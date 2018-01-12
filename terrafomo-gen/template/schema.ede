@@ -59,18 +59,21 @@ data {{ schema.key }} = {{ schema.key }}
     {% if arg.last %}
     } deriving (Show, Eq, Generic)
     {% endif %}
+  {% else %}
+    deriving (Show, Eq, Generic)
   {% endfor %}
+{% for attr in schema.value.attributes %}
+  {% if attr.first %}
 
 type instance Computed {{ schema.key }}
-  {% for attr in schema.value.attributes %}
-    {% if attr.first %}= '[{% else %}  ,{% endif %} '("{{ attr.key }}", Attr {{ attr.value.type }})
+  {% endif %}
+    {% if attr.first %}= '[{% else %}  ,{% endif %} '("{{ attr.key }}", {{ attr.value.type }})
          {- {{ attr.value.help }} -}
     {% if attr.last %}
        ]
     {% endif %}
-  {% else %}
-    = '[]
-  {% endfor %}
+{% else %}
+{% endfor %}
 
 $(TH.make{{ type }}
     "{{ original }}"

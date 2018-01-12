@@ -72,6 +72,9 @@ terrafomoNS = NS (pure "Terrafomo")
 syntaxNS :: NS
 syntaxNS = terrafomoNS <> NS ("Syntax" :| ["Provider"])
 
+serializeNS :: NS
+serializeNS = terrafomoNS <> NS ("Syntax" :| ["Serialize"])
+
 mainNS :: Provider a -> NS
 mainNS p = terrafomoNS <> NS (pure (providerName p))
 

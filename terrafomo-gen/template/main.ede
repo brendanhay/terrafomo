@@ -6,9 +6,8 @@
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
-    (
     {% for export in reexports %}
-    {% if export.first %} {% else %},{% endif %} module {{ export.value }}
+    {% if export.first %}({% else %},{% endif %} module {{ export.value }}
     {% endfor %}
     ) where
 

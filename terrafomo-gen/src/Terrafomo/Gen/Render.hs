@@ -92,6 +92,7 @@ provider tmpls p =
         , "schema"    .= providerDatatype p
         , "imports"   .=
             [ syntaxNS
+            , serializeNS
             , typesNS p
             ]
         ]

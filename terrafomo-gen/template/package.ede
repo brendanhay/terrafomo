@@ -8,6 +8,7 @@ name: {{ package }}
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

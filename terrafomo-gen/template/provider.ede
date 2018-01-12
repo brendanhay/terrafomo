@@ -8,12 +8,13 @@
 --
 module {{ namespace }} where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
 {% for import in imports %}
-import {{ import.value }}
+import qualified {{ import.value }} as Qual
 {% if import.last %}
 
 {% endif %}
@@ -43,6 +44,11 @@ data {{ provider.name }} = {{ provider.name }}
     } deriving (Show, Eq, Generic)
     {% endif %}
   {% endfor %}
+
+instance Hashable {{ provider.name }}
+
+instance Qual.ToValue {{ provider.name }} where
+    toValue = Qual.genericToValue
 {% for arg in schema.arguments %}
 
 {- | {{ arg.value.help | wrap }}
