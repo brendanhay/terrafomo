@@ -1,6 +1,0 @@
-arguments: {}
-name: alicloud_dns_domain_records
-attributes: {}
-about: ! '~> NOTE: This resource has been deprecated from <https://github.com/alibaba/terraform-provider/releases/tag/V1.5.0>
-  . New datasource @alicloud_dns_records@ will replace.'
-examples: []

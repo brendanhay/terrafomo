@@ -1,7 +1,0 @@
-arguments: {}
-name: GoogleCloudProvider
-attributes: {}
-about: The Google Cloud provider is used to interact with <https://cloud.google.com/>
-  . The provider needs to be configured with the proper credentials before it can
-  be used. Use the navigation to the left to read about the available resources.
-examples: []

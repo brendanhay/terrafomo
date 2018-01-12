@@ -7,7 +7,7 @@ extra-deps: []
 packages:
   - terrafomo
   - terrafomo-gen
-  # - terrafomo-examples
+  - terrafomo-examples
 
 # GENERATED
   - provider/terrafomo-alicloud

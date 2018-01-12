@@ -1,6 +1,0 @@
-arguments: {}
-name: aws_partition
-attributes: {}
-about: Use this data source to lookup current AWS partition in which Terraform is
-  working
-examples: []

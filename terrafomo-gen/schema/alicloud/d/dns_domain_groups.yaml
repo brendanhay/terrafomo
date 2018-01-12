@@ -1,6 +1,0 @@
-arguments: {}
-name: alicloud_dns_domain_groups
-attributes: {}
-about: ! '~> NOTE: This datasource has been deprecated from <https://github.com/alibaba/terraform-provider/releases/tag/V1.5.0>
-  . New datasource @alicloud_dns_groups@ will replace.'
-examples: []
