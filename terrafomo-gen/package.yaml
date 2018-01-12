@@ -1,0 +1,37 @@
+_include: !include '../share/package.yaml'
+
+name: terrafomo-gen
+
+synopsis: Pending
+
+description: >
+  Pending
+
+<<: *common
+<<: *version
+<<: *options
+
+executables:
+  terrafomo-gen:
+    main: Main.hs
+
+    source-dirs:
+      - src
+
+    dependencies:
+      - aeson
+      - base       >= 4.9 && < 5
+      - cmark
+      - containers
+      - directory
+      - ede
+      - errors
+      - filepath
+      - megaparsec >= 6.2
+      - optparse-applicative
+      - pretty-show
+      - process
+      - terrafomo
+      - text
+      - wl-pprint-text
+      - yaml

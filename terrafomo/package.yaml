@@ -1,0 +1,32 @@
+_include: !include '../share/package.yaml'
+
+name: terrafomo
+
+synopsis: Pending
+
+description: >
+  Pending
+
+<<: *common
+<<: *version
+<<: *options
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  dependencies:
+    - aeson
+    - base       >= 4.9 && < 5
+    - containers
+    - formatting
+    - hashable
+    - lens
+    - megaparsec >= 6.2
+    - mtl
+    - random
+    - template-haskell
+    - text
+    - unordered-containers
+    - wl-pprint-text

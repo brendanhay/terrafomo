@@ -1,9 +1,16 @@
 - &common
-  maintainer: brendan.g.hay+terrafomo@gmail.com
+  author: Brendan Hay
+  maintainer: Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
   copyright: Copyright (c) 2017 Brendan Hay
   license: MPL-2.0
+  homepage: https://github.com/brendanhay/terrafomo
+  bug-reports: https://github.com/brendanhay/terrafomo/issues
+  git: git@gitlab.com:brendanhay/terreurfromage.git
+
+- &version
   version: 0.0.0.0
 
+- &options
   ghc-options:
     - -Wall
     - -Wincomplete-uni-patterns
@@ -11,10 +18,3 @@
     - -Wcompat
     - -Wnoncanonical-monad-instances
     - -Wnoncanonical-monadfail-instances
-
-  dependencies:
-    - base
-    - containers
-    - hashable
-    - terrafomo
-    - text
