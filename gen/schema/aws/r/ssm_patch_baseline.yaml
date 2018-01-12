@@ -1,0 +1,48 @@
+_name: aws_ssm_patch_baseline
+arguments:
+  global_filter:
+    required: false
+    help: (Optional) A set of global filters used to exclude patches from the baseline.
+      Up to 4 global filters can be specified using Key/Value pairs. Valid Keys are
+      @PRODUCT | CLASSIFICATION | MSRC_SEVERITY | PATCH_ID@ .
+    type: Text
+  operating_system:
+    required: false
+    help: (Optional) Defines the operating system the patch baseline applies to. Supported
+      operating systems include @WINDOWS@ , @AMAZON_LINUX@ , @UBUNTU@ and @REDHAT_ENTERPRISE_LINUX@
+      . The Default value is @WINDOWS@ .
+    type: Text
+  approved_patches_compliance_level:
+    required: false
+    help: ! '(Optional) Defines the compliance level for approved patches. This means
+      that if an approved patch is reported as missing, this is the severity of the
+      compliance violation. Valid compliance levels include the following: @CRITICAL@
+      , @HIGH@ , @MEDIUM@ , @LOW@ , @INFORMATIONAL@ , @UNSPECIFIED@ . The default
+      value is @UNSPECIFIED@ .'
+    type: Text
+  approved_patches:
+    required: false
+    help: (Optional) A list of explicitly approved patches for the baseline.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the patch baseline.
+    type: Text
+  approval_rule:
+    required: false
+    help: (Optional) A set of rules used to include patches in the baseline. up to
+      10 approval rules can be specified. Each approval_rule block requires the fields
+      documented below.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description of the patch baseline.
+    type: Text
+  rejected_patches:
+    required: false
+    help: (Optional) A list of rejected patches.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the patch baseline.'
+    type: Text

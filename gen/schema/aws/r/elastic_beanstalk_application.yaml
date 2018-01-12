@@ -1,0 +1,11 @@
+_name: aws_elastic_beanstalk_application
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the application, must be unique within your account
+    type: Text
+  description:
+    required: true
+    help: (Optional) Short description of the application
+    type: Text
+attributes: {}

@@ -1,0 +1,55 @@
+_name: aws_iam_instance_profile
+arguments:
+  roles:
+    required: true
+    help: ! '- ( ) A list of role names to include in the profile.  The current default
+      is 1.  If you see an error message similar to @Cannot exceed quota for InstanceSessionsPerInstanceProfile:
+      1@ , then you must contact AWS support and ask for a limit increase. WARNING:
+      This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017>
+      , as >= 2 roles are not possible. See <https://github.com/hashicorp/terraform/issues/11575>
+      .'
+    type: Text
+  path:
+    required: false
+    help: (Optional, default "/") Path in which to create the profile.
+    type: Text
+  role:
+    required: false
+    help: (Optional) The role name to include in the profile.
+    type: Text
+  name:
+    required: false
+    help: (Optional, Forces new resource) The profile's name. If omitted, Terraform
+      will assign a random, unique name.
+    type: Text
+  name_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique name beginning with the
+      specified prefix. Conflicts with @name@ .
+    type: Text
+attributes:
+  roles:
+    help: ! '- The list of roles assigned to the instance profile. ( )'
+    type: Text
+  arn:
+    help: ! '- The ARN assigned by AWS to the instance profile.'
+    type: Text
+  path:
+    help: ! '- The path of the instance profile in IAM.'
+    type: Text
+  role:
+    help: ! '- The role assigned to the instance profile.'
+    type: Text
+  create_date:
+    help: ! '- The creation timestamp of the instance profile.'
+    type: Text
+  name:
+    help: ! '- The instance profile''s name.'
+    type: Text
+  id:
+    help: ! '- The instance profile''s ID.'
+    type: Text
+  unique_id:
+    help: ! '- The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs>
+      assigned by AWS.'
+    type: Text

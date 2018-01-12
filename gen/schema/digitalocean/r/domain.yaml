@@ -1,0 +1,15 @@
+_name: digitalocean_domain
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the domain
+    type: Text
+  ip_address:
+    required: true
+    help: (Required) The IP address of the domain. This IP is used to created an initial
+      A record for the domain. It is required upstream by the DigitalOcean API.
+    type: Text
+attributes:
+  id:
+    help: ! '- The name of the domain'
+    type: Text

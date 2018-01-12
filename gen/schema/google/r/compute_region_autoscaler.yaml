@@ -1,0 +1,23 @@
+_name: google_compute_region_autoscaler
+arguments:
+  autoscaling_policy:
+    required: true
+    help: (Required) The parameters of the autoscaling algorithm. Structure is documented
+      below.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the autoscaler.
+    type: Text
+  region:
+    required: true
+    help: (Required) The region of the target.
+    type: Text
+  target:
+    required: true
+    help: (Required) The full URL to the instance group manager whose size we control.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URL of the created resource.'
+    type: Text

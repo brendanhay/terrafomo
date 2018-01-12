@@ -1,0 +1,19 @@
+_name: google_compute_global_forwarding_rule
+arguments:
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  target:
+    required: true
+    help: (Required) URL of target HTTP or HTTPS proxy.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  label_fingerprint:
+    help: ! '- ( </docs/providers/google/index.html#beta-features> ) The current label
+      fingerprint.'
+    type: Text

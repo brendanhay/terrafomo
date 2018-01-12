@@ -1,0 +1,36 @@
+_name: azure_sql_database_server
+arguments:
+  location:
+    required: true
+    help: (Required) The location where the database server should be created. For
+      a list of all Azure locations, please consult <https://azure.microsoft.com/en-us/regions/>
+      .
+    type: Text
+  url:
+    required: true
+    help: ! '- (Computed) The fully qualified domain name of the database server.
+      Will be of the form @<name>.database.windows.net@ .'
+    type: Text
+  username:
+    required: true
+    help: (Required) The username for the administrator of the database server.
+    type: Text
+  name:
+    required: true
+    help: ! '- (Computed) The name of the database server. It is determined upon creation
+      as it is randomly-generated per server.'
+    type: Text
+  password:
+    required: true
+    help: (Required) The password for the administrator of the database server.
+    type: Text
+  version:
+    required: false
+    help: (Optional) The version of the database server to be used. Can be any one
+      of @2.0@ or @12.0@ .
+    type: Text
+attributes:
+  id:
+    help: ! '- The database server ID. Coincides with the randomly-generated @name@
+      .'
+    type: Text

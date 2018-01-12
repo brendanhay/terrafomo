@@ -1,0 +1,16 @@
+_name: google_pubsub_subscription
+arguments:
+  topic:
+    required: true
+    help: (Required) A topic to bind this subscription to, required by pubsub. Changing
+      this forces a new resource to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by pubsub. Changing
+      this forces a new resource to be created.
+    type: Text
+attributes:
+  path:
+    help: ! '- Path of the subscription in the format @projects/{project}/subscriptions/{sub}@'
+    type: Text

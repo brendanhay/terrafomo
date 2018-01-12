@@ -1,0 +1,19 @@
+_name: aws_ses_domain_identity
+arguments:
+  domain:
+    required: true
+    help: (Required) The domain name to assign to SES
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN of the domain identity.'
+    type: Text
+  verification_token:
+    help: ! '- A code which when added to the domain as a TXT record will signal to
+      SES that the owner of the domain has authorised SES to act on their behalf.
+      The domain identity will be in state "verification pending" until this is done.
+      See below for an example of how this might be achieved when the domain is hosted
+      in Route 53 and managed by Terraform.  Find out more about verifying domains
+      in Amazon SES in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html>
+      .'
+    type: Text

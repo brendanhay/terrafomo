@@ -1,0 +1,45 @@
+_name: aws_elastictranscoder_preset
+arguments:
+  video_codec_options:
+    required: true
+    help: (Optional, Forces new resource) Codec options for the video parameters
+    type: Text
+  video_watermarks:
+    required: false
+    help: (Optional, Forces new resource) Watermark parameters for the video parameters
+      (documented below)
+    type: Text
+  audio_codec_options:
+    required: false
+    help: (Optional, Forces new resource) Codec options for the audio parameters (documented
+      below)
+    type: Text
+  video:
+    required: false
+    help: (Optional, Forces new resource) Video parameters object (documented below)
+    type: Text
+  name:
+    required: false
+    help: (Optional, Forces new resource) The name of the preset. (maximum 40 characters)
+    type: Text
+  thumbnails:
+    required: false
+    help: (Optional, Forces new resource) Thumbnail parameters object (documented
+      below)
+    type: Text
+  container:
+    required: true
+    help: (Required, Forces new resource) The container type for the output file.
+      Valid values are @flac@ , @flv@ , @fmp4@ , @gif@ , @mp3@ , @mp4@ , @mpg@ , @mxf@
+      , @oga@ , @ogg@ , @ts@ , and @webm@ .
+    type: Text
+  audio:
+    required: false
+    help: (Optional, Forces new resource) Audio parameters object (documented below).
+    type: Text
+  description:
+    required: false
+    help: (Optional, Forces new resource) A description of the preset (maximum 255
+      characters)
+    type: Text
+attributes: {}

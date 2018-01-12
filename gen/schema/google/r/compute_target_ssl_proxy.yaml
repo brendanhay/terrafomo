@@ -1,0 +1,24 @@
+_name: google_compute_target_ssl_proxy
+arguments:
+  backend_service:
+    required: true
+    help: (Required) The URL of a Backend Service resource to receive the matched
+      traffic.
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  ssl_certificates:
+    required: true
+    help: (Required) The URLs of the SSL Certificate resources that authenticate connections
+      between users and load balancing.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  proxy_id:
+    help: ! '- A unique ID assigned by GCE.'
+    type: Text

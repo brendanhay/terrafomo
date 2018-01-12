@@ -1,0 +1,14 @@
+_name: google_compute_global_address
+arguments:
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  address:
+    help: ! '- The assigned address.'
+    type: Text

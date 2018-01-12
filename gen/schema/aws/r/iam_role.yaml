@@ -1,0 +1,32 @@
+_name: aws_iam_role
+arguments:
+  assume_role_policy:
+    required: true
+    help: (Required) The policy that grants an entity permission to assume the role.
+    type: Text
+  name:
+    required: false
+    help: (Optional, Forces new resource) The name of the role. If omitted, Terraform
+      will assign a random, unique name.
+    type: Text
+  name_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique name beginning with the
+      specified prefix. Conflicts with @name@ .
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name (ARN) specifying the role.'
+    type: Text
+  create_date:
+    help: ! '- The creation date of the IAM role.'
+    type: Text
+  name:
+    help: ! '- The name of the role.'
+    type: Text
+  description:
+    help: ! '- The description of the role.'
+    type: Text
+  unique_id:
+    help: ! '- The stable and unique string identifying the role.'
+    type: Text

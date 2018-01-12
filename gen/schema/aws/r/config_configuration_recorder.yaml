@@ -1,0 +1,22 @@
+_name: aws_config_configuration_recorder
+arguments:
+  recording_group:
+    required: false
+    help: (Optional) Recording group - see below.
+    type: Text
+  role_arn:
+    required: true
+    help: (Required) Amazon Resource Name (ARN) of the IAM role. used to make read
+      or write requests to the delivery channel and to describe the AWS resources
+      associated with the account. See <http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html>
+      for more details.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the recorder. Defaults to @default@ . Changing it
+      recreates the resource.
+    type: Text
+attributes:
+  id:
+    help: ! '- Name of the recorder'
+    type: Text

@@ -37,12 +37,9 @@ import qualified Text.EDE               as EDE
 -- * Continue investigating having a Dhall frontend
 -- * Extract all the usage examples and write out tests
 --     - convert to DSL/Haskell and have as examples too
+-- * Data source(s) support.
 
 -- Options Parsing
-
--- FIXME: Shouldn't have to configure providers here.
--- add configuration containing the clc -> CenturyLinkCloud mapping, and the
--- library name, namespace, etc.
 
 data Options = Options
     { configPath       :: !FilePath

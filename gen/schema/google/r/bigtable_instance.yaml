@@ -1,0 +1,42 @@
+_name: google_bigtable_instance
+arguments:
+  num_nodes:
+    required: false
+    help: (Optional) The number of nodes in your Bigtable instance. Minimum of @3@
+      for a @PRODUCTION@ instance. Cannot be set for a @DEVELOPMENT@ instance.
+    type: Text
+  display_name:
+    required: false
+    help: (Optional) The human-readable display name of the Bigtable instance. Defaults
+      to the instance @name@ .
+    type: Text
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  cluster_id:
+    required: true
+    help: (Required) The name of the Bigtable instance's cluster.
+    type: Text
+  storage_type:
+    required: false
+    help: (Optional) The storage type to use. One of @"SSD"@ or @"HDD"@ . Defaults
+      to @SSD@ .
+    type: Text
+  zone:
+    required: true
+    help: (Required) The zone to create the Bigtable instance in. Zones that support
+      Bigtable instances are noted on the <https://cloud.google.com/about/locations/>
+      .
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the Bigtable instance.
+    type: Text
+  instance_type:
+    required: false
+    help: (Optional) The instance type to create. One of @"DEVELOPMENT"@ or @"PRODUCTION"@
+      . Defaults to @PRODUCTION@ .
+    type: Text
+attributes: {}

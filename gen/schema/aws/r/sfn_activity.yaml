@@ -1,0 +1,16 @@
+_name: sfn_activity
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the activity to create.
+    type: Text
+attributes:
+  name:
+    help: ! '- The name of the activity.'
+    type: Text
+  creation_date:
+    help: ! '- The date the activity was created.'
+    type: Text
+  id:
+    help: ! '- The Amazon Resource Name (ARN) that identifies the created activity.'
+    type: Text

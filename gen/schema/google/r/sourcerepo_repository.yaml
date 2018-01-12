@@ -1,0 +1,10 @@
+_name: google_sourcerepo_repository
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the repository that will be created.
+    type: Text
+attributes:
+  size:
+    help: ! '- The size of the repository.'
+    type: Text

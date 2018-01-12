@@ -1,0 +1,25 @@
+_name: azure_affinity_group
+arguments:
+  location:
+    required: true
+    help: (Required) The location where the affinity group should be created. For
+      a list of all Azure locations, please consult <https://azure.microsoft.com/en-us/regions/>
+      .
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the affinity group. Must be unique on your Azure
+      subscription.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description for the affinity group.
+    type: Text
+  label:
+    required: true
+    help: (Required) A label to be used for tracking purposes.
+    type: Text
+attributes:
+  id:
+    help: ! '- The affinity group ID. Coincides with the given @name@ .'
+    type: Text

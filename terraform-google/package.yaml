@@ -1,0 +1,21 @@
+_common: !include '../share/package-common.yaml'
+
+name: terraform-google
+
+<<: *common
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terraform.Google
+    - Terraform.Google.Provider
+    - Terraform.Google.Types
+    - Terraform.Google.Resource
+
+  reexported-modules: >
+    terraform:Terraform.Format,
+    terraform:Terraform.Prelude,
+    terraform:Terraform.Tutorial

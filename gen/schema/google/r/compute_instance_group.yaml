@@ -1,0 +1,19 @@
+_name: google_compute_instance_group
+arguments:
+  zone:
+    required: true
+    help: (Required) The zone that this instance group should be created in.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the instance group. Must be 1-63 characters long
+      and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters
+      include lowercase letters, numbers, and hyphens.
+    type: Text
+attributes:
+  size:
+    help: ! '- The number of instances in the group.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
