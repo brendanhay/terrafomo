@@ -1,5 +1,7 @@
 -- This module was auto-generated. If it exists, it will not be overwritten.
 
+{-# LANGUAGE DeriveGeneric #-}
+
 -- |
 -- Module      : Terrafomo.Google.Types
 -- Copyright   : (c) 2017 Brendan Hay
@@ -9,3 +11,19 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Google.Types where
+
+import GHC.Generics (Generic)
+
+import Terrafomo.Syntax.Serialize (ToValue (toValue), genericToValue)
+
+data PlacementType = PlacementType
+    deriving (Show, Eq, Generic)
+
+instance ToValue PlacementType where
+    toValue = genericToValue
+
+data SchedulingType = SchedulingType
+    deriving (Show, Eq, Generic)
+
+instance ToValue SchedulingType where
+    toValue = genericToValue

@@ -10,7 +10,11 @@ import qualified Data.Set  as Set
 import qualified Data.Text as Text
 
 fieldName :: Text -> Text
-fieldName = Text.cons '_' . unreserved
+fieldName x =
+    Text.cons '_' . unreserved $
+        case Text.split (== '/') x of
+            [] -> x
+            xs -> last xs
 
 resourceName :: Text -> Text
 resourceName = (<> "Resource") . schemaTypeName
