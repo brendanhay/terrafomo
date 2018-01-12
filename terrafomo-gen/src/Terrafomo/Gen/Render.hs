@@ -14,6 +14,7 @@ import Data.Map.Strict (Map)
 import Data.Maybe      (isJust)
 import Data.Text       (Text)
 
+import Terrafomo.Gen.Namespace
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
@@ -65,7 +66,7 @@ main tmpls p =
         , "provider"  .= fmap Just p
         , "schema"    .= providerDatatype p
         , "reexports" .=
-            ( terrafomoNS
+            ( baseNS
             : typesNS p
             : [providerNS p | isJust (providerDatatype p)]
             )
@@ -93,8 +94,8 @@ provider tmpls p =
         , "provider"  .= p
         , "schema"    .= providerDatatype p
         , "imports"   .=
-            ([ syntaxNS
-             , serializeNS
+            ([ variableNS
+             , hclNS
              , typesNS p
              ] :: [NS])
         ]
@@ -113,8 +114,12 @@ schemas tmpls p typ xs =
         , "type"      .= typ
         , "schemas"   .= createMap (getTypeName typ) xs
         , "imports"   .=
-            (  fromNS '.' syntaxNS
-            : [fromNS '.' (mainNS p) | isJust (providerDatatype p)]
+            ( variableNS
+            : hclNS
+            : thNS
+            : [mainNS p     | isJust (providerDatatype p)]
+           ++ [resourceNS   | typ == Resource]
+           ++ [dataSourceNS | typ == DataSource]
             )
         ]
 

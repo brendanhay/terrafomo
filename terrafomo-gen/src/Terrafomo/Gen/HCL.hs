@@ -27,11 +27,11 @@ runParser p file source = P.parseErrorPretty `first` P.parse p file source
 
 type Parser = P.Parsec Void Text
 
-keyParser :: Parser Key
-keyParser = skipSpaces quoted <|> skipSpaces ident
+keyParser :: Parser Id
+keyParser = skipSpaces (quoted <|> unquoted)
   where
-    quoted = Quoted <$> quotedParser <?> "quoted identifier"
-    ident  = Ident  <$> identParser  <?> "identifier"
+    quoted   = Quoted   <$> quotedParser <?> "quoted identifier"
+    unquoted = Unquoted <$> identParser  <?> "identifier"
 
 statementsParser :: Parser [Value]
 statementsParser =

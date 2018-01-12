@@ -9,9 +9,16 @@ import qualified Data.Char as Char
 import qualified Data.Set  as Set
 import qualified Data.Text as Text
 
-fieldName :: Text -> Text
-fieldName x =
+safeArgName :: Text -> Text
+safeArgName x =
     Text.cons '_' . unreserved $
+        case Text.split (== '/') x of
+            [] -> x
+            xs -> last xs
+
+safeAttrName :: Text -> Text
+safeAttrName x =
+    mappend "_computed_" . unreserved . Text.replace "." "_" $
         case Text.split (== '/') x of
             [] -> x
             xs -> last xs

@@ -18,9 +18,10 @@ import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
 
-import Terrafomo.Gen.Parser   (Parser)
+import Terrafomo.Gen.Namespace
+import Terrafomo.Gen.Parser    (Parser)
 import Terrafomo.Gen.Provider
-import Terrafomo.Gen.Render   (Templates (Templates))
+import Terrafomo.Gen.Render    (Templates (Templates))
 import Terrafomo.Gen.Schema
 
 import qualified Data.Char            as Char

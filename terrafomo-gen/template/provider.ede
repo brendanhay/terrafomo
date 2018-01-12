@@ -14,7 +14,7 @@ import Data.Hashable (Hashable)
 import GHC.Generics (Generic)
 
 {% for import in imports %}
-import qualified {{ import.value }} as Qual
+import qualified {{ import.value }} as TF
 {% if import.last %}
 
 {% endif %}
@@ -49,8 +49,14 @@ data {{ provider.name }} = {{ provider.name }}
 
 instance Hashable {{ provider.name }}
 
-instance Qual.ToValue {{ provider.name }} where
-    toValue = Qual.genericToValue
+instance TF.ToHCL {{ provider.name }} where
+  {% for arg in schema.arguments %}
+    {% if arg.first %}toHCL x = TF.arguments
+        [{% else %}    ,{% endif %} TF.assign "{{ arg.value.name }}" <$> {{ arg.key }} x{% if arg.last %}
+        ]{% endif %}
+  {% else %}
+    toHCL = const $ TF.arguments []
+  {% endfor %}
 {% for arg in schema.arguments %}
 
 {- | {{ arg.value.help | wrap }}

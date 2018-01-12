@@ -147,16 +147,18 @@ argItem :: Parser (Text, Arg)
 argItem = item >>> paragraph >>> argument
   where
     argument = do
-        name <- fmap fieldName code
+        name <- code
+        let field = safeArgName name
         arg  <- fmap required textual
         pure $!
             case Text.break (== '.') name of
-                (_, "") -> (,) name arg
+                (_, "") -> (,) field (arg { argName = pure name })
                 (x, _)  -> (,) x $
-                    arg { argHelp     = pure "(Optional) See datatype documentation."
+                    arg { argName     = pure name
+                        , argHelp     = pure "(Optional) See datatype documentation."
                         , argRequired = pure False
                         , argIgnored  = pure False
-                        , argType     = pure ("Qual." <> dataTypeName x <> "Type")
+                        , argType     = pure ("TF." <> dataTypeName x <> "Type")
                         }
 
     -- should use Parsec.Char here and rethrow errors.
@@ -167,16 +169,18 @@ argItem = item >>> paragraph >>> argument
         | otherwise                         = mk h               True  False
       where
         mk h' require deprecate =
-            Arg (pure h') (pure require) (pure deprecate) defaultType
+            Arg (pure mempty) (pure h') (pure require) (pure deprecate)
+                defaultType
 
 attrItem :: Parser (Text, Attr)
 attrItem = item >>> paragraph >>> attribute
   where
-    attribute =
-        (,) <$> code
-            <*> ( Attr <$> fmap (pure . strip) textual
-                       <*> pure defaultType
-                )
+    attribute = do
+        name <- code
+        attr <- Attr (pure name)
+            <$> fmap (pure . strip) textual
+            <*> pure defaultType
+        pure (safeAttrName name, attr)
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)
 

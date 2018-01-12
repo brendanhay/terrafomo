@@ -1,11 +1,8 @@
-{-# LANGUAGE DeriveFunctor              #-}
-{-# LANGUAGE DeriveGeneric              #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE DeriveFunctor     #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
 
 module Terrafomo.Gen.Provider where
 
@@ -45,44 +42,3 @@ instance ToJSON (Provider (Maybe a)) where
                     then providerName
                     else "Provider"
             ]
-
--- Haskell Namespace
-
-newtype NS = NS (NonEmpty Text)
-    deriving (Show, Eq, Ord, Semigroup)
-
-instance ToJSON NS where
-    toJSON = JSON.toJSON . fromNS '.'
-
-instance ToJSONKey NS where
-    toJSONKey = JSON.toJSONKeyText (Text.pack . fromNS '.')
-
-fromNS :: Char -> NS -> String
-fromNS c (NS xs) =
-    Text.unpack $ Text.intercalate (Text.singleton c) (Fold.toList xs)
-
-pathNS :: NS -> String
-pathNS = fromNS '/'
-
--- Package Namespaces
-
-terrafomoNS :: NS
-terrafomoNS = NS (pure "Terrafomo")
-
-syntaxNS :: NS
-syntaxNS = terrafomoNS <> NS ("Syntax" :| ["Provider"])
-
-serializeNS :: NS
-serializeNS = terrafomoNS <> NS ("Syntax" :| ["Serialize"])
-
-mainNS :: Provider a -> NS
-mainNS p = terrafomoNS <> NS (pure (providerName p))
-
-providerNS :: Provider a -> NS
-providerNS p = mainNS p <> NS (pure "Provider")
-
-typesNS :: Provider a -> NS
-typesNS p = mainNS p <> NS (pure "Types")
-
-schemaNS :: Provider a -> SchemaType -> NS
-schemaNS p typ = mainNS p <> NS (pure (Text.pack (show typ)))

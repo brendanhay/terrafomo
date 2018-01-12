@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -19,18 +17,16 @@
 --
 module {{ namespace }} where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
-
-import Terrafomo.Syntax.Attribute (Attr, Computed)
+import GHC.Base (Eq, ($))
+import GHC.Show (Show)
 
 {% for import in imports %}
-import qualified {{ import.value }} as Qual
+import qualified {{ import.value }} as TF
 {% endfor %}
-import qualified Terrafomo.Syntax.TH as TH
 {% for schema in schemas %}
 
 {% let original = schema.value.name %}
@@ -54,30 +50,42 @@ import qualified Terrafomo.Syntax.TH as TH
 -}
 data {{ schema.key }} = {{ schema.key }}
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(Attr {{ arg.value.type }})
+    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
-    {% if arg.last %}
-    } deriving (Show, Generic)
-    {% endif %}
-  {% else %}
-    deriving (Show, Generic)
   {% endfor %}
-{% for attr in schema.value.attributes %}
-  {% if attr.first %}
+  {% for attr in schema.value.attributes %}
+    , {{ attr.key }} :: !(TF.Attribute {{ attr.value.type }})
+    {- ^ {{ attr.value.help }} -}
+  {% endfor %}
+    } deriving (Show, Eq)
 
-type instance Computed {{ schema.key }}
-  {% endif %}
-    {% if attr.first %}= '[{% else %}   ,{% endif %} '("{{ attr.key }}", {{ attr.value.type }})
-       {- {{ attr.value.help }} -}
-    {% if attr.last %}
-       ]
-    {% endif %}
-{% else %}
-{% endfor %}
+{% let constructor = schema.key | lowerHead %}
+{{ constructor }} :: TF.{{ type }} TF.{{ provider.name }} {{ schema.key }}
+{{ constructor }} =
+    TF.new{{ type }} "{{ original }}" $
+        {{ schema.key }}
+          {% for arg in schema.value.arguments %}
+            {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} = TF.Absent
+          {% endfor %}
+          {% for attr in schema.value.attributes %}
+            , {{ attr.key }} = TF.Computed "{{ attr.value.name }}"
+          {% endfor %}
+            }
+{% endlet %}
 
-$(TH.make{{ type }}
-    "{{ original }}"
-    ''Qual.{{ provider.type }}
-    ''{{ schema.key }})
+instance TF.ToHCL {{ schema.key }} where
+  {% for arg in schema.value.arguments %}
+    {% if arg.first %}toHCL {{ schema.key }}{..} = TF.arguments
+        [{% else %}    ,{% endif %} TF.assign "{{ arg.value.name }}" <$> {{ arg.key }}{% if arg.last %}
+        ]{% endif %}
+  {% else %}
+    toHCL = const $ TF.arguments []
+  {% endfor %}
+
+$(TF.makeSchemaLenses
+    ''{{ schema.key }}
+    ''TF.{{ provider.type }}
+    ''TF.{{ type }}
+    'TF.schema)
 {% endlet %}
 {% endfor %}

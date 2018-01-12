@@ -79,7 +79,8 @@ applyDeprecations x
 
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg
-    { argHelp     :: !(Last Text)
+    { argName     :: !(Last Text)
+    , argHelp     :: !(Last Text)
     , argRequired :: !(Last Bool)
     , argIgnored  :: !(Last Bool) -- FIXME: Should be added to 'Attr' too.
     , argType     :: !(Last Text)
@@ -87,7 +88,8 @@ data Arg = Arg
 
 instance Semigroup Arg where
     (<>) parsed saved = Arg
-        { argHelp     = on (<>) argHelp     parsed saved
+        { argName     = on (<>) argName     parsed saved
+        , argHelp     = on (<>) argHelp     parsed saved
         , argRequired = on (<>) argRequired parsed saved
         , argIgnored  = on (<>) argIgnored  parsed saved
         , argType     = on (<>) argType     parsed saved
@@ -101,13 +103,15 @@ instance FromJSON Arg where
 
 -- > * `name` - documentation
 data Attr = Attr
-    { attrHelp :: !(First Text)
+    { attrName :: !(First Text)
+    , attrHelp :: !(First Text)
     , attrType :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
 instance Semigroup Attr where
     (<>) parsed saved = Attr
-        { attrHelp = on (<>) attrHelp parsed saved
+        { attrName = on (<>) attrName parsed saved
+        , attrHelp = on (<>) attrHelp parsed saved
         , attrType = on (<>) attrType parsed saved
         }
 

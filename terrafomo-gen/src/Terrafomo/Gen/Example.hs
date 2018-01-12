@@ -66,21 +66,21 @@ renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
                 else '_'
 
     value = \case
-        Object (Ident "resource" :| [Quoted r, Quoted (identifier -> n)]) vs ->
+        Object (Unquoted "resource" :| [Quoted r, Quoted (identifier -> n)]) vs ->
             pretty n <+> "<-" <+> "resource" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> PP.nest 4
                     ( resource r <$$> PP.vcat (map value vs)
                     )
                 )
 
-        Object (Ident "data" :| [Quoted d, Quoted (identifier -> n)]) vs ->
+        Object (Unquoted "data" :| [Quoted d, Quoted (identifier -> n)]) vs ->
             pretty n <+> "<-" <+> "datasource" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> PP.nest 4
                     ( datasource d <$$> PP.vcat (map value vs)
                     )
                 )
 
-        Object (Ident "output" :| [Quoted n]) [Assign (Ident "value") v] ->
+        Object (Unquoted "output" :| [Quoted n]) [Assign (Unquoted "value") v] ->
             "output" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> pretty v
                 )
@@ -97,8 +97,8 @@ renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
         _         -> mempty
 
     key = \case
-        Ident  k -> pretty k
-        Quoted k -> PP.dquotes (pretty k)
+        Unquoted k -> pretty k
+        Quoted   k -> PP.dquotes (pretty k)
 
 type Parser = P.Parsec Void String
 
