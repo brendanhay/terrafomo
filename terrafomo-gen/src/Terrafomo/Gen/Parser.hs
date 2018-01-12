@@ -13,7 +13,7 @@ import CMark (Node, NodeType (..))
 
 import Data.Bifunctor     (first)
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes, fromMaybe)
+import Data.Maybe         (fromMaybe)
 import Data.Semigroup     ((<>))
 import Data.Text          (Text)
 import Data.Void          (Void)
@@ -21,7 +21,6 @@ import Data.Void          (Void)
 import Control.Applicative (many, some, (<|>))
 import Control.Monad       (unless, void)
 
-import Terrafomo.Gen.Example
 import Terrafomo.Gen.Markdown
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema

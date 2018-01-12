@@ -11,10 +11,7 @@ module Terrafomo.Gen.Example
     ) where
 
 import Data.Aeson         (FromJSON, ToJSON)
-import Data.Bifunctor     (first)
-import Data.Function      (on)
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
 import Data.Monoid        ((<>))
 import Data.Text          (Text)
 import Data.Void          (Void)
@@ -25,14 +22,12 @@ import Terrafomo.Gen.Text
 import Terrafomo.Syntax.HCL
 
 import Text.Megaparsec              ((<?>))
-import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
-                                     (<$$>), (<+>))
+import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty), (<$$>), (<$$>),
+                                     (<+>))
 
 import qualified Data.Aeson                   as JSON
 import qualified Data.Char                    as Char
-import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
-import qualified Data.Map.Strict              as Map
 import qualified Data.Text                    as Text
 import qualified Terrafomo.Gen.JSON           as JSON
 import qualified Terrafomo.Syntax.Parser      as HCL
@@ -52,10 +47,9 @@ instance FromJSON Example where
     parseJSON = JSON.genericParseJSON (JSON.options "example")
 
 renderHCL :: Text -> Either String [Text]
-renderHCL = fmap render . HCL.runParser HCL.statementsParser "<renderHCL>"
+renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
   where
-    render =
-          Text.lines
+    go =  Text.lines
         . Text.pack
         . show
         . PP.vcat

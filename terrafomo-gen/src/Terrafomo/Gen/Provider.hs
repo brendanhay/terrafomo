@@ -10,7 +10,6 @@ import Data.Aeson         (FromJSON, ToJSON, ToJSONKey)
 import Data.Function      (on)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
-import Data.Maybe         (fromMaybe)
 import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
@@ -25,6 +24,7 @@ import qualified Data.Aeson.Types   as JSON
 import qualified Data.Foldable      as Fold
 import qualified Data.Map.Strict    as Map
 import qualified Data.Text          as Text
+import qualified System.FilePath    as Path
 import qualified Terrafomo.Gen.JSON as JSON
 
 -- Haskell Namespaces
@@ -64,7 +64,9 @@ instance FromJSON Provider where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
 providerDir :: Provider -> FilePath
-providerDir = Text.unpack . fromMaybe "terrafomo" . providerPackage
+providerDir =
+    maybe "terrafomo" (Path.combine "provider" . Text.unpack)
+        . providerPackage
 
 providerNamespace :: Provider -> NS
 providerNamespace p = NS ("Terrafomo" :| [providerName p, "Provider"])

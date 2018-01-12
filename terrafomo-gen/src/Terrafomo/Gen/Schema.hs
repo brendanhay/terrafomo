@@ -17,11 +17,9 @@ import GHC.Generics (Generic)
 
 import Terrafomo.Gen.Example
 
-import qualified Data.Aeson              as JSON
-import qualified Data.Map.Strict         as Map
-import qualified Terrafomo.Gen.JSON      as JSON
-import qualified Terrafomo.Syntax.HCL    as HCL
-import qualified Terrafomo.Syntax.Parser as HCL
+import qualified Data.Aeson         as JSON
+import qualified Data.Map.Strict    as Map
+import qualified Terrafomo.Gen.JSON as JSON
 
 -- Syntax Types
 

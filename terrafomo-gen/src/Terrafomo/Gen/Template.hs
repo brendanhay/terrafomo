@@ -8,8 +8,6 @@
 
 module Terrafomo.Gen.Template where
 
-import Control.Error (ExceptT)
-
 import Data.Aeson      ((.=))
 import Data.Bifunctor  (first, second)
 import Data.Map.Strict (Map)
@@ -20,7 +18,6 @@ import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
 
 import qualified Data.Aeson.Types as JSON
-import qualified Data.Char        as Char
 import qualified Data.Foldable    as Fold
 import qualified Data.Map.Strict  as Map
 import qualified Data.Text        as Text
