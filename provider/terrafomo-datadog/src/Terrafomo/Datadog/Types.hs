@@ -1,4 +1,4 @@
--- This module was auto-generated. If it exists, it will not be overwritten.
+-- This module was auto-generated. If it is modified, it will not be overwritten.
 
 -- |
 -- Module      : Terrafomo.Datadog.Types

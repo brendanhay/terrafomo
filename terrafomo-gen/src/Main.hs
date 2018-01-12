@@ -266,8 +266,8 @@ renderPackage
 renderPackage tmpls dir p d r = do
     let packageFile = dir    </> "package" <.> "yaml"
         srcDir      = dir    </> "src"
-        mainFile    = srcDir </> pathNS (mainNS  p)
-        typesFile   = srcDir </> pathNS (typesNS p)
+        mainFile    = srcDir </> pathNS (mainNS  p) <.> "hs"
+        typesFile   = srcDir </> pathNS (typesNS p) <.> "hs"
 
     createDirectory dir
 
