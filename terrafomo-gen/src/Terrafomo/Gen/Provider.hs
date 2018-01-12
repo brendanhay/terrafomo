@@ -11,7 +11,6 @@ module Terrafomo.Gen.Provider where
 
 import Data.Aeson         (FromJSON, ToJSON, ToJSONKey, (.=))
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
 import Data.Maybe         (isJust)
 import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
@@ -20,12 +19,9 @@ import GHC.Generics (Generic)
 
 import Terrafomo.Gen.Schema
 
-import Text.Printf (printf)
-
 import qualified Data.Aeson         as JSON
 import qualified Data.Aeson.Types   as JSON
 import qualified Data.Foldable      as Fold
-import qualified Data.Map.Strict    as Map
 import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.JSON as JSON
 
@@ -87,20 +83,3 @@ typesNS p = mainNS p <> NS (pure "Types")
 
 schemaNS :: Provider a -> SchemaType -> NS
 schemaNS p typ = mainNS p <> NS (pure (Text.pack (show typ)))
-
-moduleNS :: Provider a -> SchemaType -> [b] -> Map NS [b]
-moduleNS p typ xs
-    | length xs > 200 = partition 8 xs
-    | length xs > 100 = partition 4 xs
-    | length xs > 50  = partition 2 xs
-    | otherwise       = Map.singleton namespace xs
-  where
-    partition m =
-        Map.fromListWith (<>)
-            . zipWith assign (map (flip mod m) [1..])
-
-    assign (n :: Int) x =
-        (,) (namespace <> NS (pure $ Text.pack (printf "M%02d" n)))
-            [x]
-
-    namespace = schemaNS p typ

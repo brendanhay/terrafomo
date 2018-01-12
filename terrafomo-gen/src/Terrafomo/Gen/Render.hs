@@ -32,7 +32,6 @@ import qualified Text.Wrap           as Wrap
 data Templates a = Templates
     { packageTemplate  :: !a
     , providerTemplate :: !a
-    , contentsTemplate :: !a
     , schemaTemplate   :: !a
     , mainTemplate     :: !a
     , typesTemplate    :: !a
@@ -97,42 +96,24 @@ provider tmpls p =
             ]
         ]
 
-contents
-    :: Templates EDE.Template
-    -> Provider a
-    -> SchemaType
-    -> Map NS b
-    -> Either Text (NS, LText.Text)
-contents tmpls p typ xs =
-    let ns = schemaNS p typ
-     in second (ns,) $ render (contentsTemplate tmpls)
-        [ "namespace" .= ns
-        , "type"      .= typ
-        , "reexports" .= Map.keys xs
-        ]
-
 schemas
     :: Templates EDE.Template
     -> Provider (Maybe a)
     -> SchemaType
-    -> Map NS [Schema]
-    -> Either Text (Map NS LText.Text)
-schemas tmpls p typ = Map.traverseWithKey go
-  where
-    go ns xs =
-        render (schemaTemplate tmpls)
-            [ "namespace" .= ns
-            , "provider"  .= p
-            , "type"      .= typ
-            , "schemas"   .= createMap (getTypeName typ) xs
-            , "imports"   .=
-                (  fromNS '.' syntaxNS
-                : [fromNS '.' (mainNS p) | isJust (providerDatatype p)]
-                )
-            ]
-
-    createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
-    createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]
+    -> [Schema]
+    -> Either Text (NS, LText.Text)
+schemas tmpls p typ xs =
+    let ns = schemaNS p typ
+     in second (ns,) $ render (schemaTemplate tmpls)
+        [ "namespace" .= ns
+        , "provider"  .= p
+        , "type"      .= typ
+        , "schemas"   .= createMap (getTypeName typ) xs
+        , "imports"   .=
+            (  fromNS '.' syntaxNS
+            : [fromNS '.' (mainNS p) | isJust (providerDatatype p)]
+            )
+        ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either Text LText.Text
 render tmpl =
@@ -146,3 +127,6 @@ getTypeName :: SchemaType -> Schema -> Text
 getTypeName = \case
     Resource   -> resourceName   . schema_Name
     DataSource -> dataSourceName . schema_Name
+
+createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
+createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]

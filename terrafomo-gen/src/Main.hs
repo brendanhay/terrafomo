@@ -24,7 +24,6 @@ import Terrafomo.Gen.Render   (Templates (Templates))
 import Terrafomo.Gen.Schema
 
 import qualified Data.Foldable        as Fold
-import qualified Data.Map.Strict      as Map
 import qualified Data.Text            as Text
 import qualified Data.Text.IO         as Text
 import qualified Data.Text.Lazy       as LText
@@ -238,7 +237,7 @@ renderProvider tmpls p@Provider{providerPackage, providerDatatype} = do
 
     when (isJust providerDatatype) $
         hoistEither (Render.provider tmpls p)
-            >>= writeNS dir
+            >>= writeNS (dir </> "gen")
 
     pure dir
 
@@ -250,14 +249,10 @@ renderPackage
 renderPackage tmpls dir p = do
     let packageFile = dir    </> "package" <.> "yaml"
         srcDir      = dir    </> "src"
-        srcGitKeep  = srcDir </> ".gitkeep"
         mainFile    = srcDir </> pathNS (mainNS  p)
         typesFile   = srcDir </> pathNS (typesNS p)
 
-
-    echo ("Writing " ++ srcGitKeep)
-    createDirectory srcDir
-    scriptIO (LText.appendFile srcGitKeep "")
+    createDirectory dir
 
     echo ("Writing " ++ packageFile)
     hoistEither (Render.package tmpls p)
@@ -267,13 +262,13 @@ renderPackage tmpls dir p = do
     echo ("Main " ++ mainFile ++ " == " ++ show mainExists)
     unless mainExists $
         hoistEither (Render.main tmpls p)
-            >>= writeNS dir
+            >>= writeNS srcDir
 
     typesExists <- scriptIO (Dir.doesFileExist typesFile)
     echo ("Types " ++ typesFile ++ " == " ++ show typesExists)
     unless typesExists $
         hoistEither (Render.types tmpls p)
-            >>= writeNS dir
+            >>= writeNS srcDir
 
 renderSchemas
     :: Templates EDE.Template
@@ -285,19 +280,13 @@ renderSchemas
 renderSchemas tmpls dir p typ xs
     | null xs   = pure ()
     | otherwise = do
-        let writeModule = writeNS dir
-            modules     = moduleNS p typ xs
-
-        hoistEither (Render.schemas tmpls p typ modules)
-            >>= Fold.traverse_ writeModule . Map.toList
-
-        unless (Fold.length modules <= 1) $
-            hoistEither (Render.contents tmpls p typ modules)
-                >>= writeModule
+        let writeModule = writeNS (dir </> "gen")
+        hoistEither (Render.schemas tmpls p typ xs)
+            >>= writeModule
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
-    let moduleFile = dir </> "gen" </> pathNS ns <.> "hs"
+    let moduleFile = dir </> pathNS ns <.> "hs"
     echo ("Writing " ++ moduleFile)
     createDirectory (Path.takeDirectory moduleFile)
     scriptIO (LText.writeFile moduleFile text)
@@ -339,7 +328,6 @@ loadTemplates Options{templateDir} =
         Templates
             { packageTemplate  = "package.ede"
             , providerTemplate = "provider.ede"
-            , contentsTemplate = "contents.ede"
             , schemaTemplate   = "schema.ede"
             , mainTemplate     = "main.ede"
             , typesTemplate    = "types.ede"
