@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.GitHub          as TF
+import qualified Terrafomo.GitHub.Provider as TF
+import qualified Terrafomo.GitHub.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -59,33 +61,32 @@ data BranchProtectionResource = BranchProtectionResource {
     {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
     } deriving (Show, Eq)
 
-branchProtectionResource :: TF.Resource TF.GitHub BranchProtectionResource
-branchProtectionResource =
-    TF.newResource "github_branch_protection" $
-        BranchProtectionResource {
-            _branch = TF.Absent
-            , _enforce_admins = TF.Absent
-            , _repository = TF.Absent
-            , _required_pull_request_reviews = TF.Absent
-            , _required_status_checks = TF.Absent
-            , _restrictions = TF.Absent
-            }
-
 instance TF.ToHCL BranchProtectionResource where
-    toHCL BranchProtectionResource{..} = TF.arguments
-        [ TF.assign "branch" <$> _branch
-        , TF.assign "enforce_admins" <$> _enforce_admins
-        , TF.assign "repository" <$> _repository
-        , TF.assign "required_pull_request_reviews" <$> _required_pull_request_reviews
-        , TF.assign "required_status_checks" <$> _required_status_checks
-        , TF.assign "restrictions" <$> _restrictions
+    toHCL BranchProtectionResource{..} = TF.block $ catMaybes
+        [ TF.assign "branch" <$> TF.argument _branch
+        , TF.assign "enforce_admins" <$> TF.argument _enforce_admins
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "required_pull_request_reviews" <$> TF.argument _required_pull_request_reviews
+        , TF.assign "required_status_checks" <$> TF.argument _required_status_checks
+        , TF.assign "restrictions" <$> TF.argument _restrictions
         ]
 
 $(TF.makeSchemaLenses
     ''BranchProtectionResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+branchProtectionResource :: TF.Resource TF.GitHub BranchProtectionResource
+branchProtectionResource =
+    TF.newResource "github_branch_protection" $
+        BranchProtectionResource {
+            _branch = TF.Nil
+            , _enforce_admins = TF.Nil
+            , _repository = TF.Nil
+            , _required_pull_request_reviews = TF.Nil
+            , _required_status_checks = TF.Nil
+            , _restrictions = TF.Nil
+            }
 
 {- | The @github_issue_label@ GitHub resource.
 
@@ -109,29 +110,28 @@ data IssueLabelResource = IssueLabelResource {
     {- ^ - (Computed) The URL to the issue label -}
     } deriving (Show, Eq)
 
-issueLabelResource :: TF.Resource TF.GitHub IssueLabelResource
-issueLabelResource =
-    TF.newResource "github_issue_label" $
-        IssueLabelResource {
-            _color = TF.Absent
-            , _name = TF.Absent
-            , _repository = TF.Absent
-            , _url = TF.Absent
-            }
-
 instance TF.ToHCL IssueLabelResource where
-    toHCL IssueLabelResource{..} = TF.arguments
-        [ TF.assign "color" <$> _color
-        , TF.assign "name" <$> _name
-        , TF.assign "repository" <$> _repository
-        , TF.assign "url" <$> _url
+    toHCL IssueLabelResource{..} = TF.block $ catMaybes
+        [ TF.assign "color" <$> TF.argument _color
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "url" <$> TF.argument _url
         ]
 
 $(TF.makeSchemaLenses
     ''IssueLabelResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+issueLabelResource :: TF.Resource TF.GitHub IssueLabelResource
+issueLabelResource =
+    TF.newResource "github_issue_label" $
+        IssueLabelResource {
+            _color = TF.Nil
+            , _name = TF.Nil
+            , _repository = TF.Nil
+            , _url = TF.Nil
+            }
 
 {- | The @github_membership@ GitHub resource.
 
@@ -147,25 +147,24 @@ data MembershipResource = MembershipResource {
     {- ^ (Required) The user to add to the organization. -}
     } deriving (Show, Eq)
 
-membershipResource :: TF.Resource TF.GitHub MembershipResource
-membershipResource =
-    TF.newResource "github_membership" $
-        MembershipResource {
-            _role = TF.Absent
-            , _username = TF.Absent
-            }
-
 instance TF.ToHCL MembershipResource where
-    toHCL MembershipResource{..} = TF.arguments
-        [ TF.assign "role" <$> _role
-        , TF.assign "username" <$> _username
+    toHCL MembershipResource{..} = TF.block $ catMaybes
+        [ TF.assign "role" <$> TF.argument _role
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''MembershipResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+membershipResource :: TF.Resource TF.GitHub MembershipResource
+membershipResource =
+    TF.newResource "github_membership" $
+        MembershipResource {
+            _role = TF.Nil
+            , _username = TF.Nil
+            }
 
 {- | The @github_organization_webhook@ GitHub resource.
 
@@ -185,30 +184,29 @@ data OrganizationWebhookResource = OrganizationWebhookResource {
     {- ^ - URL of the webhook -}
     } deriving (Show, Eq)
 
-organizationWebhookResource :: TF.Resource TF.GitHub OrganizationWebhookResource
-organizationWebhookResource =
-    TF.newResource "github_organization_webhook" $
-        OrganizationWebhookResource {
-            _active = TF.Absent
-            , _configuration = TF.Absent
-            , _events = TF.Absent
-            , _name = TF.Absent
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL OrganizationWebhookResource where
-    toHCL OrganizationWebhookResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "configuration" <$> _configuration
-        , TF.assign "events" <$> _events
-        , TF.assign "name" <$> _name
+    toHCL OrganizationWebhookResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "configuration" <$> TF.argument _configuration
+        , TF.assign "events" <$> TF.argument _events
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''OrganizationWebhookResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+organizationWebhookResource :: TF.Resource TF.GitHub OrganizationWebhookResource
+organizationWebhookResource =
+    TF.newResource "github_organization_webhook" $
+        OrganizationWebhookResource {
+            _active = TF.Nil
+            , _configuration = TF.Nil
+            , _events = TF.Nil
+            , _name = TF.Nil
+            , _computed_url = TF.Compute "url"
+            }
 
 {- | The @github_repository_collaborator@ GitHub resource.
 
@@ -231,27 +229,26 @@ data RepositoryCollaboratorResource = RepositoryCollaboratorResource {
     {- ^ (Required) The user to add to the repository as a collaborator. -}
     } deriving (Show, Eq)
 
-repositoryCollaboratorResource :: TF.Resource TF.GitHub RepositoryCollaboratorResource
-repositoryCollaboratorResource =
-    TF.newResource "github_repository_collaborator" $
-        RepositoryCollaboratorResource {
-            _permission = TF.Absent
-            , _repository = TF.Absent
-            , _username = TF.Absent
-            }
-
 instance TF.ToHCL RepositoryCollaboratorResource where
-    toHCL RepositoryCollaboratorResource{..} = TF.arguments
-        [ TF.assign "permission" <$> _permission
-        , TF.assign "repository" <$> _repository
-        , TF.assign "username" <$> _username
+    toHCL RepositoryCollaboratorResource{..} = TF.block $ catMaybes
+        [ TF.assign "permission" <$> TF.argument _permission
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''RepositoryCollaboratorResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+repositoryCollaboratorResource :: TF.Resource TF.GitHub RepositoryCollaboratorResource
+repositoryCollaboratorResource =
+    TF.newResource "github_repository_collaborator" $
+        RepositoryCollaboratorResource {
+            _permission = TF.Nil
+            , _repository = TF.Nil
+            , _username = TF.Nil
+            }
 
 {- | The @github_repository_deploy_key@ GitHub resource.
 
@@ -272,29 +269,28 @@ data RepositoryDeployKeyResource = RepositoryDeployKeyResource {
     {- ^ (Required) A title. -}
     } deriving (Show, Eq)
 
-repositoryDeployKeyResource :: TF.Resource TF.GitHub RepositoryDeployKeyResource
-repositoryDeployKeyResource =
-    TF.newResource "github_repository_deploy_key" $
-        RepositoryDeployKeyResource {
-            _key = TF.Absent
-            , _read_only = TF.Absent
-            , _repository = TF.Absent
-            , _title = TF.Absent
-            }
-
 instance TF.ToHCL RepositoryDeployKeyResource where
-    toHCL RepositoryDeployKeyResource{..} = TF.arguments
-        [ TF.assign "key" <$> _key
-        , TF.assign "read_only" <$> _read_only
-        , TF.assign "repository" <$> _repository
-        , TF.assign "title" <$> _title
+    toHCL RepositoryDeployKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "key" <$> TF.argument _key
+        , TF.assign "read_only" <$> TF.argument _read_only
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "title" <$> TF.argument _title
         ]
 
 $(TF.makeSchemaLenses
     ''RepositoryDeployKeyResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+repositoryDeployKeyResource :: TF.Resource TF.GitHub RepositoryDeployKeyResource
+repositoryDeployKeyResource =
+    TF.newResource "github_repository_deploy_key" $
+        RepositoryDeployKeyResource {
+            _key = TF.Nil
+            , _read_only = TF.Nil
+            , _repository = TF.Nil
+            , _title = TF.Nil
+            }
 
 {- | The @github_repository@ GitHub resource.
 
@@ -343,54 +339,53 @@ data RepositoryResource = RepositoryResource {
     {- ^ - URL that can be provided to @svn checkout@ to check out the repository via Github's Subversion protocol emulation. -}
     } deriving (Show, Eq)
 
-repositoryResource :: TF.Resource TF.GitHub RepositoryResource
-repositoryResource =
-    TF.newResource "github_repository" $
-        RepositoryResource {
-            _allow_merge_commit = TF.Absent
-            , _allow_rebase_merge = TF.Absent
-            , _allow_squash_merge = TF.Absent
-            , _auto_init = TF.Absent
-            , _default_branch = TF.Absent
-            , _description = TF.Absent
-            , _gitignore_template = TF.Absent
-            , _has_downloads = TF.Absent
-            , _has_issues = TF.Absent
-            , _has_wiki = TF.Absent
-            , _homepage_url = TF.Absent
-            , _license_template = TF.Absent
-            , _name = TF.Absent
-            , _private = TF.Absent
-            , _computed_full_name = TF.Computed "full_name"
-            , _computed_git_clone_url = TF.Computed "git_clone_url"
-            , _computed_http_clone_url = TF.Computed "http_clone_url"
-            , _computed_ssh_clone_url = TF.Computed "ssh_clone_url"
-            , _computed_svn_url = TF.Computed "svn_url"
-            }
-
 instance TF.ToHCL RepositoryResource where
-    toHCL RepositoryResource{..} = TF.arguments
-        [ TF.assign "allow_merge_commit" <$> _allow_merge_commit
-        , TF.assign "allow_rebase_merge" <$> _allow_rebase_merge
-        , TF.assign "allow_squash_merge" <$> _allow_squash_merge
-        , TF.assign "auto_init" <$> _auto_init
-        , TF.assign "default_branch" <$> _default_branch
-        , TF.assign "description" <$> _description
-        , TF.assign "gitignore_template" <$> _gitignore_template
-        , TF.assign "has_downloads" <$> _has_downloads
-        , TF.assign "has_issues" <$> _has_issues
-        , TF.assign "has_wiki" <$> _has_wiki
-        , TF.assign "homepage_url" <$> _homepage_url
-        , TF.assign "license_template" <$> _license_template
-        , TF.assign "name" <$> _name
-        , TF.assign "private" <$> _private
+    toHCL RepositoryResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_merge_commit" <$> TF.argument _allow_merge_commit
+        , TF.assign "allow_rebase_merge" <$> TF.argument _allow_rebase_merge
+        , TF.assign "allow_squash_merge" <$> TF.argument _allow_squash_merge
+        , TF.assign "auto_init" <$> TF.argument _auto_init
+        , TF.assign "default_branch" <$> TF.argument _default_branch
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "gitignore_template" <$> TF.argument _gitignore_template
+        , TF.assign "has_downloads" <$> TF.argument _has_downloads
+        , TF.assign "has_issues" <$> TF.argument _has_issues
+        , TF.assign "has_wiki" <$> TF.argument _has_wiki
+        , TF.assign "homepage_url" <$> TF.argument _homepage_url
+        , TF.assign "license_template" <$> TF.argument _license_template
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "private" <$> TF.argument _private
         ]
 
 $(TF.makeSchemaLenses
     ''RepositoryResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+repositoryResource :: TF.Resource TF.GitHub RepositoryResource
+repositoryResource =
+    TF.newResource "github_repository" $
+        RepositoryResource {
+            _allow_merge_commit = TF.Nil
+            , _allow_rebase_merge = TF.Nil
+            , _allow_squash_merge = TF.Nil
+            , _auto_init = TF.Nil
+            , _default_branch = TF.Nil
+            , _description = TF.Nil
+            , _gitignore_template = TF.Nil
+            , _has_downloads = TF.Nil
+            , _has_issues = TF.Nil
+            , _has_wiki = TF.Nil
+            , _homepage_url = TF.Nil
+            , _license_template = TF.Nil
+            , _name = TF.Nil
+            , _private = TF.Nil
+            , _computed_full_name = TF.Compute "full_name"
+            , _computed_git_clone_url = TF.Compute "git_clone_url"
+            , _computed_http_clone_url = TF.Compute "http_clone_url"
+            , _computed_ssh_clone_url = TF.Compute "ssh_clone_url"
+            , _computed_svn_url = TF.Compute "svn_url"
+            }
 
 {- | The @github_repository_webhook@ GitHub resource.
 
@@ -413,32 +408,31 @@ data RepositoryWebhookResource = RepositoryWebhookResource {
     {- ^ - URL of the webhook -}
     } deriving (Show, Eq)
 
-repositoryWebhookResource :: TF.Resource TF.GitHub RepositoryWebhookResource
-repositoryWebhookResource =
-    TF.newResource "github_repository_webhook" $
-        RepositoryWebhookResource {
-            _active = TF.Absent
-            , _configuration = TF.Absent
-            , _events = TF.Absent
-            , _name = TF.Absent
-            , _repository = TF.Absent
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL RepositoryWebhookResource where
-    toHCL RepositoryWebhookResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "configuration" <$> _configuration
-        , TF.assign "events" <$> _events
-        , TF.assign "name" <$> _name
-        , TF.assign "repository" <$> _repository
+    toHCL RepositoryWebhookResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "configuration" <$> TF.argument _configuration
+        , TF.assign "events" <$> TF.argument _events
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "repository" <$> TF.argument _repository
         ]
 
 $(TF.makeSchemaLenses
     ''RepositoryWebhookResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+repositoryWebhookResource :: TF.Resource TF.GitHub RepositoryWebhookResource
+repositoryWebhookResource =
+    TF.newResource "github_repository_webhook" $
+        RepositoryWebhookResource {
+            _active = TF.Nil
+            , _configuration = TF.Nil
+            , _events = TF.Nil
+            , _name = TF.Nil
+            , _repository = TF.Nil
+            , _computed_url = TF.Compute "url"
+            }
 
 {- | The @github_team_membership@ GitHub resource.
 
@@ -457,27 +451,26 @@ data TeamMembershipResource = TeamMembershipResource {
     {- ^ (Required) The user to add to the team. -}
     } deriving (Show, Eq)
 
-teamMembershipResource :: TF.Resource TF.GitHub TeamMembershipResource
-teamMembershipResource =
-    TF.newResource "github_team_membership" $
-        TeamMembershipResource {
-            _role = TF.Absent
-            , _team_id = TF.Absent
-            , _username = TF.Absent
-            }
-
 instance TF.ToHCL TeamMembershipResource where
-    toHCL TeamMembershipResource{..} = TF.arguments
-        [ TF.assign "role" <$> _role
-        , TF.assign "team_id" <$> _team_id
-        , TF.assign "username" <$> _username
+    toHCL TeamMembershipResource{..} = TF.block $ catMaybes
+        [ TF.assign "role" <$> TF.argument _role
+        , TF.assign "team_id" <$> TF.argument _team_id
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''TeamMembershipResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamMembershipResource :: TF.Resource TF.GitHub TeamMembershipResource
+teamMembershipResource =
+    TF.newResource "github_team_membership" $
+        TeamMembershipResource {
+            _role = TF.Nil
+            , _team_id = TF.Nil
+            , _username = TF.Nil
+            }
 
 {- | The @github_team_repository@ GitHub resource.
 
@@ -496,27 +489,26 @@ data TeamRepositoryResource = TeamRepositoryResource {
     {- ^ (Required) The GitHub team id -}
     } deriving (Show, Eq)
 
-teamRepositoryResource :: TF.Resource TF.GitHub TeamRepositoryResource
-teamRepositoryResource =
-    TF.newResource "github_team_repository" $
-        TeamRepositoryResource {
-            _permission = TF.Absent
-            , _repository = TF.Absent
-            , _team_id = TF.Absent
-            }
-
 instance TF.ToHCL TeamRepositoryResource where
-    toHCL TeamRepositoryResource{..} = TF.arguments
-        [ TF.assign "permission" <$> _permission
-        , TF.assign "repository" <$> _repository
-        , TF.assign "team_id" <$> _team_id
+    toHCL TeamRepositoryResource{..} = TF.block $ catMaybes
+        [ TF.assign "permission" <$> TF.argument _permission
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "team_id" <$> TF.argument _team_id
         ]
 
 $(TF.makeSchemaLenses
     ''TeamRepositoryResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamRepositoryResource :: TF.Resource TF.GitHub TeamRepositoryResource
+teamRepositoryResource =
+    TF.newResource "github_team_repository" $
+        TeamRepositoryResource {
+            _permission = TF.Nil
+            , _repository = TF.Nil
+            , _team_id = TF.Nil
+            }
 
 {- | The @github_team@ GitHub resource.
 
@@ -537,27 +529,26 @@ data TeamResource = TeamResource {
     {- ^ - The ID of the created team. -}
     } deriving (Show, Eq)
 
-teamResource :: TF.Resource TF.GitHub TeamResource
-teamResource =
-    TF.newResource "github_team" $
-        TeamResource {
-            _description = TF.Absent
-            , _ldap_dn = TF.Absent
-            , _name = TF.Absent
-            , _privacy = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL TeamResource where
-    toHCL TeamResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "ldap_dn" <$> _ldap_dn
-        , TF.assign "name" <$> _name
-        , TF.assign "privacy" <$> _privacy
+    toHCL TeamResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "ldap_dn" <$> TF.argument _ldap_dn
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "privacy" <$> TF.argument _privacy
         ]
 
 $(TF.makeSchemaLenses
     ''TeamResource
     ''TF.GitHub
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamResource :: TF.Resource TF.GitHub TeamResource
+teamResource =
+    TF.newResource "github_team" $
+        TeamResource {
+            _description = TF.Nil
+            , _ldap_dn = TF.Nil
+            , _name = TF.Nil
+            , _privacy = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

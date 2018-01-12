@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.NewRelic        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.NewRelic.Provider as TF
+import qualified Terrafomo.NewRelic.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @newrelic_alert_channel@ NewRelic resource.
 
@@ -51,28 +53,27 @@ data AlertChannelResource = AlertChannelResource {
     {- ^ - The ID of the channel. -}
     } deriving (Show, Eq)
 
-alertChannelResource :: TF.Resource TF.NewRelic AlertChannelResource
-alertChannelResource =
-    TF.newResource "newrelic_alert_channel" $
-        AlertChannelResource {
-            _configuration = TF.Absent
-            , _name = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AlertChannelResource where
-    toHCL AlertChannelResource{..} = TF.arguments
-        [ TF.assign "configuration" <$> _configuration
-        , TF.assign "name" <$> _name
-        , TF.assign "type" <$> _type'
+    toHCL AlertChannelResource{..} = TF.block $ catMaybes
+        [ TF.assign "configuration" <$> TF.argument _configuration
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''AlertChannelResource
     ''TF.NewRelic
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+alertChannelResource :: TF.Resource TF.NewRelic AlertChannelResource
+alertChannelResource =
+    TF.newResource "newrelic_alert_channel" $
+        AlertChannelResource {
+            _configuration = TF.Nil
+            , _name = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @newrelic_alert_condition@ NewRelic resource.
 
@@ -101,41 +102,40 @@ data AlertConditionResource = AlertConditionResource {
     {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
     } deriving (Show, Eq)
 
-alertConditionResource :: TF.Resource TF.NewRelic AlertConditionResource
-alertConditionResource =
-    TF.newResource "newrelic_alert_condition" $
-        AlertConditionResource {
-            _condition_scope = TF.Absent
-            , _entities = TF.Absent
-            , _metric = TF.Absent
-            , _name = TF.Absent
-            , _policy_id = TF.Absent
-            , _runbook_url = TF.Absent
-            , _term = TF.Absent
-            , _type' = TF.Absent
-            , _user_defined_metric = TF.Absent
-            , _user_defined_value_function = TF.Absent
-            }
-
 instance TF.ToHCL AlertConditionResource where
-    toHCL AlertConditionResource{..} = TF.arguments
-        [ TF.assign "condition_scope" <$> _condition_scope
-        , TF.assign "entities" <$> _entities
-        , TF.assign "metric" <$> _metric
-        , TF.assign "name" <$> _name
-        , TF.assign "policy_id" <$> _policy_id
-        , TF.assign "runbook_url" <$> _runbook_url
-        , TF.assign "term" <$> _term
-        , TF.assign "type" <$> _type'
-        , TF.assign "user_defined_metric" <$> _user_defined_metric
-        , TF.assign "user_defined_value_function" <$> _user_defined_value_function
+    toHCL AlertConditionResource{..} = TF.block $ catMaybes
+        [ TF.assign "condition_scope" <$> TF.argument _condition_scope
+        , TF.assign "entities" <$> TF.argument _entities
+        , TF.assign "metric" <$> TF.argument _metric
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "policy_id" <$> TF.argument _policy_id
+        , TF.assign "runbook_url" <$> TF.argument _runbook_url
+        , TF.assign "term" <$> TF.argument _term
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "user_defined_metric" <$> TF.argument _user_defined_metric
+        , TF.assign "user_defined_value_function" <$> TF.argument _user_defined_value_function
         ]
 
 $(TF.makeSchemaLenses
     ''AlertConditionResource
     ''TF.NewRelic
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+alertConditionResource :: TF.Resource TF.NewRelic AlertConditionResource
+alertConditionResource =
+    TF.newResource "newrelic_alert_condition" $
+        AlertConditionResource {
+            _condition_scope = TF.Nil
+            , _entities = TF.Nil
+            , _metric = TF.Nil
+            , _name = TF.Nil
+            , _policy_id = TF.Nil
+            , _runbook_url = TF.Nil
+            , _term = TF.Nil
+            , _type' = TF.Nil
+            , _user_defined_metric = TF.Nil
+            , _user_defined_value_function = TF.Nil
+            }
 
 {- | The @newrelic_alert_policy_channel@ NewRelic resource.
 
@@ -148,25 +148,24 @@ data AlertPolicyChannelResource = AlertPolicyChannelResource {
     {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Eq)
 
-alertPolicyChannelResource :: TF.Resource TF.NewRelic AlertPolicyChannelResource
-alertPolicyChannelResource =
-    TF.newResource "newrelic_alert_policy_channel" $
-        AlertPolicyChannelResource {
-            _channel_id = TF.Absent
-            , _policy_id = TF.Absent
-            }
-
 instance TF.ToHCL AlertPolicyChannelResource where
-    toHCL AlertPolicyChannelResource{..} = TF.arguments
-        [ TF.assign "channel_id" <$> _channel_id
-        , TF.assign "policy_id" <$> _policy_id
+    toHCL AlertPolicyChannelResource{..} = TF.block $ catMaybes
+        [ TF.assign "channel_id" <$> TF.argument _channel_id
+        , TF.assign "policy_id" <$> TF.argument _policy_id
         ]
 
 $(TF.makeSchemaLenses
     ''AlertPolicyChannelResource
     ''TF.NewRelic
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+alertPolicyChannelResource :: TF.Resource TF.NewRelic AlertPolicyChannelResource
+alertPolicyChannelResource =
+    TF.newResource "newrelic_alert_policy_channel" $
+        AlertPolicyChannelResource {
+            _channel_id = TF.Nil
+            , _policy_id = TF.Nil
+            }
 
 {- | The @newrelic_alert_policy@ NewRelic resource.
 
@@ -185,28 +184,27 @@ data AlertPolicyResource = AlertPolicyResource {
     {- ^ - The time the policy was last updated. -}
     } deriving (Show, Eq)
 
-alertPolicyResource :: TF.Resource TF.NewRelic AlertPolicyResource
-alertPolicyResource =
-    TF.newResource "newrelic_alert_policy" $
-        AlertPolicyResource {
-            _incident_preference = TF.Absent
-            , _name = TF.Absent
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_id = TF.Computed "id"
-            , _computed_updated_at = TF.Computed "updated_at"
-            }
-
 instance TF.ToHCL AlertPolicyResource where
-    toHCL AlertPolicyResource{..} = TF.arguments
-        [ TF.assign "incident_preference" <$> _incident_preference
-        , TF.assign "name" <$> _name
+    toHCL AlertPolicyResource{..} = TF.block $ catMaybes
+        [ TF.assign "incident_preference" <$> TF.argument _incident_preference
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''AlertPolicyResource
     ''TF.NewRelic
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+alertPolicyResource :: TF.Resource TF.NewRelic AlertPolicyResource
+alertPolicyResource =
+    TF.newResource "newrelic_alert_policy" $
+        AlertPolicyResource {
+            _incident_preference = TF.Nil
+            , _name = TF.Nil
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_id = TF.Compute "id"
+            , _computed_updated_at = TF.Compute "updated_at"
+            }
 
 {- | The @newrelic_nrql_alert_condition@ NewRelic resource.
 
@@ -229,32 +227,31 @@ data NrqlAlertConditionResource = NrqlAlertConditionResource {
     {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}
     } deriving (Show, Eq)
 
-nrqlAlertConditionResource :: TF.Resource TF.NewRelic NrqlAlertConditionResource
-nrqlAlertConditionResource =
-    TF.newResource "newrelic_nrql_alert_condition" $
-        NrqlAlertConditionResource {
-            _enabled = TF.Absent
-            , _name = TF.Absent
-            , _nrql = TF.Absent
-            , _policy_id = TF.Absent
-            , _runbook_url = TF.Absent
-            , _term = TF.Absent
-            , _value_function = TF.Absent
-            }
-
 instance TF.ToHCL NrqlAlertConditionResource where
-    toHCL NrqlAlertConditionResource{..} = TF.arguments
-        [ TF.assign "enabled" <$> _enabled
-        , TF.assign "name" <$> _name
-        , TF.assign "nrql" <$> _nrql
-        , TF.assign "policy_id" <$> _policy_id
-        , TF.assign "runbook_url" <$> _runbook_url
-        , TF.assign "term" <$> _term
-        , TF.assign "value_function" <$> _value_function
+    toHCL NrqlAlertConditionResource{..} = TF.block $ catMaybes
+        [ TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "nrql" <$> TF.argument _nrql
+        , TF.assign "policy_id" <$> TF.argument _policy_id
+        , TF.assign "runbook_url" <$> TF.argument _runbook_url
+        , TF.assign "term" <$> TF.argument _term
+        , TF.assign "value_function" <$> TF.argument _value_function
         ]
 
 $(TF.makeSchemaLenses
     ''NrqlAlertConditionResource
     ''TF.NewRelic
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+nrqlAlertConditionResource :: TF.Resource TF.NewRelic NrqlAlertConditionResource
+nrqlAlertConditionResource =
+    TF.newResource "newrelic_nrql_alert_condition" $
+        NrqlAlertConditionResource {
+            _enabled = TF.Nil
+            , _name = TF.Nil
+            , _nrql = TF.Nil
+            , _policy_id = TF.Nil
+            , _runbook_url = TF.Nil
+            , _term = TF.Nil
+            , _value_function = TF.Nil
+            }

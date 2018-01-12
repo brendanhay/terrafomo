@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Docker.Provider where
+module Terrafomo.Docker.Provider
+    ( Docker    (..)
+    , HasDocker (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Docker.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -35,8 +48,8 @@ only with single server Docker but Swarm and any additional
 Docker-compatible API hosts. Use the navigation to the left to read about
 the available resources.
 -}
-data Docker = Docker
-    { _ca_material   :: !(TF.Argument Text)
+data Docker = Docker {
+      _ca_material   :: !(TF.Argument Text)
     {- ^ , @cert_material@ , @key_material@ , - (Optional) Content of @ca.pem@ , @cert.pem@ , and @key.pem@ files for TLS authentication. Cannot be used together with @cert_path@ . -}
     , _cert_path     :: !(TF.Argument Text)
     {- ^ (Optional) Path to a directory with certificate information for connecting to the Docker host via TLS. If this is blank, the @DOCKER_CERT_PATH@ will also be checked. -}
@@ -49,11 +62,33 @@ data Docker = Docker
 instance Hashable Docker
 
 instance TF.ToHCL Docker where
-    toHCL x = TF.arguments
-        [ TF.assign "ca_material" <$> _ca_material x
-        , TF.assign "cert_path" <$> _cert_path x
-        , TF.assign "host" <$> _host x
-        , TF.assign "registry_auth" <$> _registry_auth x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Docker))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "ca_material" <$> TF.argument (_ca_material x)
+            , TF.assign "cert_path" <$> TF.argument (_cert_path x)
+            , TF.assign "host" <$> TF.argument (_host x)
+            , TF.assign "registry_auth" <$> TF.argument (_registry_auth x)
+            ]
 
-$(TF.makeClassy ''Docker)
+instance Semigroup Docker where
+    (<>) a b = Docker {
+          _ca_material = on (<>) _ca_material a b
+        , _cert_path = on (<>) _cert_path a b
+        , _host = on (<>) _host a b
+        , _registry_auth = on (<>) _registry_auth a b
+        }
+
+instance Monoid Docker where
+    mappend = (<>)
+    mempty  = Docker {
+            _ca_material = TF.Nil
+          , _cert_path = TF.Nil
+          , _host = TF.Nil
+          , _registry_auth = TF.Nil
+        }
+
+instance TF.IsProvider Docker where
+    type ProviderName Docker = "docker"
+
+$(TF.makeProviderLenses ''Docker)

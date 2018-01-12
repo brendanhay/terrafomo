@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Datadog         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Datadog.Provider as TF
+import qualified Terrafomo.Datadog.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @datadog_downtime@ Datadog resource.
 
@@ -60,36 +62,35 @@ data DowntimeResource = DowntimeResource {
     {- ^ - ID of the Datadog downtime -}
     } deriving (Show, Eq)
 
-downtimeResource :: TF.Resource TF.Datadog DowntimeResource
-downtimeResource =
-    TF.newResource "datadog_downtime" $
-        DowntimeResource {
-            _active = TF.Absent
-            , _disabled = TF.Absent
-            , _end = TF.Absent
-            , _message = TF.Absent
-            , _recurrence = TF.Absent
-            , _scope = TF.Absent
-            , _start = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DowntimeResource where
-    toHCL DowntimeResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "disabled" <$> _disabled
-        , TF.assign "end" <$> _end
-        , TF.assign "message" <$> _message
-        , TF.assign "recurrence" <$> _recurrence
-        , TF.assign "scope" <$> _scope
-        , TF.assign "start" <$> _start
+    toHCL DowntimeResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "disabled" <$> TF.argument _disabled
+        , TF.assign "end" <$> TF.argument _end
+        , TF.assign "message" <$> TF.argument _message
+        , TF.assign "recurrence" <$> TF.argument _recurrence
+        , TF.assign "scope" <$> TF.argument _scope
+        , TF.assign "start" <$> TF.argument _start
         ]
 
 $(TF.makeSchemaLenses
     ''DowntimeResource
     ''TF.Datadog
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+downtimeResource :: TF.Resource TF.Datadog DowntimeResource
+downtimeResource =
+    TF.newResource "datadog_downtime" $
+        DowntimeResource {
+            _active = TF.Nil
+            , _disabled = TF.Nil
+            , _end = TF.Nil
+            , _message = TF.Nil
+            , _recurrence = TF.Nil
+            , _scope = TF.Nil
+            , _start = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @datadog_metric_metadata@ Datadog resource.
 
@@ -111,33 +112,32 @@ data MetricMetadataResource = MetricMetadataResource {
     {- ^ (Optional) Primary unit of the metric such as 'byte' or 'operation'. -}
     } deriving (Show, Eq)
 
-metricMetadataResource :: TF.Resource TF.Datadog MetricMetadataResource
-metricMetadataResource =
-    TF.newResource "datadog_metric_metadata" $
-        MetricMetadataResource {
-            _description = TF.Absent
-            , _metric = TF.Absent
-            , _per_unit = TF.Absent
-            , _short_name = TF.Absent
-            , _statsd_interval = TF.Absent
-            , _unit = TF.Absent
-            }
-
 instance TF.ToHCL MetricMetadataResource where
-    toHCL MetricMetadataResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "metric" <$> _metric
-        , TF.assign "per_unit" <$> _per_unit
-        , TF.assign "short_name" <$> _short_name
-        , TF.assign "statsd_interval" <$> _statsd_interval
-        , TF.assign "unit" <$> _unit
+    toHCL MetricMetadataResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "metric" <$> TF.argument _metric
+        , TF.assign "per_unit" <$> TF.argument _per_unit
+        , TF.assign "short_name" <$> TF.argument _short_name
+        , TF.assign "statsd_interval" <$> TF.argument _statsd_interval
+        , TF.assign "unit" <$> TF.argument _unit
         ]
 
 $(TF.makeSchemaLenses
     ''MetricMetadataResource
     ''TF.Datadog
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+metricMetadataResource :: TF.Resource TF.Datadog MetricMetadataResource
+metricMetadataResource =
+    TF.newResource "datadog_metric_metadata" $
+        MetricMetadataResource {
+            _description = TF.Nil
+            , _metric = TF.Nil
+            , _per_unit = TF.Nil
+            , _short_name = TF.Nil
+            , _statsd_interval = TF.Nil
+            , _unit = TF.Nil
+            }
 
 {- | The @datadog_monitor@ Datadog resource.
 
@@ -185,58 +185,57 @@ data MonitorResource = MonitorResource {
     {- ^ - ID of the Datadog monitor -}
     } deriving (Show, Eq)
 
-monitorResource :: TF.Resource TF.Datadog MonitorResource
-monitorResource =
-    TF.newResource "datadog_monitor" $
-        MonitorResource {
-            _escalation_message = TF.Absent
-            , _evaluation_delay = TF.Absent
-            , _include_tags = TF.Absent
-            , _locked = TF.Absent
-            , _message = TF.Absent
-            , _name = TF.Absent
-            , _new_host_delay = TF.Absent
-            , _no_data_timeframe = TF.Absent
-            , _notify_audit = TF.Absent
-            , _notify_no_data = TF.Absent
-            , _query = TF.Absent
-            , _renotify_interval = TF.Absent
-            , _require_full_window = TF.Absent
-            , _silenced = TF.Absent
-            , _tags = TF.Absent
-            , _thresholds = TF.Absent
-            , _timeout_h = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL MonitorResource where
-    toHCL MonitorResource{..} = TF.arguments
-        [ TF.assign "escalation_message" <$> _escalation_message
-        , TF.assign "evaluation_delay" <$> _evaluation_delay
-        , TF.assign "include_tags" <$> _include_tags
-        , TF.assign "locked" <$> _locked
-        , TF.assign "message" <$> _message
-        , TF.assign "name" <$> _name
-        , TF.assign "new_host_delay" <$> _new_host_delay
-        , TF.assign "no_data_timeframe" <$> _no_data_timeframe
-        , TF.assign "notify_audit" <$> _notify_audit
-        , TF.assign "notify_no_data" <$> _notify_no_data
-        , TF.assign "query" <$> _query
-        , TF.assign "renotify_interval" <$> _renotify_interval
-        , TF.assign "require_full_window" <$> _require_full_window
-        , TF.assign "silenced" <$> _silenced
-        , TF.assign "tags" <$> _tags
-        , TF.assign "thresholds" <$> _thresholds
-        , TF.assign "timeout_h" <$> _timeout_h
-        , TF.assign "type" <$> _type'
+    toHCL MonitorResource{..} = TF.block $ catMaybes
+        [ TF.assign "escalation_message" <$> TF.argument _escalation_message
+        , TF.assign "evaluation_delay" <$> TF.argument _evaluation_delay
+        , TF.assign "include_tags" <$> TF.argument _include_tags
+        , TF.assign "locked" <$> TF.argument _locked
+        , TF.assign "message" <$> TF.argument _message
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "new_host_delay" <$> TF.argument _new_host_delay
+        , TF.assign "no_data_timeframe" <$> TF.argument _no_data_timeframe
+        , TF.assign "notify_audit" <$> TF.argument _notify_audit
+        , TF.assign "notify_no_data" <$> TF.argument _notify_no_data
+        , TF.assign "query" <$> TF.argument _query
+        , TF.assign "renotify_interval" <$> TF.argument _renotify_interval
+        , TF.assign "require_full_window" <$> TF.argument _require_full_window
+        , TF.assign "silenced" <$> TF.argument _silenced
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "thresholds" <$> TF.argument _thresholds
+        , TF.assign "timeout_h" <$> TF.argument _timeout_h
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''MonitorResource
     ''TF.Datadog
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+monitorResource :: TF.Resource TF.Datadog MonitorResource
+monitorResource =
+    TF.newResource "datadog_monitor" $
+        MonitorResource {
+            _escalation_message = TF.Nil
+            , _evaluation_delay = TF.Nil
+            , _include_tags = TF.Nil
+            , _locked = TF.Nil
+            , _message = TF.Nil
+            , _name = TF.Nil
+            , _new_host_delay = TF.Nil
+            , _no_data_timeframe = TF.Nil
+            , _notify_audit = TF.Nil
+            , _notify_no_data = TF.Nil
+            , _query = TF.Nil
+            , _renotify_interval = TF.Nil
+            , _require_full_window = TF.Nil
+            , _silenced = TF.Nil
+            , _tags = TF.Nil
+            , _thresholds = TF.Nil
+            , _timeout_h = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @datadog_timeboard@ Datadog resource.
 
@@ -256,31 +255,30 @@ data TimeboardResource = TimeboardResource {
     {- ^ (Required) The name of the dashboard. -}
     } deriving (Show, Eq)
 
-timeboardResource :: TF.Resource TF.Datadog TimeboardResource
-timeboardResource =
-    TF.newResource "datadog_timeboard" $
-        TimeboardResource {
-            _description = TF.Absent
-            , _graph = TF.Absent
-            , _read_only = TF.Absent
-            , _template_variable = TF.Absent
-            , _title = TF.Absent
-            }
-
 instance TF.ToHCL TimeboardResource where
-    toHCL TimeboardResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "graph" <$> _graph
-        , TF.assign "read_only" <$> _read_only
-        , TF.assign "template_variable" <$> _template_variable
-        , TF.assign "title" <$> _title
+    toHCL TimeboardResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "graph" <$> TF.argument _graph
+        , TF.assign "read_only" <$> TF.argument _read_only
+        , TF.assign "template_variable" <$> TF.argument _template_variable
+        , TF.assign "title" <$> TF.argument _title
         ]
 
 $(TF.makeSchemaLenses
     ''TimeboardResource
     ''TF.Datadog
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+timeboardResource :: TF.Resource TF.Datadog TimeboardResource
+timeboardResource =
+    TF.newResource "datadog_timeboard" $
+        TimeboardResource {
+            _description = TF.Nil
+            , _graph = TF.Nil
+            , _read_only = TF.Nil
+            , _template_variable = TF.Nil
+            , _title = TF.Nil
+            }
 
 {- | The @datadog_user@ Datadog resource.
 
@@ -308,33 +306,32 @@ data UserResource = UserResource {
     {- ^ - Returns true if Datadog user is verified -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.Datadog UserResource
-userResource =
-    TF.newResource "datadog_user" $
-        UserResource {
-            _disabled = TF.Absent
-            , _email = TF.Absent
-            , _handle = TF.Absent
-            , _is_admin = TF.Absent
-            , _name = TF.Absent
-            , _role = TF.Absent
-            , _computed_disabled = TF.Computed "disabled"
-            , _computed_id = TF.Computed "id"
-            , _computed_verified = TF.Computed "verified"
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "disabled" <$> _disabled
-        , TF.assign "email" <$> _email
-        , TF.assign "handle" <$> _handle
-        , TF.assign "is_admin" <$> _is_admin
-        , TF.assign "name" <$> _name
-        , TF.assign "role" <$> _role
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "disabled" <$> TF.argument _disabled
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "handle" <$> TF.argument _handle
+        , TF.assign "is_admin" <$> TF.argument _is_admin
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "role" <$> TF.argument _role
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.Datadog
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.Datadog UserResource
+userResource =
+    TF.newResource "datadog_user" $
+        UserResource {
+            _disabled = TF.Nil
+            , _email = TF.Nil
+            , _handle = TF.Nil
+            , _is_admin = TF.Nil
+            , _name = TF.Nil
+            , _role = TF.Nil
+            , _computed_disabled = TF.Compute "disabled"
+            , _computed_id = TF.Compute "id"
+            , _computed_verified = TF.Compute "verified"
+            }

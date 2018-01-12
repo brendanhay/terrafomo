@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Fastly            as TF
+import qualified Terrafomo.Fastly.Provider   as TF
+import qualified Terrafomo.Fastly.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -47,18 +49,17 @@ data IpRangesDataSource = IpRangesDataSource {
     {- ^ - The lexically ordered list of CIDR blocks. -}
     } deriving (Show, Eq)
 
-ipRangesDataSource :: TF.DataSource TF.Fastly IpRangesDataSource
-ipRangesDataSource =
-    TF.newDataSource "fastly_ip_ranges" $
-        IpRangesDataSource {
-              _computed_cidr_blocks = TF.Computed "cidr_blocks"
-            }
-
 instance TF.ToHCL IpRangesDataSource where
-    toHCL = const $ TF.arguments []
+    toHCL _ = TF.block []
 
 $(TF.makeSchemaLenses
     ''IpRangesDataSource
     ''TF.Fastly
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+ipRangesDataSource :: TF.DataSource TF.Fastly IpRangesDataSource
+ipRangesDataSource =
+    TF.newDataSource "fastly_ip_ranges" $
+        IpRangesDataSource {
+              _computed_cidr_blocks = TF.Compute "cidr_blocks"
+            }

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
-import qualified Terrafomo.Triton            as TF
+import qualified Terrafomo.Triton.Provider   as TF
+import qualified Terrafomo.Triton.Types      as TF
 
 {- | The @triton_image@ Triton datasource.
 
@@ -60,37 +62,36 @@ data ImageDataSource = ImageDataSource {
     {- ^ - (string) The version for the image -}
     } deriving (Show, Eq)
 
-imageDataSource :: TF.DataSource TF.Triton ImageDataSource
-imageDataSource =
-    TF.newDataSource "triton_image" $
-        ImageDataSource {
-            _most_recent = TF.Absent
-            , _name = TF.Absent
-            , _os = TF.Absent
-            , _owner = TF.Absent
-            , _public = TF.Absent
-            , _state = TF.Absent
-            , _type' = TF.Absent
-            , _version = TF.Absent
-            }
-
 instance TF.ToHCL ImageDataSource where
-    toHCL ImageDataSource{..} = TF.arguments
-        [ TF.assign "most_recent" <$> _most_recent
-        , TF.assign "name" <$> _name
-        , TF.assign "os" <$> _os
-        , TF.assign "owner" <$> _owner
-        , TF.assign "public" <$> _public
-        , TF.assign "state" <$> _state
-        , TF.assign "type" <$> _type'
-        , TF.assign "version" <$> _version
+    toHCL ImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "most_recent" <$> TF.argument _most_recent
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "os" <$> TF.argument _os
+        , TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "public" <$> TF.argument _public
+        , TF.assign "state" <$> TF.argument _state
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''ImageDataSource
     ''TF.Triton
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imageDataSource :: TF.DataSource TF.Triton ImageDataSource
+imageDataSource =
+    TF.newDataSource "triton_image" $
+        ImageDataSource {
+            _most_recent = TF.Nil
+            , _name = TF.Nil
+            , _os = TF.Nil
+            , _owner = TF.Nil
+            , _public = TF.Nil
+            , _state = TF.Nil
+            , _type' = TF.Nil
+            , _version = TF.Nil
+            }
 
 {- | The @triton_network@ Triton datasource.
 
@@ -104,21 +105,20 @@ data NetworkDataSource = NetworkDataSource {
     {- ^ - (string) The ID of the network. -}
     } deriving (Show, Eq)
 
-networkDataSource :: TF.DataSource TF.Triton NetworkDataSource
-networkDataSource =
-    TF.newDataSource "triton_network" $
-        NetworkDataSource {
-            _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkDataSource where
-    toHCL NetworkDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL NetworkDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkDataSource
     ''TF.Triton
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkDataSource :: TF.DataSource TF.Triton NetworkDataSource
+networkDataSource =
+    TF.newDataSource "triton_network" $
+        NetworkDataSource {
+            _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

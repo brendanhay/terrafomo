@@ -1,4 +1,4 @@
 name: Icinga2
 package: terrafomo-icinga2
 datatype: true
-
+original: icinga2

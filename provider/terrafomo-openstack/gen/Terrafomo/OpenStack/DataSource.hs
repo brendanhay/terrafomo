@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OpenStack         as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.OpenStack.Provider as TF
+import qualified Terrafomo.OpenStack.Types    as TF
+import qualified Terrafomo.Syntax.DataSource  as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @openstack_dns_zone_v2@ OpenStack datasource.
 
@@ -89,51 +91,50 @@ data DnsZoneV2DataSource = DnsZoneV2DataSource {
     {- ^ - The version of the zone. -}
     } deriving (Show, Eq)
 
-dnsZoneV2DataSource :: TF.DataSource TF.OpenStack DnsZoneV2DataSource
-dnsZoneV2DataSource =
-    TF.newDataSource "openstack_dns_zone_v2" $
-        DnsZoneV2DataSource {
-            _description = TF.Absent
-            , _email = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _status = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _computed_attributes = TF.Computed "attributes"
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_description = TF.Computed "description"
-            , _computed_email = TF.Computed "email"
-            , _computed_masters = TF.Computed "masters"
-            , _computed_name = TF.Computed "name"
-            , _computed_pool_id = TF.Computed "pool_id"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_region = TF.Computed "region"
-            , _computed_serial = TF.Computed "serial"
-            , _computed_status = TF.Computed "status"
-            , _computed_transferred_at = TF.Computed "transferred_at"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_updated_at = TF.Computed "updated_at"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL DnsZoneV2DataSource where
-    toHCL DnsZoneV2DataSource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "email" <$> _email
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "status" <$> _status
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
+    toHCL DnsZoneV2DataSource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''DnsZoneV2DataSource
     ''TF.OpenStack
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+dnsZoneV2DataSource :: TF.DataSource TF.OpenStack DnsZoneV2DataSource
+dnsZoneV2DataSource =
+    TF.newDataSource "openstack_dns_zone_v2" $
+        DnsZoneV2DataSource {
+            _description = TF.Nil
+            , _email = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _status = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _computed_attributes = TF.Compute "attributes"
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_description = TF.Compute "description"
+            , _computed_email = TF.Compute "email"
+            , _computed_masters = TF.Compute "masters"
+            , _computed_name = TF.Compute "name"
+            , _computed_pool_id = TF.Compute "pool_id"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_region = TF.Compute "region"
+            , _computed_serial = TF.Compute "serial"
+            , _computed_status = TF.Compute "status"
+            , _computed_transferred_at = TF.Compute "transferred_at"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_updated_at = TF.Compute "updated_at"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @openstack_images_image_v2@ OpenStack datasource.
 
@@ -192,57 +193,56 @@ data ImagesImageV2DataSource = ImagesImageV2DataSource {
     {- ^ - The date the image was last updated. -}
     } deriving (Show, Eq)
 
-imagesImageV2DataSource :: TF.DataSource TF.OpenStack ImagesImageV2DataSource
-imagesImageV2DataSource =
-    TF.newDataSource "openstack_images_image_v2" $
-        ImagesImageV2DataSource {
-            _most_recent = TF.Absent
-            , _name = TF.Absent
-            , _owner = TF.Absent
-            , _properties = TF.Absent
-            , _region = TF.Absent
-            , _size_max = TF.Absent
-            , _size_min = TF.Absent
-            , _sort_direction = TF.Absent
-            , _sort_key = TF.Absent
-            , _tag = TF.Absent
-            , _visibility = TF.Absent
-            , _computed_checksum = TF.Computed "checksum"
-            , _computed_container_format = TF.Computed "container_format"
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_disk_format = TF.Computed "disk_format"
-            , _computed_file = TF.Computed "file"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_min_disk_gb = TF.Computed "min_disk_gb"
-            , _computed_min_ram_mb = TF.Computed "min_ram_mb"
-            , _computed_properties = TF.Computed "properties"
-            , _computed_protected = TF.Computed "protected"
-            , _computed_schema = TF.Computed "schema"
-            , _computed_size_bytes = TF.Computed "size_bytes"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_update_at = TF.Computed "update_at"
-            }
-
 instance TF.ToHCL ImagesImageV2DataSource where
-    toHCL ImagesImageV2DataSource{..} = TF.arguments
-        [ TF.assign "most_recent" <$> _most_recent
-        , TF.assign "name" <$> _name
-        , TF.assign "owner" <$> _owner
-        , TF.assign "properties" <$> _properties
-        , TF.assign "region" <$> _region
-        , TF.assign "size_max" <$> _size_max
-        , TF.assign "size_min" <$> _size_min
-        , TF.assign "sort_direction" <$> _sort_direction
-        , TF.assign "sort_key" <$> _sort_key
-        , TF.assign "tag" <$> _tag
-        , TF.assign "visibility" <$> _visibility
+    toHCL ImagesImageV2DataSource{..} = TF.block $ catMaybes
+        [ TF.assign "most_recent" <$> TF.argument _most_recent
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "properties" <$> TF.argument _properties
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "size_max" <$> TF.argument _size_max
+        , TF.assign "size_min" <$> TF.argument _size_min
+        , TF.assign "sort_direction" <$> TF.argument _sort_direction
+        , TF.assign "sort_key" <$> TF.argument _sort_key
+        , TF.assign "tag" <$> TF.argument _tag
+        , TF.assign "visibility" <$> TF.argument _visibility
         ]
 
 $(TF.makeSchemaLenses
     ''ImagesImageV2DataSource
     ''TF.OpenStack
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imagesImageV2DataSource :: TF.DataSource TF.OpenStack ImagesImageV2DataSource
+imagesImageV2DataSource =
+    TF.newDataSource "openstack_images_image_v2" $
+        ImagesImageV2DataSource {
+            _most_recent = TF.Nil
+            , _name = TF.Nil
+            , _owner = TF.Nil
+            , _properties = TF.Nil
+            , _region = TF.Nil
+            , _size_max = TF.Nil
+            , _size_min = TF.Nil
+            , _sort_direction = TF.Nil
+            , _sort_key = TF.Nil
+            , _tag = TF.Nil
+            , _visibility = TF.Nil
+            , _computed_checksum = TF.Compute "checksum"
+            , _computed_container_format = TF.Compute "container_format"
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_disk_format = TF.Compute "disk_format"
+            , _computed_file = TF.Compute "file"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_min_disk_gb = TF.Compute "min_disk_gb"
+            , _computed_min_ram_mb = TF.Compute "min_ram_mb"
+            , _computed_properties = TF.Compute "properties"
+            , _computed_protected = TF.Compute "protected"
+            , _computed_schema = TF.Compute "schema"
+            , _computed_size_bytes = TF.Compute "size_bytes"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_update_at = TF.Compute "update_at"
+            }
 
 {- | The @openstack_networking_network_v2@ OpenStack datasource.
 
@@ -275,40 +275,39 @@ data NetworkingNetworkV2DataSource = NetworkingNetworkV2DataSource {
     {- ^ - (Optional)  Specifies whether the network resource can be accessed by any tenant or not. -}
     } deriving (Show, Eq)
 
-networkingNetworkV2DataSource :: TF.DataSource TF.OpenStack NetworkingNetworkV2DataSource
-networkingNetworkV2DataSource =
-    TF.newDataSource "openstack_networking_network_v2" $
-        NetworkingNetworkV2DataSource {
-            _availability_zone_hints = TF.Absent
-            , _matching_subnet_cidr = TF.Absent
-            , _name = TF.Absent
-            , _network_id = TF.Absent
-            , _region = TF.Absent
-            , _status = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_availability_zone_hints = TF.Computed "availability_zone_hints"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_shared = TF.Computed "shared"
-            }
-
 instance TF.ToHCL NetworkingNetworkV2DataSource where
-    toHCL NetworkingNetworkV2DataSource{..} = TF.arguments
-        [ TF.assign "availability_zone_hints" <$> _availability_zone_hints
-        , TF.assign "matching_subnet_cidr" <$> _matching_subnet_cidr
-        , TF.assign "name" <$> _name
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "region" <$> _region
-        , TF.assign "status" <$> _status
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL NetworkingNetworkV2DataSource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_zone_hints" <$> TF.argument _availability_zone_hints
+        , TF.assign "matching_subnet_cidr" <$> TF.argument _matching_subnet_cidr
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingNetworkV2DataSource
     ''TF.OpenStack
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkingNetworkV2DataSource :: TF.DataSource TF.OpenStack NetworkingNetworkV2DataSource
+networkingNetworkV2DataSource =
+    TF.newDataSource "openstack_networking_network_v2" $
+        NetworkingNetworkV2DataSource {
+            _availability_zone_hints = TF.Nil
+            , _matching_subnet_cidr = TF.Nil
+            , _name = TF.Nil
+            , _network_id = TF.Nil
+            , _region = TF.Nil
+            , _status = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_availability_zone_hints = TF.Compute "availability_zone_hints"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_shared = TF.Compute "shared"
+            }
 
 {- | The @openstack_networking_secgroup_v2@ OpenStack datasource.
 
@@ -331,32 +330,31 @@ data NetworkingSecgroupV2DataSource = NetworkingSecgroupV2DataSource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingSecgroupV2DataSource :: TF.DataSource TF.OpenStack NetworkingSecgroupV2DataSource
-networkingSecgroupV2DataSource =
-    TF.newDataSource "openstack_networking_secgroup_v2" $
-        NetworkingSecgroupV2DataSource {
-            _name = TF.Absent
-            , _region = TF.Absent
-            , _secgroup_id = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL NetworkingSecgroupV2DataSource where
-    toHCL NetworkingSecgroupV2DataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "secgroup_id" <$> _secgroup_id
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL NetworkingSecgroupV2DataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "secgroup_id" <$> TF.argument _secgroup_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingSecgroupV2DataSource
     ''TF.OpenStack
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkingSecgroupV2DataSource :: TF.DataSource TF.OpenStack NetworkingSecgroupV2DataSource
+networkingSecgroupV2DataSource =
+    TF.newDataSource "openstack_networking_secgroup_v2" $
+        NetworkingSecgroupV2DataSource {
+            _name = TF.Nil
+            , _region = TF.Nil
+            , _secgroup_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            }
 
 {- | The @openstack_networking_subnet_v2@ OpenStack datasource.
 
@@ -395,43 +393,42 @@ data NetworkingSubnetV2DataSource = NetworkingSubnetV2DataSource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingSubnetV2DataSource :: TF.DataSource TF.OpenStack NetworkingSubnetV2DataSource
-networkingSubnetV2DataSource =
-    TF.newDataSource "openstack_networking_subnet_v2" $
-        NetworkingSubnetV2DataSource {
-            _cidr = TF.Absent
-            , _dhcp_disabled = TF.Absent
-            , _dhcp_enabled = TF.Absent
-            , _gateway_ip = TF.Absent
-            , _ip_version = TF.Absent
-            , _name = TF.Absent
-            , _network_id = TF.Absent
-            , _region = TF.Absent
-            , _subnet_id = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_allocation_pools = TF.Computed "allocation_pools"
-            , _computed_dns_nameservers = TF.Computed "dns_nameservers"
-            , _computed_enable_dhcp = TF.Computed "enable_dhcp"
-            , _computed_host_routes = TF.Computed "host_routes"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL NetworkingSubnetV2DataSource where
-    toHCL NetworkingSubnetV2DataSource{..} = TF.arguments
-        [ TF.assign "cidr" <$> _cidr
-        , TF.assign "dhcp_disabled" <$> _dhcp_disabled
-        , TF.assign "dhcp_enabled" <$> _dhcp_enabled
-        , TF.assign "gateway_ip" <$> _gateway_ip
-        , TF.assign "ip_version" <$> _ip_version
-        , TF.assign "name" <$> _name
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "region" <$> _region
-        , TF.assign "subnet_id" <$> _subnet_id
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL NetworkingSubnetV2DataSource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr" <$> TF.argument _cidr
+        , TF.assign "dhcp_disabled" <$> TF.argument _dhcp_disabled
+        , TF.assign "dhcp_enabled" <$> TF.argument _dhcp_enabled
+        , TF.assign "gateway_ip" <$> TF.argument _gateway_ip
+        , TF.assign "ip_version" <$> TF.argument _ip_version
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "subnet_id" <$> TF.argument _subnet_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingSubnetV2DataSource
     ''TF.OpenStack
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkingSubnetV2DataSource :: TF.DataSource TF.OpenStack NetworkingSubnetV2DataSource
+networkingSubnetV2DataSource =
+    TF.newDataSource "openstack_networking_subnet_v2" $
+        NetworkingSubnetV2DataSource {
+            _cidr = TF.Nil
+            , _dhcp_disabled = TF.Nil
+            , _dhcp_enabled = TF.Nil
+            , _gateway_ip = TF.Nil
+            , _ip_version = TF.Nil
+            , _name = TF.Nil
+            , _network_id = TF.Nil
+            , _region = TF.Nil
+            , _subnet_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_allocation_pools = TF.Compute "allocation_pools"
+            , _computed_dns_nameservers = TF.Compute "dns_nameservers"
+            , _computed_enable_dhcp = TF.Compute "enable_dhcp"
+            , _computed_host_routes = TF.Compute "host_routes"
+            , _computed_region = TF.Compute "region"
+            }

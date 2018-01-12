@@ -1,4 +1,4 @@
 name: Spotinst
 package: terrafomo-spotinst
 datatype: true
-
+original: spotinst

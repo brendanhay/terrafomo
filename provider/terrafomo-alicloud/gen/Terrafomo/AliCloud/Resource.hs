@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.AliCloud        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.AliCloud.Provider as TF
+import qualified Terrafomo.AliCloud.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @alicloud_cdn_domain@ AliCloud resource.
 
@@ -55,33 +57,32 @@ data CdnDomainResource = CdnDomainResource {
     {- ^ (Optional, Type: list) Sources of the accelerated domain. It's a list of domain names or IP address and consists of at most 20 items. You must set this parameter when @cdn_type@ value is not @liveStream@ . -}
     } deriving (Show, Eq)
 
-cdnDomainResource :: TF.Resource TF.AliCloud CdnDomainResource
-cdnDomainResource =
-    TF.newResource "alicloud_cdn_domain" $
-        CdnDomainResource {
-            _cdn_type = TF.Absent
-            , _domain_name = TF.Absent
-            , _scope = TF.Absent
-            , _source_port = TF.Absent
-            , _source_type = TF.Absent
-            , _sources = TF.Absent
-            }
-
 instance TF.ToHCL CdnDomainResource where
-    toHCL CdnDomainResource{..} = TF.arguments
-        [ TF.assign "cdn_type" <$> _cdn_type
-        , TF.assign "domain_name" <$> _domain_name
-        , TF.assign "scope" <$> _scope
-        , TF.assign "source_port" <$> _source_port
-        , TF.assign "source_type" <$> _source_type
-        , TF.assign "sources" <$> _sources
+    toHCL CdnDomainResource{..} = TF.block $ catMaybes
+        [ TF.assign "cdn_type" <$> TF.argument _cdn_type
+        , TF.assign "domain_name" <$> TF.argument _domain_name
+        , TF.assign "scope" <$> TF.argument _scope
+        , TF.assign "source_port" <$> TF.argument _source_port
+        , TF.assign "source_type" <$> TF.argument _source_type
+        , TF.assign "sources" <$> TF.argument _sources
         ]
 
 $(TF.makeSchemaLenses
     ''CdnDomainResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+cdnDomainResource :: TF.Resource TF.AliCloud CdnDomainResource
+cdnDomainResource =
+    TF.newResource "alicloud_cdn_domain" $
+        CdnDomainResource {
+            _cdn_type = TF.Nil
+            , _domain_name = TF.Nil
+            , _scope = TF.Nil
+            , _source_port = TF.Nil
+            , _source_type = TF.Nil
+            , _sources = TF.Nil
+            }
 
 {- | The @alicloud_container_cluster@ AliCloud resource.
 
@@ -118,45 +119,44 @@ data ContainerClusterResource = ContainerClusterResource {
     {- ^ - The ID of VSwitch that current cluster launched. -}
     } deriving (Show, Eq)
 
-containerClusterResource :: TF.Resource TF.AliCloud ContainerClusterResource
-containerClusterResource =
-    TF.newResource "alicloud_container_cluster" $
-        ContainerClusterResource {
-            _cidr_block = TF.Absent
-            , _disk_category = TF.Absent
-            , _disk_size = TF.Absent
-            , _image_id = TF.Absent
-            , _instance_type = TF.Absent
-            , _name = TF.Absent
-            , _name_prefix = TF.Absent
-            , _password = TF.Absent
-            , _size = TF.Absent
-            , _vswitch_id = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_size = TF.Computed "size"
-            , _computed_vpc_id = TF.Computed "vpc_id"
-            , _computed_vswitch_id = TF.Computed "vswitch_id"
-            }
-
 instance TF.ToHCL ContainerClusterResource where
-    toHCL ContainerClusterResource{..} = TF.arguments
-        [ TF.assign "cidr_block" <$> _cidr_block
-        , TF.assign "disk_category" <$> _disk_category
-        , TF.assign "disk_size" <$> _disk_size
-        , TF.assign "image_id" <$> _image_id
-        , TF.assign "instance_type" <$> _instance_type
-        , TF.assign "name" <$> _name
-        , TF.assign "name_prefix" <$> _name_prefix
-        , TF.assign "password" <$> _password
-        , TF.assign "size" <$> _size
-        , TF.assign "vswitch_id" <$> _vswitch_id
+    toHCL ContainerClusterResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr_block" <$> TF.argument _cidr_block
+        , TF.assign "disk_category" <$> TF.argument _disk_category
+        , TF.assign "disk_size" <$> TF.argument _disk_size
+        , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "instance_type" <$> TF.argument _instance_type
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "name_prefix" <$> TF.argument _name_prefix
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
 $(TF.makeSchemaLenses
     ''ContainerClusterResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+containerClusterResource :: TF.Resource TF.AliCloud ContainerClusterResource
+containerClusterResource =
+    TF.newResource "alicloud_container_cluster" $
+        ContainerClusterResource {
+            _cidr_block = TF.Nil
+            , _disk_category = TF.Nil
+            , _disk_size = TF.Nil
+            , _image_id = TF.Nil
+            , _instance_type = TF.Nil
+            , _name = TF.Nil
+            , _name_prefix = TF.Nil
+            , _password = TF.Nil
+            , _size = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_size = TF.Compute "size"
+            , _computed_vpc_id = TF.Compute "vpc_id"
+            , _computed_vswitch_id = TF.Compute "vswitch_id"
+            }
 
 {- | The @alicloud_db_instance@ AliCloud resource.
 
@@ -205,59 +205,58 @@ data DbInstanceResource = DbInstanceResource {
     {- ^ (Optional) Selected zone to create database instance. You cannot set the ZoneId parameter if the MultiAZ parameter is set to true. -}
     } deriving (Show, Eq)
 
-dbInstanceResource :: TF.Resource TF.AliCloud DbInstanceResource
-dbInstanceResource =
-    TF.newResource "alicloud_db_instance" $
-        DbInstanceResource {
-            _allocate_public_connection = TF.Absent
-            , _backup_retention_period = TF.Absent
-            , _db_instance_class = TF.Absent
-            , _db_instance_net_type = TF.Absent
-            , _db_instance_storage = TF.Absent
-            , _db_mappings = TF.Absent
-            , _engine = TF.Absent
-            , _engine_version = TF.Absent
-            , _instance_charge_type = TF.Absent
-            , _instance_network_type = TF.Absent
-            , _master_user_name = TF.Absent
-            , _master_user_password = TF.Absent
-            , _multi_az = TF.Absent
-            , _period = TF.Absent
-            , _preferred_backup_period = TF.Absent
-            , _preferred_backup_time = TF.Absent
-            , _security_ips = TF.Absent
-            , _vswitch_id = TF.Absent
-            , _zone_id = TF.Absent
-            }
-
 instance TF.ToHCL DbInstanceResource where
-    toHCL DbInstanceResource{..} = TF.arguments
-        [ TF.assign "allocate_public_connection" <$> _allocate_public_connection
-        , TF.assign "backup_retention_period" <$> _backup_retention_period
-        , TF.assign "db_instance_class" <$> _db_instance_class
-        , TF.assign "db_instance_net_type" <$> _db_instance_net_type
-        , TF.assign "db_instance_storage" <$> _db_instance_storage
-        , TF.assign "db_mappings" <$> _db_mappings
-        , TF.assign "engine" <$> _engine
-        , TF.assign "engine_version" <$> _engine_version
-        , TF.assign "instance_charge_type" <$> _instance_charge_type
-        , TF.assign "instance_network_type" <$> _instance_network_type
-        , TF.assign "master_user_name" <$> _master_user_name
-        , TF.assign "master_user_password" <$> _master_user_password
-        , TF.assign "multi_az" <$> _multi_az
-        , TF.assign "period" <$> _period
-        , TF.assign "preferred_backup_period" <$> _preferred_backup_period
-        , TF.assign "preferred_backup_time" <$> _preferred_backup_time
-        , TF.assign "security_ips" <$> _security_ips
-        , TF.assign "vswitch_id" <$> _vswitch_id
-        , TF.assign "zone_id" <$> _zone_id
+    toHCL DbInstanceResource{..} = TF.block $ catMaybes
+        [ TF.assign "allocate_public_connection" <$> TF.argument _allocate_public_connection
+        , TF.assign "backup_retention_period" <$> TF.argument _backup_retention_period
+        , TF.assign "db_instance_class" <$> TF.argument _db_instance_class
+        , TF.assign "db_instance_net_type" <$> TF.argument _db_instance_net_type
+        , TF.assign "db_instance_storage" <$> TF.argument _db_instance_storage
+        , TF.assign "db_mappings" <$> TF.argument _db_mappings
+        , TF.assign "engine" <$> TF.argument _engine
+        , TF.assign "engine_version" <$> TF.argument _engine_version
+        , TF.assign "instance_charge_type" <$> TF.argument _instance_charge_type
+        , TF.assign "instance_network_type" <$> TF.argument _instance_network_type
+        , TF.assign "master_user_name" <$> TF.argument _master_user_name
+        , TF.assign "master_user_password" <$> TF.argument _master_user_password
+        , TF.assign "multi_az" <$> TF.argument _multi_az
+        , TF.assign "period" <$> TF.argument _period
+        , TF.assign "preferred_backup_period" <$> TF.argument _preferred_backup_period
+        , TF.assign "preferred_backup_time" <$> TF.argument _preferred_backup_time
+        , TF.assign "security_ips" <$> TF.argument _security_ips
+        , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
+        , TF.assign "zone_id" <$> TF.argument _zone_id
         ]
 
 $(TF.makeSchemaLenses
     ''DbInstanceResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dbInstanceResource :: TF.Resource TF.AliCloud DbInstanceResource
+dbInstanceResource =
+    TF.newResource "alicloud_db_instance" $
+        DbInstanceResource {
+            _allocate_public_connection = TF.Nil
+            , _backup_retention_period = TF.Nil
+            , _db_instance_class = TF.Nil
+            , _db_instance_net_type = TF.Nil
+            , _db_instance_storage = TF.Nil
+            , _db_mappings = TF.Nil
+            , _engine = TF.Nil
+            , _engine_version = TF.Nil
+            , _instance_charge_type = TF.Nil
+            , _instance_network_type = TF.Nil
+            , _master_user_name = TF.Nil
+            , _master_user_password = TF.Nil
+            , _multi_az = TF.Nil
+            , _period = TF.Nil
+            , _preferred_backup_period = TF.Nil
+            , _preferred_backup_time = TF.Nil
+            , _security_ips = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _zone_id = TF.Nil
+            }
 
 {- | The @alicloud_disk_attachment@ AliCloud resource.
 
@@ -277,28 +276,27 @@ data DiskAttachmentResource = DiskAttachmentResource {
     {- ^ - ID of the Instance. -}
     } deriving (Show, Eq)
 
-diskAttachmentResource :: TF.Resource TF.AliCloud DiskAttachmentResource
-diskAttachmentResource =
-    TF.newResource "alicloud_disk_attachment" $
-        DiskAttachmentResource {
-            _disk_id = TF.Absent
-            , _instance_id = TF.Absent
-            , _computed_device_name = TF.Computed "device_name"
-            , _computed_disk_id = TF.Computed "disk_id"
-            , _computed_instance_id = TF.Computed "instance_id"
-            }
-
 instance TF.ToHCL DiskAttachmentResource where
-    toHCL DiskAttachmentResource{..} = TF.arguments
-        [ TF.assign "disk_id" <$> _disk_id
-        , TF.assign "instance_id" <$> _instance_id
+    toHCL DiskAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "disk_id" <$> TF.argument _disk_id
+        , TF.assign "instance_id" <$> TF.argument _instance_id
         ]
 
 $(TF.makeSchemaLenses
     ''DiskAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+diskAttachmentResource :: TF.Resource TF.AliCloud DiskAttachmentResource
+diskAttachmentResource =
+    TF.newResource "alicloud_disk_attachment" $
+        DiskAttachmentResource {
+            _disk_id = TF.Nil
+            , _instance_id = TF.Nil
+            , _computed_device_name = TF.Compute "device_name"
+            , _computed_disk_id = TF.Compute "disk_id"
+            , _computed_instance_id = TF.Compute "instance_id"
+            }
 
 {- | The @alicloud_disk@ AliCloud resource.
 
@@ -342,44 +340,43 @@ data DiskResource = DiskResource {
     {- ^ - The disk tags. -}
     } deriving (Show, Eq)
 
-diskResource :: TF.Resource TF.AliCloud DiskResource
-diskResource =
-    TF.newResource "alicloud_disk" $
-        DiskResource {
-            _availability_zone = TF.Absent
-            , _category = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _size = TF.Absent
-            , _snapshot_id = TF.Absent
-            , _tags = TF.Absent
-            , _computed_availability_zone = TF.Computed "availability_zone"
-            , _computed_category = TF.Computed "category"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_size = TF.Computed "size"
-            , _computed_snapshot_id = TF.Computed "snapshot_id"
-            , _computed_status = TF.Computed "status"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL DiskResource where
-    toHCL DiskResource{..} = TF.arguments
-        [ TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "category" <$> _category
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "size" <$> _size
-        , TF.assign "snapshot_id" <$> _snapshot_id
-        , TF.assign "tags" <$> _tags
+    toHCL DiskResource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "category" <$> TF.argument _category
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "snapshot_id" <$> TF.argument _snapshot_id
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''DiskResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+diskResource :: TF.Resource TF.AliCloud DiskResource
+diskResource =
+    TF.newResource "alicloud_disk" $
+        DiskResource {
+            _availability_zone = TF.Nil
+            , _category = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _size = TF.Nil
+            , _snapshot_id = TF.Nil
+            , _tags = TF.Nil
+            , _computed_availability_zone = TF.Compute "availability_zone"
+            , _computed_category = TF.Compute "category"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_size = TF.Compute "size"
+            , _computed_snapshot_id = TF.Compute "snapshot_id"
+            , _computed_status = TF.Compute "status"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @alicloud_dns_group@ AliCloud resource.
 
@@ -394,25 +391,24 @@ data DnsGroupResource = DnsGroupResource {
     {- ^ - The group name. -}
     } deriving (Show, Eq)
 
-dnsGroupResource :: TF.Resource TF.AliCloud DnsGroupResource
-dnsGroupResource =
-    TF.newResource "alicloud_dns_group" $
-        DnsGroupResource {
-            _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL DnsGroupResource where
-    toHCL DnsGroupResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL DnsGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsGroupResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsGroupResource :: TF.Resource TF.AliCloud DnsGroupResource
+dnsGroupResource =
+    TF.newResource "alicloud_dns_group" $
+        DnsGroupResource {
+            _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @alicloud_dns@ AliCloud resource.
 
@@ -455,45 +451,44 @@ data DnsResource = DnsResource {
     {- ^ - The record value. -}
     } deriving (Show, Eq)
 
-dnsResource :: TF.Resource TF.AliCloud DnsResource
-dnsResource =
-    TF.newResource "alicloud_dns" $
-        DnsResource {
-            _host_record = TF.Absent
-            , _name = TF.Absent
-            , _priority = TF.Absent
-            , _routing = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value = TF.Absent
-            , _computed_Locked = TF.Computed "Locked"
-            , _computed_host_record = TF.Computed "host_record"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_priority = TF.Computed "priority"
-            , _computed_routing = TF.Computed "routing"
-            , _computed_status = TF.Computed "status"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_value = TF.Computed "value"
-            }
-
 instance TF.ToHCL DnsResource where
-    toHCL DnsResource{..} = TF.arguments
-        [ TF.assign "host_record" <$> _host_record
-        , TF.assign "name" <$> _name
-        , TF.assign "priority" <$> _priority
-        , TF.assign "routing" <$> _routing
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value" <$> _value
+    toHCL DnsResource{..} = TF.block $ catMaybes
+        [ TF.assign "host_record" <$> TF.argument _host_record
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "routing" <$> TF.argument _routing
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value" <$> TF.argument _value
         ]
 
 $(TF.makeSchemaLenses
     ''DnsResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsResource :: TF.Resource TF.AliCloud DnsResource
+dnsResource =
+    TF.newResource "alicloud_dns" $
+        DnsResource {
+            _host_record = TF.Nil
+            , _name = TF.Nil
+            , _priority = TF.Nil
+            , _routing = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value = TF.Nil
+            , _computed_Locked = TF.Compute "Locked"
+            , _computed_host_record = TF.Compute "host_record"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_priority = TF.Compute "priority"
+            , _computed_routing = TF.Compute "routing"
+            , _computed_status = TF.Compute "status"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_value = TF.Compute "value"
+            }
 
 {- | The @alicloud_eip_association@ AliCloud resource.
 
@@ -514,27 +509,26 @@ data EipAssociationResource = EipAssociationResource {
     {- ^ - As above. -}
     } deriving (Show, Eq)
 
-eipAssociationResource :: TF.Resource TF.AliCloud EipAssociationResource
-eipAssociationResource =
-    TF.newResource "alicloud_eip_association" $
-        EipAssociationResource {
-            _allocation_id = TF.Absent
-            , _instance_id = TF.Absent
-            , _computed_allocation_id = TF.Computed "allocation_id"
-            , _computed_instance_id = TF.Computed "instance_id"
-            }
-
 instance TF.ToHCL EipAssociationResource where
-    toHCL EipAssociationResource{..} = TF.arguments
-        [ TF.assign "allocation_id" <$> _allocation_id
-        , TF.assign "instance_id" <$> _instance_id
+    toHCL EipAssociationResource{..} = TF.block $ catMaybes
+        [ TF.assign "allocation_id" <$> TF.argument _allocation_id
+        , TF.assign "instance_id" <$> TF.argument _instance_id
         ]
 
 $(TF.makeSchemaLenses
     ''EipAssociationResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eipAssociationResource :: TF.Resource TF.AliCloud EipAssociationResource
+eipAssociationResource =
+    TF.newResource "alicloud_eip_association" $
+        EipAssociationResource {
+            _allocation_id = TF.Nil
+            , _instance_id = TF.Nil
+            , _computed_allocation_id = TF.Compute "allocation_id"
+            , _computed_instance_id = TF.Compute "instance_id"
+            }
 
 {- | The @alicloud_eip@ AliCloud resource.
 
@@ -557,30 +551,29 @@ data EipResource = EipResource {
     {- ^ - The EIP current status. -}
     } deriving (Show, Eq)
 
-eipResource :: TF.Resource TF.AliCloud EipResource
-eipResource =
-    TF.newResource "alicloud_eip" $
-        EipResource {
-            _bandwidth = TF.Absent
-            , _internet_charge_type = TF.Absent
-            , _computed_bandwidth = TF.Computed "bandwidth"
-            , _computed_id = TF.Computed "id"
-            , _computed_internet_charge_type = TF.Computed "internet_charge_type"
-            , _computed_ip_address = TF.Computed "ip_address"
-            , _computed_status = TF.Computed "status"
-            }
-
 instance TF.ToHCL EipResource where
-    toHCL EipResource{..} = TF.arguments
-        [ TF.assign "bandwidth" <$> _bandwidth
-        , TF.assign "internet_charge_type" <$> _internet_charge_type
+    toHCL EipResource{..} = TF.block $ catMaybes
+        [ TF.assign "bandwidth" <$> TF.argument _bandwidth
+        , TF.assign "internet_charge_type" <$> TF.argument _internet_charge_type
         ]
 
 $(TF.makeSchemaLenses
     ''EipResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eipResource :: TF.Resource TF.AliCloud EipResource
+eipResource =
+    TF.newResource "alicloud_eip" $
+        EipResource {
+            _bandwidth = TF.Nil
+            , _internet_charge_type = TF.Nil
+            , _computed_bandwidth = TF.Compute "bandwidth"
+            , _computed_id = TF.Compute "id"
+            , _computed_internet_charge_type = TF.Compute "internet_charge_type"
+            , _computed_ip_address = TF.Compute "ip_address"
+            , _computed_status = TF.Compute "status"
+            }
 
 {- | The @alicloud_ess_scaling_configuration@ AliCloud resource.
 
@@ -633,61 +626,60 @@ data EssScalingConfigurationResource = EssScalingConfigurationResource {
     {- ^ (Optional) User-defined data to customize the startup behaviors of the ECS instance and to pass data into the ECS instance. -}
     } deriving (Show, Eq)
 
-essScalingConfigurationResource :: TF.Resource TF.AliCloud EssScalingConfigurationResource
-essScalingConfigurationResource =
-    TF.newResource "alicloud_ess_scaling_configuration" $
-        EssScalingConfigurationResource {
-            _active = TF.Absent
-            , _data_disk = TF.Absent
-            , _enable = TF.Absent
-            , _force_delete = TF.Absent
-            , _image_id = TF.Absent
-            , _instance_ids = TF.Absent
-            , _instance_type = TF.Absent
-            , _internet_charge_type = TF.Absent
-            , _internet_max_bandwidth_in = TF.Absent
-            , _internet_max_bandwidth_out = TF.Absent
-            , _is_outdated = TF.Absent
-            , _key_name = TF.Absent
-            , _role_name = TF.Absent
-            , _scaling_configuration_name = TF.Absent
-            , _scaling_group_id = TF.Absent
-            , _security_group_id = TF.Absent
-            , _substitute = TF.Absent
-            , _system_disk_category = TF.Absent
-            , _tags = TF.Absent
-            , _user_data = TF.Absent
-            }
-
 instance TF.ToHCL EssScalingConfigurationResource where
-    toHCL EssScalingConfigurationResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "data_disk" <$> _data_disk
-        , TF.assign "enable" <$> _enable
-        , TF.assign "force_delete" <$> _force_delete
-        , TF.assign "image_id" <$> _image_id
-        , TF.assign "instance_ids" <$> _instance_ids
-        , TF.assign "instance_type" <$> _instance_type
-        , TF.assign "internet_charge_type" <$> _internet_charge_type
-        , TF.assign "internet_max_bandwidth_in" <$> _internet_max_bandwidth_in
-        , TF.assign "internet_max_bandwidth_out" <$> _internet_max_bandwidth_out
-        , TF.assign "is_outdated" <$> _is_outdated
-        , TF.assign "key_name" <$> _key_name
-        , TF.assign "role_name" <$> _role_name
-        , TF.assign "scaling_configuration_name" <$> _scaling_configuration_name
-        , TF.assign "scaling_group_id" <$> _scaling_group_id
-        , TF.assign "security_group_id" <$> _security_group_id
-        , TF.assign "substitute" <$> _substitute
-        , TF.assign "system_disk_category" <$> _system_disk_category
-        , TF.assign "tags" <$> _tags
-        , TF.assign "user_data" <$> _user_data
+    toHCL EssScalingConfigurationResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "data_disk" <$> TF.argument _data_disk
+        , TF.assign "enable" <$> TF.argument _enable
+        , TF.assign "force_delete" <$> TF.argument _force_delete
+        , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "instance_ids" <$> TF.argument _instance_ids
+        , TF.assign "instance_type" <$> TF.argument _instance_type
+        , TF.assign "internet_charge_type" <$> TF.argument _internet_charge_type
+        , TF.assign "internet_max_bandwidth_in" <$> TF.argument _internet_max_bandwidth_in
+        , TF.assign "internet_max_bandwidth_out" <$> TF.argument _internet_max_bandwidth_out
+        , TF.assign "is_outdated" <$> TF.argument _is_outdated
+        , TF.assign "key_name" <$> TF.argument _key_name
+        , TF.assign "role_name" <$> TF.argument _role_name
+        , TF.assign "scaling_configuration_name" <$> TF.argument _scaling_configuration_name
+        , TF.assign "scaling_group_id" <$> TF.argument _scaling_group_id
+        , TF.assign "security_group_id" <$> TF.argument _security_group_id
+        , TF.assign "substitute" <$> TF.argument _substitute
+        , TF.assign "system_disk_category" <$> TF.argument _system_disk_category
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "user_data" <$> TF.argument _user_data
         ]
 
 $(TF.makeSchemaLenses
     ''EssScalingConfigurationResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+essScalingConfigurationResource :: TF.Resource TF.AliCloud EssScalingConfigurationResource
+essScalingConfigurationResource =
+    TF.newResource "alicloud_ess_scaling_configuration" $
+        EssScalingConfigurationResource {
+            _active = TF.Nil
+            , _data_disk = TF.Nil
+            , _enable = TF.Nil
+            , _force_delete = TF.Nil
+            , _image_id = TF.Nil
+            , _instance_ids = TF.Nil
+            , _instance_type = TF.Nil
+            , _internet_charge_type = TF.Nil
+            , _internet_max_bandwidth_in = TF.Nil
+            , _internet_max_bandwidth_out = TF.Nil
+            , _is_outdated = TF.Nil
+            , _key_name = TF.Nil
+            , _role_name = TF.Nil
+            , _scaling_configuration_name = TF.Nil
+            , _scaling_group_id = TF.Nil
+            , _security_group_id = TF.Nil
+            , _substitute = TF.Nil
+            , _system_disk_category = TF.Nil
+            , _tags = TF.Nil
+            , _user_data = TF.Nil
+            }
 
 {- | The @alicloud_ess_scaling_group@ AliCloud resource.
 
@@ -730,45 +722,44 @@ data EssScalingGroupResource = EssScalingGroupResource {
     {- ^ - The name of the scaling group. -}
     } deriving (Show, Eq)
 
-essScalingGroupResource :: TF.Resource TF.AliCloud EssScalingGroupResource
-essScalingGroupResource =
-    TF.newResource "alicloud_ess_scaling_group" $
-        EssScalingGroupResource {
-            _db_instance_ids = TF.Absent
-            , _default_cooldown = TF.Absent
-            , _loadbalancer_ids = TF.Absent
-            , _max_size = TF.Absent
-            , _min_size = TF.Absent
-            , _removal_policies = TF.Absent
-            , _scaling_group_name = TF.Absent
-            , _vswitch_id = TF.Absent
-            , _computed_db_instance_ids = TF.Computed "db_instance_ids"
-            , _computed_default_cooldown = TF.Computed "default_cooldown"
-            , _computed_id = TF.Computed "id"
-            , _computed_loadbalancer_ids = TF.Computed "loadbalancer_ids"
-            , _computed_max_size = TF.Computed "max_size"
-            , _computed_min_size = TF.Computed "min_size"
-            , _computed_removal_policies = TF.Computed "removal_policies"
-            , _computed_scaling_group_name = TF.Computed "scaling_group_name"
-            }
-
 instance TF.ToHCL EssScalingGroupResource where
-    toHCL EssScalingGroupResource{..} = TF.arguments
-        [ TF.assign "db_instance_ids" <$> _db_instance_ids
-        , TF.assign "default_cooldown" <$> _default_cooldown
-        , TF.assign "loadbalancer_ids" <$> _loadbalancer_ids
-        , TF.assign "max_size" <$> _max_size
-        , TF.assign "min_size" <$> _min_size
-        , TF.assign "removal_policies" <$> _removal_policies
-        , TF.assign "scaling_group_name" <$> _scaling_group_name
-        , TF.assign "vswitch_id" <$> _vswitch_id
+    toHCL EssScalingGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "db_instance_ids" <$> TF.argument _db_instance_ids
+        , TF.assign "default_cooldown" <$> TF.argument _default_cooldown
+        , TF.assign "loadbalancer_ids" <$> TF.argument _loadbalancer_ids
+        , TF.assign "max_size" <$> TF.argument _max_size
+        , TF.assign "min_size" <$> TF.argument _min_size
+        , TF.assign "removal_policies" <$> TF.argument _removal_policies
+        , TF.assign "scaling_group_name" <$> TF.argument _scaling_group_name
+        , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
 $(TF.makeSchemaLenses
     ''EssScalingGroupResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+essScalingGroupResource :: TF.Resource TF.AliCloud EssScalingGroupResource
+essScalingGroupResource =
+    TF.newResource "alicloud_ess_scaling_group" $
+        EssScalingGroupResource {
+            _db_instance_ids = TF.Nil
+            , _default_cooldown = TF.Nil
+            , _loadbalancer_ids = TF.Nil
+            , _max_size = TF.Nil
+            , _min_size = TF.Nil
+            , _removal_policies = TF.Nil
+            , _scaling_group_name = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _computed_db_instance_ids = TF.Compute "db_instance_ids"
+            , _computed_default_cooldown = TF.Compute "default_cooldown"
+            , _computed_id = TF.Compute "id"
+            , _computed_loadbalancer_ids = TF.Compute "loadbalancer_ids"
+            , _computed_max_size = TF.Compute "max_size"
+            , _computed_min_size = TF.Compute "min_size"
+            , _computed_removal_policies = TF.Compute "removal_policies"
+            , _computed_scaling_group_name = TF.Compute "scaling_group_name"
+            }
 
 {- | The @alicloud_ess_scaling_rule@ AliCloud resource.
 
@@ -801,38 +792,37 @@ data EssScalingRuleResource = EssScalingRuleResource {
     {- ^ - Name of a scaling rule. -}
     } deriving (Show, Eq)
 
-essScalingRuleResource :: TF.Resource TF.AliCloud EssScalingRuleResource
-essScalingRuleResource =
-    TF.newResource "alicloud_ess_scaling_rule" $
-        EssScalingRuleResource {
-            _adjustment_type = TF.Absent
-            , _adjustment_value = TF.Absent
-            , _cooldown = TF.Absent
-            , _scaling_group_id = TF.Absent
-            , _scaling_rule_name = TF.Absent
-            , _computed_adjustment_type = TF.Computed "adjustment_type"
-            , _computed_adjustment_value = TF.Computed "adjustment_value"
-            , _computed_ari = TF.Computed "ari"
-            , _computed_cooldown = TF.Computed "cooldown"
-            , _computed_id = TF.Computed "id"
-            , _computed_scaling_group_id = TF.Computed "scaling_group_id"
-            , _computed_scaling_rule_name = TF.Computed "scaling_rule_name"
-            }
-
 instance TF.ToHCL EssScalingRuleResource where
-    toHCL EssScalingRuleResource{..} = TF.arguments
-        [ TF.assign "adjustment_type" <$> _adjustment_type
-        , TF.assign "adjustment_value" <$> _adjustment_value
-        , TF.assign "cooldown" <$> _cooldown
-        , TF.assign "scaling_group_id" <$> _scaling_group_id
-        , TF.assign "scaling_rule_name" <$> _scaling_rule_name
+    toHCL EssScalingRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "adjustment_type" <$> TF.argument _adjustment_type
+        , TF.assign "adjustment_value" <$> TF.argument _adjustment_value
+        , TF.assign "cooldown" <$> TF.argument _cooldown
+        , TF.assign "scaling_group_id" <$> TF.argument _scaling_group_id
+        , TF.assign "scaling_rule_name" <$> TF.argument _scaling_rule_name
         ]
 
 $(TF.makeSchemaLenses
     ''EssScalingRuleResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+essScalingRuleResource :: TF.Resource TF.AliCloud EssScalingRuleResource
+essScalingRuleResource =
+    TF.newResource "alicloud_ess_scaling_rule" $
+        EssScalingRuleResource {
+            _adjustment_type = TF.Nil
+            , _adjustment_value = TF.Nil
+            , _cooldown = TF.Nil
+            , _scaling_group_id = TF.Nil
+            , _scaling_rule_name = TF.Nil
+            , _computed_adjustment_type = TF.Compute "adjustment_type"
+            , _computed_adjustment_value = TF.Compute "adjustment_value"
+            , _computed_ari = TF.Compute "ari"
+            , _computed_cooldown = TF.Compute "cooldown"
+            , _computed_id = TF.Compute "id"
+            , _computed_scaling_group_id = TF.Compute "scaling_group_id"
+            , _computed_scaling_rule_name = TF.Compute "scaling_rule_name"
+            }
 
 {- | The @alicloud_ess_schedule@ AliCloud resource.
 
@@ -871,45 +861,44 @@ data EssScheduleResource = EssScheduleResource {
     {- ^ - Wether the task is enabled. -}
     } deriving (Show, Eq)
 
-essScheduleResource :: TF.Resource TF.AliCloud EssScheduleResource
-essScheduleResource =
-    TF.newResource "alicloud_ess_schedule" $
-        EssScheduleResource {
-            _description = TF.Absent
-            , _launch_expiration_time = TF.Absent
-            , _launch_time = TF.Absent
-            , _recurrence_end_time = TF.Absent
-            , _recurrence_type = TF.Absent
-            , _recurrence_value = TF.Absent
-            , _scheduled_action = TF.Absent
-            , _scheduled_task_name = TF.Absent
-            , _task_enabled = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_launch_time = TF.Computed "launch_time"
-            , _computed_scheduled_action = TF.Computed "scheduled_action"
-            , _computed_scheduled_task_name = TF.Computed "scheduled_task_name"
-            , _computed_task_enabled = TF.Computed "task_enabled"
-            }
-
 instance TF.ToHCL EssScheduleResource where
-    toHCL EssScheduleResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "launch_expiration_time" <$> _launch_expiration_time
-        , TF.assign "launch_time" <$> _launch_time
-        , TF.assign "recurrence_end_time" <$> _recurrence_end_time
-        , TF.assign "recurrence_type" <$> _recurrence_type
-        , TF.assign "recurrence_value" <$> _recurrence_value
-        , TF.assign "scheduled_action" <$> _scheduled_action
-        , TF.assign "scheduled_task_name" <$> _scheduled_task_name
-        , TF.assign "task_enabled" <$> _task_enabled
+    toHCL EssScheduleResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "launch_expiration_time" <$> TF.argument _launch_expiration_time
+        , TF.assign "launch_time" <$> TF.argument _launch_time
+        , TF.assign "recurrence_end_time" <$> TF.argument _recurrence_end_time
+        , TF.assign "recurrence_type" <$> TF.argument _recurrence_type
+        , TF.assign "recurrence_value" <$> TF.argument _recurrence_value
+        , TF.assign "scheduled_action" <$> TF.argument _scheduled_action
+        , TF.assign "scheduled_task_name" <$> TF.argument _scheduled_task_name
+        , TF.assign "task_enabled" <$> TF.argument _task_enabled
         ]
 
 $(TF.makeSchemaLenses
     ''EssScheduleResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+essScheduleResource :: TF.Resource TF.AliCloud EssScheduleResource
+essScheduleResource =
+    TF.newResource "alicloud_ess_schedule" $
+        EssScheduleResource {
+            _description = TF.Nil
+            , _launch_expiration_time = TF.Nil
+            , _launch_time = TF.Nil
+            , _recurrence_end_time = TF.Nil
+            , _recurrence_type = TF.Nil
+            , _recurrence_value = TF.Nil
+            , _scheduled_action = TF.Nil
+            , _scheduled_task_name = TF.Nil
+            , _task_enabled = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_launch_time = TF.Compute "launch_time"
+            , _computed_scheduled_action = TF.Compute "scheduled_action"
+            , _computed_scheduled_task_name = TF.Compute "scheduled_task_name"
+            , _computed_task_enabled = TF.Compute "task_enabled"
+            }
 
 {- | The @alicloud_forward@ AliCloud resource.
 
@@ -930,33 +919,32 @@ data ForwardResource = ForwardResource {
     {- ^ (Required) The ip protocal, valid value is tcp|udp|any. -}
     } deriving (Show, Eq)
 
-forwardResource :: TF.Resource TF.AliCloud ForwardResource
-forwardResource =
-    TF.newResource "alicloud_forward" $
-        ForwardResource {
-            _external_ip = TF.Absent
-            , _external_port = TF.Absent
-            , _forward_table_id = TF.Absent
-            , _internal_ip = TF.Absent
-            , _internal_port = TF.Absent
-            , _ip_protocol = TF.Absent
-            }
-
 instance TF.ToHCL ForwardResource where
-    toHCL ForwardResource{..} = TF.arguments
-        [ TF.assign "external_ip" <$> _external_ip
-        , TF.assign "external_port" <$> _external_port
-        , TF.assign "forward_table_id" <$> _forward_table_id
-        , TF.assign "internal_ip" <$> _internal_ip
-        , TF.assign "internal_port" <$> _internal_port
-        , TF.assign "ip_protocol" <$> _ip_protocol
+    toHCL ForwardResource{..} = TF.block $ catMaybes
+        [ TF.assign "external_ip" <$> TF.argument _external_ip
+        , TF.assign "external_port" <$> TF.argument _external_port
+        , TF.assign "forward_table_id" <$> TF.argument _forward_table_id
+        , TF.assign "internal_ip" <$> TF.argument _internal_ip
+        , TF.assign "internal_port" <$> TF.argument _internal_port
+        , TF.assign "ip_protocol" <$> TF.argument _ip_protocol
         ]
 
 $(TF.makeSchemaLenses
     ''ForwardResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+forwardResource :: TF.Resource TF.AliCloud ForwardResource
+forwardResource =
+    TF.newResource "alicloud_forward" $
+        ForwardResource {
+            _external_ip = TF.Nil
+            , _external_port = TF.Nil
+            , _forward_table_id = TF.Nil
+            , _internal_ip = TF.Nil
+            , _internal_port = TF.Nil
+            , _ip_protocol = TF.Nil
+            }
 
 {- | The @alicloud_instance@ AliCloud resource.
 
@@ -1047,80 +1035,79 @@ data InstanceResource = InstanceResource {
     {- ^ - If the instance created in VPC, then this value is  virtual switch ID. -}
     } deriving (Show, Eq)
 
-instanceResource :: TF.Resource TF.AliCloud InstanceResource
-instanceResource =
-    TF.newResource "alicloud_instance" $
-        InstanceResource {
-            _allocate_public_ip = TF.Absent
-            , _availability_zone = TF.Absent
-            , _description = TF.Absent
-            , _host_name = TF.Absent
-            , _image_id = TF.Absent
-            , _instance_charge_type = TF.Absent
-            , _instance_name = TF.Absent
-            , _instance_type = TF.Absent
-            , _internet_charge_type = TF.Absent
-            , _internet_max_bandwidth_in = TF.Absent
-            , _internet_max_bandwidth_out = TF.Absent
-            , _is_outdated = TF.Absent
-            , _key_name = TF.Absent
-            , _password = TF.Absent
-            , _period = TF.Absent
-            , _role_name = TF.Absent
-            , _security_groups = TF.Absent
-            , _system_disk_category = TF.Absent
-            , _system_disk_size = TF.Absent
-            , _tags = TF.Absent
-            , _user_data = TF.Absent
-            , _vswitch_id = TF.Absent
-            , _computed_availability_zone = TF.Computed "availability_zone"
-            , _computed_description = TF.Computed "description"
-            , _computed_host_name = TF.Computed "host_name"
-            , _computed_id = TF.Computed "id"
-            , _computed_image_id = TF.Computed "image_id"
-            , _computed_instance_name = TF.Computed "instance_name"
-            , _computed_instance_type = TF.Computed "instance_type"
-            , _computed_key_name = TF.Computed "key_name"
-            , _computed_private_ip = TF.Computed "private_ip"
-            , _computed_public_ip = TF.Computed "public_ip"
-            , _computed_role_name = TF.Computed "role_name"
-            , _computed_status = TF.Computed "status"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_user_data = TF.Computed "user_data"
-            , _computed_vswitch_id = TF.Computed "vswitch_id"
-            }
-
 instance TF.ToHCL InstanceResource where
-    toHCL InstanceResource{..} = TF.arguments
-        [ TF.assign "allocate_public_ip" <$> _allocate_public_ip
-        , TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "description" <$> _description
-        , TF.assign "host_name" <$> _host_name
-        , TF.assign "image_id" <$> _image_id
-        , TF.assign "instance_charge_type" <$> _instance_charge_type
-        , TF.assign "instance_name" <$> _instance_name
-        , TF.assign "instance_type" <$> _instance_type
-        , TF.assign "internet_charge_type" <$> _internet_charge_type
-        , TF.assign "internet_max_bandwidth_in" <$> _internet_max_bandwidth_in
-        , TF.assign "internet_max_bandwidth_out" <$> _internet_max_bandwidth_out
-        , TF.assign "is_outdated" <$> _is_outdated
-        , TF.assign "key_name" <$> _key_name
-        , TF.assign "password" <$> _password
-        , TF.assign "period" <$> _period
-        , TF.assign "role_name" <$> _role_name
-        , TF.assign "security_groups" <$> _security_groups
-        , TF.assign "system_disk_category" <$> _system_disk_category
-        , TF.assign "system_disk_size" <$> _system_disk_size
-        , TF.assign "tags" <$> _tags
-        , TF.assign "user_data" <$> _user_data
-        , TF.assign "vswitch_id" <$> _vswitch_id
+    toHCL InstanceResource{..} = TF.block $ catMaybes
+        [ TF.assign "allocate_public_ip" <$> TF.argument _allocate_public_ip
+        , TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "host_name" <$> TF.argument _host_name
+        , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "instance_charge_type" <$> TF.argument _instance_charge_type
+        , TF.assign "instance_name" <$> TF.argument _instance_name
+        , TF.assign "instance_type" <$> TF.argument _instance_type
+        , TF.assign "internet_charge_type" <$> TF.argument _internet_charge_type
+        , TF.assign "internet_max_bandwidth_in" <$> TF.argument _internet_max_bandwidth_in
+        , TF.assign "internet_max_bandwidth_out" <$> TF.argument _internet_max_bandwidth_out
+        , TF.assign "is_outdated" <$> TF.argument _is_outdated
+        , TF.assign "key_name" <$> TF.argument _key_name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "period" <$> TF.argument _period
+        , TF.assign "role_name" <$> TF.argument _role_name
+        , TF.assign "security_groups" <$> TF.argument _security_groups
+        , TF.assign "system_disk_category" <$> TF.argument _system_disk_category
+        , TF.assign "system_disk_size" <$> TF.argument _system_disk_size
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "user_data" <$> TF.argument _user_data
+        , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
 $(TF.makeSchemaLenses
     ''InstanceResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+instanceResource :: TF.Resource TF.AliCloud InstanceResource
+instanceResource =
+    TF.newResource "alicloud_instance" $
+        InstanceResource {
+            _allocate_public_ip = TF.Nil
+            , _availability_zone = TF.Nil
+            , _description = TF.Nil
+            , _host_name = TF.Nil
+            , _image_id = TF.Nil
+            , _instance_charge_type = TF.Nil
+            , _instance_name = TF.Nil
+            , _instance_type = TF.Nil
+            , _internet_charge_type = TF.Nil
+            , _internet_max_bandwidth_in = TF.Nil
+            , _internet_max_bandwidth_out = TF.Nil
+            , _is_outdated = TF.Nil
+            , _key_name = TF.Nil
+            , _password = TF.Nil
+            , _period = TF.Nil
+            , _role_name = TF.Nil
+            , _security_groups = TF.Nil
+            , _system_disk_category = TF.Nil
+            , _system_disk_size = TF.Nil
+            , _tags = TF.Nil
+            , _user_data = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _computed_availability_zone = TF.Compute "availability_zone"
+            , _computed_description = TF.Compute "description"
+            , _computed_host_name = TF.Compute "host_name"
+            , _computed_id = TF.Compute "id"
+            , _computed_image_id = TF.Compute "image_id"
+            , _computed_instance_name = TF.Compute "instance_name"
+            , _computed_instance_type = TF.Compute "instance_type"
+            , _computed_key_name = TF.Compute "key_name"
+            , _computed_private_ip = TF.Compute "private_ip"
+            , _computed_public_ip = TF.Compute "public_ip"
+            , _computed_role_name = TF.Compute "role_name"
+            , _computed_status = TF.Compute "status"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_user_data = TF.Compute "user_data"
+            , _computed_vswitch_id = TF.Compute "vswitch_id"
+            }
 
 {- | The @alicloud_key_pair_attachment@ AliCloud resource.
 
@@ -1138,27 +1125,26 @@ data KeyPairAttachmentResource = KeyPairAttachmentResource {
     {- ^ - The name of the key pair. -}
     } deriving (Show, Eq)
 
-keyPairAttachmentResource :: TF.Resource TF.AliCloud KeyPairAttachmentResource
-keyPairAttachmentResource =
-    TF.newResource "alicloud_key_pair_attachment" $
-        KeyPairAttachmentResource {
-            _instance_ids = TF.Absent
-            , _key_name = TF.Absent
-            , _computed_instance_ids = TF.Computed "instance_ids"
-            , _computed_key_name = TF.Computed "key_name"
-            }
-
 instance TF.ToHCL KeyPairAttachmentResource where
-    toHCL KeyPairAttachmentResource{..} = TF.arguments
-        [ TF.assign "instance_ids" <$> _instance_ids
-        , TF.assign "key_name" <$> _key_name
+    toHCL KeyPairAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "instance_ids" <$> TF.argument _instance_ids
+        , TF.assign "key_name" <$> TF.argument _key_name
         ]
 
 $(TF.makeSchemaLenses
     ''KeyPairAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyPairAttachmentResource :: TF.Resource TF.AliCloud KeyPairAttachmentResource
+keyPairAttachmentResource =
+    TF.newResource "alicloud_key_pair_attachment" $
+        KeyPairAttachmentResource {
+            _instance_ids = TF.Nil
+            , _key_name = TF.Nil
+            , _computed_instance_ids = TF.Compute "instance_ids"
+            , _computed_key_name = TF.Compute "key_name"
+            }
 
 {- | The @alicloud_key_pair@ AliCloud resource.
 
@@ -1179,31 +1165,30 @@ data KeyPairResource = KeyPairResource {
     {- ^ - The name of the key pair. -}
     } deriving (Show, Eq)
 
-keyPairResource :: TF.Resource TF.AliCloud KeyPairResource
-keyPairResource =
-    TF.newResource "alicloud_key_pair" $
-        KeyPairResource {
-            _key_file = TF.Absent
-            , _key_name = TF.Absent
-            , _key_name_prefix = TF.Absent
-            , _public_key = TF.Absent
-            , _computed_fingerprint = TF.Computed "fingerprint"
-            , _computed_key_name = TF.Computed "key_name"
-            }
-
 instance TF.ToHCL KeyPairResource where
-    toHCL KeyPairResource{..} = TF.arguments
-        [ TF.assign "key_file" <$> _key_file
-        , TF.assign "key_name" <$> _key_name
-        , TF.assign "key_name_prefix" <$> _key_name_prefix
-        , TF.assign "public_key" <$> _public_key
+    toHCL KeyPairResource{..} = TF.block $ catMaybes
+        [ TF.assign "key_file" <$> TF.argument _key_file
+        , TF.assign "key_name" <$> TF.argument _key_name
+        , TF.assign "key_name_prefix" <$> TF.argument _key_name_prefix
+        , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
 $(TF.makeSchemaLenses
     ''KeyPairResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyPairResource :: TF.Resource TF.AliCloud KeyPairResource
+keyPairResource =
+    TF.newResource "alicloud_key_pair" $
+        KeyPairResource {
+            _key_file = TF.Nil
+            , _key_name = TF.Nil
+            , _key_name_prefix = TF.Nil
+            , _public_key = TF.Nil
+            , _computed_fingerprint = TF.Compute "fingerprint"
+            , _computed_key_name = TF.Compute "key_name"
+            }
 
 {- | The @alicloud_nat_gateway@ AliCloud resource.
 
@@ -1223,31 +1208,30 @@ data NatGatewayResource = NatGatewayResource {
     {- ^ (Required, Forces New Resorce) The VPC ID. -}
     } deriving (Show, Eq)
 
-natGatewayResource :: TF.Resource TF.AliCloud NatGatewayResource
-natGatewayResource =
-    TF.newResource "alicloud_nat_gateway" $
-        NatGatewayResource {
-            _bandwidth_packages = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _spec = TF.Absent
-            , _vpc_id = TF.Absent
-            }
-
 instance TF.ToHCL NatGatewayResource where
-    toHCL NatGatewayResource{..} = TF.arguments
-        [ TF.assign "bandwidth_packages" <$> _bandwidth_packages
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "spec" <$> _spec
-        , TF.assign "vpc_id" <$> _vpc_id
+    toHCL NatGatewayResource{..} = TF.block $ catMaybes
+        [ TF.assign "bandwidth_packages" <$> TF.argument _bandwidth_packages
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "spec" <$> TF.argument _spec
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
 $(TF.makeSchemaLenses
     ''NatGatewayResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+natGatewayResource :: TF.Resource TF.AliCloud NatGatewayResource
+natGatewayResource =
+    TF.newResource "alicloud_nat_gateway" $
+        NatGatewayResource {
+            _bandwidth_packages = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _spec = TF.Nil
+            , _vpc_id = TF.Nil
+            }
 
 {- | The @alicloud_oss_bucket_object@ AliCloud resource.
 
@@ -1286,48 +1270,47 @@ data OssBucketObjectResource = OssBucketObjectResource {
     {- ^ - the @key@ of the resource supplied above -}
     } deriving (Show, Eq)
 
-ossBucketObjectResource :: TF.Resource TF.AliCloud OssBucketObjectResource
-ossBucketObjectResource =
-    TF.newResource "alicloud_oss_bucket_object" $
-        OssBucketObjectResource {
-            _acl = TF.Absent
-            , _bucket = TF.Absent
-            , _cache_control = TF.Absent
-            , _content = TF.Absent
-            , _content_disposition = TF.Absent
-            , _content_encoding = TF.Absent
-            , _content_md5 = TF.Absent
-            , _content_type = TF.Absent
-            , _expires = TF.Absent
-            , _key = TF.Absent
-            , _server_side_encryption = TF.Absent
-            , _source = TF.Absent
-            , _computed_content_length = TF.Computed "content_length"
-            , _computed_etag = TF.Computed "etag"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL OssBucketObjectResource where
-    toHCL OssBucketObjectResource{..} = TF.arguments
-        [ TF.assign "acl" <$> _acl
-        , TF.assign "bucket" <$> _bucket
-        , TF.assign "cache_control" <$> _cache_control
-        , TF.assign "content" <$> _content
-        , TF.assign "content_disposition" <$> _content_disposition
-        , TF.assign "content_encoding" <$> _content_encoding
-        , TF.assign "content_md5" <$> _content_md5
-        , TF.assign "content_type" <$> _content_type
-        , TF.assign "expires" <$> _expires
-        , TF.assign "key" <$> _key
-        , TF.assign "server_side_encryption" <$> _server_side_encryption
-        , TF.assign "source" <$> _source
+    toHCL OssBucketObjectResource{..} = TF.block $ catMaybes
+        [ TF.assign "acl" <$> TF.argument _acl
+        , TF.assign "bucket" <$> TF.argument _bucket
+        , TF.assign "cache_control" <$> TF.argument _cache_control
+        , TF.assign "content" <$> TF.argument _content
+        , TF.assign "content_disposition" <$> TF.argument _content_disposition
+        , TF.assign "content_encoding" <$> TF.argument _content_encoding
+        , TF.assign "content_md5" <$> TF.argument _content_md5
+        , TF.assign "content_type" <$> TF.argument _content_type
+        , TF.assign "expires" <$> TF.argument _expires
+        , TF.assign "key" <$> TF.argument _key
+        , TF.assign "server_side_encryption" <$> TF.argument _server_side_encryption
+        , TF.assign "source" <$> TF.argument _source
         ]
 
 $(TF.makeSchemaLenses
     ''OssBucketObjectResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ossBucketObjectResource :: TF.Resource TF.AliCloud OssBucketObjectResource
+ossBucketObjectResource =
+    TF.newResource "alicloud_oss_bucket_object" $
+        OssBucketObjectResource {
+            _acl = TF.Nil
+            , _bucket = TF.Nil
+            , _cache_control = TF.Nil
+            , _content = TF.Nil
+            , _content_disposition = TF.Nil
+            , _content_encoding = TF.Nil
+            , _content_md5 = TF.Nil
+            , _content_type = TF.Nil
+            , _expires = TF.Nil
+            , _key = TF.Nil
+            , _server_side_encryption = TF.Nil
+            , _source = TF.Nil
+            , _computed_content_length = TF.Compute "content_length"
+            , _computed_etag = TF.Compute "etag"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @alicloud_oss_bucket@ AliCloud resource.
 
@@ -1354,37 +1337,36 @@ data OssBucketResource = OssBucketResource {
     {- ^ (Optional) A website object(documented below). -}
     } deriving (Show, Eq)
 
-ossBucketResource :: TF.Resource TF.AliCloud OssBucketResource
-ossBucketResource =
-    TF.newResource "alicloud_oss_bucket" $
-        OssBucketResource {
-            _acl = TF.Absent
-            , _bucket = TF.Absent
-            , _core_rule = TF.Absent
-            , _lifecycle_rule = TF.Absent
-            , _logging = TF.Absent
-            , _logging_isenable = TF.Absent
-            , _referer_config = TF.Absent
-            , _website = TF.Absent
-            }
-
 instance TF.ToHCL OssBucketResource where
-    toHCL OssBucketResource{..} = TF.arguments
-        [ TF.assign "acl" <$> _acl
-        , TF.assign "bucket" <$> _bucket
-        , TF.assign "core_rule" <$> _core_rule
-        , TF.assign "lifecycle_rule" <$> _lifecycle_rule
-        , TF.assign "logging" <$> _logging
-        , TF.assign "logging_isenable" <$> _logging_isenable
-        , TF.assign "referer_config" <$> _referer_config
-        , TF.assign "website" <$> _website
+    toHCL OssBucketResource{..} = TF.block $ catMaybes
+        [ TF.assign "acl" <$> TF.argument _acl
+        , TF.assign "bucket" <$> TF.argument _bucket
+        , TF.assign "core_rule" <$> TF.argument _core_rule
+        , TF.assign "lifecycle_rule" <$> TF.argument _lifecycle_rule
+        , TF.assign "logging" <$> TF.argument _logging
+        , TF.assign "logging_isenable" <$> TF.argument _logging_isenable
+        , TF.assign "referer_config" <$> TF.argument _referer_config
+        , TF.assign "website" <$> TF.argument _website
         ]
 
 $(TF.makeSchemaLenses
     ''OssBucketResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ossBucketResource :: TF.Resource TF.AliCloud OssBucketResource
+ossBucketResource =
+    TF.newResource "alicloud_oss_bucket" $
+        OssBucketResource {
+            _acl = TF.Nil
+            , _bucket = TF.Nil
+            , _core_rule = TF.Nil
+            , _lifecycle_rule = TF.Nil
+            , _logging = TF.Nil
+            , _logging_isenable = TF.Nil
+            , _referer_config = TF.Nil
+            , _website = TF.Nil
+            }
 
 {- | The @alicloud_ram_access_key@ AliCloud resource.
 
@@ -1404,29 +1386,28 @@ data RamAccessKeyResource = RamAccessKeyResource {
     {- ^ - The access key status. -}
     } deriving (Show, Eq)
 
-ramAccessKeyResource :: TF.Resource TF.AliCloud RamAccessKeyResource
-ramAccessKeyResource =
-    TF.newResource "alicloud_ram_access_key" $
-        RamAccessKeyResource {
-            _secret_file = TF.Absent
-            , _status = TF.Absent
-            , _user_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_status = TF.Computed "status"
-            }
-
 instance TF.ToHCL RamAccessKeyResource where
-    toHCL RamAccessKeyResource{..} = TF.arguments
-        [ TF.assign "secret_file" <$> _secret_file
-        , TF.assign "status" <$> _status
-        , TF.assign "user_name" <$> _user_name
+    toHCL RamAccessKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "secret_file" <$> TF.argument _secret_file
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamAccessKeyResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramAccessKeyResource :: TF.Resource TF.AliCloud RamAccessKeyResource
+ramAccessKeyResource =
+    TF.newResource "alicloud_ram_access_key" $
+        RamAccessKeyResource {
+            _secret_file = TF.Nil
+            , _status = TF.Nil
+            , _user_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_status = TF.Compute "status"
+            }
 
 {- | The @alicloud_ram_account_alias@ AliCloud resource.
 
@@ -1439,24 +1420,23 @@ data RamAccountAliasResource = RamAccountAliasResource {
     {- ^ - The account alias. -}
     } deriving (Show, Eq)
 
-ramAccountAliasResource :: TF.Resource TF.AliCloud RamAccountAliasResource
-ramAccountAliasResource =
-    TF.newResource "alicloud_ram_account_alias" $
-        RamAccountAliasResource {
-            _account_alias = TF.Absent
-            , _computed_account_alias = TF.Computed "account_alias"
-            }
-
 instance TF.ToHCL RamAccountAliasResource where
-    toHCL RamAccountAliasResource{..} = TF.arguments
-        [ TF.assign "account_alias" <$> _account_alias
+    toHCL RamAccountAliasResource{..} = TF.block $ catMaybes
+        [ TF.assign "account_alias" <$> TF.argument _account_alias
         ]
 
 $(TF.makeSchemaLenses
     ''RamAccountAliasResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramAccountAliasResource :: TF.Resource TF.AliCloud RamAccountAliasResource
+ramAccountAliasResource =
+    TF.newResource "alicloud_ram_account_alias" $
+        RamAccountAliasResource {
+            _account_alias = TF.Nil
+            , _computed_account_alias = TF.Compute "account_alias"
+            }
 
 {- | The @alicloud_ram_group_membership@ AliCloud resource.
 
@@ -1475,28 +1455,27 @@ data RamGroupMembershipResource = RamGroupMembershipResource {
     {- ^ - The list of names of users which in the group. -}
     } deriving (Show, Eq)
 
-ramGroupMembershipResource :: TF.Resource TF.AliCloud RamGroupMembershipResource
-ramGroupMembershipResource =
-    TF.newResource "alicloud_ram_group_membership" $
-        RamGroupMembershipResource {
-            _group_name = TF.Absent
-            , _user_names = TF.Absent
-            , _computed_group_name = TF.Computed "group_name"
-            , _computed_id = TF.Computed "id"
-            , _computed_user_names = TF.Computed "user_names"
-            }
-
 instance TF.ToHCL RamGroupMembershipResource where
-    toHCL RamGroupMembershipResource{..} = TF.arguments
-        [ TF.assign "group_name" <$> _group_name
-        , TF.assign "user_names" <$> _user_names
+    toHCL RamGroupMembershipResource{..} = TF.block $ catMaybes
+        [ TF.assign "group_name" <$> TF.argument _group_name
+        , TF.assign "user_names" <$> TF.argument _user_names
         ]
 
 $(TF.makeSchemaLenses
     ''RamGroupMembershipResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramGroupMembershipResource :: TF.Resource TF.AliCloud RamGroupMembershipResource
+ramGroupMembershipResource =
+    TF.newResource "alicloud_ram_group_membership" $
+        RamGroupMembershipResource {
+            _group_name = TF.Nil
+            , _user_names = TF.Nil
+            , _computed_group_name = TF.Compute "group_name"
+            , _computed_id = TF.Compute "id"
+            , _computed_user_names = TF.Compute "user_names"
+            }
 
 {- | The @alicloud_ram_group_policy_attachment@ AliCloud resource.
 
@@ -1519,31 +1498,30 @@ data RamGroupPolicyAttachmentResource = RamGroupPolicyAttachmentResource {
     {- ^ - The policy type. -}
     } deriving (Show, Eq)
 
-ramGroupPolicyAttachmentResource :: TF.Resource TF.AliCloud RamGroupPolicyAttachmentResource
-ramGroupPolicyAttachmentResource =
-    TF.newResource "alicloud_ram_group_policy_attachment" $
-        RamGroupPolicyAttachmentResource {
-            _group_name = TF.Absent
-            , _policy_name = TF.Absent
-            , _policy_type = TF.Absent
-            , _computed_group_name = TF.Computed "group_name"
-            , _computed_id = TF.Computed "id"
-            , _computed_policy_name = TF.Computed "policy_name"
-            , _computed_policy_type = TF.Computed "policy_type"
-            }
-
 instance TF.ToHCL RamGroupPolicyAttachmentResource where
-    toHCL RamGroupPolicyAttachmentResource{..} = TF.arguments
-        [ TF.assign "group_name" <$> _group_name
-        , TF.assign "policy_name" <$> _policy_name
-        , TF.assign "policy_type" <$> _policy_type
+    toHCL RamGroupPolicyAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "group_name" <$> TF.argument _group_name
+        , TF.assign "policy_name" <$> TF.argument _policy_name
+        , TF.assign "policy_type" <$> TF.argument _policy_type
         ]
 
 $(TF.makeSchemaLenses
     ''RamGroupPolicyAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramGroupPolicyAttachmentResource :: TF.Resource TF.AliCloud RamGroupPolicyAttachmentResource
+ramGroupPolicyAttachmentResource =
+    TF.newResource "alicloud_ram_group_policy_attachment" $
+        RamGroupPolicyAttachmentResource {
+            _group_name = TF.Nil
+            , _policy_name = TF.Nil
+            , _policy_type = TF.Nil
+            , _computed_group_name = TF.Compute "group_name"
+            , _computed_id = TF.Compute "id"
+            , _computed_policy_name = TF.Compute "policy_name"
+            , _computed_policy_type = TF.Compute "policy_type"
+            }
 
 {- | The @alicloud_ram_group@ AliCloud resource.
 
@@ -1568,30 +1546,29 @@ data RamGroupResource = RamGroupResource {
     {- ^ - The group name. -}
     } deriving (Show, Eq)
 
-ramGroupResource :: TF.Resource TF.AliCloud RamGroupResource
-ramGroupResource =
-    TF.newResource "alicloud_ram_group" $
-        RamGroupResource {
-            _comments = TF.Absent
-            , _force = TF.Absent
-            , _name = TF.Absent
-            , _computed_comments = TF.Computed "comments"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL RamGroupResource where
-    toHCL RamGroupResource{..} = TF.arguments
-        [ TF.assign "comments" <$> _comments
-        , TF.assign "force" <$> _force
-        , TF.assign "name" <$> _name
+    toHCL RamGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "comments" <$> TF.argument _comments
+        , TF.assign "force" <$> TF.argument _force
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''RamGroupResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramGroupResource :: TF.Resource TF.AliCloud RamGroupResource
+ramGroupResource =
+    TF.newResource "alicloud_ram_group" $
+        RamGroupResource {
+            _comments = TF.Nil
+            , _force = TF.Nil
+            , _name = TF.Nil
+            , _computed_comments = TF.Compute "comments"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @alicloud_ram_login_profile@ AliCloud resource.
 
@@ -1616,33 +1593,32 @@ data RamLoginProfileResource = RamLoginProfileResource {
     {- ^ - The user name. -}
     } deriving (Show, Eq)
 
-ramLoginProfileResource :: TF.Resource TF.AliCloud RamLoginProfileResource
-ramLoginProfileResource =
-    TF.newResource "alicloud_ram_login_profile" $
-        RamLoginProfileResource {
-            _mfa_bind_required = TF.Absent
-            , _password = TF.Absent
-            , _password_reset_required = TF.Absent
-            , _user_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_mfa_bind_required = TF.Computed "mfa_bind_required"
-            , _computed_password_reset_required = TF.Computed "password_reset_required"
-            , _computed_user_name = TF.Computed "user_name"
-            }
-
 instance TF.ToHCL RamLoginProfileResource where
-    toHCL RamLoginProfileResource{..} = TF.arguments
-        [ TF.assign "mfa_bind_required" <$> _mfa_bind_required
-        , TF.assign "password" <$> _password
-        , TF.assign "password_reset_required" <$> _password_reset_required
-        , TF.assign "user_name" <$> _user_name
+    toHCL RamLoginProfileResource{..} = TF.block $ catMaybes
+        [ TF.assign "mfa_bind_required" <$> TF.argument _mfa_bind_required
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "password_reset_required" <$> TF.argument _password_reset_required
+        , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamLoginProfileResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramLoginProfileResource :: TF.Resource TF.AliCloud RamLoginProfileResource
+ramLoginProfileResource =
+    TF.newResource "alicloud_ram_login_profile" $
+        RamLoginProfileResource {
+            _mfa_bind_required = TF.Nil
+            , _password = TF.Nil
+            , _password_reset_required = TF.Nil
+            , _user_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_mfa_bind_required = TF.Compute "mfa_bind_required"
+            , _computed_password_reset_required = TF.Compute "password_reset_required"
+            , _computed_user_name = TF.Compute "user_name"
+            }
 
 {- | The @alicloud_ram_policy@ AliCloud resource.
 
@@ -1683,41 +1659,40 @@ data RamPolicyResource = RamPolicyResource {
     {- ^ - The policy document version. -}
     } deriving (Show, Eq)
 
-ramPolicyResource :: TF.Resource TF.AliCloud RamPolicyResource
-ramPolicyResource =
-    TF.newResource "alicloud_ram_policy" $
-        RamPolicyResource {
-            _description = TF.Absent
-            , _document = TF.Absent
-            , _force = TF.Absent
-            , _name = TF.Absent
-            , _statement = TF.Absent
-            , _version = TF.Absent
-            , _computed_attachment_count = TF.Computed "attachment_count"
-            , _computed_description = TF.Computed "description"
-            , _computed_document = TF.Computed "document"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_statement = TF.Computed "statement"
-            , _computed_type' = TF.Computed "type"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL RamPolicyResource where
-    toHCL RamPolicyResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "document" <$> _document
-        , TF.assign "force" <$> _force
-        , TF.assign "name" <$> _name
-        , TF.assign "statement" <$> _statement
-        , TF.assign "version" <$> _version
+    toHCL RamPolicyResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "document" <$> TF.argument _document
+        , TF.assign "force" <$> TF.argument _force
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "statement" <$> TF.argument _statement
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''RamPolicyResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramPolicyResource :: TF.Resource TF.AliCloud RamPolicyResource
+ramPolicyResource =
+    TF.newResource "alicloud_ram_policy" $
+        RamPolicyResource {
+            _description = TF.Nil
+            , _document = TF.Nil
+            , _force = TF.Nil
+            , _name = TF.Nil
+            , _statement = TF.Nil
+            , _version = TF.Nil
+            , _computed_attachment_count = TF.Compute "attachment_count"
+            , _computed_description = TF.Compute "description"
+            , _computed_document = TF.Compute "document"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_statement = TF.Compute "statement"
+            , _computed_type' = TF.Compute "type"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @alicloud_ram_role_attachment@ AliCloud resource.
 
@@ -1735,27 +1710,26 @@ data RamRoleAttachmentResource = RamRoleAttachmentResource {
     {- ^ - The name of the role. -}
     } deriving (Show, Eq)
 
-ramRoleAttachmentResource :: TF.Resource TF.AliCloud RamRoleAttachmentResource
-ramRoleAttachmentResource =
-    TF.newResource "alicloud_ram_role_attachment" $
-        RamRoleAttachmentResource {
-            _instance_ids = TF.Absent
-            , _role_name = TF.Absent
-            , _computed_instance_ids = TF.Computed "instance_ids"
-            , _computed_role_name = TF.Computed "role_name"
-            }
-
 instance TF.ToHCL RamRoleAttachmentResource where
-    toHCL RamRoleAttachmentResource{..} = TF.arguments
-        [ TF.assign "instance_ids" <$> _instance_ids
-        , TF.assign "role_name" <$> _role_name
+    toHCL RamRoleAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "instance_ids" <$> TF.argument _instance_ids
+        , TF.assign "role_name" <$> TF.argument _role_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamRoleAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramRoleAttachmentResource :: TF.Resource TF.AliCloud RamRoleAttachmentResource
+ramRoleAttachmentResource =
+    TF.newResource "alicloud_ram_role_attachment" $
+        RamRoleAttachmentResource {
+            _instance_ids = TF.Nil
+            , _role_name = TF.Nil
+            , _computed_instance_ids = TF.Compute "instance_ids"
+            , _computed_role_name = TF.Compute "role_name"
+            }
 
 {- | The @alicloud_ram_role_policy_attachment@ AliCloud resource.
 
@@ -1778,31 +1752,30 @@ data RamRolePolicyAttachmentResource = RamRolePolicyAttachmentResource {
     {- ^ - The role name. -}
     } deriving (Show, Eq)
 
-ramRolePolicyAttachmentResource :: TF.Resource TF.AliCloud RamRolePolicyAttachmentResource
-ramRolePolicyAttachmentResource =
-    TF.newResource "alicloud_ram_role_policy_attachment" $
-        RamRolePolicyAttachmentResource {
-            _policy_name = TF.Absent
-            , _policy_type = TF.Absent
-            , _role_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_policy_name = TF.Computed "policy_name"
-            , _computed_policy_type = TF.Computed "policy_type"
-            , _computed_role_name = TF.Computed "role_name"
-            }
-
 instance TF.ToHCL RamRolePolicyAttachmentResource where
-    toHCL RamRolePolicyAttachmentResource{..} = TF.arguments
-        [ TF.assign "policy_name" <$> _policy_name
-        , TF.assign "policy_type" <$> _policy_type
-        , TF.assign "role_name" <$> _role_name
+    toHCL RamRolePolicyAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "policy_name" <$> TF.argument _policy_name
+        , TF.assign "policy_type" <$> TF.argument _policy_type
+        , TF.assign "role_name" <$> TF.argument _role_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamRolePolicyAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramRolePolicyAttachmentResource :: TF.Resource TF.AliCloud RamRolePolicyAttachmentResource
+ramRolePolicyAttachmentResource =
+    TF.newResource "alicloud_ram_role_policy_attachment" $
+        RamRolePolicyAttachmentResource {
+            _policy_name = TF.Nil
+            , _policy_type = TF.Nil
+            , _role_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_policy_name = TF.Compute "policy_name"
+            , _computed_policy_type = TF.Compute "policy_type"
+            , _computed_role_name = TF.Compute "role_name"
+            }
 
 {- | The @alicloud_ram_role@ AliCloud resource.
 
@@ -1845,43 +1818,42 @@ data RamRoleResource = RamRoleResource {
     {- ^ - The role policy document version. -}
     } deriving (Show, Eq)
 
-ramRoleResource :: TF.Resource TF.AliCloud RamRoleResource
-ramRoleResource =
-    TF.newResource "alicloud_ram_role" $
-        RamRoleResource {
-            _description = TF.Absent
-            , _document = TF.Absent
-            , _force = TF.Absent
-            , _name = TF.Absent
-            , _ram_users = TF.Absent
-            , _services = TF.Absent
-            , _version = TF.Absent
-            , _computed_arn = TF.Computed "arn"
-            , _computed_description = TF.Computed "description"
-            , _computed_document = TF.Computed "document"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_ram_users = TF.Computed "ram_users"
-            , _computed_services = TF.Computed "services"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL RamRoleResource where
-    toHCL RamRoleResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "document" <$> _document
-        , TF.assign "force" <$> _force
-        , TF.assign "name" <$> _name
-        , TF.assign "ram_users" <$> _ram_users
-        , TF.assign "services" <$> _services
-        , TF.assign "version" <$> _version
+    toHCL RamRoleResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "document" <$> TF.argument _document
+        , TF.assign "force" <$> TF.argument _force
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "ram_users" <$> TF.argument _ram_users
+        , TF.assign "services" <$> TF.argument _services
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''RamRoleResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramRoleResource :: TF.Resource TF.AliCloud RamRoleResource
+ramRoleResource =
+    TF.newResource "alicloud_ram_role" $
+        RamRoleResource {
+            _description = TF.Nil
+            , _document = TF.Nil
+            , _force = TF.Nil
+            , _name = TF.Nil
+            , _ram_users = TF.Nil
+            , _services = TF.Nil
+            , _version = TF.Nil
+            , _computed_arn = TF.Compute "arn"
+            , _computed_description = TF.Compute "description"
+            , _computed_document = TF.Compute "document"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_ram_users = TF.Compute "ram_users"
+            , _computed_services = TF.Compute "services"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @alicloud_ram_user_policy_attachment@ AliCloud resource.
 
@@ -1904,31 +1876,30 @@ data RamUserPolicyAttachmentResource = RamUserPolicyAttachmentResource {
     {- ^ - The user name. -}
     } deriving (Show, Eq)
 
-ramUserPolicyAttachmentResource :: TF.Resource TF.AliCloud RamUserPolicyAttachmentResource
-ramUserPolicyAttachmentResource =
-    TF.newResource "alicloud_ram_user_policy_attachment" $
-        RamUserPolicyAttachmentResource {
-            _policy_name = TF.Absent
-            , _policy_type = TF.Absent
-            , _user_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_policy_name = TF.Computed "policy_name"
-            , _computed_policy_type = TF.Computed "policy_type"
-            , _computed_user_name = TF.Computed "user_name"
-            }
-
 instance TF.ToHCL RamUserPolicyAttachmentResource where
-    toHCL RamUserPolicyAttachmentResource{..} = TF.arguments
-        [ TF.assign "policy_name" <$> _policy_name
-        , TF.assign "policy_type" <$> _policy_type
-        , TF.assign "user_name" <$> _user_name
+    toHCL RamUserPolicyAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "policy_name" <$> TF.argument _policy_name
+        , TF.assign "policy_type" <$> TF.argument _policy_type
+        , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamUserPolicyAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramUserPolicyAttachmentResource :: TF.Resource TF.AliCloud RamUserPolicyAttachmentResource
+ramUserPolicyAttachmentResource =
+    TF.newResource "alicloud_ram_user_policy_attachment" $
+        RamUserPolicyAttachmentResource {
+            _policy_name = TF.Nil
+            , _policy_type = TF.Nil
+            , _user_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_policy_name = TF.Compute "policy_name"
+            , _computed_policy_type = TF.Compute "policy_type"
+            , _computed_user_name = TF.Compute "user_name"
+            }
 
 {- | The @alicloud_ram_user@ AliCloud resource.
 
@@ -1965,39 +1936,38 @@ data RamUserResource = RamUserResource {
     {- ^ - The user name. -}
     } deriving (Show, Eq)
 
-ramUserResource :: TF.Resource TF.AliCloud RamUserResource
-ramUserResource =
-    TF.newResource "alicloud_ram_user" $
-        RamUserResource {
-            _comments = TF.Absent
-            , _display_name = TF.Absent
-            , _email = TF.Absent
-            , _force = TF.Absent
-            , _mobile = TF.Absent
-            , _name = TF.Absent
-            , _computed_comments = TF.Computed "comments"
-            , _computed_display_name = TF.Computed "display_name"
-            , _computed_email = TF.Computed "email"
-            , _computed_id = TF.Computed "id"
-            , _computed_mobile = TF.Computed "mobile"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL RamUserResource where
-    toHCL RamUserResource{..} = TF.arguments
-        [ TF.assign "comments" <$> _comments
-        , TF.assign "display_name" <$> _display_name
-        , TF.assign "email" <$> _email
-        , TF.assign "force" <$> _force
-        , TF.assign "mobile" <$> _mobile
-        , TF.assign "name" <$> _name
+    toHCL RamUserResource{..} = TF.block $ catMaybes
+        [ TF.assign "comments" <$> TF.argument _comments
+        , TF.assign "display_name" <$> TF.argument _display_name
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "force" <$> TF.argument _force
+        , TF.assign "mobile" <$> TF.argument _mobile
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''RamUserResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ramUserResource :: TF.Resource TF.AliCloud RamUserResource
+ramUserResource =
+    TF.newResource "alicloud_ram_user" $
+        RamUserResource {
+            _comments = TF.Nil
+            , _display_name = TF.Nil
+            , _email = TF.Nil
+            , _force = TF.Nil
+            , _mobile = TF.Nil
+            , _name = TF.Nil
+            , _computed_comments = TF.Compute "comments"
+            , _computed_display_name = TF.Compute "display_name"
+            , _computed_email = TF.Compute "email"
+            , _computed_id = TF.Compute "id"
+            , _computed_mobile = TF.Compute "mobile"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @alicloud_route_entry@ AliCloud resource.
 
@@ -2025,34 +1995,33 @@ data RouteEntryResource = RouteEntryResource {
     {- ^ - The ID of the virtual router attached to Vpc. -}
     } deriving (Show, Eq)
 
-routeEntryResource :: TF.Resource TF.AliCloud RouteEntryResource
-routeEntryResource =
-    TF.newResource "alicloud_route_entry" $
-        RouteEntryResource {
-            _destination_cidrblock = TF.Absent
-            , _nexthop_id = TF.Absent
-            , _nexthop_type = TF.Absent
-            , _route_table_id = TF.Absent
-            , _computed_destination_cidrblock = TF.Computed "destination_cidrblock"
-            , _computed_nexthop_id = TF.Computed "nexthop_id"
-            , _computed_nexthop_type = TF.Computed "nexthop_type"
-            , _computed_route_table_id = TF.Computed "route_table_id"
-            , _computed_router_id = TF.Computed "router_id"
-            }
-
 instance TF.ToHCL RouteEntryResource where
-    toHCL RouteEntryResource{..} = TF.arguments
-        [ TF.assign "destination_cidrblock" <$> _destination_cidrblock
-        , TF.assign "nexthop_id" <$> _nexthop_id
-        , TF.assign "nexthop_type" <$> _nexthop_type
-        , TF.assign "route_table_id" <$> _route_table_id
+    toHCL RouteEntryResource{..} = TF.block $ catMaybes
+        [ TF.assign "destination_cidrblock" <$> TF.argument _destination_cidrblock
+        , TF.assign "nexthop_id" <$> TF.argument _nexthop_id
+        , TF.assign "nexthop_type" <$> TF.argument _nexthop_type
+        , TF.assign "route_table_id" <$> TF.argument _route_table_id
         ]
 
 $(TF.makeSchemaLenses
     ''RouteEntryResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+routeEntryResource :: TF.Resource TF.AliCloud RouteEntryResource
+routeEntryResource =
+    TF.newResource "alicloud_route_entry" $
+        RouteEntryResource {
+            _destination_cidrblock = TF.Nil
+            , _nexthop_id = TF.Nil
+            , _nexthop_type = TF.Nil
+            , _route_table_id = TF.Nil
+            , _computed_destination_cidrblock = TF.Compute "destination_cidrblock"
+            , _computed_nexthop_id = TF.Compute "nexthop_id"
+            , _computed_nexthop_type = TF.Compute "nexthop_type"
+            , _computed_route_table_id = TF.Compute "route_table_id"
+            , _computed_router_id = TF.Compute "router_id"
+            }
 
 {- | The @alicloud_router_interface@ AliCloud resource.
 
@@ -2124,66 +2093,65 @@ data RouterInterfaceResource = RouterInterfaceResource {
     {- ^ - Router nterface specification. -}
     } deriving (Show, Eq)
 
-routerInterfaceResource :: TF.Resource TF.AliCloud RouterInterfaceResource
-routerInterfaceResource =
-    TF.newResource "alicloud_router_interface" $
-        RouterInterfaceResource {
-            _access_point_id = TF.Absent
-            , _description = TF.Absent
-            , _health_check_source_ip = TF.Absent
-            , _health_check_target_ip = TF.Absent
-            , _name = TF.Absent
-            , _opposite_access_point_id = TF.Absent
-            , _opposite_interface_id = TF.Absent
-            , _opposite_interface_owner_id = TF.Absent
-            , _opposite_region = TF.Absent
-            , _opposite_router_id = TF.Absent
-            , _opposite_router_type = TF.Absent
-            , _role = TF.Absent
-            , _router_id = TF.Absent
-            , _router_type = TF.Absent
-            , _specification = TF.Absent
-            , _computed_access_point_id = TF.Computed "access_point_id"
-            , _computed_description = TF.Computed "description"
-            , _computed_health_check_source_ip = TF.Computed "health_check_source_ip"
-            , _computed_health_check_target_ip = TF.Computed "health_check_target_ip"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_opposite_access_point_id = TF.Computed "opposite_access_point_id"
-            , _computed_opposite_interface_id = TF.Computed "opposite_interface_id"
-            , _computed_opposite_interface_owner_id = TF.Computed "opposite_interface_owner_id"
-            , _computed_opposite_router_id = TF.Computed "opposite_router_id"
-            , _computed_opposite_router_type = TF.Computed "opposite_router_type"
-            , _computed_role = TF.Computed "role"
-            , _computed_router_id = TF.Computed "router_id"
-            , _computed_router_type = TF.Computed "router_type"
-            , _computed_specification = TF.Computed "specification"
-            }
-
 instance TF.ToHCL RouterInterfaceResource where
-    toHCL RouterInterfaceResource{..} = TF.arguments
-        [ TF.assign "access_point_id" <$> _access_point_id
-        , TF.assign "description" <$> _description
-        , TF.assign "health_check_source_ip" <$> _health_check_source_ip
-        , TF.assign "health_check_target_ip" <$> _health_check_target_ip
-        , TF.assign "name" <$> _name
-        , TF.assign "opposite_access_point_id" <$> _opposite_access_point_id
-        , TF.assign "opposite_interface_id" <$> _opposite_interface_id
-        , TF.assign "opposite_interface_owner_id" <$> _opposite_interface_owner_id
-        , TF.assign "opposite_region" <$> _opposite_region
-        , TF.assign "opposite_router_id" <$> _opposite_router_id
-        , TF.assign "opposite_router_type" <$> _opposite_router_type
-        , TF.assign "role" <$> _role
-        , TF.assign "router_id" <$> _router_id
-        , TF.assign "router_type" <$> _router_type
-        , TF.assign "specification" <$> _specification
+    toHCL RouterInterfaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "access_point_id" <$> TF.argument _access_point_id
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "health_check_source_ip" <$> TF.argument _health_check_source_ip
+        , TF.assign "health_check_target_ip" <$> TF.argument _health_check_target_ip
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "opposite_access_point_id" <$> TF.argument _opposite_access_point_id
+        , TF.assign "opposite_interface_id" <$> TF.argument _opposite_interface_id
+        , TF.assign "opposite_interface_owner_id" <$> TF.argument _opposite_interface_owner_id
+        , TF.assign "opposite_region" <$> TF.argument _opposite_region
+        , TF.assign "opposite_router_id" <$> TF.argument _opposite_router_id
+        , TF.assign "opposite_router_type" <$> TF.argument _opposite_router_type
+        , TF.assign "role" <$> TF.argument _role
+        , TF.assign "router_id" <$> TF.argument _router_id
+        , TF.assign "router_type" <$> TF.argument _router_type
+        , TF.assign "specification" <$> TF.argument _specification
         ]
 
 $(TF.makeSchemaLenses
     ''RouterInterfaceResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+routerInterfaceResource :: TF.Resource TF.AliCloud RouterInterfaceResource
+routerInterfaceResource =
+    TF.newResource "alicloud_router_interface" $
+        RouterInterfaceResource {
+            _access_point_id = TF.Nil
+            , _description = TF.Nil
+            , _health_check_source_ip = TF.Nil
+            , _health_check_target_ip = TF.Nil
+            , _name = TF.Nil
+            , _opposite_access_point_id = TF.Nil
+            , _opposite_interface_id = TF.Nil
+            , _opposite_interface_owner_id = TF.Nil
+            , _opposite_region = TF.Nil
+            , _opposite_router_id = TF.Nil
+            , _opposite_router_type = TF.Nil
+            , _role = TF.Nil
+            , _router_id = TF.Nil
+            , _router_type = TF.Nil
+            , _specification = TF.Nil
+            , _computed_access_point_id = TF.Compute "access_point_id"
+            , _computed_description = TF.Compute "description"
+            , _computed_health_check_source_ip = TF.Compute "health_check_source_ip"
+            , _computed_health_check_target_ip = TF.Compute "health_check_target_ip"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_opposite_access_point_id = TF.Compute "opposite_access_point_id"
+            , _computed_opposite_interface_id = TF.Compute "opposite_interface_id"
+            , _computed_opposite_interface_owner_id = TF.Compute "opposite_interface_owner_id"
+            , _computed_opposite_router_id = TF.Compute "opposite_router_id"
+            , _computed_opposite_router_type = TF.Compute "opposite_router_type"
+            , _computed_role = TF.Compute "role"
+            , _computed_router_id = TF.Compute "router_id"
+            , _computed_router_type = TF.Compute "router_type"
+            , _computed_specification = TF.Compute "specification"
+            }
 
 {- | The @alicloud_security_group@ AliCloud resource.
 
@@ -2208,31 +2176,30 @@ data SecurityGroupResource = SecurityGroupResource {
     {- ^ - The VPC ID. -}
     } deriving (Show, Eq)
 
-securityGroupResource :: TF.Resource TF.AliCloud SecurityGroupResource
-securityGroupResource =
-    TF.newResource "alicloud_security_group" $
-        SecurityGroupResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _vpc_id = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_vpc_id = TF.Computed "vpc_id"
-            }
-
 instance TF.ToHCL SecurityGroupResource where
-    toHCL SecurityGroupResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "vpc_id" <$> _vpc_id
+    toHCL SecurityGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
 $(TF.makeSchemaLenses
     ''SecurityGroupResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+securityGroupResource :: TF.Resource TF.AliCloud SecurityGroupResource
+securityGroupResource =
+    TF.newResource "alicloud_security_group" $
+        SecurityGroupResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _vpc_id = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_vpc_id = TF.Compute "vpc_id"
+            }
 
 {- | The @alicloud_security_group_rule@ AliCloud resource.
 
@@ -2276,46 +2243,45 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource {
     {- ^ - The type of rule, @ingress@ or @egress@ -}
     } deriving (Show, Eq)
 
-securityGroupRuleResource :: TF.Resource TF.AliCloud SecurityGroupRuleResource
-securityGroupRuleResource =
-    TF.newResource "alicloud_security_group_rule" $
-        SecurityGroupRuleResource {
-            _cidr_ip = TF.Absent
-            , _ip_protocol = TF.Absent
-            , _nic_type = TF.Absent
-            , _policy = TF.Absent
-            , _port_range = TF.Absent
-            , _priority = TF.Absent
-            , _security_group_id = TF.Absent
-            , _source_group_owner_account = TF.Absent
-            , _source_security_group_id = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_protocol = TF.Computed "ip_protocol"
-            , _computed_name = TF.Computed "name"
-            , _computed_port_range = TF.Computed "port_range"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL SecurityGroupRuleResource where
-    toHCL SecurityGroupRuleResource{..} = TF.arguments
-        [ TF.assign "cidr_ip" <$> _cidr_ip
-        , TF.assign "ip_protocol" <$> _ip_protocol
-        , TF.assign "nic_type" <$> _nic_type
-        , TF.assign "policy" <$> _policy
-        , TF.assign "port_range" <$> _port_range
-        , TF.assign "priority" <$> _priority
-        , TF.assign "security_group_id" <$> _security_group_id
-        , TF.assign "source_group_owner_account" <$> _source_group_owner_account
-        , TF.assign "source_security_group_id" <$> _source_security_group_id
-        , TF.assign "type" <$> _type'
+    toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr_ip" <$> TF.argument _cidr_ip
+        , TF.assign "ip_protocol" <$> TF.argument _ip_protocol
+        , TF.assign "nic_type" <$> TF.argument _nic_type
+        , TF.assign "policy" <$> TF.argument _policy
+        , TF.assign "port_range" <$> TF.argument _port_range
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "security_group_id" <$> TF.argument _security_group_id
+        , TF.assign "source_group_owner_account" <$> TF.argument _source_group_owner_account
+        , TF.assign "source_security_group_id" <$> TF.argument _source_security_group_id
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''SecurityGroupRuleResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+securityGroupRuleResource :: TF.Resource TF.AliCloud SecurityGroupRuleResource
+securityGroupRuleResource =
+    TF.newResource "alicloud_security_group_rule" $
+        SecurityGroupRuleResource {
+            _cidr_ip = TF.Nil
+            , _ip_protocol = TF.Nil
+            , _nic_type = TF.Nil
+            , _policy = TF.Nil
+            , _port_range = TF.Nil
+            , _priority = TF.Nil
+            , _security_group_id = TF.Nil
+            , _source_group_owner_account = TF.Nil
+            , _source_security_group_id = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_protocol = TF.Compute "ip_protocol"
+            , _computed_name = TF.Compute "name"
+            , _computed_port_range = TF.Compute "port_range"
+            , _computed_type' = TF.Compute "type"
+            }
 
 {- | The @alicloud_slb_attachment@ AliCloud resource.
 
@@ -2330,26 +2296,25 @@ data SlbAttachmentResource = SlbAttachmentResource {
     {- ^ - The backend servers of the load balancer. -}
     } deriving (Show, Eq)
 
-slbAttachmentResource :: TF.Resource TF.AliCloud SlbAttachmentResource
-slbAttachmentResource =
-    TF.newResource "alicloud_slb_attachment" $
-        SlbAttachmentResource {
-            _instances = TF.Absent
-            , _slb_id = TF.Absent
-            , _computed_backend_servers = TF.Computed "backend_servers"
-            }
-
 instance TF.ToHCL SlbAttachmentResource where
-    toHCL SlbAttachmentResource{..} = TF.arguments
-        [ TF.assign "instances" <$> _instances
-        , TF.assign "slb_id" <$> _slb_id
+    toHCL SlbAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "instances" <$> TF.argument _instances
+        , TF.assign "slb_id" <$> TF.argument _slb_id
         ]
 
 $(TF.makeSchemaLenses
     ''SlbAttachmentResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+slbAttachmentResource :: TF.Resource TF.AliCloud SlbAttachmentResource
+slbAttachmentResource =
+    TF.newResource "alicloud_slb_attachment" $
+        SlbAttachmentResource {
+            _instances = TF.Nil
+            , _slb_id = TF.Nil
+            , _computed_backend_servers = TF.Compute "backend_servers"
+            }
 
 {- | The @alicloud_slb_listener@ AliCloud resource.
 
@@ -2402,65 +2367,64 @@ data SlbListenerResource = SlbListenerResource {
     {- ^ - (Optinal) Threshold determining the result of the health check is fail. It is required when @health_check@ is on. Valid value range: [1-10] in seconds. Default to 3. -}
     } deriving (Show, Eq)
 
-slbListenerResource :: TF.Resource TF.AliCloud SlbListenerResource
-slbListenerResource =
-    TF.newResource "alicloud_slb_listener" $
-        SlbListenerResource {
-            _backend_port = TF.Absent
-            , _bandwidth = TF.Absent
-            , _cookie = TF.Absent
-            , _cookie_timeout = TF.Absent
-            , _frontend_port = TF.Absent
-            , _health_check = TF.Absent
-            , _health_check_connect_port = TF.Absent
-            , _health_check_domain = TF.Absent
-            , _health_check_http_code = TF.Absent
-            , _health_check_interval = TF.Absent
-            , _health_check_timeout = TF.Absent
-            , _health_check_type = TF.Absent
-            , _health_check_uri = TF.Absent
-            , _healthy_threshold = TF.Absent
-            , _load_balancer_id = TF.Absent
-            , _persistence_timeout = TF.Absent
-            , _protocol = TF.Absent
-            , _scheduler = TF.Absent
-            , _ssl_certificate_id = TF.Absent
-            , _sticky_session = TF.Absent
-            , _sticky_session_type = TF.Absent
-            , _unhealthy_threshold = TF.Absent
-            }
-
 instance TF.ToHCL SlbListenerResource where
-    toHCL SlbListenerResource{..} = TF.arguments
-        [ TF.assign "backend_port" <$> _backend_port
-        , TF.assign "bandwidth" <$> _bandwidth
-        , TF.assign "cookie" <$> _cookie
-        , TF.assign "cookie_timeout" <$> _cookie_timeout
-        , TF.assign "frontend_port" <$> _frontend_port
-        , TF.assign "health_check" <$> _health_check
-        , TF.assign "health_check_connect_port" <$> _health_check_connect_port
-        , TF.assign "health_check_domain" <$> _health_check_domain
-        , TF.assign "health_check_http_code" <$> _health_check_http_code
-        , TF.assign "health_check_interval" <$> _health_check_interval
-        , TF.assign "health_check_timeout" <$> _health_check_timeout
-        , TF.assign "health_check_type" <$> _health_check_type
-        , TF.assign "health_check_uri" <$> _health_check_uri
-        , TF.assign "healthy_threshold" <$> _healthy_threshold
-        , TF.assign "load_balancer_id" <$> _load_balancer_id
-        , TF.assign "persistence_timeout" <$> _persistence_timeout
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "scheduler" <$> _scheduler
-        , TF.assign "ssl_certificate_id" <$> _ssl_certificate_id
-        , TF.assign "sticky_session" <$> _sticky_session
-        , TF.assign "sticky_session_type" <$> _sticky_session_type
-        , TF.assign "unhealthy_threshold" <$> _unhealthy_threshold
+    toHCL SlbListenerResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend_port" <$> TF.argument _backend_port
+        , TF.assign "bandwidth" <$> TF.argument _bandwidth
+        , TF.assign "cookie" <$> TF.argument _cookie
+        , TF.assign "cookie_timeout" <$> TF.argument _cookie_timeout
+        , TF.assign "frontend_port" <$> TF.argument _frontend_port
+        , TF.assign "health_check" <$> TF.argument _health_check
+        , TF.assign "health_check_connect_port" <$> TF.argument _health_check_connect_port
+        , TF.assign "health_check_domain" <$> TF.argument _health_check_domain
+        , TF.assign "health_check_http_code" <$> TF.argument _health_check_http_code
+        , TF.assign "health_check_interval" <$> TF.argument _health_check_interval
+        , TF.assign "health_check_timeout" <$> TF.argument _health_check_timeout
+        , TF.assign "health_check_type" <$> TF.argument _health_check_type
+        , TF.assign "health_check_uri" <$> TF.argument _health_check_uri
+        , TF.assign "healthy_threshold" <$> TF.argument _healthy_threshold
+        , TF.assign "load_balancer_id" <$> TF.argument _load_balancer_id
+        , TF.assign "persistence_timeout" <$> TF.argument _persistence_timeout
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "scheduler" <$> TF.argument _scheduler
+        , TF.assign "ssl_certificate_id" <$> TF.argument _ssl_certificate_id
+        , TF.assign "sticky_session" <$> TF.argument _sticky_session
+        , TF.assign "sticky_session_type" <$> TF.argument _sticky_session_type
+        , TF.assign "unhealthy_threshold" <$> TF.argument _unhealthy_threshold
         ]
 
 $(TF.makeSchemaLenses
     ''SlbListenerResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+slbListenerResource :: TF.Resource TF.AliCloud SlbListenerResource
+slbListenerResource =
+    TF.newResource "alicloud_slb_listener" $
+        SlbListenerResource {
+            _backend_port = TF.Nil
+            , _bandwidth = TF.Nil
+            , _cookie = TF.Nil
+            , _cookie_timeout = TF.Nil
+            , _frontend_port = TF.Nil
+            , _health_check = TF.Nil
+            , _health_check_connect_port = TF.Nil
+            , _health_check_domain = TF.Nil
+            , _health_check_http_code = TF.Nil
+            , _health_check_interval = TF.Nil
+            , _health_check_timeout = TF.Nil
+            , _health_check_type = TF.Nil
+            , _health_check_uri = TF.Nil
+            , _healthy_threshold = TF.Nil
+            , _load_balancer_id = TF.Nil
+            , _persistence_timeout = TF.Nil
+            , _protocol = TF.Nil
+            , _scheduler = TF.Nil
+            , _ssl_certificate_id = TF.Nil
+            , _sticky_session = TF.Nil
+            , _sticky_session_type = TF.Nil
+            , _unhealthy_threshold = TF.Nil
+            }
 
 {- | The @alicloud_slb@ AliCloud resource.
 
@@ -2501,38 +2465,37 @@ data SlbResource = SlbResource {
     {- ^ - The VSwitch ID of the load balancer. Only available on SLB launched in a VPC. -}
     } deriving (Show, Eq)
 
-slbResource :: TF.Resource TF.AliCloud SlbResource
-slbResource =
-    TF.newResource "alicloud_slb" $
-        SlbResource {
-            _bandwidth = TF.Absent
-            , _internet = TF.Absent
-            , _internet_charge_type = TF.Absent
-            , _name = TF.Absent
-            , _vswitch_id = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_bandwidth = TF.Computed "bandwidth"
-            , _computed_id = TF.Computed "id"
-            , _computed_internet = TF.Computed "internet"
-            , _computed_internet_charge_type = TF.Computed "internet_charge_type"
-            , _computed_name = TF.Computed "name"
-            , _computed_vswitch_id = TF.Computed "vswitch_id"
-            }
-
 instance TF.ToHCL SlbResource where
-    toHCL SlbResource{..} = TF.arguments
-        [ TF.assign "bandwidth" <$> _bandwidth
-        , TF.assign "internet" <$> _internet
-        , TF.assign "internet_charge_type" <$> _internet_charge_type
-        , TF.assign "name" <$> _name
-        , TF.assign "vswitch_id" <$> _vswitch_id
+    toHCL SlbResource{..} = TF.block $ catMaybes
+        [ TF.assign "bandwidth" <$> TF.argument _bandwidth
+        , TF.assign "internet" <$> TF.argument _internet
+        , TF.assign "internet_charge_type" <$> TF.argument _internet_charge_type
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
 $(TF.makeSchemaLenses
     ''SlbResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+slbResource :: TF.Resource TF.AliCloud SlbResource
+slbResource =
+    TF.newResource "alicloud_slb" $
+        SlbResource {
+            _bandwidth = TF.Nil
+            , _internet = TF.Nil
+            , _internet_charge_type = TF.Nil
+            , _name = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_bandwidth = TF.Compute "bandwidth"
+            , _computed_id = TF.Compute "id"
+            , _computed_internet = TF.Compute "internet"
+            , _computed_internet_charge_type = TF.Compute "internet_charge_type"
+            , _computed_name = TF.Compute "name"
+            , _computed_vswitch_id = TF.Compute "vswitch_id"
+            }
 
 {- | The @alicloud_snat@ AliCloud resource.
 
@@ -2547,27 +2510,26 @@ data SnatResource = SnatResource {
     {- ^ (Required, Forces new resource) The vswitch ID. -}
     } deriving (Show, Eq)
 
-snatResource :: TF.Resource TF.AliCloud SnatResource
-snatResource =
-    TF.newResource "alicloud_snat" $
-        SnatResource {
-            _snat_ip = TF.Absent
-            , _snat_table_id = TF.Absent
-            , _source_vswitch_id = TF.Absent
-            }
-
 instance TF.ToHCL SnatResource where
-    toHCL SnatResource{..} = TF.arguments
-        [ TF.assign "snat_ip" <$> _snat_ip
-        , TF.assign "snat_table_id" <$> _snat_table_id
-        , TF.assign "source_vswitch_id" <$> _source_vswitch_id
+    toHCL SnatResource{..} = TF.block $ catMaybes
+        [ TF.assign "snat_ip" <$> TF.argument _snat_ip
+        , TF.assign "snat_table_id" <$> TF.argument _snat_table_id
+        , TF.assign "source_vswitch_id" <$> TF.argument _source_vswitch_id
         ]
 
 $(TF.makeSchemaLenses
     ''SnatResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+snatResource :: TF.Resource TF.AliCloud SnatResource
+snatResource =
+    TF.newResource "alicloud_snat" $
+        SnatResource {
+            _snat_ip = TF.Nil
+            , _snat_table_id = TF.Nil
+            , _source_vswitch_id = TF.Nil
+            }
 
 {- | The @alicloud_vpc@ AliCloud resource.
 
@@ -2595,33 +2557,32 @@ data VpcResource = VpcResource {
     {- ^ - The ID of the router created by default on VPC creation. -}
     } deriving (Show, Eq)
 
-vpcResource :: TF.Resource TF.AliCloud VpcResource
-vpcResource =
-    TF.newResource "alicloud_vpc" $
-        VpcResource {
-            _cidr_block = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _computed_cidr_block = TF.Computed "cidr_block"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_route_table_id = TF.Computed "route_table_id"
-            , _computed_router_id = TF.Computed "router_id"
-            }
-
 instance TF.ToHCL VpcResource where
-    toHCL VpcResource{..} = TF.arguments
-        [ TF.assign "cidr_block" <$> _cidr_block
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
+    toHCL VpcResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr_block" <$> TF.argument _cidr_block
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''VpcResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vpcResource :: TF.Resource TF.AliCloud VpcResource
+vpcResource =
+    TF.newResource "alicloud_vpc" $
+        VpcResource {
+            _cidr_block = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _computed_cidr_block = TF.Compute "cidr_block"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_route_table_id = TF.Compute "route_table_id"
+            , _computed_router_id = TF.Compute "router_id"
+            }
 
 {- | The @alicloud_vswitch@ AliCloud resource.
 
@@ -2652,34 +2613,33 @@ data VswitchResource = VswitchResource {
     {- ^ - The VPC ID. -}
     } deriving (Show, Eq)
 
-vswitchResource :: TF.Resource TF.AliCloud VswitchResource
-vswitchResource =
-    TF.newResource "alicloud_vswitch" $
-        VswitchResource {
-            _availability_zone = TF.Absent
-            , _cidr_block = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _vpc_id = TF.Absent
-            , _computed_availability_zone = TF.Computed "availability_zone"
-            , _computed_cidr_block = TF.Computed "cidr_block"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_vpc_id = TF.Computed "vpc_id"
-            }
-
 instance TF.ToHCL VswitchResource where
-    toHCL VswitchResource{..} = TF.arguments
-        [ TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "cidr_block" <$> _cidr_block
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "vpc_id" <$> _vpc_id
+    toHCL VswitchResource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "cidr_block" <$> TF.argument _cidr_block
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
 $(TF.makeSchemaLenses
     ''VswitchResource
     ''TF.AliCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vswitchResource :: TF.Resource TF.AliCloud VswitchResource
+vswitchResource =
+    TF.newResource "alicloud_vswitch" $
+        VswitchResource {
+            _availability_zone = TF.Nil
+            , _cidr_block = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _vpc_id = TF.Nil
+            , _computed_availability_zone = TF.Compute "availability_zone"
+            , _computed_cidr_block = TF.Compute "cidr_block"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_vpc_id = TF.Compute "vpc_id"
+            }

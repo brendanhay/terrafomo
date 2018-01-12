@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OPC.Provider where
+module Terrafomo.OPC.Provider
+    ( OPC    (..)
+    , HasOPC (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.OPC.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ supported by the Oracle Public Cloud. The provider needs to be configured
 with credentials for the Oracle Public Cloud API. Use the navigation to the
 left to read about the available resources.
 -}
-data OPC = OPC
-    { _endpoint         :: !(TF.Argument Text)
+data OPC = OPC {
+      _endpoint         :: !(TF.Argument Text)
     {- ^ (Optional) The API endpoint to use, associated with your Oracle Public Cloud account. This is known as the @REST Endpoint@ within the Oracle portal. It can also be sourced from the @OPC_ENDPOINT@ environment variable. -}
     , _identity_domain  :: !(TF.Argument Text)
     {- ^ (Optional) The Identity Domain or Service Instance ID of the environment to use. It can also be sourced from the @OPC_IDENTITY_DOMAIN@ environment variable. -}
@@ -53,14 +66,42 @@ data OPC = OPC
 instance Hashable OPC
 
 instance TF.ToHCL OPC where
-    toHCL x = TF.arguments
-        [ TF.assign "endpoint" <$> _endpoint x
-        , TF.assign "identity_domain" <$> _identity_domain x
-        , TF.assign "insecure" <$> _insecure x
-        , TF.assign "max_retries" <$> _max_retries x
-        , TF.assign "password" <$> _password x
-        , TF.assign "storage_endpoint" <$> _storage_endpoint x
-        , TF.assign "user" <$> _user x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OPC))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "endpoint" <$> TF.argument (_endpoint x)
+            , TF.assign "identity_domain" <$> TF.argument (_identity_domain x)
+            , TF.assign "insecure" <$> TF.argument (_insecure x)
+            , TF.assign "max_retries" <$> TF.argument (_max_retries x)
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "storage_endpoint" <$> TF.argument (_storage_endpoint x)
+            , TF.assign "user" <$> TF.argument (_user x)
+            ]
 
-$(TF.makeClassy ''OPC)
+instance Semigroup OPC where
+    (<>) a b = OPC {
+          _endpoint = on (<>) _endpoint a b
+        , _identity_domain = on (<>) _identity_domain a b
+        , _insecure = on (<>) _insecure a b
+        , _max_retries = on (<>) _max_retries a b
+        , _password = on (<>) _password a b
+        , _storage_endpoint = on (<>) _storage_endpoint a b
+        , _user = on (<>) _user a b
+        }
+
+instance Monoid OPC where
+    mappend = (<>)
+    mempty  = OPC {
+            _endpoint = TF.Nil
+          , _identity_domain = TF.Nil
+          , _insecure = TF.Nil
+          , _max_retries = TF.Nil
+          , _password = TF.Nil
+          , _storage_endpoint = TF.Nil
+          , _user = TF.Nil
+        }
+
+instance TF.IsProvider OPC where
+    type ProviderName OPC = "opc"
+
+$(TF.makeProviderLenses ''OPC)

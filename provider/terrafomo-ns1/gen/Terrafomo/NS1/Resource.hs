@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.NS1             as TF
+import qualified Terrafomo.NS1.Provider    as TF
+import qualified Terrafomo.NS1.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -52,29 +54,28 @@ data ApikeyResource = ApikeyResource {
     {- ^ (Required) The teams that the apikey belongs to. -}
     } deriving (Show, Eq)
 
-apikeyResource :: TF.Resource TF.NS1 ApikeyResource
-apikeyResource =
-    TF.newResource "ns1_apikey" $
-        ApikeyResource {
-            _key = TF.Absent
-            , _name = TF.Absent
-            , _permissions = TF.Absent
-            , _teams = TF.Absent
-            }
-
 instance TF.ToHCL ApikeyResource where
-    toHCL ApikeyResource{..} = TF.arguments
-        [ TF.assign "key" <$> _key
-        , TF.assign "name" <$> _name
-        , TF.assign "permissions" <$> _permissions
-        , TF.assign "teams" <$> _teams
+    toHCL ApikeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "key" <$> TF.argument _key
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "permissions" <$> TF.argument _permissions
+        , TF.assign "teams" <$> TF.argument _teams
         ]
 
 $(TF.makeSchemaLenses
     ''ApikeyResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+apikeyResource :: TF.Resource TF.NS1 ApikeyResource
+apikeyResource =
+    TF.newResource "ns1_apikey" $
+        ApikeyResource {
+            _key = TF.Nil
+            , _name = TF.Nil
+            , _permissions = TF.Nil
+            , _teams = TF.Nil
+            }
 
 {- | The @ns1_datafeed@ NS1 resource.
 
@@ -90,27 +91,26 @@ data DatafeedResource = DatafeedResource {
     {- ^ (Required) The data source id that this feed is connected to. -}
     } deriving (Show, Eq)
 
-datafeedResource :: TF.Resource TF.NS1 DatafeedResource
-datafeedResource =
-    TF.newResource "ns1_datafeed" $
-        DatafeedResource {
-            _config = TF.Absent
-            , _name = TF.Absent
-            , _source_id = TF.Absent
-            }
-
 instance TF.ToHCL DatafeedResource where
-    toHCL DatafeedResource{..} = TF.arguments
-        [ TF.assign "config" <$> _config
-        , TF.assign "name" <$> _name
-        , TF.assign "source_id" <$> _source_id
+    toHCL DatafeedResource{..} = TF.block $ catMaybes
+        [ TF.assign "config" <$> TF.argument _config
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "source_id" <$> TF.argument _source_id
         ]
 
 $(TF.makeSchemaLenses
     ''DatafeedResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+datafeedResource :: TF.Resource TF.NS1 DatafeedResource
+datafeedResource =
+    TF.newResource "ns1_datafeed" $
+        DatafeedResource {
+            _config = TF.Nil
+            , _name = TF.Nil
+            , _source_id = TF.Nil
+            }
 
 {- | The @ns1_datasource@ NS1 resource.
 
@@ -126,27 +126,26 @@ data DatasourceResource = DatasourceResource {
     {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
     } deriving (Show, Eq)
 
-datasourceResource :: TF.Resource TF.NS1 DatasourceResource
-datasourceResource =
-    TF.newResource "ns1_datasource" $
-        DatasourceResource {
-            _config = TF.Absent
-            , _name = TF.Absent
-            , _sourcetype = TF.Absent
-            }
-
 instance TF.ToHCL DatasourceResource where
-    toHCL DatasourceResource{..} = TF.arguments
-        [ TF.assign "config" <$> _config
-        , TF.assign "name" <$> _name
-        , TF.assign "sourcetype" <$> _sourcetype
+    toHCL DatasourceResource{..} = TF.block $ catMaybes
+        [ TF.assign "config" <$> TF.argument _config
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "sourcetype" <$> TF.argument _sourcetype
         ]
 
 $(TF.makeSchemaLenses
     ''DatasourceResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+datasourceResource :: TF.Resource TF.NS1 DatasourceResource
+datasourceResource =
+    TF.newResource "ns1_datasource" $
+        DatasourceResource {
+            _config = TF.Nil
+            , _name = TF.Nil
+            , _sourcetype = TF.Nil
+            }
 
 {- | The @ns1_monitoringjob@ NS1 resource.
 
@@ -186,51 +185,50 @@ data MonitoringjobResource = MonitoringjobResource {
     {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
     } deriving (Show, Eq)
 
-monitoringjobResource :: TF.Resource TF.NS1 MonitoringjobResource
-monitoringjobResource =
-    TF.newResource "ns1_monitoringjob" $
-        MonitoringjobResource {
-            _active = TF.Absent
-            , _config = TF.Absent
-            , _frequency = TF.Absent
-            , _job_type = TF.Absent
-            , _name = TF.Absent
-            , _notes = TF.Absent
-            , _notify_delay = TF.Absent
-            , _notify_failback = TF.Absent
-            , _notify_list = TF.Absent
-            , _notify_regional = TF.Absent
-            , _notify_repeat = TF.Absent
-            , _policy = TF.Absent
-            , _rapid_recheck = TF.Absent
-            , _regions = TF.Absent
-            , _rules = TF.Absent
-            }
-
 instance TF.ToHCL MonitoringjobResource where
-    toHCL MonitoringjobResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "config" <$> _config
-        , TF.assign "frequency" <$> _frequency
-        , TF.assign "job_type" <$> _job_type
-        , TF.assign "name" <$> _name
-        , TF.assign "notes" <$> _notes
-        , TF.assign "notify_delay" <$> _notify_delay
-        , TF.assign "notify_failback" <$> _notify_failback
-        , TF.assign "notify_list" <$> _notify_list
-        , TF.assign "notify_regional" <$> _notify_regional
-        , TF.assign "notify_repeat" <$> _notify_repeat
-        , TF.assign "policy" <$> _policy
-        , TF.assign "rapid_recheck" <$> _rapid_recheck
-        , TF.assign "regions" <$> _regions
-        , TF.assign "rules" <$> _rules
+    toHCL MonitoringjobResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "config" <$> TF.argument _config
+        , TF.assign "frequency" <$> TF.argument _frequency
+        , TF.assign "job_type" <$> TF.argument _job_type
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "notes" <$> TF.argument _notes
+        , TF.assign "notify_delay" <$> TF.argument _notify_delay
+        , TF.assign "notify_failback" <$> TF.argument _notify_failback
+        , TF.assign "notify_list" <$> TF.argument _notify_list
+        , TF.assign "notify_regional" <$> TF.argument _notify_regional
+        , TF.assign "notify_repeat" <$> TF.argument _notify_repeat
+        , TF.assign "policy" <$> TF.argument _policy
+        , TF.assign "rapid_recheck" <$> TF.argument _rapid_recheck
+        , TF.assign "regions" <$> TF.argument _regions
+        , TF.assign "rules" <$> TF.argument _rules
         ]
 
 $(TF.makeSchemaLenses
     ''MonitoringjobResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+monitoringjobResource :: TF.Resource TF.NS1 MonitoringjobResource
+monitoringjobResource =
+    TF.newResource "ns1_monitoringjob" $
+        MonitoringjobResource {
+            _active = TF.Nil
+            , _config = TF.Nil
+            , _frequency = TF.Nil
+            , _job_type = TF.Nil
+            , _name = TF.Nil
+            , _notes = TF.Nil
+            , _notify_delay = TF.Nil
+            , _notify_failback = TF.Nil
+            , _notify_list = TF.Nil
+            , _notify_regional = TF.Nil
+            , _notify_repeat = TF.Nil
+            , _policy = TF.Nil
+            , _rapid_recheck = TF.Nil
+            , _regions = TF.Nil
+            , _rules = TF.Nil
+            }
 
 {- | The @ns1_notifylist@ NS1 resource.
 
@@ -244,25 +242,24 @@ data NotifylistResource = NotifylistResource {
     {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
     } deriving (Show, Eq)
 
-notifylistResource :: TF.Resource TF.NS1 NotifylistResource
-notifylistResource =
-    TF.newResource "ns1_notifylist" $
-        NotifylistResource {
-            _name = TF.Absent
-            , _notifications = TF.Absent
-            }
-
 instance TF.ToHCL NotifylistResource where
-    toHCL NotifylistResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "notifications" <$> _notifications
+    toHCL NotifylistResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "notifications" <$> TF.argument _notifications
         ]
 
 $(TF.makeSchemaLenses
     ''NotifylistResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+notifylistResource :: TF.Resource TF.NS1 NotifylistResource
+notifylistResource =
+    TF.newResource "ns1_notifylist" $
+        NotifylistResource {
+            _name = TF.Nil
+            , _notifications = TF.Nil
+            }
 
 {- | The @ns1_record@ NS1 resource.
 
@@ -288,37 +285,36 @@ data RecordResource = RecordResource {
     {- ^ (Required) The zone the record belongs to. -}
     } deriving (Show, Eq)
 
-recordResource :: TF.Resource TF.NS1 RecordResource
-recordResource =
-    TF.newResource "ns1_record" $
-        RecordResource {
-            _answers = TF.Absent
-            , _domain = TF.Absent
-            , _filters = TF.Absent
-            , _link = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _use_client_subnet = TF.Absent
-            , _zone = TF.Absent
-            }
-
 instance TF.ToHCL RecordResource where
-    toHCL RecordResource{..} = TF.arguments
-        [ TF.assign "answers" <$> _answers
-        , TF.assign "domain" <$> _domain
-        , TF.assign "filters" <$> _filters
-        , TF.assign "link" <$> _link
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "use_client_subnet" <$> _use_client_subnet
-        , TF.assign "zone" <$> _zone
+    toHCL RecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "answers" <$> TF.argument _answers
+        , TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "filters" <$> TF.argument _filters
+        , TF.assign "link" <$> TF.argument _link
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "use_client_subnet" <$> TF.argument _use_client_subnet
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''RecordResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+recordResource :: TF.Resource TF.NS1 RecordResource
+recordResource =
+    TF.newResource "ns1_record" $
+        RecordResource {
+            _answers = TF.Nil
+            , _domain = TF.Nil
+            , _filters = TF.Nil
+            , _link = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _use_client_subnet = TF.Nil
+            , _zone = TF.Nil
+            }
 
 {- | The @ns1_team@ NS1 resource.
 
@@ -332,25 +328,24 @@ data TeamResource = TeamResource {
     {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
     } deriving (Show, Eq)
 
-teamResource :: TF.Resource TF.NS1 TeamResource
-teamResource =
-    TF.newResource "ns1_team" $
-        TeamResource {
-            _name = TF.Absent
-            , _permissions = TF.Absent
-            }
-
 instance TF.ToHCL TeamResource where
-    toHCL TeamResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "permissions" <$> _permissions
+    toHCL TeamResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "permissions" <$> TF.argument _permissions
         ]
 
 $(TF.makeSchemaLenses
     ''TeamResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamResource :: TF.Resource TF.NS1 TeamResource
+teamResource =
+    TF.newResource "ns1_team" $
+        TeamResource {
+            _name = TF.Nil
+            , _permissions = TF.Nil
+            }
 
 {- | The @ns1_user@ NS1 resource.
 
@@ -373,33 +368,32 @@ data UserResource = UserResource {
     {- ^ (Required) The users login name. -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.NS1 UserResource
-userResource =
-    TF.newResource "ns1_user" $
-        UserResource {
-            _email = TF.Absent
-            , _name = TF.Absent
-            , _notify = TF.Absent
-            , _permissions = TF.Absent
-            , _teams = TF.Absent
-            , _username = TF.Absent
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "email" <$> _email
-        , TF.assign "name" <$> _name
-        , TF.assign "notify" <$> _notify
-        , TF.assign "permissions" <$> _permissions
-        , TF.assign "teams" <$> _teams
-        , TF.assign "username" <$> _username
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "email" <$> TF.argument _email
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "notify" <$> TF.argument _notify
+        , TF.assign "permissions" <$> TF.argument _permissions
+        , TF.assign "teams" <$> TF.argument _teams
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.NS1 UserResource
+userResource =
+    TF.newResource "ns1_user" $
+        UserResource {
+            _email = TF.Nil
+            , _name = TF.Nil
+            , _notify = TF.Nil
+            , _permissions = TF.Nil
+            , _teams = TF.Nil
+            , _username = TF.Nil
+            }
 
 {- | The @ns1_zone@ NS1 resource.
 
@@ -425,34 +419,33 @@ data ZoneResource = ZoneResource {
     {- ^ (Required) The domain name of the zone. -}
     } deriving (Show, Eq)
 
-zoneResource :: TF.Resource TF.NS1 ZoneResource
-zoneResource =
-    TF.newResource "ns1_zone" $
-        ZoneResource {
-            _expiry = TF.Absent
-            , _link = TF.Absent
-            , _nx_ttl = TF.Absent
-            , _primary = TF.Absent
-            , _refresh = TF.Absent
-            , _retry = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            }
-
 instance TF.ToHCL ZoneResource where
-    toHCL ZoneResource{..} = TF.arguments
-        [ TF.assign "expiry" <$> _expiry
-        , TF.assign "link" <$> _link
-        , TF.assign "nx_ttl" <$> _nx_ttl
-        , TF.assign "primary" <$> _primary
-        , TF.assign "refresh" <$> _refresh
-        , TF.assign "retry" <$> _retry
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL ZoneResource{..} = TF.block $ catMaybes
+        [ TF.assign "expiry" <$> TF.argument _expiry
+        , TF.assign "link" <$> TF.argument _link
+        , TF.assign "nx_ttl" <$> TF.argument _nx_ttl
+        , TF.assign "primary" <$> TF.argument _primary
+        , TF.assign "refresh" <$> TF.argument _refresh
+        , TF.assign "retry" <$> TF.argument _retry
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''ZoneResource
     ''TF.NS1
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+zoneResource :: TF.Resource TF.NS1 ZoneResource
+zoneResource =
+    TF.newResource "ns1_zone" $
+        ZoneResource {
+            _expiry = TF.Nil
+            , _link = TF.Nil
+            , _nx_ttl = TF.Nil
+            , _primary = TF.Nil
+            , _refresh = TF.Nil
+            , _retry = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            }

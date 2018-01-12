@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Circonus        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Circonus.Provider as TF
+import qualified Terrafomo.Circonus.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @circonus_check@ Circonus resource.
 
@@ -92,63 +94,62 @@ data CheckResource = CheckResource {
     {- ^ (Optional) A floating point number representing the maximum number of seconds this check should wait for a result.  Defaults to @10.0@ . -}
     } deriving (Show, Eq)
 
-checkResource :: TF.Resource TF.Circonus CheckResource
-checkResource =
-    TF.newResource "circonus_check" $
-        CheckResource {
-            _active = TF.Absent
-            , _caql = TF.Absent
-            , _cloudwatch = TF.Absent
-            , _collector = TF.Absent
-            , _consul = TF.Absent
-            , _http = TF.Absent
-            , _httptrap = TF.Absent
-            , _icmp_ping = TF.Absent
-            , _json = TF.Absent
-            , _metric = TF.Absent
-            , _metric_limit = TF.Absent
-            , _mysql = TF.Absent
-            , _name = TF.Absent
-            , _notes = TF.Absent
-            , _period = TF.Absent
-            , _postgresql = TF.Absent
-            , _statsd = TF.Absent
-            , _tags = TF.Absent
-            , _target = TF.Absent
-            , _tcp = TF.Absent
-            , _timeout = TF.Absent
-            }
-
 instance TF.ToHCL CheckResource where
-    toHCL CheckResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "caql" <$> _caql
-        , TF.assign "cloudwatch" <$> _cloudwatch
-        , TF.assign "collector" <$> _collector
-        , TF.assign "consul" <$> _consul
-        , TF.assign "http" <$> _http
-        , TF.assign "httptrap" <$> _httptrap
-        , TF.assign "icmp_ping" <$> _icmp_ping
-        , TF.assign "json" <$> _json
-        , TF.assign "metric" <$> _metric
-        , TF.assign "metric_limit" <$> _metric_limit
-        , TF.assign "mysql" <$> _mysql
-        , TF.assign "name" <$> _name
-        , TF.assign "notes" <$> _notes
-        , TF.assign "period" <$> _period
-        , TF.assign "postgresql" <$> _postgresql
-        , TF.assign "statsd" <$> _statsd
-        , TF.assign "tags" <$> _tags
-        , TF.assign "target" <$> _target
-        , TF.assign "tcp" <$> _tcp
-        , TF.assign "timeout" <$> _timeout
+    toHCL CheckResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "caql" <$> TF.argument _caql
+        , TF.assign "cloudwatch" <$> TF.argument _cloudwatch
+        , TF.assign "collector" <$> TF.argument _collector
+        , TF.assign "consul" <$> TF.argument _consul
+        , TF.assign "http" <$> TF.argument _http
+        , TF.assign "httptrap" <$> TF.argument _httptrap
+        , TF.assign "icmp_ping" <$> TF.argument _icmp_ping
+        , TF.assign "json" <$> TF.argument _json
+        , TF.assign "metric" <$> TF.argument _metric
+        , TF.assign "metric_limit" <$> TF.argument _metric_limit
+        , TF.assign "mysql" <$> TF.argument _mysql
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "notes" <$> TF.argument _notes
+        , TF.assign "period" <$> TF.argument _period
+        , TF.assign "postgresql" <$> TF.argument _postgresql
+        , TF.assign "statsd" <$> TF.argument _statsd
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "target" <$> TF.argument _target
+        , TF.assign "tcp" <$> TF.argument _tcp
+        , TF.assign "timeout" <$> TF.argument _timeout
         ]
 
 $(TF.makeSchemaLenses
     ''CheckResource
     ''TF.Circonus
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+checkResource :: TF.Resource TF.Circonus CheckResource
+checkResource =
+    TF.newResource "circonus_check" $
+        CheckResource {
+            _active = TF.Nil
+            , _caql = TF.Nil
+            , _cloudwatch = TF.Nil
+            , _collector = TF.Nil
+            , _consul = TF.Nil
+            , _http = TF.Nil
+            , _httptrap = TF.Nil
+            , _icmp_ping = TF.Nil
+            , _json = TF.Nil
+            , _metric = TF.Nil
+            , _metric_limit = TF.Nil
+            , _mysql = TF.Nil
+            , _name = TF.Nil
+            , _notes = TF.Nil
+            , _period = TF.Nil
+            , _postgresql = TF.Nil
+            , _statsd = TF.Nil
+            , _tags = TF.Nil
+            , _target = TF.Nil
+            , _tcp = TF.Nil
+            , _timeout = TF.Nil
+            }
 
 {- | The @circonus_contact_group@ Circonus resource.
 
@@ -190,53 +191,52 @@ data ContactGroupResource = ContactGroupResource {
     {- ^ (Optional) Zero or more @victorops@ attributes may be present to dispatch to <https://login.circonus.com/user/docs/Alerting/ContactGroups#VictorOps> . See below for details on supported attributes. -}
     } deriving (Show, Eq)
 
-contactGroupResource :: TF.Resource TF.Circonus ContactGroupResource
-contactGroupResource =
-    TF.newResource "circonus_contact_group" $
-        ContactGroupResource {
-            _aggregation_window = TF.Absent
-            , _alert_option = TF.Absent
-            , _email = TF.Absent
-            , _http = TF.Absent
-            , _irc = TF.Absent
-            , _long_message = TF.Absent
-            , _long_subject = TF.Absent
-            , _long_summary = TF.Absent
-            , _name = TF.Absent
-            , _pager_duty = TF.Absent
-            , _short_message = TF.Absent
-            , _short_summary = TF.Absent
-            , _slack = TF.Absent
-            , _sms = TF.Absent
-            , _tags = TF.Absent
-            , _victorops = TF.Absent
-            }
-
 instance TF.ToHCL ContactGroupResource where
-    toHCL ContactGroupResource{..} = TF.arguments
-        [ TF.assign "aggregation_window" <$> _aggregation_window
-        , TF.assign "alert_option" <$> _alert_option
-        , TF.assign "email" <$> _email
-        , TF.assign "http" <$> _http
-        , TF.assign "irc" <$> _irc
-        , TF.assign "long_message" <$> _long_message
-        , TF.assign "long_subject" <$> _long_subject
-        , TF.assign "long_summary" <$> _long_summary
-        , TF.assign "name" <$> _name
-        , TF.assign "pager_duty" <$> _pager_duty
-        , TF.assign "short_message" <$> _short_message
-        , TF.assign "short_summary" <$> _short_summary
-        , TF.assign "slack" <$> _slack
-        , TF.assign "sms" <$> _sms
-        , TF.assign "tags" <$> _tags
-        , TF.assign "victorops" <$> _victorops
+    toHCL ContactGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "aggregation_window" <$> TF.argument _aggregation_window
+        , TF.assign "alert_option" <$> TF.argument _alert_option
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "http" <$> TF.argument _http
+        , TF.assign "irc" <$> TF.argument _irc
+        , TF.assign "long_message" <$> TF.argument _long_message
+        , TF.assign "long_subject" <$> TF.argument _long_subject
+        , TF.assign "long_summary" <$> TF.argument _long_summary
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "pager_duty" <$> TF.argument _pager_duty
+        , TF.assign "short_message" <$> TF.argument _short_message
+        , TF.assign "short_summary" <$> TF.argument _short_summary
+        , TF.assign "slack" <$> TF.argument _slack
+        , TF.assign "sms" <$> TF.argument _sms
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "victorops" <$> TF.argument _victorops
         ]
 
 $(TF.makeSchemaLenses
     ''ContactGroupResource
     ''TF.Circonus
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+contactGroupResource :: TF.Resource TF.Circonus ContactGroupResource
+contactGroupResource =
+    TF.newResource "circonus_contact_group" $
+        ContactGroupResource {
+            _aggregation_window = TF.Nil
+            , _alert_option = TF.Nil
+            , _email = TF.Nil
+            , _http = TF.Nil
+            , _irc = TF.Nil
+            , _long_message = TF.Nil
+            , _long_subject = TF.Nil
+            , _long_summary = TF.Nil
+            , _name = TF.Nil
+            , _pager_duty = TF.Nil
+            , _short_message = TF.Nil
+            , _short_summary = TF.Nil
+            , _slack = TF.Nil
+            , _sms = TF.Nil
+            , _tags = TF.Nil
+            , _victorops = TF.Nil
+            }
 
 {- | The @circonus_graph@ Circonus resource.
 
@@ -267,41 +267,40 @@ data GraphResource = GraphResource {
     {- ^ (Optional) A list of tags assigned to this graph. -}
     } deriving (Show, Eq)
 
-graphResource :: TF.Resource TF.Circonus GraphResource
-graphResource =
-    TF.newResource "circonus_graph" $
-        GraphResource {
-            _description = TF.Absent
-            , _graph_style = TF.Absent
-            , _left = TF.Absent
-            , _line_style = TF.Absent
-            , _metric = TF.Absent
-            , _metric_cluster = TF.Absent
-            , _name = TF.Absent
-            , _notes = TF.Absent
-            , _right = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL GraphResource where
-    toHCL GraphResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "graph_style" <$> _graph_style
-        , TF.assign "left" <$> _left
-        , TF.assign "line_style" <$> _line_style
-        , TF.assign "metric" <$> _metric
-        , TF.assign "metric_cluster" <$> _metric_cluster
-        , TF.assign "name" <$> _name
-        , TF.assign "notes" <$> _notes
-        , TF.assign "right" <$> _right
-        , TF.assign "tags" <$> _tags
+    toHCL GraphResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "graph_style" <$> TF.argument _graph_style
+        , TF.assign "left" <$> TF.argument _left
+        , TF.assign "line_style" <$> TF.argument _line_style
+        , TF.assign "metric" <$> TF.argument _metric
+        , TF.assign "metric_cluster" <$> TF.argument _metric_cluster
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "notes" <$> TF.argument _notes
+        , TF.assign "right" <$> TF.argument _right
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''GraphResource
     ''TF.Circonus
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+graphResource :: TF.Resource TF.Circonus GraphResource
+graphResource =
+    TF.newResource "circonus_graph" $
+        GraphResource {
+            _description = TF.Nil
+            , _graph_style = TF.Nil
+            , _left = TF.Nil
+            , _line_style = TF.Nil
+            , _metric = TF.Nil
+            , _metric_cluster = TF.Nil
+            , _name = TF.Nil
+            , _notes = TF.Nil
+            , _right = TF.Nil
+            , _tags = TF.Nil
+            }
 
 {- | The @circonus_metric_cluster@ Circonus resource.
 
@@ -319,29 +318,28 @@ data MetricClusterResource = MetricClusterResource {
     {- ^ (Optional) A list of tags attached to the metric cluster. -}
     } deriving (Show, Eq)
 
-metricClusterResource :: TF.Resource TF.Circonus MetricClusterResource
-metricClusterResource =
-    TF.newResource "circonus_metric_cluster" $
-        MetricClusterResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _query = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL MetricClusterResource where
-    toHCL MetricClusterResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "query" <$> _query
-        , TF.assign "tags" <$> _tags
+    toHCL MetricClusterResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "query" <$> TF.argument _query
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''MetricClusterResource
     ''TF.Circonus
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+metricClusterResource :: TF.Resource TF.Circonus MetricClusterResource
+metricClusterResource =
+    TF.newResource "circonus_metric_cluster" $
+        MetricClusterResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _query = TF.Nil
+            , _tags = TF.Nil
+            }
 
 {- | The @circonus_metric@ Circonus resource.
 
@@ -362,31 +360,30 @@ data MetricResource = MetricResource {
     {- ^ (Optional) The unit of measurement for this @circonus_metric@ . -}
     } deriving (Show, Eq)
 
-metricResource :: TF.Resource TF.Circonus MetricResource
-metricResource =
-    TF.newResource "circonus_metric" $
-        MetricResource {
-            _active = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _type' = TF.Absent
-            , _unit = TF.Absent
-            }
-
 instance TF.ToHCL MetricResource where
-    toHCL MetricResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "type" <$> _type'
-        , TF.assign "unit" <$> _unit
+    toHCL MetricResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "unit" <$> TF.argument _unit
         ]
 
 $(TF.makeSchemaLenses
     ''MetricResource
     ''TF.Circonus
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+metricResource :: TF.Resource TF.Circonus MetricResource
+metricResource =
+    TF.newResource "circonus_metric" $
+        MetricResource {
+            _active = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _type' = TF.Nil
+            , _unit = TF.Nil
+            }
 
 {- | The @circonus_rule_set@ Circonus resource.
 
@@ -412,34 +409,33 @@ data RuleSetResource = RuleSetResource {
     {- ^ (Optional) A list of tags assigned to this rule set. -}
     } deriving (Show, Eq)
 
-ruleSetResource :: TF.Resource TF.Circonus RuleSetResource
-ruleSetResource =
-    TF.newResource "circonus_rule_set" $
-        RuleSetResource {
-            _check = TF.Absent
-            , _if' = TF.Absent
-            , _link = TF.Absent
-            , _metric_name = TF.Absent
-            , _metric_type = TF.Absent
-            , _notes = TF.Absent
-            , _parent = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL RuleSetResource where
-    toHCL RuleSetResource{..} = TF.arguments
-        [ TF.assign "check" <$> _check
-        , TF.assign "if" <$> _if'
-        , TF.assign "link" <$> _link
-        , TF.assign "metric_name" <$> _metric_name
-        , TF.assign "metric_type" <$> _metric_type
-        , TF.assign "notes" <$> _notes
-        , TF.assign "parent" <$> _parent
-        , TF.assign "tags" <$> _tags
+    toHCL RuleSetResource{..} = TF.block $ catMaybes
+        [ TF.assign "check" <$> TF.argument _check
+        , TF.assign "if" <$> TF.argument _if'
+        , TF.assign "link" <$> TF.argument _link
+        , TF.assign "metric_name" <$> TF.argument _metric_name
+        , TF.assign "metric_type" <$> TF.argument _metric_type
+        , TF.assign "notes" <$> TF.argument _notes
+        , TF.assign "parent" <$> TF.argument _parent
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''RuleSetResource
     ''TF.Circonus
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ruleSetResource :: TF.Resource TF.Circonus RuleSetResource
+ruleSetResource =
+    TF.newResource "circonus_rule_set" $
+        RuleSetResource {
+            _check = TF.Nil
+            , _if' = TF.Nil
+            , _link = TF.Nil
+            , _metric_name = TF.Nil
+            , _metric_type = TF.Nil
+            , _notes = TF.Nil
+            , _parent = TF.Nil
+            , _tags = TF.Nil
+            }

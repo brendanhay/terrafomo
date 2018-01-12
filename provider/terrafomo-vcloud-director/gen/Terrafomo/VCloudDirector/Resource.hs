@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
-import qualified Terrafomo.VCloudDirector  as TF
+import qualified Terrafomo.Syntax.HCL              as TF
+import qualified Terrafomo.Syntax.Resource         as TF
+import qualified Terrafomo.Syntax.Resource         as TF
+import qualified Terrafomo.Syntax.Variable         as TF
+import qualified Terrafomo.TH                      as TF
+import qualified Terrafomo.VCloudDirector.Provider as TF
+import qualified Terrafomo.VCloudDirector.Types    as TF
 
 {- | The @vcd_dnat@ VCloudDirector resource.
 
@@ -53,29 +55,28 @@ data DnatResource = DnatResource {
     {- ^ (Required) The port number to map -}
     } deriving (Show, Eq)
 
-dnatResource :: TF.Resource TF.VCloudDirector DnatResource
-dnatResource =
-    TF.newResource "vcd_dnat" $
-        DnatResource {
-            _edge_gateway = TF.Absent
-            , _external_ip = TF.Absent
-            , _internal_ip = TF.Absent
-            , _port = TF.Absent
-            }
-
 instance TF.ToHCL DnatResource where
-    toHCL DnatResource{..} = TF.arguments
-        [ TF.assign "edge_gateway" <$> _edge_gateway
-        , TF.assign "external_ip" <$> _external_ip
-        , TF.assign "internal_ip" <$> _internal_ip
-        , TF.assign "port" <$> _port
+    toHCL DnatResource{..} = TF.block $ catMaybes
+        [ TF.assign "edge_gateway" <$> TF.argument _edge_gateway
+        , TF.assign "external_ip" <$> TF.argument _external_ip
+        , TF.assign "internal_ip" <$> TF.argument _internal_ip
+        , TF.assign "port" <$> TF.argument _port
         ]
 
 $(TF.makeSchemaLenses
     ''DnatResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnatResource :: TF.Resource TF.VCloudDirector DnatResource
+dnatResource =
+    TF.newResource "vcd_dnat" $
+        DnatResource {
+            _edge_gateway = TF.Nil
+            , _external_ip = TF.Nil
+            , _internal_ip = TF.Nil
+            , _port = TF.Nil
+            }
 
 {- | The @vcd_edgegateway_vpn@ VCloudDirector resource.
 
@@ -109,45 +110,44 @@ data EdgegatewayVpnResource = EdgegatewayVpnResource {
     {- ^ (Required) - Shared Secret -}
     } deriving (Show, Eq)
 
-edgegatewayVpnResource :: TF.Resource TF.VCloudDirector EdgegatewayVpnResource
-edgegatewayVpnResource =
-    TF.newResource "vcd_edgegateway_vpn" $
-        EdgegatewayVpnResource {
-            _description = TF.Absent
-            , _edge_gateway = TF.Absent
-            , _encryption_protocol = TF.Absent
-            , _local_id = TF.Absent
-            , _local_ip_address = TF.Absent
-            , _local_subnets = TF.Absent
-            , _mtu = TF.Absent
-            , _name = TF.Absent
-            , _peer_id = TF.Absent
-            , _peer_ip_address = TF.Absent
-            , _peer_subnets = TF.Absent
-            , _shared_secret = TF.Absent
-            }
-
 instance TF.ToHCL EdgegatewayVpnResource where
-    toHCL EdgegatewayVpnResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "edge_gateway" <$> _edge_gateway
-        , TF.assign "encryption_protocol" <$> _encryption_protocol
-        , TF.assign "local_id" <$> _local_id
-        , TF.assign "local_ip_address" <$> _local_ip_address
-        , TF.assign "local_subnets" <$> _local_subnets
-        , TF.assign "mtu" <$> _mtu
-        , TF.assign "name" <$> _name
-        , TF.assign "peer_id" <$> _peer_id
-        , TF.assign "peer_ip_address" <$> _peer_ip_address
-        , TF.assign "peer_subnets" <$> _peer_subnets
-        , TF.assign "shared_secret" <$> _shared_secret
+    toHCL EdgegatewayVpnResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "edge_gateway" <$> TF.argument _edge_gateway
+        , TF.assign "encryption_protocol" <$> TF.argument _encryption_protocol
+        , TF.assign "local_id" <$> TF.argument _local_id
+        , TF.assign "local_ip_address" <$> TF.argument _local_ip_address
+        , TF.assign "local_subnets" <$> TF.argument _local_subnets
+        , TF.assign "mtu" <$> TF.argument _mtu
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "peer_id" <$> TF.argument _peer_id
+        , TF.assign "peer_ip_address" <$> TF.argument _peer_ip_address
+        , TF.assign "peer_subnets" <$> TF.argument _peer_subnets
+        , TF.assign "shared_secret" <$> TF.argument _shared_secret
         ]
 
 $(TF.makeSchemaLenses
     ''EdgegatewayVpnResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+edgegatewayVpnResource :: TF.Resource TF.VCloudDirector EdgegatewayVpnResource
+edgegatewayVpnResource =
+    TF.newResource "vcd_edgegateway_vpn" $
+        EdgegatewayVpnResource {
+            _description = TF.Nil
+            , _edge_gateway = TF.Nil
+            , _encryption_protocol = TF.Nil
+            , _local_id = TF.Nil
+            , _local_ip_address = TF.Nil
+            , _local_subnets = TF.Nil
+            , _mtu = TF.Nil
+            , _name = TF.Nil
+            , _peer_id = TF.Nil
+            , _peer_ip_address = TF.Nil
+            , _peer_subnets = TF.Nil
+            , _shared_secret = TF.Nil
+            }
 
 {- | The @vcd_firewall_rules@ VCloudDirector resource.
 
@@ -163,27 +163,26 @@ data FirewallRulesResource = FirewallRulesResource {
     {- ^ (Optional) Configures a firewall rule; see <#rules> below for details. -}
     } deriving (Show, Eq)
 
-firewallRulesResource :: TF.Resource TF.VCloudDirector FirewallRulesResource
-firewallRulesResource =
-    TF.newResource "vcd_firewall_rules" $
-        FirewallRulesResource {
-            _default_action = TF.Absent
-            , _edge_gateway = TF.Absent
-            , _rule = TF.Absent
-            }
-
 instance TF.ToHCL FirewallRulesResource where
-    toHCL FirewallRulesResource{..} = TF.arguments
-        [ TF.assign "default_action" <$> _default_action
-        , TF.assign "edge_gateway" <$> _edge_gateway
-        , TF.assign "rule" <$> _rule
+    toHCL FirewallRulesResource{..} = TF.block $ catMaybes
+        [ TF.assign "default_action" <$> TF.argument _default_action
+        , TF.assign "edge_gateway" <$> TF.argument _edge_gateway
+        , TF.assign "rule" <$> TF.argument _rule
         ]
 
 $(TF.makeSchemaLenses
     ''FirewallRulesResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+firewallRulesResource :: TF.Resource TF.VCloudDirector FirewallRulesResource
+firewallRulesResource =
+    TF.newResource "vcd_firewall_rules" $
+        FirewallRulesResource {
+            _default_action = TF.Nil
+            , _edge_gateway = TF.Nil
+            , _rule = TF.Nil
+            }
 
 {- | The @vcd_network@ VCloudDirector resource.
 
@@ -213,41 +212,40 @@ data NetworkResource = NetworkResource {
     {- ^ (Optional) A range of IPs permitted to be used as static IPs for virtual machines; see <#ip-pools> below for details. -}
     } deriving (Show, Eq)
 
-networkResource :: TF.Resource TF.VCloudDirector NetworkResource
-networkResource =
-    TF.newResource "vcd_network" $
-        NetworkResource {
-            _dhcp_pool = TF.Absent
-            , _dns1 = TF.Absent
-            , _dns2 = TF.Absent
-            , _dns_suffix = TF.Absent
-            , _edge_gateway = TF.Absent
-            , _gateway = TF.Absent
-            , _name = TF.Absent
-            , _netmask = TF.Absent
-            , _shared = TF.Absent
-            , _static_ip_pool = TF.Absent
-            }
-
 instance TF.ToHCL NetworkResource where
-    toHCL NetworkResource{..} = TF.arguments
-        [ TF.assign "dhcp_pool" <$> _dhcp_pool
-        , TF.assign "dns1" <$> _dns1
-        , TF.assign "dns2" <$> _dns2
-        , TF.assign "dns_suffix" <$> _dns_suffix
-        , TF.assign "edge_gateway" <$> _edge_gateway
-        , TF.assign "gateway" <$> _gateway
-        , TF.assign "name" <$> _name
-        , TF.assign "netmask" <$> _netmask
-        , TF.assign "shared" <$> _shared
-        , TF.assign "static_ip_pool" <$> _static_ip_pool
+    toHCL NetworkResource{..} = TF.block $ catMaybes
+        [ TF.assign "dhcp_pool" <$> TF.argument _dhcp_pool
+        , TF.assign "dns1" <$> TF.argument _dns1
+        , TF.assign "dns2" <$> TF.argument _dns2
+        , TF.assign "dns_suffix" <$> TF.argument _dns_suffix
+        , TF.assign "edge_gateway" <$> TF.argument _edge_gateway
+        , TF.assign "gateway" <$> TF.argument _gateway
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "netmask" <$> TF.argument _netmask
+        , TF.assign "shared" <$> TF.argument _shared
+        , TF.assign "static_ip_pool" <$> TF.argument _static_ip_pool
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkResource :: TF.Resource TF.VCloudDirector NetworkResource
+networkResource =
+    TF.newResource "vcd_network" $
+        NetworkResource {
+            _dhcp_pool = TF.Nil
+            , _dns1 = TF.Nil
+            , _dns2 = TF.Nil
+            , _dns_suffix = TF.Nil
+            , _edge_gateway = TF.Nil
+            , _gateway = TF.Nil
+            , _name = TF.Nil
+            , _netmask = TF.Nil
+            , _shared = TF.Nil
+            , _static_ip_pool = TF.Nil
+            }
 
 {- | The @vcd_snat@ VCloudDirector resource.
 
@@ -263,27 +261,26 @@ data SnatResource = SnatResource {
     {- ^ (Required) The IP or IP Range of the VM(s) to map from -}
     } deriving (Show, Eq)
 
-snatResource :: TF.Resource TF.VCloudDirector SnatResource
-snatResource =
-    TF.newResource "vcd_snat" $
-        SnatResource {
-            _edge_gateway = TF.Absent
-            , _external_ip = TF.Absent
-            , _internal_ip = TF.Absent
-            }
-
 instance TF.ToHCL SnatResource where
-    toHCL SnatResource{..} = TF.arguments
-        [ TF.assign "edge_gateway" <$> _edge_gateway
-        , TF.assign "external_ip" <$> _external_ip
-        , TF.assign "internal_ip" <$> _internal_ip
+    toHCL SnatResource{..} = TF.block $ catMaybes
+        [ TF.assign "edge_gateway" <$> TF.argument _edge_gateway
+        , TF.assign "external_ip" <$> TF.argument _external_ip
+        , TF.assign "internal_ip" <$> TF.argument _internal_ip
         ]
 
 $(TF.makeSchemaLenses
     ''SnatResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+snatResource :: TF.Resource TF.VCloudDirector SnatResource
+snatResource =
+    TF.newResource "vcd_snat" $
+        SnatResource {
+            _edge_gateway = TF.Nil
+            , _external_ip = TF.Nil
+            , _internal_ip = TF.Nil
+            }
 
 {- | The @vcd_vapp@ VCloudDirector resource.
 
@@ -315,43 +312,42 @@ data VappResource = VappResource {
     {- ^ (Optional) The name of the vApp Template to use -}
     } deriving (Show, Eq)
 
-vappResource :: TF.Resource TF.VCloudDirector VappResource
-vappResource =
-    TF.newResource "vcd_vapp" $
-        VappResource {
-            _catalog_name = TF.Absent
-            , _cpus = TF.Absent
-            , _initscript = TF.Absent
-            , _ip = TF.Absent
-            , _memory = TF.Absent
-            , _metadata = TF.Absent
-            , _name = TF.Absent
-            , _network_name = TF.Absent
-            , _ovf = TF.Absent
-            , _power_on = TF.Absent
-            , _template_name = TF.Absent
-            }
-
 instance TF.ToHCL VappResource where
-    toHCL VappResource{..} = TF.arguments
-        [ TF.assign "catalog_name" <$> _catalog_name
-        , TF.assign "cpus" <$> _cpus
-        , TF.assign "initscript" <$> _initscript
-        , TF.assign "ip" <$> _ip
-        , TF.assign "memory" <$> _memory
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "name" <$> _name
-        , TF.assign "network_name" <$> _network_name
-        , TF.assign "ovf" <$> _ovf
-        , TF.assign "power_on" <$> _power_on
-        , TF.assign "template_name" <$> _template_name
+    toHCL VappResource{..} = TF.block $ catMaybes
+        [ TF.assign "catalog_name" <$> TF.argument _catalog_name
+        , TF.assign "cpus" <$> TF.argument _cpus
+        , TF.assign "initscript" <$> TF.argument _initscript
+        , TF.assign "ip" <$> TF.argument _ip
+        , TF.assign "memory" <$> TF.argument _memory
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_name" <$> TF.argument _network_name
+        , TF.assign "ovf" <$> TF.argument _ovf
+        , TF.assign "power_on" <$> TF.argument _power_on
+        , TF.assign "template_name" <$> TF.argument _template_name
         ]
 
 $(TF.makeSchemaLenses
     ''VappResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vappResource :: TF.Resource TF.VCloudDirector VappResource
+vappResource =
+    TF.newResource "vcd_vapp" $
+        VappResource {
+            _catalog_name = TF.Nil
+            , _cpus = TF.Nil
+            , _initscript = TF.Nil
+            , _ip = TF.Nil
+            , _memory = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _network_name = TF.Nil
+            , _ovf = TF.Nil
+            , _power_on = TF.Nil
+            , _template_name = TF.Nil
+            }
 
 {- | The @vcd_vapp_vm@ VCloudDirector resource.
 
@@ -382,36 +378,35 @@ data VappVmResource = VappVmResource {
     {- ^ (Required) The vApp this VM should belong to. -}
     } deriving (Show, Eq)
 
-vappVmResource :: TF.Resource TF.VCloudDirector VappVmResource
-vappVmResource =
-    TF.newResource "vcd_vapp_vm" $
-        VappVmResource {
-            _catalog_name = TF.Absent
-            , _cpus = TF.Absent
-            , _initscript = TF.Absent
-            , _ip = TF.Absent
-            , _memory = TF.Absent
-            , _name = TF.Absent
-            , _power_on = TF.Absent
-            , _template_name = TF.Absent
-            , _vapp_name = TF.Absent
-            }
-
 instance TF.ToHCL VappVmResource where
-    toHCL VappVmResource{..} = TF.arguments
-        [ TF.assign "catalog_name" <$> _catalog_name
-        , TF.assign "cpus" <$> _cpus
-        , TF.assign "initscript" <$> _initscript
-        , TF.assign "ip" <$> _ip
-        , TF.assign "memory" <$> _memory
-        , TF.assign "name" <$> _name
-        , TF.assign "power_on" <$> _power_on
-        , TF.assign "template_name" <$> _template_name
-        , TF.assign "vapp_name" <$> _vapp_name
+    toHCL VappVmResource{..} = TF.block $ catMaybes
+        [ TF.assign "catalog_name" <$> TF.argument _catalog_name
+        , TF.assign "cpus" <$> TF.argument _cpus
+        , TF.assign "initscript" <$> TF.argument _initscript
+        , TF.assign "ip" <$> TF.argument _ip
+        , TF.assign "memory" <$> TF.argument _memory
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "power_on" <$> TF.argument _power_on
+        , TF.assign "template_name" <$> TF.argument _template_name
+        , TF.assign "vapp_name" <$> TF.argument _vapp_name
         ]
 
 $(TF.makeSchemaLenses
     ''VappVmResource
     ''TF.VCloudDirector
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vappVmResource :: TF.Resource TF.VCloudDirector VappVmResource
+vappVmResource =
+    TF.newResource "vcd_vapp_vm" $
+        VappVmResource {
+            _catalog_name = TF.Nil
+            , _cpus = TF.Nil
+            , _initscript = TF.Nil
+            , _ip = TF.Nil
+            , _memory = TF.Nil
+            , _name = TF.Nil
+            , _power_on = TF.Nil
+            , _template_name = TF.Nil
+            , _vapp_name = TF.Nil
+            }

@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Nomad.Provider where
+module Terrafomo.Nomad.Provider
+    ( Nomad    (..)
+    , HasNomad (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Nomad.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -32,8 +45,8 @@ import qualified Terrafomo.TH              as TF
 provider exposes resources to interact with a Nomad cluster. Use the
 navigation to the left to read about the available resources.
 -}
-data Nomad = Nomad
-    { _address   :: !(TF.Argument Text)
+data Nomad = Nomad {
+      _address   :: !(TF.Argument Text)
     {- ^  @(string: "http://127.0.0.1:4646")@ - The HTTP(S) API address of the Nomad agent. This must include the leading protocol (e.g. @https://@ ). This can also be specified as the @NOMAD_ADDR@ environment variable. -}
     , _ca_file   :: !(TF.Argument Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate authority used to verify the remote agent's certificate. This can also be specified as the @NOMAD_CACERT@ environment variable. -}
@@ -50,13 +63,39 @@ data Nomad = Nomad
 instance Hashable Nomad
 
 instance TF.ToHCL Nomad where
-    toHCL x = TF.arguments
-        [ TF.assign "address" <$> _address x
-        , TF.assign "ca_file" <$> _ca_file x
-        , TF.assign "cert_file" <$> _cert_file x
-        , TF.assign "key_file" <$> _key_file x
-        , TF.assign "region" <$> _region x
-        , TF.assign "secret_id" <$> _secret_id x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Nomad))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "address" <$> TF.argument (_address x)
+            , TF.assign "ca_file" <$> TF.argument (_ca_file x)
+            , TF.assign "cert_file" <$> TF.argument (_cert_file x)
+            , TF.assign "key_file" <$> TF.argument (_key_file x)
+            , TF.assign "region" <$> TF.argument (_region x)
+            , TF.assign "secret_id" <$> TF.argument (_secret_id x)
+            ]
 
-$(TF.makeClassy ''Nomad)
+instance Semigroup Nomad where
+    (<>) a b = Nomad {
+          _address = on (<>) _address a b
+        , _ca_file = on (<>) _ca_file a b
+        , _cert_file = on (<>) _cert_file a b
+        , _key_file = on (<>) _key_file a b
+        , _region = on (<>) _region a b
+        , _secret_id = on (<>) _secret_id a b
+        }
+
+instance Monoid Nomad where
+    mappend = (<>)
+    mempty  = Nomad {
+            _address = TF.Nil
+          , _ca_file = TF.Nil
+          , _cert_file = TF.Nil
+          , _key_file = TF.Nil
+          , _region = TF.Nil
+          , _secret_id = TF.Nil
+        }
+
+instance TF.IsProvider Nomad where
+    type ProviderName Nomad = "nomad"
+
+$(TF.makeProviderLenses ''Nomad)

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.LogicMonitor    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.LogicMonitor.Provider as TF
+import qualified Terrafomo.LogicMonitor.Types    as TF
+import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.TH                    as TF
 
 {- | The @logicmonitor_collector_group@ LogicMonitor resource.
 
@@ -48,25 +50,24 @@ data CollectorGroupResource = CollectorGroupResource {
     {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq)
 
-collectorGroupResource :: TF.Resource TF.LogicMonitor CollectorGroupResource
-collectorGroupResource =
-    TF.newResource "logicmonitor_collector_group" $
-        CollectorGroupResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL CollectorGroupResource where
-    toHCL CollectorGroupResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
+    toHCL CollectorGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''CollectorGroupResource
     ''TF.LogicMonitor
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+collectorGroupResource :: TF.Resource TF.LogicMonitor CollectorGroupResource
+collectorGroupResource =
+    TF.newResource "logicmonitor_collector_group" $
+        CollectorGroupResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @logicmonitor_device_group@ LogicMonitor resource.
 
@@ -88,33 +89,32 @@ data DeviceGroupResource = DeviceGroupResource {
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
-deviceGroupResource :: TF.Resource TF.LogicMonitor DeviceGroupResource
-deviceGroupResource =
-    TF.newResource "logicmonitor_device_group" $
-        DeviceGroupResource {
-            _applies_to = TF.Absent
-            , _description = TF.Absent
-            , _disable_alerting = TF.Absent
-            , _name = TF.Absent
-            , _parent_id = TF.Absent
-            , _properties = TF.Absent
-            }
-
 instance TF.ToHCL DeviceGroupResource where
-    toHCL DeviceGroupResource{..} = TF.arguments
-        [ TF.assign "applies_to" <$> _applies_to
-        , TF.assign "description" <$> _description
-        , TF.assign "disable_alerting" <$> _disable_alerting
-        , TF.assign "name" <$> _name
-        , TF.assign "parent_id" <$> _parent_id
-        , TF.assign "properties" <$> _properties
+    toHCL DeviceGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "applies_to" <$> TF.argument _applies_to
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "disable_alerting" <$> TF.argument _disable_alerting
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "parent_id" <$> TF.argument _parent_id
+        , TF.assign "properties" <$> TF.argument _properties
         ]
 
 $(TF.makeSchemaLenses
     ''DeviceGroupResource
     ''TF.LogicMonitor
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+deviceGroupResource :: TF.Resource TF.LogicMonitor DeviceGroupResource
+deviceGroupResource =
+    TF.newResource "logicmonitor_device_group" $
+        DeviceGroupResource {
+            _applies_to = TF.Nil
+            , _description = TF.Nil
+            , _disable_alerting = TF.Nil
+            , _name = TF.Nil
+            , _parent_id = TF.Nil
+            , _properties = TF.Nil
+            }
 
 {- | The @logicmonitor_device@ LogicMonitor resource.
 
@@ -136,30 +136,29 @@ data DeviceResource = DeviceResource {
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
-deviceResource :: TF.Resource TF.LogicMonitor DeviceResource
-deviceResource =
-    TF.newResource "logicmonitor_device" $
-        DeviceResource {
-            _collector = TF.Absent
-            , _disable_alerting = TF.Absent
-            , _display_name = TF.Absent
-            , _hostgroup_id = TF.Absent
-            , _ip_addr = TF.Absent
-            , _properties = TF.Absent
-            }
-
 instance TF.ToHCL DeviceResource where
-    toHCL DeviceResource{..} = TF.arguments
-        [ TF.assign "collector" <$> _collector
-        , TF.assign "disable_alerting" <$> _disable_alerting
-        , TF.assign "display_name" <$> _display_name
-        , TF.assign "hostgroup_id" <$> _hostgroup_id
-        , TF.assign "ip_addr" <$> _ip_addr
-        , TF.assign "properties" <$> _properties
+    toHCL DeviceResource{..} = TF.block $ catMaybes
+        [ TF.assign "collector" <$> TF.argument _collector
+        , TF.assign "disable_alerting" <$> TF.argument _disable_alerting
+        , TF.assign "display_name" <$> TF.argument _display_name
+        , TF.assign "hostgroup_id" <$> TF.argument _hostgroup_id
+        , TF.assign "ip_addr" <$> TF.argument _ip_addr
+        , TF.assign "properties" <$> TF.argument _properties
         ]
 
 $(TF.makeSchemaLenses
     ''DeviceResource
     ''TF.LogicMonitor
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+deviceResource :: TF.Resource TF.LogicMonitor DeviceResource
+deviceResource =
+    TF.newResource "logicmonitor_device" $
+        DeviceResource {
+            _collector = TF.Nil
+            , _disable_alerting = TF.Nil
+            , _display_name = TF.Nil
+            , _hostgroup_id = TF.Nil
+            , _ip_addr = TF.Nil
+            , _properties = TF.Nil
+            }

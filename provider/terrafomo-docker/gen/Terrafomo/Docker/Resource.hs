@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Docker          as TF
+import qualified Terrafomo.Docker.Provider as TF
+import qualified Terrafomo.Docker.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -107,85 +109,84 @@ data ContainerResource = ContainerResource {
     {- ^ (Optional, block) See <#volumes> below for details. -}
     } deriving (Show, Eq)
 
-containerResource :: TF.Resource TF.Docker ContainerResource
-containerResource =
-    TF.newResource "docker_container" $
-        ContainerResource {
-            _capabilities = TF.Absent
-            , _command = TF.Absent
-            , _cpu_shares = TF.Absent
-            , _destroy_grace_seconds = TF.Absent
-            , _dns = TF.Absent
-            , _dns_opts = TF.Absent
-            , _dns_search = TF.Absent
-            , _domainname = TF.Absent
-            , _entrypoint = TF.Absent
-            , _env = TF.Absent
-            , _host = TF.Absent
-            , _hostname = TF.Absent
-            , _image = TF.Absent
-            , _labels = TF.Absent
-            , _links = TF.Absent
-            , _log_driver = TF.Absent
-            , _log_opts = TF.Absent
-            , _max_retry_count = TF.Absent
-            , _memory = TF.Absent
-            , _memory_swap = TF.Absent
-            , _must_run = TF.Absent
-            , _name = TF.Absent
-            , _network_alias = TF.Absent
-            , _network_mode = TF.Absent
-            , _networks = TF.Absent
-            , _ports = TF.Absent
-            , _privileged = TF.Absent
-            , _publish_all_ports = TF.Absent
-            , _restart = TF.Absent
-            , _upload = TF.Absent
-            , _user = TF.Absent
-            , _volumes = TF.Absent
-            }
-
 instance TF.ToHCL ContainerResource where
-    toHCL ContainerResource{..} = TF.arguments
-        [ TF.assign "capabilities" <$> _capabilities
-        , TF.assign "command" <$> _command
-        , TF.assign "cpu_shares" <$> _cpu_shares
-        , TF.assign "destroy_grace_seconds" <$> _destroy_grace_seconds
-        , TF.assign "dns" <$> _dns
-        , TF.assign "dns_opts" <$> _dns_opts
-        , TF.assign "dns_search" <$> _dns_search
-        , TF.assign "domainname" <$> _domainname
-        , TF.assign "entrypoint" <$> _entrypoint
-        , TF.assign "env" <$> _env
-        , TF.assign "host" <$> _host
-        , TF.assign "hostname" <$> _hostname
-        , TF.assign "image" <$> _image
-        , TF.assign "labels" <$> _labels
-        , TF.assign "links" <$> _links
-        , TF.assign "log_driver" <$> _log_driver
-        , TF.assign "log_opts" <$> _log_opts
-        , TF.assign "max_retry_count" <$> _max_retry_count
-        , TF.assign "memory" <$> _memory
-        , TF.assign "memory_swap" <$> _memory_swap
-        , TF.assign "must_run" <$> _must_run
-        , TF.assign "name" <$> _name
-        , TF.assign "network_alias" <$> _network_alias
-        , TF.assign "network_mode" <$> _network_mode
-        , TF.assign "networks" <$> _networks
-        , TF.assign "ports" <$> _ports
-        , TF.assign "privileged" <$> _privileged
-        , TF.assign "publish_all_ports" <$> _publish_all_ports
-        , TF.assign "restart" <$> _restart
-        , TF.assign "upload" <$> _upload
-        , TF.assign "user" <$> _user
-        , TF.assign "volumes" <$> _volumes
+    toHCL ContainerResource{..} = TF.block $ catMaybes
+        [ TF.assign "capabilities" <$> TF.argument _capabilities
+        , TF.assign "command" <$> TF.argument _command
+        , TF.assign "cpu_shares" <$> TF.argument _cpu_shares
+        , TF.assign "destroy_grace_seconds" <$> TF.argument _destroy_grace_seconds
+        , TF.assign "dns" <$> TF.argument _dns
+        , TF.assign "dns_opts" <$> TF.argument _dns_opts
+        , TF.assign "dns_search" <$> TF.argument _dns_search
+        , TF.assign "domainname" <$> TF.argument _domainname
+        , TF.assign "entrypoint" <$> TF.argument _entrypoint
+        , TF.assign "env" <$> TF.argument _env
+        , TF.assign "host" <$> TF.argument _host
+        , TF.assign "hostname" <$> TF.argument _hostname
+        , TF.assign "image" <$> TF.argument _image
+        , TF.assign "labels" <$> TF.argument _labels
+        , TF.assign "links" <$> TF.argument _links
+        , TF.assign "log_driver" <$> TF.argument _log_driver
+        , TF.assign "log_opts" <$> TF.argument _log_opts
+        , TF.assign "max_retry_count" <$> TF.argument _max_retry_count
+        , TF.assign "memory" <$> TF.argument _memory
+        , TF.assign "memory_swap" <$> TF.argument _memory_swap
+        , TF.assign "must_run" <$> TF.argument _must_run
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_alias" <$> TF.argument _network_alias
+        , TF.assign "network_mode" <$> TF.argument _network_mode
+        , TF.assign "networks" <$> TF.argument _networks
+        , TF.assign "ports" <$> TF.argument _ports
+        , TF.assign "privileged" <$> TF.argument _privileged
+        , TF.assign "publish_all_ports" <$> TF.argument _publish_all_ports
+        , TF.assign "restart" <$> TF.argument _restart
+        , TF.assign "upload" <$> TF.argument _upload
+        , TF.assign "user" <$> TF.argument _user
+        , TF.assign "volumes" <$> TF.argument _volumes
         ]
 
 $(TF.makeSchemaLenses
     ''ContainerResource
     ''TF.Docker
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+containerResource :: TF.Resource TF.Docker ContainerResource
+containerResource =
+    TF.newResource "docker_container" $
+        ContainerResource {
+            _capabilities = TF.Nil
+            , _command = TF.Nil
+            , _cpu_shares = TF.Nil
+            , _destroy_grace_seconds = TF.Nil
+            , _dns = TF.Nil
+            , _dns_opts = TF.Nil
+            , _dns_search = TF.Nil
+            , _domainname = TF.Nil
+            , _entrypoint = TF.Nil
+            , _env = TF.Nil
+            , _host = TF.Nil
+            , _hostname = TF.Nil
+            , _image = TF.Nil
+            , _labels = TF.Nil
+            , _links = TF.Nil
+            , _log_driver = TF.Nil
+            , _log_opts = TF.Nil
+            , _max_retry_count = TF.Nil
+            , _memory = TF.Nil
+            , _memory_swap = TF.Nil
+            , _must_run = TF.Nil
+            , _name = TF.Nil
+            , _network_alias = TF.Nil
+            , _network_mode = TF.Nil
+            , _networks = TF.Nil
+            , _ports = TF.Nil
+            , _privileged = TF.Nil
+            , _publish_all_ports = TF.Nil
+            , _restart = TF.Nil
+            , _upload = TF.Nil
+            , _user = TF.Nil
+            , _volumes = TF.Nil
+            }
 
 {- | The @docker_image@ Docker resource.
 
@@ -207,30 +208,29 @@ data ImageResource = ImageResource {
     {- ^ (string) - The ID of the image. -}
     } deriving (Show, Eq)
 
-imageResource :: TF.Resource TF.Docker ImageResource
-imageResource =
-    TF.newResource "docker_image" $
-        ImageResource {
-            _keep_locally = TF.Absent
-            , _name = TF.Absent
-            , _pull_trigger = TF.Absent
-            , _pull_triggers = TF.Absent
-            , _computed_latest = TF.Computed "latest"
-            }
-
 instance TF.ToHCL ImageResource where
-    toHCL ImageResource{..} = TF.arguments
-        [ TF.assign "keep_locally" <$> _keep_locally
-        , TF.assign "name" <$> _name
-        , TF.assign "pull_trigger" <$> _pull_trigger
-        , TF.assign "pull_triggers" <$> _pull_triggers
+    toHCL ImageResource{..} = TF.block $ catMaybes
+        [ TF.assign "keep_locally" <$> TF.argument _keep_locally
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "pull_trigger" <$> TF.argument _pull_trigger
+        , TF.assign "pull_triggers" <$> TF.argument _pull_triggers
         ]
 
 $(TF.makeSchemaLenses
     ''ImageResource
     ''TF.Docker
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+imageResource :: TF.Resource TF.Docker ImageResource
+imageResource =
+    TF.newResource "docker_image" $
+        ImageResource {
+            _keep_locally = TF.Nil
+            , _name = TF.Nil
+            , _pull_trigger = TF.Nil
+            , _pull_triggers = TF.Nil
+            , _computed_latest = TF.Compute "latest"
+            }
 
 {- | The @docker_network@ Docker resource.
 
@@ -255,35 +255,34 @@ data NetworkResource = NetworkResource {
     {- ^ (Optional, map of strings) Network specific options to be used by the drivers. -}
     } deriving (Show, Eq)
 
-networkResource :: TF.Resource TF.Docker NetworkResource
-networkResource =
-    TF.newResource "docker_network" $
-        NetworkResource {
-            _check_duplicate = TF.Absent
-            , _driver = TF.Absent
-            , _internal = TF.Absent
-            , _ipam_config = TF.Absent
-            , _ipam_driver = TF.Absent
-            , _name = TF.Absent
-            , _options = TF.Absent
-            }
-
 instance TF.ToHCL NetworkResource where
-    toHCL NetworkResource{..} = TF.arguments
-        [ TF.assign "check_duplicate" <$> _check_duplicate
-        , TF.assign "driver" <$> _driver
-        , TF.assign "internal" <$> _internal
-        , TF.assign "ipam_config" <$> _ipam_config
-        , TF.assign "ipam_driver" <$> _ipam_driver
-        , TF.assign "name" <$> _name
-        , TF.assign "options" <$> _options
+    toHCL NetworkResource{..} = TF.block $ catMaybes
+        [ TF.assign "check_duplicate" <$> TF.argument _check_duplicate
+        , TF.assign "driver" <$> TF.argument _driver
+        , TF.assign "internal" <$> TF.argument _internal
+        , TF.assign "ipam_config" <$> TF.argument _ipam_config
+        , TF.assign "ipam_driver" <$> TF.argument _ipam_driver
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "options" <$> TF.argument _options
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkResource
     ''TF.Docker
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkResource :: TF.Resource TF.Docker NetworkResource
+networkResource =
+    TF.newResource "docker_network" $
+        NetworkResource {
+            _check_duplicate = TF.Nil
+            , _driver = TF.Nil
+            , _internal = TF.Nil
+            , _ipam_config = TF.Nil
+            , _ipam_driver = TF.Nil
+            , _name = TF.Nil
+            , _options = TF.Nil
+            }
 
 {- | The @docker_volume@ Docker resource.
 
@@ -302,25 +301,24 @@ data VolumeResource = VolumeResource {
     {- ^ (string) - The mountpoint of the volume. -}
     } deriving (Show, Eq)
 
-volumeResource :: TF.Resource TF.Docker VolumeResource
-volumeResource =
-    TF.newResource "docker_volume" $
-        VolumeResource {
-            _driver = TF.Absent
-            , _driver_opts = TF.Absent
-            , _name = TF.Absent
-            , _computed_mountpoint = TF.Computed "mountpoint"
-            }
-
 instance TF.ToHCL VolumeResource where
-    toHCL VolumeResource{..} = TF.arguments
-        [ TF.assign "driver" <$> _driver
-        , TF.assign "driver_opts" <$> _driver_opts
-        , TF.assign "name" <$> _name
+    toHCL VolumeResource{..} = TF.block $ catMaybes
+        [ TF.assign "driver" <$> TF.argument _driver
+        , TF.assign "driver_opts" <$> TF.argument _driver_opts
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''VolumeResource
     ''TF.Docker
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+volumeResource :: TF.Resource TF.Docker VolumeResource
+volumeResource =
+    TF.newResource "docker_volume" $
+        VolumeResource {
+            _driver = TF.Nil
+            , _driver_opts = TF.Nil
+            , _name = TF.Nil
+            , _computed_mountpoint = TF.Compute "mountpoint"
+            }

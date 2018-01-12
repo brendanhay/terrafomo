@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Kubernetes        as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.Kubernetes.Provider as TF
+import qualified Terrafomo.Kubernetes.Types    as TF
+import qualified Terrafomo.Syntax.DataSource   as TF
+import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.TH                  as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 
@@ -47,23 +49,22 @@ data ServiceDataSource = ServiceDataSource {
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-serviceDataSource :: TF.DataSource TF.Kubernetes ServiceDataSource
-serviceDataSource =
-    TF.newDataSource "kubernetes_service" $
-        ServiceDataSource {
-            _metadata = TF.Absent
-            }
-
 instance TF.ToHCL ServiceDataSource where
-    toHCL ServiceDataSource{..} = TF.arguments
-        [ TF.assign "metadata" <$> _metadata
+    toHCL ServiceDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "metadata" <$> TF.argument _metadata
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceDataSource
     ''TF.Kubernetes
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+serviceDataSource :: TF.DataSource TF.Kubernetes ServiceDataSource
+serviceDataSource =
+    TF.newDataSource "kubernetes_service" $
+        ServiceDataSource {
+            _metadata = TF.Nil
+            }
 
 {- | The @kubernetes_storage_class@ Kubernetes datasource.
 
@@ -77,20 +78,19 @@ data StorageClassDataSource = StorageClassDataSource {
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-storageClassDataSource :: TF.DataSource TF.Kubernetes StorageClassDataSource
-storageClassDataSource =
-    TF.newDataSource "kubernetes_storage_class" $
-        StorageClassDataSource {
-            _metadata = TF.Absent
-            }
-
 instance TF.ToHCL StorageClassDataSource where
-    toHCL StorageClassDataSource{..} = TF.arguments
-        [ TF.assign "metadata" <$> _metadata
+    toHCL StorageClassDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "metadata" <$> TF.argument _metadata
         ]
 
 $(TF.makeSchemaLenses
     ''StorageClassDataSource
     ''TF.Kubernetes
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+storageClassDataSource :: TF.DataSource TF.Kubernetes StorageClassDataSource
+storageClassDataSource =
+    TF.newDataSource "kubernetes_storage_class" $
+        StorageClassDataSource {
+            _metadata = TF.Nil
+            }

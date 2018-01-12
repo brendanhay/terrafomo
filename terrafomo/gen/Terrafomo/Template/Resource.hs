@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Template.Types  as TF
 import qualified Terrafomo.TH              as TF
 
 {- | The @template_dir@ Template resource.
@@ -57,24 +59,23 @@ data DirResource = DirResource {
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq)
 
-dirResource :: TF.Resource TF.Template DirResource
-dirResource =
-    TF.newResource "template_dir" $
-        DirResource {
-            _destination_dir = TF.Absent
-            , _source_dir = TF.Absent
-            , _vars = TF.Absent
-            }
-
 instance TF.ToHCL DirResource where
-    toHCL DirResource{..} = TF.arguments
-        [ TF.assign "destination_dir" <$> _destination_dir
-        , TF.assign "source_dir" <$> _source_dir
-        , TF.assign "vars" <$> _vars
+    toHCL DirResource{..} = TF.block $ catMaybes
+        [ TF.assign "destination_dir" <$> TF.argument _destination_dir
+        , TF.assign "source_dir" <$> TF.argument _source_dir
+        , TF.assign "vars" <$> TF.argument _vars
         ]
 
 $(TF.makeSchemaLenses
     ''DirResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dirResource :: TF.Resource TF.Template DirResource
+dirResource =
+    TF.newResource "template_dir" $
+        DirResource {
+            _destination_dir = TF.Nil
+            , _source_dir = TF.Nil
+            , _vars = TF.Nil
+            }

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
-import qualified Terrafomo.VSphere           as TF
+import qualified Terrafomo.VSphere.Provider  as TF
+import qualified Terrafomo.VSphere.Types     as TF
 
 {- | The @vsphere_datacenter@ VSphere datasource.
 
@@ -48,23 +50,22 @@ data DatacenterDataSource = DatacenterDataSource {
     {- ^ (Optional) The name of the datacenter. This can be a name or path. Can be omitted if there is only one datacenter in your inventory. -}
     } deriving (Show, Eq)
 
-datacenterDataSource :: TF.DataSource TF.VSphere DatacenterDataSource
-datacenterDataSource =
-    TF.newDataSource "vsphere_datacenter" $
-        DatacenterDataSource {
-            _name = TF.Absent
-            }
-
 instance TF.ToHCL DatacenterDataSource where
-    toHCL DatacenterDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL DatacenterDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DatacenterDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+datacenterDataSource :: TF.DataSource TF.VSphere DatacenterDataSource
+datacenterDataSource =
+    TF.newDataSource "vsphere_datacenter" $
+        DatacenterDataSource {
+            _name = TF.Nil
+            }
 
 {- | The @vsphere_datastore@ VSphere datasource.
 
@@ -80,25 +81,24 @@ data DatastoreDataSource = DatastoreDataSource {
     {- ^ (Required) The name of the datastore. This can be a name or path. -}
     } deriving (Show, Eq)
 
-datastoreDataSource :: TF.DataSource TF.VSphere DatastoreDataSource
-datastoreDataSource =
-    TF.newDataSource "vsphere_datastore" $
-        DatastoreDataSource {
-            _datacenter_id = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL DatastoreDataSource where
-    toHCL DatastoreDataSource{..} = TF.arguments
-        [ TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "name" <$> _name
+    toHCL DatastoreDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DatastoreDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+datastoreDataSource :: TF.DataSource TF.VSphere DatastoreDataSource
+datastoreDataSource =
+    TF.newDataSource "vsphere_datastore" $
+        DatastoreDataSource {
+            _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_distributed_virtual_switch@ VSphere datasource.
 
@@ -120,27 +120,26 @@ data DistributedVirtualSwitchDataSource = DistributedVirtualSwitchDataSource {
     {- ^ : The list of the uplinks on this DVS, as per the </docs/providers/vsphere/r/distributed_virtual_switch.html#uplinks> argument to the </docs/providers/vsphere/r/distributed_virtual_switch.html> resource. -}
     } deriving (Show, Eq)
 
-distributedVirtualSwitchDataSource :: TF.DataSource TF.VSphere DistributedVirtualSwitchDataSource
-distributedVirtualSwitchDataSource =
-    TF.newDataSource "vsphere_distributed_virtual_switch" $
-        DistributedVirtualSwitchDataSource {
-            _datacenter_id = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_uplinks = TF.Computed "uplinks"
-            }
-
 instance TF.ToHCL DistributedVirtualSwitchDataSource where
-    toHCL DistributedVirtualSwitchDataSource{..} = TF.arguments
-        [ TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "name" <$> _name
+    toHCL DistributedVirtualSwitchDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DistributedVirtualSwitchDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+distributedVirtualSwitchDataSource :: TF.DataSource TF.VSphere DistributedVirtualSwitchDataSource
+distributedVirtualSwitchDataSource =
+    TF.newDataSource "vsphere_distributed_virtual_switch" $
+        DistributedVirtualSwitchDataSource {
+            _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_uplinks = TF.Compute "uplinks"
+            }
 
 {- | The @vsphere_host@ VSphere datasource.
 
@@ -155,25 +154,24 @@ data HostDataSource = HostDataSource {
     {- ^ (Optional) The name of the host. This can be a name or path. Can be omitted if there is only one host in your inventory. -}
     } deriving (Show, Eq)
 
-hostDataSource :: TF.DataSource TF.VSphere HostDataSource
-hostDataSource =
-    TF.newDataSource "vsphere_host" $
-        HostDataSource {
-            _datacenter_id = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL HostDataSource where
-    toHCL HostDataSource{..} = TF.arguments
-        [ TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "name" <$> _name
+    toHCL HostDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''HostDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+hostDataSource :: TF.DataSource TF.VSphere HostDataSource
+hostDataSource =
+    TF.newDataSource "vsphere_host" $
+        HostDataSource {
+            _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_network@ VSphere datasource.
 
@@ -194,27 +192,26 @@ data NetworkDataSource = NetworkDataSource {
     {- ^ : The managed object type for the discovered network. This will be one of @DistributedVirtualPortgroup@ for DVS port groups, @Network@ for standard (host-based) port groups, or @OpaqueNetwork@ for networks managed externally by features such as NSX. -}
     } deriving (Show, Eq)
 
-networkDataSource :: TF.DataSource TF.VSphere NetworkDataSource
-networkDataSource =
-    TF.newDataSource "vsphere_network" $
-        NetworkDataSource {
-            _datacenter_id = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL NetworkDataSource where
-    toHCL NetworkDataSource{..} = TF.arguments
-        [ TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "name" <$> _name
+    toHCL NetworkDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkDataSource :: TF.DataSource TF.VSphere NetworkDataSource
+networkDataSource =
+    TF.newDataSource "vsphere_network" $
+        NetworkDataSource {
+            _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_type' = TF.Compute "type"
+            }
 
 {- | The @vsphere_resource_pool@ VSphere datasource.
 
@@ -230,25 +227,24 @@ data ResourcePoolDataSource = ResourcePoolDataSource {
     {- ^ (Optional) The name of the resource pool. This can be a name or path. This is required when using vCenter. -}
     } deriving (Show, Eq)
 
-resourcePoolDataSource :: TF.DataSource TF.VSphere ResourcePoolDataSource
-resourcePoolDataSource =
-    TF.newDataSource "vsphere_resource_pool" $
-        ResourcePoolDataSource {
-            _datacenter_id = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL ResourcePoolDataSource where
-    toHCL ResourcePoolDataSource{..} = TF.arguments
-        [ TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "name" <$> _name
+    toHCL ResourcePoolDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ResourcePoolDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+resourcePoolDataSource :: TF.DataSource TF.VSphere ResourcePoolDataSource
+resourcePoolDataSource =
+    TF.newDataSource "vsphere_resource_pool" $
+        ResourcePoolDataSource {
+            _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_tag_category@ VSphere datasource.
 
@@ -265,23 +261,22 @@ data TagCategoryDataSource = TagCategoryDataSource {
     {- ^ (Required) The name of the tag category. -}
     } deriving (Show, Eq)
 
-tagCategoryDataSource :: TF.DataSource TF.VSphere TagCategoryDataSource
-tagCategoryDataSource =
-    TF.newDataSource "vsphere_tag_category" $
-        TagCategoryDataSource {
-            _name = TF.Absent
-            }
-
 instance TF.ToHCL TagCategoryDataSource where
-    toHCL TagCategoryDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL TagCategoryDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TagCategoryDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+tagCategoryDataSource :: TF.DataSource TF.VSphere TagCategoryDataSource
+tagCategoryDataSource =
+    TF.newDataSource "vsphere_tag_category" $
+        TagCategoryDataSource {
+            _name = TF.Nil
+            }
 
 {- | The @vsphere_tag@ VSphere datasource.
 
@@ -300,25 +295,24 @@ data TagDataSource = TagDataSource {
     {- ^ (Required) The name of the tag. -}
     } deriving (Show, Eq)
 
-tagDataSource :: TF.DataSource TF.VSphere TagDataSource
-tagDataSource =
-    TF.newDataSource "vsphere_tag" $
-        TagDataSource {
-            _category_id = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL TagDataSource where
-    toHCL TagDataSource{..} = TF.arguments
-        [ TF.assign "category_id" <$> _category_id
-        , TF.assign "name" <$> _name
+    toHCL TagDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "category_id" <$> TF.argument _category_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TagDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+tagDataSource :: TF.DataSource TF.VSphere TagDataSource
+tagDataSource =
+    TF.newDataSource "vsphere_tag" $
+        TagDataSource {
+            _category_id = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_virtual_machine@ VSphere datasource.
 
@@ -355,36 +349,35 @@ data VirtualMachineDataSource = VirtualMachineDataSource {
     {- ^ - Set to @true@ if the disk has been thin provisioned. -}
     } deriving (Show, Eq)
 
-virtualMachineDataSource :: TF.DataSource TF.VSphere VirtualMachineDataSource
-virtualMachineDataSource =
-    TF.newDataSource "vsphere_virtual_machine" $
-        VirtualMachineDataSource {
-            _datacenter_id = TF.Absent
-            , _name = TF.Absent
-            , _scsi_controller_scan_count = TF.Absent
-            , _computed_alternate_guest_name = TF.Computed "alternate_guest_name"
-            , _computed_disks = TF.Computed "disks"
-            , _computed_eagerly_scrub = TF.Computed "eagerly_scrub"
-            , _computed_guest_id = TF.Computed "guest_id"
-            , _computed_id = TF.Computed "id"
-            , _computed_network_interface_types = TF.Computed "network_interface_types"
-            , _computed_scsi_type = TF.Computed "scsi_type"
-            , _computed_size = TF.Computed "size"
-            , _computed_thin_provisioned = TF.Computed "thin_provisioned"
-            }
-
 instance TF.ToHCL VirtualMachineDataSource where
-    toHCL VirtualMachineDataSource{..} = TF.arguments
-        [ TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "name" <$> _name
-        , TF.assign "scsi_controller_scan_count" <$> _scsi_controller_scan_count
+    toHCL VirtualMachineDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "scsi_controller_scan_count" <$> TF.argument _scsi_controller_scan_count
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualMachineDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+virtualMachineDataSource :: TF.DataSource TF.VSphere VirtualMachineDataSource
+virtualMachineDataSource =
+    TF.newDataSource "vsphere_virtual_machine" $
+        VirtualMachineDataSource {
+            _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            , _scsi_controller_scan_count = TF.Nil
+            , _computed_alternate_guest_name = TF.Compute "alternate_guest_name"
+            , _computed_disks = TF.Compute "disks"
+            , _computed_eagerly_scrub = TF.Compute "eagerly_scrub"
+            , _computed_guest_id = TF.Compute "guest_id"
+            , _computed_id = TF.Compute "id"
+            , _computed_network_interface_types = TF.Compute "network_interface_types"
+            , _computed_scsi_type = TF.Compute "scsi_type"
+            , _computed_size = TF.Compute "size"
+            , _computed_thin_provisioned = TF.Compute "thin_provisioned"
+            }
 
 {- | The @vsphere_vmfs_disks@ VSphere datasource.
 
@@ -404,25 +397,24 @@ data VmfsDisksDataSource = VmfsDisksDataSource {
     {- ^ - A lexicographically sorted list of devices discovered by the operation, matching the supplied @filter@ , if provided. -}
     } deriving (Show, Eq)
 
-vmfsDisksDataSource :: TF.DataSource TF.VSphere VmfsDisksDataSource
-vmfsDisksDataSource =
-    TF.newDataSource "vsphere_vmfs_disks" $
-        VmfsDisksDataSource {
-            _filter = TF.Absent
-            , _host_system_id = TF.Absent
-            , _rescan = TF.Absent
-            , _computed_disks = TF.Computed "disks"
-            }
-
 instance TF.ToHCL VmfsDisksDataSource where
-    toHCL VmfsDisksDataSource{..} = TF.arguments
-        [ TF.assign "filter" <$> _filter
-        , TF.assign "host_system_id" <$> _host_system_id
-        , TF.assign "rescan" <$> _rescan
+    toHCL VmfsDisksDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "filter" <$> TF.argument _filter
+        , TF.assign "host_system_id" <$> TF.argument _host_system_id
+        , TF.assign "rescan" <$> TF.argument _rescan
         ]
 
 $(TF.makeSchemaLenses
     ''VmfsDisksDataSource
     ''TF.VSphere
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+vmfsDisksDataSource :: TF.DataSource TF.VSphere VmfsDisksDataSource
+vmfsDisksDataSource =
+    TF.newDataSource "vsphere_vmfs_disks" $
+        VmfsDisksDataSource {
+            _filter = TF.Nil
+            , _host_system_id = TF.Nil
+            , _rescan = TF.Nil
+            , _computed_disks = TF.Compute "disks"
+            }

@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Fastly          as TF
+import qualified Terrafomo.Fastly.Provider as TF
+import qualified Terrafomo.Fastly.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -115,71 +117,70 @@ data ServiceV1Resource = ServiceV1Resource {
     {- ^ – Set of custom VCL configurations. See above for details. -}
     } deriving (Show, Eq)
 
-serviceV1Resource :: TF.Resource TF.Fastly ServiceV1Resource
-serviceV1Resource =
-    TF.newResource "fastly_service_v1" $
-        ServiceV1Resource {
-            _backend = TF.Absent
-            , _cache_setting = TF.Absent
-            , _condition = TF.Absent
-            , _default_host = TF.Absent
-            , _default_ttl = TF.Absent
-            , _domain = TF.Absent
-            , _force_destroy = TF.Absent
-            , _gcslogging = TF.Absent
-            , _gzip = TF.Absent
-            , _header = TF.Absent
-            , _healthcheck = TF.Absent
-            , _logentries = TF.Absent
-            , _name = TF.Absent
-            , _papertrail = TF.Absent
-            , _request_setting = TF.Absent
-            , _response_object = TF.Absent
-            , _s3logging = TF.Absent
-            , _sumologic = TF.Absent
-            , _syslog = TF.Absent
-            , _vcl = TF.Absent
-            , _computed_active_version = TF.Computed "active_version"
-            , _computed_backend = TF.Computed "backend"
-            , _computed_default_host = TF.Computed "default_host"
-            , _computed_default_ttl = TF.Computed "default_ttl"
-            , _computed_domain = TF.Computed "domain"
-            , _computed_force_destroy = TF.Computed "force_destroy"
-            , _computed_header = TF.Computed "header"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_papertrail = TF.Computed "papertrail"
-            , _computed_response_object = TF.Computed "response_object"
-            , _computed_s3logging = TF.Computed "s3logging"
-            , _computed_vcl = TF.Computed "vcl"
-            }
-
 instance TF.ToHCL ServiceV1Resource where
-    toHCL ServiceV1Resource{..} = TF.arguments
-        [ TF.assign "backend" <$> _backend
-        , TF.assign "cache_setting" <$> _cache_setting
-        , TF.assign "condition" <$> _condition
-        , TF.assign "default_host" <$> _default_host
-        , TF.assign "default_ttl" <$> _default_ttl
-        , TF.assign "domain" <$> _domain
-        , TF.assign "force_destroy" <$> _force_destroy
-        , TF.assign "gcslogging" <$> _gcslogging
-        , TF.assign "gzip" <$> _gzip
-        , TF.assign "header" <$> _header
-        , TF.assign "healthcheck" <$> _healthcheck
-        , TF.assign "logentries" <$> _logentries
-        , TF.assign "name" <$> _name
-        , TF.assign "papertrail" <$> _papertrail
-        , TF.assign "request_setting" <$> _request_setting
-        , TF.assign "response_object" <$> _response_object
-        , TF.assign "s3logging" <$> _s3logging
-        , TF.assign "sumologic" <$> _sumologic
-        , TF.assign "syslog" <$> _syslog
-        , TF.assign "vcl" <$> _vcl
+    toHCL ServiceV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "cache_setting" <$> TF.argument _cache_setting
+        , TF.assign "condition" <$> TF.argument _condition
+        , TF.assign "default_host" <$> TF.argument _default_host
+        , TF.assign "default_ttl" <$> TF.argument _default_ttl
+        , TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "force_destroy" <$> TF.argument _force_destroy
+        , TF.assign "gcslogging" <$> TF.argument _gcslogging
+        , TF.assign "gzip" <$> TF.argument _gzip
+        , TF.assign "header" <$> TF.argument _header
+        , TF.assign "healthcheck" <$> TF.argument _healthcheck
+        , TF.assign "logentries" <$> TF.argument _logentries
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "papertrail" <$> TF.argument _papertrail
+        , TF.assign "request_setting" <$> TF.argument _request_setting
+        , TF.assign "response_object" <$> TF.argument _response_object
+        , TF.assign "s3logging" <$> TF.argument _s3logging
+        , TF.assign "sumologic" <$> TF.argument _sumologic
+        , TF.assign "syslog" <$> TF.argument _syslog
+        , TF.assign "vcl" <$> TF.argument _vcl
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceV1Resource
     ''TF.Fastly
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serviceV1Resource :: TF.Resource TF.Fastly ServiceV1Resource
+serviceV1Resource =
+    TF.newResource "fastly_service_v1" $
+        ServiceV1Resource {
+            _backend = TF.Nil
+            , _cache_setting = TF.Nil
+            , _condition = TF.Nil
+            , _default_host = TF.Nil
+            , _default_ttl = TF.Nil
+            , _domain = TF.Nil
+            , _force_destroy = TF.Nil
+            , _gcslogging = TF.Nil
+            , _gzip = TF.Nil
+            , _header = TF.Nil
+            , _healthcheck = TF.Nil
+            , _logentries = TF.Nil
+            , _name = TF.Nil
+            , _papertrail = TF.Nil
+            , _request_setting = TF.Nil
+            , _response_object = TF.Nil
+            , _s3logging = TF.Nil
+            , _sumologic = TF.Nil
+            , _syslog = TF.Nil
+            , _vcl = TF.Nil
+            , _computed_active_version = TF.Compute "active_version"
+            , _computed_backend = TF.Compute "backend"
+            , _computed_default_host = TF.Compute "default_host"
+            , _computed_default_ttl = TF.Compute "default_ttl"
+            , _computed_domain = TF.Compute "domain"
+            , _computed_force_destroy = TF.Compute "force_destroy"
+            , _computed_header = TF.Compute "header"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_papertrail = TF.Compute "papertrail"
+            , _computed_response_object = TF.Compute "response_object"
+            , _computed_s3logging = TF.Compute "s3logging"
+            , _computed_vcl = TF.Compute "vcl"
+            }

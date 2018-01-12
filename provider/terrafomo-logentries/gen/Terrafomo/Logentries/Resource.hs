@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Logentries      as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Logentries.Provider as TF
+import qualified Terrafomo.Logentries.Types    as TF
+import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.TH                  as TF
 
 {- | The @logentries_log@ Logentries resource.
 
@@ -57,34 +59,33 @@ data LogResource = LogResource {
     {- ^ - If the log @source@ is @token@ , this value holds the generated log token that is used by logging clients. See the Logentries <https://logentries.com/doc/input-token/> for more information. -}
     } deriving (Show, Eq)
 
-logResource :: TF.Resource TF.Logentries LogResource
-logResource =
-    TF.newResource "logentries_log" $
-        LogResource {
-            _filename = TF.Absent
-            , _logset_id = TF.Absent
-            , _name = TF.Absent
-            , _retention_period = TF.Absent
-            , _source = TF.Absent
-            , _type' = TF.Absent
-            , _computed_token = TF.Computed "token"
-            }
-
 instance TF.ToHCL LogResource where
-    toHCL LogResource{..} = TF.arguments
-        [ TF.assign "filename" <$> _filename
-        , TF.assign "logset_id" <$> _logset_id
-        , TF.assign "name" <$> _name
-        , TF.assign "retention_period" <$> _retention_period
-        , TF.assign "source" <$> _source
-        , TF.assign "type" <$> _type'
+    toHCL LogResource{..} = TF.block $ catMaybes
+        [ TF.assign "filename" <$> TF.argument _filename
+        , TF.assign "logset_id" <$> TF.argument _logset_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "retention_period" <$> TF.argument _retention_period
+        , TF.assign "source" <$> TF.argument _source
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''LogResource
     ''TF.Logentries
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+logResource :: TF.Resource TF.Logentries LogResource
+logResource =
+    TF.newResource "logentries_log" $
+        LogResource {
+            _filename = TF.Nil
+            , _logset_id = TF.Nil
+            , _name = TF.Nil
+            , _retention_period = TF.Nil
+            , _source = TF.Nil
+            , _type' = TF.Nil
+            , _computed_token = TF.Compute "token"
+            }
 
 {- | The @logentries_logset@ Logentries resource.
 
@@ -98,22 +99,21 @@ data LogsetResource = LogsetResource {
     {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
     } deriving (Show, Eq)
 
-logsetResource :: TF.Resource TF.Logentries LogsetResource
-logsetResource =
-    TF.newResource "logentries_logset" $
-        LogsetResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL LogsetResource where
-    toHCL LogsetResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
+    toHCL LogsetResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''LogsetResource
     ''TF.Logentries
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+logsetResource :: TF.Resource TF.Logentries LogsetResource
+logsetResource =
+    TF.newResource "logentries_logset" $
+        LogsetResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            }

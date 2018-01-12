@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Cobbler         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Cobbler.Provider as TF
+import qualified Terrafomo.Cobbler.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @cobbler_distro@ Cobbler resource.
 
@@ -75,53 +77,52 @@ data DistroResource = DistroResource {
     {- ^ (Optional) File mappings for built-in config management. -}
     } deriving (Show, Eq)
 
-distroResource :: TF.Resource TF.Cobbler DistroResource
-distroResource =
-    TF.newResource "cobbler_distro" $
-        DistroResource {
-            _arch = TF.Absent
-            , _boot_files = TF.Absent
-            , _breed = TF.Absent
-            , _comment = TF.Absent
-            , _fetchable_files = TF.Absent
-            , _initrd = TF.Absent
-            , _kernel = TF.Absent
-            , _kernel_options = TF.Absent
-            , _kernel_options_post = TF.Absent
-            , _mgmt_classes = TF.Absent
-            , _name = TF.Absent
-            , _os_version = TF.Absent
-            , _owners = TF.Absent
-            , _redhat_management_key = TF.Absent
-            , _redhat_management_server = TF.Absent
-            , _template_files = TF.Absent
-            }
-
 instance TF.ToHCL DistroResource where
-    toHCL DistroResource{..} = TF.arguments
-        [ TF.assign "arch" <$> _arch
-        , TF.assign "boot_files" <$> _boot_files
-        , TF.assign "breed" <$> _breed
-        , TF.assign "comment" <$> _comment
-        , TF.assign "fetchable_files" <$> _fetchable_files
-        , TF.assign "initrd" <$> _initrd
-        , TF.assign "kernel" <$> _kernel
-        , TF.assign "kernel_options" <$> _kernel_options
-        , TF.assign "kernel_options_post" <$> _kernel_options_post
-        , TF.assign "mgmt_classes" <$> _mgmt_classes
-        , TF.assign "name" <$> _name
-        , TF.assign "os_version" <$> _os_version
-        , TF.assign "owners" <$> _owners
-        , TF.assign "redhat_management_key" <$> _redhat_management_key
-        , TF.assign "redhat_management_server" <$> _redhat_management_server
-        , TF.assign "template_files" <$> _template_files
+    toHCL DistroResource{..} = TF.block $ catMaybes
+        [ TF.assign "arch" <$> TF.argument _arch
+        , TF.assign "boot_files" <$> TF.argument _boot_files
+        , TF.assign "breed" <$> TF.argument _breed
+        , TF.assign "comment" <$> TF.argument _comment
+        , TF.assign "fetchable_files" <$> TF.argument _fetchable_files
+        , TF.assign "initrd" <$> TF.argument _initrd
+        , TF.assign "kernel" <$> TF.argument _kernel
+        , TF.assign "kernel_options" <$> TF.argument _kernel_options
+        , TF.assign "kernel_options_post" <$> TF.argument _kernel_options_post
+        , TF.assign "mgmt_classes" <$> TF.argument _mgmt_classes
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "os_version" <$> TF.argument _os_version
+        , TF.assign "owners" <$> TF.argument _owners
+        , TF.assign "redhat_management_key" <$> TF.argument _redhat_management_key
+        , TF.assign "redhat_management_server" <$> TF.argument _redhat_management_server
+        , TF.assign "template_files" <$> TF.argument _template_files
         ]
 
 $(TF.makeSchemaLenses
     ''DistroResource
     ''TF.Cobbler
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+distroResource :: TF.Resource TF.Cobbler DistroResource
+distroResource =
+    TF.newResource "cobbler_distro" $
+        DistroResource {
+            _arch = TF.Nil
+            , _boot_files = TF.Nil
+            , _breed = TF.Nil
+            , _comment = TF.Nil
+            , _fetchable_files = TF.Nil
+            , _initrd = TF.Nil
+            , _kernel = TF.Nil
+            , _kernel_options = TF.Nil
+            , _kernel_options_post = TF.Nil
+            , _mgmt_classes = TF.Nil
+            , _name = TF.Nil
+            , _os_version = TF.Nil
+            , _owners = TF.Nil
+            , _redhat_management_key = TF.Nil
+            , _redhat_management_server = TF.Nil
+            , _template_files = TF.Nil
+            }
 
 {- | The @cobbler_kickstart_file@ Cobbler resource.
 
@@ -134,25 +135,24 @@ data KickstartFileResource = KickstartFileResource {
     {- ^ (Required) The name of the kickstart file. This must be the full path, including @/var/lib/cobbler/kickstarts@ . -}
     } deriving (Show, Eq)
 
-kickstartFileResource :: TF.Resource TF.Cobbler KickstartFileResource
-kickstartFileResource =
-    TF.newResource "cobbler_kickstart_file" $
-        KickstartFileResource {
-            _body = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL KickstartFileResource where
-    toHCL KickstartFileResource{..} = TF.arguments
-        [ TF.assign "body" <$> _body
-        , TF.assign "name" <$> _name
+    toHCL KickstartFileResource{..} = TF.block $ catMaybes
+        [ TF.assign "body" <$> TF.argument _body
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''KickstartFileResource
     ''TF.Cobbler
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+kickstartFileResource :: TF.Resource TF.Cobbler KickstartFileResource
+kickstartFileResource =
+    TF.newResource "cobbler_kickstart_file" $
+        KickstartFileResource {
+            _body = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @cobbler_profile@ Cobbler resource.
 
@@ -225,85 +225,84 @@ data ProfileResource = ProfileResource {
     {- ^ (Optional) The type of virtual machine. Valid options are: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
     } deriving (Show, Eq)
 
-profileResource :: TF.Resource TF.Cobbler ProfileResource
-profileResource =
-    TF.newResource "cobbler_profile" $
-        ProfileResource {
-            _boot_files = TF.Absent
-            , _comment = TF.Absent
-            , _distro = TF.Absent
-            , _enable_gpxe = TF.Absent
-            , _enable_menu = TF.Absent
-            , _fetchable_files = TF.Absent
-            , _kernel_options = TF.Absent
-            , _kernel_options_post = TF.Absent
-            , _kickstart = TF.Absent
-            , _ks_meta = TF.Absent
-            , _mgmt_classes = TF.Absent
-            , _mgmt_parameters = TF.Absent
-            , _name = TF.Absent
-            , _name_servers = TF.Absent
-            , _name_servers_search = TF.Absent
-            , _owners = TF.Absent
-            , _parent = TF.Absent
-            , _proxy = TF.Absent
-            , _redhat_management_key = TF.Absent
-            , _redhat_management_server = TF.Absent
-            , _repos = TF.Absent
-            , _server = TF.Absent
-            , _template_files = TF.Absent
-            , _template_remote_kickstarts = TF.Absent
-            , _virt_auto_boot = TF.Absent
-            , _virt_bridge = TF.Absent
-            , _virt_cpus = TF.Absent
-            , _virt_disk_driver = TF.Absent
-            , _virt_file_size = TF.Absent
-            , _virt_path = TF.Absent
-            , _virt_ram = TF.Absent
-            , _virt_type = TF.Absent
-            }
-
 instance TF.ToHCL ProfileResource where
-    toHCL ProfileResource{..} = TF.arguments
-        [ TF.assign "boot_files" <$> _boot_files
-        , TF.assign "comment" <$> _comment
-        , TF.assign "distro" <$> _distro
-        , TF.assign "enable_gpxe" <$> _enable_gpxe
-        , TF.assign "enable_menu" <$> _enable_menu
-        , TF.assign "fetchable_files" <$> _fetchable_files
-        , TF.assign "kernel_options" <$> _kernel_options
-        , TF.assign "kernel_options_post" <$> _kernel_options_post
-        , TF.assign "kickstart" <$> _kickstart
-        , TF.assign "ks_meta" <$> _ks_meta
-        , TF.assign "mgmt_classes" <$> _mgmt_classes
-        , TF.assign "mgmt_parameters" <$> _mgmt_parameters
-        , TF.assign "name" <$> _name
-        , TF.assign "name_servers" <$> _name_servers
-        , TF.assign "name_servers_search" <$> _name_servers_search
-        , TF.assign "owners" <$> _owners
-        , TF.assign "parent" <$> _parent
-        , TF.assign "proxy" <$> _proxy
-        , TF.assign "redhat_management_key" <$> _redhat_management_key
-        , TF.assign "redhat_management_server" <$> _redhat_management_server
-        , TF.assign "repos" <$> _repos
-        , TF.assign "server" <$> _server
-        , TF.assign "template_files" <$> _template_files
-        , TF.assign "template_remote_kickstarts" <$> _template_remote_kickstarts
-        , TF.assign "virt_auto_boot" <$> _virt_auto_boot
-        , TF.assign "virt_bridge" <$> _virt_bridge
-        , TF.assign "virt_cpus" <$> _virt_cpus
-        , TF.assign "virt_disk_driver" <$> _virt_disk_driver
-        , TF.assign "virt_file_size" <$> _virt_file_size
-        , TF.assign "virt_path" <$> _virt_path
-        , TF.assign "virt_ram" <$> _virt_ram
-        , TF.assign "virt_type" <$> _virt_type
+    toHCL ProfileResource{..} = TF.block $ catMaybes
+        [ TF.assign "boot_files" <$> TF.argument _boot_files
+        , TF.assign "comment" <$> TF.argument _comment
+        , TF.assign "distro" <$> TF.argument _distro
+        , TF.assign "enable_gpxe" <$> TF.argument _enable_gpxe
+        , TF.assign "enable_menu" <$> TF.argument _enable_menu
+        , TF.assign "fetchable_files" <$> TF.argument _fetchable_files
+        , TF.assign "kernel_options" <$> TF.argument _kernel_options
+        , TF.assign "kernel_options_post" <$> TF.argument _kernel_options_post
+        , TF.assign "kickstart" <$> TF.argument _kickstart
+        , TF.assign "ks_meta" <$> TF.argument _ks_meta
+        , TF.assign "mgmt_classes" <$> TF.argument _mgmt_classes
+        , TF.assign "mgmt_parameters" <$> TF.argument _mgmt_parameters
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "name_servers" <$> TF.argument _name_servers
+        , TF.assign "name_servers_search" <$> TF.argument _name_servers_search
+        , TF.assign "owners" <$> TF.argument _owners
+        , TF.assign "parent" <$> TF.argument _parent
+        , TF.assign "proxy" <$> TF.argument _proxy
+        , TF.assign "redhat_management_key" <$> TF.argument _redhat_management_key
+        , TF.assign "redhat_management_server" <$> TF.argument _redhat_management_server
+        , TF.assign "repos" <$> TF.argument _repos
+        , TF.assign "server" <$> TF.argument _server
+        , TF.assign "template_files" <$> TF.argument _template_files
+        , TF.assign "template_remote_kickstarts" <$> TF.argument _template_remote_kickstarts
+        , TF.assign "virt_auto_boot" <$> TF.argument _virt_auto_boot
+        , TF.assign "virt_bridge" <$> TF.argument _virt_bridge
+        , TF.assign "virt_cpus" <$> TF.argument _virt_cpus
+        , TF.assign "virt_disk_driver" <$> TF.argument _virt_disk_driver
+        , TF.assign "virt_file_size" <$> TF.argument _virt_file_size
+        , TF.assign "virt_path" <$> TF.argument _virt_path
+        , TF.assign "virt_ram" <$> TF.argument _virt_ram
+        , TF.assign "virt_type" <$> TF.argument _virt_type
         ]
 
 $(TF.makeSchemaLenses
     ''ProfileResource
     ''TF.Cobbler
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+profileResource :: TF.Resource TF.Cobbler ProfileResource
+profileResource =
+    TF.newResource "cobbler_profile" $
+        ProfileResource {
+            _boot_files = TF.Nil
+            , _comment = TF.Nil
+            , _distro = TF.Nil
+            , _enable_gpxe = TF.Nil
+            , _enable_menu = TF.Nil
+            , _fetchable_files = TF.Nil
+            , _kernel_options = TF.Nil
+            , _kernel_options_post = TF.Nil
+            , _kickstart = TF.Nil
+            , _ks_meta = TF.Nil
+            , _mgmt_classes = TF.Nil
+            , _mgmt_parameters = TF.Nil
+            , _name = TF.Nil
+            , _name_servers = TF.Nil
+            , _name_servers_search = TF.Nil
+            , _owners = TF.Nil
+            , _parent = TF.Nil
+            , _proxy = TF.Nil
+            , _redhat_management_key = TF.Nil
+            , _redhat_management_server = TF.Nil
+            , _repos = TF.Nil
+            , _server = TF.Nil
+            , _template_files = TF.Nil
+            , _template_remote_kickstarts = TF.Nil
+            , _virt_auto_boot = TF.Nil
+            , _virt_bridge = TF.Nil
+            , _virt_cpus = TF.Nil
+            , _virt_disk_driver = TF.Nil
+            , _virt_file_size = TF.Nil
+            , _virt_path = TF.Nil
+            , _virt_ram = TF.Nil
+            , _virt_type = TF.Nil
+            }
 
 {- | The @cobbler_repo@ Cobbler resource.
 
@@ -340,49 +339,48 @@ data RepoResource = RepoResource {
     {- ^ (Optional) List of specific RPMs to mirror. -}
     } deriving (Show, Eq)
 
-repoResource :: TF.Resource TF.Cobbler RepoResource
-repoResource =
-    TF.newResource "cobbler_repo" $
-        RepoResource {
-            _apt_components = TF.Absent
-            , _apt_dists = TF.Absent
-            , _arch = TF.Absent
-            , _breed = TF.Absent
-            , _comment = TF.Absent
-            , _createrepo_flags = TF.Absent
-            , _environment = TF.Absent
-            , _keep_updated = TF.Absent
-            , _mirror = TF.Absent
-            , _mirror_locally = TF.Absent
-            , _name = TF.Absent
-            , _owners = TF.Absent
-            , _proxy = TF.Absent
-            , _rpm_list = TF.Absent
-            }
-
 instance TF.ToHCL RepoResource where
-    toHCL RepoResource{..} = TF.arguments
-        [ TF.assign "apt_components" <$> _apt_components
-        , TF.assign "apt_dists" <$> _apt_dists
-        , TF.assign "arch" <$> _arch
-        , TF.assign "breed" <$> _breed
-        , TF.assign "comment" <$> _comment
-        , TF.assign "createrepo_flags" <$> _createrepo_flags
-        , TF.assign "environment" <$> _environment
-        , TF.assign "keep_updated" <$> _keep_updated
-        , TF.assign "mirror" <$> _mirror
-        , TF.assign "mirror_locally" <$> _mirror_locally
-        , TF.assign "name" <$> _name
-        , TF.assign "owners" <$> _owners
-        , TF.assign "proxy" <$> _proxy
-        , TF.assign "rpm_list" <$> _rpm_list
+    toHCL RepoResource{..} = TF.block $ catMaybes
+        [ TF.assign "apt_components" <$> TF.argument _apt_components
+        , TF.assign "apt_dists" <$> TF.argument _apt_dists
+        , TF.assign "arch" <$> TF.argument _arch
+        , TF.assign "breed" <$> TF.argument _breed
+        , TF.assign "comment" <$> TF.argument _comment
+        , TF.assign "createrepo_flags" <$> TF.argument _createrepo_flags
+        , TF.assign "environment" <$> TF.argument _environment
+        , TF.assign "keep_updated" <$> TF.argument _keep_updated
+        , TF.assign "mirror" <$> TF.argument _mirror
+        , TF.assign "mirror_locally" <$> TF.argument _mirror_locally
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "owners" <$> TF.argument _owners
+        , TF.assign "proxy" <$> TF.argument _proxy
+        , TF.assign "rpm_list" <$> TF.argument _rpm_list
         ]
 
 $(TF.makeSchemaLenses
     ''RepoResource
     ''TF.Cobbler
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+repoResource :: TF.Resource TF.Cobbler RepoResource
+repoResource =
+    TF.newResource "cobbler_repo" $
+        RepoResource {
+            _apt_components = TF.Nil
+            , _apt_dists = TF.Nil
+            , _arch = TF.Nil
+            , _breed = TF.Nil
+            , _comment = TF.Nil
+            , _createrepo_flags = TF.Nil
+            , _environment = TF.Nil
+            , _keep_updated = TF.Nil
+            , _mirror = TF.Nil
+            , _mirror_locally = TF.Nil
+            , _name = TF.Nil
+            , _owners = TF.Nil
+            , _proxy = TF.Nil
+            , _rpm_list = TF.Nil
+            }
 
 {- | The @cobbler_snippet@ Cobbler resource.
 
@@ -395,25 +393,24 @@ data SnippetResource = SnippetResource {
     {- ^ (Required) The name of the snippet. This must be the full path, including @/var/lib/cobbler/snippets@ . -}
     } deriving (Show, Eq)
 
-snippetResource :: TF.Resource TF.Cobbler SnippetResource
-snippetResource =
-    TF.newResource "cobbler_snippet" $
-        SnippetResource {
-            _body = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL SnippetResource where
-    toHCL SnippetResource{..} = TF.arguments
-        [ TF.assign "body" <$> _body
-        , TF.assign "name" <$> _name
+    toHCL SnippetResource{..} = TF.block $ catMaybes
+        [ TF.assign "body" <$> TF.argument _body
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''SnippetResource
     ''TF.Cobbler
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+snippetResource :: TF.Resource TF.Cobbler SnippetResource
+snippetResource =
+    TF.newResource "cobbler_snippet" $
+        SnippetResource {
+            _body = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @cobbler_system@ Cobbler resource.
 
@@ -508,104 +505,103 @@ data SystemResource = SystemResource {
     {- ^ (Optional) Virtualization technology to use: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
     } deriving (Show, Eq)
 
-systemResource :: TF.Resource TF.Cobbler SystemResource
-systemResource =
-    TF.newResource "cobbler_system" $
-        SystemResource {
-            _boot_files = TF.Absent
-            , _comment = TF.Absent
-            , _enable_gpxe = TF.Absent
-            , _fetchable_files = TF.Absent
-            , _gateway = TF.Absent
-            , _hostname = TF.Absent
-            , _image = TF.Absent
-            , _interface = TF.Absent
-            , _ipv6_default_device = TF.Absent
-            , _kernel_options = TF.Absent
-            , _kernel_options_post = TF.Absent
-            , _kickstart = TF.Absent
-            , _ks_meta = TF.Absent
-            , _ldap_enabled = TF.Absent
-            , _ldap_type = TF.Absent
-            , _mgmt_classes = TF.Absent
-            , _mgmt_parameters = TF.Absent
-            , _monit_enabled = TF.Absent
-            , _name = TF.Absent
-            , _name_servers = TF.Absent
-            , _name_servers_search = TF.Absent
-            , _netboot_enabled = TF.Absent
-            , _owners = TF.Absent
-            , _power_address = TF.Absent
-            , _power_id = TF.Absent
-            , _power_pass = TF.Absent
-            , _power_type = TF.Absent
-            , _power_user = TF.Absent
-            , _profile = TF.Absent
-            , _proxy = TF.Absent
-            , _redhat_management_key = TF.Absent
-            , _redhat_management_server = TF.Absent
-            , _status = TF.Absent
-            , _template_files = TF.Absent
-            , _template_remote_kickstarts = TF.Absent
-            , _virt_auto_boot = TF.Absent
-            , _virt_cpus = TF.Absent
-            , _virt_disk_driver = TF.Absent
-            , _virt_file_size = TF.Absent
-            , _virt_path = TF.Absent
-            , _virt_pxe_boot = TF.Absent
-            , _virt_ram = TF.Absent
-            , _virt_type = TF.Absent
-            }
-
 instance TF.ToHCL SystemResource where
-    toHCL SystemResource{..} = TF.arguments
-        [ TF.assign "boot_files" <$> _boot_files
-        , TF.assign "comment" <$> _comment
-        , TF.assign "enable_gpxe" <$> _enable_gpxe
-        , TF.assign "fetchable_files" <$> _fetchable_files
-        , TF.assign "gateway" <$> _gateway
-        , TF.assign "hostname" <$> _hostname
-        , TF.assign "image" <$> _image
-        , TF.assign "interface" <$> _interface
-        , TF.assign "ipv6_default_device" <$> _ipv6_default_device
-        , TF.assign "kernel_options" <$> _kernel_options
-        , TF.assign "kernel_options_post" <$> _kernel_options_post
-        , TF.assign "kickstart" <$> _kickstart
-        , TF.assign "ks_meta" <$> _ks_meta
-        , TF.assign "ldap_enabled" <$> _ldap_enabled
-        , TF.assign "ldap_type" <$> _ldap_type
-        , TF.assign "mgmt_classes" <$> _mgmt_classes
-        , TF.assign "mgmt_parameters" <$> _mgmt_parameters
-        , TF.assign "monit_enabled" <$> _monit_enabled
-        , TF.assign "name" <$> _name
-        , TF.assign "name_servers" <$> _name_servers
-        , TF.assign "name_servers_search" <$> _name_servers_search
-        , TF.assign "netboot_enabled" <$> _netboot_enabled
-        , TF.assign "owners" <$> _owners
-        , TF.assign "power_address" <$> _power_address
-        , TF.assign "power_id" <$> _power_id
-        , TF.assign "power_pass" <$> _power_pass
-        , TF.assign "power_type" <$> _power_type
-        , TF.assign "power_user" <$> _power_user
-        , TF.assign "profile" <$> _profile
-        , TF.assign "proxy" <$> _proxy
-        , TF.assign "redhat_management_key" <$> _redhat_management_key
-        , TF.assign "redhat_management_server" <$> _redhat_management_server
-        , TF.assign "status" <$> _status
-        , TF.assign "template_files" <$> _template_files
-        , TF.assign "template_remote_kickstarts" <$> _template_remote_kickstarts
-        , TF.assign "virt_auto_boot" <$> _virt_auto_boot
-        , TF.assign "virt_cpus" <$> _virt_cpus
-        , TF.assign "virt_disk_driver" <$> _virt_disk_driver
-        , TF.assign "virt_file_size" <$> _virt_file_size
-        , TF.assign "virt_path" <$> _virt_path
-        , TF.assign "virt_pxe_boot" <$> _virt_pxe_boot
-        , TF.assign "virt_ram" <$> _virt_ram
-        , TF.assign "virt_type" <$> _virt_type
+    toHCL SystemResource{..} = TF.block $ catMaybes
+        [ TF.assign "boot_files" <$> TF.argument _boot_files
+        , TF.assign "comment" <$> TF.argument _comment
+        , TF.assign "enable_gpxe" <$> TF.argument _enable_gpxe
+        , TF.assign "fetchable_files" <$> TF.argument _fetchable_files
+        , TF.assign "gateway" <$> TF.argument _gateway
+        , TF.assign "hostname" <$> TF.argument _hostname
+        , TF.assign "image" <$> TF.argument _image
+        , TF.assign "interface" <$> TF.argument _interface
+        , TF.assign "ipv6_default_device" <$> TF.argument _ipv6_default_device
+        , TF.assign "kernel_options" <$> TF.argument _kernel_options
+        , TF.assign "kernel_options_post" <$> TF.argument _kernel_options_post
+        , TF.assign "kickstart" <$> TF.argument _kickstart
+        , TF.assign "ks_meta" <$> TF.argument _ks_meta
+        , TF.assign "ldap_enabled" <$> TF.argument _ldap_enabled
+        , TF.assign "ldap_type" <$> TF.argument _ldap_type
+        , TF.assign "mgmt_classes" <$> TF.argument _mgmt_classes
+        , TF.assign "mgmt_parameters" <$> TF.argument _mgmt_parameters
+        , TF.assign "monit_enabled" <$> TF.argument _monit_enabled
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "name_servers" <$> TF.argument _name_servers
+        , TF.assign "name_servers_search" <$> TF.argument _name_servers_search
+        , TF.assign "netboot_enabled" <$> TF.argument _netboot_enabled
+        , TF.assign "owners" <$> TF.argument _owners
+        , TF.assign "power_address" <$> TF.argument _power_address
+        , TF.assign "power_id" <$> TF.argument _power_id
+        , TF.assign "power_pass" <$> TF.argument _power_pass
+        , TF.assign "power_type" <$> TF.argument _power_type
+        , TF.assign "power_user" <$> TF.argument _power_user
+        , TF.assign "profile" <$> TF.argument _profile
+        , TF.assign "proxy" <$> TF.argument _proxy
+        , TF.assign "redhat_management_key" <$> TF.argument _redhat_management_key
+        , TF.assign "redhat_management_server" <$> TF.argument _redhat_management_server
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "template_files" <$> TF.argument _template_files
+        , TF.assign "template_remote_kickstarts" <$> TF.argument _template_remote_kickstarts
+        , TF.assign "virt_auto_boot" <$> TF.argument _virt_auto_boot
+        , TF.assign "virt_cpus" <$> TF.argument _virt_cpus
+        , TF.assign "virt_disk_driver" <$> TF.argument _virt_disk_driver
+        , TF.assign "virt_file_size" <$> TF.argument _virt_file_size
+        , TF.assign "virt_path" <$> TF.argument _virt_path
+        , TF.assign "virt_pxe_boot" <$> TF.argument _virt_pxe_boot
+        , TF.assign "virt_ram" <$> TF.argument _virt_ram
+        , TF.assign "virt_type" <$> TF.argument _virt_type
         ]
 
 $(TF.makeSchemaLenses
     ''SystemResource
     ''TF.Cobbler
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+systemResource :: TF.Resource TF.Cobbler SystemResource
+systemResource =
+    TF.newResource "cobbler_system" $
+        SystemResource {
+            _boot_files = TF.Nil
+            , _comment = TF.Nil
+            , _enable_gpxe = TF.Nil
+            , _fetchable_files = TF.Nil
+            , _gateway = TF.Nil
+            , _hostname = TF.Nil
+            , _image = TF.Nil
+            , _interface = TF.Nil
+            , _ipv6_default_device = TF.Nil
+            , _kernel_options = TF.Nil
+            , _kernel_options_post = TF.Nil
+            , _kickstart = TF.Nil
+            , _ks_meta = TF.Nil
+            , _ldap_enabled = TF.Nil
+            , _ldap_type = TF.Nil
+            , _mgmt_classes = TF.Nil
+            , _mgmt_parameters = TF.Nil
+            , _monit_enabled = TF.Nil
+            , _name = TF.Nil
+            , _name_servers = TF.Nil
+            , _name_servers_search = TF.Nil
+            , _netboot_enabled = TF.Nil
+            , _owners = TF.Nil
+            , _power_address = TF.Nil
+            , _power_id = TF.Nil
+            , _power_pass = TF.Nil
+            , _power_type = TF.Nil
+            , _power_user = TF.Nil
+            , _profile = TF.Nil
+            , _proxy = TF.Nil
+            , _redhat_management_key = TF.Nil
+            , _redhat_management_server = TF.Nil
+            , _status = TF.Nil
+            , _template_files = TF.Nil
+            , _template_remote_kickstarts = TF.Nil
+            , _virt_auto_boot = TF.Nil
+            , _virt_cpus = TF.Nil
+            , _virt_disk_driver = TF.Nil
+            , _virt_file_size = TF.Nil
+            , _virt_path = TF.Nil
+            , _virt_pxe_boot = TF.Nil
+            , _virt_ram = TF.Nil
+            , _virt_type = TF.Nil
+            }

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Librato         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Librato.Provider as TF
+import qualified Terrafomo.Librato.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @librato_alert@ Librato resource.
 
@@ -72,42 +74,41 @@ data AlertResource = AlertResource {
     {- ^ - list of notification service IDs. -}
     } deriving (Show, Eq)
 
-alertResource :: TF.Resource TF.Librato AlertResource
-alertResource =
-    TF.newResource "librato_alert" $
-        AlertResource {
-            _active = TF.Absent
-            , _attributes = TF.Absent
-            , _condition = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _rearm_seconds = TF.Absent
-            , _services = TF.Absent
-            , _computed_active = TF.Computed "active"
-            , _computed_condition = TF.Computed "condition"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_rearm_seconds = TF.Computed "rearm_seconds"
-            , _computed_services = TF.Computed "services"
-            }
-
 instance TF.ToHCL AlertResource where
-    toHCL AlertResource{..} = TF.arguments
-        [ TF.assign "active" <$> _active
-        , TF.assign "attributes" <$> _attributes
-        , TF.assign "condition" <$> _condition
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "rearm_seconds" <$> _rearm_seconds
-        , TF.assign "services" <$> _services
+    toHCL AlertResource{..} = TF.block $ catMaybes
+        [ TF.assign "active" <$> TF.argument _active
+        , TF.assign "attributes" <$> TF.argument _attributes
+        , TF.assign "condition" <$> TF.argument _condition
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "rearm_seconds" <$> TF.argument _rearm_seconds
+        , TF.assign "services" <$> TF.argument _services
         ]
 
 $(TF.makeSchemaLenses
     ''AlertResource
     ''TF.Librato
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+alertResource :: TF.Resource TF.Librato AlertResource
+alertResource =
+    TF.newResource "librato_alert" $
+        AlertResource {
+            _active = TF.Nil
+            , _attributes = TF.Nil
+            , _condition = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _rearm_seconds = TF.Nil
+            , _services = TF.Nil
+            , _computed_active = TF.Compute "active"
+            , _computed_condition = TF.Compute "condition"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_rearm_seconds = TF.Compute "rearm_seconds"
+            , _computed_services = TF.Compute "services"
+            }
 
 {- | The @librato_metric@ Librato resource.
 
@@ -145,42 +146,41 @@ data MetricResource = MetricResource {
     {- ^ - The type of metric to create (gauge, counter, or composite). -}
     } deriving (Show, Eq)
 
-metricResource :: TF.Resource TF.Librato MetricResource
-metricResource =
-    TF.newResource "librato_metric" $
-        MetricResource {
-            _attributes = TF.Absent
-            , _composite = TF.Absent
-            , _description = TF.Absent
-            , _display_name = TF.Absent
-            , _name = TF.Absent
-            , _period = TF.Absent
-            , _type' = TF.Absent
-            , _computed_composite = TF.Computed "composite"
-            , _computed_description = TF.Computed "description"
-            , _computed_display_name = TF.Computed "display_name"
-            , _computed_name = TF.Computed "name"
-            , _computed_period = TF.Computed "period"
-            , _computed_source_lag = TF.Computed "source_lag"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL MetricResource where
-    toHCL MetricResource{..} = TF.arguments
-        [ TF.assign "attributes" <$> _attributes
-        , TF.assign "composite" <$> _composite
-        , TF.assign "description" <$> _description
-        , TF.assign "display_name" <$> _display_name
-        , TF.assign "name" <$> _name
-        , TF.assign "period" <$> _period
-        , TF.assign "type" <$> _type'
+    toHCL MetricResource{..} = TF.block $ catMaybes
+        [ TF.assign "attributes" <$> TF.argument _attributes
+        , TF.assign "composite" <$> TF.argument _composite
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "display_name" <$> TF.argument _display_name
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "period" <$> TF.argument _period
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''MetricResource
     ''TF.Librato
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+metricResource :: TF.Resource TF.Librato MetricResource
+metricResource =
+    TF.newResource "librato_metric" $
+        MetricResource {
+            _attributes = TF.Nil
+            , _composite = TF.Nil
+            , _description = TF.Nil
+            , _display_name = TF.Nil
+            , _name = TF.Nil
+            , _period = TF.Nil
+            , _type' = TF.Nil
+            , _computed_composite = TF.Compute "composite"
+            , _computed_description = TF.Compute "description"
+            , _computed_display_name = TF.Compute "display_name"
+            , _computed_name = TF.Compute "name"
+            , _computed_period = TF.Compute "period"
+            , _computed_source_lag = TF.Compute "source_lag"
+            , _computed_type' = TF.Compute "type"
+            }
 
 {- | The @librato_service@ Librato resource.
 
@@ -204,31 +204,30 @@ data ServiceResource = ServiceResource {
     {- ^ - The type of notificaion. -}
     } deriving (Show, Eq)
 
-serviceResource :: TF.Resource TF.Librato ServiceResource
-serviceResource =
-    TF.newResource "librato_service" $
-        ServiceResource {
-            _settings = TF.Absent
-            , _title = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_settings = TF.Computed "settings"
-            , _computed_title = TF.Computed "title"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL ServiceResource where
-    toHCL ServiceResource{..} = TF.arguments
-        [ TF.assign "settings" <$> _settings
-        , TF.assign "title" <$> _title
-        , TF.assign "type" <$> _type'
+    toHCL ServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "settings" <$> TF.argument _settings
+        , TF.assign "title" <$> TF.argument _title
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceResource
     ''TF.Librato
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serviceResource :: TF.Resource TF.Librato ServiceResource
+serviceResource =
+    TF.newResource "librato_service" $
+        ServiceResource {
+            _settings = TF.Nil
+            , _title = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_settings = TF.Compute "settings"
+            , _computed_title = TF.Compute "title"
+            , _computed_type' = TF.Compute "type"
+            }
 
 {- | The @librato_space_chart@ Librato resource.
 
@@ -260,40 +259,39 @@ data SpaceChartResource = SpaceChartResource {
     {- ^ - The title of the chart when it is displayed. -}
     } deriving (Show, Eq)
 
-spaceChartResource :: TF.Resource TF.Librato SpaceChartResource
-spaceChartResource =
-    TF.newResource "librato_space_chart" $
-        SpaceChartResource {
-            _label = TF.Absent
-            , _max = TF.Absent
-            , _min = TF.Absent
-            , _name = TF.Absent
-            , _related_space = TF.Absent
-            , _space_id = TF.Absent
-            , _stream = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_space_id = TF.Computed "space_id"
-            , _computed_title = TF.Computed "title"
-            }
-
 instance TF.ToHCL SpaceChartResource where
-    toHCL SpaceChartResource{..} = TF.arguments
-        [ TF.assign "label" <$> _label
-        , TF.assign "max" <$> _max
-        , TF.assign "min" <$> _min
-        , TF.assign "name" <$> _name
-        , TF.assign "related_space" <$> _related_space
-        , TF.assign "space_id" <$> _space_id
-        , TF.assign "stream" <$> _stream
-        , TF.assign "type" <$> _type'
+    toHCL SpaceChartResource{..} = TF.block $ catMaybes
+        [ TF.assign "label" <$> TF.argument _label
+        , TF.assign "max" <$> TF.argument _max
+        , TF.assign "min" <$> TF.argument _min
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "related_space" <$> TF.argument _related_space
+        , TF.assign "space_id" <$> TF.argument _space_id
+        , TF.assign "stream" <$> TF.argument _stream
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''SpaceChartResource
     ''TF.Librato
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+spaceChartResource :: TF.Resource TF.Librato SpaceChartResource
+spaceChartResource =
+    TF.newResource "librato_space_chart" $
+        SpaceChartResource {
+            _label = TF.Nil
+            , _max = TF.Nil
+            , _min = TF.Nil
+            , _name = TF.Nil
+            , _related_space = TF.Nil
+            , _space_id = TF.Nil
+            , _stream = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_space_id = TF.Compute "space_id"
+            , _computed_title = TF.Compute "title"
+            }
 
 {- | The @librato_space@ Librato resource.
 
@@ -309,22 +307,21 @@ data SpaceResource = SpaceResource {
     {- ^ - The name of the space. -}
     } deriving (Show, Eq)
 
-spaceResource :: TF.Resource TF.Librato SpaceResource
-spaceResource =
-    TF.newResource "librato_space" $
-        SpaceResource {
-            _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL SpaceResource where
-    toHCL SpaceResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL SpaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''SpaceResource
     ''TF.Librato
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+spaceResource :: TF.Resource TF.Librato SpaceResource
+spaceResource =
+    TF.newResource "librato_space" $
+        SpaceResource {
+            _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            }

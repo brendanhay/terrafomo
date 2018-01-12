@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Consul.Provider where
+module Terrafomo.Consul.Provider
+    ( Consul    (..)
+    , HasConsul (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Consul.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -34,8 +47,8 @@ Consul cluster. Configuration of the provider is optional, as it provides
 defaults for all arguments. Use the navigation to the left to read about the
 available resources.
 -}
-data Consul = Consul
-    { _address    :: !(TF.Argument Text)
+data Consul = Consul {
+      _address    :: !(TF.Argument Text)
     {- ^ (Optional) The HTTP(S) API address of the agent to use. Defaults to "127.0.0.1:8500". -}
     , _ca_file    :: !(TF.Argument Text)
     {- ^ (Optional) A path to a PEM-encoded certificate authority used to verify the remote agent's certificate. -}
@@ -56,15 +69,45 @@ data Consul = Consul
 instance Hashable Consul
 
 instance TF.ToHCL Consul where
-    toHCL x = TF.arguments
-        [ TF.assign "address" <$> _address x
-        , TF.assign "ca_file" <$> _ca_file x
-        , TF.assign "cert_file" <$> _cert_file x
-        , TF.assign "datacenter" <$> _datacenter x
-        , TF.assign "http_auth" <$> _http_auth x
-        , TF.assign "key_file" <$> _key_file x
-        , TF.assign "scheme" <$> _scheme x
-        , TF.assign "token" <$> _token x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Consul))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "address" <$> TF.argument (_address x)
+            , TF.assign "ca_file" <$> TF.argument (_ca_file x)
+            , TF.assign "cert_file" <$> TF.argument (_cert_file x)
+            , TF.assign "datacenter" <$> TF.argument (_datacenter x)
+            , TF.assign "http_auth" <$> TF.argument (_http_auth x)
+            , TF.assign "key_file" <$> TF.argument (_key_file x)
+            , TF.assign "scheme" <$> TF.argument (_scheme x)
+            , TF.assign "token" <$> TF.argument (_token x)
+            ]
 
-$(TF.makeClassy ''Consul)
+instance Semigroup Consul where
+    (<>) a b = Consul {
+          _address = on (<>) _address a b
+        , _ca_file = on (<>) _ca_file a b
+        , _cert_file = on (<>) _cert_file a b
+        , _datacenter = on (<>) _datacenter a b
+        , _http_auth = on (<>) _http_auth a b
+        , _key_file = on (<>) _key_file a b
+        , _scheme = on (<>) _scheme a b
+        , _token = on (<>) _token a b
+        }
+
+instance Monoid Consul where
+    mappend = (<>)
+    mempty  = Consul {
+            _address = TF.Nil
+          , _ca_file = TF.Nil
+          , _cert_file = TF.Nil
+          , _datacenter = TF.Nil
+          , _http_auth = TF.Nil
+          , _key_file = TF.Nil
+          , _scheme = TF.Nil
+          , _token = TF.Nil
+        }
+
+instance TF.IsProvider Consul where
+    type ProviderName Consul = "consul"
+
+$(TF.makeProviderLenses ''Consul)

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Cloudflare      as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Cloudflare.Provider as TF
+import qualified Terrafomo.Cloudflare.Types    as TF
+import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.TH                  as TF
 
 {- | The @cloudflare_record@ Cloudflare resource.
 
@@ -75,41 +77,40 @@ data RecordResource = RecordResource {
     {- ^ - (Computed) the zone id of the record -}
     } deriving (Show, Eq)
 
-recordResource :: TF.Resource TF.Cloudflare RecordResource
-recordResource =
-    TF.newResource "cloudflare_record" $
-        RecordResource {
-            _domain = TF.Absent
-            , _name = TF.Absent
-            , _priority = TF.Absent
-            , _proxied = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value = TF.Absent
-            , _computed_hostname = TF.Computed "hostname"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_priority = TF.Computed "priority"
-            , _computed_proxied = TF.Computed "proxied"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_value = TF.Computed "value"
-            , _computed_zone_id = TF.Computed "zone_id"
-            }
-
 instance TF.ToHCL RecordResource where
-    toHCL RecordResource{..} = TF.arguments
-        [ TF.assign "domain" <$> _domain
-        , TF.assign "name" <$> _name
-        , TF.assign "priority" <$> _priority
-        , TF.assign "proxied" <$> _proxied
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value" <$> _value
+    toHCL RecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "proxied" <$> TF.argument _proxied
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value" <$> TF.argument _value
         ]
 
 $(TF.makeSchemaLenses
     ''RecordResource
     ''TF.Cloudflare
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+recordResource :: TF.Resource TF.Cloudflare RecordResource
+recordResource =
+    TF.newResource "cloudflare_record" $
+        RecordResource {
+            _domain = TF.Nil
+            , _name = TF.Nil
+            , _priority = TF.Nil
+            , _proxied = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value = TF.Nil
+            , _computed_hostname = TF.Compute "hostname"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_priority = TF.Compute "priority"
+            , _computed_proxied = TF.Compute "proxied"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_value = TF.Compute "value"
+            , _computed_zone_id = TF.Compute "zone_id"
+            }

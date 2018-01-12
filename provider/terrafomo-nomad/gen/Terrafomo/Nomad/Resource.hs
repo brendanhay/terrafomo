@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Nomad           as TF
+import qualified Terrafomo.Nomad.Provider  as TF
+import qualified Terrafomo.Nomad.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -55,24 +57,23 @@ data JobResource = JobResource {
     {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Eq)
 
-jobResource :: TF.Resource TF.Nomad JobResource
-jobResource =
-    TF.newResource "nomad_job" $
-        JobResource {
-            _deregister_on_destroy = TF.Absent
-            , _deregister_on_id_change = TF.Absent
-            , _jobspec = TF.Absent
-            }
-
 instance TF.ToHCL JobResource where
-    toHCL JobResource{..} = TF.arguments
-        [ TF.assign "deregister_on_destroy" <$> _deregister_on_destroy
-        , TF.assign "deregister_on_id_change" <$> _deregister_on_id_change
-        , TF.assign "jobspec" <$> _jobspec
+    toHCL JobResource{..} = TF.block $ catMaybes
+        [ TF.assign "deregister_on_destroy" <$> TF.argument _deregister_on_destroy
+        , TF.assign "deregister_on_id_change" <$> TF.argument _deregister_on_id_change
+        , TF.assign "jobspec" <$> TF.argument _jobspec
         ]
 
 $(TF.makeSchemaLenses
     ''JobResource
     ''TF.Nomad
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+jobResource :: TF.Resource TF.Nomad JobResource
+jobResource =
+    TF.newResource "nomad_job" $
+        JobResource {
+            _deregister_on_destroy = TF.Nil
+            , _deregister_on_id_change = TF.Nil
+            , _jobspec = TF.Nil
+            }

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Bitbucket       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Bitbucket.Provider as TF
+import qualified Terrafomo.Bitbucket.Types    as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @bitbucket_default_reviewers@ Bitbucket resource.
 
@@ -49,27 +51,26 @@ data DefaultReviewersResource = DefaultReviewersResource {
     {- ^ (Required) A list of reviewers to use. -}
     } deriving (Show, Eq)
 
-defaultReviewersResource :: TF.Resource TF.Bitbucket DefaultReviewersResource
-defaultReviewersResource =
-    TF.newResource "bitbucket_default_reviewers" $
-        DefaultReviewersResource {
-            _owner = TF.Absent
-            , _repository = TF.Absent
-            , _reviewers = TF.Absent
-            }
-
 instance TF.ToHCL DefaultReviewersResource where
-    toHCL DefaultReviewersResource{..} = TF.arguments
-        [ TF.assign "owner" <$> _owner
-        , TF.assign "repository" <$> _repository
-        , TF.assign "reviewers" <$> _reviewers
+    toHCL DefaultReviewersResource{..} = TF.block $ catMaybes
+        [ TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "reviewers" <$> TF.argument _reviewers
         ]
 
 $(TF.makeSchemaLenses
     ''DefaultReviewersResource
     ''TF.Bitbucket
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+defaultReviewersResource :: TF.Resource TF.Bitbucket DefaultReviewersResource
+defaultReviewersResource =
+    TF.newResource "bitbucket_default_reviewers" $
+        DefaultReviewersResource {
+            _owner = TF.Nil
+            , _repository = TF.Nil
+            , _reviewers = TF.Nil
+            }
 
 {- | The @bitbucket_hook@ Bitbucket resource.
 
@@ -89,31 +90,30 @@ data HookResource = HookResource {
     {- ^ (Required) Where to POST to. -}
     } deriving (Show, Eq)
 
-hookResource :: TF.Resource TF.Bitbucket HookResource
-hookResource =
-    TF.newResource "bitbucket_hook" $
-        HookResource {
-            _description = TF.Absent
-            , _events = TF.Absent
-            , _owner = TF.Absent
-            , _repository = TF.Absent
-            , _url = TF.Absent
-            }
-
 instance TF.ToHCL HookResource where
-    toHCL HookResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "events" <$> _events
-        , TF.assign "owner" <$> _owner
-        , TF.assign "repository" <$> _repository
-        , TF.assign "url" <$> _url
+    toHCL HookResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "events" <$> TF.argument _events
+        , TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "repository" <$> TF.argument _repository
+        , TF.assign "url" <$> TF.argument _url
         ]
 
 $(TF.makeSchemaLenses
     ''HookResource
     ''TF.Bitbucket
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+hookResource :: TF.Resource TF.Bitbucket HookResource
+hookResource =
+    TF.newResource "bitbucket_hook" $
+        HookResource {
+            _description = TF.Nil
+            , _events = TF.Nil
+            , _owner = TF.Nil
+            , _repository = TF.Nil
+            , _url = TF.Nil
+            }
 
 {- | The @bitbucket_repository@ Bitbucket resource.
 
@@ -148,42 +148,41 @@ data RepositoryResource = RepositoryResource {
     {- ^ (Optional) URL of website associated with this repository. -}
     } deriving (Show, Eq)
 
-repositoryResource :: TF.Resource TF.Bitbucket RepositoryResource
-repositoryResource =
-    TF.newResource "bitbucket_repository" $
-        RepositoryResource {
-            _description = TF.Absent
-            , _fork_policy = TF.Absent
-            , _has_issues = TF.Absent
-            , _has_wiki = TF.Absent
-            , _is_private = TF.Absent
-            , _language = TF.Absent
-            , _name = TF.Absent
-            , _owner = TF.Absent
-            , _project_key = TF.Absent
-            , _scm = TF.Absent
-            , _slug = TF.Absent
-            , _website = TF.Absent
-            }
-
 instance TF.ToHCL RepositoryResource where
-    toHCL RepositoryResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "fork_policy" <$> _fork_policy
-        , TF.assign "has_issues" <$> _has_issues
-        , TF.assign "has_wiki" <$> _has_wiki
-        , TF.assign "is_private" <$> _is_private
-        , TF.assign "language" <$> _language
-        , TF.assign "name" <$> _name
-        , TF.assign "owner" <$> _owner
-        , TF.assign "project_key" <$> _project_key
-        , TF.assign "scm" <$> _scm
-        , TF.assign "slug" <$> _slug
-        , TF.assign "website" <$> _website
+    toHCL RepositoryResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "fork_policy" <$> TF.argument _fork_policy
+        , TF.assign "has_issues" <$> TF.argument _has_issues
+        , TF.assign "has_wiki" <$> TF.argument _has_wiki
+        , TF.assign "is_private" <$> TF.argument _is_private
+        , TF.assign "language" <$> TF.argument _language
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "project_key" <$> TF.argument _project_key
+        , TF.assign "scm" <$> TF.argument _scm
+        , TF.assign "slug" <$> TF.argument _slug
+        , TF.assign "website" <$> TF.argument _website
         ]
 
 $(TF.makeSchemaLenses
     ''RepositoryResource
     ''TF.Bitbucket
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+repositoryResource :: TF.Resource TF.Bitbucket RepositoryResource
+repositoryResource =
+    TF.newResource "bitbucket_repository" $
+        RepositoryResource {
+            _description = TF.Nil
+            , _fork_policy = TF.Nil
+            , _has_issues = TF.Nil
+            , _has_wiki = TF.Nil
+            , _is_private = TF.Nil
+            , _language = TF.Nil
+            , _name = TF.Nil
+            , _owner = TF.Nil
+            , _project_key = TF.Nil
+            , _scm = TF.Nil
+            , _slug = TF.Nil
+            , _website = TF.Nil
+            }

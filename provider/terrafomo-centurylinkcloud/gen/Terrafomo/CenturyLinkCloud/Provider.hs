@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CenturyLinkCloud.Provider where
+module Terrafomo.CenturyLinkCloud.Provider
+    ( CenturyLinkCloud    (..)
+    , HasCenturyLinkCloud (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.CenturyLinkCloud.Types as TF
 import qualified Terrafomo.Syntax.HCL             as TF
+import qualified Terrafomo.Syntax.Meta            as TF
+import qualified Terrafomo.Syntax.Name            as TF
 import qualified Terrafomo.Syntax.Variable        as TF
 import qualified Terrafomo.TH                     as TF
 
@@ -34,8 +47,8 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources. For additional documentation, see the
 <https://www.ctl.io/developers/>
 -}
-data CenturyLinkCloud = CenturyLinkCloud
-    { _clc_account  :: !(TF.Argument Text)
+data CenturyLinkCloud = CenturyLinkCloud {
+      _clc_account  :: !(TF.Argument Text)
     {- ^ (Optional) Override CLC account alias. Also taken from the @CLC_ACCOUNT@ environment variable if provided. -}
     , _clc_password :: !(TF.Argument Text)
     {- ^ (Required) This is the CLC account password. It must be provided, but it can also be sourced from the @CLC_PASSWORD@ environment variable. -}
@@ -46,10 +59,30 @@ data CenturyLinkCloud = CenturyLinkCloud
 instance Hashable CenturyLinkCloud
 
 instance TF.ToHCL CenturyLinkCloud where
-    toHCL x = TF.arguments
-        [ TF.assign "clc_account" <$> _clc_account x
-        , TF.assign "clc_password" <$> _clc_password x
-        , TF.assign "clc_username" <$> _clc_username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy CenturyLinkCloud))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "clc_account" <$> TF.argument (_clc_account x)
+            , TF.assign "clc_password" <$> TF.argument (_clc_password x)
+            , TF.assign "clc_username" <$> TF.argument (_clc_username x)
+            ]
 
-$(TF.makeClassy ''CenturyLinkCloud)
+instance Semigroup CenturyLinkCloud where
+    (<>) a b = CenturyLinkCloud {
+          _clc_account = on (<>) _clc_account a b
+        , _clc_password = on (<>) _clc_password a b
+        , _clc_username = on (<>) _clc_username a b
+        }
+
+instance Monoid CenturyLinkCloud where
+    mappend = (<>)
+    mempty  = CenturyLinkCloud {
+            _clc_account = TF.Nil
+          , _clc_password = TF.Nil
+          , _clc_username = TF.Nil
+        }
+
+instance TF.IsProvider CenturyLinkCloud where
+    type ProviderName CenturyLinkCloud = "clc"
+
+$(TF.makeProviderLenses ''CenturyLinkCloud)

@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.DNSimple.Provider where
+module Terrafomo.DNSimple.Provider
+    ( DNSimple    (..)
+    , HasDNSimple (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.DNSimple.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ DNSimple. The provider needs to be configured with the proper credentials
 before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
-data DNSimple = DNSimple
-    { _account :: !(TF.Argument Text)
+data DNSimple = DNSimple {
+      _account :: !(TF.Argument Text)
     {- ^ (Required) The ID of the account associated with the token. It must be provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment variable. -}
     , _token   :: !(TF.Argument Text)
     {- ^ (Required) The DNSimple API v2 token. It must be provided, but it can also be sourced from the @DNSIMPLE_TOKEN@ environment variable. Please note that this must be an <https://support.dnsimple.com/articles/api-access-token/> . You can use either an User or Account token, but an Account token is recommended. -}
@@ -43,9 +56,27 @@ data DNSimple = DNSimple
 instance Hashable DNSimple
 
 instance TF.ToHCL DNSimple where
-    toHCL x = TF.arguments
-        [ TF.assign "account" <$> _account x
-        , TF.assign "token" <$> _token x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy DNSimple))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "account" <$> TF.argument (_account x)
+            , TF.assign "token" <$> TF.argument (_token x)
+            ]
 
-$(TF.makeClassy ''DNSimple)
+instance Semigroup DNSimple where
+    (<>) a b = DNSimple {
+          _account = on (<>) _account a b
+        , _token = on (<>) _token a b
+        }
+
+instance Monoid DNSimple where
+    mappend = (<>)
+    mempty  = DNSimple {
+            _account = TF.Nil
+          , _token = TF.Nil
+        }
+
+instance TF.IsProvider DNSimple where
+    type ProviderName DNSimple = "dnsimple"
+
+$(TF.makeProviderLenses ''DNSimple)

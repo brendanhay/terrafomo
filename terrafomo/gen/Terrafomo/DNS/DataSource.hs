@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
+import qualified Terrafomo.DNS.Types         as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -48,25 +50,24 @@ data ARecordSetDataSource = ARecordSetDataSource {
     {- ^ - Set to @host@ . -}
     } deriving (Show, Eq)
 
-aRecordSetDataSource :: TF.DataSource TF.DNS ARecordSetDataSource
-aRecordSetDataSource =
-    TF.newDataSource "dns_a_record_set" $
-        ARecordSetDataSource {
-            _host = TF.Absent
-            , _computed_addrs = TF.Computed "addrs"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ARecordSetDataSource where
-    toHCL ARecordSetDataSource{..} = TF.arguments
-        [ TF.assign "host" <$> _host
+    toHCL ARecordSetDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "host" <$> TF.argument _host
         ]
 
 $(TF.makeSchemaLenses
     ''ARecordSetDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+aRecordSetDataSource :: TF.DataSource TF.DNS ARecordSetDataSource
+aRecordSetDataSource =
+    TF.newDataSource "dns_a_record_set" $
+        ARecordSetDataSource {
+            _host = TF.Nil
+            , _computed_addrs = TF.Compute "addrs"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @dns_aaaa_record_set@ DNS datasource.
 
@@ -81,25 +82,24 @@ data AaaaRecordSetDataSource = AaaaRecordSetDataSource {
     {- ^ - Set to @host@ . -}
     } deriving (Show, Eq)
 
-aaaaRecordSetDataSource :: TF.DataSource TF.DNS AaaaRecordSetDataSource
-aaaaRecordSetDataSource =
-    TF.newDataSource "dns_aaaa_record_set" $
-        AaaaRecordSetDataSource {
-            _host = TF.Absent
-            , _computed_addrs = TF.Computed "addrs"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AaaaRecordSetDataSource where
-    toHCL AaaaRecordSetDataSource{..} = TF.arguments
-        [ TF.assign "host" <$> _host
+    toHCL AaaaRecordSetDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "host" <$> TF.argument _host
         ]
 
 $(TF.makeSchemaLenses
     ''AaaaRecordSetDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+aaaaRecordSetDataSource :: TF.DataSource TF.DNS AaaaRecordSetDataSource
+aaaaRecordSetDataSource =
+    TF.newDataSource "dns_aaaa_record_set" $
+        AaaaRecordSetDataSource {
+            _host = TF.Nil
+            , _computed_addrs = TF.Compute "addrs"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @dns_cname_record_set@ DNS datasource.
 
@@ -114,25 +114,24 @@ data CnameRecordSetDataSource = CnameRecordSetDataSource {
     {- ^ - Set to @host@ . -}
     } deriving (Show, Eq)
 
-cnameRecordSetDataSource :: TF.DataSource TF.DNS CnameRecordSetDataSource
-cnameRecordSetDataSource =
-    TF.newDataSource "dns_cname_record_set" $
-        CnameRecordSetDataSource {
-            _host = TF.Absent
-            , _computed_cname = TF.Computed "cname"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL CnameRecordSetDataSource where
-    toHCL CnameRecordSetDataSource{..} = TF.arguments
-        [ TF.assign "host" <$> _host
+    toHCL CnameRecordSetDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "host" <$> TF.argument _host
         ]
 
 $(TF.makeSchemaLenses
     ''CnameRecordSetDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+cnameRecordSetDataSource :: TF.DataSource TF.DNS CnameRecordSetDataSource
+cnameRecordSetDataSource =
+    TF.newDataSource "dns_cname_record_set" $
+        CnameRecordSetDataSource {
+            _host = TF.Nil
+            , _computed_cname = TF.Compute "cname"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @dns_ns_record_set@ DNS datasource.
 
@@ -147,25 +146,24 @@ data NsRecordSetDataSource = NsRecordSetDataSource {
     {- ^ - A list of nameservers. Nameservers are always sorted to avoid constant changing plans. -}
     } deriving (Show, Eq)
 
-nsRecordSetDataSource :: TF.DataSource TF.DNS NsRecordSetDataSource
-nsRecordSetDataSource =
-    TF.newDataSource "dns_ns_record_set" $
-        NsRecordSetDataSource {
-            _host = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_nameservers = TF.Computed "nameservers"
-            }
-
 instance TF.ToHCL NsRecordSetDataSource where
-    toHCL NsRecordSetDataSource{..} = TF.arguments
-        [ TF.assign "host" <$> _host
+    toHCL NsRecordSetDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "host" <$> TF.argument _host
         ]
 
 $(TF.makeSchemaLenses
     ''NsRecordSetDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+nsRecordSetDataSource :: TF.DataSource TF.DNS NsRecordSetDataSource
+nsRecordSetDataSource =
+    TF.newDataSource "dns_ns_record_set" $
+        NsRecordSetDataSource {
+            _host = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_nameservers = TF.Compute "nameservers"
+            }
 
 {- | The @dns_txt_record_set@ DNS datasource.
 
@@ -182,23 +180,22 @@ data TxtRecordSetDataSource = TxtRecordSetDataSource {
     {- ^ - A list of TXT records. -}
     } deriving (Show, Eq)
 
-txtRecordSetDataSource :: TF.DataSource TF.DNS TxtRecordSetDataSource
-txtRecordSetDataSource =
-    TF.newDataSource "dns_txt_record_set" $
-        TxtRecordSetDataSource {
-            _host = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_record = TF.Computed "record"
-            , _computed_records = TF.Computed "records"
-            }
-
 instance TF.ToHCL TxtRecordSetDataSource where
-    toHCL TxtRecordSetDataSource{..} = TF.arguments
-        [ TF.assign "host" <$> _host
+    toHCL TxtRecordSetDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "host" <$> TF.argument _host
         ]
 
 $(TF.makeSchemaLenses
     ''TxtRecordSetDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+txtRecordSetDataSource :: TF.DataSource TF.DNS TxtRecordSetDataSource
+txtRecordSetDataSource =
+    TF.newDataSource "dns_txt_record_set" $
+        TxtRecordSetDataSource {
+            _host = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_record = TF.Compute "record"
+            , _computed_records = TF.Compute "records"
+            }

@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cobbler.Provider where
+module Terrafomo.Cobbler.Provider
+    ( Cobbler    (..)
+    , HasCobbler (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Cobbler.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ The Cobbler provider is used to interact with a locally installed
 the proper credentials before it can be used. Use the navigation to the left
 to read about the available resources.
 -}
-data Cobbler = Cobbler
-    { _password :: !(TF.Argument Text)
+data Cobbler = Cobbler {
+      _password :: !(TF.Argument Text)
     {- ^ (Required) The password to the Cobbler service. This can also be specified with the @COBBLER_PASSWORD@ shell environment variable. -}
     , _url      :: !(TF.Argument Text)
     {- ^ (Required) The url to the Cobbler service. This can also be specified with the @COBBLER_URL@ shell environment variable. -}
@@ -45,10 +58,30 @@ data Cobbler = Cobbler
 instance Hashable Cobbler
 
 instance TF.ToHCL Cobbler where
-    toHCL x = TF.arguments
-        [ TF.assign "password" <$> _password x
-        , TF.assign "url" <$> _url x
-        , TF.assign "username" <$> _username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Cobbler))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "url" <$> TF.argument (_url x)
+            , TF.assign "username" <$> TF.argument (_username x)
+            ]
 
-$(TF.makeClassy ''Cobbler)
+instance Semigroup Cobbler where
+    (<>) a b = Cobbler {
+          _password = on (<>) _password a b
+        , _url = on (<>) _url a b
+        , _username = on (<>) _username a b
+        }
+
+instance Monoid Cobbler where
+    mappend = (<>)
+    mempty  = Cobbler {
+            _password = TF.Nil
+          , _url = TF.Nil
+          , _username = TF.Nil
+        }
+
+instance TF.IsProvider Cobbler where
+    type ProviderName Cobbler = "cobbler"
+
+$(TF.makeProviderLenses ''Cobbler)

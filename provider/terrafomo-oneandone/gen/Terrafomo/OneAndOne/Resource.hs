@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OneAndOne       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.OneAndOne.Provider as TF
+import qualified Terrafomo.OneAndOne.Types    as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @oneandone_instance_size@ OneAndOne resource.
 
@@ -49,27 +51,26 @@ data InstanceSizeResource = InstanceSizeResource {
     {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Eq)
 
-instanceSizeResource :: TF.Resource TF.OneAndOne InstanceSizeResource
-instanceSizeResource =
-    TF.newResource "oneandone_instance_size" $
-        InstanceSizeResource {
-            _name = TF.Absent
-            , _ram = TF.Absent
-            , _vcores = TF.Absent
-            }
-
 instance TF.ToHCL InstanceSizeResource where
-    toHCL InstanceSizeResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "ram" <$> _ram
-        , TF.assign "vcores" <$> _vcores
+    toHCL InstanceSizeResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "ram" <$> TF.argument _ram
+        , TF.assign "vcores" <$> TF.argument _vcores
         ]
 
 $(TF.makeSchemaLenses
     ''InstanceSizeResource
     ''TF.OneAndOne
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+instanceSizeResource :: TF.Resource TF.OneAndOne InstanceSizeResource
+instanceSizeResource =
+    TF.newResource "oneandone_instance_size" $
+        InstanceSizeResource {
+            _name = TF.Nil
+            , _ram = TF.Nil
+            , _vcores = TF.Nil
+            }
 
 {- | The @oneandone_ip@ OneAndOne resource.
 
@@ -86,29 +87,28 @@ data IpResource = IpResource {
     {- ^ (Optional) -}
     } deriving (Show, Eq)
 
-ipResource :: TF.Resource TF.OneAndOne IpResource
-ipResource =
-    TF.newResource "oneandone_ip" $
-        IpResource {
-            _datacenter = TF.Absent
-            , _ip_address = TF.Absent
-            , _ip_type = TF.Absent
-            , _reverse_dns = TF.Absent
-            }
-
 instance TF.ToHCL IpResource where
-    toHCL IpResource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "ip_address" <$> _ip_address
-        , TF.assign "ip_type" <$> _ip_type
-        , TF.assign "reverse_dns" <$> _reverse_dns
+    toHCL IpResource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "ip_type" <$> TF.argument _ip_type
+        , TF.assign "reverse_dns" <$> TF.argument _reverse_dns
         ]
 
 $(TF.makeSchemaLenses
     ''IpResource
     ''TF.OneAndOne
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ipResource :: TF.Resource TF.OneAndOne IpResource
+ipResource =
+    TF.newResource "oneandone_ip" $
+        IpResource {
+            _datacenter = TF.Nil
+            , _ip_address = TF.Nil
+            , _ip_type = TF.Nil
+            , _reverse_dns = TF.Nil
+            }
 
 {- | The @oneandone_server@ OneAndOne resource.
 
@@ -127,31 +127,30 @@ data ServerResource = ServerResource {
     {- ^ (Optional) List of servers that will have access to the stored storage -}
     } deriving (Show, Eq)
 
-serverResource :: TF.Resource TF.OneAndOne ServerResource
-serverResource =
-    TF.newResource "oneandone_server" $
-        ServerResource {
-            _datacenter = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _size = TF.Absent
-            , _storage_servers = TF.Absent
-            }
-
 instance TF.ToHCL ServerResource where
-    toHCL ServerResource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "size" <$> _size
-        , TF.assign "storage_servers" <$> _storage_servers
+    toHCL ServerResource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "storage_servers" <$> TF.argument _storage_servers
         ]
 
 $(TF.makeSchemaLenses
     ''ServerResource
     ''TF.OneAndOne
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serverResource :: TF.Resource TF.OneAndOne ServerResource
+serverResource =
+    TF.newResource "oneandone_server" $
+        ServerResource {
+            _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _size = TF.Nil
+            , _storage_servers = TF.Nil
+            }
 
 {- | The @oneandone_vpn@ OneAndOne resource.
 
@@ -170,28 +169,27 @@ data VpnResource = VpnResource {
     {- ^ (Required) The name of the VPN -}
     } deriving (Show, Eq)
 
-vpnResource :: TF.Resource TF.OneAndOne VpnResource
-vpnResource =
-    TF.newResource "oneandone_vpn" $
-        VpnResource {
-            _datacenter = TF.Absent
-            , _description = TF.Absent
-            , _download_path = TF.Absent
-            , _file_name = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL VpnResource where
-    toHCL VpnResource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "description" <$> _description
-        , TF.assign "download_path" <$> _download_path
-        , TF.assign "file_name" <$> _file_name
-        , TF.assign "name" <$> _name
+    toHCL VpnResource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "download_path" <$> TF.argument _download_path
+        , TF.assign "file_name" <$> TF.argument _file_name
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''VpnResource
     ''TF.OneAndOne
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vpnResource :: TF.Resource TF.OneAndOne VpnResource
+vpnResource =
+    TF.newResource "oneandone_vpn" $
+        VpnResource {
+            _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _download_path = TF.Nil
+            , _file_name = TF.Nil
+            , _name = TF.Nil
+            }

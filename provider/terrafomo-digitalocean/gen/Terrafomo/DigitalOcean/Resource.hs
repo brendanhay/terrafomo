@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.DigitalOcean    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.DigitalOcean.Provider as TF
+import qualified Terrafomo.DigitalOcean.Types    as TF
+import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.TH                    as TF
 
 {- | The @digitalocean_certificate@ DigitalOcean resource.
 
@@ -62,33 +64,32 @@ data CertificateResource = CertificateResource {
     {- ^ - The SHA-1 fingerprint of the certificate -}
     } deriving (Show, Eq)
 
-certificateResource :: TF.Resource TF.DigitalOcean CertificateResource
-certificateResource =
-    TF.newResource "digitalocean_certificate" $
-        CertificateResource {
-            _certificate_chain = TF.Absent
-            , _leaf_certificate = TF.Absent
-            , _name = TF.Absent
-            , _private_key = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_not_after = TF.Computed "not_after"
-            , _computed_sha1_fingerprint = TF.Computed "sha1_fingerprint"
-            }
-
 instance TF.ToHCL CertificateResource where
-    toHCL CertificateResource{..} = TF.arguments
-        [ TF.assign "certificate_chain" <$> _certificate_chain
-        , TF.assign "leaf_certificate" <$> _leaf_certificate
-        , TF.assign "name" <$> _name
-        , TF.assign "private_key" <$> _private_key
+    toHCL CertificateResource{..} = TF.block $ catMaybes
+        [ TF.assign "certificate_chain" <$> TF.argument _certificate_chain
+        , TF.assign "leaf_certificate" <$> TF.argument _leaf_certificate
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "private_key" <$> TF.argument _private_key
         ]
 
 $(TF.makeSchemaLenses
     ''CertificateResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+certificateResource :: TF.Resource TF.DigitalOcean CertificateResource
+certificateResource =
+    TF.newResource "digitalocean_certificate" $
+        CertificateResource {
+            _certificate_chain = TF.Nil
+            , _leaf_certificate = TF.Nil
+            , _name = TF.Nil
+            , _private_key = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_not_after = TF.Compute "not_after"
+            , _computed_sha1_fingerprint = TF.Compute "sha1_fingerprint"
+            }
 
 {- | The @digitalocean_domain@ DigitalOcean resource.
 
@@ -103,26 +104,25 @@ data DomainResource = DomainResource {
     {- ^ - The name of the domain -}
     } deriving (Show, Eq)
 
-domainResource :: TF.Resource TF.DigitalOcean DomainResource
-domainResource =
-    TF.newResource "digitalocean_domain" $
-        DomainResource {
-            _ip_address = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DomainResource where
-    toHCL DomainResource{..} = TF.arguments
-        [ TF.assign "ip_address" <$> _ip_address
-        , TF.assign "name" <$> _name
+    toHCL DomainResource{..} = TF.block $ catMaybes
+        [ TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DomainResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+domainResource :: TF.Resource TF.DigitalOcean DomainResource
+domainResource =
+    TF.newResource "digitalocean_domain" $
+        DomainResource {
+            _ip_address = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @digitalocean_droplet@ DigitalOcean resource.
 
@@ -197,66 +197,65 @@ data DropletResource = DropletResource {
     {- ^ - A list of the attached block storage volumes -}
     } deriving (Show, Eq)
 
-dropletResource :: TF.Resource TF.DigitalOcean DropletResource
-dropletResource =
-    TF.newResource "digitalocean_droplet" $
-        DropletResource {
-            _backups = TF.Absent
-            , _image = TF.Absent
-            , _ipv6 = TF.Absent
-            , _monitoring = TF.Absent
-            , _name = TF.Absent
-            , _private_networking = TF.Absent
-            , _region = TF.Absent
-            , _resize_disk = TF.Absent
-            , _size = TF.Absent
-            , _ssh_keys = TF.Absent
-            , _tags = TF.Absent
-            , _user_data = TF.Absent
-            , _volume_ids = TF.Absent
-            , _computed_disk = TF.Computed "disk"
-            , _computed_id = TF.Computed "id"
-            , _computed_image = TF.Computed "image"
-            , _computed_ipv4_address = TF.Computed "ipv4_address"
-            , _computed_ipv4_address_private = TF.Computed "ipv4_address_private"
-            , _computed_ipv6 = TF.Computed "ipv6"
-            , _computed_ipv6_address = TF.Computed "ipv6_address"
-            , _computed_ipv6_address_private = TF.Computed "ipv6_address_private"
-            , _computed_locked = TF.Computed "locked"
-            , _computed_name = TF.Computed "name"
-            , _computed_price_hourly = TF.Computed "price_hourly"
-            , _computed_price_monthly = TF.Computed "price_monthly"
-            , _computed_private_networking = TF.Computed "private_networking"
-            , _computed_region = TF.Computed "region"
-            , _computed_size = TF.Computed "size"
-            , _computed_status = TF.Computed "status"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_vcpus = TF.Computed "vcpus"
-            , _computed_volume_ids = TF.Computed "volume_ids"
-            }
-
 instance TF.ToHCL DropletResource where
-    toHCL DropletResource{..} = TF.arguments
-        [ TF.assign "backups" <$> _backups
-        , TF.assign "image" <$> _image
-        , TF.assign "ipv6" <$> _ipv6
-        , TF.assign "monitoring" <$> _monitoring
-        , TF.assign "name" <$> _name
-        , TF.assign "private_networking" <$> _private_networking
-        , TF.assign "region" <$> _region
-        , TF.assign "resize_disk" <$> _resize_disk
-        , TF.assign "size" <$> _size
-        , TF.assign "ssh_keys" <$> _ssh_keys
-        , TF.assign "tags" <$> _tags
-        , TF.assign "user_data" <$> _user_data
-        , TF.assign "volume_ids" <$> _volume_ids
+    toHCL DropletResource{..} = TF.block $ catMaybes
+        [ TF.assign "backups" <$> TF.argument _backups
+        , TF.assign "image" <$> TF.argument _image
+        , TF.assign "ipv6" <$> TF.argument _ipv6
+        , TF.assign "monitoring" <$> TF.argument _monitoring
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "private_networking" <$> TF.argument _private_networking
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "resize_disk" <$> TF.argument _resize_disk
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "ssh_keys" <$> TF.argument _ssh_keys
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "user_data" <$> TF.argument _user_data
+        , TF.assign "volume_ids" <$> TF.argument _volume_ids
         ]
 
 $(TF.makeSchemaLenses
     ''DropletResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dropletResource :: TF.Resource TF.DigitalOcean DropletResource
+dropletResource =
+    TF.newResource "digitalocean_droplet" $
+        DropletResource {
+            _backups = TF.Nil
+            , _image = TF.Nil
+            , _ipv6 = TF.Nil
+            , _monitoring = TF.Nil
+            , _name = TF.Nil
+            , _private_networking = TF.Nil
+            , _region = TF.Nil
+            , _resize_disk = TF.Nil
+            , _size = TF.Nil
+            , _ssh_keys = TF.Nil
+            , _tags = TF.Nil
+            , _user_data = TF.Nil
+            , _volume_ids = TF.Nil
+            , _computed_disk = TF.Compute "disk"
+            , _computed_id = TF.Compute "id"
+            , _computed_image = TF.Compute "image"
+            , _computed_ipv4_address = TF.Compute "ipv4_address"
+            , _computed_ipv4_address_private = TF.Compute "ipv4_address_private"
+            , _computed_ipv6 = TF.Compute "ipv6"
+            , _computed_ipv6_address = TF.Compute "ipv6_address"
+            , _computed_ipv6_address_private = TF.Compute "ipv6_address_private"
+            , _computed_locked = TF.Compute "locked"
+            , _computed_name = TF.Compute "name"
+            , _computed_price_hourly = TF.Compute "price_hourly"
+            , _computed_price_monthly = TF.Compute "price_monthly"
+            , _computed_private_networking = TF.Compute "private_networking"
+            , _computed_region = TF.Compute "region"
+            , _computed_size = TF.Compute "size"
+            , _computed_status = TF.Compute "status"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_vcpus = TF.Compute "vcpus"
+            , _computed_volume_ids = TF.Compute "volume_ids"
+            }
 
 {- | The @digitalocean_firewall@ DigitalOcean resource.
 
@@ -294,40 +293,39 @@ data FirewallResource = FirewallResource {
     {- ^ - The names of the Tags assigned to the Firewall. -}
     } deriving (Show, Eq)
 
-firewallResource :: TF.Resource TF.DigitalOcean FirewallResource
-firewallResource =
-    TF.newResource "digitalocean_firewall" $
-        FirewallResource {
-            _droplet_ids = TF.Absent
-            , _inbound_rule = TF.Absent
-            , _name = TF.Absent
-            , _outbound_rule = TF.Absent
-            , _tags = TF.Absent
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_droplet_ids = TF.Computed "droplet_ids"
-            , _computed_id = TF.Computed "id"
-            , _computed_inbound_rules = TF.Computed "inbound_rules"
-            , _computed_name = TF.Computed "name"
-            , _computed_outbound_rules = TF.Computed "outbound_rules"
-            , _computed_pending_changes = TF.Computed "pending_changes"
-            , _computed_status = TF.Computed "status"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL FirewallResource where
-    toHCL FirewallResource{..} = TF.arguments
-        [ TF.assign "droplet_ids" <$> _droplet_ids
-        , TF.assign "inbound_rule" <$> _inbound_rule
-        , TF.assign "name" <$> _name
-        , TF.assign "outbound_rule" <$> _outbound_rule
-        , TF.assign "tags" <$> _tags
+    toHCL FirewallResource{..} = TF.block $ catMaybes
+        [ TF.assign "droplet_ids" <$> TF.argument _droplet_ids
+        , TF.assign "inbound_rule" <$> TF.argument _inbound_rule
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "outbound_rule" <$> TF.argument _outbound_rule
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''FirewallResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+firewallResource :: TF.Resource TF.DigitalOcean FirewallResource
+firewallResource =
+    TF.newResource "digitalocean_firewall" $
+        FirewallResource {
+            _droplet_ids = TF.Nil
+            , _inbound_rule = TF.Nil
+            , _name = TF.Nil
+            , _outbound_rule = TF.Nil
+            , _tags = TF.Nil
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_droplet_ids = TF.Compute "droplet_ids"
+            , _computed_id = TF.Compute "id"
+            , _computed_inbound_rules = TF.Compute "inbound_rules"
+            , _computed_name = TF.Compute "name"
+            , _computed_outbound_rules = TF.Compute "outbound_rules"
+            , _computed_pending_changes = TF.Compute "pending_changes"
+            , _computed_status = TF.Compute "status"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @digitalocean_floating_ip@ DigitalOcean resource.
 
@@ -343,26 +341,25 @@ data FloatingIpResource = FloatingIpResource {
     {- ^ - The IP Address of the resource -}
     } deriving (Show, Eq)
 
-floatingIpResource :: TF.Resource TF.DigitalOcean FloatingIpResource
-floatingIpResource =
-    TF.newResource "digitalocean_floating_ip" $
-        FloatingIpResource {
-            _droplet_id = TF.Absent
-            , _region = TF.Absent
-            , _computed_ip_address = TF.Computed "ip_address"
-            }
-
 instance TF.ToHCL FloatingIpResource where
-    toHCL FloatingIpResource{..} = TF.arguments
-        [ TF.assign "droplet_id" <$> _droplet_id
-        , TF.assign "region" <$> _region
+    toHCL FloatingIpResource{..} = TF.block $ catMaybes
+        [ TF.assign "droplet_id" <$> TF.argument _droplet_id
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''FloatingIpResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+floatingIpResource :: TF.Resource TF.DigitalOcean FloatingIpResource
+floatingIpResource =
+    TF.newResource "digitalocean_floating_ip" $
+        FloatingIpResource {
+            _droplet_id = TF.Nil
+            , _region = TF.Nil
+            , _computed_ip_address = TF.Compute "ip_address"
+            }
 
 {- | The @digitalocean_loadbalancer@ DigitalOcean resource.
 
@@ -394,41 +391,40 @@ data LoadbalancerResource = LoadbalancerResource {
     {- ^ - The ip of the Load Balancer -}
     } deriving (Show, Eq)
 
-loadbalancerResource :: TF.Resource TF.DigitalOcean LoadbalancerResource
-loadbalancerResource =
-    TF.newResource "digitalocean_loadbalancer" $
-        LoadbalancerResource {
-            _algorithm = TF.Absent
-            , _droplet_ids = TF.Absent
-            , _droplet_tag = TF.Absent
-            , _forwarding_rule = TF.Absent
-            , _healthcheck = TF.Absent
-            , _name = TF.Absent
-            , _redirect_http_to_https = TF.Absent
-            , _region = TF.Absent
-            , _sticky_sessions = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip = TF.Computed "ip"
-            }
-
 instance TF.ToHCL LoadbalancerResource where
-    toHCL LoadbalancerResource{..} = TF.arguments
-        [ TF.assign "algorithm" <$> _algorithm
-        , TF.assign "droplet_ids" <$> _droplet_ids
-        , TF.assign "droplet_tag" <$> _droplet_tag
-        , TF.assign "forwarding_rule" <$> _forwarding_rule
-        , TF.assign "healthcheck" <$> _healthcheck
-        , TF.assign "name" <$> _name
-        , TF.assign "redirect_http_to_https" <$> _redirect_http_to_https
-        , TF.assign "region" <$> _region
-        , TF.assign "sticky_sessions" <$> _sticky_sessions
+    toHCL LoadbalancerResource{..} = TF.block $ catMaybes
+        [ TF.assign "algorithm" <$> TF.argument _algorithm
+        , TF.assign "droplet_ids" <$> TF.argument _droplet_ids
+        , TF.assign "droplet_tag" <$> TF.argument _droplet_tag
+        , TF.assign "forwarding_rule" <$> TF.argument _forwarding_rule
+        , TF.assign "healthcheck" <$> TF.argument _healthcheck
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "redirect_http_to_https" <$> TF.argument _redirect_http_to_https
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "sticky_sessions" <$> TF.argument _sticky_sessions
         ]
 
 $(TF.makeSchemaLenses
     ''LoadbalancerResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+loadbalancerResource :: TF.Resource TF.DigitalOcean LoadbalancerResource
+loadbalancerResource =
+    TF.newResource "digitalocean_loadbalancer" $
+        LoadbalancerResource {
+            _algorithm = TF.Nil
+            , _droplet_ids = TF.Nil
+            , _droplet_tag = TF.Nil
+            , _forwarding_rule = TF.Nil
+            , _healthcheck = TF.Nil
+            , _name = TF.Nil
+            , _redirect_http_to_https = TF.Nil
+            , _region = TF.Nil
+            , _sticky_sessions = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip = TF.Compute "ip"
+            }
 
 {- | The @digitalocean_record@ DigitalOcean resource.
 
@@ -457,39 +453,38 @@ data RecordResource = RecordResource {
     {- ^ - The record ID -}
     } deriving (Show, Eq)
 
-recordResource :: TF.Resource TF.DigitalOcean RecordResource
-recordResource =
-    TF.newResource "digitalocean_record" $
-        RecordResource {
-            _domain = TF.Absent
-            , _name = TF.Absent
-            , _port = TF.Absent
-            , _priority = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value = TF.Absent
-            , _weight = TF.Absent
-            , _computed_fqdn = TF.Computed "fqdn"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RecordResource where
-    toHCL RecordResource{..} = TF.arguments
-        [ TF.assign "domain" <$> _domain
-        , TF.assign "name" <$> _name
-        , TF.assign "port" <$> _port
-        , TF.assign "priority" <$> _priority
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value" <$> _value
-        , TF.assign "weight" <$> _weight
+    toHCL RecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value" <$> TF.argument _value
+        , TF.assign "weight" <$> TF.argument _weight
         ]
 
 $(TF.makeSchemaLenses
     ''RecordResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+recordResource :: TF.Resource TF.DigitalOcean RecordResource
+recordResource =
+    TF.newResource "digitalocean_record" $
+        RecordResource {
+            _domain = TF.Nil
+            , _name = TF.Nil
+            , _port = TF.Nil
+            , _priority = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value = TF.Nil
+            , _weight = TF.Nil
+            , _computed_fqdn = TF.Compute "fqdn"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @digitalocean_ssh_key@ DigitalOcean resource.
 
@@ -512,29 +507,28 @@ data SshKeyResource = SshKeyResource {
     {- ^ - The text of the public key -}
     } deriving (Show, Eq)
 
-sshKeyResource :: TF.Resource TF.DigitalOcean SshKeyResource
-sshKeyResource =
-    TF.newResource "digitalocean_ssh_key" $
-        SshKeyResource {
-            _name = TF.Absent
-            , _public_key = TF.Absent
-            , _computed_fingerprint = TF.Computed "fingerprint"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_public_key = TF.Computed "public_key"
-            }
-
 instance TF.ToHCL SshKeyResource where
-    toHCL SshKeyResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "public_key" <$> _public_key
+    toHCL SshKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
 $(TF.makeSchemaLenses
     ''SshKeyResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sshKeyResource :: TF.Resource TF.DigitalOcean SshKeyResource
+sshKeyResource =
+    TF.newResource "digitalocean_ssh_key" $
+        SshKeyResource {
+            _name = TF.Nil
+            , _public_key = TF.Nil
+            , _computed_fingerprint = TF.Compute "fingerprint"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_public_key = TF.Compute "public_key"
+            }
 
 {- | The @digitalocean_tag@ DigitalOcean resource.
 
@@ -552,25 +546,24 @@ data TagResource = TagResource {
     {- ^ - The name of the tag -}
     } deriving (Show, Eq)
 
-tagResource :: TF.Resource TF.DigitalOcean TagResource
-tagResource =
-    TF.newResource "digitalocean_tag" $
-        TagResource {
-            _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL TagResource where
-    toHCL TagResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL TagResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TagResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+tagResource :: TF.Resource TF.DigitalOcean TagResource
+tagResource =
+    TF.newResource "digitalocean_tag" $
+        TagResource {
+            _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @digitalocean_volume@ DigitalOcean resource.
 
@@ -592,29 +585,28 @@ data VolumeResource = VolumeResource {
     {- ^ - The unique identifier for the block storage volume. -}
     } deriving (Show, Eq)
 
-volumeResource :: TF.Resource TF.DigitalOcean VolumeResource
-volumeResource =
-    TF.newResource "digitalocean_volume" $
-        VolumeResource {
-            _description = TF.Absent
-            , _droplet_ids = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _size = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VolumeResource where
-    toHCL VolumeResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "droplet_ids" <$> _droplet_ids
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "size" <$> _size
+    toHCL VolumeResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "droplet_ids" <$> TF.argument _droplet_ids
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "size" <$> TF.argument _size
         ]
 
 $(TF.makeSchemaLenses
     ''VolumeResource
     ''TF.DigitalOcean
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+volumeResource :: TF.Resource TF.DigitalOcean VolumeResource
+volumeResource =
+    TF.newResource "digitalocean_volume" $
+        VolumeResource {
+            _description = TF.Nil
+            , _droplet_ids = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _size = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

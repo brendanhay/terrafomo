@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CloudStack.Provider where
+module Terrafomo.CloudStack.Provider
+    ( CloudStack    (..)
+    , HasCloudStack (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.CloudStack.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Meta      as TF
+import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Variable  as TF
 import qualified Terrafomo.TH               as TF
 
@@ -37,8 +50,8 @@ or for the @config@ and @profile@ fields. A combination of both is not
 allowed and will not work. Use the navigation to the left to read about the
 available resources.
 -}
-data CloudStack = CloudStack
-    { _api_key       :: !(TF.Argument Text)
+data CloudStack = CloudStack {
+      _api_key       :: !(TF.Argument Text)
     {- ^ (Optional) This is the CloudStack API key. It can also be sourced from the @CLOUDSTACK_API_KEY@ environment variable. -}
     , _api_url       :: !(TF.Argument Text)
     {- ^ (Optional) This is the CloudStack API URL. It can also be sourced from the @CLOUDSTACK_API_URL@ environment variable. -}
@@ -57,14 +70,42 @@ data CloudStack = CloudStack
 instance Hashable CloudStack
 
 instance TF.ToHCL CloudStack where
-    toHCL x = TF.arguments
-        [ TF.assign "api_key" <$> _api_key x
-        , TF.assign "api_url" <$> _api_url x
-        , TF.assign "config" <$> _config x
-        , TF.assign "http_get_only" <$> _http_get_only x
-        , TF.assign "profile" <$> _profile x
-        , TF.assign "secret_key" <$> _secret_key x
-        , TF.assign "timeout" <$> _timeout x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy CloudStack))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "api_key" <$> TF.argument (_api_key x)
+            , TF.assign "api_url" <$> TF.argument (_api_url x)
+            , TF.assign "config" <$> TF.argument (_config x)
+            , TF.assign "http_get_only" <$> TF.argument (_http_get_only x)
+            , TF.assign "profile" <$> TF.argument (_profile x)
+            , TF.assign "secret_key" <$> TF.argument (_secret_key x)
+            , TF.assign "timeout" <$> TF.argument (_timeout x)
+            ]
 
-$(TF.makeClassy ''CloudStack)
+instance Semigroup CloudStack where
+    (<>) a b = CloudStack {
+          _api_key = on (<>) _api_key a b
+        , _api_url = on (<>) _api_url a b
+        , _config = on (<>) _config a b
+        , _http_get_only = on (<>) _http_get_only a b
+        , _profile = on (<>) _profile a b
+        , _secret_key = on (<>) _secret_key a b
+        , _timeout = on (<>) _timeout a b
+        }
+
+instance Monoid CloudStack where
+    mappend = (<>)
+    mempty  = CloudStack {
+            _api_key = TF.Nil
+          , _api_url = TF.Nil
+          , _config = TF.Nil
+          , _http_get_only = TF.Nil
+          , _profile = TF.Nil
+          , _secret_key = TF.Nil
+          , _timeout = TF.Nil
+        }
+
+instance TF.IsProvider CloudStack where
+    type ProviderName CloudStack = "cloudstack"
+
+$(TF.makeProviderLenses ''CloudStack)

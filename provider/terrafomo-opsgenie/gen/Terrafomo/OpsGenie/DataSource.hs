@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OpsGenie          as TF
+import qualified Terrafomo.OpsGenie.Provider as TF
+import qualified Terrafomo.OpsGenie.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -50,22 +52,21 @@ data UserDataSource = UserDataSource {
     {- ^ - The role of the found user. -}
     } deriving (Show, Eq)
 
-userDataSource :: TF.DataSource TF.OpsGenie UserDataSource
-userDataSource =
-    TF.newDataSource "opsgenie_user" $
-        UserDataSource {
-            _username = TF.Absent
-            , _computed_full_name = TF.Computed "full_name"
-            , _computed_role = TF.Computed "role"
-            }
-
 instance TF.ToHCL UserDataSource where
-    toHCL UserDataSource{..} = TF.arguments
-        [ TF.assign "username" <$> _username
+    toHCL UserDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''UserDataSource
     ''TF.OpsGenie
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+userDataSource :: TF.DataSource TF.OpsGenie UserDataSource
+userDataSource =
+    TF.newDataSource "opsgenie_user" $
+        UserDataSource {
+            _username = TF.Nil
+            , _computed_full_name = TF.Compute "full_name"
+            , _computed_role = TF.Compute "role"
+            }

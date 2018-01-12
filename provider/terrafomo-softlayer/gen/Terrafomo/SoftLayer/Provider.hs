@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.SoftLayer.Provider where
+module Terrafomo.SoftLayer.Provider
+    ( SoftLayer    (..)
+    , HasSoftLayer (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.SoftLayer.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -34,12 +47,27 @@ SoftLayer provider is new as of Terraform 0.6.16. It is ready to be used but
 many features are still being added. If there is a SoftLayer feature
 missing, please report it in the GitHub repo.
 -}
-data SoftLayer = SoftLayer
-    deriving (Show, Eq, Generic)
+data SoftLayer = SoftLayer {
+    } deriving (Show, Eq, Generic)
 
 instance Hashable SoftLayer
 
 instance TF.ToHCL SoftLayer where
-    toHCL = const $ TF.arguments []
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy SoftLayer))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            ]
 
-$(TF.makeClassy ''SoftLayer)
+instance Semigroup SoftLayer where
+    (<>) a b = SoftLayer {
+        }
+
+instance Monoid SoftLayer where
+    mappend = (<>)
+    mempty  = SoftLayer {
+        }
+
+instance TF.IsProvider SoftLayer where
+    type ProviderName SoftLayer = "softlayer"
+
+$(TF.makeProviderLenses ''SoftLayer)

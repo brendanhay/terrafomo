@@ -1,73 +1,61 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeFamilies        #-}
-
 -- | The intention here is to have a somewhat bash-esque suite of
 -- functionality.  Rather than requiring heavily curated imports etc. that a
 -- batteries-included environment tailored to matching Terraform's builtin
 -- functions + common system engineering tasks.
 module Terrafomo
     (
-    -- * Primitive Types
-      Text
-    , Natural
-    , Map
-    , Set
-    , Proxy (Proxy)
+    -- * The Terraform Monad
+      Terraform
+    , runTerraformT
+    , renderTerraformT
 
-    -- * Lenses
-    , (Lens.&)
-    , (Lens..~)
-    , (Lens.?~)
-    , (Lens.%~)
+    , TerraformT
+    , runTerraformT
+    , renderTerraformT
 
-    , attribute
-    , constant
-    , nil
-    , true
-    , false
+    -- ** Errors
+    , TerraformError  (..)
 
-    , provider
-    , dependsOn
-    , lifecycle
-    , preventDestroy
-    , createBeforeDestroy
-    , ignoreChanges
+    -- ** Rendering Output
+    , TerraformOutput
+    , renderOutput
 
     -- * Terraform Syntax
     , Name
     , Reference
+    , Attribute
+    , Argument
 
-    -- ** Providers
+    -- ** Arguments and Attributes
+    , constant
+    , nil
+    , true
+    , false
+    , attribute
+
+    -- * Providers
     , Alias
-    , defaultProvider
 
-    -- ** DataSources and Resources
+    -- * Meta Parameters
+    , HasMeta         (..)
+    , Change          (..)
 
+    -- * DataSources
     , DataSource
     , datasource
 
+    -- * Resources
     , Resource
     , resource
 
-    -- -- *** Resource Metadata
-    -- , Monad.dependsOn
-    -- , Monad.preventDestroy
-    -- , Monad.createBeforeDestroy
-    -- , Monad.ignoreChange
-    -- , Monad.provider
+    -- ** Lifecycles
+    , HasLifecycle    (..)
+    , Lifecycle       (..)
 
-    -- ** Attributes
-    , Attribute (..)
-    , Argument  (..)
-    -- , attribute
-
-    -- ** Defining Outputs
+    -- * Outputs
+    , Output
     , output
 
-    -- * Terraform Monad
-    , Terraform
-    , runTerraform
-    , evalTerraform
     -- ** Count
     , count
 
@@ -76,15 +64,26 @@ module Terrafomo
     , format
     , sformat
     , nformat
+
+    -- * Re-exported
+
+    -- ** Primitive Types
+    , Text
+    , Natural
+    , Map
+    , Set
+
+    -- ** Lenses
+    , (Lens.&)
+    , (Lens..~)
+    , (Lens.?~)
+    , (Lens.%~)
     ) where
 
 import Data.Map.Strict (Map)
-import Data.Proxy      (Proxy (Proxy))
 import Data.Set        (Set)
 import Data.String     (fromString)
 import Data.Text       (Text)
-
-import GHC.TypeLits (KnownSymbol, symbolVal)
 
 import Numeric.Natural (Natural)
 
@@ -96,20 +95,4 @@ import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 
-import qualified Data.Traversable as Traverse
-import qualified Lens.Micro       as Lens
-
--- FIXME: probably use ':=' or '=:' to avoid ambiguity with aeson and lens.
-
--- -- | @setter .= x@ is equivalent to @setter .~ Present x@.
--- (.=) :: Lens.ASetter s t a (Argument b) -> b -> s -> t
--- (.=) l x = l Lens..~ Present x
-
-
--- -- attribute
--- --     :: ( KnownSymbol k
--- --        )
--- --     => Ref p s
--- --     -> proxy k
--- --     -> Attr v
--- attribute (Ref k x) field = Computed k (field x)
+import qualified Lens.Micro as Lens

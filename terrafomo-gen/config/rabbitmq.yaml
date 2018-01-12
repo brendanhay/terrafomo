@@ -1,4 +1,4 @@
 name: RabbitMQ
 package: terrafomo-rabbitmq
 datatype: true
-
+original: rabbitmq

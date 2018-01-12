@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.InfluxDB        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.InfluxDB.Provider as TF
+import qualified Terrafomo.InfluxDB.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @influxdb_continuous_query@ InfluxDB resource.
 
@@ -50,27 +52,26 @@ data ContinuousQueryResource = ContinuousQueryResource {
     {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Eq)
 
-continuousQueryResource :: TF.Resource TF.InfluxDB ContinuousQueryResource
-continuousQueryResource =
-    TF.newResource "influxdb_continuous_query" $
-        ContinuousQueryResource {
-            _database = TF.Absent
-            , _name = TF.Absent
-            , _query = TF.Absent
-            }
-
 instance TF.ToHCL ContinuousQueryResource where
-    toHCL ContinuousQueryResource{..} = TF.arguments
-        [ TF.assign "database" <$> _database
-        , TF.assign "name" <$> _name
-        , TF.assign "query" <$> _query
+    toHCL ContinuousQueryResource{..} = TF.block $ catMaybes
+        [ TF.assign "database" <$> TF.argument _database
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "query" <$> TF.argument _query
         ]
 
 $(TF.makeSchemaLenses
     ''ContinuousQueryResource
     ''TF.InfluxDB
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+continuousQueryResource :: TF.Resource TF.InfluxDB ContinuousQueryResource
+continuousQueryResource =
+    TF.newResource "influxdb_continuous_query" $
+        ContinuousQueryResource {
+            _database = TF.Nil
+            , _name = TF.Nil
+            , _query = TF.Nil
+            }
 
 {- | The @influxdb_database@ InfluxDB resource.
 
@@ -81,23 +82,22 @@ data DatabaseResource = DatabaseResource {
     {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
     } deriving (Show, Eq)
 
-databaseResource :: TF.Resource TF.InfluxDB DatabaseResource
-databaseResource =
-    TF.newResource "influxdb_database" $
-        DatabaseResource {
-            _name = TF.Absent
-            }
-
 instance TF.ToHCL DatabaseResource where
-    toHCL DatabaseResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL DatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DatabaseResource
     ''TF.InfluxDB
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+databaseResource :: TF.Resource TF.InfluxDB DatabaseResource
+databaseResource =
+    TF.newResource "influxdb_database" $
+        DatabaseResource {
+            _name = TF.Nil
+            }
 
 {- | The @influxdb_user@ InfluxDB resource.
 
@@ -116,27 +116,26 @@ data UserResource = UserResource {
     {- ^ - (Bool) indication if the user is an admin or not. -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.InfluxDB UserResource
-userResource =
-    TF.newResource "influxdb_user" $
-        UserResource {
-            _admin = TF.Absent
-            , _grant = TF.Absent
-            , _name = TF.Absent
-            , _password = TF.Absent
-            , _computed_admin = TF.Computed "admin"
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "admin" <$> _admin
-        , TF.assign "grant" <$> _grant
-        , TF.assign "name" <$> _name
-        , TF.assign "password" <$> _password
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "admin" <$> TF.argument _admin
+        , TF.assign "grant" <$> TF.argument _grant
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.InfluxDB
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.InfluxDB UserResource
+userResource =
+    TF.newResource "influxdb_user" $
+        UserResource {
+            _admin = TF.Nil
+            , _grant = TF.Nil
+            , _name = TF.Nil
+            , _password = TF.Nil
+            , _computed_admin = TF.Compute "admin"
+            }

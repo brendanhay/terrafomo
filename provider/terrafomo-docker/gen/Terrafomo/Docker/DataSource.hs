@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Docker            as TF
+import qualified Terrafomo.Docker.Provider   as TF
+import qualified Terrafomo.Docker.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -49,21 +51,20 @@ data RegistryImageDataSource = RegistryImageDataSource {
     {- ^ (string) - The content digest of the image, as stored on the registry. -}
     } deriving (Show, Eq)
 
-registryImageDataSource :: TF.DataSource TF.Docker RegistryImageDataSource
-registryImageDataSource =
-    TF.newDataSource "docker_registry_image" $
-        RegistryImageDataSource {
-            _name = TF.Absent
-            , _computed_sha256_digest = TF.Computed "sha256_digest"
-            }
-
 instance TF.ToHCL RegistryImageDataSource where
-    toHCL RegistryImageDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL RegistryImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''RegistryImageDataSource
     ''TF.Docker
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+registryImageDataSource :: TF.DataSource TF.Docker RegistryImageDataSource
+registryImageDataSource =
+    TF.newDataSource "docker_registry_image" $
+        RegistryImageDataSource {
+            _name = TF.Nil
+            , _computed_sha256_digest = TF.Compute "sha256_digest"
+            }

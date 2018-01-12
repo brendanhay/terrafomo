@@ -1,4 +1,4 @@
 name: Datadog
 package: terrafomo-datadog
 datatype: true
-
+original: datadog

@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.Provider where
+module Terrafomo.LogicMonitor.Provider
+    ( LogicMonitor    (..)
+    , HasLogicMonitor (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.LogicMonitor.Types as TF
 import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Meta        as TF
+import qualified Terrafomo.Syntax.Name        as TF
 import qualified Terrafomo.Syntax.Variable    as TF
 import qualified Terrafomo.TH                 as TF
 
@@ -33,8 +46,8 @@ by LogicMonitor. The provider needs to be configured with the proper
 credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
-data LogicMonitor = LogicMonitor
-    { _api_id  :: !(TF.Argument Text)
+data LogicMonitor = LogicMonitor {
+      _api_id  :: !(TF.Argument Text)
     {- ^ (Required) LogicMonitor API id. This can also be set via the @LM_API_ID@ environment variable. -}
     , _api_key :: !(TF.Argument Text)
     {- ^ (Required) LogicMonitor API key. This can also be set via the @LM_API_KEY@ environment variable. -}
@@ -45,10 +58,30 @@ data LogicMonitor = LogicMonitor
 instance Hashable LogicMonitor
 
 instance TF.ToHCL LogicMonitor where
-    toHCL x = TF.arguments
-        [ TF.assign "api_id" <$> _api_id x
-        , TF.assign "api_key" <$> _api_key x
-        , TF.assign "company" <$> _company x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy LogicMonitor))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "api_id" <$> TF.argument (_api_id x)
+            , TF.assign "api_key" <$> TF.argument (_api_key x)
+            , TF.assign "company" <$> TF.argument (_company x)
+            ]
 
-$(TF.makeClassy ''LogicMonitor)
+instance Semigroup LogicMonitor where
+    (<>) a b = LogicMonitor {
+          _api_id = on (<>) _api_id a b
+        , _api_key = on (<>) _api_key a b
+        , _company = on (<>) _company a b
+        }
+
+instance Monoid LogicMonitor where
+    mappend = (<>)
+    mempty  = LogicMonitor {
+            _api_id = TF.Nil
+          , _api_key = TF.Nil
+          , _company = TF.Nil
+        }
+
+instance TF.IsProvider LogicMonitor where
+    type ProviderName LogicMonitor = "logicmonitor"
+
+$(TF.makeProviderLenses ''LogicMonitor)

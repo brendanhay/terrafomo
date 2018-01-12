@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Heroku          as TF
+import qualified Terrafomo.Heroku.Provider as TF
+import qualified Terrafomo.Heroku.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -51,28 +53,27 @@ data AddonAttachmentResource = AddonAttachmentResource {
     {- ^ - The unique ID of the add-on attachment -}
     } deriving (Show, Eq)
 
-addonAttachmentResource :: TF.Resource TF.Heroku AddonAttachmentResource
-addonAttachmentResource =
-    TF.newResource "heroku_addon_attachment" $
-        AddonAttachmentResource {
-            _addon_id = TF.Absent
-            , _app_id = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AddonAttachmentResource where
-    toHCL AddonAttachmentResource{..} = TF.arguments
-        [ TF.assign "addon_id" <$> _addon_id
-        , TF.assign "app_id" <$> _app_id
-        , TF.assign "name" <$> _name
+    toHCL AddonAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "addon_id" <$> TF.argument _addon_id
+        , TF.assign "app_id" <$> TF.argument _app_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''AddonAttachmentResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+addonAttachmentResource :: TF.Resource TF.Heroku AddonAttachmentResource
+addonAttachmentResource =
+    TF.newResource "heroku_addon_attachment" $
+        AddonAttachmentResource {
+            _addon_id = TF.Nil
+            , _app_id = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @heroku_addon@ Heroku resource.
 
@@ -98,32 +99,31 @@ data AddonResource = AddonResource {
     {- ^ - The ID of the plan provider -}
     } deriving (Show, Eq)
 
-addonResource :: TF.Resource TF.Heroku AddonResource
-addonResource =
-    TF.newResource "heroku_addon" $
-        AddonResource {
-            _app = TF.Absent
-            , _config = TF.Absent
-            , _plan = TF.Absent
-            , _computed_config_vars = TF.Computed "config_vars"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_plan = TF.Computed "plan"
-            , _computed_provider_id = TF.Computed "provider_id"
-            }
-
 instance TF.ToHCL AddonResource where
-    toHCL AddonResource{..} = TF.arguments
-        [ TF.assign "app" <$> _app
-        , TF.assign "config" <$> _config
-        , TF.assign "plan" <$> _plan
+    toHCL AddonResource{..} = TF.block $ catMaybes
+        [ TF.assign "app" <$> TF.argument _app
+        , TF.assign "config" <$> TF.argument _config
+        , TF.assign "plan" <$> TF.argument _plan
         ]
 
 $(TF.makeSchemaLenses
     ''AddonResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+addonResource :: TF.Resource TF.Heroku AddonResource
+addonResource =
+    TF.newResource "heroku_addon" $
+        AddonResource {
+            _app = TF.Nil
+            , _config = TF.Nil
+            , _plan = TF.Nil
+            , _computed_config_vars = TF.Compute "config_vars"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_plan = TF.Compute "plan"
+            , _computed_provider_id = TF.Compute "provider_id"
+            }
 
 {- | The @heroku_app_feature@ Heroku resource.
 
@@ -139,27 +139,26 @@ data AppFeatureResource = AppFeatureResource {
     {- ^ (Required) The name of the App Feature to manage. -}
     } deriving (Show, Eq)
 
-appFeatureResource :: TF.Resource TF.Heroku AppFeatureResource
-appFeatureResource =
-    TF.newResource "heroku_app_feature" $
-        AppFeatureResource {
-            _app = TF.Absent
-            , _enabled = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL AppFeatureResource where
-    toHCL AppFeatureResource{..} = TF.arguments
-        [ TF.assign "app" <$> _app
-        , TF.assign "enabled" <$> _enabled
-        , TF.assign "name" <$> _name
+    toHCL AppFeatureResource{..} = TF.block $ catMaybes
+        [ TF.assign "app" <$> TF.argument _app
+        , TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''AppFeatureResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+appFeatureResource :: TF.Resource TF.Heroku AppFeatureResource
+appFeatureResource =
+    TF.newResource "heroku_app_feature" $
+        AppFeatureResource {
+            _app = TF.Nil
+            , _enabled = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @heroku_app@ Heroku resource.
 
@@ -201,44 +200,43 @@ data AppResource = AppResource {
     {- ^ - The web (HTTP) URL that the application can be accessed at by default. -}
     } deriving (Show, Eq)
 
-appResource :: TF.Resource TF.Heroku AppResource
-appResource =
-    TF.newResource "heroku_app" $
-        AppResource {
-            _buildpacks = TF.Absent
-            , _config_vars = TF.Absent
-            , _name = TF.Absent
-            , _organization = TF.Absent
-            , _region = TF.Absent
-            , _space = TF.Absent
-            , _stack = TF.Absent
-            , _computed_all_config_vars = TF.Computed "all_config_vars"
-            , _computed_git_url = TF.Computed "git_url"
-            , _computed_heroku_hostname = TF.Computed "heroku_hostname"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_space = TF.Computed "space"
-            , _computed_stack = TF.Computed "stack"
-            , _computed_web_url = TF.Computed "web_url"
-            }
-
 instance TF.ToHCL AppResource where
-    toHCL AppResource{..} = TF.arguments
-        [ TF.assign "buildpacks" <$> _buildpacks
-        , TF.assign "config_vars" <$> _config_vars
-        , TF.assign "name" <$> _name
-        , TF.assign "organization" <$> _organization
-        , TF.assign "region" <$> _region
-        , TF.assign "space" <$> _space
-        , TF.assign "stack" <$> _stack
+    toHCL AppResource{..} = TF.block $ catMaybes
+        [ TF.assign "buildpacks" <$> TF.argument _buildpacks
+        , TF.assign "config_vars" <$> TF.argument _config_vars
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "organization" <$> TF.argument _organization
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "space" <$> TF.argument _space
+        , TF.assign "stack" <$> TF.argument _stack
         ]
 
 $(TF.makeSchemaLenses
     ''AppResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+appResource :: TF.Resource TF.Heroku AppResource
+appResource =
+    TF.newResource "heroku_app" $
+        AppResource {
+            _buildpacks = TF.Nil
+            , _config_vars = TF.Nil
+            , _name = TF.Nil
+            , _organization = TF.Nil
+            , _region = TF.Nil
+            , _space = TF.Nil
+            , _stack = TF.Nil
+            , _computed_all_config_vars = TF.Compute "all_config_vars"
+            , _computed_git_url = TF.Compute "git_url"
+            , _computed_heroku_hostname = TF.Compute "heroku_hostname"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_space = TF.Compute "space"
+            , _computed_stack = TF.Compute "stack"
+            , _computed_web_url = TF.Compute "web_url"
+            }
 
 {- | The @heroku_cert@ Heroku resource.
 
@@ -260,30 +258,29 @@ data CertResource = CertResource {
     {- ^ - The name of the SSL certificate -}
     } deriving (Show, Eq)
 
-certResource :: TF.Resource TF.Heroku CertResource
-certResource =
-    TF.newResource "heroku_cert" $
-        CertResource {
-            _app = TF.Absent
-            , _certificate_chain = TF.Absent
-            , _private_key = TF.Absent
-            , _computed_cname = TF.Computed "cname"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL CertResource where
-    toHCL CertResource{..} = TF.arguments
-        [ TF.assign "app" <$> _app
-        , TF.assign "certificate_chain" <$> _certificate_chain
-        , TF.assign "private_key" <$> _private_key
+    toHCL CertResource{..} = TF.block $ catMaybes
+        [ TF.assign "app" <$> TF.argument _app
+        , TF.assign "certificate_chain" <$> TF.argument _certificate_chain
+        , TF.assign "private_key" <$> TF.argument _private_key
         ]
 
 $(TF.makeSchemaLenses
     ''CertResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+certResource :: TF.Resource TF.Heroku CertResource
+certResource =
+    TF.newResource "heroku_cert" $
+        CertResource {
+            _app = TF.Nil
+            , _certificate_chain = TF.Nil
+            , _private_key = TF.Nil
+            , _computed_cname = TF.Compute "cname"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @heroku_domain@ Heroku resource.
 
@@ -303,28 +300,27 @@ data DomainResource = DomainResource {
     {- ^ - The ID of the of the domain record. -}
     } deriving (Show, Eq)
 
-domainResource :: TF.Resource TF.Heroku DomainResource
-domainResource =
-    TF.newResource "heroku_domain" $
-        DomainResource {
-            _app = TF.Absent
-            , _hostname = TF.Absent
-            , _computed_cname = TF.Computed "cname"
-            , _computed_hostname = TF.Computed "hostname"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DomainResource where
-    toHCL DomainResource{..} = TF.arguments
-        [ TF.assign "app" <$> _app
-        , TF.assign "hostname" <$> _hostname
+    toHCL DomainResource{..} = TF.block $ catMaybes
+        [ TF.assign "app" <$> TF.argument _app
+        , TF.assign "hostname" <$> TF.argument _hostname
         ]
 
 $(TF.makeSchemaLenses
     ''DomainResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+domainResource :: TF.Resource TF.Heroku DomainResource
+domainResource =
+    TF.newResource "heroku_domain" $
+        DomainResource {
+            _app = TF.Nil
+            , _hostname = TF.Nil
+            , _computed_cname = TF.Compute "cname"
+            , _computed_hostname = TF.Compute "hostname"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @heroku_drain@ Heroku resource.
 
@@ -340,26 +336,25 @@ data DrainResource = DrainResource {
     {- ^ - The unique token for your created drain. -}
     } deriving (Show, Eq)
 
-drainResource :: TF.Resource TF.Heroku DrainResource
-drainResource =
-    TF.newResource "heroku_drain" $
-        DrainResource {
-            _app = TF.Absent
-            , _url = TF.Absent
-            , _computed_token = TF.Computed "token"
-            }
-
 instance TF.ToHCL DrainResource where
-    toHCL DrainResource{..} = TF.arguments
-        [ TF.assign "app" <$> _app
-        , TF.assign "url" <$> _url
+    toHCL DrainResource{..} = TF.block $ catMaybes
+        [ TF.assign "app" <$> TF.argument _app
+        , TF.assign "url" <$> TF.argument _url
         ]
 
 $(TF.makeSchemaLenses
     ''DrainResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+drainResource :: TF.Resource TF.Heroku DrainResource
+drainResource =
+    TF.newResource "heroku_drain" $
+        DrainResource {
+            _app = TF.Nil
+            , _url = TF.Nil
+            , _computed_token = TF.Compute "token"
+            }
 
 {- | The @heroku_pipeline_coupling@ Heroku resource.
 
@@ -388,32 +383,31 @@ data PipelineCouplingResource = PipelineCouplingResource {
     {- ^ - The stage for this coupling. -}
     } deriving (Show, Eq)
 
-pipelineCouplingResource :: TF.Resource TF.Heroku PipelineCouplingResource
-pipelineCouplingResource =
-    TF.newResource "heroku_pipeline_coupling" $
-        PipelineCouplingResource {
-            _app = TF.Absent
-            , _pipeline = TF.Absent
-            , _stage = TF.Absent
-            , _computed_app = TF.Computed "app"
-            , _computed_app_id = TF.Computed "app_id"
-            , _computed_id = TF.Computed "id"
-            , _computed_pipeline = TF.Computed "pipeline"
-            , _computed_stage = TF.Computed "stage"
-            }
-
 instance TF.ToHCL PipelineCouplingResource where
-    toHCL PipelineCouplingResource{..} = TF.arguments
-        [ TF.assign "app" <$> _app
-        , TF.assign "pipeline" <$> _pipeline
-        , TF.assign "stage" <$> _stage
+    toHCL PipelineCouplingResource{..} = TF.block $ catMaybes
+        [ TF.assign "app" <$> TF.argument _app
+        , TF.assign "pipeline" <$> TF.argument _pipeline
+        , TF.assign "stage" <$> TF.argument _stage
         ]
 
 $(TF.makeSchemaLenses
     ''PipelineCouplingResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+pipelineCouplingResource :: TF.Resource TF.Heroku PipelineCouplingResource
+pipelineCouplingResource =
+    TF.newResource "heroku_pipeline_coupling" $
+        PipelineCouplingResource {
+            _app = TF.Nil
+            , _pipeline = TF.Nil
+            , _stage = TF.Nil
+            , _computed_app = TF.Compute "app"
+            , _computed_app_id = TF.Compute "app_id"
+            , _computed_id = TF.Compute "id"
+            , _computed_pipeline = TF.Compute "pipeline"
+            , _computed_stage = TF.Compute "stage"
+            }
 
 {- | The @heroku_pipeline@ Heroku resource.
 
@@ -431,25 +425,24 @@ data PipelineResource = PipelineResource {
     {- ^ - The name of the pipeline. -}
     } deriving (Show, Eq)
 
-pipelineResource :: TF.Resource TF.Heroku PipelineResource
-pipelineResource =
-    TF.newResource "heroku_pipeline" $
-        PipelineResource {
-            _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL PipelineResource where
-    toHCL PipelineResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL PipelineResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''PipelineResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+pipelineResource :: TF.Resource TF.Heroku PipelineResource
+pipelineResource =
+    TF.newResource "heroku_pipeline" $
+        PipelineResource {
+            _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @heroku_space@ Heroku resource.
 
@@ -473,28 +466,27 @@ data SpaceResource = SpaceResource {
     {- ^ - The space's region. -}
     } deriving (Show, Eq)
 
-spaceResource :: TF.Resource TF.Heroku SpaceResource
-spaceResource =
-    TF.newResource "heroku_space" $
-        SpaceResource {
-            _name = TF.Absent
-            , _organization = TF.Absent
-            , _region = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_organization = TF.Computed "organization"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL SpaceResource where
-    toHCL SpaceResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "organization" <$> _organization
-        , TF.assign "region" <$> _region
+    toHCL SpaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "organization" <$> TF.argument _organization
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''SpaceResource
     ''TF.Heroku
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+spaceResource :: TF.Resource TF.Heroku SpaceResource
+spaceResource =
+    TF.newResource "heroku_space" $
+        SpaceResource {
+            _name = TF.Nil
+            , _organization = TF.Nil
+            , _region = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_organization = TF.Compute "organization"
+            , _computed_region = TF.Compute "region"
+            }

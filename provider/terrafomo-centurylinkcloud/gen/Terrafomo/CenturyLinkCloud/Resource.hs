@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.CenturyLinkCloud as TF
-import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.Resource  as TF
-import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
+import qualified Terrafomo.CenturyLinkCloud.Provider as TF
+import qualified Terrafomo.CenturyLinkCloud.Types    as TF
+import qualified Terrafomo.Syntax.HCL                as TF
+import qualified Terrafomo.Syntax.Resource           as TF
+import qualified Terrafomo.Syntax.Resource           as TF
+import qualified Terrafomo.Syntax.Variable           as TF
+import qualified Terrafomo.TH                        as TF
 
 {- | The @clc_group@ CenturyLinkCloud resource.
 
@@ -56,33 +58,32 @@ data GroupResource = GroupResource {
     {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Eq)
 
-groupResource :: TF.Resource TF.CenturyLinkCloud GroupResource
-groupResource =
-    TF.newResource "clc_group" $
-        GroupResource {
-            _custom_fields = TF.Absent
-            , _description = TF.Absent
-            , _location_id = TF.Absent
-            , _name = TF.Absent
-            , _parent = TF.Absent
-            , _parent_group_id = TF.Absent
-            }
-
 instance TF.ToHCL GroupResource where
-    toHCL GroupResource{..} = TF.arguments
-        [ TF.assign "custom_fields" <$> _custom_fields
-        , TF.assign "description" <$> _description
-        , TF.assign "location_id" <$> _location_id
-        , TF.assign "name" <$> _name
-        , TF.assign "parent" <$> _parent
-        , TF.assign "parent_group_id" <$> _parent_group_id
+    toHCL GroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "custom_fields" <$> TF.argument _custom_fields
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "location_id" <$> TF.argument _location_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "parent" <$> TF.argument _parent
+        , TF.assign "parent_group_id" <$> TF.argument _parent_group_id
         ]
 
 $(TF.makeSchemaLenses
     ''GroupResource
     ''TF.CenturyLinkCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+groupResource :: TF.Resource TF.CenturyLinkCloud GroupResource
+groupResource =
+    TF.newResource "clc_group" $
+        GroupResource {
+            _custom_fields = TF.Nil
+            , _description = TF.Nil
+            , _location_id = TF.Nil
+            , _name = TF.Nil
+            , _parent = TF.Nil
+            , _parent_group_id = TF.Nil
+            }
 
 {- | The @clc_load_balancer_pool@ CenturyLinkCloud resource.
 
@@ -105,33 +106,32 @@ data LoadBalancerPoolResource = LoadBalancerPoolResource {
     {- ^ (Required, int) Either 80 or 443 -}
     } deriving (Show, Eq)
 
-loadBalancerPoolResource :: TF.Resource TF.CenturyLinkCloud LoadBalancerPoolResource
-loadBalancerPoolResource =
-    TF.newResource "clc_load_balancer_pool" $
-        LoadBalancerPoolResource {
-            _data_center = TF.Absent
-            , _load_balancer = TF.Absent
-            , _method = TF.Absent
-            , _nodes = TF.Absent
-            , _persistence = TF.Absent
-            , _port = TF.Absent
-            }
-
 instance TF.ToHCL LoadBalancerPoolResource where
-    toHCL LoadBalancerPoolResource{..} = TF.arguments
-        [ TF.assign "data_center" <$> _data_center
-        , TF.assign "load_balancer" <$> _load_balancer
-        , TF.assign "method" <$> _method
-        , TF.assign "nodes" <$> _nodes
-        , TF.assign "persistence" <$> _persistence
-        , TF.assign "port" <$> _port
+    toHCL LoadBalancerPoolResource{..} = TF.block $ catMaybes
+        [ TF.assign "data_center" <$> TF.argument _data_center
+        , TF.assign "load_balancer" <$> TF.argument _load_balancer
+        , TF.assign "method" <$> TF.argument _method
+        , TF.assign "nodes" <$> TF.argument _nodes
+        , TF.assign "persistence" <$> TF.argument _persistence
+        , TF.assign "port" <$> TF.argument _port
         ]
 
 $(TF.makeSchemaLenses
     ''LoadBalancerPoolResource
     ''TF.CenturyLinkCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+loadBalancerPoolResource :: TF.Resource TF.CenturyLinkCloud LoadBalancerPoolResource
+loadBalancerPoolResource =
+    TF.newResource "clc_load_balancer_pool" $
+        LoadBalancerPoolResource {
+            _data_center = TF.Nil
+            , _load_balancer = TF.Nil
+            , _method = TF.Nil
+            , _nodes = TF.Nil
+            , _persistence = TF.Nil
+            , _port = TF.Nil
+            }
 
 {- | The @clc_load_balancer@ CenturyLinkCloud resource.
 
@@ -152,31 +152,30 @@ data LoadBalancerResource = LoadBalancerResource {
     {- ^ (Required, string) Either "enabled" or "disabled" -}
     } deriving (Show, Eq)
 
-loadBalancerResource :: TF.Resource TF.CenturyLinkCloud LoadBalancerResource
-loadBalancerResource =
-    TF.newResource "clc_load_balancer" $
-        LoadBalancerResource {
-            _data_center = TF.Absent
-            , _description = TF.Absent
-            , _ip_address = TF.Absent
-            , _name = TF.Absent
-            , _status = TF.Absent
-            }
-
 instance TF.ToHCL LoadBalancerResource where
-    toHCL LoadBalancerResource{..} = TF.arguments
-        [ TF.assign "data_center" <$> _data_center
-        , TF.assign "description" <$> _description
-        , TF.assign "ip_address" <$> _ip_address
-        , TF.assign "name" <$> _name
-        , TF.assign "status" <$> _status
+    toHCL LoadBalancerResource{..} = TF.block $ catMaybes
+        [ TF.assign "data_center" <$> TF.argument _data_center
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "status" <$> TF.argument _status
         ]
 
 $(TF.makeSchemaLenses
     ''LoadBalancerResource
     ''TF.CenturyLinkCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+loadBalancerResource :: TF.Resource TF.CenturyLinkCloud LoadBalancerResource
+loadBalancerResource =
+    TF.newResource "clc_load_balancer" $
+        LoadBalancerResource {
+            _data_center = TF.Nil
+            , _description = TF.Nil
+            , _ip_address = TF.Nil
+            , _name = TF.Nil
+            , _status = TF.Nil
+            }
 
 {- | The @clc_public_ip@ CenturyLinkCloud resource.
 
@@ -194,29 +193,28 @@ data PublicIpResource = PublicIpResource {
     {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Eq)
 
-publicIpResource :: TF.Resource TF.CenturyLinkCloud PublicIpResource
-publicIpResource =
-    TF.newResource "clc_public_ip" $
-        PublicIpResource {
-            _internal_ip_address = TF.Absent
-            , _ports = TF.Absent
-            , _server_id = TF.Absent
-            , _source_restrictions = TF.Absent
-            }
-
 instance TF.ToHCL PublicIpResource where
-    toHCL PublicIpResource{..} = TF.arguments
-        [ TF.assign "internal_ip_address" <$> _internal_ip_address
-        , TF.assign "ports" <$> _ports
-        , TF.assign "server_id" <$> _server_id
-        , TF.assign "source_restrictions" <$> _source_restrictions
+    toHCL PublicIpResource{..} = TF.block $ catMaybes
+        [ TF.assign "internal_ip_address" <$> TF.argument _internal_ip_address
+        , TF.assign "ports" <$> TF.argument _ports
+        , TF.assign "server_id" <$> TF.argument _server_id
+        , TF.assign "source_restrictions" <$> TF.argument _source_restrictions
         ]
 
 $(TF.makeSchemaLenses
     ''PublicIpResource
     ''TF.CenturyLinkCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+publicIpResource :: TF.Resource TF.CenturyLinkCloud PublicIpResource
+publicIpResource =
+    TF.newResource "clc_public_ip" $
+        PublicIpResource {
+            _internal_ip_address = TF.Nil
+            , _ports = TF.Nil
+            , _server_id = TF.Nil
+            , _source_restrictions = TF.Nil
+            }
 
 {- | The @clc_server@ CenturyLinkCloud resource.
 
@@ -269,62 +267,61 @@ data ServerResource = ServerResource {
     {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Eq)
 
-serverResource :: TF.Resource TF.CenturyLinkCloud ServerResource
-serverResource =
-    TF.newResource "clc_server" $
-        ServerResource {
-            _aa_policy_id = TF.Absent
-            , _additional_disks = TF.Absent
-            , _configuration_id = TF.Absent
-            , _cpu = TF.Absent
-            , _created_dat = TF.Absent
-            , _custom_fields = TF.Absent
-            , _description = TF.Absent
-            , _group_id = TF.Absent
-            , _memory_mb = TF.Absent
-            , _metadata = TF.Absent
-            , _modified_dat = TF.Absent
-            , _name = TF.Absent
-            , _name_template = TF.Absent
-            , _network_id = TF.Absent
-            , _os_type = TF.Absent
-            , _password = TF.Absent
-            , _power_state = TF.Absent
-            , _private_ip_address = TF.Absent
-            , _public_ip_address = TF.Absent
-            , _source_server_id = TF.Absent
-            , _storage_type = TF.Absent
-            , _type' = TF.Absent
-            }
-
 instance TF.ToHCL ServerResource where
-    toHCL ServerResource{..} = TF.arguments
-        [ TF.assign "aa_policy_id" <$> _aa_policy_id
-        , TF.assign "additional_disks" <$> _additional_disks
-        , TF.assign "configuration_id" <$> _configuration_id
-        , TF.assign "cpu" <$> _cpu
-        , TF.assign "created_dat" <$> _created_dat
-        , TF.assign "custom_fields" <$> _custom_fields
-        , TF.assign "description" <$> _description
-        , TF.assign "group_id" <$> _group_id
-        , TF.assign "memory_mb" <$> _memory_mb
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "modified_dat" <$> _modified_dat
-        , TF.assign "name" <$> _name
-        , TF.assign "name_template" <$> _name_template
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "os_type" <$> _os_type
-        , TF.assign "password" <$> _password
-        , TF.assign "power_state" <$> _power_state
-        , TF.assign "private_ip_address" <$> _private_ip_address
-        , TF.assign "public_ip_address" <$> _public_ip_address
-        , TF.assign "source_server_id" <$> _source_server_id
-        , TF.assign "storage_type" <$> _storage_type
-        , TF.assign "type" <$> _type'
+    toHCL ServerResource{..} = TF.block $ catMaybes
+        [ TF.assign "aa_policy_id" <$> TF.argument _aa_policy_id
+        , TF.assign "additional_disks" <$> TF.argument _additional_disks
+        , TF.assign "configuration_id" <$> TF.argument _configuration_id
+        , TF.assign "cpu" <$> TF.argument _cpu
+        , TF.assign "created_dat" <$> TF.argument _created_dat
+        , TF.assign "custom_fields" <$> TF.argument _custom_fields
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "group_id" <$> TF.argument _group_id
+        , TF.assign "memory_mb" <$> TF.argument _memory_mb
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "modified_dat" <$> TF.argument _modified_dat
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "name_template" <$> TF.argument _name_template
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "os_type" <$> TF.argument _os_type
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "power_state" <$> TF.argument _power_state
+        , TF.assign "private_ip_address" <$> TF.argument _private_ip_address
+        , TF.assign "public_ip_address" <$> TF.argument _public_ip_address
+        , TF.assign "source_server_id" <$> TF.argument _source_server_id
+        , TF.assign "storage_type" <$> TF.argument _storage_type
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''ServerResource
     ''TF.CenturyLinkCloud
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serverResource :: TF.Resource TF.CenturyLinkCloud ServerResource
+serverResource =
+    TF.newResource "clc_server" $
+        ServerResource {
+            _aa_policy_id = TF.Nil
+            , _additional_disks = TF.Nil
+            , _configuration_id = TF.Nil
+            , _cpu = TF.Nil
+            , _created_dat = TF.Nil
+            , _custom_fields = TF.Nil
+            , _description = TF.Nil
+            , _group_id = TF.Nil
+            , _memory_mb = TF.Nil
+            , _metadata = TF.Nil
+            , _modified_dat = TF.Nil
+            , _name = TF.Nil
+            , _name_template = TF.Nil
+            , _network_id = TF.Nil
+            , _os_type = TF.Nil
+            , _password = TF.Nil
+            , _power_state = TF.Nil
+            , _private_ip_address = TF.Nil
+            , _public_ip_address = TF.Nil
+            , _source_server_id = TF.Nil
+            , _storage_type = TF.Nil
+            , _type' = TF.Nil
+            }

@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Template.Types    as TF
 import qualified Terrafomo.TH                as TF
 
 {- | The @template_cloudinit_config@ Template datasource.
@@ -50,28 +52,27 @@ data CloudinitConfigDataSource = CloudinitConfigDataSource {
     {- ^ - The final rendered multi-part cloudinit config. -}
     } deriving (Show, Eq)
 
-cloudinitConfigDataSource :: TF.DataSource TF.Template CloudinitConfigDataSource
-cloudinitConfigDataSource =
-    TF.newDataSource "template_cloudinit_config" $
-        CloudinitConfigDataSource {
-            _base64_encode = TF.Absent
-            , _gzip = TF.Absent
-            , _part = TF.Absent
-            , _computed_rendered = TF.Computed "rendered"
-            }
-
 instance TF.ToHCL CloudinitConfigDataSource where
-    toHCL CloudinitConfigDataSource{..} = TF.arguments
-        [ TF.assign "base64_encode" <$> _base64_encode
-        , TF.assign "gzip" <$> _gzip
-        , TF.assign "part" <$> _part
+    toHCL CloudinitConfigDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "base64_encode" <$> TF.argument _base64_encode
+        , TF.assign "gzip" <$> TF.argument _gzip
+        , TF.assign "part" <$> TF.argument _part
         ]
 
 $(TF.makeSchemaLenses
     ''CloudinitConfigDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+cloudinitConfigDataSource :: TF.DataSource TF.Template CloudinitConfigDataSource
+cloudinitConfigDataSource =
+    TF.newDataSource "template_cloudinit_config" $
+        CloudinitConfigDataSource {
+            _base64_encode = TF.Nil
+            , _gzip = TF.Nil
+            , _part = TF.Nil
+            , _computed_rendered = TF.Compute "rendered"
+            }
 
 {- | The @template_file@ Template datasource.
 
@@ -90,25 +91,24 @@ data FileDataSource = FileDataSource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-fileDataSource :: TF.DataSource TF.Template FileDataSource
-fileDataSource =
-    TF.newDataSource "template_file" $
-        FileDataSource {
-            _template = TF.Absent
-            , _vars = TF.Absent
-            , _computed_rendered = TF.Computed "rendered"
-            , _computed_template = TF.Computed "template"
-            , _computed_vars = TF.Computed "vars"
-            }
-
 instance TF.ToHCL FileDataSource where
-    toHCL FileDataSource{..} = TF.arguments
-        [ TF.assign "template" <$> _template
-        , TF.assign "vars" <$> _vars
+    toHCL FileDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "template" <$> TF.argument _template
+        , TF.assign "vars" <$> TF.argument _vars
         ]
 
 $(TF.makeSchemaLenses
     ''FileDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+fileDataSource :: TF.DataSource TF.Template FileDataSource
+fileDataSource =
+    TF.newDataSource "template_file" $
+        FileDataSource {
+            _template = TF.Nil
+            , _vars = TF.Nil
+            , _computed_rendered = TF.Compute "rendered"
+            , _computed_template = TF.Compute "template"
+            , _computed_vars = TF.Compute "vars"
+            }

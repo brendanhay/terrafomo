@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Packet            as TF
+import qualified Terrafomo.Packet.Provider   as TF
+import qualified Terrafomo.Packet.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -55,27 +57,26 @@ data PrecreatedIpBlockDataSource = PrecreatedIpBlockDataSource {
     {- ^ - CIDR notation of the looked up block. -}
     } deriving (Show, Eq)
 
-precreatedIpBlockDataSource :: TF.DataSource TF.Packet PrecreatedIpBlockDataSource
-precreatedIpBlockDataSource =
-    TF.newDataSource "packet_precreated_ip_block" $
-        PrecreatedIpBlockDataSource {
-            _address_family = TF.Absent
-            , _facility = TF.Absent
-            , _project_id = TF.Absent
-            , _public = TF.Absent
-            , _computed_cidr_notation = TF.Computed "cidr_notation"
-            }
-
 instance TF.ToHCL PrecreatedIpBlockDataSource where
-    toHCL PrecreatedIpBlockDataSource{..} = TF.arguments
-        [ TF.assign "address_family" <$> _address_family
-        , TF.assign "facility" <$> _facility
-        , TF.assign "project_id" <$> _project_id
-        , TF.assign "public" <$> _public
+    toHCL PrecreatedIpBlockDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "address_family" <$> TF.argument _address_family
+        , TF.assign "facility" <$> TF.argument _facility
+        , TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "public" <$> TF.argument _public
         ]
 
 $(TF.makeSchemaLenses
     ''PrecreatedIpBlockDataSource
     ''TF.Packet
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+precreatedIpBlockDataSource :: TF.DataSource TF.Packet PrecreatedIpBlockDataSource
+precreatedIpBlockDataSource =
+    TF.newDataSource "packet_precreated_ip_block" $
+        PrecreatedIpBlockDataSource {
+            _address_family = TF.Nil
+            , _facility = TF.Nil
+            , _project_id = TF.Nil
+            , _public = TF.Nil
+            , _computed_cidr_notation = TF.Compute "cidr_notation"
+            }

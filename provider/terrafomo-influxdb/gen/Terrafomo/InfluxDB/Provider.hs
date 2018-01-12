@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.InfluxDB.Provider where
+module Terrafomo.InfluxDB.Provider
+    ( InfluxDB    (..)
+    , HasInfluxDB (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.InfluxDB.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,12 +46,27 @@ The InfluxDB provider allows Terraform to create Databases in
 time-series data. The provider configuration block accepts the following
 arguments:
 -}
-data InfluxDB = InfluxDB
-    deriving (Show, Eq, Generic)
+data InfluxDB = InfluxDB {
+    } deriving (Show, Eq, Generic)
 
 instance Hashable InfluxDB
 
 instance TF.ToHCL InfluxDB where
-    toHCL = const $ TF.arguments []
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy InfluxDB))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            ]
 
-$(TF.makeClassy ''InfluxDB)
+instance Semigroup InfluxDB where
+    (<>) a b = InfluxDB {
+        }
+
+instance Monoid InfluxDB where
+    mappend = (<>)
+    mempty  = InfluxDB {
+        }
+
+instance TF.IsProvider InfluxDB where
+    type ProviderName InfluxDB = "influxdb"
+
+$(TF.makeProviderLenses ''InfluxDB)

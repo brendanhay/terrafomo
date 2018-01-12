@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Consul            as TF
+import qualified Terrafomo.Consul.Provider   as TF
+import qualified Terrafomo.Consul.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -45,20 +47,19 @@ specified in the @provider@ .
 data AgentSelfDataSource = AgentSelfDataSource {
     } deriving (Show, Eq)
 
+instance TF.ToHCL AgentSelfDataSource where
+    toHCL _ = TF.block []
+
+$(TF.makeSchemaLenses
+    ''AgentSelfDataSource
+    ''TF.Consul
+    ''TF.DataSource)
+
 agentSelfDataSource :: TF.DataSource TF.Consul AgentSelfDataSource
 agentSelfDataSource =
     TF.newDataSource "consul_agent_self" $
         AgentSelfDataSource {
             }
-
-instance TF.ToHCL AgentSelfDataSource where
-    toHCL = const $ TF.arguments []
-
-$(TF.makeSchemaLenses
-    ''AgentSelfDataSource
-    ''TF.Consul
-    ''TF.DataSource
-    'TF.schema)
 
 {- | The @consul_catalog_nodes@ Consul datasource.
 
@@ -82,29 +83,28 @@ data CatalogNodesDataSource = CatalogNodesDataSource {
     {- ^ - A list of nodes and details about each Consul agent.  The list of per-node attributes is detailed below. -}
     } deriving (Show, Eq)
 
-catalogNodesDataSource :: TF.DataSource TF.Consul CatalogNodesDataSource
-catalogNodesDataSource =
-    TF.newDataSource "consul_catalog_nodes" $
-        CatalogNodesDataSource {
-            _datacenter = TF.Absent
-            , _query_options = TF.Absent
-            , _computed_datacenter = TF.Computed "datacenter"
-            , _computed_node_ids = TF.Computed "node_ids"
-            , _computed_node_names = TF.Computed "node_names"
-            , _computed_nodes = TF.Computed "nodes"
-            }
-
 instance TF.ToHCL CatalogNodesDataSource where
-    toHCL CatalogNodesDataSource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "query_options" <$> _query_options
+    toHCL CatalogNodesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "query_options" <$> TF.argument _query_options
         ]
 
 $(TF.makeSchemaLenses
     ''CatalogNodesDataSource
     ''TF.Consul
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+catalogNodesDataSource :: TF.DataSource TF.Consul CatalogNodesDataSource
+catalogNodesDataSource =
+    TF.newDataSource "consul_catalog_nodes" $
+        CatalogNodesDataSource {
+            _datacenter = TF.Nil
+            , _query_options = TF.Nil
+            , _computed_datacenter = TF.Compute "datacenter"
+            , _computed_node_ids = TF.Compute "node_ids"
+            , _computed_node_names = TF.Compute "node_names"
+            , _computed_nodes = TF.Compute "nodes"
+            }
 
 {- | The @consul_catalog_service@ Consul datasource.
 
@@ -135,30 +135,29 @@ data CatalogServiceDataSource = CatalogServiceDataSource {
     {- ^ - The name of the tag used to filter the list of nodes in @service@ . -}
     } deriving (Show, Eq)
 
-catalogServiceDataSource :: TF.DataSource TF.Consul CatalogServiceDataSource
-catalogServiceDataSource =
-    TF.newDataSource "consul_catalog_service" $
-        CatalogServiceDataSource {
-            _datacenter = TF.Absent
-            , _name = TF.Absent
-            , _query_options = TF.Absent
-            , _tag = TF.Absent
-            , _computed_datacenter = TF.Computed "datacenter"
-            , _computed_name = TF.Computed "name"
-            , _computed_service = TF.Computed "service"
-            , _computed_tag = TF.Computed "tag"
-            }
-
 instance TF.ToHCL CatalogServiceDataSource where
-    toHCL CatalogServiceDataSource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "name" <$> _name
-        , TF.assign "query_options" <$> _query_options
-        , TF.assign "tag" <$> _tag
+    toHCL CatalogServiceDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "query_options" <$> TF.argument _query_options
+        , TF.assign "tag" <$> TF.argument _tag
         ]
 
 $(TF.makeSchemaLenses
     ''CatalogServiceDataSource
     ''TF.Consul
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+catalogServiceDataSource :: TF.DataSource TF.Consul CatalogServiceDataSource
+catalogServiceDataSource =
+    TF.newDataSource "consul_catalog_service" $
+        CatalogServiceDataSource {
+            _datacenter = TF.Nil
+            , _name = TF.Nil
+            , _query_options = TF.Nil
+            , _tag = TF.Nil
+            , _computed_datacenter = TF.Compute "datacenter"
+            , _computed_name = TF.Compute "name"
+            , _computed_service = TF.Compute "service"
+            , _computed_tag = TF.Compute "tag"
+            }

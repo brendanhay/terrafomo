@@ -1,4 +1,4 @@
 name: LogicMonitor
 package: terrafomo-logicmonitor
 datatype: true
-
+original: logicmonitor

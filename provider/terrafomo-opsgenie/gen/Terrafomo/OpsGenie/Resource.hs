@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OpsGenie        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.OpsGenie.Provider as TF
+import qualified Terrafomo.OpsGenie.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @opsgenie_team@ OpsGenie resource.
 
@@ -51,28 +53,27 @@ data TeamResource = TeamResource {
     {- ^ - The ID of the OpsGenie User. -}
     } deriving (Show, Eq)
 
-teamResource :: TF.Resource TF.OpsGenie TeamResource
-teamResource =
-    TF.newResource "opsgenie_team" $
-        TeamResource {
-            _description = TF.Absent
-            , _member = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL TeamResource where
-    toHCL TeamResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "member" <$> _member
-        , TF.assign "name" <$> _name
+    toHCL TeamResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "member" <$> TF.argument _member
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TeamResource
     ''TF.OpsGenie
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamResource :: TF.Resource TF.OpsGenie TeamResource
+teamResource =
+    TF.newResource "opsgenie_team" $
+        TeamResource {
+            _description = TF.Nil
+            , _member = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @opsgenie_user@ OpsGenie resource.
 
@@ -93,29 +94,28 @@ data UserResource = UserResource {
     {- ^ - The ID of the OpsGenie User. -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.OpsGenie UserResource
-userResource =
-    TF.newResource "opsgenie_user" $
-        UserResource {
-            _full_name = TF.Absent
-            , _locale = TF.Absent
-            , _role = TF.Absent
-            , _timezone = TF.Absent
-            , _username = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "full_name" <$> _full_name
-        , TF.assign "locale" <$> _locale
-        , TF.assign "role" <$> _role
-        , TF.assign "timezone" <$> _timezone
-        , TF.assign "username" <$> _username
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "full_name" <$> TF.argument _full_name
+        , TF.assign "locale" <$> TF.argument _locale
+        , TF.assign "role" <$> TF.argument _role
+        , TF.assign "timezone" <$> TF.argument _timezone
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.OpsGenie
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.OpsGenie UserResource
+userResource =
+    TF.newResource "opsgenie_user" $
+        UserResource {
+            _full_name = TF.Nil
+            , _locale = TF.Nil
+            , _role = TF.Nil
+            , _timezone = TF.Nil
+            , _username = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

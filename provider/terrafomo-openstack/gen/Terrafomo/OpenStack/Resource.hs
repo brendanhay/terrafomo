@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OpenStack       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.OpenStack.Provider as TF
+import qualified Terrafomo.OpenStack.Types    as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @openstack_blockstorage_volume_attach_v2@ OpenStack resource.
 
@@ -81,48 +83,47 @@ data BlockstorageVolumeAttachV2Resource = BlockstorageVolumeAttachV2Resource {
     {- ^ - A mount point base name for shared storage. -}
     } deriving (Show, Eq)
 
-blockstorageVolumeAttachV2Resource :: TF.Resource TF.OpenStack BlockstorageVolumeAttachV2Resource
-blockstorageVolumeAttachV2Resource =
-    TF.newResource "openstack_blockstorage_volume_attach_v2" $
-        BlockstorageVolumeAttachV2Resource {
-            _attach_mode = TF.Absent
-            , _device = TF.Absent
-            , _host_name = TF.Absent
-            , _initiator = TF.Absent
-            , _ip_address = TF.Absent
-            , _multipath = TF.Absent
-            , _os_type = TF.Absent
-            , _platform = TF.Absent
-            , _region = TF.Absent
-            , _volume_id = TF.Absent
-            , _wwnn = TF.Absent
-            , _wwpn = TF.Absent
-            , _computed_data' = TF.Computed "data"
-            , _computed_driver_volume_type = TF.Computed "driver_volume_type"
-            , _computed_mount_point_base = TF.Computed "mount_point_base"
-            }
-
 instance TF.ToHCL BlockstorageVolumeAttachV2Resource where
-    toHCL BlockstorageVolumeAttachV2Resource{..} = TF.arguments
-        [ TF.assign "attach_mode" <$> _attach_mode
-        , TF.assign "device" <$> _device
-        , TF.assign "host_name" <$> _host_name
-        , TF.assign "initiator" <$> _initiator
-        , TF.assign "ip_address" <$> _ip_address
-        , TF.assign "multipath" <$> _multipath
-        , TF.assign "os_type" <$> _os_type
-        , TF.assign "platform" <$> _platform
-        , TF.assign "region" <$> _region
-        , TF.assign "volume_id" <$> _volume_id
-        , TF.assign "wwnn" <$> _wwnn
-        , TF.assign "wwpn" <$> _wwpn
+    toHCL BlockstorageVolumeAttachV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "attach_mode" <$> TF.argument _attach_mode
+        , TF.assign "device" <$> TF.argument _device
+        , TF.assign "host_name" <$> TF.argument _host_name
+        , TF.assign "initiator" <$> TF.argument _initiator
+        , TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "multipath" <$> TF.argument _multipath
+        , TF.assign "os_type" <$> TF.argument _os_type
+        , TF.assign "platform" <$> TF.argument _platform
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "volume_id" <$> TF.argument _volume_id
+        , TF.assign "wwnn" <$> TF.argument _wwnn
+        , TF.assign "wwpn" <$> TF.argument _wwpn
         ]
 
 $(TF.makeSchemaLenses
     ''BlockstorageVolumeAttachV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+blockstorageVolumeAttachV2Resource :: TF.Resource TF.OpenStack BlockstorageVolumeAttachV2Resource
+blockstorageVolumeAttachV2Resource =
+    TF.newResource "openstack_blockstorage_volume_attach_v2" $
+        BlockstorageVolumeAttachV2Resource {
+            _attach_mode = TF.Nil
+            , _device = TF.Nil
+            , _host_name = TF.Nil
+            , _initiator = TF.Nil
+            , _ip_address = TF.Nil
+            , _multipath = TF.Nil
+            , _os_type = TF.Nil
+            , _platform = TF.Nil
+            , _region = TF.Nil
+            , _volume_id = TF.Nil
+            , _wwnn = TF.Nil
+            , _wwpn = TF.Nil
+            , _computed_data' = TF.Compute "data"
+            , _computed_driver_volume_type = TF.Compute "driver_volume_type"
+            , _computed_mount_point_base = TF.Compute "mount_point_base"
+            }
 
 {- | The @openstack_blockstorage_volume_v1@ OpenStack resource.
 
@@ -173,52 +174,51 @@ data BlockstorageVolumeV1Resource = BlockstorageVolumeV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-blockstorageVolumeV1Resource :: TF.Resource TF.OpenStack BlockstorageVolumeV1Resource
-blockstorageVolumeV1Resource =
-    TF.newResource "openstack_blockstorage_volume_v1" $
-        BlockstorageVolumeV1Resource {
-            _availability_zone = TF.Absent
-            , _description = TF.Absent
-            , _image_id = TF.Absent
-            , _metadata = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _size = TF.Absent
-            , _snapshot_id = TF.Absent
-            , _source_vol_id = TF.Absent
-            , _volume_type = TF.Absent
-            , _computed_attachment = TF.Computed "attachment"
-            , _computed_availability_zone = TF.Computed "availability_zone"
-            , _computed_description = TF.Computed "description"
-            , _computed_image_id = TF.Computed "image_id"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_size = TF.Computed "size"
-            , _computed_snapshot_id = TF.Computed "snapshot_id"
-            , _computed_source_vol_id = TF.Computed "source_vol_id"
-            , _computed_volume_type = TF.Computed "volume_type"
-            }
-
 instance TF.ToHCL BlockstorageVolumeV1Resource where
-    toHCL BlockstorageVolumeV1Resource{..} = TF.arguments
-        [ TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "description" <$> _description
-        , TF.assign "image_id" <$> _image_id
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "size" <$> _size
-        , TF.assign "snapshot_id" <$> _snapshot_id
-        , TF.assign "source_vol_id" <$> _source_vol_id
-        , TF.assign "volume_type" <$> _volume_type
+    toHCL BlockstorageVolumeV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "snapshot_id" <$> TF.argument _snapshot_id
+        , TF.assign "source_vol_id" <$> TF.argument _source_vol_id
+        , TF.assign "volume_type" <$> TF.argument _volume_type
         ]
 
 $(TF.makeSchemaLenses
     ''BlockstorageVolumeV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+blockstorageVolumeV1Resource :: TF.Resource TF.OpenStack BlockstorageVolumeV1Resource
+blockstorageVolumeV1Resource =
+    TF.newResource "openstack_blockstorage_volume_v1" $
+        BlockstorageVolumeV1Resource {
+            _availability_zone = TF.Nil
+            , _description = TF.Nil
+            , _image_id = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _size = TF.Nil
+            , _snapshot_id = TF.Nil
+            , _source_vol_id = TF.Nil
+            , _volume_type = TF.Nil
+            , _computed_attachment = TF.Compute "attachment"
+            , _computed_availability_zone = TF.Compute "availability_zone"
+            , _computed_description = TF.Compute "description"
+            , _computed_image_id = TF.Compute "image_id"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_size = TF.Compute "size"
+            , _computed_snapshot_id = TF.Compute "snapshot_id"
+            , _computed_source_vol_id = TF.Compute "source_vol_id"
+            , _computed_volume_type = TF.Compute "volume_type"
+            }
 
 {- | The @openstack_blockstorage_volume_v2@ OpenStack resource.
 
@@ -273,56 +273,55 @@ data BlockstorageVolumeV2Resource = BlockstorageVolumeV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-blockstorageVolumeV2Resource :: TF.Resource TF.OpenStack BlockstorageVolumeV2Resource
-blockstorageVolumeV2Resource =
-    TF.newResource "openstack_blockstorage_volume_v2" $
-        BlockstorageVolumeV2Resource {
-            _availability_zone = TF.Absent
-            , _consistency_group_id = TF.Absent
-            , _description = TF.Absent
-            , _image_id = TF.Absent
-            , _metadata = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _size = TF.Absent
-            , _snapshot_id = TF.Absent
-            , _source_replica = TF.Absent
-            , _source_vol_id = TF.Absent
-            , _volume_type = TF.Absent
-            , _computed_attachment = TF.Computed "attachment"
-            , _computed_availability_zone = TF.Computed "availability_zone"
-            , _computed_description = TF.Computed "description"
-            , _computed_image_id = TF.Computed "image_id"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_size = TF.Computed "size"
-            , _computed_snapshot_id = TF.Computed "snapshot_id"
-            , _computed_source_vol_id = TF.Computed "source_vol_id"
-            , _computed_volume_type = TF.Computed "volume_type"
-            }
-
 instance TF.ToHCL BlockstorageVolumeV2Resource where
-    toHCL BlockstorageVolumeV2Resource{..} = TF.arguments
-        [ TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "consistency_group_id" <$> _consistency_group_id
-        , TF.assign "description" <$> _description
-        , TF.assign "image_id" <$> _image_id
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "size" <$> _size
-        , TF.assign "snapshot_id" <$> _snapshot_id
-        , TF.assign "source_replica" <$> _source_replica
-        , TF.assign "source_vol_id" <$> _source_vol_id
-        , TF.assign "volume_type" <$> _volume_type
+    toHCL BlockstorageVolumeV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "consistency_group_id" <$> TF.argument _consistency_group_id
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "snapshot_id" <$> TF.argument _snapshot_id
+        , TF.assign "source_replica" <$> TF.argument _source_replica
+        , TF.assign "source_vol_id" <$> TF.argument _source_vol_id
+        , TF.assign "volume_type" <$> TF.argument _volume_type
         ]
 
 $(TF.makeSchemaLenses
     ''BlockstorageVolumeV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+blockstorageVolumeV2Resource :: TF.Resource TF.OpenStack BlockstorageVolumeV2Resource
+blockstorageVolumeV2Resource =
+    TF.newResource "openstack_blockstorage_volume_v2" $
+        BlockstorageVolumeV2Resource {
+            _availability_zone = TF.Nil
+            , _consistency_group_id = TF.Nil
+            , _description = TF.Nil
+            , _image_id = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _size = TF.Nil
+            , _snapshot_id = TF.Nil
+            , _source_replica = TF.Nil
+            , _source_vol_id = TF.Nil
+            , _volume_type = TF.Nil
+            , _computed_attachment = TF.Compute "attachment"
+            , _computed_availability_zone = TF.Compute "availability_zone"
+            , _computed_description = TF.Compute "description"
+            , _computed_image_id = TF.Compute "image_id"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_size = TF.Compute "size"
+            , _computed_snapshot_id = TF.Compute "snapshot_id"
+            , _computed_source_vol_id = TF.Compute "source_vol_id"
+            , _computed_volume_type = TF.Compute "volume_type"
+            }
 
 {- | The @openstack_compute_flavor_v2@ OpenStack resource.
 
@@ -363,45 +362,44 @@ data ComputeFlavorV2Resource = ComputeFlavorV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeFlavorV2Resource :: TF.Resource TF.OpenStack ComputeFlavorV2Resource
-computeFlavorV2Resource =
-    TF.newResource "openstack_compute_flavor_v2" $
-        ComputeFlavorV2Resource {
-            _disk = TF.Absent
-            , _is_public = TF.Absent
-            , _name = TF.Absent
-            , _ram = TF.Absent
-            , _region = TF.Absent
-            , _rx_tx_factor = TF.Absent
-            , _swap = TF.Absent
-            , _vcpus = TF.Absent
-            , _computed_disk = TF.Computed "disk"
-            , _computed_is_public = TF.Computed "is_public"
-            , _computed_name = TF.Computed "name"
-            , _computed_ram = TF.Computed "ram"
-            , _computed_region = TF.Computed "region"
-            , _computed_rx_tx_factor = TF.Computed "rx_tx_factor"
-            , _computed_swap = TF.Computed "swap"
-            , _computed_vcpus = TF.Computed "vcpus"
-            }
-
 instance TF.ToHCL ComputeFlavorV2Resource where
-    toHCL ComputeFlavorV2Resource{..} = TF.arguments
-        [ TF.assign "disk" <$> _disk
-        , TF.assign "is_public" <$> _is_public
-        , TF.assign "name" <$> _name
-        , TF.assign "ram" <$> _ram
-        , TF.assign "region" <$> _region
-        , TF.assign "rx_tx_factor" <$> _rx_tx_factor
-        , TF.assign "swap" <$> _swap
-        , TF.assign "vcpus" <$> _vcpus
+    toHCL ComputeFlavorV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "disk" <$> TF.argument _disk
+        , TF.assign "is_public" <$> TF.argument _is_public
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "ram" <$> TF.argument _ram
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "rx_tx_factor" <$> TF.argument _rx_tx_factor
+        , TF.assign "swap" <$> TF.argument _swap
+        , TF.assign "vcpus" <$> TF.argument _vcpus
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeFlavorV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeFlavorV2Resource :: TF.Resource TF.OpenStack ComputeFlavorV2Resource
+computeFlavorV2Resource =
+    TF.newResource "openstack_compute_flavor_v2" $
+        ComputeFlavorV2Resource {
+            _disk = TF.Nil
+            , _is_public = TF.Nil
+            , _name = TF.Nil
+            , _ram = TF.Nil
+            , _region = TF.Nil
+            , _rx_tx_factor = TF.Nil
+            , _swap = TF.Nil
+            , _vcpus = TF.Nil
+            , _computed_disk = TF.Compute "disk"
+            , _computed_is_public = TF.Compute "is_public"
+            , _computed_name = TF.Compute "name"
+            , _computed_ram = TF.Compute "ram"
+            , _computed_region = TF.Compute "region"
+            , _computed_rx_tx_factor = TF.Compute "rx_tx_factor"
+            , _computed_swap = TF.Compute "swap"
+            , _computed_vcpus = TF.Compute "vcpus"
+            }
 
 {- | The @openstack_compute_floatingip_associate_v2@ OpenStack resource.
 
@@ -427,33 +425,32 @@ data ComputeFloatingipAssociateV2Resource = ComputeFloatingipAssociateV2Resource
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeFloatingipAssociateV2Resource :: TF.Resource TF.OpenStack ComputeFloatingipAssociateV2Resource
-computeFloatingipAssociateV2Resource =
-    TF.newResource "openstack_compute_floatingip_associate_v2" $
-        ComputeFloatingipAssociateV2Resource {
-            _fixed_ip = TF.Absent
-            , _floating_ip = TF.Absent
-            , _instance_id = TF.Absent
-            , _region = TF.Absent
-            , _computed_fixed_ip = TF.Computed "fixed_ip"
-            , _computed_floating_ip = TF.Computed "floating_ip"
-            , _computed_instance_id = TF.Computed "instance_id"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL ComputeFloatingipAssociateV2Resource where
-    toHCL ComputeFloatingipAssociateV2Resource{..} = TF.arguments
-        [ TF.assign "fixed_ip" <$> _fixed_ip
-        , TF.assign "floating_ip" <$> _floating_ip
-        , TF.assign "instance_id" <$> _instance_id
-        , TF.assign "region" <$> _region
+    toHCL ComputeFloatingipAssociateV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "fixed_ip" <$> TF.argument _fixed_ip
+        , TF.assign "floating_ip" <$> TF.argument _floating_ip
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeFloatingipAssociateV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeFloatingipAssociateV2Resource :: TF.Resource TF.OpenStack ComputeFloatingipAssociateV2Resource
+computeFloatingipAssociateV2Resource =
+    TF.newResource "openstack_compute_floatingip_associate_v2" $
+        ComputeFloatingipAssociateV2Resource {
+            _fixed_ip = TF.Nil
+            , _floating_ip = TF.Nil
+            , _instance_id = TF.Nil
+            , _region = TF.Nil
+            , _computed_fixed_ip = TF.Compute "fixed_ip"
+            , _computed_floating_ip = TF.Compute "floating_ip"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_region = TF.Compute "region"
+            }
 
 {- | The @openstack_compute_floatingip_v2@ OpenStack resource.
 
@@ -481,30 +478,29 @@ data ComputeFloatingipV2Resource = ComputeFloatingipV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeFloatingipV2Resource :: TF.Resource TF.OpenStack ComputeFloatingipV2Resource
-computeFloatingipV2Resource =
-    TF.newResource "openstack_compute_floatingip_v2" $
-        ComputeFloatingipV2Resource {
-            _pool = TF.Absent
-            , _region = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_fixed_ip = TF.Computed "fixed_ip"
-            , _computed_instance_id = TF.Computed "instance_id"
-            , _computed_pool = TF.Computed "pool"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL ComputeFloatingipV2Resource where
-    toHCL ComputeFloatingipV2Resource{..} = TF.arguments
-        [ TF.assign "pool" <$> _pool
-        , TF.assign "region" <$> _region
+    toHCL ComputeFloatingipV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "pool" <$> TF.argument _pool
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeFloatingipV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeFloatingipV2Resource :: TF.Resource TF.OpenStack ComputeFloatingipV2Resource
+computeFloatingipV2Resource =
+    TF.newResource "openstack_compute_floatingip_v2" $
+        ComputeFloatingipV2Resource {
+            _pool = TF.Nil
+            , _region = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_fixed_ip = TF.Compute "fixed_ip"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_pool = TF.Compute "pool"
+            , _computed_region = TF.Compute "region"
+            }
 
 {- | The @openstack_compute_instance_v2@ OpenStack resource.
 
@@ -579,73 +575,72 @@ data ComputeInstanceV2Resource = ComputeInstanceV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeInstanceV2Resource :: TF.Resource TF.OpenStack ComputeInstanceV2Resource
-computeInstanceV2Resource =
-    TF.newResource "openstack_compute_instance_v2" $
-        ComputeInstanceV2Resource {
-            _admin_pass = TF.Absent
-            , _availability_zone = TF.Absent
-            , _block_device = TF.Absent
-            , _config_drive = TF.Absent
-            , _flavor_id = TF.Absent
-            , _flavor_name = TF.Absent
-            , _force_delete = TF.Absent
-            , _image_id = TF.Absent
-            , _image_name = TF.Absent
-            , _key_pair = TF.Absent
-            , _metadata = TF.Absent
-            , _name = TF.Absent
-            , _network = TF.Absent
-            , _personality = TF.Absent
-            , _region = TF.Absent
-            , _scheduler_hints = TF.Absent
-            , _security_groups = TF.Absent
-            , _stop_before_destroy = TF.Absent
-            , _user_data = TF.Absent
-            , _computed_access_ip_v4 = TF.Computed "access_ip_v4"
-            , _computed_access_ip_v6 = TF.Computed "access_ip_v6"
-            , _computed_all_metadata = TF.Computed "all_metadata"
-            , _computed_fixed_ip_v4 = TF.Computed "network/fixed_ip_v4"
-            , _computed_fixed_ip_v6 = TF.Computed "network/fixed_ip_v6"
-            , _computed_flavor_id = TF.Computed "flavor_id"
-            , _computed_flavor_name = TF.Computed "flavor_name"
-            , _computed_mac = TF.Computed "network/mac"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_name = TF.Computed "network/name"
-            , _computed_port = TF.Computed "network/port"
-            , _computed_region = TF.Computed "region"
-            , _computed_security_groups = TF.Computed "security_groups"
-            , _computed_uuid = TF.Computed "network/uuid"
-            }
-
 instance TF.ToHCL ComputeInstanceV2Resource where
-    toHCL ComputeInstanceV2Resource{..} = TF.arguments
-        [ TF.assign "admin_pass" <$> _admin_pass
-        , TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "block_device" <$> _block_device
-        , TF.assign "config_drive" <$> _config_drive
-        , TF.assign "flavor_id" <$> _flavor_id
-        , TF.assign "flavor_name" <$> _flavor_name
-        , TF.assign "force_delete" <$> _force_delete
-        , TF.assign "image_id" <$> _image_id
-        , TF.assign "image_name" <$> _image_name
-        , TF.assign "key_pair" <$> _key_pair
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "name" <$> _name
-        , TF.assign "network" <$> _network
-        , TF.assign "personality" <$> _personality
-        , TF.assign "region" <$> _region
-        , TF.assign "scheduler_hints" <$> _scheduler_hints
-        , TF.assign "security_groups" <$> _security_groups
-        , TF.assign "stop_before_destroy" <$> _stop_before_destroy
-        , TF.assign "user_data" <$> _user_data
+    toHCL ComputeInstanceV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_pass" <$> TF.argument _admin_pass
+        , TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "block_device" <$> TF.argument _block_device
+        , TF.assign "config_drive" <$> TF.argument _config_drive
+        , TF.assign "flavor_id" <$> TF.argument _flavor_id
+        , TF.assign "flavor_name" <$> TF.argument _flavor_name
+        , TF.assign "force_delete" <$> TF.argument _force_delete
+        , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "image_name" <$> TF.argument _image_name
+        , TF.assign "key_pair" <$> TF.argument _key_pair
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network" <$> TF.argument _network
+        , TF.assign "personality" <$> TF.argument _personality
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "scheduler_hints" <$> TF.argument _scheduler_hints
+        , TF.assign "security_groups" <$> TF.argument _security_groups
+        , TF.assign "stop_before_destroy" <$> TF.argument _stop_before_destroy
+        , TF.assign "user_data" <$> TF.argument _user_data
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeInstanceV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeInstanceV2Resource :: TF.Resource TF.OpenStack ComputeInstanceV2Resource
+computeInstanceV2Resource =
+    TF.newResource "openstack_compute_instance_v2" $
+        ComputeInstanceV2Resource {
+            _admin_pass = TF.Nil
+            , _availability_zone = TF.Nil
+            , _block_device = TF.Nil
+            , _config_drive = TF.Nil
+            , _flavor_id = TF.Nil
+            , _flavor_name = TF.Nil
+            , _force_delete = TF.Nil
+            , _image_id = TF.Nil
+            , _image_name = TF.Nil
+            , _key_pair = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _network = TF.Nil
+            , _personality = TF.Nil
+            , _region = TF.Nil
+            , _scheduler_hints = TF.Nil
+            , _security_groups = TF.Nil
+            , _stop_before_destroy = TF.Nil
+            , _user_data = TF.Nil
+            , _computed_access_ip_v4 = TF.Compute "access_ip_v4"
+            , _computed_access_ip_v6 = TF.Compute "access_ip_v6"
+            , _computed_all_metadata = TF.Compute "all_metadata"
+            , _computed_fixed_ip_v4 = TF.Compute "network/fixed_ip_v4"
+            , _computed_fixed_ip_v6 = TF.Compute "network/fixed_ip_v6"
+            , _computed_flavor_id = TF.Compute "flavor_id"
+            , _computed_flavor_name = TF.Compute "flavor_name"
+            , _computed_mac = TF.Compute "network/mac"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_name = TF.Compute "network/name"
+            , _computed_port = TF.Compute "network/port"
+            , _computed_region = TF.Compute "region"
+            , _computed_security_groups = TF.Compute "security_groups"
+            , _computed_uuid = TF.Compute "network/uuid"
+            }
 
 {- | The @openstack_compute_keypair_v2@ OpenStack resource.
 
@@ -668,32 +663,31 @@ data ComputeKeypairV2Resource = ComputeKeypairV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeKeypairV2Resource :: TF.Resource TF.OpenStack ComputeKeypairV2Resource
-computeKeypairV2Resource =
-    TF.newResource "openstack_compute_keypair_v2" $
-        ComputeKeypairV2Resource {
-            _name = TF.Absent
-            , _public_key = TF.Absent
-            , _region = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_public_key = TF.Computed "public_key"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL ComputeKeypairV2Resource where
-    toHCL ComputeKeypairV2Resource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "public_key" <$> _public_key
-        , TF.assign "region" <$> _region
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL ComputeKeypairV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "public_key" <$> TF.argument _public_key
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeKeypairV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeKeypairV2Resource :: TF.Resource TF.OpenStack ComputeKeypairV2Resource
+computeKeypairV2Resource =
+    TF.newResource "openstack_compute_keypair_v2" $
+        ComputeKeypairV2Resource {
+            _name = TF.Nil
+            , _public_key = TF.Nil
+            , _region = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_public_key = TF.Compute "public_key"
+            , _computed_region = TF.Compute "region"
+            }
 
 {- | The @openstack_compute_secgroup_v2@ OpenStack resource.
 
@@ -723,33 +717,32 @@ data ComputeSecgroupV2Resource = ComputeSecgroupV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeSecgroupV2Resource :: TF.Resource TF.OpenStack ComputeSecgroupV2Resource
-computeSecgroupV2Resource =
-    TF.newResource "openstack_compute_secgroup_v2" $
-        ComputeSecgroupV2Resource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _rule = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_rule = TF.Computed "rule"
-            }
-
 instance TF.ToHCL ComputeSecgroupV2Resource where
-    toHCL ComputeSecgroupV2Resource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "rule" <$> _rule
+    toHCL ComputeSecgroupV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "rule" <$> TF.argument _rule
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeSecgroupV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeSecgroupV2Resource :: TF.Resource TF.OpenStack ComputeSecgroupV2Resource
+computeSecgroupV2Resource =
+    TF.newResource "openstack_compute_secgroup_v2" $
+        ComputeSecgroupV2Resource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _rule = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_rule = TF.Compute "rule"
+            }
 
 {- | The @openstack_compute_servergroup_v2@ OpenStack resource.
 
@@ -766,29 +759,28 @@ data ComputeServergroupV2Resource = ComputeServergroupV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-computeServergroupV2Resource :: TF.Resource TF.OpenStack ComputeServergroupV2Resource
-computeServergroupV2Resource =
-    TF.newResource "openstack_compute_servergroup_v2" $
-        ComputeServergroupV2Resource {
-            _name = TF.Absent
-            , _policies = TF.Absent
-            , _region = TF.Absent
-            , _value_specs = TF.Absent
-            }
-
 instance TF.ToHCL ComputeServergroupV2Resource where
-    toHCL ComputeServergroupV2Resource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "policies" <$> _policies
-        , TF.assign "region" <$> _region
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL ComputeServergroupV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "policies" <$> TF.argument _policies
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeServergroupV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeServergroupV2Resource :: TF.Resource TF.OpenStack ComputeServergroupV2Resource
+computeServergroupV2Resource =
+    TF.newResource "openstack_compute_servergroup_v2" $
+        ComputeServergroupV2Resource {
+            _name = TF.Nil
+            , _policies = TF.Nil
+            , _region = TF.Nil
+            , _value_specs = TF.Nil
+            }
 
 {- | The @openstack_compute_volume_attach_v2@ OpenStack resource.
 
@@ -814,33 +806,32 @@ data ComputeVolumeAttachV2Resource = ComputeVolumeAttachV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-computeVolumeAttachV2Resource :: TF.Resource TF.OpenStack ComputeVolumeAttachV2Resource
-computeVolumeAttachV2Resource =
-    TF.newResource "openstack_compute_volume_attach_v2" $
-        ComputeVolumeAttachV2Resource {
-            _device = TF.Absent
-            , _instance_id = TF.Absent
-            , _region = TF.Absent
-            , _volume_id = TF.Absent
-            , _computed_device = TF.Computed "device"
-            , _computed_instance_id = TF.Computed "instance_id"
-            , _computed_region = TF.Computed "region"
-            , _computed_volume_id = TF.Computed "volume_id"
-            }
-
 instance TF.ToHCL ComputeVolumeAttachV2Resource where
-    toHCL ComputeVolumeAttachV2Resource{..} = TF.arguments
-        [ TF.assign "device" <$> _device
-        , TF.assign "instance_id" <$> _instance_id
-        , TF.assign "region" <$> _region
-        , TF.assign "volume_id" <$> _volume_id
+    toHCL ComputeVolumeAttachV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "device" <$> TF.argument _device
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "volume_id" <$> TF.argument _volume_id
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeVolumeAttachV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+computeVolumeAttachV2Resource :: TF.Resource TF.OpenStack ComputeVolumeAttachV2Resource
+computeVolumeAttachV2Resource =
+    TF.newResource "openstack_compute_volume_attach_v2" $
+        ComputeVolumeAttachV2Resource {
+            _device = TF.Nil
+            , _instance_id = TF.Nil
+            , _region = TF.Nil
+            , _volume_id = TF.Nil
+            , _computed_device = TF.Compute "device"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_region = TF.Compute "region"
+            , _computed_volume_id = TF.Compute "volume_id"
+            }
 
 {- | The @openstack_db_instance_v1@ OpenStack resource.
 
@@ -895,52 +886,51 @@ data DbInstanceV1Resource = DbInstanceV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-dbInstanceV1Resource :: TF.Resource TF.OpenStack DbInstanceV1Resource
-dbInstanceV1Resource =
-    TF.newResource "openstack_db_instance_v1" $
-        DbInstanceV1Resource {
-            _database = TF.Absent
-            , _datastore = TF.Absent
-            , _flavor_id = TF.Absent
-            , _name = TF.Absent
-            , _network = TF.Absent
-            , _region = TF.Absent
-            , _size = TF.Absent
-            , _user = TF.Absent
-            , _computed_charset = TF.Computed "database/charset"
-            , _computed_collate = TF.Computed "database/collate"
-            , _computed_databases = TF.Computed "user/databases"
-            , _computed_fixed_ip_v4 = TF.Computed "network/fixed_ip_v4"
-            , _computed_fixed_ip_v6 = TF.Computed "network/fixed_ip_v6"
-            , _computed_flavor_id = TF.Computed "flavor_id"
-            , _computed_host = TF.Computed "user/host"
-            , _computed_name = TF.Computed "user/name"
-            , _computed_password = TF.Computed "user/password"
-            , _computed_port = TF.Computed "network/port"
-            , _computed_region = TF.Computed "region"
-            , _computed_size = TF.Computed "size"
-            , _computed_type' = TF.Computed "datastore/type"
-            , _computed_uuid = TF.Computed "network/uuid"
-            , _computed_version = TF.Computed "datastore/version"
-            }
-
 instance TF.ToHCL DbInstanceV1Resource where
-    toHCL DbInstanceV1Resource{..} = TF.arguments
-        [ TF.assign "database" <$> _database
-        , TF.assign "datastore" <$> _datastore
-        , TF.assign "flavor_id" <$> _flavor_id
-        , TF.assign "name" <$> _name
-        , TF.assign "network" <$> _network
-        , TF.assign "region" <$> _region
-        , TF.assign "size" <$> _size
-        , TF.assign "user" <$> _user
+    toHCL DbInstanceV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "database" <$> TF.argument _database
+        , TF.assign "datastore" <$> TF.argument _datastore
+        , TF.assign "flavor_id" <$> TF.argument _flavor_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network" <$> TF.argument _network
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "user" <$> TF.argument _user
         ]
 
 $(TF.makeSchemaLenses
     ''DbInstanceV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dbInstanceV1Resource :: TF.Resource TF.OpenStack DbInstanceV1Resource
+dbInstanceV1Resource =
+    TF.newResource "openstack_db_instance_v1" $
+        DbInstanceV1Resource {
+            _database = TF.Nil
+            , _datastore = TF.Nil
+            , _flavor_id = TF.Nil
+            , _name = TF.Nil
+            , _network = TF.Nil
+            , _region = TF.Nil
+            , _size = TF.Nil
+            , _user = TF.Nil
+            , _computed_charset = TF.Compute "database/charset"
+            , _computed_collate = TF.Compute "database/collate"
+            , _computed_databases = TF.Compute "user/databases"
+            , _computed_fixed_ip_v4 = TF.Compute "network/fixed_ip_v4"
+            , _computed_fixed_ip_v6 = TF.Compute "network/fixed_ip_v6"
+            , _computed_flavor_id = TF.Compute "flavor_id"
+            , _computed_host = TF.Compute "user/host"
+            , _computed_name = TF.Compute "user/name"
+            , _computed_password = TF.Compute "user/password"
+            , _computed_port = TF.Compute "network/port"
+            , _computed_region = TF.Compute "region"
+            , _computed_size = TF.Compute "size"
+            , _computed_type' = TF.Compute "datastore/type"
+            , _computed_uuid = TF.Compute "network/uuid"
+            , _computed_version = TF.Compute "datastore/version"
+            }
 
 {- | The @openstack_dns_recordset_v2@ OpenStack resource.
 
@@ -981,45 +971,44 @@ data DnsRecordsetV2Resource = DnsRecordsetV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-dnsRecordsetV2Resource :: TF.Resource TF.OpenStack DnsRecordsetV2Resource
-dnsRecordsetV2Resource =
-    TF.newResource "openstack_dns_recordset_v2" $
-        DnsRecordsetV2Resource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _records = TF.Absent
-            , _region = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value_specs = TF.Absent
-            , _zone_id = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_name = TF.Computed "name"
-            , _computed_records = TF.Computed "records"
-            , _computed_region = TF.Computed "region"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_value_specs = TF.Computed "value_specs"
-            , _computed_zone_id = TF.Computed "zone_id"
-            }
-
 instance TF.ToHCL DnsRecordsetV2Resource where
-    toHCL DnsRecordsetV2Resource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "records" <$> _records
-        , TF.assign "region" <$> _region
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value_specs" <$> _value_specs
-        , TF.assign "zone_id" <$> _zone_id
+    toHCL DnsRecordsetV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "records" <$> TF.argument _records
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value_specs" <$> TF.argument _value_specs
+        , TF.assign "zone_id" <$> TF.argument _zone_id
         ]
 
 $(TF.makeSchemaLenses
     ''DnsRecordsetV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsRecordsetV2Resource :: TF.Resource TF.OpenStack DnsRecordsetV2Resource
+dnsRecordsetV2Resource =
+    TF.newResource "openstack_dns_recordset_v2" $
+        DnsRecordsetV2Resource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _records = TF.Nil
+            , _region = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value_specs = TF.Nil
+            , _zone_id = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_name = TF.Compute "name"
+            , _computed_records = TF.Compute "records"
+            , _computed_region = TF.Compute "region"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_value_specs = TF.Compute "value_specs"
+            , _computed_zone_id = TF.Compute "zone_id"
+            }
 
 {- | The @openstack_dns_zone_v2@ OpenStack resource.
 
@@ -1064,48 +1053,47 @@ data DnsZoneV2Resource = DnsZoneV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-dnsZoneV2Resource :: TF.Resource TF.OpenStack DnsZoneV2Resource
-dnsZoneV2Resource =
-    TF.newResource "openstack_dns_zone_v2" $
-        DnsZoneV2Resource {
-            _attributes = TF.Absent
-            , _description = TF.Absent
-            , _email = TF.Absent
-            , _masters = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_attributes = TF.Computed "attributes"
-            , _computed_description = TF.Computed "description"
-            , _computed_email = TF.Computed "email"
-            , _computed_masters = TF.Computed "masters"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_value_specs = TF.Computed "value_specs"
-            }
-
 instance TF.ToHCL DnsZoneV2Resource where
-    toHCL DnsZoneV2Resource{..} = TF.arguments
-        [ TF.assign "attributes" <$> _attributes
-        , TF.assign "description" <$> _description
-        , TF.assign "email" <$> _email
-        , TF.assign "masters" <$> _masters
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL DnsZoneV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "attributes" <$> TF.argument _attributes
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "masters" <$> TF.argument _masters
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''DnsZoneV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsZoneV2Resource :: TF.Resource TF.OpenStack DnsZoneV2Resource
+dnsZoneV2Resource =
+    TF.newResource "openstack_dns_zone_v2" $
+        DnsZoneV2Resource {
+            _attributes = TF.Nil
+            , _description = TF.Nil
+            , _email = TF.Nil
+            , _masters = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_attributes = TF.Compute "attributes"
+            , _computed_description = TF.Compute "description"
+            , _computed_email = TF.Compute "email"
+            , _computed_masters = TF.Compute "masters"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_value_specs = TF.Compute "value_specs"
+            }
 
 {- | The @openstack_fw_firewall_v1@ OpenStack resource.
 
@@ -1148,47 +1136,46 @@ data FwFirewallV1Resource = FwFirewallV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-fwFirewallV1Resource :: TF.Resource TF.OpenStack FwFirewallV1Resource
-fwFirewallV1Resource =
-    TF.newResource "openstack_fw_firewall_v1" $
-        FwFirewallV1Resource {
-            _admin_state_up = TF.Absent
-            , _associated_routers = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _no_routers = TF.Absent
-            , _policy_id = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_associated_routers = TF.Computed "associated_routers"
-            , _computed_description = TF.Computed "description"
-            , _computed_name = TF.Computed "name"
-            , _computed_no_routers = TF.Computed "no_routers"
-            , _computed_policy_id = TF.Computed "policy_id"
-            , _computed_region = TF.Computed "region"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL FwFirewallV1Resource where
-    toHCL FwFirewallV1Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "associated_routers" <$> _associated_routers
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "no_routers" <$> _no_routers
-        , TF.assign "policy_id" <$> _policy_id
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL FwFirewallV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "associated_routers" <$> TF.argument _associated_routers
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "no_routers" <$> TF.argument _no_routers
+        , TF.assign "policy_id" <$> TF.argument _policy_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''FwFirewallV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+fwFirewallV1Resource :: TF.Resource TF.OpenStack FwFirewallV1Resource
+fwFirewallV1Resource =
+    TF.newResource "openstack_fw_firewall_v1" $
+        FwFirewallV1Resource {
+            _admin_state_up = TF.Nil
+            , _associated_routers = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _no_routers = TF.Nil
+            , _policy_id = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_associated_routers = TF.Compute "associated_routers"
+            , _computed_description = TF.Compute "description"
+            , _computed_name = TF.Compute "name"
+            , _computed_no_routers = TF.Compute "no_routers"
+            , _computed_policy_id = TF.Compute "policy_id"
+            , _computed_region = TF.Compute "region"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_fw_policy_v1@ OpenStack resource.
 
@@ -1221,40 +1208,39 @@ data FwPolicyV1Resource = FwPolicyV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-fwPolicyV1Resource :: TF.Resource TF.OpenStack FwPolicyV1Resource
-fwPolicyV1Resource =
-    TF.newResource "openstack_fw_policy_v1" $
-        FwPolicyV1Resource {
-            _audited = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _rules = TF.Absent
-            , _shared = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_audited = TF.Computed "audited"
-            , _computed_description = TF.Computed "description"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_shared = TF.Computed "shared"
-            }
-
 instance TF.ToHCL FwPolicyV1Resource where
-    toHCL FwPolicyV1Resource{..} = TF.arguments
-        [ TF.assign "audited" <$> _audited
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "rules" <$> _rules
-        , TF.assign "shared" <$> _shared
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL FwPolicyV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "audited" <$> TF.argument _audited
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "rules" <$> TF.argument _rules
+        , TF.assign "shared" <$> TF.argument _shared
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''FwPolicyV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+fwPolicyV1Resource :: TF.Resource TF.OpenStack FwPolicyV1Resource
+fwPolicyV1Resource =
+    TF.newResource "openstack_fw_policy_v1" $
+        FwPolicyV1Resource {
+            _audited = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _rules = TF.Nil
+            , _shared = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_audited = TF.Compute "audited"
+            , _computed_description = TF.Compute "description"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_shared = TF.Compute "shared"
+            }
 
 {- | The @openstack_fw_rule_v1@ OpenStack resource.
 
@@ -1313,59 +1299,58 @@ data FwRuleV1Resource = FwRuleV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-fwRuleV1Resource :: TF.Resource TF.OpenStack FwRuleV1Resource
-fwRuleV1Resource =
-    TF.newResource "openstack_fw_rule_v1" $
-        FwRuleV1Resource {
-            _action = TF.Absent
-            , _description = TF.Absent
-            , _destination_ip_address = TF.Absent
-            , _destination_port = TF.Absent
-            , _enabled = TF.Absent
-            , _ip_version = TF.Absent
-            , _name = TF.Absent
-            , _protocol = TF.Absent
-            , _region = TF.Absent
-            , _source_ip_address = TF.Absent
-            , _source_port = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_action = TF.Computed "action"
-            , _computed_description = TF.Computed "description"
-            , _computed_destination_ip_address = TF.Computed "destination_ip_address"
-            , _computed_destination_port = TF.Computed "destination_port"
-            , _computed_enabled = TF.Computed "enabled"
-            , _computed_ip_version = TF.Computed "ip_version"
-            , _computed_name = TF.Computed "name"
-            , _computed_protocol = TF.Computed "protocol"
-            , _computed_region = TF.Computed "region"
-            , _computed_source_ip_address = TF.Computed "source_ip_address"
-            , _computed_source_port = TF.Computed "source_port"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL FwRuleV1Resource where
-    toHCL FwRuleV1Resource{..} = TF.arguments
-        [ TF.assign "action" <$> _action
-        , TF.assign "description" <$> _description
-        , TF.assign "destination_ip_address" <$> _destination_ip_address
-        , TF.assign "destination_port" <$> _destination_port
-        , TF.assign "enabled" <$> _enabled
-        , TF.assign "ip_version" <$> _ip_version
-        , TF.assign "name" <$> _name
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "region" <$> _region
-        , TF.assign "source_ip_address" <$> _source_ip_address
-        , TF.assign "source_port" <$> _source_port
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL FwRuleV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "action" <$> TF.argument _action
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "destination_ip_address" <$> TF.argument _destination_ip_address
+        , TF.assign "destination_port" <$> TF.argument _destination_port
+        , TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "ip_version" <$> TF.argument _ip_version
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "source_ip_address" <$> TF.argument _source_ip_address
+        , TF.assign "source_port" <$> TF.argument _source_port
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''FwRuleV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+fwRuleV1Resource :: TF.Resource TF.OpenStack FwRuleV1Resource
+fwRuleV1Resource =
+    TF.newResource "openstack_fw_rule_v1" $
+        FwRuleV1Resource {
+            _action = TF.Nil
+            , _description = TF.Nil
+            , _destination_ip_address = TF.Nil
+            , _destination_port = TF.Nil
+            , _enabled = TF.Nil
+            , _ip_version = TF.Nil
+            , _name = TF.Nil
+            , _protocol = TF.Nil
+            , _region = TF.Nil
+            , _source_ip_address = TF.Nil
+            , _source_port = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_action = TF.Compute "action"
+            , _computed_description = TF.Compute "description"
+            , _computed_destination_ip_address = TF.Compute "destination_ip_address"
+            , _computed_destination_port = TF.Compute "destination_port"
+            , _computed_enabled = TF.Compute "enabled"
+            , _computed_ip_version = TF.Compute "ip_version"
+            , _computed_name = TF.Compute "name"
+            , _computed_protocol = TF.Compute "protocol"
+            , _computed_region = TF.Compute "region"
+            , _computed_source_ip_address = TF.Compute "source_ip_address"
+            , _computed_source_port = TF.Compute "source_port"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_identity_project_v3@ OpenStack resource.
 
@@ -1393,37 +1378,36 @@ data IdentityProjectV3Resource = IdentityProjectV3Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-identityProjectV3Resource :: TF.Resource TF.OpenStack IdentityProjectV3Resource
-identityProjectV3Resource =
-    TF.newResource "openstack_identity_project_v3" $
-        IdentityProjectV3Resource {
-            _description = TF.Absent
-            , _domain_id = TF.Absent
-            , _enabled = TF.Absent
-            , _is_domain = TF.Absent
-            , _name = TF.Absent
-            , _parent_id = TF.Absent
-            , _region = TF.Absent
-            , _computed_domain_id = TF.Computed "domain_id"
-            , _computed_parent_id = TF.Computed "parent_id"
-            }
-
 instance TF.ToHCL IdentityProjectV3Resource where
-    toHCL IdentityProjectV3Resource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "domain_id" <$> _domain_id
-        , TF.assign "enabled" <$> _enabled
-        , TF.assign "is_domain" <$> _is_domain
-        , TF.assign "name" <$> _name
-        , TF.assign "parent_id" <$> _parent_id
-        , TF.assign "region" <$> _region
+    toHCL IdentityProjectV3Resource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "domain_id" <$> TF.argument _domain_id
+        , TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "is_domain" <$> TF.argument _is_domain
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "parent_id" <$> TF.argument _parent_id
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''IdentityProjectV3Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+identityProjectV3Resource :: TF.Resource TF.OpenStack IdentityProjectV3Resource
+identityProjectV3Resource =
+    TF.newResource "openstack_identity_project_v3" $
+        IdentityProjectV3Resource {
+            _description = TF.Nil
+            , _domain_id = TF.Nil
+            , _enabled = TF.Nil
+            , _is_domain = TF.Nil
+            , _name = TF.Nil
+            , _parent_id = TF.Nil
+            , _region = TF.Nil
+            , _computed_domain_id = TF.Compute "domain_id"
+            , _computed_parent_id = TF.Compute "parent_id"
+            }
 
 {- | The @openstack_identity_user_v3@ OpenStack resource.
 
@@ -1461,48 +1445,47 @@ data IdentityUserV3Resource = IdentityUserV3Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-identityUserV3Resource :: TF.Resource TF.OpenStack IdentityUserV3Resource
-identityUserV3Resource =
-    TF.newResource "openstack_identity_user_v3" $
-        IdentityUserV3Resource {
-            _default_project_id = TF.Absent
-            , _description = TF.Absent
-            , _domain_id = TF.Absent
-            , _enabled = TF.Absent
-            , _extra = TF.Absent
-            , _ignore_change_password_upon_first_use = TF.Absent
-            , _ignore_lockout_failure_attempts = TF.Absent
-            , _ignore_password_expiry = TF.Absent
-            , _multi_factor_auth_enabled = TF.Absent
-            , _multi_factor_auth_rule = TF.Absent
-            , _name = TF.Absent
-            , _password = TF.Absent
-            , _region = TF.Absent
-            , _computed_domain_id = TF.Computed "domain_id"
-            }
-
 instance TF.ToHCL IdentityUserV3Resource where
-    toHCL IdentityUserV3Resource{..} = TF.arguments
-        [ TF.assign "default_project_id" <$> _default_project_id
-        , TF.assign "description" <$> _description
-        , TF.assign "domain_id" <$> _domain_id
-        , TF.assign "enabled" <$> _enabled
-        , TF.assign "extra" <$> _extra
-        , TF.assign "ignore_change_password_upon_first_use" <$> _ignore_change_password_upon_first_use
-        , TF.assign "ignore_lockout_failure_attempts" <$> _ignore_lockout_failure_attempts
-        , TF.assign "ignore_password_expiry" <$> _ignore_password_expiry
-        , TF.assign "multi_factor_auth_enabled" <$> _multi_factor_auth_enabled
-        , TF.assign "multi_factor_auth_rule" <$> _multi_factor_auth_rule
-        , TF.assign "name" <$> _name
-        , TF.assign "password" <$> _password
-        , TF.assign "region" <$> _region
+    toHCL IdentityUserV3Resource{..} = TF.block $ catMaybes
+        [ TF.assign "default_project_id" <$> TF.argument _default_project_id
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "domain_id" <$> TF.argument _domain_id
+        , TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "extra" <$> TF.argument _extra
+        , TF.assign "ignore_change_password_upon_first_use" <$> TF.argument _ignore_change_password_upon_first_use
+        , TF.assign "ignore_lockout_failure_attempts" <$> TF.argument _ignore_lockout_failure_attempts
+        , TF.assign "ignore_password_expiry" <$> TF.argument _ignore_password_expiry
+        , TF.assign "multi_factor_auth_enabled" <$> TF.argument _multi_factor_auth_enabled
+        , TF.assign "multi_factor_auth_rule" <$> TF.argument _multi_factor_auth_rule
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''IdentityUserV3Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+identityUserV3Resource :: TF.Resource TF.OpenStack IdentityUserV3Resource
+identityUserV3Resource =
+    TF.newResource "openstack_identity_user_v3" $
+        IdentityUserV3Resource {
+            _default_project_id = TF.Nil
+            , _description = TF.Nil
+            , _domain_id = TF.Nil
+            , _enabled = TF.Nil
+            , _extra = TF.Nil
+            , _ignore_change_password_upon_first_use = TF.Nil
+            , _ignore_lockout_failure_attempts = TF.Nil
+            , _ignore_password_expiry = TF.Nil
+            , _multi_factor_auth_enabled = TF.Nil
+            , _multi_factor_auth_rule = TF.Nil
+            , _name = TF.Nil
+            , _password = TF.Nil
+            , _region = TF.Nil
+            , _computed_domain_id = TF.Compute "domain_id"
+            }
 
 {- | The @openstack_images_image_v2@ OpenStack resource.
 
@@ -1577,67 +1560,66 @@ data ImagesImageV2Resource = ImagesImageV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-imagesImageV2Resource :: TF.Resource TF.OpenStack ImagesImageV2Resource
-imagesImageV2Resource =
-    TF.newResource "openstack_images_image_v2" $
-        ImagesImageV2Resource {
-            _container_format = TF.Absent
-            , _disk_format = TF.Absent
-            , _image_cache_path = TF.Absent
-            , _image_source_url = TF.Absent
-            , _local_file_path = TF.Absent
-            , _min_disk_gb = TF.Absent
-            , _min_ram_mb = TF.Absent
-            , _name = TF.Absent
-            , _properties = TF.Absent
-            , _protected = TF.Absent
-            , _region = TF.Absent
-            , _tags = TF.Absent
-            , _visibility = TF.Absent
-            , _computed_checksum = TF.Computed "checksum"
-            , _computed_container_format = TF.Computed "container_format"
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_disk_format = TF.Computed "disk_format"
-            , _computed_file = TF.Computed "file"
-            , _computed_id = TF.Computed "id"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_min_disk_gb = TF.Computed "min_disk_gb"
-            , _computed_min_ram_mb = TF.Computed "min_ram_mb"
-            , _computed_name = TF.Computed "name"
-            , _computed_owner = TF.Computed "owner"
-            , _computed_properties = TF.Computed "properties"
-            , _computed_protected = TF.Computed "protected"
-            , _computed_region = TF.Computed "region"
-            , _computed_schema = TF.Computed "schema"
-            , _computed_size_bytes = TF.Computed "size_bytes"
-            , _computed_status = TF.Computed "status"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_update_at = TF.Computed "update_at"
-            , _computed_visibility = TF.Computed "visibility"
-            }
-
 instance TF.ToHCL ImagesImageV2Resource where
-    toHCL ImagesImageV2Resource{..} = TF.arguments
-        [ TF.assign "container_format" <$> _container_format
-        , TF.assign "disk_format" <$> _disk_format
-        , TF.assign "image_cache_path" <$> _image_cache_path
-        , TF.assign "image_source_url" <$> _image_source_url
-        , TF.assign "local_file_path" <$> _local_file_path
-        , TF.assign "min_disk_gb" <$> _min_disk_gb
-        , TF.assign "min_ram_mb" <$> _min_ram_mb
-        , TF.assign "name" <$> _name
-        , TF.assign "properties" <$> _properties
-        , TF.assign "protected" <$> _protected
-        , TF.assign "region" <$> _region
-        , TF.assign "tags" <$> _tags
-        , TF.assign "visibility" <$> _visibility
+    toHCL ImagesImageV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "container_format" <$> TF.argument _container_format
+        , TF.assign "disk_format" <$> TF.argument _disk_format
+        , TF.assign "image_cache_path" <$> TF.argument _image_cache_path
+        , TF.assign "image_source_url" <$> TF.argument _image_source_url
+        , TF.assign "local_file_path" <$> TF.argument _local_file_path
+        , TF.assign "min_disk_gb" <$> TF.argument _min_disk_gb
+        , TF.assign "min_ram_mb" <$> TF.argument _min_ram_mb
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "properties" <$> TF.argument _properties
+        , TF.assign "protected" <$> TF.argument _protected
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "visibility" <$> TF.argument _visibility
         ]
 
 $(TF.makeSchemaLenses
     ''ImagesImageV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+imagesImageV2Resource :: TF.Resource TF.OpenStack ImagesImageV2Resource
+imagesImageV2Resource =
+    TF.newResource "openstack_images_image_v2" $
+        ImagesImageV2Resource {
+            _container_format = TF.Nil
+            , _disk_format = TF.Nil
+            , _image_cache_path = TF.Nil
+            , _image_source_url = TF.Nil
+            , _local_file_path = TF.Nil
+            , _min_disk_gb = TF.Nil
+            , _min_ram_mb = TF.Nil
+            , _name = TF.Nil
+            , _properties = TF.Nil
+            , _protected = TF.Nil
+            , _region = TF.Nil
+            , _tags = TF.Nil
+            , _visibility = TF.Nil
+            , _computed_checksum = TF.Compute "checksum"
+            , _computed_container_format = TF.Compute "container_format"
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_disk_format = TF.Compute "disk_format"
+            , _computed_file = TF.Compute "file"
+            , _computed_id = TF.Compute "id"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_min_disk_gb = TF.Compute "min_disk_gb"
+            , _computed_min_ram_mb = TF.Compute "min_ram_mb"
+            , _computed_name = TF.Compute "name"
+            , _computed_owner = TF.Compute "owner"
+            , _computed_properties = TF.Compute "properties"
+            , _computed_protected = TF.Compute "protected"
+            , _computed_region = TF.Compute "region"
+            , _computed_schema = TF.Compute "schema"
+            , _computed_size_bytes = TF.Compute "size_bytes"
+            , _computed_status = TF.Compute "status"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_update_at = TF.Compute "update_at"
+            , _computed_visibility = TF.Compute "visibility"
+            }
 
 {- | The @openstack_lb_listener_v2@ OpenStack resource.
 
@@ -1692,56 +1674,55 @@ data LbListenerV2Resource = LbListenerV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbListenerV2Resource :: TF.Resource TF.OpenStack LbListenerV2Resource
-lbListenerV2Resource =
-    TF.newResource "openstack_lb_listener_v2" $
-        LbListenerV2Resource {
-            _admin_state_up = TF.Absent
-            , _connection_limit = TF.Absent
-            , _default_pool_id = TF.Absent
-            , _default_tls_container_ref = TF.Absent
-            , _description = TF.Absent
-            , _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _protocol = TF.Absent
-            , _protocol_port = TF.Absent
-            , _region = TF.Absent
-            , _sni_container_refs = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_connection_limit = TF.Computed "connection_limit"
-            , _computed_default_port_id = TF.Computed "default_port_id"
-            , _computed_default_tls_container_ref = TF.Computed "default_tls_container_ref"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_protocol = TF.Computed "protocol"
-            , _computed_protocol_port = TF.Computed "protocol_port"
-            , _computed_sni_container_refs = TF.Computed "sni_container_refs"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL LbListenerV2Resource where
-    toHCL LbListenerV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "connection_limit" <$> _connection_limit
-        , TF.assign "default_pool_id" <$> _default_pool_id
-        , TF.assign "default_tls_container_ref" <$> _default_tls_container_ref
-        , TF.assign "description" <$> _description
-        , TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "protocol_port" <$> _protocol_port
-        , TF.assign "region" <$> _region
-        , TF.assign "sni_container_refs" <$> _sni_container_refs
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL LbListenerV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "connection_limit" <$> TF.argument _connection_limit
+        , TF.assign "default_pool_id" <$> TF.argument _default_pool_id
+        , TF.assign "default_tls_container_ref" <$> TF.argument _default_tls_container_ref
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "protocol_port" <$> TF.argument _protocol_port
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "sni_container_refs" <$> TF.argument _sni_container_refs
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''LbListenerV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbListenerV2Resource :: TF.Resource TF.OpenStack LbListenerV2Resource
+lbListenerV2Resource =
+    TF.newResource "openstack_lb_listener_v2" $
+        LbListenerV2Resource {
+            _admin_state_up = TF.Nil
+            , _connection_limit = TF.Nil
+            , _default_pool_id = TF.Nil
+            , _default_tls_container_ref = TF.Nil
+            , _description = TF.Nil
+            , _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _protocol = TF.Nil
+            , _protocol_port = TF.Nil
+            , _region = TF.Nil
+            , _sni_container_refs = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_connection_limit = TF.Compute "connection_limit"
+            , _computed_default_port_id = TF.Compute "default_port_id"
+            , _computed_default_tls_container_ref = TF.Compute "default_tls_container_ref"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_protocol = TF.Compute "protocol"
+            , _computed_protocol_port = TF.Compute "protocol_port"
+            , _computed_sni_container_refs = TF.Compute "sni_container_refs"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_lb_loadbalancer_v2@ OpenStack resource.
 
@@ -1792,52 +1773,51 @@ data LbLoadbalancerV2Resource = LbLoadbalancerV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbLoadbalancerV2Resource :: TF.Resource TF.OpenStack LbLoadbalancerV2Resource
-lbLoadbalancerV2Resource =
-    TF.newResource "openstack_lb_loadbalancer_v2" $
-        LbLoadbalancerV2Resource {
-            _admin_state_up = TF.Absent
-            , _description = TF.Absent
-            , _flavor = TF.Absent
-            , _loadbalancer_provider = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _security_group_ids = TF.Absent
-            , _tenant_id = TF.Absent
-            , _vip_address = TF.Absent
-            , _vip_subnet_id = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_description = TF.Computed "description"
-            , _computed_flavor = TF.Computed "flavor"
-            , _computed_loadbalancer_provider = TF.Computed "loadbalancer_provider"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_security_group_ids = TF.Computed "security_group_ids"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            , _computed_vip_address = TF.Computed "vip_address"
-            , _computed_vip_port_id = TF.Computed "vip_port_id"
-            , _computed_vip_subnet_id = TF.Computed "vip_subnet_id"
-            }
-
 instance TF.ToHCL LbLoadbalancerV2Resource where
-    toHCL LbLoadbalancerV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "description" <$> _description
-        , TF.assign "flavor" <$> _flavor
-        , TF.assign "loadbalancer_provider" <$> _loadbalancer_provider
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "security_group_ids" <$> _security_group_ids
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "vip_address" <$> _vip_address
-        , TF.assign "vip_subnet_id" <$> _vip_subnet_id
+    toHCL LbLoadbalancerV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "flavor" <$> TF.argument _flavor
+        , TF.assign "loadbalancer_provider" <$> TF.argument _loadbalancer_provider
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "security_group_ids" <$> TF.argument _security_group_ids
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "vip_address" <$> TF.argument _vip_address
+        , TF.assign "vip_subnet_id" <$> TF.argument _vip_subnet_id
         ]
 
 $(TF.makeSchemaLenses
     ''LbLoadbalancerV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbLoadbalancerV2Resource :: TF.Resource TF.OpenStack LbLoadbalancerV2Resource
+lbLoadbalancerV2Resource =
+    TF.newResource "openstack_lb_loadbalancer_v2" $
+        LbLoadbalancerV2Resource {
+            _admin_state_up = TF.Nil
+            , _description = TF.Nil
+            , _flavor = TF.Nil
+            , _loadbalancer_provider = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _security_group_ids = TF.Nil
+            , _tenant_id = TF.Nil
+            , _vip_address = TF.Nil
+            , _vip_subnet_id = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_description = TF.Compute "description"
+            , _computed_flavor = TF.Compute "flavor"
+            , _computed_loadbalancer_provider = TF.Compute "loadbalancer_provider"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_security_group_ids = TF.Compute "security_group_ids"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            , _computed_vip_address = TF.Compute "vip_address"
+            , _computed_vip_port_id = TF.Compute "vip_port_id"
+            , _computed_vip_subnet_id = TF.Compute "vip_subnet_id"
+            }
 
 {- | The @openstack_lb_member_v1@ OpenStack resource.
 
@@ -1870,39 +1850,38 @@ data LbMemberV1Resource = LbMemberV1Resource {
     {- ^ - The load balancing weight of the member. This is currently unable to be set through Terraform. -}
     } deriving (Show, Eq)
 
-lbMemberV1Resource :: TF.Resource TF.OpenStack LbMemberV1Resource
-lbMemberV1Resource =
-    TF.newResource "openstack_lb_member_v1" $
-        LbMemberV1Resource {
-            _address = TF.Absent
-            , _admin_state_up = TF.Absent
-            , _pool_id = TF.Absent
-            , _port = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_pool_id = TF.Computed "pool_id"
-            , _computed_port = TF.Computed "port"
-            , _computed_region = TF.Computed "region"
-            , _computed_weight = TF.Computed "weight"
-            }
-
 instance TF.ToHCL LbMemberV1Resource where
-    toHCL LbMemberV1Resource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "pool_id" <$> _pool_id
-        , TF.assign "port" <$> _port
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL LbMemberV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "pool_id" <$> TF.argument _pool_id
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''LbMemberV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbMemberV1Resource :: TF.Resource TF.OpenStack LbMemberV1Resource
+lbMemberV1Resource =
+    TF.newResource "openstack_lb_member_v1" $
+        LbMemberV1Resource {
+            _address = TF.Nil
+            , _admin_state_up = TF.Nil
+            , _pool_id = TF.Nil
+            , _port = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_pool_id = TF.Compute "pool_id"
+            , _computed_port = TF.Compute "port"
+            , _computed_region = TF.Compute "region"
+            , _computed_weight = TF.Compute "weight"
+            }
 
 {- | The @openstack_lb_member_v2@ OpenStack resource.
 
@@ -1947,48 +1926,47 @@ data LbMemberV2Resource = LbMemberV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbMemberV2Resource :: TF.Resource TF.OpenStack LbMemberV2Resource
-lbMemberV2Resource =
-    TF.newResource "openstack_lb_member_v2" $
-        LbMemberV2Resource {
-            _address = TF.Absent
-            , _admin_state_up = TF.Absent
-            , _name = TF.Absent
-            , _pool_id = TF.Absent
-            , _protocol_port = TF.Absent
-            , _region = TF.Absent
-            , _subnet_id = TF.Absent
-            , _tenant_id = TF.Absent
-            , _weight = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_pool_id = TF.Computed "pool_id"
-            , _computed_protocol_port = TF.Computed "protocol_port"
-            , _computed_subnet_id = TF.Computed "subnet_id"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            , _computed_weight = TF.Computed "weight"
-            }
-
 instance TF.ToHCL LbMemberV2Resource where
-    toHCL LbMemberV2Resource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "name" <$> _name
-        , TF.assign "pool_id" <$> _pool_id
-        , TF.assign "protocol_port" <$> _protocol_port
-        , TF.assign "region" <$> _region
-        , TF.assign "subnet_id" <$> _subnet_id
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "weight" <$> _weight
+    toHCL LbMemberV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "pool_id" <$> TF.argument _pool_id
+        , TF.assign "protocol_port" <$> TF.argument _protocol_port
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "subnet_id" <$> TF.argument _subnet_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "weight" <$> TF.argument _weight
         ]
 
 $(TF.makeSchemaLenses
     ''LbMemberV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbMemberV2Resource :: TF.Resource TF.OpenStack LbMemberV2Resource
+lbMemberV2Resource =
+    TF.newResource "openstack_lb_member_v2" $
+        LbMemberV2Resource {
+            _address = TF.Nil
+            , _admin_state_up = TF.Nil
+            , _name = TF.Nil
+            , _pool_id = TF.Nil
+            , _protocol_port = TF.Nil
+            , _region = TF.Nil
+            , _subnet_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _weight = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_pool_id = TF.Compute "pool_id"
+            , _computed_protocol_port = TF.Compute "protocol_port"
+            , _computed_subnet_id = TF.Compute "subnet_id"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            , _computed_weight = TF.Compute "weight"
+            }
 
 {- | The @openstack_lb_monitor_v1@ OpenStack resource.
 
@@ -2037,51 +2015,50 @@ data LbMonitorV1Resource = LbMonitorV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbMonitorV1Resource :: TF.Resource TF.OpenStack LbMonitorV1Resource
-lbMonitorV1Resource =
-    TF.newResource "openstack_lb_monitor_v1" $
-        LbMonitorV1Resource {
-            _admin_state_up = TF.Absent
-            , _delay = TF.Absent
-            , _expected_codes = TF.Absent
-            , _http_method = TF.Absent
-            , _max_retries = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _timeout = TF.Absent
-            , _type' = TF.Absent
-            , _url_path = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_delay = TF.Computed "delay"
-            , _computed_expected_codes = TF.Computed "expected_codes"
-            , _computed_http_method = TF.Computed "http_method"
-            , _computed_max_retries = TF.Computed "max_retries"
-            , _computed_region = TF.Computed "region"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            , _computed_timeout = TF.Computed "timeout"
-            , _computed_type' = TF.Computed "type"
-            , _computed_url_path = TF.Computed "url_path"
-            }
-
 instance TF.ToHCL LbMonitorV1Resource where
-    toHCL LbMonitorV1Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "delay" <$> _delay
-        , TF.assign "expected_codes" <$> _expected_codes
-        , TF.assign "http_method" <$> _http_method
-        , TF.assign "max_retries" <$> _max_retries
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "timeout" <$> _timeout
-        , TF.assign "type" <$> _type'
-        , TF.assign "url_path" <$> _url_path
+    toHCL LbMonitorV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "delay" <$> TF.argument _delay
+        , TF.assign "expected_codes" <$> TF.argument _expected_codes
+        , TF.assign "http_method" <$> TF.argument _http_method
+        , TF.assign "max_retries" <$> TF.argument _max_retries
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "timeout" <$> TF.argument _timeout
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "url_path" <$> TF.argument _url_path
         ]
 
 $(TF.makeSchemaLenses
     ''LbMonitorV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbMonitorV1Resource :: TF.Resource TF.OpenStack LbMonitorV1Resource
+lbMonitorV1Resource =
+    TF.newResource "openstack_lb_monitor_v1" $
+        LbMonitorV1Resource {
+            _admin_state_up = TF.Nil
+            , _delay = TF.Nil
+            , _expected_codes = TF.Nil
+            , _http_method = TF.Nil
+            , _max_retries = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _timeout = TF.Nil
+            , _type' = TF.Nil
+            , _url_path = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_delay = TF.Compute "delay"
+            , _computed_expected_codes = TF.Compute "expected_codes"
+            , _computed_http_method = TF.Compute "http_method"
+            , _computed_max_retries = TF.Compute "max_retries"
+            , _computed_region = TF.Compute "region"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            , _computed_timeout = TF.Compute "timeout"
+            , _computed_type' = TF.Compute "type"
+            , _computed_url_path = TF.Compute "url_path"
+            }
 
 {- | The @openstack_lb_monitor_v2@ OpenStack resource.
 
@@ -2134,55 +2111,54 @@ data LbMonitorV2Resource = LbMonitorV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbMonitorV2Resource :: TF.Resource TF.OpenStack LbMonitorV2Resource
-lbMonitorV2Resource =
-    TF.newResource "openstack_lb_monitor_v2" $
-        LbMonitorV2Resource {
-            _admin_state_up = TF.Absent
-            , _delay = TF.Absent
-            , _expected_codes = TF.Absent
-            , _http_method = TF.Absent
-            , _max_retries = TF.Absent
-            , _name = TF.Absent
-            , _pool_id = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _timeout = TF.Absent
-            , _type' = TF.Absent
-            , _url_path = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_delay = TF.Computed "delay"
-            , _computed_expected_codes = TF.Computed "expected_codes"
-            , _computed_http_method = TF.Computed "http_method"
-            , _computed_id = TF.Computed "id"
-            , _computed_max_retries = TF.Computed "max_retries"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            , _computed_timeout = TF.Computed "timeout"
-            , _computed_type' = TF.Computed "type"
-            , _computed_url_path = TF.Computed "url_path"
-            }
-
 instance TF.ToHCL LbMonitorV2Resource where
-    toHCL LbMonitorV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "delay" <$> _delay
-        , TF.assign "expected_codes" <$> _expected_codes
-        , TF.assign "http_method" <$> _http_method
-        , TF.assign "max_retries" <$> _max_retries
-        , TF.assign "name" <$> _name
-        , TF.assign "pool_id" <$> _pool_id
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "timeout" <$> _timeout
-        , TF.assign "type" <$> _type'
-        , TF.assign "url_path" <$> _url_path
+    toHCL LbMonitorV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "delay" <$> TF.argument _delay
+        , TF.assign "expected_codes" <$> TF.argument _expected_codes
+        , TF.assign "http_method" <$> TF.argument _http_method
+        , TF.assign "max_retries" <$> TF.argument _max_retries
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "pool_id" <$> TF.argument _pool_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "timeout" <$> TF.argument _timeout
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "url_path" <$> TF.argument _url_path
         ]
 
 $(TF.makeSchemaLenses
     ''LbMonitorV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbMonitorV2Resource :: TF.Resource TF.OpenStack LbMonitorV2Resource
+lbMonitorV2Resource =
+    TF.newResource "openstack_lb_monitor_v2" $
+        LbMonitorV2Resource {
+            _admin_state_up = TF.Nil
+            , _delay = TF.Nil
+            , _expected_codes = TF.Nil
+            , _http_method = TF.Nil
+            , _max_retries = TF.Nil
+            , _name = TF.Nil
+            , _pool_id = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _timeout = TF.Nil
+            , _type' = TF.Nil
+            , _url_path = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_delay = TF.Compute "delay"
+            , _computed_expected_codes = TF.Compute "expected_codes"
+            , _computed_http_method = TF.Compute "http_method"
+            , _computed_id = TF.Compute "id"
+            , _computed_max_retries = TF.Compute "max_retries"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            , _computed_timeout = TF.Compute "timeout"
+            , _computed_type' = TF.Compute "type"
+            , _computed_url_path = TF.Compute "url_path"
+            }
 
 {- | The @openstack_lb_pool_v1@ OpenStack resource.
 
@@ -2227,48 +2203,47 @@ data LbPoolV1Resource = LbPoolV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbPoolV1Resource :: TF.Resource TF.OpenStack LbPoolV1Resource
-lbPoolV1Resource =
-    TF.newResource "openstack_lb_pool_v1" $
-        LbPoolV1Resource {
-            _lb_method = TF.Absent
-            , _lb_provider = TF.Absent
-            , _member = TF.Absent
-            , _monitor_ids = TF.Absent
-            , _name = TF.Absent
-            , _protocol = TF.Absent
-            , _region = TF.Absent
-            , _subnet_id = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_lb_method = TF.Computed "lb_method"
-            , _computed_lb_provider = TF.Computed "lb_provider"
-            , _computed_member = TF.Computed "member"
-            , _computed_monitor_id = TF.Computed "monitor_id"
-            , _computed_name = TF.Computed "name"
-            , _computed_protocol = TF.Computed "protocol"
-            , _computed_region = TF.Computed "region"
-            , _computed_subnet_id = TF.Computed "subnet_id"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL LbPoolV1Resource where
-    toHCL LbPoolV1Resource{..} = TF.arguments
-        [ TF.assign "lb_method" <$> _lb_method
-        , TF.assign "lb_provider" <$> _lb_provider
-        , TF.assign "member" <$> _member
-        , TF.assign "monitor_ids" <$> _monitor_ids
-        , TF.assign "name" <$> _name
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "region" <$> _region
-        , TF.assign "subnet_id" <$> _subnet_id
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL LbPoolV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "lb_method" <$> TF.argument _lb_method
+        , TF.assign "lb_provider" <$> TF.argument _lb_provider
+        , TF.assign "member" <$> TF.argument _member
+        , TF.assign "monitor_ids" <$> TF.argument _monitor_ids
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "subnet_id" <$> TF.argument _subnet_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''LbPoolV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbPoolV1Resource :: TF.Resource TF.OpenStack LbPoolV1Resource
+lbPoolV1Resource =
+    TF.newResource "openstack_lb_pool_v1" $
+        LbPoolV1Resource {
+            _lb_method = TF.Nil
+            , _lb_provider = TF.Nil
+            , _member = TF.Nil
+            , _monitor_ids = TF.Nil
+            , _name = TF.Nil
+            , _protocol = TF.Nil
+            , _region = TF.Nil
+            , _subnet_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_lb_method = TF.Compute "lb_method"
+            , _computed_lb_provider = TF.Compute "lb_provider"
+            , _computed_member = TF.Compute "member"
+            , _computed_monitor_id = TF.Compute "monitor_id"
+            , _computed_name = TF.Compute "name"
+            , _computed_protocol = TF.Compute "protocol"
+            , _computed_region = TF.Compute "region"
+            , _computed_subnet_id = TF.Compute "subnet_id"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_lb_pool_v2@ OpenStack resource.
 
@@ -2313,49 +2288,48 @@ data LbPoolV2Resource = LbPoolV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbPoolV2Resource :: TF.Resource TF.OpenStack LbPoolV2Resource
-lbPoolV2Resource =
-    TF.newResource "openstack_lb_pool_v2" $
-        LbPoolV2Resource {
-            _admin_state_up = TF.Absent
-            , _description = TF.Absent
-            , _lb_method = TF.Absent
-            , _listener_id = TF.Absent
-            , _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _persistence = TF.Absent
-            , _protocol = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_lb_method = TF.Computed "lb_method"
-            , _computed_name = TF.Computed "name"
-            , _computed_persistence = TF.Computed "persistence"
-            , _computed_protocol = TF.Computed "protocol"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL LbPoolV2Resource where
-    toHCL LbPoolV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "description" <$> _description
-        , TF.assign "lb_method" <$> _lb_method
-        , TF.assign "listener_id" <$> _listener_id
-        , TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "persistence" <$> _persistence
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL LbPoolV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "lb_method" <$> TF.argument _lb_method
+        , TF.assign "listener_id" <$> TF.argument _listener_id
+        , TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "persistence" <$> TF.argument _persistence
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''LbPoolV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbPoolV2Resource :: TF.Resource TF.OpenStack LbPoolV2Resource
+lbPoolV2Resource =
+    TF.newResource "openstack_lb_pool_v2" $
+        LbPoolV2Resource {
+            _admin_state_up = TF.Nil
+            , _description = TF.Nil
+            , _lb_method = TF.Nil
+            , _listener_id = TF.Nil
+            , _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _persistence = TF.Nil
+            , _protocol = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_lb_method = TF.Compute "lb_method"
+            , _computed_name = TF.Compute "name"
+            , _computed_persistence = TF.Compute "persistence"
+            , _computed_protocol = TF.Compute "protocol"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_lb_vip_v1@ OpenStack resource.
 
@@ -2418,61 +2392,60 @@ data LbVipV1Resource = LbVipV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-lbVipV1Resource :: TF.Resource TF.OpenStack LbVipV1Resource
-lbVipV1Resource =
-    TF.newResource "openstack_lb_vip_v1" $
-        LbVipV1Resource {
-            _address = TF.Absent
-            , _admin_state_up = TF.Absent
-            , _conn_limit = TF.Absent
-            , _description = TF.Absent
-            , _floating_ip = TF.Absent
-            , _name = TF.Absent
-            , _persistence = TF.Absent
-            , _pool_id = TF.Absent
-            , _port = TF.Absent
-            , _protocol = TF.Absent
-            , _region = TF.Absent
-            , _subnet_id = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_conn_limit = TF.Computed "conn_limit"
-            , _computed_description = TF.Computed "description"
-            , _computed_floating_ip = TF.Computed "floating_ip"
-            , _computed_name = TF.Computed "name"
-            , _computed_persistence = TF.Computed "persistence"
-            , _computed_pool_id = TF.Computed "pool_id"
-            , _computed_port = TF.Computed "port"
-            , _computed_port_id = TF.Computed "port_id"
-            , _computed_protocol = TF.Computed "protocol"
-            , _computed_region = TF.Computed "region"
-            , _computed_subnet_id = TF.Computed "subnet_id"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL LbVipV1Resource where
-    toHCL LbVipV1Resource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "conn_limit" <$> _conn_limit
-        , TF.assign "description" <$> _description
-        , TF.assign "floating_ip" <$> _floating_ip
-        , TF.assign "name" <$> _name
-        , TF.assign "persistence" <$> _persistence
-        , TF.assign "pool_id" <$> _pool_id
-        , TF.assign "port" <$> _port
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "region" <$> _region
-        , TF.assign "subnet_id" <$> _subnet_id
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL LbVipV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "conn_limit" <$> TF.argument _conn_limit
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "floating_ip" <$> TF.argument _floating_ip
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "persistence" <$> TF.argument _persistence
+        , TF.assign "pool_id" <$> TF.argument _pool_id
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "subnet_id" <$> TF.argument _subnet_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''LbVipV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbVipV1Resource :: TF.Resource TF.OpenStack LbVipV1Resource
+lbVipV1Resource =
+    TF.newResource "openstack_lb_vip_v1" $
+        LbVipV1Resource {
+            _address = TF.Nil
+            , _admin_state_up = TF.Nil
+            , _conn_limit = TF.Nil
+            , _description = TF.Nil
+            , _floating_ip = TF.Nil
+            , _name = TF.Nil
+            , _persistence = TF.Nil
+            , _pool_id = TF.Nil
+            , _port = TF.Nil
+            , _protocol = TF.Nil
+            , _region = TF.Nil
+            , _subnet_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_conn_limit = TF.Compute "conn_limit"
+            , _computed_description = TF.Compute "description"
+            , _computed_floating_ip = TF.Compute "floating_ip"
+            , _computed_name = TF.Compute "name"
+            , _computed_persistence = TF.Compute "persistence"
+            , _computed_pool_id = TF.Compute "pool_id"
+            , _computed_port = TF.Compute "port"
+            , _computed_port_id = TF.Compute "port_id"
+            , _computed_protocol = TF.Compute "protocol"
+            , _computed_region = TF.Compute "region"
+            , _computed_subnet_id = TF.Compute "subnet_id"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_networking_floatingip_v2@ OpenStack resource.
 
@@ -2508,39 +2481,38 @@ data NetworkingFloatingipV2Resource = NetworkingFloatingipV2Resource {
     {- ^ - the ID of the tenant in which to create the floating IP. -}
     } deriving (Show, Eq)
 
-networkingFloatingipV2Resource :: TF.Resource TF.OpenStack NetworkingFloatingipV2Resource
-networkingFloatingipV2Resource =
-    TF.newResource "openstack_networking_floatingip_v2" $
-        NetworkingFloatingipV2Resource {
-            _fixed_ip = TF.Absent
-            , _pool = TF.Absent
-            , _port_id = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_fixed_ip = TF.Computed "fixed_ip"
-            , _computed_pool = TF.Computed "pool"
-            , _computed_port_id = TF.Computed "port_id"
-            , _computed_region = TF.Computed "region"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL NetworkingFloatingipV2Resource where
-    toHCL NetworkingFloatingipV2Resource{..} = TF.arguments
-        [ TF.assign "fixed_ip" <$> _fixed_ip
-        , TF.assign "pool" <$> _pool
-        , TF.assign "port_id" <$> _port_id
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL NetworkingFloatingipV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "fixed_ip" <$> TF.argument _fixed_ip
+        , TF.assign "pool" <$> TF.argument _pool
+        , TF.assign "port_id" <$> TF.argument _port_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingFloatingipV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingFloatingipV2Resource :: TF.Resource TF.OpenStack NetworkingFloatingipV2Resource
+networkingFloatingipV2Resource =
+    TF.newResource "openstack_networking_floatingip_v2" $
+        NetworkingFloatingipV2Resource {
+            _fixed_ip = TF.Nil
+            , _pool = TF.Nil
+            , _port_id = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_fixed_ip = TF.Compute "fixed_ip"
+            , _computed_pool = TF.Compute "pool"
+            , _computed_port_id = TF.Compute "port_id"
+            , _computed_region = TF.Compute "region"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_networking_network_v2@ OpenStack resource.
 
@@ -2573,40 +2545,39 @@ data NetworkingNetworkV2Resource = NetworkingNetworkV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingNetworkV2Resource :: TF.Resource TF.OpenStack NetworkingNetworkV2Resource
-networkingNetworkV2Resource =
-    TF.newResource "openstack_networking_network_v2" $
-        NetworkingNetworkV2Resource {
-            _admin_state_up = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _segments = TF.Absent
-            , _shared = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_shared = TF.Computed "shared"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL NetworkingNetworkV2Resource where
-    toHCL NetworkingNetworkV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "segments" <$> _segments
-        , TF.assign "shared" <$> _shared
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL NetworkingNetworkV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "segments" <$> TF.argument _segments
+        , TF.assign "shared" <$> TF.argument _shared
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingNetworkV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingNetworkV2Resource :: TF.Resource TF.OpenStack NetworkingNetworkV2Resource
+networkingNetworkV2Resource =
+    TF.newResource "openstack_networking_network_v2" $
+        NetworkingNetworkV2Resource {
+            _admin_state_up = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _segments = TF.Nil
+            , _shared = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_shared = TF.Compute "shared"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_networking_port_v2@ OpenStack resource.
 
@@ -2661,57 +2632,56 @@ data NetworkingPortV2Resource = NetworkingPortV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingPortV2Resource :: TF.Resource TF.OpenStack NetworkingPortV2Resource
-networkingPortV2Resource =
-    TF.newResource "openstack_networking_port_v2" $
-        NetworkingPortV2Resource {
-            _admin_state_up = TF.Absent
-            , _allowed_address_pairs = TF.Absent
-            , _device_id = TF.Absent
-            , _device_owner = TF.Absent
-            , _fixed_ip = TF.Absent
-            , _mac_address = TF.Absent
-            , _name = TF.Absent
-            , _network_id = TF.Absent
-            , _no_security_groups = TF.Absent
-            , _region = TF.Absent
-            , _security_group_ids = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_all_fixed_ips = TF.Computed "all_fixed_ips"
-            , _computed_all_security_group_ids = TF.Computed "all_security_group_ids"
-            , _computed_device_id = TF.Computed "device_id"
-            , _computed_device_owner = TF.Computed "device_owner"
-            , _computed_fixed_ip = TF.Computed "fixed_ip"
-            , _computed_mac_address = TF.Computed "mac_address"
-            , _computed_region = TF.Computed "region"
-            , _computed_security_group_ids = TF.Computed "security_group_ids"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL NetworkingPortV2Resource where
-    toHCL NetworkingPortV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "allowed_address_pairs" <$> _allowed_address_pairs
-        , TF.assign "device_id" <$> _device_id
-        , TF.assign "device_owner" <$> _device_owner
-        , TF.assign "fixed_ip" <$> _fixed_ip
-        , TF.assign "mac_address" <$> _mac_address
-        , TF.assign "name" <$> _name
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "no_security_groups" <$> _no_security_groups
-        , TF.assign "region" <$> _region
-        , TF.assign "security_group_ids" <$> _security_group_ids
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL NetworkingPortV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "allowed_address_pairs" <$> TF.argument _allowed_address_pairs
+        , TF.assign "device_id" <$> TF.argument _device_id
+        , TF.assign "device_owner" <$> TF.argument _device_owner
+        , TF.assign "fixed_ip" <$> TF.argument _fixed_ip
+        , TF.assign "mac_address" <$> TF.argument _mac_address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "no_security_groups" <$> TF.argument _no_security_groups
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "security_group_ids" <$> TF.argument _security_group_ids
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingPortV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingPortV2Resource :: TF.Resource TF.OpenStack NetworkingPortV2Resource
+networkingPortV2Resource =
+    TF.newResource "openstack_networking_port_v2" $
+        NetworkingPortV2Resource {
+            _admin_state_up = TF.Nil
+            , _allowed_address_pairs = TF.Nil
+            , _device_id = TF.Nil
+            , _device_owner = TF.Nil
+            , _fixed_ip = TF.Nil
+            , _mac_address = TF.Nil
+            , _name = TF.Nil
+            , _network_id = TF.Nil
+            , _no_security_groups = TF.Nil
+            , _region = TF.Nil
+            , _security_group_ids = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_all_fixed_ips = TF.Compute "all_fixed_ips"
+            , _computed_all_security_group_ids = TF.Compute "all_security_group_ids"
+            , _computed_device_id = TF.Compute "device_id"
+            , _computed_device_owner = TF.Compute "device_owner"
+            , _computed_fixed_ip = TF.Compute "fixed_ip"
+            , _computed_mac_address = TF.Compute "mac_address"
+            , _computed_region = TF.Compute "region"
+            , _computed_security_group_ids = TF.Compute "security_group_ids"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_networking_router_interface_v2@ OpenStack resource.
 
@@ -2736,33 +2706,32 @@ data NetworkingRouterInterfaceV2Resource = NetworkingRouterInterfaceV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingRouterInterfaceV2Resource :: TF.Resource TF.OpenStack NetworkingRouterInterfaceV2Resource
-networkingRouterInterfaceV2Resource =
-    TF.newResource "openstack_networking_router_interface_v2" $
-        NetworkingRouterInterfaceV2Resource {
-            _port_id = TF.Absent
-            , _region = TF.Absent
-            , _router_id = TF.Absent
-            , _subnet_id = TF.Absent
-            , _computed_port_id = TF.Computed "port_id"
-            , _computed_region = TF.Computed "region"
-            , _computed_router_id = TF.Computed "router_id"
-            , _computed_subnet_id = TF.Computed "subnet_id"
-            }
-
 instance TF.ToHCL NetworkingRouterInterfaceV2Resource where
-    toHCL NetworkingRouterInterfaceV2Resource{..} = TF.arguments
-        [ TF.assign "port_id" <$> _port_id
-        , TF.assign "region" <$> _region
-        , TF.assign "router_id" <$> _router_id
-        , TF.assign "subnet_id" <$> _subnet_id
+    toHCL NetworkingRouterInterfaceV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "port_id" <$> TF.argument _port_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "router_id" <$> TF.argument _router_id
+        , TF.assign "subnet_id" <$> TF.argument _subnet_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingRouterInterfaceV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingRouterInterfaceV2Resource :: TF.Resource TF.OpenStack NetworkingRouterInterfaceV2Resource
+networkingRouterInterfaceV2Resource =
+    TF.newResource "openstack_networking_router_interface_v2" $
+        NetworkingRouterInterfaceV2Resource {
+            _port_id = TF.Nil
+            , _region = TF.Nil
+            , _router_id = TF.Nil
+            , _subnet_id = TF.Nil
+            , _computed_port_id = TF.Compute "port_id"
+            , _computed_region = TF.Compute "region"
+            , _computed_router_id = TF.Compute "router_id"
+            , _computed_subnet_id = TF.Compute "subnet_id"
+            }
 
 {- | The @openstack_networking_router_route_v2@ OpenStack resource.
 
@@ -2787,33 +2756,32 @@ data NetworkingRouterRouteV2Resource = NetworkingRouterRouteV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingRouterRouteV2Resource :: TF.Resource TF.OpenStack NetworkingRouterRouteV2Resource
-networkingRouterRouteV2Resource =
-    TF.newResource "openstack_networking_router_route_v2" $
-        NetworkingRouterRouteV2Resource {
-            _destination_cidr = TF.Absent
-            , _next_hop = TF.Absent
-            , _region = TF.Absent
-            , _router_id = TF.Absent
-            , _computed_destination_cidr = TF.Computed "destination_cidr"
-            , _computed_next_hop = TF.Computed "next_hop"
-            , _computed_region = TF.Computed "region"
-            , _computed_router_id = TF.Computed "router_id"
-            }
-
 instance TF.ToHCL NetworkingRouterRouteV2Resource where
-    toHCL NetworkingRouterRouteV2Resource{..} = TF.arguments
-        [ TF.assign "destination_cidr" <$> _destination_cidr
-        , TF.assign "next_hop" <$> _next_hop
-        , TF.assign "region" <$> _region
-        , TF.assign "router_id" <$> _router_id
+    toHCL NetworkingRouterRouteV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "destination_cidr" <$> TF.argument _destination_cidr
+        , TF.assign "next_hop" <$> TF.argument _next_hop
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "router_id" <$> TF.argument _router_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingRouterRouteV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingRouterRouteV2Resource :: TF.Resource TF.OpenStack NetworkingRouterRouteV2Resource
+networkingRouterRouteV2Resource =
+    TF.newResource "openstack_networking_router_route_v2" $
+        NetworkingRouterRouteV2Resource {
+            _destination_cidr = TF.Nil
+            , _next_hop = TF.Nil
+            , _region = TF.Nil
+            , _router_id = TF.Nil
+            , _computed_destination_cidr = TF.Compute "destination_cidr"
+            , _computed_next_hop = TF.Compute "next_hop"
+            , _computed_region = TF.Compute "region"
+            , _computed_router_id = TF.Compute "router_id"
+            }
 
 {- | The @openstack_networking_router_v2@ OpenStack resource.
 
@@ -2860,49 +2828,48 @@ data NetworkingRouterV2Resource = NetworkingRouterV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingRouterV2Resource :: TF.Resource TF.OpenStack NetworkingRouterV2Resource
-networkingRouterV2Resource =
-    TF.newResource "openstack_networking_router_v2" $
-        NetworkingRouterV2Resource {
-            _admin_state_up = TF.Absent
-            , _distributed = TF.Absent
-            , _enable_snat = TF.Absent
-            , _external_fixed_ip = TF.Absent
-            , _external_network_id = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_admin_state_up = TF.Computed "admin_state_up"
-            , _computed_enable_snat = TF.Computed "enable_snat"
-            , _computed_external_fixed_ip = TF.Computed "external_fixed_ip"
-            , _computed_external_gateway = TF.Computed "external_gateway"
-            , _computed_external_network_id = TF.Computed "external_network_id"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            , _computed_value_specs = TF.Computed "value_specs"
-            }
-
 instance TF.ToHCL NetworkingRouterV2Resource where
-    toHCL NetworkingRouterV2Resource{..} = TF.arguments
-        [ TF.assign "admin_state_up" <$> _admin_state_up
-        , TF.assign "distributed" <$> _distributed
-        , TF.assign "enable_snat" <$> _enable_snat
-        , TF.assign "external_fixed_ip" <$> _external_fixed_ip
-        , TF.assign "external_network_id" <$> _external_network_id
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL NetworkingRouterV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.argument _admin_state_up
+        , TF.assign "distributed" <$> TF.argument _distributed
+        , TF.assign "enable_snat" <$> TF.argument _enable_snat
+        , TF.assign "external_fixed_ip" <$> TF.argument _external_fixed_ip
+        , TF.assign "external_network_id" <$> TF.argument _external_network_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingRouterV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingRouterV2Resource :: TF.Resource TF.OpenStack NetworkingRouterV2Resource
+networkingRouterV2Resource =
+    TF.newResource "openstack_networking_router_v2" $
+        NetworkingRouterV2Resource {
+            _admin_state_up = TF.Nil
+            , _distributed = TF.Nil
+            , _enable_snat = TF.Nil
+            , _external_fixed_ip = TF.Nil
+            , _external_network_id = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_admin_state_up = TF.Compute "admin_state_up"
+            , _computed_enable_snat = TF.Compute "enable_snat"
+            , _computed_external_fixed_ip = TF.Compute "external_fixed_ip"
+            , _computed_external_gateway = TF.Compute "external_gateway"
+            , _computed_external_network_id = TF.Compute "external_network_id"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            , _computed_value_specs = TF.Compute "value_specs"
+            }
 
 {- | The @openstack_networking_secgroup_rule_v2@ OpenStack resource.
 
@@ -2953,51 +2920,50 @@ data NetworkingSecgroupRuleV2Resource = NetworkingSecgroupRuleV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingSecgroupRuleV2Resource :: TF.Resource TF.OpenStack NetworkingSecgroupRuleV2Resource
-networkingSecgroupRuleV2Resource =
-    TF.newResource "openstack_networking_secgroup_rule_v2" $
-        NetworkingSecgroupRuleV2Resource {
-            _direction = TF.Absent
-            , _ethertype = TF.Absent
-            , _port_range_max = TF.Absent
-            , _port_range_min = TF.Absent
-            , _protocol = TF.Absent
-            , _region = TF.Absent
-            , _remote_group_id = TF.Absent
-            , _remote_ip_prefix = TF.Absent
-            , _security_group_id = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_direction = TF.Computed "direction"
-            , _computed_ethertype = TF.Computed "ethertype"
-            , _computed_port_range_max = TF.Computed "port_range_max"
-            , _computed_port_range_min = TF.Computed "port_range_min"
-            , _computed_protocol = TF.Computed "protocol"
-            , _computed_region = TF.Computed "region"
-            , _computed_remote_group_id = TF.Computed "remote_group_id"
-            , _computed_remote_ip_prefix = TF.Computed "remote_ip_prefix"
-            , _computed_security_group_id = TF.Computed "security_group_id"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL NetworkingSecgroupRuleV2Resource where
-    toHCL NetworkingSecgroupRuleV2Resource{..} = TF.arguments
-        [ TF.assign "direction" <$> _direction
-        , TF.assign "ethertype" <$> _ethertype
-        , TF.assign "port_range_max" <$> _port_range_max
-        , TF.assign "port_range_min" <$> _port_range_min
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "region" <$> _region
-        , TF.assign "remote_group_id" <$> _remote_group_id
-        , TF.assign "remote_ip_prefix" <$> _remote_ip_prefix
-        , TF.assign "security_group_id" <$> _security_group_id
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL NetworkingSecgroupRuleV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "direction" <$> TF.argument _direction
+        , TF.assign "ethertype" <$> TF.argument _ethertype
+        , TF.assign "port_range_max" <$> TF.argument _port_range_max
+        , TF.assign "port_range_min" <$> TF.argument _port_range_min
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "remote_group_id" <$> TF.argument _remote_group_id
+        , TF.assign "remote_ip_prefix" <$> TF.argument _remote_ip_prefix
+        , TF.assign "security_group_id" <$> TF.argument _security_group_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingSecgroupRuleV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingSecgroupRuleV2Resource :: TF.Resource TF.OpenStack NetworkingSecgroupRuleV2Resource
+networkingSecgroupRuleV2Resource =
+    TF.newResource "openstack_networking_secgroup_rule_v2" $
+        NetworkingSecgroupRuleV2Resource {
+            _direction = TF.Nil
+            , _ethertype = TF.Nil
+            , _port_range_max = TF.Nil
+            , _port_range_min = TF.Nil
+            , _protocol = TF.Nil
+            , _region = TF.Nil
+            , _remote_group_id = TF.Nil
+            , _remote_ip_prefix = TF.Nil
+            , _security_group_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_direction = TF.Compute "direction"
+            , _computed_ethertype = TF.Compute "ethertype"
+            , _computed_port_range_max = TF.Compute "port_range_max"
+            , _computed_port_range_min = TF.Compute "port_range_min"
+            , _computed_protocol = TF.Compute "protocol"
+            , _computed_region = TF.Compute "region"
+            , _computed_remote_group_id = TF.Compute "remote_group_id"
+            , _computed_remote_ip_prefix = TF.Compute "remote_ip_prefix"
+            , _computed_security_group_id = TF.Compute "security_group_id"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_networking_secgroup_v2@ OpenStack resource.
 
@@ -3026,35 +2992,34 @@ data NetworkingSecgroupV2Resource = NetworkingSecgroupV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingSecgroupV2Resource :: TF.Resource TF.OpenStack NetworkingSecgroupV2Resource
-networkingSecgroupV2Resource =
-    TF.newResource "openstack_networking_secgroup_v2" $
-        NetworkingSecgroupV2Resource {
-            _delete_default_rules = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL NetworkingSecgroupV2Resource where
-    toHCL NetworkingSecgroupV2Resource{..} = TF.arguments
-        [ TF.assign "delete_default_rules" <$> _delete_default_rules
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL NetworkingSecgroupV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "delete_default_rules" <$> TF.argument _delete_default_rules
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingSecgroupV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingSecgroupV2Resource :: TF.Resource TF.OpenStack NetworkingSecgroupV2Resource
+networkingSecgroupV2Resource =
+    TF.newResource "openstack_networking_secgroup_v2" $
+        NetworkingSecgroupV2Resource {
+            _delete_default_rules = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_networking_subnet_v2@ OpenStack resource.
 
@@ -3111,58 +3076,57 @@ data NetworkingSubnetV2Resource = NetworkingSubnetV2Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-networkingSubnetV2Resource :: TF.Resource TF.OpenStack NetworkingSubnetV2Resource
-networkingSubnetV2Resource =
-    TF.newResource "openstack_networking_subnet_v2" $
-        NetworkingSubnetV2Resource {
-            _allocation_pools = TF.Absent
-            , _cidr = TF.Absent
-            , _dns_nameservers = TF.Absent
-            , _enable_dhcp = TF.Absent
-            , _gateway_ip = TF.Absent
-            , _host_routes = TF.Absent
-            , _ip_version = TF.Absent
-            , _name = TF.Absent
-            , _network_id = TF.Absent
-            , _no_gateway = TF.Absent
-            , _region = TF.Absent
-            , _tenant_id = TF.Absent
-            , _value_specs = TF.Absent
-            , _computed_allocation_pools = TF.Computed "allocation_pools"
-            , _computed_cidr = TF.Computed "cidr"
-            , _computed_dns_nameservers = TF.Computed "dns_nameservers"
-            , _computed_enable_dhcp = TF.Computed "enable_dhcp"
-            , _computed_gateway_ip = TF.Computed "gateway_ip"
-            , _computed_host_routes = TF.Computed "host_routes"
-            , _computed_ip_version = TF.Computed "ip_version"
-            , _computed_name = TF.Computed "name"
-            , _computed_network_id = TF.Computed "network_id"
-            , _computed_region = TF.Computed "region"
-            , _computed_tenant_id = TF.Computed "tenant_id"
-            }
-
 instance TF.ToHCL NetworkingSubnetV2Resource where
-    toHCL NetworkingSubnetV2Resource{..} = TF.arguments
-        [ TF.assign "allocation_pools" <$> _allocation_pools
-        , TF.assign "cidr" <$> _cidr
-        , TF.assign "dns_nameservers" <$> _dns_nameservers
-        , TF.assign "enable_dhcp" <$> _enable_dhcp
-        , TF.assign "gateway_ip" <$> _gateway_ip
-        , TF.assign "host_routes" <$> _host_routes
-        , TF.assign "ip_version" <$> _ip_version
-        , TF.assign "name" <$> _name
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "no_gateway" <$> _no_gateway
-        , TF.assign "region" <$> _region
-        , TF.assign "tenant_id" <$> _tenant_id
-        , TF.assign "value_specs" <$> _value_specs
+    toHCL NetworkingSubnetV2Resource{..} = TF.block $ catMaybes
+        [ TF.assign "allocation_pools" <$> TF.argument _allocation_pools
+        , TF.assign "cidr" <$> TF.argument _cidr
+        , TF.assign "dns_nameservers" <$> TF.argument _dns_nameservers
+        , TF.assign "enable_dhcp" <$> TF.argument _enable_dhcp
+        , TF.assign "gateway_ip" <$> TF.argument _gateway_ip
+        , TF.assign "host_routes" <$> TF.argument _host_routes
+        , TF.assign "ip_version" <$> TF.argument _ip_version
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "no_gateway" <$> TF.argument _no_gateway
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
+        , TF.assign "value_specs" <$> TF.argument _value_specs
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkingSubnetV2Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkingSubnetV2Resource :: TF.Resource TF.OpenStack NetworkingSubnetV2Resource
+networkingSubnetV2Resource =
+    TF.newResource "openstack_networking_subnet_v2" $
+        NetworkingSubnetV2Resource {
+            _allocation_pools = TF.Nil
+            , _cidr = TF.Nil
+            , _dns_nameservers = TF.Nil
+            , _enable_dhcp = TF.Nil
+            , _gateway_ip = TF.Nil
+            , _host_routes = TF.Nil
+            , _ip_version = TF.Nil
+            , _name = TF.Nil
+            , _network_id = TF.Nil
+            , _no_gateway = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _computed_allocation_pools = TF.Compute "allocation_pools"
+            , _computed_cidr = TF.Compute "cidr"
+            , _computed_dns_nameservers = TF.Compute "dns_nameservers"
+            , _computed_enable_dhcp = TF.Compute "enable_dhcp"
+            , _computed_gateway_ip = TF.Compute "gateway_ip"
+            , _computed_host_routes = TF.Compute "host_routes"
+            , _computed_ip_version = TF.Compute "ip_version"
+            , _computed_name = TF.Compute "name"
+            , _computed_network_id = TF.Compute "network_id"
+            , _computed_region = TF.Compute "region"
+            , _computed_tenant_id = TF.Compute "tenant_id"
+            }
 
 {- | The @openstack_objectstorage_container_v1@ OpenStack resource.
 
@@ -3203,45 +3167,44 @@ data ObjectstorageContainerV1Resource = ObjectstorageContainerV1Resource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-objectstorageContainerV1Resource :: TF.Resource TF.OpenStack ObjectstorageContainerV1Resource
-objectstorageContainerV1Resource =
-    TF.newResource "openstack_objectstorage_container_v1" $
-        ObjectstorageContainerV1Resource {
-            _container_read = TF.Absent
-            , _container_sync_key = TF.Absent
-            , _container_sync_to = TF.Absent
-            , _container_write = TF.Absent
-            , _content_type = TF.Absent
-            , _metadata = TF.Absent
-            , _name = TF.Absent
-            , _region = TF.Absent
-            , _computed_container_read = TF.Computed "container_read"
-            , _computed_container_sync_key = TF.Computed "container_sync_key"
-            , _computed_container_sync_to = TF.Computed "container_sync_to"
-            , _computed_container_write = TF.Computed "container_write"
-            , _computed_content_type = TF.Computed "content_type"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_name = TF.Computed "name"
-            , _computed_region = TF.Computed "region"
-            }
-
 instance TF.ToHCL ObjectstorageContainerV1Resource where
-    toHCL ObjectstorageContainerV1Resource{..} = TF.arguments
-        [ TF.assign "container_read" <$> _container_read
-        , TF.assign "container_sync_key" <$> _container_sync_key
-        , TF.assign "container_sync_to" <$> _container_sync_to
-        , TF.assign "container_write" <$> _container_write
-        , TF.assign "content_type" <$> _content_type
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "name" <$> _name
-        , TF.assign "region" <$> _region
+    toHCL ObjectstorageContainerV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "container_read" <$> TF.argument _container_read
+        , TF.assign "container_sync_key" <$> TF.argument _container_sync_key
+        , TF.assign "container_sync_to" <$> TF.argument _container_sync_to
+        , TF.assign "container_write" <$> TF.argument _container_write
+        , TF.assign "content_type" <$> TF.argument _content_type
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''ObjectstorageContainerV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+objectstorageContainerV1Resource :: TF.Resource TF.OpenStack ObjectstorageContainerV1Resource
+objectstorageContainerV1Resource =
+    TF.newResource "openstack_objectstorage_container_v1" $
+        ObjectstorageContainerV1Resource {
+            _container_read = TF.Nil
+            , _container_sync_key = TF.Nil
+            , _container_sync_to = TF.Nil
+            , _container_write = TF.Nil
+            , _content_type = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _computed_container_read = TF.Compute "container_read"
+            , _computed_container_sync_key = TF.Compute "container_sync_key"
+            , _computed_container_sync_to = TF.Compute "container_sync_to"
+            , _computed_container_write = TF.Compute "container_write"
+            , _computed_content_type = TF.Compute "content_type"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_name = TF.Compute "name"
+            , _computed_region = TF.Compute "region"
+            }
 
 {- | The @openstack_objectstorage_object_v1@ OpenStack resource.
 
@@ -3316,65 +3279,64 @@ data ObjectstorageObjectV1Resource = ObjectstorageObjectV1Resource {
     {- ^ - A unique transaction ID for this request. Your service provider might need this value if you report a problem. -}
     } deriving (Show, Eq)
 
-objectstorageObjectV1Resource :: TF.Resource TF.OpenStack ObjectstorageObjectV1Resource
-objectstorageObjectV1Resource =
-    TF.newResource "openstack_objectstorage_object_v1" $
-        ObjectstorageObjectV1Resource {
-            _container_name = TF.Absent
-            , _content = TF.Absent
-            , _content_disposition = TF.Absent
-            , _content_encoding = TF.Absent
-            , _content_type = TF.Absent
-            , _copy_from = TF.Absent
-            , _delete_after = TF.Absent
-            , _delete_at = TF.Absent
-            , _detect_content_type = TF.Absent
-            , _etag = TF.Absent
-            , _name = TF.Absent
-            , _object_manifest = TF.Absent
-            , _region = TF.Absent
-            , _source = TF.Absent
-            , _computed_container_name = TF.Computed "container_name"
-            , _computed_content = TF.Computed "content"
-            , _computed_content_disposition = TF.Computed "content_disposition"
-            , _computed_content_encoding = TF.Computed "content_encoding"
-            , _computed_content_length = TF.Computed "content_length"
-            , _computed_content_type = TF.Computed "content_type"
-            , _computed_copy_from = TF.Computed "copy_from"
-            , _computed_date = TF.Computed "date"
-            , _computed_delete_after = TF.Computed "delete_after"
-            , _computed_delete_at = TF.Computed "delete_at"
-            , _computed_detect_content_type = TF.Computed "detect_content_type"
-            , _computed_etag = TF.Computed "etag"
-            , _computed_last_modified = TF.Computed "last_modified"
-            , _computed_name = TF.Computed "name"
-            , _computed_object_manifest = TF.Computed "object_manifest"
-            , _computed_region = TF.Computed "region"
-            , _computed_source = TF.Computed "source"
-            , _computed_static_large_object = TF.Computed "static_large_object"
-            , _computed_trans_id = TF.Computed "trans_id"
-            }
-
 instance TF.ToHCL ObjectstorageObjectV1Resource where
-    toHCL ObjectstorageObjectV1Resource{..} = TF.arguments
-        [ TF.assign "container_name" <$> _container_name
-        , TF.assign "content" <$> _content
-        , TF.assign "content_disposition" <$> _content_disposition
-        , TF.assign "content_encoding" <$> _content_encoding
-        , TF.assign "content_type" <$> _content_type
-        , TF.assign "copy_from" <$> _copy_from
-        , TF.assign "delete_after" <$> _delete_after
-        , TF.assign "delete_at" <$> _delete_at
-        , TF.assign "detect_content_type" <$> _detect_content_type
-        , TF.assign "etag" <$> _etag
-        , TF.assign "name" <$> _name
-        , TF.assign "object_manifest" <$> _object_manifest
-        , TF.assign "region" <$> _region
-        , TF.assign "source" <$> _source
+    toHCL ObjectstorageObjectV1Resource{..} = TF.block $ catMaybes
+        [ TF.assign "container_name" <$> TF.argument _container_name
+        , TF.assign "content" <$> TF.argument _content
+        , TF.assign "content_disposition" <$> TF.argument _content_disposition
+        , TF.assign "content_encoding" <$> TF.argument _content_encoding
+        , TF.assign "content_type" <$> TF.argument _content_type
+        , TF.assign "copy_from" <$> TF.argument _copy_from
+        , TF.assign "delete_after" <$> TF.argument _delete_after
+        , TF.assign "delete_at" <$> TF.argument _delete_at
+        , TF.assign "detect_content_type" <$> TF.argument _detect_content_type
+        , TF.assign "etag" <$> TF.argument _etag
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "object_manifest" <$> TF.argument _object_manifest
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "source" <$> TF.argument _source
         ]
 
 $(TF.makeSchemaLenses
     ''ObjectstorageObjectV1Resource
     ''TF.OpenStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+objectstorageObjectV1Resource :: TF.Resource TF.OpenStack ObjectstorageObjectV1Resource
+objectstorageObjectV1Resource =
+    TF.newResource "openstack_objectstorage_object_v1" $
+        ObjectstorageObjectV1Resource {
+            _container_name = TF.Nil
+            , _content = TF.Nil
+            , _content_disposition = TF.Nil
+            , _content_encoding = TF.Nil
+            , _content_type = TF.Nil
+            , _copy_from = TF.Nil
+            , _delete_after = TF.Nil
+            , _delete_at = TF.Nil
+            , _detect_content_type = TF.Nil
+            , _etag = TF.Nil
+            , _name = TF.Nil
+            , _object_manifest = TF.Nil
+            , _region = TF.Nil
+            , _source = TF.Nil
+            , _computed_container_name = TF.Compute "container_name"
+            , _computed_content = TF.Compute "content"
+            , _computed_content_disposition = TF.Compute "content_disposition"
+            , _computed_content_encoding = TF.Compute "content_encoding"
+            , _computed_content_length = TF.Compute "content_length"
+            , _computed_content_type = TF.Compute "content_type"
+            , _computed_copy_from = TF.Compute "copy_from"
+            , _computed_date = TF.Compute "date"
+            , _computed_delete_after = TF.Compute "delete_after"
+            , _computed_delete_at = TF.Compute "delete_at"
+            , _computed_detect_content_type = TF.Compute "detect_content_type"
+            , _computed_etag = TF.Compute "etag"
+            , _computed_last_modified = TF.Compute "last_modified"
+            , _computed_name = TF.Compute "name"
+            , _computed_object_manifest = TF.Compute "object_manifest"
+            , _computed_region = TF.Compute "region"
+            , _computed_source = TF.Compute "source"
+            , _computed_static_large_object = TF.Compute "static_large_object"
+            , _computed_trans_id = TF.Compute "trans_id"
+            }

@@ -27,10 +27,12 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
+import qualified Terrafomo.Random.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -64,31 +66,30 @@ data IdResource = IdResource {
     {- ^ - The generated id presented in padded hexadecimal digits. This result will always be twice as long as the requested byte length. -}
     } deriving (Show, Eq)
 
-idResource :: TF.Resource TF.Random IdResource
-idResource =
-    TF.newResource "random_id" $
-        IdResource {
-            _byte_length = TF.Absent
-            , _keepers = TF.Absent
-            , _prefix = TF.Absent
-            , _computed_b64_std = TF.Computed "b64_std"
-            , _computed_b64_url = TF.Computed "b64_url"
-            , _computed_dec = TF.Computed "dec"
-            , _computed_hex = TF.Computed "hex"
-            }
-
 instance TF.ToHCL IdResource where
-    toHCL IdResource{..} = TF.arguments
-        [ TF.assign "byte_length" <$> _byte_length
-        , TF.assign "keepers" <$> _keepers
-        , TF.assign "prefix" <$> _prefix
+    toHCL IdResource{..} = TF.block $ catMaybes
+        [ TF.assign "byte_length" <$> TF.argument _byte_length
+        , TF.assign "keepers" <$> TF.argument _keepers
+        , TF.assign "prefix" <$> TF.argument _prefix
         ]
 
 $(TF.makeSchemaLenses
     ''IdResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+idResource :: TF.Resource TF.Random IdResource
+idResource =
+    TF.newResource "random_id" $
+        IdResource {
+            _byte_length = TF.Nil
+            , _keepers = TF.Nil
+            , _prefix = TF.Nil
+            , _computed_b64_std = TF.Compute "b64_std"
+            , _computed_b64_url = TF.Compute "b64_url"
+            , _computed_dec = TF.Compute "dec"
+            , _computed_hex = TF.Compute "hex"
+            }
 
 {- | The @random_integer@ Random resource.
 
@@ -114,31 +115,30 @@ data IntegerResource = IntegerResource {
     {- ^ - (int) The random Integer result. -}
     } deriving (Show, Eq)
 
-integerResource :: TF.Resource TF.Random IntegerResource
-integerResource =
-    TF.newResource "random_integer" $
-        IntegerResource {
-            _keepers = TF.Absent
-            , _max = TF.Absent
-            , _min = TF.Absent
-            , _seed = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_result = TF.Computed "result"
-            }
-
 instance TF.ToHCL IntegerResource where
-    toHCL IntegerResource{..} = TF.arguments
-        [ TF.assign "keepers" <$> _keepers
-        , TF.assign "max" <$> _max
-        , TF.assign "min" <$> _min
-        , TF.assign "seed" <$> _seed
+    toHCL IntegerResource{..} = TF.block $ catMaybes
+        [ TF.assign "keepers" <$> TF.argument _keepers
+        , TF.assign "max" <$> TF.argument _max
+        , TF.assign "min" <$> TF.argument _min
+        , TF.assign "seed" <$> TF.argument _seed
         ]
 
 $(TF.makeSchemaLenses
     ''IntegerResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+integerResource :: TF.Resource TF.Random IntegerResource
+integerResource =
+    TF.newResource "random_integer" $
+        IntegerResource {
+            _keepers = TF.Nil
+            , _max = TF.Nil
+            , _min = TF.Nil
+            , _seed = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_result = TF.Compute "result"
+            }
 
 {- | The @random_pet@ Random resource.
 
@@ -161,30 +161,29 @@ data PetResource = PetResource {
     {- ^ - (string) The random pet name -}
     } deriving (Show, Eq)
 
-petResource :: TF.Resource TF.Random PetResource
-petResource =
-    TF.newResource "random_pet" $
-        PetResource {
-            _keepers = TF.Absent
-            , _length = TF.Absent
-            , _prefix = TF.Absent
-            , _separator = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PetResource where
-    toHCL PetResource{..} = TF.arguments
-        [ TF.assign "keepers" <$> _keepers
-        , TF.assign "length" <$> _length
-        , TF.assign "prefix" <$> _prefix
-        , TF.assign "separator" <$> _separator
+    toHCL PetResource{..} = TF.block $ catMaybes
+        [ TF.assign "keepers" <$> TF.argument _keepers
+        , TF.assign "length" <$> TF.argument _length
+        , TF.assign "prefix" <$> TF.argument _prefix
+        , TF.assign "separator" <$> TF.argument _separator
         ]
 
 $(TF.makeSchemaLenses
     ''PetResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+petResource :: TF.Resource TF.Random PetResource
+petResource =
+    TF.newResource "random_pet" $
+        PetResource {
+            _keepers = TF.Nil
+            , _length = TF.Nil
+            , _prefix = TF.Nil
+            , _separator = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @random_shuffle@ Random resource.
 
@@ -204,30 +203,29 @@ data ShuffleResource = ShuffleResource {
     {- ^ - Random permutation of the list of strings given in @input@ . -}
     } deriving (Show, Eq)
 
-shuffleResource :: TF.Resource TF.Random ShuffleResource
-shuffleResource =
-    TF.newResource "random_shuffle" $
-        ShuffleResource {
-            _input = TF.Absent
-            , _keepers = TF.Absent
-            , _result_count = TF.Absent
-            , _seed = TF.Absent
-            , _computed_result = TF.Computed "result"
-            }
-
 instance TF.ToHCL ShuffleResource where
-    toHCL ShuffleResource{..} = TF.arguments
-        [ TF.assign "input" <$> _input
-        , TF.assign "keepers" <$> _keepers
-        , TF.assign "result_count" <$> _result_count
-        , TF.assign "seed" <$> _seed
+    toHCL ShuffleResource{..} = TF.block $ catMaybes
+        [ TF.assign "input" <$> TF.argument _input
+        , TF.assign "keepers" <$> TF.argument _keepers
+        , TF.assign "result_count" <$> TF.argument _result_count
+        , TF.assign "seed" <$> TF.argument _seed
         ]
 
 $(TF.makeSchemaLenses
     ''ShuffleResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+shuffleResource :: TF.Resource TF.Random ShuffleResource
+shuffleResource =
+    TF.newResource "random_shuffle" $
+        ShuffleResource {
+            _input = TF.Nil
+            , _keepers = TF.Nil
+            , _result_count = TF.Nil
+            , _seed = TF.Nil
+            , _computed_result = TF.Compute "result"
+            }
 
 {- | The @random_string@ Random resource.
 
@@ -256,33 +254,32 @@ data StringResource = StringResource {
     {- ^ - Random string generated. -}
     } deriving (Show, Eq)
 
-stringResource :: TF.Resource TF.Random StringResource
-stringResource =
-    TF.newResource "random_string" $
-        StringResource {
-            _keepers = TF.Absent
-            , _length = TF.Absent
-            , _lower = TF.Absent
-            , _number = TF.Absent
-            , _override_special = TF.Absent
-            , _special = TF.Absent
-            , _upper = TF.Absent
-            , _computed_result = TF.Computed "result"
-            }
-
 instance TF.ToHCL StringResource where
-    toHCL StringResource{..} = TF.arguments
-        [ TF.assign "keepers" <$> _keepers
-        , TF.assign "length" <$> _length
-        , TF.assign "lower" <$> _lower
-        , TF.assign "number" <$> _number
-        , TF.assign "override_special" <$> _override_special
-        , TF.assign "special" <$> _special
-        , TF.assign "upper" <$> _upper
+    toHCL StringResource{..} = TF.block $ catMaybes
+        [ TF.assign "keepers" <$> TF.argument _keepers
+        , TF.assign "length" <$> TF.argument _length
+        , TF.assign "lower" <$> TF.argument _lower
+        , TF.assign "number" <$> TF.argument _number
+        , TF.assign "override_special" <$> TF.argument _override_special
+        , TF.assign "special" <$> TF.argument _special
+        , TF.assign "upper" <$> TF.argument _upper
         ]
 
 $(TF.makeSchemaLenses
     ''StringResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+stringResource :: TF.Resource TF.Random StringResource
+stringResource =
+    TF.newResource "random_string" $
+        StringResource {
+            _keepers = TF.Nil
+            , _length = TF.Nil
+            , _lower = TF.Nil
+            , _number = TF.Nil
+            , _override_special = TF.Nil
+            , _special = TF.Nil
+            , _upper = TF.Nil
+            , _computed_result = TF.Compute "result"
+            }

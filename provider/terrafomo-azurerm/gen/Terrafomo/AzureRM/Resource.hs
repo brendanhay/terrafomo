@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.AzureRM         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.AzureRM.Provider as TF
+import qualified Terrafomo.AzureRM.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @azurerm_app_service_plan@ AzureRM resource.
 
@@ -61,37 +63,36 @@ data AppServicePlanResource = AppServicePlanResource {
     {- ^ - The maximum number of workers supported with the App Service Plan's sku. -}
     } deriving (Show, Eq)
 
-appServicePlanResource :: TF.Resource TF.AzureRM AppServicePlanResource
-appServicePlanResource =
-    TF.newResource "azurerm_app_service_plan" $
-        AppServicePlanResource {
-            _kind = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _properties = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_maximum_number_of_workers = TF.Computed "maximum_number_of_workers"
-            }
-
 instance TF.ToHCL AppServicePlanResource where
-    toHCL AppServicePlanResource{..} = TF.arguments
-        [ TF.assign "kind" <$> _kind
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "properties" <$> _properties
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL AppServicePlanResource{..} = TF.block $ catMaybes
+        [ TF.assign "kind" <$> TF.argument _kind
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "properties" <$> TF.argument _properties
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''AppServicePlanResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+appServicePlanResource :: TF.Resource TF.AzureRM AppServicePlanResource
+appServicePlanResource =
+    TF.newResource "azurerm_app_service_plan" $
+        AppServicePlanResource {
+            _kind = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _properties = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_maximum_number_of_workers = TF.Compute "maximum_number_of_workers"
+            }
 
 {- | The @azurerm_app_service@ AzureRM resource.
 
@@ -124,43 +125,42 @@ data AppServiceResource = AppServiceResource {
     {- ^ - The ID of the App Service. -}
     } deriving (Show, Eq)
 
-appServiceResource :: TF.Resource TF.AzureRM AppServiceResource
-appServiceResource =
-    TF.newResource "azurerm_app_service" $
-        AppServiceResource {
-            _app_service_plan_id = TF.Absent
-            , _app_settings = TF.Absent
-            , _client_affinity_enabled = TF.Absent
-            , _connection_string = TF.Absent
-            , _enabled = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _site_config = TF.Absent
-            , _tags = TF.Absent
-            , _computed_default_site_hostname = TF.Computed "default_site_hostname"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AppServiceResource where
-    toHCL AppServiceResource{..} = TF.arguments
-        [ TF.assign "app_service_plan_id" <$> _app_service_plan_id
-        , TF.assign "app_settings" <$> _app_settings
-        , TF.assign "client_affinity_enabled" <$> _client_affinity_enabled
-        , TF.assign "connection_string" <$> _connection_string
-        , TF.assign "enabled" <$> _enabled
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "site_config" <$> _site_config
-        , TF.assign "tags" <$> _tags
+    toHCL AppServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "app_service_plan_id" <$> TF.argument _app_service_plan_id
+        , TF.assign "app_settings" <$> TF.argument _app_settings
+        , TF.assign "client_affinity_enabled" <$> TF.argument _client_affinity_enabled
+        , TF.assign "connection_string" <$> TF.argument _connection_string
+        , TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "site_config" <$> TF.argument _site_config
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''AppServiceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+appServiceResource :: TF.Resource TF.AzureRM AppServiceResource
+appServiceResource =
+    TF.newResource "azurerm_app_service" $
+        AppServiceResource {
+            _app_service_plan_id = TF.Nil
+            , _app_settings = TF.Nil
+            , _client_affinity_enabled = TF.Nil
+            , _connection_string = TF.Nil
+            , _enabled = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _site_config = TF.Nil
+            , _tags = TF.Nil
+            , _computed_default_site_hostname = TF.Compute "default_site_hostname"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_application_gateway@ AzureRM resource.
 
@@ -212,59 +212,58 @@ data ApplicationGatewayResource = ApplicationGatewayResource {
     {- ^ - The name of the resource group in which to create the application gateway. -}
     } deriving (Show, Eq)
 
-applicationGatewayResource :: TF.Resource TF.AzureRM ApplicationGatewayResource
-applicationGatewayResource =
-    TF.newResource "azurerm_application_gateway" $
-        ApplicationGatewayResource {
-            _authentication_certificate = TF.Absent
-            , _backend_address_pool = TF.Absent
-            , _backend_http_settings = TF.Absent
-            , _disabled_ssl_protocols = TF.Absent
-            , _frontend_ip_configuration = TF.Absent
-            , _frontend_port = TF.Absent
-            , _gateway_ip_configuration = TF.Absent
-            , _http_listener = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _probe = TF.Absent
-            , _request_routing_rule = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _ssl_certificate = TF.Absent
-            , _url_path_map = TF.Absent
-            , _waf_configuration = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_location = TF.Computed "location"
-            , _computed_name = TF.Computed "name"
-            , _computed_resource_group_name = TF.Computed "resource_group_name"
-            }
-
 instance TF.ToHCL ApplicationGatewayResource where
-    toHCL ApplicationGatewayResource{..} = TF.arguments
-        [ TF.assign "authentication_certificate" <$> _authentication_certificate
-        , TF.assign "backend_address_pool" <$> _backend_address_pool
-        , TF.assign "backend_http_settings" <$> _backend_http_settings
-        , TF.assign "disabled_ssl_protocols" <$> _disabled_ssl_protocols
-        , TF.assign "frontend_ip_configuration" <$> _frontend_ip_configuration
-        , TF.assign "frontend_port" <$> _frontend_port
-        , TF.assign "gateway_ip_configuration" <$> _gateway_ip_configuration
-        , TF.assign "http_listener" <$> _http_listener
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "probe" <$> _probe
-        , TF.assign "request_routing_rule" <$> _request_routing_rule
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "ssl_certificate" <$> _ssl_certificate
-        , TF.assign "url_path_map" <$> _url_path_map
-        , TF.assign "waf_configuration" <$> _waf_configuration
+    toHCL ApplicationGatewayResource{..} = TF.block $ catMaybes
+        [ TF.assign "authentication_certificate" <$> TF.argument _authentication_certificate
+        , TF.assign "backend_address_pool" <$> TF.argument _backend_address_pool
+        , TF.assign "backend_http_settings" <$> TF.argument _backend_http_settings
+        , TF.assign "disabled_ssl_protocols" <$> TF.argument _disabled_ssl_protocols
+        , TF.assign "frontend_ip_configuration" <$> TF.argument _frontend_ip_configuration
+        , TF.assign "frontend_port" <$> TF.argument _frontend_port
+        , TF.assign "gateway_ip_configuration" <$> TF.argument _gateway_ip_configuration
+        , TF.assign "http_listener" <$> TF.argument _http_listener
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "probe" <$> TF.argument _probe
+        , TF.assign "request_routing_rule" <$> TF.argument _request_routing_rule
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "ssl_certificate" <$> TF.argument _ssl_certificate
+        , TF.assign "url_path_map" <$> TF.argument _url_path_map
+        , TF.assign "waf_configuration" <$> TF.argument _waf_configuration
         ]
 
 $(TF.makeSchemaLenses
     ''ApplicationGatewayResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+applicationGatewayResource :: TF.Resource TF.AzureRM ApplicationGatewayResource
+applicationGatewayResource =
+    TF.newResource "azurerm_application_gateway" $
+        ApplicationGatewayResource {
+            _authentication_certificate = TF.Nil
+            , _backend_address_pool = TF.Nil
+            , _backend_http_settings = TF.Nil
+            , _disabled_ssl_protocols = TF.Nil
+            , _frontend_ip_configuration = TF.Nil
+            , _frontend_port = TF.Nil
+            , _gateway_ip_configuration = TF.Nil
+            , _http_listener = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _probe = TF.Nil
+            , _request_routing_rule = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _ssl_certificate = TF.Nil
+            , _url_path_map = TF.Nil
+            , _waf_configuration = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_location = TF.Compute "location"
+            , _computed_name = TF.Compute "name"
+            , _computed_resource_group_name = TF.Compute "resource_group_name"
+            }
 
 {- | The @azurerm_application_insights@ AzureRM resource.
 
@@ -289,34 +288,33 @@ data ApplicationInsightsResource = ApplicationInsightsResource {
     {- ^ - The Instrumentation Key for this Application Insights component. -}
     } deriving (Show, Eq)
 
-applicationInsightsResource :: TF.Resource TF.AzureRM ApplicationInsightsResource
-applicationInsightsResource =
-    TF.newResource "azurerm_application_insights" $
-        ApplicationInsightsResource {
-            _application_type = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_app_id = TF.Computed "app_id"
-            , _computed_id = TF.Computed "id"
-            , _computed_instrumentation_key = TF.Computed "instrumentation_key"
-            }
-
 instance TF.ToHCL ApplicationInsightsResource where
-    toHCL ApplicationInsightsResource{..} = TF.arguments
-        [ TF.assign "application_type" <$> _application_type
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL ApplicationInsightsResource{..} = TF.block $ catMaybes
+        [ TF.assign "application_type" <$> TF.argument _application_type
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ApplicationInsightsResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+applicationInsightsResource :: TF.Resource TF.AzureRM ApplicationInsightsResource
+applicationInsightsResource =
+    TF.newResource "azurerm_application_insights" $
+        ApplicationInsightsResource {
+            _application_type = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_app_id = TF.Compute "app_id"
+            , _computed_id = TF.Compute "id"
+            , _computed_instrumentation_key = TF.Compute "instrumentation_key"
+            }
 
 {- | The @azurerm_automation_account@ AzureRM resource.
 
@@ -337,32 +335,31 @@ data AutomationAccountResource = AutomationAccountResource {
     {- ^ - The Automation Account ID. -}
     } deriving (Show, Eq)
 
-automationAccountResource :: TF.Resource TF.AzureRM AutomationAccountResource
-automationAccountResource =
-    TF.newResource "azurerm_automation_account" $
-        AutomationAccountResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AutomationAccountResource where
-    toHCL AutomationAccountResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL AutomationAccountResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''AutomationAccountResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+automationAccountResource :: TF.Resource TF.AzureRM AutomationAccountResource
+automationAccountResource =
+    TF.newResource "azurerm_automation_account" $
+        AutomationAccountResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_automation_credential@ AzureRM resource.
 
@@ -385,34 +382,33 @@ data AutomationCredentialResource = AutomationCredentialResource {
     {- ^ - The Automation Credential ID. -}
     } deriving (Show, Eq)
 
-automationCredentialResource :: TF.Resource TF.AzureRM AutomationCredentialResource
-automationCredentialResource =
-    TF.newResource "azurerm_automation_credential" $
-        AutomationCredentialResource {
-            _account_name = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _password = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _username = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AutomationCredentialResource where
-    toHCL AutomationCredentialResource{..} = TF.arguments
-        [ TF.assign "account_name" <$> _account_name
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "password" <$> _password
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "username" <$> _username
+    toHCL AutomationCredentialResource{..} = TF.block $ catMaybes
+        [ TF.assign "account_name" <$> TF.argument _account_name
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''AutomationCredentialResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+automationCredentialResource :: TF.Resource TF.AzureRM AutomationCredentialResource
+automationCredentialResource =
+    TF.newResource "azurerm_automation_credential" $
+        AutomationCredentialResource {
+            _account_name = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _password = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _username = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_automation_runbook@ AzureRM resource.
 
@@ -441,40 +437,39 @@ data AutomationRunbookResource = AutomationRunbookResource {
     {- ^ - The Automation Runbook ID. -}
     } deriving (Show, Eq)
 
-automationRunbookResource :: TF.Resource TF.AzureRM AutomationRunbookResource
-automationRunbookResource =
-    TF.newResource "azurerm_automation_runbook" $
-        AutomationRunbookResource {
-            _account_name = TF.Absent
-            , _description = TF.Absent
-            , _location = TF.Absent
-            , _log_progress = TF.Absent
-            , _log_verbose = TF.Absent
-            , _name = TF.Absent
-            , _publish_content_link = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _runbook_type = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AutomationRunbookResource where
-    toHCL AutomationRunbookResource{..} = TF.arguments
-        [ TF.assign "account_name" <$> _account_name
-        , TF.assign "description" <$> _description
-        , TF.assign "location" <$> _location
-        , TF.assign "log_progress" <$> _log_progress
-        , TF.assign "log_verbose" <$> _log_verbose
-        , TF.assign "name" <$> _name
-        , TF.assign "publish_content_link" <$> _publish_content_link
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "runbook_type" <$> _runbook_type
+    toHCL AutomationRunbookResource{..} = TF.block $ catMaybes
+        [ TF.assign "account_name" <$> TF.argument _account_name
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "log_progress" <$> TF.argument _log_progress
+        , TF.assign "log_verbose" <$> TF.argument _log_verbose
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "publish_content_link" <$> TF.argument _publish_content_link
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "runbook_type" <$> TF.argument _runbook_type
         ]
 
 $(TF.makeSchemaLenses
     ''AutomationRunbookResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+automationRunbookResource :: TF.Resource TF.AzureRM AutomationRunbookResource
+automationRunbookResource =
+    TF.newResource "azurerm_automation_runbook" $
+        AutomationRunbookResource {
+            _account_name = TF.Nil
+            , _description = TF.Nil
+            , _location = TF.Nil
+            , _log_progress = TF.Nil
+            , _log_verbose = TF.Nil
+            , _name = TF.Nil
+            , _publish_content_link = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _runbook_type = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_automation_schedule@ AzureRM resource.
 
@@ -501,38 +496,37 @@ data AutomationScheduleResource = AutomationScheduleResource {
     {- ^ - The Automation Schedule ID. -}
     } deriving (Show, Eq)
 
-automationScheduleResource :: TF.Resource TF.AzureRM AutomationScheduleResource
-automationScheduleResource =
-    TF.newResource "azurerm_automation_schedule" $
-        AutomationScheduleResource {
-            _account_name = TF.Absent
-            , _description = TF.Absent
-            , _expiry_time = TF.Absent
-            , _frequency = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _start_time = TF.Absent
-            , _timezone = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AutomationScheduleResource where
-    toHCL AutomationScheduleResource{..} = TF.arguments
-        [ TF.assign "account_name" <$> _account_name
-        , TF.assign "description" <$> _description
-        , TF.assign "expiry_time" <$> _expiry_time
-        , TF.assign "frequency" <$> _frequency
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "start_time" <$> _start_time
-        , TF.assign "timezone" <$> _timezone
+    toHCL AutomationScheduleResource{..} = TF.block $ catMaybes
+        [ TF.assign "account_name" <$> TF.argument _account_name
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "expiry_time" <$> TF.argument _expiry_time
+        , TF.assign "frequency" <$> TF.argument _frequency
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "start_time" <$> TF.argument _start_time
+        , TF.assign "timezone" <$> TF.argument _timezone
         ]
 
 $(TF.makeSchemaLenses
     ''AutomationScheduleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+automationScheduleResource :: TF.Resource TF.AzureRM AutomationScheduleResource
+automationScheduleResource =
+    TF.newResource "azurerm_automation_schedule" $
+        AutomationScheduleResource {
+            _account_name = TF.Nil
+            , _description = TF.Nil
+            , _expiry_time = TF.Nil
+            , _frequency = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _start_time = TF.Nil
+            , _timezone = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_availability_set@ AzureRM resource.
 
@@ -557,36 +551,35 @@ data AvailabilitySetResource = AvailabilitySetResource {
     {- ^ - The virtual Availability Set ID. -}
     } deriving (Show, Eq)
 
-availabilitySetResource :: TF.Resource TF.AzureRM AvailabilitySetResource
-availabilitySetResource =
-    TF.newResource "azurerm_availability_set" $
-        AvailabilitySetResource {
-            _location = TF.Absent
-            , _managed = TF.Absent
-            , _name = TF.Absent
-            , _platform_fault_domain_count = TF.Absent
-            , _platform_update_domain_count = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AvailabilitySetResource where
-    toHCL AvailabilitySetResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "managed" <$> _managed
-        , TF.assign "name" <$> _name
-        , TF.assign "platform_fault_domain_count" <$> _platform_fault_domain_count
-        , TF.assign "platform_update_domain_count" <$> _platform_update_domain_count
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL AvailabilitySetResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "managed" <$> TF.argument _managed
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "platform_fault_domain_count" <$> TF.argument _platform_fault_domain_count
+        , TF.assign "platform_update_domain_count" <$> TF.argument _platform_update_domain_count
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''AvailabilitySetResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+availabilitySetResource :: TF.Resource TF.AzureRM AvailabilitySetResource
+availabilitySetResource =
+    TF.newResource "azurerm_availability_set" $
+        AvailabilitySetResource {
+            _location = TF.Nil
+            , _managed = TF.Nil
+            , _name = TF.Nil
+            , _platform_fault_domain_count = TF.Nil
+            , _platform_update_domain_count = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_cdn_endpoint@ AzureRM resource.
 
@@ -626,48 +619,47 @@ data CdnEndpointResource = CdnEndpointResource {
     {- ^ - The CDN Endpoint ID. -}
     } deriving (Show, Eq)
 
-cdnEndpointResource :: TF.Resource TF.AzureRM CdnEndpointResource
-cdnEndpointResource =
-    TF.newResource "azurerm_cdn_endpoint" $
-        CdnEndpointResource {
-            _content_types_to_compress = TF.Absent
-            , _is_compression_enabled = TF.Absent
-            , _is_http_allowed = TF.Absent
-            , _is_https_allowed = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _origin = TF.Absent
-            , _origin_host_header = TF.Absent
-            , _origin_path = TF.Absent
-            , _profile_name = TF.Absent
-            , _querystring_caching_behaviour = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL CdnEndpointResource where
-    toHCL CdnEndpointResource{..} = TF.arguments
-        [ TF.assign "content_types_to_compress" <$> _content_types_to_compress
-        , TF.assign "is_compression_enabled" <$> _is_compression_enabled
-        , TF.assign "is_http_allowed" <$> _is_http_allowed
-        , TF.assign "is_https_allowed" <$> _is_https_allowed
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "origin" <$> _origin
-        , TF.assign "origin_host_header" <$> _origin_host_header
-        , TF.assign "origin_path" <$> _origin_path
-        , TF.assign "profile_name" <$> _profile_name
-        , TF.assign "querystring_caching_behaviour" <$> _querystring_caching_behaviour
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL CdnEndpointResource{..} = TF.block $ catMaybes
+        [ TF.assign "content_types_to_compress" <$> TF.argument _content_types_to_compress
+        , TF.assign "is_compression_enabled" <$> TF.argument _is_compression_enabled
+        , TF.assign "is_http_allowed" <$> TF.argument _is_http_allowed
+        , TF.assign "is_https_allowed" <$> TF.argument _is_https_allowed
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "origin" <$> TF.argument _origin
+        , TF.assign "origin_host_header" <$> TF.argument _origin_host_header
+        , TF.assign "origin_path" <$> TF.argument _origin_path
+        , TF.assign "profile_name" <$> TF.argument _profile_name
+        , TF.assign "querystring_caching_behaviour" <$> TF.argument _querystring_caching_behaviour
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''CdnEndpointResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+cdnEndpointResource :: TF.Resource TF.AzureRM CdnEndpointResource
+cdnEndpointResource =
+    TF.newResource "azurerm_cdn_endpoint" $
+        CdnEndpointResource {
+            _content_types_to_compress = TF.Nil
+            , _is_compression_enabled = TF.Nil
+            , _is_http_allowed = TF.Nil
+            , _is_https_allowed = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _origin = TF.Nil
+            , _origin_host_header = TF.Nil
+            , _origin_path = TF.Nil
+            , _profile_name = TF.Nil
+            , _querystring_caching_behaviour = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_cdn_profile@ AzureRM resource.
 
@@ -688,32 +680,31 @@ data CdnProfileResource = CdnProfileResource {
     {- ^ - The CDN Profile ID. -}
     } deriving (Show, Eq)
 
-cdnProfileResource :: TF.Resource TF.AzureRM CdnProfileResource
-cdnProfileResource =
-    TF.newResource "azurerm_cdn_profile" $
-        CdnProfileResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL CdnProfileResource where
-    toHCL CdnProfileResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL CdnProfileResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''CdnProfileResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+cdnProfileResource :: TF.Resource TF.AzureRM CdnProfileResource
+cdnProfileResource =
+    TF.newResource "azurerm_cdn_profile" $
+        CdnProfileResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_container_group@ AzureRM resource.
 
@@ -738,35 +729,34 @@ data ContainerGroupResource = ContainerGroupResource {
     {- ^ - The IP address allocated to the container group. -}
     } deriving (Show, Eq)
 
-containerGroupResource :: TF.Resource TF.AzureRM ContainerGroupResource
-containerGroupResource =
-    TF.newResource "azurerm_container_group" $
-        ContainerGroupResource {
-            _container = TF.Absent
-            , _ip_address_type = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _os_type = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_address = TF.Computed "ip_address"
-            }
-
 instance TF.ToHCL ContainerGroupResource where
-    toHCL ContainerGroupResource{..} = TF.arguments
-        [ TF.assign "container" <$> _container
-        , TF.assign "ip_address_type" <$> _ip_address_type
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "os_type" <$> _os_type
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL ContainerGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "container" <$> TF.argument _container
+        , TF.assign "ip_address_type" <$> TF.argument _ip_address_type
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "os_type" <$> TF.argument _os_type
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''ContainerGroupResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+containerGroupResource :: TF.Resource TF.AzureRM ContainerGroupResource
+containerGroupResource =
+    TF.newResource "azurerm_container_group" $
+        ContainerGroupResource {
+            _container = TF.Nil
+            , _ip_address_type = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _os_type = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_address = TF.Compute "ip_address"
+            }
 
 {- | The @azurerm_container_registry@ AzureRM resource.
 
@@ -799,39 +789,38 @@ data ContainerRegistryResource = ContainerRegistryResource {
     {- ^ - The URL that can be used to log into the container registry. -}
     } deriving (Show, Eq)
 
-containerRegistryResource :: TF.Resource TF.AzureRM ContainerRegistryResource
-containerRegistryResource =
-    TF.newResource "azurerm_container_registry" $
-        ContainerRegistryResource {
-            _admin_enabled = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _storage_account_id = TF.Absent
-            , _tags = TF.Absent
-            , _computed_admin_password = TF.Computed "admin_password"
-            , _computed_admin_username = TF.Computed "admin_username"
-            , _computed_id = TF.Computed "id"
-            , _computed_login_server = TF.Computed "login_server"
-            }
-
 instance TF.ToHCL ContainerRegistryResource where
-    toHCL ContainerRegistryResource{..} = TF.arguments
-        [ TF.assign "admin_enabled" <$> _admin_enabled
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "storage_account_id" <$> _storage_account_id
-        , TF.assign "tags" <$> _tags
+    toHCL ContainerRegistryResource{..} = TF.block $ catMaybes
+        [ TF.assign "admin_enabled" <$> TF.argument _admin_enabled
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "storage_account_id" <$> TF.argument _storage_account_id
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ContainerRegistryResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+containerRegistryResource :: TF.Resource TF.AzureRM ContainerRegistryResource
+containerRegistryResource =
+    TF.newResource "azurerm_container_registry" $
+        ContainerRegistryResource {
+            _admin_enabled = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _storage_account_id = TF.Nil
+            , _tags = TF.Nil
+            , _computed_admin_password = TF.Compute "admin_password"
+            , _computed_admin_username = TF.Compute "admin_username"
+            , _computed_id = TF.Compute "id"
+            , _computed_login_server = TF.Compute "login_server"
+            }
 
 {- | The @azurerm_container_service@ AzureRM resource.
 
@@ -870,45 +859,44 @@ data ContainerServiceResource = ContainerServiceResource {
     {- ^ - FDQN for the master. -}
     } deriving (Show, Eq)
 
-containerServiceResource :: TF.Resource TF.AzureRM ContainerServiceResource
-containerServiceResource =
-    TF.newResource "azurerm_container_service" $
-        ContainerServiceResource {
-            _agent_pool_profile = TF.Absent
-            , _diagnostics_profile = TF.Absent
-            , _linux_profile = TF.Absent
-            , _location = TF.Absent
-            , _master_profile = TF.Absent
-            , _name = TF.Absent
-            , _orchestration_platform = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _service_principal = TF.Absent
-            , _tags = TF.Absent
-            , _computed_agent_pool_profile_fqdn = TF.Computed "agent_pool_profile.fqdn"
-            , _computed_diagnostics_profile_storage_uri = TF.Computed "diagnostics_profile.storage_uri"
-            , _computed_id = TF.Computed "id"
-            , _computed_master_profile_fqdn = TF.Computed "master_profile.fqdn"
-            }
-
 instance TF.ToHCL ContainerServiceResource where
-    toHCL ContainerServiceResource{..} = TF.arguments
-        [ TF.assign "agent_pool_profile" <$> _agent_pool_profile
-        , TF.assign "diagnostics_profile" <$> _diagnostics_profile
-        , TF.assign "linux_profile" <$> _linux_profile
-        , TF.assign "location" <$> _location
-        , TF.assign "master_profile" <$> _master_profile
-        , TF.assign "name" <$> _name
-        , TF.assign "orchestration_platform" <$> _orchestration_platform
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "service_principal" <$> _service_principal
-        , TF.assign "tags" <$> _tags
+    toHCL ContainerServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "agent_pool_profile" <$> TF.argument _agent_pool_profile
+        , TF.assign "diagnostics_profile" <$> TF.argument _diagnostics_profile
+        , TF.assign "linux_profile" <$> TF.argument _linux_profile
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "master_profile" <$> TF.argument _master_profile
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "orchestration_platform" <$> TF.argument _orchestration_platform
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "service_principal" <$> TF.argument _service_principal
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ContainerServiceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+containerServiceResource :: TF.Resource TF.AzureRM ContainerServiceResource
+containerServiceResource =
+    TF.newResource "azurerm_container_service" $
+        ContainerServiceResource {
+            _agent_pool_profile = TF.Nil
+            , _diagnostics_profile = TF.Nil
+            , _linux_profile = TF.Nil
+            , _location = TF.Nil
+            , _master_profile = TF.Nil
+            , _name = TF.Nil
+            , _orchestration_platform = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _service_principal = TF.Nil
+            , _tags = TF.Nil
+            , _computed_agent_pool_profile_fqdn = TF.Compute "agent_pool_profile.fqdn"
+            , _computed_diagnostics_profile_storage_uri = TF.Compute "diagnostics_profile.storage_uri"
+            , _computed_id = TF.Compute "id"
+            , _computed_master_profile_fqdn = TF.Compute "master_profile.fqdn"
+            }
 
 {- | The @azurerm_cosmos_db_account@ AzureRM resource.
 
@@ -945,44 +933,43 @@ data CosmosDbAccountResource = CosmosDbAccountResource {
     {- ^ - The Secondary read-only master key for the CosmosDB Account. -}
     } deriving (Show, Eq)
 
-cosmosDbAccountResource :: TF.Resource TF.AzureRM CosmosDbAccountResource
-cosmosDbAccountResource =
-    TF.newResource "azurerm_cosmos_db_account" $
-        CosmosDbAccountResource {
-            _consistency_policy = TF.Absent
-            , _failover_policy = TF.Absent
-            , _ip_range_filter = TF.Absent
-            , _kind = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _offer_type = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_primary_master_key = TF.Computed "primary_master_key"
-            , _computed_primary_readonly_master_key = TF.Computed "primary_readonly_master_key"
-            , _computed_secondary_master_key = TF.Computed "secondary_master_key"
-            , _computed_secondary_readonly_master_key = TF.Computed "secondary_readonly_master_key"
-            }
-
 instance TF.ToHCL CosmosDbAccountResource where
-    toHCL CosmosDbAccountResource{..} = TF.arguments
-        [ TF.assign "consistency_policy" <$> _consistency_policy
-        , TF.assign "failover_policy" <$> _failover_policy
-        , TF.assign "ip_range_filter" <$> _ip_range_filter
-        , TF.assign "kind" <$> _kind
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "offer_type" <$> _offer_type
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL CosmosDbAccountResource{..} = TF.block $ catMaybes
+        [ TF.assign "consistency_policy" <$> TF.argument _consistency_policy
+        , TF.assign "failover_policy" <$> TF.argument _failover_policy
+        , TF.assign "ip_range_filter" <$> TF.argument _ip_range_filter
+        , TF.assign "kind" <$> TF.argument _kind
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "offer_type" <$> TF.argument _offer_type
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''CosmosDbAccountResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+cosmosDbAccountResource :: TF.Resource TF.AzureRM CosmosDbAccountResource
+cosmosDbAccountResource =
+    TF.newResource "azurerm_cosmos_db_account" $
+        CosmosDbAccountResource {
+            _consistency_policy = TF.Nil
+            , _failover_policy = TF.Nil
+            , _ip_range_filter = TF.Nil
+            , _kind = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _offer_type = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_primary_master_key = TF.Compute "primary_master_key"
+            , _computed_primary_readonly_master_key = TF.Compute "primary_readonly_master_key"
+            , _computed_secondary_master_key = TF.Compute "secondary_master_key"
+            , _computed_secondary_readonly_master_key = TF.Compute "secondary_readonly_master_key"
+            }
 
 {- | The @azurerm_dns_a_record@ AzureRM resource.
 
@@ -1005,34 +992,33 @@ data DnsARecordResource = DnsARecordResource {
     {- ^ - The DNS A Record ID. -}
     } deriving (Show, Eq)
 
-dnsARecordResource :: TF.Resource TF.AzureRM DnsARecordResource
-dnsARecordResource =
-    TF.newResource "azurerm_dns_a_record" $
-        DnsARecordResource {
-            _TTL = TF.Absent
-            , _name = TF.Absent
-            , _records = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsARecordResource where
-    toHCL DnsARecordResource{..} = TF.arguments
-        [ TF.assign "TTL" <$> _TTL
-        , TF.assign "name" <$> _name
-        , TF.assign "records" <$> _records
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsARecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "TTL" <$> TF.argument _TTL
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "records" <$> TF.argument _records
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsARecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsARecordResource :: TF.Resource TF.AzureRM DnsARecordResource
+dnsARecordResource =
+    TF.newResource "azurerm_dns_a_record" $
+        DnsARecordResource {
+            _TTL = TF.Nil
+            , _name = TF.Nil
+            , _records = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_aaaa_record@ AzureRM resource.
 
@@ -1055,34 +1041,33 @@ data DnsAaaaRecordResource = DnsAaaaRecordResource {
     {- ^ - The DNS AAAA Record ID. -}
     } deriving (Show, Eq)
 
-dnsAaaaRecordResource :: TF.Resource TF.AzureRM DnsAaaaRecordResource
-dnsAaaaRecordResource =
-    TF.newResource "azurerm_dns_aaaa_record" $
-        DnsAaaaRecordResource {
-            _TTL = TF.Absent
-            , _name = TF.Absent
-            , _records = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsAaaaRecordResource where
-    toHCL DnsAaaaRecordResource{..} = TF.arguments
-        [ TF.assign "TTL" <$> _TTL
-        , TF.assign "name" <$> _name
-        , TF.assign "records" <$> _records
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsAaaaRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "TTL" <$> TF.argument _TTL
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "records" <$> TF.argument _records
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsAaaaRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsAaaaRecordResource :: TF.Resource TF.AzureRM DnsAaaaRecordResource
+dnsAaaaRecordResource =
+    TF.newResource "azurerm_dns_aaaa_record" $
+        DnsAaaaRecordResource {
+            _TTL = TF.Nil
+            , _name = TF.Nil
+            , _records = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_cname_record@ AzureRM resource.
 
@@ -1105,34 +1090,33 @@ data DnsCnameRecordResource = DnsCnameRecordResource {
     {- ^ - The DNS CName Record ID. -}
     } deriving (Show, Eq)
 
-dnsCnameRecordResource :: TF.Resource TF.AzureRM DnsCnameRecordResource
-dnsCnameRecordResource =
-    TF.newResource "azurerm_dns_cname_record" $
-        DnsCnameRecordResource {
-            _TTL = TF.Absent
-            , _name = TF.Absent
-            , _record = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsCnameRecordResource where
-    toHCL DnsCnameRecordResource{..} = TF.arguments
-        [ TF.assign "TTL" <$> _TTL
-        , TF.assign "name" <$> _name
-        , TF.assign "record" <$> _record
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsCnameRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "TTL" <$> TF.argument _TTL
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "record" <$> TF.argument _record
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsCnameRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsCnameRecordResource :: TF.Resource TF.AzureRM DnsCnameRecordResource
+dnsCnameRecordResource =
+    TF.newResource "azurerm_dns_cname_record" $
+        DnsCnameRecordResource {
+            _TTL = TF.Nil
+            , _name = TF.Nil
+            , _record = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_mx_record@ AzureRM resource.
 
@@ -1155,34 +1139,33 @@ data DnsMxRecordResource = DnsMxRecordResource {
     {- ^ - The DNS MX Record ID. -}
     } deriving (Show, Eq)
 
-dnsMxRecordResource :: TF.Resource TF.AzureRM DnsMxRecordResource
-dnsMxRecordResource =
-    TF.newResource "azurerm_dns_mx_record" $
-        DnsMxRecordResource {
-            _name = TF.Absent
-            , _record = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _ttl = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsMxRecordResource where
-    toHCL DnsMxRecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "record" <$> _record
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsMxRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "record" <$> TF.argument _record
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsMxRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsMxRecordResource :: TF.Resource TF.AzureRM DnsMxRecordResource
+dnsMxRecordResource =
+    TF.newResource "azurerm_dns_mx_record" $
+        DnsMxRecordResource {
+            _name = TF.Nil
+            , _record = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _ttl = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_ns_record@ AzureRM resource.
 
@@ -1205,34 +1188,33 @@ data DnsNsRecordResource = DnsNsRecordResource {
     {- ^ - The DNS NS Record ID. -}
     } deriving (Show, Eq)
 
-dnsNsRecordResource :: TF.Resource TF.AzureRM DnsNsRecordResource
-dnsNsRecordResource =
-    TF.newResource "azurerm_dns_ns_record" $
-        DnsNsRecordResource {
-            _name = TF.Absent
-            , _record = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _ttl = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsNsRecordResource where
-    toHCL DnsNsRecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "record" <$> _record
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsNsRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "record" <$> TF.argument _record
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsNsRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsNsRecordResource :: TF.Resource TF.AzureRM DnsNsRecordResource
+dnsNsRecordResource =
+    TF.newResource "azurerm_dns_ns_record" $
+        DnsNsRecordResource {
+            _name = TF.Nil
+            , _record = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _ttl = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_ptr_record@ AzureRM resource.
 
@@ -1255,34 +1237,33 @@ data DnsPtrRecordResource = DnsPtrRecordResource {
     {- ^ - The DNS PTR Record ID. -}
     } deriving (Show, Eq)
 
-dnsPtrRecordResource :: TF.Resource TF.AzureRM DnsPtrRecordResource
-dnsPtrRecordResource =
-    TF.newResource "azurerm_dns_ptr_record" $
-        DnsPtrRecordResource {
-            _name = TF.Absent
-            , _records = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _ttl = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsPtrRecordResource where
-    toHCL DnsPtrRecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "records" <$> _records
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsPtrRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "records" <$> TF.argument _records
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsPtrRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsPtrRecordResource :: TF.Resource TF.AzureRM DnsPtrRecordResource
+dnsPtrRecordResource =
+    TF.newResource "azurerm_dns_ptr_record" $
+        DnsPtrRecordResource {
+            _name = TF.Nil
+            , _records = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _ttl = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_srv_record@ AzureRM resource.
 
@@ -1305,34 +1286,33 @@ data DnsSrvRecordResource = DnsSrvRecordResource {
     {- ^ - The DNS SRV Record ID. -}
     } deriving (Show, Eq)
 
-dnsSrvRecordResource :: TF.Resource TF.AzureRM DnsSrvRecordResource
-dnsSrvRecordResource =
-    TF.newResource "azurerm_dns_srv_record" $
-        DnsSrvRecordResource {
-            _name = TF.Absent
-            , _record = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _ttl = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsSrvRecordResource where
-    toHCL DnsSrvRecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "record" <$> _record
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsSrvRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "record" <$> TF.argument _record
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsSrvRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsSrvRecordResource :: TF.Resource TF.AzureRM DnsSrvRecordResource
+dnsSrvRecordResource =
+    TF.newResource "azurerm_dns_srv_record" $
+        DnsSrvRecordResource {
+            _name = TF.Nil
+            , _record = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _ttl = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_txt_record@ AzureRM resource.
 
@@ -1355,34 +1335,33 @@ data DnsTxtRecordResource = DnsTxtRecordResource {
     {- ^ - The DNS TXT Record ID. -}
     } deriving (Show, Eq)
 
-dnsTxtRecordResource :: TF.Resource TF.AzureRM DnsTxtRecordResource
-dnsTxtRecordResource =
-    TF.newResource "azurerm_dns_txt_record" $
-        DnsTxtRecordResource {
-            _name = TF.Absent
-            , _record = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _ttl = TF.Absent
-            , _zone_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DnsTxtRecordResource where
-    toHCL DnsTxtRecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "record" <$> _record
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone_name" <$> _zone_name
+    toHCL DnsTxtRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "record" <$> TF.argument _record
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone_name" <$> TF.argument _zone_name
         ]
 
 $(TF.makeSchemaLenses
     ''DnsTxtRecordResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsTxtRecordResource :: TF.Resource TF.AzureRM DnsTxtRecordResource
+dnsTxtRecordResource =
+    TF.newResource "azurerm_dns_txt_record" $
+        DnsTxtRecordResource {
+            _name = TF.Nil
+            , _record = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _ttl = TF.Nil
+            , _zone_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_dns_zone@ AzureRM resource.
 
@@ -1407,31 +1386,30 @@ data DnsZoneResource = DnsZoneResource {
     {- ^ - (Optional) The number of records already in the zone. -}
     } deriving (Show, Eq)
 
-dnsZoneResource :: TF.Resource TF.AzureRM DnsZoneResource
-dnsZoneResource =
-    TF.newResource "azurerm_dns_zone" $
-        DnsZoneResource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_max_number_of_record_sets = TF.Computed "max_number_of_record_sets"
-            , _computed_name_servers = TF.Computed "name_servers"
-            , _computed_number_of_record_sets = TF.Computed "number_of_record_sets"
-            }
-
 instance TF.ToHCL DnsZoneResource where
-    toHCL DnsZoneResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL DnsZoneResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''DnsZoneResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dnsZoneResource :: TF.Resource TF.AzureRM DnsZoneResource
+dnsZoneResource =
+    TF.newResource "azurerm_dns_zone" $
+        DnsZoneResource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_max_number_of_record_sets = TF.Compute "max_number_of_record_sets"
+            , _computed_name_servers = TF.Compute "name_servers"
+            , _computed_number_of_record_sets = TF.Compute "number_of_record_sets"
+            }
 
 {- | The @azurerm_eventgrid_topic@ AzureRM resource.
 
@@ -1457,33 +1435,32 @@ data EventgridTopicResource = EventgridTopicResource {
     {- ^ - The Secondary Shared Access Key associated with the EventGrid Topic. -}
     } deriving (Show, Eq)
 
-eventgridTopicResource :: TF.Resource TF.AzureRM EventgridTopicResource
-eventgridTopicResource =
-    TF.newResource "azurerm_eventgrid_topic" $
-        EventgridTopicResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_endpoint = TF.Computed "endpoint"
-            , _computed_id = TF.Computed "id"
-            , _computed_primary_access_key = TF.Computed "primary_access_key"
-            , _computed_secondary_access_key = TF.Computed "secondary_access_key"
-            }
-
 instance TF.ToHCL EventgridTopicResource where
-    toHCL EventgridTopicResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL EventgridTopicResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''EventgridTopicResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eventgridTopicResource :: TF.Resource TF.AzureRM EventgridTopicResource
+eventgridTopicResource =
+    TF.newResource "azurerm_eventgrid_topic" $
+        EventgridTopicResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_endpoint = TF.Compute "endpoint"
+            , _computed_id = TF.Compute "id"
+            , _computed_primary_access_key = TF.Compute "primary_access_key"
+            , _computed_secondary_access_key = TF.Compute "secondary_access_key"
+            }
 
 {- | The @azurerm_eventhub_authorization_rule@ AzureRM resource.
 
@@ -1510,34 +1487,33 @@ data EventhubAuthorizationRuleResource = EventhubAuthorizationRuleResource {
     {- ^ - The Secondary Key for the Event Hubs authorization Rule. -}
     } deriving (Show, Eq)
 
-eventhubAuthorizationRuleResource :: TF.Resource TF.AzureRM EventhubAuthorizationRuleResource
-eventhubAuthorizationRuleResource =
-    TF.newResource "azurerm_eventhub_authorization_rule" $
-        EventhubAuthorizationRuleResource {
-            _eventhub_name = TF.Absent
-            , _name = TF.Absent
-            , _namespace_name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_primary_connection_string = TF.Computed "primary_connection_string"
-            , _computed_primary_key = TF.Computed "primary_key"
-            , _computed_secondary_connection_string = TF.Computed "secondary_connection_string"
-            , _computed_secondary_key = TF.Computed "secondary_key"
-            }
-
 instance TF.ToHCL EventhubAuthorizationRuleResource where
-    toHCL EventhubAuthorizationRuleResource{..} = TF.arguments
-        [ TF.assign "eventhub_name" <$> _eventhub_name
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_name" <$> _namespace_name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL EventhubAuthorizationRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "eventhub_name" <$> TF.argument _eventhub_name
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_name" <$> TF.argument _namespace_name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''EventhubAuthorizationRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eventhubAuthorizationRuleResource :: TF.Resource TF.AzureRM EventhubAuthorizationRuleResource
+eventhubAuthorizationRuleResource =
+    TF.newResource "azurerm_eventhub_authorization_rule" $
+        EventhubAuthorizationRuleResource {
+            _eventhub_name = TF.Nil
+            , _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_primary_connection_string = TF.Compute "primary_connection_string"
+            , _computed_primary_key = TF.Compute "primary_key"
+            , _computed_secondary_connection_string = TF.Compute "secondary_connection_string"
+            , _computed_secondary_key = TF.Compute "secondary_key"
+            }
 
 {- | The @azurerm_eventhub_consumer_group@ AzureRM resource.
 
@@ -1559,32 +1535,31 @@ data EventhubConsumerGroupResource = EventhubConsumerGroupResource {
     {- ^ - The EventHub Consumer Group ID. -}
     } deriving (Show, Eq)
 
-eventhubConsumerGroupResource :: TF.Resource TF.AzureRM EventhubConsumerGroupResource
-eventhubConsumerGroupResource =
-    TF.newResource "azurerm_eventhub_consumer_group" $
-        EventhubConsumerGroupResource {
-            _eventhub_name = TF.Absent
-            , _name = TF.Absent
-            , _namespace_name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _user_metadata = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL EventhubConsumerGroupResource where
-    toHCL EventhubConsumerGroupResource{..} = TF.arguments
-        [ TF.assign "eventhub_name" <$> _eventhub_name
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_name" <$> _namespace_name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "user_metadata" <$> _user_metadata
+    toHCL EventhubConsumerGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "eventhub_name" <$> TF.argument _eventhub_name
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_name" <$> TF.argument _namespace_name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "user_metadata" <$> TF.argument _user_metadata
         ]
 
 $(TF.makeSchemaLenses
     ''EventhubConsumerGroupResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eventhubConsumerGroupResource :: TF.Resource TF.AzureRM EventhubConsumerGroupResource
+eventhubConsumerGroupResource =
+    TF.newResource "azurerm_eventhub_consumer_group" $
+        EventhubConsumerGroupResource {
+            _eventhub_name = TF.Nil
+            , _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _user_metadata = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_eventhub_namespace@ AzureRM resource.
 
@@ -1611,38 +1586,37 @@ data EventhubNamespaceResource = EventhubNamespaceResource {
     {- ^ - The EventHub Namespace ID. -}
     } deriving (Show, Eq)
 
-eventhubNamespaceResource :: TF.Resource TF.AzureRM EventhubNamespaceResource
-eventhubNamespaceResource =
-    TF.newResource "azurerm_eventhub_namespace" $
-        EventhubNamespaceResource {
-            _auto_inflate_enabled = TF.Absent
-            , _capacity = TF.Absent
-            , _location = TF.Absent
-            , _maximum_throughput_units = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL EventhubNamespaceResource where
-    toHCL EventhubNamespaceResource{..} = TF.arguments
-        [ TF.assign "auto_inflate_enabled" <$> _auto_inflate_enabled
-        , TF.assign "capacity" <$> _capacity
-        , TF.assign "location" <$> _location
-        , TF.assign "maximum_throughput_units" <$> _maximum_throughput_units
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL EventhubNamespaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "auto_inflate_enabled" <$> TF.argument _auto_inflate_enabled
+        , TF.assign "capacity" <$> TF.argument _capacity
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "maximum_throughput_units" <$> TF.argument _maximum_throughput_units
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''EventhubNamespaceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eventhubNamespaceResource :: TF.Resource TF.AzureRM EventhubNamespaceResource
+eventhubNamespaceResource =
+    TF.newResource "azurerm_eventhub_namespace" $
+        EventhubNamespaceResource {
+            _auto_inflate_enabled = TF.Nil
+            , _capacity = TF.Nil
+            , _location = TF.Nil
+            , _maximum_throughput_units = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_eventhub@ AzureRM resource.
 
@@ -1665,33 +1639,32 @@ data EventhubResource = EventhubResource {
     {- ^ - The identifiers for partitions created for Event Hubs. -}
     } deriving (Show, Eq)
 
-eventhubResource :: TF.Resource TF.AzureRM EventhubResource
-eventhubResource =
-    TF.newResource "azurerm_eventhub" $
-        EventhubResource {
-            _message_retention = TF.Absent
-            , _name = TF.Absent
-            , _namespace_name = TF.Absent
-            , _partition_count = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_partition_ids = TF.Computed "partition_ids"
-            }
-
 instance TF.ToHCL EventhubResource where
-    toHCL EventhubResource{..} = TF.arguments
-        [ TF.assign "message_retention" <$> _message_retention
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_name" <$> _namespace_name
-        , TF.assign "partition_count" <$> _partition_count
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL EventhubResource{..} = TF.block $ catMaybes
+        [ TF.assign "message_retention" <$> TF.argument _message_retention
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_name" <$> TF.argument _namespace_name
+        , TF.assign "partition_count" <$> TF.argument _partition_count
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''EventhubResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+eventhubResource :: TF.Resource TF.AzureRM EventhubResource
+eventhubResource =
+    TF.newResource "azurerm_eventhub" $
+        EventhubResource {
+            _message_retention = TF.Nil
+            , _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _partition_count = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_partition_ids = TF.Compute "partition_ids"
+            }
 
 {- | The @azurerm_express_route_circuit@ AzureRM resource.
 
@@ -1724,42 +1697,41 @@ data ExpressRouteCircuitResource = ExpressRouteCircuitResource {
     {- ^ - The ExpressRoute circuit provisioning state from your chosen service provider. Possible values are "NotProvisioned", "Provisioning", "Provisioned", and "Deprovisioning". -}
     } deriving (Show, Eq)
 
-expressRouteCircuitResource :: TF.Resource TF.AzureRM ExpressRouteCircuitResource
-expressRouteCircuitResource =
-    TF.newResource "azurerm_express_route_circuit" $
-        ExpressRouteCircuitResource {
-            _allow_classic_operations = TF.Absent
-            , _bandwidth_in_mbps = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _peering_location = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _service_provider_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_service_key = TF.Computed "service_key"
-            , _computed_service_provider_provisioning_state = TF.Computed "service_provider_provisioning_state"
-            }
-
 instance TF.ToHCL ExpressRouteCircuitResource where
-    toHCL ExpressRouteCircuitResource{..} = TF.arguments
-        [ TF.assign "allow_classic_operations" <$> _allow_classic_operations
-        , TF.assign "bandwidth_in_mbps" <$> _bandwidth_in_mbps
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "peering_location" <$> _peering_location
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "service_provider_name" <$> _service_provider_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL ExpressRouteCircuitResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_classic_operations" <$> TF.argument _allow_classic_operations
+        , TF.assign "bandwidth_in_mbps" <$> TF.argument _bandwidth_in_mbps
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "peering_location" <$> TF.argument _peering_location
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "service_provider_name" <$> TF.argument _service_provider_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ExpressRouteCircuitResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+expressRouteCircuitResource :: TF.Resource TF.AzureRM ExpressRouteCircuitResource
+expressRouteCircuitResource =
+    TF.newResource "azurerm_express_route_circuit" $
+        ExpressRouteCircuitResource {
+            _allow_classic_operations = TF.Nil
+            , _bandwidth_in_mbps = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _peering_location = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _service_provider_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_service_key = TF.Compute "service_key"
+            , _computed_service_provider_provisioning_state = TF.Compute "service_provider_provisioning_state"
+            }
 
 {- | The @azurerm_image@ AzureRM resource.
 
@@ -1785,36 +1757,35 @@ data ImageResource = ImageResource {
     {- ^ - The managed image ID. -}
     } deriving (Show, Eq)
 
-imageResource :: TF.Resource TF.AzureRM ImageResource
-imageResource =
-    TF.newResource "azurerm_image" $
-        ImageResource {
-            _data_disk = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _os_disk = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _source_virtual_machine_id = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ImageResource where
-    toHCL ImageResource{..} = TF.arguments
-        [ TF.assign "data_disk" <$> _data_disk
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "os_disk" <$> _os_disk
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "source_virtual_machine_id" <$> _source_virtual_machine_id
-        , TF.assign "tags" <$> _tags
+    toHCL ImageResource{..} = TF.block $ catMaybes
+        [ TF.assign "data_disk" <$> TF.argument _data_disk
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "os_disk" <$> TF.argument _os_disk
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "source_virtual_machine_id" <$> TF.argument _source_virtual_machine_id
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ImageResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+imageResource :: TF.Resource TF.AzureRM ImageResource
+imageResource =
+    TF.newResource "azurerm_image" $
+        ImageResource {
+            _data_disk = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _os_disk = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _source_virtual_machine_id = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_key_vault_certificate@ AzureRM resource.
 
@@ -1837,33 +1808,32 @@ data KeyVaultCertificateResource = KeyVaultCertificateResource {
     {- ^ - The current version of the Key Vault Certificate. -}
     } deriving (Show, Eq)
 
-keyVaultCertificateResource :: TF.Resource TF.AzureRM KeyVaultCertificateResource
-keyVaultCertificateResource =
-    TF.newResource "azurerm_key_vault_certificate" $
-        KeyVaultCertificateResource {
-            _certificate = TF.Absent
-            , _certificate_policy = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _vault_uri = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL KeyVaultCertificateResource where
-    toHCL KeyVaultCertificateResource{..} = TF.arguments
-        [ TF.assign "certificate" <$> _certificate
-        , TF.assign "certificate_policy" <$> _certificate_policy
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "vault_uri" <$> _vault_uri
+    toHCL KeyVaultCertificateResource{..} = TF.block $ catMaybes
+        [ TF.assign "certificate" <$> TF.argument _certificate
+        , TF.assign "certificate_policy" <$> TF.argument _certificate_policy
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "vault_uri" <$> TF.argument _vault_uri
         ]
 
 $(TF.makeSchemaLenses
     ''KeyVaultCertificateResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyVaultCertificateResource :: TF.Resource TF.AzureRM KeyVaultCertificateResource
+keyVaultCertificateResource =
+    TF.newResource "azurerm_key_vault_certificate" $
+        KeyVaultCertificateResource {
+            _certificate = TF.Nil
+            , _certificate_policy = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _vault_uri = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @azurerm_key_vault_key@ AzureRM resource.
 
@@ -1892,37 +1862,36 @@ data KeyVaultKeyResource = KeyVaultKeyResource {
     {- ^ - The current version of the Key Vault Key. -}
     } deriving (Show, Eq)
 
-keyVaultKeyResource :: TF.Resource TF.AzureRM KeyVaultKeyResource
-keyVaultKeyResource =
-    TF.newResource "azurerm_key_vault_key" $
-        KeyVaultKeyResource {
-            _key_opts = TF.Absent
-            , _key_size = TF.Absent
-            , _key_type = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _vault_uri = TF.Absent
-            , _computed_e = TF.Computed "e"
-            , _computed_id = TF.Computed "id"
-            , _computed_n = TF.Computed "n"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL KeyVaultKeyResource where
-    toHCL KeyVaultKeyResource{..} = TF.arguments
-        [ TF.assign "key_opts" <$> _key_opts
-        , TF.assign "key_size" <$> _key_size
-        , TF.assign "key_type" <$> _key_type
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "vault_uri" <$> _vault_uri
+    toHCL KeyVaultKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "key_opts" <$> TF.argument _key_opts
+        , TF.assign "key_size" <$> TF.argument _key_size
+        , TF.assign "key_type" <$> TF.argument _key_type
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "vault_uri" <$> TF.argument _vault_uri
         ]
 
 $(TF.makeSchemaLenses
     ''KeyVaultKeyResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyVaultKeyResource :: TF.Resource TF.AzureRM KeyVaultKeyResource
+keyVaultKeyResource =
+    TF.newResource "azurerm_key_vault_key" $
+        KeyVaultKeyResource {
+            _key_opts = TF.Nil
+            , _key_size = TF.Nil
+            , _key_type = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _vault_uri = TF.Nil
+            , _computed_e = TF.Compute "e"
+            , _computed_id = TF.Compute "id"
+            , _computed_n = TF.Compute "n"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @azurerm_key_vault@ AzureRM resource.
 
@@ -1955,43 +1924,42 @@ data KeyVaultResource = KeyVaultResource {
     {- ^ - The URI of the vault for performing operations on keys and secrets. -}
     } deriving (Show, Eq)
 
-keyVaultResource :: TF.Resource TF.AzureRM KeyVaultResource
-keyVaultResource =
-    TF.newResource "azurerm_key_vault" $
-        KeyVaultResource {
-            _access_policy = TF.Absent
-            , _enabled_for_deployment = TF.Absent
-            , _enabled_for_disk_encryption = TF.Absent
-            , _enabled_for_template_deployment = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _tenant_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_vault_uri = TF.Computed "vault_uri"
-            }
-
 instance TF.ToHCL KeyVaultResource where
-    toHCL KeyVaultResource{..} = TF.arguments
-        [ TF.assign "access_policy" <$> _access_policy
-        , TF.assign "enabled_for_deployment" <$> _enabled_for_deployment
-        , TF.assign "enabled_for_disk_encryption" <$> _enabled_for_disk_encryption
-        , TF.assign "enabled_for_template_deployment" <$> _enabled_for_template_deployment
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL KeyVaultResource{..} = TF.block $ catMaybes
+        [ TF.assign "access_policy" <$> TF.argument _access_policy
+        , TF.assign "enabled_for_deployment" <$> TF.argument _enabled_for_deployment
+        , TF.assign "enabled_for_disk_encryption" <$> TF.argument _enabled_for_disk_encryption
+        , TF.assign "enabled_for_template_deployment" <$> TF.argument _enabled_for_template_deployment
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''KeyVaultResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyVaultResource :: TF.Resource TF.AzureRM KeyVaultResource
+keyVaultResource =
+    TF.newResource "azurerm_key_vault" $
+        KeyVaultResource {
+            _access_policy = TF.Nil
+            , _enabled_for_deployment = TF.Nil
+            , _enabled_for_disk_encryption = TF.Nil
+            , _enabled_for_template_deployment = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _tenant_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_vault_uri = TF.Compute "vault_uri"
+            }
 
 {- | The @azurerm_key_vault_secret@ AzureRM resource.
 
@@ -2014,33 +1982,32 @@ data KeyVaultSecretResource = KeyVaultSecretResource {
     {- ^ - The current version of the Key Vault Secret. -}
     } deriving (Show, Eq)
 
-keyVaultSecretResource :: TF.Resource TF.AzureRM KeyVaultSecretResource
-keyVaultSecretResource =
-    TF.newResource "azurerm_key_vault_secret" $
-        KeyVaultSecretResource {
-            _content_type = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _value = TF.Absent
-            , _vault_uri = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL KeyVaultSecretResource where
-    toHCL KeyVaultSecretResource{..} = TF.arguments
-        [ TF.assign "content_type" <$> _content_type
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "value" <$> _value
-        , TF.assign "vault_uri" <$> _vault_uri
+    toHCL KeyVaultSecretResource{..} = TF.block $ catMaybes
+        [ TF.assign "content_type" <$> TF.argument _content_type
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "value" <$> TF.argument _value
+        , TF.assign "vault_uri" <$> TF.argument _vault_uri
         ]
 
 $(TF.makeSchemaLenses
     ''KeyVaultSecretResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyVaultSecretResource :: TF.Resource TF.AzureRM KeyVaultSecretResource
+keyVaultSecretResource =
+    TF.newResource "azurerm_key_vault_secret" $
+        KeyVaultSecretResource {
+            _content_type = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _value = TF.Nil
+            , _vault_uri = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @azurerm_lb_backend_address_pool@ AzureRM resource.
 
@@ -2059,28 +2026,27 @@ data LbBackendAddressPoolResource = LbBackendAddressPoolResource {
     {- ^ - The ID of the LoadBalancer to which the resource is attached. -}
     } deriving (Show, Eq)
 
-lbBackendAddressPoolResource :: TF.Resource TF.AzureRM LbBackendAddressPoolResource
-lbBackendAddressPoolResource =
-    TF.newResource "azurerm_lb_backend_address_pool" $
-        LbBackendAddressPoolResource {
-            _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LbBackendAddressPoolResource where
-    toHCL LbBackendAddressPoolResource{..} = TF.arguments
-        [ TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL LbBackendAddressPoolResource{..} = TF.block $ catMaybes
+        [ TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''LbBackendAddressPoolResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbBackendAddressPoolResource :: TF.Resource TF.AzureRM LbBackendAddressPoolResource
+lbBackendAddressPoolResource =
+    TF.newResource "azurerm_lb_backend_address_pool" $
+        LbBackendAddressPoolResource {
+            _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_lb_nat_pool@ AzureRM resource.
 
@@ -2108,38 +2074,37 @@ data LbNatPoolResource = LbNatPoolResource {
     {- ^ - The ID of the LoadBalancer to which the resource is attached. -}
     } deriving (Show, Eq)
 
-lbNatPoolResource :: TF.Resource TF.AzureRM LbNatPoolResource
-lbNatPoolResource =
-    TF.newResource "azurerm_lb_nat_pool" $
-        LbNatPoolResource {
-            _backend_port = TF.Absent
-            , _frontend_ip_configuration_name = TF.Absent
-            , _frontend_port_end = TF.Absent
-            , _frontend_port_start = TF.Absent
-            , _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _protocol = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LbNatPoolResource where
-    toHCL LbNatPoolResource{..} = TF.arguments
-        [ TF.assign "backend_port" <$> _backend_port
-        , TF.assign "frontend_ip_configuration_name" <$> _frontend_ip_configuration_name
-        , TF.assign "frontend_port_end" <$> _frontend_port_end
-        , TF.assign "frontend_port_start" <$> _frontend_port_start
-        , TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL LbNatPoolResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend_port" <$> TF.argument _backend_port
+        , TF.assign "frontend_ip_configuration_name" <$> TF.argument _frontend_ip_configuration_name
+        , TF.assign "frontend_port_end" <$> TF.argument _frontend_port_end
+        , TF.assign "frontend_port_start" <$> TF.argument _frontend_port_start
+        , TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''LbNatPoolResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbNatPoolResource :: TF.Resource TF.AzureRM LbNatPoolResource
+lbNatPoolResource =
+    TF.newResource "azurerm_lb_nat_pool" $
+        LbNatPoolResource {
+            _backend_port = TF.Nil
+            , _frontend_ip_configuration_name = TF.Nil
+            , _frontend_port_end = TF.Nil
+            , _frontend_port_start = TF.Nil
+            , _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _protocol = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_lb_nat_rule@ AzureRM resource.
 
@@ -2167,38 +2132,37 @@ data LbNatRuleResource = LbNatRuleResource {
     {- ^ - The ID of the LoadBalancer to which the resource is attached. -}
     } deriving (Show, Eq)
 
-lbNatRuleResource :: TF.Resource TF.AzureRM LbNatRuleResource
-lbNatRuleResource =
-    TF.newResource "azurerm_lb_nat_rule" $
-        LbNatRuleResource {
-            _backend_port = TF.Absent
-            , _enable_floating_ip = TF.Absent
-            , _frontend_ip_configuration_name = TF.Absent
-            , _frontend_port = TF.Absent
-            , _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _protocol = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LbNatRuleResource where
-    toHCL LbNatRuleResource{..} = TF.arguments
-        [ TF.assign "backend_port" <$> _backend_port
-        , TF.assign "enable_floating_ip" <$> _enable_floating_ip
-        , TF.assign "frontend_ip_configuration_name" <$> _frontend_ip_configuration_name
-        , TF.assign "frontend_port" <$> _frontend_port
-        , TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL LbNatRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend_port" <$> TF.argument _backend_port
+        , TF.assign "enable_floating_ip" <$> TF.argument _enable_floating_ip
+        , TF.assign "frontend_ip_configuration_name" <$> TF.argument _frontend_ip_configuration_name
+        , TF.assign "frontend_port" <$> TF.argument _frontend_port
+        , TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''LbNatRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbNatRuleResource :: TF.Resource TF.AzureRM LbNatRuleResource
+lbNatRuleResource =
+    TF.newResource "azurerm_lb_nat_rule" $
+        LbNatRuleResource {
+            _backend_port = TF.Nil
+            , _enable_floating_ip = TF.Nil
+            , _frontend_ip_configuration_name = TF.Nil
+            , _frontend_port = TF.Nil
+            , _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _protocol = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_lb_probe@ AzureRM resource.
 
@@ -2226,38 +2190,37 @@ data LbProbeResource = LbProbeResource {
     {- ^ - The ID of the LoadBalancer to which the resource is attached. -}
     } deriving (Show, Eq)
 
-lbProbeResource :: TF.Resource TF.AzureRM LbProbeResource
-lbProbeResource =
-    TF.newResource "azurerm_lb_probe" $
-        LbProbeResource {
-            _interval_in_seconds = TF.Absent
-            , _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _number_of_probes = TF.Absent
-            , _port = TF.Absent
-            , _protocol = TF.Absent
-            , _request_path = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LbProbeResource where
-    toHCL LbProbeResource{..} = TF.arguments
-        [ TF.assign "interval_in_seconds" <$> _interval_in_seconds
-        , TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "number_of_probes" <$> _number_of_probes
-        , TF.assign "port" <$> _port
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "request_path" <$> _request_path
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL LbProbeResource{..} = TF.block $ catMaybes
+        [ TF.assign "interval_in_seconds" <$> TF.argument _interval_in_seconds
+        , TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "number_of_probes" <$> TF.argument _number_of_probes
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "request_path" <$> TF.argument _request_path
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''LbProbeResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbProbeResource :: TF.Resource TF.AzureRM LbProbeResource
+lbProbeResource =
+    TF.newResource "azurerm_lb_probe" $
+        LbProbeResource {
+            _interval_in_seconds = TF.Nil
+            , _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _number_of_probes = TF.Nil
+            , _port = TF.Nil
+            , _protocol = TF.Nil
+            , _request_path = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_lb@ AzureRM resource.
 
@@ -2280,33 +2243,32 @@ data LbResource = LbResource {
     {- ^ - The private IP address assigned to the load balancer, if any. -}
     } deriving (Show, Eq)
 
-lbResource :: TF.Resource TF.AzureRM LbResource
-lbResource =
-    TF.newResource "azurerm_lb" $
-        LbResource {
-            _frontend_ip_configuration = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_private_ip_address = TF.Computed "private_ip_address"
-            }
-
 instance TF.ToHCL LbResource where
-    toHCL LbResource{..} = TF.arguments
-        [ TF.assign "frontend_ip_configuration" <$> _frontend_ip_configuration
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL LbResource{..} = TF.block $ catMaybes
+        [ TF.assign "frontend_ip_configuration" <$> TF.argument _frontend_ip_configuration
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''LbResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbResource :: TF.Resource TF.AzureRM LbResource
+lbResource =
+    TF.newResource "azurerm_lb" $
+        LbResource {
+            _frontend_ip_configuration = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_private_ip_address = TF.Compute "private_ip_address"
+            }
 
 {- | The @azurerm_lb_rule@ AzureRM resource.
 
@@ -2342,46 +2304,45 @@ data LbRuleResource = LbRuleResource {
     {- ^ - The ID of the LoadBalancer to which the resource is attached. -}
     } deriving (Show, Eq)
 
-lbRuleResource :: TF.Resource TF.AzureRM LbRuleResource
-lbRuleResource =
-    TF.newResource "azurerm_lb_rule" $
-        LbRuleResource {
-            _backend_address_pool_id = TF.Absent
-            , _backend_port = TF.Absent
-            , _enable_floating_ip = TF.Absent
-            , _frontend_ip_configuration_name = TF.Absent
-            , _frontend_port = TF.Absent
-            , _idle_timeout_in_minutes = TF.Absent
-            , _load_distribution = TF.Absent
-            , _loadbalancer_id = TF.Absent
-            , _name = TF.Absent
-            , _probe_id = TF.Absent
-            , _protocol = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LbRuleResource where
-    toHCL LbRuleResource{..} = TF.arguments
-        [ TF.assign "backend_address_pool_id" <$> _backend_address_pool_id
-        , TF.assign "backend_port" <$> _backend_port
-        , TF.assign "enable_floating_ip" <$> _enable_floating_ip
-        , TF.assign "frontend_ip_configuration_name" <$> _frontend_ip_configuration_name
-        , TF.assign "frontend_port" <$> _frontend_port
-        , TF.assign "idle_timeout_in_minutes" <$> _idle_timeout_in_minutes
-        , TF.assign "load_distribution" <$> _load_distribution
-        , TF.assign "loadbalancer_id" <$> _loadbalancer_id
-        , TF.assign "name" <$> _name
-        , TF.assign "probe_id" <$> _probe_id
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL LbRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend_address_pool_id" <$> TF.argument _backend_address_pool_id
+        , TF.assign "backend_port" <$> TF.argument _backend_port
+        , TF.assign "enable_floating_ip" <$> TF.argument _enable_floating_ip
+        , TF.assign "frontend_ip_configuration_name" <$> TF.argument _frontend_ip_configuration_name
+        , TF.assign "frontend_port" <$> TF.argument _frontend_port
+        , TF.assign "idle_timeout_in_minutes" <$> TF.argument _idle_timeout_in_minutes
+        , TF.assign "load_distribution" <$> TF.argument _load_distribution
+        , TF.assign "loadbalancer_id" <$> TF.argument _loadbalancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "probe_id" <$> TF.argument _probe_id
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''LbRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+lbRuleResource :: TF.Resource TF.AzureRM LbRuleResource
+lbRuleResource =
+    TF.newResource "azurerm_lb_rule" $
+        LbRuleResource {
+            _backend_address_pool_id = TF.Nil
+            , _backend_port = TF.Nil
+            , _enable_floating_ip = TF.Nil
+            , _frontend_ip_configuration_name = TF.Nil
+            , _frontend_port = TF.Nil
+            , _idle_timeout_in_minutes = TF.Nil
+            , _load_distribution = TF.Nil
+            , _loadbalancer_id = TF.Nil
+            , _name = TF.Nil
+            , _probe_id = TF.Nil
+            , _protocol = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_local_network_gateway@ AzureRM resource.
 
@@ -2405,34 +2366,33 @@ data LocalNetworkGatewayResource = LocalNetworkGatewayResource {
     {- ^ - The local network gateway unique ID within Azure. -}
     } deriving (Show, Eq)
 
-localNetworkGatewayResource :: TF.Resource TF.AzureRM LocalNetworkGatewayResource
-localNetworkGatewayResource =
-    TF.newResource "azurerm_local_network_gateway" $
-        LocalNetworkGatewayResource {
-            _address_space = TF.Absent
-            , _bgp_settings = TF.Absent
-            , _gateway_address = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LocalNetworkGatewayResource where
-    toHCL LocalNetworkGatewayResource{..} = TF.arguments
-        [ TF.assign "address_space" <$> _address_space
-        , TF.assign "bgp_settings" <$> _bgp_settings
-        , TF.assign "gateway_address" <$> _gateway_address
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL LocalNetworkGatewayResource{..} = TF.block $ catMaybes
+        [ TF.assign "address_space" <$> TF.argument _address_space
+        , TF.assign "bgp_settings" <$> TF.argument _bgp_settings
+        , TF.assign "gateway_address" <$> TF.argument _gateway_address
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''LocalNetworkGatewayResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+localNetworkGatewayResource :: TF.Resource TF.AzureRM LocalNetworkGatewayResource
+localNetworkGatewayResource =
+    TF.newResource "azurerm_local_network_gateway" $
+        LocalNetworkGatewayResource {
+            _address_space = TF.Nil
+            , _bgp_settings = TF.Nil
+            , _gateway_address = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_log_analytics_workspace@ AzureRM resource.
 
@@ -2463,38 +2423,37 @@ data LogAnalyticsWorkspaceResource = LogAnalyticsWorkspaceResource {
     {- ^ - The Workspace (or Customer) ID for the Log Analytics Workspace. -}
     } deriving (Show, Eq)
 
-logAnalyticsWorkspaceResource :: TF.Resource TF.AzureRM LogAnalyticsWorkspaceResource
-logAnalyticsWorkspaceResource =
-    TF.newResource "azurerm_log_analytics_workspace" $
-        LogAnalyticsWorkspaceResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _retention_in_days = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_portal_url = TF.Computed "portal_url"
-            , _computed_primary_shared_key = TF.Computed "primary_shared_key"
-            , _computed_secondary_shared_key = TF.Computed "secondary_shared_key"
-            , _computed_workspace_id = TF.Computed "workspace_id"
-            }
-
 instance TF.ToHCL LogAnalyticsWorkspaceResource where
-    toHCL LogAnalyticsWorkspaceResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "retention_in_days" <$> _retention_in_days
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL LogAnalyticsWorkspaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "retention_in_days" <$> TF.argument _retention_in_days
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''LogAnalyticsWorkspaceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+logAnalyticsWorkspaceResource :: TF.Resource TF.AzureRM LogAnalyticsWorkspaceResource
+logAnalyticsWorkspaceResource =
+    TF.newResource "azurerm_log_analytics_workspace" $
+        LogAnalyticsWorkspaceResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _retention_in_days = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_portal_url = TF.Compute "portal_url"
+            , _computed_primary_shared_key = TF.Compute "primary_shared_key"
+            , _computed_secondary_shared_key = TF.Compute "secondary_shared_key"
+            , _computed_workspace_id = TF.Compute "workspace_id"
+            }
 
 {- | The @azurerm_managed_disk@ AzureRM resource.
 
@@ -2529,46 +2488,45 @@ data ManagedDiskResource = ManagedDiskResource {
     {- ^ - The managed disk ID. -}
     } deriving (Show, Eq)
 
-managedDiskResource :: TF.Resource TF.AzureRM ManagedDiskResource
-managedDiskResource =
-    TF.newResource "azurerm_managed_disk" $
-        ManagedDiskResource {
-            _create_option = TF.Absent
-            , _disk_size_gb = TF.Absent
-            , _encryption_settings = TF.Absent
-            , _image_reference_id = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _os_type = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _source_resource_id = TF.Absent
-            , _source_uri = TF.Absent
-            , _storage_account_type = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ManagedDiskResource where
-    toHCL ManagedDiskResource{..} = TF.arguments
-        [ TF.assign "create_option" <$> _create_option
-        , TF.assign "disk_size_gb" <$> _disk_size_gb
-        , TF.assign "encryption_settings" <$> _encryption_settings
-        , TF.assign "image_reference_id" <$> _image_reference_id
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "os_type" <$> _os_type
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "source_resource_id" <$> _source_resource_id
-        , TF.assign "source_uri" <$> _source_uri
-        , TF.assign "storage_account_type" <$> _storage_account_type
-        , TF.assign "tags" <$> _tags
+    toHCL ManagedDiskResource{..} = TF.block $ catMaybes
+        [ TF.assign "create_option" <$> TF.argument _create_option
+        , TF.assign "disk_size_gb" <$> TF.argument _disk_size_gb
+        , TF.assign "encryption_settings" <$> TF.argument _encryption_settings
+        , TF.assign "image_reference_id" <$> TF.argument _image_reference_id
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "os_type" <$> TF.argument _os_type
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "source_resource_id" <$> TF.argument _source_resource_id
+        , TF.assign "source_uri" <$> TF.argument _source_uri
+        , TF.assign "storage_account_type" <$> TF.argument _storage_account_type
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ManagedDiskResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+managedDiskResource :: TF.Resource TF.AzureRM ManagedDiskResource
+managedDiskResource =
+    TF.newResource "azurerm_managed_disk" $
+        ManagedDiskResource {
+            _create_option = TF.Nil
+            , _disk_size_gb = TF.Nil
+            , _encryption_settings = TF.Nil
+            , _image_reference_id = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _os_type = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _source_resource_id = TF.Nil
+            , _source_uri = TF.Nil
+            , _storage_account_type = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_management_lock@ AzureRM resource.
 
@@ -2586,28 +2544,27 @@ data ManagementLockResource = ManagementLockResource {
     {- ^ - The ID of the Management Lock -}
     } deriving (Show, Eq)
 
-managementLockResource :: TF.Resource TF.AzureRM ManagementLockResource
-managementLockResource =
-    TF.newResource "azurerm_management_lock" $
-        ManagementLockResource {
-            _lock_level = TF.Absent
-            , _name = TF.Absent
-            , _scope = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ManagementLockResource where
-    toHCL ManagementLockResource{..} = TF.arguments
-        [ TF.assign "lock_level" <$> _lock_level
-        , TF.assign "name" <$> _name
-        , TF.assign "scope" <$> _scope
+    toHCL ManagementLockResource{..} = TF.block $ catMaybes
+        [ TF.assign "lock_level" <$> TF.argument _lock_level
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "scope" <$> TF.argument _scope
         ]
 
 $(TF.makeSchemaLenses
     ''ManagementLockResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+managementLockResource :: TF.Resource TF.AzureRM ManagementLockResource
+managementLockResource =
+    TF.newResource "azurerm_management_lock" $
+        ManagementLockResource {
+            _lock_level = TF.Nil
+            , _name = TF.Nil
+            , _scope = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_mysql_configuration@ AzureRM resource.
 
@@ -2626,30 +2583,29 @@ data MysqlConfigurationResource = MysqlConfigurationResource {
     {- ^ - The ID of the MySQL Configuration. -}
     } deriving (Show, Eq)
 
-mysqlConfigurationResource :: TF.Resource TF.AzureRM MysqlConfigurationResource
-mysqlConfigurationResource =
-    TF.newResource "azurerm_mysql_configuration" $
-        MysqlConfigurationResource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _value = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL MysqlConfigurationResource where
-    toHCL MysqlConfigurationResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "value" <$> _value
+    toHCL MysqlConfigurationResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "value" <$> TF.argument _value
         ]
 
 $(TF.makeSchemaLenses
     ''MysqlConfigurationResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+mysqlConfigurationResource :: TF.Resource TF.AzureRM MysqlConfigurationResource
+mysqlConfigurationResource =
+    TF.newResource "azurerm_mysql_configuration" $
+        MysqlConfigurationResource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _value = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_mysql_database@ AzureRM resource.
 
@@ -2670,32 +2626,31 @@ data MysqlDatabaseResource = MysqlDatabaseResource {
     {- ^ - The ID of the MySQL Database. -}
     } deriving (Show, Eq)
 
-mysqlDatabaseResource :: TF.Resource TF.AzureRM MysqlDatabaseResource
-mysqlDatabaseResource =
-    TF.newResource "azurerm_mysql_database" $
-        MysqlDatabaseResource {
-            _charset = TF.Absent
-            , _collation = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL MysqlDatabaseResource where
-    toHCL MysqlDatabaseResource{..} = TF.arguments
-        [ TF.assign "charset" <$> _charset
-        , TF.assign "collation" <$> _collation
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
+    toHCL MysqlDatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "charset" <$> TF.argument _charset
+        , TF.assign "collation" <$> TF.argument _collation
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
         ]
 
 $(TF.makeSchemaLenses
     ''MysqlDatabaseResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+mysqlDatabaseResource :: TF.Resource TF.AzureRM MysqlDatabaseResource
+mysqlDatabaseResource =
+    TF.newResource "azurerm_mysql_database" $
+        MysqlDatabaseResource {
+            _charset = TF.Nil
+            , _collation = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_mysql_firewall_rule@ AzureRM resource.
 
@@ -2716,32 +2671,31 @@ data MysqlFirewallRuleResource = MysqlFirewallRuleResource {
     {- ^ - The ID of the MySQL Firewall Rule. -}
     } deriving (Show, Eq)
 
-mysqlFirewallRuleResource :: TF.Resource TF.AzureRM MysqlFirewallRuleResource
-mysqlFirewallRuleResource =
-    TF.newResource "azurerm_mysql_firewall_rule" $
-        MysqlFirewallRuleResource {
-            _end_ip_address = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _start_ip_address = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL MysqlFirewallRuleResource where
-    toHCL MysqlFirewallRuleResource{..} = TF.arguments
-        [ TF.assign "end_ip_address" <$> _end_ip_address
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "start_ip_address" <$> _start_ip_address
+    toHCL MysqlFirewallRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "end_ip_address" <$> TF.argument _end_ip_address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "start_ip_address" <$> TF.argument _start_ip_address
         ]
 
 $(TF.makeSchemaLenses
     ''MysqlFirewallRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+mysqlFirewallRuleResource :: TF.Resource TF.AzureRM MysqlFirewallRuleResource
+mysqlFirewallRuleResource =
+    TF.newResource "azurerm_mysql_firewall_rule" $
+        MysqlFirewallRuleResource {
+            _end_ip_address = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _start_ip_address = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_mysql_server@ AzureRM resource.
 
@@ -2770,39 +2724,38 @@ data MysqlServerResource = MysqlServerResource {
     {- ^ - The ID of the MySQL Server. -}
     } deriving (Show, Eq)
 
-mysqlServerResource :: TF.Resource TF.AzureRM MysqlServerResource
-mysqlServerResource =
-    TF.newResource "azurerm_mysql_server" $
-        MysqlServerResource {
-            _administrator_login = TF.Absent
-            , _administrator_login_password = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _storage_mb = TF.Absent
-            , _version = TF.Absent
-            , _computed_fqdn = TF.Computed "fqdn"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL MysqlServerResource where
-    toHCL MysqlServerResource{..} = TF.arguments
-        [ TF.assign "administrator_login" <$> _administrator_login
-        , TF.assign "administrator_login_password" <$> _administrator_login_password
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "storage_mb" <$> _storage_mb
-        , TF.assign "version" <$> _version
+    toHCL MysqlServerResource{..} = TF.block $ catMaybes
+        [ TF.assign "administrator_login" <$> TF.argument _administrator_login
+        , TF.assign "administrator_login_password" <$> TF.argument _administrator_login_password
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "storage_mb" <$> TF.argument _storage_mb
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''MysqlServerResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+mysqlServerResource :: TF.Resource TF.AzureRM MysqlServerResource
+mysqlServerResource =
+    TF.newResource "azurerm_mysql_server" $
+        MysqlServerResource {
+            _administrator_login = TF.Nil
+            , _administrator_login_password = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _storage_mb = TF.Nil
+            , _version = TF.Nil
+            , _computed_fqdn = TF.Compute "fqdn"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_network_interface@ AzureRM resource.
 
@@ -2842,45 +2795,44 @@ data NetworkInterfaceResource = NetworkInterfaceResource {
     {- ^ - Reference to a VM with which this NIC has been associated. -}
     } deriving (Show, Eq)
 
-networkInterfaceResource :: TF.Resource TF.AzureRM NetworkInterfaceResource
-networkInterfaceResource =
-    TF.newResource "azurerm_network_interface" $
-        NetworkInterfaceResource {
-            _dns_servers = TF.Absent
-            , _enable_ip_forwarding = TF.Absent
-            , _internal_dns_name_label = TF.Absent
-            , _ip_configuration = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _network_security_group_id = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_applied_dns_servers = TF.Computed "applied_dns_servers"
-            , _computed_id = TF.Computed "id"
-            , _computed_internal_fqdn = TF.Computed "internal_fqdn"
-            , _computed_mac_address = TF.Computed "mac_address"
-            , _computed_private_ip_address = TF.Computed "private_ip_address"
-            , _computed_virtual_machine_id = TF.Computed "virtual_machine_id"
-            }
-
 instance TF.ToHCL NetworkInterfaceResource where
-    toHCL NetworkInterfaceResource{..} = TF.arguments
-        [ TF.assign "dns_servers" <$> _dns_servers
-        , TF.assign "enable_ip_forwarding" <$> _enable_ip_forwarding
-        , TF.assign "internal_dns_name_label" <$> _internal_dns_name_label
-        , TF.assign "ip_configuration" <$> _ip_configuration
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "network_security_group_id" <$> _network_security_group_id
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL NetworkInterfaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "dns_servers" <$> TF.argument _dns_servers
+        , TF.assign "enable_ip_forwarding" <$> TF.argument _enable_ip_forwarding
+        , TF.assign "internal_dns_name_label" <$> TF.argument _internal_dns_name_label
+        , TF.assign "ip_configuration" <$> TF.argument _ip_configuration
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_security_group_id" <$> TF.argument _network_security_group_id
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkInterfaceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkInterfaceResource :: TF.Resource TF.AzureRM NetworkInterfaceResource
+networkInterfaceResource =
+    TF.newResource "azurerm_network_interface" $
+        NetworkInterfaceResource {
+            _dns_servers = TF.Nil
+            , _enable_ip_forwarding = TF.Nil
+            , _internal_dns_name_label = TF.Nil
+            , _ip_configuration = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _network_security_group_id = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_applied_dns_servers = TF.Compute "applied_dns_servers"
+            , _computed_id = TF.Compute "id"
+            , _computed_internal_fqdn = TF.Compute "internal_fqdn"
+            , _computed_mac_address = TF.Compute "mac_address"
+            , _computed_private_ip_address = TF.Compute "private_ip_address"
+            , _computed_virtual_machine_id = TF.Compute "virtual_machine_id"
+            }
 
 {- | The @azurerm_network_security_group@ AzureRM resource.
 
@@ -2909,32 +2861,31 @@ data NetworkSecurityGroupResource = NetworkSecurityGroupResource {
     {- ^ - The Network Security Group ID. -}
     } deriving (Show, Eq)
 
-networkSecurityGroupResource :: TF.Resource TF.AzureRM NetworkSecurityGroupResource
-networkSecurityGroupResource =
-    TF.newResource "azurerm_network_security_group" $
-        NetworkSecurityGroupResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _security_rule = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkSecurityGroupResource where
-    toHCL NetworkSecurityGroupResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "security_rule" <$> _security_rule
-        , TF.assign "tags" <$> _tags
+    toHCL NetworkSecurityGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "security_rule" <$> TF.argument _security_rule
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkSecurityGroupResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkSecurityGroupResource :: TF.Resource TF.AzureRM NetworkSecurityGroupResource
+networkSecurityGroupResource =
+    TF.newResource "azurerm_network_security_group" $
+        NetworkSecurityGroupResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _security_rule = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_network_security_rule@ AzureRM resource.
 
@@ -2975,46 +2926,45 @@ data NetworkSecurityRuleResource = NetworkSecurityRuleResource {
     {- ^ - The Network Security Rule ID. -}
     } deriving (Show, Eq)
 
-networkSecurityRuleResource :: TF.Resource TF.AzureRM NetworkSecurityRuleResource
-networkSecurityRuleResource =
-    TF.newResource "azurerm_network_security_rule" $
-        NetworkSecurityRuleResource {
-            _access = TF.Absent
-            , _description = TF.Absent
-            , _destination_address_prefix = TF.Absent
-            , _destination_port_range = TF.Absent
-            , _direction = TF.Absent
-            , _name = TF.Absent
-            , _network_security_group_name = TF.Absent
-            , _priority = TF.Absent
-            , _protocol = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _source_address_prefix = TF.Absent
-            , _source_port_range = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkSecurityRuleResource where
-    toHCL NetworkSecurityRuleResource{..} = TF.arguments
-        [ TF.assign "access" <$> _access
-        , TF.assign "description" <$> _description
-        , TF.assign "destination_address_prefix" <$> _destination_address_prefix
-        , TF.assign "destination_port_range" <$> _destination_port_range
-        , TF.assign "direction" <$> _direction
-        , TF.assign "name" <$> _name
-        , TF.assign "network_security_group_name" <$> _network_security_group_name
-        , TF.assign "priority" <$> _priority
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "source_address_prefix" <$> _source_address_prefix
-        , TF.assign "source_port_range" <$> _source_port_range
+    toHCL NetworkSecurityRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "access" <$> TF.argument _access
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "destination_address_prefix" <$> TF.argument _destination_address_prefix
+        , TF.assign "destination_port_range" <$> TF.argument _destination_port_range
+        , TF.assign "direction" <$> TF.argument _direction
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_security_group_name" <$> TF.argument _network_security_group_name
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "source_address_prefix" <$> TF.argument _source_address_prefix
+        , TF.assign "source_port_range" <$> TF.argument _source_port_range
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkSecurityRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkSecurityRuleResource :: TF.Resource TF.AzureRM NetworkSecurityRuleResource
+networkSecurityRuleResource =
+    TF.newResource "azurerm_network_security_rule" $
+        NetworkSecurityRuleResource {
+            _access = TF.Nil
+            , _description = TF.Nil
+            , _destination_address_prefix = TF.Nil
+            , _destination_port_range = TF.Nil
+            , _direction = TF.Nil
+            , _name = TF.Nil
+            , _network_security_group_name = TF.Nil
+            , _priority = TF.Nil
+            , _protocol = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _source_address_prefix = TF.Nil
+            , _source_port_range = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_network_watcher@ AzureRM resource.
 
@@ -3033,30 +2983,29 @@ data NetworkWatcherResource = NetworkWatcherResource {
     {- ^ - The Network Watcher ID. -}
     } deriving (Show, Eq)
 
-networkWatcherResource :: TF.Resource TF.AzureRM NetworkWatcherResource
-networkWatcherResource =
-    TF.newResource "azurerm_network_watcher" $
-        NetworkWatcherResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkWatcherResource where
-    toHCL NetworkWatcherResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
+    toHCL NetworkWatcherResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkWatcherResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkWatcherResource :: TF.Resource TF.AzureRM NetworkWatcherResource
+networkWatcherResource =
+    TF.newResource "azurerm_network_watcher" $
+        NetworkWatcherResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_postgresql_configuration@ AzureRM resource.
 
@@ -3075,30 +3024,29 @@ data PostgresqlConfigurationResource = PostgresqlConfigurationResource {
     {- ^ - The ID of the PostgreSQL Configuration. -}
     } deriving (Show, Eq)
 
-postgresqlConfigurationResource :: TF.Resource TF.AzureRM PostgresqlConfigurationResource
-postgresqlConfigurationResource =
-    TF.newResource "azurerm_postgresql_configuration" $
-        PostgresqlConfigurationResource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _value = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PostgresqlConfigurationResource where
-    toHCL PostgresqlConfigurationResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "value" <$> _value
+    toHCL PostgresqlConfigurationResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "value" <$> TF.argument _value
         ]
 
 $(TF.makeSchemaLenses
     ''PostgresqlConfigurationResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+postgresqlConfigurationResource :: TF.Resource TF.AzureRM PostgresqlConfigurationResource
+postgresqlConfigurationResource =
+    TF.newResource "azurerm_postgresql_configuration" $
+        PostgresqlConfigurationResource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _value = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_postgresql_database@ AzureRM resource.
 
@@ -3119,32 +3067,31 @@ data PostgresqlDatabaseResource = PostgresqlDatabaseResource {
     {- ^ - The ID of the PostgreSQL Database. -}
     } deriving (Show, Eq)
 
-postgresqlDatabaseResource :: TF.Resource TF.AzureRM PostgresqlDatabaseResource
-postgresqlDatabaseResource =
-    TF.newResource "azurerm_postgresql_database" $
-        PostgresqlDatabaseResource {
-            _charset = TF.Absent
-            , _collation = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PostgresqlDatabaseResource where
-    toHCL PostgresqlDatabaseResource{..} = TF.arguments
-        [ TF.assign "charset" <$> _charset
-        , TF.assign "collation" <$> _collation
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
+    toHCL PostgresqlDatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "charset" <$> TF.argument _charset
+        , TF.assign "collation" <$> TF.argument _collation
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
         ]
 
 $(TF.makeSchemaLenses
     ''PostgresqlDatabaseResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+postgresqlDatabaseResource :: TF.Resource TF.AzureRM PostgresqlDatabaseResource
+postgresqlDatabaseResource =
+    TF.newResource "azurerm_postgresql_database" $
+        PostgresqlDatabaseResource {
+            _charset = TF.Nil
+            , _collation = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_postgresql_firewall_rule@ AzureRM resource.
 
@@ -3165,32 +3112,31 @@ data PostgresqlFirewallRuleResource = PostgresqlFirewallRuleResource {
     {- ^ - The ID of the PostgreSQL Firewall Rule. -}
     } deriving (Show, Eq)
 
-postgresqlFirewallRuleResource :: TF.Resource TF.AzureRM PostgresqlFirewallRuleResource
-postgresqlFirewallRuleResource =
-    TF.newResource "azurerm_postgresql_firewall_rule" $
-        PostgresqlFirewallRuleResource {
-            _end_ip_address = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _start_ip_address = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PostgresqlFirewallRuleResource where
-    toHCL PostgresqlFirewallRuleResource{..} = TF.arguments
-        [ TF.assign "end_ip_address" <$> _end_ip_address
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "start_ip_address" <$> _start_ip_address
+    toHCL PostgresqlFirewallRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "end_ip_address" <$> TF.argument _end_ip_address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "start_ip_address" <$> TF.argument _start_ip_address
         ]
 
 $(TF.makeSchemaLenses
     ''PostgresqlFirewallRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+postgresqlFirewallRuleResource :: TF.Resource TF.AzureRM PostgresqlFirewallRuleResource
+postgresqlFirewallRuleResource =
+    TF.newResource "azurerm_postgresql_firewall_rule" $
+        PostgresqlFirewallRuleResource {
+            _end_ip_address = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _start_ip_address = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_postgresql_server@ AzureRM resource.
 
@@ -3219,39 +3165,38 @@ data PostgresqlServerResource = PostgresqlServerResource {
     {- ^ - The ID of the PostgreSQL Server. -}
     } deriving (Show, Eq)
 
-postgresqlServerResource :: TF.Resource TF.AzureRM PostgresqlServerResource
-postgresqlServerResource =
-    TF.newResource "azurerm_postgresql_server" $
-        PostgresqlServerResource {
-            _administrator_login = TF.Absent
-            , _administrator_login_password = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _storage_mb = TF.Absent
-            , _version = TF.Absent
-            , _computed_fqdn = TF.Computed "fqdn"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PostgresqlServerResource where
-    toHCL PostgresqlServerResource{..} = TF.arguments
-        [ TF.assign "administrator_login" <$> _administrator_login
-        , TF.assign "administrator_login_password" <$> _administrator_login_password
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "storage_mb" <$> _storage_mb
-        , TF.assign "version" <$> _version
+    toHCL PostgresqlServerResource{..} = TF.block $ catMaybes
+        [ TF.assign "administrator_login" <$> TF.argument _administrator_login
+        , TF.assign "administrator_login_password" <$> TF.argument _administrator_login_password
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "storage_mb" <$> TF.argument _storage_mb
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''PostgresqlServerResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+postgresqlServerResource :: TF.Resource TF.AzureRM PostgresqlServerResource
+postgresqlServerResource =
+    TF.newResource "azurerm_postgresql_server" $
+        PostgresqlServerResource {
+            _administrator_login = TF.Nil
+            , _administrator_login_password = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _storage_mb = TF.Nil
+            , _version = TF.Nil
+            , _computed_fqdn = TF.Compute "fqdn"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_public_ip@ AzureRM resource.
 
@@ -3272,31 +3217,30 @@ data PublicIpResource = PublicIpResource {
     {- ^ - The IP address value that was allocated. -}
     } deriving (Show, Eq)
 
-publicIpResource :: TF.Resource TF.AzureRM PublicIpResource
-publicIpResource =
-    TF.newResource "azurerm_public_ip" $
-        PublicIpResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _public_ip_address_allocation = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_address = TF.Computed "ip_address"
-            }
-
 instance TF.ToHCL PublicIpResource where
-    toHCL PublicIpResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "public_ip_address_allocation" <$> _public_ip_address_allocation
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL PublicIpResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "public_ip_address_allocation" <$> TF.argument _public_ip_address_allocation
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''PublicIpResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+publicIpResource :: TF.Resource TF.AzureRM PublicIpResource
+publicIpResource =
+    TF.newResource "azurerm_public_ip" $
+        PublicIpResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _public_ip_address_allocation = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_address = TF.Compute "ip_address"
+            }
 
 {- | The @azurerm_redis_cache@ AzureRM resource.
 
@@ -3315,31 +3259,30 @@ data RedisCacheResource = RedisCacheResource {
     {- ^ (Required) The name of the resource group in which to create the Redis instance. -}
     } deriving (Show, Eq)
 
-redisCacheResource :: TF.Resource TF.AzureRM RedisCacheResource
-redisCacheResource =
-    TF.newResource "azurerm_redis_cache" $
-        RedisCacheResource {
-            _capacity = TF.Absent
-            , _family' = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            }
-
 instance TF.ToHCL RedisCacheResource where
-    toHCL RedisCacheResource{..} = TF.arguments
-        [ TF.assign "capacity" <$> _capacity
-        , TF.assign "family" <$> _family'
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL RedisCacheResource{..} = TF.block $ catMaybes
+        [ TF.assign "capacity" <$> TF.argument _capacity
+        , TF.assign "family" <$> TF.argument _family'
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''RedisCacheResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+redisCacheResource :: TF.Resource TF.AzureRM RedisCacheResource
+redisCacheResource =
+    TF.newResource "azurerm_redis_cache" $
+        RedisCacheResource {
+            _capacity = TF.Nil
+            , _family' = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
 
 {- | The @azurerm_redis_firewall_rule@ AzureRM resource.
 
@@ -3362,32 +3305,31 @@ data RedisFirewallRuleResource = RedisFirewallRuleResource {
     {- ^ - The Redis Firewall Rule ID. -}
     } deriving (Show, Eq)
 
-redisFirewallRuleResource :: TF.Resource TF.AzureRM RedisFirewallRuleResource
-redisFirewallRuleResource =
-    TF.newResource "azurerm_redis_firewall_rule" $
-        RedisFirewallRuleResource {
-            _end_ip = TF.Absent
-            , _name = TF.Absent
-            , _redis_cache_name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _start_ip = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RedisFirewallRuleResource where
-    toHCL RedisFirewallRuleResource{..} = TF.arguments
-        [ TF.assign "end_ip" <$> _end_ip
-        , TF.assign "name" <$> _name
-        , TF.assign "redis_cache_name" <$> _redis_cache_name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "start_ip" <$> _start_ip
+    toHCL RedisFirewallRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "end_ip" <$> TF.argument _end_ip
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "redis_cache_name" <$> TF.argument _redis_cache_name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "start_ip" <$> TF.argument _start_ip
         ]
 
 $(TF.makeSchemaLenses
     ''RedisFirewallRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+redisFirewallRuleResource :: TF.Resource TF.AzureRM RedisFirewallRuleResource
+redisFirewallRuleResource =
+    TF.newResource "azurerm_redis_firewall_rule" $
+        RedisFirewallRuleResource {
+            _end_ip = TF.Nil
+            , _name = TF.Nil
+            , _redis_cache_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _start_ip = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_resource_group@ AzureRM resource.
 
@@ -3404,28 +3346,27 @@ data ResourceGroupResource = ResourceGroupResource {
     {- ^ - The resource group ID. -}
     } deriving (Show, Eq)
 
-resourceGroupResource :: TF.Resource TF.AzureRM ResourceGroupResource
-resourceGroupResource =
-    TF.newResource "azurerm_resource_group" $
-        ResourceGroupResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ResourceGroupResource where
-    toHCL ResourceGroupResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
+    toHCL ResourceGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ResourceGroupResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+resourceGroupResource :: TF.Resource TF.AzureRM ResourceGroupResource
+resourceGroupResource =
+    TF.newResource "azurerm_resource_group" $
+        ResourceGroupResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_role_assignment@ AzureRM resource.
 
@@ -3444,30 +3385,29 @@ data RoleAssignmentResource = RoleAssignmentResource {
     {- ^ - The Role Assignment ID. -}
     } deriving (Show, Eq)
 
-roleAssignmentResource :: TF.Resource TF.AzureRM RoleAssignmentResource
-roleAssignmentResource =
-    TF.newResource "azurerm_role_assignment" $
-        RoleAssignmentResource {
-            _name = TF.Absent
-            , _principal_id = TF.Absent
-            , _role_definition_id = TF.Absent
-            , _scope = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RoleAssignmentResource where
-    toHCL RoleAssignmentResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "principal_id" <$> _principal_id
-        , TF.assign "role_definition_id" <$> _role_definition_id
-        , TF.assign "scope" <$> _scope
+    toHCL RoleAssignmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "principal_id" <$> TF.argument _principal_id
+        , TF.assign "role_definition_id" <$> TF.argument _role_definition_id
+        , TF.assign "scope" <$> TF.argument _scope
         ]
 
 $(TF.makeSchemaLenses
     ''RoleAssignmentResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+roleAssignmentResource :: TF.Resource TF.AzureRM RoleAssignmentResource
+roleAssignmentResource =
+    TF.newResource "azurerm_role_assignment" $
+        RoleAssignmentResource {
+            _name = TF.Nil
+            , _principal_id = TF.Nil
+            , _role_definition_id = TF.Nil
+            , _scope = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_role_definition@ AzureRM resource.
 
@@ -3490,34 +3430,33 @@ data RoleDefinitionResource = RoleDefinitionResource {
     {- ^ - The Role Definition ID. -}
     } deriving (Show, Eq)
 
-roleDefinitionResource :: TF.Resource TF.AzureRM RoleDefinitionResource
-roleDefinitionResource =
-    TF.newResource "azurerm_role_definition" $
-        RoleDefinitionResource {
-            _assignable_scopes = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _permissions = TF.Absent
-            , _role_definition_id = TF.Absent
-            , _scope = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RoleDefinitionResource where
-    toHCL RoleDefinitionResource{..} = TF.arguments
-        [ TF.assign "assignable_scopes" <$> _assignable_scopes
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "permissions" <$> _permissions
-        , TF.assign "role_definition_id" <$> _role_definition_id
-        , TF.assign "scope" <$> _scope
+    toHCL RoleDefinitionResource{..} = TF.block $ catMaybes
+        [ TF.assign "assignable_scopes" <$> TF.argument _assignable_scopes
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "permissions" <$> TF.argument _permissions
+        , TF.assign "role_definition_id" <$> TF.argument _role_definition_id
+        , TF.assign "scope" <$> TF.argument _scope
         ]
 
 $(TF.makeSchemaLenses
     ''RoleDefinitionResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+roleDefinitionResource :: TF.Resource TF.AzureRM RoleDefinitionResource
+roleDefinitionResource =
+    TF.newResource "azurerm_role_definition" $
+        RoleDefinitionResource {
+            _assignable_scopes = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _permissions = TF.Nil
+            , _role_definition_id = TF.Nil
+            , _scope = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_route@ AzureRM resource.
 
@@ -3540,34 +3479,33 @@ data RouteResource = RouteResource {
     {- ^ - The Route ID. -}
     } deriving (Show, Eq)
 
-routeResource :: TF.Resource TF.AzureRM RouteResource
-routeResource =
-    TF.newResource "azurerm_route" $
-        RouteResource {
-            _address_prefix = TF.Absent
-            , _name = TF.Absent
-            , _next_hop_in_ip_address = TF.Absent
-            , _next_hop_type = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _route_table_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RouteResource where
-    toHCL RouteResource{..} = TF.arguments
-        [ TF.assign "address_prefix" <$> _address_prefix
-        , TF.assign "name" <$> _name
-        , TF.assign "next_hop_in_ip_address" <$> _next_hop_in_ip_address
-        , TF.assign "next_hop_type" <$> _next_hop_type
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "route_table_name" <$> _route_table_name
+    toHCL RouteResource{..} = TF.block $ catMaybes
+        [ TF.assign "address_prefix" <$> TF.argument _address_prefix
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "next_hop_in_ip_address" <$> TF.argument _next_hop_in_ip_address
+        , TF.assign "next_hop_type" <$> TF.argument _next_hop_type
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "route_table_name" <$> TF.argument _route_table_name
         ]
 
 $(TF.makeSchemaLenses
     ''RouteResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+routeResource :: TF.Resource TF.AzureRM RouteResource
+routeResource =
+    TF.newResource "azurerm_route" $
+        RouteResource {
+            _address_prefix = TF.Nil
+            , _name = TF.Nil
+            , _next_hop_in_ip_address = TF.Nil
+            , _next_hop_type = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _route_table_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_route_table@ AzureRM resource.
 
@@ -3590,33 +3528,32 @@ data RouteTableResource = RouteTableResource {
     {- ^ - The collection of Subnets associated with this route table. -}
     } deriving (Show, Eq)
 
-routeTableResource :: TF.Resource TF.AzureRM RouteTableResource
-routeTableResource =
-    TF.newResource "azurerm_route_table" $
-        RouteTableResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _route = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_subnets = TF.Computed "subnets"
-            }
-
 instance TF.ToHCL RouteTableResource where
-    toHCL RouteTableResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "route" <$> _route
-        , TF.assign "tags" <$> _tags
+    toHCL RouteTableResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "route" <$> TF.argument _route
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''RouteTableResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+routeTableResource :: TF.Resource TF.AzureRM RouteTableResource
+routeTableResource =
+    TF.newResource "azurerm_route_table" $
+        RouteTableResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _route = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_subnets = TF.Compute "subnets"
+            }
 
 {- | The @azurerm_search_service@ AzureRM resource.
 
@@ -3641,36 +3578,35 @@ data SearchServiceResource = SearchServiceResource {
     {- ^ - The Search Service ID. -}
     } deriving (Show, Eq)
 
-searchServiceResource :: TF.Resource TF.AzureRM SearchServiceResource
-searchServiceResource =
-    TF.newResource "azurerm_search_service" $
-        SearchServiceResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _partition_count = TF.Absent
-            , _replica_count = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SearchServiceResource where
-    toHCL SearchServiceResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "partition_count" <$> _partition_count
-        , TF.assign "replica_count" <$> _replica_count
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL SearchServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "partition_count" <$> TF.argument _partition_count
+        , TF.assign "replica_count" <$> TF.argument _replica_count
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''SearchServiceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+searchServiceResource :: TF.Resource TF.AzureRM SearchServiceResource
+searchServiceResource =
+    TF.newResource "azurerm_search_service" $
+        SearchServiceResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _partition_count = TF.Nil
+            , _replica_count = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_servicebus_namespace@ AzureRM resource.
 
@@ -3693,34 +3629,33 @@ data ServicebusNamespaceResource = ServicebusNamespaceResource {
     {- ^ - The ServiceBus Namespace ID. -}
     } deriving (Show, Eq)
 
-servicebusNamespaceResource :: TF.Resource TF.AzureRM ServicebusNamespaceResource
-servicebusNamespaceResource =
-    TF.newResource "azurerm_servicebus_namespace" $
-        ServicebusNamespaceResource {
-            _capacity = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _sku = TF.Absent
-            , _tags = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ServicebusNamespaceResource where
-    toHCL ServicebusNamespaceResource{..} = TF.arguments
-        [ TF.assign "capacity" <$> _capacity
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "sku" <$> _sku
-        , TF.assign "tags" <$> _tags
+    toHCL ServicebusNamespaceResource{..} = TF.block $ catMaybes
+        [ TF.assign "capacity" <$> TF.argument _capacity
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ServicebusNamespaceResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+servicebusNamespaceResource :: TF.Resource TF.AzureRM ServicebusNamespaceResource
+servicebusNamespaceResource =
+    TF.newResource "azurerm_servicebus_namespace" $
+        ServicebusNamespaceResource {
+            _capacity = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _sku = TF.Nil
+            , _tags = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_servicebus_queue@ AzureRM resource.
 
@@ -3745,37 +3680,36 @@ data ServicebusQueueResource = ServicebusQueueResource {
     {- ^ (Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-servicebusQueueResource :: TF.Resource TF.AzureRM ServicebusQueueResource
-servicebusQueueResource =
-    TF.newResource "azurerm_servicebus_queue" $
-        ServicebusQueueResource {
-            _auto_delete_on_idle = TF.Absent
-            , _default_message_ttl = TF.Absent
-            , _duplicate_detection_history_time_window = TF.Absent
-            , _enable_express = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _namespace_name = TF.Absent
-            , _resource_group_name = TF.Absent
-            }
-
 instance TF.ToHCL ServicebusQueueResource where
-    toHCL ServicebusQueueResource{..} = TF.arguments
-        [ TF.assign "auto_delete_on_idle" <$> _auto_delete_on_idle
-        , TF.assign "default_message_ttl" <$> _default_message_ttl
-        , TF.assign "duplicate_detection_history_time_window" <$> _duplicate_detection_history_time_window
-        , TF.assign "enable_express" <$> _enable_express
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_name" <$> _namespace_name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL ServicebusQueueResource{..} = TF.block $ catMaybes
+        [ TF.assign "auto_delete_on_idle" <$> TF.argument _auto_delete_on_idle
+        , TF.assign "default_message_ttl" <$> TF.argument _default_message_ttl
+        , TF.assign "duplicate_detection_history_time_window" <$> TF.argument _duplicate_detection_history_time_window
+        , TF.assign "enable_express" <$> TF.argument _enable_express
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_name" <$> TF.argument _namespace_name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''ServicebusQueueResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+servicebusQueueResource :: TF.Resource TF.AzureRM ServicebusQueueResource
+servicebusQueueResource =
+    TF.newResource "azurerm_servicebus_queue" $
+        ServicebusQueueResource {
+            _auto_delete_on_idle = TF.Nil
+            , _default_message_ttl = TF.Nil
+            , _duplicate_detection_history_time_window = TF.Nil
+            , _enable_express = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
 
 {- | The @azurerm_servicebus_subscription@ AzureRM resource.
 
@@ -3808,45 +3742,44 @@ data ServicebusSubscriptionResource = ServicebusSubscriptionResource {
     {- ^ (Required) The name of the ServiceBus Topic to create this Subscription in. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-servicebusSubscriptionResource :: TF.Resource TF.AzureRM ServicebusSubscriptionResource
-servicebusSubscriptionResource =
-    TF.newResource "azurerm_servicebus_subscription" $
-        ServicebusSubscriptionResource {
-            _auto_delete_on_idle = TF.Absent
-            , _dead_lettering_on_message_expiration = TF.Absent
-            , _default_message_ttl = TF.Absent
-            , _enable_batched_operations = TF.Absent
-            , _location = TF.Absent
-            , _lock_duration = TF.Absent
-            , _max_delivery_count = TF.Absent
-            , _name = TF.Absent
-            , _namespace_name = TF.Absent
-            , _requires_session = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _topic_name = TF.Absent
-            }
-
 instance TF.ToHCL ServicebusSubscriptionResource where
-    toHCL ServicebusSubscriptionResource{..} = TF.arguments
-        [ TF.assign "auto_delete_on_idle" <$> _auto_delete_on_idle
-        , TF.assign "dead_lettering_on_message_expiration" <$> _dead_lettering_on_message_expiration
-        , TF.assign "default_message_ttl" <$> _default_message_ttl
-        , TF.assign "enable_batched_operations" <$> _enable_batched_operations
-        , TF.assign "location" <$> _location
-        , TF.assign "lock_duration" <$> _lock_duration
-        , TF.assign "max_delivery_count" <$> _max_delivery_count
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_name" <$> _namespace_name
-        , TF.assign "requires_session" <$> _requires_session
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "topic_name" <$> _topic_name
+    toHCL ServicebusSubscriptionResource{..} = TF.block $ catMaybes
+        [ TF.assign "auto_delete_on_idle" <$> TF.argument _auto_delete_on_idle
+        , TF.assign "dead_lettering_on_message_expiration" <$> TF.argument _dead_lettering_on_message_expiration
+        , TF.assign "default_message_ttl" <$> TF.argument _default_message_ttl
+        , TF.assign "enable_batched_operations" <$> TF.argument _enable_batched_operations
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "lock_duration" <$> TF.argument _lock_duration
+        , TF.assign "max_delivery_count" <$> TF.argument _max_delivery_count
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_name" <$> TF.argument _namespace_name
+        , TF.assign "requires_session" <$> TF.argument _requires_session
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "topic_name" <$> TF.argument _topic_name
         ]
 
 $(TF.makeSchemaLenses
     ''ServicebusSubscriptionResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+servicebusSubscriptionResource :: TF.Resource TF.AzureRM ServicebusSubscriptionResource
+servicebusSubscriptionResource =
+    TF.newResource "azurerm_servicebus_subscription" $
+        ServicebusSubscriptionResource {
+            _auto_delete_on_idle = TF.Nil
+            , _dead_lettering_on_message_expiration = TF.Nil
+            , _default_message_ttl = TF.Nil
+            , _enable_batched_operations = TF.Nil
+            , _location = TF.Nil
+            , _lock_duration = TF.Nil
+            , _max_delivery_count = TF.Nil
+            , _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _requires_session = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _topic_name = TF.Nil
+            }
 
 {- | The @azurerm_servicebus_topic@ AzureRM resource.
 
@@ -3884,49 +3817,48 @@ data ServicebusTopicResource = ServicebusTopicResource {
     {- ^ (Optional) Boolean flag which controls whether the Topic supports ordering. Defaults to false. -}
     } deriving (Show, Eq)
 
-servicebusTopicResource :: TF.Resource TF.AzureRM ServicebusTopicResource
-servicebusTopicResource =
-    TF.newResource "azurerm_servicebus_topic" $
-        ServicebusTopicResource {
-            _auto_delete_on_idle = TF.Absent
-            , _default_message_ttl = TF.Absent
-            , _duplicate_detection_history_time_window = TF.Absent
-            , _enable_batched_operations = TF.Absent
-            , _enable_express = TF.Absent
-            , _enable_partitioning = TF.Absent
-            , _location = TF.Absent
-            , _max_size_in_megabytes = TF.Absent
-            , _name = TF.Absent
-            , _namespace_name = TF.Absent
-            , _requires_duplicate_detection = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _status = TF.Absent
-            , _support_ordering = TF.Absent
-            }
-
 instance TF.ToHCL ServicebusTopicResource where
-    toHCL ServicebusTopicResource{..} = TF.arguments
-        [ TF.assign "auto_delete_on_idle" <$> _auto_delete_on_idle
-        , TF.assign "default_message_ttl" <$> _default_message_ttl
-        , TF.assign "duplicate_detection_history_time_window" <$> _duplicate_detection_history_time_window
-        , TF.assign "enable_batched_operations" <$> _enable_batched_operations
-        , TF.assign "enable_express" <$> _enable_express
-        , TF.assign "enable_partitioning" <$> _enable_partitioning
-        , TF.assign "location" <$> _location
-        , TF.assign "max_size_in_megabytes" <$> _max_size_in_megabytes
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_name" <$> _namespace_name
-        , TF.assign "requires_duplicate_detection" <$> _requires_duplicate_detection
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "status" <$> _status
-        , TF.assign "support_ordering" <$> _support_ordering
+    toHCL ServicebusTopicResource{..} = TF.block $ catMaybes
+        [ TF.assign "auto_delete_on_idle" <$> TF.argument _auto_delete_on_idle
+        , TF.assign "default_message_ttl" <$> TF.argument _default_message_ttl
+        , TF.assign "duplicate_detection_history_time_window" <$> TF.argument _duplicate_detection_history_time_window
+        , TF.assign "enable_batched_operations" <$> TF.argument _enable_batched_operations
+        , TF.assign "enable_express" <$> TF.argument _enable_express
+        , TF.assign "enable_partitioning" <$> TF.argument _enable_partitioning
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "max_size_in_megabytes" <$> TF.argument _max_size_in_megabytes
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_name" <$> TF.argument _namespace_name
+        , TF.assign "requires_duplicate_detection" <$> TF.argument _requires_duplicate_detection
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "support_ordering" <$> TF.argument _support_ordering
         ]
 
 $(TF.makeSchemaLenses
     ''ServicebusTopicResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+servicebusTopicResource :: TF.Resource TF.AzureRM ServicebusTopicResource
+servicebusTopicResource =
+    TF.newResource "azurerm_servicebus_topic" $
+        ServicebusTopicResource {
+            _auto_delete_on_idle = TF.Nil
+            , _default_message_ttl = TF.Nil
+            , _duplicate_detection_history_time_window = TF.Nil
+            , _enable_batched_operations = TF.Nil
+            , _enable_express = TF.Nil
+            , _enable_partitioning = TF.Nil
+            , _location = TF.Nil
+            , _max_size_in_megabytes = TF.Nil
+            , _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _requires_duplicate_detection = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _status = TF.Nil
+            , _support_ordering = TF.Nil
+            }
 
 {- | The @azurerm_snapshot@ AzureRM resource.
 
@@ -3947,31 +3879,30 @@ data SnapshotResource = SnapshotResource {
     {- ^ - The Snapshot ID. -}
     } deriving (Show, Eq)
 
-snapshotResource :: TF.Resource TF.AzureRM SnapshotResource
-snapshotResource =
-    TF.newResource "azurerm_snapshot" $
-        SnapshotResource {
-            _create_option = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_disk_size_gb = TF.Computed "disk_size_gb"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SnapshotResource where
-    toHCL SnapshotResource{..} = TF.arguments
-        [ TF.assign "create_option" <$> _create_option
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL SnapshotResource{..} = TF.block $ catMaybes
+        [ TF.assign "create_option" <$> TF.argument _create_option
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''SnapshotResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+snapshotResource :: TF.Resource TF.AzureRM SnapshotResource
+snapshotResource =
+    TF.newResource "azurerm_snapshot" $
+        SnapshotResource {
+            _create_option = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_disk_size_gb = TF.Compute "disk_size_gb"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_sql_database@ AzureRM resource.
 
@@ -4016,54 +3947,53 @@ data SqlDatabaseResource = SqlDatabaseResource {
     {- ^ - The SQL Database ID. -}
     } deriving (Show, Eq)
 
-sqlDatabaseResource :: TF.Resource TF.AzureRM SqlDatabaseResource
-sqlDatabaseResource =
-    TF.newResource "azurerm_sql_database" $
-        SqlDatabaseResource {
-            _collation = TF.Absent
-            , _create_mode = TF.Absent
-            , _edition = TF.Absent
-            , _elastic_pool_name = TF.Absent
-            , _location = TF.Absent
-            , _max_size_bytes = TF.Absent
-            , _name = TF.Absent
-            , _requested_service_objective_id = TF.Absent
-            , _requested_service_objective_name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _restore_point_in_time = TF.Absent
-            , _server_name = TF.Absent
-            , _source_database_deletion_date = TF.Absent
-            , _source_database_id = TF.Absent
-            , _tags = TF.Absent
-            , _computed_creation_data = TF.Computed "creation_data"
-            , _computed_default_secondary_location = TF.Computed "default_secondary_location"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SqlDatabaseResource where
-    toHCL SqlDatabaseResource{..} = TF.arguments
-        [ TF.assign "collation" <$> _collation
-        , TF.assign "create_mode" <$> _create_mode
-        , TF.assign "edition" <$> _edition
-        , TF.assign "elastic_pool_name" <$> _elastic_pool_name
-        , TF.assign "location" <$> _location
-        , TF.assign "max_size_bytes" <$> _max_size_bytes
-        , TF.assign "name" <$> _name
-        , TF.assign "requested_service_objective_id" <$> _requested_service_objective_id
-        , TF.assign "requested_service_objective_name" <$> _requested_service_objective_name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "restore_point_in_time" <$> _restore_point_in_time
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "source_database_deletion_date" <$> _source_database_deletion_date
-        , TF.assign "source_database_id" <$> _source_database_id
-        , TF.assign "tags" <$> _tags
+    toHCL SqlDatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "collation" <$> TF.argument _collation
+        , TF.assign "create_mode" <$> TF.argument _create_mode
+        , TF.assign "edition" <$> TF.argument _edition
+        , TF.assign "elastic_pool_name" <$> TF.argument _elastic_pool_name
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "max_size_bytes" <$> TF.argument _max_size_bytes
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "requested_service_objective_id" <$> TF.argument _requested_service_objective_id
+        , TF.assign "requested_service_objective_name" <$> TF.argument _requested_service_objective_name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "restore_point_in_time" <$> TF.argument _restore_point_in_time
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "source_database_deletion_date" <$> TF.argument _source_database_deletion_date
+        , TF.assign "source_database_id" <$> TF.argument _source_database_id
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''SqlDatabaseResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sqlDatabaseResource :: TF.Resource TF.AzureRM SqlDatabaseResource
+sqlDatabaseResource =
+    TF.newResource "azurerm_sql_database" $
+        SqlDatabaseResource {
+            _collation = TF.Nil
+            , _create_mode = TF.Nil
+            , _edition = TF.Nil
+            , _elastic_pool_name = TF.Nil
+            , _location = TF.Nil
+            , _max_size_bytes = TF.Nil
+            , _name = TF.Nil
+            , _requested_service_objective_id = TF.Nil
+            , _requested_service_objective_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _restore_point_in_time = TF.Nil
+            , _server_name = TF.Nil
+            , _source_database_deletion_date = TF.Nil
+            , _source_database_id = TF.Nil
+            , _tags = TF.Nil
+            , _computed_creation_data = TF.Compute "creation_data"
+            , _computed_default_secondary_location = TF.Compute "default_secondary_location"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_sql_elasticpool@ AzureRM resource.
 
@@ -4096,43 +4026,42 @@ data SqlElasticpoolResource = SqlElasticpoolResource {
     {- ^ - The SQL Elastic Pool ID. -}
     } deriving (Show, Eq)
 
-sqlElasticpoolResource :: TF.Resource TF.AzureRM SqlElasticpoolResource
-sqlElasticpoolResource =
-    TF.newResource "azurerm_sql_elasticpool" $
-        SqlElasticpoolResource {
-            _db_dtu_max = TF.Absent
-            , _db_dtu_min = TF.Absent
-            , _dtu = TF.Absent
-            , _edition = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _pool_size = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_creation_date = TF.Computed "creation_date"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SqlElasticpoolResource where
-    toHCL SqlElasticpoolResource{..} = TF.arguments
-        [ TF.assign "db_dtu_max" <$> _db_dtu_max
-        , TF.assign "db_dtu_min" <$> _db_dtu_min
-        , TF.assign "dtu" <$> _dtu
-        , TF.assign "edition" <$> _edition
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "pool_size" <$> _pool_size
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "tags" <$> _tags
+    toHCL SqlElasticpoolResource{..} = TF.block $ catMaybes
+        [ TF.assign "db_dtu_max" <$> TF.argument _db_dtu_max
+        , TF.assign "db_dtu_min" <$> TF.argument _db_dtu_min
+        , TF.assign "dtu" <$> TF.argument _dtu
+        , TF.assign "edition" <$> TF.argument _edition
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "pool_size" <$> TF.argument _pool_size
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''SqlElasticpoolResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sqlElasticpoolResource :: TF.Resource TF.AzureRM SqlElasticpoolResource
+sqlElasticpoolResource =
+    TF.newResource "azurerm_sql_elasticpool" $
+        SqlElasticpoolResource {
+            _db_dtu_max = TF.Nil
+            , _db_dtu_min = TF.Nil
+            , _dtu = TF.Nil
+            , _edition = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _pool_size = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_creation_date = TF.Compute "creation_date"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_sql_firewall_rule@ AzureRM resource.
 
@@ -4153,32 +4082,31 @@ data SqlFirewallRuleResource = SqlFirewallRuleResource {
     {- ^ - The SQL Firewall Rule ID. -}
     } deriving (Show, Eq)
 
-sqlFirewallRuleResource :: TF.Resource TF.AzureRM SqlFirewallRuleResource
-sqlFirewallRuleResource =
-    TF.newResource "azurerm_sql_firewall_rule" $
-        SqlFirewallRuleResource {
-            _end_ip_address = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _server_name = TF.Absent
-            , _start_ip_address = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SqlFirewallRuleResource where
-    toHCL SqlFirewallRuleResource{..} = TF.arguments
-        [ TF.assign "end_ip_address" <$> _end_ip_address
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "server_name" <$> _server_name
-        , TF.assign "start_ip_address" <$> _start_ip_address
+    toHCL SqlFirewallRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "end_ip_address" <$> TF.argument _end_ip_address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "server_name" <$> TF.argument _server_name
+        , TF.assign "start_ip_address" <$> TF.argument _start_ip_address
         ]
 
 $(TF.makeSchemaLenses
     ''SqlFirewallRuleResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sqlFirewallRuleResource :: TF.Resource TF.AzureRM SqlFirewallRuleResource
+sqlFirewallRuleResource =
+    TF.newResource "azurerm_sql_firewall_rule" $
+        SqlFirewallRuleResource {
+            _end_ip_address = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _server_name = TF.Nil
+            , _start_ip_address = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_sql_server@ AzureRM resource.
 
@@ -4207,37 +4135,36 @@ data SqlServerResource = SqlServerResource {
     {- ^ - The SQL Server ID. -}
     } deriving (Show, Eq)
 
-sqlServerResource :: TF.Resource TF.AzureRM SqlServerResource
-sqlServerResource =
-    TF.newResource "azurerm_sql_server" $
-        SqlServerResource {
-            _administrator_login = TF.Absent
-            , _administrator_login_password = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _version = TF.Absent
-            , _computed_fully_qualified_domain_name = TF.Computed "fully_qualified_domain_name"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SqlServerResource where
-    toHCL SqlServerResource{..} = TF.arguments
-        [ TF.assign "administrator_login" <$> _administrator_login
-        , TF.assign "administrator_login_password" <$> _administrator_login_password
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "version" <$> _version
+    toHCL SqlServerResource{..} = TF.block $ catMaybes
+        [ TF.assign "administrator_login" <$> TF.argument _administrator_login
+        , TF.assign "administrator_login_password" <$> TF.argument _administrator_login_password
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''SqlServerResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sqlServerResource :: TF.Resource TF.AzureRM SqlServerResource
+sqlServerResource =
+    TF.newResource "azurerm_sql_server" $
+        SqlServerResource {
+            _administrator_login = TF.Nil
+            , _administrator_login_password = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _version = TF.Nil
+            , _computed_fully_qualified_domain_name = TF.Compute "fully_qualified_domain_name"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_storage_account@ AzureRM resource.
 
@@ -4302,63 +4229,62 @@ data StorageAccountResource = StorageAccountResource {
     {- ^ - The endpoint URL for table storage in the secondary location. -}
     } deriving (Show, Eq)
 
-storageAccountResource :: TF.Resource TF.AzureRM StorageAccountResource
-storageAccountResource =
-    TF.newResource "azurerm_storage_account" $
-        StorageAccountResource {
-            _access_tier = TF.Absent
-            , _account_encryption_source = TF.Absent
-            , _account_kind = TF.Absent
-            , _account_replication_type = TF.Absent
-            , _account_tier = TF.Absent
-            , _custom_domain = TF.Absent
-            , _enable_blob_encryption = TF.Absent
-            , _enable_file_encryption = TF.Absent
-            , _enable_https_traffic_only = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _use_subdomain = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_primary_access_key = TF.Computed "primary_access_key"
-            , _computed_primary_blob_connection_string = TF.Computed "primary_blob_connection_string"
-            , _computed_primary_blob_endpoint = TF.Computed "primary_blob_endpoint"
-            , _computed_primary_file_endpoint = TF.Computed "primary_file_endpoint"
-            , _computed_primary_location = TF.Computed "primary_location"
-            , _computed_primary_queue_endpoint = TF.Computed "primary_queue_endpoint"
-            , _computed_primary_table_endpoint = TF.Computed "primary_table_endpoint"
-            , _computed_secondary_access_key = TF.Computed "secondary_access_key"
-            , _computed_secondary_blob_connection_string = TF.Computed "secondary_blob_connection_string"
-            , _computed_secondary_blob_endpoint = TF.Computed "secondary_blob_endpoint"
-            , _computed_secondary_location = TF.Computed "secondary_location"
-            , _computed_secondary_queue_endpoint = TF.Computed "secondary_queue_endpoint"
-            , _computed_secondary_table_endpoint = TF.Computed "secondary_table_endpoint"
-            }
-
 instance TF.ToHCL StorageAccountResource where
-    toHCL StorageAccountResource{..} = TF.arguments
-        [ TF.assign "access_tier" <$> _access_tier
-        , TF.assign "account_encryption_source" <$> _account_encryption_source
-        , TF.assign "account_kind" <$> _account_kind
-        , TF.assign "account_replication_type" <$> _account_replication_type
-        , TF.assign "account_tier" <$> _account_tier
-        , TF.assign "custom_domain" <$> _custom_domain
-        , TF.assign "enable_blob_encryption" <$> _enable_blob_encryption
-        , TF.assign "enable_file_encryption" <$> _enable_file_encryption
-        , TF.assign "enable_https_traffic_only" <$> _enable_https_traffic_only
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "use_subdomain" <$> _use_subdomain
+    toHCL StorageAccountResource{..} = TF.block $ catMaybes
+        [ TF.assign "access_tier" <$> TF.argument _access_tier
+        , TF.assign "account_encryption_source" <$> TF.argument _account_encryption_source
+        , TF.assign "account_kind" <$> TF.argument _account_kind
+        , TF.assign "account_replication_type" <$> TF.argument _account_replication_type
+        , TF.assign "account_tier" <$> TF.argument _account_tier
+        , TF.assign "custom_domain" <$> TF.argument _custom_domain
+        , TF.assign "enable_blob_encryption" <$> TF.argument _enable_blob_encryption
+        , TF.assign "enable_file_encryption" <$> TF.argument _enable_file_encryption
+        , TF.assign "enable_https_traffic_only" <$> TF.argument _enable_https_traffic_only
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "use_subdomain" <$> TF.argument _use_subdomain
         ]
 
 $(TF.makeSchemaLenses
     ''StorageAccountResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+storageAccountResource :: TF.Resource TF.AzureRM StorageAccountResource
+storageAccountResource =
+    TF.newResource "azurerm_storage_account" $
+        StorageAccountResource {
+            _access_tier = TF.Nil
+            , _account_encryption_source = TF.Nil
+            , _account_kind = TF.Nil
+            , _account_replication_type = TF.Nil
+            , _account_tier = TF.Nil
+            , _custom_domain = TF.Nil
+            , _enable_blob_encryption = TF.Nil
+            , _enable_file_encryption = TF.Nil
+            , _enable_https_traffic_only = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _use_subdomain = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_primary_access_key = TF.Compute "primary_access_key"
+            , _computed_primary_blob_connection_string = TF.Compute "primary_blob_connection_string"
+            , _computed_primary_blob_endpoint = TF.Compute "primary_blob_endpoint"
+            , _computed_primary_file_endpoint = TF.Compute "primary_file_endpoint"
+            , _computed_primary_location = TF.Compute "primary_location"
+            , _computed_primary_queue_endpoint = TF.Compute "primary_queue_endpoint"
+            , _computed_primary_table_endpoint = TF.Compute "primary_table_endpoint"
+            , _computed_secondary_access_key = TF.Compute "secondary_access_key"
+            , _computed_secondary_blob_connection_string = TF.Compute "secondary_blob_connection_string"
+            , _computed_secondary_blob_endpoint = TF.Compute "secondary_blob_endpoint"
+            , _computed_secondary_location = TF.Compute "secondary_location"
+            , _computed_secondary_queue_endpoint = TF.Compute "secondary_queue_endpoint"
+            , _computed_secondary_table_endpoint = TF.Compute "secondary_table_endpoint"
+            }
 
 {- | The @azurerm_storage_blob@ AzureRM resource.
 
@@ -4391,43 +4317,42 @@ data StorageBlobResource = StorageBlobResource {
     {- ^ - The URL of the blob -}
     } deriving (Show, Eq)
 
-storageBlobResource :: TF.Resource TF.AzureRM StorageBlobResource
-storageBlobResource =
-    TF.newResource "azurerm_storage_blob" $
-        StorageBlobResource {
-            _attempts = TF.Absent
-            , _name = TF.Absent
-            , _parallelism = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _size = TF.Absent
-            , _source = TF.Absent
-            , _source_uri = TF.Absent
-            , _storage_account_name = TF.Absent
-            , _storage_container_name = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL StorageBlobResource where
-    toHCL StorageBlobResource{..} = TF.arguments
-        [ TF.assign "attempts" <$> _attempts
-        , TF.assign "name" <$> _name
-        , TF.assign "parallelism" <$> _parallelism
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "size" <$> _size
-        , TF.assign "source" <$> _source
-        , TF.assign "source_uri" <$> _source_uri
-        , TF.assign "storage_account_name" <$> _storage_account_name
-        , TF.assign "storage_container_name" <$> _storage_container_name
-        , TF.assign "type" <$> _type'
+    toHCL StorageBlobResource{..} = TF.block $ catMaybes
+        [ TF.assign "attempts" <$> TF.argument _attempts
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "parallelism" <$> TF.argument _parallelism
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "source" <$> TF.argument _source
+        , TF.assign "source_uri" <$> TF.argument _source_uri
+        , TF.assign "storage_account_name" <$> TF.argument _storage_account_name
+        , TF.assign "storage_container_name" <$> TF.argument _storage_container_name
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''StorageBlobResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+storageBlobResource :: TF.Resource TF.AzureRM StorageBlobResource
+storageBlobResource =
+    TF.newResource "azurerm_storage_blob" $
+        StorageBlobResource {
+            _attempts = TF.Nil
+            , _name = TF.Nil
+            , _parallelism = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _size = TF.Nil
+            , _source = TF.Nil
+            , _source_uri = TF.Nil
+            , _storage_account_name = TF.Nil
+            , _storage_container_name = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_url = TF.Compute "url"
+            }
 
 {- | The @azurerm_storage_container@ AzureRM resource.
 
@@ -4448,31 +4373,30 @@ data StorageContainerResource = StorageContainerResource {
     {- ^ - Key-value definition of additional properties associated to the storage container -}
     } deriving (Show, Eq)
 
-storageContainerResource :: TF.Resource TF.AzureRM StorageContainerResource
-storageContainerResource =
-    TF.newResource "azurerm_storage_container" $
-        StorageContainerResource {
-            _container_access_type = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _storage_account_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_properties = TF.Computed "properties"
-            }
-
 instance TF.ToHCL StorageContainerResource where
-    toHCL StorageContainerResource{..} = TF.arguments
-        [ TF.assign "container_access_type" <$> _container_access_type
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "storage_account_name" <$> _storage_account_name
+    toHCL StorageContainerResource{..} = TF.block $ catMaybes
+        [ TF.assign "container_access_type" <$> TF.argument _container_access_type
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "storage_account_name" <$> TF.argument _storage_account_name
         ]
 
 $(TF.makeSchemaLenses
     ''StorageContainerResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+storageContainerResource :: TF.Resource TF.AzureRM StorageContainerResource
+storageContainerResource =
+    TF.newResource "azurerm_storage_container" $
+        StorageContainerResource {
+            _container_access_type = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _storage_account_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_properties = TF.Compute "properties"
+            }
 
 {- | The @azurerm_storage_queue@ AzureRM resource.
 
@@ -4489,28 +4413,27 @@ data StorageQueueResource = StorageQueueResource {
     {- ^ - The storage queue Resource ID. -}
     } deriving (Show, Eq)
 
-storageQueueResource :: TF.Resource TF.AzureRM StorageQueueResource
-storageQueueResource =
-    TF.newResource "azurerm_storage_queue" $
-        StorageQueueResource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _storage_account_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL StorageQueueResource where
-    toHCL StorageQueueResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "storage_account_name" <$> _storage_account_name
+    toHCL StorageQueueResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "storage_account_name" <$> TF.argument _storage_account_name
         ]
 
 $(TF.makeSchemaLenses
     ''StorageQueueResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+storageQueueResource :: TF.Resource TF.AzureRM StorageQueueResource
+storageQueueResource =
+    TF.newResource "azurerm_storage_queue" $
+        StorageQueueResource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _storage_account_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_storage_share@ AzureRM resource.
 
@@ -4531,31 +4454,30 @@ data StorageShareResource = StorageShareResource {
     {- ^ - The URL of the share -}
     } deriving (Show, Eq)
 
-storageShareResource :: TF.Resource TF.AzureRM StorageShareResource
-storageShareResource =
-    TF.newResource "azurerm_storage_share" $
-        StorageShareResource {
-            _name = TF.Absent
-            , _quota = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _storage_account_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL StorageShareResource where
-    toHCL StorageShareResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "quota" <$> _quota
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "storage_account_name" <$> _storage_account_name
+    toHCL StorageShareResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "quota" <$> TF.argument _quota
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "storage_account_name" <$> TF.argument _storage_account_name
         ]
 
 $(TF.makeSchemaLenses
     ''StorageShareResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+storageShareResource :: TF.Resource TF.AzureRM StorageShareResource
+storageShareResource =
+    TF.newResource "azurerm_storage_share" $
+        StorageShareResource {
+            _name = TF.Nil
+            , _quota = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _storage_account_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_url = TF.Compute "url"
+            }
 
 {- | The @azurerm_storage_table@ AzureRM resource.
 
@@ -4572,28 +4494,27 @@ data StorageTableResource = StorageTableResource {
     {- ^ - The storage table Resource ID. -}
     } deriving (Show, Eq)
 
-storageTableResource :: TF.Resource TF.AzureRM StorageTableResource
-storageTableResource =
-    TF.newResource "azurerm_storage_table" $
-        StorageTableResource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _storage_account_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL StorageTableResource where
-    toHCL StorageTableResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "storage_account_name" <$> _storage_account_name
+    toHCL StorageTableResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "storage_account_name" <$> TF.argument _storage_account_name
         ]
 
 $(TF.makeSchemaLenses
     ''StorageTableResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+storageTableResource :: TF.Resource TF.AzureRM StorageTableResource
+storageTableResource =
+    TF.newResource "azurerm_storage_table" $
+        StorageTableResource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _storage_account_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_subnet@ AzureRM resource.
 
@@ -4632,39 +4553,38 @@ data SubnetResource = SubnetResource {
     {- ^ - The name of the virtual network in which the subnet is created in -}
     } deriving (Show, Eq)
 
-subnetResource :: TF.Resource TF.AzureRM SubnetResource
-subnetResource =
-    TF.newResource "azurerm_subnet" $
-        SubnetResource {
-            _address_prefix = TF.Absent
-            , _name = TF.Absent
-            , _network_security_group_id = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _route_table_id = TF.Absent
-            , _virtual_network_name = TF.Absent
-            , _computed_address_prefix = TF.Computed "address_prefix"
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_configurations = TF.Computed "ip_configurations"
-            , _computed_name = TF.Computed "name"
-            , _computed_resource_group_name = TF.Computed "resource_group_name"
-            , _computed_virtual_network_name = TF.Computed "virtual_network_name"
-            }
-
 instance TF.ToHCL SubnetResource where
-    toHCL SubnetResource{..} = TF.arguments
-        [ TF.assign "address_prefix" <$> _address_prefix
-        , TF.assign "name" <$> _name
-        , TF.assign "network_security_group_id" <$> _network_security_group_id
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "route_table_id" <$> _route_table_id
-        , TF.assign "virtual_network_name" <$> _virtual_network_name
+    toHCL SubnetResource{..} = TF.block $ catMaybes
+        [ TF.assign "address_prefix" <$> TF.argument _address_prefix
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_security_group_id" <$> TF.argument _network_security_group_id
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "route_table_id" <$> TF.argument _route_table_id
+        , TF.assign "virtual_network_name" <$> TF.argument _virtual_network_name
         ]
 
 $(TF.makeSchemaLenses
     ''SubnetResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+subnetResource :: TF.Resource TF.AzureRM SubnetResource
+subnetResource =
+    TF.newResource "azurerm_subnet" $
+        SubnetResource {
+            _address_prefix = TF.Nil
+            , _name = TF.Nil
+            , _network_security_group_id = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _route_table_id = TF.Nil
+            , _virtual_network_name = TF.Nil
+            , _computed_address_prefix = TF.Compute "address_prefix"
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_configurations = TF.Compute "ip_configurations"
+            , _computed_name = TF.Compute "name"
+            , _computed_resource_group_name = TF.Compute "resource_group_name"
+            , _computed_virtual_network_name = TF.Compute "virtual_network_name"
+            }
 
 {- | The @azurerm_template_deployment@ AzureRM resource.
 
@@ -4696,31 +4616,30 @@ data TemplateDeploymentResource = TemplateDeploymentResource {
     {- ^ - A map of supported scalar output types returned from the deployment (currently, Azure Template Deployment outputs of type String, Int and Bool are supported, and are converted to strings - others will be ignored) and can be accessed using @.outputs["name"]@ . -}
     } deriving (Show, Eq)
 
-templateDeploymentResource :: TF.Resource TF.AzureRM TemplateDeploymentResource
-templateDeploymentResource =
-    TF.newResource "azurerm_template_deployment" $
-        TemplateDeploymentResource {
-            _deployment_mode = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _template_body = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_outputs = TF.Computed "outputs"
-            }
-
 instance TF.ToHCL TemplateDeploymentResource where
-    toHCL TemplateDeploymentResource{..} = TF.arguments
-        [ TF.assign "deployment_mode" <$> _deployment_mode
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "template_body" <$> _template_body
+    toHCL TemplateDeploymentResource{..} = TF.block $ catMaybes
+        [ TF.assign "deployment_mode" <$> TF.argument _deployment_mode
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "template_body" <$> TF.argument _template_body
         ]
 
 $(TF.makeSchemaLenses
     ''TemplateDeploymentResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+templateDeploymentResource :: TF.Resource TF.AzureRM TemplateDeploymentResource
+templateDeploymentResource =
+    TF.newResource "azurerm_template_deployment" $
+        TemplateDeploymentResource {
+            _deployment_mode = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _template_body = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_outputs = TF.Compute "outputs"
+            }
 
 {- | The @azurerm_traffic_manager_endpoint@ AzureRM resource.
 
@@ -4753,44 +4672,43 @@ data TrafficManagerEndpointResource = TrafficManagerEndpointResource {
     {- ^ - The Traffic Manager Endpoint id. -}
     } deriving (Show, Eq)
 
-trafficManagerEndpointResource :: TF.Resource TF.AzureRM TrafficManagerEndpointResource
-trafficManagerEndpointResource =
-    TF.newResource "azurerm_traffic_manager_endpoint" $
-        TrafficManagerEndpointResource {
-            _endpoint_location = TF.Absent
-            , _endpoint_status = TF.Absent
-            , _min_child_endpoints = TF.Absent
-            , _name = TF.Absent
-            , _priority = TF.Absent
-            , _profile_name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _target = TF.Absent
-            , _target_resource_id = TF.Absent
-            , _type' = TF.Absent
-            , _weight = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL TrafficManagerEndpointResource where
-    toHCL TrafficManagerEndpointResource{..} = TF.arguments
-        [ TF.assign "endpoint_location" <$> _endpoint_location
-        , TF.assign "endpoint_status" <$> _endpoint_status
-        , TF.assign "min_child_endpoints" <$> _min_child_endpoints
-        , TF.assign "name" <$> _name
-        , TF.assign "priority" <$> _priority
-        , TF.assign "profile_name" <$> _profile_name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "target" <$> _target
-        , TF.assign "target_resource_id" <$> _target_resource_id
-        , TF.assign "type" <$> _type'
-        , TF.assign "weight" <$> _weight
+    toHCL TrafficManagerEndpointResource{..} = TF.block $ catMaybes
+        [ TF.assign "endpoint_location" <$> TF.argument _endpoint_location
+        , TF.assign "endpoint_status" <$> TF.argument _endpoint_status
+        , TF.assign "min_child_endpoints" <$> TF.argument _min_child_endpoints
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "profile_name" <$> TF.argument _profile_name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "target" <$> TF.argument _target
+        , TF.assign "target_resource_id" <$> TF.argument _target_resource_id
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "weight" <$> TF.argument _weight
         ]
 
 $(TF.makeSchemaLenses
     ''TrafficManagerEndpointResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+trafficManagerEndpointResource :: TF.Resource TF.AzureRM TrafficManagerEndpointResource
+trafficManagerEndpointResource =
+    TF.newResource "azurerm_traffic_manager_endpoint" $
+        TrafficManagerEndpointResource {
+            _endpoint_location = TF.Nil
+            , _endpoint_status = TF.Nil
+            , _min_child_endpoints = TF.Nil
+            , _name = TF.Nil
+            , _priority = TF.Nil
+            , _profile_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _target = TF.Nil
+            , _target_resource_id = TF.Nil
+            , _type' = TF.Nil
+            , _weight = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_traffic_manager_profile@ AzureRM resource.
 
@@ -4818,37 +4736,36 @@ data TrafficManagerProfileResource = TrafficManagerProfileResource {
     {- ^ - The Traffic Manager Profile id. -}
     } deriving (Show, Eq)
 
-trafficManagerProfileResource :: TF.Resource TF.AzureRM TrafficManagerProfileResource
-trafficManagerProfileResource =
-    TF.newResource "azurerm_traffic_manager_profile" $
-        TrafficManagerProfileResource {
-            _dns_config = TF.Absent
-            , _monitor_config = TF.Absent
-            , _name = TF.Absent
-            , _profile_status = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _tags = TF.Absent
-            , _traffic_routing_method = TF.Absent
-            , _computed_fqdn = TF.Computed "fqdn"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL TrafficManagerProfileResource where
-    toHCL TrafficManagerProfileResource{..} = TF.arguments
-        [ TF.assign "dns_config" <$> _dns_config
-        , TF.assign "monitor_config" <$> _monitor_config
-        , TF.assign "name" <$> _name
-        , TF.assign "profile_status" <$> _profile_status
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "traffic_routing_method" <$> _traffic_routing_method
+    toHCL TrafficManagerProfileResource{..} = TF.block $ catMaybes
+        [ TF.assign "dns_config" <$> TF.argument _dns_config
+        , TF.assign "monitor_config" <$> TF.argument _monitor_config
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "profile_status" <$> TF.argument _profile_status
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "traffic_routing_method" <$> TF.argument _traffic_routing_method
         ]
 
 $(TF.makeSchemaLenses
     ''TrafficManagerProfileResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+trafficManagerProfileResource :: TF.Resource TF.AzureRM TrafficManagerProfileResource
+trafficManagerProfileResource =
+    TF.newResource "azurerm_traffic_manager_profile" $
+        TrafficManagerProfileResource {
+            _dns_config = TF.Nil
+            , _monitor_config = TF.Nil
+            , _name = TF.Nil
+            , _profile_status = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _tags = TF.Nil
+            , _traffic_routing_method = TF.Nil
+            , _computed_fqdn = TF.Compute "fqdn"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_virtual_machine_extension@ AzureRM resource.
 
@@ -4872,34 +4789,33 @@ data VirtualMachineExtensionResource = VirtualMachineExtensionResource {
     {- ^ - The Virtual Machine Extension ID. -}
     } deriving (Show, Eq)
 
-virtualMachineExtensionResource :: TF.Resource TF.AzureRM VirtualMachineExtensionResource
-virtualMachineExtensionResource =
-    TF.newResource "azurerm_virtual_machine_extension" $
-        VirtualMachineExtensionResource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _publisher = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _type' = TF.Absent
-            , _virtual_machine_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VirtualMachineExtensionResource where
-    toHCL VirtualMachineExtensionResource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "publisher" <$> _publisher
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "type" <$> _type'
-        , TF.assign "virtual_machine_name" <$> _virtual_machine_name
+    toHCL VirtualMachineExtensionResource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "publisher" <$> TF.argument _publisher
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "virtual_machine_name" <$> TF.argument _virtual_machine_name
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualMachineExtensionResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualMachineExtensionResource :: TF.Resource TF.AzureRM VirtualMachineExtensionResource
+virtualMachineExtensionResource =
+    TF.newResource "azurerm_virtual_machine_extension" $
+        VirtualMachineExtensionResource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _publisher = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _type' = TF.Nil
+            , _virtual_machine_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_virtual_machine@ AzureRM resource.
 
@@ -4952,64 +4868,63 @@ data VirtualMachineResource = VirtualMachineResource {
     {- ^ - The virtual machine ID. -}
     } deriving (Show, Eq)
 
-virtualMachineResource :: TF.Resource TF.AzureRM VirtualMachineResource
-virtualMachineResource =
-    TF.newResource "azurerm_virtual_machine" $
-        VirtualMachineResource {
-            _availability_set_id = TF.Absent
-            , _boot_diagnostics = TF.Absent
-            , _delete_data_disks_on_termination = TF.Absent
-            , _delete_os_disk_on_termination = TF.Absent
-            , _identity = TF.Absent
-            , _license_type = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _network_interface_ids = TF.Absent
-            , _os_profile = TF.Absent
-            , _os_profile_linux_config = TF.Absent
-            , _os_profile_secrets = TF.Absent
-            , _os_profile_windows_config = TF.Absent
-            , _plan = TF.Absent
-            , _primary_network_interface_id = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _storage_data_disk = TF.Absent
-            , _storage_image_reference = TF.Absent
-            , _storage_os_disk = TF.Absent
-            , _tags = TF.Absent
-            , _vm_size = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VirtualMachineResource where
-    toHCL VirtualMachineResource{..} = TF.arguments
-        [ TF.assign "availability_set_id" <$> _availability_set_id
-        , TF.assign "boot_diagnostics" <$> _boot_diagnostics
-        , TF.assign "delete_data_disks_on_termination" <$> _delete_data_disks_on_termination
-        , TF.assign "delete_os_disk_on_termination" <$> _delete_os_disk_on_termination
-        , TF.assign "identity" <$> _identity
-        , TF.assign "license_type" <$> _license_type
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "network_interface_ids" <$> _network_interface_ids
-        , TF.assign "os_profile" <$> _os_profile
-        , TF.assign "os_profile_linux_config" <$> _os_profile_linux_config
-        , TF.assign "os_profile_secrets" <$> _os_profile_secrets
-        , TF.assign "os_profile_windows_config" <$> _os_profile_windows_config
-        , TF.assign "plan" <$> _plan
-        , TF.assign "primary_network_interface_id" <$> _primary_network_interface_id
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "storage_data_disk" <$> _storage_data_disk
-        , TF.assign "storage_image_reference" <$> _storage_image_reference
-        , TF.assign "storage_os_disk" <$> _storage_os_disk
-        , TF.assign "tags" <$> _tags
-        , TF.assign "vm_size" <$> _vm_size
+    toHCL VirtualMachineResource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_set_id" <$> TF.argument _availability_set_id
+        , TF.assign "boot_diagnostics" <$> TF.argument _boot_diagnostics
+        , TF.assign "delete_data_disks_on_termination" <$> TF.argument _delete_data_disks_on_termination
+        , TF.assign "delete_os_disk_on_termination" <$> TF.argument _delete_os_disk_on_termination
+        , TF.assign "identity" <$> TF.argument _identity
+        , TF.assign "license_type" <$> TF.argument _license_type
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_interface_ids" <$> TF.argument _network_interface_ids
+        , TF.assign "os_profile" <$> TF.argument _os_profile
+        , TF.assign "os_profile_linux_config" <$> TF.argument _os_profile_linux_config
+        , TF.assign "os_profile_secrets" <$> TF.argument _os_profile_secrets
+        , TF.assign "os_profile_windows_config" <$> TF.argument _os_profile_windows_config
+        , TF.assign "plan" <$> TF.argument _plan
+        , TF.assign "primary_network_interface_id" <$> TF.argument _primary_network_interface_id
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "storage_data_disk" <$> TF.argument _storage_data_disk
+        , TF.assign "storage_image_reference" <$> TF.argument _storage_image_reference
+        , TF.assign "storage_os_disk" <$> TF.argument _storage_os_disk
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "vm_size" <$> TF.argument _vm_size
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualMachineResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualMachineResource :: TF.Resource TF.AzureRM VirtualMachineResource
+virtualMachineResource =
+    TF.newResource "azurerm_virtual_machine" $
+        VirtualMachineResource {
+            _availability_set_id = TF.Nil
+            , _boot_diagnostics = TF.Nil
+            , _delete_data_disks_on_termination = TF.Nil
+            , _delete_os_disk_on_termination = TF.Nil
+            , _identity = TF.Nil
+            , _license_type = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _network_interface_ids = TF.Nil
+            , _os_profile = TF.Nil
+            , _os_profile_linux_config = TF.Nil
+            , _os_profile_secrets = TF.Nil
+            , _os_profile_windows_config = TF.Nil
+            , _plan = TF.Nil
+            , _primary_network_interface_id = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _storage_data_disk = TF.Nil
+            , _storage_image_reference = TF.Nil
+            , _storage_os_disk = TF.Nil
+            , _tags = TF.Nil
+            , _vm_size = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_virtual_machine_scale_set@ AzureRM resource.
 
@@ -5058,59 +4973,58 @@ data VirtualMachineScaleSetResource = VirtualMachineScaleSetResource {
     {- ^ (Required) Specifies the mode of an upgrade to virtual machines in the scale set. Possible values, @Manual@ or @Automatic@ . -}
     } deriving (Show, Eq)
 
-virtualMachineScaleSetResource :: TF.Resource TF.AzureRM VirtualMachineScaleSetResource
-virtualMachineScaleSetResource =
-    TF.newResource "azurerm_virtual_machine_scale_set" $
-        VirtualMachineScaleSetResource {
-            _boot_diagnostics = TF.Absent
-            , _extension = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _network_profile = TF.Absent
-            , _os_profile = TF.Absent
-            , _os_profile_linux_config = TF.Absent
-            , _os_profile_secrets = TF.Absent
-            , _os_profile_windows_config = TF.Absent
-            , _overprovision = TF.Absent
-            , _plan = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _single_placement_group = TF.Absent
-            , _sku = TF.Absent
-            , _storage_profile_data_disk = TF.Absent
-            , _storage_profile_image_reference = TF.Absent
-            , _storage_profile_os_disk = TF.Absent
-            , _tags = TF.Absent
-            , _upgrade_policy_mode = TF.Absent
-            }
-
 instance TF.ToHCL VirtualMachineScaleSetResource where
-    toHCL VirtualMachineScaleSetResource{..} = TF.arguments
-        [ TF.assign "boot_diagnostics" <$> _boot_diagnostics
-        , TF.assign "extension" <$> _extension
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "network_profile" <$> _network_profile
-        , TF.assign "os_profile" <$> _os_profile
-        , TF.assign "os_profile_linux_config" <$> _os_profile_linux_config
-        , TF.assign "os_profile_secrets" <$> _os_profile_secrets
-        , TF.assign "os_profile_windows_config" <$> _os_profile_windows_config
-        , TF.assign "overprovision" <$> _overprovision
-        , TF.assign "plan" <$> _plan
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "single_placement_group" <$> _single_placement_group
-        , TF.assign "sku" <$> _sku
-        , TF.assign "storage_profile_data_disk" <$> _storage_profile_data_disk
-        , TF.assign "storage_profile_image_reference" <$> _storage_profile_image_reference
-        , TF.assign "storage_profile_os_disk" <$> _storage_profile_os_disk
-        , TF.assign "tags" <$> _tags
-        , TF.assign "upgrade_policy_mode" <$> _upgrade_policy_mode
+    toHCL VirtualMachineScaleSetResource{..} = TF.block $ catMaybes
+        [ TF.assign "boot_diagnostics" <$> TF.argument _boot_diagnostics
+        , TF.assign "extension" <$> TF.argument _extension
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_profile" <$> TF.argument _network_profile
+        , TF.assign "os_profile" <$> TF.argument _os_profile
+        , TF.assign "os_profile_linux_config" <$> TF.argument _os_profile_linux_config
+        , TF.assign "os_profile_secrets" <$> TF.argument _os_profile_secrets
+        , TF.assign "os_profile_windows_config" <$> TF.argument _os_profile_windows_config
+        , TF.assign "overprovision" <$> TF.argument _overprovision
+        , TF.assign "plan" <$> TF.argument _plan
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "single_placement_group" <$> TF.argument _single_placement_group
+        , TF.assign "sku" <$> TF.argument _sku
+        , TF.assign "storage_profile_data_disk" <$> TF.argument _storage_profile_data_disk
+        , TF.assign "storage_profile_image_reference" <$> TF.argument _storage_profile_image_reference
+        , TF.assign "storage_profile_os_disk" <$> TF.argument _storage_profile_os_disk
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "upgrade_policy_mode" <$> TF.argument _upgrade_policy_mode
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualMachineScaleSetResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualMachineScaleSetResource :: TF.Resource TF.AzureRM VirtualMachineScaleSetResource
+virtualMachineScaleSetResource =
+    TF.newResource "azurerm_virtual_machine_scale_set" $
+        VirtualMachineScaleSetResource {
+            _boot_diagnostics = TF.Nil
+            , _extension = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _network_profile = TF.Nil
+            , _os_profile = TF.Nil
+            , _os_profile_linux_config = TF.Nil
+            , _os_profile_secrets = TF.Nil
+            , _os_profile_windows_config = TF.Nil
+            , _overprovision = TF.Nil
+            , _plan = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _single_placement_group = TF.Nil
+            , _sku = TF.Nil
+            , _storage_profile_data_disk = TF.Nil
+            , _storage_profile_image_reference = TF.Nil
+            , _storage_profile_os_disk = TF.Nil
+            , _tags = TF.Nil
+            , _upgrade_policy_mode = TF.Nil
+            }
 
 {- | The @azurerm_virtual_network_peering@ AzureRM resource.
 
@@ -5138,38 +5052,37 @@ data VirtualNetworkPeeringResource = VirtualNetworkPeeringResource {
     {- ^ - The Virtual Network Peering resource ID. -}
     } deriving (Show, Eq)
 
-virtualNetworkPeeringResource :: TF.Resource TF.AzureRM VirtualNetworkPeeringResource
-virtualNetworkPeeringResource =
-    TF.newResource "azurerm_virtual_network_peering" $
-        VirtualNetworkPeeringResource {
-            _allow_forwarded_traffic = TF.Absent
-            , _allow_gateway_transit = TF.Absent
-            , _allow_virtual_network_access = TF.Absent
-            , _name = TF.Absent
-            , _remote_virtual_network_id = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _use_remote_gateways = TF.Absent
-            , _virtual_network_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VirtualNetworkPeeringResource where
-    toHCL VirtualNetworkPeeringResource{..} = TF.arguments
-        [ TF.assign "allow_forwarded_traffic" <$> _allow_forwarded_traffic
-        , TF.assign "allow_gateway_transit" <$> _allow_gateway_transit
-        , TF.assign "allow_virtual_network_access" <$> _allow_virtual_network_access
-        , TF.assign "name" <$> _name
-        , TF.assign "remote_virtual_network_id" <$> _remote_virtual_network_id
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "use_remote_gateways" <$> _use_remote_gateways
-        , TF.assign "virtual_network_name" <$> _virtual_network_name
+    toHCL VirtualNetworkPeeringResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_forwarded_traffic" <$> TF.argument _allow_forwarded_traffic
+        , TF.assign "allow_gateway_transit" <$> TF.argument _allow_gateway_transit
+        , TF.assign "allow_virtual_network_access" <$> TF.argument _allow_virtual_network_access
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "remote_virtual_network_id" <$> TF.argument _remote_virtual_network_id
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "use_remote_gateways" <$> TF.argument _use_remote_gateways
+        , TF.assign "virtual_network_name" <$> TF.argument _virtual_network_name
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualNetworkPeeringResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualNetworkPeeringResource :: TF.Resource TF.AzureRM VirtualNetworkPeeringResource
+virtualNetworkPeeringResource =
+    TF.newResource "azurerm_virtual_network_peering" $
+        VirtualNetworkPeeringResource {
+            _allow_forwarded_traffic = TF.Nil
+            , _allow_gateway_transit = TF.Nil
+            , _allow_virtual_network_access = TF.Nil
+            , _name = TF.Nil
+            , _remote_virtual_network_id = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _use_remote_gateways = TF.Nil
+            , _virtual_network_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @azurerm_virtual_network@ AzureRM resource.
 
@@ -5209,37 +5122,36 @@ data VirtualNetworkResource = VirtualNetworkResource {
     {- ^ - The name of the resource group in which to create the virtual network. -}
     } deriving (Show, Eq)
 
-virtualNetworkResource :: TF.Resource TF.AzureRM VirtualNetworkResource
-virtualNetworkResource =
-    TF.newResource "azurerm_virtual_network" $
-        VirtualNetworkResource {
-            _address_space = TF.Absent
-            , _dns_servers = TF.Absent
-            , _location = TF.Absent
-            , _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _subnet = TF.Absent
-            , _tags = TF.Absent
-            , _computed_address_space = TF.Computed "address_space"
-            , _computed_id = TF.Computed "id"
-            , _computed_location = TF.Computed "location"
-            , _computed_name = TF.Computed "name"
-            , _computed_resource_group_name = TF.Computed "resource_group_name"
-            }
-
 instance TF.ToHCL VirtualNetworkResource where
-    toHCL VirtualNetworkResource{..} = TF.arguments
-        [ TF.assign "address_space" <$> _address_space
-        , TF.assign "dns_servers" <$> _dns_servers
-        , TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "subnet" <$> _subnet
-        , TF.assign "tags" <$> _tags
+    toHCL VirtualNetworkResource{..} = TF.block $ catMaybes
+        [ TF.assign "address_space" <$> TF.argument _address_space
+        , TF.assign "dns_servers" <$> TF.argument _dns_servers
+        , TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "subnet" <$> TF.argument _subnet
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualNetworkResource
     ''TF.AzureRM
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualNetworkResource :: TF.Resource TF.AzureRM VirtualNetworkResource
+virtualNetworkResource =
+    TF.newResource "azurerm_virtual_network" $
+        VirtualNetworkResource {
+            _address_space = TF.Nil
+            , _dns_servers = TF.Nil
+            , _location = TF.Nil
+            , _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _subnet = TF.Nil
+            , _tags = TF.Nil
+            , _computed_address_space = TF.Compute "address_space"
+            , _computed_id = TF.Compute "id"
+            , _computed_location = TF.Compute "location"
+            , _computed_name = TF.Compute "name"
+            , _computed_resource_group_name = TF.Compute "resource_group_name"
+            }

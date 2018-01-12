@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AzureRM.Provider where
+module Terrafomo.AzureRM.Provider
+    ( AzureRM    (..)
+    , HasAzureRM (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.AzureRM.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -36,8 +49,8 @@ for the AzureRM API's. ~> Note: This supercedes the
 Service Management API. Use the navigation to the left to read about the
 available resources.
 -}
-data AzureRM = AzureRM
-    { _client_id                   :: !(TF.Argument Text)
+data AzureRM = AzureRM {
+      _client_id                   :: !(TF.Argument Text)
     {- ^ (Optional) The client ID to use. It can also be sourced from the @ARM_CLIENT_ID@ environment variable. -}
     , _client_secret               :: !(TF.Argument Text)
     {- ^ (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@ environment variable. -}
@@ -56,14 +69,42 @@ data AzureRM = AzureRM
 instance Hashable AzureRM
 
 instance TF.ToHCL AzureRM where
-    toHCL x = TF.arguments
-        [ TF.assign "client_id" <$> _client_id x
-        , TF.assign "client_secret" <$> _client_secret x
-        , TF.assign "environment" <$> _environment x
-        , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
-        , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
-        , TF.assign "subscription_id" <$> _subscription_id x
-        , TF.assign "tenant_id" <$> _tenant_id x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AzureRM))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "client_id" <$> TF.argument (_client_id x)
+            , TF.assign "client_secret" <$> TF.argument (_client_secret x)
+            , TF.assign "environment" <$> TF.argument (_environment x)
+            , TF.assign "skip_credentials_validation" <$> TF.argument (_skip_credentials_validation x)
+            , TF.assign "skip_provider_registration" <$> TF.argument (_skip_provider_registration x)
+            , TF.assign "subscription_id" <$> TF.argument (_subscription_id x)
+            , TF.assign "tenant_id" <$> TF.argument (_tenant_id x)
+            ]
 
-$(TF.makeClassy ''AzureRM)
+instance Semigroup AzureRM where
+    (<>) a b = AzureRM {
+          _client_id = on (<>) _client_id a b
+        , _client_secret = on (<>) _client_secret a b
+        , _environment = on (<>) _environment a b
+        , _skip_credentials_validation = on (<>) _skip_credentials_validation a b
+        , _skip_provider_registration = on (<>) _skip_provider_registration a b
+        , _subscription_id = on (<>) _subscription_id a b
+        , _tenant_id = on (<>) _tenant_id a b
+        }
+
+instance Monoid AzureRM where
+    mappend = (<>)
+    mempty  = AzureRM {
+            _client_id = TF.Nil
+          , _client_secret = TF.Nil
+          , _environment = TF.Nil
+          , _skip_credentials_validation = TF.Nil
+          , _skip_provider_registration = TF.Nil
+          , _subscription_id = TF.Nil
+          , _tenant_id = TF.Nil
+        }
+
+instance TF.IsProvider AzureRM where
+    type ProviderName AzureRM = "azurerm"
+
+$(TF.makeProviderLenses ''AzureRM)

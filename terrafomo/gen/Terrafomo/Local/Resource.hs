@@ -27,10 +27,12 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
+import qualified Terrafomo.Local.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -51,22 +53,21 @@ data FileResource = FileResource {
     {- ^ (Required) The path of the file to create. -}
     } deriving (Show, Eq)
 
-fileResource :: TF.Resource TF.Local FileResource
-fileResource =
-    TF.newResource "local_file" $
-        FileResource {
-            _content = TF.Absent
-            , _filename = TF.Absent
-            }
-
 instance TF.ToHCL FileResource where
-    toHCL FileResource{..} = TF.arguments
-        [ TF.assign "content" <$> _content
-        , TF.assign "filename" <$> _filename
+    toHCL FileResource{..} = TF.block $ catMaybes
+        [ TF.assign "content" <$> TF.argument _content
+        , TF.assign "filename" <$> TF.argument _filename
         ]
 
 $(TF.makeSchemaLenses
     ''FileResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+fileResource :: TF.Resource TF.Local FileResource
+fileResource =
+    TF.newResource "local_file" $
+        FileResource {
+            _content = TF.Nil
+            , _filename = TF.Nil
+            }

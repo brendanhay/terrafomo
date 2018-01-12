@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Spotinst        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Spotinst.Provider as TF
+import qualified Terrafomo.Spotinst.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @spotinst_aws_group@ Spotinst resource.
 
@@ -61,39 +63,38 @@ data AwsGroupResource = AwsGroupResource {
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-awsGroupResource :: TF.Resource TF.Spotinst AwsGroupResource
-awsGroupResource =
-    TF.newResource "spotinst_aws_group" $
-        AwsGroupResource {
-            _capacity = TF.Absent
-            , _description = TF.Absent
-            , _elastic_ips = TF.Absent
-            , _instance_types = TF.Absent
-            , _launch_specification = TF.Absent
-            , _name = TF.Absent
-            , _product = TF.Absent
-            , _strategy = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL AwsGroupResource where
-    toHCL AwsGroupResource{..} = TF.arguments
-        [ TF.assign "capacity" <$> _capacity
-        , TF.assign "description" <$> _description
-        , TF.assign "elastic_ips" <$> _elastic_ips
-        , TF.assign "instance_types" <$> _instance_types
-        , TF.assign "launch_specification" <$> _launch_specification
-        , TF.assign "name" <$> _name
-        , TF.assign "product" <$> _product
-        , TF.assign "strategy" <$> _strategy
-        , TF.assign "tags" <$> _tags
+    toHCL AwsGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "capacity" <$> TF.argument _capacity
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "elastic_ips" <$> TF.argument _elastic_ips
+        , TF.assign "instance_types" <$> TF.argument _instance_types
+        , TF.assign "launch_specification" <$> TF.argument _launch_specification
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "product" <$> TF.argument _product
+        , TF.assign "strategy" <$> TF.argument _strategy
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''AwsGroupResource
     ''TF.Spotinst
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsGroupResource :: TF.Resource TF.Spotinst AwsGroupResource
+awsGroupResource =
+    TF.newResource "spotinst_aws_group" $
+        AwsGroupResource {
+            _capacity = TF.Nil
+            , _description = TF.Nil
+            , _elastic_ips = TF.Nil
+            , _instance_types = TF.Nil
+            , _launch_specification = TF.Nil
+            , _name = TF.Nil
+            , _product = TF.Nil
+            , _strategy = TF.Nil
+            , _tags = TF.Nil
+            }
 
 {- | The @spotinst_healthcheck@ Spotinst resource.
 
@@ -114,32 +115,31 @@ data HealthcheckResource = HealthcheckResource {
     {- ^ - The healthcheck ID. -}
     } deriving (Show, Eq)
 
-healthcheckResource :: TF.Resource TF.Spotinst HealthcheckResource
-healthcheckResource =
-    TF.newResource "spotinst_healthcheck" $
-        HealthcheckResource {
-            _check = TF.Absent
-            , _name = TF.Absent
-            , _proxy = TF.Absent
-            , _resource_id = TF.Absent
-            , _threshold = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL HealthcheckResource where
-    toHCL HealthcheckResource{..} = TF.arguments
-        [ TF.assign "check" <$> _check
-        , TF.assign "name" <$> _name
-        , TF.assign "proxy" <$> _proxy
-        , TF.assign "resource_id" <$> _resource_id
-        , TF.assign "threshold" <$> _threshold
+    toHCL HealthcheckResource{..} = TF.block $ catMaybes
+        [ TF.assign "check" <$> TF.argument _check
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "proxy" <$> TF.argument _proxy
+        , TF.assign "resource_id" <$> TF.argument _resource_id
+        , TF.assign "threshold" <$> TF.argument _threshold
         ]
 
 $(TF.makeSchemaLenses
     ''HealthcheckResource
     ''TF.Spotinst
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+healthcheckResource :: TF.Resource TF.Spotinst HealthcheckResource
+healthcheckResource =
+    TF.newResource "spotinst_healthcheck" $
+        HealthcheckResource {
+            _check = TF.Nil
+            , _name = TF.Nil
+            , _proxy = TF.Nil
+            , _resource_id = TF.Nil
+            , _threshold = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @spotinst_subscription@ Spotinst resource.
 
@@ -160,29 +160,28 @@ data SubscriptionResource = SubscriptionResource {
     {- ^ - The subscription ID. -}
     } deriving (Show, Eq)
 
-subscriptionResource :: TF.Resource TF.Spotinst SubscriptionResource
-subscriptionResource =
-    TF.newResource "spotinst_subscription" $
-        SubscriptionResource {
-            _endpoint = TF.Absent
-            , _event_type = TF.Absent
-            , _format = TF.Absent
-            , _protocol = TF.Absent
-            , _resource_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SubscriptionResource where
-    toHCL SubscriptionResource{..} = TF.arguments
-        [ TF.assign "endpoint" <$> _endpoint
-        , TF.assign "event_type" <$> _event_type
-        , TF.assign "format" <$> _format
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "resource_id" <$> _resource_id
+    toHCL SubscriptionResource{..} = TF.block $ catMaybes
+        [ TF.assign "endpoint" <$> TF.argument _endpoint
+        , TF.assign "event_type" <$> TF.argument _event_type
+        , TF.assign "format" <$> TF.argument _format
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "resource_id" <$> TF.argument _resource_id
         ]
 
 $(TF.makeSchemaLenses
     ''SubscriptionResource
     ''TF.Spotinst
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+subscriptionResource :: TF.Resource TF.Spotinst SubscriptionResource
+subscriptionResource =
+    TF.newResource "spotinst_subscription" $
+        SubscriptionResource {
+            _endpoint = TF.Nil
+            , _event_type = TF.Nil
+            , _format = TF.Nil
+            , _protocol = TF.Nil
+            , _resource_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

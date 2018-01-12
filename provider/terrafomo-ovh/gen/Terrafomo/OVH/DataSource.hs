@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OVH               as TF
+import qualified Terrafomo.OVH.Provider      as TF
+import qualified Terrafomo.OVH.Types         as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -58,30 +60,29 @@ data RegionDataSource = RegionDataSource {
     {- ^ - The list of public cloud services running within the region -}
     } deriving (Show, Eq)
 
-regionDataSource :: TF.DataSource TF.OVH RegionDataSource
-regionDataSource =
-    TF.newDataSource "publiccloud_region" $
-        RegionDataSource {
-            _project_id = TF.Absent
-            , _region = TF.Absent
-            , _computed_continentCode = TF.Computed "continentCode"
-            , _computed_continent_code = TF.Computed "continent_code"
-            , _computed_datacenterLocation = TF.Computed "datacenterLocation"
-            , _computed_datacenter_location = TF.Computed "datacenter_location"
-            , _computed_services = TF.Computed "services"
-            }
-
 instance TF.ToHCL RegionDataSource where
-    toHCL RegionDataSource{..} = TF.arguments
-        [ TF.assign "project_id" <$> _project_id
-        , TF.assign "region" <$> _region
+    toHCL RegionDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "region" <$> TF.argument _region
         ]
 
 $(TF.makeSchemaLenses
     ''RegionDataSource
     ''TF.OVH
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+regionDataSource :: TF.DataSource TF.OVH RegionDataSource
+regionDataSource =
+    TF.newDataSource "publiccloud_region" $
+        RegionDataSource {
+            _project_id = TF.Nil
+            , _region = TF.Nil
+            , _computed_continentCode = TF.Compute "continentCode"
+            , _computed_continent_code = TF.Compute "continent_code"
+            , _computed_datacenterLocation = TF.Compute "datacenterLocation"
+            , _computed_datacenter_location = TF.Compute "datacenter_location"
+            , _computed_services = TF.Compute "services"
+            }
 
 {- | The @publiccloud_regions@ OVH datasource.
 
@@ -94,21 +95,20 @@ data RegionsDataSource = RegionsDataSource {
     {- ^ - The list of regions associated with the project -}
     } deriving (Show, Eq)
 
-regionsDataSource :: TF.DataSource TF.OVH RegionsDataSource
-regionsDataSource =
-    TF.newDataSource "publiccloud_regions" $
-        RegionsDataSource {
-            _project_id = TF.Absent
-            , _computed_names = TF.Computed "names"
-            }
-
 instance TF.ToHCL RegionsDataSource where
-    toHCL RegionsDataSource{..} = TF.arguments
-        [ TF.assign "project_id" <$> _project_id
+    toHCL RegionsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "project_id" <$> TF.argument _project_id
         ]
 
 $(TF.makeSchemaLenses
     ''RegionsDataSource
     ''TF.OVH
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+regionsDataSource :: TF.DataSource TF.OVH RegionsDataSource
+regionsDataSource =
+    TF.newDataSource "publiccloud_regions" $
+        RegionsDataSource {
+            _project_id = TF.Nil
+            , _computed_names = TF.Compute "names"
+            }

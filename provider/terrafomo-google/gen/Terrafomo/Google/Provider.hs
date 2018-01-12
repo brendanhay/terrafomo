@@ -1,9 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,22 +18,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Google.Provider
-    ( Google   (..)
+    ( Google    (..)
     , HasGoogle (..)
-    , defaultGoogle
     ) where
 
+import Data.Function      (on)
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Google.Types as TF
+import qualified Terrafomo.Google.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -48,12 +52,21 @@ data Google = Google {
 instance Hashable Google
 
 instance TF.ToHCL Google where
-    toHCL x = TF.block $ catMaybes [
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Google))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            ]
 
-$(TF.makeClassyProvider ''Google)
+instance Semigroup Google where
+    (<>) a b = Google {
+        }
 
-defaultGoogle :: TF.Provider Google
-defaultGoogle =
-    TF.Provider "google" Nothing
+instance Monoid Google where
+    mappend = (<>)
+    mempty  = Google {
+        }
 
+instance TF.IsProvider Google where
+    type ProviderName Google = "google"
+
+$(TF.makeProviderLenses ''Google)

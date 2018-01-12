@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.PowerDNS        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.PowerDNS.Provider as TF
+import qualified Terrafomo.PowerDNS.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @powerdns_record@ PowerDNS resource.
 
@@ -53,28 +55,27 @@ data RecordResource = RecordResource {
     {- ^ (Required) The name of zone to contain this record. -}
     } deriving (Show, Eq)
 
-recordResource :: TF.Resource TF.PowerDNS RecordResource
-recordResource =
-    TF.newResource "powerdns_record" $
-        RecordResource {
-            _name = TF.Absent
-            , _records = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _zone = TF.Absent
-            }
-
 instance TF.ToHCL RecordResource where
-    toHCL RecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "records" <$> _records
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "zone" <$> _zone
+    toHCL RecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "records" <$> TF.argument _records
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''RecordResource
     ''TF.PowerDNS
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+recordResource :: TF.Resource TF.PowerDNS RecordResource
+recordResource =
+    TF.newResource "powerdns_record" $
+        RecordResource {
+            _name = TF.Nil
+            , _records = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _zone = TF.Nil
+            }

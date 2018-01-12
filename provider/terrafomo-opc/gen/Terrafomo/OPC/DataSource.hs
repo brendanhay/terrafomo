@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OPC               as TF
+import qualified Terrafomo.OPC.Provider      as TF
+import qualified Terrafomo.OPC.Types         as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -49,27 +51,26 @@ data ComputeImageListEntryDataSource = ComputeImageListEntryDataSource {
     {- ^ (Required) - The version (integer) of the Image List to use. -}
     } deriving (Show, Eq)
 
-computeImageListEntryDataSource :: TF.DataSource TF.OPC ComputeImageListEntryDataSource
-computeImageListEntryDataSource =
-    TF.newDataSource "opc_compute_image_list_entry" $
-        ComputeImageListEntryDataSource {
-            _entry = TF.Absent
-            , _image_list = TF.Absent
-            , _version = TF.Absent
-            }
-
 instance TF.ToHCL ComputeImageListEntryDataSource where
-    toHCL ComputeImageListEntryDataSource{..} = TF.arguments
-        [ TF.assign "entry" <$> _entry
-        , TF.assign "image_list" <$> _image_list
-        , TF.assign "version" <$> _version
+    toHCL ComputeImageListEntryDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "entry" <$> TF.argument _entry
+        , TF.assign "image_list" <$> TF.argument _image_list
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeImageListEntryDataSource
     ''TF.OPC
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+computeImageListEntryDataSource :: TF.DataSource TF.OPC ComputeImageListEntryDataSource
+computeImageListEntryDataSource =
+    TF.newDataSource "opc_compute_image_list_entry" $
+        ComputeImageListEntryDataSource {
+            _entry = TF.Nil
+            , _image_list = TF.Nil
+            , _version = TF.Nil
+            }
 
 {- | The @opc_compute_network_interface@ OPC datasource.
 
@@ -111,40 +112,39 @@ data ComputeNetworkInterfaceDataSource = ComputeNetworkInterfaceDataSource {
     {- ^ - The array of vNIC Sets the interface was added to. -}
     } deriving (Show, Eq)
 
-computeNetworkInterfaceDataSource :: TF.DataSource TF.OPC ComputeNetworkInterfaceDataSource
-computeNetworkInterfaceDataSource =
-    TF.newDataSource "opc_compute_network_interface" $
-        ComputeNetworkInterfaceDataSource {
-            _instance_id = TF.Absent
-            , _instance_name = TF.Absent
-            , _interface = TF.Absent
-            , _computed_dns = TF.Computed "dns"
-            , _computed_ip_address = TF.Computed "ip_address"
-            , _computed_ip_network = TF.Computed "ip_network"
-            , _computed_is_default_gateway = TF.Computed "is_default_gateway"
-            , _computed_mac_address = TF.Computed "mac_address"
-            , _computed_model = TF.Computed "model"
-            , _computed_name_servers = TF.Computed "name_servers"
-            , _computed_nat = TF.Computed "nat"
-            , _computed_search_domains = TF.Computed "search_domains"
-            , _computed_sec_lists = TF.Computed "sec_lists"
-            , _computed_shared_network = TF.Computed "shared_network"
-            , _computed_vnic = TF.Computed "vnic"
-            , _computed_vnic_sets = TF.Computed "vnic_sets"
-            }
-
 instance TF.ToHCL ComputeNetworkInterfaceDataSource where
-    toHCL ComputeNetworkInterfaceDataSource{..} = TF.arguments
-        [ TF.assign "instance_id" <$> _instance_id
-        , TF.assign "instance_name" <$> _instance_name
-        , TF.assign "interface" <$> _interface
+    toHCL ComputeNetworkInterfaceDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "instance_name" <$> TF.argument _instance_name
+        , TF.assign "interface" <$> TF.argument _interface
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeNetworkInterfaceDataSource
     ''TF.OPC
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+computeNetworkInterfaceDataSource :: TF.DataSource TF.OPC ComputeNetworkInterfaceDataSource
+computeNetworkInterfaceDataSource =
+    TF.newDataSource "opc_compute_network_interface" $
+        ComputeNetworkInterfaceDataSource {
+            _instance_id = TF.Nil
+            , _instance_name = TF.Nil
+            , _interface = TF.Nil
+            , _computed_dns = TF.Compute "dns"
+            , _computed_ip_address = TF.Compute "ip_address"
+            , _computed_ip_network = TF.Compute "ip_network"
+            , _computed_is_default_gateway = TF.Compute "is_default_gateway"
+            , _computed_mac_address = TF.Compute "mac_address"
+            , _computed_model = TF.Compute "model"
+            , _computed_name_servers = TF.Compute "name_servers"
+            , _computed_nat = TF.Compute "nat"
+            , _computed_search_domains = TF.Compute "search_domains"
+            , _computed_sec_lists = TF.Compute "sec_lists"
+            , _computed_shared_network = TF.Compute "shared_network"
+            , _computed_vnic = TF.Compute "vnic"
+            , _computed_vnic_sets = TF.Compute "vnic_sets"
+            }
 
 {- | The @opc_compute_storage_volume_snapshot@ OPC datasource.
 
@@ -190,40 +190,39 @@ data ComputeStorageVolumeSnapshotDataSource = ComputeStorageVolumeSnapshotDataSo
     {- ^ - The name of the storage volume that the snapshot was created from -}
     } deriving (Show, Eq)
 
-computeStorageVolumeSnapshotDataSource :: TF.DataSource TF.OPC ComputeStorageVolumeSnapshotDataSource
-computeStorageVolumeSnapshotDataSource =
-    TF.newDataSource "opc_compute_storage_volume_snapshot" $
-        ComputeStorageVolumeSnapshotDataSource {
-            _name = TF.Absent
-            , _computed_account = TF.Computed "account"
-            , _computed_collocated = TF.Computed "collocated"
-            , _computed_description = TF.Computed "description"
-            , _computed_machine_image_name = TF.Computed "machine_image_name"
-            , _computed_parent_volume_bootable = TF.Computed "parent_volume_bootable"
-            , _computed_platform = TF.Computed "platform"
-            , _computed_property = TF.Computed "property"
-            , _computed_size = TF.Computed "size"
-            , _computed_snapshot_id = TF.Computed "snapshot_id"
-            , _computed_snapshot_timestamp = TF.Computed "snapshot_timestamp"
-            , _computed_start_timestamp = TF.Computed "start_timestamp"
-            , _computed_status = TF.Computed "status"
-            , _computed_status_detail = TF.Computed "status_detail"
-            , _computed_status_timestamp = TF.Computed "status_timestamp"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_uri = TF.Computed "uri"
-            , _computed_volume_name = TF.Computed "volume_name"
-            }
-
 instance TF.ToHCL ComputeStorageVolumeSnapshotDataSource where
-    toHCL ComputeStorageVolumeSnapshotDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL ComputeStorageVolumeSnapshotDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeStorageVolumeSnapshotDataSource
     ''TF.OPC
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+computeStorageVolumeSnapshotDataSource :: TF.DataSource TF.OPC ComputeStorageVolumeSnapshotDataSource
+computeStorageVolumeSnapshotDataSource =
+    TF.newDataSource "opc_compute_storage_volume_snapshot" $
+        ComputeStorageVolumeSnapshotDataSource {
+            _name = TF.Nil
+            , _computed_account = TF.Compute "account"
+            , _computed_collocated = TF.Compute "collocated"
+            , _computed_description = TF.Compute "description"
+            , _computed_machine_image_name = TF.Compute "machine_image_name"
+            , _computed_parent_volume_bootable = TF.Compute "parent_volume_bootable"
+            , _computed_platform = TF.Compute "platform"
+            , _computed_property = TF.Compute "property"
+            , _computed_size = TF.Compute "size"
+            , _computed_snapshot_id = TF.Compute "snapshot_id"
+            , _computed_snapshot_timestamp = TF.Compute "snapshot_timestamp"
+            , _computed_start_timestamp = TF.Compute "start_timestamp"
+            , _computed_status = TF.Compute "status"
+            , _computed_status_detail = TF.Compute "status_detail"
+            , _computed_status_timestamp = TF.Compute "status_timestamp"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_uri = TF.Compute "uri"
+            , _computed_volume_name = TF.Compute "volume_name"
+            }
 
 {- | The @opc_compute_vnic@ OPC datasource.
 
@@ -244,25 +243,24 @@ data ComputeVnicDataSource = ComputeVnicDataSource {
     {- ^ is the Unique Resource Locator of the Virtual NIC. -}
     } deriving (Show, Eq)
 
-computeVnicDataSource :: TF.DataSource TF.OPC ComputeVnicDataSource
-computeVnicDataSource =
-    TF.newDataSource "opc_compute_vnic" $
-        ComputeVnicDataSource {
-            _name = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_mac_address = TF.Computed "mac_address"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_transit_flag = TF.Computed "transit_flag"
-            , _computed_uri = TF.Computed "uri"
-            }
-
 instance TF.ToHCL ComputeVnicDataSource where
-    toHCL ComputeVnicDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL ComputeVnicDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ComputeVnicDataSource
     ''TF.OPC
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+computeVnicDataSource :: TF.DataSource TF.OPC ComputeVnicDataSource
+computeVnicDataSource =
+    TF.newDataSource "opc_compute_vnic" $
+        ComputeVnicDataSource {
+            _name = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_mac_address = TF.Compute "mac_address"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_transit_flag = TF.Compute "transit_flag"
+            , _computed_uri = TF.Compute "uri"
+            }

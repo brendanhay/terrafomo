@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Circonus          as TF
+import qualified Terrafomo.Circonus.Provider as TF
+import qualified Terrafomo.Circonus.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -83,41 +85,40 @@ data AccountDataSource = AccountDataSource {
     {- ^ - A list of users who have access to this account.  Each element in the list has both an @id@ and a @role@ .  The @id@ is a Circonus ID referencing the user. -}
     } deriving (Show, Eq)
 
-accountDataSource :: TF.DataSource TF.Circonus AccountDataSource
-accountDataSource =
-    TF.newDataSource "circonus_account" $
-        AccountDataSource {
-            _current = TF.Absent
-            , _id = TF.Absent
-            , _computed_address1 = TF.Computed "address1"
-            , _computed_address2 = TF.Computed "address2"
-            , _computed_cc_email = TF.Computed "cc_email"
-            , _computed_city = TF.Computed "city"
-            , _computed_contact_groups = TF.Computed "contact_groups"
-            , _computed_country = TF.Computed "country"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_invites = TF.Computed "invites"
-            , _computed_name = TF.Computed "name"
-            , _computed_owner = TF.Computed "owner"
-            , _computed_state = TF.Computed "state"
-            , _computed_timezone = TF.Computed "timezone"
-            , _computed_ui_base_url = TF.Computed "ui_base_url"
-            , _computed_usage = TF.Computed "usage"
-            , _computed_users = TF.Computed "users"
-            }
-
 instance TF.ToHCL AccountDataSource where
-    toHCL AccountDataSource{..} = TF.arguments
-        [ TF.assign "current" <$> _current
-        , TF.assign "id" <$> _id
+    toHCL AccountDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "current" <$> TF.argument _current
+        , TF.assign "id" <$> TF.argument _id
         ]
 
 $(TF.makeSchemaLenses
     ''AccountDataSource
     ''TF.Circonus
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+accountDataSource :: TF.DataSource TF.Circonus AccountDataSource
+accountDataSource =
+    TF.newDataSource "circonus_account" $
+        AccountDataSource {
+            _current = TF.Nil
+            , _id = TF.Nil
+            , _computed_address1 = TF.Compute "address1"
+            , _computed_address2 = TF.Compute "address2"
+            , _computed_cc_email = TF.Compute "cc_email"
+            , _computed_city = TF.Compute "city"
+            , _computed_contact_groups = TF.Compute "contact_groups"
+            , _computed_country = TF.Compute "country"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_invites = TF.Compute "invites"
+            , _computed_name = TF.Compute "name"
+            , _computed_owner = TF.Compute "owner"
+            , _computed_state = TF.Compute "state"
+            , _computed_timezone = TF.Compute "timezone"
+            , _computed_ui_base_url = TF.Compute "ui_base_url"
+            , _computed_usage = TF.Compute "usage"
+            , _computed_users = TF.Compute "users"
+            }
 
 {- | The @circonus_collector@ Circonus datasource.
 
@@ -155,27 +156,26 @@ data CollectorDataSource = CollectorDataSource {
     {- ^ - The of the selected Collector.  This value is either @circonus@ for a Circonus-managed, public Collector, or @enterprise@ for a private collector that is private to an account. -}
     } deriving (Show, Eq)
 
-collectorDataSource :: TF.DataSource TF.Circonus CollectorDataSource
-collectorDataSource =
-    TF.newDataSource "circonus_collector" $
-        CollectorDataSource {
-            _id = TF.Absent
-            , _computed_details = TF.Computed "details"
-            , _computed_id = TF.Computed "id"
-            , _computed_latitude = TF.Computed "latitude"
-            , _computed_longitude = TF.Computed "longitude"
-            , _computed_name = TF.Computed "name"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL CollectorDataSource where
-    toHCL CollectorDataSource{..} = TF.arguments
-        [ TF.assign "id" <$> _id
+    toHCL CollectorDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "id" <$> TF.argument _id
         ]
 
 $(TF.makeSchemaLenses
     ''CollectorDataSource
     ''TF.Circonus
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+collectorDataSource :: TF.DataSource TF.Circonus CollectorDataSource
+collectorDataSource =
+    TF.newDataSource "circonus_collector" $
+        CollectorDataSource {
+            _id = TF.Nil
+            , _computed_details = TF.Compute "details"
+            , _computed_id = TF.Compute "id"
+            , _computed_latitude = TF.Compute "latitude"
+            , _computed_longitude = TF.Compute "longitude"
+            , _computed_name = TF.Compute "name"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_type' = TF.Compute "type"
+            }

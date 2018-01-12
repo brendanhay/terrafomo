@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.MySQL.Provider where
+module Terrafomo.MySQL.Provider
+    ( MySQL    (..)
+    , HasMySQL (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.MySQL.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ exposes resources used to manage the configuration of resources in a MySQL
 server. Use the navigation to the left to read about the available
 resources.
 -}
-data MySQL = MySQL
-    { _endpoint :: !(TF.Argument Text)
+data MySQL = MySQL {
+      _endpoint :: !(TF.Argument Text)
     {- ^ (Required) The address of the MySQL server to use. Most often a "hostname:port" pair, but may also be an absolute path to a Unix socket when the host OS is Unix-compatible. -}
     , _password :: !(TF.Argument Text)
     {- ^ (Optional) Password for the given user, if that user has a password. -}
@@ -45,10 +58,30 @@ data MySQL = MySQL
 instance Hashable MySQL
 
 instance TF.ToHCL MySQL where
-    toHCL x = TF.arguments
-        [ TF.assign "endpoint" <$> _endpoint x
-        , TF.assign "password" <$> _password x
-        , TF.assign "username" <$> _username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy MySQL))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "endpoint" <$> TF.argument (_endpoint x)
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "username" <$> TF.argument (_username x)
+            ]
 
-$(TF.makeClassy ''MySQL)
+instance Semigroup MySQL where
+    (<>) a b = MySQL {
+          _endpoint = on (<>) _endpoint a b
+        , _password = on (<>) _password a b
+        , _username = on (<>) _username a b
+        }
+
+instance Monoid MySQL where
+    mappend = (<>)
+    mempty  = MySQL {
+            _endpoint = TF.Nil
+          , _password = TF.Nil
+          , _username = TF.Nil
+        }
+
+instance TF.IsProvider MySQL where
+    type ProviderName MySQL = "mysql"
+
+$(TF.makeProviderLenses ''MySQL)

@@ -1,4 +1,4 @@
 name: Bitbucket
 package: terrafomo-bitbucket
 datatype: true
-
+original: bitbucket

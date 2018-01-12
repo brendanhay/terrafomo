@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.RabbitMQ        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.RabbitMQ.Provider as TF
+import qualified Terrafomo.RabbitMQ.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @rabbitmq_binding@ RabbitMQ resource.
 
@@ -58,34 +60,33 @@ data BindingResource = BindingResource {
     {- ^ - A unique key to refer to the binding. -}
     } deriving (Show, Eq)
 
-bindingResource :: TF.Resource TF.RabbitMQ BindingResource
-bindingResource =
-    TF.newResource "rabbitmq_binding" $
-        BindingResource {
-            _arguments = TF.Absent
-            , _destination = TF.Absent
-            , _destination_type = TF.Absent
-            , _routing_key = TF.Absent
-            , _source = TF.Absent
-            , _vhost = TF.Absent
-            , _computed_properties_key = TF.Computed "properties_key"
-            }
-
 instance TF.ToHCL BindingResource where
-    toHCL BindingResource{..} = TF.arguments
-        [ TF.assign "arguments" <$> _arguments
-        , TF.assign "destination" <$> _destination
-        , TF.assign "destination_type" <$> _destination_type
-        , TF.assign "routing_key" <$> _routing_key
-        , TF.assign "source" <$> _source
-        , TF.assign "vhost" <$> _vhost
+    toHCL BindingResource{..} = TF.block $ catMaybes
+        [ TF.assign "arguments" <$> TF.argument _arguments
+        , TF.assign "destination" <$> TF.argument _destination
+        , TF.assign "destination_type" <$> TF.argument _destination_type
+        , TF.assign "routing_key" <$> TF.argument _routing_key
+        , TF.assign "source" <$> TF.argument _source
+        , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
 $(TF.makeSchemaLenses
     ''BindingResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+bindingResource :: TF.Resource TF.RabbitMQ BindingResource
+bindingResource =
+    TF.newResource "rabbitmq_binding" $
+        BindingResource {
+            _arguments = TF.Nil
+            , _destination = TF.Nil
+            , _destination_type = TF.Nil
+            , _routing_key = TF.Nil
+            , _source = TF.Nil
+            , _vhost = TF.Nil
+            , _computed_properties_key = TF.Compute "properties_key"
+            }
 
 {- | The @rabbitmq_exchange@ RabbitMQ resource.
 
@@ -100,27 +101,26 @@ data ExchangeResource = ExchangeResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-exchangeResource :: TF.Resource TF.RabbitMQ ExchangeResource
-exchangeResource =
-    TF.newResource "rabbitmq_exchange" $
-        ExchangeResource {
-            _name = TF.Absent
-            , _settings = TF.Absent
-            , _vhost = TF.Absent
-            }
-
 instance TF.ToHCL ExchangeResource where
-    toHCL ExchangeResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "settings" <$> _settings
-        , TF.assign "vhost" <$> _vhost
+    toHCL ExchangeResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "settings" <$> TF.argument _settings
+        , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
 $(TF.makeSchemaLenses
     ''ExchangeResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+exchangeResource :: TF.Resource TF.RabbitMQ ExchangeResource
+exchangeResource =
+    TF.newResource "rabbitmq_exchange" $
+        ExchangeResource {
+            _name = TF.Nil
+            , _settings = TF.Nil
+            , _vhost = TF.Nil
+            }
 
 {- | The @rabbitmq_permissions@ RabbitMQ resource.
 
@@ -136,27 +136,26 @@ data PermissionsResource = PermissionsResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-permissionsResource :: TF.Resource TF.RabbitMQ PermissionsResource
-permissionsResource =
-    TF.newResource "rabbitmq_permissions" $
-        PermissionsResource {
-            _permissions = TF.Absent
-            , _user = TF.Absent
-            , _vhost = TF.Absent
-            }
-
 instance TF.ToHCL PermissionsResource where
-    toHCL PermissionsResource{..} = TF.arguments
-        [ TF.assign "permissions" <$> _permissions
-        , TF.assign "user" <$> _user
-        , TF.assign "vhost" <$> _vhost
+    toHCL PermissionsResource{..} = TF.block $ catMaybes
+        [ TF.assign "permissions" <$> TF.argument _permissions
+        , TF.assign "user" <$> TF.argument _user
+        , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
 $(TF.makeSchemaLenses
     ''PermissionsResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+permissionsResource :: TF.Resource TF.RabbitMQ PermissionsResource
+permissionsResource =
+    TF.newResource "rabbitmq_permissions" $
+        PermissionsResource {
+            _permissions = TF.Nil
+            , _user = TF.Nil
+            , _vhost = TF.Nil
+            }
 
 {- | The @rabbitmq_policy@ RabbitMQ resource.
 
@@ -172,27 +171,26 @@ data PolicyResource = PolicyResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-policyResource :: TF.Resource TF.RabbitMQ PolicyResource
-policyResource =
-    TF.newResource "rabbitmq_policy" $
-        PolicyResource {
-            _name = TF.Absent
-            , _policy = TF.Absent
-            , _vhost = TF.Absent
-            }
-
 instance TF.ToHCL PolicyResource where
-    toHCL PolicyResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "policy" <$> _policy
-        , TF.assign "vhost" <$> _vhost
+    toHCL PolicyResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "policy" <$> TF.argument _policy
+        , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
 $(TF.makeSchemaLenses
     ''PolicyResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+policyResource :: TF.Resource TF.RabbitMQ PolicyResource
+policyResource =
+    TF.newResource "rabbitmq_policy" $
+        PolicyResource {
+            _name = TF.Nil
+            , _policy = TF.Nil
+            , _vhost = TF.Nil
+            }
 
 {- | The @rabbitmq_queue@ RabbitMQ resource.
 
@@ -207,27 +205,26 @@ data QueueResource = QueueResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-queueResource :: TF.Resource TF.RabbitMQ QueueResource
-queueResource =
-    TF.newResource "rabbitmq_queue" $
-        QueueResource {
-            _name = TF.Absent
-            , _settings = TF.Absent
-            , _vhost = TF.Absent
-            }
-
 instance TF.ToHCL QueueResource where
-    toHCL QueueResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "settings" <$> _settings
-        , TF.assign "vhost" <$> _vhost
+    toHCL QueueResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "settings" <$> TF.argument _settings
+        , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
 $(TF.makeSchemaLenses
     ''QueueResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+queueResource :: TF.Resource TF.RabbitMQ QueueResource
+queueResource =
+    TF.newResource "rabbitmq_queue" $
+        QueueResource {
+            _name = TF.Nil
+            , _settings = TF.Nil
+            , _vhost = TF.Nil
+            }
 
 {- | The @rabbitmq_user@ RabbitMQ resource.
 
@@ -244,27 +241,26 @@ data UserResource = UserResource {
     {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.RabbitMQ UserResource
-userResource =
-    TF.newResource "rabbitmq_user" $
-        UserResource {
-            _name = TF.Absent
-            , _password = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "password" <$> _password
-        , TF.assign "tags" <$> _tags
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.RabbitMQ UserResource
+userResource =
+    TF.newResource "rabbitmq_user" $
+        UserResource {
+            _name = TF.Nil
+            , _password = TF.Nil
+            , _tags = TF.Nil
+            }
 
 {- | The @rabbitmq_vhost@ RabbitMQ resource.
 
@@ -275,20 +271,19 @@ data VhostResource = VhostResource {
     {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Eq)
 
-vhostResource :: TF.Resource TF.RabbitMQ VhostResource
-vhostResource =
-    TF.newResource "rabbitmq_vhost" $
-        VhostResource {
-            _name = TF.Absent
-            }
-
 instance TF.ToHCL VhostResource where
-    toHCL VhostResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL VhostResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''VhostResource
     ''TF.RabbitMQ
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vhostResource :: TF.Resource TF.RabbitMQ VhostResource
+vhostResource =
+    TF.newResource "rabbitmq_vhost" $
+        VhostResource {
+            _name = TF.Nil
+            }

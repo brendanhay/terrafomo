@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.PostgreSQL.Provider where
+module Terrafomo.PostgreSQL.Provider
+    ( PostgreSQL    (..)
+    , HasPostgreSQL (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.PostgreSQL.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Meta      as TF
+import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Variable  as TF
 import qualified Terrafomo.TH               as TF
 
@@ -32,8 +45,8 @@ The PostgreSQL provider gives the ability to deploy and configure resources
 in a PostgreSQL server. Use the navigation to the left to read about the
 available resources.
 -}
-data PostgreSQL = PostgreSQL
-    { _connect_timeout  :: !(TF.Argument Text)
+data PostgreSQL = PostgreSQL {
+      _connect_timeout  :: !(TF.Argument Text)
     {- ^ (Optional) Maximum wait for connection, in seconds. The default is @180s@ .  Zero or not specified means wait indefinitely. -}
     , _database         :: !(TF.Argument Text)
     {- ^ (Optional) Database to connect to. The default is @postgres@ . -}
@@ -56,16 +69,48 @@ data PostgreSQL = PostgreSQL
 instance Hashable PostgreSQL
 
 instance TF.ToHCL PostgreSQL where
-    toHCL x = TF.arguments
-        [ TF.assign "connect_timeout" <$> _connect_timeout x
-        , TF.assign "database" <$> _database x
-        , TF.assign "expected_version" <$> _expected_version x
-        , TF.assign "host" <$> _host x
-        , TF.assign "max_connections" <$> _max_connections x
-        , TF.assign "password" <$> _password x
-        , TF.assign "port" <$> _port x
-        , TF.assign "sslmode" <$> _sslmode x
-        , TF.assign "username" <$> _username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy PostgreSQL))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "connect_timeout" <$> TF.argument (_connect_timeout x)
+            , TF.assign "database" <$> TF.argument (_database x)
+            , TF.assign "expected_version" <$> TF.argument (_expected_version x)
+            , TF.assign "host" <$> TF.argument (_host x)
+            , TF.assign "max_connections" <$> TF.argument (_max_connections x)
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "port" <$> TF.argument (_port x)
+            , TF.assign "sslmode" <$> TF.argument (_sslmode x)
+            , TF.assign "username" <$> TF.argument (_username x)
+            ]
 
-$(TF.makeClassy ''PostgreSQL)
+instance Semigroup PostgreSQL where
+    (<>) a b = PostgreSQL {
+          _connect_timeout = on (<>) _connect_timeout a b
+        , _database = on (<>) _database a b
+        , _expected_version = on (<>) _expected_version a b
+        , _host = on (<>) _host a b
+        , _max_connections = on (<>) _max_connections a b
+        , _password = on (<>) _password a b
+        , _port = on (<>) _port a b
+        , _sslmode = on (<>) _sslmode a b
+        , _username = on (<>) _username a b
+        }
+
+instance Monoid PostgreSQL where
+    mappend = (<>)
+    mempty  = PostgreSQL {
+            _connect_timeout = TF.Nil
+          , _database = TF.Nil
+          , _expected_version = TF.Nil
+          , _host = TF.Nil
+          , _max_connections = TF.Nil
+          , _password = TF.Nil
+          , _port = TF.Nil
+          , _sslmode = TF.Nil
+          , _username = TF.Nil
+        }
+
+instance TF.IsProvider PostgreSQL where
+    type ProviderName PostgreSQL = "postgresql"
+
+$(TF.makeProviderLenses ''PostgreSQL)

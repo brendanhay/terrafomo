@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Librato.Provider where
+module Terrafomo.Librato.Provider
+    ( Librato    (..)
+    , HasLibrato (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Librato.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ Librato. The provider needs to be configured with the proper credentials
 before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
-data Librato = Librato
-    { _email :: !(TF.Argument Text)
+data Librato = Librato {
+      _email :: !(TF.Argument Text)
     {- ^ (Required) Librato email address. It must be provided, but it can also be sourced from the @LIBRATO_EMAIL@ environment variable. -}
     , _token :: !(TF.Argument Text)
     {- ^ (Required) Librato API token. It must be provided, but it can also be sourced from the @LIBRATO_TOKEN@ environment variable. -}
@@ -43,9 +56,27 @@ data Librato = Librato
 instance Hashable Librato
 
 instance TF.ToHCL Librato where
-    toHCL x = TF.arguments
-        [ TF.assign "email" <$> _email x
-        , TF.assign "token" <$> _token x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Librato))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "email" <$> TF.argument (_email x)
+            , TF.assign "token" <$> TF.argument (_token x)
+            ]
 
-$(TF.makeClassy ''Librato)
+instance Semigroup Librato where
+    (<>) a b = Librato {
+          _email = on (<>) _email a b
+        , _token = on (<>) _token a b
+        }
+
+instance Monoid Librato where
+    mappend = (<>)
+    mempty  = Librato {
+            _email = TF.Nil
+          , _token = TF.Nil
+        }
+
+instance TF.IsProvider Librato where
+    type ProviderName Librato = "librato"
+
+$(TF.makeProviderLenses ''Librato)

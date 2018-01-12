@@ -27,10 +27,12 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
+import qualified Terrafomo.DNS.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -58,33 +60,32 @@ data ARecordSetResource = ARecordSetResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-aRecordSetResource :: TF.Resource TF.DNS ARecordSetResource
-aRecordSetResource =
-    TF.newResource "dns_a_record_set" $
-        ARecordSetResource {
-            _addresses = TF.Absent
-            , _name = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            , _computed_addresses = TF.Computed "addresses"
-            , _computed_name = TF.Computed "name"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_zone = TF.Computed "zone"
-            }
-
 instance TF.ToHCL ARecordSetResource where
-    toHCL ARecordSetResource{..} = TF.arguments
-        [ TF.assign "addresses" <$> _addresses
-        , TF.assign "name" <$> _name
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL ARecordSetResource{..} = TF.block $ catMaybes
+        [ TF.assign "addresses" <$> TF.argument _addresses
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''ARecordSetResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+aRecordSetResource :: TF.Resource TF.DNS ARecordSetResource
+aRecordSetResource =
+    TF.newResource "dns_a_record_set" $
+        ARecordSetResource {
+            _addresses = TF.Nil
+            , _name = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            , _computed_addresses = TF.Compute "addresses"
+            , _computed_name = TF.Compute "name"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_zone = TF.Compute "zone"
+            }
 
 {- | The @dns_aaaa_record_set@ DNS resource.
 
@@ -109,33 +110,32 @@ data AaaaRecordSetResource = AaaaRecordSetResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-aaaaRecordSetResource :: TF.Resource TF.DNS AaaaRecordSetResource
-aaaaRecordSetResource =
-    TF.newResource "dns_aaaa_record_set" $
-        AaaaRecordSetResource {
-            _addresses = TF.Absent
-            , _name = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            , _computed_addresses = TF.Computed "addresses"
-            , _computed_name = TF.Computed "name"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_zone = TF.Computed "zone"
-            }
-
 instance TF.ToHCL AaaaRecordSetResource where
-    toHCL AaaaRecordSetResource{..} = TF.arguments
-        [ TF.assign "addresses" <$> _addresses
-        , TF.assign "name" <$> _name
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL AaaaRecordSetResource{..} = TF.block $ catMaybes
+        [ TF.assign "addresses" <$> TF.argument _addresses
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''AaaaRecordSetResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+aaaaRecordSetResource :: TF.Resource TF.DNS AaaaRecordSetResource
+aaaaRecordSetResource =
+    TF.newResource "dns_aaaa_record_set" $
+        AaaaRecordSetResource {
+            _addresses = TF.Nil
+            , _name = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            , _computed_addresses = TF.Compute "addresses"
+            , _computed_name = TF.Compute "name"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_zone = TF.Compute "zone"
+            }
 
 {- | The @dns_cname_record@ DNS resource.
 
@@ -160,33 +160,32 @@ data CnameRecordResource = CnameRecordResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-cnameRecordResource :: TF.Resource TF.DNS CnameRecordResource
-cnameRecordResource =
-    TF.newResource "dns_cname_record" $
-        CnameRecordResource {
-            _cname = TF.Absent
-            , _name = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            , _computed_cname = TF.Computed "cname"
-            , _computed_name = TF.Computed "name"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_zone = TF.Computed "zone"
-            }
-
 instance TF.ToHCL CnameRecordResource where
-    toHCL CnameRecordResource{..} = TF.arguments
-        [ TF.assign "cname" <$> _cname
-        , TF.assign "name" <$> _name
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL CnameRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "cname" <$> TF.argument _cname
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''CnameRecordResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+cnameRecordResource :: TF.Resource TF.DNS CnameRecordResource
+cnameRecordResource =
+    TF.newResource "dns_cname_record" $
+        CnameRecordResource {
+            _cname = TF.Nil
+            , _name = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            , _computed_cname = TF.Compute "cname"
+            , _computed_name = TF.Compute "name"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_zone = TF.Compute "zone"
+            }
 
 {- | The @dns_ns_record_set@ DNS resource.
 
@@ -211,33 +210,32 @@ data NsRecordSetResource = NsRecordSetResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-nsRecordSetResource :: TF.Resource TF.DNS NsRecordSetResource
-nsRecordSetResource =
-    TF.newResource "dns_ns_record_set" $
-        NsRecordSetResource {
-            _name = TF.Absent
-            , _nameservers = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_nameservers = TF.Computed "nameservers"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_zone = TF.Computed "zone"
-            }
-
 instance TF.ToHCL NsRecordSetResource where
-    toHCL NsRecordSetResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "nameservers" <$> _nameservers
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL NsRecordSetResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "nameservers" <$> TF.argument _nameservers
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''NsRecordSetResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+nsRecordSetResource :: TF.Resource TF.DNS NsRecordSetResource
+nsRecordSetResource =
+    TF.newResource "dns_ns_record_set" $
+        NsRecordSetResource {
+            _name = TF.Nil
+            , _nameservers = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_nameservers = TF.Compute "nameservers"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_zone = TF.Compute "zone"
+            }
 
 {- | The @dns_ptr_record@ DNS resource.
 
@@ -262,30 +260,29 @@ data PtrRecordResource = PtrRecordResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-ptrRecordResource :: TF.Resource TF.DNS PtrRecordResource
-ptrRecordResource =
-    TF.newResource "dns_ptr_record" $
-        PtrRecordResource {
-            _name = TF.Absent
-            , _ptr = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_ptr = TF.Computed "ptr"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_zone = TF.Computed "zone"
-            }
-
 instance TF.ToHCL PtrRecordResource where
-    toHCL PtrRecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "ptr" <$> _ptr
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL PtrRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "ptr" <$> TF.argument _ptr
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''PtrRecordResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ptrRecordResource :: TF.Resource TF.DNS PtrRecordResource
+ptrRecordResource =
+    TF.newResource "dns_ptr_record" $
+        PtrRecordResource {
+            _name = TF.Nil
+            , _ptr = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_ptr = TF.Compute "ptr"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_zone = TF.Compute "zone"
+            }

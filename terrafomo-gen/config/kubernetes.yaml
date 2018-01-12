@@ -1,4 +1,4 @@
 name: Kubernetes
 package: terrafomo-kubernetes
 datatype: true
-
+original: kubernetes

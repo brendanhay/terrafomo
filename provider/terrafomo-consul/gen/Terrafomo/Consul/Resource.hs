@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Consul          as TF
+import qualified Terrafomo.Consul.Provider as TF
+import qualified Terrafomo.Consul.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -63,34 +65,33 @@ data AgentServiceResource = AgentServiceResource {
     {- ^ - The tags of the service. -}
     } deriving (Show, Eq)
 
-agentServiceResource :: TF.Resource TF.Consul AgentServiceResource
-agentServiceResource =
-    TF.newResource "consul_agent_service" $
-        AgentServiceResource {
-            _address = TF.Absent
-            , _name = TF.Absent
-            , _port = TF.Absent
-            , _tags = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_port = TF.Computed "port"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL AgentServiceResource where
-    toHCL AgentServiceResource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "name" <$> _name
-        , TF.assign "port" <$> _port
-        , TF.assign "tags" <$> _tags
+    toHCL AgentServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''AgentServiceResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+agentServiceResource :: TF.Resource TF.Consul AgentServiceResource
+agentServiceResource =
+    TF.newResource "consul_agent_service" $
+        AgentServiceResource {
+            _address = TF.Nil
+            , _name = TF.Nil
+            , _port = TF.Nil
+            , _tags = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_port = TF.Compute "port"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @consul_catalog_entry@ Consul resource.
 
@@ -115,33 +116,32 @@ data CatalogEntryResource = CatalogEntryResource {
     {- ^ - The ID of the service, defaults to the value of @name@ . -}
     } deriving (Show, Eq)
 
-catalogEntryResource :: TF.Resource TF.Consul CatalogEntryResource
-catalogEntryResource =
-    TF.newResource "consul_catalog_entry" $
-        CatalogEntryResource {
-            _address = TF.Absent
-            , _datacenter = TF.Absent
-            , _node = TF.Absent
-            , _service = TF.Absent
-            , _token = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_node = TF.Computed "node"
-            }
-
 instance TF.ToHCL CatalogEntryResource where
-    toHCL CatalogEntryResource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "datacenter" <$> _datacenter
-        , TF.assign "node" <$> _node
-        , TF.assign "service" <$> _service
-        , TF.assign "token" <$> _token
+    toHCL CatalogEntryResource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "node" <$> TF.argument _node
+        , TF.assign "service" <$> TF.argument _service
+        , TF.assign "token" <$> TF.argument _token
         ]
 
 $(TF.makeSchemaLenses
     ''CatalogEntryResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+catalogEntryResource :: TF.Resource TF.Consul CatalogEntryResource
+catalogEntryResource =
+    TF.newResource "consul_catalog_entry" $
+        CatalogEntryResource {
+            _address = TF.Nil
+            , _datacenter = TF.Nil
+            , _node = TF.Nil
+            , _service = TF.Nil
+            , _token = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_node = TF.Compute "node"
+            }
 
 {- | The @consul_key_prefix@ Consul resource.
 
@@ -175,30 +175,29 @@ data KeyPrefixResource = KeyPrefixResource {
     {- ^ - The datacenter the keys are being read/written to. -}
     } deriving (Show, Eq)
 
-keyPrefixResource :: TF.Resource TF.Consul KeyPrefixResource
-keyPrefixResource =
-    TF.newResource "consul_key_prefix" $
-        KeyPrefixResource {
-            _datacenter = TF.Absent
-            , _path_prefix = TF.Absent
-            , _subkeys = TF.Absent
-            , _token = TF.Absent
-            , _computed_datacenter = TF.Computed "datacenter"
-            }
-
 instance TF.ToHCL KeyPrefixResource where
-    toHCL KeyPrefixResource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "path_prefix" <$> _path_prefix
-        , TF.assign "subkeys" <$> _subkeys
-        , TF.assign "token" <$> _token
+    toHCL KeyPrefixResource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "path_prefix" <$> TF.argument _path_prefix
+        , TF.assign "subkeys" <$> TF.argument _subkeys
+        , TF.assign "token" <$> TF.argument _token
         ]
 
 $(TF.makeSchemaLenses
     ''KeyPrefixResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyPrefixResource :: TF.Resource TF.Consul KeyPrefixResource
+keyPrefixResource =
+    TF.newResource "consul_key_prefix" $
+        KeyPrefixResource {
+            _datacenter = TF.Nil
+            , _path_prefix = TF.Nil
+            , _subkeys = TF.Nil
+            , _token = TF.Nil
+            , _computed_datacenter = TF.Compute "datacenter"
+            }
 
 {- | The @consul_keys@ Consul resource.
 
@@ -220,27 +219,26 @@ data KeysResource = KeysResource {
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
-keysResource :: TF.Resource TF.Consul KeysResource
-keysResource =
-    TF.newResource "consul_keys" $
-        KeysResource {
-            _datacenter = TF.Absent
-            , _key = TF.Absent
-            , _token = TF.Absent
-            }
-
 instance TF.ToHCL KeysResource where
-    toHCL KeysResource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "key" <$> _key
-        , TF.assign "token" <$> _token
+    toHCL KeysResource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "key" <$> TF.argument _key
+        , TF.assign "token" <$> TF.argument _token
         ]
 
 $(TF.makeSchemaLenses
     ''KeysResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keysResource :: TF.Resource TF.Consul KeysResource
+keysResource =
+    TF.newResource "consul_keys" $
+        KeysResource {
+            _datacenter = TF.Nil
+            , _key = TF.Nil
+            , _token = TF.Nil
+            }
 
 {- | The @consul_node@ Consul resource.
 
@@ -258,27 +256,26 @@ data NodeResource = NodeResource {
     {- ^ - The name of the service. -}
     } deriving (Show, Eq)
 
-nodeResource :: TF.Resource TF.Consul NodeResource
-nodeResource =
-    TF.newResource "consul_node" $
-        NodeResource {
-            _address = TF.Absent
-            , _name = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL NodeResource where
-    toHCL NodeResource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "name" <$> _name
+    toHCL NodeResource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''NodeResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+nodeResource :: TF.Resource TF.Consul NodeResource
+nodeResource =
+    TF.newResource "consul_node" $
+        NodeResource {
+            _address = TF.Nil
+            , _name = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @consul_prepared_query@ Consul resource.
 
@@ -316,46 +313,45 @@ data PreparedQueryResource = PreparedQueryResource {
     {- ^ - The ID of the prepared query, generated by Consul. -}
     } deriving (Show, Eq)
 
-preparedQueryResource :: TF.Resource TF.Consul PreparedQueryResource
-preparedQueryResource =
-    TF.newResource "consul_prepared_query" $
-        PreparedQueryResource {
-            _datacenter = TF.Absent
-            , _dns = TF.Absent
-            , _failover = TF.Absent
-            , _name = TF.Absent
-            , _near = TF.Absent
-            , _only_passing = TF.Absent
-            , _service = TF.Absent
-            , _session = TF.Absent
-            , _stored_token = TF.Absent
-            , _tags = TF.Absent
-            , _template = TF.Absent
-            , _token = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PreparedQueryResource where
-    toHCL PreparedQueryResource{..} = TF.arguments
-        [ TF.assign "datacenter" <$> _datacenter
-        , TF.assign "dns" <$> _dns
-        , TF.assign "failover" <$> _failover
-        , TF.assign "name" <$> _name
-        , TF.assign "near" <$> _near
-        , TF.assign "only_passing" <$> _only_passing
-        , TF.assign "service" <$> _service
-        , TF.assign "session" <$> _session
-        , TF.assign "stored_token" <$> _stored_token
-        , TF.assign "tags" <$> _tags
-        , TF.assign "template" <$> _template
-        , TF.assign "token" <$> _token
+    toHCL PreparedQueryResource{..} = TF.block $ catMaybes
+        [ TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "dns" <$> TF.argument _dns
+        , TF.assign "failover" <$> TF.argument _failover
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "near" <$> TF.argument _near
+        , TF.assign "only_passing" <$> TF.argument _only_passing
+        , TF.assign "service" <$> TF.argument _service
+        , TF.assign "session" <$> TF.argument _session
+        , TF.assign "stored_token" <$> TF.argument _stored_token
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "template" <$> TF.argument _template
+        , TF.assign "token" <$> TF.argument _token
         ]
 
 $(TF.makeSchemaLenses
     ''PreparedQueryResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+preparedQueryResource :: TF.Resource TF.Consul PreparedQueryResource
+preparedQueryResource =
+    TF.newResource "consul_prepared_query" $
+        PreparedQueryResource {
+            _datacenter = TF.Nil
+            , _dns = TF.Nil
+            , _failover = TF.Nil
+            , _name = TF.Nil
+            , _near = TF.Nil
+            , _only_passing = TF.Nil
+            , _service = TF.Nil
+            , _session = TF.Nil
+            , _stored_token = TF.Nil
+            , _tags = TF.Nil
+            , _template = TF.Nil
+            , _token = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @consul_service@ Consul resource.
 
@@ -393,33 +389,32 @@ data ServiceResource = ServiceResource {
     {- ^ - The tags of the service. -}
     } deriving (Show, Eq)
 
-serviceResource :: TF.Resource TF.Consul ServiceResource
-serviceResource =
-    TF.newResource "consul_service" $
-        ServiceResource {
-            _address = TF.Absent
-            , _name = TF.Absent
-            , _port = TF.Absent
-            , _service_id = TF.Absent
-            , _tags = TF.Absent
-            , _computed_address = TF.Computed "address"
-            , _computed_name = TF.Computed "name"
-            , _computed_port = TF.Computed "port"
-            , _computed_service_id = TF.Computed "service_id"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL ServiceResource where
-    toHCL ServiceResource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "name" <$> _name
-        , TF.assign "port" <$> _port
-        , TF.assign "service_id" <$> _service_id
-        , TF.assign "tags" <$> _tags
+    toHCL ServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "service_id" <$> TF.argument _service_id
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceResource
     ''TF.Consul
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serviceResource :: TF.Resource TF.Consul ServiceResource
+serviceResource =
+    TF.newResource "consul_service" $
+        ServiceResource {
+            _address = TF.Nil
+            , _name = TF.Nil
+            , _port = TF.Nil
+            , _service_id = TF.Nil
+            , _tags = TF.Nil
+            , _computed_address = TF.Compute "address"
+            , _computed_name = TF.Compute "name"
+            , _computed_port = TF.Compute "port"
+            , _computed_service_id = TF.Compute "service_id"
+            , _computed_tags = TF.Compute "tags"
+            }

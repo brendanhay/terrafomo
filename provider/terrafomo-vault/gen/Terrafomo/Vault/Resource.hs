@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
-import qualified Terrafomo.Vault           as TF
+import qualified Terrafomo.Vault.Provider  as TF
+import qualified Terrafomo.Vault.Types     as TF
 
 {- | The @vault_auth_backend@ Vault resource.
 
@@ -49,27 +51,26 @@ data AuthBackendResource = AuthBackendResource {
     {- ^ (Required) The name of the policy -}
     } deriving (Show, Eq)
 
-authBackendResource :: TF.Resource TF.Vault AuthBackendResource
-authBackendResource =
-    TF.newResource "vault_auth_backend" $
-        AuthBackendResource {
-            _description = TF.Absent
-            , _path = TF.Absent
-            , _type' = TF.Absent
-            }
-
 instance TF.ToHCL AuthBackendResource where
-    toHCL AuthBackendResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "path" <$> _path
-        , TF.assign "type" <$> _type'
+    toHCL AuthBackendResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''AuthBackendResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+authBackendResource :: TF.Resource TF.Vault AuthBackendResource
+authBackendResource =
+    TF.newResource "vault_auth_backend" $
+        AuthBackendResource {
+            _description = TF.Nil
+            , _path = TF.Nil
+            , _type' = TF.Nil
+            }
 
 {- | The @vault_aws_auth_backend_cert@ Vault resource.
 
@@ -94,29 +95,28 @@ data AwsAuthBackendCertResource = AwsAuthBackendCertResource {
     {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
     } deriving (Show, Eq)
 
-awsAuthBackendCertResource :: TF.Resource TF.Vault AwsAuthBackendCertResource
-awsAuthBackendCertResource =
-    TF.newResource "vault_aws_auth_backend_cert" $
-        AwsAuthBackendCertResource {
-            _aws_public_cert = TF.Absent
-            , _backend = TF.Absent
-            , _cert_name = TF.Absent
-            , _type' = TF.Absent
-            }
-
 instance TF.ToHCL AwsAuthBackendCertResource where
-    toHCL AwsAuthBackendCertResource{..} = TF.arguments
-        [ TF.assign "aws_public_cert" <$> _aws_public_cert
-        , TF.assign "backend" <$> _backend
-        , TF.assign "cert_name" <$> _cert_name
-        , TF.assign "type" <$> _type'
+    toHCL AwsAuthBackendCertResource{..} = TF.block $ catMaybes
+        [ TF.assign "aws_public_cert" <$> TF.argument _aws_public_cert
+        , TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "cert_name" <$> TF.argument _cert_name
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''AwsAuthBackendCertResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsAuthBackendCertResource :: TF.Resource TF.Vault AwsAuthBackendCertResource
+awsAuthBackendCertResource =
+    TF.newResource "vault_aws_auth_backend_cert" $
+        AwsAuthBackendCertResource {
+            _aws_public_cert = TF.Nil
+            , _backend = TF.Nil
+            , _cert_name = TF.Nil
+            , _type' = TF.Nil
+            }
 
 {- | The @vault_aws_auth_backend_client@ Vault resource.
 
@@ -148,35 +148,34 @@ data AwsAuthBackendClientResource = AwsAuthBackendClientResource {
     {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
     } deriving (Show, Eq)
 
-awsAuthBackendClientResource :: TF.Resource TF.Vault AwsAuthBackendClientResource
-awsAuthBackendClientResource =
-    TF.newResource "vault_aws_auth_backend_client" $
-        AwsAuthBackendClientResource {
-            _access_key = TF.Absent
-            , _backend = TF.Absent
-            , _ec2_endpoint = TF.Absent
-            , _iam_endpoint = TF.Absent
-            , _iam_server_id_header_value = TF.Absent
-            , _secret_key = TF.Absent
-            , _sts_endpoint = TF.Absent
-            }
-
 instance TF.ToHCL AwsAuthBackendClientResource where
-    toHCL AwsAuthBackendClientResource{..} = TF.arguments
-        [ TF.assign "access_key" <$> _access_key
-        , TF.assign "backend" <$> _backend
-        , TF.assign "ec2_endpoint" <$> _ec2_endpoint
-        , TF.assign "iam_endpoint" <$> _iam_endpoint
-        , TF.assign "iam_server_id_header_value" <$> _iam_server_id_header_value
-        , TF.assign "secret_key" <$> _secret_key
-        , TF.assign "sts_endpoint" <$> _sts_endpoint
+    toHCL AwsAuthBackendClientResource{..} = TF.block $ catMaybes
+        [ TF.assign "access_key" <$> TF.argument _access_key
+        , TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "ec2_endpoint" <$> TF.argument _ec2_endpoint
+        , TF.assign "iam_endpoint" <$> TF.argument _iam_endpoint
+        , TF.assign "iam_server_id_header_value" <$> TF.argument _iam_server_id_header_value
+        , TF.assign "secret_key" <$> TF.argument _secret_key
+        , TF.assign "sts_endpoint" <$> TF.argument _sts_endpoint
         ]
 
 $(TF.makeSchemaLenses
     ''AwsAuthBackendClientResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsAuthBackendClientResource :: TF.Resource TF.Vault AwsAuthBackendClientResource
+awsAuthBackendClientResource =
+    TF.newResource "vault_aws_auth_backend_client" $
+        AwsAuthBackendClientResource {
+            _access_key = TF.Nil
+            , _backend = TF.Nil
+            , _ec2_endpoint = TF.Nil
+            , _iam_endpoint = TF.Nil
+            , _iam_server_id_header_value = TF.Nil
+            , _secret_key = TF.Nil
+            , _sts_endpoint = TF.Nil
+            }
 
 {- | The @vault_aws_auth_backend_login@ Vault resource.
 
@@ -224,49 +223,48 @@ data AwsAuthBackendLoginResource = AwsAuthBackendLoginResource {
     {- ^ - Set to true if the token can be extended through renewal. -}
     } deriving (Show, Eq)
 
-awsAuthBackendLoginResource :: TF.Resource TF.Vault AwsAuthBackendLoginResource
-awsAuthBackendLoginResource =
-    TF.newResource "vault_aws_auth_backend_login" $
-        AwsAuthBackendLoginResource {
-            _backend = TF.Absent
-            , _iam_http_request_method = TF.Absent
-            , _iam_request_body = TF.Absent
-            , _iam_request_headers = TF.Absent
-            , _iam_request_url = TF.Absent
-            , _identity = TF.Absent
-            , _nonce = TF.Absent
-            , _pkcs7 = TF.Absent
-            , _role = TF.Absent
-            , _signature = TF.Absent
-            , _computed_accessor = TF.Computed "accessor"
-            , _computed_auth_type = TF.Computed "auth_type"
-            , _computed_client_token = TF.Computed "client_token"
-            , _computed_lease_duration = TF.Computed "lease_duration"
-            , _computed_lease_start_time = TF.Computed "lease_start_time"
-            , _computed_metadata = TF.Computed "metadata"
-            , _computed_policies = TF.Computed "policies"
-            , _computed_renewable = TF.Computed "renewable"
-            }
-
 instance TF.ToHCL AwsAuthBackendLoginResource where
-    toHCL AwsAuthBackendLoginResource{..} = TF.arguments
-        [ TF.assign "backend" <$> _backend
-        , TF.assign "iam_http_request_method" <$> _iam_http_request_method
-        , TF.assign "iam_request_body" <$> _iam_request_body
-        , TF.assign "iam_request_headers" <$> _iam_request_headers
-        , TF.assign "iam_request_url" <$> _iam_request_url
-        , TF.assign "identity" <$> _identity
-        , TF.assign "nonce" <$> _nonce
-        , TF.assign "pkcs7" <$> _pkcs7
-        , TF.assign "role" <$> _role
-        , TF.assign "signature" <$> _signature
+    toHCL AwsAuthBackendLoginResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "iam_http_request_method" <$> TF.argument _iam_http_request_method
+        , TF.assign "iam_request_body" <$> TF.argument _iam_request_body
+        , TF.assign "iam_request_headers" <$> TF.argument _iam_request_headers
+        , TF.assign "iam_request_url" <$> TF.argument _iam_request_url
+        , TF.assign "identity" <$> TF.argument _identity
+        , TF.assign "nonce" <$> TF.argument _nonce
+        , TF.assign "pkcs7" <$> TF.argument _pkcs7
+        , TF.assign "role" <$> TF.argument _role
+        , TF.assign "signature" <$> TF.argument _signature
         ]
 
 $(TF.makeSchemaLenses
     ''AwsAuthBackendLoginResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsAuthBackendLoginResource :: TF.Resource TF.Vault AwsAuthBackendLoginResource
+awsAuthBackendLoginResource =
+    TF.newResource "vault_aws_auth_backend_login" $
+        AwsAuthBackendLoginResource {
+            _backend = TF.Nil
+            , _iam_http_request_method = TF.Nil
+            , _iam_request_body = TF.Nil
+            , _iam_request_headers = TF.Nil
+            , _iam_request_url = TF.Nil
+            , _identity = TF.Nil
+            , _nonce = TF.Nil
+            , _pkcs7 = TF.Nil
+            , _role = TF.Nil
+            , _signature = TF.Nil
+            , _computed_accessor = TF.Compute "accessor"
+            , _computed_auth_type = TF.Compute "auth_type"
+            , _computed_client_token = TF.Compute "client_token"
+            , _computed_lease_duration = TF.Compute "lease_duration"
+            , _computed_lease_start_time = TF.Compute "lease_start_time"
+            , _computed_metadata = TF.Compute "metadata"
+            , _computed_policies = TF.Compute "policies"
+            , _computed_renewable = TF.Compute "renewable"
+            }
 
 {- | The @vault_aws_auth_backend_role@ Vault resource.
 
@@ -318,61 +316,60 @@ data AwsAuthBackendRoleResource = AwsAuthBackendRoleResource {
     {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
     } deriving (Show, Eq)
 
-awsAuthBackendRoleResource :: TF.Resource TF.Vault AwsAuthBackendRoleResource
-awsAuthBackendRoleResource =
-    TF.newResource "vault_aws_auth_backend_role" $
-        AwsAuthBackendRoleResource {
-            _allow_instance_migration = TF.Absent
-            , _auth_type = TF.Absent
-            , _bound_account_id = TF.Absent
-            , _bound_ami_id = TF.Absent
-            , _bound_iam_instance_profile_arn = TF.Absent
-            , _bound_iam_principal_arn = TF.Absent
-            , _bound_iam_role_arn = TF.Absent
-            , _bound_region = TF.Absent
-            , _bound_subnet_id = TF.Absent
-            , _bound_vpc_id = TF.Absent
-            , _disallow_reauthentication = TF.Absent
-            , _inferred_aws_region = TF.Absent
-            , _inferred_entity_type = TF.Absent
-            , _max_ttl = TF.Absent
-            , _period = TF.Absent
-            , _policies = TF.Absent
-            , _resolve_aws_unique_ids = TF.Absent
-            , _role = TF.Absent
-            , _role_tag = TF.Absent
-            , _ttl = TF.Absent
-            }
-
 instance TF.ToHCL AwsAuthBackendRoleResource where
-    toHCL AwsAuthBackendRoleResource{..} = TF.arguments
-        [ TF.assign "allow_instance_migration" <$> _allow_instance_migration
-        , TF.assign "auth_type" <$> _auth_type
-        , TF.assign "bound_account_id" <$> _bound_account_id
-        , TF.assign "bound_ami_id" <$> _bound_ami_id
-        , TF.assign "bound_iam_instance_profile_arn" <$> _bound_iam_instance_profile_arn
-        , TF.assign "bound_iam_principal_arn" <$> _bound_iam_principal_arn
-        , TF.assign "bound_iam_role_arn" <$> _bound_iam_role_arn
-        , TF.assign "bound_region" <$> _bound_region
-        , TF.assign "bound_subnet_id" <$> _bound_subnet_id
-        , TF.assign "bound_vpc_id" <$> _bound_vpc_id
-        , TF.assign "disallow_reauthentication" <$> _disallow_reauthentication
-        , TF.assign "inferred_aws_region" <$> _inferred_aws_region
-        , TF.assign "inferred_entity_type" <$> _inferred_entity_type
-        , TF.assign "max_ttl" <$> _max_ttl
-        , TF.assign "period" <$> _period
-        , TF.assign "policies" <$> _policies
-        , TF.assign "resolve_aws_unique_ids" <$> _resolve_aws_unique_ids
-        , TF.assign "role" <$> _role
-        , TF.assign "role_tag" <$> _role_tag
-        , TF.assign "ttl" <$> _ttl
+    toHCL AwsAuthBackendRoleResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_instance_migration" <$> TF.argument _allow_instance_migration
+        , TF.assign "auth_type" <$> TF.argument _auth_type
+        , TF.assign "bound_account_id" <$> TF.argument _bound_account_id
+        , TF.assign "bound_ami_id" <$> TF.argument _bound_ami_id
+        , TF.assign "bound_iam_instance_profile_arn" <$> TF.argument _bound_iam_instance_profile_arn
+        , TF.assign "bound_iam_principal_arn" <$> TF.argument _bound_iam_principal_arn
+        , TF.assign "bound_iam_role_arn" <$> TF.argument _bound_iam_role_arn
+        , TF.assign "bound_region" <$> TF.argument _bound_region
+        , TF.assign "bound_subnet_id" <$> TF.argument _bound_subnet_id
+        , TF.assign "bound_vpc_id" <$> TF.argument _bound_vpc_id
+        , TF.assign "disallow_reauthentication" <$> TF.argument _disallow_reauthentication
+        , TF.assign "inferred_aws_region" <$> TF.argument _inferred_aws_region
+        , TF.assign "inferred_entity_type" <$> TF.argument _inferred_entity_type
+        , TF.assign "max_ttl" <$> TF.argument _max_ttl
+        , TF.assign "period" <$> TF.argument _period
+        , TF.assign "policies" <$> TF.argument _policies
+        , TF.assign "resolve_aws_unique_ids" <$> TF.argument _resolve_aws_unique_ids
+        , TF.assign "role" <$> TF.argument _role
+        , TF.assign "role_tag" <$> TF.argument _role_tag
+        , TF.assign "ttl" <$> TF.argument _ttl
         ]
 
 $(TF.makeSchemaLenses
     ''AwsAuthBackendRoleResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsAuthBackendRoleResource :: TF.Resource TF.Vault AwsAuthBackendRoleResource
+awsAuthBackendRoleResource =
+    TF.newResource "vault_aws_auth_backend_role" $
+        AwsAuthBackendRoleResource {
+            _allow_instance_migration = TF.Nil
+            , _auth_type = TF.Nil
+            , _bound_account_id = TF.Nil
+            , _bound_ami_id = TF.Nil
+            , _bound_iam_instance_profile_arn = TF.Nil
+            , _bound_iam_principal_arn = TF.Nil
+            , _bound_iam_role_arn = TF.Nil
+            , _bound_region = TF.Nil
+            , _bound_subnet_id = TF.Nil
+            , _bound_vpc_id = TF.Nil
+            , _disallow_reauthentication = TF.Nil
+            , _inferred_aws_region = TF.Nil
+            , _inferred_entity_type = TF.Nil
+            , _max_ttl = TF.Nil
+            , _period = TF.Nil
+            , _policies = TF.Nil
+            , _resolve_aws_unique_ids = TF.Nil
+            , _role = TF.Nil
+            , _role_tag = TF.Nil
+            , _ttl = TF.Nil
+            }
 
 {- | The @vault_aws_auth_backend_sts_role@ Vault resource.
 
@@ -395,27 +392,26 @@ data AwsAuthBackendStsRoleResource = AwsAuthBackendStsRoleResource {
     {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
     } deriving (Show, Eq)
 
-awsAuthBackendStsRoleResource :: TF.Resource TF.Vault AwsAuthBackendStsRoleResource
-awsAuthBackendStsRoleResource =
-    TF.newResource "vault_aws_auth_backend_sts_role" $
-        AwsAuthBackendStsRoleResource {
-            _account_id = TF.Absent
-            , _backend = TF.Absent
-            , _sts_role = TF.Absent
-            }
-
 instance TF.ToHCL AwsAuthBackendStsRoleResource where
-    toHCL AwsAuthBackendStsRoleResource{..} = TF.arguments
-        [ TF.assign "account_id" <$> _account_id
-        , TF.assign "backend" <$> _backend
-        , TF.assign "sts_role" <$> _sts_role
+    toHCL AwsAuthBackendStsRoleResource{..} = TF.block $ catMaybes
+        [ TF.assign "account_id" <$> TF.argument _account_id
+        , TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "sts_role" <$> TF.argument _sts_role
         ]
 
 $(TF.makeSchemaLenses
     ''AwsAuthBackendStsRoleResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsAuthBackendStsRoleResource :: TF.Resource TF.Vault AwsAuthBackendStsRoleResource
+awsAuthBackendStsRoleResource =
+    TF.newResource "vault_aws_auth_backend_sts_role" $
+        AwsAuthBackendStsRoleResource {
+            _account_id = TF.Nil
+            , _backend = TF.Nil
+            , _sts_role = TF.Nil
+            }
 
 {- | The @vault_aws_secret_backend@ Vault resource.
 
@@ -433,25 +429,24 @@ data AwsSecretBackendResource = AwsSecretBackendResource {
     {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
     } deriving (Show, Eq)
 
-awsSecretBackendResource :: TF.Resource TF.Vault AwsSecretBackendResource
-awsSecretBackendResource =
-    TF.newResource "vault_aws_secret_backend" $
-        AwsSecretBackendResource {
-            _access_key = TF.Absent
-            , _secret_key = TF.Absent
-            }
-
 instance TF.ToHCL AwsSecretBackendResource where
-    toHCL AwsSecretBackendResource{..} = TF.arguments
-        [ TF.assign "access_key" <$> _access_key
-        , TF.assign "secret_key" <$> _secret_key
+    toHCL AwsSecretBackendResource{..} = TF.block $ catMaybes
+        [ TF.assign "access_key" <$> TF.argument _access_key
+        , TF.assign "secret_key" <$> TF.argument _secret_key
         ]
 
 $(TF.makeSchemaLenses
     ''AwsSecretBackendResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsSecretBackendResource :: TF.Resource TF.Vault AwsSecretBackendResource
+awsSecretBackendResource =
+    TF.newResource "vault_aws_secret_backend" $
+        AwsSecretBackendResource {
+            _access_key = TF.Nil
+            , _secret_key = TF.Nil
+            }
 
 {- | The @vault_aws_secret_backend_role@ Vault resource.
 
@@ -473,29 +468,28 @@ data AwsSecretBackendRoleResource = AwsSecretBackendRoleResource {
     {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     } deriving (Show, Eq)
 
-awsSecretBackendRoleResource :: TF.Resource TF.Vault AwsSecretBackendRoleResource
-awsSecretBackendRoleResource =
-    TF.newResource "vault_aws_secret_backend_role" $
-        AwsSecretBackendRoleResource {
-            _backend = TF.Absent
-            , _name = TF.Absent
-            , _policy = TF.Absent
-            , _policy_arn = TF.Absent
-            }
-
 instance TF.ToHCL AwsSecretBackendRoleResource where
-    toHCL AwsSecretBackendRoleResource{..} = TF.arguments
-        [ TF.assign "backend" <$> _backend
-        , TF.assign "name" <$> _name
-        , TF.assign "policy" <$> _policy
-        , TF.assign "policy_arn" <$> _policy_arn
+    toHCL AwsSecretBackendRoleResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "policy" <$> TF.argument _policy
+        , TF.assign "policy_arn" <$> TF.argument _policy_arn
         ]
 
 $(TF.makeSchemaLenses
     ''AwsSecretBackendRoleResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+awsSecretBackendRoleResource :: TF.Resource TF.Vault AwsSecretBackendRoleResource
+awsSecretBackendRoleResource =
+    TF.newResource "vault_aws_secret_backend_role" $
+        AwsSecretBackendRoleResource {
+            _backend = TF.Nil
+            , _name = TF.Nil
+            , _policy = TF.Nil
+            , _policy_arn = TF.Nil
+            }
 
 {- | The @vault_generic_secret@ Vault resource.
 
@@ -520,29 +514,28 @@ data GenericSecretResource = GenericSecretResource {
     {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
     } deriving (Show, Eq)
 
-genericSecretResource :: TF.Resource TF.Vault GenericSecretResource
-genericSecretResource =
-    TF.newResource "vault_generic_secret" $
-        GenericSecretResource {
-            _allow_read = TF.Absent
-            , _data_json = TF.Absent
-            , _disable_read = TF.Absent
-            , _path = TF.Absent
-            }
-
 instance TF.ToHCL GenericSecretResource where
-    toHCL GenericSecretResource{..} = TF.arguments
-        [ TF.assign "allow_read" <$> _allow_read
-        , TF.assign "data_json" <$> _data_json
-        , TF.assign "disable_read" <$> _disable_read
-        , TF.assign "path" <$> _path
+    toHCL GenericSecretResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_read" <$> TF.argument _allow_read
+        , TF.assign "data_json" <$> TF.argument _data_json
+        , TF.assign "disable_read" <$> TF.argument _disable_read
+        , TF.assign "path" <$> TF.argument _path
         ]
 
 $(TF.makeSchemaLenses
     ''GenericSecretResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+genericSecretResource :: TF.Resource TF.Vault GenericSecretResource
+genericSecretResource =
+    TF.newResource "vault_generic_secret" $
+        GenericSecretResource {
+            _allow_read = TF.Nil
+            , _data_json = TF.Nil
+            , _disable_read = TF.Nil
+            , _path = TF.Nil
+            }
 
 {- | The @vault_mount@ Vault resource.
 
@@ -561,31 +554,30 @@ data MountResource = MountResource {
     {- ^ (Required) Type of the backend, such as "aws" -}
     } deriving (Show, Eq)
 
-mountResource :: TF.Resource TF.Vault MountResource
-mountResource =
-    TF.newResource "vault_mount" $
-        MountResource {
-            _default_lease_ttl_seconds = TF.Absent
-            , _description = TF.Absent
-            , _max_lease_ttl_seconds = TF.Absent
-            , _path = TF.Absent
-            , _type' = TF.Absent
-            }
-
 instance TF.ToHCL MountResource where
-    toHCL MountResource{..} = TF.arguments
-        [ TF.assign "default_lease_ttl_seconds" <$> _default_lease_ttl_seconds
-        , TF.assign "description" <$> _description
-        , TF.assign "max_lease_ttl_seconds" <$> _max_lease_ttl_seconds
-        , TF.assign "path" <$> _path
-        , TF.assign "type" <$> _type'
+    toHCL MountResource{..} = TF.block $ catMaybes
+        [ TF.assign "default_lease_ttl_seconds" <$> TF.argument _default_lease_ttl_seconds
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "max_lease_ttl_seconds" <$> TF.argument _max_lease_ttl_seconds
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''MountResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+mountResource :: TF.Resource TF.Vault MountResource
+mountResource =
+    TF.newResource "vault_mount" $
+        MountResource {
+            _default_lease_ttl_seconds = TF.Nil
+            , _description = TF.Nil
+            , _max_lease_ttl_seconds = TF.Nil
+            , _path = TF.Nil
+            , _type' = TF.Nil
+            }
 
 {- | The @vault_policy@ Vault resource.
 
@@ -598,22 +590,21 @@ data PolicyResource = PolicyResource {
     {- ^ (Required) String containing a Vault policy -}
     } deriving (Show, Eq)
 
-policyResource :: TF.Resource TF.Vault PolicyResource
-policyResource =
-    TF.newResource "vault_policy" $
-        PolicyResource {
-            _name = TF.Absent
-            , _policy = TF.Absent
-            }
-
 instance TF.ToHCL PolicyResource where
-    toHCL PolicyResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "policy" <$> _policy
+    toHCL PolicyResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "policy" <$> TF.argument _policy
         ]
 
 $(TF.makeSchemaLenses
     ''PolicyResource
     ''TF.Vault
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+policyResource :: TF.Resource TF.Vault PolicyResource
+policyResource =
+    TF.newResource "vault_policy" $
+        PolicyResource {
+            _name = TF.Nil
+            , _policy = TF.Nil
+            }

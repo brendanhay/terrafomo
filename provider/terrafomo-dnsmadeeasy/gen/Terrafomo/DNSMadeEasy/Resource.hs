@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.DNSMadeEasy     as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.DNSMadeEasy.Provider as TF
+import qualified Terrafomo.DNSMadeEasy.Types    as TF
+import qualified Terrafomo.Syntax.HCL           as TF
+import qualified Terrafomo.Syntax.Resource      as TF
+import qualified Terrafomo.Syntax.Resource      as TF
+import qualified Terrafomo.Syntax.Variable      as TF
+import qualified Terrafomo.TH                   as TF
 
 {- | The @dme_record@ DNSMadeEasy resource.
 
@@ -43,17 +45,16 @@ Provides a DNSMadeEasy record resource.
 data RecordResource = RecordResource {
     } deriving (Show, Eq)
 
+instance TF.ToHCL RecordResource where
+    toHCL _ = TF.block []
+
+$(TF.makeSchemaLenses
+    ''RecordResource
+    ''TF.DNSMadeEasy
+    ''TF.Resource)
+
 recordResource :: TF.Resource TF.DNSMadeEasy RecordResource
 recordResource =
     TF.newResource "dme_record" $
         RecordResource {
             }
-
-instance TF.ToHCL RecordResource where
-    toHCL = const $ TF.arguments []
-
-$(TF.makeSchemaLenses
-    ''RecordResource
-    ''TF.DNSMadeEasy
-    ''TF.Resource
-    'TF.schema)

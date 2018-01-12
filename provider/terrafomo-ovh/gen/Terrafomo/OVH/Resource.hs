@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.OVH             as TF
+import qualified Terrafomo.OVH.Provider    as TF
+import qualified Terrafomo.OVH.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -65,37 +67,36 @@ data DomainZoneRecordResource = DomainZoneRecordResource {
     {- ^ - The domain to add the record to -}
     } deriving (Show, Eq)
 
-domainZoneRecordResource :: TF.Resource TF.OVH DomainZoneRecordResource
-domainZoneRecordResource =
-    TF.newResource "ovh_domain_zone_record" $
-        DomainZoneRecordResource {
-            _fieldType = TF.Absent
-            , _subDomain = TF.Absent
-            , _target = TF.Absent
-            , _ttl = TF.Absent
-            , _zone = TF.Absent
-            , _computed_fieldType = TF.Computed "fieldType"
-            , _computed_id = TF.Computed "id"
-            , _computed_subDomain = TF.Computed "subDomain"
-            , _computed_target = TF.Computed "target"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_zone = TF.Computed "zone"
-            }
-
 instance TF.ToHCL DomainZoneRecordResource where
-    toHCL DomainZoneRecordResource{..} = TF.arguments
-        [ TF.assign "fieldType" <$> _fieldType
-        , TF.assign "subDomain" <$> _subDomain
-        , TF.assign "target" <$> _target
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "zone" <$> _zone
+    toHCL DomainZoneRecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "fieldType" <$> TF.argument _fieldType
+        , TF.assign "subDomain" <$> TF.argument _subDomain
+        , TF.assign "target" <$> TF.argument _target
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''DomainZoneRecordResource
     ''TF.OVH
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+domainZoneRecordResource :: TF.Resource TF.OVH DomainZoneRecordResource
+domainZoneRecordResource =
+    TF.newResource "ovh_domain_zone_record" $
+        DomainZoneRecordResource {
+            _fieldType = TF.Nil
+            , _subDomain = TF.Nil
+            , _target = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = TF.Nil
+            , _computed_fieldType = TF.Compute "fieldType"
+            , _computed_id = TF.Compute "id"
+            , _computed_subDomain = TF.Compute "subDomain"
+            , _computed_target = TF.Compute "target"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_zone = TF.Compute "zone"
+            }
 
 {- | The @ovh_publiccloud_private_network@ OVH resource.
 
@@ -128,37 +129,36 @@ data PubliccloudPrivateNetworkResource = PubliccloudPrivateNetworkResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-publiccloudPrivateNetworkResource :: TF.Resource TF.OVH PubliccloudPrivateNetworkResource
-publiccloudPrivateNetworkResource =
-    TF.newResource "ovh_publiccloud_private_network" $
-        PubliccloudPrivateNetworkResource {
-            _name = TF.Absent
-            , _project_id = TF.Absent
-            , _regions = TF.Absent
-            , _vlan_id = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_region = TF.Computed "regions_status/region"
-            , _computed_regions = TF.Computed "regions"
-            , _computed_regions_status = TF.Computed "regions_status"
-            , _computed_status = TF.Computed "status"
-            , _computed_type' = TF.Computed "type"
-            , _computed_vlan_id = TF.Computed "vlan_id"
-            }
-
 instance TF.ToHCL PubliccloudPrivateNetworkResource where
-    toHCL PubliccloudPrivateNetworkResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "project_id" <$> _project_id
-        , TF.assign "regions" <$> _regions
-        , TF.assign "vlan_id" <$> _vlan_id
+    toHCL PubliccloudPrivateNetworkResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "regions" <$> TF.argument _regions
+        , TF.assign "vlan_id" <$> TF.argument _vlan_id
         ]
 
 $(TF.makeSchemaLenses
     ''PubliccloudPrivateNetworkResource
     ''TF.OVH
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+publiccloudPrivateNetworkResource :: TF.Resource TF.OVH PubliccloudPrivateNetworkResource
+publiccloudPrivateNetworkResource =
+    TF.newResource "ovh_publiccloud_private_network" $
+        PubliccloudPrivateNetworkResource {
+            _name = TF.Nil
+            , _project_id = TF.Nil
+            , _regions = TF.Nil
+            , _vlan_id = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_region = TF.Compute "regions_status/region"
+            , _computed_regions = TF.Compute "regions"
+            , _computed_regions_status = TF.Compute "regions_status"
+            , _computed_status = TF.Compute "status"
+            , _computed_type' = TF.Compute "type"
+            , _computed_vlan_id = TF.Compute "vlan_id"
+            }
 
 {- | The @ovh_publiccloud_private_network_subnet@ OVH resource.
 
@@ -207,49 +207,48 @@ data PubliccloudPrivateNetworkSubnetResource = PubliccloudPrivateNetworkSubnetRe
     {- ^ - First ip for this region. -}
     } deriving (Show, Eq)
 
-publiccloudPrivateNetworkSubnetResource :: TF.Resource TF.OVH PubliccloudPrivateNetworkSubnetResource
-publiccloudPrivateNetworkSubnetResource =
-    TF.newResource "ovh_publiccloud_private_network_subnet" $
-        PubliccloudPrivateNetworkSubnetResource {
-            _dhcp = TF.Absent
-            , _end = TF.Absent
-            , _network = TF.Absent
-            , _network_id = TF.Absent
-            , _no_gateway = TF.Absent
-            , _project_id = TF.Absent
-            , _region = TF.Absent
-            , _start = TF.Absent
-            , _computed_cidr = TF.Computed "cidr"
-            , _computed_dhcp = TF.Computed "ip_pools/dhcp"
-            , _computed_dhcp_id = TF.Computed "dhcp_id"
-            , _computed_end = TF.Computed "ip_pools/end"
-            , _computed_gateway_ip = TF.Computed "gateway_ip"
-            , _computed_ip_pools = TF.Computed "ip_pools"
-            , _computed_network = TF.Computed "ip_pools/network"
-            , _computed_network_id = TF.Computed "network_id"
-            , _computed_no_gateway = TF.Computed "no_gateway"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_region = TF.Computed "ip_pools/region"
-            , _computed_start = TF.Computed "ip_pools/start"
-            }
-
 instance TF.ToHCL PubliccloudPrivateNetworkSubnetResource where
-    toHCL PubliccloudPrivateNetworkSubnetResource{..} = TF.arguments
-        [ TF.assign "dhcp" <$> _dhcp
-        , TF.assign "end" <$> _end
-        , TF.assign "network" <$> _network
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "no_gateway" <$> _no_gateway
-        , TF.assign "project_id" <$> _project_id
-        , TF.assign "region" <$> _region
-        , TF.assign "start" <$> _start
+    toHCL PubliccloudPrivateNetworkSubnetResource{..} = TF.block $ catMaybes
+        [ TF.assign "dhcp" <$> TF.argument _dhcp
+        , TF.assign "end" <$> TF.argument _end
+        , TF.assign "network" <$> TF.argument _network
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "no_gateway" <$> TF.argument _no_gateway
+        , TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "start" <$> TF.argument _start
         ]
 
 $(TF.makeSchemaLenses
     ''PubliccloudPrivateNetworkSubnetResource
     ''TF.OVH
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+publiccloudPrivateNetworkSubnetResource :: TF.Resource TF.OVH PubliccloudPrivateNetworkSubnetResource
+publiccloudPrivateNetworkSubnetResource =
+    TF.newResource "ovh_publiccloud_private_network_subnet" $
+        PubliccloudPrivateNetworkSubnetResource {
+            _dhcp = TF.Nil
+            , _end = TF.Nil
+            , _network = TF.Nil
+            , _network_id = TF.Nil
+            , _no_gateway = TF.Nil
+            , _project_id = TF.Nil
+            , _region = TF.Nil
+            , _start = TF.Nil
+            , _computed_cidr = TF.Compute "cidr"
+            , _computed_dhcp = TF.Compute "ip_pools/dhcp"
+            , _computed_dhcp_id = TF.Compute "dhcp_id"
+            , _computed_end = TF.Compute "ip_pools/end"
+            , _computed_gateway_ip = TF.Compute "gateway_ip"
+            , _computed_ip_pools = TF.Compute "ip_pools"
+            , _computed_network = TF.Compute "ip_pools/network"
+            , _computed_network_id = TF.Compute "network_id"
+            , _computed_no_gateway = TF.Compute "no_gateway"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_region = TF.Compute "ip_pools/region"
+            , _computed_start = TF.Compute "ip_pools/start"
+            }
 
 {- | The @ovh_publiccloud_user@ OVH resource.
 
@@ -276,32 +275,31 @@ data PubliccloudUserResource = PubliccloudUserResource {
     {- ^ - the username generated for the user. This username can be used with the Openstack API. -}
     } deriving (Show, Eq)
 
-publiccloudUserResource :: TF.Resource TF.OVH PubliccloudUserResource
-publiccloudUserResource =
-    TF.newResource "ovh_publiccloud_user" $
-        PubliccloudUserResource {
-            _description = TF.Absent
-            , _project_id = TF.Absent
-            , _computed_creation_date = TF.Computed "creation_date"
-            , _computed_description = TF.Computed "description"
-            , _computed_openstack_rc = TF.Computed "openstack_rc"
-            , _computed_password = TF.Computed "password"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_status = TF.Computed "status"
-            , _computed_username = TF.Computed "username"
-            }
-
 instance TF.ToHCL PubliccloudUserResource where
-    toHCL PubliccloudUserResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "project_id" <$> _project_id
+    toHCL PubliccloudUserResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "project_id" <$> TF.argument _project_id
         ]
 
 $(TF.makeSchemaLenses
     ''PubliccloudUserResource
     ''TF.OVH
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+publiccloudUserResource :: TF.Resource TF.OVH PubliccloudUserResource
+publiccloudUserResource =
+    TF.newResource "ovh_publiccloud_user" $
+        PubliccloudUserResource {
+            _description = TF.Nil
+            , _project_id = TF.Nil
+            , _computed_creation_date = TF.Compute "creation_date"
+            , _computed_description = TF.Compute "description"
+            , _computed_openstack_rc = TF.Compute "openstack_rc"
+            , _computed_password = TF.Compute "password"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_status = TF.Compute "status"
+            , _computed_username = TF.Compute "username"
+            }
 
 {- | The @ovh_vrack_publiccloud_attachment@ OVH resource.
 
@@ -318,24 +316,23 @@ data VrackPubliccloudAttachmentResource = VrackPubliccloudAttachmentResource {
     {- ^ - See Argument Reference above. -}
     } deriving (Show, Eq)
 
-vrackPubliccloudAttachmentResource :: TF.Resource TF.OVH VrackPubliccloudAttachmentResource
-vrackPubliccloudAttachmentResource =
-    TF.newResource "ovh_vrack_publiccloud_attachment" $
-        VrackPubliccloudAttachmentResource {
-            _project_id = TF.Absent
-            , _vrack_id = TF.Absent
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_vrack_id = TF.Computed "vrack_id"
-            }
-
 instance TF.ToHCL VrackPubliccloudAttachmentResource where
-    toHCL VrackPubliccloudAttachmentResource{..} = TF.arguments
-        [ TF.assign "project_id" <$> _project_id
-        , TF.assign "vrack_id" <$> _vrack_id
+    toHCL VrackPubliccloudAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "vrack_id" <$> TF.argument _vrack_id
         ]
 
 $(TF.makeSchemaLenses
     ''VrackPubliccloudAttachmentResource
     ''TF.OVH
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vrackPubliccloudAttachmentResource :: TF.Resource TF.OVH VrackPubliccloudAttachmentResource
+vrackPubliccloudAttachmentResource =
+    TF.newResource "ovh_vrack_publiccloud_attachment" $
+        VrackPubliccloudAttachmentResource {
+            _project_id = TF.Nil
+            , _vrack_id = TF.Nil
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_vrack_id = TF.Compute "vrack_id"
+            }

@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Scaleway          as TF
+import qualified Terrafomo.Scaleway.Provider as TF
+import qualified Terrafomo.Scaleway.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -64,34 +66,33 @@ data BootscriptDataSource = BootscriptDataSource {
     {- ^ - is this a public bootscript -}
     } deriving (Show, Eq)
 
-bootscriptDataSource :: TF.DataSource TF.Scaleway BootscriptDataSource
-bootscriptDataSource =
-    TF.newDataSource "scaleway_bootscript" $
-        BootscriptDataSource {
-            _architecture = TF.Absent
-            , _name = TF.Absent
-            , _name_filter = TF.Absent
-            , _computed_architecture = TF.Computed "architecture"
-            , _computed_boot_cmd_args = TF.Computed "boot_cmd_args"
-            , _computed_dtb = TF.Computed "dtb"
-            , _computed_initrd = TF.Computed "initrd"
-            , _computed_kernel = TF.Computed "kernel"
-            , _computed_organization = TF.Computed "organization"
-            , _computed_public = TF.Computed "public"
-            }
-
 instance TF.ToHCL BootscriptDataSource where
-    toHCL BootscriptDataSource{..} = TF.arguments
-        [ TF.assign "architecture" <$> _architecture
-        , TF.assign "name" <$> _name
-        , TF.assign "name_filter" <$> _name_filter
+    toHCL BootscriptDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "architecture" <$> TF.argument _architecture
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "name_filter" <$> TF.argument _name_filter
         ]
 
 $(TF.makeSchemaLenses
     ''BootscriptDataSource
     ''TF.Scaleway
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+bootscriptDataSource :: TF.DataSource TF.Scaleway BootscriptDataSource
+bootscriptDataSource =
+    TF.newDataSource "scaleway_bootscript" $
+        BootscriptDataSource {
+            _architecture = TF.Nil
+            , _name = TF.Nil
+            , _name_filter = TF.Nil
+            , _computed_architecture = TF.Compute "architecture"
+            , _computed_boot_cmd_args = TF.Compute "boot_cmd_args"
+            , _computed_dtb = TF.Compute "dtb"
+            , _computed_initrd = TF.Compute "initrd"
+            , _computed_kernel = TF.Compute "kernel"
+            , _computed_organization = TF.Compute "organization"
+            , _computed_public = TF.Compute "public"
+            }
 
 {- | The @scaleway_image@ Scaleway datasource.
 
@@ -115,28 +116,27 @@ data ImageDataSource = ImageDataSource {
     {- ^ - is this a public bootscript -}
     } deriving (Show, Eq)
 
-imageDataSource :: TF.DataSource TF.Scaleway ImageDataSource
-imageDataSource =
-    TF.newDataSource "scaleway_image" $
-        ImageDataSource {
-            _architecture = TF.Absent
-            , _name = TF.Absent
-            , _name_filter = TF.Absent
-            , _computed_architecture = TF.Computed "architecture"
-            , _computed_creation_date = TF.Computed "creation_date"
-            , _computed_organization = TF.Computed "organization"
-            , _computed_public = TF.Computed "public"
-            }
-
 instance TF.ToHCL ImageDataSource where
-    toHCL ImageDataSource{..} = TF.arguments
-        [ TF.assign "architecture" <$> _architecture
-        , TF.assign "name" <$> _name
-        , TF.assign "name_filter" <$> _name_filter
+    toHCL ImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "architecture" <$> TF.argument _architecture
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "name_filter" <$> TF.argument _name_filter
         ]
 
 $(TF.makeSchemaLenses
     ''ImageDataSource
     ''TF.Scaleway
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imageDataSource :: TF.DataSource TF.Scaleway ImageDataSource
+imageDataSource =
+    TF.newDataSource "scaleway_image" $
+        ImageDataSource {
+            _architecture = TF.Nil
+            , _name = TF.Nil
+            , _name_filter = TF.Nil
+            , _computed_architecture = TF.Compute "architecture"
+            , _computed_creation_date = TF.Compute "creation_date"
+            , _computed_organization = TF.Compute "organization"
+            , _computed_public = TF.Compute "public"
+            }

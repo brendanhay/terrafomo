@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Icinga2         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Icinga2.Provider as TF
+import qualified Terrafomo.Icinga2.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @icinga2_checkcommand@ Icinga2 resource.
 
@@ -52,29 +54,28 @@ data CheckcommandResource = CheckcommandResource {
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     } deriving (Show, Eq)
 
-checkcommandResource :: TF.Resource TF.Icinga2 CheckcommandResource
-checkcommandResource =
-    TF.newResource "icinga2_checkcommand" $
-        CheckcommandResource {
-            _arguments = TF.Absent
-            , _command = TF.Absent
-            , _name = TF.Absent
-            , _templates = TF.Absent
-            }
-
 instance TF.ToHCL CheckcommandResource where
-    toHCL CheckcommandResource{..} = TF.arguments
-        [ TF.assign "arguments" <$> _arguments
-        , TF.assign "command" <$> _command
-        , TF.assign "name" <$> _name
-        , TF.assign "templates" <$> _templates
+    toHCL CheckcommandResource{..} = TF.block $ catMaybes
+        [ TF.assign "arguments" <$> TF.argument _arguments
+        , TF.assign "command" <$> TF.argument _command
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "templates" <$> TF.argument _templates
         ]
 
 $(TF.makeSchemaLenses
     ''CheckcommandResource
     ''TF.Icinga2
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+checkcommandResource :: TF.Resource TF.Icinga2 CheckcommandResource
+checkcommandResource =
+    TF.newResource "icinga2_checkcommand" $
+        CheckcommandResource {
+            _arguments = TF.Nil
+            , _command = TF.Nil
+            , _name = TF.Nil
+            , _templates = TF.Nil
+            }
 
 {- | The @icinga2_host@ Icinga2 resource.
 
@@ -94,31 +95,30 @@ data HostResource = HostResource {
     {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Eq)
 
-hostResource :: TF.Resource TF.Icinga2 HostResource
-hostResource =
-    TF.newResource "icinga2_host" $
-        HostResource {
-            _address = TF.Absent
-            , _check_command = TF.Absent
-            , _hostname = TF.Absent
-            , _templates = TF.Absent
-            , _vars = TF.Absent
-            }
-
 instance TF.ToHCL HostResource where
-    toHCL HostResource{..} = TF.arguments
-        [ TF.assign "address" <$> _address
-        , TF.assign "check_command" <$> _check_command
-        , TF.assign "hostname" <$> _hostname
-        , TF.assign "templates" <$> _templates
-        , TF.assign "vars" <$> _vars
+    toHCL HostResource{..} = TF.block $ catMaybes
+        [ TF.assign "address" <$> TF.argument _address
+        , TF.assign "check_command" <$> TF.argument _check_command
+        , TF.assign "hostname" <$> TF.argument _hostname
+        , TF.assign "templates" <$> TF.argument _templates
+        , TF.assign "vars" <$> TF.argument _vars
         ]
 
 $(TF.makeSchemaLenses
     ''HostResource
     ''TF.Icinga2
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+hostResource :: TF.Resource TF.Icinga2 HostResource
+hostResource =
+    TF.newResource "icinga2_host" $
+        HostResource {
+            _address = TF.Nil
+            , _check_command = TF.Nil
+            , _hostname = TF.Nil
+            , _templates = TF.Nil
+            , _vars = TF.Nil
+            }
 
 {- | The @icinga2_hostgroup@ Icinga2 resource.
 
@@ -132,25 +132,24 @@ data HostgroupResource = HostgroupResource {
     {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Eq)
 
-hostgroupResource :: TF.Resource TF.Icinga2 HostgroupResource
-hostgroupResource =
-    TF.newResource "icinga2_hostgroup" $
-        HostgroupResource {
-            _display_name = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL HostgroupResource where
-    toHCL HostgroupResource{..} = TF.arguments
-        [ TF.assign "display_name" <$> _display_name
-        , TF.assign "name" <$> _name
+    toHCL HostgroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "display_name" <$> TF.argument _display_name
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''HostgroupResource
     ''TF.Icinga2
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+hostgroupResource :: TF.Resource TF.Icinga2 HostgroupResource
+hostgroupResource =
+    TF.newResource "icinga2_hostgroup" $
+        HostgroupResource {
+            _display_name = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @icinga2_service@ Icinga2 resource.
 
@@ -166,24 +165,23 @@ data ServiceResource = ServiceResource {
     {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Eq)
 
-serviceResource :: TF.Resource TF.Icinga2 ServiceResource
-serviceResource =
-    TF.newResource "icinga2_service" $
-        ServiceResource {
-            _check_command = TF.Absent
-            , _hostname = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL ServiceResource where
-    toHCL ServiceResource{..} = TF.arguments
-        [ TF.assign "check_command" <$> _check_command
-        , TF.assign "hostname" <$> _hostname
-        , TF.assign "name" <$> _name
+    toHCL ServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "check_command" <$> TF.argument _check_command
+        , TF.assign "hostname" <$> TF.argument _hostname
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceResource
     ''TF.Icinga2
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serviceResource :: TF.Resource TF.Icinga2 ServiceResource
+serviceResource =
+    TF.newResource "icinga2_service" $
+        ServiceResource {
+            _check_command = TF.Nil
+            , _hostname = TF.Nil
+            , _name = TF.Nil
+            }

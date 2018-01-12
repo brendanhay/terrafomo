@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.PagerDuty       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.PagerDuty.Provider as TF
+import qualified Terrafomo.PagerDuty.Types    as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @pagerduty_addon@ PagerDuty resource.
 
@@ -53,26 +55,25 @@ data AddonResource = AddonResource {
     {- ^ - The ID of the add-on. -}
     } deriving (Show, Eq)
 
-addonResource :: TF.Resource TF.PagerDuty AddonResource
-addonResource =
-    TF.newResource "pagerduty_addon" $
-        AddonResource {
-            _name = TF.Absent
-            , _src = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AddonResource where
-    toHCL AddonResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "src" <$> _src
+    toHCL AddonResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "src" <$> TF.argument _src
         ]
 
 $(TF.makeSchemaLenses
     ''AddonResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+addonResource :: TF.Resource TF.PagerDuty AddonResource
+addonResource =
+    TF.newResource "pagerduty_addon" $
+        AddonResource {
+            _name = TF.Nil
+            , _src = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @pagerduty_escalation_policy@ PagerDuty resource.
 
@@ -97,32 +98,31 @@ data EscalationPolicyResource = EscalationPolicyResource {
     {- ^ - The ID of the escalation policy. -}
     } deriving (Show, Eq)
 
-escalationPolicyResource :: TF.Resource TF.PagerDuty EscalationPolicyResource
-escalationPolicyResource =
-    TF.newResource "pagerduty_escalation_policy" $
-        EscalationPolicyResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _num_loops = TF.Absent
-            , _rule = TF.Absent
-            , _teams = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL EscalationPolicyResource where
-    toHCL EscalationPolicyResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "num_loops" <$> _num_loops
-        , TF.assign "rule" <$> _rule
-        , TF.assign "teams" <$> _teams
+    toHCL EscalationPolicyResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "num_loops" <$> TF.argument _num_loops
+        , TF.assign "rule" <$> TF.argument _rule
+        , TF.assign "teams" <$> TF.argument _teams
         ]
 
 $(TF.makeSchemaLenses
     ''EscalationPolicyResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+escalationPolicyResource :: TF.Resource TF.PagerDuty EscalationPolicyResource
+escalationPolicyResource =
+    TF.newResource "pagerduty_escalation_policy" $
+        EscalationPolicyResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _num_loops = TF.Nil
+            , _rule = TF.Nil
+            , _teams = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @pagerduty_maintenance_window@ PagerDuty resource.
 
@@ -148,30 +148,29 @@ data MaintenanceWindowResource = MaintenanceWindowResource {
     {- ^ - The ID of the maintenance window. -}
     } deriving (Show, Eq)
 
-maintenanceWindowResource :: TF.Resource TF.PagerDuty MaintenanceWindowResource
-maintenanceWindowResource =
-    TF.newResource "pagerduty_maintenance_window" $
-        MaintenanceWindowResource {
-            _description = TF.Absent
-            , _end_time = TF.Absent
-            , _services = TF.Absent
-            , _start_time = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL MaintenanceWindowResource where
-    toHCL MaintenanceWindowResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "end_time" <$> _end_time
-        , TF.assign "services" <$> _services
-        , TF.assign "start_time" <$> _start_time
+    toHCL MaintenanceWindowResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "end_time" <$> TF.argument _end_time
+        , TF.assign "services" <$> TF.argument _services
+        , TF.assign "start_time" <$> TF.argument _start_time
         ]
 
 $(TF.makeSchemaLenses
     ''MaintenanceWindowResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+maintenanceWindowResource :: TF.Resource TF.PagerDuty MaintenanceWindowResource
+maintenanceWindowResource =
+    TF.newResource "pagerduty_maintenance_window" $
+        MaintenanceWindowResource {
+            _description = TF.Nil
+            , _end_time = TF.Nil
+            , _services = TF.Nil
+            , _start_time = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @pagerduty_schedule@ PagerDuty resource.
 
@@ -195,32 +194,31 @@ data ScheduleResource = ScheduleResource {
     {- ^ - The ID of the schedule -}
     } deriving (Show, Eq)
 
-scheduleResource :: TF.Resource TF.PagerDuty ScheduleResource
-scheduleResource =
-    TF.newResource "pagerduty_schedule" $
-        ScheduleResource {
-            _description = TF.Absent
-            , _layer = TF.Absent
-            , _name = TF.Absent
-            , _overflow = TF.Absent
-            , _time_zone = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ScheduleResource where
-    toHCL ScheduleResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "layer" <$> _layer
-        , TF.assign "name" <$> _name
-        , TF.assign "overflow" <$> _overflow
-        , TF.assign "time_zone" <$> _time_zone
+    toHCL ScheduleResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "layer" <$> TF.argument _layer
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "overflow" <$> TF.argument _overflow
+        , TF.assign "time_zone" <$> TF.argument _time_zone
         ]
 
 $(TF.makeSchemaLenses
     ''ScheduleResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+scheduleResource :: TF.Resource TF.PagerDuty ScheduleResource
+scheduleResource =
+    TF.newResource "pagerduty_schedule" $
+        ScheduleResource {
+            _description = TF.Nil
+            , _layer = TF.Nil
+            , _name = TF.Nil
+            , _overflow = TF.Nil
+            , _time_zone = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @pagerduty_service_integration@ PagerDuty resource.
 
@@ -249,36 +247,35 @@ data ServiceIntegrationResource = ServiceIntegrationResource {
     {- ^ - This is the unique key used to route events to this integration when received via the PagerDuty Events API. -}
     } deriving (Show, Eq)
 
-serviceIntegrationResource :: TF.Resource TF.PagerDuty ServiceIntegrationResource
-serviceIntegrationResource =
-    TF.newResource "pagerduty_service_integration" $
-        ServiceIntegrationResource {
-            _integration_email = TF.Absent
-            , _integration_key = TF.Absent
-            , _name = TF.Absent
-            , _service = TF.Absent
-            , _type' = TF.Absent
-            , _vendor = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_integration_email = TF.Computed "integration_email"
-            , _computed_integration_key = TF.Computed "integration_key"
-            }
-
 instance TF.ToHCL ServiceIntegrationResource where
-    toHCL ServiceIntegrationResource{..} = TF.arguments
-        [ TF.assign "integration_email" <$> _integration_email
-        , TF.assign "integration_key" <$> _integration_key
-        , TF.assign "name" <$> _name
-        , TF.assign "service" <$> _service
-        , TF.assign "type" <$> _type'
-        , TF.assign "vendor" <$> _vendor
+    toHCL ServiceIntegrationResource{..} = TF.block $ catMaybes
+        [ TF.assign "integration_email" <$> TF.argument _integration_email
+        , TF.assign "integration_key" <$> TF.argument _integration_key
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "service" <$> TF.argument _service
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "vendor" <$> TF.argument _vendor
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceIntegrationResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serviceIntegrationResource :: TF.Resource TF.PagerDuty ServiceIntegrationResource
+serviceIntegrationResource =
+    TF.newResource "pagerduty_service_integration" $
+        ServiceIntegrationResource {
+            _integration_email = TF.Nil
+            , _integration_key = TF.Nil
+            , _name = TF.Nil
+            , _service = TF.Nil
+            , _type' = TF.Nil
+            , _vendor = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_integration_email = TF.Compute "integration_email"
+            , _computed_integration_key = TF.Compute "integration_key"
+            }
 
 {- | The @pagerduty_service@ PagerDuty resource.
 
@@ -311,37 +308,36 @@ data ServiceResource = ServiceResource {
     {- ^ - The status of the service -}
     } deriving (Show, Eq)
 
-serviceResource :: TF.Resource TF.PagerDuty ServiceResource
-serviceResource =
-    TF.newResource "pagerduty_service" $
-        ServiceResource {
-            _acknowledgement_timeout = TF.Absent
-            , _alert_creation = TF.Absent
-            , _auto_resolve_timeout = TF.Absent
-            , _description = TF.Absent
-            , _escalation_policy = TF.Absent
-            , _name = TF.Absent
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_id = TF.Computed "id"
-            , _computed_last_incident_timestamp = TF.Computed "last_incident_timestamp"
-            , _computed_status = TF.Computed "status"
-            }
-
 instance TF.ToHCL ServiceResource where
-    toHCL ServiceResource{..} = TF.arguments
-        [ TF.assign "acknowledgement_timeout" <$> _acknowledgement_timeout
-        , TF.assign "alert_creation" <$> _alert_creation
-        , TF.assign "auto_resolve_timeout" <$> _auto_resolve_timeout
-        , TF.assign "description" <$> _description
-        , TF.assign "escalation_policy" <$> _escalation_policy
-        , TF.assign "name" <$> _name
+    toHCL ServiceResource{..} = TF.block $ catMaybes
+        [ TF.assign "acknowledgement_timeout" <$> TF.argument _acknowledgement_timeout
+        , TF.assign "alert_creation" <$> TF.argument _alert_creation
+        , TF.assign "auto_resolve_timeout" <$> TF.argument _auto_resolve_timeout
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "escalation_policy" <$> TF.argument _escalation_policy
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ServiceResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serviceResource :: TF.Resource TF.PagerDuty ServiceResource
+serviceResource =
+    TF.newResource "pagerduty_service" $
+        ServiceResource {
+            _acknowledgement_timeout = TF.Nil
+            , _alert_creation = TF.Nil
+            , _auto_resolve_timeout = TF.Nil
+            , _description = TF.Nil
+            , _escalation_policy = TF.Nil
+            , _name = TF.Nil
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_id = TF.Compute "id"
+            , _computed_last_incident_timestamp = TF.Compute "last_incident_timestamp"
+            , _computed_status = TF.Compute "status"
+            }
 
 {- | The @pagerduty_team_membership@ PagerDuty resource.
 
@@ -360,27 +356,26 @@ data TeamMembershipResource = TeamMembershipResource {
     {- ^ - The ID of the user belonging to the team. -}
     } deriving (Show, Eq)
 
-teamMembershipResource :: TF.Resource TF.PagerDuty TeamMembershipResource
-teamMembershipResource =
-    TF.newResource "pagerduty_team_membership" $
-        TeamMembershipResource {
-            _team_id = TF.Absent
-            , _user_id = TF.Absent
-            , _computed_team_id = TF.Computed "team_id"
-            , _computed_user_id = TF.Computed "user_id"
-            }
-
 instance TF.ToHCL TeamMembershipResource where
-    toHCL TeamMembershipResource{..} = TF.arguments
-        [ TF.assign "team_id" <$> _team_id
-        , TF.assign "user_id" <$> _user_id
+    toHCL TeamMembershipResource{..} = TF.block $ catMaybes
+        [ TF.assign "team_id" <$> TF.argument _team_id
+        , TF.assign "user_id" <$> TF.argument _user_id
         ]
 
 $(TF.makeSchemaLenses
     ''TeamMembershipResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamMembershipResource :: TF.Resource TF.PagerDuty TeamMembershipResource
+teamMembershipResource =
+    TF.newResource "pagerduty_team_membership" $
+        TeamMembershipResource {
+            _team_id = TF.Nil
+            , _user_id = TF.Nil
+            , _computed_team_id = TF.Compute "team_id"
+            , _computed_user_id = TF.Compute "user_id"
+            }
 
 {- | The @pagerduty_team@ PagerDuty resource.
 
@@ -399,26 +394,25 @@ data TeamResource = TeamResource {
     {- ^ - The ID of the team. -}
     } deriving (Show, Eq)
 
-teamResource :: TF.Resource TF.PagerDuty TeamResource
-teamResource =
-    TF.newResource "pagerduty_team" $
-        TeamResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL TeamResource where
-    toHCL TeamResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
+    toHCL TeamResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TeamResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+teamResource :: TF.Resource TF.PagerDuty TeamResource
+teamResource =
+    TF.newResource "pagerduty_team" $
+        TeamResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @pagerduty_user@ PagerDuty resource.
 
@@ -454,37 +448,36 @@ data UserResource = UserResource {
     {- ^ - The timezone of the user -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.PagerDuty UserResource
-userResource =
-    TF.newResource "pagerduty_user" $
-        UserResource {
-            _color = TF.Absent
-            , _description = TF.Absent
-            , _email = TF.Absent
-            , _job_title = TF.Absent
-            , _name = TF.Absent
-            , _role = TF.Absent
-            , _teams = TF.Absent
-            , _computed_avatar_url = TF.Computed "avatar_url"
-            , _computed_html_url = TF.Computed "html_url"
-            , _computed_id = TF.Computed "id"
-            , _computed_invitation_sent = TF.Computed "invitation_sent"
-            , _computed_time_zone = TF.Computed "time_zone"
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "color" <$> _color
-        , TF.assign "description" <$> _description
-        , TF.assign "email" <$> _email
-        , TF.assign "job_title" <$> _job_title
-        , TF.assign "name" <$> _name
-        , TF.assign "role" <$> _role
-        , TF.assign "teams" <$> _teams
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "color" <$> TF.argument _color
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "job_title" <$> TF.argument _job_title
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "role" <$> TF.argument _role
+        , TF.assign "teams" <$> TF.argument _teams
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.PagerDuty
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.PagerDuty UserResource
+userResource =
+    TF.newResource "pagerduty_user" $
+        UserResource {
+            _color = TF.Nil
+            , _description = TF.Nil
+            , _email = TF.Nil
+            , _job_title = TF.Nil
+            , _name = TF.Nil
+            , _role = TF.Nil
+            , _teams = TF.Nil
+            , _computed_avatar_url = TF.Compute "avatar_url"
+            , _computed_html_url = TF.Compute "html_url"
+            , _computed_id = TF.Compute "id"
+            , _computed_invitation_sent = TF.Compute "invitation_sent"
+            , _computed_time_zone = TF.Compute "time_zone"
+            }

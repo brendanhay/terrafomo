@@ -44,10 +44,13 @@ library:
     - base >= 4.9 && < 5
     - containers
     - dlist
+    - either
     - formatting
     - hashable
     - microlens
     - microlens-th
+    - mmorph
+    - mtl
     - random
     - template-haskell
     - text

@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Kubernetes.Provider where
+module Terrafomo.Kubernetes.Provider
+    ( Kubernetes    (..)
+    , HasKubernetes (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Kubernetes.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Meta      as TF
+import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Variable  as TF
 import qualified Terrafomo.TH               as TF
 
@@ -33,8 +46,8 @@ supported by Kubernetes. The provider needs to be configured with the proper
 credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
-data Kubernetes = Kubernetes
-    { _client_certificate       :: !(TF.Argument Text)
+data Kubernetes = Kubernetes {
+      _client_certificate       :: !(TF.Argument Text)
     {- ^ (Optional) PEM-encoded client certificate for TLS authentication. Can be sourced from @KUBE_CLIENT_CERT_DATA@ . -}
     , _client_key               :: !(TF.Argument Text)
     {- ^ (Optional) PEM-encoded client certificate key for TLS authentication. Can be sourced from @KUBE_CLIENT_KEY_DATA@ . -}
@@ -65,20 +78,60 @@ data Kubernetes = Kubernetes
 instance Hashable Kubernetes
 
 instance TF.ToHCL Kubernetes where
-    toHCL x = TF.arguments
-        [ TF.assign "client_certificate" <$> _client_certificate x
-        , TF.assign "client_key" <$> _client_key x
-        , TF.assign "cluster_ca_certificate" <$> _cluster_ca_certificate x
-        , TF.assign "config_context" <$> _config_context x
-        , TF.assign "config_context_auth_info" <$> _config_context_auth_info x
-        , TF.assign "config_context_cluster" <$> _config_context_cluster x
-        , TF.assign "config_path" <$> _config_path x
-        , TF.assign "host" <$> _host x
-        , TF.assign "insecure" <$> _insecure x
-        , TF.assign "load_config_file" <$> _load_config_file x
-        , TF.assign "password" <$> _password x
-        , TF.assign "token" <$> _token x
-        , TF.assign "username" <$> _username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Kubernetes))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "client_certificate" <$> TF.argument (_client_certificate x)
+            , TF.assign "client_key" <$> TF.argument (_client_key x)
+            , TF.assign "cluster_ca_certificate" <$> TF.argument (_cluster_ca_certificate x)
+            , TF.assign "config_context" <$> TF.argument (_config_context x)
+            , TF.assign "config_context_auth_info" <$> TF.argument (_config_context_auth_info x)
+            , TF.assign "config_context_cluster" <$> TF.argument (_config_context_cluster x)
+            , TF.assign "config_path" <$> TF.argument (_config_path x)
+            , TF.assign "host" <$> TF.argument (_host x)
+            , TF.assign "insecure" <$> TF.argument (_insecure x)
+            , TF.assign "load_config_file" <$> TF.argument (_load_config_file x)
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.assign "username" <$> TF.argument (_username x)
+            ]
 
-$(TF.makeClassy ''Kubernetes)
+instance Semigroup Kubernetes where
+    (<>) a b = Kubernetes {
+          _client_certificate = on (<>) _client_certificate a b
+        , _client_key = on (<>) _client_key a b
+        , _cluster_ca_certificate = on (<>) _cluster_ca_certificate a b
+        , _config_context = on (<>) _config_context a b
+        , _config_context_auth_info = on (<>) _config_context_auth_info a b
+        , _config_context_cluster = on (<>) _config_context_cluster a b
+        , _config_path = on (<>) _config_path a b
+        , _host = on (<>) _host a b
+        , _insecure = on (<>) _insecure a b
+        , _load_config_file = on (<>) _load_config_file a b
+        , _password = on (<>) _password a b
+        , _token = on (<>) _token a b
+        , _username = on (<>) _username a b
+        }
+
+instance Monoid Kubernetes where
+    mappend = (<>)
+    mempty  = Kubernetes {
+            _client_certificate = TF.Nil
+          , _client_key = TF.Nil
+          , _cluster_ca_certificate = TF.Nil
+          , _config_context = TF.Nil
+          , _config_context_auth_info = TF.Nil
+          , _config_context_cluster = TF.Nil
+          , _config_path = TF.Nil
+          , _host = TF.Nil
+          , _insecure = TF.Nil
+          , _load_config_file = TF.Nil
+          , _password = TF.Nil
+          , _token = TF.Nil
+          , _username = TF.Nil
+        }
+
+instance TF.IsProvider Kubernetes where
+    type ProviderName Kubernetes = "kubernetes"
+
+$(TF.makeProviderLenses ''Kubernetes)

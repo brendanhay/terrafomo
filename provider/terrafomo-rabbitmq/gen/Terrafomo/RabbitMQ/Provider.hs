@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.RabbitMQ.Provider where
+module Terrafomo.RabbitMQ.Provider
+    ( RabbitMQ    (..)
+    , HasRabbitMQ (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.RabbitMQ.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ provider exposes resources used to manage the configuration of resources in
 a RabbitMQ server. Use the navigation to the left to read about the
 available resources.
 -}
-data RabbitMQ = RabbitMQ
-    { _cacert_file :: !(TF.Argument Text)
+data RabbitMQ = RabbitMQ {
+      _cacert_file :: !(TF.Argument Text)
     {- ^ (Optional) The path to a custom CA / intermediate certificate. -}
     , _endpoint    :: !(TF.Argument Text)
     {- ^ (Required) The HTTP URL of the management plugin on the RabbitMQ server. The RabbitMQ management plugin must be enabled in order to use this provder. Note : This is not the IP address or hostname of the RabbitMQ server that you would use to access RabbitMQ directly. -}
@@ -49,12 +62,36 @@ data RabbitMQ = RabbitMQ
 instance Hashable RabbitMQ
 
 instance TF.ToHCL RabbitMQ where
-    toHCL x = TF.arguments
-        [ TF.assign "cacert_file" <$> _cacert_file x
-        , TF.assign "endpoint" <$> _endpoint x
-        , TF.assign "insecure" <$> _insecure x
-        , TF.assign "password" <$> _password x
-        , TF.assign "username" <$> _username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy RabbitMQ))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "cacert_file" <$> TF.argument (_cacert_file x)
+            , TF.assign "endpoint" <$> TF.argument (_endpoint x)
+            , TF.assign "insecure" <$> TF.argument (_insecure x)
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "username" <$> TF.argument (_username x)
+            ]
 
-$(TF.makeClassy ''RabbitMQ)
+instance Semigroup RabbitMQ where
+    (<>) a b = RabbitMQ {
+          _cacert_file = on (<>) _cacert_file a b
+        , _endpoint = on (<>) _endpoint a b
+        , _insecure = on (<>) _insecure a b
+        , _password = on (<>) _password a b
+        , _username = on (<>) _username a b
+        }
+
+instance Monoid RabbitMQ where
+    mappend = (<>)
+    mempty  = RabbitMQ {
+            _cacert_file = TF.Nil
+          , _endpoint = TF.Nil
+          , _insecure = TF.Nil
+          , _password = TF.Nil
+          , _username = TF.Nil
+        }
+
+instance TF.IsProvider RabbitMQ where
+    type ProviderName RabbitMQ = "rabbitmq"
+
+$(TF.makeProviderLenses ''RabbitMQ)

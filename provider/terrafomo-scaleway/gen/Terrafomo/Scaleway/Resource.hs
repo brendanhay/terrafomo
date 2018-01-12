@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Scaleway        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Scaleway.Provider as TF
+import qualified Terrafomo.Scaleway.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @scaleway_ip@ Scaleway resource.
 
@@ -51,25 +53,24 @@ data IpResource = IpResource {
     {- ^ - IP of the new resource -}
     } deriving (Show, Eq)
 
-ipResource :: TF.Resource TF.Scaleway IpResource
-ipResource =
-    TF.newResource "scaleway_ip" $
-        IpResource {
-            _server = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip = TF.Computed "ip"
-            }
-
 instance TF.ToHCL IpResource where
-    toHCL IpResource{..} = TF.arguments
-        [ TF.assign "server" <$> _server
+    toHCL IpResource{..} = TF.block $ catMaybes
+        [ TF.assign "server" <$> TF.argument _server
         ]
 
 $(TF.makeSchemaLenses
     ''IpResource
     ''TF.Scaleway
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ipResource :: TF.Resource TF.Scaleway IpResource
+ipResource =
+    TF.newResource "scaleway_ip" $
+        IpResource {
+            _server = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip = TF.Compute "ip"
+            }
 
 {- | The @scaleway_security_group@ Scaleway resource.
 
@@ -86,26 +87,25 @@ data SecurityGroupResource = SecurityGroupResource {
     {- ^ - id of the new resource -}
     } deriving (Show, Eq)
 
-securityGroupResource :: TF.Resource TF.Scaleway SecurityGroupResource
-securityGroupResource =
-    TF.newResource "scaleway_security_group" $
-        SecurityGroupResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SecurityGroupResource where
-    toHCL SecurityGroupResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
+    toHCL SecurityGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''SecurityGroupResource
     ''TF.Scaleway
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+securityGroupResource :: TF.Resource TF.Scaleway SecurityGroupResource
+securityGroupResource =
+    TF.newResource "scaleway_security_group" $
+        SecurityGroupResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @scaleway_security_group_rule@ Scaleway resource.
 
@@ -130,34 +130,33 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource {
     {- ^ - id of the new resource -}
     } deriving (Show, Eq)
 
-securityGroupRuleResource :: TF.Resource TF.Scaleway SecurityGroupRuleResource
-securityGroupRuleResource =
-    TF.newResource "scaleway_security_group_rule" $
-        SecurityGroupRuleResource {
-            _action = TF.Absent
-            , _direction = TF.Absent
-            , _ip_range = TF.Absent
-            , _port = TF.Absent
-            , _protocol = TF.Absent
-            , _security_group = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SecurityGroupRuleResource where
-    toHCL SecurityGroupRuleResource{..} = TF.arguments
-        [ TF.assign "action" <$> _action
-        , TF.assign "direction" <$> _direction
-        , TF.assign "ip_range" <$> _ip_range
-        , TF.assign "port" <$> _port
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "security_group" <$> _security_group
+    toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "action" <$> TF.argument _action
+        , TF.assign "direction" <$> TF.argument _direction
+        , TF.assign "ip_range" <$> TF.argument _ip_range
+        , TF.assign "port" <$> TF.argument _port
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "security_group" <$> TF.argument _security_group
         ]
 
 $(TF.makeSchemaLenses
     ''SecurityGroupRuleResource
     ''TF.Scaleway
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+securityGroupRuleResource :: TF.Resource TF.Scaleway SecurityGroupRuleResource
+securityGroupRuleResource =
+    TF.newResource "scaleway_security_group_rule" $
+        SecurityGroupRuleResource {
+            _action = TF.Nil
+            , _direction = TF.Nil
+            , _ip_range = TF.Nil
+            , _port = TF.Nil
+            , _protocol = TF.Nil
+            , _security_group = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @scaleway_server@ Scaleway resource.
 
@@ -192,45 +191,44 @@ data ServerResource = ServerResource {
     {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Eq)
 
-serverResource :: TF.Resource TF.Scaleway ServerResource
-serverResource =
-    TF.newResource "scaleway_server" $
-        ServerResource {
-            _bootscript = TF.Absent
-            , _dynamic_ip_required = TF.Absent
-            , _enable_ipv6 = TF.Absent
-            , _image = TF.Absent
-            , _name = TF.Absent
-            , _public_ipv6 = TF.Absent
-            , _security_group = TF.Absent
-            , _state = TF.Absent
-            , _state_detail = TF.Absent
-            , _tags = TF.Absent
-            , _type' = TF.Absent
-            , _volume = TF.Absent
-            }
-
 instance TF.ToHCL ServerResource where
-    toHCL ServerResource{..} = TF.arguments
-        [ TF.assign "bootscript" <$> _bootscript
-        , TF.assign "dynamic_ip_required" <$> _dynamic_ip_required
-        , TF.assign "enable_ipv6" <$> _enable_ipv6
-        , TF.assign "image" <$> _image
-        , TF.assign "name" <$> _name
-        , TF.assign "public_ipv6" <$> _public_ipv6
-        , TF.assign "security_group" <$> _security_group
-        , TF.assign "state" <$> _state
-        , TF.assign "state_detail" <$> _state_detail
-        , TF.assign "tags" <$> _tags
-        , TF.assign "type" <$> _type'
-        , TF.assign "volume" <$> _volume
+    toHCL ServerResource{..} = TF.block $ catMaybes
+        [ TF.assign "bootscript" <$> TF.argument _bootscript
+        , TF.assign "dynamic_ip_required" <$> TF.argument _dynamic_ip_required
+        , TF.assign "enable_ipv6" <$> TF.argument _enable_ipv6
+        , TF.assign "image" <$> TF.argument _image
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "public_ipv6" <$> TF.argument _public_ipv6
+        , TF.assign "security_group" <$> TF.argument _security_group
+        , TF.assign "state" <$> TF.argument _state
+        , TF.assign "state_detail" <$> TF.argument _state_detail
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "volume" <$> TF.argument _volume
         ]
 
 $(TF.makeSchemaLenses
     ''ServerResource
     ''TF.Scaleway
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+serverResource :: TF.Resource TF.Scaleway ServerResource
+serverResource =
+    TF.newResource "scaleway_server" $
+        ServerResource {
+            _bootscript = TF.Nil
+            , _dynamic_ip_required = TF.Nil
+            , _enable_ipv6 = TF.Nil
+            , _image = TF.Nil
+            , _name = TF.Nil
+            , _public_ipv6 = TF.Nil
+            , _security_group = TF.Nil
+            , _state = TF.Nil
+            , _state_detail = TF.Nil
+            , _tags = TF.Nil
+            , _type' = TF.Nil
+            , _volume = TF.Nil
+            }
 
 {- | The @scaleway_volume_attachment@ Scaleway resource.
 
@@ -247,26 +245,25 @@ data VolumeAttachmentResource = VolumeAttachmentResource {
     {- ^ - id of the new resource -}
     } deriving (Show, Eq)
 
-volumeAttachmentResource :: TF.Resource TF.Scaleway VolumeAttachmentResource
-volumeAttachmentResource =
-    TF.newResource "scaleway_volume_attachment" $
-        VolumeAttachmentResource {
-            _server = TF.Absent
-            , _volume = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VolumeAttachmentResource where
-    toHCL VolumeAttachmentResource{..} = TF.arguments
-        [ TF.assign "server" <$> _server
-        , TF.assign "volume" <$> _volume
+    toHCL VolumeAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "server" <$> TF.argument _server
+        , TF.assign "volume" <$> TF.argument _volume
         ]
 
 $(TF.makeSchemaLenses
     ''VolumeAttachmentResource
     ''TF.Scaleway
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+volumeAttachmentResource :: TF.Resource TF.Scaleway VolumeAttachmentResource
+volumeAttachmentResource =
+    TF.newResource "scaleway_volume_attachment" $
+        VolumeAttachmentResource {
+            _server = TF.Nil
+            , _volume = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @scaleway_volume@ Scaleway resource.
 
@@ -287,27 +284,26 @@ data VolumeResource = VolumeResource {
     {- ^ - id of the new resource -}
     } deriving (Show, Eq)
 
-volumeResource :: TF.Resource TF.Scaleway VolumeResource
-volumeResource =
-    TF.newResource "scaleway_volume" $
-        VolumeResource {
-            _name = TF.Absent
-            , _server = TF.Absent
-            , _size_in_gb = TF.Absent
-            , _type' = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VolumeResource where
-    toHCL VolumeResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "server" <$> _server
-        , TF.assign "size_in_gb" <$> _size_in_gb
-        , TF.assign "type" <$> _type'
+    toHCL VolumeResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "server" <$> TF.argument _server
+        , TF.assign "size_in_gb" <$> TF.argument _size_in_gb
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''VolumeResource
     ''TF.Scaleway
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+volumeResource :: TF.Resource TF.Scaleway VolumeResource
+volumeResource =
+    TF.newResource "scaleway_volume" $
+        VolumeResource {
+            _name = TF.Nil
+            , _server = TF.Nil
+            , _size_in_gb = TF.Nil
+            , _type' = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

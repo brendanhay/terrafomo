@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Packet          as TF
+import qualified Terrafomo.Packet.Provider as TF
+import qualified Terrafomo.Packet.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -104,61 +106,60 @@ data DeviceResource = DeviceResource {
     {- ^ - The timestamp for the last time the device was updated -}
     } deriving (Show, Eq)
 
-deviceResource :: TF.Resource TF.Packet DeviceResource
-deviceResource =
-    TF.newResource "packet_device" $
-        DeviceResource {
-            _always_pxe = TF.Absent
-            , _billing_cycle = TF.Absent
-            , _facility = TF.Absent
-            , _hardware_reservation_id = TF.Absent
-            , _hostname = TF.Absent
-            , _ipxe_script_url = TF.Absent
-            , _operating_system = TF.Absent
-            , _plan = TF.Absent
-            , _project_id = TF.Absent
-            , _public_ipv4_subnet_size = TF.Absent
-            , _user_data = TF.Absent
-            , _computed_access_private_ipv4 = TF.Computed "access_private_ipv4"
-            , _computed_access_public_ipv4 = TF.Computed "access_public_ipv4"
-            , _computed_access_public_ipv6 = TF.Computed "access_public_ipv6"
-            , _computed_billing_cycle = TF.Computed "billing_cycle"
-            , _computed_created = TF.Computed "created"
-            , _computed_facility = TF.Computed "facility"
-            , _computed_hardware_reservation_id = TF.Computed "hardware_reservation_id"
-            , _computed_hostname = TF.Computed "hostname"
-            , _computed_id = TF.Computed "id"
-            , _computed_locked = TF.Computed "locked"
-            , _computed_network = TF.Computed "network"
-            , _computed_operating_system = TF.Computed "operating_system"
-            , _computed_plan = TF.Computed "plan"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_root_password = TF.Computed "root_password"
-            , _computed_state = TF.Computed "state"
-            , _computed_tags = TF.Computed "tags"
-            , _computed_updated = TF.Computed "updated"
-            }
-
 instance TF.ToHCL DeviceResource where
-    toHCL DeviceResource{..} = TF.arguments
-        [ TF.assign "always_pxe" <$> _always_pxe
-        , TF.assign "billing_cycle" <$> _billing_cycle
-        , TF.assign "facility" <$> _facility
-        , TF.assign "hardware_reservation_id" <$> _hardware_reservation_id
-        , TF.assign "hostname" <$> _hostname
-        , TF.assign "ipxe_script_url" <$> _ipxe_script_url
-        , TF.assign "operating_system" <$> _operating_system
-        , TF.assign "plan" <$> _plan
-        , TF.assign "project_id" <$> _project_id
-        , TF.assign "public_ipv4_subnet_size" <$> _public_ipv4_subnet_size
-        , TF.assign "user_data" <$> _user_data
+    toHCL DeviceResource{..} = TF.block $ catMaybes
+        [ TF.assign "always_pxe" <$> TF.argument _always_pxe
+        , TF.assign "billing_cycle" <$> TF.argument _billing_cycle
+        , TF.assign "facility" <$> TF.argument _facility
+        , TF.assign "hardware_reservation_id" <$> TF.argument _hardware_reservation_id
+        , TF.assign "hostname" <$> TF.argument _hostname
+        , TF.assign "ipxe_script_url" <$> TF.argument _ipxe_script_url
+        , TF.assign "operating_system" <$> TF.argument _operating_system
+        , TF.assign "plan" <$> TF.argument _plan
+        , TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "public_ipv4_subnet_size" <$> TF.argument _public_ipv4_subnet_size
+        , TF.assign "user_data" <$> TF.argument _user_data
         ]
 
 $(TF.makeSchemaLenses
     ''DeviceResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+deviceResource :: TF.Resource TF.Packet DeviceResource
+deviceResource =
+    TF.newResource "packet_device" $
+        DeviceResource {
+            _always_pxe = TF.Nil
+            , _billing_cycle = TF.Nil
+            , _facility = TF.Nil
+            , _hardware_reservation_id = TF.Nil
+            , _hostname = TF.Nil
+            , _ipxe_script_url = TF.Nil
+            , _operating_system = TF.Nil
+            , _plan = TF.Nil
+            , _project_id = TF.Nil
+            , _public_ipv4_subnet_size = TF.Nil
+            , _user_data = TF.Nil
+            , _computed_access_private_ipv4 = TF.Compute "access_private_ipv4"
+            , _computed_access_public_ipv4 = TF.Compute "access_public_ipv4"
+            , _computed_access_public_ipv6 = TF.Compute "access_public_ipv6"
+            , _computed_billing_cycle = TF.Compute "billing_cycle"
+            , _computed_created = TF.Compute "created"
+            , _computed_facility = TF.Compute "facility"
+            , _computed_hardware_reservation_id = TF.Compute "hardware_reservation_id"
+            , _computed_hostname = TF.Compute "hostname"
+            , _computed_id = TF.Compute "id"
+            , _computed_locked = TF.Compute "locked"
+            , _computed_network = TF.Compute "network"
+            , _computed_operating_system = TF.Compute "operating_system"
+            , _computed_plan = TF.Compute "plan"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_root_password = TF.Compute "root_password"
+            , _computed_state = TF.Compute "state"
+            , _computed_tags = TF.Compute "tags"
+            , _computed_updated = TF.Compute "updated"
+            }
 
 {- | The @packet_ip_attachment@ Packet resource.
 
@@ -198,34 +199,33 @@ data IpAttachmentResource = IpAttachmentResource {
     {- ^ - boolean flag whether subnet is reachable from the Internet -}
     } deriving (Show, Eq)
 
-ipAttachmentResource :: TF.Resource TF.Packet IpAttachmentResource
-ipAttachmentResource =
-    TF.newResource "packet_ip_attachment" $
-        IpAttachmentResource {
-            _cidr_notation = TF.Absent
-            , _device_id = TF.Absent
-            , _computed_address_family = TF.Computed "address_family"
-            , _computed_cidr = TF.Computed "cidr"
-            , _computed_cidr_notation = TF.Computed "cidr_notation"
-            , _computed_device_id = TF.Computed "device_id"
-            , _computed_gateway = TF.Computed "gateway"
-            , _computed_id = TF.Computed "id"
-            , _computed_netmask = TF.Computed "netmask"
-            , _computed_network = TF.Computed "network"
-            , _computed_public = TF.Computed "public"
-            }
-
 instance TF.ToHCL IpAttachmentResource where
-    toHCL IpAttachmentResource{..} = TF.arguments
-        [ TF.assign "cidr_notation" <$> _cidr_notation
-        , TF.assign "device_id" <$> _device_id
+    toHCL IpAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr_notation" <$> TF.argument _cidr_notation
+        , TF.assign "device_id" <$> TF.argument _device_id
         ]
 
 $(TF.makeSchemaLenses
     ''IpAttachmentResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ipAttachmentResource :: TF.Resource TF.Packet IpAttachmentResource
+ipAttachmentResource =
+    TF.newResource "packet_ip_attachment" $
+        IpAttachmentResource {
+            _cidr_notation = TF.Nil
+            , _device_id = TF.Nil
+            , _computed_address_family = TF.Compute "address_family"
+            , _computed_cidr = TF.Compute "cidr"
+            , _computed_cidr_notation = TF.Compute "cidr_notation"
+            , _computed_device_id = TF.Compute "device_id"
+            , _computed_gateway = TF.Compute "gateway"
+            , _computed_id = TF.Compute "id"
+            , _computed_netmask = TF.Compute "netmask"
+            , _computed_network = TF.Compute "network"
+            , _computed_public = TF.Compute "public"
+            }
 
 {- | The @packet_project@ Packet resource.
 
@@ -247,29 +247,28 @@ data ProjectResource = ProjectResource {
     {- ^ - The timestamp for the last time the Project was updated -}
     } deriving (Show, Eq)
 
-projectResource :: TF.Resource TF.Packet ProjectResource
-projectResource =
-    TF.newResource "packet_project" $
-        ProjectResource {
-            _name = TF.Absent
-            , _payment_method = TF.Absent
-            , _computed_created = TF.Computed "created"
-            , _computed_id = TF.Computed "id"
-            , _computed_payment_method = TF.Computed "payment_method"
-            , _computed_updated = TF.Computed "updated"
-            }
-
 instance TF.ToHCL ProjectResource where
-    toHCL ProjectResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "payment_method" <$> _payment_method
+    toHCL ProjectResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "payment_method" <$> TF.argument _payment_method
         ]
 
 $(TF.makeSchemaLenses
     ''ProjectResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+projectResource :: TF.Resource TF.Packet ProjectResource
+projectResource =
+    TF.newResource "packet_project" $
+        ProjectResource {
+            _name = TF.Nil
+            , _payment_method = TF.Nil
+            , _computed_created = TF.Compute "created"
+            , _computed_id = TF.Compute "id"
+            , _computed_payment_method = TF.Compute "payment_method"
+            , _computed_updated = TF.Compute "updated"
+            }
 
 {- | The @packet_reserved_ip_block@ Packet resource.
 
@@ -314,37 +313,36 @@ data ReservedIpBlockResource = ReservedIpBlockResource {
     {- ^ - Number of /32 addresses in the block -}
     } deriving (Show, Eq)
 
-reservedIpBlockResource :: TF.Resource TF.Packet ReservedIpBlockResource
-reservedIpBlockResource =
-    TF.newResource "packet_reserved_ip_block" $
-        ReservedIpBlockResource {
-            _facility = TF.Absent
-            , _project_id = TF.Absent
-            , _quantity = TF.Absent
-            , _computed_address_family = TF.Computed "address_family"
-            , _computed_cidr = TF.Computed "cidr"
-            , _computed_cidr_notation = TF.Computed "cidr_notation"
-            , _computed_facility = TF.Computed "facility"
-            , _computed_id = TF.Computed "id"
-            , _computed_netmask = TF.Computed "netmask"
-            , _computed_network = TF.Computed "network"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_public = TF.Computed "public"
-            , _computed_quantity = TF.Computed "quantity"
-            }
-
 instance TF.ToHCL ReservedIpBlockResource where
-    toHCL ReservedIpBlockResource{..} = TF.arguments
-        [ TF.assign "facility" <$> _facility
-        , TF.assign "project_id" <$> _project_id
-        , TF.assign "quantity" <$> _quantity
+    toHCL ReservedIpBlockResource{..} = TF.block $ catMaybes
+        [ TF.assign "facility" <$> TF.argument _facility
+        , TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "quantity" <$> TF.argument _quantity
         ]
 
 $(TF.makeSchemaLenses
     ''ReservedIpBlockResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+reservedIpBlockResource :: TF.Resource TF.Packet ReservedIpBlockResource
+reservedIpBlockResource =
+    TF.newResource "packet_reserved_ip_block" $
+        ReservedIpBlockResource {
+            _facility = TF.Nil
+            , _project_id = TF.Nil
+            , _quantity = TF.Nil
+            , _computed_address_family = TF.Compute "address_family"
+            , _computed_cidr = TF.Compute "cidr"
+            , _computed_cidr_notation = TF.Compute "cidr_notation"
+            , _computed_facility = TF.Compute "facility"
+            , _computed_id = TF.Compute "id"
+            , _computed_netmask = TF.Compute "netmask"
+            , _computed_network = TF.Compute "network"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_public = TF.Compute "public"
+            , _computed_quantity = TF.Compute "quantity"
+            }
 
 {- | The @packet_ssh_key@ Packet resource.
 
@@ -371,31 +369,30 @@ data SshKeyResource = SshKeyResource {
     {- ^ - The timestamp for the last time the SSH key was updated -}
     } deriving (Show, Eq)
 
-sshKeyResource :: TF.Resource TF.Packet SshKeyResource
-sshKeyResource =
-    TF.newResource "packet_ssh_key" $
-        SshKeyResource {
-            _name = TF.Absent
-            , _public_key = TF.Absent
-            , _computed_created = TF.Computed "created"
-            , _computed_fingerprint = TF.Computed "fingerprint"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_public_key = TF.Computed "public_key"
-            , _computed_updated = TF.Computed "updated"
-            }
-
 instance TF.ToHCL SshKeyResource where
-    toHCL SshKeyResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "public_key" <$> _public_key
+    toHCL SshKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
 $(TF.makeSchemaLenses
     ''SshKeyResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sshKeyResource :: TF.Resource TF.Packet SshKeyResource
+sshKeyResource =
+    TF.newResource "packet_ssh_key" $
+        SshKeyResource {
+            _name = TF.Nil
+            , _public_key = TF.Nil
+            , _computed_created = TF.Compute "created"
+            , _computed_fingerprint = TF.Compute "fingerprint"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_public_key = TF.Compute "public_key"
+            , _computed_updated = TF.Compute "updated"
+            }
 
 {- | The @packet_volume_attachment@ Packet resource.
 
@@ -413,26 +410,25 @@ data VolumeAttachmentResource = VolumeAttachmentResource {
     {- ^ - The unique ID of the volume attachment -}
     } deriving (Show, Eq)
 
-volumeAttachmentResource :: TF.Resource TF.Packet VolumeAttachmentResource
-volumeAttachmentResource =
-    TF.newResource "packet_volume_attachment" $
-        VolumeAttachmentResource {
-            _device_id = TF.Absent
-            , _volume_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VolumeAttachmentResource where
-    toHCL VolumeAttachmentResource{..} = TF.arguments
-        [ TF.assign "device_id" <$> _device_id
-        , TF.assign "volume_id" <$> _volume_id
+    toHCL VolumeAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "device_id" <$> TF.argument _device_id
+        , TF.assign "volume_id" <$> TF.argument _volume_id
         ]
 
 $(TF.makeSchemaLenses
     ''VolumeAttachmentResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+volumeAttachmentResource :: TF.Resource TF.Packet VolumeAttachmentResource
+volumeAttachmentResource =
+    TF.newResource "packet_volume_attachment" $
+        VolumeAttachmentResource {
+            _device_id = TF.Nil
+            , _volume_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @packet_volume@ Packet resource.
 
@@ -484,45 +480,44 @@ data VolumeResource = VolumeResource {
     {- ^ - The timestamp for the last time the volume was updated -}
     } deriving (Show, Eq)
 
-volumeResource :: TF.Resource TF.Packet VolumeResource
-volumeResource =
-    TF.newResource "packet_volume" $
-        VolumeResource {
-            _billing_cycle = TF.Absent
-            , _description = TF.Absent
-            , _facility = TF.Absent
-            , _plan = TF.Absent
-            , _project_id = TF.Absent
-            , _size = TF.Absent
-            , _snapshot_policies = TF.Absent
-            , _computed_attachments = TF.Computed "attachments"
-            , _computed_billing_cycle = TF.Computed "billing_cycle"
-            , _computed_created = TF.Computed "created"
-            , _computed_description = TF.Computed "description"
-            , _computed_facility = TF.Computed "facility"
-            , _computed_id = TF.Computed "id"
-            , _computed_locked = TF.Computed "locked"
-            , _computed_name = TF.Computed "name"
-            , _computed_plan = TF.Computed "plan"
-            , _computed_project_id = TF.Computed "project_id"
-            , _computed_size = TF.Computed "size"
-            , _computed_state = TF.Computed "state"
-            , _computed_updated = TF.Computed "updated"
-            }
-
 instance TF.ToHCL VolumeResource where
-    toHCL VolumeResource{..} = TF.arguments
-        [ TF.assign "billing_cycle" <$> _billing_cycle
-        , TF.assign "description" <$> _description
-        , TF.assign "facility" <$> _facility
-        , TF.assign "plan" <$> _plan
-        , TF.assign "project_id" <$> _project_id
-        , TF.assign "size" <$> _size
-        , TF.assign "snapshot_policies" <$> _snapshot_policies
+    toHCL VolumeResource{..} = TF.block $ catMaybes
+        [ TF.assign "billing_cycle" <$> TF.argument _billing_cycle
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "facility" <$> TF.argument _facility
+        , TF.assign "plan" <$> TF.argument _plan
+        , TF.assign "project_id" <$> TF.argument _project_id
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "snapshot_policies" <$> TF.argument _snapshot_policies
         ]
 
 $(TF.makeSchemaLenses
     ''VolumeResource
     ''TF.Packet
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+volumeResource :: TF.Resource TF.Packet VolumeResource
+volumeResource =
+    TF.newResource "packet_volume" $
+        VolumeResource {
+            _billing_cycle = TF.Nil
+            , _description = TF.Nil
+            , _facility = TF.Nil
+            , _plan = TF.Nil
+            , _project_id = TF.Nil
+            , _size = TF.Nil
+            , _snapshot_policies = TF.Nil
+            , _computed_attachments = TF.Compute "attachments"
+            , _computed_billing_cycle = TF.Compute "billing_cycle"
+            , _computed_created = TF.Compute "created"
+            , _computed_description = TF.Compute "description"
+            , _computed_facility = TF.Compute "facility"
+            , _computed_id = TF.Compute "id"
+            , _computed_locked = TF.Compute "locked"
+            , _computed_name = TF.Compute "name"
+            , _computed_plan = TF.Compute "plan"
+            , _computed_project_id = TF.Compute "project_id"
+            , _computed_size = TF.Compute "size"
+            , _computed_state = TF.Compute "state"
+            , _computed_updated = TF.Compute "updated"
+            }

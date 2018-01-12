@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Rundeck         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Rundeck.Provider as TF
+import qualified Terrafomo.Rundeck.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @rundeck_job@ Rundeck resource.
 
@@ -82,56 +84,55 @@ data JobResource = JobResource {
     {- ^ - A unique identifier for the job. -}
     } deriving (Show, Eq)
 
-jobResource :: TF.Resource TF.Rundeck JobResource
-jobResource =
-    TF.newResource "rundeck_job" $
-        JobResource {
-            _allow_concurrent_executions = TF.Absent
-            , _command = TF.Absent
-            , _command_ordering_strategy = TF.Absent
-            , _continue_on_error = TF.Absent
-            , _description = TF.Absent
-            , _group_name = TF.Absent
-            , _log_level = TF.Absent
-            , _max_thread_count = TF.Absent
-            , _name = TF.Absent
-            , _node_filter_exclude_precedence = TF.Absent
-            , _node_filter_query = TF.Absent
-            , _option = TF.Absent
-            , _preserve_options_order = TF.Absent
-            , _project_name = TF.Absent
-            , _rank_attribute = TF.Absent
-            , _rank_order = TF.Absent
-            , _schedule = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL JobResource where
-    toHCL JobResource{..} = TF.arguments
-        [ TF.assign "allow_concurrent_executions" <$> _allow_concurrent_executions
-        , TF.assign "command" <$> _command
-        , TF.assign "command_ordering_strategy" <$> _command_ordering_strategy
-        , TF.assign "continue_on_error" <$> _continue_on_error
-        , TF.assign "description" <$> _description
-        , TF.assign "group_name" <$> _group_name
-        , TF.assign "log_level" <$> _log_level
-        , TF.assign "max_thread_count" <$> _max_thread_count
-        , TF.assign "name" <$> _name
-        , TF.assign "node_filter_exclude_precedence" <$> _node_filter_exclude_precedence
-        , TF.assign "node_filter_query" <$> _node_filter_query
-        , TF.assign "option" <$> _option
-        , TF.assign "preserve_options_order" <$> _preserve_options_order
-        , TF.assign "project_name" <$> _project_name
-        , TF.assign "rank_attribute" <$> _rank_attribute
-        , TF.assign "rank_order" <$> _rank_order
-        , TF.assign "schedule" <$> _schedule
+    toHCL JobResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_concurrent_executions" <$> TF.argument _allow_concurrent_executions
+        , TF.assign "command" <$> TF.argument _command
+        , TF.assign "command_ordering_strategy" <$> TF.argument _command_ordering_strategy
+        , TF.assign "continue_on_error" <$> TF.argument _continue_on_error
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "group_name" <$> TF.argument _group_name
+        , TF.assign "log_level" <$> TF.argument _log_level
+        , TF.assign "max_thread_count" <$> TF.argument _max_thread_count
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "node_filter_exclude_precedence" <$> TF.argument _node_filter_exclude_precedence
+        , TF.assign "node_filter_query" <$> TF.argument _node_filter_query
+        , TF.assign "option" <$> TF.argument _option
+        , TF.assign "preserve_options_order" <$> TF.argument _preserve_options_order
+        , TF.assign "project_name" <$> TF.argument _project_name
+        , TF.assign "rank_attribute" <$> TF.argument _rank_attribute
+        , TF.assign "rank_order" <$> TF.argument _rank_order
+        , TF.assign "schedule" <$> TF.argument _schedule
         ]
 
 $(TF.makeSchemaLenses
     ''JobResource
     ''TF.Rundeck
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+jobResource :: TF.Resource TF.Rundeck JobResource
+jobResource =
+    TF.newResource "rundeck_job" $
+        JobResource {
+            _allow_concurrent_executions = TF.Nil
+            , _command = TF.Nil
+            , _command_ordering_strategy = TF.Nil
+            , _continue_on_error = TF.Nil
+            , _description = TF.Nil
+            , _group_name = TF.Nil
+            , _log_level = TF.Nil
+            , _max_thread_count = TF.Nil
+            , _name = TF.Nil
+            , _node_filter_exclude_precedence = TF.Nil
+            , _node_filter_query = TF.Nil
+            , _option = TF.Nil
+            , _preserve_options_order = TF.Nil
+            , _project_name = TF.Nil
+            , _rank_attribute = TF.Nil
+            , _rank_order = TF.Nil
+            , _schedule = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @rundeck_private_key@ Rundeck resource.
 
@@ -146,25 +147,24 @@ data PrivateKeyResource = PrivateKeyResource {
     {- ^ (Required) The path within the key store where the key will be stored. -}
     } deriving (Show, Eq)
 
-privateKeyResource :: TF.Resource TF.Rundeck PrivateKeyResource
-privateKeyResource =
-    TF.newResource "rundeck_private_key" $
-        PrivateKeyResource {
-            _key_material = TF.Absent
-            , _path = TF.Absent
-            }
-
 instance TF.ToHCL PrivateKeyResource where
-    toHCL PrivateKeyResource{..} = TF.arguments
-        [ TF.assign "key_material" <$> _key_material
-        , TF.assign "path" <$> _path
+    toHCL PrivateKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "key_material" <$> TF.argument _key_material
+        , TF.assign "path" <$> TF.argument _path
         ]
 
 $(TF.makeSchemaLenses
     ''PrivateKeyResource
     ''TF.Rundeck
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+privateKeyResource :: TF.Resource TF.Rundeck PrivateKeyResource
+privateKeyResource =
+    TF.newResource "rundeck_private_key" $
+        PrivateKeyResource {
+            _key_material = TF.Nil
+            , _path = TF.Nil
+            }
 
 {- | The @rundeck_project@ Rundeck resource.
 
@@ -197,41 +197,40 @@ data ProjectResource = ProjectResource {
     {- ^ - The URL of the index page for this project in the Rundeck UI. -}
     } deriving (Show, Eq)
 
-projectResource :: TF.Resource TF.Rundeck ProjectResource
-projectResource =
-    TF.newResource "rundeck_project" $
-        ProjectResource {
-            _default_node_executor_plugin = TF.Absent
-            , _default_node_file_copier_plugin = TF.Absent
-            , _description = TF.Absent
-            , _extra_config = TF.Absent
-            , _name = TF.Absent
-            , _resource_model_source = TF.Absent
-            , _ssh_authentication_type = TF.Absent
-            , _ssh_key_file_path = TF.Absent
-            , _ssh_key_storage_path = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_ui_url = TF.Computed "ui_url"
-            }
-
 instance TF.ToHCL ProjectResource where
-    toHCL ProjectResource{..} = TF.arguments
-        [ TF.assign "default_node_executor_plugin" <$> _default_node_executor_plugin
-        , TF.assign "default_node_file_copier_plugin" <$> _default_node_file_copier_plugin
-        , TF.assign "description" <$> _description
-        , TF.assign "extra_config" <$> _extra_config
-        , TF.assign "name" <$> _name
-        , TF.assign "resource_model_source" <$> _resource_model_source
-        , TF.assign "ssh_authentication_type" <$> _ssh_authentication_type
-        , TF.assign "ssh_key_file_path" <$> _ssh_key_file_path
-        , TF.assign "ssh_key_storage_path" <$> _ssh_key_storage_path
+    toHCL ProjectResource{..} = TF.block $ catMaybes
+        [ TF.assign "default_node_executor_plugin" <$> TF.argument _default_node_executor_plugin
+        , TF.assign "default_node_file_copier_plugin" <$> TF.argument _default_node_file_copier_plugin
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "extra_config" <$> TF.argument _extra_config
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_model_source" <$> TF.argument _resource_model_source
+        , TF.assign "ssh_authentication_type" <$> TF.argument _ssh_authentication_type
+        , TF.assign "ssh_key_file_path" <$> TF.argument _ssh_key_file_path
+        , TF.assign "ssh_key_storage_path" <$> TF.argument _ssh_key_storage_path
         ]
 
 $(TF.makeSchemaLenses
     ''ProjectResource
     ''TF.Rundeck
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+projectResource :: TF.Resource TF.Rundeck ProjectResource
+projectResource =
+    TF.newResource "rundeck_project" $
+        ProjectResource {
+            _default_node_executor_plugin = TF.Nil
+            , _default_node_file_copier_plugin = TF.Nil
+            , _description = TF.Nil
+            , _extra_config = TF.Nil
+            , _name = TF.Nil
+            , _resource_model_source = TF.Nil
+            , _ssh_authentication_type = TF.Nil
+            , _ssh_key_file_path = TF.Nil
+            , _ssh_key_storage_path = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_ui_url = TF.Compute "ui_url"
+            }
 
 {- | The @rundeck_public_key@ Rundeck resource.
 
@@ -254,26 +253,25 @@ data PublicKeyResource = PublicKeyResource {
     {- ^ - The URL at which the key material can be retrieved from the key store by other clients. -}
     } deriving (Show, Eq)
 
-publicKeyResource :: TF.Resource TF.Rundeck PublicKeyResource
-publicKeyResource =
-    TF.newResource "rundeck_public_key" $
-        PublicKeyResource {
-            _delete = TF.Absent
-            , _key_material = TF.Absent
-            , _path = TF.Absent
-            , _computed_key_material = TF.Computed "key_material"
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL PublicKeyResource where
-    toHCL PublicKeyResource{..} = TF.arguments
-        [ TF.assign "delete" <$> _delete
-        , TF.assign "key_material" <$> _key_material
-        , TF.assign "path" <$> _path
+    toHCL PublicKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "delete" <$> TF.argument _delete
+        , TF.assign "key_material" <$> TF.argument _key_material
+        , TF.assign "path" <$> TF.argument _path
         ]
 
 $(TF.makeSchemaLenses
     ''PublicKeyResource
     ''TF.Rundeck
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+publicKeyResource :: TF.Resource TF.Rundeck PublicKeyResource
+publicKeyResource =
+    TF.newResource "rundeck_public_key" $
+        PublicKeyResource {
+            _delete = TF.Nil
+            , _key_material = TF.Nil
+            , _path = TF.Nil
+            , _computed_key_material = TF.Compute "key_material"
+            , _computed_url = TF.Compute "url"
+            }

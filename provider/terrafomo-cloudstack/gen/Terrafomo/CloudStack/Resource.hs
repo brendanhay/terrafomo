@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.CloudStack      as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.CloudStack.Provider as TF
+import qualified Terrafomo.CloudStack.Types    as TF
+import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.TH                  as TF
 
 {- | The @cloudstack_affinity_group@ CloudStack resource.
 
@@ -55,31 +57,30 @@ data AffinityGroupResource = AffinityGroupResource {
     {- ^ - The id of the affinity group. -}
     } deriving (Show, Eq)
 
-affinityGroupResource :: TF.Resource TF.CloudStack AffinityGroupResource
-affinityGroupResource =
-    TF.newResource "cloudstack_affinity_group" $
-        AffinityGroupResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _project = TF.Absent
-            , _type' = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL AffinityGroupResource where
-    toHCL AffinityGroupResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
-        , TF.assign "type" <$> _type'
+    toHCL AffinityGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''AffinityGroupResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+affinityGroupResource :: TF.Resource TF.CloudStack AffinityGroupResource
+affinityGroupResource =
+    TF.newResource "cloudstack_affinity_group" $
+        AffinityGroupResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _type' = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_disk@ CloudStack resource.
 
@@ -111,41 +112,40 @@ data DiskResource = DiskResource {
     {- ^ - The ID of the disk volume. -}
     } deriving (Show, Eq)
 
-diskResource :: TF.Resource TF.CloudStack DiskResource
-diskResource =
-    TF.newResource "cloudstack_disk" $
-        DiskResource {
-            _attach = TF.Absent
-            , _device_id = TF.Absent
-            , _disk_offering = TF.Absent
-            , _name = TF.Absent
-            , _project = TF.Absent
-            , _shrink_ok = TF.Absent
-            , _size = TF.Absent
-            , _virtual_machine_id = TF.Absent
-            , _zone = TF.Absent
-            , _computed_device_id = TF.Computed "device_id"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DiskResource where
-    toHCL DiskResource{..} = TF.arguments
-        [ TF.assign "attach" <$> _attach
-        , TF.assign "device_id" <$> _device_id
-        , TF.assign "disk_offering" <$> _disk_offering
-        , TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
-        , TF.assign "shrink_ok" <$> _shrink_ok
-        , TF.assign "size" <$> _size
-        , TF.assign "virtual_machine_id" <$> _virtual_machine_id
-        , TF.assign "zone" <$> _zone
+    toHCL DiskResource{..} = TF.block $ catMaybes
+        [ TF.assign "attach" <$> TF.argument _attach
+        , TF.assign "device_id" <$> TF.argument _device_id
+        , TF.assign "disk_offering" <$> TF.argument _disk_offering
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "shrink_ok" <$> TF.argument _shrink_ok
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''DiskResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+diskResource :: TF.Resource TF.CloudStack DiskResource
+diskResource =
+    TF.newResource "cloudstack_disk" $
+        DiskResource {
+            _attach = TF.Nil
+            , _device_id = TF.Nil
+            , _disk_offering = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _shrink_ok = TF.Nil
+            , _size = TF.Nil
+            , _virtual_machine_id = TF.Nil
+            , _zone = TF.Nil
+            , _computed_device_id = TF.Compute "device_id"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_egress_firewall@ CloudStack resource.
 
@@ -164,30 +164,29 @@ data EgressFirewallResource = EgressFirewallResource {
     {- ^ - The network ID for which the egress firewall rules are created. -}
     } deriving (Show, Eq)
 
-egressFirewallResource :: TF.Resource TF.CloudStack EgressFirewallResource
-egressFirewallResource =
-    TF.newResource "cloudstack_egress_firewall" $
-        EgressFirewallResource {
-            _managed = TF.Absent
-            , _network_id = TF.Absent
-            , _parallelism = TF.Absent
-            , _rule = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL EgressFirewallResource where
-    toHCL EgressFirewallResource{..} = TF.arguments
-        [ TF.assign "managed" <$> _managed
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "parallelism" <$> _parallelism
-        , TF.assign "rule" <$> _rule
+    toHCL EgressFirewallResource{..} = TF.block $ catMaybes
+        [ TF.assign "managed" <$> TF.argument _managed
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "parallelism" <$> TF.argument _parallelism
+        , TF.assign "rule" <$> TF.argument _rule
         ]
 
 $(TF.makeSchemaLenses
     ''EgressFirewallResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+egressFirewallResource :: TF.Resource TF.CloudStack EgressFirewallResource
+egressFirewallResource =
+    TF.newResource "cloudstack_egress_firewall" $
+        EgressFirewallResource {
+            _managed = TF.Nil
+            , _network_id = TF.Nil
+            , _parallelism = TF.Nil
+            , _rule = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_firewall@ CloudStack resource.
 
@@ -206,30 +205,29 @@ data FirewallResource = FirewallResource {
     {- ^ - The IP address ID for which the firewall rules are created. -}
     } deriving (Show, Eq)
 
-firewallResource :: TF.Resource TF.CloudStack FirewallResource
-firewallResource =
-    TF.newResource "cloudstack_firewall" $
-        FirewallResource {
-            _ip_address_id = TF.Absent
-            , _managed = TF.Absent
-            , _parallelism = TF.Absent
-            , _rule = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL FirewallResource where
-    toHCL FirewallResource{..} = TF.arguments
-        [ TF.assign "ip_address_id" <$> _ip_address_id
-        , TF.assign "managed" <$> _managed
-        , TF.assign "parallelism" <$> _parallelism
-        , TF.assign "rule" <$> _rule
+    toHCL FirewallResource{..} = TF.block $ catMaybes
+        [ TF.assign "ip_address_id" <$> TF.argument _ip_address_id
+        , TF.assign "managed" <$> TF.argument _managed
+        , TF.assign "parallelism" <$> TF.argument _parallelism
+        , TF.assign "rule" <$> TF.argument _rule
         ]
 
 $(TF.makeSchemaLenses
     ''FirewallResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+firewallResource :: TF.Resource TF.CloudStack FirewallResource
+firewallResource =
+    TF.newResource "cloudstack_firewall" $
+        FirewallResource {
+            _ip_address_id = TF.Nil
+            , _managed = TF.Nil
+            , _parallelism = TF.Nil
+            , _rule = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_instance@ CloudStack resource.
 
@@ -277,57 +275,56 @@ data InstanceResource = InstanceResource {
     {- ^ - The instance ID. -}
     } deriving (Show, Eq)
 
-instanceResource :: TF.Resource TF.CloudStack InstanceResource
-instanceResource =
-    TF.newResource "cloudstack_instance" $
-        InstanceResource {
-            _affinity_group_ids = TF.Absent
-            , _affinity_group_names = TF.Absent
-            , _display_name = TF.Absent
-            , _expunge = TF.Absent
-            , _group = TF.Absent
-            , _ip_address = TF.Absent
-            , _keypair = TF.Absent
-            , _name = TF.Absent
-            , _network_id = TF.Absent
-            , _project = TF.Absent
-            , _root_disk_size = TF.Absent
-            , _security_group_ids = TF.Absent
-            , _security_group_names = TF.Absent
-            , _service_offering = TF.Absent
-            , _template = TF.Absent
-            , _user_data = TF.Absent
-            , _zone = TF.Absent
-            , _computed_display_name = TF.Computed "display_name"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL InstanceResource where
-    toHCL InstanceResource{..} = TF.arguments
-        [ TF.assign "affinity_group_ids" <$> _affinity_group_ids
-        , TF.assign "affinity_group_names" <$> _affinity_group_names
-        , TF.assign "display_name" <$> _display_name
-        , TF.assign "expunge" <$> _expunge
-        , TF.assign "group" <$> _group
-        , TF.assign "ip_address" <$> _ip_address
-        , TF.assign "keypair" <$> _keypair
-        , TF.assign "name" <$> _name
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "project" <$> _project
-        , TF.assign "root_disk_size" <$> _root_disk_size
-        , TF.assign "security_group_ids" <$> _security_group_ids
-        , TF.assign "security_group_names" <$> _security_group_names
-        , TF.assign "service_offering" <$> _service_offering
-        , TF.assign "template" <$> _template
-        , TF.assign "user_data" <$> _user_data
-        , TF.assign "zone" <$> _zone
+    toHCL InstanceResource{..} = TF.block $ catMaybes
+        [ TF.assign "affinity_group_ids" <$> TF.argument _affinity_group_ids
+        , TF.assign "affinity_group_names" <$> TF.argument _affinity_group_names
+        , TF.assign "display_name" <$> TF.argument _display_name
+        , TF.assign "expunge" <$> TF.argument _expunge
+        , TF.assign "group" <$> TF.argument _group
+        , TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "keypair" <$> TF.argument _keypair
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "root_disk_size" <$> TF.argument _root_disk_size
+        , TF.assign "security_group_ids" <$> TF.argument _security_group_ids
+        , TF.assign "security_group_names" <$> TF.argument _security_group_names
+        , TF.assign "service_offering" <$> TF.argument _service_offering
+        , TF.assign "template" <$> TF.argument _template
+        , TF.assign "user_data" <$> TF.argument _user_data
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''InstanceResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+instanceResource :: TF.Resource TF.CloudStack InstanceResource
+instanceResource =
+    TF.newResource "cloudstack_instance" $
+        InstanceResource {
+            _affinity_group_ids = TF.Nil
+            , _affinity_group_names = TF.Nil
+            , _display_name = TF.Nil
+            , _expunge = TF.Nil
+            , _group = TF.Nil
+            , _ip_address = TF.Nil
+            , _keypair = TF.Nil
+            , _name = TF.Nil
+            , _network_id = TF.Nil
+            , _project = TF.Nil
+            , _root_disk_size = TF.Nil
+            , _security_group_ids = TF.Nil
+            , _security_group_names = TF.Nil
+            , _service_offering = TF.Nil
+            , _template = TF.Nil
+            , _user_data = TF.Nil
+            , _zone = TF.Nil
+            , _computed_display_name = TF.Compute "display_name"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_ipaddress@ CloudStack resource.
 
@@ -350,33 +347,32 @@ data IpaddressResource = IpaddressResource {
     {- ^ - The IP address that was acquired and associated. -}
     } deriving (Show, Eq)
 
-ipaddressResource :: TF.Resource TF.CloudStack IpaddressResource
-ipaddressResource =
-    TF.newResource "cloudstack_ipaddress" $
-        IpaddressResource {
-            _is_portable = TF.Absent
-            , _network_id = TF.Absent
-            , _project = TF.Absent
-            , _vpc_id = TF.Absent
-            , _zone = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_address = TF.Computed "ip_address"
-            }
-
 instance TF.ToHCL IpaddressResource where
-    toHCL IpaddressResource{..} = TF.arguments
-        [ TF.assign "is_portable" <$> _is_portable
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "project" <$> _project
-        , TF.assign "vpc_id" <$> _vpc_id
-        , TF.assign "zone" <$> _zone
+    toHCL IpaddressResource{..} = TF.block $ catMaybes
+        [ TF.assign "is_portable" <$> TF.argument _is_portable
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''IpaddressResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+ipaddressResource :: TF.Resource TF.CloudStack IpaddressResource
+ipaddressResource =
+    TF.newResource "cloudstack_ipaddress" $
+        IpaddressResource {
+            _is_portable = TF.Nil
+            , _network_id = TF.Nil
+            , _project = TF.Nil
+            , _vpc_id = TF.Nil
+            , _zone = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_address = TF.Compute "ip_address"
+            }
 
 {- | The @cloudstack_loadbalancer_rule@ CloudStack resource.
 
@@ -409,43 +405,42 @@ data LoadbalancerRuleResource = LoadbalancerRuleResource {
     {- ^ - The load balancer rule ID. -}
     } deriving (Show, Eq)
 
-loadbalancerRuleResource :: TF.Resource TF.CloudStack LoadbalancerRuleResource
-loadbalancerRuleResource =
-    TF.newResource "cloudstack_loadbalancer_rule" $
-        LoadbalancerRuleResource {
-            _algorithm = TF.Absent
-            , _description = TF.Absent
-            , _ip_address_id = TF.Absent
-            , _member_ids = TF.Absent
-            , _name = TF.Absent
-            , _network_id = TF.Absent
-            , _private_port = TF.Absent
-            , _project = TF.Absent
-            , _protocol = TF.Absent
-            , _public_port = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LoadbalancerRuleResource where
-    toHCL LoadbalancerRuleResource{..} = TF.arguments
-        [ TF.assign "algorithm" <$> _algorithm
-        , TF.assign "description" <$> _description
-        , TF.assign "ip_address_id" <$> _ip_address_id
-        , TF.assign "member_ids" <$> _member_ids
-        , TF.assign "name" <$> _name
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "private_port" <$> _private_port
-        , TF.assign "project" <$> _project
-        , TF.assign "protocol" <$> _protocol
-        , TF.assign "public_port" <$> _public_port
+    toHCL LoadbalancerRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "algorithm" <$> TF.argument _algorithm
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "ip_address_id" <$> TF.argument _ip_address_id
+        , TF.assign "member_ids" <$> TF.argument _member_ids
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "private_port" <$> TF.argument _private_port
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "protocol" <$> TF.argument _protocol
+        , TF.assign "public_port" <$> TF.argument _public_port
         ]
 
 $(TF.makeSchemaLenses
     ''LoadbalancerRuleResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+loadbalancerRuleResource :: TF.Resource TF.CloudStack LoadbalancerRuleResource
+loadbalancerRuleResource =
+    TF.newResource "cloudstack_loadbalancer_rule" $
+        LoadbalancerRuleResource {
+            _algorithm = TF.Nil
+            , _description = TF.Nil
+            , _ip_address_id = TF.Nil
+            , _member_ids = TF.Nil
+            , _name = TF.Nil
+            , _network_id = TF.Nil
+            , _private_port = TF.Nil
+            , _project = TF.Nil
+            , _protocol = TF.Nil
+            , _public_port = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_network_acl@ CloudStack resource.
 
@@ -464,30 +459,29 @@ data NetworkAclResource = NetworkAclResource {
     {- ^ - The ID of the Network ACL -}
     } deriving (Show, Eq)
 
-networkAclResource :: TF.Resource TF.CloudStack NetworkAclResource
-networkAclResource =
-    TF.newResource "cloudstack_network_acl" $
-        NetworkAclResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _project = TF.Absent
-            , _vpc_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkAclResource where
-    toHCL NetworkAclResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
-        , TF.assign "vpc_id" <$> _vpc_id
+    toHCL NetworkAclResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkAclResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkAclResource :: TF.Resource TF.CloudStack NetworkAclResource
+networkAclResource =
+    TF.newResource "cloudstack_network_acl" $
+        NetworkAclResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _vpc_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_network_acl_rule@ CloudStack resource.
 
@@ -508,32 +502,31 @@ data NetworkAclRuleResource = NetworkAclRuleResource {
     {- ^ - The ACL ID for which the rules are created. -}
     } deriving (Show, Eq)
 
-networkAclRuleResource :: TF.Resource TF.CloudStack NetworkAclRuleResource
-networkAclRuleResource =
-    TF.newResource "cloudstack_network_acl_rule" $
-        NetworkAclRuleResource {
-            _acl_id = TF.Absent
-            , _managed = TF.Absent
-            , _parallelism = TF.Absent
-            , _project = TF.Absent
-            , _rule = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkAclRuleResource where
-    toHCL NetworkAclRuleResource{..} = TF.arguments
-        [ TF.assign "acl_id" <$> _acl_id
-        , TF.assign "managed" <$> _managed
-        , TF.assign "parallelism" <$> _parallelism
-        , TF.assign "project" <$> _project
-        , TF.assign "rule" <$> _rule
+    toHCL NetworkAclRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "acl_id" <$> TF.argument _acl_id
+        , TF.assign "managed" <$> TF.argument _managed
+        , TF.assign "parallelism" <$> TF.argument _parallelism
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "rule" <$> TF.argument _rule
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkAclRuleResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkAclRuleResource :: TF.Resource TF.CloudStack NetworkAclRuleResource
+networkAclRuleResource =
+    TF.newResource "cloudstack_network_acl_rule" $
+        NetworkAclRuleResource {
+            _acl_id = TF.Nil
+            , _managed = TF.Nil
+            , _parallelism = TF.Nil
+            , _project = TF.Nil
+            , _rule = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_network@ CloudStack resource.
 
@@ -576,52 +569,51 @@ data NetworkResource = NetworkResource {
     {- ^ - DNS domain for the network. -}
     } deriving (Show, Eq)
 
-networkResource :: TF.Resource TF.CloudStack NetworkResource
-networkResource =
-    TF.newResource "cloudstack_network" $
-        NetworkResource {
-            _acl_id = TF.Absent
-            , _cidr = TF.Absent
-            , _display_text = TF.Absent
-            , _endip = TF.Absent
-            , _gateway = TF.Absent
-            , _name = TF.Absent
-            , _network_domain = TF.Absent
-            , _network_offering = TF.Absent
-            , _project = TF.Absent
-            , _startip = TF.Absent
-            , _tags = TF.Absent
-            , _vlan = TF.Absent
-            , _vpc_id = TF.Absent
-            , _zone = TF.Absent
-            , _computed_display_text = TF.Computed "display_text"
-            , _computed_id = TF.Computed "id"
-            , _computed_network_domain = TF.Computed "network_domain"
-            }
-
 instance TF.ToHCL NetworkResource where
-    toHCL NetworkResource{..} = TF.arguments
-        [ TF.assign "acl_id" <$> _acl_id
-        , TF.assign "cidr" <$> _cidr
-        , TF.assign "display_text" <$> _display_text
-        , TF.assign "endip" <$> _endip
-        , TF.assign "gateway" <$> _gateway
-        , TF.assign "name" <$> _name
-        , TF.assign "network_domain" <$> _network_domain
-        , TF.assign "network_offering" <$> _network_offering
-        , TF.assign "project" <$> _project
-        , TF.assign "startip" <$> _startip
-        , TF.assign "tags" <$> _tags
-        , TF.assign "vlan" <$> _vlan
-        , TF.assign "vpc_id" <$> _vpc_id
-        , TF.assign "zone" <$> _zone
+    toHCL NetworkResource{..} = TF.block $ catMaybes
+        [ TF.assign "acl_id" <$> TF.argument _acl_id
+        , TF.assign "cidr" <$> TF.argument _cidr
+        , TF.assign "display_text" <$> TF.argument _display_text
+        , TF.assign "endip" <$> TF.argument _endip
+        , TF.assign "gateway" <$> TF.argument _gateway
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_domain" <$> TF.argument _network_domain
+        , TF.assign "network_offering" <$> TF.argument _network_offering
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "startip" <$> TF.argument _startip
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "vlan" <$> TF.argument _vlan
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+networkResource :: TF.Resource TF.CloudStack NetworkResource
+networkResource =
+    TF.newResource "cloudstack_network" $
+        NetworkResource {
+            _acl_id = TF.Nil
+            , _cidr = TF.Nil
+            , _display_text = TF.Nil
+            , _endip = TF.Nil
+            , _gateway = TF.Nil
+            , _name = TF.Nil
+            , _network_domain = TF.Nil
+            , _network_offering = TF.Nil
+            , _project = TF.Nil
+            , _startip = TF.Nil
+            , _tags = TF.Nil
+            , _vlan = TF.Nil
+            , _vpc_id = TF.Nil
+            , _zone = TF.Nil
+            , _computed_display_text = TF.Compute "display_text"
+            , _computed_id = TF.Compute "id"
+            , _computed_network_domain = TF.Compute "network_domain"
+            }
 
 {- | The @cloudstack_nic@ CloudStack resource.
 
@@ -640,29 +632,28 @@ data NicResource = NicResource {
     {- ^ - The assigned IP address. -}
     } deriving (Show, Eq)
 
-nicResource :: TF.Resource TF.CloudStack NicResource
-nicResource =
-    TF.newResource "cloudstack_nic" $
-        NicResource {
-            _ip_address = TF.Absent
-            , _network_id = TF.Absent
-            , _virtual_machine_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_address = TF.Computed "ip_address"
-            }
-
 instance TF.ToHCL NicResource where
-    toHCL NicResource{..} = TF.arguments
-        [ TF.assign "ip_address" <$> _ip_address
-        , TF.assign "network_id" <$> _network_id
-        , TF.assign "virtual_machine_id" <$> _virtual_machine_id
+    toHCL NicResource{..} = TF.block $ catMaybes
+        [ TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "network_id" <$> TF.argument _network_id
+        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
         ]
 
 $(TF.makeSchemaLenses
     ''NicResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+nicResource :: TF.Resource TF.CloudStack NicResource
+nicResource =
+    TF.newResource "cloudstack_nic" $
+        NicResource {
+            _ip_address = TF.Nil
+            , _network_id = TF.Nil
+            , _virtual_machine_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_address = TF.Compute "ip_address"
+            }
 
 {- | The @cloudstack_port_forward@ CloudStack resource.
 
@@ -683,31 +674,30 @@ data PortForwardResource = PortForwardResource {
     {- ^ - The IP address of the virtual machine that is used for the port forwarding rule. -}
     } deriving (Show, Eq)
 
-portForwardResource :: TF.Resource TF.CloudStack PortForwardResource
-portForwardResource =
-    TF.newResource "cloudstack_port_forward" $
-        PortForwardResource {
-            _forward = TF.Absent
-            , _ip_address_id = TF.Absent
-            , _managed = TF.Absent
-            , _project = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_vm_guest_ip = TF.Computed "vm_guest_ip"
-            }
-
 instance TF.ToHCL PortForwardResource where
-    toHCL PortForwardResource{..} = TF.arguments
-        [ TF.assign "forward" <$> _forward
-        , TF.assign "ip_address_id" <$> _ip_address_id
-        , TF.assign "managed" <$> _managed
-        , TF.assign "project" <$> _project
+    toHCL PortForwardResource{..} = TF.block $ catMaybes
+        [ TF.assign "forward" <$> TF.argument _forward
+        , TF.assign "ip_address_id" <$> TF.argument _ip_address_id
+        , TF.assign "managed" <$> TF.argument _managed
+        , TF.assign "project" <$> TF.argument _project
         ]
 
 $(TF.makeSchemaLenses
     ''PortForwardResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+portForwardResource :: TF.Resource TF.CloudStack PortForwardResource
+portForwardResource =
+    TF.newResource "cloudstack_port_forward" $
+        PortForwardResource {
+            _forward = TF.Nil
+            , _ip_address_id = TF.Nil
+            , _managed = TF.Nil
+            , _project = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_vm_guest_ip = TF.Compute "vm_guest_ip"
+            }
 
 {- | The @cloudstack_private_gateway@ CloudStack resource.
 
@@ -735,38 +725,37 @@ data PrivateGatewayResource = PrivateGatewayResource {
     {- ^ - The ID of the private gateway. -}
     } deriving (Show, Eq)
 
-privateGatewayResource :: TF.Resource TF.CloudStack PrivateGatewayResource
-privateGatewayResource =
-    TF.newResource "cloudstack_private_gateway" $
-        PrivateGatewayResource {
-            _acl_id = TF.Absent
-            , _gateway = TF.Absent
-            , _ip_address = TF.Absent
-            , _netmask = TF.Absent
-            , _network_offering = TF.Absent
-            , _physical_network_id = TF.Absent
-            , _vlan = TF.Absent
-            , _vpc_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL PrivateGatewayResource where
-    toHCL PrivateGatewayResource{..} = TF.arguments
-        [ TF.assign "acl_id" <$> _acl_id
-        , TF.assign "gateway" <$> _gateway
-        , TF.assign "ip_address" <$> _ip_address
-        , TF.assign "netmask" <$> _netmask
-        , TF.assign "network_offering" <$> _network_offering
-        , TF.assign "physical_network_id" <$> _physical_network_id
-        , TF.assign "vlan" <$> _vlan
-        , TF.assign "vpc_id" <$> _vpc_id
+    toHCL PrivateGatewayResource{..} = TF.block $ catMaybes
+        [ TF.assign "acl_id" <$> TF.argument _acl_id
+        , TF.assign "gateway" <$> TF.argument _gateway
+        , TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "netmask" <$> TF.argument _netmask
+        , TF.assign "network_offering" <$> TF.argument _network_offering
+        , TF.assign "physical_network_id" <$> TF.argument _physical_network_id
+        , TF.assign "vlan" <$> TF.argument _vlan
+        , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
 $(TF.makeSchemaLenses
     ''PrivateGatewayResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+privateGatewayResource :: TF.Resource TF.CloudStack PrivateGatewayResource
+privateGatewayResource =
+    TF.newResource "cloudstack_private_gateway" $
+        PrivateGatewayResource {
+            _acl_id = TF.Nil
+            , _gateway = TF.Nil
+            , _ip_address = TF.Nil
+            , _netmask = TF.Nil
+            , _network_offering = TF.Nil
+            , _physical_network_id = TF.Nil
+            , _vlan = TF.Nil
+            , _vpc_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_secondary_ipaddress@ CloudStack resource.
 
@@ -783,28 +772,27 @@ data SecondaryIpaddressResource = SecondaryIpaddressResource {
     {- ^ - The secondary IP address ID. -}
     } deriving (Show, Eq)
 
-secondaryIpaddressResource :: TF.Resource TF.CloudStack SecondaryIpaddressResource
-secondaryIpaddressResource =
-    TF.newResource "cloudstack_secondary_ipaddress" $
-        SecondaryIpaddressResource {
-            _ip_address = TF.Absent
-            , _nic_id = TF.Absent
-            , _virtual_machine_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SecondaryIpaddressResource where
-    toHCL SecondaryIpaddressResource{..} = TF.arguments
-        [ TF.assign "ip_address" <$> _ip_address
-        , TF.assign "nic_id" <$> _nic_id
-        , TF.assign "virtual_machine_id" <$> _virtual_machine_id
+    toHCL SecondaryIpaddressResource{..} = TF.block $ catMaybes
+        [ TF.assign "ip_address" <$> TF.argument _ip_address
+        , TF.assign "nic_id" <$> TF.argument _nic_id
+        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
         ]
 
 $(TF.makeSchemaLenses
     ''SecondaryIpaddressResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+secondaryIpaddressResource :: TF.Resource TF.CloudStack SecondaryIpaddressResource
+secondaryIpaddressResource =
+    TF.newResource "cloudstack_secondary_ipaddress" $
+        SecondaryIpaddressResource {
+            _ip_address = TF.Nil
+            , _nic_id = TF.Nil
+            , _virtual_machine_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_security_group@ CloudStack resource.
 
@@ -821,28 +809,27 @@ data SecurityGroupResource = SecurityGroupResource {
     {- ^ - The ID of the security group. -}
     } deriving (Show, Eq)
 
-securityGroupResource :: TF.Resource TF.CloudStack SecurityGroupResource
-securityGroupResource =
-    TF.newResource "cloudstack_security_group" $
-        SecurityGroupResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _project = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SecurityGroupResource where
-    toHCL SecurityGroupResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
+    toHCL SecurityGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
         ]
 
 $(TF.makeSchemaLenses
     ''SecurityGroupResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+securityGroupResource :: TF.Resource TF.CloudStack SecurityGroupResource
+securityGroupResource =
+    TF.newResource "cloudstack_security_group" $
+        SecurityGroupResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_security_group_rule@ CloudStack resource.
 
@@ -862,30 +849,29 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource {
     {- ^ - The security group ID for which the rules are created. -}
     } deriving (Show, Eq)
 
-securityGroupRuleResource :: TF.Resource TF.CloudStack SecurityGroupRuleResource
-securityGroupRuleResource =
-    TF.newResource "cloudstack_security_group_rule" $
-        SecurityGroupRuleResource {
-            _parallelism = TF.Absent
-            , _project = TF.Absent
-            , _rule = TF.Absent
-            , _security_group_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SecurityGroupRuleResource where
-    toHCL SecurityGroupRuleResource{..} = TF.arguments
-        [ TF.assign "parallelism" <$> _parallelism
-        , TF.assign "project" <$> _project
-        , TF.assign "rule" <$> _rule
-        , TF.assign "security_group_id" <$> _security_group_id
+    toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "parallelism" <$> TF.argument _parallelism
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "rule" <$> TF.argument _rule
+        , TF.assign "security_group_id" <$> TF.argument _security_group_id
         ]
 
 $(TF.makeSchemaLenses
     ''SecurityGroupRuleResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+securityGroupRuleResource :: TF.Resource TF.CloudStack SecurityGroupRuleResource
+securityGroupRuleResource =
+    TF.newResource "cloudstack_security_group_rule" $
+        SecurityGroupRuleResource {
+            _parallelism = TF.Nil
+            , _project = TF.Nil
+            , _rule = TF.Nil
+            , _security_group_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_ssh_keypair@ CloudStack resource.
 
@@ -906,30 +892,29 @@ data SshKeypairResource = SshKeypairResource {
     {- ^ - The private key generated by CloudStack. Only available if CloudStack generated the key pair. -}
     } deriving (Show, Eq)
 
-sshKeypairResource :: TF.Resource TF.CloudStack SshKeypairResource
-sshKeypairResource =
-    TF.newResource "cloudstack_ssh_keypair" $
-        SshKeypairResource {
-            _name = TF.Absent
-            , _project = TF.Absent
-            , _public_key = TF.Absent
-            , _computed_fingerprint = TF.Computed "fingerprint"
-            , _computed_id = TF.Computed "id"
-            , _computed_private_key = TF.Computed "private_key"
-            }
-
 instance TF.ToHCL SshKeypairResource where
-    toHCL SshKeypairResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
-        , TF.assign "public_key" <$> _public_key
+    toHCL SshKeypairResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
 $(TF.makeSchemaLenses
     ''SshKeypairResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sshKeypairResource :: TF.Resource TF.CloudStack SshKeypairResource
+sshKeypairResource =
+    TF.newResource "cloudstack_ssh_keypair" $
+        SshKeypairResource {
+            _name = TF.Nil
+            , _project = TF.Nil
+            , _public_key = TF.Nil
+            , _computed_fingerprint = TF.Compute "fingerprint"
+            , _computed_id = TF.Compute "id"
+            , _computed_private_key = TF.Compute "private_key"
+            }
 
 {- | The @cloudstack_static_nat@ CloudStack resource.
 
@@ -950,31 +935,30 @@ data StaticNatResource = StaticNatResource {
     {- ^ - The IP address of the virtual machine that is used to forward the static NAT traffic to. -}
     } deriving (Show, Eq)
 
-staticNatResource :: TF.Resource TF.CloudStack StaticNatResource
-staticNatResource =
-    TF.newResource "cloudstack_static_nat" $
-        StaticNatResource {
-            _ip_address_id = TF.Absent
-            , _project = TF.Absent
-            , _virtual_machine_id = TF.Absent
-            , _vm_guest_ip = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_vm_guest_ip = TF.Computed "vm_guest_ip"
-            }
-
 instance TF.ToHCL StaticNatResource where
-    toHCL StaticNatResource{..} = TF.arguments
-        [ TF.assign "ip_address_id" <$> _ip_address_id
-        , TF.assign "project" <$> _project
-        , TF.assign "virtual_machine_id" <$> _virtual_machine_id
-        , TF.assign "vm_guest_ip" <$> _vm_guest_ip
+    toHCL StaticNatResource{..} = TF.block $ catMaybes
+        [ TF.assign "ip_address_id" <$> TF.argument _ip_address_id
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
+        , TF.assign "vm_guest_ip" <$> TF.argument _vm_guest_ip
         ]
 
 $(TF.makeSchemaLenses
     ''StaticNatResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+staticNatResource :: TF.Resource TF.CloudStack StaticNatResource
+staticNatResource =
+    TF.newResource "cloudstack_static_nat" $
+        StaticNatResource {
+            _ip_address_id = TF.Nil
+            , _project = TF.Nil
+            , _virtual_machine_id = TF.Nil
+            , _vm_guest_ip = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_vm_guest_ip = TF.Compute "vm_guest_ip"
+            }
 
 {- | The @cloudstack_static_route@ CloudStack resource.
 
@@ -989,26 +973,25 @@ data StaticRouteResource = StaticRouteResource {
     {- ^ - The ID of the static route. -}
     } deriving (Show, Eq)
 
-staticRouteResource :: TF.Resource TF.CloudStack StaticRouteResource
-staticRouteResource =
-    TF.newResource "cloudstack_static_route" $
-        StaticRouteResource {
-            _cidr = TF.Absent
-            , _gateway_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL StaticRouteResource where
-    toHCL StaticRouteResource{..} = TF.arguments
-        [ TF.assign "cidr" <$> _cidr
-        , TF.assign "gateway_id" <$> _gateway_id
+    toHCL StaticRouteResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr" <$> TF.argument _cidr
+        , TF.assign "gateway_id" <$> TF.argument _gateway_id
         ]
 
 $(TF.makeSchemaLenses
     ''StaticRouteResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+staticRouteResource :: TF.Resource TF.CloudStack StaticRouteResource
+staticRouteResource =
+    TF.newResource "cloudstack_static_route" $
+        StaticRouteResource {
+            _cidr = TF.Nil
+            , _gateway_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_template@ CloudStack resource.
 
@@ -1061,57 +1044,56 @@ data TemplateResource = TemplateResource {
     {- ^ - Set to "true" if the template is password enabled. -}
     } deriving (Show, Eq)
 
-templateResource :: TF.Resource TF.CloudStack TemplateResource
-templateResource =
-    TF.newResource "cloudstack_template" $
-        TemplateResource {
-            _display_text = TF.Absent
-            , _format = TF.Absent
-            , _hypervisor = TF.Absent
-            , _is_dynamically_scalable = TF.Absent
-            , _is_extractable = TF.Absent
-            , _is_featured = TF.Absent
-            , _is_public = TF.Absent
-            , _is_ready_timeout = TF.Absent
-            , _name = TF.Absent
-            , _os_type = TF.Absent
-            , _password_enabled = TF.Absent
-            , _project = TF.Absent
-            , _url = TF.Absent
-            , _zone = TF.Absent
-            , _computed_display_text = TF.Computed "display_text"
-            , _computed_id = TF.Computed "id"
-            , _computed_is_dynamically_scalable = TF.Computed "is_dynamically_scalable"
-            , _computed_is_extractable = TF.Computed "is_extractable"
-            , _computed_is_featured = TF.Computed "is_featured"
-            , _computed_is_public = TF.Computed "is_public"
-            , _computed_is_ready = TF.Computed "is_ready"
-            , _computed_password_enabled = TF.Computed "password_enabled"
-            }
-
 instance TF.ToHCL TemplateResource where
-    toHCL TemplateResource{..} = TF.arguments
-        [ TF.assign "display_text" <$> _display_text
-        , TF.assign "format" <$> _format
-        , TF.assign "hypervisor" <$> _hypervisor
-        , TF.assign "is_dynamically_scalable" <$> _is_dynamically_scalable
-        , TF.assign "is_extractable" <$> _is_extractable
-        , TF.assign "is_featured" <$> _is_featured
-        , TF.assign "is_public" <$> _is_public
-        , TF.assign "is_ready_timeout" <$> _is_ready_timeout
-        , TF.assign "name" <$> _name
-        , TF.assign "os_type" <$> _os_type
-        , TF.assign "password_enabled" <$> _password_enabled
-        , TF.assign "project" <$> _project
-        , TF.assign "url" <$> _url
-        , TF.assign "zone" <$> _zone
+    toHCL TemplateResource{..} = TF.block $ catMaybes
+        [ TF.assign "display_text" <$> TF.argument _display_text
+        , TF.assign "format" <$> TF.argument _format
+        , TF.assign "hypervisor" <$> TF.argument _hypervisor
+        , TF.assign "is_dynamically_scalable" <$> TF.argument _is_dynamically_scalable
+        , TF.assign "is_extractable" <$> TF.argument _is_extractable
+        , TF.assign "is_featured" <$> TF.argument _is_featured
+        , TF.assign "is_public" <$> TF.argument _is_public
+        , TF.assign "is_ready_timeout" <$> TF.argument _is_ready_timeout
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "os_type" <$> TF.argument _os_type
+        , TF.assign "password_enabled" <$> TF.argument _password_enabled
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "url" <$> TF.argument _url
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''TemplateResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+templateResource :: TF.Resource TF.CloudStack TemplateResource
+templateResource =
+    TF.newResource "cloudstack_template" $
+        TemplateResource {
+            _display_text = TF.Nil
+            , _format = TF.Nil
+            , _hypervisor = TF.Nil
+            , _is_dynamically_scalable = TF.Nil
+            , _is_extractable = TF.Nil
+            , _is_featured = TF.Nil
+            , _is_public = TF.Nil
+            , _is_ready_timeout = TF.Nil
+            , _name = TF.Nil
+            , _os_type = TF.Nil
+            , _password_enabled = TF.Nil
+            , _project = TF.Nil
+            , _url = TF.Nil
+            , _zone = TF.Nil
+            , _computed_display_text = TF.Compute "display_text"
+            , _computed_id = TF.Compute "id"
+            , _computed_is_dynamically_scalable = TF.Compute "is_dynamically_scalable"
+            , _computed_is_extractable = TF.Compute "is_extractable"
+            , _computed_is_featured = TF.Compute "is_featured"
+            , _computed_is_public = TF.Compute "is_public"
+            , _computed_is_ready = TF.Compute "is_ready"
+            , _computed_password_enabled = TF.Compute "password_enabled"
+            }
 
 {- | The @cloudstack_vpc@ CloudStack resource.
 
@@ -1140,38 +1122,37 @@ data VpcResource = VpcResource {
     {- ^ - The source NAT IP assigned to the VPC. -}
     } deriving (Show, Eq)
 
-vpcResource :: TF.Resource TF.CloudStack VpcResource
-vpcResource =
-    TF.newResource "cloudstack_vpc" $
-        VpcResource {
-            _cidr = TF.Absent
-            , _display_text = TF.Absent
-            , _name = TF.Absent
-            , _network_domain = TF.Absent
-            , _project = TF.Absent
-            , _vpc_offering = TF.Absent
-            , _zone = TF.Absent
-            , _computed_display_text = TF.Computed "display_text"
-            , _computed_id = TF.Computed "id"
-            , _computed_source_nat_ip = TF.Computed "source_nat_ip"
-            }
-
 instance TF.ToHCL VpcResource where
-    toHCL VpcResource{..} = TF.arguments
-        [ TF.assign "cidr" <$> _cidr
-        , TF.assign "display_text" <$> _display_text
-        , TF.assign "name" <$> _name
-        , TF.assign "network_domain" <$> _network_domain
-        , TF.assign "project" <$> _project
-        , TF.assign "vpc_offering" <$> _vpc_offering
-        , TF.assign "zone" <$> _zone
+    toHCL VpcResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr" <$> TF.argument _cidr
+        , TF.assign "display_text" <$> TF.argument _display_text
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_domain" <$> TF.argument _network_domain
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "vpc_offering" <$> TF.argument _vpc_offering
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''VpcResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vpcResource :: TF.Resource TF.CloudStack VpcResource
+vpcResource =
+    TF.newResource "cloudstack_vpc" $
+        VpcResource {
+            _cidr = TF.Nil
+            , _display_text = TF.Nil
+            , _name = TF.Nil
+            , _network_domain = TF.Nil
+            , _project = TF.Nil
+            , _vpc_offering = TF.Nil
+            , _zone = TF.Nil
+            , _computed_display_text = TF.Compute "display_text"
+            , _computed_id = TF.Compute "id"
+            , _computed_source_nat_ip = TF.Compute "source_nat_ip"
+            }
 
 {- | The @cloudstack_vpn_connection@ CloudStack resource.
 
@@ -1186,26 +1167,25 @@ data VpnConnectionResource = VpnConnectionResource {
     {- ^ - The ID of the VPN Connection. -}
     } deriving (Show, Eq)
 
-vpnConnectionResource :: TF.Resource TF.CloudStack VpnConnectionResource
-vpnConnectionResource =
-    TF.newResource "cloudstack_vpn_connection" $
-        VpnConnectionResource {
-            _customer_gateway_id = TF.Absent
-            , _vpn_gateway_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VpnConnectionResource where
-    toHCL VpnConnectionResource{..} = TF.arguments
-        [ TF.assign "customer_gateway_id" <$> _customer_gateway_id
-        , TF.assign "vpn_gateway_id" <$> _vpn_gateway_id
+    toHCL VpnConnectionResource{..} = TF.block $ catMaybes
+        [ TF.assign "customer_gateway_id" <$> TF.argument _customer_gateway_id
+        , TF.assign "vpn_gateway_id" <$> TF.argument _vpn_gateway_id
         ]
 
 $(TF.makeSchemaLenses
     ''VpnConnectionResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vpnConnectionResource :: TF.Resource TF.CloudStack VpnConnectionResource
+vpnConnectionResource =
+    TF.newResource "cloudstack_vpn_connection" $
+        VpnConnectionResource {
+            _customer_gateway_id = TF.Nil
+            , _vpn_gateway_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @cloudstack_vpn_customer_gateway@ CloudStack resource.
 
@@ -1242,45 +1222,44 @@ data VpnCustomerGatewayResource = VpnCustomerGatewayResource {
     {- ^ - The IKE lifetime of phase 2 VPN connection to this VPN Customer Gateway. -}
     } deriving (Show, Eq)
 
-vpnCustomerGatewayResource :: TF.Resource TF.CloudStack VpnCustomerGatewayResource
-vpnCustomerGatewayResource =
-    TF.newResource "cloudstack_vpn_customer_gateway" $
-        VpnCustomerGatewayResource {
-            _cidr = TF.Absent
-            , _dpd = TF.Absent
-            , _esp_lifetime = TF.Absent
-            , _esp_policy = TF.Absent
-            , _gateway = TF.Absent
-            , _ike_lifetime = TF.Absent
-            , _ike_policy = TF.Absent
-            , _ipsec_psk = TF.Absent
-            , _name = TF.Absent
-            , _project = TF.Absent
-            , _computed_dpd = TF.Computed "dpd"
-            , _computed_esp_lifetime = TF.Computed "esp_lifetime"
-            , _computed_id = TF.Computed "id"
-            , _computed_ike_lifetime = TF.Computed "ike_lifetime"
-            }
-
 instance TF.ToHCL VpnCustomerGatewayResource where
-    toHCL VpnCustomerGatewayResource{..} = TF.arguments
-        [ TF.assign "cidr" <$> _cidr
-        , TF.assign "dpd" <$> _dpd
-        , TF.assign "esp_lifetime" <$> _esp_lifetime
-        , TF.assign "esp_policy" <$> _esp_policy
-        , TF.assign "gateway" <$> _gateway
-        , TF.assign "ike_lifetime" <$> _ike_lifetime
-        , TF.assign "ike_policy" <$> _ike_policy
-        , TF.assign "ipsec_psk" <$> _ipsec_psk
-        , TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
+    toHCL VpnCustomerGatewayResource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr" <$> TF.argument _cidr
+        , TF.assign "dpd" <$> TF.argument _dpd
+        , TF.assign "esp_lifetime" <$> TF.argument _esp_lifetime
+        , TF.assign "esp_policy" <$> TF.argument _esp_policy
+        , TF.assign "gateway" <$> TF.argument _gateway
+        , TF.assign "ike_lifetime" <$> TF.argument _ike_lifetime
+        , TF.assign "ike_policy" <$> TF.argument _ike_policy
+        , TF.assign "ipsec_psk" <$> TF.argument _ipsec_psk
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
         ]
 
 $(TF.makeSchemaLenses
     ''VpnCustomerGatewayResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vpnCustomerGatewayResource :: TF.Resource TF.CloudStack VpnCustomerGatewayResource
+vpnCustomerGatewayResource =
+    TF.newResource "cloudstack_vpn_customer_gateway" $
+        VpnCustomerGatewayResource {
+            _cidr = TF.Nil
+            , _dpd = TF.Nil
+            , _esp_lifetime = TF.Nil
+            , _esp_policy = TF.Nil
+            , _gateway = TF.Nil
+            , _ike_lifetime = TF.Nil
+            , _ike_policy = TF.Nil
+            , _ipsec_psk = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _computed_dpd = TF.Compute "dpd"
+            , _computed_esp_lifetime = TF.Compute "esp_lifetime"
+            , _computed_id = TF.Compute "id"
+            , _computed_ike_lifetime = TF.Compute "ike_lifetime"
+            }
 
 {- | The @cloudstack_vpn_gateway@ CloudStack resource.
 
@@ -1295,22 +1274,21 @@ data VpnGatewayResource = VpnGatewayResource {
     {- ^ - The public IP address associated with the VPN Gateway. -}
     } deriving (Show, Eq)
 
-vpnGatewayResource :: TF.Resource TF.CloudStack VpnGatewayResource
-vpnGatewayResource =
-    TF.newResource "cloudstack_vpn_gateway" $
-        VpnGatewayResource {
-            _vpc_id = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_public_ip = TF.Computed "public_ip"
-            }
-
 instance TF.ToHCL VpnGatewayResource where
-    toHCL VpnGatewayResource{..} = TF.arguments
-        [ TF.assign "vpc_id" <$> _vpc_id
+    toHCL VpnGatewayResource{..} = TF.block $ catMaybes
+        [ TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
 $(TF.makeSchemaLenses
     ''VpnGatewayResource
     ''TF.CloudStack
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vpnGatewayResource :: TF.Resource TF.CloudStack VpnGatewayResource
+vpnGatewayResource =
+    TF.newResource "cloudstack_vpn_gateway" $
+        VpnGatewayResource {
+            _vpc_id = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_public_ip = TF.Compute "public_ip"
+            }

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.DigitalOcean      as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.DigitalOcean.Provider as TF
+import qualified Terrafomo.DigitalOcean.Types    as TF
+import qualified Terrafomo.Syntax.DataSource     as TF
+import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.TH                    as TF
 
 {- | The @digitalocean_image@ DigitalOcean datasource.
 
@@ -61,27 +63,26 @@ data ImageDataSource = ImageDataSource {
     {- ^ : Type of the image. Can be "snapshot" or "backup". -}
     } deriving (Show, Eq)
 
-imageDataSource :: TF.DataSource TF.DigitalOcean ImageDataSource
-imageDataSource =
-    TF.newDataSource "digitalocean_image" $
-        ImageDataSource {
-            _name = TF.Absent
-            , _computed_image = TF.Computed "image"
-            , _computed_min_disk_size = TF.Computed "min_disk_size"
-            , _computed_name = TF.Computed "name"
-            , _computed_private = TF.Computed "private"
-            , _computed_regions = TF.Computed "regions"
-            , _computed_size_gigabytes = TF.Computed "size_gigabytes"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL ImageDataSource where
-    toHCL ImageDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL ImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ImageDataSource
     ''TF.DigitalOcean
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imageDataSource :: TF.DataSource TF.DigitalOcean ImageDataSource
+imageDataSource =
+    TF.newDataSource "digitalocean_image" $
+        ImageDataSource {
+            _name = TF.Nil
+            , _computed_image = TF.Compute "image"
+            , _computed_min_disk_size = TF.Compute "min_disk_size"
+            , _computed_name = TF.Compute "name"
+            , _computed_private = TF.Compute "private"
+            , _computed_regions = TF.Compute "regions"
+            , _computed_size_gigabytes = TF.Compute "size_gigabytes"
+            , _computed_type' = TF.Compute "type"
+            }

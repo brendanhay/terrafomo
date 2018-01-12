@@ -1,4 +1,4 @@
 name: Lailgun
 package: terrafomo-mailgun
 datatype: true
-
+original: mailgun

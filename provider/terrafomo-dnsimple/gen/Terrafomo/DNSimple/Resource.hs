@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.DNSimple        as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.DNSimple.Provider as TF
+import qualified Terrafomo.DNSimple.Types    as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Resource   as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @dnsimple_record@ DNSimple resource.
 
@@ -71,38 +73,37 @@ data RecordResource = RecordResource {
     {- ^ - The value of the record -}
     } deriving (Show, Eq)
 
-recordResource :: TF.Resource TF.DNSimple RecordResource
-recordResource =
-    TF.newResource "dnsimple_record" $
-        RecordResource {
-            _domain = TF.Absent
-            , _name = TF.Absent
-            , _priority = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value = TF.Absent
-            , _computed_domain_id = TF.Computed "domain_id"
-            , _computed_hostname = TF.Computed "hostname"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_priority = TF.Computed "priority"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_value = TF.Computed "value"
-            }
-
 instance TF.ToHCL RecordResource where
-    toHCL RecordResource{..} = TF.arguments
-        [ TF.assign "domain" <$> _domain
-        , TF.assign "name" <$> _name
-        , TF.assign "priority" <$> _priority
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value" <$> _value
+    toHCL RecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "priority" <$> TF.argument _priority
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value" <$> TF.argument _value
         ]
 
 $(TF.makeSchemaLenses
     ''RecordResource
     ''TF.DNSimple
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+recordResource :: TF.Resource TF.DNSimple RecordResource
+recordResource =
+    TF.newResource "dnsimple_record" $
+        RecordResource {
+            _domain = TF.Nil
+            , _name = TF.Nil
+            , _priority = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value = TF.Nil
+            , _computed_domain_id = TF.Compute "domain_id"
+            , _computed_hostname = TF.Compute "hostname"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_priority = TF.Compute "priority"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_value = TF.Compute "value"
+            }

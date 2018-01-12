@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AliCloud.Provider where
+module Terrafomo.AliCloud.Provider
+    ( AliCloud    (..)
+    , HasAliCloud (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.AliCloud.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,8 +46,8 @@ by <https://www.aliyun.com> . The provider needs to be configured with the
 proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
-data AliCloud = AliCloud
-    { _access_key :: !(TF.Argument Text)
+data AliCloud = AliCloud {
+      _access_key :: !(TF.Argument Text)
     {- ^ (Optional) This is the Alicloud access key. It must be provided, but it can also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable. -}
     , _region     :: !(TF.Argument Text)
     {- ^ (Required) This is the Alicloud region. It must be provided, but it can also be sourced from the @ALICLOUD_REGION@ environment variables. -}
@@ -45,10 +58,30 @@ data AliCloud = AliCloud
 instance Hashable AliCloud
 
 instance TF.ToHCL AliCloud where
-    toHCL x = TF.arguments
-        [ TF.assign "access_key" <$> _access_key x
-        , TF.assign "region" <$> _region x
-        , TF.assign "secret_key" <$> _secret_key x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AliCloud))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "access_key" <$> TF.argument (_access_key x)
+            , TF.assign "region" <$> TF.argument (_region x)
+            , TF.assign "secret_key" <$> TF.argument (_secret_key x)
+            ]
 
-$(TF.makeClassy ''AliCloud)
+instance Semigroup AliCloud where
+    (<>) a b = AliCloud {
+          _access_key = on (<>) _access_key a b
+        , _region = on (<>) _region a b
+        , _secret_key = on (<>) _secret_key a b
+        }
+
+instance Monoid AliCloud where
+    mappend = (<>)
+    mempty  = AliCloud {
+            _access_key = TF.Nil
+          , _region = TF.Nil
+          , _secret_key = TF.Nil
+        }
+
+instance TF.IsProvider AliCloud where
+    type ProviderName AliCloud = "alicloud"
+
+$(TF.makeProviderLenses ''AliCloud)

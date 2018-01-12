@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OVH.Provider where
+module Terrafomo.OVH.Provider
+    ( OVH    (..)
+    , HasOVH (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.OVH.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,12 +46,27 @@ OVH. The provider needs to be configured with the proper credentials before
 it can be used. Use the navigation to the left to read about the available
 resources.
 -}
-data OVH = OVH
-    deriving (Show, Eq, Generic)
+data OVH = OVH {
+    } deriving (Show, Eq, Generic)
 
 instance Hashable OVH
 
 instance TF.ToHCL OVH where
-    toHCL = const $ TF.arguments []
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OVH))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            ]
 
-$(TF.makeClassy ''OVH)
+instance Semigroup OVH where
+    (<>) a b = OVH {
+        }
+
+instance Monoid OVH where
+    mappend = (<>)
+    mempty  = OVH {
+        }
+
+instance TF.IsProvider OVH where
+    type ProviderName OVH = "ovh"
+
+$(TF.makeProviderLenses ''OVH)

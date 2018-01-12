@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
-import qualified Terrafomo.Vault             as TF
+import qualified Terrafomo.Vault.Provider    as TF
+import qualified Terrafomo.Vault.Types       as TF
 
 {- | The @vault_aws_access_credentials@ Vault datasource.
 
@@ -68,34 +70,33 @@ data AwsAccessCredentialsDataSource = AwsAccessCredentialsDataSource {
     {- ^ - The STS token returned by Vault, if any. -}
     } deriving (Show, Eq)
 
-awsAccessCredentialsDataSource :: TF.DataSource TF.Vault AwsAccessCredentialsDataSource
-awsAccessCredentialsDataSource =
-    TF.newDataSource "vault_aws_access_credentials" $
-        AwsAccessCredentialsDataSource {
-            _backend = TF.Absent
-            , _role = TF.Absent
-            , _type' = TF.Absent
-            , _computed_access_key = TF.Computed "access_key"
-            , _computed_lease_duration = TF.Computed "lease_duration"
-            , _computed_lease_id = TF.Computed "lease_id"
-            , _computed_lease_renewable = TF.Computed "lease_renewable"
-            , _computed_lease_start_time = TF.Computed "lease_start_time"
-            , _computed_secret_key = TF.Computed "secret_key"
-            , _computed_security_token = TF.Computed "security_token"
-            }
-
 instance TF.ToHCL AwsAccessCredentialsDataSource where
-    toHCL AwsAccessCredentialsDataSource{..} = TF.arguments
-        [ TF.assign "backend" <$> _backend
-        , TF.assign "role" <$> _role
-        , TF.assign "type" <$> _type'
+    toHCL AwsAccessCredentialsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "backend" <$> TF.argument _backend
+        , TF.assign "role" <$> TF.argument _role
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''AwsAccessCredentialsDataSource
     ''TF.Vault
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+awsAccessCredentialsDataSource :: TF.DataSource TF.Vault AwsAccessCredentialsDataSource
+awsAccessCredentialsDataSource =
+    TF.newDataSource "vault_aws_access_credentials" $
+        AwsAccessCredentialsDataSource {
+            _backend = TF.Nil
+            , _role = TF.Nil
+            , _type' = TF.Nil
+            , _computed_access_key = TF.Compute "access_key"
+            , _computed_lease_duration = TF.Compute "lease_duration"
+            , _computed_lease_id = TF.Compute "lease_id"
+            , _computed_lease_renewable = TF.Compute "lease_renewable"
+            , _computed_lease_start_time = TF.Compute "lease_start_time"
+            , _computed_secret_key = TF.Compute "secret_key"
+            , _computed_security_token = TF.Compute "security_token"
+            }
 
 {- | The @vault_generic_secret@ Vault datasource.
 
@@ -114,20 +115,19 @@ data GenericSecretDataSource = GenericSecretDataSource {
     {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Eq)
 
-genericSecretDataSource :: TF.DataSource TF.Vault GenericSecretDataSource
-genericSecretDataSource =
-    TF.newDataSource "vault_generic_secret" $
-        GenericSecretDataSource {
-            _path = TF.Absent
-            }
-
 instance TF.ToHCL GenericSecretDataSource where
-    toHCL GenericSecretDataSource{..} = TF.arguments
-        [ TF.assign "path" <$> _path
+    toHCL GenericSecretDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "path" <$> TF.argument _path
         ]
 
 $(TF.makeSchemaLenses
     ''GenericSecretDataSource
     ''TF.Vault
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+genericSecretDataSource :: TF.DataSource TF.Vault GenericSecretDataSource
+genericSecretDataSource =
+    TF.newDataSource "vault_generic_secret" $
+        GenericSecretDataSource {
+            _path = TF.Nil
+            }

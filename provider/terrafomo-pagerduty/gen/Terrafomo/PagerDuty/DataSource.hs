@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.PagerDuty         as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.PagerDuty.Provider as TF
+import qualified Terrafomo.PagerDuty.Types    as TF
+import qualified Terrafomo.Syntax.DataSource  as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @pagerduty_escalation_policy@ PagerDuty datasource.
 
@@ -49,24 +51,23 @@ data EscalationPolicyDataSource = EscalationPolicyDataSource {
     {- ^ - The short name of the found escalation policy. -}
     } deriving (Show, Eq)
 
-escalationPolicyDataSource :: TF.DataSource TF.PagerDuty EscalationPolicyDataSource
-escalationPolicyDataSource =
-    TF.newDataSource "pagerduty_escalation_policy" $
-        EscalationPolicyDataSource {
-            _name = TF.Absent
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL EscalationPolicyDataSource where
-    toHCL EscalationPolicyDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL EscalationPolicyDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''EscalationPolicyDataSource
     ''TF.PagerDuty
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+escalationPolicyDataSource :: TF.DataSource TF.PagerDuty EscalationPolicyDataSource
+escalationPolicyDataSource =
+    TF.newDataSource "pagerduty_escalation_policy" $
+        EscalationPolicyDataSource {
+            _name = TF.Nil
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @pagerduty_schedule@ PagerDuty datasource.
 
@@ -81,24 +82,23 @@ data ScheduleDataSource = ScheduleDataSource {
     {- ^ - The short name of the found schedule. -}
     } deriving (Show, Eq)
 
-scheduleDataSource :: TF.DataSource TF.PagerDuty ScheduleDataSource
-scheduleDataSource =
-    TF.newDataSource "pagerduty_schedule" $
-        ScheduleDataSource {
-            _name = TF.Absent
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL ScheduleDataSource where
-    toHCL ScheduleDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL ScheduleDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ScheduleDataSource
     ''TF.PagerDuty
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+scheduleDataSource :: TF.DataSource TF.PagerDuty ScheduleDataSource
+scheduleDataSource =
+    TF.newDataSource "pagerduty_schedule" $
+        ScheduleDataSource {
+            _name = TF.Nil
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @pagerduty_user@ PagerDuty datasource.
 
@@ -113,24 +113,23 @@ data UserDataSource = UserDataSource {
     {- ^ - The short name of the found user. -}
     } deriving (Show, Eq)
 
-userDataSource :: TF.DataSource TF.PagerDuty UserDataSource
-userDataSource =
-    TF.newDataSource "pagerduty_user" $
-        UserDataSource {
-            _email = TF.Absent
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL UserDataSource where
-    toHCL UserDataSource{..} = TF.arguments
-        [ TF.assign "email" <$> _email
+    toHCL UserDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "email" <$> TF.argument _email
         ]
 
 $(TF.makeSchemaLenses
     ''UserDataSource
     ''TF.PagerDuty
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+userDataSource :: TF.DataSource TF.PagerDuty UserDataSource
+userDataSource =
+    TF.newDataSource "pagerduty_user" $
+        UserDataSource {
+            _email = TF.Nil
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @pagerduty_vendor@ PagerDuty datasource.
 
@@ -148,22 +147,21 @@ data VendorDataSource = VendorDataSource {
     {- ^ - The generic service type for this vendor. -}
     } deriving (Show, Eq)
 
-vendorDataSource :: TF.DataSource TF.PagerDuty VendorDataSource
-vendorDataSource =
-    TF.newDataSource "pagerduty_vendor" $
-        VendorDataSource {
-            _name = TF.Absent
-            , _computed_name = TF.Computed "name"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL VendorDataSource where
-    toHCL VendorDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL VendorDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''VendorDataSource
     ''TF.PagerDuty
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+vendorDataSource :: TF.DataSource TF.PagerDuty VendorDataSource
+vendorDataSource =
+    TF.newDataSource "pagerduty_vendor" $
+        VendorDataSource {
+            _name = TF.Nil
+            , _computed_name = TF.Compute "name"
+            , _computed_type' = TF.Compute "type"
+            }

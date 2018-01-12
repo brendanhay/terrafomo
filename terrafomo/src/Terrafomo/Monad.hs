@@ -2,53 +2,59 @@
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE TupleSections              #-}
+{-# LANGUAGE UndecidableInstances       #-}
 
-module Terrafomo.Monad where
-    -- ( TerraformError (..)
+module Terrafomo.Monad
+    ( Terraform
+    , runTerraform
+    , renderTerraform
 
-    -- , TerraformState (..)
-    -- , render
+    , TerraformT
+    , runTerraformT
+    , renderTerraformT
 
-    -- , MonadTerraform (..)
+    , TerraformError  (..)
 
-    -- , Terraform
-    -- , runTerraform
-    -- , evalTerraform
+    , TerraformOutput (..)
+    , renderOutput
 
-    -- , Reference
+    , Reference
 
-    -- , count
-    -- , attribute
-    -- , constant
-    -- , nil
-    -- , true
-    -- , false
+    , count
+    , defaultProvider
+    , attribute
+    , constant
+    , nil
+    , true
+    , false
 
-    -- , datasource
-    -- , resource
-    -- , output
-    -- ) where
+    , datasource
+    , resource
+    , output
+    ) where
 
-import Control.Applicative              (Alternative (..))
-import Control.Exception                (Exception)
-import Control.Monad                    (MonadPlus (..), ap, unless, when)
-import Control.Monad.Trans.Class        (MonadTrans (..))
-import Control.Monad.Trans.Except       (Except, ExceptT)
-import Control.Monad.Trans.State.Strict (StateT)
+import Control.Applicative (Alternative (..))
+import Control.Exception   (Exception)
+import Control.Monad       (MonadPlus (..), ap, unless, when)
+import Control.Monad.Morph (MFunctor (..))
+import Control.Monad.State (MonadTrans (..))
 
-import Data.Bifunctor        (Bifunctor (..))
-import Data.DList            (DList)
-import Data.Function         ((&))
-import Data.Functor.Identity (Identity (..))
-import Data.Hashable         (Hashable)
-import Data.Map.Strict       (Map)
-import Data.Maybe            (isNothing)
-import Data.Proxy            (Proxy (..))
-import Data.Set              (Set)
-import Data.Typeable         (Typeable)
+import Data.Bifunctor         (Bifunctor (..))
+import Data.DList             (DList)
+import Data.Either.Validation (Validation (..), validationToEither)
+import Data.Function          (on, (&))
+import Data.Functor.Identity  (Identity (..))
+import Data.Hashable          (Hashable)
+import Data.Map.Strict        (Map)
+import Data.Maybe             (isNothing)
+import Data.Proxy             (Proxy (..))
+import Data.Semigroup         (Semigroup ((<>)))
+import Data.Set               (Set)
+import Data.Typeable          (Typeable)
 
 import Terrafomo.Syntax.DataSource (DataSource (..))
 import Terrafomo.Syntax.Meta
@@ -57,45 +63,60 @@ import Terrafomo.Syntax.Resource   (Resource (..))
 import Terrafomo.Syntax.Variable
 import Terrafomo.ValueMap          (ValueMap)
 
-import qualified Control.Monad.Trans.Except        as Except
-import qualified Control.Monad.Trans.Except        as Trans
-import qualified Control.Monad.Trans.Identity      as Trans
-import qualified Control.Monad.Trans.Maybe         as Trans
-import qualified Control.Monad.Trans.Reader        as Trans
-import qualified Control.Monad.Trans.RWS.Lazy      as Lazy
-import qualified Control.Monad.Trans.RWS.Strict    as Strict
-import qualified Control.Monad.Trans.State.Lazy    as Lazy
-import qualified Control.Monad.Trans.State.Strict  as State
-import qualified Control.Monad.Trans.State.Strict  as Strict
-import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
-import qualified Control.Monad.Trans.Writer.Strict as Strict
-import qualified Data.DList                        as DList
-import qualified Data.Map.Strict                   as Map
-import qualified Data.Set                          as Set
-import qualified Data.Text.Lazy                    as LText
-import qualified Data.Traversable                  as Traverse
-import qualified Lens.Micro                        as Lens
-import qualified Lens.Micro.Extras                 as Lens
-import qualified Terrafomo.Syntax.HCL              as HCL
-import qualified Terrafomo.Syntax.Meta             as Meta
-import qualified Terrafomo.Syntax.Name             as Name
-import qualified Terrafomo.ValueMap                as VMap
-import qualified Text.PrettyPrint.Leijen.Text      as PP
+import qualified Data.DList                   as DList
+import qualified Data.Map.Strict              as Map
+import qualified Data.Set                     as Set
+import qualified Data.Text.Lazy               as LText
+import qualified Data.Traversable             as Traverse
+import qualified Lens.Micro                   as Lens
+import qualified Lens.Micro.Extras            as Lens
+import qualified Terrafomo.Syntax.HCL         as HCL
+import qualified Terrafomo.Syntax.Meta        as Meta
+import qualified Terrafomo.Syntax.Name        as Name
+import qualified Terrafomo.ValueMap           as VMap
+import qualified Text.PrettyPrint.Leijen.Text as PP
+
+import qualified Control.Monad.Except     as MTL
+import qualified Control.Monad.Identity   as MTL
+import qualified Control.Monad.Reader     as MTL
+import qualified Control.Monad.Signatures as MTL
+import qualified Control.Monad.State      as MTL
+import qualified Control.Monad.Writer     as MTL
 
 -- Errors
 
 data TerraformError
-    = NonUniqueKey    !Key  !HCL.Value
+    = MultipleErrors  ![TerraformError]
+    | NonUniqueKey    !Key  !HCL.Value
     | NonUniqueOutput !Name !HCL.Value
       deriving (Show, Typeable)
 
 instance Exception TerraformError
 
+instance Semigroup TerraformError where
+    (<>) a b =
+        case (a, b) of
+            (MultipleErrors xs, MultipleErrors ys) -> MultipleErrors (xs <> ys)
+            (MultipleErrors xs, y)                 -> MultipleErrors (xs ++ [y])
+            (x,                 MultipleErrors ys) -> MultipleErrors (x : ys)
+            (x,                 y)                 -> MultipleErrors [x, y]
+
+instance Monoid TerraformError where
+    mempty  = MultipleErrors mempty
+    mappend = (<>)
+
 -- State
 
 data TerraformConfig = TerraformConfig
     { aliases :: !(Map Name Alias)
-    }
+    } deriving (Show, Eq)
+
+instance Semigroup TerraformConfig where
+    (<>) a b = TerraformConfig (on (<>) aliases a b)
+
+instance Monoid TerraformConfig where
+    mempty  = TerraformConfig mempty
+    mappend = (<>)
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformOutput = UnsafeTerraformOutput
@@ -106,10 +127,10 @@ data TerraformOutput = UnsafeTerraformOutput
     }
 
 instance Show TerraformOutput where
-    show = LText.unpack . render
+    show = LText.unpack . renderOutput
 
-render :: TerraformOutput -> LText.Text
-render s =
+renderOutput :: TerraformOutput -> LText.Text
+renderOutput s =
       PP.displayT
     . PP.renderPretty 0.4 100
     . HCL.render
@@ -127,118 +148,140 @@ type Terraform a = TerraformT Identity a
 
 -- FIXME: The following instances only exist for debugging.
 instance Show a => Show (Terraform a) where
-    show = show . evalTerraform
+    show = show . renderTerraform
 
-evalTerraform = runIdentity . evalTerraformT
-
+runTerraform :: Terraform a -> Either TerraformError (a, TerraformOutput)
 runTerraform = runIdentity . runTerraformT
+
+renderTerraform :: Terraform a -> Either TerraformError LText.Text
+renderTerraform = runIdentity . renderTerraformT
 
 newtype TerraformT m a = TerraformT
     { unTerraformT
         :: TerraformConfig
         -> TerraformOutput
-        -> m (Either TerraformError (a, TerraformOutput))
+        -> m (Validation TerraformError (a, TerraformOutput))
     }
 
+-- Instances
+
 instance Functor m => Functor (TerraformT m) where
-    fmap f m = TerraformT $ \r w -> second (first f) <$> unTerraformT m r w
-    {-# INLINE fmap #-}
+    fmap f m = TerraformT (\r w -> second (first f) <$> unTerraformT m r w)
+    {-# INLINEABLE fmap #-}
 
 instance Monad m => Applicative (TerraformT m) where
-    pure x = TerraformT $ \_ w -> pure (Right (x, w))
-    {-# INLINE pure #-}
+    pure x = TerraformT (\_ w -> pure $! Success (x, w))
+    {-# INLINEABLE pure #-}
 
     (<*>) = ap
-    {-# INLINE (<*>) #-}
+    {-# INLINEABLE (<*>) #-}
 
 instance MonadPlus m => Alternative (TerraformT m) where
-    empty = TerraformT $ \_ _ -> mzero
-    {-# INLINE empty #-}
+    empty = TerraformT (\_ _ -> mzero)
+    {-# INLINEABLE empty #-}
 
-    TerraformT m <|> TerraformT n = TerraformT $ \r w -> m r w `mplus` n r w
-    {-# INLINE (<|>) #-}
+    TerraformT m <|> TerraformT n = TerraformT (\r w -> m r w `mplus` n r w)
+    {-# INLINEABLE (<|>) #-}
 
 instance Monad m => Monad (TerraformT m) where
     m >>= k = TerraformT $ \r w ->
         unTerraformT m r w >>= \case
-            Left  e       -> pure $! Left e
-            Right (x, w') -> unTerraformT (k x) r w'
-    {-# INLINE (>>=) #-}
+            Failure e       -> pure $! Failure e
+            Success (x, w') -> unTerraformT (k x) r w'
+    {-# INLINEABLE (>>=) #-}
 
 instance MonadPlus m => MonadPlus (TerraformT m) where
     mzero = empty
-    {-# INLINE mzero #-}
+    {-# INLINEABLE mzero #-}
 
     mplus = (<|>)
-    {-# INLINE mplus #-}
+    {-# INLINEABLE mplus #-}
 
 instance MonadTrans TerraformT where
     lift m = TerraformT $ \_ w -> do
         x <- m
-        pure $! Right (x, w)
-    {-# INLINE lift #-}
+        pure $! Success (x, w)
+    {-# INLINEABLE lift #-}
 
-evalTerraformT
-    :: Functor m
-    => TerraformT m a
-    -> m (Either TerraformError TerraformOutput)
-evalTerraformT  = fmap (second snd) . runTerraformT
+instance MFunctor TerraformT where
+    hoist nat m = TerraformT (\r w -> nat (unTerraformT m r w))
+    {-# INLINEABLE hoist #-}
+
+-- Instances for other mtl transformers
+--
+-- All of these instances need UndecidableInstances, because they do not
+-- satisfy the coverage condition.
+
+instance MTL.MonadReader r m => MTL.MonadReader r (TerraformT m) where
+    ask = lift MTL.ask
+    {-# INLINEABLE ask #-}
+
+    local = mapTerraformT . MTL.local
+    {-# INLINEABLE local #-}
+
+    reader = lift . MTL.reader
+    {-# INLINEABLE reader #-}
+
+instance MTL.MonadWriter r m => MTL.MonadWriter r (TerraformT m) where
+    tell = lift . MTL.tell
+    {-# INLINEABLE tell #-}
+
+    listen = liftListen MTL.listen
+    {-# INLINEABLE listen #-}
+
+    -- pass = lift . MTL.pass
+    -- {-# INLINEABLE pass #-}
+
+instance MTL.MonadState s m => MTL.MonadState s (TerraformT m) where
+    get = lift MTL.get
+    {-# INLINEABLE get #-}
+
+    put = lift . MTL.put
+    {-# INLINEABLE put #-}
+
+-- LiftLocal
+-- LiftListen
+-- LiftCatch
+-- LiftPass
+-- LiftCallCC
+
+
+
+-- | Lift a 'MTL.Listen' operation to the new monad.
+liftListen
+    :: Monad m
+    => MTL.Listen w m (Validation TerraformError (a, TerraformOutput))
+    -> MTL.Listen w (TerraformT m) a
+liftListen listen m =
+    TerraformT $ \r w -> do
+        (a, x) <- listen (unTerraformT m r w)
+        pure $! fmap (first (,x)) a
+
+mapTerraformT
+    :: (m (Validation TerraformError (a, TerraformOutput))
+           -> n (Validation TerraformError (b, TerraformOutput)))
+    -> TerraformT m a
+    -> TerraformT n b
+mapTerraformT f m = TerraformT (\r w -> f (unTerraformT m r w))
 
 runTerraformT
-    :: TerraformT m a
+    :: Functor m
+    => TerraformT m a
     -> m (Either TerraformError (a, TerraformOutput))
-runTerraformT m = unTerraformT m config initial
-  where
-    config = TerraformConfig
-        { aliases = Map.empty
-        }
+runTerraformT m =
+    fmap validationToEither . unTerraformT m mempty $
+        UnsafeTerraformOutput
+            { providers      = VMap.empty
+            , datasources    = VMap.empty
+            , resources      = VMap.empty
+            , outputs        = VMap.empty
+            }
 
-    initial = UnsafeTerraformOutput
-        { providers      = VMap.empty
-        , datasources    = VMap.empty
-        , resources      = VMap.empty
-        , outputs        = VMap.empty
-        }
-
--- -- Terraform Monad Homomorphism
-
--- -- FIXME: Not convinced providing this is a sound idea. Probably the idea of
--- -- a terraform monad should be quite restrictive - since determinism is the goal.
--- class Monad m => MonadTerraform m where
---     liftTerraform :: Terraform a -> m a
-
--- instance MonadTerraform Terraform where
---     liftTerraform = id
-
--- instance MonadTerraform m => MonadTerraform (Trans.IdentityT m) where
---     liftTerraform = lift . liftTerraform
-
--- instance MonadTerraform m => MonadTerraform (Trans.MaybeT m) where
---     liftTerraform = lift . liftTerraform
-
--- instance MonadTerraform m => MonadTerraform (Trans.ReaderT r m) where
---     liftTerraform = lift . liftTerraform
-
--- instance MonadTerraform m => MonadTerraform (Strict.StateT s m) where
---     liftTerraform = lift . liftTerraform
-
--- instance MonadTerraform m => MonadTerraform (Lazy.StateT s m) where
---     liftTerraform = lift . liftTerraform
-
--- instance MonadTerraform m => MonadTerraform (Trans.ExceptT e m) where
---     liftTerraform = lift . liftTerraform
-
--- instance (MonadTerraform m, Monoid w) => MonadTerraform (Strict.WriterT w m) where
---     liftTerraform = lift . liftTerraform
-
--- instance (MonadTerraform m, Monoid w) => MonadTerraform (Lazy.WriterT w m) where
---     liftTerraform = lift . liftTerraform
-
--- instance (MonadTerraform m, Monoid w) => MonadTerraform (Strict.RWST r w s m) where
---     liftTerraform = lift . liftTerraform
-
--- instance (MonadTerraform m, Monoid w) => MonadTerraform (Lazy.RWST r w s m) where
---     liftTerraform = lift . liftTerraform
+renderTerraformT
+    :: Functor m
+    => TerraformT m a
+    -> m (Either TerraformError LText.Text)
+renderTerraformT = fmap (second (renderOutput . snd)) . runTerraformT
 
 -- Opaque Named References
 
@@ -411,7 +454,7 @@ insertProvider mp =
             pure $! Just alias
 
 asks :: Applicative m => (TerraformConfig -> a) -> TerraformT m a
-asks f = TerraformT (\r w -> pure $! Right (f r, w))
+asks f = TerraformT (\r w -> pure $! Success (f r, w))
 
 local
     :: (TerraformConfig -> TerraformConfig)
@@ -420,13 +463,13 @@ local
 local f m = TerraformT (\r w -> unTerraformT m (f r) w)
 
 gets :: Applicative m => (TerraformOutput -> a) -> TerraformT m a
-gets f = TerraformT (\_ w -> pure $! Right (f w, w))
+gets f = TerraformT (\_ w -> pure $! Success (f w, w))
 
 modify
     :: Applicative m
     => (TerraformOutput -> TerraformOutput)
     -> TerraformT m ()
-modify f = TerraformT (\_ w -> pure $! Right ((), f w))
+modify f = TerraformT (\_ w -> pure $! Success ((), f w))
 
 throw :: Monad m => TerraformError -> TerraformT m a
-throw err = TerraformT (\_ _ -> pure $! Left err)
+throw e = TerraformT (\_ _ -> pure $! Failure e)

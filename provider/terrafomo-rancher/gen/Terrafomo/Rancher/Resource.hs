@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Rancher         as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.Rancher.Provider as TF
+import qualified Terrafomo.Rancher.Types    as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | The @rancher_certificate@ Rancher resource.
 
@@ -78,44 +80,43 @@ data CertificateResource = CertificateResource {
     {- ^ - The certificate version. -}
     } deriving (Show, Eq)
 
-certificateResource :: TF.Resource TF.Rancher CertificateResource
-certificateResource =
-    TF.newResource "rancher_certificate" $
-        CertificateResource {
-            _cert = TF.Absent
-            , _cert_chain = TF.Absent
-            , _description = TF.Absent
-            , _environment_id = TF.Absent
-            , _key = TF.Absent
-            , _name = TF.Absent
-            , _computed_algorithm = TF.Computed "algorithm"
-            , _computed_cert_fingerprint = TF.Computed "cert_fingerprint"
-            , _computed_cn = TF.Computed "cn"
-            , _computed_expires_at = TF.Computed "expires_at"
-            , _computed_id = TF.Computed "id"
-            , _computed_issued_at = TF.Computed "issued_at"
-            , _computed_issuer = TF.Computed "issuer"
-            , _computed_key_size = TF.Computed "key_size"
-            , _computed_serial_number = TF.Computed "serial_number"
-            , _computed_subject_alternative_names = TF.Computed "subject_alternative_names"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL CertificateResource where
-    toHCL CertificateResource{..} = TF.arguments
-        [ TF.assign "cert" <$> _cert
-        , TF.assign "cert_chain" <$> _cert_chain
-        , TF.assign "description" <$> _description
-        , TF.assign "environment_id" <$> _environment_id
-        , TF.assign "key" <$> _key
-        , TF.assign "name" <$> _name
+    toHCL CertificateResource{..} = TF.block $ catMaybes
+        [ TF.assign "cert" <$> TF.argument _cert
+        , TF.assign "cert_chain" <$> TF.argument _cert_chain
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "key" <$> TF.argument _key
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''CertificateResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+certificateResource :: TF.Resource TF.Rancher CertificateResource
+certificateResource =
+    TF.newResource "rancher_certificate" $
+        CertificateResource {
+            _cert = TF.Nil
+            , _cert_chain = TF.Nil
+            , _description = TF.Nil
+            , _environment_id = TF.Nil
+            , _key = TF.Nil
+            , _name = TF.Nil
+            , _computed_algorithm = TF.Compute "algorithm"
+            , _computed_cert_fingerprint = TF.Compute "cert_fingerprint"
+            , _computed_cn = TF.Compute "cn"
+            , _computed_expires_at = TF.Compute "expires_at"
+            , _computed_id = TF.Compute "id"
+            , _computed_issued_at = TF.Compute "issued_at"
+            , _computed_issuer = TF.Compute "issuer"
+            , _computed_key_size = TF.Compute "key_size"
+            , _computed_serial_number = TF.Compute "serial_number"
+            , _computed_subject_alternative_names = TF.Compute "subject_alternative_names"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @rancher_environment@ Rancher resource.
 
@@ -135,31 +136,30 @@ data EnvironmentResource = EnvironmentResource {
     {- ^ (Optional) This can be any valid project template ID. If this is set, then orchestration can not be. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-environmentResource :: TF.Resource TF.Rancher EnvironmentResource
-environmentResource =
-    TF.newResource "rancher_environment" $
-        EnvironmentResource {
-            _description = TF.Absent
-            , _member = TF.Absent
-            , _name = TF.Absent
-            , _orchestration = TF.Absent
-            , _project_template_id = TF.Absent
-            }
-
 instance TF.ToHCL EnvironmentResource where
-    toHCL EnvironmentResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "member" <$> _member
-        , TF.assign "name" <$> _name
-        , TF.assign "orchestration" <$> _orchestration
-        , TF.assign "project_template_id" <$> _project_template_id
+    toHCL EnvironmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "member" <$> TF.argument _member
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "orchestration" <$> TF.argument _orchestration
+        , TF.assign "project_template_id" <$> TF.argument _project_template_id
         ]
 
 $(TF.makeSchemaLenses
     ''EnvironmentResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+environmentResource :: TF.Resource TF.Rancher EnvironmentResource
+environmentResource =
+    TF.newResource "rancher_environment" $
+        EnvironmentResource {
+            _description = TF.Nil
+            , _member = TF.Nil
+            , _name = TF.Nil
+            , _orchestration = TF.Nil
+            , _project_template_id = TF.Nil
+            }
 
 {- | The @rancher_host@ Rancher resource.
 
@@ -181,33 +181,32 @@ data HostResource = HostResource {
     {- ^ (Required) The name of the host. -}
     } deriving (Show, Eq)
 
-hostResource :: TF.Resource TF.Rancher HostResource
-hostResource =
-    TF.newResource "rancher_host" $
-        HostResource {
-            _description = TF.Absent
-            , _environment_id = TF.Absent
-            , _hostname = TF.Absent
-            , _id = TF.Absent
-            , _labels = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL HostResource where
-    toHCL HostResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "environment_id" <$> _environment_id
-        , TF.assign "hostname" <$> _hostname
-        , TF.assign "id" <$> _id
-        , TF.assign "labels" <$> _labels
-        , TF.assign "name" <$> _name
+    toHCL HostResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "hostname" <$> TF.argument _hostname
+        , TF.assign "id" <$> TF.argument _id
+        , TF.assign "labels" <$> TF.argument _labels
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''HostResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+hostResource :: TF.Resource TF.Rancher HostResource
+hostResource =
+    TF.newResource "rancher_host" $
+        HostResource {
+            _description = TF.Nil
+            , _environment_id = TF.Nil
+            , _hostname = TF.Nil
+            , _id = TF.Nil
+            , _labels = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @rancher_registration_token@ Rancher resource.
 
@@ -237,36 +236,35 @@ data RegistrationTokenResource = RegistrationTokenResource {
     {- ^ - The token to use to register new nodes to the environment. -}
     } deriving (Show, Eq)
 
-registrationTokenResource :: TF.Resource TF.Rancher RegistrationTokenResource
-registrationTokenResource =
-    TF.newResource "rancher_registration_token" $
-        RegistrationTokenResource {
-            _agent_ip = TF.Absent
-            , _description = TF.Absent
-            , _environment_id = TF.Absent
-            , _host_labels = TF.Absent
-            , _name = TF.Absent
-            , _computed_command = TF.Computed "command"
-            , _computed_id = TF.Computed "id"
-            , _computed_image = TF.Computed "image"
-            , _computed_registration_url = TF.Computed "registration_url"
-            , _computed_token = TF.Computed "token"
-            }
-
 instance TF.ToHCL RegistrationTokenResource where
-    toHCL RegistrationTokenResource{..} = TF.arguments
-        [ TF.assign "agent_ip" <$> _agent_ip
-        , TF.assign "description" <$> _description
-        , TF.assign "environment_id" <$> _environment_id
-        , TF.assign "host_labels" <$> _host_labels
-        , TF.assign "name" <$> _name
+    toHCL RegistrationTokenResource{..} = TF.block $ catMaybes
+        [ TF.assign "agent_ip" <$> TF.argument _agent_ip
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "host_labels" <$> TF.argument _host_labels
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''RegistrationTokenResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+registrationTokenResource :: TF.Resource TF.Rancher RegistrationTokenResource
+registrationTokenResource =
+    TF.newResource "rancher_registration_token" $
+        RegistrationTokenResource {
+            _agent_ip = TF.Nil
+            , _description = TF.Nil
+            , _environment_id = TF.Nil
+            , _host_labels = TF.Nil
+            , _name = TF.Nil
+            , _computed_command = TF.Compute "command"
+            , _computed_id = TF.Compute "id"
+            , _computed_image = TF.Compute "image"
+            , _computed_registration_url = TF.Compute "registration_url"
+            , _computed_token = TF.Compute "token"
+            }
 
 {- | The @rancher_registry_credential@ Rancher resource.
 
@@ -291,34 +289,33 @@ data RegistryCredentialResource = RegistryCredentialResource {
     {- ^ - (Computed) The ID of the resource. -}
     } deriving (Show, Eq)
 
-registryCredentialResource :: TF.Resource TF.Rancher RegistryCredentialResource
-registryCredentialResource =
-    TF.newResource "rancher_registry_credential" $
-        RegistryCredentialResource {
-            _description = TF.Absent
-            , _email = TF.Absent
-            , _name = TF.Absent
-            , _public_value = TF.Absent
-            , _registry_id = TF.Absent
-            , _secret_value = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RegistryCredentialResource where
-    toHCL RegistryCredentialResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "email" <$> _email
-        , TF.assign "name" <$> _name
-        , TF.assign "public_value" <$> _public_value
-        , TF.assign "registry_id" <$> _registry_id
-        , TF.assign "secret_value" <$> _secret_value
+    toHCL RegistryCredentialResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "public_value" <$> TF.argument _public_value
+        , TF.assign "registry_id" <$> TF.argument _registry_id
+        , TF.assign "secret_value" <$> TF.argument _secret_value
         ]
 
 $(TF.makeSchemaLenses
     ''RegistryCredentialResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+registryCredentialResource :: TF.Resource TF.Rancher RegistryCredentialResource
+registryCredentialResource =
+    TF.newResource "rancher_registry_credential" $
+        RegistryCredentialResource {
+            _description = TF.Nil
+            , _email = TF.Nil
+            , _name = TF.Nil
+            , _public_value = TF.Nil
+            , _registry_id = TF.Nil
+            , _secret_value = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @rancher_registry@ Rancher resource.
 
@@ -338,30 +335,29 @@ data RegistryResource = RegistryResource {
     {- ^ - (Computed) The ID of the resource. -}
     } deriving (Show, Eq)
 
-registryResource :: TF.Resource TF.Rancher RegistryResource
-registryResource =
-    TF.newResource "rancher_registry" $
-        RegistryResource {
-            _description = TF.Absent
-            , _environment_id = TF.Absent
-            , _name = TF.Absent
-            , _server_address = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RegistryResource where
-    toHCL RegistryResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "environment_id" <$> _environment_id
-        , TF.assign "name" <$> _name
-        , TF.assign "server_address" <$> _server_address
+    toHCL RegistryResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "server_address" <$> TF.argument _server_address
         ]
 
 $(TF.makeSchemaLenses
     ''RegistryResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+registryResource :: TF.Resource TF.Rancher RegistryResource
+registryResource =
+    TF.newResource "rancher_registry" $
+        RegistryResource {
+            _description = TF.Nil
+            , _environment_id = TF.Nil
+            , _name = TF.Nil
+            , _server_address = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @rancher_secrets@ Rancher resource.
 
@@ -379,29 +375,28 @@ data SecretsResource = SecretsResource {
     {- ^ (Required) The secret value. -}
     } deriving (Show, Eq)
 
-secretsResource :: TF.Resource TF.Rancher SecretsResource
-secretsResource =
-    TF.newResource "rancher_secrets" $
-        SecretsResource {
-            _description = TF.Absent
-            , _environment_id = TF.Absent
-            , _name = TF.Absent
-            , _value = TF.Absent
-            }
-
 instance TF.ToHCL SecretsResource where
-    toHCL SecretsResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "environment_id" <$> _environment_id
-        , TF.assign "name" <$> _name
-        , TF.assign "value" <$> _value
+    toHCL SecretsResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "value" <$> TF.argument _value
         ]
 
 $(TF.makeSchemaLenses
     ''SecretsResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+secretsResource :: TF.Resource TF.Rancher SecretsResource
+secretsResource =
+    TF.newResource "rancher_secrets" $
+        SecretsResource {
+            _description = TF.Nil
+            , _environment_id = TF.Nil
+            , _name = TF.Nil
+            , _value = TF.Nil
+            }
 
 {- | The @rancher_stack@ Rancher resource.
 
@@ -437,41 +432,40 @@ data StackResource = StackResource {
     {- ^ - The interpolated @rancher_compose@ applied to the stack. -}
     } deriving (Show, Eq)
 
-stackResource :: TF.Resource TF.Rancher StackResource
-stackResource =
-    TF.newResource "rancher_stack" $
-        StackResource {
-            _catalog_id = TF.Absent
-            , _description = TF.Absent
-            , _docker_compose = TF.Absent
-            , _environment = TF.Absent
-            , _environment_id = TF.Absent
-            , _finish_upgrade = TF.Absent
-            , _name = TF.Absent
-            , _rancher_compose = TF.Absent
-            , _scope = TF.Absent
-            , _start_on_create = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_rendered_docker_compose = TF.Computed "rendered_docker_compose"
-            , _computed_rendered_rancher_compose = TF.Computed "rendered_rancher_compose"
-            }
-
 instance TF.ToHCL StackResource where
-    toHCL StackResource{..} = TF.arguments
-        [ TF.assign "catalog_id" <$> _catalog_id
-        , TF.assign "description" <$> _description
-        , TF.assign "docker_compose" <$> _docker_compose
-        , TF.assign "environment" <$> _environment
-        , TF.assign "environment_id" <$> _environment_id
-        , TF.assign "finish_upgrade" <$> _finish_upgrade
-        , TF.assign "name" <$> _name
-        , TF.assign "rancher_compose" <$> _rancher_compose
-        , TF.assign "scope" <$> _scope
-        , TF.assign "start_on_create" <$> _start_on_create
+    toHCL StackResource{..} = TF.block $ catMaybes
+        [ TF.assign "catalog_id" <$> TF.argument _catalog_id
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "docker_compose" <$> TF.argument _docker_compose
+        , TF.assign "environment" <$> TF.argument _environment
+        , TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "finish_upgrade" <$> TF.argument _finish_upgrade
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "rancher_compose" <$> TF.argument _rancher_compose
+        , TF.assign "scope" <$> TF.argument _scope
+        , TF.assign "start_on_create" <$> TF.argument _start_on_create
         ]
 
 $(TF.makeSchemaLenses
     ''StackResource
     ''TF.Rancher
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+stackResource :: TF.Resource TF.Rancher StackResource
+stackResource =
+    TF.newResource "rancher_stack" $
+        StackResource {
+            _catalog_id = TF.Nil
+            , _description = TF.Nil
+            , _docker_compose = TF.Nil
+            , _environment = TF.Nil
+            , _environment_id = TF.Nil
+            , _finish_upgrade = TF.Nil
+            , _name = TF.Nil
+            , _rancher_compose = TF.Nil
+            , _scope = TF.Nil
+            , _start_on_create = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_rendered_docker_compose = TF.Compute "rendered_docker_compose"
+            , _computed_rendered_rancher_compose = TF.Compute "rendered_rancher_compose"
+            }

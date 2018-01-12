@@ -239,12 +239,12 @@ example1 :: Terraform ()
 example1 =
     defaultProvider east $ do
         ipranges <-
-                datasource "myipranges" $
-                    D.ipRangesDataSource
-                        & D.regions  .~ constant "us-west-1"
-                        & D.services .~ nil
+            datasource "myipranges" $
+                D.ipRangesDataSource
+                    & D.regions  .~ constant "us-west-1"
+                    & D.services .~ nil
 
-        myami    <-
+        myami <-
             datasource "myami" $
                 D.amiDataSource
                     & D.mostRecent .~ constant "true"

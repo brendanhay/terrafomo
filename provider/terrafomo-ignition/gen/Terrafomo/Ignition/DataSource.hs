@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Ignition          as TF
+import qualified Terrafomo.Ignition.Provider as TF
+import qualified Terrafomo.Ignition.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -70,46 +72,45 @@ data ConfigDataSource = ConfigDataSource {
     {- ^ - The final rendered template. -}
     } deriving (Show, Eq)
 
-configDataSource :: TF.DataSource TF.Ignition ConfigDataSource
-configDataSource =
-    TF.newDataSource "ignition_config" $
-        ConfigDataSource {
-            _append = TF.Absent
-            , _arrays = TF.Absent
-            , _directories = TF.Absent
-            , _disks = TF.Absent
-            , _files = TF.Absent
-            , _filesystems = TF.Absent
-            , _groups = TF.Absent
-            , _links = TF.Absent
-            , _networkd = TF.Absent
-            , _replace = TF.Absent
-            , _systemd = TF.Absent
-            , _users = TF.Absent
-            , _computed_rendered = TF.Computed "rendered"
-            }
-
 instance TF.ToHCL ConfigDataSource where
-    toHCL ConfigDataSource{..} = TF.arguments
-        [ TF.assign "append" <$> _append
-        , TF.assign "arrays" <$> _arrays
-        , TF.assign "directories" <$> _directories
-        , TF.assign "disks" <$> _disks
-        , TF.assign "files" <$> _files
-        , TF.assign "filesystems" <$> _filesystems
-        , TF.assign "groups" <$> _groups
-        , TF.assign "links" <$> _links
-        , TF.assign "networkd" <$> _networkd
-        , TF.assign "replace" <$> _replace
-        , TF.assign "systemd" <$> _systemd
-        , TF.assign "users" <$> _users
+    toHCL ConfigDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "append" <$> TF.argument _append
+        , TF.assign "arrays" <$> TF.argument _arrays
+        , TF.assign "directories" <$> TF.argument _directories
+        , TF.assign "disks" <$> TF.argument _disks
+        , TF.assign "files" <$> TF.argument _files
+        , TF.assign "filesystems" <$> TF.argument _filesystems
+        , TF.assign "groups" <$> TF.argument _groups
+        , TF.assign "links" <$> TF.argument _links
+        , TF.assign "networkd" <$> TF.argument _networkd
+        , TF.assign "replace" <$> TF.argument _replace
+        , TF.assign "systemd" <$> TF.argument _systemd
+        , TF.assign "users" <$> TF.argument _users
         ]
 
 $(TF.makeSchemaLenses
     ''ConfigDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+configDataSource :: TF.DataSource TF.Ignition ConfigDataSource
+configDataSource =
+    TF.newDataSource "ignition_config" $
+        ConfigDataSource {
+            _append = TF.Nil
+            , _arrays = TF.Nil
+            , _directories = TF.Nil
+            , _disks = TF.Nil
+            , _files = TF.Nil
+            , _filesystems = TF.Nil
+            , _groups = TF.Nil
+            , _links = TF.Nil
+            , _networkd = TF.Nil
+            , _replace = TF.Nil
+            , _systemd = TF.Nil
+            , _users = TF.Nil
+            , _computed_rendered = TF.Compute "rendered"
+            }
 
 {- | The @ignition_directory@ Ignition datasource.
 
@@ -130,32 +131,31 @@ data DirectoryDataSource = DirectoryDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-directoryDataSource :: TF.DataSource TF.Ignition DirectoryDataSource
-directoryDataSource =
-    TF.newDataSource "ignition_directory" $
-        DirectoryDataSource {
-            _filesystem = TF.Absent
-            , _gid = TF.Absent
-            , _mode = TF.Absent
-            , _path = TF.Absent
-            , _uid = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DirectoryDataSource where
-    toHCL DirectoryDataSource{..} = TF.arguments
-        [ TF.assign "filesystem" <$> _filesystem
-        , TF.assign "gid" <$> _gid
-        , TF.assign "mode" <$> _mode
-        , TF.assign "path" <$> _path
-        , TF.assign "uid" <$> _uid
+    toHCL DirectoryDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "filesystem" <$> TF.argument _filesystem
+        , TF.assign "gid" <$> TF.argument _gid
+        , TF.assign "mode" <$> TF.argument _mode
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "uid" <$> TF.argument _uid
         ]
 
 $(TF.makeSchemaLenses
     ''DirectoryDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+directoryDataSource :: TF.DataSource TF.Ignition DirectoryDataSource
+directoryDataSource =
+    TF.newDataSource "ignition_directory" $
+        DirectoryDataSource {
+            _filesystem = TF.Nil
+            , _gid = TF.Nil
+            , _mode = TF.Nil
+            , _path = TF.Nil
+            , _uid = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_disk@ Ignition datasource.
 
@@ -172,28 +172,27 @@ data DiskDataSource = DiskDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-diskDataSource :: TF.DataSource TF.Ignition DiskDataSource
-diskDataSource =
-    TF.newDataSource "ignition_disk" $
-        DiskDataSource {
-            _device = TF.Absent
-            , _partition = TF.Absent
-            , _wipe_table = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DiskDataSource where
-    toHCL DiskDataSource{..} = TF.arguments
-        [ TF.assign "device" <$> _device
-        , TF.assign "partition" <$> _partition
-        , TF.assign "wipe_table" <$> _wipe_table
+    toHCL DiskDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "device" <$> TF.argument _device
+        , TF.assign "partition" <$> TF.argument _partition
+        , TF.assign "wipe_table" <$> TF.argument _wipe_table
         ]
 
 $(TF.makeSchemaLenses
     ''DiskDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+diskDataSource :: TF.DataSource TF.Ignition DiskDataSource
+diskDataSource =
+    TF.newDataSource "ignition_disk" $
+        DiskDataSource {
+            _device = TF.Nil
+            , _partition = TF.Nil
+            , _wipe_table = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_file@ Ignition datasource.
 
@@ -218,36 +217,35 @@ data FileDataSource = FileDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-fileDataSource :: TF.DataSource TF.Ignition FileDataSource
-fileDataSource =
-    TF.newDataSource "ignition_file" $
-        FileDataSource {
-            _content = TF.Absent
-            , _filesystem = TF.Absent
-            , _gid = TF.Absent
-            , _mode = TF.Absent
-            , _path = TF.Absent
-            , _source = TF.Absent
-            , _uid = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL FileDataSource where
-    toHCL FileDataSource{..} = TF.arguments
-        [ TF.assign "content" <$> _content
-        , TF.assign "filesystem" <$> _filesystem
-        , TF.assign "gid" <$> _gid
-        , TF.assign "mode" <$> _mode
-        , TF.assign "path" <$> _path
-        , TF.assign "source" <$> _source
-        , TF.assign "uid" <$> _uid
+    toHCL FileDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "content" <$> TF.argument _content
+        , TF.assign "filesystem" <$> TF.argument _filesystem
+        , TF.assign "gid" <$> TF.argument _gid
+        , TF.assign "mode" <$> TF.argument _mode
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "source" <$> TF.argument _source
+        , TF.assign "uid" <$> TF.argument _uid
         ]
 
 $(TF.makeSchemaLenses
     ''FileDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+fileDataSource :: TF.DataSource TF.Ignition FileDataSource
+fileDataSource =
+    TF.newDataSource "ignition_file" $
+        FileDataSource {
+            _content = TF.Nil
+            , _filesystem = TF.Nil
+            , _gid = TF.Nil
+            , _mode = TF.Nil
+            , _path = TF.Nil
+            , _source = TF.Nil
+            , _uid = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_filesystem@ Ignition datasource.
 
@@ -265,28 +263,27 @@ data FilesystemDataSource = FilesystemDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-filesystemDataSource :: TF.DataSource TF.Ignition FilesystemDataSource
-filesystemDataSource =
-    TF.newDataSource "ignition_filesystem" $
-        FilesystemDataSource {
-            _mount = TF.Absent
-            , _name = TF.Absent
-            , _path = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL FilesystemDataSource where
-    toHCL FilesystemDataSource{..} = TF.arguments
-        [ TF.assign "mount" <$> _mount
-        , TF.assign "name" <$> _name
-        , TF.assign "path" <$> _path
+    toHCL FilesystemDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "mount" <$> TF.argument _mount
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "path" <$> TF.argument _path
         ]
 
 $(TF.makeSchemaLenses
     ''FilesystemDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+filesystemDataSource :: TF.DataSource TF.Ignition FilesystemDataSource
+filesystemDataSource =
+    TF.newDataSource "ignition_filesystem" $
+        FilesystemDataSource {
+            _mount = TF.Nil
+            , _name = TF.Nil
+            , _path = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_group@ Ignition datasource.
 
@@ -303,28 +300,27 @@ data GroupDataSource = GroupDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-groupDataSource :: TF.DataSource TF.Ignition GroupDataSource
-groupDataSource =
-    TF.newDataSource "ignition_group" $
-        GroupDataSource {
-            _gid = TF.Absent
-            , _name = TF.Absent
-            , _password_hash = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL GroupDataSource where
-    toHCL GroupDataSource{..} = TF.arguments
-        [ TF.assign "gid" <$> _gid
-        , TF.assign "name" <$> _name
-        , TF.assign "password_hash" <$> _password_hash
+    toHCL GroupDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "gid" <$> TF.argument _gid
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password_hash" <$> TF.argument _password_hash
         ]
 
 $(TF.makeSchemaLenses
     ''GroupDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+groupDataSource :: TF.DataSource TF.Ignition GroupDataSource
+groupDataSource =
+    TF.newDataSource "ignition_group" $
+        GroupDataSource {
+            _gid = TF.Nil
+            , _name = TF.Nil
+            , _password_hash = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_link@ Ignition datasource.
 
@@ -347,34 +343,33 @@ data LinkDataSource = LinkDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-linkDataSource :: TF.DataSource TF.Ignition LinkDataSource
-linkDataSource =
-    TF.newDataSource "ignition_link" $
-        LinkDataSource {
-            _filesystem = TF.Absent
-            , _gid = TF.Absent
-            , _hard = TF.Absent
-            , _path = TF.Absent
-            , _target = TF.Absent
-            , _uid = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LinkDataSource where
-    toHCL LinkDataSource{..} = TF.arguments
-        [ TF.assign "filesystem" <$> _filesystem
-        , TF.assign "gid" <$> _gid
-        , TF.assign "hard" <$> _hard
-        , TF.assign "path" <$> _path
-        , TF.assign "target" <$> _target
-        , TF.assign "uid" <$> _uid
+    toHCL LinkDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "filesystem" <$> TF.argument _filesystem
+        , TF.assign "gid" <$> TF.argument _gid
+        , TF.assign "hard" <$> TF.argument _hard
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "target" <$> TF.argument _target
+        , TF.assign "uid" <$> TF.argument _uid
         ]
 
 $(TF.makeSchemaLenses
     ''LinkDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+linkDataSource :: TF.DataSource TF.Ignition LinkDataSource
+linkDataSource =
+    TF.newDataSource "ignition_link" $
+        LinkDataSource {
+            _filesystem = TF.Nil
+            , _gid = TF.Nil
+            , _hard = TF.Nil
+            , _path = TF.Nil
+            , _target = TF.Nil
+            , _uid = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_networkd_unit@ Ignition datasource.
 
@@ -389,26 +384,25 @@ data NetworkdUnitDataSource = NetworkdUnitDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-networkdUnitDataSource :: TF.DataSource TF.Ignition NetworkdUnitDataSource
-networkdUnitDataSource =
-    TF.newDataSource "ignition_networkd_unit" $
-        NetworkdUnitDataSource {
-            _content = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL NetworkdUnitDataSource where
-    toHCL NetworkdUnitDataSource{..} = TF.arguments
-        [ TF.assign "content" <$> _content
-        , TF.assign "name" <$> _name
+    toHCL NetworkdUnitDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "content" <$> TF.argument _content
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkdUnitDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkdUnitDataSource :: TF.DataSource TF.Ignition NetworkdUnitDataSource
+networkdUnitDataSource =
+    TF.newDataSource "ignition_networkd_unit" $
+        NetworkdUnitDataSource {
+            _content = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_raid@ Ignition datasource.
 
@@ -427,30 +421,29 @@ data RaidDataSource = RaidDataSource {
     {- ^ - ID used to reference this resource in ignition_config -}
     } deriving (Show, Eq)
 
-raidDataSource :: TF.DataSource TF.Ignition RaidDataSource
-raidDataSource =
-    TF.newDataSource "ignition_raid" $
-        RaidDataSource {
-            _devices = TF.Absent
-            , _level = TF.Absent
-            , _name = TF.Absent
-            , _spares = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RaidDataSource where
-    toHCL RaidDataSource{..} = TF.arguments
-        [ TF.assign "devices" <$> _devices
-        , TF.assign "level" <$> _level
-        , TF.assign "name" <$> _name
-        , TF.assign "spares" <$> _spares
+    toHCL RaidDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "devices" <$> TF.argument _devices
+        , TF.assign "level" <$> TF.argument _level
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "spares" <$> TF.argument _spares
         ]
 
 $(TF.makeSchemaLenses
     ''RaidDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+raidDataSource :: TF.DataSource TF.Ignition RaidDataSource
+raidDataSource =
+    TF.newDataSource "ignition_raid" $
+        RaidDataSource {
+            _devices = TF.Nil
+            , _level = TF.Nil
+            , _name = TF.Nil
+            , _spares = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_systemd_unit@ Ignition datasource.
 
@@ -471,32 +464,31 @@ data SystemdUnitDataSource = SystemdUnitDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-systemdUnitDataSource :: TF.DataSource TF.Ignition SystemdUnitDataSource
-systemdUnitDataSource =
-    TF.newDataSource "ignition_systemd_unit" $
-        SystemdUnitDataSource {
-            _content = TF.Absent
-            , _dropin = TF.Absent
-            , _enabled = TF.Absent
-            , _mask = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SystemdUnitDataSource where
-    toHCL SystemdUnitDataSource{..} = TF.arguments
-        [ TF.assign "content" <$> _content
-        , TF.assign "dropin" <$> _dropin
-        , TF.assign "enabled" <$> _enabled
-        , TF.assign "mask" <$> _mask
-        , TF.assign "name" <$> _name
+    toHCL SystemdUnitDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "content" <$> TF.argument _content
+        , TF.assign "dropin" <$> TF.argument _dropin
+        , TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "mask" <$> TF.argument _mask
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''SystemdUnitDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+systemdUnitDataSource :: TF.DataSource TF.Ignition SystemdUnitDataSource
+systemdUnitDataSource =
+    TF.newDataSource "ignition_systemd_unit" $
+        SystemdUnitDataSource {
+            _content = TF.Nil
+            , _dropin = TF.Nil
+            , _enabled = TF.Nil
+            , _mask = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @ignition_user@ Ignition datasource.
 
@@ -533,45 +525,44 @@ data UserDataSource = UserDataSource {
     {- ^ - ID used to reference this resource in ignition_config . -}
     } deriving (Show, Eq)
 
-userDataSource :: TF.DataSource TF.Ignition UserDataSource
-userDataSource =
-    TF.newDataSource "ignition_user" $
-        UserDataSource {
-            _gecos = TF.Absent
-            , _groups = TF.Absent
-            , _home_dir = TF.Absent
-            , _name = TF.Absent
-            , _no_create_home = TF.Absent
-            , _no_log_init = TF.Absent
-            , _no_user_group = TF.Absent
-            , _password_hash = TF.Absent
-            , _primary_group = TF.Absent
-            , _shell = TF.Absent
-            , _ssh_authorized_keys = TF.Absent
-            , _system = TF.Absent
-            , _uid = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL UserDataSource where
-    toHCL UserDataSource{..} = TF.arguments
-        [ TF.assign "gecos" <$> _gecos
-        , TF.assign "groups" <$> _groups
-        , TF.assign "home_dir" <$> _home_dir
-        , TF.assign "name" <$> _name
-        , TF.assign "no_create_home" <$> _no_create_home
-        , TF.assign "no_log_init" <$> _no_log_init
-        , TF.assign "no_user_group" <$> _no_user_group
-        , TF.assign "password_hash" <$> _password_hash
-        , TF.assign "primary_group" <$> _primary_group
-        , TF.assign "shell" <$> _shell
-        , TF.assign "ssh_authorized_keys" <$> _ssh_authorized_keys
-        , TF.assign "system" <$> _system
-        , TF.assign "uid" <$> _uid
+    toHCL UserDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "gecos" <$> TF.argument _gecos
+        , TF.assign "groups" <$> TF.argument _groups
+        , TF.assign "home_dir" <$> TF.argument _home_dir
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "no_create_home" <$> TF.argument _no_create_home
+        , TF.assign "no_log_init" <$> TF.argument _no_log_init
+        , TF.assign "no_user_group" <$> TF.argument _no_user_group
+        , TF.assign "password_hash" <$> TF.argument _password_hash
+        , TF.assign "primary_group" <$> TF.argument _primary_group
+        , TF.assign "shell" <$> TF.argument _shell
+        , TF.assign "ssh_authorized_keys" <$> TF.argument _ssh_authorized_keys
+        , TF.assign "system" <$> TF.argument _system
+        , TF.assign "uid" <$> TF.argument _uid
         ]
 
 $(TF.makeSchemaLenses
     ''UserDataSource
     ''TF.Ignition
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+userDataSource :: TF.DataSource TF.Ignition UserDataSource
+userDataSource =
+    TF.newDataSource "ignition_user" $
+        UserDataSource {
+            _gecos = TF.Nil
+            , _groups = TF.Nil
+            , _home_dir = TF.Nil
+            , _name = TF.Nil
+            , _no_create_home = TF.Nil
+            , _no_log_init = TF.Nil
+            , _no_user_group = TF.Nil
+            , _password_hash = TF.Nil
+            , _primary_group = TF.Nil
+            , _shell = TF.Nil
+            , _ssh_authorized_keys = TF.Nil
+            , _system = TF.Nil
+            , _uid = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

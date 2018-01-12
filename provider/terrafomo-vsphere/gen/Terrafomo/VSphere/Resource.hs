@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
-import qualified Terrafomo.VSphere         as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Resource  as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
+import qualified Terrafomo.VSphere.Provider as TF
+import qualified Terrafomo.VSphere.Types    as TF
 
 {- | The @vsphere_datacenter@ VSphere resource.
 
@@ -50,27 +52,26 @@ data DatacenterResource = DatacenterResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-datacenterResource :: TF.Resource TF.VSphere DatacenterResource
-datacenterResource =
-    TF.newResource "vsphere_datacenter" $
-        DatacenterResource {
-            _folder = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL DatacenterResource where
-    toHCL DatacenterResource{..} = TF.arguments
-        [ TF.assign "folder" <$> _folder
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
+    toHCL DatacenterResource{..} = TF.block $ catMaybes
+        [ TF.assign "folder" <$> TF.argument _folder
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''DatacenterResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+datacenterResource :: TF.Resource TF.VSphere DatacenterResource
+datacenterResource =
+    TF.newResource "vsphere_datacenter" $
+        DatacenterResource {
+            _folder = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
 
 {- | The @vsphere_distributed_port_group@ VSphere resource.
 
@@ -103,33 +104,32 @@ data DistributedPortGroupResource = DistributedPortGroupResource {
     {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
     } deriving (Show, Eq)
 
-distributedPortGroupResource :: TF.Resource TF.VSphere DistributedPortGroupResource
-distributedPortGroupResource =
-    TF.newResource "vsphere_distributed_port_group" $
-        DistributedPortGroupResource {
-            _auto_expand = TF.Absent
-            , _description = TF.Absent
-            , _distributed_virtual_switch_uuid = TF.Absent
-            , _name = TF.Absent
-            , _number_of_ports = TF.Absent
-            , _type' = TF.Absent
-            }
-
 instance TF.ToHCL DistributedPortGroupResource where
-    toHCL DistributedPortGroupResource{..} = TF.arguments
-        [ TF.assign "auto_expand" <$> _auto_expand
-        , TF.assign "description" <$> _description
-        , TF.assign "distributed_virtual_switch_uuid" <$> _distributed_virtual_switch_uuid
-        , TF.assign "name" <$> _name
-        , TF.assign "number_of_ports" <$> _number_of_ports
-        , TF.assign "type" <$> _type'
+    toHCL DistributedPortGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "auto_expand" <$> TF.argument _auto_expand
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "distributed_virtual_switch_uuid" <$> TF.argument _distributed_virtual_switch_uuid
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "number_of_ports" <$> TF.argument _number_of_ports
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''DistributedPortGroupResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+distributedPortGroupResource :: TF.Resource TF.VSphere DistributedPortGroupResource
+distributedPortGroupResource =
+    TF.newResource "vsphere_distributed_port_group" $
+        DistributedPortGroupResource {
+            _auto_expand = TF.Nil
+            , _description = TF.Nil
+            , _distributed_virtual_switch_uuid = TF.Nil
+            , _name = TF.Nil
+            , _number_of_ports = TF.Nil
+            , _type' = TF.Nil
+            }
 
 {- | The @vsphere_distributed_virtual_switch@ VSphere resource.
 
@@ -180,49 +180,48 @@ data DistributedVirtualSwitchResource = DistributedVirtualSwitchResource {
     {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
     } deriving (Show, Eq)
 
-distributedVirtualSwitchResource :: TF.Resource TF.VSphere DistributedVirtualSwitchResource
-distributedVirtualSwitchResource =
-    TF.newResource "vsphere_distributed_virtual_switch" $
-        DistributedVirtualSwitchResource {
-            _contact_detail = TF.Absent
-            , _contact_name = TF.Absent
-            , _datacenter_id = TF.Absent
-            , _description = TF.Absent
-            , _folder = TF.Absent
-            , _ipv4_address = TF.Absent
-            , _lacp_api_version = TF.Absent
-            , _link_discovery_operation = TF.Absent
-            , _link_discovery_protocol = TF.Absent
-            , _max_mtu = TF.Absent
-            , _multicast_filtering_mode = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _version = TF.Absent
-            }
-
 instance TF.ToHCL DistributedVirtualSwitchResource where
-    toHCL DistributedVirtualSwitchResource{..} = TF.arguments
-        [ TF.assign "contact_detail" <$> _contact_detail
-        , TF.assign "contact_name" <$> _contact_name
-        , TF.assign "datacenter_id" <$> _datacenter_id
-        , TF.assign "description" <$> _description
-        , TF.assign "folder" <$> _folder
-        , TF.assign "ipv4_address" <$> _ipv4_address
-        , TF.assign "lacp_api_version" <$> _lacp_api_version
-        , TF.assign "link_discovery_operation" <$> _link_discovery_operation
-        , TF.assign "link_discovery_protocol" <$> _link_discovery_protocol
-        , TF.assign "max_mtu" <$> _max_mtu
-        , TF.assign "multicast_filtering_mode" <$> _multicast_filtering_mode
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
-        , TF.assign "version" <$> _version
+    toHCL DistributedVirtualSwitchResource{..} = TF.block $ catMaybes
+        [ TF.assign "contact_detail" <$> TF.argument _contact_detail
+        , TF.assign "contact_name" <$> TF.argument _contact_name
+        , TF.assign "datacenter_id" <$> TF.argument _datacenter_id
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "folder" <$> TF.argument _folder
+        , TF.assign "ipv4_address" <$> TF.argument _ipv4_address
+        , TF.assign "lacp_api_version" <$> TF.argument _lacp_api_version
+        , TF.assign "link_discovery_operation" <$> TF.argument _link_discovery_operation
+        , TF.assign "link_discovery_protocol" <$> TF.argument _link_discovery_protocol
+        , TF.assign "max_mtu" <$> TF.argument _max_mtu
+        , TF.assign "multicast_filtering_mode" <$> TF.argument _multicast_filtering_mode
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''DistributedVirtualSwitchResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+distributedVirtualSwitchResource :: TF.Resource TF.VSphere DistributedVirtualSwitchResource
+distributedVirtualSwitchResource =
+    TF.newResource "vsphere_distributed_virtual_switch" $
+        DistributedVirtualSwitchResource {
+            _contact_detail = TF.Nil
+            , _contact_name = TF.Nil
+            , _datacenter_id = TF.Nil
+            , _description = TF.Nil
+            , _folder = TF.Nil
+            , _ipv4_address = TF.Nil
+            , _lacp_api_version = TF.Nil
+            , _link_discovery_operation = TF.Nil
+            , _link_discovery_protocol = TF.Nil
+            , _max_mtu = TF.Nil
+            , _multicast_filtering_mode = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _version = TF.Nil
+            }
 
 {- | The @vsphere_file@ VSphere resource.
 
@@ -255,35 +254,34 @@ data FileResource = FileResource {
     {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-fileResource :: TF.Resource TF.VSphere FileResource
-fileResource =
-    TF.newResource "vsphere_file" $
-        FileResource {
-            _create_directories = TF.Absent
-            , _datacenter = TF.Absent
-            , _datastore = TF.Absent
-            , _destination_file = TF.Absent
-            , _source_datacenter = TF.Absent
-            , _source_datastore = TF.Absent
-            , _source_file = TF.Absent
-            }
-
 instance TF.ToHCL FileResource where
-    toHCL FileResource{..} = TF.arguments
-        [ TF.assign "create_directories" <$> _create_directories
-        , TF.assign "datacenter" <$> _datacenter
-        , TF.assign "datastore" <$> _datastore
-        , TF.assign "destination_file" <$> _destination_file
-        , TF.assign "source_datacenter" <$> _source_datacenter
-        , TF.assign "source_datastore" <$> _source_datastore
-        , TF.assign "source_file" <$> _source_file
+    toHCL FileResource{..} = TF.block $ catMaybes
+        [ TF.assign "create_directories" <$> TF.argument _create_directories
+        , TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "datastore" <$> TF.argument _datastore
+        , TF.assign "destination_file" <$> TF.argument _destination_file
+        , TF.assign "source_datacenter" <$> TF.argument _source_datacenter
+        , TF.assign "source_datastore" <$> TF.argument _source_datastore
+        , TF.assign "source_file" <$> TF.argument _source_file
         ]
 
 $(TF.makeSchemaLenses
     ''FileResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+fileResource :: TF.Resource TF.VSphere FileResource
+fileResource =
+    TF.newResource "vsphere_file" $
+        FileResource {
+            _create_directories = TF.Nil
+            , _datacenter = TF.Nil
+            , _datastore = TF.Nil
+            , _destination_file = TF.Nil
+            , _source_datacenter = TF.Nil
+            , _source_datastore = TF.Nil
+            , _source_file = TF.Nil
+            }
 
 {- | The @vsphere_folder@ VSphere resource.
 
@@ -301,23 +299,22 @@ data FolderResource = FolderResource {
     {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
     } deriving (Show, Eq)
 
-folderResource :: TF.Resource TF.VSphere FolderResource
-folderResource =
-    TF.newResource "vsphere_folder" $
-        FolderResource {
-            _path = TF.Absent
-            }
-
 instance TF.ToHCL FolderResource where
-    toHCL FolderResource{..} = TF.arguments
-        [ TF.assign "path" <$> _path
+    toHCL FolderResource{..} = TF.block $ catMaybes
+        [ TF.assign "path" <$> TF.argument _path
         ]
 
 $(TF.makeSchemaLenses
     ''FolderResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+folderResource :: TF.Resource TF.VSphere FolderResource
+folderResource =
+    TF.newResource "vsphere_folder" $
+        FolderResource {
+            _path = TF.Nil
+            }
 
 {- | The @vsphere_host_port_group@ VSphere resource.
 
@@ -340,29 +337,28 @@ data HostPortGroupResource = HostPortGroupResource {
     {- ^ (Optional) The VLAN ID/trunk mode for this port group.  An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
     } deriving (Show, Eq)
 
-hostPortGroupResource :: TF.Resource TF.VSphere HostPortGroupResource
-hostPortGroupResource =
-    TF.newResource "vsphere_host_port_group" $
-        HostPortGroupResource {
-            _host_system_id = TF.Absent
-            , _name = TF.Absent
-            , _virtual_switch_name = TF.Absent
-            , _vlan_id = TF.Absent
-            }
-
 instance TF.ToHCL HostPortGroupResource where
-    toHCL HostPortGroupResource{..} = TF.arguments
-        [ TF.assign "host_system_id" <$> _host_system_id
-        , TF.assign "name" <$> _name
-        , TF.assign "virtual_switch_name" <$> _virtual_switch_name
-        , TF.assign "vlan_id" <$> _vlan_id
+    toHCL HostPortGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "host_system_id" <$> TF.argument _host_system_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "virtual_switch_name" <$> TF.argument _virtual_switch_name
+        , TF.assign "vlan_id" <$> TF.argument _vlan_id
         ]
 
 $(TF.makeSchemaLenses
     ''HostPortGroupResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+hostPortGroupResource :: TF.Resource TF.VSphere HostPortGroupResource
+hostPortGroupResource =
+    TF.newResource "vsphere_host_port_group" $
+        HostPortGroupResource {
+            _host_system_id = TF.Nil
+            , _name = TF.Nil
+            , _virtual_switch_name = TF.Nil
+            , _vlan_id = TF.Nil
+            }
 
 {- | The @vsphere_host_virtual_switch@ VSphere resource.
 
@@ -385,29 +381,28 @@ data HostVirtualSwitchResource = HostVirtualSwitchResource {
     {- ^ (Optional) The number of ports to create with this virtual switch. Default: @128@ . -}
     } deriving (Show, Eq)
 
-hostVirtualSwitchResource :: TF.Resource TF.VSphere HostVirtualSwitchResource
-hostVirtualSwitchResource =
-    TF.newResource "vsphere_host_virtual_switch" $
-        HostVirtualSwitchResource {
-            _host_system_id = TF.Absent
-            , _mtu = TF.Absent
-            , _name = TF.Absent
-            , _number_of_ports = TF.Absent
-            }
-
 instance TF.ToHCL HostVirtualSwitchResource where
-    toHCL HostVirtualSwitchResource{..} = TF.arguments
-        [ TF.assign "host_system_id" <$> _host_system_id
-        , TF.assign "mtu" <$> _mtu
-        , TF.assign "name" <$> _name
-        , TF.assign "number_of_ports" <$> _number_of_ports
+    toHCL HostVirtualSwitchResource{..} = TF.block $ catMaybes
+        [ TF.assign "host_system_id" <$> TF.argument _host_system_id
+        , TF.assign "mtu" <$> TF.argument _mtu
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "number_of_ports" <$> TF.argument _number_of_ports
         ]
 
 $(TF.makeSchemaLenses
     ''HostVirtualSwitchResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+hostVirtualSwitchResource :: TF.Resource TF.VSphere HostVirtualSwitchResource
+hostVirtualSwitchResource =
+    TF.newResource "vsphere_host_virtual_switch" $
+        HostVirtualSwitchResource {
+            _host_system_id = TF.Nil
+            , _mtu = TF.Nil
+            , _name = TF.Nil
+            , _number_of_ports = TF.Nil
+            }
 
 {- | The @vsphere_license@ VSphere resource.
 
@@ -429,29 +424,28 @@ data LicenseResource = LicenseResource {
     {- ^ - The number of units (example: CPUs) assigned to this license. -}
     } deriving (Show, Eq)
 
-licenseResource :: TF.Resource TF.VSphere LicenseResource
-licenseResource =
-    TF.newResource "vsphere_license" $
-        LicenseResource {
-            _labels = TF.Absent
-            , _license_key = TF.Absent
-            , _computed_edition_key = TF.Computed "edition_key"
-            , _computed_name = TF.Computed "name"
-            , _computed_total = TF.Computed "total"
-            , _computed_used = TF.Computed "used"
-            }
-
 instance TF.ToHCL LicenseResource where
-    toHCL LicenseResource{..} = TF.arguments
-        [ TF.assign "labels" <$> _labels
-        , TF.assign "license_key" <$> _license_key
+    toHCL LicenseResource{..} = TF.block $ catMaybes
+        [ TF.assign "labels" <$> TF.argument _labels
+        , TF.assign "license_key" <$> TF.argument _license_key
         ]
 
 $(TF.makeSchemaLenses
     ''LicenseResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+licenseResource :: TF.Resource TF.VSphere LicenseResource
+licenseResource =
+    TF.newResource "vsphere_license" $
+        LicenseResource {
+            _labels = TF.Nil
+            , _license_key = TF.Nil
+            , _computed_edition_key = TF.Compute "edition_key"
+            , _computed_name = TF.Compute "name"
+            , _computed_total = TF.Compute "total"
+            , _computed_used = TF.Compute "used"
+            }
 
 {- | The @vsphere_nas_datastore@ VSphere resource.
 
@@ -502,48 +496,47 @@ data NasDatastoreResource = NasDatastoreResource {
     {- ^ - The unique locator for the datastore. -}
     } deriving (Show, Eq)
 
-nasDatastoreResource :: TF.Resource TF.VSphere NasDatastoreResource
-nasDatastoreResource =
-    TF.newResource "vsphere_nas_datastore" $
-        NasDatastoreResource {
-            _access_mode = TF.Absent
-            , _folder = TF.Absent
-            , _host_system_ids = TF.Absent
-            , _name = TF.Absent
-            , _remote_hosts = TF.Absent
-            , _remote_path = TF.Absent
-            , _security_type = TF.Absent
-            , _tags = TF.Absent
-            , _type' = TF.Absent
-            , _computed_accessible = TF.Computed "accessible"
-            , _computed_capacity = TF.Computed "capacity"
-            , _computed_free_space = TF.Computed "free_space"
-            , _computed_id = TF.Computed "id"
-            , _computed_maintenance_mode = TF.Computed "maintenance_mode"
-            , _computed_multiple_host_access = TF.Computed "multiple_host_access"
-            , _computed_protocol_endpoint = TF.Computed "protocol_endpoint"
-            , _computed_uncommitted_space = TF.Computed "uncommitted_space"
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL NasDatastoreResource where
-    toHCL NasDatastoreResource{..} = TF.arguments
-        [ TF.assign "access_mode" <$> _access_mode
-        , TF.assign "folder" <$> _folder
-        , TF.assign "host_system_ids" <$> _host_system_ids
-        , TF.assign "name" <$> _name
-        , TF.assign "remote_hosts" <$> _remote_hosts
-        , TF.assign "remote_path" <$> _remote_path
-        , TF.assign "security_type" <$> _security_type
-        , TF.assign "tags" <$> _tags
-        , TF.assign "type" <$> _type'
+    toHCL NasDatastoreResource{..} = TF.block $ catMaybes
+        [ TF.assign "access_mode" <$> TF.argument _access_mode
+        , TF.assign "folder" <$> TF.argument _folder
+        , TF.assign "host_system_ids" <$> TF.argument _host_system_ids
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "remote_hosts" <$> TF.argument _remote_hosts
+        , TF.assign "remote_path" <$> TF.argument _remote_path
+        , TF.assign "security_type" <$> TF.argument _security_type
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''NasDatastoreResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+nasDatastoreResource :: TF.Resource TF.VSphere NasDatastoreResource
+nasDatastoreResource =
+    TF.newResource "vsphere_nas_datastore" $
+        NasDatastoreResource {
+            _access_mode = TF.Nil
+            , _folder = TF.Nil
+            , _host_system_ids = TF.Nil
+            , _name = TF.Nil
+            , _remote_hosts = TF.Nil
+            , _remote_path = TF.Nil
+            , _security_type = TF.Nil
+            , _tags = TF.Nil
+            , _type' = TF.Nil
+            , _computed_accessible = TF.Compute "accessible"
+            , _computed_capacity = TF.Compute "capacity"
+            , _computed_free_space = TF.Compute "free_space"
+            , _computed_id = TF.Compute "id"
+            , _computed_maintenance_mode = TF.Compute "maintenance_mode"
+            , _computed_multiple_host_access = TF.Compute "multiple_host_access"
+            , _computed_protocol_endpoint = TF.Compute "protocol_endpoint"
+            , _computed_uncommitted_space = TF.Compute "uncommitted_space"
+            , _computed_url = TF.Compute "url"
+            }
 
 {- | The @vsphere_tag_category@ VSphere resource.
 
@@ -567,29 +560,28 @@ data TagCategoryResource = TagCategoryResource {
     {- ^ (Required) The name of the category. -}
     } deriving (Show, Eq)
 
-tagCategoryResource :: TF.Resource TF.VSphere TagCategoryResource
-tagCategoryResource =
-    TF.newResource "vsphere_tag_category" $
-        TagCategoryResource {
-            _associable_types = TF.Absent
-            , _cardinality = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL TagCategoryResource where
-    toHCL TagCategoryResource{..} = TF.arguments
-        [ TF.assign "associable_types" <$> _associable_types
-        , TF.assign "cardinality" <$> _cardinality
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
+    toHCL TagCategoryResource{..} = TF.block $ catMaybes
+        [ TF.assign "associable_types" <$> TF.argument _associable_types
+        , TF.assign "cardinality" <$> TF.argument _cardinality
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TagCategoryResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+tagCategoryResource :: TF.Resource TF.VSphere TagCategoryResource
+tagCategoryResource =
+    TF.newResource "vsphere_tag_category" $
+        TagCategoryResource {
+            _associable_types = TF.Nil
+            , _cardinality = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_tag@ VSphere resource.
 
@@ -610,27 +602,26 @@ data TagResource = TagResource {
     {- ^ (Required) The display name of the tag. The name must be unique within its category. -}
     } deriving (Show, Eq)
 
-tagResource :: TF.Resource TF.VSphere TagResource
-tagResource =
-    TF.newResource "vsphere_tag" $
-        TagResource {
-            _category_id = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL TagResource where
-    toHCL TagResource{..} = TF.arguments
-        [ TF.assign "category_id" <$> _category_id
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
+    toHCL TagResource{..} = TF.block $ catMaybes
+        [ TF.assign "category_id" <$> TF.argument _category_id
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''TagResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+tagResource :: TF.Resource TF.VSphere TagResource
+tagResource =
+    TF.newResource "vsphere_tag" $
+        TagResource {
+            _category_id = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_virtual_disk@ VSphere resource.
 
@@ -655,33 +646,32 @@ data VirtualDiskResource = VirtualDiskResource {
     {- ^ (Required) The path, including filename, of the virtual disk to be created.  This needs to end in @.vmdk@ . -}
     } deriving (Show, Eq)
 
-virtualDiskResource :: TF.Resource TF.VSphere VirtualDiskResource
-virtualDiskResource =
-    TF.newResource "vsphere_virtual_disk" $
-        VirtualDiskResource {
-            _adapter_type = TF.Absent
-            , _datacenter = TF.Absent
-            , _datastore = TF.Absent
-            , _size = TF.Absent
-            , _type' = TF.Absent
-            , _vmdk_path = TF.Absent
-            }
-
 instance TF.ToHCL VirtualDiskResource where
-    toHCL VirtualDiskResource{..} = TF.arguments
-        [ TF.assign "adapter_type" <$> _adapter_type
-        , TF.assign "datacenter" <$> _datacenter
-        , TF.assign "datastore" <$> _datastore
-        , TF.assign "size" <$> _size
-        , TF.assign "type" <$> _type'
-        , TF.assign "vmdk_path" <$> _vmdk_path
+    toHCL VirtualDiskResource{..} = TF.block $ catMaybes
+        [ TF.assign "adapter_type" <$> TF.argument _adapter_type
+        , TF.assign "datacenter" <$> TF.argument _datacenter
+        , TF.assign "datastore" <$> TF.argument _datastore
+        , TF.assign "size" <$> TF.argument _size
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "vmdk_path" <$> TF.argument _vmdk_path
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualDiskResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualDiskResource :: TF.Resource TF.VSphere VirtualDiskResource
+virtualDiskResource =
+    TF.newResource "vsphere_virtual_disk" $
+        VirtualDiskResource {
+            _adapter_type = TF.Nil
+            , _datacenter = TF.Nil
+            , _datastore = TF.Nil
+            , _size = TF.Nil
+            , _type' = TF.Nil
+            , _vmdk_path = TF.Nil
+            }
 
 {- | The @vsphere_virtual_machine@ VSphere resource.
 
@@ -728,53 +718,52 @@ data VirtualMachineResource = VirtualMachineResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-virtualMachineResource :: TF.Resource TF.VSphere VirtualMachineResource
-virtualMachineResource =
-    TF.newResource "vsphere_virtual_machine" $
-        VirtualMachineResource {
-            _alternate_guest_name = TF.Absent
-            , _annotation = TF.Absent
-            , _cdrom = TF.Absent
-            , _clone = TF.Absent
-            , _datastore_id = TF.Absent
-            , _disk = TF.Absent
-            , _extra_config = TF.Absent
-            , _firmware = TF.Absent
-            , _folder = TF.Absent
-            , _guest_id = TF.Absent
-            , _host_system_id = TF.Absent
-            , _name = TF.Absent
-            , _network_interface = TF.Absent
-            , _resource_pool_id = TF.Absent
-            , _scsi_type = TF.Absent
-            , _tags = TF.Absent
-            }
-
 instance TF.ToHCL VirtualMachineResource where
-    toHCL VirtualMachineResource{..} = TF.arguments
-        [ TF.assign "alternate_guest_name" <$> _alternate_guest_name
-        , TF.assign "annotation" <$> _annotation
-        , TF.assign "cdrom" <$> _cdrom
-        , TF.assign "clone" <$> _clone
-        , TF.assign "datastore_id" <$> _datastore_id
-        , TF.assign "disk" <$> _disk
-        , TF.assign "extra_config" <$> _extra_config
-        , TF.assign "firmware" <$> _firmware
-        , TF.assign "folder" <$> _folder
-        , TF.assign "guest_id" <$> _guest_id
-        , TF.assign "host_system_id" <$> _host_system_id
-        , TF.assign "name" <$> _name
-        , TF.assign "network_interface" <$> _network_interface
-        , TF.assign "resource_pool_id" <$> _resource_pool_id
-        , TF.assign "scsi_type" <$> _scsi_type
-        , TF.assign "tags" <$> _tags
+    toHCL VirtualMachineResource{..} = TF.block $ catMaybes
+        [ TF.assign "alternate_guest_name" <$> TF.argument _alternate_guest_name
+        , TF.assign "annotation" <$> TF.argument _annotation
+        , TF.assign "cdrom" <$> TF.argument _cdrom
+        , TF.assign "clone" <$> TF.argument _clone
+        , TF.assign "datastore_id" <$> TF.argument _datastore_id
+        , TF.assign "disk" <$> TF.argument _disk
+        , TF.assign "extra_config" <$> TF.argument _extra_config
+        , TF.assign "firmware" <$> TF.argument _firmware
+        , TF.assign "folder" <$> TF.argument _folder
+        , TF.assign "guest_id" <$> TF.argument _guest_id
+        , TF.assign "host_system_id" <$> TF.argument _host_system_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "network_interface" <$> TF.argument _network_interface
+        , TF.assign "resource_pool_id" <$> TF.argument _resource_pool_id
+        , TF.assign "scsi_type" <$> TF.argument _scsi_type
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualMachineResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualMachineResource :: TF.Resource TF.VSphere VirtualMachineResource
+virtualMachineResource =
+    TF.newResource "vsphere_virtual_machine" $
+        VirtualMachineResource {
+            _alternate_guest_name = TF.Nil
+            , _annotation = TF.Nil
+            , _cdrom = TF.Nil
+            , _clone = TF.Nil
+            , _datastore_id = TF.Nil
+            , _disk = TF.Nil
+            , _extra_config = TF.Nil
+            , _firmware = TF.Nil
+            , _folder = TF.Nil
+            , _guest_id = TF.Nil
+            , _host_system_id = TF.Nil
+            , _name = TF.Nil
+            , _network_interface = TF.Nil
+            , _resource_pool_id = TF.Nil
+            , _scsi_type = TF.Nil
+            , _tags = TF.Nil
+            }
 
 {- | The @vsphere_virtual_machine_snapshot@ VSphere resource.
 
@@ -814,35 +803,34 @@ data VirtualMachineSnapshotResource = VirtualMachineSnapshotResource {
     {- ^ (Required) The virtual machine UUID. -}
     } deriving (Show, Eq)
 
-virtualMachineSnapshotResource :: TF.Resource TF.VSphere VirtualMachineSnapshotResource
-virtualMachineSnapshotResource =
-    TF.newResource "vsphere_virtual_machine_snapshot" $
-        VirtualMachineSnapshotResource {
-            _consolidate = TF.Absent
-            , _description = TF.Absent
-            , _memory = TF.Absent
-            , _quiesce = TF.Absent
-            , _remove_children = TF.Absent
-            , _snapshot_name = TF.Absent
-            , _virtual_machine_uuid = TF.Absent
-            }
-
 instance TF.ToHCL VirtualMachineSnapshotResource where
-    toHCL VirtualMachineSnapshotResource{..} = TF.arguments
-        [ TF.assign "consolidate" <$> _consolidate
-        , TF.assign "description" <$> _description
-        , TF.assign "memory" <$> _memory
-        , TF.assign "quiesce" <$> _quiesce
-        , TF.assign "remove_children" <$> _remove_children
-        , TF.assign "snapshot_name" <$> _snapshot_name
-        , TF.assign "virtual_machine_uuid" <$> _virtual_machine_uuid
+    toHCL VirtualMachineSnapshotResource{..} = TF.block $ catMaybes
+        [ TF.assign "consolidate" <$> TF.argument _consolidate
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "memory" <$> TF.argument _memory
+        , TF.assign "quiesce" <$> TF.argument _quiesce
+        , TF.assign "remove_children" <$> TF.argument _remove_children
+        , TF.assign "snapshot_name" <$> TF.argument _snapshot_name
+        , TF.assign "virtual_machine_uuid" <$> TF.argument _virtual_machine_uuid
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualMachineSnapshotResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualMachineSnapshotResource :: TF.Resource TF.VSphere VirtualMachineSnapshotResource
+virtualMachineSnapshotResource =
+    TF.newResource "vsphere_virtual_machine_snapshot" $
+        VirtualMachineSnapshotResource {
+            _consolidate = TF.Nil
+            , _description = TF.Nil
+            , _memory = TF.Nil
+            , _quiesce = TF.Nil
+            , _remove_children = TF.Nil
+            , _snapshot_name = TF.Nil
+            , _virtual_machine_uuid = TF.Nil
+            }
 
 {- | The @vsphere_vmfs_datastore@ VSphere resource.
 
@@ -882,36 +870,35 @@ data VmfsDatastoreResource = VmfsDatastoreResource {
     {- ^ - The unique locator for the datastore. -}
     } deriving (Show, Eq)
 
-vmfsDatastoreResource :: TF.Resource TF.VSphere VmfsDatastoreResource
-vmfsDatastoreResource =
-    TF.newResource "vsphere_vmfs_datastore" $
-        VmfsDatastoreResource {
-            _disks = TF.Absent
-            , _folder = TF.Absent
-            , _host_system_id = TF.Absent
-            , _name = TF.Absent
-            , _tags = TF.Absent
-            , _computed_accessible = TF.Computed "accessible"
-            , _computed_capacity = TF.Computed "capacity"
-            , _computed_free_space = TF.Computed "free_space"
-            , _computed_id = TF.Computed "id"
-            , _computed_maintenance_mode = TF.Computed "maintenance_mode"
-            , _computed_multiple_host_access = TF.Computed "multiple_host_access"
-            , _computed_uncommitted_space = TF.Computed "uncommitted_space"
-            , _computed_url = TF.Computed "url"
-            }
-
 instance TF.ToHCL VmfsDatastoreResource where
-    toHCL VmfsDatastoreResource{..} = TF.arguments
-        [ TF.assign "disks" <$> _disks
-        , TF.assign "folder" <$> _folder
-        , TF.assign "host_system_id" <$> _host_system_id
-        , TF.assign "name" <$> _name
-        , TF.assign "tags" <$> _tags
+    toHCL VmfsDatastoreResource{..} = TF.block $ catMaybes
+        [ TF.assign "disks" <$> TF.argument _disks
+        , TF.assign "folder" <$> TF.argument _folder
+        , TF.assign "host_system_id" <$> TF.argument _host_system_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "tags" <$> TF.argument _tags
         ]
 
 $(TF.makeSchemaLenses
     ''VmfsDatastoreResource
     ''TF.VSphere
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vmfsDatastoreResource :: TF.Resource TF.VSphere VmfsDatastoreResource
+vmfsDatastoreResource =
+    TF.newResource "vsphere_vmfs_datastore" $
+        VmfsDatastoreResource {
+            _disks = TF.Nil
+            , _folder = TF.Nil
+            , _host_system_id = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _computed_accessible = TF.Compute "accessible"
+            , _computed_capacity = TF.Compute "capacity"
+            , _computed_free_space = TF.Compute "free_space"
+            , _computed_id = TF.Compute "id"
+            , _computed_maintenance_mode = TF.Compute "maintenance_mode"
+            , _computed_multiple_host_access = TF.Compute "multiple_host_access"
+            , _computed_uncommitted_space = TF.Compute "uncommitted_space"
+            , _computed_url = TF.Compute "url"
+            }

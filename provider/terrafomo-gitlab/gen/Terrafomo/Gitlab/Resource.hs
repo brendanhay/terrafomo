@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Gitlab          as TF
+import qualified Terrafomo.Gitlab.Provider as TF
+import qualified Terrafomo.Gitlab.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -52,29 +54,28 @@ data DeployKeyResource = DeployKeyResource {
     {- ^ (Required, string) A title to describe the deploy key with. -}
     } deriving (Show, Eq)
 
-deployKeyResource :: TF.Resource TF.Gitlab DeployKeyResource
-deployKeyResource =
-    TF.newResource "gitlab_deploy_key" $
-        DeployKeyResource {
-            _can_push = TF.Absent
-            , _key = TF.Absent
-            , _project = TF.Absent
-            , _title = TF.Absent
-            }
-
 instance TF.ToHCL DeployKeyResource where
-    toHCL DeployKeyResource{..} = TF.arguments
-        [ TF.assign "can_push" <$> _can_push
-        , TF.assign "key" <$> _key
-        , TF.assign "project" <$> _project
-        , TF.assign "title" <$> _title
+    toHCL DeployKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "can_push" <$> TF.argument _can_push
+        , TF.assign "key" <$> TF.argument _key
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "title" <$> TF.argument _title
         ]
 
 $(TF.makeSchemaLenses
     ''DeployKeyResource
     ''TF.Gitlab
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+deployKeyResource :: TF.Resource TF.Gitlab DeployKeyResource
+deployKeyResource =
+    TF.newResource "gitlab_deploy_key" $
+        DeployKeyResource {
+            _can_push = TF.Nil
+            , _key = TF.Nil
+            , _project = TF.Nil
+            , _title = TF.Nil
+            }
 
 {- | The @gitlab_group@ Gitlab resource.
 
@@ -101,36 +102,35 @@ data GroupResource = GroupResource {
     {- ^ - The unique id assigned to the group by the GitLab server.  Serves as a namespace id where one is needed. -}
     } deriving (Show, Eq)
 
-groupResource :: TF.Resource TF.Gitlab GroupResource
-groupResource =
-    TF.newResource "gitlab_group" $
-        GroupResource {
-            _description = TF.Absent
-            , _lfs_enabled = TF.Absent
-            , _name = TF.Absent
-            , _parent_id = TF.Absent
-            , _path = TF.Absent
-            , _request_access_enabled = TF.Absent
-            , _visibility_level = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL GroupResource where
-    toHCL GroupResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "lfs_enabled" <$> _lfs_enabled
-        , TF.assign "name" <$> _name
-        , TF.assign "parent_id" <$> _parent_id
-        , TF.assign "path" <$> _path
-        , TF.assign "request_access_enabled" <$> _request_access_enabled
-        , TF.assign "visibility_level" <$> _visibility_level
+    toHCL GroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "lfs_enabled" <$> TF.argument _lfs_enabled
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "parent_id" <$> TF.argument _parent_id
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "request_access_enabled" <$> TF.argument _request_access_enabled
+        , TF.assign "visibility_level" <$> TF.argument _visibility_level
         ]
 
 $(TF.makeSchemaLenses
     ''GroupResource
     ''TF.Gitlab
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+groupResource :: TF.Resource TF.Gitlab GroupResource
+groupResource =
+    TF.newResource "gitlab_group" $
+        GroupResource {
+            _description = TF.Nil
+            , _lfs_enabled = TF.Nil
+            , _name = TF.Nil
+            , _parent_id = TF.Nil
+            , _path = TF.Nil
+            , _request_access_enabled = TF.Nil
+            , _visibility_level = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @gitlab_label@ Gitlab resource.
 
@@ -151,30 +151,29 @@ data LabelResource = LabelResource {
     {- ^ - The unique id assigned to the label by the GitLab server (the name of the label). -}
     } deriving (Show, Eq)
 
-labelResource :: TF.Resource TF.Gitlab LabelResource
-labelResource =
-    TF.newResource "gitlab_label" $
-        LabelResource {
-            _color = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _project = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LabelResource where
-    toHCL LabelResource{..} = TF.arguments
-        [ TF.assign "color" <$> _color
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "project" <$> _project
+    toHCL LabelResource{..} = TF.block $ catMaybes
+        [ TF.assign "color" <$> TF.argument _color
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
         ]
 
 $(TF.makeSchemaLenses
     ''LabelResource
     ''TF.Gitlab
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+labelResource :: TF.Resource TF.Gitlab LabelResource
+labelResource =
+    TF.newResource "gitlab_label" $
+        LabelResource {
+            _color = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @gitlab_project_hook@ Gitlab resource.
 
@@ -211,46 +210,45 @@ data ProjectHookResource = ProjectHookResource {
     {- ^ - The unique id assigned to the hook by the GitLab server. -}
     } deriving (Show, Eq)
 
-projectHookResource :: TF.Resource TF.Gitlab ProjectHookResource
-projectHookResource =
-    TF.newResource "gitlab_project_hook" $
-        ProjectHookResource {
-            _enable_ssl_verification = TF.Absent
-            , _issues_events = TF.Absent
-            , _job_events = TF.Absent
-            , _merge_requests_events = TF.Absent
-            , _note_events = TF.Absent
-            , _pipeline_events = TF.Absent
-            , _project = TF.Absent
-            , _push_events = TF.Absent
-            , _tag_push_events = TF.Absent
-            , _token = TF.Absent
-            , _url = TF.Absent
-            , _wiki_page_events = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ProjectHookResource where
-    toHCL ProjectHookResource{..} = TF.arguments
-        [ TF.assign "enable_ssl_verification" <$> _enable_ssl_verification
-        , TF.assign "issues_events" <$> _issues_events
-        , TF.assign "job_events" <$> _job_events
-        , TF.assign "merge_requests_events" <$> _merge_requests_events
-        , TF.assign "note_events" <$> _note_events
-        , TF.assign "pipeline_events" <$> _pipeline_events
-        , TF.assign "project" <$> _project
-        , TF.assign "push_events" <$> _push_events
-        , TF.assign "tag_push_events" <$> _tag_push_events
-        , TF.assign "token" <$> _token
-        , TF.assign "url" <$> _url
-        , TF.assign "wiki_page_events" <$> _wiki_page_events
+    toHCL ProjectHookResource{..} = TF.block $ catMaybes
+        [ TF.assign "enable_ssl_verification" <$> TF.argument _enable_ssl_verification
+        , TF.assign "issues_events" <$> TF.argument _issues_events
+        , TF.assign "job_events" <$> TF.argument _job_events
+        , TF.assign "merge_requests_events" <$> TF.argument _merge_requests_events
+        , TF.assign "note_events" <$> TF.argument _note_events
+        , TF.assign "pipeline_events" <$> TF.argument _pipeline_events
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "push_events" <$> TF.argument _push_events
+        , TF.assign "tag_push_events" <$> TF.argument _tag_push_events
+        , TF.assign "token" <$> TF.argument _token
+        , TF.assign "url" <$> TF.argument _url
+        , TF.assign "wiki_page_events" <$> TF.argument _wiki_page_events
         ]
 
 $(TF.makeSchemaLenses
     ''ProjectHookResource
     ''TF.Gitlab
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+projectHookResource :: TF.Resource TF.Gitlab ProjectHookResource
+projectHookResource =
+    TF.newResource "gitlab_project_hook" $
+        ProjectHookResource {
+            _enable_ssl_verification = TF.Nil
+            , _issues_events = TF.Nil
+            , _job_events = TF.Nil
+            , _merge_requests_events = TF.Nil
+            , _note_events = TF.Nil
+            , _pipeline_events = TF.Nil
+            , _project = TF.Nil
+            , _push_events = TF.Nil
+            , _tag_push_events = TF.Nil
+            , _token = TF.Nil
+            , _url = TF.Nil
+            , _wiki_page_events = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @gitlab_project@ Gitlab resource.
 
@@ -288,45 +286,44 @@ data ProjectResource = ProjectResource {
     {- ^ - URL that can be used to find the project in a browser. -}
     } deriving (Show, Eq)
 
-projectResource :: TF.Resource TF.Gitlab ProjectResource
-projectResource =
-    TF.newResource "gitlab_project" $
-        ProjectResource {
-            _default_branch = TF.Absent
-            , _description = TF.Absent
-            , _issues_enabled = TF.Absent
-            , _merge_requests_enabled = TF.Absent
-            , _name = TF.Absent
-            , _namespace_id = TF.Absent
-            , _path = TF.Absent
-            , _snippets_enabled = TF.Absent
-            , _visibility_level = TF.Absent
-            , _wiki_enabled = TF.Absent
-            , _computed_http_url_to_repo = TF.Computed "http_url_to_repo"
-            , _computed_id = TF.Computed "id"
-            , _computed_ssh_url_to_repo = TF.Computed "ssh_url_to_repo"
-            , _computed_web_url = TF.Computed "web_url"
-            }
-
 instance TF.ToHCL ProjectResource where
-    toHCL ProjectResource{..} = TF.arguments
-        [ TF.assign "default_branch" <$> _default_branch
-        , TF.assign "description" <$> _description
-        , TF.assign "issues_enabled" <$> _issues_enabled
-        , TF.assign "merge_requests_enabled" <$> _merge_requests_enabled
-        , TF.assign "name" <$> _name
-        , TF.assign "namespace_id" <$> _namespace_id
-        , TF.assign "path" <$> _path
-        , TF.assign "snippets_enabled" <$> _snippets_enabled
-        , TF.assign "visibility_level" <$> _visibility_level
-        , TF.assign "wiki_enabled" <$> _wiki_enabled
+    toHCL ProjectResource{..} = TF.block $ catMaybes
+        [ TF.assign "default_branch" <$> TF.argument _default_branch
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "issues_enabled" <$> TF.argument _issues_enabled
+        , TF.assign "merge_requests_enabled" <$> TF.argument _merge_requests_enabled
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "namespace_id" <$> TF.argument _namespace_id
+        , TF.assign "path" <$> TF.argument _path
+        , TF.assign "snippets_enabled" <$> TF.argument _snippets_enabled
+        , TF.assign "visibility_level" <$> TF.argument _visibility_level
+        , TF.assign "wiki_enabled" <$> TF.argument _wiki_enabled
         ]
 
 $(TF.makeSchemaLenses
     ''ProjectResource
     ''TF.Gitlab
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+projectResource :: TF.Resource TF.Gitlab ProjectResource
+projectResource =
+    TF.newResource "gitlab_project" $
+        ProjectResource {
+            _default_branch = TF.Nil
+            , _description = TF.Nil
+            , _issues_enabled = TF.Nil
+            , _merge_requests_enabled = TF.Nil
+            , _name = TF.Nil
+            , _namespace_id = TF.Nil
+            , _path = TF.Nil
+            , _snippets_enabled = TF.Nil
+            , _visibility_level = TF.Nil
+            , _wiki_enabled = TF.Nil
+            , _computed_http_url_to_repo = TF.Compute "http_url_to_repo"
+            , _computed_id = TF.Compute "id"
+            , _computed_ssh_url_to_repo = TF.Compute "ssh_url_to_repo"
+            , _computed_web_url = TF.Compute "web_url"
+            }
 
 {- | The @gitlab_user@ Gitlab resource.
 
@@ -355,35 +352,34 @@ data UserResource = UserResource {
     {- ^ - The unique id assigned to the user by the GitLab server. -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.Gitlab UserResource
-userResource =
-    TF.newResource "gitlab_user" $
-        UserResource {
-            _can_create_group = TF.Absent
-            , _email = TF.Absent
-            , _is_admin = TF.Absent
-            , _name = TF.Absent
-            , _password = TF.Absent
-            , _projects_limit = TF.Absent
-            , _skip_confirmation = TF.Absent
-            , _username = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "can_create_group" <$> _can_create_group
-        , TF.assign "email" <$> _email
-        , TF.assign "is_admin" <$> _is_admin
-        , TF.assign "name" <$> _name
-        , TF.assign "password" <$> _password
-        , TF.assign "projects_limit" <$> _projects_limit
-        , TF.assign "skip_confirmation" <$> _skip_confirmation
-        , TF.assign "username" <$> _username
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "can_create_group" <$> TF.argument _can_create_group
+        , TF.assign "email" <$> TF.argument _email
+        , TF.assign "is_admin" <$> TF.argument _is_admin
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "projects_limit" <$> TF.argument _projects_limit
+        , TF.assign "skip_confirmation" <$> TF.argument _skip_confirmation
+        , TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.Gitlab
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.Gitlab UserResource
+userResource =
+    TF.newResource "gitlab_user" $
+        UserResource {
+            _can_create_group = TF.Nil
+            , _email = TF.Nil
+            , _is_admin = TF.Nil
+            , _name = TF.Nil
+            , _password = TF.Nil
+            , _projects_limit = TF.Nil
+            , _skip_confirmation = TF.Nil
+            , _username = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

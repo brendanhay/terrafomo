@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.AzureRM           as TF
+import qualified Terrafomo.AzureRM.Provider  as TF
+import qualified Terrafomo.AzureRM.Types     as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -57,28 +59,27 @@ data BuiltinRoleDefinitionDataSource = BuiltinRoleDefinitionDataSource {
     {- ^ - the Type of the Role. -}
     } deriving (Show, Eq)
 
-builtinRoleDefinitionDataSource :: TF.DataSource TF.AzureRM BuiltinRoleDefinitionDataSource
-builtinRoleDefinitionDataSource =
-    TF.newDataSource "azurerm_builtin_role_definition" $
-        BuiltinRoleDefinitionDataSource {
-            _name = TF.Absent
-            , _computed_assignable_scopes = TF.Computed "assignable_scopes"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_permissions = TF.Computed "permissions"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL BuiltinRoleDefinitionDataSource where
-    toHCL BuiltinRoleDefinitionDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL BuiltinRoleDefinitionDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''BuiltinRoleDefinitionDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+builtinRoleDefinitionDataSource :: TF.DataSource TF.AzureRM BuiltinRoleDefinitionDataSource
+builtinRoleDefinitionDataSource =
+    TF.newDataSource "azurerm_builtin_role_definition" $
+        BuiltinRoleDefinitionDataSource {
+            _name = TF.Nil
+            , _computed_assignable_scopes = TF.Compute "assignable_scopes"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_permissions = TF.Compute "permissions"
+            , _computed_type' = TF.Compute "type"
+            }
 
 {- | The @azurerm_client_config@ AzureRM datasource.
 
@@ -94,27 +95,26 @@ data ClientConfigDataSource = ClientConfigDataSource {
     {- ^ is set to the Azure Tenant ID. -}
     } deriving (Show, Eq)
 
-clientConfigDataSource :: TF.DataSource TF.AzureRM ClientConfigDataSource
-clientConfigDataSource =
-    TF.newDataSource "azurerm_client_config" $
-        ClientConfigDataSource {
-            _client_id = TF.Absent
-            , _subscription_id = TF.Absent
-            , _tenant_id = TF.Absent
-            }
-
 instance TF.ToHCL ClientConfigDataSource where
-    toHCL ClientConfigDataSource{..} = TF.arguments
-        [ TF.assign "client_id" <$> _client_id
-        , TF.assign "subscription_id" <$> _subscription_id
-        , TF.assign "tenant_id" <$> _tenant_id
+    toHCL ClientConfigDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "client_id" <$> TF.argument _client_id
+        , TF.assign "subscription_id" <$> TF.argument _subscription_id
+        , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
 $(TF.makeSchemaLenses
     ''ClientConfigDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+clientConfigDataSource :: TF.DataSource TF.AzureRM ClientConfigDataSource
+clientConfigDataSource =
+    TF.newDataSource "azurerm_client_config" $
+        ClientConfigDataSource {
+            _client_id = TF.Nil
+            , _subscription_id = TF.Nil
+            , _tenant_id = TF.Nil
+            }
 
 {- | The @azurerm_image@ AzureRM datasource.
 
@@ -135,29 +135,28 @@ data ImageDataSource = ImageDataSource {
     {- ^ - a mapping of tags to assigned to the resource. -}
     } deriving (Show, Eq)
 
-imageDataSource :: TF.DataSource TF.AzureRM ImageDataSource
-imageDataSource =
-    TF.newDataSource "azurerm_image" $
-        ImageDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_data_disk = TF.Computed "data_disk"
-            , _computed_location = TF.Computed "location"
-            , _computed_os_disk = TF.Computed "os_disk"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL ImageDataSource where
-    toHCL ImageDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL ImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''ImageDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imageDataSource :: TF.DataSource TF.AzureRM ImageDataSource
+imageDataSource =
+    TF.newDataSource "azurerm_image" $
+        ImageDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_data_disk = TF.Compute "data_disk"
+            , _computed_location = TF.Compute "location"
+            , _computed_os_disk = TF.Compute "os_disk"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @azurerm_key_vault_access_policy@ AzureRM datasource.
 
@@ -177,27 +176,26 @@ data KeyVaultAccessPolicyDataSource = KeyVaultAccessPolicyDataSource {
     {- ^ - the secret permissions for the access policy -}
     } deriving (Show, Eq)
 
-keyVaultAccessPolicyDataSource :: TF.DataSource TF.AzureRM KeyVaultAccessPolicyDataSource
-keyVaultAccessPolicyDataSource =
-    TF.newDataSource "azurerm_key_vault_access_policy" $
-        KeyVaultAccessPolicyDataSource {
-            _name = TF.Absent
-            , _computed_certificate_permissions = TF.Computed "certificate_permissions"
-            , _computed_id = TF.Computed "id"
-            , _computed_key_permissions = TF.Computed "key_permissions"
-            , _computed_secret_permissions = TF.Computed "secret_permissions"
-            }
-
 instance TF.ToHCL KeyVaultAccessPolicyDataSource where
-    toHCL KeyVaultAccessPolicyDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL KeyVaultAccessPolicyDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''KeyVaultAccessPolicyDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+keyVaultAccessPolicyDataSource :: TF.DataSource TF.AzureRM KeyVaultAccessPolicyDataSource
+keyVaultAccessPolicyDataSource =
+    TF.newDataSource "azurerm_key_vault_access_policy" $
+        KeyVaultAccessPolicyDataSource {
+            _name = TF.Nil
+            , _computed_certificate_permissions = TF.Compute "certificate_permissions"
+            , _computed_id = TF.Compute "id"
+            , _computed_key_permissions = TF.Compute "key_permissions"
+            , _computed_secret_permissions = TF.Compute "secret_permissions"
+            }
 
 {- | The @azurerm_managed_disk@ AzureRM datasource.
 
@@ -223,31 +221,30 @@ data ManagedDiskDataSource = ManagedDiskDataSource {
     {- ^ - A mapping of tags assigned to the resource. -}
     } deriving (Show, Eq)
 
-managedDiskDataSource :: TF.DataSource TF.AzureRM ManagedDiskDataSource
-managedDiskDataSource =
-    TF.newDataSource "azurerm_managed_disk" $
-        ManagedDiskDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_disk_size_gb = TF.Computed "disk_size_gb"
-            , _computed_os_type = TF.Computed "os_type"
-            , _computed_source_resource_id = TF.Computed "source_resource_id"
-            , _computed_source_uri = TF.Computed "source_uri"
-            , _computed_storage_account_type = TF.Computed "storage_account_type"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL ManagedDiskDataSource where
-    toHCL ManagedDiskDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL ManagedDiskDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''ManagedDiskDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+managedDiskDataSource :: TF.DataSource TF.AzureRM ManagedDiskDataSource
+managedDiskDataSource =
+    TF.newDataSource "azurerm_managed_disk" $
+        ManagedDiskDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_disk_size_gb = TF.Compute "disk_size_gb"
+            , _computed_os_type = TF.Compute "os_type"
+            , _computed_source_resource_id = TF.Compute "source_resource_id"
+            , _computed_source_uri = TF.Compute "source_uri"
+            , _computed_storage_account_type = TF.Compute "storage_account_type"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @azurerm_network_security_group@ AzureRM datasource.
 
@@ -268,29 +265,28 @@ data NetworkSecurityGroupDataSource = NetworkSecurityGroupDataSource {
     {- ^ - A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-networkSecurityGroupDataSource :: TF.DataSource TF.AzureRM NetworkSecurityGroupDataSource
-networkSecurityGroupDataSource =
-    TF.newDataSource "azurerm_network_security_group" $
-        NetworkSecurityGroupDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_location = TF.Computed "location"
-            , _computed_security_rule = TF.Computed "security_rule"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL NetworkSecurityGroupDataSource where
-    toHCL NetworkSecurityGroupDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL NetworkSecurityGroupDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''NetworkSecurityGroupDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+networkSecurityGroupDataSource :: TF.DataSource TF.AzureRM NetworkSecurityGroupDataSource
+networkSecurityGroupDataSource =
+    TF.newDataSource "azurerm_network_security_group" $
+        NetworkSecurityGroupDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_location = TF.Compute "location"
+            , _computed_security_rule = TF.Compute "security_rule"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @azurerm_platform_image@ AzureRM datasource.
 
@@ -311,31 +307,30 @@ data PlatformImageDataSource = PlatformImageDataSource {
     {- ^ - The latest version of the Platform Image. -}
     } deriving (Show, Eq)
 
-platformImageDataSource :: TF.DataSource TF.AzureRM PlatformImageDataSource
-platformImageDataSource =
-    TF.newDataSource "azurerm_platform_image" $
-        PlatformImageDataSource {
-            _location = TF.Absent
-            , _offer = TF.Absent
-            , _publisher = TF.Absent
-            , _sku = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL PlatformImageDataSource where
-    toHCL PlatformImageDataSource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "offer" <$> _offer
-        , TF.assign "publisher" <$> _publisher
-        , TF.assign "sku" <$> _sku
+    toHCL PlatformImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "offer" <$> TF.argument _offer
+        , TF.assign "publisher" <$> TF.argument _publisher
+        , TF.assign "sku" <$> TF.argument _sku
         ]
 
 $(TF.makeSchemaLenses
     ''PlatformImageDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+platformImageDataSource :: TF.DataSource TF.AzureRM PlatformImageDataSource
+platformImageDataSource =
+    TF.newDataSource "azurerm_platform_image" $
+        PlatformImageDataSource {
+            _location = TF.Nil
+            , _offer = TF.Nil
+            , _publisher = TF.Nil
+            , _sku = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @azurerm_public_ip@ AzureRM datasource.
 
@@ -359,30 +354,29 @@ data PublicIpDataSource = PublicIpDataSource {
     {- ^ - A mapping of tags to assigned to the resource. -}
     } deriving (Show, Eq)
 
-publicIpDataSource :: TF.DataSource TF.AzureRM PublicIpDataSource
-publicIpDataSource =
-    TF.newDataSource "azurerm_public_ip" $
-        PublicIpDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_domain_name_label = TF.Computed "domain_name_label"
-            , _computed_fqdn = TF.Computed "fqdn"
-            , _computed_idle_timeout_in_minutes = TF.Computed "idle_timeout_in_minutes"
-            , _computed_ip_address = TF.Computed "ip_address"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL PublicIpDataSource where
-    toHCL PublicIpDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL PublicIpDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''PublicIpDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+publicIpDataSource :: TF.DataSource TF.AzureRM PublicIpDataSource
+publicIpDataSource =
+    TF.newDataSource "azurerm_public_ip" $
+        PublicIpDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_domain_name_label = TF.Compute "domain_name_label"
+            , _computed_fqdn = TF.Compute "fqdn"
+            , _computed_idle_timeout_in_minutes = TF.Compute "idle_timeout_in_minutes"
+            , _computed_ip_address = TF.Compute "ip_address"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @azurerm_resource_group@ AzureRM datasource.
 
@@ -397,25 +391,24 @@ data ResourceGroupDataSource = ResourceGroupDataSource {
     {- ^ - A mapping of tags assigned to the resource group. -}
     } deriving (Show, Eq)
 
-resourceGroupDataSource :: TF.DataSource TF.AzureRM ResourceGroupDataSource
-resourceGroupDataSource =
-    TF.newDataSource "azurerm_resource_group" $
-        ResourceGroupDataSource {
-            _name = TF.Absent
-            , _computed_location = TF.Computed "location"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL ResourceGroupDataSource where
-    toHCL ResourceGroupDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL ResourceGroupDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ResourceGroupDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+resourceGroupDataSource :: TF.DataSource TF.AzureRM ResourceGroupDataSource
+resourceGroupDataSource =
+    TF.newDataSource "azurerm_resource_group" $
+        ResourceGroupDataSource {
+            _name = TF.Nil
+            , _computed_location = TF.Compute "location"
+            , _computed_tags = TF.Compute "tags"
+            }
 
 {- | The @azurerm_role_definition@ AzureRM datasource.
 
@@ -440,30 +433,29 @@ data RoleDefinitionDataSource = RoleDefinitionDataSource {
     {- ^ - the Type of the Role. -}
     } deriving (Show, Eq)
 
-roleDefinitionDataSource :: TF.DataSource TF.AzureRM RoleDefinitionDataSource
-roleDefinitionDataSource =
-    TF.newDataSource "azurerm_role_definition" $
-        RoleDefinitionDataSource {
-            _role_definition_id = TF.Absent
-            , _scope = TF.Absent
-            , _computed_assignable_scopes = TF.Computed "assignable_scopes"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_permissions = TF.Computed "permissions"
-            , _computed_type' = TF.Computed "type"
-            }
-
 instance TF.ToHCL RoleDefinitionDataSource where
-    toHCL RoleDefinitionDataSource{..} = TF.arguments
-        [ TF.assign "role_definition_id" <$> _role_definition_id
-        , TF.assign "scope" <$> _scope
+    toHCL RoleDefinitionDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "role_definition_id" <$> TF.argument _role_definition_id
+        , TF.assign "scope" <$> TF.argument _scope
         ]
 
 $(TF.makeSchemaLenses
     ''RoleDefinitionDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+roleDefinitionDataSource :: TF.DataSource TF.AzureRM RoleDefinitionDataSource
+roleDefinitionDataSource =
+    TF.newDataSource "azurerm_role_definition" $
+        RoleDefinitionDataSource {
+            _role_definition_id = TF.Nil
+            , _scope = TF.Nil
+            , _computed_assignable_scopes = TF.Compute "assignable_scopes"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_permissions = TF.Compute "permissions"
+            , _computed_type' = TF.Compute "type"
+            }
 
 {- | The @azurerm_snapshot@ AzureRM datasource.
 
@@ -488,31 +480,30 @@ data SnapshotDataSource = SnapshotDataSource {
     {- ^ - The ID of an storage account. -}
     } deriving (Show, Eq)
 
-snapshotDataSource :: TF.DataSource TF.AzureRM SnapshotDataSource
-snapshotDataSource =
-    TF.newDataSource "azurerm_snapshot" $
-        SnapshotDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_create_option = TF.Computed "create_option"
-            , _computed_disk_size_gb = TF.Computed "disk_size_gb"
-            , _computed_id = TF.Computed "id"
-            , _computed_source_resource_id = TF.Computed "source_resource_id"
-            , _computed_source_uri = TF.Computed "source_uri"
-            , _computed_storage_account_id = TF.Computed "storage_account_id"
-            }
-
 instance TF.ToHCL SnapshotDataSource where
-    toHCL SnapshotDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL SnapshotDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''SnapshotDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+snapshotDataSource :: TF.DataSource TF.AzureRM SnapshotDataSource
+snapshotDataSource =
+    TF.newDataSource "azurerm_snapshot" $
+        SnapshotDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_create_option = TF.Compute "create_option"
+            , _computed_disk_size_gb = TF.Compute "disk_size_gb"
+            , _computed_id = TF.Compute "id"
+            , _computed_source_resource_id = TF.Compute "source_resource_id"
+            , _computed_source_uri = TF.Compute "source_uri"
+            , _computed_storage_account_id = TF.Compute "storage_account_id"
+            }
 
 {- | The @azurerm_subnet@ AzureRM datasource.
 
@@ -538,32 +529,31 @@ data SubnetDataSource = SubnetDataSource {
     {- ^ - The ID of the Route Table associated with this subnet. -}
     } deriving (Show, Eq)
 
-subnetDataSource :: TF.DataSource TF.AzureRM SubnetDataSource
-subnetDataSource =
-    TF.newDataSource "azurerm_subnet" $
-        SubnetDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _virtual_network_name = TF.Absent
-            , _computed_address_prefix = TF.Computed "address_prefix"
-            , _computed_id = TF.Computed "id"
-            , _computed_ip_configurations = TF.Computed "ip_configurations"
-            , _computed_network_security_group_id = TF.Computed "network_security_group_id"
-            , _computed_route_table_id = TF.Computed "route_table_id"
-            }
-
 instance TF.ToHCL SubnetDataSource where
-    toHCL SubnetDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
-        , TF.assign "virtual_network_name" <$> _virtual_network_name
+    toHCL SubnetDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        , TF.assign "virtual_network_name" <$> TF.argument _virtual_network_name
         ]
 
 $(TF.makeSchemaLenses
     ''SubnetDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+subnetDataSource :: TF.DataSource TF.AzureRM SubnetDataSource
+subnetDataSource =
+    TF.newDataSource "azurerm_subnet" $
+        SubnetDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _virtual_network_name = TF.Nil
+            , _computed_address_prefix = TF.Compute "address_prefix"
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_configurations = TF.Compute "ip_configurations"
+            , _computed_network_security_group_id = TF.Compute "network_security_group_id"
+            , _computed_route_table_id = TF.Compute "route_table_id"
+            }
 
 {- | The @azurerm_subscription@ AzureRM datasource.
 
@@ -584,28 +574,27 @@ data SubscriptionDataSource = SubscriptionDataSource {
     {- ^ - The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted. -}
     } deriving (Show, Eq)
 
-subscriptionDataSource :: TF.DataSource TF.AzureRM SubscriptionDataSource
-subscriptionDataSource =
-    TF.newDataSource "azurerm_subscription" $
-        SubscriptionDataSource {
-            _subscription_id = TF.Absent
-            , _computed_display_name = TF.Computed "display_name"
-            , _computed_location_placement_id = TF.Computed "location_placement_id"
-            , _computed_quota_id = TF.Computed "quota_id"
-            , _computed_spending_limit = TF.Computed "spending_limit"
-            , _computed_state = TF.Computed "state"
-            }
-
 instance TF.ToHCL SubscriptionDataSource where
-    toHCL SubscriptionDataSource{..} = TF.arguments
-        [ TF.assign "subscription_id" <$> _subscription_id
+    toHCL SubscriptionDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "subscription_id" <$> TF.argument _subscription_id
         ]
 
 $(TF.makeSchemaLenses
     ''SubscriptionDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+subscriptionDataSource :: TF.DataSource TF.AzureRM SubscriptionDataSource
+subscriptionDataSource =
+    TF.newDataSource "azurerm_subscription" $
+        SubscriptionDataSource {
+            _subscription_id = TF.Nil
+            , _computed_display_name = TF.Compute "display_name"
+            , _computed_location_placement_id = TF.Compute "location_placement_id"
+            , _computed_quota_id = TF.Compute "quota_id"
+            , _computed_spending_limit = TF.Compute "spending_limit"
+            , _computed_state = TF.Compute "state"
+            }
 
 {- | The @azurerm_virtual_network@ AzureRM datasource.
 
@@ -628,27 +617,26 @@ data VirtualNetworkDataSource = VirtualNetworkDataSource {
     {- ^ - A mapping of name - virtual network id of the virtual network peerings. -}
     } deriving (Show, Eq)
 
-virtualNetworkDataSource :: TF.DataSource TF.AzureRM VirtualNetworkDataSource
-virtualNetworkDataSource =
-    TF.newDataSource "azurerm_virtual_network" $
-        VirtualNetworkDataSource {
-            _name = TF.Absent
-            , _resource_group_name = TF.Absent
-            , _computed_address_spaces = TF.Computed "address_spaces"
-            , _computed_dns_servers = TF.Computed "dns_servers"
-            , _computed_id = TF.Computed "id"
-            , _computed_subnets = TF.Computed "subnets"
-            , _computed_vnet_peerings = TF.Computed "vnet_peerings"
-            }
-
 instance TF.ToHCL VirtualNetworkDataSource where
-    toHCL VirtualNetworkDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "resource_group_name" <$> _resource_group_name
+    toHCL VirtualNetworkDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualNetworkDataSource
     ''TF.AzureRM
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+virtualNetworkDataSource :: TF.DataSource TF.AzureRM VirtualNetworkDataSource
+virtualNetworkDataSource =
+    TF.newDataSource "azurerm_virtual_network" $
+        VirtualNetworkDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_address_spaces = TF.Compute "address_spaces"
+            , _computed_dns_servers = TF.Compute "dns_servers"
+            , _computed_id = TF.Compute "id"
+            , _computed_subnets = TF.Compute "subnets"
+            , _computed_vnet_peerings = TF.Compute "vnet_peerings"
+            }

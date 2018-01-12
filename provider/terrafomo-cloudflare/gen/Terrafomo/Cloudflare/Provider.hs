@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cloudflare.Provider where
+module Terrafomo.Cloudflare.Provider
+    ( Cloudflare    (..)
+    , HasCloudflare (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Cloudflare.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Meta      as TF
+import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Variable  as TF
 import qualified Terrafomo.TH               as TF
 
@@ -33,8 +46,8 @@ by Cloudflare. The provider needs to be configured with the proper
 credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
-data Cloudflare = Cloudflare
-    { _email :: !(TF.Argument Text)
+data Cloudflare = Cloudflare {
+      _email :: !(TF.Argument Text)
     {- ^ (Required) The email associated with the account. This can also be specified with the @CLOUDFLARE_EMAIL@ shell environment variable. -}
     , _token :: !(TF.Argument Text)
     {- ^ (Required) The Cloudflare API token. This can also be specified with the @CLOUDFLARE_TOKEN@ shell environment variable. -}
@@ -43,9 +56,27 @@ data Cloudflare = Cloudflare
 instance Hashable Cloudflare
 
 instance TF.ToHCL Cloudflare where
-    toHCL x = TF.arguments
-        [ TF.assign "email" <$> _email x
-        , TF.assign "token" <$> _token x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Cloudflare))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "email" <$> TF.argument (_email x)
+            , TF.assign "token" <$> TF.argument (_token x)
+            ]
 
-$(TF.makeClassy ''Cloudflare)
+instance Semigroup Cloudflare where
+    (<>) a b = Cloudflare {
+          _email = on (<>) _email a b
+        , _token = on (<>) _token a b
+        }
+
+instance Monoid Cloudflare where
+    mappend = (<>)
+    mempty  = Cloudflare {
+            _email = TF.Nil
+          , _token = TF.Nil
+        }
+
+instance TF.IsProvider Cloudflare where
+    type ProviderName Cloudflare = "cloudflare"
+
+$(TF.makeProviderLenses ''Cloudflare)

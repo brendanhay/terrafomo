@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Bitbucket.Provider where
+module Terrafomo.Bitbucket.Provider
+    ( Bitbucket    (..)
+    , HasBitbucket (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Bitbucket.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -32,8 +45,8 @@ The Bitbucket provider allows you to manage resources including
 repositories, webhooks, and default reviewers. Use the navigation to the
 left to read about the available resources.
 -}
-data Bitbucket = Bitbucket
-    { _password :: !(TF.Argument Text)
+data Bitbucket = Bitbucket {
+      _password :: !(TF.Argument Text)
     {- ^ (Required) Your password used to connect to bitbucket. You can also set this via the environment variable. @BITBUCKET_PASSWORD@ -}
     , _username :: !(TF.Argument Text)
     {- ^ (Required) Your username used to connect to bitbucket. You can also set this via the environment variable. @BITBUCKET_USERNAME@ -}
@@ -42,9 +55,27 @@ data Bitbucket = Bitbucket
 instance Hashable Bitbucket
 
 instance TF.ToHCL Bitbucket where
-    toHCL x = TF.arguments
-        [ TF.assign "password" <$> _password x
-        , TF.assign "username" <$> _username x
-        ]
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Bitbucket))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            , TF.assign "password" <$> TF.argument (_password x)
+            , TF.assign "username" <$> TF.argument (_username x)
+            ]
 
-$(TF.makeClassy ''Bitbucket)
+instance Semigroup Bitbucket where
+    (<>) a b = Bitbucket {
+          _password = on (<>) _password a b
+        , _username = on (<>) _username a b
+        }
+
+instance Monoid Bitbucket where
+    mappend = (<>)
+    mempty  = Bitbucket {
+            _password = TF.Nil
+          , _username = TF.Nil
+        }
+
+instance TF.IsProvider Bitbucket where
+    type ProviderName Bitbucket = "bitbucket"
+
+$(TF.makeProviderLenses ''Bitbucket)

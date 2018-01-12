@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Rancher           as TF
+import qualified Terrafomo.Rancher.Provider  as TF
+import qualified Terrafomo.Rancher.Types     as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -67,35 +69,34 @@ data CertificateDataSource = CertificateDataSource {
     {- ^ - The certificate version. -}
     } deriving (Show, Eq)
 
-certificateDataSource :: TF.DataSource TF.Rancher CertificateDataSource
-certificateDataSource =
-    TF.newDataSource "rancher_certificate" $
-        CertificateDataSource {
-            _environment_id = TF.Absent
-            , _name = TF.Absent
-            , _computed_algorithm = TF.Computed "algorithm"
-            , _computed_cert_fingerprint = TF.Computed "cert_fingerprint"
-            , _computed_cn = TF.Computed "cn"
-            , _computed_expires_at = TF.Computed "expires_at"
-            , _computed_id = TF.Computed "id"
-            , _computed_issued_at = TF.Computed "issued_at"
-            , _computed_issuer = TF.Computed "issuer"
-            , _computed_serial_number = TF.Computed "serial_number"
-            , _computed_subject_alternative_names = TF.Computed "subject_alternative_names"
-            , _computed_version = TF.Computed "version"
-            }
-
 instance TF.ToHCL CertificateDataSource where
-    toHCL CertificateDataSource{..} = TF.arguments
-        [ TF.assign "environment_id" <$> _environment_id
-        , TF.assign "name" <$> _name
+    toHCL CertificateDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "environment_id" <$> TF.argument _environment_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''CertificateDataSource
     ''TF.Rancher
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+certificateDataSource :: TF.DataSource TF.Rancher CertificateDataSource
+certificateDataSource =
+    TF.newDataSource "rancher_certificate" $
+        CertificateDataSource {
+            _environment_id = TF.Nil
+            , _name = TF.Nil
+            , _computed_algorithm = TF.Compute "algorithm"
+            , _computed_cert_fingerprint = TF.Compute "cert_fingerprint"
+            , _computed_cn = TF.Compute "cn"
+            , _computed_expires_at = TF.Compute "expires_at"
+            , _computed_id = TF.Compute "id"
+            , _computed_issued_at = TF.Compute "issued_at"
+            , _computed_issuer = TF.Compute "issuer"
+            , _computed_serial_number = TF.Compute "serial_number"
+            , _computed_subject_alternative_names = TF.Compute "subject_alternative_names"
+            , _computed_version = TF.Compute "version"
+            }
 
 {- | The @rancher_environment@ Rancher datasource.
 
@@ -116,28 +117,27 @@ data EnvironmentDataSource = EnvironmentDataSource {
     {- ^ - The environment project template ID. -}
     } deriving (Show, Eq)
 
-environmentDataSource :: TF.DataSource TF.Rancher EnvironmentDataSource
-environmentDataSource =
-    TF.newDataSource "rancher_environment" $
-        EnvironmentDataSource {
-            _name = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_member = TF.Computed "member"
-            , _computed_orchestration = TF.Computed "orchestration"
-            , _computed_project_template_id = TF.Computed "project_template_id"
-            }
-
 instance TF.ToHCL EnvironmentDataSource where
-    toHCL EnvironmentDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL EnvironmentDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''EnvironmentDataSource
     ''TF.Rancher
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+environmentDataSource :: TF.DataSource TF.Rancher EnvironmentDataSource
+environmentDataSource =
+    TF.newDataSource "rancher_environment" $
+        EnvironmentDataSource {
+            _name = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_member = TF.Compute "member"
+            , _computed_orchestration = TF.Compute "orchestration"
+            , _computed_project_template_id = TF.Compute "project_template_id"
+            }
 
 {- | The @rancher_setting@ Rancher datasource.
 
@@ -150,21 +150,20 @@ data SettingDataSource = SettingDataSource {
     {- ^ - the settting's value. -}
     } deriving (Show, Eq)
 
-settingDataSource :: TF.DataSource TF.Rancher SettingDataSource
-settingDataSource =
-    TF.newDataSource "rancher_setting" $
-        SettingDataSource {
-            _name = TF.Absent
-            , _computed_value = TF.Computed "value"
-            }
-
 instance TF.ToHCL SettingDataSource where
-    toHCL SettingDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL SettingDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''SettingDataSource
     ''TF.Rancher
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+settingDataSource :: TF.DataSource TF.Rancher SettingDataSource
+settingDataSource =
+    TF.newDataSource "rancher_setting" $
+        SettingDataSource {
+            _name = TF.Nil
+            , _computed_value = TF.Compute "value"
+            }

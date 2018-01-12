@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.GitHub            as TF
+import qualified Terrafomo.GitHub.Provider   as TF
+import qualified Terrafomo.GitHub.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -57,29 +59,28 @@ data TeamDataSource = TeamDataSource {
     {- ^ - the team's privacy type. -}
     } deriving (Show, Eq)
 
-teamDataSource :: TF.DataSource TF.GitHub TeamDataSource
-teamDataSource =
-    TF.newDataSource "github_team" $
-        TeamDataSource {
-            _slug = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_members = TF.Computed "members"
-            , _computed_name = TF.Computed "name"
-            , _computed_permission = TF.Computed "permission"
-            , _computed_privacy = TF.Computed "privacy"
-            }
-
 instance TF.ToHCL TeamDataSource where
-    toHCL TeamDataSource{..} = TF.arguments
-        [ TF.assign "slug" <$> _slug
+    toHCL TeamDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "slug" <$> TF.argument _slug
         ]
 
 $(TF.makeSchemaLenses
     ''TeamDataSource
     ''TF.GitHub
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+teamDataSource :: TF.DataSource TF.GitHub TeamDataSource
+teamDataSource =
+    TF.newDataSource "github_team" $
+        TeamDataSource {
+            _slug = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_members = TF.Compute "members"
+            , _computed_name = TF.Compute "name"
+            , _computed_permission = TF.Compute "permission"
+            , _computed_privacy = TF.Compute "privacy"
+            }
 
 {- | The @github_user@ GitHub datasource.
 
@@ -126,38 +127,37 @@ data UserDataSource = UserDataSource {
     {- ^ - the update date. -}
     } deriving (Show, Eq)
 
-userDataSource :: TF.DataSource TF.GitHub UserDataSource
-userDataSource =
-    TF.newDataSource "github_user" $
-        UserDataSource {
-            _username = TF.Absent
-            , _computed_avatar_url = TF.Computed "avatar_url"
-            , _computed_bio = TF.Computed "bio"
-            , _computed_blog = TF.Computed "blog"
-            , _computed_company = TF.Computed "company"
-            , _computed_created_at = TF.Computed "created_at"
-            , _computed_email = TF.Computed "email"
-            , _computed_followers = TF.Computed "followers"
-            , _computed_following = TF.Computed "following"
-            , _computed_gpg_keys = TF.Computed "gpg_keys"
-            , _computed_gravatar_id = TF.Computed "gravatar_id"
-            , _computed_location = TF.Computed "location"
-            , _computed_login = TF.Computed "login"
-            , _computed_name = TF.Computed "name"
-            , _computed_public_gists = TF.Computed "public_gists"
-            , _computed_public_repos = TF.Computed "public_repos"
-            , _computed_site_admin = TF.Computed "site_admin"
-            , _computed_ssh_keys = TF.Computed "ssh_keys"
-            , _computed_updated_at = TF.Computed "updated_at"
-            }
-
 instance TF.ToHCL UserDataSource where
-    toHCL UserDataSource{..} = TF.arguments
-        [ TF.assign "username" <$> _username
+    toHCL UserDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "username" <$> TF.argument _username
         ]
 
 $(TF.makeSchemaLenses
     ''UserDataSource
     ''TF.GitHub
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+userDataSource :: TF.DataSource TF.GitHub UserDataSource
+userDataSource =
+    TF.newDataSource "github_user" $
+        UserDataSource {
+            _username = TF.Nil
+            , _computed_avatar_url = TF.Compute "avatar_url"
+            , _computed_bio = TF.Compute "bio"
+            , _computed_blog = TF.Compute "blog"
+            , _computed_company = TF.Compute "company"
+            , _computed_created_at = TF.Compute "created_at"
+            , _computed_email = TF.Compute "email"
+            , _computed_followers = TF.Compute "followers"
+            , _computed_following = TF.Compute "following"
+            , _computed_gpg_keys = TF.Compute "gpg_keys"
+            , _computed_gravatar_id = TF.Compute "gravatar_id"
+            , _computed_location = TF.Compute "location"
+            , _computed_login = TF.Compute "login"
+            , _computed_name = TF.Compute "name"
+            , _computed_public_gists = TF.Compute "public_gists"
+            , _computed_public_repos = TF.Compute "public_repos"
+            , _computed_site_admin = TF.Compute "site_admin"
+            , _computed_ssh_keys = TF.Compute "ssh_keys"
+            , _computed_updated_at = TF.Compute "updated_at"
+            }

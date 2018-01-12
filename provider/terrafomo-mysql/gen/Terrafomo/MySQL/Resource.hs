@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.MySQL           as TF
+import qualified Terrafomo.MySQL.Provider  as TF
+import qualified Terrafomo.MySQL.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -53,27 +55,26 @@ data DatabaseResource = DatabaseResource {
     {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
     } deriving (Show, Eq)
 
-databaseResource :: TF.Resource TF.MySQL DatabaseResource
-databaseResource =
-    TF.newResource "mysql_database" $
-        DatabaseResource {
-            _default_character_set = TF.Absent
-            , _default_collation = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL DatabaseResource where
-    toHCL DatabaseResource{..} = TF.arguments
-        [ TF.assign "default_character_set" <$> _default_character_set
-        , TF.assign "default_collation" <$> _default_collation
-        , TF.assign "name" <$> _name
+    toHCL DatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "default_character_set" <$> TF.argument _default_character_set
+        , TF.assign "default_collation" <$> TF.argument _default_collation
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DatabaseResource
     ''TF.MySQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+databaseResource :: TF.Resource TF.MySQL DatabaseResource
+databaseResource =
+    TF.newResource "mysql_database" $
+        DatabaseResource {
+            _default_character_set = TF.Nil
+            , _default_collation = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @mysql_grant@ MySQL resource.
 
@@ -93,31 +94,30 @@ data GrantResource = GrantResource {
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
-grantResource :: TF.Resource TF.MySQL GrantResource
-grantResource =
-    TF.newResource "mysql_grant" $
-        GrantResource {
-            _database = TF.Absent
-            , _grant = TF.Absent
-            , _host = TF.Absent
-            , _privileges = TF.Absent
-            , _user = TF.Absent
-            }
-
 instance TF.ToHCL GrantResource where
-    toHCL GrantResource{..} = TF.arguments
-        [ TF.assign "database" <$> _database
-        , TF.assign "grant" <$> _grant
-        , TF.assign "host" <$> _host
-        , TF.assign "privileges" <$> _privileges
-        , TF.assign "user" <$> _user
+    toHCL GrantResource{..} = TF.block $ catMaybes
+        [ TF.assign "database" <$> TF.argument _database
+        , TF.assign "grant" <$> TF.argument _grant
+        , TF.assign "host" <$> TF.argument _host
+        , TF.assign "privileges" <$> TF.argument _privileges
+        , TF.assign "user" <$> TF.argument _user
         ]
 
 $(TF.makeSchemaLenses
     ''GrantResource
     ''TF.MySQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+grantResource :: TF.Resource TF.MySQL GrantResource
+grantResource =
+    TF.newResource "mysql_grant" $
+        GrantResource {
+            _database = TF.Nil
+            , _grant = TF.Nil
+            , _host = TF.Nil
+            , _privileges = TF.Nil
+            , _user = TF.Nil
+            }
 
 {- | The @mysql_user@ MySQL resource.
 
@@ -137,26 +137,25 @@ data UserResource = UserResource {
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
-userResource :: TF.Resource TF.MySQL UserResource
-userResource =
-    TF.newResource "mysql_user" $
-        UserResource {
-            _host = TF.Absent
-            , _password = TF.Absent
-            , _plaintext_password = TF.Absent
-            , _user = TF.Absent
-            }
-
 instance TF.ToHCL UserResource where
-    toHCL UserResource{..} = TF.arguments
-        [ TF.assign "host" <$> _host
-        , TF.assign "password" <$> _password
-        , TF.assign "plaintext_password" <$> _plaintext_password
-        , TF.assign "user" <$> _user
+    toHCL UserResource{..} = TF.block $ catMaybes
+        [ TF.assign "host" <$> TF.argument _host
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "plaintext_password" <$> TF.argument _plaintext_password
+        , TF.assign "user" <$> TF.argument _user
         ]
 
 $(TF.makeSchemaLenses
     ''UserResource
     ''TF.MySQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+userResource :: TF.Resource TF.MySQL UserResource
+userResource =
+    TF.newResource "mysql_user" $
+        UserResource {
+            _host = TF.Nil
+            , _password = TF.Nil
+            , _plaintext_password = TF.Nil
+            , _user = TF.Nil
+            }

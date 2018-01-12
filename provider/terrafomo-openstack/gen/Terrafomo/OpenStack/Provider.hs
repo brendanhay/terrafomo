@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OpenStack.Provider where
+module Terrafomo.OpenStack.Provider
+    ( OpenStack    (..)
+    , HasOpenStack (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.OpenStack.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,12 +46,27 @@ by OpenStack. The provider needs to be configured with the proper
 credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
-data OpenStack = OpenStack
-    deriving (Show, Eq, Generic)
+data OpenStack = OpenStack {
+    } deriving (Show, Eq, Generic)
 
 instance Hashable OpenStack
 
 instance TF.ToHCL OpenStack where
-    toHCL = const $ TF.arguments []
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OpenStack))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            ]
 
-$(TF.makeClassy ''OpenStack)
+instance Semigroup OpenStack where
+    (<>) a b = OpenStack {
+        }
+
+instance Monoid OpenStack where
+    mappend = (<>)
+    mempty  = OpenStack {
+        }
+
+instance TF.IsProvider OpenStack where
+    type ProviderName OpenStack = "openstack"
+
+$(TF.makeProviderLenses ''OpenStack)

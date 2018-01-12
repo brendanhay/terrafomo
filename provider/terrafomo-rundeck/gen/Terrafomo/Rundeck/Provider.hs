@@ -1,8 +1,11 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,15 +17,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rundeck.Provider where
+module Terrafomo.Rundeck.Provider
+    ( Rundeck    (..)
+    , HasRundeck (..)
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Rundeck.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -34,12 +47,27 @@ and execution of arbitrary management tasks, allowing operators to avoid
 logging in to individual machines directly via SSH. The provider
 configuration block accepts the following arguments:
 -}
-data Rundeck = Rundeck
-    deriving (Show, Eq, Generic)
+data Rundeck = Rundeck {
+    } deriving (Show, Eq, Generic)
 
 instance Hashable Rundeck
 
 instance TF.ToHCL Rundeck where
-    toHCL = const $ TF.arguments []
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Rundeck))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+            ]
 
-$(TF.makeClassy ''Rundeck)
+instance Semigroup Rundeck where
+    (<>) a b = Rundeck {
+        }
+
+instance Monoid Rundeck where
+    mappend = (<>)
+    mempty  = Rundeck {
+        }
+
+instance TF.IsProvider Rundeck where
+    type ProviderName Rundeck = "rundeck"
+
+$(TF.makeProviderLenses ''Rundeck)

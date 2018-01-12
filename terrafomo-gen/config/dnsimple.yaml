@@ -1,4 +1,4 @@
 name: DNSimple
 package: terrafomo-dnsimple
 datatype: true
-
+original: dnsimple

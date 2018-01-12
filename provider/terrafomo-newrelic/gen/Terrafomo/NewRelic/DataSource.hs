@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.NewRelic          as TF
+import qualified Terrafomo.NewRelic.Provider as TF
+import qualified Terrafomo.NewRelic.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -52,23 +54,22 @@ data ApplicationDataSource = ApplicationDataSource {
     {- ^ - A list of instance IDs associated with the application. -}
     } deriving (Show, Eq)
 
-applicationDataSource :: TF.DataSource TF.NewRelic ApplicationDataSource
-applicationDataSource =
-    TF.newDataSource "newrelic_application" $
-        ApplicationDataSource {
-            _name = TF.Absent
-            , _computed_host_ids = TF.Computed "host_ids"
-            , _computed_id = TF.Computed "id"
-            , _computed_instance_ids = TF.Computed "instance_ids"
-            }
-
 instance TF.ToHCL ApplicationDataSource where
-    toHCL ApplicationDataSource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL ApplicationDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''ApplicationDataSource
     ''TF.NewRelic
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+applicationDataSource :: TF.DataSource TF.NewRelic ApplicationDataSource
+applicationDataSource =
+    TF.newDataSource "newrelic_application" $
+        ApplicationDataSource {
+            _name = TF.Nil
+            , _computed_host_ids = TF.Compute "host_ids"
+            , _computed_id = TF.Compute "id"
+            , _computed_instance_ids = TF.Compute "instance_ids"
+            }

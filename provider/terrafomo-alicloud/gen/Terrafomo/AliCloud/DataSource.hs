@@ -27,12 +27,14 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.AliCloud          as TF
+import qualified Terrafomo.AliCloud.Provider as TF
+import qualified Terrafomo.AliCloud.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -74,42 +76,41 @@ data DnsDomainsDataSource = DnsDomainsDataSource {
     {- ^ - Cloud analysis version code of the domain. -}
     } deriving (Show, Eq)
 
-dnsDomainsDataSource :: TF.DataSource TF.AliCloud DnsDomainsDataSource
-dnsDomainsDataSource =
-    TF.newDataSource "alicloud_dns_domains" $
-        DnsDomainsDataSource {
-            _ali_domain = TF.Absent
-            , _domain_name_regex = TF.Absent
-            , _group_name_regex = TF.Absent
-            , _instance_id = TF.Absent
-            , _output_file = TF.Absent
-            , _version_code = TF.Absent
-            , _computed_ali_domain = TF.Computed "ali_domain"
-            , _computed_dns_servers = TF.Computed "dns_servers"
-            , _computed_domain_id = TF.Computed "domain_id"
-            , _computed_domain_name = TF.Computed "domain_name"
-            , _computed_group_id = TF.Computed "group_id"
-            , _computed_group_name = TF.Computed "group_name"
-            , _computed_instance_id = TF.Computed "instance_id"
-            , _computed_puny_code = TF.Computed "puny_code"
-            , _computed_version_code = TF.Computed "version_code"
-            }
-
 instance TF.ToHCL DnsDomainsDataSource where
-    toHCL DnsDomainsDataSource{..} = TF.arguments
-        [ TF.assign "ali_domain" <$> _ali_domain
-        , TF.assign "domain_name_regex" <$> _domain_name_regex
-        , TF.assign "group_name_regex" <$> _group_name_regex
-        , TF.assign "instance_id" <$> _instance_id
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "version_code" <$> _version_code
+    toHCL DnsDomainsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "ali_domain" <$> TF.argument _ali_domain
+        , TF.assign "domain_name_regex" <$> TF.argument _domain_name_regex
+        , TF.assign "group_name_regex" <$> TF.argument _group_name_regex
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "version_code" <$> TF.argument _version_code
         ]
 
 $(TF.makeSchemaLenses
     ''DnsDomainsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+dnsDomainsDataSource :: TF.DataSource TF.AliCloud DnsDomainsDataSource
+dnsDomainsDataSource =
+    TF.newDataSource "alicloud_dns_domains" $
+        DnsDomainsDataSource {
+            _ali_domain = TF.Nil
+            , _domain_name_regex = TF.Nil
+            , _group_name_regex = TF.Nil
+            , _instance_id = TF.Nil
+            , _output_file = TF.Nil
+            , _version_code = TF.Nil
+            , _computed_ali_domain = TF.Compute "ali_domain"
+            , _computed_dns_servers = TF.Compute "dns_servers"
+            , _computed_domain_id = TF.Compute "domain_id"
+            , _computed_domain_name = TF.Compute "domain_name"
+            , _computed_group_id = TF.Compute "group_id"
+            , _computed_group_name = TF.Compute "group_name"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_puny_code = TF.Compute "puny_code"
+            , _computed_version_code = TF.Compute "version_code"
+            }
 
 {- | The @alicloud_dns_groups@ AliCloud datasource.
 
@@ -127,27 +128,26 @@ data DnsGroupsDataSource = DnsGroupsDataSource {
     {- ^ - Name of the group . -}
     } deriving (Show, Eq)
 
-dnsGroupsDataSource :: TF.DataSource TF.AliCloud DnsGroupsDataSource
-dnsGroupsDataSource =
-    TF.newDataSource "alicloud_dns_groups" $
-        DnsGroupsDataSource {
-            _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _computed_group_id = TF.Computed "group_id"
-            , _computed_group_name = TF.Computed "group_name"
-            }
-
 instance TF.ToHCL DnsGroupsDataSource where
-    toHCL DnsGroupsDataSource{..} = TF.arguments
-        [ TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
+    toHCL DnsGroupsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
 $(TF.makeSchemaLenses
     ''DnsGroupsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+dnsGroupsDataSource :: TF.DataSource TF.AliCloud DnsGroupsDataSource
+dnsGroupsDataSource =
+    TF.newDataSource "alicloud_dns_groups" $
+        DnsGroupsDataSource {
+            _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _computed_group_id = TF.Compute "group_id"
+            , _computed_group_name = TF.Compute "group_name"
+            }
 
 {- | The @alicloud_dns_records@ AliCloud datasource.
 
@@ -193,47 +193,46 @@ data DnsRecordsDataSource = DnsRecordsDataSource {
     {- ^ - Host record value of the record. -}
     } deriving (Show, Eq)
 
-dnsRecordsDataSource :: TF.DataSource TF.AliCloud DnsRecordsDataSource
-dnsRecordsDataSource =
-    TF.newDataSource "alicloud_dns_records" $
-        DnsRecordsDataSource {
-            _domain_name = TF.Absent
-            , _host_record_regex = TF.Absent
-            , _is_locked = TF.Absent
-            , _line = TF.Absent
-            , _output_file = TF.Absent
-            , _status = TF.Absent
-            , _type' = TF.Absent
-            , _value_regex = TF.Absent
-            , _computed_domain_name = TF.Computed "domain_name"
-            , _computed_host_record = TF.Computed "host_record"
-            , _computed_line = TF.Computed "line"
-            , _computed_locked = TF.Computed "locked"
-            , _computed_priority = TF.Computed "priority"
-            , _computed_record_id = TF.Computed "record_id"
-            , _computed_status = TF.Computed "status"
-            , _computed_ttl = TF.Computed "ttl"
-            , _computed_type' = TF.Computed "type"
-            , _computed_value = TF.Computed "value"
-            }
-
 instance TF.ToHCL DnsRecordsDataSource where
-    toHCL DnsRecordsDataSource{..} = TF.arguments
-        [ TF.assign "domain_name" <$> _domain_name
-        , TF.assign "host_record_regex" <$> _host_record_regex
-        , TF.assign "is_locked" <$> _is_locked
-        , TF.assign "line" <$> _line
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "status" <$> _status
-        , TF.assign "type" <$> _type'
-        , TF.assign "value_regex" <$> _value_regex
+    toHCL DnsRecordsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "domain_name" <$> TF.argument _domain_name
+        , TF.assign "host_record_regex" <$> TF.argument _host_record_regex
+        , TF.assign "is_locked" <$> TF.argument _is_locked
+        , TF.assign "line" <$> TF.argument _line
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value_regex" <$> TF.argument _value_regex
         ]
 
 $(TF.makeSchemaLenses
     ''DnsRecordsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+dnsRecordsDataSource :: TF.DataSource TF.AliCloud DnsRecordsDataSource
+dnsRecordsDataSource =
+    TF.newDataSource "alicloud_dns_records" $
+        DnsRecordsDataSource {
+            _domain_name = TF.Nil
+            , _host_record_regex = TF.Nil
+            , _is_locked = TF.Nil
+            , _line = TF.Nil
+            , _output_file = TF.Nil
+            , _status = TF.Nil
+            , _type' = TF.Nil
+            , _value_regex = TF.Nil
+            , _computed_domain_name = TF.Compute "domain_name"
+            , _computed_host_record = TF.Compute "host_record"
+            , _computed_line = TF.Compute "line"
+            , _computed_locked = TF.Compute "locked"
+            , _computed_priority = TF.Compute "priority"
+            , _computed_record_id = TF.Compute "record_id"
+            , _computed_status = TF.Compute "status"
+            , _computed_ttl = TF.Compute "ttl"
+            , _computed_type' = TF.Compute "type"
+            , _computed_value = TF.Compute "value"
+            }
 
 {- | The @alicloud_images@ AliCloud datasource.
 
@@ -278,42 +277,41 @@ data ImagesDataSource = ImagesDataSource {
     {- ^ - Status of the image, with possible values: @UnAvailable@ , @Available@ , @Creating@ or @CreateFailed@ . -}
     } deriving (Show, Eq)
 
-imagesDataSource :: TF.DataSource TF.AliCloud ImagesDataSource
-imagesDataSource =
-    TF.newDataSource "alicloud_images" $
-        ImagesDataSource {
-            _most_recent = TF.Absent
-            , _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _owners = TF.Absent
-            , _computed_architecture = TF.Computed "architecture"
-            , _computed_creation_time = TF.Computed "creation_time"
-            , _computed_description = TF.Computed "description"
-            , _computed_disk_device_mappings = TF.Computed "disk_device_mappings"
-            , _computed_id = TF.Computed "id"
-            , _computed_image_owner_alias = TF.Computed "image_owner_alias"
-            , _computed_image_version = TF.Computed "image_version"
-            , _computed_is_subscribed = TF.Computed "is_subscribed"
-            , _computed_os_name = TF.Computed "os_name"
-            , _computed_product_code = TF.Computed "product_code"
-            , _computed_progress = TF.Computed "progress"
-            , _computed_size = TF.Computed "size"
-            , _computed_status = TF.Computed "status"
-            }
-
 instance TF.ToHCL ImagesDataSource where
-    toHCL ImagesDataSource{..} = TF.arguments
-        [ TF.assign "most_recent" <$> _most_recent
-        , TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "owners" <$> _owners
+    toHCL ImagesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "most_recent" <$> TF.argument _most_recent
+        , TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "owners" <$> TF.argument _owners
         ]
 
 $(TF.makeSchemaLenses
     ''ImagesDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imagesDataSource :: TF.DataSource TF.AliCloud ImagesDataSource
+imagesDataSource =
+    TF.newDataSource "alicloud_images" $
+        ImagesDataSource {
+            _most_recent = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _owners = TF.Nil
+            , _computed_architecture = TF.Compute "architecture"
+            , _computed_creation_time = TF.Compute "creation_time"
+            , _computed_description = TF.Compute "description"
+            , _computed_disk_device_mappings = TF.Compute "disk_device_mappings"
+            , _computed_id = TF.Compute "id"
+            , _computed_image_owner_alias = TF.Compute "image_owner_alias"
+            , _computed_image_version = TF.Compute "image_version"
+            , _computed_is_subscribed = TF.Compute "is_subscribed"
+            , _computed_os_name = TF.Compute "os_name"
+            , _computed_product_code = TF.Compute "product_code"
+            , _computed_progress = TF.Compute "progress"
+            , _computed_size = TF.Compute "size"
+            , _computed_status = TF.Compute "status"
+            }
 
 {- | The @alicloud_instance_types@ AliCloud datasource.
 
@@ -344,37 +342,36 @@ data InstanceTypesDataSource = InstanceTypesDataSource {
     {- ^ - Size of memory, measured in GB. -}
     } deriving (Show, Eq)
 
-instanceTypesDataSource :: TF.DataSource TF.AliCloud InstanceTypesDataSource
-instanceTypesDataSource =
-    TF.newDataSource "alicloud_instance_types" $
-        InstanceTypesDataSource {
-            _availability_zone = TF.Absent
-            , _cpu_core_count = TF.Absent
-            , _instance_type_family = TF.Absent
-            , _is_outdated = TF.Absent
-            , _memory_size = TF.Absent
-            , _output_file = TF.Absent
-            , _computed_cpu_core_count = TF.Computed "cpu_core_count"
-            , _computed_family' = TF.Computed "family"
-            , _computed_id = TF.Computed "id"
-            , _computed_memory_size = TF.Computed "memory_size"
-            }
-
 instance TF.ToHCL InstanceTypesDataSource where
-    toHCL InstanceTypesDataSource{..} = TF.arguments
-        [ TF.assign "availability_zone" <$> _availability_zone
-        , TF.assign "cpu_core_count" <$> _cpu_core_count
-        , TF.assign "instance_type_family" <$> _instance_type_family
-        , TF.assign "is_outdated" <$> _is_outdated
-        , TF.assign "memory_size" <$> _memory_size
-        , TF.assign "output_file" <$> _output_file
+    toHCL InstanceTypesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.argument _availability_zone
+        , TF.assign "cpu_core_count" <$> TF.argument _cpu_core_count
+        , TF.assign "instance_type_family" <$> TF.argument _instance_type_family
+        , TF.assign "is_outdated" <$> TF.argument _is_outdated
+        , TF.assign "memory_size" <$> TF.argument _memory_size
+        , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
 $(TF.makeSchemaLenses
     ''InstanceTypesDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+instanceTypesDataSource :: TF.DataSource TF.AliCloud InstanceTypesDataSource
+instanceTypesDataSource =
+    TF.newDataSource "alicloud_instance_types" $
+        InstanceTypesDataSource {
+            _availability_zone = TF.Nil
+            , _cpu_core_count = TF.Nil
+            , _instance_type_family = TF.Nil
+            , _is_outdated = TF.Nil
+            , _memory_size = TF.Nil
+            , _output_file = TF.Nil
+            , _computed_cpu_core_count = TF.Compute "cpu_core_count"
+            , _computed_family' = TF.Compute "family"
+            , _computed_id = TF.Compute "id"
+            , _computed_memory_size = TF.Compute "memory_size"
+            }
 
 {- | The @alicloud_key_pairs@ AliCloud datasource.
 
@@ -398,31 +395,30 @@ data KeyPairsDataSource = KeyPairsDataSource {
     {- ^ - Name of the key pair. -}
     } deriving (Show, Eq)
 
-keyPairsDataSource :: TF.DataSource TF.AliCloud KeyPairsDataSource
-keyPairsDataSource =
-    TF.newDataSource "alicloud_key_pairs" $
-        KeyPairsDataSource {
-            _finger_print = TF.Absent
-            , _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _computed_finger_print = TF.Computed "finger_print"
-            , _computed_id = TF.Computed "id"
-            , _computed_instances = TF.Computed "instances"
-            , _computed_key_name = TF.Computed "key_name"
-            }
-
 instance TF.ToHCL KeyPairsDataSource where
-    toHCL KeyPairsDataSource{..} = TF.arguments
-        [ TF.assign "finger_print" <$> _finger_print
-        , TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
+    toHCL KeyPairsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "finger_print" <$> TF.argument _finger_print
+        , TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
 $(TF.makeSchemaLenses
     ''KeyPairsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+keyPairsDataSource :: TF.DataSource TF.AliCloud KeyPairsDataSource
+keyPairsDataSource =
+    TF.newDataSource "alicloud_key_pairs" $
+        KeyPairsDataSource {
+            _finger_print = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _computed_finger_print = TF.Compute "finger_print"
+            , _computed_id = TF.Compute "id"
+            , _computed_instances = TF.Compute "instances"
+            , _computed_key_name = TF.Compute "key_name"
+            }
 
 {- | The @alicloud_ram_account_aliases@ AliCloud datasource.
 
@@ -436,24 +432,23 @@ data RamAccountAliasesDataSource = RamAccountAliasesDataSource {
     {- ^ - Alias of the account. -}
     } deriving (Show, Eq)
 
-ramAccountAliasesDataSource :: TF.DataSource TF.AliCloud RamAccountAliasesDataSource
-ramAccountAliasesDataSource =
-    TF.newDataSource "alicloud_ram_account_aliases" $
-        RamAccountAliasesDataSource {
-            _output_file = TF.Absent
-            , _computed_account_alias = TF.Computed "account_alias"
-            }
-
 instance TF.ToHCL RamAccountAliasesDataSource where
-    toHCL RamAccountAliasesDataSource{..} = TF.arguments
-        [ TF.assign "output_file" <$> _output_file
+    toHCL RamAccountAliasesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "output_file" <$> TF.argument _output_file
         ]
 
 $(TF.makeSchemaLenses
     ''RamAccountAliasesDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+ramAccountAliasesDataSource :: TF.DataSource TF.AliCloud RamAccountAliasesDataSource
+ramAccountAliasesDataSource =
+    TF.newDataSource "alicloud_ram_account_aliases" $
+        RamAccountAliasesDataSource {
+            _output_file = TF.Nil
+            , _computed_account_alias = TF.Compute "account_alias"
+            }
 
 {- | The @alicloud_ram_groups@ AliCloud datasource.
 
@@ -477,33 +472,32 @@ data RamGroupsDataSource = RamGroupsDataSource {
     {- ^ - Name of the group. -}
     } deriving (Show, Eq)
 
-ramGroupsDataSource :: TF.DataSource TF.AliCloud RamGroupsDataSource
-ramGroupsDataSource =
-    TF.newDataSource "alicloud_ram_groups" $
-        RamGroupsDataSource {
-            _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _policy_name = TF.Absent
-            , _policy_type = TF.Absent
-            , _user_name = TF.Absent
-            , _computed_comments = TF.Computed "comments"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL RamGroupsDataSource where
-    toHCL RamGroupsDataSource{..} = TF.arguments
-        [ TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "policy_name" <$> _policy_name
-        , TF.assign "policy_type" <$> _policy_type
-        , TF.assign "user_name" <$> _user_name
+    toHCL RamGroupsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "policy_name" <$> TF.argument _policy_name
+        , TF.assign "policy_type" <$> TF.argument _policy_type
+        , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamGroupsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+ramGroupsDataSource :: TF.DataSource TF.AliCloud RamGroupsDataSource
+ramGroupsDataSource =
+    TF.newDataSource "alicloud_ram_groups" $
+        RamGroupsDataSource {
+            _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _policy_name = TF.Nil
+            , _policy_type = TF.Nil
+            , _user_name = TF.Nil
+            , _computed_comments = TF.Compute "comments"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @alicloud_ram_policies@ AliCloud datasource.
 
@@ -541,41 +535,40 @@ data RamPoliciesDataSource = RamPoliciesDataSource {
     {- ^ - Update date of the policy. -}
     } deriving (Show, Eq)
 
-ramPoliciesDataSource :: TF.DataSource TF.AliCloud RamPoliciesDataSource
-ramPoliciesDataSource =
-    TF.newDataSource "alicloud_ram_policies" $
-        RamPoliciesDataSource {
-            _group_name = TF.Absent
-            , _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _role_name = TF.Absent
-            , _type' = TF.Absent
-            , _user_name = TF.Absent
-            , _computed_attachment_count = TF.Computed "attachment_count"
-            , _computed_create_date = TF.Computed "create_date"
-            , _computed_default_version = TF.Computed "default_version"
-            , _computed_description = TF.Computed "description"
-            , _computed_document = TF.Computed "document"
-            , _computed_name = TF.Computed "name"
-            , _computed_type' = TF.Computed "type"
-            , _computed_update_date = TF.Computed "update_date"
-            }
-
 instance TF.ToHCL RamPoliciesDataSource where
-    toHCL RamPoliciesDataSource{..} = TF.arguments
-        [ TF.assign "group_name" <$> _group_name
-        , TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "role_name" <$> _role_name
-        , TF.assign "type" <$> _type'
-        , TF.assign "user_name" <$> _user_name
+    toHCL RamPoliciesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "group_name" <$> TF.argument _group_name
+        , TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "role_name" <$> TF.argument _role_name
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
 $(TF.makeSchemaLenses
     ''RamPoliciesDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+ramPoliciesDataSource :: TF.DataSource TF.AliCloud RamPoliciesDataSource
+ramPoliciesDataSource =
+    TF.newDataSource "alicloud_ram_policies" $
+        RamPoliciesDataSource {
+            _group_name = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _role_name = TF.Nil
+            , _type' = TF.Nil
+            , _user_name = TF.Nil
+            , _computed_attachment_count = TF.Compute "attachment_count"
+            , _computed_create_date = TF.Compute "create_date"
+            , _computed_default_version = TF.Compute "default_version"
+            , _computed_description = TF.Compute "description"
+            , _computed_document = TF.Compute "document"
+            , _computed_name = TF.Compute "name"
+            , _computed_type' = TF.Compute "type"
+            , _computed_update_date = TF.Compute "update_date"
+            }
 
 {- | The @alicloud_ram_roles@ AliCloud datasource.
 
@@ -609,37 +602,36 @@ data RamRolesDataSource = RamRolesDataSource {
     {- ^ - Update date of the role. -}
     } deriving (Show, Eq)
 
-ramRolesDataSource :: TF.DataSource TF.AliCloud RamRolesDataSource
-ramRolesDataSource =
-    TF.newDataSource "alicloud_ram_roles" $
-        RamRolesDataSource {
-            _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _policy_name = TF.Absent
-            , _policy_type = TF.Absent
-            , _computed_arn = TF.Computed "arn"
-            , _computed_assume_role_policy_document = TF.Computed "assume_role_policy_document"
-            , _computed_create_date = TF.Computed "create_date"
-            , _computed_description = TF.Computed "description"
-            , _computed_document = TF.Computed "document"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_update_date = TF.Computed "update_date"
-            }
-
 instance TF.ToHCL RamRolesDataSource where
-    toHCL RamRolesDataSource{..} = TF.arguments
-        [ TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "policy_name" <$> _policy_name
-        , TF.assign "policy_type" <$> _policy_type
+    toHCL RamRolesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "policy_name" <$> TF.argument _policy_name
+        , TF.assign "policy_type" <$> TF.argument _policy_type
         ]
 
 $(TF.makeSchemaLenses
     ''RamRolesDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+ramRolesDataSource :: TF.DataSource TF.AliCloud RamRolesDataSource
+ramRolesDataSource =
+    TF.newDataSource "alicloud_ram_roles" $
+        RamRolesDataSource {
+            _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _policy_name = TF.Nil
+            , _policy_type = TF.Nil
+            , _computed_arn = TF.Compute "arn"
+            , _computed_assume_role_policy_document = TF.Compute "assume_role_policy_document"
+            , _computed_create_date = TF.Compute "create_date"
+            , _computed_description = TF.Compute "description"
+            , _computed_document = TF.Compute "document"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_update_date = TF.Compute "update_date"
+            }
 
 {- | The @alicloud_ram_users@ AliCloud datasource.
 
@@ -667,35 +659,34 @@ data RamUsersDataSource = RamUsersDataSource {
     {- ^ - Name of the user. -}
     } deriving (Show, Eq)
 
-ramUsersDataSource :: TF.DataSource TF.AliCloud RamUsersDataSource
-ramUsersDataSource =
-    TF.newDataSource "alicloud_ram_users" $
-        RamUsersDataSource {
-            _group_name = TF.Absent
-            , _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _policy_name = TF.Absent
-            , _policy_type = TF.Absent
-            , _computed_create_date = TF.Computed "create_date"
-            , _computed_id = TF.Computed "id"
-            , _computed_last_login_date = TF.Computed "last_login_date"
-            , _computed_name = TF.Computed "name"
-            }
-
 instance TF.ToHCL RamUsersDataSource where
-    toHCL RamUsersDataSource{..} = TF.arguments
-        [ TF.assign "group_name" <$> _group_name
-        , TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "policy_name" <$> _policy_name
-        , TF.assign "policy_type" <$> _policy_type
+    toHCL RamUsersDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "group_name" <$> TF.argument _group_name
+        , TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "policy_name" <$> TF.argument _policy_name
+        , TF.assign "policy_type" <$> TF.argument _policy_type
         ]
 
 $(TF.makeSchemaLenses
     ''RamUsersDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+ramUsersDataSource :: TF.DataSource TF.AliCloud RamUsersDataSource
+ramUsersDataSource =
+    TF.newDataSource "alicloud_ram_users" $
+        RamUsersDataSource {
+            _group_name = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _policy_name = TF.Nil
+            , _policy_type = TF.Nil
+            , _computed_create_date = TF.Compute "create_date"
+            , _computed_id = TF.Compute "id"
+            , _computed_last_login_date = TF.Compute "last_login_date"
+            , _computed_name = TF.Compute "name"
+            }
 
 {- | The @alicloud_regions@ AliCloud datasource.
 
@@ -714,29 +705,28 @@ data RegionsDataSource = RegionsDataSource {
     {- ^ - Name of the region in the local language. -}
     } deriving (Show, Eq)
 
-regionsDataSource :: TF.DataSource TF.AliCloud RegionsDataSource
-regionsDataSource =
-    TF.newDataSource "alicloud_regions" $
-        RegionsDataSource {
-            _current = TF.Absent
-            , _name = TF.Absent
-            , _output_file = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_local_name = TF.Computed "local_name"
-            }
-
 instance TF.ToHCL RegionsDataSource where
-    toHCL RegionsDataSource{..} = TF.arguments
-        [ TF.assign "current" <$> _current
-        , TF.assign "name" <$> _name
-        , TF.assign "output_file" <$> _output_file
+    toHCL RegionsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "current" <$> TF.argument _current
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
 $(TF.makeSchemaLenses
     ''RegionsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+regionsDataSource :: TF.DataSource TF.AliCloud RegionsDataSource
+regionsDataSource =
+    TF.newDataSource "alicloud_regions" $
+        RegionsDataSource {
+            _current = TF.Nil
+            , _name = TF.Nil
+            , _output_file = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_local_name = TF.Compute "local_name"
+            }
 
 {- | The @alicloud_vpcs@ AliCloud datasource.
 
@@ -780,44 +770,43 @@ data VpcsDataSource = VpcsDataSource {
     {- ^ - List of VSwitch IDs in the specified VPC -}
     } deriving (Show, Eq)
 
-vpcsDataSource :: TF.DataSource TF.AliCloud VpcsDataSource
-vpcsDataSource =
-    TF.newDataSource "alicloud_vpcs" $
-        VpcsDataSource {
-            _cidr_block = TF.Absent
-            , _is_default = TF.Absent
-            , _name_regex = TF.Absent
-            , _output_file = TF.Absent
-            , _status = TF.Absent
-            , _vswitch_id = TF.Absent
-            , _computed_cidr_block = TF.Computed "cidr_block"
-            , _computed_creation_time = TF.Computed "creation_time"
-            , _computed_description = TF.Computed "description"
-            , _computed_id = TF.Computed "id"
-            , _computed_is_default = TF.Computed "is_default"
-            , _computed_region_id = TF.Computed "region_id"
-            , _computed_route_table_id = TF.Computed "route_table_id"
-            , _computed_status = TF.Computed "status"
-            , _computed_vpc_name = TF.Computed "vpc_name"
-            , _computed_vrouter_id = TF.Computed "vrouter_id"
-            , _computed_vswitch_ids = TF.Computed "vswitch_ids"
-            }
-
 instance TF.ToHCL VpcsDataSource where
-    toHCL VpcsDataSource{..} = TF.arguments
-        [ TF.assign "cidr_block" <$> _cidr_block
-        , TF.assign "is_default" <$> _is_default
-        , TF.assign "name_regex" <$> _name_regex
-        , TF.assign "output_file" <$> _output_file
-        , TF.assign "status" <$> _status
-        , TF.assign "vswitch_id" <$> _vswitch_id
+    toHCL VpcsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "cidr_block" <$> TF.argument _cidr_block
+        , TF.assign "is_default" <$> TF.argument _is_default
+        , TF.assign "name_regex" <$> TF.argument _name_regex
+        , TF.assign "output_file" <$> TF.argument _output_file
+        , TF.assign "status" <$> TF.argument _status
+        , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
 $(TF.makeSchemaLenses
     ''VpcsDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+vpcsDataSource :: TF.DataSource TF.AliCloud VpcsDataSource
+vpcsDataSource =
+    TF.newDataSource "alicloud_vpcs" $
+        VpcsDataSource {
+            _cidr_block = TF.Nil
+            , _is_default = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _status = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _computed_cidr_block = TF.Compute "cidr_block"
+            , _computed_creation_time = TF.Compute "creation_time"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_is_default = TF.Compute "is_default"
+            , _computed_region_id = TF.Compute "region_id"
+            , _computed_route_table_id = TF.Compute "route_table_id"
+            , _computed_status = TF.Compute "status"
+            , _computed_vpc_name = TF.Compute "vpc_name"
+            , _computed_vrouter_id = TF.Compute "vrouter_id"
+            , _computed_vswitch_ids = TF.Compute "vswitch_ids"
+            }
 
 {- | The @alicloud_zones@ AliCloud datasource.
 
@@ -846,31 +835,30 @@ data ZonesDataSource = ZonesDataSource {
     {- ^ - Name of the zone in the local language. -}
     } deriving (Show, Eq)
 
-zonesDataSource :: TF.DataSource TF.AliCloud ZonesDataSource
-zonesDataSource =
-    TF.newDataSource "alicloud_zones" $
-        ZonesDataSource {
-            _available_disk_category = TF.Absent
-            , _available_instance_type = TF.Absent
-            , _available_resource_creation = TF.Absent
-            , _output_file = TF.Absent
-            , _computed_available_disk_categories = TF.Computed "available_disk_categories"
-            , _computed_available_instance_types = TF.Computed "available_instance_types"
-            , _computed_available_resource_creation = TF.Computed "available_resource_creation"
-            , _computed_id = TF.Computed "id"
-            , _computed_local_name = TF.Computed "local_name"
-            }
-
 instance TF.ToHCL ZonesDataSource where
-    toHCL ZonesDataSource{..} = TF.arguments
-        [ TF.assign "available_disk_category" <$> _available_disk_category
-        , TF.assign "available_instance_type" <$> _available_instance_type
-        , TF.assign "available_resource_creation" <$> _available_resource_creation
-        , TF.assign "output_file" <$> _output_file
+    toHCL ZonesDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "available_disk_category" <$> TF.argument _available_disk_category
+        , TF.assign "available_instance_type" <$> TF.argument _available_instance_type
+        , TF.assign "available_resource_creation" <$> TF.argument _available_resource_creation
+        , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
 $(TF.makeSchemaLenses
     ''ZonesDataSource
     ''TF.AliCloud
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+zonesDataSource :: TF.DataSource TF.AliCloud ZonesDataSource
+zonesDataSource =
+    TF.newDataSource "alicloud_zones" $
+        ZonesDataSource {
+            _available_disk_category = TF.Nil
+            , _available_instance_type = TF.Nil
+            , _available_resource_creation = TF.Nil
+            , _output_file = TF.Nil
+            , _computed_available_disk_categories = TF.Compute "available_disk_categories"
+            , _computed_available_instance_types = TF.Compute "available_instance_types"
+            , _computed_available_resource_creation = TF.Compute "available_resource_creation"
+            , _computed_id = TF.Compute "id"
+            , _computed_local_name = TF.Compute "local_name"
+            }

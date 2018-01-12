@@ -27,13 +27,15 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.TLS.Types       as TF
 
 {- | The @tls_cert_request@ TLS resource.
 
@@ -66,32 +68,31 @@ data CertRequestResource = CertRequestResource {
     {- ^ - The certificate request data in PEM format. -}
     } deriving (Show, Eq)
 
-certRequestResource :: TF.Resource TF.TLS CertRequestResource
-certRequestResource =
-    TF.newResource "tls_cert_request" $
-        CertRequestResource {
-            _dns_names = TF.Absent
-            , _ip_addresses = TF.Absent
-            , _key_algorithm = TF.Absent
-            , _private_key_pem = TF.Absent
-            , _subject = TF.Absent
-            , _computed_cert_request_pem = TF.Computed "cert_request_pem"
-            }
-
 instance TF.ToHCL CertRequestResource where
-    toHCL CertRequestResource{..} = TF.arguments
-        [ TF.assign "dns_names" <$> _dns_names
-        , TF.assign "ip_addresses" <$> _ip_addresses
-        , TF.assign "key_algorithm" <$> _key_algorithm
-        , TF.assign "private_key_pem" <$> _private_key_pem
-        , TF.assign "subject" <$> _subject
+    toHCL CertRequestResource{..} = TF.block $ catMaybes
+        [ TF.assign "dns_names" <$> TF.argument _dns_names
+        , TF.assign "ip_addresses" <$> TF.argument _ip_addresses
+        , TF.assign "key_algorithm" <$> TF.argument _key_algorithm
+        , TF.assign "private_key_pem" <$> TF.argument _private_key_pem
+        , TF.assign "subject" <$> TF.argument _subject
         ]
 
 $(TF.makeSchemaLenses
     ''CertRequestResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+certRequestResource :: TF.Resource TF.TLS CertRequestResource
+certRequestResource =
+    TF.newResource "tls_cert_request" $
+        CertRequestResource {
+            _dns_names = TF.Nil
+            , _ip_addresses = TF.Nil
+            , _key_algorithm = TF.Nil
+            , _private_key_pem = TF.Nil
+            , _subject = TF.Nil
+            , _computed_cert_request_pem = TF.Compute "cert_request_pem"
+            }
 
 {- | The @tls_locally_signed_cert@ TLS resource.
 
@@ -126,40 +127,39 @@ data LocallySignedCertResource = LocallySignedCertResource {
     {- ^ - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
     } deriving (Show, Eq)
 
-locallySignedCertResource :: TF.Resource TF.TLS LocallySignedCertResource
-locallySignedCertResource =
-    TF.newResource "tls_locally_signed_cert" $
-        LocallySignedCertResource {
-            _allowed_uses = TF.Absent
-            , _ca_cert_pem = TF.Absent
-            , _ca_key_algorithm = TF.Absent
-            , _ca_private_key_pem = TF.Absent
-            , _cert_request_pem = TF.Absent
-            , _early_renewal_hours = TF.Absent
-            , _is_ca_certificate = TF.Absent
-            , _validity_period_hours = TF.Absent
-            , _computed_cert_pem = TF.Computed "cert_pem"
-            , _computed_validity_end_time = TF.Computed "validity_end_time"
-            , _computed_validity_start_time = TF.Computed "validity_start_time"
-            }
-
 instance TF.ToHCL LocallySignedCertResource where
-    toHCL LocallySignedCertResource{..} = TF.arguments
-        [ TF.assign "allowed_uses" <$> _allowed_uses
-        , TF.assign "ca_cert_pem" <$> _ca_cert_pem
-        , TF.assign "ca_key_algorithm" <$> _ca_key_algorithm
-        , TF.assign "ca_private_key_pem" <$> _ca_private_key_pem
-        , TF.assign "cert_request_pem" <$> _cert_request_pem
-        , TF.assign "early_renewal_hours" <$> _early_renewal_hours
-        , TF.assign "is_ca_certificate" <$> _is_ca_certificate
-        , TF.assign "validity_period_hours" <$> _validity_period_hours
+    toHCL LocallySignedCertResource{..} = TF.block $ catMaybes
+        [ TF.assign "allowed_uses" <$> TF.argument _allowed_uses
+        , TF.assign "ca_cert_pem" <$> TF.argument _ca_cert_pem
+        , TF.assign "ca_key_algorithm" <$> TF.argument _ca_key_algorithm
+        , TF.assign "ca_private_key_pem" <$> TF.argument _ca_private_key_pem
+        , TF.assign "cert_request_pem" <$> TF.argument _cert_request_pem
+        , TF.assign "early_renewal_hours" <$> TF.argument _early_renewal_hours
+        , TF.assign "is_ca_certificate" <$> TF.argument _is_ca_certificate
+        , TF.assign "validity_period_hours" <$> TF.argument _validity_period_hours
         ]
 
 $(TF.makeSchemaLenses
     ''LocallySignedCertResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+locallySignedCertResource :: TF.Resource TF.TLS LocallySignedCertResource
+locallySignedCertResource =
+    TF.newResource "tls_locally_signed_cert" $
+        LocallySignedCertResource {
+            _allowed_uses = TF.Nil
+            , _ca_cert_pem = TF.Nil
+            , _ca_key_algorithm = TF.Nil
+            , _ca_private_key_pem = TF.Nil
+            , _cert_request_pem = TF.Nil
+            , _early_renewal_hours = TF.Nil
+            , _is_ca_certificate = TF.Nil
+            , _validity_period_hours = TF.Nil
+            , _computed_cert_pem = TF.Compute "cert_pem"
+            , _computed_validity_end_time = TF.Compute "validity_end_time"
+            , _computed_validity_start_time = TF.Compute "validity_start_time"
+            }
 
 {- | The @tls_private_key@ TLS resource.
 
@@ -190,31 +190,30 @@ data PrivateKeyResource = PrivateKeyResource {
     {- ^ - The public key data in PEM format. -}
     } deriving (Show, Eq)
 
-privateKeyResource :: TF.Resource TF.TLS PrivateKeyResource
-privateKeyResource =
-    TF.newResource "tls_private_key" $
-        PrivateKeyResource {
-            _algorithm = TF.Absent
-            , _ecdsa_curve = TF.Absent
-            , _rsa_bits = TF.Absent
-            , _computed_algorithm = TF.Computed "algorithm"
-            , _computed_private_key_pem = TF.Computed "private_key_pem"
-            , _computed_public_key_openssh = TF.Computed "public_key_openssh"
-            , _computed_public_key_pem = TF.Computed "public_key_pem"
-            }
-
 instance TF.ToHCL PrivateKeyResource where
-    toHCL PrivateKeyResource{..} = TF.arguments
-        [ TF.assign "algorithm" <$> _algorithm
-        , TF.assign "ecdsa_curve" <$> _ecdsa_curve
-        , TF.assign "rsa_bits" <$> _rsa_bits
+    toHCL PrivateKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "algorithm" <$> TF.argument _algorithm
+        , TF.assign "ecdsa_curve" <$> TF.argument _ecdsa_curve
+        , TF.assign "rsa_bits" <$> TF.argument _rsa_bits
         ]
 
 $(TF.makeSchemaLenses
     ''PrivateKeyResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+privateKeyResource :: TF.Resource TF.TLS PrivateKeyResource
+privateKeyResource =
+    TF.newResource "tls_private_key" $
+        PrivateKeyResource {
+            _algorithm = TF.Nil
+            , _ecdsa_curve = TF.Nil
+            , _rsa_bits = TF.Nil
+            , _computed_algorithm = TF.Compute "algorithm"
+            , _computed_private_key_pem = TF.Compute "private_key_pem"
+            , _computed_public_key_openssh = TF.Compute "public_key_openssh"
+            , _computed_public_key_pem = TF.Compute "public_key_pem"
+            }
 
 {- | The @tls_self_signed_cert@ TLS resource.
 
@@ -255,39 +254,38 @@ data SelfSignedCertResource = SelfSignedCertResource {
     {- ^ - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
     } deriving (Show, Eq)
 
-selfSignedCertResource :: TF.Resource TF.TLS SelfSignedCertResource
-selfSignedCertResource =
-    TF.newResource "tls_self_signed_cert" $
-        SelfSignedCertResource {
-            _allowed_uses = TF.Absent
-            , _dns_names = TF.Absent
-            , _early_renewal_hours = TF.Absent
-            , _ip_addresses = TF.Absent
-            , _is_ca_certificate = TF.Absent
-            , _key_algorithm = TF.Absent
-            , _private_key_pem = TF.Absent
-            , _subject = TF.Absent
-            , _validity_period_hours = TF.Absent
-            , _computed_cert_pem = TF.Computed "cert_pem"
-            , _computed_validity_end_time = TF.Computed "validity_end_time"
-            , _computed_validity_start_time = TF.Computed "validity_start_time"
-            }
-
 instance TF.ToHCL SelfSignedCertResource where
-    toHCL SelfSignedCertResource{..} = TF.arguments
-        [ TF.assign "allowed_uses" <$> _allowed_uses
-        , TF.assign "dns_names" <$> _dns_names
-        , TF.assign "early_renewal_hours" <$> _early_renewal_hours
-        , TF.assign "ip_addresses" <$> _ip_addresses
-        , TF.assign "is_ca_certificate" <$> _is_ca_certificate
-        , TF.assign "key_algorithm" <$> _key_algorithm
-        , TF.assign "private_key_pem" <$> _private_key_pem
-        , TF.assign "subject" <$> _subject
-        , TF.assign "validity_period_hours" <$> _validity_period_hours
+    toHCL SelfSignedCertResource{..} = TF.block $ catMaybes
+        [ TF.assign "allowed_uses" <$> TF.argument _allowed_uses
+        , TF.assign "dns_names" <$> TF.argument _dns_names
+        , TF.assign "early_renewal_hours" <$> TF.argument _early_renewal_hours
+        , TF.assign "ip_addresses" <$> TF.argument _ip_addresses
+        , TF.assign "is_ca_certificate" <$> TF.argument _is_ca_certificate
+        , TF.assign "key_algorithm" <$> TF.argument _key_algorithm
+        , TF.assign "private_key_pem" <$> TF.argument _private_key_pem
+        , TF.assign "subject" <$> TF.argument _subject
+        , TF.assign "validity_period_hours" <$> TF.argument _validity_period_hours
         ]
 
 $(TF.makeSchemaLenses
     ''SelfSignedCertResource
     ''TF.Provider
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+selfSignedCertResource :: TF.Resource TF.TLS SelfSignedCertResource
+selfSignedCertResource =
+    TF.newResource "tls_self_signed_cert" $
+        SelfSignedCertResource {
+            _allowed_uses = TF.Nil
+            , _dns_names = TF.Nil
+            , _early_renewal_hours = TF.Nil
+            , _ip_addresses = TF.Nil
+            , _is_ca_certificate = TF.Nil
+            , _key_algorithm = TF.Nil
+            , _private_key_pem = TF.Nil
+            , _subject = TF.Nil
+            , _validity_period_hours = TF.Nil
+            , _computed_cert_pem = TF.Compute "cert_pem"
+            , _computed_validity_end_time = TF.Compute "validity_end_time"
+            , _computed_validity_start_time = TF.Compute "validity_start_time"
+            }

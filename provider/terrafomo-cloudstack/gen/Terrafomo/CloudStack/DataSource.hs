@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.CloudStack        as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.CloudStack.Provider as TF
+import qualified Terrafomo.CloudStack.Types    as TF
+import qualified Terrafomo.Syntax.DataSource   as TF
+import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.TH                  as TF
 
 {- | The @cloudstack_template@ CloudStack datasource.
 
@@ -65,31 +67,30 @@ data TemplateDataSource = TemplateDataSource {
     {- ^ - The tags associated with this template. -}
     } deriving (Show, Eq)
 
-templateDataSource :: TF.DataSource TF.CloudStack TemplateDataSource
-templateDataSource =
-    TF.newDataSource "cloudstack_template" $
-        TemplateDataSource {
-            _filter = TF.Absent
-            , _template_filter = TF.Absent
-            , _computed_account = TF.Computed "account"
-            , _computed_created = TF.Computed "created"
-            , _computed_display_text = TF.Computed "display_text"
-            , _computed_format = TF.Computed "format"
-            , _computed_hypervisor = TF.Computed "hypervisor"
-            , _computed_id = TF.Computed "id"
-            , _computed_name = TF.Computed "name"
-            , _computed_size = TF.Computed "size"
-            , _computed_tags = TF.Computed "tags"
-            }
-
 instance TF.ToHCL TemplateDataSource where
-    toHCL TemplateDataSource{..} = TF.arguments
-        [ TF.assign "filter" <$> _filter
-        , TF.assign "template_filter" <$> _template_filter
+    toHCL TemplateDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "filter" <$> TF.argument _filter
+        , TF.assign "template_filter" <$> TF.argument _template_filter
         ]
 
 $(TF.makeSchemaLenses
     ''TemplateDataSource
     ''TF.CloudStack
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+templateDataSource :: TF.DataSource TF.CloudStack TemplateDataSource
+templateDataSource =
+    TF.newDataSource "cloudstack_template" $
+        TemplateDataSource {
+            _filter = TF.Nil
+            , _template_filter = TF.Nil
+            , _computed_account = TF.Compute "account"
+            , _computed_created = TF.Compute "created"
+            , _computed_display_text = TF.Compute "display_text"
+            , _computed_format = TF.Compute "format"
+            , _computed_hypervisor = TF.Compute "hypervisor"
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_size = TF.Compute "size"
+            , _computed_tags = TF.Compute "tags"
+            }

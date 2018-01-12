@@ -1,4 +1,4 @@
 name: SoftLayer
 package: terrafomo-softlayer
 datatype: true
-
+original: softlayer

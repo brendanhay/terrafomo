@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Chef            as TF
+import qualified Terrafomo.Chef.Provider   as TF
+import qualified Terrafomo.Chef.Types      as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -52,26 +54,25 @@ data DataBagItemResource = DataBagItemResource {
     {- ^ - The value of the "id" property in the @content_json@ JSON object, which can be used by clients to retrieve this item's content. -}
     } deriving (Show, Eq)
 
-dataBagItemResource :: TF.Resource TF.Chef DataBagItemResource
-dataBagItemResource =
-    TF.newResource "chef_data_bag_item" $
-        DataBagItemResource {
-            _content_json = TF.Absent
-            , _data_bag_name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DataBagItemResource where
-    toHCL DataBagItemResource{..} = TF.arguments
-        [ TF.assign "content_json" <$> _content_json
-        , TF.assign "data_bag_name" <$> _data_bag_name
+    toHCL DataBagItemResource{..} = TF.block $ catMaybes
+        [ TF.assign "content_json" <$> TF.argument _content_json
+        , TF.assign "data_bag_name" <$> TF.argument _data_bag_name
         ]
 
 $(TF.makeSchemaLenses
     ''DataBagItemResource
     ''TF.Chef
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dataBagItemResource :: TF.Resource TF.Chef DataBagItemResource
+dataBagItemResource =
+    TF.newResource "chef_data_bag_item" $
+        DataBagItemResource {
+            _content_json = TF.Nil
+            , _data_bag_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @chef_data_bag@ Chef resource.
 
@@ -88,24 +89,23 @@ data DataBagResource = DataBagResource {
     {- ^ - The URI representing this data bag in the Chef server API. -}
     } deriving (Show, Eq)
 
-dataBagResource :: TF.Resource TF.Chef DataBagResource
-dataBagResource =
-    TF.newResource "chef_data_bag" $
-        DataBagResource {
-            _name = TF.Absent
-            , _computed_api_uri = TF.Computed "api_uri"
-            }
-
 instance TF.ToHCL DataBagResource where
-    toHCL DataBagResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
+    toHCL DataBagResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DataBagResource
     ''TF.Chef
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+dataBagResource :: TF.Resource TF.Chef DataBagResource
+dataBagResource =
+    TF.newResource "chef_data_bag" $
+        DataBagResource {
+            _name = TF.Nil
+            , _computed_api_uri = TF.Compute "api_uri"
+            }
 
 {- | The @chef_environment@ Chef resource.
 
@@ -126,31 +126,30 @@ data EnvironmentResource = EnvironmentResource {
     {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
     } deriving (Show, Eq)
 
-environmentResource :: TF.Resource TF.Chef EnvironmentResource
-environmentResource =
-    TF.newResource "chef_environment" $
-        EnvironmentResource {
-            _cookbook_constraints = TF.Absent
-            , _default_attributes_json = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _override_attributes_json = TF.Absent
-            }
-
 instance TF.ToHCL EnvironmentResource where
-    toHCL EnvironmentResource{..} = TF.arguments
-        [ TF.assign "cookbook_constraints" <$> _cookbook_constraints
-        , TF.assign "default_attributes_json" <$> _default_attributes_json
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "override_attributes_json" <$> _override_attributes_json
+    toHCL EnvironmentResource{..} = TF.block $ catMaybes
+        [ TF.assign "cookbook_constraints" <$> TF.argument _cookbook_constraints
+        , TF.assign "default_attributes_json" <$> TF.argument _default_attributes_json
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "override_attributes_json" <$> TF.argument _override_attributes_json
         ]
 
 $(TF.makeSchemaLenses
     ''EnvironmentResource
     ''TF.Chef
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+environmentResource :: TF.Resource TF.Chef EnvironmentResource
+environmentResource =
+    TF.newResource "chef_environment" $
+        EnvironmentResource {
+            _cookbook_constraints = TF.Nil
+            , _default_attributes_json = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _override_attributes_json = TF.Nil
+            }
 
 {- | The @chef_node@ Chef resource.
 
@@ -178,35 +177,34 @@ data NodeResource = NodeResource {
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
     } deriving (Show, Eq)
 
-nodeResource :: TF.Resource TF.Chef NodeResource
-nodeResource =
-    TF.newResource "chef_node" $
-        NodeResource {
-            _automatic_attributes_json = TF.Absent
-            , _default_attributes_json = TF.Absent
-            , _environment_name = TF.Absent
-            , _name = TF.Absent
-            , _normal_attributes_json = TF.Absent
-            , _override_attributes_json = TF.Absent
-            , _run_list = TF.Absent
-            }
-
 instance TF.ToHCL NodeResource where
-    toHCL NodeResource{..} = TF.arguments
-        [ TF.assign "automatic_attributes_json" <$> _automatic_attributes_json
-        , TF.assign "default_attributes_json" <$> _default_attributes_json
-        , TF.assign "environment_name" <$> _environment_name
-        , TF.assign "name" <$> _name
-        , TF.assign "normal_attributes_json" <$> _normal_attributes_json
-        , TF.assign "override_attributes_json" <$> _override_attributes_json
-        , TF.assign "run_list" <$> _run_list
+    toHCL NodeResource{..} = TF.block $ catMaybes
+        [ TF.assign "automatic_attributes_json" <$> TF.argument _automatic_attributes_json
+        , TF.assign "default_attributes_json" <$> TF.argument _default_attributes_json
+        , TF.assign "environment_name" <$> TF.argument _environment_name
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "normal_attributes_json" <$> TF.argument _normal_attributes_json
+        , TF.assign "override_attributes_json" <$> TF.argument _override_attributes_json
+        , TF.assign "run_list" <$> TF.argument _run_list
         ]
 
 $(TF.makeSchemaLenses
     ''NodeResource
     ''TF.Chef
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+nodeResource :: TF.Resource TF.Chef NodeResource
+nodeResource =
+    TF.newResource "chef_node" $
+        NodeResource {
+            _automatic_attributes_json = TF.Nil
+            , _default_attributes_json = TF.Nil
+            , _environment_name = TF.Nil
+            , _name = TF.Nil
+            , _normal_attributes_json = TF.Nil
+            , _override_attributes_json = TF.Nil
+            , _run_list = TF.Nil
+            }
 
 {- | The @chef_role@ Chef resource.
 
@@ -226,28 +224,27 @@ data RoleResource = RoleResource {
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
     } deriving (Show, Eq)
 
-roleResource :: TF.Resource TF.Chef RoleResource
-roleResource =
-    TF.newResource "chef_role" $
-        RoleResource {
-            _default_attributes_json = TF.Absent
-            , _description = TF.Absent
-            , _name = TF.Absent
-            , _override_attributes_json = TF.Absent
-            , _run_list = TF.Absent
-            }
-
 instance TF.ToHCL RoleResource where
-    toHCL RoleResource{..} = TF.arguments
-        [ TF.assign "default_attributes_json" <$> _default_attributes_json
-        , TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "override_attributes_json" <$> _override_attributes_json
-        , TF.assign "run_list" <$> _run_list
+    toHCL RoleResource{..} = TF.block $ catMaybes
+        [ TF.assign "default_attributes_json" <$> TF.argument _default_attributes_json
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "override_attributes_json" <$> TF.argument _override_attributes_json
+        , TF.assign "run_list" <$> TF.argument _run_list
         ]
 
 $(TF.makeSchemaLenses
     ''RoleResource
     ''TF.Chef
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+roleResource :: TF.Resource TF.Chef RoleResource
+roleResource =
+    TF.newResource "chef_role" $
+        RoleResource {
+            _default_attributes_json = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _override_attributes_json = TF.Nil
+            , _run_list = TF.Nil
+            }

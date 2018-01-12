@@ -1,4 +1,4 @@
 name: OpsGenie
 package: terrafomo-opsgenie
 datatype: true
-
+original: opsgenie

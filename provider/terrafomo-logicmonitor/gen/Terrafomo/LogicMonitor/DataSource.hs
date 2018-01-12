@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.LogicMonitor      as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.LogicMonitor.Provider as TF
+import qualified Terrafomo.LogicMonitor.Types    as TF
+import qualified Terrafomo.Syntax.DataSource     as TF
+import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.TH                    as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
@@ -51,29 +53,28 @@ data CollectorsDataSource = CollectorsDataSource {
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-collectorsDataSource :: TF.DataSource TF.LogicMonitor CollectorsDataSource
-collectorsDataSource =
-    TF.newDataSource "logicmonitor_collectors" $
-        CollectorsDataSource {
-            _filters = TF.Absent
-            , _most_recent = TF.Absent
-            , _offset = TF.Absent
-            , _size = TF.Absent
-            }
-
 instance TF.ToHCL CollectorsDataSource where
-    toHCL CollectorsDataSource{..} = TF.arguments
-        [ TF.assign "filters" <$> _filters
-        , TF.assign "most_recent" <$> _most_recent
-        , TF.assign "offset" <$> _offset
-        , TF.assign "size" <$> _size
+    toHCL CollectorsDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "filters" <$> TF.argument _filters
+        , TF.assign "most_recent" <$> TF.argument _most_recent
+        , TF.assign "offset" <$> TF.argument _offset
+        , TF.assign "size" <$> TF.argument _size
         ]
 
 $(TF.makeSchemaLenses
     ''CollectorsDataSource
     ''TF.LogicMonitor
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+collectorsDataSource :: TF.DataSource TF.LogicMonitor CollectorsDataSource
+collectorsDataSource =
+    TF.newDataSource "logicmonitor_collectors" $
+        CollectorsDataSource {
+            _filters = TF.Nil
+            , _most_recent = TF.Nil
+            , _offset = TF.Nil
+            , _size = TF.Nil
+            }
 
 {- | The @logicmonitor_device_group@ LogicMonitor datasource.
 
@@ -88,24 +89,23 @@ data DeviceGroupDataSource = DeviceGroupDataSource {
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-deviceGroupDataSource :: TF.DataSource TF.LogicMonitor DeviceGroupDataSource
-deviceGroupDataSource =
-    TF.newDataSource "logicmonitor_device_group" $
-        DeviceGroupDataSource {
-            _filters = TF.Absent
-            , _offset = TF.Absent
-            , _size = TF.Absent
-            }
-
 instance TF.ToHCL DeviceGroupDataSource where
-    toHCL DeviceGroupDataSource{..} = TF.arguments
-        [ TF.assign "filters" <$> _filters
-        , TF.assign "offset" <$> _offset
-        , TF.assign "size" <$> _size
+    toHCL DeviceGroupDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "filters" <$> TF.argument _filters
+        , TF.assign "offset" <$> TF.argument _offset
+        , TF.assign "size" <$> TF.argument _size
         ]
 
 $(TF.makeSchemaLenses
     ''DeviceGroupDataSource
     ''TF.LogicMonitor
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+deviceGroupDataSource :: TF.DataSource TF.LogicMonitor DeviceGroupDataSource
+deviceGroupDataSource =
+    TF.newDataSource "logicmonitor_device_group" $
+        DeviceGroupDataSource {
+            _filters = TF.Nil
+            , _offset = TF.Nil
+            , _size = TF.Nil
+            }

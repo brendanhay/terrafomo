@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
-import qualified Terrafomo.Triton          as TF
+import qualified Terrafomo.Triton.Provider as TF
+import qualified Terrafomo.Triton.Types    as TF
 
 {- | The @triton_fabric@ Triton resource.
 
@@ -88,53 +90,52 @@ data FabricResource = FabricResource {
     {- ^ - (Int) - VLAN id the network is on. Number between 0-4095 indicating VLAN ID. -}
     } deriving (Show, Eq)
 
-fabricResource :: TF.Resource TF.Triton FabricResource
-fabricResource =
-    TF.newResource "triton_fabric" $
-        FabricResource {
-            _description = TF.Absent
-            , _gateway = TF.Absent
-            , _internet_nat = TF.Absent
-            , _name = TF.Absent
-            , _provision_end_ip = TF.Absent
-            , _provision_start_ip = TF.Absent
-            , _resolvers = TF.Absent
-            , _routes = TF.Absent
-            , _subnet = TF.Absent
-            , _vlan_id = TF.Absent
-            , _computed_description = TF.Computed "description"
-            , _computed_fabric = TF.Computed "fabric"
-            , _computed_gateway = TF.Computed "gateway"
-            , _computed_internet_nat = TF.Computed "internet_nat"
-            , _computed_name = TF.Computed "name"
-            , _computed_provision_end_ip = TF.Computed "provision_end_ip"
-            , _computed_provision_start_ip = TF.Computed "provision_start_ip"
-            , _computed_public = TF.Computed "public"
-            , _computed_resolvers = TF.Computed "resolvers"
-            , _computed_routes = TF.Computed "routes"
-            , _computed_subnet = TF.Computed "subnet"
-            , _computed_vlan_id = TF.Computed "vlan_id"
-            }
-
 instance TF.ToHCL FabricResource where
-    toHCL FabricResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "gateway" <$> _gateway
-        , TF.assign "internet_nat" <$> _internet_nat
-        , TF.assign "name" <$> _name
-        , TF.assign "provision_end_ip" <$> _provision_end_ip
-        , TF.assign "provision_start_ip" <$> _provision_start_ip
-        , TF.assign "resolvers" <$> _resolvers
-        , TF.assign "routes" <$> _routes
-        , TF.assign "subnet" <$> _subnet
-        , TF.assign "vlan_id" <$> _vlan_id
+    toHCL FabricResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "gateway" <$> TF.argument _gateway
+        , TF.assign "internet_nat" <$> TF.argument _internet_nat
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "provision_end_ip" <$> TF.argument _provision_end_ip
+        , TF.assign "provision_start_ip" <$> TF.argument _provision_start_ip
+        , TF.assign "resolvers" <$> TF.argument _resolvers
+        , TF.assign "routes" <$> TF.argument _routes
+        , TF.assign "subnet" <$> TF.argument _subnet
+        , TF.assign "vlan_id" <$> TF.argument _vlan_id
         ]
 
 $(TF.makeSchemaLenses
     ''FabricResource
     ''TF.Triton
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+fabricResource :: TF.Resource TF.Triton FabricResource
+fabricResource =
+    TF.newResource "triton_fabric" $
+        FabricResource {
+            _description = TF.Nil
+            , _gateway = TF.Nil
+            , _internet_nat = TF.Nil
+            , _name = TF.Nil
+            , _provision_end_ip = TF.Nil
+            , _provision_start_ip = TF.Nil
+            , _resolvers = TF.Nil
+            , _routes = TF.Nil
+            , _subnet = TF.Nil
+            , _vlan_id = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_fabric = TF.Compute "fabric"
+            , _computed_gateway = TF.Compute "gateway"
+            , _computed_internet_nat = TF.Compute "internet_nat"
+            , _computed_name = TF.Compute "name"
+            , _computed_provision_end_ip = TF.Compute "provision_end_ip"
+            , _computed_provision_start_ip = TF.Compute "provision_start_ip"
+            , _computed_public = TF.Compute "public"
+            , _computed_resolvers = TF.Compute "resolvers"
+            , _computed_routes = TF.Compute "routes"
+            , _computed_subnet = TF.Compute "subnet"
+            , _computed_vlan_id = TF.Compute "vlan_id"
+            }
 
 {- | The @triton_firewall_rule@ Triton resource.
 
@@ -150,26 +151,25 @@ data FirewallRuleResource = FirewallRuleResource {
     {- ^ - (string) - The identifier representing the firewall rule in Triton. -}
     } deriving (Show, Eq)
 
-firewallRuleResource :: TF.Resource TF.Triton FirewallRuleResource
-firewallRuleResource =
-    TF.newResource "triton_firewall_rule" $
-        FirewallRuleResource {
-            _enabled = TF.Absent
-            , _rule = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL FirewallRuleResource where
-    toHCL FirewallRuleResource{..} = TF.arguments
-        [ TF.assign "enabled" <$> _enabled
-        , TF.assign "rule" <$> _rule
+    toHCL FirewallRuleResource{..} = TF.block $ catMaybes
+        [ TF.assign "enabled" <$> TF.argument _enabled
+        , TF.assign "rule" <$> TF.argument _rule
         ]
 
 $(TF.makeSchemaLenses
     ''FirewallRuleResource
     ''TF.Triton
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+firewallRuleResource :: TF.Resource TF.Triton FirewallRuleResource
+firewallRuleResource =
+    TF.newResource "triton_firewall_rule" $
+        FirewallRuleResource {
+            _enabled = TF.Nil
+            , _rule = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @triton_key@ Triton resource.
 
@@ -182,25 +182,24 @@ data KeyResource = KeyResource {
     {- ^ - (string, Change forces new resource) The name of the key. If this is left empty, the name is inferred from the comment in the SSH key material. -}
     } deriving (Show, Eq)
 
-keyResource :: TF.Resource TF.Triton KeyResource
-keyResource =
-    TF.newResource "triton_key" $
-        KeyResource {
-            _key = TF.Absent
-            , _name = TF.Absent
-            }
-
 instance TF.ToHCL KeyResource where
-    toHCL KeyResource{..} = TF.arguments
-        [ TF.assign "key" <$> _key
-        , TF.assign "name" <$> _name
+    toHCL KeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "key" <$> TF.argument _key
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''KeyResource
     ''TF.Triton
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+keyResource :: TF.Resource TF.Triton KeyResource
+keyResource =
+    TF.newResource "triton_key" $
+        KeyResource {
+            _key = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @triton_machine@ Triton resource.
 
@@ -276,68 +275,67 @@ data MachineResource = MachineResource {
     {- ^ - (string) - The time at which the machine was last updated. -}
     } deriving (Show, Eq)
 
-machineResource :: TF.Resource TF.Triton MachineResource
-machineResource =
-    TF.newResource "triton_machine" $
-        MachineResource {
-            _administrator_pw = TF.Absent
-            , _affinity = TF.Absent
-            , _cloud_config = TF.Absent
-            , _cns = TF.Absent
-            , _firewall_enabled = TF.Absent
-            , _image = TF.Absent
-            , _locality = TF.Absent
-            , _metadata = TF.Absent
-            , _name = TF.Absent
-            , _networks = TF.Absent
-            , _package = TF.Absent
-            , _root_authorized_keys = TF.Absent
-            , _tags = TF.Absent
-            , _user_data = TF.Absent
-            , _user_script = TF.Absent
-            , _computed_created = TF.Computed "created"
-            , _computed_dataset = TF.Computed "dataset"
-            , _computed_disk = TF.Computed "disk"
-            , _computed_gateway = TF.Computed "gateway"
-            , _computed_id = TF.Computed "id"
-            , _computed_ip = TF.Computed "ip"
-            , _computed_ips = TF.Computed "ips"
-            , _computed_mac = TF.Computed "mac"
-            , _computed_memory = TF.Computed "memory"
-            , _computed_netmask = TF.Computed "netmask"
-            , _computed_network = TF.Computed "network"
-            , _computed_nic = TF.Computed "nic"
-            , _computed_primary = TF.Computed "primary"
-            , _computed_primaryip = TF.Computed "primaryip"
-            , _computed_state = TF.Computed "state"
-            , _computed_type' = TF.Computed "type"
-            , _computed_updated = TF.Computed "updated"
-            }
-
 instance TF.ToHCL MachineResource where
-    toHCL MachineResource{..} = TF.arguments
-        [ TF.assign "administrator_pw" <$> _administrator_pw
-        , TF.assign "affinity" <$> _affinity
-        , TF.assign "cloud_config" <$> _cloud_config
-        , TF.assign "cns" <$> _cns
-        , TF.assign "firewall_enabled" <$> _firewall_enabled
-        , TF.assign "image" <$> _image
-        , TF.assign "locality" <$> _locality
-        , TF.assign "metadata" <$> _metadata
-        , TF.assign "name" <$> _name
-        , TF.assign "networks" <$> _networks
-        , TF.assign "package" <$> _package
-        , TF.assign "root_authorized_keys" <$> _root_authorized_keys
-        , TF.assign "tags" <$> _tags
-        , TF.assign "user_data" <$> _user_data
-        , TF.assign "user_script" <$> _user_script
+    toHCL MachineResource{..} = TF.block $ catMaybes
+        [ TF.assign "administrator_pw" <$> TF.argument _administrator_pw
+        , TF.assign "affinity" <$> TF.argument _affinity
+        , TF.assign "cloud_config" <$> TF.argument _cloud_config
+        , TF.assign "cns" <$> TF.argument _cns
+        , TF.assign "firewall_enabled" <$> TF.argument _firewall_enabled
+        , TF.assign "image" <$> TF.argument _image
+        , TF.assign "locality" <$> TF.argument _locality
+        , TF.assign "metadata" <$> TF.argument _metadata
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "networks" <$> TF.argument _networks
+        , TF.assign "package" <$> TF.argument _package
+        , TF.assign "root_authorized_keys" <$> TF.argument _root_authorized_keys
+        , TF.assign "tags" <$> TF.argument _tags
+        , TF.assign "user_data" <$> TF.argument _user_data
+        , TF.assign "user_script" <$> TF.argument _user_script
         ]
 
 $(TF.makeSchemaLenses
     ''MachineResource
     ''TF.Triton
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+machineResource :: TF.Resource TF.Triton MachineResource
+machineResource =
+    TF.newResource "triton_machine" $
+        MachineResource {
+            _administrator_pw = TF.Nil
+            , _affinity = TF.Nil
+            , _cloud_config = TF.Nil
+            , _cns = TF.Nil
+            , _firewall_enabled = TF.Nil
+            , _image = TF.Nil
+            , _locality = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _networks = TF.Nil
+            , _package = TF.Nil
+            , _root_authorized_keys = TF.Nil
+            , _tags = TF.Nil
+            , _user_data = TF.Nil
+            , _user_script = TF.Nil
+            , _computed_created = TF.Compute "created"
+            , _computed_dataset = TF.Compute "dataset"
+            , _computed_disk = TF.Compute "disk"
+            , _computed_gateway = TF.Compute "gateway"
+            , _computed_id = TF.Compute "id"
+            , _computed_ip = TF.Compute "ip"
+            , _computed_ips = TF.Compute "ips"
+            , _computed_mac = TF.Compute "mac"
+            , _computed_memory = TF.Compute "memory"
+            , _computed_netmask = TF.Compute "netmask"
+            , _computed_network = TF.Compute "network"
+            , _computed_nic = TF.Compute "nic"
+            , _computed_primary = TF.Compute "primary"
+            , _computed_primaryip = TF.Compute "primaryip"
+            , _computed_state = TF.Compute "state"
+            , _computed_type' = TF.Compute "type"
+            , _computed_updated = TF.Compute "updated"
+            }
 
 {- | The @triton_snapshot@ Triton resource.
 
@@ -357,27 +355,26 @@ data SnapshotResource = SnapshotResource {
     {- ^ - (string) - The current state of the snapshot. -}
     } deriving (Show, Eq)
 
-snapshotResource :: TF.Resource TF.Triton SnapshotResource
-snapshotResource =
-    TF.newResource "triton_snapshot" $
-        SnapshotResource {
-            _machine_id = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            , _computed_state = TF.Computed "state"
-            }
-
 instance TF.ToHCL SnapshotResource where
-    toHCL SnapshotResource{..} = TF.arguments
-        [ TF.assign "machine_id" <$> _machine_id
-        , TF.assign "name" <$> _name
+    toHCL SnapshotResource{..} = TF.block $ catMaybes
+        [ TF.assign "machine_id" <$> TF.argument _machine_id
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''SnapshotResource
     ''TF.Triton
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+snapshotResource :: TF.Resource TF.Triton SnapshotResource
+snapshotResource =
+    TF.newResource "triton_snapshot" $
+        SnapshotResource {
+            _machine_id = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_state = TF.Compute "state"
+            }
 
 {- | The @triton_vlan@ Triton resource.
 
@@ -394,24 +391,23 @@ data VlanResource = VlanResource {
     {- ^ - (int, Required, Change forces new resource) Number between 0-4095 indicating VLAN ID -}
     } deriving (Show, Eq)
 
-vlanResource :: TF.Resource TF.Triton VlanResource
-vlanResource =
-    TF.newResource "triton_vlan" $
-        VlanResource {
-            _description = TF.Absent
-            , _name = TF.Absent
-            , _vlan_id = TF.Absent
-            }
-
 instance TF.ToHCL VlanResource where
-    toHCL VlanResource{..} = TF.arguments
-        [ TF.assign "description" <$> _description
-        , TF.assign "name" <$> _name
-        , TF.assign "vlan_id" <$> _vlan_id
+    toHCL VlanResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "vlan_id" <$> TF.argument _vlan_id
         ]
 
 $(TF.makeSchemaLenses
     ''VlanResource
     ''TF.Triton
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+vlanResource :: TF.Resource TF.Triton VlanResource
+vlanResource =
+    TF.newResource "triton_vlan" $
+        VlanResource {
+            _description = TF.Nil
+            , _name = TF.Nil
+            , _vlan_id = TF.Nil
+            }

@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.PostgreSQL      as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.PostgreSQL.Provider as TF
+import qualified Terrafomo.PostgreSQL.Types    as TF
+import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Resource     as TF
+import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.TH                  as TF
 
 {- | The @postgresql_database@ PostgreSQL resource.
 
@@ -65,41 +67,40 @@ data DatabaseResource = DatabaseResource {
     {- ^ (Optional) The name of the template database from which to create the database, or @DEFAULT@ to use the default template ( @template0@ ).  NOTE: the default in Terraform is @template0@ , not @template1@ .  Changing this value will force the creation of a new resource as this value can only be changed when a database is created. -}
     } deriving (Show, Eq)
 
-databaseResource :: TF.Resource TF.PostgreSQL DatabaseResource
-databaseResource =
-    TF.newResource "postgresql_database" $
-        DatabaseResource {
-            _allow_connections = TF.Absent
-            , _connection_limit = TF.Absent
-            , _encoding = TF.Absent
-            , _is_template = TF.Absent
-            , _lc_collate = TF.Absent
-            , _lc_ctype = TF.Absent
-            , _name = TF.Absent
-            , _owner = TF.Absent
-            , _tablespace_name = TF.Absent
-            , _template = TF.Absent
-            }
-
 instance TF.ToHCL DatabaseResource where
-    toHCL DatabaseResource{..} = TF.arguments
-        [ TF.assign "allow_connections" <$> _allow_connections
-        , TF.assign "connection_limit" <$> _connection_limit
-        , TF.assign "encoding" <$> _encoding
-        , TF.assign "is_template" <$> _is_template
-        , TF.assign "lc_collate" <$> _lc_collate
-        , TF.assign "lc_ctype" <$> _lc_ctype
-        , TF.assign "name" <$> _name
-        , TF.assign "owner" <$> _owner
-        , TF.assign "tablespace_name" <$> _tablespace_name
-        , TF.assign "template" <$> _template
+    toHCL DatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "allow_connections" <$> TF.argument _allow_connections
+        , TF.assign "connection_limit" <$> TF.argument _connection_limit
+        , TF.assign "encoding" <$> TF.argument _encoding
+        , TF.assign "is_template" <$> TF.argument _is_template
+        , TF.assign "lc_collate" <$> TF.argument _lc_collate
+        , TF.assign "lc_ctype" <$> TF.argument _lc_ctype
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "tablespace_name" <$> TF.argument _tablespace_name
+        , TF.assign "template" <$> TF.argument _template
         ]
 
 $(TF.makeSchemaLenses
     ''DatabaseResource
     ''TF.PostgreSQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+databaseResource :: TF.Resource TF.PostgreSQL DatabaseResource
+databaseResource =
+    TF.newResource "postgresql_database" $
+        DatabaseResource {
+            _allow_connections = TF.Nil
+            , _connection_limit = TF.Nil
+            , _encoding = TF.Nil
+            , _is_template = TF.Nil
+            , _lc_collate = TF.Nil
+            , _lc_ctype = TF.Nil
+            , _name = TF.Nil
+            , _owner = TF.Nil
+            , _tablespace_name = TF.Nil
+            , _template = TF.Nil
+            }
 
 {- | The @postgresql_extension@ PostgreSQL resource.
 
@@ -115,27 +116,26 @@ data ExtensionResource = ExtensionResource {
     {- ^ (Optional) Sets the version number of the extension. -}
     } deriving (Show, Eq)
 
-extensionResource :: TF.Resource TF.PostgreSQL ExtensionResource
-extensionResource =
-    TF.newResource "postgresql_extension" $
-        ExtensionResource {
-            _name = TF.Absent
-            , _schema = TF.Absent
-            , _version = TF.Absent
-            }
-
 instance TF.ToHCL ExtensionResource where
-    toHCL ExtensionResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "schema" <$> _schema
-        , TF.assign "version" <$> _version
+    toHCL ExtensionResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "schema" <$> TF.argument _schema
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''ExtensionResource
     ''TF.PostgreSQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+extensionResource :: TF.Resource TF.PostgreSQL ExtensionResource
+extensionResource =
+    TF.newResource "postgresql_extension" $
+        ExtensionResource {
+            _name = TF.Nil
+            , _schema = TF.Nil
+            , _version = TF.Nil
+            }
 
 {- | The @postgresql_role@ PostgreSQL resource.
 
@@ -183,49 +183,48 @@ data RoleResource = RoleResource {
     {- ^ (Optional) Defines the date and time after which the role's password is no longer valid.  Established connections past this @valid_time@ will have to be manually terminated.  This value corresponds to a PostgreSQL datetime. If omitted or the magic value @NULL@ is used, @valid_until@ will be set to @infinity@ .  Default is @NULL@ , therefore @infinity@ . -}
     } deriving (Show, Eq)
 
-roleResource :: TF.Resource TF.PostgreSQL RoleResource
-roleResource =
-    TF.newResource "postgresql_role" $
-        RoleResource {
-            _bypass_row_level_security = TF.Absent
-            , _connection_limit = TF.Absent
-            , _create_database = TF.Absent
-            , _create_role = TF.Absent
-            , _encrypted_password = TF.Absent
-            , _inherit = TF.Absent
-            , _login = TF.Absent
-            , _name = TF.Absent
-            , _password = TF.Absent
-            , _replication = TF.Absent
-            , _skip_drop_role = TF.Absent
-            , _skip_reassign_owned = TF.Absent
-            , _superuser = TF.Absent
-            , _valid_until = TF.Absent
-            }
-
 instance TF.ToHCL RoleResource where
-    toHCL RoleResource{..} = TF.arguments
-        [ TF.assign "bypass_row_level_security" <$> _bypass_row_level_security
-        , TF.assign "connection_limit" <$> _connection_limit
-        , TF.assign "create_database" <$> _create_database
-        , TF.assign "create_role" <$> _create_role
-        , TF.assign "encrypted_password" <$> _encrypted_password
-        , TF.assign "inherit" <$> _inherit
-        , TF.assign "login" <$> _login
-        , TF.assign "name" <$> _name
-        , TF.assign "password" <$> _password
-        , TF.assign "replication" <$> _replication
-        , TF.assign "skip_drop_role" <$> _skip_drop_role
-        , TF.assign "skip_reassign_owned" <$> _skip_reassign_owned
-        , TF.assign "superuser" <$> _superuser
-        , TF.assign "valid_until" <$> _valid_until
+    toHCL RoleResource{..} = TF.block $ catMaybes
+        [ TF.assign "bypass_row_level_security" <$> TF.argument _bypass_row_level_security
+        , TF.assign "connection_limit" <$> TF.argument _connection_limit
+        , TF.assign "create_database" <$> TF.argument _create_database
+        , TF.assign "create_role" <$> TF.argument _create_role
+        , TF.assign "encrypted_password" <$> TF.argument _encrypted_password
+        , TF.assign "inherit" <$> TF.argument _inherit
+        , TF.assign "login" <$> TF.argument _login
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "replication" <$> TF.argument _replication
+        , TF.assign "skip_drop_role" <$> TF.argument _skip_drop_role
+        , TF.assign "skip_reassign_owned" <$> TF.argument _skip_reassign_owned
+        , TF.assign "superuser" <$> TF.argument _superuser
+        , TF.assign "valid_until" <$> TF.argument _valid_until
         ]
 
 $(TF.makeSchemaLenses
     ''RoleResource
     ''TF.PostgreSQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+roleResource :: TF.Resource TF.PostgreSQL RoleResource
+roleResource =
+    TF.newResource "postgresql_role" $
+        RoleResource {
+            _bypass_row_level_security = TF.Nil
+            , _connection_limit = TF.Nil
+            , _create_database = TF.Nil
+            , _create_role = TF.Nil
+            , _encrypted_password = TF.Nil
+            , _inherit = TF.Nil
+            , _login = TF.Nil
+            , _name = TF.Nil
+            , _password = TF.Nil
+            , _replication = TF.Nil
+            , _skip_drop_role = TF.Nil
+            , _skip_reassign_owned = TF.Nil
+            , _superuser = TF.Nil
+            , _valid_until = TF.Nil
+            }
 
 {- | The @postgresql_schema@ PostgreSQL resource.
 
@@ -244,26 +243,25 @@ data SchemaResource = SchemaResource {
     {- ^ (Optional) Can be specified multiple times for each policy.  Each policy block supports fields documented below. -}
     } deriving (Show, Eq)
 
-schemaResource :: TF.Resource TF.PostgreSQL SchemaResource
-schemaResource =
-    TF.newResource "postgresql_schema" $
-        SchemaResource {
-            _if_not_exists = TF.Absent
-            , _name = TF.Absent
-            , _owner = TF.Absent
-            , _policy = TF.Absent
-            }
-
 instance TF.ToHCL SchemaResource where
-    toHCL SchemaResource{..} = TF.arguments
-        [ TF.assign "if_not_exists" <$> _if_not_exists
-        , TF.assign "name" <$> _name
-        , TF.assign "owner" <$> _owner
-        , TF.assign "policy" <$> _policy
+    toHCL SchemaResource{..} = TF.block $ catMaybes
+        [ TF.assign "if_not_exists" <$> TF.argument _if_not_exists
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "owner" <$> TF.argument _owner
+        , TF.assign "policy" <$> TF.argument _policy
         ]
 
 $(TF.makeSchemaLenses
     ''SchemaResource
     ''TF.PostgreSQL
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+schemaResource :: TF.Resource TF.PostgreSQL SchemaResource
+schemaResource =
+    TF.newResource "postgresql_schema" $
+        SchemaResource {
+            _if_not_exists = TF.Nil
+            , _name = TF.Nil
+            , _owner = TF.Nil
+            , _policy = TF.Nil
+            }

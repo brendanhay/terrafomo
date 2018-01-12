@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.Dyn             as TF
+import qualified Terrafomo.Dyn.Provider    as TF
+import qualified Terrafomo.Dyn.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
@@ -57,30 +59,29 @@ data RecordResource = RecordResource {
     {- ^ - The record ID. -}
     } deriving (Show, Eq)
 
-recordResource :: TF.Resource TF.Dyn RecordResource
-recordResource =
-    TF.newResource "dyn_record" $
-        RecordResource {
-            _name = TF.Absent
-            , _ttl = TF.Absent
-            , _type' = TF.Absent
-            , _value = TF.Absent
-            , _zone = TF.Absent
-            , _computed_fqdn = TF.Computed "fqdn"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL RecordResource where
-    toHCL RecordResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "ttl" <$> _ttl
-        , TF.assign "type" <$> _type'
-        , TF.assign "value" <$> _value
-        , TF.assign "zone" <$> _zone
+    toHCL RecordResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "ttl" <$> TF.argument _ttl
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "value" <$> TF.argument _value
+        , TF.assign "zone" <$> TF.argument _zone
         ]
 
 $(TF.makeSchemaLenses
     ''RecordResource
     ''TF.Dyn
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+recordResource :: TF.Resource TF.Dyn RecordResource
+recordResource =
+    TF.newResource "dyn_record" $
+        RecordResource {
+            _name = TF.Nil
+            , _ttl = TF.Nil
+            , _type' = TF.Nil
+            , _value = TF.Nil
+            , _zone = TF.Nil
+            , _computed_fqdn = TF.Compute "fqdn"
+            , _computed_id = TF.Compute "id"
+            }

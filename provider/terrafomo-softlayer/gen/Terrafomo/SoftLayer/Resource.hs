@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.SoftLayer       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.SoftLayer.Provider as TF
+import qualified Terrafomo.SoftLayer.Types    as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Resource    as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | The @softlayer_ssh_key@ SoftLayer resource.
 
@@ -55,29 +57,28 @@ data SshKeyResource = SshKeyResource {
     {- ^ - The ID of the new SSH key -}
     } deriving (Show, Eq)
 
-sshKeyResource :: TF.Resource TF.SoftLayer SshKeyResource
-sshKeyResource =
-    TF.newResource "softlayer_ssh_key" $
-        SshKeyResource {
-            _name = TF.Absent
-            , _notes = TF.Absent
-            , _public_key = TF.Absent
-            , _computed_fingerprint = TF.Computed "fingerprint"
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SshKeyResource where
-    toHCL SshKeyResource{..} = TF.arguments
-        [ TF.assign "name" <$> _name
-        , TF.assign "notes" <$> _notes
-        , TF.assign "public_key" <$> _public_key
+    toHCL SshKeyResource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "notes" <$> TF.argument _notes
+        , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
 $(TF.makeSchemaLenses
     ''SshKeyResource
     ''TF.SoftLayer
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+sshKeyResource :: TF.Resource TF.SoftLayer SshKeyResource
+sshKeyResource =
+    TF.newResource "softlayer_ssh_key" $
+        SshKeyResource {
+            _name = TF.Nil
+            , _notes = TF.Nil
+            , _public_key = TF.Nil
+            , _computed_fingerprint = TF.Compute "fingerprint"
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @softlayer_virtual_guest@ SoftLayer resource.
 
@@ -130,59 +131,58 @@ data VirtualGuestResource = VirtualGuestResource {
     {- ^ - The ID of the virtual guest. -}
     } deriving (Show, Eq)
 
-virtualGuestResource :: TF.Resource TF.SoftLayer VirtualGuestResource
-virtualGuestResource =
-    TF.newResource "softlayer_virtual_guest" $
-        VirtualGuestResource {
-            _backend_vlan_id = TF.Absent
-            , _block_device_template_group_gid = TF.Absent
-            , _cpu = TF.Absent
-            , _dedicated_acct_host_only = TF.Absent
-            , _disks = TF.Absent
-            , _domain = TF.Absent
-            , _frontend_vlan_id = TF.Absent
-            , _hourly_billing = TF.Absent
-            , _image = TF.Absent
-            , _ipv4_address = TF.Absent
-            , _ipv4_address_private = TF.Absent
-            , _local_disk = TF.Absent
-            , _name = TF.Absent
-            , _post_install_script_uri = TF.Absent
-            , _private_network_only = TF.Absent
-            , _public_network_speed = TF.Absent
-            , _ram = TF.Absent
-            , _region = TF.Absent
-            , _ssh_keys = TF.Absent
-            , _user_data = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL VirtualGuestResource where
-    toHCL VirtualGuestResource{..} = TF.arguments
-        [ TF.assign "backend_vlan_id" <$> _backend_vlan_id
-        , TF.assign "block_device_template_group_gid" <$> _block_device_template_group_gid
-        , TF.assign "cpu" <$> _cpu
-        , TF.assign "dedicated_acct_host_only" <$> _dedicated_acct_host_only
-        , TF.assign "disks" <$> _disks
-        , TF.assign "domain" <$> _domain
-        , TF.assign "frontend_vlan_id" <$> _frontend_vlan_id
-        , TF.assign "hourly_billing" <$> _hourly_billing
-        , TF.assign "image" <$> _image
-        , TF.assign "ipv4_address" <$> _ipv4_address
-        , TF.assign "ipv4_address_private" <$> _ipv4_address_private
-        , TF.assign "local_disk" <$> _local_disk
-        , TF.assign "name" <$> _name
-        , TF.assign "post_install_script_uri" <$> _post_install_script_uri
-        , TF.assign "private_network_only" <$> _private_network_only
-        , TF.assign "public_network_speed" <$> _public_network_speed
-        , TF.assign "ram" <$> _ram
-        , TF.assign "region" <$> _region
-        , TF.assign "ssh_keys" <$> _ssh_keys
-        , TF.assign "user_data" <$> _user_data
+    toHCL VirtualGuestResource{..} = TF.block $ catMaybes
+        [ TF.assign "backend_vlan_id" <$> TF.argument _backend_vlan_id
+        , TF.assign "block_device_template_group_gid" <$> TF.argument _block_device_template_group_gid
+        , TF.assign "cpu" <$> TF.argument _cpu
+        , TF.assign "dedicated_acct_host_only" <$> TF.argument _dedicated_acct_host_only
+        , TF.assign "disks" <$> TF.argument _disks
+        , TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "frontend_vlan_id" <$> TF.argument _frontend_vlan_id
+        , TF.assign "hourly_billing" <$> TF.argument _hourly_billing
+        , TF.assign "image" <$> TF.argument _image
+        , TF.assign "ipv4_address" <$> TF.argument _ipv4_address
+        , TF.assign "ipv4_address_private" <$> TF.argument _ipv4_address_private
+        , TF.assign "local_disk" <$> TF.argument _local_disk
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "post_install_script_uri" <$> TF.argument _post_install_script_uri
+        , TF.assign "private_network_only" <$> TF.argument _private_network_only
+        , TF.assign "public_network_speed" <$> TF.argument _public_network_speed
+        , TF.assign "ram" <$> TF.argument _ram
+        , TF.assign "region" <$> TF.argument _region
+        , TF.assign "ssh_keys" <$> TF.argument _ssh_keys
+        , TF.assign "user_data" <$> TF.argument _user_data
         ]
 
 $(TF.makeSchemaLenses
     ''VirtualGuestResource
     ''TF.SoftLayer
-    ''TF.Resource
-    'TF.schema)
+    ''TF.Resource)
+
+virtualGuestResource :: TF.Resource TF.SoftLayer VirtualGuestResource
+virtualGuestResource =
+    TF.newResource "softlayer_virtual_guest" $
+        VirtualGuestResource {
+            _backend_vlan_id = TF.Nil
+            , _block_device_template_group_gid = TF.Nil
+            , _cpu = TF.Nil
+            , _dedicated_acct_host_only = TF.Nil
+            , _disks = TF.Nil
+            , _domain = TF.Nil
+            , _frontend_vlan_id = TF.Nil
+            , _hourly_billing = TF.Nil
+            , _image = TF.Nil
+            , _ipv4_address = TF.Nil
+            , _ipv4_address_private = TF.Nil
+            , _local_disk = TF.Nil
+            , _name = TF.Nil
+            , _post_install_script_uri = TF.Nil
+            , _private_network_only = TF.Nil
+            , _public_network_speed = TF.Nil
+            , _ram = TF.Nil
+            , _region = TF.Nil
+            , _ssh_keys = TF.Nil
+            , _user_data = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }

@@ -27,11 +27,13 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
+import qualified Terrafomo.Archive.Types     as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
 import qualified Terrafomo.TH                as TF
 
@@ -64,36 +66,35 @@ data FileDataSource = FileDataSource {
     {- ^ - The size of the output archive file. -}
     } deriving (Show, Eq)
 
-fileDataSource :: TF.DataSource TF.Archive FileDataSource
-fileDataSource =
-    TF.newDataSource "archive_file" $
-        FileDataSource {
-            _output_path = TF.Absent
-            , _source = TF.Absent
-            , _source_content = TF.Absent
-            , _source_content_filename = TF.Absent
-            , _source_dir = TF.Absent
-            , _source_file = TF.Absent
-            , _type' = TF.Absent
-            , _computed_output_base64sha256 = TF.Computed "output_base64sha256"
-            , _computed_output_md5 = TF.Computed "output_md5"
-            , _computed_output_sha = TF.Computed "output_sha"
-            , _computed_output_size = TF.Computed "output_size"
-            }
-
 instance TF.ToHCL FileDataSource where
-    toHCL FileDataSource{..} = TF.arguments
-        [ TF.assign "output_path" <$> _output_path
-        , TF.assign "source" <$> _source
-        , TF.assign "source_content" <$> _source_content
-        , TF.assign "source_content_filename" <$> _source_content_filename
-        , TF.assign "source_dir" <$> _source_dir
-        , TF.assign "source_file" <$> _source_file
-        , TF.assign "type" <$> _type'
+    toHCL FileDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "output_path" <$> TF.argument _output_path
+        , TF.assign "source" <$> TF.argument _source
+        , TF.assign "source_content" <$> TF.argument _source_content
+        , TF.assign "source_content_filename" <$> TF.argument _source_content_filename
+        , TF.assign "source_dir" <$> TF.argument _source_dir
+        , TF.assign "source_file" <$> TF.argument _source_file
+        , TF.assign "type" <$> TF.argument _type'
         ]
 
 $(TF.makeSchemaLenses
     ''FileDataSource
     ''TF.Provider
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+fileDataSource :: TF.DataSource TF.Archive FileDataSource
+fileDataSource =
+    TF.newDataSource "archive_file" $
+        FileDataSource {
+            _output_path = TF.Nil
+            , _source = TF.Nil
+            , _source_content = TF.Nil
+            , _source_content_filename = TF.Nil
+            , _source_dir = TF.Nil
+            , _source_file = TF.Nil
+            , _type' = TF.Nil
+            , _computed_output_base64sha256 = TF.Compute "output_base64sha256"
+            , _computed_output_md5 = TF.Compute "output_md5"
+            , _computed_output_sha = TF.Compute "output_sha"
+            , _computed_output_size = TF.Compute "output_size"
+            }

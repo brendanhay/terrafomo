@@ -27,14 +27,16 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, const, ($))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import qualified Terrafomo.ProfitBricks      as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
+import qualified Terrafomo.ProfitBricks.Provider as TF
+import qualified Terrafomo.ProfitBricks.Types    as TF
+import qualified Terrafomo.Syntax.DataSource     as TF
+import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Resource       as TF
+import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.TH                    as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks datasource.
 
@@ -55,26 +57,25 @@ data DatacenterDataSource = DatacenterDataSource {
     {- ^ - UUID of the Virtual Data Center -}
     } deriving (Show, Eq)
 
-datacenterDataSource :: TF.DataSource TF.ProfitBricks DatacenterDataSource
-datacenterDataSource =
-    TF.newDataSource "profitbricks_datacenter" $
-        DatacenterDataSource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL DatacenterDataSource where
-    toHCL DatacenterDataSource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
+    toHCL DatacenterDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''DatacenterDataSource
     ''TF.ProfitBricks
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+datacenterDataSource :: TF.DataSource TF.ProfitBricks DatacenterDataSource
+datacenterDataSource =
+    TF.newDataSource "profitbricks_datacenter" $
+        DatacenterDataSource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @profitbricks_image@ ProfitBricks datasource.
 
@@ -94,30 +95,29 @@ data ImageDataSource = ImageDataSource {
     {- ^ - UUID of the image -}
     } deriving (Show, Eq)
 
-imageDataSource :: TF.DataSource TF.ProfitBricks ImageDataSource
-imageDataSource =
-    TF.newDataSource "profitbricks_image" $
-        ImageDataSource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _type' = TF.Absent
-            , _version = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ImageDataSource where
-    toHCL ImageDataSource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "type" <$> _type'
-        , TF.assign "version" <$> _version
+    toHCL ImageDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "type" <$> TF.argument _type'
+        , TF.assign "version" <$> TF.argument _version
         ]
 
 $(TF.makeSchemaLenses
     ''ImageDataSource
     ''TF.ProfitBricks
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+imageDataSource :: TF.DataSource TF.ProfitBricks ImageDataSource
+imageDataSource =
+    TF.newDataSource "profitbricks_image" $
+        ImageDataSource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _type' = TF.Nil
+            , _version = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @profitbricks_location@ ProfitBricks datasource.
 
@@ -133,26 +133,25 @@ data LocationDataSource = LocationDataSource {
     {- ^ - UUID of the location -}
     } deriving (Show, Eq)
 
-locationDataSource :: TF.DataSource TF.ProfitBricks LocationDataSource
-locationDataSource =
-    TF.newDataSource "profitbricks_location" $
-        LocationDataSource {
-            _feature = TF.Absent
-            , _name = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL LocationDataSource where
-    toHCL LocationDataSource{..} = TF.arguments
-        [ TF.assign "feature" <$> _feature
-        , TF.assign "name" <$> _name
+    toHCL LocationDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "feature" <$> TF.argument _feature
+        , TF.assign "name" <$> TF.argument _name
         ]
 
 $(TF.makeSchemaLenses
     ''LocationDataSource
     ''TF.ProfitBricks
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+locationDataSource :: TF.DataSource TF.ProfitBricks LocationDataSource
+locationDataSource =
+    TF.newDataSource "profitbricks_location" $
+        LocationDataSource {
+            _feature = TF.Nil
+            , _name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @profitbricks_resource@ ProfitBricks datasource.
 
@@ -174,26 +173,25 @@ data ResourceDataSource = ResourceDataSource {
     {- ^ - UUID of the Resource -}
     } deriving (Show, Eq)
 
-resourceDataSource :: TF.DataSource TF.ProfitBricks ResourceDataSource
-resourceDataSource =
-    TF.newDataSource "profitbricks_resource" $
-        ResourceDataSource {
-            _resource_id = TF.Absent
-            , _resource_type = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL ResourceDataSource where
-    toHCL ResourceDataSource{..} = TF.arguments
-        [ TF.assign "resource_id" <$> _resource_id
-        , TF.assign "resource_type" <$> _resource_type
+    toHCL ResourceDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "resource_id" <$> TF.argument _resource_id
+        , TF.assign "resource_type" <$> TF.argument _resource_type
         ]
 
 $(TF.makeSchemaLenses
     ''ResourceDataSource
     ''TF.ProfitBricks
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+resourceDataSource :: TF.DataSource TF.ProfitBricks ResourceDataSource
+resourceDataSource =
+    TF.newDataSource "profitbricks_resource" $
+        ResourceDataSource {
+            _resource_id = TF.Nil
+            , _resource_type = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
 
 {- | The @profitbricks_snapshot@ ProfitBricks datasource.
 
@@ -211,25 +209,24 @@ data SnapshotDataSource = SnapshotDataSource {
     {- ^ - UUID of the snapshot -}
     } deriving (Show, Eq)
 
-snapshotDataSource :: TF.DataSource TF.ProfitBricks SnapshotDataSource
-snapshotDataSource =
-    TF.newDataSource "profitbricks_snapshot" $
-        SnapshotDataSource {
-            _location = TF.Absent
-            , _name = TF.Absent
-            , _size = TF.Absent
-            , _computed_id = TF.Computed "id"
-            }
-
 instance TF.ToHCL SnapshotDataSource where
-    toHCL SnapshotDataSource{..} = TF.arguments
-        [ TF.assign "location" <$> _location
-        , TF.assign "name" <$> _name
-        , TF.assign "size" <$> _size
+    toHCL SnapshotDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "location" <$> TF.argument _location
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "size" <$> TF.argument _size
         ]
 
 $(TF.makeSchemaLenses
     ''SnapshotDataSource
     ''TF.ProfitBricks
-    ''TF.DataSource
-    'TF.schema)
+    ''TF.DataSource)
+
+snapshotDataSource :: TF.DataSource TF.ProfitBricks SnapshotDataSource
+snapshotDataSource =
+    TF.newDataSource "profitbricks_snapshot" $
+        SnapshotDataSource {
+            _location = TF.Nil
+            , _name = TF.Nil
+            , _size = TF.Nil
+            , _computed_id = TF.Compute "id"
+            }
