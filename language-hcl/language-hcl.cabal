@@ -27,10 +27,9 @@ library
     ghc-options:      -Wall -Wincomplete-uni-patterns
 
     exposed-modules:
-          Language.HCL
-          Language.HCL.AST
-          Language.HCL.Parser
-          Language.HCL.Printer
+          HCL
+          HCL.Syntax
+          HCL.Parser
 
     build-depends:
           base >= 4.7 && < 5

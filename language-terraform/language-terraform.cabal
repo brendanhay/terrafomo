@@ -27,13 +27,14 @@ library
     ghc-options:      -Wall -Wincomplete-uni-patterns
 
     exposed-modules:
-          Language.Terraform
-          Language.Terraform.AST
-          -- Language.Terraform.Parser
-          Language.Terraform.Printer
+--          Terraform
+          Terraform.AST
+          -- Terraform.Parser
+--          Terraform.Printer
 
     build-depends:
           base >= 4.7 && < 5
         , text
         , containers
         , language-hcl
+        , transformers

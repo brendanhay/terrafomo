@@ -1,11 +1,11 @@
-module Language.HCL.Parser where
+module HCL.Parser where
 
 import Control.Applicative (many, some, (<|>))
 
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Text          (Text)
 
-import Language.HCL.AST
+import HCL.Syntax
 
 import Text.Megaparsec (Parsec)
 
