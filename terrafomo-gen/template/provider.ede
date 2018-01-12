@@ -32,6 +32,7 @@ import qualified {{ import.value }} as TF
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 

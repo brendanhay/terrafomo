@@ -2,8 +2,6 @@
 
 module Terrafomo.Hash where
 
-import Data.Hashable (Hashable)
-
 import Data.Hashable (Hashable (hash))
 import Data.Text     (Text)
 

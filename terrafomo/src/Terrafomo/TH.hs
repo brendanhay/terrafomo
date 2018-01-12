@@ -23,18 +23,6 @@ makeProviderLenses
     :: TH.Name -- ^ Provider datatype name.
     -> TH.Q [TH.Dec]
 makeProviderLenses = TH.makeClassy
-    -- let class_ = TH.conT (TH.mkName ("Has" ++ TH.nameBase provider))
-    --                  `TH.appT`
-    --                      TH.parensT ( TH.conT ''P.Provider
-    --                         `TH.appT` TH.conT provider
-    --                                 )
-
-        -- field  = TH.mkName (lowerHead (TH.nameBase provider))
-        -- body   = TH.normalB (TH.varE 'P.settings)
-        -- fun    = TH.funD field [TH.clause [] body []]
-
-     -- in (:) <$> TH.instanceD (TH.cxt []) class_ [fun]
-     --        <*> TH.makeClassy provider
 
 makeSchemaLenses
     :: TH.Name -- ^ Datatype name.

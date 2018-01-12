@@ -1,21 +1,11 @@
-{-# LANGUAGE DataKinds           #-}
-{-# LANGUAGE FlexibleContexts    #-}
-{-# LANGUAGE LambdaCase          #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeFamilies        #-}
+{-# LANGUAGE LambdaCase #-}
 
 module Terrafomo.Syntax.Meta
-    ( IsProvider   (..)
-    , providerName
-    , providerAlias
-
-    , HasMeta      (..)
+    ( HasMeta      (..)
     , Change       (..)
     , Lifecycle    (..)
     , HasLifecycle (..)
     )where
-
-import Lens.Micro (ASetter', Lens, Lens', lens)
 
 import Data.Function  (on)
 import Data.Hashable  (Hashable)
@@ -26,21 +16,11 @@ import Data.String    (IsString (fromString))
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
+import Lens.Micro (ASetter', Lens, Lens', lens)
+
 import Terrafomo.Syntax.Name
 
 -- Meta Parameters (shared between Resource + DataSources)
-
-class ( Hashable a
-      , Monoid   a
-      , KnownSymbol (ProviderName a)
-      ) => IsProvider a where
-    type ProviderName a :: Symbol
-
-providerName :: forall proxy a. IsProvider a => proxy a -> Name
-providerName _ = fromString $ symbolVal (Proxy :: Proxy (ProviderName a))
-
-providerAlias :: forall a. IsProvider a => a -> Alias
-providerAlias x = newAlias (providerName (Proxy :: Proxy a)) x
 
 class HasMeta b where
     -- | The specific provider configuration to use for this resource or

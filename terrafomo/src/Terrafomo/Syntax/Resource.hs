@@ -1,14 +1,12 @@
-{-# LANGUAGE LambdaCase #-}
-
 module Terrafomo.Syntax.Resource
     ( Resource (..)
     , newResource
     ) where
 
-import Lens.Micro (lens)
-
 import Data.Bifunctor (Bifunctor (bimap, second))
 import Data.Set       (Set)
+
+import Lens.Micro (lens)
 
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name

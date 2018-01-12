@@ -4,29 +4,37 @@
 -- functions + common system engineering tasks.
 module Terrafomo
     (
-    -- * The Terraform Monad
+    -- * Terraform Monad
       Terraform
-    , runTerraformT
-    , renderTerraformT
+    , runTerraform
+    , renderTerraform
 
+    -- * Terraform Monad Transformer
     , TerraformT
     , runTerraformT
     , renderTerraformT
 
-    -- ** Errors
+    -- * Terraform Monad Class
+    , MonadTerraform  (..)
+
+    -- * Errors
     , TerraformError  (..)
 
-    -- ** Rendering Output
-    , TerraformOutput
+    -- * HCL Output
+    , TerraformOutput (..)
     , renderOutput
 
     -- * Terraform Syntax
     , Name
     , Reference
+
+    -- ** Count
+    , count
+
+    -- ** Arguments and Attributes
     , Attribute
     , Argument
 
-    -- ** Arguments and Attributes
     , constant
     , nil
     , true
@@ -34,7 +42,9 @@ module Terrafomo
     , attribute
 
     -- * Providers
+    , IsProvider      (..)
     , Alias
+    , defaultProvider
 
     -- * Meta Parameters
     , HasMeta         (..)
@@ -55,9 +65,6 @@ module Terrafomo
     -- * Outputs
     , Output
     , output
-
-    -- ** Count
-    , count
 
     -- * Formatting Strings
     , (%)
@@ -82,7 +89,6 @@ module Terrafomo
 
 import Data.Map.Strict (Map)
 import Data.Set        (Set)
-import Data.String     (fromString)
 import Data.Text       (Text)
 
 import Numeric.Natural (Natural)
@@ -92,6 +98,7 @@ import Terrafomo.Monad
 import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
+import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 

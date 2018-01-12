@@ -26,6 +26,7 @@ library:
     - Terrafomo.Syntax.HCL
     - Terrafomo.Syntax.Meta
     - Terrafomo.Syntax.Name
+    - Terrafomo.Syntax.Provider
     - Terrafomo.Syntax.Resource
     - Terrafomo.Syntax.Variable
 
@@ -41,10 +42,9 @@ library:
     # - Terrafomo.Template.Resource
 
   dependencies:
-    - base >= 4.9 && < 5
+    - base >= 4.9
     - containers
     - dlist
-    - either
     - formatting
     - hashable
     - microlens

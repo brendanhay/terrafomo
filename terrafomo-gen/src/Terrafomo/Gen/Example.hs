@@ -53,30 +53,30 @@ renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
         . show
         . PP.vcat
         . List.intersperse " "
-        . map value
+        . map prettyValue
 
-    resource   = pretty . Text.toLower . resourceName
-    datasource = pretty . Text.toLower . dataSourceName
+    prettyResource   = pretty . Text.toLower . resourceName
+    prettyDataSource = pretty . Text.toLower . dataSourceName
 
-    identifier = Text.map valid . Text.toLower
+    prettyIdent = Text.map valid . Text.toLower
       where
         valid c =
             if c == '_' || Char.isAlphaNum c
                 then c
                 else '_'
 
-    value = \case
-        Object (Unquoted "resource" :| [Quoted r, Quoted (identifier -> n)]) vs ->
+    prettyValue = \case
+        Object (Unquoted "resource" :| [Quoted r, Quoted (prettyIdent -> n)]) vs ->
             pretty n <+> "<-" <+> "resource" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> PP.nest 4
-                    ( resource r <$$> PP.vcat (map value vs)
+                    ( prettyResource r <$$> PP.vcat (map prettyValue vs)
                     )
                 )
 
-        Object (Unquoted "data" :| [Quoted d, Quoted (identifier -> n)]) vs ->
+        Object (Unquoted "data" :| [Quoted d, Quoted (prettyIdent -> n)]) vs ->
             pretty n <+> "<-" <+> "datasource" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> PP.nest 4
-                    ( datasource d <$$> PP.vcat (map value vs)
+                    ( prettyDataSource d <$$> PP.vcat (map prettyValue vs)
                     )
                 )
 
@@ -85,10 +85,10 @@ renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
                 ( "$" <$$> pretty v
                 )
 
-        Assign k v -> "& " <> key k <+> ".~" <+> value v
+        Assign k v -> "& " <> prettyKey k <+> ".~" <+> prettyValue v
 
         Block  _  -> "<block>"
-        List   vs -> PP.list (map value vs)
+        List   vs -> PP.list (map prettyValue vs)
         Bool   b  -> pretty b
         Number n  -> pretty n
         Float  d  -> pretty d
@@ -96,7 +96,7 @@ renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
 
         _         -> mempty
 
-    key = \case
+    prettyKey = \case
         Unquoted k -> pretty k
         Quoted   k -> PP.dquotes (pretty k)
 
