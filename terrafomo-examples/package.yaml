@@ -1,0 +1,24 @@
+_include: !include '../share/package.yaml'
+
+name: terrafomo-examples
+
+synopsis: Pending
+
+description: >
+  Pending
+
+<<: *common
+<<: *version
+<<: *options
+
+library:
+  source-dirs:
+    - src
+
+  exposed-modules:
+    - Terrafomo.Tutorial
+
+  dependencies:
+    - base >= 4.9 && < 5
+    - terrafomo
+    # - terrafomo-aws
