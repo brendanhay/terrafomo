@@ -1,0 +1,4 @@
+name: InfluxDB
+package: terrafomo-influxdb
+datatype: true
+

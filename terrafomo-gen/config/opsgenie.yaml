@@ -1,0 +1,4 @@
+name: OpsGenie
+package: terrafomo-opsgenie
+datatype: true
+

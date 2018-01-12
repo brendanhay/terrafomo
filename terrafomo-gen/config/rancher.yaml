@@ -1,0 +1,4 @@
+name: Rancher
+package: terrafomo-rancher
+datatype: true
+

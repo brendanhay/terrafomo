@@ -1,0 +1,4 @@
+name: VSphere
+package: terrafomo-vmware
+datatype: true
+

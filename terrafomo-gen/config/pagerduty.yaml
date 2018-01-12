@@ -1,0 +1,4 @@
+name: PagerDuty
+package: terrafomo-pagerduty
+datatype: true
+

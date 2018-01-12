@@ -1,0 +1,4 @@
+name: Librato
+package: terrafomo-librato
+datatype: true
+

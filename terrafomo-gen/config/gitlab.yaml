@@ -1,0 +1,4 @@
+name: Gitlab
+package: terrafomo-gitlab
+datatype: true
+

@@ -1,0 +1,4 @@
+name: GitHub
+package: terrafomo-github
+datatype: true
+

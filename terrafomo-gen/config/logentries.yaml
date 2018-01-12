@@ -1,0 +1,4 @@
+name: Logentries
+package: terrafomo-logentries
+datatype: true
+

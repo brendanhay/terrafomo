@@ -1,0 +1,4 @@
+name: DigitalOcean
+package: terrafomo-digitalocean
+datatype: true
+

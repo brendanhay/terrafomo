@@ -1,0 +1,4 @@
+name: Cloudflare
+package: terrafomo-cloudflare
+datatype: true
+
