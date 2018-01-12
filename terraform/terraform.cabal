@@ -38,6 +38,7 @@ library
         Terraform.Syntax.Resource
         Terraform.Syntax.Serialize
         Terraform.Syntax.TH
+        Terraform.Syntax.Parser
         Terraform.Tutorial
 
     build-depends:
@@ -53,3 +54,4 @@ library
         , text
         , unordered-containers
         , wl-pprint-text
+        , megaparsec

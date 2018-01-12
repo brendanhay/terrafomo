@@ -23,10 +23,10 @@ import qualified Control.Lens as Lens
 import Data.Proxy (Proxy (Proxy))
 import Data.Void
 
-import Terrorfrom.AWS
+-- import Terrorfrom.AWS
 
-import Terrorfrom.Syntax.Attribute as Attr
-import Terrorfrom.Syntax.Resource  as Syn
+-- import Terrorfrom.Syntax.Attribute as Attr
+-- import Terrorfrom.Syntax.Resource  as Syn
 
 -- import qualified Terraform.AWS.Resource as R
 -- import qualified Terraform.Format       as Format
