@@ -18,5 +18,5 @@ module Terrafomo.DigitalOcean
     ) where
 
 import Terrafomo
-import Terrafomo.DigitalOcean.Provider
 import Terrafomo.DigitalOcean.Types
+import Terrafomo.DigitalOcean.Provider

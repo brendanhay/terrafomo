@@ -18,5 +18,5 @@ module Terrafomo.PowerDNS
     ) where
 
 import Terrafomo
-import Terrafomo.PowerDNS.Provider
 import Terrafomo.PowerDNS.Types
+import Terrafomo.PowerDNS.Provider

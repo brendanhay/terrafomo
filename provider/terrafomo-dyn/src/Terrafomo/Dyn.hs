@@ -18,5 +18,5 @@ module Terrafomo.Dyn
     ) where
 
 import Terrafomo
-import Terrafomo.Dyn.Provider
 import Terrafomo.Dyn.Types
+import Terrafomo.Dyn.Provider

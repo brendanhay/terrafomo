@@ -18,5 +18,5 @@ module Terrafomo.NewRelic
     ) where
 
 import Terrafomo
-import Terrafomo.NewRelic.Provider
 import Terrafomo.NewRelic.Types
+import Terrafomo.NewRelic.Provider

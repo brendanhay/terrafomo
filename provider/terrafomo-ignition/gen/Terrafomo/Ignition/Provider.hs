@@ -33,6 +33,7 @@ resources. It generates configurations files to be used by other resources.
 Use the navigation to the left to read about the available resources.
 -}
 data Ignition = Ignition
+    deriving (Show, Eq, Generic)
 
 instance Hashable Ignition
 

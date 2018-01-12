@@ -18,5 +18,5 @@ module Terrafomo.OpsGenie
     ) where
 
 import Terrafomo
-import Terrafomo.OpsGenie.Provider
 import Terrafomo.OpsGenie.Types
+import Terrafomo.OpsGenie.Provider

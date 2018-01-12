@@ -18,5 +18,5 @@ module Terrafomo.AWS
     ) where
 
 import Terrafomo
-import Terrafomo.AWS.Provider
 import Terrafomo.AWS.Types
+import Terrafomo.AWS.Provider

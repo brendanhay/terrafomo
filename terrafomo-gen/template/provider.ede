@@ -43,6 +43,8 @@ data {{ provider.name }} = {{ provider.name }}
     {% if arg.last %}
     } deriving (Show, Eq, Generic)
     {% endif %}
+  {% else %}
+    deriving (Show, Eq, Generic)
   {% endfor %}
 
 instance Hashable {{ provider.name }}

@@ -18,5 +18,5 @@ module Terrafomo.GitHub
     ) where
 
 import Terrafomo
-import Terrafomo.GitHub.Provider
 import Terrafomo.GitHub.Types
+import Terrafomo.GitHub.Provider

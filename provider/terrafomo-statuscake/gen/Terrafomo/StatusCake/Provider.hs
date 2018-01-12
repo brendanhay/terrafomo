@@ -31,6 +31,7 @@ the uptime of your service via a network of monitoring centers throughout
 the world The provider configuration block accepts the following arguments:
 -}
 data StatusCake = StatusCake
+    deriving (Show, Eq, Generic)
 
 instance Hashable StatusCake
 

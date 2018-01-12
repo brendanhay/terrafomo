@@ -18,5 +18,5 @@ module Terrafomo.Packet
     ) where
 
 import Terrafomo
-import Terrafomo.Packet.Provider
 import Terrafomo.Packet.Types
+import Terrafomo.Packet.Provider

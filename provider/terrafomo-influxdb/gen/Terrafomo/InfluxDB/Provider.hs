@@ -31,6 +31,7 @@ time-series data. The provider configuration block accepts the following
 arguments:
 -}
 data InfluxDB = InfluxDB
+    deriving (Show, Eq, Generic)
 
 instance Hashable InfluxDB
 

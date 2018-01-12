@@ -31,6 +31,7 @@ it can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data OVH = OVH
+    deriving (Show, Eq, Generic)
 
 instance Hashable OVH
 

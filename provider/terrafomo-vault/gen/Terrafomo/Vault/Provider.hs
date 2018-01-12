@@ -36,6 +36,7 @@ caveats that are covered in the sections that follow. Consider these
 carefully before using this provider within your Terraform configuration.
 -}
 data Vault = Vault
+    deriving (Show, Eq, Generic)
 
 instance Hashable Vault
 

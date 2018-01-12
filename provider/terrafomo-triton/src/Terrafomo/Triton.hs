@@ -18,5 +18,5 @@ module Terrafomo.Triton
     ) where
 
 import Terrafomo
-import Terrafomo.Triton.Provider
 import Terrafomo.Triton.Types
+import Terrafomo.Triton.Provider

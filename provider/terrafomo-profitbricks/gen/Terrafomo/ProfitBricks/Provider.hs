@@ -30,6 +30,7 @@ resources using ProfitBricks Cloud API. Use the navigation to the left to
 read about the available resources.
 -}
 data ProfitBricks = ProfitBricks
+    deriving (Show, Eq, Generic)
 
 instance Hashable ProfitBricks
 

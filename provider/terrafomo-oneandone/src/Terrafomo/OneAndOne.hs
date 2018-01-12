@@ -18,5 +18,5 @@ module Terrafomo.OneAndOne
     ) where
 
 import Terrafomo
-import Terrafomo.OneAndOne.Provider
 import Terrafomo.OneAndOne.Types
+import Terrafomo.OneAndOne.Provider

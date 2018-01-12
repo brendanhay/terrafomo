@@ -18,5 +18,5 @@ module Terrafomo.Logentries
     ) where
 
 import Terrafomo
-import Terrafomo.Logentries.Provider
 import Terrafomo.Logentries.Types
+import Terrafomo.Logentries.Provider

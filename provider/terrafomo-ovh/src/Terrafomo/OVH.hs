@@ -18,5 +18,5 @@ module Terrafomo.OVH
     ) where
 
 import Terrafomo
-import Terrafomo.OVH.Provider
 import Terrafomo.OVH.Types
+import Terrafomo.OVH.Provider

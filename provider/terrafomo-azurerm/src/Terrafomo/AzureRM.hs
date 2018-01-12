@@ -18,5 +18,5 @@ module Terrafomo.AzureRM
     ) where
 
 import Terrafomo
-import Terrafomo.AzureRM.Provider
 import Terrafomo.AzureRM.Types
+import Terrafomo.AzureRM.Provider

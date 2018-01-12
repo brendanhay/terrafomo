@@ -18,5 +18,5 @@ module Terrafomo.Bitbucket
     ) where
 
 import Terrafomo
-import Terrafomo.Bitbucket.Provider
 import Terrafomo.Bitbucket.Types
+import Terrafomo.Bitbucket.Provider

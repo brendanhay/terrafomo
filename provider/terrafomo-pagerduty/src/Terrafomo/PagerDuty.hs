@@ -18,5 +18,5 @@ module Terrafomo.PagerDuty
     ) where
 
 import Terrafomo
-import Terrafomo.PagerDuty.Provider
 import Terrafomo.PagerDuty.Types
+import Terrafomo.PagerDuty.Provider

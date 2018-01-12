@@ -18,5 +18,5 @@ module Terrafomo.Heroku
     ) where
 
 import Terrafomo
-import Terrafomo.Heroku.Provider
 import Terrafomo.Heroku.Types
+import Terrafomo.Heroku.Provider

@@ -18,5 +18,5 @@ module Terrafomo.Grafana
     ) where
 
 import Terrafomo
-import Terrafomo.Grafana.Provider
 import Terrafomo.Grafana.Types
+import Terrafomo.Grafana.Provider

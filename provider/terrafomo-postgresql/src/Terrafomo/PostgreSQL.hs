@@ -18,5 +18,5 @@ module Terrafomo.PostgreSQL
     ) where
 
 import Terrafomo
-import Terrafomo.PostgreSQL.Provider
 import Terrafomo.PostgreSQL.Types
+import Terrafomo.PostgreSQL.Provider

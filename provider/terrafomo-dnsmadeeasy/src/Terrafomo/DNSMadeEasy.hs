@@ -18,5 +18,5 @@ module Terrafomo.DNSMadeEasy
     ) where
 
 import Terrafomo
-import Terrafomo.DNSMadeEasy.Provider
 import Terrafomo.DNSMadeEasy.Types
+import Terrafomo.DNSMadeEasy.Provider

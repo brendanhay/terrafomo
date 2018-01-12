@@ -29,6 +29,7 @@ The Scaleway provider is used to manage Scaleway resources. Use the
 navigation to the left to read about the available resources.
 -}
 data Scaleway = Scaleway
+    deriving (Show, Eq, Generic)
 
 instance Hashable Scaleway
 

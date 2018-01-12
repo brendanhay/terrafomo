@@ -30,6 +30,7 @@ the 1&1 Cloud Server API. Use the navigation to the left to read about the
 available resources.
 -}
 data OneAndOne = OneAndOne
+    deriving (Show, Eq, Generic)
 
 instance Hashable OneAndOne
 

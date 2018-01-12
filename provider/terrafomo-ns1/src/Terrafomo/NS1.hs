@@ -18,5 +18,5 @@ module Terrafomo.NS1
     ) where
 
 import Terrafomo
-import Terrafomo.NS1.Provider
 import Terrafomo.NS1.Types
+import Terrafomo.NS1.Provider

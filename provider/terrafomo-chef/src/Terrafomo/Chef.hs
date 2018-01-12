@@ -18,5 +18,5 @@ module Terrafomo.Chef
     ) where
 
 import Terrafomo
-import Terrafomo.Chef.Provider
 import Terrafomo.Chef.Types
+import Terrafomo.Chef.Provider

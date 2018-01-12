@@ -18,5 +18,5 @@ module Terrafomo.Icinga2
     ) where
 
 import Terrafomo
-import Terrafomo.Icinga2.Provider
 import Terrafomo.Icinga2.Types
+import Terrafomo.Icinga2.Provider

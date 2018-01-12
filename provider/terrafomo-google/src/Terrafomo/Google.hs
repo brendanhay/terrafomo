@@ -18,5 +18,5 @@ module Terrafomo.Google
     ) where
 
 import Terrafomo
-import Terrafomo.Google.Provider
 import Terrafomo.Google.Types
+import Terrafomo.Google.Provider

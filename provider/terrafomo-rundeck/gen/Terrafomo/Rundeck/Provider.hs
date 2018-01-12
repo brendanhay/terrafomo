@@ -32,6 +32,7 @@ logging in to individual machines directly via SSH. The provider
 configuration block accepts the following arguments:
 -}
 data Rundeck = Rundeck
+    deriving (Show, Eq, Generic)
 
 instance Hashable Rundeck
 

@@ -18,5 +18,5 @@ module Terrafomo.Vault
     ) where
 
 import Terrafomo
-import Terrafomo.Vault.Provider
 import Terrafomo.Vault.Types
+import Terrafomo.Vault.Provider

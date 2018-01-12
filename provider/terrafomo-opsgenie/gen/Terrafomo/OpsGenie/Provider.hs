@@ -31,6 +31,7 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data OpsGenie = OpsGenie
+    deriving (Show, Eq, Generic)
 
 instance Hashable OpsGenie
 

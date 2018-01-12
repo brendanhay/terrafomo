@@ -31,6 +31,7 @@ sharing metrics dashboards. The provider configuration block accepts the
 following arguments:
 -}
 data Grafana = Grafana
+    deriving (Show, Eq, Generic)
 
 instance Hashable Grafana
 

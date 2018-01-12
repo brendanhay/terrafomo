@@ -18,5 +18,5 @@ module Terrafomo.Cobbler
     ) where
 
 import Terrafomo
-import Terrafomo.Cobbler.Provider
 import Terrafomo.Cobbler.Types
+import Terrafomo.Cobbler.Provider

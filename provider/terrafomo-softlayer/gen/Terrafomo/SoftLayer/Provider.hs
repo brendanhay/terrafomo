@@ -32,6 +32,7 @@ many features are still being added. If there is a SoftLayer feature
 missing, please report it in the GitHub repo.
 -}
 data SoftLayer = SoftLayer
+    deriving (Show, Eq, Generic)
 
 instance Hashable SoftLayer
 
