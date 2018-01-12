@@ -1,48 +1,49 @@
 arguments:
 - required: true
-  help: The AMI to use for the instance.
+  help: (Required) The AMI to use for the instance.
   name: ami
   type: Attr Text
 - required: false
-  help: Associate a public ip address with an instance in a VPC.  Boolean value.
+  help: (Optional) Associate a public ip address with an instance in a VPC.  Boolean
+    value.
   name: associate_public_ip_address
   type: Attr Text
 - required: false
-  help: The AZ to start the instance in.
+  help: (Optional) The AZ to start the instance in.
   name: availability_zone
   type: Attr Text
 - required: false
-  help: If true, enables  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingDisableAPITermination
+  help: (Optional) If true, enables  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingDisableAPITermination
   name: disable_api_termination
   type: Attr Text
 - required: false
-  help: ! 'Additional EBS block devices to attach to the instance.  See  #block-devices  below
+  help: ! '(Optional) Additional EBS block devices to attach to the instance.  See  #block-devices  below
     for details.'
   name: ebs_block_device
   type: Attr Text
 - required: false
-  help: If true, the launched EC2 instance will be EBS-optimized.
+  help: (Optional) If true, the launched EC2 instance will be EBS-optimized.
   name: ebs_optimized
   type: Attr Text
 - required: false
-  help: ! 'Customize Ephemeral (also known as "Instance Store") volumes on the instance.
-    See  #block-devices  below for details.'
+  help: ! '(Optional) Customize Ephemeral (also known as "Instance Store") volumes
+    on the instance. See  #block-devices  below for details.'
   name: ephemeral_block_device
   type: Attr Text
 - required: false
-  help: The IAM Instance Profile to launch the instance with. Specified as the name
-    of the Instance Profile.
+  help: (Optional) The IAM Instance Profile to launch the instance with. Specified
+    as the name of the Instance Profile.
   name: iam_instance_profile
   type: Attr Text
 - required: false
-  help: Shutdown behavior for the instance. Amazon defaults this to  stop  for EBS-backed
-    instances and terminate  for instance-store instances. Cannot be set on instance-store
-    instances. See  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingInstanceInitiatedShutdownBehavior  for
+  help: (Optional) Shutdown behavior for the instance. Amazon defaults this to  stop  for
+    EBS-backed instances and terminate  for instance-store instances. Cannot be set
+    on instance-store instances. See  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingInstanceInitiatedShutdownBehavior  for
     more information.
   name: instance_initiated_shutdown_behavior
   type: Attr Text
 - required: true
-  help: The type of instance to start
+  help: (Required) The type of instance to start
   name: instance_type
   type: Attr Text
 - required: true
@@ -51,80 +52,80 @@ arguments:
   name: ipv6_address_count
   type: Attr Text
 - required: false
-  help: Specify one or more IPv6 addresses from the range of the subnet to associate
-    with the primary network interface
+  help: (Optional) Specify one or more IPv6 addresses from the range of the subnet
+    to associate with the primary network interface
   name: ipv6_addresses
   type: Attr Text
 - required: false
-  help: The key name to use for the instance.
+  help: (Optional) The key name to use for the instance.
   name: key_name
   type: Attr Text
 - required: false
-  help: If true, the launched EC2 instance will have detailed monitoring enabled.
-    (Available since v0.6.0)
+  help: (Optional) If true, the launched EC2 instance will have detailed monitoring
+    enabled. (Available since v0.6.0)
   name: monitoring
   type: Attr Text
 - required: false
-  help: ! 'Customize network interfaces to be attached at instance boot time. See  #network-interfaces  below
-    for more details.'
+  help: ! '(Optional) Customize network interfaces to be attached at instance boot
+    time. See  #network-interfaces  below for more details.'
   name: network_interface
   type: Attr Text
 - required: false
-  help: The Placement Group to start the instance in.
+  help: (Optional) The Placement Group to start the instance in.
   name: placement_group
   type: Attr Text
 - required: false
-  help: Private IP address to associate with the instance in a VPC.
+  help: (Optional) Private IP address to associate with the instance in a VPC.
   name: private_ip
   type: Attr Text
 - required: false
-  help: ! 'Customize details about the root block device of the instance. See  #block-devices  below
-    for details.'
+  help: ! '(Optional) Customize details about the root block device of the instance.
+    See  #block-devices  below for details.'
   name: root_block_device
   type: Attr Text
 - required: false
-  help: A list of security group names to associate with. If you are creating Instances
-    in a VPC, use  vpc_security_group_ids  instead.
+  help: (Optional) A list of security group names to associate with. If you are creating
+    Instances in a VPC, use  vpc_security_group_ids  instead.
   name: security_groups
   type: Attr Text
 - required: false
-  help: Controls if traffic is routed to the instance when the destination address
-    does not match the instance. Used for NAT or VPNs. Defaults true.
+  help: (Optional) Controls if traffic is routed to the instance when the destination
+    address does not match the instance. Used for NAT or VPNs. Defaults true.
   name: source_dest_check
   type: Attr Text
 - required: false
-  help: The VPC Subnet ID to launch in.
+  help: (Optional) The VPC Subnet ID to launch in.
   name: subnet_id
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: false
-  help: The tenancy of the instance (if the instance is running in a VPC). An instance
-    with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is
-    not supported for the import-instance command.
+  help: (Optional) The tenancy of the instance (if the instance is running in a VPC).
+    An instance with a tenancy of dedicated runs on single-tenant hardware. The host
+    tenancy is not supported for the import-instance command.
   name: tenancy
   type: Attr Text
 - required: false
-  help: The user data to provide when launching the instance. Do not pass gzip-compressed
-    data via this argument; see  user_data_base64  instead.
+  help: (Optional) The user data to provide when launching the instance. Do not pass
+    gzip-compressed data via this argument; see  user_data_base64  instead.
   name: user_data
   type: Attr Text
 - required: false
-  help: Can be used instead of  user_data  to pass base64-encoded binary data directly.
-    Use this instead of  user_data  whenever the value is not a valid UTF-8 string.
-    For example, gzip-encoded user data must be base64-encoded and passed via this
-    argument to avoid corruption.
+  help: (Optional) Can be used instead of  user_data  to pass base64-encoded binary
+    data directly. Use this instead of  user_data  whenever the value is not a valid
+    UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed
+    via this argument to avoid corruption.
   name: user_data_base64
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the devices created by the instance at launch
-    time.
+  help: (Optional) A mapping of tags to assign to the devices created by the instance
+    at launch time.
   name: volume_tags
   type: Attr Text
 - required: false
-  help: A list of security group IDs to associate with.
+  help: (Optional) A list of security group IDs to associate with.
   name: vpc_security_group_ids
   type: Attr Text
 name: aws_instance

@@ -4,11 +4,11 @@ arguments:
   name: group
   type: Attr Text
 - required: true
-  help: The name to identify the Group Membership
+  help: (Required) The name to identify the Group Membership
   name: name
   type: Attr Text
 - required: true
-  help: A list of IAM User names to associate with the Group
+  help: (Required) A list of IAM User names to associate with the Group
   name: users
   type: Attr Text
 name: aws_iam_group_membership

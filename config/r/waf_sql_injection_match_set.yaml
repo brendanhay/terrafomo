@@ -1,11 +1,12 @@
 arguments:
 - required: true
-  help: The name or description of the SizeConstraintSet.
+  help: (Required) The name or description of the SizeConstraintSet.
   name: name
   type: Attr Text
 - required: false
-  help: The parts of web requests that you want AWS WAF to inspect for malicious SQL
-    code and, if you want AWS WAF to inspect a header, the name of the header.
+  help: (Optional) The parts of web requests that you want AWS WAF to inspect for
+    malicious SQL code and, if you want AWS WAF to inspect a header, the name of the
+    header.
   name: sql_injection_match_tuples
   type: Attr Text
 name: aws_waf_sql_injection_match_set

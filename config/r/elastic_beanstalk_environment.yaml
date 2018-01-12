@@ -4,15 +4,16 @@ arguments:
   name: application
   type: Attr Text
 - required: false
-  help: Prefix to use for the fully qualified DNS name of the Environment.
+  help: (Optional) Prefix to use for the fully qualified DNS name of the Environment.
   name: cname_prefix
   type: Attr Text
 - required: false
-  help: Short description of the Environment
+  help: (Optional) Short description of the Environment
   name: description
   type: Attr Text
 - required: true
-  help: A unique name for this Environment. This name is used in the application URL
+  help: (Required) A unique name for this Environment. This name is used in the application
+    URL
   name: name
   type: Attr Text
 - required: true
@@ -44,12 +45,13 @@ arguments:
   name: template_name
   type: Attr Text
 - required: false
-  help: Elastic Beanstalk Environment tier. Valid values are  Worker or  WebServer
+  help: (Optional) Elastic Beanstalk Environment tier. Valid values are  Worker or  WebServer
     . If tier is left blank  WebServer  will be used.
   name: tier
   type: Attr Text
 - required: false
-  help: The name of the Elastic Beanstalk Application Version to use in deployment.
+  help: (Optional) The name of the Elastic Beanstalk Application Version to use in
+    deployment.
   name: version_label
   type: Attr Text
 - required: true

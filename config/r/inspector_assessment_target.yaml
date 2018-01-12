@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: The name of the assessment target.
+  help: (Required) The name of the assessment target.
   name: name
   type: Attr Text
 - required: true

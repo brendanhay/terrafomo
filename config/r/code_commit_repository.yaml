@@ -1,14 +1,16 @@
 arguments:
 - required: false
-  help: The default branch of the repository. The branch specified here needs to exist.
+  help: (Optional) The default branch of the repository. The branch specified here
+    needs to exist.
   name: default_branch
   type: Attr Text
 - required: false
-  help: The description of the repository. This needs to be less than 1000 characters
+  help: (Optional) The description of the repository. This needs to be less than 1000
+    characters
   name: description
   type: Attr Text
 - required: true
-  help: The name for the repository. This needs to be less than 100 characters.
+  help: (Required) The name for the repository. This needs to be less than 100 characters.
   name: repository_name
   type: Attr Text
 name: aws_codecommit_repository

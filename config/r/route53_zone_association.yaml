@@ -1,14 +1,14 @@
 arguments:
 - required: true
-  help: The VPC to associate with the private hosted zone.
+  help: (Required) The VPC to associate with the private hosted zone.
   name: vpc_id
   type: Attr Text
 - required: false
-  help: The VPC's region. Defaults to the region of the AWS provider.
+  help: (Optional) The VPC's region. Defaults to the region of the AWS provider.
   name: vpc_region
   type: Attr Text
 - required: true
-  help: The private hosted zone to associate.
+  help: (Required) The private hosted zone to associate.
   name: zone_id
   type: Attr Text
 name: aws_route53_zone_association

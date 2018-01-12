@@ -1,39 +1,39 @@
 arguments:
 - required: false
-  help: Specifies whether a cache cluster is enabled for the stage
+  help: (Optional) Specifies whether a cache cluster is enabled for the stage
   name: cache_cluster_enabled
   type: Attr Text
 - required: false
-  help: The size of the cache cluster for the stage, if enabled. Allowed values include  0.5
-    ,  1.6 ,  6.1 ,  13.5 ,  28.4 ,  58.2 ,  118  and  237 .
+  help: (Optional) The size of the cache cluster for the stage, if enabled. Allowed
+    values include  0.5 ,  1.6 ,  6.1 ,  13.5 ,  28.4 ,  58.2 ,  118  and  237 .
   name: cache_cluster_size
   type: Attr Text
 - required: false
-  help: The identifier of a client certificate for the stage.
+  help: (Optional) The identifier of a client certificate for the stage.
   name: client_certificate_id
   type: Attr Text
 - required: true
-  help: The ID of the deployment that the stage points to
+  help: (Required) The ID of the deployment that the stage points to
   name: deployment_id
   type: Attr Text
 - required: false
-  help: The description of the stage
+  help: (Optional) The description of the stage
   name: description
   type: Attr Text
 - required: false
-  help: The version of the associated API documentation
+  help: (Optional) The version of the associated API documentation
   name: documentation_version
   type: Attr Text
 - required: true
-  help: The ID of the associated REST API
+  help: (Required) The ID of the associated REST API
   name: rest_api_id
   type: Attr Text
 - required: true
-  help: The name of the stage
+  help: (Required) The name of the stage
   name: stage_name
   type: Attr Text
 - required: false
-  help: A map that defines the stage variables
+  help: (Optional) A map that defines the stage variables
   name: variables
   type: Attr Text
 name: aws_api_gateway_stage

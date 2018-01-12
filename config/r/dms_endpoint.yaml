@@ -1,50 +1,50 @@
 arguments:
-- required: true
-  help: ! ' - (Optional, Default: empty string) The Amazon Resource Name (ARN) for
-    the certificate.'
+- required: false
+  help: ! '(Optional, Default: empty string) The Amazon Resource Name (ARN) for the
+    certificate.'
   name: certificate_arn
   type: Attr Text
 - required: false
-  help: The name of the endpoint database.
+  help: (Optional) The name of the endpoint database.
   name: database_name
   type: Attr Text
 - required: true
-  help: The database endpoint identifier.
+  help: (Required) The database endpoint identifier.
   name: endpoint_id
   type: Attr Text
 - required: true
-  help: The type of endpoint. Can be one of  source | target .
+  help: (Required) The type of endpoint. Can be one of  source | target .
   name: endpoint_type
   type: Attr Text
 - required: true
-  help: The type of engine for the endpoint. Can be one of  mysql | oracle | postgres
-    | mariadb | aurora | redshift | sybase | sqlserver | dynamodb .
+  help: (Required) The type of engine for the endpoint. Can be one of  mysql | oracle
+    | postgres | mariadb | aurora | redshift | sybase | sqlserver | dynamodb .
   name: engine_name
   type: Attr Text
 - required: false
-  help: Additional attributes associated with the connection. For available attributes
-    see  http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.ConnectionAttributes.html
+  help: (Optional) Additional attributes associated with the connection. For available
+    attributes see  http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.ConnectionAttributes.html
     .
   name: extra_connection_attributes
   type: Attr Text
 - required: false
-  help: The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt
-    the connection parameters. If you do not specify a value for  kms_key_arn , then
-    AWS DMS will use your default encryption key. AWS KMS creates the default encryption
-    key for your AWS account. Your AWS account has a different default encryption
-    key for each AWS region.
+  help: (Optional) The Amazon Resource Name (ARN) for the KMS key that will be used
+    to encrypt the connection parameters. If you do not specify a value for  kms_key_arn
+    , then AWS DMS will use your default encryption key. AWS KMS creates the default
+    encryption key for your AWS account. Your AWS account has a different default
+    encryption key for each AWS region.
   name: kms_key_arn
   type: Attr Text
 - required: false
-  help: The password to be used to login to the endpoint database.
+  help: (Optional) The password to be used to login to the endpoint database.
   name: password
   type: Attr Text
 - required: false
-  help: The port used by the endpoint database.
+  help: (Optional) The port used by the endpoint database.
   name: port
   type: Attr Text
 - required: false
-  help: The host name of the server.
+  help: (Optional) The host name of the server.
   name: server_name
   type: Attr Text
 - required: true
@@ -52,17 +52,17 @@ arguments:
     role for dynamodb endpoints.'
   name: service_access_role
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Default: none) The SSL mode to use for the connection. Can
-    be one of  none | require | verify-ca | verify-full'
+- required: false
+  help: ! '(Optional, Default: none) The SSL mode to use for the connection. Can be
+    one of  none | require | verify-ca | verify-full'
   name: ssl_mode
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: false
-  help: The user name to be used to login to the endpoint database.
+  help: (Optional) The user name to be used to login to the endpoint database.
   name: username
   type: Attr Text
 name: aws_dms_endpoint

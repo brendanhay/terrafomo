@@ -68,7 +68,7 @@ arguments:
   name: retain_on_delete
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: true

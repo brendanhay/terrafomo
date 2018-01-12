@@ -1,23 +1,24 @@
 arguments:
 - required: true
-  help: The ID of the customer gateway.
+  help: (Required) The ID of the customer gateway.
   name: customer_gateway_id
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Default  false ) Whether the VPN connection uses static routes
-    exclusively. Static routes must be used for devices that don''t support BGP.'
+- required: false
+  help: (Optional, Default  false ) Whether the VPN connection uses static routes
+    exclusively. Static routes must be used for devices that don't support BGP.
   name: static_routes_only
   type: Attr Text
 - required: false
-  help: Tags to apply to the connection.
+  help: (Optional) Tags to apply to the connection.
   name: tags
   type: Attr Text
 - required: true
-  help: The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+  help: (Required) The type of VPN connection. The only type AWS supports at this
+    time is "ipsec.1".
   name: type
   type: Attr Text
 - required: true
-  help: The ID of the virtual private gateway.
+  help: (Required) The ID of the virtual private gateway.
   name: vpn_gateway_id
   type: Attr Text
 name: aws_vpn_connection

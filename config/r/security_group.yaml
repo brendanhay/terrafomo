@@ -1,37 +1,37 @@
 arguments:
-- required: true
-  help: ! ' - (Optional, Forces new resource) The security group description. Defaults
+- required: false
+  help: ! '(Optional, Forces new resource) The security group description. Defaults
     to "Managed by Terraform". Cannot be "".  : This field maps to the AWS GroupDescription  attribute,
     for which there is no Update API. If you''d like to classify your security groups
     in a way that can be updated, use  tags .'
   name: description
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, VPC only) Can be specified multiple times for each egress
-    rule. Each egress block supports fields documented below.'
+- required: false
+  help: (Optional, VPC only) Can be specified multiple times for each egress rule.
+    Each egress block supports fields documented below.
   name: egress
   type: Attr Text
 - required: false
-  help: Can be specified multiple times for each ingress rule. Each ingress block
-    supports fields documented below.
+  help: (Optional) Can be specified multiple times for each ingress rule. Each ingress
+    block supports fields documented below.
   name: ingress
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The name of the security group. If omitted,
-    Terraform will assign a random, unique name'
+- required: false
+  help: (Optional, Forces new resource) The name of the security group. If omitted,
+    Terraform will assign a random, unique name
   name: name
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Creates a unique name beginning with
-    the specified prefix. Conflicts with  name .'
+- required: false
+  help: (Optional, Forces new resource) Creates a unique name beginning with the specified
+    prefix. Conflicts with  name .
   name: name_prefix
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The VPC ID.'
+- required: false
+  help: (Optional, Forces new resource) The VPC ID.
   name: vpc_id
   type: Attr Text
 name: aws_security_group

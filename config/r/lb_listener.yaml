@@ -1,28 +1,28 @@
 arguments:
 - required: false
-  help: The ARN of the SSL server certificate. Exactly one certificate is required
-    if the protocol is HTTPS.
+  help: (Optional) The ARN of the SSL server certificate. Exactly one certificate
+    is required if the protocol is HTTPS.
   name: certificate_arn
   type: Attr Text
 - required: true
-  help: An Action block. Action blocks are documented below.
+  help: (Required) An Action block. Action blocks are documented below.
   name: default_action
   type: Attr Text
 - required: true
-  help: ! ' - (Required, Forces New Resource) The ARN of the load balancer.'
+  help: (Required, Forces New Resource) The ARN of the load balancer.
   name: load_balancer_arn
   type: Attr Text
 - required: true
-  help: The port on which the load balancer is listening.
+  help: (Required) The port on which the load balancer is listening.
   name: port
   type: Attr Text
 - required: false
-  help: The protocol for connections from clients to the load balancer. Valid values
-    are  TCP ,  HTTP  and  HTTPS . Defaults to  HTTP .
+  help: (Optional) The protocol for connections from clients to the load balancer.
+    Valid values are  TCP ,  HTTP  and  HTTPS . Defaults to  HTTP .
   name: protocol
   type: Attr Text
 - required: false
-  help: The name of the SSL Policy for the listener. Required if  protocol  is  HTTPS
+  help: (Optional) The name of the SSL Policy for the listener. Required if  protocol  is  HTTPS
     .
   name: ssl_policy
   type: Attr Text

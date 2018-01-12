@@ -1,18 +1,18 @@
 arguments:
 - required: false
-  help: A list of virtual gateways for propagation.
+  help: (Optional) A list of virtual gateways for propagation.
   name: propagating_vgws
   type: Attr Text
 - required: false
-  help: A list of route objects. Their keys are documented below.
+  help: (Optional) A list of route objects. Their keys are documented below.
   name: route
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: true
-  help: The VPC ID.
+  help: (Required) The VPC ID.
   name: vpc_id
   type: Attr Text
 name: aws_route_table

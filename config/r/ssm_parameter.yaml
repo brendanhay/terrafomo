@@ -1,24 +1,24 @@
 arguments:
 - required: false
-  help: The KMS key id or arn for encrypting a SecureString.
+  help: (Optional) The KMS key id or arn for encrypting a SecureString.
   name: key_id
   type: Attr Text
 - required: true
-  help: The name of the parameter.
+  help: (Required) The name of the parameter.
   name: name
   type: Attr Text
 - required: false
-  help: Overwrite an existing parameter. If not specified, will default to  false
-    .
+  help: (Optional) Overwrite an existing parameter. If not specified, will default
+    to  false .
   name: overwrite
   type: Attr Text
 - required: true
-  help: The type of the parameter. Valid types are  String ,  StringList  and  SecureString
+  help: (Required) The type of the parameter. Valid types are  String ,  StringList  and  SecureString
     .
   name: type
   type: Attr Text
 - required: true
-  help: The value of the parameter.
+  help: (Required) The value of the parameter.
   name: value
   type: Attr Text
 name: aws_ssm_parameter

@@ -1,14 +1,14 @@
 arguments:
 - required: true
-  help: The ID of the parent API resource
+  help: (Required) The ID of the parent API resource
   name: parent_id
   type: Attr Text
 - required: true
-  help: The last path segment of this API resource.
+  help: (Required) The last path segment of this API resource.
   name: path_part
   type: Attr Text
 - required: true
-  help: The ID of the associated REST API
+  help: (Required) The ID of the associated REST API
   name: rest_api_id
   type: Attr Text
 name: aws_api_gateway_resource

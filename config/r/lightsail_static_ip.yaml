@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: The name for the allocated static IP
+  help: (Required) The name for the allocated static IP
   name: name
   type: Attr Text
 name: aws_lightsail_static_ip

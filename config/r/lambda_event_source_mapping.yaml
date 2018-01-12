@@ -1,24 +1,26 @@
 arguments:
 - required: false
-  help: The largest number of records that Lambda will retrieve from your event source
-    at the time of invocation. Defaults to  100 .
+  help: (Optional) The largest number of records that Lambda will retrieve from your
+    event source at the time of invocation. Defaults to  100 .
   name: batch_size
   type: Attr Text
 - required: false
-  help: Determines if the mapping will be enabled on creation. Defaults to  true .
+  help: (Optional) Determines if the mapping will be enabled on creation. Defaults
+    to  true .
   name: enabled
   type: Attr Text
 - required: true
-  help: The event source ARN - can either be a Kinesis or DynamoDB stream.
+  help: (Required) The event source ARN - can either be a Kinesis or DynamoDB stream.
   name: event_source_arn
   type: Attr Text
 - required: true
-  help: The name or the ARN of the Lambda function that will be subscribing to events.
+  help: (Required) The name or the ARN of the Lambda function that will be subscribing
+    to events.
   name: function_name
   type: Attr Text
 - required: true
-  help: The position in the stream where AWS Lambda should start reading. Can be one
-    of either  TRIM_HORIZON  or  LATEST .
+  help: (Required) The position in the stream where AWS Lambda should start reading.
+    Can be one of either  TRIM_HORIZON  or  LATEST .
   name: starting_position
   type: Attr Text
 name: aws_lambda_event_source_mapping

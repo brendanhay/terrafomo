@@ -1,14 +1,15 @@
 arguments:
 - required: false
-  help: The description of the Redshift security group. Defaults to "Managed by Terraform".
+  help: (Optional) The description of the Redshift security group. Defaults to "Managed
+    by Terraform".
   name: description
   type: Attr Text
 - required: false
-  help: A list of ingress rules.
+  help: (Optional) A list of ingress rules.
   name: ingress
   type: Attr Text
 - required: true
-  help: The name of the Redshift security group.
+  help: (Required) The name of the Redshift security group.
   name: name
   type: Attr Text
 name: aws_redshift_security_group

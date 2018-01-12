@@ -1,58 +1,59 @@
 arguments:
 - required: false
-  help: An Access Logs block. Access Logs documented below.
+  help: (Optional) An Access Logs block. Access Logs documented below.
   name: access_logs
   type: Attr Text
 - required: false
-  help: If true, deletion of the load balancer will be disabled via the AWS API. This
-    will prevent Terraform from deleting the load balancer. Defaults to  false .
+  help: (Optional) If true, deletion of the load balancer will be disabled via the
+    AWS API. This will prevent Terraform from deleting the load balancer. Defaults
+    to  false .
   name: enable_deletion_protection
   type: Attr Text
 - required: false
-  help: ! 'The time in seconds that the connection is allowed to be idle. Default:
-    60.'
+  help: ! '(Optional) The time in seconds that the connection is allowed to be idle.
+    Default: 60.'
   name: idle_timeout
   type: Attr Text
 - required: false
-  help: If true, the LB will be internal.
+  help: (Optional) If true, the LB will be internal.
   name: internal
   type: Attr Text
 - required: false
-  help: The type of IP addresses used by the subnets for your load balancer. The possible
-    values are  ipv4  and  dualstack
+  help: (Optional) The type of IP addresses used by the subnets for your load balancer.
+    The possible values are  ipv4  and  dualstack
   name: ip_address_type
   type: Attr Text
 - required: false
-  help: The type of load balancer to create. Possible values are  application  or  network
+  help: (Optional) The type of load balancer to create. Possible values are  application  or  network
     . The default value is  application .
   name: load_balancer_type
   type: Attr Text
 - required: false
-  help: The name of the LB. This name must be unique within your AWS account, can
-    have a maximum of 32 characters, must contain only alphanumeric characters or
-    hyphens, and must not begin or end with a hyphen. If not specified, Terraform
+  help: (Optional) The name of the LB. This name must be unique within your AWS account,
+    can have a maximum of 32 characters, must contain only alphanumeric characters
+    or hyphens, and must not begin or end with a hyphen. If not specified, Terraform
     will autogenerate a name beginning with  tf-lb .
   name: name
   type: Attr Text
 - required: false
-  help: Creates a unique name beginning with the specified prefix. Conflicts with  name
-    .
+  help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
+    with  name .
   name: name_prefix
   type: Attr Text
 - required: false
-  help: A list of security group IDs to assign to the LB.
+  help: (Optional) A list of security group IDs to assign to the LB.
   name: security_groups
   type: Attr Text
 - required: false
-  help: A subnet mapping block as documented below.
+  help: (Optional) A subnet mapping block as documented below.
   name: subnet_mapping
   type: Attr Text
 - required: false
-  help: A list of subnet IDs to attach to the LB.
+  help: (Optional) A list of subnet IDs to attach to the LB.
   name: subnets
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_lb

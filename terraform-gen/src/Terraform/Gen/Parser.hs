@@ -111,11 +111,11 @@ argItem = item >>> paragraph >>> (required <$> code <*> textual)
   where
     -- should use Parsec.Char here and rethrow errors.
     required n h
-        | Just x <- Text.stripPrefix " - (Required) " h =
-            Arg n x True  defaultType
+        | Text.isPrefixOf " - (Required" h =
+            Arg n (Text.drop 3 h) True  defaultType
 
-        | Just x <- Text.stripPrefix " - (Optional) " h =
-            Arg n x False defaultType
+        | Text.isPrefixOf " - (Optional" h =
+            Arg n (Text.drop 3 h) False defaultType
 
         | otherwise =
             Arg n h True  defaultType

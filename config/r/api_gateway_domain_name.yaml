@@ -1,32 +1,33 @@
 arguments:
 - required: false
-  help: The ARN for an AWS-managed certificate. Conflicts with  certificate_name ,  certificate_body
-    ,  certificate_chain  and  certificate_private_key .
+  help: (Optional) The ARN for an AWS-managed certificate. Conflicts with  certificate_name
+    ,  certificate_body ,  certificate_chain  and  certificate_private_key .
   name: certificate_arn
   type: Attr Text
 - required: false
-  help: The certificate issued for the domain name being registered, in PEM format.
-    Conflicts with  certificate_arn .
+  help: (Optional) The certificate issued for the domain name being registered, in
+    PEM format. Conflicts with  certificate_arn .
   name: certificate_body
   type: Attr Text
 - required: false
-  help: The certificate for the CA that issued the certificate, along with any intermediate
-    CA certificates required to create an unbroken chain to a certificate trusted
-    by the intended API clients. Conflicts with  certificate_arn .
+  help: (Optional) The certificate for the CA that issued the certificate, along with
+    any intermediate CA certificates required to create an unbroken chain to a certificate
+    trusted by the intended API clients. Conflicts with  certificate_arn .
   name: certificate_chain
   type: Attr Text
 - required: false
-  help: The unique name to use when registering this cert as an IAM server certificate.
-    Conflicts with  certificate_arn . Required if  certificate_arn  is not set.
+  help: (Optional) The unique name to use when registering this cert as an IAM server
+    certificate. Conflicts with  certificate_arn . Required if  certificate_arn  is
+    not set.
   name: certificate_name
   type: Attr Text
 - required: false
-  help: The private key associated with the domain certificate given in  certificate_body
+  help: (Optional) The private key associated with the domain certificate given in  certificate_body
     . Conflicts with  certificate_arn .
   name: certificate_private_key
   type: Attr Text
 - required: true
-  help: The fully-qualified domain name to register
+  help: (Required) The fully-qualified domain name to register
   name: domain_name
   type: Attr Text
 name: aws_api_gateway_domain_name

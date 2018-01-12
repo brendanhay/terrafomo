@@ -1,30 +1,31 @@
 arguments:
 - required: false
-  help: The description of the DB parameter group. Defaults to "Managed by Terraform".
+  help: (Optional) The description of the DB parameter group. Defaults to "Managed
+    by Terraform".
   name: description
   type: Attr Text
 - required: true
-  help: The family of the DB parameter group.
+  help: (Required) The family of the DB parameter group.
   name: family
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The name of the DB parameter group.
-    If omitted, Terraform will assign a random, unique name.'
+- required: false
+  help: (Optional, Forces new resource) The name of the DB parameter group. If omitted,
+    Terraform will assign a random, unique name.
   name: name
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Creates a unique name beginning with
-    the specified prefix. Conflicts with  name .'
+- required: false
+  help: (Optional, Forces new resource) Creates a unique name beginning with the specified
+    prefix. Conflicts with  name .
   name: name_prefix
   type: Attr Text
 - required: false
-  help: A list of DB parameters to apply. Note that parameters may differ from a family
-    to an other. Full list of all parameters can be discovered via  https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html  after
+  help: (Optional) A list of DB parameters to apply. Note that parameters may differ
+    from a family to an other. Full list of all parameters can be discovered via  https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html  after
     initial creation of the group.
   name: parameter
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_db_parameter_group

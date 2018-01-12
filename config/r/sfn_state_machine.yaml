@@ -1,14 +1,15 @@
 arguments:
 - required: true
-  help: The Amazon States Language definition of the state machine.
+  help: (Required) The Amazon States Language definition of the state machine.
   name: definition
   type: Attr Text
 - required: true
-  help: The name of the state machine.
+  help: (Required) The name of the state machine.
   name: name
   type: Attr Text
 - required: true
-  help: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+  help: (Required) The Amazon Resource Name (ARN) of the IAM role to use for this
+    state machine.
   name: role_arn
   type: Attr Text
 name: sfn_state_machine

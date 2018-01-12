@@ -1,10 +1,10 @@
 arguments:
 - required: true
-  help: The JSON policy for the SQS queue
+  help: (Required) The JSON policy for the SQS queue
   name: policy
   type: Attr Text
 - required: true
-  help: The URL of the SQS Queue to which to attach the policy
+  help: (Required) The URL of the SQS Queue to which to attach the policy
   name: queue_url
   type: Attr Text
 name: aws_sqs_queue_policy

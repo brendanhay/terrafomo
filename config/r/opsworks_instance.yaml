@@ -1,95 +1,97 @@
 arguments:
 - required: false
-  help: The AWS OpsWorks agent to install.  Defaults to  "INHERIT" .
+  help: (Optional) The AWS OpsWorks agent to install.  Defaults to  "INHERIT" .
   name: agent_version
   type: Attr Text
 - required: false
-  help: The AMI to use for the instance.  If an AMI is specified,  os  must be  "Custom"
-    .
+  help: (Optional) The AMI to use for the instance.  If an AMI is specified,  os  must
+    be  "Custom" .
   name: ami_id
   type: Attr Text
 - required: false
-  help: Machine architecture for created instances.  Can be either  "x86_64"  (the
+  help: (Optional) Machine architecture for created instances.  Can be either  "x86_64"  (the
     default) or  "i386"
   name: architecture
   type: Attr Text
 - required: false
-  help: ! 'Creates load-based or time-based instances.  If set, can be either:  "load"  or  "timer"
-    .'
+  help: ! '(Optional) Creates load-based or time-based instances.  If set, can be
+    either:  "load"  or  "timer" .'
   name: auto_scaling_type
   type: Attr Text
 - required: false
-  help: Name of the availability zone where instances will be created by default.
+  help: (Optional) Name of the availability zone where instances will be created by
+    default.
   name: availability_zone
   type: Attr Text
 - required: false
-  help: ! 'Additional EBS block devices to attach to the instance.  See  #block-devices  below
+  help: ! '(Optional) Additional EBS block devices to attach to the instance.  See  #block-devices  below
     for details.'
   name: ebs_block_device
   type: Attr Text
 - required: false
-  help: If true, the launched EC2 instance will be EBS-optimized.
+  help: (Optional) If true, the launched EC2 instance will be EBS-optimized.
   name: ebs_optimized
   type: Attr Text
 - required: false
-  help: ! 'Customize Ephemeral (also known as "Instance Store") volumes on the instance.
-    See  #block-devices  below for details.'
+  help: ! '(Optional) Customize Ephemeral (also known as "Instance Store") volumes
+    on the instance. See  #block-devices  below for details.'
   name: ephemeral_block_device
   type: Attr Text
 - required: false
-  help: The instance's host name.
+  help: (Optional) The instance's host name.
   name: hostname
   type: Attr Text
 - required: false
-  help: Controls where to install OS and package updates when the instance boots.  Defaults
-    to  true .
+  help: (Optional) Controls where to install OS and package updates when the instance
+    boots.  Defaults to  true .
   name: install_updates_on_boot
   type: Attr Text
 - required: true
-  help: The type of instance to start
+  help: (Required) The type of instance to start
   name: instance_type
   type: Attr Text
 - required: true
-  help: The ids of the layers the instance will belong to.
+  help: (Required) The ids of the layers the instance will belong to.
   name: layer_ids
   type: Attr Text
 - required: false
-  help: Name of operating system that will be installed.
+  help: (Optional) Name of operating system that will be installed.
   name: os
   type: Attr Text
 - required: false
-  help: ! 'Customize details about the root block device of the instance. See  #block-devices  below
-    for details.'
+  help: ! '(Optional) Customize details about the root block device of the instance.
+    See  #block-devices  below for details.'
   name: root_block_device
   type: Attr Text
 - required: false
-  help: Name of the type of root device instances will have by default.  Can be either  "ebs"  or  "instance-store"
+  help: (Optional) Name of the type of root device instances will have by default.  Can
+    be either  "ebs"  or  "instance-store"
   name: root_device_type
   type: Attr Text
 - required: false
-  help: Name of the SSH keypair that instances will have by default.
+  help: (Optional) Name of the SSH keypair that instances will have by default.
   name: ssh_key_name
   type: Attr Text
 - required: true
-  help: The id of the stack the instance will belong to.
+  help: (Required) The id of the stack the instance will belong to.
   name: stack_id
   type: Attr Text
 - required: false
-  help: The desired state of the instance.  Can be either  "running"  or  "stopped"
+  help: (Optional) The desired state of the instance.  Can be either  "running"  or  "stopped"
     .
   name: state
   type: Attr Text
 - required: false
-  help: Subnet ID to attach to
+  help: (Optional) Subnet ID to attach to
   name: subnet_id
   type: Attr Text
 - required: false
-  help: Instance tenancy to use. Can be one of  "default" ,  "dedicated"  or  "host"
+  help: (Optional) Instance tenancy to use. Can be one of  "default" ,  "dedicated"  or  "host"
   name: tenancy
   type: Attr Text
 - required: false
-  help: Keyword to choose what virtualization mode created instances will use. Can
-    be either  "paravirtual"  or  "hvm" .
+  help: (Optional) Keyword to choose what virtualization mode created instances will
+    use. Can be either  "paravirtual"  or  "hvm" .
   name: virtualization_type
   type: Attr Text
 name: aws_opsworks_instance

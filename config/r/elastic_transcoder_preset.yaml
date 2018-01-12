@@ -1,47 +1,42 @@
 arguments:
-- required: true
-  help: ! ' - (Optional, Forces new resource) Audio parameters object (documented
-    below).'
+- required: false
+  help: (Optional, Forces new resource) Audio parameters object (documented below).
   name: audio
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Codec options for the audio parameters
-    (documented below)'
+- required: false
+  help: (Optional, Forces new resource) Codec options for the audio parameters (documented
+    below)
   name: audio_codec_options
   type: Attr Text
 - required: true
-  help: ! ' - (Required, Forces new resource) The container type for the output file.
-    Valid values are  flac ,  flv ,  fmp4 ,  gif ,  mp3 ,  mp4 ,  mpg ,  mxf ,  oga
-    ,  ogg ,  ts , and  webm .'
+  help: (Required, Forces new resource) The container type for the output file. Valid
+    values are  flac ,  flv ,  fmp4 ,  gif ,  mp3 ,  mp4 ,  mpg ,  mxf ,  oga ,  ogg
+    ,  ts , and  webm .
   name: container
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) A description of the preset (maximum
-    255 characters)'
+- required: false
+  help: (Optional, Forces new resource) A description of the preset (maximum 255 characters)
   name: description
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The name of the preset. (maximum 40
-    characters)'
+- required: false
+  help: (Optional, Forces new resource) The name of the preset. (maximum 40 characters)
   name: name
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Thumbnail parameters object (documented
-    below)'
+- required: false
+  help: (Optional, Forces new resource) Thumbnail parameters object (documented below)
   name: thumbnails
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Video parameters object (documented
-    below)'
+- required: false
+  help: (Optional, Forces new resource) Video parameters object (documented below)
   name: video
   type: Attr Text
 - required: true
   help: ! ' (Optional, Forces new resource) Codec options for the video parameters'
   name: video_codec_options
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Watermark parameters for the video parameters
-    (documented below)'
+- required: false
+  help: (Optional, Forces new resource) Watermark parameters for the video parameters
+    (documented below)
   name: video_watermarks
   type: Attr Text
 name: aws_elastictranscoder_preset

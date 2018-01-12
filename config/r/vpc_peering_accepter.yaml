@@ -1,14 +1,15 @@
 arguments:
 - required: false
-  help: Whether or not to accept the peering request. Defaults to  false .
+  help: (Optional) Whether or not to accept the peering request. Defaults to  false
+    .
   name: auto_accept
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: true
-  help: The VPC Peering Connection ID to manage.
+  help: (Required) The VPC Peering Connection ID to manage.
   name: vpc_peering_connection_id
   type: Attr Text
 name: aws_vpc_peering_connection_accepter

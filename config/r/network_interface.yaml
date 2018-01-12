@@ -1,34 +1,35 @@
 arguments:
 - required: false
-  help: Block to define the attachment of the ENI. Documented below.
+  help: (Optional) Block to define the attachment of the ENI. Documented below.
   name: attachment
   type: Attr Text
 - required: false
-  help: A description for the network interface.
+  help: (Optional) A description for the network interface.
   name: description
   type: Attr Text
 - required: false
-  help: List of private IPs to assign to the ENI.
+  help: (Optional) List of private IPs to assign to the ENI.
   name: private_ips
   type: Attr Text
 - required: false
-  help: Number of private IPs to assign to the ENI.
+  help: (Optional) Number of private IPs to assign to the ENI.
   name: private_ips_count
   type: Attr Text
 - required: false
-  help: List of security group IDs to assign to the ENI.
+  help: (Optional) List of security group IDs to assign to the ENI.
   name: security_groups
   type: Attr Text
 - required: false
-  help: Whether to enable source destination checking for the ENI. Default true.
+  help: (Optional) Whether to enable source destination checking for the ENI. Default
+    true.
   name: source_dest_check
   type: Attr Text
 - required: true
-  help: Subnet ID to create the ENI in.
+  help: (Required) Subnet ID to create the ENI in.
   name: subnet_id
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_network_interface

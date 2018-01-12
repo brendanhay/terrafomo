@@ -1,18 +1,19 @@
 arguments:
 - required: false
-  help: The description of the Redshift Subnet group. Defaults to "Managed by Terraform".
+  help: (Optional) The description of the Redshift Subnet group. Defaults to "Managed
+    by Terraform".
   name: description
   type: Attr Text
 - required: true
-  help: The name of the Redshift Subnet group.
+  help: (Required) The name of the Redshift Subnet group.
   name: name
   type: Attr Text
 - required: true
-  help: An array of VPC subnet IDs.
+  help: (Required) An array of VPC subnet IDs.
   name: subnet_ids
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_redshift_subnet_group

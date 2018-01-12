@@ -1,44 +1,45 @@
 arguments:
 - required: true
-  help: ! ' - (Required unless a  snapshot_identifier  or replicate_source_db  is
-    provided) The allocated storage in gigabytes.'
+  help: (Required unless a  snapshot_identifier  or replicate_source_db  is provided)
+    The allocated storage in gigabytes.
   name: allocated_storage
   type: Attr Text
 - required: false
-  help: Indicates that major version upgrades are allowed. Changing this parameter
-    does not result in an outage and the change is asynchronously applied as soon
-    as possible.
+  help: (Optional) Indicates that major version upgrades are allowed. Changing this
+    parameter does not result in an outage and the change is asynchronously applied
+    as soon as possible.
   name: allow_major_version_upgrade
   type: Attr Text
 - required: false
-  help: Specifies whether any database modifications are applied immediately, or during
-    the next maintenance window. Default is false . See  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
+  help: (Optional) Specifies whether any database modifications are applied immediately,
+    or during the next maintenance window. Default is false . See  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
     for more information.
   name: apply_immediately
   type: Attr Text
 - required: false
-  help: Indicates that minor engine upgrades will be applied automatically to the
-    DB instance during the maintenance window. Defaults to true.
+  help: (Optional) Indicates that minor engine upgrades will be applied automatically
+    to the DB instance during the maintenance window. Defaults to true.
   name: auto_minor_version_upgrade
   type: Attr Text
 - required: false
-  help: The AZ for the RDS instance.
+  help: (Optional) The AZ for the RDS instance.
   name: availability_zone
   type: Attr Text
 - required: false
-  help: The days to retain backups for. Must be 1  or greater to be a source for a  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Replication.html
+  help: (Optional) The days to retain backups for. Must be 1  or greater to be a source
+    for a  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Replication.html
     .
   name: backup_retention_period
   type: Attr Text
 - required: false
-  help: ! 'The daily time range (in UTC) during which automated backups are created
-    if they are enabled. Example: "09:46-10:16". Must not overlap with  maintenance_window
+  help: ! '(Optional) The daily time range (in UTC) during which automated backups
+    are created if they are enabled. Example: "09:46-10:16". Must not overlap with  maintenance_window
     .'
   name: backup_window
   type: Attr Text
 - required: false
-  help: The character set name to use for DB encoding in Oracle instances. This can't
-    be changed. See  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
+  help: (Optional) The character set name to use for DB encoding in Oracle instances.
+    This can't be changed. See  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
     for more information.
   name: character_set_name
   type: Attr Text
@@ -48,163 +49,164 @@ arguments:
   name: copy_tags_to_snapshot
   type: Attr Text
 - required: false
-  help: Name of DB subnet group. DB instance will be created in the VPC associated
-    with the DB subnet group. If unspecified, will be created in the  default  VPC,
+  help: (Optional) Name of DB subnet group. DB instance will be created in the VPC
+    associated with the DB subnet group. If unspecified, will be created in the  default  VPC,
     or in EC2 Classic, if available.
   name: db_subnet_group_name
   type: Attr Text
 - required: true
-  help: ! ' - (Required unless a  snapshot_identifier  or  replicate_source_db is
-    provided) The database engine to use.'
+  help: (Required unless a  snapshot_identifier  or  replicate_source_db is provided)
+    The database engine to use.
   name: engine
   type: Attr Text
 - required: false
-  help: The engine version to use.
+  help: (Optional) The engine version to use.
   name: engine_version
   type: Attr Text
 - required: false
-  help: The name of your final DB snapshot when this DB instance is deleted. If omitted,
-    no final snapshot will be made.
+  help: (Optional) The name of your final DB snapshot when this DB instance is deleted.
+    If omitted, no final snapshot will be made.
   name: final_snapshot_identifier
   type: Attr Text
 - required: false
-  help: Specifies whether or mappings of AWS Identity and Access Management (IAM)
-    accounts to database accounts is enabled.
+  help: (Optional) Specifies whether or mappings of AWS Identity and Access Management
+    (IAM) accounts to database accounts is enabled.
   name: iam_database_authentication_enabled
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The name of the RDS instance, if omitted,
-    Terraform will assign a random, unique identifier.'
+- required: false
+  help: (Optional, Forces new resource) The name of the RDS instance, if omitted,
+    Terraform will assign a random, unique identifier.
   name: identifier
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Creates a unique identifier beginning
-    with the specified prefix. Conflicts with  identifer .'
+- required: false
+  help: (Optional, Forces new resource) Creates a unique identifier beginning with
+    the specified prefix. Conflicts with  identifer .
   name: identifier_prefix
   type: Attr Text
 - required: true
-  help: The instance type of the RDS instance.
+  help: (Required) The instance type of the RDS instance.
   name: instance_class
   type: Attr Text
 - required: false
-  help: The amount of provisioned IOPS. Setting this implies a storage_type of "io1".
+  help: (Optional) The amount of provisioned IOPS. Setting this implies a storage_type
+    of "io1".
   name: iops
   type: Attr Text
 - required: false
-  help: The ARN for the KMS encryption key. If creating an encrypted replica, set
-    this to the destination KMS ARN.
+  help: (Optional) The ARN for the KMS encryption key. If creating an encrypted replica,
+    set this to the destination KMS ARN.
   name: kms_key_id
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, but required for some DB engines, i.e. Oracle SE1) License
-    model information for this DB instance.'
+- required: false
+  help: (Optional, but required for some DB engines, i.e. Oracle SE1) License model
+    information for this DB instance.
   name: license_model
   type: Attr Text
 - required: false
-  help: ! 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+  help: ! '(Optional) The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
     Eg: "Mon:00:00-Mon:03:00". See  http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow
     for more information.'
   name: maintenance_window
   type: Attr Text
 - required: false
-  help: ! 'The interval, in seconds, between points when Enhanced Monitoring metrics
-    are collected for the DB instance. To disable collecting Enhanced Monitoring metrics,
-    specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+  help: ! '(Optional) The interval, in seconds, between points when Enhanced Monitoring
+    metrics are collected for the DB instance. To disable collecting Enhanced Monitoring
+    metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
   name: monitoring_interval
   type: Attr Text
 - required: false
-  help: The ARN for the IAM role that permits RDS to send enhanced monitoring metrics
-    to CloudWatch Logs. You can find more information on the  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html
+  help: (Optional) The ARN for the IAM role that permits RDS to send enhanced monitoring
+    metrics to CloudWatch Logs. You can find more information on the  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html
     what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
   name: monitoring_role_arn
   type: Attr Text
 - required: false
-  help: Specifies if the RDS instance is multi-AZ
+  help: (Optional) Specifies if the RDS instance is multi-AZ
   name: multi_az
   type: Attr Text
 - required: false
-  help: The name of the database to create when the DB instance is created. If this
-    parameter is not specified, no database is created in the DB instance. Note that
-    this does not apply for Oracle or SQL Server engines. See the  http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html  for
+  help: (Optional) The name of the database to create when the DB instance is created.
+    If this parameter is not specified, no database is created in the DB instance.
+    Note that this does not apply for Oracle or SQL Server engines. See the  http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html  for
     more details on what applies for those engines.
   name: name
   type: Attr Text
 - required: false
-  help: Name of the DB option group to associate.
+  help: (Optional) Name of the DB option group to associate.
   name: option_group_name
   type: Attr Text
 - required: false
-  help: Name of the DB parameter group to associate.
+  help: (Optional) Name of the DB parameter group to associate.
   name: parameter_group_name
   type: Attr Text
 - required: true
-  help: ! ' - (Required unless a  snapshot_identifier  or  replicate_source_db is
-    provided) Password for the master DB user. Note that this may show up in logs,
-    and it will be stored in the state file.'
+  help: (Required unless a  snapshot_identifier  or  replicate_source_db is provided)
+    Password for the master DB user. Note that this may show up in logs, and it will
+    be stored in the state file.
   name: password
   type: Attr Text
 - required: false
-  help: The port on which the DB accepts connections.
+  help: (Optional) The port on which the DB accepts connections.
   name: port
   type: Attr Text
 - required: false
-  help: Bool to control if instance is publicly accessible. Default is  false .
+  help: (Optional) Bool to control if instance is publicly accessible. Default is  false
+    .
   name: publicly_accessible
   type: Attr Text
 - required: false
-  help: Specifies that this resource is a Replicate database, and to use this value
-    as the source database. This correlates to the identifier  of another Amazon RDS
-    Database to replicate. See  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Replication.html  and  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html
+  help: (Optional) Specifies that this resource is a Replicate database, and to use
+    this value as the source database. This correlates to the identifier  of another
+    Amazon RDS Database to replicate. See  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Replication.html  and  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html
     for more information on using Replication.
   name: replicate_source_db
   type: Attr Text
-- required: true
-  help: ! ' - (Optional/Deprecated) List of DB Security Groups to associate. Only
-    used for  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html#USER_VPC.FindDefaultVPC
-    .'
+- required: false
+  help: (Optional/Deprecated) List of DB Security Groups to associate. Only used for  https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html#USER_VPC.FindDefaultVPC
+    .
   name: security_group_names
   type: Attr Text
 - required: false
-  help: Determines whether a final DB snapshot is created before the DB instance is
-    deleted. If true is specified, no DBSnapshot is created. If false is specified,
-    a DB snapshot is created before the DB instance is deleted, using the value from  final_snapshot_identifier
-    . Default is  false .
+  help: (Optional) Determines whether a final DB snapshot is created before the DB
+    instance is deleted. If true is specified, no DBSnapshot is created. If false
+    is specified, a DB snapshot is created before the DB instance is deleted, using
+    the value from  final_snapshot_identifier . Default is  false .
   name: skip_final_snapshot
   type: Attr Text
 - required: false
-  help: ! 'Specifies whether or not to create this database from a snapshot. This
-    correlates to the snapshot ID you''d find in the RDS console, e.g: rds:production-2015-06-26-06-05.'
+  help: ! '(Optional) Specifies whether or not to create this database from a snapshot.
+    This correlates to the snapshot ID you''d find in the RDS console, e.g: rds:production-2015-06-26-06-05.'
   name: snapshot_identifier
   type: Attr Text
 - required: false
-  help: Specifies whether the DB instance is encrypted. The default is  false  if
+  help: (Optional) Specifies whether the DB instance is encrypted. The default is  false  if
     not specified.
   name: storage_encrypted
   type: Attr Text
 - required: false
-  help: One of "standard" (magnetic), "gp2" (general purpose SSD), or "io1" (provisioned
-    IOPS SSD). The default is "io1" if  iops  is specified, "standard" if not. Note
-    that this behaviour is different from the AWS web console, where the default is
-    "gp2".
+  help: (Optional) One of "standard" (magnetic), "gp2" (general purpose SSD), or "io1"
+    (provisioned IOPS SSD). The default is "io1" if  iops  is specified, "standard"
+    if not. Note that this behaviour is different from the AWS web console, where
+    the default is "gp2".
   name: storage_type
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: false
-  help: Time zone of the DB instance.  timezone  is currently only supported by Microsoft
-    SQL Server. The  timezone  can only be set on creation. See  http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+  help: (Optional) Time zone of the DB instance.  timezone  is currently only supported
+    by Microsoft SQL Server. The  timezone  can only be set on creation. See  http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     for more information.
   name: timezone
   type: Attr Text
 - required: true
-  help: ! ' - (Required unless a  snapshot_identifier  or  replicate_source_db is
-    provided) Username for the master DB user.'
+  help: (Required unless a  snapshot_identifier  or  replicate_source_db is provided)
+    Username for the master DB user.
   name: username
   type: Attr Text
 - required: false
-  help: List of VPC security groups to associate.
+  help: (Optional) List of VPC security groups to associate.
   name: vpc_security_group_ids
   type: Attr Text
 name: aws_db_instance

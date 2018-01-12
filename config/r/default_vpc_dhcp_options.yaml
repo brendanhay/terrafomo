@@ -1,16 +1,16 @@
 arguments:
 - required: false
-  help: List of NETBIOS name servers.
+  help: (Optional) List of NETBIOS name servers.
   name: netbios_name_servers
   type: Attr Text
 - required: false
-  help: The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast
-    and multicast are not supported in their network. For more information about these
-    node types, see  http://www.ietf.org/rfc/rfc2132.txt .
+  help: (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify
+    2 since broadcast and multicast are not supported in their network. For more information
+    about these node types, see  http://www.ietf.org/rfc/rfc2132.txt .
   name: netbios_node_type
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_default_vpc_dhcp_options

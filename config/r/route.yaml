@@ -1,38 +1,38 @@
 arguments:
 - required: false
-  help: The destination CIDR block.
+  help: (Optional) The destination CIDR block.
   name: destination_cidr_block
   type: Attr Text
 - required: false
-  help: The destination IPv6 CIDR block.
+  help: (Optional) The destination IPv6 CIDR block.
   name: destination_ipv6_cidr_block
   type: Attr Text
 - required: false
-  help: An ID of a VPC Egress Only Internet Gateway.
+  help: (Optional) An ID of a VPC Egress Only Internet Gateway.
   name: egress_only_gateway_id
   type: Attr Text
 - required: false
-  help: An ID of a VPC internet gateway or a virtual private gateway.
+  help: (Optional) An ID of a VPC internet gateway or a virtual private gateway.
   name: gateway_id
   type: Attr Text
 - required: false
-  help: An ID of an EC2 instance.
+  help: (Optional) An ID of an EC2 instance.
   name: instance_id
   type: Attr Text
 - required: false
-  help: An ID of a VPC NAT gateway.
+  help: (Optional) An ID of a VPC NAT gateway.
   name: nat_gateway_id
   type: Attr Text
 - required: false
-  help: An ID of a network interface.
+  help: (Optional) An ID of a network interface.
   name: network_interface_id
   type: Attr Text
 - required: true
-  help: The ID of the routing table.
+  help: (Required) The ID of the routing table.
   name: route_table_id
   type: Attr Text
 - required: false
-  help: An ID of a VPC peering connection.
+  help: (Optional) An ID of a VPC peering connection.
   name: vpc_peering_connection_id
   type: Attr Text
 name: aws_route

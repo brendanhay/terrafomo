@@ -1,19 +1,20 @@
 arguments:
 - required: true
-  help: A db password
+  help: (Required) A db password
   name: db_password
   type: Attr Text
 - required: true
-  help: A db username
+  help: (Required) A db username
   name: db_user
   type: Attr Text
 - required: true
-  help: The db instance to register for this stack. Changing this will force a new
-    resource.
+  help: (Required) The db instance to register for this stack. Changing this will
+    force a new resource.
   name: rds_db_instance_arn
   type: Attr Text
 - required: true
-  help: The stack to register a db inatance for. Changing this will force a new resource.
+  help: (Required) The stack to register a db inatance for. Changing this will force
+    a new resource.
   name: stack_id
   type: Attr Text
 name: aws_opsworks_rds_db_instance

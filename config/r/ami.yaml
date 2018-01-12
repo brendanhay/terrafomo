@@ -1,20 +1,20 @@
 arguments:
 - required: false
-  help: Machine architecture for created instances. Defaults to "x86_64".
+  help: (Optional) Machine architecture for created instances. Defaults to "x86_64".
   name: architecture
   type: Attr Text
 - required: false
-  help: A longer, human-readable description for the AMI.
+  help: (Optional) A longer, human-readable description for the AMI.
   name: description
   type: Attr Text
 - required: false
-  help: Nested block describing an EBS block device that should be attached to created
-    instances. The structure of this block is described below.
+  help: (Optional) Nested block describing an EBS block device that should be attached
+    to created instances. The structure of this block is described below.
   name: ebs_block_device
   type: Attr Text
 - required: false
-  help: Nested block describing an ephemeral block device that should be attached
-    to created instances. The structure of this block is described below.
+  help: (Optional) Nested block describing an ephemeral block device that should be
+    attached to created instances. The structure of this block is described below.
   name: ephemeral_block_device
   type: Attr Text
 - required: false
@@ -33,7 +33,7 @@ arguments:
   name: most_recent
   type: Attr Text
 - required: true
-  help: A region-unique name for the AMI.
+  help: (Required) A region-unique name for the AMI.
   name: name
   type: Attr Text
 - required: false
@@ -50,13 +50,14 @@ arguments:
   name: owners
   type: Attr Text
 - required: false
-  help: The name of the root device (for example,  /dev/sda1 , or  /dev/xvda ).
+  help: (Optional) The name of the root device (for example,  /dev/sda1 , or  /dev/xvda
+    ).
   name: root_device_name
   type: Attr Text
 - required: false
-  help: Keyword to choose what virtualization mode created instances will use. Can
-    be either "paravirtual" (the default) or "hvm". The choice of virtualization type
-    changes the set of further arguments that are required, as described below.
+  help: (Optional) Keyword to choose what virtualization mode created instances will
+    use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization
+    type changes the set of further arguments that are required, as described below.
   name: virtualization_type
   type: Attr Text
 name: aws_ami

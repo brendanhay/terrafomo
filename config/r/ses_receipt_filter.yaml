@@ -1,14 +1,14 @@
 arguments:
 - required: true
-  help: The IP address or address range to filter, in CIDR notation
+  help: (Required) The IP address or address range to filter, in CIDR notation
   name: cidr
   type: Attr Text
 - required: true
-  help: The name of the filter
+  help: (Required) The name of the filter
   name: name
   type: Attr Text
 - required: true
-  help: Block or Allow
+  help: (Required) Block or Allow
   name: policy
   type: Attr Text
 name: aws_ses_receipt_filter

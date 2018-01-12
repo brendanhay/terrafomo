@@ -1,21 +1,21 @@
 arguments:
-- required: true
-  help: ! ' - (Optional, VPC only) Can be specified multiple times for each egress
-    rule. Each egress block supports fields documented below.'
+- required: false
+  help: (Optional, VPC only) Can be specified multiple times for each egress rule.
+    Each egress block supports fields documented below.
   name: egress
   type: Attr Text
 - required: false
-  help: Can be specified multiple times for each ingress rule. Each ingress block
-    supports fields documented below.
+  help: (Optional) Can be specified multiple times for each ingress rule. Each ingress
+    block supports fields documented below.
   name: ingress
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The VPC ID.   It will be left in it''s
-    current state'
+- required: false
+  help: (Optional, Forces new resource) The VPC ID.   It will be left in it's current
+    state
   name: vpc_id
   type: Attr Text
 name: aws_default_security_group

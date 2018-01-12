@@ -1,11 +1,11 @@
 arguments:
 - required: false
-  help: The IP address type and IP address range (in CIDR notation) from which web
-    requests originate.
+  help: (Optional) The IP address type and IP address range (in CIDR notation) from
+    which web requests originate.
   name: ip_set_descriptor
   type: Attr Text
 - required: true
-  help: The name or description of the IPSet.
+  help: (Required) The name or description of the IPSet.
   name: name
   type: Attr Text
 name: aws_wafregional_ipset

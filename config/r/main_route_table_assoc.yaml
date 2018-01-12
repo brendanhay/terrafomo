@@ -1,11 +1,11 @@
 arguments:
 - required: true
-  help: The ID of the Route Table to set as the new main route table for the target
-    VPC
+  help: (Required) The ID of the Route Table to set as the new main route table for
+    the target VPC
   name: route_table_id
   type: Attr Text
 - required: true
-  help: The ID of the VPC whose main route table should be set
+  help: (Required) The ID of the VPC whose main route table should be set
   name: vpc_id
   type: Attr Text
 name: aws_main_route_table_

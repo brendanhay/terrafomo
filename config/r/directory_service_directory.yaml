@@ -1,42 +1,42 @@
 arguments:
 - required: false
-  help: The alias for the directory (must be unique amongst all aliases in AWS). Required
-    for  enable_sso .
+  help: (Optional) The alias for the directory (must be unique amongst all aliases
+    in AWS). Required for  enable_sso .
   name: alias
   type: Attr Text
 - required: true
-  help: ! ' - (Required for  ADConnector ) Connector related information about the
-    directory. Fields documented below.'
+  help: (Required for  ADConnector ) Connector related information about the directory.
+    Fields documented below.
   name: connect_settings
   type: Attr Text
 - required: false
-  help: A textual description for the directory.
+  help: (Optional) A textual description for the directory.
   name: description
   type: Attr Text
 - required: false
-  help: Whether to enable single-sign on for the directory. Requires  alias . Defaults
-    to  false .
+  help: (Optional) Whether to enable single-sign on for the directory. Requires  alias
+    . Defaults to  false .
   name: enable_sso
   type: Attr Text
 - required: true
-  help: The fully qualified name for the directory, such as  corp.example.com
+  help: (Required) The fully qualified name for the directory, such as  corp.example.com
   name: name
   type: Attr Text
 - required: true
-  help: The password for the directory administrator or connector user.
+  help: (Required) The password for the directory administrator or connector user.
   name: password
   type: Attr Text
 - required: false
-  help: The short name of the directory, such as  CORP .
+  help: (Optional) The short name of the directory, such as  CORP .
   name: short_name
   type: Attr Text
 - required: true
-  help: ! ' - (Required for  SimpleAD  and  ADConnector ) The size of the directory
-    ( Small  or  Large  are accepted values).'
+  help: (Required for  SimpleAD  and  ADConnector ) The size of the directory ( Small  or  Large  are
+    accepted values).
   name: size
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: true
@@ -45,8 +45,8 @@ arguments:
   name: type
   type: Attr Text
 - required: true
-  help: ! ' - (Required for  SimpleAD  and  MicrosoftAD ) VPC related information
-    about the directory. Fields documented below.'
+  help: (Required for  SimpleAD  and  MicrosoftAD ) VPC related information about
+    the directory. Fields documented below.
   name: vpc_settings
   type: Attr Text
 name: aws_directory_service_directory

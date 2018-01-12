@@ -10,19 +10,19 @@ arguments:
   name: certificate_chain
   type: Attr Text
 - required: false
-  help: The name of the Server Certificate. Do not include the path in this value.
-    If omitted, Terraform will assign a random, unique name.
+  help: (Optional) The name of the Server Certificate. Do not include the path in
+    this value. If omitted, Terraform will assign a random, unique name.
   name: name
   type: Attr Text
 - required: false
-  help: Creates a unique name beginning with the specified prefix. Conflicts with  name
-    .
+  help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
+    with  name .
   name: name_prefix
   type: Attr Text
 - required: false
-  help: The IAM path for the server certificate.  If it is not included, it defaults
-    to a slash (/). If this certificate is for use with AWS CloudFront, the path must
-    be in format  /cloudfront/your_path_here . See  https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html  for
+  help: (Optional) The IAM path for the server certificate.  If it is not included,
+    it defaults to a slash (/). If this certificate is for use with AWS CloudFront,
+    the path must be in format  /cloudfront/your_path_here . See  https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html  for
     more details on IAM Paths.
   name: path
   type: Attr Text

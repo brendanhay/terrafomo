@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: Name of the repository.
+  help: (Required) Name of the repository.
   name: name
   type: Attr Text
 name: aws_ecr_repository

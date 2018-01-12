@@ -1,6 +1,6 @@
 arguments:
 - required: false
-  help: The description of the client certificate.
+  help: (Optional) The description of the client certificate.
   name: description
   type: Attr Text
 name: aws_api_gateway_client_certificate

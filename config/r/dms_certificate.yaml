@@ -1,16 +1,16 @@
 arguments:
 - required: true
-  help: The certificate identifier.
+  help: (Required) The certificate identifier.
   name: certificate_id
   type: Attr Text
 - required: false
-  help: The contents of the .pem X.509 certificate file for the certificate. Either  certificate_pem  or  certificate_wallet  must
-    be set.
+  help: (Optional) The contents of the .pem X.509 certificate file for the certificate.
+    Either  certificate_pem  or  certificate_wallet  must be set.
   name: certificate_pem
   type: Attr Text
 - required: false
-  help: The contents of the Oracle Wallet certificate for use with SSL. Either  certificate_pem  or  certificate_wallet  must
-    be set.
+  help: (Optional) The contents of the Oracle Wallet certificate for use with SSL.
+    Either  certificate_pem  or  certificate_wallet  must be set.
   name: certificate_wallet
   type: Attr Text
 name: aws_dms_certificate

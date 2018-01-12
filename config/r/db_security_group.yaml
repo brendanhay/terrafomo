@@ -1,18 +1,19 @@
 arguments:
 - required: false
-  help: The description of the DB security group. Defaults to "Managed by Terraform".
+  help: (Optional) The description of the DB security group. Defaults to "Managed
+    by Terraform".
   name: description
   type: Attr Text
 - required: true
-  help: A list of ingress rules.
+  help: (Required) A list of ingress rules.
   name: ingress
   type: Attr Text
 - required: true
-  help: The name of the DB security group.
+  help: (Required) The name of the DB security group.
   name: name
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_db_security_group

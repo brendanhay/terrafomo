@@ -1,10 +1,10 @@
 arguments:
 - required: true
-  help: The Amazon S3 bucket in which to store the Spot instance data feed.
+  help: (Required) The Amazon S3 bucket in which to store the Spot instance data feed.
   name: bucket
   type: Attr Text
 - required: false
-  help: Path of folder inside bucket to place spot pricing data.
+  help: (Optional) Path of folder inside bucket to place spot pricing data.
   name: prefix
   type: Attr Text
 name: aws_spot_datafeed_subscription

@@ -1,60 +1,61 @@
 arguments:
 - required: false
-  help: Information about alarms associated with the deployment group (documented
+  help: (Optional) Information about alarms associated with the deployment group (documented
     below).
   name: alarm_configuration
   type: Attr Text
 - required: true
-  help: The name of the application.
+  help: (Required) The name of the application.
   name: app_name
   type: Attr Text
 - required: false
-  help: The automatic rollback configuration associated with the deployment group
-    (documented below).
+  help: (Optional) The automatic rollback configuration associated with the deployment
+    group (documented below).
   name: auto_rollback_configuration
   type: Attr Text
 - required: false
-  help: Autoscaling groups associated with the deployment group.
+  help: (Optional) Autoscaling groups associated with the deployment group.
   name: autoscaling_groups
   type: Attr Text
 - required: false
-  help: Information about blue/green deployment options for a deployment group (documented
-    below).
+  help: (Optional) Information about blue/green deployment options for a deployment
+    group (documented below).
   name: blue_green_deployment_config
   type: Attr Text
 - required: false
-  help: The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime".
+  help: (Optional) The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime".
   name: deployment_config_name
   type: Attr Text
 - required: true
-  help: The name of the deployment group.
+  help: (Required) The name of the deployment group.
   name: deployment_group_name
   type: Attr Text
 - required: false
-  help: Information about the type of deployment, either in-place or blue/green, you
-    want to run and whether to route deployment traffic behind a load balancer (documented
-    below).
+  help: (Optional) Information about the type of deployment, either in-place or blue/green,
+    you want to run and whether to route deployment traffic behind a load balancer
+    (documented below).
   name: deployment_style
   type: Attr Text
 - required: false
-  help: Tag filters associated with the group. See the AWS docs for details.
+  help: (Optional) Tag filters associated with the group. See the AWS docs for details.
   name: ec2_tag_filter
   type: Attr Text
 - required: false
-  help: Information about the load balancer to use in a blue/green deployment (documented
-    below).
+  help: (Optional) Information about the load balancer to use in a blue/green deployment
+    (documented below).
   name: load_balancer_info
   type: Attr Text
 - required: false
-  help: On premise tag filters associated with the group. See the AWS docs for details.
+  help: (Optional) On premise tag filters associated with the group. See the AWS docs
+    for details.
   name: on_premises_instance_tag_filter
   type: Attr Text
 - required: true
-  help: The service role ARN that allows deployments.
+  help: (Required) The service role ARN that allows deployments.
   name: service_role_arn
   type: Attr Text
 - required: false
-  help: Trigger Configurations for the deployment group (documented below).
+  help: (Optional) Trigger Configurations for the deployment group (documented below).
   name: trigger_configuration
   type: Attr Text
 name: aws_codedeploy_deployment_group

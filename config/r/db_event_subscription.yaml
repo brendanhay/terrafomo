@@ -1,33 +1,34 @@
 arguments:
 - required: false
-  help: A boolean flag to enable/disable the subscription. Defaults to true.
+  help: (Optional) A boolean flag to enable/disable the subscription. Defaults to
+    true.
   name: enabled
   type: Attr Text
 - required: false
-  help: A list of event categories for a SourceType that you want to subscribe to.
-    See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_Events.html
+  help: (Optional) A list of event categories for a SourceType that you want to subscribe
+    to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_Events.html
   name: event_categories
   type: Attr Text
 - required: true
-  help: The name of the DB event subscription.
+  help: (Required) The name of the DB event subscription.
   name: name
   type: Attr Text
 - required: true
-  help: The SNS topic to send events to.
+  help: (Required) The SNS topic to send events to.
   name: sns_topic
   type: Attr Text
 - required: false
-  help: A list of identifiers of the event sources for which events will be returned.
-    If not specified, then all sources are included in the response. If specified,
-    a source_type must also be specified.
+  help: (Optional) A list of identifiers of the event sources for which events will
+    be returned. If not specified, then all sources are included in the response.
+    If specified, a source_type must also be specified.
   name: source_ids
   type: Attr Text
 - required: false
-  help: The type of source that will be generating the events.
+  help: (Optional) The type of source that will be generating the events.
   name: source_type
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_db_event_subscription

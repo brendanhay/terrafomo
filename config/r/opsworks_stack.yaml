@@ -1,98 +1,100 @@
 arguments:
 - required: false
-  help: If set to  "LATEST" , OpsWorks will automatically install the latest version.
+  help: (Optional) If set to  "LATEST" , OpsWorks will automatically install the latest
+    version.
   name: agent_version
   type: Attr Text
 - required: false
-  help: If  manage_berkshelf  is enabled, the version of Berkshelf to use.
+  help: (Optional) If  manage_berkshelf  is enabled, the version of Berkshelf to use.
   name: berkshelf_version
   type: Attr Text
 - required: false
-  help: Color to paint next to the stack's resources in the OpsWorks console.
+  help: (Optional) Color to paint next to the stack's resources in the OpsWorks console.
   name: color
   type: Attr Text
 - required: false
-  help: Name of the configuration manager to use. Defaults to "Chef".
+  help: (Optional) Name of the configuration manager to use. Defaults to "Chef".
   name: configuration_manager_name
   type: Attr Text
 - required: false
-  help: Version of the configuration manager to use. Defaults to "11.4".
+  help: (Optional) Version of the configuration manager to use. Defaults to "11.4".
   name: configuration_manager_version
   type: Attr Text
 - required: false
-  help: When  use_custom_cookbooks  is set, provide this sub-object as described below.
+  help: (Optional) When  use_custom_cookbooks  is set, provide this sub-object as
+    described below.
   name: custom_cookbooks_source
   type: Attr Text
 - required: false
-  help: Custom JSON attributes to apply to the entire stack.
+  help: (Optional) User defined JSON passed to "Chef". Use a "here doc" for multiline
+    JSON.
   name: custom_json
   type: Attr Text
 - required: false
-  help: User defined JSON passed to "Chef". Use a "here doc" for multiline JSON.
-  name: custom_json
-  type: Attr Text
-- required: false
-  help: Name of the availability zone where instances will be created by default.
-    This is required unless you set  vpc_id .
+  help: (Optional) Name of the availability zone where instances will be created by
+    default. This is required unless you set  vpc_id .
   name: default_availability_zone
   type: Attr Text
 - required: true
-  help: The ARN of an IAM Instance Profile that created instances will have by default.
+  help: (Required) The ARN of an IAM Instance Profile that created instances will
+    have by default.
   name: default_instance_profile_arn
   type: Attr Text
 - required: false
-  help: Name of OS that will be installed on instances by default.
+  help: (Optional) Name of OS that will be installed on instances by default.
   name: default_os
   type: Attr Text
 - required: false
-  help: Name of the type of root device instances will have by default.
+  help: (Optional) Name of the type of root device instances will have by default.
   name: default_root_device_type
   type: Attr Text
 - required: false
-  help: Name of the SSH keypair that instances will have by default.
+  help: (Optional) Name of the SSH keypair that instances will have by default.
   name: default_ssh_key_name
   type: Attr Text
 - required: false
-  help: Id of the subnet in which instances will be created by default. Mandatory
-    if  vpc_id  is set, and forbidden if it isn't.
+  help: (Optional) Id of the subnet in which instances will be created by default.
+    Mandatory if  vpc_id  is set, and forbidden if it isn't.
   name: default_subnet_id
   type: Attr Text
 - required: false
-  help: Keyword representing the naming scheme that will be used for instance hostnames
-    within this stack.
+  help: (Optional) Keyword representing the naming scheme that will be used for instance
+    hostnames within this stack.
   name: hostname_theme
   type: Attr Text
 - required: false
-  help: Boolean value controlling whether Opsworks will run Berkshelf for this stack.
+  help: (Optional) Boolean value controlling whether Opsworks will run Berkshelf for
+    this stack.
   name: manage_berkshelf
   type: Attr Text
 - required: true
-  help: The name of the stack.
+  help: (Required) The name of the stack.
   name: name
   type: Attr Text
 - required: true
-  help: The name of the region where the stack will exist.
+  help: (Required) The name of the region where the stack will exist.
   name: region
   type: Attr Text
 - required: true
-  help: The ARN of an IAM role that the OpsWorks service will act as.
+  help: (Required) The ARN of an IAM role that the OpsWorks service will act as.
   name: service_role_arn
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: false
-  help: Boolean value controlling whether the custom cookbook settings are enabled.
+  help: (Optional) Boolean value controlling whether the custom cookbook settings
+    are enabled.
   name: use_custom_cookbooks
   type: Attr Text
 - required: false
-  help: Boolean value controlling whether the standard OpsWorks security groups apply
-    to created instances.
+  help: (Optional) Boolean value controlling whether the standard OpsWorks security
+    groups apply to created instances.
   name: use_opsworks_security_groups
   type: Attr Text
 - required: false
-  help: The id of the VPC that this stack belongs to.
+  help: (Optional) The id of the VPC that this stack belongs to.
   name: vpc_id
   type: Attr Text
 name: aws_opsworks_stack

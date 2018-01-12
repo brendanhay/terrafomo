@@ -91,9 +91,10 @@ data Config = Config
     , configAttributes :: !(Set Attr)
     } deriving (Show, Generic)
 
-- If the config was a Monoid proper?
-- If the generated config was separate from a more 'partial/incomplete' config specified by hand?
-    this is primarily to reduce noise, probably not important right now.
+-- - If the config was a Monoid proper?
+-- - If the generated config was separate from a more 'partial/incomplete' config specified by hand?
+--     this is primarily to reduce noise, probably not important right now.
+-- - Add a Makefile
 
 instance Semigroup Config where
     (<>) parsed config     = Config

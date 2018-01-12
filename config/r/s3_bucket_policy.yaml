@@ -1,10 +1,10 @@
 arguments:
 - required: true
-  help: The name of the bucket to which to apply the policy.
+  help: (Required) The name of the bucket to which to apply the policy.
   name: bucket
   type: Attr Text
 - required: true
-  help: The text of the policy.
+  help: (Required) The text of the policy.
   name: policy
   type: Attr Text
 name: aws_s3_bucket_policy

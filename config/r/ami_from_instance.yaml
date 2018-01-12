@@ -1,17 +1,17 @@
 arguments:
 - required: true
-  help: A region-unique name for the AMI.
+  help: (Required) A region-unique name for the AMI.
   name: name
   type: Attr Text
 - required: false
-  help: Boolean that overrides the behavior of stopping the instance before snapshotting.
-    This is risky since it may cause a snapshot of an inconsistent filesystem state,
-    but can be used to avoid downtime if the user otherwise guarantees that no filesystem
-    writes will be underway at the time of snapshot.
+  help: (Optional) Boolean that overrides the behavior of stopping the instance before
+    snapshotting. This is risky since it may cause a snapshot of an inconsistent filesystem
+    state, but can be used to avoid downtime if the user otherwise guarantees that
+    no filesystem writes will be underway at the time of snapshot.
   name: snapshot_without_reboot
   type: Attr Text
 - required: true
-  help: The id of the instance to use as the basis of the AMI.
+  help: (Required) The id of the instance to use as the basis of the AMI.
   name: source_instance_id
   type: Attr Text
 name: aws_ami_from_instance

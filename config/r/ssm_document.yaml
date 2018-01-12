@@ -1,18 +1,19 @@
 arguments:
 - required: true
-  help: The json content of the document.
+  help: (Required) The json content of the document.
   name: content
   type: Attr Text
 - required: true
-  help: ! 'The type of the document. Valid document types include:  Command ,  Policy  and  Automation'
+  help: ! '(Required) The type of the document. Valid document types include:  Command
+    ,  Policy  and  Automation'
   name: document_type
   type: Attr Text
 - required: true
-  help: The name of the document.
+  help: (Required) The name of the document.
   name: name
   type: Attr Text
 - required: false
-  help: ! 'Additional Permissions to attach to the document. See  #permissions  below
+  help: ! '(Optional) Additional Permissions to attach to the document. See  #permissions  below
     for details.'
   name: permissions
   type: Attr Text

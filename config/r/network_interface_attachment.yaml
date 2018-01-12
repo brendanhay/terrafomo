@@ -1,14 +1,14 @@
 arguments:
 - required: true
-  help: Network interface index (int).
+  help: (Required) Network interface index (int).
   name: device_index
   type: Attr Text
 - required: true
-  help: Instance ID to attach.
+  help: (Required) Instance ID to attach.
   name: instance_id
   type: Attr Text
 - required: true
-  help: ENI ID to attach.
+  help: (Required) ENI ID to attach.
   name: network_interface_id
   type: Attr Text
 name: aws_network_interface_attachment

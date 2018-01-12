@@ -1,10 +1,10 @@
 arguments:
 - required: true
-  help: The DB Instance Identifier from which to take the snapshot.
+  help: (Required) The DB Instance Identifier from which to take the snapshot.
   name: db_instance_identifier
   type: Attr Text
 - required: true
-  help: The Identifier for the snapshot.
+  help: (Required) The Identifier for the snapshot.
   name: db_snapshot_identifier
   type: Attr Text
 name: aws_db_snapshot

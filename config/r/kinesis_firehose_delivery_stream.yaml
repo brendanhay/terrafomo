@@ -5,30 +5,30 @@ arguments:
     , and  elasticsearch .'
   name: destination
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, only Required when  destination  is  extended_s3 ) Enhanced
-    configuration options for the s3 destination. More details are given below.'
+- required: false
+  help: (Optional, only Required when  destination  is  extended_s3 ) Enhanced configuration
+    options for the s3 destination. More details are given below.
   name: extended_s3_configuration
   type: Attr Text
 - required: false
-  help: Allows the ability to specify the kinesis stream that is used as the source
-    of the firehose delivery stream.
+  help: (Optional) Allows the ability to specify the kinesis stream that is used as
+    the source of the firehose delivery stream.
   name: kinesis_source_configuration
   type: Attr Text
 - required: true
-  help: A name to identify the stream. This is unique to the AWS account and region
-    the Stream is created in.
+  help: (Required) A name to identify the stream. This is unique to the AWS account
+    and region the Stream is created in.
   name: name
   type: Attr Text
 - required: false
-  help: Configuration options if redshift is the destination. Using  redshift_configuration  requires
+  help: (Optional) Configuration options if redshift is the destination. Using  redshift_configuration  requires
     the user to also specify a s3_configuration  block. More details are given below.
   name: redshift_configuration
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Deprecated, see/use  extended_s3_configuration  unless  destination  is  redshift
+- required: false
+  help: (Optional, Deprecated, see/use  extended_s3_configuration  unless  destination  is  redshift
     ) Configuration options for the s3 destination (or the intermediate bucket if
-    the destination is redshift). More details are given below.'
+    the destination is redshift). More details are given below.
   name: s3_configuration
   type: Attr Text
 name: aws_kinesis_firehose_delivery_stream

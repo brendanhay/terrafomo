@@ -1,23 +1,23 @@
 arguments:
 - required: false
-  help: The encryption type to use. The only acceptable values are  NONE  or  KMS
+  help: (Optional) The encryption type to use. The only acceptable values are  NONE  or  KMS
     . The default value is  NONE .
   name: encryption_type
   type: Attr Text
 - required: false
-  help: The GUID for the customer-managed KMS key to use for encryption. You can also
-    use a Kinesis-owned master key by specifying the alias aws/kinesis.
+  help: (Optional) The GUID for the customer-managed KMS key to use for encryption.
+    You can also use a Kinesis-owned master key by specifying the alias aws/kinesis.
   name: kms_key_id
   type: Attr Text
 - required: true
-  help: A name to identify the stream. This is unique to the AWS account and region
-    the Stream is created in.
+  help: (Required) A name to identify the stream. This is unique to the AWS account
+    and region the Stream is created in.
   name: name
   type: Attr Text
 - required: false
-  help: Length of time data records are accessible after they are added to the stream.
-    The maximum value of a stream's retention period is 168 hours. Minimum value is
-    24. Default is 24.
+  help: (Optional) Length of time data records are accessible after they are added
+    to the stream. The maximum value of a stream's retention period is 168 hours.
+    Minimum value is 24. Default is 24.
   name: retention_period
   type: Attr Text
 - required: true
@@ -28,14 +28,14 @@ arguments:
   name: shard_count
   type: Attr Text
 - required: false
-  help: A list of shard-level CloudWatch metrics which can be enabled for the stream.
-    See  https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html  for
+  help: (Optional) A list of shard-level CloudWatch metrics which can be enabled for
+    the stream. See  https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html  for
     more. Note that the value ALL should not be used; instead you should provide an
     explicit list of metrics you wish to enable.
   name: shard_level_metrics
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_kinesis_stream

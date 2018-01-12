@@ -6,7 +6,7 @@ arguments:
   name: byte_match_tuples
   type: Attr Text
 - required: true
-  help: The name or description of the Byte Match Set.
+  help: (Required) The name or description of the Byte Match Set.
   name: name
   type: Attr Text
 name: aws_waf_byte_match_set

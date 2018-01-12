@@ -1,20 +1,20 @@
 arguments:
 - required: false
-  help: The list of binary media types supported by the RestApi. By default, the RestApi
-    supports only UTF-8-encoded text payloads.
+  help: (Optional) The list of binary media types supported by the RestApi. By default,
+    the RestApi supports only UTF-8-encoded text payloads.
   name: binary_media_types
   type: Attr Text
 - required: false
-  help: An OpenAPI specification that defines the set of routes and integrations to
-    create as part of the REST API.
+  help: (Optional) An OpenAPI specification that defines the set of routes and integrations
+    to create as part of the REST API.
   name: body
   type: Attr Text
 - required: false
-  help: The description of the REST API
+  help: (Optional) The description of the REST API
   name: description
   type: Attr Text
 - required: true
-  help: The name of the REST API
+  help: (Required) The name of the REST API
   name: name
   type: Attr Text
 name: aws_api_gateway_rest_api

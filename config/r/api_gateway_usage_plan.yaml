@@ -1,27 +1,27 @@
 arguments:
 - required: false
-  help: ! 'The associated  #api-stages-arguments  of the usage plan.'
+  help: ! '(Optional) The associated  #api-stages-arguments  of the usage plan.'
   name: api_stages
   type: Attr Text
 - required: true
-  help: The description of a usage plan.
+  help: (Required) The description of a usage plan.
   name: description
   type: Attr Text
 - required: true
-  help: The name of the usage plan.
+  help: (Required) The name of the usage plan.
   name: name
   type: Attr Text
 - required: false
-  help: The AWS Markeplace product identifier to associate with the usage plan as
-    a SaaS product on AWS Marketplace.
+  help: (Optional) The AWS Markeplace product identifier to associate with the usage
+    plan as a SaaS product on AWS Marketplace.
   name: product_code
   type: Attr Text
 - required: false
-  help: ! 'The  #quota-settings-arguments  of the usage plan.'
+  help: ! '(Optional) The  #quota-settings-arguments  of the usage plan.'
   name: quota_settings
   type: Attr Text
 - required: false
-  help: ! 'The  #throttling-settings-arguments  of the usage plan.'
+  help: ! '(Optional) The  #throttling-settings-arguments  of the usage plan.'
   name: throttle_settings
   type: Attr Text
 name: aws_api_gateway_usage_plan

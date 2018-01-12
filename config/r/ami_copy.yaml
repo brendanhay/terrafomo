@@ -1,27 +1,27 @@
 arguments:
 - required: false
-  help: Specifies whether the destination snapshots of the copied image should be
-    encrypted. Defaults to  false
+  help: (Optional) Specifies whether the destination snapshots of the copied image
+    should be encrypted. Defaults to  false
   name: encrypted
   type: Attr Text
 - required: false
-  help: The full ARN of the KMS Key to use when encrypting the snapshots of an image
-    during a copy operation. If not specified, then the default AWS KMS Key will be
-    used
+  help: (Optional) The full ARN of the KMS Key to use when encrypting the snapshots
+    of an image during a copy operation. If not specified, then the default AWS KMS
+    Key will be used
   name: kms_key_id
   type: Attr Text
 - required: true
-  help: A region-unique name for the AMI.
+  help: (Required) A region-unique name for the AMI.
   name: name
   type: Attr Text
 - required: true
-  help: The id of the AMI to copy. This id must be valid in the region given by  source_ami_region
-    .
+  help: (Required) The id of the AMI to copy. This id must be valid in the region
+    given by  source_ami_region .
   name: source_ami_id
   type: Attr Text
 - required: true
-  help: The region from which the AMI will be copied. This may be the same as the
-    AWS provider region in order to create a copy within the same region.
+  help: (Required) The region from which the AMI will be copied. This may be the same
+    as the AWS provider region in order to create a copy within the same region.
   name: source_ami_region
   type: Attr Text
 name: aws_ami_copy

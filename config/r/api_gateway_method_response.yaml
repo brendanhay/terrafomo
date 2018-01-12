@@ -1,20 +1,21 @@
 arguments:
 - required: true
-  help: The HTTP Method ( GET ,  POST ,  PUT ,  DELETE ,  HEAD ,  OPTION ,  ANY )
+  help: (Required) The HTTP Method ( GET ,  POST ,  PUT ,  DELETE ,  HEAD ,  OPTION
+    ,  ANY )
   name: http_method
   type: Attr Text
 - required: true
-  help: The API resource ID
+  help: (Required) The API resource ID
   name: resource_id
   type: Attr Text
 - required: false
-  help: A map of the API models used for the response's content type
+  help: (Optional) A map of the API models used for the response's content type
   name: response_models
   type: Attr Text
 - required: false
-  help: ! 'A map of response parameters that can be sent to the caller. For example:  response_parameters
-    = { "method.response.header.X-Some-Header" = true } would define that the header  X-Some-Header  can
-    be provided on the response.'
+  help: ! '(Optional) A map of response parameters that can be sent to the caller.
+    For example:  response_parameters = { "method.response.header.X-Some-Header" =
+    true } would define that the header  X-Some-Header  can be provided on the response.'
   name: response_parameters
   type: Attr Text
 - required: true
@@ -22,11 +23,11 @@ arguments:
   name: response_parameters_in_json
   type: Attr Text
 - required: true
-  help: The ID of the associated REST API
+  help: (Required) The ID of the associated REST API
   name: rest_api_id
   type: Attr Text
 - required: true
-  help: The HTTP status code
+  help: (Required) The HTTP status code
   name: status_code
   type: Attr Text
 name: aws_api_gateway_method_response

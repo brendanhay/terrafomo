@@ -1,11 +1,11 @@
 arguments:
 - required: false
-  help: Either a base-64 encoded PGP public key, or a keybase username in the form  keybase:some_person_that_exists
-    .
+  help: (Optional) Either a base-64 encoded PGP public key, or a keybase username
+    in the form  keybase:some_person_that_exists .
   name: pgp_key
   type: Attr Text
 - required: true
-  help: The IAM user to associate with this access key.
+  help: (Required) The IAM user to associate with this access key.
   name: user
   type: Attr Text
 name: aws_iam_access_key

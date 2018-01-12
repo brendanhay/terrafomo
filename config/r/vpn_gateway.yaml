@@ -1,14 +1,14 @@
 arguments:
 - required: false
-  help: The Availability Zone for the virtual private gateway.
+  help: (Optional) The Availability Zone for the virtual private gateway.
   name: availability_zone
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: false
-  help: The VPC ID to create in.
+  help: (Optional) The VPC ID to create in.
   name: vpc_id
   type: Attr Text
 name: aws_vpn_gateway

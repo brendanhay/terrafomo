@@ -1,14 +1,14 @@
 arguments:
 - required: true
-  help: The Allocation ID of the Elastic IP address for the gateway.
+  help: (Required) The Allocation ID of the Elastic IP address for the gateway.
   name: allocation_id
   type: Attr Text
 - required: true
-  help: The Subnet ID of the subnet in which to place the gateway.
+  help: (Required) The Subnet ID of the subnet in which to place the gateway.
   name: subnet_id
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_nat_gateway

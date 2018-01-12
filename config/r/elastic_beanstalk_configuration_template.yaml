@@ -5,7 +5,7 @@ arguments:
   name: application
   type: Attr Text
 - required: false
-  help: Short description of the Template
+  help: (Optional) Short description of the Template
   name: description
   type: Attr Text
 - required: true
@@ -13,7 +13,7 @@ arguments:
   name: environment_id
   type: Attr Text
 - required: true
-  help: A unique name for this Template.
+  help: (Required) A unique name for this Template.
   name: name
   type: Attr Text
 - required: true

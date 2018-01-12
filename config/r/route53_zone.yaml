@@ -1,35 +1,35 @@
 arguments:
 - required: false
-  help: A comment for the hosted zone. Defaults to 'Managed by Terraform'.
+  help: (Optional) A comment for the hosted zone. Defaults to 'Managed by Terraform'.
   name: comment
   type: Attr Text
 - required: false
-  help: The ID of the reusable delegation set whose NS records you want to assign
-    to the hosted zone. Conflicts w/  vpc_id  as delegation sets can only be used
-    for public zones.
+  help: (Optional) The ID of the reusable delegation set whose NS records you want
+    to assign to the hosted zone. Conflicts w/  vpc_id  as delegation sets can only
+    be used for public zones.
   name: delegation_set_id
   type: Attr Text
 - required: false
-  help: Whether to destroy all records (possibly managed outside of Terraform) in
-    the zone when destroying the zone.
+  help: (Optional) Whether to destroy all records (possibly managed outside of Terraform)
+    in the zone when destroying the zone.
   name: force_destroy
   type: Attr Text
 - required: true
-  help: This is the name of the hosted zone.
+  help: (Required) This is the name of the hosted zone.
   name: name
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the zone.
+  help: (Optional) A mapping of tags to assign to the zone.
   name: tags
   type: Attr Text
 - required: false
-  help: The VPC to associate with a private hosted zone. Specifying  vpc_id  will
+  help: (Optional) The VPC to associate with a private hosted zone. Specifying  vpc_id  will
     create a private hosted zone. Conflicts w/  delegation_set_id  as delegation sets
     can only be used for public zones.
   name: vpc_id
   type: Attr Text
 - required: false
-  help: The VPC's region. Defaults to the region of the AWS provider.
+  help: (Optional) The VPC's region. Defaults to the region of the AWS provider.
   name: vpc_region
   type: Attr Text
 name: aws_route53_zone

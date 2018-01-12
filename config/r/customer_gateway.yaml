@@ -1,18 +1,20 @@
 arguments:
 - required: true
-  help: The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
+  help: (Required) The gateway's Border Gateway Protocol (BGP) Autonomous System Number
+    (ASN).
   name: bgp_asn
   type: Attr Text
 - required: true
-  help: The IP address of the gateway's Internet-routable external interface.
+  help: (Required) The IP address of the gateway's Internet-routable external interface.
   name: ip_address
   type: Attr Text
 - required: false
-  help: Tags to apply to the gateway.
+  help: (Optional) Tags to apply to the gateway.
   name: tags
   type: Attr Text
 - required: true
-  help: The type of customer gateway. The only type AWS supports at this time is "ipsec.1".
+  help: (Required) The type of customer gateway. The only type AWS supports at this
+    time is "ipsec.1".
   name: type
   type: Attr Text
 name: aws_customer_gateway

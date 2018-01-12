@@ -1,18 +1,18 @@
 arguments:
 - required: true
-  help: The load balancer on which the policy is defined.
+  help: (Required) The load balancer on which the policy is defined.
   name: load_balancer_name
   type: Attr Text
 - required: false
-  help: Policy attribute to apply to the policy.
+  help: (Optional) Policy attribute to apply to the policy.
   name: policy_attribute
   type: Attr Text
 - required: true
-  help: The name of the load balancer policy.
+  help: (Required) The name of the load balancer policy.
   name: policy_name
   type: Attr Text
 - required: true
-  help: The policy type.
+  help: (Required) The policy type.
   name: policy_type_name
   type: Attr Text
 name: aws_elb_load_balancer_policy

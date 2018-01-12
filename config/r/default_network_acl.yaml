@@ -1,24 +1,24 @@
 arguments:
 - required: true
-  help: The Network ACL ID to manage. This attribute is exported from  aws_vpc , or
-    manually found via the AWS Console.
+  help: (Required) The Network ACL ID to manage. This attribute is exported from  aws_vpc
+    , or manually found via the AWS Console.
   name: default_network_acl_id
   type: Attr Text
 - required: false
-  help: Specifies an egress rule. Parameters defined below.
+  help: (Optional) Specifies an egress rule. Parameters defined below.
   name: egress
   type: Attr Text
 - required: false
-  help: Specifies an ingress rule. Parameters defined below.
+  help: (Optional) Specifies an ingress rule. Parameters defined below.
   name: ingress
   type: Attr Text
 - required: false
-  help: A list of Subnet IDs to apply the ACL to. See the notes below on managing
-    Subnets in the Default Network ACL
+  help: (Optional) A list of Subnet IDs to apply the ACL to. See the notes below on
+    managing Subnets in the Default Network ACL
   name: subnet_ids
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 name: aws_default_network_acl

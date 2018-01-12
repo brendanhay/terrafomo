@@ -1,10 +1,10 @@
 arguments:
 - required: true
-  help: The name of the placement group.
+  help: (Required) The name of the placement group.
   name: name
   type: Attr Text
 - required: true
-  help: The placement strategy. The only supported value is  cluster
+  help: (Required) The placement strategy. The only supported value is  cluster
   name: strategy
   type: Attr Text
 name: aws_placement_group

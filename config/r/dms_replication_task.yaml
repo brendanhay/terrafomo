@@ -1,44 +1,45 @@
 arguments:
 - required: false
-  help: The Unix timestamp integer for the start of the Change Data Capture (CDC)
-    operation.
+  help: (Optional) The Unix timestamp integer for the start of the Change Data Capture
+    (CDC) operation.
   name: cdc_start_time
   type: Attr Text
 - required: true
-  help: The migration type. Can be one of  full-load | cdc | full-load-and-cdc .
+  help: (Required) The migration type. Can be one of  full-load | cdc | full-load-and-cdc
+    .
   name: migration_type
   type: Attr Text
 - required: true
-  help: The Amazon Resource Name (ARN) of the replication instance.
+  help: (Required) The Amazon Resource Name (ARN) of the replication instance.
   name: replication_instance_arn
   type: Attr Text
 - required: true
-  help: The replication task identifier.
+  help: (Required) The replication task identifier.
   name: replication_task_id
   type: Attr Text
 - required: false
-  help: An escaped JSON string that contains the task settings. For a complete list
-    of task settings, see  http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
+  help: (Optional) An escaped JSON string that contains the task settings. For a complete
+    list of task settings, see  http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
     .
   name: replication_task_settings
   type: Attr Text
 - required: true
-  help: The Amazon Resource Name (ARN) string that uniquely identifies the source
-    endpoint.
+  help: (Required) The Amazon Resource Name (ARN) string that uniquely identifies
+    the source endpoint.
   name: source_endpoint_arn
   type: Attr Text
 - required: true
-  help: An escaped JSON string that contains the table mappings. For information on
-    table mapping see  http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html
+  help: (Required) An escaped JSON string that contains the table mappings. For information
+    on table mapping see  http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html
   name: table_mappings
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the resource.
+  help: (Optional) A mapping of tags to assign to the resource.
   name: tags
   type: Attr Text
 - required: true
-  help: The Amazon Resource Name (ARN) string that uniquely identifies the target
-    endpoint.
+  help: (Required) The Amazon Resource Name (ARN) string that uniquely identifies
+    the target endpoint.
   name: target_endpoint_arn
   type: Attr Text
 name: aws_dms_replication_task

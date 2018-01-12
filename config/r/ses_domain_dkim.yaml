@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: Verified domain name to generate DKIM tokens for.
+  help: (Required) Verified domain name to generate DKIM tokens for.
   name: domain
   type: Attr Text
 name: aws_ses_domain_dkim

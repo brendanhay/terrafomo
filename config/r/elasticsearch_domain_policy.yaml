@@ -1,10 +1,10 @@
 arguments:
 - required: false
-  help: IAM policy document specifying the access policies for the domain
+  help: (Optional) IAM policy document specifying the access policies for the domain
   name: access_policies
   type: Attr Text
 - required: true
-  help: Name of the domain.
+  help: (Required) Name of the domain.
   name: domain_name
   type: Attr Text
 name: aws_elasticsearch_domain_policy

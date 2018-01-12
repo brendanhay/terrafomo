@@ -4,12 +4,12 @@ arguments:
   name: artifact_store
   type: Attr Text
 - required: true
-  help: The name of the pipeline.
+  help: (Required) The name of the pipeline.
   name: name
   type: Attr Text
 - required: true
-  help: A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission
-    to make calls to AWS services on your behalf.
+  help: (Required) A service role Amazon Resource Name (ARN) that grants AWS CodePipeline
+    permission to make calls to AWS services on your behalf.
   name: role_arn
   type: Attr Text
 - required: true

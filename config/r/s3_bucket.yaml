@@ -1,80 +1,80 @@
 arguments:
 - required: false
-  help: Sets the accelerate configuration of an existing bucket. Can be  Enabled  or  Suspended
+  help: (Optional) Sets the accelerate configuration of an existing bucket. Can be  Enabled  or  Suspended
     .
   name: acceleration_status
   type: Attr Text
 - required: false
-  help: The  https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl  to
+  help: (Optional) The  https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl  to
     apply. Defaults to "private".
   name: acl
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The name of the bucket. If omitted,
-    Terraform will assign a random, unique name.'
+- required: false
+  help: (Optional, Forces new resource) The name of the bucket. If omitted, Terraform
+    will assign a random, unique name.
   name: bucket
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Creates a unique bucket name beginning
-    with the specified prefix. Conflicts with  bucket .'
+- required: false
+  help: (Optional, Forces new resource) Creates a unique bucket name beginning with
+    the specified prefix. Conflicts with  bucket .
   name: bucket_prefix
   type: Attr Text
 - required: false
-  help: A rule of  https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html  (documented
+  help: (Optional) A rule of  https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html  (documented
     below).
   name: cors_rule
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Default:false ) A boolean that indicates all objects should
-    be deleted from the bucket so that the bucket can be destroyed without error.
-    These objects are   recoverable.'
+- required: false
+  help: (Optional, Default:false ) A boolean that indicates all objects should be
+    deleted from the bucket so that the bucket can be destroyed without error. These
+    objects are   recoverable.
   name: force_destroy
   type: Attr Text
 - required: false
-  help: A configuration of  http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html  (documented
+  help: (Optional) A configuration of  http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html  (documented
     below).
   name: lifecycle_rule
   type: Attr Text
 - required: false
-  help: A settings of  https://docs.aws.amazon.com/AmazonS3/latest/UG/ManagingBucketLogging.html  (documented
+  help: (Optional) A settings of  https://docs.aws.amazon.com/AmazonS3/latest/UG/ManagingBucketLogging.html  (documented
     below).
   name: logging
   type: Attr Text
 - required: false
-  help: A valid  https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html  JSON
+  help: (Optional) A valid  https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html  JSON
     document. Note that if the policy document is not specific enough (but still valid),
     Terraform may view the policy as constantly changing in a  terraform plan . In
     this case, please make sure you use the verbose/specific version of the policy.
   name: policy
   type: Attr Text
 - required: false
-  help: If specified, the AWS region this bucket should reside in. Otherwise, the
-    region used by the callee.
+  help: (Optional) If specified, the AWS region this bucket should reside in. Otherwise,
+    the region used by the callee.
   name: region
   type: Attr Text
 - required: false
-  help: A configuration of  http://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html  (documented
+  help: (Optional) A configuration of  http://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html  (documented
     below).
   name: replication_configuration
   type: Attr Text
 - required: false
-  help: Specifies who should bear the cost of Amazon S3 data transfer. Can be either  BucketOwner  or  Requester
-    . By default, the owner of the S3 bucket would incur the costs of any data transfer.
-    See  http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
+  help: (Optional) Specifies who should bear the cost of Amazon S3 data transfer.
+    Can be either  BucketOwner  or  Requester . By default, the owner of the S3 bucket
+    would incur the costs of any data transfer. See  http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
     developer guide for more information.
   name: request_payer
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the bucket.
+  help: (Optional) A mapping of tags to assign to the bucket.
   name: tags
   type: Attr Text
 - required: false
-  help: A state of  https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html  (documented
+  help: (Optional) A state of  https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html  (documented
     below)
   name: versioning
   type: Attr Text
 - required: false
-  help: A website object (documented below).
+  help: (Optional) A website object (documented below).
   name: website
   type: Attr Text
 name: aws_s3_bucket

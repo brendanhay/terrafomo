@@ -1,18 +1,20 @@
 arguments:
 - required: false
-  help: A policy to attach to the endpoint that controls access to the service.
+  help: (Optional) A policy to attach to the endpoint that controls access to the
+    service.
   name: policy
   type: Attr Text
 - required: false
-  help: One or more route table IDs.
+  help: (Optional) One or more route table IDs.
   name: route_table_ids
   type: Attr Text
 - required: true
-  help: The AWS service name, in the form  com.amazonaws.region.service .
+  help: (Required) The AWS service name, in the form  com.amazonaws.region.service
+    .
   name: service_name
   type: Attr Text
 - required: true
-  help: The ID of the VPC in which the endpoint will be used.
+  help: (Required) The ID of the VPC in which the endpoint will be used.
   name: vpc_id
   type: Attr Text
 name: aws_vpc_endpoint

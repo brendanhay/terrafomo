@@ -1,19 +1,19 @@
 arguments:
 - required: false
-  help: The description of the ElastiCache parameter group. Defaults to "Managed by
-    Terraform".
+  help: (Optional) The description of the ElastiCache parameter group. Defaults to
+    "Managed by Terraform".
   name: description
   type: Attr Text
 - required: true
-  help: The family of the ElastiCache parameter group.
+  help: (Required) The family of the ElastiCache parameter group.
   name: family
   type: Attr Text
 - required: true
-  help: The name of the ElastiCache parameter group.
+  help: (Required) The name of the ElastiCache parameter group.
   name: name
   type: Attr Text
 - required: false
-  help: A list of ElastiCache parameters to apply.
+  help: (Optional) A list of ElastiCache parameters to apply.
   name: parameter
   type: Attr Text
 name: aws_elasticache_parameter_group

@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: The name of the application.
+  help: (Required) The name of the application.
   name: name
   type: Attr Text
 name: aws_codedeploy_app

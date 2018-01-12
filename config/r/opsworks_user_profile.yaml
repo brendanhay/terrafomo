@@ -1,19 +1,19 @@
 arguments:
 - required: false
-  help: Whether users can specify their own SSH public key through the My Settings
-    page
+  help: (Optional) Whether users can specify their own SSH public key through the
+    My Settings page
   name: allow_self_management
   type: Attr Text
 - required: false
-  help: The users public key
+  help: (Optional) The users public key
   name: ssh_public_key
   type: Attr Text
 - required: true
-  help: The ssh username, with witch this user wants to log in
+  help: (Required) The ssh username, with witch this user wants to log in
   name: ssh_username
   type: Attr Text
 - required: true
-  help: The user's IAM ARN
+  help: (Required) The user's IAM ARN
   name: user_arn
   type: Attr Text
 name: aws_opsworks_user_profile

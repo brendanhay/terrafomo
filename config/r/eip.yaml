@@ -1,20 +1,20 @@
 arguments:
 - required: false
-  help: A user specified primary or secondary private IP address to associate with
-    the Elastic IP address. If no private IP address is specified, the Elastic IP
-    address is associated with the primary private IP address.
+  help: (Optional) A user specified primary or secondary private IP address to associate
+    with the Elastic IP address. If no private IP address is specified, the Elastic
+    IP address is associated with the primary private IP address.
   name: associate_with_private_ip
   type: Attr Text
 - required: false
-  help: EC2 instance ID.
+  help: (Optional) EC2 instance ID.
   name: instance
   type: Attr Text
 - required: false
-  help: Network interface ID to associate with.
+  help: (Optional) Network interface ID to associate with.
   name: network_interface
   type: Attr Text
 - required: false
-  help: Boolean if the EIP is in a VPC or not.
+  help: (Optional) Boolean if the EIP is in a VPC or not.
   name: vpc
   type: Attr Text
 name: aws_eip

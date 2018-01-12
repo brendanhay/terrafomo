@@ -1,18 +1,18 @@
 arguments:
 - required: false
-  help: The SNS delivery policy
+  help: (Optional) The SNS delivery policy
   name: delivery_policy
   type: Attr Text
 - required: false
-  help: The display name for the SNS topic
+  help: (Optional) The display name for the SNS topic
   name: display_name
   type: Attr Text
 - required: true
-  help: The friendly name for the SNS topic
+  help: (Required) The friendly name for the SNS topic
   name: name
   type: Attr Text
 - required: false
-  help: The fully-formed AWS policy as JSON
+  help: (Optional) The fully-formed AWS policy as JSON
   name: policy
   type: Attr Text
 name: aws_sns_topic

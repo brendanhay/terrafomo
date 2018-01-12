@@ -1,13 +1,13 @@
 arguments:
 - required: true
-  help: ! 'The group''s name. The name must consist of upper and lowercase alphanumeric
-    characters with no spaces. You can also include any of the following characters:  =,.@-_.
-    . Group names are not distinguished by case. For example, you cannot create groups
-    named both "ADMINS" and "admins".'
+  help: ! '(Required) The group''s name. The name must consist of upper and lowercase
+    alphanumeric characters with no spaces. You can also include any of the following
+    characters:  =,.@-_. . Group names are not distinguished by case. For example,
+    you cannot create groups named both "ADMINS" and "admins".'
   name: name
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, default "/") Path in which to create the group.'
+- required: false
+  help: (Optional, default "/") Path in which to create the group.
   name: path
   type: Attr Text
 name: aws_iam_group

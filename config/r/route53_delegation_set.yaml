@@ -1,7 +1,7 @@
 arguments:
 - required: false
-  help: This is a reference name used in Caller Reference (helpful for identifying
-    single delegation set amongst others)
+  help: (Optional) This is a reference name used in Caller Reference (helpful for
+    identifying single delegation set amongst others)
   name: reference_name
   type: Attr Text
 name: aws_route53_delegation_set

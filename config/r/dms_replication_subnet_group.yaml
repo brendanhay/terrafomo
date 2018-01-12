@@ -1,15 +1,15 @@
 arguments:
 - required: true
-  help: The description for the subnet group.
+  help: (Required) The description for the subnet group.
   name: replication_subnet_group_description
   type: Attr Text
 - required: true
-  help: The name for the replication subnet group. This value is stored as a lowercase
-    string.
+  help: (Required) The name for the replication subnet group. This value is stored
+    as a lowercase string.
   name: replication_subnet_group_id
   type: Attr Text
 - required: true
-  help: A list of the EC2 subnet IDs for the subnet group.
+  help: (Required) A list of the EC2 subnet IDs for the subnet group.
   name: subnet_ids
   type: Attr Text
 name: aws_dms_replication_subnet_group

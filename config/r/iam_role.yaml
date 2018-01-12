@@ -1,16 +1,16 @@
 arguments:
 - required: true
-  help: The policy that grants an entity permission to assume the role.
+  help: (Required) The policy that grants an entity permission to assume the role.
   name: assume_role_policy
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) The name of the role. If omitted, Terraform
-    will assign a random, unique name.'
+- required: false
+  help: (Optional, Forces new resource) The name of the role. If omitted, Terraform
+    will assign a random, unique name.
   name: name
   type: Attr Text
-- required: true
-  help: ! ' - (Optional, Forces new resource) Creates a unique name beginning with
-    the specified prefix. Conflicts with  name .'
+- required: false
+  help: (Optional, Forces new resource) Creates a unique name beginning with the specified
+    prefix. Conflicts with  name .
   name: name_prefix
   type: Attr Text
 name: aws_iam_role

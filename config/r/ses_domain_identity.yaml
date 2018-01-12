@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: The domain name to assign to SES
+  help: (Required) The domain name to assign to SES
   name: domain
   type: Attr Text
 name: aws_ses_domain_identity

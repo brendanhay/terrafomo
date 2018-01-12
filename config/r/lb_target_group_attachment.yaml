@@ -1,10 +1,10 @@
 arguments:
 - required: false
-  help: The port on which targets receive traffic.
+  help: (Optional) The port on which targets receive traffic.
   name: port
   type: Attr Text
 - required: true
-  help: The ARN of the target group with which to register targets
+  help: (Required) The ARN of the target group with which to register targets
   name: target_group_arn
   type: Attr Text
 - required: true

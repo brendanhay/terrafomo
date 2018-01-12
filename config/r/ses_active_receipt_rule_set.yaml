@@ -1,6 +1,6 @@
 arguments:
 - required: true
-  help: The name of the rule set
+  help: (Required) The name of the rule set
   name: rule_set_name
   type: Attr Text
 name: aws_ses_active_receipt_rule_set

@@ -1,14 +1,14 @@
 arguments:
 - required: false
-  help: A description of what the snapshot is.
+  help: (Optional) A description of what the snapshot is.
   name: description
   type: Attr Text
 - required: false
-  help: A mapping of tags to assign to the snapshot
+  help: (Optional) A mapping of tags to assign to the snapshot
   name: tags
   type: Attr Text
 - required: true
-  help: The Volume ID of which to make a snapshot.
+  help: (Required) The Volume ID of which to make a snapshot.
   name: volume_id
   type: Attr Text
 name: aws_ebs_snapshot
