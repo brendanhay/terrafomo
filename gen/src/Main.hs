@@ -7,7 +7,7 @@ module Main (main) where
 import Control.Applicative (many)
 import Control.Monad       (when)
 
-import Data.Bifunctor   (bimap)
+import Data.Bifunctor   (first)
 import Data.Foldable    (for_)
 import Data.Function    ((&))
 import Data.Semigroup   ((<>))
@@ -45,22 +45,21 @@ import qualified Text.EDE               as EDE
 -- library name, namespace, etc.
 
 data Options = Options
-    { optionsProvider     :: !Provider
-    , optionsSchemaType   :: !SchemaType
-    , optionsSchemaDir    :: !FilePath
-    , optionsPatchDir     :: !FilePath
-    , optionsSchemaTmpl   :: !FilePath
-    , optionsContentsTmpl :: !FilePath
-    , optionsOutputDir    :: !FilePath
-    , optionsFiles        :: ![FilePath]
+    { configPath       :: !FilePath
+    , schemaType       :: !SchemaType
+    , schemaDir        :: !FilePath
+    , patchDir         :: !FilePath
+    , schemaTmplPath   :: !FilePath
+    , contentsTmplPath :: !FilePath
+    , inputPaths       :: ![FilePath]
     } deriving (Show)
 
 optionsParser :: Option.Parser Options
 optionsParser = Options
-    <$> Option.option Option.auto
-         ( Option.long "provider"
-        <> Option.help "Terraform provider."
-        <> Option.metavar "PROVIDER"
+    <$> Option.strOption
+         ( Option.long "config-file"
+        <> Option.help "Terraform provider configuration file."
+        <> Option.metavar "FILE"
          )
 
     <*> Option.option Option.auto
@@ -93,12 +92,6 @@ optionsParser = Options
         <> Option.metavar "FILE"
          )
 
-    <*> Option.strOption
-         ( Option.long "output-dir"
-        <> Option.help "Output directory."
-        <> Option.metavar "DIR"
-         )
-
     <*> many (Option.strArgument
          ( Option.help "Input markdown file to parse schema information from."
         <> Option.metavar "FILE"
@@ -120,11 +113,10 @@ main :: IO ()
 main = do
     let prefs = Option.prefs Option.showHelpOnError
 
-    opts <- Option.customExecParser prefs parserInfo
+    Options{..} <- Option.customExecParser prefs parserInfo
 
-    let schemaTmplPath   = optionsSchemaTmpl opts
-        contentsTmplPath = optionsContentsTmpl opts
-        total            = length (optionsFiles opts) :: Int
+    say ("Parsing " ++ configPath)
+    provider <- readYAML configPath
 
     say ("Parsing " ++ schemaTmplPath)
     schemaTmpl   <-
@@ -136,14 +128,16 @@ main = do
         EDE.eitherParseFile contentsTmplPath
             >>= handleError contentsTmplPath
 
-    configs <- for (zip [1..] (optionsFiles opts)) $ \(n, inputPath) -> do
+    let total = length inputPaths :: Int
+
+    schemas <- for (zip [1..] inputPaths) $ \(n, inputPath) -> do
         let name    = Path.dropExtensions (Path.takeBaseName inputPath)
             current = "[" ++ show (n :: Int) ++ " of " ++ show total ++ "] "
             step x  = say (current ++ x)
 
-        let patchPath  = optionsPatchDir  opts </> name <.> "patch"
-            rejectPath = optionsPatchDir  opts </> name <.> "rej"
-            schemaPath = optionsSchemaDir opts </> name <.> "yaml"
+        let patchPath  = patchDir  </> name <.> "patch"
+            rejectPath = patchDir  </> name <.> "rej"
+            schemaPath = schemaDir </> name <.> "yaml"
 
         patchExists <- Dir.doesFileExist patchPath
         step ("Checking for " ++ patchPath ++ " == " ++ show patchExists)
@@ -157,7 +151,6 @@ main = do
                         , patchPath
                         , "1>&2"
                         ]
-
             when (code /= Exit.ExitSuccess) $
                 step ("Failure applying patch " ++ patchPath)
 
@@ -170,43 +163,45 @@ main = do
         configExists <- Dir.doesFileExist schemaPath
         step ("Checking for " ++ schemaPath ++ " == " ++ show configExists)
 
-        config <-
+        newSchema <-
             if not configExists
                 then pure schema
                 else do
                     step ("Reading " ++ schemaPath)
-                    YAML.decodeFileEither schemaPath
-                        >>= handleError schemaPath
-                          . bimap YAML.prettyPrintParseException (schema <>)
+                    (schema <>) <$> readYAML schemaPath
 
         step ("Writing " ++ schemaPath)
         Dir.createDirectoryIfMissing True (Path.takeDirectory schemaPath)
-        YAML.encodeFile schemaPath config
+        YAML.encodeFile schemaPath newSchema
 
-        pure config
+        pure newSchema
 
-    let contentsNS = contentsNamespace (optionsProvider opts)
-                                       (optionsSchemaType opts)
-        schemaNS   = schemaNamespaces  (optionsProvider opts)
-                                       (optionsSchemaType opts)
-                                       configs
+    let contentsNS = contentsNamespace provider schemaType
+        schemaNS   = schemaNamespaces  provider schemaType schemas
 
     say ("Rendering " ++ schemaTmplPath)
     rendered <-
         handleError schemaTmplPath $
-            Template.renderSchemas schemaTmpl (optionsProvider opts) schemaNS
+            Template.renderSchemas schemaTmpl provider schemaNS
 
     say ("Rendering " ++ contentsTmplPath)
     contents <-
         handleError contentsTmplPath $
             Template.renderContents contentsTmpl contentsNS schemaNS
 
+    let outputDir = providerDir provider </> "gen"
+
     for_ ((contentsNS, contents) : Map.toList rendered) $ \(ns, txt) -> do
-        let modulePath = optionsOutputDir opts </> namespace '/' ns <.> "hs"
+        let modulePath = outputDir </> namespace '/' ns <.> "hs"
 
         say ("Writing " ++ modulePath)
         Dir.createDirectoryIfMissing True (Path.takeDirectory modulePath)
         LText.writeFile modulePath txt
+
+readYAML :: YAML.FromJSON a => FilePath -> IO a
+readYAML path =
+    YAML.decodeFileEither path
+        >>= handleError path . first YAML.prettyPrintParseException
 
 handleError :: FilePath -> Either String a -> IO a
 handleError path = \case

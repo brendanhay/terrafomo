@@ -43,7 +43,7 @@ renderSchemas tmpl p = Map.traverseWithKey go
             EDE.fromPairs
                 [ "schemas"   .= createMap schema_Name xs
                 , "namespace" .= ns
-                , "provider"  .= p
+                , "provider"  .= providerName p
                 ]
 
 toResourceName :: Text -> Text

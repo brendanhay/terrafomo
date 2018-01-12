@@ -2,8 +2,9 @@
 
 set -euo pipefail
 
-library=( $(ls -d terraform-*) )
-library=( $(echo ${library[@]} | tr ' ' '\n' | sort | uniq -u) )
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+libraries=( $(${dir}/list-packages) )
 
 for config in stack-*.yaml; do
     echo "Updating ${config}"
@@ -11,7 +12,11 @@ for config in stack-*.yaml; do
     sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
 
     echo "# GENERATED" >> "${config}"
-    echo "$(printf '  - %s\n' "${library[@]}")" >> "${config}"
+
+    if [ ${#libraries[@]} -ne 0 ]; then
+       echo "$(printf '  - %s\n' "${libraries[@]}")" >> "${config}"
+    fi
+
     echo "# END GENERATED" >> "${config}"
 done
 

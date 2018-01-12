@@ -27,6 +27,7 @@ import Terraform.Gen.Schema
 import Text.Megaparsec  ((<?>))
 import Text.Show.Pretty (ppShow)
 
+import qualified Data.Char       as Char
 import qualified Data.Foldable   as Fold
 import qualified Data.List       as List
 import qualified Data.Map.Strict as Map
@@ -84,7 +85,7 @@ schemaParser = do
     void h2
 
     -- resource/datasource name
-    schema_Name <- h1 >>> textual
+    schema_Name <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
 
     -- argument name/help/required
     (Map.fromList -> schemaArguments) <-
@@ -116,9 +117,9 @@ argItem = item >>> paragraph >>> argument
 
     -- should use Parsec.Char here and rethrow errors.
     required h
-        | Text.isPrefixOf " - (Required" h = mk (Text.drop 3 h) True
-        | Text.isPrefixOf " - (Optional" h = mk (Text.drop 3 h) False
-        | otherwise                        = mk h True
+        | Text.isPrefixOf "- (Required" h = mk (Text.drop 2 h) True
+        | Text.isPrefixOf "- (Optional" h = mk (Text.drop 2 h) False
+        | otherwise                       = mk h True
       where
         mk h' req = Arg (pure h') (pure req) defaultType
 
@@ -170,7 +171,7 @@ paragraph = match PARAGRAPH <?> "paragraph"
 
 textual :: Parser Text
 textual =
-    Text.intercalate " "
+    Text.intercalate " " . map Text.strip
         <$> some ( fmap (surround '<' '>') link
                <|> fmap (surround '@' '@') code
                <|> text

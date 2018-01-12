@@ -9,4 +9,5 @@ packages:
   - gen
   - terraform
 # GENERATED
+  - terraform-aws
 # END GENERATED

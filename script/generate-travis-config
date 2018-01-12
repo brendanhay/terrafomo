@@ -2,11 +2,11 @@
 
 set -euo pipefail
 
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 docs=( documentation )
 core=( terraform )
-
-library_=( $(ls -d terraform-*) )
-library=( $(echo ${library_[@]} ${priority[@]} | tr ' ' '\n' | sort | uniq -u) )
+libraries=( $(${dir}/list-packages) )
 
 entry() {
     local ver="$1"
@@ -35,7 +35,7 @@ TITLE
     done
 }
 
-ghc_82=( 8.2 )
+ghc_820=( 8.2 )
 
 travis=".travis.yml"
 
@@ -43,10 +43,11 @@ echo "Updating ${travis}"
 
 sed -i -e '/# GENERATED/,/# END GENERATED/d' "${travis}"
 
-echo "# GENERATED"                       >> "${travis}"
-matrix "Documentation" ghc_82[@] docs[@] >> "${travis}"
-matrix "Core" ghc_82[@] core[@]         >> "${travis}"
-matrix "Libraries" ghc_82[@] library[@]  >> "${travis}"
-echo "# END GENERATED"                   >> "${travis}"
+echo "# GENERATED"                             >> "${travis}"
+matrix "Core" ghc_820[@] core[@]               >> "${travis}"
+if [ ${#libraries[@]} -ne 0 ]; then
+    matrix "Libraries" ghc_820[@] libraries[@] >> "${travis}"
+fi
+echo "# END GENERATED"                         >> "${travis}"
 
 echo "Done."

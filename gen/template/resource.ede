@@ -25,7 +25,7 @@ import qualified Terraform.Syntax.TH as TH
 {% for schema in schemas %}
 
 {% let original = schema.value._name %}
--- | The @{{ original }}@ Terraform {{ provider }} provider resource.
+-- | The @{{ original }}@ {{ provider }} resource.
 {% let datatype = original | toResourceName %}
 data {{ datatype }} = {{ datatype }}
   {% for arg in schema.value.arguments %}

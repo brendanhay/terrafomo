@@ -1,77 +1,6 @@
 VENDOR_DIR := vendor
 BIN        := ./bin/terraform-gen
-
-# Not working:
-# azurerm      \
-# clc          \
-# dme          \
-# opc          \
-# profitbricks \
-
-
-PROVIDERS  := \
- alicloud     \
- archive      \
- arukas       \
- aws          \
- azure        \
- bitbucket    \
- chef         \
- circonus     \
- cloudflare   \
- cloudstack   \
- cobbler      \
- consul       \
- datadog      \
- digitalocean \
- dns          \
- dnsimple     \
- docker       \
- dyn          \
- external     \
- fastly       \
- github       \
- gitlab       \
- google       \
- grafana      \
- heroku       \
- http         \
- icinga2      \
- ignition     \
- influxdb     \
- kubernetes   \
- librato      \
- local        \
- logentries   \
- logicmonitor \
- mailgun      \
- mysql        \
- newrelic     \
- nomad        \
- ns1          \
- oneandone    \
- openstack    \
- opsgenie     \
- ovh          \
- packet       \
- pagerduty    \
- postgresql   \
- powerdns     \
- rabbitmq     \
- rancher      \
- random       \
- rundeck      \
- scaleway     \
- softlayer    \
- spotinst     \
- statuscake   \
- template     \
- tls          \
- triton       \
- ultradns     \
- vault        \
- vcd          \
- vsphere
+PROVIDERS  := $(basename $(notdir $(wildcard gen/config/*.yaml)))
 
 default: $(PROVIDERS)
 
@@ -96,13 +25,12 @@ $1: $1-resources
 
 $1-resources: $(VENDOR_DIR)/$1 $(BIN)
 	@$(BIN) \
- --provider $1 \
+ --config-file gen/config/$1.yaml \
  --schema-type Resource \
  --schema-dir gen/schema/$1/r \
  --patch-dir gen/patch/$1/r \
  --schema-template gen/template/resource.ede \
  --contents-template gen/template/contents.ede \
- --output-dir terraform-$1/gen \
  $$(wildcard $(VENDOR_DIR)/$1/website/docs/r/*.*)
 
 $1-clean:

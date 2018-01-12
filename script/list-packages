@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+libraries=(terraform-*/package.yaml)
+
+for i in ${!libraries[@]}; do
+    libraries[i]=$(dirname ${libraries[i]})
+done
+
+echo ${libraries[@]}

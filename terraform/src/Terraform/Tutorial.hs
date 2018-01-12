@@ -23,13 +23,13 @@ import qualified Control.Lens as Lens
 import Data.Proxy (Proxy (Proxy))
 import Data.Void
 
-import Terraform.AWS
+-- import Terraform.AWS
 
 import Terraform.Syntax.Attribute as Attr
 import Terraform.Syntax.Resource  as Syn
 
-import qualified Terraform.AWS.Resource as R
-import qualified Terraform.Format       as Format
+-- import qualified Terraform.AWS.Resource as R
+-- import qualified Terraform.Format       as Format
 
 -- data Arch = AMD64
 -- data Distro = Zesty
@@ -74,10 +74,10 @@ import qualified Terraform.Format       as Format
 -- * provider aliases
 
 -- Equivalent to: @provider "aws" { alias = ..., region = "eu-west-2" }@
-west :: AWS
-west = defaultProvider
-    { region = "eu-west-2"
-    }
+-- west :: AWS
+-- west = defaultProvider
+--     { region = "eu-west-2"
+--     }
 
 -- iso :: (Functor f, Profunctor p) => (s -> a) -> (b -> t) -> p a (f b) -> p s (f t)
 -- lens :: Functor f => (s -> a) -> (s -> b -> t) -> (a -> f b) -> s -> f t
@@ -109,24 +109,24 @@ west = defaultProvider
 -- resource_ :: IsResource p a a => Name -> a -> Resource p a
 -- resource_ _ = fromSchema
 
-common :: Tags
-common =
-    [ ("Name",        "foo")
-    , ("Description", "bar")
-    , ("Component",   "baz")
-    , ("Env",         "prod")
-    , ("Squad",       "Operations")
-    , ("Origin",      "http://github.com/brendanhay/terrorform")
-    ]
+-- common :: Tags
+-- common =
+--     [ ("Name",        "foo")
+--     , ("Description", "bar")
+--     , ("Component",   "baz")
+--     , ("Env",         "prod")
+--     , ("Squad",       "Operations")
+--     , ("Origin",      "http://github.com/brendanhay/terrorform")
+--     ]
 
-base :: Terraform ()
-base = do
-    resource "foo" $
-        R.instance_resource
-            & R.ami                         .~ "123"
-            & R.associate_public_ip_address .~ True
-            & R.tags                        .~ common
-            & preventDestroy                .~ True
+-- base :: Terraform ()
+-- base = do
+--     resource "foo" $
+--         R.instance_resource
+--             & R.ami                         .~ "123"
+--             & R.associate_public_ip_address .~ True
+--             & R.tags                        .~ common
+            -- & preventDestroy                .~ True
 
 -- example :: Terraform ()
 -- example = do
