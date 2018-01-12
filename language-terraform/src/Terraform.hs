@@ -26,38 +26,64 @@ tags =
     . value @"Squad"       (map "namespace" "squad")
     . value @"Origin"      (map "namespace" "origin")
 
+-- example1 :: Resource AWS _
+-- example1 =
+--     resource AWS.Instance "example1" $
+--           value @"ami" (var "ami")
+
+--         . block @"root_block_device" (
+--               value @"volume_size" (var "volume_size")
+--             . value @"volume_type" (var "volume_type")
+--           )
+
+--         . value @"subnet_id"            (var "subnet_id")
+--         . value @"key_name"             (var "key_name")
+--         . value @"iam_instance_profile" (var "iam_instance_profile")
+--         . value @"user_data"            (var "user_data_id")
+
+--         . block @"tags" tags
+
+-- example2 :: Resource AWS _
+-- example2 =
+--     resource AWS.Route53_Record "record" $
+--           value @"zone_id" (var "zone_id")
+--         . value @"type" "A"
+--         . value @"ttl" 3600
+
+--         . value @"name" (format("%s-%d", refer @"instance_id" example1))
+
+--         . value @"records"
+--             [ refer @"private_ip" example1
+--             ]
+
 example1 :: Resource AWS _
 example1 =
-    resource AWS.Instance "example1" $
-          value @"ami" (var "ami" :: Expr Text)
-
-        . block @"root_block_device" (
-              value @"volume_size" (var "volume_size")
-            . value @"volume_type" (var "volume_type")
-          )
-
-        . value @"subnet_id"            (var "subnet_id")
-        . value @"key_name"             (var "key_name")
-        . value @"iam_instance_profile" (var "iam_instance_profile")
-        . value @"user_data"            (var "user_data_id")
-
-        . block @"tags" tags
+    resource AWS.Route53_Record "record" $ do
+        "zone_id" =: zone_id
+        "type"    =: "A"
+        "value"   =: 3600
 
 example2 :: Resource AWS _
 example2 =
-    resource AWS.Route53_Record "record" $
-          value @"zone_id" (var "zone_id")
+    resource AWS.Route53_Record "record" $ do
 
-        . value @"name"
-            (if count == 1
-                then var "common_name"
-                else format("%s-%d", var "common_name", count))
-            -- (var "base_domain_name")
+        "name"    =: ("record" ++ show n)
 
-        . value @"type" "A"
+        "records" =:
+            [ refer example1 "private_ip"
+            ]
 
-        . value @"ttl" 3600
 
-        . value @"records" [refer @"private_ip" example1 :: Expr Text]
 
--- The whole Vinyl thing doesn't work with non-specified attributes.
+
+-- Observations:
+--
+-- * The whole Vinyl thing doesn't work with non-specified attributes.
+--
+-- * There is no longer the concept of a 'var', 'map', or 'index' user variable,
+--   they're just haskell variables/functions with the correct type.
+--
+-- * Expressions (and by proxy HCL functions) only need to apply to references.
+--
+-- * Output variables may need special handling similar to this previous
+-- * approach for variables.
