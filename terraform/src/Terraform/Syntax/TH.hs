@@ -36,8 +36,9 @@ makeResource prefix provider newResource datatype = do
 
     let lowered     = map Char.toLower (TH.nameBase stripped)
         constructor = TH.mkName lowered
-        original    = prefix ++ fromMaybe lowered
-                          (List.stripPrefix "resource_" lowered)
+        original    = prefix ++ maybe lowered reverse
+                          (List.stripPrefix (reverse "_resource")
+                              (reverse lowered))
 
     sequenceA
         [

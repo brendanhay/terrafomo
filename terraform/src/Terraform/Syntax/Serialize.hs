@@ -96,11 +96,11 @@ instance ToValue Change where
     toValue Wildcard  = HCL.String "*"
 
 -- -- FIXME: "meta" hilarity
-instance ToValue a => ToValue (Resource Alias a) where
+instance ToValue a => ToValue (Resource Alias (Key, a)) where
     toValue Resource{..} =
-        object (pure (type_ _type))
+        object (key "resource" (fst _schema))
             [ "provider" =: _provider
-            , toValue       _schema
+            , toValue       (snd _schema)
             , toValue       _metadata
             ]
 

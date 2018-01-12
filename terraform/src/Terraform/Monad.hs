@@ -2,6 +2,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE NamedFieldPuns             #-}
 {-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE TupleSections              #-}
 {-# LANGUAGE ViewPatterns               #-}
 
 module Terraform.Monad where
@@ -9,7 +10,7 @@ module Terraform.Monad where
 import Control.Lens               ((%~))
 import Control.Monad.State.Strict (MonadState, StateT)
 
-import Data.Bifunctor        (first)
+import Data.Bifunctor        (bimap)
 import Data.Functor.Identity (Identity)
 import Data.Hashable         (Hashable)
 import Data.HashMap.Strict   (HashMap)
@@ -40,11 +41,12 @@ data TerraformState = TerraformState
 
 $(TH.makeLenses ''TerraformState)
 
+-- FIXME: Exists for debuging, proper rendering pending.
 instance Show TerraformState where
-    show s = show $
-        HCL.render $
+    show s =
+        show $ HCL.render
              ( HashMap.elems (_providers s)
-            ++ Map.elems (_resources s)
+            ++ Map.elems     (_resources s)
              )
 
 type Terraform = TerraformT Identity
@@ -77,7 +79,7 @@ resource
        , IsResource p b a
        , Schema r ~ a
        , HCL.ToValue b
-       , HCL.ToValue (Resource Alias (Schema r))
+       , HCL.ToValue a
        )
     => Name
     -> p
@@ -91,7 +93,7 @@ resource name (newResource -> x@Resource{_provider, _type, _schema}) = do
 
     Lens.modifying resources $
         Map.insert key $
-            HCL.toValue (first (const alias) x)
+            HCL.toValue (bimap (const alias) (key,) x)
 
     Lens.modifying providers $
         HashMap.insert alias $
@@ -114,6 +116,7 @@ dependsOn (Ref key) = (Resource.dependsOn %~ Set.insert key) . newResource
 
 preventDestroy
     :: IsResource p b a
+    => Bool
     -> p
     -> Resource b a
 preventDestroy b = Lens.set Resource.preventDestroy b . newResource

@@ -45,8 +45,8 @@ instance {-# OVERLAPPING #-} GInitialState (K1 i Placeholder) where
 instance {-# OVERLAPPING #-} GInitialState (K1 i (Maybe a)) where
     gInitialState = K1 Nothing
 
-instance (GInitialState a, GInitialState b) => GInitialState (a :*: b) where
-    gInitialState = gInitialState :*: gInitialState
-
 instance (GInitialState a) => GInitialState (M1 i c a) where
     gInitialState = M1 gInitialState
+
+instance (GInitialState a, GInitialState b) => GInitialState (a :*: b) where
+    gInitialState = gInitialState :*: gInitialState

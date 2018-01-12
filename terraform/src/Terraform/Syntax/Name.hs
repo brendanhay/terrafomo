@@ -27,3 +27,6 @@ data Key = Key
     { keyType :: !Type
     , keyName :: !Name
     } deriving (Show, Eq, Ord)
+
+renameKey :: Name -> Key -> Key
+renameKey n k = k { keyName = n }

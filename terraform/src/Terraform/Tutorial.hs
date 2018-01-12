@@ -6,18 +6,9 @@ module Terraform.Tutorial where
 
 import Terraform.AWS
 
-import qualified Terraform.AWS.Resource as AWS
+import qualified Terraform.AWS.Resource as R
 
 import Terraform.Monad
-
-
--- Trivial Example:
---
--- > example1 :: Resource AWS.Instance "example1"
--- > example1 =
--- >     AWs.instance_
--- >         { AWS.ami = "123"
--- >         } & dependsOn ...
 
 -- data Arch = AMD64
 -- data Distro = Zesty
@@ -39,7 +30,7 @@ import Terraform.Monad
 -- * There is no longer the concept of a 'var', 'map', or 'index' user variable,
 --   they're just haskell variables/functions with the correct type.
 --
--- * Expressions (and by proxy HCL functions) only need to apply to references.
+-- * Expressions (and by proxy HCL functions) only need to apply to outputs
 --
 -- * Output variables may need special handling similar to this previous
 -- * approach for variables.
@@ -74,32 +65,45 @@ common =
     , ("Component",   "baz")
     , ("Env",         "prod")
     , ("Squad",       "Operations")
-    , ("Origin",      "http://github.com/taktinc/takt-infrastructure")
+    , ("Origin",      "http://github.com/brendanhay/terrorform")
     ]
+
+base :: R.Instance_Resource
+base =
+    R.instance_resource
+        { R.ami                         = "123"
+        , R.associate_public_ip_address = Just True
+        , R.tags                        = Just common
+        }
 
 example :: Terraform ()
 example = do
     bucket1 <-
-        resource "mybucket" $
-            AWS.resource_s3_bucket
-                { AWS.bucket = Just "foo"
+        resource "mybucket1" $
+            R.s3_bucket_resource
+                { R.bucket = Just "foo"
+                , R.tags   = Just common
                 } & preventDestroy True
                   & createBeforeDestroy True
 
     bucket2 <-
         resource "mybucket2" $
-            AWS.resource_s3_bucket
-                { AWS.bucket = Just "bar"
+            R.s3_bucket_resource
+                { R.bucket = Just "bar"
                 } & preventDestroy True
 
-    myinstance <-
-        resource "myinstance" $
-            AWS.resource_instance
-                { AWS.ami                         = "123"
-                , AWS.associate_public_ip_address = Just True
-                , AWS.tags                        = Just common
+    instance1 <-
+        resource "myinstance1" $
+            R.instance_resource
+                { R.ami                         = "123"
+                , R.associate_public_ip_address = Just True
+                , R.tags                        = Just common
                 } & dependsOn bucket2
                   & dependsOn bucket1
                   & ignoreChange "ami"
+
+    instance2 <-
+        resource "myinstance2" $
+            base & dependsOn instance1
 
     pure ()

@@ -34,1380 +34,1794 @@ import qualified Terraform.Syntax.TH as TH
 -- 2. lowercase all letters.
 -- 3. add the 'aws_' prefix.
 
-data Resource_API_Gateway_Account' s = Resource_API_Gateway_Account
-    deriving (Generic)
+data API_Gateway_Account_Resource' s
+    = API_Gateway_Account_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Account')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Account_Resource')
 
-data Resource_API_Gateway_API_Key' s = Resource_API_Gateway_API_Key
-    deriving (Generic)
+data API_Gateway_API_Key_Resource' s
+    = API_Gateway_API_Key_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_API_Key')
-
-
-data Resource_API_Gateway_Authorizer' s = Resource_API_Gateway_Authorizer
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Authorizer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_API_Key_Resource')
 
 
-data Resource_API_Gateway_Base_Path_Mapping' s = Resource_API_Gateway_Base_Path_Mapping
-    deriving (Generic)
+data API_Gateway_Authorizer_Resource' s
+    = API_Gateway_Authorizer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Base_Path_Mapping')
-
-
-data Resource_API_Gateway_Client_Certificate' s = Resource_API_Gateway_Client_Certificate
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Client_Certificate')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Authorizer_Resource')
 
 
-data Resource_API_Gateway_Deployment' s = Resource_API_Gateway_Deployment
-    deriving (Generic)
+data API_Gateway_Base_Path_Mapping_Resource' s
+    = API_Gateway_Base_Path_Mapping_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Deployment')
-
-
-data Resource_API_Gateway_Domain_Name' s = Resource_API_Gateway_Domain_Name
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Domain_Name')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Base_Path_Mapping_Resource')
 
 
-data Resource_API_Gateway_Gateway_Response' s = Resource_API_Gateway_Gateway_Response
-    deriving (Generic)
+data API_Gateway_Client_Certificate_Resource' s
+    = API_Gateway_Client_Certificate_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Gateway_Response')
-
-
-data Resource_API_Gateway_Integration' s = Resource_API_Gateway_Integration
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Integration')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Client_Certificate_Resource')
 
 
-data Resource_API_Gateway_Integration_Response' s = Resource_API_Gateway_Integration_Response
-    deriving (Generic)
+data API_Gateway_Deployment_Resource' s
+    = API_Gateway_Deployment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Integration_Response')
-
-
-data Resource_API_Gateway_Method' s = Resource_API_Gateway_Method
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Method')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Deployment_Resource')
 
 
-data Resource_API_Gateway_Method_Response' s = Resource_API_Gateway_Method_Response
-    deriving (Generic)
+data API_Gateway_Domain_Name_Resource' s
+    = API_Gateway_Domain_Name_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Method_Response')
-
-
-data Resource_API_Gateway_Method_Settings' s = Resource_API_Gateway_Method_Settings
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Method_Settings')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Domain_Name_Resource')
 
 
-data Resource_API_Gateway_Model' s = Resource_API_Gateway_Model
-    deriving (Generic)
+data API_Gateway_Gateway_Response_Resource' s
+    = API_Gateway_Gateway_Response_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Model')
-
-
-data Resource_API_Gateway_Resource' s = Resource_API_Gateway_Resource
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Resource')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Gateway_Response_Resource')
 
 
-data Resource_API_Gateway_Rest_API' s = Resource_API_Gateway_Rest_API
-    deriving (Generic)
+data API_Gateway_Integration_Resource' s
+    = API_Gateway_Integration_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Rest_API')
-
-
-data Resource_API_Gateway_Stage' s = Resource_API_Gateway_Stage
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Stage')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Integration_Resource')
 
 
-data Resource_API_Gateway_Usage_Plan' s = Resource_API_Gateway_Usage_Plan
-    deriving (Generic)
+data API_Gateway_Integration_Response_Resource' s
+    = API_Gateway_Integration_Response_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Usage_Plan')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Integration_Response_Resource')
 
 
-data Resource_API_Gateway_Usage_Plan_Key' s = Resource_API_Gateway_Usage_Plan_Key
-    deriving (Generic)
+data API_Gateway_Method_Resource' s
+    = API_Gateway_Method_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_API_Gateway_Usage_Plan_Key')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Method_Resource')
+
+
+data API_Gateway_Method_Response_Resource' s
+    = API_Gateway_Method_Response_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Method_Response_Resource')
+
+
+data API_Gateway_Method_Settings_Resource' s
+    = API_Gateway_Method_Settings_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Method_Settings_Resource')
+
+
+data API_Gateway_Model_Resource' s
+    = API_Gateway_Model_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Model_Resource')
+
+
+data API_Gateway_Resource_Resource' s
+    = API_Gateway_Resource_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Resource_Resource')
+
+
+data API_Gateway_Rest_API_Resource' s
+    = API_Gateway_Rest_API_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Rest_API_Resource')
+
+
+data API_Gateway_Stage_Resource' s
+    = API_Gateway_Stage_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Stage_Resource')
+
+
+data API_Gateway_Usage_Plan_Resource' s
+    = API_Gateway_Usage_Plan_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Usage_Plan_Resource')
+
+
+data API_Gateway_Usage_Plan_Key_Resource' s
+    = API_Gateway_Usage_Plan_Key_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''API_Gateway_Usage_Plan_Key_Resource')
 
 
 -- App Autoscaling Resources
 
-data Resource_AppAutoscaling_Policy' s = Resource_AppAutoscaling_Policy
-    deriving (Generic)
+data AppAutoscaling_Policy_Resource' s
+    = AppAutoscaling_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_AppAutoscaling_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''AppAutoscaling_Policy_Resource')
 
 
-data Resource_AppAutoscaling_Target' s = Resource_AppAutoscaling_Target
-    deriving (Generic)
+data AppAutoscaling_Target_Resource' s
+    = AppAutoscaling_Target_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_AppAutoscaling_Target')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''AppAutoscaling_Target_Resource')
 
 
 
 -- Batch Resources
 
-data Resource_Batch_Compute_Environment' s = Resource_Batch_Compute_Environment
-    deriving (Generic)
+data Batch_Compute_Environment_Resource' s
+    = Batch_Compute_Environment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Batch_Compute_Environment')
-
-
-data Resource_Batch_Job_Definition' s = Resource_Batch_Job_Definition
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Batch_Job_Definition')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Batch_Compute_Environment_Resource')
 
 
-data Resource_Batch_Job_Queue' s = Resource_Batch_Job_Queue
-    deriving (Generic)
+data Batch_Job_Definition_Resource' s
+    = Batch_Job_Definition_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Batch_Job_Queue')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Batch_Job_Definition_Resource')
+
+
+data Batch_Job_Queue_Resource' s
+    = Batch_Job_Queue_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Batch_Job_Queue_Resource')
 
 
 
 -- CloudFormation Resources
 
-data Resource_Cloudformation_Stack' s = Resource_Cloudformation_Stack
-    deriving (Generic)
+data Cloudformation_Stack_Resource' s
+    = Cloudformation_Stack_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudformation_Stack')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudformation_Stack_Resource')
 
 
 
 -- CloudFront Resources
 
-data Resource_Cloudfront_Distribution' s = Resource_Cloudfront_Distribution
-    deriving (Generic)
+data Cloudfront_Distribution_Resource' s
+    = Cloudfront_Distribution_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudfront_Distribution')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudfront_Distribution_Resource')
 
 
-data Resource_Cloudfront_Origin_Access_Identity' s = Resource_Cloudfront_Origin_Access_Identity
-    deriving (Generic)
+data Cloudfront_Origin_Access_Identity_Resource' s
+    = Cloudfront_Origin_Access_Identity_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudfront_Origin_Access_Identity')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudfront_Origin_Access_Identity_Resource')
 
 
 
 -- CloudTrail Resources
 
-data Resource_Cloudtrail' s = Resource_Cloudtrail
-    deriving (Generic)
+data Cloudtrail_Resource' s
+    = Cloudtrail_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudtrail')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudtrail_Resource')
 
 
 
 -- CloudWatch Resources
 
-data Resource_Cloudwatch_Dashboard' s = Resource_Cloudwatch_Dashboard
-    deriving (Generic)
+data Cloudwatch_Dashboard_Resource' s
+    = Cloudwatch_Dashboard_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Dashboard')
-
-
-data Resource_Cloudwatch_Event_Rule' s = Resource_Cloudwatch_Event_Rule
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Event_Rule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Dashboard_Resource')
 
 
-data Resource_Cloudwatch_Event_Target' s = Resource_Cloudwatch_Event_Target
-    deriving (Generic)
+data Cloudwatch_Event_Rule_Resource' s
+    = Cloudwatch_Event_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Event_Target')
-
-
-data Resource_Cloudwatch_Log_Destination' s = Resource_Cloudwatch_Log_Destination
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Log_Destination')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Event_Rule_Resource')
 
 
-data Resource_Cloudwatch_Log_Destination_Policy' s = Resource_Cloudwatch_Log_Destination_Policy
-    deriving (Generic)
+data Cloudwatch_Event_Target_Resource' s
+    = Cloudwatch_Event_Target_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Log_Destination_Policy')
-
-
-data Resource_Cloudwatch_Log_Group' s = Resource_Cloudwatch_Log_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Log_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Event_Target_Resource')
 
 
-data Resource_Cloudwatch_Log_Metric_Filter' s = Resource_Cloudwatch_Log_Metric_Filter
-    deriving (Generic)
+data Cloudwatch_Log_Destination_Resource' s
+    = Cloudwatch_Log_Destination_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Log_Metric_Filter')
-
-
-data Resource_Cloudwatch_Log_Stream' s = Resource_Cloudwatch_Log_Stream
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Log_Stream')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Log_Destination_Resource')
 
 
-data Resource_Cloudwatch_Log_Subscription_Filter' s = Resource_Cloudwatch_Log_Subscription_Filter
-    deriving (Generic)
+data Cloudwatch_Log_Destination_Policy_Resource' s
+    = Cloudwatch_Log_Destination_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Log_Subscription_Filter')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Log_Destination_Policy_Resource')
 
 
-data Resource_Cloudwatch_Metric_Alarm' s = Resource_Cloudwatch_Metric_Alarm
-    deriving (Generic)
+data Cloudwatch_Log_Group_Resource' s
+    = Cloudwatch_Log_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cloudwatch_Metric_Alarm')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Log_Group_Resource')
+
+
+data Cloudwatch_Log_Metric_Filter_Resource' s
+    = Cloudwatch_Log_Metric_Filter_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Log_Metric_Filter_Resource')
+
+
+data Cloudwatch_Log_Stream_Resource' s
+    = Cloudwatch_Log_Stream_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Log_Stream_Resource')
+
+
+data Cloudwatch_Log_Subscription_Filter_Resource' s
+    = Cloudwatch_Log_Subscription_Filter_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Log_Subscription_Filter_Resource')
+
+
+data Cloudwatch_Metric_Alarm_Resource' s
+    = Cloudwatch_Metric_Alarm_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cloudwatch_Metric_Alarm_Resource')
 
 
 
 -- CodeBuild Resources
 
-data Resource_Codebuild_Project' s = Resource_Codebuild_Project
-    deriving (Generic)
+data Codebuild_Project_Resource' s
+    = Codebuild_Project_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codebuild_Project')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codebuild_Project_Resource')
 
 
 
 -- CodeCommit Resources
 
-data Resource_Codecommit_Repository' s = Resource_Codecommit_Repository
-    deriving (Generic)
+data Codecommit_Repository_Resource' s
+    = Codecommit_Repository_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codecommit_Repository')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codecommit_Repository_Resource')
 
 
-data Resource_Codecommit_Trigger' s = Resource_Codecommit_Trigger
-    deriving (Generic)
+data Codecommit_Trigger_Resource' s
+    = Codecommit_Trigger_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codecommit_Trigger')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codecommit_Trigger_Resource')
 
 
 
 -- CodeDeploy Resources
 
-data Resource_Codedeploy_App' s = Resource_Codedeploy_App
-    deriving (Generic)
+data Codedeploy_App_Resource' s
+    = Codedeploy_App_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codedeploy_App')
-
-
-data Resource_Codedeploy_Deployment_Config' s = Resource_Codedeploy_Deployment_Config
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codedeploy_Deployment_Config')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codedeploy_App_Resource')
 
 
-data Resource_Codedeploy_Deployment_Group' s = Resource_Codedeploy_Deployment_Group
-    deriving (Generic)
+data Codedeploy_Deployment_Config_Resource' s
+    = Codedeploy_Deployment_Config_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codedeploy_Deployment_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codedeploy_Deployment_Config_Resource')
+
+
+data Codedeploy_Deployment_Group_Resource' s
+    = Codedeploy_Deployment_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codedeploy_Deployment_Group_Resource')
 
 
 
 -- CodePipeline Resources
 
-data Resource_Codepipeline' s = Resource_Codepipeline
-    deriving (Generic)
+data Codepipeline_Resource' s
+    = Codepipeline_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Codepipeline')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Codepipeline_Resource')
 
 
 
 -- Cognito Resources
 
-data Resource_Cognito_Identity_Pool' s = Resource_Cognito_Identity_Pool
-    deriving (Generic)
+data Cognito_Identity_Pool_Resource' s
+    = Cognito_Identity_Pool_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Cognito_Identity_Pool')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Cognito_Identity_Pool_Resource')
 
 
 
 -- Config Resources
 
-data Resource_Config_Config_Rule' s = Resource_Config_Config_Rule
-    deriving (Generic)
+data Config_Config_Rule_Resource' s
+    = Config_Config_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Config_Config_Rule')
-
-
-data Resource_Config_Configuration_Recorder' s = Resource_Config_Configuration_Recorder
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Config_Configuration_Recorder')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Config_Config_Rule_Resource')
 
 
-data Resource_Config_Configuration_Recorder_Status' s = Resource_Config_Configuration_Recorder_Status
-    deriving (Generic)
+data Config_Configuration_Recorder_Resource' s
+    = Config_Configuration_Recorder_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Config_Configuration_Recorder_Status')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Config_Configuration_Recorder_Resource')
 
 
-data Resource_Config_Delivery_Channel' s = Resource_Config_Delivery_Channel
-    deriving (Generic)
+data Config_Configuration_Recorder_Status_Resource' s
+    = Config_Configuration_Recorder_Status_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Config_Delivery_Channel')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Config_Configuration_Recorder_Status_Resource')
+
+
+data Config_Delivery_Channel_Resource' s
+    = Config_Delivery_Channel_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Config_Delivery_Channel_Resource')
 
 
 
 -- Database Migration Service
 
-data Resource_DMS_Certificate' s = Resource_DMS_Certificate
-    deriving (Generic)
+data DMS_Certificate_Resource' s
+    = DMS_Certificate_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DMS_Certificate')
-
-
-data Resource_DMS_Endpoint' s = Resource_DMS_Endpoint
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DMS_Endpoint')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DMS_Certificate_Resource')
 
 
-data Resource_DMS_Replication_Instance' s = Resource_DMS_Replication_Instance
-    deriving (Generic)
+data DMS_Endpoint_Resource' s
+    = DMS_Endpoint_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DMS_Replication_Instance')
-
-
-data Resource_DMS_Replication_Subnet_Group' s = Resource_DMS_Replication_Subnet_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DMS_Replication_Subnet_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DMS_Endpoint_Resource')
 
 
-data Resource_DMS_Replication_Task' s = Resource_DMS_Replication_Task
-    deriving (Generic)
+data DMS_Replication_Instance_Resource' s
+    = DMS_Replication_Instance_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DMS_Replication_Task')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DMS_Replication_Instance_Resource')
+
+
+data DMS_Replication_Subnet_Group_Resource' s
+    = DMS_Replication_Subnet_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DMS_Replication_Subnet_Group_Resource')
+
+
+data DMS_Replication_Task_Resource' s
+    = DMS_Replication_Task_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DMS_Replication_Task_Resource')
 
 
 
 -- Device Farm Resources
 
-data Resource_Devicefarm_Project' s = Resource_Devicefarm_Project
-    deriving (Generic)
+data Devicefarm_Project_Resource' s
+    = Devicefarm_Project_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Devicefarm_Project')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Devicefarm_Project_Resource')
 
 
 
 -- Directory Service Resources
 
-data Resource_Directory_Service_Directory' s = Resource_Directory_Service_Directory
-    deriving (Generic)
+data Directory_Service_Directory_Resource' s
+    = Directory_Service_Directory_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Directory_Service_Directory')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Directory_Service_Directory_Resource')
 
 
 
 -- DynamoDB Resources
 
-data Resource_DynamoDB_Table' s = Resource_DynamoDB_Table
-    deriving (Generic)
+data DynamoDB_Table_Resource' s
+    = DynamoDB_Table_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DynamoDB_Table')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DynamoDB_Table_Resource')
 
 
 
 -- EC2 Resources
 
-data Resource_ALB' s = Resource_ALB
-    deriving (Generic)
+data ALB_Resource' s
+    = ALB_RESOURCE
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ALB')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ALB_Resource')
 
 
-data Resource_ALB_Listener' s = Resource_ALB_Listener
-    deriving (Generic)
+data ALB_Listener_Resource' s
+    = ALB_Listener_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ALB_Listener')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ALB_Listener_Resource')
 
 
-data Resource_ALB_Listener_Rule' s = Resource_ALB_Listener_Rule
-    deriving (Generic)
+data ALB_Listener_Rule_Resource' s
+    = ALB_Listener_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ALB_Listener_Rule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ALB_Listener_Rule_Resource')
 
 
-data Resource_ALB_Target_Group' s = Resource_ALB_Target_Group
-    deriving (Generic)
+data ALB_Target_Group_Resource' s
+    = ALB_Target_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ALB_Target_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ALB_Target_Group_Resource')
 
 
-data Resource_ALB_Target_Group_Attachment' s = Resource_ALB_Target_Group_Attachment
-    deriving (Generic)
+data ALB_Target_Group_Attachment_Resource' s
+    = ALB_Target_Group_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ALB_Target_Group_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ALB_Target_Group_Attachment_Resource')
 
 
-data Resource_AMI' s = Resource_AMI
-    deriving (Generic)
+data AMI_Resource' s
+    = AMI_RESOURCE
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_AMI')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''AMI_Resource')
 
 
-data Resource_AMI_Copy' s = Resource_AMI_Copy
-    deriving (Generic)
+data AMI_Copy_Resource' s
+    = AMI_Copy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_AMI_Copy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''AMI_Copy_Resource')
 
 
-data Resource_AMI_From_Instance' s = Resource_AMI_From_Instance
-    deriving (Generic)
+data AMI_From_Instance_Resource' s
+    = AMI_From_Instance_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_AMI_From_Instance')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''AMI_From_Instance_Resource')
 
 
-data Resource_AMI_Launch_Permission' s = Resource_AMI_Launch_Permission
-    deriving (Generic)
+data AMI_Launch_Permission_Resource' s
+    = AMI_Launch_Permission_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_AMI_Launch_Permission')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''AMI_Launch_Permission_Resource')
 
 
-data Resource_App_Cookie_Stickiness_Policy' s = Resource_App_Cookie_Stickiness_Policy
-    deriving (Generic)
+data App_Cookie_Stickiness_Policy_Resource' s
+    = App_Cookie_Stickiness_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_App_Cookie_Stickiness_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''App_Cookie_Stickiness_Policy_Resource')
 
 
-data Resource_Autoscaling_Attachment' s = Resource_Autoscaling_Attachment
-    deriving (Generic)
+data Autoscaling_Attachment_Resource' s
+    = Autoscaling_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Autoscaling_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Autoscaling_Attachment_Resource')
 
 
-data Resource_Autoscaling_Group' s = Resource_Autoscaling_Group
-    deriving (Generic)
+data Autoscaling_Group_Resource' s
+    = Autoscaling_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Autoscaling_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Autoscaling_Group_Resource')
 
 
-data Resource_Autoscaling_Lifecycle_Hook' s = Resource_Autoscaling_Lifecycle_Hook
-    deriving (Generic)
+data Autoscaling_Lifecycle_Hook_Resource' s
+    = Autoscaling_Lifecycle_Hook_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Autoscaling_Lifecycle_Hook')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Autoscaling_Lifecycle_Hook_Resource')
 
 
-data Resource_Autoscaling_Notification' s = Resource_Autoscaling_Notification
-    deriving (Generic)
+data Autoscaling_Notification_Resource' s
+    = Autoscaling_Notification_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Autoscaling_Notification')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Autoscaling_Notification_Resource')
 
 
-data Resource_Autoscaling_Policy' s = Resource_Autoscaling_Policy
-    deriving (Generic)
+data Autoscaling_Policy_Resource' s
+    = Autoscaling_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Autoscaling_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Autoscaling_Policy_Resource')
 
 
-data Resource_Autoscaling_Schedule' s = Resource_Autoscaling_Schedule
-    deriving (Generic)
+data Autoscaling_Schedule_Resource' s
+    = Autoscaling_Schedule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Autoscaling_Schedule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Autoscaling_Schedule_Resource')
 
 
-data Resource_Snapshot_Create_Volume_Permission' s = Resource_Snapshot_Create_Volume_Permission
-    deriving (Generic)
+data Snapshot_Create_Volume_Permission_Resource' s
+    = Snapshot_Create_Volume_Permission_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Snapshot_Create_Volume_Permission')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Snapshot_Create_Volume_Permission_Resource')
 
 
-data Resource_EBS_Snapshot' s = Resource_EBS_Snapshot
-    deriving (Generic)
+data EBS_Snapshot_Resource' s
+    = EBS_Snapshot_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EBS_Snapshot')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EBS_Snapshot_Resource')
 
 
-data Resource_EBS_Volume' s = Resource_EBS_Volume
-    deriving (Generic)
+data EBS_Volume_Resource' s
+    = EBS_Volume_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EBS_Volume')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EBS_Volume_Resource')
 
 
-data Resource_EIP' s = Resource_EIP
-    deriving (Generic)
+data EIP_Resource' s
+    = EIP_RESOURCE
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EIP')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EIP_Resource')
 
 
-data Resource_EIP_Association' s = Resource_EIP_Association
-    deriving (Generic)
+data EIP_Association_Resource' s
+    = EIP_Association_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EIP_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EIP_Association_Resource')
 
 
-data Resource_ELB' s = Resource_ELB
-    deriving (Generic)
+data ELB_Resource' s
+    = ELB_RESOURCE
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ELB')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ELB_Resource')
 
 
-data Resource_ELB_Attachment' s = Resource_ELB_Attachment
-    deriving (Generic)
+data ELB_Attachment_Resource' s
+    = ELB_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ELB_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ELB_Attachment_Resource')
 
 
-data Resource_Instance' s = Resource_Instance
+data Instance_Resource' s = Instance_Resource
     { ami                         :: !(Required s Type.AMI)
     , tags                        :: !(Maybe Type.Tags)
     , associate_public_ip_address :: !(Maybe Bool)
-    }
-    deriving (Generic)
+    } deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Instance')
-
-
-data Resource_Key_Pair' s = Resource_Key_Pair
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Key_Pair')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Instance_Resource')
 
 
-data Resource_Launch_Configuration' s = Resource_Launch_Configuration
-    deriving (Generic)
+data Key_Pair_Resource' s
+    = Key_Pair_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Launch_Configuration')
-
-
-data Resource_LB_Cookie_Stickiness_Policy' s = Resource_LB_Cookie_Stickiness_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB_Cookie_Stickiness_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Key_Pair_Resource')
 
 
-data Resource_LB_SSL_Negotiation_Policy' s = Resource_LB_SSL_Negotiation_Policy
-    deriving (Generic)
+data Launch_Configuration_Resource' s
+    = Launch_Configuration_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB_SSL_Negotiation_Policy')
-
-
-data Resource_Load_Balancer_Backend_Server_Policy' s = Resource_Load_Balancer_Backend_Server_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Load_Balancer_Backend_Server_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Launch_Configuration_Resource')
 
 
-data Resource_Load_Balancer_Listener_Policy' s = Resource_Load_Balancer_Listener_Policy
-    deriving (Generic)
+data LB_Cookie_Stickiness_Policy_Resource' s
+    = LB_Cookie_Stickiness_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Load_Balancer_Listener_Policy')
-
-
-data Resource_Load_Balancer_Policy' s = Resource_Load_Balancer_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Load_Balancer_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_Cookie_Stickiness_Policy_Resource')
 
 
-data Resource_Placement_Group' s = Resource_Placement_Group
-    deriving (Generic)
+data LB_SSL_Negotiation_Policy_Resource' s
+    = LB_SSL_Negotiation_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Placement_Group')
-
-
-data Resource_Proxy_Protocol_Policy' s = Resource_Proxy_Protocol_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Proxy_Protocol_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_SSL_Negotiation_Policy_Resource')
 
 
-data Resource_Spot_Datafeed_Subscription' s = Resource_Spot_Datafeed_Subscription
-    deriving (Generic)
+data Load_Balancer_Backend_Server_Policy_Resource' s
+    = Load_Balancer_Backend_Server_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Spot_Datafeed_Subscription')
-
-
-data Resource_Spot_Fleet_Request' s = Resource_Spot_Fleet_Request
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Spot_Fleet_Request')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Load_Balancer_Backend_Server_Policy_Resource')
 
 
-data Resource_Spot_Instance_Request' s = Resource_Spot_Instance_Request
-    deriving (Generic)
+data Load_Balancer_Listener_Policy_Resource' s
+    = Load_Balancer_Listener_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Spot_Instance_Request')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Load_Balancer_Listener_Policy_Resource')
 
 
-data Resource_Volume_Attachment' s = Resource_Volume_Attachment
-    deriving (Generic)
+data Load_Balancer_Policy_Resource' s
+    = Load_Balancer_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Volume_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Load_Balancer_Policy_Resource')
+
+
+data Placement_Group_Resource' s
+    = Placement_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Placement_Group_Resource')
+
+
+data Proxy_Protocol_Policy_Resource' s
+    = Proxy_Protocol_Policy_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Proxy_Protocol_Policy_Resource')
+
+
+data Spot_Datafeed_Subscription_Resource' s
+    = Spot_Datafeed_Subscription_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Spot_Datafeed_Subscription_Resource')
+
+
+data Spot_Fleet_Request_Resource' s
+    = Spot_Fleet_Request_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Spot_Fleet_Request_Resource')
+
+
+data Spot_Instance_Request_Resource' s
+    = Spot_Instance_Request_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Spot_Instance_Request_Resource')
+
+
+data Volume_Attachment_Resource' s
+    = Volume_Attachment_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Volume_Attachment_Resource')
 
 
 
 -- Load Balancing Resources
 
-data Resource_LB' s = Resource_LB
-    deriving (Generic)
+data LB_Resource' s
+    = LB_RESOURCE
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB')
-
-
-data Resource_LB_Listener' s = Resource_LB_Listener
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB_Listener')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_Resource')
 
 
-data Resource_LB_Listener_Rule' s = Resource_LB_Listener_Rule
-    deriving (Generic)
+data LB_Listener_Resource' s
+    = LB_Listener_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB_Listener_Rule')
-
-
-data Resource_LB_Target_Group' s = Resource_LB_Target_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB_Target_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_Listener_Resource')
 
 
-data Resource_LB_Target_Group_Attachment' s = Resource_LB_Target_Group_Attachment
-    deriving (Generic)
+data LB_Listener_Rule_Resource' s
+    = LB_Listener_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_LB_Target_Group_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_Listener_Rule_Resource')
+
+
+data LB_Target_Group_Resource' s
+    = LB_Target_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_Target_Group_Resource')
+
+
+data LB_Target_Group_Attachment_Resource' s
+    = LB_Target_Group_Attachment_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''LB_Target_Group_Attachment_Resource')
 
 
 
 -- ECS Resources
 
-data Resource_ECRepository' s = Resource_ECRepository
-    deriving (Generic)
+data ECRepository_Resource' s
+    = ECRepository_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ECRepository')
-
-
-data Resource_ECRepository_Policy' s = Resource_ECRepository_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ECRepository_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ECRepository_Resource')
 
 
-data Resource_ECS_Cluster' s = Resource_ECS_Cluster
-    deriving (Generic)
+data ECRepository_Policy_Resource' s
+    = ECRepository_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ECS_Cluster')
-
-
-data Resource_ECS_Service' s = Resource_ECS_Service
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ECS_Service')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ECRepository_Policy_Resource')
 
 
-data Resource_ECS_Task_Definition' s = Resource_ECS_Task_Definition
-    deriving (Generic)
+data ECS_Cluster_Resource' s
+    = ECS_Cluster_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_ECS_Task_Definition')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ECS_Cluster_Resource')
+
+
+data ECS_Service_Resource' s
+    = ECS_Service_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ECS_Service_Resource')
+
+
+data ECS_Task_Definition_Resource' s
+    = ECS_Task_Definition_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''ECS_Task_Definition_Resource')
 
 
 
 -- EFS Resources
 
-data Resource_EFS_File_System' s = Resource_EFS_File_System
-    deriving (Generic)
+data EFS_File_System_Resource' s
+    = EFS_File_System_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EFS_File_System')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EFS_File_System_Resource')
 
 
-data Resource_EFS_Mount_Target' s = Resource_EFS_Mount_Target
-    deriving (Generic)
+data EFS_Mount_Target_Resource' s
+    = EFS_Mount_Target_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EFS_Mount_Target')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EFS_Mount_Target_Resource')
 
 
 
 -- ElastiCache Resources
 
-data Resource_Elasticache_Cluster' s = Resource_Elasticache_Cluster
-    deriving (Generic)
+data Elasticache_Cluster_Resource' s
+    = Elasticache_Cluster_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticache_Cluster')
-
-
-data Resource_Elasticache_Parameter_Group' s = Resource_Elasticache_Parameter_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticache_Parameter_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticache_Cluster_Resource')
 
 
-data Resource_Elasticache_Replication_Group' s = Resource_Elasticache_Replication_Group
-    deriving (Generic)
+data Elasticache_Parameter_Group_Resource' s
+    = Elasticache_Parameter_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticache_Replication_Group')
-
-
-data Resource_Elasticache_Security_Group' s = Resource_Elasticache_Security_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticache_Security_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticache_Parameter_Group_Resource')
 
 
-data Resource_Elasticache_Subnet_Group' s = Resource_Elasticache_Subnet_Group
-    deriving (Generic)
+data Elasticache_Replication_Group_Resource' s
+    = Elasticache_Replication_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticache_Subnet_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticache_Replication_Group_Resource')
+
+
+data Elasticache_Security_Group_Resource' s
+    = Elasticache_Security_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticache_Security_Group_Resource')
+
+
+data Elasticache_Subnet_Group_Resource' s
+    = Elasticache_Subnet_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticache_Subnet_Group_Resource')
 
 
 
 -- Elastic Beanstalk Resources
 
-data Resource_Elastic_Beanstalk_Application' s = Resource_Elastic_Beanstalk_Application
-    deriving (Generic)
+data Elastic_Beanstalk_Application_Resource' s
+    = Elastic_Beanstalk_Application_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elastic_Beanstalk_Application')
-
-
-data Resource_Elastic_Beanstalk_Application_Version' s = Resource_Elastic_Beanstalk_Application_Version
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elastic_Beanstalk_Application_Version')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elastic_Beanstalk_Application_Resource')
 
 
-data Resource_Elastic_Beanstalk_Configuration_Template' s = Resource_Elastic_Beanstalk_Configuration_Template
-    deriving (Generic)
+data Elastic_Beanstalk_Application_Version_Resource' s
+    = Elastic_Beanstalk_Application_Version_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elastic_Beanstalk_Configuration_Template')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elastic_Beanstalk_Application_Version_Resource')
 
 
-data Resource_Elastic_Beanstalk_Environment' s = Resource_Elastic_Beanstalk_Environment
-    deriving (Generic)
+data Elastic_Beanstalk_Configuration_Template_Resource' s
+    = Elastic_Beanstalk_Configuration_Template_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elastic_Beanstalk_Environment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elastic_Beanstalk_Configuration_Template_Resource')
+
+
+data Elastic_Beanstalk_Environment_Resource' s
+    = Elastic_Beanstalk_Environment_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elastic_Beanstalk_Environment_Resource')
 
 
 
 -- Elastic Map Reduce Resources
 
-data Resource_EMCluster' s = Resource_EMCluster
-    deriving (Generic)
+data EMCluster_Resource' s
+    = EMCluster_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EMCluster')
-
-
-data Resource_EMInstance_Group' s = Resource_EMInstance_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EMInstance_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EMCluster_Resource')
 
 
-data Resource_EMSecurity_Configuration' s = Resource_EMSecurity_Configuration
-    deriving (Generic)
+data EMInstance_Group_Resource' s
+    = EMInstance_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_EMSecurity_Configuration')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EMInstance_Group_Resource')
+
+
+data EMSecurity_Configuration_Resource' s
+    = EMSecurity_Configuration_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''EMSecurity_Configuration_Resource')
 
 
 
 -- ElasticSearch Resources
 
-data Resource_Elasticsearch_Domain' s = Resource_Elasticsearch_Domain
-    deriving (Generic)
+data Elasticsearch_Domain_Resource' s
+    = Elasticsearch_Domain_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticsearch_Domain')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticsearch_Domain_Resource')
 
 
-data Resource_Elasticsearch_Domain_Policy' s = Resource_Elasticsearch_Domain_Policy
-    deriving (Generic)
+data Elasticsearch_Domain_Policy_Resource' s
+    = Elasticsearch_Domain_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elasticsearch_Domain_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elasticsearch_Domain_Policy_Resource')
 
 
 
 -- Elastic Transcoder Resources
 
-data Resource_Elastictranscoder_Pipeline' s = Resource_Elastictranscoder_Pipeline
-    deriving (Generic)
+data Elastictranscoder_Pipeline_Resource' s
+    = Elastictranscoder_Pipeline_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elastictranscoder_Pipeline')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elastictranscoder_Pipeline_Resource')
 
 
-data Resource_Elastictranscoder_Preset' s = Resource_Elastictranscoder_Preset
-    deriving (Generic)
+data Elastictranscoder_Preset_Resource' s
+    = Elastictranscoder_Preset_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Elastictranscoder_Preset')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Elastictranscoder_Preset_Resource')
 
 
 
 -- Glacier Resources
 
-data Resource_Glacier_Vault' s = Resource_Glacier_Vault
-    deriving (Generic)
+data Glacier_Vault_Resource' s
+    = Glacier_Vault_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Glacier_Vault')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Glacier_Vault_Resource')
 
 
 
 -- IAM Resources
 
-data Resource_IAM_Access_Key' s = Resource_IAM_Access_Key
-    deriving (Generic)
+data IAM_Access_Key_Resource' s
+    = IAM_Access_Key_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Access_Key')
-
-
-data Resource_IAM_Account_Alias' s = Resource_IAM_Account_Alias
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Account_Alias')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Access_Key_Resource')
 
 
-data Resource_IAM_Account_Password_Policy' s = Resource_IAM_Account_Password_Policy
-    deriving (Generic)
+data IAM_Account_Alias_Resource' s
+    = IAM_Account_Alias_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Account_Password_Policy')
-
-
-data Resource_IAM_Group' s = Resource_IAM_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Account_Alias_Resource')
 
 
-data Resource_IAM_Group_Membership' s = Resource_IAM_Group_Membership
-    deriving (Generic)
+data IAM_Account_Password_Policy_Resource' s
+    = IAM_Account_Password_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Group_Membership')
-
-
-data Resource_IAM_Group_Policy' s = Resource_IAM_Group_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Group_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Account_Password_Policy_Resource')
 
 
-data Resource_IAM_Group_Policy_Attachment' s = Resource_IAM_Group_Policy_Attachment
-    deriving (Generic)
+data IAM_Group_Resource' s
+    = IAM_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Group_Policy_Attachment')
-
-
-data Resource_IAM_Instance_Profile' s = Resource_IAM_Instance_Profile
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Instance_Profile')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Group_Resource')
 
 
-data Resource_IAM_OpenId_Connect_Provider' s = Resource_IAM_OpenId_Connect_Provider
-    deriving (Generic)
+data IAM_Group_Membership_Resource' s
+    = IAM_Group_Membership_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_OpenId_Connect_Provider')
-
-
-data Resource_IAM_Policy' s = Resource_IAM_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Group_Membership_Resource')
 
 
-data Resource_IAM_Policy_Attachment' s = Resource_IAM_Policy_Attachment
-    deriving (Generic)
+data IAM_Group_Policy_Resource' s
+    = IAM_Group_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Policy_Attachment')
-
-
-data Resource_IAM_Role' s = Resource_IAM_Role
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Role')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Group_Policy_Resource')
 
 
-data Resource_IAM_Role_Policy' s = Resource_IAM_Role_Policy
-    deriving (Generic)
+data IAM_Group_Policy_Attachment_Resource' s
+    = IAM_Group_Policy_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Role_Policy')
-
-
-data Resource_IAM_Role_Policy_Attachment' s = Resource_IAM_Role_Policy_Attachment
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Role_Policy_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Group_Policy_Attachment_Resource')
 
 
-data Resource_IAM_Saml_Provider' s = Resource_IAM_Saml_Provider
-    deriving (Generic)
+data IAM_Instance_Profile_Resource' s
+    = IAM_Instance_Profile_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Saml_Provider')
-
-
-data Resource_IAM_Server_Certificate' s = Resource_IAM_Server_Certificate
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_Server_Certificate')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Instance_Profile_Resource')
 
 
-data Resource_IAM_User' s = Resource_IAM_User
-    deriving (Generic)
+data IAM_OpenId_Connect_Provider_Resource' s
+    = IAM_OpenId_Connect_Provider_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_User')
-
-
-data Resource_IAM_User_Login_Profile' s = Resource_IAM_User_Login_Profile
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_User_Login_Profile')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_OpenId_Connect_Provider_Resource')
 
 
-data Resource_IAM_User_Policy' s = Resource_IAM_User_Policy
-    deriving (Generic)
+data IAM_Policy_Resource' s
+    = IAM_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_User_Policy')
-
-
-data Resource_IAM_User_Policy_Attachment' s = Resource_IAM_User_Policy_Attachment
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_User_Policy_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Policy_Resource')
 
 
-data Resource_IAM_User_SSH_Key' s = Resource_IAM_User_SSH_Key
-    deriving (Generic)
+data IAM_Policy_Attachment_Resource' s
+    = IAM_Policy_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IAM_User_SSH_Key')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Policy_Attachment_Resource')
+
+
+data IAM_Role_Resource' s
+    = IAM_Role_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Role_Resource')
+
+
+data IAM_Role_Policy_Resource' s
+    = IAM_Role_Policy_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Role_Policy_Resource')
+
+
+data IAM_Role_Policy_Attachment_Resource' s
+    = IAM_Role_Policy_Attachment_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Role_Policy_Attachment_Resource')
+
+
+data IAM_Saml_Provider_Resource' s
+    = IAM_Saml_Provider_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Saml_Provider_Resource')
+
+
+data IAM_Server_Certificate_Resource' s
+    = IAM_Server_Certificate_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_Server_Certificate_Resource')
+
+
+data IAM_User_Resource' s
+    = IAM_User_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_User_Resource')
+
+
+data IAM_User_Login_Profile_Resource' s
+    = IAM_User_Login_Profile_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_User_Login_Profile_Resource')
+
+
+data IAM_User_Policy_Resource' s
+    = IAM_User_Policy_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_User_Policy_Resource')
+
+
+data IAM_User_Policy_Attachment_Resource' s
+    = IAM_User_Policy_Attachment_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_User_Policy_Attachment_Resource')
+
+
+data IAM_User_SSH_Key_Resource' s
+    = IAM_User_SSH_Key_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IAM_User_SSH_Key_Resource')
 
 
 
 -- IoT Resources
 
-data Resource_IoT_Certificate' s = Resource_IoT_Certificate
-    deriving (Generic)
+data IoT_Certificate_Resource' s
+    = IoT_Certificate_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IoT_Certificate')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IoT_Certificate_Resource')
 
 
-data Resource_IoT_Policy' s = Resource_IoT_Policy
-    deriving (Generic)
+data IoT_Policy_Resource' s
+    = IoT_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_IoT_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''IoT_Policy_Resource')
 
 
 
 -- Inspector Resources
 
-data Resource_Inspector_Assessment_Target' s = Resource_Inspector_Assessment_Target
-    deriving (Generic)
+data Inspector_Assessment_Target_Resource' s
+    = Inspector_Assessment_Target_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Inspector_Assessment_Target')
-
-
-data Resource_Inspector_Assessment_Template' s = Resource_Inspector_Assessment_Template
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Inspector_Assessment_Template')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Inspector_Assessment_Target_Resource')
 
 
-data Resource_Inspector_Group' s = Resource_Inspector_Group
-    deriving (Generic)
+data Inspector_Assessment_Template_Resource' s
+    = Inspector_Assessment_Template_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Inspector_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Inspector_Assessment_Template_Resource')
+
+
+data Inspector_Group_Resource' s
+    = Inspector_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Inspector_Group_Resource')
 
 
 
 -- Kinesis Resources
 
-data Resource_Kinesis_Stream' s = Resource_Kinesis_Stream
-    deriving (Generic)
+data Kinesis_Stream_Resource' s
+    = Kinesis_Stream_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Kinesis_Stream')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Kinesis_Stream_Resource')
 
 
 
 -- Kinesis Firehose Resources
 
-data Resource_Kinesis_Firehose_Delivery_Stream' s = Resource_Kinesis_Firehose_Delivery_Stream
-    deriving (Generic)
+data Kinesis_Firehose_Delivery_Stream_Resource' s
+    = Kinesis_Firehose_Delivery_Stream_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Kinesis_Firehose_Delivery_Stream')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Kinesis_Firehose_Delivery_Stream_Resource')
 
 
 
 -- KMS Resources
 
-data Resource_KMS_Alias' s = Resource_KMS_Alias
-    deriving (Generic)
+data KMS_Alias_Resource' s
+    = KMS_Alias_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_KMS_Alias')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''KMS_Alias_Resource')
 
 
-data Resource_KMS_Key' s = Resource_KMS_Key
-    deriving (Generic)
+data KMS_Key_Resource' s
+    = KMS_Key_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_KMS_Key')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''KMS_Key_Resource')
 
 
 
 -- Lambda Resources
 
-data Resource_Lambda_Alias' s = Resource_Lambda_Alias
-    deriving (Generic)
+data Lambda_Alias_Resource' s
+    = Lambda_Alias_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lambda_Alias')
-
-
-data Resource_Lambda_Event_Source_Mapping' s = Resource_Lambda_Event_Source_Mapping
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lambda_Event_Source_Mapping')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lambda_Alias_Resource')
 
 
-data Resource_Lambda_Function' s = Resource_Lambda_Function
-    deriving (Generic)
+data Lambda_Event_Source_Mapping_Resource' s
+    = Lambda_Event_Source_Mapping_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lambda_Function')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lambda_Event_Source_Mapping_Resource')
 
 
-data Resource_Lambda_Permission' s = Resource_Lambda_Permission
-    deriving (Generic)
+data Lambda_Function_Resource' s
+    = Lambda_Function_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lambda_Permission')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lambda_Function_Resource')
+
+
+data Lambda_Permission_Resource' s
+    = Lambda_Permission_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lambda_Permission_Resource')
 
 
 
 -- Lightsail Resources
 
-data Resource_Lightsail_Domain' s = Resource_Lightsail_Domain
-    deriving (Generic)
+data Lightsail_Domain_Resource' s
+    = Lightsail_Domain_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lightsail_Domain')
-
-
-data Resource_Lightsail_Instance' s = Resource_Lightsail_Instance
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lightsail_Instance')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lightsail_Domain_Resource')
 
 
-data Resource_Lightsail_Key_Pair' s = Resource_Lightsail_Key_Pair
-    deriving (Generic)
+data Lightsail_Instance_Resource' s
+    = Lightsail_Instance_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lightsail_Key_Pair')
-
-
-data Resource_Lightsail_Static_IP' s = Resource_Lightsail_Static_IP
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lightsail_Static_IP')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lightsail_Instance_Resource')
 
 
-data Resource_Lightsail_Static_IP_Attachment' s = Resource_Lightsail_Static_IP_Attachment
-    deriving (Generic)
+data Lightsail_Key_Pair_Resource' s
+    = Lightsail_Key_Pair_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Lightsail_Static_IP_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lightsail_Key_Pair_Resource')
+
+
+data Lightsail_Static_IP_Resource' s
+    = Lightsail_Static_IP_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lightsail_Static_IP_Resource')
+
+
+data Lightsail_Static_IP_Attachment_Resource' s
+    = Lightsail_Static_IP_Attachment_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Lightsail_Static_IP_Attachment_Resource')
 
 
 
 -- OpsWorks Resources
 
-data Resource_Opsworks_Application' s = Resource_Opsworks_Application
-    deriving (Generic)
+data Opsworks_Application_Resource' s
+    = Opsworks_Application_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Application')
-
-
-data Resource_Opsworks_Custom_Layer' s = Resource_Opsworks_Custom_Layer
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Custom_Layer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Application_Resource')
 
 
-data Resource_Opsworks_Ganglia_Layer' s = Resource_Opsworks_Ganglia_Layer
-    deriving (Generic)
+data Opsworks_Custom_Layer_Resource' s
+    = Opsworks_Custom_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Ganglia_Layer')
-
-
-data Resource_Opsworks_Haproxy_Layer' s = Resource_Opsworks_Haproxy_Layer
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Haproxy_Layer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Custom_Layer_Resource')
 
 
-data Resource_Opsworks_Instance' s = Resource_Opsworks_Instance
-    deriving (Generic)
+data Opsworks_Ganglia_Layer_Resource' s
+    = Opsworks_Ganglia_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Instance')
-
-
-data Resource_Opsworks_Java_App_Layer' s = Resource_Opsworks_Java_App_Layer
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Java_App_Layer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Ganglia_Layer_Resource')
 
 
-data Resource_Opsworks_Memcached_Layer' s = Resource_Opsworks_Memcached_Layer
-    deriving (Generic)
+data Opsworks_Haproxy_Layer_Resource' s
+    = Opsworks_Haproxy_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Memcached_Layer')
-
-
-data Resource_Opsworks_Mysql_Layer' s = Resource_Opsworks_Mysql_Layer
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Mysql_Layer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Haproxy_Layer_Resource')
 
 
-data Resource_Opsworks_Nodejs_App_Layer' s = Resource_Opsworks_Nodejs_App_Layer
-    deriving (Generic)
+data Opsworks_Instance_Resource' s
+    = Opsworks_Instance_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Nodejs_App_Layer')
-
-
-data Resource_Opsworks_Permission' s = Resource_Opsworks_Permission
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Permission')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Instance_Resource')
 
 
-data Resource_Opsworks_PHP_App_Layer' s = Resource_Opsworks_PHP_App_Layer
-    deriving (Generic)
+data Opsworks_Java_App_Layer_Resource' s
+    = Opsworks_Java_App_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_PHP_App_Layer')
-
-
-data Resource_Opsworks_Rails_App_Layer' s = Resource_Opsworks_Rails_App_Layer
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Rails_App_Layer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Java_App_Layer_Resource')
 
 
-data Resource_Opsworks_RDS_DB_Instance' s = Resource_Opsworks_RDS_DB_Instance
-    deriving (Generic)
+data Opsworks_Memcached_Layer_Resource' s
+    = Opsworks_Memcached_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_RDS_DB_Instance')
-
-
-data Resource_Opsworks_Stack' s = Resource_Opsworks_Stack
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Stack')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Memcached_Layer_Resource')
 
 
-data Resource_Opsworks_Static_Web_Layer' s = Resource_Opsworks_Static_Web_Layer
-    deriving (Generic)
+data Opsworks_Mysql_Layer_Resource' s
+    = Opsworks_Mysql_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_Static_Web_Layer')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Mysql_Layer_Resource')
 
 
-data Resource_Opsworks_User_Profile' s = Resource_Opsworks_User_Profile
-    deriving (Generic)
+data Opsworks_Nodejs_App_Layer_Resource' s
+    = Opsworks_Nodejs_App_Layer_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Opsworks_User_Profile')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Nodejs_App_Layer_Resource')
+
+
+data Opsworks_Permission_Resource' s
+    = Opsworks_Permission_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Permission_Resource')
+
+
+data Opsworks_PHP_App_Layer_Resource' s
+    = Opsworks_PHP_App_Layer_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_PHP_App_Layer_Resource')
+
+
+data Opsworks_Rails_App_Layer_Resource' s
+    = Opsworks_Rails_App_Layer_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Rails_App_Layer_Resource')
+
+
+data Opsworks_RDS_DB_Instance_Resource' s
+    = Opsworks_RDS_DB_Instance_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_RDS_DB_Instance_Resource')
+
+
+data Opsworks_Stack_Resource' s
+    = Opsworks_Stack_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Stack_Resource')
+
+
+data Opsworks_Static_Web_Layer_Resource' s
+    = Opsworks_Static_Web_Layer_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_Static_Web_Layer_Resource')
+
+
+data Opsworks_User_Profile_Resource' s
+    = Opsworks_User_Profile_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Opsworks_User_Profile_Resource')
 
 
 
 -- RDS Resources
 
-data Resource_DB_Event_Subscription' s = Resource_DB_Event_Subscription
-    deriving (Generic)
+data DB_Event_Subscription_Resource' s
+    = DB_Event_Subscription_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Event_Subscription')
-
-
-data Resource_DB_Instance' s = Resource_DB_Instance
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Instance')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Event_Subscription_Resource')
 
 
-data Resource_DB_Option_Group' s = Resource_DB_Option_Group
-    deriving (Generic)
+data DB_Instance_Resource' s
+    = DB_Instance_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Option_Group')
-
-
-data Resource_DB_Parameter_Group' s = Resource_DB_Parameter_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Parameter_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Instance_Resource')
 
 
-data Resource_DB_Security_Group' s = Resource_DB_Security_Group
-    deriving (Generic)
+data DB_Option_Group_Resource' s
+    = DB_Option_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Security_Group')
-
-
-data Resource_DB_Snapshot' s = Resource_DB_Snapshot
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Snapshot')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Option_Group_Resource')
 
 
-data Resource_DB_Subnet_Group' s = Resource_DB_Subnet_Group
-    deriving (Generic)
+data DB_Parameter_Group_Resource' s
+    = DB_Parameter_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_DB_Subnet_Group')
-
-
-data Resource_RDS_Cluster' s = Resource_RDS_Cluster
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_RDS_Cluster')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Parameter_Group_Resource')
 
 
-data Resource_RDS_Cluster_Instance' s = Resource_RDS_Cluster_Instance
-    deriving (Generic)
+data DB_Security_Group_Resource' s
+    = DB_Security_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_RDS_Cluster_Instance')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Security_Group_Resource')
 
 
-data Resource_RDS_Cluster_Parameter_Group' s = Resource_RDS_Cluster_Parameter_Group
-    deriving (Generic)
+data DB_Snapshot_Resource' s
+    = DB_Snapshot_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_RDS_Cluster_Parameter_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Snapshot_Resource')
+
+
+data DB_Subnet_Group_Resource' s
+    = DB_Subnet_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''DB_Subnet_Group_Resource')
+
+
+data RDS_Cluster_Resource' s
+    = RDS_Cluster_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''RDS_Cluster_Resource')
+
+
+data RDS_Cluster_Instance_Resource' s
+    = RDS_Cluster_Instance_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''RDS_Cluster_Instance_Resource')
+
+
+data RDS_Cluster_Parameter_Group_Resource' s
+    = RDS_Cluster_Parameter_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''RDS_Cluster_Parameter_Group_Resource')
 
 
 
 -- Redshift Resources
 
-data Resource_Redshift_Cluster' s = Resource_Redshift_Cluster
-    deriving (Generic)
+data Redshift_Cluster_Resource' s
+    = Redshift_Cluster_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Redshift_Cluster')
-
-
-data Resource_Redshift_Parameter_Group' s = Resource_Redshift_Parameter_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Redshift_Parameter_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Redshift_Cluster_Resource')
 
 
-data Resource_Redshift_Security_Group' s = Resource_Redshift_Security_Group
-    deriving (Generic)
+data Redshift_Parameter_Group_Resource' s
+    = Redshift_Parameter_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Redshift_Security_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Redshift_Parameter_Group_Resource')
 
 
-data Resource_Redshift_Subnet_Group' s = Resource_Redshift_Subnet_Group
-    deriving (Generic)
+data Redshift_Security_Group_Resource' s
+    = Redshift_Security_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Redshift_Subnet_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Redshift_Security_Group_Resource')
+
+
+data Redshift_Subnet_Group_Resource' s
+    = Redshift_Subnet_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Redshift_Subnet_Group_Resource')
 
 
 
 -- WAF Resources
 
-data Resource_WAF_Byte_Match_Set' s = Resource_WAF_Byte_Match_Set
-    deriving (Generic)
+data WAF_Byte_Match_Set_Resource' s
+    = WAF_Byte_Match_Set_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Byte_Match_Set')
-
-
-data Resource_WAF_IPSet' s = Resource_WAF_IPSet
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_IPSet')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Byte_Match_Set_Resource')
 
 
-data Resource_WAF_Rule' s = Resource_WAF_Rule
-    deriving (Generic)
+data WAF_IPSet_Resource' s
+    = WAF_IPSet_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Rule')
-
-
-data Resource_WAF_Rate_Based_Rule' s = Resource_WAF_Rate_Based_Rule
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Rate_Based_Rule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_IPSet_Resource')
 
 
-data Resource_WAF_Size_Constraint_Set' s = Resource_WAF_Size_Constraint_Set
-    deriving (Generic)
+data WAF_Rule_Resource' s
+    = WAF_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Size_Constraint_Set')
-
-
-data Resource_WAF_Sql_Injection_Match_Set' s = Resource_WAF_Sql_Injection_Match_Set
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Sql_Injection_Match_Set')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Rule_Resource')
 
 
-data Resource_WAF_Web_ACL' s = Resource_WAF_Web_ACL
-    deriving (Generic)
+data WAF_Rate_Based_Rule_Resource' s
+    = WAF_Rate_Based_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Web_ACL')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Rate_Based_Rule_Resource')
 
 
-data Resource_WAF_Xss_Match_Set' s = Resource_WAF_Xss_Match_Set
-    deriving (Generic)
+data WAF_Size_Constraint_Set_Resource' s
+    = WAF_Size_Constraint_Set_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAF_Xss_Match_Set')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Size_Constraint_Set_Resource')
+
+
+data WAF_Sql_Injection_Match_Set_Resource' s
+    = WAF_Sql_Injection_Match_Set_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Sql_Injection_Match_Set_Resource')
+
+
+data WAF_Web_ACL_Resource' s
+    = WAF_Web_ACL_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Web_ACL_Resource')
+
+
+data WAF_Xss_Match_Set_Resource' s
+    = WAF_Xss_Match_Set_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAF_Xss_Match_Set_Resource')
 
 
 
 -- WAF Regional Resources
 
-data Resource_WAFRegional_Byte_Match_Set' s = Resource_WAFRegional_Byte_Match_Set
-    deriving (Generic)
+data WAFRegional_Byte_Match_Set_Resource' s
+    = WAFRegional_Byte_Match_Set_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAFRegional_Byte_Match_Set')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAFRegional_Byte_Match_Set_Resource')
 
 
-data Resource_WAFRegional_IPSet' s = Resource_WAFRegional_IPSet
-    deriving (Generic)
+data WAFRegional_IPSet_Resource' s
+    = WAFRegional_IPSet_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_WAFRegional_IPSet')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''WAFRegional_IPSet_Resource')
 
 
 
 -- Route53 Resources
 
-data Resource_Route53_Delegation_Set' s = Resource_Route53_Delegation_Set
-    deriving (Generic)
+data Route53_Delegation_Set_Resource' s
+    = Route53_Delegation_Set_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route53_Delegation_Set')
-
-
-data Resource_Route53_Health_Check' s = Resource_Route53_Health_Check
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route53_Health_Check')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route53_Delegation_Set_Resource')
 
 
-data Resource_Route53_Record' s = Resource_Route53_Record
-    deriving (Generic)
+data Route53_Health_Check_Resource' s
+    = Route53_Health_Check_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route53_Record')
-
-
-data Resource_Route53_Zone' s = Resource_Route53_Zone
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route53_Zone')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route53_Health_Check_Resource')
 
 
-data Resource_Route53_Zone_Association' s = Resource_Route53_Zone_Association
-    deriving (Generic)
+data Route53_Record_Resource' s
+    = Route53_Record_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route53_Zone_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route53_Record_Resource')
+
+
+data Route53_Zone_Resource' s
+    = Route53_Zone_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route53_Zone_Resource')
+
+
+data Route53_Zone_Association_Resource' s
+    = Route53_Zone_Association_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route53_Zone_Association_Resource')
 
 
 
 -- S3 Resources
 
-data Resource_S3_Bucket' s = Resource_S3_Bucket
+data S3_Bucket_Resource' s = S3_Bucket_Resource
     { bucket                    :: !(Maybe Text)
     -- ^ (Optional, Forces new resource) The name of the bucket. If omitted,
     -- Terraform will assign a random, unique name.
@@ -1448,406 +1862,530 @@ data Resource_S3_Bucket' s = Resource_S3_Bucket
     , request_payer             :: !(Maybe Text)
     -- ^ (Optional) Specifies who should bear the cost of Amazon S3 data
     -- transfer. Can be either BucketOwner or Requester. By default, the owner
-    -- of the S3 bucket would incur the costs of any data Resource_transfer. See
+    -- of the S3 bucket would incur the costs of any data transfer. See
     -- Requester Pays Buckets developer guide for more information.
     , replication_configuration :: !(Maybe Text)
     -- ^ (Optional) A configuration of replication configuration (documented
     -- below).
-    }
-    deriving (Generic)
+    } deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_S3_Bucket')
-
-
-data Resource_S3_Bucket_Notification' s = Resource_S3_Bucket_Notification
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_S3_Bucket_Notification')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''S3_Bucket_Resource')
 
 
-data Resource_S3_Bucket_Object' s = Resource_S3_Bucket_Object
-    deriving (Generic)
+data S3_Bucket_Notification_Resource' s
+    = S3_Bucket_Notification_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_S3_Bucket_Object')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''S3_Bucket_Notification_Resource')
 
 
-data Resource_S3_Bucket_Policy' s = Resource_S3_Bucket_Policy
-    deriving (Generic)
+data S3_Bucket_Object_Resource' s
+    = S3_Bucket_Object_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_S3_Bucket_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''S3_Bucket_Object_Resource')
+
+
+data S3_Bucket_Policy_Resource' s
+    = S3_Bucket_Policy_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''S3_Bucket_Policy_Resource')
 
 
 
 -- SES Resources
 
-data Resource_SES_Active_Receipt_Rule_Set' s = Resource_SES_Active_Receipt_Rule_Set
-    deriving (Generic)
+data SES_Active_Receipt_Rule_Set_Resource' s
+    = SES_Active_Receipt_Rule_Set_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Active_Receipt_Rule_Set')
-
-
-data Resource_SES_Domain_Identity' s = Resource_SES_Domain_Identity
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Domain_Identity')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Active_Receipt_Rule_Set_Resource')
 
 
-data Resource_SES_Receipt_Filter' s = Resource_SES_Receipt_Filter
-    deriving (Generic)
+data SES_Domain_Identity_Resource' s
+    = SES_Domain_Identity_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Receipt_Filter')
-
-
-data Resource_SES_Receipt_Rule' s = Resource_SES_Receipt_Rule
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Receipt_Rule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Domain_Identity_Resource')
 
 
-data Resource_SES_Receipt_Rule_Set' s = Resource_SES_Receipt_Rule_Set
-    deriving (Generic)
+data SES_Receipt_Filter_Resource' s
+    = SES_Receipt_Filter_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Receipt_Rule_Set')
-
-
-data Resource_SES_Configuration_Set' s = Resource_SES_Configuration_Set
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Configuration_Set')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Receipt_Filter_Resource')
 
 
-data Resource_SES_Event_Destination' s = Resource_SES_Event_Destination
-    deriving (Generic)
+data SES_Receipt_Rule_Resource' s
+    = SES_Receipt_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SES_Event_Destination')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Receipt_Rule_Resource')
+
+
+data SES_Receipt_Rule_Set_Resource' s
+    = SES_Receipt_Rule_Set_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Receipt_Rule_Set_Resource')
+
+
+data SES_Configuration_Set_Resource' s
+    = SES_Configuration_Set_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Configuration_Set_Resource')
+
+
+data SES_Event_Destination_Resource' s
+    = SES_Event_Destination_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SES_Event_Destination_Resource')
 
 
 
 -- Step Function Resources
 
-data Resource_SFN_Activity' s = Resource_SFN_Activity
-    deriving (Generic)
+data SFN_Activity_Resource' s
+    = SFN_Activity_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SFN_Activity')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SFN_Activity_Resource')
 
 
-data Resource_SFN_State_Machine' s = Resource_SFN_State_Machine
-    deriving (Generic)
+data SFN_State_Machine_Resource' s
+    = SFN_State_Machine_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SFN_State_Machine')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SFN_State_Machine_Resource')
 
 
 
 -- SimpleDB Resources
 
-data Resource_SimpleDB_Domain' s = Resource_SimpleDB_Domain
-    deriving (Generic)
+data SimpleDB_Domain_Resource' s
+    = SimpleDB_Domain_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SimpleDB_Domain')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SimpleDB_Domain_Resource')
 
 
 
 -- SNS Resources
 
-data Resource_SNS_Topic' s = Resource_SNS_Topic
-    deriving (Generic)
+data SNS_Topic_Resource' s
+    = SNS_Topic_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SNS_Topic')
-
-
-data Resource_SNS_Topic_Policy' s = Resource_SNS_Topic_Policy
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SNS_Topic_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SNS_Topic_Resource')
 
 
-data Resource_SNS_Topic_Subscription' s = Resource_SNS_Topic_Subscription
-    deriving (Generic)
+data SNS_Topic_Policy_Resource' s
+    = SNS_Topic_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SNS_Topic_Subscription')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SNS_Topic_Policy_Resource')
+
+
+data SNS_Topic_Subscription_Resource' s
+    = SNS_Topic_Subscription_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SNS_Topic_Subscription_Resource')
 
 
 
 -- SSM Resources
 
-data Resource_SSM_Activation' s = Resource_SSM_Activation
-    deriving (Generic)
+data SSM_Activation_Resource' s
+    = SSM_Activation_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Activation')
-
-
-data Resource_SSM_Association' s = Resource_SSM_Association
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Activation_Resource')
 
 
-data Resource_SSM_Document' s = Resource_SSM_Document
-    deriving (Generic)
+data SSM_Association_Resource' s
+    = SSM_Association_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Document')
-
-
-data Resource_SSM_Maintenance_Window' s = Resource_SSM_Maintenance_Window
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Maintenance_Window')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Association_Resource')
 
 
-data Resource_SSM_Maintenance_Window_Target' s = Resource_SSM_Maintenance_Window_Target
-    deriving (Generic)
+data SSM_Document_Resource' s
+    = SSM_Document_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Maintenance_Window_Target')
-
-data Resource_SSM_Maintenance_Window_Task' s = Resource_SSM_Maintenance_Window_Task
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Maintenance_Window_Task')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Document_Resource')
 
 
-data Resource_SSM_Patch_Baseline' s = Resource_SSM_Patch_Baseline
-    deriving (Generic)
+data SSM_Maintenance_Window_Resource' s
+    = SSM_Maintenance_Window_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Patch_Baseline')
-
-
-data Resource_SSM_Patch_Group' s = Resource_SSM_Patch_Group
-    deriving (Generic)
-
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Patch_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Maintenance_Window_Resource')
 
 
-data Resource_SSM_Parameter' s = Resource_SSM_Parameter
-    deriving (Generic)
+data SSM_Maintenance_Window_Target_Resource' s
+    = SSM_Maintenance_Window_Target_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SSM_Parameter')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Maintenance_Window_Target_Resource')
+
+data SSM_Maintenance_Window_Task_Resource' s
+    = SSM_Maintenance_Window_Task_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Maintenance_Window_Task_Resource')
+
+
+data SSM_Patch_Baseline_Resource' s
+    = SSM_Patch_Baseline_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Patch_Baseline_Resource')
+
+
+data SSM_Patch_Group_Resource' s
+    = SSM_Patch_Group_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Patch_Group_Resource')
+
+
+data SSM_Parameter_Resource' s
+    = SSM_Parameter_Resource
+     deriving (Generic)
+
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SSM_Parameter_Resource')
 
 
 
 -- SQS Resources
 
-data Resource_SQS_Queue' s = Resource_SQS_Queue
-    deriving (Generic)
+data SQS_Queue_Resource' s
+    = SQS_Queue_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SQS_Queue')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SQS_Queue_Resource')
 
 
-data Resource_SQS_Queue_Policy' s = Resource_SQS_Queue_Policy
-    deriving (Generic)
+data SQS_Queue_Policy_Resource' s
+    = SQS_Queue_Policy_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_SQS_Queue_Policy')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''SQS_Queue_Policy_Resource')
 
 
 
 -- VPC Resources
 
-data Resource_Customer_Gateway' s = Resource_Customer_Gateway
-    deriving (Generic)
+data Customer_Gateway_Resource' s
+    = Customer_Gateway_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Customer_Gateway')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Customer_Gateway_Resource')
 
 
-data Resource_Default_Network_ACL' s = Resource_Default_Network_ACL
-    deriving (Generic)
+data Default_Network_ACL_Resource' s
+    = Default_Network_ACL_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Default_Network_ACL')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Default_Network_ACL_Resource')
 
 
-data Resource_Default_Route_Table' s = Resource_Default_Route_Table
-    deriving (Generic)
+data Default_Route_Table_Resource' s
+    = Default_Route_Table_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Default_Route_Table')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Default_Route_Table_Resource')
 
 
-data Resource_Default_Security_Group' s = Resource_Default_Security_Group
-    deriving (Generic)
+data Default_Security_Group_Resource' s
+    = Default_Security_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Default_Security_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Default_Security_Group_Resource')
 
 
-data Resource_Default_Subnet' s = Resource_Default_Subnet
-    deriving (Generic)
+data Default_Subnet_Resource' s
+    = Default_Subnet_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Default_Subnet')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Default_Subnet_Resource')
 
 
-data Resource_Default_VPC' s = Resource_Default_VPC
-    deriving (Generic)
+data Default_VPC_Resource' s
+    = Default_VPC_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Default_VPC')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Default_VPC_Resource')
 
 
 
 
-data Resource_Default_VPC_DHCP_Options' s = Resource_Default_VPC_DHCP_Options
-    deriving (Generic)
+data Default_VPC_DHCP_Options_Resource' s
+    = Default_VPC_DHCP_Options_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Default_VPC_DHCP_Options')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Default_VPC_DHCP_Options_Resource')
 
 
-data Resource_Egress_Only_Internet_Gateway' s = Resource_Egress_Only_Internet_Gateway
-    deriving (Generic)
+data Egress_Only_Internet_Gateway_Resource' s
+    = Egress_Only_Internet_Gateway_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Egress_Only_Internet_Gateway')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Egress_Only_Internet_Gateway_Resource')
 
 
-data Resource_Flow_Log' s = Resource_Flow_Log
-    deriving (Generic)
+data Flow_Log_Resource' s
+    = Flow_Log_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Flow_Log')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Flow_Log_Resource')
 
 
-data Resource_Internet_Gateway' s = Resource_Internet_Gateway
-    deriving (Generic)
+data Internet_Gateway_Resource' s
+    = Internet_Gateway_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Internet_Gateway')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Internet_Gateway_Resource')
 
 
-data Resource_Main_Route_Table_Association' s = Resource_Main_Route_Table_Association
-    deriving (Generic)
+data Main_Route_Table_Association_Resource' s
+    = Main_Route_Table_Association_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Main_Route_Table_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Main_Route_Table_Association_Resource')
 
 
-data Resource_Nat_Gateway' s = Resource_Nat_Gateway
-    deriving (Generic)
+data Nat_Gateway_Resource' s
+    = Nat_Gateway_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Nat_Gateway')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Nat_Gateway_Resource')
 
 
-data Resource_Network_ACL' s = Resource_Network_ACL
-    deriving (Generic)
+data Network_ACL_Resource' s
+    = Network_ACL_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Network_ACL')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Network_ACL_Resource')
 
 
-data Resource_Network_ACL_Rule' s = Resource_Network_ACL_Rule
-    deriving (Generic)
+data Network_ACL_Rule_Resource' s
+    = Network_ACL_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Network_ACL_Rule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Network_ACL_Rule_Resource')
 
 
-data Resource_Network_Interface' s = Resource_Network_Interface
-    deriving (Generic)
+data Network_Interface_Resource' s
+    = Network_Interface_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Network_Interface')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Network_Interface_Resource')
 
 
-data Resource_Network_Interface_Attachment' s = Resource_Network_Interface_Attachment
-    deriving (Generic)
+data Network_Interface_Attachment_Resource' s
+    = Network_Interface_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Network_Interface_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Network_Interface_Attachment_Resource')
 
 
-data Resource_Route' s = Resource_Route
-    deriving (Generic)
+data Route_Resource' s
+    = Route_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route_Resource')
 
 
-data Resource_Route_Table' s = Resource_Route_Table
-    deriving (Generic)
+data Route_Table_Resource' s
+    = Route_Table_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route_Table')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route_Table_Resource')
 
 
-data Resource_Route_Table_Association' s = Resource_Route_Table_Association
-    deriving (Generic)
+data Route_Table_Association_Resource' s
+    = Route_Table_Association_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Route_Table_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Route_Table_Association_Resource')
 
 
-data Resource_Security_Group' s = Resource_Security_Group
-    deriving (Generic)
+data Security_Group_Resource' s
+    = Security_Group_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Security_Group')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Security_Group_Resource')
 
 
-data Resource_Network_Interface_SG_Attachment' s = Resource_Network_Interface_SG_Attachment
-    deriving (Generic)
+data Network_Interface_SG_Attachment_Resource' s
+    = Network_Interface_SG_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Network_Interface_SG_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Network_Interface_SG_Attachment_Resource')
 
 
-data Resource_Security_Group_Rule' s = Resource_Security_Group_Rule
-    deriving (Generic)
+data Security_Group_Rule_Resource' s
+    = Security_Group_Rule_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Security_Group_Rule')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Security_Group_Rule_Resource')
 
 
-data Resource_Subnet' s = Resource_Subnet
-    deriving (Generic)
+data Subnet_Resource' s
+    = Subnet_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_Subnet')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''Subnet_Resource')
 
 
-data Resource_VPC' s = Resource_VPC
-    deriving (Generic)
+data VPC_Resource' s
+    = VPC_RESOURCE
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_Resource')
 
 
-data Resource_VPC_DHCP_Options' s = Resource_VPC_DHCP_Options
-    deriving (Generic)
+data VPC_DHCP_Options_Resource' s
+    = VPC_DHCP_Options_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC_DHCP_Options')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_DHCP_Options_Resource')
 
 
-data Resource_VPC_DHCP_Options_Association' s = Resource_VPC_DHCP_Options_Association
-    deriving (Generic)
+data VPC_DHCP_Options_Association_Resource' s
+    = VPC_DHCP_Options_Association_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC_DHCP_Options_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_DHCP_Options_Association_Resource')
 
 
-data Resource_VPC_Endpoint' s = Resource_VPC_Endpoint
-    deriving (Generic)
+data VPC_Endpoint_Resource' s
+    = VPC_Endpoint_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC_Endpoint')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_Endpoint_Resource')
 
 
-data Resource_VPC_Endpoint_Route_Table_Association' s = Resource_VPC_Endpoint_Route_Table_Association
-    deriving (Generic)
+data VPC_Endpoint_Route_Table_Association_Resource' s
+    = VPC_Endpoint_Route_Table_Association_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC_Endpoint_Route_Table_Association')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_Endpoint_Route_Table_Association_Resource')
 
 
-data Resource_VPC_Peering_Connection' s = Resource_VPC_Peering_Connection
-    deriving (Generic)
+data VPC_Peering_Connection_Resource' s
+    = VPC_Peering_Connection_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC_Peering_Connection')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_Peering_Connection_Resource')
 
 
-data Resource_VPC_Peering_Connection_Accepter' s = Resource_VPC_Peering_Connection_Accepter
-    deriving (Generic)
+data VPC_Peering_Connection_Accepter_Resource' s
+    = VPC_Peering_Connection_Accepter_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPC_Peering_Connection_Accepter')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPC_Peering_Connection_Accepter_Resource')
 
 
-data Resource_VPN_Connection' s = Resource_VPN_Connection
-    deriving (Generic)
+data VPN_Connection_Resource' s
+    = VPN_Connection_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPN_Connection')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPN_Connection_Resource')
 
 
-data Resource_VPN_Connection_Route' s = Resource_VPN_Connection_Route
-    deriving (Generic)
+data VPN_Connection_Route_Resource' s
+    = VPN_Connection_Route_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPN_Connection_Route')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPN_Connection_Route_Resource')
 
 
-data Resource_VPN_Gateway' s = Resource_VPN_Gateway
-    deriving (Generic)
+data VPN_Gateway_Resource' s
+    = VPN_Gateway_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPN_Gateway')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPN_Gateway_Resource')
 
 
-data Resource_VPN_Gateway_Attachment' s = Resource_VPN_Gateway_Attachment
-    deriving (Generic)
+data VPN_Gateway_Attachment_Resource' s
+    = VPN_Gateway_Attachment_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPN_Gateway_Attachment')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPN_Gateway_Attachment_Resource')
 
 
-data Resource_VPN_Gateway_Route_Propagation' s = Resource_VPN_Gateway_Route_Propagation
-    deriving (Generic)
+data VPN_Gateway_Route_Propagation_Resource' s
+    = VPN_Gateway_Route_Propagation_Resource
+     deriving (Generic)
 
-$(TH.makeResource "aws_" ''AWS 'newAWSResource ''Resource_VPN_Gateway_Route_Propagation')
+$(TH.makeResource
+    "aws_" ''AWS 'newAWSResource ''VPN_Gateway_Route_Propagation_Resource')
