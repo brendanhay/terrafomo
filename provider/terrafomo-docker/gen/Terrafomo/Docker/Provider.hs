@@ -33,9 +33,10 @@ Docker-compatible API hosts. Use the navigation to the left to read about
 the available resources.
 -}
 data Docker = Docker
-    { _ca_material :: !Text
-    , _cert_path   :: !Text
-    , _host        :: !Text
+    { _ca_material   :: !Text
+    , _cert_path     :: !Text
+    , _host          :: !Text
+    , _registry_auth :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Docker
@@ -68,3 +69,11 @@ host :: Functor f => (Text -> f Text) -> Docker -> f Docker
 host f s =
     (\x -> s { _host = x })
         <$> f (_host s)
+
+{- | (Optional) A block specifying the credentials for a target v2 Docker
+registry.
+-}
+registryAuth :: Functor f => (Text -> f Text) -> Docker -> f Docker
+registryAuth f s =
+    (\x -> s { _registry_auth = x })
+        <$> f (_registry_auth s)

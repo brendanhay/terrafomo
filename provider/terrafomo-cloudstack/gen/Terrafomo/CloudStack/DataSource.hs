@@ -16,14 +16,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Docker.DataSource
+-- Module      : Terrafomo.CloudStack.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Docker.DataSource where
+module Terrafomo.CloudStack.DataSource where
 
 import Data.Text (Text)
 
@@ -33,27 +33,18 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
-import qualified Terrafomo.Docker          as Qual
+import qualified Terrafomo.CloudStack      as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
 import qualified Terrafomo.Syntax.TH       as TH
 
-{- | The @docker_registry_image@ Docker datasource.
+{- | The @cloudstack_template@ CloudStack datasource.
 
-Reads the image metadata from a Docker Registry. Used in conjunction with
-the </docs/providers/docker/r/image.html> resource to keep an image up to
-date on the latest available version of the tag.
+Use this datasource to get the ID of a template for use in other resources.
 -}
-data RegistryImageDataSource = RegistryImageDataSource
-    { _name :: !(Attr Text)
-    {- ^ (Required, string) The name of the Docker image, including any tags. e.g. @alpine:latest@ -}
-    } deriving (Show, Generic)
-
-type instance Computed RegistryImageDataSource
-    = '[ '("sha256_digest", Text)
-       {- (string) - The content digest of the image, as stored on the registry. -}
-       ]
+data TemplateDataSource = TemplateDataSource
+    deriving (Show, Generic)
 
 $(TH.makeDataSource
-    "docker_registry_image"
-    ''Qual.Docker
-    ''RegistryImageDataSource)
+    "cloudstack_template"
+    ''Qual.CloudStack
+    ''TemplateDataSource)

@@ -45,18 +45,18 @@ derive subnets.
 -}
 data PrecreatedIpBlockDataSource = PrecreatedIpBlockDataSource
     { _address_family :: !(Attr Text)
-      {- ^ (Required) 4 or 6, depending on which block you are looking for. -}
+    {- ^ (Required) 4 or 6, depending on which block you are looking for. -}
     , _facility       :: !(Attr Text)
-      {- ^ (Required) Facility of the searched block. -}
+    {- ^ (Required) Facility of the searched block. -}
     , _project_id     :: !(Attr Text)
-      {- ^ (Required) ID of the project where the searched block should be. -}
+    {- ^ (Required) ID of the project where the searched block should be. -}
     , _public         :: !(Attr Text)
-      {- ^ (Required) Whether to look for public or private block. -}
+    {- ^ (Required) Whether to look for public or private block. -}
     } deriving (Show, Generic)
 
 type instance Computed PrecreatedIpBlockDataSource
     = '[ '("cidr_notation", Text)
-         {- - CIDR notation of the looked up block. -}
+       {- - CIDR notation of the looked up block. -}
        ]
 
 $(TH.makeDataSource

@@ -43,36 +43,36 @@ Provides a DNSimple record resource.
 -}
 data RecordResource = RecordResource
     { _domain   :: !(Attr Text)
-      {- ^ (Required) The domain to add the record to -}
+    {- ^ (Required) The domain to add the record to -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) The name of the record -}
+    {- ^ (Required) The name of the record -}
     , _priority :: !(Attr Text)
-      {- ^ (Optional) The priority of the record - only useful for some record types -}
+    {- ^ (Optional) The priority of the record - only useful for some record types -}
     , _ttl      :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record -}
+    {- ^ (Optional) The TTL of the record -}
     , _type'    :: !(Attr Text)
-      {- ^ (Required) The type of the record -}
+    {- ^ (Required) The type of the record -}
     , _value    :: !(Attr Text)
-      {- ^ (Required) The value of the record -}
+    {- ^ (Required) The value of the record -}
     } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("domain_id", Text)
-         {- - The domain ID of the record -}
-      , '("hostname", Text)
-         {- - The FQDN of the record -}
-      , '("id", Text)
-         {- - The record ID -}
-      , '("name", Text)
-         {- - The name of the record -}
-      , '("priority", Text)
-         {- - The priority of the record -}
-      , '("ttl", Text)
-         {- - The TTL of the record -}
-      , '("type", Text)
-         {- - The type of the record -}
-      , '("value", Text)
-         {- - The value of the record -}
+       {- - The domain ID of the record -}
+       , '("hostname", Text)
+       {- - The FQDN of the record -}
+       , '("id", Text)
+       {- - The record ID -}
+       , '("name", Text)
+       {- - The name of the record -}
+       , '("priority", Text)
+       {- - The priority of the record -}
+       , '("ttl", Text)
+       {- - The TTL of the record -}
+       , '("type", Text)
+       {- - The type of the record -}
+       , '("value", Text)
+       {- - The value of the record -}
        ]
 
 $(TH.makeResource

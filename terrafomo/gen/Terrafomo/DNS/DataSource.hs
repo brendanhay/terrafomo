@@ -42,14 +42,14 @@ Use this data source to get DNS A records of the host.
 -}
 data ARecordSetDataSource = ARecordSetDataSource
     { _host :: !(Attr Text)
-      {- ^ - (required): Host to look up -}
+    {- ^ - (required): Host to look up -}
     } deriving (Show, Generic)
 
 type instance Computed ARecordSetDataSource
     = '[ '("addrs", Text)
-         {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Text)
-         {- - Set to @host@ . -}
+       {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
+       , '("id", Text)
+       {- - Set to @host@ . -}
        ]
 
 $(TH.makeDataSource
@@ -63,14 +63,14 @@ Use this data source to get DNS AAAA records of the host.
 -}
 data AaaaRecordSetDataSource = AaaaRecordSetDataSource
     { _host :: !(Attr Text)
-      {- ^ - (required): Host to look up -}
+    {- ^ - (required): Host to look up -}
     } deriving (Show, Generic)
 
 type instance Computed AaaaRecordSetDataSource
     = '[ '("addrs", Text)
-         {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Text)
-         {- - Set to @host@ . -}
+       {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
+       , '("id", Text)
+       {- - Set to @host@ . -}
        ]
 
 $(TH.makeDataSource
@@ -84,14 +84,14 @@ Use this data source to get DNS CNAME record set of the host.
 -}
 data CnameRecordSetDataSource = CnameRecordSetDataSource
     { _host :: !(Attr Text)
-      {- ^ - (required): Host to look up -}
+    {- ^ - (required): Host to look up -}
     } deriving (Show, Generic)
 
 type instance Computed CnameRecordSetDataSource
     = '[ '("cname", Text)
-         {- - A CNAME record associated with host. -}
-      , '("id", Text)
-         {- - Set to @host@ . -}
+       {- - A CNAME record associated with host. -}
+       , '("id", Text)
+       {- - Set to @host@ . -}
        ]
 
 $(TH.makeDataSource
@@ -99,22 +99,43 @@ $(TH.makeDataSource
     ''Qual.Provider
     ''CnameRecordSetDataSource)
 
+{- | The @dns_ns_record_set@ DNS datasource.
+
+Use this data source to get DNS ns records of the host.
+-}
+data NsRecordSetDataSource = NsRecordSetDataSource
+    { _host :: !(Attr Text)
+    {- ^ - (required): Host to look up -}
+    } deriving (Show, Generic)
+
+type instance Computed NsRecordSetDataSource
+    = '[ '("id", Text)
+       {- - Set to @host@ . -}
+       , '("nameservers", Text)
+       {- - A list of nameservers. Nameservers are always sorted to avoid constant changing plans. -}
+       ]
+
+$(TH.makeDataSource
+    "dns_ns_record_set"
+    ''Qual.Provider
+    ''NsRecordSetDataSource)
+
 {- | The @dns_txt_record_set@ DNS datasource.
 
 Use this data source to get DNS TXT record set of the host.
 -}
 data TxtRecordSetDataSource = TxtRecordSetDataSource
     { _host :: !(Attr Text)
-      {- ^ - (required): Host to look up -}
+    {- ^ - (required): Host to look up -}
     } deriving (Show, Generic)
 
 type instance Computed TxtRecordSetDataSource
     = '[ '("id", Text)
-         {- - Set to @host@ . -}
-      , '("record", Text)
-         {- - The first TXT record. -}
-      , '("records", Text)
-         {- - A list of TXT records. -}
+       {- - Set to @host@ . -}
+       , '("record", Text)
+       {- - The first TXT record. -}
+       , '("records", Text)
+       {- - A list of TXT records. -}
        ]
 
 $(TH.makeDataSource

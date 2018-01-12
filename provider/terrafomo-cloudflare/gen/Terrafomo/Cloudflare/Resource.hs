@@ -43,40 +43,40 @@ Provides a Cloudflare record resource.
 -}
 data RecordResource = RecordResource
     { _domain   :: !(Attr Text)
-      {- ^ (Required) The domain to add the record to -}
+    {- ^ (Required) The domain to add the record to -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) The name of the record -}
+    {- ^ (Required) The name of the record -}
     , _priority :: !(Attr Text)
-      {- ^ (Optional) The priority of the record -}
+    {- ^ (Optional) The priority of the record -}
     , _proxied  :: !(Attr Text)
-      {- ^ (Optional) Whether the record gets Cloudflare's origin protection. -}
+    {- ^ (Optional) Whether the record gets Cloudflare's origin protection. -}
     , _ttl      :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record> ) -}
+    {- ^ (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record> ) -}
     , _type'    :: !(Attr Text)
-      {- ^ (Required) The type of the record -}
+    {- ^ (Required) The type of the record -}
     , _value    :: !(Attr Text)
-      {- ^ (Required) The value of the record -}
+    {- ^ (Required) The value of the record -}
     } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("hostname", Text)
-         {- - The FQDN of the record -}
-      , '("id", Text)
-         {- - The record ID -}
-      , '("name", Text)
-         {- - The name of the record -}
-      , '("priority", Text)
-         {- - The priority of the record -}
-      , '("proxied", Text)
-         {- - (Optional) Whether the record gets Cloudflare's origin protection; defaults to @false@ . -}
-      , '("ttl", Text)
-         {- - The TTL of the record -}
-      , '("type", Text)
-         {- - The type of the record -}
-      , '("value", Text)
-         {- - The value of the record -}
-      , '("zone_id", Text)
-         {- - (Computed) the zone id of the record -}
+       {- - The FQDN of the record -}
+       , '("id", Text)
+       {- - The record ID -}
+       , '("name", Text)
+       {- - The name of the record -}
+       , '("priority", Text)
+       {- - The priority of the record -}
+       , '("proxied", Text)
+       {- - (Optional) Whether the record gets Cloudflare's origin protection; defaults to @false@ . -}
+       , '("ttl", Text)
+       {- - The TTL of the record -}
+       , '("type", Text)
+       {- - The type of the record -}
+       , '("value", Text)
+       {- - The value of the record -}
+       , '("zone_id", Text)
+       {- - (Computed) the zone id of the record -}
        ]
 
 $(TH.makeResource

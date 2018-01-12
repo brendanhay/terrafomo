@@ -25,22 +25,21 @@ import qualified Terrafomo.VSphere.Types    as Qual
 
 {- | VSphere Terraform provider.
 
-The VMware vSphere provider is used to interact with the resources supported
-by VMware vSphere. The provider needs to be configured with the proper
-credentials before it can be used. Use the navigation to the left to read
-about the available resources. ~> NOTE: The VMware vSphere Provider
-currently represents initial support and therefore may undergo significant
-changes as the community improves it. This provider at this time only
-supports IPv4 addresses on virtual machines.
+The VMware vSphere provider gives Terraform the ability to work with VMware
+vSphere Products, notably
+<https://www.vmware.com/products/vcenter-server.html> and
+<https://www.vmware.com/products/esxi-and-esx.html> . This provider can be
+used to manage many aspects of a VMware vSphere environment, including
+virtual machines, standard and distributed networks, datastores, and more.
+Use the navigation on the left to read about the various resources and data
+sources supported by the provider. ~> NOTE: This provider requires API write
+access and hence is not supported on a free ESXi license.
 -}
 data VSphere = VSphere
-    { _allow_unverified_ssl  :: !Text
-    , _client_debug          :: !Text
-    , _client_debug_path     :: !Text
-    , _client_debug_path_run :: !Text
-    , _password              :: !Text
-    , _user                  :: !Text
-    , _vsphere_server        :: !Text
+    { _allow_unverified_ssl :: !Text
+    , _password             :: !Text
+    , _user                 :: !Text
+    , _vsphere_server       :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable VSphere
@@ -57,31 +56,6 @@ allowUnverifiedSsl :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
 allowUnverifiedSsl f s =
     (\x -> s { _allow_unverified_ssl = x })
         <$> f (_allow_unverified_ssl s)
-
-{- | (Optional) Boolean to set the govomomi api to log soap calls to disk.  The
-log files are logged to @${HOME}/.govc@ , the same path used by @govc@ .
-Can also be specified with the @VSPHERE_CLIENT_DEBUG@ environment variable.
--}
-clientDebug :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-clientDebug f s =
-    (\x -> s { _client_debug = x })
-        <$> f (_client_debug s)
-
-{- | (Optional) Override the default log path. Can also be specified with the
-@VSPHERE_CLIENT_DEBUG_PATH@ environment variable.
--}
-clientDebugPath :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-clientDebugPath f s =
-    (\x -> s { _client_debug_path = x })
-        <$> f (_client_debug_path s)
-
-{- | (Optional) Client debug file path for a single run. Can also be specified
-with the @VSPHERE_CLIENT_DEBUG_PATH_RUN@ environment variable.
--}
-clientDebugPathRun :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-clientDebugPathRun f s =
-    (\x -> s { _client_debug_path_run = x })
-        <$> f (_client_debug_path_run s)
 
 {- | (Required) This is the password for vSphere API operations. Can also be
 specified with the @VSPHERE_PASSWORD@ environment variable.

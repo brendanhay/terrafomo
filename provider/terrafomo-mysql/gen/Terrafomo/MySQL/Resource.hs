@@ -47,11 +47,11 @@ your database resources as an extra safety measure.
 -}
 data DatabaseResource = DatabaseResource
     { _default_character_set :: !(Attr Text)
-      {- ^ (Optional) The default character set to use when a table is created without specifying an explicit character set. Defaults to "utf8". -}
+    {- ^ (Optional) The default character set to use when a table is created without specifying an explicit character set. Defaults to "utf8". -}
     , _default_collation     :: !(Attr Text)
-      {- ^ (Optional) The default collation to use when a table is created without specifying an explicit collation. Defaults to @utf8_general_ci@ . Each character set has its own set of collations, so changing the character set requires also changing the collation. -}
+    {- ^ (Optional) The default collation to use when a table is created without specifying an explicit collation. Defaults to @utf8_general_ci@ . Each character set has its own set of collations, so changing the character set requires also changing the collation. -}
     , _name                  :: !(Attr Text)
-      {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
+    {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -66,15 +66,15 @@ a MySQL server.
 -}
 data GrantResource = GrantResource
     { _database   :: !(Attr Text)
-      {- ^ (Required) The database to grant privileges on. At this time, privileges are given to all tables on the database ( @mydb.*@ ). -}
+    {- ^ (Required) The database to grant privileges on. At this time, privileges are given to all tables on the database ( @mydb.*@ ). -}
     , _grant      :: !(Attr Text)
-      {- ^ (Optional) Whether to also give the user privileges to grant the same privileges to other users. -}
+    {- ^ (Optional) Whether to also give the user privileges to grant the same privileges to other users. -}
     , _host       :: !(Attr Text)
-      {- ^ (Optional) The source host of the user. Defaults to "localhost". -}
+    {- ^ (Optional) The source host of the user. Defaults to "localhost". -}
     , _privileges :: !(Attr Text)
-      {- ^ (Required) A list of privileges to grant to the user. Refer to a list of privileges (such as <https://dev.mysql.com/doc/refman/5.5/en/grant.html> ) for applicable privileges. -}
+    {- ^ (Required) A list of privileges to grant to the user. Refer to a list of privileges (such as <https://dev.mysql.com/doc/refman/5.5/en/grant.html> ) for applicable privileges. -}
     , _user       :: !(Attr Text)
-      {- ^ (Required) The name of the user. -}
+    {- ^ (Required) The name of the user. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -91,13 +91,13 @@ required when using this resource, to avoid disclosing the password.
 -}
 data UserResource = UserResource
     { _host               :: !(Attr Text)
-      {- ^ (Optional) The source host of the user. Defaults to "localhost". -}
+    {- ^ (Optional) The source host of the user. Defaults to "localhost". -}
     , _password           :: !(Attr Text)
-      {- ^ (Optional) Deprecated alias of @plaintext_password@ , whose value is stored as plaintext in state . Prefer to use @plaintext_password@ instead, which stores the password as an unsalted hash. -}
+    {- ^ (Optional) Deprecated alias of @plaintext_password@ , whose value is stored as plaintext in state . Prefer to use @plaintext_password@ instead, which stores the password as an unsalted hash. -}
     , _plaintext_password :: !(Attr Text)
-      {- ^ (Optional) The password for the user. This must be provided in plain text, so the data source for it must be secured. An unsalted hash of the provided password is stored in state. -}
+    {- ^ (Optional) The password for the user. This must be provided in plain text, so the data source for it must be secured. An unsalted hash of the provided password is stored in state. -}
     , _user               :: !(Attr Text)
-      {- ^ (Required) The name of the user. -}
+    {- ^ (Required) The name of the user. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

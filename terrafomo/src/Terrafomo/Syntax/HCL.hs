@@ -96,4 +96,3 @@ prettyBool :: Bool -> Doc
 prettyBool = \case
     True  -> "true"
     False -> "false"
-

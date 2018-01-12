@@ -45,12 +45,12 @@ that you can use for other PagerDuty resources.
 -}
 data EscalationPolicyDataSource = EscalationPolicyDataSource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
+    {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
     } deriving (Show, Generic)
 
 type instance Computed EscalationPolicyDataSource
     = '[ '("name", Text)
-         {- - The short name of the found escalation policy. -}
+       {- - The short name of the found escalation policy. -}
        ]
 
 $(TH.makeDataSource
@@ -66,12 +66,12 @@ that you can use for other PagerDuty resources.
 -}
 data ScheduleDataSource = ScheduleDataSource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
+    {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
     } deriving (Show, Generic)
 
 type instance Computed ScheduleDataSource
     = '[ '("name", Text)
-         {- - The short name of the found schedule. -}
+       {- - The short name of the found schedule. -}
        ]
 
 $(TH.makeDataSource
@@ -87,12 +87,12 @@ that you can use for other PagerDuty resources.
 -}
 data UserDataSource = UserDataSource
     { _email :: !(Attr Text)
-      {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
+    {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
     } deriving (Show, Generic)
 
 type instance Computed UserDataSource
     = '[ '("name", Text)
-         {- - The short name of the found user. -}
+       {- - The short name of the found user. -}
        ]
 
 $(TH.makeDataSource
@@ -109,14 +109,14 @@ Datadog).
 -}
 data VendorDataSource = VendorDataSource
     { _name :: !(Attr Text)
-      {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
+    {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
     } deriving (Show, Generic)
 
 type instance Computed VendorDataSource
     = '[ '("name", Text)
-         {- - The short name of the found vendor. -}
-      , '("type", Text)
-         {- - The generic service type for this vendor. -}
+       {- - The short name of the found vendor. -}
+       , '("type", Text)
+       {- - The generic service type for this vendor. -}
        ]
 
 $(TH.makeDataSource

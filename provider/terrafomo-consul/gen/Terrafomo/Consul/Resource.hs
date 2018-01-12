@@ -45,26 +45,26 @@ health checks for an agent service is not supported.
 -}
 data AgentServiceResource = AgentServiceResource
     { _address :: !(Attr Text)
-      {- ^ (Optional) The address of the service. Defaults to the address of the agent. -}
+    {- ^ (Optional) The address of the service. Defaults to the address of the agent. -}
     , _name    :: !(Attr Text)
-      {- ^ (Required) The name of the service. -}
+    {- ^ (Required) The name of the service. -}
     , _port    :: !(Attr Text)
-      {- ^ (Optional) The port of the service. -}
+    {- ^ (Optional) The port of the service. -}
     , _tags    :: !(Attr Text)
-      {- ^ (Optional) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
+    {- ^ (Optional) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Generic)
 
 type instance Computed AgentServiceResource
     = '[ '("address", Text)
-         {- - The address of the service. -}
-      , '("id", Text)
-         {- - The ID of the service, defaults to the value of @name@ . -}
-      , '("name", Text)
-         {- - The name of the service. -}
-      , '("port", Text)
-         {- - The port of the service. -}
-      , '("tags", Text)
-         {- - The tags of the service. -}
+       {- - The address of the service. -}
+       , '("id", Text)
+       {- - The ID of the service, defaults to the value of @name@ . -}
+       , '("name", Text)
+       {- - The name of the service. -}
+       , '("port", Text)
+       {- - The port of the service. -}
+       , '("tags", Text)
+       {- - The tags of the service. -}
        ]
 
 $(TH.makeResource
@@ -80,22 +80,22 @@ Currently, defining health checks is not supported.
 -}
 data CatalogEntryResource = CatalogEntryResource
     { _address    :: !(Attr Text)
-      {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
+    {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
     , _datacenter :: !(Attr Text)
-      {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
+    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
     , _node       :: !(Attr Text)
-      {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
+    {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
     , _service    :: !(Attr Text)
-      {- ^ (Optional) A service to optionally associated with the node. Supported values are documented below. -}
+    {- ^ (Optional) A service to optionally associated with the node. Supported values are documented below. -}
     , _token      :: !(Attr Text)
-      {- ^ (Optional) ACL token. -}
+    {- ^ (Optional) ACL token. -}
     } deriving (Show, Generic)
 
 type instance Computed CatalogEntryResource
     = '[ '("address", Text)
-         {- - The address of the service. -}
-      , '("node", Text)
-         {- - The ID of the service, defaults to the value of @name@ . -}
+       {- - The address of the service. -}
+       , '("node", Text)
+       {- - The ID of the service, defaults to the value of @name@ . -}
        ]
 
 $(TH.makeResource
@@ -124,18 +124,18 @@ outside of Terraform.
 -}
 data KeyPrefixResource = KeyPrefixResource
     { _datacenter  :: !(Attr Text)
-      {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
+    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
     , _path_prefix :: !(Attr Text)
-      {- ^ (Required) Specifies the common prefix shared by all keys that will be managed by this resource instance. In most cases this will end with a slash, to manage a "folder" of keys. -}
+    {- ^ (Required) Specifies the common prefix shared by all keys that will be managed by this resource instance. In most cases this will end with a slash, to manage a "folder" of keys. -}
     , _subkeys     :: !(Attr Text)
-      {- ^ (Required) A mapping from subkey name (which will be appended to the given @path_prefix@ ) to the value that should be stored at that key. Use slashes, as shown in the above example, to create "sub-folders" under the given path prefix. -}
+    {- ^ (Required) A mapping from subkey name (which will be appended to the given @path_prefix@ ) to the value that should be stored at that key. Use slashes, as shown in the above example, to create "sub-folders" under the given path prefix. -}
     , _token       :: !(Attr Text)
-      {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
+    {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Generic)
 
 type instance Computed KeyPrefixResource
     = '[ '("datacenter", Text)
-         {- - The datacenter the keys are being read/written to. -}
+       {- - The datacenter the keys are being read/written to. -}
        ]
 
 $(TH.makeResource
@@ -156,11 +156,11 @@ resource instead.
 -}
 data KeysResource = KeysResource
     { _datacenter :: !(Attr Text)
-      {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
+    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
     , _key        :: !(Attr Text)
-      {- ^ (Required) Specifies a key in Consul to be written. Supported values documented below. -}
+    {- ^ (Required) Specifies a key in Consul to be written. Supported values documented below. -}
     , _token      :: !(Attr Text)
-      {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
+    {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -175,16 +175,16 @@ Currently, defining health checks is not supported.
 -}
 data NodeResource = NodeResource
     { _address :: !(Attr Text)
-      {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
+    {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
     , _name    :: !(Attr Text)
-      {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
+    {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
     } deriving (Show, Generic)
 
 type instance Computed NodeResource
     = '[ '("address", Text)
-         {- - The address of the service. -}
-      , '("name", Text)
-         {- - The name of the service. -}
+       {- - The address of the service. -}
+       , '("name", Text)
+       {- - The name of the service. -}
        ]
 
 $(TH.makeResource
@@ -201,34 +201,34 @@ cluster using Terraform.
 -}
 data PreparedQueryResource = PreparedQueryResource
     { _datacenter   :: !(Attr Text)
-      {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
+    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
     , _dns          :: !(Attr Text)
-      {- ^ (Optional) Settings for controlling the DNS response details. -}
+    {- ^ (Optional) Settings for controlling the DNS response details. -}
     , _failover     :: !(Attr Text)
-      {- ^ (Optional) Options for controlling behavior when no healthy nodes are available in the local DC. -}
+    {- ^ (Optional) Options for controlling behavior when no healthy nodes are available in the local DC. -}
     , _name         :: !(Attr Text)
-      {- ^ (Required) The name of the prepared query. Used to identify the prepared query during requests. Can be specified as an empty string to configure the query as a catch-all. -}
+    {- ^ (Required) The name of the prepared query. Used to identify the prepared query during requests. Can be specified as an empty string to configure the query as a catch-all. -}
     , _near         :: !(Attr Text)
-      {- ^ (Optional) Allows specifying the name of a node to sort results near using Consul's distance sorting and network coordinates. The magic @_agent@ value can be used to always sort nearest the node servicing the request. -}
+    {- ^ (Optional) Allows specifying the name of a node to sort results near using Consul's distance sorting and network coordinates. The magic @_agent@ value can be used to always sort nearest the node servicing the request. -}
     , _only_passing :: !(Attr Text)
-      {- ^ (Optional) When @true@ , the prepared query will only return nodes with passing health checks in the result. -}
+    {- ^ (Optional) When @true@ , the prepared query will only return nodes with passing health checks in the result. -}
     , _service      :: !(Attr Text)
-      {- ^ (Required) The name of the service to query. -}
+    {- ^ (Required) The name of the service to query. -}
     , _session      :: !(Attr Text)
-      {- ^ (Optional) The name of the Consul session to tie this query's lifetime to.  This is an advanced parameter that should not be used without a complete understanding of Consul sessions and the implications of their use (it is recommended to leave this blank in nearly all cases).  If this parameter is omitted the query will not expire. -}
+    {- ^ (Optional) The name of the Consul session to tie this query's lifetime to.  This is an advanced parameter that should not be used without a complete understanding of Consul sessions and the implications of their use (it is recommended to leave this blank in nearly all cases).  If this parameter is omitted the query will not expire. -}
     , _stored_token :: !(Attr Text)
-      {- ^ (Optional) The ACL token to store with the prepared query. This token will be used by default whenever the query is executed. -}
+    {- ^ (Optional) The ACL token to store with the prepared query. This token will be used by default whenever the query is executed. -}
     , _tags         :: !(Attr Text)
-      {- ^ (Optional) The list of required and/or disallowed tags.  If a tag is in this list it must be present.  If the tag is preceded with a "!" then it is disallowed. -}
+    {- ^ (Optional) The list of required and/or disallowed tags.  If a tag is in this list it must be present.  If the tag is preceded with a "!" then it is disallowed. -}
     , _template     :: !(Attr Text)
-      {- ^ (Optional) Query templating options. This is used to make a single prepared query respond to many different requests. -}
+    {- ^ (Optional) Query templating options. This is used to make a single prepared query respond to many different requests. -}
     , _token        :: !(Attr Text)
-      {- ^ (Optional) The ACL token to use when saving the prepared query. This overrides the token that the agent provides by default. -}
+    {- ^ (Optional) The ACL token to use when saving the prepared query. This overrides the token that the agent provides by default. -}
     } deriving (Show, Generic)
 
 type instance Computed PreparedQueryResource
     = '[ '("id", Text)
-         {- - The ID of the prepared query, generated by Consul. -}
+       {- - The ID of the prepared query, generated by Consul. -}
        ]
 
 $(TH.makeResource
@@ -251,28 +251,28 @@ instead, which can create an arbitrary service record in the Consul catalog.
 -}
 data ServiceResource = ServiceResource
     { _address    :: !(Attr Text)
-      {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
+    {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
     , _name       :: !(Attr Text)
-      {- ^ (Required, string) The name of the service. -}
+    {- ^ (Required, string) The name of the service. -}
     , _port       :: !(Attr Text)
-      {- ^ (Optional, int) The port of the service. -}
+    {- ^ (Optional, int) The port of the service. -}
     , _service_id :: !(Attr Text)
-      {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
+    {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
     , _tags       :: !(Attr Text)
-      {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
+    {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Generic)
 
 type instance Computed ServiceResource
     = '[ '("address", Text)
-         {- - The address of the service. -}
-      , '("name", Text)
-         {- - The name of the service. -}
-      , '("port", Text)
-         {- - The port of the service. -}
-      , '("service_id", Text)
-         {- - The id of the service, defaults to the value of @name@ . -}
-      , '("tags", Text)
-         {- - The tags of the service. -}
+       {- - The address of the service. -}
+       , '("name", Text)
+       {- - The name of the service. -}
+       , '("port", Text)
+       {- - The port of the service. -}
+       , '("service_id", Text)
+       {- - The id of the service, defaults to the value of @name@ . -}
+       , '("tags", Text)
+       {- - The tags of the service. -}
        ]
 
 $(TH.makeResource

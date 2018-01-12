@@ -44,13 +44,13 @@ projects.
 -}
 data DeployKeyResource = DeployKeyResource
     { _can_push :: !(Attr Text)
-      {- ^ (Optional, boolean) Allow this deploy key to be used to push changes to the project.  Defaults to @false@ . NOTE:: this cannot currently be managed. -}
+    {- ^ (Optional, boolean) Allow this deploy key to be used to push changes to the project.  Defaults to @false@ . NOTE:: this cannot currently be managed. -}
     , _key      :: !(Attr Text)
-      {- ^ (Required, string) The public ssh key body. -}
+    {- ^ (Required, string) The public ssh key body. -}
     , _project  :: !(Attr Text)
-      {- ^ (Required, string) The name or id of the project to add the deploy key to. -}
+    {- ^ (Required, string) The name or id of the project to add the deploy key to. -}
     , _title    :: !(Attr Text)
-      {- ^ (Required, string) A title to describe the deploy key with. -}
+    {- ^ (Required, string) A title to describe the deploy key with. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -66,24 +66,24 @@ resource to work.
 -}
 data GroupResource = GroupResource
     { _description            :: !(Attr Text)
-      {- ^ (Optional) The description of the group. -}
+    {- ^ (Optional) The description of the group. -}
     , _lfs_enabled            :: !(Attr Text)
-      {- ^ (Optional) Boolean, defaults to true.  Whether to enable LFS support for projects in this group. -}
+    {- ^ (Optional) Boolean, defaults to true.  Whether to enable LFS support for projects in this group. -}
     , _name                   :: !(Attr Text)
-      {- ^ (Required) The name of this group. -}
+    {- ^ (Required) The name of this group. -}
     , _parent_id              :: !(Attr Text)
-      {- ^ (Optional) Integer, id of the parent group (creates a nested group). -}
+    {- ^ (Optional) Integer, id of the parent group (creates a nested group). -}
     , _path                   :: !(Attr Text)
-      {- ^ (Required) The url of the hook to invoke. -}
+    {- ^ (Required) The url of the hook to invoke. -}
     , _request_access_enabled :: !(Attr Text)
-      {- ^ (Optional) Boolean, defaults to false.  Whether to enable users to request access to the group. -}
+    {- ^ (Optional) Boolean, defaults to false.  Whether to enable users to request access to the group. -}
     , _visibility_level       :: !(Attr Text)
-      {- ^ (Optional) Set to @public@ to create a public group. Valid values are @private@ , @internal@ , @public@ . Groups are created as private by default. -}
+    {- ^ (Optional) Set to @public@ to create a public group. Valid values are @private@ , @internal@ , @public@ . Groups are created as private by default. -}
     } deriving (Show, Generic)
 
 type instance Computed GroupResource
     = '[ '("id", Text)
-         {- - The unique id assigned to the group by the GitLab server.  Serves as a namespace id where one is needed. -}
+       {- - The unique id assigned to the group by the GitLab server.  Serves as a namespace id where one is needed. -}
        ]
 
 $(TH.makeResource
@@ -99,18 +99,18 @@ projects. For further information on labels, consult the
 -}
 data LabelResource = LabelResource
     { _color       :: !(Attr Text)
-      {- ^ (Required) The color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords> . -}
+    {- ^ (Required) The color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords> . -}
     , _description :: !(Attr Text)
-      {- ^ (Optional) The description of the label. -}
+    {- ^ (Optional) The description of the label. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) The name of the label. -}
+    {- ^ (Required) The name of the label. -}
     , _project     :: !(Attr Text)
-      {- ^ (Required) The name or id of the project to add the label to. -}
+    {- ^ (Required) The name or id of the project to add the label to. -}
     } deriving (Show, Generic)
 
 type instance Computed LabelResource
     = '[ '("id", Text)
-         {- - The unique id assigned to the label by the GitLab server (the name of the label). -}
+       {- - The unique id assigned to the label by the GitLab server (the name of the label). -}
        ]
 
 $(TH.makeResource
@@ -126,34 +126,34 @@ projects. For further information on hooks, consult the
 -}
 data ProjectHookResource = ProjectHookResource
     { _enable_ssl_verification :: !(Attr Text)
-      {- ^ (Optional) Enable ssl verification when invoking the hook. -}
+    {- ^ (Optional) Enable ssl verification when invoking the hook. -}
     , _issues_events           :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for issues events. -}
+    {- ^ (Optional) Invoke the hook for issues events. -}
     , _job_events              :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for job events. -}
+    {- ^ (Optional) Invoke the hook for job events. -}
     , _merge_requests_events   :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for merge requests. -}
+    {- ^ (Optional) Invoke the hook for merge requests. -}
     , _note_events             :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for notes events. -}
+    {- ^ (Optional) Invoke the hook for notes events. -}
     , _pipeline_events         :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for pipeline events. -}
+    {- ^ (Optional) Invoke the hook for pipeline events. -}
     , _project                 :: !(Attr Text)
-      {- ^ (Required) The name or id of the project to add the hook to. -}
+    {- ^ (Required) The name or id of the project to add the hook to. -}
     , _push_events             :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for push events. -}
+    {- ^ (Optional) Invoke the hook for push events. -}
     , _tag_push_events         :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for tag push events. -}
+    {- ^ (Optional) Invoke the hook for tag push events. -}
     , _token                   :: !(Attr Text)
-      {- ^ (Optional) A token to present when invoking the hook. -}
+    {- ^ (Optional) A token to present when invoking the hook. -}
     , _url                     :: !(Attr Text)
-      {- ^ (Required) The url of the hook to invoke. -}
+    {- ^ (Required) The url of the hook to invoke. -}
     , _wiki_page_events        :: !(Attr Text)
-      {- ^ (Optional) Invoke the hook for wiki page events. -}
+    {- ^ (Optional) Invoke the hook for wiki page events. -}
     } deriving (Show, Generic)
 
 type instance Computed ProjectHookResource
     = '[ '("id", Text)
-         {- - The unique id assigned to the hook by the GitLab server. -}
+       {- - The unique id assigned to the hook by the GitLab server. -}
        ]
 
 $(TH.makeResource
@@ -168,36 +168,36 @@ group or within your user.
 -}
 data ProjectResource = ProjectResource
     { _default_branch         :: !(Attr Text)
-      {- ^ (Optional) The default branch for the project. -}
+    {- ^ (Optional) The default branch for the project. -}
     , _description            :: !(Attr Text)
-      {- ^ (Optional) A description of the project. -}
+    {- ^ (Optional) A description of the project. -}
     , _issues_enabled         :: !(Attr Text)
-      {- ^ (Optional) Enable issue tracking for the project. -}
+    {- ^ (Optional) Enable issue tracking for the project. -}
     , _merge_requests_enabled :: !(Attr Text)
-      {- ^ (Optional) Enable merge requests for the project. -}
+    {- ^ (Optional) Enable merge requests for the project. -}
     , _name                   :: !(Attr Text)
-      {- ^ (Required) The name of the project. -}
+    {- ^ (Required) The name of the project. -}
     , _namespace_id           :: !(Attr Text)
-      {- ^ (Optional) The namespace (group or user) of the project. Defaults to your user. See <group.html> for an example. -}
+    {- ^ (Optional) The namespace (group or user) of the project. Defaults to your user. See <group.html> for an example. -}
     , _path                   :: !(Attr Text)
-      {- ^ (Optional) The path of the repository. -}
+    {- ^ (Optional) The path of the repository. -}
     , _snippets_enabled       :: !(Attr Text)
-      {- ^ (Optional) Enable snippets for the project. -}
+    {- ^ (Optional) Enable snippets for the project. -}
     , _visibility_level       :: !(Attr Text)
-      {- ^ (Optional) Set to @public@ to create a public project. Valid values are @private@ , @internal@ , @public@ . Repositories are created as private by default. -}
+    {- ^ (Optional) Set to @public@ to create a public project. Valid values are @private@ , @internal@ , @public@ . Repositories are created as private by default. -}
     , _wiki_enabled           :: !(Attr Text)
-      {- ^ (Optional) Enable wiki for the project. -}
+    {- ^ (Optional) Enable wiki for the project. -}
     } deriving (Show, Generic)
 
 type instance Computed ProjectResource
     = '[ '("http_url_to_repo", Text)
-         {- - URL that can be provided to @git clone@ to clone the repository via HTTP. -}
-      , '("id", Text)
-         {- - Integer that uniquely identifies the project within the gitlab install. -}
-      , '("ssh_url_to_repo", Text)
-         {- - URL that can be provided to @git clone@ to clone the repository via SSH. -}
-      , '("web_url", Text)
-         {- - URL that can be used to find the project in a browser. -}
+       {- - URL that can be provided to @git clone@ to clone the repository via HTTP. -}
+       , '("id", Text)
+       {- - Integer that uniquely identifies the project within the gitlab install. -}
+       , '("ssh_url_to_repo", Text)
+       {- - URL that can be provided to @git clone@ to clone the repository via SSH. -}
+       , '("web_url", Text)
+       {- - URL that can be used to find the project in a browser. -}
        ]
 
 $(TH.makeResource
@@ -213,26 +213,26 @@ resource to work.
 -}
 data UserResource = UserResource
     { _can_create_group  :: !(Attr Text)
-      {- ^ (Optional) Boolean, defaults to false. Whether to allow the user to create groups. -}
+    {- ^ (Optional) Boolean, defaults to false. Whether to allow the user to create groups. -}
     , _email             :: !(Attr Text)
-      {- ^ (Required) The e-mail address of the user. -}
+    {- ^ (Required) The e-mail address of the user. -}
     , _is_admin          :: !(Attr Text)
-      {- ^ (Optional) Boolean, defaults to false.  Whether to enable administrative priviledges for the user. -}
+    {- ^ (Optional) Boolean, defaults to false.  Whether to enable administrative priviledges for the user. -}
     , _name              :: !(Attr Text)
-      {- ^ (Required) The name of the user. -}
+    {- ^ (Required) The name of the user. -}
     , _password          :: !(Attr Text)
-      {- ^ (Required) The password of the user. -}
+    {- ^ (Required) The password of the user. -}
     , _projects_limit    :: !(Attr Text)
-      {- ^ (Optional) Integer, defaults to 0.  Number of projects user can create. -}
+    {- ^ (Optional) Integer, defaults to 0.  Number of projects user can create. -}
     , _skip_confirmation :: !(Attr Text)
-      {- ^ (Optional) Boolean, defaults to true. Whether to skip confirmation. -}
+    {- ^ (Optional) Boolean, defaults to true. Whether to skip confirmation. -}
     , _username          :: !(Attr Text)
-      {- ^ (Required) The username of the user. -}
+    {- ^ (Required) The username of the user. -}
     } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("id", Text)
-         {- - The unique id assigned to the user by the GitLab server. -}
+       {- - The unique id assigned to the user by the GitLab server. -}
        ]
 
 $(TH.makeResource

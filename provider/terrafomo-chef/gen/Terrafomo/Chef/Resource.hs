@@ -46,14 +46,14 @@ To create the data bag itself, use the @chef_data_bag@ resource.
 -}
 data DataBagItemResource = DataBagItemResource
     { _content_json  :: !(Attr Text)
-      {- ^ (Required) A string containing a JSON object that will be the content of the item. Must at minimum contain a property called "id" that is unique within the data bag, which will become the identifier of the created item. -}
+    {- ^ (Required) A string containing a JSON object that will be the content of the item. Must at minimum contain a property called "id" that is unique within the data bag, which will become the identifier of the created item. -}
     , _data_bag_name :: !(Attr Text)
-      {- ^ (Required) The name of the data bag into which this item will be placed. -}
+    {- ^ (Required) The name of the data bag into which this item will be placed. -}
     } deriving (Show, Generic)
 
 type instance Computed DataBagItemResource
     = '[ '("id", Text)
-         {- - The value of the "id" property in the @content_json@ JSON object, which can be used by clients to retrieve this item's content. -}
+       {- - The value of the "id" property in the @content_json@ JSON object, which can be used by clients to retrieve this item's content. -}
        ]
 
 $(TH.makeResource
@@ -71,12 +71,12 @@ bag is a collection of items which can be created using the
 -}
 data DataBagResource = DataBagResource
     { _name :: !(Attr Text)
-      {- ^ (Required) The unique name to assign to the data bag. This is the name that other server clients will use to find and retrieve data from the data bag. -}
+    {- ^ (Required) The unique name to assign to the data bag. This is the name that other server clients will use to find and retrieve data from the data bag. -}
     } deriving (Show, Generic)
 
 type instance Computed DataBagResource
     = '[ '("api_uri", Text)
-         {- - The URI representing this data bag in the Chef server API. -}
+       {- - The URI representing this data bag in the Chef server API. -}
        ]
 
 $(TH.makeResource
@@ -92,15 +92,15 @@ constraints for which cookbook versions may be used on its nodes.
 -}
 data EnvironmentResource = EnvironmentResource
     { _cookbook_constraints     :: !(Attr Text)
-      {- ^ (Optional) Mapping of cookbook names to cookbook version constraints that should apply for this environment. -}
+    {- ^ (Optional) Mapping of cookbook names to cookbook version constraints that should apply for this environment. -}
     , _default_attributes_json  :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the environment. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the environment. -}
     , _description              :: !(Attr Text)
-      {- ^ (Optional) A human-friendly description of the environment. If not set, a placeholder of "Managed by Terraform" will be set. -}
+    {- ^ (Optional) A human-friendly description of the environment. If not set, a placeholder of "Managed by Terraform" will be set. -}
     , _name                     :: !(Attr Text)
-      {- ^ (Required) The unique name to assign to the environment. This name will be used when nodes are created within the environment. -}
+    {- ^ (Required) The unique name to assign to the environment. This name will be used when nodes are created within the environment. -}
     , _override_attributes_json :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -119,19 +119,19 @@ Chef server.
 -}
 data NodeResource = NodeResource
     { _automatic_attributes_json :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the automatic attributes for the node. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the automatic attributes for the node. -}
     , _default_attributes_json   :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the node. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the node. -}
     , _environment_name          :: !(Attr Text)
-      {- ^ (Optional) the nodes environment name (default: _default) -}
+    {- ^ (Optional) the nodes environment name (default: _default) -}
     , _name                      :: !(Attr Text)
-      {- ^ (Required) The unique name to assign to the node. -}
+    {- ^ (Required) The unique name to assign to the node. -}
     , _normal_attributes_json    :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the normal attributes for the node. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the normal attributes for the node. -}
     , _override_attributes_json  :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the node. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the node. -}
     , _run_list                  :: !(Attr Text)
-      {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
+    {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -146,15 +146,15 @@ can apply across multiple nodes that perform the same function.
 -}
 data RoleResource = RoleResource
     { _default_attributes_json  :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the role. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the role. -}
     , _description              :: !(Attr Text)
-      {- ^ (Optional) A human-friendly description of the role. If not set, a placeholder of "Managed by Terraform" will be set. -}
+    {- ^ (Optional) A human-friendly description of the role. If not set, a placeholder of "Managed by Terraform" will be set. -}
     , _name                     :: !(Attr Text)
-      {- ^ (Required) The unique name to assign to the role. -}
+    {- ^ (Required) The unique name to assign to the role. -}
     , _override_attributes_json :: !(Attr Text)
-      {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the role. -}
+    {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the role. -}
     , _run_list                 :: !(Attr Text)
-      {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
+    {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

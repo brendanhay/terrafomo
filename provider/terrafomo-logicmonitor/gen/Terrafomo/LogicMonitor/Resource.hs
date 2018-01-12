@@ -44,9 +44,9 @@ and manage LogicMonitor users
 -}
 data CollectorGroupResource = CollectorGroupResource
     { _description :: !(Attr Text)
-      {- ^ (Optional) Set description of collector group -}
+    {- ^ (Optional) Set description of collector group -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) Name of collector group -}
+    {- ^ (Required) Name of collector group -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -61,17 +61,17 @@ and manage LogicMonitor device groups
 -}
 data DeviceGroupResource = DeviceGroupResource
     { _applies_to       :: !(Attr Text)
-      {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
+    {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
     , _description      :: !(Attr Text)
-      {- ^ (Optional) Description of device group -}
+    {- ^ (Optional) Description of device group -}
     , _disable_alerting :: !(Attr Text)
-      {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
+    {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
     , _name             :: !(Attr Text)
-      {- ^ (Required) Name of device group -}
+    {- ^ (Required) Name of device group -}
     , _parent_id        :: !(Attr Text)
-      {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
+    {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
     , _properties       :: !(Attr Text)
-      {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
+    {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -86,17 +86,17 @@ manage LogicMonitor devices
 -}
 data DeviceResource = DeviceResource
     { _collector        :: !(Attr Text)
-      {- ^ - (required) The id of the collector that will monitoring the device -}
+    {- ^ - (required) The id of the collector that will monitoring the device -}
     , _disable_alerting :: !(Attr Text)
-      {- ^ (Optional) The host is created with alerting disabled (default is true) -}
+    {- ^ (Optional) The host is created with alerting disabled (default is true) -}
     , _display_name     :: !(Attr Text)
-      {- ^ (Optional) Display name of device, (default is ip_addr) -}
+    {- ^ (Optional) Display name of device, (default is ip_addr) -}
     , _hostgroup_id     :: !(Attr Text)
-      {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
+    {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
     , _ip_addr          :: !(Attr Text)
-      {- ^ (Required) Ip Address/Hostname of device -}
+    {- ^ (Required) Ip Address/Hostname of device -}
     , _properties       :: !(Attr Text)
-      {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
+    {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

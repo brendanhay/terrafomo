@@ -45,14 +45,14 @@ deleted. For additional details please refer to
 -}
 data IpResource = IpResource
     { _server :: !(Attr Text)
-      {- ^ (Optional) ID of server to associate IP with -}
+    {- ^ (Optional) ID of server to associate IP with -}
     } deriving (Show, Generic)
 
 type instance Computed IpResource
     = '[ '("id", Text)
-         {- - id of the new resource -}
-      , '("ip", Text)
-         {- - IP of the new resource -}
+       {- - id of the new resource -}
+       , '("ip", Text)
+       {- - IP of the new resource -}
        ]
 
 $(TH.makeResource
@@ -68,14 +68,14 @@ and deleted. For additional details please refer to
 -}
 data SecurityGroupResource = SecurityGroupResource
     { _description :: !(Attr Text)
-      {- ^ (Required) description of security group -}
+    {- ^ (Required) description of security group -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) name of security group -}
+    {- ^ (Required) name of security group -}
     } deriving (Show, Generic)
 
 type instance Computed SecurityGroupResource
     = '[ '("id", Text)
-         {- - id of the new resource -}
+       {- - id of the new resource -}
        ]
 
 $(TH.makeResource
@@ -91,22 +91,22 @@ created, updated and deleted. For additional details please refer to
 -}
 data SecurityGroupRuleResource = SecurityGroupRuleResource
     { _action         :: !(Attr Text)
-      {- ^ (Required) action of rule ( @accept@ , @drop@ ) -}
+    {- ^ (Required) action of rule ( @accept@ , @drop@ ) -}
     , _direction      :: !(Attr Text)
-      {- ^ (Required) direction of rule ( @inbound@ , @outbound@ ) -}
+    {- ^ (Required) direction of rule ( @inbound@ , @outbound@ ) -}
     , _ip_range       :: !(Attr Text)
-      {- ^ (Required) ip_range of rule -}
+    {- ^ (Required) ip_range of rule -}
     , _port           :: !(Attr Text)
-      {- ^ (Optional) port of the rule -}
+    {- ^ (Optional) port of the rule -}
     , _protocol       :: !(Attr Text)
-      {- ^ (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ ) -}
+    {- ^ (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ ) -}
     , _security_group :: !(Attr Text)
-      {- ^ (Required) the security group which should be associated with this rule -}
+    {- ^ (Required) the security group which should be associated with this rule -}
     } deriving (Show, Generic)
 
 type instance Computed SecurityGroupRuleResource
     = '[ '("id", Text)
-         {- - id of the new resource -}
+       {- - id of the new resource -}
        ]
 
 $(TH.makeResource
@@ -122,29 +122,29 @@ For additional details please refer to
 -}
 data ServerResource = ServerResource
     { _bootscript          :: !(Attr Text)
-      {- ^ (Optional) server bootscript -}
+    {- ^ (Optional) server bootscript -}
     , _dynamic_ip_required :: !(Attr Text)
-      {- ^ (Optional) make server publicly available -}
+    {- ^ (Optional) make server publicly available -}
     , _enable_ipv6         :: !(Attr Text)
-      {- ^ (Optional) enable ipv6 -}
+    {- ^ (Optional) enable ipv6 -}
     , _image               :: !(Attr Text)
-      {- ^ (Required) base image of server -}
+    {- ^ (Required) base image of server -}
     , _name                :: !(Attr Text)
-      {- ^ (Required) name of server -}
+    {- ^ (Required) name of server -}
     , _public_ipv6         :: !(Attr Text)
-      {- ^ - (Read Only) if @enable_ipv6@ is set this contains the ipv6 address of your instance -}
+    {- ^ - (Read Only) if @enable_ipv6@ is set this contains the ipv6 address of your instance -}
     , _security_group      :: !(Attr Text)
-      {- ^ (Optional) assign security group to server -}
+    {- ^ (Optional) assign security group to server -}
     , _state               :: !(Attr Text)
-      {- ^ (Optional) allows you to define the desired state of your server. Valid values include ( @stopped@ , @running@ ) -}
+    {- ^ (Optional) allows you to define the desired state of your server. Valid values include ( @stopped@ , @running@ ) -}
     , _state_detail        :: !(Attr Text)
-      {- ^ - (Read Only) contains details from the scaleway API the state of your instance -}
+    {- ^ - (Read Only) contains details from the scaleway API the state of your instance -}
     , _tags                :: !(Attr Text)
-      {- ^ (Optional) list of tags for server -}
+    {- ^ (Optional) list of tags for server -}
     , _type'               :: !(Attr Text)
-      {- ^ (Required) type of server -}
+    {- ^ (Required) type of server -}
     , _volume              :: !(Attr Text)
-      {- ^ (Optional) attach additional volumes to your instance (see below) -}
+    {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -160,14 +160,14 @@ server is already in use.
 -}
 data VolumeAttachmentResource = VolumeAttachmentResource
     { _server :: !(Attr Text)
-      {- ^ (Required) id of the server -}
+    {- ^ (Required) id of the server -}
     , _volume :: !(Attr Text)
-      {- ^ (Required) id of the volume to be attached -}
+    {- ^ (Required) id of the volume to be attached -}
     } deriving (Show, Generic)
 
 type instance Computed VolumeAttachmentResource
     = '[ '("id", Text)
-         {- - id of the new resource -}
+       {- - id of the new resource -}
        ]
 
 $(TH.makeResource
@@ -183,18 +183,18 @@ For additional details please refer to
 -}
 data VolumeResource = VolumeResource
     { _name       :: !(Attr Text)
-      {- ^ (Required) name of volume -}
+    {- ^ (Required) name of volume -}
     , _server     :: !(Attr Text)
-      {- ^ - (Read Only) the @scaleway_server@ instance which has this volume mounted right now -}
+    {- ^ - (Read Only) the @scaleway_server@ instance which has this volume mounted right now -}
     , _size_in_gb :: !(Attr Text)
-      {- ^ (Required) size of the volume in GB -}
+    {- ^ (Required) size of the volume in GB -}
     , _type'      :: !(Attr Text)
-      {- ^ (Required) type of volume -}
+    {- ^ (Required) type of volume -}
     } deriving (Show, Generic)
 
 type instance Computed VolumeResource
     = '[ '("id", Text)
-         {- - id of the new resource -}
+       {- - id of the new resource -}
        ]
 
 $(TH.makeResource

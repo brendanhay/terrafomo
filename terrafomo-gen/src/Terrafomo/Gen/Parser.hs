@@ -108,7 +108,8 @@ schemaParser = do
 
     -- example usage
 --    schemaExamples <- catMaybes <$> example
-    let schemaExamples = mempty
+    let schemaExamples   = mempty
+        schemaDeprecated = False
 
     -- skip any non-headers
     P.skipManyTill node $

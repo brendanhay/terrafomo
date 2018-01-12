@@ -2,7 +2,7 @@
 .stack-work
 /vendor
 /bin
-/gen/schema
+/terrafomo-gen/schema
 *.rej
 
 # hpack

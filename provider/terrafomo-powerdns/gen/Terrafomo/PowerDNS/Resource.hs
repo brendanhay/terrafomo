@@ -43,15 +43,15 @@ Provides a PowerDNS record resource.
 -}
 data RecordResource = RecordResource
     { _name    :: !(Attr Text)
-      {- ^ (Required) The name of the record. -}
+    {- ^ (Required) The name of the record. -}
     , _records :: !(Attr Text)
-      {- ^ (Required) A string list of records. -}
+    {- ^ (Required) A string list of records. -}
     , _ttl     :: !(Attr Text)
-      {- ^ (Required) The TTL of the record. -}
+    {- ^ (Required) The TTL of the record. -}
     , _type'   :: !(Attr Text)
-      {- ^ (Required) The record type. -}
+    {- ^ (Required) The record type. -}
     , _zone    :: !(Attr Text)
-      {- ^ (Required) The name of zone to contain this record. -}
+    {- ^ (Required) The name of zone to contain this record. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

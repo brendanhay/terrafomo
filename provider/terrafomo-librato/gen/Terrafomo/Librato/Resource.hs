@@ -44,36 +44,36 @@ alerts on Librato.
 -}
 data AlertResource = AlertResource
     { _active        :: !(Attr Text)
-      {- ^ - whether the alert is active (can be triggered). Defaults to true. -}
+    {- ^ - whether the alert is active (can be triggered). Defaults to true. -}
     , _attributes    :: !(Attr Text)
-      {- ^ - A hash of additional attribtues for the alert. Attributes documented below. -}
+    {- ^ - A hash of additional attribtues for the alert. Attributes documented below. -}
     , _condition     :: !(Attr Text)
-      {- ^ - A trigger condition for the alert. Conditions documented below. -}
+    {- ^ - A trigger condition for the alert. Conditions documented below. -}
     , _description   :: !(Attr Text)
-      {- ^ (Required) Description of the alert. -}
+    {- ^ (Required) Description of the alert. -}
     , _name          :: !(Attr Text)
-      {- ^ (Required) The name of the alert. -}
+    {- ^ (Required) The name of the alert. -}
     , _rearm_seconds :: !(Attr Text)
-      {- ^ - minimum amount of time between sending alert notifications, in seconds. -}
+    {- ^ - minimum amount of time between sending alert notifications, in seconds. -}
     , _services      :: !(Attr Text)
-      {- ^ - list of notification service IDs. -}
+    {- ^ - list of notification service IDs. -}
     } deriving (Show, Generic)
 
 type instance Computed AlertResource
     = '[ '("active", Text)
-         {- - whether the alert is active (can be triggered). Defaults to true. -}
-      , '("condition", Text)
-         {- - A trigger condition for the alert. Conditions documented below. -}
-      , '("description", Text)
-         {- - (Required) Description of the alert. -}
-      , '("id", Text)
-         {- - The ID of the alert. -}
-      , '("name", Text)
-         {- - The name of the alert. -}
-      , '("rearm_seconds", Text)
-         {- - minimum amount of time between sending alert notifications, in seconds. -}
-      , '("services", Text)
-         {- - list of notification service IDs. -}
+       {- - whether the alert is active (can be triggered). Defaults to true. -}
+       , '("condition", Text)
+       {- - A trigger condition for the alert. Conditions documented below. -}
+       , '("description", Text)
+       {- - (Required) Description of the alert. -}
+       , '("id", Text)
+       {- - The ID of the alert. -}
+       , '("name", Text)
+       {- - The name of the alert. -}
+       , '("rearm_seconds", Text)
+       {- - minimum amount of time between sending alert notifications, in seconds. -}
+       , '("services", Text)
+       {- - list of notification service IDs. -}
        ]
 
 $(TH.makeResource
@@ -88,36 +88,36 @@ metrics on Librato.
 -}
 data MetricResource = MetricResource
     { _attributes   :: !(Attr Text)
-      {- ^ - The attributes hash configures specific components of a metric’s visualization. -}
+    {- ^ - The attributes hash configures specific components of a metric’s visualization. -}
     , _composite    :: !(Attr Text)
-      {- ^ - The definition of the composite metric. -}
+    {- ^ - The definition of the composite metric. -}
     , _description  :: !(Attr Text)
-      {- ^ - Text that can be used to explain precisely what the metric is measuring. -}
+    {- ^ - Text that can be used to explain precisely what the metric is measuring. -}
     , _display_name :: !(Attr Text)
-      {- ^ - The name which will be used for the metric when viewing the Metrics website. -}
+    {- ^ - The name which will be used for the metric when viewing the Metrics website. -}
     , _name         :: !(Attr Text)
-      {- ^ (Required) The unique identifier of the metric. -}
+    {- ^ (Required) The unique identifier of the metric. -}
     , _period       :: !(Attr Text)
-      {- ^ - Number of seconds that is the standard reporting period of the metric. -}
+    {- ^ - Number of seconds that is the standard reporting period of the metric. -}
     , _type'        :: !(Attr Text)
-      {- ^ (Required) The type of metric to create (gauge, counter, or composite). -}
+    {- ^ (Required) The type of metric to create (gauge, counter, or composite). -}
     } deriving (Show, Generic)
 
 type instance Computed MetricResource
     = '[ '("composite", Text)
-         {- - The composite definition. Only used when type is composite. -}
-      , '("description", Text)
-         {- - Text that describes precisely what the metric is measuring. -}
-      , '("display_name", Text)
-         {- - The name which will be used for the metric when viewing the Metrics website. -}
-      , '("name", Text)
-         {- - The identifier for the metric. -}
-      , '("period", Text)
-         {- - Number of seconds that is the standard reporting period of the metric. Setting the period enables Metrics to detect abnormal interruptions in reporting and aids in analytics. For gauge metrics that have service-side aggregation enabled, this option will define the period that aggregation occurs on. -}
-      , '("source_lag", Text)
-         {- - -}
-      , '("type", Text)
-         {- - The type of metric to create (gauge, counter, or composite). -}
+       {- - The composite definition. Only used when type is composite. -}
+       , '("description", Text)
+       {- - Text that describes precisely what the metric is measuring. -}
+       , '("display_name", Text)
+       {- - The name which will be used for the metric when viewing the Metrics website. -}
+       , '("name", Text)
+       {- - The identifier for the metric. -}
+       , '("period", Text)
+       {- - Number of seconds that is the standard reporting period of the metric. Setting the period enables Metrics to detect abnormal interruptions in reporting and aids in analytics. For gauge metrics that have service-side aggregation enabled, this option will define the period that aggregation occurs on. -}
+       , '("source_lag", Text)
+       {- - -}
+       , '("type", Text)
+       {- - The type of metric to create (gauge, counter, or composite). -}
        ]
 
 $(TH.makeResource
@@ -132,22 +132,22 @@ notification services on Librato.
 -}
 data ServiceResource = ServiceResource
     { _settings :: !(Attr Text)
-      {- ^ (Required) a JSON hash of settings specific to the alert type. -}
+    {- ^ (Required) a JSON hash of settings specific to the alert type. -}
     , _title    :: !(Attr Text)
-      {- ^ (Required) The alert title. -}
+    {- ^ (Required) The alert title. -}
     , _type'    :: !(Attr Text)
-      {- ^ (Required) The type of notificaion. -}
+    {- ^ (Required) The type of notificaion. -}
     } deriving (Show, Generic)
 
 type instance Computed ServiceResource
     = '[ '("id", Text)
-         {- - The ID of the alert. -}
-      , '("settings", Text)
-         {- - a JSON hash of settings specific to the alert type. -}
-      , '("title", Text)
-         {- - The alert title. -}
-      , '("type", Text)
-         {- - The type of notificaion. -}
+       {- - The ID of the alert. -}
+       , '("settings", Text)
+       {- - a JSON hash of settings specific to the alert type. -}
+       , '("title", Text)
+       {- - The alert title. -}
+       , '("type", Text)
+       {- - The type of notificaion. -}
        ]
 
 $(TH.makeResource
@@ -162,30 +162,30 @@ manage charts in Librato Spaces.
 -}
 data SpaceChartResource = SpaceChartResource
     { _label         :: !(Attr Text)
-      {- ^ (Optional) The Y-axis label. -}
+    {- ^ (Optional) The Y-axis label. -}
     , _max           :: !(Attr Text)
-      {- ^ (Optional) The maximum display value of the chart's Y-axis. -}
+    {- ^ (Optional) The maximum display value of the chart's Y-axis. -}
     , _min           :: !(Attr Text)
-      {- ^ (Optional) The minimum display value of the chart's Y-axis. -}
+    {- ^ (Optional) The minimum display value of the chart's Y-axis. -}
     , _name          :: !(Attr Text)
-      {- ^ (Required) The title of the chart when it is displayed. -}
+    {- ^ (Required) The title of the chart when it is displayed. -}
     , _related_space :: !(Attr Text)
-      {- ^ (Optional) The ID of another space to which this chart is related. -}
+    {- ^ (Optional) The ID of another space to which this chart is related. -}
     , _space_id      :: !(Attr Text)
-      {- ^ (Required) The ID of the space this chart should be in. -}
+    {- ^ (Required) The ID of the space this chart should be in. -}
     , _stream        :: !(Attr Text)
-      {- ^ (Optional) Nested block describing a metric to use for data in the chart. The structure of this block is described below. -}
+    {- ^ (Optional) Nested block describing a metric to use for data in the chart. The structure of this block is described below. -}
     , _type'         :: !(Attr Text)
-      {- ^ (Optional) Indicates the type of chart. Must be one of line or stacked (default to line). -}
+    {- ^ (Optional) Indicates the type of chart. Must be one of line or stacked (default to line). -}
     } deriving (Show, Generic)
 
 type instance Computed SpaceChartResource
     = '[ '("id", Text)
-         {- - The ID of the chart. -}
-      , '("space_id", Text)
-         {- - The ID of the space this chart should be in. -}
-      , '("title", Text)
-         {- - The title of the chart when it is displayed. -}
+       {- - The ID of the chart. -}
+       , '("space_id", Text)
+       {- - The ID of the space this chart should be in. -}
+       , '("title", Text)
+       {- - The title of the chart when it is displayed. -}
        ]
 
 $(TH.makeResource
@@ -200,14 +200,14 @@ spaces on Librato.
 -}
 data SpaceResource = SpaceResource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name of the space. -}
+    {- ^ (Required) The name of the space. -}
     } deriving (Show, Generic)
 
 type instance Computed SpaceResource
     = '[ '("id", Text)
-         {- - The ID of the space. -}
-      , '("name", Text)
-         {- - The name of the space. -}
+       {- - The ID of the space. -}
+       , '("name", Text)
+       {- - The name of the space. -}
        ]
 
 $(TH.makeResource

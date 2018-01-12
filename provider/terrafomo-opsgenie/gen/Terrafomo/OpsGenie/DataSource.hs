@@ -44,14 +44,14 @@ OpsGenie.
 -}
 data UserDataSource = UserDataSource
     { _username :: !(Attr Text)
-      {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
+    {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
     } deriving (Show, Generic)
 
 type instance Computed UserDataSource
     = '[ '("full_name", Text)
-         {- - The full name of the found user. -}
-      , '("role", Text)
-         {- - The role of the found user. -}
+       {- - The full name of the found user. -}
+       , '("role", Text)
+       {- - The role of the found user. -}
        ]
 
 $(TH.makeDataSource

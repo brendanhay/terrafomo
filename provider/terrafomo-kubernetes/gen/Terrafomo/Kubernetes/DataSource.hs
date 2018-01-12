@@ -45,7 +45,7 @@ allows you to pull data about such service.
 -}
 data ServiceDataSource = ServiceDataSource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Generic)
 
 $(TH.makeDataSource
@@ -62,7 +62,7 @@ http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kuber
 -}
 data StorageClassDataSource = StorageClassDataSource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Generic)
 
 $(TH.makeDataSource

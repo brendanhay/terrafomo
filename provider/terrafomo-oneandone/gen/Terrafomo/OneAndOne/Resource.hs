@@ -43,11 +43,11 @@ Fetches a predefined instance type for 1&1 servers
 -}
 data InstanceSizeResource = InstanceSizeResource
     { _name   :: !(Attr Text)
-      {- ^ -(Optional) Number of cores per processor -}
+    {- ^ -(Optional) Number of cores per processor -}
     , _ram    :: !(Attr Text)
-      {- ^ (Optional) Size of ram in GB -}
+    {- ^ (Optional) Size of ram in GB -}
     , _vcores :: !(Attr Text)
-      {- ^ (Optional)  Number of vcores -}
+    {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -61,13 +61,13 @@ Manages a Public IP on 1&1
 -}
 data IpResource = IpResource
     { _datacenter  :: !(Attr Text)
-      {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
+    {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
     , _ip_address  :: !(Attr Text)
-      {- ^ - (Computed) The IP address. -}
+    {- ^ - (Computed) The IP address. -}
     , _ip_type     :: !(Attr Text)
-      {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
+    {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
     , _reverse_dns :: !(Attr Text)
-      {- ^ (Optional) -}
+    {- ^ (Optional) -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -81,15 +81,15 @@ Manages a Shared Storage on 1&1
 -}
 data ServerResource = ServerResource
     { _datacenter      :: !(Attr Text)
-      {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
+    {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
     , _description     :: !(Attr Text)
-      {- ^ (Optional) Description for the shared storage -}
+    {- ^ (Optional) Description for the shared storage -}
     , _name            :: !(Attr Text)
-      {- ^ (Required) The name of the storage -}
+    {- ^ (Required) The name of the storage -}
     , _size            :: !(Attr Text)
-      {- ^ (Required) Size of the shared storage -}
+    {- ^ (Required) Size of the shared storage -}
     , _storage_servers :: !(Attr Text)
-      {- ^ (Optional) List of servers that will have access to the stored storage -}
+    {- ^ (Optional) List of servers that will have access to the stored storage -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -103,15 +103,15 @@ Manages a VPN on 1&1
 -}
 data VpnResource = VpnResource
     { _datacenter    :: !(Attr Text)
-      {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
+    {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
     , _description   :: !(Attr Text)
-      {- ^ (Optional) -}
+    {- ^ (Optional) -}
     , _download_path :: !(Attr Text)
-      {- ^ (Optional) -}
+    {- ^ (Optional) -}
     , _file_name     :: !(Attr Text)
-      {- ^ (Optional) -}
+    {- ^ (Optional) -}
     , _name          :: !(Attr Text)
-      {- ^ (Required) The name of the VPN -}
+    {- ^ (Required) The name of the VPN -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

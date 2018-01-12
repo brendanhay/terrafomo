@@ -43,11 +43,11 @@ import qualified Terrafomo.Vault           as Qual
 -}
 data AuthBackendResource = AuthBackendResource
     { _description :: !(Attr Text)
-      {- ^ (Optional) A description of the auth backend -}
+    {- ^ (Optional) A description of the auth backend -}
     , _path        :: !(Attr Text)
-      {- ^ (Optional) The path to mount the auth backend. This defaults to the name. -}
+    {- ^ (Optional) The path to mount the auth backend. This defaults to the name. -}
     , _type'       :: !(Attr Text)
-      {- ^ (Required) The name of the policy -}
+    {- ^ (Required) The name of the policy -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -69,13 +69,13 @@ See <../index.html> for more details.
 -}
 data AwsAuthBackendCertResource = AwsAuthBackendCertResource
     { _aws_public_cert :: !(Attr Text)
-      {- ^ (Required) The  Base64 encoded AWS Public key required to verify PKCS7 signature of the EC2 instance metadata. You can find this key in the <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html> . -}
+    {- ^ (Required) The  Base64 encoded AWS Public key required to verify PKCS7 signature of the EC2 instance metadata. You can find this key in the <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html> . -}
     , _backend         :: !(Attr Text)
-      {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
+    {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
     , _cert_name       :: !(Attr Text)
-      {- ^ (Required) The name of the certificate. -}
+    {- ^ (Required) The name of the certificate. -}
     , _type'           :: !(Attr Text)
-      {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
+    {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -98,19 +98,19 @@ See <../index.html> for more details.
 -}
 data AwsAuthBackendClientResource = AwsAuthBackendClientResource
     { _access_key                 :: !(Attr Text)
-      {- ^ (Optional) The AWS access key that Vault should use for the auth backend. -}
+    {- ^ (Optional) The AWS access key that Vault should use for the auth backend. -}
     , _backend                    :: !(Attr Text)
-      {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
+    {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
     , _ec2_endpoint               :: !(Attr Text)
-      {- ^ (Optional) Override the URL Vault uses when making EC2 API calls. -}
+    {- ^ (Optional) Override the URL Vault uses when making EC2 API calls. -}
     , _iam_endpoint               :: !(Attr Text)
-      {- ^ (Optional) Override the URL Vault uses when making IAM API calls. -}
+    {- ^ (Optional) Override the URL Vault uses when making IAM API calls. -}
     , _iam_server_id_header_value :: !(Attr Text)
-      {- ^ (Optional) The value to require in the @X-Vault-AWS-IAM-Server-ID@ header as part of @GetCallerIdentity@ requests that are used in the IAM auth method. -}
+    {- ^ (Optional) The value to require in the @X-Vault-AWS-IAM-Server-ID@ header as part of @GetCallerIdentity@ requests that are used in the IAM auth method. -}
     , _secret_key                 :: !(Attr Text)
-      {- ^ (Optional) The AWS secret key that Vault should use for the auth backend. -}
+    {- ^ (Optional) The AWS secret key that Vault should use for the auth backend. -}
     , _sts_endpoint               :: !(Attr Text)
-      {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
+    {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -122,49 +122,49 @@ $(TH.makeResource
 
 Logs into a Vault server using an AWS auth backend. Login can be
 accomplished using a signed identity request from IAM or using ec2 instance
-metadata. For more informtion, see the
+metadata. For more information, see the
 <https://www.vaultproject.io/docs/auth/aws.html> .
 -}
 data AwsAuthBackendLoginResource = AwsAuthBackendLoginResource
     { _backend                 :: !(Attr Text)
-      {- ^ (Optional) The unique name of the AWS auth backend. Defaults to 'aws'. -}
+    {- ^ (Optional) The unique name of the AWS auth backend. Defaults to 'aws'. -}
     , _iam_http_request_method :: !(Attr Text)
-      {- ^ (Optional) The HTTP method used in the signed IAM request. -}
+    {- ^ (Optional) The HTTP method used in the signed IAM request. -}
     , _iam_request_body        :: !(Attr Text)
-      {- ^ (Optional) The base64-encoded body of the signed request. -}
+    {- ^ (Optional) The base64-encoded body of the signed request. -}
     , _iam_request_headers     :: !(Attr Text)
-      {- ^ (Optional) The base64-encoded, JSON serialized representation of the GetCallerIdentity HTTP request headers. -}
+    {- ^ (Optional) The base64-encoded, JSON serialized representation of the GetCallerIdentity HTTP request headers. -}
     , _iam_request_url         :: !(Attr Text)
-      {- ^ (Optional) The base64-encoded HTTP URL used in the signed request. -}
+    {- ^ (Optional) The base64-encoded HTTP URL used in the signed request. -}
     , _identity                :: !(Attr Text)
-      {- ^ (Optional) The base64-encoded EC2 instance identity document to authenticate with. Can be retrieved from the EC2 metadata server. -}
+    {- ^ (Optional) The base64-encoded EC2 instance identity document to authenticate with. Can be retrieved from the EC2 metadata server. -}
     , _nonce                   :: !(Attr Text)
-      {- ^ (Optional) The unique nonce to be used for login requests. Can be set to a user-specified value, or will contain the server-generated value once a token is issued. EC2 instances can only acquire a single token until the whitelist is tidied again unless they keep track of this nonce. -}
+    {- ^ (Optional) The unique nonce to be used for login requests. Can be set to a user-specified value, or will contain the server-generated value once a token is issued. EC2 instances can only acquire a single token until the whitelist is tidied again unless they keep track of this nonce. -}
     , _pkcs7                   :: !(Attr Text)
-      {- ^ (Optional) The PKCS#7 signature of the identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
+    {- ^ (Optional) The PKCS#7 signature of the identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
     , _role                    :: !(Attr Text)
-      {- ^ (Optional) The name of the AWS auth backend role to create tokens against. -}
+    {- ^ (Optional) The name of the AWS auth backend role to create tokens against. -}
     , _signature               :: !(Attr Text)
-      {- ^ (Optional) The base64-encoded SHA256 RSA signature of the instance identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
+    {- ^ (Optional) The base64-encoded SHA256 RSA signature of the instance identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
     } deriving (Show, Generic)
 
 type instance Computed AwsAuthBackendLoginResource
     = '[ '("accessor", Text)
-         {- - The token's accessor. -}
-      , '("auth_type", Text)
-         {- - The authentication type used to generate this token. -}
-      , '("client_token", Text)
-         {- - The token returned by Vault. -}
-      , '("lease_duration", Text)
-         {- - The duration in seconds the token will be valid, relative to the time in @lease_start_time@ . -}
-      , '("lease_start_time", Text)
-         {- - The approximate time at which the token was created, using the clock of the system where Terraform was running. -}
-      , '("metadata", Text)
-         {- - A map of information returned by the Vault server about the authentication used to generate this token. -}
-      , '("policies", Text)
-         {- - The Vault policies assigned to this token. -}
-      , '("renewable", Text)
-         {- - Set to true if the token can be extended through renewal. -}
+       {- - The token's accessor. -}
+       , '("auth_type", Text)
+       {- - The authentication type used to generate this token. -}
+       , '("client_token", Text)
+       {- - The token returned by Vault. -}
+       , '("lease_duration", Text)
+       {- - The duration in seconds the token will be valid, relative to the time in @lease_start_time@ . -}
+       , '("lease_start_time", Text)
+       {- - The approximate time at which the token was created, using the clock of the system where Terraform was running. -}
+       , '("metadata", Text)
+       {- - A map of information returned by the Vault server about the authentication used to generate this token. -}
+       , '("policies", Text)
+       {- - The Vault policies assigned to this token. -}
+       , '("renewable", Text)
+       {- - Set to true if the token can be extended through renewal. -}
        ]
 
 $(TH.makeResource
@@ -181,45 +181,45 @@ information.
 -}
 data AwsAuthBackendRoleResource = AwsAuthBackendRoleResource
     { _allow_instance_migration       :: !(Attr Text)
-      {- ^ (Optional) If set to @true@ , allows migration of the underlying instance where the client resides. -}
+    {- ^ (Optional) If set to @true@ , allows migration of the underlying instance where the client resides. -}
     , _auth_type                      :: !(Attr Text)
-      {- ^ (Optional) The auth type permitted for this role. Valid choices are @ec2@ and @iam@ . Defaults to @iam@ . -}
+    {- ^ (Optional) The auth type permitted for this role. Valid choices are @ec2@ and @iam@ . Defaults to @iam@ . -}
     , _bound_account_id               :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they should be using the account ID specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they should be using the account ID specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _bound_ami_id                   :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they should be using the AMI ID specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they should be using the AMI ID specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _bound_iam_instance_profile_arn :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they must be associated with an IAM instance profile ARN which has a prefix that matches the value specified by this field. The value is prefix-matched as though it were a glob ending in @*@ . @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they must be associated with an IAM instance profile ARN which has a prefix that matches the value specified by this field. The value is prefix-matched as though it were a glob ending in @*@ . @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _bound_iam_principal_arn        :: !(Attr Text)
-      {- ^ (Optional) If set, defines the IAM principal that must be authenticated when @auth_type@ is set to @iam@ . Wildcards are supported at the end of the ARN. -}
+    {- ^ (Optional) If set, defines the IAM principal that must be authenticated when @auth_type@ is set to @iam@ . Wildcards are supported at the end of the ARN. -}
     , _bound_iam_role_arn             :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they must match the IAM role ARN specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they must match the IAM role ARN specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _bound_region                   :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that the region in their identity document must match the one specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that the region in their identity document must match the one specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _bound_subnet_id                :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they be associated with the subnet ID that matches the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they be associated with the subnet ID that matches the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _bound_vpc_id                   :: !(Attr Text)
-      {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they be associated with the VPC ID that matches the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they be associated with the VPC ID that matches the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _disallow_reauthentication      :: !(Attr Text)
-      {- ^ (Optional) IF set to @true@ , only allows a single token to be granted per instance ID. This can only be set when @auth_type@ is set to @ec2@ . -}
+    {- ^ (Optional) IF set to @true@ , only allows a single token to be granted per instance ID. This can only be set when @auth_type@ is set to @ec2@ . -}
     , _inferred_aws_region            :: !(Attr Text)
-      {- ^ (Optional) When @inferred_entity_type@ is set, this is the region to search for the inferred entities. Required if @inferred_entity_type@ is set. This only applies when @auth_type@ is set to @iam@ . -}
+    {- ^ (Optional) When @inferred_entity_type@ is set, this is the region to search for the inferred entities. Required if @inferred_entity_type@ is set. This only applies when @auth_type@ is set to @iam@ . -}
     , _inferred_entity_type           :: !(Attr Text)
-      {- ^ (Optional) If set, instructs Vault to turn on inferencing. The only valid value is @ec2_instance@ , which instructs Vault to infer that the role comes from an EC2 instance in an IAM instance profile. This only applies when @auth_type@ is set to @iam@ . -}
+    {- ^ (Optional) If set, instructs Vault to turn on inferencing. The only valid value is @ec2_instance@ , which instructs Vault to infer that the role comes from an EC2 instance in an IAM instance profile. This only applies when @auth_type@ is set to @iam@ . -}
     , _max_ttl                        :: !(Attr Text)
-      {- ^ (Optional) The maximum allowed lifetime of tokens issued using this role, provided as a number of minutes. -}
+    {- ^ (Optional) The maximum allowed lifetime of tokens issued using this role, provided as a number of minutes. -}
     , _period                         :: !(Attr Text)
-      {- ^ (Optional) If set, indicates that the token generated using this role should never expire. The token should be renewed within the duration specified by this value. At each renewal, the token's TTL will be set to the value of this field. The maximum allowed lifetime of token issued using this role. Specified as a number of minutes. -}
+    {- ^ (Optional) If set, indicates that the token generated using this role should never expire. The token should be renewed within the duration specified by this value. At each renewal, the token's TTL will be set to the value of this field. The maximum allowed lifetime of token issued using this role. Specified as a number of minutes. -}
     , _policies                       :: !(Attr Text)
-      {- ^ (Optional) An array of strings specifying the policies to be set on tokens issued using this role. -}
+    {- ^ (Optional) An array of strings specifying the policies to be set on tokens issued using this role. -}
     , _resolve_aws_unique_ids         :: !(Attr Text)
-      {- ^ (Optional) If set to @true@ , the @bound_iam_principal_arn@ is resolved to an <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids> for the bound principal ARN. This field is ignored when @bound_iam_principal_arn@ ends in a wildcard. Resolving to unique IDs more closely mimics the behavior of AWS services in that if an IAM user or role is deleted and a new one is recreated with the same name, those new users or roles won't get access to roles in Vault that were permissioned to the prioer principals of the same name. Defaults to @true@ . Once set to @true@ , this cannot be changed to @false@ --the role must be deleted and recreated, with the value set to @true@ . -}
+    {- ^ (Optional) If set to @true@ , the @bound_iam_principal_arn@ is resolved to an <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids> for the bound principal ARN. This field is ignored when @bound_iam_principal_arn@ ends in a wildcard. Resolving to unique IDs more closely mimics the behavior of AWS services in that if an IAM user or role is deleted and a new one is recreated with the same name, those new users or roles won't get access to roles in Vault that were permissioned to the prioer principals of the same name. Defaults to @true@ . Once set to @true@ , this cannot be changed to @false@ --the role must be deleted and recreated, with the value set to @true@ . -}
     , _role                           :: !(Attr Text)
-      {- ^ (Required) The name of the role. -}
+    {- ^ (Required) The name of the role. -}
     , _role_tag                       :: !(Attr Text)
-      {- ^ (Optional) If set, enable role tags for this role. The value set for this field should be the key of the tag on the EC2 instance. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
+    {- ^ (Optional) If set, enable role tags for this role. The value set for this field should be the key of the tag on the EC2 instance. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _ttl                            :: !(Attr Text)
-      {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
+    {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -241,11 +241,11 @@ See <../../index.html> for more details.
 -}
 data AwsAuthBackendStsRoleResource = AwsAuthBackendStsRoleResource
     { _account_id :: !(Attr Text)
-      {- ^ (Optional) The AWS account ID to configure the STS role for. -}
+    {- ^ (Optional) The AWS account ID to configure the STS role for. -}
     , _backend    :: !(Attr Text)
-      {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
+    {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
     , _sts_role   :: !(Attr Text)
-      {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
+    {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -264,9 +264,9 @@ accordingly. See <../index.html> for more details.
 -}
 data AwsSecretBackendResource = AwsSecretBackendResource
     { _access_key :: !(Attr Text)
-      {- ^ (Required) The AWS Access Key ID this backend should use to issue new credentials. -}
+    {- ^ (Required) The AWS Access Key ID this backend should use to issue new credentials. -}
     , _secret_key :: !(Attr Text)
-      {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
+    {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -285,13 +285,13 @@ when Terraform runs. Protect these artifacts accordingly. See
 -}
 data AwsSecretBackendRoleResource = AwsSecretBackendRoleResource
     { _backend    :: !(Attr Text)
-      {- ^ (Required) The path the AWS secret backend is mounted at, with no leading or trailing @/@ s. -}
+    {- ^ (Required) The path the AWS secret backend is mounted at, with no leading or trailing @/@ s. -}
     , _name       :: !(Attr Text)
-      {- ^ (Required) The name to identify this role within the backend. Must be unique within the backend. -}
+    {- ^ (Required) The name to identify this role within the backend. Must be unique within the backend. -}
     , _policy     :: !(Attr Text)
-      {- ^ (Optional) The JSON-formatted policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
+    {- ^ (Optional) The JSON-formatted policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     , _policy_arn :: !(Attr Text)
-      {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
+    {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -313,13 +313,13 @@ See <../index.html> for more details.
 -}
 data GenericSecretResource = GenericSecretResource
     { _allow_read   :: !(Attr Text)
-      {- ^ (Optional, Deprecated) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
+    {- ^ (Optional, Deprecated) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
     , _data_json    :: !(Attr Text)
-      {- ^ (Required) String containing a JSON-encoded object that will be written as the secret data at the given path. -}
+    {- ^ (Required) String containing a JSON-encoded object that will be written as the secret data at the given path. -}
     , _disable_read :: !(Attr Text)
-      {- ^ (Optional) True/false. Set this to true if your vault authentication is not able to read the data. Setting this to @true@ will break drift detection. Defaults to false. -}
+    {- ^ (Optional) True/false. Set this to true if your vault authentication is not able to read the data. Setting this to @true@ will break drift detection. Defaults to false. -}
     , _path         :: !(Attr Text)
-      {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
+    {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -333,15 +333,15 @@ $(TH.makeResource
 -}
 data MountResource = MountResource
     { _default_lease_ttl_seconds :: !(Attr Text)
-      {- ^ (Optional) Default lease duration for tokens and secrets in seconds -}
+    {- ^ (Optional) Default lease duration for tokens and secrets in seconds -}
     , _description               :: !(Attr Text)
-      {- ^ (Optional) Human-friendly description of the mount -}
+    {- ^ (Optional) Human-friendly description of the mount -}
     , _max_lease_ttl_seconds     :: !(Attr Text)
-      {- ^ (Optional) Maximum possible lease duration for tokens and secrets in seconds -}
+    {- ^ (Optional) Maximum possible lease duration for tokens and secrets in seconds -}
     , _path                      :: !(Attr Text)
-      {- ^ (Required) Where the secret backend will be mounted -}
+    {- ^ (Required) Where the secret backend will be mounted -}
     , _type'                     :: !(Attr Text)
-      {- ^ (Required) Type of the backend, such as "aws" -}
+    {- ^ (Required) Type of the backend, such as "aws" -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -355,9 +355,9 @@ $(TH.makeResource
 -}
 data PolicyResource = PolicyResource
     { _name   :: !(Attr Text)
-      {- ^ (Required) The name of the policy -}
+    {- ^ (Required) The name of the policy -}
     , _policy :: !(Attr Text)
-      {- ^ (Required) String containing a Vault policy -}
+    {- ^ (Required) String containing a Vault policy -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

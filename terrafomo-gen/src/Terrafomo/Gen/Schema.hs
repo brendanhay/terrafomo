@@ -38,15 +38,17 @@ data Schema = Schema
     { schemaName       :: !Text
     , schemaAbout      :: !(Maybe Text)
     , schemaExamples   :: ![Example]
+    , schemaDeprecated :: !Bool
     , schemaArguments  :: !(Map Text Arg)
     , schemaAttributes :: !(Map Text Attr)
     } deriving (Show, Generic)
 
 instance Semigroup Schema where
     (<>) parsed saved = Schema
-        { schemaName       = schemaName      parsed
+        { schemaName       = schemaName     parsed
         , schemaAbout      = schemaAbout    parsed
         , schemaExamples   = schemaExamples parsed
+        , schemaDeprecated = on (||) schemaDeprecated parsed saved
         , schemaArguments  =
             on (Map.unionWith (<>)) schemaArguments  parsed saved
         , schemaAttributes =
@@ -62,15 +64,18 @@ instance FromJSON Schema where
         schemaName       <- o .:  "name"
         schemaAbout      <- o .:? "about"
         schemaExamples   <- o .:? "examples"   .!= []
+        schemaDeprecated <- o .:? "deprecated" .!= False
         schemaArguments  <- o .:? "arguments"  .!= mempty
         schemaAttributes <- o .:? "attributes" .!= mempty
         pure Schema{..}
 
-applyDeprecations :: Schema -> Schema
-applyDeprecations x = x
-    { schemaArguments =
-        Map.filter ((/= pure True) . argIgnored) (schemaArguments x)
-    }
+applyDeprecations :: Schema -> Maybe Schema
+applyDeprecations x
+    | schemaDeprecated x = Nothing
+    | otherwise          = Just $
+        x { schemaArguments =
+              Map.filter ((/= pure True) . argIgnored) (schemaArguments x)
+          }
 
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg

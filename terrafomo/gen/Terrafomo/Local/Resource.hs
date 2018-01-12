@@ -47,9 +47,9 @@ different users or within automation systems.
 -}
 data FileResource = FileResource
     { _content  :: !(Attr Text)
-      {- ^ (Required) The content of file to create. -}
+    {- ^ (Required) The content of file to create. -}
     , _filename :: !(Attr Text)
-      {- ^ (Required) The path of the file to create. -}
+    {- ^ (Required) The path of the file to create. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

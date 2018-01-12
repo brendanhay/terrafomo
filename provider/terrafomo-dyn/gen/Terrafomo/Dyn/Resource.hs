@@ -43,22 +43,22 @@ Provides a Dyn DNS record resource.
 -}
 data RecordResource = RecordResource
     { _name  :: !(Attr Text)
-      {- ^ (Required) The name of the record. -}
+    {- ^ (Required) The name of the record. -}
     , _ttl   :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
+    {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
     , _type' :: !(Attr Text)
-      {- ^ (Required) The type of the record. -}
+    {- ^ (Required) The type of the record. -}
     , _value :: !(Attr Text)
-      {- ^ (Required) The value of the record. -}
+    {- ^ (Required) The value of the record. -}
     , _zone  :: !(Attr Text)
-      {- ^ (Required) The DNS zone to add the record to. -}
+    {- ^ (Required) The DNS zone to add the record to. -}
     } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("fqdn", Text)
-         {- - The FQDN of the record, built from the @name@ and the @zone@ . -}
-      , '("id", Text)
-         {- - The record ID. -}
+       {- - The FQDN of the record, built from the @name@ and the @zone@ . -}
+       , '("id", Text)
+       {- - The record ID. -}
        ]
 
 $(TH.makeResource

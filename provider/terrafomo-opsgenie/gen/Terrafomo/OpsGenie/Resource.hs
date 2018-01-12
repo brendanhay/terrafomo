@@ -43,16 +43,16 @@ Manages a Team within OpsGenie.
 -}
 data TeamResource = TeamResource
     { _description :: !(Attr Text)
-      {- ^ (Optional) A description for this team. -}
+    {- ^ (Optional) A description for this team. -}
     , _member      :: !(Attr Text)
-      {- ^ (Optional) A Member block as documented below. -}
+    {- ^ (Optional) A Member block as documented below. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
+    {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Generic)
 
 type instance Computed TeamResource
     = '[ '("id", Text)
-         {- - The ID of the OpsGenie User. -}
+       {- - The ID of the OpsGenie User. -}
        ]
 
 $(TH.makeResource
@@ -66,20 +66,20 @@ Manages a User within OpsGenie.
 -}
 data UserResource = UserResource
     { _full_name :: !(Attr Text)
-      {- ^ (Required) The Full Name of the User. -}
+    {- ^ (Required) The Full Name of the User. -}
     , _locale    :: !(Attr Text)
-      {- ^ (Optional) Location information for the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-locales> for available locales - Defaults to "en_US". -}
+    {- ^ (Optional) Location information for the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-locales> for available locales - Defaults to "en_US". -}
     , _role      :: !(Attr Text)
-      {- ^ (Required) The Role assigned to the User. Either a built-in such as 'Owner', 'Admin' or 'User' - or the name of a custom role. -}
+    {- ^ (Required) The Role assigned to the User. Either a built-in such as 'Owner', 'Admin' or 'User' - or the name of a custom role. -}
     , _timezone  :: !(Attr Text)
-      {- ^ (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids> for available timezones - Defaults to "America/New_York". -}
+    {- ^ (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids> for available timezones - Defaults to "America/New_York". -}
     , _username  :: !(Attr Text)
-      {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
+    {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("id", Text)
-         {- - The ID of the OpsGenie User. -}
+       {- - The ID of the OpsGenie User. -}
        ]
 
 $(TH.makeResource

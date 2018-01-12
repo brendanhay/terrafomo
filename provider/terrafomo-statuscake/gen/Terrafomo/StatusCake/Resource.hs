@@ -43,30 +43,30 @@ The test resource allows StatusCake tests to be managed by Terraform.
 -}
 data TestResource = TestResource
     { _check_rate    :: !(Attr Text)
-      {- ^ (Optional) Test check rate in seconds. Defaults to 300 -}
+    {- ^ (Optional) Test check rate in seconds. Defaults to 300 -}
     , _confirmations :: !(Attr Text)
-      {- ^ (Optional) The number of confirmation servers to use in order to detect downtime. Defaults to 0. -}
+    {- ^ (Optional) The number of confirmation servers to use in order to detect downtime. Defaults to 0. -}
     , _contact_id    :: !(Attr Text)
-      {- ^ (Optional) The id of the contact group to be add to the test.  Each test can have only one. -}
+    {- ^ (Optional) The id of the contact group to be add to the test.  Each test can have only one. -}
     , _paused        :: !(Attr Text)
-      {- ^ (Optional) Whether or not the test is paused. Defaults to false. -}
+    {- ^ (Optional) Whether or not the test is paused. Defaults to false. -}
     , _port          :: !(Attr Text)
-      {- ^ (Optional) The port to use when specifying a TCP test. -}
+    {- ^ (Optional) The port to use when specifying a TCP test. -}
     , _test_type     :: !(Attr Text)
-      {- ^ (Required) The type of Test. Either HTTP or TCP -}
+    {- ^ (Required) The type of Test. Either HTTP or TCP -}
     , _timeout       :: !(Attr Text)
-      {- ^ (Optional) The timeout of the test in seconds. -}
+    {- ^ (Optional) The timeout of the test in seconds. -}
     , _trigger_rate  :: !(Attr Text)
-      {- ^ (Optional) The number of minutes to wait before sending an alert. Default is @5@ . -}
+    {- ^ (Optional) The number of minutes to wait before sending an alert. Default is @5@ . -}
     , _website_name  :: !(Attr Text)
-      {- ^ (Required) This is the name of the test and the website to be monitored. -}
+    {- ^ (Required) This is the name of the test and the website to be monitored. -}
     , _website_url   :: !(Attr Text)
-      {- ^ (Required) The URL of the website to be monitored -}
+    {- ^ (Required) The URL of the website to be monitored -}
     } deriving (Show, Generic)
 
 type instance Computed TestResource
     = '[ '("test_id", Text)
-         {- - A unique identifier for the test. -}
+       {- - A unique identifier for the test. -}
        ]
 
 $(TH.makeResource

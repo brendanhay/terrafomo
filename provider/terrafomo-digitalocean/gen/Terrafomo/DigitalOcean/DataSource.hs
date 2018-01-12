@@ -45,24 +45,24 @@ if zero or more than one result is returned by the query.
 -}
 data ImageDataSource = ImageDataSource
     { _name :: !(Attr Text)
-      {- ^ - The name of the image. -}
+    {- ^ - The name of the image. -}
     } deriving (Show, Generic)
 
 type instance Computed ImageDataSource
     = '[ '("image", Text)
-         {- - The id of the image. -}
-      , '("min_disk_size", Text)
-         {- : The minimum 'disk' required for the image. -}
-      , '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("private", Text)
-         {- - Is image a public image or not. Public images represents Linux distributions or Application, while non-public images represent snapshots and backups and are only available within your account. -}
-      , '("regions", Text)
-         {- : The regions that the image is available in. -}
-      , '("size_gigabytes", Text)
-         {- : The size of the image in gigabytes. -}
-      , '("type", Text)
-         {- : Type of the image. Can be "snapshot" or "backup". -}
+       {- - The id of the image. -}
+       , '("min_disk_size", Text)
+       {- : The minimum 'disk' required for the image. -}
+       , '("name", Text)
+       {- - See Argument Reference above. -}
+       , '("private", Text)
+       {- - Is image a public image or not. Public images represents Linux distributions or Application, while non-public images represent snapshots and backups and are only available within your account. -}
+       , '("regions", Text)
+       {- : The regions that the image is available in. -}
+       , '("size_gigabytes", Text)
+       {- : The size of the image in gigabytes. -}
+       , '("type", Text)
+       {- : Type of the image. Can be "snapshot" or "backup". -}
        ]
 
 $(TH.makeDataSource

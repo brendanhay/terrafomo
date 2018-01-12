@@ -54,20 +54,20 @@ using the resource form.
 -}
 data CertRequestResource = CertRequestResource
     { _dns_names       :: !(Attr Text)
-      {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
+    {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
     , _ip_addresses    :: !(Attr Text)
-      {- ^ (Optional) List of IP addresses for which a certificate is being requested. -}
+    {- ^ (Optional) List of IP addresses for which a certificate is being requested. -}
     , _key_algorithm   :: !(Attr Text)
-      {- ^ (Required) The name of the algorithm for the key provided in @private_key_pem@ . -}
+    {- ^ (Required) The name of the algorithm for the key provided in @private_key_pem@ . -}
     , _private_key_pem :: !(Attr Text)
-      {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
+    {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
     , _subject         :: !(Attr Text)
-      {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure is described below. -}
+    {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure is described below. -}
     } deriving (Show, Generic)
 
 type instance Computed CertRequestResource
     = '[ '("cert_request_pem", Text)
-         {- - The certificate request data in PEM format. -}
+       {- - The certificate request data in PEM format. -}
        ]
 
 $(TH.makeResource
@@ -85,30 +85,30 @@ environments or when deployed internally to an organization.
 -}
 data LocallySignedCertResource = LocallySignedCertResource
     { _allowed_uses          :: !(Attr Text)
-      {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
+    {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
     , _ca_cert_pem           :: !(Attr Text)
-      {- ^ (Required) PEM-encoded certificate data for the CA. -}
+    {- ^ (Required) PEM-encoded certificate data for the CA. -}
     , _ca_key_algorithm      :: !(Attr Text)
-      {- ^ (Required) The name of the algorithm for the key provided in @ca_private_key_pem@ . -}
+    {- ^ (Required) The name of the algorithm for the key provided in @ca_private_key_pem@ . -}
     , _ca_private_key_pem    :: !(Attr Text)
-      {- ^ (Required) PEM-encoded private key data for the CA. This can be read from a separate file using the @file@ interpolation function. -}
+    {- ^ (Required) PEM-encoded private key data for the CA. This can be read from a separate file using the @file@ interpolation function. -}
     , _cert_request_pem      :: !(Attr Text)
-      {- ^ (Required) PEM-encoded request certificate data. -}
+    {- ^ (Required) PEM-encoded request certificate data. -}
     , _early_renewal_hours   :: !(Attr Text)
-      {- ^ (Optional) If set, the resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. Note however that the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Note also that this advance update can only be performed should the Terraform configuration be applied during the early renewal period. -}
+    {- ^ (Optional) If set, the resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. Note however that the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Note also that this advance update can only be performed should the Terraform configuration be applied during the early renewal period. -}
     , _is_ca_certificate     :: !(Attr Text)
-      {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
+    {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
     , _validity_period_hours :: !(Attr Text)
-      {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
+    {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
     } deriving (Show, Generic)
 
 type instance Computed LocallySignedCertResource
     = '[ '("cert_pem", Text)
-         {- - The certificate data in PEM format. -}
-      , '("validity_end_time", Text)
-         {- - The time until which the certificate is invalid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
-      , '("validity_start_time", Text)
-         {- - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
+       {- - The certificate data in PEM format. -}
+       , '("validity_end_time", Text)
+       {- - The time until which the certificate is invalid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
+       , '("validity_start_time", Text)
+       {- - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
        ]
 
 $(TH.makeResource
@@ -130,22 +130,22 @@ external managed resources.
 -}
 data PrivateKeyResource = PrivateKeyResource
     { _algorithm   :: !(Attr Text)
-      {- ^ (Required) The name of the algorithm to use for the key. Currently-supported values are "RSA" and "ECDSA". -}
+    {- ^ (Required) The name of the algorithm to use for the key. Currently-supported values are "RSA" and "ECDSA". -}
     , _ecdsa_curve :: !(Attr Text)
-      {- ^ (Optional) When @algorithm@ is "ECDSA", the name of the elliptic curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the default. -}
+    {- ^ (Optional) When @algorithm@ is "ECDSA", the name of the elliptic curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the default. -}
     , _rsa_bits    :: !(Attr Text)
-      {- ^ (Optional) When @algorithm@ is "RSA", the size of the generated RSA key in bits. Defaults to 2048. -}
+    {- ^ (Optional) When @algorithm@ is "RSA", the size of the generated RSA key in bits. Defaults to 2048. -}
     } deriving (Show, Generic)
 
 type instance Computed PrivateKeyResource
     = '[ '("algorithm", Text)
-         {- - The algorithm that was selected for the key. -}
-      , '("private_key_pem", Text)
-         {- - The private key data in PEM format. -}
-      , '("public_key_openssh", Text)
-         {- - The public key data in OpenSSH @authorized_keys@ format, if the selected private key format is compatible. All RSA keys are supported, and ECDSA keys with curves "P256", "P384" and "P251" are supported. This attribute is empty if an incompatible ECDSA curve is selected. -}
-      , '("public_key_pem", Text)
-         {- - The public key data in PEM format. -}
+       {- - The algorithm that was selected for the key. -}
+       , '("private_key_pem", Text)
+       {- - The private key data in PEM format. -}
+       , '("public_key_openssh", Text)
+       {- - The public key data in OpenSSH @authorized_keys@ format, if the selected private key format is compatible. All RSA keys are supported, and ECDSA keys with curves "P256", "P384" and "P251" are supported. This attribute is empty if an incompatible ECDSA curve is selected. -}
+       , '("public_key_pem", Text)
+       {- - The public key data in PEM format. -}
        ]
 
 $(TH.makeResource
@@ -167,32 +167,32 @@ as:
 -}
 data SelfSignedCertResource = SelfSignedCertResource
     { _allowed_uses          :: !(Attr Text)
-      {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
+    {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
     , _dns_names             :: !(Attr Text)
-      {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
+    {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
     , _early_renewal_hours   :: !(Attr Text)
-      {- ^ (Optional) If set, the resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. Note however that the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Note also that this advance update can only be performed should the Terraform configuration be applied during the early renewal period. -}
+    {- ^ (Optional) If set, the resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. Note however that the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Note also that this advance update can only be performed should the Terraform configuration be applied during the early renewal period. -}
     , _ip_addresses          :: !(Attr Text)
-      {- ^ (Optional) List of IP addresses for which a certificate is being requested. -}
+    {- ^ (Optional) List of IP addresses for which a certificate is being requested. -}
     , _is_ca_certificate     :: !(Attr Text)
-      {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
+    {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
     , _key_algorithm         :: !(Attr Text)
-      {- ^ (Required) The name of the algorithm for the key provided in @private_key_pem@ . -}
+    {- ^ (Required) The name of the algorithm for the key provided in @private_key_pem@ . -}
     , _private_key_pem       :: !(Attr Text)
-      {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. If the certificate is being generated to be used for a throwaway development environment or other non-critical application, the @tls_private_key@ resource can be used to generate a TLS private key from within Terraform. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
+    {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. If the certificate is being generated to be used for a throwaway development environment or other non-critical application, the @tls_private_key@ resource can be used to generate a TLS private key from within Terraform. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
     , _subject               :: !(Attr Text)
-      {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure matches the corresponding block for <cert_request.html> . -}
+    {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure matches the corresponding block for <cert_request.html> . -}
     , _validity_period_hours :: !(Attr Text)
-      {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
+    {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
     } deriving (Show, Generic)
 
 type instance Computed SelfSignedCertResource
     = '[ '("cert_pem", Text)
-         {- - The certificate data in PEM format. -}
-      , '("validity_end_time", Text)
-         {- - The time until which the certificate is invalid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
-      , '("validity_start_time", Text)
-         {- - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
+       {- - The certificate data in PEM format. -}
+       , '("validity_end_time", Text)
+       {- - The time until which the certificate is invalid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
+       , '("validity_start_time", Text)
+       {- - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
        ]
 
 $(TH.makeResource

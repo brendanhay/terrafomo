@@ -44,22 +44,22 @@ between a queue an exchange.
 -}
 data BindingResource = BindingResource
     { _arguments        :: !(Attr Text)
-      {- ^ (Optional) Additional key/value arguments for the binding. -}
+    {- ^ (Optional) Additional key/value arguments for the binding. -}
     , _destination      :: !(Attr Text)
-      {- ^ (Required) The destination queue or exchange. -}
+    {- ^ (Required) The destination queue or exchange. -}
     , _destination_type :: !(Attr Text)
-      {- ^ (Required) The type of destination (queue or exchange). -}
+    {- ^ (Required) The type of destination (queue or exchange). -}
     , _routing_key      :: !(Attr Text)
-      {- ^ (Optional) A routing key for the binding. -}
+    {- ^ (Optional) A routing key for the binding. -}
     , _source           :: !(Attr Text)
-      {- ^ (Required) The source exchange. -}
+    {- ^ (Required) The source exchange. -}
     , _vhost            :: !(Attr Text)
-      {- ^ (Required) The vhost to create the resource in. -}
+    {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
 type instance Computed BindingResource
     = '[ '("properties_key", Text)
-         {- - A unique key to refer to the binding. -}
+       {- - A unique key to refer to the binding. -}
        ]
 
 $(TH.makeResource
@@ -73,11 +73,11 @@ The @rabbitmq_exchange@ resource creates and manages an exchange.
 -}
 data ExchangeResource = ExchangeResource
     { _name     :: !(Attr Text)
-      {- ^ (Required) The name of the exchange. -}
+    {- ^ (Required) The name of the exchange. -}
     , _settings :: !(Attr Text)
-      {- ^ (Required) The settings of the exchange. The structure is described below. -}
+    {- ^ (Required) The settings of the exchange. The structure is described below. -}
     , _vhost    :: !(Attr Text)
-      {- ^ (Required) The vhost to create the resource in. -}
+    {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -92,11 +92,11 @@ permissions.
 -}
 data PermissionsResource = PermissionsResource
     { _permissions :: !(Attr Text)
-      {- ^ (Required) The settings of the permissions. The structure is described below. -}
+    {- ^ (Required) The settings of the permissions. The structure is described below. -}
     , _user        :: !(Attr Text)
-      {- ^ (Required) The user to apply the permissions to. -}
+    {- ^ (Required) The user to apply the permissions to. -}
     , _vhost       :: !(Attr Text)
-      {- ^ (Required) The vhost to create the resource in. -}
+    {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -111,11 +111,11 @@ and queues.
 -}
 data PolicyResource = PolicyResource
     { _name   :: !(Attr Text)
-      {- ^ (Required) The name of the policy. -}
+    {- ^ (Required) The name of the policy. -}
     , _policy :: !(Attr Text)
-      {- ^ (Required) The settings of the policy. The structure is described below. -}
+    {- ^ (Required) The settings of the policy. The structure is described below. -}
     , _vhost  :: !(Attr Text)
-      {- ^ (Required) The vhost to create the resource in. -}
+    {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -129,11 +129,11 @@ The @rabbitmq_queue@ resource creates and manages a queue.
 -}
 data QueueResource = QueueResource
     { _name     :: !(Attr Text)
-      {- ^ (Required) The name of the queue. -}
+    {- ^ (Required) The name of the queue. -}
     , _settings :: !(Attr Text)
-      {- ^ (Required) The settings of the queue. The structure is described below. -}
+    {- ^ (Required) The settings of the queue. The structure is described below. -}
     , _vhost    :: !(Attr Text)
-      {- ^ (Required) The vhost to create the resource in. -}
+    {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -149,11 +149,11 @@ plain-text. </docs/state/sensitive-data.html> .
 -}
 data UserResource = UserResource
     { _name     :: !(Attr Text)
-      {- ^ (Required) The name of the user. -}
+    {- ^ (Required) The name of the user. -}
     , _password :: !(Attr Text)
-      {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
+    {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
     , _tags     :: !(Attr Text)
-      {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
+    {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -167,7 +167,7 @@ The @rabbitmq_vhost@ resource creates and manages a vhost.
 -}
 data VhostResource = VhostResource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name of the vhost. -}
+    {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

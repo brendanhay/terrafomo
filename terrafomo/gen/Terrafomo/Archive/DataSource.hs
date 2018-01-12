@@ -42,30 +42,30 @@ Generates an archive from content, a file, or directory of files.
 -}
 data FileDataSource = FileDataSource
     { _output_path             :: !(Attr Text)
-      {- ^ (Required) The output of the archive file. -}
+    {- ^ (Required) The output of the archive file. -}
     , _source                  :: !(Attr Text)
-      {- ^ (Optional) Specifies attributes of a single source file to include into the archive. -}
+    {- ^ (Optional) Specifies attributes of a single source file to include into the archive. -}
     , _source_content          :: !(Attr Text)
-      {- ^ (Optional) Add only this content to the archive with @source_content_filename@ as the filename. -}
+    {- ^ (Optional) Add only this content to the archive with @source_content_filename@ as the filename. -}
     , _source_content_filename :: !(Attr Text)
-      {- ^ (Optional) Set this as the filename when using @source_content@ . -}
+    {- ^ (Optional) Set this as the filename when using @source_content@ . -}
     , _source_dir              :: !(Attr Text)
-      {- ^ (Optional) Package entire contents of this directory into the archive. -}
+    {- ^ (Optional) Package entire contents of this directory into the archive. -}
     , _source_file             :: !(Attr Text)
-      {- ^ (Optional) Package this file into the archive. -}
+    {- ^ (Optional) Package this file into the archive. -}
     , _type'                   :: !(Attr Text)
-      {- ^ (Required) The type of archive to generate. NOTE: @zip@ is supported. -}
+    {- ^ (Required) The type of archive to generate. NOTE: @zip@ is supported. -}
     } deriving (Show, Generic)
 
 type instance Computed FileDataSource
     = '[ '("output_base64sha256", Text)
-         {- - The base64-encoded SHA256 checksum of output archive file. -}
-      , '("output_md5", Text)
-         {- - The MD5 checksum of output archive file. -}
-      , '("output_sha", Text)
-         {- - The SHA1 checksum of output archive file. -}
-      , '("output_size", Text)
-         {- - The size of the output archive file. -}
+       {- - The base64-encoded SHA256 checksum of output archive file. -}
+       , '("output_md5", Text)
+       {- - The MD5 checksum of output archive file. -}
+       , '("output_sha", Text)
+       {- - The SHA1 checksum of output archive file. -}
+       , '("output_size", Text)
+       {- - The size of the output archive file. -}
        ]
 
 $(TH.makeDataSource

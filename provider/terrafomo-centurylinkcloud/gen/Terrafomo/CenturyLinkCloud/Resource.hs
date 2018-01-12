@@ -44,17 +44,17 @@ group. See also <https://www.ctl.io/api-docs/v2/#groups> .
 -}
 data GroupResource = GroupResource
     { _custom_fields   :: !(Attr Text)
-      {- ^ (Optional) See <#custom_fields> below for details. -}
+    {- ^ (Optional) See <#custom_fields> below for details. -}
     , _description     :: !(Attr Text)
-      {- ^ (Optional, string) Description for server group (visible in control portal only) -}
+    {- ^ (Optional, string) Description for server group (visible in control portal only) -}
     , _location_id     :: !(Attr Text)
-      {- ^ (Required, string) The datacenter location of both parent group and this group. Examples: "WA1", "VA1" -}
+    {- ^ (Required, string) The datacenter location of both parent group and this group. Examples: "WA1", "VA1" -}
     , _name            :: !(Attr Text)
-      {- ^ (Required, string) The name (or GUID) of this server group. Will resolve to existing if present. -}
+    {- ^ (Required, string) The name (or GUID) of this server group. Will resolve to existing if present. -}
     , _parent          :: !(Attr Text)
-      {- ^ (Required, string) The name or ID of the parent group. Will error if absent or unable to resolve. -}
+    {- ^ (Required, string) The name or ID of the parent group. Will error if absent or unable to resolve. -}
     , _parent_group_id :: !(Attr Text)
-      {- ^ - (Computed) The ID of the parent group. -}
+    {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -84,15 +84,15 @@ Manages a CLC load balancer. Manage connected backends with
 -}
 data LoadBalancerResource = LoadBalancerResource
     { _data_center :: !(Attr Text)
-      {- ^ (Required, string) The datacenter location of both parent group and this group. -}
+    {- ^ (Required, string) The datacenter location of both parent group and this group. -}
     , _description :: !(Attr Text)
-      {- ^ (Optional, string) Description for server group (visible in control portal only) -}
+    {- ^ (Optional, string) Description for server group (visible in control portal only) -}
     , _ip_address  :: !(Attr Text)
-      {- ^ - (Computed) The IP of the load balancer. -}
+    {- ^ - (Computed) The IP of the load balancer. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required, string) The name of the load balancer. -}
+    {- ^ (Required, string) The name of the load balancer. -}
     , _status      :: !(Attr Text)
-      {- ^ (Required, string) Either "enabled" or "disabled" -}
+    {- ^ (Required, string) Either "enabled" or "disabled" -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -107,13 +107,13 @@ Manages a CLC public ip (for an existing server). See also
 -}
 data PublicIpResource = PublicIpResource
     { _internal_ip_address :: !(Attr Text)
-      {- ^ (Required, string) The internal IP of the NIC to attach to. If not provided, a new internal NIC will be provisioned and used. -}
+    {- ^ (Required, string) The internal IP of the NIC to attach to. If not provided, a new internal NIC will be provisioned and used. -}
     , _ports               :: !(Attr Text)
-      {- ^ (Optional) See <#ports> below for details. -}
+    {- ^ (Optional) See <#ports> below for details. -}
     , _server_id           :: !(Attr Text)
-      {- ^ (Required, string) The name or ID of the server to bind IP to. -}
+    {- ^ (Required, string) The name or ID of the server to bind IP to. -}
     , _source_restrictions :: !(Attr Text)
-      {- ^ (Optional) See <#source_restrictions> below for details. -}
+    {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -127,49 +127,49 @@ Manages a CLC server. Resources and Documentation:
 -}
 data ServerResource = ServerResource
     { _aa_policy_id       :: !(Attr Text)
-      {- ^ (Optional, string | hyperscale) Anti-Affinity policy ID -}
+    {- ^ (Optional, string | hyperscale) Anti-Affinity policy ID -}
     , _additional_disks   :: !(Attr Text)
-      {- ^ (Optional) See <#disks> below for details. -}
+    {- ^ (Optional) See <#disks> below for details. -}
     , _configuration_id   :: !(Attr Text)
-      {- ^ (Optional, string | bareMetal) Hardware configuration ID -}
+    {- ^ (Optional, string | bareMetal) Hardware configuration ID -}
     , _cpu                :: !(Attr Text)
-      {- ^ (Required, int) The number of virtual cores -}
+    {- ^ (Required, int) The number of virtual cores -}
     , _created_dat        :: !(Attr Text)
-      {- ^ - (Computed) The creation date of the server. -}
+    {- ^ - (Computed) The creation date of the server. -}
     , _custom_fields      :: !(Attr Text)
-      {- ^ (Optional) See <#custom_fields> below for details. -}
+    {- ^ (Optional) See <#custom_fields> below for details. -}
     , _description        :: !(Attr Text)
-      {- ^ (Optional, string) Description for server (visible in control portal only) -}
+    {- ^ (Optional, string) Description for server (visible in control portal only) -}
     , _group_id           :: !(Attr Text)
-      {- ^ (Required, string) The name or ID of the server group to spawn server into. -}
+    {- ^ (Required, string) The name or ID of the server group to spawn server into. -}
     , _memory_mb          :: !(Attr Text)
-      {- ^ (Required, int) Provisioned RAM -}
+    {- ^ (Required, int) Provisioned RAM -}
     , _metadata           :: !(Attr Text)
-      {- ^ (Optional) Misc state storage for non-CLC metadata. -}
+    {- ^ (Optional) Misc state storage for non-CLC metadata. -}
     , _modified_dat       :: !(Attr Text)
-      {- ^ - (Computed) The last modification date of the server. -}
+    {- ^ - (Computed) The last modification date of the server. -}
     , _name               :: !(Attr Text)
-      {- ^ - (Computed) the unique name of the server, as generated by the platform. -}
+    {- ^ - (Computed) the unique name of the server, as generated by the platform. -}
     , _name_template      :: !(Attr Text)
-      {- ^ (Required, string) The basename of the server. A unique name will be generated by the platform. -}
+    {- ^ (Required, string) The basename of the server. A unique name will be generated by the platform. -}
     , _network_id         :: !(Attr Text)
-      {- ^ (Optional, string) GUID of network to use. (Must be set up in advance from control portal.) When absent, the default network will be used. -}
+    {- ^ (Optional, string) GUID of network to use. (Must be set up in advance from control portal.) When absent, the default network will be used. -}
     , _os_type            :: !(Attr Text)
-      {- ^ (Optional, string | bareMetal) Operating system to install. -}
+    {- ^ (Optional, string | bareMetal) Operating system to install. -}
     , _password           :: !(Attr Text)
-      {- ^ (Optional, string) The root/administrator password. Will be generated by platform if not provided. -}
+    {- ^ (Optional, string) The root/administrator password. Will be generated by platform if not provided. -}
     , _power_state        :: !(Attr Text)
-      {- ^ (Optional, string) See <#power_states> below for details. If absent, defaults to @started@ . -}
+    {- ^ (Optional, string) See <#power_states> below for details. If absent, defaults to @started@ . -}
     , _private_ip_address :: !(Attr Text)
-      {- ^ (Optional, string) Set internal IP address. If absent, allocated and assigned from pool. -}
+    {- ^ (Optional, string) Set internal IP address. If absent, allocated and assigned from pool. -}
     , _public_ip_address  :: !(Attr Text)
-      {- ^ - (Computed) The public IP address of the server. -}
+    {- ^ - (Computed) The public IP address of the server. -}
     , _source_server_id   :: !(Attr Text)
-      {- ^ (Required, string) The name or ID of the base OS image. Examples: "ubuntu-14-64-template", "rhel-7-64-template", "win2012r2dtc-64" -}
+    {- ^ (Required, string) The name or ID of the base OS image. Examples: "ubuntu-14-64-template", "rhel-7-64-template", "win2012r2dtc-64" -}
     , _storage_type       :: !(Attr Text)
-      {- ^ (Optional, string) Backup and replication strategy for disks. One of "standard", "premium" -}
+    {- ^ (Optional, string) Backup and replication strategy for disks. One of "standard", "premium" -}
     , _type'              :: !(Attr Text)
-      {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
+    {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

@@ -43,11 +43,11 @@ Provides support for setting up default reviewers for your repository.
 -}
 data DefaultReviewersResource = DefaultReviewersResource
     { _owner      :: !(Attr Text)
-      {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
+    {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
     , _repository :: !(Attr Text)
-      {- ^ (Required) The name of the repository. -}
+    {- ^ (Required) The name of the repository. -}
     , _reviewers  :: !(Attr Text)
-      {- ^ (Required) A list of reviewers to use. -}
+    {- ^ (Required) A list of reviewers to use. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -62,15 +62,15 @@ on a repository.
 -}
 data HookResource = HookResource
     { _description :: !(Attr Text)
-      {- ^ (Required) The name / description to show in the UI. -}
+    {- ^ (Required) The name / description to show in the UI. -}
     , _events      :: !(Attr Text)
-      {- ^ (Required) The event you want to react on. -}
+    {- ^ (Required) The event you want to react on. -}
     , _owner       :: !(Attr Text)
-      {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
+    {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
     , _repository  :: !(Attr Text)
-      {- ^ (Required) The name of the repository. -}
+    {- ^ (Required) The name of the repository. -}
     , _url         :: !(Attr Text)
-      {- ^ (Required) Where to POST to. -}
+    {- ^ (Required) Where to POST to. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -86,29 +86,29 @@ repository and other options.
 -}
 data RepositoryResource = RepositoryResource
     { _description :: !(Attr Text)
-      {- ^ (Optional) What the description of the repo is. -}
+    {- ^ (Optional) What the description of the repo is. -}
     , _fork_policy :: !(Attr Text)
-      {- ^ (Optional) What the fork policy should be. Defaults to allow_forks. -}
+    {- ^ (Optional) What the fork policy should be. Defaults to allow_forks. -}
     , _has_issues  :: !(Attr Text)
-      {- ^ (Optional) If this should have issues turned on or not. -}
+    {- ^ (Optional) If this should have issues turned on or not. -}
     , _has_wiki    :: !(Attr Text)
-      {- ^ (Optional) If this should have wiki turned on or not. -}
+    {- ^ (Optional) If this should have wiki turned on or not. -}
     , _is_private  :: !(Attr Text)
-      {- ^ (Optional) If this should be private or not. Defaults to @true@ . -}
+    {- ^ (Optional) If this should be private or not. Defaults to @true@ . -}
     , _language    :: !(Attr Text)
-      {- ^ (Optional) What the language of this repository should be. -}
+    {- ^ (Optional) What the language of this repository should be. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) The name of the repository. -}
+    {- ^ (Required) The name of the repository. -}
     , _owner       :: !(Attr Text)
-      {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
+    {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
     , _project_key :: !(Attr Text)
-      {- ^ (Optional) If you want to have this repo associated with a project. -}
+    {- ^ (Optional) If you want to have this repo associated with a project. -}
     , _scm         :: !(Attr Text)
-      {- ^ (Optional) What SCM you want to use. Valid options are hg or git. Defaults to git. -}
+    {- ^ (Optional) What SCM you want to use. Valid options are hg or git. Defaults to git. -}
     , _slug        :: !(Attr Text)
-      {- ^ (Optional) The slug of the repository. -}
+    {- ^ (Optional) The slug of the repository. -}
     , _website     :: !(Attr Text)
-      {- ^ (Optional) URL of website associated with this repository. -}
+    {- ^ (Optional) URL of website associated with this repository. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

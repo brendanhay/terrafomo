@@ -49,14 +49,14 @@ only one result.
 -}
 data DatacenterDataSource = DatacenterDataSource
     { _location :: !(Attr Text)
-      {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
+    {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
+    {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
     } deriving (Show, Generic)
 
 type instance Computed DatacenterDataSource
     = '[ '("id", Text)
-         {- - UUID of the Virtual Data Center -}
+       {- - UUID of the Virtual Data Center -}
        ]
 
 $(TH.makeDataSource
@@ -71,18 +71,18 @@ image which can then be used to provision a server.
 -}
 data ImageDataSource = ImageDataSource
     { _location :: !(Attr Text)
-      {- ^ (Optional) Id of the existing image's location. -}
+    {- ^ (Optional) Id of the existing image's location. -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) Name or part of the name of an existing image that you want to search for. -}
+    {- ^ (Required) Name or part of the name of an existing image that you want to search for. -}
     , _type'    :: !(Attr Text)
-      {- ^ (Optional) The image type, HDD or CD-ROM. -}
+    {- ^ (Optional) The image type, HDD or CD-ROM. -}
     , _version  :: !(Attr Text)
-      {- ^ (Optional) Version of the image (see details below). -}
+    {- ^ (Optional) Version of the image (see details below). -}
     } deriving (Show, Generic)
 
 type instance Computed ImageDataSource
     = '[ '("id", Text)
-         {- - UUID of the image -}
+       {- - UUID of the image -}
        ]
 
 $(TH.makeDataSource
@@ -97,14 +97,14 @@ location which can then be used elsewhere in the configuration.
 -}
 data LocationDataSource = LocationDataSource
     { _feature :: !(Attr Text)
-      {- ^ (Optional) A desired feature that the location must be able to provide. -}
+    {- ^ (Optional) A desired feature that the location must be able to provide. -}
     , _name    :: !(Attr Text)
-      {- ^ (Required) Name or part of the location name to search for. -}
+    {- ^ (Required) Name or part of the location name to search for. -}
     } deriving (Show, Generic)
 
 type instance Computed LocationDataSource
     = '[ '("id", Text)
-         {- - UUID of the location -}
+       {- - UUID of the location -}
        ]
 
 $(TH.makeDataSource
@@ -125,14 +125,14 @@ only one result.
 -}
 data ResourceDataSource = ResourceDataSource
     { _resource_id   :: !(Attr Text)
-      {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
+    {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
     , _resource_type :: !(Attr Text)
-      {- ^ (Optional) The specific type of resources to retrieve information about. -}
+    {- ^ (Optional) The specific type of resources to retrieve information about. -}
     } deriving (Show, Generic)
 
 type instance Computed ResourceDataSource
     = '[ '("id", Text)
-         {- - UUID of the Resource -}
+       {- - UUID of the Resource -}
        ]
 
 $(TH.makeDataSource
@@ -147,16 +147,16 @@ snapshot which can then be used to provision a server.
 -}
 data SnapshotDataSource = SnapshotDataSource
     { _location :: !(Attr Text)
-      {- ^ (Optional) Id of the existing snapshot's location. -}
+    {- ^ (Optional) Id of the existing snapshot's location. -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
+    {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
     , _size     :: !(Attr Text)
-      {- ^ (Optional) The size of the snapshot to look for. -}
+    {- ^ (Optional) The size of the snapshot to look for. -}
     } deriving (Show, Generic)
 
 type instance Computed SnapshotDataSource
     = '[ '("id", Text)
-         {- - UUID of the snapshot -}
+       {- - UUID of the snapshot -}
        ]
 
 $(TH.makeDataSource

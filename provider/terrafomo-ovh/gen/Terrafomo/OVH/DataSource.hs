@@ -44,22 +44,22 @@ a public cloud project. The region must be associated with the project.
 -}
 data RegionDataSource = RegionDataSource
     { _project_id :: !(Attr Text)
-      {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
+    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     , _region     :: !(Attr Text)
-      {- ^ (Required) The name of the region associated with the public cloud project. -}
+    {- ^ (Required) The name of the region associated with the public cloud project. -}
     } deriving (Show, Generic)
 
 type instance Computed RegionDataSource
     = '[ '("continentCode", Text)
-         {- - (Deprecated) Use @continent_code@ instead. -}
-      , '("continent_code", Text)
-         {- - the code of the geographic continent the region is running. E.g.: EU for Europe, US for America... -}
-      , '("datacenterLocation", Text)
-         {- - (Deprecated) Use @datacenter_location@ instead. -}
-      , '("datacenter_location", Text)
-         {- - The location code of the datacenter. E.g.: "GRA", meaning Gravelines, for region "GRA1" -}
-      , '("services", Text)
-         {- - The list of public cloud services running within the region -}
+       {- - (Deprecated) Use @continent_code@ instead. -}
+       , '("continent_code", Text)
+       {- - the code of the geographic continent the region is running. E.g.: EU for Europe, US for America... -}
+       , '("datacenterLocation", Text)
+       {- - (Deprecated) Use @datacenter_location@ instead. -}
+       , '("datacenter_location", Text)
+       {- - The location code of the datacenter. E.g.: "GRA", meaning Gravelines, for region "GRA1" -}
+       , '("services", Text)
+       {- - The list of public cloud services running within the region -}
        ]
 
 $(TH.makeDataSource
@@ -73,12 +73,12 @@ Use this data source to get the regions of a public cloud project.
 -}
 data RegionsDataSource = RegionsDataSource
     { _project_id :: !(Attr Text)
-      {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
+    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Generic)
 
 type instance Computed RegionsDataSource
     = '[ '("names", Text)
-         {- - The list of regions associated with the project -}
+       {- - The list of regions associated with the project -}
        ]
 
 $(TH.makeDataSource

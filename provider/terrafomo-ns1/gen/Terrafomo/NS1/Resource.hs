@@ -44,13 +44,13 @@ delete api keys.
 -}
 data ApikeyResource = ApikeyResource
     { _key         :: !(Attr Text)
-      {- ^ (Required) The apikeys authentication token. -}
+    {- ^ (Required) The apikeys authentication token. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) The free form name of the apikey. -}
+    {- ^ (Required) The free form name of the apikey. -}
     , _permissions :: !(Attr Text)
-      {- ^ (Optional) The allowed permissions of the apikey. Permissions documented below. -}
+    {- ^ (Optional) The allowed permissions of the apikey. Permissions documented below. -}
     , _teams       :: !(Attr Text)
-      {- ^ (Required) The teams that the apikey belongs to. -}
+    {- ^ (Required) The teams that the apikey belongs to. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -65,11 +65,11 @@ delete data feeds.
 -}
 data DatafeedResource = DatafeedResource
     { _config    :: !(Attr Text)
-      {- ^ (Optional) The feeds configuration matching the specification in 'feed_config' from /data/sourcetypes. -}
+    {- ^ (Optional) The feeds configuration matching the specification in 'feed_config' from /data/sourcetypes. -}
     , _name      :: !(Attr Text)
-      {- ^ (Required) The free form name of the data feed. -}
+    {- ^ (Required) The free form name of the data feed. -}
     , _source_id :: !(Attr Text)
-      {- ^ (Required) The data source id that this feed is connected to. -}
+    {- ^ (Required) The data source id that this feed is connected to. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -84,11 +84,11 @@ delete data sources.
 -}
 data DatasourceResource = DatasourceResource
     { _config     :: !(Attr Text)
-      {- ^ (Optional) The data source configuration, determined by its type. -}
+    {- ^ (Optional) The data source configuration, determined by its type. -}
     , _name       :: !(Attr Text)
-      {- ^ (Required) The free form name of the data source. -}
+    {- ^ (Required) The free form name of the data source. -}
     , _sourcetype :: !(Attr Text)
-      {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
+    {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -103,35 +103,35 @@ and delete monitoring jobs.
 -}
 data MonitoringjobResource = MonitoringjobResource
     { _active          :: !(Attr Text)
-      {- ^ (Required) Indicates if the job is active or temporaril.y disabled. -}
+    {- ^ (Required) Indicates if the job is active or temporaril.y disabled. -}
     , _config          :: !(Attr Text)
-      {- ^ (Required) A configuration dictionary with keys and values depending on the jobs' type. -}
+    {- ^ (Required) A configuration dictionary with keys and values depending on the jobs' type. -}
     , _frequency       :: !(Attr Text)
-      {- ^ (Required) The frequency, in seconds, at which to run the monitoring job in each region. -}
+    {- ^ (Required) The frequency, in seconds, at which to run the monitoring job in each region. -}
     , _job_type        :: !(Attr Text)
-      {- ^ (Required) The type of monitoring job to be run. -}
+    {- ^ (Required) The type of monitoring job to be run. -}
     , _name            :: !(Attr Text)
-      {- ^ (Required) The free-form display name for the monitoring job. -}
+    {- ^ (Required) The free-form display name for the monitoring job. -}
     , _notes           :: !(Attr Text)
-      {- ^ (Optional) Freeform notes to be included in any notifications about this job. -}
+    {- ^ (Optional) Freeform notes to be included in any notifications about this job. -}
     , _notify_delay    :: !(Attr Text)
-      {- ^ (Optional) The time in seconds after a failure to wait before sending a notification. -}
+    {- ^ (Optional) The time in seconds after a failure to wait before sending a notification. -}
     , _notify_failback :: !(Attr Text)
-      {- ^ (Optional) If true, a notification is sent when a job returns to an "up" state. -}
+    {- ^ (Optional) If true, a notification is sent when a job returns to an "up" state. -}
     , _notify_list     :: !(Attr Text)
-      {- ^ (Optional) The id of the notification list to send notifications to. -}
+    {- ^ (Optional) The id of the notification list to send notifications to. -}
     , _notify_regional :: !(Attr Text)
-      {- ^ (Optional) If true, notifications are sent for any regional failure (and failback if desired), in addition to global state notifications. -}
+    {- ^ (Optional) If true, notifications are sent for any regional failure (and failback if desired), in addition to global state notifications. -}
     , _notify_repeat   :: !(Attr Text)
-      {- ^ (Optional) The time in seconds between repeat notifications of a failed job. -}
+    {- ^ (Optional) The time in seconds between repeat notifications of a failed job. -}
     , _policy          :: !(Attr Text)
-      {- ^ (Required) The policy for determining the monitor's global status based on the status of the job in all regions. -}
+    {- ^ (Required) The policy for determining the monitor's global status based on the status of the job in all regions. -}
     , _rapid_recheck   :: !(Attr Text)
-      {- ^ (Required) If true, on any apparent state change, the job is quickly re-run after one second to confirm the state change before notification. -}
+    {- ^ (Required) If true, on any apparent state change, the job is quickly re-run after one second to confirm the state change before notification. -}
     , _regions         :: !(Attr Text)
-      {- ^ (Required) The list of region codes in which to run the monitoring job. -}
+    {- ^ (Required) The list of region codes in which to run the monitoring job. -}
     , _rules           :: !(Attr Text)
-      {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
+    {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -146,9 +146,9 @@ delete notify lists.
 -}
 data NotifylistResource = NotifylistResource
     { _name          :: !(Attr Text)
-      {- ^ (Required) The free-form display name for the notify list. -}
+    {- ^ (Required) The free-form display name for the notify list. -}
     , _notifications :: !(Attr Text)
-      {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
+    {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -163,21 +163,21 @@ delete records.
 -}
 data RecordResource = RecordResource
     { _answers           :: !(Attr Text)
-      {- ^ (Optional) One or more NS1 answers for the records' specified type. Answers are documented below. -}
+    {- ^ (Optional) One or more NS1 answers for the records' specified type. Answers are documented below. -}
     , _domain            :: !(Attr Text)
-      {- ^ (Required) The records' domain. -}
+    {- ^ (Required) The records' domain. -}
     , _filters           :: !(Attr Text)
-      {- ^ (Optional) One or more NS1 filters for the record(order matters). Filters are documented below. -}
+    {- ^ (Optional) One or more NS1 filters for the record(order matters). Filters are documented below. -}
     , _link              :: !(Attr Text)
-      {- ^ (Optional) The target record to link to. This means this record is a 'linked' record, and it inherits all properties from its target. -}
+    {- ^ (Optional) The target record to link to. This means this record is a 'linked' record, and it inherits all properties from its target. -}
     , _ttl               :: !(Attr Text)
-      {- ^ (Optional) The records' time to live. -}
+    {- ^ (Optional) The records' time to live. -}
     , _type'             :: !(Attr Text)
-      {- ^ (Required) The records' RR type. -}
+    {- ^ (Required) The records' RR type. -}
     , _use_client_subnet :: !(Attr Text)
-      {- ^ (Optional) Whether to use EDNS client subnet data when available(in filter chain). -}
+    {- ^ (Optional) Whether to use EDNS client subnet data when available(in filter chain). -}
     , _zone              :: !(Attr Text)
-      {- ^ (Required) The zone the record belongs to. -}
+    {- ^ (Required) The zone the record belongs to. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -192,9 +192,9 @@ teams.
 -}
 data TeamResource = TeamResource
     { _name        :: !(Attr Text)
-      {- ^ (Required) The free form name of the team. -}
+    {- ^ (Required) The free form name of the team. -}
     , _permissions :: !(Attr Text)
-      {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
+    {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -210,17 +210,17 @@ users.
 -}
 data UserResource = UserResource
     { _email       :: !(Attr Text)
-      {- ^ (Required) The email address of the user. -}
+    {- ^ (Required) The email address of the user. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) The free form name of the user. -}
+    {- ^ (Required) The free form name of the user. -}
     , _notify      :: !(Attr Text)
-      {- ^ (Required) The Whether or not to notify the user of specified events. Only @billing@ is available currently. -}
+    {- ^ (Required) The Whether or not to notify the user of specified events. Only @billing@ is available currently. -}
     , _permissions :: !(Attr Text)
-      {- ^ (Optional) The allowed permissions of the user. Permissions documented below. -}
+    {- ^ (Optional) The allowed permissions of the user. Permissions documented below. -}
     , _teams       :: !(Attr Text)
-      {- ^ (Required) The teams that the user belongs to. -}
+    {- ^ (Required) The teams that the user belongs to. -}
     , _username    :: !(Attr Text)
-      {- ^ (Required) The users login name. -}
+    {- ^ (Required) The users login name. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -235,21 +235,21 @@ delete zones.
 -}
 data ZoneResource = ZoneResource
     { _expiry  :: !(Attr Text)
-      {- ^ (Optional) The SOA Expiry. -}
+    {- ^ (Optional) The SOA Expiry. -}
     , _link    :: !(Attr Text)
-      {- ^ (Optional) The target zone(domain name) to link to. -}
+    {- ^ (Optional) The target zone(domain name) to link to. -}
     , _nx_ttl  :: !(Attr Text)
-      {- ^ (Optional) The SOA NX TTL. -}
+    {- ^ (Optional) The SOA NX TTL. -}
     , _primary :: !(Attr Text)
-      {- ^ (Optional) The primary zones' ip. This makes the zone a secondary. -}
+    {- ^ (Optional) The primary zones' ip. This makes the zone a secondary. -}
     , _refresh :: !(Attr Text)
-      {- ^ (Optional) The SOA Refresh. -}
+    {- ^ (Optional) The SOA Refresh. -}
     , _retry   :: !(Attr Text)
-      {- ^ (Optional) The SOA Retry. -}
+    {- ^ (Optional) The SOA Retry. -}
     , _ttl     :: !(Attr Text)
-      {- ^ (Optional) The SOA TTL. -}
+    {- ^ (Optional) The SOA TTL. -}
     , _zone    :: !(Attr Text)
-      {- ^ (Required) The domain name of the zone. -}
+    {- ^ (Required) The domain name of the zone. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

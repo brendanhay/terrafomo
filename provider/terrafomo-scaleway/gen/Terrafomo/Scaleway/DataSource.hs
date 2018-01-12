@@ -44,28 +44,28 @@ the @scaleway_server@ resource.
 -}
 data BootscriptDataSource = BootscriptDataSource
     { _architecture :: !(Attr Text)
-      {- ^ (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
+    {- ^ (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
     , _name         :: !(Attr Text)
-      {- ^ (Optional) Exact name of desired Bootscript -}
+    {- ^ (Optional) Exact name of desired Bootscript -}
     , _name_filter  :: !(Attr Text)
-      {- ^ (Optional) Regexp to match Bootscript name by -}
+    {- ^ (Optional) Regexp to match Bootscript name by -}
     } deriving (Show, Generic)
 
 type instance Computed BootscriptDataSource
     = '[ '("architecture", Text)
-         {- - architecture of the Bootscript, e.g. @arm@ or @x86_64@ -}
-      , '("boot_cmd_args", Text)
-         {- - command line arguments used for booting -}
-      , '("dtb", Text)
-         {- - path to Device Tree Blob detailing hardware information -}
-      , '("initrd", Text)
-         {- - URL to initial ramdisk content -}
-      , '("kernel", Text)
-         {- - URL to used kernel -}
-      , '("organization", Text)
-         {- - uuid of the organization owning this Bootscript -}
-      , '("public", Text)
-         {- - is this a public bootscript -}
+       {- - architecture of the Bootscript, e.g. @arm@ or @x86_64@ -}
+       , '("boot_cmd_args", Text)
+       {- - command line arguments used for booting -}
+       , '("dtb", Text)
+       {- - path to Device Tree Blob detailing hardware information -}
+       , '("initrd", Text)
+       {- - URL to initial ramdisk content -}
+       , '("kernel", Text)
+       {- - URL to used kernel -}
+       , '("organization", Text)
+       {- - uuid of the organization owning this Bootscript -}
+       , '("public", Text)
+       {- - is this a public bootscript -}
        ]
 
 $(TH.makeDataSource
@@ -80,22 +80,22 @@ Use this data source to get the ID of a registered Image for use with the
 -}
 data ImageDataSource = ImageDataSource
     { _architecture :: !(Attr Text)
-      {- ^ (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
+    {- ^ (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
     , _name         :: !(Attr Text)
-      {- ^ (Optional) Exact name of desired Image -}
+    {- ^ (Optional) Exact name of desired Image -}
     , _name_filter  :: !(Attr Text)
-      {- ^ (Optional) Regexp to match Image name by -}
+    {- ^ (Optional) Regexp to match Image name by -}
     } deriving (Show, Generic)
 
 type instance Computed ImageDataSource
     = '[ '("architecture", Text)
-         {- - architecture of the Image, e.g. @arm@ or @x86_64@ -}
-      , '("creation_date", Text)
-         {- - date when image was created -}
-      , '("organization", Text)
-         {- - uuid of the organization owning this Image -}
-      , '("public", Text)
-         {- - is this a public bootscript -}
+       {- - architecture of the Image, e.g. @arm@ or @x86_64@ -}
+       , '("creation_date", Text)
+       {- - date when image was created -}
+       , '("organization", Text)
+       {- - uuid of the organization owning this Image -}
+       , '("public", Text)
+       {- - is this a public bootscript -}
        ]
 
 $(TH.makeDataSource

@@ -46,9 +46,9 @@ coarse-grained information like entire config files or JSON blobs.
 -}
 data ConfigMapResource = ConfigMapResource
     { _data'    :: !(Attr Text)
-      {- ^ (Optional) A map of the configuration data. -}
+    {- ^ (Optional) A map of the configuration data. -}
     , _metadata :: !(Attr Text)
-      {- ^ (Required) Standard config map's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard config map's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -64,9 +64,9 @@ utilization.
 -}
 data HorizontalPodAutoscalerResource = HorizontalPodAutoscalerResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard horizontal pod autoscaler's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard horizontal pod autoscaler's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Required) Behaviour of the autoscaler. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
+    {- ^ (Required) Behaviour of the autoscaler. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -83,9 +83,9 @@ supported kinds of resources in a namespace. Read more in
 -}
 data LimitRangeResource = LimitRangeResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard limit range's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard limit range's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Optional) Spec defines the limits enforced. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
+    {- ^ (Optional) Spec defines the limits enforced. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -101,7 +101,7 @@ namespaces at https://kubernetes.io/docs/user-guide/namespaces/
 -}
 data NamespaceResource = NamespaceResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard namespace's <https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata> . -}
+    {- ^ (Required) Standard namespace's <https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata> . -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -116,11 +116,11 @@ volume.
 -}
 data PersistentVolumeClaimResource = PersistentVolumeClaimResource
     { _metadata         :: !(Attr Text)
-      {- ^ (Required) Standard persistent volume claim's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard persistent volume claim's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec             :: !(Attr Text)
-      {- ^ (Required) Spec defines the desired characteristics of a volume requested by a pod author. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#persistentvolumeclaims -}
+    {- ^ (Required) Spec defines the desired characteristics of a volume requested by a pod author. More info: http://kubernetes.io/docs/user-guide/persistent-volumes#persistentvolumeclaims -}
     , _wait_until_bound :: !(Attr Text)
-      {- ^ (Optional) Whether to wait for the claim to reach @Bound@ state (to find volume in which to claim the space) -}
+    {- ^ (Optional) Whether to wait for the claim to reach @Bound@ state (to find volume in which to claim the space) -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -138,9 +138,9 @@ https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 -}
 data PersistentVolumeResource = PersistentVolumeResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard persistent volume's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard persistent volume's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Required) Spec of the persistent volume owned by the cluster. See below. -}
+    {- ^ (Required) Spec of the persistent volume owned by the cluster. See below. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -157,9 +157,9 @@ https://kubernetes.io/docs/concepts/workloads/pods/pod/
 -}
 data PodResource = PodResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard pod's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard pod's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Required) Spec of the pod owned by the cluster -}
+    {- ^ (Required) Spec of the pod owned by the cluster -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -177,9 +177,9 @@ Replication Controller will start more.
 -}
 data ReplicationControllerResource = ReplicationControllerResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard replication controller's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard replication controller's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Required) Spec defines the specification of the desired behavior of the replication controller. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
+    {- ^ (Required) Spec defines the specification of the desired behavior of the replication controller. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -196,9 +196,9 @@ resources that may be consumed by resources in that project.
 -}
 data ResourceQuotaResource = ResourceQuotaResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard resource quota's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard resource quota's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Optional) Spec defines the desired quota. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
+    {- ^ (Optional) Spec defines the desired quota. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -221,11 +221,11 @@ plain-text. </docs/state/sensitive-data.html> .
 -}
 data SecretResource = SecretResource
     { _data'    :: !(Attr Text)
-      {- ^ (Optional) A map of the secret data. -}
+    {- ^ (Optional) A map of the secret data. -}
     , _metadata :: !(Attr Text)
-      {- ^ (Required) Standard secret's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard secret's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _type'    :: !(Attr Text)
-      {- ^ (Optional) The secret type. Defaults to @Opaque@ . More info: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/secrets.md#proposed-design -}
+    {- ^ (Optional) The secret type. Defaults to @Opaque@ . More info: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/secrets.md#proposed-design -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -240,11 +240,11 @@ more at https://kubernetes.io/docs/admin/service-accounts-admin/
 -}
 data ServiceAccountResource = ServiceAccountResource
     { _image_pull_secret :: !(Attr Text)
-      {- ^ (Optional) A list of references to secrets in the same namespace to use for pulling any images in pods that reference this Service Account. More info: http://kubernetes.io/docs/user-guide/secrets#manually-specifying-an-imagepullsecret -}
+    {- ^ (Optional) A list of references to secrets in the same namespace to use for pulling any images in pods that reference this Service Account. More info: http://kubernetes.io/docs/user-guide/secrets#manually-specifying-an-imagepullsecret -}
     , _metadata          :: !(Attr Text)
-      {- ^ (Required) Standard service account's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard service account's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _secret            :: !(Attr Text)
-      {- ^ (Optional) A list of secrets allowed to be used by pods running using this Service Account. More info: http://kubernetes.io/docs/user-guide/secrets -}
+    {- ^ (Optional) A list of secrets allowed to be used by pods running using this Service Account. More info: http://kubernetes.io/docs/user-guide/secrets -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -259,9 +259,9 @@ by which to access them - sometimes called a micro-service.
 -}
 data ServiceResource = ServiceResource
     { _metadata :: !(Attr Text)
-      {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _spec     :: !(Attr Text)
-      {- ^ (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
+    {- ^ (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -278,11 +278,11 @@ http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kuber
 -}
 data StorageClassResource = StorageClassResource
     { _metadata            :: !(Attr Text)
-      {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
+    {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _parameters          :: !(Attr Text)
-      {- ^ (Optional) The parameters for the provisioner that should create volumes of this storage class. Read more about <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#parameters> . -}
+    {- ^ (Optional) The parameters for the provisioner that should create volumes of this storage class. Read more about <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#parameters> . -}
     , _storage_provisioner :: !(Attr Text)
-      {- ^ (Required) Indicates the type of the provisioner -}
+    {- ^ (Required) Indicates the type of the provisioner -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

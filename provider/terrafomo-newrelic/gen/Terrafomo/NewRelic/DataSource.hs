@@ -44,16 +44,16 @@ Relic.
 -}
 data ApplicationDataSource = ApplicationDataSource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name of the application in New Relic. -}
+    {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Generic)
 
 type instance Computed ApplicationDataSource
     = '[ '("host_ids", Text)
-         {- - A list of host IDs associated with the application. -}
-      , '("id", Text)
-         {- - The ID of the application. -}
-      , '("instance_ids", Text)
-         {- - A list of instance IDs associated with the application. -}
+       {- - A list of host IDs associated with the application. -}
+       , '("id", Text)
+       {- - The ID of the application. -}
+       , '("instance_ids", Text)
+       {- - A list of instance IDs associated with the application. -}
        ]
 
 $(TH.makeDataSource

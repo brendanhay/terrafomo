@@ -48,28 +48,28 @@ resource attributes. Protect these artifacts accordingly. See
 -}
 data AwsAccessCredentialsDataSource = AwsAccessCredentialsDataSource
     { _backend :: !(Attr Text)
-      {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
+    {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
     , _role    :: !(Attr Text)
-      {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
+    {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
     , _type'   :: !(Attr Text)
-      {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
+    {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
     } deriving (Show, Generic)
 
 type instance Computed AwsAccessCredentialsDataSource
     = '[ '("access_key", Text)
-         {- - The AWS Access Key ID returned by Vault. -}
-      , '("lease_duration", Text)
-         {- - The duration of the secret lease, in seconds relative to the time the data was requested. Once this time has passed any plan generated with this data may fail to apply. -}
-      , '("lease_id", Text)
-         {- - The lease identifier assigned by Vault. -}
-      , '("lease_renewable", Text)
-         {- - @true@ if the lease can be renewed using Vault's @sys/renew/{lease-id}@ endpoint. Terraform does not currently support lease renewal, and so it will request a new lease each time this data source is refreshed. -}
-      , '("lease_start_time", Text)
-         {- - As a convenience, this records the current time on the computer where Terraform is running when the data is requested. This can be used to approximate the absolute time represented by @lease_duration@ , though users must allow for any clock drift and response latency relative to the Vault server. -}
-      , '("secret_key", Text)
-         {- - The AWS Secret Key returned by Vault. -}
-      , '("security_token", Text)
-         {- - The STS token returned by Vault, if any. -}
+       {- - The AWS Access Key ID returned by Vault. -}
+       , '("lease_duration", Text)
+       {- - The duration of the secret lease, in seconds relative to the time the data was requested. Once this time has passed any plan generated with this data may fail to apply. -}
+       , '("lease_id", Text)
+       {- - The lease identifier assigned by Vault. -}
+       , '("lease_renewable", Text)
+       {- - @true@ if the lease can be renewed using Vault's @sys/renew/{lease-id}@ endpoint. Terraform does not currently support lease renewal, and so it will request a new lease each time this data source is refreshed. -}
+       , '("lease_start_time", Text)
+       {- - As a convenience, this records the current time on the computer where Terraform is running when the data is requested. This can be used to approximate the absolute time represented by @lease_duration@ , though users must allow for any clock drift and response latency relative to the Vault server. -}
+       , '("secret_key", Text)
+       {- - The AWS Secret Key returned by Vault. -}
+       , '("security_token", Text)
+       {- - The STS token returned by Vault, if any. -}
        ]
 
 $(TH.makeDataSource
@@ -91,7 +91,7 @@ accordingly. See <../index.html> for more details.
 -}
 data GenericSecretDataSource = GenericSecretDataSource
     { _path :: !(Attr Text)
-      {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
+    {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Generic)
 
 $(TH.makeDataSource

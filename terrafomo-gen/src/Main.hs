@@ -13,7 +13,7 @@ import Control.Monad       (unless, when)
 import Data.Aeson     (FromJSON)
 import Data.Bifunctor (first)
 import Data.Function  ((&))
-import Data.Maybe     (isJust)
+import Data.Maybe     (catMaybes, isJust)
 import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
@@ -170,16 +170,18 @@ loadProvider opts = do
             echo "Provider" (markdownFile ++ " == " ++ show exists)
 
             schema <- loadSchema Parser.providerParser path
-            pure (Just (applyDeprecations schema) <$ provider)
+            pure (applyDeprecations schema <$ provider)
 
 loadResources :: Options -> Script [Schema]
 loadResources =
-    traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
+    fmap catMaybes
+        . traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
         . resourcePaths
 
 loadDataSources :: Options -> Script [Schema]
 loadDataSources =
-    traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
+    fmap catMaybes
+        . traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
         . dataSourcePaths
 
 -- Schema

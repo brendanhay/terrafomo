@@ -47,17 +47,17 @@ be configured.
 -}
 data BranchProtectionResource = BranchProtectionResource
     { _branch                        :: !(Attr Text)
-      {- ^ (Required) The Git branch to protect. -}
+    {- ^ (Required) The Git branch to protect. -}
     , _enforce_admins                :: !(Attr Text)
-      {- ^ (Optional) Boolean, setting this to @true@ enforces status checks for repository administrators. -}
+    {- ^ (Optional) Boolean, setting this to @true@ enforces status checks for repository administrators. -}
     , _repository                    :: !(Attr Text)
-      {- ^ (Required) The GitHub repository name. -}
+    {- ^ (Required) The GitHub repository name. -}
     , _required_pull_request_reviews :: !(Attr Text)
-      {- ^ (Optional) Enforce restrictions for pull request reviews. See <#required-pull-request-reviews> below for details. -}
+    {- ^ (Optional) Enforce restrictions for pull request reviews. See <#required-pull-request-reviews> below for details. -}
     , _required_status_checks        :: !(Attr Text)
-      {- ^ (Optional) Enforce restrictions for required status checks. See <#required-status-checks> below for details. -}
+    {- ^ (Optional) Enforce restrictions for required status checks. See <#required-status-checks> below for details. -}
     , _restrictions                  :: !(Attr Text)
-      {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
+    {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -78,13 +78,13 @@ create.
 -}
 data IssueLabelResource = IssueLabelResource
     { _color      :: !(Attr Text)
-      {- ^ (Required) A 6 character hex code, without the leading # , identifying the color of the label. -}
+    {- ^ (Required) A 6 character hex code, without the leading # , identifying the color of the label. -}
     , _name       :: !(Attr Text)
-      {- ^ (Required) The name of the label. -}
+    {- ^ (Required) The name of the label. -}
     , _repository :: !(Attr Text)
-      {- ^ (Required) The GitHub repository -}
+    {- ^ (Required) The GitHub repository -}
     , _url        :: !(Attr Text)
-      {- ^ - (Computed) The URL to the issue label -}
+    {- ^ - (Computed) The URL to the issue label -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -101,9 +101,9 @@ the invitation will be cancelled or the user will be removed.
 -}
 data MembershipResource = MembershipResource
     { _role     :: !(Attr Text)
-      {- ^ (Optional) The role of the user within the organization. Must be one of @member@ or @admin@ . Defaults to @member@ . -}
+    {- ^ (Optional) The role of the user within the organization. Must be one of @member@ or @admin@ . Defaults to @member@ . -}
     , _username :: !(Attr Text)
-      {- ^ (Required) The user to add to the organization. -}
+    {- ^ (Required) The user to add to the organization. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -118,18 +118,18 @@ organization.
 -}
 data OrganizationWebhookResource = OrganizationWebhookResource
     { _active        :: !(Attr Text)
-      {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
+    {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
     , _configuration :: !(Attr Text)
-      {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
+    {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
     , _events        :: !(Attr Text)
-      {- ^ (Required) A list of events which should trigger the webhook. Defaults to @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/> -}
+    {- ^ (Required) A list of events which should trigger the webhook. See a list of <https://developer.github.com/v3/activity/events/types/> -}
     , _name          :: !(Attr Text)
-      {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
+    {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
     } deriving (Show, Generic)
 
 type instance Computed OrganizationWebhookResource
     = '[ '("url", Text)
-         {- - URL of the webhook -}
+       {- - URL of the webhook -}
        ]
 
 $(TH.makeResource
@@ -151,11 +151,11 @@ collaborators:
 -}
 data RepositoryCollaboratorResource = RepositoryCollaboratorResource
     { _permission :: !(Attr Text)
-      {- ^ (Optional) The permission of the outside collaborator for the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @push@ . -}
+    {- ^ (Optional) The permission of the outside collaborator for the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @push@ . -}
     , _repository :: !(Attr Text)
-      {- ^ (Required) The GitHub repository -}
+    {- ^ (Required) The GitHub repository -}
     , _username   :: !(Attr Text)
-      {- ^ (Required) The user to add to the repository as a collaborator. -}
+    {- ^ (Required) The user to add to the repository as a collaborator. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -173,13 +173,13 @@ deploy keys. Further documentation on GitHub repository deploy keys:
 -}
 data RepositoryDeployKeyResource = RepositoryDeployKeyResource
     { _key        :: !(Attr Text)
-      {- ^ (Required) A ssh key. -}
+    {- ^ (Required) A ssh key. -}
     , _read_only  :: !(Attr Text)
-      {- ^ (Required) A boolean qualifying the key to be either read only or read/write. -}
+    {- ^ (Required) A boolean qualifying the key to be either read only or read/write. -}
     , _repository :: !(Attr Text)
-      {- ^ (Required) Name of the Github repository. -}
+    {- ^ (Required) Name of the Github repository. -}
     , _title      :: !(Attr Text)
-      {- ^ (Required) A title. -}
+    {- ^ (Required) A title. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -195,46 +195,46 @@ personal repositories, outside of organizations.
 -}
 data RepositoryResource = RepositoryResource
     { _allow_merge_commit :: !(Attr Text)
-      {- ^ (Optional) Set to @false@ to disable merge commits on the repository. -}
+    {- ^ (Optional) Set to @false@ to disable merge commits on the repository. -}
     , _allow_rebase_merge :: !(Attr Text)
-      {- ^ (Optional) Set to @false@ to disable rebase merges on the repository. -}
+    {- ^ (Optional) Set to @false@ to disable rebase merges on the repository. -}
     , _allow_squash_merge :: !(Attr Text)
-      {- ^ (Optional) Set to @false@ to disable squash merges on the repository. -}
+    {- ^ (Optional) Set to @false@ to disable squash merges on the repository. -}
     , _auto_init          :: !(Attr Text)
-      {- ^ (Optional) Meaningful only during create; set to @true@ to produce an initial commit in the repository. -}
+    {- ^ (Optional) Meaningful only during create; set to @true@ to produce an initial commit in the repository. -}
     , _default_branch     :: !(Attr Text)
-      {- ^ (Optional) The name of the default branch of the repository. NOTE: This can only be set after a repository has already been created, and after a correct reference has been created for the target branch inside the repository. This means a user will have to omit this parameter from the initial repository creation and create the target branch inside of the repository prior to setting this attribute. -}
+    {- ^ (Optional) The name of the default branch of the repository. NOTE: This can only be set after a repository has already been created, and after a correct reference has been created for the target branch inside the repository. This means a user will have to omit this parameter from the initial repository creation and create the target branch inside of the repository prior to setting this attribute. -}
     , _description        :: !(Attr Text)
-      {- ^ (Optional) A description of the repository. -}
+    {- ^ (Optional) A description of the repository. -}
     , _gitignore_template :: !(Attr Text)
-      {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/gitignore> without the extension. For example, "Haskell". -}
+    {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/gitignore> without the extension. For example, "Haskell". -}
     , _has_downloads      :: !(Attr Text)
-      {- ^ (Optional) Set to @true@ to enable the (deprecated) downloads features on the repository. -}
+    {- ^ (Optional) Set to @true@ to enable the (deprecated) downloads features on the repository. -}
     , _has_issues         :: !(Attr Text)
-      {- ^ (Optional) Set to @true@ to enable the Github Issues features on the repository. -}
+    {- ^ (Optional) Set to @true@ to enable the Github Issues features on the repository. -}
     , _has_wiki           :: !(Attr Text)
-      {- ^ (Optional) Set to @true@ to enable the Github Wiki features on the repository. -}
+    {- ^ (Optional) Set to @true@ to enable the Github Wiki features on the repository. -}
     , _homepage_url       :: !(Attr Text)
-      {- ^ (Optional) URL of a page describing the project. -}
+    {- ^ (Optional) URL of a page describing the project. -}
     , _license_template   :: !(Attr Text)
-      {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses> without the extension. For example, "mit" or "mozilla". -}
+    {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses> without the extension. For example, "mit" or "mozilla". -}
     , _name               :: !(Attr Text)
-      {- ^ (Required) The name of the repository. -}
+    {- ^ (Required) The name of the repository. -}
     , _private            :: !(Attr Text)
-      {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
+    {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
     } deriving (Show, Generic)
 
 type instance Computed RepositoryResource
     = '[ '("full_name", Text)
-         {- - A string of the form "orgname/reponame". -}
-      , '("git_clone_url", Text)
-         {- - URL that can be provided to @git clone@ to clone the repository anonymously via the git protocol. -}
-      , '("http_clone_url", Text)
-         {- - URL that can be provided to @git clone@ to clone the repository via HTTPS. -}
-      , '("ssh_clone_url", Text)
-         {- - URL that can be provided to @git clone@ to clone the repository via SSH. -}
-      , '("svn_url", Text)
-         {- - URL that can be provided to @svn checkout@ to check out the repository via Github's Subversion protocol emulation. -}
+       {- - A string of the form "orgname/reponame". -}
+       , '("git_clone_url", Text)
+       {- - URL that can be provided to @git clone@ to clone the repository anonymously via the git protocol. -}
+       , '("http_clone_url", Text)
+       {- - URL that can be provided to @git clone@ to clone the repository via HTTPS. -}
+       , '("ssh_clone_url", Text)
+       {- - URL that can be provided to @git clone@ to clone the repository via SSH. -}
+       , '("svn_url", Text)
+       {- - URL that can be provided to @svn checkout@ to check out the repository via Github's Subversion protocol emulation. -}
        ]
 
 $(TH.makeResource
@@ -250,20 +250,20 @@ manage webhooks for personal repositories, outside of organizations.
 -}
 data RepositoryWebhookResource = RepositoryWebhookResource
     { _active        :: !(Attr Text)
-      {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
+    {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
     , _configuration :: !(Attr Text)
-      {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
+    {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
     , _events        :: !(Attr Text)
-      {- ^ (Required) A list of events which should trigger the webhook. Defaults to @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/> -}
+    {- ^ (Required) A list of events which should trigger the webhook. See a list of <https://developer.github.com/v3/activity/events/types/> -}
     , _name          :: !(Attr Text)
-      {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
+    {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
     , _repository    :: !(Attr Text)
-      {- ^ (Required) The repository of the webhook. -}
+    {- ^ (Required) The repository of the webhook. -}
     } deriving (Show, Generic)
 
 type instance Computed RepositoryWebhookResource
     = '[ '("url", Text)
-         {- - URL of the webhook -}
+       {- - URL of the webhook -}
        ]
 
 $(TH.makeResource
@@ -281,11 +281,11 @@ destroyed, the user will be removed from the team.
 -}
 data TeamMembershipResource = TeamMembershipResource
     { _role     :: !(Attr Text)
-      {- ^ (Optional) The role of the user within the team. Must be one of @member@ or @maintainer@ . Defaults to @member@ . -}
+    {- ^ (Optional) The role of the user within the team. Must be one of @member@ or @maintainer@ . Defaults to @member@ . -}
     , _team_id  :: !(Attr Text)
-      {- ^ (Required) The GitHub team id -}
+    {- ^ (Required) The GitHub team id -}
     , _username :: !(Attr Text)
-      {- ^ (Required) The user to add to the team. -}
+    {- ^ (Required) The user to add to the team. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -303,11 +303,11 @@ actually create any repositories; to do that, see <repository.html> .
 -}
 data TeamRepositoryResource = TeamRepositoryResource
     { _permission :: !(Attr Text)
-      {- ^ (Optional) The permissions of team members regarding the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @pull@ . -}
+    {- ^ (Optional) The permissions of team members regarding the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @pull@ . -}
     , _repository :: !(Attr Text)
-      {- ^ (Required) The repository to add to the team. -}
+    {- ^ (Required) The repository to add to the team. -}
     , _team_id    :: !(Attr Text)
-      {- ^ (Required) The GitHub team id -}
+    {- ^ (Required) The GitHub team id -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -323,18 +323,18 @@ destroyed, that team will be removed.
 -}
 data TeamResource = TeamResource
     { _description :: !(Attr Text)
-      {- ^ (Optional) A description of the team. -}
+    {- ^ (Optional) A description of the team. -}
     , _ldap_dn     :: !(Attr Text)
-      {- ^ (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise. -}
+    {- ^ (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required) The name of the team. -}
+    {- ^ (Required) The name of the team. -}
     , _privacy     :: !(Attr Text)
-      {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
+    {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
     } deriving (Show, Generic)
 
 type instance Computed TeamResource
     = '[ '("id", Text)
-         {- - The ID of the created team. -}
+       {- - The ID of the created team. -}
        ]
 
 $(TH.makeResource

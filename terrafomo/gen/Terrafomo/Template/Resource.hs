@@ -51,11 +51,11 @@ automation systems.
 -}
 data DirResource = DirResource
     { _destination_dir :: !(Attr Text)
-      {- ^ (Required) Path to the directory where the templated files will be written. -}
+    {- ^ (Required) Path to the directory where the templated files will be written. -}
     , _source_dir      :: !(Attr Text)
-      {- ^ (Required) Path to the directory where the files to template reside. -}
+    {- ^ (Required) Path to the directory where the files to template reside. -}
     , _vars            :: !(Attr Text)
-      {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
+    {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

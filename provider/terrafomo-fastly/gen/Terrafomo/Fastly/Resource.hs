@@ -49,74 +49,74 @@ documentation site for guidance.
 -}
 data ServiceV1Resource = ServiceV1Resource
     { _backend         :: !(Attr Text)
-      {- ^ (Optional) A set of Backends to service requests from your Domains. Defined below. Backends must be defined in this argument, or defined in the @vcl@ argument below -}
+    {- ^ (Optional) A set of Backends to service requests from your Domains. Defined below. Backends must be defined in this argument, or defined in the @vcl@ argument below -}
     , _cache_setting   :: !(Attr Text)
-      {- ^ (Optional) A set of Cache Settings, allowing you to override when an item is not to be cached based on an above @condition@ . Defined below -}
+    {- ^ (Optional) A set of Cache Settings, allowing you to override when an item is not to be cached based on an above @condition@ . Defined below -}
     , _condition       :: !(Attr Text)
-      {- ^ (Optional) A set of conditions to add logic to any basic configuration object in this service. Defined below. -}
+    {- ^ (Optional) A set of conditions to add logic to any basic configuration object in this service. Defined below. -}
     , _default_host    :: !(Attr Text)
-      {- ^ (Optional) The default hostname. -}
+    {- ^ (Optional) The default hostname. -}
     , _default_ttl     :: !(Attr Text)
-      {- ^ (Optional) The default Time-to-live (TTL) for requests. -}
+    {- ^ (Optional) The default Time-to-live (TTL) for requests. -}
     , _domain          :: !(Attr Text)
-      {- ^ (Required) A set of Domain names to serve as entry points for your Service. Defined below. -}
+    {- ^ (Required) A set of Domain names to serve as entry points for your Service. Defined below. -}
     , _force_destroy   :: !(Attr Text)
-      {- ^ (Optional) Services that are active cannot be destroyed. In order to destroy the Service, set @force_destroy@ to @true@ . Default @false@ . -}
+    {- ^ (Optional) Services that are active cannot be destroyed. In order to destroy the Service, set @force_destroy@ to @true@ . Default @false@ . -}
     , _gcslogging      :: !(Attr Text)
-      {- ^ (Optional) A gcs endpoint to send streaming logs too. Defined below. -}
+    {- ^ (Optional) A gcs endpoint to send streaming logs too. Defined below. -}
     , _gzip            :: !(Attr Text)
-      {- ^ (Required) A set of gzip rules to control automatic gzipping of content. Defined below. -}
+    {- ^ (Required) A set of gzip rules to control automatic gzipping of content. Defined below. -}
     , _header          :: !(Attr Text)
-      {- ^ (Optional) A set of Headers to manipulate for each request. Defined below. -}
+    {- ^ (Optional) A set of Headers to manipulate for each request. Defined below. -}
     , _healthcheck     :: !(Attr Text)
-      {- ^ (Optional) Automated healthchecks on the cache that can change how fastly interacts with the cache based on its health. -}
+    {- ^ (Optional) Automated healthchecks on the cache that can change how fastly interacts with the cache based on its health. -}
     , _logentries      :: !(Attr Text)
-      {- ^ (Optional) A logentries endpoint to send streaming logs too. Defined below. -}
+    {- ^ (Optional) A logentries endpoint to send streaming logs too. Defined below. -}
     , _name            :: !(Attr Text)
-      {- ^ (Required) The unique name for the Service to create. -}
+    {- ^ (Required) The unique name for the Service to create. -}
     , _papertrail      :: !(Attr Text)
-      {- ^ (Optional) A Papertrail endpoint to send streaming logs too. Defined below. -}
+    {- ^ (Optional) A Papertrail endpoint to send streaming logs too. Defined below. -}
     , _request_setting :: !(Attr Text)
-      {- ^ (Optional) A set of Request modifiers. Defined below -}
+    {- ^ (Optional) A set of Request modifiers. Defined below -}
     , _response_object :: !(Attr Text)
-      {- ^ (Optional) Allows you to create synthetic responses that exist entirely on the varnish machine. Useful for creating error or maintenance pages that exists outside the scope of your datacenter. Best when used with Condition objects. -}
+    {- ^ (Optional) Allows you to create synthetic responses that exist entirely on the varnish machine. Useful for creating error or maintenance pages that exists outside the scope of your datacenter. Best when used with Condition objects. -}
     , _s3logging       :: !(Attr Text)
-      {- ^ (Optional) A set of S3 Buckets to send streaming logs too. Defined below. -}
+    {- ^ (Optional) A set of S3 Buckets to send streaming logs too. Defined below. -}
     , _sumologic       :: !(Attr Text)
-      {- ^ (Optional) A Sumologic endpoint to send streaming logs too. Defined below. -}
+    {- ^ (Optional) A Sumologic endpoint to send streaming logs too. Defined below. -}
     , _syslog          :: !(Attr Text)
-      {- ^ (Optional) A syslog endpoint to send streaming logs too. Defined below. -}
+    {- ^ (Optional) A syslog endpoint to send streaming logs too. Defined below. -}
     , _vcl             :: !(Attr Text)
-      {- ^ (Optional) A set of custom VCL configuration blocks. The ability to upload custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl> for details). -}
+    {- ^ (Optional) A set of custom VCL configuration blocks. The ability to upload custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl> for details). -}
     } deriving (Show, Generic)
 
 type instance Computed ServiceV1Resource
     = '[ '("active_version", Text)
-         {- - The currently active version of your Fastly Service. -}
-      , '("backend", Text)
-         {- – Set of Backends. See above for details. -}
-      , '("default_host", Text)
-         {- – Default host specified. -}
-      , '("default_ttl", Text)
-         {- - Default TTL. -}
-      , '("domain", Text)
-         {- – Set of Domains. See above for details. -}
-      , '("force_destroy", Text)
-         {- - Force the destruction of the Service on delete. -}
-      , '("header", Text)
-         {- – Set of Headers. See above for details. -}
-      , '("id", Text)
-         {- - The ID of the Service. -}
-      , '("name", Text)
-         {- – Name of this service. -}
-      , '("papertrail", Text)
-         {- – Set of Papertrail configurations. See above for details. -}
-      , '("response_object", Text)
-         {- - Set of Response Object configurations. See above for details. -}
-      , '("s3logging", Text)
-         {- – Set of S3 Logging configurations. See above for details. -}
-      , '("vcl", Text)
-         {- – Set of custom VCL configurations. See above for details. -}
+       {- - The currently active version of your Fastly Service. -}
+       , '("backend", Text)
+       {- – Set of Backends. See above for details. -}
+       , '("default_host", Text)
+       {- – Default host specified. -}
+       , '("default_ttl", Text)
+       {- - Default TTL. -}
+       , '("domain", Text)
+       {- – Set of Domains. See above for details. -}
+       , '("force_destroy", Text)
+       {- - Force the destruction of the Service on delete. -}
+       , '("header", Text)
+       {- – Set of Headers. See above for details. -}
+       , '("id", Text)
+       {- - The ID of the Service. -}
+       , '("name", Text)
+       {- – Name of this service. -}
+       , '("papertrail", Text)
+       {- – Set of Papertrail configurations. See above for details. -}
+       , '("response_object", Text)
+       {- - Set of Response Object configurations. See above for details. -}
+       , '("s3logging", Text)
+       {- – Set of S3 Logging configurations. See above for details. -}
+       , '("vcl", Text)
+       {- – Set of custom VCL configurations. See above for details. -}
        ]
 
 $(TH.makeResource

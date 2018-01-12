@@ -44,11 +44,11 @@ InfluxDB server.
 -}
 data ContinuousQueryResource = ContinuousQueryResource
     { _database :: !(Attr Text)
-      {- ^ (Required) The database for the continuous_query. This must be an existing influxdb database. -}
+    {- ^ (Required) The database for the continuous_query. This must be an existing influxdb database. -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
+    {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
     , _query    :: !(Attr Text)
-      {- ^ (Required) The query for the continuous_query. -}
+    {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -62,7 +62,7 @@ The database resource allows a database to be created on an InfluxDB server.
 -}
 data DatabaseResource = DatabaseResource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
+    {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource
@@ -76,18 +76,18 @@ The user resource allows a user to be created on an InfluxDB server.
 -}
 data UserResource = UserResource
     { _admin    :: !(Attr Text)
-      {- ^ (Optional) Mark the user as admin. -}
+    {- ^ (Optional) Mark the user as admin. -}
     , _grant    :: !(Attr Text)
-      {- ^ (Optional) A list of grants for non-admin users -}
+    {- ^ (Optional) A list of grants for non-admin users -}
     , _name     :: !(Attr Text)
-      {- ^ (Required) The name for the user. -}
+    {- ^ (Required) The name for the user. -}
     , _password :: !(Attr Text)
-      {- ^ (Required) The password for the user. -}
+    {- ^ (Required) The password for the user. -}
     } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("admin", Text)
-         {- - (Bool) indication if the user is an admin or not. -}
+       {- - (Bool) indication if the user is an admin or not. -}
        ]
 
 $(TH.makeResource

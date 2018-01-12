@@ -49,11 +49,11 @@ to manage any job within Nomad.
 -}
 data JobResource = JobResource
     { _deregister_on_destroy   :: !(Attr Text)
-      {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
+    {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
     , _deregister_on_id_change :: !(Attr Text)
-      {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
+    {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
     , _jobspec                 :: !(Attr Text)
-      {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
+    {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

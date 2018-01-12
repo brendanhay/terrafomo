@@ -43,11 +43,11 @@ Manages a Virtual Data Center on ProfitBricks
 -}
 data DatacenterResource = DatacenterResource
     { _description :: !(Attr Text)
-      {- ^ (Optional)[string] Description for the data center. -}
+    {- ^ (Optional)[string] Description for the data center. -}
     , _location    :: !(Attr Text)
-      {- ^ (Required)[string] The physical location where the data center will be created. -}
+    {- ^ (Required)[string] The physical location where the data center will be created. -}
     , _name        :: !(Attr Text)
-      {- ^ (Required)[string] The name of the Virtual Data Center. -}
+    {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Generic)
 
 $(TH.makeResource

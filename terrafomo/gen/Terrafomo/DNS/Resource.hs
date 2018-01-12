@@ -42,24 +42,24 @@ Creates a A type DNS record set.
 -}
 data ARecordSetResource = ARecordSetResource
     { _addresses :: !(Attr Text)
-      {- ^ (Required) The IPv4 addresses this record set will point to. -}
+    {- ^ (Required) The IPv4 addresses this record set will point to. -}
     , _name      :: !(Attr Text)
-      {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
+    {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl       :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
+    {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone      :: !(Attr Text)
-      {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
+    {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
 type instance Computed ARecordSetResource
     = '[ '("addresses", Text)
-         {- - See Argument Reference above. -}
-      , '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("ttl", Text)
-         {- - See Argument Reference above. -}
-      , '("zone", Text)
-         {- - See Argument Reference above. -}
+       {- - See Argument Reference above. -}
+       , '("name", Text)
+       {- - See Argument Reference above. -}
+       , '("ttl", Text)
+       {- - See Argument Reference above. -}
+       , '("zone", Text)
+       {- - See Argument Reference above. -}
        ]
 
 $(TH.makeResource
@@ -73,24 +73,24 @@ Creates a AAAA type DNS record set.
 -}
 data AaaaRecordSetResource = AaaaRecordSetResource
     { _addresses :: !(Attr Text)
-      {- ^ (Required) The IPv6 addresses this record set will point to. -}
+    {- ^ (Required) The IPv6 addresses this record set will point to. -}
     , _name      :: !(Attr Text)
-      {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
+    {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl       :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
+    {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone      :: !(Attr Text)
-      {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
+    {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
 type instance Computed AaaaRecordSetResource
     = '[ '("addresses", Text)
-         {- - See Argument Reference above. -}
-      , '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("ttl", Text)
-         {- - See Argument Reference above. -}
-      , '("zone", Text)
-         {- - See Argument Reference above. -}
+       {- - See Argument Reference above. -}
+       , '("name", Text)
+       {- - See Argument Reference above. -}
+       , '("ttl", Text)
+       {- - See Argument Reference above. -}
+       , '("zone", Text)
+       {- - See Argument Reference above. -}
        ]
 
 $(TH.makeResource
@@ -104,24 +104,24 @@ Creates a CNAME type DNS record.
 -}
 data CnameRecordResource = CnameRecordResource
     { _cname :: !(Attr Text)
-      {- ^ (Required) The canonical name this record will point to. -}
+    {- ^ (Required) The canonical name this record will point to. -}
     , _name  :: !(Attr Text)
-      {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
+    {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl   :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
+    {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone  :: !(Attr Text)
-      {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
+    {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
 type instance Computed CnameRecordResource
     = '[ '("cname", Text)
-         {- - See Argument Reference above. -}
-      , '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("ttl", Text)
-         {- - See Argument Reference above. -}
-      , '("zone", Text)
-         {- - See Argument Reference above. -}
+       {- - See Argument Reference above. -}
+       , '("name", Text)
+       {- - See Argument Reference above. -}
+       , '("ttl", Text)
+       {- - See Argument Reference above. -}
+       , '("zone", Text)
+       {- - See Argument Reference above. -}
        ]
 
 $(TH.makeResource
@@ -129,30 +129,61 @@ $(TH.makeResource
     ''Qual.Provider
     ''CnameRecordResource)
 
+{- | The @dns_ns_record_set@ DNS resource.
+
+Creates a NS type DNS record set.
+-}
+data NsRecordSetResource = NsRecordSetResource
+    { _name        :: !(Attr Text)
+    {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
+    , _nameservers :: !(Attr Text)
+    {- ^ (Required) The nameservers this record set will point to. -}
+    , _ttl         :: !(Attr Text)
+    {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
+    , _zone        :: !(Attr Text)
+    {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
+    } deriving (Show, Generic)
+
+type instance Computed NsRecordSetResource
+    = '[ '("name", Text)
+       {- - See Argument Reference above. -}
+       , '("nameservers", Text)
+       {- - See Argument Reference above. -}
+       , '("ttl", Text)
+       {- - See Argument Reference above. -}
+       , '("zone", Text)
+       {- - See Argument Reference above. -}
+       ]
+
+$(TH.makeResource
+    "dns_ns_record_set"
+    ''Qual.Provider
+    ''NsRecordSetResource)
+
 {- | The @dns_ptr_record@ DNS resource.
 
 Creates a PTR type DNS record.
 -}
 data PtrRecordResource = PtrRecordResource
     { _name :: !(Attr Text)
-      {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
+    {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ptr  :: !(Attr Text)
-      {- ^ (Required) The canonical name this record will point to. -}
+    {- ^ (Required) The canonical name this record will point to. -}
     , _ttl  :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
+    {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone :: !(Attr Text)
-      {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
+    {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
 type instance Computed PtrRecordResource
     = '[ '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("ptr", Text)
-         {- - See Argument Reference above. -}
-      , '("ttl", Text)
-         {- - See Argument Reference above. -}
-      , '("zone", Text)
-         {- - See Argument Reference above. -}
+       {- - See Argument Reference above. -}
+       , '("ptr", Text)
+       {- - See Argument Reference above. -}
+       , '("ttl", Text)
+       {- - See Argument Reference above. -}
+       , '("zone", Text)
+       {- - See Argument Reference above. -}
        ]
 
 $(TH.makeResource

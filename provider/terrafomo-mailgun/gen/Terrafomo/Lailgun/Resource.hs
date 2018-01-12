@@ -44,30 +44,30 @@ applications on Mailgun.
 -}
 data DomainResource = DomainResource
     { _name          :: !(Attr Text)
-      {- ^ (Required) The domain to add to Mailgun -}
+    {- ^ (Required) The domain to add to Mailgun -}
     , _smtp_password :: !(Attr Text)
-      {- ^ (Required) Password for SMTP authentication -}
+    {- ^ (Required) Password for SMTP authentication -}
     , _spam_action   :: !(Attr Text)
-      {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
+    {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
     , _wildcard      :: !(Attr Text)
-      {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
+    {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
     } deriving (Show, Generic)
 
 type instance Computed DomainResource
     = '[ '("name", Text)
-         {- - The name of the domain. -}
-      , '("receiving_records", Text)
-         {- - A list of DNS records for receiving validation. -}
-      , '("sending_records", Text)
-         {- - A list of DNS records for sending validation. -}
-      , '("smtp_login", Text)
-         {- - The login email for the SMTP server. -}
-      , '("smtp_password", Text)
-         {- - The password to the SMTP server. -}
-      , '("spam_action", Text)
-         {- - The spam filtering setting. -}
-      , '("wildcard", Text)
-         {- - Whether or not the domain will accept email for sub-domains. -}
+       {- - The name of the domain. -}
+       , '("receiving_records", Text)
+       {- - A list of DNS records for receiving validation. -}
+       , '("sending_records", Text)
+       {- - A list of DNS records for sending validation. -}
+       , '("smtp_login", Text)
+       {- - The login email for the SMTP server. -}
+       , '("smtp_password", Text)
+       {- - The password to the SMTP server. -}
+       , '("spam_action", Text)
+       {- - The spam filtering setting. -}
+       , '("wildcard", Text)
+       {- - Whether or not the domain will accept email for sub-domains. -}
        ]
 
 $(TH.makeResource

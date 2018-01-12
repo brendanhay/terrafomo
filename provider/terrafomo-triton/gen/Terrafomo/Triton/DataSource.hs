@@ -44,21 +44,21 @@ based on a variety of different parameters.
 -}
 data ImageDataSource = ImageDataSource
     { _most_recent :: !(Attr Text)
-      {- ^ - (bool) If more than one result is returned, use the most recent Image. -}
+    {- ^ - (bool) If more than one result is returned, use the most recent Image. -}
     , _name        :: !(Attr Text)
-      {- ^ - (string) The name of the image -}
+    {- ^ - (string) The name of the image -}
     , _os          :: !(Attr Text)
-      {- ^ - (string) The underlying operating system for the image -}
+    {- ^ - (string) The underlying operating system for the image -}
     , _owner       :: !(Attr Text)
-      {- ^ - (string) The UUID of the account which owns the image -}
+    {- ^ - (string) The UUID of the account which owns the image -}
     , _public      :: !(Attr Text)
-      {- ^ - (boolean) Whether to return public as well as private images -}
+    {- ^ - (boolean) Whether to return public as well as private images -}
     , _state       :: !(Attr Text)
-      {- ^ - (string) The state of the image. By default, only @active@ images are shown. Must be one of: @active@ , @unactivated@ , @disabled@ , @creating@ , @failed@ or @all@ , though the default is sufficient in almost every case. -}
+    {- ^ - (string) The state of the image. By default, only @active@ images are shown. Must be one of: @active@ , @unactivated@ , @disabled@ , @creating@ , @failed@ or @all@ , though the default is sufficient in almost every case. -}
     , _type'       :: !(Attr Text)
-      {- ^ - (string) The image type. Must be one of: @zone-dataset@ , @lx-dataset@ , @zvol@ , @docker@ or @other@ . -}
+    {- ^ - (string) The image type. Must be one of: @zone-dataset@ , @lx-dataset@ , @zvol@ , @docker@ or @other@ . -}
     , _version     :: !(Attr Text)
-      {- ^ - (string) The version for the image -}
+    {- ^ - (string) The version for the image -}
     } deriving (Show, Generic)
 
 $(TH.makeDataSource
@@ -73,12 +73,12 @@ network ID based on the name of the network.
 -}
 data NetworkDataSource = NetworkDataSource
     { _name :: !(Attr Text)
-      {- ^ - (string) The name of the network. -}
+    {- ^ - (string) The name of the network. -}
     } deriving (Show, Generic)
 
 type instance Computed NetworkDataSource
     = '[ '("id", Text)
-         {- - (string) The ID of the network. -}
+       {- - (string) The ID of the network. -}
        ]
 
 $(TH.makeDataSource

@@ -35,6 +35,7 @@ data Nomad = Nomad
     , _cert_file :: !Text
     , _key_file  :: !Text
     , _region    :: !Text
+    , _secret_id :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Nomad
@@ -85,3 +86,12 @@ region :: Functor f => (Text -> f Text) -> Nomad -> f Nomad
 region f s =
     (\x -> s { _region = x })
         <$> f (_region s)
+
+{- |  @(string: "")@ - The Secret ID of an ACL token to make requests with, for
+ACL-enabled clusters. This can also be specified via the @NOMAD_TOKEN@
+environment variable.
+-}
+secretId :: Functor f => (Text -> f Text) -> Nomad -> f Nomad
+secretId f s =
+    (\x -> s { _secret_id = x })
+        <$> f (_secret_id s)
