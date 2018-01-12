@@ -16,6 +16,21 @@ library:
     - src
     - gen
 
+  exposed-modules:
+    - Terrafomo.Format
+    - Terrafomo.Monad
+    - Terrafomo.Prelude
+    - Terrafomo.Tutorial
+
+    - Terrafomo.Syntax.Attribute
+    - Terrafomo.Syntax.HCL
+    - Terrafomo.Syntax.Name
+    - Terrafomo.Syntax.Output
+    - Terrafomo.Syntax.Provider
+    - Terrafomo.Syntax.Resource
+    - Terrafomo.Syntax.Serialize
+    - Terrafomo.Syntax.TH
+
   dependencies:
     - aeson
     - base       >= 4.9 && < 5
@@ -23,7 +38,6 @@ library:
     - formatting
     - hashable
     - lens
-    - megaparsec >= 6.2
     - mtl
     - random
     - template-haskell

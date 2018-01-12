@@ -4,7 +4,7 @@
 
 module Terrafomo.Syntax.HCL where
 
-import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.List.NonEmpty (NonEmpty)
 import Data.Monoid        ((<>))
 import Data.String        (IsString (fromString))
 import Data.Text          (Text)
@@ -96,3 +96,4 @@ prettyBool :: Bool -> Doc
 prettyBool = \case
     True  -> "true"
     False -> "false"
+

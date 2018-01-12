@@ -12,7 +12,7 @@ import qualified Data.Char                  as Char
 import qualified Language.Haskell.TH        as TH
 import qualified Terrafomo.Syntax.Attribute as Attribute
 import qualified Terrafomo.Syntax.Resource  as Resource
-import qualified Terrafomo.Syntax.Serialize as HCL
+import qualified Terrafomo.Syntax.Serialize as Serialize
 
 makeDataSource
     :: String
@@ -73,15 +73,12 @@ makeResource original provider mk datatype = do
 
     mappend fields . mappend classes <$> sequenceA
         [
-        -- type instance Computed ...
-        -- Currently written by hand.
-
         -- instance ToValue ...
-          let class_ = TH.conT ''HCL.ToValue `TH.appT` TH.conT datatype
+          let class_ = TH.conT ''Serialize.ToValue `TH.appT` TH.conT datatype
 
            in TH.instanceD (TH.cxt []) class_
-                  [ TH.funD 'HCL.toValue
-                      [ TH.clause [] (TH.normalB (TH.varE 'HCL.genericToValue)) []
+                  [ TH.funD 'Serialize.toValue
+                      [ TH.clause [] (TH.normalB (TH.varE 'Serialize.genericToValue)) []
                       ]
                   ]
 

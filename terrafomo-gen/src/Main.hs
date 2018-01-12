@@ -19,26 +19,26 @@ import System.FilePath ((<.>), (</>))
 
 import Terrafomo.Gen.Parser   (Parser)
 import Terrafomo.Gen.Provider
+import Terrafomo.Gen.Render   (Templates (Templates))
 import Terrafomo.Gen.Schema
-import Terrafomo.Gen.Template (Templates (Templates))
 
-import qualified Control.Error          as Error
-import qualified Data.Foldable          as Fold
-import qualified Data.Map.Strict        as Map
-import qualified Data.Text              as Text
-import qualified Data.Text.IO           as Text
-import qualified Data.Text.Lazy         as LText
-import qualified Data.Text.Lazy.IO      as LText
-import qualified Data.Yaml              as YAML
-import qualified Options.Applicative    as Option
-import qualified System.Directory       as Dir
-import qualified System.Exit            as Exit
-import qualified System.FilePath        as Path
-import qualified System.IO              as IO
-import qualified System.Process         as Process
-import qualified Terrafomo.Gen.Parser   as Parser
-import qualified Terrafomo.Gen.Template as Template
-import qualified Text.EDE               as EDE
+import qualified Control.Error        as Error
+import qualified Data.Foldable        as Fold
+import qualified Data.Map.Strict      as Map
+import qualified Data.Text            as Text
+import qualified Data.Text.IO         as Text
+import qualified Data.Text.Lazy       as LText
+import qualified Data.Text.Lazy.IO    as LText
+import qualified Data.Yaml            as YAML
+import qualified Options.Applicative  as Option
+import qualified System.Directory     as Dir
+import qualified System.Exit          as Exit
+import qualified System.FilePath      as Path
+import qualified System.IO            as IO
+import qualified System.Process       as Process
+import qualified Terrafomo.Gen.Parser as Parser
+import qualified Terrafomo.Gen.Render as Render
+import qualified Text.EDE             as EDE
 
 -- TODO:
 -- * Switch to using Megaparsec.Char to parse Required/Optional and add Haddockisms.
@@ -240,7 +240,7 @@ renderProvider tmpls p@Provider{providerPackage} schema = do
 
     when (providerDatatype p) $
         Fold.for_ schema $
-            hoistEither . Template.renderProvider tmpls p
+            hoistEither . Render.provider tmpls p
                 >=> writeNS dir
 
     pure dir
@@ -254,7 +254,7 @@ renderPackage tmpls dir p = do
     let packageFile = dir </> "package" <.> "yaml"
 
     echo ("Writing " ++ packageFile)
-    hoistEither (Template.renderPackage tmpls p)
+    hoistEither (Render.package tmpls p)
         >>= scriptIO . LText.writeFile packageFile
 
 renderSchemas
@@ -264,16 +264,18 @@ renderSchemas
     -> SchemaType
     -> [Schema]
     -> Script ()
-renderSchemas tmpls dir p typ xs = do
-    let writeModule = writeNS dir
-        modules     = moduleNS p typ xs
+renderSchemas tmpls dir p typ xs
+    | null xs   = pure ()
+    | otherwise = do
+        let writeModule = writeNS dir
+            modules     = moduleNS p typ xs
 
-    hoistEither (Template.renderSchemas tmpls p typ modules)
-        >>= Fold.traverse_ writeModule . Map.toList
+        hoistEither (Render.schemas tmpls p typ modules)
+            >>= Fold.traverse_ writeModule . Map.toList
 
-    unless (Fold.length modules <= 1) $
-        hoistEither (Template.renderContents tmpls p typ modules)
-            >>= writeModule
+        unless (Fold.length modules <= 1) $
+            hoistEither (Render.contents tmpls p typ modules)
+                >>= writeModule
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do

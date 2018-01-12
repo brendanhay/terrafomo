@@ -6,7 +6,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections     #-}
 
-module Terrafomo.Gen.Template where
+module Terrafomo.Gen.Render where
 
 import Data.Aeson         ((.=))
 import Data.Bifunctor     (first, second)
@@ -33,11 +33,11 @@ data Templates a = Templates
     , dataSourceTemplate :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
-renderPackage
+package
     :: Templates EDE.Template
     -> Provider
     -> Either Text LText.Text
-renderPackage tmpls p =
+package tmpls p =
     render (packageTemplate tmpls)
         [ "provider" .=   p
         , "package"  .= providerPackage p
@@ -50,12 +50,12 @@ renderPackage tmpls p =
             ]
         ]
 
-renderProvider
+provider
     :: Templates EDE.Template
     -> Provider
     -> Schema
     -> Either Text (NS, LText.Text)
-renderProvider tmpls p x =
+provider tmpls p x =
     let ns = providerNS p
      in second (ns,) $ render (providerTemplate tmpls)
         [ "namespace" .= ns
@@ -64,26 +64,26 @@ renderProvider tmpls p x =
         , "reexports" .= [typesNS p]
         ]
 
-renderContents
+contents
     :: Templates EDE.Template
     -> Provider
     -> SchemaType
     -> Map NS a
     -> Either Text (NS, LText.Text)
-renderContents tmpls p typ xs =
+contents tmpls p typ xs =
     let ns = schemaNS p typ
      in second (ns,) $ render (contentsTemplate tmpls)
         [ "namespace" .= ns
         , "reexports" .= Map.keys xs
         ]
 
-renderSchemas
+schemas
     :: Templates EDE.Template
     -> Provider
     -> SchemaType
     -> Map NS [Schema]
     -> Either Text (Map NS LText.Text)
-renderSchemas tmpls p typ = Map.traverseWithKey go
+schemas tmpls p typ = Map.traverseWithKey go
   where
     go ns xs =
         render (getTypeTemplate typ tmpls)
@@ -91,7 +91,7 @@ renderSchemas tmpls p typ = Map.traverseWithKey go
             , "provider"  .= p
             , "schemas"   .= createMap (getTypeName typ) xs
             , "imports"   .=
-                (NS ("Terrafomo" :| ["Provider"])
+                (NS ("Terrafomo" :| ["Syntax", "Provider"])
                     : [providerNS p | providerDatatype p])
             ]
 

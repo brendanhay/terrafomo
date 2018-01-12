@@ -1,13 +1,12 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Terrafomo.Syntax.Parser where
+module Terrafomo.Gen.HCL where
 
 import Control.Applicative (many, some, (<|>))
 
 import Data.Bifunctor     (first)
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Monoid        ((<>))
 import Data.Text          (Text)
 import Data.Void          (Void)
 

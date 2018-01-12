@@ -45,9 +45,9 @@ instance Semigroup Schema where
         , schemaAbout      = schemaAbout    parsed
         , schemaExamples   = schemaExamples parsed
         , schemaArguments  =
-            on (Map.unionWith mappend) schemaArguments  parsed saved
+            on (Map.unionWith (<>)) schemaArguments  parsed saved
         , schemaAttributes =
-            on (Map.unionWith mappend) schemaAttributes parsed saved
+            on (Map.unionWith (<>)) schemaAttributes parsed saved
           -- FIXME: make sure to delete config old keys.
         }
 
@@ -64,13 +64,11 @@ data Arg = Arg
     , argType     :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
-instance Monoid Arg where
-    mempty = Arg mempty mempty mempty
-
-    mappend parsed saved = Arg
-        { argHelp      = on mappend argHelp     parsed saved
-        , argRequired  = on mappend argRequired parsed saved
-        , argType      = on mappend argType     parsed saved
+instance Semigroup Arg where
+    (<>) parsed saved = Arg
+        { argHelp      = on (<>) argHelp     parsed saved
+        , argRequired  = on (<>) argRequired parsed saved
+        , argType      = on (<>) argType     parsed saved
         }
 
 instance ToJSON Arg where
@@ -85,12 +83,10 @@ data Attr = Attr
     , attrType :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
-instance Monoid Attr where
-    mempty = Attr mempty mempty
-
-    mappend parsed saved = Attr
-        { attrHelp = on mappend attrHelp parsed saved
-        , attrType = on mappend attrType parsed saved
+instance Semigroup Attr where
+    (<>) parsed saved = Attr
+        { attrHelp = on (<>) attrHelp parsed saved
+        , attrType = on (<>) attrType parsed saved
         }
 
 instance ToJSON Attr where

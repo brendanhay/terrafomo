@@ -1,4 +1,4 @@
-module Terrafomo.Provider where
+module Terrafomo.Syntax.Provider where
 
 data Provider = Provider
 

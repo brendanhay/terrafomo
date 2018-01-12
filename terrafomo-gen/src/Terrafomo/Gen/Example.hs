@@ -29,8 +29,8 @@ import qualified Data.Aeson                   as JSON
 import qualified Data.Char                    as Char
 import qualified Data.List                    as List
 import qualified Data.Text                    as Text
+import qualified Terrafomo.Gen.HCL            as HCL
 import qualified Terrafomo.Gen.JSON           as JSON
-import qualified Terrafomo.Syntax.Parser      as HCL
 import qualified Text.Megaparsec              as P
 import qualified Text.Megaparsec.Char         as P
 import qualified Text.PrettyPrint.Leijen.Text as PP
