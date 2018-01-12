@@ -1,0 +1,11 @@
+--- load_balancer_pool.html.markdown	2017-12-27 16:59:09.012184099 +0100
++++ load_balancer_pool.html.markdown.new	2017-12-27 16:59:28.642315335 +0100
+@@ -54,7 +54,7 @@
+   "roundRobin" (default) or "leastConnection".
+ * `persistence` - (Optional, string) The configured persistence
+   method. Either "standard" (default) or "sticky".
+-* nodes - (Optional) See [Nodes](#nodes) below for details.
++* `nodes` - (Optional) See [Nodes](#nodes) below for details.
+ 
+ 
+ <a id="nodes"></a>

@@ -9,7 +9,7 @@ module Terrafomo.Gen.Schema where
 import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:), (.:?))
 import Data.Function   (on)
 import Data.Map.Strict (Map)
-import Data.Monoid     (First, Last (Last))
+import Data.Monoid     (Last (..))
 import Data.Semigroup  (Semigroup ((<>)))
 import Data.Text       (Text)
 
@@ -103,8 +103,8 @@ instance FromJSON Arg where
 
 -- > * `name` - documentation
 data Attr = Attr
-    { attrName :: !(First Text)
-    , attrHelp :: !(First Text)
+    { attrName :: !(Last Text)
+    , attrHelp :: !(Last Text)
     , attrType :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 

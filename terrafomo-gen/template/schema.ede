@@ -48,13 +48,13 @@ import qualified {{ import.value }} as TF
 @
 {% endfor %}
 -}
-data {{ schema.key }} = {{ schema.key }}
+data {{ schema.key }} = {{ schema.key }} {
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
   {% for attr in schema.value.attributes %}
-    , {{ attr.key }} :: !(TF.Attribute {{ attr.value.type }})
+    {% if (schema.value.arguments | empty) && attr.first %}  {% else %}, {% endif %}{{ attr.key }} :: !(TF.Attribute {{ attr.value.type }})
     {- ^ {{ attr.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq)
@@ -63,12 +63,12 @@ data {{ schema.key }} = {{ schema.key }}
 {{ constructor }} :: TF.{{ type }} TF.{{ provider.name }} {{ schema.key }}
 {{ constructor }} =
     TF.new{{ type }} "{{ original }}" $
-        {{ schema.key }}
+        {{ schema.key }} {
           {% for arg in schema.value.arguments %}
-            {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} = TF.Absent
+            {% if !arg.first %}, {% endif %}{{ arg.key }} = TF.Absent
           {% endfor %}
           {% for attr in schema.value.attributes %}
-            , {{ attr.key }} = TF.Computed "{{ attr.value.name }}"
+            {% if (schema.value.arguments | empty) && attr.first %}  {% else %}, {% endif %}{{ attr.key }} = TF.Computed "{{ attr.value.name }}"
           {% endfor %}
             }
 {% endlet %}

@@ -112,8 +112,12 @@ schemaParser = do
         schemaDeprecated = False
 
     -- skip any non-headers
-    P.skipManyTill node $
-        P.try ( P.lookAhead (void argHeader <|> void attrHeader <|> P.eof)
+    P.skipManyTill node
+        . P.try
+        $ P.lookAhead
+              ( P.try (void argHeader)
+            <|> void attrHeader
+            <|> P.eof
               )
 
     -- argument name/help/required
@@ -135,13 +139,15 @@ schemaParser = do
 
 argHeader :: Parser ()
 argHeader =
-    h2 >>> void (string "Argument Reference") <?> "Argument Reference"
+    heading
+        >>> void (string "Argument Reference") <?> "Argument Reference"
 
 attrHeader :: Parser ()
 attrHeader =
-    h2 >>> void ( P.try (string "Attributes Reference")
-              <|> string "Attribute Reference"
-                ) <?> "Attribute(s) Reference"
+    heading
+        >>> void ( P.try (string "Attributes Reference")
+               <|> string "Attribute Reference"
+                  ) <?> "Attribute(s) Reference"
 
 argItem :: Parser (Text, Arg)
 argItem = item >>> paragraph >>> argument
