@@ -6,12 +6,14 @@ arguments:
       Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g.
       @eu-central-1@ )
     type: Text
+    deprecated: false
   _services:
     required: true
     help: (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com),
       @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and
       @S3@ .
     type: Text
+    deprecated: false
 attributes:
   cidr_blocks:
     help: ! '- The lexically ordered list of CIDR blocks.'

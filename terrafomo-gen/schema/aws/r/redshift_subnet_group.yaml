@@ -4,19 +4,23 @@ arguments:
     required: true
     help: (Required) An array of VPC subnet IDs.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the Redshift Subnet group.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the Redshift Subnet group. Defaults to "Managed
       by Terraform".
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The Redshift Subnet group ID.'

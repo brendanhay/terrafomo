@@ -5,18 +5,22 @@ arguments:
     help: (Optional) Arbitrary map of values that, when changed, will trigger a new
       id to be generated. See <../index.html> for more information.
     type: Text
+    deprecated: false
   _max:
     required: true
     help: ! '- (int) The maximum inclusive value of the range.'
     type: Text
+    deprecated: false
   _min:
     required: true
     help: ! '- (int) The minimum inclusive value of the range.'
     type: Text
+    deprecated: false
   _seed:
     required: false
     help: (Optional) A custom seed to always produce the same value.
     type: Text
+    deprecated: false
 attributes:
   result:
     help: ! '- (int) The random Integer result.'

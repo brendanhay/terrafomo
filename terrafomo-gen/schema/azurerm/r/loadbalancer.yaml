@@ -4,22 +4,27 @@ arguments:
     required: false
     help: (Optional) A frontend ip configuration block as documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the LoadBalancer.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the LoadBalancer.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   private_ip_address:
     help: ! '- The private IP address assigned to the load balancer, if any.'

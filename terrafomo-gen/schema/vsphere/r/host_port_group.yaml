@@ -4,16 +4,19 @@ arguments:
     required: true
     help: ! '- (String, required, forces new resource) The name of the port group.'
     type: Text
+    deprecated: false
   _virtual_switch_name:
     required: true
     help: ! '- (String, required, forces new resource) The name of the virtual switch
       to bind this port group to.'
     type: Text
+    deprecated: false
   _host_system_id:
     required: true
     help: ! '- (String, required, forces new resource) The managed object ID of the
       host to set the port group up on.'
     type: Text
+    deprecated: false
   _vlan_id:
     required: true
     help: ! '- (Integer, optional) The VLAN ID/trunk mode for this port group. An
@@ -21,6 +24,7 @@ arguments:
       and an ID of @4095@ enables trunk mode, allowing the guest to manage its own
       tagging. Default: @0@ .'
     type: Text
+    deprecated: false
 attributes: {}
 about: The @vsphere_host_port_group@ resource can be used to manage vSphere standard
   port groups on an ESXi host. These port groups are connected to standard virtual

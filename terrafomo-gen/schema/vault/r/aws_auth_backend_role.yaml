@@ -12,12 +12,14 @@ arguments:
       @true@ . Once set to @true@ , this cannot be changed to @false@ --the role must
       be deleted and recreated, with the value set to @true@ .
     type: Text
+    deprecated: false
   _inferred_aws_region:
     required: false
     help: (Optional) When @inferred_entity_type@ is set, this is the region to search
       for the inferred entities. Required if @inferred_entity_type@ is set. This only
       applies when @auth_type@ is set to @iam@ .
     type: Text
+    deprecated: false
   _bound_vpc_id:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -25,35 +27,42 @@ arguments:
       value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@
       must be set to @ec2_instance@ to use this constraint.
     type: Text
+    deprecated: false
   _disallow_reauthentication:
     required: false
     help: (Optional) IF set to @true@ , only allows a single token to be granted per
       instance ID. This can only be set when @auth_type@ is set to @ec2@ .
     type: Text
+    deprecated: false
   _max_ttl:
     required: false
     help: (Optional) The maximum allowed lifetime of tokens issued using this role,
       provided as a number of minutes.
     type: Text
+    deprecated: false
   _auth_type:
     required: false
     help: (Optional) The auth type permitted for this role. Valid choices are @ec2@
       and @iam@ . Defaults to @iam@ .
     type: Text
+    deprecated: false
   _allow_instance_migration:
     required: false
     help: (Optional) If set to @true@ , allows migration of the underlying instance
       where the client resides.
     type: Text
+    deprecated: false
   _role:
     required: true
     help: (Required) The name of the role.
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: (Optional) The TTL period of tokens issued using this role, provided as
       a number of minutes.
     type: Text
+    deprecated: false
   _bound_iam_role_arn:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -61,6 +70,7 @@ arguments:
       field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set
       to @ec2_instance@ to use this constraint.
     type: Text
+    deprecated: false
   _inferred_entity_type:
     required: false
     help: (Optional) If set, instructs Vault to turn on inferencing. The only valid
@@ -68,6 +78,7 @@ arguments:
       from an EC2 instance in an IAM instance profile. This only applies when @auth_type@
       is set to @iam@ .
     type: Text
+    deprecated: false
   _bound_iam_instance_profile_arn:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -77,6 +88,7 @@ arguments:
       be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use
       this constraint.
     type: Text
+    deprecated: false
   _bound_region:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -84,6 +96,7 @@ arguments:
       one specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@
       must be set to @ec2_instance@ to use this constraint.
     type: Text
+    deprecated: false
   _period:
     required: false
     help: (Optional) If set, indicates that the token generated using this role should
@@ -92,6 +105,7 @@ arguments:
       The maximum allowed lifetime of token issued using this role. Specified as a
       number of minutes.
     type: Text
+    deprecated: false
   _bound_ami_id:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -99,12 +113,14 @@ arguments:
       @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@
       to use this constraint.
     type: Text
+    deprecated: false
   _bound_iam_principal_arn:
     required: false
     help: (Optional) If set, defines the IAM principal that must be authenticated
       when @auth_type@ is set to @iam@ . Wildcards are supported at the end of the
       ARN.
     type: Text
+    deprecated: false
   _bound_subnet_id:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -112,6 +128,7 @@ arguments:
       the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@
       must be set to @ec2_instance@ to use this constraint.
     type: Text
+    deprecated: false
   _role_tag:
     required: false
     help: (Optional) If set, enable role tags for this role. The value set for this
@@ -119,6 +136,7 @@ arguments:
       set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use
       this constraint.
     type: Text
+    deprecated: false
   _bound_account_id:
     required: false
     help: (Optional) If set, defines a constraint on the EC2 instances that can perform
@@ -126,11 +144,13 @@ arguments:
       field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set
       to @ec2_instance@ to use this constraint.
     type: Text
+    deprecated: false
   _policies:
     required: false
     help: (Optional) An array of strings specifying the policies to be set on tokens
       issued using this role.
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages an AWS auth backend role in a Vault server. Roles constrain the instances
   or principals that can perform the login operation against the backend. See the

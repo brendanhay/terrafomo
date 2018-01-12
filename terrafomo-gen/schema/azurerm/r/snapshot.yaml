@@ -5,21 +5,25 @@ arguments:
     help: (Required) Specifies the name of the Snapshot resource. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _create_option:
     required: true
     help: (Required) Indicates how the snapshot is to be created. Possible values
       are @Copy@ or @Import@ . Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the Snapshot.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   disk_size_gb:
     help: ! '- The Size of the Snapshotted Disk in GB.'

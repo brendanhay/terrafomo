@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the application in New Relic.
     type: Text
+    deprecated: false
 attributes:
   instance_ids:
     help: ! '- A list of instance IDs associated with the application.'

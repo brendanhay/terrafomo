@@ -4,6 +4,7 @@ arguments:
     required: true
     help: is the name of the Virtual NIC.
     type: Text
+    deprecated: false
 attributes:
   transit_flag:
     help: is @true@ if the Virtual NIC is of the type @transit@ .

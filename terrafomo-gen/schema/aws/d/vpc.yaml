@@ -4,33 +4,40 @@ arguments:
     required: false
     help: (Optional) Custom filter block as described below.
     type: Text
+    deprecated: false
   _id:
     required: false
     help: (Optional) The id of the specific VPC to retrieve.
     type: Text
+    deprecated: false
   _cidr_block:
     required: false
     help: (Optional) The cidr block of the desired VPC.
     type: Text
+    deprecated: false
   _state:
     required: false
     help: (Optional) The current state of the desired VPC. Can be either @"pending"@
       or @"available"@ .
     type: Text
+    deprecated: false
   _default':
     required: false
     help: (Optional) Boolean constraint on whether the desired VPC is the default
       VPC for the region.
     type: Text
+    deprecated: false
   _dhcp_options_id:
     required: false
     help: (Optional) The DHCP options id of the desired VPC.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired VPC.
     type: Text
+    deprecated: false
 attributes:
   instance_tenancy:
     help: ! '- The allowed tenancy of instances launched into the selected VPC. May

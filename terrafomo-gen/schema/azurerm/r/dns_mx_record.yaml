@@ -5,28 +5,34 @@ arguments:
     help: (Required) A list of values that make up the SRV record. Each @record@ block
       supports fields documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the DNS MX Record.
     type: Text
+    deprecated: false
   _ttl:
     required: true
     help: (Required) The Time To Live (TTL) of the DNS record.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) Specifies the resource group where the resource exists. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _zone_name:
     required: true
     help: (Required) Specifies the DNS Zone where the resource exists. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The DNS MX Record ID.'

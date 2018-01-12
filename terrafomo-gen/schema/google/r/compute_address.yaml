@@ -5,33 +5,39 @@ arguments:
     help: (Optional) The Region in which the created address should reside. If it
       is not provided, the provider region is used.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _subnetwork:
     required: false
     help: (Optional) The self link URI of the subnetwork in which to create the address.
       A subnetwork may only be specified for INTERNAL address types.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _address_type:
     required: false
     help: (Optional) The Address Type that should be configured. Specify INTERNAL
       to reserve an internal static IP address EXTERNAL to specify an external static
       IP address. Defaults to EXTERNAL if omitted.
     type: Text
+    deprecated: false
   _address:
     required: false
     help: (Optional) The IP address to reserve. An address may only be specified for
       INTERNAL address types. The IP address must be inside the specified subnetwork,
       if any.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

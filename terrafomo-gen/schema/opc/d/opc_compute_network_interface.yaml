@@ -4,14 +4,17 @@ arguments:
     required: true
     help: is the id of the instance.
     type: Text
+    deprecated: false
   _interface:
     required: true
     help: is the name of the attached interface. @eth0@ , @eth1@ , ... @eth9@ .
     type: Text
+    deprecated: false
   _instance_name:
     required: true
     help: is the name of the instance.
     type: Text
+    deprecated: false
 attributes:
   vnic_sets:
     help: ! '- The array of vNIC Sets the interface was added to.'

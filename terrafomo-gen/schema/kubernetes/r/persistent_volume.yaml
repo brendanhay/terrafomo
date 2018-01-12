@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '(Required) Standard persistent volume''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
     type: Text
+    deprecated: false
   _spec:
     required: true
     help: (Required) Spec of the persistent volume owned by the cluster. See below.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The resource provides a piece of networked storage in the cluster provisioned
   by an administrator. It is a resource in the cluster just like a node is a cluster

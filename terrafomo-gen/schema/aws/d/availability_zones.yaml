@@ -7,6 +7,7 @@ arguments:
       . By default the list includes a complete set of Availability Zones to which
       the underlying AWS account has access, regardless of their state.
     type: Text
+    deprecated: false
 attributes:
   names:
     help: ! '- A list of the Availability Zone names available to the account.'

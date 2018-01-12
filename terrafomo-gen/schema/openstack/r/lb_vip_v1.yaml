@@ -6,68 +6,81 @@ arguments:
       client is needed to create a VIP. If omitted, the @region@ argument of the provider
       is used. Changing this creates a new VIP.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the vip. Changing this updates the name of the existing
       vip.
     type: Text
+    deprecated: false
   _subnet_id:
     required: true
     help: (Required) The network on which to allocate the vip's address. A tenant
       can only create vips on networks authorized by policy (e.g. networks that belong
       to them or networks that are shared). Changing this creates a new vip.
     type: Text
+    deprecated: false
   _floating_ip:
     required: false
     help: (Optional) A Networking Floating IP that will be associated with the vip.
       The Floating IP must be provisioned already.
     type: Text
+    deprecated: false
   _protocol:
     required: true
     help: (Required)  The protocol - can be either 'TCP, 'HTTP', or HTTPS'. Changing
       this creates a new vip.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Human-readable description for the vip. Changing this updates
       the description of the existing vip.
     type: Text
+    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) The administrative state of the vip. Acceptable values are "true"
       and "false". Changing this value updates the state of the existing vip.
     type: Text
+    deprecated: false
   _persistence:
     required: false
     help: (Optional) Omit this field to prevent session persistence. The persistence
       object structure is documented below. Changing this updates the persistence
       of the existing vip.
     type: Text
+    deprecated: false
   _port:
     required: true
     help: (Required) The port on which to listen for client traffic. Changing this
       creates a new vip.
     type: Text
+    deprecated: false
   _pool_id:
     required: true
     help: (Required) The ID of the pool with which the vip is associated. Changing
       this updates the pool_id of the existing vip.
     type: Text
+    deprecated: false
   _address:
     required: false
     help: (Optional)  The IP address of the vip. Changing this creates a new vip.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the vip. Required if admin wants to create a vip
       member for another tenant. Changing this creates a new vip.
     type: Text
+    deprecated: false
   _conn_limit:
     required: false
     help: (Optional) The maximum number of connections allowed for the vip. Default
       is -1, meaning no limit. Changing this updates the conn_limit of the existing
       vip.
     type: Text
+    deprecated: false
 attributes:
   admin_state_up:
     help: ! '- See Argument Reference above.'

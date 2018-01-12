@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The VPC ID to create in.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the Egress Only Internet Gateway.'

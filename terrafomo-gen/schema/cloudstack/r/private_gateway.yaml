@@ -5,38 +5,46 @@ arguments:
     help: (Required) the gateway of the Private gateway. Changing this forces a new
       resource to be created.
     type: Text
+    deprecated: false
   _ip_address:
     required: true
     help: (Required) the IP address of the Private gateway. Changing this forces a
       new resource to be created.
     type: Text
+    deprecated: false
   _network_offering:
     required: false
     help: (Optional) The name or ID of the network offering to use for the private
       gateways network connection.
     type: Text
+    deprecated: false
   _netmask:
     required: true
     help: (Required) The netmask of the Private gateway. Changing this forces a new
       resource to be created.
     type: Text
+    deprecated: false
   _vlan:
     required: true
     help: (Required) The VLAN number (1-4095) the network will use.
     type: Text
+    deprecated: false
   _vpc_id:
     required: true
     help: (Required) The VPC ID in which to create this Private gateway. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _acl_id:
     required: true
     help: (Required) The ACL ID that should be attached to the network.
     type: Text
+    deprecated: false
   _physical_network_id:
     required: false
     help: (Optional) The ID of the physical network this private gateway belongs to.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the private gateway.'

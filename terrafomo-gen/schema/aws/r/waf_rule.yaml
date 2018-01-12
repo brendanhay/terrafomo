@@ -4,16 +4,19 @@ arguments:
     required: true
     help: (Required) The name or description of the rule.
     type: Text
+    deprecated: false
   _predicates:
     required: false
     help: (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet,
       or XssMatchSet objects to include in a rule.
     type: Text
+    deprecated: false
   _metric_name:
     required: true
     help: (Required) The name or description for the Amazon CloudWatch metric of this
       rule.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a WAF Rule Resource
 examples: []

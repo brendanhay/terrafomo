@@ -4,30 +4,37 @@ arguments:
     required: false
     help: (Optional) POSIX timestamp to start the downtime.
     type: Text
+    deprecated: false
   _recurrence:
     required: false
     help: (Optional) A dictionary to configure the downtime to be recurring.
     type: Text
+    deprecated: false
   _active:
     required: false
     help: (Optional) A flag indicating if the downtime is active now.
     type: Text
+    deprecated: false
   _message:
     required: false
     help: (Optional) A message to include with notifications for this downtime.
     type: Text
+    deprecated: false
   _disabled:
     required: false
     help: (Optional) A flag indicating if the downtime was disabled.
     type: Text
+    deprecated: false
   _scope:
     required: true
     help: (Required) A list of items to apply the downtime to, e.g. host:X
     type: Text
+    deprecated: false
   _end:
     required: false
     help: (Optional) POSIX timestamp to end the downtime.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- ID of the Datadog downtime'

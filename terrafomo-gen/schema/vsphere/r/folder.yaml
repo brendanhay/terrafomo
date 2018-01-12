@@ -8,6 +8,7 @@ arguments:
       (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@
       , the resulting path would be @/default-dc/vm/terraform-test-folder@ .
     type: Text
+    deprecated: false
 attributes: {}
 about: The @vsphere_folder@ resource can be used to manage vSphere inventory folders.
   The resource supports creating folders of the 5 major types - datacenter folders,

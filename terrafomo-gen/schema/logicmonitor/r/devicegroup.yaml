@@ -5,29 +5,35 @@ arguments:
     help: (Optional) Indicates whether alerting is disabled (true) or enabled (false)
       for this device group
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Name of device group
     type: Text
+    deprecated: false
   _applies_to:
     required: false
     help: (Optional) The Applies to custom query for this group. Setting this field
       will make this a dynamic group.
     type: Text
+    deprecated: false
   _parent_id:
     required: false
     help: (Optional) The id of the parent group for this device group (the root device
       group has an Id of 1)
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of device group
     type: Text
+    deprecated: false
   _properties:
     required: false
     help: (Optional) The properties associated with this device group. Any string
       value pair will work (see example).
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a LogicMonitor device group resource. This can be used to create and
   manage LogicMonitor device groups

@@ -4,18 +4,22 @@ arguments:
     required: true
     help: (Required) ID of the project where the searched block should be.
     type: Text
+    deprecated: false
   _address_family:
     required: true
     help: (Required) 4 or 6, depending on which block you are looking for.
     type: Text
+    deprecated: false
   _facility:
     required: true
     help: (Required) Facility of the searched block.
     type: Text
+    deprecated: false
   _public:
     required: true
     help: (Required) Whether to look for public or private block.
     type: Text
+    deprecated: false
 attributes:
   cidr_notation:
     help: ! '- CIDR notation of the looked up block.'

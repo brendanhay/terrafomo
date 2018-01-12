@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name for the allocated static IP
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the Lightsail static IP'

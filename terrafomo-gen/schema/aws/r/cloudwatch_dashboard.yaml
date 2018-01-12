@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the dashboard.
     type: Text
+    deprecated: false
   _dashboard_body:
     required: true
     help: (Required) The detailed information about the dashboard, including what
@@ -11,6 +12,7 @@ arguments:
       about the body structure in the <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html>
       .
     type: Text
+    deprecated: false
 attributes:
   dashboard_arn:
     help: ! '- The Amazon Resource Name (ARN) of the dashboard.'

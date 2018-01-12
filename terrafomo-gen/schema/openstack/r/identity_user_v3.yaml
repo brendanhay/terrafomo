@@ -4,62 +4,75 @@ arguments:
     required: false
     help: (Optional) The default project this user belongs to.
     type: Text
+    deprecated: false
   _ignore_change_password_upon_first_use:
     required: false
     help: (Optional) User will not have to change their password upon first use. Valid
       values are @true@ and @false@ .
     type: Text
+    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V3 Keystone client. If omitted,
       the @region@ argument of the provider is used. Changing this creates a new User.
     type: Text
+    deprecated: false
   _ignore_password_expiry:
     required: false
     help: (Optional) User's password will not expire. Valid values are @true@ and
       @false@ .
     type: Text
+    deprecated: false
   _enabled:
     required: false
     help: (Optional) Whether the user is enabled or disabled. Valid values are @true@
       and @false@ .
     type: Text
+    deprecated: false
   _extra:
     required: false
     help: (Optional) Free-form key/value pairs of extra information.
     type: Text
+    deprecated: false
   _domain_id:
     required: false
     help: (Optional) The domain this user belongs to.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the user.
     type: Text
+    deprecated: false
   _password:
     required: false
     help: (Optional) The password for the user.
     type: Text
+    deprecated: false
   _ignore_lockout_failure_attempts:
     required: false
     help: (Optional) User will not have a failure lockout placed on their account.
       Valid values are @true@ and @false@ .
     type: Text
+    deprecated: false
   _multi_factor_auth_enabled:
     required: false
     help: (Optional) Whether to enable multi-factor authentication. Valid values are
       @true@ and @false@ .
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the user.
     type: Text
+    deprecated: false
   _multi_factor_auth_rule:
     required: false
     help: (Optional) A multi-factor authentication rule. The structure is documented
       below. Please see the <https://docs.openstack.org/releasenotes/keystone/ocata.html>
       for more information on how to use mulit-factor rules.
     type: Text
+    deprecated: false
 attributes:
   domain_id:
     help: ! '- See Argument Reference above.'

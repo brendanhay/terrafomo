@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the Lightsail domain to manage
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the Lightsail domain'

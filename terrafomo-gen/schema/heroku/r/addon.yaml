@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The addon to add.
     type: Text
+    deprecated: false
   _config:
     required: false
     help: (Optional) Optional plan configuration.
     type: Text
+    deprecated: false
   _app:
     required: true
     help: (Required) The Heroku app to add to.
     type: Text
+    deprecated: false
 attributes:
   provider_id:
     help: ! '- The ID of the plan provider'

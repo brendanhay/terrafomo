@@ -5,16 +5,19 @@ arguments:
     help: (Optional) Arbitrary map of values that, when changed, will trigger a new
       id to be generated. See <../index.html> for more information.
     type: Text
+    deprecated: false
   _byte_length:
     required: true
     help: (Required) The number of random bytes to produce. The minimum value is 1,
       which produces eight bits of randomness.
     type: Text
+    deprecated: false
   _prefix:
     required: false
     help: (Optional) Arbitrary string to prefix the output value with. This string
       is supplied as-is, meaning it is not guaranteed to be URL-safe or base64 encoded.
     type: Text
+    deprecated: false
 attributes:
   b64_url:
     help: ! '- The generated id presented in base64, using the URL-friendly character

@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The name or description of the Size Constraint Set.
     type: Text
+    deprecated: false
   _size_constraints:
     required: false
     help: (Optional) Specifies the parts of web requests that you want to inspect
       the size of.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a WAF Size Constraint Set Resource
 examples: []

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The cluster identifier of the RDS cluster.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides information about a RDS cluster.
 examples: []

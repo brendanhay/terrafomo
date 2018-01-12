@@ -4,15 +4,18 @@ arguments:
     required: false
     help: (Optional) An optional mapping that makes up the encryption context.
     type: Text
+    deprecated: false
   _key_id:
     required: true
     help: (Required) Globally unique key ID for the customer master key.
     type: Text
+    deprecated: false
   _plaintext:
     required: true
     help: (Required) Data to be encrypted. Note that this may show up in logs, and
       it will be stored in the state file.
     type: Text
+    deprecated: false
 attributes:
   ciphertext_blob:
     help: ! '- Base64 encoded ciphertext'

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: is the name of the storage volume snapshot.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- Status of the snapshot.'

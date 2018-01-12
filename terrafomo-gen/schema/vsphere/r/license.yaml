@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The license key to add.
     type: Text
+    deprecated: false
   _labels:
     required: false
     help: (Optional) A map of key/value pairs to be attached as labels (tags) to the
       license key.
     type: Text
+    deprecated: false
 attributes:
   used:
     help: ! '- The number of units (example: CPUs) assigned to this license.'

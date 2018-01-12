@@ -4,29 +4,35 @@ arguments:
     required: false
     help: (Optional) A regex string of VPC name.
     type: Text
+    deprecated: false
   _cidr_block:
     required: false
     help: (Optional) Limit search to specific cidr block,like "172.16.0.0/12".
     type: Text
+    deprecated: false
   _is_default:
     required: false
     help: (Optional) Whether the VPC is the default VPC in the specified region -
       valid value is true or false.
     type: Text
+    deprecated: false
   _status:
     required: false
     help: (Optional) Limit search to specific status - valid value is "Pending" or
       "Available".
     type: Text
+    deprecated: false
   _vswitch_id:
     required: false
     help: (Optional) Retrieving VPC according to the specified VSwitch.
     type: Text
+    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save vpcs data source after running
       @terraform plan@ .
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- Status of the VPC.'

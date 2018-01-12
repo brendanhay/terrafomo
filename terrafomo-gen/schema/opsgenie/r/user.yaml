@@ -4,26 +4,31 @@ arguments:
     required: true
     help: (Required) The Full Name of the User.
     type: Text
+    deprecated: false
   _timezone:
     required: false
     help: (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids>
       for available timezones - Defaults to "America/New_York".
     type: Text
+    deprecated: false
   _role:
     required: true
     help: (Required) The Role assigned to the User. Either a built-in such as 'Owner',
       'Admin' or 'User' - or the name of a custom role.
     type: Text
+    deprecated: false
   _username:
     required: true
     help: (Required) The email address associated with this user. OpsGenie defines
       that this must not be longer than 100 characters.
     type: Text
+    deprecated: false
   _locale:
     required: false
     help: (Optional) Location information for the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-locales>
       for available locales - Defaults to "en_US".
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the OpsGenie User.'

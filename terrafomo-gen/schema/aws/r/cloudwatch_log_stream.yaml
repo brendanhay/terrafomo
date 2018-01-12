@@ -5,11 +5,13 @@ arguments:
     help: (Required) The name of the log stream. Must not be longer than 512 characters
       and must not contain @:@
     type: Text
+    deprecated: false
   _log_group_name:
     required: true
     help: (Required) The name of the log group under which the log stream is to be
       created.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the log stream.'

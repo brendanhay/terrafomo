@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) - The ARN of the policy you want to apply
     type: Text
+    deprecated: false
   _role:
     required: true
     help: (Required) - The role the policy should be applied to
     type: Text
+    deprecated: false
 attributes: {}
 about: Attaches a Managed IAM Policy to an IAM role
 examples: []

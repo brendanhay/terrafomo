@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) Specifies the name of the resource group.
     type: Text
+    deprecated: false
 attributes:
   location:
     help: ! '- The location of the resource group.'

@@ -6,19 +6,23 @@ arguments:
       or the container ID for an ECS container. If the target type is ip, specify
       an IP address.
     type: Text
+    deprecated: false
   _target_group_arn:
     required: true
     help: (Required) The ARN of the target group with which to register targets
     type: Text
+    deprecated: false
   _availability_zone:
     required: false
     help: (Optional) The Availability Zone where the IP address of the target is to
       be registered.
     type: Text
+    deprecated: false
   _port:
     required: false
     help: (Optional) The port on which targets receive traffic.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- A unique identifier for the attachment'

@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The folder's display name.
     type: Text
+    deprecated: false
   _parent:
     required: true
     help: (Required) The resource name of the parent Folder or Organization.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The resource name of the Folder. This uniquely identifies the folder.'

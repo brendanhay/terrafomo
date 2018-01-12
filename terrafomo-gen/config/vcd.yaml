@@ -1,4 +1,4 @@
 name: VCloudDirector
-package: terrafomo-vmware
+package: terrafomo-vcloud-director
 datatype: true
 

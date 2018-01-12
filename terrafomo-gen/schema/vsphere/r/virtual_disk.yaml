@@ -5,28 +5,34 @@ arguments:
     help: (Required) The path, including filename, of the virtual disk to be created.  This
       should end with '.vmdk'.
     type: Text
+    deprecated: false
   _datacenter:
     required: false
     help: (Optional) The name of a Datacenter in which to create the disk.
     type: Text
+    deprecated: false
   _adapter_type:
     required: false
     help: (Optional) set adapter type, 'ide' (the default), 'lsiLogic', or 'busLogic'
       are supported options.
     type: Text
+    deprecated: false
   _size:
     required: true
     help: (Required) Size of the disk (in GB).
     type: Text
+    deprecated: false
   _type':
     required: false
     help: (Optional) 'eagerZeroedThick' (the default), 'lazy', or 'thin' are supported
       options.
     type: Text
+    deprecated: false
   _datastore:
     required: true
     help: (Required) The name of the Datastore in which to create the disk.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a VMware virtual disk resource.  This can be used to create and delete
   virtual disks.

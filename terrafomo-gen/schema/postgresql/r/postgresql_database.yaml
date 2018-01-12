@@ -6,6 +6,7 @@ arguments:
       is @true@ , allowing connections (except as restricted by other mechanisms,
       such as @GRANT@ or @REVOKE CONNECT@ ).
     type: Text
+    deprecated: false
   _lc_ctype:
     required: false
     help: (Optional) Character classification ( @LC_CTYPE@ ) to use in the database.
@@ -15,6 +16,7 @@ arguments:
       of the specified @template@ database.  Changing this value will force the creation
       of a new resource as this value can only be changed when a database is created.
     type: Text
+    deprecated: false
   _encoding:
     required: false
     help: (Optional) Character set encoding to use in the database. Specify a string
@@ -24,6 +26,7 @@ arguments:
       this value will force the creation of a new resource as this value can only
       be changed when a database is created.
     type: Text
+    deprecated: false
   _template:
     required: false
     help: ! '(Optional) The name of the template database from which to create the
@@ -32,23 +35,27 @@ arguments:
       will force the creation of a new resource as this value can only be changed
       when a database is created.'
     type: Text
+    deprecated: false
   _tablespace_name:
     required: false
     help: (Optional) The name of the tablespace that will be associated with the database,
       or @DEFAULT@ to use the template database's tablespace.  This tablespace will
       be the default tablespace used for objects created in this database.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the database. Must be unique on the PostgreSQL server
       instance where it is configured.
     type: Text
+    deprecated: false
   _is_template:
     required: false
     help: (Optional) If @true@ , then this database can be cloned by any user with
       @CREATEDB@ privileges; if @false@ (the default), then only superusers or the
       owner of the database can clone it.
     type: Text
+    deprecated: false
   _lc_collate:
     required: false
     help: (Optional) Collation order ( @LC_COLLATE@ ) to use in the database.  This
@@ -59,11 +66,13 @@ arguments:
       this value will force the creation of a new resource as this value can only
       be changed when a database is created.
     type: Text
+    deprecated: false
   _connection_limit:
     required: false
     help: (Optional) How many concurrent connections can be established to this database.
       @-1@ (the default) means no limit.
     type: Text
+    deprecated: false
   _owner:
     required: false
     help: (Optional) The role name of the user who will own the database, or @DEFAULT@
@@ -72,6 +81,7 @@ arguments:
       be a direct or indirect member of the specified role, or the username in the
       provider is a superuser.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @postgresql_database@ resource creates and manages <https://www.postgresql.org/docs/current/static/managing-databases.html>
   within a PostgreSQL server instance.

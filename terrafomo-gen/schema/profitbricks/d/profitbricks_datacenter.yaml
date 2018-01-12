@@ -5,10 +5,12 @@ arguments:
     help: (Required) Name or part of the name of an existing Virtual Data Center that
       you want to search for.
     type: Text
+    deprecated: false
   _location:
     required: false
     help: (Optional) Id of the existing Virtual Data Center's location.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- UUID of the Virtual Data Center'

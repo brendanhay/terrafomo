@@ -4,35 +4,43 @@ arguments:
     required: false
     help: (Optional) List of private IPs to assign to the ENI.
     type: Text
+    deprecated: false
   _private_ips_count:
     required: false
     help: (Optional) Number of private IPs to assign to the ENI.
     type: Text
+    deprecated: false
   _attachment:
     required: false
     help: (Optional) Block to define the attachment of the ENI. Documented below.
     type: Text
+    deprecated: false
   _subnet_id:
     required: true
     help: (Required) Subnet ID to create the ENI in.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description for the network interface.
     type: Text
+    deprecated: false
   _security_groups:
     required: false
     help: (Optional) List of security group IDs to assign to the ENI.
     type: Text
+    deprecated: false
   _source_dest_check:
     required: false
     help: (Optional) Whether to enable source destination checking for the ENI. Default
       true.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   private_ips:
     help: ! '- List of private IPs assigned to the ENI.'

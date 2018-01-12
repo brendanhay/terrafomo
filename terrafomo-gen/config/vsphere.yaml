@@ -1,4 +1,4 @@
 name: VSphere
-package: terrafomo-vmware
+package: terrafomo-vsphere
 datatype: true
 

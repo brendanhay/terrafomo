@@ -6,37 +6,45 @@ arguments:
       must be unique within the Load Balancer. Possible values range between 1 and
       65534, inclusive.
     type: Text
+    deprecated: false
   _backend_port:
     required: true
     help: (Required) The port used for internal connections on the endpoint. Possible
       values range between 1 and 65535, inclusive.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the NAT Rule.
     type: Text
+    deprecated: false
   _frontend_ip_configuration_name:
     required: true
     help: (Required) The name of the frontend IP configuration exposing this rule.
     type: Text
+    deprecated: false
   _protocol:
     required: true
     help: (Required) The transport protocol for the external endpoint. Possible values
       are @Udp@ or @Tcp@ .
     type: Text
+    deprecated: false
   _loadbalancer_id:
     required: true
     help: (Required) The ID of the LoadBalancer in which to create the NAT Rule.
     type: Text
+    deprecated: false
   _enable_floating_ip:
     required: false
     help: (Optional) Enables the Floating IP Capacity, required to configure a SQL
       AlwaysOn Availability Group.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the resource.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the LoadBalancer to which the resource is attached.'

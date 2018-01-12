@@ -5,15 +5,18 @@ arguments:
     help: ! '- (String, required, forces new resource) The unique identifier of the
       parent category in which this tag will be created.'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '- (String, required) The display name of the tag. The name must be unique
       within its category.'
     type: Text
+    deprecated: false
   _description:
     required: true
     help: ! '- (String, optional) A description for the tag.'
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The @vsphere_tag@ resource can be used to create and manage tags, which
   allow you to attach metadata to objects in the vSphere inventory to make these objects

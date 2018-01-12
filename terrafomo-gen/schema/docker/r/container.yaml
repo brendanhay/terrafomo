@@ -5,88 +5,107 @@ arguments:
     help: (Optional, map of strings) Key/value pairs to use as options for the logging
       driver.
     type: Text
+    deprecated: false
   _destroy_grace_seconds:
     required: false
     help: (Optional, int) If defined will attempt to stop the container before destroying.
       Container will be destroyed after @n@ seconds or on successful stop.
     type: Text
+    deprecated: false
   _upload:
     required: false
     help: (Optional, block) See <#upload> below for details.
     type: Text
+    deprecated: false
   _host:
     required: false
     help: (Optional, block) See <#extra_hosts> below for details.
     type: Text
+    deprecated: false
   _dns_search:
     required: false
     help: (Optional, set of strings) Set of DNS search domains that are used when
       bare unqualified hostnames are used inside of the container.
     type: Text
+    deprecated: false
   _labels:
     required: false
     help: (Optional, map of strings) Key/value pairs to set as labels on the container.
     type: Text
+    deprecated: false
   _env:
     required: false
     help: (Optional, set of strings) Environment variables to set.
     type: Text
+    deprecated: false
   _publish_all_ports:
     required: false
     help: (Optional, bool) Publish all ports of the container.
     type: Text
+    deprecated: false
   _network_alias:
     required: false
     help: (Optional, set of strings) Network aliases of the container for user-defined
       networks only.
     type: Text
+    deprecated: false
   _max_retry_count:
     required: false
     help: (Optional, int) The maximum amount of times to an attempt a restart when
       @restart@ is set to "on-failure"
     type: Text
+    deprecated: false
   _cpu_shares:
     required: false
     help: (Optional, int) CPU shares (relative weight) for the container.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required, string) The name of the Docker container.
     type: Text
+    deprecated: false
   _domainname:
     required: false
     help: (Optional, string) Domain name of the container.
     type: Text
+    deprecated: false
   _image:
     required: true
     help: (Required, string) The ID of the image to back this container. The easiest
       way to get this value is to use the @docker_image@ resource as is shown in the
       example above.
     type: Text
+    deprecated: false
   _command:
     required: false
     help: (Optional, list of strings) The command to use to start the container. For
       example, to run @/usr/bin/myprogram -f baz.conf@ set the command to be @["/usr/bin/myprogram",
       "-f", "baz.conf"]@ .
     type: Text
+    deprecated: false
   _memory:
     required: false
     help: (Optional, int) The memory limit for the container in MBs.
     type: Text
+    deprecated: false
   _dns:
     required: false
     help: (Optional, set of strings) Set of DNS servers.
     type: Text
+    deprecated: false
   _user:
     required: false
     help: (Optional, string) User used for run the first process. Format is @user@
       or @user:group@ which user and group can be passed literraly or by name.
     type: Text
+    deprecated: false
   _dns_opts:
     required: false
     help: (Optional, set of strings) Set of DNS options used by the DNS provider(s),
       see @resolv.conf@ documentation for valid list of options.
     type: Text
+    deprecated: false
   _memory_swap:
     required: false
     help: (Optional, int) The total memory limit (memory + swap) for the container
@@ -94,19 +113,23 @@ arguments:
       host doesn't support memory swap, when that is the case docker will use a soft
       limitation.
     type: Text
+    deprecated: false
   _volumes:
     required: false
     help: (Optional, block) See <#volumes> below for details.
     type: Text
+    deprecated: false
   _privileged:
     required: false
     help: (Optional, bool) Run container in privileged mode.
     type: Text
+    deprecated: false
   _links:
     required: false
     help: (Optional, set of strings) Set of links for link based connectivity between
       containers that are running on the same host.
     type: Text
+    deprecated: false
   _entrypoint:
     required: false
     help: (Optional, list of strings) The command to use as the Entrypoint for the
@@ -114,41 +137,50 @@ arguments:
       For example, to run @/usr/bin/myprogram@ when starting a container, set the
       entrypoint to be @["/usr/bin/myprogram"]@ .
     type: Text
+    deprecated: false
   _networks:
     required: false
     help: (Optional, set of strings) Id of the networks in which the container is.
     type: Text
+    deprecated: false
   _log_driver:
     required: false
     help: (Optional, string) The logging driver to use for the container. Defaults
       to "json-file".
     type: Text
+    deprecated: false
   _network_mode:
     required: false
     help: (Optional, string) Network mode of the container.
     type: Text
+    deprecated: false
   _ports:
     required: false
     help: (Optional, block) See <#ports> below for details.
     type: Text
+    deprecated: false
   _restart:
     required: false
     help: (Optional, string) The restart policy for the container. Must be one of
       "no", "on-failure", "always", "unless-stopped".
     type: Text
+    deprecated: false
   _hostname:
     required: false
     help: (Optional, string) Hostname of the container.
     type: Text
+    deprecated: false
   _must_run:
     required: false
     help: (Optional, bool) If true, then the Docker container will be kept running.
       If false, then as long as the container exists, Terraform assumes it is successful.
     type: Text
+    deprecated: false
   _capabilities:
     required: false
     help: (Optional, block) See <#capabilities> below for details.
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages the lifecycle of a Docker container.
 examples: []

@@ -6,10 +6,12 @@ arguments:
       valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html>
       .
     type: Text
+    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent Volume.
     type: Text
+    deprecated: false
 attributes:
   volume_type:
     help: ! '- The type of EBS volume.'

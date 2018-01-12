@@ -5,68 +5,81 @@ arguments:
     help: (Optional) The source port on which the firewall rule operates. Changing
       this updates the @source_port@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the v1 Compute client. A Compute
       client is needed to create a firewall rule. If omitted, the @region@ argument
       of the provider is used. Changing this creates a new firewall rule.
     type: Text
+    deprecated: false
   _enabled:
     required: false
     help: (Optional) Enabled status for the firewall rule (must be "true" or "false"
       if provided - defaults to "true"). Changing this updates the @enabled@ status
       of an existing firewall rule.
     type: Text
+    deprecated: false
   _source_ip_address:
     required: false
     help: (Optional) The source IP address on which the firewall rule operates. Changing
       this updates the @source_ip_address@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) A unique name for the firewall rule. Changing this updates the
       @name@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _ip_version:
     required: false
     help: (Optional) IP version, either 4 (default) or 6. Changing this updates the
       @ip_version@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _action:
     required: true
     help: (Required) Action to be taken ( must be "allow" or "deny") when the firewall
       rule matches. Changing this updates the @action@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _protocol:
     required: true
     help: ! '(Required) The protocol type on which the firewall rule operates. Valid
       values are: @tcp@ , @udp@ , @icmp@ , and @any@ . Changing this updates the @protocol@
       of an existing firewall rule.'
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description for the firewall rule. Changing this updates the
       @description@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _destination_ip_address:
     required: false
     help: (Optional) The destination IP address on which the firewall rule operates.
       Changing this updates the @destination_ip_address@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _destination_port:
     required: false
     help: (Optional) The destination port on which the firewall rule operates. Changing
       this updates the @destination_port@ of an existing firewall rule.
     type: Text
+    deprecated: false
   _value_specs:
     required: false
     help: (Optional) Map of additional options.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the firewall rule. Required if admin wants to create
       a firewall rule for another tenant. Changing this creates a new firewall rule.
     type: Text
+    deprecated: false
 attributes:
   source_ip_address:
     help: ! '- See Argument Reference above.'

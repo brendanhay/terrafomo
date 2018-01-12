@@ -6,20 +6,24 @@ arguments:
       will start creating incidents again. This date must be in the future and after
       the @start_time@ .
     type: Text
+    deprecated: false
   _start_time:
     required: true
     help: (Required) The maintenance window's start time. This is when the services
       will stop creating incidents. If this date is in the past, it will be updated
       to be the current time.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description for the maintenance window.
     type: Text
+    deprecated: false
   _services:
     required: true
     help: (Required) A list of service IDs to include in the maintenance window.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the maintenance window.'

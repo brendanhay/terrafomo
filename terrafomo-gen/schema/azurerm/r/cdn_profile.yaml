@@ -5,24 +5,29 @@ arguments:
     help: (Required) Specifies the name of the CDN Profile. Changing this forces a
       new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _sku:
     required: true
     help: (Required) The pricing related information of current CDN profile. Accepted
       values are @Standard_Verizon@ , @Standard_Akamai@ or @Premium_Verizon@ .
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the CDN Profile.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The CDN Profile ID.'

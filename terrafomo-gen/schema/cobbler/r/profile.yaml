@@ -4,132 +4,164 @@ arguments:
     required: false
     help: (Optional) Repos to auto-assign to this profile.
     type: Text
+    deprecated: false
   _kernel_options_post:
     required: false
     help: (Optional) Post install kernel options.
     type: Text
+    deprecated: false
   _virt_cpus:
     required: false
     help: (Optional) The number of virtual CPUs.
     type: Text
+    deprecated: false
   _virt_ram:
     required: false
     help: (Optional) The amount of RAM for the virtual machine.
     type: Text
+    deprecated: false
   _redhat_management_server:
     required: false
     help: (Optional) RedHat Management Server.
     type: Text
+    deprecated: false
   _template_remote_kickstarts:
     required: false
     help: (Optional) remote kickstart templates.
     type: Text
+    deprecated: false
   _server:
     required: false
     help: (Optional) The server-override for the profile.
     type: Text
+    deprecated: false
   _enable_menu:
     required: false
     help: (Optional) Enable a boot menu.
     type: Text
+    deprecated: false
   _redhat_management_key:
     required: false
     help: (Optional) Red Hat Management Key.
     type: Text
+    deprecated: false
   _kickstart:
     required: false
     help: (Optional) The kickstart file to use.
     type: Text
+    deprecated: false
   _ks_meta:
     required: false
     help: (Optional) Kickstart metadata.
     type: Text
+    deprecated: false
   _distro:
     required: false
     help: (Optional) Parent distribution.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the profile.
     type: Text
+    deprecated: false
   _fetchable_files:
     required: false
     help: (Optional) Templates for tftp or wget.
     type: Text
+    deprecated: false
   _kernel_options:
     required: false
     help: (Optional) Kernel options for the profile.
     type: Text
+    deprecated: false
   _proxy:
     required: false
     help: (Optional) Proxy URL.
     type: Text
+    deprecated: false
   _virt_type:
     required: false
     help: ! '(Optional) The type of virtual machine. Valid options are: xenpv, xenfv,
       qemu, kvm, vmware, openvz.'
     type: Text
+    deprecated: false
   _mgmt_parameters:
     required: false
     help: (Optional) Parameters which will be handed to your management application
       (Must be a valid YAML dictionary).
     type: Text
+    deprecated: false
   _comment:
     required: false
     help: (Optional) Free form text description.
     type: Text
+    deprecated: false
   _virt_path:
     required: false
     help: (Optional) The virtual machine path.
     type: Text
+    deprecated: false
   _virt_auto_boot:
     required: false
     help: (Optional) Auto boot virtual machines.
     type: Text
+    deprecated: false
   _virt_file_size:
     required: false
     help: (Optional) The virtual machine file size.
     type: Text
+    deprecated: false
   _template_files:
     required: false
     help: (Optional) File mappings for built-in config management.
     type: Text
+    deprecated: false
   _virt_disk_driver:
     required: false
     help: (Optional) The virtual machine disk driver.
     type: Text
+    deprecated: false
   _owners:
     required: false
     help: (Optional) Owners list for authz_ownership.
     type: Text
+    deprecated: false
   _name_servers_search:
     required: false
     help: (Optional) Name server search settings.
     type: Text
+    deprecated: false
   _parent:
     required: false
     help: (Optional) The parent this profile inherits settings from.
     type: Text
+    deprecated: false
   _boot_files:
     required: false
     help: (Optional) Files copied into tftpboot beyond the kernel/initrd.
     type: Text
+    deprecated: false
   _enable_gpxe:
     required: false
     help: (Optional) Use gPXE instead of PXELINUX for advanced booting options.
     type: Text
+    deprecated: false
   _mgmt_classes:
     required: false
     help: (Optional) For external configuration management.
     type: Text
+    deprecated: false
   _virt_bridge:
     required: false
     help: (Optional) The bridge for virtual machines.
     type: Text
+    deprecated: false
   _name_servers:
     required: false
     help: (Optional) Name servers.
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages a Profile within Cobbler.
 examples: []

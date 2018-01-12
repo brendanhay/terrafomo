@@ -4,14 +4,17 @@ arguments:
     required: false
     help: (Optional) The name of the ELB.
     type: Text
+    deprecated: false
   _alb_target_group_arn:
     required: false
     help: (Optional) The ARN of an ALB Target Group.
     type: Text
+    deprecated: false
   _autoscaling_group_name:
     required: true
     help: (Required) Name of ASG to associate with the ELB.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides an AutoScaling Attachment resource. ~> NOTE on AutoScaling Groups
   and ASG Attachments: Terraform currently provides both a standalone ASG Attachment

@@ -4,21 +4,25 @@ arguments:
     required: false
     help: (Optional) Limit search to specific instance type.
     type: Text
+    deprecated: false
   _available_resource_creation:
     required: false
     help: (Optional) Limit search to specific resource type. The following values
       are allowed @Instance@ , @Disk@ and @VSwitch@ .
     type: Text
+    deprecated: false
   _available_disk_category:
     required: false
     help: (Optional) Limit search to specific disk category. Can be either @cloud@
       , @ephemeral@ , or @ephemeral_ssd@ .
     type: Text
+    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save zones data source after running
       @terraform plan@ .
     type: Text
+    deprecated: false
 attributes:
   available_disk_categories:
     help: ! '- Set of supported disk categories.'

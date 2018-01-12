@@ -4,14 +4,17 @@ arguments:
     required: false
     help: (Optional) Regexp to match Bootscript name by
     type: Text
+    deprecated: false
   _architecture:
     required: false
     help: (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) Exact name of desired Bootscript
     type: Text
+    deprecated: false
 attributes:
   initrd:
     help: ! '- URL to initial ramdisk content'

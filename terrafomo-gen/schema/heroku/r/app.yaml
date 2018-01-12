@@ -5,29 +5,35 @@ arguments:
     help: (Optional) A block that can be specified once to define organization settings
       for this app. The fields for this block are documented below.
     type: Text
+    deprecated: false
   _region:
     required: true
     help: (Required) The region that the app should be deployed in.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the application. In Heroku, this is also the unique
       ID, so it must be unique and have a minimum of 3 characters.
     type: Text
+    deprecated: false
   _buildpacks:
     required: false
     help: (Optional) Buildpack names or URLs for the application. Buildpacks configured
       externally won't be altered if this is not present.
     type: Text
+    deprecated: false
   _space:
     required: false
     help: (Optional) The name of a private space to create the app in.
     type: Text
+    deprecated: false
   _stack:
     required: false
     help: (Optional) The application stack is what platform to run the application
       in.
     type: Text
+    deprecated: false
   _config_vars:
     required: false
     help: (Optional) Configuration variables for the application. The config variables
@@ -35,6 +41,7 @@ arguments:
       you want present. That is, other configuration variables set externally won't
       be removed by Terraform if they aren't present in this list.
     type: Text
+    deprecated: false
 attributes:
   space:
     help: ! '- The private space the app should run in.'

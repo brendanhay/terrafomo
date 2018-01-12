@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) Instance ID to attach.
     type: Text
+    deprecated: false
   _device_index:
     required: true
     help: (Required) Network interface index (int).
     type: Text
+    deprecated: false
   _network_interface_id:
     required: true
     help: (Required) ENI ID to attach.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The status of the Network Interface Attachment.'

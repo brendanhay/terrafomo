@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The email to use to find a user in the PagerDuty API.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The short name of the found user.'

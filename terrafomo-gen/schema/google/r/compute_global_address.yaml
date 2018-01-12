@@ -5,16 +5,19 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _ip_version:
     required: false
     help: (Optional) The IP Version that will be used by this address. One of @"IPV4"@
       or @"IPV6"@ .
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

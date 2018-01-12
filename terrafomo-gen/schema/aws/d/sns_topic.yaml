@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The friendly name of the topic to match.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- Set to the ARN of the found topic, suitable for referencing in other

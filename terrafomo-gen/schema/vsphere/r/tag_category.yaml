@@ -6,14 +6,17 @@ arguments:
       is valid to be assigned to. For a full list, click <#associable-object-types>
       .'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '- (String, required) The name of the category.'
     type: Text
+    deprecated: false
   _description:
     required: true
     help: ! '- (String, optional) A description for the category.'
     type: Text
+    deprecated: false
   _cardinality:
     required: true
     help: ! '- (String, required, forces new resource) The number of tags that can
@@ -21,6 +24,7 @@ arguments:
       (object can only be assigned one tag in this category), to @MULTIPLE@ (object
       can be assigned multiple tags in this category).'
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The @vsphere_tag_category@ resource can be used to create and manage tag
   categories, which determine how tags are grouped together and applied to specific

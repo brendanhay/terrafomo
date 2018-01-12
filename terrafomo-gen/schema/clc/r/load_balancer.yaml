@@ -4,24 +4,29 @@ arguments:
     required: true
     help: ! '- (Computed) The IP of the load balancer.'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required, string) The name of the load balancer.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional, string) Description for server group (visible in control portal
       only)
     type: Text
+    deprecated: false
   _data_center:
     required: true
     help: (Required, string) The datacenter location of both parent group and this
       group.
     type: Text
+    deprecated: false
   _status:
     required: true
     help: (Required, string) Either "enabled" or "disabled"
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages a CLC load balancer. Manage connected backends with <load_balancer_pool.html>
   See also <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .

@@ -6,30 +6,36 @@ arguments:
       name should include 4-63 letters, digits or '-'. The '-' shouldn't be the first
       or the last symbol. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _sku:
     required: true
     help: (Required) Specifies the Sku of the Log Analytics Workspace. Possible values
       are @Free@ , @PerNode@ , @Premium@ , @Standard@ , @Standalone@ and @Unlimited.@
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the Log Analytics workspace
       is created. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _retention_in_days:
     required: false
     help: (Optional) The workspace data retention in days. Possible values range between
       30 and 730.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   secondary_shared_key:
     help: ! '- The Secondary shared key for the Log Analytics Workspace.'

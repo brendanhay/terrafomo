@@ -4,39 +4,47 @@ arguments:
     required: false
     help: ! '(Optional) The timezone of the start time. For possible values see: https://msdn.microsoft.com/en-us/library/ms912391(v=winembedded.11).aspx'
     type: Text
+    deprecated: false
   _expiry_time:
     required: true
     help: ! '-  (Optional) The end time of the schedule.'
     type: Text
+    deprecated: false
   _start_time:
     required: true
     help: ! '-  (Required) Start time of the schedule. Must be at least five minutes
       in the future.'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the Schedule. Changing this forces a new
       resource to be created.
     type: Text
+    deprecated: false
   _frequency:
     required: true
     help: (Required) The frequency of the schedule. - can be either @OneTime@ , @Day@
       , @Hour@ , @Week@ , or @Month@ .
     type: Text
+    deprecated: false
   _description:
     required: true
     help: ! '-  (Optional) A description for this Schedule.'
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the Schedule is created.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _account_name:
     required: true
     help: (Required) The name of the automation account in which the Schedule is created.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The Automation Schedule ID.'

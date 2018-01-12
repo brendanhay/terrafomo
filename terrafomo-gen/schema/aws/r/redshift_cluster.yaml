@@ -4,33 +4,40 @@ arguments:
     required: false
     help: (Optional) The Elastic IP (EIP) address for the cluster.
     type: Text
+    deprecated: false
   _snapshot_cluster_identifier:
     required: false
     help: (Optional) The name of the cluster the source snapshot was created from.
     type: Text
+    deprecated: false
   _iam_roles:
     required: false
     help: (Optional) A list of IAM Role ARNs to associate with the cluster. A Maximum
       of 10 can be associated to the cluster at any time.
     type: Text
+    deprecated: false
   _enhanced_vpc_routing:
     required: false
     help: (Optional) If true , enhanced VPC routing is enabled.
     type: Text
+    deprecated: false
   _owner_account:
     required: false
     help: (Optional) The AWS customer account used to create or copy the snapshot.
       Required if you are restoring a snapshot you do not own, optional if you own
       the snapshot.
     type: Text
+    deprecated: false
   _node_type:
     required: true
     help: (Required) The node type to be provisioned for the cluster.
     type: Text
+    deprecated: false
   _cluster_parameter_group_name:
     required: false
     help: (Optional) The name of the parameter group to be associated with this cluster.
     type: Text
+    deprecated: false
   _automated_snapshot_retention_period:
     required: false
     help: (Optional) The number of days that automated snapshots are retained. If
@@ -38,6 +45,7 @@ arguments:
       are disabled, you can still create manual snapshots when you want with create-cluster-snapshot.
       Default is 1.
     type: Text
+    deprecated: false
   _skip_final_snapshot:
     required: false
     help: (Optional) Determines whether a final snapshot of the cluster is created
@@ -45,26 +53,31 @@ arguments:
       is not created. If false , a final cluster snapshot is created before the cluster
       is deleted. Default is false.
     type: Text
+    deprecated: false
   _cluster_identifier:
     required: true
     help: (Required) The Cluster Identifier. Must be a lower case string.
     type: Text
+    deprecated: false
   _allow_version_upgrade:
     required: false
     help: (Optional) If true , major version upgrades can be applied during the maintenance
       window to the Amazon Redshift engine that is running on the cluster. Default
       is true
     type: Text
+    deprecated: false
   _logging:
     required: false
     help: (Optional) Logging, documented below.
     type: Text
+    deprecated: false
   _final_snapshot_identifier:
     required: false
     help: (Optional) The identifier of the final snapshot that is to be created immediately
       before deleting the cluster. If this parameter is provided, @skip_final_snapshot@
       must be false.
     type: Text
+    deprecated: false
   _availability_zone:
     required: false
     help: (Optional) The EC2 Availability Zone (AZ) in which you want Amazon Redshift
@@ -72,51 +85,61 @@ arguments:
       in a specific Availability Zone, then you might want the cluster to be provisioned
       in the same zone in order to decrease network latency.
     type: Text
+    deprecated: false
   _cluster_security_groups:
     required: false
     help: (Optional) A list of security groups to be associated with this cluster.
     type: Text
+    deprecated: false
   _snapshot_identifier:
     required: false
     help: (Optional) The name of the snapshot from which to create the new cluster.
     type: Text
+    deprecated: false
   _master_username:
     required: true
     help: (Required unless a @snapshot_identifier@ is provided) Username for the master
       DB user.
     type: Text
+    deprecated: false
   _cluster_type:
     required: false
     help: (Optional) The cluster type to use. Either @single-node@ or @multi-node@
       .
     type: Text
+    deprecated: false
   _publicly_accessible:
     required: false
     help: (Optional) If true, the cluster can be accessed from a public network. Default
       is @true@ .
     type: Text
+    deprecated: false
   _database_name:
     required: false
     help: (Optional) The name of the first database to be created when the cluster
       is created. If you do not provide a name, Amazon Redshift will create a default
       database called @dev@ .
     type: Text
+    deprecated: false
   _vpc_security_group_ids:
     required: false
     help: (Optional) A list of Virtual Private Cloud (VPC) security groups to be associated
       with the cluster.
     type: Text
+    deprecated: false
   _cluster_version:
     required: false
     help: (Optional) The version of the Amazon Redshift engine software that you want
       to deploy on the cluster. The version selected runs on all the nodes in the
       cluster.
     type: Text
+    deprecated: false
   _kms_key_id:
     required: false
     help: (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@
       , @encrypted@ needs to be set to true.
     type: Text
+    deprecated: false
   _master_password:
     required: true
     help: (Required unless a @snapshot_identifier@ is provided) Password for the master
@@ -124,15 +147,18 @@ arguments:
       file. Password must contain at least 8 chars and contain at least one uppercase
       letter, one lowercase letter, and one number.
     type: Text
+    deprecated: false
   _preferred_maintenance_window:
     required: false
     help: ! '(Optional) The weekly time range (in UTC) during which automated cluster
       maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi'
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _port:
     required: false
     help: (Optional) The port number on which the cluster accepts incoming connections.
@@ -140,27 +166,32 @@ arguments:
       of the connection string requires the port on which the cluster will listen
       for incoming connections. Default port is 5439.
     type: Text
+    deprecated: false
   _number_of_nodes:
     required: false
     help: (Optional) The number of compute nodes in the cluster. This parameter is
       required when the ClusterType parameter is specified as multi-node. Default
       is 1.
     type: Text
+    deprecated: false
   _encrypted:
     required: false
     help: (Optional) If true , the data in the cluster is encrypted at rest.
     type: Text
+    deprecated: false
   _snapshot_copy:
     required: false
     help: (Optional) Configuration of automatic copy of snapshots from one region
       to another. Documented below.
     type: Text
+    deprecated: false
   _cluster_subnet_group_name:
     required: false
     help: (Optional) The name of a cluster subnet group to be associated with this
       cluster. If this parameter is not provided the resulting cluster will be deployed
       outside virtual private cloud (VPC).
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides a Redshift Cluster Resource. ~> Note: All arguments including the
   username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>

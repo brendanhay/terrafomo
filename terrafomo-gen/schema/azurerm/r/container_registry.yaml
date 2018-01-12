@@ -5,36 +5,43 @@ arguments:
     help: (Optional) Specifies whether the admin user is enabled. Defaults to @false@
       .
     type: Text
+    deprecated: false
   _storage_account_id:
     required: true
     help: (Required for @Classic@ Sku - Optional otherwise) The ID of a Storage Account
       which must be located in the same Azure Region as the Container Registry.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the Container Registry. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _sku:
     required: false
     help: (Optional) The SKU name of the the container registry. Possible values are
       @Classic@ (which was previously @Basic@ ), @Basic@ , @Standard@ and @Premium@
       .
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the Container
       Registry.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   admin_username:
     help: ! '- The Username associated with the Container Registry Admin account -

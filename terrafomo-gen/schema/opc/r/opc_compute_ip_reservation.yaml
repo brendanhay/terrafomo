@@ -7,19 +7,23 @@ arguments:
       with a different IP address when an instance is restarted, or deleted and recreated
       (if false).
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) Name of the IP Reservation. Will be generated if unspecified.
     type: Text
+    deprecated: false
   _parent_pool:
     required: false
     help: (Optional) The pool from which to allocate the IP address. Defaults to @/oracle/public/ippool@
       , and is currently the only acceptable input.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) List of tags that may be applied to the IP reservation.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @opc_compute_ip_reservation@ resource creates and manages an IP reservation
   in an OPC identity domain for the Shared Network.

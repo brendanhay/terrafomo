@@ -7,25 +7,30 @@ arguments:
       in order of preference: data source @credentials@ attribute, provider @credentials@
       attribute and finally the GOOGLE_APPLICATION_CREDENTIALS environment variable.'
     type: Text
+    deprecated: false
   _bucket:
     required: true
     help: (Required) The name of the bucket to read the object from
     type: Text
+    deprecated: false
   _http_method:
     required: false
     help: (Optional) What HTTP Method will the signed URL allow (defaults to @GET@
       )
     type: Text
+    deprecated: false
   _path:
     required: true
     help: (Required) The full path to the object inside the bucket
     type: Text
+    deprecated: false
   _duration:
     required: false
     help: (Optional) For how long shall the signed URL be valid (defaults to 1 hour
       - i.e. @1h@ ). See <https://golang.org/pkg/time/#ParseDuration> for info on
       valid duration formats.
     type: Text
+    deprecated: false
 attributes:
   signed_url:
     help: ! '- The signed URL that can be used to access the storage object without

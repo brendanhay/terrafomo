@@ -5,14 +5,17 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the database.
     type: Text
+    deprecated: false
   _instance':
     required: true
     help: (Required) The name of containing instance.
     type: Text
+    deprecated: false
   _charset:
     required: false
     help: (Optional) The charset value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html>
@@ -21,6 +24,7 @@ arguments:
       , and have limited @charset@ support; they only support a value of @UTF8@ at
       creation time.
     type: Text
+    deprecated: false
   _collation:
     required: false
     help: (Optional) The collation value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html>
@@ -29,6 +33,7 @@ arguments:
       , and have limited @collation@ support; they only support a value of @en_US.UTF8@
       at creation time.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

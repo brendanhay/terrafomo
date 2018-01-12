@@ -5,15 +5,18 @@ arguments:
     help: ! '(Optional) Filters the response according to the operator and value specified.
       Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/'
     type: Text
+    deprecated: false
   _size:
     required: false
     help: (Optional) The number of results to display. Max is 1000. Default is 50
     type: Text
+    deprecated: false
   _offset:
     required: false
     help: (Optional) The number of results to offset the displayed results by. Default
       is 0
     type: Text
+    deprecated: false
 attributes: {}
 about: Use this datasource to get the ID of an available device group.
 examples: []

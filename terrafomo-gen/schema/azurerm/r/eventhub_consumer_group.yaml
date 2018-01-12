@@ -5,26 +5,31 @@ arguments:
     help: (Required) Specifies the name of the grandparent EventHub Namespace. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the EventHub Consumer Group resource. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _eventhub_name:
     required: true
     help: (Required) Specifies the name of the EventHub. Changing this forces a new
       resource to be created.
     type: Text
+    deprecated: false
   _user_metadata:
     required: false
     help: (Optional) Specifies the user metadata.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the EventHub Consumer
       Group's grandparent Namespace exists. Changing this forces a new resource to
       be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The EventHub Consumer Group ID.'

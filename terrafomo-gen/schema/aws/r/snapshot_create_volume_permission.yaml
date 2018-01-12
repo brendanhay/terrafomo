@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '- (required) An AWS Account ID to add create volume permissions'
     type: Text
+    deprecated: false
   _snapshot_id:
     required: true
     help: ! '- (required) A snapshot ID'
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- A combination of " @snapshot_id@ - @account_id@ ".'

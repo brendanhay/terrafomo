@@ -5,44 +5,54 @@ arguments:
     help: (Optional) The environment to apply to interpret the docker-compose and
       rancher-compose files.
     type: Text
+    deprecated: false
   _start_on_create:
     required: false
     help: (Optional) Whether to start the stack automatically.
     type: Text
+    deprecated: false
   _environment_id:
     required: true
     help: (Required) The ID of the environment to create the stack for.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the stack.
     type: Text
+    deprecated: false
   _rancher_compose:
     required: false
     help: (Optional) The @rancher-compose.yml@ content to apply for the stack.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A stack description.
     type: Text
+    deprecated: false
   _docker_compose:
     required: false
     help: (Optional) The @docker-compose.yml@ content to apply for the stack.
     type: Text
+    deprecated: false
   _scope:
     required: false
     help: (Optional) The scope to attach the stack to. Must be one of user or system
       . Defaults to user .
     type: Text
+    deprecated: false
   _finish_upgrade:
     required: false
     help: (Optional) Whether to automatically finish upgrades to this stack.
     type: Text
+    deprecated: false
   _catalog_id:
     required: false
     help: (Optional) The catalog ID to link this stack to. When provided, @docker_compose@
       and @rancher_compose@ will be retrieved from the catalog unless they are overridden.
     type: Text
+    deprecated: false
 attributes:
   rendered_docker_compose:
     help: ! '- The interpolated @docker_compose@ applied to the stack.'

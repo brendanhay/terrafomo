@@ -6,6 +6,7 @@ arguments:
       @LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries <https://logentries.com/doc/accountkey/>
       for more information.
     type: Text
+    deprecated: false
 attributes: {}
 about: The Logentries provider is used to manage Logentries logs and log sets. Logentries
   provides live log management and analytics. The provider needs to be configured

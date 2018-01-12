@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The free form name of the team.
     type: Text
+    deprecated: false
   _permissions:
     required: false
     help: (Optional) The allowed permissions of the team. Permissions documented below.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a NS1 Team resource. This can be used to create, modify, and delete
   teams.

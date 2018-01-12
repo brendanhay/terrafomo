@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '- (String, Optional, Change forces new resource) Optional gateway IP.'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '- (String, Required, Change forces new resource) Network name.'
     type: Text
+    deprecated: false
   _internet_nat:
     required: true
     help: ! '- (Bool, Optional, Change forces new resource) If a NAT zone is provisioned
@@ -15,40 +17,48 @@ arguments:
       which implicitly creates a NAT instance by default. NOTE: There is a known issue
       in Triton that prevents deletion of fabric networks when @internet_nat@ is enabled.'
     type: Text
+    deprecated: false
   _description:
     required: true
     help: ! '- (String, Optional, Change forces new resource) Optional description
       of network.'
     type: Text
+    deprecated: false
   _subnet:
     required: true
     help: ! '- (String, Required, Change forces new resource) CIDR formatted string
       describing network.'
     type: Text
+    deprecated: false
   _provision_start_ip:
     required: true
     help: ! '- (String, Required, Change forces new resource) First IP on the network
       that can be assigned.'
     type: Text
+    deprecated: false
   _resolvers:
     required: true
     help: ! '- (List, Optional) Array of IP addresses for resolvers.'
     type: Text
+    deprecated: false
   _routes:
     required: true
     help: ! '- (Map, Optional, Change forces new resource) Map of CIDR block to Gateway
       IP address.'
     type: Text
+    deprecated: false
   _vlan_id:
     required: true
     help: ! '- (Int, Required, Change forces new resource) VLAN id the network is
       on. Number between 0-4095 indicating VLAN ID.'
     type: Text
+    deprecated: false
   _provision_end_ip:
     required: true
     help: ! '- (String, Required, Change forces new resource) Last assignable IP on
       the network.'
     type: Text
+    deprecated: false
 attributes:
   provision_end_ip:
     help: ! '- (String) - Last assignable IP on the network.'

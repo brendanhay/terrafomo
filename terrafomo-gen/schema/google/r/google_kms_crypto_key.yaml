@@ -5,11 +5,13 @@ arguments:
     help: (Required) The CryptoKey's name. A CryptoKey’s name must be unique within
       a location and match the regular expression @[a-zA-Z0-9_-]{1,63}@
     type: Text
+    deprecated: false
   _key_ring:
     required: true
     help: (Required) The id of the Google Cloud Platform KeyRing to which the key
       shall belong.
     type: Text
+    deprecated: false
   _rotation_period:
     required: false
     help: (Optional) Every time this period passes, generate a new CryptoKeyVersion
@@ -18,6 +20,7 @@ arguments:
       fractional digits, followed by the letter s (seconds). It must be greater than
       a day (ie, 83400).
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the created CryptoKey. Its format is @{projectId}/{location}/{keyRingName}/{cryptoKeyName}@

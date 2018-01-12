@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the bucket
     type: Text
+    deprecated: false
 attributes:
   website_domain:
     help: ! '- The domain of the website endpoint, if the bucket is configured with

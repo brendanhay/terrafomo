@@ -4,23 +4,28 @@ arguments:
     required: true
     help: (Required) The name of the storage
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description for the shared storage
     type: Text
+    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@
     type: Text
+    deprecated: false
   _storage_servers:
     required: true
     help: (Optional) List of servers that will have access to the stored storage
     type: Text
+    deprecated: false
   _size:
     required: true
     help: (Required) Size of the shared storage
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages a Shared Storage on 1&1
 examples: []

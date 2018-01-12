@@ -4,20 +4,24 @@ arguments:
     required: true
     help: (Required) The name of the REST API
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the REST API
     type: Text
+    deprecated: false
   _binary_media_types:
     required: false
     help: (Optional) The list of binary media types supported by the RestApi. By default,
       the RestApi supports only UTF-8-encoded text payloads.
     type: Text
+    deprecated: false
   _body:
     required: false
     help: (Optional) An OpenAPI specification that defines the set of routes and integrations
       to create as part of the REST API.
     type: Text
+    deprecated: false
 attributes:
   created_date:
     help: ! '- The creation date of the REST API'

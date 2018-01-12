@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the vhost.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @rabbitmq_vhost@ resource creates and manages a vhost.
 examples: []

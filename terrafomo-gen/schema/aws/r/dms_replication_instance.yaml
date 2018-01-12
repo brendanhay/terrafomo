@@ -7,59 +7,70 @@ arguments:
       | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge
       | dms.c4.4xlarge@
     type: Text
+    deprecated: false
   _multi_az:
     required: false
     help: (Optional) Specifies if the replication instance is a multi-az deployment.
       You cannot set the @availability_zone@ parameter if the @multi_az@ parameter
       is set to @true@ .
     type: Text
+    deprecated: false
   _auto_minor_version_upgrade:
     required: false
     help: ! '(Optional, Default: false) Indicates that minor engine upgrades will
       be applied automatically to the replication instance during the maintenance
       window.'
     type: Text
+    deprecated: false
   _replication_subnet_group_id:
     required: false
     help: (Optional) A subnet group to associate with the replication instance.
     type: Text
+    deprecated: false
   _allocated_storage:
     required: false
     help: ! '(Optional, Default: 50, Min: 5, Max: 6144) The amount of storage (in
       gigabytes) to be initially allocated for the replication instance.'
     type: Text
+    deprecated: false
   _engine_version:
     required: false
     help: (Optional) The engine version number of the replication instance.
     type: Text
+    deprecated: false
   _replication_instance_id:
     required: true
     help: (Required) The replication instance identifier. This parameter is stored
       as a lowercase string.
     type: Text
+    deprecated: false
   _availability_zone:
     required: false
     help: (Optional) The EC2 Availability Zone that the replication instance will
       be created in.
     type: Text
+    deprecated: false
   _publicly_accessible:
     required: false
     help: ! '(Optional, Default: false) Specifies the accessibility options for the
       replication instance. A value of true represents an instance with a public IP
       address. A value of false represents an instance with a private IP address.'
     type: Text
+    deprecated: false
   _vpc_security_group_ids:
     required: false
     help: (Optional) A list of VPC security group IDs to be used with the replication
       instance. The VPC security groups must work with the VPC containing the replication
       instance.
     type: Text
+    deprecated: false
   _apply_immediately:
     required: false
     help: ! '(Optional, Default: false) Indicates whether the changes should be applied
       immediately or during the next maintenance window. Only used when updating an
       existing resource.'
     type: Text
+    deprecated: false
   _kms_key_arn:
     required: false
     help: (Optional) The Amazon Resource Name (ARN) for the KMS key that will be used
@@ -68,15 +79,18 @@ arguments:
       encryption key for your AWS account. Your AWS account has a different default
       encryption key for each AWS region.
     type: Text
+    deprecated: false
   _preferred_maintenance_window:
     required: false
     help: (Optional) The weekly time range during which system maintenance can occur,
       in Universal Coordinated Time (UTC).
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   replication_instance_private_ips:
     help: ! '-  A list of the private IP addresses of the replication instance.'

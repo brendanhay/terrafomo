@@ -6,6 +6,7 @@ arguments:
       (family:revision) for a specific revision in the family, the ARN of the task
       definition to access to.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The status of this task definition'

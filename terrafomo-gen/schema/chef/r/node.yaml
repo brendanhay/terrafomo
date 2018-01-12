@@ -4,35 +4,42 @@ arguments:
     required: false
     help: ! '(Optional) the nodes environment name (default: _default)'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The unique name to assign to the node.
     type: Text
+    deprecated: false
   _normal_attributes_json:
     required: false
     help: (Optional) String containing a JSON-serialized object containing the normal
       attributes for the node.
     type: Text
+    deprecated: false
   _override_attributes_json:
     required: false
     help: (Optional) String containing a JSON-serialized object containing the override
       attributes for the node.
     type: Text
+    deprecated: false
   _automatic_attributes_json:
     required: false
     help: (Optional) String containing a JSON-serialized object containing the automatic
       attributes for the node.
     type: Text
+    deprecated: false
   _default_attributes_json:
     required: false
     help: (Optional) String containing a JSON-serialized object containing the default
       attributes for the node.
     type: Text
+    deprecated: false
   _run_list:
     required: false
     help: (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html>
       for the node.
     type: Text
+    deprecated: false
 attributes: {}
 about: A <http://docs.chef.io/nodes.html> is a computer whose configuration is managed
   by Chef. Although this resource allows a node to be registered, it does not actually

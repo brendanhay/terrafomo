@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The setting name.
     type: Text
+    deprecated: false
 attributes:
   value:
     help: ! '- the settting''s value.'

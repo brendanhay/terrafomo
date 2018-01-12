@@ -6,20 +6,24 @@ arguments:
       Qualified Domain Names. In other words, this is what ends up being the @search@
       value in the @/etc/resolv.conf@ file.
     type: Text
+    deprecated: false
   _netbios_name_servers:
     required: false
     help: (Optional) List of NETBIOS name servers.
     type: Text
+    deprecated: false
   _domain_name_servers:
     required: false
     help: (Optional) List of name servers to configure in @/etc/resolv.conf@ . If
       you want to use the default AWS nameservers you should set this to @AmazonProvidedDNS@
       .
     type: Text
+    deprecated: false
   _ntp_servers:
     required: false
     help: (Optional) List of NTP servers to configure.
     type: Text
+    deprecated: false
   _netbios_node_type:
     required: false
     help: (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify
@@ -27,10 +31,12 @@ arguments:
       information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt>
       .
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a VPC DHCP Options resource.
 examples: []

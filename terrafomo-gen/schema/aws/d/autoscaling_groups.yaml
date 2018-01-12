@@ -5,6 +5,7 @@ arguments:
     help: (Optional) A filter used to scope the list e.g. by tags. See <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_Filter.html>
       .
     type: Text
+    deprecated: false
 attributes:
   names:
     help: ! '- A list of the Autoscaling Groups in the current region.'

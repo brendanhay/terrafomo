@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The last path segment of this API resource.
     type: Text
+    deprecated: false
   _parent_id:
     required: true
     help: (Required) The ID of the parent API resource
     type: Text
+    deprecated: false
   _rest_api_id:
     required: true
     help: (Required) The ID of the associated REST API
     type: Text
+    deprecated: false
 attributes:
   path:
     help: ! '- The complete path for this API resource, including all parent paths.'

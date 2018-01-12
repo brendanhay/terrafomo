@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) Set to @false@ to disable rebase merges on the repository.
     type: Text
+    deprecated: false
   _default_branch:
     required: false
     help: ! '(Optional) The name of the default branch of the repository. NOTE: This
@@ -13,61 +14,74 @@ arguments:
       and create the target branch inside of the repository prior to setting this
       attribute.'
     type: Text
+    deprecated: false
   _allow_merge_commit:
     required: false
     help: (Optional) Set to @false@ to disable merge commits on the repository.
     type: Text
+    deprecated: false
   _private:
     required: false
     help: (Optional) Set to @true@ to create a private repository. Repositories are
       created as public (e.g. open source) by default.
     type: Text
+    deprecated: false
   _gitignore_template:
     required: false
     help: (Optional) Meaningful only during create, will be ignored after repository
       creation. Use the <https://github.com/github/gitignore> without the extension.
       For example, "Haskell".
     type: Text
+    deprecated: false
   _auto_init:
     required: false
     help: (Optional) Meaningful only during create; set to @true@ to produce an initial
       commit in the repository.
     type: Text
+    deprecated: false
   _has_issues:
     required: false
     help: (Optional) Set to @true@ to enable the Github Issues features on the repository.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the repository.
     type: Text
+    deprecated: false
   _has_wiki:
     required: false
     help: (Optional) Set to @true@ to enable the Github Wiki features on the repository.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the repository.
     type: Text
+    deprecated: false
   _homepage_url:
     required: false
     help: (Optional) URL of a page describing the project.
     type: Text
+    deprecated: false
   _has_downloads:
     required: false
     help: (Optional) Set to @true@ to enable the (deprecated) downloads features on
       the repository.
     type: Text
+    deprecated: false
   _allow_squash_merge:
     required: false
     help: (Optional) Set to @false@ to disable squash merges on the repository.
     type: Text
+    deprecated: false
   _license_template:
     required: false
     help: (Optional) Meaningful only during create, will be ignored after repository
       creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses>
       without the extension. For example, "mit" or "mozilla".
     type: Text
+    deprecated: false
 attributes:
   svn_url:
     help: ! '- URL that can be provided to @svn checkout@ to check out the repository

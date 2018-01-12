@@ -5,15 +5,18 @@ arguments:
     help: (Required) The Id of the usage plan resource representing to associate the
       key to.
     type: Text
+    deprecated: false
   _key_type:
     required: true
     help: (Required) The type of the API key resource. Currently, the valid key type
       is API_KEY.
     type: Text
+    deprecated: false
   _key_id:
     required: true
     help: (Required) The identifier of the API key resource.
     type: Text
+    deprecated: false
 attributes:
   key_id:
     help: ! '- The identifier of the API gateway key resource.'

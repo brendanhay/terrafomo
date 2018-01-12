@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) Name of the repository.
     type: Text
+    deprecated: false
 attributes:
   registry_id:
     help: ! '- The registry ID where the repository was created.'

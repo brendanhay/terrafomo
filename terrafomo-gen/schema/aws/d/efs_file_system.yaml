@@ -4,10 +4,12 @@ arguments:
     required: false
     help: (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65).
     type: Text
+    deprecated: false
   _creation_token:
     required: false
     help: (Optional) Restricts the list to the file system with this creation token.
     type: Text
+    deprecated: false
 attributes:
   kms_key_id:
     help: ! '- The ARN for the KMS encryption key.'

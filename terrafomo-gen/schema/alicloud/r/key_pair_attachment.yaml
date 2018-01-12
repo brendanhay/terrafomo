@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required, Force new resource) The list of ECS instance's IDs.
     type: Text
+    deprecated: false
   _key_name:
     required: true
     help: (Required, Force new resource) The name of key pair used to bind.
     type: Text
+    deprecated: false
 attributes:
   key_name:
     help: ! '- The name of the key pair.'

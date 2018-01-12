@@ -5,31 +5,38 @@ arguments:
     help: (Optional) Add only this content to the archive with @source_content_filename@
       as the filename.
     type: Text
+    deprecated: false
   _source_content_filename:
     required: false
     help: (Optional) Set this as the filename when using @source_content@ .
     type: Text
+    deprecated: false
   _source_dir:
     required: false
     help: (Optional) Package entire contents of this directory into the archive.
     type: Text
+    deprecated: false
   _source:
     required: false
     help: (Optional) Specifies attributes of a single source file to include into
       the archive.
     type: Text
+    deprecated: false
   _output_path:
     required: true
     help: (Required) The output of the archive file.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: ! '(Required) The type of archive to generate. NOTE: @zip@ is supported.'
     type: Text
+    deprecated: false
   _source_file:
     required: false
     help: (Optional) Package this file into the archive.
     type: Text
+    deprecated: false
 attributes:
   output_md5:
     help: ! '- The MD5 checksum of output archive file.'

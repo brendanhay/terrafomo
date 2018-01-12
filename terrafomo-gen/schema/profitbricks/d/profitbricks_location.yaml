@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) Name or part of the location name to search for.
     type: Text
+    deprecated: false
   _feature:
     required: false
     help: (Optional) A desired feature that the location must be able to provide.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- UUID of the location'

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: ! '- (required): Host to look up'
     type: Text
+    deprecated: false
 attributes:
   addrs:
     help: ! '- A list of IP addresses. IP addresses are always sorted to avoid constant

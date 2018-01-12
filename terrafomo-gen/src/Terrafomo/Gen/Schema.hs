@@ -60,18 +60,26 @@ instance ToJSON Schema where
 instance FromJSON Schema where
     parseJSON = JSON.genericParseJSON (JSON.options "schema")
 
+applyDeprecations :: Schema -> Schema
+applyDeprecations x = x
+    { schemaArguments =
+        Map.filter ((/= pure True) . argDeprecated) (schemaArguments x)
+    }
+
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg
-    { argHelp     :: !(First Text)
-    , argRequired :: !(Last Bool)
-    , argType     :: !(Last Text)
+    { argHelp       :: !(First Text)
+    , argRequired   :: !(Last  Bool)
+    , argDeprecated :: !(Last  Bool) -- FIXME: Should be added to 'Attr' too.
+    , argType       :: !(Last  Text)
     } deriving (Show, Eq, Ord, Generic)
 
 instance Semigroup Arg where
     (<>) parsed saved = Arg
-        { argHelp      = on (<>) argHelp     parsed saved
-        , argRequired  = on (<>) argRequired parsed saved
-        , argType      = on (<>) argType     parsed saved
+        { argHelp       = on (<>) argHelp       parsed saved
+        , argRequired   = on (<>) argRequired   parsed saved
+        , argDeprecated = on (<>) argDeprecated parsed saved
+        , argType       = on (<>) argType       parsed saved
         }
 
 instance ToJSON Arg where

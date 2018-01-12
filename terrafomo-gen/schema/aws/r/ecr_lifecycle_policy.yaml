@@ -6,10 +6,12 @@ arguments:
       details about <http://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters>
       in the official AWS docs.
     type: Text
+    deprecated: false
   _repository:
     required: true
     help: (Required) Name of the repository to apply the policy.
     type: Text
+    deprecated: false
 attributes:
   registry_id:
     help: ! '- The registry ID where the repository was created.'

@@ -6,57 +6,67 @@ arguments:
       client is needed to create an LB monitor. If omitted, the @region@ argument
       of the provider is used. Changing this creates a new LB monitor.
     type: Text
+    deprecated: false
   _expected_codes:
     required: false
     help: (Optional) equired for HTTP(S) types. Expected HTTP codes for a passing
       HTTP(S) monitor. You can either specify a single status like "200", or a range
       like "200-202". Changing this updates the expected_codes of the existing monitor.
     type: Text
+    deprecated: false
   _url_path:
     required: false
     help: (Optional) Required for HTTP(S) types. URI path that will be accessed if
       monitor type is HTTP or HTTPS. Changing this updates the url_path of the existing
       monitor.
     type: Text
+    deprecated: false
   _timeout:
     required: true
     help: (Required) Maximum number of seconds for a monitor to wait for a ping reply
       before it times out. The value must be less than the delay value. Changing this
       updates the timeout of the existing monitor.
     type: Text
+    deprecated: false
   _http_method:
     required: false
     help: (Optional) Required for HTTP(S) types. The HTTP method used for requests
       by the monitor. If this attribute is not specified, it defaults to "GET". Changing
       this updates the http_method of the existing monitor.
     type: Text
+    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) The administrative state of the monitor. Acceptable values are
       "true" and "false". Changing this value updates the state of the existing monitor.
     type: Text
+    deprecated: false
   _max_retries:
     required: true
     help: (Required) Number of permissible ping failures before changing the member's
       status to INACTIVE. Must be a number between 1 and 10. Changing this updates
       the max_retries of the existing monitor.
     type: Text
+    deprecated: false
   _delay:
     required: true
     help: (Required) The time, in seconds, between sending probes to members. Changing
       this creates a new monitor.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of probe, which is PING, TCP, HTTP, or HTTPS, that is
       sent by the monitor to verify the member state. Changing this creates a new
       monitor.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the monitor. Required if admin wants to create a
       monitor for another tenant. Changing this creates a new monitor.
     type: Text
+    deprecated: false
 attributes:
   admin_state_up:
     help: ! '- See Argument Reference above.'

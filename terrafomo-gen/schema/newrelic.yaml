@@ -5,6 +5,7 @@ arguments:
     help: (Required) Your New Relic API key. Can also use @NEWRELIC_API_KEY@ environment
       variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: <https://newrelic.com/> offers a performance management solution enabling developers
   to diagnose and fix application performance problems in real time. Use the navigation

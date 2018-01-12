@@ -4,22 +4,27 @@ arguments:
     required: false
     help: (Optional) Default lease duration for tokens and secrets in seconds
     type: Text
+    deprecated: false
   _max_lease_ttl_seconds:
     required: false
     help: (Optional) Maximum possible lease duration for tokens and secrets in seconds
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Human-friendly description of the mount
     type: Text
+    deprecated: false
   _path:
     required: true
     help: (Required) Where the secret backend will be mounted
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) Type of the backend, such as "aws"
     type: Text
+    deprecated: false
 attributes: {}
 about: ''
 examples: []

@@ -4,16 +4,19 @@ arguments:
     required: false
     help: (Optional) Peer router interface ID.
     type: Text
+    deprecated: false
   _opposite_router_type:
     required: false
     help: ! '(Optional, Force New) Peer router type. Optional value: @VRouter@ , @VBR@
       . Default to @VRouter@ .'
     type: Text
+    deprecated: false
   _access_point_id:
     required: false
     help: (Optional, Force New) Access point ID. Required when @router_type@ is @VBR@
       . Prohibited when @router_type@ is @VRouter@ .
     type: Text
+    deprecated: false
   _health_check_target_ip:
     required: false
     help: (Optional) Used as the Packet Target IP of health check for disaster recovery
@@ -21,16 +24,19 @@ arguments:
       is @VBR@ . The IP must be an unused IP in the local VPC. It and @health_check_source_ip@
       must be specified at the same time.
     type: Text
+    deprecated: false
   _opposite_interface_owner_id:
     required: false
     help: (Optional) Peer account ID. Log on to the Alibaba Cloud console, select
       User Info > Account Management to check your account ID.
     type: Text
+    deprecated: false
   _opposite_router_id:
     required: false
     help: (Optional) Peer router ID. When @opposite_router_type@ is VBR, the @opposite_router_id@
       must be in the access point specified by @opposite_access_point_id@ .
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) Name of the router interface. Length must be 2-80 characters
@@ -38,27 +44,32 @@ arguments:
       (_), or dash (-) are permitted. If it is not specified, the default value is
       interface ID. The name cannot start with http:// and https://.
     type: Text
+    deprecated: false
   _role:
     required: true
     help: ! '(Required, Force New) The role the router interface plays. Optional value:
       @InitiatingSide@ , @AcceptingSide@ .'
     type: Text
+    deprecated: false
   _router_id:
     required: true
     help: (Required, Force New) Router ID. When @router_type@ is VBR, the VBR specified
       by the @router_id@ must be in the access point specified by @access_point_id@
       .
     type: Text
+    deprecated: false
   _opposite_access_point_id:
     required: false
     help: (Optional, Force New) Access point ID of peer side. Required when @opposite_router_type@
       is @VBR@ . Prohibited when @opposite_router_type@ is @VRouter@ .
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the router interface. It can be 2-256 characters
       long or left blank. It cannot start with http:// and https://.
     type: Text
+    deprecated: false
   _specification:
     required: false
     help: (Optional) Specification of router interfaces. If @role@ is @AcceptingSide@
@@ -66,16 +77,19 @@ arguments:
       refer to <https://www.alibabacloud.com/help/doc-detail/52415.htm?spm=a3c0i.o52412zh.b99.10.698e566fdVCfKD>
       .
     type: Text
+    deprecated: false
   _opposite_region:
     required: true
     help: ! '(Required, Force New) The Region of peer side. At present, optional value:
       @cn-beijing@ , @cn-hangzhou@ , @cn-shanghai@ , @cn-shenzhen@ , @cn-hongkong@
       , @ap-southeast-1@ , @us-east-1@ , @us-west-1@ .'
     type: Text
+    deprecated: false
   _router_type:
     required: true
     help: ! '(Required, Forces New) Router Type. Optional value: VRouter, VBR.'
     type: Text
+    deprecated: false
   _health_check_source_ip:
     required: false
     help: (Optional) Used as the Packet Source IP of health check for disaster recovery
@@ -83,6 +97,7 @@ arguments:
       is @VBR@ . The IP must be an unused IP in the local VPC. It and @health_check_target_ip@
       must be specified at the same time.
     type: Text
+    deprecated: false
 attributes:
   access_point_id:
     help: ! '- Access point of the router interface.'

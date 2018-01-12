@@ -4,41 +4,49 @@ arguments:
     required: true
     help: (Required) The CIDR block for the VPC.
     type: Text
+    deprecated: false
   _assign_generated_ipv6_cidr_block:
     required: false
     help: (Optional) Requests an Amazon-provided IPv6 CIDR block with a /56 prefix
       length for the VPC. You cannot specify the range of IP addresses, or the size
       of the CIDR block. Default is @false@ .
     type: Text
+    deprecated: false
   _enable_classiclink:
     required: false
     help: (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only
       valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html>
       for more information. Defaults false.
     type: Text
+    deprecated: false
   _enable_dns_support:
     required: false
     help: (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults
       true.
     type: Text
+    deprecated: false
   _enable_dns_hostnames:
     required: false
     help: (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults
       false.
     type: Text
+    deprecated: false
   _enable_classiclink_dns_support:
     required: false
     help: (Optional) A boolean flag to enable/disable ClassicLink DNS Support for
       the VPC. Only valid in regions and accounts that support EC2 Classic.
     type: Text
+    deprecated: false
   _instance_tenancy:
     required: false
     help: (Optional) A tenancy option for instances launched into the VPC
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   instance_tenancy:
     help: ! '- Tenancy of instances spin up within VPC.'

@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '- The region to operate under.'
     type: Text
+    deprecated: false
   _project:
     required: true
     help: ! '- The ID of the project to apply any resources to.'
     type: Text
+    deprecated: false
 attributes: {}
 about: Use this data source to access the configuration of the Google Cloud provider.
 examples: []

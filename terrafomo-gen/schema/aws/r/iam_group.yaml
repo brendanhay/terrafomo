@@ -7,10 +7,12 @@ arguments:
       characters: @=,.@-_.@ . Group names are not distinguished by case. For example,
       you cannot create groups named both "ADMINS" and "admins".'
     type: Text
+    deprecated: false
   _path:
     required: false
     help: (Optional, default "/") Path in which to create the group.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN assigned by AWS for this group.'

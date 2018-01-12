@@ -4,19 +4,23 @@ arguments:
     required: true
     help: (Required) The load balancer to which the policy should be attached.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the SSL negotiation policy.
     type: Text
+    deprecated: false
   _attribute:
     required: false
     help: ! '(Optional) An SSL Negotiation policy attribute. Each has two properties:'
     type: Text
+    deprecated: false
   _lb_port:
     required: true
     help: (Required) The load balancer port to which the policy should be applied.
       This must be an active listener on the load balancer.
     type: Text
+    deprecated: false
 attributes:
   attribute:
     help: ! '- The SSL Negotiation policy attributes.'

@@ -5,22 +5,26 @@ arguments:
     help: (Required) Front-end port for the application gateway.  The @frontend_port@
       block supports fields documented below.
     type: Text
+    deprecated: false
   _probe:
     required: false
     help: (Optional) Specifies list of URL probes. The @probe@ block supports fields
       documented below.
     type: Text
+    deprecated: false
   _url_path_map:
     required: false
     help: (Optional) UrlPathMaps give url Path to backend mapping information for
       PathBasedRouting specified in @request_routing_rule@ .  The @url_path_map@ block
       supports fields documented below.
     type: Text
+    deprecated: false
   _authentication_certificate:
     required: false
     help: (Optional) List of authentication certificates.  The @authentication_certificate@
       block supports fields documented below.
     type: Text
+    deprecated: false
   _frontend_ip_configuration:
     required: true
     help: (Required) Specifies lists of frontend IP configurations. Currently only
@@ -28,16 +32,19 @@ arguments:
       element can specify either Public or Private IP address, not both.  The @frontend_ip_configuration@
       block supports fields documented below.
     type: Text
+    deprecated: false
   _waf_configuration:
     required: false
     help: (Optional) Web Application Firewall configuration settings. The @waf_configuration@
       block supports fields documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the application gateway. Changing this forces a new
       resource to be created.
     type: Text
+    deprecated: false
   _gateway_ip_configuration:
     required: true
     help: (Required) List of subnets that the application gateway is deployed into.  The
@@ -45,12 +52,14 @@ arguments:
       other resource can be deployed in a subnet where application gateway is deployed.  The
       @gateway_ip_configuration@ block supports fields documented below.
     type: Text
+    deprecated: false
   _backend_http_settings:
     required: true
     help: (Required) Related group of backend http and/or https features to be applied
       when routing to backend address pools.  The @backend_http_settings@ block supports
       fields documented below.
     type: Text
+    deprecated: false
   _backend_address_pool:
     required: true
     help: (Required) Backend pools can be composed of NICs, virtual machine scale
@@ -60,42 +69,50 @@ arguments:
       data centers, or outside of Azure as long as they have IP connectivity.  The
       @backend_address_pool@ block supports fields documented below.
     type: Text
+    deprecated: false
   _ssl_certificate:
     required: false
     help: (Optional) List of ssl certificates. The @ssl_certificate@ block supports
       fields documented below.
     type: Text
+    deprecated: false
   _request_routing_rule:
     required: true
     help: (Required) Request routing rules can be either Basic or Path Based.  Request
       routing rules are order sensitive.  The @request_routing_rule@ block supports
       fields documented below.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) The location/region where the application gateway is created.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _sku:
     required: true
     help: (Required) Specifies size, tier and capacity of the application gateway.  Must
       be specified once.  The @sku@ block fields documented below.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the application
       gateway.
     type: Text
+    deprecated: false
   _disabled_ssl_protocols:
     required: true
     help: ! '- TODO - based on "sslPolicy": {"disabledSslProtocols": []}'
     type: Text
+    deprecated: false
   _http_listener:
     required: true
     help: (Required) 1 or more listeners specifying port, http or https and SSL certificate
       (if configuring SSL offload)  Each @http_listener@ is attached to a @frontend_ip_configuration@
       .  The @http_listener@ block supports fields documented below.
     type: Text
+    deprecated: false
 attributes:
   location:
     help: ! '- The location/region where the application gateway is created'

@@ -4,15 +4,18 @@ arguments:
     required: false
     help: (Optional) The name of the security group. Defaults to null.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional, Forces new resource) The security group description. Defaults
       to null.
     type: Text
+    deprecated: false
   _vpc_id:
     required: false
     help: (Optional, Forces new resource) The VPC ID.
     type: Text
+    deprecated: false
 attributes:
   vpc_id:
     help: ! '- The VPC ID.'

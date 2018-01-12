@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) Name of collector group
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Set description of collector group
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a LogicMonitor collector group resource. This can be used to create
   and manage LogicMonitor users

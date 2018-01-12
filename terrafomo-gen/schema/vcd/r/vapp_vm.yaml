@@ -4,18 +4,22 @@ arguments:
     required: true
     help: (Required) The catalog name in which to find the given vApp Template
     type: Text
+    deprecated: false
   _cpus:
     required: false
     help: (Optional) The number of virtual CPUs to allocate to the vApp
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the vApp
     type: Text
+    deprecated: false
   _memory:
     required: false
     help: (Optional) The amount of RAM (in MB) to allocate to the vApp
     type: Text
+    deprecated: false
   _ip:
     required: false
     help: (Optional) The IP to assign to this vApp. Must be an IP address or one of
@@ -23,23 +27,28 @@ arguments:
       set for the network. If left blank, and the network has @dhcp_pool@ set with
       at least one available IP then this will be set with DHCP.
     type: Text
+    deprecated: false
   _power_on:
     required: false
     help: (Optional) A boolean value stating if this vApp should be powered on. Default
       to @true@
     type: Text
+    deprecated: false
   _template_name:
     required: true
     help: (Required) The name of the vApp Template to use
     type: Text
+    deprecated: false
   _initscript:
     required: true
     help: (Optional) A script to be run only on initial boot
     type: Text
+    deprecated: false
   _vapp_name:
     required: true
     help: (Required) The vApp this VM should belong to.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides a vCloud Director VM resource. This can be used to create, modify,
   and delete VMs within a vApp. ~> Note: There is known bug with this implementation,

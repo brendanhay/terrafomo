@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) - The ARN of the policy you want to apply
     type: Text
+    deprecated: false
   _group:
     required: true
     help: (Required) - The group the policy should be applied to
     type: Text
+    deprecated: false
 attributes: {}
 about: Attaches a Managed IAM Policy to an IAM group
 examples: []

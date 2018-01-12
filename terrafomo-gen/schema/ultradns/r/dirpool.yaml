@@ -4,37 +4,45 @@ arguments:
     required: false
     help: ! '(Optional) String. Valid: @"GEO"@ or @"IP"@ . Default: @"GEO"@ .'
     type: Text
+    deprecated: false
   _no_response:
     required: false
     help: (Optional) a single Record Data block, without any @host@ attribute. Record
       Data documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the record
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: ! '(Optional) The TTL of the record. Default: @3600@ .'
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The domain to add the record to
     type: Text
+    deprecated: false
   _description:
     required: true
     help: (Required) Description of the Traffic Controller pool. Valid values are
       strings less than 256 characters.
     type: Text
+    deprecated: false
   _rdata:
     required: true
     help: (Required) a list of Record Data blocks, one for each member in the pool.
       Record Data documented below.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The Record Type of the record
     type: Text
+    deprecated: false
 attributes:
   hostname:
     help: ! '- The FQDN of the record'

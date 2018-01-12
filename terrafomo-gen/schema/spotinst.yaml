@@ -6,28 +6,33 @@ arguments:
       with the username. It can be sourced from the @SPOTINST_CLIENT_ID@ environment
       variable.
     type: Text
+    deprecated: false
   _token:
     required: false
     help: (Optional; Required if not using @password@ ) A Personal API Access Token
       issued by Spotinst. It can be sourced from the @SPOTINST_TOKEN@ environment
       variable.
     type: Text
+    deprecated: false
   _client_secret:
     required: false
     help: (Optional; Required if not using @token@ ) The OAuth client secret associated
       with the username. It can be sourced from the @SPOTINST_CLIENT_SECRET@ environment
       variable.
     type: Text
+    deprecated: false
   _password:
     required: false
     help: (Optional; Required if not using @token@ ) The password associated with
       the username. It can be sourced from the @SPOTINST_PASSWORD@ environment variable.
     type: Text
+    deprecated: false
   _email:
     required: true
     help: (Required) The email registered in Spotinst. It must be provided, but it
       can also be sourced from the @SPOTINST_EMAIL@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The Spotinst provider is used to interact with the resources supported by Spotinst.
   The provider needs to be configured with the proper credentials before it can be

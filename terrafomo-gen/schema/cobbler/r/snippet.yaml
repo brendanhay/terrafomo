@@ -5,10 +5,12 @@ arguments:
     help: (Required) The name of the snippet. This must be the full path, including
       @/var/lib/cobbler/snippets@ .
     type: Text
+    deprecated: false
   _body:
     required: true
     help: (Required) The body of the snippet.
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages a Snippet within Cobbler.
 examples: []

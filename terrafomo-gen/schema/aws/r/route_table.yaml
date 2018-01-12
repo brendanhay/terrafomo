@@ -4,18 +4,22 @@ arguments:
     required: false
     help: (Optional) A list of virtual gateways for propagation.
     type: Text
+    deprecated: false
   _vpc_id:
     required: true
     help: (Required) The VPC ID.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _route:
     required: false
     help: (Optional) A list of route objects. Their keys are documented below.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the routing table'

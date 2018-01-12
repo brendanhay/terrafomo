@@ -5,32 +5,38 @@ arguments:
     help: (Required) Specifies the name of the Container Group. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _os_type:
     required: true
     help: (Required) The OS for the container group. Allowed values are @Linux@ and
       @Windows@ . Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the Container
       Group. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _ip_address_type:
     required: false
     help: (Optional) Specifies the ip address type of the container. @Public@ is the
       only acceptable value at this time. Changing this forces a new resource to be
       created.
     type: Text
+    deprecated: false
   _container:
     required: true
     help: (Required) The definition of a container that is part of the group as documented
       in the @container@ block below. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The container group ID.'

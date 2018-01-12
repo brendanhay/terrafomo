@@ -4,48 +4,58 @@ arguments:
     required: true
     help: (Required) The title of the graph.
     type: Text
+    deprecated: false
   _metric:
     required: false
     help: (Optional) A list of metric streams to graph.  See below for options.
     type: Text
+    deprecated: false
   _graph_style:
     required: false
     help: (Optional) How the graph should be rendered.  Valid options are @area@ or
       @line@ (default).
     type: Text
+    deprecated: false
   _line_style:
     required: false
     help: (Optional) How the line should change between points.  Can be either @stepped@
       (default) or @interpolated@ .
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of what the graph is for.
     type: Text
+    deprecated: false
   _left:
     required: false
     help: ! '(Optional) A map of graph left axis options.  Valid values in @left@
       include: @logarithmic@ can be set to @0@ (default) or @1@ ; @min@ is the @min@
       Y axis value on the left; and @max@ is the Y axis max value on the left.'
     type: Text
+    deprecated: false
   _notes:
     required: false
     help: (Optional) A place for storing notes about this graph.
     type: Text
+    deprecated: false
   _right:
     required: false
     help: ! '(Optional) A map of graph right axis options.  Valid values in @right@
       include: @logarithmic@ can be set to @0@ (default) or @1@ ; @min@ is the @min@
       Y axis value on the right; and @max@ is the Y axis max value on the right.'
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A list of tags assigned to this graph.
     type: Text
+    deprecated: false
   _metric_cluster:
     required: false
     help: (Optional) A metric cluster to graph.  See below for options.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @circonus_graph@ resource creates and manages a <https://login.circonus.com/user/docs/Visualization/Graph/Create>
   . https://login.circonus.com/resources/api/calls/graph).

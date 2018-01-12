@@ -5,18 +5,22 @@ arguments:
     help: (Required) Name or part of the name of an existing image that you want to
       search for.
     type: Text
+    deprecated: false
   _location:
     required: false
     help: (Optional) Id of the existing image's location.
     type: Text
+    deprecated: false
   _version:
     required: false
     help: (Optional) Version of the image (see details below).
     type: Text
+    deprecated: false
   _type':
     required: false
     help: (Optional) The image type, HDD or CD-ROM.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- UUID of the image'

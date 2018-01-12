@@ -7,11 +7,13 @@ arguments:
       It must be provided, but it can also be sourced from the @GITHUB_ORGANIZATION@
       environment variable.
     type: Text
+    deprecated: false
   _token:
     required: false
     help: (Optional) This is the GitHub personal access token. It must be provided,
       but it can also be sourced from the @GITHUB_TOKEN@ environment variable.
     type: Text
+    deprecated: false
   _base_url:
     required: false
     help: (Optional) This is the target GitHub base API endpoint. Providing a value
@@ -19,6 +21,7 @@ arguments:
       this value and it can also be sourced from the @GITHUB_BASE_URL@ environment
       variable.  The value must end with a slash.
     type: Text
+    deprecated: false
 attributes: {}
 about: The GitHub provider is used to interact with GitHub organization resources.
   The provider allows you to manage your GitHub organization's members and teams easily.

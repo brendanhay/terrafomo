@@ -5,19 +5,23 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _dns_name:
     required: true
     help: (Required) The DNS name of this zone, e.g. "terraform.io".
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A textual description field. Defaults to 'Managed by Terraform'.
     type: Text
+    deprecated: false
 attributes:
   name_servers:
     help: ! '- The list of nameservers that will be authoritative for this domain.

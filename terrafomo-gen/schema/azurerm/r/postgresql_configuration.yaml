@@ -5,22 +5,26 @@ arguments:
     help: (Required) Specifies the value of the PostgreSQL Configuration. See the
       PostgreSQL documentation for valid values.
     type: Text
+    deprecated: false
   _server_name:
     required: true
     help: (Required) Specifies the name of the PostgreSQL Server. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the PostgreSQL Configuration, which needs
       <https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIER>
       . Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the PostgreSQL Server
       exists. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the PostgreSQL Configuration.'

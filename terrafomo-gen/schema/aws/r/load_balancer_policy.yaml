@@ -4,18 +4,22 @@ arguments:
     required: false
     help: (Optional) Policy attribute to apply to the policy.
     type: Text
+    deprecated: false
   _load_balancer_name:
     required: true
     help: (Required) The load balancer on which the policy is defined.
     type: Text
+    deprecated: false
   _policy_name:
     required: true
     help: (Required) The name of the load balancer policy.
     type: Text
+    deprecated: false
   _policy_type_name:
     required: true
     help: (Required) The policy type.
     type: Text
+    deprecated: false
 attributes:
   policy_type_name:
     help: ! '- The policy type of the policy.'

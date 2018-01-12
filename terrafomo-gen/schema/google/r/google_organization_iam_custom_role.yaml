@@ -6,32 +6,39 @@ arguments:
       of possible stages is <https://cloud.google.com/iam/reference/rest/v1/organizations.roles#Role.RoleLaunchStage>
       .
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A human-readable description for the role.
     type: Text
+    deprecated: false
   _org_id:
     required: true
     help: (Required) The numeric ID of the organization in which you want to create
       a custom role.
     type: Text
+    deprecated: false
   _title:
     required: true
     help: (Required) A human-readable title for the role.
     type: Text
+    deprecated: false
   _permissions:
     required: true
     help: (Required) The names of the permissions this role grants when bound in an
       IAM policy. At least one permission must be specified.
     type: Text
+    deprecated: false
   _deleted:
     required: false
     help: (Optional) The current deleted state of the role. Defaults to @false@ .
     type: Text
+    deprecated: false
   _role_id:
     required: true
     help: (Required) The role id to use for this role.
     type: Text
+    deprecated: false
 attributes: {}
 about: Allows management of a customized Cloud IAM organization role. For more information
   see <https://cloud.google.com/iam/docs/understanding-custom-roles> and <https://cloud.google.com/iam/reference/rest/v1/organizations.roles>

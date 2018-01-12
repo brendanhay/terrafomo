@@ -5,10 +5,12 @@ arguments:
     help: (Optional) The IP address type and IP address range (in CIDR notation) from
       which web requests originate.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name or description of the IPSet.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a WAF Regional IPSet Resource for use with Application Load Balancer.
 examples: []

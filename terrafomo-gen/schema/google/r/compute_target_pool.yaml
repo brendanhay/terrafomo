@@ -6,38 +6,46 @@ arguments:
       (hash of the source/dest addresses / ports), and "CLIENT_IP_PROTO" also includes
       the protocol (default "NONE").
     type: Text
+    deprecated: false
   _region:
     required: false
     help: (Optional) Where the target pool resides. Defaults to project region.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _failover_ratio:
     required: false
     help: (Optional) Ratio (0 to 1) of failed nodes before using the backup pool (which
       must also be set).
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Textual description field.
     type: Text
+    deprecated: false
   _health_checks:
     required: false
     help: (Optional) List of zero or one health check name or self_link. Only legacy
       @google_compute_http_health_check@ is supported.
     type: Text
+    deprecated: false
   _backup_pool:
     required: false
     help: (Optional) URL to the backup target pool. Must also set failover_ratio.
     type: Text
+    deprecated: false
   _instances:
     required: false
     help: (Optional) List of instances in the pool. They can be given as URLs, or
@@ -45,6 +53,7 @@ arguments:
       of target pool creation, so there is no need to use the Terraform interpolators
       to create a dependency on the instances from the target pool.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

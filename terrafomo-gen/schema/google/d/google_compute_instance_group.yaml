@@ -5,14 +5,17 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the instance group.
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The zone of the instance group.
     type: Text
+    deprecated: false
 attributes:
   named_port:
     help: ! '- List of named ports in the group.'

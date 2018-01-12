@@ -65,5 +65,6 @@ packages:
   - provider/terrafomo-triton
   - provider/terrafomo-ultradns
   - provider/terrafomo-vault
-  - provider/terrafomo-vmware
+  - provider/terrafomo-vcloud-director
+  - provider/terrafomo-vsphere
 # END GENERATED

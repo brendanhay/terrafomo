@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the RDS instance
     type: Text
+    deprecated: false
 attributes:
   preferred_maintenance_window:
     help: ! '-  Specifies the weekly time range during which system maintenance can

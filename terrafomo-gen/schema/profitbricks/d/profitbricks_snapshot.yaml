@@ -5,14 +5,17 @@ arguments:
     help: (Required) Name or part of the name of an existing snapshot that you want
       to search for.
     type: Text
+    deprecated: false
   _size:
     required: false
     help: (Optional) The size of the snapshot to look for.
     type: Text
+    deprecated: false
   _location:
     required: false
     help: (Optional) Id of the existing snapshot's location.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- UUID of the snapshot'

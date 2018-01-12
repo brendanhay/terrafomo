@@ -4,33 +4,40 @@ arguments:
     required: false
     help: (Optional) A mapping of labels to assign to the resource.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _default_table_expiration_ms:
     required: false
     help: (Optional) The default lifetime of all tables in the dataset, in milliseconds.
       The minimum value is 3600000 milliseconds (one hour).
     type: Text
+    deprecated: false
   _friendly_name:
     required: false
     help: (Optional) A descriptive name for the dataset.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A user-friendly description of the dataset.
     type: Text
+    deprecated: false
   _dataset_id:
     required: true
     help: (Required) A unique ID for the resource. Changing this forces a new resource
       to be created.
     type: Text
+    deprecated: false
   _location:
     required: false
     help: (Optional) The geographic location where the dataset should reside.
     type: Text
+    deprecated: false
 attributes:
   etag:
     help: ! '- A hash of the resource.'

@@ -4,20 +4,24 @@ arguments:
     required: true
     help: (Required) The name to use for the resulting md device.
     type: Text
+    deprecated: false
   _spares:
     required: false
     help: (Optional) The number of spares (if applicable) in the array.
     type: Text
+    deprecated: false
   _level:
     required: true
     help: (Required) The redundancy level of the array (e.g. linear, raid1, raid5,
       etc.).
     type: Text
+    deprecated: false
   _devices:
     required: true
     help: (Required) The list of devices (referenced by their absolute path) in the
       array.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- ID used to reference this resource in ignition_config'

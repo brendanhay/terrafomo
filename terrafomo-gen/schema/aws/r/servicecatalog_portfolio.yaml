@@ -4,18 +4,22 @@ arguments:
     required: true
     help: (Required) The name of the portfolio.
     type: Text
+    deprecated: false
   _description:
     required: true
     help: (Required) Description of the portfolio
     type: Text
+    deprecated: false
   _provider_name:
     required: true
     help: (Required) Name of the person or organization who owns the portfolio.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) Tags to apply to the connection.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the Service Catalog Portfolio.'

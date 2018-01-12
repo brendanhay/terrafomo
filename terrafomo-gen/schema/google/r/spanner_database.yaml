@@ -5,10 +5,12 @@ arguments:
     help: (Optional) The project in which to look for the @instance@ specified. If
       it is not provided, the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the database.
     type: Text
+    deprecated: false
   _ddl:
     required: false
     help: ! '(Optional) An optional list of DDL statements to run inside the newly
@@ -16,10 +18,12 @@ arguments:
       execute atomically with the creation of the database: if there is an error in
       any statement, the database is not created.'
     type: Text
+    deprecated: false
   _instance':
     required: true
     help: (Required) The name of the instance that will serve the new database.
     type: Text
+    deprecated: false
 attributes:
   state:
     help: ! '- The current state of the database.'

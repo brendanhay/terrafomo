@@ -4,18 +4,22 @@ arguments:
     required: false
     help: (Optional) A list of Icinga2 templates to assign to the host.
     type: Text
+    deprecated: false
   _arguments:
     required: false
     help: (Optional) A mapping of arguments to include with the command.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Name by which to reference the checkcommand
     type: Text
+    deprecated: false
   _command:
     required: true
     help: (Required) Path to the command te be executed.
     type: Text
+    deprecated: false
 attributes: {}
 about: Configures an Icinga2 checkcommand resource. This allows checkcommands to be
   configured, updated, and deleted.

@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) The path to a custom CA / intermediate certificate.
     type: Text
+    deprecated: false
   _endpoint:
     required: true
     help: ! '(Required) The HTTP URL of the management plugin on the RabbitMQ server.
@@ -11,18 +12,22 @@ arguments:
       Note : This is not the IP address or hostname of the RabbitMQ server that you
       would use to access RabbitMQ directly.'
     type: Text
+    deprecated: false
   _insecure:
     required: false
     help: (Optional) Trust self-signed certificates.
     type: Text
+    deprecated: false
   _password:
     required: false
     help: (Optional) Password for the given user.
     type: Text
+    deprecated: false
   _username:
     required: true
     help: (Required) Username to use to authenticate with the server.
     type: Text
+    deprecated: false
 attributes: {}
 about: <http://www.rabbitmq.com> is an AMQP message broker server. The RabbitMQ provider
   exposes resources used to manage the configuration of resources in a RabbitMQ server.

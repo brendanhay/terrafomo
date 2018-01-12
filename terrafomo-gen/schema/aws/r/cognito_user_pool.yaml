@@ -4,82 +4,100 @@ arguments:
     required: true
     help: (Optional) - A container for information about the <#password-policy> .
     type: Text
+    deprecated: false
   _sms_configuration:
     required: true
     help: (Optional) - The <#sms-configuration> .
     type: Text
+    deprecated: false
   _admin_create_user_config:
     required: true
     help: (Optional) - The configuration for <#admin-create-user-config> requests.
     type: Text
+    deprecated: false
   _device_configuration:
     required: true
     help: (Optional) - The configuration for the <#device-configuration> .
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the user pool.
     type: Text
+    deprecated: false
   _sms_verification_message:
     required: false
     help: (Optional) A string representing the SMS verification message.
     type: Text
+    deprecated: false
   _email_verification_subject:
     required: false
     help: (Optional) A string representing the email verification subject.
     type: Text
+    deprecated: false
   _schema:
     required: true
     help: (Optional) - A container with the <#schema-attributes> of a user pool. Maximum
       of 50 attributes.
     type: Text
+    deprecated: false
   _alias_attributes:
     required: false
     help: ! '(Optional) Attributes supported as an alias for this user pool. Possible
       values: phone_number, email, or preferred_username. Conflicts with @username_attributes@
       .'
     type: Text
+    deprecated: false
   _auto_verified_attributes:
     required: false
     help: ! '(Optional) The attributes to be auto-verified. Possible values: email,
       phone_number.'
     type: Text
+    deprecated: false
   _email_verification_message:
     required: false
     help: (Optional) A string representing the email verification message. Must contain
       the @{####}@ placeholder.
     type: Text
+    deprecated: false
   _email_configuration:
     required: true
     help: (Optional) - The <#email-configuration> .
     type: Text
+    deprecated: false
   _mfa_configuration:
     required: false
     help: ! '(Optional, Default: OFF) Set to enable multi-factor authentication. Must
       be one of the following values (ON, OFF, OPTIONAL)'
     type: Text
+    deprecated: false
   _lambda_config:
     required: true
     help: (Optional) - A container for the AWS <#lambda-configuration> associated
       with the user pool.
     type: Text
+    deprecated: false
   _verification_message_template:
     required: true
     help: (Optional) - The <#verification-message-template> configuration.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the User Pool.
     type: Text
+    deprecated: false
   _sms_authentication_message:
     required: false
     help: (Optional) A string representing the SMS authentication message.
     type: Text
+    deprecated: false
   _username_attributes:
     required: false
     help: (Optional) pecifies whether email addresses or phone numbers can be specified
       as usernames when a user signs up. Conflicts with @alias_attributes@ .
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a Cognito User Pool resource.
 examples: []

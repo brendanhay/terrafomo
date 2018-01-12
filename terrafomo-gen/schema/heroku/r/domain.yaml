@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The hostname to serve requests from.
     type: Text
+    deprecated: false
   _app:
     required: true
     help: (Required) The Heroku app to link to.
     type: Text
+    deprecated: false
 attributes:
   cname:
     help: ! '- The CNAME traffic should route to.'

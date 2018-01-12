@@ -6,11 +6,13 @@ arguments:
       override all access restrictions within the database.  Default value is @false@
       .
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the role. Must be unique on the PostgreSQL server
       instance where it is configured.
     type: Text
+    deprecated: false
   _password:
     required: false
     help: (Optional) Sets the role's password. (A password is only of use for roles
@@ -19,6 +21,7 @@ arguments:
       the password is set to the magic value @NULL@ , the password will be always
       be cleared.
     type: Text
+    deprecated: false
   _skip_drop_role:
     required: false
     help: (Optional) When a PostgreSQL ROLE exists in multiple databases and the ROLE
@@ -28,6 +31,7 @@ arguments:
       in a PostgreSQL cluster using the same PostgreSQL ROLE for object ownership.
       This is the third and final step taken when removing a ROLE from a database.
     type: Text
+    deprecated: false
   _encrypted_password:
     required: false
     help: ! '(Optional) Defines whether the password is stored encrypted in the system
@@ -35,17 +39,20 @@ arguments:
       conservative and safe value), but may interfere with the behavior of <https://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-PASSWORD-ENCRYPTION>
       .'
     type: Text
+    deprecated: false
   _create_database:
     required: false
     help: (Optional) Defines a role's ability to execute @CREATE DATABASE@ .  Default
       value is @false@ .
     type: Text
+    deprecated: false
   _login:
     required: false
     help: (Optional) Defines whether role is allowed to log in.  Roles without this
       attribute are useful for managing database privileges, but are not users in
       the usual sense of the word.  Default value is @false@ .
     type: Text
+    deprecated: false
   _valid_until:
     required: false
     help: (Optional) Defines the date and time after which the role's password is
@@ -54,6 +61,7 @@ arguments:
       omitted or the magic value @NULL@ is used, @valid_until@ will be set to @infinity@
       .  Default is @NULL@ , therefore @infinity@ .
     type: Text
+    deprecated: false
   _skip_reassign_owned:
     required: false
     help: (Optional) When a PostgreSQL ROLE exists in multiple databases and the ROLE
@@ -64,32 +72,38 @@ arguments:
       an implicit <https://www.postgresql.org/docs/current/static/sql-drop-owned.html>
       ).
     type: Text
+    deprecated: false
   _inherit:
     required: false
     help: (Optional) Defines whether a role "inherits" the privileges of roles it
       is a member of.  Default value is @true@ .
     type: Text
+    deprecated: false
   _bypass_row_level_security:
     required: false
     help: (Optional) Defines whether a role bypasses every row-level security (RLS)
       policy.  Default value is @false@ .
     type: Text
+    deprecated: false
   _create_role:
     required: false
     help: (Optional) Defines a role's ability to execute @CREATE ROLE@ . A role with
       this privilege can also alter and drop other roles.  Default value is @false@
       .
     type: Text
+    deprecated: false
   _connection_limit:
     required: false
     help: (Optional) If this role can log in, this specifies how many concurrent connections
       the role can establish. @-1@ (the default) means no limit.
     type: Text
+    deprecated: false
   _replication:
     required: false
     help: (Optional) Defines whether a role is allowed to initiate streaming replication
       or put the system in and out of backup mode.  Default value is @false@
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The @postgresql_role@ resource creates and manages a role on a PostgreSQL
   server. When a @postgresql_role@ resource is removed, the PostgreSQL ROLE will automatically

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the ECR Repository.
     type: Text
+    deprecated: false
 attributes:
   registry_id:
     help: ! '- The registry ID where the repository was created.'

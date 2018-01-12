@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The Volume ID of which to make a snapshot.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description of what the snapshot is.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the snapshot
     type: Text
+    deprecated: false
 attributes:
   kms_key_id:
     help: ! '- The ARN for the KMS encryption key.'

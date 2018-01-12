@@ -5,14 +5,17 @@ arguments:
     help: (Optional) Whether to enable or disable the App Feature. The default value
       is true.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the App Feature to manage.
     type: Text
+    deprecated: false
   _app:
     required: true
     help: (Required) The Heroku app to link to.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a Heroku App Feature resource. This can be used to create and manage
   App Features on Heroku.

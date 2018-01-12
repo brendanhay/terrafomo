@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The vendor name to use to find a vendor in the PagerDuty API.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The short name of the found vendor.'

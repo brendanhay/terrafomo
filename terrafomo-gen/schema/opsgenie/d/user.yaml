@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The username (email) to use to find a user in OpsGenie.
     type: Text
+    deprecated: false
 attributes:
   full_name:
     help: ! '- The full name of the found user.'

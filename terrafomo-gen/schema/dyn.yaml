@@ -5,16 +5,19 @@ arguments:
     help: (Required) The Dyn password. It must be provided, but it can also be sourced
       from the @DYN_PASSWORD@ environment variable.
     type: Text
+    deprecated: false
   _username:
     required: true
     help: (Required) The Dyn username. It must be provided, but it can also be sourced
       from the @DYN_USERNAME@ environment variable.
     type: Text
+    deprecated: false
   _customer_name:
     required: true
     help: (Required) The Dyn customer name. It must be provided, but it can also be
       sourced from the @DYN_CUSTOMER_NAME@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The Dyn provider is used to interact with the resources supported by Dyn. The
   provider needs to be configured with the proper credentials before it can be used.

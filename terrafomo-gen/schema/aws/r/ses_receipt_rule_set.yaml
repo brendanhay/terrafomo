@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the rule set
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an SES receipt rule set resource
 examples: []

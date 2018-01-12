@@ -4,12 +4,14 @@ arguments:
     required: true
     help: (Required) The name of the policy.
     type: Text
+    deprecated: false
   _incident_preference:
     required: false
     help: ! '(Optional) The rollup strategy for the policy.  Options include: @PER_POLICY@
       , @PER_CONDITION@ , or @PER_CONDITION_AND_TARGET@ .  The default is @PER_POLICY@
       .'
     type: Text
+    deprecated: false
 attributes:
   updated_at:
     help: ! '- The time the policy was last updated.'

@@ -5,60 +5,73 @@ arguments:
     help: (Optional) The host header CDN provider will send along with content requests
       to origins. Defaults to the host name of the origin.
     type: Text
+    deprecated: false
   _profile_name:
     required: true
     help: (Required) The CDN Profile to which to attach the CDN Endpoint.
     type: Text
+    deprecated: false
   _is_http_allowed:
     required: false
     help: (Optional) Defaults to @true@ .
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the CDN Endpoint. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _querystring_caching_behaviour:
     required: false
     help: (Optional) Sets query string caching behavior. Allowed values are @IgnoreQueryString@
       , @BypassCaching@ and @UseQueryString@ . Defaults to @IgnoreQueryString@ .
     type: Text
+    deprecated: false
   _is_https_allowed:
     required: false
     help: (Optional) Defaults to @true@ .
     type: Text
+    deprecated: false
   _is_compression_enabled:
     required: false
     help: (Optional) Indicates whether compression is to be enabled. Defaults to false.
     type: Text
+    deprecated: false
   _content_types_to_compress:
     required: false
     help: (Optional) An array of strings that indicates a content types on which compression
       will be applied. The value for the elements should be MIME types.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the CDN Endpoint.
     type: Text
+    deprecated: false
   _origin:
     required: false
     help: (Optional) The set of origins of the CDN endpoint. When multiple origins
       exist, the first origin will be used as primary and rest will be used as failover
       options. Each @origin@ block supports fields documented below.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _origin_path:
     required: false
     help: (Optional) The path used at for origin requests.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The CDN Endpoint ID.'

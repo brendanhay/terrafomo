@@ -4,6 +4,7 @@ arguments:
     required: true
     help: – (Required) The identifier for the replication group.
     type: Text
+    deprecated: false
 attributes:
   node_type:
     help: – The cluster node type.

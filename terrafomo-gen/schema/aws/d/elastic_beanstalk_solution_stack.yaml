@@ -6,11 +6,13 @@ arguments:
       See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html>
       from AWS documentation for reference solution stack names.'
     type: Text
+    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent solution
       stack.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The name of the solution stack.'

@@ -4,94 +4,114 @@ arguments:
     required: true
     help: (Required) A Storage OS Disk block as referenced below.
     type: Text
+    deprecated: false
   _os_profile:
     required: false
     help: (Optional) An OS Profile block as documented below. Required when @create_option@
       in the @storage_os_disk@ block is set to @FromImage@ .
     type: Text
+    deprecated: false
   _storage_image_reference:
     required: false
     help: (Optional) A Storage Image Reference block as documented below.
     type: Text
+    deprecated: false
   _os_profile_secrets:
     required: false
     help: (Optional) A collection of Secret blocks as documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the virtual machine resource. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _availability_set_id:
     required: false
     help: (Optional) The Id of the Availability Set in which to create the virtual
       machine
     type: Text
+    deprecated: false
   _plan:
     required: false
     help: (Optional) A plan block as documented below.
     type: Text
+    deprecated: false
   _primary_network_interface_id:
     required: false
     help: (Optional) Specifies the resource ID for the primary network interface associated
       with the virtual machine.
     type: Text
+    deprecated: false
   _delete_os_disk_on_termination:
     required: false
     help: (Optional) Flag to enable deletion of the OS disk VHD blob or managed disk
       when the VM is deleted, defaults to @false@
     type: Text
+    deprecated: false
   _os_profile_windows_config:
     required: true
     help: (Required, when a Windows machine) A Windows config block as documented
       below.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _boot_diagnostics:
     required: false
     help: (Optional) A boot diagnostics profile block as referenced below.
     type: Text
+    deprecated: false
   _network_interface_ids:
     required: true
     help: (Required) Specifies the list of resource IDs for the network interfaces
       associated with the virtual machine.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the virtual
       machine.
     type: Text
+    deprecated: false
   _delete_data_disks_on_termination:
     required: false
     help: (Optional) Flag to enable deletion of storage data disk VHD blobs or managed
       disks when the VM is deleted, defaults to @false@
     type: Text
+    deprecated: false
   _storage_data_disk:
     required: false
     help: (Optional) A list of Storage Data disk blocks as referenced below.
     type: Text
+    deprecated: false
   _license_type:
     required: false
     help: (Optional, when a Windows machine) Specifies the Windows OS license type.
       The only allowable value, if supplied, is @Windows_Server@ .
     type: Text
+    deprecated: false
   _os_profile_linux_config:
     required: true
     help: (Required, when a Linux machine) A Linux config block as documented below.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _vm_size:
     required: true
     help: (Required) Specifies the <https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-size-specs/>
       .
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The virtual machine ID.'

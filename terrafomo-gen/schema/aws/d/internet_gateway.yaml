@@ -4,15 +4,18 @@ arguments:
     required: false
     help: (Optional) Custom filter block as described below.
     type: Text
+    deprecated: false
   _internet_gateway_id:
     required: false
     help: (Optional) The id of the specific Internet Gateway to retrieve.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired Internet Gateway.
     type: Text
+    deprecated: false
 attributes:
   state:
     help: ! '- The current state of the attachment between the gateway and the VPC.

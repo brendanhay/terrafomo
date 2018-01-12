@@ -4,20 +4,24 @@ arguments:
     required: true
     help: (Required) The IP address of the gateway's Internet-routable external interface.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of customer gateway. The only type AWS supports at this
       time is "ipsec.1".
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) Tags to apply to the gateway.
     type: Text
+    deprecated: false
   _bgp_asn:
     required: true
     help: (Required) The gateway's Border Gateway Protocol (BGP) Autonomous System
       Number (ASN).
     type: Text
+    deprecated: false
 attributes:
   bgp_asn:
     help: ! '- The gateway''s Border Gateway Protocol (BGP) Autonomous System Number

@@ -5,11 +5,13 @@ arguments:
     help: (Required) Datadog API key. This can also be set via the @DATADOG_API_KEY@
       environment variable.
     type: Text
+    deprecated: false
   _app_key:
     required: true
     help: (Required) Datadog APP key. This can also be set via the @DATADOG_APP_KEY@
       environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The <https://www.datadoghq.com> provider is used to interact with the resources
   supported by Datadog. The provider needs to be configured with the proper credentials

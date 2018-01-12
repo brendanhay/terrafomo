@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The policy document. This is a JSON formatted string.
     type: Text
+    deprecated: false
   _repository:
     required: true
     help: (Required) Name of the repository to apply the policy.
     type: Text
+    deprecated: false
 attributes:
   registry_id:
     help: ! '- The registry ID where the repository was created.'

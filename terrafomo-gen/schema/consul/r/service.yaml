@@ -5,24 +5,29 @@ arguments:
     help: (Optional, string) The ID of the service, defaults to the value of @name@
       if not supplied.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required, string) The name of the service.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional, set of strings) A list of values that are opaque to Consul, but
       can be used to distinguish between services or nodes.
     type: Text
+    deprecated: false
   _port:
     required: false
     help: (Optional, int) The port of the service.
     type: Text
+    deprecated: false
   _address:
     required: false
     help: (Optional, string) The address of the service. Defaults to the address of
       the agent.
     type: Text
+    deprecated: false
 attributes:
   address:
     help: ! '- The address of the service.'

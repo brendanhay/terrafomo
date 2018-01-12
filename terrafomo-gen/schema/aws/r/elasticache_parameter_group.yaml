@@ -4,19 +4,23 @@ arguments:
     required: true
     help: (Required) The name of the ElastiCache parameter group.
     type: Text
+    deprecated: false
   _family':
     required: true
     help: (Required) The family of the ElastiCache parameter group.
     type: Text
+    deprecated: false
   _parameter:
     required: false
     help: (Optional) A list of ElastiCache parameters to apply.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the ElastiCache parameter group. Defaults
       to "Managed by Terraform".
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ElastiCache parameter group name.'

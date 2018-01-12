@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the project
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name of this project'

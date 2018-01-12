@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The DB Instance Identifier from which to take the snapshot.
     type: Text
+    deprecated: false
   _db_snapshot_identifier:
     required: true
     help: (Required) The Identifier for the snapshot.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- Specifies the status of this DB snapshot.'

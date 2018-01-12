@@ -5,10 +5,12 @@ arguments:
     help: (Required) The IP address of the domain. This IP is used to created an initial
       A record for the domain. It is required upstream by the DigitalOcean API.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the domain
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The name of the domain'

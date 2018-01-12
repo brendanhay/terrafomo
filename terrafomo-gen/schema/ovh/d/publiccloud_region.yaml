@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The name of the region associated with the public cloud project.
     type: Text
+    deprecated: false
   _project_id:
     required: true
     help: (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@
       environment variable is used.
     type: Text
+    deprecated: false
 attributes:
   continent_code:
     help: ! '- the code of the geographic continent the region is running. E.g.: EU

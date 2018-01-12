@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The ID of the project that will serve as a Shared VPC host project
     type: Text
+    deprecated: false
 attributes: {}
 about: Enables the Google Compute Engine <https://cloud.google.com/compute/docs/shared-vpc>
   feature for a project, assigning it as a Shared VPC host project. For more information,

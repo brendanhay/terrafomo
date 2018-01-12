@@ -5,11 +5,13 @@ arguments:
     help: (Required) Specifies the name of the CosmosDB Account. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _consistency_policy:
     required: true
     help: (Required) Specifies a @consistency_policy@ resource, used to define the
       consistency policy for this CosmosDB account.
     type: Text
+    deprecated: false
   _ip_range_filter:
     required: false
     help: ! '(Optional) CosmosDB Firewall Support: This value specifies the set of
@@ -17,36 +19,43 @@ arguments:
       list of client IP''s for a given database account. IP addresses/ranges must
       be comma separated and must not contain any spaces.'
     type: Text
+    deprecated: false
   _failover_policy:
     required: true
     help: (Required) Specifies a @failover_policy@ resource, used to define where
       data should be replicated.
     type: Text
+    deprecated: false
   _kind:
     required: false
     help: (Optional) Specifies the Kind of CosmosDB to create - possible values are
       @GlobalDocumentDB@ and @MongoDB@ . Defaults to @GlobalDocumentDB@ . Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the CosmosDB Account
       is created. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _offer_type:
     required: true
     help: (Required) Specifies the Offer Type to use for this CosmosDB Account - currently
       this can only be set to @Standard@ .
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   primary_master_key:
     help: ! '- The Primary master key for the CosmosDB Account.'

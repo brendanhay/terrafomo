@@ -5,11 +5,13 @@ arguments:
     help: (Optional) Details of the compute resources managed by the compute environment.
       This parameter is required for managed compute environments. See details below.
     type: Text
+    deprecated: false
   _compute_environment_name:
     required: true
     help: (Required) The name for your compute environment. Up to 128 letters (uppercase
       and lowercase), numbers, and underscores are allowed.
     type: Text
+    deprecated: false
   _state:
     required: false
     help: (Optional) The state of the compute environment. If the state is @ENABLED@
@@ -17,16 +19,19 @@ arguments:
       based on queues. Valid items are @ENABLED@ or @DISABLED@ . Defaults to @ENABLED@
       .
     type: Text
+    deprecated: false
   _service_role:
     required: true
     help: (Required) The full Amazon Resource Name (ARN) of the IAM role that allows
       AWS Batch to make calls to other AWS services on your behalf.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of the compute environment. Valid items are @MANAGED@
       or @UNMANAGED@ .
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The current status of the compute environment (for example, CREATING

@@ -4,31 +4,38 @@ arguments:
     required: true
     help: (Required) The value of the record
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the record
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record>
       )
     type: Text
+    deprecated: false
   _domain:
     required: true
     help: (Required) The domain to add the record to
     type: Text
+    deprecated: false
   _proxied:
     required: false
     help: (Optional) Whether the record gets Cloudflare's origin protection.
     type: Text
+    deprecated: false
   _priority:
     required: false
     help: (Optional) The priority of the record
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of the record
     type: Text
+    deprecated: false
 attributes:
   ttl:
     help: ! '- The TTL of the record'

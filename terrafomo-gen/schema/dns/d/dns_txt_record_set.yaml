@@ -4,6 +4,7 @@ arguments:
     required: true
     help: ! '- (required): Host to look up'
     type: Text
+    deprecated: false
 attributes:
   records:
     help: ! '- A list of TXT records.'

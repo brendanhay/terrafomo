@@ -7,30 +7,36 @@ arguments:
       but not both. The operation fails if you specify an instance ID unless exactly
       one network interface is attached.
     type: Text
+    deprecated: false
   _allow_reassociation:
     required: false
     help: (Optional, Boolean) Whether to allow an Elastic IP to be re-associated.
       Defaults to @true@ in VPC.
     type: Text
+    deprecated: false
   _private_ip_address:
     required: false
     help: (Optional) The primary or secondary private IP address to associate with
       the Elastic IP address. If no private IP address is specified, the Elastic IP
       address is associated with the primary private IP address.
     type: Text
+    deprecated: false
   _allocation_id:
     required: false
     help: (Optional) The allocation ID. This is required for EC2-VPC.
     type: Text
+    deprecated: false
   _public_ip:
     required: false
     help: (Optional) The Elastic IP address. This is required for EC2-Classic.
     type: Text
+    deprecated: false
   _network_interface_id:
     required: false
     help: (Optional) The ID of the network interface. If the instance has more than
       one network interface, you must specify a network interface ID.
     type: Text
+    deprecated: false
 attributes:
   instance_id:
     help: ! '- As above'

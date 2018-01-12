@@ -5,14 +5,17 @@ arguments:
     help: (Optional) The permission of the outside collaborator for the repository.
       Must be one of @pull@ , @push@ , or @admin@ . Defaults to @push@ .
     type: Text
+    deprecated: false
   _username:
     required: true
     help: (Required) The user to add to the repository as a collaborator.
     type: Text
+    deprecated: false
   _repository:
     required: true
     help: (Required) The GitHub repository
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides a GitHub repository collaborator resource. This resource allows
   you to add/remove collaborators from repositories in your organization. Collaborators

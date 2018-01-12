@@ -5,10 +5,12 @@ arguments:
     help: (Required) A valid CloudWatch Logs filter pattern for subscribing to a filtered
       stream of log events.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A name for the subscription filter
     type: Text
+    deprecated: false
   _role_arn:
     required: false
     help: (Optional) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions
@@ -16,16 +18,19 @@ arguments:
       you should skip this argument and use @aws_lambda_permission@ resource for granting
       access from CloudWatch logs to the destination Lambda function.
     type: Text
+    deprecated: false
   _destination_arn:
     required: true
     help: (Required) The ARN of the destination to deliver matching log events to.
       Kinesis stream or Lambda function ARN.
     type: Text
+    deprecated: false
   _log_group_name:
     required: true
     help: (Required) The name of the log group to associate the subscription filter
       with
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the log subscription filter.'

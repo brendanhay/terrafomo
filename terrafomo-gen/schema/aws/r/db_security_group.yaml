@@ -4,19 +4,23 @@ arguments:
     required: true
     help: (Required) The name of the DB security group.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the DB security group. Defaults to "Managed
       by Terraform".
     type: Text
+    deprecated: false
   _ingress:
     required: true
     help: (Required) A list of ingress rules.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The arn of the DB security group.'

@@ -5,35 +5,42 @@ arguments:
     help: (Optional) A list of source tags for this firewall. Can't be used for @EGRESS@
       .
     type: Text
+    deprecated: false
   _direction:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) Direction
       of traffic to which this firewall applies; One of @INGRESS@ or @EGRESS@ . Defaults
       to @INGRESS@ .
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _target_tags:
     required: false
     help: (Optional) A list of target tags for this firewall.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _source_ranges:
     required: false
     help: (Optional) A list of source CIDR ranges that this firewall applies to. Can't
       be used for @EGRESS@ .
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Textual description field.
     type: Text
+    deprecated: false
   _priority:
     required: false
     help: (Optional) The priority for this firewall. Ranges from 0-65535, inclusive.
@@ -41,6 +48,7 @@ arguments:
       precedence (e.g. a firewall resource with a priority value of 0 takes effect
       over all other firewall rules with a non-zero priority).
     type: Text
+    deprecated: false
   _source_service_accounts:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) A list of
@@ -55,22 +63,26 @@ arguments:
       apply. @source_service_accounts@ cannot be used at the same time as @source_tags@
       or @target_tags@ .
     type: Text
+    deprecated: false
   _destination_ranges:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) A list of
       destination CIDR ranges that this firewall applies to. Can't be used for @INGRESS@
       .
     type: Text
+    deprecated: false
   _allow:
     required: true
     help: (Required) Can be specified multiple times for each allow rule. Each allow
       block supports fields documented below.
     type: Text
+    deprecated: false
   _network:
     required: true
     help: (Required) The name or self_link of the network to attach this firewall
       to.
     type: Text
+    deprecated: false
   _target_service_accounts:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) A list of
@@ -80,12 +92,14 @@ arguments:
       @target_service_accounts@ nor @target_tags@ are specified, the firewall rule
       applies to all instances on the specified network.
     type: Text
+    deprecated: false
   _deny:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) Can be specified
       multiple times for each deny rule. Each deny block supports fields documented
       below. Can be specified instead of allow.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

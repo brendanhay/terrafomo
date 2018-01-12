@@ -5,18 +5,22 @@ arguments:
     help: ! '- (Read Only) the @scaleway_server@ instance which has this volume mounted
       right now'
     type: Text
+    deprecated: false
   _size_in_gb:
     required: true
     help: (Required) size of the volume in GB
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) name of volume
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) type of volume
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- id of the new resource'

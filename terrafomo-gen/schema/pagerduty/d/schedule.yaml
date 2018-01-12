@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name to use to find a schedule in the PagerDuty API.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The short name of the found schedule.'

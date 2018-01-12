@@ -5,83 +5,100 @@ arguments:
     help: (Required) - The <#default-cache-behavior-arguments> for this distribution
       (maximum one).
     type: Text
+    deprecated: false
   _viewer_certificate:
     required: true
     help: (Required) - The <#viewer-certificate-arguments> for this distribution (maximum
       one).
     type: Text
+    deprecated: false
   _aliases:
     required: true
     help: (Optional) - Extra CNAMEs (alternate domain names), if any, for this distribution.
     type: Text
+    deprecated: false
   _enabled:
     required: true
     help: (Required) - Whether the distribution is enabled to accept end user requests
       for content.
     type: Text
+    deprecated: false
   _cache_behavior:
     required: true
     help: (Optional) - A <#cache-behavior-arguments> resource for this distribution
       (multiples allowed).
     type: Text
+    deprecated: false
   _restrictions:
     required: true
     help: (Required) - The <#restrictions-arguments> for this distribution (maximum
       one).
     type: Text
+    deprecated: false
   _logging_config:
     required: true
     help: (Optional) - The <#logging-config-arguments> that controls how logs are
       written to your distribution (maximum one).
     type: Text
+    deprecated: false
   _is_ipv6_enabled:
     required: true
     help: (Optional) - Whether the IPv6 is enabled for the distribution.
     type: Text
+    deprecated: false
   _web_acl_id:
     required: true
     help: (Optional) - If you're using AWS WAF to filter CloudFront requests, the
       Id of the AWS WAF web ACL that is associated with the distribution.
     type: Text
+    deprecated: false
   _comment:
     required: true
     help: (Optional) - Any comments you want to include about the distribution.
     type: Text
+    deprecated: false
   _default_root_object:
     required: true
     help: (Optional) - The object that you want CloudFront to return (for example,
       index.html) when an end user requests the root URL.
     type: Text
+    deprecated: false
   _custom_error_response:
     required: true
     help: (Optional) - One or more <#custom-error-response-arguments> elements (multiples
       allowed).
     type: Text
+    deprecated: false
   _http_version:
     required: true
     help: (Optional) - The maximum HTTP version to support on the distribution. Allowed
       values are @http1.1@ and @http2@ . The default is @http2@ .
     type: Text
+    deprecated: false
   _retain_on_delete:
     required: true
     help: ! '(Optional) - Disables the distribution instead of deleting it when destroying
       the resource through Terraform. If this is set, the distribution needs to be
       deleted manually afterwards. Default: @false@ .'
     type: Text
+    deprecated: false
   _origin:
     required: true
     help: (Required) - One or more <#origin-arguments> for this distribution (multiples
       allowed).
     type: Text
+    deprecated: false
   _price_class:
     required: true
     help: (Optional) - The price class for this distribution. One of @PriceClass_All@
       , @PriceClass_200@ , @PriceClass_100@
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Creates an Amazon CloudFront web distribution. For information about CloudFront
   distributions, see the <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>

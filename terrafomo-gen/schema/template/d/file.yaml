@@ -5,12 +5,14 @@ arguments:
     help: (Required) The contents of the template. These can be loaded from a file
       on disk using the </docs/configuration/interpolation.html#file_path_> .
     type: Text
+    deprecated: false
   _vars:
     required: false
     help: (Optional) Variables for interpolation within the template. Note that variables
       must all be primitives. Direct references to lists or maps will cause a validation
       error.
     type: Text
+    deprecated: false
 attributes:
   rendered:
     help: ! '- The final rendered template.'

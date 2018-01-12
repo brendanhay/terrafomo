@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the stack
     type: Text
+    deprecated: false
 attributes:
   notification_arns:
     help: ! '- A list of SNS topic ARNs to publish stack related events'

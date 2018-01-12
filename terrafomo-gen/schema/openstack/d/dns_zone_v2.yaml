@@ -6,31 +6,38 @@ arguments:
       is needed to retrieve zone ids. If omitted, the @region@ argument of the provider
       is used.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the zone.
     type: Text
+    deprecated: false
   _email:
     required: false
     help: (Optional) The email contact for the zone record.
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: (Optional) The time to live (TTL) of the zone.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the zone.
     type: Text
+    deprecated: false
   _type':
     required: false
     help: (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@
       .
     type: Text
+    deprecated: false
   _status:
     required: false
     help: (Optional) The zone's status.
     type: Text
+    deprecated: false
 attributes:
   ttl:
     help: ! '- See Argument Reference above.'

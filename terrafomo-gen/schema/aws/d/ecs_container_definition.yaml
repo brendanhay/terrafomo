@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The ARN of the task definition which contains the container
     type: Text
+    deprecated: false
   _container_name:
     required: true
     help: (Required) The name of the container definition
     type: Text
+    deprecated: false
 attributes:
   image:
     help: ! '- The docker image in use, including the digest'

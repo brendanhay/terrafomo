@@ -34,7 +34,6 @@ undergo significant changes as the community improves it.
 -}
 data VCloudDirector = VCloudDirector
     { _allow_unverified_ssl :: !Text
-    , _maxRetryTimeout      :: !Text
     , _max_retry_timeout    :: !Text
     , _org                  :: !Text
     , _password             :: !Text
@@ -57,13 +56,6 @@ allowUnverifiedSsl :: Functor f => (Text -> f Text) -> VCloudDirector -> f VClou
 allowUnverifiedSsl f s =
     (\x -> s { _allow_unverified_ssl = x })
         <$> f (_allow_unverified_ssl s)
-
-{- | - (Deprecated) Use @max_retry_timeout@ instead.
--}
-maxRetryTimeout :: Functor f => (Text -> f Text) -> VCloudDirector -> f VCloudDirector
-maxRetryTimeout f s =
-    (\x -> s { _maxRetryTimeout = x })
-        <$> f (_maxRetryTimeout s)
 
 {- | (Optional) This provides you with the ability to specify the maximum amount
 of time (in seconds) you are prepared to wait for interactions on resources

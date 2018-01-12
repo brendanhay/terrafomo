@@ -5,10 +5,12 @@ arguments:
     help: (Required) The container format. Must be one of "ami", "ari", "aki", "bare",
       "ovf".
     type: Text
+    deprecated: false
   _min_ram_mb:
     required: false
     help: (Optional) Amount of ram (in MB) required to boot image. Defauts to 0.
     type: Text
+    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Glance client. A Glance
@@ -16,30 +18,36 @@ arguments:
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new Image.
     type: Text
+    deprecated: false
   _protected:
     required: false
     help: (Optional) If true, image will not be deletable. Defaults to false.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the image.
     type: Text
+    deprecated: false
   _visibility:
     required: false
     help: (Optional) The visibility of the image. Must be one of "public", "private",
       "community", or "shared". The ability to set the visibility depends upon the
       configuration of the OpenStack cloud.
     type: Text
+    deprecated: false
   _min_disk_gb:
     required: false
     help: (Optional) Amount of disk space (in GB) required to boot image. Defaults
       to 0.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) The tags of the image. It must be a list of strings. At this
       time, it is not possible to delete all tags of an image.
     type: Text
+    deprecated: false
   _image_source_url:
     required: false
     help: (Optional) This is the url of the raw image that will be downloaded in the
@@ -47,27 +55,32 @@ arguments:
       image from internet but the @gophercloud@ library does not yet provide a way
       to do so. Conflicts with @local_file_path@ .
     type: Text
+    deprecated: false
   _disk_format:
     required: true
     help: (Required) The disk format. Must be one of "ami", "ari", "aki", "vhd", "vmdk",
       "raw", "qcow2", "vdi", "iso".
     type: Text
+    deprecated: false
   _properties:
     required: false
     help: (Optional) A map of key/value pairs to set freeform information about an
       image.
     type: Text
+    deprecated: false
   _image_cache_path:
     required: false
     help: (Optional) This is the directory where the images will be downloaded. Images
       will be stored with a filename corresponding to the url's md5 hash. Defaults
       to "$HOME/.terraform/image_cache"
     type: Text
+    deprecated: false
   _local_file_path:
     required: false
     help: (Optional) This is the filepath of the raw image file that will be uploaded
       to Glance. Conflicts with @image_source_url@ .
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The status of the image. It can be "queued", "active" or "saving".'

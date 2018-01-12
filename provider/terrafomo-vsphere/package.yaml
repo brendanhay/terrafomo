@@ -1,0 +1,26 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-vsphere
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - hashable
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.VSphere
+    - Terrafomo.VSphere.DataSource
+    - Terrafomo.VSphere.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

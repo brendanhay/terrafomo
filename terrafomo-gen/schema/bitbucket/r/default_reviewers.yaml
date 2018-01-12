@@ -4,15 +4,18 @@ arguments:
     required: true
     help: (Required) A list of reviewers to use.
     type: Text
+    deprecated: false
   _repository:
     required: true
     help: (Required) The name of the repository.
     type: Text
+    deprecated: false
   _owner:
     required: true
     help: (Required) The owner of this repository. Can be you or any team you have
       write access to.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides support for setting up default reviewers for your repository.
 examples: []

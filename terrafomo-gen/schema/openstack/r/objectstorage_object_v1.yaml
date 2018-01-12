@@ -5,11 +5,13 @@ arguments:
     help: (Optional) The region in which to create the container. If omitted, the
       @region@ argument of the provider is used. Changing this creates a new container.
     type: Text
+    deprecated: false
   _source:
     required: false
     help: (Optional) A string representing the local path of a file which will be
       used as the object's content. Conflicts with @source@ and @copy_from@ .
     type: Text
+    deprecated: false
   _object_manifest:
     required: false
     help: (Optional) A string set to specify that this is a dynamic large object manifest
@@ -17,41 +19,49 @@ arguments:
       in the form container/prefix. You must UTF-8-encode and then URL-encode the
       names of the container and prefix before you include them in this header.
     type: Text
+    deprecated: false
   _content_encoding:
     required: false
     help: (Optional) A string representing the value of the Content-Encoding metadata.
     type: Text
+    deprecated: false
   _delete_after:
     required: false
     help: (Optional) An integer representing the number of seconds after which the
       system removes the object. Internally, the Object Storage system stores this
       value in the X-Delete-At metadata item.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the object.
     type: Text
+    deprecated: false
   _content_disposition:
     required: false
     help: (Optional) A string which specifies the override behavior for the browser.
       For example, this header might specify that the browser use a download program
       to save this file rather than show the file, which is the default.
     type: Text
+    deprecated: false
   _detect_content_type:
     required: false
     help: (Optional) If set to true, Object Storage guesses the content type based
       on the file extension and ignores the value sent in the Content-Type header,
       if present.
     type: Text
+    deprecated: false
   _content_type:
     required: false
     help: (Optional) A string which sets the MIME type for the object.
     type: Text
+    deprecated: false
   _delete_at:
     required: false
     help: (Optional) An string representing the date when the system removes the object.
       For example, "2015-08-26" is equivalent to Mon, Wed, 26 Aug 2015 00:00:00 GMT.
     type: Text
+    deprecated: false
   _container_name:
     required: true
     help: (Required) A unique (within an account) name for the container. The container
@@ -61,10 +71,12 @@ arguments:
       and object name. For example, the path /v1/account/www/pages specifies the www
       container, not the www/pages container.
     type: Text
+    deprecated: false
   _etag:
     required: false
     help: (Optional) Used to trigger updates. The only meaningful value is ${md5(file("path/to/file"))}.
     type: Text
+    deprecated: false
   _copy_from:
     required: false
     help: (Optional) A string representing the name of an object used to create the
@@ -73,11 +85,13 @@ arguments:
       before you include them in the header. Conflicts with @source@ and @content@
       .
     type: Text
+    deprecated: false
   _content:
     required: false
     help: (Optional) A string representing the content of the object. Conflicts with
       @source@ and @copy_from@ .
     type: Text
+    deprecated: false
 attributes:
   last_modified:
     help: ! '- The date and time when the object was last modified. The date and time

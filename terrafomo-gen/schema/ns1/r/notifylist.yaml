@@ -4,12 +4,14 @@ arguments:
     required: true
     help: (Required) The free-form display name for the notify list.
     type: Text
+    deprecated: false
   _notifications:
     required: false
     help: (Optional) A list of notifiers. All notifiers in a notification list will
       receive notifications whenever an event is send to the list (e.g., when a monitoring
       job fails). Notifiers are documented below.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a NS1 Notify List resource. This can be used to create, modify, and
   delete notify lists.

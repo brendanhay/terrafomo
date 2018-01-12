@@ -4,23 +4,28 @@ arguments:
     required: false
     help: (Optional) A list of Icinga2 templates to assign to the host.
     type: Text
+    deprecated: false
   _hostname:
     required: true
     help: (Required) The hostname of the host.
     type: Text
+    deprecated: false
   _vars:
     required: false
     help: (Optional) A mapping of variables to assign to the host.
     type: Text
+    deprecated: false
   _check_command:
     required: true
     help: (Required) The name of an existing Icinga2 CheckCommand object that is used
       to determine if the host is available or not.
     type: Text
+    deprecated: false
   _address:
     required: true
     help: (Required) The address of the host.
     type: Text
+    deprecated: false
 attributes: {}
 about: Configures an Icinga2 host resource. This allows hosts to be configured, updated,
   and deleted.

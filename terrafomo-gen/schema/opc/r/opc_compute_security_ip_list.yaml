@@ -5,14 +5,17 @@ arguments:
     help: (Required) The unique (within the identity domain) name of the security
       IP list.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the security ip list.
     type: Text
+    deprecated: false
   _ip_entries:
     required: true
     help: (Required) The IP addresses to include in the list.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @opc_compute_security_ip_list@ resource creates and manages a security
   IP list in an OPC identity domain.

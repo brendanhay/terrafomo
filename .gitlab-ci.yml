@@ -64,7 +64,8 @@ cache:
     - provider/terrafomo-triton/.stack-work/
     - provider/terrafomo-ultradns/.stack-work/
     - provider/terrafomo-vault/.stack-work/
-    - provider/terrafomo-vmware/.stack-work/
+    - provider/terrafomo-vcloud-director/.stack-work/
+    - provider/terrafomo-vsphere/.stack-work/
 # END GENERATED
 
 before_script:

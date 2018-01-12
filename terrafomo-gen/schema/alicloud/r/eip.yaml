@@ -6,11 +6,13 @@ arguments:
       Mbps (Mega bit per second). If this value is not specified, then automatically
       sets it to 5 Mbps.
     type: Text
+    deprecated: false
   _internet_charge_type:
     required: false
     help: (Optional, Forces new resource) Internet charge type of the EIP, Valid values
       are @PayByBandwidth@ , @PayByTraffic@ . Default is @PayByBandwidth@ .
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The EIP current status.'

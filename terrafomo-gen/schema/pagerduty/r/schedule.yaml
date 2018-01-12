@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) The name of the escalation policy.
     type: Text
+    deprecated: false
   _overflow:
     required: false
     help: ! '(Optional) Any on-call schedule entries that pass the date range bounds
@@ -15,18 +16,22 @@ arguments:
       . If you do pass the @overflow@ parameter, you will get one schedule entry returned
       with a start of @2011-06-01T00:00:00Z@ and end of @2011-06-02T00:00:00Z@ .'
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the schedule
     type: Text
+    deprecated: false
   _layer:
     required: true
     help: (Required) A schedule layer block. Schedule layers documented below.
     type: Text
+    deprecated: false
   _time_zone:
     required: true
     help: (Required) The time zone of the schedule (e.g Europe/Berlin).
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the schedule'

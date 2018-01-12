@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The load balancer to attach the policy to.
     type: Text
+    deprecated: false
   _instance_port:
     required: true
     help: (Required) The instance port to apply the policy to.
     type: Text
+    deprecated: false
   _policy_names:
     required: true
     help: (Required) List of Policy Names to apply to the backend server.
     type: Text
+    deprecated: false
 attributes:
   instance_port:
     help: ! '- The backend port the policies are applied to'

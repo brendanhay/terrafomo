@@ -6,20 +6,24 @@ arguments:
       syntax or @file@ function is helpful here. Use the <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html>
       for more information on Glacier Vault Policy
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the Vault. Names can be between 1 and 255 characters
       long and the valid characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen),
       and '.' (period).
     type: Text
+    deprecated: false
   _notification:
     required: false
     help: (Optional) The notifications for the Vault. Fields documented below.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the vault.'

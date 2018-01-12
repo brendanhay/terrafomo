@@ -7,36 +7,43 @@ arguments:
       and must not begin or end with a hyphen, and must not begin with http:// or
       https://. Default value is null.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the disk. This description can have a string of
       2 to 256 characters, It cannot begin with http:// or https://. Default value
       is null.
     type: Text
+    deprecated: false
   _snapshot_id:
     required: false
     help: (Optional) A snapshot to base the disk off of. If it is specified, @size@
       will be invalid and the disk size is equals to the snapshot size.
     type: Text
+    deprecated: false
   _availability_zone:
     required: true
     help: (Required, Forces new resource) The Zone to create the disk in.
     type: Text
+    deprecated: false
   _category:
     required: false
     help: (Optional, Forces new resource) Category of the disk. Valid values are @cloud@
       , @cloud_efficiency@ and @cloud_ssd@ . Default is @cloud@ .
     type: Text
+    deprecated: false
   _size:
     required: true
     help: ! '(Required) The size of the disk in GiBs, and its value depends on @Category@
       . @cloud@ disk value range: 5GB ~ 2000GB and other category disk value range:
       20 ~ 32768.'
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The disk status.'

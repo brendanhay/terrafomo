@@ -4,44 +4,53 @@ arguments:
     required: false
     help: (Optional) A mapping of labels to assign to the resource.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _friendly_name:
     required: false
     help: (Optional) A descriptive name for the table.
     type: Text
+    deprecated: false
   _schema:
     required: false
     help: (Optional) A JSON schema for the table.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The field description.
     type: Text
+    deprecated: false
   _dataset_id:
     required: true
     help: (Required) The dataset ID to create the table in. Changing this forces a
       new resource to be created.
     type: Text
+    deprecated: false
   _time_partitioning:
     required: false
     help: (Optional) If specified, configures time-based partitioning for this table.
       Structure is documented below.
     type: Text
+    deprecated: false
   _table_id:
     required: true
     help: (Required) A unique ID for the resource. Changing this forces a new resource
       to be created.
     type: Text
+    deprecated: false
   _expiration_time:
     required: false
     help: (Optional) The time when this table expires, in milliseconds since the epoch.
       If not present, the table will persist indefinitely. Expired tables will be
       deleted and their storage reclaimed.
     type: Text
+    deprecated: false
 attributes:
   num_long_term_bytes:
     help: ! '- The number of bytes in the table that are considered "long-term storage".'

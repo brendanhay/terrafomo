@@ -1,6 +1,6 @@
 _include: !include '../../share/package.yaml'
 
-name: terrafomo-vmware
+name: terrafomo-vcloud-director
 
 <<: *common
 <<: *version

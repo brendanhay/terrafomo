@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) Block or Allow
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the filter
     type: Text
+    deprecated: false
   _cidr:
     required: true
     help: (Required) The IP address or address range to filter, in CIDR notation
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an SES receipt filter resource
 examples: []

@@ -7,23 +7,28 @@ arguments:
       templates. This will conflict with project_template_id setting. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _member:
     required: false
     help: (Optional) Members to add to the environment.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the environment.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) An environment description.
     type: Text
+    deprecated: false
   _project_template_id:
     required: false
     help: (Optional) This can be any valid project template ID. If this is set, then
       orchestration can not be. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a Rancher Environment resource. This can be used to create and manage
   environments on rancher.

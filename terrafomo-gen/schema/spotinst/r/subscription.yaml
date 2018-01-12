@@ -4,23 +4,28 @@ arguments:
     required: true
     help: (Required) The destination for the request
     type: Text
+    deprecated: false
   _protocol:
     required: true
     help: ! '(Required) The protocol to use to connect with the instance. Valid values:
       http, https'
     type: Text
+    deprecated: false
   _format:
     required: false
     help: (Optional) The structure of the payload.
     type: Text
+    deprecated: false
   _event_type:
     required: true
     help: (Required) The events to subscribe to
     type: Text
+    deprecated: false
   _resource_id:
     required: true
     help: (Required) The resource to subscribe to
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The subscription ID.'

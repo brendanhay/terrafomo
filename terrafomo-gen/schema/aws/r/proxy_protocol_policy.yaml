@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The load balancer to which the policy should be attached.
     type: Text
+    deprecated: false
   _instance_ports:
     required: true
     help: (Required) List of instance ports to which the policy should be applied.
       This can be specified if the protocol is SSL or TCP.
     type: Text
+    deprecated: false
 attributes:
   load_balancer:
     help: ! '- The load balancer to which the policy is attached.'

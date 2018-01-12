@@ -5,11 +5,13 @@ arguments:
     help: (Optional) Used together with the @config@ option. Specifies which @CloudMonkey@
       profile in the config file to use.
     type: Text
+    deprecated: false
   _api_key:
     required: false
     help: (Optional) This is the CloudStack API key. It can also be sourced from the
       @CLOUDSTACK_API_KEY@ environment variable.
     type: Text
+    deprecated: false
   _http_get_only:
     required: false
     help: (Optional) Some cloud providers only allow HTTP GET calls to their CloudStack
@@ -17,6 +19,7 @@ arguments:
       provider to only make GET calls and no POST calls. It can also be sourced from
       the @CLOUDSTACK_HTTP_GET_ONLY@ environment variable.
     type: Text
+    deprecated: false
   _timeout:
     required: false
     help: (Optional) A value in seconds. This is the time allowed for Cloudstack to
@@ -24,21 +27,25 @@ arguments:
       the @CLOUDSTACK_TIMEOUT@ environment variable. Otherwise, this will default
       to 300 seconds.
     type: Text
+    deprecated: false
   _config:
     required: false
     help: (Optional) The path to a @CloudMonkey@ config file. If set the API URL,
       key and secret will be retrieved from this file.
     type: Text
+    deprecated: false
   _api_url:
     required: false
     help: (Optional) This is the CloudStack API URL. It can also be sourced from the
       @CLOUDSTACK_API_URL@ environment variable.
     type: Text
+    deprecated: false
   _secret_key:
     required: false
     help: (Optional) This is the CloudStack secret key. It can also be sourced from
       the @CLOUDSTACK_SECRET_KEY@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The CloudStack provider is used to interact with the many resources supported
   by CloudStack. The provider needs to be configured with a URL pointing to a running

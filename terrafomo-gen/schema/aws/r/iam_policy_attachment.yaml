@@ -4,22 +4,27 @@ arguments:
     required: true
     help: (Required) - The ARN of the policy you want to apply
     type: Text
+    deprecated: false
   _users:
     required: true
     help: (Optional) - The user(s) the policy should be applied to
     type: Text
+    deprecated: false
   _roles:
     required: true
     help: (Optional) - The role(s) the policy should be applied to
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) - The name of the policy. This cannot be an empty string.
     type: Text
+    deprecated: false
   _groups:
     required: true
     help: (Optional) - The group(s) the policy should be applied to
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The name of the policy.'

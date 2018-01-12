@@ -4,16 +4,19 @@ arguments:
     required: true
     help: – (Required) List of VPC Subnet IDs for the cache subnet group
     type: Text
+    deprecated: false
   _name:
     required: true
     help: – (Required) Name for the cache subnet group. Elasticache converts this
       name to lowercase.
     type: Text
+    deprecated: false
   _description:
     required: true
     help: – (Optional) Description for the cache subnet group. Defaults to "Managed
       by Terraform".
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides an ElastiCache Subnet Group resource. ~> NOTE: ElastiCache Subnet
   Groups are only for use when working with an ElastiCache cluster inside of a VPC.

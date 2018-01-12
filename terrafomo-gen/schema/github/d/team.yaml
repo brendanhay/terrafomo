@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The team slug.
     type: Text
+    deprecated: false
 attributes:
   members:
     help: ! '- List of team members'

@@ -5,15 +5,18 @@ arguments:
     help: (Optional) The region this subnetwork has been created in. If unspecified,
       this defaults to the region configured in the provider.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '- The name of the subnetwork.'
     type: Text
+    deprecated: false
 attributes:
   secondary_ip_range:
     help: ! '- An array of configurations for secondary IP ranges for VM instances

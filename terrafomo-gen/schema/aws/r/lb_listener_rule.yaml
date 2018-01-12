@@ -4,20 +4,24 @@ arguments:
     required: true
     help: (Required) An Action block. Action blocks are documented below.
     type: Text
+    deprecated: false
   _condition:
     required: true
     help: (Required) A Condition block. Condition blocks are documented below.
     type: Text
+    deprecated: false
   _priority:
     required: true
     help: (Required) The priority for the rule. A listener can't have multiple rules
       with the same priority.
     type: Text
+    deprecated: false
   _listener_arn:
     required: true
     help: (Required, Forces New Resource) The ARN of the listener to which to attach
       the rule.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the rule (matches @id@ )'

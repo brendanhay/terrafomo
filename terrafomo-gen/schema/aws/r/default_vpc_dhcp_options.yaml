@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) List of NETBIOS name servers.
     type: Text
+    deprecated: false
   _netbios_node_type:
     required: false
     help: (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify
@@ -11,10 +12,12 @@ arguments:
       information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt>
       .
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a resource to manage the <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html#AmazonDNS>
   in the current region. Each AWS region comes with a default set of DHCP options.

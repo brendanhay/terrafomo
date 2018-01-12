@@ -4,15 +4,18 @@ arguments:
     required: false
     help: (Optional) The full name of the region to select.
     type: Text
+    deprecated: false
   _current:
     required: false
     help: (Optional) Set to true to match only the region configured in the provider.
     type: Text
+    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save regions data source after running
       @terraform plan@ .
     type: Text
+    deprecated: false
 attributes:
   local_name:
     help: ! '- Name of the region in the local language.'

@@ -5,16 +5,19 @@ arguments:
     help: (Optional) The client ID to use. It can also be sourced from the @ARM_CLIENT_ID@
       environment variable.
     type: Text
+    deprecated: false
   _client_secret:
     required: false
     help: (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@
       environment variable.
     type: Text
+    deprecated: false
   _environment:
     required: false
     help: ! '(Optional) The cloud environment to use. It can also be sourced from
       the @ARM_ENVIRONMENT@ environment variable. Supported values are:'
     type: Text
+    deprecated: false
   _skip_credentials_validation:
     required: false
     help: (Optional) Prevents the provider from validating the given credentials.
@@ -22,6 +25,7 @@ arguments:
       sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable, defaults
       to @false@ .
     type: Text
+    deprecated: false
   _skip_provider_registration:
     required: false
     help: (Optional) Prevents the provider from registering the ARM provider namespaces,
@@ -29,16 +33,19 @@ arguments:
       permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@
       environment variable, defaults to @false@ .
     type: Text
+    deprecated: false
   _subscription_id:
     required: false
     help: (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@
       environment variable.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The tenant ID to use. It can also be sourced from the @ARM_TENANT_ID@
       environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The Microsoft AzureRM provider is used to interact with the many resources
   supported by Azure Resource Manager via the AzureRM API''s. The provider needs to

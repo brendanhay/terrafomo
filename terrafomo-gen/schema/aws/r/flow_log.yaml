@@ -4,28 +4,34 @@ arguments:
     required: false
     help: (Optional) Elastic Network Interface ID to attach to
     type: Text
+    deprecated: false
   _iam_role_arn:
     required: true
     help: (Required) The ARN for the IAM role that's used to post flow logs to a CloudWatch
       Logs log group
     type: Text
+    deprecated: false
   _subnet_id:
     required: false
     help: (Optional) Subnet ID to attach to
     type: Text
+    deprecated: false
   _traffic_type:
     required: true
     help: ! '(Required) The type of traffic to capture. Valid values: @ACCEPT@ , @REJECT@
       , @ALL@'
     type: Text
+    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) VPC ID to attach to
     type: Text
+    deprecated: false
   _log_group_name:
     required: true
     help: (Required) The name of the CloudWatch log group
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The Flow Log ID'

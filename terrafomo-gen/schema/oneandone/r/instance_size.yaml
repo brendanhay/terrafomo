@@ -4,14 +4,17 @@ arguments:
     required: true
     help: -(Optional) Number of cores per processor
     type: Text
+    deprecated: false
   _ram:
     required: false
     help: (Optional) Size of ram in GB
     type: Text
+    deprecated: false
   _vcores:
     required: false
     help: (Optional)  Number of vcores
     type: Text
+    deprecated: false
 attributes: {}
 about: Fetches a predefined instance type for 1&1 servers
 examples: []

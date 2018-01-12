@@ -5,6 +5,7 @@ arguments:
     help: (Required) This is your Packet API Auth token. This can also be specified
       with the @PACKET_AUTH_TOKEN@ shell environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The Packet provider is used to interact with the resources supported by Packet.
   The provider needs to be configured with the proper credentials before it can be

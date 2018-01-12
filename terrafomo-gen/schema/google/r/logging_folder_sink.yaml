@@ -4,17 +4,20 @@ arguments:
     required: true
     help: (Required) The name of the logging sink.
     type: Text
+    deprecated: false
   _destination:
     required: true
     help: ! '(Required) The destination of the sink (or, in other words, where logs
       are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery
       dataset. Examples:'
     type: Text
+    deprecated: false
   _folder:
     required: true
     help: (Required) The folder to be exported to the sink. Note that either [FOLDER_ID]
       or "folders/[FOLDER_ID]" is accepted.
     type: Text
+    deprecated: false
 attributes:
   writer_identity:
     help: ! '- The identity associated with this sink. This identity must be granted

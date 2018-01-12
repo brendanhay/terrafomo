@@ -5,6 +5,7 @@ arguments:
     help: (Optional) Specifies the ID of the subscription. If this argument is omitted,
       the subscription ID of the current Azure Resource Manager provider is used.
     type: Text
+    deprecated: false
 attributes:
   quota_id:
     help: ! '- The subscription quota ID.'

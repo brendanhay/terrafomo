@@ -4,28 +4,34 @@ arguments:
     required: false
     help: (Optional) Limit search to specific memory size.
     type: Text
+    deprecated: false
   _is_outdated:
     required: false
     help: (Optional) Whether to export outdated instance types. Default to false.
     type: Text
+    deprecated: false
   _availability_zone:
     required: false
     help: (Optional) The Zone that supports available instance types.
     type: Text
+    deprecated: false
   _instance_type_family:
     required: false
     help: (Optional) Allows to filter list of Instance Types based on their family
       name, for example 'ecs.n4'.
     type: Text
+    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save instance types data source after
       running @terraform plan@ .
     type: Text
+    deprecated: false
   _cpu_core_count:
     required: false
     help: (Optional) Limit search to specific cpu core count.
     type: Text
+    deprecated: false
 attributes:
   memory_size:
     help: ! '- Size of memory, measured in GB.'

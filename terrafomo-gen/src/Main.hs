@@ -171,13 +171,17 @@ loadProvider opts = do
             echo ("Provider " ++ markdownFile ++ " == " ++ show exists)
 
             schema <- loadSchema Parser.providerParser path
-            pure (Just schema <$ provider)
+            pure (Just (applyDeprecations schema) <$ provider)
 
 loadResources :: Options -> Script [Schema]
-loadResources = traverse (loadSchema Parser.schemaParser) . resourcePaths
+loadResources =
+    traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
+        . resourcePaths
 
 loadDataSources :: Options -> Script [Schema]
-loadDataSources = traverse (loadSchema Parser.schemaParser) . dataSourcePaths
+loadDataSources =
+    traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
+        . dataSourcePaths
 
 -- Schema
 

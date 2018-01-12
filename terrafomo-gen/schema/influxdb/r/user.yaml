@@ -4,18 +4,22 @@ arguments:
     required: false
     help: (Optional) Mark the user as admin.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name for the user.
     type: Text
+    deprecated: false
   _password:
     required: true
     help: (Required) The password for the user.
     type: Text
+    deprecated: false
   _grant:
     required: false
     help: (Optional) A list of grants for non-admin users
     type: Text
+    deprecated: false
 attributes:
   admin:
     help: ! '- (Bool) indication if the user is an admin or not.'

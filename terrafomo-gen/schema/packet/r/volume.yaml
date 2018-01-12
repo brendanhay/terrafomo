@@ -4,30 +4,37 @@ arguments:
     required: true
     help: (Required) The packet project ID to deploy the volume in
     type: Text
+    deprecated: false
   _billing_cycle:
     required: true
     help: ! '- The billing cycle, defaults to "hourly"'
     type: Text
+    deprecated: false
   _description:
     required: true
     help: ! '- Optional description for the volume'
     type: Text
+    deprecated: false
   _plan:
     required: true
     help: (Required) The service plan slug of the volume
     type: Text
+    deprecated: false
   _facility:
     required: true
     help: (Required) The facility to create the volume in
     type: Text
+    deprecated: false
   _snapshot_policies:
     required: true
     help: ! '- Optional list of snapshot policies'
     type: Text
+    deprecated: false
   _size:
     required: true
     help: (Required) The size in GB to make the volume
     type: Text
+    deprecated: false
 attributes:
   billing_cycle:
     help: ! '- The billing cycle, defaults to hourly'

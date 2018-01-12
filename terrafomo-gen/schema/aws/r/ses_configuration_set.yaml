@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the configuration set
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an SES configuration set resource
 examples: []

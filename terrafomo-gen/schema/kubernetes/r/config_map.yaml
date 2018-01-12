@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '(Required) Standard config map''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
     type: Text
+    deprecated: false
   _data':
     required: false
     help: (Optional) A map of the configuration data.
     type: Text
+    deprecated: false
 attributes: {}
 about: The resource provides mechanisms to inject containers with configuration data
   while keeping containers agnostic of Kubernetes. Config Map can be used to store

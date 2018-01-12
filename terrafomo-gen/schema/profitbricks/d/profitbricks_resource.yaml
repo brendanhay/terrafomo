@@ -4,10 +4,12 @@ arguments:
     required: false
     help: (Optional) The ID of the specific resource to retrieve information about.
     type: Text
+    deprecated: false
   _resource_type:
     required: false
     help: (Optional) The specific type of resources to retrieve information about.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- UUID of the Resource'

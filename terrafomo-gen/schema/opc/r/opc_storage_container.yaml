@@ -4,30 +4,37 @@ arguments:
     required: false
     help: (Optional) Maximum age in seconds for the origin to hold the preflight results.
     type: Text
+    deprecated: false
   _allowed_origins:
     required: false
     help: (Optional) List of origins that are allowed to make cross-origin requests.
     type: Text
+    deprecated: false
   _read_acls:
     required: false
     help: (Optional) The list of ACLs that grant read access.
     type: Text
+    deprecated: false
   _write_acls:
     required: false
     help: (Optional) The list of ACLs that grant write access.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the Storage Container.
     type: Text
+    deprecated: false
   _primary_key:
     required: false
     help: (Optional) The primary secret key value for temporary URLs.
     type: Text
+    deprecated: false
   _secondary_key:
     required: false
     help: (Optional) The secondary secret key value for temporary URLs.
     type: Text
+    deprecated: false
 attributes: {}
 about: Creates and manages a Container in the OPC Storage Domain. @storage_endpoint@
   must be set in the provider or environment to manage these resources.

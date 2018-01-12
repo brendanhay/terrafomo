@@ -5,37 +5,45 @@ arguments:
     help: (Optional) One or more NS1 filters for the record(order matters). Filters
       are documented below.
     type: Text
+    deprecated: false
   _answers:
     required: false
     help: (Optional) One or more NS1 answers for the records' specified type. Answers
       are documented below.
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: (Optional) The records' time to live.
     type: Text
+    deprecated: false
   _use_client_subnet:
     required: false
     help: (Optional) Whether to use EDNS client subnet data when available(in filter
       chain).
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The zone the record belongs to.
     type: Text
+    deprecated: false
   _link:
     required: false
     help: (Optional) The target record to link to. This means this record is a 'linked'
       record, and it inherits all properties from its target.
     type: Text
+    deprecated: false
   _domain:
     required: true
     help: (Required) The records' domain.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The records' RR type.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a NS1 Record resource. This can be used to create, modify, and delete
   records.

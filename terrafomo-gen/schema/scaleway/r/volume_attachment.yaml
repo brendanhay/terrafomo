@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) id of the server
     type: Text
+    deprecated: false
   _volume:
     required: true
     help: (Required) id of the volume to be attached
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- id of the new resource'

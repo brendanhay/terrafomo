@@ -5,11 +5,13 @@ arguments:
     help: ! '- (string, Change forces new resource) The name of the key. If this is
       left empty, the name is inferred from the comment in the SSH key material.'
     type: Text
+    deprecated: false
   _key:
     required: true
     help: ! '- (string, Required, Change forces new resource) The SSH key material.
       In order to read this from a file, use the @file@ interpolation.'
     type: Text
+    deprecated: false
 attributes: {}
 about: The @triton_key@ resource represents an SSH key for a Triton account.
 examples: []

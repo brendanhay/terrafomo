@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The VPC ID to create in.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the Internet Gateway.'

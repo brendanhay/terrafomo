@@ -5,17 +5,20 @@ arguments:
     help: (Optional) When @algorithm@ is "RSA", the size of the generated RSA key
       in bits. Defaults to 2048.
     type: Text
+    deprecated: false
   _ecdsa_curve:
     required: false
     help: (Optional) When @algorithm@ is "ECDSA", the name of the elliptic curve to
       use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
       default.
     type: Text
+    deprecated: false
   _algorithm:
     required: true
     help: (Required) The name of the algorithm to use for the key. Currently-supported
       values are "RSA" and "ECDSA".
     type: Text
+    deprecated: false
 attributes:
   algorithm:
     help: ! '- The algorithm that was selected for the key.'

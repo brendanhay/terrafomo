@@ -6,25 +6,30 @@ arguments:
       into consideration during task placement. Maximum number of @placement_constraints@
       is @10@ .
     type: Text
+    deprecated: false
   _task_role_arn:
     required: false
     help: (Optional) The ARN of IAM role that allows your Amazon ECS container task
       to make calls to other AWS services.
     type: Text
+    deprecated: false
   _family':
     required: true
     help: (Required) A unique name for your task definition.
     type: Text
+    deprecated: false
   _volume:
     required: false
     help: (Optional) A set of <#volume-block-arguments> that containers in your task
       may use.
     type: Text
+    deprecated: false
   _network_mode:
     required: false
     help: (Optional) The Docker networking mode to use for the containers in the task.
       The valid values are @none@ , @bridge@ , and @host@ .
     type: Text
+    deprecated: false
   _container_definitions:
     required: true
     help: (Required) A list of valid [container definitions] (http://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html)
@@ -34,6 +39,7 @@ arguments:
       section from the official <https://docs.aws.amazon.com/AmazonECS/latest/developerguide>
       .
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an ECS task definition to be used in @aws_ecs_service@ .
 examples: []

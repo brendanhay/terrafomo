@@ -6,42 +6,52 @@ arguments:
       client is needed to retrieve subnet ids. If omitted, the @region@ argument of
       the provider is used.
     type: Text
+    deprecated: false
   _dhcp_disabled:
     required: false
     help: (Optional) If the subnet has DHCP disabled.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the subnet.
     type: Text
+    deprecated: false
   _cidr:
     required: false
     help: (Optional) The CIDR of the subnet.
     type: Text
+    deprecated: false
   _ip_version:
     required: false
     help: (Optional) The IP version of the subnet (either 4 or 6).
     type: Text
+    deprecated: false
   _network_id:
     required: false
     help: (Optional) The ID of the network the subnet belongs to.
     type: Text
+    deprecated: false
   _subnet_id:
     required: false
     help: (Optional) The ID of the subnet.
     type: Text
+    deprecated: false
   _gateway_ip:
     required: false
     help: (Optional) The IP of the subnet's gateway.
     type: Text
+    deprecated: false
   _dhcp_enabled:
     required: false
     help: (Optional) If the subnet has DHCP enabled.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the subnet.
     type: Text
+    deprecated: false
 attributes:
   dns_nameservers:
     help: ! '- DNS Nameservers of the subnet.'

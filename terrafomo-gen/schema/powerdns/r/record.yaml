@@ -4,22 +4,27 @@ arguments:
     required: true
     help: (Required) The name of the record.
     type: Text
+    deprecated: false
   _ttl:
     required: true
     help: (Required) The TTL of the record.
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The name of zone to contain this record.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The record type.
     type: Text
+    deprecated: false
   _records:
     required: true
     help: (Required) A string list of records.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a PowerDNS record resource.
 examples: []

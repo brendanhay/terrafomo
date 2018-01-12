@@ -5,26 +5,31 @@ arguments:
     help: (Optional) A boolean policy is a constraint that is either enforced or not.
       Structure is documented below.
     type: Text
+    deprecated: false
   _list_policy:
     required: false
     help: (Optional) A policy that can define specific values that are allowed or
       denied for the given constraint. It can also be used to allow or deny all values.
       Structure is documented below.
     type: Text
+    deprecated: false
   _constraint:
     required: true
     help: (Required) The name of the Constraint the Policy is configuring, for example,
       @serviceuser.services@ . Check out the <https://cloud.google.com/resource-manager/docs/organization-policy/understanding-constraints#available_constraints>
       .
     type: Text
+    deprecated: false
   _org_id:
     required: true
     help: (Required) The numeric ID of the organization to set the policy for.
     type: Text
+    deprecated: false
   _version:
     required: false
     help: (Optional) Version of the Policy. Default version is 0.
     type: Text
+    deprecated: false
 attributes:
   etag:
     help: ! '- (Computed) The etag of the organization policy. @etag@ is used for

@@ -7,30 +7,36 @@ arguments:
       and public DB snapshots are not included in the returned results by default.
       Possible values are, @automated@ , @manual@ , @shared@ and @public@ .
     type: Text
+    deprecated: false
   _include_shared:
     required: false
     help: (Optional) Set this value to true to include shared manual DB snapshots
       from other AWS accounts that this AWS account has been given permission to copy
       or restore, otherwise set this value to false. The default is @false@ .
     type: Text
+    deprecated: false
   _db_instance_identifier:
     required: false
     help: (Optional) Returns the list of snapshots created by the specific db_instance
     type: Text
+    deprecated: false
   _include_public:
     required: false
     help: (Optional) Set this value to true to include manual DB snapshots that are
       public and can be copied or restored by any AWS account, otherwise set this
       value to false. The default is @false@ .
     type: Text
+    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent Snapshot.
     type: Text
+    deprecated: false
   _db_snapshot_identifier:
     required: false
     help: (Optional) Returns information on a specific snapshot_id.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- Specifies the status of this DB snapshot.'

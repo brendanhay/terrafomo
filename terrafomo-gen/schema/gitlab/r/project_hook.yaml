@@ -4,50 +4,62 @@ arguments:
     required: false
     help: (Optional) Invoke the hook for tag push events.
     type: Text
+    deprecated: false
   _url:
     required: true
     help: (Required) The url of the hook to invoke.
     type: Text
+    deprecated: false
   _token:
     required: false
     help: (Optional) A token to present when invoking the hook.
     type: Text
+    deprecated: false
   _wiki_page_events:
     required: false
     help: (Optional) Invoke the hook for wiki page events.
     type: Text
+    deprecated: false
   _note_events:
     required: false
     help: (Optional) Invoke the hook for notes events.
     type: Text
+    deprecated: false
   _project:
     required: true
     help: (Required) The name or id of the project to add the hook to.
     type: Text
+    deprecated: false
   _merge_requests_events:
     required: false
     help: (Optional) Invoke the hook for merge requests.
     type: Text
+    deprecated: false
   _push_events:
     required: false
     help: (Optional) Invoke the hook for push events.
     type: Text
+    deprecated: false
   _issues_events:
     required: false
     help: (Optional) Invoke the hook for issues events.
     type: Text
+    deprecated: false
   _pipeline_events:
     required: false
     help: (Optional) Invoke the hook for pipeline events.
     type: Text
+    deprecated: false
   _job_events:
     required: false
     help: (Optional) Invoke the hook for job events.
     type: Text
+    deprecated: false
   _enable_ssl_verification:
     required: false
     help: (Optional) Enable ssl verification when invoking the hook.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The unique id assigned to the hook by the GitLab server.'

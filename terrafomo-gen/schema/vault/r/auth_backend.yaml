@@ -4,14 +4,17 @@ arguments:
     required: false
     help: (Optional) A description of the auth backend
     type: Text
+    deprecated: false
   _path:
     required: false
     help: (Optional) The path to mount the auth backend. This defaults to the name.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The name of the policy
     type: Text
+    deprecated: false
 attributes: {}
 about: ''
 examples: []

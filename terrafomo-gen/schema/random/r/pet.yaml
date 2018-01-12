@@ -4,19 +4,23 @@ arguments:
     required: false
     help: (Optional) The character to separate words in the pet name.
     type: Text
+    deprecated: false
   _keepers:
     required: false
     help: (Optional) Arbitrary map of values that, when changed, will trigger a new
       id to be generated. See <../index.html> for more information.
     type: Text
+    deprecated: false
   _prefix:
     required: false
     help: (Optional) A string to prefix the name with.
     type: Text
+    deprecated: false
   _length:
     required: false
     help: (Optional) The length (in words) of the pet name.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- (string) The random pet name'

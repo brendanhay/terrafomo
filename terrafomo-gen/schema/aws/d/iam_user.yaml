@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The friendly IAM user name to match.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) assigned by AWS for this user.'

@@ -5,26 +5,31 @@ arguments:
     help: (Required) Specifies the name of the EventHub Namespace. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the EventHub Namespace resource. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _message_retention:
     required: true
     help: (Required) Specifies the number of days to retain the events for this Event
       Hub. Needs to be between 1 and 7 days; or 1 day when using a Basic SKU for the
       parent EventHub Namespace.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the EventHub's parent
       Namespace exists. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _partition_count:
     required: true
     help: (Required) Specifies the current number of shards on the Event Hub.
     type: Text
+    deprecated: false
 attributes:
   partition_ids:
     help: ! '- The identifiers for partitions created for Event Hubs.'

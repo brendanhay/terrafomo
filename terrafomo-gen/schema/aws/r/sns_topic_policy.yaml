@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The fully-formed AWS policy as JSON
     type: Text
+    deprecated: false
   _arn:
     required: true
     help: (Required) The ARN of the SNS topic
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides an SNS topic policy resource ~> NOTE: If a Principal is specified
   as just an AWS account ID rather than an ARN, AWS silently converts it to the ARN

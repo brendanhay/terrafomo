@@ -5,27 +5,33 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the autoscaler.
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The zone of the target.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) An optional textual description of the instance group manager.
     type: Text
+    deprecated: false
   _autoscaling_policy:
     required: true
     help: (Required) The parameters of the autoscaling algorithm. Structure is documented
       below.
     type: Text
+    deprecated: false
   _target:
     required: true
     help: (Required) The full URL to the instance group manager whose size we control.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URL of the created resource.'

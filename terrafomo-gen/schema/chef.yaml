@@ -6,11 +6,13 @@ arguments:
       client. This is issued by the server when a new client object is created. May
       be provided via the @CHEF_KEY_MATERIAL@ environment variable.
     type: Text
+    deprecated: false
   _allow_unverified_ssl:
     required: false
     help: (Optional) Boolean indicating whether to make requests to a Chef server
       whose SSL certicate cannot be verified. Defaults to @false@ .
     type: Text
+    deprecated: false
   _server_url:
     required: true
     help: (Required) The HTTP(S) API URL of the Chef server to use. If the target
@@ -18,12 +20,14 @@ arguments:
       wish to configure. May be provided instead via the @CHEF_SERVER_URL@ environment
       variable.
     type: Text
+    deprecated: false
   _client_name:
     required: true
     help: (Required) The name of the client account to use when making requests. This
       must have been already configured on the Chef server. May be provided instead
       via the @CHEF_CLIENT_NAME@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: <https://www.chef.io/> is a systems and cloud infrastructure automation framework.
   The Chef provider allows Terraform to manage various resources that exist within

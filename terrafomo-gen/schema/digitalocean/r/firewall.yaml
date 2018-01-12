@@ -5,23 +5,28 @@ arguments:
     help: (Optional) The outbound access rule block for the Firewall. The @outbound_rule@
       block is documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The Firewall name
     type: Text
+    deprecated: false
   _inbound_rule:
     required: false
     help: (Optional) The inbound access rule block for the Firewall. The @inbound_rule@
       block is documented below.
     type: Text
+    deprecated: false
   _droplet_ids:
     required: true
     help: (Optional) - The list of the IDs of the Droplets assigned to the Firewall.
     type: Text
+    deprecated: false
   _tags:
     required: true
     help: (Optional) - The names of the Tags assigned to the Firewall.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- A status string indicating the current state of the Firewall. This

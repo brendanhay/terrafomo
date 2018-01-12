@@ -6,18 +6,22 @@ arguments:
       leading ''#'' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords>
       .'
     type: Text
+    deprecated: false
   _project:
     required: true
     help: (Required) The name or id of the project to add the label to.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the label.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the label.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The unique id assigned to the label by the GitLab server (the name

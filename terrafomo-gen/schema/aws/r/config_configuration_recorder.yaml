@@ -4,11 +4,13 @@ arguments:
     required: false
     help: (Optional) Recording group - see below.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the recorder. Defaults to @default@ . Changing it
       recreates the resource.
     type: Text
+    deprecated: false
   _role_arn:
     required: true
     help: (Required) Amazon Resource Name (ARN) of the IAM role. used to make read
@@ -16,6 +18,7 @@ arguments:
       associated with the account. See <http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html>
       for more details.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides an AWS Config Configuration Recorder. Please note that this resource
   does not start the created recorder automatically. ~> Note:  Starting the Configuration

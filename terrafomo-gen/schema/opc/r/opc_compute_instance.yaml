@@ -6,6 +6,7 @@ arguments:
       @shutdown@ . You can use this request to shut down and restart individual instances
       which use a persistent bootable storage volume.
     type: Text
+    deprecated: false
   _networking_info:
     required: false
     help: (Optional) Information pertaining to an individual network interface to
@@ -13,6 +14,7 @@ arguments:
       be created within the @shared_network@ . See <#networking-info> below for more
       information.
     type: Text
+    deprecated: false
   _boot_order:
     required: false
     help: (Optional) The index number of the bootable storage volume, presented as
@@ -23,33 +25,40 @@ arguments:
       the instance is booted using the image on the specified bootable storage volume.
       If you specify both boot_order and imagelist, the imagelist attribute is ignored.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the instance.
     type: Text
+    deprecated: false
   _reverse_dns:
     required: false
     help: (Optional) If set to @true@ (default), then reverse DNS records are created.
       If set to @false@ , no reverse DNS records are created.
     type: Text
+    deprecated: false
   _label:
     required: false
     help: (Optional) The label to apply to the instance.
     type: Text
+    deprecated: false
   _ssh_keys:
     required: false
     help: (Optional) A list of the names of the SSH Keys that can be used to log into
       the instance.
     type: Text
+    deprecated: false
   _image_list:
     required: false
     help: (Optional) The imageList of the instance, e.g. @/oracle/public/oel_6.4_2GB_v1@
       .
     type: Text
+    deprecated: false
   _shape:
     required: true
     help: (Required) The shape of the instance, e.g. @oc4@ .
     type: Text
+    deprecated: false
   _hostname:
     required: false
     help: (Optional) The host name assigned to the instance. On an Oracle Linux instance,
@@ -58,22 +67,26 @@ arguments:
       The host name must not end with a period. If you don't specify a host name,
       then a name is generated automatically.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A list of strings that should be supplied to the instance as
       tags.
     type: Text
+    deprecated: false
   _instance_attributes:
     required: false
     help: (Optional) A JSON string of custom attributes. See <#attributes> below for
       more information.
     type: Text
+    deprecated: false
   _storage:
     required: false
     help: (Optional) Information pertaining to an individual storage attachment to
       be created during instance creation. Please see <#storage-attachments> below
       for more information.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The @opc_compute_instance@ resource creates and manages an instance in an
   OPC identity domain. ~> Caution: The @opc_compute_instance@ resource can completely

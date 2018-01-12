@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The name of the SSH key for identification
     type: Text
+    deprecated: false
   _public_key:
     required: true
     help: (Required) The public key. If this is a file, it can be read using the file
       interpolation function
     type: Text
+    deprecated: false
 attributes:
   fingerprint:
     help: ! '- The fingerprint of the SSH key'

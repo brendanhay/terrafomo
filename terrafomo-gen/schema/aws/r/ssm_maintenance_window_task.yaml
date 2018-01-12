@@ -5,39 +5,47 @@ arguments:
     help: (Optional) A structure containing information about parameters required
       by the particular @task_arn@ . Documented below.
     type: Text
+    deprecated: false
   _task_type:
     required: true
     help: (Required) The type of task being registered. The only allowed value is
       @RUN_COMMAND@ .
     type: Text
+    deprecated: false
   _logging_info:
     required: false
     help: (Optional) A structure containing information about an Amazon S3 bucket
       to write instance-level logs to. Documented below.
     type: Text
+    deprecated: false
   _task_arn:
     required: true
     help: (Required) The ARN of the task to execute.
     type: Text
+    deprecated: false
   _service_role_arn:
     required: true
     help: (Required) The role that should be assumed when executing the task.
     type: Text
+    deprecated: false
   _window_id:
     required: true
     help: (Required) The Id of the maintenance window to register the task with.
     type: Text
+    deprecated: false
   _max_errors:
     required: true
     help: (Required) The maximum number of errors allowed before this task stops being
       scheduled.
     type: Text
+    deprecated: false
   _priority:
     required: false
     help: (Optional) The priority of the task in the Maintenance Window, the lower
       the number the higher the priority. Tasks in a Maintenance Window are scheduled
       in priority order with tasks that have the same priority scheduled in parallel.
     type: Text
+    deprecated: false
   _targets:
     required: true
     help: (Required) The targets (either instances or window target ids). Instances
@@ -45,10 +53,12 @@ arguments:
       ids are specified using Key=WindowTargetIds,Values=window target id1, window
       target id2.
     type: Text
+    deprecated: false
   _max_concurrency:
     required: true
     help: (Required) The maximum number of targets this task can be run for in parallel.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the maintenance window task.'

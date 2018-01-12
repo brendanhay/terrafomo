@@ -4,21 +4,25 @@ arguments:
     required: false
     help: (Optional) See below.
     type: Text
+    deprecated: false
   _tag:
     required: false
     help: (Optional) A single tag that can be used to filter the list of nodes to
       return based on a single matching tag..
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The service name to select.
     type: Text
+    deprecated: false
   _datacenter:
     required: false
     help: (Optional) The Consul datacenter to query.  Defaults to the same value found
       in @query_options@ parameter specified below, or if that is empty, the @datacenter@
       value found in the Consul agent that this provider is configured to talk to.
     type: Text
+    deprecated: false
 attributes:
   tag:
     help: ! '- The name of the tag used to filter the list of nodes in @service@ .'

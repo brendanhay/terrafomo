@@ -5,6 +5,7 @@ arguments:
     help: (Optional) This is a reference name used in Caller Reference (helpful for
       identifying single delegation set amongst others)
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The delegation set ID'

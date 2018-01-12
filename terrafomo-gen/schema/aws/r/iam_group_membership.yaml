@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) A list of IAM User names to associate with the Group
     type: Text
+    deprecated: false
   _group:
     required: true
     help: – (Required) The IAM Group name to attach the list of @users@ to
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name to identify the Group Membership
     type: Text
+    deprecated: false
 attributes:
   group:
     help: – IAM Group name

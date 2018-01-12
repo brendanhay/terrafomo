@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The username.
     type: Text
+    deprecated: false
 attributes:
   bio:
     help: ! '- the user''s bio.'

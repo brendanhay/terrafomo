@@ -7,11 +7,13 @@ arguments:
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new floating IP (which may or may not have a different address).
     type: Text
+    deprecated: false
   _pool:
     required: true
     help: (Required) The name of the pool from which to obtain the floating IP. Changing
       this creates a new floating IP.
     type: Text
+    deprecated: false
 attributes:
   instance_id:
     help: ! '- UUID of the compute instance associated with the floating IP.'

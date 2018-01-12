@@ -4,27 +4,33 @@ arguments:
     required: false
     help: (Optional) The associated <#api-stages-arguments> of the usage plan.
     type: Text
+    deprecated: false
   _throttle_settings:
     required: false
     help: (Optional) The <#throttling-settings-arguments> of the usage plan.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the usage plan.
     type: Text
+    deprecated: false
   _quota_settings:
     required: false
     help: (Optional) The <#quota-settings-arguments> of the usage plan.
     type: Text
+    deprecated: false
   _product_code:
     required: false
     help: (Optional) The AWS Markeplace product identifier to associate with the usage
       plan as a SaaS product on AWS Marketplace.
     type: Text
+    deprecated: false
   _description:
     required: true
     help: (Required) The description of a usage plan.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an API Gateway Usage Plan.
 examples: []

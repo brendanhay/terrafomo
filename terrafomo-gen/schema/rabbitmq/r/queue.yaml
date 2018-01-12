@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The name of the queue.
     type: Text
+    deprecated: false
   _settings:
     required: true
     help: (Required) The settings of the queue. The structure is described below.
     type: Text
+    deprecated: false
   _vhost:
     required: true
     help: (Required) The vhost to create the resource in.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @rabbitmq_queue@ resource creates and manages a queue.
 examples: []

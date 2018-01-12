@@ -5,28 +5,33 @@ arguments:
     help: (Optional) List of node pools associated with this cluster. See <container_node_pool.html>
       for schema.
     type: Text
+    deprecated: false
   _master_auth:
     required: false
     help: (Optional) The authentication information for accessing the Kubernetes master.
       Structure is documented below.
     type: Text
+    deprecated: false
   _master_authorized_networks_config:
     required: false
     help: (Optional) The desired configuration options for master authorized networks.
       Omit the nested @cidr_blocks@ attribute to disallow external access (except
       the cluster node IPs, which GKE automatically whitelists).
     type: Text
+    deprecated: false
   _cluster_ipv4_cidr:
     required: false
     help: (Optional) The IP address range of the container pods in this cluster. Default
       is an automatically assigned CIDR.
     type: Text
+    deprecated: false
   _node_version:
     required: false
     help: (Optional) The Kubernetes version on the nodes. Must either be unset or
       set to the same value as @min_master_version@ on create. Defaults to the default
       version set by GKE which is not necessarily the latest version.
     type: Text
+    deprecated: false
   _enable_legacy_abac:
     required: false
     help: (Optional) Whether the ABAC authorizer is enabled for this cluster. When
@@ -34,55 +39,66 @@ arguments:
       will have statically granted permissions beyond those provided by the RBAC configuration
       or IAM.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _initial_node_count:
     required: false
     help: (Optional) The number of nodes to create in this cluster (not including
       the Kubernetes master). Must be set if @node_pool@ is not set.
     type: Text
+    deprecated: false
   _subnetwork:
     required: false
     help: (Optional) The name of the Google Compute Engine subnetwork in which the
       cluster's instances are launched.
     type: Text
+    deprecated: false
   _maintenance_policy:
     required: false
     help: (Optional) The maintenance policy to use for the cluster. Structure is documented
       below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the cluster, unique within the project and zone.
     type: Text
+    deprecated: false
   _logging_service:
     required: false
     help: (Optional) The logging service that the cluster should write logs to. Available
       options include @logging.googleapis.com@ and @none@ . Defaults to @logging.googleapis.com@
     type: Text
+    deprecated: false
   _addons_config:
     required: false
     help: (Optional) The configuration for addons supported by Google Container Engine.
       Structure is documented below.
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The zone that the master and the number of nodes specified in
       @initial_node_count@ should be created in.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the cluster.
     type: Text
+    deprecated: false
   _monitoring_service:
     required: false
     help: (Optional) The monitoring service that the cluster should write metrics
       to. Available options include @monitoring.googleapis.com@ and @none@ . Defaults
       to @monitoring.googleapis.com@
     type: Text
+    deprecated: false
   _additional_zones:
     required: false
     help: (Optional) The list of additional Google Compute Engine locations in which
@@ -90,17 +106,20 @@ arguments:
       number of nodes specified in @initial_node_count@ is created in all specified
       zones.
     type: Text
+    deprecated: false
   _node_config:
     required: true
     help: ! '-  (Optional) Parameters used in creating the cluster''s nodes. Structure
       is documented below.'
     type: Text
+    deprecated: false
   _enable_kubernetes_alpha:
     required: false
     help: (Optional) Whether to enable Kubernetes Alpha features for this cluster.
       Note that when this option is enabled, the cluster cannot be upgraded and will
       be automatically deleted after 30 days.
     type: Text
+    deprecated: false
   _min_master_version:
     required: false
     help: (Optional) The minimum version of the master. GKE will auto-update the master
@@ -109,11 +128,13 @@ arguments:
       version will be set by GKE to the version of the most recent official release
       (which is not necessarily the latest version).
     type: Text
+    deprecated: false
   _network:
     required: false
     help: (Optional) The name or self_link of the Google Compute Engine network to
       which the cluster is connected.
     type: Text
+    deprecated: false
 attributes:
   instance_group_urls:
     help: ! '- List of instance group URLs which have been assigned to the cluster.'

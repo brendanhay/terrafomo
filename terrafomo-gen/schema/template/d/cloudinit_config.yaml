@@ -5,16 +5,19 @@ arguments:
     help: (Optional) Specify whether or not to gzip the rendered output. Default to
       @true@
     type: Text
+    deprecated: false
   _part:
     required: true
     help: (Required) One may specify this many times, this creates a fragment of the
       rendered cloud-init config file. The order of the parts is maintained in the
       configuration is maintained in the rendered template.
     type: Text
+    deprecated: false
   _base64_encode:
     required: false
     help: (Optional) Base64 encoding of the rendered output. Default to @true@
     type: Text
+    deprecated: false
 attributes:
   rendered:
     help: ! '- The final rendered multi-part cloudinit config.'

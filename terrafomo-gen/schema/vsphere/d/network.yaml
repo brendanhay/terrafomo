@@ -4,12 +4,14 @@ arguments:
     required: true
     help: (Required) The name of the network. This can be a name or path.
     type: Text
+    deprecated: false
   _datacenter_id:
     required: false
     help: (Optional) The managed object reference ID of the datacenter the network
       is located in. This can be omitted if the search path used in @name@ is an absolute
       path, or if there is only one datacenter in the vSphere infrastructure.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! ': The managed object ID of the network in question.'

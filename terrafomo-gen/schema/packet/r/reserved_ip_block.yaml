@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The packet project ID where to allocate the address block
     type: Text
+    deprecated: false
   _quantity:
     required: true
     help: (Required) The number of allocated /32 addresses, a power of 2
     type: Text
+    deprecated: false
   _facility:
     required: true
     help: (Required) The facility where to allocate the address block
     type: Text
+    deprecated: false
 attributes:
   facility:
     help: ! '- The facility where the addresses are'

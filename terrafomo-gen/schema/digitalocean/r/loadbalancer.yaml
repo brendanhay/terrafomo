@@ -4,48 +4,57 @@ arguments:
     required: true
     help: (Required) The region to start in
     type: Text
+    deprecated: false
   _redirect_http_to_https:
     required: false
     help: (Optional) A boolean value indicating whether HTTP requests to the Load
       Balancer on port 80 will be redirected to HTTPS on port 443. Default value is
       @false@ .
     type: Text
+    deprecated: false
   _healthcheck:
     required: false
     help: (Optional) A @healthcheck@ block to be assigned to the Load Balancer. The
       @healthcheck@ block is documented below. Only 1 healthcheck is allowed.
     type: Text
+    deprecated: false
   _forwarding_rule:
     required: true
     help: (Required) A list of @forwarding_rule@ to be assigned to the Load Balancer.
       The @forwarding_rule@ block is documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The Load Balancer name
     type: Text
+    deprecated: false
   _droplet_ids:
     required: true
     help: (Optional) - A list of the IDs of each droplet to be attached to the Load
       Balancer.
     type: Text
+    deprecated: false
   _sticky_sessions:
     required: false
     help: (Optional) A @sticky_sessions@ block to be assigned to the Load Balancer.
       The @sticky_sessions@ block is documented below. Only 1 sticky_sessions block
       is allowed.
     type: Text
+    deprecated: false
   _algorithm:
     required: false
     help: (Optional) The load balancing algorithm used to determine which backend
       Droplet will be selected by a client. It must be either @round_robin@ or @least_connections@
       . The default value is @round_robin@ .
     type: Text
+    deprecated: false
   _droplet_tag:
     required: true
     help: (Optional) - The name of a Droplet tag corresponding to Droplets to be assigned
       to the Load Balancer.
     type: Text
+    deprecated: false
 attributes:
   ip:
     help: ! '- The ip of the Load Balancer'

@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The name of the deployment config.
     type: Text
+    deprecated: false
   _minimum_healthy_hosts:
     required: false
     help: (Optional) A minimum_healthy_hosts block. Minimum Healthy Hosts are documented
       below.
     type: Text
+    deprecated: false
 attributes:
   deployment_config_id:
     help: ! '- The AWS Assigned deployment config id'

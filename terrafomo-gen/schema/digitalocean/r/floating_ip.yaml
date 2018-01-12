@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The region that the Floating IP is reserved to.
     type: Text
+    deprecated: false
   _droplet_id:
     required: false
     help: (Optional) The ID of Droplet that the Floating IP will be assigned to.
     type: Text
+    deprecated: false
 attributes:
   ip_address:
     help: ! '- The IP Address of the resource'

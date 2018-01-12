@@ -4,15 +4,18 @@ arguments:
     required: true
     help: (Required, Forces new resource) ID of the Instance to attach to.
     type: Text
+    deprecated: false
   _device_name:
     required: true
     help: (Required, Forces new resource) The device name to expose to the instance
       (for example, /dev/xvdb).
     type: Text
+    deprecated: false
   _disk_id:
     required: true
     help: (Required, Forces new resource) ID of the Disk to be attached.
     type: Text
+    deprecated: false
 attributes:
   device_name:
     help: ! '- The device name exposed to the instance.'

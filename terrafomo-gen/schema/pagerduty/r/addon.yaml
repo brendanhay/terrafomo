@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The name of the add-on.
     type: Text
+    deprecated: false
   _src:
     required: true
     help: (Required) The source URL to display in a frame in the PagerDuty UI. @HTTPS@
       is required.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the add-on.'

@@ -5,34 +5,41 @@ arguments:
     help: (Optional) Specifies if the database instance is a multiple Availability
       Zone deployment.
     type: Text
+    deprecated: false
   _instance_network_type:
     required: false
     help: ! '(Optional) VPC: VPC instance; Classic: classic instance. If no value
       is specified, a classic instance will be created by default.'
     type: Text
+    deprecated: false
   _engine:
     required: true
     help: ! '(Required) Database type. Value options: MySQL, SQLServer, PostgreSQL,
       and PPAS.'
     type: Text
+    deprecated: false
   _db_instance_storage:
     required: true
     help: ! '(Required) User-defined storage space. Value range:'
     type: Text
+    deprecated: false
   _preferred_backup_period:
     required: false
     help: ! '(Optional) Backup period. Values: Monday, Tuesday, Wednesday, Thursday,
       Friday, Saturday, and Sunday.'
     type: Text
+    deprecated: false
   _preferred_backup_time:
     required: false
     help: (Optional) Backup time, in the format ofHH:mmZ- HH:mm Z.
     type: Text
+    deprecated: false
   _instance_charge_type:
     required: false
     help: (Optional) Valid values are @Prepaid@ , @Postpaid@ , The default is @Postpaid@
       .
     type: Text
+    deprecated: false
   _security_ips:
     required: false
     help: (Optional) List of IP addresses under the IP address white list array. The
@@ -41,61 +48,73 @@ arguments:
       Routing (CIDR) mode. /24 represents the length of the prefix in an IP address.
       The range of the prefix length is [1,32]).
     type: Text
+    deprecated: false
   _engine_version:
     required: true
     help: ! '(Required) Database version. Value options:'
     type: Text
+    deprecated: false
   _period:
     required: false
     help: (Optional) The time that you have bought the resource, in month. Only valid
       when instance_charge_type is set as @PrePaid@ . Value range [1, 12].
     type: Text
+    deprecated: false
   _master_user_name:
     required: false
     help: (Optional) The master user name for the database instance. Operation account
       requiring a uniqueness check. It may consist of lower case letters, numbers
       and underlines, and must start with a letter and have no more than 16 characters.
     type: Text
+    deprecated: false
   _allocate_public_connection:
     required: false
     help: (Optional) If set to true will applies for an Internet connection string
       of an instance.
     type: Text
+    deprecated: false
   _master_user_password:
     required: false
     help: (Optional) The master password for the database instance. Operation password.
       It may consist of letters, digits, or underlines, with a length of 6 to 32 characters.
     type: Text
+    deprecated: false
   _db_instance_net_type:
     required: false
     help: ! '(Optional) Network connection type of an instance. Internet: public network;
       Intranet: private network'
     type: Text
+    deprecated: false
   _backup_retention_period:
     required: false
     help: (Optional) Retention days of the backup (7 to 730 days). The default value
       is 7 days.
     type: Text
+    deprecated: false
   _zone_id:
     required: false
     help: (Optional) Selected zone to create database instance. You cannot set the
       ZoneId parameter if the MultiAZ parameter is set to true.
     type: Text
+    deprecated: false
   _db_instance_class:
     required: true
     help: (Required) Instance type. For details, see <https://intl.aliyun.com/help/doc-detail/26312.htm?spm=a3c0i.o26228en.a3.2.bRUHF3>
       .
     type: Text
+    deprecated: false
   _vswitch_id:
     required: false
     help: (Optional) The virtual switch ID to launch in VPC. If you want to create
       instances in VPC network, this parameter must be set.
     type: Text
+    deprecated: false
   _db_mappings:
     required: false
     help: (Optional) Database mappings to attach to db instance. See <#block-database>
       below for details.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an RDS instance resource.  A DB instance is an isolated database environment
   in the cloud.  A DB instance can contain multiple user-created databases.

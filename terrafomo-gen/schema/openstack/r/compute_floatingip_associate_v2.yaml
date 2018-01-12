@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The instance to associte the floating IP with.
     type: Text
+    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Compute client. Keypairs
@@ -11,14 +12,17 @@ arguments:
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new floatingip_associate.
     type: Text
+    deprecated: false
   _fixed_ip:
     required: false
     help: (Optional) The specific IP address to direct traffic to.
     type: Text
+    deprecated: false
   _floating_ip:
     required: true
     help: (Required) The floating IP to associate.
     type: Text
+    deprecated: false
 attributes:
   instance_id:
     help: ! '- See Argument Reference above.'

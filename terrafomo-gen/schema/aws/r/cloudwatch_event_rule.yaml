@@ -6,28 +6,34 @@ arguments:
       a JSON object. See full documentation of <http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatchEventsandEventPatterns.html>
       for details.
     type: Text
+    deprecated: false
   _is_enabled:
     required: false
     help: (Optional) Whether the rule should be enabled (defaults to @true@ ).
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The rule's name.
     type: Text
+    deprecated: false
   _role_arn:
     required: false
     help: (Optional) The Amazon Resource Name (ARN) associated with the role that
       is used for target invocation.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the rule.
     type: Text
+    deprecated: false
   _schedule_expression:
     required: true
     help: (Required, if @event_pattern@ isn't specified) The scheduling expression.
       For example, @cron(0 20 * * ? *)@ or @rate(5 minutes)@ .
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) of the rule.'

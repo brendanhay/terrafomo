@@ -5,39 +5,47 @@ arguments:
     help: (Required) Specifies the name of the MySQL Server. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _storage_mb:
     required: true
     help: (Required) Specifies the amount of storage for the MySQL Server in Megabytes.
       Possible values are shown below. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _sku:
     required: true
     help: (Required) A @sku@ block as defined below.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the MySQL Server.
     type: Text
+    deprecated: false
   _version:
     required: true
     help: (Required) Specifies the version of MySQL to use. Valid values are @5.6@
       and @5.7@ . Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _administrator_login:
     required: true
     help: (Required) The Administrator Login for the MySQL Server. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _administrator_login_password:
     required: true
     help: (Required) The Password associated with the @administrator_login@ for the
       MySQL Server.
     type: Text
+    deprecated: false
 attributes:
   fqdn:
     help: ! '- The FQDN of the MySQL Server.'

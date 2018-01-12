@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The groupname for the account.
     type: Text
+    deprecated: false
   _password_hash:
     required: false
     help: (Optional) The encrypted password for the account.
     type: Text
+    deprecated: false
   _gid:
     required: false
     help: (Optional) The group ID of the new account.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- ID used to reference this resource in ignition_config .'

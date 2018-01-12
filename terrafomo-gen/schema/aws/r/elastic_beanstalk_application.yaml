@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The name of the application, must be unique within your account
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Short description of the application
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an Elastic Beanstalk Application Resource. Elastic Beanstalk allows
   you to deploy and manage applications in the AWS cloud without worrying about the

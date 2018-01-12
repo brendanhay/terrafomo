@@ -4,22 +4,27 @@ arguments:
     required: true
     help: (Required, Forces new resource) The CIDR block for the switch.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the switch. Defaults to null.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The switch description. Defaults to null.
     type: Text
+    deprecated: false
   _availability_zone:
     required: true
     help: (Required, Forces new resource) The AZ for the switch.
     type: Text
+    deprecated: false
   _vpc_id:
     required: true
     help: (Required, Forces new resource) The VPC ID.
     type: Text
+    deprecated: false
 attributes:
   vpc_id:
     help: ! '- The VPC ID.'

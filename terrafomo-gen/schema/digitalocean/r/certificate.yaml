@@ -5,19 +5,23 @@ arguments:
     help: (Optional) The full PEM-formatted trust chain between the certificate authority's
       certificate and your domain's TLS certificate.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the certificate for identification.
     type: Text
+    deprecated: false
   _leaf_certificate:
     required: true
     help: (Required) The contents of a PEM-formatted public TLS certificate.
     type: Text
+    deprecated: false
   _private_key:
     required: true
     help: (Required) The contents of a PEM-formatted private-key corresponding to
       the SSL certificate.
     type: Text
+    deprecated: false
 attributes:
   sha1_fingerprint:
     help: ! '- The SHA-1 fingerprint of the certificate'

@@ -4,12 +4,14 @@ arguments:
     required: true
     help: (Required) The name of the Project on Packet.net
     type: Text
+    deprecated: false
   _payment_method:
     required: false
     help: (Optional) The unique ID of the payment method on file to use for services
       created in this project. If not given, the project will use the default payment
       method for your user.
     type: Text
+    deprecated: false
 attributes:
   payment_method:
     help: ! '- The unique ID of the payment method on file to use for services created

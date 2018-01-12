@@ -6,6 +6,7 @@ arguments:
       values are: @Contributor@ , @Owner@ , @Reader@ and @VirtualMachineContributor@
       .'
     type: Text
+    deprecated: false
 attributes:
   assignable_scopes:
     help: ! '- One or more assignable scopes for this Role Definition, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@

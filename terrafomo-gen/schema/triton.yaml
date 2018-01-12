@@ -7,12 +7,14 @@ arguments:
       public cloud us-west-1 endpoint. Valid public cloud endpoints include: @us-east-1@
       , @us-east-2@ , @us-east-3@ , @us-sw-1@ , @us-west-1@ , @eu-ams-1@'
     type: Text
+    deprecated: false
   _key_material:
     required: false
     help: (Optional) This is the private key of an SSH key associated with the Triton
       account to be used. If this is not set, the private key corresponding to the
       fingerprint in @key_id@ must be available via an SSH Agent.
     type: Text
+    deprecated: false
   _insecure_skip_tls_verify:
     required: true
     help: (Optional - defaults to false) This allows skipping TLS verification of
@@ -20,17 +22,20 @@ arguments:
       such as Cloud-On-A-Laptop which does not generally use a certificate signed
       by a trusted root CA.
     type: Text
+    deprecated: false
   _key_id:
     required: true
     help: (Required) This is the fingerprint of the public key matching the key specified
       in @key_path@ . It can be obtained via the command @ssh-keygen -l -E md5 -f
       /path/to/key@
     type: Text
+    deprecated: false
   _account:
     required: true
     help: (Required) This is the name of the Triton account. It can also be provided
       via the @SDC_ACCOUNT@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The Triton provider is used to interact with resources in Joyent's Triton cloud.
   It is compatible with both public- and on-premise installations of Triton. The provider

@@ -5,19 +5,23 @@ arguments:
     help: (Optional) Boolean that determines whether the domain will accept email
       for sub-domains.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The domain to add to Mailgun
     type: Text
+    deprecated: false
   _spam_action:
     required: false
     help: (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for
       inbound messages. Tag, messages will be tagged with a spam header.
     type: Text
+    deprecated: false
   _smtp_password:
     required: true
     help: (Required) Password for SMTP authentication
     type: Text
+    deprecated: false
 attributes:
   receiving_records:
     help: ! '- A list of DNS records for receiving validation.'

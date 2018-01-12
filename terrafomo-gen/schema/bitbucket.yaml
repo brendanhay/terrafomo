@@ -5,11 +5,13 @@ arguments:
     help: (Required) Your password used to connect to bitbucket. You can also set
       this via the environment variable. @BITBUCKET_PASSWORD@
     type: Text
+    deprecated: false
   _username:
     required: true
     help: (Required) Your username used to connect to bitbucket. You can also set
       this via the environment variable. @BITBUCKET_USERNAME@
     type: Text
+    deprecated: false
 attributes: {}
 about: The Bitbucket provider allows you to manage resources including repositories,
   webhooks, and default reviewers. Use the navigation to the left to read about the

@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The ID of a host project to associate.
     type: Text
+    deprecated: false
   _service_project:
     required: true
     help: (Required) The ID of the project that will serve as a Shared VPC service
       project.
     type: Text
+    deprecated: false
 attributes: {}
 about: Enables the Google Compute Engine <https://cloud.google.com/compute/docs/shared-vpc>
   feature for a project, assigning it as a Shared VPC service project associated with

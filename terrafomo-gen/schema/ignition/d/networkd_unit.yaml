@@ -5,10 +5,12 @@ arguments:
     help: (Required) The name of the file. This must be suffixed with a valid unit
       type (e.g. 00-eth0.network ).
     type: Text
+    deprecated: false
   _content:
     required: true
     help: (Required) The contents of the networkd file.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- ID used to reference this resource in ignition_config .'

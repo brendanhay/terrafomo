@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) Name of the domain.
     type: Text
+    deprecated: false
   _access_policies:
     required: false
     help: (Optional) IAM policy document specifying the access policies for the domain
     type: Text
+    deprecated: false
 attributes: {}
 about: Allows setting policy to an ElasticSearch domain while referencing domain attributes
   (e.g. ARN)

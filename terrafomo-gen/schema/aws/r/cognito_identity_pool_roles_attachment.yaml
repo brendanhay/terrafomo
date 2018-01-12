@@ -6,14 +6,17 @@ arguments:
       the key will be either "authenticated" or "unauthenticated" and the value will
       be the Role ARN.
     type: Text
+    deprecated: false
   _identity_pool_id:
     required: true
     help: (Required) - An identity pool ID in the format REGION:GUID.
     type: Text
+    deprecated: false
   _role_mapping:
     required: true
     help: (Optional) - A List of <#role-mappings> .
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an AWS Cognito Identity Pool Roles Attachment.
 examples: []

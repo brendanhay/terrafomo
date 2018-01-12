@@ -8,17 +8,20 @@ arguments:
       a hyphen. If not specified, Terraform will autogenerate a name beginning with
       @tf-lb@ .
     type: Text
+    deprecated: false
   _internet:
     required: false
     help: (Optional, Forces New Resource) If true, the SLB addressType will be internet,
       false will be intranet, Default is false. If load balancer launched in VPC,
       this value must be "false".
     type: Text
+    deprecated: false
   _bandwidth:
     required: false
     help: (Optional) Valid value is between 1 and 1000, If argument "internet_charge_type"
       is "paybytraffic", then this value will be ignore.
     type: Text
+    deprecated: false
   _internet_charge_type:
     required: false
     help: (Optional, Forces New Resource) Valid values are @paybybandwidth@ , @paybytraffic@
@@ -26,14 +29,17 @@ arguments:
       Default is "paybytraffic". If load balancer launched in VPC, this value must
       be "paybytraffic".
     type: Text
+    deprecated: false
   _vswitch_id:
     required: true
     help: (Required for a VPC SLB, Forces New Resource) The VSwitch ID to launch in.
     type: Text
+    deprecated: false
   _listener:
     required: false
     help: (Optional) Additional SLB listener. See <#block-listener> below for details.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an Application Load Balancer resource.
 examples: []

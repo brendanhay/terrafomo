@@ -4,22 +4,27 @@ arguments:
     required: true
     help: (Required) The name of the record
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: (Optional) The TTL of the record
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The domain to add the record to
     type: Text
+    deprecated: false
   _rdata:
     required: true
     help: (Required) An array containing the values of the record
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of the record
     type: Text
+    deprecated: false
 attributes:
   ttl:
     help: ! '- The TTL of the record'

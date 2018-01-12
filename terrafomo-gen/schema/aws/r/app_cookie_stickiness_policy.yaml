@@ -4,20 +4,24 @@ arguments:
     required: true
     help: (Required) The name of load balancer to which the policy should be attached.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the stickiness policy.
     type: Text
+    deprecated: false
   _cookie_name:
     required: true
     help: (Required) The application cookie whose lifetime the ELB's cookie should
       follow.
     type: Text
+    deprecated: false
   _lb_port:
     required: true
     help: (Required) The load balancer port to which the policy should be applied.
       This must be an active listener on the load balancer.
     type: Text
+    deprecated: false
 attributes:
   cookie_name:
     help: ! '- The application cookie whose lifetime the ELB''s cookie should follow.'

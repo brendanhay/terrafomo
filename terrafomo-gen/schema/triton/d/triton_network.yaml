@@ -4,6 +4,7 @@ arguments:
     required: true
     help: ! '- (string) The name of the network.'
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- (string) The ID of the network.'

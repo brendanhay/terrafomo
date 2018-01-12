@@ -6,14 +6,17 @@ arguments:
       client is needed to create an . If omitted, the @region@ argument of the provider
       is used. Changing this creates a new member.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) Human-readable name for the member.
     type: Text
+    deprecated: false
   _subnet_id:
     required: true
     help: (Required) The subnet in which to access the member
     type: Text
+    deprecated: false
   _weight:
     required: false
     help: (Optional)  A positive integer value that indicates the relative portion
@@ -21,31 +24,37 @@ arguments:
       with a weight of 10 receives five times as much traffic as a member with a weight
       of 2.
     type: Text
+    deprecated: false
   _protocol_port:
     required: true
     help: (Required) The port on which to listen for client traffic. Changing this
       creates a new member.
     type: Text
+    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) The administrative state of the member. A valid value is true
       (UP) or false (DOWN).
     type: Text
+    deprecated: false
   _pool_id:
     required: true
     help: (Required) The id of the pool that this member will be assigned to.
     type: Text
+    deprecated: false
   _address:
     required: true
     help: (Required) The IP address of the member to receive traffic from the load
       balancer. Changing this creates a new member.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) Required for admins. The UUID of the tenant who owns the member.  Only
       administrative users can specify a tenant UUID other than their own. Changing
       this creates a new member.
     type: Text
+    deprecated: false
 attributes:
   admin_state_up:
     help: ! '- See Argument Reference above.'

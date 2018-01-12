@@ -6,10 +6,12 @@ arguments:
       syntax or @file@ function is helpful here. Use the [IoT Developer Guide] (http://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html)
       for more information on IoT Policies
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the policy.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN assigned by AWS to this policy.'

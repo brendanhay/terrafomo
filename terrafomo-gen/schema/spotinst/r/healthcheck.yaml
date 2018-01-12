@@ -4,22 +4,27 @@ arguments:
     required: false
     help: (Optional) the name of the healthcheck
     type: Text
+    deprecated: false
   _proxy:
     required: true
     help: (Required)
     type: Text
+    deprecated: false
   _resource_id:
     required: true
     help: (Required) The resource to health check
     type: Text
+    deprecated: false
   _threshold:
     required: true
     help: (Required)
     type: Text
+    deprecated: false
   _check:
     required: true
     help: (Required) Describes the check to execute.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The healthcheck ID.'

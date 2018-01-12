@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '(Required) Standard service''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
     type: Text
+    deprecated: false
   _spec:
     required: true
     help: (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
     type: Text
+    deprecated: false
 attributes: {}
 about: A Service is an abstraction which defines a logical set of pods and a policy
   by which to access them - sometimes called a micro-service.

@@ -4,20 +4,24 @@ arguments:
     required: false
     help: (Optional) A set of key/value label pairs to assign to the project.
     type: Text
+    deprecated: false
   _project_id:
     required: true
     help: (Required) The project ID. Changing this forces a new project to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The display name of the project.
     type: Text
+    deprecated: false
   _policy_data:
-    required: true
-    help: ! '- (Deprecated) The IAM policy associated with the project. This argument
-      is no longer supported, and will be removed in a future version of Terraform.
-      It should be replaced with a @google_project_iam_policy@ resource.'
+    required: false
+    help: (Deprecated) The IAM policy associated with the project. This argument is
+      no longer supported, and will be removed in a future version of Terraform. It
+      should be replaced with a @google_project_iam_policy@ resource.
     type: Text
+    deprecated: true
   _org_id:
     required: false
     help: (Optional) The numeric ID of the organization this project belongs to. Changing
@@ -26,6 +30,7 @@ arguments:
       the top level. Changing this forces the project to be migrated to the newly
       specified organization.
     type: Text
+    deprecated: false
   _billing_account:
     required: false
     help: (Optional) The alphanumeric ID of the billing account this project belongs
@@ -34,11 +39,13 @@ arguments:
       organization. See <https://cloud.google.com/billing/v1/how-tos/access-control>
       for more details.
     type: Text
+    deprecated: false
   _skip_delete:
     required: false
     help: (Optional) If true, the Terraform resource can be deleted without deleting
       the Project via the Google API.
     type: Text
+    deprecated: false
   _folder_id:
     required: false
     help: (Optional) The numeric ID of the folder this project should be created under.
@@ -46,6 +53,7 @@ arguments:
       specified, then the project is created under the specified folder. Changing
       this forces the project to be migrated to the newly specified folder.
     type: Text
+    deprecated: false
 attributes:
   policy_etag:
     help: ! '- (Deprecated) The etag of the project''s IAM policy, used to determine

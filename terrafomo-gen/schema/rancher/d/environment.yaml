@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The setting name.
     type: Text
+    deprecated: false
 attributes:
   orchestration:
     help: ! '- The environment orchestration engine.'

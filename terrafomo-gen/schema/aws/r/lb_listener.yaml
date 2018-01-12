@@ -5,28 +5,34 @@ arguments:
     help: (Optional) The name of the SSL Policy for the listener. Required if @protocol@
       is @HTTPS@ .
     type: Text
+    deprecated: false
   _default_action:
     required: true
     help: (Required) An Action block. Action blocks are documented below.
     type: Text
+    deprecated: false
   _load_balancer_arn:
     required: true
     help: (Required, Forces New Resource) The ARN of the load balancer.
     type: Text
+    deprecated: false
   _protocol:
     required: false
     help: (Optional) The protocol for connections from clients to the load balancer.
       Valid values are @TCP@ , @HTTP@ and @HTTPS@ . Defaults to @HTTP@ .
     type: Text
+    deprecated: false
   _certificate_arn:
     required: false
     help: (Optional) The ARN of the SSL server certificate. Exactly one certificate
       is required if the protocol is HTTPS.
     type: Text
+    deprecated: false
   _port:
     required: true
     help: (Required) The port on which the load balancer is listening.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the listener (matches @id@ )'

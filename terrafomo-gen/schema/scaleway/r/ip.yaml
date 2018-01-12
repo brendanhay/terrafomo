@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) ID of server to associate IP with
     type: Text
+    deprecated: false
 attributes:
   ip:
     help: ! '- IP of the new resource'

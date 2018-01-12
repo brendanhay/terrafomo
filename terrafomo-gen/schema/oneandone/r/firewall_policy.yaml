@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The name of the VPN.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description for the VPN
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages a Firewall Policy on 1&1
 examples: []

@@ -5,22 +5,26 @@ arguments:
     help: (Required) Specifies the name of the PostgreSQL Server. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the PostgreSQL Database, which needs <https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS>
       . Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the PostgreSQL Server
       exists. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _charset:
     required: true
     help: (Required) Specifies the Charset for the PostgreSQL Database, which needs
       <https://www.postgresql.org/docs/current/static/multibyte.html> . Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _collation:
     required: true
     help: (Required) Specifies the Collation for the PostgreSQL Database, which needs
@@ -28,6 +32,7 @@ arguments:
       Microsoft uses different <https://msdn.microsoft.com/library/windows/desktop/dd373814.aspx>
       - en-US instead of en_US. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the PostgreSQL Database.'

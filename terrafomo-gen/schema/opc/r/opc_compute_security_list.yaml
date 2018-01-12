@@ -6,17 +6,20 @@ arguments:
       be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and
       @deny@ (packets are dropped and no reply is sent).
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The unique (within the identity domain) name of the security
       list.
     type: Text
+    deprecated: false
   _output_cidr_policy:
     required: true
     help: (Required) The policy for outbound traffic from the security list. Must
       be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and
       @deny@ (packets are dropped and no reply is sent).
     type: Text
+    deprecated: false
 attributes: {}
 about: The @opc_compute_security_list@ resource creates and manages a security list
   in an OPC identity domain.

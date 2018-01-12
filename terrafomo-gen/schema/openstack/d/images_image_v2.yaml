@@ -6,48 +6,59 @@ arguments:
       client is needed to create an Image that can be used with a compute instance.
       If omitted, the @region@ argument of the provider is used.
     type: Text
+    deprecated: false
   _sort_direction:
     required: false
     help: (Optional) Order the results in either @asc@ or @desc@ .
     type: Text
+    deprecated: false
   _size_min:
     required: false
     help: (Optional) The minimum size (in bytes) of the image to return.
     type: Text
+    deprecated: false
   _tag:
     required: false
     help: (Optional) Search for images with a specific tag.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the image.
     type: Text
+    deprecated: false
   _visibility:
     required: false
     help: (Optional) The visibility of the image. Must be one of "public", "private",
       "community", or "shared". Defaults to "private".
     type: Text
+    deprecated: false
   _sort_key:
     required: false
     help: (Optional) Sort images based on a certain key. Defaults to @name@ .
     type: Text
+    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent image.
     type: Text
+    deprecated: false
   _owner:
     required: false
     help: (Optional) The owner (UUID) of the image.
     type: Text
+    deprecated: false
   _properties:
     required: false
     help: (Optional) a map of key/value pairs to match an image with. All specified
       properties must be matched.
     type: Text
+    deprecated: false
   _size_max:
     required: false
     help: (Optional) The maximum size (in bytes) of the image to return.
     type: Text
+    deprecated: false
 attributes:
   protected:
     help: ! '- Whether or not the image is protected.'

@@ -4,12 +4,14 @@ arguments:
     required: true
     help: (Required) The name or description of the Byte Match Set.
     type: Text
+    deprecated: false
   _byte_match_tuples:
     required: true
     help: ! '- Specifies the bytes (typically a string that corresponds with ASCII
       characters) that you want to search for in web requests, the location in requests
       that you want to search, and other settings.'
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a WAF Byte Match Set Resource
 examples: []

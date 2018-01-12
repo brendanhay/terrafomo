@@ -5,21 +5,25 @@ arguments:
     help: (Required) A list of events which should trigger the webhook. Defaults to
       @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/>
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The type of the webhook. See a list of <https://api.github.com/hooks>
       .
     type: Text
+    deprecated: false
   _active:
     required: false
     help: (Optional) Indicate of the webhook should receive events. Defaults to @true@
       .
     type: Text
+    deprecated: false
   _configuration:
     required: true
     help: (Required) key/value pair of configuration for this webhook. Available keys
       are @url@ , @content_type@ , @secret@ and @insecure_ssl@ .
     type: Text
+    deprecated: false
 attributes:
   url:
     help: ! '- URL of the webhook'

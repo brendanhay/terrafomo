@@ -5,35 +5,42 @@ arguments:
     help: (Required) The name of the virtual network. Changing this forces a new resource
       to be created.
     type: Text
+    deprecated: false
   _dns_config:
     required: true
     help: (Required) This block specifies the DNS configuration of the Profile, it
       supports the fields documented below.
     type: Text
+    deprecated: false
   _monitor_config:
     required: true
     help: (Required) This block specifies the Endpoint monitoring configuration for
       the Profile, it supports the fields documented below.
     type: Text
+    deprecated: false
   _profile_status:
     required: false
     help: (Optional) The status of the profile, can be set to either @Enabled@ or
       @Disabled@ . Defaults to @Enabled@ .
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the virtual
       network.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _traffic_routing_method:
     required: true
     help: ! '(Required) Specifies the algorithm used to route traffic, possible values
       are:'
     type: Text
+    deprecated: false
 attributes:
   fqdn:
     help: ! '- The FQDN of the created Profile.'

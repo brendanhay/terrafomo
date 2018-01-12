@@ -4,26 +4,32 @@ arguments:
     required: false
     help: (Optional) Additional key/value arguments for the binding.
     type: Text
+    deprecated: false
   _source:
     required: true
     help: (Required) The source exchange.
     type: Text
+    deprecated: false
   _routing_key:
     required: false
     help: (Optional) A routing key for the binding.
     type: Text
+    deprecated: false
   _destination:
     required: true
     help: (Required) The destination queue or exchange.
     type: Text
+    deprecated: false
   _destination_type:
     required: true
     help: (Required) The type of destination (queue or exchange).
     type: Text
+    deprecated: false
   _vhost:
     required: true
     help: (Required) The vhost to create the resource in.
     type: Text
+    deprecated: false
 attributes:
   properties_key:
     help: ! '- A unique key to refer to the binding.'

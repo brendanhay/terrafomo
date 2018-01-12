@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) The description of the client certificate.
     type: Text
+    deprecated: false
 attributes:
   pem_encoded_certificate:
     help: ! '- The PEM-encoded public key of the client certificate.'

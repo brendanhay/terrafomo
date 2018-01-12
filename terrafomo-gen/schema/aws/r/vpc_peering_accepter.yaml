@@ -4,15 +4,18 @@ arguments:
     required: true
     help: (Required) The VPC Peering Connection ID to manage.
     type: Text
+    deprecated: false
   _auto_accept:
     required: false
     help: (Optional) Whether or not to accept the peering request. Defaults to @false@
       .
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a resource to manage the accepter's side of a cross-account VPC Peering
   Connection. When a cross-account (requester's AWS account differs from the accepter's

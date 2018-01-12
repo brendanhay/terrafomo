@@ -5,11 +5,13 @@ arguments:
     help: (Required) The ID of the Principal (User or Application) to assign the Role
       Definition to. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique UUID/GUID for this Role Assignment. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _scope:
     required: true
     help: (Required) The scope at which the Role Assignment applies too, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@
@@ -17,11 +19,13 @@ arguments:
       , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@
       . Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _role_definition_id:
     required: true
     help: (Required) The Scoped-ID of the Role Definition. Changing this forces a
       new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The Role Assignment ID.'

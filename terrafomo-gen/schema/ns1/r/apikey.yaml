@@ -4,19 +4,23 @@ arguments:
     required: true
     help: (Required) The free form name of the apikey.
     type: Text
+    deprecated: false
   _permissions:
     required: false
     help: (Optional) The allowed permissions of the apikey. Permissions documented
       below.
     type: Text
+    deprecated: false
   _key:
     required: true
     help: (Required) The apikeys authentication token.
     type: Text
+    deprecated: false
   _teams:
     required: true
     help: (Required) The teams that the apikey belongs to.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a NS1 Api Key resource. This can be used to create, modify, and delete
   api keys.

@@ -4,18 +4,22 @@ arguments:
     required: true
     help: (Required) The assessment target ARN to attach the template to.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the assessment template.
     type: Text
+    deprecated: false
   _rules_package_arns:
     required: true
     help: (Required) The rules to be used during the run.
     type: Text
+    deprecated: false
   _duration:
     required: true
     help: (Required) The duration of the inspector run.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The template assessment ARN.'

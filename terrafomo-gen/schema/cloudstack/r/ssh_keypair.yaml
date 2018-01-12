@@ -5,11 +5,13 @@ arguments:
     help: (Optional) The name or ID of the project to register this key to. Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the SSH key pair. This is a unique value within a
       CloudStack account. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _public_key:
     required: false
     help: (Optional) The public key to register with CloudStack. If this is omitted,
@@ -17,6 +19,7 @@ arguments:
       disk using the </docs/configuration/interpolation.html#file_path_> . Changing
       this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   fingerprint:
     help: ! '- The fingerprint of the public key specified or created.'

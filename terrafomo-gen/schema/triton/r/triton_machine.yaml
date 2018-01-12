@@ -4,20 +4,24 @@ arguments:
     required: true
     help: ! '- (map, optional) A mapping of metadata to apply to the machine.'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '- (string) The friendly name for the machine. Triton will generate a
       name if one is not specified.'
     type: Text
+    deprecated: false
   _image:
     required: true
     help: ! '- (string, Required) The UUID of the image to provision.'
     type: Text
+    deprecated: false
   _cloud_config:
     required: true
     help: ! '- (string) Cloud-init configuration for Linux brand machines, used instead
       of @user_data@ .'
     type: Text
+    deprecated: false
   _locality:
     required: true
     help: ! '- (map of Locality hints, Optional) A mapping of <https://apidocs.joyent.com/cloudapi/#CreateMachine>
@@ -25,26 +29,31 @@ arguments:
       Locality hints are only used at the time of machine creation and not referenced
       after.'
     type: Text
+    deprecated: false
   _user_data:
     required: true
     help: ! '- (string) Data to be copied to the machine on boot.'
     type: Text
+    deprecated: false
   _administrator_pw:
     required: true
     help: ! '- (string) The initial password for the Administrator user. Only used
       for Windows virtual machines.'
     type: Text
+    deprecated: false
   _root_authorized_keys:
     required: true
     help: ! '- (string) The public keys authorized for root access via SSH to the
       machine.'
     type: Text
+    deprecated: false
   _networks:
     required: true
     help: ! '- (list, optional) The list of networks to associate with the machine.
       The network ID will be in hex form, e.g @xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx@
       .'
     type: Text
+    deprecated: false
   _affinity:
     required: true
     help: ! '- (list of Affinity rules, Optional) A list of valid <https://apidocs.joyent.com/cloudapi/#affinity-rules>
@@ -53,28 +62,34 @@ arguments:
       and assist in placing instances across a data center. They''re used at creation
       and not referenced after.'
     type: Text
+    deprecated: false
   _package:
     required: true
     help: ! '- (string, Required) The name of the package to use for provisioning.'
     type: Text
+    deprecated: false
   _firewall_enabled:
     required: true
     help: ! '- (boolean)  Default: @false@ Whether the cloud firewall should be enabled
       for this machine.'
     type: Text
+    deprecated: false
   _tags:
     required: true
     help: ! '- (map) A mapping of tags to apply to the machine.'
     type: Text
+    deprecated: false
   _user_script:
     required: true
     help: ! '- (string) The user script to run on boot (every boot on SmartMachines).'
     type: Text
+    deprecated: false
   _cns:
     required: true
     help: ! '- (map of CNS attributes, Optional) A mapping of <https://docs.joyent.com/public-cloud/network/cns>
       attributes to apply to the machine.'
     type: Text
+    deprecated: false
 attributes:
   nic:
     help: ! '- A list of the networks that the machine is attached to. Each network

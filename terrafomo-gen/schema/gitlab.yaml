@@ -6,16 +6,19 @@ arguments:
       is available for use when working with GitLab CE or Gitlab Enterprise with a
       locally-issued or self-signed certificate chain.
     type: Text
+    deprecated: false
   _token:
     required: false
     help: (Optional) This is the GitLab personal access token. It must be provided,
       but it can also be sourced from the @GITLAB_TOKEN@ environment variable.
     type: Text
+    deprecated: false
   _insecure:
     required: false
     help: (Optional; boolean, defaults to false) When set to true this disables SSL
       verification of the connection to the GitLab instance.
     type: Text
+    deprecated: false
   _base_url:
     required: false
     help: (Optional) This is the target GitLab base API endpoint. Providing a value
@@ -23,6 +26,7 @@ arguments:
       It is optional to provide this value and it can also be sourced from the @GITLAB_BASE_URL@
       environment variable. The value must end with a slash.
     type: Text
+    deprecated: false
 attributes: {}
 about: The GitLab provider is used to interact with GitLab group or user resources.
   It needs to be configured with the proper credentials before it can be used. Use

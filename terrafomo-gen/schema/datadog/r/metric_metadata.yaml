@@ -4,26 +4,32 @@ arguments:
     required: false
     help: (Optional) A short name of the metric.
     type: Text
+    deprecated: false
   _metric:
     required: true
     help: (Required) The name of the metric.
     type: Text
+    deprecated: false
   _per_unit:
     required: false
     help: (Optional) 'Per' unit of the metric such as 'second' in 'bytes per second'.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the metric.
     type: Text
+    deprecated: false
   _statsd_interval:
     required: false
     help: (Optional) If applicable, stasd flush interval in seconds for the metric.
     type: Text
+    deprecated: false
   _unit:
     required: false
     help: (Optional) Primary unit of the metric such as 'byte' or 'operation'.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a Datadog metric_metadata resource. This can be used to manage a metric's
   metadata.

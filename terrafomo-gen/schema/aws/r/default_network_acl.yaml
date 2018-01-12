@@ -4,24 +4,29 @@ arguments:
     required: false
     help: (Optional) Specifies an egress rule. Parameters defined below.
     type: Text
+    deprecated: false
   _subnet_ids:
     required: false
     help: (Optional) A list of Subnet IDs to apply the ACL to. See the notes below
       on managing Subnets in the Default Network ACL
     type: Text
+    deprecated: false
   _default_network_acl_id:
     required: true
     help: (Required) The Network ACL ID to manage. This attribute is exported from
       @aws_vpc@ , or manually found via the AWS Console.
     type: Text
+    deprecated: false
   _ingress:
     required: false
     help: (Optional) Specifies an ingress rule. Parameters defined below.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a resource to manage the default AWS Network ACL. VPC Only. Each VPC
   created in AWS comes with a Default Network ACL that can be managed, but not destroyed.

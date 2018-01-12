@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The name of the Storage Object.
     type: Text
+    deprecated: false
   _container:
     required: true
     help: (Required) The name of the Storage Container in which to place the object.
     type: Text
+    deprecated: false
 attributes:
   last_modified:
     help: ! '- Date and time that the object was created/modified in ISO 8601.'

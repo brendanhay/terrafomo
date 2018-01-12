@@ -4,6 +4,7 @@ arguments:
     required: false
     help: (Optional) The Circonus ID of a given collector.
     type: Text
+    deprecated: false
 attributes:
   latitude:
     help: ! '- The latitude of the selected Collector.'

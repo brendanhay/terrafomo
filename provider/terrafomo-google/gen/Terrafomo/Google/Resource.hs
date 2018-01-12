@@ -1766,23 +1766,21 @@ Manages a Node Pool resource within GKE. For more information see
 .
 -}
 data ContainerNodePoolResource = ContainerNodePoolResource
-    { _autoscaling        :: !(Attr Text)
+    { _autoscaling :: !(Attr Text)
       {- ^ (Optional) Configuration required by cluster autoscaler to adjust the size of the node pool to the current cluster usage. Structure is documented below. -}
-    , _cluster            :: !(Attr Text)
+    , _cluster     :: !(Attr Text)
       {- ^ (Required) The cluster to create the node pool for. -}
-    , _initial_node_count :: !(Attr Text)
-      {- ^ - (Deprecated, Optional) The initial node count for the pool. Use @node_count@ instead. -}
-    , _name               :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Optional) The name of the node pool. If left blank, Terraform will auto-generate a unique name. -}
-    , _name_prefix        :: !(Attr Text)
+    , _name_prefix :: !(Attr Text)
       {- ^ (Optional) Creates a unique name for the node pool beginning with the specified prefix. Conflicts with @name@ . -}
-    , _node_config        :: !(Attr Text)
+    , _node_config :: !(Attr Text)
       {- ^ (Optional) The node configuration of the pool. See [google_container_cluster](container_cluster.html for schema. -}
-    , _node_count         :: !(Attr Text)
+    , _node_count  :: !(Attr Text)
       {- ^ (Optional) The number of nodes per instance group. -}
-    , _project            :: !(Attr Text)
+    , _project     :: !(Attr Text)
       {- ^ (Optional) The project in which to create the node pool. If blank, the provider-configured project will be used. -}
-    , _zone               :: !(Attr Text)
+    , _zone        :: !(Attr Text)
       {- ^ (Required) The zone in which the cluster resides. -}
     } deriving (Show, Generic)
 
@@ -2293,8 +2291,6 @@ data ProjectResource = ProjectResource
       {- ^ (Required) The display name of the project. -}
     , _org_id          :: !(Attr Text)
       {- ^ (Optional) The numeric ID of the organization this project belongs to. Changing this forces a new project to be created.  Only one of @org_id@ or @folder_id@ may be specified. If the @org_id@ is specified then the project is created at the top level. Changing this forces the project to be migrated to the newly specified organization. -}
-    , _policy_data     :: !(Attr Text)
-      {- ^ - (Deprecated) The IAM policy associated with the project. This argument is no longer supported, and will be removed in a future version of Terraform. It should be replaced with a @google_project_iam_policy@ resource. -}
     , _project_id      :: !(Attr Text)
       {- ^ (Required) The project ID. Changing this forces a new project to be created. -}
     , _skip_delete     :: !(Attr Text)

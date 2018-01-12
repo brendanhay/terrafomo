@@ -5,10 +5,12 @@ arguments:
     help: (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address
       range (in CIDR format) that web requests originate from.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name or description of the IPSet.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a WAF IPSet Resource
 examples: []

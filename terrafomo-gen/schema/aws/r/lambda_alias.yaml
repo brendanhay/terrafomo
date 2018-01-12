@@ -5,19 +5,23 @@ arguments:
     help: (Required) The function ARN of the Lambda function for which you want to
       create an alias.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '(Required) Name for the alias you are creating. Pattern: @(?!^[0-9]+$)([a-zA-Z0-9-_]+)@'
     type: Text
+    deprecated: false
   _function_version:
     required: true
     help: ! '(Required) Lambda function version for which you are creating the alias.
       Pattern: @(\$LATEST|[0-9]+)@ .'
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the alias.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) identifying your Lambda function alias.'

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: ! '- The name of the image.'
     type: Text
+    deprecated: false
 attributes:
   image:
     help: ! '- The id of the image.'

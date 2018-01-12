@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) name of security group
     type: Text
+    deprecated: false
   _description:
     required: true
     help: (Required) description of security group
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- id of the new resource'

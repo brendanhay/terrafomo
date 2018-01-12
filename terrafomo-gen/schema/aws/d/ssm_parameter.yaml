@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the parameter.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an SSM Parameter data source.
 examples: []

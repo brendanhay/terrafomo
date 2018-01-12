@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The VPC ID that you want to filter from.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired subnets.
     type: Text
+    deprecated: false
 attributes:
   ids:
     help: ! '- A list of all the subnet ids found. This data source will fail if none

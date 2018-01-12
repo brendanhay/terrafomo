@@ -4,24 +4,29 @@ arguments:
     required: false
     help: (Optional) Custom filter block as described below.
     type: Text
+    deprecated: false
   _subnet_id:
     required: false
     help: (Optional) The id of a Subnet which is connected to the Route Table (not
       be exported if not given in parameter).
     type: Text
+    deprecated: false
   _route_table_id:
     required: false
     help: (Optional) The id of the specific Route Table to retrieve.
     type: Text
+    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The id of the VPC that the desired Route Table belongs to.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired Route Table.
     type: Text
+    deprecated: false
 attributes:
   gateway_id:
     help: ! '- The Internet Gateway ID.'

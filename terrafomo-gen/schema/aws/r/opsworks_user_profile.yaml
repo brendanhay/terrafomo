@@ -4,19 +4,23 @@ arguments:
     required: true
     help: (Required) The ssh username, with witch this user wants to log in
     type: Text
+    deprecated: false
   _ssh_public_key:
     required: false
     help: (Optional) The users public key
     type: Text
+    deprecated: false
   _allow_self_management:
     required: false
     help: (Optional) Whether users can specify their own SSH public key through the
       My Settings page
     type: Text
+    deprecated: false
   _user_arn:
     required: true
     help: (Required) The user's IAM ARN
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- Same value as @user_arn@'

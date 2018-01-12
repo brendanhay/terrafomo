@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The name of the object.
     type: Text
+    deprecated: false
   _bucket:
     required: true
     help: (Required) The name of the containing bucket.
     type: Text
+    deprecated: false
 attributes:
   crc32c:
     help: ! '- (Computed) Base 64 CRC32 hash of the uploaded data.'

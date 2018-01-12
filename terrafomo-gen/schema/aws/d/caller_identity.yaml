@@ -5,14 +5,17 @@ arguments:
     help: ! '- The AWS Account ID number of the account that owns or contains the
       calling entity.'
     type: Text
+    deprecated: false
   _arn:
     required: true
     help: ! '- The AWS ARN associated with the calling entity.'
     type: Text
+    deprecated: false
   _user_id:
     required: true
     help: ! '- The unique identifier of the calling entity.'
     type: Text
+    deprecated: false
 attributes: {}
 about: Use this data source to get the access to the effective Account ID, User ID,
   and ARN in which Terraform is authorized.

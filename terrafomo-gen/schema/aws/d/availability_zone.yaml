@@ -4,11 +4,13 @@ arguments:
     required: false
     help: (Optional) The full name of the availability zone to select.
     type: Text
+    deprecated: false
   _state:
     required: false
     help: (Optional) A specific availability zone state to require. May be any of
       @"available"@ , @"information"@ , @"impaired"@ or @"available"@ .
     type: Text
+    deprecated: false
 attributes:
   state:
     help: ! '- The current state of the AZ.'

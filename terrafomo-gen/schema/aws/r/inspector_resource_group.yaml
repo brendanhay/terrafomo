@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The tags on your EC2 Instance.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The resource group ARN.'

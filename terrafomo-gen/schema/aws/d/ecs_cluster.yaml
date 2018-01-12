@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the ECS Cluster
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The status of the ECS Cluster'

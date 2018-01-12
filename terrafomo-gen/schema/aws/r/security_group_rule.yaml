@@ -5,50 +5,61 @@ arguments:
     help: (Optional) If true, the security group itself will be added as a source
       to this ingress rule.
     type: Text
+    deprecated: false
   _security_group_id:
     required: true
     help: (Required) The security group to apply this rule to.
     type: Text
+    deprecated: false
   _prefix_list_ids:
     required: false
     help: (Optional) List of prefix list IDs (for allowing access to VPC endpoints).
       Only valid with @egress@ .
     type: Text
+    deprecated: false
   _source_security_group_id:
     required: false
     help: (Optional) The security group id to allow access to/from, depending on the
       @type@ . Cannot be specified with @cidr_blocks@ .
     type: Text
+    deprecated: false
   _protocol:
     required: true
     help: (Required) The protocol. If not icmp, tcp, udp, or all use the <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the rule.
     type: Text
+    deprecated: false
   _from_port:
     required: true
     help: (Required) The start port (or ICMP type number if protocol is "icmp").
     type: Text
+    deprecated: false
   _to_port:
     required: true
     help: (Required) The end port (or ICMP code if protocol is "icmp").
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of rule being created. Valid options are @ingress@ (inbound)
       or @egress@ (outbound).
     type: Text
+    deprecated: false
   _ipv6_cidr_blocks:
     required: false
     help: (Optional) List of IPv6 CIDR blocks.
     type: Text
+    deprecated: false
   _cidr_blocks:
     required: false
     help: (Optional) List of CIDR blocks. Cannot be specified with @source_security_group_id@
       .
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides a security group rule resource. Represents a single @ingress@ or
   @egress@ group rule, which can be added to external Security Groups. ~> NOTE on

@@ -5,30 +5,36 @@ arguments:
     help: (Optional) The base64-encoded, JSON serialized representation of the GetCallerIdentity
       HTTP request headers.
     type: Text
+    deprecated: false
   _iam_http_request_method:
     required: false
     help: (Optional) The HTTP method used in the signed IAM request.
     type: Text
+    deprecated: false
   _signature:
     required: false
     help: (Optional) The base64-encoded SHA256 RSA signature of the instance identity
       document to authenticate with, with all newline characters removed. Can be retrieved
       from the EC2 metadata server.
     type: Text
+    deprecated: false
   _iam_request_body:
     required: false
     help: (Optional) The base64-encoded body of the signed request.
     type: Text
+    deprecated: false
   _role:
     required: false
     help: (Optional) The name of the AWS auth backend role to create tokens against.
     type: Text
+    deprecated: false
   _pkcs7:
     required: false
     help: (Optional) The PKCS#7 signature of the identity document to authenticate
       with, with all newline characters removed. Can be retrieved from the EC2 metadata
       server.
     type: Text
+    deprecated: false
   _nonce:
     required: false
     help: (Optional) The unique nonce to be used for login requests. Can be set to
@@ -36,19 +42,23 @@ arguments:
       is issued. EC2 instances can only acquire a single token until the whitelist
       is tidied again unless they keep track of this nonce.
     type: Text
+    deprecated: false
   _iam_request_url:
     required: false
     help: (Optional) The base64-encoded HTTP URL used in the signed request.
     type: Text
+    deprecated: false
   _backend:
     required: false
     help: (Optional) The unique name of the AWS auth backend. Defaults to 'aws'.
     type: Text
+    deprecated: false
   _identity:
     required: false
     help: (Optional) The base64-encoded EC2 instance identity document to authenticate
       with. Can be retrieved from the EC2 metadata server.
     type: Text
+    deprecated: false
 attributes:
   lease_duration:
     help: ! '- The duration in seconds the token will be valid, relative to the time

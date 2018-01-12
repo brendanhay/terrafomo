@@ -7,10 +7,12 @@ arguments:
       the IP reservation. To allocate an IP address from a pool, use the prefix @ippool:@
       , e.g. @ippool:/oracle/public/ippool@ .
     type: Text
+    deprecated: false
   _vcable:
     required: true
     help: (Required) The vcable of the instance to associate the IP address with.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: The name of the IP Association

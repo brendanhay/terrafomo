@@ -5,14 +5,17 @@ arguments:
     help: (Optional) Specific version ID of the object returned (defaults to latest
       version)
     type: Text
+    deprecated: false
   _bucket:
     required: true
     help: (Required) The name of the bucket to read the object from
     type: Text
+    deprecated: false
   _key:
     required: true
     help: (Required) The full path to the object inside the bucket
     type: Text
+    deprecated: false
 attributes:
   website_redirect_location:
     help: ! '- If the bucket is configured as a website, redirects requests for this

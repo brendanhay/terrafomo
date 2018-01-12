@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The name of the placement group.
     type: Text
+    deprecated: false
   _strategy:
     required: true
     help: (Required) The placement strategy. The only supported value is @cluster@
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The name of the placement group.'

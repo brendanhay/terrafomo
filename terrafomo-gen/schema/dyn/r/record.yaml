@@ -4,22 +4,27 @@ arguments:
     required: true
     help: (Required) The value of the record.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the record.
     type: Text
+    deprecated: false
   _ttl:
     required: false
     help: (Optional) The TTL of the record. Default uses the zone default.
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The DNS zone to add the record to.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of the record.
     type: Text
+    deprecated: false
 attributes:
   fqdn:
     help: ! '- The FQDN of the record, built from the @name@ and the @zone@ .'

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: ! '- (String, required) The name of the tag category.'
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'The @vsphere_tag_category@ data source can be used to reference tag categories
   that are not managed by Terraform. Its attributes are exactly the same as the </docs/providers/vsphere/r/tag_category.html>

@@ -5,10 +5,12 @@ arguments:
     help: (Required) - A nested configuration block (described below) configuring
       one statement to be included in the policy document.
     type: Text
+    deprecated: false
   _policy_id:
     required: true
     help: (Optional) - An ID for the policy document.
     type: Text
+    deprecated: false
 attributes: {}
 about: Generates an IAM policy document in JSON format. This is a data source which
   can be used to construct a JSON representation of an IAM policy document, for use

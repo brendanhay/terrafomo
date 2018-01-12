@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The alert title.
     type: Text
+    deprecated: false
   _settings:
     required: true
     help: (Required) a JSON hash of settings specific to the alert type.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The type of notificaion.
     type: Text
+    deprecated: false
 attributes:
   settings:
     help: ! '- a JSON hash of settings specific to the alert type.'

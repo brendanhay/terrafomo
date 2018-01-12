@@ -5,41 +5,49 @@ arguments:
     help: (Optional) The region this subnetwork will be created in. If unspecified,
       this defaults to the region configured in the provider.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _ip_cidr_range:
     required: true
     help: (Required) The IP address range that machines in this network are assigned
       to, represented as a CIDR block.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _private_ip_google_access:
     required: false
     help: (Optional) Whether the VMs in this subnet can access Google services without
       assigned external IP addresses.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of this subnetwork.
     type: Text
+    deprecated: false
   _secondary_ip_range:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) An array
       of configurations for secondary IP ranges for VM instances contained in this
       subnetwork. Structure is documented below.
     type: Text
+    deprecated: false
   _network:
     required: true
     help: (Required) The network name or resource link to the parent network of this
       subnetwork. The parent network must have been created in custom subnet mode.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

@@ -4,14 +4,17 @@ arguments:
     required: true
     help: is set to the Azure Client ID (Application Object ID).
     type: Text
+    deprecated: false
   _subscription_id:
     required: true
     help: is set to the Azure Subscription ID.
     type: Text
+    deprecated: false
   _tenant_id:
     required: true
     help: is set to the Azure Tenant ID.
     type: Text
+    deprecated: false
 attributes: {}
 about: Use this data source to access the configuration of the Azure Resource Manager
   provider.

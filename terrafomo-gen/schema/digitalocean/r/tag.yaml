@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the tag
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The name of the tag'

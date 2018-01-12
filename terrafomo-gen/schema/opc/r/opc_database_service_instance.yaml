@@ -7,54 +7,65 @@ arguments:
       that was created using Oracle Database Backup Cloud Service. IBKUP is documented
       below.
     type: Text
+    deprecated: false
   _vm_public_key:
     required: true
     help: (Required) Public key for the secure shell (SSH). This key will be used
       for authentication when connecting to the Database Cloud Service instance using
       an SSH client.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the Service Instance.
     type: Text
+    deprecated: false
   _edition:
     required: true
     help: (Required) Database edition for the service instance. Possible values are
       @SE@ , @EE@ , @EE_HP@ , or @EE_EP@ .
     type: Text
+    deprecated: false
   _subscription_type:
     required: true
     help: (Required) Billing unit. Possible values are @HOURLY@ or @MONTHLY@ .
     type: Text
+    deprecated: false
   _parameter:
     required: false
     help: (Optional) Additional configuration for a service instance. This set is
       required if level is PAAS. Parameter is documented below.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the Service Instance.
     type: Text
+    deprecated: false
   _level:
     required: true
     help: (Required) Service level for the service instance. Possible values are @BASIC@
       or @PAAS@ .
     type: Text
+    deprecated: false
   _version:
     required: true
     help: ! '(Required) Oracle Database software version; one of: @12.2.0.1@ , @12.1.0.2@
       , or @11.2.0.4@ .'
     type: Text
+    deprecated: false
   _cloud_storage:
     required: false
     help: (Optional) Provides Cloud Storage for service instance backups. Cloud Storage
       is documented below
     type: Text
+    deprecated: false
   _shape:
     required: true
     help: (Required) Desired compute shape. Possible values are @oc3@ , @oc4@ , @oc5@
       , @oc6@ , @oc1m@ , @oc2m@ , @oc3m@ , or @oc4m@ .
     type: Text
+    deprecated: false
 attributes: {}
 about: The @opc_database_service_instance@ resource creates and manages a service
   instance in an OPC identity domain.

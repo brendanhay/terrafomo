@@ -4,10 +4,12 @@ arguments:
     required: false
     help: (Optional) ID of the project for the Google Cloud DNS zone.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource.
     type: Text
+    deprecated: false
 attributes:
   dns_name:
     help: ! '- The DNS name of this zone, e.g. "terraform.io".'

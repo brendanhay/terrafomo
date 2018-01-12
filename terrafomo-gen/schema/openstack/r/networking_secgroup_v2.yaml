@@ -6,24 +6,29 @@ arguments:
       client is needed to create a port. If omitted, the @region@ argument of the
       provider is used. Changing this creates a new security group.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the security group.
     type: Text
+    deprecated: false
   _delete_default_rules:
     required: false
     help: (Optional) Whether or not to delete the default egress security rules. This
       is @false@ by default. See the below note for more information.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A unique name for the security group.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the security group. Required if admin wants to create
       a port for another tenant. Changing this creates a new security group.
     type: Text
+    deprecated: false
 attributes:
   tenant_id:
     help: ! '- See Argument Reference above.'

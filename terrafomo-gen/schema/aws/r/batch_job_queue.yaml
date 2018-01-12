@@ -4,15 +4,18 @@ arguments:
     required: true
     help: (Required) Specifies the name of the job queue.
     type: Text
+    deprecated: false
   _state:
     required: true
     help: ! '(Required) The state of the job queue. Must be one of: @ENABLED@ or @DISABLED@'
     type: Text
+    deprecated: false
   _priority:
     required: true
     help: (Required) The priority of the job queue. Job queues with a higher priority
       are evaluated first when associated with same compute environment.
     type: Text
+    deprecated: false
   _compute_environments:
     required: true
     help: (Required) Specifies the set of compute environments mapped to a job queue
@@ -20,6 +23,7 @@ arguments:
       dictate the order. You can associate up to 3 compute environments with a job
       queue.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name of the job queue.'

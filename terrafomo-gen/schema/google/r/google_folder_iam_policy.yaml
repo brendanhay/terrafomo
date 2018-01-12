@@ -6,11 +6,13 @@ arguments:
       that will be applied to the folder. This policy overrides any existing policy
       applied to the folder.
     type: Text
+    deprecated: false
   _folder:
     required: true
     help: (Required) The resource name of the folder the policy is attached to. Its
       format is folders/{folder_id}.
     type: Text
+    deprecated: false
 attributes:
   etag:
     help: ! '- (Computed) The etag of the folder''s IAM policy. @etag@ is used for

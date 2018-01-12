@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) The name of the exchange.
     type: Text
+    deprecated: false
   _settings:
     required: true
     help: (Required) The settings of the exchange. The structure is described below.
     type: Text
+    deprecated: false
   _vhost:
     required: true
     help: (Required) The vhost to create the resource in.
     type: Text
+    deprecated: false
 attributes: {}
 about: The @rabbitmq_exchange@ resource creates and manages an exchange.
 examples: []

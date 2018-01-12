@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The domain name to assign to SES
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the domain identity.'

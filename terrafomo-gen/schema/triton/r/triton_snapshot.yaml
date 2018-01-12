@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '- (string, Required) The ID of the machine of which to take a snapshot.'
     type: Text
+    deprecated: false
   _name:
     required: true
     help: ! '- (string) The name for the snapshot.'
     type: Text
+    deprecated: false
 attributes:
   state:
     help: ! '- (string) - The current state of the snapshot.'

@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '- Deprecated , use @request_parameters@ instead.'
     type: Text
+    deprecated: false
   _cache_key_namespace:
     required: false
     help: (Optional) The integration's cache namespace.
     type: Text
+    deprecated: false
   _credentials:
     required: false
     help: (Optional) The credentials required for the integration. For @AWS@ integrations,
@@ -15,32 +17,39 @@ arguments:
       use the role's ARN. To require that the caller's identity be passed through
       from the request, specify the string @arn:aws:iam::\*:user/\*@ .
     type: Text
+    deprecated: false
   _passthrough_behavior:
     required: false
     help: (Optional) The integration passthrough behavior ( @WHEN_NO_MATCH@ , @WHEN_NO_TEMPLATES@
       , @NEVER@ ). Required if @request_templates@ is used.
     type: Text
+    deprecated: false
   _cache_key_parameters:
     required: false
     help: (Optional) A list of cache key parameters for the integration.
     type: Text
+    deprecated: false
   _resource_id:
     required: true
     help: (Required) The API resource ID.
     type: Text
+    deprecated: false
   _http_method:
     required: true
     help: (Required) The HTTP method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@
       , @OPTION@ , @ANY@ ) when calling the associated resource.
     type: Text
+    deprecated: false
   _request_templates:
     required: false
     help: (Optional) A map of the integration's request templates.
     type: Text
+    deprecated: false
   _rest_api_id:
     required: true
     help: (Required) The ID of the associated REST API.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The integration input's <https://docs.aws.amazon.com/apigateway/api-reference/resource/integration/>
@@ -48,6 +57,7 @@ arguments:
       backend), @AWS@ (for AWS services), @AWS_PROXY@ (for Lambda proxy integration)
       and @HTTP_PROXY@ (for HTTP proxy integration).
     type: Text
+    deprecated: false
   _request_parameters:
     required: false
     help: ! '(Optional) A map of request query string parameters and headers that
@@ -55,6 +65,7 @@ arguments:
       = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header"
       }@'
     type: Text
+    deprecated: false
   _content_handling:
     required: false
     help: (Optional) Specifies how to handle request payload content type conversions.
@@ -63,6 +74,7 @@ arguments:
       to integration request without modification, provided that the passthroughBehaviors
       is configured to support payload pass-through.
     type: Text
+    deprecated: false
   _integration_http_method:
     required: false
     help: (Optional) The integration HTTP method ( @GET@ , @POST@ , @PUT@ , @DELETE@
@@ -72,6 +84,7 @@ arguments:
       <https://github.com/awslabs/aws-apigateway-importer/issues/9#issuecomment-129651005>
       via @POST@ .
     type: Text
+    deprecated: false
   _uri:
     required: false
     help: (Optional) The input's URI (HTTP, AWS). Required if @type@ is @HTTP@ or
@@ -81,6 +94,7 @@ arguments:
       . @region@ , @subdomain@ and @service@ are used to determine the right endpoint.
       e.g. @arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations@
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides an HTTP Method Integration for an API Gateway Integration.
 examples: []

@@ -7,19 +7,23 @@ arguments:
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new keypair.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the keypair. Changing this creates a new keypair.
     type: Text
+    deprecated: false
   _public_key:
     required: true
     help: (Required) A pregenerated OpenSSH-formatted public key. Changing this creates
       a new keypair.
     type: Text
+    deprecated: false
   _value_specs:
     required: false
     help: (Optional) Map of additional options.
     type: Text
+    deprecated: false
 attributes:
   public_key:
     help: ! '- See Argument Reference above.'

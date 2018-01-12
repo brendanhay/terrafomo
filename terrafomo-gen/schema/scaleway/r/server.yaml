@@ -4,53 +4,65 @@ arguments:
     required: false
     help: (Optional) make server publicly available
     type: Text
+    deprecated: false
   _enable_ipv6:
     required: false
     help: (Optional) enable ipv6
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) name of server
     type: Text
+    deprecated: false
   _state:
     required: false
     help: (Optional) allows you to define the desired state of your server. Valid
       values include ( @stopped@ , @running@ )
     type: Text
+    deprecated: false
   _image:
     required: true
     help: (Required) base image of server
     type: Text
+    deprecated: false
   _volume:
     required: false
     help: (Optional) attach additional volumes to your instance (see below)
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) type of server
     type: Text
+    deprecated: false
   _public_ipv6:
     required: true
     help: ! '- (Read Only) if @enable_ipv6@ is set this contains the ipv6 address
       of your instance'
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) list of tags for server
     type: Text
+    deprecated: false
   _bootscript:
     required: false
     help: (Optional) server bootscript
     type: Text
+    deprecated: false
   _state_detail:
     required: true
     help: ! '- (Read Only) contains details from the scaleway API the state of your
       instance'
     type: Text
+    deprecated: false
   _security_group:
     required: false
     help: (Optional) assign security group to server
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides servers. This allows servers to be created, updated and deleted. For
   additional details please refer to <https://developer.scaleway.com/#servers> .

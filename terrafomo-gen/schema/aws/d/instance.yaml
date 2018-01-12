@@ -5,17 +5,20 @@ arguments:
     help: (Optional) Specify the exact Instance ID with which to populate the data
       source.
     type: Text
+    deprecated: false
   _filter:
     required: false
     help: (Optional) One or more name/value pairs to use as filters. There are several
       valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html>
       .
     type: Text
+    deprecated: false
   _instance_tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired Instance.
     type: Text
+    deprecated: false
 attributes:
   root_block_device:
     help: ! '- The root block device mappings of the Instance'

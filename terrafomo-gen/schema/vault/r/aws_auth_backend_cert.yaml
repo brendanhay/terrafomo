@@ -6,20 +6,24 @@ arguments:
       of the EC2 instance metadata. You can find this key in the <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html>
       .
     type: Text
+    deprecated: false
   _cert_name:
     required: true
     help: (Required) The name of the certificate.
     type: Text
+    deprecated: false
   _type':
     required: false
     help: (Optional) Either "pkcs7" or "identity", indicating the type of document
       which can be verified using the given certificate. Defaults to "pkcs7".
     type: Text
+    deprecated: false
   _backend:
     required: false
     help: (Optional) The path the AWS auth backend being configured was mounted at.  Defaults
       to @aws@ .
     type: Text
+    deprecated: false
 attributes: {}
 about: Manages a certificate to be used with an AWS Auth Backend in Vault. This resource
   sets the AWS public key and the type of document that can be verified against the

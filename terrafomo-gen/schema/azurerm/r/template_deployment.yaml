@@ -4,11 +4,13 @@ arguments:
     required: false
     help: (Optional) Specifies the JSON definition for the template.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the template deployment. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _deployment_mode:
     required: true
     help: (Required) Specifies the mode that is used to deploy resources. This value
@@ -17,11 +19,13 @@ arguments:
       infrastructure not specified within the template, and Terraform will not be
       aware of this.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the template
       deployment.
     type: Text
+    deprecated: false
 attributes:
   outputs:
     help: ! '- A map of supported scalar output types returned from the deployment

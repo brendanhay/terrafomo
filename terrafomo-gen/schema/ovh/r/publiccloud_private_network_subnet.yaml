@@ -5,39 +5,47 @@ arguments:
     help: ! '- The region in which the network subnet will be created. Ex.: "GRA1".
       Changing this value recreates the resource.'
     type: Text
+    deprecated: false
   _start:
     required: true
     help: (Required) First ip for this region. Changing this value recreates the subnet.
     type: Text
+    deprecated: false
   _project_id:
     required: true
     help: (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@
       environment variable is used. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _network_id:
     required: true
     help: (Required) The id of the network. Changing this forces a new resource to
       be created.
     type: Text
+    deprecated: false
   _end:
     required: true
     help: (Required) Last ip for this region. Changing this value recreates the subnet.
     type: Text
+    deprecated: false
   _dhcp:
     required: false
     help: (Optional) Enable DHCP. Changing this forces a new resource to be created.
       Defaults to false. _
     type: Text
+    deprecated: false
   _network:
     required: true
     help: (Required) Global network in CIDR format. Changing this value recreates
       the subnet
     type: Text
+    deprecated: false
   _no_gateway:
     required: true
     help: ! '- Set to true if you don''t want to set a default gateway IP. Changing
       this value recreates the resource. Defaults to false.'
     type: Text
+    deprecated: false
 attributes:
   start:
     help: ! '- See Argument Reference above.'

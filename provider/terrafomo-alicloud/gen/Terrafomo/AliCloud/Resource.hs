@@ -246,8 +246,6 @@ data EssScalingConfigurationResource = EssScalingConfigurationResource
       {- ^ (Optional) Maximum incoming bandwidth from the public network, measured in Mbps (Mega bit per second). The value range is [1,200]. -}
     , _internet_max_bandwidth_out :: !(Attr Text)
       {- ^ (Optional) Maximum outgoing bandwidth from the public network, measured in Mbps (Mega bit per second). The value range for PayByBandwidth is [1,100]. -}
-    , _io_optimized               :: !(Attr Text)
-      {- ^ - (Deprecated) It has been deprecated on instance resource. All the launched alicloud instances will be I/O optimized. -}
     , _is_outdated                :: !(Attr Text)
       {- ^ (Optional) Whether to use outdated instance type. Default to false. -}
     , _scaling_configuration_name :: !(Attr Text)
@@ -457,8 +455,6 @@ data InstanceResource = InstanceResource
       {- ^ (Optional) Maximum incoming bandwidth from the public network, measured in Mbps (Mega bit per second). Value range: [1, 200]. If this value is not specified, then automatically sets it to 200 Mbps. -}
     , _internet_max_bandwidth_out :: !(Attr Text)
       {- ^ (Optional) Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bit per second). Value range:  [0, 100], If this value is not specified, then automatically sets it to 0 Mbps. -}
-    , _io_optimized               :: !(Attr Text)
-      {- ^ - (Deprecated) It has been deprecated on instance resource. All the launched alicloud instances will be I/O optimized. -}
     , _is_outdated                :: !(Attr Text)
       {- ^ (Optional) Whether to use outdated instance type. Default to false. -}
     , _key_name                   :: !(Attr Text)
@@ -676,8 +672,6 @@ data RouteEntryResource = RouteEntryResource
       {- ^ (Required, Forces new resource) The next hop type. Available value is @Instance@ and @RouterInterface@ . @Instance@ points to ECS Instance. -}
     , _route_table_id        :: !(Attr Text)
       {- ^ (Required, Forces new resource) The ID of the route table. -}
-    , _router_id             :: !(Attr Text)
-      {- ^ - (Deprecated) This argument has beeb deprecated. Please use other arguments to launch a custom route entry. -}
     } deriving (Show, Generic)
 
 type instance Computed RouteEntryResource

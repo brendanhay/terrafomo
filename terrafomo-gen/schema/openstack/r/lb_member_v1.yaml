@@ -6,29 +6,35 @@ arguments:
       client is needed to create an LB member. If omitted, the @region@ argument of
       the provider is used. Changing this creates a new LB member.
     type: Text
+    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) The administrative state of the member. Acceptable values are
       'true' and 'false'. Changing this value updates the state of the existing member.
     type: Text
+    deprecated: false
   _port:
     required: true
     help: (Required) An integer representing the port on which the member is hosted.
       Changing this creates a new member.
     type: Text
+    deprecated: false
   _pool_id:
     required: true
     help: (Required)  The ID of the LB pool. Changing this creates a new member.
     type: Text
+    deprecated: false
   _address:
     required: true
     help: (Required) The IP address of the member. Changing this creates a new member.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the member. Required if admin wants to create a
       member for another tenant. Changing this creates a new member.
     type: Text
+    deprecated: false
 attributes:
   admin_state_up:
     help: ! '- See Argument Reference above.'

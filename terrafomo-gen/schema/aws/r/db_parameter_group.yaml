@@ -5,10 +5,12 @@ arguments:
     help: (Optional, Forces new resource) The name of the DB parameter group. If omitted,
       Terraform will assign a random, unique name.
     type: Text
+    deprecated: false
   _family':
     required: true
     help: (Required) The family of the DB parameter group.
     type: Text
+    deprecated: false
   _parameter:
     required: false
     help: (Optional) A list of DB parameters to apply. Note that parameters may differ
@@ -16,20 +18,24 @@ arguments:
       <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html>
       after initial creation of the group.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the DB parameter group. Defaults to "Managed
       by Terraform".
     type: Text
+    deprecated: false
   _name_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique name beginning with the
       specified prefix. Conflicts with @name@ .
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the db parameter group.'

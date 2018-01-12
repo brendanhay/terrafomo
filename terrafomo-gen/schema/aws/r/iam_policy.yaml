@@ -6,25 +6,30 @@ arguments:
       syntax, @file@ function, or the </docs/providers/aws/d/iam_policy_document.html>
       are all helpful here.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional, Forces new resource) The name of the policy. If omitted, Terraform
       will assign a random, unique name.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the IAM policy.
     type: Text
+    deprecated: false
   _name_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique name beginning with the
       specified prefix. Conflicts with @name@ .
     type: Text
+    deprecated: false
   _path:
     required: false
     help: (Optional, default "/") Path in which to create the policy. See <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>
       for more information.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN assigned by AWS to this policy.'

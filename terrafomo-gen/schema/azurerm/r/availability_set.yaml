@@ -6,35 +6,42 @@ arguments:
       values are @true@ (to specify aligned) or @false@ (to specify classic). Default
       is @false@ .
     type: Text
+    deprecated: false
   _platform_update_domain_count:
     required: false
     help: (Optional) Specifies the number of update domains that are used. Defaults
       to 5.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the availability set. Changing this forces
       a new resource to be created.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the availability
       set. Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
   _platform_fault_domain_count:
     required: false
     help: (Optional) Specifies the number of fault domains that are used. Defaults
       to 3.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The virtual Availability Set ID.'

@@ -5,12 +5,14 @@ arguments:
     help: (Required) The name of the distributed virtual switch. This can be a name
       or path.
     type: Text
+    deprecated: false
   _datacenter_id:
     required: false
     help: (Optional) The managed object reference ID of the datacenter the DVS is
       located in. This can be omitted if the search path used in @name@ is an absolute
       path, or if there is only one datacenter in the vSphere infrastructure.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! ': The UUID of the distributed virtual switch.'

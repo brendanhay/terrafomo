@@ -187,8 +187,6 @@ data VappResource = VappResource
       {- ^ (Optional) Key value map of metadata to assign to this vApp -}
     , _name          :: !(Attr Text)
       {- ^ (Required) A unique name for the vApp -}
-    , _network_href  :: !(Attr Text)
-      {- ^ - (Deprecated) The vCloud Director generated href of the network this vApp should join. If empty it will use the network name and query vCloud Director to discover this -}
     , _network_name  :: !(Attr Text)
       {- ^ (Optional) Name of the network this vApp should join -}
     , _ovf           :: !(Attr Text)

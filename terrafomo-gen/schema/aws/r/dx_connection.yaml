@@ -4,17 +4,20 @@ arguments:
     required: true
     help: (Required) The name of the connection.
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) The AWS Direct Connect location where the connection is located.
       See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html>
       for the list of AWS Direct Connect locations. Use @locationCode@ .
     type: Text
+    deprecated: false
   _bandwidth:
     required: true
     help: ! '(Required) The bandwidth of the connection. Available values: 1Gbps,
       10Gbps. Case sensitive.'
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the connection.'

@@ -5,15 +5,18 @@ arguments:
     help: (Optional) The name of the EMR Security Configuration. By default generated
       by Terraform.
     type: Text
+    deprecated: false
   _name_prefix:
     required: false
     help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
       with @name@ .
     type: Text
+    deprecated: false
   _configuration:
     required: true
     help: (Required) A JSON formatted Security Configuration
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The Name of the EMR Security Configuration'

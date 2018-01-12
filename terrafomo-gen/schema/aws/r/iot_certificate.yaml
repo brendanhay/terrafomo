@@ -7,10 +7,12 @@ arguments:
       for more information on creating a certificate from a certificate signing request
       (CSR).
     type: Text
+    deprecated: false
   _active:
     required: true
     help: (Required)  Boolean flag to indicate if the certificate should be active
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The ARN of the created AWS IoT certificate'

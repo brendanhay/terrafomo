@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The ID of the policy.
     type: Text
+    deprecated: false
   _channel_id:
     required: true
     help: (Required) The ID of the channel.
     type: Text
+    deprecated: false
 attributes: {}
 about: ''
 examples: []

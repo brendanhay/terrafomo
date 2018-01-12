@@ -5,10 +5,12 @@ arguments:
     help: ! '(Required) Standard horizontal pod autoscaler''s metadata. More info:
       https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
     type: Text
+    deprecated: false
   _spec:
     required: true
     help: ! '(Required) Behaviour of the autoscaler. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status'
     type: Text
+    deprecated: false
 attributes: {}
 about: Horizontal Pod Autoscaler automatically scales the number of pods in a replication
   controller, deployment or replica set based on observed CPU utilization.

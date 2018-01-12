@@ -5,34 +5,41 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _host_rule:
     required: false
     help: (Optional) A list of host rules. Multiple blocks of this type are permitted.
       Structure is documented below.
     type: Text
+    deprecated: false
   _test:
     required: false
     help: (Optional) The test to perform.  Multiple blocks of this type are permitted.
       Structure is documented below.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) A brief description of this resource.
     type: Text
+    deprecated: false
   _default_service:
     required: true
     help: (Required) The backend service or backend bucket to use when none of the
       given rules match.
     type: Text
+    deprecated: false
   _path_matcher:
     required: false
     help: (Optional) A list of paths to match. Structure is documented below.
     type: Text
+    deprecated: false
 attributes:
   fingerprint:
     help: ! '- The unique fingerprint for this resource.'

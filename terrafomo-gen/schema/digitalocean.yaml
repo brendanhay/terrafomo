@@ -5,6 +5,7 @@ arguments:
     help: (Required) This is the DO API token. This can also be specified with the
       @DIGITALOCEAN_TOKEN@ shell environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The DigitalOcean (DO) provider is used to interact with the resources supported
   by DigitalOcean. The provider needs to be configured with the proper credentials

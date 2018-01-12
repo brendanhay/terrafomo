@@ -5,41 +5,50 @@ arguments:
     help: ! '- The type of instance determines your instance''s CPU capacity, memory
       and storage (e.g., m1.small, c1.xlarge).'
     type: Text
+    deprecated: false
   _launch_specification:
     required: true
     help: (Required) Describes the launch specification for an instance.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The group description.
     type: Text
+    deprecated: false
   _capacity:
     required: true
     help: (Required) The group capacity. Only a single block is allowed.
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) The group description.
     type: Text
+    deprecated: false
   _strategy:
     required: true
     help: (Required) This determines how your group request is fulfilled from the
       possible On-Demand and Spot pools selected for launch. Only a single block is
       allowed.
     type: Text
+    deprecated: false
   _product:
     required: true
     help: (Required) Operation system type.
     type: Text
+    deprecated: false
   _elastic_ips:
     required: false
     help: (Optional) A list of <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>
       allocation IDs to associate to the group instances.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a Spotinst AWS group resource.
 examples: []

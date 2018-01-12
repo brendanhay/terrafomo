@@ -5,6 +5,7 @@ arguments:
     help: (Optional) Name of the region whose AWS ELB HostedZoneId is desired. Defaults
       to the region from the AWS provider configuration.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The ID of the AWS ELB HostedZoneId in the selected region.'

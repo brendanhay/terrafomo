@@ -4,11 +4,13 @@ arguments:
     required: true
     help: (Required) The fully-qualified domain name to register
     type: Text
+    deprecated: false
   _certificate_body:
     required: false
     help: (Optional) The certificate issued for the domain name being registered,
       in PEM format. Conflicts with @certificate_arn@ .
     type: Text
+    deprecated: false
   _certificate_chain:
     required: false
     help: (Optional) The certificate for the CA that issued the certificate, along
@@ -16,22 +18,26 @@ arguments:
       a certificate trusted by the intended API clients. Conflicts with @certificate_arn@
       .
     type: Text
+    deprecated: false
   _certificate_private_key:
     required: false
     help: (Optional) The private key associated with the domain certificate given
       in @certificate_body@ . Conflicts with @certificate_arn@ .
     type: Text
+    deprecated: false
   _certificate_name:
     required: false
     help: (Optional) The unique name to use when registering this cert as an IAM server
       certificate. Conflicts with @certificate_arn@ . Required if @certificate_arn@
       is not set.
     type: Text
+    deprecated: false
   _certificate_arn:
     required: false
     help: (Optional) The ARN for an AWS-managed certificate. Conflicts with @certificate_name@
       , @certificate_body@ , @certificate_chain@ and @certificate_private_key@ .
     type: Text
+    deprecated: false
 attributes:
   cloudfront_domain_name:
     help: ! '- The hostname created by Cloudfront to represent the distribution that

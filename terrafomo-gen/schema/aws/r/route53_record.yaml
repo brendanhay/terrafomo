@@ -5,63 +5,76 @@ arguments:
     help: (Optional) A block indicating a weighted routing policy. Conflicts with
       any other routing policy. Documented below.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The name of the record.
     type: Text
+    deprecated: false
   _geolocation_routing_policy:
     required: false
     help: (Optional) A block indicating a routing policy based on the geolocation
       of the requestor. Conflicts with any other routing policy. Documented below.
     type: Text
+    deprecated: false
   _ttl:
     required: true
     help: (Required for non-alias records) The TTL of the record.
     type: Text
+    deprecated: false
   _set_identifier:
     required: false
     help: (Optional) Unique identifier to differentiate records with routing policies
       from one another. Required if using @failover@ , @geolocation@ , @latency@ ,
       or @weighted@ routing policies documented below.
     type: Text
+    deprecated: false
   _failover_routing_policy:
     required: false
     help: (Optional) A block indicating the routing behavior when associated health
       check fails. Conflicts with any other routing policy. Documented below.
     type: Text
+    deprecated: false
   _multivalue_answer_routing_policy:
     required: false
     help: (Optional) A block indicating a multivalue answer routing policy. Conflicts
       with any other routing policy.
     type: Text
+    deprecated: false
   _health_check_id:
     required: false
     help: (Optional) The health check the record should be associated with.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The record type. Valid values are @A@ , @AAAA@ , @CAA@ , @CNAME@
       , @MX@ , @NAPTR@ , @NS@ , @PTR@ , @SOA@ , @SPF@ , @SRV@ and @TXT@ .
     type: Text
+    deprecated: false
   _zone_id:
     required: true
     help: (Required) The ID of the hosted zone to contain this record.
     type: Text
+    deprecated: false
   _latency_routing_policy:
     required: false
     help: (Optional) A block indicating a routing policy based on the latency between
       the requestor and an AWS region. Conflicts with any other routing policy. Documented
       below.
     type: Text
+    deprecated: false
   _records:
     required: true
     help: (Required for non-alias records) A string list of records.
     type: Text
+    deprecated: false
   _alias:
     required: false
     help: (Optional) An alias block. Conflicts with @ttl@ & @records@ . Alias record
       documented below.
     type: Text
+    deprecated: false
 attributes:
   fqdn:
     help: ! '- <https://en.wikipedia.org/wiki/Fully_qualified_domain_name> built using

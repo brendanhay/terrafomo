@@ -148,11 +148,13 @@ argItem = item >>> paragraph >>> argument
 
     -- should use Parsec.Char here and rethrow errors.
     required h
-        | Text.isPrefixOf "- (Required" h = mk (Text.drop 2 h) True
-        | Text.isPrefixOf "- (Optional" h = mk (Text.drop 2 h) False
-        | otherwise                       = mk h True
+        | Text.isPrefixOf "- (Required"   h = mk (Text.drop 2 h) True  False
+        | Text.isPrefixOf "- (Optional"   h = mk (Text.drop 2 h) False False
+        | Text.isPrefixOf "- (Deprecated" h = mk (Text.drop 2 h) False True
+        | otherwise                         = mk h               True  False
       where
-        mk h' req = Arg (pure h') (pure req) defaultType
+        mk h' require deprecate =
+            Arg (pure h') (pure require) (pure deprecate) defaultType
 
 attrItem :: Parser (Text, Attr)
 attrItem = item >>> paragraph >>> attribute
@@ -164,7 +166,6 @@ attrItem = item >>> paragraph >>> attribute
                 )
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)
-
 
 -- Markdown Syntax Parsers
 

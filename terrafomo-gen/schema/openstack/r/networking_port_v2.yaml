@@ -7,67 +7,80 @@ arguments:
       are specified, then the Port will yield to the default behavior of the Networking
       service, which is to usually apply the "default" security group.
     type: Text
+    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 networking client. A networking
       client is needed to create a port. If omitted, the @region@ argument of the
       provider is used. Changing this creates a new port.
     type: Text
+    deprecated: false
   _fixed_ip:
     required: false
     help: (Optional) An array of desired IPs for this port. The structure is described
       below.
     type: Text
+    deprecated: false
   _device_id:
     required: false
     help: (Optional) The ID of the device attached to the port. Changing this creates
       a new port.
     type: Text
+    deprecated: false
   _security_group_ids:
     required: false
     help: (Optional - Conflicts with @no_security_groups@ ) A list of security group
       IDs to apply to the port. The security groups must be specified by ID and not
       name (as opposed to how they are configured with the Compute Instance).
     type: Text
+    deprecated: false
   _allowed_address_pairs:
     required: false
     help: (Optional) An IP/MAC Address pair of additional IP addresses that can be
       active on this port. The structure is described below.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) A unique name for the port. Changing this updates the @name@
       of an existing port.
     type: Text
+    deprecated: false
   _network_id:
     required: true
     help: (Required) The ID of the network to attach the port to. Changing this creates
       a new port.
     type: Text
+    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) Administrative up/down status for the port (must be "true" or
       "false" if provided). Changing this updates the @admin_state_up@ of an existing
       port.
     type: Text
+    deprecated: false
   _value_specs:
     required: false
     help: (Optional) Map of additional options.
     type: Text
+    deprecated: false
   _device_owner:
     required: false
     help: (Optional) The device owner of the Port. Changing this creates a new port.
     type: Text
+    deprecated: false
   _mac_address:
     required: false
     help: (Optional) Specify a specific MAC address for the port. Changing this creates
       a new port.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the Port. Required if admin wants to create a port
       for another tenant. Changing this creates a new port.
     type: Text
+    deprecated: false
 attributes:
   all fixed_ips:
     help: ! '- The collection of Fixed IP addresses on the port in the order returned

@@ -6,6 +6,7 @@ arguments:
       valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html>
       .
     type: Text
+    deprecated: false
   _name_regex:
     required: false
     help: (Optional) A regex string to apply to the AMI list returned by AWS. This
@@ -14,20 +15,24 @@ arguments:
       the result is large. It is recommended to combine this with other options to
       narrow down the list AWS returns.
     type: Text
+    deprecated: false
   _executable_users:
     required: false
     help: (Optional) Limit search to users with explicit launch permission on the
       image. Valid items are the numeric account ID or @self@ .
     type: Text
+    deprecated: false
   _owners:
     required: false
     help: (Optional) Limit search to specific AMI owners. Valid items are the numeric
       account ID, @amazon@ , or @self@ .
     type: Text
+    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent AMI.
     type: Text
+    deprecated: false
 attributes:
   hypervisor:
     help: ! '- The hypervisor type of the image.'

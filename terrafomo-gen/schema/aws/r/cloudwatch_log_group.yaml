@@ -5,11 +5,13 @@ arguments:
     help: (Optional, Forces new resource) The name of the log group. If omitted, Terraform
       will assign a random, unique name.
     type: Text
+    deprecated: false
   _name_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique name beginning with the
       specified prefix. Conflicts with @name@ .
     type: Text
+    deprecated: false
   _kms_key_id:
     required: false
     help: (Optional) The ARN of the KMS Key to use when encrypting log data. Please
@@ -18,15 +20,18 @@ arguments:
       ingested data remains encrypted, and AWS CloudWatch Logs requires permissions
       for the CMK whenever the encrypted data is requested.
     type: Text
+    deprecated: false
   _retention_in_days:
     required: false
     help: (Optional) Specifies the number of days you want to retain log events in
       the specified log group.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
+    deprecated: false
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the log group.'

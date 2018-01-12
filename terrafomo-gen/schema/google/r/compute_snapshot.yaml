@@ -4,35 +4,42 @@ arguments:
     required: false
     help: (Optional) A set of key/value label pairs to assign to the snapshot.
     type: Text
+    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+    deprecated: false
   _source_disk_encryption_key_raw:
     required: false
     help: (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption),
       encoded in <https://tools.ietf.org/html/rfc4648#section-4> to decrypt the source
       disk.
     type: Text
+    deprecated: false
   _zone:
     required: true
     help: (Required) The zone where the source disk is located.
     type: Text
+    deprecated: false
   _snapshot_encryption_key_raw:
     required: false
     help: (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption),
       encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this snapshot.
     type: Text
+    deprecated: false
   _source_disk:
     required: true
     help: (Required) The disk which will be used as the source of the snapshot.
     type: Text
+    deprecated: false
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

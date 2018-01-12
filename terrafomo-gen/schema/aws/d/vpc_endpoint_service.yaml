@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The common name of the AWS service (e.g. @s3@ ).
     type: Text
+    deprecated: false
 attributes:
   service_name:
     help: ! '- The service name of the AWS service that can be specified when creating

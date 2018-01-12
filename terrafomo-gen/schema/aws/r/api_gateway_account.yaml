@@ -7,6 +7,7 @@ arguments:
       . Logging & monitoring can be enabled/disabled and otherwise tuned on the API
       Gateway Stage level.
     type: Text
+    deprecated: false
 attributes:
   throttle_settings:
     help: ! '- Account-Level throttle settings. See exported fields below.'

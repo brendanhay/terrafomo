@@ -5,6 +5,7 @@ arguments:
     help: (Required) The name to use to find an escalation policy in the PagerDuty
       API.
     type: Text
+    deprecated: false
 attributes:
   name:
     help: ! '- The short name of the found escalation policy.'

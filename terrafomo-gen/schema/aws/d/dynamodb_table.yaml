@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the DynamoDB table.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides information about a DynamoDB table.
 examples: []

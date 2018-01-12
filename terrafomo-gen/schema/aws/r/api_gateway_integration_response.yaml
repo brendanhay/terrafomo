@@ -4,24 +4,29 @@ arguments:
     required: true
     help: (Required) The HTTP status code
     type: Text
+    deprecated: false
   _resource_id:
     required: true
     help: (Required) The API resource ID
     type: Text
+    deprecated: false
   _http_method:
     required: true
     help: (Required) The HTTP method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@
       , @OPTION@ , @ANY@ )
     type: Text
+    deprecated: false
   _rest_api_id:
     required: true
     help: (Required) The ID of the associated REST API
     type: Text
+    deprecated: false
   _response_templates:
     required: false
     help: (Optional) A map specifying the templates used to transform the integration
       response body
     type: Text
+    deprecated: false
   _selection_pattern:
     required: false
     help: (Optional) Specifies the regular expression pattern used to choose an integration
@@ -30,6 +35,7 @@ arguments:
       AWS Lambda function error header is matched. For all other @HTTP@ and @AWS@
       backends, the HTTP status code is matched.
     type: Text
+    deprecated: false
   _content_handling:
     required: false
     help: (Optional) Specifies how to handle request payload content type conversions.
@@ -37,16 +43,19 @@ arguments:
       is not defined, the response payload will be passed through from the integration
       response to the method response without modification.
     type: Text
+    deprecated: false
   _response_parameters_in_json:
     required: true
     help: ! '- Deprecated , use @response_parameters@ instead.'
     type: Text
+    deprecated: false
   _response_parameters:
     required: false
     help: ! '(Optional) A map of response parameters that can be read from the backend
       response. For example: @response_parameters = { "method.response.header.X-Some-Header"
       = "integration.response.header.X-Some-Other-Header" }@ ,'
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Provides an HTTP Method Integration Response for an API Gateway Resource.
   -> Note: Depends on having @aws_api_gateway_integration@ inside your rest api. To

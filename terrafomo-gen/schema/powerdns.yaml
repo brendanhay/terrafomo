@@ -5,11 +5,13 @@ arguments:
     help: (Required) The PowerDNS API key. This can also be specified with @PDNS_API_KEY@
       environment variable.
     type: Text
+    deprecated: false
   _server_url:
     required: true
     help: (Required) The address of PowerDNS server. This can also be specified with
       @PDNS_SERVER_URL@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The PowerDNS provider is used manipulate DNS records supported by PowerDNS
   server. The provider needs to be configured with the proper credentials before it

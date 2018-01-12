@@ -4,11 +4,13 @@ arguments:
     required: false
     help: (Optional) The Circonus ID of a given account.
     type: Text
+    deprecated: false
   _current:
     required: false
     help: (Optional) Automatically use the current Circonus Account attached to the
       API token making the request.
     type: Text
+    deprecated: false
 attributes:
   address2:
     help: ! '- The second line of the address associated with the account.'

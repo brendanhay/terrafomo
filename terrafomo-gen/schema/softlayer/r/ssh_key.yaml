@@ -4,14 +4,17 @@ arguments:
     required: true
     help: (Required) A descriptive name used to identify an SSH key.
     type: Text
+    deprecated: false
   _public_key:
     required: true
     help: (Required) The public SSH key.
     type: Text
+    deprecated: false
   _notes:
     required: false
     help: (Optional) A small note about an SSH key to use at your discretion.
     type: Text
+    deprecated: false
 attributes:
   fingerprint:
     help: ! '- sequence of bytes to authenticate or lookup a longer SSH key.'

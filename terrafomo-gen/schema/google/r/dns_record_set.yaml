@@ -5,28 +5,34 @@ arguments:
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The DNS name this record set will apply to.
     type: Text
+    deprecated: false
   _managed_zone:
     required: true
     help: (Required) The name of the zone in which this record set will reside.
     type: Text
+    deprecated: false
   _ttl:
     required: true
     help: (Required) The time-to-live of this record set (seconds).
     type: Text
+    deprecated: false
   _rrdatas:
     required: true
     help: (Required) The string data for the records in this record set whose meaning
       depends on the DNS type. For TXT record, if the string data contains spaces,
       add surrounding @\"@ if you don't want your string to get split on spaces.
     type: Text
+    deprecated: false
   _type':
     required: true
     help: (Required) The DNS record set type.
     type: Text
+    deprecated: false
 attributes: {}
 about: ! 'Manages a set of DNS records within Google Cloud DNS. ~> Note: The Google
   Cloud DNS API requires NS records be present at all times. To accommodate this,

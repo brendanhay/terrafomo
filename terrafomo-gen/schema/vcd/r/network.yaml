@@ -4,45 +4,55 @@ arguments:
     required: false
     help: (Optional) Second DNS server to use. Defaults to @8.8.4.4@
     type: Text
+    deprecated: false
   _gateway:
     required: true
     help: (Required) The gateway for this network
     type: Text
+    deprecated: false
   _static_ip_pool:
     required: false
     help: (Optional) A range of IPs permitted to be used as static IPs for virtual
       machines; see <#ip-pools> below for details.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the network
     type: Text
+    deprecated: false
   _edge_gateway:
     required: true
     help: (Required) The name of the edge gateway
     type: Text
+    deprecated: false
   _shared:
     required: false
     help: (Optional) Defines if this network is shared between multiple vDCs in the
       vOrg.  Defaults to @false@ .
     type: Text
+    deprecated: false
   _netmask:
     required: false
     help: (Optional) The netmask for the new network. Defaults to @255.255.255.0@
     type: Text
+    deprecated: false
   _dns1:
     required: false
     help: (Optional) First DNS server to use. Defaults to @8.8.8.8@
     type: Text
+    deprecated: false
   _dhcp_pool:
     required: false
     help: (Optional) A range of IPs to issue to virtual machines that don't have a
       static IP; see <#ip-pools> below for details.
     type: Text
+    deprecated: false
   _dns_suffix:
     required: false
     help: (Optional) A FQDN for the virtual machines on this network
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a vCloud Director VDC Network. This can be used to create, modify,
   and delete internal networks for vApps to connect.

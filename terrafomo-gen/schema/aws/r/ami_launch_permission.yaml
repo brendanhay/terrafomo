@@ -4,10 +4,12 @@ arguments:
     required: true
     help: ! '- (required) An AWS Account ID to add launch permissions.'
     type: Text
+    deprecated: false
   _image_id:
     required: true
     help: ! '- (required) A region-unique name for the AMI.'
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- A combination of " @image_id@ - @account_id@ ".'

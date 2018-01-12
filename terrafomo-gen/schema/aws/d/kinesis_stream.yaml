@@ -4,6 +4,7 @@ arguments:
     required: true
     help: (Required) The name of the Kinesis Stream.
     type: Text
+    deprecated: false
 attributes:
   status:
     help: ! '- The current status of the stream. The stream status is one of CREATING,

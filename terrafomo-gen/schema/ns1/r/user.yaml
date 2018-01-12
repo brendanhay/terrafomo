@@ -5,26 +5,32 @@ arguments:
     help: (Required) The Whether or not to notify the user of specified events. Only
       @billing@ is available currently.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) The free form name of the user.
     type: Text
+    deprecated: false
   _email:
     required: true
     help: (Required) The email address of the user.
     type: Text
+    deprecated: false
   _username:
     required: true
     help: (Required) The users login name.
     type: Text
+    deprecated: false
   _permissions:
     required: false
     help: (Optional) The allowed permissions of the user. Permissions documented below.
     type: Text
+    deprecated: false
   _teams:
     required: true
     help: (Required) The teams that the user belongs to.
     type: Text
+    deprecated: false
 attributes: {}
 about: Provides a NS1 User resource. Creating a user sends an invitation email to
   the user's email address. This can be used to create, modify, and delete users.

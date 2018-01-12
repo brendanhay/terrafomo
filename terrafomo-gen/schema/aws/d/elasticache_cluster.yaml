@@ -4,6 +4,7 @@ arguments:
     required: true
     help: – (Required) Group identifier.
     type: Text
+    deprecated: false
 attributes:
   node_type:
     help: – The cluster node type.

@@ -5,30 +5,36 @@ arguments:
     help: (Optional) Amount of memory in MB your Lambda Function can use at runtime.
       Defaults to @128@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html>
     type: Text
+    deprecated: false
   _dead_letter_config:
     required: false
     help: (Optional) Nested block to configure the function's dead letter queue .
       See details below.
     type: Text
+    deprecated: false
   _vpc_config:
     required: false
     help: (Optional) Provide this to allow your function to access your VPC. Fields
       documented below. See <http://docs.aws.amazon.com/lambda/latest/dg/vpc.html>
     type: Text
+    deprecated: false
   _environment:
     required: false
     help: (Optional) The Lambda environment's configuration settings. Fields documented
       below.
     type: Text
+    deprecated: false
   _function_name:
     required: true
     help: (Required) A unique name for your Lambda Function.
     type: Text
+    deprecated: false
   _s3_object_version:
     required: false
     help: (Optional) The object version containing the function's deployment package.
       Conflicts with @filename@ .
     type: Text
+    deprecated: false
   _role:
     required: true
     help: (Required) IAM role attached to the Lambda Function. This governs both who
@@ -36,40 +42,48 @@ arguments:
       Function has access to. See <https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html>
       for more details.
     type: Text
+    deprecated: false
   _runtime:
     required: true
     help: (Required) See <https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html#SSS-CreateFunction-request-Runtime>
       for valid values.
     type: Text
+    deprecated: false
   _publish:
     required: false
     help: (Optional) Whether to publish creation/change as new Lambda Function Version.
       Defaults to @false@ .
     type: Text
+    deprecated: false
   _s3_bucket:
     required: false
     help: (Optional) The S3 bucket location containing the function's deployment package.
       Conflicts with @filename@ .
     type: Text
+    deprecated: false
   _description:
     required: false
     help: (Optional) Description of what your Lambda Function does.
     type: Text
+    deprecated: false
   _timeout:
     required: false
     help: (Optional) The amount of time your Lambda Function has to run in seconds.
       Defaults to @3@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html>
     type: Text
+    deprecated: false
   _s3_key:
     required: false
     help: (Optional) The S3 key of an object containing the function's deployment
       package. Conflicts with @filename@ .
     type: Text
+    deprecated: false
   _handler:
     required: true
     help: (Required) The function <https://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events-create-test-function.html>
       in your code.
     type: Text
+    deprecated: false
   _source_code_hash:
     required: false
     help: (Optional) Used to trigger updates. Must be set to a base64-encoded SHA256
@@ -77,19 +91,23 @@ arguments:
       usual way to set this is @${base64sha256(file("file.zip"))}@ , where "file.zip"
       is the local filename of the lambda function source archive.
     type: Text
+    deprecated: false
   _kms_key_arn:
     required: false
     help: (Optional) The ARN for the KMS encryption key.
     type: Text
+    deprecated: false
   _filename:
     required: false
     help: (Optional) The path to the function's deployment package within the local
       filesystem. If defined, The @s3_@ -prefixed options cannot be used.
     type: Text
+    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the object.
     type: Text
+    deprecated: false
 attributes:
   last_modified:
     help: ! '- The date this resource was last modified.'

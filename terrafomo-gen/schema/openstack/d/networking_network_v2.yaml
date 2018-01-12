@@ -6,26 +6,32 @@ arguments:
       client is needed to retrieve networks ids. If omitted, the @region@ argument
       of the provider is used.
     type: Text
+    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the network.
     type: Text
+    deprecated: false
   _matching_subnet_cidr:
     required: false
     help: (Optional) The CIDR of a subnet within the network.
     type: Text
+    deprecated: false
   _network_id:
     required: false
     help: (Optional) The ID of the network.
     type: Text
+    deprecated: false
   _status:
     required: false
     help: (Optional) The status of the network.
     type: Text
+    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the network.
     type: Text
+    deprecated: false
 attributes:
   admin_state_up:
     help: ! '- (Optional) The administrative state of the network.'

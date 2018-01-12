@@ -7,11 +7,13 @@ arguments:
       this must be an <https://support.dnsimple.com/articles/api-access-token/> .
       You can use either an User or Account token, but an Account token is recommended.
     type: Text
+    deprecated: false
   _account:
     required: true
     help: (Required) The ID of the account associated with the token. It must be provided,
       but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment variable.
     type: Text
+    deprecated: false
 attributes: {}
 about: The DNSimple provider is used to interact with the resources supported by DNSimple.
   The provider needs to be configured with the proper credentials before it can be

@@ -4,6 +4,7 @@ arguments:
     required: true
     help: ! '- (required): Host to look up'
     type: Text
+    deprecated: false
 attributes:
   cname:
     help: ! '- A CNAME record associated with host.'

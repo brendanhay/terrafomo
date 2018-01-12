@@ -4,10 +4,12 @@ arguments:
     required: true
     help: (Required) The name of the Image.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The Name of the Resource Group where this Image exists.
     type: Text
+    deprecated: false
 attributes:
   location:
     help: ! '- the Azure Location where this Image exists.'

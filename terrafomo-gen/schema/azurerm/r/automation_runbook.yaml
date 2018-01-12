@@ -4,44 +4,53 @@ arguments:
     required: true
     help: (Required) The published runbook content link.
     type: Text
+    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the Runbook. Changing this forces a new
       resource to be created.
     type: Text
+    deprecated: false
   _log_progress:
     required: true
     help: (Required) Progress log option.
     type: Text
+    deprecated: false
   _description:
     required: true
     help: ! '-  (Optional) A description for this credential.'
     type: Text
+    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the Runbook is created.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
   _runbook_type:
     required: true
     help: (Required) The type of the runbook - can be either @Graph@ , @GraphPowerShell@
       , @GraphPowerShellWorkflow@ , @PowerShellWorkflow@ , @PowerShell@ or @Script@
       .
     type: Text
+    deprecated: false
   _log_verbose:
     required: true
     help: ! '-  (Required) Verbose log option.'
     type: Text
+    deprecated: false
   _account_name:
     required: true
     help: (Required) The name of the automation account in which the Runbook is created.
       Changing this forces a new resource to be created.
     type: Text
+    deprecated: false
 attributes:
   id:
     help: ! '- The Automation Runbook ID.'

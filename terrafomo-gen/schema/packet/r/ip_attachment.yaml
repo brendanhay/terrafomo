@@ -5,10 +5,12 @@ arguments:
     help: (Required) CIDR notation of subnet from block reserved in the same project
       and facility as the device
     type: Text
+    deprecated: false
   _device_id:
     required: true
     help: (Required) ID of device to which to assign the subnet
     type: Text
+    deprecated: false
 attributes:
   device_id:
     help: ! '- ID of device to which subnet is assigned'
