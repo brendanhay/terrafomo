@@ -1,0 +1,9 @@
+- &common
+  version: 0.0.0.0
+  ghc-options: -Wall -Wincomplete-uni-patterns
+  dependencies:
+    - base
+    - terraform
+    - containers
+    - text
+    - hashable

@@ -1,5 +1,5 @@
 name:                  terraform
-version:               0.1.0.0
+version:               0.0.0.0
 synopsis:              Pending.
 homepage:              https://github.com/brendanhay/terraform
 bug-reports:           https://github.com/brendanhay/terraform/issues

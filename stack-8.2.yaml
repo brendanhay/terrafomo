@@ -10,4 +10,5 @@ packages:
   - terraform
 # GENERATED
   - terraform-aws
+  - terraform-google
 # END GENERATED
