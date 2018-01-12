@@ -17,3 +17,11 @@ arguments:
       .
     type: Text
 attributes: {}
+about: Use this data source to get a list of EBS Snapshot IDs matching the specified
+  criteria.
+examples:
+- name: null
+  code:
+  - ebs_volumes <- datasource "ebs_volumes" $
+  - ! '    ebs_snapshot_ids_datasource'
+  - ! '        & owners .~ ["self"]'

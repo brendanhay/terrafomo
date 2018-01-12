@@ -1,5 +1,16 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE DeriveGeneric          #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleContexts       #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TypeFamilies           #-}
+
 module {{ namespace }} where
 
 import Data.Text (Text)
@@ -15,6 +26,31 @@ import qualified Terraform.Syntax.TH as TH
 
 {% let original = schema.value._name %}
 -- | The @{{ original }}@ {{ provider }} datasource.
+{% if schema.value.about %}
+--
+-- {{ schema.value.about }}
+{% endif %}
+{% for example in schema.value.examples %}
+{% if example.first %}
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.{{ provider }}
+-- import Terraform.{{ provider }}.DataSource
+-- @
+{% endif %}
+--
+{% if example.value.title %}
+-- {{ example.value.title }}
+--
+{% endif %}
+-- @
+{% for line in example.value.code %}
+-- {{ line.value }}
+{% endfor %}
+-- @
+{% endfor %}
 data {{ schema.key }} = {{ schema.key }}
   {% for arg in schema.value.arguments %}
     {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(Attr {{ arg.value.type }})

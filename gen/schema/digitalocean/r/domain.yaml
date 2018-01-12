@@ -13,3 +13,5 @@ attributes:
   id:
     help: ! '- The name of the domain'
     type: Text
+about: Provides a DigitalOcean domain resource.
+examples: []

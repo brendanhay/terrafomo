@@ -5,3 +5,10 @@ arguments:
     help: (Required) The name of the rule set
     type: Text
 attributes: {}
+about: Provides an SES receipt rule set resource
+examples:
+- name: null
+  code:
+  - main <- resource "main" $
+  - ! '    ses_receipt_rule_set_resource'
+  - ! '        & rule_set_name .~ "primary-rules"'

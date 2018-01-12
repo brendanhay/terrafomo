@@ -106,3 +106,5 @@ attributes:
   public:
     help: ! '- @true@ if the image has public launch permissions.'
     type: Text
+about: Use this data source to get the ID of a registered AMI for use in other resources.
+examples: []

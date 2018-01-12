@@ -22,3 +22,18 @@ attributes:
   gateway_address:
     help: ! '- The IP address of the gateway.'
     type: Text
+about: Manages a subnetwork within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/#vpc_networks_and_subnets>
+  and <https://cloud.google.com/compute/docs/reference/latest/subnetworks> .
+examples:
+- name: null
+  code:
+  - default-us-east1 <- resource "default-us-east1" $
+  - ! '    compute_subnetwork_resource'
+  - ! '        & name .~ "default-us-east1"'
+  - ! '        & ip_cidr_range .~ "10.0.0.0/16"'
+  - ! '        & network .~ compute default @"self_link"'
+  - ! '        & region .~ "us-east1"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_network_resource'
+  - ! '        & name .~ "test"'

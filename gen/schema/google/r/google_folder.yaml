@@ -25,3 +25,7 @@ attributes:
     help: ! '- Timestamp when the Folder was created. Assigned by the server. A timestamp
       in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z".'
     type: Text
+about: Allows management of a Google Cloud Platform folder. For more information see
+  <https://cloud.google.com/resource-manager/docs/creating-managing-folders> and <https://cloud.google.com/resource-manager/reference/rest/v2/folders>
+  .
+examples: []

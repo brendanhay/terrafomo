@@ -17,3 +17,26 @@ attributes:
   proxy_id:
     help: ! '- A unique ID assigned by GCE.'
     type: Text
+about: Creates a target TCP proxy resource in GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/tcp-ssl/tcp-proxy>
+  and <https://cloud.google.com/compute/docs/reference/latest/targetTcpProxies> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_target_tcp_proxy_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & description .~ "test"'
+  - ! '        & backend_service .~ compute default @"self_link"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_backend_service_resource'
+  - ! '        & name .~ "default-backend"'
+  - ! '        & protocol .~ "TCP"'
+  - ! '        & timeout_sec .~ 10'
+  - ! '        & health_checks .~ [compute default @"self_link"]'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_health_check_resource'
+  - ! '        & name .~ "default"'
+  - ! '        & timeout_sec .~ 1'
+  - ! '        & check_interval_sec .~ 1'

@@ -29,3 +29,14 @@ attributes:
   id:
     help: ! '- The ID of the created AMI.'
     type: Text
+about: The "AMI copy" resource allows duplication of an Amazon Machine Image (AMI),
+  including cross-region copies.
+examples:
+- name: null
+  code:
+  - example <- resource "example" $
+  - ! '    ami_copy_resource'
+  - ! '        & name .~ "terraform-example"'
+  - ! '        & description .~ "A copy of ami-xxxxxxxx"'
+  - ! '        & source_ami_id .~ "ami-xxxxxxxx"'
+  - ! '        & source_ami_region .~ "us-west-1"'

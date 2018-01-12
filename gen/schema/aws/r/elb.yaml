@@ -64,30 +64,7 @@ arguments:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
-attributes:
-  source_security_group_id:
-    help: ! '- The ID of the security group that you can use as part of your inbound
-      rules for your load balancer''s back-end application instances. Only available
-      on ELBs launched in a VPC.'
-    type: Text
-  dns_name:
-    help: ! '- The DNS name of the ELB'
-    type: Text
-  source_security_group:
-    help: ! '- The name of the security group that you can use as part of your inbound
-      rules for your load balancer''s back-end application instances. Use this for
-      Classic or Default VPC only.'
-    type: Text
-  zone_id:
-    help: ! '- The canonical hosted zone ID of the ELB (to be used in a Route 53 Alias
-      record)'
-    type: Text
-  name:
-    help: ! '- The name of the ELB'
-    type: Text
-  instances:
-    help: ! '- The list of instances in the ELB'
-    type: Text
-  id:
-    help: ! '- The name of the ELB'
-    type: Text
+attributes: {}
+about: Provides an Elastic Load Balancer resource, also known as a "Classic Load Balancer"
+  after the release of </docs/providers/aws/r/lb.html> .
+examples: []

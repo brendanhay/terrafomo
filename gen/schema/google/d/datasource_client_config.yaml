@@ -9,3 +9,12 @@ arguments:
     help: ! '- The region to operate under.'
     type: Text
 attributes: {}
+about: Use this data source to access the configuration of the Google Cloud provider.
+examples:
+- name: null
+  code:
+  - current <- datasource "current" $
+  - ! '    client_config_datasource'
+  - ! ' '
+  - output "project" $
+  - ! '    "${data.google_client_config.current.project}"'

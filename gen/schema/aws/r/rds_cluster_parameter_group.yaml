@@ -37,3 +37,12 @@ attributes:
   id:
     help: ! '- The db cluster parameter group name.'
     type: Text
+about: Provides an RDS DB cluster parameter group resource.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    rds_cluster_parameter_group_resource'
+  - ! '        & name .~ "rds-cluster-pg"'
+  - ! '        & family .~ "aurora5.6"'
+  - ! '        & description .~ "RDS default cluster parameter group"'

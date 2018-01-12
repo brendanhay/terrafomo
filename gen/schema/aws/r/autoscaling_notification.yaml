@@ -1,16 +1,7 @@
 _name: aws_autoscaling_notification
-arguments:
-  topic_arn:
-    required: true
-    help: (Required) The Topic ARN for notifications to be sent through
-    type: Text
-  group_names:
-    required: true
-    help: (Required) A list of AutoScaling Group Names
-    type: Text
-  notifications:
-    required: true
-    help: (Required) A list of Notification Types that trigger notifications. Acceptable
-      values are documented <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html>
-    type: Text
+arguments: {}
 attributes: {}
+about: Provides an AutoScaling Group with Notification support, via SNS Topics. Each
+  of the @notifications@ map to a <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_DescribeNotificationConfigurations.html>
+  inside Amazon Web Services, and are applied to each AutoScaling Group you supply.
+examples: []

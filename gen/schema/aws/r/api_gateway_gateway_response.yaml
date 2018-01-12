@@ -23,3 +23,5 @@ arguments:
     help: (Optional) The HTTP status code of the Gateway Response.
     type: Text
 attributes: {}
+about: Provides an API Gateway Gateway Response for a REST API Gateway.
+examples: []

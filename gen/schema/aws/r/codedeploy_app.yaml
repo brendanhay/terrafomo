@@ -11,3 +11,10 @@ attributes:
   id:
     help: ! '- Amazon''s assigned ID for the application.'
     type: Text
+about: Provides a CodeDeploy application to be used as a basis for deployments
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    codedeploy_app_resource'
+  - ! '        & name .~ "foo"'

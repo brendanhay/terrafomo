@@ -17,3 +17,25 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: The Google Compute Engine Instance Group API creates and manages pools of homogeneous
+  Compute Engine virtual machine instances from a common instance template. For more
+  information, see <https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
+  and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
+examples:
+- name: Empty instance group
+  code:
+  - test <- resource "test" $
+  - ! '    compute_instance_group_resource'
+  - ! '        & name .~ "terraform-test"'
+  - ! '        & description .~ "Terraform test instance group"'
+  - ! '        & zone .~ "us-central1-a"'
+  - ! '        & network .~ compute default @"self_link"'
+- name: With instances and named ports
+  code:
+  - webservers <- resource "webservers" $
+  - ! '    compute_instance_group_resource'
+  - ! '        & name .~ "terraform-webservers"'
+  - ! '        & description .~ "Terraform test instance group"'
+  - ! '        & instances .~ [compute test @"self_link"'
+  - ! '                       ,compute test2 @"self_link"]'
+  - ! '        & zone .~ "us-central1-a"'

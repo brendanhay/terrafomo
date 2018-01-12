@@ -36,16 +36,25 @@ arguments:
     help: (Optional) A target tracking policy, requires @policy_type = "TargetTrackingScaling"@
       . See supported fields below.
     type: Text
-attributes:
-  arn:
-    help: ! '- The ARN assigned by AWS to the scaling policy.'
-    type: Text
-  name:
-    help: ! '- The scaling policy''s name.'
-    type: Text
-  policy_type:
-    help: ! '- The scaling policy''s type.'
-    type: Text
-  adjustment_type:
-    help: ! '- The scaling policy''s adjustment type.'
-    type: Text
+attributes: {}
+about: Provides an Application AutoScaling Policy resource.
+examples:
+- name: DynamoDB Table Autoscaling
+  code:
+  - dynamodb_table_read_target <- resource "dynamodb_table_read_target" $
+  - ! '    appautoscaling_target_resource'
+  - ! '        & max_capacity .~ 100'
+  - ! '        & min_capacity .~ 5'
+  - ! '        & resource_id .~ "table/tableName"'
+  - ! '        & role_arn .~ data.aws_iam_role.DynamoDBAutoscaleRole.arn'
+  - ! '        & scalable_dimension .~ "dynamodb:table:ReadCapacityUnits"'
+  - ! '        & service_namespace .~ "dynamodb"'
+  - ! ' '
+  - dynamodb_table_read_policy <- resource "dynamodb_table_read_policy" $
+  - ! '    appautoscaling_policy_resource'
+  - ! '        & name .~ "DynamoDBReadCapacityUtilization:"<>compute dynamodb_table_read_target
+    @"resource_id"'
+  - ! '        & policy_type .~ "TargetTrackingScaling"'
+  - ! '        & resource_id .~ compute dynamodb_table_read_target @"resource_id"'
+  - ! '        & scalable_dimension .~ compute dynamodb_table_read_target @"scalable_dimension"'
+  - ! '        & service_namespace .~ compute dynamodb_table_read_target @"service_namespace"'

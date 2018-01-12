@@ -35,3 +35,25 @@ attributes:
   adjustment_type:
     help: ! '- The scaling policy''s adjustment type.'
     type: Text
+about: Provides an AutoScaling Scaling Policy resource.
+examples:
+- name: null
+  code:
+  - bat <- resource "bat" $
+  - ! '    autoscaling_policy_resource'
+  - ! '        & name .~ "foobar3-terraform-test"'
+  - ! '        & scaling_adjustment .~ 4'
+  - ! '        & adjustment_type .~ "ChangeInCapacity"'
+  - ! '        & cooldown .~ 300'
+  - ! '        & autoscaling_group_name .~ compute bar @"name"'
+  - ! ' '
+  - bar <- resource "bar" $
+  - ! '    autoscaling_group_resource'
+  - ! '        & availability_zones .~ ["us-east-1a"]'
+  - ! '        & name .~ "foobar3-terraform-test"'
+  - ! '        & max_size .~ 5'
+  - ! '        & min_size .~ 2'
+  - ! '        & health_check_grace_period .~ 300'
+  - ! '        & health_check_type .~ "ELB"'
+  - ! '        & force_delete .~ True'
+  - ! '        & launch_configuration .~ compute foo @"name"'

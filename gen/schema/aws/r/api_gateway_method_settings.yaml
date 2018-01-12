@@ -18,3 +18,5 @@ arguments:
       individual method override, or @*/*@ for overriding all methods in the stage.
     type: Text
 attributes: {}
+about: Provides an API Gateway Method Settings, e.g. logging or monitoring.
+examples: []

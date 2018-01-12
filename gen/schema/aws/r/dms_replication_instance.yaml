@@ -87,3 +87,6 @@ attributes:
   replication_instance_public_ips:
     help: ! '- A list of the public IP addresses of the replication instance.'
     type: Text
+about: Provides a DMS (Data Migration Service) replication instance resource. DMS
+  replication instances can be created, updated, deleted, and imported.
+examples: []

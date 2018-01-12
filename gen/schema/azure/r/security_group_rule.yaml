@@ -50,3 +50,6 @@ arguments:
       to the rule. An asterisk (*) can also be used to match all source IPs.
     type: Text
 attributes: {}
+about: Creates a new network Security Group Rule to be associated with a number of
+  given Security Groups.
+examples: []

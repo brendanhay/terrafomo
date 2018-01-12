@@ -61,3 +61,5 @@ attributes:
   description:
     help: ! '- A short description of the project.'
     type: Text
+about: Provides a CodeBuild Project resource.
+examples: []

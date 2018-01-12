@@ -21,3 +21,30 @@ attributes:
   id:
     help: ! '- The Redshift Subnet group ID.'
     type: Text
+about: Creates a new Amazon Redshift subnet group. You must provide a list of one
+  or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when
+  creating Amazon Redshift subnet group.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.1.0.0/16"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    subnet_resource'
+  - ! '        & cidr_block .~ "10.1.1.0/24"'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! ' '
+  - bar <- resource "bar" $
+  - ! '    subnet_resource'
+  - ! '        & cidr_block .~ "10.1.2.0/24"'
+  - ! '        & availability_zone .~ "us-west-2b"'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    redshift_subnet_group_resource'
+  - ! '        & name .~ "foo"'
+  - ! '        & subnet_ids .~ [compute foo @"id"'
+  - ! '                        ,compute bar @"id"]'

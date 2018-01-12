@@ -9,3 +9,20 @@ attributes:
   names:
     help: ! '- A list of the Autoscaling Groups in the current region.'
     type: Text
+about: The Autoscaling Groups data source allows access to the list of AWS ASGs within
+  a specific region. This will allow you to pass a list of AutoScaling Groups to other
+  resources.
+examples:
+- name: null
+  code:
+  - groups <- datasource "groups" $
+  - ! '    autoscaling_groups_datasource'
+  - ! ' '
+  - slack_notifications <- resource "slack_notifications" $
+  - ! '    autoscaling_notification_resource'
+  - ! '        & group_names .~ [data.aws_autoscaling_groups.groups.names]'
+  - ! '        & notifications .~ ["autoscaling:EC2_INSTANCE_LAUNCH"'
+  - ! '                           ,"autoscaling:EC2_INSTANCE_TERMINATE"'
+  - ! '                           ,"autoscaling:EC2_INSTANCE_LAUNCH_ERROR"'
+  - ! '                           ,"autoscaling:EC2_INSTANCE_TERMINATE_ERROR"]'
+  - ! '        & topic_arn .~ "TOPIC ARN"'

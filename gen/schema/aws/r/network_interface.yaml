@@ -55,3 +55,12 @@ attributes:
   tags:
     help: ! '- Tags assigned to the ENI.'
     type: Text
+about: Provides an Elastic network interface (ENI) resource.
+examples:
+- name: null
+  code:
+  - test <- resource "test" $
+  - ! '    network_interface_resource'
+  - ! '        & subnet_id .~ compute public_a @"id"'
+  - ! '        & private_ips .~ ["10.0.0.50"]'
+  - ! '        & security_groups .~ [compute web @"id"]'

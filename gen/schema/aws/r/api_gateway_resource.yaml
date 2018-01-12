@@ -19,3 +19,17 @@ attributes:
   id:
     help: ! '- The resource''s identifier.'
     type: Text
+about: Provides an API Gateway Resource.
+examples:
+- name: null
+  code:
+  - mydemoapi <- resource "mydemoapi" $
+  - ! '    api_gateway_rest_api_resource'
+  - ! '        & name .~ "MyDemoAPI"'
+  - ! '        & description .~ "This is my API for demonstration purposes"'
+  - ! ' '
+  - mydemoresource <- resource "mydemoresource" $
+  - ! '    api_gateway_resource_resource'
+  - ! '        & rest_api_id .~ compute MyDemoAPI @"id"'
+  - ! '        & parent_id .~ compute MyDemoAPI @"root_resource_id"'
+  - ! '        & path_part .~ "mydemoresource"'

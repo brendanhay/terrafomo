@@ -99,3 +99,11 @@ attributes:
   placement_group:
     help: ! '- The placement group of the Instance.'
     type: Text
+about: Use this data source to get the ID of an Amazon EC2 Instance for use in other
+  resources.
+examples:
+- name: null
+  code:
+  - foo <- datasource "foo" $
+  - ! '    instance_datasource'
+  - ! '        & instance_id .~ "i-instanceid"'

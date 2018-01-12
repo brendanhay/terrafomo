@@ -9,3 +9,5 @@ arguments:
     help: (Required) Instance ID to place in the ELB pool.
     type: Text
 attributes: {}
+about: Provides an Elastic Load Balancer Attachment resource.
+examples: []

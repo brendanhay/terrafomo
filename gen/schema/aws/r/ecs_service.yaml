@@ -51,19 +51,18 @@ arguments:
       of the number of running tasks that must remain running and healthy in a service
       during a deployment.
     type: Text
-attributes:
-  desired_count:
-    help: ! '- The number of instances of the task definition'
-    type: Text
-  cluster:
-    help: ! '- The Amazon Resource Name (ARN) of cluster which the service runs on'
-    type: Text
-  iam_role:
-    help: ! '- The ARN of IAM role used for ELB'
-    type: Text
-  name:
-    help: ! '- The name of the service'
-    type: Text
-  id:
-    help: ! '- The Amazon Resource Name (ARN) that identifies the service'
-    type: Text
+attributes: {}
+about: -> To prevent a race condition during service deletion, make sure to set @depends_on@
+  to the related @aws_iam_role_policy@ ; otherwise, the policy may be destroyed too
+  soon and the ECS service will then get stuck in the @DRAINING@ state.
+examples:
+- name: null
+  code:
+  - mongo <- resource "mongo" $
+  - ! '    ecs_service_resource'
+  - ! '        & name .~ "mongodb"'
+  - ! '        & cluster .~ compute foo @"id"'
+  - ! '        & task_definition .~ compute mongo @"arn"'
+  - ! '        & desired_count .~ 3'
+  - ! '        & iam_role .~ compute foo @"arn"'
+  - ! '        & depends_on .~ ["aws_iam_role_policy.foo"]'

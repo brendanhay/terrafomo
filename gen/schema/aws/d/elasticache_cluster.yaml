@@ -67,3 +67,10 @@ attributes:
   port:
     help: – The port number on which each of the cache nodes will accept connections.
     type: Text
+about: Use this data source to get information about an Elasticache Cluster
+examples:
+- name: null
+  code:
+  - my_cluster <- datasource "my_cluster" $
+  - ! '    elasticache_cluster_datasource'
+  - ! '        & cluster_id .~ "my-cluster-id"'

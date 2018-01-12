@@ -34,3 +34,15 @@ attributes:
     help: ! '- The database server ID. Coincides with the randomly-generated @name@
       .'
     type: Text
+about: Allocates a new SQL Database Server on Azure.
+examples:
+- name: null
+  code:
+  - sql-serv <- resource "sql-serv" $
+  - ! '    sql_database_server_resource'
+  - ! '        & name .~ "<computed>"'
+  - ! '        & location .~ "West US"'
+  - ! '        & username .~ "SuperUser"'
+  - ! '        & password .~ "SuperSEKR3T"'
+  - ! '        & version .~ "2.0"'
+  - ! '        & url .~ "<computed>"'

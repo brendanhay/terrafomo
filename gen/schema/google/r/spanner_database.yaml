@@ -1,14 +1,7 @@
 _name: google_spanner_instance
-arguments:
-  instance_:
-    required: true
-    help: (Required) The name of the instance that will serve the new database.
-    type: Text
-  name:
-    required: true
-    help: (Required) The name of the database.
-    type: Text
-attributes:
-  state:
-    help: ! '- The current state of the database.'
-    type: Text
+arguments: {}
+attributes: {}
+about: Creates a Google Spanner Database within a Spanner Instance. For more information,
+  see the <https://cloud.google.com/spanner/> , or the <https://cloud.google.com/spanner/docs/reference/rest/v1/projects.instances.databases>
+  .
+examples: []

@@ -53,3 +53,28 @@ attributes:
   id:
     help: ! '- The ID of the maintenance window task.'
     type: Text
+about: Provides an SSM Maintenance Window Task resource
+examples:
+- name: null
+  code:
+  - window <- resource "window" $
+  - ! '    ssm_maintenance_window_resource'
+  - ! '        & name .~ "maintenance-window-%s"'
+  - ! '        & schedule .~ "cron(0 16 ? * TUE *)"'
+  - ! '        & duration .~ 3'
+  - ! '        & cutoff .~ 1'
+  - ! ' '
+  - task <- resource "task" $
+  - ! '    ssm_maintenance_window_task_resource'
+  - ! '        & window_id .~ compute window @"id"'
+  - ! '        & task_type .~ "RUN_COMMAND"'
+  - ! '        & task_arn .~ "AWS-RunShellScript"'
+  - ! '        & priority .~ 1'
+  - ! '        & service_role_arn .~ "arn:aws:iam::187416307283:role/service-role/AWS_Events_Invoke_Run_Command_112316643"'
+  - ! '        & max_concurrency .~ "2"'
+  - ! '        & max_errors .~ "1"'
+  - ! ' '
+  - instance <- resource "instance" $
+  - ! '    instance_resource'
+  - ! '        & ami .~ "ami-4fccb37f"'
+  - ! '        & instance_type .~ "m1.small"'

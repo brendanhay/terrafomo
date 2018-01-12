@@ -36,7 +36,7 @@ arguments:
       two-minute warning before it terminates. Note that you can't specify an Availability
       Zone group or a launch group if you specify a duration.
     type: Text
-attributes:
-  id:
-    help: ! '- The Spot Instance Request ID.'
-    type: Text
+attributes: {}
+about: Provides an EC2 Spot Instance Request resource. This allows instances to be
+  requested on the spot market.
+examples: []

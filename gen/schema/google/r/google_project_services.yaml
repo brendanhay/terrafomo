@@ -10,3 +10,14 @@ arguments:
     help: (Required) The list of services that are enabled. Supports update.
     type: Text
 attributes: {}
+about: Allows management of enabled API services for an existing Google Cloud Platform
+  project. Services in an existing project that are not defined in the config will
+  be removed.
+examples:
+- name: null
+  code:
+  - project <- resource "project" $
+  - ! '    project_services_resource'
+  - ! '        & project .~ "your-project-id"'
+  - ! '        & services .~ ["iam.googleapis.com"'
+  - ! '                      ,"cloudresourcemanager.googleapis.com"]'

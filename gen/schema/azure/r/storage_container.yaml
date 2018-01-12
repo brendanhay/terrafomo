@@ -24,3 +24,12 @@ attributes:
   id:
     help: ! '- The storage container ID. Coincides with the given @name@ .'
     type: Text
+about: Creates a new storage container within a given storage service on Azure.
+examples:
+- name: null
+  code:
+  - stor-cont <- resource "stor-cont" $
+  - ! '    storage_container_resource'
+  - ! '        & name .~ "terraform-storage-container"'
+  - ! '        & container_access_type .~ "blob"'
+  - ! '        & storage_service_name .~ "tfstorserv"'

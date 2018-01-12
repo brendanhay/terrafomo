@@ -33,3 +33,5 @@ attributes:
   id:
     help: ! '- The Id of a usage plan key.'
     type: Text
+about: Provides an API Gateway Usage Plan Key.
+examples: []

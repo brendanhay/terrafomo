@@ -25,26 +25,6 @@ arguments:
     required: true
     help: (Required) The description of a usage plan.
     type: Text
-attributes:
-  throttle_settings:
-    help: ! '- The throttling limits of the usage plan.'
-    type: Text
-  product_code:
-    help: ! '- The AWS Markeplace product identifier to associate with the usage plan
-      as a SaaS product on AWS Marketplace.'
-    type: Text
-  quota_settings:
-    help: ! '- The quota of the usage plan.'
-    type: Text
-  name:
-    help: ! '- The name of the usage plan.'
-    type: Text
-  id:
-    help: ! '- The ID of the API resource'
-    type: Text
-  api_stages:
-    help: ! '- The associated API stages of the usage plan.'
-    type: Text
-  description:
-    help: ! '- The description of a usage plan.'
-    type: Text
+attributes: {}
+about: Provides an API Gateway Usage Plan.
+examples: []

@@ -1,11 +1,7 @@
 _name: google_storage_object_acl
-arguments:
-  bucket:
-    required: true
-    help: (Required) The name of the bucket it applies to.
-    type: Text
-  object:
-    required: true
-    help: (Required) The name of the object it applies to.
-    type: Text
+arguments: {}
 attributes: {}
+about: Creates a new object ACL in Google cloud storage service (GCS). For more information
+  see <https://cloud.google.com/storage/docs/access-control/lists> and <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls>
+  .
+examples: []

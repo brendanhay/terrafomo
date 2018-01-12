@@ -23,3 +23,6 @@ attributes:
   id:
     help: ! '- A unique identifier for the attachment'
     type: Text
+about: Provides the ability to register instances and containers with a LB target
+  group
+examples: []

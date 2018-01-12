@@ -65,3 +65,10 @@ attributes:
   id:
     help: ! '- The id of the layer.'
     type: Text
+about: Provides an OpsWorks static web server layer resource.
+examples:
+- name: null
+  code:
+  - web <- resource "web" $
+  - ! '    opsworks_static_web_layer_resource'
+  - ! '        & stack_id .~ compute main @"id"'

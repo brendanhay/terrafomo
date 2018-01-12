@@ -22,3 +22,27 @@ attributes:
   name:
     help: ! '- The name to identifing the Group Membership'
     type: Text
+about: Provides a top level resource to manage IAM Group membership for IAM Users.
+  For more information on managing IAM Groups or IAM Users, see </docs/providers/aws/r/iam_group.html>
+  or </docs/providers/aws/r/iam_user.html>
+examples:
+- name: null
+  code:
+  - team <- resource "team" $
+  - ! '    iam_group_membership_resource'
+  - ! '        & name .~ "tf-testing-group-membership"'
+  - ! '        & users .~ [compute user_one @"name"'
+  - ! '                   ,compute user_two @"name"]'
+  - ! '        & group .~ compute group @"name"'
+  - ! ' '
+  - group <- resource "group" $
+  - ! '    iam_group_resource'
+  - ! '        & name .~ "test-group"'
+  - ! ' '
+  - user_one <- resource "user_one" $
+  - ! '    iam_user_resource'
+  - ! '        & name .~ "test-user"'
+  - ! ' '
+  - user_two <- resource "user_two" $
+  - ! '    iam_user_resource'
+  - ! '        & name .~ "test-user-two"'

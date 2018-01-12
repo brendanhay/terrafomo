@@ -17,3 +17,15 @@ attributes:
     help: ! '- Set to the ARN of the found certificate, suitable for referencing in
       other resources that support ACM certificates.'
     type: Text
+about: Use this data source to get the ARN of a certificate in AWS Certificate Manager
+  (ACM). The process of requesting and verifying a certificate in ACM requires some
+  manual steps, which means that Terraform cannot automate the creation of ACM certificates.
+  But using this data source, you can reference them by domain without having to hard
+  code the ARNs as input.
+examples:
+- name: null
+  code:
+  - example <- datasource "example" $
+  - ! '    acm_certificate_datasource'
+  - ! '        & domain .~ "tf.example.com"'
+  - ! '        & statuses .~ ["ISSUED"]'

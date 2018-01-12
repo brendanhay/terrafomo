@@ -15,3 +15,21 @@ arguments:
       by Terraform".
     type: Text
 attributes: {}
+about: Provides an ElastiCache Subnet Group resource.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.0.0.0/16"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    subnet_resource'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! '        & cidr_block .~ "10.0.0.0/24"'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! ' '
+  - bar <- resource "bar" $
+  - ! '    elasticache_subnet_group_resource'
+  - ! '        & name .~ "tf-test-cache-subnet"'
+  - ! '        & subnet_ids .~ [compute foo @"id"]'

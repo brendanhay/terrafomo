@@ -21,3 +21,11 @@ attributes:
   id:
     help: ! '- Same value as @user_arn@'
     type: Text
+about: Provides an OpsWorks User Profile resource.
+examples:
+- name: null
+  code:
+  - my_profile <- resource "my_profile" $
+  - ! '    opsworks_user_profile_resource'
+  - ! '        & user_arn .~ compute user @"arn"'
+  - ! '        & ssh_username .~ "my_user"'

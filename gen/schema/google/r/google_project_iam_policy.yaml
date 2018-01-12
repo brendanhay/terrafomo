@@ -35,3 +35,15 @@ attributes:
     help: ! '- (DEPRECATED) (Computed) The IAM policy that will be restored when a
       non-authoritative policy resource is deleted.'
     type: Text
+about: Allows creation and management of an IAM policy for an existing Google Cloud
+  Platform project.
+examples:
+- name: null
+  code:
+  - project <- resource "project" $
+  - ! '    project_iam_policy_resource'
+  - ! '        & project .~ "your-project-id"'
+  - ! '        & policy_data .~ data.google_iam_policy.admin.policy_data'
+  - ! ' '
+  - admin <- datasource "admin" $
+  - ! '    iam_policy_datasource'

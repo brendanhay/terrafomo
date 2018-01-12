@@ -10,3 +10,15 @@ arguments:
       feed.
     type: Text
 attributes: {}
+about: -> There is only a single subscription allowed per account.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "tf-spot-datafeed"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    spot_datafeed_subscription_resource'
+  - ! '        & bucket .~ compute default @"bucket"'
+  - ! '        & prefix .~ "my_subdirectory"'

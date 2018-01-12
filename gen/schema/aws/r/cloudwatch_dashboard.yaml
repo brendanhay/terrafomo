@@ -15,3 +15,5 @@ attributes:
   dashboard_arn:
     help: ! '- The Amazon Resource Name (ARN) of the dashboard.'
     type: Text
+about: Provides a CloudWatch Dashboard resource.
+examples: []

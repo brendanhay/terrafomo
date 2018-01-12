@@ -28,12 +28,14 @@ executable terraform-gen
     ghc-options:      -Wall -Wincomplete-uni-patterns
 
     other-modules:
+        Terraform.Gen.Example
         Terraform.Gen.JSON
         Terraform.Gen.Markdown
         Terraform.Gen.Parser
         Terraform.Gen.Provider
         Terraform.Gen.Schema
         Terraform.Gen.Template
+        Terraform.Gen.Text
 
     build-depends:
           aeson
@@ -47,5 +49,7 @@ executable terraform-gen
         , optparse-applicative
         , pretty-show
         , process
+        , terraform
         , text
+        , wl-pprint-text
         , yaml

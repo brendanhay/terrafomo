@@ -19,3 +19,88 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: Manages a Cloud Router resource. For more information see <https://cloud.google.com/compute/docs/cloudrouter>
+  and <https://cloud.google.com/compute/docs/reference/latest/routers> .
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    compute_network_resource'
+  - ! '        & name .~ "network-1"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_subnetwork_resource'
+  - ! '        & name .~ "subnet-1"'
+  - ! '        & network .~ compute foobar @"self_link"'
+  - ! '        & ip_cidr_range .~ "10.0.0.0/16"'
+  - ! '        & region .~ "us-central1"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_address_resource'
+  - ! '        & name .~ "vpn-gateway-1-address"'
+  - ! '        & region .~ compute foobar @"region"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_vpn_gateway_resource'
+  - ! '        & name .~ "vpn-gateway-1"'
+  - ! '        & network .~ compute foobar @"self_link"'
+  - ! '        & region .~ compute foobar @"region"'
+  - ! ' '
+  - foobar_esp <- resource "foobar_esp" $
+  - ! '    compute_forwarding_rule_resource'
+  - ! '        & name .~ "vpn-gw-1-esp"'
+  - ! '        & region .~ compute foobar @"region"'
+  - ! '        & ip_protocol .~ "ESP"'
+  - ! '        & ip_address .~ compute foobar @"address"'
+  - ! '        & target .~ compute foobar @"self_link"'
+  - ! ' '
+  - foobar_udp500 <- resource "foobar_udp500" $
+  - ! '    compute_forwarding_rule_resource'
+  - ! '        & name .~ "vpn-gw-1-udp-500"'
+  - ! '        & region .~ compute foobar_esp @"region"'
+  - ! '        & ip_protocol .~ "UDP"'
+  - ! '        & port_range .~ "500-500"'
+  - ! '        & ip_address .~ compute foobar @"address"'
+  - ! '        & target .~ compute foobar @"self_link"'
+  - ! ' '
+  - foobar_udp4500 <- resource "foobar_udp4500" $
+  - ! '    compute_forwarding_rule_resource'
+  - ! '        & name .~ "vpn-gw-1-udp-4500"'
+  - ! '        & region .~ compute foobar_udp500 @"region"'
+  - ! '        & ip_protocol .~ "UDP"'
+  - ! '        & port_range .~ "4500-4500"'
+  - ! '        & ip_address .~ compute foobar @"address"'
+  - ! '        & target .~ compute foobar @"self_link"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_router_resource'
+  - ! '        & name .~ "router-1"'
+  - ! '        & region .~ compute foobar_udp500 @"region"'
+  - ! '        & network .~ compute foobar @"self_link"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_vpn_tunnel_resource'
+  - ! '        & name .~ "vpn-tunnel-1"'
+  - ! '        & region .~ compute foobar_udp4500 @"region"'
+  - ! '        & target_vpn_gateway .~ compute foobar @"self_link"'
+  - ! '        & shared_secret .~ "unguessable"'
+  - ! '        & peer_ip .~ "8.8.8.8"'
+  - ! '        & router .~ compute foobar @"name"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_router_interface_resource'
+  - ! '        & name .~ "interface-1"'
+  - ! '        & router .~ compute foobar @"name"'
+  - ! '        & region .~ compute foobar @"region"'
+  - ! '        & ip_range .~ "169.254.1.1/30"'
+  - ! '        & vpn_tunnel .~ compute foobar @"name"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_router_peer_resource'
+  - ! '        & name .~ "peer-1"'
+  - ! '        & router .~ compute foobar @"name"'
+  - ! '        & region .~ compute foobar @"region"'
+  - ! '        & peer_ip_address .~ "169.254.1.2"'
+  - ! '        & peer_asn .~ 65513'
+  - ! '        & advertised_route_priority .~ 100'
+  - ! '        & interface .~ compute foobar @"name"'

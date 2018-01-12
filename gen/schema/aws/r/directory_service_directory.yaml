@@ -61,3 +61,28 @@ attributes:
   dns_ip_addresses:
     help: ! '- A list of IP addresses of the DNS servers for the directory or connector.'
     type: Text
+about: Provides a Simple or Managed Microsoft directory in AWS Directory Service.
+examples:
+- name: null
+  code:
+  - bar <- resource "bar" $
+  - ! '    directory_service_directory_resource'
+  - ! '        & name .~ "corp.notexample.com"'
+  - ! '        & password .~ "SuperSecretPassw0rd"'
+  - ! '        & size .~ "Small"'
+  - ! ' '
+  - main <- resource "main" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.0.0.0/16"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    subnet_resource'
+  - ! '        & vpc_id .~ compute main @"id"'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & cidr_block .~ "10.0.1.0/24"'
+  - ! ' '
+  - bar <- resource "bar" $
+  - ! '    subnet_resource'
+  - ! '        & vpc_id .~ compute main @"id"'
+  - ! '        & availability_zone .~ "us-west-2b"'
+  - ! '        & cidr_block .~ "10.0.2.0/24"'

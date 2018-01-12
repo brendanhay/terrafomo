@@ -103,3 +103,5 @@ attributes:
   id:
     help: ! '- The id of the stack.'
     type: Text
+about: Provides an OpsWorks stack resource.
+examples: []

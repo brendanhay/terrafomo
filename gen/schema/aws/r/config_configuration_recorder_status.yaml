@@ -9,3 +9,5 @@ arguments:
     help: (Required) Whether the configuration recorder should be enabled or disabled.
     type: Text
 attributes: {}
+about: Manages status (recording / stopped) of an AWS Config Configuration Recorder.
+examples: []

@@ -30,3 +30,25 @@ arguments:
     help: (Required) The min capacity of the scalable target.
     type: Text
 attributes: {}
+about: Provides an Application AutoScaling ScalableTarget resource.
+examples:
+- name: DynamoDB Table Autoscaling
+  code:
+  - dynamodb_table_read_target <- resource "dynamodb_table_read_target" $
+  - ! '    appautoscaling_target_resource'
+  - ! '        & max_capacity .~ 100'
+  - ! '        & min_capacity .~ 5'
+  - ! '        & resource_id .~ "table/tableName"'
+  - ! '        & role_arn .~ data.aws_iam_role.DynamoDBAutoscaleRole.arn'
+  - ! '        & scalable_dimension .~ "dynamodb:table:ReadCapacityUnits"'
+  - ! '        & service_namespace .~ "dynamodb"'
+- name: ECS Service Autoscaling
+  code:
+  - ecs_target <- resource "ecs_target" $
+  - ! '    appautoscaling_target_resource'
+  - ! '        & max_capacity .~ 4'
+  - ! '        & min_capacity .~ 1'
+  - ! '        & resource_id .~ "service/clusterName/serviceName"'
+  - ! '        & role_arn .~ var.ecs_iam_role'
+  - ! '        & scalable_dimension .~ "ecs:service:DesiredCount"'
+  - ! '        & service_namespace .~ "ecs"'

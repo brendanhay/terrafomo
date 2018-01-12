@@ -10,7 +10,12 @@ arguments:
       string that corresponds with ASCII characters) that you want AWS WAF to search
       for in web requests. ByteMatchTuple documented below.
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the WAF ByteMatchSet.'
-    type: Text
+attributes: {}
+about: Provides a WAF Regional Byte Match Set Resource for use with Application Load
+  Balancer.
+examples:
+- name: null
+  code:
+  - byte_set <- resource "byte_set" $
+  - ! '    wafregional_byte_match_set_resource'
+  - ! '        & name .~ "tf_waf_byte_match_set"'

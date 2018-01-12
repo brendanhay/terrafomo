@@ -35,3 +35,17 @@ attributes:
   tags:
     help: ! '- A map of tags associated with this stack.'
     type: Text
+about: The CloudFormation Stack data source allows access to stack outputs and other
+  useful data including the template body.
+examples:
+- name: null
+  code:
+  - network <- datasource "network" $
+  - ! '    cloudformation_stack_datasource'
+  - ! '        & name .~ "my-network-stack"'
+  - ! ' '
+  - web <- resource "web" $
+  - ! '    instance_resource'
+  - ! '        & ami .~ "ami-abb07bcb"'
+  - ! '        & instance_type .~ "t1.micro"'
+  - ! '        & subnet_id .~ data.aws_cloudformation_stack.network.outputs["SubnetId"]'

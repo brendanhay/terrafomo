@@ -17,3 +17,6 @@ attributes:
   ciphertext_blob:
     help: ! '- Base64 encoded ciphertext'
     type: Text
+about: The KMS ciphertext data source allows you to encrypt plaintext into ciphertext
+  by using an AWS KMS customer master key.
+examples: []

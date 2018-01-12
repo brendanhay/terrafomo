@@ -48,3 +48,5 @@ arguments:
       response to the method response without modification.
     type: Text
 attributes: {}
+about: Provides an HTTP Method Integration Response for an API Gateway Resource.
+examples: []

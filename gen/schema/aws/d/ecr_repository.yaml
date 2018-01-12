@@ -15,3 +15,11 @@ attributes:
     help: ! '- The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@
       ).'
     type: Text
+about: The ECR Repository data source allows the ARN, Repository URI and Registry
+  ID to be retrieved for an ECR repository.
+examples:
+- name: null
+  code:
+  - service <- datasource "service" $
+  - ! '    ecr_repository_datasource'
+  - ! '        & name .~ "ecr-repository"'

@@ -33,3 +33,19 @@ attributes:
   lb_port:
     help: ! '- The load balancer port to which the policy is applied.'
     type: Text
+about: Provides a load balancer SSL negotiation policy, which allows an ELB to control
+  the ciphers and protocols that are supported during SSL negotiations between a client
+  and a load balancer.
+examples:
+- name: null
+  code:
+  - lb <- resource "lb" $
+  - ! '    elb_resource'
+  - ! '        & name .~ "test-lb"'
+  - ! '        & availability_zones .~ ["us-east-1a"]'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    lb_ssl_negotiation_policy_resource'
+  - ! '        & name .~ "foo-policy"'
+  - ! '        & load_balancer .~ compute lb @"id"'
+  - ! '        & lb_port .~ 443'

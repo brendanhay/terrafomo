@@ -1,10 +1,6 @@
 _name: triton_network
-arguments:
-  name:
-    required: true
-    help: ! '- (string) The name of the network.'
-    type: Text
-attributes:
-  id:
-    help: ! '- (string) The ID of the network.'
-    type: Text
+arguments: {}
+attributes: {}
+about: The @triton_network@ data source queries the Triton Network API for a network
+  ID based on the name of the network.
+examples: []

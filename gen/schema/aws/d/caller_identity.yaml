@@ -14,3 +14,19 @@ arguments:
     help: ! '- The unique identifier of the calling entity.'
     type: Text
 attributes: {}
+about: Use this data source to get the access to the effective Account ID, User ID,
+  and ARN in which Terraform is authorized.
+examples:
+- name: null
+  code:
+  - current <- datasource "current" $
+  - ! '    caller_identity_datasource'
+  - ! ' '
+  - output "account_id" $
+  - ! '    "${data.aws_caller_identity.current.account_id}"'
+  - ! ' '
+  - output "caller_arn" $
+  - ! '    "${data.aws_caller_identity.current.arn}"'
+  - ! ' '
+  - output "caller_user" $
+  - ! '    "${data.aws_caller_identity.current.user_id}"'

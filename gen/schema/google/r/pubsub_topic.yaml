@@ -6,3 +6,12 @@ arguments:
       this forces a new resource to be created.
     type: Text
 attributes: {}
+about: Creates a topic in Google's pubsub queueing system. For more information see
+  <https://cloud.google.com/pubsub/docs> and <https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics>
+  .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    pubsub_topic_resource'
+  - ! '        & name .~ "default-topic"'

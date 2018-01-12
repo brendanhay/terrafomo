@@ -10,7 +10,11 @@ arguments:
       characters) that you want to search for in web requests, the location in requests
       that you want to search, and other settings.'
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the WAF Byte Match Set.'
-    type: Text
+attributes: {}
+about: Provides a WAF Byte Match Set Resource
+examples:
+- name: null
+  code:
+  - byte_set <- resource "byte_set" $
+  - ! '    waf_byte_match_set_resource'
+  - ! '        & name .~ "tf_waf_byte_match_set"'

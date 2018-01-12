@@ -16,3 +16,17 @@ attributes:
   id:
     help: ! '- The deployment group''s config name.'
     type: Text
+about: Provides a CodeDeploy deployment config for an application
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    codedeploy_deployment_config_resource'
+  - ! '        & deployment_config_name .~ "test-deployment-config"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    codedeploy_deployment_group_resource'
+  - ! '        & app_name .~ compute foo_app @"name"'
+  - ! '        & deployment_group_name .~ "bar"'
+  - ! '        & service_role_arn .~ compute foo_role @"arn"'
+  - ! '        & deployment_config_name .~ compute foo @"id"'

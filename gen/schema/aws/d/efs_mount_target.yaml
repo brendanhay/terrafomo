@@ -25,3 +25,11 @@ attributes:
   subnet_id:
     help: ! '- ID of the mount target''s subnet.'
     type: Text
+about: Provides information about an Elastic File System Mount Target (EFS).
+examples:
+- name: null
+  code:
+  - ! ' '
+  - by_id <- datasource "by_id" $
+  - ! '    efs_mount_target_datasource'
+  - ! '        & mount_target_id .~ var.mount_target_id'

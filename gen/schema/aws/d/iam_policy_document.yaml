@@ -9,7 +9,6 @@ arguments:
     required: true
     help: (Optional) - An ID for the policy document.
     type: Text
-attributes:
-  json:
-    help: ! '- The above arguments serialized as a standard JSON policy document.'
-    type: Text
+attributes: {}
+about: Generates an IAM policy document in JSON format.
+examples: []

@@ -34,10 +34,13 @@ arguments:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the VPC Peering Connection.'
-    type: Text
-  accept_status:
-    help: ! '- The status of the VPC Peering Connection request.'
-    type: Text
+attributes: {}
+about: Provides a resource to manage a VPC Peering Connection resource.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    vpc_peering_connection_resource'
+  - ! '        & peer_owner_id .~ var.peer_owner_id'
+  - ! '        & peer_vpc_id .~ compute bar @"id"'
+  - ! '        & vpc_id .~ compute foo @"id"'

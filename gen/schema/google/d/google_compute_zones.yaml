@@ -15,3 +15,7 @@ attributes:
   names:
     help: ! '- A list of zones available in the given region'
     type: Text
+about: Provides access to available Google Compute zones in a region for a given project.
+  See more about <https://cloud.google.com/compute/docs/regions-zones/regions-zones>
+  in the upstream docs.
+examples: []

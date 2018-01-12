@@ -9,7 +9,11 @@ arguments:
     required: true
     help: (Required) The name or description of the Size Constraint Set.
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the WAF Size Constraint Set.'
-    type: Text
+attributes: {}
+about: Provides a WAF Size Constraint Set Resource
+examples:
+- name: null
+  code:
+  - size_constraint_set <- resource "size_constraint_set" $
+  - ! '    waf_size_constraint_set_resource'
+  - ! '        & name .~ "tfsize_constraints"'

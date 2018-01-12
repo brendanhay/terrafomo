@@ -32,3 +32,5 @@ attributes:
   policy:
     help: ! '- The policy document attached to the role.'
     type: Text
+about: Provides an IAM role policy.
+examples: []

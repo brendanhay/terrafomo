@@ -13,3 +13,5 @@ arguments:
     help: (Optional) The ARN of an ALB Target Group.
     type: Text
 attributes: {}
+about: Provides an AutoScaling Attachment resource.
+examples: []

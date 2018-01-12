@@ -12,3 +12,10 @@ attributes:
   id:
     help: ! '- The Amazon Resource Name (ARN) that identifies the cluster'
     type: Text
+about: Provides an ECS cluster.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    ecs_cluster_resource'
+  - ! '        & name .~ "white-hart"'

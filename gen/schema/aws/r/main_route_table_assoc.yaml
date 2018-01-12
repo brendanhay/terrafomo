@@ -16,3 +16,11 @@ attributes:
   id:
     help: ! '- The ID of the Route Table Association'
     type: Text
+about: Provides a resource for managing the main routing table of a VPC.
+examples:
+- name: null
+  code:
+  - a <- resource "a" $
+  - ! '    main_route_table_association_resource'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! '        & route_table_id .~ compute bar @"id"'

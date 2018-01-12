@@ -43,3 +43,5 @@ arguments:
       characters)
     type: Text
 attributes: {}
+about: Provides an Elastic Transcoder preset resource.
+examples: []

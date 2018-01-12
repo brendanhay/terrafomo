@@ -22,3 +22,6 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) identifying your Lambda function alias.'
     type: Text
+about: Creates a Lambda function alias. Creates an alias that points to the specified
+  Lambda function version.
+examples: []

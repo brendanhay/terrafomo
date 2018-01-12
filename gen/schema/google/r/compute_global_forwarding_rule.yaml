@@ -17,3 +17,42 @@ attributes:
     help: ! '- ( </docs/providers/google/index.html#beta-features> ) The current label
       fingerprint.'
     type: Text
+about: Manages a Global Forwarding Rule within GCE. This binds an ip and port to a
+  target HTTP(s) proxy. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/global-forwarding-rules>
+  and <https://cloud.google.com/compute/docs/reference/latest/globalForwardingRules>
+  .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_global_forwarding_rule_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & target .~ compute default @"self_link"'
+  - ! '        & port_range .~ "80"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_target_http_proxy_resource'
+  - ! '        & name .~ "test-proxy"'
+  - ! '        & description .~ "a description"'
+  - ! '        & url_map .~ compute default @"self_link"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_url_map_resource'
+  - ! '        & name .~ "url-map"'
+  - ! '        & description .~ "a description"'
+  - ! '        & default_service .~ compute default @"self_link"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_backend_service_resource'
+  - ! '        & name .~ "default-backend"'
+  - ! '        & port_name .~ "http"'
+  - ! '        & protocol .~ "HTTP"'
+  - ! '        & timeout_sec .~ 10'
+  - ! '        & health_checks .~ [compute default @"self_link"]'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_http_health_check_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & request_path .~ "/"'
+  - ! '        & check_interval_sec .~ 1'
+  - ! '        & timeout_sec .~ 1'

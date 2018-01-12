@@ -65,3 +65,5 @@ attributes:
   parameter:
     help: ! '- The parameters that are available to this document.'
     type: Text
+about: Provides an SSM Document resource
+examples: []

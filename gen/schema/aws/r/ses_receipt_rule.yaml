@@ -57,3 +57,5 @@ arguments:
     help: (Optional) A list of Stop Action blocks. Documented below.
     type: Text
 attributes: {}
+about: Provides an SES receipt rule resource
+examples: []

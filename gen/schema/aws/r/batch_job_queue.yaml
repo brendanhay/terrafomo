@@ -24,3 +24,14 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name of the job queue.'
     type: Text
+about: Provides a Batch Job Queue resource.
+examples:
+- name: null
+  code:
+  - test_queue <- resource "test_queue" $
+  - ! '    batch_job_queue_resource'
+  - ! '        & name .~ "tf-test-batch-job-queue"'
+  - ! '        & state .~ "ENABLED"'
+  - ! '        & priority .~ 1'
+  - ! '        & compute_environments .~ [compute test_environment_1 @"arn"'
+  - ! '                                  ,compute test_environment_2 @"arn"]'

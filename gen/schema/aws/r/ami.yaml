@@ -41,3 +41,6 @@ attributes:
   id:
     help: ! '- The ID of the created AMI.'
     type: Text
+about: The AMI resource allows the creation and management of a completely-custom
+  (AMI).
+examples: []

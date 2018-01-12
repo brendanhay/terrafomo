@@ -71,3 +71,5 @@ attributes:
   id:
     help: ! '- A unique identifier of the stack.'
     type: Text
+about: Provides a CloudFormation Stack resource.
+examples: []

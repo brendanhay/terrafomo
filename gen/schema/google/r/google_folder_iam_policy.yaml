@@ -17,3 +17,20 @@ attributes:
       optimistic concurrency control as a way to help prevent simultaneous updates
       of a policy from overwriting each other.'
     type: Text
+about: Allows creation and management of the IAM policy for an existing Google Cloud
+  Platform folder.
+examples:
+- name: null
+  code:
+  - folder_admin_policy <- resource "folder_admin_policy" $
+  - ! '    folder_iam_policy_resource'
+  - ! '        & folder .~ compute department1 @"name"'
+  - ! '        & policy_data .~ data.google_iam_policy.admin.policy_data'
+  - ! ' '
+  - department1 <- resource "department1" $
+  - ! '    folder_resource'
+  - ! '        & display_name .~ "Department 1"'
+  - ! '        & parent .~ "organizations/1234567"'
+  - ! ' '
+  - admin <- datasource "admin" $
+  - ! '    iam_policy_datasource'

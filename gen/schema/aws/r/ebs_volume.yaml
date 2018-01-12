@@ -38,3 +38,11 @@ attributes:
   id:
     help: ! '- The volume ID (e.g. vol-59fcb34e).'
     type: Text
+about: Manages a single EBS volume.
+examples:
+- name: null
+  code:
+  - example <- resource "example" $
+  - ! '    ebs_volume_resource'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & size .~ 40'

@@ -11,3 +11,8 @@ attributes:
   id:
     help: ! '- The id of the tag'
     type: Text
+about: Provides a DigitalOcean Tag resource. A Tag is a label that can be applied
+  to a droplet resource in order to better organize or facilitate the lookups and
+  actions on it. Tags created with this resource can be referenced in your droplet
+  configuration via their ID or name.
+examples: []

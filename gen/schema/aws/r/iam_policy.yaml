@@ -44,3 +44,5 @@ attributes:
   description:
     help: ! '- The description of the policy.'
     type: Text
+about: Provides an IAM policy.
+examples: []

@@ -129,52 +129,7 @@ arguments:
     required: false
     help: (Optional) The Placement Group to start the instance in.
     type: Text
-attributes:
-  key_name:
-    help: ! '- The key name of the instance'
-    type: Text
-  public_dns:
-    help: ! '- The public DNS name assigned to the instance. For EC2-VPC, this is
-      only available if you''ve enabled DNS hostnames for your VPC'
-    type: Text
-  vpc_security_group_ids:
-    help: ! '- The associated security groups in non-default VPC'
-    type: Text
-  primary_network_interface_id:
-    help: ! '- The ID of the instance''s primary network interface.'
-    type: Text
-  private_ip:
-    help: ! '- The private IP address assigned to the instance'
-    type: Text
-  public_ip:
-    help: ! '- The public IP address assigned to the instance, if applicable. : If
-      you are using an </docs/providers/aws/r/eip.html> with your instance, you should
-      refer to the EIP''s address directly and not use @public_ip@ , as this field
-      will change after the EIP is attached.'
-    type: Text
-  security_groups:
-    help: ! '- The associated security groups.'
-    type: Text
-  id:
-    help: ! '- The instance ID.'
-    type: Text
-  availability_zone:
-    help: ! '- The availability zone of the instance.'
-    type: Text
-  private_dns:
-    help: ! '- The private DNS name assigned to the instance. Can only be used inside
-      the Amazon EC2, and only available if you''ve enabled DNS hostnames for your
-      VPC'
-    type: Text
-  network_interface_id:
-    help: ! '- The ID of the network interface that was created with the instance.'
-    type: Text
-  ipv6_addresses:
-    help: ! '- A list of assigned IPv6 addresses, if any'
-    type: Text
-  subnet_id:
-    help: ! '- The VPC subnet ID.'
-    type: Text
-  placement_group:
-    help: ! '- The placement group of the instance.'
-    type: Text
+attributes: {}
+about: Provides an EC2 instance resource. This allows instances to be created, updated,
+  and deleted. Instances also support </docs/provisioners/index.html> .
+examples: []

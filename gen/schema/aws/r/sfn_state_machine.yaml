@@ -23,3 +23,5 @@ attributes:
   id:
     help: ! '- The ARN of the state machine.'
     type: Text
+about: Provides a Step Function State Machine resource
+examples: []

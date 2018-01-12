@@ -6,29 +6,22 @@
 
 module Terraform.Gen.Schema where
 
-import Control.Applicative ((<|>))
-
-import Data.Aeson         (FromJSON, ToJSON)
-import Data.Function      (on)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
-import Data.Monoid        (First, Last (Last))
-import Data.Semigroup     (Semigroup ((<>)))
-import Data.Text          (Text)
+import Data.Aeson      (FromJSON, ToJSON)
+import Data.Function   (on)
+import Data.Map.Strict (Map)
+import Data.Monoid     (First, Last (Last))
+import Data.Semigroup  (Semigroup ((<>)))
+import Data.Text       (Text)
 
 import GHC.Generics (Generic)
 
-import Text.Printf (printf)
+import Terraform.Gen.Example
 
-import qualified Data.Aeson         as JSON
-import qualified Data.Aeson.Types   as JSON
-import qualified Data.Char          as Char
-import qualified Data.Foldable      as Fold
-import qualified Data.Map.Strict    as Map
-import qualified Data.Text          as Text
-import qualified GHC.Read           as Read
-import qualified Terraform.Gen.JSON as JSON
-import qualified Text.Read.Lex      as Read
+import qualified Data.Aeson              as JSON
+import qualified Data.Map.Strict         as Map
+import qualified Terraform.Gen.JSON      as JSON
+import qualified Terraform.Syntax.HCL    as HCL
+import qualified Terraform.Syntax.Parser as HCL
 
 -- Syntax Types
 
@@ -42,13 +35,17 @@ data SchemaType
 
 data Schema = Schema
     { schema_Name      :: !Text
+    , schemaAbout      :: !(Maybe Text)
+    , schemaExamples   :: ![Example]
     , schemaArguments  :: !(Map Text Arg)
     , schemaAttributes :: !(Map Text Attr)
     } deriving (Show, Generic)
 
 instance Semigroup Schema where
     (<>) a b = Schema
-        { schema_Name      = schema_Name b
+        { schema_Name      = schema_Name    a
+        , schemaAbout      = schemaAbout    a
+        , schemaExamples   = schemaExamples a
         , schemaArguments  = on (Map.unionWith mappend) schemaArguments  a b
         , schemaAttributes = on (Map.unionWith mappend) schemaAttributes a b
           -- FIXME: make sure to delete config old keys.

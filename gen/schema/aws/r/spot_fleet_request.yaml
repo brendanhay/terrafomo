@@ -59,10 +59,7 @@ arguments:
       YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed
       or enabled to fulfill the request. Defaults to 24 hours.'
     type: Text
-attributes:
-  id:
-    help: ! '- The Spot fleet request ID'
-    type: Text
-  spot_request_state:
-    help: ! '- The state of the Spot fleet request.'
-    type: Text
+attributes: {}
+about: Provides an EC2 Spot Fleet Request resource. This allows a fleet of Spot instances
+  to be requested on the Spot market.
+examples: []

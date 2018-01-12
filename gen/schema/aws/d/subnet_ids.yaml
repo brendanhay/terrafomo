@@ -1,16 +1,5 @@
 _name: aws_subnet_ids
-arguments:
-  vpc_id:
-    required: true
-    help: (Required) The VPC ID that you want to filter from.
-    type: Text
-  tags:
-    required: false
-    help: (Optional) A mapping of tags, each pair of which must exactly match a pair
-      on the desired subnets.
-    type: Text
-attributes:
-  ids:
-    help: ! '- A list of all the subnet ids found. This data source will fail if none
-      are found.'
-    type: Text
+arguments: {}
+attributes: {}
+about: ! '@aws_subnet_ids@ provides a list of ids for a vpc_id'
+examples: []

@@ -14,3 +14,10 @@ attributes:
   ip_address:
     help: ! '- The allocated static IP address'
     type: Text
+about: Allocates a static IP address.
+examples:
+- name: null
+  code:
+  - test <- resource "test" $
+  - ! '    lightsail_static_ip_resource'
+  - ! '        & name .~ "example"'

@@ -56,3 +56,12 @@ attributes:
   number:
     help: ! '- The numeric identifier of the project.'
     type: Text
+about: Allows creation and management of a Google Cloud Platform project.
+examples:
+- name: null
+  code:
+  - my_project <- resource "my_project" $
+  - ! '    project_resource'
+  - ! '        & name .~ "My Project"'
+  - ! '        & project_id .~ "your-project-id"'
+  - ! '        & org_id .~ "1234567"'

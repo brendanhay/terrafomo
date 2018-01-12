@@ -9,3 +9,5 @@ arguments:
     help: (Required) The policy document. This is a JSON formatted string.
     type: Text
 attributes: {}
+about: Provides a CloudWatch Logs destination policy resource.
+examples: []

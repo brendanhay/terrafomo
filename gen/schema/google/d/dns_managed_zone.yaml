@@ -20,3 +20,7 @@ attributes:
   description:
     help: ! '- A textual description field.'
     type: Text
+about: Provides access to a zone's attributes within Google Cloud DNS. For more information
+  see <https://cloud.google.com/dns/zones/> and <https://cloud.google.com/dns/api/v1/managedZones>
+  .
+examples: []

@@ -9,3 +9,14 @@ arguments:
     help: (Optional) The unique name of the target group.
     type: Text
 attributes: {}
+about: ~>  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The functionality
+  is identical.
+examples:
+- name: null
+  code:
+  - ! ' '
+  - ! ' '
+  - test <- datasource "test" $
+  - ! '    lb_target_group_datasource'
+  - ! '        & arn .~ var.lb_tg_arn'
+  - ! '        & name .~ var.lb_tg_name'

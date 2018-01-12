@@ -54,3 +54,6 @@ attributes:
   tags:
     help: ! '- The names of the Tags assigned to the Firewall.'
     type: Text
+about: Provides a DigitalOcean Cloud Firewall resource. This can be used to create,
+  modify, and delete Firewalls.
+examples: []

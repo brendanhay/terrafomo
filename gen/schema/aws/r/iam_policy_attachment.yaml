@@ -27,3 +27,5 @@ attributes:
   id:
     help: ! '- The policy''s ID.'
     type: Text
+about: Attaches a Managed IAM Policy to user(s), role(s), and/or group(s)
+examples: []

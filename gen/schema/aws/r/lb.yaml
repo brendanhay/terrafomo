@@ -77,3 +77,5 @@ attributes:
   id:
     help: ! '- The ARN of the load balancer (matches @arn@ ).'
     type: Text
+about: Provides a Load Balancer resource.
+examples: []

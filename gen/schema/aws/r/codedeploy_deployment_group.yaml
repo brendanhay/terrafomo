@@ -59,22 +59,17 @@ arguments:
       blue/green, you want to run and whether to route deployment traffic behind a
       load balancer (documented below).
     type: Text
-attributes:
-  deployment_group_name:
-    help: ! '- The group''s name.'
-    type: Text
-  service_role_arn:
-    help: ! '- The group''s service role ARN.'
-    type: Text
-  deployment_config_name:
-    help: ! '- The name of the group''s deployment config.'
-    type: Text
-  id:
-    help: ! '- The deployment group''s ID.'
-    type: Text
-  app_name:
-    help: ! '- The group''s assigned application.'
-    type: Text
-  autoscaling_groups:
-    help: ! '- The autoscaling groups associated with the deployment group.'
-    type: Text
+attributes: {}
+about: Provides a CodeDeploy Deployment Group for a CodeDeploy Application
+examples:
+- name: Using Blue Green Deployments
+  code:
+  - example <- resource "example" $
+  - ! '    codedeploy_app_resource'
+  - ! '        & name .~ "example-app"'
+  - ! ' '
+  - example <- resource "example" $
+  - ! '    codedeploy_deployment_group_resource'
+  - ! '        & app_name .~ compute example @"name"'
+  - ! '        & deployment_group_name .~ "example-group"'
+  - ! '        & service_role_arn .~ compute example @"arn"'

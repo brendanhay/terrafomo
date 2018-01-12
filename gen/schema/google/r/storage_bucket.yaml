@@ -1,13 +1,9 @@
 _name: google_storage_bucket
-arguments:
-  name:
-    required: true
-    help: (Required) The name of the bucket.
-    type: Text
-attributes:
-  self_link:
-    help: ! '- The URI of the created resource.'
-    type: Text
-  url:
-    help: ! '- The base URL of the bucket, in the format @gs://<bucket-name>@ .'
-    type: Text
+arguments: {}
+attributes: {}
+about: Creates a new bucket in Google cloud storage service (GCS). Once a bucket has
+  been created, its location can't be changed. <https://cloud.google.com/storage/docs/access-control/lists>
+  can be applied using the @google_storage_bucket_acl@ resource. For more information
+  see <https://cloud.google.com/storage/docs/overview> and <https://cloud.google.com/storage/docs/json_api/v1/buckets>
+  .
+examples: []

@@ -34,3 +34,14 @@ attributes:
   id:
     help: ! '- The hosted service ID. Coincides with the given @name@ .'
     type: Text
+about: Creates a new hosted service on Azure with its own .cloudapp.net domain.
+examples:
+- name: null
+  code:
+  - terraform-service <- resource "terraform-service" $
+  - ! '    hosted_service_resource'
+  - ! '        & name .~ "terraform-service"'
+  - ! '        & location .~ "North Europe"'
+  - ! '        & ephemeral_contents .~ False'
+  - ! '        & description .~ "Hosted service created by Terraform."'
+  - ! '        & label .~ "tf-hs-01"'

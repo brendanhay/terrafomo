@@ -15,3 +15,13 @@ attributes:
       Use NS records to redirect from your DNS provider to these names, thus making
       Google Cloud DNS authoritative for this zone.'
     type: Text
+about: Manages a zone within Google Cloud DNS. For more information see <https://cloud.google.com/dns/zones/>
+  and <https://cloud.google.com/dns/api/v1/managedZones> .
+examples:
+- name: null
+  code:
+  - prod <- resource "prod" $
+  - ! '    dns_managed_zone_resource'
+  - ! '        & name .~ "prod-zone"'
+  - ! '        & dns_name .~ "prod.mydomain.com."'
+  - ! '        & description .~ "Production DNS zone"'

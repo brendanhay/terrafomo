@@ -31,3 +31,7 @@ attributes:
   not_after:
     help: ! '- The expiration date of the certificate'
     type: Text
+about: Provides a DigitalOcean Certificate resource that allows you to manage certificates
+  for configuring TLS termination in Load Balancers. Certificates created with this
+  resource can be referenced in your Load Balancer configuration via their ID.
+examples: []

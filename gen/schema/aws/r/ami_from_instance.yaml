@@ -19,3 +19,12 @@ attributes:
   id:
     help: ! '- The ID of the created AMI.'
     type: Text
+about: The "AMI from instance" resource allows the creation of an Amazon Machine Image
+  (AMI) modelled after an existing EBS-backed EC2 instance.
+examples:
+- name: null
+  code:
+  - example <- resource "example" $
+  - ! '    ami_from_instance_resource'
+  - ! '        & name .~ "terraform-example"'
+  - ! '        & source_instance_id .~ "i-xxxxxxxx"'

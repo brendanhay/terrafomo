@@ -9,3 +9,6 @@ arguments:
     help: (Optional) IAM policy document specifying the access policies for the domain
     type: Text
 attributes: {}
+about: Allows setting policy to an ElasticSearch domain while referencing domain attributes
+  (e.g. ARN)
+examples: []

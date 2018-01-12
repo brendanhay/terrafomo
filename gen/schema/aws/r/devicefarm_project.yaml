@@ -1,10 +1,7 @@
 _name: aws_devicefarm_project
-arguments:
-  name:
-    required: true
-    help: (Required) The name of the project
-    type: Text
-attributes:
-  arn:
-    help: ! '- The Amazon Resource Name of this project'
-    type: Text
+arguments: {}
+attributes: {}
+about: Provides a resource to manage AWS Device Farm Projects. Please keep in mind
+  that this feature is only supported on the "us-west-2" region. This resource will
+  error if you try to create a project in another region.
+examples: []

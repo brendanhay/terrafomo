@@ -32,3 +32,5 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) of the rule.'
     type: Text
+about: Provides a CloudWatch Event Rule resource.
+examples: []

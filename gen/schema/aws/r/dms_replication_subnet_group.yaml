@@ -17,3 +17,6 @@ attributes:
   vpc_id:
     help: ! '- The ID of the VPC the subnet group is in.'
     type: Text
+about: Provides a DMS (Data Migration Service) replication subnet group resource.
+  DMS replication subnet groups can be created, updated, deleted, and imported.
+examples: []

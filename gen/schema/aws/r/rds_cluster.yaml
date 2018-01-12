@@ -179,3 +179,21 @@ attributes:
   port:
     help: ! '- The database port'
     type: Text
+about: Provides an RDS Cluster Resource. A Cluster Resource defines attributes that
+  are applied to the entire cluster of </docs/providers/aws/r/rds_cluster_instance.html>
+  . Use the RDS Cluster resource and RDS Cluster Instances to create and use Amazon
+  Aurora, a MySQL-compatible database engine.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    rds_cluster_resource'
+  - ! '        & cluster_identifier .~ "aurora-cluster-demo"'
+  - ! '        & availability_zones .~ ["us-west-2a"'
+  - ! '                                ,"us-west-2b"'
+  - ! '                                ,"us-west-2c"]'
+  - ! '        & database_name .~ "mydb"'
+  - ! '        & master_username .~ "foo"'
+  - ! '        & master_password .~ "bar"'
+  - ! '        & backup_retention_period .~ 5'
+  - ! '        & preferred_backup_window .~ "07:00-09:00"'

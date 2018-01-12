@@ -38,3 +38,10 @@ attributes:
   id:
     help: ! '- The ID that identifies the file system (e.g. fs-ccfc0d65).'
     type: Text
+about: Provides an Elastic File System (EFS) resource.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    efs_file_system_resource'
+  - ! '        & creation_token .~ "my-product"'

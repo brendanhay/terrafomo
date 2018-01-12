@@ -17,3 +17,5 @@ attributes:
       in Amazon SES in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html>
       .'
     type: Text
+about: Provides an SES domain identity resource
+examples: []

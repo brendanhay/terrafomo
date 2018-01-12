@@ -20,3 +20,47 @@ attributes:
   id:
     help: ! '- The GCE assigned ID of the resource.'
     type: Text
+about: Manages a URL Map resource within GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/url-map>
+  and <https://cloud.google.com/compute/docs/reference/latest/urlMaps> .
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    compute_url_map_resource'
+  - ! '        & name .~ "urlmap"'
+  - ! '        & description .~ "a description"'
+  - ! '        & default_service .~ compute home @"self_link"'
+  - ! ' '
+  - login <- resource "login" $
+  - ! '    compute_backend_service_resource'
+  - ! '        & name .~ "login-backend"'
+  - ! '        & port_name .~ "http"'
+  - ! '        & protocol .~ "HTTP"'
+  - ! '        & timeout_sec .~ 10'
+  - ! '        & health_checks .~ [compute default @"self_link"]'
+  - ! ' '
+  - home <- resource "home" $
+  - ! '    compute_backend_service_resource'
+  - ! '        & name .~ "home-backend"'
+  - ! '        & port_name .~ "http"'
+  - ! '        & protocol .~ "HTTP"'
+  - ! '        & timeout_sec .~ 10'
+  - ! '        & health_checks .~ [compute default @"self_link"]'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_http_health_check_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & request_path .~ "/"'
+  - ! '        & check_interval_sec .~ 1'
+  - ! '        & timeout_sec .~ 1'
+  - ! ' '
+  - static <- resource "static" $
+  - ! '    compute_backend_bucket_resource'
+  - ! '        & name .~ "static-asset-backend-bucket"'
+  - ! '        & bucket_name .~ compute static @"name"'
+  - ! '        & enable_cdn .~ True'
+  - ! ' '
+  - static <- resource "static" $
+  - ! '    storage_bucket_resource'
+  - ! '        & name .~ "static-asset-bucket"'
+  - ! '        & location .~ "US"'

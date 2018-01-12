@@ -9,3 +9,7 @@ arguments:
     help: (Required) The host project ID.
     type: Text
 attributes: {}
+about: Allows enabling and disabling Shared VPC for the host Google Cloud Platform
+  project. For more information see <https://cloud.google.com/compute/docs/shared-vpc>
+  and <https://cloud.google.com/compute/docs/reference/latest/projects> .
+examples: []

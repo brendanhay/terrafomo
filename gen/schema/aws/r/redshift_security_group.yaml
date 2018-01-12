@@ -17,3 +17,11 @@ attributes:
   id:
     help: ! '- The Redshift security group ID.'
     type: Text
+about: Creates a new Amazon Redshift security group. You use security groups to control
+  access to non-VPC clusters
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    redshift_security_group_resource'
+  - ! '        & name .~ "redshift-sg"'

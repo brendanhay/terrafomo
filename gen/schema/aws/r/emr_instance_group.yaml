@@ -40,3 +40,14 @@ attributes:
   id:
     help: ! '- The EMR Instance ID'
     type: Text
+about: Provides an Elastic MapReduce Cluster Instance Group configuration. See <https://aws.amazon.com/documentation/emr/>
+  for more information.
+examples:
+- name: null
+  code:
+  - task <- resource "task" $
+  - ! '    emr_instance_group_resource'
+  - ! '        & cluster_id .~ compute tf-test-cluster @"id"'
+  - ! '        & instance_count .~ 1'
+  - ! '        & instance_type .~ "m3.xlarge"'
+  - ! '        & name .~ "my little instance group"'

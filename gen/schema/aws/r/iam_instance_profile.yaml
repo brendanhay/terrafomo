@@ -53,3 +53,5 @@ attributes:
     help: ! '- The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs>
       assigned by AWS.'
     type: Text
+about: Provides an IAM instance profile.
+examples: []

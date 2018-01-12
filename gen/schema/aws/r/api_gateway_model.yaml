@@ -24,3 +24,5 @@ attributes:
   id:
     help: ! '- The ID of the model'
     type: Text
+about: Provides a Model for a API Gateway.
+examples: []

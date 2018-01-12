@@ -23,3 +23,5 @@ attributes:
   policy:
     help: ! '- The policy document.'
     type: Text
+about: Provides an IoT policy.
+examples: []

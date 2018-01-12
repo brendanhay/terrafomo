@@ -22,3 +22,6 @@ attributes:
   revision:
     help: ! '- The revision of this task definition'
     type: Text
+about: The ECS task definition data source allows access to details of a specific
+  AWS ECS task definition.
+examples: []

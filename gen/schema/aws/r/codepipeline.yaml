@@ -21,3 +21,5 @@ attributes:
   id:
     help: ! '- The codepipeline ID.'
     type: Text
+about: Provides a CodePipeline.
+examples: []

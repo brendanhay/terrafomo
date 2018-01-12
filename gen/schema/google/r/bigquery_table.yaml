@@ -74,3 +74,22 @@ attributes:
   type:
     help: ! '- Describes the table type.'
     type: Text
+about: Creates a table resource in a dataset for Google BigQuery. For more information
+  see <https://cloud.google.com/bigquery/docs/> and <https://cloud.google.com/bigquery/docs/reference/rest/v2/tables>
+  .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    bigquery_dataset_resource'
+  - ! '        & dataset_id .~ "foo"'
+  - ! '        & friendly_name .~ "test"'
+  - ! '        & description .~ "This is a test description"'
+  - ! '        & location .~ "EU"'
+  - ! '        & default_table_expiration_ms .~ 3600000'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    bigquery_table_resource'
+  - ! '        & dataset_id .~ compute default @"dataset_id"'
+  - ! '        & table_id .~ "bar"'
+  - ! '        & schema .~ file("schema.json")'

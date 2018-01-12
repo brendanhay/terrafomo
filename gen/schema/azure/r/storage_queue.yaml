@@ -14,3 +14,11 @@ attributes:
   id:
     help: ! '- The storage queue ID. Coincides with the given @name@ .'
     type: Text
+about: Creates a new storage queue within a given storage service on Azure.
+examples:
+- name: null
+  code:
+  - stor-queue <- resource "stor-queue" $
+  - ! '    storage_queue_resource'
+  - ! '        & name .~ "terraform-storage-queue"'
+  - ! '        & storage_service_name .~ "tfstorserv"'

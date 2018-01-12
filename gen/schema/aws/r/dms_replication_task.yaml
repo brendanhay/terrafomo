@@ -47,3 +47,6 @@ attributes:
   replication_task_arn:
     help: ! '- The Amazon Resource Name (ARN) for the replication task.'
     type: Text
+about: Provides a DMS (Data Migration Service) replication task resource. DMS replication
+  tasks can be created, updated, deleted, and imported.
+examples: []

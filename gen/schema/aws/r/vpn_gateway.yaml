@@ -16,3 +16,10 @@ attributes:
   id:
     help: ! '- The ID of the VPN Gateway.'
     type: Text
+about: Provides a resource to create a VPC VPN Gateway.
+examples:
+- name: null
+  code:
+  - vpn_gw <- resource "vpn_gw" $
+  - ! '    vpn_gateway_resource'
+  - ! '        & vpc_id .~ compute main @"id"'

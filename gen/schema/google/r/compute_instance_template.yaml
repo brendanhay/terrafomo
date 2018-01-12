@@ -1,22 +1,7 @@
 _name: google_compute_instance_template
-arguments:
-  disk:
-    required: true
-    help: (Required) Disks to attach to instances created from this template. This
-      can be specified multiple times for multiple disks. Structure is documented
-      below.
-    type: Text
-  machine_type:
-    required: true
-    help: (Required) The machine type to create.
-    type: Text
-attributes:
-  self_link:
-    help: ! '- The URI of the created resource.'
-    type: Text
-  tags_fingerprint:
-    help: ! '- The unique fingerprint of the tags.'
-    type: Text
-  metadata_fingerprint:
-    help: ! '- The unique fingerprint of the metadata.'
-    type: Text
+arguments: {}
+attributes: {}
+about: Manages a VM instance template resource within GCE. For more information see
+  <https://cloud.google.com/compute/docs/instance-templates> and <https://cloud.google.com/compute/docs/reference/latest/instanceTemplates>
+  .
+examples: []

@@ -27,3 +27,11 @@ attributes:
   clone_url_http:
     help: ! '- The URL to use for cloning the repository over HTTPS.'
     type: Text
+about: Provides a CodeCommit Repository Resource.
+examples:
+- name: null
+  code:
+  - test <- resource "test" $
+  - ! '    codecommit_repository_resource'
+  - ! '        & repository_name .~ "MyTestRepository"'
+  - ! '        & description .~ "This is the Sample App Repository"'

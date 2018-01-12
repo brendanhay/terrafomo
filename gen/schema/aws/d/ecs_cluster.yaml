@@ -20,3 +20,11 @@ attributes:
   registered_container_instances_count:
     help: ! '- The number of registered container instances for the ECS Cluster'
     type: Text
+about: The ECS Cluster data source allows access to details of a specific cluster
+  within an AWS ECS service.
+examples:
+- name: null
+  code:
+  - ecs-mongo <- datasource "ecs-mongo" $
+  - ! '    ecs_cluster_datasource'
+  - ! '        & cluster_name .~ "ecs-mongo-production"'

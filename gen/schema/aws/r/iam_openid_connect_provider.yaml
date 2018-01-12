@@ -20,3 +20,12 @@ attributes:
   arn:
     help: ! '- The ARN assigned by AWS for this provider.'
     type: Text
+about: Provides an IAM OpenID Connect provider.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    iam_openid_connect_provider_resource'
+  - ! '        & url .~ "https://accounts.google.com"'
+  - ! '        & client_id_list .~ ["266362248691-342342xasdasdasda-apps.googleusercontent.com"]'
+  - ! '        & thumbprint_list .~ []'

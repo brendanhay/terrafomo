@@ -14,3 +14,15 @@ arguments:
       date in furthest in the future.'
     type: Text
 attributes: {}
+about: Use this data source to lookup information about IAM Server Certificates.
+examples:
+- name: null
+  code:
+  - my-domain <- datasource "my-domain" $
+  - ! '    iam_server_certificate_datasource'
+  - ! '        & name_prefix .~ "my-domain.org"'
+  - ! '        & latest .~ True'
+  - ! ' '
+  - elb <- resource "elb" $
+  - ! '    elb_resource'
+  - ! '        & name .~ "my-domain-elb"'

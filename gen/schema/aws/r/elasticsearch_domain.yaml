@@ -55,3 +55,5 @@ attributes:
     help: ! '- Domain-specific endpoint used to submit index, search, and data upload
       requests.'
     type: Text
+about: null
+examples: []

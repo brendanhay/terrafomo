@@ -31,3 +31,11 @@ attributes:
   subnet_id:
     help: ! '- The Subnet ID of the subnet in which the NAT gateway is placed.'
     type: Text
+about: Provides a resource to create a VPC NAT Gateway.
+examples:
+- name: null
+  code:
+  - gw <- resource "gw" $
+  - ! '    nat_gateway_resource'
+  - ! '        & allocation_id .~ compute nat @"id"'
+  - ! '        & subnet_id .~ compute public @"id"'

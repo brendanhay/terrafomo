@@ -13,7 +13,7 @@ import CMark (Node, NodeType (..))
 
 import Data.Bifunctor     (first)
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (fromMaybe)
+import Data.Maybe         (catMaybes, fromMaybe)
 import Data.Semigroup     ((<>))
 import Data.Text          (Text)
 import Data.Void          (Void)
@@ -21,8 +21,10 @@ import Data.Void          (Void)
 import Control.Applicative (many, some, (<|>))
 import Control.Monad       (unless, void)
 
+import Terraform.Gen.Example
 import Terraform.Gen.Markdown
 import Terraform.Gen.Schema
+import Terraform.Gen.Text
 
 import Text.Megaparsec  ((<?>))
 import Text.Show.Pretty (ppShow)
@@ -34,6 +36,8 @@ import qualified Data.Map.Strict as Map
 import qualified Data.Set        as Set
 import qualified Data.Text       as Text
 import qualified Text.Megaparsec as P
+
+import Debug.Trace
 
 -- Markdown Parsing
 
@@ -59,12 +63,8 @@ instance P.Stream [Node] where
     chunkLength   _ = List.length
 
     advance1 _ _tab pos = \case
-        Position {} ->
-            pos { P.sourceColumn = P.sourceColumn pos <> P.mkPos 1 }
-            -- pos { P.sourceLine   = P.mkPos (max 1 (CMark.endLine   p))
-            --     , P.sourceColumn = P.mkPos (max 1 (CMark.endColumn p))
-            --     }
-        _          -> pos
+        Position {} -> pos { P.sourceColumn = P.sourceColumn pos <> P.mkPos 1 }
+        _           -> pos
 
     advanceN p tab = Fold.foldl' (P.advance1 p tab)
 
@@ -87,19 +87,51 @@ schemaParser = do
     -- resource/datasource name
     schema_Name <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
 
+    -- about/documentation
+    schemaAbout <- P.optional (paragraph >>> textual)
+
+    -- skip any non-headers
+    void $ P.skipManyTill node (P.lookAhead heading)
+
+    -- example usage
+    schemaExamples' <-
+        P.try ( do usageHeader
+                   fmap catMaybes (P.some exampleItem)
+              ) <|> pure []
+
+    -- full example
+    schemaExamples <- fmap (mappend schemaExamples') $
+        P.try ( do exampleHeader
+                   fmap catMaybes (P.some exampleItem)
+              ) <|> pure []
+
+    -- skip any non-headers
+    void $ P.skipManyTill node (P.lookAhead heading)
+
     -- argument name/help/required
     (Map.fromList -> schemaArguments) <-
-        P.try (do P.skipManyTill node (P.try argHeader)
-                  P.skipManyTill node list >>> many argItem)
-           <|> pure mempty
+        P.try ( do argHeader
+                   P.skipManyTill node list >>> many argItem
+              ) <|> pure mempty
+
+    -- skip any non-headers
+    P.skipManyTill node (P.lookAhead (void heading <|> P.eof))
 
     -- attribute name/help
     (Map.fromList -> schemaAttributes) <-
-        P.try (do P.skipManyTill node (P.try attrHeader)
-                  P.skipManyTill node list >>> many attrItem)
-           <|> pure mempty
+        P.try ( do attrHeader
+                   P.skipManyTill node list >>> many attrItem
+              ) <|> pure mempty
 
     pure Schema{..}
+
+usageHeader :: Parser ()
+usageHeader =
+    h2 >>> void (string "Example Usage") <?> "Example Usage"
+
+exampleHeader :: Parser ()
+exampleHeader =
+    h2 >>> void (string "Full Example") <?> "Full Example"
 
 argHeader :: Parser ()
 argHeader =
@@ -110,6 +142,14 @@ attrHeader =
     h2 >>> void ( P.try (string "Attributes Reference")
               <|> string "Attribute Reference"
                 ) <?> "Attribute(s) Reference"
+
+exampleItem :: Parser (Maybe Example)
+exampleItem = do
+   name <- P.try (P.optional (h3 >>> text))
+   hcl  <- codeblock
+   case renderHCL hcl of
+       Left  _ -> pure Nothing
+       Right x -> pure $! Just (Example name x)
 
 argItem :: Parser (Text, Arg)
 argItem = item >>> paragraph >>> argument
@@ -150,9 +190,13 @@ unreserved x
 
 -- Markdown Syntax Parsers
 
-h1, h2 :: Parser Node
+h1, h2, h3 :: Parser Node
 h1 = match (HEADING 1) <?> "h1"
 h2 = match (HEADING 2) <?> "h2"
+h3 = match (HEADING 3) <?> "h3"
+
+heading :: Parser Node
+heading = satisfy (\case; Heading _ -> True; _ -> False) <?> "heading"
 
 string :: Text -> Parser Text
 string s = do
@@ -257,8 +301,3 @@ parse' p n = P.runParser' p . initial . filter valid
         , P.stateTokensProcessed = 0
         , P.stateTabWidth        = P.defaultTabWidth
         }
-
--- Text utilities
-
-surround :: Char -> Char -> Text -> Text
-surround start end x = Text.cons start x `Text.snoc` end

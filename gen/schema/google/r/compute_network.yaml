@@ -15,3 +15,12 @@ attributes:
   name:
     help: ! '- The unique name of the network.'
     type: Text
+about: Manages a network within GCE. For more information see <https://cloud.google.com/compute/docs/vpc>
+  and <https://cloud.google.com/compute/docs/reference/latest/networks> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_network_resource'
+  - ! '        & name .~ "foobar"'
+  - ! '        & auto_create_subnetworks .~ "true"'

@@ -20,3 +20,10 @@ attributes:
   description:
     help: ! '- Description of this network.'
     type: Text
+about: Get a network within GCE from its name.
+examples:
+- name: null
+  code:
+  - my-network <- datasource "my-network" $
+  - ! '    compute_network_datasource'
+  - ! '        & name .~ "default-us-east1"'

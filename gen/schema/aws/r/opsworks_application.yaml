@@ -82,3 +82,5 @@ attributes:
   id:
     help: ! '- The id of the application.'
     type: Text
+about: Provides an OpsWorks application resource.
+examples: []

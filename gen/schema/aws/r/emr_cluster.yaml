@@ -96,54 +96,23 @@ arguments:
       block for at least the @MASTER@ instance group type (as well as any additional
       instance groups). Defined below
     type: Text
-attributes:
-  ec2_attributes:
-    help: ! '- Provides information about the EC2 instances in a cluster grouped by
-      category: key name, subnet ID, IAM instance profile, and so on.'
-    type: Text
-  master_public_dns:
-    help: ! '- The public DNS name of the master EC2 instance.'
-    type: Text
-  release_label:
-    help: ! '- The release label for the Amazon EMR release.'
-    type: Text
-  configurations:
-    help: ! '- The list of Configurations supplied to the EMR cluster.'
-    type: Text
-  service_role:
-    help: ! '- The IAM role that will be assumed by the Amazon EMR service to access
-      AWS resources on your behalf.'
-    type: Text
-  visible_to_all_users:
-    help: ! '- Indicates whether the job flow is visible to all IAM users of the AWS
-      account associated with the job flow.'
-    type: Text
-  core_instance_count:
-    help: The number of slave nodes, i.e. EC2 instance nodes.
-    type: Text
-  name:
-    help: ! '- The name of the cluster.'
-    type: Text
-  core_instance_type:
-    help: ! '- The EC2 instance type of the slave nodes.'
-    type: Text
-  id:
-    help: ! '- The ID of the EMR Cluster'
-    type: Text
-  log_uri:
-    help: ! '- The path to the Amazon S3 location where logs for this cluster are
-      stored.'
-    type: Text
-  master_instance_type:
-    help: ! '- The EC2 instance type of the master node.'
-    type: Text
-  bootstrap_action:
-    help: ! '- A list of bootstrap actions that will be run before Hadoop is started
-      on the cluster nodes.'
-    type: Text
-  applications:
-    help: ! '- The applications installed on this cluster.'
-    type: Text
-  tags:
-    help: ! '- The list of tags associated with a cluster.'
-    type: Text
+attributes: {}
+about: Provides an Elastic MapReduce Cluster, a web service that makes it easy to
+  process large amounts of data efficiently. See <https://aws.amazon.com/documentation/elastic-mapreduce/>
+  for more information.
+examples:
+- name: null
+  code:
+  - emr-test-cluster <- resource "emr-test-cluster" $
+  - ! '    emr_cluster_resource'
+  - ! '        & name .~ "emr-test-arn"'
+  - ! '        & release_label .~ "emr-4.6.0"'
+  - ! '        & applications .~ ["Spark"]'
+  - ! '        & termination_protection .~ False'
+  - ! '        & keep_job_flow_alive_when_no_steps .~ True'
+  - ! '        & ebs_root_volume_size .~ 100'
+  - ! '        & master_instance_type .~ "m3.xlarge"'
+  - ! '        & core_instance_type .~ "m3.xlarge"'
+  - ! '        & core_instance_count .~ 1'
+  - ! '        & configurations .~ "test-fixtures/emr_configurations.json"'
+  - ! '        & service_role .~ compute iam_emr_service_role @"arn"'

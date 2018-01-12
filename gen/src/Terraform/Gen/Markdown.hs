@@ -46,3 +46,6 @@ pattern CodeBlock x <- CMark.Node _ (CODE_BLOCK _ x) _
 
 pattern Code :: Text -> Node
 pattern Code x <- CMark.Node _ (CODE x) _
+
+pattern Heading :: Int -> Node
+pattern Heading n <- CMark.Node _ (HEADING n) _

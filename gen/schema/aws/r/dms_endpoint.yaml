@@ -70,3 +70,6 @@ attributes:
   endpoint_arn:
     help: ! '- The Amazon Resource Name (ARN) for the endpoint.'
     type: Text
+about: Provides a DMS (Data Migration Service) endpoint resource. DMS endpoints can
+  be created, updated, deleted, and imported.
+examples: []

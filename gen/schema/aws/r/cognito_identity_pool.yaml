@@ -33,7 +33,6 @@ arguments:
     help: (Required) - Whether the identity pool supports unauthenticated logins or
       not.
     type: Text
-attributes:
-  id:
-    help: ! '- An identity pool ID in the format REGION:GUID.'
-    type: Text
+attributes: {}
+about: Provides an AWS Cognito Identity Pool.
+examples: []

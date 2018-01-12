@@ -90,3 +90,44 @@ attributes:
   version_id:
     help: ! '- A unique version ID value for the object, if bucket versioning is enabled.'
     type: Text
+about: Provides a S3 bucket object resource.
+examples:
+- name: Uploading a file to a bucket
+  code:
+  - object <- resource "object" $
+  - ! '    s3_bucket_object_resource'
+  - ! '        & bucket .~ "your_bucket_name"'
+  - ! '        & key .~ "new_object_key"'
+  - ! '        & source .~ "path/to/file"'
+  - ! '        & etag .~ md5(file("path/to/file"))'
+- name: Encrypting with KMS Key
+  code:
+  - examplekms <- resource "examplekms" $
+  - ! '    kms_key_resource'
+  - ! '        & description .~ "KMS key 1"'
+  - ! '        & deletion_window_in_days .~ 7'
+  - ! ' '
+  - examplebucket <- resource "examplebucket" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "examplebuckettftest"'
+  - ! '        & acl .~ "private"'
+  - ! ' '
+  - examplebucket_object <- resource "examplebucket_object" $
+  - ! '    s3_bucket_object_resource'
+  - ! '        & key .~ "someobject"'
+  - ! '        & bucket .~ compute examplebucket @"bucket"'
+  - ! '        & source .~ "index.html"'
+  - ! '        & kms_key_id .~ compute examplekms @"arn"'
+- name: Server Side Encryption with S3 Default Master Key
+  code:
+  - examplebucket <- resource "examplebucket" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "examplebuckettftest"'
+  - ! '        & acl .~ "private"'
+  - ! ' '
+  - examplebucket_object <- resource "examplebucket_object" $
+  - ! '    s3_bucket_object_resource'
+  - ! '        & key .~ "someobject"'
+  - ! '        & bucket .~ compute examplebucket @"bucket"'
+  - ! '        & source .~ "index.html"'
+  - ! '        & server_side_encryption .~ "aws:kms"'

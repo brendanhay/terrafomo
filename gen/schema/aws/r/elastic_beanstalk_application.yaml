@@ -5,7 +5,17 @@ arguments:
     help: (Required) The name of the application, must be unique within your account
     type: Text
   description:
-    required: true
+    required: false
     help: (Optional) Short description of the application
     type: Text
 attributes: {}
+about: Provides an Elastic Beanstalk Application Resource. Elastic Beanstalk allows
+  you to deploy and manage applications in the AWS cloud without worrying about the
+  infrastructure that runs those applications.
+examples:
+- name: null
+  code:
+  - tftest <- resource "tftest" $
+  - ! '    elastic_beanstalk_application_resource'
+  - ! '        & name .~ "tf-test-name"'
+  - ! '        & description .~ "tf-test-desc"'

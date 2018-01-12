@@ -83,3 +83,6 @@ attributes:
   tags:
     help: ! '- A mapping of tags assigned to the object.'
     type: Text
+about: The S3 object data source allows access to the metadata and (see below) content
+  of an object stored inside S3 bucket.
+examples: []

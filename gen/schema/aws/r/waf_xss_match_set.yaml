@@ -9,7 +9,11 @@ arguments:
     help: (Optional) The parts of web requests that you want to inspect for cross-site
       scripting attacks.
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the WAF XssMatchSet.'
-    type: Text
+attributes: {}
+about: Provides a WAF XSS Match Set Resource
+examples:
+- name: null
+  code:
+  - xss_match_set <- resource "xss_match_set" $
+  - ! '    waf_xss_match_set_resource'
+  - ! '        & name .~ "xss_match_set"'

@@ -9,3 +9,5 @@ arguments:
     help: (Required) - The ARN of the policy you want to apply
     type: Text
 attributes: {}
+about: Attaches a Managed IAM Policy to an IAM role
+examples: []

@@ -22,3 +22,16 @@ attributes:
   id:
     help: ! '- The name of the metric filter.'
     type: Text
+about: Provides a CloudWatch Log Metric Filter resource.
+examples:
+- name: null
+  code:
+  - yada <- resource "yada" $
+  - ! '    cloudwatch_log_metric_filter_resource'
+  - ! '        & name .~ "MyAppAccessCount"'
+  - ! '        & pattern .~'
+  - ! '        & log_group_name .~ compute dada @"name"'
+  - ! ' '
+  - dada <- resource "dada" $
+  - ! '    cloudwatch_log_group_resource'
+  - ! '        & name .~ "MyApp/access.log"'

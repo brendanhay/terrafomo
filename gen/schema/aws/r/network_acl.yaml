@@ -29,3 +29,12 @@ attributes:
   id:
     help: ! '- The ID of the network ACL'
     type: Text
+about: Provides an network ACL resource. You might set up network ACLs with rules
+  similar to your security groups in order to add an additional layer of security
+  to your VPC.
+examples:
+- name: null
+  code:
+  - main <- resource "main" $
+  - ! '    network_acl_resource'
+  - ! '        & vpc_id .~ compute main @"id"'

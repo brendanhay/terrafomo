@@ -9,7 +9,11 @@ arguments:
     help: (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address
       range (in CIDR format) that web requests originate from.
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the WAF IPSet.'
-    type: Text
+attributes: {}
+about: Provides a WAF IPSet Resource
+examples:
+- name: null
+  code:
+  - ipset <- resource "ipset" $
+  - ! '    waf_ipset_resource'
+  - ! '        & name .~ "tfIPSet"'

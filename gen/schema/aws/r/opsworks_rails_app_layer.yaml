@@ -94,3 +94,10 @@ attributes:
   id:
     help: ! '- The id of the layer.'
     type: Text
+about: Provides an OpsWorks Ruby on Rails application layer resource.
+examples:
+- name: null
+  code:
+  - app <- resource "app" $
+  - ! '    opsworks_rails_app_layer_resource'
+  - ! '        & stack_id .~ compute main @"id"'

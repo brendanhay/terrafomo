@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections     #-}
+{-# LANGUAGE ViewPatterns      #-}
 
 module Terraform.Gen.Template where
 
@@ -9,6 +10,7 @@ import Data.Text       (Text)
 
 import Terraform.Gen.Provider
 import Terraform.Gen.Schema
+import Terraform.Gen.Text
 
 import qualified Data.Char       as Char
 import qualified Data.Foldable   as Fold
@@ -26,7 +28,7 @@ renderContents
 renderContents tmpl typ ns xs =
     EDE.eitherRender tmpl $
         EDE.fromPairs
-            [ "contents"  .= fmap (map (dataTypeName typ)) xs
+            [ "contents"  .= fmap (map (getDataTypeName typ)) xs
             , "namespace" .= ns
             ]
 
@@ -41,31 +43,16 @@ renderSchemas tmpl p typ = Map.traverseWithKey go
     go ns xs =
         EDE.eitherRender tmpl $
             EDE.fromPairs
-                [ "schemas"   .= createMap (dataTypeName typ) xs
+                [ "schemas"   .= createMap (getDataTypeName typ) xs
                 , "namespace" .= ns
                 , "provider"  .= providerName p
                 ]
 
-dataTypeName :: SchemaType -> Schema -> Text
-dataTypeName typ = go
-  where
-    go = flip mappend suffix
-       . Text.intercalate "_"
-       . map upperHead
-       . tail
-       . Text.split (== '_')
-       . schema_Name
-
-    suffix =
-        case typ of
-            Resource   -> "_Resource"
-            DataSource -> "_DataSource"
-
-upperHead :: Text -> Text
-upperHead x =
-    case Text.uncons x of
-        Nothing      -> x
-        Just (y, ys) -> Char.toUpper y `Text.cons` ys
+getDataTypeName :: SchemaType -> Schema -> Text
+getDataTypeName typ (schema_Name -> x) =
+    case typ of
+        Resource   -> resourceName   x
+        DataSource -> dataSourceName x
 
 createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
 createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]

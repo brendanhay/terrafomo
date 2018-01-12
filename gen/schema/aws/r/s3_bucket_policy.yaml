@@ -9,3 +9,5 @@ arguments:
     help: (Required) The text of the policy.
     type: Text
 attributes: {}
+about: Attaches a policy to an S3 bucket resource.
+examples: []

@@ -31,3 +31,10 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the log group.'
     type: Text
+about: Provides a CloudWatch Log Group resource.
+examples:
+- name: null
+  code:
+  - yada <- resource "yada" $
+  - ! '    cloudwatch_log_group_resource'
+  - ! '        & name .~ "Yada"'

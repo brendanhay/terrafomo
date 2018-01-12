@@ -9,3 +9,14 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: Manages a Forwarding Rule within GCE. This binds an ip and port range to a
+  target pool. For more information see <https://cloud.google.com/compute/docs/load-balancing/network/forwarding-rules>
+  and <https://cloud.google.com/compute/docs/reference/latest/forwardingRules> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_forwarding_rule_resource'
+  - ! '        & name .~ "website-forwarding-rule"'
+  - ! '        & target .~ compute default @"self_link"'
+  - ! '        & port_range .~ "80"'

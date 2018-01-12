@@ -13,3 +13,20 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: A Backend Bucket defines a Google Cloud Storage bucket that will serve traffic
+  through Google Cloud Load Balancer. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/backend-bucket>
+  and <https://cloud.google.com/compute/docs/reference/latest/backendBuckets> .
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    compute_backend_bucket_resource'
+  - ! '        & name .~ "image-backend-bucket"'
+  - ! '        & description .~ "Contains beautiful images"'
+  - ! '        & bucket_name .~ compute image_bucket @"name"'
+  - ! '        & enable_cdn .~ True'
+  - ! ' '
+  - image_bucket <- resource "image_bucket" $
+  - ! '    storage_bucket_resource'
+  - ! '        & name .~ "image-store-bucket"'
+  - ! '        & location .~ "EU"'

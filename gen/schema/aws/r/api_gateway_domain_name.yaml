@@ -47,3 +47,5 @@ attributes:
     help: ! '- For convenience, the hosted zone id ( @Z2FDTNDATAQYW2@ ) that can be
       used to create a Route53 alias record for the distribution.'
     type: Text
+about: Registers a custom domain name for use with AWS API Gateway.
+examples: []

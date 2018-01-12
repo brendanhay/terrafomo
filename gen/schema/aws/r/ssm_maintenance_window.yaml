@@ -27,3 +27,13 @@ attributes:
   id:
     help: ! '- The ID of the maintenance window.'
     type: Text
+about: Provides an SSM Maintenance Window resource
+examples:
+- name: null
+  code:
+  - production <- resource "production" $
+  - ! '    ssm_maintenance_window_resource'
+  - ! '        & name .~ "maintenance-window-application"'
+  - ! '        & schedule .~ "cron(0 16 ? * TUE *)"'
+  - ! '        & duration .~ 3'
+  - ! '        & cutoff .~ 1'

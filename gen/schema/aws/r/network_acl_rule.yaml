@@ -54,3 +54,21 @@ attributes:
   id:
     help: ! '- The ID of the network ACL Rule'
     type: Text
+about: Creates an entry (a rule) in a network ACL with the specified rule number.
+examples:
+- name: null
+  code:
+  - bar <- resource "bar" $
+  - ! '    network_acl_resource'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! ' '
+  - bar <- resource "bar" $
+  - ! '    network_acl_rule_resource'
+  - ! '        & network_acl_id .~ compute bar @"id"'
+  - ! '        & rule_number .~ 200'
+  - ! '        & egress .~ False'
+  - ! '        & protocol .~ "tcp"'
+  - ! '        & rule_action .~ "allow"'
+  - ! '        & cidr_block .~ "0.0.0.0/0"'
+  - ! '        & from_port .~ 22'
+  - ! '        & to_port .~ 22'

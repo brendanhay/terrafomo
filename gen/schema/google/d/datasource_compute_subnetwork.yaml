@@ -25,3 +25,11 @@ attributes:
   gateway_address:
     help: ! '- The IP address of the gateway.'
     type: Text
+about: Get a subnetwork within GCE from its name and region.
+examples:
+- name: null
+  code:
+  - my-subnetwork <- datasource "my-subnetwork" $
+  - ! '    compute_subnetwork_datasource'
+  - ! '        & name .~ "default-us-east1"'
+  - ! '        & region .~ "us-east1"'

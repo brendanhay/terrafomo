@@ -137,3 +137,6 @@ attributes:
   description:
     help: ! '- The description for the associated hosted service.'
     type: Text
+about: Creates a hosted service, role and deployment and then creates a virtual machine
+  in the deployment based on the specified configuration.
+examples: []

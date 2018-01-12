@@ -32,3 +32,28 @@ attributes:
     help: ! '- The bucket domain name. Will be of format @bucketname.s3.amazonaws.com@
       .'
     type: Text
+about: Provides details about a specific S3 bucket.
+examples:
+- name: Route53 Record
+  code:
+  - selected <- datasource "selected" $
+  - ! '    s3_bucket_datasource'
+  - ! '        & bucket .~ "bucket.test.com"'
+  - ! ' '
+  - test_zone <- datasource "test_zone" $
+  - ! '    route53_zone_datasource'
+  - ! '        & name .~ "test.com."'
+  - ! ' '
+  - example <- resource "example" $
+  - ! '    route53_record_resource'
+  - ! '        & zone_id .~ data.aws_route53_zone.test_zone.id'
+  - ! '        & name .~ "bucket"'
+  - ! '        & type .~ "A"'
+- name: CloudFront Origin
+  code:
+  - selected <- datasource "selected" $
+  - ! '    s3_bucket_datasource'
+  - ! '        & bucket .~ "a-test-bucket"'
+  - ! ' '
+  - test <- resource "test" $
+  - ! '    cloudfront_distribution_resource'

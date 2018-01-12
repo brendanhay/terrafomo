@@ -18,3 +18,5 @@ arguments:
       (documented below).
     type: Text
 attributes: {}
+about: Provides a S3 bucket notification resource.
+examples: []

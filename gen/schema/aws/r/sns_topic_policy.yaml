@@ -9,3 +9,5 @@ arguments:
     help: (Required) The fully-formed AWS policy as JSON
     type: Text
 attributes: {}
+about: Provides an SNS topic policy resource
+examples: []

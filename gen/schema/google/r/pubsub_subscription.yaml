@@ -14,3 +14,14 @@ attributes:
   path:
     help: ! '- Path of the subscription in the format @projects/{project}/subscriptions/{sub}@'
     type: Text
+about: Creates a subscription in Google's pubsub queueing system. For more information
+  see <https://cloud.google.com/pubsub/docs> and <https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions>
+  .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    pubsub_subscription_resource'
+  - ! '        & name .~ "default-subscription"'
+  - ! '        & topic .~ "default-topic"'
+  - ! '        & ack_deadline_seconds .~ 20'

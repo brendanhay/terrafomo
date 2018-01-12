@@ -12,3 +12,20 @@ attributes:
   id:
     help: ! '- A combination of " @snapshot_id@ - @account_id@ ".'
     type: Text
+about: Adds permission to create volumes off of a given EBS Snapshot.
+examples:
+- name: null
+  code:
+  - example_perm <- resource "example_perm" $
+  - ! '    snapshot_create_volume_permission_resource'
+  - ! '        & snapshot_id .~ compute example_snapshot @"id"'
+  - ! '        & account_id .~ "12345678"'
+  - ! ' '
+  - example <- resource "example" $
+  - ! '    ebs_volume_resource'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & size .~ 40'
+  - ! ' '
+  - example_snapshot <- resource "example_snapshot" $
+  - ! '    ebs_snapshot_resource'
+  - ! '        & volume_id .~ compute example @"id"'

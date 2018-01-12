@@ -22,3 +22,5 @@ attributes:
   load_balancer_name:
     help: ! '- The load balancer on which the policy is defined.'
     type: Text
+about: Attaches a load balancer policy to an ELB backend server.
+examples: []

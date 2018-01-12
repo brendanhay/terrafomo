@@ -21,3 +21,10 @@ attributes:
   self_link:
     help: ! '- The URL of the created resource.'
     type: Text
+about: A Compute Engine Regional Autoscaler automatically adds or removes virtual
+  machines from a managed instance group based on increases or decreases in load.
+  This allows your applications to gracefully handle increases in traffic and reduces
+  cost when the need for resources is lower. You just define the autoscaling policy
+  and the autoscaler performs automatic scaling based on the measured load. For more
+  information, see <https://cloud.google.com/compute/docs/autoscaler/> and <https://cloud.google.com/compute/docs/reference/latest/regionAutoscalers>
+examples: []

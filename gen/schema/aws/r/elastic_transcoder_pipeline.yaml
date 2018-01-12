@@ -52,3 +52,5 @@ arguments:
       below)
     type: Text
 attributes: {}
+about: Provides an Elastic Transcoder pipeline resource.
+examples: []

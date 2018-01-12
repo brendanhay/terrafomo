@@ -30,3 +30,21 @@ attributes:
     help: ! '- The ID of the network interface that Amazon EFS created when it created
       the mount target.'
     type: Text
+about: Provides an Elastic File System (EFS) mount target.
+examples:
+- name: null
+  code:
+  - alpha <- resource "alpha" $
+  - ! '    efs_mount_target_resource'
+  - ! '        & file_system_id .~ compute foo @"id"'
+  - ! '        & subnet_id .~ compute alpha @"id"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.0.0.0/16"'
+  - ! ' '
+  - alpha <- resource "alpha" $
+  - ! '    subnet_resource'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & cidr_block .~ "10.0.1.0/24"'

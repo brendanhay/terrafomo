@@ -30,3 +30,5 @@ attributes:
   unique_id:
     help: ! '- The stable and unique string identifying the role.'
     type: Text
+about: Provides an IAM role.
+examples: []

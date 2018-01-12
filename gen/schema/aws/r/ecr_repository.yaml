@@ -17,3 +17,10 @@ attributes:
   repository_url:
     help: ! '- The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@'
     type: Text
+about: Provides an EC2 Container Registry Repository.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    ecr_repository_resource'
+  - ! '        & name .~ "bar"'

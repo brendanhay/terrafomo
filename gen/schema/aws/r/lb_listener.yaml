@@ -34,3 +34,5 @@ attributes:
   id:
     help: ! '- The ARN of the listener (matches @arn@ )'
     type: Text
+about: Provides a Load Balancer Listener resource.
+examples: []

@@ -44,3 +44,5 @@ arguments:
       hook. This ARN target can be either an SQS queue or an SNS topic.
     type: Text
 attributes: {}
+about: Provides an AutoScaling Lifecycle Hook resource.
+examples: []

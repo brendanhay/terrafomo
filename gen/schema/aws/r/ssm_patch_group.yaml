@@ -13,3 +13,16 @@ attributes:
   id:
     help: ! '- The ID of the patch baseline.'
     type: Text
+about: Provides an SSM Patch Group resource
+examples:
+- name: null
+  code:
+  - production <- resource "production" $
+  - ! '    ssm_patch_baseline_resource'
+  - ! '        & name .~ "patch-baseline"'
+  - ! '        & approved_patches .~ ["KB123456"]'
+  - ! ' '
+  - patchgroup <- resource "patchgroup" $
+  - ! '    ssm_patch_group_resource'
+  - ! '        & baseline_id .~ compute production @"id"'
+  - ! '        & patch_group .~ "patch-group-name"'

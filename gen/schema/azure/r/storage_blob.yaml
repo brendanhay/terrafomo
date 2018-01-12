@@ -30,3 +30,14 @@ attributes:
   id:
     help: ! '- The storage blob ID. Coincides with the given @name@ .'
     type: Text
+about: Creates a new storage blob within a given storage container on Azure.
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    storage_blob_resource'
+  - ! '        & name .~ "tftesting-blob"'
+  - ! '        & storage_service_name .~ "tfstorserv"'
+  - ! '        & storage_container_name .~ "terraform-storage-container"'
+  - ! '        & type .~ "PageBlob"'
+  - ! '        & size .~ 1024'

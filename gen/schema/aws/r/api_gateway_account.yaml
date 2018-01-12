@@ -11,3 +11,6 @@ attributes:
   throttle_settings:
     help: ! '- Account-Level throttle settings. See exported fields below.'
     type: Text
+about: Provides a settings of an API Gateway Account. Settings is applied region-wide
+  per @provider@ block.
+examples: []

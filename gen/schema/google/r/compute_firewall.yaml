@@ -19,3 +19,13 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: Manages a firewall resource within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/firewalls>
+  and <https://cloud.google.com/compute/docs/reference/latest/firewalls> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_firewall_resource'
+  - ! '        & name .~ "test-firewall"'
+  - ! '        & network .~ compute other @"name"'
+  - ! '        & source_tags .~ ["web"]'

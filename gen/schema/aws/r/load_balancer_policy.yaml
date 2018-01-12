@@ -29,3 +29,6 @@ attributes:
   policy_name:
     help: ! '- The name of the stickiness policy.'
     type: Text
+about: Provides a load balancer policy, which can be attached to an ELB listener or
+  backend server.
+examples: []

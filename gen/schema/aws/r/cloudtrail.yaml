@@ -68,3 +68,5 @@ attributes:
   home_region:
     help: ! '- The region in which the trail was created.'
     type: Text
+about: Provides a CloudTrail resource.
+examples: []

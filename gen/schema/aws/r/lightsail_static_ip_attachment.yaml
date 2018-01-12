@@ -18,3 +18,24 @@ attributes:
   ip_address:
     help: ! '- The allocated static IP address'
     type: Text
+about: Provides a static IP address attachment - relationship between a Lightsail
+  static IP & Lightsail instance.
+examples:
+- name: null
+  code:
+  - test <- resource "test" $
+  - ! '    lightsail_static_ip_attachment_resource'
+  - ! '        & static_ip_name .~ compute test @"name"'
+  - ! '        & instance_name .~ compute test @"name"'
+  - ! ' '
+  - test <- resource "test" $
+  - ! '    lightsail_static_ip_resource'
+  - ! '        & name .~ "example"'
+  - ! ' '
+  - test <- resource "test" $
+  - ! '    lightsail_instance_resource'
+  - ! '        & name .~ "example"'
+  - ! '        & availability_zone .~ "us-east-1b"'
+  - ! '        & blueprint_id .~ "string"'
+  - ! '        & bundle_id .~ "string"'
+  - ! '        & key_pair_name .~ "some_key_name"'

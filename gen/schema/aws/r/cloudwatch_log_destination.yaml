@@ -18,3 +18,12 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the log destination.'
     type: Text
+about: Provides a CloudWatch Logs destination resource.
+examples:
+- name: null
+  code:
+  - test_destination <- resource "test_destination" $
+  - ! '    cloudwatch_log_destination_resource'
+  - ! '        & name .~ "test_destination"'
+  - ! '        & role_arn .~ compute iam_for_cloudwatch @"arn"'
+  - ! '        & target_arn .~ compute kinesis_for_cloudwatch @"arn"'

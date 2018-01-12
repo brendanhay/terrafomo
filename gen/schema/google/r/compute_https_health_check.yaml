@@ -9,3 +9,16 @@ attributes:
   self_link:
     help: ! '- The URL of the created resource.'
     type: Text
+about: Manages an HTTPS health check within GCE. This is used to monitor instances
+  behind load balancers. Timeouts or HTTPS errors cause the instance to be removed
+  from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks>
+  and <https://cloud.google.com/compute/docs/reference/latest/httpsHealthChecks> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_https_health_check_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & request_path .~ "/health_check"'
+  - ! '        & timeout_sec .~ 1'
+  - ! '        & check_interval_sec .~ 1'

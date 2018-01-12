@@ -37,7 +37,7 @@ import qualified Text.EDE               as EDE
 -- * Continue investigating having a Dhall frontend
 -- * Extract all the usage examples and write out tests
 --     - convert to DSL/Haskell and have as examples too
--- * Data source(s) support.
+--     - ! just write them out as doctests
 
 -- Options Parsing
 

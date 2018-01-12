@@ -12,3 +12,12 @@ attributes:
   address:
     help: ! '- The assigned address.'
     type: Text
+about: Creates a static IP address resource global to a Google Compute Engine project.
+  For more information see <https://cloud.google.com/compute/docs/instances-and-network>
+  and <https://cloud.google.com/compute/docs/reference/latest/globalAddresses> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_global_address_resource'
+  - ! '        & name .~ "global-appserver-ip"'

@@ -18,3 +18,13 @@ attributes:
   etag:
     help: ! '- (Computed) The etag of the project''s IAM policy.'
     type: Text
+about: Allows creation and management of a single binding within IAM policy for an
+  existing Google Cloud Platform project.
+examples:
+- name: null
+  code:
+  - project <- resource "project" $
+  - ! '    project_iam_binding_resource'
+  - ! '        & project .~ "your-project-id"'
+  - ! '        & role .~ "roles/editor"'
+  - ! '        & members .~ ["user:jane@example.com"]'

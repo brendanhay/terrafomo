@@ -14,3 +14,15 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the log stream.'
     type: Text
+about: Provides a CloudWatch Log Stream resource.
+examples:
+- name: null
+  code:
+  - yada <- resource "yada" $
+  - ! '    cloudwatch_log_group_resource'
+  - ! '        & name .~ "Yada"'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    cloudwatch_log_stream_resource'
+  - ! '        & name .~ "SampleLogStream1234"'
+  - ! '        & log_group_name .~ compute yada @"name"'

@@ -35,3 +35,19 @@ attributes:
   id:
     help: ! '- The ID of the API key'
     type: Text
+about: Provides an API Gateway API Key.
+examples:
+- name: null
+  code:
+  - mydemoapi <- resource "mydemoapi" $
+  - ! '    api_gateway_rest_api_resource'
+  - ! '        & name .~ "MyDemoAPI"'
+  - ! ' '
+  - mydemoapikey <- resource "mydemoapikey" $
+  - ! '    api_gateway_api_key_resource'
+  - ! '        & name .~ "demo"'
+  - ! ' '
+  - mydemodeployment <- resource "mydemodeployment" $
+  - ! '    api_gateway_deployment_resource'
+  - ! '        & rest_api_id .~ compute MyDemoAPI @"id"'
+  - ! '        & stage_name .~ "test"'

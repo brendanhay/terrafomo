@@ -1,3 +1,13 @@
 _name: aws_partition
 arguments: {}
 attributes: {}
+about: Use this data source to lookup current AWS partition in which Terraform is
+  working
+examples:
+- name: null
+  code:
+  - current <- datasource "current" $
+  - ! '    partition_datasource'
+  - ! ' '
+  - s3_policy <- datasource "s3_policy" $
+  - ! '    iam_policy_document_datasource'

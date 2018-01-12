@@ -15,3 +15,5 @@ attributes:
   repository:
     help: ! '- The name of the repository.'
     type: Text
+about: Provides an ECR repository policy.
+examples: []

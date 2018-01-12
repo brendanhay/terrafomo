@@ -9,7 +9,11 @@ arguments:
     required: true
     help: (Required) The name or description of the IPSet.
     type: Text
-attributes:
-  id:
-    help: ! '- The ID of the WAF IPSet.'
-    type: Text
+attributes: {}
+about: Provides a WAF Regional IPSet Resource for use with Application Load Balancer.
+examples:
+- name: null
+  code:
+  - ipset <- resource "ipset" $
+  - ! '    wafregional_ipset_resource'
+  - ! '        & name .~ "tfIPSet"'

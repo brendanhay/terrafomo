@@ -20,3 +20,16 @@ attributes:
   arn:
     help: ! '- The template assessment ARN.'
     type: Text
+about: Provides a Inspector assessment template
+examples:
+- name: null
+  code:
+  - foo <- resource "foo" $
+  - ! '    inspector_assessment_template_resource'
+  - ! '        & name .~ "bar template"'
+  - ! '        & target_arn .~ compute foo @"arn"'
+  - ! '        & duration .~ 3600'
+  - ! '        & rules_package_arns .~ ["arn:aws:inspector:us-west-2:758058086616:rulespackage/0-9hgA516p"'
+  - ! '                                ,"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-H5hpSawc"'
+  - ! '                                ,"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ"'
+  - ! '                                ,"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-vg5GGHSD"]'

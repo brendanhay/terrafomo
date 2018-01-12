@@ -34,14 +34,12 @@ arguments:
     required: true
     help: (Required) A unique name for your task definition.
     type: Text
-attributes:
-  arn:
-    help: ! '- Full ARN of the Task Definition (including both @family@ and @revision@
-      ).'
-    type: Text
-  family:
-    help: ! '- The family of the Task Definition.'
-    type: Text
-  revision:
-    help: ! '- The revision of the task in a particular family.'
-    type: Text
+attributes: {}
+about: Provides an ECS task definition to be used in @aws_ecs_service@ .
+examples:
+- name: null
+  code:
+  - service <- resource "service" $
+  - ! '    ecs_task_definition_resource'
+  - ! '        & family .~ "service"'
+  - ! '        & container_definitions .~ file("task-definitions/service.json")'

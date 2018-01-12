@@ -1,41 +1,5 @@
 _name: aws_subnet
-arguments:
-  state:
-    required: false
-    help: (Optional) The state that the desired subnet must have.
-    type: Text
-  vpc_id:
-    required: false
-    help: (Optional) The id of the VPC that the desired subnet belongs to.
-    type: Text
-  default_for_az:
-    required: false
-    help: (Optional) Boolean constraint for whether the desired subnet must be the
-      default subnet for its associated availability zone.
-    type: Text
-  ipv6_cidr_block:
-    required: false
-    help: (Optional) The Ipv6 cidr block of the desired subnet
-    type: Text
-  cidr_block:
-    required: false
-    help: (Optional) The cidr block of the desired subnet.
-    type: Text
-  id:
-    required: false
-    help: (Optional) The id of the specific subnet to retrieve.
-    type: Text
-  filter:
-    required: false
-    help: (Optional) Custom filter block as described below.
-    type: Text
-  availability_zone:
-    required: false
-    help: (Optional) The availability zone where the subnet must reside.
-    type: Text
-  tags:
-    required: false
-    help: (Optional) A mapping of tags, each pair of which must exactly match a pair
-      on the desired subnet.
-    type: Text
+arguments: {}
 attributes: {}
+about: ! '@aws_subnet@ provides details about a specific VPC subnet.'
+examples: []

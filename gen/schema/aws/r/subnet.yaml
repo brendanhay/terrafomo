@@ -50,3 +50,11 @@ attributes:
   availability_zone:
     help: ! '- The AZ for the subnet.'
     type: Text
+about: Provides an VPC subnet resource.
+examples:
+- name: null
+  code:
+  - main <- resource "main" $
+  - ! '    subnet_resource'
+  - ! '        & vpc_id .~ compute main @"id"'
+  - ! '        & cidr_block .~ "10.0.1.0/24"'

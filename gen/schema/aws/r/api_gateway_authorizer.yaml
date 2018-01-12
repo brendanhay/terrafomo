@@ -42,3 +42,5 @@ arguments:
       Role for API Gateway to assume, use the IAM Role ARN.
     type: Text
 attributes: {}
+about: Provides an API Gateway Authorizer.
+examples: []

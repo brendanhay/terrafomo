@@ -37,3 +37,17 @@ attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the Stream'
     type: Text
+about: Provides a Kinesis Firehose Delivery Stream resource. Amazon Kinesis Firehose
+  is a fully managed, elastic service to easily deliver real-time data streams to
+  destinations such as Amazon S3 and Amazon Redshift.
+examples:
+- name: Elasticsearch Destination
+  code:
+  - test_cluster <- resource "test_cluster" $
+  - ! '    elasticsearch_domain_resource'
+  - ! '        & domain_name .~ "firehose-es-test"'
+  - ! ' '
+  - test_stream <- resource "test_stream" $
+  - ! '    kinesis_firehose_delivery_stream_resource'
+  - ! '        & name .~ "terraform-kinesis-firehose-test-stream"'
+  - ! '        & destination .~ "elasticsearch"'

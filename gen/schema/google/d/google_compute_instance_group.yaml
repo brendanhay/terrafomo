@@ -27,3 +27,6 @@ attributes:
   description:
     help: ! '- Textual description of the instance group.'
     type: Text
+about: Get a Compute Instance Group within GCE. For more information, see <https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
+  and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
+examples: []

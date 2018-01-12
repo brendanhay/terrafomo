@@ -21,3 +21,6 @@ arguments:
     help: (Required) The id of the API to connect.
     type: Text
 attributes: {}
+about: Connects a custom domain name registered via @aws_api_gateway_domain_name@
+  with a deployed API so that its methods can be called via the custom domain name.
+examples: []

@@ -20,3 +20,5 @@ arguments:
       specified prefix. Conflicts with @name@ .
     type: Text
 attributes: {}
+about: Provides an IAM policy attached to a user.
+examples: []

@@ -69,3 +69,10 @@ attributes:
   id:
     help: ! '- The id of the layer.'
     type: Text
+about: Provides an OpsWorks PHP application layer resource.
+examples:
+- name: null
+  code:
+  - app <- resource "app" $
+  - ! '    opsworks_php_app_layer_resource'
+  - ! '        & stack_id .~ compute main @"id"'

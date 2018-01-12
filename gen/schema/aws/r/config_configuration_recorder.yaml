@@ -16,7 +16,7 @@ arguments:
     help: (Optional) The name of the recorder. Defaults to @default@ . Changing it
       recreates the resource.
     type: Text
-attributes:
-  id:
-    help: ! '- Name of the recorder'
-    type: Text
+attributes: {}
+about: Provides an AWS Config Configuration Recorder. Please note that this resource
+  the created recorder automatically.
+examples: []

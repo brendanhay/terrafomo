@@ -51,3 +51,22 @@ attributes:
   network_interface_id:
     help: ! '- As above'
     type: Text
+about: Provides an AWS EIP Association as a top level resource, to associate and disassociate
+  Elastic IPs from AWS Instances and Network Interfaces.
+examples:
+- name: null
+  code:
+  - eip_assoc <- resource "eip_assoc" $
+  - ! '    eip_association_resource'
+  - ! '        & instance_id .~ compute web @"id"'
+  - ! '        & allocation_id .~ compute example @"id"'
+  - ! ' '
+  - web <- resource "web" $
+  - ! '    instance_resource'
+  - ! '        & ami .~ "ami-21f78e11"'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & instance_type .~ "t1.micro"'
+  - ! ' '
+  - example <- resource "example" $
+  - ! '    eip_resource'
+  - ! '        & vpc .~ True'

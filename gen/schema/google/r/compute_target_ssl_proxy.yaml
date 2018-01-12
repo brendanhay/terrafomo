@@ -22,3 +22,31 @@ attributes:
   proxy_id:
     help: ! '- A unique ID assigned by GCE.'
     type: Text
+about: Creates a target SSL proxy resource in GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/ssl-ssl/>
+  and <https://cloud.google.com/compute/docs/reference/latest/targetSslProxies> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_target_ssl_proxy_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & backend_service .~ compute default @"self_link"'
+  - ! '        & ssl_certificates .~ [compute default @"self_link"]'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_ssl_certificate_resource'
+  - ! '        & name .~ "default-cert"'
+  - ! '        & private_key .~ file("path/to/test.key")'
+  - ! '        & certificate .~ file("path/to/test.crt")'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_backend_service_resource'
+  - ! '        & name .~ "default-backend"'
+  - ! '        & protocol .~ "SSL"'
+  - ! '        & health_checks .~ [compute default @"self_link"]'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_health_check_resource'
+  - ! '        & name .~ "default-health-check"'
+  - ! '        & check_interval_sec .~ 1'
+  - ! '        & timeout_sec .~ 1'

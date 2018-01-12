@@ -66,3 +66,6 @@ attributes:
       hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
       that protects this resource.'
     type: Text
+about: Manages a VM instance resource within GCE. For more information see <https://cloud.google.com/compute/docs/instances>
+  and <https://cloud.google.com/compute/docs/reference/latest/instances> .
+examples: []

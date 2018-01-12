@@ -26,3 +26,5 @@ attributes:
   route_table_ids:
     help: ! '- One or more route tables associated with the VPC Endpoint.'
     type: Text
+about: The VPC Endpoint data source provides details about a specific VPC endpoint.
+examples: []

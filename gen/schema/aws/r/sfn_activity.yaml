@@ -14,3 +14,10 @@ attributes:
   id:
     help: ! '- The Amazon Resource Name (ARN) that identifies the created activity.'
     type: Text
+about: Provides a Step Function Activity resource
+examples:
+- name: null
+  code:
+  - sfn_activity <- resource "sfn_activity" $
+  - ! '    sfn_activity_resource'
+  - ! '        & name .~ "my-activity"'

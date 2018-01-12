@@ -9,3 +9,13 @@ arguments:
     help: (Optional) The unique name of the load balancer.
     type: Text
 attributes: {}
+about: ~>  @aws_alb@ is known as @aws_lb@ . The functionality is identical.
+examples:
+- name: null
+  code:
+  - ! ' '
+  - ! ' '
+  - test <- datasource "test" $
+  - ! '    lb_datasource'
+  - ! '        & arn .~ var.lb_arn'
+  - ! '        & name .~ var.lb_name'

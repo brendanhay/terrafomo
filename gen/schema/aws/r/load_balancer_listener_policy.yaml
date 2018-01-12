@@ -22,3 +22,5 @@ attributes:
   load_balancer_port:
     help: ! '- The load balancer listener port the policies are applied to'
     type: Text
+about: Attaches a load balancer policy to an ELB Listener.
+examples: []

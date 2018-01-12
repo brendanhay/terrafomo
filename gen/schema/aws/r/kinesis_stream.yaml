@@ -53,3 +53,15 @@ attributes:
   id:
     help: ! '- The unique Stream id'
     type: Text
+about: Provides a Kinesis Stream resource. Amazon Kinesis is a managed service that
+  scales elastically for real-time processing of streaming big data.
+examples:
+- name: null
+  code:
+  - test_stream <- resource "test_stream" $
+  - ! '    kinesis_stream_resource'
+  - ! '        & name .~ "terraform-kinesis-test"'
+  - ! '        & shard_count .~ 1'
+  - ! '        & retention_period .~ 48'
+  - ! '        & shard_level_metrics .~ ["IncomingBytes"'
+  - ! '                                 ,"OutgoingBytes"]'

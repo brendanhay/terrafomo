@@ -17,3 +17,36 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: A Region Backend Service defines a regionally-scoped group of virtual machines
+  that will serve traffic for load balancing. For more information see <https://cloud.google.com/compute/docs/load-balancing/internal/>
+  and <https://cloud.google.com/compute/docs/reference/latest/backendServices> .
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    compute_region_backend_service_resource'
+  - ! '        & name .~ "blablah"'
+  - ! '        & description .~ "Hello World 1234"'
+  - ! '        & protocol .~ "TCP"'
+  - ! '        & timeout_sec .~ 10'
+  - ! '        & session_affinity .~ "CLIENT_IP"'
+  - ! '        & health_checks .~ [compute default @"self_link"]'
+  - ! ' '
+  - foo <- resource "foo" $
+  - ! '    compute_region_instance_group_manager_resource'
+  - ! '        & name .~ "terraform-test"'
+  - ! '        & instance_template .~ compute foobar @"self_link"'
+  - ! '        & base_instance_name .~ "foobar"'
+  - ! '        & region .~ "us-central1"'
+  - ! '        & target_size .~ 1'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    compute_instance_template_resource'
+  - ! '        & name .~ "terraform-test"'
+  - ! '        & machine_type .~ "n1-standard-1"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    compute_health_check_resource'
+  - ! '        & name .~ "test"'
+  - ! '        & check_interval_sec .~ 1'
+  - ! '        & timeout_sec .~ 1'

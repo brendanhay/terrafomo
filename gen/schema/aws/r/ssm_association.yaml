@@ -42,3 +42,5 @@ attributes:
   parameters:
     help: ! '- Additional parameters passed to the SSM document.'
     type: Text
+about: Associates an SSM Document to an instance.
+examples: []

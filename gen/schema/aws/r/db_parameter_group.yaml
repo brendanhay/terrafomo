@@ -37,3 +37,11 @@ attributes:
   id:
     help: ! '- The db parameter group name.'
     type: Text
+about: Provides an RDS DB parameter group resource.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    db_parameter_group_resource'
+  - ! '        & name .~ "rds-pg"'
+  - ! '        & family .~ "mysql5.6"'

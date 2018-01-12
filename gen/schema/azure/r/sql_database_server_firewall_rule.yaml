@@ -25,3 +25,5 @@ attributes:
   id:
     help: ! '- The database server ID. Coincides with the given @name@ .'
     type: Text
+about: Defines a new Firewall Rule to be applied across the given Database Servers.
+examples: []

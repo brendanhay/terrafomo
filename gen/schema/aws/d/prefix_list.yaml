@@ -19,3 +19,31 @@ attributes:
   id:
     help: ! '- The ID of the selected prefix list.'
     type: Text
+about: ! '@aws_prefix_list@ provides details about a specific prefix list (PL) in
+  the current region.'
+examples:
+- name: null
+  code:
+  - private_s3 <- resource "private_s3" $
+  - ! '    vpc_endpoint_resource'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! '        & service_name .~ "com.amazonaws.us-west-2.s3"'
+  - ! ' '
+  - private_s3 <- datasource "private_s3" $
+  - ! '    prefix_list_datasource'
+  - ! '        & prefix_list_id .~ compute private_s3 @"prefix_list_id"'
+  - ! ' '
+  - bar <- resource "bar" $
+  - ! '    network_acl_resource'
+  - ! '        & vpc_id .~ compute foo @"id"'
+  - ! ' '
+  - private_s3 <- resource "private_s3" $
+  - ! '    network_acl_rule_resource'
+  - ! '        & network_acl_id .~ compute bar @"id"'
+  - ! '        & rule_number .~ 200'
+  - ! '        & egress .~ False'
+  - ! '        & protocol .~ "tcp"'
+  - ! '        & rule_action .~ "allow"'
+  - ! '        & cidr_block .~ data.aws_prefix_list.private_s3.cidr_blocks[0]'
+  - ! '        & from_port .~ 443'
+  - ! '        & to_port .~ 443'

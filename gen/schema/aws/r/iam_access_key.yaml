@@ -38,3 +38,6 @@ attributes:
   key_fingerprint:
     help: ! '- The fingerprint of the PGP key used to encrypt the secret'
     type: Text
+about: Provides an IAM access key. This is a set of credentials that allow API requests
+  to be made as an IAM user.
+examples: []

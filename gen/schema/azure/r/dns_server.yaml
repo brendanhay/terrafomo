@@ -13,3 +13,11 @@ attributes:
   id:
     help: ! '- The DNS server definition ID. Coincides with the given @name@ .'
     type: Text
+about: Creates a new DNS server definition to be used internally in Azure.
+examples:
+- name: null
+  code:
+  - google-dns <- resource "google-dns" $
+  - ! '    dns_server_resource'
+  - ! '        & name .~ "google"'
+  - ! '        & dns_address .~ "8.8.8.8"'

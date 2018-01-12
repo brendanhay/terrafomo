@@ -107,3 +107,34 @@ attributes:
     help: ! '- The bucket domain name. Will be of format @bucketname.s3.amazonaws.com@
       .'
     type: Text
+about: Provides a S3 bucket resource.
+examples:
+- name: Private Bucket w/ Tags
+  code:
+  - b <- resource "b" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "my-tf-test-bucket"'
+  - ! '        & acl .~ "private"'
+- name: Using CORS
+  code:
+  - b <- resource "b" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "s3-website-test.hashicorp.com"'
+  - ! '        & acl .~ "public-read"'
+- name: Using versioning
+  code:
+  - b <- resource "b" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "my-tf-test-bucket"'
+  - ! '        & acl .~ "private"'
+- name: Enable Logging
+  code:
+  - log_bucket <- resource "log_bucket" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "my-tf-log-bucket"'
+  - ! '        & acl .~ "log-delivery-write"'
+  - ! ' '
+  - b <- resource "b" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "my-tf-test-bucket"'
+  - ! '        & acl .~ "private"'

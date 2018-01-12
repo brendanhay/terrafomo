@@ -45,3 +45,15 @@ attributes:
   state_transition_reason:
     help: ! '- The reason the event source mapping is in its current state.'
     type: Text
+about: Provides a Lambda event source mapping. This allows Lambda functions to get
+  events from Kinesis and DynamoDB.
+examples:
+- name: null
+  code:
+  - event_source_mapping <- resource "event_source_mapping" $
+  - ! '    lambda_event_source_mapping_resource'
+  - ! '        & batch_size .~ 100'
+  - ! '        & event_source_arn .~ "arn:aws:kinesis:REGION:123456789012:stream/stream_name"'
+  - ! '        & enabled .~ True'
+  - ! '        & function_name .~ "arn:aws:lambda:REGION:123456789012:function:function_name"'
+  - ! '        & starting_position .~ "TRIM_HORIZON|LATEST"'

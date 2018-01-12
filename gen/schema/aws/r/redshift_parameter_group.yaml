@@ -21,3 +21,11 @@ attributes:
   id:
     help: ! '- The Redshift parameter group name.'
     type: Text
+about: Provides a Redshift Cluster parameter group resource.
+examples:
+- name: null
+  code:
+  - bar <- resource "bar" $
+  - ! '    redshift_parameter_group_resource'
+  - ! '        & name .~ "parameter-group-test-terraform"'
+  - ! '        & family .~ "redshift-1.0"'

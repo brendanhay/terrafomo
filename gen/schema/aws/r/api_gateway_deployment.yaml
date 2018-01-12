@@ -35,3 +35,5 @@ attributes:
       ''s @source_arn@ when allowing API Gateway to invoke a Lambda function, e.g.
       @arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod@'
     type: Text
+about: Provides an API Gateway Deployment.
+examples: []

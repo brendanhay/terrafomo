@@ -15,3 +15,5 @@ attributes:
   name:
     help: ! '- The name of the solution stack.'
     type: Text
+about: Use this data source to get the name of a elastic beanstalk solution stack.
+examples: []

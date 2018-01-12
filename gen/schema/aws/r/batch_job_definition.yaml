@@ -25,10 +25,6 @@ arguments:
     help: (Optional) Specifies the parameter substitution placeholders to set in the
       job definition.
     type: Text
-attributes:
-  arn:
-    help: ! '- The Amazon Resource Name of the job definition.'
-    type: Text
-  revision:
-    help: ! '- The revision of the job definition.'
-    type: Text
+attributes: {}
+about: Provides a Batch Job Definition resource.
+examples: []

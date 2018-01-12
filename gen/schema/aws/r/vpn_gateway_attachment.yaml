@@ -15,3 +15,19 @@ attributes:
   vpn_gateway_id:
     help: ! '- The ID of the Virtual Private Gateway.'
     type: Text
+about: Provides a Virtual Private Gateway attachment resource, allowing for an existing
+  hardware VPN gateway to be attached and/or detached from a VPC.
+examples:
+- name: null
+  code:
+  - network <- resource "network" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.0.0.0/16"'
+  - ! ' '
+  - vpn <- resource "vpn" $
+  - ! '    vpn_gateway_resource'
+  - ! ' '
+  - vpn_attachment <- resource "vpn_attachment" $
+  - ! '    vpn_gateway_attachment_resource'
+  - ! '        & vpc_id .~ compute network @"id"'
+  - ! '        & vpn_gateway_id .~ compute vpn @"id"'

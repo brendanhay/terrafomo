@@ -5,3 +5,12 @@ arguments:
     help: (Required) The ARN of the listener.
     type: Text
 attributes: {}
+about: ~>  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality is
+  identical.
+examples:
+- name: null
+  code:
+  - ! ' '
+  - listener <- datasource "listener" $
+  - ! '    lb_listener_datasource'
+  - ! '        & arn .~ var.listener_arn'

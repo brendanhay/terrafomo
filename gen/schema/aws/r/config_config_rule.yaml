@@ -29,10 +29,6 @@ arguments:
     required: false
     help: (Optional) Description of the rule
     type: Text
-attributes:
-  arn:
-    help: ! '- The ARN of the config rule'
-    type: Text
-  rule_id:
-    help: ! '- The ID of the config rule'
-    type: Text
+attributes: {}
+about: Provides an AWS Config Rule.
+examples: []

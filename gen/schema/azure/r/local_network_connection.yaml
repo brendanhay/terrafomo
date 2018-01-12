@@ -18,3 +18,13 @@ attributes:
   id:
     help: ! '- The local network connection ID.'
     type: Text
+about: Defines a new connection to a remote network through a VPN tunnel.
+examples:
+- name: null
+  code:
+  - localnet <- resource "localnet" $
+  - ! '    local_network_connection_resource'
+  - ! '        & name .~ "terraform-local-network-connection"'
+  - ! '        & vpn_gateway_address .~ "45.12.189.2"'
+  - ! '        & address_space_prefixes .~ ["10.10.10.0/24"'
+  - ! '                                    ,"10.10.11.0/24"]'

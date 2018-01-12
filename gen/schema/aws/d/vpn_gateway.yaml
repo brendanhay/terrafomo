@@ -26,3 +26,12 @@ arguments:
       on the desired VPN Gateway.
     type: Text
 attributes: {}
+about: The VPN Gateway data source provides details about a specific VPN gateway.
+examples:
+- name: null
+  code:
+  - selected <- datasource "selected" $
+  - ! '    vpn_gateway_datasource'
+  - ! ' '
+  - output "vpn_gateway_id" $
+  - ! '    "${data.aws_vpn_gateway.selected.id}"'

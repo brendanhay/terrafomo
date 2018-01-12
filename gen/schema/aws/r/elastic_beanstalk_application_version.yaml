@@ -17,15 +17,43 @@ arguments:
     help: (Required) A unique name for the this Application Version.
     type: Text
   force_delete:
-    required: true
+    required: false
     help: (Optional) On delete, force an Application Version to be deleted when it
       may be in use by multiple Elastic Beanstalk Environments.
     type: Text
   description:
-    required: true
+    required: false
     help: (Optional) Short description of the Application Version.
     type: Text
 attributes:
   name:
     help: ! '- The Application Version name.'
     type: Text
+about: Provides an Elastic Beanstalk Application Version Resource. Elastic Beanstalk
+  allows you to deploy and manage applications in the AWS cloud without worrying about
+  the infrastructure that runs those applications.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    s3_bucket_resource'
+  - ! '        & bucket .~ "tftest.applicationversion.bucket"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    s3_bucket_object_resource'
+  - ! '        & bucket .~ compute default @"id"'
+  - ! '        & key .~ "beanstalk/go-v1.zip"'
+  - ! '        & source .~ "go-v1.zip"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    elastic_beanstalk_application_resource'
+  - ! '        & name .~ "tf-test-name"'
+  - ! '        & description .~ "tf-test-desc"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    elastic_beanstalk_application_version_resource'
+  - ! '        & name .~ "tf-test-version-label"'
+  - ! '        & application .~ "tf-test-name"'
+  - ! '        & description .~ "application version created by terraform"'
+  - ! '        & bucket .~ compute default @"id"'
+  - ! '        & key .~ compute default @"id"'

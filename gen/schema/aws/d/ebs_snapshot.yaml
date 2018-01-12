@@ -62,3 +62,12 @@ attributes:
   tags:
     help: ! '- A mapping of tags for the resource.'
     type: Text
+about: Use this data source to get information about an EBS Snapshot for use when
+  provisioning EBS Volumes
+examples:
+- name: null
+  code:
+  - ebs_volume <- datasource "ebs_volume" $
+  - ! '    ebs_snapshot_datasource'
+  - ! '        & most_recent .~ True'
+  - ! '        & owners .~ ["self"]'

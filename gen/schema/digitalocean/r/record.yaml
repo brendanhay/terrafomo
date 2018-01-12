@@ -39,3 +39,5 @@ attributes:
   id:
     help: ! '- The record ID'
     type: Text
+about: Provides a DigitalOcean DNS record resource.
+examples: []

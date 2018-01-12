@@ -37,3 +37,24 @@ attributes:
   instance_id:
     help: ! '- ID of the Instance'
     type: Text
+about: Provides an AWS EBS Volume Attachment as a top level resource, to attach and
+  detach volumes from AWS Instances.
+examples:
+- name: null
+  code:
+  - ebs_att <- resource "ebs_att" $
+  - ! '    volume_attachment_resource'
+  - ! '        & device_name .~ "/dev/sdh"'
+  - ! '        & volume_id .~ compute example @"id"'
+  - ! '        & instance_id .~ compute web @"id"'
+  - ! ' '
+  - web <- resource "web" $
+  - ! '    instance_resource'
+  - ! '        & ami .~ "ami-21f78e11"'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & instance_type .~ "t1.micro"'
+  - ! ' '
+  - example <- resource "example" $
+  - ! '    ebs_volume_resource'
+  - ! '        & availability_zone .~ "us-west-2a"'
+  - ! '        & size .~ 1'

@@ -6,3 +6,7 @@ arguments:
       GCE state.
     type: Text
 attributes: {}
+about: Manages metadata common to all instances for a project in GCE. For more information
+  see <https://cloud.google.com/compute/docs/storing-retrieving-metadata> and <https://cloud.google.com/compute/docs/reference/latest/projects/setCommonInstanceMetadata>
+  .
+examples: []

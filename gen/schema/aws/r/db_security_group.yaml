@@ -24,3 +24,12 @@ attributes:
   id:
     help: ! '- The db security group ID.'
     type: Text
+about: Provides an RDS security group resource. This is only for DB instances in the
+  EC2-Classic Platform. For instances inside a VPC, use the </docs/providers/aws/r/db_instance.html#vpc_security_group_ids>
+  attribute instead.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    db_security_group_resource'
+  - ! '        & name .~ "rds_sg"'

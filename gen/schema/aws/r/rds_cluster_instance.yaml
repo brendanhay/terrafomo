@@ -134,3 +134,25 @@ attributes:
   port:
     help: ! '- The database port'
     type: Text
+about: Provides an RDS Cluster Resource Instance. A Cluster Instance Resource defines
+  attributes that are specific to a single instance in a </docs/providers/aws/r/rds_cluster.html>
+  , specifically running Amazon Aurora.
+examples:
+- name: null
+  code:
+  - cluster_instances <- resource "cluster_instances" $
+  - ! '    rds_cluster_instance_resource'
+  - ! '        & count .~ 2'
+  - ! '        & identifier .~ "aurora-cluster-demo-"<>count.index'
+  - ! '        & cluster_identifier .~ compute default @"id"'
+  - ! '        & instance_class .~ "db.r3.large"'
+  - ! ' '
+  - default <- resource "default" $
+  - ! '    rds_cluster_resource'
+  - ! '        & cluster_identifier .~ "aurora-cluster-demo"'
+  - ! '        & availability_zones .~ ["us-west-2a"'
+  - ! '                                ,"us-west-2b"'
+  - ! '                                ,"us-west-2c"]'
+  - ! '        & database_name .~ "mydb"'
+  - ! '        & master_username .~ "foo"'
+  - ! '        & master_password .~ "barbut8chars"'

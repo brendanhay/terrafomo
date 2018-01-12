@@ -23,3 +23,10 @@ attributes:
   id:
     help: ! '- The ARN of the SNS topic'
     type: Text
+about: Provides an SNS topic resource
+examples:
+- name: null
+  code:
+  - user_updates <- resource "user_updates" $
+  - ! '    sns_topic_resource'
+  - ! '        & name .~ "user-updates-topic"'

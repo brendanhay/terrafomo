@@ -29,3 +29,17 @@ attributes:
   ip_address:
     help: ! '- IP address of the interface inside Google Cloud Platform.'
     type: Text
+about: Manages a Cloud Router BGP peer. For more information see <https://cloud.google.com/compute/docs/cloudrouter>
+  and <https://cloud.google.com/compute/docs/reference/latest/routers> .
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    compute_router_peer_resource'
+  - ! '        & name .~ "peer-1"'
+  - ! '        & router .~ "router-1"'
+  - ! '        & region .~ "us-central1"'
+  - ! '        & peer_ip_address .~ "169.254.1.2"'
+  - ! '        & peer_asn .~ 65513'
+  - ! '        & advertised_route_priority .~ 100'
+  - ! '        & interface .~ "interface-1"'

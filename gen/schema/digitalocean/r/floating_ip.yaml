@@ -12,3 +12,21 @@ attributes:
   ip_address:
     help: ! '- The IP Address of the resource'
     type: Text
+about: Provides a DigitalOcean Floating IP to represent a publicly-accessible static
+  IP addresses that can be mapped to one of your Droplets.
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    droplet_resource'
+  - ! '        & name .~ "baz"'
+  - ! '        & size .~ "1gb"'
+  - ! '        & image .~ "centos-5-8-x32"'
+  - ! '        & region .~ "sgp1"'
+  - ! '        & ipv6 .~ True'
+  - ! '        & private_networking .~ True'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    floating_ip_resource'
+  - ! '        & droplet_id .~ compute foobar @"id"'
+  - ! '        & region .~ compute foobar @"region"'

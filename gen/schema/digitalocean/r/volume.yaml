@@ -26,3 +26,22 @@ attributes:
   id:
     help: ! '- The unique identifier for the block storage volume.'
     type: Text
+about: Provides a DigitalOcean Block Storage volume which can be attached to a Droplet
+  in order to provide expanded storage.
+examples:
+- name: null
+  code:
+  - foobar <- resource "foobar" $
+  - ! '    volume_resource'
+  - ! '        & region .~ "nyc1"'
+  - ! '        & name .~ "baz"'
+  - ! '        & size .~ 100'
+  - ! '        & description .~ "an example volume"'
+  - ! ' '
+  - foobar <- resource "foobar" $
+  - ! '    droplet_resource'
+  - ! '        & name .~ "baz"'
+  - ! '        & size .~ "1gb"'
+  - ! '        & image .~ "coreos-stable"'
+  - ! '        & region .~ "nyc1"'
+  - ! '        & volume_ids .~ [compute foobar @"id"]'

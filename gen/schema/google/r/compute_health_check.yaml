@@ -9,3 +9,15 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
+about: Manages a health check within GCE. This is used to monitor instances behind
+  load balancers. Timeouts or HTTP errors cause the instance to be removed from the
+  pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks>
+  and <https://cloud.google.com/compute/docs/reference/latest/healthChecks> .
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    compute_health_check_resource'
+  - ! '        & name .~ "internal-service-health-check"'
+  - ! '        & timeout_sec .~ 1'
+  - ! '        & check_interval_sec .~ 1'

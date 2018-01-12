@@ -30,3 +30,12 @@ attributes:
   id:
     help: ! '- The db subnet group name.'
     type: Text
+about: Provides an RDS DB subnet group resource.
+examples:
+- name: null
+  code:
+  - default <- resource "default" $
+  - ! '    db_subnet_group_resource'
+  - ! '        & name .~ "main"'
+  - ! '        & subnet_ids .~ [compute frontend @"id"'
+  - ! '                        ,compute backend @"id"]'

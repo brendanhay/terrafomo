@@ -27,3 +27,5 @@ attributes:
   configuration:
     help: ! '- The JSON formatted Security Configuration'
     type: Text
+about: Provides a resource to manage AWS EMR Security Configurations
+examples: []

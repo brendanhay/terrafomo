@@ -25,3 +25,28 @@ attributes:
   id:
     help: ! '- The calculated unique identifier for the association.'
     type: Text
+about: Provides a Route53 private Hosted Zone to VPC association resource.
+examples:
+- name: null
+  code:
+  - primary <- resource "primary" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.6.0.0/16"'
+  - ! '        & enable_dns_hostnames .~ True'
+  - ! '        & enable_dns_support .~ True'
+  - ! ' '
+  - secondary <- resource "secondary" $
+  - ! '    vpc_resource'
+  - ! '        & cidr_block .~ "10.7.0.0/16"'
+  - ! '        & enable_dns_hostnames .~ True'
+  - ! '        & enable_dns_support .~ True'
+  - ! ' '
+  - example <- resource "example" $
+  - ! '    route53_zone_resource'
+  - ! '        & name .~ "example.com"'
+  - ! '        & vpc_id .~ compute primary @"id"'
+  - ! ' '
+  - secondary <- resource "secondary" $
+  - ! '    route53_zone_association_resource'
+  - ! '        & zone_id .~ compute example @"zone_id"'
+  - ! '        & vpc_id .~ compute secondary @"id"'

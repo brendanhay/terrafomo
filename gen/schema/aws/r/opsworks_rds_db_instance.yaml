@@ -23,3 +23,13 @@ attributes:
     help: ! '- The computed id. Please note that this is only used internally to identify
       the stack <-> instance relation. This value is not used in aws.'
     type: Text
+about: Provides an OpsWorks RDS DB Instance resource.
+examples:
+- name: null
+  code:
+  - my_instance <- resource "my_instance" $
+  - ! '    opsworks_rds_db_instance_resource'
+  - ! '        & stack_id .~ compute my_stack @"id"'
+  - ! '        & rds_db_instance_arn .~ compute my_instance @"arn"'
+  - ! '        & db_user .~ "someUser"'
+  - ! '        & db_password .~ "somePass"'
