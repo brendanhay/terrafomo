@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,17 +23,18 @@
 --
 module Terrafomo.Kubernetes.DataSource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Kubernetes      as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Kubernetes        as TF
+import qualified Terrafomo.Syntax.DataSource as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 
@@ -43,15 +42,28 @@ A Service is an abstraction which defines a logical set of pods and a policy
 by which to access them - sometimes called a micro-service. This data source
 allows you to pull data about such service.
 -}
-data ServiceDataSource = ServiceDataSource
-    { _metadata :: !(Attr Text)
+data ServiceDataSource = ServiceDataSource {
+      _metadata :: !(TF.Argument Text)
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeDataSource
-    "kubernetes_service"
-    ''Qual.Kubernetes
-    ''ServiceDataSource)
+serviceDataSource :: TF.DataSource TF.Kubernetes ServiceDataSource
+serviceDataSource =
+    TF.newDataSource "kubernetes_service" $
+        ServiceDataSource {
+            _metadata = TF.Absent
+            }
+
+instance TF.ToHCL ServiceDataSource where
+    toHCL ServiceDataSource{..} = TF.arguments
+        [ TF.assign "metadata" <$> _metadata
+        ]
+
+$(TF.makeSchemaLenses
+    ''ServiceDataSource
+    ''TF.Kubernetes
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @kubernetes_storage_class@ Kubernetes datasource.
 
@@ -60,12 +72,25 @@ administrators to define abstractions for the underlying storage platform.
 Read more at
 http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kubernetes.html
 -}
-data StorageClassDataSource = StorageClassDataSource
-    { _metadata :: !(Attr Text)
+data StorageClassDataSource = StorageClassDataSource {
+      _metadata :: !(TF.Argument Text)
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeDataSource
-    "kubernetes_storage_class"
-    ''Qual.Kubernetes
-    ''StorageClassDataSource)
+storageClassDataSource :: TF.DataSource TF.Kubernetes StorageClassDataSource
+storageClassDataSource =
+    TF.newDataSource "kubernetes_storage_class" $
+        StorageClassDataSource {
+            _metadata = TF.Absent
+            }
+
+instance TF.ToHCL StorageClassDataSource where
+    toHCL StorageClassDataSource{..} = TF.arguments
+        [ TF.assign "metadata" <$> _metadata
+        ]
+
+$(TF.makeSchemaLenses
+    ''StorageClassDataSource
+    ''TF.Kubernetes
+    ''TF.DataSource
+    'TF.schema)

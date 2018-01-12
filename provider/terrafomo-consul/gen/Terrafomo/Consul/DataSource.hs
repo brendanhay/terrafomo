@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,17 +23,18 @@
 --
 module Terrafomo.Consul.DataSource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Consul          as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Consul            as TF
+import qualified Terrafomo.Syntax.DataSource as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @consul_agent_self@ Consul datasource.
 
@@ -43,13 +42,23 @@ The @consul_agent_self@ data source returns
 <https://www.consul.io/docs/agent/http/agent.html#agent_self> from the agent
 specified in the @provider@ .
 -}
-data AgentSelfDataSource = AgentSelfDataSource
-    deriving (Show, Generic)
+data AgentSelfDataSource = AgentSelfDataSource {
+    } deriving (Show, Eq)
 
-$(TH.makeDataSource
-    "consul_agent_self"
-    ''Qual.Consul
-    ''AgentSelfDataSource)
+agentSelfDataSource :: TF.DataSource TF.Consul AgentSelfDataSource
+agentSelfDataSource =
+    TF.newDataSource "consul_agent_self" $
+        AgentSelfDataSource {
+            }
+
+instance TF.ToHCL AgentSelfDataSource where
+    toHCL = const $ TF.arguments []
+
+$(TF.makeSchemaLenses
+    ''AgentSelfDataSource
+    ''TF.Consul
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @consul_catalog_nodes@ Consul datasource.
 
@@ -58,28 +67,44 @@ have been registered with the Consul cluster in a given datacenter.  By
 specifying a different datacenter in the @query_options@ it is possible to
 retrieve a list of nodes from a different WAN-attached Consul datacenter.
 -}
-data CatalogNodesDataSource = CatalogNodesDataSource
-    { _datacenter    :: !(Attr Text)
+data CatalogNodesDataSource = CatalogNodesDataSource {
+      _datacenter          :: !(TF.Argument Text)
     {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _query_options :: !(Attr Text)
+    , _query_options       :: !(TF.Argument Text)
     {- ^ (Optional) See below. -}
-    } deriving (Show, Generic)
+    , _computed_datacenter :: !(TF.Attribute Text)
+    {- ^ - The datacenter the keys are being read from to. -}
+    , _computed_node_ids   :: !(TF.Attribute Text)
+    {- ^ - A list of the Consul node IDs. -}
+    , _computed_node_names :: !(TF.Attribute Text)
+    {- ^ - A list of the Consul node names. -}
+    , _computed_nodes      :: !(TF.Attribute Text)
+    {- ^ - A list of nodes and details about each Consul agent.  The list of per-node attributes is detailed below. -}
+    } deriving (Show, Eq)
 
-type instance Computed CatalogNodesDataSource
-    = '[ '("datacenter", Text)
-       {- - The datacenter the keys are being read from to. -}
-       , '("node_ids", Text)
-       {- - A list of the Consul node IDs. -}
-       , '("node_names", Text)
-       {- - A list of the Consul node names. -}
-       , '("nodes", Text)
-       {- - A list of nodes and details about each Consul agent.  The list of per-node attributes is detailed below. -}
-       ]
+catalogNodesDataSource :: TF.DataSource TF.Consul CatalogNodesDataSource
+catalogNodesDataSource =
+    TF.newDataSource "consul_catalog_nodes" $
+        CatalogNodesDataSource {
+            _datacenter = TF.Absent
+            , _query_options = TF.Absent
+            , _computed_datacenter = TF.Computed "datacenter"
+            , _computed_node_ids = TF.Computed "node_ids"
+            , _computed_node_names = TF.Computed "node_names"
+            , _computed_nodes = TF.Computed "nodes"
+            }
 
-$(TH.makeDataSource
-    "consul_catalog_nodes"
-    ''Qual.Consul
-    ''CatalogNodesDataSource)
+instance TF.ToHCL CatalogNodesDataSource where
+    toHCL CatalogNodesDataSource{..} = TF.arguments
+        [ TF.assign "datacenter" <$> _datacenter
+        , TF.assign "query_options" <$> _query_options
+        ]
+
+$(TF.makeSchemaLenses
+    ''CatalogNodesDataSource
+    ''TF.Consul
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @consul_catalog_service@ Consul datasource.
 
@@ -91,88 +116,49 @@ retrieve a list of services from a different WAN-attached Consul datacenter.
 This data source is different from the @consul_catalog_services@ (plural)
 data source, which provides a summary of the current Consul services.
 -}
-data CatalogServiceDataSource = CatalogServiceDataSource
-    { _datacenter    :: !(Attr Text)
+data CatalogServiceDataSource = CatalogServiceDataSource {
+      _datacenter          :: !(TF.Argument Text)
     {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _name          :: !(Attr Text)
+    , _name                :: !(TF.Argument Text)
     {- ^ (Required) The service name to select. -}
-    , _query_options :: !(Attr Text)
+    , _query_options       :: !(TF.Argument Text)
     {- ^ (Optional) See below. -}
-    , _tag           :: !(Attr Text)
+    , _tag                 :: !(TF.Argument Text)
     {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
-    } deriving (Show, Generic)
+    , _computed_datacenter :: !(TF.Attribute Text)
+    {- ^ - The datacenter the keys are being read from to. -}
+    , _computed_name       :: !(TF.Attribute Text)
+    {- ^ - The name of the service -}
+    , _computed_service    :: !(TF.Attribute Text)
+    {- ^ - A list of nodes and details about each endpoint advertising a service.  Each element in the list is a map of attributes that correspond to each individual node.  The list of per-node attributes is detailed below. -}
+    , _computed_tag        :: !(TF.Attribute Text)
+    {- ^ - The name of the tag used to filter the list of nodes in @service@ . -}
+    } deriving (Show, Eq)
 
-type instance Computed CatalogServiceDataSource
-    = '[ '("datacenter", Text)
-       {- - The datacenter the keys are being read from to. -}
-       , '("name", Text)
-       {- - The name of the service -}
-       , '("service", Text)
-       {- - A list of nodes and details about each endpoint advertising a service.  Each element in the list is a map of attributes that correspond to each individual node.  The list of per-node attributes is detailed below. -}
-       , '("tag", Text)
-       {- - The name of the tag used to filter the list of nodes in @service@ . -}
-       ]
+catalogServiceDataSource :: TF.DataSource TF.Consul CatalogServiceDataSource
+catalogServiceDataSource =
+    TF.newDataSource "consul_catalog_service" $
+        CatalogServiceDataSource {
+            _datacenter = TF.Absent
+            , _name = TF.Absent
+            , _query_options = TF.Absent
+            , _tag = TF.Absent
+            , _computed_datacenter = TF.Computed "datacenter"
+            , _computed_name = TF.Computed "name"
+            , _computed_service = TF.Computed "service"
+            , _computed_tag = TF.Computed "tag"
+            }
 
-$(TH.makeDataSource
-    "consul_catalog_service"
-    ''Qual.Consul
-    ''CatalogServiceDataSource)
+instance TF.ToHCL CatalogServiceDataSource where
+    toHCL CatalogServiceDataSource{..} = TF.arguments
+        [ TF.assign "datacenter" <$> _datacenter
+        , TF.assign "name" <$> _name
+        , TF.assign "query_options" <$> _query_options
+        , TF.assign "tag" <$> _tag
+        ]
 
-{- | The @consul_catalog_services@ Consul datasource.
-
-The @consul_catalog_services@ data source returns a list of Consul services
-that have been registered with the Consul cluster in a given datacenter.  By
-specifying a different datacenter in the @query_options@ it is possible to
-retrieve a list of services from a different WAN-attached Consul datacenter.
-This data source is different from the @consul_catalog_service@ (singular)
-data source, which provides a detailed response about a specific Consul
-service.
--}
-data CatalogServicesDataSource = CatalogServicesDataSource
-    { _datacenter    :: !(Attr Text)
-    {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _query_options :: !(Attr Text)
-    {- ^ (Optional) See below. -}
-    } deriving (Show, Generic)
-
-type instance Computed CatalogServicesDataSource
-    = '[ '("datacenter", Text)
-       {- - The datacenter the keys are being read from to. -}
-       , '("names", Text)
-       {- - A list of the Consul services found.  This will always contain the list of services found. -}
-       , '("services.<service>", Text)
-       {- - For each name given, the corresponding attribute is a Terraform map of services and their tags.  The value is an alphanumerically sorted, whitespace delimited set of tags associated with the service. -}
-       , '("tags", Text)
-       {- - A map of the tags found for each service.  If more than one service shares the same tag, unique service names will be joined by whitespace (this is the inverse of @services@ and can be used to lookup the services that match a single tag). -}
-       ]
-
-$(TH.makeDataSource
-    "consul_catalog_services"
-    ''Qual.Consul
-    ''CatalogServicesDataSource)
-
-{- | The @consul_keys@ Consul datasource.
-
-The @consul_keys@ resource reads values from the Consul key/value store.
-This is a powerful way dynamically set values in templates.
--}
-data KeysDataSource = KeysDataSource
-    { _datacenter :: !(Attr Text)
-    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _key        :: !(Attr Text)
-    {- ^ (Required) Specifies a key in Consul to be read or written. Supported values documented below. -}
-    , _token      :: !(Attr Text)
-    {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Generic)
-
-type instance Computed KeysDataSource
-    = '[ '("datacenter", Text)
-       {- - The datacenter the keys are being read from to. -}
-       , '("var.<name>", Text)
-       {- - For each name given, the corresponding attribute has the value of the key. -}
-       ]
-
-$(TH.makeDataSource
-    "consul_keys"
-    ''Qual.Consul
-    ''KeysDataSource)
+$(TF.makeSchemaLenses
+    ''CatalogServiceDataSource
+    ''TF.Consul
+    ''TF.DataSource
+    'TF.schema)

@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,17 +23,18 @@
 --
 module Terrafomo.Nomad.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Nomad           as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Nomad           as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @nomad_job@ Nomad resource.
 
@@ -47,16 +46,33 @@ runs core system services that are ideally setup during infrastructure
 creation. This resource is ideal for the latter type of job, but can be used
 to manage any job within Nomad.
 -}
-data JobResource = JobResource
-    { _deregister_on_destroy   :: !(Attr Text)
+data JobResource = JobResource {
+      _deregister_on_destroy   :: !(TF.Argument Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
-    , _deregister_on_id_change :: !(Attr Text)
+    , _deregister_on_id_change :: !(TF.Argument Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
-    , _jobspec                 :: !(Attr Text)
+    , _jobspec                 :: !(TF.Argument Text)
     {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeResource
-    "nomad_job"
-    ''Qual.Nomad
-    ''JobResource)
+jobResource :: TF.Resource TF.Nomad JobResource
+jobResource =
+    TF.newResource "nomad_job" $
+        JobResource {
+            _deregister_on_destroy = TF.Absent
+            , _deregister_on_id_change = TF.Absent
+            , _jobspec = TF.Absent
+            }
+
+instance TF.ToHCL JobResource where
+    toHCL JobResource{..} = TF.arguments
+        [ TF.assign "deregister_on_destroy" <$> _deregister_on_destroy
+        , TF.assign "deregister_on_id_change" <$> _deregister_on_id_change
+        , TF.assign "jobspec" <$> _jobspec
+        ]
+
+$(TF.makeSchemaLenses
+    ''JobResource
+    ''TF.Nomad
+    ''TF.Resource
+    'TF.schema)

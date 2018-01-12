@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,52 +23,89 @@
 --
 module Terrafomo.LogicMonitor.DataSource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.LogicMonitor    as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.LogicMonitor      as TF
+import qualified Terrafomo.Syntax.DataSource as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
 Use this datasource to get the ID of an available collector.
 -}
-data CollectorsDataSource = CollectorsDataSource
-    { _filters     :: !(Attr Text)
+data CollectorsDataSource = CollectorsDataSource {
+      _filters     :: !(TF.Argument Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _most_recent :: !(Attr Text)
+    , _most_recent :: !(TF.Argument Text)
     {- ^ (Optional) The most recent collector installed that is online -}
-    , _offset      :: !(Attr Text)
+    , _offset      :: !(TF.Argument Text)
     {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size        :: !(Attr Text)
+    , _size        :: !(TF.Argument Text)
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeDataSource
-    "logicmonitor_collectors"
-    ''Qual.LogicMonitor
-    ''CollectorsDataSource)
+collectorsDataSource :: TF.DataSource TF.LogicMonitor CollectorsDataSource
+collectorsDataSource =
+    TF.newDataSource "logicmonitor_collectors" $
+        CollectorsDataSource {
+            _filters = TF.Absent
+            , _most_recent = TF.Absent
+            , _offset = TF.Absent
+            , _size = TF.Absent
+            }
+
+instance TF.ToHCL CollectorsDataSource where
+    toHCL CollectorsDataSource{..} = TF.arguments
+        [ TF.assign "filters" <$> _filters
+        , TF.assign "most_recent" <$> _most_recent
+        , TF.assign "offset" <$> _offset
+        , TF.assign "size" <$> _size
+        ]
+
+$(TF.makeSchemaLenses
+    ''CollectorsDataSource
+    ''TF.LogicMonitor
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @logicmonitor_device_group@ LogicMonitor datasource.
 
 Use this datasource to get the ID of an available device group.
 -}
-data DeviceGroupDataSource = DeviceGroupDataSource
-    { _filters :: !(Attr Text)
+data DeviceGroupDataSource = DeviceGroupDataSource {
+      _filters :: !(TF.Argument Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _offset  :: !(Attr Text)
+    , _offset  :: !(TF.Argument Text)
     {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size    :: !(Attr Text)
+    , _size    :: !(TF.Argument Text)
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeDataSource
-    "logicmonitor_device_group"
-    ''Qual.LogicMonitor
-    ''DeviceGroupDataSource)
+deviceGroupDataSource :: TF.DataSource TF.LogicMonitor DeviceGroupDataSource
+deviceGroupDataSource =
+    TF.newDataSource "logicmonitor_device_group" $
+        DeviceGroupDataSource {
+            _filters = TF.Absent
+            , _offset = TF.Absent
+            , _size = TF.Absent
+            }
+
+instance TF.ToHCL DeviceGroupDataSource where
+    toHCL DeviceGroupDataSource{..} = TF.arguments
+        [ TF.assign "filters" <$> _filters
+        , TF.assign "offset" <$> _offset
+        , TF.assign "size" <$> _size
+        ]
+
+$(TF.makeSchemaLenses
+    ''DeviceGroupDataSource
+    ''TF.LogicMonitor
+    ''TF.DataSource
+    'TF.schema)

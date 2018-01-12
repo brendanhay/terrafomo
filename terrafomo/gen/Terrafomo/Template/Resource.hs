@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,16 +23,17 @@
 --
 module Terrafomo.Template.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @template_dir@ Template resource.
 
@@ -49,16 +48,33 @@ diff to create it. This may cause "noise" in diffs in environments where
 configurations are routinely applied by many different users or within
 automation systems.
 -}
-data DirResource = DirResource
-    { _destination_dir :: !(Attr Text)
+data DirResource = DirResource {
+      _destination_dir :: !(TF.Argument Text)
     {- ^ (Required) Path to the directory where the templated files will be written. -}
-    , _source_dir      :: !(Attr Text)
+    , _source_dir      :: !(TF.Argument Text)
     {- ^ (Required) Path to the directory where the files to template reside. -}
-    , _vars            :: !(Attr Text)
+    , _vars            :: !(TF.Argument Text)
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeResource
-    "template_dir"
-    ''Qual.Provider
-    ''DirResource)
+dirResource :: TF.Resource TF.Template DirResource
+dirResource =
+    TF.newResource "template_dir" $
+        DirResource {
+            _destination_dir = TF.Absent
+            , _source_dir = TF.Absent
+            , _vars = TF.Absent
+            }
+
+instance TF.ToHCL DirResource where
+    toHCL DirResource{..} = TF.arguments
+        [ TF.assign "destination_dir" <$> _destination_dir
+        , TF.assign "source_dir" <$> _source_dir
+        , TF.assign "vars" <$> _vars
+        ]
+
+$(TF.makeSchemaLenses
+    ''DirResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)

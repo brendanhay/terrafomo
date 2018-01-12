@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.VSphere.Types    as Qual
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
+import qualified Terrafomo.VSphere.Types   as TF
 
 {- | VSphere Terraform provider.
 
@@ -36,47 +39,24 @@ sources supported by the provider. ~> NOTE: This provider requires API write
 access and hence is not supported on a free ESXi license.
 -}
 data VSphere = VSphere
-    { _allow_unverified_ssl :: !Text
-    , _password             :: !Text
-    , _user                 :: !Text
-    , _vsphere_server       :: !Text
+    { _allow_unverified_ssl :: !(TF.Argument Text)
+    {- ^ (Optional) Boolean that can be set to true to disable SSL certificate verification. This should be used with care as it could allow an attacker to intercept your auth token. If omitted, default value is @false@ . Can also be specified with the @VSPHERE_ALLOW_UNVERIFIED_SSL@ environment variable. -}
+    , _password             :: !(TF.Argument Text)
+    {- ^ (Required) This is the password for vSphere API operations. Can also be specified with the @VSPHERE_PASSWORD@ environment variable. -}
+    , _user                 :: !(TF.Argument Text)
+    {- ^ (Required) This is the username for vSphere API operations. Can also be specified with the @VSPHERE_USER@ environment variable. -}
+    , _vsphere_server       :: !(TF.Argument Text)
+    {- ^ (Required) This is the vCenter server name for vSphere API operations. Can also be specified with the @VSPHERE_SERVER@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable VSphere
 
-instance Qual.ToValue VSphere where
-    toValue = Qual.genericToValue
+instance TF.ToHCL VSphere where
+    toHCL x = TF.arguments
+        [ TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
+        , TF.assign "password" <$> _password x
+        , TF.assign "user" <$> _user x
+        , TF.assign "vsphere_server" <$> _vsphere_server x
+        ]
 
-{- | (Optional) Boolean that can be set to true to disable SSL certificate
-verification. This should be used with care as it could allow an attacker to
-intercept your auth token. If omitted, default value is @false@ . Can also
-be specified with the @VSPHERE_ALLOW_UNVERIFIED_SSL@ environment variable.
--}
-allowUnverifiedSsl :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-allowUnverifiedSsl f s =
-    (\x -> s { _allow_unverified_ssl = x })
-        <$> f (_allow_unverified_ssl s)
-
-{- | (Required) This is the password for vSphere API operations. Can also be
-specified with the @VSPHERE_PASSWORD@ environment variable.
--}
-password :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Required) This is the username for vSphere API operations. Can also be
-specified with the @VSPHERE_USER@ environment variable.
--}
-user :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-user f s =
-    (\x -> s { _user = x })
-        <$> f (_user s)
-
-{- | (Required) This is the vCenter server name for vSphere API operations. Can
-also be specified with the @VSPHERE_SERVER@ environment variable.
--}
-vsphereServer :: Functor f => (Text -> f Text) -> VSphere -> f VSphere
-vsphereServer f s =
-    (\x -> s { _vsphere_server = x })
-        <$> f (_vsphere_server s)
+$(TF.makeClassy ''VSphere)

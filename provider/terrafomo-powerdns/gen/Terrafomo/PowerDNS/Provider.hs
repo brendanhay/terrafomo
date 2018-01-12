@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.PowerDNS.Types   as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.PowerDNS.Types  as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | PowerDNS Terraform provider.
 
@@ -34,27 +37,18 @@ to be configured differently. Use the navigation to the left to read about
 the available resources.
 -}
 data PowerDNS = PowerDNS
-    { _api_key    :: !Text
-    , _server_url :: !Text
+    { _api_key    :: !(TF.Argument Text)
+    {- ^ (Required) The PowerDNS API key. This can also be specified with @PDNS_API_KEY@ environment variable. -}
+    , _server_url :: !(TF.Argument Text)
+    {- ^ (Required) The address of PowerDNS server. This can also be specified with @PDNS_SERVER_URL@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable PowerDNS
 
-instance Qual.ToValue PowerDNS where
-    toValue = Qual.genericToValue
+instance TF.ToHCL PowerDNS where
+    toHCL x = TF.arguments
+        [ TF.assign "api_key" <$> _api_key x
+        , TF.assign "server_url" <$> _server_url x
+        ]
 
-{- | (Required) The PowerDNS API key. This can also be specified with
-@PDNS_API_KEY@ environment variable.
--}
-apiKey :: Functor f => (Text -> f Text) -> PowerDNS -> f PowerDNS
-apiKey f s =
-    (\x -> s { _api_key = x })
-        <$> f (_api_key s)
-
-{- | (Required) The address of PowerDNS server. This can also be specified with
-@PDNS_SERVER_URL@ environment variable.
--}
-serverUrl :: Functor f => (Text -> f Text) -> PowerDNS -> f PowerDNS
-serverUrl f s =
-    (\x -> s { _server_url = x })
-        <$> f (_server_url s)
+$(TF.makeClassy ''PowerDNS)

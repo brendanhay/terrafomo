@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.AzureRM.Types    as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.AzureRM.Types   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | AzureRM Terraform provider.
 
@@ -34,77 +37,33 @@ Service Management API. Use the navigation to the left to read about the
 available resources.
 -}
 data AzureRM = AzureRM
-    { _client_id                   :: !Text
-    , _client_secret               :: !Text
-    , _environment                 :: !Text
-    , _skip_credentials_validation :: !Text
-    , _skip_provider_registration  :: !Text
-    , _subscription_id             :: !Text
-    , _tenant_id                   :: !Text
+    { _client_id                   :: !(TF.Argument Text)
+    {- ^ (Optional) The client ID to use. It can also be sourced from the @ARM_CLIENT_ID@ environment variable. -}
+    , _client_secret               :: !(TF.Argument Text)
+    {- ^ (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@ environment variable. -}
+    , _environment                 :: !(TF.Argument Text)
+    {- ^ (Optional) The cloud environment to use. It can also be sourced from the @ARM_ENVIRONMENT@ environment variable. Supported values are: -}
+    , _skip_credentials_validation :: !(TF.Argument Text)
+    {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable, defaults to @false@ . -}
+    , _skip_provider_registration  :: !(TF.Argument Text)
+    {- ^ (Optional) Prevents the provider from registering the ARM provider namespaces, this can be used if you don't wish to give the Active Directory Application permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable, defaults to @false@ . -}
+    , _subscription_id             :: !(TF.Argument Text)
+    {- ^ (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@ environment variable. -}
+    , _tenant_id                   :: !(TF.Argument Text)
+    {- ^ (Optional) The tenant ID to use. It can also be sourced from the @ARM_TENANT_ID@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable AzureRM
 
-instance Qual.ToValue AzureRM where
-    toValue = Qual.genericToValue
+instance TF.ToHCL AzureRM where
+    toHCL x = TF.arguments
+        [ TF.assign "client_id" <$> _client_id x
+        , TF.assign "client_secret" <$> _client_secret x
+        , TF.assign "environment" <$> _environment x
+        , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
+        , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
+        , TF.assign "subscription_id" <$> _subscription_id x
+        , TF.assign "tenant_id" <$> _tenant_id x
+        ]
 
-{- | (Optional) The client ID to use. It can also be sourced from the
-@ARM_CLIENT_ID@ environment variable.
--}
-clientId :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-clientId f s =
-    (\x -> s { _client_id = x })
-        <$> f (_client_id s)
-
-{- | (Optional) The client secret to use. It can also be sourced from the
-@ARM_CLIENT_SECRET@ environment variable.
--}
-clientSecret :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-clientSecret f s =
-    (\x -> s { _client_secret = x })
-        <$> f (_client_secret s)
-
-{- | (Optional) The cloud environment to use. It can also be sourced from the
-@ARM_ENVIRONMENT@ environment variable. Supported values are:
--}
-environment :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-environment f s =
-    (\x -> s { _environment = x })
-        <$> f (_environment s)
-
-{- | (Optional) Prevents the provider from validating the given credentials. When
-set to @true@ , @skip_provider_registration@ is assumed. It can also be
-sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable,
-defaults to @false@ .
--}
-skipCredentialsValidation :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-skipCredentialsValidation f s =
-    (\x -> s { _skip_credentials_validation = x })
-        <$> f (_skip_credentials_validation s)
-
-{- | (Optional) Prevents the provider from registering the ARM provider
-namespaces, this can be used if you don't wish to give the Active Directory
-Application permission to register resource providers. It can also be
-sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable,
-defaults to @false@ .
--}
-skipProviderRegistration :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-skipProviderRegistration f s =
-    (\x -> s { _skip_provider_registration = x })
-        <$> f (_skip_provider_registration s)
-
-{- | (Optional) The subscription ID to use. It can also be sourced from the
-@ARM_SUBSCRIPTION_ID@ environment variable.
--}
-subscriptionId :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-subscriptionId f s =
-    (\x -> s { _subscription_id = x })
-        <$> f (_subscription_id s)
-
-{- | (Optional) The tenant ID to use. It can also be sourced from the
-@ARM_TENANT_ID@ environment variable.
--}
-tenantId :: Functor f => (Text -> f Text) -> AzureRM -> f AzureRM
-tenantId f s =
-    (\x -> s { _tenant_id = x })
-        <$> f (_tenant_id s)
+$(TF.makeClassy ''AzureRM)

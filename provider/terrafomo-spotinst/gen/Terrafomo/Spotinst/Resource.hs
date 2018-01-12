@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,98 +23,166 @@
 --
 module Terrafomo.Spotinst.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Spotinst        as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Spotinst        as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @spotinst_aws_group@ Spotinst resource.
 
 Provides a Spotinst AWS group resource.
 -}
-data AwsGroupResource = AwsGroupResource
-    { _capacity             :: !(Attr Text)
+data AwsGroupResource = AwsGroupResource {
+      _capacity             :: !(TF.Argument Text)
     {- ^ (Required) The group capacity. Only a single block is allowed. -}
-    , _description          :: !(Attr Text)
+    , _description          :: !(TF.Argument Text)
     {- ^ (Optional) The group description. -}
-    , _elastic_ips          :: !(Attr Text)
+    , _elastic_ips          :: !(TF.Argument Text)
     {- ^ (Optional) A list of <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html> allocation IDs to associate to the group instances. -}
-    , _instance_types       :: !(Attr Text)
+    , _instance_types       :: !(TF.Argument Text)
     {- ^ - The type of instance determines your instance's CPU capacity, memory and storage (e.g., m1.small, c1.xlarge). -}
-    , _launch_specification :: !(Attr Text)
+    , _launch_specification :: !(TF.Argument Text)
     {- ^ (Required) Describes the launch specification for an instance. -}
-    , _name                 :: !(Attr Text)
+    , _name                 :: !(TF.Argument Text)
     {- ^ (Optional) The group description. -}
-    , _product              :: !(Attr Text)
+    , _product              :: !(TF.Argument Text)
     {- ^ (Required) Operation system type. -}
-    , _strategy             :: !(Attr Text)
+    , _strategy             :: !(TF.Argument Text)
     {- ^ (Required) This determines how your group request is fulfilled from the possible On-Demand and Spot pools selected for launch. Only a single block is allowed. -}
-    , _tags                 :: !(Attr Text)
+    , _tags                 :: !(TF.Argument Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeResource
-    "spotinst_aws_group"
-    ''Qual.Spotinst
-    ''AwsGroupResource)
+awsGroupResource :: TF.Resource TF.Spotinst AwsGroupResource
+awsGroupResource =
+    TF.newResource "spotinst_aws_group" $
+        AwsGroupResource {
+            _capacity = TF.Absent
+            , _description = TF.Absent
+            , _elastic_ips = TF.Absent
+            , _instance_types = TF.Absent
+            , _launch_specification = TF.Absent
+            , _name = TF.Absent
+            , _product = TF.Absent
+            , _strategy = TF.Absent
+            , _tags = TF.Absent
+            }
+
+instance TF.ToHCL AwsGroupResource where
+    toHCL AwsGroupResource{..} = TF.arguments
+        [ TF.assign "capacity" <$> _capacity
+        , TF.assign "description" <$> _description
+        , TF.assign "elastic_ips" <$> _elastic_ips
+        , TF.assign "instance_types" <$> _instance_types
+        , TF.assign "launch_specification" <$> _launch_specification
+        , TF.assign "name" <$> _name
+        , TF.assign "product" <$> _product
+        , TF.assign "strategy" <$> _strategy
+        , TF.assign "tags" <$> _tags
+        ]
+
+$(TF.makeSchemaLenses
+    ''AwsGroupResource
+    ''TF.Spotinst
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @spotinst_healthcheck@ Spotinst resource.
 
 Provides a Spotinst healthcheck resource.
 -}
-data HealthcheckResource = HealthcheckResource
-    { _check       :: !(Attr Text)
+data HealthcheckResource = HealthcheckResource {
+      _check       :: !(TF.Argument Text)
     {- ^ (Required) Describes the check to execute. -}
-    , _name        :: !(Attr Text)
+    , _name        :: !(TF.Argument Text)
     {- ^ (Optional) the name of the healthcheck -}
-    , _proxy       :: !(Attr Text)
+    , _proxy       :: !(TF.Argument Text)
     {- ^ (Required) -}
-    , _resource_id :: !(Attr Text)
+    , _resource_id :: !(TF.Argument Text)
     {- ^ (Required) The resource to health check -}
-    , _threshold   :: !(Attr Text)
+    , _threshold   :: !(TF.Argument Text)
     {- ^ (Required) -}
-    } deriving (Show, Generic)
+    , _computed_id :: !(TF.Attribute Text)
+    {- ^ - The healthcheck ID. -}
+    } deriving (Show, Eq)
 
-type instance Computed HealthcheckResource
-    = '[ '("id", Text)
-       {- - The healthcheck ID. -}
-       ]
+healthcheckResource :: TF.Resource TF.Spotinst HealthcheckResource
+healthcheckResource =
+    TF.newResource "spotinst_healthcheck" $
+        HealthcheckResource {
+            _check = TF.Absent
+            , _name = TF.Absent
+            , _proxy = TF.Absent
+            , _resource_id = TF.Absent
+            , _threshold = TF.Absent
+            , _computed_id = TF.Computed "id"
+            }
 
-$(TH.makeResource
-    "spotinst_healthcheck"
-    ''Qual.Spotinst
-    ''HealthcheckResource)
+instance TF.ToHCL HealthcheckResource where
+    toHCL HealthcheckResource{..} = TF.arguments
+        [ TF.assign "check" <$> _check
+        , TF.assign "name" <$> _name
+        , TF.assign "proxy" <$> _proxy
+        , TF.assign "resource_id" <$> _resource_id
+        , TF.assign "threshold" <$> _threshold
+        ]
+
+$(TF.makeSchemaLenses
+    ''HealthcheckResource
+    ''TF.Spotinst
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @spotinst_subscription@ Spotinst resource.
 
 Provides a Spotinst subscription resource.
 -}
-data SubscriptionResource = SubscriptionResource
-    { _endpoint    :: !(Attr Text)
+data SubscriptionResource = SubscriptionResource {
+      _endpoint    :: !(TF.Argument Text)
     {- ^ (Required) The destination for the request -}
-    , _event_type  :: !(Attr Text)
+    , _event_type  :: !(TF.Argument Text)
     {- ^ (Required) The events to subscribe to -}
-    , _format      :: !(Attr Text)
+    , _format      :: !(TF.Argument Text)
     {- ^ (Optional) The structure of the payload. -}
-    , _protocol    :: !(Attr Text)
+    , _protocol    :: !(TF.Argument Text)
     {- ^ (Required) The protocol to use to connect with the instance. Valid values: http, https -}
-    , _resource_id :: !(Attr Text)
+    , _resource_id :: !(TF.Argument Text)
     {- ^ (Required) The resource to subscribe to -}
-    } deriving (Show, Generic)
+    , _computed_id :: !(TF.Attribute Text)
+    {- ^ - The subscription ID. -}
+    } deriving (Show, Eq)
 
-type instance Computed SubscriptionResource
-    = '[ '("id", Text)
-       {- - The subscription ID. -}
-       ]
+subscriptionResource :: TF.Resource TF.Spotinst SubscriptionResource
+subscriptionResource =
+    TF.newResource "spotinst_subscription" $
+        SubscriptionResource {
+            _endpoint = TF.Absent
+            , _event_type = TF.Absent
+            , _format = TF.Absent
+            , _protocol = TF.Absent
+            , _resource_id = TF.Absent
+            , _computed_id = TF.Computed "id"
+            }
 
-$(TH.makeResource
-    "spotinst_subscription"
-    ''Qual.Spotinst
-    ''SubscriptionResource)
+instance TF.ToHCL SubscriptionResource where
+    toHCL SubscriptionResource{..} = TF.arguments
+        [ TF.assign "endpoint" <$> _endpoint
+        , TF.assign "event_type" <$> _event_type
+        , TF.assign "format" <$> _format
+        , TF.assign "protocol" <$> _protocol
+        , TF.assign "resource_id" <$> _resource_id
+        ]
+
+$(TF.makeSchemaLenses
+    ''SubscriptionResource
+    ''TF.Spotinst
+    ''TF.Resource
+    'TF.schema)

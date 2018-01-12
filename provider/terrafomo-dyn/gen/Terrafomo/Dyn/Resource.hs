@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,43 +23,64 @@
 --
 module Terrafomo.Dyn.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Dyn             as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Dyn             as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @dyn_record@ Dyn resource.
 
 Provides a Dyn DNS record resource.
 -}
-data RecordResource = RecordResource
-    { _name  :: !(Attr Text)
+data RecordResource = RecordResource {
+      _name          :: !(TF.Argument Text)
     {- ^ (Required) The name of the record. -}
-    , _ttl   :: !(Attr Text)
+    , _ttl           :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
-    , _type' :: !(Attr Text)
+    , _type'         :: !(TF.Argument Text)
     {- ^ (Required) The type of the record. -}
-    , _value :: !(Attr Text)
+    , _value         :: !(TF.Argument Text)
     {- ^ (Required) The value of the record. -}
-    , _zone  :: !(Attr Text)
+    , _zone          :: !(TF.Argument Text)
     {- ^ (Required) The DNS zone to add the record to. -}
-    } deriving (Show, Generic)
+    , _computed_fqdn :: !(TF.Attribute Text)
+    {- ^ - The FQDN of the record, built from the @name@ and the @zone@ . -}
+    , _computed_id   :: !(TF.Attribute Text)
+    {- ^ - The record ID. -}
+    } deriving (Show, Eq)
 
-type instance Computed RecordResource
-    = '[ '("fqdn", Text)
-       {- - The FQDN of the record, built from the @name@ and the @zone@ . -}
-       , '("id", Text)
-       {- - The record ID. -}
-       ]
+recordResource :: TF.Resource TF.Dyn RecordResource
+recordResource =
+    TF.newResource "dyn_record" $
+        RecordResource {
+            _name = TF.Absent
+            , _ttl = TF.Absent
+            , _type' = TF.Absent
+            , _value = TF.Absent
+            , _zone = TF.Absent
+            , _computed_fqdn = TF.Computed "fqdn"
+            , _computed_id = TF.Computed "id"
+            }
 
-$(TH.makeResource
-    "dyn_record"
-    ''Qual.Dyn
-    ''RecordResource)
+instance TF.ToHCL RecordResource where
+    toHCL RecordResource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "type" <$> _type'
+        , TF.assign "value" <$> _value
+        , TF.assign "zone" <$> _zone
+        ]
+
+$(TF.makeSchemaLenses
+    ''RecordResource
+    ''TF.Dyn
+    ''TF.Resource
+    'TF.schema)

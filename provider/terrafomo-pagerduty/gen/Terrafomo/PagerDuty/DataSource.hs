@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,17 +23,18 @@
 --
 module Terrafomo.PagerDuty.DataSource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.PagerDuty       as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.PagerDuty         as TF
+import qualified Terrafomo.Syntax.DataSource as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @pagerduty_escalation_policy@ PagerDuty datasource.
 
@@ -43,20 +42,31 @@ Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Escalation_Policies/get_escalation_policies>
 that you can use for other PagerDuty resources.
 -}
-data EscalationPolicyDataSource = EscalationPolicyDataSource
-    { _name :: !(Attr Text)
+data EscalationPolicyDataSource = EscalationPolicyDataSource {
+      _name          :: !(TF.Argument Text)
     {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
-    } deriving (Show, Generic)
+    , _computed_name :: !(TF.Attribute Text)
+    {- ^ - The short name of the found escalation policy. -}
+    } deriving (Show, Eq)
 
-type instance Computed EscalationPolicyDataSource
-    = '[ '("name", Text)
-       {- - The short name of the found escalation policy. -}
-       ]
+escalationPolicyDataSource :: TF.DataSource TF.PagerDuty EscalationPolicyDataSource
+escalationPolicyDataSource =
+    TF.newDataSource "pagerduty_escalation_policy" $
+        EscalationPolicyDataSource {
+            _name = TF.Absent
+            , _computed_name = TF.Computed "name"
+            }
 
-$(TH.makeDataSource
-    "pagerduty_escalation_policy"
-    ''Qual.PagerDuty
-    ''EscalationPolicyDataSource)
+instance TF.ToHCL EscalationPolicyDataSource where
+    toHCL EscalationPolicyDataSource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        ]
+
+$(TF.makeSchemaLenses
+    ''EscalationPolicyDataSource
+    ''TF.PagerDuty
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @pagerduty_schedule@ PagerDuty datasource.
 
@@ -64,20 +74,31 @@ Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Schedules/get_schedules>
 that you can use for other PagerDuty resources.
 -}
-data ScheduleDataSource = ScheduleDataSource
-    { _name :: !(Attr Text)
+data ScheduleDataSource = ScheduleDataSource {
+      _name          :: !(TF.Argument Text)
     {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
-    } deriving (Show, Generic)
+    , _computed_name :: !(TF.Attribute Text)
+    {- ^ - The short name of the found schedule. -}
+    } deriving (Show, Eq)
 
-type instance Computed ScheduleDataSource
-    = '[ '("name", Text)
-       {- - The short name of the found schedule. -}
-       ]
+scheduleDataSource :: TF.DataSource TF.PagerDuty ScheduleDataSource
+scheduleDataSource =
+    TF.newDataSource "pagerduty_schedule" $
+        ScheduleDataSource {
+            _name = TF.Absent
+            , _computed_name = TF.Computed "name"
+            }
 
-$(TH.makeDataSource
-    "pagerduty_schedule"
-    ''Qual.PagerDuty
-    ''ScheduleDataSource)
+instance TF.ToHCL ScheduleDataSource where
+    toHCL ScheduleDataSource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        ]
+
+$(TF.makeSchemaLenses
+    ''ScheduleDataSource
+    ''TF.PagerDuty
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @pagerduty_user@ PagerDuty datasource.
 
@@ -85,20 +106,31 @@ Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Users/get_users>
 that you can use for other PagerDuty resources.
 -}
-data UserDataSource = UserDataSource
-    { _email :: !(Attr Text)
+data UserDataSource = UserDataSource {
+      _email         :: !(TF.Argument Text)
     {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
-    } deriving (Show, Generic)
+    , _computed_name :: !(TF.Attribute Text)
+    {- ^ - The short name of the found user. -}
+    } deriving (Show, Eq)
 
-type instance Computed UserDataSource
-    = '[ '("name", Text)
-       {- - The short name of the found user. -}
-       ]
+userDataSource :: TF.DataSource TF.PagerDuty UserDataSource
+userDataSource =
+    TF.newDataSource "pagerduty_user" $
+        UserDataSource {
+            _email = TF.Absent
+            , _computed_name = TF.Computed "name"
+            }
 
-$(TH.makeDataSource
-    "pagerduty_user"
-    ''Qual.PagerDuty
-    ''UserDataSource)
+instance TF.ToHCL UserDataSource where
+    toHCL UserDataSource{..} = TF.arguments
+        [ TF.assign "email" <$> _email
+        ]
+
+$(TF.makeSchemaLenses
+    ''UserDataSource
+    ''TF.PagerDuty
+    ''TF.DataSource
+    'TF.schema)
 
 {- | The @pagerduty_vendor@ PagerDuty datasource.
 
@@ -107,19 +139,31 @@ Use this data source to get information about a specific
 that you can use for a service integration (e.g Amazon Cloudwatch, Splunk,
 Datadog).
 -}
-data VendorDataSource = VendorDataSource
-    { _name :: !(Attr Text)
+data VendorDataSource = VendorDataSource {
+      _name           :: !(TF.Argument Text)
     {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
-    } deriving (Show, Generic)
+    , _computed_name  :: !(TF.Attribute Text)
+    {- ^ - The short name of the found vendor. -}
+    , _computed_type' :: !(TF.Attribute Text)
+    {- ^ - The generic service type for this vendor. -}
+    } deriving (Show, Eq)
 
-type instance Computed VendorDataSource
-    = '[ '("name", Text)
-       {- - The short name of the found vendor. -}
-       , '("type", Text)
-       {- - The generic service type for this vendor. -}
-       ]
+vendorDataSource :: TF.DataSource TF.PagerDuty VendorDataSource
+vendorDataSource =
+    TF.newDataSource "pagerduty_vendor" $
+        VendorDataSource {
+            _name = TF.Absent
+            , _computed_name = TF.Computed "name"
+            , _computed_type' = TF.Computed "type"
+            }
 
-$(TH.makeDataSource
-    "pagerduty_vendor"
-    ''Qual.PagerDuty
-    ''VendorDataSource)
+instance TF.ToHCL VendorDataSource where
+    toHCL VendorDataSource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        ]
+
+$(TF.makeSchemaLenses
+    ''VendorDataSource
+    ''TF.PagerDuty
+    ''TF.DataSource
+    'TF.schema)

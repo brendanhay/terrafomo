@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Circonus.Types   as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Circonus.Types  as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Circonus Terraform provider.
 
@@ -29,26 +32,18 @@ The Circonus provider gives the ability to manage a Circonus account. Use
 the navigation to the left to read about the available resources.
 -}
 data Circonus = Circonus
-    { _api_url :: !Text
-    , _key     :: !Text
+    { _api_url :: !(TF.Argument Text)
+    {- ^ (Optional) The API URL to use to talk with. The default is @https://api.circonus.com/v2@ . -}
+    , _key     :: !(TF.Argument Text)
+    {- ^ (Required) The Circonus API Key. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Circonus
 
-instance Qual.ToValue Circonus where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Circonus where
+    toHCL x = TF.arguments
+        [ TF.assign "api_url" <$> _api_url x
+        , TF.assign "key" <$> _key x
+        ]
 
-{- | (Optional) The API URL to use to talk with. The default is
-@https://api.circonus.com/v2@ .
--}
-apiUrl :: Functor f => (Text -> f Text) -> Circonus -> f Circonus
-apiUrl f s =
-    (\x -> s { _api_url = x })
-        <$> f (_api_url s)
-
-{- | (Required) The Circonus API Key.
--}
-key :: Functor f => (Text -> f Text) -> Circonus -> f Circonus
-key f s =
-    (\x -> s { _key = x })
-        <$> f (_key s)
+$(TF.makeClassy ''Circonus)

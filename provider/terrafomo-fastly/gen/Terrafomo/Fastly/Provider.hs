@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Fastly.Types     as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Fastly.Types    as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Fastly Terraform provider.
 
@@ -32,18 +35,15 @@ https://www.fastly.com/signup Use the navigation to the left to read about
 the available resources.
 -}
 data Fastly = Fastly
-    { _api_key :: !Text
+    { _api_key :: !(TF.Argument Text)
+    {- ^ (Optional) This is the API key. It must be provided, but it can also be sourced from the @FASTLY_API_KEY@ environment variable -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Fastly
 
-instance Qual.ToValue Fastly where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Fastly where
+    toHCL x = TF.arguments
+        [ TF.assign "api_key" <$> _api_key x
+        ]
 
-{- | (Optional) This is the API key. It must be provided, but it can also be
-sourced from the @FASTLY_API_KEY@ environment variable
--}
-apiKey :: Functor f => (Text -> f Text) -> Fastly -> f Fastly
-apiKey f s =
-    (\x -> s { _api_key = x })
-        <$> f (_api_key s)
+$(TF.makeClassy ''Fastly)

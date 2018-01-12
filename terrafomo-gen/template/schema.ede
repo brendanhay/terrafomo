@@ -21,7 +21,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), const)
 import GHC.Show (Show)
 
 {% for import in imports %}

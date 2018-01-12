@@ -12,18 +12,16 @@
 --
 module Terrafomo.Google.Types where
 
-import GHC.Generics (Generic)
-
-import Terrafomo.Syntax.Serialize (ToValue (toValue), genericToValue)
+import qualified Terrafomo.Syntax.HCL as TF
 
 data PlacementType = PlacementType
-    deriving (Show, Eq, Generic)
+    deriving (Show, Eq)
 
-instance ToValue PlacementType where
-    toValue = genericToValue
+instance TF.ToHCL PlacementType where
+    toHCL _ = TF.arguments []
 
 data SchedulingType = SchedulingType
-    deriving (Show, Eq, Generic)
+    deriving (Show, Eq)
 
-instance ToValue SchedulingType where
-    toValue = genericToValue
+instance TF.ToHCL SchedulingType where
+    toHCL _ = TF.arguments []

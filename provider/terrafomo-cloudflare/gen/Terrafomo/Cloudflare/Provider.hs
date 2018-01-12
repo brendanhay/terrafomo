@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Cloudflare.Types as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Cloudflare.Types as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | Cloudflare Terraform provider.
 
@@ -31,27 +34,18 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Cloudflare = Cloudflare
-    { _email :: !Text
-    , _token :: !Text
+    { _email :: !(TF.Argument Text)
+    {- ^ (Required) The email associated with the account. This can also be specified with the @CLOUDFLARE_EMAIL@ shell environment variable. -}
+    , _token :: !(TF.Argument Text)
+    {- ^ (Required) The Cloudflare API token. This can also be specified with the @CLOUDFLARE_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Cloudflare
 
-instance Qual.ToValue Cloudflare where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Cloudflare where
+    toHCL x = TF.arguments
+        [ TF.assign "email" <$> _email x
+        , TF.assign "token" <$> _token x
+        ]
 
-{- | (Required) The email associated with the account. This can also be specified
-with the @CLOUDFLARE_EMAIL@ shell environment variable.
--}
-email :: Functor f => (Text -> f Text) -> Cloudflare -> f Cloudflare
-email f s =
-    (\x -> s { _email = x })
-        <$> f (_email s)
-
-{- | (Required) The Cloudflare API token. This can also be specified with the
-@CLOUDFLARE_TOKEN@ shell environment variable.
--}
-token :: Functor f => (Text -> f Text) -> Cloudflare -> f Cloudflare
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
+$(TF.makeClassy ''Cloudflare)

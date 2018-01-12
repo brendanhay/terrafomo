@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Bitbucket.Types  as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Bitbucket.Types as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Bitbucket Terraform provider.
 
@@ -30,27 +33,18 @@ repositories, webhooks, and default reviewers. Use the navigation to the
 left to read about the available resources.
 -}
 data Bitbucket = Bitbucket
-    { _password :: !Text
-    , _username :: !Text
+    { _password :: !(TF.Argument Text)
+    {- ^ (Required) Your password used to connect to bitbucket. You can also set this via the environment variable. @BITBUCKET_PASSWORD@ -}
+    , _username :: !(TF.Argument Text)
+    {- ^ (Required) Your username used to connect to bitbucket. You can also set this via the environment variable. @BITBUCKET_USERNAME@ -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Bitbucket
 
-instance Qual.ToValue Bitbucket where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Bitbucket where
+    toHCL x = TF.arguments
+        [ TF.assign "password" <$> _password x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Required) Your password used to connect to bitbucket. You can also set this
-via the environment variable. @BITBUCKET_PASSWORD@
--}
-password :: Functor f => (Text -> f Text) -> Bitbucket -> f Bitbucket
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Required) Your username used to connect to bitbucket. You can also set this
-via the environment variable. @BITBUCKET_USERNAME@
--}
-username :: Functor f => (Text -> f Text) -> Bitbucket -> f Bitbucket
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''Bitbucket)

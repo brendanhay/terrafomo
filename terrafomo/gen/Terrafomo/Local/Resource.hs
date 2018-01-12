@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,16 +23,17 @@
 --
 module Terrafomo.Local.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @local_file@ Local resource.
 
@@ -45,14 +44,29 @@ present and will generate a diff to re-create it. This may cause "noise" in
 diffs in environments where configurations are routinely applied by many
 different users or within automation systems.
 -}
-data FileResource = FileResource
-    { _content  :: !(Attr Text)
+data FileResource = FileResource {
+      _content  :: !(TF.Argument Text)
     {- ^ (Required) The content of file to create. -}
-    , _filename :: !(Attr Text)
+    , _filename :: !(TF.Argument Text)
     {- ^ (Required) The path of the file to create. -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeResource
-    "local_file"
-    ''Qual.Provider
-    ''FileResource)
+fileResource :: TF.Resource TF.Local FileResource
+fileResource =
+    TF.newResource "local_file" $
+        FileResource {
+            _content = TF.Absent
+            , _filename = TF.Absent
+            }
+
+instance TF.ToHCL FileResource where
+    toHCL FileResource{..} = TF.arguments
+        [ TF.assign "content" <$> _content
+        , TF.assign "filename" <$> _filename
+        ]
+
+$(TF.makeSchemaLenses
+    ''FileResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)

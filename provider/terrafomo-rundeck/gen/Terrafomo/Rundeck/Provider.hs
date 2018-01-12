@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Rundeck.Types    as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Rundeck.Types   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Rundeck Terraform provider.
 
@@ -36,5 +39,7 @@ data Rundeck = Rundeck
 
 instance Hashable Rundeck
 
-instance Qual.ToValue Rundeck where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Rundeck where
+    toHCL = const $ TF.arguments []
+
+$(TF.makeClassy ''Rundeck)

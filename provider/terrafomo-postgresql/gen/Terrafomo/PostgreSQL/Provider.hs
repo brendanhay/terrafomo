@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.PostgreSQL.Types as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.PostgreSQL.Types as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | PostgreSQL Terraform provider.
 
@@ -30,91 +33,39 @@ in a PostgreSQL server. Use the navigation to the left to read about the
 available resources.
 -}
 data PostgreSQL = PostgreSQL
-    { _connect_timeout  :: !Text
-    , _database         :: !Text
-    , _expected_version :: !Text
-    , _host             :: !Text
-    , _max_connections  :: !Text
-    , _password         :: !Text
-    , _port             :: !Text
-    , _sslmode          :: !Text
-    , _username         :: !Text
+    { _connect_timeout  :: !(TF.Argument Text)
+    {- ^ (Optional) Maximum wait for connection, in seconds. The default is @180s@ .  Zero or not specified means wait indefinitely. -}
+    , _database         :: !(TF.Argument Text)
+    {- ^ (Optional) Database to connect to. The default is @postgres@ . -}
+    , _expected_version :: !(TF.Argument Text)
+    {- ^ (Optional) Specify a hint to Terraform regarding the expected version that the provider will be talking with.  This is a required hint in order for Terraform to talk with an ancient version of PostgreSQL. This parameter is expected to be a <https://www.postgresql.org/support/versioning/> or @current@ .  Once a connection has been established, Terraform will fingerprint the actual version.  Default: @9.0.0@ . -}
+    , _host             :: !(TF.Argument Text)
+    {- ^ (Required) The address for the postgresql server connection. -}
+    , _max_connections  :: !(TF.Argument Text)
+    {- ^ (Optional) Set the maximum number of open connections to the database. The default is @4@ .  Zero means unlimited open connections. -}
+    , _password         :: !(TF.Argument Text)
+    {- ^ (Optional) Password for the server connection. -}
+    , _port             :: !(TF.Argument Text)
+    {- ^ (Optional) The port for the postgresql server connection. The default is @5432@ . -}
+    , _sslmode          :: !(TF.Argument Text)
+    {- ^ (Optional) Set the priority for an SSL connection to the server. Valid values for @sslmode@ are (note: @prefer@ is not supported by Go's <https://godoc.org/github.com/lib/pq> ): -}
+    , _username         :: !(TF.Argument Text)
+    {- ^ (Required) Username for the server connection. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable PostgreSQL
 
-instance Qual.ToValue PostgreSQL where
-    toValue = Qual.genericToValue
+instance TF.ToHCL PostgreSQL where
+    toHCL x = TF.arguments
+        [ TF.assign "connect_timeout" <$> _connect_timeout x
+        , TF.assign "database" <$> _database x
+        , TF.assign "expected_version" <$> _expected_version x
+        , TF.assign "host" <$> _host x
+        , TF.assign "max_connections" <$> _max_connections x
+        , TF.assign "password" <$> _password x
+        , TF.assign "port" <$> _port x
+        , TF.assign "sslmode" <$> _sslmode x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Optional) Maximum wait for connection, in seconds. The default is @180s@ .
-Zero or not specified means wait indefinitely.
--}
-connectTimeout :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-connectTimeout f s =
-    (\x -> s { _connect_timeout = x })
-        <$> f (_connect_timeout s)
-
-{- | (Optional) Database to connect to. The default is @postgres@ .
--}
-database :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-database f s =
-    (\x -> s { _database = x })
-        <$> f (_database s)
-
-{- | (Optional) Specify a hint to Terraform regarding the expected version that
-the provider will be talking with.  This is a required hint in order for
-Terraform to talk with an ancient version of PostgreSQL. This parameter is
-expected to be a <https://www.postgresql.org/support/versioning/> or
-@current@ .  Once a connection has been established, Terraform will
-fingerprint the actual version.  Default: @9.0.0@ .
--}
-expectedVersion :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-expectedVersion f s =
-    (\x -> s { _expected_version = x })
-        <$> f (_expected_version s)
-
-{- | (Required) The address for the postgresql server connection.
--}
-host :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-host f s =
-    (\x -> s { _host = x })
-        <$> f (_host s)
-
-{- | (Optional) Set the maximum number of open connections to the database. The
-default is @4@ .  Zero means unlimited open connections.
--}
-maxConnections :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-maxConnections f s =
-    (\x -> s { _max_connections = x })
-        <$> f (_max_connections s)
-
-{- | (Optional) Password for the server connection.
--}
-password :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Optional) The port for the postgresql server connection. The default is
-@5432@ .
--}
-port :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-port f s =
-    (\x -> s { _port = x })
-        <$> f (_port s)
-
-{- | (Optional) Set the priority for an SSL connection to the server. Valid
-values for @sslmode@ are (note: @prefer@ is not supported by Go's
-<https://godoc.org/github.com/lib/pq> ):
--}
-sslmode :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-sslmode f s =
-    (\x -> s { _sslmode = x })
-        <$> f (_sslmode s)
-
-{- | (Required) Username for the server connection.
--}
-username :: Functor f => (Text -> f Text) -> PostgreSQL -> f PostgreSQL
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''PostgreSQL)

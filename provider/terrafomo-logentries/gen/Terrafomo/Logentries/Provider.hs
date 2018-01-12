@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Logentries.Types as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Logentries.Types as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | Logentries Terraform provider.
 
@@ -31,19 +34,15 @@ be configured with a Logentries account key before it can be used. Use the
 navigation to the left to read about the available resources.
 -}
 data Logentries = Logentries
-    { _account_key :: !Text
+    { _account_key :: !(TF.Argument Text)
+    {- ^ (Required) The Logentries account key. This can also be specified with the @LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries <https://logentries.com/doc/accountkey/> for more information. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Logentries
 
-instance Qual.ToValue Logentries where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Logentries where
+    toHCL x = TF.arguments
+        [ TF.assign "account_key" <$> _account_key x
+        ]
 
-{- | (Required) The Logentries account key. This can also be specified with the
-@LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries
-<https://logentries.com/doc/accountkey/> for more information.
--}
-accountKey :: Functor f => (Text -> f Text) -> Logentries -> f Logentries
-accountKey f s =
-    (\x -> s { _account_key = x })
-        <$> f (_account_key s)
+$(TF.makeClassy ''Logentries)

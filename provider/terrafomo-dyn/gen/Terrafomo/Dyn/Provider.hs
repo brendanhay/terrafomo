@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Dyn.Types        as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Dyn.Types       as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Dyn Terraform provider.
 
@@ -31,36 +34,21 @@ can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data Dyn = Dyn
-    { _customer_name :: !Text
-    , _password      :: !Text
-    , _username      :: !Text
+    { _customer_name :: !(TF.Argument Text)
+    {- ^ (Required) The Dyn customer name. It must be provided, but it can also be sourced from the @DYN_CUSTOMER_NAME@ environment variable. -}
+    , _password      :: !(TF.Argument Text)
+    {- ^ (Required) The Dyn password. It must be provided, but it can also be sourced from the @DYN_PASSWORD@ environment variable. -}
+    , _username      :: !(TF.Argument Text)
+    {- ^ (Required) The Dyn username. It must be provided, but it can also be sourced from the @DYN_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Dyn
 
-instance Qual.ToValue Dyn where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Dyn where
+    toHCL x = TF.arguments
+        [ TF.assign "customer_name" <$> _customer_name x
+        , TF.assign "password" <$> _password x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Required) The Dyn customer name. It must be provided, but it can also be
-sourced from the @DYN_CUSTOMER_NAME@ environment variable.
--}
-customerName :: Functor f => (Text -> f Text) -> Dyn -> f Dyn
-customerName f s =
-    (\x -> s { _customer_name = x })
-        <$> f (_customer_name s)
-
-{- | (Required) The Dyn password. It must be provided, but it can also be sourced
-from the @DYN_PASSWORD@ environment variable.
--}
-password :: Functor f => (Text -> f Text) -> Dyn -> f Dyn
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Required) The Dyn username. It must be provided, but it can also be sourced
-from the @DYN_USERNAME@ environment variable.
--}
-username :: Functor f => (Text -> f Text) -> Dyn -> f Dyn
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''Dyn)

@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.DigitalOcean.Types as Qual
-import qualified Terrafomo.Syntax.Provider    as Qual
-import qualified Terrafomo.Syntax.Serialize   as Qual
+import qualified Terrafomo.DigitalOcean.Types as TF
+import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.TH                 as TF
 
 {- | DigitalOcean Terraform provider.
 
@@ -31,18 +34,15 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data DigitalOcean = DigitalOcean
-    { _token :: !Text
+    { _token :: !(TF.Argument Text)
+    {- ^ (Required) This is the DO API token. This can also be specified with the @DIGITALOCEAN_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable DigitalOcean
 
-instance Qual.ToValue DigitalOcean where
-    toValue = Qual.genericToValue
+instance TF.ToHCL DigitalOcean where
+    toHCL x = TF.arguments
+        [ TF.assign "token" <$> _token x
+        ]
 
-{- | (Required) This is the DO API token. This can also be specified with the
-@DIGITALOCEAN_TOKEN@ shell environment variable.
--}
-token :: Functor f => (Text -> f Text) -> DigitalOcean -> f DigitalOcean
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
+$(TF.makeClassy ''DigitalOcean)

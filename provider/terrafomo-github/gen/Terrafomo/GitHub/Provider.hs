@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.GitHub.Types     as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.GitHub.Types    as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | GitHub Terraform provider.
 
@@ -32,40 +35,21 @@ it can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data GitHub = GitHub
-    { _base_url     :: !Text
-    , _organization :: !Text
-    , _token        :: !Text
+    { _base_url     :: !(TF.Argument Text)
+    {- ^ (Optional) This is the target GitHub base API endpoint. Providing a value is a requirement when working with GitHub Enterprise.  It is optional to provide this value and it can also be sourced from the @GITHUB_BASE_URL@ environment variable.  The value must end with a slash. -}
+    , _organization :: !(TF.Argument Text)
+    {- ^ (Optional) This is the target GitHub organization to manage. The account corresponding to the token will need "owner" privileges for this organization. It must be provided, but it can also be sourced from the @GITHUB_ORGANIZATION@ environment variable. -}
+    , _token        :: !(TF.Argument Text)
+    {- ^ (Optional) This is the GitHub personal access token. It must be provided, but it can also be sourced from the @GITHUB_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable GitHub
 
-instance Qual.ToValue GitHub where
-    toValue = Qual.genericToValue
+instance TF.ToHCL GitHub where
+    toHCL x = TF.arguments
+        [ TF.assign "base_url" <$> _base_url x
+        , TF.assign "organization" <$> _organization x
+        , TF.assign "token" <$> _token x
+        ]
 
-{- | (Optional) This is the target GitHub base API endpoint. Providing a value is
-a requirement when working with GitHub Enterprise.  It is optional to
-provide this value and it can also be sourced from the @GITHUB_BASE_URL@
-environment variable.  The value must end with a slash.
--}
-baseUrl :: Functor f => (Text -> f Text) -> GitHub -> f GitHub
-baseUrl f s =
-    (\x -> s { _base_url = x })
-        <$> f (_base_url s)
-
-{- | (Optional) This is the target GitHub organization to manage. The account
-corresponding to the token will need "owner" privileges for this
-organization. It must be provided, but it can also be sourced from the
-@GITHUB_ORGANIZATION@ environment variable.
--}
-organization :: Functor f => (Text -> f Text) -> GitHub -> f GitHub
-organization f s =
-    (\x -> s { _organization = x })
-        <$> f (_organization s)
-
-{- | (Optional) This is the GitHub personal access token. It must be provided,
-but it can also be sourced from the @GITHUB_TOKEN@ environment variable.
--}
-token :: Functor f => (Text -> f Text) -> GitHub -> f GitHub
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
+$(TF.makeClassy ''GitHub)

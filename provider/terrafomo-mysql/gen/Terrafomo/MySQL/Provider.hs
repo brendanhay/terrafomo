@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.MySQL.Types      as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.MySQL.Types     as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | MySQL Terraform provider.
 
@@ -31,35 +34,21 @@ server. Use the navigation to the left to read about the available
 resources.
 -}
 data MySQL = MySQL
-    { _endpoint :: !Text
-    , _password :: !Text
-    , _username :: !Text
+    { _endpoint :: !(TF.Argument Text)
+    {- ^ (Required) The address of the MySQL server to use. Most often a "hostname:port" pair, but may also be an absolute path to a Unix socket when the host OS is Unix-compatible. -}
+    , _password :: !(TF.Argument Text)
+    {- ^ (Optional) Password for the given user, if that user has a password. -}
+    , _username :: !(TF.Argument Text)
+    {- ^ (Required) Username to use to authenticate with the server. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable MySQL
 
-instance Qual.ToValue MySQL where
-    toValue = Qual.genericToValue
+instance TF.ToHCL MySQL where
+    toHCL x = TF.arguments
+        [ TF.assign "endpoint" <$> _endpoint x
+        , TF.assign "password" <$> _password x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Required) The address of the MySQL server to use. Most often a
-"hostname:port" pair, but may also be an absolute path to a Unix socket when
-the host OS is Unix-compatible.
--}
-endpoint :: Functor f => (Text -> f Text) -> MySQL -> f MySQL
-endpoint f s =
-    (\x -> s { _endpoint = x })
-        <$> f (_endpoint s)
-
-{- | (Optional) Password for the given user, if that user has a password.
--}
-password :: Functor f => (Text -> f Text) -> MySQL -> f MySQL
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Required) Username to use to authenticate with the server.
--}
-username :: Functor f => (Text -> f Text) -> MySQL -> f MySQL
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''MySQL)

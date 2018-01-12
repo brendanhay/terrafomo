@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Cobbler.Types    as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Cobbler.Types   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Cobbler Terraform provider.
 
@@ -31,36 +34,21 @@ the proper credentials before it can be used. Use the navigation to the left
 to read about the available resources.
 -}
 data Cobbler = Cobbler
-    { _password :: !Text
-    , _url      :: !Text
-    , _username :: !Text
+    { _password :: !(TF.Argument Text)
+    {- ^ (Required) The password to the Cobbler service. This can also be specified with the @COBBLER_PASSWORD@ shell environment variable. -}
+    , _url      :: !(TF.Argument Text)
+    {- ^ (Required) The url to the Cobbler service. This can also be specified with the @COBBLER_URL@ shell environment variable. -}
+    , _username :: !(TF.Argument Text)
+    {- ^ (Required) The username to the Cobbler service. This can also be specified with the @COBBLER_USERNAME@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Cobbler
 
-instance Qual.ToValue Cobbler where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Cobbler where
+    toHCL x = TF.arguments
+        [ TF.assign "password" <$> _password x
+        , TF.assign "url" <$> _url x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Required) The password to the Cobbler service. This can also be specified
-with the @COBBLER_PASSWORD@ shell environment variable.
--}
-password :: Functor f => (Text -> f Text) -> Cobbler -> f Cobbler
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Required) The url to the Cobbler service. This can also be specified with
-the @COBBLER_URL@ shell environment variable.
--}
-url :: Functor f => (Text -> f Text) -> Cobbler -> f Cobbler
-url f s =
-    (\x -> s { _url = x })
-        <$> f (_url s)
-
-{- | (Required) The username to the Cobbler service. This can also be specified
-with the @COBBLER_USERNAME@ shell environment variable.
--}
-username :: Functor f => (Text -> f Text) -> Cobbler -> f Cobbler
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''Cobbler)

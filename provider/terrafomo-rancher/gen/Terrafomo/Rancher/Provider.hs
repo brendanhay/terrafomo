@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Rancher.Types    as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Rancher.Types   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Rancher Terraform provider.
 
@@ -31,36 +34,21 @@ server at minimum and API credentials if access control is enabled on the
 server.
 -}
 data Rancher = Rancher
-    { _access_key :: !Text
-    , _api_url    :: !Text
-    , _secret_key :: !Text
+    { _access_key :: !(TF.Argument Text)
+    {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_ACCESS_KEY@ environment variable. -}
+    , _api_url    :: !(TF.Argument Text)
+    {- ^ (Required) Rancher API url. It must be provided, but it can also be sourced from the @RANCHER_URL@ environment variable. -}
+    , _secret_key :: !(TF.Argument Text)
+    {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Rancher
 
-instance Qual.ToValue Rancher where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Rancher where
+    toHCL x = TF.arguments
+        [ TF.assign "access_key" <$> _access_key x
+        , TF.assign "api_url" <$> _api_url x
+        , TF.assign "secret_key" <$> _secret_key x
+        ]
 
-{- | (Optional) Rancher API access key. It can also be sourced from the
-@RANCHER_ACCESS_KEY@ environment variable.
--}
-accessKey :: Functor f => (Text -> f Text) -> Rancher -> f Rancher
-accessKey f s =
-    (\x -> s { _access_key = x })
-        <$> f (_access_key s)
-
-{- | (Required) Rancher API url. It must be provided, but it can also be sourced
-from the @RANCHER_URL@ environment variable.
--}
-apiUrl :: Functor f => (Text -> f Text) -> Rancher -> f Rancher
-apiUrl f s =
-    (\x -> s { _api_url = x })
-        <$> f (_api_url s)
-
-{- | (Optional) Rancher API access key. It can also be sourced from the
-@RANCHER_SECRET_KEY@ environment variable.
--}
-secretKey :: Functor f => (Text -> f Text) -> Rancher -> f Rancher
-secretKey f s =
-    (\x -> s { _secret_key = x })
-        <$> f (_secret_key s)
+$(TF.makeClassy ''Rancher)

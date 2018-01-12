@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.DNSimple.Types   as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.DNSimple.Types  as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | DNSimple Terraform provider.
 
@@ -31,31 +34,18 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSimple = DNSimple
-    { _account :: !Text
-    , _token   :: !Text
+    { _account :: !(TF.Argument Text)
+    {- ^ (Required) The ID of the account associated with the token. It must be provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment variable. -}
+    , _token   :: !(TF.Argument Text)
+    {- ^ (Required) The DNSimple API v2 token. It must be provided, but it can also be sourced from the @DNSIMPLE_TOKEN@ environment variable. Please note that this must be an <https://support.dnsimple.com/articles/api-access-token/> . You can use either an User or Account token, but an Account token is recommended. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable DNSimple
 
-instance Qual.ToValue DNSimple where
-    toValue = Qual.genericToValue
+instance TF.ToHCL DNSimple where
+    toHCL x = TF.arguments
+        [ TF.assign "account" <$> _account x
+        , TF.assign "token" <$> _token x
+        ]
 
-{- | (Required) The ID of the account associated with the token. It must be
-provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment
-variable.
--}
-account :: Functor f => (Text -> f Text) -> DNSimple -> f DNSimple
-account f s =
-    (\x -> s { _account = x })
-        <$> f (_account s)
-
-{- | (Required) The DNSimple API v2 token. It must be provided, but it can also
-be sourced from the @DNSIMPLE_TOKEN@ environment variable. Please note that
-this must be an <https://support.dnsimple.com/articles/api-access-token/> .
-You can use either an User or Account token, but an Account token is
-recommended.
--}
-token :: Functor f => (Text -> f Text) -> DNSimple -> f DNSimple
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
+$(TF.makeClassy ''DNSimple)

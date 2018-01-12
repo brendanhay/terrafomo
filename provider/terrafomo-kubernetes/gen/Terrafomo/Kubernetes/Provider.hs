@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Kubernetes.Types as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Kubernetes.Types as TF
+import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.TH               as TF
 
 {- | Kubernetes Terraform provider.
 
@@ -31,129 +34,51 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Kubernetes = Kubernetes
-    { _client_certificate       :: !Text
-    , _client_key               :: !Text
-    , _cluster_ca_certificate   :: !Text
-    , _config_context           :: !Text
-    , _config_context_auth_info :: !Text
-    , _config_context_cluster   :: !Text
-    , _config_path              :: !Text
-    , _host                     :: !Text
-    , _insecure                 :: !Text
-    , _load_config_file         :: !Text
-    , _password                 :: !Text
-    , _token                    :: !Text
-    , _username                 :: !Text
+    { _client_certificate       :: !(TF.Argument Text)
+    {- ^ (Optional) PEM-encoded client certificate for TLS authentication. Can be sourced from @KUBE_CLIENT_CERT_DATA@ . -}
+    , _client_key               :: !(TF.Argument Text)
+    {- ^ (Optional) PEM-encoded client certificate key for TLS authentication. Can be sourced from @KUBE_CLIENT_KEY_DATA@ . -}
+    , _cluster_ca_certificate   :: !(TF.Argument Text)
+    {- ^ (Optional) PEM-encoded root certificates bundle for TLS authentication. Can be sourced from @KUBE_CLUSTER_CA_CERT_DATA@ . -}
+    , _config_context           :: !(TF.Argument Text)
+    {- ^ (Optional) Context to choose from the config file. Can be sourced from @KUBE_CTX@ . -}
+    , _config_context_auth_info :: !(TF.Argument Text)
+    {- ^ (Optional) Authentication info context of the kube config (name of the kubeconfig user, @--user@ flag in @kubectl@ ). Can be sourced from @KUBE_CTX_AUTH_INFO@ . -}
+    , _config_context_cluster   :: !(TF.Argument Text)
+    {- ^ (Optional) Cluster context of the kube config (name of the kubeconfig cluster, @--cluster@ flag in @kubectl@ ). Can be sourced from @KUBE_CTX_CLUSTER@ . -}
+    , _config_path              :: !(TF.Argument Text)
+    {- ^ (Optional) Path to the kube config file. Can be sourced from @KUBE_CONFIG@ or @KUBECONFIG@ . Defaults to @~/.kube/config@ . -}
+    , _host                     :: !(TF.Argument Text)
+    {- ^ (Optional) The hostname (in form of URI) of Kubernetes master. Can be sourced from @KUBE_HOST@ . Defaults to @https://localhost@ . -}
+    , _insecure                 :: !(TF.Argument Text)
+    {- ^ (Optional) Whether server should be accessed without verifying the TLS certificate. Can be sourced from @KUBE_INSECURE@ . Defaults to @false@ . -}
+    , _load_config_file         :: !(TF.Argument Text)
+    {- ^ (Optional) By default the local config (~/.kube/config) is loaded when you use this provider. This option at false disable this behaviour. Can be sourced from @KUBE_LOAD_CONFIG_FILE@ . -}
+    , _password                 :: !(TF.Argument Text)
+    {- ^ (Optional) The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Can be sourced from @KUBE_PASSWORD@ . -}
+    , _token                    :: !(TF.Argument Text)
+    {- ^ (Optional) Token of your service account.  Can be sourced from @KUBE_TOKEN@ . -}
+    , _username                 :: !(TF.Argument Text)
+    {- ^ (Optional) The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Can be sourced from @KUBE_USER@ . -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Kubernetes
 
-instance Qual.ToValue Kubernetes where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Kubernetes where
+    toHCL x = TF.arguments
+        [ TF.assign "client_certificate" <$> _client_certificate x
+        , TF.assign "client_key" <$> _client_key x
+        , TF.assign "cluster_ca_certificate" <$> _cluster_ca_certificate x
+        , TF.assign "config_context" <$> _config_context x
+        , TF.assign "config_context_auth_info" <$> _config_context_auth_info x
+        , TF.assign "config_context_cluster" <$> _config_context_cluster x
+        , TF.assign "config_path" <$> _config_path x
+        , TF.assign "host" <$> _host x
+        , TF.assign "insecure" <$> _insecure x
+        , TF.assign "load_config_file" <$> _load_config_file x
+        , TF.assign "password" <$> _password x
+        , TF.assign "token" <$> _token x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Optional) PEM-encoded client certificate for TLS authentication. Can be
-sourced from @KUBE_CLIENT_CERT_DATA@ .
--}
-clientCertificate :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-clientCertificate f s =
-    (\x -> s { _client_certificate = x })
-        <$> f (_client_certificate s)
-
-{- | (Optional) PEM-encoded client certificate key for TLS authentication. Can be
-sourced from @KUBE_CLIENT_KEY_DATA@ .
--}
-clientKey :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-clientKey f s =
-    (\x -> s { _client_key = x })
-        <$> f (_client_key s)
-
-{- | (Optional) PEM-encoded root certificates bundle for TLS authentication. Can
-be sourced from @KUBE_CLUSTER_CA_CERT_DATA@ .
--}
-clusterCaCertificate :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-clusterCaCertificate f s =
-    (\x -> s { _cluster_ca_certificate = x })
-        <$> f (_cluster_ca_certificate s)
-
-{- | (Optional) Context to choose from the config file. Can be sourced from
-@KUBE_CTX@ .
--}
-configContext :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-configContext f s =
-    (\x -> s { _config_context = x })
-        <$> f (_config_context s)
-
-{- | (Optional) Authentication info context of the kube config (name of the
-kubeconfig user, @--user@ flag in @kubectl@ ). Can be sourced from
-@KUBE_CTX_AUTH_INFO@ .
--}
-configContextAuthInfo :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-configContextAuthInfo f s =
-    (\x -> s { _config_context_auth_info = x })
-        <$> f (_config_context_auth_info s)
-
-{- | (Optional) Cluster context of the kube config (name of the kubeconfig
-cluster, @--cluster@ flag in @kubectl@ ). Can be sourced from
-@KUBE_CTX_CLUSTER@ .
--}
-configContextCluster :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-configContextCluster f s =
-    (\x -> s { _config_context_cluster = x })
-        <$> f (_config_context_cluster s)
-
-{- | (Optional) Path to the kube config file. Can be sourced from @KUBE_CONFIG@
-or @KUBECONFIG@ . Defaults to @~/.kube/config@ .
--}
-configPath :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-configPath f s =
-    (\x -> s { _config_path = x })
-        <$> f (_config_path s)
-
-{- | (Optional) The hostname (in form of URI) of Kubernetes master. Can be
-sourced from @KUBE_HOST@ . Defaults to @https://localhost@ .
--}
-host :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-host f s =
-    (\x -> s { _host = x })
-        <$> f (_host s)
-
-{- | (Optional) Whether server should be accessed without verifying the TLS
-certificate. Can be sourced from @KUBE_INSECURE@ . Defaults to @false@ .
--}
-insecure :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-insecure f s =
-    (\x -> s { _insecure = x })
-        <$> f (_insecure s)
-
-{- | (Optional) By default the local config (~/.kube/config) is loaded when you
-use this provider. This option at false disable this behaviour. Can be
-sourced from @KUBE_LOAD_CONFIG_FILE@ .
--}
-loadConfigFile :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-loadConfigFile f s =
-    (\x -> s { _load_config_file = x })
-        <$> f (_load_config_file s)
-
-{- | (Optional) The password to use for HTTP basic authentication when accessing
-the Kubernetes master endpoint. Can be sourced from @KUBE_PASSWORD@ .
--}
-password :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Optional) Token of your service account.  Can be sourced from @KUBE_TOKEN@
-.
--}
-token :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
-
-{- | (Optional) The username to use for HTTP basic authentication when accessing
-the Kubernetes master endpoint. Can be sourced from @KUBE_USER@ .
--}
-username :: Functor f => (Text -> f Text) -> Kubernetes -> f Kubernetes
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''Kubernetes)

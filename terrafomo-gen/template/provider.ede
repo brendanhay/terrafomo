@@ -2,6 +2,7 @@
 
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -40,7 +41,8 @@ import qualified {{ import.value }} as TF
 -}
 data {{ provider.name }} = {{ provider.name }}
   {% for arg in schema.arguments %}
-    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !{{ arg.value.type }}
+    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
+    {- ^ {{ arg.value.help }} -}
     {% if arg.last %}
     } deriving (Show, Eq, Generic)
     {% endif %}
@@ -58,12 +60,5 @@ instance TF.ToHCL {{ provider.name }} where
   {% else %}
     toHCL = const $ TF.arguments []
   {% endfor %}
-{% for arg in schema.arguments %}
 
-{- | {{ arg.value.help | wrap }}
--}
-{{ arg.key | toCamel}} :: Functor f => ({{ arg.value.type }} -> f {{ arg.value.type}}) -> {{ provider.name }} -> f {{ provider.name }}
-{{ arg.key | toCamel }} f s =
-    (\x -> s { {{ arg.key }} = x })
-        <$> f ({{ arg.key }} s)
-{% endfor %}
+$(TF.makeClassy ''{{ provider.name }})

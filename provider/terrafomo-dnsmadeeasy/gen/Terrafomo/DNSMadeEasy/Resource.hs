@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,26 +23,37 @@
 --
 module Terrafomo.DNSMadeEasy.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.DNSMadeEasy     as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.DNSMadeEasy     as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @dme_record@ DNSMadeEasy resource.
 
 Provides a DNSMadeEasy record resource.
 -}
-data RecordResource = RecordResource
-    deriving (Show, Generic)
+data RecordResource = RecordResource {
+    } deriving (Show, Eq)
 
-$(TH.makeResource
-    "dme_record"
-    ''Qual.DNSMadeEasy
-    ''RecordResource)
+recordResource :: TF.Resource TF.DNSMadeEasy RecordResource
+recordResource =
+    TF.newResource "dme_record" $
+        RecordResource {
+            }
+
+instance TF.ToHCL RecordResource where
+    toHCL = const $ TF.arguments []
+
+$(TF.makeSchemaLenses
+    ''RecordResource
+    ''TF.DNSMadeEasy
+    ''TF.Resource
+    'TF.schema)

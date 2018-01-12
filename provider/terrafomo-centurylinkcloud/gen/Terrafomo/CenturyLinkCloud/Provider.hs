@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.CenturyLinkCloud.Types as Qual
-import qualified Terrafomo.Syntax.Provider        as Qual
-import qualified Terrafomo.Syntax.Serialize       as Qual
+import qualified Terrafomo.CenturyLinkCloud.Types as TF
+import qualified Terrafomo.Syntax.HCL             as TF
+import qualified Terrafomo.Syntax.Variable        as TF
+import qualified Terrafomo.TH                     as TF
 
 {- | CenturyLinkCloud Terraform provider.
 
@@ -32,36 +35,21 @@ about the available resources. For additional documentation, see the
 <https://www.ctl.io/developers/>
 -}
 data CenturyLinkCloud = CenturyLinkCloud
-    { _clc_account  :: !Text
-    , _clc_password :: !Text
-    , _clc_username :: !Text
+    { _clc_account  :: !(TF.Argument Text)
+    {- ^ (Optional) Override CLC account alias. Also taken from the @CLC_ACCOUNT@ environment variable if provided. -}
+    , _clc_password :: !(TF.Argument Text)
+    {- ^ (Required) This is the CLC account password. It must be provided, but it can also be sourced from the @CLC_PASSWORD@ environment variable. -}
+    , _clc_username :: !(TF.Argument Text)
+    {- ^ (Required) This is the CLC account username. It must be provided, but it can also be sourced from the @CLC_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable CenturyLinkCloud
 
-instance Qual.ToValue CenturyLinkCloud where
-    toValue = Qual.genericToValue
+instance TF.ToHCL CenturyLinkCloud where
+    toHCL x = TF.arguments
+        [ TF.assign "clc_account" <$> _clc_account x
+        , TF.assign "clc_password" <$> _clc_password x
+        , TF.assign "clc_username" <$> _clc_username x
+        ]
 
-{- | (Optional) Override CLC account alias. Also taken from the @CLC_ACCOUNT@
-environment variable if provided.
--}
-clcAccount :: Functor f => (Text -> f Text) -> CenturyLinkCloud -> f CenturyLinkCloud
-clcAccount f s =
-    (\x -> s { _clc_account = x })
-        <$> f (_clc_account s)
-
-{- | (Required) This is the CLC account password. It must be provided, but it can
-also be sourced from the @CLC_PASSWORD@ environment variable.
--}
-clcPassword :: Functor f => (Text -> f Text) -> CenturyLinkCloud -> f CenturyLinkCloud
-clcPassword f s =
-    (\x -> s { _clc_password = x })
-        <$> f (_clc_password s)
-
-{- | (Required) This is the CLC account username. It must be provided, but it can
-also be sourced from the @CLC_USERNAME@ environment variable.
--}
-clcUsername :: Functor f => (Text -> f Text) -> CenturyLinkCloud -> f CenturyLinkCloud
-clcUsername f s =
-    (\x -> s { _clc_username = x })
-        <$> f (_clc_username s)
+$(TF.makeClassy ''CenturyLinkCloud)

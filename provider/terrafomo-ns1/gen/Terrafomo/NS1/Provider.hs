@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.NS1.Types        as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.NS1.Types       as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | NS1 Terraform provider.
 
@@ -30,18 +33,15 @@ provider needs to be configured with the proper credentials before it can be
 used. Use the navigation to the left to read about the available resources.
 -}
 data NS1 = NS1
-    { _apikey :: !Text
+    { _apikey :: !(TF.Argument Text)
+    {- ^ (Required) NS1 API token. It must be provided, but it can also be sourced from the @NS1_APIKEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable NS1
 
-instance Qual.ToValue NS1 where
-    toValue = Qual.genericToValue
+instance TF.ToHCL NS1 where
+    toHCL x = TF.arguments
+        [ TF.assign "apikey" <$> _apikey x
+        ]
 
-{- | (Required) NS1 API token. It must be provided, but it can also be sourced
-from the @NS1_APIKEY@ environment variable.
--}
-apikey :: Functor f => (Text -> f Text) -> NS1 -> f NS1
-apikey f s =
-    (\x -> s { _apikey = x })
-        <$> f (_apikey s)
+$(TF.makeClassy ''NS1)

@@ -96,6 +96,7 @@ provider tmpls p =
         , "imports"   .=
             ([ variableNS
              , hclNS
+             , thNS
              , typesNS p
              ] :: [NS])
         ]

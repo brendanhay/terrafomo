@@ -10,10 +10,10 @@ import Data.Proxy (Proxy (Proxy))
 
 import Terrafomo.AWS
 
-import qualified Terrafomo.AWS.DataSource      as D
-import qualified Terrafomo.AWS.Resource        as R
-import qualified Terrafomo.Local.Resource      as L
-import qualified Terrafomo.Template.DataSource as T
+import qualified Terrafomo.AWS.DataSource as D
+import qualified Terrafomo.AWS.Resource   as R
+-- import qualified Terrafomo.Local.Resource      as L
+-- import qualified Terrafomo.Template.DataSource as T
 
 -- Observations:
 --
@@ -94,7 +94,7 @@ example1 = do
                 & D.services .= "S3"
 
     output "cidr_blocks" $
-        attribute ipranges (Proxy @"cidr_blocks")
+        (ipranges ^. D.computed_name)
 
 -- Equivalent to:
 --

@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,36 +23,49 @@
 --
 module Terrafomo.OpsGenie.DataSource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.OpsGenie        as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.OpsGenie          as TF
+import qualified Terrafomo.Syntax.DataSource as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @opsgenie_user@ OpsGenie datasource.
 
 Use this data source to get information about a specific user within
 OpsGenie.
 -}
-data UserDataSource = UserDataSource
-    { _username :: !(Attr Text)
+data UserDataSource = UserDataSource {
+      _username           :: !(TF.Argument Text)
     {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
-    } deriving (Show, Generic)
+    , _computed_full_name :: !(TF.Attribute Text)
+    {- ^ - The full name of the found user. -}
+    , _computed_role      :: !(TF.Attribute Text)
+    {- ^ - The role of the found user. -}
+    } deriving (Show, Eq)
 
-type instance Computed UserDataSource
-    = '[ '("full_name", Text)
-       {- - The full name of the found user. -}
-       , '("role", Text)
-       {- - The role of the found user. -}
-       ]
+userDataSource :: TF.DataSource TF.OpsGenie UserDataSource
+userDataSource =
+    TF.newDataSource "opsgenie_user" $
+        UserDataSource {
+            _username = TF.Absent
+            , _computed_full_name = TF.Computed "full_name"
+            , _computed_role = TF.Computed "role"
+            }
 
-$(TH.makeDataSource
-    "opsgenie_user"
-    ''Qual.OpsGenie
-    ''UserDataSource)
+instance TF.ToHCL UserDataSource where
+    toHCL UserDataSource{..} = TF.arguments
+        [ TF.assign "username" <$> _username
+        ]
+
+$(TF.makeSchemaLenses
+    ''UserDataSource
+    ''TF.OpsGenie
+    ''TF.DataSource
+    'TF.schema)

@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Librato.Types    as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Librato.Types   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Librato Terraform provider.
 
@@ -31,27 +34,18 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Librato = Librato
-    { _email :: !Text
-    , _token :: !Text
+    { _email :: !(TF.Argument Text)
+    {- ^ (Required) Librato email address. It must be provided, but it can also be sourced from the @LIBRATO_EMAIL@ environment variable. -}
+    , _token :: !(TF.Argument Text)
+    {- ^ (Required) Librato API token. It must be provided, but it can also be sourced from the @LIBRATO_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Librato
 
-instance Qual.ToValue Librato where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Librato where
+    toHCL x = TF.arguments
+        [ TF.assign "email" <$> _email x
+        , TF.assign "token" <$> _token x
+        ]
 
-{- | (Required) Librato email address. It must be provided, but it can also be
-sourced from the @LIBRATO_EMAIL@ environment variable.
--}
-email :: Functor f => (Text -> f Text) -> Librato -> f Librato
-email f s =
-    (\x -> s { _email = x })
-        <$> f (_email s)
-
-{- | (Required) Librato API token. It must be provided, but it can also be
-sourced from the @LIBRATO_TOKEN@ environment variable.
--}
-token :: Functor f => (Text -> f Text) -> Librato -> f Librato
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
+$(TF.makeClassy ''Librato)

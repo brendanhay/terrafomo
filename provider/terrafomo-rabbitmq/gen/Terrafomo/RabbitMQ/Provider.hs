@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.RabbitMQ.Types   as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.RabbitMQ.Types  as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | RabbitMQ Terraform provider.
 
@@ -31,52 +34,27 @@ a RabbitMQ server. Use the navigation to the left to read about the
 available resources.
 -}
 data RabbitMQ = RabbitMQ
-    { _cacert_file :: !Text
-    , _endpoint    :: !Text
-    , _insecure    :: !Text
-    , _password    :: !Text
-    , _username    :: !Text
+    { _cacert_file :: !(TF.Argument Text)
+    {- ^ (Optional) The path to a custom CA / intermediate certificate. -}
+    , _endpoint    :: !(TF.Argument Text)
+    {- ^ (Required) The HTTP URL of the management plugin on the RabbitMQ server. The RabbitMQ management plugin must be enabled in order to use this provder. Note : This is not the IP address or hostname of the RabbitMQ server that you would use to access RabbitMQ directly. -}
+    , _insecure    :: !(TF.Argument Text)
+    {- ^ (Optional) Trust self-signed certificates. -}
+    , _password    :: !(TF.Argument Text)
+    {- ^ (Optional) Password for the given user. -}
+    , _username    :: !(TF.Argument Text)
+    {- ^ (Required) Username to use to authenticate with the server. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable RabbitMQ
 
-instance Qual.ToValue RabbitMQ where
-    toValue = Qual.genericToValue
+instance TF.ToHCL RabbitMQ where
+    toHCL x = TF.arguments
+        [ TF.assign "cacert_file" <$> _cacert_file x
+        , TF.assign "endpoint" <$> _endpoint x
+        , TF.assign "insecure" <$> _insecure x
+        , TF.assign "password" <$> _password x
+        , TF.assign "username" <$> _username x
+        ]
 
-{- | (Optional) The path to a custom CA / intermediate certificate.
--}
-cacertFile :: Functor f => (Text -> f Text) -> RabbitMQ -> f RabbitMQ
-cacertFile f s =
-    (\x -> s { _cacert_file = x })
-        <$> f (_cacert_file s)
-
-{- | (Required) The HTTP URL of the management plugin on the RabbitMQ server. The
-RabbitMQ management plugin must be enabled in order to use this provder.
-Note : This is not the IP address or hostname of the RabbitMQ server that
-you would use to access RabbitMQ directly.
--}
-endpoint :: Functor f => (Text -> f Text) -> RabbitMQ -> f RabbitMQ
-endpoint f s =
-    (\x -> s { _endpoint = x })
-        <$> f (_endpoint s)
-
-{- | (Optional) Trust self-signed certificates.
--}
-insecure :: Functor f => (Text -> f Text) -> RabbitMQ -> f RabbitMQ
-insecure f s =
-    (\x -> s { _insecure = x })
-        <$> f (_insecure s)
-
-{- | (Optional) Password for the given user.
--}
-password :: Functor f => (Text -> f Text) -> RabbitMQ -> f RabbitMQ
-password f s =
-    (\x -> s { _password = x })
-        <$> f (_password s)
-
-{- | (Required) Username to use to authenticate with the server.
--}
-username :: Functor f => (Text -> f Text) -> RabbitMQ -> f RabbitMQ
-username f s =
-    (\x -> s { _username = x })
-        <$> f (_username s)
+$(TF.makeClassy ''RabbitMQ)

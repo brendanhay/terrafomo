@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,57 +23,86 @@
 --
 module Terrafomo.DNSimple.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.DNSimple        as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.DNSimple        as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @dnsimple_record@ DNSimple resource.
 
 Provides a DNSimple record resource.
 -}
-data RecordResource = RecordResource
-    { _domain   :: !(Attr Text)
+data RecordResource = RecordResource {
+      _domain             :: !(TF.Argument Text)
     {- ^ (Required) The domain to add the record to -}
-    , _name     :: !(Attr Text)
+    , _name               :: !(TF.Argument Text)
     {- ^ (Required) The name of the record -}
-    , _priority :: !(Attr Text)
+    , _priority           :: !(TF.Argument Text)
     {- ^ (Optional) The priority of the record - only useful for some record types -}
-    , _ttl      :: !(Attr Text)
+    , _ttl                :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record -}
-    , _type'    :: !(Attr Text)
+    , _type'              :: !(TF.Argument Text)
     {- ^ (Required) The type of the record -}
-    , _value    :: !(Attr Text)
+    , _value              :: !(TF.Argument Text)
     {- ^ (Required) The value of the record -}
-    } deriving (Show, Generic)
+    , _computed_domain_id :: !(TF.Attribute Text)
+    {- ^ - The domain ID of the record -}
+    , _computed_hostname  :: !(TF.Attribute Text)
+    {- ^ - The FQDN of the record -}
+    , _computed_id        :: !(TF.Attribute Text)
+    {- ^ - The record ID -}
+    , _computed_name      :: !(TF.Attribute Text)
+    {- ^ - The name of the record -}
+    , _computed_priority  :: !(TF.Attribute Text)
+    {- ^ - The priority of the record -}
+    , _computed_ttl       :: !(TF.Attribute Text)
+    {- ^ - The TTL of the record -}
+    , _computed_type'     :: !(TF.Attribute Text)
+    {- ^ - The type of the record -}
+    , _computed_value     :: !(TF.Attribute Text)
+    {- ^ - The value of the record -}
+    } deriving (Show, Eq)
 
-type instance Computed RecordResource
-    = '[ '("domain_id", Text)
-       {- - The domain ID of the record -}
-       , '("hostname", Text)
-       {- - The FQDN of the record -}
-       , '("id", Text)
-       {- - The record ID -}
-       , '("name", Text)
-       {- - The name of the record -}
-       , '("priority", Text)
-       {- - The priority of the record -}
-       , '("ttl", Text)
-       {- - The TTL of the record -}
-       , '("type", Text)
-       {- - The type of the record -}
-       , '("value", Text)
-       {- - The value of the record -}
-       ]
+recordResource :: TF.Resource TF.DNSimple RecordResource
+recordResource =
+    TF.newResource "dnsimple_record" $
+        RecordResource {
+            _domain = TF.Absent
+            , _name = TF.Absent
+            , _priority = TF.Absent
+            , _ttl = TF.Absent
+            , _type' = TF.Absent
+            , _value = TF.Absent
+            , _computed_domain_id = TF.Computed "domain_id"
+            , _computed_hostname = TF.Computed "hostname"
+            , _computed_id = TF.Computed "id"
+            , _computed_name = TF.Computed "name"
+            , _computed_priority = TF.Computed "priority"
+            , _computed_ttl = TF.Computed "ttl"
+            , _computed_type' = TF.Computed "type"
+            , _computed_value = TF.Computed "value"
+            }
 
-$(TH.makeResource
-    "dnsimple_record"
-    ''Qual.DNSimple
-    ''RecordResource)
+instance TF.ToHCL RecordResource where
+    toHCL RecordResource{..} = TF.arguments
+        [ TF.assign "domain" <$> _domain
+        , TF.assign "name" <$> _name
+        , TF.assign "priority" <$> _priority
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "type" <$> _type'
+        , TF.assign "value" <$> _value
+        ]
+
+$(TF.makeSchemaLenses
+    ''RecordResource
+    ''TF.DNSimple
+    ''TF.Resource
+    'TF.schema)

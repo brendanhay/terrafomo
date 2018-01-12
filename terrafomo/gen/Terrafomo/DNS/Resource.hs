@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,168 +23,269 @@
 --
 module Terrafomo.DNS.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @dns_a_record_set@ DNS resource.
 
 Creates a A type DNS record set.
 -}
-data ARecordSetResource = ARecordSetResource
-    { _addresses :: !(Attr Text)
+data ARecordSetResource = ARecordSetResource {
+      _addresses          :: !(TF.Argument Text)
     {- ^ (Required) The IPv4 addresses this record set will point to. -}
-    , _name      :: !(Attr Text)
+    , _name               :: !(TF.Argument Text)
     {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl       :: !(Attr Text)
+    , _ttl                :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone      :: !(Attr Text)
+    , _zone               :: !(TF.Argument Text)
     {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Generic)
+    , _computed_addresses :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_name      :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_ttl       :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_zone      :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    } deriving (Show, Eq)
 
-type instance Computed ARecordSetResource
-    = '[ '("addresses", Text)
-       {- - See Argument Reference above. -}
-       , '("name", Text)
-       {- - See Argument Reference above. -}
-       , '("ttl", Text)
-       {- - See Argument Reference above. -}
-       , '("zone", Text)
-       {- - See Argument Reference above. -}
-       ]
+aRecordSetResource :: TF.Resource TF.DNS ARecordSetResource
+aRecordSetResource =
+    TF.newResource "dns_a_record_set" $
+        ARecordSetResource {
+            _addresses = TF.Absent
+            , _name = TF.Absent
+            , _ttl = TF.Absent
+            , _zone = TF.Absent
+            , _computed_addresses = TF.Computed "addresses"
+            , _computed_name = TF.Computed "name"
+            , _computed_ttl = TF.Computed "ttl"
+            , _computed_zone = TF.Computed "zone"
+            }
 
-$(TH.makeResource
-    "dns_a_record_set"
-    ''Qual.Provider
-    ''ARecordSetResource)
+instance TF.ToHCL ARecordSetResource where
+    toHCL ARecordSetResource{..} = TF.arguments
+        [ TF.assign "addresses" <$> _addresses
+        , TF.assign "name" <$> _name
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "zone" <$> _zone
+        ]
+
+$(TF.makeSchemaLenses
+    ''ARecordSetResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @dns_aaaa_record_set@ DNS resource.
 
 Creates a AAAA type DNS record set.
 -}
-data AaaaRecordSetResource = AaaaRecordSetResource
-    { _addresses :: !(Attr Text)
+data AaaaRecordSetResource = AaaaRecordSetResource {
+      _addresses          :: !(TF.Argument Text)
     {- ^ (Required) The IPv6 addresses this record set will point to. -}
-    , _name      :: !(Attr Text)
+    , _name               :: !(TF.Argument Text)
     {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl       :: !(Attr Text)
+    , _ttl                :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone      :: !(Attr Text)
+    , _zone               :: !(TF.Argument Text)
     {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Generic)
+    , _computed_addresses :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_name      :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_ttl       :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_zone      :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    } deriving (Show, Eq)
 
-type instance Computed AaaaRecordSetResource
-    = '[ '("addresses", Text)
-       {- - See Argument Reference above. -}
-       , '("name", Text)
-       {- - See Argument Reference above. -}
-       , '("ttl", Text)
-       {- - See Argument Reference above. -}
-       , '("zone", Text)
-       {- - See Argument Reference above. -}
-       ]
+aaaaRecordSetResource :: TF.Resource TF.DNS AaaaRecordSetResource
+aaaaRecordSetResource =
+    TF.newResource "dns_aaaa_record_set" $
+        AaaaRecordSetResource {
+            _addresses = TF.Absent
+            , _name = TF.Absent
+            , _ttl = TF.Absent
+            , _zone = TF.Absent
+            , _computed_addresses = TF.Computed "addresses"
+            , _computed_name = TF.Computed "name"
+            , _computed_ttl = TF.Computed "ttl"
+            , _computed_zone = TF.Computed "zone"
+            }
 
-$(TH.makeResource
-    "dns_aaaa_record_set"
-    ''Qual.Provider
-    ''AaaaRecordSetResource)
+instance TF.ToHCL AaaaRecordSetResource where
+    toHCL AaaaRecordSetResource{..} = TF.arguments
+        [ TF.assign "addresses" <$> _addresses
+        , TF.assign "name" <$> _name
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "zone" <$> _zone
+        ]
+
+$(TF.makeSchemaLenses
+    ''AaaaRecordSetResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @dns_cname_record@ DNS resource.
 
 Creates a CNAME type DNS record.
 -}
-data CnameRecordResource = CnameRecordResource
-    { _cname :: !(Attr Text)
+data CnameRecordResource = CnameRecordResource {
+      _cname          :: !(TF.Argument Text)
     {- ^ (Required) The canonical name this record will point to. -}
-    , _name  :: !(Attr Text)
+    , _name           :: !(TF.Argument Text)
     {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl   :: !(Attr Text)
+    , _ttl            :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone  :: !(Attr Text)
+    , _zone           :: !(TF.Argument Text)
     {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Generic)
+    , _computed_cname :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_name  :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_ttl   :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_zone  :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    } deriving (Show, Eq)
 
-type instance Computed CnameRecordResource
-    = '[ '("cname", Text)
-       {- - See Argument Reference above. -}
-       , '("name", Text)
-       {- - See Argument Reference above. -}
-       , '("ttl", Text)
-       {- - See Argument Reference above. -}
-       , '("zone", Text)
-       {- - See Argument Reference above. -}
-       ]
+cnameRecordResource :: TF.Resource TF.DNS CnameRecordResource
+cnameRecordResource =
+    TF.newResource "dns_cname_record" $
+        CnameRecordResource {
+            _cname = TF.Absent
+            , _name = TF.Absent
+            , _ttl = TF.Absent
+            , _zone = TF.Absent
+            , _computed_cname = TF.Computed "cname"
+            , _computed_name = TF.Computed "name"
+            , _computed_ttl = TF.Computed "ttl"
+            , _computed_zone = TF.Computed "zone"
+            }
 
-$(TH.makeResource
-    "dns_cname_record"
-    ''Qual.Provider
-    ''CnameRecordResource)
+instance TF.ToHCL CnameRecordResource where
+    toHCL CnameRecordResource{..} = TF.arguments
+        [ TF.assign "cname" <$> _cname
+        , TF.assign "name" <$> _name
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "zone" <$> _zone
+        ]
+
+$(TF.makeSchemaLenses
+    ''CnameRecordResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @dns_ns_record_set@ DNS resource.
 
 Creates a NS type DNS record set.
 -}
-data NsRecordSetResource = NsRecordSetResource
-    { _name        :: !(Attr Text)
+data NsRecordSetResource = NsRecordSetResource {
+      _name                 :: !(TF.Argument Text)
     {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _nameservers :: !(Attr Text)
+    , _nameservers          :: !(TF.Argument Text)
     {- ^ (Required) The nameservers this record set will point to. -}
-    , _ttl         :: !(Attr Text)
+    , _ttl                  :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone        :: !(Attr Text)
+    , _zone                 :: !(TF.Argument Text)
     {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Generic)
+    , _computed_name        :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_nameservers :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_ttl         :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_zone        :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    } deriving (Show, Eq)
 
-type instance Computed NsRecordSetResource
-    = '[ '("name", Text)
-       {- - See Argument Reference above. -}
-       , '("nameservers", Text)
-       {- - See Argument Reference above. -}
-       , '("ttl", Text)
-       {- - See Argument Reference above. -}
-       , '("zone", Text)
-       {- - See Argument Reference above. -}
-       ]
+nsRecordSetResource :: TF.Resource TF.DNS NsRecordSetResource
+nsRecordSetResource =
+    TF.newResource "dns_ns_record_set" $
+        NsRecordSetResource {
+            _name = TF.Absent
+            , _nameservers = TF.Absent
+            , _ttl = TF.Absent
+            , _zone = TF.Absent
+            , _computed_name = TF.Computed "name"
+            , _computed_nameservers = TF.Computed "nameservers"
+            , _computed_ttl = TF.Computed "ttl"
+            , _computed_zone = TF.Computed "zone"
+            }
 
-$(TH.makeResource
-    "dns_ns_record_set"
-    ''Qual.Provider
-    ''NsRecordSetResource)
+instance TF.ToHCL NsRecordSetResource where
+    toHCL NsRecordSetResource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        , TF.assign "nameservers" <$> _nameservers
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "zone" <$> _zone
+        ]
+
+$(TF.makeSchemaLenses
+    ''NsRecordSetResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @dns_ptr_record@ DNS resource.
 
 Creates a PTR type DNS record.
 -}
-data PtrRecordResource = PtrRecordResource
-    { _name :: !(Attr Text)
+data PtrRecordResource = PtrRecordResource {
+      _name          :: !(TF.Argument Text)
     {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ptr  :: !(Attr Text)
+    , _ptr           :: !(TF.Argument Text)
     {- ^ (Required) The canonical name this record will point to. -}
-    , _ttl  :: !(Attr Text)
+    , _ttl           :: !(TF.Argument Text)
     {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone :: !(Attr Text)
+    , _zone          :: !(TF.Argument Text)
     {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Generic)
+    , _computed_name :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_ptr  :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_ttl  :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    , _computed_zone :: !(TF.Attribute Text)
+    {- ^ - See Argument Reference above. -}
+    } deriving (Show, Eq)
 
-type instance Computed PtrRecordResource
-    = '[ '("name", Text)
-       {- - See Argument Reference above. -}
-       , '("ptr", Text)
-       {- - See Argument Reference above. -}
-       , '("ttl", Text)
-       {- - See Argument Reference above. -}
-       , '("zone", Text)
-       {- - See Argument Reference above. -}
-       ]
+ptrRecordResource :: TF.Resource TF.DNS PtrRecordResource
+ptrRecordResource =
+    TF.newResource "dns_ptr_record" $
+        PtrRecordResource {
+            _name = TF.Absent
+            , _ptr = TF.Absent
+            , _ttl = TF.Absent
+            , _zone = TF.Absent
+            , _computed_name = TF.Computed "name"
+            , _computed_ptr = TF.Computed "ptr"
+            , _computed_ttl = TF.Computed "ttl"
+            , _computed_zone = TF.Computed "zone"
+            }
 
-$(TH.makeResource
-    "dns_ptr_record"
-    ''Qual.Provider
-    ''PtrRecordResource)
+instance TF.ToHCL PtrRecordResource where
+    toHCL PtrRecordResource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        , TF.assign "ptr" <$> _ptr
+        , TF.assign "ttl" <$> _ttl
+        , TF.assign "zone" <$> _zone
+        ]
+
+$(TF.makeSchemaLenses
+    ''PtrRecordResource
+    ''TF.Provider
+    ''TF.Resource
+    'TF.schema)

@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.AliCloud.Types   as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.AliCloud.Types  as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | AliCloud Terraform provider.
 
@@ -31,36 +34,21 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AliCloud = AliCloud
-    { _access_key :: !Text
-    , _region     :: !Text
-    , _secret_key :: !Text
+    { _access_key :: !(TF.Argument Text)
+    {- ^ (Optional) This is the Alicloud access key. It must be provided, but it can also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable. -}
+    , _region     :: !(TF.Argument Text)
+    {- ^ (Required) This is the Alicloud region. It must be provided, but it can also be sourced from the @ALICLOUD_REGION@ environment variables. -}
+    , _secret_key :: !(TF.Argument Text)
+    {- ^ (Optional) This is the Alicloud secret key. It must be provided, but it can also be sourced from the @ALICLOUD_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable AliCloud
 
-instance Qual.ToValue AliCloud where
-    toValue = Qual.genericToValue
+instance TF.ToHCL AliCloud where
+    toHCL x = TF.arguments
+        [ TF.assign "access_key" <$> _access_key x
+        , TF.assign "region" <$> _region x
+        , TF.assign "secret_key" <$> _secret_key x
+        ]
 
-{- | (Optional) This is the Alicloud access key. It must be provided, but it can
-also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable.
--}
-accessKey :: Functor f => (Text -> f Text) -> AliCloud -> f AliCloud
-accessKey f s =
-    (\x -> s { _access_key = x })
-        <$> f (_access_key s)
-
-{- | (Required) This is the Alicloud region. It must be provided, but it can also
-be sourced from the @ALICLOUD_REGION@ environment variables.
--}
-region :: Functor f => (Text -> f Text) -> AliCloud -> f AliCloud
-region f s =
-    (\x -> s { _region = x })
-        <$> f (_region s)
-
-{- | (Optional) This is the Alicloud secret key. It must be provided, but it can
-also be sourced from the @ALICLOUD_SECRET_KEY@ environment variable.
--}
-secretKey :: Functor f => (Text -> f Text) -> AliCloud -> f AliCloud
-secretKey f s =
-    (\x -> s { _secret_key = x })
-        <$> f (_secret_key s)
+$(TF.makeClassy ''AliCloud)

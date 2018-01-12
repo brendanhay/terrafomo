@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Lailgun.Types    as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Lailgun.Types   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Lailgun Terraform provider.
 
@@ -31,17 +34,15 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Lailgun = Lailgun
-    { _api_key :: !Text
+    { _api_key :: !(TF.Argument Text)
+    {- ^ (Required) Mailgun API key -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Lailgun
 
-instance Qual.ToValue Lailgun where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Lailgun where
+    toHCL x = TF.arguments
+        [ TF.assign "api_key" <$> _api_key x
+        ]
 
-{- | (Required) Mailgun API key
--}
-apiKey :: Functor f => (Text -> f Text) -> Lailgun -> f Lailgun
-apiKey f s =
-    (\x -> s { _api_key = x })
-        <$> f (_api_key s)
+$(TF.makeClassy ''Lailgun)

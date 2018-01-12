@@ -1,6 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -19,9 +21,10 @@ import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Consul.Types     as Qual
-import qualified Terrafomo.Syntax.Provider  as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Consul.Types    as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | Consul Terraform provider.
 
@@ -32,82 +35,36 @@ defaults for all arguments. Use the navigation to the left to read about the
 available resources.
 -}
 data Consul = Consul
-    { _address    :: !Text
-    , _ca_file    :: !Text
-    , _cert_file  :: !Text
-    , _datacenter :: !Text
-    , _http_auth  :: !Text
-    , _key_file   :: !Text
-    , _scheme     :: !Text
-    , _token      :: !Text
+    { _address    :: !(TF.Argument Text)
+    {- ^ (Optional) The HTTP(S) API address of the agent to use. Defaults to "127.0.0.1:8500". -}
+    , _ca_file    :: !(TF.Argument Text)
+    {- ^ (Optional) A path to a PEM-encoded certificate authority used to verify the remote agent's certificate. -}
+    , _cert_file  :: !(TF.Argument Text)
+    {- ^ (Optional) A path to a PEM-encoded certificate provided to the remote agent; requires use of @key_file@ . -}
+    , _datacenter :: !(TF.Argument Text)
+    {- ^ (Optional) The datacenter to use. Defaults to that of the agent. -}
+    , _http_auth  :: !(TF.Argument Text)
+    {- ^ (Optional) HTTP Basic Authentication credentials to be used when communicating with Consul, in the format of either @user@ or @user:pass@ . This may also be specified using the @CONSUL_HTTP_AUTH@ environment variable. -}
+    , _key_file   :: !(TF.Argument Text)
+    {- ^ (Optional) A path to a PEM-encoded private key, required if @cert_file@ is specified. -}
+    , _scheme     :: !(TF.Argument Text)
+    {- ^ (Optional) The URL scheme of the agent to use ("http" or "https"). Defaults to "http". -}
+    , _token      :: !(TF.Argument Text)
+    {- ^ (Optional) The ACL token to use by default when making requests to the agent. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Consul
 
-instance Qual.ToValue Consul where
-    toValue = Qual.genericToValue
+instance TF.ToHCL Consul where
+    toHCL x = TF.arguments
+        [ TF.assign "address" <$> _address x
+        , TF.assign "ca_file" <$> _ca_file x
+        , TF.assign "cert_file" <$> _cert_file x
+        , TF.assign "datacenter" <$> _datacenter x
+        , TF.assign "http_auth" <$> _http_auth x
+        , TF.assign "key_file" <$> _key_file x
+        , TF.assign "scheme" <$> _scheme x
+        , TF.assign "token" <$> _token x
+        ]
 
-{- | (Optional) The HTTP(S) API address of the agent to use. Defaults to
-"127.0.0.1:8500".
--}
-address :: Functor f => (Text -> f Text) -> Consul -> f Consul
-address f s =
-    (\x -> s { _address = x })
-        <$> f (_address s)
-
-{- | (Optional) A path to a PEM-encoded certificate authority used to verify the
-remote agent's certificate.
--}
-caFile :: Functor f => (Text -> f Text) -> Consul -> f Consul
-caFile f s =
-    (\x -> s { _ca_file = x })
-        <$> f (_ca_file s)
-
-{- | (Optional) A path to a PEM-encoded certificate provided to the remote agent;
-requires use of @key_file@ .
--}
-certFile :: Functor f => (Text -> f Text) -> Consul -> f Consul
-certFile f s =
-    (\x -> s { _cert_file = x })
-        <$> f (_cert_file s)
-
-{- | (Optional) The datacenter to use. Defaults to that of the agent.
--}
-datacenter :: Functor f => (Text -> f Text) -> Consul -> f Consul
-datacenter f s =
-    (\x -> s { _datacenter = x })
-        <$> f (_datacenter s)
-
-{- | (Optional) HTTP Basic Authentication credentials to be used when
-communicating with Consul, in the format of either @user@ or @user:pass@ .
-This may also be specified using the @CONSUL_HTTP_AUTH@ environment
-variable.
--}
-httpAuth :: Functor f => (Text -> f Text) -> Consul -> f Consul
-httpAuth f s =
-    (\x -> s { _http_auth = x })
-        <$> f (_http_auth s)
-
-{- | (Optional) A path to a PEM-encoded private key, required if @cert_file@ is
-specified.
--}
-keyFile :: Functor f => (Text -> f Text) -> Consul -> f Consul
-keyFile f s =
-    (\x -> s { _key_file = x })
-        <$> f (_key_file s)
-
-{- | (Optional) The URL scheme of the agent to use ("http" or "https"). Defaults
-to "http".
--}
-scheme :: Functor f => (Text -> f Text) -> Consul -> f Consul
-scheme f s =
-    (\x -> s { _scheme = x })
-        <$> f (_scheme s)
-
-{- | (Optional) The ACL token to use by default when making requests to the
-agent.
--}
-token :: Functor f => (Text -> f Text) -> Consul -> f Consul
-token f s =
-    (\x -> s { _token = x })
-        <$> f (_token s)
+$(TF.makeClassy ''Consul)

@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,17 +23,18 @@
 --
 module Terrafomo.Consul.Resource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.Consul          as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Consul          as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
 
 {- | The @consul_agent_service@ Consul resource.
 
@@ -43,34 +42,55 @@ Provides access to the agent service data in Consul. This can be used to
 define a service associated with a particular agent. Currently, defining
 health checks for an agent service is not supported.
 -}
-data AgentServiceResource = AgentServiceResource
-    { _address :: !(Attr Text)
+data AgentServiceResource = AgentServiceResource {
+      _address          :: !(TF.Argument Text)
     {- ^ (Optional) The address of the service. Defaults to the address of the agent. -}
-    , _name    :: !(Attr Text)
+    , _name             :: !(TF.Argument Text)
     {- ^ (Required) The name of the service. -}
-    , _port    :: !(Attr Text)
+    , _port             :: !(TF.Argument Text)
     {- ^ (Optional) The port of the service. -}
-    , _tags    :: !(Attr Text)
+    , _tags             :: !(TF.Argument Text)
     {- ^ (Optional) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
-    } deriving (Show, Generic)
+    , _computed_address :: !(TF.Attribute Text)
+    {- ^ - The address of the service. -}
+    , _computed_id      :: !(TF.Attribute Text)
+    {- ^ - The ID of the service, defaults to the value of @name@ . -}
+    , _computed_name    :: !(TF.Attribute Text)
+    {- ^ - The name of the service. -}
+    , _computed_port    :: !(TF.Attribute Text)
+    {- ^ - The port of the service. -}
+    , _computed_tags    :: !(TF.Attribute Text)
+    {- ^ - The tags of the service. -}
+    } deriving (Show, Eq)
 
-type instance Computed AgentServiceResource
-    = '[ '("address", Text)
-       {- - The address of the service. -}
-       , '("id", Text)
-       {- - The ID of the service, defaults to the value of @name@ . -}
-       , '("name", Text)
-       {- - The name of the service. -}
-       , '("port", Text)
-       {- - The port of the service. -}
-       , '("tags", Text)
-       {- - The tags of the service. -}
-       ]
+agentServiceResource :: TF.Resource TF.Consul AgentServiceResource
+agentServiceResource =
+    TF.newResource "consul_agent_service" $
+        AgentServiceResource {
+            _address = TF.Absent
+            , _name = TF.Absent
+            , _port = TF.Absent
+            , _tags = TF.Absent
+            , _computed_address = TF.Computed "address"
+            , _computed_id = TF.Computed "id"
+            , _computed_name = TF.Computed "name"
+            , _computed_port = TF.Computed "port"
+            , _computed_tags = TF.Computed "tags"
+            }
 
-$(TH.makeResource
-    "consul_agent_service"
-    ''Qual.Consul
-    ''AgentServiceResource)
+instance TF.ToHCL AgentServiceResource where
+    toHCL AgentServiceResource{..} = TF.arguments
+        [ TF.assign "address" <$> _address
+        , TF.assign "name" <$> _name
+        , TF.assign "port" <$> _port
+        , TF.assign "tags" <$> _tags
+        ]
+
+$(TF.makeSchemaLenses
+    ''AgentServiceResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @consul_catalog_entry@ Consul resource.
 
@@ -78,30 +98,50 @@ Registers a node or service with the
 <https://www.consul.io/docs/agent/http/catalog.html#catalog_register> .
 Currently, defining health checks is not supported.
 -}
-data CatalogEntryResource = CatalogEntryResource
-    { _address    :: !(Attr Text)
+data CatalogEntryResource = CatalogEntryResource {
+      _address          :: !(TF.Argument Text)
     {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
-    , _datacenter :: !(Attr Text)
+    , _datacenter       :: !(TF.Argument Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _node       :: !(Attr Text)
+    , _node             :: !(TF.Argument Text)
     {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
-    , _service    :: !(Attr Text)
+    , _service          :: !(TF.Argument Text)
     {- ^ (Optional) A service to optionally associated with the node. Supported values are documented below. -}
-    , _token      :: !(Attr Text)
+    , _token            :: !(TF.Argument Text)
     {- ^ (Optional) ACL token. -}
-    } deriving (Show, Generic)
+    , _computed_address :: !(TF.Attribute Text)
+    {- ^ - The address of the service. -}
+    , _computed_node    :: !(TF.Attribute Text)
+    {- ^ - The ID of the service, defaults to the value of @name@ . -}
+    } deriving (Show, Eq)
 
-type instance Computed CatalogEntryResource
-    = '[ '("address", Text)
-       {- - The address of the service. -}
-       , '("node", Text)
-       {- - The ID of the service, defaults to the value of @name@ . -}
-       ]
+catalogEntryResource :: TF.Resource TF.Consul CatalogEntryResource
+catalogEntryResource =
+    TF.newResource "consul_catalog_entry" $
+        CatalogEntryResource {
+            _address = TF.Absent
+            , _datacenter = TF.Absent
+            , _node = TF.Absent
+            , _service = TF.Absent
+            , _token = TF.Absent
+            , _computed_address = TF.Computed "address"
+            , _computed_node = TF.Computed "node"
+            }
 
-$(TH.makeResource
-    "consul_catalog_entry"
-    ''Qual.Consul
-    ''CatalogEntryResource)
+instance TF.ToHCL CatalogEntryResource where
+    toHCL CatalogEntryResource{..} = TF.arguments
+        [ TF.assign "address" <$> _address
+        , TF.assign "datacenter" <$> _datacenter
+        , TF.assign "node" <$> _node
+        , TF.assign "service" <$> _service
+        , TF.assign "token" <$> _token
+        ]
+
+$(TF.makeSchemaLenses
+    ''CatalogEntryResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @consul_key_prefix@ Consul resource.
 
@@ -122,26 +162,43 @@ configuration. It will also delete all keys under the given prefix when a
 @consul_key_prefix@ resource is destroyed, even if those keys were created
 outside of Terraform.
 -}
-data KeyPrefixResource = KeyPrefixResource
-    { _datacenter  :: !(Attr Text)
+data KeyPrefixResource = KeyPrefixResource {
+      _datacenter          :: !(TF.Argument Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _path_prefix :: !(Attr Text)
+    , _path_prefix         :: !(TF.Argument Text)
     {- ^ (Required) Specifies the common prefix shared by all keys that will be managed by this resource instance. In most cases this will end with a slash, to manage a "folder" of keys. -}
-    , _subkeys     :: !(Attr Text)
+    , _subkeys             :: !(TF.Argument Text)
     {- ^ (Required) A mapping from subkey name (which will be appended to the given @path_prefix@ ) to the value that should be stored at that key. Use slashes, as shown in the above example, to create "sub-folders" under the given path prefix. -}
-    , _token       :: !(Attr Text)
+    , _token               :: !(TF.Argument Text)
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Generic)
+    , _computed_datacenter :: !(TF.Attribute Text)
+    {- ^ - The datacenter the keys are being read/written to. -}
+    } deriving (Show, Eq)
 
-type instance Computed KeyPrefixResource
-    = '[ '("datacenter", Text)
-       {- - The datacenter the keys are being read/written to. -}
-       ]
+keyPrefixResource :: TF.Resource TF.Consul KeyPrefixResource
+keyPrefixResource =
+    TF.newResource "consul_key_prefix" $
+        KeyPrefixResource {
+            _datacenter = TF.Absent
+            , _path_prefix = TF.Absent
+            , _subkeys = TF.Absent
+            , _token = TF.Absent
+            , _computed_datacenter = TF.Computed "datacenter"
+            }
 
-$(TH.makeResource
-    "consul_key_prefix"
-    ''Qual.Consul
-    ''KeyPrefixResource)
+instance TF.ToHCL KeyPrefixResource where
+    toHCL KeyPrefixResource{..} = TF.arguments
+        [ TF.assign "datacenter" <$> _datacenter
+        , TF.assign "path_prefix" <$> _path_prefix
+        , TF.assign "subkeys" <$> _subkeys
+        , TF.assign "token" <$> _token
+        ]
+
+$(TF.makeSchemaLenses
+    ''KeyPrefixResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @consul_keys@ Consul resource.
 
@@ -154,43 +211,74 @@ keys sharing a common prefix, and thus have Terraform remove errant keys not
 present in the configuration, consider using the @consul_key_prefix@
 resource instead.
 -}
-data KeysResource = KeysResource
-    { _datacenter :: !(Attr Text)
+data KeysResource = KeysResource {
+      _datacenter :: !(TF.Argument Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _key        :: !(Attr Text)
+    , _key        :: !(TF.Argument Text)
     {- ^ (Required) Specifies a key in Consul to be written. Supported values documented below. -}
-    , _token      :: !(Attr Text)
+    , _token      :: !(TF.Argument Text)
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Generic)
+    } deriving (Show, Eq)
 
-$(TH.makeResource
-    "consul_keys"
-    ''Qual.Consul
-    ''KeysResource)
+keysResource :: TF.Resource TF.Consul KeysResource
+keysResource =
+    TF.newResource "consul_keys" $
+        KeysResource {
+            _datacenter = TF.Absent
+            , _key = TF.Absent
+            , _token = TF.Absent
+            }
+
+instance TF.ToHCL KeysResource where
+    toHCL KeysResource{..} = TF.arguments
+        [ TF.assign "datacenter" <$> _datacenter
+        , TF.assign "key" <$> _key
+        , TF.assign "token" <$> _token
+        ]
+
+$(TF.makeSchemaLenses
+    ''KeysResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @consul_node@ Consul resource.
 
 Provides access to Node data in Consul. This can be used to define a node.
 Currently, defining health checks is not supported.
 -}
-data NodeResource = NodeResource
-    { _address :: !(Attr Text)
+data NodeResource = NodeResource {
+      _address          :: !(TF.Argument Text)
     {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
-    , _name    :: !(Attr Text)
+    , _name             :: !(TF.Argument Text)
     {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
-    } deriving (Show, Generic)
+    , _computed_address :: !(TF.Attribute Text)
+    {- ^ - The address of the service. -}
+    , _computed_name    :: !(TF.Attribute Text)
+    {- ^ - The name of the service. -}
+    } deriving (Show, Eq)
 
-type instance Computed NodeResource
-    = '[ '("address", Text)
-       {- - The address of the service. -}
-       , '("name", Text)
-       {- - The name of the service. -}
-       ]
+nodeResource :: TF.Resource TF.Consul NodeResource
+nodeResource =
+    TF.newResource "consul_node" $
+        NodeResource {
+            _address = TF.Absent
+            , _name = TF.Absent
+            , _computed_address = TF.Computed "address"
+            , _computed_name = TF.Computed "name"
+            }
 
-$(TH.makeResource
-    "consul_node"
-    ''Qual.Consul
-    ''NodeResource)
+instance TF.ToHCL NodeResource where
+    toHCL NodeResource{..} = TF.arguments
+        [ TF.assign "address" <$> _address
+        , TF.assign "name" <$> _name
+        ]
+
+$(TF.makeSchemaLenses
+    ''NodeResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @consul_prepared_query@ Consul resource.
 
@@ -199,42 +287,75 @@ queries is done using Consul's REST API. This resource is useful to provide
 a consistent and declarative way of managing prepared queries in your Consul
 cluster using Terraform.
 -}
-data PreparedQueryResource = PreparedQueryResource
-    { _datacenter   :: !(Attr Text)
+data PreparedQueryResource = PreparedQueryResource {
+      _datacenter   :: !(TF.Argument Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _dns          :: !(Attr Text)
+    , _dns          :: !(TF.Argument Text)
     {- ^ (Optional) Settings for controlling the DNS response details. -}
-    , _failover     :: !(Attr Text)
+    , _failover     :: !(TF.Argument Text)
     {- ^ (Optional) Options for controlling behavior when no healthy nodes are available in the local DC. -}
-    , _name         :: !(Attr Text)
+    , _name         :: !(TF.Argument Text)
     {- ^ (Required) The name of the prepared query. Used to identify the prepared query during requests. Can be specified as an empty string to configure the query as a catch-all. -}
-    , _near         :: !(Attr Text)
+    , _near         :: !(TF.Argument Text)
     {- ^ (Optional) Allows specifying the name of a node to sort results near using Consul's distance sorting and network coordinates. The magic @_agent@ value can be used to always sort nearest the node servicing the request. -}
-    , _only_passing :: !(Attr Text)
+    , _only_passing :: !(TF.Argument Text)
     {- ^ (Optional) When @true@ , the prepared query will only return nodes with passing health checks in the result. -}
-    , _service      :: !(Attr Text)
+    , _service      :: !(TF.Argument Text)
     {- ^ (Required) The name of the service to query. -}
-    , _session      :: !(Attr Text)
+    , _session      :: !(TF.Argument Text)
     {- ^ (Optional) The name of the Consul session to tie this query's lifetime to.  This is an advanced parameter that should not be used without a complete understanding of Consul sessions and the implications of their use (it is recommended to leave this blank in nearly all cases).  If this parameter is omitted the query will not expire. -}
-    , _stored_token :: !(Attr Text)
+    , _stored_token :: !(TF.Argument Text)
     {- ^ (Optional) The ACL token to store with the prepared query. This token will be used by default whenever the query is executed. -}
-    , _tags         :: !(Attr Text)
+    , _tags         :: !(TF.Argument Text)
     {- ^ (Optional) The list of required and/or disallowed tags.  If a tag is in this list it must be present.  If the tag is preceded with a "!" then it is disallowed. -}
-    , _template     :: !(Attr Text)
+    , _template     :: !(TF.Argument Text)
     {- ^ (Optional) Query templating options. This is used to make a single prepared query respond to many different requests. -}
-    , _token        :: !(Attr Text)
+    , _token        :: !(TF.Argument Text)
     {- ^ (Optional) The ACL token to use when saving the prepared query. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Generic)
+    , _computed_id  :: !(TF.Attribute Text)
+    {- ^ - The ID of the prepared query, generated by Consul. -}
+    } deriving (Show, Eq)
 
-type instance Computed PreparedQueryResource
-    = '[ '("id", Text)
-       {- - The ID of the prepared query, generated by Consul. -}
-       ]
+preparedQueryResource :: TF.Resource TF.Consul PreparedQueryResource
+preparedQueryResource =
+    TF.newResource "consul_prepared_query" $
+        PreparedQueryResource {
+            _datacenter = TF.Absent
+            , _dns = TF.Absent
+            , _failover = TF.Absent
+            , _name = TF.Absent
+            , _near = TF.Absent
+            , _only_passing = TF.Absent
+            , _service = TF.Absent
+            , _session = TF.Absent
+            , _stored_token = TF.Absent
+            , _tags = TF.Absent
+            , _template = TF.Absent
+            , _token = TF.Absent
+            , _computed_id = TF.Computed "id"
+            }
 
-$(TH.makeResource
-    "consul_prepared_query"
-    ''Qual.Consul
-    ''PreparedQueryResource)
+instance TF.ToHCL PreparedQueryResource where
+    toHCL PreparedQueryResource{..} = TF.arguments
+        [ TF.assign "datacenter" <$> _datacenter
+        , TF.assign "dns" <$> _dns
+        , TF.assign "failover" <$> _failover
+        , TF.assign "name" <$> _name
+        , TF.assign "near" <$> _near
+        , TF.assign "only_passing" <$> _only_passing
+        , TF.assign "service" <$> _service
+        , TF.assign "session" <$> _session
+        , TF.assign "stored_token" <$> _stored_token
+        , TF.assign "tags" <$> _tags
+        , TF.assign "template" <$> _template
+        , TF.assign "token" <$> _token
+        ]
+
+$(TF.makeSchemaLenses
+    ''PreparedQueryResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)
 
 {- | The @consul_service@ Consul resource.
 
@@ -249,33 +370,56 @@ resource, such as a hosted database, as a service, as described in
 <https://www.consul.io/docs/guides/external.html> , use <catalog_entry.html>
 instead, which can create an arbitrary service record in the Consul catalog.
 -}
-data ServiceResource = ServiceResource
-    { _address    :: !(Attr Text)
+data ServiceResource = ServiceResource {
+      _address             :: !(TF.Argument Text)
     {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
-    , _name       :: !(Attr Text)
+    , _name                :: !(TF.Argument Text)
     {- ^ (Required, string) The name of the service. -}
-    , _port       :: !(Attr Text)
+    , _port                :: !(TF.Argument Text)
     {- ^ (Optional, int) The port of the service. -}
-    , _service_id :: !(Attr Text)
+    , _service_id          :: !(TF.Argument Text)
     {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
-    , _tags       :: !(Attr Text)
+    , _tags                :: !(TF.Argument Text)
     {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
-    } deriving (Show, Generic)
+    , _computed_address    :: !(TF.Attribute Text)
+    {- ^ - The address of the service. -}
+    , _computed_name       :: !(TF.Attribute Text)
+    {- ^ - The name of the service. -}
+    , _computed_port       :: !(TF.Attribute Text)
+    {- ^ - The port of the service. -}
+    , _computed_service_id :: !(TF.Attribute Text)
+    {- ^ - The id of the service, defaults to the value of @name@ . -}
+    , _computed_tags       :: !(TF.Attribute Text)
+    {- ^ - The tags of the service. -}
+    } deriving (Show, Eq)
 
-type instance Computed ServiceResource
-    = '[ '("address", Text)
-       {- - The address of the service. -}
-       , '("name", Text)
-       {- - The name of the service. -}
-       , '("port", Text)
-       {- - The port of the service. -}
-       , '("service_id", Text)
-       {- - The id of the service, defaults to the value of @name@ . -}
-       , '("tags", Text)
-       {- - The tags of the service. -}
-       ]
+serviceResource :: TF.Resource TF.Consul ServiceResource
+serviceResource =
+    TF.newResource "consul_service" $
+        ServiceResource {
+            _address = TF.Absent
+            , _name = TF.Absent
+            , _port = TF.Absent
+            , _service_id = TF.Absent
+            , _tags = TF.Absent
+            , _computed_address = TF.Computed "address"
+            , _computed_name = TF.Computed "name"
+            , _computed_port = TF.Computed "port"
+            , _computed_service_id = TF.Computed "service_id"
+            , _computed_tags = TF.Computed "tags"
+            }
 
-$(TH.makeResource
-    "consul_service"
-    ''Qual.Consul
-    ''ServiceResource)
+instance TF.ToHCL ServiceResource where
+    toHCL ServiceResource{..} = TF.arguments
+        [ TF.assign "address" <$> _address
+        , TF.assign "name" <$> _name
+        , TF.assign "port" <$> _port
+        , TF.assign "service_id" <$> _service_id
+        , TF.assign "tags" <$> _tags
+        ]
+
+$(TF.makeSchemaLenses
+    ''ServiceResource
+    ''TF.Consul
+    ''TF.Resource
+    'TF.schema)

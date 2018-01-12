@@ -1,7 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
@@ -9,8 +7,8 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE TemplateHaskell        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -25,38 +23,52 @@
 --
 module Terrafomo.NewRelic.DataSource where
 
-import Data.Text (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
-import GHC.Base     (Eq)
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
+import GHC.Base (Eq, const, ($))
+import GHC.Show (Show)
 
-import Terrafomo.Syntax.Attribute (Attr, Computed)
-
-import qualified Terrafomo.NewRelic        as Qual
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.NewRelic          as TF
+import qualified Terrafomo.Syntax.DataSource as TF
+import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.TH                as TF
 
 {- | The @newrelic_application@ NewRelic datasource.
 
 Use this data source to get information about a specific application in New
 Relic.
 -}
-data ApplicationDataSource = ApplicationDataSource
-    { _name :: !(Attr Text)
+data ApplicationDataSource = ApplicationDataSource {
+      _name                  :: !(TF.Argument Text)
     {- ^ (Required) The name of the application in New Relic. -}
-    } deriving (Show, Generic)
+    , _computed_host_ids     :: !(TF.Attribute Text)
+    {- ^ - A list of host IDs associated with the application. -}
+    , _computed_id           :: !(TF.Attribute Text)
+    {- ^ - The ID of the application. -}
+    , _computed_instance_ids :: !(TF.Attribute Text)
+    {- ^ - A list of instance IDs associated with the application. -}
+    } deriving (Show, Eq)
 
-type instance Computed ApplicationDataSource
-    = '[ '("host_ids", Text)
-       {- - A list of host IDs associated with the application. -}
-       , '("id", Text)
-       {- - The ID of the application. -}
-       , '("instance_ids", Text)
-       {- - A list of instance IDs associated with the application. -}
-       ]
+applicationDataSource :: TF.DataSource TF.NewRelic ApplicationDataSource
+applicationDataSource =
+    TF.newDataSource "newrelic_application" $
+        ApplicationDataSource {
+            _name = TF.Absent
+            , _computed_host_ids = TF.Computed "host_ids"
+            , _computed_id = TF.Computed "id"
+            , _computed_instance_ids = TF.Computed "instance_ids"
+            }
 
-$(TH.makeDataSource
-    "newrelic_application"
-    ''Qual.NewRelic
-    ''ApplicationDataSource)
+instance TF.ToHCL ApplicationDataSource where
+    toHCL ApplicationDataSource{..} = TF.arguments
+        [ TF.assign "name" <$> _name
+        ]
+
+$(TF.makeSchemaLenses
+    ''ApplicationDataSource
+    ''TF.NewRelic
+    ''TF.DataSource
+    'TF.schema)
