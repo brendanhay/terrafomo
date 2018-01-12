@@ -3,69 +3,69 @@ image: haskell:latest
 variables:
   STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
 
-cache:
-  key: "$CI_BUILD_NAME"
-  paths:
-    - .stack-work/
-    - .stack-root/
-# GENERATED
-    - provider/terrafomo-alicloud/.stack-work/
-    - provider/terrafomo-aws/.stack-work/
-    - provider/terrafomo-azurerm/.stack-work/
-    - provider/terrafomo-bitbucket/.stack-work/
-    - provider/terrafomo-centurylinkcloud/.stack-work/
-    - provider/terrafomo-chef/.stack-work/
-    - provider/terrafomo-circonus/.stack-work/
-    - provider/terrafomo-cloudflare/.stack-work/
-    - provider/terrafomo-cloudstack/.stack-work/
-    - provider/terrafomo-cobbler/.stack-work/
-    - provider/terrafomo-consul/.stack-work/
-    - provider/terrafomo-datadog/.stack-work/
-    - provider/terrafomo-digitalocean/.stack-work/
-    - provider/terrafomo-dnsimple/.stack-work/
-    - provider/terrafomo-dnsmadeeasy/.stack-work/
-    - provider/terrafomo-docker/.stack-work/
-    - provider/terrafomo-dyn/.stack-work/
-    - provider/terrafomo-fastly/.stack-work/
-    - provider/terrafomo-github/.stack-work/
-    - provider/terrafomo-gitlab/.stack-work/
-    - provider/terrafomo-google/.stack-work/
-    - provider/terrafomo-grafana/.stack-work/
-    - provider/terrafomo-heroku/.stack-work/
-    - provider/terrafomo-icinga2/.stack-work/
-    - provider/terrafomo-ignition/.stack-work/
-    - provider/terrafomo-influxdb/.stack-work/
-    - provider/terrafomo-kubernetes/.stack-work/
-    - provider/terrafomo-librato/.stack-work/
-    - provider/terrafomo-logentries/.stack-work/
-    - provider/terrafomo-logicmonitor/.stack-work/
-    - provider/terrafomo-mailgun/.stack-work/
-    - provider/terrafomo-mysql/.stack-work/
-    - provider/terrafomo-newrelic/.stack-work/
-    - provider/terrafomo-nomad/.stack-work/
-    - provider/terrafomo-ns1/.stack-work/
-    - provider/terrafomo-oneandone/.stack-work/
-    - provider/terrafomo-opc/.stack-work/
-    - provider/terrafomo-openstack/.stack-work/
-    - provider/terrafomo-opsgenie/.stack-work/
-    - provider/terrafomo-ovh/.stack-work/
-    - provider/terrafomo-packet/.stack-work/
-    - provider/terrafomo-pagerduty/.stack-work/
-    - provider/terrafomo-postgresql/.stack-work/
-    - provider/terrafomo-powerdns/.stack-work/
-    - provider/terrafomo-profitbricks/.stack-work/
-    - provider/terrafomo-rabbitmq/.stack-work/
-    - provider/terrafomo-rancher/.stack-work/
-    - provider/terrafomo-rundeck/.stack-work/
-    - provider/terrafomo-scaleway/.stack-work/
-    - provider/terrafomo-softlayer/.stack-work/
-    - provider/terrafomo-spotinst/.stack-work/
-    - provider/terrafomo-statuscake/.stack-work/
-    - provider/terrafomo-triton/.stack-work/
-    - provider/terrafomo-ultradns/.stack-work/
-    - provider/terrafomo-vault/.stack-work/
-    - provider/terrafomo-vmware/.stack-work/
-# END GENERATED
+# cache:
+#   key: "$CI_BUILD_NAME"
+#   paths:
+#     - .stack-work/
+#     - .stack-root/
+# # GENERATED
+#     - provider/terrafomo-alicloud/.stack-work/
+#     - provider/terrafomo-aws/.stack-work/
+#     - provider/terrafomo-azurerm/.stack-work/
+#     - provider/terrafomo-bitbucket/.stack-work/
+#     - provider/terrafomo-centurylinkcloud/.stack-work/
+#     - provider/terrafomo-chef/.stack-work/
+#     - provider/terrafomo-circonus/.stack-work/
+#     - provider/terrafomo-cloudflare/.stack-work/
+#     - provider/terrafomo-cloudstack/.stack-work/
+#     - provider/terrafomo-cobbler/.stack-work/
+#     - provider/terrafomo-consul/.stack-work/
+#     - provider/terrafomo-datadog/.stack-work/
+#     - provider/terrafomo-digitalocean/.stack-work/
+#     - provider/terrafomo-dnsimple/.stack-work/
+#     - provider/terrafomo-dnsmadeeasy/.stack-work/
+#     - provider/terrafomo-docker/.stack-work/
+#     - provider/terrafomo-dyn/.stack-work/
+#     - provider/terrafomo-fastly/.stack-work/
+#     - provider/terrafomo-github/.stack-work/
+#     - provider/terrafomo-gitlab/.stack-work/
+#     - provider/terrafomo-google/.stack-work/
+#     - provider/terrafomo-grafana/.stack-work/
+#     - provider/terrafomo-heroku/.stack-work/
+#     - provider/terrafomo-icinga2/.stack-work/
+#     - provider/terrafomo-ignition/.stack-work/
+#     - provider/terrafomo-influxdb/.stack-work/
+#     - provider/terrafomo-kubernetes/.stack-work/
+#     - provider/terrafomo-librato/.stack-work/
+#     - provider/terrafomo-logentries/.stack-work/
+#     - provider/terrafomo-logicmonitor/.stack-work/
+#     - provider/terrafomo-mailgun/.stack-work/
+#     - provider/terrafomo-mysql/.stack-work/
+#     - provider/terrafomo-newrelic/.stack-work/
+#     - provider/terrafomo-nomad/.stack-work/
+#     - provider/terrafomo-ns1/.stack-work/
+#     - provider/terrafomo-oneandone/.stack-work/
+#     - provider/terrafomo-opc/.stack-work/
+#     - provider/terrafomo-openstack/.stack-work/
+#     - provider/terrafomo-opsgenie/.stack-work/
+#     - provider/terrafomo-ovh/.stack-work/
+#     - provider/terrafomo-packet/.stack-work/
+#     - provider/terrafomo-pagerduty/.stack-work/
+#     - provider/terrafomo-postgresql/.stack-work/
+#     - provider/terrafomo-powerdns/.stack-work/
+#     - provider/terrafomo-profitbricks/.stack-work/
+#     - provider/terrafomo-rabbitmq/.stack-work/
+#     - provider/terrafomo-rancher/.stack-work/
+#     - provider/terrafomo-rundeck/.stack-work/
+#     - provider/terrafomo-scaleway/.stack-work/
+#     - provider/terrafomo-softlayer/.stack-work/
+#     - provider/terrafomo-spotinst/.stack-work/
+#     - provider/terrafomo-statuscake/.stack-work/
+#     - provider/terrafomo-triton/.stack-work/
+#     - provider/terrafomo-ultradns/.stack-work/
+#     - provider/terrafomo-vault/.stack-work/
+#     - provider/terrafomo-vmware/.stack-work/
+# # END GENERATED
 
 before_script:
   - apt-get update && apt-get install xz-utils make
