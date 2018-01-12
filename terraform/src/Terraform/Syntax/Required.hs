@@ -1,44 +1,31 @@
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE PolyKinds         #-}
 {-# LANGUAGE TypeFamilies      #-}
 {-# LANGUAGE TypeOperators     #-}
 
 module Terraform.Syntax.Required
-    ( RequiredState (Initial, Valid)
-    , Placeholder
+    ( Placeholder
     , Required
 
-    , def
-
-    , GInitialState
+    , gInitialState
     ) where
 
 import GHC.Generics
 
--- | Whether the instantiated value is in an initial or valid state.
-data RequiredState = Initial | Valid
+-- | Determine based on the phase if there is a valid value or a placeholder.
+type family Required s a :: *
 
 -- | The placeholder value that is set by the generic machinery to signify
 -- an initial but required value.
 data Placeholder = Required
     deriving (Show, Eq, Ord)
 
--- | Determine based on the phase if there is a valid value or a placeholder.
-type family Required (s :: RequiredState) a where
-    Required 'Initial a = Placeholder
-    Required 'Valid   a = a
-
 -- | Obtain a value in the initial state.
 --
 -- /Note:/ This produces considerably better errors than using 'Data.Default'
 -- without the higher-kinded @f@.
-def :: ( Generic (f 'Initial)
-       , GInitialState (Rep (f 'Initial))
-       )
-    => f 'Initial
-def = to gInitialState
-
 class GInitialState f where
     gInitialState :: f a
 

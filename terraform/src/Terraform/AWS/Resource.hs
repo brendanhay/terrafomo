@@ -16,8 +16,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.AWS.Provider    (AWS)
-import Terraform.Syntax.Required (Required, RequiredState (Initial, Valid))
+import Terraform.Syntax.Required (Required)
 import Terraform.Syntax.Resource (HasMeta (metadata), Meta)
 
 import qualified Terraform.AWS.Types as Type
@@ -654,6 +653,7 @@ $(TH.makeResource "aws_" "meta" ''Resource_ELB_Attachment')
 data Resource_Instance' s = Resource_Instance
     { meta                        :: !Meta
     , ami                         :: !(Required s Type.AMI)
+    , tags                        :: !(Maybe Type.Tags)
     , associate_public_ip_address :: !(Maybe Bool)
     } deriving(Generic)
 
@@ -1630,7 +1630,7 @@ data Resource_S3_Bucket' s = Resource_S3_Bucket
     -- view the policy as constantly changing in a terraform plan. In this
     -- case, please make sure you use the verbose/specific version of the
     -- policy.
-    , tags                      :: !(Maybe Text)
+    , tags                      :: !(Maybe Type.Tags)
     -- ^ (Optional) A mapping of tags to assign to the bucket.
     , force_destroy             :: !(Maybe Text)
     -- ^ (Optional, Default:false ) A boolean that indicates all objects should

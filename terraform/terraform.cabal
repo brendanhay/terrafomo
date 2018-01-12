@@ -36,10 +36,11 @@ library
           aeson
         , base >= 4.9 && < 5
         , containers
+        , hashable
         , hcl
         , lens
-        , text
         , mtl
         , template-haskell
+        , text
         , unordered-containers
-        , hashable
+        , random

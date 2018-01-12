@@ -1,15 +1,24 @@
-{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleContexts  #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Terraform.AWS.Provider where
 
-import Data.Hashable (Hashable (hashWithSalt))
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
 
-import Terraform.Monad           (Ref, Res, TerraformT)
-import Terraform.Syntax.Name     (HasType, Name)
-import Terraform.Syntax.Required (RequiredState (Valid))
-import Terraform.Syntax.Resource (Resource (..))
+import GHC.Generics (Generic)
 
-import qualified Terraform.Monad as Terraform
+import Terraform.Monad            (Ref, TerraformT)
+import Terraform.Syntax.Name      (HasType (getType), Key (Key), Name)
+import Terraform.Syntax.Provider  (newAlias)
+import Terraform.Syntax.Resource  (Resource (..), Schema)
+import Terraform.Syntax.Serialize ((=:))
+
+import qualified Data.Text                  as Text
+import qualified Terraform.Monad            as Terraform
+import qualified Terraform.Syntax.Serialize as HCL
 
 -- FIXME: Need to utilise versioning.
 
@@ -22,20 +31,27 @@ import qualified Terraform.Monad as Terraform
 -- }
 
 data AWS = AWS
-    deriving (Show, Eq, Ord)
+    deriving (Show, Eq, Ord, Generic)
 
-instance Hashable AWS where
-    hashWithSalt salt _ = salt
+instance Hashable AWS
 
-instance Monoid AWS where
-    mempty  = AWS
-    mappend = const
+-- Basic example.
+instance HCL.ToValue AWS where
+    toValue x@AWS =
+        HCL.object ("provider" :| [HCL.quoted "aws"])
+            [ "alias"      =: newAlias x
+            , "version"    =: Text.pack "~> 1.0"
+            , "access_key" =: Text.pack "foo"
+            , "secret_key" =: Text.pack "bar"
+            , "region"     =: Text.pack "us-east-1"
+            ]
 
 resource
     :: ( Monad m
-       , HasType (r 'Valid)
+       , HasType (Schema r)
+       , HCL.ToValue (Schema r)
        )
     => Name
-    -> r 'Valid
-    -> TerraformT m Ref
-resource = Terraform.resourceWith AWS
+    -> Schema r
+    -> TerraformT m (Ref AWS (Schema r))
+resource n x = Terraform.resourceWith (Resource AWS (Key (getType x) n) x)

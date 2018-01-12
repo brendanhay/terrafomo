@@ -10,77 +10,65 @@ import HCL.Syntax
 import Text.Megaparsec (Parsec)
 
 import qualified Data.Char             as Char
+import qualified Data.Foldable         as Fold
 import qualified Data.Text             as Text
 import qualified Text.Megaparsec       as Parse
 import qualified Text.Megaparsec.Lexer as Parse (charLiteral, decimal, float)
 
 type Parser = Parsec () Text
 
-parseKey :: Parser Key
-parseKey = quoted <|> ident
-  where
-    quoted = Quoted <$> parseQuoted
-    ident  = Ident  <$> parseIdent
+-- parseKey :: Parser Key
+-- parseKey = quoted <|> ident
+--   where
+--     quoted = Quoted <$> parseQuoted
+--     ident  = Ident  <$> parseIdent
 
-parseStatement :: Parser Statement
-parseStatement = do
-    k <- parseKey
-    assign k <|> object k
-  where
-    assign k =
-        Assign k <$  Parse.try (skipSpaces (Parse.char '='))
-                 <*> parseValue
+-- parseValue :: Parser Value
+-- parseValue =
+--     assign <|> named <|> object <|> list <|> bool <|> Parse.try number <|> float <|> string <|> heredoc
+--   where
+--     assign =
+--         Assign <$> Parse.try (parseKey <* skipSpaces (Parse.char '='))
+--                <*> parseValue
 
-    object k = do
-        ks <- Parse.many parseKey
-        Object (k :| ks) <$> parseObject
+--     object =
+--         Object <$> parseKey
+--                <*> between '{' '}' (many parseValue)
 
-parseObject :: Parser [Statement]
-parseObject = between '{' '}' (many parseStatement)
+--     list = List <$>
+--         between '[' ']' (Parse.sepBy parseValue (skipSpaces (Parse.char ',')))
 
-parseValue :: Parser Value
-parseValue = body <|> list <|> literal
-  where
-    body    = ObjectBody <$> parseObject
-    literal = Literal    <$> parseLiteral
+--     bool = Bool
+--         <$> ( True  <$ Parse.string "true"
+--           <|> False <$ Parse.string "false"
+--             )
 
-    list = List <$>
-        between '[' ']' (Parse.sepBy parseValue (skipSpaces (Parse.char ',')))
+--     number = Number <$> Parse.decimal
+--     float  = Float  <$> Parse.float
+--     string = String <$> parseQuoted
 
-parseLiteral :: Parser Literal
-parseLiteral = bool <|> Parse.try number <|> float <|> string <|> heredoc
-  where
-    bool = Bool
-        <$> ( True  <$ Parse.string "true"
-          <|> False <$ Parse.string "false"
-            )
+--     heredoc = do
+--         k <- Parse.try (Parse.string "<<") *> parseIdent <* Parse.newline
+--         HereDoc k . Text.pack
+--             <$> Parse.many Parse.anyChar
+--             <*  Parse.string (Text.unpack k)
 
-    number = Number <$> Parse.decimal
-    float  = Float  <$> Parse.float
-    string = String <$> parseQuoted
+-- skipSpaces :: Parser a -> Parser a
+-- skipSpaces p = Parse.space *> p <* Parse.space
 
-    heredoc = do
-        k <- Parse.try (Parse.string "<<") *> parseIdent <* Parse.newline
-        HereDoc k . Text.pack
-            <$> Parse.many Parse.anyChar
-            <*  Parse.string (Text.unpack k)
+-- parseIdent :: Parser Text
+-- parseIdent =
+--     Text.pack <$> some (Parse.satisfy (\c -> Char.isAlphaNum c || c == '_'))
 
-skipSpaces :: Parser a -> Parser a
-skipSpaces p = Parse.space *> p <* Parse.space
+-- parseQuoted :: Parser Text
+-- parseQuoted =
+--     Text.pack
+--         <$> ( Parse.try (Parse.char '"')
+--            *> Parse.someTill Parse.charLiteral (Parse.char '"')
+--             )
 
-parseIdent :: Parser Text
-parseIdent =
-    Text.pack <$> some (Parse.satisfy (\c -> Char.isAlphaNum c || c == '_'))
-
-parseQuoted :: Parser Text
-parseQuoted =
-    Text.pack
-        <$> ( Parse.try (Parse.char '"')
-           *> Parse.someTill Parse.charLiteral (Parse.char '"')
-            )
-
-between :: Char -> Char -> Parser a -> Parser a
-between start end p =
-    Parse.try (skipSpaces (Parse.char start))
-        *> p
-        <* skipSpaces (Parse.char end)
+-- between :: Char -> Char -> Parser a -> Parser a
+-- between start end p =
+--     Parse.try (skipSpaces (Parse.char start))
+--         *> p
+--         <* skipSpaces (Parse.char end)

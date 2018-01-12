@@ -4,15 +4,17 @@
 
 module HCL.Syntax where
 
-import Data.List.NonEmpty (NonEmpty)
+import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Monoid        ((<>))
+import Data.String        (IsString (fromString))
 import Data.Text          (Text)
 
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
 import qualified Data.Foldable                as Fold
-import qualified Text.PrettyPrint.Leijen.Text as Print
+import qualified Data.List                    as List
+import qualified Text.PrettyPrint.Leijen.Text as PP
 
 -- FIXME: JSON serialization instances
 
@@ -21,54 +23,63 @@ data Key
     | Quoted !Text
       deriving (Show, Eq)
 
+instance IsString Key where
+    fromString = Ident . fromString
+
 instance Pretty Key where
-    prettyList = Print.hsep . map pretty
+    prettyList = PP.hsep . map pretty
     pretty     = \case
         Ident  k -> pretty k
-        Quoted k -> Print.dquotes (pretty k)
+        Quoted k -> PP.dquotes (pretty k)
 
-data Statement
-    = Assign !Key            !Value
-    | Object !(NonEmpty Key) ![Statement]
-      deriving (Show, Eq)
-
-instance Pretty Statement where
-    prettyList = Print.vcat . map pretty
-    pretty     = \case
-        Assign k  v -> pretty k <+> "=" <+> pretty v
-        Object ks o -> prettyList (Fold.toList ks) <+> pretty o
+-- instance Pretty Statement where
+--     prettyList = render
+--     pretty     = \case
+--         Assign k  v  -> pretty k <+> "=" <+> pretty v
+--         Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
 
 data Value
-    = ObjectBody ![Statement]
-    | List       ![Value]
-    | Literal    !Literal
-      deriving (Show, Eq)
-
-instance Pretty Value where
-    prettyList = Print.list . map pretty
-    pretty     = \case
-        ObjectBody o  -> pretty o
-        List       vs -> prettyList vs
-        Literal    x  -> pretty x
-
-data Literal
-    = Bool    !Bool
+    = Assign  !Key            !Value   -- foo = bar
+    | Object  !(NonEmpty Key) ![Value] -- resource foo bar { ... }
+    | Block   ![Value]                 -- { foo = bar }
+    | List    ![Value]
+    | Bool    !Bool
     | Number  !Integer
     | Float   !Double
     | String  !Text
     | HereDoc !Text !Text
       deriving (Show, Eq)
 
-instance Pretty Literal where
-    pretty = \case
-        Bool                  x -> prettyBool x
-        Number                x -> pretty x
-        Float                 x -> pretty x
-        String                x -> pretty x
-        HereDoc (pretty -> k) x -> "<<" <> k <$$> pretty x <$$> k
+instance IsString Value where
+    fromString = String . fromString
 
-prettyObject :: [Statement] -> Doc
-prettyObject xs = "{" <$$> prettyList xs <$$> "}"
+instance Pretty Value where
+    prettyList = pretty . List
+    pretty     = \case
+        Assign k  v  -> pretty k <+> "=" <+> pretty v
+        Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
+
+        Block vs            -> PP.vcat (map pretty vs)
+
+        List []             -> "[]"
+        List (reverse       -> v:vs) ->
+            let xs = map (flip mappend ", " . pretty) vs
+                y  = pretty v
+             in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : xs))) <$$> "]"
+
+        Bool   x            -> prettyBool x
+        Number x            -> pretty x
+        Float  x            -> pretty x
+        String x            -> PP.dquotes (pretty x)
+
+        HereDoc (pretty -> k) x ->
+            "<<" <> k <$$> pretty x <$$> k
+
+render :: [Value] -> Doc
+render = PP.vcat . List.intersperse PP.line . map pretty
+
+prettyObject :: [Value] -> Doc
+prettyObject xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
 
 prettyBool :: Bool -> Doc
 prettyBool = \case
