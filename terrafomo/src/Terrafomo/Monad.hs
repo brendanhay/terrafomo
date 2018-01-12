@@ -346,13 +346,6 @@ resource name x = do
 
     pure $! Reference key (_resourceConfig x)
 
--- FIXME: additional validation logic can run when storing a ref,
--- for example checking the reference changes exist, etc.
-
--- FIXME: currently no mechanism(s) whereby this can be tied back into the
--- dependency graph and automatically create a datasource.
--- ie. you can depend on something that hasn't been declared in the monad?
---
 -- FIXME: I feel like output variables are not even needed + possibly even
 -- an anti-pattern.
 --
@@ -376,6 +369,8 @@ output name x =
 
 -- Internal State Modifiers
 
+-- FIXME: additional validation logic can run when storing a ref,
+-- for example checking the reference changes exist, etc.
 insert
     :: ( Monad m
        , Ord k
