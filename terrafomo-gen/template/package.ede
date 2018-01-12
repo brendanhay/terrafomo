@@ -2,14 +2,12 @@ _include: !include '../../share/package.yaml'
 
 name: {{ package }}
 
-<<: *legal
+<<: *common
 <<: *version
 <<: *options
 
 dependencies:
   - base
-  - containers
-  - hashable
   - terrafomo
   - text
 
@@ -24,5 +22,4 @@ library:
 {% endfor %}
 
   reexported-modules: >
-    terrafomo:Terrafomo.Format,
-    terrafomo:Terrafomo.Prelude
+    terrafomo:Terrafomo.Format

@@ -1,0 +1,17 @@
+-- This module was auto-generated. If it exists, it will not be overwritten.
+
+{-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ namespace }}
+    (
+    {% for export in reexports %}
+    {% if export.first %} {% else %},{% endif %} module {{ export.value }}
+    {% endfor %}
+    ) where
+
+{% for export in reexports %}
+import {{ export.value }}
+{% endfor %}

@@ -1,0 +1,5 @@
+-- This module was auto-generated. If it exists, it will not be overwritten.
+
+{% include "_include/license.ede" %}
+--
+module {{ namespace }} where

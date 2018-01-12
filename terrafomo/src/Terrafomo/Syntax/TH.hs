@@ -24,18 +24,19 @@ makeDataSource
     -> TH.Name
     -- ^ The provider's Haskell data type, such as ''AWS, etc.
     -> TH.Name
-    -- ^ The provider's 'defaultProvider' function.
-    -> TH.Name
     -- ^ The Haskell data type to create datasource-related instances for.
     -> TH.DecsQ
-makeDataSource original provider mkprovider datatype =
-    makeSchema datatype (TH.conT provider) (TH.conT ''DataSource.DataSource) (TH.varE 'DataSource.schema) $
-        TH.normalB ( TH.conE 'DataSource.DataSource
-           `TH.appE` TH.varE mkprovider
-           `TH.appE` TH.varE 'mempty
-           `TH.appE` TH.stringE original
-           `TH.appE` TH.varE 'Attribute.genericAttributes
-                   )
+makeDataSource original provider datatype =
+    makeSchema datatype
+        (TH.conT provider)
+        (TH.conT ''DataSource.DataSource)
+        (TH.varE 'DataSource.schema) $
+            TH.normalB ( TH.conE 'DataSource.DataSource
+               `TH.appE` TH.conE 'Nothing
+               `TH.appE` TH.varE 'mempty
+               `TH.appE` TH.stringE original
+               `TH.appE` TH.varE 'Attribute.genericAttributes
+                       )
 
 makeResource
     :: String
@@ -43,19 +44,20 @@ makeResource
     -> TH.Name
     -- ^ The provider's Haskell data type, such as ''AWS, etc.
     -> TH.Name
-    -- ^ The provider's 'defaultProvider' function.
-    -> TH.Name
     -- ^ The Haskell data type to create resource-related instances for.
     -> TH.DecsQ
-makeResource original provider mkprovider datatype =
-    makeSchema datatype (TH.conT provider) (TH.conT ''Resource.Resource) (TH.varE 'Resource.schema) $
-        TH.normalB ( TH.conE 'Resource.Resource
-           `TH.appE` TH.varE mkprovider
-           `TH.appE` TH.varE 'mempty
-           `TH.appE` TH.varE 'mempty
-           `TH.appE` TH.stringE original
-           `TH.appE` TH.varE 'Attribute.genericAttributes
-                   )
+makeResource original provider datatype =
+    makeSchema datatype
+        (TH.conT provider)
+        (TH.conT ''Resource.Resource)
+        (TH.varE 'Resource.schema) $
+            TH.normalB ( TH.conE 'Resource.Resource
+               `TH.appE` TH.conE 'Nothing
+               `TH.appE` TH.varE 'mempty
+               `TH.appE` TH.varE 'mempty
+               `TH.appE` TH.stringE original
+               `TH.appE` TH.varE 'Attribute.genericAttributes
+                       )
 
 makeSchema
     :: TH.Name  -- ^ Datatype name.
@@ -121,6 +123,15 @@ makeSchema datatype provider schematype schemafield mkconstructor = do
         , TH.funD constructor [TH.clause [] mkconstructor []]
         ]
 
+-- Strips the leading underscore and then camelizes the lens label.
+makeLenses :: TH.Name -> TH.DecsQ
+makeLenses =
+   TH.makeLensesWith
+       ( TH.lensRules
+       & TH.lensField .~ \_ _ field ->
+           maybeToList (renameField (TH.nameBase field))
+       )
+
 -- Strips the leading underscore and then camelizes the field label.
 makeFields :: TH.Name -> TH.DecsQ
 makeFields =
@@ -136,7 +147,7 @@ renameField s = do
     case underscores n of
         []   -> Nothing
         x:xs -> do
-           let method = List.concat (x : map upperHead xs)
+           let method = List.concat (map Char.toLower x : map upperHead xs)
                cls    = upperHead method
            Just (TH.MethodName (TH.mkName ("Has" ++ cls))
                                (TH.mkName method))

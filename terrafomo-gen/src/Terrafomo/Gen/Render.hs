@@ -8,66 +8,100 @@
 
 module Terrafomo.Gen.Render where
 
-import Data.Aeson         ((.=))
-import Data.Bifunctor     (first, second)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
-import Data.Text          (Text)
+import Data.Aeson      ((.=))
+import Data.Bifunctor  (first, second)
+import Data.Map.Strict (Map)
+import Data.Maybe      (isJust)
+import Data.Text       (Text)
 
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
 
-import qualified Data.Aeson.Types as JSON
-import qualified Data.Foldable    as Fold
-import qualified Data.Map.Strict  as Map
-import qualified Data.Text        as Text
-import qualified Data.Text.Lazy   as LText
-import qualified Text.EDE         as EDE
+import Text.EDE.Filters ((@:))
+
+import qualified Data.Aeson.Types    as JSON
+import qualified Data.Foldable       as Fold
+import qualified Data.HashMap.Strict as HashMap
+import qualified Data.Map.Strict     as Map
+import qualified Data.Text           as Text
+import qualified Data.Text.Lazy      as LText
+import qualified Text.EDE            as EDE
+import qualified Text.Wrap           as Wrap
 
 data Templates a = Templates
     { packageTemplate  :: !a
     , providerTemplate :: !a
     , contentsTemplate :: !a
     , schemaTemplate   :: !a
+    , mainTemplate     :: !a
+    , typesTemplate    :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
 package
     :: Templates EDE.Template
-    -> Provider
+    -> Provider a
     -> Either Text LText.Text
 package tmpls p =
     render (packageTemplate tmpls)
-        [ "provider" .=   p
+        [ "provider" .= fmap Just p
         , "package"  .= providerPackage p
         , "exposed"  .=
-            [ mainNS     p
-            , typesNS    p
-            , providerNS p
-            , schemaNS   p DataSource
-            , schemaNS   p Resource
+            [ mainNS   p
+            , schemaNS p DataSource
+            , schemaNS p Resource
             ]
+        ]
+
+main
+    :: Templates EDE.Template
+    -> Provider (Maybe Schema)
+    -> Either Text (NS, LText.Text)
+main tmpls p =
+    let ns = mainNS p
+     in second (ns,) $ render (mainTemplate tmpls)
+        [ "namespace" .= ns
+        , "provider"  .= fmap Just p
+        , "schema"    .= providerDatatype p
+        , "reexports" .=
+            ( terrafomoNS
+            : typesNS p
+            : [providerNS p | isJust (providerDatatype p)]
+            )
+        ]
+
+types
+    :: Templates EDE.Template
+    -> Provider (Maybe a)
+    -> Either Text (NS, LText.Text)
+types tmpls p =
+    let ns = typesNS p
+     in second (ns,) $ render (typesTemplate tmpls)
+        [ "namespace" .= ns
+        , "provider"  .= p
         ]
 
 provider
     :: Templates EDE.Template
-    -> Provider
-    -> Schema
+    -> Provider (Maybe Schema)
     -> Either Text (NS, LText.Text)
-provider tmpls p x =
+provider tmpls p =
     let ns = providerNS p
      in second (ns,) $ render (providerTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= p
-        , "schema"    .= x
-        , "reexports" .= [typesNS p]
+        , "schema"    .= providerDatatype p
+        , "imports"   .=
+            [ syntaxNS
+            , typesNS p
+            ]
         ]
 
 contents
     :: Templates EDE.Template
-    -> Provider
+    -> Provider a
     -> SchemaType
-    -> Map NS a
+    -> Map NS b
     -> Either Text (NS, LText.Text)
 contents tmpls p typ xs =
     let ns = schemaNS p typ
@@ -79,7 +113,7 @@ contents tmpls p typ xs =
 
 schemas
     :: Templates EDE.Template
-    -> Provider
+    -> Provider (Maybe a)
     -> SchemaType
     -> Map NS [Schema]
     -> Either Text (Map NS LText.Text)
@@ -92,8 +126,8 @@ schemas tmpls p typ = Map.traverseWithKey go
             , "type"      .= typ
             , "schemas"   .= createMap (getTypeName typ) xs
             , "imports"   .=
-                ( NS ("Terrafomo" :| ["Syntax", "Provider"])
-                : [providerNS p | providerDatatype p]
+                (  fromNS '.' syntaxNS
+                : [fromNS '.' (mainNS p) | isJust (providerDatatype p)]
                 )
             ]
 
@@ -101,7 +135,12 @@ schemas tmpls p typ = Map.traverseWithKey go
     createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]
 
 render :: EDE.Template -> [JSON.Pair] -> Either Text LText.Text
-render tmpl = first Text.pack . EDE.eitherRender tmpl . EDE.fromPairs
+render tmpl =
+    first Text.pack . EDE.eitherRenderWith filters tmpl . EDE.fromPairs
+  where
+    filters = HashMap.fromList
+        [ "wrap" @: Wrap.wrapText Wrap.defaultWrapSettings 76
+        ]
 
 getTypeName :: SchemaType -> Schema -> Text
 getTypeName = \case

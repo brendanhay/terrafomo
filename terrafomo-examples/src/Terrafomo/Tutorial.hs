@@ -1,18 +1,17 @@
 {-
-
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE OverloadedLists        #-}
-{-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE TypeApplications       #-}
-
 -}
+
+{-# LANGUAGE OverloadedStrings #-}
 
 module Terrafomo.Tutorial where
 
@@ -23,7 +22,7 @@ import Terrafomo.Prelude
 import qualified Terrafomo.Template.DataSource as D
 import qualified Terrafomo.Template.Resource   as R
 
--- Example of using MonadTerraform homomorphism to lift into any monad.
+-- Example of using MonadTerraform homomorphism to lift into any other monad.
 
 -- infixr 7 =:
 --

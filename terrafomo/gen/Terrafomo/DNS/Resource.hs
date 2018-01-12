@@ -13,6 +13,16 @@
 {-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+-- |
+-- Module      : Terrafomo.DNS.Resource
+-- Copyright   : (c) 2017 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
 module Terrafomo.DNS.Resource where
 
 import Data.Text (Text)
@@ -22,16 +32,19 @@ import GHC.Generics (Generic)
 import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
-import Terrafomo.Syntax.Provider
 
+import qualified Terrafomo.Syntax.Provider as Qual
 import qualified Terrafomo.Syntax.TH as TH
 
--- | The @dns_a_record_set@ DNS resource.
---
--- Creates a A type DNS record set.
+{- | The @dns_a_record_set@ DNS resource.
+
+Creates a A type DNS record set.
+-}
 data ARecordSetResource = ARecordSetResource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv4 addresses this record set will point to. -}
+    , _host :: !(Attr Text)
+      {- ^ - (required): Host to look up -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl :: !(Attr Text)
@@ -43,6 +56,10 @@ data ARecordSetResource = ARecordSetResource
 type instance Computed ARecordSetResource
     = '[ '("addresses", Attr Text)
          {- - See Argument Reference above. -}
+      , '("addrs", Attr Text)
+         {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
+      , '("id", Attr Text)
+         {- - Set to @host@ . -}
       , '("name", Attr Text)
          {- - See Argument Reference above. -}
       , '("ttl", Attr Text)
@@ -53,16 +70,18 @@ type instance Computed ARecordSetResource
 
 $(TH.makeResource
     "dns_a_record_set"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''ARecordSetResource)
 
--- | The @dns_aaaa_record_set@ DNS resource.
---
--- Creates a AAAA type DNS record set.
+{- | The @dns_aaaa_record_set@ DNS resource.
+
+Creates a AAAA type DNS record set.
+-}
 data AaaaRecordSetResource = AaaaRecordSetResource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv6 addresses this record set will point to. -}
+    , _host :: !(Attr Text)
+      {- ^ - (required): Host to look up -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl :: !(Attr Text)
@@ -74,6 +93,10 @@ data AaaaRecordSetResource = AaaaRecordSetResource
 type instance Computed AaaaRecordSetResource
     = '[ '("addresses", Attr Text)
          {- - See Argument Reference above. -}
+      , '("addrs", Attr Text)
+         {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
+      , '("id", Attr Text)
+         {- - Set to @host@ . -}
       , '("name", Attr Text)
          {- - See Argument Reference above. -}
       , '("ttl", Attr Text)
@@ -84,13 +107,13 @@ type instance Computed AaaaRecordSetResource
 
 $(TH.makeResource
     "dns_aaaa_record_set"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''AaaaRecordSetResource)
 
--- | The @dns_cname_record@ DNS resource.
---
--- Creates a CNAME type DNS record.
+{- | The @dns_cname_record@ DNS resource.
+
+Creates a CNAME type DNS record.
+-}
 data CnameRecordResource = CnameRecordResource
     { _cname :: !(Attr Text)
       {- ^ (Required) The canonical name this record will point to. -}
@@ -115,13 +138,13 @@ type instance Computed CnameRecordResource
 
 $(TH.makeResource
     "dns_cname_record"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''CnameRecordResource)
 
--- | The @dns_ptr_record@ DNS resource.
---
--- Creates a PTR type DNS record.
+{- | The @dns_ptr_record@ DNS resource.
+
+Creates a PTR type DNS record.
+-}
 data PtrRecordResource = PtrRecordResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
@@ -146,6 +169,5 @@ type instance Computed PtrRecordResource
 
 $(TH.makeResource
     "dns_ptr_record"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''PtrRecordResource)

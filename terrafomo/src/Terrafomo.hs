@@ -2,7 +2,7 @@
 -- functionality.  Rather than requiring heavily curated imports etc. that a
 -- batteries-included environment tailored to matching Terraform's builtin
 -- functions + common system engineering tasks.
-module Terrafomo.Prelude
+module Terrafomo
     (
     -- * Primitive Types
       Text
@@ -62,7 +62,6 @@ import Data.Map.Strict (Map)
 import Data.Set        (Set)
 import Data.Text       (Text)
 
-
 import Numeric.Natural (Natural)
 
 import Terrafomo.Format
@@ -72,8 +71,7 @@ import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
 
-import qualified Data.Function as Prelude
-import qualified Lens.Micro    as Lens
+import qualified Lens.Micro as Lens
 
 -- -- Boolean Logic
 

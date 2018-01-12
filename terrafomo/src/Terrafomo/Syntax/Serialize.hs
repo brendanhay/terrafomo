@@ -24,7 +24,6 @@ import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource
 
 import qualified Data.Foldable        as Fold
-import qualified Data.List            as List
 import qualified Data.Text            as Text
 import qualified Terrafomo.Hash       as Hash
 import qualified Terrafomo.Syntax.HCL as HCL

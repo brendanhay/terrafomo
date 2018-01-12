@@ -13,6 +13,16 @@
 {-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+-- |
+-- Module      : Terrafomo.DNS.DataSource
+-- Copyright   : (c) 2017 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
 module Terrafomo.DNS.DataSource where
 
 import Data.Text (Text)
@@ -22,13 +32,14 @@ import GHC.Generics (Generic)
 import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
-import Terrafomo.Syntax.Provider
 
+import qualified Terrafomo.Syntax.Provider as Qual
 import qualified Terrafomo.Syntax.TH as TH
 
--- | The @dns_a_record_set@ DNS datasource.
---
--- Use this data source to get DNS A records of the host.
+{- | The @dns_a_record_set@ DNS datasource.
+
+Use this data source to get DNS A records of the host.
+-}
 data ARecordSetDataSource = ARecordSetDataSource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv4 addresses this record set will point to. -}
@@ -59,13 +70,13 @@ type instance Computed ARecordSetDataSource
 
 $(TH.makeDataSource
     "dns_a_record_set"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''ARecordSetDataSource)
 
--- | The @dns_aaaa_record_set@ DNS datasource.
---
--- Use this data source to get DNS AAAA records of the host.
+{- | The @dns_aaaa_record_set@ DNS datasource.
+
+Use this data source to get DNS AAAA records of the host.
+-}
 data AaaaRecordSetDataSource = AaaaRecordSetDataSource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv6 addresses this record set will point to. -}
@@ -96,13 +107,13 @@ type instance Computed AaaaRecordSetDataSource
 
 $(TH.makeDataSource
     "dns_aaaa_record_set"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''AaaaRecordSetDataSource)
 
--- | The @dns_cname_record_set@ DNS datasource.
---
--- Use this data source to get DNS CNAME record set of the host.
+{- | The @dns_cname_record_set@ DNS datasource.
+
+Use this data source to get DNS CNAME record set of the host.
+-}
 data CnameRecordSetDataSource = CnameRecordSetDataSource
     { _host :: !(Attr Text)
       {- ^ - (required): Host to look up -}
@@ -117,13 +128,13 @@ type instance Computed CnameRecordSetDataSource
 
 $(TH.makeDataSource
     "dns_cname_record_set"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''CnameRecordSetDataSource)
 
--- | The @dns_txt_record_set@ DNS datasource.
---
--- Use this data source to get DNS TXT record set of the host.
+{- | The @dns_txt_record_set@ DNS datasource.
+
+Use this data source to get DNS TXT record set of the host.
+-}
 data TxtRecordSetDataSource = TxtRecordSetDataSource
     { _host :: !(Attr Text)
       {- ^ - (required): Host to look up -}
@@ -140,6 +151,5 @@ type instance Computed TxtRecordSetDataSource
 
 $(TH.makeDataSource
     "dns_txt_record_set"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''TxtRecordSetDataSource)

@@ -1,4 +1,6 @@
+{-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
@@ -10,6 +12,7 @@ module Terrafomo.Gen.Provider where
 import Data.Aeson         (FromJSON, ToJSON, ToJSONKey, (.=))
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
+import Data.Maybe         (isJust)
 import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
@@ -28,21 +31,21 @@ import qualified Terrafomo.Gen.JSON as JSON
 
 -- Provider Configuration
 
-data Provider = Provider
+data Provider a = Provider
     { providerName     :: !Text
     , providerPackage  :: !(Maybe Text)
-    , providerDatatype :: !Bool
-    } deriving (Show, Generic)
+    , providerDatatype :: !a
+    } deriving (Show, Generic, Functor)
 
-instance FromJSON Provider where
+instance FromJSON (Provider Bool) where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
-instance ToJSON Provider where
+instance ToJSON (Provider (Maybe a)) where
     toJSON Provider{..} =
         JSON.object
             [ "name" .= providerName
             , "type" .=
-                if providerDatatype
+                if isJust providerDatatype
                     then providerName
                     else "Provider"
             ]
@@ -67,19 +70,25 @@ pathNS = fromNS '/'
 
 -- Package Namespaces
 
-mainNS :: Provider -> NS
-mainNS p = NS ("Terrafomo" :| [providerName p])
+terrafomoNS :: NS
+terrafomoNS = NS (pure "Terrafomo")
 
-providerNS :: Provider -> NS
+syntaxNS :: NS
+syntaxNS = terrafomoNS <> NS ("Syntax" :| ["Provider"])
+
+mainNS :: Provider a -> NS
+mainNS p = terrafomoNS <> NS (pure (providerName p))
+
+providerNS :: Provider a -> NS
 providerNS p = mainNS p <> NS (pure "Provider")
 
-typesNS :: Provider -> NS
+typesNS :: Provider a -> NS
 typesNS p = mainNS p <> NS (pure "Types")
 
-schemaNS :: Provider -> SchemaType -> NS
+schemaNS :: Provider a -> SchemaType -> NS
 schemaNS p typ = mainNS p <> NS (pure (Text.pack (show typ)))
 
-moduleNS :: Provider -> SchemaType -> [a] -> Map NS [a]
+moduleNS :: Provider a -> SchemaType -> [b] -> Map NS [b]
 moduleNS p typ xs
     | length xs > 200 = partition 8 xs
     | length xs > 100 = partition 4 xs

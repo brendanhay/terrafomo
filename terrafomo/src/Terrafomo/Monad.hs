@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleContexts           #-}
+{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE NamedFieldPuns             #-}
 {-# LANGUAGE RankNTypes                 #-}
@@ -25,7 +26,7 @@ import Control.Monad                    (unless)
 import Control.Monad.Trans.Class        (lift)
 import Control.Monad.Trans.State.Strict (State)
 
-import Data.Bifunctor  (bimap)
+import Data.Bifunctor  (Bifunctor (bimap))
 import Data.Hashable   (Hashable)
 import Data.Map.Strict (Map)
 import Data.Set        (Set)
@@ -33,7 +34,7 @@ import Data.String     (fromString)
 
 import GHC.TypeLits (KnownSymbol, symbolVal)
 
-import Lens.Micro (Lens')
+import Lens.Micro (ASetter', Lens')
 
 import Terrafomo.Syntax.Attribute
 import Terrafomo.Syntax.DataSource
@@ -66,23 +67,31 @@ import qualified Control.Monad.Trans.Writer.Strict as Strict
 -- State
 
 data TerraformState = UnsafeTerraformState
-    { _providers    :: !(Map Alias HCL.Value)
-    , _resourceKeys :: !(Set Key)
-    , _resources    :: ![HCL.Value]
-    , _outputNames  :: !(Set Name)
-    , _outputs      :: ![HCL.Value]
+    { _providers      :: !(Map Alias HCL.Value)
+    , _datasourceKeys :: !(Set Key)
+    , _datasources    :: ![HCL.Value]
+    , _resourceKeys   :: !(Set Key)
+    , _resources      :: ![HCL.Value]
+    , _outputNames    :: !(Set Name)
+    , _outputs        :: ![HCL.Value]
     }
 
 $(TH.makeLenses ''TerraformState)
 
--- FIXME: Exists for debuging, proper rendering pending.
+-- FIXME: The following instances only exist for debuging.
+-- Proper rendering functions pending.
+
 instance Show TerraformState where
-    show UnsafeTerraformState{_providers, _resources, _outputs} =
+    show tfs =
         show $ HCL.render
-             ( Map.elems _providers
-            ++ reverse   _resources
-            ++ reverse   _outputs
+             ( Map.elems (_providers   tfs)
+            ++ reverse   (_datasources tfs)
+            ++ reverse   (_resources   tfs)
+            ++ reverse   (_outputs     tfs)
              )
+
+instance Show (Terraform ()) where
+    show = show . snd . runTerraform
 
 -- Terraform Monad
 
@@ -93,11 +102,13 @@ runTerraform :: Terraform a -> (a, TerraformState)
 runTerraform = flip State.runState inital . unTerraform
   where
     inital = UnsafeTerraformState
-        { _providers    = mempty
-        , _resourceKeys = mempty
-        , _resources    = mempty
-        , _outputNames  = mempty
-        , _outputs      = mempty
+        { _providers      = mempty
+        , _datasourceKeys = mempty
+        , _datasources    = mempty
+        , _resourceKeys   = mempty
+        , _resources      = mempty
+        , _outputNames    = mempty
+        , _outputs        = mempty
         }
 
 evalTerraform :: Terraform a -> TerraformState
@@ -113,6 +124,39 @@ insertNewKey l k = do
     unless exists $
         modifying l (Set.insert k)
     pure exists
+
+insertItem
+    :: ( MonadTerraform m
+       , Bifunctor b
+       , Hashable p
+       , HCL.ToValue p
+       , HCL.ToValue (b Alias (Key, a))
+       )
+    => Lens'    TerraformState (Set Key)
+    -> ASetter' TerraformState [HCL.Value]
+    -> Name
+    -> Maybe p
+    -> Type
+    -> b p a
+    -> m (Ref p a)
+insertItem keys items name mprovider typ item =
+    liftTerraform $ do
+        let alias = Name.newAlias mprovider
+            key   = Name.Key typ name
+
+        _exists <- insertNewKey keys key
+        -- error handling
+
+        case mprovider of
+            Nothing -> pure ()
+            Just p  ->
+                modifying providers $
+                    Map.insert alias (HCL.toValue p)
+
+        modifying items $
+            (HCL.toValue (bimap (const alias) (key,) item) :)
+
+        pure (Ref key)
 
 -- Analogues for Control.Lens
 
@@ -180,24 +224,9 @@ datasource
     => Name
     -> DataSource p a
     -> m (Ref p a)
-datasource name x@DataSource{_dsProvider, _dsType, _dsSchema} =
-    liftTerraform $ do
-        let alias = Name.newAlias _dsProvider
-            key   = Name.Key _dsType name
+datasource name x =
+    insertItem datasourceKeys datasources name (_dsProvider x) (_dsType x) x
 
-        _exists <- insertNewKey resourceKeys key
-        -- error handling
-
-        modifying providers $
-            Map.insert alias (HCL.toValue _dsProvider)
-
-        modifying resources $
-            (HCL.toValue (bimap (const alias) (key,) x) :)
-
-        pure (Ref key)
-
--- The equality constraint ensures either 'Resource' or 'IsResource' can be
--- used interchangeably here with no ambiguity.
 resource
     :: ( MonadTerraform m
        , Hashable p
@@ -207,21 +236,8 @@ resource
     => Name
     -> Resource p a
     -> m (Ref p a)
-resource name x@Resource{_rsProvider, _rsType, _rsSchema} =
-    liftTerraform $ do
-        let alias = Name.newAlias _rsProvider
-            key   = Name.Key _rsType name
-
-        _exists <- insertNewKey resourceKeys key
-        -- error handling
-
-        modifying providers $
-            Map.insert alias (HCL.toValue _rsProvider)
-
-        modifying resources $
-            (HCL.toValue (bimap (const alias) (key,) x) :)
-
-        pure (Ref key)
+resource name x =
+    insertItem resourceKeys resources name (_rsProvider x) (_rsType x) x
 
 -- | Emit an output variable.
 output
@@ -237,7 +253,8 @@ output name _attr =
         -- error handling
 
         modifying outputs $
-            (HCL.toValue (Output name undefined) :) -- FIXME: HCL.toValue attr
+            (HCL.toValue (Output name (error "Output values not implemented.")) :)
+            -- FIXME: HCL.toValue attr
 
 attribute
     :: ( HasAttribute k a ~ v

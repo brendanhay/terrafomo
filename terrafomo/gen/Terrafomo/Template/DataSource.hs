@@ -13,6 +13,16 @@
 {-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+-- |
+-- Module      : Terrafomo.Template.DataSource
+-- Copyright   : (c) 2017 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
 module Terrafomo.Template.DataSource where
 
 import Data.Text (Text)
@@ -22,13 +32,14 @@ import GHC.Generics (Generic)
 import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
-import Terrafomo.Syntax.Provider
 
+import qualified Terrafomo.Syntax.Provider as Qual
 import qualified Terrafomo.Syntax.TH as TH
 
--- | The @template_cloudinit_config@ Template datasource.
---
--- Renders a multi-part cloud-init config from source files.
+{- | The @template_cloudinit_config@ Template datasource.
+
+Renders a multi-part cloud-init config from source files.
+-}
 data CloudinitConfigDataSource = CloudinitConfigDataSource
     { _base64_encode :: !(Attr Text)
       {- ^ (Optional) Base64 encoding of the rendered output. Default to @true@ -}
@@ -45,13 +56,13 @@ type instance Computed CloudinitConfigDataSource
 
 $(TH.makeDataSource
     "template_cloudinit_config"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''CloudinitConfigDataSource)
 
--- | The @template_file@ Template datasource.
---
--- Renders a template from a file.
+{- | The @template_file@ Template datasource.
+
+Renders a template from a file.
+-}
 data FileDataSource = FileDataSource
     { _template :: !(Attr Text)
       {- ^ (Required) The contents of the template. These can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . -}
@@ -70,6 +81,5 @@ type instance Computed FileDataSource
 
 $(TH.makeDataSource
     "template_file"
-    ''Provider
-    'defaultProvider
+    ''Qual.Provider
     ''FileDataSource)

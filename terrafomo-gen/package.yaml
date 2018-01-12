@@ -33,5 +33,7 @@ executables:
       - process
       - terrafomo
       - text
+      - unordered-containers
       - wl-pprint-text
+      - word-wrap
       - yaml

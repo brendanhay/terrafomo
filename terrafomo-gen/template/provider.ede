@@ -2,40 +2,53 @@
 
 {-# LANGUAGE DeriveGeneric #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+{% include "_include/license.ede" %}
+--
 module {{ namespace }} where
 
 import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-{% for export in reexports %}
-import {{ export.value }}
-{% if export.last %}
+{% for import in imports %}
+import {{ import.value }}
+{% if import.last %}
 
 {% endif %}
 {% endfor %}
--- | {{ provider.name }} Terraform provider.
+{- | {{ provider.name }} Terraform provider.
 {% if schema.about %}
---
--- {{ schema.about }}
+
+{{ schema.about | wrap }}
 {% endif %}
 {% for example in schema.examples %}
---
+
 {% if example.value.title %}
--- {{ example.value.title }}
---
+{{ example.value.title }}
+
 {% endif %}
--- @
+@
 {% for line in example.value.code %}
--- {{ line.value }}
+{{ line.value }}
 {% endfor %}
--- @
+@
 {% endfor %}
+-}
 data {{ provider.name }} = {{ provider.name }}
   {% for arg in schema.arguments %}
     {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !{{ arg.value.type }}
-      {- ^ {{ arg.value.help }} -}
     {% if arg.last %}
     } deriving (Show, Eq, Generic)
     {% endif %}
   {% endfor %}
+{% for arg in schema.arguments %}
+
+{- | {{ arg.value.help | wrap }}
+-}
+{{ arg.key | toCamel}} :: Functor f => ({{ arg.value.type }} -> f {{ arg.value.type}}) -> {{ provider.name }} -> f {{ provider.name }}
+{{ arg.key | toCamel }} f s =
+    (\x -> s { {{ arg.key }} = x })
+        <$> f ({{ arg.key }} s)
+{% endfor %}

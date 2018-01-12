@@ -6,10 +6,9 @@ import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-data Provider = Provider
-    deriving (Generic)
+data Provider deriving (Generic)
 
 instance Hashable Provider
 
-defaultProvider :: Provider
-defaultProvider = Provider
+defaultProvider :: Maybe Provider
+defaultProvider = Nothing

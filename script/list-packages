@@ -2,7 +2,7 @@
 
 shopt -s nullglob
 
-libraries=(terrafomo/terrafomo-*/package.yaml)
+libraries=(provider/terrafomo-*/package.yaml)
 
 for i in ${!libraries[@]}; do
     libraries[i]=$(dirname ${libraries[i]})

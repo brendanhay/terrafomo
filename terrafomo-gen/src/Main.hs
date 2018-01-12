@@ -8,11 +8,12 @@ module Main (main) where
 
 import Control.Applicative (many)
 import Control.Error       (Script, hoistEither, runScript, scriptIO)
-import Control.Monad       (unless, when, (>=>))
-import Data.Aeson          (FromJSON, ToJSON)
+import Control.Monad       (unless, when)
 
+import Data.Aeson     (FromJSON, ToJSON)
 import Data.Bifunctor (first)
 import Data.Function  ((&))
+import Data.Maybe     (isJust)
 import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
@@ -22,7 +23,6 @@ import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Render   (Templates (Templates))
 import Terrafomo.Gen.Schema
 
-import qualified Control.Error        as Error
 import qualified Data.Foldable        as Fold
 import qualified Data.Map.Strict      as Map
 import qualified Data.Text            as Text
@@ -137,9 +137,9 @@ main = do
     runScript $ do
         echo "Starting ..."
 
-        tmpls              <- loadTemplates opts
-        (provider, schema) <- loadProvider  opts
-        dir                <- renderProvider tmpls provider schema
+        tmpls    <- loadTemplates opts
+        provider <- loadProvider opts
+        dir      <- renderProvider tmpls provider
 
         renderSchemas tmpls dir provider Resource
             =<< loadResources opts
@@ -151,18 +151,21 @@ main = do
 
 -- Provider
 
-loadProvider :: Options -> Script (Provider, Maybe Schema)
+loadProvider :: Options -> Script (Provider (Maybe Schema))
 loadProvider opts = do
     let path@Path{markdownFile} = providerPath opts
         configFile              = configDir opts </> providerAlias opts <.> "yaml"
 
     provider <- parseYAML configFile
-    exists   <- scriptIO (Dir.doesFileExist markdownFile)
-    echo ("Provider " ++ markdownFile ++ " == " ++ show exists)
 
-    if exists
-        then (provider,) . Just <$> loadSchema Parser.providerParser path
-        else pure (provider, Nothing)
+    if not (providerDatatype provider)
+        then pure (Nothing <$ provider)
+        else do
+            exists <- scriptIO (Dir.doesFileExist markdownFile)
+            echo ("Provider " ++ markdownFile ++ " == " ++ show exists)
+
+            schema <- loadSchema Parser.providerParser path
+            pure (Just schema <$ provider)
 
 loadResources :: Options -> Script [Schema]
 loadResources = traverse (loadSchema Parser.schemaParser) . resourcePaths
@@ -191,9 +194,8 @@ updateSchema Path{schemaFile} input = do
                 (input <>) <$> parseYAML schemaFile
 
     echo ("Writing " ++ schemaFile)
-    scriptIO $ do
-        Dir.createDirectoryIfMissing True (Path.takeDirectory schemaFile)
-        YAML.encodeFile schemaFile output
+    createDirectory (Path.takeDirectory schemaFile)
+    scriptIO (YAML.encodeFile schemaFile output)
 
     pure output
 
@@ -225,39 +227,52 @@ parseSchema parser Path{markdownFile} = do
 
 renderProvider
     :: Templates EDE.Template
-    -> Provider
-    -> Maybe Schema
+    -> Provider (Maybe Schema)
     -> Script FilePath
-renderProvider tmpls p@Provider{providerPackage} schema = do
+renderProvider tmpls p@Provider{providerPackage, providerDatatype} = do
     let dir = maybe "terrafomo" (Path.combine "provider" . Text.unpack)
                     providerPackage
 
     Fold.for_ providerPackage $
         const (renderPackage tmpls dir p)
 
-    when (providerDatatype p) $
-        Fold.for_ schema $
-            hoistEither . Render.provider tmpls p
-                >=> writeNS dir
+    when (isJust providerDatatype) $
+        hoistEither (Render.provider tmpls p)
+            >>= writeNS dir
 
     pure dir
 
 renderPackage
     :: Templates EDE.Template
     -> FilePath
-    -> Provider
+    -> Provider (Maybe Schema)
     -> Script ()
 renderPackage tmpls dir p = do
     let packageFile = dir </> "package" <.> "yaml"
+        mainFile    = dir </> "src" </> pathNS (mainNS  p)
+        typesFile   = dir </> "src" </> pathNS (typesNS p)
 
     echo ("Writing " ++ packageFile)
+    createDirectory (Path.takeDirectory packageFile)
     hoistEither (Render.package tmpls p)
         >>= scriptIO . LText.writeFile packageFile
+
+    mainExists <- scriptIO (Dir.doesFileExist mainFile)
+    echo ("Main " ++ mainFile ++ " == " ++ show mainExists)
+    unless mainExists $
+        hoistEither (Render.main tmpls p)
+            >>= writeNS dir
+
+    typesExists <- scriptIO (Dir.doesFileExist typesFile)
+    echo ("Types " ++ typesFile ++ " == " ++ show typesExists)
+    unless typesExists $
+        hoistEither (Render.types tmpls p)
+            >>= writeNS dir
 
 renderSchemas
     :: Templates EDE.Template
     -> FilePath
-    -> Provider
+    -> Provider (Maybe a)
     -> SchemaType
     -> [Schema]
     -> Script ()
@@ -277,11 +292,9 @@ renderSchemas tmpls dir p typ xs
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
     let moduleFile = dir </> "gen" </> pathNS ns <.> "hs"
-
     echo ("Writing " ++ moduleFile)
-    scriptIO $ do
-        Dir.createDirectoryIfMissing True (Path.takeDirectory moduleFile)
-        LText.writeFile moduleFile text
+    createDirectory (Path.takeDirectory moduleFile)
+    scriptIO (LText.writeFile moduleFile text)
 
 -- Paths
 
@@ -322,6 +335,8 @@ loadTemplates Options{templateDir} =
             , providerTemplate = "provider.ede"
             , contentsTemplate = "contents.ede"
             , schemaTemplate   = "schema.ede"
+            , mainTemplate     = "main.ede"
+            , typesTemplate    = "types.ede"
             }
 
 parseEDE :: FilePath -> Script EDE.Template
@@ -343,4 +358,7 @@ parseYAML file = do
 -- Standard IO
 
 echo :: String -> Script ()
-echo = Error.scriptIO . IO.putStrLn
+echo = scriptIO . IO.putStrLn
+
+createDirectory :: FilePath -> Script ()
+createDirectory = scriptIO . Dir.createDirectoryIfMissing True
