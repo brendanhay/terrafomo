@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+docs=( documentation )
+core=( terraform )
+
+library_=( $(ls -d terraform-*) )
+library=( $(echo ${library_[@]} ${priority[@]} | tr ' ' '\n' | sort | uniq -u) )
+
+entry() {
+    local ver="$1"
+    local lib="$2"
+
+cat <<-ENTRY
+    - env: GHCVER=${ver} LIBRARY=${lib}
+      addons: { apt: { packages: [ghc-${ver}], sources: [hvr-ghc] } }
+ENTRY
+}
+
+matrix() {
+    local title="$1"
+    declare -a versions=("${!2}")
+    declare -a selected=("${!3}")
+
+cat <<-TITLE
+
+    # ${title}
+TITLE
+
+    for lib in ${selected[@]}; do
+        for ver in ${versions[@]}; do
+            entry $ver $lib
+        done
+    done
+}
+
+ghc_82=( 8.2 )
+
+travis=".travis.yml"
+
+echo "Updating ${travis}"
+
+sed -i -e '/# GENERATED/,/# END GENERATED/d' "${travis}"
+
+echo "# GENERATED"                       >> "${travis}"
+matrix "Documentation" ghc_82[@] docs[@] >> "${travis}"
+matrix "Core" ghc_82[@] core[@]         >> "${travis}"
+matrix "Libraries" ghc_82[@] library[@]  >> "${travis}"
+echo "# END GENERATED"                   >> "${travis}"
+
+echo "Done."
