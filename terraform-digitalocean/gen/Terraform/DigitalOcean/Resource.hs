@@ -4,5 +4,5 @@ module Terraform.DigitalOcean.Resource
     ( module Export
     ) where
 
-import Terraform.DigitalOcean.Resource.R00 as Export
-import Terraform.DigitalOcean.Resource.R01 as Export
+import Terraform.DigitalOcean.Resource.M00 as Export
+import Terraform.DigitalOcean.Resource.M01 as Export

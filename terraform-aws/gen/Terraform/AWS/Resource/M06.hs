@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.AWS.Resource.R06 where
+module Terraform.AWS.Resource.M06 where
 
 import Data.Text (Text)
 
@@ -821,6 +821,27 @@ $(TH.makeResource
     'newResource
     ''Opsworks_Haproxy_Layer_Resource)
 
+-- | The @aws_s3_bucket_notification@ AWS resource.
+data S3_Bucket_Notification_Resource = S3_Bucket_Notification_Resource
+    { bucket :: !(Attr Text)
+      {- ^ (Required) The name of the bucket to put notification configuration. -}
+    , lambda_function :: !(Attr Text)
+      {- ^ (Optional, Multiple) Used to configure notifications to a Lambda Function (documented below). -}
+    , queue :: !(Attr Text)
+      {- ^ (Optional) The notification configuration to SQS Queue (documented below). -}
+    , topic :: !(Attr Text)
+      {- ^ (Optional) The notification configuration to SNS Topic (documented below). -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed S3_Bucket_Notification_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_s3_bucket_notification"
+    ''AWS
+    'newResource
+    ''S3_Bucket_Notification_Resource)
+
 -- | The @aws_s3_bucket@ AWS resource.
 data S3_Bucket_Resource = S3_Bucket_Resource
     { acceleration_status :: !(Attr Text)
@@ -877,27 +898,6 @@ $(TH.makeResource
     ''AWS
     'newResource
     ''S3_Bucket_Resource)
-
--- | The @aws_s3_bucket_notification@ AWS resource.
-data S3_Bucket_Notification_Resource = S3_Bucket_Notification_Resource
-    { bucket :: !(Attr Text)
-      {- ^ (Required) The name of the bucket to put notification configuration. -}
-    , lambda_function :: !(Attr Text)
-      {- ^ (Optional, Multiple) Used to configure notifications to a Lambda Function (documented below). -}
-    , queue :: !(Attr Text)
-      {- ^ (Optional) The notification configuration to SQS Queue (documented below). -}
-    , topic :: !(Attr Text)
-      {- ^ (Optional) The notification configuration to SNS Topic (documented below). -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed S3_Bucket_Notification_Resource
-    = '[]
-
-$(TH.makeResource
-    "aws_s3_bucket_notification"
-    ''AWS
-    'newResource
-    ''S3_Bucket_Notification_Resource)
 
 -- | The @aws_ses_active_receipt_rule_set@ AWS resource.
 data Ses_Active_Receipt_Rule_Set_Resource = Ses_Active_Receipt_Rule_Set_Resource

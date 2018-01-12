@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.AWS.Resource.R09 where
+module Terraform.AWS.Resource.M09 where
 
 import Data.Text (Text)
 
@@ -229,6 +229,27 @@ $(TH.makeResource
     'newResource
     ''Db_Security_Group_Resource)
 
+-- | The @aws_default_vpc_dhcp_options@ AWS resource.
+data Default_Vpc_Dhcp_Options_Resource = Default_Vpc_Dhcp_Options_Resource
+    { netbios_name_servers :: !(Attr Text)
+      {- ^ (Optional) List of NETBIOS name servers. -}
+    , netbios_node_type :: !(Attr Text)
+      {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Default_Vpc_Dhcp_Options_Resource
+    = '[ '("id", Attr Text)
+         {- - The ID of the DHCP Options Set. -}
+       ]
+
+$(TH.makeResource
+    "aws_default_vpc_dhcp_options"
+    ''AWS
+    'newResource
+    ''Default_Vpc_Dhcp_Options_Resource)
+
 -- | The @aws_default_vpc@ AWS resource.
 data Default_Vpc_Resource = Default_Vpc_Resource
     { enable_classiclink :: !(Attr Text)
@@ -275,27 +296,6 @@ $(TH.makeResource
     ''AWS
     'newResource
     ''Default_Vpc_Resource)
-
--- | The @aws_default_vpc_dhcp_options@ AWS resource.
-data Default_Vpc_Dhcp_Options_Resource = Default_Vpc_Dhcp_Options_Resource
-    { netbios_name_servers :: !(Attr Text)
-      {- ^ (Optional) List of NETBIOS name servers. -}
-    , netbios_node_type :: !(Attr Text)
-      {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Default_Vpc_Dhcp_Options_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the DHCP Options Set. -}
-       ]
-
-$(TH.makeResource
-    "aws_default_vpc_dhcp_options"
-    ''AWS
-    'newResource
-    ''Default_Vpc_Dhcp_Options_Resource)
 
 -- | The @aws_ebs_volume@ AWS resource.
 data Ebs_Volume_Resource = Ebs_Volume_Resource

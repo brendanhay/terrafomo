@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.Google.Resource.R00 where
+module Terraform.Google.Resource.M00 where
 
 import Data.Text (Text)
 
@@ -161,27 +161,6 @@ $(TH.makeResource
     'newResource
     ''Compute_Image_Resource)
 
--- | The @google_compute_instance_group@ Google resource.
-data Compute_Instance_Group_Resource = Compute_Instance_Group_Resource
-    { name :: !(Attr Text)
-      {- ^ (Required) The name of the instance group. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
-    , zone :: !(Attr Text)
-      {- ^ (Required) The zone that this instance group should be created in. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Compute_Instance_Group_Resource
-    = '[ '("self_link", Attr Text)
-         {- - The URI of the created resource. -}
-      , '("size", Attr Text)
-         {- - The number of instances in the group. -}
-       ]
-
-$(TH.makeResource
-    "google_compute_instance_group"
-    ''Google
-    'newResource
-    ''Compute_Instance_Group_Resource)
-
 -- | The @google_compute_instance_group_manager@ Google resource.
 data Compute_Instance_Group_Manager_Resource = Compute_Instance_Group_Manager_Resource
     { base_instance_name :: !(Attr Text)
@@ -208,6 +187,27 @@ $(TH.makeResource
     ''Google
     'newResource
     ''Compute_Instance_Group_Manager_Resource)
+
+-- | The @google_compute_instance_group@ Google resource.
+data Compute_Instance_Group_Resource = Compute_Instance_Group_Resource
+    { name :: !(Attr Text)
+      {- ^ (Required) The name of the instance group. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
+    , zone :: !(Attr Text)
+      {- ^ (Required) The zone that this instance group should be created in. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Compute_Instance_Group_Resource
+    = '[ '("self_link", Attr Text)
+         {- - The URI of the created resource. -}
+      , '("size", Attr Text)
+         {- - The number of instances in the group. -}
+       ]
+
+$(TH.makeResource
+    "google_compute_instance_group"
+    ''Google
+    'newResource
+    ''Compute_Instance_Group_Resource)
 
 -- | The @google_compute_instance_template@ Google resource.
 data Compute_Instance_Template_Resource = Compute_Instance_Template_Resource
@@ -316,6 +316,25 @@ $(TH.makeResource
     'newResource
     ''Compute_Route_Resource)
 
+-- | The @google_compute_router_interface@ Google resource.
+data Compute_Router_Interface_Resource = Compute_Router_Interface_Resource
+    { name :: !(Attr Text)
+      {- ^ (Required) A unique name for the interface, required by GCE. Changing this forces a new interface to be created. -}
+    , router :: !(Attr Text)
+      {- ^ (Required) The name of the router this interface will be attached to. Changing this forces a new interface to be created. -}
+    , vpn_tunnel :: !(Attr Text)
+      {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Compute_Router_Interface_Resource
+    = '[]
+
+$(TH.makeResource
+    "google_compute_router_interface"
+    ''Google
+    'newResource
+    ''Compute_Router_Interface_Resource)
+
 -- | The @google_compute_router@ Google resource.
 data Compute_Router_Resource = Compute_Router_Resource
     { interface :: !(Attr Text)
@@ -340,25 +359,6 @@ $(TH.makeResource
     ''Google
     'newResource
     ''Compute_Router_Resource)
-
--- | The @google_compute_router_interface@ Google resource.
-data Compute_Router_Interface_Resource = Compute_Router_Interface_Resource
-    { name :: !(Attr Text)
-      {- ^ (Required) A unique name for the interface, required by GCE. Changing this forces a new interface to be created. -}
-    , router :: !(Attr Text)
-      {- ^ (Required) The name of the router this interface will be attached to. Changing this forces a new interface to be created. -}
-    , vpn_tunnel :: !(Attr Text)
-      {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Compute_Router_Interface_Resource
-    = '[]
-
-$(TH.makeResource
-    "google_compute_router_interface"
-    ''Google
-    'newResource
-    ''Compute_Router_Interface_Resource)
 
 -- | The @google_compute_shared_vpc_host_project@ Google resource.
 data Compute_Shared_Vpc_Host_Project_Resource = Compute_Shared_Vpc_Host_Project_Resource
@@ -679,33 +679,6 @@ $(TH.makeResource
     'newResource
     ''Runtimeconfig_Variable_Resource)
 
--- | The @google_service_account@ Google resource.
-data Service_Account_Resource = Service_Account_Resource
-    { account_id :: !(Attr Text)
-      {- ^ (Required) The service account ID. Changing this forces a new service account to be created. -}
-    , display_name :: !(Attr Text)
-      {- ^ (Optional) The display name for the service account. Can be updated without creating a new resource. -}
-    , policy_data :: !(Attr Text)
-      {- ^ - (DEPRECATED, Optional) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the service account. The policy will be merged with any existing policy. -}
-    , project :: !(Attr Text)
-      {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Service_Account_Resource
-    = '[ '("email", Attr Text)
-         {- - The e-mail address of the service account. This value should be referenced from any @google_iam_policy@ data sources that would grant the service account privileges. -}
-      , '("name", Attr Text)
-         {- - The fully-qualified name of the service account. -}
-      , '("unique_id", Attr Text)
-         {- - The unique id of the service account. -}
-       ]
-
-$(TH.makeResource
-    "google_service_account"
-    ''Google
-    'newResource
-    ''Service_Account_Resource)
-
 -- | The @google_service_account_key@ Google resource.
 data Service_Account_Key_Resource = Service_Account_Key_Resource
     { key_algorithm :: !(Attr Text)
@@ -744,6 +717,33 @@ $(TH.makeResource
     ''Google
     'newResource
     ''Service_Account_Key_Resource)
+
+-- | The @google_service_account@ Google resource.
+data Service_Account_Resource = Service_Account_Resource
+    { account_id :: !(Attr Text)
+      {- ^ (Required) The service account ID. Changing this forces a new service account to be created. -}
+    , display_name :: !(Attr Text)
+      {- ^ (Optional) The display name for the service account. Can be updated without creating a new resource. -}
+    , policy_data :: !(Attr Text)
+      {- ^ - (DEPRECATED, Optional) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the service account. The policy will be merged with any existing policy. -}
+    , project :: !(Attr Text)
+      {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Service_Account_Resource
+    = '[ '("email", Attr Text)
+         {- - The e-mail address of the service account. This value should be referenced from any @google_iam_policy@ data sources that would grant the service account privileges. -}
+      , '("name", Attr Text)
+         {- - The fully-qualified name of the service account. -}
+      , '("unique_id", Attr Text)
+         {- - The unique id of the service account. -}
+       ]
+
+$(TH.makeResource
+    "google_service_account"
+    ''Google
+    'newResource
+    ''Service_Account_Resource)
 
 -- | The @google_spanner_instance@ Google resource.
 data Spanner_Instance_Resource = Spanner_Instance_Resource

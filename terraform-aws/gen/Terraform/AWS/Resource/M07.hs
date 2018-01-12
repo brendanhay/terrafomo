@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.AWS.Resource.R07 where
+module Terraform.AWS.Resource.M07 where
 
 import Data.Text (Text)
 
@@ -471,6 +471,29 @@ $(TH.makeResource
     'newResource
     ''Kms_Alias_Resource)
 
+-- | The @aws_lb_target_group_attachment@ AWS resource.
+data Lb_Target_Group_Attachment_Resource = Lb_Target_Group_Attachment_Resource
+    { availability_zone :: !(Attr Text)
+      {- ^ (Optional) The Availability Zone where the IP address of the target is to be registered. -}
+    , port :: !(Attr Text)
+      {- ^ (Optional) The port on which targets receive traffic. -}
+    , target_group_arn :: !(Attr Text)
+      {- ^ (Required) The ARN of the target group with which to register targets -}
+    , target_id :: !(Attr Text)
+      {- ^ (Required) The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Lb_Target_Group_Attachment_Resource
+    = '[ '("id", Attr Text)
+         {- - A unique identifier for the attachment -}
+       ]
+
+$(TH.makeResource
+    "aws_lb_target_group_attachment"
+    ''AWS
+    'newResource
+    ''Lb_Target_Group_Attachment_Resource)
+
 -- | The @aws_lb_target_group@ AWS resource.
 data Lb_Target_Group_Resource = Lb_Target_Group_Resource
     { deregistration_delay :: !(Attr Text)
@@ -509,29 +532,6 @@ $(TH.makeResource
     ''AWS
     'newResource
     ''Lb_Target_Group_Resource)
-
--- | The @aws_lb_target_group_attachment@ AWS resource.
-data Lb_Target_Group_Attachment_Resource = Lb_Target_Group_Attachment_Resource
-    { availability_zone :: !(Attr Text)
-      {- ^ (Optional) The Availability Zone where the IP address of the target is to be registered. -}
-    , port :: !(Attr Text)
-      {- ^ (Optional) The port on which targets receive traffic. -}
-    , target_group_arn :: !(Attr Text)
-      {- ^ (Required) The ARN of the target group with which to register targets -}
-    , target_id :: !(Attr Text)
-      {- ^ (Required) The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Lb_Target_Group_Attachment_Resource
-    = '[ '("id", Attr Text)
-         {- - A unique identifier for the attachment -}
-       ]
-
-$(TH.makeResource
-    "aws_lb_target_group_attachment"
-    ''AWS
-    'newResource
-    ''Lb_Target_Group_Attachment_Resource)
 
 -- | The @aws_network_acl@ AWS resource.
 data Network_Acl_Resource = Network_Acl_Resource

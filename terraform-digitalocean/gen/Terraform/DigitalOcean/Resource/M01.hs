@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.DigitalOcean.Resource.R01 where
+module Terraform.DigitalOcean.Resource.M01 where
 
 import Data.Text (Text)
 

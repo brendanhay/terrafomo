@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.AWS.Resource.R03 where
+module Terraform.AWS.Resource.M03 where
 
 import Data.Text (Text)
 
@@ -827,6 +827,31 @@ $(TH.makeResource
     'newResource
     ''Simpledb_Domain_Resource)
 
+-- | The @sfn_state_machine@ AWS resource.
+data State_Machine_Resource = State_Machine_Resource
+    { definition :: !(Attr Text)
+      {- ^ (Required) The Amazon States Language definition of the state machine. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the state machine. -}
+    , role_arn :: !(Attr Text)
+      {- ^ (Required) The Amazon Resource Name (ARN) of the IAM role to use for this state machine. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed State_Machine_Resource
+    = '[ '("creation_date", Attr Text)
+         {- - The date the state machine was created. -}
+      , '("id", Attr Text)
+         {- - The ARN of the state machine. -}
+      , '("status", Attr Text)
+         {- - The current status of the state machine. Either "ACTIVE" or "DELETING". -}
+       ]
+
+$(TH.makeResource
+    "sfn_state_machine"
+    ''AWS
+    'newResource
+    ''State_Machine_Resource)
+
 -- | The @aws_waf_rate_based_rule@ AWS resource.
 data Waf_Rate_Based_Rule_Resource = Waf_Rate_Based_Rule_Resource
     { metric_name :: !(Attr Text)
@@ -870,28 +895,3 @@ $(TH.makeResource
     ''AWS
     'newResource
     ''Waf_Xss_Match_Set_Resource)
-
--- | The @sfn_state_machine@ AWS resource.
-data State_Machine_Resource = State_Machine_Resource
-    { definition :: !(Attr Text)
-      {- ^ (Required) The Amazon States Language definition of the state machine. -}
-    , name :: !(Attr Text)
-      {- ^ (Required) The name of the state machine. -}
-    , role_arn :: !(Attr Text)
-      {- ^ (Required) The Amazon Resource Name (ARN) of the IAM role to use for this state machine. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed State_Machine_Resource
-    = '[ '("creation_date", Attr Text)
-         {- - The date the state machine was created. -}
-      , '("id", Attr Text)
-         {- - The ARN of the state machine. -}
-      , '("status", Attr Text)
-         {- - The current status of the state machine. Either "ACTIVE" or "DELETING". -}
-       ]
-
-$(TH.makeResource
-    "sfn_state_machine"
-    ''AWS
-    'newResource
-    ''State_Machine_Resource)

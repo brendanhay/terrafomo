@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.Azure.Resource.R00 where
+module Terraform.Azure.Resource.M00 where
 
 import Data.Text (Text)
 

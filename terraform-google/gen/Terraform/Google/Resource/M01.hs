@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.Google.Resource.R01 where
+module Terraform.Google.Resource.M01 where
 
 import Data.Text (Text)
 
@@ -675,6 +675,27 @@ $(TH.makeResource
     'newResource
     ''Organization_Policy_Resource)
 
+-- | The @google_project_iam_member@ Google resource.
+data Project_Iam_Member_Resource = Project_Iam_Member_Resource
+    { member :: !(Attr Text)
+      {- ^ (Required) The user that the role should apply to. -}
+    , project :: !(Attr Text)
+      {- ^ (Optional) The project ID. If not specified, uses the ID of the project configured with the provider. -}
+    , role :: !(Attr Text)
+      {- ^ (Required) The role that should be applied. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Project_Iam_Member_Resource
+    = '[ '("etag", Attr Text)
+         {- - (Computed) The etag of the project's IAM policy. -}
+       ]
+
+$(TH.makeResource
+    "google_project_iam_member"
+    ''Google
+    'newResource
+    ''Project_Iam_Member_Resource)
+
 -- | The @google_project@ Google resource.
 data Project_Resource = Project_Resource
     { billing_account :: !(Attr Text)
@@ -707,27 +728,6 @@ $(TH.makeResource
     ''Google
     'newResource
     ''Project_Resource)
-
--- | The @google_project_iam_member@ Google resource.
-data Project_Iam_Member_Resource = Project_Iam_Member_Resource
-    { member :: !(Attr Text)
-      {- ^ (Required) The user that the role should apply to. -}
-    , project :: !(Attr Text)
-      {- ^ (Optional) The project ID. If not specified, uses the ID of the project configured with the provider. -}
-    , role :: !(Attr Text)
-      {- ^ (Required) The role that should be applied. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Project_Iam_Member_Resource
-    = '[ '("etag", Attr Text)
-         {- - (Computed) The etag of the project's IAM policy. -}
-       ]
-
-$(TH.makeResource
-    "google_project_iam_member"
-    ''Google
-    'newResource
-    ''Project_Iam_Member_Resource)
 
 -- | The @google_project_services@ Google resource.
 data Project_Services_Resource = Project_Services_Resource
@@ -837,25 +837,6 @@ $(TH.makeResource
     'newResource
     ''Sql_Database_Instance_Resource)
 
--- | The @google_storage_bucket@ Google resource.
-data Storage_Bucket_Resource = Storage_Bucket_Resource
-    { name :: !(Attr Text)
-      {- ^ (Required) The name of the bucket. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Storage_Bucket_Resource
-    = '[ '("self_link", Attr Text)
-         {- - The URI of the created resource. -}
-      , '("url", Attr Text)
-         {- - The base URL of the bucket, in the format @gs://<bucket-name>@ . -}
-       ]
-
-$(TH.makeResource
-    "google_storage_bucket"
-    ''Google
-    'newResource
-    ''Storage_Bucket_Resource)
-
 -- | The @google_storage_bucket_acl@ Google resource.
 data Storage_Bucket_Acl_Resource = Storage_Bucket_Acl_Resource
     { bucket :: !(Attr Text)
@@ -891,3 +872,22 @@ $(TH.makeResource
     ''Google
     'newResource
     ''Storage_Bucket_Object_Resource)
+
+-- | The @google_storage_bucket@ Google resource.
+data Storage_Bucket_Resource = Storage_Bucket_Resource
+    { name :: !(Attr Text)
+      {- ^ (Required) The name of the bucket. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Storage_Bucket_Resource
+    = '[ '("self_link", Attr Text)
+         {- - The URI of the created resource. -}
+      , '("url", Attr Text)
+         {- - The base URL of the bucket, in the format @gs://<bucket-name>@ . -}
+       ]
+
+$(TH.makeResource
+    "google_storage_bucket"
+    ''Google
+    'newResource
+    ''Storage_Bucket_Resource)

@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.Triton.Resource.R00 where
+module Terraform.Triton.Resource.M00 where
 
 import Data.Text (Text)
 

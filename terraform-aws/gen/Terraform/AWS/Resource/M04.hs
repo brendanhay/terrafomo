@@ -11,7 +11,7 @@
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
 
-module Terraform.AWS.Resource.R04 where
+module Terraform.AWS.Resource.M04 where
 
 import Data.Text (Text)
 
@@ -22,6 +22,27 @@ import Terraform.AWS.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
 import qualified Terraform.Syntax.TH as TH
+
+-- | The @sfn_activity@ AWS resource.
+data Activity_Resource = Activity_Resource
+    { name :: !(Attr Text)
+      {- ^ (Required) The name of the activity to create. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Activity_Resource
+    = '[ '("creation_date", Attr Text)
+         {- - The date the activity was created. -}
+      , '("id", Attr Text)
+         {- - The Amazon Resource Name (ARN) that identifies the created activity. -}
+      , '("name", Attr Text)
+         {- - The name of the activity. -}
+       ]
+
+$(TH.makeResource
+    "sfn_activity"
+    ''AWS
+    'newResource
+    ''Activity_Resource)
 
 -- | The @aws_api_gateway_usage_plan@ AWS resource.
 data Api_Gateway_Usage_Plan_Resource = Api_Gateway_Usage_Plan_Resource
@@ -910,24 +931,3 @@ $(TH.makeResource
     ''AWS
     'newResource
     ''Vpn_Connection_Resource)
-
--- | The @sfn_activity@ AWS resource.
-data Activity_Resource = Activity_Resource
-    { name :: !(Attr Text)
-      {- ^ (Required) The name of the activity to create. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Activity_Resource
-    = '[ '("creation_date", Attr Text)
-         {- - The date the activity was created. -}
-      , '("id", Attr Text)
-         {- - The Amazon Resource Name (ARN) that identifies the created activity. -}
-      , '("name", Attr Text)
-         {- - The name of the activity. -}
-       ]
-
-$(TH.makeResource
-    "sfn_activity"
-    ''AWS
-    'newResource
-    ''Activity_Resource)
