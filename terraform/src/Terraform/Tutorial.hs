@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE OverloadedLabels  #-}
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
 
@@ -7,6 +8,9 @@ module Terraform.Tutorial where
 import Terraform.AWS
 
 import qualified Terraform.AWS.Resource as AWS
+
+import Terraform.Monad
+
 
 -- Trivial Example:
 --
@@ -65,6 +69,8 @@ import qualified Terraform.AWS.Resource as AWS
 --     { AWS.region = AWS.Ireland
 --     }
 
+
+
 common :: Tags
 common =
     [ ("Name",        "foo")
@@ -75,39 +81,52 @@ common =
     , ("Origin",      "http://github.com/taktinc/takt-infrastructure")
     ]
 
--- newtype Resource' m a = Resource' (ReaderT (Meta AWS) m a)
+bucket :: Monad m => TerraformT m Ref
+bucket = do
+    mybucket <- resource "mybucket" $
+        AWS.resource_s3_bucket
+            { AWS.bucket = Just "123"
+            }
 
--- bucket :: Resource AWS.S3_Bucket "foo"
--- bucket = undefined
+    pure mybucket
 
-instance_
-    :: AWS.Security_Group n
-    -> AWS.Instance "instance"
-instance_ sg =
-    def { AWS.ami = "123"
+-- foo = dependsOn bucket
+--     . ignoreChange "ami"
+--     . resource "instance" $
+--             AWS.resource_instance
+--                 { AWS.ami = "123"
+--                 }
 
-        -- , AWS.root_block_device =
-        --       def { volume_size = 123
-        --           , volume_type = AWS.VTIO1
-        --           }
+-- Is equivalent to:
 
-        -- , AWS.tags = common
+-- bar =
+--     AWS.resource_instance
+--         { AWS.ami = "123"
+--         } & resource "instance"
+--           & dependsOn bucket
 
-        -- , AWS.subnet_id            =
-        -- , AWS.key_name             =
-        -- , AWS.iam_instance_profile =
+--         , AWS.root_block_device =
+--               def { volume_size = 123
+--                   , volume_type = AWS.VTIO1
+--                   }
 
-        -- , AWS.user_data = "foo"
+--         , AWS.tags = common
 
-        -- , AWS.vpc_security_group_ids =
-        --     [ output sg "access_sg_id"
-        --     -- , ... "${compact(split(",", var.security_groups))}"
-        --     ]
-        }
+--         , AWS.subnet_id            =
+--         , AWS.key_name             =
+--         , AWS.iam_instance_profile =
+
+--         , AWS.user_data = "foo"
+
+--         , AWS.vpc_security_group_ids = []
+--         --     [ output sg "access_sg_id"
+--         --     -- , ... "${compact(split(",", var.security_groups))}"
+--         --     ]
+--         } & dependsOn bucket
 
 -- record
---     :: Resource AWS.Instance n
---     -> Resource AWS.Route53_Record "instancerecord"
+--     :: AWS.Instance n
+--     -> AWS.Route53_Record "instancerecord"
 -- record i =
 --     def { AWS.zone_id = "HKZ123123432"
 --         , AWS.name    =
@@ -116,4 +135,4 @@ instance_ sg =
 --         , AWS.records =
 --             [ output i "private_ip"
 --             ]
---         } & dependsOn i
+--         }

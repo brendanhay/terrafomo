@@ -10,6 +10,8 @@ module Terraform.Syntax.Required
     , Required
 
     , def
+
+    , GInitialState
     ) where
 
 import GHC.Generics

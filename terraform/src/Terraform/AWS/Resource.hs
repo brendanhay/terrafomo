@@ -8,2072 +8,2115 @@
 {-# LANGUAGE StandaloneDeriving    #-}
 {-# LANGUAGE TemplateHaskell       #-}
 
-{-# OPTIONS_GHC -ddump-splices       #-}
+-- {-# OPTIONS_GHC -ddump-splices       #-}
 
 module Terraform.AWS.Resource where
+
+import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
 import Terraform.AWS.Provider    (AWS)
 import Terraform.Syntax.Required (Required, RequiredState (Initial, Valid))
-import Terraform.Syntax.Resource (HasMeta (meta), Meta)
+import Terraform.Syntax.Resource (HasMeta (metadata), Meta)
 
 import qualified Terraform.AWS.Types as Type
 import qualified Terraform.Syntax.TH as TH
 
-import Control.Lens.TH (makeLenses)
-
 -- FIXME: Serialization of the actual TYPE. (resource type name)
 -- FIXME: Add description about implementing resources.
 
--- Add note about the primed '\'' type names.
+-- Add note about the primed '\''Resource_ type names.
 
 -- These resource names rely on the 'Show' instance providing a string which
 -- will match the terraform naming via the additional steps:
 --
--- 1. lowercase all letters.
--- 2. add the 'aws_' prefix.
+-- 1. remove any prime suffix.
+-- 2. lowercase all letters.
+-- 3. add the 'aws_' prefix.
 
--- API Gateway Resources
+data Resource_API_Gateway_Account' s = Resource_API_Gateway_Account
+    { meta :: !Meta
+    } deriving(Generic)
 
-data API_Gateway_Account' n s = API_Gateway_Account
-    { metadata :: !(Meta AWS)
-    , foo      :: Maybe Int
-    , bar      :: Maybe String
-    } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Account')
 
-$(TH.makeResource ''API_Gateway_Account' ''AWS "metadata")
+data Resource_API_Gateway_API_Key' s = Resource_API_Gateway_API_Key
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_API_Key' n s = API_Gateway_API_Key
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_API_Key')
 
--- $(TH.makeResource ''API_Gateway_API_Key' ''AWS)
 
+data Resource_API_Gateway_Authorizer' s = Resource_API_Gateway_Authorizer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Authorizer' n s = API_Gateway_Authorizer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Authorizer')
 
--- $(TH.makeResource ''API_Gateway_Authorizer' ''AWS)
 
+data Resource_API_Gateway_Base_Path_Mapping' s = Resource_API_Gateway_Base_Path_Mapping
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Base_Path_Mapping' n s = API_Gateway_Base_Path_Mapping
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Base_Path_Mapping')
 
--- $(TH.makeResource ''API_Gateway_Base_Path_Mapping' ''AWS)
 
+data Resource_API_Gateway_Client_Certificate' s = Resource_API_Gateway_Client_Certificate
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Client_Certificate' n s = API_Gateway_Client_Certificate
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Client_Certificate')
 
--- $(TH.makeResource ''API_Gateway_Client_Certificate' ''AWS)
 
+data Resource_API_Gateway_Deployment' s = Resource_API_Gateway_Deployment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Deployment' n s = API_Gateway_Deployment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Deployment')
 
--- $(TH.makeResource ''API_Gateway_Deployment' ''AWS)
 
+data Resource_API_Gateway_Domain_Name' s = Resource_API_Gateway_Domain_Name
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Domain_Name' n s = API_Gateway_Domain_Name
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Domain_Name')
 
--- $(TH.makeResource ''API_Gateway_Domain_Name' ''AWS)
 
+data Resource_API_Gateway_Gateway_Response' s = Resource_API_Gateway_Gateway_Response
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Gateway_Response' n s = API_Gateway_Gateway_Response
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Gateway_Response')
 
--- $(TH.makeResource ''API_Gateway_Gateway_Response' ''AWS)
 
+data Resource_API_Gateway_Integration' s = Resource_API_Gateway_Integration
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Integration' n s = API_Gateway_Integration
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Integration')
 
--- $(TH.makeResource ''API_Gateway_Integration' ''AWS)
 
+data Resource_API_Gateway_Integration_Response' s = Resource_API_Gateway_Integration_Response
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Integration_Response' n s = API_Gateway_Integration_Response
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Integration_Response')
 
--- $(TH.makeResource ''API_Gateway_Integration_Response' ''AWS)
 
+data Resource_API_Gateway_Method' s = Resource_API_Gateway_Method
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Method' n s = API_Gateway_Method
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Method')
 
--- $(TH.makeResource ''API_Gateway_Method' ''AWS)
 
+data Resource_API_Gateway_Method_Response' s = Resource_API_Gateway_Method_Response
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Method_Response' n s = API_Gateway_Method_Response
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Method_Response')
 
--- $(TH.makeResource ''API_Gateway_Method_Response' ''AWS)
 
+data Resource_API_Gateway_Method_Settings' s = Resource_API_Gateway_Method_Settings
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Method_Settings' n s = API_Gateway_Method_Settings
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Method_Settings')
 
--- $(TH.makeResource ''API_Gateway_Method_Settings' ''AWS)
 
+data Resource_API_Gateway_Model' s = Resource_API_Gateway_Model
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Model' n s = API_Gateway_Model
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Model')
 
--- $(TH.makeResource ''API_Gateway_Model' ''AWS)
 
+data Resource_API_Gateway_Resource' s = Resource_API_Gateway_Resource
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Resource' n s = API_Gateway_Resource
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Resource')
 
--- $(TH.makeResource ''API_Gateway_Resource' ''AWS)
 
+data Resource_API_Gateway_Rest_API' s = Resource_API_Gateway_Rest_API
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Rest_API' n s = API_Gateway_Rest_API
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Rest_API')
 
--- $(TH.makeResource ''API_Gateway_Rest_API' ''AWS)
 
+data Resource_API_Gateway_Stage' s = Resource_API_Gateway_Stage
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Stage' n s = API_Gateway_Stage
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Stage')
 
--- $(TH.makeResource ''API_Gateway_Stage' ''AWS)
 
+data Resource_API_Gateway_Usage_Plan' s = Resource_API_Gateway_Usage_Plan
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Usage_Plan' n s = API_Gateway_Usage_Plan
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Usage_Plan')
 
--- $(TH.makeResource ''API_Gateway_Usage_Plan' ''AWS)
 
+data Resource_API_Gateway_Usage_Plan_Key' s = Resource_API_Gateway_Usage_Plan_Key
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data API_Gateway_Usage_Plan_Key' n s = API_Gateway_Usage_Plan_Key
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_API_Gateway_Usage_Plan_Key')
 
--- $(TH.makeResource ''API_Gateway_Usage_Plan_Key' ''AWS)
 
+-- App Autoscaling Resources
 
--- -- App Autoscaling Resources
+data Resource_AppAutoscaling_Policy' s = Resource_AppAutoscaling_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data AppAutoscaling_Policy' n s = AppAutoscaling_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_AppAutoscaling_Policy')
 
--- $(TH.makeResource ''AppAutoscaling_Policy' ''AWS)
 
+data Resource_AppAutoscaling_Target' s = Resource_AppAutoscaling_Target
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data AppAutoscaling_Target' n s = AppAutoscaling_Target
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_AppAutoscaling_Target')
 
--- $(TH.makeResource ''AppAutoscaling_Target' ''AWS)
 
 
+-- Batch Resources
 
--- -- Batch Resources
+data Resource_Batch_Compute_Environment' s = Resource_Batch_Compute_Environment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Batch_Compute_Environment' n s = Batch_Compute_Environment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Batch_Compute_Environment')
 
--- $(TH.makeResource ''Batch_Compute_Environment' ''AWS)
 
+data Resource_Batch_Job_Definition' s = Resource_Batch_Job_Definition
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Batch_Job_Definition' n s = Batch_Job_Definition
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Batch_Job_Definition')
 
--- $(TH.makeResource ''Batch_Job_Definition' ''AWS)
 
+data Resource_Batch_Job_Queue' s = Resource_Batch_Job_Queue
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Batch_Job_Queue' n s = Batch_Job_Queue
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Batch_Job_Queue')
 
--- $(TH.makeResource ''Batch_Job_Queue' ''AWS)
 
 
+-- CloudFormation Resources
 
--- -- CloudFormation Resources
+data Resource_Cloudformation_Stack' s = Resource_Cloudformation_Stack
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudformation_Stack' n s = Cloudformation_Stack
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudformation_Stack')
 
--- $(TH.makeResource ''Cloudformation_Stack' ''AWS)
 
 
+-- CloudFront Resources
 
--- -- CloudFront Resources
+data Resource_Cloudfront_Distribution' s = Resource_Cloudfront_Distribution
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudfront_Distribution' n s = Cloudfront_Distribution
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudfront_Distribution')
 
--- $(TH.makeResource ''Cloudfront_Distribution' ''AWS)
 
+data Resource_Cloudfront_Origin_Access_Identity' s = Resource_Cloudfront_Origin_Access_Identity
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudfront_Origin_Access_Identity' n s = Cloudfront_Origin_Access_Identity
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudfront_Origin_Access_Identity')
 
--- $(TH.makeResource ''Cloudfront_Origin_Access_Identity' ''AWS)
 
 
+-- CloudTrail Resources
 
--- -- CloudTrail Resources
+data Resource_Cloudtrail' s = Resource_Cloudtrail
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudtrail' n s = Cloudtrail
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudtrail')
 
--- $(TH.makeResource ''Cloudtrail' ''AWS)
 
 
+-- CloudWatch Resources
 
--- -- CloudWatch Resources
+data Resource_Cloudwatch_Dashboard' s = Resource_Cloudwatch_Dashboard
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Dashboard' n s = Cloudwatch_Dashboard
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Dashboard')
 
--- $(TH.makeResource ''Cloudwatch_Dashboard' ''AWS)
 
+data Resource_Cloudwatch_Event_Rule' s = Resource_Cloudwatch_Event_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Event_Rule' n s = Cloudwatch_Event_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Event_Rule')
 
--- $(TH.makeResource ''Cloudwatch_Event_Rule' ''AWS)
 
+data Resource_Cloudwatch_Event_Target' s = Resource_Cloudwatch_Event_Target
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Event_Target' n s = Cloudwatch_Event_Target
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Event_Target')
 
--- $(TH.makeResource ''Cloudwatch_Event_Target' ''AWS)
 
+data Resource_Cloudwatch_Log_Destination' s = Resource_Cloudwatch_Log_Destination
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Log_Destination' n s = Cloudwatch_Log_Destination
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Log_Destination')
 
--- $(TH.makeResource ''Cloudwatch_Log_Destination' ''AWS)
 
+data Resource_Cloudwatch_Log_Destination_Policy' s = Resource_Cloudwatch_Log_Destination_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Log_Destination_Policy' n s = Cloudwatch_Log_Destination_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Log_Destination_Policy')
 
--- $(TH.makeResource ''Cloudwatch_Log_Destination_Policy' ''AWS)
 
+data Resource_Cloudwatch_Log_Group' s = Resource_Cloudwatch_Log_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Log_Group' n s = Cloudwatch_Log_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Log_Group')
 
--- $(TH.makeResource ''Cloudwatch_Log_Group' ''AWS)
 
+data Resource_Cloudwatch_Log_Metric_Filter' s = Resource_Cloudwatch_Log_Metric_Filter
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Log_Metric_Filter' n s = Cloudwatch_Log_Metric_Filter
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Log_Metric_Filter')
 
--- $(TH.makeResource ''Cloudwatch_Log_Metric_Filter' ''AWS)
 
+data Resource_Cloudwatch_Log_Stream' s = Resource_Cloudwatch_Log_Stream
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Log_Stream' n s = Cloudwatch_Log_Stream
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Log_Stream')
 
--- $(TH.makeResource ''Cloudwatch_Log_Stream' ''AWS)
 
+data Resource_Cloudwatch_Log_Subscription_Filter' s = Resource_Cloudwatch_Log_Subscription_Filter
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Log_Subscription_Filter' n s = Cloudwatch_Log_Subscription_Filter
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Log_Subscription_Filter')
 
--- $(TH.makeResource ''Cloudwatch_Log_Subscription_Filter' ''AWS)
 
+data Resource_Cloudwatch_Metric_Alarm' s = Resource_Cloudwatch_Metric_Alarm
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cloudwatch_Metric_Alarm' n s = Cloudwatch_Metric_Alarm
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cloudwatch_Metric_Alarm')
 
--- $(TH.makeResource ''Cloudwatch_Metric_Alarm' ''AWS)
 
 
+-- CodeBuild Resources
 
--- -- CodeBuild Resources
+data Resource_Codebuild_Project' s = Resource_Codebuild_Project
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codebuild_Project' n s = Codebuild_Project
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codebuild_Project')
 
--- $(TH.makeResource ''Codebuild_Project' ''AWS)
 
 
+-- CodeCommit Resources
 
--- -- CodeCommit Resources
+data Resource_Codecommit_Repository' s = Resource_Codecommit_Repository
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codecommit_Repository' n s = Codecommit_Repository
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codecommit_Repository')
 
--- $(TH.makeResource ''Codecommit_Repository' ''AWS)
 
+data Resource_Codecommit_Trigger' s = Resource_Codecommit_Trigger
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codecommit_Trigger' n s = Codecommit_Trigger
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codecommit_Trigger')
 
--- $(TH.makeResource ''Codecommit_Trigger' ''AWS)
 
 
+-- CodeDeploy Resources
 
--- -- CodeDeploy Resources
+data Resource_Codedeploy_App' s = Resource_Codedeploy_App
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codedeploy_App' n s = Codedeploy_App
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codedeploy_App')
 
--- $(TH.makeResource ''Codedeploy_App' ''AWS)
 
+data Resource_Codedeploy_Deployment_Config' s = Resource_Codedeploy_Deployment_Config
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codedeploy_Deployment_Config' n s = Codedeploy_Deployment_Config
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codedeploy_Deployment_Config')
 
--- $(TH.makeResource ''Codedeploy_Deployment_Config' ''AWS)
 
+data Resource_Codedeploy_Deployment_Group' s = Resource_Codedeploy_Deployment_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codedeploy_Deployment_Group' n s = Codedeploy_Deployment_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codedeploy_Deployment_Group')
 
--- $(TH.makeResource ''Codedeploy_Deployment_Group' ''AWS)
 
 
+-- CodePipeline Resources
 
--- -- CodePipeline Resources
+data Resource_Codepipeline' s = Resource_Codepipeline
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Codepipeline' n s = Codepipeline
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Codepipeline')
 
--- $(TH.makeResource ''Codepipeline' ''AWS)
 
 
+-- Cognito Resources
 
--- -- Cognito Resources
+data Resource_Cognito_Identity_Pool' s = Resource_Cognito_Identity_Pool
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Cognito_Identity_Pool' n s = Cognito_Identity_Pool
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Cognito_Identity_Pool')
 
--- $(TH.makeResource ''Cognito_Identity_Pool' ''AWS)
 
 
+-- Config Resources
 
--- -- Config Resources
+data Resource_Config_Config_Rule' s = Resource_Config_Config_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Config_Config_Rule' n s = Config_Config_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Config_Config_Rule')
 
--- $(TH.makeResource ''Config_Config_Rule' ''AWS)
 
+data Resource_Config_Configuration_Recorder' s = Resource_Config_Configuration_Recorder
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Config_Configuration_Recorder' n s = Config_Configuration_Recorder
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Config_Configuration_Recorder')
 
--- $(TH.makeResource ''Config_Configuration_Recorder' ''AWS)
 
+data Resource_Config_Configuration_Recorder_Status' s = Resource_Config_Configuration_Recorder_Status
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Config_Configuration_Recorder_Status' n s = Config_Configuration_Recorder_Status
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Config_Configuration_Recorder_Status')
 
--- $(TH.makeResource ''Config_Configuration_Recorder_Status' ''AWS)
 
+data Resource_Config_Delivery_Channel' s = Resource_Config_Delivery_Channel
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Config_Delivery_Channel' n s = Config_Delivery_Channel
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Config_Delivery_Channel')
 
--- $(TH.makeResource ''Config_Delivery_Channel' ''AWS)
 
 
+-- Database Migration Service
 
--- -- Database Migration Service
+data Resource_DMS_Certificate' s = Resource_DMS_Certificate
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DMS_Certificate' n s = DMS_Certificate
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DMS_Certificate')
 
--- $(TH.makeResource ''DMS_Certificate' ''AWS)
 
+data Resource_DMS_Endpoint' s = Resource_DMS_Endpoint
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DMS_Endpoint' n s = DMS_Endpoint
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DMS_Endpoint')
 
--- $(TH.makeResource ''DMS_Endpoint' ''AWS)
 
+data Resource_DMS_Replication_Instance' s = Resource_DMS_Replication_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DMS_Replication_Instance' n s = DMS_Replication_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DMS_Replication_Instance')
 
--- $(TH.makeResource ''DMS_Replication_Instance' ''AWS)
 
+data Resource_DMS_Replication_Subnet_Group' s = Resource_DMS_Replication_Subnet_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DMS_Replication_Subnet_Group' n s = DMS_Replication_Subnet_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DMS_Replication_Subnet_Group')
 
--- $(TH.makeResource ''DMS_Replication_Subnet_Group' ''AWS)
 
+data Resource_DMS_Replication_Task' s = Resource_DMS_Replication_Task
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DMS_Replication_Task' n s = DMS_Replication_Task
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DMS_Replication_Task')
 
--- $(TH.makeResource ''DMS_Replication_Task' ''AWS)
 
 
+-- Device Farm Resources
 
--- -- Device Farm Resources
+data Resource_Devicefarm_Project' s = Resource_Devicefarm_Project
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Devicefarm_Project' n s = Devicefarm_Project
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Devicefarm_Project')
 
--- $(TH.makeResource ''Devicefarm_Project' ''AWS)
 
 
+-- Directory Service Resources
 
--- -- Directory Service Resources
+data Resource_Directory_Service_Directory' s = Resource_Directory_Service_Directory
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Directory_Service_Directory' n s = Directory_Service_Directory
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Directory_Service_Directory')
 
--- $(TH.makeResource ''Directory_Service_Directory' ''AWS)
 
 
+-- DynamoDB Resources
 
--- -- DynamoDB Resources
+data Resource_DynamoDB_Table' s = Resource_DynamoDB_Table
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DynamoDB_Table' n s = DynamoDB_Table
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DynamoDB_Table')
 
--- $(TH.makeResource ''DynamoDB_Table' ''AWS)
 
 
+-- EC2 Resources
 
--- -- EC2 Resources
+data Resource_ALB' s = Resource_ALB
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ALB' n s = ALB
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ALB')
 
--- $(TH.makeResource ''ALB' ''AWS)
 
+data Resource_ALB_Listener' s = Resource_ALB_Listener
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ALB_Listener' n s = ALB_Listener
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ALB_Listener')
 
--- $(TH.makeResource ''ALB_Listener' ''AWS)
 
+data Resource_ALB_Listener_Rule' s = Resource_ALB_Listener_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ALB_Listener_Rule' n s = ALB_Listener_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ALB_Listener_Rule')
 
--- $(TH.makeResource ''ALB_Listener_Rule' ''AWS)
 
+data Resource_ALB_Target_Group' s = Resource_ALB_Target_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ALB_Target_Group' n s = ALB_Target_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ALB_Target_Group')
 
--- $(TH.makeResource ''ALB_Target_Group' ''AWS)
 
+data Resource_ALB_Target_Group_Attachment' s = Resource_ALB_Target_Group_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ALB_Target_Group_Attachment' n s = ALB_Target_Group_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ALB_Target_Group_Attachment')
 
--- $(TH.makeResource ''ALB_Target_Group_Attachment' ''AWS)
 
+data Resource_AMI' s = Resource_AMI
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data AMI' n s = AMI
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_AMI')
 
--- $(TH.makeResource ''AMI' ''AWS)
 
+data Resource_AMI_Copy' s = Resource_AMI_Copy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data AMI_Copy' n s = AMI_Copy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_AMI_Copy')
 
--- $(TH.makeResource ''AMI_Copy' ''AWS)
 
+data Resource_AMI_From_Instance' s = Resource_AMI_From_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data AMI_From_Instance' n s = AMI_From_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_AMI_From_Instance')
 
--- $(TH.makeResource ''AMI_From_Instance' ''AWS)
 
+data Resource_AMI_Launch_Permission' s = Resource_AMI_Launch_Permission
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data AMI_Launch_Permission' n s = AMI_Launch_Permission
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_AMI_Launch_Permission')
 
--- $(TH.makeResource ''AMI_Launch_Permission' ''AWS)
 
+data Resource_App_Cookie_Stickiness_Policy' s = Resource_App_Cookie_Stickiness_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data App_Cookie_Stickiness_Policy' n s = App_Cookie_Stickiness_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_App_Cookie_Stickiness_Policy')
 
--- $(TH.makeResource ''App_Cookie_Stickiness_Policy' ''AWS)
 
+data Resource_Autoscaling_Attachment' s = Resource_Autoscaling_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Autoscaling_Attachment' n s = Autoscaling_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Autoscaling_Attachment')
 
--- $(TH.makeResource ''Autoscaling_Attachment' ''AWS)
 
+data Resource_Autoscaling_Group' s = Resource_Autoscaling_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Autoscaling_Group' n s = Autoscaling_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Autoscaling_Group')
 
--- $(TH.makeResource ''Autoscaling_Group' ''AWS)
 
+data Resource_Autoscaling_Lifecycle_Hook' s = Resource_Autoscaling_Lifecycle_Hook
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Autoscaling_Lifecycle_Hook' n s = Autoscaling_Lifecycle_Hook
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Autoscaling_Lifecycle_Hook')
 
--- $(TH.makeResource ''Autoscaling_Lifecycle_Hook' ''AWS)
 
+data Resource_Autoscaling_Notification' s = Resource_Autoscaling_Notification
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Autoscaling_Notification' n s = Autoscaling_Notification
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Autoscaling_Notification')
 
--- $(TH.makeResource ''Autoscaling_Notification' ''AWS)
 
+data Resource_Autoscaling_Policy' s = Resource_Autoscaling_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Autoscaling_Policy' n s = Autoscaling_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Autoscaling_Policy')
 
--- $(TH.makeResource ''Autoscaling_Policy' ''AWS)
 
+data Resource_Autoscaling_Schedule' s = Resource_Autoscaling_Schedule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Autoscaling_Schedule' n s = Autoscaling_Schedule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Autoscaling_Schedule')
 
--- $(TH.makeResource ''Autoscaling_Schedule' ''AWS)
 
+data Resource_Snapshot_Create_Volume_Permission' s = Resource_Snapshot_Create_Volume_Permission
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Snapshot_Create_Volume_Permission' n s = Snapshot_Create_Volume_Permission
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Snapshot_Create_Volume_Permission')
 
--- $(TH.makeResource ''Snapshot_Create_Volume_Permission' ''AWS)
 
+data Resource_EBS_Snapshot' s = Resource_EBS_Snapshot
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EBS_Snapshot' n s = EBS_Snapshot
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EBS_Snapshot')
 
--- $(TH.makeResource ''EBS_Snapshot' ''AWS)
 
+data Resource_EBS_Volume' s = Resource_EBS_Volume
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EBS_Volume' n s = EBS_Volume
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EBS_Volume')
 
--- $(TH.makeResource ''EBS_Volume' ''AWS)
 
+data Resource_EIP' s = Resource_EIP
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EIP' n s = EIP
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EIP')
 
--- $(TH.makeResource ''EIP' ''AWS)
 
+data Resource_EIP_Association' s = Resource_EIP_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EIP_Association' n s = EIP_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EIP_Association')
 
--- $(TH.makeResource ''EIP_Association' ''AWS)
 
+data Resource_ELB' s = Resource_ELB
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ELB' n s = ELB
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ELB')
 
--- $(TH.makeResource ''ELB' ''AWS)
 
+data Resource_ELB_Attachment' s = Resource_ELB_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ELB_Attachment' n s = ELB_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ELB_Attachment')
 
--- $(TH.makeResource ''ELB_Attachment' ''AWS)
 
+data Resource_Instance' s = Resource_Instance
+    { meta                        :: !Meta
+    , ami                         :: !(Required s Type.AMI)
+    , associate_public_ip_address :: !(Maybe Bool)
+    } deriving(Generic)
 
--- data Instance' n s = Instance
---     { metadata                    :: !(Meta AWS)
---     , ami                         :: !(Required s Type.AMI)
---     , associate_public_ip_address :: !(Maybe Bool)
---     }
+$(TH.makeResource "aws_" "meta" ''Resource_Instance')
 
--- $(TH.makeResource ''Instance' ''AWS)
 
+data Resource_Key_Pair' s = Resource_Key_Pair
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Key_Pair' n s = Key_Pair
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Key_Pair')
 
--- $(TH.makeResource ''Key_Pair' ''AWS)
 
+data Resource_Launch_Configuration' s = Resource_Launch_Configuration
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Launch_Configuration' n s = Launch_Configuration
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Launch_Configuration')
 
--- $(TH.makeResource ''Launch_Configuration' ''AWS)
 
+data Resource_LB_Cookie_Stickiness_Policy' s = Resource_LB_Cookie_Stickiness_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB_Cookie_Stickiness_Policy' n s = LB_Cookie_Stickiness_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB_Cookie_Stickiness_Policy')
 
--- $(TH.makeResource ''LB_Cookie_Stickiness_Policy' ''AWS)
 
+data Resource_LB_SSL_Negotiation_Policy' s = Resource_LB_SSL_Negotiation_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB_SSL_Negotiation_Policy' n s = LB_SSL_Negotiation_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB_SSL_Negotiation_Policy')
 
--- $(TH.makeResource ''LB_SSL_Negotiation_Policy' ''AWS)
 
+data Resource_Load_Balancer_Backend_Server_Policy' s = Resource_Load_Balancer_Backend_Server_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Load_Balancer_Backend_Server_Policy' n s = Load_Balancer_Backend_Server_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Load_Balancer_Backend_Server_Policy')
 
--- $(TH.makeResource ''Load_Balancer_Backend_Server_Policy' ''AWS)
 
+data Resource_Load_Balancer_Listener_Policy' s = Resource_Load_Balancer_Listener_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Load_Balancer_Listener_Policy' n s = Load_Balancer_Listener_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Load_Balancer_Listener_Policy')
 
--- $(TH.makeResource ''Load_Balancer_Listener_Policy' ''AWS)
 
+data Resource_Load_Balancer_Policy' s = Resource_Load_Balancer_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Load_Balancer_Policy' n s = Load_Balancer_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Load_Balancer_Policy')
 
--- $(TH.makeResource ''Load_Balancer_Policy' ''AWS)
 
+data Resource_Placement_Group' s = Resource_Placement_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Placement_Group' n s = Placement_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Placement_Group')
 
--- $(TH.makeResource ''Placement_Group' ''AWS)
 
+data Resource_Proxy_Protocol_Policy' s = Resource_Proxy_Protocol_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Proxy_Protocol_Policy' n s = Proxy_Protocol_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Proxy_Protocol_Policy')
 
--- $(TH.makeResource ''Proxy_Protocol_Policy' ''AWS)
 
+data Resource_Spot_Datafeed_Subscription' s = Resource_Spot_Datafeed_Subscription
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Spot_Datafeed_Subscription' n s = Spot_Datafeed_Subscription
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Spot_Datafeed_Subscription')
 
--- $(TH.makeResource ''Spot_Datafeed_Subscription' ''AWS)
 
+data Resource_Spot_Fleet_Request' s = Resource_Spot_Fleet_Request
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Spot_Fleet_Request' n s = Spot_Fleet_Request
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Spot_Fleet_Request')
 
--- $(TH.makeResource ''Spot_Fleet_Request' ''AWS)
 
+data Resource_Spot_Instance_Request' s = Resource_Spot_Instance_Request
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Spot_Instance_Request' n s = Spot_Instance_Request
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Spot_Instance_Request')
 
--- $(TH.makeResource ''Spot_Instance_Request' ''AWS)
 
+data Resource_Volume_Attachment' s = Resource_Volume_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Volume_Attachment' n s = Volume_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Volume_Attachment')
 
--- $(TH.makeResource ''Volume_Attachment' ''AWS)
 
 
+-- Load Balancing Resources
 
--- -- Load Balancing Resources
+data Resource_LB' s = Resource_LB
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB' n s = LB
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB')
 
--- $(TH.makeResource ''LB' ''AWS)
 
+data Resource_LB_Listener' s = Resource_LB_Listener
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB_Listener' n s = LB_Listener
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB_Listener')
 
--- $(TH.makeResource ''LB_Listener' ''AWS)
 
+data Resource_LB_Listener_Rule' s = Resource_LB_Listener_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB_Listener_Rule' n s = LB_Listener_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB_Listener_Rule')
 
--- $(TH.makeResource ''LB_Listener_Rule' ''AWS)
 
+data Resource_LB_Target_Group' s = Resource_LB_Target_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB_Target_Group' n s = LB_Target_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB_Target_Group')
 
--- $(TH.makeResource ''LB_Target_Group' ''AWS)
 
+data Resource_LB_Target_Group_Attachment' s = Resource_LB_Target_Group_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data LB_Target_Group_Attachment' n s = LB_Target_Group_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_LB_Target_Group_Attachment')
 
--- $(TH.makeResource ''LB_Target_Group_Attachment' ''AWS)
 
 
+-- ECS Resources
 
--- -- ECS Resources
+data Resource_ECRepository' s = Resource_ECRepository
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ECR_Repository' n s = ECR_Repository
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ECRepository')
 
--- $(TH.makeResource ''ECR_Repository' ''AWS)
 
+data Resource_ECRepository_Policy' s = Resource_ECRepository_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ECR_Repository_Policy' n s = ECR_Repository_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ECRepository_Policy')
 
--- $(TH.makeResource ''ECR_Repository_Policy' ''AWS)
 
+data Resource_ECS_Cluster' s = Resource_ECS_Cluster
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ECS_Cluster' n s = ECS_Cluster
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ECS_Cluster')
 
--- $(TH.makeResource ''ECS_Cluster' ''AWS)
 
+data Resource_ECS_Service' s = Resource_ECS_Service
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ECS_Service' n s = ECS_Service
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ECS_Service')
 
--- $(TH.makeResource ''ECS_Service' ''AWS)
 
+data Resource_ECS_Task_Definition' s = Resource_ECS_Task_Definition
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data ECS_Task_Definition' n s = ECS_Task_Definition
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_ECS_Task_Definition')
 
--- $(TH.makeResource ''ECS_Task_Definition' ''AWS)
 
 
+-- EFS Resources
 
--- -- EFS Resources
+data Resource_EFS_File_System' s = Resource_EFS_File_System
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EFS_File_System' n s = EFS_File_System
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EFS_File_System')
 
--- $(TH.makeResource ''EFS_File_System' ''AWS)
 
+data Resource_EFS_Mount_Target' s = Resource_EFS_Mount_Target
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EFS_Mount_Target' n s = EFS_Mount_Target
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EFS_Mount_Target')
 
--- $(TH.makeResource ''EFS_Mount_Target' ''AWS)
 
 
+-- ElastiCache Resources
 
--- -- ElastiCache Resources
+data Resource_Elasticache_Cluster' s = Resource_Elasticache_Cluster
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticache_Cluster' n s = Elasticache_Cluster
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticache_Cluster')
 
--- $(TH.makeResource ''Elasticache_Cluster' ''AWS)
 
+data Resource_Elasticache_Parameter_Group' s = Resource_Elasticache_Parameter_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticache_Parameter_Group' n s = Elasticache_Parameter_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticache_Parameter_Group')
 
--- $(TH.makeResource ''Elasticache_Parameter_Group' ''AWS)
 
+data Resource_Elasticache_Replication_Group' s = Resource_Elasticache_Replication_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticache_Replication_Group' n s = Elasticache_Replication_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticache_Replication_Group')
 
--- $(TH.makeResource ''Elasticache_Replication_Group' ''AWS)
 
+data Resource_Elasticache_Security_Group' s = Resource_Elasticache_Security_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticache_Security_Group' n s = Elasticache_Security_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticache_Security_Group')
 
--- $(TH.makeResource ''Elasticache_Security_Group' ''AWS)
 
+data Resource_Elasticache_Subnet_Group' s = Resource_Elasticache_Subnet_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticache_Subnet_Group' n s = Elasticache_Subnet_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticache_Subnet_Group')
 
--- $(TH.makeResource ''Elasticache_Subnet_Group' ''AWS)
 
 
+-- Elastic Beanstalk Resources
 
--- -- Elastic Beanstalk Resources
+data Resource_Elastic_Beanstalk_Application' s = Resource_Elastic_Beanstalk_Application
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elastic_Beanstalk_Application' n s = Elastic_Beanstalk_Application
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elastic_Beanstalk_Application')
 
--- $(TH.makeResource ''Elastic_Beanstalk_Application' ''AWS)
 
+data Resource_Elastic_Beanstalk_Application_Version' s = Resource_Elastic_Beanstalk_Application_Version
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elastic_Beanstalk_Application_Version' n s = Elastic_Beanstalk_Application_Version
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elastic_Beanstalk_Application_Version')
 
--- $(TH.makeResource ''Elastic_Beanstalk_Application_Version' ''AWS)
 
+data Resource_Elastic_Beanstalk_Configuration_Template' s = Resource_Elastic_Beanstalk_Configuration_Template
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elastic_Beanstalk_Configuration_Template' n s = Elastic_Beanstalk_Configuration_Template
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elastic_Beanstalk_Configuration_Template')
 
--- $(TH.makeResource ''Elastic_Beanstalk_Configuration_Template' ''AWS)
 
+data Resource_Elastic_Beanstalk_Environment' s = Resource_Elastic_Beanstalk_Environment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elastic_Beanstalk_Environment' n s = Elastic_Beanstalk_Environment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elastic_Beanstalk_Environment')
 
--- $(TH.makeResource ''Elastic_Beanstalk_Environment' ''AWS)
 
 
+-- Elastic Map Reduce Resources
 
--- -- Elastic Map Reduce Resources
+data Resource_EMCluster' s = Resource_EMCluster
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EMR_Cluster' n s = EMR_Cluster
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EMCluster')
 
--- $(TH.makeResource ''EMR_Cluster' ''AWS)
 
+data Resource_EMInstance_Group' s = Resource_EMInstance_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EMR_Instance_Group' n s = EMR_Instance_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EMInstance_Group')
 
--- $(TH.makeResource ''EMR_Instance_Group' ''AWS)
 
+data Resource_EMSecurity_Configuration' s = Resource_EMSecurity_Configuration
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data EMR_Security_Configuration' n s = EMR_Security_Configuration
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_EMSecurity_Configuration')
 
--- $(TH.makeResource ''EMR_Security_Configuration' ''AWS)
 
 
+-- ElasticSearch Resources
 
--- -- ElasticSearch Resources
+data Resource_Elasticsearch_Domain' s = Resource_Elasticsearch_Domain
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticsearch_Domain' n s = Elasticsearch_Domain
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticsearch_Domain')
 
--- $(TH.makeResource ''Elasticsearch_Domain' ''AWS)
 
+data Resource_Elasticsearch_Domain_Policy' s = Resource_Elasticsearch_Domain_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elasticsearch_Domain_Policy' n s = Elasticsearch_Domain_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elasticsearch_Domain_Policy')
 
--- $(TH.makeResource ''Elasticsearch_Domain_Policy' ''AWS)
 
 
+-- Elastic Transcoder Resources
 
--- -- Elastic Transcoder Resources
+data Resource_Elastictranscoder_Pipeline' s = Resource_Elastictranscoder_Pipeline
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elastictranscoder_Pipeline' n s = Elastictranscoder_Pipeline
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elastictranscoder_Pipeline')
 
--- $(TH.makeResource ''Elastictranscoder_Pipeline' ''AWS)
 
+data Resource_Elastictranscoder_Preset' s = Resource_Elastictranscoder_Preset
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Elastictranscoder_Preset' n s = Elastictranscoder_Preset
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Elastictranscoder_Preset')
 
--- $(TH.makeResource ''Elastictranscoder_Preset' ''AWS)
 
 
+-- Glacier Resources
 
--- -- Glacier Resources
+data Resource_Glacier_Vault' s = Resource_Glacier_Vault
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Glacier_Vault' n s = Glacier_Vault
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Glacier_Vault')
 
--- $(TH.makeResource ''Glacier_Vault' ''AWS)
 
 
+-- IAM Resources
 
--- -- IAM Resources
+data Resource_IAM_Access_Key' s = Resource_IAM_Access_Key
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Access_Key' n s = IAM_Access_Key
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Access_Key')
 
--- $(TH.makeResource ''IAM_Access_Key' ''AWS)
 
+data Resource_IAM_Account_Alias' s = Resource_IAM_Account_Alias
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Account_Alias' n s = IAM_Account_Alias
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Account_Alias')
 
--- $(TH.makeResource ''IAM_Account_Alias' ''AWS)
 
+data Resource_IAM_Account_Password_Policy' s = Resource_IAM_Account_Password_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Account_Password_Policy' n s = IAM_Account_Password_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Account_Password_Policy')
 
--- $(TH.makeResource ''IAM_Account_Password_Policy' ''AWS)
 
+data Resource_IAM_Group' s = Resource_IAM_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Group' n s = IAM_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Group')
 
--- $(TH.makeResource ''IAM_Group' ''AWS)
 
+data Resource_IAM_Group_Membership' s = Resource_IAM_Group_Membership
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Group_Membership' n s = IAM_Group_Membership
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Group_Membership')
 
--- $(TH.makeResource ''IAM_Group_Membership' ''AWS)
 
+data Resource_IAM_Group_Policy' s = Resource_IAM_Group_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Group_Policy' n s = IAM_Group_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Group_Policy')
 
--- $(TH.makeResource ''IAM_Group_Policy' ''AWS)
 
+data Resource_IAM_Group_Policy_Attachment' s = Resource_IAM_Group_Policy_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Group_Policy_Attachment' n s = IAM_Group_Policy_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Group_Policy_Attachment')
 
--- $(TH.makeResource ''IAM_Group_Policy_Attachment' ''AWS)
 
+data Resource_IAM_Instance_Profile' s = Resource_IAM_Instance_Profile
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Instance_Profile' n s = IAM_Instance_Profile
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Instance_Profile')
 
--- $(TH.makeResource ''IAM_Instance_Profile' ''AWS)
 
+data Resource_IAM_OpenId_Connect_Provider' s = Resource_IAM_OpenId_Connect_Provider
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_OpenId_Connect_Provider' n s = IAM_OpenId_Connect_Provider
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_OpenId_Connect_Provider')
 
--- $(TH.makeResource ''IAM_OpenId_Connect_Provider' ''AWS)
 
+data Resource_IAM_Policy' s = Resource_IAM_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Policy' n s = IAM_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Policy')
 
--- $(TH.makeResource ''IAM_Policy' ''AWS)
 
+data Resource_IAM_Policy_Attachment' s = Resource_IAM_Policy_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Policy_Attachment' n s = IAM_Policy_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Policy_Attachment')
 
--- $(TH.makeResource ''IAM_Policy_Attachment' ''AWS)
 
+data Resource_IAM_Role' s = Resource_IAM_Role
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Role' n s = IAM_Role
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Role')
 
--- $(TH.makeResource ''IAM_Role' ''AWS)
 
+data Resource_IAM_Role_Policy' s = Resource_IAM_Role_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Role_Policy' n s = IAM_Role_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Role_Policy')
 
--- $(TH.makeResource ''IAM_Role_Policy' ''AWS)
 
+data Resource_IAM_Role_Policy_Attachment' s = Resource_IAM_Role_Policy_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Role_Policy_Attachment' n s = IAM_Role_Policy_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Role_Policy_Attachment')
 
--- $(TH.makeResource ''IAM_Role_Policy_Attachment' ''AWS)
 
+data Resource_IAM_Saml_Provider' s = Resource_IAM_Saml_Provider
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Saml_Provider' n s = IAM_Saml_Provider
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Saml_Provider')
 
--- $(TH.makeResource ''IAM_Saml_Provider' ''AWS)
 
+data Resource_IAM_Server_Certificate' s = Resource_IAM_Server_Certificate
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_Server_Certificate' n s = IAM_Server_Certificate
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_Server_Certificate')
 
--- $(TH.makeResource ''IAM_Server_Certificate' ''AWS)
 
+data Resource_IAM_User' s = Resource_IAM_User
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_User' n s = IAM_User
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_User')
 
--- $(TH.makeResource ''IAM_User' ''AWS)
 
+data Resource_IAM_User_Login_Profile' s = Resource_IAM_User_Login_Profile
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_User_Login_Profile' n s = IAM_User_Login_Profile
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_User_Login_Profile')
 
--- $(TH.makeResource ''IAM_User_Login_Profile' ''AWS)
 
+data Resource_IAM_User_Policy' s = Resource_IAM_User_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_User_Policy' n s = IAM_User_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_User_Policy')
 
--- $(TH.makeResource ''IAM_User_Policy' ''AWS)
 
+data Resource_IAM_User_Policy_Attachment' s = Resource_IAM_User_Policy_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_User_Policy_Attachment' n s = IAM_User_Policy_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_User_Policy_Attachment')
 
--- $(TH.makeResource ''IAM_User_Policy_Attachment' ''AWS)
 
+data Resource_IAM_User_SSH_Key' s = Resource_IAM_User_SSH_Key
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IAM_User_SSH_Key' n s = IAM_User_SSH_Key
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IAM_User_SSH_Key')
 
--- $(TH.makeResource ''IAM_User_SSH_Key' ''AWS)
 
 
+-- IoT Resources
 
--- -- IoT Resources
+data Resource_IoT_Certificate' s = Resource_IoT_Certificate
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IoT_Certificate' n s = IoT_Certificate
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IoT_Certificate')
 
--- $(TH.makeResource ''IoT_Certificate' ''AWS)
 
+data Resource_IoT_Policy' s = Resource_IoT_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data IoT_Policy' n s = IoT_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_IoT_Policy')
 
--- $(TH.makeResource ''IoT_Policy' ''AWS)
 
 
+-- Inspector Resources
 
--- -- Inspector Resources
+data Resource_Inspector_Assessment_Target' s = Resource_Inspector_Assessment_Target
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Inspector_Assessment_Target' n s = Inspector_Assessment_Target
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Inspector_Assessment_Target')
 
--- $(TH.makeResource ''Inspector_Assessment_Target' ''AWS)
 
+data Resource_Inspector_Assessment_Template' s = Resource_Inspector_Assessment_Template
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Inspector_Assessment_Template' n s = Inspector_Assessment_Template
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Inspector_Assessment_Template')
 
--- $(TH.makeResource ''Inspector_Assessment_Template' ''AWS)
 
+data Resource_Inspector_Group' s = Resource_Inspector_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Inspector_Resource_Group' n s = Inspector_Resource_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Inspector_Group')
 
--- $(TH.makeResource ''Inspector_Resource_Group' ''AWS)
 
 
+-- Kinesis Resources
 
--- -- Kinesis Resources
+data Resource_Kinesis_Stream' s = Resource_Kinesis_Stream
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Kinesis_Stream' n s = Kinesis_Stream
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Kinesis_Stream')
 
--- $(TH.makeResource ''Kinesis_Stream' ''AWS)
 
 
+-- Kinesis Firehose Resources
 
--- -- Kinesis Firehose Resources
+data Resource_Kinesis_Firehose_Delivery_Stream' s = Resource_Kinesis_Firehose_Delivery_Stream
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Kinesis_Firehose_Delivery_Stream' n s = Kinesis_Firehose_Delivery_Stream
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Kinesis_Firehose_Delivery_Stream')
 
--- $(TH.makeResource ''Kinesis_Firehose_Delivery_Stream' ''AWS)
 
 
+-- KMS Resources
 
--- -- KMS Resources
+data Resource_KMS_Alias' s = Resource_KMS_Alias
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data KMS_Alias' n s = KMS_Alias
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_KMS_Alias')
 
--- $(TH.makeResource ''KMS_Alias' ''AWS)
 
+data Resource_KMS_Key' s = Resource_KMS_Key
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data KMS_Key' n s = KMS_Key
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_KMS_Key')
 
--- $(TH.makeResource ''KMS_Key' ''AWS)
 
 
+-- Lambda Resources
 
--- -- Lambda Resources
+data Resource_Lambda_Alias' s = Resource_Lambda_Alias
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lambda_Alias' n s = Lambda_Alias
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lambda_Alias')
 
--- $(TH.makeResource ''Lambda_Alias' ''AWS)
 
+data Resource_Lambda_Event_Source_Mapping' s = Resource_Lambda_Event_Source_Mapping
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lambda_Event_Source_Mapping' n s = Lambda_Event_Source_Mapping
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lambda_Event_Source_Mapping')
 
--- $(TH.makeResource ''Lambda_Event_Source_Mapping' ''AWS)
 
+data Resource_Lambda_Function' s = Resource_Lambda_Function
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lambda_Function' n s = Lambda_Function
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lambda_Function')
 
--- $(TH.makeResource ''Lambda_Function' ''AWS)
 
+data Resource_Lambda_Permission' s = Resource_Lambda_Permission
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lambda_Permission' n s = Lambda_Permission
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lambda_Permission')
 
--- $(TH.makeResource ''Lambda_Permission' ''AWS)
 
 
+-- Lightsail Resources
 
--- -- Lightsail Resources
+data Resource_Lightsail_Domain' s = Resource_Lightsail_Domain
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lightsail_Domain' n s = Lightsail_Domain
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lightsail_Domain')
 
--- $(TH.makeResource ''Lightsail_Domain' ''AWS)
 
+data Resource_Lightsail_Instance' s = Resource_Lightsail_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lightsail_Instance' n s = Lightsail_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lightsail_Instance')
 
--- $(TH.makeResource ''Lightsail_Instance' ''AWS)
 
+data Resource_Lightsail_Key_Pair' s = Resource_Lightsail_Key_Pair
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lightsail_Key_Pair' n s = Lightsail_Key_Pair
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lightsail_Key_Pair')
 
--- $(TH.makeResource ''Lightsail_Key_Pair' ''AWS)
 
+data Resource_Lightsail_Static_IP' s = Resource_Lightsail_Static_IP
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lightsail_Static_IP' n s = Lightsail_Static_IP
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lightsail_Static_IP')
 
--- $(TH.makeResource ''Lightsail_Static_IP' ''AWS)
 
+data Resource_Lightsail_Static_IP_Attachment' s = Resource_Lightsail_Static_IP_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Lightsail_Static_IP_Attachment' n s = Lightsail_Static_IP_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Lightsail_Static_IP_Attachment')
 
--- $(TH.makeResource ''Lightsail_Static_IP_Attachment' ''AWS)
 
 
+-- OpsWorks Resources
 
--- -- OpsWorks Resources
+data Resource_Opsworks_Application' s = Resource_Opsworks_Application
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Application' n s = Opsworks_Application
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Application')
 
--- $(TH.makeResource ''Opsworks_Application' ''AWS)
 
+data Resource_Opsworks_Custom_Layer' s = Resource_Opsworks_Custom_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Custom_Layer' n s = Opsworks_Custom_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Custom_Layer')
 
--- $(TH.makeResource ''Opsworks_Custom_Layer' ''AWS)
 
+data Resource_Opsworks_Ganglia_Layer' s = Resource_Opsworks_Ganglia_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Ganglia_Layer' n s = Opsworks_Ganglia_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Ganglia_Layer')
 
--- $(TH.makeResource ''Opsworks_Ganglia_Layer' ''AWS)
 
+data Resource_Opsworks_Haproxy_Layer' s = Resource_Opsworks_Haproxy_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Haproxy_Layer' n s = Opsworks_Haproxy_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Haproxy_Layer')
 
--- $(TH.makeResource ''Opsworks_Haproxy_Layer' ''AWS)
 
+data Resource_Opsworks_Instance' s = Resource_Opsworks_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Instance' n s = Opsworks_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Instance')
 
--- $(TH.makeResource ''Opsworks_Instance' ''AWS)
 
+data Resource_Opsworks_Java_App_Layer' s = Resource_Opsworks_Java_App_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Java_App_Layer' n s = Opsworks_Java_App_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Java_App_Layer')
 
--- $(TH.makeResource ''Opsworks_Java_App_Layer' ''AWS)
 
+data Resource_Opsworks_Memcached_Layer' s = Resource_Opsworks_Memcached_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Memcached_Layer' n s = Opsworks_Memcached_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Memcached_Layer')
 
--- $(TH.makeResource ''Opsworks_Memcached_Layer' ''AWS)
 
+data Resource_Opsworks_Mysql_Layer' s = Resource_Opsworks_Mysql_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Mysql_Layer' n s = Opsworks_Mysql_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Mysql_Layer')
 
--- $(TH.makeResource ''Opsworks_Mysql_Layer' ''AWS)
 
+data Resource_Opsworks_Nodejs_App_Layer' s = Resource_Opsworks_Nodejs_App_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Nodejs_App_Layer' n s = Opsworks_Nodejs_App_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Nodejs_App_Layer')
 
--- $(TH.makeResource ''Opsworks_Nodejs_App_Layer' ''AWS)
 
+data Resource_Opsworks_Permission' s = Resource_Opsworks_Permission
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Permission' n s = Opsworks_Permission
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Permission')
 
--- $(TH.makeResource ''Opsworks_Permission' ''AWS)
 
+data Resource_Opsworks_PHP_App_Layer' s = Resource_Opsworks_PHP_App_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_PHP_App_Layer' n s = Opsworks_PHP_App_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_PHP_App_Layer')
 
--- $(TH.makeResource ''Opsworks_PHP_App_Layer' ''AWS)
 
+data Resource_Opsworks_Rails_App_Layer' s = Resource_Opsworks_Rails_App_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Rails_App_Layer' n s = Opsworks_Rails_App_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Rails_App_Layer')
 
--- $(TH.makeResource ''Opsworks_Rails_App_Layer' ''AWS)
 
+data Resource_Opsworks_RDS_DB_Instance' s = Resource_Opsworks_RDS_DB_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_RDS_DB_Instance' n s = Opsworks_RDS_DB_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_RDS_DB_Instance')
 
--- $(TH.makeResource ''Opsworks_RDS_DB_Instance' ''AWS)
 
+data Resource_Opsworks_Stack' s = Resource_Opsworks_Stack
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Stack' n s = Opsworks_Stack
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Stack')
 
--- $(TH.makeResource ''Opsworks_Stack' ''AWS)
 
+data Resource_Opsworks_Static_Web_Layer' s = Resource_Opsworks_Static_Web_Layer
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_Static_Web_Layer' n s = Opsworks_Static_Web_Layer
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_Static_Web_Layer')
 
--- $(TH.makeResource ''Opsworks_Static_Web_Layer' ''AWS)
 
+data Resource_Opsworks_User_Profile' s = Resource_Opsworks_User_Profile
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Opsworks_User_Profile' n s = Opsworks_User_Profile
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Opsworks_User_Profile')
 
--- $(TH.makeResource ''Opsworks_User_Profile' ''AWS)
 
 
+-- RDS Resources
 
--- -- RDS Resources
+data Resource_DB_Event_Subscription' s = Resource_DB_Event_Subscription
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Event_Subscription' n s = DB_Event_Subscription
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Event_Subscription')
 
--- $(TH.makeResource ''DB_Event_Subscription' ''AWS)
 
+data Resource_DB_Instance' s = Resource_DB_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Instance' n s = DB_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Instance')
 
--- $(TH.makeResource ''DB_Instance' ''AWS)
 
+data Resource_DB_Option_Group' s = Resource_DB_Option_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Option_Group' n s = DB_Option_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Option_Group')
 
--- $(TH.makeResource ''DB_Option_Group' ''AWS)
 
+data Resource_DB_Parameter_Group' s = Resource_DB_Parameter_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Parameter_Group' n s = DB_Parameter_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Parameter_Group')
 
--- $(TH.makeResource ''DB_Parameter_Group' ''AWS)
 
+data Resource_DB_Security_Group' s = Resource_DB_Security_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Security_Group' n s = DB_Security_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Security_Group')
 
--- $(TH.makeResource ''DB_Security_Group' ''AWS)
 
+data Resource_DB_Snapshot' s = Resource_DB_Snapshot
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Snapshot' n s = DB_Snapshot
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Snapshot')
 
--- $(TH.makeResource ''DB_Snapshot' ''AWS)
 
+data Resource_DB_Subnet_Group' s = Resource_DB_Subnet_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data DB_Subnet_Group' n s = DB_Subnet_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_DB_Subnet_Group')
 
--- $(TH.makeResource ''DB_Subnet_Group' ''AWS)
 
+data Resource_RDS_Cluster' s = Resource_RDS_Cluster
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data RDS_Cluster' n s = RDS_Cluster
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_RDS_Cluster')
 
--- $(TH.makeResource ''RDS_Cluster' ''AWS)
 
+data Resource_RDS_Cluster_Instance' s = Resource_RDS_Cluster_Instance
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data RDS_Cluster_Instance' n s = RDS_Cluster_Instance
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_RDS_Cluster_Instance')
 
--- $(TH.makeResource ''RDS_Cluster_Instance' ''AWS)
 
+data Resource_RDS_Cluster_Parameter_Group' s = Resource_RDS_Cluster_Parameter_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data RDS_Cluster_Parameter_Group' n s = RDS_Cluster_Parameter_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_RDS_Cluster_Parameter_Group')
 
--- $(TH.makeResource ''RDS_Cluster_Parameter_Group' ''AWS)
 
 
+-- Redshift Resources
 
--- -- Redshift Resources
+data Resource_Redshift_Cluster' s = Resource_Redshift_Cluster
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Redshift_Cluster' n s = Redshift_Cluster
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Redshift_Cluster')
 
--- $(TH.makeResource ''Redshift_Cluster' ''AWS)
 
+data Resource_Redshift_Parameter_Group' s = Resource_Redshift_Parameter_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Redshift_Parameter_Group' n s = Redshift_Parameter_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Redshift_Parameter_Group')
 
--- $(TH.makeResource ''Redshift_Parameter_Group' ''AWS)
 
+data Resource_Redshift_Security_Group' s = Resource_Redshift_Security_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Redshift_Security_Group' n s = Redshift_Security_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Redshift_Security_Group')
 
--- $(TH.makeResource ''Redshift_Security_Group' ''AWS)
 
+data Resource_Redshift_Subnet_Group' s = Resource_Redshift_Subnet_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Redshift_Subnet_Group' n s = Redshift_Subnet_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Redshift_Subnet_Group')
 
--- $(TH.makeResource ''Redshift_Subnet_Group' ''AWS)
 
 
+-- WAF Resources
 
--- -- WAF Resources
+data Resource_WAF_Byte_Match_Set' s = Resource_WAF_Byte_Match_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Byte_Match_Set' n s = WAF_Byte_Match_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Byte_Match_Set')
 
--- $(TH.makeResource ''WAF_Byte_Match_Set' ''AWS)
 
+data Resource_WAF_IPSet' s = Resource_WAF_IPSet
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_IPSet' n s = WAF_IPSet
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_IPSet')
 
--- $(TH.makeResource ''WAF_IPSet' ''AWS)
 
+data Resource_WAF_Rule' s = Resource_WAF_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Rule' n s = WAF_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Rule')
 
--- $(TH.makeResource ''WAF_Rule' ''AWS)
 
+data Resource_WAF_Rate_Based_Rule' s = Resource_WAF_Rate_Based_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Rate_Based_Rule' n s = WAF_Rate_Based_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Rate_Based_Rule')
 
--- $(TH.makeResource ''WAF_Rate_Based_Rule' ''AWS)
 
+data Resource_WAF_Size_Constraint_Set' s = Resource_WAF_Size_Constraint_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Size_Constraint_Set' n s = WAF_Size_Constraint_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Size_Constraint_Set')
 
--- $(TH.makeResource ''WAF_Size_Constraint_Set' ''AWS)
 
+data Resource_WAF_Sql_Injection_Match_Set' s = Resource_WAF_Sql_Injection_Match_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Sql_Injection_Match_Set' n s = WAF_Sql_Injection_Match_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Sql_Injection_Match_Set')
 
--- $(TH.makeResource ''WAF_Sql_Injection_Match_Set' ''AWS)
 
+data Resource_WAF_Web_ACL' s = Resource_WAF_Web_ACL
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Web_ACL' n s = WAF_Web_ACL
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Web_ACL')
 
--- $(TH.makeResource ''WAF_Web_ACL' ''AWS)
 
+data Resource_WAF_Xss_Match_Set' s = Resource_WAF_Xss_Match_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAF_Xss_Match_Set' n s = WAF_Xss_Match_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAF_Xss_Match_Set')
 
--- $(TH.makeResource ''WAF_Xss_Match_Set' ''AWS)
 
 
+-- WAF Regional Resources
 
--- -- WAF Regional Resources
+data Resource_WAFRegional_Byte_Match_Set' s = Resource_WAFRegional_Byte_Match_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAFRegional_Byte_Match_Set' n s = WAFRegional_Byte_Match_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAFRegional_Byte_Match_Set')
 
--- $(TH.makeResource ''WAFRegional_Byte_Match_Set' ''AWS)
 
+data Resource_WAFRegional_IPSet' s = Resource_WAFRegional_IPSet
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data WAFRegional_IPSet' n s = WAFRegional_IPSet
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_WAFRegional_IPSet')
 
--- $(TH.makeResource ''WAFRegional_IPSet' ''AWS)
 
 
+-- Route53 Resources
 
--- -- Route53 Resources
+data Resource_Route53_Delegation_Set' s = Resource_Route53_Delegation_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Route53_Delegation_Set' n s = Route53_Delegation_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Route53_Delegation_Set')
 
--- $(TH.makeResource ''Route53_Delegation_Set' ''AWS)
 
+data Resource_Route53_Health_Check' s = Resource_Route53_Health_Check
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Route53_Health_Check' n s = Route53_Health_Check
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Route53_Health_Check')
 
--- $(TH.makeResource ''Route53_Health_Check' ''AWS)
 
+data Resource_Route53_Record' s = Resource_Route53_Record
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Route53_Record' n s = Route53_Record
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Route53_Record')
 
--- $(TH.makeResource ''Route53_Record' ''AWS)
 
+data Resource_Route53_Zone' s = Resource_Route53_Zone
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Route53_Zone' n s = Route53_Zone
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Route53_Zone')
 
--- $(TH.makeResource ''Route53_Zone' ''AWS)
 
+data Resource_Route53_Zone_Association' s = Resource_Route53_Zone_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data Route53_Zone_Association' n s = Route53_Zone_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_Route53_Zone_Association')
 
--- $(TH.makeResource ''Route53_Zone_Association' ''AWS)
 
 
+-- S3 Resources
 
--- -- S3 Resources
+data Resource_S3_Bucket' s = Resource_S3_Bucket
+    { meta                      :: !Meta
+    , bucket                    :: !(Maybe Text)
+    -- ^ (Optional, Forces new resource) The name of the bucket. If omitted,
+    -- Terraform will assign a random, unique name.
+    , bucket_prefix             :: !(Maybe Text)
+    -- ^ (Optional, Forces new resource) Creates a unique bucket name beginning
+    -- with the specified prefix. Conflicts with bucket.
+    , acl                       :: !(Maybe Text)
+    -- ^ (Optional) The canned ACL to apply. Defaults to "private".
+    , policy                    :: !(Maybe Text)
+    -- ^ (Optional) A valid bucket policy JSON document. Note that if the
+    -- policy document is not specific enough (but still valid), Terraform may
+    -- view the policy as constantly changing in a terraform plan. In this
+    -- case, please make sure you use the verbose/specific version of the
+    -- policy.
+    , tags                      :: !(Maybe Text)
+    -- ^ (Optional) A mapping of tags to assign to the bucket.
+    , force_destroy             :: !(Maybe Text)
+    -- ^ (Optional, Default:false ) A boolean that indicates all objects should
+    -- be deleted from the bucket so that the bucket can be destroyed without
+    -- error. These objects are not recoverable.
+    , website                   :: !(Maybe Text)
+    -- ^ (Optional) A website object (documented below).
+    , cors_rule                 :: !(Maybe Text)
+    -- ^ (Optional) A rule of Cross-Origin Resource Sharing (documented below).
+    , versioning                :: !(Maybe Text)
+    -- ^ (Optional) A state of versioning (documented below)
+    , logging                   :: !(Maybe Text)
+    -- ^ (Optional) A settings of bucket logging (documented below).
+    , lifecycle_rule            :: !(Maybe Text)
+    -- ^ (Optional) A configuration of object lifecycle management (documented
+    -- below).
+    , acceleration_status       :: !(Maybe Text)
+    -- ^ (Optional) Sets the accelerate configuration of an existing
+    -- bucket. Can be Enabled or Suspended.
+    , region                    :: !(Maybe Text)
+    -- ^ (Optional) If specified, the AWS region this bucket should reside
+    -- in. Otherwise, the region used by the callee.
+    , request_payer             :: !(Maybe Text)
+    -- ^ (Optional) Specifies who should bear the cost of Amazon S3 data
+    -- transfer. Can be either BucketOwner or Requester. By default, the owner
+    -- of the S3 bucket would incur the costs of any data Resource_transfer. See
+    -- Requester Pays Buckets developer guide for more information.
+    , replication_configuration :: !(Maybe Text)
+    -- ^ (Optional) A configuration of replication configuration (documented
+    -- below).
+    } deriving(Generic)
 
--- data S3_Bucket' n s = S3_Bucket
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_S3_Bucket')
 
--- $(TH.makeResource ''S3_Bucket' ''AWS)
 
+data Resource_S3_Bucket_Notification' s = Resource_S3_Bucket_Notification
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data S3_Bucket_Notification' n s = S3_Bucket_Notification
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_S3_Bucket_Notification')
 
--- $(TH.makeResource ''S3_Bucket_Notification' ''AWS)
 
+data Resource_S3_Bucket_Object' s = Resource_S3_Bucket_Object
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data S3_Bucket_Object' n s = S3_Bucket_Object
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_S3_Bucket_Object')
 
--- $(TH.makeResource ''S3_Bucket_Object' ''AWS)
 
+data Resource_S3_Bucket_Policy' s = Resource_S3_Bucket_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data S3_Bucket_Policy' n s = S3_Bucket_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_S3_Bucket_Policy')
 
--- $(TH.makeResource ''S3_Bucket_Policy' ''AWS)
 
 
+-- SES Resources
 
--- -- SES Resources
+data Resource_SES_Active_Receipt_Rule_Set' s = Resource_SES_Active_Receipt_Rule_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Active_Receipt_Rule_Set' n s = SES_Active_Receipt_Rule_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Active_Receipt_Rule_Set')
 
--- $(TH.makeResource ''SES_Active_Receipt_Rule_Set' ''AWS)
 
+data Resource_SES_Domain_Identity' s = Resource_SES_Domain_Identity
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Domain_Identity' n s = SES_Domain_Identity
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Domain_Identity')
 
--- $(TH.makeResource ''SES_Domain_Identity' ''AWS)
 
+data Resource_SES_Receipt_Filter' s = Resource_SES_Receipt_Filter
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Receipt_Filter' n s = SES_Receipt_Filter
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Receipt_Filter')
 
--- $(TH.makeResource ''SES_Receipt_Filter' ''AWS)
 
+data Resource_SES_Receipt_Rule' s = Resource_SES_Receipt_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Receipt_Rule' n s = SES_Receipt_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Receipt_Rule')
 
--- $(TH.makeResource ''SES_Receipt_Rule' ''AWS)
 
+data Resource_SES_Receipt_Rule_Set' s = Resource_SES_Receipt_Rule_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Receipt_Rule_Set' n s = SES_Receipt_Rule_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Receipt_Rule_Set')
 
--- $(TH.makeResource ''SES_Receipt_Rule_Set' ''AWS)
 
+data Resource_SES_Configuration_Set' s = Resource_SES_Configuration_Set
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Configuration_Set' n s = SES_Configuration_Set
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Configuration_Set')
 
--- $(TH.makeResource ''SES_Configuration_Set' ''AWS)
 
+data Resource_SES_Event_Destination' s = Resource_SES_Event_Destination
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SES_Event_Destination' n s = SES_Event_Destination
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SES_Event_Destination')
 
--- $(TH.makeResource ''SES_Event_Destination' ''AWS)
 
 
+-- Step Function Resources
 
--- -- Step Function Resources
+data Resource_SFN_Activity' s = Resource_SFN_Activity
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SFN_Activity' n s = SFN_Activity
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SFN_Activity')
 
--- $(TH.makeResource ''SFN_Activity' ''AWS)
 
+data Resource_SFN_State_Machine' s = Resource_SFN_State_Machine
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SFN_State_Machine' n s = SFN_State_Machine
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SFN_State_Machine')
 
--- $(TH.makeResource ''SFN_State_Machine' ''AWS)
 
 
+-- SimpleDB Resources
 
--- -- SimpleDB Resources
+data Resource_SimpleDB_Domain' s = Resource_SimpleDB_Domain
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SimpleDB_Domain' n s = SimpleDB_Domain
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SimpleDB_Domain')
 
--- $(TH.makeResource ''SimpleDB_Domain' ''AWS)
 
 
+-- SNS Resources
 
--- -- SNS Resources
+data Resource_SNS_Topic' s = Resource_SNS_Topic
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SNS_Topic' n s = SNS_Topic
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SNS_Topic')
 
--- $(TH.makeResource ''SNS_Topic' ''AWS)
 
+data Resource_SNS_Topic_Policy' s = Resource_SNS_Topic_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SNS_Topic_Policy' n s = SNS_Topic_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SNS_Topic_Policy')
 
--- $(TH.makeResource ''SNS_Topic_Policy' ''AWS)
 
+data Resource_SNS_Topic_Subscription' s = Resource_SNS_Topic_Subscription
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SNS_Topic_Subscription' n s = SNS_Topic_Subscription
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SNS_Topic_Subscription')
 
--- $(TH.makeResource ''SNS_Topic_Subscription' ''AWS)
 
 
+-- SSM Resources
 
--- -- SSM Resources
+data Resource_SSM_Activation' s = Resource_SSM_Activation
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SSM_Activation' n s = SSM_Activation
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Activation')
 
--- $(TH.makeResource ''SSM_Activation' ''AWS)
 
+data Resource_SSM_Association' s = Resource_SSM_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SSM_Association' n s = SSM_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Association')
 
--- $(TH.makeResource ''SSM_Association' ''AWS)
 
+data Resource_SSM_Document' s = Resource_SSM_Document
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SSM_Document' n s = SSM_Document
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Document')
 
--- $(TH.makeResource ''SSM_Document' ''AWS)
 
+data Resource_SSM_Maintenance_Window' s = Resource_SSM_Maintenance_Window
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SSM_Maintenance_Window' n s = SSM_Maintenance_Window
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Maintenance_Window')
 
--- $(TH.makeResource ''SSM_Maintenance_Window' ''AWS)
 
+data Resource_SSM_Maintenance_Window_Target' s = Resource_SSM_Maintenance_Window_Target
+    { meta :: !Meta
+    } deriving(Generic)
 
--- data SSM_Maintenance_Window_Target' n s = SSM_Maintenance_Window_Target
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Maintenance_Window_Target')
 
--- $(TH.makeResource ''SSM_Maintenance_Window_Target' ''AWS)
+data Resource_SSM_Maintenance_Window_Task' s = Resource_SSM_Maintenance_Window_Task
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Maintenance_Window_Task')
 
--- data SSM_Maintenance_Window_Task' n s = SSM_Maintenance_Window_Task
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''SSM_Maintenance_Window_Task' ''AWS)
+data Resource_SSM_Patch_Baseline' s = Resource_SSM_Patch_Baseline
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Patch_Baseline')
 
--- data SSM_Patch_Baseline' n s = SSM_Patch_Baseline
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''SSM_Patch_Baseline' ''AWS)
+data Resource_SSM_Patch_Group' s = Resource_SSM_Patch_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Patch_Group')
 
--- data SSM_Patch_Group' n s = SSM_Patch_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''SSM_Patch_Group' ''AWS)
+data Resource_SSM_Parameter' s = Resource_SSM_Parameter
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_SSM_Parameter')
 
--- data SSM_Parameter' n s = SSM_Parameter
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''SSM_Parameter' ''AWS)
 
+-- SQS Resources
 
+data Resource_SQS_Queue' s = Resource_SQS_Queue
+    { meta :: !Meta
+    } deriving(Generic)
 
--- -- SQS Resources
+$(TH.makeResource "aws_" "meta" ''Resource_SQS_Queue')
 
--- data SQS_Queue' n s = SQS_Queue
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''SQS_Queue' ''AWS)
+data Resource_SQS_Queue_Policy' s = Resource_SQS_Queue_Policy
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_SQS_Queue_Policy')
 
--- data SQS_Queue_Policy' n s = SQS_Queue_Policy
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''SQS_Queue_Policy' ''AWS)
 
+-- VPC Resources
 
+data Resource_Customer_Gateway' s = Resource_Customer_Gateway
+    { meta :: !Meta
+    } deriving(Generic)
 
--- -- VPC Resources
+$(TH.makeResource "aws_" "meta" ''Resource_Customer_Gateway')
 
--- data Customer_Gateway' n s = Customer_Gateway
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''Customer_Gateway' ''AWS)
+data Resource_Default_Network_ACL' s = Resource_Default_Network_ACL
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_Default_Network_ACL')
 
--- data Default_Network_ACL' n s = Default_Network_ACL
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''Default_Network_ACL' ''AWS)
+data Resource_Default_Route_Table' s = Resource_Default_Route_Table
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_Default_Route_Table')
 
--- data Default_Route_Table' n s = Default_Route_Table
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''Default_Route_Table' ''AWS)
+data Resource_Default_Security_Group' s = Resource_Default_Security_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_Default_Security_Group')
 
--- data Default_Security_Group' n s = Default_Security_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''Default_Security_Group' ''AWS)
+data Resource_Default_Subnet' s = Resource_Default_Subnet
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_Default_Subnet')
 
--- data Default_Subnet' n s = Default_Subnet
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''Default_Subnet' ''AWS)
+data Resource_Default_VPC' s = Resource_Default_VPC
+    { meta :: !Meta
+    } deriving(Generic)
 
+$(TH.makeResource "aws_" "meta" ''Resource_Default_VPC')
 
--- data Default_VPC' n s = Default_VPC
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
 
--- $(TH.makeResource ''Default_VPC' ''AWS)
 
 
--- data Default_VPC_DHCP_Options' n s = Default_VPC_DHCP_Options
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Default_VPC_DHCP_Options' s = Resource_Default_VPC_DHCP_Options
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Default_VPC_DHCP_Options' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Default_VPC_DHCP_Options')
 
 
--- data Egress_Only_Internet_Gateway' n s = Egress_Only_Internet_Gateway
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Egress_Only_Internet_Gateway' s = Resource_Egress_Only_Internet_Gateway
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Egress_Only_Internet_Gateway' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Egress_Only_Internet_Gateway')
 
 
--- data Flow_Log' n s = Flow_Log
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Flow_Log' s = Resource_Flow_Log
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Flow_Log' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Flow_Log')
 
 
--- data Internet_Gateway' n s = Internet_Gateway
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Internet_Gateway' s = Resource_Internet_Gateway
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Internet_Gateway' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Internet_Gateway')
 
 
--- data Main_Route_Table_Association' n s = Main_Route_Table_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Main_Route_Table_Association' s = Resource_Main_Route_Table_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Main_Route_Table_Association' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Main_Route_Table_Association')
 
 
--- data Nat_Gateway' n s = Nat_Gateway
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Nat_Gateway' s = Resource_Nat_Gateway
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Nat_Gateway' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Nat_Gateway')
 
 
--- data Network_ACL' n s = Network_ACL
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Network_ACL' s = Resource_Network_ACL
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Network_ACL' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Network_ACL')
 
 
--- data Network_ACL_Rule' n s = Network_ACL_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Network_ACL_Rule' s = Resource_Network_ACL_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Network_ACL_Rule' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Network_ACL_Rule')
 
 
--- data Network_Interface' n s = Network_Interface
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Network_Interface' s = Resource_Network_Interface
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Network_Interface' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Network_Interface')
 
 
--- data Network_Interface_Attachment' n s = Network_Interface_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Network_Interface_Attachment' s = Resource_Network_Interface_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Network_Interface_Attachment' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Network_Interface_Attachment')
 
 
--- data Route' n s = Route
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Route' s = Resource_Route
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Route' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Route')
 
 
--- data Route_Table' n s = Route_Table
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Route_Table' s = Resource_Route_Table
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Route_Table' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Route_Table')
 
 
--- data Route_Table_Association' n s = Route_Table_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Route_Table_Association' s = Resource_Route_Table_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Route_Table_Association' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Route_Table_Association')
 
 
--- data Security_Group' n s = Security_Group
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Security_Group' s = Resource_Security_Group
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Security_Group' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Security_Group')
 
 
--- data Network_Interface_SG_Attachment' n s = Network_Interface_SG_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Network_Interface_SG_Attachment' s = Resource_Network_Interface_SG_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Network_Interface_SG_Attachment' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Network_Interface_SG_Attachment')
 
 
--- data Security_Group_Rule' n s = Security_Group_Rule
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Security_Group_Rule' s = Resource_Security_Group_Rule
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Security_Group_Rule' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Security_Group_Rule')
 
 
--- data Subnet' n s = Subnet
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_Subnet' s = Resource_Subnet
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''Subnet' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_Subnet')
 
 
--- data VPC' n s = VPC
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC' s = Resource_VPC
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC')
 
 
--- data VPC_DHCP_Options' n s = VPC_DHCP_Options
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC_DHCP_Options' s = Resource_VPC_DHCP_Options
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC_DHCP_Options' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC_DHCP_Options')
 
 
--- data VPC_DHCP_Options_Association' n s = VPC_DHCP_Options_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC_DHCP_Options_Association' s = Resource_VPC_DHCP_Options_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC_DHCP_Options_Association' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC_DHCP_Options_Association')
 
 
--- data VPC_Endpoint' n s = VPC_Endpoint
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC_Endpoint' s = Resource_VPC_Endpoint
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC_Endpoint' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC_Endpoint')
 
 
--- data VPC_Endpoint_Route_Table_Association' n s = VPC_Endpoint_Route_Table_Association
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC_Endpoint_Route_Table_Association' s = Resource_VPC_Endpoint_Route_Table_Association
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC_Endpoint_Route_Table_Association' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC_Endpoint_Route_Table_Association')
 
 
--- data VPC_Peering_Connection' n s = VPC_Peering_Connection
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC_Peering_Connection' s = Resource_VPC_Peering_Connection
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC_Peering_Connection' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC_Peering_Connection')
 
 
--- data VPC_Peering_Connection_Accepter' n s = VPC_Peering_Connection_Accepter
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPC_Peering_Connection_Accepter' s = Resource_VPC_Peering_Connection_Accepter
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPC_Peering_Connection_Accepter' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPC_Peering_Connection_Accepter')
 
 
--- data VPN_Connection' n s = VPN_Connection
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPN_Connection' s = Resource_VPN_Connection
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPN_Connection' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPN_Connection')
 
 
--- data VPN_Connection_Route' n s = VPN_Connection_Route
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPN_Connection_Route' s = Resource_VPN_Connection_Route
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPN_Connection_Route' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPN_Connection_Route')
 
 
--- data VPN_Gateway' n s = VPN_Gateway
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPN_Gateway' s = Resource_VPN_Gateway
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPN_Gateway' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPN_Gateway')
 
 
--- data VPN_Gateway_Attachment' n s = VPN_Gateway_Attachment
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPN_Gateway_Attachment' s = Resource_VPN_Gateway_Attachment
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPN_Gateway_Attachment' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPN_Gateway_Attachment')
 
 
--- data VPN_Gateway_Route_Propagation' n s = VPN_Gateway_Route_Propagation
---     { metadata :: !(Meta AWS)
---     } deriving (Generic)
+data Resource_VPN_Gateway_Route_Propagation' s = Resource_VPN_Gateway_Route_Propagation
+    { meta :: !Meta
+    } deriving(Generic)
 
--- $(TH.makeResource ''VPN_Gateway_Route_Propagation' ''AWS)
+$(TH.makeResource "aws_" "meta" ''Resource_VPN_Gateway_Route_Propagation')

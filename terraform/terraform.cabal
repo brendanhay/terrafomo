@@ -39,5 +39,7 @@ library
         , hcl
         , lens
         , text
-        , transformers
+        , mtl
         , template-haskell
+        , unordered-containers
+        , hashable
