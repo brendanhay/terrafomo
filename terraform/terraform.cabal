@@ -35,9 +35,9 @@ library
     build-depends:
           aeson
         , base >= 4.9 && < 5
-        , text
         , containers
         , hcl
+        , lens
+        , text
         , transformers
-        , ghc-prim
-        , vinyl
+        , template-haskell

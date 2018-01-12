@@ -1,6 +1,6 @@
-{-# LANGUAGE DataKinds        #-}
-{-# LANGUAGE OverloadedLists  #-}
-{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Terraform.Tutorial where
 
@@ -8,68 +8,26 @@ import Terraform.AWS
 
 import qualified Terraform.AWS.Resource as AWS
 
+-- Trivial Example:
+--
 -- > example1 :: Resource AWS.Instance "example1"
 -- > example1 =
--- >     resource $ def
+-- >     AWs.instance_
 -- >         { AWS.ami = "123"
--- >         }
---
--- The above type signature which also serves to name the resource, can be
--- omitted via the use of 'TypeApplications':
---
--- > {-# LANGUAGE TypeApplications #-}
--- >
--- > example1 =
--- >     resource @"example1" $ def
--- >         { AWS.ami = "123"
--- >         }
+-- >         } & dependsOn ...
 
-commonTags :: Text -> Text -> Text -> Tags
-commonTags name desc comp =
-    [ ("Name",        name)
-    , ("Description", desc)
-    , ("Component",   comp)
-    , ("Env",         "prod")
-    , ("Squad",       "Operations")
-    , ("Origin",      "http://github.com/taktinc/takt-infrastructure")
-    ]
-
-example1 :: Resource AWS.Instance n
-example1 =
-    resource $ def
-        { AWS.ami = "123"
-        }
-
-
---          , ("ami" (var "ami")
-
-        -- . block @"root_block_device" (
-        --       , ("volume_size" (var "volume_size")
-        --     . , ("volume_type" (var "volume_type")
-        --   )
-
-        -- . , ("subnet_id"            (var "subnet_id")
-        -- . , ("key_name"             (var "key_name")
-        -- . , ("iam_instance_profile" (var "iam_instance_profile")
-        -- . , ("user_data"            (var "user_data_id")
-
-        -- . block @"tags" tags
-
--- example2 :: Resource AWS _
--- example2 =
---     resource AWS.Route53_Record "record" $
---           , ("zone_id" (var "zone_id")
---         . , ("type" "A"
---         . , ("ttl" 3600
-
---         . , ("name" (format("%s-%d", refer @"instance_id" example1))
-
---         . , ("records"
---             [ refer @"private_ip" example1
---             ]
-
-
-
+-- data Arch = AMD64
+-- data Distro = Zesty
+-- ubuntu
+--     :: AWS.Region
+--     -> Arch
+--     -> Distro
+--     -> AWS.VirtualizationType
+--     -> AWS.DeviceType
+--     -> AMI
+-- ubuntu region arch distro virt device =
+--      case (arch, distro, region, virt, device) of
+--          (AMD64, Zesty, )
 
 -- Observations:
 --
@@ -82,3 +40,80 @@ example1 =
 --
 -- * Output variables may need special handling similar to this previous
 -- * approach for variables.
+
+-- Questions:
+--
+-- * output variables
+--
+-- * reusing amazonka types - worth the compile time/dependency overhead?
+--
+-- * drop having to use a type-level name at all
+--     - names should be stable + auto-generated? can this be hidden from the user?
+--     -- the names need to be unique and deterministic, so ..
+--
+-- * answer the question 'what region is this resource being created in?' and similar.
+--    have these overridable on the resource, but if they're unset then nothing is emitted.
+--
+-- * provider modifications via Reader.local ?
+--
+-- * provider aliases
+
+
+-- Equivalent to: @provider "aws" { alias = "west" }@
+-- west :: AWS
+-- west = AWS.provider
+--     { AWS.region = AWS.Ireland
+--     }
+
+common :: Tags
+common =
+    [ ("Name",        "foo")
+    , ("Description", "bar")
+    , ("Component",   "baz")
+    , ("Env",         "prod")
+    , ("Squad",       "Operations")
+    , ("Origin",      "http://github.com/taktinc/takt-infrastructure")
+    ]
+
+-- newtype Resource' m a = Resource' (ReaderT (Meta AWS) m a)
+
+-- bucket :: Resource AWS.S3_Bucket "foo"
+-- bucket = undefined
+
+instance_
+    :: AWS.Security_Group n
+    -> AWS.Instance "instance"
+instance_ sg =
+    def { AWS.ami = "123"
+
+        -- , AWS.root_block_device =
+        --       def { volume_size = 123
+        --           , volume_type = AWS.VTIO1
+        --           }
+
+        -- , AWS.tags = common
+
+        -- , AWS.subnet_id            =
+        -- , AWS.key_name             =
+        -- , AWS.iam_instance_profile =
+
+        -- , AWS.user_data = "foo"
+
+        -- , AWS.vpc_security_group_ids =
+        --     [ output sg "access_sg_id"
+        --     -- , ... "${compact(split(",", var.security_groups))}"
+        --     ]
+        }
+
+-- record
+--     :: Resource AWS.Instance n
+--     -> Resource AWS.Route53_Record "instancerecord"
+-- record i =
+--     def { AWS.zone_id = "HKZ123123432"
+--         , AWS.name    =
+--         , AWS.type    = "A"
+--         , AWS.ttl     = 3600
+--         , AWS.records =
+--             [ output i "private_ip"
+--             ]
+--         } & dependsOn i

@@ -16,10 +16,11 @@ module Terraform.Prelude
     , module Terraform.Syntax
 
     -- * Re-exported Types
+    , Natural
     , Map
     , Text
 
-    -- , (Prelude.&)
+    , (Prelude.&)
     -- , (Prelude.$)
     -- , (Prelude..)
     -- , Prelude.Bool  (..)
@@ -30,16 +31,16 @@ module Terraform.Prelude
 
 -- import Prelude ((.))
 
-import Data.Bool       (Bool (..))
+-- import Data.Bool       (Bool (..))
 import Data.Map.Strict (Map)
 import Data.Text       (Text)
-import Data.Void       (Void)
+-- import Data.Void       (Void)
 
 import Numeric.Natural (Natural)
 
 import Terraform.Syntax
 
--- import qualified Data.Function as Prelude
+import qualified Data.Function as Prelude
 -- import qualified Prelude       as Prelude
 
 -- FIXME: Rename Expr -> HCL
