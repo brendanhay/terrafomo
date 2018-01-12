@@ -1,4 +1,7 @@
-image: registry.gitlab.fpcomplete.com/fpco/default-build-image:7
+image: haskell:latest
+
+variables:
+  STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
 
 cache:
   key: "$CI_BUILD_NAME"
@@ -12,12 +15,13 @@ cache:
     - provider/terrafomo-google/.stack-work
 # END GENERATED
 
-stages:
-  # - generate
-  - build
+before_script:
+  - apt-get update && apt-get install xz-utils make
+  - stack setup
+  - stack install --only-dependencies
 
-variables:
-    STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
+stages:
+  - build
 
 build:
   stage: build

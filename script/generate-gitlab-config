@@ -10,7 +10,7 @@ libraries=( $(${dir}/list-packages) )
 output=""
 
 if [ ${#libraries[@]} -ne 0 ]; then
-    output=$output$(printf '    - %s/.stack-work\\n' "${libraries[@]}")
+    output=$output$(printf '    - %s/.stack-work/\\n' "${libraries[@]}")
 fi
 
 if [ "${output}" != "" ]; then
