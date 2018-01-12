@@ -2,51 +2,51 @@ arguments:
 - required: false
   help: (Optional) The allocation ID. This is required for EC2-VPC.
   name: allocation_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Boolean) Whether to allow an Elastic IP to be re-associated. Defaults
     to  true  in VPC.
   name: allow_reassociation
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The ID of the instance. This is required for EC2-Classic. For EC2-VPC,
     you can specify either the instance ID or the network interface ID, but not both.
     The operation fails if you specify an instance ID unless exactly one network interface
     is attached.
   name: instance_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The ID of the network interface. If the instance has more than
     one network interface, you must specify a network interface ID.
   name: network_interface_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The primary or secondary private IP address to associate with the
     Elastic IP address. If no private IP address is specified, the Elastic IP address
     is associated with the primary private IP address.
   name: private_ip_address
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The Elastic IP address. This is required for EC2-Classic.
   name: public_ip
-  type: Attr Text
+  type: Text
 name: aws_eip_association
 attributes:
 - help: As above
   name: allocation_id
-  type: Attr Text
+  type: Text
 - help: The ID that represents the association of the Elastic IP address with an instance.
   name: association_id
-  type: Attr Text
+  type: Text
 - help: As above
   name: instance_id
-  type: Attr Text
+  type: Text
 - help: As above
   name: network_interface_id
-  type: Attr Text
+  type: Text
 - help: As above
   name: private_ip_address
-  type: Attr Text
+  type: Text
 - help: As above
   name: public_ip
-  type: Attr Text
+  type: Text

@@ -5,13 +5,13 @@ arguments:
     body structure in the  https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
     .
   name: dashboard_body
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the dashboard.
   name: dashboard_name
-  type: Attr Text
+  type: Text
 name: aws_cloudwatch_dashboard
 attributes:
 - help: The Amazon Resource Name (ARN) of the dashboard.
   name: dashboard_arn
-  type: Attr Text
+  type: Text

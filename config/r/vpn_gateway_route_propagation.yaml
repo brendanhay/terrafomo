@@ -2,10 +2,10 @@ arguments:
 - required: true
   help: ! ' - The id of the  aws_route_table  to propagate routes into.'
   name: route_table_id
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' - The id of the  aws_vpn_gateway  to propagate routes from.'
   name: vpn_gateway_id
-  type: Attr Text
+  type: Text
 name: aws_vpn_gateway_route_propagation
 attributes: []

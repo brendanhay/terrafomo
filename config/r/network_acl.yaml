@@ -2,30 +2,30 @@ arguments:
 - required: false
   help: (Optional) Specifies an egress rule. Parameters defined below.
   name: egress
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Specifies an ingress rule. Parameters defined below.
   name: ingress
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Deprecated) The ID of the associated Subnet. This attribute is
     deprecated, please use the  subnet_ids  attribute instead
   name: subnet_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of Subnet IDs to apply the ACL to
   name: subnet_ids
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID of the associated VPC.
   name: vpc_id
-  type: Attr Text
+  type: Text
 name: aws_network_acl
 attributes:
 - help: The ID of the network ACL
   name: id
-  type: Attr Text
+  type: Text

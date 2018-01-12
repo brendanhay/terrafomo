@@ -2,39 +2,39 @@ arguments:
 - required: false
   help: (Optional) A description of what the snapshot is.
   name: description
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the snapshot
   name: tags
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The Volume ID of which to make a snapshot.
   name: volume_id
-  type: Attr Text
+  type: Text
 name: aws_ebs_snapshot
 attributes:
 - help: The data encryption key identifier for the snapshot.
   name: data_encryption_key_id
-  type: Attr Text
+  type: Text
 - help: Whether the snapshot is encrypted.
   name: encrypted
-  type: Attr Text
+  type: Text
 - help: The snapshot ID (e.g. snap-59fcb34e).
   name: id
-  type: Attr Text
+  type: Text
 - help: The ARN for the KMS encryption key.
   name: kms_key_id
-  type: Attr Text
+  type: Text
 - help: Value from an Amazon-maintained list ( amazon ,  aws-marketplace ,  microsoft
     ) of snapshot owners.
   name: owner_alias
-  type: Attr Text
+  type: Text
 - help: The AWS account ID of the EBS snapshot owner.
   name: owner_id
-  type: Attr Text
+  type: Text
 - help: A mapping of tags for the snapshot.
   name: tags
-  type: Attr Text
+  type: Text
 - help: The size of the drive in GiBs.
   name: volume_size
-  type: Attr Text
+  type: Text

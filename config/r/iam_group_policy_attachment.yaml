@@ -2,10 +2,10 @@ arguments:
 - required: true
   help: ! "\t\t(Required) - The group the policy should be applied to"
   name: group
-  type: Attr Text
+  type: Text
 - required: true
   help: ! "\t(Required) - The ARN of the policy you want to apply"
   name: policy_arn
-  type: Attr Text
+  type: Text
 name: aws_iam_group_policy_attachment
 attributes: []

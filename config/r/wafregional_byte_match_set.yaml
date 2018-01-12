@@ -4,13 +4,13 @@ arguments:
     that corresponds with ASCII characters) that you want AWS WAF to search for in
     web requests. ByteMatchTuple documented below.
   name: byte_match_tuple
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name or description of the ByteMatchSet.
   name: name
-  type: Attr Text
+  type: Text
 name: aws_wafregional_byte_match_set
 attributes:
 - help: The ID of the WAF ByteMatchSet.
   name: id
-  type: Attr Text
+  type: Text

@@ -2,9 +2,9 @@ arguments:
 - required: true
   help: (Required) The name of the SimpleDB domain
   name: name
-  type: Attr Text
+  type: Text
 name: aws_simpledb_domain
 attributes:
 - help: The name of the SimpleDB domain
   name: id
-  type: Attr Text
+  type: Text

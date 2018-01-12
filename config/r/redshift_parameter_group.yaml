@@ -3,21 +3,21 @@ arguments:
   help: (Optional) The description of the Redshift parameter group. Defaults to "Managed
     by Terraform".
   name: description
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The family of the Redshift parameter group.
   name: family
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the Redshift parameter group.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of Redshift parameters to apply.
   name: parameter
-  type: Attr Text
+  type: Text
 name: aws_redshift_parameter_group
 attributes:
 - help: The Redshift parameter group name.
   name: id
-  type: Attr Text
+  type: Text

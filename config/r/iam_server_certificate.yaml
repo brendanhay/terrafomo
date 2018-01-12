@@ -3,41 +3,41 @@ arguments:
   help: ! ' – (Required) The contents of the public key certificate in PEM-encoded
     format.'
   name: certificate_body
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' – (Optional) The contents of the certificate chain. This is typically
     a concatenation of the PEM-encoded public key certificates of the chain.'
   name: certificate_chain
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The name of the Server Certificate. Do not include the path in
     this value. If omitted, Terraform will assign a random, unique name.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
     with  name .
   name: name_prefix
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The IAM path for the server certificate.  If it is not included,
     it defaults to a slash (/). If this certificate is for use with AWS CloudFront,
     the path must be in format  /cloudfront/your_path_here . See  https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html  for
     more details on IAM Paths.
   name: path
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' – (Required) The contents of the private key in PEM-encoded format.'
   name: private_key
-  type: Attr Text
+  type: Text
 name: aws_iam_server_certificate
 attributes:
 - help: The Amazon Resource Name (ARN) specifying the server certificate.
   name: arn
-  type: Attr Text
+  type: Text
 - help: The unique Server Certificate name
   name: id
-  type: Attr Text
+  type: Text
 - help: The name of the Server Certificate
   name: name
-  type: Attr Text
+  type: Text

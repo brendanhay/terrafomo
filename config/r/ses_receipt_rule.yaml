@@ -2,58 +2,58 @@ arguments:
 - required: false
   help: (Optional) A list of Add Header Action blocks. Documented below.
   name: add_header_action
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The name of the rule to place this rule after
   name: after
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of Bounce Action blocks. Documented below.
   name: bounce_action
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) If true, the rule will be enabled
   name: enabled
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of Lambda Action blocks. Documented below.
   name: lambda_action
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the rule
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of email addresses
   name: recipients
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the rule set
   name: rule_set_name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of S3 Action blocks. Documented below.
   name: s3_action
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) If true, incoming emails will be scanned for spam and viruses
   name: scan_enabled
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of SNS Action blocks. Documented below.
   name: sns_action
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of Stop Action blocks. Documented below.
   name: stop_action
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Require or Optional
   name: tls_policy
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of WorkMail Action blocks. Documented below.
   name: workmail_action
-  type: Attr Text
+  type: Text
 name: aws_ses_receipt_rule
 attributes: []

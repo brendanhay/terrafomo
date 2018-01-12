@@ -3,44 +3,44 @@ arguments:
   help: ! '(Optional) A list of applications for the cluster. Valid values are:  Flink
     ,  Hadoop ,  Hive ,  Mahout ,  Pig , and  Spark . Case insensitive'
   name: applications
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) An IAM role for automatic scaling policies. The IAM role provides
     permissions that the automatic scaling feature requires to launch and terminate
     EC2 instances in an instance group.
   name: autoscaling_role
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) List of bootstrap actions that will be run before Hadoop is started
     on the cluster nodes. Defined below
   name: bootstrap_action
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) List of configurations supplied for the EMR cluster you are creating
   name: configurations
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Number of Amazon EC2 instances used to execute the job flow. EMR
     will use one node as the cluster's master node and use the remainder of the nodes
     ( core_instance_count -1) as core nodes. Cannot be specified if  instance_groups  is
     set. Default  1
   name: core_instance_count
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The EC2 instance type of the slave nodes. Cannot be specified if  instance_groups  is
     set
   name: core_instance_type
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Size in GiB of the EBS root device volume of the Linux AMI that
     is used for each EC2 instance. Available in Amazon EMR version 4.x and later.
   name: ebs_root_volume_size
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Attributes for the EC2 instances running the job flow. Defined
     below
   name: ec2_attributes
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of  instance_group  objects for each instance group in the
     cluster. Exactly one of  master_instance_type  and  instance_group  must be specified.
@@ -48,101 +48,101 @@ arguments:
     least the  MASTER  instance group type (as well as any additional instance groups).
     Defined below
   name: instance_group
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Switch on/off run cluster with no steps or when all steps are complete
     (default is on)
   name: keep_job_flow_alive_when_no_steps
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) S3 bucket to write the log files of the job flow. If a value is
     not provided, logs are not created
   name: log_uri
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The EC2 instance type of the master node. Exactly one of  master_instance_type  and  instance_group  must
     be specified.
   name: master_instance_type
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the job flow
   name: name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The release label for the Amazon EMR release
   name: release_label
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The security configuration name to attach to the EMR cluster. Only
     valid for EMR clusters with  release_label  4.8.0 or greater
   name: security_configuration
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) IAM role that will be assumed by the Amazon EMR service to access
     AWS resources
   name: service_role
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) list of tags to apply to the EMR Cluster
   name: tags
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Switch on/off termination protection (default is off)
   name: termination_protection
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Whether the job flow is visible to all IAM users of the AWS account
     associated with the job flow. Default  true
   name: visible_to_all_users
-  type: Attr Text
+  type: Text
 name: aws_emr_cluster
 attributes:
 - help: The applications installed on this cluster.
   name: applications
-  type: Attr Text
+  type: Text
 - help: A list of bootstrap actions that will be run before Hadoop is started on the
     cluster nodes.
   name: bootstrap_action
-  type: Attr Text
+  type: Text
 - help: The list of Configurations supplied to the EMR cluster.
   name: configurations
-  type: Attr Text
+  type: Text
 - help: ! ' The number of slave nodes, i.e. EC2 instance nodes.'
   name: core_instance_count
-  type: Attr Text
+  type: Text
 - help: The EC2 instance type of the slave nodes.
   name: core_instance_type
-  type: Attr Text
+  type: Text
 - help: ! 'Provides information about the EC2 instances in a cluster grouped by category:
     key name, subnet ID, IAM instance profile, and so on.'
   name: ec2_attributes
-  type: Attr Text
+  type: Text
 - help: The ID of the EMR Cluster
   name: id
-  type: Attr Text
+  type: Text
 - help: The path to the Amazon S3 location where logs for this cluster are stored.
   name: log_uri
-  type: Attr Text
+  type: Text
 - help: The EC2 instance type of the master node.
   name: master_instance_type
-  type: Attr Text
+  type: Text
 - help: The public DNS name of the master EC2 instance.
   name: master_public_dns
-  type: Attr Text
+  type: Text
 - help: The name of the cluster.
   name: name
-  type: Attr Text
+  type: Text
 - help: The release label for the Amazon EMR release.
   name: release_label
-  type: Attr Text
+  type: Text
 - help: The IAM role that will be assumed by the Amazon EMR service to access AWS
     resources on your behalf.
   name: service_role
-  type: Attr Text
+  type: Text
 - help: The list of tags associated with a cluster.
   name: tags
-  type: Attr Text
+  type: Text
 - help: Indicates whether the job flow is visible to all IAM users of the AWS account
     associated with the job flow.
   name: visible_to_all_users
-  type: Attr Text
+  type: Text

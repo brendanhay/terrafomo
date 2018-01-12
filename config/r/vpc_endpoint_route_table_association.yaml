@@ -2,14 +2,14 @@ arguments:
 - required: true
   help: (Required) The ID of the routing table to be associated with the VPC endpoint.
   name: route_table_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID of the VPC endpoint with which the routing table will be
     associated.
   name: vpc_endpoint_id
-  type: Attr Text
+  type: Text
 name: aws_vpc_endpoint_route_table_association
 attributes:
 - help: The ID of the association.
   name: id
-  type: Attr Text
+  type: Text

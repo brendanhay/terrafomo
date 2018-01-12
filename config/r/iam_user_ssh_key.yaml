@@ -4,27 +4,27 @@ arguments:
     To retrieve the public key in ssh-rsa format, use SSH . To retrieve the public
     key in PEM format, use PEM .
   name: encoding
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The SSH public key. The public key must be encoded in ssh-rsa format
     or PEM format.
   name: public_key
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The status to assign to the SSH public key. Active means the key
     can be used for authentication with an AWS CodeCommit repository. Inactive means
     the key cannot be used. Default is  active .
   name: status
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the IAM user to associate the SSH public key with.
   name: username
-  type: Attr Text
+  type: Text
 name: aws_iam_user_ssh_key
 attributes:
 - help: The MD5 message digest of the SSH public key.
   name: fingerprint
-  type: Attr Text
+  type: Text
 - help: The unique identifier for the SSH public key.
   name: ssh_public_key_id
-  type: Attr Text
+  type: Text

@@ -4,13 +4,13 @@ arguments:
     characters) that you want to search for in web requests, the location in requests
     that you want to search, and other settings.'
   name: byte_match_tuples
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name or description of the Byte Match Set.
   name: name
-  type: Attr Text
+  type: Text
 name: aws_waf_byte_match_set
 attributes:
 - help: The ID of the WAF Byte Match Set.
   name: id
-  type: Attr Text
+  type: Text

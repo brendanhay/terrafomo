@@ -2,24 +2,24 @@ arguments:
 - required: true
   help: (Required) The Amazon States Language definition of the state machine.
   name: definition
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the state machine.
   name: name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The Amazon Resource Name (ARN) of the IAM role to use for this
     state machine.
   name: role_arn
-  type: Attr Text
+  type: Text
 name: sfn_state_machine
 attributes:
 - help: The date the state machine was created.
   name: creation_date
-  type: Attr Text
+  type: Text
 - help: The ARN of the state machine.
   name: id
-  type: Attr Text
+  type: Text
 - help: The current status of the state machine. Either "ACTIVE" or "DELETING".
   name: status
-  type: Attr Text
+  type: Text

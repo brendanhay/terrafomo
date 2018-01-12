@@ -2,74 +2,74 @@ arguments:
 - required: true
   help: ! ' - Define an attribute, has two properties:'
   name: attribute
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Describe a GSO for the table; subject to the normal limits on the
     number of GSIs, projected attributes, etc.
   name: global_secondary_index
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required, Forces new resource) The attribute to use as the hash key (the
     attribute must also be defined as an attribute record
   name: hash_key
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Forces new resource) Describe an LSI on the table; these can only
     be allocated   so you cannot change this definition after you have created the
     resource.
   name: local_secondary_index
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the table, this needs to be unique within a region.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Forces new resource) The attribute to use as the range key (must
     also be defined)
   name: range_key
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The number of read units for this table
   name: read_capacity
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Indicates whether Streams are to be enabled (true) or disabled
     (false).
   name: stream_enabled
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) When an item in the table is modified, StreamViewType determines
     what information is written to the table's stream. Valid values are KEYS_ONLY,
     NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
   name: stream_view_type
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A map of tags to populate on the created table.
   name: tags
-  type: Attr Text
+  type: Text
 - required: false
   help: ! '(Optional) Defines ttl, has two properties, and can only be specified once:'
   name: ttl
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The number of write units for this table
   name: write_capacity
-  type: Attr Text
+  type: Text
 name: aws_dynamodb_table
 attributes:
 - help: The arn of the table
   name: arn
-  type: Attr Text
+  type: Text
 - help: The name of the table
   name: id
-  type: Attr Text
+  type: Text
 - help: The ARN of the Table Stream. Only available when  stream_enabled = true
   name: stream_arn
-  type: Attr Text
+  type: Text
 - help: A timestamp, in ISO 8601 format, for this stream. Note that this timestamp
     is not a unique identifier for the stream on its own. However, the combination
     of AWS customer ID, table name and this field is guaranteed to be unique. It can
     be used for creating CloudWatch Alarms. Only available when  stream_enabled =
     true
   name: stream_label
-  type: Attr Text
+  type: Text

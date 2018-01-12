@@ -2,32 +2,32 @@ arguments:
 - required: true
   help: (Required) The Allocation ID of the Elastic IP address for the gateway.
   name: allocation_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The Subnet ID of the subnet in which to place the gateway.
   name: subnet_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 name: aws_nat_gateway
 attributes:
 - help: The Allocation ID of the Elastic IP address for the gateway.
   name: allocation_id
-  type: Attr Text
+  type: Text
 - help: The ID of the NAT Gateway.
   name: id
-  type: Attr Text
+  type: Text
 - help: The ENI ID of the network interface created by the NAT gateway.
   name: network_interface_id
-  type: Attr Text
+  type: Text
 - help: The private IP address of the NAT Gateway.
   name: private_ip
-  type: Attr Text
+  type: Text
 - help: The public IP address of the NAT Gateway.
   name: public_ip
-  type: Attr Text
+  type: Text
 - help: The Subnet ID of the subnet in which the NAT gateway is placed.
   name: subnet_id
-  type: Attr Text
+  type: Text

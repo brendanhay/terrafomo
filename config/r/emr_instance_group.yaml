@@ -3,40 +3,40 @@ arguments:
   help: ! ' (Required) ID of the EMR Cluster to attach to. Changing this forces a
     new resource to be created.'
   name: cluster_id
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' (Optional) One or more  ebs_config  blocks as defined below. Changing
     this forces a new resource to be created.'
   name: ebs_config
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' (Optional) Indicates whether an Amazon EBS volume is EBS-optimized. Changing
     this forces a new resource to be created.'
   name: ebs_optimized
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' (Optional) Target number of instances for the instance group. Defaults
     to 0.'
   name: instance_count
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' (Required) The EC2 instance type for all instances in the instance group.
     Changing this forces a new resource to be created.'
   name: instance_type
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' (Required) Human friendly name given to the instance group. Changing this
     forces a new resource to be created.'
   name: name
-  type: Attr Text
+  type: Text
 name: aws_emr_instance_group
 attributes:
 - help: The EMR Instance ID
   name: id
-  type: Attr Text
+  type: Text
 - help: ! ' The number of instances currently running in this instance group.'
   name: running_instance_count
-  type: Attr Text
+  type: Text
 - help: ! ' The current status of the instance group.'
   name: status
-  type: Attr Text
+  type: Text

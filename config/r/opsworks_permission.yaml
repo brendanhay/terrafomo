@@ -3,27 +3,27 @@ arguments:
   help: (Optional) Whether the user is allowed to use SSH to communicate with the
     instance
   name: allow_ssh
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Whether the user is allowed to use sudo to elevate privileges
   name: allow_sudo
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The users permission level. Mus be one of  deny ,  show ,  deploy
     ,  manage ,  iam_only
   name: level
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The stack to set the permissions for
   name: stack_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The user's IAM ARN to set permissions for
   name: user_arn
-  type: Attr Text
+  type: Text
 name: aws_opsworks_permission
 attributes:
 - help: The computed id of the permission. Please note that this is only used internally
     to identify the permission. This value is not used in aws.
   name: id
-  type: Attr Text
+  type: Text

@@ -2,13 +2,13 @@ arguments:
 - required: true
   help: ! ' - (required) An AWS Account ID to add create volume permissions'
   name: account_id
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' - (required) A snapshot ID'
   name: snapshot_id
-  type: Attr Text
+  type: Text
 name: aws_snapshot_create_volume_permission
 attributes:
 - help: A combination of " snapshot_id - account_id ".
   name: id
-  type: Attr Text
+  type: Text

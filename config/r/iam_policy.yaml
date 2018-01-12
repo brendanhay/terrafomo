@@ -2,45 +2,45 @@ arguments:
 - required: false
   help: (Optional) Description of the IAM policy.
   name: description
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Forces new resource) The name of the policy. If omitted, Terraform
     will assign a random, unique name.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Forces new resource) Creates a unique name beginning with the specified
     prefix. Conflicts with  name .
   name: name_prefix
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, default "/") Path in which to create the policy. See  https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html  for
     more information.
   name: path
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The policy document. This is a JSON formatted string. The heredoc
     syntax,  file  function, or the  /docs/providers/aws/d/iam_policy_document.html
     are all helpful here.
   name: policy
-  type: Attr Text
+  type: Text
 name: aws_iam_policy
 attributes:
 - help: The ARN assigned by AWS to this policy.
   name: arn
-  type: Attr Text
+  type: Text
 - help: The description of the policy.
   name: description
-  type: Attr Text
+  type: Text
 - help: The policy's ID.
   name: id
-  type: Attr Text
+  type: Text
 - help: The name of the policy.
   name: name
-  type: Attr Text
+  type: Text
 - help: The path of the policy in IAM.
   name: path
-  type: Attr Text
+  type: Text
 - help: The policy document.
   name: policy
-  type: Attr Text
+  type: Text

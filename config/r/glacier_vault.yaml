@@ -4,26 +4,26 @@ arguments:
     syntax or  file  function is helpful here. Use the  https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html  for
     more information on Glacier Vault Policy
   name: access_policy
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the Vault. Names can be between 1 and 255 characters
     long and the valid characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen),
     and '.' (period).
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The notifications for the Vault. Fields documented below.
   name: notification
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 name: aws_glacier_vault
 attributes:
 - help: The ARN of the vault.
   name: arn
-  type: Attr Text
+  type: Text
 - help: The URI of the vault that was created.
   name: location
-  type: Attr Text
+  type: Text

@@ -4,31 +4,31 @@ arguments:
     provided as a single valid JSON document. This parameter is required if the  type  parameter
     is  container .
   name: container_properties
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) Specifies the name of the job definition.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Specifies the parameter substitution placeholders to set in the
     job definition.
   name: parameters
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Specifies the retry strategy to use for failed jobs that are submitted
     with this job definition. Maximum number of  retry_strategy  is  1 .  Defined
     below.
   name: retry_strategy
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The type of job definition.  Must be  container
   name: type
-  type: Attr Text
+  type: Text
 name: aws_batch_job_definition
 attributes:
 - help: The Amazon Resource Name of the job definition.
   name: arn
-  type: Attr Text
+  type: Text
 - help: The revision of the job definition.
   name: revision
-  type: Attr Text
+  type: Text

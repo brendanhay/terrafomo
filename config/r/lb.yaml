@@ -2,78 +2,78 @@ arguments:
 - required: false
   help: (Optional) An Access Logs block. Access Logs documented below.
   name: access_logs
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) If true, deletion of the load balancer will be disabled via the
     AWS API. This will prevent Terraform from deleting the load balancer. Defaults
     to  false .
   name: enable_deletion_protection
-  type: Attr Text
+  type: Text
 - required: false
   help: ! '(Optional) The time in seconds that the connection is allowed to be idle.
     Default: 60.'
   name: idle_timeout
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) If true, the LB will be internal.
   name: internal
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The type of IP addresses used by the subnets for your load balancer.
     The possible values are  ipv4  and  dualstack
   name: ip_address_type
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The type of load balancer to create. Possible values are  application  or  network
     . The default value is  application .
   name: load_balancer_type
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The name of the LB. This name must be unique within your AWS account,
     can have a maximum of 32 characters, must contain only alphanumeric characters
     or hyphens, and must not begin or end with a hyphen. If not specified, Terraform
     will autogenerate a name beginning with  tf-lb .
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
     with  name .
   name: name_prefix
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of security group IDs to assign to the LB.
   name: security_groups
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A subnet mapping block as documented below.
   name: subnet_mapping
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of subnet IDs to attach to the LB.
   name: subnets
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 name: aws_lb
 attributes:
 - help: The ARN of the load balancer (matches  id ).
   name: arn
-  type: Attr Text
+  type: Text
 - help: The ARN suffix for use with CloudWatch Metrics.
   name: arn_suffix
-  type: Attr Text
+  type: Text
 - help: The canonical hosted zone ID of the load balancer.
   name: canonical_hosted_zone_id
-  type: Attr Text
+  type: Text
 - help: The DNS name of the load balancer.
   name: dns_name
-  type: Attr Text
+  type: Text
 - help: The ARN of the load balancer (matches  arn ).
   name: id
-  type: Attr Text
+  type: Text
 - help: The canonical hosted zone ID of the load balancer (to be used in a Route 53
     Alias record).
   name: zone_id
-  type: Attr Text
+  type: Text

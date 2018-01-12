@@ -2,13 +2,13 @@ arguments:
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The VPC ID to create in.
   name: vpc_id
-  type: Attr Text
+  type: Text
 name: aws_internet_gateway
 attributes:
 - help: The ID of the Internet Gateway.
   name: id
-  type: Attr Text
+  type: Text

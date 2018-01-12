@@ -3,28 +3,28 @@ arguments:
   help: (Required) The name or description for the Amazon CloudWatch metric of this
     rule.
   name: metric_name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name or description of the rule.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet,
     or XssMatchSet objects to include in a rule.
   name: predicates
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) Valid value is IP.
   name: rate_key
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The maximum number of requests, which have an identical value in
     the field specified by the RateKey, allowed in a five-minute period. Minimum value
     is 2000.
   name: rate_limit
-  type: Attr Text
+  type: Text
 name: aws_waf_rate_based_rule
 attributes:
 - help: The ID of the WAF rule.
   name: id
-  type: Attr Text
+  type: Text

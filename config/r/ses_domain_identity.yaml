@@ -2,12 +2,12 @@ arguments:
 - required: true
   help: (Required) The domain name to assign to SES
   name: domain
-  type: Attr Text
+  type: Text
 name: aws_ses_domain_identity
 attributes:
 - help: The ARN of the domain identity.
   name: arn
-  type: Attr Text
+  type: Text
 - help: A code which when added to the domain as a TXT record will signal to SES that
     the owner of the domain has authorised SES to act on their behalf. The domain
     identity will be in state "verification pending" until this is done. See below
@@ -16,4 +16,4 @@ attributes:
     SES in the  http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
     .
   name: verification_token
-  type: Attr Text
+  type: Text

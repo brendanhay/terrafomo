@@ -2,6 +2,6 @@ arguments:
 - required: true
   help: (Required) The name of the configuration set
   name: name
-  type: Attr Text
+  type: Text
 name: aws_ses_configuration_set
 attributes: []

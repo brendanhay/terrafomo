@@ -3,13 +3,13 @@ arguments:
   help: (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address
     range (in CIDR format) that web requests originate from.
   name: ip_set_descriptors
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name or description of the IPSet.
   name: name
-  type: Attr Text
+  type: Text
 name: aws_waf_ipset
 attributes:
 - help: The ID of the WAF IPSet.
   name: id
-  type: Attr Text
+  type: Text

@@ -4,39 +4,39 @@ arguments:
     Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options
     to be set for the VPC that accepts the peering connection (a maximum of one).'
   name: accepter
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Accept the peering (both VPCs need to be in the same AWS account).
   name: auto_accept
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The AWS account ID of the owner of the peer VPC. Defaults to the
     account ID the  /docs/providers/aws/index.html  is currently connected to.
   name: peer_owner_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID of the VPC with which you are creating the VPC Peering Connection.
   name: peer_vpc_id
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' (Optional) - A optional configuration block that allows for [VPC Peering
     Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options
     to be set for the VPC that requests the peering connection (a maximum of one).'
   name: requester
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID of the requester VPC.
   name: vpc_id
-  type: Attr Text
+  type: Text
 name: aws_vpc_peering_connection
 attributes:
 - help: The status of the VPC Peering Connection request.
   name: accept_status
-  type: Attr Text
+  type: Text
 - help: The ID of the VPC Peering Connection.
   name: id
-  type: Attr Text
+  type: Text

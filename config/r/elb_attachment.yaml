@@ -2,10 +2,10 @@ arguments:
 - required: true
   help: (Required) The name of the ELB.
   name: elb
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) Instance ID to place in the ELB pool.
   name: instance
-  type: Attr Text
+  type: Text
 name: aws_elb_attachment
 attributes: []

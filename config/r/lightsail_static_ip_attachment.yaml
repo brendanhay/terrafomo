@@ -2,19 +2,19 @@ arguments:
 - required: true
   help: (Required) The name of the Lightsail instance to attach the IP to
   name: instance_name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the allocated static IP
   name: static_ip_name
-  type: Attr Text
+  type: Text
 name: aws_lightsail_static_ip_attachment
 attributes:
 - help: The ARN of the Lightsail static IP
   name: arn
-  type: Attr Text
+  type: Text
 - help: The allocated static IP address
   name: ip_address
-  type: Attr Text
+  type: Text
 - help: The support code.
   name: support_code
-  type: Attr Text
+  type: Text

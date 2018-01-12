@@ -2,16 +2,16 @@ arguments:
 - required: true
   help: (Required) The ID of the VPC.
   name: vpc_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID of the Virtual Private Gateway.
   name: vpn_gateway_id
-  type: Attr Text
+  type: Text
 name: aws_vpn_gateway_attachment
 attributes:
 - help: The ID of the VPC that Virtual Private Gateway is attached to.
   name: vpc_id
-  type: Attr Text
+  type: Text
 - help: The ID of the Virtual Private Gateway.
   name: vpn_gateway_id
-  type: Attr Text
+  type: Text

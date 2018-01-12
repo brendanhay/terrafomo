@@ -3,13 +3,13 @@ arguments:
   help: (Optional) The IP address type and IP address range (in CIDR notation) from
     which web requests originate.
   name: ip_set_descriptor
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name or description of the IPSet.
   name: name
-  type: Attr Text
+  type: Text
 name: aws_wafregional_ipset
 attributes:
 - help: The ID of the WAF IPSet.
   name: id
-  type: Attr Text
+  type: Text

@@ -2,28 +2,28 @@ arguments:
 - required: true
   help: ! "\t\t(Optional) - The group(s) the policy should be applied to"
   name: groups
-  type: Attr Text
+  type: Text
 - required: true
   help: ! " \t\t(Required) - The name of the policy. This cannot be an empty string."
   name: name
-  type: Attr Text
+  type: Text
 - required: true
   help: ! "\t(Required) - The ARN of the policy you want to apply"
   name: policy_arn
-  type: Attr Text
+  type: Text
 - required: true
   help: ! "\t\t(Optional) - The role(s) the policy should be applied to"
   name: roles
-  type: Attr Text
+  type: Text
 - required: true
   help: ! "\t\t(Optional) - The user(s) the policy should be applied to"
   name: users
-  type: Attr Text
+  type: Text
 name: aws_iam_policy_attachment
 attributes:
 - help: The policy's ID.
   name: id
-  type: Attr Text
+  type: Text
 - help: The name of the policy.
   name: name
-  type: Attr Text
+  type: Text

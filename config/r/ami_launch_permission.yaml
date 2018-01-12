@@ -2,13 +2,13 @@ arguments:
 - required: true
   help: ! ' - (required) An AWS Account ID to add launch permissions.'
   name: account_id
-  type: Attr Text
+  type: Text
 - required: true
   help: ! ' - (required) A region-unique name for the AMI.'
   name: image_id
-  type: Attr Text
+  type: Text
 name: aws_ami_launch_permission
 attributes:
 - help: A combination of " image_id - account_id ".
   name: id
-  type: Attr Text
+  type: Text

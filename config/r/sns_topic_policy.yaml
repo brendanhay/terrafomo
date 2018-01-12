@@ -2,10 +2,10 @@ arguments:
 - required: true
   help: (Required) The ARN of the SNS topic
   name: arn
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The fully-formed AWS policy as JSON
   name: policy
-  type: Attr Text
+  type: Text
 name: aws_sns_topic_policy
 attributes: []

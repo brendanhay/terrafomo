@@ -2,11 +2,11 @@ arguments:
 - required: true
   help: (Required) The max capacity of the scalable target.
   name: max_capacity
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The min capacity of the scalable target.
   name: min_capacity
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The resource type and unique identifier string for the resource
     associated with the scalable target. For Amazon ECS services, this value is the
@@ -17,12 +17,12 @@ arguments:
     , the identifier is the Cluster Id and the Instance Group Id; for example,  instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0
     .
   name: resource_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ARN of the IAM role that allows Application AutoScaling to
     modify your scalable target on your behalf.
   name: role_arn
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The scalable dimension of the scalable target. The scalable dimension
     contains the service namespace, resource type, and scaling property, such as  ecs:service:DesiredCount  for
@@ -30,12 +30,12 @@ arguments:
     the target capacity of an Amazon EC2 Spot fleet request or elasticmapreduce:instancegroup:InstanceCount  for
     the Instance count of an EMR Cluster Instance Group.
   name: scalable_dimension
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The AWS service namespace of the scalable target. Valid values
     are  ecs  for Amazon ECS services,  ec2  Amazon EC2 Spot fleet requests and  elasticmapreduce  for
     Amazon EMR Clusters.
   name: service_namespace
-  type: Attr Text
+  type: Text
 name: aws_appautoscaling_target
 attributes: []

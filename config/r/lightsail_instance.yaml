@@ -4,27 +4,27 @@ arguments:
     time, must be in  us-east-1 ,  us-east-2 ,  us-west-2 ,  eu-west-1 ,  eu-west-2
     ,  eu-central-1 ,  ap-southeast-1 ,  ap-southeast-2 ,  ap-northeast-1 ,  ap-south-1  regions
   name: availability_zone
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID for a virtual private server image (see list below)
   name: blueprint_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The bundle of specification information (see list below)
   name: bundle_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of your key pair. Created in the Lightsail console (cannot
     use  aws_key_pair  at this time)
   name: key_pair_name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the Lightsail Instance
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) launch script to configure server with additional user data
   name: user_data
-  type: Attr Text
+  type: Text
 name: aws_lightsail_instance
 attributes: []

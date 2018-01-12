@@ -2,34 +2,34 @@ arguments:
 - required: true
   help: (Required) The application cookie whose lifetime the ELB's cookie should follow.
   name: cookie_name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The load balancer port to which the policy should be applied. This
     must be an active listener on the load balancer.
   name: lb_port
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of load balancer to which the policy should be attached.
   name: load_balancer
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the stickiness policy.
   name: name
-  type: Attr Text
+  type: Text
 name: aws_app_cookie_stickiness_policy
 attributes:
 - help: The application cookie whose lifetime the ELB's cookie should follow.
   name: cookie_name
-  type: Attr Text
+  type: Text
 - help: The ID of the policy.
   name: id
-  type: Attr Text
+  type: Text
 - help: The load balancer port to which the policy is applied.
   name: lb_port
-  type: Attr Text
+  type: Text
 - help: The name of load balancer to which the policy is attached.
   name: load_balancer
-  type: Attr Text
+  type: Text
 - help: The name of the stickiness policy.
   name: name
-  type: Attr Text
+  type: Text

@@ -2,21 +2,21 @@ arguments:
 - required: true
   help: (Required) The ID of the Default Routing Table.
   name: default_route_table_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of virtual gateways for propagation.
   name: propagating_vgws
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A list of route objects. Their keys are documented below.
   name: route
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 name: aws_default_route_table
 attributes:
 - help: The ID of the routing table
   name: id
-  type: Attr Text
+  type: Text

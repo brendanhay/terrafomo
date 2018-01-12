@@ -3,61 +3,61 @@ arguments:
   help: (Required) Information about the project's build output artifacts. Artifact
     blocks are documented below.
   name: artifacts
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild
     to wait until timing out any related build that does not get marked as completed.
     The default is 60 minutes.
   name: build_timeout
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A short description of the project.
   name: description
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The AWS Key Management Service (AWS KMS) customer master key (CMK)
     to be used for encrypting the build project's build output artifacts.
   name: encryption_key
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) Information about the project's build environment. Environment
     blocks are documented below.
   name: environment
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The projects name.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The Amazon Resource Name (ARN) of the AWS Identity and Access Management
     (IAM) role that enables AWS CodeBuild to interact with dependent AWS services
     on behalf of the AWS account.
   name: service_role
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) Information about the project's input source code. Source blocks
     are documented below.
   name: source
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 name: aws_codebuild_project
 attributes:
 - help: A short description of the project.
   name: description
-  type: Attr Text
+  type: Text
 - help: The AWS Key Management Service (AWS KMS) customer master key (CMK) that was
     used for encrypting the build project's build output artifacts.
   name: encryption_key
-  type: Attr Text
+  type: Text
 - help: The ARN of the CodeBuild project.
   name: id
-  type: Attr Text
+  type: Text
 - help: The projects name.
   name: name
-  type: Attr Text
+  type: Text
 - help: The ARN of the IAM service role.
   name: service_role
-  type: Attr Text
+  type: Text

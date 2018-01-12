@@ -31,7 +31,7 @@ data Schema = Schema
     } deriving (Show)
 
 defaultType :: Last Text
-defaultType = Last "Attr Text"
+defaultType = Last "Text"
 
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg
@@ -90,11 +90,6 @@ data Config = Config
     , configArguments  :: !(Set Arg)
     , configAttributes :: !(Set Attr)
     } deriving (Show, Generic)
-
--- - If the config was a Monoid proper?
--- - If the generated config was separate from a more 'partial/incomplete' config specified by hand?
---     this is primarily to reduce noise, probably not important right now.
--- - Add a Makefile
 
 instance Semigroup Config where
     (<>) parsed config     = Config

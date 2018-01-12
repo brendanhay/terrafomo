@@ -2,66 +2,66 @@ arguments:
 - required: true
   help: (Required) The json content of the document.
   name: content
-  type: Attr Text
+  type: Text
 - required: true
   help: ! '(Required) The type of the document. Valid document types include:  Command
     ,  Policy  and  Automation'
   name: document_type
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the document.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: ! '(Optional) Additional Permissions to attach to the document. See  #permissions  below
     for details.'
   name: permissions
-  type: Attr Text
+  type: Text
 name: aws_ssm_document
 attributes:
 - help: ! ' The json content of the document.'
   name: content
-  type: Attr Text
+  type: Text
 - help: The date the document was created.
   name: created_date
-  type: Attr Text
+  type: Text
 - help: The default version of the document.
   name: default_version
-  type: Attr Text
+  type: Text
 - help: The description of the document.
   name: description
-  type: Attr Text
+  type: Text
 - help: The type of document created.
   name: document_type
-  type: Attr Text
+  type: Text
 - help: The sha1 or sha256 of the document content
   name: hash
-  type: Attr Text
+  type: Text
 - help: ! '"Sha1" "Sha256". The hashing algorithm used when hashing the content.'
   name: hash_type
-  type: Attr Text
+  type: Text
 - help: The latest version of the document.
   name: latest_version
-  type: Attr Text
+  type: Text
 - help: The name of the document.
   name: name
-  type: Attr Text
+  type: Text
 - help: The AWS user account of the person who created the document.
   name: owner
-  type: Attr Text
+  type: Text
 - help: The parameters that are available to this document.
   name: parameter
-  type: Attr Text
+  type: Text
 - help: The permissions of how this document should be shared.
   name: permissions
-  type: Attr Text
+  type: Text
 - help: A list of OS platforms compatible with this SSM document, either "Windows"
     or "Linux".
   name: platform_types
-  type: Attr Text
+  type: Text
 - help: The schema version of the document.
   name: schema_version
-  type: Attr Text
+  type: Text
 - help: ! '"Creating", "Active" or "Deleting". The current status of the document.'
   name: status
-  type: Attr Text
+  type: Text

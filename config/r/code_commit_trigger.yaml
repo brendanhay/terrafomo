@@ -3,17 +3,17 @@ arguments:
   help: (Optional) The branches that will be included in the trigger configuration.
     If no branches are specified, the trigger will apply to all branches.
   name: branches
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Any custom data associated with the trigger that will be included
     in the information sent to the target of the trigger.
   name: custom_data
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ARN of the resource that is the target for a trigger. For example,
     the ARN of a topic in Amazon Simple Notification Service (SNS).
   name: destination_arn
-  type: Attr Text
+  type: Text
 - required: true
   help: ! '(Required) The repository events that will cause the trigger to run actions
     in another service, such as sending a notification through Amazon Simple Notification
@@ -21,14 +21,14 @@ arguments:
     events. Event types include:  all ,  updateReference ,  createReference ,  deleteReference
     .'
   name: events
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the trigger.
   name: name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name for the repository. This needs to be less than 100 characters.
   name: repository_name
-  type: Attr Text
+  type: Text
 name: aws_codecommit_trigger
 attributes: []

@@ -5,18 +5,18 @@ arguments:
     identifies the application. (This is the value that's sent as the client_id parameter
     on OAuth requests.)
   name: client_id_list
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) A list of server certificate thumbprints for the OpenID Connect
     (OIDC) identity provider's server certificate(s).
   name: thumbprint_list
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The URL of the identity provider. Corresponds to the   claim.
   name: url
-  type: Attr Text
+  type: Text
 name: aws_iam_openid_connect_provider
 attributes:
 - help: The ARN assigned by AWS for this provider.
   name: arn
-  type: Attr Text
+  type: Text

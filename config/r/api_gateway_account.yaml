@@ -5,9 +5,9 @@ arguments:
     . Logging & monitoring can be enabled/disabled and otherwise tuned on the API
     Gateway Stage level.
   name: cloudwatch_role_arn
-  type: Attr Text
+  type: Text
 name: aws_api_gateway_account
 attributes:
 - help: Account-Level throttle settings. See exported fields below.
   name: throttle_settings
-  type: Attr Text
+  type: Text

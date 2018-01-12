@@ -2,17 +2,17 @@ arguments:
 - required: true
   help: (Required) The name of the deployment config.
   name: deployment_config_name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A minimum_healthy_hosts block. Minimum Healthy Hosts are documented
     below.
   name: minimum_healthy_hosts
-  type: Attr Text
+  type: Text
 name: aws_codedeploy_deployment_config
 attributes:
 - help: The AWS Assigned deployment config id
   name: deployment_config_id
-  type: Attr Text
+  type: Text
 - help: The deployment group's config name.
   name: id
-  type: Attr Text
+  type: Text

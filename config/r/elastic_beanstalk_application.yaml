@@ -2,10 +2,10 @@ arguments:
 - required: false
   help: (Optional) Short description of the application
   name: description
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the application, must be unique within your account
   name: name
-  type: Attr Text
+  type: Text
 name: aws_elastic_beanstalk_
 attributes: []

@@ -3,30 +3,30 @@ arguments:
   help: (Required) The ARN of the destination to deliver matching log events to. Kinesis
     stream or Lambda function ARN.
   name: destination_arn
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) A valid CloudWatch Logs filter pattern for subscribing to a filtered
     stream of log events.
   name: filter_pattern
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the log group to associate the subscription filter
     with
   name: log_group_name
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) A name for the subscription filter
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions
     to deliver ingested log events to the destination. If you use Lambda as a destination,
     you should skip this argument and use  aws_lambda_permission  resource for granting
     access from CloudWatch logs to the destination Lambda function.
   name: role_arn
-  type: Attr Text
+  type: Text
 name: aws_cloudwatch_log_subscription_filter
 attributes:
 - help: The Amazon Resource Name (ARN) specifying the log subscription filter.
   name: arn
-  type: Attr Text
+  type: Text

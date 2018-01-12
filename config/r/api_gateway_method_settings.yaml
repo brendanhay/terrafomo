@@ -3,18 +3,18 @@ arguments:
   help: (Required) Method path defined as  {resource_path}/{http_method}  for an individual
     method override, or  */*  for overriding all methods in the stage.
   name: method_path
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The ID of the REST API
   name: rest_api_id
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The settings block, see below.
   name: settings
-  type: Attr Text
+  type: Text
 - required: true
   help: (Required) The name of the stage
   name: stage_name
-  type: Attr Text
+  type: Text
 name: aws_api_gateway_method_settings
 attributes: []

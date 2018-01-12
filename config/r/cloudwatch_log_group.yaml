@@ -6,28 +6,28 @@ arguments:
     data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK
     whenever the encrypted data is requested.
   name: kms_key_id
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Forces new resource) The name of the log group. If omitted, Terraform
     will assign a random, unique name.
   name: name
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional, Forces new resource) Creates a unique name beginning with the specified
     prefix. Conflicts with  name .
   name: name_prefix
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) Specifies the number of days you want to retain log events in the
     specified log group.
   name: retention_in_days
-  type: Attr Text
+  type: Text
 - required: false
   help: (Optional) A mapping of tags to assign to the resource.
   name: tags
-  type: Attr Text
+  type: Text
 name: aws_cloudwatch_log_group
 attributes:
 - help: The Amazon Resource Name (ARN) specifying the log group.
   name: arn
-  type: Attr Text
+  type: Text

@@ -2,6 +2,6 @@ arguments:
 - required: true
   help: (Required) The name of the rule set
   name: rule_set_name
-  type: Attr Text
+  type: Text
 name: aws_ses_receipt_rule_set
 attributes: []
