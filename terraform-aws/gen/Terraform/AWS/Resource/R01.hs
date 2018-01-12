@@ -23,272 +23,125 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 
 import qualified Terraform.Syntax.TH as TH
 
--- | The @aws_api_gateway_deployment@ Terraform AWS provider resource.
-data Api_Gateway_Deployment_Resource = Api_Gateway_Deployment_Resource
-    { description :: !(Attr Text)
-      {- ^ (Optional) The description of the deployment -}
-    , rest_api_id :: !(Attr Text)
-      {- ^ (Required) The ID of the associated REST API -}
-    , stage_description :: !(Attr Text)
-      {- ^ (Optional) The description of the stage -}
-    , stage_name :: !(Attr Text)
-      {- ^ (Required) The name of the stage -}
-    , variables :: !(Attr Text)
-      {- ^ (Optional) A map that defines variables for the stage -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Api_Gateway_Deployment_Resource
-    = '[ '("created_date", Attr Text)
-         {- The creation date of the deployment -}
-      , '("execution_arn", Attr Text)
-         {- The execution ARN to be used in  </docs/providers/aws/r/lambda_permission.html> 's  @source_arn@ when allowing API Gateway to invoke a Lambda function, e.g.  @arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod@ -}
-      , '("id", Attr Text)
-         {- The ID of the deployment -}
-      , '("invoke_url", Attr Text)
-         {- The URL to invoke the API pointing to the stage, e.g.  @https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod@ -}
-       ]
-
-$(TH.makeResource
-    "aws_api_gateway_deployment"
-    ''AWS
-    'newResource
-    ''Api_Gateway_Deployment_Resource)
-
--- | The @aws_cloudformation_stack@ Terraform AWS provider resource.
-data Cloudformation_Stack_Resource = Cloudformation_Stack_Resource
-    { capabilities :: !(Attr Text)
-      {- ^ (Optional) A list of capabilities. Valid values:  @CAPABILITY_IAM@  or  @CAPABILITY_NAMED_IAM@ -}
-    , disable_rollback :: !(Attr Text)
-      {- ^ (Optional) Set to true to disable rollback of the stack if stack creation failed. Conflicts with  @on_failure@ . -}
-    , iam_role_arn :: !(Attr Text)
-      {- ^ (Optional) The ARN of an IAM role that AWS CloudFormation assumes to create the stack. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials. -}
-    , name :: !(Attr Text)
-      {- ^ (Required) Stack name. -}
-    , notification_arns :: !(Attr Text)
-      {- ^ (Optional) A list of SNS topic ARNs to publish stack related events. -}
-    , on_failure :: !(Attr Text)
-      {- ^ (Optional) Action to be taken if stack creation fails. This must be one of:  @DO_NOTHING@ ,  @ROLLBACK@ , or  @DELETE@ . Conflicts with  @disable_rollback@ . -}
-    , parameters :: !(Attr Text)
-      {- ^ (Optional) A list of Parameter structures that specify input parameters for the stack. -}
-    , policy_body :: !(Attr Text)
-      {- ^ (Optional) Structure containing the stack policy body. Conflicts w/  @policy_url@ . -}
-    , policy_url :: !(Attr Text)
-      {- ^ (Optional) Location of a file containing the stack policy. Conflicts w/  @policy_body@ . -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A list of tags to associate with this stack. -}
-    , template_body :: !(Attr Text)
-      {- ^ (Optional) Structure containing the template body (max size: 51,200 bytes). -}
-    , template_url :: !(Attr Text)
-      {- ^ (Optional) Location of a file containing the template body (max size: 460,800 bytes). -}
-    , timeout_in_minutes :: !(Attr Text)
-      {- ^ (Optional) The amount of time that can pass before the stack status becomes  @CREATE_FAILED@ . -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Cloudformation_Stack_Resource
-    = '[ '("id", Attr Text)
-         {- A unique identifier of the stack. -}
-      , '("outputs", Attr Text)
-         {- A map of outputs from the stack. -}
-       ]
-
-$(TH.makeResource
-    "aws_cloudformation_stack"
-    ''AWS
-    'newResource
-    ''Cloudformation_Stack_Resource)
-
--- | The @aws_cloudwatch_metric_alarm@ Terraform AWS provider resource.
-data Cloudwatch_Metric_Alarm_Resource = Cloudwatch_Metric_Alarm_Resource
-    { actions_enabled :: !(Attr Text)
-      {- ^ (Optional) Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to  @true@ . -}
-    , alarm_actions :: !(Attr Text)
-      {- ^ (Optional) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Number (ARN). -}
-    , alarm_description :: !(Attr Text)
-      {- ^ (Optional) The description for the alarm. -}
-    , alarm_name :: !(Attr Text)
-      {- ^ (Required) The descriptive name for the alarm. This name must be unique within the user's AWS account -}
-    , comparison_operator :: !(Attr Text)
-      {- ^ (Required) The arithmetic operation to use when comparing the specified Statistic and Threshold. The specified Statistic value is used as the first operand. Either of the following is supported:  @GreaterThanOrEqualToThreshold@ ,  @GreaterThanThreshold@ ,  @LessThanThreshold@ ,  @LessThanOrEqualToThreshold@ . -}
-    , dimensions :: !(Attr Text)
-      {- ^ (Optional) The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation  <http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html> . -}
-    , evaluate_low_sample_count_percentiles :: !(Attr Text)
-      {- ^ (Optional) Used only for alarms based on percentiles. If you specify  @ignore@ , the alarm state will not change during periods with too few data points to be statistically significant. If you specify  @evaluate@  or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available. The following values are supported:  @ignore@ , and  @evaluate@ . -}
-    , evaluation_periods :: !(Attr Text)
-      {- ^ (Required) The number of periods over which data is compared to the specified threshold. -}
-    , extended_statistic :: !(Attr Text)
-      {- ^ (Optional) The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. -}
-    , insufficient_data_actions :: !(Attr Text)
-      {- ^ (Optional) The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Number (ARN). -}
-    , metric_name :: !(Attr Text)
-      {- ^ (Required) The name for the alarm's associated metric. See docs for  <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html> . -}
-    , namespace :: !(Attr Text)
-      {- ^ (Required) The namespace for the alarm's associated metric. See docs for the  <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/aws-namespaces.html> . See docs for  <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html> . -}
-    , ok_actions :: !(Attr Text)
-      {- ^ (Optional) The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Number (ARN). -}
-    , period :: !(Attr Text)
-      {- ^ (Required) The period in seconds over which the specified  @statistic@  is applied. -}
-    , statistic :: !(Attr Text)
-      {- ^ (Optional) The statistic to apply to the alarm's associated metric. Either of the following is supported:  @SampleCount@ ,  @Average@ ,  @Sum@ ,  @Minimum@ ,  @Maximum@ -}
-    , threshold :: !(Attr Text)
-      {- ^ (Required) The value against which the specified statistic is compared. -}
-    , treat_missing_data :: !(Attr Text)
-      {- ^ (Optional) Sets how this alarm is to handle missing data points. The following values are supported:  @missing@ ,  @ignore@ ,  @breaching@  and  @notBreaching@ . Defaults to  @missing@ . -}
-    , unit :: !(Attr Text)
-      {- ^ (Optional) The unit for the alarm's associated metric. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Cloudwatch_Metric_Alarm_Resource
-    = '[ '("id", Attr Text)
-         {- The ID of the health check -}
-       ]
-
-$(TH.makeResource
-    "aws_cloudwatch_metric_alarm"
-    ''AWS
-    'newResource
-    ''Cloudwatch_Metric_Alarm_Resource)
-
--- | The @aws_codedeploy_deployment_config@ Terraform AWS provider resource.
-data Codedeploy_Deployment_Config_Resource = Codedeploy_Deployment_Config_Resource
-    { deployment_config_name :: !(Attr Text)
-      {- ^ (Required) The name of the deployment config. -}
-    , minimum_healthy_hosts :: !(Attr Text)
-      {- ^ (Optional) A minimum_healthy_hosts block. Minimum Healthy Hosts are documented below. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Codedeploy_Deployment_Config_Resource
-    = '[ '("deployment_config_id", Attr Text)
-         {- The AWS Assigned deployment config id -}
-      , '("id", Attr Text)
-         {- The deployment group's config name. -}
-       ]
-
-$(TH.makeResource
-    "aws_codedeploy_deployment_config"
-    ''AWS
-    'newResource
-    ''Codedeploy_Deployment_Config_Resource)
-
--- | The @aws_default_network_acl@ Terraform AWS provider resource.
-data Default_Network_Acl_Resource = Default_Network_Acl_Resource
-    { default_network_acl_id :: !(Attr Text)
-      {- ^ (Required) The Network ACL ID to manage. This attribute is exported from  @aws_vpc@ , or manually found via the AWS Console. -}
-    , egress :: !(Attr Text)
-      {- ^ (Optional) Specifies an egress rule. Parameters defined below. -}
-    , ingress :: !(Attr Text)
-      {- ^ (Optional) Specifies an ingress rule. Parameters defined below. -}
-    , subnet_ids :: !(Attr Text)
-      {- ^ (Optional) A list of Subnet IDs to apply the ACL to. See the notes below on managing Subnets in the Default Network ACL -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Default_Network_Acl_Resource
-    = '[ '("egress", Attr Text)
-         {- Set of egress rules -}
-      , '("id", Attr Text)
-         {- The ID of the Default Network ACL -}
-      , '("ingress", Attr Text)
-         {- Set of ingress rules -}
-      , '("subnet_ids", Attr Text)
-         {-  – IDs of associated Subnets -}
-      , '("vpc_id", Attr Text)
-         {-  The ID of the associated VPC -}
-       ]
-
-$(TH.makeResource
-    "aws_default_network_acl"
-    ''AWS
-    'newResource
-    ''Default_Network_Acl_Resource)
-
--- | The @aws_directory_service_directory@ Terraform AWS provider resource.
-data Directory_Service_Directory_Resource = Directory_Service_Directory_Resource
-    { alias :: !(Attr Text)
-      {- ^ (Optional) The alias for the directory (must be unique amongst all aliases in AWS). Required for  @enable_sso@ . -}
-    , connect_settings :: !(Attr Text)
-      {- ^ (Required for  @ADConnector@ ) Connector related information about the directory. Fields documented below. -}
+-- | The @aws_ami@ Terraform AWS provider resource.
+data Ami_Resource = Ami_Resource
+    { architecture :: !(Attr Text)
+      {- ^ (Optional) Machine architecture for created instances. Defaults to "x86_64". -}
     , description :: !(Attr Text)
-      {- ^ (Optional) A textual description for the directory. -}
-    , enable_sso :: !(Attr Text)
-      {- ^ (Optional) Whether to enable single-sign on for the directory. Requires  @alias@ . Defaults to  @false@ . -}
+      {- ^ (Optional) A longer, human-readable description for the AMI. -}
+    , ebs_block_device :: !(Attr Text)
+      {- ^ (Optional) Nested block describing an EBS block device that should be attached to created instances. The structure of this block is described below. -}
+    , ephemeral_block_device :: !(Attr Text)
+      {- ^ (Optional) Nested block describing an ephemeral block device that should be attached to created instances. The structure of this block is described below. -}
     , name :: !(Attr Text)
-      {- ^ (Required) The fully qualified name for the directory, such as  @corp.example.com@ -}
-    , password :: !(Attr Text)
-      {- ^ (Required) The password for the directory administrator or connector user. -}
-    , short_name :: !(Attr Text)
-      {- ^ (Optional) The short name of the directory, such as  @CORP@ . -}
-    , size :: !(Attr Text)
-      {- ^ (Required for  @SimpleAD@  and  @ADConnector@ ) The size of the directory ( @Small@  or  @Large@  are accepted values). -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , type_ :: !(Attr Text)
-      {- ^  (Optional) - The directory type ( @SimpleAD@  or  @MicrosoftAD@  are accepted values). Defaults to  @SimpleAD@ . -}
-    , vpc_settings :: !(Attr Text)
-      {- ^ (Required for  @SimpleAD@  and  @MicrosoftAD@ ) VPC related information about the directory. Fields documented below. -}
+      {- ^ (Required) A region-unique name for the AMI. -}
+    , root_device_name :: !(Attr Text)
+      {- ^ (Optional) The name of the root device (for example,  @/dev/sda1@ , or  @/dev/xvda@ ). -}
+    , virtualization_type :: !(Attr Text)
+      {- ^ (Optional) Keyword to choose what virtualization mode created instances will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type changes the set of further arguments that are required, as described below. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Directory_Service_Directory_Resource
-    = '[ '("access_url", Attr Text)
-         {- The access URL for the directory, such as  @http://alias.awsapps.com@ . -}
-      , '("dns_ip_addresses", Attr Text)
-         {- A list of IP addresses of the DNS servers for the directory or connector. -}
+type instance Computed Ami_Resource
+    = '[ '("id", Attr Text)
+         {- The ID of the created AMI. -}
+      , '("root_snapshot_id", Attr Text)
+         {- The Snapshot ID for the root volume (for EBS-backed AMIs) -}
+       ]
+
+$(TH.makeResource
+    "aws_ami"
+    ''AWS
+    'newResource
+    ''Ami_Resource)
+
+-- | The @aws_codebuild_project@ Terraform AWS provider resource.
+data Codebuild_Project_Resource = Codebuild_Project_Resource
+    { artifacts :: !(Attr Text)
+      {- ^ (Required) Information about the project's build output artifacts. Artifact blocks are documented below. -}
+    , build_timeout :: !(Attr Text)
+      {- ^ (Optional) How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes. -}
+    , description :: !(Attr Text)
+      {- ^ (Optional) A short description of the project. -}
+    , encryption_key :: !(Attr Text)
+      {- ^ (Optional) The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts. -}
+    , environment :: !(Attr Text)
+      {- ^ (Required) Information about the project's build environment. Environment blocks are documented below. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The projects name. -}
+    , service_role :: !(Attr Text)
+      {- ^ (Optional) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account. -}
+    , source :: !(Attr Text)
+      {- ^ (Required) Information about the project's input source code. Source blocks are documented below. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Codebuild_Project_Resource
+    = '[ '("description", Attr Text)
+         {- A short description of the project. -}
+      , '("encryption_key", Attr Text)
+         {- The AWS Key Management Service (AWS KMS) customer master key (CMK) that was used for encrypting the build project's build output artifacts. -}
       , '("id", Attr Text)
-         {- The directory identifier. -}
+         {- The ARN of the CodeBuild project. -}
+      , '("name", Attr Text)
+         {- The projects name. -}
+      , '("service_role", Attr Text)
+         {- The ARN of the IAM service role. -}
        ]
 
 $(TH.makeResource
-    "aws_directory_service_directory"
+    "aws_codebuild_project"
     ''AWS
     'newResource
-    ''Directory_Service_Directory_Resource)
+    ''Codebuild_Project_Resource)
 
--- | The @aws_dms_replication_instance@ Terraform AWS provider resource.
-data Dms_Replication_Instance_Resource = Dms_Replication_Instance_Resource
-    { allocated_storage :: !(Attr Text)
-      {- ^ (Optional, Default: 50, Min: 5, Max: 6144) The amount of storage (in gigabytes) to be initially allocated for the replication instance. -}
-    , apply_immediately :: !(Attr Text)
-      {- ^ (Optional, Default: false) Indicates whether the changes should be applied immediately or during the next maintenance window. Only used when updating an existing resource. -}
-    , auto_minor_version_upgrade :: !(Attr Text)
-      {- ^ (Optional, Default: false) Indicates that minor engine upgrades will be applied automatically to the replication instance during the maintenance window. -}
-    , availability_zone :: !(Attr Text)
-      {- ^ (Optional) The EC2 Availability Zone that the replication instance will be created in. -}
-    , engine_version :: !(Attr Text)
-      {- ^ (Optional) The engine version number of the replication instance. -}
-    , kms_key_arn :: !(Attr Text)
-      {- ^ (Optional) The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for  @kms_key_arn@ , then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. -}
-    , multi_az :: !(Attr Text)
-      {- ^ (Optional) Specifies if the replication instance is a multi-az deployment. You cannot set the  @availability_zone@  parameter if the  @multi_az@  parameter is set to  @true@ . -}
-    , preferred_maintenance_window :: !(Attr Text)
-      {- ^ (Optional) The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). -}
-    , publicly_accessible :: !(Attr Text)
-      {- ^ (Optional, Default: false) Specifies the accessibility options for the replication instance. A value of true represents an instance with a public IP address. A value of false represents an instance with a private IP address. -}
-    , replication_instance_class :: !(Attr Text)
-      {- ^ (Required) The compute and memory capacity of the replication instance as specified by the replication instance class. Can be one of  @dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge@ -}
-    , replication_instance_id :: !(Attr Text)
-      {- ^ (Required) The replication instance identifier. This parameter is stored as a lowercase string. -}
-    , replication_subnet_group_id :: !(Attr Text)
-      {- ^ (Optional) A subnet group to associate with the replication instance. -}
-    , tags :: !(Attr Text)
+-- | The @aws_default_subnet@ Terraform AWS provider resource.
+data Default_Subnet_Resource = Default_Subnet_Resource
+    { tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , vpc_security_group_ids :: !(Attr Text)
-      {- ^ (Optional) A list of VPC security group IDs to be used with the replication instance. The VPC security groups must work with the VPC containing the replication instance. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Dms_Replication_Instance_Resource
-    = '[ '("replication_instance_arn", Attr Text)
-         {- The Amazon Resource Name (ARN) of the replication instance. -}
-      , '("replication_instance_private_ips", Attr Text)
-         {-  A list of the private IP addresses of the replication instance. -}
-      , '("replication_instance_public_ips", Attr Text)
-         {- A list of the public IP addresses of the replication instance. -}
+type instance Computed Default_Subnet_Resource
+    = '[ '("availability_zone", Attr Text)
+         {- - The AZ for the subnet. -}
+      , '("cidr_block", Attr Text)
+         {- The CIDR block for the subnet. -}
+      , '("id", Attr Text)
+         {- The ID of the subnet -}
+      , '("ipv6_association_id", Attr Text)
+         {- The association ID for the IPv6 CIDR block. -}
+      , '("ipv6_cidr_block", Attr Text)
+         {- The IPv6 CIDR block. -}
+      , '("vpc_id", Attr Text)
+         {- The VPC ID. -}
        ]
 
 $(TH.makeResource
-    "aws_dms_replication_instance"
+    "aws_default_subnet"
     ''AWS
     'newResource
-    ''Dms_Replication_Instance_Resource)
+    ''Default_Subnet_Resource)
+
+-- | The @aws_dms_replication_subnet_group@ Terraform AWS provider resource.
+data Dms_Replication_Subnet_Group_Resource = Dms_Replication_Subnet_Group_Resource
+    { replication_subnet_group_description :: !(Attr Text)
+      {- ^ (Required) The description for the subnet group. -}
+    , replication_subnet_group_id :: !(Attr Text)
+      {- ^ (Required) The name for the replication subnet group. This value is stored as a lowercase string. -}
+    , subnet_ids :: !(Attr Text)
+      {- ^ (Required) A list of the EC2 subnet IDs for the subnet group. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Dms_Replication_Subnet_Group_Resource
+    = '[ '("vpc_id", Attr Text)
+         {- The ID of the VPC the subnet group is in. -}
+       ]
+
+$(TH.makeResource
+    "aws_dms_replication_subnet_group"
+    ''AWS
+    'newResource
+    ''Dms_Replication_Subnet_Group_Resource)
 
 -- | The @aws_eip_association@ Terraform AWS provider resource.
 data Eip_Association_Resource = Eip_Association_Resource
@@ -327,360 +180,594 @@ $(TH.makeResource
     'newResource
     ''Eip_Association_Resource)
 
--- | The @aws_flow_log@ Terraform AWS provider resource.
-data Flow_Log_Resource = Flow_Log_Resource
-    { eni_id :: !(Attr Text)
-      {- ^ (Optional) Elastic Network Interface ID to attach to -}
-    , iam_role_arn :: !(Attr Text)
-      {- ^ (Required) The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group -}
-    , log_group_name :: !(Attr Text)
-      {- ^ (Required) The name of the CloudWatch log group -}
-    , subnet_id :: !(Attr Text)
-      {- ^ (Optional) Subnet ID to attach to -}
-    , traffic_type :: !(Attr Text)
-      {- ^ (Required) The type of traffic to capture. Valid values: @ACCEPT@ , @REJECT@ ,  @ALL@ -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Optional) VPC ID to attach to -}
+-- | The @aws_elasticache_cluster@ Terraform AWS provider resource.
+data Elasticache_Cluster_Resource = Elasticache_Cluster_Resource
+    { apply_immediately :: !(Attr Text)
+      {- ^ (Optional) Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default is @false@ . See  <https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheCluster.html> (Available since v0.6.0) -}
+    , availability_zone :: !(Attr Text)
+      {- ^ (Optional) The Availability Zone for the cache cluster. If you want to create cache nodes in multi-az, use  @availability_zones@ -}
+    , availability_zones :: !(Attr Text)
+      {- ^ (Optional, Memcached only) List of Availability Zones in which the cache nodes will be created. If you want to create cache nodes in single-az, use  @availability_zone@ -}
+    , az_mode :: !(Attr Text)
+      {- ^ (Optional, Memcached only) Specifies whether the nodes in this Memcached node group are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region. Valid values for this parameter are  @single-az@  or  @cross-az@ , default is  @single-az@ . If you want to choose  @cross-az@ ,  @num_cache_nodes@  must be greater than  @1@ -}
+    , cluster_id :: !(Attr Text)
+      {- ^  – (Required) Group identifier. ElastiCache converts this name to lowercase -}
+    , engine :: !(Attr Text)
+      {- ^  – (Required) Name of the cache engine to be used for this cache cluster. Valid values for this parameter are  @memcached@  or  @redis@ -}
+    , engine_version :: !(Attr Text)
+      {- ^  – (Optional) Version number of the cache engine to be used. See  <https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html> in the AWS Documentation center for supported versions -}
+    , maintenance_window :: !(Attr Text)
+      {- ^  – (Optional) Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is  @ddd:hh24:mi-ddd:hh24:mi@  (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:  @sun:05:00-sun:09:00@ -}
+    , node_type :: !(Attr Text)
+      {- ^  – (Required) The compute and memory capacity of the nodes. See <https://aws.amazon.com/elasticache/details#Available_Cache_Node_Types>  for supported node types -}
+    , notification_topic_arn :: !(Attr Text)
+      {- ^  – (Optional) An Amazon Resource Name (ARN) of an SNS topic to send ElastiCache notifications to. Example: @arn:aws:sns:us-east-1:012345678999:my_sns_topic@ -}
+    , num_cache_nodes :: !(Attr Text)
+      {- ^  – (Required) The initial number of cache nodes that the cache cluster will have. For Redis, this value must be 1. For Memcache, this value must be between 1 and 20. If this number is reduced on subsequent runs, the highest numbered nodes will be removed. -}
+    , parameter_group_name :: !(Attr Text)
+      {- ^  – (Required) Name of the parameter group to associate with this cache cluster -}
+    , port :: !(Attr Text)
+      {- ^  – (Required) The port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379. -}
+    , security_group_ids :: !(Attr Text)
+      {- ^  – (Optional, VPC only) One or more VPC security groups associated with the cache cluster -}
+    , security_group_names :: !(Attr Text)
+      {- ^  – (Optional, EC2 Classic only) List of security group names to associate with this cache cluster -}
+    , snapshot_arns :: !(Attr Text)
+      {- ^  – (Optional) A single-element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. Example:  @arn:aws:s3:::my_bucket/snapshot1.rdb@ -}
+    , snapshot_name :: !(Attr Text)
+      {- ^ (Optional) The name of a snapshot from which to restore data into the new node group.  Changing the  @snapshot_name@  forces a new resource. -}
+    , snapshot_retention_limit :: !(Attr Text)
+      {- ^ (Optional, Redis only) The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off. Please note that setting a  @snapshot_retention_limit@  is not supported on cache.t1.micro or cache.t2.* cache nodes -}
+    , snapshot_window :: !(Attr Text)
+      {- ^ (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00 -}
+    , subnet_group_name :: !(Attr Text)
+      {- ^  – (Optional, VPC only) Name of the subnet group to be used for the cache cluster. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the resource -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Flow_Log_Resource
-    = '[ '("id", Attr Text)
-         {- The Flow Log ID -}
+type instance Computed Elasticache_Cluster_Resource
+    = '[ '("cache_nodes", Attr Text)
+         {- List of node objects including  @id@ ,  @address@ ,  @port@  and  @availability_zone@ . Referenceable e.g. as  @${aws_elasticache_cluster.bar.cache_nodes.0.address}@ -}
+      , '("cluster_address", Attr Text)
+         {- (Memcached only) The DNS name of the cache cluster without the port appended. -}
+      , '("configuration_endpoint", Attr Text)
+         {- (Memcached only) The configuration endpoint to allow host discovery. -}
        ]
 
 $(TH.makeResource
-    "aws_flow_log"
+    "aws_elasticache_cluster"
     ''AWS
     'newResource
-    ''Flow_Log_Resource)
+    ''Elasticache_Cluster_Resource)
 
--- | The @aws_iam_access_key@ Terraform AWS provider resource.
-data Iam_Access_Key_Resource = Iam_Access_Key_Resource
-    { pgp_key :: !(Attr Text)
-      {- ^ (Optional) Either a base-64 encoded PGP public key, or a keybase username in the form  @keybase:some_person_that_exists@ . -}
-    , user :: !(Attr Text)
-      {- ^ (Required) The IAM user to associate with this access key. -}
+-- | The @aws_elasticsearch_domain_policy@ Terraform AWS provider resource.
+data Elasticsearch_Domain_Policy_Resource = Elasticsearch_Domain_Policy_Resource
+    { access_policies :: !(Attr Text)
+      {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
+    , domain_name :: !(Attr Text)
+      {- ^ (Required) Name of the domain. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Iam_Access_Key_Resource
-    = '[ '("encrypted_secret", Attr Text)
-         {- The encrypted secret, base64 encoded. ~>   The encrypted secret may be decrypted using the command line, for example:  @terraform output secret | base64 --decode | keybase pgp decrypt@ . -}
-      , '("id", Attr Text)
-         {- The access key ID. -}
-      , '("key_fingerprint", Attr Text)
-         {- The fingerprint of the PGP key used to encrypt the secret -}
-      , '("secret", Attr Text)
-         {- The secret access key. Note that this will be written to the state file. Please supply a  @pgp_key@  instead, which will prevent the secret from being stored in plain text -}
-      , '("ses_smtp_password", Attr Text)
-         {- The secret access key converted into an SES SMTP password by applying  <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html#smtp-credentials-convert> . -}
-      , '("status", Attr Text)
-         {- "Active" or "Inactive". Keys are initially active, but can be made inactive by other means. -}
-      , '("user", Attr Text)
-         {- The IAM user associated with this access key. -}
-       ]
-
-$(TH.makeResource
-    "aws_iam_access_key"
-    ''AWS
-    'newResource
-    ''Iam_Access_Key_Resource)
-
--- | The @aws_iam_user_policy_attachment@ Terraform AWS provider resource.
-data Iam_User_Policy_Attachment_Resource = Iam_User_Policy_Attachment_Resource
-    { policy_arn :: !(Attr Text)
-      {- ^ 	(Required) - The ARN of the policy you want to apply -}
-    , user :: !(Attr Text)
-      {- ^ 		(Required) - The user the policy should be applied to -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Iam_User_Policy_Attachment_Resource
+type instance Computed Elasticsearch_Domain_Policy_Resource
     = '[]
 
 $(TH.makeResource
-    "aws_iam_user_policy_attachment"
+    "aws_elasticsearch_domain_policy"
     ''AWS
     'newResource
-    ''Iam_User_Policy_Attachment_Resource)
+    ''Elasticsearch_Domain_Policy_Resource)
 
--- | The @aws_lb@ Terraform AWS provider resource.
-data Lb_Resource = Lb_Resource
-    { access_logs :: !(Attr Text)
-      {- ^ (Optional) An Access Logs block. Access Logs documented below. -}
-    , enable_deletion_protection :: !(Attr Text)
-      {- ^ (Optional) If true, deletion of the load balancer will be disabled via the AWS API. This will prevent Terraform from deleting the load balancer. Defaults to  @false@ . -}
-    , idle_timeout :: !(Attr Text)
-      {- ^ (Optional) The time in seconds that the connection is allowed to be idle. Default: 60. -}
-    , internal :: !(Attr Text)
-      {- ^ (Optional) If true, the LB will be internal. -}
-    , ip_address_type :: !(Attr Text)
-      {- ^ (Optional) The type of IP addresses used by the subnets for your load balancer. The possible values are  @ipv4@  and  @dualstack@ -}
-    , load_balancer_type :: !(Attr Text)
-      {- ^ (Optional) The type of load balancer to create. Possible values are  @application@  or  @network@ . The default value is  @application@ . -}
+-- | The @aws_iam_account_alias@ Terraform AWS provider resource.
+data Iam_Account_Alias_Resource = Iam_Account_Alias_Resource
+    { account_alias :: !(Attr Text)
+      {- ^ (Required) The account alias -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Iam_Account_Alias_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_iam_account_alias"
+    ''AWS
+    'newResource
+    ''Iam_Account_Alias_Resource)
+
+-- | The @aws_iam_group_policy_attachment@ Terraform AWS provider resource.
+data Iam_Group_Policy_Attachment_Resource = Iam_Group_Policy_Attachment_Resource
+    { group :: !(Attr Text)
+      {- ^ 		(Required) - The group the policy should be applied to -}
+    , policy_arn :: !(Attr Text)
+      {- ^ 	(Required) - The ARN of the policy you want to apply -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Iam_Group_Policy_Attachment_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_iam_group_policy_attachment"
+    ''AWS
+    'newResource
+    ''Iam_Group_Policy_Attachment_Resource)
+
+-- | The @aws_iam_role@ Terraform AWS provider resource.
+data Iam_Role_Resource = Iam_Role_Resource
+    { assume_role_policy :: !(Attr Text)
+      {- ^ (Required) The policy that grants an entity permission to assume the role. -}
     , name :: !(Attr Text)
-      {- ^ (Optional) The name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen. If not specified, Terraform will autogenerate a name beginning with  @tf-lb@ . -}
+      {- ^ (Optional, Forces new resource) The name of the role. If omitted, Terraform will assign a random, unique name. -}
+    , name_prefix :: !(Attr Text)
+      {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with  @name@ . -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Iam_Role_Resource
+    = '[ '("arn", Attr Text)
+         {- The Amazon Resource Name (ARN) specifying the role. -}
+      , '("create_date", Attr Text)
+         {- The creation date of the IAM role. -}
+      , '("description", Attr Text)
+         {- The description of the role. -}
+      , '("name", Attr Text)
+         {- The name of the role. -}
+      , '("unique_id", Attr Text)
+         {- The stable and unique string identifying the role. -}
+       ]
+
+$(TH.makeResource
+    "aws_iam_role"
+    ''AWS
+    'newResource
+    ''Iam_Role_Resource)
+
+-- | The @aws_iam_server_certificate@ Terraform AWS provider resource.
+data Iam_Server_Certificate_Resource = Iam_Server_Certificate_Resource
+    { certificate_body :: !(Attr Text)
+      {- ^  – (Required) The contents of the public key certificate in PEM-encoded format. -}
+    , certificate_chain :: !(Attr Text)
+      {- ^  – (Optional) The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain. -}
+    , name :: !(Attr Text)
+      {- ^ (Optional) The name of the Server Certificate. Do not include the path in this value. If omitted, Terraform will assign a random, unique name. -}
     , name_prefix :: !(Attr Text)
       {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with  @name@ . -}
+    , path :: !(Attr Text)
+      {- ^ (Optional) The IAM path for the server certificate.  If it is not included, it defaults to a slash (/). If this certificate is for use with AWS CloudFront, the path must be in format  @/cloudfront/your_path_here@ . See  <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>  for more details on IAM Paths. -}
+    , private_key :: !(Attr Text)
+      {- ^  – (Required) The contents of the private key in PEM-encoded format. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Iam_Server_Certificate_Resource
+    = '[ '("arn", Attr Text)
+         {- The Amazon Resource Name (ARN) specifying the server certificate. -}
+      , '("id", Attr Text)
+         {- The unique Server Certificate name -}
+      , '("name", Attr Text)
+         {- The name of the Server Certificate -}
+       ]
+
+$(TH.makeResource
+    "aws_iam_server_certificate"
+    ''AWS
+    'newResource
+    ''Iam_Server_Certificate_Resource)
+
+-- | The @aws_iam_user_policy@ Terraform AWS provider resource.
+data Iam_User_Policy_Resource = Iam_User_Policy_Resource
+    { name :: !(Attr Text)
+      {- ^ (Optional) The name of the policy. If omitted, Terraform will assign a random, unique name. -}
+    , name_prefix :: !(Attr Text)
+      {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with  @name@ . -}
+    , policy :: !(Attr Text)
+      {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or  @file@  function is helpful here. -}
+    , user :: !(Attr Text)
+      {- ^ (Required) IAM user to which to attach this policy. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Iam_User_Policy_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_iam_user_policy"
+    ''AWS
+    'newResource
+    ''Iam_User_Policy_Resource)
+
+-- | The @aws_inspector_resource_group@ Terraform AWS provider resource.
+data Inspector_Resource_Group_Resource = Inspector_Resource_Group_Resource
+    { tags :: !(Attr Text)
+      {- ^ (Required) The tags on your EC2 Instance. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Inspector_Resource_Group_Resource
+    = '[ '("arn", Attr Text)
+         {- The resource group ARN. -}
+       ]
+
+$(TH.makeResource
+    "aws_inspector_resource_group"
+    ''AWS
+    'newResource
+    ''Inspector_Resource_Group_Resource)
+
+-- | The @aws_key_pair@ Terraform AWS provider resource.
+data Key_Pair_Resource = Key_Pair_Resource
+    { key_name :: !(Attr Text)
+      {- ^ (Optional) The name for the key pair. -}
+    , key_name_prefix :: !(Attr Text)
+      {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with  @key_name@ . -}
+    , public_key :: !(Attr Text)
+      {- ^ (Required) The public key material. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Key_Pair_Resource
+    = '[ '("fingerprint", Attr Text)
+         {- The MD5 public key fingerprint as specified in section 4 of RFC 4716. -}
+      , '("key_name", Attr Text)
+         {- The key pair name. -}
+       ]
+
+$(TH.makeResource
+    "aws_key_pair"
+    ''AWS
+    'newResource
+    ''Key_Pair_Resource)
+
+-- | The @aws_launch_configuration@ Terraform AWS provider resource.
+data Launch_Configuration_Resource = Launch_Configuration_Resource
+    { associate_public_ip_address :: !(Attr Text)
+      {- ^ (Optional) Associate a public ip address with an instance in a VPC. -}
+    , ebs_block_device :: !(Attr Text)
+      {- ^ (Optional) Additional EBS block devices to attach to the instance.  See  <#block-devices>  below for details. -}
+    , ebs_optimized :: !(Attr Text)
+      {- ^ (Optional) If true, the launched EC2 instance will be EBS-optimized. -}
+    , enable_monitoring :: !(Attr Text)
+      {- ^ (Optional) Enables/disables detailed monitoring. This is enabled by default. -}
+    , ephemeral_block_device :: !(Attr Text)
+      {- ^ (Optional) Customize Ephemeral (also known as "Instance Store") volumes on the instance. See  <#block-devices>  below for details. -}
+    , iam_instance_profile :: !(Attr Text)
+      {- ^ (Optional) The IAM instance profile to associate with launched instances. -}
+    , image_id :: !(Attr Text)
+      {- ^ (Required) The EC2 image ID to launch. -}
+    , instance_type :: !(Attr Text)
+      {- ^ (Required) The size of instance to launch. -}
+    , key_name :: !(Attr Text)
+      {- ^ (Optional) The key name that should be used for the instance. -}
+    , name :: !(Attr Text)
+      {- ^ (Optional) The name of the launch configuration. If you leave this blank, Terraform will auto-generate a unique name. -}
+    , name_prefix :: !(Attr Text)
+      {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with  @name@ . -}
+    , placement_tenancy :: !(Attr Text)
+      {- ^ (Optional) The tenancy of the instance. Valid values are @"default"@  or  @"dedicated"@ , see  <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_CreateLaunchConfiguration.html> for more details -}
+    , root_block_device :: !(Attr Text)
+      {- ^ (Optional) Customize details about the root block device of the instance. See  <#block-devices>  below for details. -}
     , security_groups :: !(Attr Text)
-      {- ^ (Optional) A list of security group IDs to assign to the LB. -}
-    , subnet_mapping :: !(Attr Text)
-      {- ^ (Optional) A subnet mapping block as documented below. -}
-    , subnets :: !(Attr Text)
-      {- ^ (Optional) A list of subnet IDs to attach to the LB. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
+      {- ^ (Optional) A list of associated security group IDS. -}
+    , spot_price :: !(Attr Text)
+      {- ^ (Optional) The price to use for reserving spot instances. -}
+    , user_data :: !(Attr Text)
+      {- ^ (Optional) The user data to provide when launching the instance. -}
+    , vpc_classic_link_id :: !(Attr Text)
+      {- ^ (Optional) The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg.  @vpc-2730681a@ ) -}
+    , vpc_classic_link_security_groups :: !(Attr Text)
+      {- ^ (Optional) The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg.  @sg-46ae3d11@ ). -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Lb_Resource
-    = '[ '("arn", Attr Text)
-         {- The ARN of the load balancer (matches  @id@ ). -}
-      , '("arn_suffix", Attr Text)
-         {- The ARN suffix for use with CloudWatch Metrics. -}
-      , '("canonical_hosted_zone_id", Attr Text)
-         {- The canonical hosted zone ID of the load balancer. -}
-      , '("dns_name", Attr Text)
-         {- The DNS name of the load balancer. -}
-      , '("id", Attr Text)
-         {- The ARN of the load balancer (matches  @arn@ ). -}
-      , '("zone_id", Attr Text)
-         {- The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record). -}
-       ]
-
-$(TH.makeResource
-    "aws_lb"
-    ''AWS
-    'newResource
-    ''Lb_Resource)
-
--- | The @aws_proxy_protocol_policy@ Terraform AWS provider resource.
-data Proxy_Protocol_Policy_Resource = Proxy_Protocol_Policy_Resource
-    { instance_ports :: !(Attr Text)
-      {- ^ (Required) List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP. -}
-    , load_balancer :: !(Attr Text)
-      {- ^ (Required) The load balancer to which the policy should be attached. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed Proxy_Protocol_Policy_Resource
+type instance Computed Launch_Configuration_Resource
     = '[ '("id", Attr Text)
-         {- The ID of the policy. -}
-      , '("load_balancer", Attr Text)
-         {- The load balancer to which the policy is attached. -}
+         {- The ID of the launch configuration. -}
+      , '("name", Attr Text)
+         {- The name of the launch configuration. -}
        ]
 
 $(TH.makeResource
-    "aws_proxy_protocol_policy"
+    "aws_launch_configuration"
     ''AWS
     'newResource
-    ''Proxy_Protocol_Policy_Resource)
+    ''Launch_Configuration_Resource)
 
--- | The @aws_rds_cluster_instance@ Terraform AWS provider resource.
-data Rds_Cluster_Instance_Resource = Rds_Cluster_Instance_Resource
-    { apply_immediately :: !(Attr Text)
-      {- ^ (Optional) Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default is @false@ . -}
-    , auto_minor_version_upgrade :: !(Attr Text)
-      {- ^ (Optional) Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default  @true@ . -}
-    , cluster_identifier :: !(Attr Text)
-      {- ^ (Required) The identifier of the  </docs/providers/aws/r/rds_cluster.html>  in which to launch this instance. -}
-    , db_parameter_group_name :: !(Attr Text)
-      {- ^ (Optional) The name of the DB parameter group to associate with this instance. -}
-    , db_subnet_group_name :: !(Attr Text)
-      {- ^ (Required if  @publicly_accessible = false@ , Optional otherwise) A DB subnet group to associate with this DB instance.   This must match the  @db_subnet_group_name@  of the attached  </docs/providers/aws/r/rds_cluster.html> . -}
-    , engine :: !(Attr Text)
-      {- ^ (Optional) The name of the database engine to be used for the RDS instance. Defaults to  @aurora@ . -}
-    , engine_version :: !(Attr Text)
-      {- ^ (Optional) The database engine version. -}
-    , identifier :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) The indentifier for the RDS instance, if omitted, Terraform will assign a random, unique identifier. -}
-    , identifier_prefix :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) Creates a unique identifier beginning with the specified prefix. Conflicts with  @identifer@ . -}
-    , instance_class :: !(Attr Text)
-      {- ^ (Required) The instance class to use. For details on CPU and memory, see  <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html> . Aurora currently supports the below instance classes. -}
-    , monitoring_interval :: !(Attr Text)
-      {- ^ (Optional) The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60. -}
-    , monitoring_role_arn :: !(Attr Text)
-      {- ^ (Optional) The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the  <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html> what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances. -}
-    , preferred_backup_window :: !(Attr Text)
-      {- ^ (Optional) The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00" -}
-    , preferred_maintenance_window :: !(Attr Text)
-      {- ^ (Optional) The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". -}
-    , promotion_tier :: !(Attr Text)
-      {- ^ (Optional) Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer. -}
-    , publicly_accessible :: !(Attr Text)
-      {- ^ (Optional) Bool to control if instance is publicly accessible. Default  @false@ . See the documentation on  <https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html>  for more details on controlling this property. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the instance. -}
+-- | The @aws_lightsail_instance@ Terraform AWS provider resource.
+data Lightsail_Instance_Resource = Lightsail_Instance_Resource
+    { availability_zone :: !(Attr Text)
+      {- ^ (Required) The Availability Zone in which to create your instance. At this time, must be in  @us-east-1@ ,  @us-east-2@ ,  @us-west-2@ ,  @eu-west-1@ ,  @eu-west-2@ ,  @eu-central-1@ ,  @ap-southeast-1@ ,  @ap-southeast-2@ ,  @ap-northeast-1@ ,  @ap-south-1@  regions -}
+    , blueprint_id :: !(Attr Text)
+      {- ^ (Required) The ID for a virtual private server image (see list below) -}
+    , bundle_id :: !(Attr Text)
+      {- ^ (Required) The bundle of specification information (see list below) -}
+    , key_pair_name :: !(Attr Text)
+      {- ^ (Required) The name of your key pair. Created in the Lightsail console (cannot use  @aws_key_pair@  at this time) -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the Lightsail Instance -}
+    , user_data :: !(Attr Text)
+      {- ^ (Optional) launch script to configure server with additional user data -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Rds_Cluster_Instance_Resource
-    = '[ '("allocated_storage", Attr Text)
-         {- The amount of allocated storage -}
-      , '("availability_zone", Attr Text)
-         {- The availability zone of the instance -}
-      , '("cluster_identifier", Attr Text)
-         {- The RDS Cluster Identifier -}
-      , '("database_name", Attr Text)
-         {- The database name -}
-      , '("dbi_resource_id", Attr Text)
-         {- The region-unique, immutable identifier for the DB instance. -}
-      , '("endpoint", Attr Text)
-         {- The DNS address for this instance. May not be writable -}
-      , '("engine", Attr Text)
-         {- The database engine -}
-      , '("engine_version", Attr Text)
-         {- The database engine version -}
-      , '("id", Attr Text)
-         {- The Instance identifier -}
-      , '("identifier", Attr Text)
-         {- The Instance identifier -}
-      , '("kms_key_id", Attr Text)
-         {- The ARN for the KMS encryption key if one is set to the cluster. -}
-      , '("port", Attr Text)
-         {- The database port -}
-      , '("status", Attr Text)
-         {- The RDS instance status -}
-      , '("storage_encrypted", Attr Text)
-         {- Specifies whether the DB cluster is encrypted. -}
-      , '("writer", Attr Text)
-         {-  – Boolean indicating if this instance is writable.  @False@  indicates this instance is a read replica -}
-       ]
+type instance Computed Lightsail_Instance_Resource
+    = '[]
 
 $(TH.makeResource
-    "aws_rds_cluster_instance"
+    "aws_lightsail_instance"
     ''AWS
     'newResource
-    ''Rds_Cluster_Instance_Resource)
+    ''Lightsail_Instance_Resource)
 
--- | The @aws_s3_bucket_object@ Terraform AWS provider resource.
-data S3_Bucket_Object_Resource = S3_Bucket_Object_Resource
-    { acl :: !(Attr Text)
-      {- ^ (Optional) The  <https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl>  to apply. Defaults to "private". -}
-    , bucket :: !(Attr Text)
-      {- ^ (Required) The name of the bucket to put the file in. -}
-    , cache_control :: !(Attr Text)
-      {- ^ (Optional) Specifies caching behavior along the request/reply chain Read  <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9>  for further details. -}
-    , content :: !(Attr Text)
-      {- ^ (Required unless  @source@  given) The literal content being uploaded to the bucket. -}
-    , content_disposition :: !(Attr Text)
-      {- ^ (Optional) Specifies presentational information for the object. Read  <http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1>  for further information. -}
-    , content_encoding :: !(Attr Text)
-      {- ^ (Optional) Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read  <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11>  for further information. -}
-    , content_language :: !(Attr Text)
-      {- ^ (Optional) The language the content is in e.g. en-US or en-GB. -}
-    , content_type :: !(Attr Text)
-      {- ^ (Optional) A standard MIME type describing the format of the object data, e.g. application/octet-stream. All Valid MIME Types are valid for this input. -}
-    , etag :: !(Attr Text)
-      {- ^ (Optional) Used to trigger updates. The only meaningful value is  @${md5(file("path/to/file"))}@ . This attribute is not compatible with  @kms_key_id@ . -}
-    , key :: !(Attr Text)
-      {- ^ (Required) The name of the object once it is in the bucket. -}
-    , kms_key_id :: !(Attr Text)
-      {- ^ (Optional) Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified   of the KMS Key. If using  @aws_kms_key@ , use the exported  @arn@  attribute: @kms_key_id = "${aws_kms_key.foo.arn}"@ -}
-    , server_side_encryption :: !(Attr Text)
-      {- ^ (Optional) Specifies server-side encryption of the object in S3. Valid values are " @AES256@ " and " @aws:kms@ ". -}
-    , source :: !(Attr Text)
-      {- ^ (Required) The path to the source file being uploaded to the bucket. -}
-    , storage_class :: !(Attr Text)
-      {- ^ (Optional) Specifies the desired  <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> for the object. Can be either " @STANDARD@ ", " @REDUCED_REDUNDANCY@ ", or " @STANDARD_IA@ ". Defaults to " @STANDARD@ ". -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the object. -}
-    , website_redirect :: !(Attr Text)
-      {- ^ (Optional) Specifies a target URL for  <http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html> . -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed S3_Bucket_Object_Resource
-    = '[ '("etag", Attr Text)
-         {- the ETag generated for the object (an MD5 sum of the object content). -}
-      , '("id", Attr Text)
-         {- the  @key@  of the resource supplied above -}
-      , '("version_id", Attr Text)
-         {- A unique version ID value for the object, if bucket versioning is enabled. -}
-       ]
-
-$(TH.makeResource
-    "aws_s3_bucket_object"
-    ''AWS
-    'newResource
-    ''S3_Bucket_Object_Resource)
-
--- | The @aws_security_group_rule@ Terraform AWS provider resource.
-data Security_Group_Rule_Resource = Security_Group_Rule_Resource
-    { cidr_blocks :: !(Attr Text)
-      {- ^ (Optional) List of CIDR blocks. Cannot be specified with  @source_security_group_id@ . -}
+-- | The @aws_opsworks_application@ Terraform AWS provider resource.
+data Opsworks_Application_Resource = Opsworks_Application_Resource
+    { app_source :: !(Attr Text)
+      {- ^ (Optional) SCM configuration of the app as described below. -}
+    , auto_bundle_on_deploy :: !(Attr Text)
+      {- ^ (Optional) Run bundle install when deploying for application of type  @rails@ . -}
+    , aws_flow_ruby_settings :: !(Attr Text)
+      {- ^ (Optional) Specify activity and workflow workers for your app using the aws-flow gem. -}
+    , data_source_arn :: !(Attr Text)
+      {- ^ (Optional) The data source's ARN. -}
+    , data_source_database_name :: !(Attr Text)
+      {- ^ (Optional) The database name. -}
+    , data_source_type :: !(Attr Text)
+      {- ^ (Optional) The data source's type one of  @AutoSelectOpsworksMysqlInstance@ ,  @OpsworksMysqlInstance@ , or  @RdsDbInstance@ . -}
     , description :: !(Attr Text)
-      {- ^ (Optional) Description of the rule. -}
-    , from_port :: !(Attr Text)
-      {- ^ (Required) The start port (or ICMP type number if protocol is "icmp"). -}
-    , ipv6_cidr_blocks :: !(Attr Text)
-      {- ^ (Optional) List of IPv6 CIDR blocks. -}
-    , prefix_list_ids :: !(Attr Text)
-      {- ^ (Optional) List of prefix list IDs (for allowing access to VPC endpoints). Only valid with  @egress@ . -}
-    , protocol :: !(Attr Text)
-      {- ^ (Required) The protocol. If not icmp, tcp, udp, or all use the  <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml> -}
-    , security_group_id :: !(Attr Text)
-      {- ^ (Required) The security group to apply this rule to. -}
-    , self :: !(Attr Text)
-      {- ^ (Optional) If true, the security group itself will be added as a source to this ingress rule. -}
-    , source_security_group_id :: !(Attr Text)
-      {- ^ (Optional) The security group id to allow access to/from, depending on the  @type@ . Cannot be specified with  @cidr_blocks@ . -}
-    , to_port :: !(Attr Text)
-      {- ^ (Required) The end port (or ICMP code if protocol is "icmp"). -}
+      {- ^ (Optional) A description of the app. -}
+    , document_root :: !(Attr Text)
+      {- ^ (Optional) Subfolder for the document root for application of type  @rails@ . -}
+    , domains :: !(Attr Text)
+      {- ^  -  (Optional) A list of virtual host alias. -}
+    , enable_ssl :: !(Attr Text)
+      {- ^ (Optional) Whether to enable SSL for the app. This must be set in order to let  @ssl_configuration.private_key@ ,  @ssl_configuration.certificate@  and  @ssl_configuration.chain@  take effect. -}
+    , environment :: !(Attr Text)
+      {- ^ (Optional) Object to define environment variables.  Object is described below. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) A human-readable name for the application. -}
+    , rails_env :: !(Attr Text)
+      {- ^ (Required if  @type@  =  @rails@ ) The name of the Rails environment for application of type  @rails@ . -}
+    , short_name :: !(Attr Text)
+      {- ^ (Required) A short, machine-readable name for the application. This can only be defined on resource creation and ignored on resource update. -}
+    , ssl_configuration :: !(Attr Text)
+      {- ^ (Optional) The SSL configuration of the app. Object is described below. -}
+    , stack_id :: !(Attr Text)
+      {- ^ (Required) The id of the stack the application will belong to. -}
     , type_ :: !(Attr Text)
-      {- ^ (Required) The type of rule being created. Valid options are  @ingress@  (inbound) or  @egress@  (outbound). -}
+      {- ^ (Required) Opsworks application type. One of  @aws-flow-ruby@ ,  @java@ ,  @rails@ ,  @php@ ,  @nodejs@ ,  @static@  or  @other@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Security_Group_Rule_Resource
-    = '[ '("description", Attr Text)
-         {-  – Description of the rule -}
-      , '("from_port", Attr Text)
-         {- The start port (or ICMP type number if protocol is "icmp") -}
-      , '("id", Attr Text)
-         {- The ID of the security group rule -}
-      , '("protocol", Attr Text)
-         {-  – The protocol used -}
-      , '("to_port", Attr Text)
-         {- The end port (or ICMP code if protocol is "icmp") -}
-      , '("type_", Attr Text)
-         {- The type of rule,  @ingress@  or  @egress@ -}
+type instance Computed Opsworks_Application_Resource
+    = '[ '("id", Attr Text)
+         {- The id of the application. -}
        ]
 
 $(TH.makeResource
-    "aws_security_group_rule"
+    "aws_opsworks_application"
     ''AWS
     'newResource
-    ''Security_Group_Rule_Resource)
+    ''Opsworks_Application_Resource)
 
--- | The @aws_sns_topic_subscription@ Terraform AWS provider resource.
-data Sns_Topic_Subscription_Resource = Sns_Topic_Subscription_Resource
-    { confirmation_timeout_in_minutes :: !(Attr Text)
-      {- ^ (Optional) Integer indicating number of minutes to wait in retying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols (default is 1 minute). -}
-    , endpoint :: !(Attr Text)
-      {- ^ (Required) The endpoint to send data to, the contents will vary with the protocol. (see below for more information) -}
-    , endpoint_auto_confirms :: !(Attr Text)
-      {- ^ (Optional) Boolean indicating whether the end point is capable of  <http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.prepare>  e.g., PagerDuty (default is false) -}
-    , protocol :: !(Attr Text)
-      {- ^ (Required) The protocol to use. The possible values for this are:  @sqs@ ,  @sms@ ,  @lambda@ ,  @application@ . ( @http@  or  @https@  are partially supported, see below) ( @email@  is option but unsupported, see below). -}
-    , raw_message_delivery :: !(Attr Text)
-      {- ^ (Optional) Boolean indicating whether or not to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property) (default is false). -}
-    , topic_arn :: !(Attr Text)
-      {- ^ (Required) The ARN of the SNS topic to subscribe to -}
+-- | The @aws_opsworks_permission@ Terraform AWS provider resource.
+data Opsworks_Permission_Resource = Opsworks_Permission_Resource
+    { allow_ssh :: !(Attr Text)
+      {- ^ (Optional) Whether the user is allowed to use SSH to communicate with the instance -}
+    , allow_sudo :: !(Attr Text)
+      {- ^ (Optional) Whether the user is allowed to use sudo to elevate privileges -}
+    , level :: !(Attr Text)
+      {- ^ (Optional) The users permission level. Mus be one of  @deny@ ,  @show@ ,  @deploy@ ,  @manage@ ,  @iam_only@ -}
+    , stack_id :: !(Attr Text)
+      {- ^ (Required) The stack to set the permissions for -}
+    , user_arn :: !(Attr Text)
+      {- ^ (Required) The user's IAM ARN to set permissions for -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Sns_Topic_Subscription_Resource
-    = '[ '("arn", Attr Text)
-         {- The ARN of the subscription stored as a more user-friendly property -}
-      , '("endpoint", Attr Text)
-         {- The full endpoint to send data to (SQS ARN, HTTP(S) URL, Application ARN, SMS number, etc.) -}
-      , '("id", Attr Text)
-         {- The ARN of the subscription -}
-      , '("protocol", Attr Text)
-         {- The protocol being used -}
-      , '("topic_arn", Attr Text)
-         {- The ARN of the topic the subscription belongs to -}
+type instance Computed Opsworks_Permission_Resource
+    = '[ '("id", Attr Text)
+         {- The computed id of the permission. Please note that this is only used internally to identify the permission. This value is not used in aws. -}
        ]
 
 $(TH.makeResource
-    "aws_sns_topic_subscription"
+    "aws_opsworks_permission"
     ''AWS
     'newResource
-    ''Sns_Topic_Subscription_Resource)
+    ''Opsworks_Permission_Resource)
+
+-- | The @aws_route53_health_check@ Terraform AWS provider resource.
+data Route53_Health_Check_Resource = Route53_Health_Check_Resource
+    { child_health_threshold :: !(Attr Text)
+      {- ^ (Optional) The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive -}
+    , child_healthchecks :: !(Attr Text)
+      {- ^ (Optional) For a specified parent health check, a list of HealthCheckId values for the associated child health checks. -}
+    , cloudwatch_alarm_name :: !(Attr Text)
+      {- ^ (Optional) The name of the CloudWatch alarm. -}
+    , cloudwatch_alarm_region :: !(Attr Text)
+      {- ^ (Optional) The CloudWatchRegion that the CloudWatch alarm was created in. -}
+    , enable_sni :: !(Attr Text)
+      {- ^ (Optional) A boolean value that indicates whether Route53 should send the  @fqdn@  to the endpoint when performing the health check. This defaults to AWS' defaults: when the  @type@  is "HTTPS"  @enable_sni@  defaults to  @true@ , when  @type@  is anything else  @enable_sni@  defaults to  @false@ . -}
+    , failure_threshold :: !(Attr Text)
+      {- ^ (Required) The number of consecutive health checks that an endpoint must pass or fail. -}
+    , fqdn :: !(Attr Text)
+      {- ^ (Optional) The fully qualified domain name of the endpoint to be checked. -}
+    , insufficient_data_health_status :: !(Attr Text)
+      {- ^ (Optional) The status of the health check when CloudWatch has insufficient data about the state of associated alarm. Valid values are  @Healthy@  ,  @Unhealthy@  and  @LastKnownStatus@ . -}
+    , invert_healthcheck :: !(Attr Text)
+      {- ^ (Optional) A boolean value that indicates whether the status of health check should be inverted. For example, if a health check is healthy but Inverted is True , then Route 53 considers the health check to be unhealthy. -}
+    , ip_address :: !(Attr Text)
+      {- ^ (Optional) The IP address of the endpoint to be checked. -}
+    , measure_latency :: !(Attr Text)
+      {- ^ (Optional) A Boolean value that indicates whether you want Route 53 to measure the latency between health checkers in multiple AWS regions and your endpoint and to display CloudWatch latency graphs in the Route 53 console. -}
+    , port :: !(Attr Text)
+      {- ^ (Optional) The port of the endpoint to be checked. -}
+    , reference_name :: !(Attr Text)
+      {- ^ (Optional) This is a reference name used in Caller Reference (helpful for identifying single health_check set amongst others) -}
+    , regions :: !(Attr Text)
+      {- ^ (Optional) A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from. -}
+    , request_interval :: !(Attr Text)
+      {- ^ (Required) The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request. -}
+    , resource_path :: !(Attr Text)
+      {- ^ (Optional) The path that you want Amazon Route 53 to request when performing health checks. -}
+    , search_string :: !(Attr Text)
+      {- ^ (Optional) String searched in the first 5120 bytes of the response body for check to be considered healthy. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the health check. -}
+    , type_ :: !(Attr Text)
+      {- ^ (Required) The protocol to use when performing health checks. Valid values are  @HTTP@ ,  @HTTPS@ ,  @HTTP_STR_MATCH@ ,  @HTTPS_STR_MATCH@ ,  @TCP@ ,  @CALCULATED@  and  @CLOUDWATCH_METRIC@ . -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Route53_Health_Check_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_route53_health_check"
+    ''AWS
+    'newResource
+    ''Route53_Health_Check_Resource)
+
+-- | The @aws_route53_record@ Terraform AWS provider resource.
+data Route53_Record_Resource = Route53_Record_Resource
+    { alias :: !(Attr Text)
+      {- ^ (Optional) An alias block. Conflicts with  @ttl@  &  @records@ . Alias record documented below. -}
+    , failover_routing_policy :: !(Attr Text)
+      {- ^ (Optional) A block indicating the routing behavior when associated health check fails. Conflicts with any other routing policy. Documented below. -}
+    , geolocation_routing_policy :: !(Attr Text)
+      {- ^ (Optional) A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below. -}
+    , health_check_id :: !(Attr Text)
+      {- ^ (Optional) The health check the record should be associated with. -}
+    , latency_routing_policy :: !(Attr Text)
+      {- ^ (Optional) A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below. -}
+    , multivalue_answer_routing_policy :: !(Attr Text)
+      {- ^ (Optional) A block indicating a multivalue answer routing policy. Conflicts with any other routing policy. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the record. -}
+    , records :: !(Attr Text)
+      {- ^ (Required for non-alias records) A string list of records. -}
+    , set_identifier :: !(Attr Text)
+      {- ^ (Optional) Unique identifier to differentiate records with routing policies from one another. Required if using  @failover@ ,  @geolocation@ ,  @latency@ , or  @weighted@  routing policies documented below. -}
+    , ttl :: !(Attr Text)
+      {- ^ (Required for non-alias records) The TTL of the record. -}
+    , type_ :: !(Attr Text)
+      {- ^ (Required) The record type. Valid values are  @A@ ,  @AAAA@ ,  @CAA@ ,  @CNAME@ ,  @MX@ ,  @NAPTR@ ,  @NS@ ,  @PTR@ ,  @SOA@ ,  @SPF@ ,  @SRV@  and  @TXT@ . -}
+    , weighted_routing_policy :: !(Attr Text)
+      {- ^ (Optional) A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below. -}
+    , zone_id :: !(Attr Text)
+      {- ^ (Required) The ID of the hosted zone to contain this record. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Route53_Record_Resource
+    = '[ '("fqdn", Attr Text)
+         {-  <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>  built using the zone domain and  @name@ -}
+       ]
+
+$(TH.makeResource
+    "aws_route53_record"
+    ''AWS
+    'newResource
+    ''Route53_Record_Resource)
+
+-- | The @aws_route53_zone@ Terraform AWS provider resource.
+data Route53_Zone_Resource = Route53_Zone_Resource
+    { comment :: !(Attr Text)
+      {- ^ (Optional) A comment for the hosted zone. Defaults to 'Managed by Terraform'. -}
+    , delegation_set_id :: !(Attr Text)
+      {- ^ (Optional) The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts w/  @vpc_id@  as delegation sets can only be used for public zones. -}
+    , force_destroy :: !(Attr Text)
+      {- ^ (Optional) Whether to destroy all records (possibly managed outside of Terraform) in the zone when destroying the zone. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) This is the name of the hosted zone. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the zone. -}
+    , vpc_id :: !(Attr Text)
+      {- ^ (Optional) The VPC to associate with a private hosted zone. Specifying  @vpc_id@  will create a private hosted zone. Conflicts w/  @delegation_set_id@  as delegation sets can only be used for public zones. -}
+    , vpc_region :: !(Attr Text)
+      {- ^ (Optional) The VPC's region. Defaults to the region of the AWS provider. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Route53_Zone_Resource
+    = '[ '("name_servers", Attr Text)
+         {- A list of name servers in associated (or default) delegation set. Find more about delegation sets in  <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html> . -}
+      , '("zone_id", Attr Text)
+         {- The Hosted Zone ID. This can be referenced by zone records. -}
+       ]
+
+$(TH.makeResource
+    "aws_route53_zone"
+    ''AWS
+    'newResource
+    ''Route53_Zone_Resource)
+
+-- | The @aws_route_table_association@ Terraform AWS provider resource.
+data Route_Table_Association_Resource = Route_Table_Association_Resource
+    { route_table_id :: !(Attr Text)
+      {- ^ (Required) The ID of the routing table to associate with. -}
+    , subnet_id :: !(Attr Text)
+      {- ^ (Required) The subnet ID to create an association. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Route_Table_Association_Resource
+    = '[ '("id", Attr Text)
+         {- The ID of the association -}
+       ]
+
+$(TH.makeResource
+    "aws_route_table_association"
+    ''AWS
+    'newResource
+    ''Route_Table_Association_Resource)
+
+-- | The @aws_ses_event_destination@ Terraform AWS provider resource.
+data Ses_Event_Destination_Resource = Ses_Event_Destination_Resource
+    { cloudwatch_destination :: !(Attr Text)
+      {- ^ (Optional) CloudWatch destination for the events -}
+    , configuration_set_name :: !(Attr Text)
+      {- ^ (Required) The name of the configuration set -}
+    , enabled :: !(Attr Text)
+      {- ^ (Optional) If true, the event destination will be enabled -}
+    , kinesis_destination :: !(Attr Text)
+      {- ^ (Optional) Send the events to a kinesis firehose destination -}
+    , matching_types :: !(Attr Text)
+      {- ^ (Required) A list of matching types. May be any of  @"send"@ ,  @"reject"@ ,  @"bounce"@ ,  @"complaint"@ ,  @"delivery"@ ,  @"open"@ , or  @"click"@ . -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the event destination -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Ses_Event_Destination_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_ses_event_destination"
+    ''AWS
+    'newResource
+    ''Ses_Event_Destination_Resource)
+
+-- | The @aws_spot_fleet_request@ Terraform AWS provider resource.
+data Spot_Fleet_Request_Resource = Spot_Fleet_Request_Resource
+    { allocation_strategy :: !(Attr Text)
+      {- ^  - Indicates how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is lowestPrice. -}
+    , excess_capacity_termination_policy :: !(Attr Text)
+      {- ^  - Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet. -}
+    , iam_fleet_role :: !(Attr Text)
+      {- ^ (Required) Grants the Spot fleet permission to terminate Spot instances on your behalf when you cancel its Spot fleet request using CancelSpotFleetRequests or when the Spot fleet request expires, if you set terminateInstancesWithExpiration. -}
+    , instance_interruption_behavior :: !(Attr Text)
+      {- ^ (Optional) Indicates whether a Spot instance stops or terminates when it is interrupted. Default is @terminate@ . -}
+    , launch_specification :: !(Attr Text)
+      {- ^  - Used to define the launch configuration of the spot-fleet request. Can be specified multiple times to define different bids across different markets and instance types. -}
+    , replace_unhealthy_instances :: !(Attr Text)
+      {- ^ (Optional) Indicates whether Spot fleet should replace unhealthy instances. Default  @false@ . -}
+    , spot_price :: !(Attr Text)
+      {- ^ (Required) The bid price per unit hour. -}
+    , target_capacity :: !(Attr Text)
+      {- ^  - The number of units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O. -}
+    , terminate_instances_with_expiration :: !(Attr Text)
+      {- ^  - Indicates whether running Spot instances should be terminated when the Spot fleet request expires. -}
+    , valid_until :: !(Attr Text)
+      {- ^  - The end date and time of the request, in UTC ISO8601 format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request. Defaults to 24 hours. -}
+    , wait_for_fulfillment :: !(Attr Text)
+      {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Spot_Fleet_Request_Resource
+    = '[ '("id", Attr Text)
+         {- The Spot fleet request ID -}
+      , '("spot_request_state", Attr Text)
+         {- The state of the Spot fleet request. -}
+       ]
+
+$(TH.makeResource
+    "aws_spot_fleet_request"
+    ''AWS
+    'newResource
+    ''Spot_Fleet_Request_Resource)
 
 -- | The @aws_ssm_patch_group@ Terraform AWS provider resource.
 data Ssm_Patch_Group_Resource = Ssm_Patch_Group_Resource
@@ -701,46 +788,60 @@ $(TH.makeResource
     'newResource
     ''Ssm_Patch_Group_Resource)
 
--- | The @aws_wafregional_ipset@ Terraform AWS provider resource.
-data Wafregional_Ipset_Resource = Wafregional_Ipset_Resource
-    { ip_set_descriptor :: !(Attr Text)
-      {- ^ (Optional) The IP address type and IP address range (in CIDR notation) from which web requests originate. -}
-    , name :: !(Attr Text)
-      {- ^ (Required) The name or description of the IPSet. -}
+-- | The @aws_vpc_dhcp_options@ Terraform AWS provider resource.
+data Vpc_Dhcp_Options_Resource = Vpc_Dhcp_Options_Resource
+    { domain_name :: !(Attr Text)
+      {- ^ (Optional) the suffix domain name to use by default when resolving non Fully Qualified Domain Names. In other words, this is what ends up being the  @search@  value in the  @/etc/resolv.conf@  file. -}
+    , domain_name_servers :: !(Attr Text)
+      {- ^ (Optional) List of name servers to configure in  @/etc/resolv.conf@ . If you want to use the default AWS nameservers you should set this to  @AmazonProvidedDNS@ . -}
+    , netbios_name_servers :: !(Attr Text)
+      {- ^ (Optional) List of NETBIOS name servers. -}
+    , netbios_node_type :: !(Attr Text)
+      {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see  <http://www.ietf.org/rfc/rfc2132.txt> . -}
+    , ntp_servers :: !(Attr Text)
+      {- ^ (Optional) List of NTP servers to configure. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Wafregional_Ipset_Resource
+type instance Computed Vpc_Dhcp_Options_Resource
     = '[ '("id", Attr Text)
-         {- The ID of the WAF IPSet. -}
+         {- The ID of the DHCP Options Set. -}
        ]
 
 $(TH.makeResource
-    "aws_wafregional_ipset"
+    "aws_vpc_dhcp_options"
     ''AWS
     'newResource
-    ''Wafregional_Ipset_Resource)
+    ''Vpc_Dhcp_Options_Resource)
 
--- | The @sfn_state_machine@ Terraform AWS provider resource.
-data State_Machine_Resource = State_Machine_Resource
-    { definition :: !(Attr Text)
-      {- ^ (Required) The Amazon States Language definition of the state machine. -}
-    , name :: !(Attr Text)
-      {- ^ (Required) The name of the state machine. -}
-    , role_arn :: !(Attr Text)
-      {- ^ (Required) The Amazon Resource Name (ARN) of the IAM role to use for this state machine. -}
+-- | The @aws_vpc_peering_connection@ Terraform AWS provider resource.
+data Vpc_Peering_Connection_Resource = Vpc_Peering_Connection_Resource
+    { accepter :: !(Attr Text)
+      {- ^  (Optional) - An optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that accepts the peering connection (a maximum of one). -}
+    , auto_accept :: !(Attr Text)
+      {- ^ (Optional) Accept the peering (both VPCs need to be in the same AWS account). -}
+    , peer_owner_id :: !(Attr Text)
+      {- ^ (Optional) The AWS account ID of the owner of the peer VPC. Defaults to the account ID the  </docs/providers/aws/index.html>  is currently connected to. -}
+    , peer_vpc_id :: !(Attr Text)
+      {- ^ (Required) The ID of the VPC with which you are creating the VPC Peering Connection. -}
+    , requester :: !(Attr Text)
+      {- ^  (Optional) - A optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that requests the peering connection (a maximum of one). -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    , vpc_id :: !(Attr Text)
+      {- ^ (Required) The ID of the requester VPC. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed State_Machine_Resource
-    = '[ '("creation_date", Attr Text)
-         {- The date the state machine was created. -}
+type instance Computed Vpc_Peering_Connection_Resource
+    = '[ '("accept_status", Attr Text)
+         {- The status of the VPC Peering Connection request. -}
       , '("id", Attr Text)
-         {- The ARN of the state machine. -}
-      , '("status", Attr Text)
-         {- The current status of the state machine. Either "ACTIVE" or "DELETING". -}
+         {- The ID of the VPC Peering Connection. -}
        ]
 
 $(TH.makeResource
-    "sfn_state_machine"
+    "aws_vpc_peering_connection"
     ''AWS
     'newResource
-    ''State_Machine_Resource)
+    ''Vpc_Peering_Connection_Resource)

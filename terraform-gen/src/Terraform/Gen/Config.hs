@@ -23,7 +23,6 @@ import qualified Data.Aeson       as JSON
 import qualified Data.Aeson.Types as JSON
 import qualified Data.Char        as Char
 import qualified Data.Foldable    as Fold
-import qualified Data.List.Split  as List
 import qualified Data.Map.Strict  as Map
 import qualified Data.Text        as Text
 import qualified GHC.Read         as Read
@@ -159,19 +158,24 @@ data SchemaType
 
 groupConfigs :: Provider -> SchemaType -> [Config] -> Map NS [Config]
 groupConfigs p t xs
-    | length xs > 200 = mod 10
-    | length xs > 100 = mod 5
-    | length xs > 50  = mod 2
-    | otherwise       = single module
-
-    Map.fromListWith (<>) . zipWith assignNamespace [1..] . List.chunksOf 20
+    | length xs > 200 = partition 10 xs
+    | length xs > 100 = partition 5  xs
+    | length xs > 50  = partition 2  xs
+    | otherwise       = Map.singleton (ns []) xs
   where
-    ns  s = NS ("Terraform" :| s)
+    partition m =
+        Map.fromListWith (<>)
+            . zipWith assign (map (flip mod m) [1..])
+
+    assign (n :: Int) x =
+        (,) (ns [Text.pack (printf "R%02d" n)])
+            [x]
+
+    ns s = NS ("Terraform" :| prov : type_ : s)
+
+    prov  = providerName p
     type_ = Text.pack (show t)
 
-    assignNamespace (n :: Int) xs =
-        (,) (ns [providerName p, type_, Text.pack (printf "R%02d" n)])
-            xs
 
 -- JSON De/serialization
 
