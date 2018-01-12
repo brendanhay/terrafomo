@@ -77,11 +77,6 @@ instance P.Stream [Node] where
 
 -- Abstract Syntax Parsers
 
-providerParser :: Parser Provider
-providerParser = do
-    x <- schemaParser
-    pure $! Provider (schema_Name x) Nothing (Just x)
-
 schemaParser :: Parser Schema
 schemaParser = do
     -- preamble

@@ -38,23 +38,21 @@ renderPackage
     -> Either Text LText.Text
 renderPackage tmpls p =
     render (packageTemplate tmpls)
-        [ "provider" .= providerName p
+        [ "provider" .= provider_Name p
         , "package"  .= providerPackage p
         ]
 
 renderProvider
     :: Templates EDE.Template
     -> Provider
-    -> Either Text (Maybe (NS, LText.Text))
-renderProvider tmpls p =
-    sequenceA $ do
-        s <- providerSchema p
-        pure . second (providerNamespace p,)
-            $! render (providerTemplate tmpls)
-            [ "namespace" .= providerNamespace p
-            , "provider"  .= providerName p
-            , "schema"    .= s
-            ]
+    -> Schema
+    -> Either Text (NS, LText.Text)
+renderProvider tmpls p x =
+    second (provider_Namespace p,) $ render (providerTemplate tmpls)
+        [ "namespace" .= provider_Namespace p
+        , "provider"  .= provider_Name p
+        , "schema"    .= x
+        ]
 
 renderContents
     :: Templates EDE.Template
@@ -79,7 +77,7 @@ renderSchemas tmpls p typ = Map.traverseWithKey go
     go ns xs =
         render (getTypeTemplate typ tmpls)
             [ "namespace" .= ns
-            , "provider"  .= providerName p
+            , "provider"  .= provider_Name p
             , "schemas"   .= createMap (getTypeName typ) xs
             ]
 

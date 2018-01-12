@@ -9,10 +9,7 @@ cache:
     - .stack-work/
     - .stack-root/
 # GENERATED
-    - provider/terrafomo-aws/.stack-work
-    - provider/terrafomo-azure/.stack-work
-    - provider/terrafomo-digitalocean/.stack-work
-    - provider/terrafomo-google/.stack-work
+    - provider/terrafomo-aws/.stack-work/
 # END GENERATED
 
 before_script:

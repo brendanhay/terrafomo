@@ -45,31 +45,15 @@ fromNamespace c (NS xs) =
 -- Provider Configuration
 
 data Provider = Provider
-    { providerName    :: !Text
+    { provider_Name   :: !Text
     , providerPackage :: !(Maybe Text)
-    , providerSchema  :: !(Maybe Schema)
     } deriving (Show, Generic)
-
-instance Semigroup Provider where
-    (<>) parsed saved = Provider
-        { providerName    = providerName saved
-        , providerPackage = providerPackage saved
-        , providerSchema  = on (<>) providerSchema parsed saved
-        }
-
-instance ToJSON Provider where
-    toJSON = JSON.genericToJSON (JSON.options "provider")
 
 instance FromJSON Provider where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
-providerDir :: Provider -> FilePath
-providerDir =
-    maybe "terrafomo" (Path.combine "provider" . Text.unpack)
-        . providerPackage
-
-providerNamespace :: Provider -> NS
-providerNamespace p = NS ("Terrafomo" :| [providerName p, "Provider"])
+provider_Namespace :: Provider -> NS
+provider_Namespace p = NS ("Terrafomo" :| [provider_Name p, "Provider"])
 
 schemaNamespaces :: Provider -> SchemaType -> [a] -> (NS, Map NS [a])
 schemaNamespaces p t xs
@@ -88,5 +72,5 @@ schemaNamespaces p t xs
         (,) (namespace [Text.pack (printf "M%02d" n)])
             [x]
 
-    namespace s = NS ("Terrafomo" :| providerName p : Text.pack (show t) : s)
+    namespace s = NS ("Terrafomo" :| provider_Name p : Text.pack (show t) : s)
 

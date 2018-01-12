@@ -8,10 +8,11 @@ module Main (main) where
 
 import Control.Applicative (many)
 import Control.Error       (Script, hoistEither, runScript, scriptIO)
-import Control.Monad       (unless, when)
+import Control.Monad       (unless, when, (>=>))
 import Data.Aeson          (FromJSON, ToJSON)
 
 import Data.Bifunctor (first)
+import Data.Foldable  (for_)
 import Data.Function  ((&))
 import Data.Semigroup (Semigroup ((<>)))
 
@@ -60,7 +61,8 @@ import qualified Text.EDE               as EDE
 -- Options Parsing
 
 data Options = Options
-    { schemaDir       :: !FilePath
+    { configDir       :: !FilePath
+    , schemaDir       :: !FilePath
     , patchDir        :: !FilePath
     , templateDir     :: !FilePath
     , providerName    :: !String
@@ -72,6 +74,12 @@ data Options = Options
 optionsParser :: Option.Parser Options
 optionsParser = Options
     <$> Option.strOption
+         ( Option.long "config-dir"
+        <> Option.help "The directory to read provider configuration."
+        <> Option.metavar "DIR"
+         )
+
+    <*> Option.strOption
          ( Option.long "schema-dir"
         <> Option.help "The directory to read/write user modifiable schemas."
         <> Option.metavar "DIR"
@@ -134,28 +142,32 @@ main = do
     runScript $ do
         echo "Starting ..."
 
-        tmpls <- loadTemplates opts
-        p     <- loadProvider  opts
+        tmpls              <- loadTemplates opts
+        (provider, schema) <- loadProvider  opts
+        dir                <- renderProvider tmpls provider schema
 
-        renderProvider tmpls p
-        renderSchemas  tmpls p Resource   =<< loadResources   opts
-        renderSchemas  tmpls p DataSource =<< loadDataSources opts
+        renderSchemas tmpls dir provider Resource
+            =<< loadResources opts
+
+        renderSchemas tmpls dir provider DataSource
+            =<< loadDataSources opts
 
         echo "Done."
 
 -- Provider
 
-loadProvider :: Options -> Script Provider
+loadProvider :: Options -> Script (Provider, Maybe Schema)
 loadProvider opts = do
-    let path@Path{markdownFile, schemaFile} = providerPath opts
+    let path@Path{markdownFile} = providerPath opts
+        configFile              = configDir opts </> providerName opts <.> "yaml"
 
-    exists <- scriptIO (Dir.doesFileExist markdownFile)
+    provider <- parseYAML configFile
+    exists   <- scriptIO (Dir.doesFileExist markdownFile)
     echo ("Provider " ++ markdownFile ++ " == " ++ show exists)
 
-    -- FIXME: Current semigroup associativity won't make sense for a provider.
     if exists
-        then loadSchema Parser.providerParser path
-        else parseYAML schemaFile >>= updateSchema path
+        then (provider,) . Just <$> loadSchema Parser.schemaParser path
+        else pure (provider, Nothing)
 
 loadResources :: Options -> Script [Schema]
 loadResources = traverse (loadSchema Parser.schemaParser) . resourcePaths
@@ -219,41 +231,52 @@ parseSchema parser Path{markdownFile} = do
 renderProvider
     :: Templates EDE.Template
     -> Provider
-    -> Script ()
-renderProvider tmpls p =
-    hoistEither (Template.renderProvider tmpls p) >>= \case
-        Nothing -> pure ()
-        Just x  -> do
-            writeNamespace (providerDir p) x
-            renderPackage tmpls p
+    -> Maybe Schema
+    -> Script FilePath
+renderProvider tmpls p@Provider{providerPackage} schema = do
+    let dir = maybe "terrafomo" (Path.combine "provider" . Text.unpack)
+                    providerPackage
+
+    for_ providerPackage $
+        const (renderPackage tmpls dir p)
+
+    for_ schema $
+        hoistEither . Template.renderProvider tmpls p
+            >=> writeNamespace dir
+
+    pure dir
 
 renderPackage
     :: Templates EDE.Template
+    -> FilePath
     -> Provider
     -> Script ()
-renderPackage tmpls p = do
-    let packageFile = providerDir p </> "package" <.> "yaml"
-        srcDir      = providerDir p </> "src"
+renderPackage tmpls dir p = do
+    let packageFile = dir    </> "package" <.> "yaml"
+        srcDir      = dir    </> "src"
         gitKeepFile = srcDir </> ".gitkeep"
 
     pkg <- hoistEither (Template.renderPackage tmpls p)
 
     echo ("Writing " ++ packageFile)
     scriptIO $ do
-        LText.writeFile packageFile pkg
         Dir.createDirectoryIfMissing True srcDir
+
         exists <- Dir.doesFileExist gitKeepFile
         unless exists $
             appendFile gitKeepFile mempty
 
+        LText.writeFile packageFile pkg
+
 renderSchemas
     :: Templates EDE.Template
+    -> FilePath
     -> Provider
     -> SchemaType
     -> [Schema]
     -> Script ()
-renderSchemas tmpls p typ xs = do
-    let writeModule         = writeNamespace (providerDir p)
+renderSchemas tmpls dir p typ xs = do
+    let writeModule         = writeNamespace dir
         (contents, modules) = schemaNamespaces p typ xs
 
     hoistEither (Template.renderSchemas tmpls p Resource modules)

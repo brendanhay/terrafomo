@@ -1,4 +1,4 @@
-_common: !include '../share/package-common.yaml'
+_common: !include '../../share/package-common.yaml'
 
 name: {{ package }}
 
