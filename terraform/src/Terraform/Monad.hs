@@ -15,6 +15,8 @@ import Data.Functor.Identity (Identity)
 import Data.Hashable         (Hashable)
 import Data.HashMap.Strict   (HashMap)
 import Data.Map.Strict       (Map)
+import Data.Monoid           ((<>))
+import Data.String           (fromString)
 
 import Terraform.Syntax
 import Terraform.Syntax.Resource (Change, HasMeta, IsResource (newResource),
@@ -36,7 +38,7 @@ data Ref b a = Ref Key
 
 data TerraformState = TerraformState
     { _providers :: !(HashMap Alias HCL.Value)
-    , _resources :: !(Map Key HCL.Value)
+    , _resources :: !(Map Key HCL.Value) -- FIXME: need to preserve (somewhat) write ordering.
     }
 
 $(TH.makeLenses ''TerraformState)
@@ -100,6 +102,10 @@ resource name (newResource -> x@Resource{_provider, _type, _schema}) = do
             HCL.toValue _provider
 
     pure (Ref key)
+
+-- Example of replacing terraform's count attribute:
+count :: Applicative f => [Int] -> (Name -> f (Ref b a)) -> f [Ref b a]
+count xs f = traverse (f . fromString . show) xs
 
  -- FIXME: move to Syntax.Resource
 

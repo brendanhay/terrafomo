@@ -8,7 +8,9 @@ import Data.Text   (Text)
 -- Names: resource.<NAME>.TYPE
 
 newtype Name = Name { fromName :: Text }
-    deriving (Show, Eq, Ord, IsString)
+    deriving (Show, Eq, Ord, Monoid, IsString)
+
+-- FIXME: formatting library with name formatters to assist in .count style naming
 
 -- Types: resource.NAME.<TYPE>
 

@@ -50,23 +50,20 @@ instance IsString Value where
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
---        Assign k v@Block{}  -> pretty k <+> pretty v
-        Assign k v          -> pretty k <+> "=" <+> pretty v
-
+        Assign k v   -> pretty k <+> "=" <+> pretty v
         Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
+        Block vs     -> PP.vcat (map pretty vs)
 
-        Block vs            -> PP.vcat (map pretty vs)
-
-        List []             -> "[]"
+        List []                      -> "[]"
         List (reverse       -> v:vs) ->
             let xs = map (flip mappend ", " . pretty) vs
                 y  = pretty v
              in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : xs))) <$$> "]"
 
-        Bool   x            -> prettyBool x
-        Number x            -> pretty x
-        Float  x            -> pretty x
-        String x            -> PP.dquotes (pretty x)
+        Bool   x -> prettyBool x
+        Number x -> pretty x
+        Float  x -> pretty x
+        String x -> PP.dquotes (pretty x)
 
         HereDoc (pretty -> k) x ->
             "<<" <> k <$$> pretty x <$$> k

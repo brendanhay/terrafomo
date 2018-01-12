@@ -1,14 +1,15 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE OverloadedLists       #-}
 {-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE ScopedTypeVariables   #-}
 
 module Terraform.Tutorial where
+
+import Data.Monoid ((<>))
 
 import Terraform.AWS
 
 import qualified Terraform.AWS.Resource as R
-
-import Terraform.Monad
 
 -- data Arch = AMD64
 -- data Distro = Zesty
@@ -105,5 +106,13 @@ example = do
     instance2 <-
         resource "myinstance2" $
             base & dependsOn instance1
+
+    instances <-
+        count [0..5] $ \n ->
+            resource ("myinstance-" <> n) $
+                R.instance_resource
+                    { R.ami  = "abdefg"
+                    , R.tags = Just common
+                    }
 
     pure ()
