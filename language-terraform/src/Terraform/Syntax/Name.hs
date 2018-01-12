@@ -17,3 +17,12 @@ data Key = Key
     { keyType :: !Type
     , keyName :: !Name
     } deriving (Show, Eq, Ord)
+
+class HasType a where
+    getType :: a -> Type
+
+instance HasType Type where
+    getType = id
+
+instance HasType Key where
+    getType = keyType

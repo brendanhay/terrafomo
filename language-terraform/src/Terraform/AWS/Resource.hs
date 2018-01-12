@@ -1,37 +1,25 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE TypeFamilies      #-}
+
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Terraform.AWS.Resource where
 
-import Prelude (Eq, Num (..), Show, ($), (.))
+import Data.String (fromString)
 
 import Terraform.AWS.Provider    (AWS)
-import Terraform.Prelude
-import Terraform.Syntax.Resource
+import Terraform.Syntax.Name     (HasType (getType))
+import Terraform.Syntax.Resource (ResourceName)
 
-example :: Resource AWS a
-example =
-    resource Instance "name" $ do
-        -- foo = ${var "variable" ? true : false}
-        value "foo" $ bool true false (var "variable")
-
-        -- bar {
-        --     a = true
-        --     b = "${false == true || true > false}"
-        --     c = "${1 + 3 * 3}"
-        -- }
-        block "bar" $ do
-            value "a" true
-            value "b" (false == true || true > false)
-            value "c" (1 + 3 * 3)
+import qualified Data.Char as Char
 
 -- These resource names rely on the 'Show' instance providing a string which
--- will match the terraform naming via the following steps:
+-- will match the terraform naming via the additional steps:
 --
 -- 1. lowercase all letters.
 -- 2. add the 'aws_' prefix.
 --
+-- Please see the 'HasType' instance for more details.
 data instance ResourceName AWS
       -- API Gateway Resources
     = API_Gateway_Account
@@ -401,3 +389,6 @@ data instance ResourceName AWS
     | VPN_Gateway_Attachment
     | VPN_Gateway_Route_Propagation
       deriving (Show, Eq)
+
+instance HasType (ResourceName AWS) where
+    getType = fromString . mappend "aws_" . map Char.toLower . show

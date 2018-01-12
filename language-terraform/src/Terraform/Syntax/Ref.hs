@@ -64,3 +64,8 @@ data Ref
     | RData !Type !Name !(Maybe Index) !Name
     | RSelf !Name
       deriving (Show, Eq)
+
+-- | Obtain/construct a reference from a top-level statement such as a
+-- resource or data source.
+class HasRef a where
+    getRef :: a -> Name -> Ref

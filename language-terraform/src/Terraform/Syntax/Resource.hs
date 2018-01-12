@@ -14,8 +14,9 @@ import Data.Text       (Text)
 import Numeric.Natural (Natural)
 
 import Terraform.Syntax.Expr     (Expr, Value (AnyExpr))
-import Terraform.Syntax.Name     (Key (Key), Name, Type)
+import Terraform.Syntax.Name     (HasType (getType), Key (Key), Name, Type)
 import Terraform.Syntax.Provider (Provider)
+import Terraform.Syntax.Ref      (HasRef (getRef), Ref (RRes))
 
 import qualified Control.Monad.Trans.Writer.Strict as Writer
 import qualified Data.Map.Strict                   as Map
@@ -37,10 +38,10 @@ data family ResourceName p :: *
 
 type Attributes a = Writer [(Name, Attr a)] ()
 
-resource :: ResourceName p -> Name -> Attributes a -> Resource p a
-resource typ name m =
+resource :: ResourceName p -> Attributes a -> Resource p a
+resource typ m =
     Resource { _resourceType  = typ
-             , _resourceName  = name
+             , _resourceName  = "<generated>"
              , _resourceAttrs = Map.fromList (Writer.execWriter m)
              , _resourceMeta  =
                  Meta { _count     = Nothing
@@ -58,6 +59,9 @@ value name x = Writer.tell [(name, Value (AnyExpr x))]
 block :: Name -> Attributes a -> Attributes a
 block name m = Writer.tell [(name, Block (Map.fromList (Writer.execWriter m)))]
 
+object :: Name -> a -> Attributes a
+object name x = Writer.tell [(name, Serialize x)]
+
 -- Resources
 
 -- FIXME: type family to prevent duplicates assignment?
@@ -69,6 +73,12 @@ data Resource p a = Resource
     }
 
 deriving instance (Show (ResourceName p), Show a) => Show (Resource p a)
+
+instance HasType (ResourceName p) => HasType (Resource p a) where
+    getType = getType . _resourceType
+
+instance HasType (ResourceName p) => HasRef (Resource p a) where
+    getRef x = RRes (getType x) (_resourceName x) Nothing
 
 -- Resource Attributes
 
