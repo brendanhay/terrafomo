@@ -1,8 +1,8 @@
-name:                  terrorform
+name:                  language-terraform
 version:               0.1.0.0
 synopsis:              Pending.
-homepage:              https://github.com/brendanhay/terrorform
-bug-reports:           https://github.com/brendanhay/terrorform/issues
+homepage:              https://github.com/brendanhay/language-terraform
+bug-reports:           https://github.com/brendanhay/language-terraform/issues
 license:               MPL-2.0
 license-file:          LICENSE
 author:                Brendan Hay
@@ -18,7 +18,7 @@ description:
 
 source-repository head
     type:     git
-    location: git://github.com/brendanhay/terrorform.git
+    location: git://github.com/brendanhay/language-terraform.git
 
 library
     default-language: Haskell2010
@@ -27,11 +27,13 @@ library
     ghc-options:      -Wall -Wincomplete-uni-patterns
 
     exposed-modules:
-          Terrorform
-
-    other-modules:
+          Language.Terraform
+          Language.Terraform.AST
+          -- Language.Terraform.Parser
+          Language.Terraform.Printer
 
     build-depends:
           base >= 4.7 && < 5
-        , bytestring
+        , text
         , containers
+        , language-hcl
