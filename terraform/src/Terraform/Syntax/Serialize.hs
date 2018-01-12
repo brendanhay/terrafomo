@@ -95,54 +95,51 @@ instance ToValue Change where
     toValue (Match n) = toValue n
     toValue Wildcard  = HCL.String "*"
 
--- FIXME: "meta" hilarity
+-- -- FIXME: "meta" hilarity
 instance ToValue a => ToValue (Resource Alias a) where
     toValue Resource{..} =
-        object (key "resource" _key) $
-            ["provider" =: _provider, toValue _schema]
+        object (pure (type_ _type))
+            [ "provider" =: _provider
+            , toValue       _schema
+            , toValue       _metadata
+            ]
 
-    -- toValue Meta{..} =
-    --     block [ "depends_on" =: list _dependsOn
-    --           , object (pure "lifecycle")
-    --               [ "prevent_destroy"       =: _preventDestroy
-    --               , "create_before_destroy" =: _createBeforeDestroy
-    --               , "ignore_changes"        =: list _ignoreChanges
-    --               ]
-    --           ]
+instance ToValue Meta where
+    toValue Meta{..} =
+        block [ "depends_on" =: list _dependsOn
+              , object (pure "lifecycle")
+                  [ "prevent_destroy"       =: _preventDestroy
+                  , "create_before_destroy" =: _createBeforeDestroy
+                  , "ignore_changes"        =: list _ignoreChanges
+                  ]
+              ]
 
-genericSerialize
-    :: ( Generic a
-       , GSerialize (Rep a)
-       )
-    => [String]
-    -> a
-    -> HCL.Value
-genericSerialize ignored = block . gSerialize ignored . from
+-- No DefaultSignatures because of the use of 'block'
+genericSerialize :: (Generic a, GSerialize (Rep a)) => a -> HCL.Value
+genericSerialize = block . gSerialize . from
 
 class GSerialize f where
-    gSerialize :: [String] -> f a -> [HCL.Value]
+    gSerialize :: f a -> [HCL.Value]
 
 instance GSerialize U1 where
-    gSerialize _ _ = []
+    gSerialize _ = []
 
 instance {-# OVERLAPPABLE #-} ToValue a => GSerialize (K1 i a) where
-    gSerialize _ = pure . toValue . unK1
+    gSerialize = pure . toValue . unK1
 
 instance {-# OVERLAPPING #-} ToValue a => GSerialize (K1 i (Maybe a)) where
-    gSerialize _ = maybe [] (pure . toValue) . unK1
+    gSerialize = maybe [] (pure . toValue) . unK1
 
 instance GSerialize f => GSerialize (M1 D x f) where
-    gSerialize ignored = gSerialize ignored . unM1
+    gSerialize = gSerialize . unM1
 
 instance GSerialize f => GSerialize (M1 C x f) where
-    gSerialize ignored = gSerialize ignored . unM1
+    gSerialize = gSerialize . unM1
 
 instance ( Selector s
          , GSerialize f
          ) => GSerialize (M1 S s f) where
-    gSerialize ignored p
-        | selName p `elem` ignored = []
-        | otherwise                = map assign (gSerialize ignored (unM1 p))
+    gSerialize p = map assign (gSerialize (unM1 p))
       where
         label  = fromString (selName p)
         assign = \case
@@ -152,5 +149,4 @@ instance ( Selector s
 instance ( GSerialize a
          , GSerialize b
          ) => GSerialize (a :*: b) where
-    gSerialize ignored (a :*: b) =
-        gSerialize ignored a ++ gSerialize ignored b
+    gSerialize (a :*: b) = gSerialize a ++ gSerialize b

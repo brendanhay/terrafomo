@@ -50,6 +50,7 @@ instance IsString Value where
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
+--        Assign k v@Block{}  -> pretty k <+> pretty v
         Assign k v          -> pretty k <+> "=" <+> pretty v
 
         Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs

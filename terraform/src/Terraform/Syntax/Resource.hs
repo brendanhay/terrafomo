@@ -1,7 +1,9 @@
 {-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE PolyKinds                  #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 {-# LANGUAGE TypeFamilies               #-}
@@ -15,7 +17,7 @@ import Data.Function  (on)
 import Data.Set       (Set)
 import Data.String    (IsString (fromString))
 
-import Terraform.Syntax.Name     (HasType (getType), Key, Name)
+import Terraform.Syntax.Name     (HasType (getType), Key, Name, Type)
 import Terraform.Syntax.Required (Placeholder, Required)
 
 -- FIXME: break meta back up into blocks like lifecycle.{...} etc.
@@ -29,9 +31,16 @@ type instance Required CompletedSchema a = a
 
 type Schema r = r CompletedSchema
 
+class IsResource p b a | p -> b, p -> a where
+    newResource :: p -> Resource b a
+
+instance IsResource (Resource b a) b a where
+    newResource = id
+
 data Resource b a = Resource
     { _provider :: !b
-    , _key      :: !Key
+    , _type     :: !Type
+    , _metadata :: !Meta
     , _schema   :: !a
     } deriving (Show, Eq)
 
@@ -39,13 +48,13 @@ instance Functor (Resource b) where
     fmap = second
 
 instance Bifunctor Resource where
-    bimap f g (Resource p k s) = Resource (f p) k (g s)
+    bimap f g (Resource p t m s) = Resource (f p) t m (g s)
 
 instance HasType (Resource b a) where
-    getType = getType . _key
+    getType = _type
 
-instance HasMeta a => HasMeta (Resource b a) where
-    metadata = lens _schema (\s a -> s { _schema = a }) . metadata
+instance HasMeta (Resource b a) where
+    metadata = lens _metadata (\s a -> s { _metadata = a })
 
 -- | A resource schema's underlying common metadata.
 data Meta = Meta

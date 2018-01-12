@@ -9,7 +9,7 @@ module Terraform.Syntax.Required
     ( Placeholder
     , Required
 
-    , gInitialState
+    , genericInitialState
     ) where
 
 import GHC.Generics
@@ -21,6 +21,10 @@ type family Required s a :: *
 -- an initial but required value.
 data Placeholder = Required
     deriving (Show, Eq, Ord)
+
+-- No DefaultSignatures because of the use of 'block'
+genericInitialState :: (Generic a, GInitialState (Rep a)) => a
+genericInitialState = to gInitialState
 
 -- | Obtain a value in the initial state.
 --

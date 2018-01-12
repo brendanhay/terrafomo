@@ -10,14 +10,13 @@ import Data.List.NonEmpty (NonEmpty ((:|)))
 
 import GHC.Generics (Generic)
 
-import Terraform.Monad            (Ref, TerraformT)
-import Terraform.Syntax.Name      (HasType (getType), Key (Key), Name)
+-- import Terraform.Monad            (Ref, TerraformT)
+import Terraform.Syntax.Name      (HasType (getType), Key (Key), Name, Type)
 import Terraform.Syntax.Provider  (newAlias)
 import Terraform.Syntax.Resource  (Resource (..), Schema)
 import Terraform.Syntax.Serialize ((=:))
 
 import qualified Data.Text                  as Text
-import qualified Terraform.Monad            as Terraform
 import qualified Terraform.Syntax.Serialize as HCL
 
 -- FIXME: Need to utilise versioning.
@@ -46,12 +45,18 @@ instance HCL.ToValue AWS where
             , "region"     =: Text.pack "us-east-1"
             ]
 
-resource
-    :: ( Monad m
-       , HasType (Schema r)
-       , HCL.ToValue (Schema r)
-       )
-    => Name
-    -> Schema r
-    -> TerraformT m (Ref AWS (Schema r))
-resource n x = Terraform.resourceWith (Resource AWS (Key (getType x) n) x)
+newAWSResource
+    :: Type
+    -> a
+    -> Resource AWS a
+newAWSResource typ = Resource AWS typ mempty
+
+-- resource
+--     :: ( Monad m
+--        , HasType (Schema r)
+--        , HCL.ToValue (Schema r)
+--        )
+--     => Name
+--     -> Schema r
+--     -> TerraformT m (Ref AWS (Schema r))
+-- resource n x = Terraform.resourceWith (Resource AWS (Key (getType x) n) x)

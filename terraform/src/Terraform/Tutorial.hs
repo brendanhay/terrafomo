@@ -100,7 +100,7 @@ example = do
                 , AWS.tags                        = Just common
                 } & dependsOn bucket2
                   & dependsOn bucket1
-                  & ignoreChange "ami"
+--                  & ignoreChange "ami"
 
   -- example of modifying the provider
   --     have the provider in the metadata again?

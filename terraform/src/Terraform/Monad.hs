@@ -1,8 +1,8 @@
-{-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE NamedFieldPuns             #-}
 {-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE ViewPatterns               #-}
 
 module Terraform.Monad where
 
@@ -16,7 +16,8 @@ import Data.HashMap.Strict   (HashMap)
 import Data.Map.Strict       (Map)
 
 import Terraform.Syntax
-import Terraform.Syntax.Resource (Change, HasMeta, Resource (..), Schema)
+import Terraform.Syntax.Resource (Change, HasMeta, IsResource (newResource),
+                                  Resource (..), Schema)
 
 import qualified Control.Lens               as Lens
 import qualified Control.Lens.TH            as TH
@@ -68,60 +69,68 @@ evalTerraformT = fmap snd . runTerraformT
 -- FIXME: additional validation logic can run when storing a ref,
 -- for example checking the reference changes exist, etc.
 
-resourceWith
+resource
     :: ( Monad m
        , Hashable b
-       , HCL.ToValue a
-       , HCL.ToValue b
-       )
-    => Resource b a
-    -> TerraformT m (Ref b a)
-resourceWith x@Resource{_provider, _key, _schema} = do
-    let alias = newAlias _provider
+       , IsResource p b a
+       , a ~ Schema r
+         -- This constraint ensures either 'Resource' or 'IsResource' can be
+         -- used interchangeably here with no ambiguity.
 
-    _exists <- Lens.uses resources (Map.lookup _key)
+
+       , HCL.ToValue b
+       , HCL.ToValue (Resource Alias (Schema r))
+       )
+    => Name
+    -> p
+    -> TerraformT m (Ref b a)
+resource name (newResource -> x@Resource{_provider, _type, _schema}) = do
+    let alias = newAlias _provider
+        key   = Key _type name
+
+    _exists <- Lens.uses resources (Map.lookup key)
     -- error handling
 
     Lens.modifying resources $
-        Map.insert _key $
+        Map.insert key $
             HCL.toValue (first (const alias) x)
 
     Lens.modifying providers $
         HashMap.insert alias $
             HCL.toValue _provider
 
-    pure (Ref _key)
+    pure (Ref key)
 
--- FIXME: move to Syntax.Resource
+-- -- FIXME: move to Syntax.Resource
 
 -- Depends on is only used to set the actual dependencies from a value like:
 -- dependsOn (resource "foo" def)
 --
 -- It's not intended to have direct access to the underlying key set.
 dependsOn
-    :: HasMeta (Schema r)
-    => Ref b a
-    -> Schema r
-    -> Schema r
-dependsOn (Ref key) = Resource.dependsOn %~ Set.insert key
+    :: IsResource p b a
+    => Ref b' a'
+    -> p
+    -> Resource b a
+dependsOn (Ref key) = (Resource.dependsOn %~ Set.insert key) . newResource
 
-preventDestroy
-    :: HasMeta (Schema r)
-    => Bool
-    -> Schema r
-    -> Schema r
-preventDestroy = Lens.set Resource.preventDestroy
+-- preventDestroy
+--     :: HasMeta a
+--     => Bool
+--     -> a
+--     -> a
+-- preventDestroy = Lens.set Resource.preventDestroy
 
-createBeforeDestroy
-    :: HasMeta (Schema r)
-    => Bool
-    -> Schema r
-    -> Schema r
-createBeforeDestroy = Lens.set Resource.createBeforeDestroy
+-- createBeforeDestroy
+--     :: HasMeta (Schema r)
+--     => Bool
+--     -> Schema r
+--     -> Schema r
+-- createBeforeDestroy = Lens.set Resource.createBeforeDestroy
 
-ignoreChange
-    :: HasMeta (Schema r)
-    => Change
-    -> Schema r
-    -> Schema r
-ignoreChange x = Resource.ignoreChanges %~ Set.insert x
+-- ignoreChange
+--     :: HasMeta (Schema r)
+--     => Change
+--     -> Schema r
+--     -> Schema r
+-- ignoreChange x = Resource.ignoreChanges %~ Set.insert x
