@@ -126,7 +126,7 @@ attrItem :: Parser (Text, Attr)
 attrItem = item >>> paragraph >>> attribute
   where
     attribute =
-        (,) <$> fmap unreserved code
+        (,) <$> code
             <*> ( Attr <$> fmap (pure . strip) textual
                        <*> pure defaultType
                 )
