@@ -1,0 +1,79 @@
+arguments:
+- required: false
+  help: Information about alarms associated with the deployment group (documented
+    below).
+  name: alarm_configuration
+  type: Text
+- required: true
+  help: The name of the application.
+  name: app_name
+  type: Text
+- required: false
+  help: The automatic rollback configuration associated with the deployment group
+    (documented below).
+  name: auto_rollback_configuration
+  type: Text
+- required: false
+  help: Autoscaling groups associated with the deployment group.
+  name: autoscaling_groups
+  type: Text
+- required: false
+  help: Information about blue/green deployment options for a deployment group (documented
+    below).
+  name: blue_green_deployment_config
+  type: Text
+- required: false
+  help: The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime".
+  name: deployment_config_name
+  type: Text
+- required: true
+  help: The name of the deployment group.
+  name: deployment_group_name
+  type: Text
+- required: false
+  help: Information about the type of deployment, either in-place or blue/green, you
+    want to run and whether to route deployment traffic behind a load balancer (documented
+    below).
+  name: deployment_style
+  type: Text
+- required: false
+  help: Tag filters associated with the group. See the AWS docs for details.
+  name: ec2_tag_filter
+  type: Text
+- required: false
+  help: Information about the load balancer to use in a blue/green deployment (documented
+    below).
+  name: load_balancer_info
+  type: Text
+- required: false
+  help: On premise tag filters associated with the group. See the AWS docs for details.
+  name: on_premises_instance_tag_filter
+  type: Text
+- required: true
+  help: The service role ARN that allows deployments.
+  name: service_role_arn
+  type: Text
+- required: false
+  help: Trigger Configurations for the deployment group (documented below).
+  name: trigger_configuration
+  type: Text
+name: aws_codedeploy_deployment_group
+attributes:
+- help: The group's assigned application.
+  name: app_name
+  type: Text
+- help: The autoscaling groups associated with the deployment group.
+  name: autoscaling_groups
+  type: Text
+- help: The name of the group's deployment config.
+  name: deployment_config_name
+  type: Text
+- help: The group's name.
+  name: deployment_group_name
+  type: Text
+- help: The deployment group's ID.
+  name: id
+  type: Text
+- help: The group's service role ARN.
+  name: service_role_arn
+  type: Text

@@ -1,0 +1,26 @@
+arguments:
+- required: true
+  help: The content type of the model
+  name: content_type
+  type: Text
+- required: false
+  help: The description of the model
+  name: description
+  type: Text
+- required: true
+  help: The name of the model
+  name: name
+  type: Text
+- required: true
+  help: The ID of the associated REST API
+  name: rest_api_id
+  type: Text
+- required: true
+  help: The schema of the model in a JSON form
+  name: schema
+  type: Text
+name: aws_api_gateway_model
+attributes:
+- help: The ID of the model
+  name: id
+  type: Text

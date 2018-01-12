@@ -1,0 +1,10 @@
+arguments:
+- required: true
+  help: The VPC ID to create in.
+  name: vpc_id
+  type: Text
+name: aws_egress_only_internet_gateway
+attributes:
+- help: The ID of the Egress Only Internet Gateway.
+  name: id
+  type: Text

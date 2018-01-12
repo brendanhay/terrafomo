@@ -1,0 +1,22 @@
+arguments:
+- required: true
+  help: The id of the API to connect.
+  name: api_id
+  type: Text
+- required: false
+  help: Path segment that must be prepended to the path when accessing the API via
+    this mapping. If omitted, the API is exposed at the root of the given domain.
+  name: base_path
+  type: Text
+- required: true
+  help: The already-registered domain name to connect the API to.
+  name: domain_name
+  type: Text
+- required: false
+  help: The name of a specific deployment stage to expose at the given path. If omitted,
+    callers may select any stage by including its name as a path element after the
+    base path.
+  name: stage_name
+  type: Text
+name: aws_api_gateway_base_path_mapping
+attributes: []

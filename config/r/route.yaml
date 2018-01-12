@@ -1,0 +1,66 @@
+arguments:
+- required: false
+  help: The destination CIDR block.
+  name: destination_cidr_block
+  type: Text
+- required: false
+  help: The destination IPv6 CIDR block.
+  name: destination_ipv6_cidr_block
+  type: Text
+- required: false
+  help: An ID of a VPC Egress Only Internet Gateway.
+  name: egress_only_gateway_id
+  type: Text
+- required: false
+  help: An ID of a VPC internet gateway or a virtual private gateway.
+  name: gateway_id
+  type: Text
+- required: false
+  help: An ID of an EC2 instance.
+  name: instance_id
+  type: Text
+- required: false
+  help: An ID of a VPC NAT gateway.
+  name: nat_gateway_id
+  type: Text
+- required: false
+  help: An ID of a network interface.
+  name: network_interface_id
+  type: Text
+- required: true
+  help: The ID of the routing table.
+  name: route_table_id
+  type: Text
+- required: false
+  help: An ID of a VPC peering connection.
+  name: vpc_peering_connection_id
+  type: Text
+name: aws_route
+attributes:
+- help: The destination CIDR block.
+  name: destination_cidr_block
+  type: Text
+- help: The destination IPv6 CIDR block.
+  name: destination_ipv6_cidr_block
+  type: Text
+- help: An ID of a VPC Egress Only Internet Gateway.
+  name: egress_only_gateway_id
+  type: Text
+- help: An ID of a VPC internet gateway or a virtual private gateway.
+  name: gateway_id
+  type: Text
+- help: An ID of a NAT instance.
+  name: instance_id
+  type: Text
+- help: An ID of a VPC NAT gateway.
+  name: nat_gateway_id
+  type: Text
+- help: An ID of a network interface.
+  name: network_interface_id
+  type: Text
+- help: The ID of the routing table.
+  name: route_table_id
+  type: Text
+- help: An ID of a VPC peering connection.
+  name: vpc_peering_connection_id
+  type: Text

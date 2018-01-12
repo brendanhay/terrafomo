@@ -1,0 +1,18 @@
+arguments:
+- required: true
+  help: List of instance ports to which the policy should be applied. This can be
+    specified if the protocol is SSL or TCP.
+  name: instance_ports
+  type: Text
+- required: true
+  help: The load balancer to which the policy should be attached.
+  name: load_balancer
+  type: Text
+name: aws_proxy_protocol_policy
+attributes:
+- help: The ID of the policy.
+  name: id
+  type: Text
+- help: The load balancer to which the policy is attached.
+  name: load_balancer
+  type: Text

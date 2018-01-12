@@ -1,0 +1,16 @@
+arguments:
+- required: true
+  help: A list of AutoScaling Group Names
+  name: group_names
+  type: Text
+- required: true
+  help: A list of Notification Types that trigger notifications. Acceptable values
+    are documented  https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html
+  name: notifications
+  type: Text
+- required: true
+  help: The Topic ARN for notifications to be sent through
+  name: topic_arn
+  type: Text
+name: aws_autoscaling_notification
+attributes: []

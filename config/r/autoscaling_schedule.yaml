@@ -1,0 +1,35 @@
+arguments:
+- required: true
+  help: The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+  name: autoscaling_group_name
+  type: Text
+- required: false
+  help: The time for this action to end, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT
+    only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action
+    in the past, Auto Scaling returns an error message.
+  name: end_time
+  type: Text
+- required: false
+  help: The minimum size for the Auto Scaling group. Default
+  name: min_size
+  type: Text
+- required: false
+  help: The time when recurring future actions will start. Start time is specified
+    by the user following the Unix cron syntax format.
+  name: recurrence
+  type: Text
+- required: true
+  help: The name of this scaling action.
+  name: scheduled_action_name
+  type: Text
+- required: false
+  help: The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT
+    only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action
+    in the past, Auto Scaling returns an error message.
+  name: start_time
+  type: Text
+name: aws_autoscaling_schedule
+attributes:
+- help: The ARN assigned by AWS to the autoscaling schedule.
+  name: arn
+  type: Text

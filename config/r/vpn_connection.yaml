@@ -1,0 +1,84 @@
+arguments:
+- required: true
+  help: The ID of the customer gateway.
+  name: customer_gateway_id
+  type: Text
+- required: true
+  help: ! ' - (Optional, Default  false ) Whether the VPN connection uses static routes
+    exclusively. Static routes must be used for devices that don''t support BGP.'
+  name: static_routes_only
+  type: Text
+- required: false
+  help: Tags to apply to the connection.
+  name: tags
+  type: Text
+- required: true
+  help: The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+  name: type
+  type: Text
+- required: true
+  help: The ID of the virtual private gateway.
+  name: vpn_gateway_id
+  type: Text
+name: aws_vpn_connection
+attributes:
+- help: The configuration information for the VPN connection's customer gateway (in
+    the native XML format).
+  name: customer_gateway_configuration
+  type: Text
+- help: The ID of the customer gateway to which the connection is attached.
+  name: customer_gateway_id
+  type: Text
+- help: The amazon-assigned ID of the VPN connection.
+  name: id
+  type: Text
+- help: Whether the VPN connection uses static routes exclusively.
+  name: static_routes_only
+  type: Text
+- help: Tags applied to the connection.
+  name: tags
+  type: Text
+- help: The public IP address of the first VPN tunnel.
+  name: tunnel1_address
+  type: Text
+- help: The bgp asn number of the first VPN tunnel.
+  name: tunnel1_bgp_asn
+  type: Text
+- help: The bgp holdtime of the first VPN tunnel.
+  name: tunnel1_bgp_holdtime
+  type: Text
+- help: The RFC 6890 link-local address of the first VPN tunnel (Customer Gateway
+    Side).
+  name: tunnel1_cgw_inside_address
+  type: Text
+- help: The preshared key of the first VPN tunnel.
+  name: tunnel1_preshared_key
+  type: Text
+- help: The RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side).
+  name: tunnel1_vgw_inside_address
+  type: Text
+- help: The public IP address of the second VPN tunnel.
+  name: tunnel2_address
+  type: Text
+- help: The bgp asn number of the second VPN tunnel.
+  name: tunnel2_bgp_asn
+  type: Text
+- help: The bgp holdtime of the second VPN tunnel.
+  name: tunnel2_bgp_holdtime
+  type: Text
+- help: The RFC 6890 link-local address of the second VPN tunnel (Customer Gateway
+    Side).
+  name: tunnel2_cgw_inside_address
+  type: Text
+- help: The preshared key of the second VPN tunnel.
+  name: tunnel2_preshared_key
+  type: Text
+- help: The RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side).
+  name: tunnel2_vgw_inside_address
+  type: Text
+- help: The type of VPN connection.
+  name: type
+  type: Text
+- help: The ID of the virtual private gateway to which the connection is attached.
+  name: vpn_gateway_id
+  type: Text

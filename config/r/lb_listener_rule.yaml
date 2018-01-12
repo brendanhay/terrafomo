@@ -1,0 +1,27 @@
+arguments:
+- required: true
+  help: An Action block. Action blocks are documented below.
+  name: action
+  type: Text
+- required: true
+  help: A Condition block. Condition blocks are documented below.
+  name: condition
+  type: Text
+- required: true
+  help: ! ' - (Required, Forces New Resource) The ARN of the listener to which to
+    attach the rule.'
+  name: listener_arn
+  type: Text
+- required: true
+  help: The priority for the rule. A listener can't have multiple rules with the same
+    priority.
+  name: priority
+  type: Text
+name: aws_lb_listener_rule
+attributes:
+- help: The ARN of the rule (matches  id )
+  name: arn
+  type: Text
+- help: The ARN of the rule (matches  arn )
+  name: id
+  type: Text

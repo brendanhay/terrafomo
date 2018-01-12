@@ -1,0 +1,73 @@
+arguments:
+- required: false
+  help: Whether to automatically assign an elastic IP address to the layer's instances.
+  name: auto_assign_elastic_ips
+  type: Text
+- required: false
+  help: For stacks belonging to a VPC, whether to automatically assign a public IP
+    address to each of the layer's instances.
+  name: auto_assign_public_ips
+  type: Text
+- required: false
+  help: Whether to enable auto-healing for the layer.
+  name: auto_healing
+  type: Text
+- required: false
+  help: The ARN of an IAM profile that will be used for the layer's instances.
+  name: custom_instance_profile_arn
+  type: Text
+- required: false
+  help: Custom JSON attributes to apply to the layer.
+  name: custom_json
+  type: Text
+- required: false
+  help: Ids for a set of security groups to apply to the layer's instances.
+  name: custom_security_group_ids
+  type: Text
+- required: false
+  help: Whether to enable Elastic Load Balancing connection draining.
+  name: drain_elb_on_shutdown
+  type: Text
+- required: false
+  help: ! ' ebs_volume  blocks, as described below, will each create an EBS volume
+    and connect it to the layer''s instances.'
+  name: ebs_volume
+  type: Text
+- required: false
+  help: Name of an Elastic Load Balancer to attach to this layer
+  name: elastic_load_balancer
+  type: Text
+- required: false
+  help: Whether to install OS and package updates on each instance when it boots.
+  name: install_updates_on_boot
+  type: Text
+- required: false
+  help: The time, in seconds, that OpsWorks will wait for Chef to complete after triggering
+    the Shutdown event.
+  name: instance_shutdown_timeout
+  type: Text
+- required: false
+  help: A human-readable name for the layer.
+  name: name
+  type: Text
+- required: false
+  help: The version of NodeJS to use. Defaults to "0.10.38".
+  name: nodejs_version
+  type: Text
+- required: true
+  help: The id of the stack the layer will belong to.
+  name: stack_id
+  type: Text
+- required: false
+  help: Names of a set of system packages to install on the layer's instances.
+  name: system_packages
+  type: Text
+- required: false
+  help: Whether to use EBS-optimized instances.
+  name: use_ebs_optimized_instances
+  type: Text
+name: aws_opsworks_nodejs_app_layer
+attributes:
+- help: The id of the layer.
+  name: id
+  type: Text

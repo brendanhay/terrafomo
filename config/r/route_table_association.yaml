@@ -1,0 +1,14 @@
+arguments:
+- required: true
+  help: The ID of the routing table to associate with.
+  name: route_table_id
+  type: Text
+- required: true
+  help: The subnet ID to create an association.
+  name: subnet_id
+  type: Text
+name: aws_route_table_association
+attributes:
+- help: The ID of the association
+  name: id
+  type: Text

@@ -1,0 +1,66 @@
+arguments:
+- required: true
+  help: The json content of the document.
+  name: content
+  type: Text
+- required: true
+  help: ! 'The type of the document. Valid document types include:  Command ,  Policy  and  Automation'
+  name: document_type
+  type: Text
+- required: true
+  help: The name of the document.
+  name: name
+  type: Text
+- required: false
+  help: ! 'Additional Permissions to attach to the document. See  #permissions  below
+    for details.'
+  name: permissions
+  type: Text
+name: aws_ssm_document
+attributes:
+- help: ! ' The json content of the document.'
+  name: content
+  type: Text
+- help: The date the document was created.
+  name: created_date
+  type: Text
+- help: The default version of the document.
+  name: default_version
+  type: Text
+- help: The description of the document.
+  name: description
+  type: Text
+- help: The type of document created.
+  name: document_type
+  type: Text
+- help: The sha1 or sha256 of the document content
+  name: hash
+  type: Text
+- help: ! '"Sha1" "Sha256". The hashing algorithm used when hashing the content.'
+  name: hash_type
+  type: Text
+- help: The latest version of the document.
+  name: latest_version
+  type: Text
+- help: The name of the document.
+  name: name
+  type: Text
+- help: The AWS user account of the person who created the document.
+  name: owner
+  type: Text
+- help: The parameters that are available to this document.
+  name: parameter
+  type: Text
+- help: The permissions of how this document should be shared.
+  name: permissions
+  type: Text
+- help: A list of OS platforms compatible with this SSM document, either "Windows"
+    or "Linux".
+  name: platform_types
+  type: Text
+- help: The schema version of the document.
+  name: schema_version
+  type: Text
+- help: ! '"Creating", "Active" or "Deleting". The current status of the document.'
+  name: status
+  type: Text

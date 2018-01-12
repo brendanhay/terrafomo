@@ -1,0 +1,22 @@
+arguments:
+- required: false
+  help: The name for the key pair.
+  name: key_name
+  type: Text
+- required: false
+  help: Creates a unique name beginning with the specified prefix. Conflicts with  key_name
+    .
+  name: key_name_prefix
+  type: Text
+- required: true
+  help: The public key material.
+  name: public_key
+  type: Text
+name: aws_key_pair
+attributes:
+- help: The MD5 public key fingerprint as specified in section 4 of RFC 4716.
+  name: fingerprint
+  type: Text
+- help: The key pair name.
+  name: key_name
+  type: Text

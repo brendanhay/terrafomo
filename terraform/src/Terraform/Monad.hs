@@ -5,7 +5,6 @@
 {-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE TupleSections              #-}
 {-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE ViewPatterns               #-}
 
 module Terraform.Monad where
 
@@ -24,11 +23,10 @@ import Data.String           (fromString)
 
 import GHC.TypeLits (KnownSymbol, symbolVal)
 
-import Terraform.Syntax.Attribute (Attr (Computed), Computed, HasAttribute)
-import Terraform.Syntax.Name      (Alias, Key (Key), Name)
-import Terraform.Syntax.Output    (Output (Output))
-import Terraform.Syntax.Resource  (Change, IsResource (fromSchema),
-                                   Resource (..))
+import Terraform.Syntax.Attribute
+import Terraform.Syntax.Name
+import Terraform.Syntax.Output
+import Terraform.Syntax.Resource
 
 import qualified Control.Lens               as Lens
 import qualified Control.Lens.TH            as TH
@@ -43,7 +41,7 @@ import qualified Terraform.Syntax.Resource  as Resource
 import qualified Terraform.Syntax.Serialize as HCL
 
 -- Tagged by some resource/data differentiator, and the provider type.
-data Ref b a = Ref Key
+data Ref p s = Ref Key
     deriving (Show, Eq, Ord)
 
 data TerraformState = TerraformState
@@ -110,15 +108,14 @@ insertNewKey l k = do
 -- used interchangeably here with no ambiguity.
 resource
     :: ( Monad m
-       , IsResource b a s
-       , Hashable b
-       , HCL.ToValue b
+       , Hashable p
+       , HCL.ToValue p
        , HCL.ToValue a
        )
     => Name
-    -> s
-    -> TerraformT m (Ref b a)
-resource name (fromSchema -> x@Resource{_provider, _type', _schema}) = do
+    -> Resource p a
+    -> TerraformT m (Ref p a)
+resource name x@Resource{_provider, _type', _schema} = do
     let alias = Name.newAlias _provider
         key   = Name.Key _type' name
 

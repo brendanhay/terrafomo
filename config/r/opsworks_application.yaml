@@ -1,0 +1,79 @@
+arguments:
+- required: false
+  help: SCM configuration of the app as described below.
+  name: app_source
+  type: Text
+- required: false
+  help: Run bundle install when deploying for application of type  rails .
+  name: auto_bundle_on_deploy
+  type: Text
+- required: false
+  help: Specify activity and workflow workers for your app using the aws-flow gem.
+  name: aws_flow_ruby_settings
+  type: Text
+- required: false
+  help: The data source's ARN.
+  name: data_source_arn
+  type: Text
+- required: false
+  help: The database name.
+  name: data_source_database_name
+  type: Text
+- required: false
+  help: The data source's type one of  AutoSelectOpsworksMysqlInstance ,  OpsworksMysqlInstance
+    , or  RdsDbInstance .
+  name: data_source_type
+  type: Text
+- required: false
+  help: A description of the app.
+  name: description
+  type: Text
+- required: false
+  help: Subfolder for the document root for application of type  rails .
+  name: document_root
+  type: Text
+- required: true
+  help: ! ' -  (Optional) A list of virtual host alias.'
+  name: domains
+  type: Text
+- required: false
+  help: Whether to enable SSL for the app. This must be set in order to let  ssl_configuration.private_key
+    ,  ssl_configuration.certificate  and  ssl_configuration.chain  take effect.
+  name: enable_ssl
+  type: Text
+- required: false
+  help: Object to define environment variables.  Object is described below.
+  name: environment
+  type: Text
+- required: true
+  help: A human-readable name for the application.
+  name: name
+  type: Text
+- required: true
+  help: ! ' - (Required if  type  =  rails ) The name of the Rails environment for
+    application of type  rails .'
+  name: rails_env
+  type: Text
+- required: true
+  help: A short, machine-readable name for the application. This can only be defined
+    on resource creation and ignored on resource update.
+  name: short_name
+  type: Text
+- required: false
+  help: The SSL configuration of the app. Object is described below.
+  name: ssl_configuration
+  type: Text
+- required: true
+  help: The id of the stack the application will belong to.
+  name: stack_id
+  type: Text
+- required: true
+  help: Opsworks application type. One of  aws-flow-ruby ,  java ,  rails ,  php ,  nodejs
+    ,  static  or  other .
+  name: type
+  type: Text
+name: aws_opsworks_application
+attributes:
+- help: The id of the application.
+  name: id
+  type: Text

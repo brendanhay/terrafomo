@@ -1,0 +1,7 @@
+arguments:
+- required: true
+  help: The name of the rule set
+  name: rule_set_name
+  type: Text
+name: aws_ses_receipt_rule_set
+attributes: []

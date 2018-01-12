@@ -1,0 +1,23 @@
+arguments:
+- required: false
+  help: Description of the alias.
+  name: description
+  type: Text
+- required: true
+  help: The function ARN of the Lambda function for which you want to create an alias.
+  name: function_name
+  type: Text
+- required: true
+  help: ! 'Lambda function version for which you are creating the alias. Pattern:  (\$LATEST|[0-9]+)
+    .'
+  name: function_version
+  type: Text
+- required: true
+  help: ! 'Name for the alias you are creating. Pattern:  (?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+  name: name
+  type: Text
+name: aws_lambda_alias
+attributes:
+- help: The Amazon Resource Name (ARN) identifying your Lambda function alias.
+  name: arn
+  type: Text

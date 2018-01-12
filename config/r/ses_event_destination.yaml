@@ -1,0 +1,28 @@
+arguments:
+- required: false
+  help: CloudWatch destination for the events
+  name: cloudwatch_destination
+  type: Text
+- required: true
+  help: The name of the configuration set
+  name: configuration_set_name
+  type: Text
+- required: false
+  help: If true, the event destination will be enabled
+  name: enabled
+  type: Text
+- required: false
+  help: Send the events to a kinesis firehose destination
+  name: kinesis_destination
+  type: Text
+- required: true
+  help: A list of matching types. May be any of  "send" ,  "reject" ,  "bounce" ,  "complaint"
+    ,  "delivery" ,  "open" , or  "click" .
+  name: matching_types
+  type: Text
+- required: true
+  help: The name of the event destination
+  name: name
+  type: Text
+name: aws_ses_event_destination
+attributes: []

@@ -1,0 +1,14 @@
+arguments:
+- required: true
+  help: The ID of the DHCP Options Set to associate to the VPC.
+  name: dhcp_options_id
+  type: Text
+- required: true
+  help: The ID of the VPC to which we would like to associate a DHCP Options Set.
+  name: vpc_id
+  type: Text
+name: aws_vpc_dhcp_options_
+attributes:
+- help: The ID of the DHCP Options Set Association.
+  name: id
+  type: Text

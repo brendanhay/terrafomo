@@ -1,0 +1,91 @@
+arguments:
+- required: false
+  help: The  https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl  to
+    apply. Defaults to "private".
+  name: acl
+  type: Text
+- required: true
+  help: The name of the bucket to put the file in.
+  name: bucket
+  type: Text
+- required: false
+  help: Specifies caching behavior along the request/reply chain Read  http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9  for
+    further details.
+  name: cache_control
+  type: Text
+- required: true
+  help: ! ' - (Required unless  source  given) The literal content being uploaded
+    to the bucket.'
+  name: content
+  type: Text
+- required: false
+  help: Specifies presentational information for the object. Read  http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1  for
+    further information.
+  name: content_disposition
+  type: Text
+- required: false
+  help: Specifies what content encodings have been applied to the object and thus
+    what decoding mechanisms must be applied to obtain the media-type referenced by
+    the Content-Type header field. Read  http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11  for
+    further information.
+  name: content_encoding
+  type: Text
+- required: false
+  help: The language the content is in e.g. en-US or en-GB.
+  name: content_language
+  type: Text
+- required: false
+  help: A standard MIME type describing the format of the object data, e.g. application/octet-stream.
+    All Valid MIME Types are valid for this input.
+  name: content_type
+  type: Text
+- required: false
+  help: Used to trigger updates. The only meaningful value is  ${md5(file("path/to/file"))}
+    . This attribute is not compatible with  kms_key_id .
+  name: etag
+  type: Text
+- required: true
+  help: The name of the object once it is in the bucket.
+  name: key
+  type: Text
+- required: false
+  help: ! 'Specifies the AWS KMS Key ARN to use for object encryption. This value
+    is a fully qualified   of the KMS Key. If using  aws_kms_key , use the exported  arn  attribute:
+    kms_key_id = "${aws_kms_key.foo.arn}"'
+  name: kms_key_id
+  type: Text
+- required: false
+  help: Specifies server-side encryption of the object in S3. Valid values are " AES256
+    " and " aws:kms ".
+  name: server_side_encryption
+  type: Text
+- required: true
+  help: The path to the source file being uploaded to the bucket.
+  name: source
+  type: Text
+- required: false
+  help: Specifies the desired  http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    for the object. Can be either " STANDARD ", " REDUCED_REDUNDANCY ", or " STANDARD_IA
+    ". Defaults to " STANDARD ".
+  name: storage_class
+  type: Text
+- required: false
+  help: A mapping of tags to assign to the object.
+  name: tags
+  type: Text
+- required: false
+  help: Specifies a target URL for  http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html
+    .
+  name: website_redirect
+  type: Text
+name: aws_s3_bucket_object
+attributes:
+- help: the ETag generated for the object (an MD5 sum of the object content).
+  name: etag
+  type: Text
+- help: the  key  of the resource supplied above
+  name: id
+  type: Text
+- help: A unique version ID value for the object, if bucket versioning is enabled.
+  name: version_id
+  type: Text

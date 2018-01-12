@@ -1,0 +1,13 @@
+arguments:
+- required: true
+  help: The name of the cluster (up to 255 letters, numbers, hyphens, and underscores)
+  name: name
+  type: Text
+name: aws_ecs_cluster
+attributes:
+- help: The Amazon Resource Name (ARN) that identifies the cluster
+  name: id
+  type: Text
+- help: The name of the cluster
+  name: name
+  type: Text

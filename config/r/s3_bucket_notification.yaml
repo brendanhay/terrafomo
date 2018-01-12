@@ -1,0 +1,20 @@
+arguments:
+- required: true
+  help: The name of the bucket to put notification configuration.
+  name: bucket
+  type: Text
+- required: true
+  help: ! ' - (Optional, Multiple) Used to configure notifications to a Lambda Function
+    (documented below).'
+  name: lambda_function
+  type: Text
+- required: false
+  help: The notification configuration to SQS Queue (documented below).
+  name: queue
+  type: Text
+- required: false
+  help: The notification configuration to SNS Topic (documented below).
+  name: topic
+  type: Text
+name: aws_s3_bucket_notification
+attributes: []

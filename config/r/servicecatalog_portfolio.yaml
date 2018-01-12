@@ -1,0 +1,22 @@
+arguments:
+- required: true
+  help: Description of the portfolio
+  name: description
+  type: Text
+- required: true
+  help: The name of the portfolio.
+  name: name
+  type: Text
+- required: true
+  help: Name of the person or organization who owns the portfolio.
+  name: provider_name
+  type: Text
+- required: false
+  help: Tags to apply to the connection.
+  name: tags
+  type: Text
+name: aws_servicecatalog_portfolio
+attributes:
+- help: The ID of the Service Catalog Portfolio.
+  name: id
+  type: Text

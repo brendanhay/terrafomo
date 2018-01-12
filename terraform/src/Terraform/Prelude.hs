@@ -11,16 +11,15 @@ module Terraform.Prelude
     , Set
 
     -- * Terraform Syntax
-    , Name.Name
+    , Name
 
     -- ** Providers
-    , Name.Alias
+    , Alias
 
     -- ** Resources
-    , Resource.IsResource
-    , Resource.Resource
-    , Monad.Ref
-    , Monad.resource
+    , Resource
+    , Ref
+    , resource
 
     -- -- *** Resource Metadata
     -- , Monad.dependsOn
@@ -32,27 +31,27 @@ module Terraform.Prelude
     -- ** Attributes
     -- , Attribute.Attr
     -- , Attribute.Computed
-    , Monad.attribute
+    , attribute
 
     -- ** Defining Outputs
-    , Monad.output
+    , output
 
     -- * Terraform Monad
-    , Monad.Terraform
-    , Monad.runTerraform
-    , Monad.evalTerraform
+    , Terraform
+    , runTerraform
+    , evalTerraform
     -- ** Monad Transformer
-    , Monad.TerraformT
-    , Monad.runTerraformT
-    , Monad.evalTerraformT
+    , TerraformT
+    , runTerraformT
+    , evalTerraformT
     -- ** Count
-    , Monad.count
+    , count
 
     -- * Formatting Strings
-    , (Format.%)
-    , Format.format
-    , Format.sformat
-    , Format.nformat
+    , (%)
+    , format
+    , sformat
+    , nformat
 
     -- * Re-exported Functions
     , (Prelude.&)
@@ -64,12 +63,13 @@ import Data.Text       (Text)
 
 import Numeric.Natural (Natural)
 
-import qualified Data.Function              as Prelude
-import qualified Terraform.Format           as Format
-import qualified Terraform.Monad            as Monad
-import qualified Terraform.Syntax.Attribute as Attribute
-import qualified Terraform.Syntax.Name      as Name
-import qualified Terraform.Syntax.Resource  as Resource
+import Terraform.Format
+import Terraform.Monad
+import Terraform.Syntax.Attribute
+import Terraform.Syntax.Name
+import Terraform.Syntax.Resource
+
+import qualified Data.Function as Prelude
 
 -- -- Boolean Logic
 

@@ -1,0 +1,33 @@
+arguments:
+- required: true
+  help: The identifier of the API key resource.
+  name: key_id
+  type: Text
+- required: true
+  help: The type of the API key resource. Currently, the valid key type is API_KEY.
+  name: key_type
+  type: Text
+- required: true
+  help: The Id of the usage plan resource representing to associate the key to.
+  name: usage_plan_id
+  type: Text
+name: aws_api_gateway_usage_plan_key
+attributes:
+- help: The Id of a usage plan key.
+  name: id
+  type: Text
+- help: The identifier of the API gateway key resource.
+  name: key_id
+  type: Text
+- help: The type of a usage plan key. Currently, the valid key type is API_KEY.
+  name: key_type
+  type: Text
+- help: The name of a usage plan key.
+  name: name
+  type: Text
+- help: The ID of the API resource
+  name: usage_plan_id
+  type: Text
+- help: The value of a usage plan key.
+  name: value
+  type: Text

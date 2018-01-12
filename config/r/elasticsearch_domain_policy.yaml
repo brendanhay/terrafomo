@@ -1,0 +1,11 @@
+arguments:
+- required: false
+  help: IAM policy document specifying the access policies for the domain
+  name: access_policies
+  type: Text
+- required: true
+  help: Name of the domain.
+  name: domain_name
+  type: Text
+name: aws_elasticsearch_domain_policy
+attributes: []

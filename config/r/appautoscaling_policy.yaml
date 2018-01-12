@@ -1,0 +1,56 @@
+arguments:
+- required: true
+  help: The name of the policy.
+  name: name
+  type: Text
+- required: false
+  help: For DynamoDB, only  TargetTrackingScaling  is supported. For any other service,
+    only  StepScaling  is supported. Defaults to  StepScaling .
+  name: policy_type
+  type: Text
+- required: true
+  help: The resource type and unique identifier string for the resource associated
+    with the scaling policy. For Amazon ECS services, this value is the resource type,
+    followed by the cluster name and service name, such as  service/default/sample-webapp
+    . For Amazon EC2 Spot fleet requests, the resource type is  spot-fleet-request
+    , and the identifier is the Spot fleet request ID; for example,  spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE
+    . For DynamoDB tables, this value is  table/nameOfTheTable .
+  name: resource_id
+  type: Text
+- required: true
+  help: The scalable dimension of the scalable target. The scalable dimension contains
+    the service namespace,   resource  type, and scaling property, such as  ecs:service:DesiredCount  for
+    the desired task count of an Amazon ECS service, or  ec2:spot-fleet-request:TargetCapacity  for
+    the target capacity of an Amazon EC2 Spot fleet request.
+  name: scalable_dimension
+  type: Text
+- required: true
+  help: The AWS service namespace of the scalable target. Valid values are  ecs  for
+    Amazon ECS services,  ec2  for Amazon EC2 Spot fleet requests and  dynamodb  for
+    DynamoDB tables.
+  name: service_namespace
+  type: Text
+- required: false
+  help: Step scaling policy configuration, requires  policy_type = "StepScaling"  (default).
+    See supported fields below.
+  name: step_scaling_policy_configuration
+  type: Text
+- required: false
+  help: A target tracking policy, requires  policy_type = "TargetTrackingScaling"
+    . See supported fields below.
+  name: target_tracking_scaling_policy_configuration
+  type: Text
+name: aws_appautoscaling_policy
+attributes:
+- help: The scaling policy's adjustment type.
+  name: adjustment_type
+  type: Text
+- help: The ARN assigned by AWS to the scaling policy.
+  name: arn
+  type: Text
+- help: The scaling policy's name.
+  name: name
+  type: Text
+- help: The scaling policy's type.
+  name: policy_type
+  type: Text

@@ -1,0 +1,11 @@
+arguments:
+- required: true
+  help: The ID of the network interface to attach to.
+  name: network_interface_id
+  type: Text
+- required: true
+  help: The ID of the security group.
+  name: security_group_id
+  type: Text
+name: aws_network_interface_sg_attachment
+attributes: []

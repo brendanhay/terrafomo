@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Terraform.Hash where
 
 import Data.Hashable (Hashable)

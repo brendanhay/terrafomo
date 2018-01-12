@@ -1,13 +1,8 @@
-{-# LANGUAGE DeriveFunctor              #-}
-{-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE PolyKinds                  #-}
-{-# LANGUAGE StandaloneDeriving         #-}
 {-# LANGUAGE TemplateHaskell            #-}
-{-# LANGUAGE TypeFamilies               #-}
 
 module Terraform.Syntax.Resource where
 
@@ -24,20 +19,14 @@ import Terraform.Syntax.Name (Key, Name, Type)
 import qualified Control.Lens    as Lens
 import qualified Control.Lens.TH as TH
 
-class IsResource b a s | s -> b, s -> a where
-    fromSchema :: s -> Resource b a
-
-instance IsResource b a (Resource b a) where
-    fromSchema = id
-
-data Resource b a = Resource
-    { _provider :: !b
+data Resource p a = Resource
+    { _provider :: !p
     , _type'    :: !Type
     , _metadata :: !Meta
     , _schema   :: !a
     } deriving (Show, Eq)
 
-instance Functor (Resource b) where
+instance Functor (Resource p) where
     fmap = second
 
 instance Bifunctor Resource where
@@ -46,7 +35,7 @@ instance Bifunctor Resource where
 -- | A resource schema's underlying common meta-parameters.
 data Meta = Meta
     { _lifecycle' :: !Lifecycle
-
+    -- ^ Customizes the lifecycle behavior of the resource. The specific options are documented below.
     , _dependsOn  :: !(Set Key)
     -- ^ Explicit dependencies that this resource has. These dependencies
     -- will be created before this resource. For syntax and other details,
@@ -121,6 +110,6 @@ $(TH.makeLenses ''Resource)
 $(TH.makeClassy ''Meta)
 $(TH.makeClassy ''Lifecycle)
 
-instance HasMeta      (Resource b a) where meta      = metadata
-instance HasLifecycle (Resource b a) where lifecycle = metadata . lifecycle
+instance HasMeta      (Resource p a) where meta      = metadata
+instance HasLifecycle (Resource p a) where lifecycle = metadata . lifecycle
 instance HasLifecycle Meta           where lifecycle = lifecycle'

@@ -1,0 +1,31 @@
+arguments:
+- required: true
+  help: ! ' (Required) - An identity pool ID in the format REGION:GUID.'
+  name: identity_pool_id
+  type: Text
+- required: true
+  help: ! ' (Optional) - A List of  #role-mappings .'
+  name: role_mapping
+  type: Text
+- required: true
+  help: ! ' (Required) - The map of roles associated with this pool. For a given role,
+    the key will be either "authenticated" or "unauthenticated" and the value will
+    be the Role ARN.'
+  name: roles
+  type: Text
+name: aws_cognito_identity_pool_roles_attachment
+attributes:
+- help: The identity pool ID.
+  name: id
+  type: Text
+- help: ! ' (Required) - An identity pool ID in the format REGION:GUID.'
+  name: identity_pool_id
+  type: Text
+- help: ! ' (Optional) - The List of  #role-mappings .'
+  name: role_mapping
+  type: Text
+- help: ! ' (Required) - The map of roles associated with this pool. For a given role,
+    the key will be either "authenticated" or "unauthenticated" and the value will
+    be the Role ARN.'
+  name: roles
+  type: Text

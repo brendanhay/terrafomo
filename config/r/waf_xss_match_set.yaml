@@ -1,0 +1,15 @@
+arguments:
+- required: true
+  help: The name or description of the SizeConstraintSet.
+  name: name
+  type: Text
+- required: false
+  help: The parts of web requests that you want to inspect for cross-site scripting
+    attacks.
+  name: xss_match_tuples
+  type: Text
+name: aws_waf_xss_match_set
+attributes:
+- help: The ID of the WAF XssMatchSet.
+  name: id
+  type: Text

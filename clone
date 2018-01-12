@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec git clone https://github.com/terraform-providers/terraform-provider-aws vendor/terraform-provider-aws

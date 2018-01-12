@@ -1,7 +1,11 @@
 resolver: lts-9.9
 
-extra-deps: []
+local-bin-path: bin
+
+extra-deps:
+  - megaparsec-6.2.0
 
 packages:
   - hcl
   - terraform
+  - terraform-gen

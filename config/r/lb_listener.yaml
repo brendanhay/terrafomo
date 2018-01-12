@@ -1,0 +1,36 @@
+arguments:
+- required: false
+  help: The ARN of the SSL server certificate. Exactly one certificate is required
+    if the protocol is HTTPS.
+  name: certificate_arn
+  type: Text
+- required: true
+  help: An Action block. Action blocks are documented below.
+  name: default_action
+  type: Text
+- required: true
+  help: ! ' - (Required, Forces New Resource) The ARN of the load balancer.'
+  name: load_balancer_arn
+  type: Text
+- required: true
+  help: The port on which the load balancer is listening.
+  name: port
+  type: Text
+- required: false
+  help: The protocol for connections from clients to the load balancer. Valid values
+    are  TCP ,  HTTP  and  HTTPS . Defaults to  HTTP .
+  name: protocol
+  type: Text
+- required: false
+  help: The name of the SSL Policy for the listener. Required if  protocol  is  HTTPS
+    .
+  name: ssl_policy
+  type: Text
+name: aws_lb_listener
+attributes:
+- help: The ARN of the listener (matches  id )
+  name: arn
+  type: Text
+- help: The ARN of the listener (matches  arn )
+  name: id
+  type: Text

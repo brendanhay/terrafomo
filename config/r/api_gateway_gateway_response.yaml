@@ -1,0 +1,24 @@
+arguments:
+- required: false
+  help: A map specifying the templates used to transform the response body.
+  name: response_parameters
+  type: Text
+- required: false
+  help: A map specifying the parameters (paths, query strings and headers) of the
+    Gateway Response.
+  name: response_templates
+  type: Text
+- required: true
+  help: The response type of the associated GatewayResponse.
+  name: response_type
+  type: Text
+- required: true
+  help: The string identifier of the associated REST API.
+  name: rest_api_id
+  type: Text
+- required: false
+  help: The HTTP status code of the Gateway Response.
+  name: status_code
+  type: Text
+name: aws_api_gateway_gateway_response
+attributes: []

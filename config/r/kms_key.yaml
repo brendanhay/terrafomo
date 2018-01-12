@@ -1,0 +1,40 @@
+arguments:
+- required: false
+  help: Duration in days after which the key is deleted after destruction of the resource,
+    must be between 7 and 30 days. Defaults to 30 days.
+  name: deletion_window_in_days
+  type: Text
+- required: false
+  help: The description of the key as viewed in AWS console.
+  name: description
+  type: Text
+- required: false
+  help: Specifies whether  http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
+    is enabled. Defaults to false.
+  name: enable_key_rotation
+  type: Text
+- required: false
+  help: Specifies whether the key is enabled. Defaults to true.
+  name: is_enabled
+  type: Text
+- required: false
+  help: Specifies the intended use of the key. Defaults to ENCRYPT_DECRYPT, and only
+    symmetric encryption and decryption are supported.
+  name: key_usage
+  type: Text
+- required: false
+  help: A valid policy JSON document.
+  name: policy
+  type: Text
+- required: false
+  help: A mapping of tags to assign to the object.
+  name: tags
+  type: Text
+name: aws_kms_key
+attributes:
+- help: The Amazon Resource Name (ARN) of the key.
+  name: arn
+  type: Text
+- help: The globally unique identifier for the key.
+  name: key_id
+  type: Text

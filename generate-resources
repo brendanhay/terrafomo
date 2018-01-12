@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+stack install terraform-gen && \
+    stack exec terraform-gen -- \
+        --config config \
+        --type Resource \
+        "$@"

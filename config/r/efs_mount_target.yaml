@@ -1,0 +1,32 @@
+arguments:
+- required: true
+  help: The ID of the file system for which the mount target is intended.
+  name: file_system_id
+  type: Text
+- required: false
+  help: The address (within the address range of the specified subnet) at which the
+    file system may be mounted via the mount target.
+  name: ip_address
+  type: Text
+- required: false
+  help: A list of up to 5 VPC security group IDs (that must be for the same VPC as
+    subnet specified) in effect for the mount target.
+  name: security_groups
+  type: Text
+- required: true
+  help: The ID of the subnet to add the mount target in.
+  name: subnet_id
+  type: Text
+name: aws_efs_mount_target
+attributes:
+- help: The DNS name for the given subnet/AZ per  http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html
+    .
+  name: dns_name
+  type: Text
+- help: The ID of the mount target.
+  name: id
+  type: Text
+- help: The ID of the network interface that Amazon EFS created when it created the
+    mount target.
+  name: network_interface_id
+  type: Text

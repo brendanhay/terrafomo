@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+rm -rf vendor
+
+git clone https://github.com/terraform-providers/terraform-provider-aws vendor/terraform-provider-aws
+
+cd vendor/terraform-provider-aws/website/docs
+
+3. Get first H1 (aws_) as the data type name
+
+4. Subsequent content up until \#\# Example Usage is 'Documentation' about the data type
+5. \#\# Example Usage and following content is 'Example'
+6. \#\# Argument Reference list items are data type fields.
+  6a. `fieldname` - (Optional) documentation
+7. \#\# Attributes Reference list items are data type 'Computed' fields.
+  7a. `name` - documentation
+
+CMark.commonmarkToNode [] text :: Node
+
+data Node = Node (Maybe PosInfo) NodeType [Node]
+
+DOCUMENT
+THEMATIC_BREAK
+PARAGRAPH
+BLOCK_QUOTE
+HTML_BLOCK Text
+CUSTOM_BLOCK OnEnter OnExit
+CODE_BLOCK Info Text
+HEADING Level
+LIST ListAttributes
+ITEM
+TEXT Text
+SOFTBREAK
+LINEBREAK
+HTML_INLINE Text
+CUSTOM_INLINE OnEnter OnExit
+CODE Text
+EMPH
+STRONG
+LINK Url Title
+IMAGE Url Title

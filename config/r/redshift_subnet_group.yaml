@@ -1,0 +1,22 @@
+arguments:
+- required: false
+  help: The description of the Redshift Subnet group. Defaults to "Managed by Terraform".
+  name: description
+  type: Text
+- required: true
+  help: The name of the Redshift Subnet group.
+  name: name
+  type: Text
+- required: true
+  help: An array of VPC subnet IDs.
+  name: subnet_ids
+  type: Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Text
+name: aws_redshift_subnet_group
+attributes:
+- help: The Redshift Subnet group ID.
+  name: id
+  type: Text

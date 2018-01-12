@@ -1,0 +1,11 @@
+arguments:
+- required: true
+  help: ! "\t(Required) - The ARN of the policy you want to apply"
+  name: policy_arn
+  type: Text
+- required: true
+  help: ! "\t\t(Required) - The role the policy should be applied to"
+  name: role
+  type: Text
+name: aws_iam_role_policy_attachment
+attributes: []

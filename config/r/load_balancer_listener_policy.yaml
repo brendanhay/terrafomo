@@ -1,0 +1,24 @@
+arguments:
+- required: true
+  help: The load balancer to attach the policy to.
+  name: load_balancer_name
+  type: Text
+- required: true
+  help: The load balancer listener port to apply the policy to.
+  name: load_balancer_port
+  type: Text
+- required: true
+  help: List of Policy Names to apply to the backend server.
+  name: policy_names
+  type: Text
+name: aws_elb_load_balancer_listener_policy
+attributes:
+- help: The ID of the policy.
+  name: id
+  type: Text
+- help: The load balancer on which the policy is defined.
+  name: load_balancer_name
+  type: Text
+- help: The load balancer listener port the policies are applied to
+  name: load_balancer_port
+  type: Text

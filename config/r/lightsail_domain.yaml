@@ -1,0 +1,13 @@
+arguments:
+- required: true
+  help: The name of the Lightsail domain to manage
+  name: domain_name
+  type: Text
+name: aws_lightsail_domain
+attributes:
+- help: The ARN of the Lightsail domain
+  name: arn
+  type: Text
+- help: The name used for this domain
+  name: id
+  type: Text

@@ -14,14 +14,14 @@
 -- That is, attributes are 'computed' as outputs of a resource or data source.
 module Terraform.Syntax.Attribute where
 
+import Control.Lens (Setter')
+
 import GHC.Generics
 import GHC.TypeLits
 
 import Terraform.Syntax.Name (Key, Name)
 
 import qualified Control.Lens.TH as TH
-
--- deriving instance Show
 
 data Attr a
     = Computed !Key !Name
@@ -38,12 +38,12 @@ type family Computed a :: [(Symbol, *)]
 --        ]
 
 type family HasAttribute k a :: * where
-    HasAttribute k a = GetValue a (Computed a) k (Computed a)
+    HasAttribute k a = GetType a (Computed a) k (Computed a)
 
-type family GetValue a as b bs :: * where
-    GetValue a as k ('(k, v) ': xs) = v
-    GetValue a as k (x       ': xs) = GetValue a as k xs
-    GetValue a as k '[]             =
+type family GetType a as b bs :: * where
+    GetType a as k ('(k, v) ': xs) = v
+    GetType a as k (x       ': xs) = GetType a as k xs
+    GetType a as k '[]             =
         TypeError ( 'Text "Computed attribute "
               ':<>: 'ShowType k
               ':<>: 'Text " does not exist for "

@@ -1,0 +1,38 @@
+arguments:
+- required: false
+  help: The description of the DB cluster parameter group. Defaults to "Managed by
+    Terraform".
+  name: description
+  type: Text
+- required: true
+  help: The family of the DB cluster parameter group.
+  name: family
+  type: Text
+- required: true
+  help: ! ' - (Optional, Forces new resource) The name of the DB cluster parameter
+    group. If omitted, Terraform will assign a random, unique name.'
+  name: name
+  type: Text
+- required: true
+  help: ! ' - (Optional, Forces new resource) Creates a unique name beginning with
+    the specified prefix. Conflicts with  name .'
+  name: name_prefix
+  type: Text
+- required: false
+  help: A list of DB parameters to apply. Note that parameters may differ from a family
+    to an other. Full list of all parameters can be discovered via  https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html  after
+    initial creation of the group.
+  name: parameter
+  type: Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Text
+name: aws_rds_cluster_parameter_group
+attributes:
+- help: The ARN of the db cluster parameter group.
+  name: arn
+  type: Text
+- help: The db cluster parameter group name.
+  name: id
+  type: Text

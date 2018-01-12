@@ -24,7 +24,7 @@ makeResource
     -> TH.Name
     -- ^ The Haskell data type to create resource-related instances for.
     -> TH.DecsQ
-makeResource original provider fromSchema datatype = do
+makeResource original provider newResource datatype = do
     let lowered     = map Char.toLower (TH.nameBase datatype)
         constructor = TH.mkName lowered
 
@@ -61,25 +61,11 @@ makeResource original provider fromSchema datatype = do
 
     mappend fields . mappend classes <$> sequenceA
         [
-
-        -- instance IsResource ...
-          let class_ = TH.conT ''Resource.IsResource
-                           `TH.appT` TH.conT provider
-                           `TH.appT` TH.conT datatype
-                           `TH.appT` TH.conT datatype
-              body   = TH.varE fromSchema `TH.appE` TH.stringE original
-
-           in TH.instanceD (TH.cxt []) class_
-                  [ TH.funD 'Resource.fromSchema
-                      [ TH.clause [] (TH.normalB body) []
-                      ]
-                  ]
-
-        -- class_e instance Computed ...
+        -- type instance Computed ...
         -- Currently written by hand.
 
         -- instance ToValue ...
-        , let class_ = TH.conT ''HCL.ToValue `TH.appT` TH.conT datatype
+          let class_ = TH.conT ''HCL.ToValue `TH.appT` TH.conT datatype
 
            in TH.instanceD (TH.cxt []) class_
                   [ TH.funD 'HCL.toValue
@@ -88,10 +74,17 @@ makeResource original provider fromSchema datatype = do
                   ]
 
         -- constructor :: ...
-        , TH.sigD constructor (TH.conT datatype)
+        , let type_ = TH.conT ''Resource.Resource
+                          `TH.appT` TH.conT provider
+                          `TH.appT` TH.conT datatype
 
-        -- constructor = genericAttributes
-        , TH.funD constructor
-              [ TH.clause [] (TH.normalB (TH.varE 'Attribute.genericAttributes)) []
-              ]
+           in TH.sigD constructor type_
+
+        -- constructor = ...
+        , let body = TH.normalB ( TH.varE newResource
+                        `TH.appE` TH.stringE original
+                        `TH.appE` TH.varE 'Attribute.genericAttributes
+                                )
+
+           in TH.funD constructor [TH.clause [] body []]
         ]

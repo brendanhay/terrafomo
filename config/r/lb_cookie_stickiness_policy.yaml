@@ -1,0 +1,37 @@
+arguments:
+- required: false
+  help: The time period after which the session cookie should be considered stale,
+    expressed in seconds.
+  name: cookie_expiration_period
+  type: Text
+- required: true
+  help: The load balancer port to which the policy should be applied. This must be
+    an active listener on the load balancer.
+  name: lb_port
+  type: Text
+- required: true
+  help: The load balancer to which the policy should be attached.
+  name: load_balancer
+  type: Text
+- required: true
+  help: The name of the stickiness policy.
+  name: name
+  type: Text
+name: aws_lb_cookie_stickiness_policy
+attributes:
+- help: The time period after which the session cookie is considered stale, expressed
+    in seconds.
+  name: cookie_expiration_period
+  type: Text
+- help: The ID of the policy.
+  name: id
+  type: Text
+- help: The load balancer port to which the policy is applied.
+  name: lb_port
+  type: Text
+- help: The load balancer to which the policy is attached.
+  name: load_balancer
+  type: Text
+- help: The name of the stickiness policy.
+  name: name
+  type: Text

@@ -1,8 +1,15 @@
 -- {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE OverloadedLists   #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances      #-}
 
-{-# LANGUAGE RankNTypes        #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedLists        #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TypeFamilies           #-}
+
+{-# LANGUAGE UndecidableInstances   #-}
+
+{-# LANGUAGE RankNTypes             #-}
 {-
 {-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE TypeApplications      #-}
@@ -18,9 +25,8 @@ import Data.Void
 
 import Terraform.AWS
 
-import           Terraform.Syntax.Attribute
-import           Terraform.Syntax.Resource  (fromSchema)
-import qualified Terraform.Syntax.Resource  as Syn
+import Terraform.Syntax.Attribute as Attr
+import Terraform.Syntax.Resource  as Syn
 
 import qualified Terraform.AWS.Resource as R
 import qualified Terraform.Format       as Format
@@ -83,66 +89,63 @@ common =
     , ("Origin",      "http://github.com/brendanhay/terrorform")
     ]
 
--- present
---      :: IsResource b a s
---      => ASetter (Resource b a) t d (Attr c)
---      -> c
---      -> s
---      -> t
--- present l x = Lens.set l (Present x) . fromSchema
+-- iso :: (Functor f, Profunctor p) => (s -> a) -> (b -> t) -> p a (f b) -> p s (f t)
+-- lens :: Functor f => (s -> a) -> (s -> b -> t) -> (a -> f b) -> s -> f t
 
--- infix what? =:
+-- sets :: ((a -> b) -> s -> t) -> Setter s t a b
 
--- (=:) :: IsResource b a s
---      => Setter' (Resource b a) (Attr c)
---      -> c
---      -> s
---      -> Resource b a
--- (=:) l x = Lens.set (l . _Present) x . fromSchema
+-- schema :: IsResource p a b => Setter b (Resource p a) c d
+-- schema = Lens.sets (\f s -> fromSchema s)
 
---base :: R.Instance_Resource
--- base =
---     R.instance_resource
---         & R.ami                         =: "123"
---         & R.associate_public_ip_address =: True
---         & R.tags                        =: common
---         & provider .~ west
-
-
--- type Lens s t a b = forall f. Functor f => (a -> f b) -> s -> f t
---lens :: (s -> a) -> (s -> b -> t) -> Lens s t a b
-
--- iso :: (s -> a) -> (b -> t) -> Iso s t a b
-
-
-
--- provider
---      :: IsResource b a s
---      => Lens.Lens s (Resource b a) b b
-
-
-provider :: (b -> Identity b') -> Resource b a -> Identity (Resource b' a)
-provider = Syn.provider -- . fromSchema
-
-
-
-  -- lens (_provider . fromSchema) (\s a -> (fromSchema s) { _provider = a })
+-- provider :: IsResource p a b => Lens _ _ (Resource p' a) p p'
+-- provider = _Schema . Syn.provider
 
 -- dependsOn
-
 -- preventDestroy
-
 -- createBeforeDestroy
-
 -- ignoreChanges
 
-base =
-    R.instance_resource
-        -- & R.ami                         .~ "123"
-        -- & R.associate_public_ip_address .~ True
-        -- & R.tags                        .~ common
-        & provider .~ west
+-- infixr 7 =:
 
+-- (=:) :: ( IsResource p a b
+--         , IsAttribute v' v
+--         )
+--      => Setter' (Resource p a) v'
+--      -> v
+--      -> b
+--      -> Resource p a
+-- (=:) l x = Lens.set (l . _Present) x . fromSchema
+
+-- resource_ :: IsResource p a a => Name -> a -> Resource p a
+-- resource_ _ = fromSchema
+
+base :: Terraform ()
+base = do
+    resource "foo" $
+        R.instance_resource
+            & R.ami                         .~ Present "123"
+            & R.associate_public_ip_address .~ Present True
+            & R.tags                        .~ Present common
+            & preventDestroy .~ True
+
+    pure ()
+
+        -- & resource "foo"
+        -- & provider       .~ west
+        -- & preventDestroy .~ True
+
+        -- & provider                           =: west
+        -- & Syn.metadata . Syn.preventDestroy      =: True
+        -- & Syn.metadata . Syn.createBeforeDestroy =: True
+
+-- base =
+--     R.instance_resource
+--         & R.ami                                  =: "123"
+--         & R.associate_public_ip_address          =: True
+--         & R.tags                                 =: common
+--         & provider                           =: west
+--         & Syn.metadata . Syn.preventDestroy      =: True
+--         & Syn.metadata . Syn.createBeforeDestroy =: True
 
 -- example :: Terraform ()
 -- example = do
