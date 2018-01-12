@@ -1,0 +1,34 @@
+_name: azurerm_managed_disk
+arguments:
+  _name:
+    required: true
+    help: (Required) Specifies the name of the Managed Disk.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) Specifies the name of the resource group.
+    type: Text
+attributes:
+  source_uri:
+    help: ! '- The source URI for the managed disk'
+    type: Text
+  source_resource_id:
+    help: ! '- ID of an existing managed disk that the current resource was created
+      from.'
+    type: Text
+  disk_size_gb:
+    help: ! '- The size of the managed disk in gigabytes.'
+    type: Text
+  storage_account_type:
+    help: ! '- The storage account type for the managed disk.'
+    type: Text
+  os_type:
+    help: ! '- The operating system for managed disk. Valid values are @Linux@ or
+      @Windows@'
+    type: Text
+  tags:
+    help: ! '- A mapping of tags assigned to the resource.'
+    type: Text
+about: Use this data source to access the properties of an existing Azure Managed
+  Disk.
+examples: []

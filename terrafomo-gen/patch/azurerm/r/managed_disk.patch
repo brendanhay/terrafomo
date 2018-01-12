@@ -1,0 +1,17 @@
+--- vendor/azurerm/website/docs/r/managed_disk.html.markdown	2017-11-17 07:23:55.301360471 +0100
++++ managed_disk.html.markdown.new	2017-11-17 07:29:11.179175813 +0100
+@@ -85,10 +85,10 @@
+     Allowable values are `Standard_LRS` or `Premium_LRS`.
+ 
+ * `create_option` - (Required) The method to use when creating the managed disk. Possible values include:
+- * `Import` - Import a VHD file in to the managed disk (VHD specified with `source_uri`).
+- * `Empty` - Create an empty managed disk.
+- * `Copy` - Copy an existing managed disk or snapshot (specified with `source_resource_id`).
+- * `FromImage` - Copy a Platform Image (specified with `image_reference_id`)
++    * `Import` - Import a VHD file in to the managed disk (VHD specified with `source_uri`).
++    * `Empty` - Create an empty managed disk.
++    * `Copy` - Copy an existing managed disk or snapshot (specified with `source_resource_id`).
++    * `FromImage` - Copy a Platform Image (specified with `image_reference_id`)
+ 
+ * `source_uri` - (Optional) URI to a valid VHD file to be used when `create_option` is `Import`.
+ 

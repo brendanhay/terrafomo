@@ -1,0 +1,31 @@
+_name: azurerm_redis_firewall_rule
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the Firewall Rule. Changing this forces a new resource
+      to be created.
+    type: Text
+  _start_ip:
+    required: true
+    help: (Required) The lowest IP address included in the range
+    type: Text
+  _redis_cache_name:
+    required: true
+    help: (Required) The name of the Redis Cache. Changing this forces a new resource
+      to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which this Redis Cache exists.
+    type: Text
+  _end_ip:
+    required: true
+    help: (Required) The highest IP address included in the range.
+    type: Text
+attributes:
+  id:
+    help: ! '- The Redis Firewall Rule ID.'
+    type: Text
+about: ! 'Manages a Firewall Rule associated with a Premium Redis Cache. ~> Note:
+  Redis Firewall Rules can only be assigned to a Redis Cache with a @Premium@ SKU.'
+examples: []

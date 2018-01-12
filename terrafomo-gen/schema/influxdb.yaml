@@ -1,7 +1,0 @@
-_name: InfluxDBProvider
-arguments: {}
-attributes: {}
-about: ! 'The InfluxDB provider allows Terraform to create Databases in <https://influxdb.com/>
-  . InfluxDB is a database server optimized for time-series data. The provider configuration
-  block accepts the following arguments:'
-examples: []

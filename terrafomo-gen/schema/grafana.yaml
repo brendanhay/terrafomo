@@ -1,7 +1,0 @@
-_name: GrafanaProvider
-arguments: {}
-attributes: {}
-about: ! 'The Grafana provider configures data sources and dashboards in <http://grafana.org/>
-  , which is a web application for creating, viewing and sharing metrics dashboards.
-  The provider configuration block accepts the following arguments:'
-examples: []

@@ -23,6 +23,7 @@ import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Render   (Templates (Templates))
 import Terrafomo.Gen.Schema
 
+import qualified Data.Char            as Char
 import qualified Data.Foldable        as Fold
 import qualified Data.Text            as Text
 import qualified Data.Text.IO         as Text
@@ -307,17 +308,18 @@ providerPath Options{..} =
      in Path{..}
 
 resourcePaths :: Options -> [Path]
-resourcePaths opts = map (schemaPath opts) (resourceFiles opts)
+resourcePaths opts = map (schemaPath opts Resource) (resourceFiles opts)
 
 dataSourcePaths :: Options -> [Path]
-dataSourcePaths opts = map (schemaPath opts) (dataSourceFiles opts)
+dataSourcePaths opts = map (schemaPath opts DataSource) (dataSourceFiles opts)
 
-schemaPath :: Options -> FilePath -> Path
-schemaPath Options{providerAlias, schemaDir, patchDir} file =
+schemaPath :: Options -> SchemaType -> FilePath -> Path
+schemaPath Options{providerAlias, schemaDir, patchDir} typ file =
     let name         = Path.dropExtensions (Path.takeBaseName file)
+        prefix       = [Char.toLower (head (show typ))]
         markdownFile = file
-        schemaFile   = schemaDir </> providerAlias </> name <.> "yaml"
-        patchFile    = patchDir  </> providerAlias </> name <.> "patch"
+        schemaFile   = schemaDir </> providerAlias </> prefix </> name <.> "yaml"
+        patchFile    = patchDir  </> providerAlias </> prefix </> name <.> "patch"
      in Path{..}
 
 -- EDE Templating

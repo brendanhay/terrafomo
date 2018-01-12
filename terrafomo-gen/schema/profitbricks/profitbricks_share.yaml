@@ -1,6 +1,0 @@
-_name: profitbricks_share
-arguments: {}
-attributes: {}
-about: Manages shares and list shares permissions granted to the group members for
-  each shared resource.
-examples: []
