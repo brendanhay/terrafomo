@@ -27,7 +27,7 @@ import GHC.TypeLits (KnownSymbol, symbolVal)
 import Terraform.Syntax.Attribute (Attr (Computed), Computed, HasAttribute)
 import Terraform.Syntax.Name      (Alias, Key (Key), Name)
 import Terraform.Syntax.Output    (Output (Output))
-import Terraform.Syntax.Resource  (Change, HasMeta, IsResource (fromSchema),
+import Terraform.Syntax.Resource  (Change, IsResource (fromSchema),
                                    Resource (..))
 
 import qualified Control.Lens               as Lens
@@ -146,7 +146,7 @@ output name attr = do
     -- error handling
 
     Lens.modifying outputs $
-        (HCL.toValue (Output name (fmap HCL.toValue attr)) :)
+        (HCL.toValue (Output name (undefined)) :) --  HCL.toValue attr
 
 -- | Example of replacing terraform's count attribute.
 --

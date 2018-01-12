@@ -10,7 +10,7 @@
 
 module Terraform.Tutorial where
 
-import           Control.Lens (ASetter, Setter', (.~))
+import           Control.Lens
 import qualified Control.Lens as Lens
 
 import Data.Proxy (Proxy (Proxy))
@@ -18,8 +18,9 @@ import Data.Void
 
 import Terraform.AWS
 
-import Terraform.Syntax.Attribute
-import Terraform.Syntax.Resource  (fromSchema, provider)
+import           Terraform.Syntax.Attribute
+import           Terraform.Syntax.Resource  (fromSchema)
+import qualified Terraform.Syntax.Resource  as Syn
 
 import qualified Terraform.AWS.Resource as R
 import qualified Terraform.Format       as Format
@@ -82,27 +83,64 @@ common =
     , ("Origin",      "http://github.com/brendanhay/terrorform")
     ]
 
-present
-    :: IsResource b a s
-    => ASetter (Resource b a) t d (Attr c)
-    -> c
-    -> s
-    -> t
-present l x = Lens.set l (Present x) . fromSchema
+-- present
+--      :: IsResource b a s
+--      => ASetter (Resource b a) t d (Attr c)
+--      -> c
+--      -> s
+--      -> t
+-- present l x = Lens.set l (Present x) . fromSchema
 
-(=:) :: IsResource b a s
-     => Setter' (Resource b a) (Attr c)
-     -> c
-     -> s
-     -> Resource b a
-(=:) = present
+-- infix what? =:
+
+-- (=:) :: IsResource b a s
+--      => Setter' (Resource b a) (Attr c)
+--      -> c
+--      -> s
+--      -> Resource b a
+-- (=:) l x = Lens.set (l . _Present) x . fromSchema
 
 --base :: R.Instance_Resource
+-- base =
+--     R.instance_resource
+--         & R.ami                         =: "123"
+--         & R.associate_public_ip_address =: True
+--         & R.tags                        =: common
+--         & provider .~ west
+
+
+-- type Lens s t a b = forall f. Functor f => (a -> f b) -> s -> f t
+--lens :: (s -> a) -> (s -> b -> t) -> Lens s t a b
+
+-- iso :: (s -> a) -> (b -> t) -> Iso s t a b
+
+
+
+-- provider
+--      :: IsResource b a s
+--      => Lens.Lens s (Resource b a) b b
+
+
+provider :: (b -> Identity b') -> Resource b a -> Identity (Resource b' a)
+provider = Syn.provider -- . fromSchema
+
+
+
+  -- lens (_provider . fromSchema) (\s a -> (fromSchema s) { _provider = a })
+
+-- dependsOn
+
+-- preventDestroy
+
+-- createBeforeDestroy
+
+-- ignoreChanges
+
 base =
     R.instance_resource
-        & R.ami                         =: "123"
-        & R.associate_public_ip_address =: True
-        & R.tags                        =: common
+        -- & R.ami                         .~ "123"
+        -- & R.associate_public_ip_address .~ True
+        -- & R.tags                        .~ common
         & provider .~ west
 
 

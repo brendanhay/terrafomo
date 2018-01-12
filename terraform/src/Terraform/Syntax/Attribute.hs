@@ -1,8 +1,8 @@
 {-# LANGUAGE DataKinds            #-}
-{-# LANGUAGE DeriveFunctor        #-}
 {-# LANGUAGE FlexibleContexts     #-}
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE PolyKinds            #-}
+{-# LANGUAGE TemplateHaskell      #-}
 {-# LANGUAGE TypeFamilies         #-}
 {-# LANGUAGE TypeOperators        #-}
 {-# LANGUAGE UndecidableInstances #-}
@@ -19,11 +19,17 @@ import GHC.TypeLits
 
 import Terraform.Syntax.Name (Key, Name)
 
+import qualified Control.Lens.TH as TH
+
+-- deriving instance Show
+
 data Attr a
     = Computed !Key !Name
     | Present  !a
     | Absent
-      deriving (Show, Eq, Functor)
+      deriving (Show, Eq)
+
+$(TH.makePrisms ''Attr)
 
 type family Computed a :: [(Symbol, *)]
 

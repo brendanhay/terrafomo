@@ -11,7 +11,7 @@
 
 module Terraform.Syntax.Resource where
 
-import Control.Lens (Lens', Setter, lens)
+import Control.Lens (Lens, Lens', Setter, lens)
 
 import Data.Bifunctor (Bifunctor (bimap, second))
 import Data.Function  (on)
@@ -21,6 +21,7 @@ import Data.String    (IsString (fromString))
 
 import Terraform.Syntax.Name (Key, Name, Type)
 
+import qualified Control.Lens    as Lens
 import qualified Control.Lens.TH as TH
 
 class IsResource b a s | s -> b, s -> a where
