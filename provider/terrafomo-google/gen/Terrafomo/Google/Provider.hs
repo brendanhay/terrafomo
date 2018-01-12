@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
 
@@ -14,15 +15,23 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Google.Provider where
+module Terrafomo.Google.Provider
+    ( Google   (..)
+    , HasGoogle (..)
+    , defaultGoogle
+    ) where
 
-import Data.Hashable (Hashable)
-import Data.Text     (Text)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Google.Types    as TF
+import qualified Terrafomo.Google.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
 import qualified Terrafomo.TH              as TF
 
@@ -33,12 +42,18 @@ The Google Cloud provider is used to interact with
 proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
-data Google = Google
-    deriving (Show, Eq, Generic)
+data Google = Google {
+    } deriving (Show, Eq, Generic)
 
 instance Hashable Google
 
 instance TF.ToHCL Google where
-    toHCL = const $ TF.arguments []
+    toHCL x = TF.block $ catMaybes [
+        ]
 
-$(TF.makeClassy ''Google)
+$(TF.makeClassyProvider ''Google)
+
+defaultGoogle :: TF.Provider Google
+defaultGoogle =
+    TF.Provider "google" Nothing
+

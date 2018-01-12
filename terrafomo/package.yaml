@@ -24,8 +24,8 @@ library:
 
     - Terrafomo.Syntax.DataSource
     - Terrafomo.Syntax.HCL
+    - Terrafomo.Syntax.Meta
     - Terrafomo.Syntax.Name
-    - Terrafomo.Syntax.Provider
     - Terrafomo.Syntax.Resource
     - Terrafomo.Syntax.Variable
 

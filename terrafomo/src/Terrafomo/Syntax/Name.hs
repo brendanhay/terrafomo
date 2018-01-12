@@ -7,8 +7,6 @@ module Terrafomo.Syntax.Name
 
     , Alias
     , newAlias
-
-    , Reference (..)
     ) where
 
 import Data.Hashable  (Hashable (hash, hashWithSalt))
@@ -46,8 +44,7 @@ instance Hashable Key where
 newtype Alias = Alias Int
     deriving (Show, Eq, Ord, Hashable)
 
-newAlias :: Hashable a => a -> Alias
-newAlias = Alias . hash
+-- FIXME: Seed the alias with the provider name.
 
-data Reference p a = Reference !Key !a
-    deriving (Show, Eq)
+newAlias :: Hashable a => Name -> a -> Alias
+newAlias n x = Alias (hash n `hashWithSalt` x)

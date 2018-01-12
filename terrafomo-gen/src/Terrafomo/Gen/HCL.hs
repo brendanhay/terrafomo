@@ -10,7 +10,7 @@ import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Text          (Text)
 import Data.Void          (Void)
 
-import Terrafomo.Syntax.HCL
+import Terrafomo.Syntax.HCL (Id (..), Interpolate (..), Value (..))
 
 import Text.Megaparsec ((<?>))
 

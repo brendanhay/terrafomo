@@ -18,28 +18,29 @@ import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
 
-import Terrafomo.Gen.Namespace
+import Terrafomo.Gen.Namespace (NS)
 import Terrafomo.Gen.Parser    (Parser)
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Render    (Templates (Templates))
 import Terrafomo.Gen.Schema
 
-import qualified Data.Char            as Char
-import qualified Data.Foldable        as Fold
-import qualified Data.Text            as Text
-import qualified Data.Text.IO         as Text
-import qualified Data.Text.Lazy       as LText
-import qualified Data.Text.Lazy.IO    as LText
-import qualified Data.Yaml            as YAML
-import qualified Options.Applicative  as Option
-import qualified System.Directory     as Dir
-import qualified System.Exit          as Exit
-import qualified System.FilePath      as Path
-import qualified System.IO            as IO
-import qualified System.Process       as Process
-import qualified Terrafomo.Gen.Parser as Parser
-import qualified Terrafomo.Gen.Render as Render
-import qualified Text.EDE             as EDE
+import qualified Data.Char               as Char
+import qualified Data.Foldable           as Fold
+import qualified Data.Text               as Text
+import qualified Data.Text.IO            as Text
+import qualified Data.Text.Lazy          as LText
+import qualified Data.Text.Lazy.IO       as LText
+import qualified Data.Yaml               as YAML
+import qualified Options.Applicative     as Option
+import qualified System.Directory        as Dir
+import qualified System.Exit             as Exit
+import qualified System.FilePath         as Path
+import qualified System.IO               as IO
+import qualified System.Process          as Process
+import qualified Terrafomo.Gen.Namespace as NS
+import qualified Terrafomo.Gen.Parser    as Parser
+import qualified Terrafomo.Gen.Render    as Render
+import qualified Text.EDE                as EDE
 
 -- TODO: FIXME:
 --
@@ -267,8 +268,8 @@ renderPackage
 renderPackage tmpls dir p d r = do
     let packageFile = dir    </> "package" <.> "yaml"
         srcDir      = dir    </> "src"
-        mainFile    = srcDir </> pathNS (mainNS  p) <.> "hs"
-        typesFile   = srcDir </> pathNS (typesNS p) <.> "hs"
+        mainFile    = srcDir </> NS.toPath (NS.provider p) <.> "hs"
+        typesFile   = srcDir </> NS.toPath (NS.types    p) <.> "hs"
 
     createDirectory dir
 
@@ -302,7 +303,7 @@ renderSchemas tmpls dir p typ xs = do
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
-    let moduleFile = dir </> pathNS ns <.> "hs"
+    let moduleFile = dir </> NS.toPath ns <.> "hs"
     echo "Module" moduleFile
     createDirectory (Path.takeDirectory moduleFile)
     scriptIO (LText.writeFile moduleFile text)

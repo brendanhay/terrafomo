@@ -16,7 +16,7 @@ module Terrafomo.Syntax.HCL
     , ToHCL       (..)
 
     , assign
-    , arguments
+    , argument
     , object
     , block
     , list
@@ -30,8 +30,9 @@ module Terrafomo.Syntax.HCL
     , string
     ) where
 
+import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes, mapMaybe)
+import Data.Maybe         (catMaybes)
 import Data.Monoid        ((<>))
 import Data.String        (IsString (fromString))
 import Data.Text          (Text)
@@ -40,8 +41,8 @@ import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
 import Terrafomo.Syntax.DataSource
+import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 
@@ -135,12 +136,18 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
-arguments :: [Argument Value] -> Value
-arguments = block . mapMaybe go
-  where
-    go = \case
-        Present x -> Just x
-        _         -> Nothing
+-- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
+-- we need to filter it out here.
+argument :: ToHCL a => Argument a -> Maybe Value
+argument = \case
+    Attribute (Key t n) (Compute x) ->
+        Just $
+            toHCL ( "${"
+                 <> fromType t <> "." <> fromName n <> "." <> fromName x
+                 <> "}"
+                  )
+    Constant  x -> Just (toHCL x)
+    _           -> Nothing
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
@@ -213,45 +220,30 @@ instance ToHCL Change where
         Match n  -> toHCL n
         Wildcard -> string "*"
 
--- Invalid - what does nil even mean?
--- instance ToHCL a => ToHCL (Argument a) where
---     toHCL = \case
---         Present x -> toHCL x
---         Absent    -> string "nil"
+instance ToHCL (DataSource Alias (Key, Value)) where
+    toHCL DataSource{..} =
+        object (key "resource" (fst _dataConfig)) $ catMaybes
+            [ assign "provider" <$> _dataProvider
+            , Just $ snd _dataConfig
+            , Just $ assign "depends_on" (list _dataDependsOn)
+            ]
 
-        -- Compute (Key t n) (Computed x) ->
-        --     toHCL ( "${"
-        --            <> fromType t <> "." <> fromName n <> "." <> fromName x
-        --            <> "}"
-        --             )
+instance ToHCL (Resource Alias (Key, Value)) where
+    toHCL Resource{..} =
+        let Lifecycle{..} = _resourceLifecycle
+         in object (key "resource" (fst _resourceConfig)) $ catMaybes
+            [ assign "provider" <$> _resourceProvider
+            , Just $ snd _resourceConfig
+            , Just $ assign "depends_on" (list _resourceDependsOn)
+            , Just $ object (pure "lifecycle")
+                [ assign "prevent_destroy"       _preventDestroy
+                , assign "create_before_destroy" _createBeforeDestroy
+                , assign "ignore_changes"        (list _ignoreChanges)
+                ]
+            ]
 
 instance ToHCL (Output Value) where
     toHCL (Output n x) =
         object ("output" :| [name n])
             [ assign "value" x
-            ]
-
-instance ToHCL Provider where
-    toHCL = const $ block []
-
-instance ToHCL (DataSource Alias (Key, Value)) where
-    toHCL DataSource{..} =
-        object (key "resource" (fst _dsSchema)) $ catMaybes
-            [ assign "provider" <$> _dsProvider
-            , Just $ snd _dsSchema
-            , Just $ assign "depends_on" (list _dsDependsOn)
-            ]
-
-instance ToHCL (Resource Alias (Key, Value)) where
-    toHCL Resource{..} =
-        let Lifecycle{..} = _rsLifecycle
-         in object (key "resource" (fst _rsSchema)) $ catMaybes
-            [ assign "provider" <$> _rsProvider
-            , Just $ snd _rsSchema
-            , Just $ assign "depends_on" (list _rsDependsOn)
-            , Just $ object (pure "lifecycle")
-                [ assign "prevent_destroy"       _lfPreventDestroy
-                , assign "create_before_destroy" _lfCreateBeforeDestroy
-                , assign "ignore_changes"        (list _lfIgnoreChanges)
-                ]
             ]

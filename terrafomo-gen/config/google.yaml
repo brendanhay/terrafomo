@@ -1,4 +1,5 @@
 name: Google
+original: google
 package: terrafomo-google
 datatype: true
 

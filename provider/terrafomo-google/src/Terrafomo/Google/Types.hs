@@ -18,10 +18,10 @@ data PlacementType = PlacementType
     deriving (Show, Eq)
 
 instance TF.ToHCL PlacementType where
-    toHCL _ = TF.arguments []
+    toHCL _ = TF.block []
 
 data SchedulingType = SchedulingType
     deriving (Show, Eq)
 
 instance TF.ToHCL SchedulingType where
-    toHCL _ = TF.arguments []
+    toHCL _ = TF.block []

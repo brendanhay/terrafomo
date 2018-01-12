@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveFoldable    #-}
-{-# LANGUAGE DeriveFunctor     #-}
-{-# LANGUAGE DeriveTraversable #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE NamedFieldPuns    #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections     #-}
+{-# LANGUAGE DeriveFoldable       #-}
+{-# LANGUAGE DeriveFunctor        #-}
+{-# LANGUAGE DeriveTraversable    #-}
+{-# LANGUAGE ExtendedDefaultRules #-}
+{-# LANGUAGE LambdaCase           #-}
+{-# LANGUAGE NamedFieldPuns       #-}
+{-# LANGUAGE OverloadedStrings    #-}
+{-# LANGUAGE TupleSections        #-}
 
 module Terrafomo.Gen.Render where
 
@@ -12,23 +13,27 @@ import Data.Aeson      ((.=))
 import Data.Bifunctor  (first, second)
 import Data.Map.Strict (Map)
 import Data.Maybe      (isJust)
+import Data.Semigroup  ((<>))
 import Data.Text       (Text)
 
-import Terrafomo.Gen.Namespace
+import Terrafomo.Gen.Namespace (NS)
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
 
 import Text.EDE.Filters ((@:))
 
-import qualified Data.Aeson.Types    as JSON
-import qualified Data.Foldable       as Fold
-import qualified Data.HashMap.Strict as HashMap
-import qualified Data.Map.Strict     as Map
-import qualified Data.Text           as Text
-import qualified Data.Text.Lazy      as LText
-import qualified Text.EDE            as EDE
-import qualified Text.Wrap           as Wrap
+import qualified Data.Aeson.Types        as JSON
+import qualified Data.Foldable           as Fold
+import qualified Data.HashMap.Strict     as HashMap
+import qualified Data.Map.Strict         as Map
+import qualified Data.Text               as Text
+import qualified Data.Text.Lazy          as LText
+import qualified Terrafomo.Gen.Namespace as NS
+import qualified Text.EDE                as EDE
+import qualified Text.Wrap               as Wrap
+
+default ([])
 
 data Templates a = Templates
     { packageTemplate  :: !a
@@ -49,9 +54,9 @@ package tmpls p d r =
         [ "provider" .= fmap Just p
         , "package"  .= providerPackage p
         , "exposed"  .=
-            ( mainNS p
-            : [schemaNS p DataSource | d]
-           ++ [schemaNS p Resource   | r]
+            ( NS.provider p
+            : [NS.schemaType p DataSource | d]
+           ++ [NS.schemaType p Resource   | r]
             )
         ]
 
@@ -60,15 +65,14 @@ main
     -> Provider (Maybe Schema)
     -> Either Text (NS, LText.Text)
 main tmpls p =
-    let ns = mainNS p
+    let ns = NS.provider p
      in second (ns,) $ render (mainTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= fmap Just p
         , "schema"    .= providerDatatype p
         , "reexports" .=
-            ( baseNS
-            : typesNS p
-            : [providerNS p | isJust (providerDatatype p)]
+            ( NS.types p
+            : [NS.provider p <> "Provider" | isJust (providerDatatype p)]
             )
         ]
 
@@ -77,7 +81,7 @@ types
     -> Provider (Maybe a)
     -> Either Text (NS, LText.Text)
 types tmpls p =
-    let ns = typesNS p
+    let ns = NS.types p
      in second (ns,) $ render (typesTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= p
@@ -88,17 +92,15 @@ provider
     -> Provider (Maybe Schema)
     -> Either Text (NS, LText.Text)
 provider tmpls p =
-    let ns = providerNS p
+    let ns = NS.provider p <> "Provider"
      in second (ns,) $ render (providerTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= p
         , "schema"    .= providerDatatype p
         , "imports"   .=
-            ([ variableNS
-             , hclNS
-             , thNS
-             , typesNS p
-             ] :: [NS])
+            ( NS.types p
+            : []
+            )
         ]
 
 schemas
@@ -108,19 +110,17 @@ schemas
     -> [Schema]
     -> Either Text (NS, LText.Text)
 schemas tmpls p typ xs =
-    let ns = schemaNS p typ
+    let ns = NS.schemaType p typ
      in second (ns,) $ render (schemaTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= p
         , "type"      .= typ
         , "schemas"   .= createMap (getTypeName typ) xs
         , "imports"   .=
-            ( variableNS
-            : hclNS
-            : thNS
-            : [mainNS p     | isJust (providerDatatype p)]
-           ++ [resourceNS   | typ == Resource]
-           ++ [dataSourceNS | typ == DataSource]
+            ( NS.types p
+            : [NS.provider p <> "Provider"   | isJust (providerDatatype p)]
+           ++ ["Terrafomo.Syntax.Resource"   | typ == Resource]
+           ++ ["Terrafomo.Syntax.DataSource" | typ == DataSource]
             )
         ]
 
@@ -130,6 +130,7 @@ render tmpl =
   where
     filters = HashMap.fromList
         [ "wrap" @: Wrap.wrapText Wrap.defaultWrapSettings 76
+        , "drop" @: Text.drop 1
         ]
 
 getTypeName :: SchemaType -> Schema -> Text

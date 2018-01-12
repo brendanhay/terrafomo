@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveFunctor              #-}
+{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 
@@ -8,7 +8,8 @@ module Terrafomo.Syntax.Variable
     , Output    (..)
     ) where
 
-import Data.Hashable (Hashable (hashWithSalt))
+import Data.Hashable  (Hashable (hashWithSalt))
+import Data.Semigroup (Last (..), Semigroup ((<>)))
 
 import Terrafomo.Syntax.Name (Key, Name)
 
@@ -16,24 +17,30 @@ import Terrafomo.Syntax.Name (Key, Name)
 --
 -- > instance = "${aws_instance.example.id}"
 --
--- That is, attributes are 'computed' as outputs of a resource or data source
+-- That is, attributes are computed as outputs of a resource or data source
 -- during a terraform run.
-newtype Attribute a = Computed Name
-    deriving (Show, Eq, Functor, Hashable)
+newtype Attribute a = Compute Name
+    deriving (Show, Eq, Hashable)
 
--- | An argument is either a 'computed' attribute of another terraform resource
--- or data source, a Haskell value, or an absent value.
+-- | An argument is either a computed attribute of another terraform resource
+-- or data source, a constant value, or nil.
 data Argument a
-    = Compute !Key !(Attribute a)
-    | Present !a
-    | Absent
-      deriving (Show, Eq, Functor)
+    = Attribute !Key !(Attribute a)
+    | Constant  !a
+    | Nil
+      deriving (Show, Eq)
 
 instance Hashable a => Hashable (Argument a) where
     hashWithSalt s = \case
-        Compute k a -> s `hashWithSalt` (0 :: Int) `hashWithSalt` a
-        Present   x -> s `hashWithSalt` (1 :: Int) `hashWithSalt` x
-        Absent      -> s `hashWithSalt` (2 :: Int)
+        Attribute k a -> s `hashWithSalt` (0 :: Int) `hashWithSalt` k `hashWithSalt` a
+        Constant    x -> s `hashWithSalt` (1 :: Int) `hashWithSalt` x
+        Nil           -> s `hashWithSalt` (2 :: Int)
+
+-- | Pointwise 'Semigroup' instance that takes 'Nil' into consideration, this
+-- exists to avoid an overlapping instance with 'Semigroup.Last'.
+instance Semigroup (Argument a) where
+    (<>) a Nil = a
+    (<>) _ b   = b
 
 -- | An explicitly declared output variable of the form:
 --

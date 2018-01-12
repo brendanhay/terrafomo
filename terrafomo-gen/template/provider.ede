@@ -1,26 +1,40 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --
-module {{ namespace }} where
+module {{ namespace }}
+    ( {{ provider.name }}    (..)
+    , Has{{provider.name }} (..)
+    ) where
 
-import Data.Text     (Text)
-import Data.Hashable (Hashable)
+import Data.Function      (on)
+import Data.Hashable      (Hashable)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (catMaybes)
+import Data.Proxy         (Proxy (Proxy))
+import Data.Semigroup     (Semigroup ((<>)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 {% for import in imports %}
 import qualified {{ import.value }} as TF
-{% if import.last %}
-
-{% endif %}
 {% endfor %}
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF
+import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.TH              as TF
+
 {- | {{ provider.name }} Terraform provider.
 {% if schema.about %}
 
@@ -39,26 +53,40 @@ import qualified {{ import.value }} as TF
 @
 {% endfor %}
 -}
-data {{ provider.name }} = {{ provider.name }}
+data {{ provider.name }} = {{ provider.name }} {
   {% for arg in schema.arguments %}
-    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
-    {% if arg.last %}
-    } deriving (Show, Eq, Generic)
-    {% endif %}
-  {% else %}
-    deriving (Show, Eq, Generic)
   {% endfor %}
+    } deriving (Show, Eq, Generic)
 
 instance Hashable {{ provider.name }}
 
 instance TF.ToHCL {{ provider.name }} where
-  {% for arg in schema.arguments %}
-    {% if arg.first %}toHCL x = TF.arguments
-        [{% else %}    ,{% endif %} TF.assign "{{ arg.value.name }}" <$> {{ arg.key }} x{% if arg.last %}
-        ]{% endif %}
-  {% else %}
-    toHCL = const $ TF.arguments []
-  {% endfor %}
+    toHCL x =
+        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy {{ provider.name }}))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+          {% for arg in schema.arguments %}
+            , TF.assign "{{ arg.value.name }}" <$> TF.argument ({{ arg.key }} x)
+          {% endfor %}
+            ]
 
-$(TF.makeClassy ''{{ provider.name }})
+instance Semigroup {{ provider.name }} where
+    (<>) a b = {{ provider.name }} {
+      {% for arg in schema.arguments %}
+        {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = on (<>) {{ arg.key }} a b
+      {% endfor %}
+        }
+
+instance Monoid {{ provider.name }} where
+    mappend = (<>)
+    mempty  = {{ provider.name }} {
+        {% for arg in schema.arguments %}
+          {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = TF.Nil
+        {% endfor %}
+        }
+
+instance TF.IsProvider {{ provider.name }} where
+    type ProviderName {{ provider.name }} = "{{ provider.original }}"
+
+$(TF.makeProviderLenses ''{{ provider.name }})

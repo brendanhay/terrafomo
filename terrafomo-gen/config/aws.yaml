@@ -1,3 +1,4 @@
 name: AWS
+original: aws
 package: terrafomo-aws
 datatype: true

@@ -17,17 +17,31 @@ module Terrafomo
     -- * Lenses
     , (Lens.&)
     , (Lens..~)
+    , (Lens.?~)
     , (Lens.%~)
-    , (.=)
+
+    , attribute
+    , constant
+    , nil
+    , true
+    , false
+
+    , provider
+    , dependsOn
+    , lifecycle
+    , preventDestroy
+    , createBeforeDestroy
+    , ignoreChanges
 
     -- * Terraform Syntax
     , Name
+    , Reference
 
     -- ** Providers
     , Alias
+    , defaultProvider
 
     -- ** DataSources and Resources
-    , Reference
 
     , DataSource
     , datasource
@@ -48,7 +62,7 @@ module Terrafomo
     -- , attribute
 
     -- ** Defining Outputs
---    , output
+    , output
 
     -- * Terraform Monad
     , Terraform
@@ -77,6 +91,7 @@ import Numeric.Natural (Natural)
 import Terrafomo.Format
 import Terrafomo.Monad
 import Terrafomo.Syntax.DataSource
+import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
@@ -84,13 +99,12 @@ import Terrafomo.Syntax.Variable
 import qualified Data.Traversable as Traverse
 import qualified Lens.Micro       as Lens
 
-infixr 6 .=
-
 -- FIXME: probably use ':=' or '=:' to avoid ambiguity with aeson and lens.
 
--- | @setter .= x@ is equivalent to @setter .~ Present x@.
-(.=) :: Lens.ASetter s t a (Argument b) -> b -> s -> t
-(.=) l x = l Lens..~ Present x
+-- -- | @setter .= x@ is equivalent to @setter .~ Present x@.
+-- (.=) :: Lens.ASetter s t a (Argument b) -> b -> s -> t
+-- (.=) l x = l Lens..~ Present x
+
 
 -- -- attribute
 -- --     :: ( KnownSymbol k
@@ -99,9 +113,3 @@ infixr 6 .=
 -- --     -> proxy k
 -- --     -> Attr v
 -- attribute (Ref k x) field = Computed k (field x)
-
--- | Example of replacing terraform's count attribute.
---
--- Uses a specialized type signature for the most common usecase.
-count :: Applicative f => [Int] -> (Int -> f (Reference p s)) -> f [Reference p s]
-count = Traverse.for
