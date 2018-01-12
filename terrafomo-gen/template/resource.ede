@@ -26,7 +26,7 @@ import qualified Terrafomo.Syntax.TH as TH
 {% for schema in schemas %}
 
 {% let original = schema.value._name %}
--- | The @{{ original }}@ {{ provider }} resource.
+-- | The @{{ original }}@ {{ provider.name }} resource.
 {% if schema.value.about %}
 --
 -- {{ schema.value.about }}
@@ -65,7 +65,7 @@ type instance Computed {{ schema.key }}
 
 $(TH.makeResource
     "{{ original }}"
-    ''{{ provider }}
+    ''{{ provider.type }}
     'defaultProvider
     ''{{ schema.key }})
 {% endlet %}

@@ -63,7 +63,7 @@ data Options = Options
     , schemaDir       :: !FilePath
     , patchDir        :: !FilePath
     , templateDir     :: !FilePath
-    , providerName    :: !String
+    , providerAlias   :: !String
     , providerFile    :: !FilePath
     , resourceFiles   :: ![FilePath]
     , dataSourceFiles :: ![FilePath]
@@ -157,7 +157,7 @@ main = do
 loadProvider :: Options -> Script (Provider, Maybe Schema)
 loadProvider opts = do
     let path@Path{markdownFile} = providerPath opts
-        configFile              = configDir opts </> providerName opts <.> "yaml"
+        configFile              = configDir opts </> providerAlias opts <.> "yaml"
 
     provider <- parseYAML configFile
     exists   <- scriptIO (Dir.doesFileExist markdownFile)
@@ -238,9 +238,10 @@ renderProvider tmpls p@Provider{providerPackage} schema = do
     Fold.for_ providerPackage $
         const (renderPackage tmpls dir p)
 
-    Fold.for_ schema $
-        hoistEither . Template.renderProvider tmpls p
-            >=> writeNS dir
+    when (providerDatatype p) $
+        Fold.for_ schema $
+            hoistEither . Template.renderProvider tmpls p
+                >=> writeNS dir
 
     pure dir
 
@@ -250,18 +251,11 @@ renderPackage
     -> Provider
     -> Script ()
 renderPackage tmpls dir p = do
-    let packageFile  = dir </> "package" <.> "yaml"
-        srcDir       = dir </> "src"
-
-    pkg <- hoistEither (Template.renderPackage tmpls p)
-
-    Fold.traverse_ (touch . Path.combine srcDir)
-        [ pathNS (mainNS  p) <.> "hs"
-        , pathNS (typesNS p) <.> "hs"
-        ]
+    let packageFile = dir </> "package" <.> "yaml"
 
     echo ("Writing " ++ packageFile)
-    scriptIO (LText.writeFile packageFile pkg)
+    hoistEither (Template.renderPackage tmpls p)
+        >>= scriptIO . LText.writeFile packageFile
 
 renderSchemas
     :: Templates EDE.Template
@@ -277,8 +271,9 @@ renderSchemas tmpls dir p typ xs = do
     hoistEither (Template.renderSchemas tmpls p typ modules)
         >>= Fold.traverse_ writeModule . Map.toList
 
-    hoistEither (Template.renderContents tmpls p typ modules)
-        >>= writeModule
+    unless (Fold.length modules <= 1) $
+        hoistEither (Template.renderContents tmpls p typ modules)
+            >>= writeModule
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
@@ -300,8 +295,8 @@ data Path = Path
 providerPath :: Options -> Path
 providerPath Options{..} =
     let markdownFile = providerFile
-        schemaFile   = schemaDir </> providerName <.> "yaml"
-        patchFile    = patchDir  </> providerName <.> "patch"
+        schemaFile   = schemaDir </> providerAlias <.> "yaml"
+        patchFile    = patchDir  </> providerAlias <.> "patch"
      in Path{..}
 
 resourcePaths :: Options -> [Path]
@@ -311,11 +306,11 @@ dataSourcePaths :: Options -> [Path]
 dataSourcePaths opts = map (schemaPath opts) (dataSourceFiles opts)
 
 schemaPath :: Options -> FilePath -> Path
-schemaPath Options{providerName, schemaDir, patchDir} file =
+schemaPath Options{providerAlias, schemaDir, patchDir} file =
     let name         = Path.dropExtensions (Path.takeBaseName file)
         markdownFile = file
-        schemaFile   = schemaDir </> providerName </> name <.> "yaml"
-        patchFile    = patchDir  </> providerName </> name <.> "patch"
+        schemaFile   = schemaDir </> providerAlias </> name <.> "yaml"
+        patchFile    = patchDir  </> providerAlias </> name <.> "patch"
      in Path{..}
 
 -- EDE Templating
@@ -351,11 +346,3 @@ parseYAML file = do
 
 echo :: String -> Script ()
 echo = Error.scriptIO . IO.putStrLn
-
-touch :: FilePath -> Script ()
-touch file =
-    scriptIO $ do
-        Dir.createDirectoryIfMissing True (Path.takeDirectory file)
-        exists <- Dir.doesFileExist file
-        unless exists $
-            appendFile file mempty

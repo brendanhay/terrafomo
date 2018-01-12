@@ -4,6 +4,6 @@ module {{ namespace }}
     ( module Export
     ) where
 
-{% for import in imports %}
-import {{ import.value }} as Export
+{% for export in reexports %}
+import {{ export.value }} as Export
 {% endfor %}

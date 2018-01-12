@@ -8,10 +8,11 @@
 
 module Terrafomo.Gen.Template where
 
-import Data.Aeson      ((.=))
-import Data.Bifunctor  (first, second)
-import Data.Map.Strict (Map)
-import Data.Text       (Text)
+import Data.Aeson         ((.=))
+import Data.Bifunctor     (first, second)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Map.Strict    (Map)
+import Data.Text          (Text)
 
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
@@ -38,7 +39,7 @@ renderPackage
     -> Either Text LText.Text
 renderPackage tmpls p =
     render (packageTemplate tmpls)
-        [ "provider" .= provider_Name   p
+        [ "provider" .=   p
         , "package"  .= providerPackage p
         , "exposed"  .=
             [ mainNS     p
@@ -58,9 +59,9 @@ renderProvider tmpls p x =
     let ns = providerNS p
      in second (ns,) $ render (providerTemplate tmpls)
         [ "namespace" .= ns
-        , "provider"  .= provider_Name p
+        , "provider"  .= p
         , "schema"    .= x
-        , "imports"   .= [typesNS p]
+        , "reexports" .= [typesNS p]
         ]
 
 renderContents
@@ -73,7 +74,7 @@ renderContents tmpls p typ xs =
     let ns = schemaNS p typ
      in second (ns,) $ render (contentsTemplate tmpls)
         [ "namespace" .= ns
-        , "imports"   .= Map.keys xs
+        , "reexports" .= Map.keys xs
         ]
 
 renderSchemas
@@ -87,9 +88,11 @@ renderSchemas tmpls p typ = Map.traverseWithKey go
     go ns xs =
         render (getTypeTemplate typ tmpls)
             [ "namespace" .= ns
-            , "provider"  .= provider_Name p
+            , "provider"  .= p
             , "schemas"   .= createMap (getTypeName typ) xs
-            , "imports"   .= [mainNS p]
+            , "imports"   .=
+                (NS ("Terrafomo" :| ["Provider"])
+                    : [providerNS p | providerDatatype p])
             ]
 
     createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a

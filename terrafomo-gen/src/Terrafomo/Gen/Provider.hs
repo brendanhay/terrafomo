@@ -7,7 +7,7 @@
 
 module Terrafomo.Gen.Provider where
 
-import Data.Aeson         (FromJSON, ToJSON, ToJSONKey)
+import Data.Aeson         (FromJSON, ToJSON, ToJSONKey, (.=))
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
 import Data.Semigroup     (Semigroup ((<>)))
@@ -47,21 +47,32 @@ pathNS = fromNS '/'
 -- Provider Configuration
 
 data Provider = Provider
-    { provider_Name   :: !Text
-    , providerPackage :: !(Maybe Text)
+    { providerName     :: !Text
+    , providerPackage  :: !(Maybe Text)
+    , providerDatatype :: !Bool
     } deriving (Show, Generic)
 
 instance FromJSON Provider where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
-mainNS :: Provider -> NS
-mainNS p = NS ("Terrafomo" :| [provider_Name p])
+instance ToJSON Provider where
+    toJSON Provider{..} =
+        JSON.object
+            [ "name" .= providerName
+            , "type" .=
+                if providerDatatype
+                    then providerName
+                    else "Provider"
+            ]
 
-typesNS :: Provider -> NS
-typesNS p = mainNS p <> NS (pure "Types")
+mainNS :: Provider -> NS
+mainNS p = NS ("Terrafomo" :| [providerName p])
 
 providerNS :: Provider -> NS
 providerNS p = mainNS p <> NS (pure "Provider")
+
+typesNS :: Provider -> NS
+typesNS p = mainNS p <> NS (pure "Types")
 
 schemaNS :: Provider -> SchemaType -> NS
 schemaNS p typ = mainNS p <> NS (pure (Text.pack (show typ)))
@@ -82,4 +93,3 @@ moduleNS p typ xs
             [x]
 
     namespace = schemaNS p typ
-

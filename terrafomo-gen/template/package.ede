@@ -1,8 +1,17 @@
-_common: !include '../../share/package-common.yaml'
+_include: !include '../../share/package.yaml'
 
 name: {{ package }}
 
-<<: *common
+<<: *legal
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - containers
+  - hashable
+  - terrafomo
+  - text
 
 library:
   source-dirs:

@@ -8,13 +8,13 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-{% for import in imports %}
-import {{ import.value }}
-{% if import.last %}
+{% for export in reexports %}
+import {{ export.value }}
+{% if export.last %}
 
 {% endif %}
 {% endfor %}
--- | {{ provider }} Terraform provider.
+-- | {{ provider.name }} Terraform provider.
 {% if schema.about %}
 --
 -- {{ schema.about }}
@@ -31,7 +31,7 @@ import {{ import.value }}
 {% endfor %}
 -- @
 {% endfor %}
-data {{ provider }} = {{ provider }}
+data {{ provider.name }} = {{ provider.name }}
   {% for arg in schema.arguments %}
     {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !{{ arg.value.type }}
       {- ^ {{ arg.value.help }} -}
