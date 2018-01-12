@@ -1,0 +1,147 @@
+_name: aws_ami
+arguments:
+  owners:
+    required: false
+    help: (Optional) Limit search to specific AMI owners. Valid items are the numeric
+      account ID, @amazon@ , or @self@ .
+    type: Text
+  executable_users:
+    required: false
+    help: (Optional) Limit search to users with explicit launch permission on the
+      image. Valid items are the numeric account ID or @self@ .
+    type: Text
+  ebs_block_device:
+    required: false
+    help: (Optional) Nested block describing an EBS block device that should be attached
+      to created instances. The structure of this block is described below.
+    type: Text
+  virtualization_type:
+    required: false
+    help: (Optional) Keyword to choose what virtualization mode created instances
+      will use. Can be either "paravirtual" (the default) or "hvm". The choice of
+      virtualization type changes the set of further arguments that are required,
+      as described below.
+    type: Text
+  most_recent:
+    required: false
+    help: (Optional) If more than one result is returned, use the most recent AMI.
+    type: Text
+  name:
+    required: true
+    help: (Required) A region-unique name for the AMI.
+    type: Text
+  name_regex:
+    required: false
+    help: (Optional) A regex string to apply to the AMI list returned by AWS. This
+      allows more advanced filtering not supported from the AWS API. This filtering
+      is done locally on what AWS returns, and could have a performance impact if
+      the result is large. It is recommended to combine this with other options to
+      narrow down the list AWS returns.
+    type: Text
+  architecture:
+    required: false
+    help: (Optional) Machine architecture for created instances. Defaults to "x86_64".
+    type: Text
+  filter:
+    required: false
+    help: (Optional) One or more name/value pairs to filter off of. There are several
+      valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html>
+      .
+    type: Text
+  ephemeral_block_device:
+    required: false
+    help: (Optional) Nested block describing an ephemeral block device that should
+      be attached to created instances. The structure of this block is described below.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A longer, human-readable description for the AMI.
+    type: Text
+  root_device_name:
+    required: false
+    help: (Optional) The name of the root device (for example, @/dev/sda1@ , or @/dev/xvda@
+      ).
+    type: Text
+attributes:
+  hypervisor:
+    help: ! '- The hypervisor type of the image.'
+    type: Text
+  state:
+    help: ! '- The current state of the AMI. If the state is @available@ , the image
+      is successfully registered and can be used to launch an instance.'
+    type: Text
+  platform:
+    help: ! '- The value is Windows for @Windows@ AMIs; otherwise blank.'
+    type: Text
+  product_codes:
+    help: ! '- Any product codes associated with the AMI.'
+    type: Text
+  image_location:
+    help: ! '- The location of the AMI.'
+    type: Text
+  virtualization_type:
+    help: ! '- The type of virtualization of the AMI (ie: @hvm@ or @paravirtual@ ).'
+    type: Text
+  block_device_mappings:
+    help: ! '- The block device mappings of the AMI.'
+    type: Text
+  root_device_type:
+    help: ! '- The type of root device (ie: @ebs@ or @instance-store@ ).'
+    type: Text
+  state_reason:
+    help: ! '- Describes a state change. Fields are @UNSET@ if not available.'
+    type: Text
+  name:
+    help: ! '- The name of the AMI that was provided during image creation.'
+    type: Text
+  root_snapshot_id:
+    help: ! '- The snapshot id associated with the root device, if any (only applies
+      to @ebs@ root devices).'
+    type: Text
+  creation_date:
+    help: ! '- The date and time the image was created.'
+    type: Text
+  id:
+    help: ! '- The ID of the created AMI.'
+    type: Text
+  image_id:
+    help: ! '- The ID of the AMI. Should be the same as the resource @id@ .'
+    type: Text
+  architecture:
+    help: ! '- The OS architecture of the AMI (ie: @i386@ or @x86_64@ ).'
+    type: Text
+  image_owner_alias:
+    help: ! '- The AWS account alias (for example, @amazon@ , @self@ ) or the AWS
+      account ID of the AMI owner.'
+    type: Text
+  image_type:
+    help: ! '- The type of image.'
+    type: Text
+  owner_id:
+    help: ! '- The AWS account ID of the image owner.'
+    type: Text
+  description:
+    help: ! '- The description of the AMI that was provided during image creation.'
+    type: Text
+  root_device_name:
+    help: ! '- The device name of the root device.'
+    type: Text
+  tags:
+    help: ! '- Any tags assigned to the image.'
+    type: Text
+  ramdisk_id:
+    help: ! '- The RAM disk associated with the image, if any. Only applicable for
+      machine images.'
+    type: Text
+  sriov_net_support:
+    help: ! '- Specifies whether enhanced networking is enabled.'
+    type: Text
+  kernel_id:
+    help: ! '- The kernel associated with the image, if any. Only applicable for machine
+      images.'
+    type: Text
+  public:
+    help: ! '- @true@ if the image has public launch permissions.'
+    type: Text
+about: Use this data source to get the ID of a registered AMI for use in other resources.
+examples: []

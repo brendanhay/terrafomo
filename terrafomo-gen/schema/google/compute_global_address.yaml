@@ -1,0 +1,28 @@
+_name: google_compute_global_address
+arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  ip_version:
+    required: false
+    help: (Optional) The IP Version that will be used by this address. One of @"IPV4"@
+      or @"IPV6"@ .
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  address:
+    help: ! '- The assigned address.'
+    type: Text
+about: Creates a static IP address resource global to a Google Compute Engine project.
+  For more information see <https://cloud.google.com/compute/docs/instances-and-network>
+  and <https://cloud.google.com/compute/docs/reference/latest/globalAddresses> .
+examples: []

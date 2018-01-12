@@ -1,0 +1,20 @@
+_name: aws_lightsail_static_ip
+arguments:
+  name:
+    required: true
+    help: (Required) The name for the allocated static IP
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN of the Lightsail static IP'
+    type: Text
+  support_code:
+    help: ! '- The support code.'
+    type: Text
+  ip_address:
+    help: ! '- The allocated static IP address'
+    type: Text
+about: ! 'Allocates a static IP address. ~> Note: Lightsail is currently only supported
+  in a limited number of AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
+  for more details'
+examples: []

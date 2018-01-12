@@ -1,0 +1,27 @@
+_name: azure_security_group
+arguments:
+  location:
+    required: true
+    help: (Required) The location/region where the security group is created. Changing
+      this forces a new resource to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the security group. Changing this forces a new resource
+      to be created.
+    type: Text
+  label:
+    required: false
+    help: (Optional) The identifier for the security group. The label can be up to
+      1024 characters long. Changing this forces a new resource to be created (defaults
+      to the security group name)
+    type: Text
+attributes:
+  id:
+    help: ! '- The security group ID.'
+    type: Text
+  label:
+    help: ! '- The identifier for the security group.'
+    type: Text
+about: Creates a new network security group within the context of the specified subscription.
+examples: []

@@ -1,0 +1,31 @@
+_name: aws_opsworks_permission
+arguments:
+  stack_id:
+    required: true
+    help: (Required) The stack to set the permissions for
+    type: Text
+  user_arn:
+    required: true
+    help: (Required) The user's IAM ARN to set permissions for
+    type: Text
+  allow_sudo:
+    required: false
+    help: (Optional) Whether the user is allowed to use sudo to elevate privileges
+    type: Text
+  allow_ssh:
+    required: false
+    help: (Optional) Whether the user is allowed to use SSH to communicate with the
+      instance
+    type: Text
+  level:
+    required: false
+    help: (Optional) The users permission level. Mus be one of @deny@ , @show@ , @deploy@
+      , @manage@ , @iam_only@
+    type: Text
+attributes:
+  id:
+    help: ! '- The computed id of the permission. Please note that this is only used
+      internally to identify the permission. This value is not used in aws.'
+    type: Text
+about: Provides an OpsWorks permission resource.
+examples: []

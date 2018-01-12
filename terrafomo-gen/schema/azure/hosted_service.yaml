@@ -1,0 +1,38 @@
+_name: azure_hosted_service
+arguments:
+  ephemeral_contents:
+    required: true
+    help: (Required) A boolean value (true|false), specifying whether all the resources
+      present in the hosted hosted service should be destroyed following the hosted
+      service's destruction.
+    type: Text
+  location:
+    required: true
+    help: (Required) The location where the hosted service should be created. For
+      a list of all Azure locations, please consult <https://azure.microsoft.com/en-us/regions/>
+      .
+    type: Text
+  reverse_dns_fqdn:
+    required: false
+    help: (Optional) The reverse of the fully qualified domain name for the hosted
+      service.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the hosted service. Must be unique on Azure.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description for the hosted service.
+    type: Text
+  label:
+    required: false
+    help: (Optional) A label to be used for tracking purposes. Must be non-void. Defaults
+      to @Made by Terraform.@ .
+    type: Text
+attributes:
+  id:
+    help: ! '- The hosted service ID. Coincides with the given @name@ .'
+    type: Text
+about: Creates a new hosted service on Azure with its own .cloudapp.net domain.
+examples: []

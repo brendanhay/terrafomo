@@ -1,0 +1,32 @@
+_name: aws_iam_user_ssh_key
+arguments:
+  status:
+    required: false
+    help: (Optional) The status to assign to the SSH public key. Active means the
+      key can be used for authentication with an AWS CodeCommit repository. Inactive
+      means the key cannot be used. Default is @active@ .
+    type: Text
+  username:
+    required: true
+    help: (Required) The name of the IAM user to associate the SSH public key with.
+    type: Text
+  public_key:
+    required: true
+    help: (Required) The SSH public key. The public key must be encoded in ssh-rsa
+      format or PEM format.
+    type: Text
+  encoding:
+    required: true
+    help: (Required) Specifies the public key encoding format to use in the response.
+      To retrieve the public key in ssh-rsa format, use SSH . To retrieve the public
+      key in PEM format, use PEM .
+    type: Text
+attributes:
+  fingerprint:
+    help: ! '- The MD5 message digest of the SSH public key.'
+    type: Text
+  ssh_public_key_id:
+    help: ! '- The unique identifier for the SSH public key.'
+    type: Text
+about: Uploads an SSH public key and associates it with the specified IAM user.
+examples: []

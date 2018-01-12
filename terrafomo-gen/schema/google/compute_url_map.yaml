@@ -1,0 +1,48 @@
+_name: google_compute_url_map
+arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  test:
+    required: false
+    help: (Optional) The test to perform.  Multiple blocks of this type are permitted.
+      Structure is documented below.
+    type: Text
+  default_service:
+    required: true
+    help: (Required) The backend service or backend bucket to use when none of the
+      given rules match.
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  path_matcher:
+    required: false
+    help: (Optional) A list of paths to match. Structure is documented below.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A brief description of this resource.
+    type: Text
+  host_rule:
+    required: false
+    help: (Optional) A list of host rules. Multiple blocks of this type are permitted.
+      Structure is documented below.
+    type: Text
+attributes:
+  fingerprint:
+    help: ! '- The unique fingerprint for this resource.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  id:
+    help: ! '- The GCE assigned ID of the resource.'
+    type: Text
+about: Manages a URL Map resource within GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/url-map>
+  and <https://cloud.google.com/compute/docs/reference/latest/urlMaps> .
+examples: []

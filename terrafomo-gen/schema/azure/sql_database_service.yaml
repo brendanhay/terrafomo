@@ -1,0 +1,39 @@
+_name: azure_sql_database_service
+arguments:
+  edition:
+    required: false
+    help: (Optional) The edition of the database service. For more information on
+      each variant, please view <https://msdn.microsoft.com/library/azure/dn741340.aspx>
+      link.
+    type: Text
+  database_server_name:
+    required: true
+    help: (Required) The name of the database server this service should run on. Changes
+      here force the creation of a new resource.
+    type: Text
+  max_size_bytes:
+    required: false
+    help: (Optional) The maximum size in bytes the database service should be allowed
+      to expand to. Range depends on the database @edition@ selected above.
+    type: Text
+  collation:
+    required: false
+    help: (Optional) The collation to be used within the database service. Defaults
+      to the standard Latin charset.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the database service.
+    type: Text
+  service_level_id:
+    required: false
+    help: (Optional) The ID corresponding to the service level per edition. Please
+      refer to <https://msdn.microsoft.com/en-us/library/azure/dn505701.aspx> link
+      for more details.
+    type: Text
+attributes:
+  id:
+    help: ! '- The database service ID. Coincides with the given @name@ .'
+    type: Text
+about: Creates a new SQL database service on an Azure database server.
+examples: []

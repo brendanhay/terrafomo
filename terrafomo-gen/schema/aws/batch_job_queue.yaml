@@ -1,0 +1,28 @@
+_name: aws_batch_job_queue
+arguments:
+  compute_environments:
+    required: true
+    help: (Required) Specifies the set of compute environments mapped to a job queue
+      and their order.  The position of the compute environments in the list will
+      dictate the order. You can associate up to 3 compute environments with a job
+      queue.
+    type: Text
+  state:
+    required: true
+    help: ! '(Required) The state of the job queue. Must be one of: @ENABLED@ or @DISABLED@'
+    type: Text
+  priority:
+    required: true
+    help: (Required) The priority of the job queue. Job queues with a higher priority
+      are evaluated first when associated with same compute environment.
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the job queue.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name of the job queue.'
+    type: Text
+about: Provides a Batch Job Queue resource.
+examples: []

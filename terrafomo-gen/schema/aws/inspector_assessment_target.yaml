@@ -1,0 +1,16 @@
+_name: aws_inspector_assessment_target
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the assessment target.
+    type: Text
+  resource_group_arn:
+    required: true
+    help: (Required )- The resource group ARN stating tags for instance matching.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The target assessment ARN.'
+    type: Text
+about: Provides a Inspector assessment target
+examples: []

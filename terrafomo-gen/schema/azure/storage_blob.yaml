@@ -1,0 +1,34 @@
+_name: azure_storage_blob
+arguments:
+  size:
+    required: false
+    help: (Optional) Used only for @PageBlob@ 's to specify the size in bytes of the
+      blob to be created. Must be a multiple of 512. Defaults to 0.
+    type: Text
+  storage_container_name:
+    required: true
+    help: (Required) The name of the storage container in which this blob should be
+      created. Must be located on the storage service given with @storage_service_name@
+      .
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the storage blob. Must be unique within the storage
+      service the blob is located.
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of the storage blob to be created. One of either @BlockBlob@
+      or @PageBlob@ .
+    type: Text
+  storage_service_name:
+    required: true
+    help: (Required) The name of the storage service within which the storage container
+      in which the blob will be created resides.
+    type: Text
+attributes:
+  id:
+    help: ! '- The storage blob ID. Coincides with the given @name@ .'
+    type: Text
+about: Creates a new storage blob within a given storage container on Azure.
+examples: []

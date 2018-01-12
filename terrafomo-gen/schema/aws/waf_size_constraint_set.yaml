@@ -1,0 +1,14 @@
+_name: aws_waf_size_constraint_set
+arguments:
+  size_constraints:
+    required: false
+    help: (Optional) Specifies the parts of web requests that you want to inspect
+      the size of.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name or description of the Size Constraint Set.
+    type: Text
+attributes: {}
+about: Provides a WAF Size Constraint Set Resource
+examples: []

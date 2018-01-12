@@ -1,0 +1,101 @@
+_name: aws_opsworks_instance
+arguments:
+  stack_id:
+    required: true
+    help: (Required) The id of the stack the instance will belong to.
+    type: Text
+  state:
+    required: false
+    help: (Optional) The desired state of the instance.  Can be either @"running"@
+      or @"stopped"@ .
+    type: Text
+  root_block_device:
+    required: false
+    help: (Optional) Customize details about the root block device of the instance.
+      See <#block-devices> below for details.
+    type: Text
+  hostname:
+    required: false
+    help: (Optional) The instance's host name.
+    type: Text
+  layer_ids:
+    required: true
+    help: (Required) The ids of the layers the instance will belong to.
+    type: Text
+  auto_scaling_type:
+    required: false
+    help: ! '(Optional) Creates load-based or time-based instances.  If set, can be
+      either: @"load"@ or @"timer"@ .'
+    type: Text
+  ebs_block_device:
+    required: false
+    help: (Optional) Additional EBS block devices to attach to the instance.  See
+      <#block-devices> below for details.
+    type: Text
+  virtualization_type:
+    required: false
+    help: (Optional) Keyword to choose what virtualization mode created instances
+      will use. Can be either @"paravirtual"@ or @"hvm"@ .
+    type: Text
+  root_device_type:
+    required: false
+    help: (Optional) Name of the type of root device instances will have by default.  Can
+      be either @"ebs"@ or @"instance-store"@
+    type: Text
+  agent_version:
+    required: false
+    help: (Optional) The AWS OpsWorks agent to install.  Defaults to @"INHERIT"@ .
+    type: Text
+  os:
+    required: false
+    help: (Optional) Name of operating system that will be installed.
+    type: Text
+  ami_id:
+    required: false
+    help: (Optional) The AMI to use for the instance.  If an AMI is specified, @os@
+      must be @"Custom"@ .
+    type: Text
+  tenancy:
+    required: false
+    help: (Optional) Instance tenancy to use. Can be one of @"default"@ , @"dedicated"@
+      or @"host"@
+    type: Text
+  architecture:
+    required: false
+    help: (Optional) Machine architecture for created instances.  Can be either @"x86_64"@
+      (the default) or @"i386"@
+    type: Text
+  ssh_key_name:
+    required: false
+    help: (Optional) Name of the SSH keypair that instances will have by default.
+    type: Text
+  availability_zone:
+    required: false
+    help: (Optional) Name of the availability zone where instances will be created
+      by default.
+    type: Text
+  install_updates_on_boot:
+    required: false
+    help: (Optional) Controls where to install OS and package updates when the instance
+      boots.  Defaults to @true@ .
+    type: Text
+  ebs_optimized:
+    required: false
+    help: (Optional) If true, the launched EC2 instance will be EBS-optimized.
+    type: Text
+  instance_type:
+    required: true
+    help: (Required) The type of instance to start
+    type: Text
+  ephemeral_block_device:
+    required: false
+    help: (Optional) Customize Ephemeral (also known as "Instance Store") volumes
+      on the instance. See <#block-devices> below for details.
+    type: Text
+  subnet_id:
+    required: false
+    help: (Optional) Subnet ID to attach to
+    type: Text
+attributes: {}
+about: Provides an OpsWorks instance resource.
+examples: []

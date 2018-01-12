@@ -1,0 +1,41 @@
+_name: aws_db_parameter_group
+arguments:
+  name:
+    required: false
+    help: (Optional, Forces new resource) The name of the DB parameter group. If omitted,
+      Terraform will assign a random, unique name.
+    type: Text
+  name_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique name beginning with the
+      specified prefix. Conflicts with @name@ .
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description of the DB parameter group. Defaults to "Managed
+      by Terraform".
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+  parameter:
+    required: false
+    help: (Optional) A list of DB parameters to apply. Note that parameters may differ
+      from a family to an other. Full list of all parameters can be discovered via
+      <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html>
+      after initial creation of the group.
+    type: Text
+  family':
+    required: true
+    help: (Required) The family of the DB parameter group.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN of the db parameter group.'
+    type: Text
+  id:
+    help: ! '- The db parameter group name.'
+    type: Text
+about: Provides an RDS DB parameter group resource.
+examples: []

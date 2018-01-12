@@ -6,7 +6,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.{{ provider }}.Types
+import Terrafomo.{{ provider }}.Types
 
 -- | {{ provider }} Terraform provider.
 {% if schema.about %}

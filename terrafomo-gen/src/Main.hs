@@ -6,17 +6,14 @@
 
 module Main (main) where
 
-import Control.Applicative (many, optional)
-import Control.Error       (Script, hoistEither, runScript, scriptIO, (??))
-import Control.Monad       (when, (>=>))
+import Control.Applicative (many)
+import Control.Error       (Script, hoistEither, runScript, scriptIO)
+import Control.Monad       (unless, when)
 import Data.Aeson          (FromJSON, ToJSON)
 
-import Data.Bifunctor   (first)
-import Data.Foldable    (for_, traverse_)
-import Data.Function    ((&))
-import Data.Semigroup   (Semigroup ((<>)))
-import Data.Text        (Text)
-import Data.Traversable (for)
+import Data.Bifunctor (first)
+import Data.Function  ((&))
+import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
 
@@ -24,6 +21,8 @@ import Terrafomo.Gen.Parser   (Parser)
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Template (Templates (Templates))
+
+import qualified Data.Foldable as Fold
 
 import qualified Control.Error          as Error
 import qualified Data.Map.Strict        as Map
@@ -222,8 +221,30 @@ renderProvider
     -> Provider
     -> Script ()
 renderProvider tmpls p =
-    hoistEither (Template.renderProvider tmpls p)
-        >>= maybe (pure ()) (writeNamespace (providerDir p))
+    hoistEither (Template.renderProvider tmpls p) >>= \case
+        Nothing -> pure ()
+        Just x  -> do
+            writeNamespace (providerDir p) x
+            renderPackage tmpls p
+
+renderPackage
+    :: Templates EDE.Template
+    -> Provider
+    -> Script ()
+renderPackage tmpls p = do
+    let packageFile = providerDir p </> "package" <.> "yaml"
+        srcDir      = providerDir p </> "src"
+        gitKeepFile = srcDir </> ".gitkeep"
+
+    pkg <- hoistEither (Template.renderPackage tmpls p)
+
+    echo ("Writing " ++ packageFile)
+    scriptIO $ do
+        LText.writeFile packageFile pkg
+        Dir.createDirectoryIfMissing True srcDir
+        exists <- Dir.doesFileExist gitKeepFile
+        unless exists $
+            appendFile gitKeepFile mempty
 
 renderSchemas
     :: Templates EDE.Template
@@ -236,14 +257,14 @@ renderSchemas tmpls p typ xs = do
         (contents, modules) = schemaNamespaces p typ xs
 
     hoistEither (Template.renderSchemas tmpls p Resource modules)
-        >>= traverse_ writeModule . Map.toList
+        >>= Fold.traverse_ writeModule . Map.toList
 
     hoistEither (Template.renderContents tmpls Resource contents modules)
         >>= writeModule
 
 writeNamespace :: FilePath -> (NS, LText.Text) -> Script ()
 writeNamespace dir (ns, text) = do
-    let moduleFile = dir </> fromNamespace '/' ns <.> "hs"
+    let moduleFile = dir </> "gen" </> fromNamespace '/' ns <.> "hs"
 
     echo ("Writing " ++ moduleFile)
     scriptIO $ do
@@ -285,7 +306,8 @@ loadTemplates :: Options -> Script (Templates EDE.Template)
 loadTemplates Options{templateDir} =
     traverse (parseEDE . Path.combine templateDir) $
         Templates
-            { providerTemplate   = "provider.ede"
+            { packageTemplate   = "package.ede"
+            , providerTemplate   = "provider.ede"
             , contentsTemplate   = "contents.ede"
             , resourceTemplate   = "resource.ede"
             , dataSourceTemplate = "datasource.ede"
@@ -311,90 +333,3 @@ parseYAML file = do
 
 echo :: String -> Script ()
 echo = Error.scriptIO . IO.putStrLn
-
-
---     let total = length inputPaths :: Int
-
---     schemas <- for (zip [1..] inputPaths) $ \(n, inputPath) -> do
---         let name    = Path.dropExtensions (Path.takeBaseName inputPath)
---             current = "[" ++ show (n :: Int) ++ " of " ++ show total ++ "] "
---             step x  = say (current ++ x)
-
---         let patchPath  = patchDir  </> name <.> "patch"
---             rejectPath = patchDir  </> name <.> "rej"
---             schemaPath = schemaDir </> name <.> "yaml"
-
---         patchExists <- Dir.doesFileExist patchPath
---         step ("Checking for " ++ patchPath ++ " == " ++ show patchExists)
-
---         when patchExists $ do
---             step ("Patching " ++ inputPath)
---             code <- Process.system $
---                 unwords [ "patch -N -r"
---                         , rejectPath
---                         , inputPath
---                         , patchPath
---                         , "1>&2"
---                         ]
---             when (code /= Exit.ExitSuccess) $
---                 step ("Failure applying patch " ++ patchPath)
-
---         step ("Parsing " ++ inputPath)
---         schema <-
---             Text.readFile inputPath
---                 >>= handleError inputPath
---                   . Parser.runParser Parser.schemaParser inputPath
-
---         configExists <- Dir.doesFileExist schemaPath
---         step ("Checking for " ++ schemaPath ++ " == " ++ show configExists)
-
---         newSchema <-
---             if not configExists
---                 then pure schema
---                 else do
---                     step ("Reading " ++ schemaPath)
---                     (schema <>) <$> readYAML schemaPath
-
---         step ("Writing " ++ schemaPath)
---         Dir.createDirectoryIfMissing True (Path.takeDirectory schemaPath)
---         YAML.encodeFile schemaPath newSchema
-
---         pure newSchema
-
---     let contentsNS = contentsNamespace provider schemaType
---         schemaNS   = schemaNamespaces  provider schemaType schemas
-
---     say ("Rendering " ++ schemaTmplPath)
---     rendered <-
---         handleError schemaTmplPath $
---             Template.renderSchemas schemaTmpl provider schemaType schemaNS
-
---     say ("Rendering " ++ contentsTmplPath)
---     contents <-
---         handleError contentsTmplPath $
---             Template.renderContents contentsTmpl schemaType contentsNS schemaNS
-
---     let outputDir = providerDir provider </> "gen"
-
---     for_ ((contentsNS, contents) : Map.toList rendered) $ \(ns, txt) -> do
---         let modulePath = outputDir </> namespace '/' ns <.> "hs"
-
---         say ("Writing " ++ modulePath)
---         Dir.createDirectoryIfMissing True (Path.takeDirectory modulePath)
---         LText.writeFile modulePath txt
-
--- readYAML :: YAML.FromJSON a => FilePath -> IO a
--- readYAML path =
---     YAML.decodeFileEither path
---         >>= handleError path . first YAML.prettyPrintParseException
-
--- handleError :: FilePath -> Either String a -> IO a
--- handleError path = \case
---     Right x   -> pure x
---     Left  err -> do
---         say err
---         say ("Error: " ++ path)
---         Exit.exitFailure
-
--- say :: String -> IO ()
--- say = IO.hPutStrLn IO.stderr

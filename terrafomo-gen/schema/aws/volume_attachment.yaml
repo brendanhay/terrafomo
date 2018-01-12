@@ -1,0 +1,46 @@
+_name: aws_volume_attachment
+arguments:
+  volume_id:
+    required: true
+    help: (Required) ID of the Volume to be attached
+    type: Text
+  force_detach:
+    required: false
+    help: (Optional, Boolean) Set to @true@ if you want to force the volume to detach.
+      Useful if previous attempts failed, but use this option only as a last resort,
+      as this can result in data loss . See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html>
+      for more information.
+    type: Text
+  device_name:
+    required: true
+    help: (Required) The device name to expose to the instance (for example, @/dev/sdh@
+      or @xvdh@ )
+    type: Text
+  instance_id:
+    required: true
+    help: (Required) ID of the Instance to attach to
+    type: Text
+  skip_destroy:
+    required: false
+    help: (Optional, Boolean) Set this to true if you do not wish to detach the volume
+      from the instance to which it is attached at destroy time, and instead just
+      remove the attachment from Terraform state. This is useful when destroying an
+      instance which has volumes created by some other means attached.
+    type: Text
+attributes:
+  volume_id:
+    help: ! '- ID of the Volume'
+    type: Text
+  device_name:
+    help: ! '- The device name exposed to the instance'
+    type: Text
+  instance_id:
+    help: ! '- ID of the Instance'
+    type: Text
+about: ! 'Provides an AWS EBS Volume Attachment as a top level resource, to attach
+  and detach volumes from AWS Instances. ~> NOTE on EBS block devices: If you use
+  @ebs_block_device@ on an @aws_instance@ , Terraform will assume management over
+  the full set of non-root EBS block devices for the instance, and treats additional
+  block devices as drift. For this reason, @ebs_block_device@ cannot be mixed with
+  external @aws_ebs_volume@ + @aws_ebs_volume_attachment@ resources for a given instance.'
+examples: []

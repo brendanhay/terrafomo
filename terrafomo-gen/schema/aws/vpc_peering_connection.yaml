@@ -1,0 +1,61 @@
+_name: aws_vpc_peering_connection
+arguments:
+  status:
+    required: false
+    help: (Optional) The status of the specific VPC Peering Connection to retrieve.
+    type: Text
+  peer_cidr_block:
+    required: false
+    help: (Optional) The CIDR block of the accepter VPC of the specific VPC Peering
+      Connection to retrieve.
+    type: Text
+  vpc_id:
+    required: false
+    help: (Optional) The ID of the requester VPC of the specific VPC Peering Connection
+      to retrieve.
+    type: Text
+  cidr_block:
+    required: false
+    help: (Optional) The CIDR block of the requester VPC of the specific VPC Peering
+      Connection to retrieve.
+    type: Text
+  peer_vpc_id:
+    required: false
+    help: (Optional) The ID of the accepter VPC of the specific VPC Peering Connection
+      to retrieve.
+    type: Text
+  id:
+    required: false
+    help: (Optional) The ID of the specific VPC Peering Connection to retrieve.
+    type: Text
+  filter:
+    required: false
+    help: (Optional) Custom filter block as described below.
+    type: Text
+  owner_id:
+    required: false
+    help: (Optional) The AWS account ID of the owner of the requester VPC of the specific
+      VPC Peering Connection to retrieve.
+    type: Text
+  peer_owner_id:
+    required: false
+    help: (Optional) The AWS account ID of the owner of the accepter VPC of the specific
+      VPC Peering Connection to retrieve.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags, each pair of which must exactly match a pair
+      on the desired VPC Peering Connection.
+    type: Text
+attributes:
+  accepter:
+    help: ! '- A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide)
+      options set for the accepter VPC.'
+    type: Text
+  requester:
+    help: ! '- A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide)
+      options set for the requester VPC.'
+    type: Text
+about: The VPC Peering Connection data source provides details about a specific VPC
+  peering connection.
+examples: []

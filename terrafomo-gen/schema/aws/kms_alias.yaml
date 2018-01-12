@@ -1,0 +1,28 @@
+_name: aws_kms_alias
+arguments:
+  name:
+    required: false
+    help: (Required) The display name of the alias. The name must start with the word
+      "alias" followed by a forward slash (alias/)
+    type: Text
+  name_prefix:
+    required: false
+    help: (Optional) Creates an unique alias beginning with the specified prefix.
+      The name must start with the word "alias" followed by a forward slash (alias/).  Conflicts
+      with @name@ .
+    type: Text
+  target_key_id:
+    required: true
+    help: (Required) Identifier for the key for which the alias is for, can be either
+      an ARN or key_id.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name(ARN) of the key alias.'
+    type: Text
+  target_key_id:
+    help: ! '- Key identifier pointed to by the alias.'
+    type: Text
+about: Use this data source to get the ARN of a KMS key alias. By using this data
+  source, you can reference key alias without having to hard code the ARN as input.
+examples: []

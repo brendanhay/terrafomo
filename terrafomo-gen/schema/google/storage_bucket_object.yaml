@@ -1,0 +1,22 @@
+_name: google_storage_bucket_object
+arguments:
+  bucket:
+    required: true
+    help: (Required) The name of the containing bucket.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the object.
+    type: Text
+attributes:
+  crc32c:
+    help: ! '- (Computed) Base 64 CRC32 hash of the uploaded data.'
+    type: Text
+  md5hash:
+    help: ! '- (Computed) Base 64 MD5 hash of the uploaded data.'
+    type: Text
+about: Creates a new object inside an existing bucket in Google cloud storage service
+  (GCS). <https://cloud.google.com/storage/docs/access-control/lists> can be applied
+  using the @google_storage_object_acl@ resource. For more information see <https://cloud.google.com/storage/docs/key-terms#objects>
+  and <https://cloud.google.com/storage/docs/json_api/v1/objects> .
+examples: []

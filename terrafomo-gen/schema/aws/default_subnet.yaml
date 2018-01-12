@@ -1,0 +1,12 @@
+_name: aws_default_subnet
+arguments:
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes: {}
+about: Provides a resource to manage a <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html#default-vpc-basics>
+  in the current region. The @aws_default_subnet@ behaves differently from normal
+  resources, in that Terraform does not create this resource, but instead "adopts"
+  it into management.
+examples: []

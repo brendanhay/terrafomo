@@ -1,0 +1,19 @@
+_name: aws_elastic_beanstalk_solution_stack
+arguments:
+  most_recent:
+    required: false
+    help: (Optional) If more than one result is returned, use the most recent solution
+      stack.
+    type: Text
+  name_regex:
+    required: true
+    help: ! '- A regex string to apply to the solution stack list returned by AWS.
+      See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html>
+      from AWS documentation for reference solution stack names.'
+    type: Text
+attributes:
+  name:
+    help: ! '- The name of the solution stack.'
+    type: Text
+about: Use this data source to get the name of a elastic beanstalk solution stack.
+examples: []

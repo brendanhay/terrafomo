@@ -45,14 +45,14 @@ fromNamespace c (NS xs) =
 -- Provider Configuration
 
 data Provider = Provider
-    { provider_Name   :: !Text
+    { providerName    :: !Text
     , providerPackage :: !(Maybe Text)
     , providerSchema  :: !(Maybe Schema)
     } deriving (Show, Generic)
 
 instance Semigroup Provider where
     (<>) parsed saved = Provider
-        { provider_Name   = provider_Name   saved
+        { providerName    = providerName saved
         , providerPackage = providerPackage saved
         , providerSchema  = on (<>) providerSchema parsed saved
         }
@@ -67,7 +67,7 @@ providerDir :: Provider -> FilePath
 providerDir = Text.unpack . fromMaybe "terrafomo" . providerPackage
 
 providerNamespace :: Provider -> NS
-providerNamespace p = NS ("Terraform" :| [provider_Name p, "Provider"])
+providerNamespace p = NS ("Terrafomo" :| [providerName p, "Provider"])
 
 schemaNamespaces :: Provider -> SchemaType -> [a] -> (NS, Map NS [a])
 schemaNamespaces p t xs
@@ -86,5 +86,5 @@ schemaNamespaces p t xs
         (,) (namespace [Text.pack (printf "M%02d" n)])
             [x]
 
-    namespace s = NS ("Terraform" :| provider_Name p : Text.pack (show t) : s)
+    namespace s = NS ("Terrafomo" :| providerName p : Text.pack (show t) : s)
 

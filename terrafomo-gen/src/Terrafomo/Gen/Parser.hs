@@ -81,12 +81,7 @@ instance P.Stream [Node] where
 providerParser :: Parser Provider
 providerParser = do
     x <- schemaParser
-
-    let provider_Name   = schema_Name x
-        providerPackage = Nothing
-        providerSchema  = Just x
-
-    pure Provider{..}
+    pure $! Provider (schema_Name x) Nothing (Just x)
 
 schemaParser :: Parser Schema
 schemaParser = do

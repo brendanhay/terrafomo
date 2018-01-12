@@ -1,6 +1,6 @@
 VENDOR_DIR := vendor
 BIN        := ./bin/terrafomo-gen
-PROVIDERS  := aws google digitalocean # $(basename $(notdir $(wildcard terrafomo-gen/config/*.yaml)))
+PROVIDERS  := $(basename $(notdir $(wildcard terrafomo-gen/schema/*.yaml)))
 
 default: $(PROVIDERS)
 

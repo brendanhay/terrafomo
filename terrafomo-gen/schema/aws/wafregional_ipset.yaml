@@ -1,0 +1,14 @@
+_name: aws_wafregional_ipset
+arguments:
+  ip_set_descriptor:
+    required: false
+    help: (Optional) The IP address type and IP address range (in CIDR notation) from
+      which web requests originate.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name or description of the IPSet.
+    type: Text
+attributes: {}
+about: Provides a WAF Regional IPSet Resource for use with Application Load Balancer.
+examples: []

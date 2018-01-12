@@ -1,0 +1,61 @@
+_name: google_storage_bucket
+arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  location:
+    required: false
+    help: ! '(Optional, Default: ''US'') The <https://cloud.google.com/storage/docs/bucket-locations>'
+    type: Text
+  storage_class:
+    required: false
+    help: ! '(Optional) The <https://cloud.google.com/storage/docs/storage-classes>
+      of the new bucket. Supported values include: @MULTI_REGIONAL@ , @REGIONAL@ ,
+      @NEARLINE@ , @COLDLINE@ .'
+    type: Text
+  website:
+    required: false
+    help: (Optional) Configuration if the bucket acts as a website. Structure is documented
+      below.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the bucket.
+    type: Text
+  lifecycle_rule:
+    required: false
+    help: (Optional) The bucket's <https://cloud.google.com/storage/docs/lifecycle#configuration>
+      configuration. Multiple blocks of this type are permitted. Structure is documented
+      below.
+    type: Text
+  versioning:
+    required: false
+    help: (Optional) The bucket's <https://cloud.google.com/storage/docs/object-versioning>
+      configuration.
+    type: Text
+  cors:
+    required: false
+    help: (Optional) The bucket's <https://www.w3.org/TR/cors/> configuration. Multiple
+      blocks of this type are permitted. Structure is documented below.
+    type: Text
+  force_destroy:
+    required: false
+    help: ! '(Optional, Default: false) When deleting a bucket, this boolean option
+      will delete all contained objects. If you try to delete a bucket that contains
+      objects, Terraform will fail that run.'
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  url:
+    help: ! '- The base URL of the bucket, in the format @gs://<bucket-name>@ .'
+    type: Text
+about: Creates a new bucket in Google cloud storage service (GCS). Once a bucket has
+  been created, its location can't be changed. <https://cloud.google.com/storage/docs/access-control/lists>
+  can be applied using the @google_storage_bucket_acl@ resource. For more information
+  see <https://cloud.google.com/storage/docs/overview> and <https://cloud.google.com/storage/docs/json_api/v1/buckets>
+  .
+examples: []

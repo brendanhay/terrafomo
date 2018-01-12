@@ -1,0 +1,32 @@
+_name: google_compute_backend_bucket
+arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  bucket_name:
+    required: true
+    help: (Required) The name of the Google Cloud Storage bucket to be used as a backend
+      bucket.
+    type: Text
+  enable_cdn:
+    required: false
+    help: (Optional) Whether or not to enable the Cloud CDN on the backend bucket.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the backend bucket.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The textual description for the backend bucket.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+about: A Backend Bucket defines a Google Cloud Storage bucket that will serve traffic
+  through Google Cloud Load Balancer. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/backend-bucket>
+  and <https://cloud.google.com/compute/docs/reference/latest/backendBuckets> .
+examples: []

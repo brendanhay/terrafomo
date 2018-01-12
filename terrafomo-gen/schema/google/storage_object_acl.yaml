@@ -1,0 +1,24 @@
+_name: google_storage_object_acl
+arguments:
+  predefined_acl:
+    required: false
+    help: (Optional) The <https://cloud.google.com/storage/docs/access-control#predefined-acl>
+      to apply. Must be set if @role_entity@ is not.
+    type: Text
+  bucket:
+    required: true
+    help: (Required) The name of the bucket it applies to.
+    type: Text
+  object:
+    required: true
+    help: (Required) The name of the object it applies to.
+    type: Text
+  role_entity:
+    required: false
+    help: (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls>
+      for more details. Must be set if @predefined_acl@ is not.
+    type: Text
+attributes: {}
+about: Creates a new object ACL in Google cloud storage service (GCS). For more information
+  see
+examples: []

@@ -1,0 +1,29 @@
+_name: aws_route53_zone_association
+arguments:
+  vpc_id:
+    required: true
+    help: (Required) The VPC to associate with the private hosted zone.
+    type: Text
+  vpc_region:
+    required: false
+    help: (Optional) The VPC's region. Defaults to the region of the AWS provider.
+    type: Text
+  zone_id:
+    required: true
+    help: (Required) The private hosted zone to associate.
+    type: Text
+attributes:
+  vpc_id:
+    help: ! '- The ID of the VPC for the association.'
+    type: Text
+  vpc_region:
+    help: ! '- The region in which the VPC identified by @vpc_id@ was created.'
+    type: Text
+  zone_id:
+    help: ! '- The ID of the hosted zone for the association.'
+    type: Text
+  id:
+    help: ! '- The calculated unique identifier for the association.'
+    type: Text
+about: Provides a Route53 private Hosted Zone to VPC association resource.
+examples: []

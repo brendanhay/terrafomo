@@ -1,0 +1,73 @@
+_name: aws_route
+arguments:
+  route_table_id:
+    required: true
+    help: (Required) The ID of the routing table.
+    type: Text
+  gateway_id:
+    required: false
+    help: (Optional) An ID of a VPC internet gateway or a virtual private gateway.
+    type: Text
+  vpc_peering_connection_id:
+    required: false
+    help: (Optional) An ID of a VPC peering connection.
+    type: Text
+  instance_id:
+    required: false
+    help: (Optional) An ID of an EC2 instance.
+    type: Text
+  egress_only_gateway_id:
+    required: false
+    help: (Optional) An ID of a VPC Egress Only Internet Gateway.
+    type: Text
+  nat_gateway_id:
+    required: false
+    help: (Optional) An ID of a VPC NAT gateway.
+    type: Text
+  destination_cidr_block:
+    required: false
+    help: (Optional) The destination CIDR block.
+    type: Text
+  destination_ipv6_cidr_block:
+    required: false
+    help: (Optional) The destination IPv6 CIDR block.
+    type: Text
+  network_interface_id:
+    required: false
+    help: (Optional) An ID of a network interface.
+    type: Text
+attributes:
+  route_table_id:
+    help: ! '- The ID of the routing table.'
+    type: Text
+  gateway_id:
+    help: ! '- An ID of a VPC internet gateway or a virtual private gateway.'
+    type: Text
+  vpc_peering_connection_id:
+    help: ! '- An ID of a VPC peering connection.'
+    type: Text
+  instance_id:
+    help: ! '- An ID of a NAT instance.'
+    type: Text
+  egress_only_gateway_id:
+    help: ! '- An ID of a VPC Egress Only Internet Gateway.'
+    type: Text
+  nat_gateway_id:
+    help: ! '- An ID of a VPC NAT gateway.'
+    type: Text
+  destination_cidr_block:
+    help: ! '- The destination CIDR block.'
+    type: Text
+  destination_ipv6_cidr_block:
+    help: ! '- The destination IPv6 CIDR block.'
+    type: Text
+  network_interface_id:
+    help: ! '- An ID of a network interface.'
+    type: Text
+about: ! 'Provides a resource to create a routing table entry (a route) in a VPC routing
+  table. ~> NOTE on Route Tables and Routes: Terraform currently provides both a standalone
+  Route resource and a <route_table.html> resource with routes defined in-line. At
+  this time you cannot use a Route Table with in-line routes in conjunction with any
+  Route resources. Doing so will cause a conflict of rule settings and will overwrite
+  rules.'
+examples: []

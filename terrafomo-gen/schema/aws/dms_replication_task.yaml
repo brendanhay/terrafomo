@@ -1,0 +1,52 @@
+_name: aws_dms_replication_task
+arguments:
+  replication_task_settings:
+    required: false
+    help: (Optional) An escaped JSON string that contains the task settings. For a
+      complete list of task settings, see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html>
+      .
+    type: Text
+  target_endpoint_arn:
+    required: true
+    help: (Required) The Amazon Resource Name (ARN) string that uniquely identifies
+      the target endpoint.
+    type: Text
+  migration_type:
+    required: true
+    help: (Required) The migration type. Can be one of @full-load | cdc | full-load-and-cdc@
+      .
+    type: Text
+  source_endpoint_arn:
+    required: true
+    help: (Required) The Amazon Resource Name (ARN) string that uniquely identifies
+      the source endpoint.
+    type: Text
+  table_mappings:
+    required: true
+    help: (Required) An escaped JSON string that contains the table mappings. For
+      information on table mapping see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html>
+    type: Text
+  replication_task_id:
+    required: true
+    help: (Required) The replication task identifier.
+    type: Text
+  replication_instance_arn:
+    required: true
+    help: (Required) The Amazon Resource Name (ARN) of the replication instance.
+    type: Text
+  cdc_start_time:
+    required: false
+    help: (Optional) The Unix timestamp integer for the start of the Change Data Capture
+      (CDC) operation.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  replication_task_arn:
+    help: ! '- The Amazon Resource Name (ARN) for the replication task.'
+    type: Text
+about: Provides a DMS (Data Migration Service) replication task resource. DMS replication
+  tasks can be created, updated, deleted, and imported.
+examples: []

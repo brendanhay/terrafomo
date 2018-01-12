@@ -28,11 +28,22 @@ import qualified Data.Text.Lazy   as LText
 import qualified Text.EDE         as EDE
 
 data Templates a = Templates
-    { providerTemplate   :: !a
+    { packageTemplate    :: !a
+    , providerTemplate   :: !a
     , contentsTemplate   :: !a
     , resourceTemplate   :: !a
     , dataSourceTemplate :: !a
     } deriving (Show, Functor, Foldable, Traversable)
+
+renderPackage
+    :: Templates EDE.Template
+    -> Provider
+    -> Either Text LText.Text
+renderPackage tmpls p =
+    render (packageTemplate tmpls)
+        [ "provider" .= providerName p
+        , "package"  .= providerPackage p
+        ]
 
 renderProvider
     :: Templates EDE.Template
@@ -44,7 +55,7 @@ renderProvider tmpls p =
         pure . second (providerNamespace p,)
             $! render (providerTemplate tmpls)
             [ "namespace" .= providerNamespace p
-            , "provider"  .= provider_Name p
+            , "provider"  .= providerName p
             , "schema"    .= s
             ]
 
@@ -71,7 +82,7 @@ renderSchemas tmpls p typ = Map.traverseWithKey go
     go ns xs =
         render (getTypeTemplate typ tmpls)
             [ "namespace" .= ns
-            , "provider"  .= provider_Name p
+            , "provider"  .= providerName p
             , "schemas"   .= createMap (getTypeName typ) xs
             ]
 

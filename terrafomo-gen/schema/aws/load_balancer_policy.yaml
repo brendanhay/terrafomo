@@ -1,0 +1,34 @@
+_name: aws_elb_load_balancer_policy
+arguments:
+  policy_type_name:
+    required: true
+    help: (Required) The policy type.
+    type: Text
+  load_balancer_name:
+    required: true
+    help: (Required) The load balancer on which the policy is defined.
+    type: Text
+  policy_name:
+    required: true
+    help: (Required) The name of the load balancer policy.
+    type: Text
+  policy_attribute:
+    required: false
+    help: (Optional) Policy attribute to apply to the policy.
+    type: Text
+attributes:
+  policy_type_name:
+    help: ! '- The policy type of the policy.'
+    type: Text
+  id:
+    help: ! '- The ID of the policy.'
+    type: Text
+  load_balancer_name:
+    help: ! '- The load balancer on which the policy is defined.'
+    type: Text
+  policy_name:
+    help: ! '- The name of the stickiness policy.'
+    type: Text
+about: Provides a load balancer policy, which can be attached to an ELB listener or
+  backend server.
+examples: []

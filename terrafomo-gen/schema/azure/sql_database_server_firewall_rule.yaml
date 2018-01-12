@@ -1,0 +1,29 @@
+_name: azure_sql_database_server
+arguments:
+  database_server_names:
+    required: true
+    help: (Required) The set of names of the Azure SQL Database servers the rule should
+      be enforced on.
+    type: Text
+  start_ip:
+    required: true
+    help: (Required) The IPv4 which will represent the lower bound of the rule's application
+      IP's. Traffic to/from IP's greater than or equal to this one up to the @end_ip@
+      will be permitted.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the rule. Changing forces the creation of a new resource.
+    type: Text
+  end_ip:
+    required: true
+    help: (Required) The IPv4 which will represent the upper bound of the rule's application
+      IP's. Traffic to/from IP's lesser that or equal to this one all the way down
+      to the @start_ip@ will be permitted.
+    type: Text
+attributes:
+  id:
+    help: ! '- The database server ID. Coincides with the given @name@ .'
+    type: Text
+about: Defines a new Firewall Rule to be applied across the given Database Servers.
+examples: []

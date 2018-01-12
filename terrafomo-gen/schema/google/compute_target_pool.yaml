@@ -1,0 +1,54 @@
+_name: google_compute_target_pool
+arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  instances:
+    required: false
+    help: (Optional) List of instances in the pool. They can be given as URLs, or
+      in the form of "zone/name". Note that the instances need not exist at the time
+      of target pool creation, so there is no need to use the Terraform interpolators
+      to create a dependency on the instances from the target pool.
+    type: Text
+  failover_ratio:
+    required: false
+    help: (Optional) Ratio (0 to 1) of failed nodes before using the backup pool (which
+      must also be set).
+    type: Text
+  backup_pool:
+    required: false
+    help: (Optional) URL to the backup target pool. Must also set failover_ratio.
+    type: Text
+  region:
+    required: false
+    help: (Optional) Where the target pool resides. Defaults to project region.
+    type: Text
+  session_affinity:
+    required: false
+    help: (Optional) How to distribute load. Options are "NONE" (no affinity). "CLIENT_IP"
+      (hash of the source/dest addresses / ports), and "CLIENT_IP_PROTO" also includes
+      the protocol (default "NONE").
+    type: Text
+  health_checks:
+    required: false
+    help: (Optional) List of zero or one healthcheck names.
+    type: Text
+  description:
+    required: false
+    help: (Optional) Textual description field.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+about: Manages a Target Pool within GCE. This is a collection of instances used as
+  target of a network load balancer (Forwarding Rule). For more information see <https://cloud.google.com/compute/docs/load-balancing/network/target-pools>
+  and <https://cloud.google.com/compute/docs/reference/latest/targetPools> .
+examples: []

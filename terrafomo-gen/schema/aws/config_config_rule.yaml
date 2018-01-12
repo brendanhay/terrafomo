@@ -1,0 +1,36 @@
+_name: aws_config_config_rule
+arguments:
+  maximum_execution_frequency:
+    required: false
+    help: (Optional) The maximum frequency with which AWS Config runs evaluations
+      for a rule.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the rule
+    type: Text
+  scope:
+    required: false
+    help: (Optional) Scope defines which resources can trigger an evaluation for the
+      rule as documented below.
+    type: Text
+  source:
+    required: true
+    help: (Required) Source specifies the rule owner, the rule identifier, and the
+      notifications that cause the function to evaluate your AWS resources as documented
+      below.
+    type: Text
+  input_parameters:
+    required: false
+    help: (Optional) A string in JSON format that is passed to the AWS Config rule
+      Lambda function.
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description of the rule
+    type: Text
+attributes: {}
+about: ! 'Provides an AWS Config Rule. ~> Note: Config Rule requires an existing </docs/providers/aws/r/config_configuration_recorder.html>
+  to be present. Use of @depends_on@ is recommended (as shown below) to avoid race
+  conditions.'
+examples: []

@@ -1,0 +1,30 @@
+_name: aws_db_security_group
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the DB security group.
+    type: Text
+  ingress:
+    required: true
+    help: (Required) A list of ingress rules.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description of the DB security group. Defaults to "Managed
+      by Terraform".
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The arn of the DB security group.'
+    type: Text
+  id:
+    help: ! '- The db security group ID.'
+    type: Text
+about: Provides an RDS security group resource. This is only for DB instances in the
+  EC2-Classic Platform. For instances inside a VPC, use the </docs/providers/aws/r/db_instance.html#vpc_security_group_ids>
+  attribute instead.
+examples: []

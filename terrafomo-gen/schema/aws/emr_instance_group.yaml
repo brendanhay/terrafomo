@@ -1,0 +1,48 @@
+_name: aws_emr_instance_group
+arguments:
+  cluster_id:
+    required: true
+    help: (Required) ID of the EMR Cluster to attach to. Changing this forces a new
+      resource to be created.
+    type: Text
+  ebs_config:
+    required: true
+    help: (Optional) One or more @ebs_config@ blocks as defined below. Changing this
+      forces a new resource to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) Human friendly name given to the instance group. Changing this
+      forces a new resource to be created.
+    type: Text
+  instance_count:
+    required: true
+    help: (Optional) Target number of instances for the instance group. Defaults to
+      0.
+    type: Text
+  ebs_optimized:
+    required: true
+    help: (Optional) Indicates whether an Amazon EBS volume is EBS-optimized. Changing
+      this forces a new resource to be created.
+    type: Text
+  instance_type:
+    required: true
+    help: (Required) The EC2 instance type for all instances in the instance group.
+      Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  status:
+    help: The current status of the instance group.
+    type: Text
+  running_instance_count:
+    help: The number of instances currently running in this instance group.
+    type: Text
+  id:
+    help: ! '- The EMR Instance ID'
+    type: Text
+about: ! 'Provides an Elastic MapReduce Cluster Instance Group configuration. See
+  <https://aws.amazon.com/documentation/emr/> for more information. ~> NOTE: At this
+  time, Instance Groups cannot be destroyed through the API nor web interface. Instance
+  Groups are destroyed when the EMR Cluster is destroyed. Terraform will resize any
+  Instance Group to zero when destroying the resource.'
+examples: []

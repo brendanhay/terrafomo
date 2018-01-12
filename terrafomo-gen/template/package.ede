@@ -1,0 +1,21 @@
+_common: !include '../share/package-common.yaml'
+
+name: {{ package }}
+
+<<: *common
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.{{ provider }}
+    - Terrafomo.{{ provider }}.DataSource
+    - Terrafomo.{{ provider }}.Provider
+    - Terrafomo.{{ provider }}.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format,
+    terrafomo:Terrafomo.Prelude,
+    terrafomo:Terrafomo.Tutorial

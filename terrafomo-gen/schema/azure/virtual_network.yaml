@@ -1,0 +1,33 @@
+_name: azure_virtual_network
+arguments:
+  location:
+    required: true
+    help: (Required) The location/region where the virtual network is created. Changing
+      this forces a new resource to be created.
+    type: Text
+  dns_servers:
+    required: false
+    help: (Optional) List of names of DNS servers previously registered on Azure.
+    type: Text
+  subnet:
+    required: true
+    help: (Required) Can be specified multiple times to define multiple subnets. Each
+      @subnet@ block supports fields documented below.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the virtual network. Changing this forces a new resource
+      to be created.
+    type: Text
+  address_space:
+    required: true
+    help: (Required) The address space that is used the virtual network. You can supply
+      more than one address space. Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The virtual NetworkConfiguration ID.'
+    type: Text
+about: Creates a new virtual network including any configured subnets. Each subnet
+  can optionally be configured with a security group to be associated with the subnet.
+examples: []

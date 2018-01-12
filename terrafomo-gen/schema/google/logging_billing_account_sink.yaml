@@ -1,0 +1,26 @@
+_name: google_logging_billing_account_sink
+arguments:
+  destination:
+    required: true
+    help: ! '(Required) The destination of the sink (or, in other words, where logs
+      are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery
+      dataset. Examples:'
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the logging sink.
+    type: Text
+  billing_account:
+    required: true
+    help: (Required) The billing account exported to the sink.
+    type: Text
+attributes:
+  writer_identity:
+    help: ! '- The identity associated with this sink. This identity must be granted
+      write access to the configured @destination@ .'
+    type: Text
+about: Manages a billing account logging sink. For more information see <https://cloud.google.com/logging/docs/>
+  and <https://cloud.google.com/logging/docs/api/tasks/exporting-logs> . Note that
+  you must have the "Logs Configuration Writer" IAM role ( @roles/logging.configWriter@
+  ) granted to the credentials used with terraform.
+examples: []

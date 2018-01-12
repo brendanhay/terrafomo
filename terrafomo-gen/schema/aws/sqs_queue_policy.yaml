@@ -1,0 +1,14 @@
+_name: aws_sqs_queue_policy
+arguments:
+  queue_url:
+    required: true
+    help: (Required) The URL of the SQS Queue to which to attach the policy
+    type: Text
+  policy:
+    required: true
+    help: (Required) The JSON policy for the SQS queue
+    type: Text
+attributes: {}
+about: Allows you to set a policy of an SQS Queue while referencing ARN of the queue
+  within the policy.
+examples: []

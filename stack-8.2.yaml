@@ -8,4 +8,8 @@ packages:
   - terrafomo
   - terrafomo-gen
 # GENERATED
+  - terrafomo-aws
+  - terrafomo-azure
+  - terrafomo-digitalocean
+  - terrafomo-google
 # END GENERATED
