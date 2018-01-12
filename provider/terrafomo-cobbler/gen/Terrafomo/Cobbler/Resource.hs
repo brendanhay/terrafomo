@@ -74,7 +74,7 @@ data DistroResource = DistroResource
       {- ^ (Optional) Red Hat Management server. -}
     , _template_files :: !(Attr Text)
       {- ^ (Optional) File mappings for built-in config management. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "cobbler_distro"
@@ -90,7 +90,7 @@ data KickstartFileResource = KickstartFileResource
       {- ^ (Required) The body of the kickstart file. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the kickstart file. This must be the full path, including @/var/lib/cobbler/kickstarts@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "cobbler_kickstart_file"
@@ -166,12 +166,52 @@ data ProfileResource = ProfileResource
       {- ^ (Optional) The amount of RAM for the virtual machine. -}
     , _virt_type :: !(Attr Text)
       {- ^ (Optional) The type of virtual machine. Valid options are: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "cobbler_profile"
     ''Qual.Cobbler
     ''ProfileResource)
+
+{- | The @cobbler_repo@ Cobbler resource.
+
+Manages a repo within Cobbler.
+-}
+data RepoResource = RepoResource
+    { _apt_components :: !(Attr Text)
+      {- ^ (Optional) List of Apt components such as main, restricted, universe. Applicable to apt breeds only. -}
+    , _apt_dists :: !(Attr Text)
+      {- ^ (Optional) List of Apt distribution names such as trusty, trusty-updates. Applicable to apt breeds only. -}
+    , _arch :: !(Attr Text)
+      {- ^ (Optional) The architecture of the repo. Valid options are: i386, x86_64, ia64, ppc, ppc64, s390, arm. -}
+    , _breed :: !(Attr Text)
+      {- ^ (Required) The "breed" of distribution. Valid options are: rsync, rhn, yum, apt, and wget. These choices may vary depending on the version of Cobbler in use. -}
+    , _comment :: !(Attr Text)
+      {- ^ (Optional) Free form text description. -}
+    , _createrepo_flags :: !(Attr Text)
+      {- ^ (Optional) Flags to use with @createrepo@ . -}
+    , _environment :: !(Attr Text)
+      {- ^ (Optional) Environment variables to use during repo command execution. -}
+    , _keep_updated :: !(Attr Text)
+      {- ^ (Optional) Update the repo upon Cobbler sync. Valid values are true or false. -}
+    , _mirror :: !(Attr Text)
+      {- ^ (Required) Address of the repo to mirror. -}
+    , _mirror_locally :: !(Attr Text)
+      {- ^ (Required) Whether to copy the files locally or just references to the external files. Valid values are true or false. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) A name for the repo. -}
+    , _owners :: !(Attr Text)
+      {- ^ (Optional) List of Owners for authz_ownership. -}
+    , _proxy :: !(Attr Text)
+      {- ^ (Optional) Proxy to use for downloading the repo. This argument does not work on older versions of Cobbler. -}
+    , _rpm_list :: !(Attr Text)
+      {- ^ (Optional) List of specific RPMs to mirror. -}
+    } deriving (Show, Generic)
+
+$(TH.makeResource
+    "cobbler_repo"
+    ''Qual.Cobbler
+    ''RepoResource)
 
 {- | The @cobbler_snippet@ Cobbler resource.
 
@@ -182,7 +222,7 @@ data SnippetResource = SnippetResource
       {- ^ (Required) The body of the snippet. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the snippet. This must be the full path, including @/var/lib/cobbler/snippets@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "cobbler_snippet"
@@ -280,7 +320,7 @@ data SystemResource = SystemResource
       {- ^ (Optional) The amount of RAM for the VM. -}
     , _virt_type :: !(Attr Text)
       {- ^ (Optional) Virtualization technology to use: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "cobbler_system"

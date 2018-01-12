@@ -79,7 +79,7 @@ data JobResource = JobResource
       {- ^ (Optional) Keyword deciding which direction the nodes are sorted in terms of the chosen @rank_attribute@ . May be either "ascending" (the default) or "descending". -}
     , _schedule :: !(Attr Text)
       {- ^ (Optional) The jobs schedule in Unix crontab format -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed JobResource
     = '[ '("id", Text)
@@ -102,7 +102,7 @@ data PrivateKeyResource = PrivateKeyResource
       {- ^ (Required) The private key material to store, serialized in any way that is accepted by OpenSSH. -}
     , _path :: !(Attr Text)
       {- ^ (Required) The path within the key store where the key will be stored. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rundeck_private_key"
@@ -134,7 +134,7 @@ data ProjectResource = ProjectResource
       {- ^ (Optional) Like @ssh_key_storage_path@ except that the key is read from the Rundeck server's local filesystem, rather than from the key store. -}
     , _ssh_key_storage_path :: !(Attr Text)
       {- ^ (Optional) When the SSH-based file copier and executor plugins are used, the location within Rundeck's key store where the SSH private key can be found. Private keys can be uploaded to rundeck using the @rundeck_private_key@ resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectResource
     = '[ '("name", Text)
@@ -163,7 +163,7 @@ data PublicKeyResource = PublicKeyResource
       {- ^ (Optional) The public key string to store, serialized in any way that is accepted by OpenSSH. If this is not included, @key_material@ becomes an attribute that can be used to read the already-existing key material in the Rundeck store. -}
     , _path :: !(Attr Text)
       {- ^ (Required) The path within the key store where the key will be stored. By convention this path name normally ends with ".pub" and otherwise has the same name as the associated private key. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PublicKeyResource
     = '[ '("key_material", Text)

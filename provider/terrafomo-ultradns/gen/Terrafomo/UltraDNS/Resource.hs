@@ -58,7 +58,7 @@ data DirpoolResource = DirpoolResource
       {- ^ (Required) The Record Type of the record -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DirpoolResource
     = '[ '("hostname", Text)
@@ -91,7 +91,7 @@ data ProbeHttpResource = ProbeHttpResource
       {- ^ (Required) Number of agents that must agree for a probe state to be changed. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain of the pool to probe. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ultradns_probe_http"
@@ -117,7 +117,7 @@ data ProbePingResource = ProbePingResource
       {- ^ (Required) Number of agents that must agree for a probe state to be changed. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain of the pool to probe. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ultradns_probe_ping"
@@ -143,7 +143,7 @@ data RdpoolResource = RdpoolResource
       {- ^ (Optional) The TTL of the pool in seconds. Default: @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RdpoolResource
     = '[ '("hostname", Text)
@@ -172,7 +172,7 @@ data RecordResource = RecordResource
       {- ^ (Required) The type of the record -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("hostname", Text)
@@ -221,7 +221,7 @@ data TcpoolResource = TcpoolResource
       {- ^ (Optional) The TTL of the record. Default: @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TcpoolResource
     = '[ '("hostname", Text)

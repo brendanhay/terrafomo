@@ -1,0 +1,44 @@
+_name: google_compute_ssl_certificate
+arguments:
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _name:
+    required: false
+    help: (Optional) A unique name for the SSL certificate. If you leave this blank,
+      Terraform will auto-generate a unique name.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) An optional description of this resource. Changing this forces
+      a new resource to be created.
+    type: Text
+  _name_prefix:
+    required: false
+    help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
+      with @name@ .
+    type: Text
+  _certificate:
+    required: true
+    help: (Required) A local certificate file in PEM format. The chain may be at most
+      5 certs long, and must include at least one intermediate cert. Changing this
+      forces a new resource to be created.
+    type: Text
+  _private_key:
+    required: true
+    help: (Required) Write only private key in PEM format. Changing this forces a
+      new resource to be created.
+    type: Text
+attributes:
+  certificate_id:
+    help: ! '- A unique ID for the certificate, assigned by GCE.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+about: Creates an SSL certificate resource necessary for HTTPS load balancing in GCE.
+  For more information see <https://cloud.google.com/compute/docs/load-balancing/http/ssl-certificates>
+  and <https://cloud.google.com/compute/docs/reference/latest/sslCertificates> .
+examples: []

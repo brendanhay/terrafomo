@@ -48,12 +48,7 @@ data DatacenterResource = DatacenterResource
       {- ^ (Required)[string] The physical location where the data center will be created. -}
     , _name :: !(Attr Text)
       {- ^ (Required)[string] The name of the Virtual Data Center. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed DatacenterResource
-    = '[ '("id", Text)
-         {- - UUID of the Virtual Data Center -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_datacenter"
@@ -65,7 +60,7 @@ $(TH.makeResource
 Manages a Firewall Rules on ProfitBricks
 -}
 data FirewallResource = FirewallResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_firewall"
@@ -77,7 +72,7 @@ $(TH.makeResource
 Manages groups and group priviliages on ProfitBricks
 -}
 data GroupResource = GroupResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_group"
@@ -89,7 +84,7 @@ $(TH.makeResource
 Manages a IP Blocks on ProfitBricks
 -}
 data IpblockResource = IpblockResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_ipblock"
@@ -101,7 +96,7 @@ $(TH.makeResource
 Manages Ip Failover groups on ProfitBricks
 -}
 data IpfailoverResource = IpfailoverResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_ipfailover"
@@ -113,7 +108,7 @@ $(TH.makeResource
 Manages a LANs on ProfitBricks
 -}
 data LanResource = LanResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_lan"
@@ -125,7 +120,7 @@ $(TH.makeResource
 Manages a Load Balancers on ProfitBricks
 -}
 data LoadbalancerResource = LoadbalancerResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_loadbalancer"
@@ -137,7 +132,7 @@ $(TH.makeResource
 Manages a NICs on ProfitBricks
 -}
 data NicResource = NicResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_nic"
@@ -149,7 +144,7 @@ $(TH.makeResource
 Manages a Servers on ProfitBricks
 -}
 data ServerResource = ServerResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_server"
@@ -162,7 +157,7 @@ Manages shares and list shares permissions granted to the group members for
 each shared resource.
 -}
 data ShareResource = ShareResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_share"
@@ -174,18 +169,7 @@ $(TH.makeResource
 Manages snapshots on ProfitBricks.
 -}
 data SnapshotResource = SnapshotResource
-    { _location :: !(Attr Text)
-      {- ^ (Optional) Id of the existing snapshot's location. -}
-    , _name :: !(Attr Text)
-      {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
-    , _size :: !(Attr Text)
-      {- ^ (Optional) The size of the snapshot to look for. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed SnapshotResource
-    = '[ '("id", Text)
-         {- - UUID of the snapshot -}
-       ]
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_snapshot"
@@ -197,7 +181,7 @@ $(TH.makeResource
 Manages users and list users and groups associated.
 -}
 data UserResource = UserResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_user"
@@ -209,7 +193,7 @@ $(TH.makeResource
 Manages a Volumes on ProfitBricks
 -}
 data VolumeResource = VolumeResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "profitbricks_volume"

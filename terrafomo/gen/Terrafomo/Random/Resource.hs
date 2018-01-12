@@ -55,7 +55,7 @@ data IdResource = IdResource
       {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
     , _prefix :: !(Attr Text)
       {- ^ (Optional) Arbitrary string to prefix the output value with. This string is supplied as-is, meaning it is not guaranteed to be URL-safe or base64 encoded. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IdResource
     = '[ '("b64_std", Text)
@@ -72,6 +72,38 @@ $(TH.makeResource
     "random_id"
     ''Qual.Provider
     ''IdResource)
+
+{- | The @random_integer@ Random resource.
+
+The resource @random_integer@ generates random values from a given range,
+described by the @min@ and @max@ attributes of a given resource. This
+resource can be used in conjunction with resources that have the
+@create_before_destroy@ lifecycle flag set, to avoid conflicts with unique
+names during the brief period where both the old and new resources exist
+concurrently.
+-}
+data IntegerResource = IntegerResource
+    { _keepers :: !(Attr Text)
+      {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
+    , _max :: !(Attr Text)
+      {- ^ - (int) The maximum inclusive value of the range. -}
+    , _min :: !(Attr Text)
+      {- ^ - (int) The minimum inclusive value of the range. -}
+    , _seed :: !(Attr Text)
+      {- ^ (Optional) A custom seed to always produce the same value. -}
+    } deriving (Show, Generic)
+
+type instance Computed IntegerResource
+    = '[ '("id", Text)
+         {- - (string) An internal id. -}
+      , '("result", Text)
+         {- - (int) The random Integer result. -}
+       ]
+
+$(TH.makeResource
+    "random_integer"
+    ''Qual.Provider
+    ''IntegerResource)
 
 {- | The @random_pet@ Random resource.
 
@@ -90,7 +122,7 @@ data PetResource = PetResource
       {- ^ (Optional) A string to prefix the name with. -}
     , _separator :: !(Attr Text)
       {- ^ (Optional) The character to separate words in the pet name. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PetResource
     = '[ '("id", Text)
@@ -116,7 +148,7 @@ data ShuffleResource = ShuffleResource
       {- ^ (Optional) The number of results to return. Defaults to the number of items in the @input@ list. If fewer items are requested, some elements will be excluded from the result. If more items are requested, items will be repeated in the result but not more frequently than the number of items in the input list. -}
     , _seed :: !(Attr Text)
       {- ^ (Optional) Arbitrary string with which to seed the random number generator, in order to produce less-volatile permutations of the list. Important: Even with an identical seed, it is not guaranteed that the same permutation will be produced across different versions of Terraform. This argument causes the result to be less volatile , but not fixed for all time. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ShuffleResource
     = '[ '("result", Text)
@@ -151,7 +183,7 @@ data StringResource = StringResource
       {- ^ (Optional) (default true) Include special characters in random string. These are '!@#$%&*()-_=+[]{}<>:?' -}
     , _upper :: !(Attr Text)
       {- ^ (Optional) (default true) Include uppercase alphabet characters in random string. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StringResource
     = '[ '("result", Text)

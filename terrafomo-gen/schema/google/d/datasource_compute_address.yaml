@@ -1,0 +1,30 @@
+_name: google_compute_address
+arguments:
+  _region:
+    required: false
+    help: (Optional) The Region in which the created address reside. If it is not
+      provided, the provider region is used.
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE.
+    type: Text
+attributes:
+  status:
+    help: ! '- Indicates if the address is used. Possible values are: RESERVED or
+      IN_USE.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  address:
+    help: ! '- The IP of the created resource.'
+    type: Text
+about: Get the IP address from a static address. For more information see the official
+  <https://cloud.google.com/compute/docs/reference/latest/addresses/get> documentation.
+examples: []

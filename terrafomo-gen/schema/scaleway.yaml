@@ -1,0 +1,6 @@
+_name: ScalewayProvider
+arguments: {}
+attributes: {}
+about: The Scaleway provider is used to manage Scaleway resources. Use the navigation
+  to the left to read about the available resources.
+examples: []

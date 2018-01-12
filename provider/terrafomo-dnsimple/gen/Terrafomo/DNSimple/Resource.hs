@@ -54,7 +54,7 @@ data RecordResource = RecordResource
       {- ^ (Required) The type of the record -}
     , _value :: !(Attr Text)
       {- ^ (Required) The value of the record -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("domain_id", Text)

@@ -50,7 +50,7 @@ data AffinityGroupResource = AffinityGroupResource
       {- ^ (Optional) The name or ID of the project to register this affinity group to. Changing this forces a new resource to be created. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The affinity group type. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AffinityGroupResource
     = '[ '("description", Text)
@@ -88,7 +88,7 @@ data DiskResource = DiskResource
       {- ^ (Optional) The ID of the virtual machine to which you want to attach the disk volume. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The name or ID of the zone where this disk volume will be available. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DiskResource
     = '[ '("device_id", Text)
@@ -115,7 +115,7 @@ data EgressFirewallResource = EgressFirewallResource
       {- ^ (Optional) Specifies how much rules will be created or deleted concurrently. (defaults 2) -}
     , _rule :: !(Attr Text)
       {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EgressFirewallResource
     = '[ '("id", Text)
@@ -140,7 +140,7 @@ data FirewallResource = FirewallResource
       {- ^ (Optional) Specifies how much rules will be created or deleted concurrently. (defaults 2) -}
     , _rule :: !(Attr Text)
       {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FirewallResource
     = '[ '("id", Text)
@@ -192,7 +192,7 @@ data InstanceResource = InstanceResource
       {- ^ (Optional) The user data to provide when launching the instance. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The name or ID of the zone where this instance will be created. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InstanceResource
     = '[ '("display_name", Text)
@@ -221,7 +221,7 @@ data IpaddressResource = IpaddressResource
       {- ^ (Optional) The ID of the VPC for which an IP address should be acquired and associated. Changing this forces a new resource to be created. -}
     , _zone :: !(Attr Text)
       {- ^ (Optional) The name or ID of the zone for which an IP address should be acquired and associated. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IpaddressResource
     = '[ '("id", Text)
@@ -258,7 +258,7 @@ data LoadbalancerRuleResource = LoadbalancerRuleResource
       {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
     , _public_port :: !(Attr Text)
       {- ^ (Required) The public port from where the network traffic will be load balanced from. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LoadbalancerRuleResource
     = '[ '("description", Text)
@@ -285,7 +285,7 @@ data NetworkAclResource = NetworkAclResource
       {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC to create this ACL for. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkAclResource
     = '[ '("id", Text)
@@ -312,7 +312,7 @@ data NetworkAclRuleResource = NetworkAclRuleResource
       {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
     , _rule :: !(Attr Text)
       {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkAclRuleResource
     = '[ '("id", Text)
@@ -357,7 +357,7 @@ data NetworkResource = NetworkResource
       {- ^ (Optional) The VPC ID in which to create this network. Changing this forces a new resource to be created. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The name or ID of the zone where this network will be available. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkResource
     = '[ '("display_text", Text)
@@ -384,7 +384,7 @@ data NicResource = NicResource
       {- ^ (Required) The ID of the network to plug the NIC into. Changing this forces a new resource to be created. -}
     , _virtual_machine_id :: !(Attr Text)
       {- ^ (Required) The ID of the virtual machine to which to attach the NIC. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NicResource
     = '[ '("id", Text)
@@ -411,7 +411,7 @@ data PortForwardResource = PortForwardResource
       {- ^ (Optional) USE WITH CAUTION! If enabled all the port forwards for this IP address will be managed by this resource. This means it will delete all port forwards that are not in your config! (defaults false) -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The name or ID of the project to create this port forward in. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PortForwardResource
     = '[ '("id", Text)
@@ -447,7 +447,7 @@ data PrivateGatewayResource = PrivateGatewayResource
       {- ^ (Required) The VLAN number (1-4095) the network will use. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC ID in which to create this Private gateway. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PrivateGatewayResource
     = '[ '("id", Text)
@@ -470,7 +470,7 @@ data SecondaryIpaddressResource = SecondaryIpaddressResource
       {- ^ (Optional) The NIC ID to which you want to attach the secondary IP address. Changing this forces a new resource to be created (defaults to the ID of the primary NIC) -}
     , _virtual_machine_id :: !(Attr Text)
       {- ^ (Required) The ID of the virtual machine to which you want to attach the secondary IP address. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecondaryIpaddressResource
     = '[ '("id", Text)
@@ -493,7 +493,7 @@ data SecurityGroupResource = SecurityGroupResource
       {- ^ (Required) The name of the security group. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The name or ID of the project to create this security group in. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecurityGroupResource
     = '[ '("id", Text)
@@ -519,7 +519,7 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
       {- ^ (Required) Can be specified multiple times. Each rule block supports fields documented below. -}
     , _security_group_id :: !(Attr Text)
       {- ^ (Required) The security group ID for which to create the rules. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecurityGroupRuleResource
     = '[ '("id", Text)
@@ -542,7 +542,7 @@ data SshKeypairResource = SshKeypairResource
       {- ^ (Optional) The name or ID of the project to register this key to. Changing this forces a new resource to be created. -}
     , _public_key :: !(Attr Text)
       {- ^ (Optional) The public key to register with CloudStack. If this is omitted, CloudStack will generate a new key pair. The key can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SshKeypairResource
     = '[ '("fingerprint", Text)
@@ -571,7 +571,7 @@ data StaticNatResource = StaticNatResource
       {- ^ (Required) The virtual machine ID to enable the static NAT feature for. Changing this forces a new resource to be created. -}
     , _vm_guest_ip :: !(Attr Text)
       {- ^ (Optional) The virtual machine IP address to forward the static NAT traffic to (useful when the virtual machine has secondary NICs or IP addresses). Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StaticNatResource
     = '[ '("id", Text)
@@ -594,7 +594,7 @@ data StaticRouteResource = StaticRouteResource
       {- ^ (Required) The CIDR for the static route. Changing this forces a new resource to be created. -}
     , _gateway_id :: !(Attr Text)
       {- ^ (Required) The ID of the Private gateway. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StaticRouteResource
     = '[ '("id", Text)
@@ -639,7 +639,7 @@ data TemplateResource = TemplateResource
       {- ^ (Required) The URL of where the template is hosted. Changing this forces a new resource to be created. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The name or ID of the zone where this template will be created. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TemplateResource
     = '[ '("display_text", Text)
@@ -684,7 +684,7 @@ data VpcResource = VpcResource
       {- ^ (Required) The name or ID of the VPC offering to use for this VPC. Changing this forces a new resource to be created. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The name or ID of the zone where this disk volume will be available. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpcResource
     = '[ '("display_text", Text)
@@ -709,7 +709,7 @@ data VpnConnectionResource = VpnConnectionResource
       {- ^ (Required) The Customer Gateway ID to connect. Changing this forces a new resource to be created. -}
     , _vpn_gateway_id :: !(Attr Text)
       {- ^ (Required) The VPN Gateway ID to connect. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnConnectionResource
     = '[ '("id", Text)
@@ -746,7 +746,7 @@ data VpnCustomerGatewayResource = VpnCustomerGatewayResource
       {- ^ (Required) The name of the VPN Customer Gateway. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The name or ID of the project to create this VPN Customer Gateway in. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnCustomerGatewayResource
     = '[ '("dpd", Text)
@@ -771,7 +771,7 @@ Creates a site to site VPN local gateway.
 data VpnGatewayResource = VpnGatewayResource
     { _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC for which to create the VPN Gateway. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnGatewayResource
     = '[ '("id", Text)

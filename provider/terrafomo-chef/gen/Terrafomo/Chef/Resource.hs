@@ -49,7 +49,7 @@ data DataBagItemResource = DataBagItemResource
       {- ^ (Required) A string containing a JSON object that will be the content of the item. Must at minimum contain a property called "id" that is unique within the data bag, which will become the identifier of the created item. -}
     , _data_bag_name :: !(Attr Text)
       {- ^ (Required) The name of the data bag into which this item will be placed. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DataBagItemResource
     = '[ '("id", Text)
@@ -72,7 +72,7 @@ bag is a collection of items which can be created using the
 data DataBagResource = DataBagResource
     { _name :: !(Attr Text)
       {- ^ (Required) The unique name to assign to the data bag. This is the name that other server clients will use to find and retrieve data from the data bag. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DataBagResource
     = '[ '("api_uri", Text)
@@ -101,7 +101,7 @@ data EnvironmentResource = EnvironmentResource
       {- ^ (Required) The unique name to assign to the environment. This name will be used when nodes are created within the environment. -}
     , _override_attributes_json :: !(Attr Text)
       {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "chef_environment"
@@ -132,7 +132,7 @@ data NodeResource = NodeResource
       {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the node. -}
     , _run_list :: !(Attr Text)
       {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "chef_node"
@@ -155,7 +155,7 @@ data RoleResource = RoleResource
       {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the role. -}
     , _run_list :: !(Attr Text)
       {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "chef_role"

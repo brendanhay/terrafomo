@@ -52,7 +52,7 @@ data RecordResource = RecordResource
       {- ^ (Required) The value of the record. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The DNS zone to add the record to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("fqdn", Text)

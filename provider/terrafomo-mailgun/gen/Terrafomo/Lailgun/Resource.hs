@@ -51,7 +51,7 @@ data DomainResource = DomainResource
       {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
     , _wildcard :: !(Attr Text)
       {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DomainResource
     = '[ '("name", Text)

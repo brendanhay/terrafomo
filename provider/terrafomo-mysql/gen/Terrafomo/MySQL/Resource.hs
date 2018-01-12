@@ -52,7 +52,7 @@ data DatabaseResource = DatabaseResource
       {- ^ (Optional) The default collation to use when a table is created without specifying an explicit collation. Defaults to @utf8_general_ci@ . Each character set has its own set of collations, so changing the character set requires also changing the collation. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "mysql_database"
@@ -75,7 +75,7 @@ data GrantResource = GrantResource
       {- ^ (Required) A list of privileges to grant to the user. Refer to a list of privileges (such as <https://dev.mysql.com/doc/refman/5.5/en/grant.html> ) for applicable privileges. -}
     , _user :: !(Attr Text)
       {- ^ (Required) The name of the user. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "mysql_grant"
@@ -98,7 +98,7 @@ data UserResource = UserResource
       {- ^ (Optional) The password for the user. This must be provided in plain text, so the data source for it must be secured. An unsalted hash of the provided password is stored in state. -}
     , _user :: !(Attr Text)
       {- ^ (Required) The name of the user. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "mysql_user"

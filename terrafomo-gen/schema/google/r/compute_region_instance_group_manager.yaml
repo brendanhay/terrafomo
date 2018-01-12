@@ -1,0 +1,75 @@
+_name: google_compute_region_instance_group_manager
+arguments:
+  _region:
+    required: true
+    help: (Required) The region where the managed instance group resides.
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the instance group manager. Must be 1-63 characters
+      long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters
+      include lowercase letters, numbers, and hyphens.
+    type: Text
+  _instance_template:
+    required: true
+    help: (Required) The full URL to an instance template from which all new instances
+      will be created.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) An optional textual description of the instance group manager.
+    type: Text
+  _target_size:
+    required: false
+    help: (Optional) The target number of running instances for this managed instance
+      group. This value should always be explicitly set unless this resource is attached
+      to an autoscaler, in which case it should never be set. Defaults to @0@ .
+    type: Text
+  _base_instance_name:
+    required: true
+    help: (Required) The base instance name to use for instances in this group. The
+      value must be a valid <https://www.ietf.org/rfc/rfc1035.txt> name. Supported
+      characters are lowercase letters, numbers, and hyphens (-). Instances are named
+      by appending a hyphen and a random four-character string to the base instance
+      name.
+    type: Text
+  _named_port:
+    required: false
+    help: (Optional) The named port configuration. See the section below for details
+      on configuration.
+    type: Text
+  _target_pools:
+    required: false
+    help: (Optional) The full URL of all target pools to which new instances in the
+      group are added. Updating the target pools attribute does not affect existing
+      instances.
+    type: Text
+  _auto_healing_policies:
+    required: false
+    help: (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing
+      policies for this managed instance group. You can specify only one value. Structure
+      is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups>
+      .
+    type: Text
+attributes:
+  fingerprint:
+    help: ! '- The fingerprint of the instance group manager.'
+    type: Text
+  self_link:
+    help: ! '- The URL of the created resource.'
+    type: Text
+  instance_group:
+    help: ! '- The full URL of the instance group created by the manager.'
+    type: Text
+about: ! 'The Google Compute Engine Regional Instance Group Manager API creates and
+  manages pools of homogeneous Compute Engine virtual machine instances from a common
+  instance template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups>
+  and <https://cloud.google.com/compute/docs/reference/latest/regionInstanceGroupManagers>
+  ~> Note: Use </docs/providers/google/r/compute_instance_group_manager.html> to create
+  a single-zone instance group manager.'
+examples: []

@@ -1,0 +1,18 @@
+_name: cloudstack_static_route
+arguments:
+  _cidr:
+    required: true
+    help: (Required) The CIDR for the static route. Changing this forces a new resource
+      to be created.
+    type: Text
+  _gateway_id:
+    required: true
+    help: (Required) The ID of the Private gateway. Changing this forces a new resource
+      to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the static route.'
+    type: Text
+about: Creates a static route for the given private gateway or VPC.
+examples: []

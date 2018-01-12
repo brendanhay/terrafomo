@@ -1,0 +1,27 @@
+_name: aws_kms_alias
+arguments:
+  _name:
+    required: false
+    help: (Optional) The display name of the alias. The name must start with the word
+      "alias" followed by a forward slash (alias/)
+    type: Text
+  _target_key_id:
+    required: true
+    help: (Required) Identifier for the key for which the alias is for, can be either
+      an ARN or key_id.
+    type: Text
+  _name_prefix:
+    required: false
+    help: (Optional) Creates an unique alias beginning with the specified prefix.
+      The name must start with the word "alias" followed by a forward slash (alias/).  Conflicts
+      with @name@ .
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name (ARN) of the key alias.'
+    type: Text
+about: Provides an alias for a KMS customer master key. AWS Console enforces 1-to-1
+  mapping between aliases & keys, but API (hence Terraform too) allows you to create
+  as many aliases as the <http://docs.aws.amazon.com/kms/latest/developerguide/limits.html>
+  allow you.
+examples: []

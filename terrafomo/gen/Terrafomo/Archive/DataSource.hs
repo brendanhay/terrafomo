@@ -55,7 +55,7 @@ data FileDataSource = FileDataSource
       {- ^ (Optional) Package this file into the archive. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of archive to generate. NOTE: @zip@ is supported. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FileDataSource
     = '[ '("output_base64sha256", Text)

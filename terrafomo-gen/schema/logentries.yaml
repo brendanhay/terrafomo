@@ -1,0 +1,14 @@
+_name: LogentriesProvider
+arguments:
+  _account_key:
+    required: true
+    help: (Required) The Logentries account key. This can also be specified with the
+      @LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries <https://logentries.com/doc/accountkey/>
+      for more information.
+    type: Text
+attributes: {}
+about: The Logentries provider is used to manage Logentries logs and log sets. Logentries
+  provides live log management and analytics. The provider needs to be configured
+  with a Logentries account key before it can be used. Use the navigation to the left
+  to read about the available resources.
+examples: []

@@ -44,7 +44,7 @@ The @consul_agent_self@ data source returns
 specified in the @provider@ .
 -}
 data AgentSelfDataSource = AgentSelfDataSource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeDataSource
     "consul_agent__self"
@@ -63,7 +63,7 @@ data CatalogNodesDataSource = CatalogNodesDataSource
       {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
     , _query_options :: !(Attr Text)
       {- ^ (Optional) See below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CatalogNodesDataSource
     = '[ '("datacenter", Text)
@@ -92,41 +92,25 @@ This data source is different from the @consul_catalog_services@ (plural)
 data source, which provides a summary of the current Consul services.
 -}
 data CatalogServiceDataSource = CatalogServiceDataSource
-    { _address :: !(Attr Text)
-      {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
-    , _datacenter :: !(Attr Text)
+    { _datacenter :: !(Attr Text)
       {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The service name to select. -}
-    , _port :: !(Attr Text)
-      {- ^ (Optional, int) The port of the service. -}
     , _query_options :: !(Attr Text)
       {- ^ (Optional) See below. -}
-    , _service_id :: !(Attr Text)
-      {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
     , _tag :: !(Attr Text)
       {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
-    , _tags :: !(Attr Text)
-      {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CatalogServiceDataSource
-    = '[ '("address", Text)
-         {- - The address of the service. -}
-      , '("datacenter", Text)
+    = '[ '("datacenter", Text)
          {- - The datacenter the keys are being read from to. -}
       , '("name", Text)
          {- - The name of the service -}
-      , '("port", Text)
-         {- - The port of the service. -}
       , '("service", Text)
          {- - A list of nodes and details about each endpoint advertising a service.  Each element in the list is a map of attributes that correspond to each individual node.  The list of per-node attributes is detailed below. -}
-      , '("service_id", Text)
-         {- - The id of the service, defaults to the value of @name@ . -}
       , '("tag", Text)
          {- - The name of the tag used to filter the list of nodes in @service@ . -}
-      , '("tags", Text)
-         {- - The tags of the service. -}
        ]
 
 $(TH.makeDataSource
@@ -149,7 +133,7 @@ data CatalogServicesDataSource = CatalogServicesDataSource
       {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
     , _query_options :: !(Attr Text)
       {- ^ (Optional) See below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CatalogServicesDataSource
     = '[ '("datacenter", Text)
@@ -179,7 +163,7 @@ data KeysDataSource = KeysDataSource
       {- ^ (Required) Specifies a key in Consul to be read or written. Supported values documented below. -}
     , _token :: !(Attr Text)
       {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeysDataSource
     = '[ '("datacenter", Text)

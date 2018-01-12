@@ -64,7 +64,7 @@ data DatabaseResource = DatabaseResource
       {- ^ (Optional) The name of the tablespace that will be associated with the database, or @DEFAULT@ to use the template database's tablespace.  This tablespace will be the default tablespace used for objects created in this database. -}
     , _template :: !(Attr Text)
       {- ^ (Optional) The name of the template database from which to create the database, or @DEFAULT@ to use the default template ( @template0@ ).  NOTE: the default in Terraform is @template0@ , not @template1@ .  Changing this value will force the creation of a new resource as this value can only be changed when a database is created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "postgresql_database"
@@ -83,7 +83,7 @@ data ExtensionResource = ExtensionResource
       {- ^ (Optional) Sets the schema of an extension. -}
     , _version :: !(Attr Text)
       {- ^ (Optional) Sets the version number of the extension. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "postgresql_extension"
@@ -134,7 +134,7 @@ data RoleResource = RoleResource
       {- ^ (Optional) Defines whether the role is a "superuser", and therefore can override all access restrictions within the database.  Default value is @false@ . -}
     , _valid_until :: !(Attr Text)
       {- ^ (Optional) Defines the date and time after which the role's password is no longer valid.  Established connections past this @valid_time@ will have to be manually terminated.  This value corresponds to a PostgreSQL datetime. If omitted or the magic value @NULL@ is used, @valid_until@ will be set to @infinity@ .  Default is @NULL@ , therefore @infinity@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "postgresql_role"
@@ -156,7 +156,7 @@ data SchemaResource = SchemaResource
       {- ^ (Optional) The ROLE who owns the schema. -}
     , _policy :: !(Attr Text)
       {- ^ (Optional) Can be specified multiple times for each policy.  Each policy block supports fields documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "postgresql_schema"

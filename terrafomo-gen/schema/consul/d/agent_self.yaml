@@ -1,0 +1,6 @@
+_name: consul_agent__self
+arguments: {}
+attributes: {}
+about: The @consul_agent_self@ data source returns <https://www.consul.io/docs/agent/http/agent.html#agent_self>
+  from the agent specified in the @provider@ .
+examples: []

@@ -1,0 +1,22 @@
+_name: aws_ecr_repository_policy
+arguments:
+  _policy:
+    required: true
+    help: (Required) The policy document. This is a JSON formatted string.
+    type: Text
+  _repository:
+    required: true
+    help: (Required) Name of the repository to apply the policy.
+    type: Text
+attributes:
+  registry_id:
+    help: ! '- The registry ID where the repository was created.'
+    type: Text
+  repository:
+    help: ! '- The name of the repository.'
+    type: Text
+about: ! 'Provides an ECR repository policy. Note that currently only one policy may
+  be applied to a repository. ~> NOTE on ECR Availability : The EC2 Container Registry
+  is not yet rolled out in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#ecr_region>
+  .'
+examples: []

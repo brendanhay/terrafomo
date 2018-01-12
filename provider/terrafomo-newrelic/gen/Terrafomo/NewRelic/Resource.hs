@@ -48,7 +48,7 @@ data AlertChannelResource = AlertChannelResource
       {- ^ (Required) The name of the channel. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@ , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AlertChannelResource
     = '[ '("id", Text)
@@ -85,7 +85,7 @@ data AlertConditionResource = AlertConditionResource
       {- ^ (Optional) A custom metric to be evaluated. -}
     , _user_defined_value_function :: !(Attr Text)
       {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "newrelic_alert_condition"
@@ -101,7 +101,7 @@ data AlertPolicyChannelResource = AlertPolicyChannelResource
       {- ^ (Required) The ID of the channel. -}
     , _policy_id :: !(Attr Text)
       {- ^ (Required) The ID of the policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "newrelic_alert_policy_channel"
@@ -117,7 +117,7 @@ data AlertPolicyResource = AlertPolicyResource
       {- ^ (Optional) The rollup strategy for the policy.  Options include: @PER_POLICY@ , @PER_CONDITION@ , or @PER_CONDITION_AND_TARGET@ .  The default is @PER_POLICY@ . -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AlertPolicyResource
     = '[ '("created_at", Text)
@@ -152,7 +152,7 @@ data NrqlAlertConditionResource = NrqlAlertConditionResource
       {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
     , _value_function :: !(Attr Text)
       {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "newrelic_nrql_alert_condition"

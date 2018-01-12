@@ -57,7 +57,7 @@ data DowntimeResource = DowntimeResource
       {- ^ (Required) A list of items to apply the downtime to, e.g. host:X -}
     , _start :: !(Attr Text)
       {- ^ (Optional) POSIX timestamp to start the downtime. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DowntimeResource
     = '[ '("id", Text)
@@ -87,7 +87,7 @@ data MetricMetadataResource = MetricMetadataResource
       {- ^ (Optional) If applicable, stasd flush interval in seconds for the metric. -}
     , _unit :: !(Attr Text)
       {- ^ (Optional) Primary unit of the metric such as 'byte' or 'operation'. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "datadog_metric_metadata"
@@ -136,7 +136,7 @@ data MonitorResource = MonitorResource
       {- ^ (Optional) The number of hours of the monitor not reporting data before it will automatically resolve from a triggered state. Defaults to false. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of the monitor, chosen from: -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MonitorResource
     = '[ '("id", Text)
@@ -164,7 +164,7 @@ data TimeboardResource = TimeboardResource
       {- ^ (Optional) Nested block describing a template variable. The structure of this block is described below. Multiple template_variable blocks are allowed within a datadog_timeboard resource. -}
     , _title :: !(Attr Text)
       {- ^ (Required) The name of the dashboard. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "datadog_timeboard"
@@ -189,7 +189,7 @@ data UserResource = UserResource
       {- ^ (Required) Name for user -}
     , _role :: !(Attr Text)
       {- ^ (Optional) Role description for user (NOTE: can only be applied on user creation) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("disabled", Text)

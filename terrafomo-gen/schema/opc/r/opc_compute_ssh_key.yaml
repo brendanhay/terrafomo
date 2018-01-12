@@ -1,0 +1,20 @@
+_name: opc_compute_ssh_key
+arguments:
+  _enabled:
+    required: false
+    help: (Optional) Whether or not the key is enabled. This is useful if you want
+      to temporarily disable an SSH key, without removing it entirely from your Terraform
+      resource definition. Defaults to @true@
+    type: Text
+  _name:
+    required: true
+    help: (Required) The unique (within this identity domain) name of the SSH key.
+    type: Text
+  _key:
+    required: true
+    help: (Required) The SSH key itself
+    type: Text
+attributes: {}
+about: The @opc_compute_ssh_key@ resource creates and manages an SSH key in an OPC
+  identity domain.
+examples: []

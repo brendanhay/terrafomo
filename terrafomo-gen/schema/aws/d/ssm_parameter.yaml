@@ -1,0 +1,9 @@
+_name: aws_ssm_parameter
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the parameter.
+    type: Text
+attributes: {}
+about: Provides an SSM Parameter data source.
+examples: []

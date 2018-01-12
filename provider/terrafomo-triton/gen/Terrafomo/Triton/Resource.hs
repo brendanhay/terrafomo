@@ -63,7 +63,7 @@ data FabricResource = FabricResource
       {- ^ - (String, Required, Change forces new resource) CIDR formatted string describing network. -}
     , _vlan_id :: !(Attr Text)
       {- ^ - (Int, Required, Change forces new resource) VLAN id the network is on. Number between 0-4095 indicating VLAN ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FabricResource
     = '[ '("description", Text)
@@ -107,7 +107,7 @@ data FirewallRuleResource = FirewallRuleResource
       {- ^ - (boolean)  Default: @false@ Whether the rule should be effective. -}
     , _rule :: !(Attr Text)
       {- ^ - (string, Required) The firewall rule described using the Cloud API rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FirewallRuleResource
     = '[ '("id", Text)
@@ -128,7 +128,7 @@ data KeyResource = KeyResource
       {- ^ - (string, Required, Change forces new resource) The SSH key material. In order to read this from a file, use the @file@ interpolation. -}
     , _name :: !(Attr Text)
       {- ^ - (string, Change forces new resource) The name of the key. If this is left empty, the name is inferred from the comment in the SSH key material. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "triton_key"
@@ -173,7 +173,7 @@ data MachineResource = MachineResource
       {- ^ - (string) Data to be copied to the machine on boot. -}
     , _user_script :: !(Attr Text)
       {- ^ - (string) The user script to run on boot (every boot on SmartMachines). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MachineResource
     = '[ '("created", Text)
@@ -185,7 +185,7 @@ type instance Computed MachineResource
       , '("gateway", Text)
          {- - IPv4 Gateway -}
       , '("id", Text)
-         {- - (string) - The identifier representing the firewall rule in Triton. -}
+         {- - (string) - The identifier representing the machine in Triton. -}
       , '("ip", Text)
          {- - The NIC's IPv4 address -}
       , '("ips", Text)
@@ -217,6 +217,32 @@ $(TH.makeResource
     ''Qual.Triton
     ''MachineResource)
 
+{- | The @triton_snapshot@ Triton resource.
+
+The @triton_snapshot@ resource represents a snapshot of a Triton machine.
+Snapshots are not usable with other instances; they are a point-in-time
+snapshot of the current instance. Snapshots can also only be taken of
+instances that are not of brand @kvm@ .
+-}
+data SnapshotResource = SnapshotResource
+    { _machine_id :: !(Attr Text)
+      {- ^ - (string, Required) The ID of the machine of which to take a snapshot. -}
+    , _name :: !(Attr Text)
+      {- ^ - (string) The name for the snapshot. -}
+    } deriving (Show, Generic)
+
+type instance Computed SnapshotResource
+    = '[ '("id", Text)
+         {- - (string) - The identifier representing the snapshot in Triton. -}
+      , '("state", Text)
+         {- - (string) - The current state of the snapshot. -}
+       ]
+
+$(TH.makeResource
+    "triton_snapshot"
+    ''Qual.Triton
+    ''SnapshotResource)
+
 {- | The @triton_vlan@ Triton resource.
 
 The @triton_vlan@ resource represents an Triton VLAN. A VLAN provides a low
@@ -230,7 +256,7 @@ data VlanResource = VlanResource
       {- ^ - (string, Required) Unique name to identify VLAN -}
     , _vlan_id :: !(Attr Text)
       {- ^ - (int, Required, Change forces new resource) Number between 0-4095 indicating VLAN ID -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "triton_vlan"

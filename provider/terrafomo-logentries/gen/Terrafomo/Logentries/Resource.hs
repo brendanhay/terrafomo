@@ -54,7 +54,7 @@ data LogResource = LogResource
       {- ^ (Optional, default @token@ ) The log source ( @token@ , @syslog@ , @agent@ , @api@ ). Review the Logentries <https://docs.logentries.com/docs/> for more information. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) The log type. See the Logentries <https://logentries.com/doc/log-types/> for more information. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LogResource
     = '[ '("token", Text)
@@ -76,7 +76,7 @@ data LogsetResource = LogsetResource
       {- ^ (Optional, default "nonlocation") A location is for your convenience only. You can specify a DNS entry such as web.example.com, IP address or arbitrary comment. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "logentries_logset"

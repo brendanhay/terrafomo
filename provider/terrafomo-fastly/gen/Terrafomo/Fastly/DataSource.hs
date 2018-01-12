@@ -44,7 +44,7 @@ Use this data source to get the
 of Fastly edge nodes.
 -}
 data IpRangesDataSource = IpRangesDataSource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeDataSource
     "fastly_ip_ranges"

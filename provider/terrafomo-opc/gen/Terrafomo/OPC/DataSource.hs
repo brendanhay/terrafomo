@@ -42,24 +42,13 @@ import qualified Terrafomo.Syntax.TH as TH
 Use this data source to access the configuration of an Image List Entry.
 -}
 data ComputeImageListEntryDataSource = ComputeImageListEntryDataSource
-    { _attributes :: !(Attr Text)
-      {- ^ (Optional) JSON String of optional data that will be passed to an instance of this machine image when it is launched. -}
-    , _entry :: !(Attr Text)
+    { _entry :: !(Attr Text)
       {- ^ (Optional) - Which machine image to use. See <#entry> below for more details -}
     , _image_list :: !(Attr Text)
       {- ^ (Required) - The name of the image list to lookup. -}
-    , _machine_images :: !(Attr Text)
-      {- ^ (Required) An array of machine images. -}
-    , _name :: !(Attr Text)
-      {- ^ (Required) The name of the Image List. -}
     , _version :: !(Attr Text)
       {- ^ (Required) - The version (integer) of the Image List to use. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeImageListEntryDataSource
-    = '[ '("uri", Text)
-         {- - The Unique Resource Identifier for the Image List Entry. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "opc_compute_image_list_entry"
@@ -78,7 +67,7 @@ data ComputeNetworkInterfaceDataSource = ComputeNetworkInterfaceDataSource
       {- ^ is the name of the instance. -}
     , _interface :: !(Attr Text)
       {- ^ is the name of the attached interface. @eth0@ , @eth1@ , ... @eth9@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeNetworkInterfaceDataSource
     = '[ '("dns", Text)
@@ -120,19 +109,9 @@ Use this data source to access the configuration of a storage volume
 snapshot.
 -}
 data ComputeStorageVolumeSnapshotDataSource = ComputeStorageVolumeSnapshotDataSource
-    { _collocated :: !(Attr Text)
-      {- ^ (Optional) Boolean specifying whether the snapshot is collocated or remote. Defaults to @false@ . -}
-    , _description :: !(Attr Text)
-      {- ^ (Optional) The description of the storage volume snapshot. -}
-    , _name :: !(Attr Text)
+    { _name :: !(Attr Text)
       {- ^ is the name of the storage volume snapshot. -}
-    , _parent_volume_bootable :: !(Attr Text)
-      {- ^ (Optional) A string value of whether or not the parent volume is 'bootable' or not. Defaults to @"false"@ . -}
-    , _tags :: !(Attr Text)
-      {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
-    , _volume_name :: !(Attr Text)
-      {- ^ (Required) The name of the storage volume to create the snapshot from. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeStorageVolumeSnapshotDataSource
     = '[ '("account", Text)
@@ -183,7 +162,7 @@ Use this data source to access the configuration of a Virtual NIC.
 data ComputeVnicDataSource = ComputeVnicDataSource
     { _name :: !(Attr Text)
       {- ^ is the name of the Virtual NIC. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeVnicDataSource
     = '[ '("description", Text)

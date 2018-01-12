@@ -57,10 +57,10 @@ data {{ schema.key }} = {{ schema.key }}
     {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(Attr {{ arg.value.type }})
       {- ^ {{ arg.value.help }} -}
     {% if arg.last %}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
     {% endif %}
   {% else %}
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
   {% endfor %}
 {% for attr in schema.value.attributes %}
   {% if attr.first %}

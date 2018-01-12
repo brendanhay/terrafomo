@@ -1,0 +1,84 @@
+_name: openstack_dns_zone_v2
+arguments:
+  _region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 DNS client. A DNS client
+      is needed to retrieve zone ids. If omitted, the @region@ argument of the provider
+      is used.
+    type: Text
+  _name:
+    required: false
+    help: (Optional) The name of the zone.
+    type: Text
+  _email:
+    required: false
+    help: (Optional) The email contact for the zone record.
+    type: Text
+  _ttl:
+    required: false
+    help: (Optional) The time to live (TTL) of the zone.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description of the zone.
+    type: Text
+  _type':
+    required: false
+    help: (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@
+      .
+    type: Text
+  _status:
+    required: false
+    help: (Optional) The zone's status.
+    type: Text
+attributes:
+  ttl:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  email:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  status:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  masters:
+    help: ! '- An array of master DNS servers. When @type@ is @SECONDARY@ .'
+    type: Text
+  serial:
+    help: ! '- The serial number of the zone.'
+    type: Text
+  pool_id:
+    help: ! '- The ID of the pool hosting the zone.'
+    type: Text
+  name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  updated_at:
+    help: ! '- The time the zone was last updated.'
+    type: Text
+  project_id:
+    help: ! '- The project ID that owns the zone.'
+    type: Text
+  attributes:
+    help: ! '- Attributes of the DNS Service scheduler.'
+    type: Text
+  version:
+    help: ! '- The version of the zone.'
+    type: Text
+  transferred_at:
+    help: ! '- The time the zone was transferred.'
+    type: Text
+  created_at:
+    help: ! '- The time the zone was created.'
+    type: Text
+  region:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  type:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  description:
+    help: ! '- See Argument Reference above.'
+    type: Text
+about: Use this data source to get the ID of an available OpenStack DNS zone.
+examples: []

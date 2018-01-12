@@ -1,0 +1,23 @@
+_name: aws_dx_connection
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the connection.
+    type: Text
+  _location:
+    required: true
+    help: (Required) The AWS Direct Connect location where the connection is located.
+      See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html>
+      for the list of AWS Direct Connect locations. Use @locationCode@ .
+    type: Text
+  _bandwidth:
+    required: true
+    help: ! '(Required) The bandwidth of the connection. Available values: 1Gbps,
+      10Gbps. Case sensitive.'
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the connection.'
+    type: Text
+about: Provides a Connection of Direct Connect.
+examples: []

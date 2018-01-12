@@ -50,7 +50,7 @@ data FileResource = FileResource
       {- ^ (Required) The content of file to create. -}
     , _filename :: !(Attr Text)
       {- ^ (Required) The path of the file to create. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "local_file"

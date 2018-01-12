@@ -56,7 +56,7 @@ data AppServicePlanResource = AppServicePlanResource
       {- ^ (Required) A @sku@ block as documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AppServicePlanResource
     = '[ '("id", Text)
@@ -95,7 +95,7 @@ data AppServiceResource = AppServiceResource
       {- ^ (Optional) A @site_config@ object as defined below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AppServiceResource
     = '[ '("id", Text)
@@ -147,7 +147,7 @@ data ApplicationGatewayResource = ApplicationGatewayResource
       {- ^ (Optional) UrlPathMaps give url Path to backend mapping information for PathBasedRouting specified in @request_routing_rule@ .  The @url_path_map@ block supports fields documented below. -}
     , _waf_configuration :: !(Attr Text)
       {- ^ (Optional) Web Application Firewall configuration settings. The @waf_configuration@ block supports fields documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApplicationGatewayResource
     = '[ '("id", Text)
@@ -180,7 +180,7 @@ data ApplicationInsightsResource = ApplicationInsightsResource
       {- ^ (Required) The name of the resource group in which to create the Application Insights component. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApplicationInsightsResource
     = '[ '("app_id", Text)
@@ -211,7 +211,7 @@ data AutomationAccountResource = AutomationAccountResource
       {- ^ (Required) A @sku@ block as defined below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutomationAccountResource
     = '[ '("id", Text)
@@ -240,7 +240,7 @@ data AutomationCredentialResource = AutomationCredentialResource
       {- ^ (Required) The name of the resource group in which the Credential is created. Changing this forces a new resource to be created. -}
     , _username :: !(Attr Text)
       {- ^ (Required) The username associated with this Automation Credential. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutomationCredentialResource
     = '[ '("id", Text)
@@ -275,7 +275,7 @@ data AutomationRunbookResource = AutomationRunbookResource
       {- ^ (Required) The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created. -}
     , _runbook_type :: !(Attr Text)
       {- ^ (Required) The type of the runbook - can be either @Graph@ , @GraphPowerShell@ , @GraphPowerShellWorkflow@ , @PowerShellWorkflow@ , @PowerShell@ or @Script@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutomationRunbookResource
     = '[ '("id", Text)
@@ -308,7 +308,7 @@ data AutomationScheduleResource = AutomationScheduleResource
       {- ^ -  (Required) Start time of the schedule. Must be at least five minutes in the future. -}
     , _timezone :: !(Attr Text)
       {- ^ (Optional) The timezone of the start time. For possible values see: https://msdn.microsoft.com/en-us/library/ms912391(v=winembedded.11).aspx -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutomationScheduleResource
     = '[ '("id", Text)
@@ -339,7 +339,7 @@ data AvailabilitySetResource = AvailabilitySetResource
       {- ^ (Required) The name of the resource group in which to create the availability set. Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AvailabilitySetResource
     = '[ '("id", Text)
@@ -385,7 +385,7 @@ data CdnEndpointResource = CdnEndpointResource
       {- ^ (Required) The name of the resource group in which to create the CDN Endpoint. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CdnEndpointResource
     = '[ '("id", Text)
@@ -412,7 +412,7 @@ data CdnProfileResource = CdnProfileResource
       {- ^ (Required) The pricing related information of current CDN profile. Accepted values are @Standard_Verizon@ , @Standard_Akamai@ or @Premium_Verizon@ . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CdnProfileResource
     = '[ '("id", Text)
@@ -441,7 +441,7 @@ data ContainerGroupResource = ContainerGroupResource
       {- ^ (Required) The OS for the container group. Allowed values are @Linux@ and @Windows@ . Changing this forces a new resource to be created. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the Container Group. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ContainerGroupResource
     = '[ '("id", Text)
@@ -476,7 +476,7 @@ data ContainerRegistryResource = ContainerRegistryResource
       {- ^ (Required for @Classic@ Sku - Optional otherwise) The ID of a Storage Account which must be located in the same Azure Region as the Container Registry. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ContainerRegistryResource
     = '[ '("admin_password", Text)
@@ -521,7 +521,7 @@ data ContainerServiceResource = ContainerServiceResource
       {- ^ - (only Required when you're using @Kubernetes@ as an Orchestration Platform) A Service Principal block as documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ContainerServiceResource
     = '[ '("agent_pool_profile.fqdn", Text)
@@ -562,7 +562,7 @@ data CosmosDbAccountResource = CosmosDbAccountResource
       {- ^ (Required) The name of the resource group in which the CosmosDB Account is created. Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CosmosDbAccountResource
     = '[ '("id", Text)
@@ -599,7 +599,7 @@ data DnsARecordResource = DnsARecordResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsARecordResource
     = '[ '("id", Text)
@@ -628,7 +628,7 @@ data DnsAaaaRecordResource = DnsAaaaRecordResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsAaaaRecordResource
     = '[ '("id", Text)
@@ -657,7 +657,7 @@ data DnsCnameRecordResource = DnsCnameRecordResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsCnameRecordResource
     = '[ '("id", Text)
@@ -686,7 +686,7 @@ data DnsMxRecordResource = DnsMxRecordResource
       {- ^ (Required) The Time To Live (TTL) of the DNS record. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsMxRecordResource
     = '[ '("id", Text)
@@ -715,7 +715,7 @@ data DnsNsRecordResource = DnsNsRecordResource
       {- ^ (Required) The Time To Live (TTL) of the DNS record. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsNsRecordResource
     = '[ '("id", Text)
@@ -744,7 +744,7 @@ data DnsPtrRecordResource = DnsPtrRecordResource
       {- ^ (Required) The Time To Live (TTL) of the DNS record. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsPtrRecordResource
     = '[ '("id", Text)
@@ -773,7 +773,7 @@ data DnsSrvRecordResource = DnsSrvRecordResource
       {- ^ (Required) The Time To Live (TTL) of the DNS record. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsSrvRecordResource
     = '[ '("id", Text)
@@ -802,7 +802,7 @@ data DnsTxtRecordResource = DnsTxtRecordResource
       {- ^ (Required) The Time To Live (TTL) of the DNS record. -}
     , _zone_name :: !(Attr Text)
       {- ^ (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsTxtRecordResource
     = '[ '("id", Text)
@@ -827,7 +827,7 @@ data DnsZoneResource = DnsZoneResource
       {- ^ (Required) Specifies the resource group where the resource exists. Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsZoneResource
     = '[ '("id", Text)
@@ -859,7 +859,7 @@ data EventgridTopicResource = EventgridTopicResource
       {- ^ (Required) The name of the resource group in which the EventGrid Topic exists. Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EventgridTopicResource
     = '[ '("endpoint", Text)
@@ -890,7 +890,7 @@ data EventhubAuthorizationRuleResource = EventhubAuthorizationRuleResource
       {- ^ (Required) Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which the EventHub Namespace exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EventhubAuthorizationRuleResource
     = '[ '("id", Text)
@@ -926,7 +926,7 @@ data EventhubConsumerGroupResource = EventhubConsumerGroupResource
       {- ^ (Required) The name of the resource group in which the EventHub Consumer Group's grandparent Namespace exists. Changing this forces a new resource to be created. -}
     , _user_metadata :: !(Attr Text)
       {- ^ (Optional) Specifies the user metadata. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EventhubConsumerGroupResource
     = '[ '("id", Text)
@@ -955,7 +955,7 @@ data EventhubNamespaceResource = EventhubNamespaceResource
       {- ^ (Required) Defines which tier to use. Options are Basic or Standard. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EventhubNamespaceResource
     = '[ '("id", Text)
@@ -982,7 +982,7 @@ data EventhubResource = EventhubResource
       {- ^ (Required) Specifies the current number of shards on the Event Hub. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which the EventHub's parent Namespace exists. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EventhubResource
     = '[ '("id", Text)
@@ -1019,7 +1019,7 @@ data ExpressRouteCircuitResource = ExpressRouteCircuitResource
       {- ^ (Required) Chosen SKU of ExpressRoute circuit as documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ExpressRouteCircuitResource
     = '[ '("id", Text)
@@ -1055,19 +1055,11 @@ data ImageResource = ImageResource
       {- ^ (Optional) The Virtual Machine ID from which to create the image. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImageResource
-    = '[ '("data_disk", Text)
-         {- - a collection of @data_disk@ blocks as defined below. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The managed image ID. -}
-      , '("location", Text)
-         {- - the Azure Location where this Image exists. -}
-      , '("os_disk", Text)
-         {- - a @os_disk@ block as defined below. -}
-      , '("tags", Text)
-         {- - a mapping of tags to assigned to the resource. -}
        ]
 
 $(TH.makeResource
@@ -1090,7 +1082,7 @@ data KeyVaultCertificateResource = KeyVaultCertificateResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vault_uri :: !(Attr Text)
       {- ^ (Required) Specifies the URI used to access the Key Vault instance, available on the @azurerm_key_vault@ resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyVaultCertificateResource
     = '[ '("id", Text)
@@ -1121,7 +1113,7 @@ data KeyVaultKeyResource = KeyVaultKeyResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vault_uri :: !(Attr Text)
       {- ^ (Required) Specifies the URI used to access the Key Vault instance, available on the @azurerm_key_vault@ resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyVaultKeyResource
     = '[ '("e", Text)
@@ -1164,7 +1156,7 @@ data KeyVaultResource = KeyVaultResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Required) The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyVaultResource
     = '[ '("id", Text)
@@ -1193,7 +1185,7 @@ data KeyVaultSecretResource = KeyVaultSecretResource
       {- ^ (Required) Specifies the value of the Key Vault Secret. -}
     , _vault_uri :: !(Attr Text)
       {- ^ (Required) Specifies the URI used to access the Key Vault instance, available on the @azurerm_key_vault@ resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyVaultSecretResource
     = '[ '("id", Text)
@@ -1209,7 +1201,7 @@ $(TH.makeResource
 
 {- | The @azurerm_lb_backend_address_pool@ AzureRM resource.
 
-Create a LoadBalancer Backend Address Pool. ~> **NOTE When using this
+Create a LoadBalancer Backend Address Pool. ~> NOTE: When using this
 resource, the LoadBalancer needs to have a FrontEnd IP Configuration
 Attached
 -}
@@ -1220,7 +1212,7 @@ data LbBackendAddressPoolResource = LbBackendAddressPoolResource
       {- ^ (Required) Specifies the name of the Backend Address Pool. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbBackendAddressPoolResource
     = '[ '("id", Text)
@@ -1234,7 +1226,7 @@ $(TH.makeResource
 
 {- | The @azurerm_lb_nat_pool@ AzureRM resource.
 
-Create a LoadBalancer NAT pool. ~> **NOTE When using this resource, the
+Create a LoadBalancer NAT pool. ~> NOTE When using this resource, the
 LoadBalancer needs to have a FrontEnd IP Configuration Attached
 -}
 data LbNatPoolResource = LbNatPoolResource
@@ -1254,7 +1246,7 @@ data LbNatPoolResource = LbNatPoolResource
       {- ^ (Required) The transport protocol for the external endpoint. Possible values are @Udp@ or @Tcp@ . -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbNatPoolResource
     = '[ '("id", Text)
@@ -1268,12 +1260,14 @@ $(TH.makeResource
 
 {- | The @azurerm_lb_nat_rule@ AzureRM resource.
 
-Create a LoadBalancer NAT Rule. ~> **NOTE When using this resource, the
+Create a LoadBalancer NAT Rule. ~> NOTE When using this resource, the
 LoadBalancer needs to have a FrontEnd IP Configuration Attached
 -}
 data LbNatRuleResource = LbNatRuleResource
     { _backend_port :: !(Attr Text)
       {- ^ (Required) The port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive. -}
+    , _enable_floating_ip :: !(Attr Text)
+      {- ^ (Optional) Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. -}
     , _frontend_ip_configuration_name :: !(Attr Text)
       {- ^ (Required) The name of the frontend IP configuration exposing this rule. -}
     , _frontend_port :: !(Attr Text)
@@ -1286,7 +1280,7 @@ data LbNatRuleResource = LbNatRuleResource
       {- ^ (Required) The transport protocol for the external endpoint. Possible values are @Udp@ or @Tcp@ . -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbNatRuleResource
     = '[ '("id", Text)
@@ -1300,8 +1294,8 @@ $(TH.makeResource
 
 {- | The @azurerm_lb_probe@ AzureRM resource.
 
-Create a LoadBalancer Probe Resource. ~> **NOTE When using this resource,
-the LoadBalancer needs to have a FrontEnd IP Configuration Attached
+Create a LoadBalancer Probe Resource. ~> NOTE When using this resource, the
+LoadBalancer needs to have a FrontEnd IP Configuration Attached
 -}
 data LbProbeResource = LbProbeResource
     { _interval_in_seconds :: !(Attr Text)
@@ -1320,7 +1314,7 @@ data LbProbeResource = LbProbeResource
       {- ^ (Optional) The URI used for requesting health status from the backend endpoint. Required if protocol is set to Http. Otherwise, it is not allowed. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbProbeResource
     = '[ '("id", Text)
@@ -1347,7 +1341,7 @@ data LbResource = LbResource
       {- ^ (Required) The name of the resource group in which to create the LoadBalancer. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbResource
     = '[ '("id", Text)
@@ -1363,7 +1357,7 @@ $(TH.makeResource
 
 {- | The @azurerm_lb_rule@ AzureRM resource.
 
-Create a LoadBalancer Rule. ~> **NOTE When using this resource, the
+Create a LoadBalancer Rule. ~> NOTE When using this resource, the
 LoadBalancer needs to have a FrontEnd IP Configuration Attached
 -}
 data LbRuleResource = LbRuleResource
@@ -1391,7 +1385,7 @@ data LbRuleResource = LbRuleResource
       {- ^ (Required) The transport protocol for the external endpoint. Possible values are @Udp@ or @Tcp@ . -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbRuleResource
     = '[ '("id", Text)
@@ -1419,7 +1413,7 @@ data LocalNetworkGatewayResource = LocalNetworkGatewayResource
       {- ^ (Required) The name of the local network gateway. Changing this forces a new resource to be created. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the local network gateway. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LocalNetworkGatewayResource
     = '[ '("id", Text)
@@ -1448,7 +1442,7 @@ data LogAnalyticsWorkspaceResource = LogAnalyticsWorkspaceResource
       {- ^ (Required) Specifies the Sku of the Log Analytics Workspace. Possible values are @Free@ , @PerNode@ , @Premium@ , @Standard@ , @Standalone@ and @Unlimited.@ -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LogAnalyticsWorkspaceResource
     = '[ '("id", Text)
@@ -1473,22 +1467,14 @@ $(TH.makeResource
 Create a managed disk.
 -}
 data ManagedDiskResource = ManagedDiskResource
-    { _Copy :: !(Attr Text)
-      {- ^ - Copy an existing managed disk or snapshot (specified with @source_resource_id@ ). -}
-    , _Empty :: !(Attr Text)
-      {- ^ - Create an empty managed disk. -}
-    , _FromImage :: !(Attr Text)
-      {- ^ - Copy a Platform Image (specified with @image_reference_id@ ) -}
-    , _Import :: !(Attr Text)
-      {- ^ - Import a VHD file in to the managed disk (VHD specified with @source_uri@ ). -}
-    , _create_option :: !(Attr Text)
+    { _create_option :: !(Attr Text)
       {- ^ (Required) The method to use when creating the managed disk. Possible values include: -}
     , _disk_size_gb :: !(Attr Text)
       {- ^ (Optional, Required for a new managed disk) Specifies the size of the managed disk to create in gigabytes. If @create_option@ is @Copy@ or @FromImage@ , then the value must be equal to or greater than the source's size. -}
     , _encryption_settings :: !(Attr Text)
       {- ^ (Optional) an @encryption_settings@ block as defined below. -}
     , _image_reference_id :: !(Attr Text)
-      {- ^ (Optional) ID of an existing platform disk image to copy when @create_option@ is @FromImage@ . -}
+      {- ^ (Optional) ID of an existing platform/marketplace disk image to copy when @create_option@ is @FromImage@ . -}
     , _location :: !(Attr Text)
       {- ^ (Required) Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created. -}
     , _name :: !(Attr Text)
@@ -1505,23 +1491,11 @@ data ManagedDiskResource = ManagedDiskResource
       {- ^ (Required) The type of storage to use for the managed disk. Allowable values are @Standard_LRS@ or @Premium_LRS@ . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ManagedDiskResource
-    = '[ '("disk_size_gb", Text)
-         {- - The size of the managed disk in gigabytes. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The managed disk ID. -}
-      , '("os_type", Text)
-         {- - The operating system for managed disk. Valid values are @Linux@ or @Windows@ -}
-      , '("source_resource_id", Text)
-         {- - ID of an existing managed disk that the current resource was created from. -}
-      , '("source_uri", Text)
-         {- - The source URI for the managed disk -}
-      , '("storage_account_type", Text)
-         {- - The storage account type for the managed disk. -}
-      , '("tags", Text)
-         {- - A mapping of tags assigned to the resource. -}
        ]
 
 $(TH.makeResource
@@ -1542,7 +1516,7 @@ data MysqlConfigurationResource = MysqlConfigurationResource
       {- ^ (Required) Specifies the name of the MySQL Server. Changing this forces a new resource to be created. -}
     , _value :: !(Attr Text)
       {- ^ (Required) Specifies the value of the MySQL Configuration. See the MySQL documentation for valid values. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MysqlConfigurationResource
     = '[ '("id", Text)
@@ -1569,7 +1543,7 @@ data MysqlDatabaseResource = MysqlDatabaseResource
       {- ^ (Required) The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created. -}
     , _server_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the MySQL Server. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MysqlDatabaseResource
     = '[ '("id", Text)
@@ -1596,7 +1570,7 @@ data MysqlFirewallRuleResource = MysqlFirewallRuleResource
       {- ^ (Required) Specifies the name of the MySQL Server. Changing this forces a new resource to be created. -}
     , _start_ip_address :: !(Attr Text)
       {- ^ (Required) Specifies the Charset for the MySQL Database. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MysqlFirewallRuleResource
     = '[ '("id", Text)
@@ -1629,7 +1603,7 @@ data MysqlServerResource = MysqlServerResource
       {- ^ (Required) Specifies the amount of storage for the MySQL Server in Megabytes. Possible values are shown below. Changing this forces a new resource to be created. -}
     , _version :: !(Attr Text)
       {- ^ (Required) Specifies the version of MySQL to use. Valid values are @5.6@ and @5.7@ . Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MysqlServerResource
     = '[ '("fqdn", Text)
@@ -1667,7 +1641,7 @@ data NetworkInterfaceResource = NetworkInterfaceResource
       {- ^ (Required) The name of the resource group in which to create the network interface. Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkInterfaceResource
     = '[ '("applied_dns_servers", Text)
@@ -1712,7 +1686,7 @@ data NetworkSecurityGroupResource = NetworkSecurityGroupResource
       {- ^ (Optional) One or more @security_rule@ blocks as defined below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkSecurityGroupResource
     = '[ '("id", Text)
@@ -1759,7 +1733,7 @@ data NetworkSecurityRuleResource = NetworkSecurityRuleResource
       {- ^ (Required) CIDR or source IP range or * to match any IP. Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. -}
     , _source_port_range :: !(Attr Text)
       {- ^ (Required) Source Port or Range. Integer or range between @0@ and @65535@ or @*@ to match any. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkSecurityRuleResource
     = '[ '("id", Text)
@@ -1784,7 +1758,7 @@ data PostgresqlConfigurationResource = PostgresqlConfigurationResource
       {- ^ (Required) Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. -}
     , _value :: !(Attr Text)
       {- ^ (Required) Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PostgresqlConfigurationResource
     = '[ '("id", Text)
@@ -1811,7 +1785,7 @@ data PostgresqlDatabaseResource = PostgresqlDatabaseResource
       {- ^ (Required) The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created. -}
     , _server_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PostgresqlDatabaseResource
     = '[ '("id", Text)
@@ -1838,7 +1812,7 @@ data PostgresqlFirewallRuleResource = PostgresqlFirewallRuleResource
       {- ^ (Required) Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. -}
     , _start_ip_address :: !(Attr Text)
       {- ^ (Required) Specifies the Charset for the PostgreSQL Database. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PostgresqlFirewallRuleResource
     = '[ '("id", Text)
@@ -1871,7 +1845,7 @@ data PostgresqlServerResource = PostgresqlServerResource
       {- ^ (Required) Specifies the amount of storage for the PostgreSQL Server in Megabytes. Possible values are shown below. Changing this forces a new resource to be created. -}
     , _version :: !(Attr Text)
       {- ^ (Required) Specifies the version of PostgreSQL to use. Valid values are @9.5@ and @9.6@ . Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PostgresqlServerResource
     = '[ '("fqdn", Text)
@@ -1898,21 +1872,13 @@ data PublicIpResource = PublicIpResource
       {- ^ (Required) Defines whether the IP address is stable or dynamic. Options are Static or Dynamic. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the public ip. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PublicIpResource
-    = '[ '("domain_name_label", Text)
-         {- - The label for the Domain Name. -}
-      , '("fqdn", Text)
-         {- - Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The Public IP ID. -}
-      , '("idle_timeout_in_minutes", Text)
-         {- - Specifies the timeout for the TCP idle connection. -}
       , '("ip_address", Text)
          {- - The IP address value that was allocated. -}
-      , '("tags", Text)
-         {- - A mapping of tags to assigned to the resource. -}
        ]
 
 $(TH.makeResource
@@ -1935,12 +1901,41 @@ data RedisCacheResource = RedisCacheResource
       {- ^ (Required) The name of the Redis instance. Changing this forces a new resource to be created. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the Redis instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "azurerm_redis_cache"
     ''Qual.AzureRM
     ''RedisCacheResource)
+
+{- | The @azurerm_redis_firewall_rule@ AzureRM resource.
+
+Manages a Firewall Rule associated with a Premium Redis Cache. ~> Note:
+Redis Firewall Rules can only be assigned to a Redis Cache with a @Premium@
+SKU.
+-}
+data RedisFirewallRuleResource = RedisFirewallRuleResource
+    { _end_ip :: !(Attr Text)
+      {- ^ (Required) The highest IP address included in the range. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The name of the Firewall Rule. Changing this forces a new resource to be created. -}
+    , _redis_cache_name :: !(Attr Text)
+      {- ^ (Required) The name of the Redis Cache. Changing this forces a new resource to be created. -}
+    , _resource_group_name :: !(Attr Text)
+      {- ^ (Required) The name of the resource group in which this Redis Cache exists. -}
+    , _start_ip :: !(Attr Text)
+      {- ^ (Required) The lowest IP address included in the range -}
+    } deriving (Show, Generic)
+
+type instance Computed RedisFirewallRuleResource
+    = '[ '("id", Text)
+         {- - The Redis Firewall Rule ID. -}
+       ]
+
+$(TH.makeResource
+    "azurerm_redis_firewall_rule"
+    ''Qual.AzureRM
+    ''RedisFirewallRuleResource)
 
 {- | The @azurerm_resource_group@ AzureRM resource.
 
@@ -1953,15 +1948,11 @@ data ResourceGroupResource = ResourceGroupResource
       {- ^ (Required) The name of the resource group. Must be unique on your Azure subscription. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ResourceGroupResource
     = '[ '("id", Text)
          {- - The resource group ID. -}
-      , '("location", Text)
-         {- - The location of the resource group. -}
-      , '("tags", Text)
-         {- - A mapping of tags assigned to the resource group. -}
        ]
 
 $(TH.makeResource
@@ -1982,7 +1973,7 @@ data RoleAssignmentResource = RoleAssignmentResource
       {- ^ (Required) The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. -}
     , _scope :: !(Attr Text)
       {- ^ (Required) The scope at which the Role Assignment applies too, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@ , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@ . Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RoleAssignmentResource
     = '[ '("id", Text)
@@ -2011,19 +2002,11 @@ data RoleDefinitionResource = RoleDefinitionResource
       {- ^ (Required) A unique UUID/GUID which identifies this role. Changing this forces a new resource to be created. -}
     , _scope :: !(Attr Text)
       {- ^ (Required) The scope at which the Role Definition applies too, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@ , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@ . Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RoleDefinitionResource
-    = '[ '("assignable_scopes", Text)
-         {- - One or more assignable scopes for this Role Definition, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@ , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@ . -}
-      , '("description", Text)
-         {- - the Description of the built-in Role. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The Role Definition ID. -}
-      , '("permissions", Text)
-         {- - a @permissions@ block as documented below. -}
-      , '("type", Text)
-         {- - the Type of the Role. -}
        ]
 
 $(TH.makeResource
@@ -2048,7 +2031,7 @@ data RouteResource = RouteResource
       {- ^ (Required) The name of the resource group in which to create the route. Changing this forces a new resource to be created. -}
     , _route_table_name :: !(Attr Text)
       {- ^ (Required) The name of the route table within which create the route. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouteResource
     = '[ '("id", Text)
@@ -2075,7 +2058,7 @@ data RouteTableResource = RouteTableResource
       {- ^ (Optional) Can be specified multiple times to define multiple routes. Each @route@ block supports fields documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouteTableResource
     = '[ '("id", Text)
@@ -2108,7 +2091,7 @@ data SearchServiceResource = SearchServiceResource
       {- ^ (Required) Valid values are @free@ and @standard@ . @standard2@ and @standard3@ are also valid, but can only be used when it's enabled on the backend by Microsoft support. @free@ provisions the service in shared clusters. @standard@ provisions the service in dedicated clusters.  Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SearchServiceResource
     = '[ '("id", Text)
@@ -2137,7 +2120,7 @@ data ServicebusNamespaceResource = ServicebusNamespaceResource
       {- ^ (Required) Defines which tier to use. Options are basic, standard or premium. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServicebusNamespaceResource
     = '[ '("id", Text)
@@ -2170,7 +2153,7 @@ data ServicebusQueueResource = ServicebusQueueResource
       {- ^ (Required) The name of the ServiceBus Namespace to create this queue in. Changing this forces a new resource to be created. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "azurerm_servicebus_queue"
@@ -2206,7 +2189,7 @@ data ServicebusSubscriptionResource = ServicebusSubscriptionResource
       {- ^ (Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created. -}
     , _topic_name :: !(Attr Text)
       {- ^ (Required) The name of the ServiceBus Topic to create this Subscription in. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "azurerm_servicebus_subscription"
@@ -2247,7 +2230,7 @@ data ServicebusTopicResource = ServicebusTopicResource
       {- ^ (Optional) The Status of the Service Bus Topic. Acceptable values are @Active@ or @Disabled@ . Defaults to @Active@ . -}
     , _support_ordering :: !(Attr Text)
       {- ^ (Optional) Boolean flag which controls whether the Topic supports ordering. Defaults to false. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "azurerm_servicebus_topic"
@@ -2267,21 +2250,13 @@ data SnapshotResource = SnapshotResource
       {- ^ (Required) Specifies the name of the Snapshot resource. Changing this forces a new resource to be created. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SnapshotResource
-    = '[ '("create_option", Text)
-         {- - How the snapshot was created. -}
-      , '("disk_size_gb", Text)
+    = '[ '("disk_size_gb", Text)
          {- - The Size of the Snapshotted Disk in GB. -}
       , '("id", Text)
          {- - The Snapshot ID. -}
-      , '("source_resource_id", Text)
-         {- - The reference to an existing snapshot. -}
-      , '("source_uri", Text)
-         {- - The URI to a Managed or Unmanaged Disk. -}
-      , '("storage_account_id", Text)
-         {- - The ID of an storage account. -}
        ]
 
 $(TH.makeResource
@@ -2324,7 +2299,7 @@ data SqlDatabaseResource = SqlDatabaseResource
       {- ^ (Optional) The URI of the source database if @create_mode@ value is not @Default@ . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqlDatabaseResource
     = '[ '("creation_data", Text)
@@ -2365,7 +2340,7 @@ data SqlElasticpoolResource = SqlElasticpoolResource
       {- ^ (Required) The name of the SQL Server on which to create the elastic pool. Changing this forces a new resource to be created. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqlElasticpoolResource
     = '[ '("creation_date", Text)
@@ -2394,7 +2369,7 @@ data SqlFirewallRuleResource = SqlFirewallRuleResource
       {- ^ (Required) The name of the SQL Server on which to create the Firewall Rule. -}
     , _start_ip_address :: !(Attr Text)
       {- ^ (Required) The starting IP address to allow through the firewall for this rule. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqlFirewallRuleResource
     = '[ '("id", Text)
@@ -2427,7 +2402,7 @@ data SqlServerResource = SqlServerResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _version :: !(Attr Text)
       {- ^ (Required) The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqlServerResource
     = '[ '("fully_qualified_domain_name", Text)
@@ -2474,7 +2449,7 @@ data StorageAccountResource = StorageAccountResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _use_subdomain :: !(Attr Text)
       {- ^ (Optional) Should the Custom Domain Name be validated by using indirect CNAME validation? -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageAccountResource
     = '[ '("id", Text)
@@ -2537,7 +2512,7 @@ data StorageBlobResource = StorageBlobResource
       {- ^ (Required) The name of the storage container in which this blob should be created. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) The type of the storage blob to be created. One of either @block@ or @page@ . When not copying from an existing blob, this becomes required. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageBlobResource
     = '[ '("id", Text)
@@ -2564,7 +2539,7 @@ data StorageContainerResource = StorageContainerResource
       {- ^ (Required) The name of the resource group in which to create the storage container. Changing this forces a new resource to be created. -}
     , _storage_account_name :: !(Attr Text)
       {- ^ (Required) Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageContainerResource
     = '[ '("id", Text)
@@ -2589,7 +2564,7 @@ data StorageQueueResource = StorageQueueResource
       {- ^ (Required) The name of the resource group in which to create the storage queue. Changing this forces a new resource to be created. -}
     , _storage_account_name :: !(Attr Text)
       {- ^ (Required) Specifies the storage account in which to create the storage queue. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageQueueResource
     = '[ '("id", Text)
@@ -2614,7 +2589,7 @@ data StorageShareResource = StorageShareResource
       {- ^ (Required) The name of the resource group in which to create the share. Changing this forces a new resource to be created. -}
     , _storage_account_name :: !(Attr Text)
       {- ^ (Required) Specifies the storage account in which to create the share. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageShareResource
     = '[ '("id", Text)
@@ -2639,7 +2614,7 @@ data StorageTableResource = StorageTableResource
       {- ^ (Required) The name of the resource group in which to create the storage table. Changing this forces a new resource to be created. -}
     , _storage_account_name :: !(Attr Text)
       {- ^ (Required) Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageTableResource
     = '[ '("id", Text)
@@ -2674,7 +2649,7 @@ data SubnetResource = SubnetResource
       {- ^ (Optional) The ID of the Route Table to associate with the subnet. -}
     , _virtual_network_name :: !(Attr Text)
       {- ^ (Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SubnetResource
     = '[ '("address_prefix", Text)
@@ -2685,12 +2660,8 @@ type instance Computed SubnetResource
          {- - The collection of IP Configurations with IPs within this subnet. -}
       , '("name", Text)
          {- - The name of the subnet. -}
-      , '("network_security_group_id", Text)
-         {- - The ID of the Network Security Group associated with the subnet. -}
       , '("resource_group_name", Text)
          {- - The name of the resource group in which the subnet is created in. -}
-      , '("route_table_id", Text)
-         {- - The ID of the Route Table associated with this subnet. -}
       , '("virtual_network_name", Text)
          {- - The name of the virtual network in which the subnet is created in -}
        ]
@@ -2724,7 +2695,7 @@ data TemplateDeploymentResource = TemplateDeploymentResource
       {- ^ (Required) The name of the resource group in which to create the template deployment. -}
     , _template_body :: !(Attr Text)
       {- ^ (Optional) Specifies the JSON definition for the template. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TemplateDeploymentResource
     = '[ '("id", Text)
@@ -2765,7 +2736,7 @@ data TrafficManagerEndpointResource = TrafficManagerEndpointResource
       {- ^ (Required) The Endpoint type, must be one of: -}
     , _weight :: !(Attr Text)
       {- ^ (Optional) Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the @Weighted@ traffic routing method. Supports values between 1 and 1000. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TrafficManagerEndpointResource
     = '[ '("id", Text)
@@ -2797,7 +2768,7 @@ data TrafficManagerProfileResource = TrafficManagerProfileResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _traffic_routing_method :: !(Attr Text)
       {- ^ (Required) Specifies the algorithm used to route traffic, possible values are: -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TrafficManagerProfileResource
     = '[ '("fqdn", Text)
@@ -2829,7 +2800,7 @@ data VirtualMachineExtensionResource = VirtualMachineExtensionResource
       {- ^ (Required) The type of extension, available types for a publisher can be found using the Azure CLI. -}
     , _virtual_machine_name :: !(Attr Text)
       {- ^ (Required) The name of the virtual machine. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VirtualMachineExtensionResource
     = '[ '("id", Text)
@@ -2886,7 +2857,7 @@ data VirtualMachineResource = VirtualMachineResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vm_size :: !(Attr Text)
       {- ^ (Required) Specifies the <https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-size-specs/> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VirtualMachineResource
     = '[ '("id", Text)
@@ -2943,7 +2914,7 @@ data VirtualMachineScaleSetResource = VirtualMachineScaleSetResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _upgrade_policy_mode :: !(Attr Text)
       {- ^ (Required) Specifies the mode of an upgrade to virtual machines in the scale set. Possible values, @Manual@ or @Automatic@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "azurerm_virtual_machine_scale_set"
@@ -2972,7 +2943,7 @@ data VirtualNetworkPeeringResource = VirtualNetworkPeeringResource
       {- ^ (Optional) Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allowGatewayTransit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false. -}
     , _virtual_network_name :: !(Attr Text)
       {- ^ (Required) The name of the virtual network. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VirtualNetworkPeeringResource
     = '[ '("id", Text)
@@ -3010,7 +2981,7 @@ data VirtualNetworkResource = VirtualNetworkResource
       {- ^ (Optional) Can be specified multiple times to define multiple subnets. Each @subnet@ block supports fields documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VirtualNetworkResource
     = '[ '("address_space", Text)

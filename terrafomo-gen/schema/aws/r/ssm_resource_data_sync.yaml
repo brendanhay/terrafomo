@@ -1,0 +1,13 @@
+_name: aws_athena_database
+arguments:
+  _s3_destination:
+    required: true
+    help: (Required) Amazon S3 configuration details for the sync.
+    type: Text
+  _name:
+    required: true
+    help: (Required) Name for the configuration.
+    type: Text
+attributes: {}
+about: Provides a SSM resource data sync.
+examples: []

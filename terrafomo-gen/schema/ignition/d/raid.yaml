@@ -1,0 +1,26 @@
+_name: ignition_raid
+arguments:
+  _name:
+    required: true
+    help: (Required) The name to use for the resulting md device.
+    type: Text
+  _spares:
+    required: false
+    help: (Optional) The number of spares (if applicable) in the array.
+    type: Text
+  _level:
+    required: true
+    help: (Required) The redundancy level of the array (e.g. linear, raid1, raid5,
+      etc.).
+    type: Text
+  _devices:
+    required: true
+    help: (Required) The list of devices (referenced by their absolute path) in the
+      array.
+    type: Text
+attributes:
+  id:
+    help: ! '- ID used to reference this resource in ignition_config'
+    type: Text
+about: Describes the desired state of the system’s RAID.
+examples: []

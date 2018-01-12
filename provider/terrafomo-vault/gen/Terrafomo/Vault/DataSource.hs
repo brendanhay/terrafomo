@@ -53,7 +53,7 @@ data AwsAccessCredentialsDataSource = AwsAccessCredentialsDataSource
       {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AwsAccessCredentialsDataSource
     = '[ '("access_key", Text)
@@ -90,13 +90,9 @@ interpolated into any resource attributes. Protect these artifacts
 accordingly. See <../index.html> for more details.
 -}
 data GenericSecretDataSource = GenericSecretDataSource
-    { _allow_read :: !(Attr Text)
-      {- ^ (Optional) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
-    , _data_json :: !(Attr Text)
-      {- ^ (Required) String containing a JSON-encoded object that will be written as the secret data at the given path. -}
-    , _path :: !(Attr Text)
+    { _path :: !(Attr Text)
       {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "vault_generic_secret"

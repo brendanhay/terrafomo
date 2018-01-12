@@ -1,0 +1,15 @@
+_name: dns_cname_record_set
+arguments:
+  _host:
+    required: true
+    help: ! '- (required): Host to look up'
+    type: Text
+attributes:
+  cname:
+    help: ! '- A CNAME record associated with host.'
+    type: Text
+  id:
+    help: ! '- Set to @host@ .'
+    type: Text
+about: Use this data source to get DNS CNAME record set of the host.
+examples: []

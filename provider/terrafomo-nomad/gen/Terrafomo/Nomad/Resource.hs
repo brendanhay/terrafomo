@@ -54,7 +54,7 @@ data JobResource = JobResource
       {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
     , _jobspec :: !(Attr Text)
       {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "nomad_job"

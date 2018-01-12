@@ -42,17 +42,9 @@ import qualified Terrafomo.Syntax.TH as TH
 Use this data source to retrieve information about a Github team.
 -}
 data TeamDataSource = TeamDataSource
-    { _description :: !(Attr Text)
-      {- ^ (Optional) A description of the team. -}
-    , _ldap_dn :: !(Attr Text)
-      {- ^ (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise. -}
-    , _name :: !(Attr Text)
-      {- ^ (Required) The name of the team. -}
-    , _privacy :: !(Attr Text)
-      {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
-    , _slug :: !(Attr Text)
+    { _slug :: !(Attr Text)
       {- ^ (Required) The team slug. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TeamDataSource
     = '[ '("description", Text)
@@ -81,7 +73,7 @@ Use this data source to retrieve information about a Github user.
 data UserDataSource = UserDataSource
     { _username :: !(Attr Text)
       {- ^ (Required) The username. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserDataSource
     = '[ '("avatar_url", Text)

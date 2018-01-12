@@ -1,0 +1,34 @@
+_name: aws_db_subnet_group
+arguments:
+  _subnet_ids:
+    required: true
+    help: (Required) A list of VPC subnet IDs.
+    type: Text
+  _name:
+    required: false
+    help: (Optional, Forces new resource) The name of the DB subnet group. If omitted,
+      Terraform will assign a random, unique name.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) The description of the DB subnet group. Defaults to "Managed
+      by Terraform".
+    type: Text
+  _name_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique name beginning with the
+      specified prefix. Conflicts with @name@ .
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN of the db subnet group.'
+    type: Text
+  id:
+    help: ! '- The db subnet group name.'
+    type: Text
+about: Provides an RDS DB subnet group resource.
+examples: []

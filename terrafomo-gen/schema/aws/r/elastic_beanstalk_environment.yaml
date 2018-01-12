@@ -1,0 +1,69 @@
+_name: aws_elastic_beanstalk_environment
+arguments:
+  _cname_prefix:
+    required: false
+    help: (Optional) Prefix to use for the fully qualified DNS name of the Environment.
+    type: Text
+  _tier:
+    required: false
+    help: (Optional) Elastic Beanstalk Environment tier. Valid values are @Worker@
+      or @WebServer@ . If tier is left blank @WebServer@ will be used.
+    type: Text
+  _application:
+    required: true
+    help: – (Required) Name of the application that contains the version to be deployed
+    type: Text
+  _poll_interval:
+    required: true
+    help: – The time between polling the AWS API to check if changes have been applied.
+      Use this to adjust the rate of API calls for any @create@ or @update@ action.
+      Minimum @10s@ , maximum @180s@ . Omit this to use the default behavior, which
+      is an exponential backoff
+    type: Text
+  _wait_for_ready_timeout:
+    required: true
+    help: ! '- (Default: @20m@ ) The maximum <https://golang.org/pkg/time/#ParseDuration>
+      that Terraform should wait for an Elastic Beanstalk Environment to be in a ready
+      state before timing out.'
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for this Environment. This name is used in the
+      application URL
+    type: Text
+  _description:
+    required: false
+    help: (Optional) Short description of the Environment
+    type: Text
+  _version_label:
+    required: false
+    help: (Optional) The name of the Elastic Beanstalk Application Version to use
+      in deployment.
+    type: Text
+  _solution_stack_name:
+    required: true
+    help: – (Optional) A solution stack to base your environment off of. Example stacks
+      can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html>
+    type: Text
+  _template_name:
+    required: true
+    help: – (Optional) The name of the Elastic Beanstalk Configuration template to
+      use in deployment
+    type: Text
+  _tags:
+    required: true
+    help: ! '– (Optional) A set of tags to apply to the Environment. Note: at this
+      time the Elastic Beanstalk API does not provide a programatic way of changing
+      these tags after initial application'
+    type: Text
+  _setting:
+    required: true
+    help: – (Optional) Option settings to configure the new Environment. These override
+      specific values that are set as defaults. The format is detailed below in <#option-settings>
+    type: Text
+attributes: {}
+about: Provides an Elastic Beanstalk Environment Resource. Elastic Beanstalk allows
+  you to deploy and manage applications in the AWS cloud without worrying about the
+  infrastructure that runs those applications. Environments are often things such
+  as @development@ , @integration@ , or @production@ .
+examples: []

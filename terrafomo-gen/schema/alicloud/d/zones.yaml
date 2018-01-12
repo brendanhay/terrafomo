@@ -1,0 +1,40 @@
+_name: alicloud_zones
+arguments:
+  _available_instance_type:
+    required: false
+    help: (Optional) Limit search to specific instance type.
+    type: Text
+  _available_resource_creation:
+    required: false
+    help: (Optional) Limit search to specific resource type. The following values
+      are allowed @Instance@ , @Disk@ and @VSwitch@ .
+    type: Text
+  _available_disk_category:
+    required: false
+    help: (Optional) Limit search to specific disk category. Can be either @cloud@
+      , @ephemeral@ , or @ephemeral_ssd@ .
+    type: Text
+  _output_file:
+    required: false
+    help: (Optional) The name of file that can save zones data source after running
+      @terraform plan@ .
+    type: Text
+attributes:
+  available_disk_categories:
+    help: ! '- Set of supported disk categories.'
+    type: Text
+  available_instance_types:
+    help: ! '- Instance types allowed.'
+    type: Text
+  available_resource_creation:
+    help: ! '- Type of resource that can be created.'
+    type: Text
+  local_name:
+    help: ! '- Name of the zone in the local language.'
+    type: Text
+  id:
+    help: ! '- ID of the zone.'
+    type: Text
+about: The Zones data source allows access to the list of Alicloud Zones which can
+  be accessed by an Alicloud account within the region configured in the provider.
+examples: []

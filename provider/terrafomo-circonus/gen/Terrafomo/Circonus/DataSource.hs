@@ -50,7 +50,7 @@ data AccountDataSource = AccountDataSource
       {- ^ (Optional) Automatically use the current Circonus Account attached to the API token making the request. -}
     , _id :: !(Attr Text)
       {- ^ (Optional) The Circonus ID of a given account. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AccountDataSource
     = '[ '("address1", Text)
@@ -112,7 +112,7 @@ funneled back through Circonus.
 data CollectorDataSource = CollectorDataSource
     { _id :: !(Attr Text)
       {- ^ (Optional) The Circonus ID of a given collector. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CollectorDataSource
     = '[ '("details", Text)

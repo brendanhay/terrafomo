@@ -61,8 +61,7 @@ clientName f s =
 
 {- | (Required) The PEM-formatted private key contents belonging to the
 configured client. This is issued by the server when a new client object is
-created. May be provided via the @CHEF_PRIVATE_KEY_FILE@ environment
-variable.
+created. May be provided via the @CHEF_KEY_MATERIAL@ environment variable.
 -}
 keyMaterial :: Functor f => (Text -> f Text) -> Chef -> f Chef
 keyMaterial f s =

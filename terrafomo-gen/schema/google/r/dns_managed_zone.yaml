@@ -1,0 +1,29 @@
+_name: google_dns_managed_zone
+arguments:
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  _dns_name:
+    required: true
+    help: (Required) The DNS name of this zone, e.g. "terraform.io".
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A textual description field. Defaults to 'Managed by Terraform'.
+    type: Text
+attributes:
+  name_servers:
+    help: ! '- The list of nameservers that will be authoritative for this domain.
+      Use NS records to redirect from your DNS provider to these names, thus making
+      Google Cloud DNS authoritative for this zone.'
+    type: Text
+about: Manages a zone within Google Cloud DNS. For more information see <https://cloud.google.com/dns/zones/>
+  and <https://cloud.google.com/dns/api/v1/managedZones> .
+examples: []

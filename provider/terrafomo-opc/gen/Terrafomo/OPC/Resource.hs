@@ -51,7 +51,7 @@ data ComputeAclResource = ComputeAclResource
       {- ^ (Required) The name of the ACL. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the ACL. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_acl"
@@ -66,17 +66,13 @@ List Entry in an OPC identity domain.
 data ComputeImageListEntryResource = ComputeImageListEntryResource
     { _attributes :: !(Attr Text)
       {- ^ (Optional) JSON String of optional data that will be passed to an instance of this machine image when it is launched. -}
-    , _entry :: !(Attr Text)
-      {- ^ (Optional) - Which machine image to use. See <#entry> below for more details -}
-    , _image_list :: !(Attr Text)
-      {- ^ (Required) - The name of the image list to lookup. -}
     , _machine_images :: !(Attr Text)
       {- ^ (Required) An array of machine images. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Image List. -}
     , _version :: !(Attr Text)
       {- ^ (Required) The unique version of the image list entry, as an integer. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeImageListEntryResource
     = '[ '("uri", Text)
@@ -100,7 +96,7 @@ data ComputeImageListResource = ComputeImageListResource
       {- ^ (Required) A description of the Image List. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Image List. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_image_list"
@@ -119,6 +115,8 @@ resources as an extra safety measure.
 data ComputeInstanceResource = ComputeInstanceResource
     { _boot_order :: !(Attr Text)
       {- ^ (Optional) The index number of the bootable storage volume, presented as a list, that should be used to boot the instance. The only valid value is @[1]@ . If you set this attribute, you must also specify a bootable storage volume with index number 1 in the volume sub-parameter of storage_attachments. When you specify boot_order, you don't need to specify the imagelist attribute, because the instance is booted using the image on the specified bootable storage volume. If you specify both boot_order and imagelist, the imagelist attribute is ignored. -}
+    , _desired_state :: !(Attr Text)
+      {- ^ (Optional) Set the desire state of the instance to @running@ (default) or @shutdown@ . You can use this request to shut down and restart individual instances which use a persistent bootable storage volume. -}
     , _hostname :: !(Attr Text)
       {- ^ (Optional) The host name assigned to the instance. On an Oracle Linux instance, this host name is displayed in response to the hostname command. Only relative DNS is supported. The domain name is suffixed to the host name that you specify. The host name must not end with a period. If you don't specify a host name, then a name is generated automatically. -}
     , _image_list :: !(Attr Text)
@@ -141,7 +139,7 @@ data ComputeInstanceResource = ComputeInstanceResource
       {- ^ (Optional) Information pertaining to an individual storage attachment to be created during instance creation. Please see <#storage-attachments> below for more information. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of strings that should be supplied to the instance as tags. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_instance"
@@ -165,7 +163,7 @@ data ComputeIpAddressAssociationResource = ComputeIpAddressAssociationResource
       {- ^ (Optional) List of tags that may be applied to the ip address association. -}
     , _vnic :: !(Attr Text)
       {- ^ (Optional) The name of the virtual NIC associated with this NAT IP reservation. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_ip_address_association"
@@ -186,7 +184,7 @@ data ComputeIpAddressPrefixSetResource = ComputeIpAddressPrefixSetResource
       {- ^ (Optional) List of CIDR IPv4 prefixes assigned in the virtual network. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the ip address prefix set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_ip_address_prefix_set"
@@ -207,7 +205,7 @@ data ComputeIpAddressReservationResource = ComputeIpAddressReservationResource
       {- ^ (Required) The name of the ip address reservation. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the IP address reservation. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_ip_address_reservation"
@@ -225,7 +223,7 @@ data ComputeIpAssociationResource = ComputeIpAssociationResource
       {- ^ (Required) The pool from which to take an IP address. To associate a specific reserved IP address, use the prefix @ipreservation:@ followed by the name of the IP reservation. To allocate an IP address from a pool, use the prefix @ippool:@ , e.g. @ippool:/oracle/public/ippool@ . -}
     , _vcable :: !(Attr Text)
       {- ^ (Required) The vcable of the instance to associate the IP address with. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeIpAssociationResource
     = '[ '("name", Text)
@@ -249,7 +247,7 @@ data ComputeIpNetworkExchangeResource = ComputeIpNetworkExchangeResource
       {- ^ (Required) The name of the ip network exchange. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the IP network exchange. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_ip_network_exchange"
@@ -271,7 +269,7 @@ data ComputeIpNetworkResource = ComputeIpNetworkResource
       {- ^ (Required) The name of the IP Network. Changing this name forces a new resource to be created. -}
     , _public_napt_enabled :: !(Attr Text)
       {- ^ (Optional) If true, enable public internet access using NAPT for VNICs without any public IP Reservation. Defaults to @false@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeIpNetworkResource
     = '[ '("description", Text)
@@ -307,7 +305,7 @@ data ComputeIpReservationResource = ComputeIpReservationResource
       {- ^ (Required) Whether the IP address remains reserved even when it is no longer associated with an instance (if true), or may be returned to the pool and replaced with a different IP address when an instance is restarted, or deleted and recreated (if false). -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the IP reservation. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_ip_reservation"
@@ -330,7 +328,7 @@ data ComputeRouteResource = ComputeRouteResource
       {- ^ (Required) The name of the route. -}
     , _next_hop_vnic_set :: !(Attr Text)
       {- ^ (Required) Name of the virtual NIC set to route matching packets to. Routed flows are load-balanced among all the virtual NICs in the virtual NIC set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeRouteResource
     = '[ '("admin_distance", Text)
@@ -372,7 +370,7 @@ data ComputeSecRuleResource = ComputeSecRuleResource
       {- ^ (Required) The unique (within the identity domain) name of the security rule. -}
     , _source_list :: !(Attr Text)
       {- ^ (Required) The source security list (prefixed with @seclist:@ ), or security IP list (prefixed with @seciplist:@ ). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_sec_rule"
@@ -395,7 +393,7 @@ data ComputeSecurityApplicationResource = ComputeSecurityApplicationResource
       {- ^ (Required) The unique (within the identity domain) name of the application -}
     , _protocol :: !(Attr Text)
       {- ^ (Required) The protocol to enable for this application. Must be one of @tcp@ , @udp@ , @ah@ , @esp@ , @icmp@ , @icmpv6@ , @igmp@ , @ipip@ , @gre@ , @mplsip@ , @ospf@ , @pim@ , @rdp@ , @sctp@ or @all@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_security_application"
@@ -415,7 +413,7 @@ data ComputeSecurityAssociationResource = ComputeSecurityAssociationResource
       {- ^ (Required) The name of the security list to associate the instance to. -}
     , _vcable :: !(Attr Text)
       {- ^ (Required) The @vcable@ of the instance to associate to the security list. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_security_association"
@@ -434,7 +432,7 @@ data ComputeSecurityIpListResource = ComputeSecurityIpListResource
       {- ^ (Required) The IP addresses to include in the list. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The unique (within the identity domain) name of the security IP list. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_security_ip_list"
@@ -453,7 +451,7 @@ data ComputeSecurityListResource = ComputeSecurityListResource
       {- ^ (Required) The policy for outbound traffic from the security list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The policy to apply to instances associated with this list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_security_list"
@@ -478,7 +476,7 @@ data ComputeSecurityProtocolResource = ComputeSecurityProtocolResource
       {- ^ (Optional) Enter a list of port numbers or port range strings. Traffic is enabled by a security rule when a packet's source port matches the ports specified here. For TCP, SCTP, and UDP, each port is a source transport port, between 0 and 65535, inclusive. For ICMP, each port is an ICMP type, between 0 and 255, inclusive. If no source ports are specified, all source ports or ICMP types are allowed. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the security protocol. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_security_protocol"
@@ -513,7 +511,7 @@ data ComputeSecurityRuleResource = ComputeSecurityRuleResource
       {- ^ (Optional) Name of virtual NIC set containing the packet's source virtual NIC. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the security rule. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeSecurityRuleResource
     = '[ '("uri", Text)
@@ -537,7 +535,7 @@ data ComputeSshKeyResource = ComputeSshKeyResource
       {- ^ (Required) The SSH key itself -}
     , _name :: !(Attr Text)
       {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_ssh_key"
@@ -576,7 +574,7 @@ data ComputeStorageVolumeResource = ComputeStorageVolumeResource
       {- ^ (Optional) - The Type of Storage to provision. Defaults to @/oracle/public/storage/default@ . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeStorageVolumeResource
     = '[ '("hypervisor", Text)
@@ -620,19 +618,13 @@ data ComputeStorageVolumeSnapshotResource = ComputeStorageVolumeSnapshotResource
       {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
     , _volume_name :: !(Attr Text)
       {- ^ (Required) The name of the storage volume to create the snapshot from. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeStorageVolumeSnapshotResource
     = '[ '("account", Text)
          {- - Account to use for snapshots. -}
-      , '("collocated", Text)
-         {- - Boolean specifying whether the snapshot is collocated or remote. -}
-      , '("description", Text)
-         {- - The description of the storage volume snapshot. -}
       , '("machine_image_name", Text)
          {- - The name of the machine image that's used in the boot volume from which this snapshot is taken. -}
-      , '("parent_volume_bootable", Text)
-         {- - Boolean specifying whether or not the snapshot's parent volume was bootable. -}
       , '("platform", Text)
          {- - The OS platform this snapshot is compatible with -}
       , '("property", Text)
@@ -651,12 +643,8 @@ type instance Computed ComputeStorageVolumeSnapshotResource
          {- - Details about the latest state of the storage volume snapshot. -}
       , '("status_timestamp", Text)
          {- - Indicates the time that the current view of the storage volume snapshot was generated. -}
-      , '("tags", Text)
-         {- - Comma-separated strings that tag the storage volume. -}
       , '("uri", Text)
          {- - Uniform Resource Identifier -}
-      , '("volume_name", Text)
-         {- - The name of the storage volume that the snapshot was created from -}
        ]
 
 $(TH.makeResource
@@ -680,7 +668,7 @@ data ComputeVnicSetResource = ComputeVnicSetResource
       {- ^ (Optional) A list of tags to apply to the storage volume. -}
     , _virtual_nics :: !(Attr Text)
       {- ^ (Optional) List of virtual NICs associated with this virtual NIC set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_compute_vnic_set"
@@ -715,7 +703,7 @@ data DatabaseServiceInstanceResource = DatabaseServiceInstanceResource
       {- ^ (Required) Oracle Database software version; one of: @12.2.0.1@ , @12.1.0.2@ , or @11.2.0.4@ . -}
     , _vm_public_key :: !(Attr Text)
       {- ^ (Required) Public key for the secure shell (SSH). This key will be used for authentication when connecting to the Database Cloud Service instance using an SSH client. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_database_service_instance"
@@ -743,7 +731,7 @@ data StorageContainerResource = StorageContainerResource
       {- ^ (Optional) The secondary secret key value for temporary URLs. -}
     , _write_acls :: !(Attr Text)
       {- ^ (Optional) The list of ACLs that grant write access. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "opc_storage_container"
@@ -761,7 +749,7 @@ data StorageObjectResource = StorageObjectResource
       {- ^ (Required) The name of the Storage Container in which to place the object. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Storage Object. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageObjectResource
     = '[ '("accept_ranges", Text)

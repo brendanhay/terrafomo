@@ -51,7 +51,7 @@ data ApikeyResource = ApikeyResource
       {- ^ (Optional) The allowed permissions of the apikey. Permissions documented below. -}
     , _teams :: !(Attr Text)
       {- ^ (Required) The teams that the apikey belongs to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_apikey"
@@ -70,7 +70,7 @@ data DatafeedResource = DatafeedResource
       {- ^ (Required) The free form name of the data feed. -}
     , _source_id :: !(Attr Text)
       {- ^ (Required) The data source id that this feed is connected to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_datafeed"
@@ -89,7 +89,7 @@ data DatasourceResource = DatasourceResource
       {- ^ (Required) The free form name of the data source. -}
     , _sourcetype :: !(Attr Text)
       {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_datasource"
@@ -132,7 +132,7 @@ data MonitoringjobResource = MonitoringjobResource
       {- ^ (Required) The list of region codes in which to run the monitoring job. -}
     , _rules :: !(Attr Text)
       {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_monitoringjob"
@@ -149,7 +149,7 @@ data NotifylistResource = NotifylistResource
       {- ^ (Required) The free-form display name for the notify list. -}
     , _notifications :: !(Attr Text)
       {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_notifylist"
@@ -178,7 +178,7 @@ data RecordResource = RecordResource
       {- ^ (Optional) Whether to use EDNS client subnet data when available(in filter chain). -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone the record belongs to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_record"
@@ -195,7 +195,7 @@ data TeamResource = TeamResource
       {- ^ (Required) The free form name of the team. -}
     , _permissions :: !(Attr Text)
       {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_team"
@@ -221,7 +221,7 @@ data UserResource = UserResource
       {- ^ (Required) The teams that the user belongs to. -}
     , _username :: !(Attr Text)
       {- ^ (Required) The users login name. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_user"
@@ -250,7 +250,7 @@ data ZoneResource = ZoneResource
       {- ^ (Optional) The SOA TTL. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain name of the zone. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "ns1_zone"

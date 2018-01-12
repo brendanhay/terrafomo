@@ -1,0 +1,110 @@
+_name: packet_device
+arguments:
+  _public_ipv4_subnet_size:
+    required: true
+    help: (Optional) - Size of allocated subnet, more information is in the <https://help.packet.net/technical/networking/custom-subnet-size>
+      doc.
+    type: Text
+  _always_pxe:
+    required: true
+    help: (Optional) - If true, a device with OS @custom_ipxe@ will continue to boot
+      via iPXE on reboots.
+    type: Text
+  _project_id:
+    required: true
+    help: (Required) The id of the project in which to create the device
+    type: Text
+  _billing_cycle:
+    required: true
+    help: (Required) monthly or hourly
+    type: Text
+  _user_data:
+    required: true
+    help: (Optional) - A string of the desired User Data for the device.
+    type: Text
+  _hardware_reservation_id:
+    required: true
+    help: (Optional) - The id of hardware reservation where you want this device deployed,
+      or @next-available@ if you want to pick your next available reservation automatically.
+    type: Text
+  _plan:
+    required: true
+    help: (Required) The hardware config slug
+    type: Text
+  _ipxe_script_url:
+    required: true
+    help: (Optional) - URL pointing to a hosted iPXE script. More information is in
+      the <https://help.packet.net/technical/infrastructure/custom-ipxe> doc.
+    type: Text
+  _facility:
+    required: true
+    help: (Required) The facility in which to create the device
+    type: Text
+  _operating_system:
+    required: true
+    help: (Required) The operating system slug
+    type: Text
+  _hostname:
+    required: true
+    help: (Required) The device name
+    type: Text
+attributes:
+  billing_cycle:
+    help: ! '- The billing cycle of the device (monthly or hourly)'
+    type: Text
+  operating_system:
+    help: ! '- The operating system running on the device'
+    type: Text
+  state:
+    help: ! '- The status of the device'
+    type: Text
+  hostname:
+    help: ! '- The hostname of the device'
+    type: Text
+  access_private_ipv4:
+    help: ! '- The ipv4 private IP assigned to the device'
+    type: Text
+  locked:
+    help: ! '- Whether the device is locked'
+    type: Text
+  facility:
+    help: ! '- The facility the device is in'
+    type: Text
+  created:
+    help: ! '- The timestamp for when the device was created'
+    type: Text
+  plan:
+    help: ! '- The hardware config of the device'
+    type: Text
+  network:
+    help: ! '- The device''s private and public IP (v4 and v6) network details'
+    type: Text
+  root_password:
+    help: ! '- Root password to the server (disabled after 24 hours)'
+    type: Text
+  access_public_ipv6:
+    help: ! '- The ipv6 maintenance IP assigned to the device'
+    type: Text
+  project_id:
+    help: ! '- The ID of the project the device belongs to'
+    type: Text
+  id:
+    help: ! '- The ID of the device'
+    type: Text
+  updated:
+    help: ! '- The timestamp for the last time the device was updated'
+    type: Text
+  hardware_reservation_id:
+    help: ! '- The id of hardware reservation which this device occupies'
+    type: Text
+  access_public_ipv4:
+    help: ! '- The ipv4 maintenance IP assigned to the device'
+    type: Text
+  tags:
+    help: ! '- Tags attached to the device'
+    type: Text
+about: ! 'Provides a Packet device resource. This can be used to create, modify, and
+  delete devices. ~> Note: All arguments including the root_password and user_data
+  will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .'
+examples: []

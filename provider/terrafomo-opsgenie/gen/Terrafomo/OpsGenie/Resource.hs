@@ -48,7 +48,7 @@ data TeamResource = TeamResource
       {- ^ (Optional) A Member block as documented below. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TeamResource
     = '[ '("id", Text)
@@ -75,15 +75,11 @@ data UserResource = UserResource
       {- ^ (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids> for available timezones - Defaults to "America/New_York". -}
     , _username :: !(Attr Text)
       {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserResource
-    = '[ '("full_name", Text)
-         {- - The full name of the found user. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The ID of the OpsGenie User. -}
-      , '("role", Text)
-         {- - The role of the found user. -}
        ]
 
 $(TH.makeResource

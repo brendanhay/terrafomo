@@ -1,0 +1,12 @@
+_name: aws_simpledb_domain
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the SimpleDB domain
+    type: Text
+attributes:
+  id:
+    help: ! '- The name of the SimpleDB domain'
+    type: Text
+about: Provides a SimpleDB domain resource
+examples: []

@@ -1,0 +1,20 @@
+_name: aws_ecr_repository
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the ECR Repository.
+    type: Text
+attributes:
+  registry_id:
+    help: ! '- The registry ID where the repository was created.'
+    type: Text
+  arn:
+    help: ! '- Full ARN of the repository.'
+    type: Text
+  repository_url:
+    help: ! '- The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@
+      ).'
+    type: Text
+about: The ECR Repository data source allows the ARN, Repository URI and Registry
+  ID to be retrieved for an ECR repository.
+examples: []

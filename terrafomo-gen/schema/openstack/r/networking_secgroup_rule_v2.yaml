@@ -1,0 +1,93 @@
+_name: openstack_networking_secgroup_rule_v2
+arguments:
+  _region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 networking client. A networking
+      client is needed to create a port. If omitted, the @region@ argument of the
+      provider is used. Changing this creates a new security group rule.
+    type: Text
+  _direction:
+    required: true
+    help: (Required) The direction of the rule, valid values are ingress or egress
+      . Changing this creates a new security group rule.
+    type: Text
+  _port_range_min:
+    required: false
+    help: (Optional) The lower part of the allowed port range, valid integer value
+      needs to be between 1 and 65535. Changing this creates a new security group
+      rule.
+    type: Text
+  _security_group_id:
+    required: true
+    help: (Required) The security group id the rule should belong to, the value needs
+      to be an Openstack ID of a security group in the same tenant. Changing this
+      creates a new security group rule.
+    type: Text
+  _remote_group_id:
+    required: false
+    help: (Optional) The remote group id, the value needs to be an Openstack ID of
+      a security group in the same tenant. Changing this creates a new security group
+      rule.
+    type: Text
+  _protocol:
+    required: false
+    help: (Optional) The layer 4 protocol type, valid values are following. Changing
+      this creates a new security group rule. This is required if you want to specify
+      a port range.
+    type: Text
+  _remote_ip_prefix:
+    required: false
+    help: (Optional) The remote CIDR, the value needs to be a valid CIDR (i.e. 192.168.0.0/16).
+      Changing this creates a new security group rule.
+    type: Text
+  _port_range_max:
+    required: false
+    help: (Optional) The higher part of the allowed port range, valid integer value
+      needs to be between 1 and 65535. Changing this creates a new security group
+      rule.
+    type: Text
+  _ethertype:
+    required: true
+    help: (Required) The layer 3 protocol type, valid values are IPv4 or IPv6 . Changing
+      this creates a new security group rule.
+    type: Text
+  _tenant_id:
+    required: false
+    help: (Optional) The owner of the security group. Required if admin wants to create
+      a port for another tenant. Changing this creates a new security group rule.
+    type: Text
+attributes:
+  security_group_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  port_range_max:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  remote_ip_prefix:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  direction:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  ethertype:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  protocol:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  tenant_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  port_range_min:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  region:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  remote_group_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+about: Manages a V2 neutron security group rule resource within OpenStack. Unlike
+  Nova security groups, neutron separates the group from the rules and also allows
+  an admin to target a specific tenant_id.
+examples: []

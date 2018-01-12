@@ -51,7 +51,7 @@ data AlertNotificationResource = AlertNotificationResource
       {- ^ (Optional) Additional settings, for full reference lookup <http://docs.grafana.org/http_api/alerting> . -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of the alert notification channel. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AlertNotificationResource
     = '[ '("id", Text)
@@ -70,7 +70,7 @@ The dashboard resource allows a dashboard to be created on a Grafana server.
 data DashboardResource = DashboardResource
     { _config_json :: !(Attr Text)
       {- ^ (Required) The JSON configuration for the dashboard. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DashboardResource
     = '[ '("slug", Text)
@@ -114,7 +114,7 @@ data DataSourceResource = DataSourceResource
       {- ^ (Required) The URL for the data source. The type of URL required varies depending on the chosen data source type. -}
     , _username :: !(Attr Text)
       {- ^ (Required by some data source types) The username to use to authenticate to the data source. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DataSourceResource
     = '[ '("id", Text)

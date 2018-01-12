@@ -47,7 +47,7 @@ data RegionDataSource = RegionDataSource
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     , _region :: !(Attr Text)
       {- ^ (Required) The name of the region associated with the public cloud project. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegionDataSource
     = '[ '("continentCode", Text)
@@ -74,7 +74,7 @@ Use this data source to get the regions of a public cloud project.
 data RegionsDataSource = RegionsDataSource
     { _project_id :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegionsDataSource
     = '[ '("names", Text)

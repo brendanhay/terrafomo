@@ -1,0 +1,13 @@
+_name: aws_iam_role_policy_attachment
+arguments:
+  _policy_arn:
+    required: true
+    help: (Required) - The ARN of the policy you want to apply
+    type: Text
+  _role:
+    required: true
+    help: (Required) - The role the policy should be applied to
+    type: Text
+attributes: {}
+about: Attaches a Managed IAM Policy to an IAM role
+examples: []

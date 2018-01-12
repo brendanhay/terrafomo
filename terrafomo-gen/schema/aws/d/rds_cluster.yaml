@@ -1,0 +1,9 @@
+_name: aws_elb
+arguments:
+  _cluster_identifier:
+    required: true
+    help: (Required) The cluster identifier of the RDS cluster.
+    type: Text
+attributes: {}
+about: Provides information about a RDS cluster.
+examples: []

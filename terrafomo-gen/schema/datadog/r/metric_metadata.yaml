@@ -1,0 +1,30 @@
+_name: datadog_metric_metadata
+arguments:
+  _short_name:
+    required: false
+    help: (Optional) A short name of the metric.
+    type: Text
+  _metric:
+    required: true
+    help: (Required) The name of the metric.
+    type: Text
+  _per_unit:
+    required: false
+    help: (Optional) 'Per' unit of the metric such as 'second' in 'bytes per second'.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description of the metric.
+    type: Text
+  _statsd_interval:
+    required: false
+    help: (Optional) If applicable, stasd flush interval in seconds for the metric.
+    type: Text
+  _unit:
+    required: false
+    help: (Optional) Primary unit of the metric such as 'byte' or 'operation'.
+    type: Text
+attributes: {}
+about: Provides a Datadog metric_metadata resource. This can be used to manage a metric's
+  metadata.
+examples: []

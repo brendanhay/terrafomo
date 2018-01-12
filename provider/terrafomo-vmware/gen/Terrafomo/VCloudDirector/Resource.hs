@@ -52,7 +52,7 @@ data DnatResource = DnatResource
       {- ^ (Required) The IP of the VM to map to -}
     , _port :: !(Attr Text)
       {- ^ (Required) The port number to map -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_dnat"
@@ -89,7 +89,7 @@ data EdgegatewayVpnResource = EdgegatewayVpnResource
       {- ^ (Required) - List of Peer Subnets see <#peersubnets> below for details. -}
     , _shared_secret :: !(Attr Text)
       {- ^ (Required) - Shared Secret -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_edgegateway_vpn"
@@ -108,7 +108,7 @@ data FirewallRulesResource = FirewallRulesResource
       {- ^ (Required) The name of the edge gateway on which to apply the Firewall Rules -}
     , _rule :: !(Attr Text)
       {- ^ (Optional) Configures a firewall rule; see <#rules> below for details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_firewall_rules"
@@ -141,7 +141,7 @@ data NetworkResource = NetworkResource
       {- ^ (Optional) Defines if this network is shared between multiple vDCs in the vOrg.  Defaults to @false@ . -}
     , _static_ip_pool :: !(Attr Text)
       {- ^ (Optional) A range of IPs permitted to be used as static IPs for virtual machines; see <#ip-pools> below for details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_network"
@@ -160,7 +160,7 @@ data SnatResource = SnatResource
       {- ^ (Required) One of the external IPs available on your Edge Gateway -}
     , _internal_ip :: !(Attr Text)
       {- ^ (Required) The IP or IP Range of the VM(s) to map from -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_snat"
@@ -197,7 +197,7 @@ data VappResource = VappResource
       {- ^ (Optional) A boolean value stating if this vApp should be powered on. Default to @true@ -}
     , _template_name :: !(Attr Text)
       {- ^ (Optional) The name of the vApp Template to use -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_vapp"
@@ -231,7 +231,7 @@ data VappVmResource = VappVmResource
       {- ^ (Required) The name of the vApp Template to use -}
     , _vapp_name :: !(Attr Text)
       {- ^ (Required) The vApp this VM should belong to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vcd_vapp_vm"

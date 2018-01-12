@@ -37,6 +37,29 @@ import qualified Terrafomo.Syntax.Provider as Qual
 import qualified Terrafomo.Heroku as Qual
 import qualified Terrafomo.Syntax.TH as TH
 
+{- | The @heroku_addon_attachment@ Heroku resource.
+
+Attaches a Heroku Addon Resource to an additional Heroku App.
+-}
+data AddonAttachmentResource = AddonAttachmentResource
+    { _addon_id :: !(Attr Text)
+      {- ^ (Required) The ID of the existing Heroku Addon to attach. -}
+    , _app_id :: !(Attr Text)
+      {- ^ (Required) The ID of the Heroku App to attach to. -}
+    , _name :: !(Attr Text)
+      {- ^ (Optional) A friendly name for the Heroku Addon Attachment. -}
+    } deriving (Show, Generic)
+
+type instance Computed AddonAttachmentResource
+    = '[ '("id", Text)
+         {- - The unique ID of the add-on attachment -}
+       ]
+
+$(TH.makeResource
+    "heroku_addon_attachment"
+    ''Qual.Heroku
+    ''AddonAttachmentResource)
+
 {- | The @heroku_addon@ Heroku resource.
 
 Provides a Heroku Add-On resource. These can be attach services to a Heroku
@@ -49,7 +72,7 @@ data AddonResource = AddonResource
       {- ^ (Optional) Optional plan configuration. -}
     , _plan :: !(Attr Text)
       {- ^ (Required) The addon to add. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AddonResource
     = '[ '("config_vars", Text)
@@ -81,7 +104,7 @@ data AppFeatureResource = AppFeatureResource
       {- ^ (Optional) Whether to enable or disable the App Feature. The default value is true. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the App Feature to manage. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "heroku_app_feature"
@@ -108,7 +131,7 @@ data AppResource = AppResource
       {- ^ (Optional) The name of a private space to create the app in. -}
     , _stack :: !(Attr Text)
       {- ^ (Optional) The application stack is what platform to run the application in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AppResource
     = '[ '("all_config_vars", Text)
@@ -148,7 +171,7 @@ data CertResource = CertResource
       {- ^ (Required) The certificate chain to add -}
     , _private_key :: !(Attr Text)
       {- ^ (Required) The private key for a given certificate chain -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CertResource
     = '[ '("cname", Text)
@@ -174,7 +197,7 @@ data DomainResource = DomainResource
       {- ^ (Required) The Heroku app to link to. -}
     , _hostname :: !(Attr Text)
       {- ^ (Required) The hostname to serve requests from. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DomainResource
     = '[ '("cname", Text)
@@ -200,7 +223,7 @@ data DrainResource = DrainResource
       {- ^ (Required) The Heroku app to link to. -}
     , _url :: !(Attr Text)
       {- ^ (Required) The URL for Heroku to drain your logs to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DrainResource
     = '[ '("token", Text)
@@ -227,7 +250,7 @@ data PipelineCouplingResource = PipelineCouplingResource
       {- ^ (Required) The ID of the pipeline to add this app to. -}
     , _stage :: !(Attr Text)
       {- ^ (Required) The stage to couple this app to. Must be one of @review@ , @development@ , @staging@ , or @production@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PipelineCouplingResource
     = '[ '("app", Text)
@@ -257,7 +280,7 @@ pipeline is created, and apps are added to different stages using
 data PipelineResource = PipelineResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the pipeline. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PipelineResource
     = '[ '("id", Text)
@@ -283,7 +306,7 @@ data SpaceResource = SpaceResource
       {- ^ (Required) The name of the organization which will own the space. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region that the space should be created in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SpaceResource
     = '[ '("id", Text)

@@ -1,0 +1,35 @@
+_name: ignition_link
+arguments:
+  _uid:
+    required: false
+    help: (Optional) The user ID of the owner.
+    type: Text
+  _hard:
+    required: false
+    help: (Optional) A symbolic link is created if this is false, a hard one if this
+      is true.
+    type: Text
+  _filesystem:
+    required: true
+    help: (Required) The internal identifier of the filesystem. This matches the last
+      filesystem with the given identifier. This should be a valid name from a ignition_filesystem
+      resource.
+    type: Text
+  _path:
+    required: true
+    help: (Required) The absolute path to the link.
+    type: Text
+  _gid:
+    required: false
+    help: (Optional) The group ID of the owner.
+    type: Text
+  _target:
+    required: true
+    help: (Required) The target path of the link.
+    type: Text
+attributes:
+  id:
+    help: ! '- ID used to reference this resource in ignition_config .'
+    type: Text
+about: Describes a link to be created in a particular filesystem.
+examples: []

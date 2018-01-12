@@ -1,0 +1,33 @@
+_name: opc_storage_object
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the Storage Object.
+    type: Text
+  _container:
+    required: true
+    help: (Required) The name of the Storage Container in which to place the object.
+    type: Text
+attributes:
+  last_modified:
+    help: ! '- Date and time that the object was created/modified in ISO 8601.'
+    type: Text
+  content_length:
+    help: ! '- Length of the Storage Object in bytes.'
+    type: Text
+  object_manifest:
+    help: ! '- The dynamic large-object manifest object.'
+    type: Text
+  accept_ranges:
+    help: ! '- Type of ranges that the object accepts.'
+    type: Text
+  transaction_id:
+    help: ! '- Transaction ID of the request. Used for bug reports.'
+    type: Text
+  timestamp:
+    help: ! '- Date and Time in UNIX EPOCH when the account, container, or object
+      was initially created at the current version.'
+    type: Text
+about: Creates and manages a Container in the OPC Storage Domain. @storage_endpoint@
+  must be set in the provider or environment to manage these resources.
+examples: []

@@ -1,0 +1,26 @@
+_name: consul_keys
+arguments:
+  _token:
+    required: false
+    help: (Optional) The ACL token to use. This overrides the token that the agent
+      provides by default.
+    type: Text
+  _datacenter:
+    required: false
+    help: (Optional) The datacenter to use. This overrides the datacenter in the provider
+      setup and the agent's default datacenter.
+    type: Text
+  _key:
+    required: true
+    help: (Required) Specifies a key in Consul to be written. Supported values documented
+      below.
+    type: Text
+attributes: {}
+about: The @consul_keys@ resource writes sets of individual values into Consul. This
+  is a powerful way to expose infrastructure details to clients. This resource manages
+  individual keys, and thus it can create, update and delete the keys explicitly given.
+  However, it is not able to detect and remove additional keys that have been added
+  by non-Terraform means. To manage all keys sharing a common prefix, and thus have
+  Terraform remove errant keys not present in the configuration, consider using the
+  @consul_key_prefix@ resource instead.
+examples: []

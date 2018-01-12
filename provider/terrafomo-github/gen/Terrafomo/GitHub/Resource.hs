@@ -58,7 +58,7 @@ data BranchProtectionResource = BranchProtectionResource
       {- ^ (Optional) Enforce restrictions for required status checks. See <#required-status-checks> below for details. -}
     , _restrictions :: !(Attr Text)
       {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_branch_protection"
@@ -85,7 +85,7 @@ data IssueLabelResource = IssueLabelResource
       {- ^ (Required) The GitHub repository -}
     , _url :: !(Attr Text)
       {- ^ - (Computed) The URL to the issue label -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_issue_label"
@@ -104,7 +104,7 @@ data MembershipResource = MembershipResource
       {- ^ (Optional) The role of the user within the organization. Must be one of @member@ or @admin@ . Defaults to @member@ . -}
     , _username :: !(Attr Text)
       {- ^ (Required) The user to add to the organization. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_membership"
@@ -125,7 +125,7 @@ data OrganizationWebhookResource = OrganizationWebhookResource
       {- ^ (Required) A list of events which should trigger the webhook. Defaults to @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/> -}
     , _name :: !(Attr Text)
       {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OrganizationWebhookResource
     = '[ '("url", Text)
@@ -156,7 +156,7 @@ data RepositoryCollaboratorResource = RepositoryCollaboratorResource
       {- ^ (Required) The GitHub repository -}
     , _username :: !(Attr Text)
       {- ^ (Required) The user to add to the repository as a collaborator. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_repository_collaborator"
@@ -180,7 +180,7 @@ data RepositoryDeployKeyResource = RepositoryDeployKeyResource
       {- ^ (Required) Name of the Github repository. -}
     , _title :: !(Attr Text)
       {- ^ (Required) A title. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_repository_deploy_key"
@@ -222,7 +222,7 @@ data RepositoryResource = RepositoryResource
       {- ^ (Required) The name of the repository. -}
     , _private :: !(Attr Text)
       {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RepositoryResource
     = '[ '("full_name", Text)
@@ -259,7 +259,7 @@ data RepositoryWebhookResource = RepositoryWebhookResource
       {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
     , _repository :: !(Attr Text)
       {- ^ (Required) The repository of the webhook. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RepositoryWebhookResource
     = '[ '("url", Text)
@@ -286,7 +286,7 @@ data TeamMembershipResource = TeamMembershipResource
       {- ^ (Required) The GitHub team id -}
     , _username :: !(Attr Text)
       {- ^ (Required) The user to add to the team. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_team_membership"
@@ -308,7 +308,7 @@ data TeamRepositoryResource = TeamRepositoryResource
       {- ^ (Required) The repository to add to the team. -}
     , _team_id :: !(Attr Text)
       {- ^ (Required) The GitHub team id -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "github_team_repository"
@@ -330,23 +330,11 @@ data TeamResource = TeamResource
       {- ^ (Required) The name of the team. -}
     , _privacy :: !(Attr Text)
       {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
-    , _slug :: !(Attr Text)
-      {- ^ (Required) The team slug. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TeamResource
-    = '[ '("description", Text)
-         {- - the team's description. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The ID of the created team. -}
-      , '("members", Text)
-         {- - List of team members -}
-      , '("name", Text)
-         {- - the team's full name. -}
-      , '("permission", Text)
-         {- - the team's permission level. -}
-      , '("privacy", Text)
-         {- - the team's privacy type. -}
        ]
 
 $(TH.makeResource

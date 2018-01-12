@@ -1,0 +1,17 @@
+_name: profitbricks_datacenter
+arguments:
+  _name:
+    required: true
+    help: (Required)[string] The name of the Virtual Data Center.
+    type: Text
+  _description:
+    required: false
+    help: (Optional)[string] Description for the data center.
+    type: Text
+  _location:
+    required: true
+    help: (Required)[string] The physical location where the data center will be created.
+    type: Text
+attributes: {}
+about: Manages a Virtual Data Center on ProfitBricks
+examples: []

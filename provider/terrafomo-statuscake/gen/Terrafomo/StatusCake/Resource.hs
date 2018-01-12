@@ -62,7 +62,7 @@ data TestResource = TestResource
       {- ^ (Required) This is the name of the test and the website to be monitored. -}
     , _website_url :: !(Attr Text)
       {- ^ (Required) The URL of the website to be monitored -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TestResource
     = '[ '("test_id", Text)

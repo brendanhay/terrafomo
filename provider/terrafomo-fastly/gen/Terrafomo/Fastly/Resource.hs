@@ -88,7 +88,7 @@ data ServiceV1Resource = ServiceV1Resource
       {- ^ (Optional) A syslog endpoint to send streaming logs too. Defined below. -}
     , _vcl :: !(Attr Text)
       {- ^ (Optional) A set of custom VCL configuration blocks. The ability to upload custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl> for details). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceV1Resource
     = '[ '("active_version", Text)

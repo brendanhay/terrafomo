@@ -57,7 +57,7 @@ data AlertResource = AlertResource
       {- ^ - minimum amount of time between sending alert notifications, in seconds. -}
     , _services :: !(Attr Text)
       {- ^ - list of notification service IDs. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AlertResource
     = '[ '("active", Text)
@@ -101,7 +101,7 @@ data MetricResource = MetricResource
       {- ^ - Number of seconds that is the standard reporting period of the metric. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of metric to create (gauge, counter, or composite). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MetricResource
     = '[ '("composite", Text)
@@ -137,7 +137,7 @@ data ServiceResource = ServiceResource
       {- ^ (Required) The alert title. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of notificaion. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceResource
     = '[ '("id", Text)
@@ -177,7 +177,7 @@ data SpaceChartResource = SpaceChartResource
       {- ^ (Optional) Nested block describing a metric to use for data in the chart. The structure of this block is described below. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) Indicates the type of chart. Must be one of line or stacked (default to line). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SpaceChartResource
     = '[ '("id", Text)
@@ -201,7 +201,7 @@ spaces on Librato.
 data SpaceResource = SpaceResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the space. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SpaceResource
     = '[ '("id", Text)

@@ -1,0 +1,179 @@
+_name: cobbler_system
+arguments:
+  _monit_enabled:
+    required: false
+    help: (Optional) Configure monit on this machine at next config update.
+    type: Text
+  _profile:
+    required: true
+    help: (Required) Parent profile.
+    type: Text
+  _kernel_options_post:
+    required: false
+    help: (Optional) Kernel options (post install).
+    type: Text
+  _virt_cpus:
+    required: false
+    help: (Optional) Number of virtual CPUs in the VM.
+    type: Text
+  _virt_ram:
+    required: false
+    help: (Optional) The amount of RAM for the VM.
+    type: Text
+  _redhat_management_server:
+    required: false
+    help: (Optional) Red Hat management server.
+    type: Text
+  _gateway:
+    required: false
+    help: (Optional) Network gateway.
+    type: Text
+  _template_remote_kickstarts:
+    required: false
+    help: (Optional) template remote kickstarts.
+    type: Text
+  _redhat_management_key:
+    required: false
+    help: (Optional) Red Hat management key.
+    type: Text
+  _virt_pxe_boot:
+    required: false
+    help: (Optional) Use PXE to build this VM?
+    type: Text
+  _kickstart:
+    required: false
+    help: (Optional) Path to kickstart template.
+    type: Text
+  _ks_meta:
+    required: false
+    help: (Optional) Kickstart metadata.
+    type: Text
+  _ipv6_default_device:
+    required: false
+    help: (Optional) IPv6 default device.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the system.
+    type: Text
+  _image:
+    required: false
+    help: (Optional) Parent image (if no profile is used).
+    type: Text
+  _fetchable_files:
+    required: false
+    help: (Optional) Templates for tftp or wget.
+    type: Text
+  _kernel_options:
+    required: false
+    help: ! '(Optional) Kernel options. ex: selinux=permissive.'
+    type: Text
+  _proxy:
+    required: false
+    help: (Optional) Proxy URL.
+    type: Text
+  _power_pass:
+    required: false
+    help: (Optional) Power management password.
+    type: Text
+  _virt_type:
+    required: false
+    help: ! '(Optional) Virtualization technology to use: xenpv, xenfv, qemu, kvm,
+      vmware, openvz.'
+    type: Text
+  _power_address:
+    required: false
+    help: (Optional) Power management address.
+    type: Text
+  _mgmt_parameters:
+    required: false
+    help: (Optional) Parameters which will be handed to your management application.
+      Must be a valid YAML dictionary.
+    type: Text
+  _comment:
+    required: false
+    help: (Optional) Free form text description
+    type: Text
+  _netboot_enabled:
+    required: false
+    help: (Optional) (re)Install this machine at next boot.
+    type: Text
+  _ldap_enabled:
+    required: false
+    help: (Optional) Configure LDAP at next config update.
+    type: Text
+  _virt_path:
+    required: false
+    help: (Optional) Path to the VM.
+    type: Text
+  _virt_auto_boot:
+    required: false
+    help: (Optional) Auto boot the VM.
+    type: Text
+  _power_type:
+    required: false
+    help: (Optional) Power management type.
+    type: Text
+  _interface:
+    required: false
+    help: (Optional)
+    type: Text
+  _power_id:
+    required: false
+    help: (Optional) Usually a plug number or blade name if power type requires it.
+    type: Text
+  _virt_file_size:
+    required: false
+    help: (Optional) Virt file size.
+    type: Text
+  _template_files:
+    required: false
+    help: (Optional) File mappings for built-in configuration management.
+    type: Text
+  _virt_disk_driver:
+    required: false
+    help: (Optional) The on-disk format for the virtualization disk.
+    type: Text
+  _owners:
+    required: false
+    help: (Optional) Owners list for authz_ownership.
+    type: Text
+  _name_servers_search:
+    required: false
+    help: (Optional) Name servers search path.
+    type: Text
+  _hostname:
+    required: false
+    help: (Optional) Hostname of the system.
+    type: Text
+  _boot_files:
+    required: false
+    help: (Optional) TFTP boot files copied into tftpboot.
+    type: Text
+  _enable_gpxe:
+    required: false
+    help: (Optional) Use gPXE instead of PXELINUX.
+    type: Text
+  _status:
+    required: false
+    help: (Optional) System status (development, testing, acceptance, production).
+    type: Text
+  _mgmt_classes:
+    required: false
+    help: (Optional) Management classes for external config management.
+    type: Text
+  _power_user:
+    required: false
+    help: (Optional) Power management user.
+    type: Text
+  _name_servers:
+    required: false
+    help: (Optional) Name servers.
+    type: Text
+  _ldap_type:
+    required: false
+    help: (Optional) LDAP management type.
+    type: Text
+attributes: {}
+about: Manages a System within Cobbler.
+examples: []

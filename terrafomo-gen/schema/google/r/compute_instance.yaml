@@ -1,0 +1,129 @@
+_name: google_compute_instance
+arguments:
+  _service_account:
+    required: false
+    help: (Optional) Service account to attach to the instance. Structure is documented
+      below.
+    type: Text
+  _attached_disk:
+    required: false
+    help: (Optional) List of disks to attach to the instance. Structure is documented
+      below.
+    type: Text
+  _scheduling:
+    required: false
+    help: (Optional) The scheduling strategy to use. More details about this configuration
+      option are detailed below.
+    type: Text
+  _labels:
+    required: false
+    help: (Optional) A set of key/value label pairs to assign to the instance.
+    type: Text
+  _metadata:
+    required: false
+    help: (Optional) Metadata key/value pairs to make available from within the instance.
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _machine_type:
+    required: true
+    help: (Required) The machine type to create. To create a custom machine type,
+      value should be set as specified <https://cloud.google.com/compute/docs/reference/latest/instances#machineType>
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  _boot_disk:
+    required: true
+    help: (Required) The boot disk for the instance. Structure is documented below.
+    type: Text
+  _network_interface:
+    required: true
+    help: (Required) Networks to attach to the instance. This can be specified multiple
+      times. Structure is documented below.
+    type: Text
+  _zone:
+    required: true
+    help: (Required) The zone that the machine should be created in.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A brief description of this resource.
+    type: Text
+  _create_timeout:
+    required: false
+    help: (Optional) Configurable timeout in minutes for creating instances. Default
+      is 4 minutes. Changing this forces a new resource to be created.
+    type: Text
+  _metadata_startup_script:
+    required: false
+    help: (Optional) An alternative to using the startup-script metadata key, except
+      this one forces the instance to be recreated (thus re-running the script) if
+      it is changed. This replaces the startup-script metadata key on the created
+      instance and thus the two mechanisms are not allowed to be used simultaneously.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A list of tags to attach to the instance.
+    type: Text
+  _scratch_disk:
+    required: false
+    help: (Optional) Scratch disks to attach to the instance. This can be specified
+      multiple times for multiple scratch disks. Structure is documented below.
+    type: Text
+  _can_ip_forward:
+    required: false
+    help: (Optional) Whether to allow sending and receiving of packets with non-matching
+      source or destination IPs. This defaults to false.
+    type: Text
+attributes:
+  disk.0.disk_encryption_key_sha256:
+    help: ! '- The <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256
+      hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
+      that protects this resource.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  instance_id:
+    help: ! '- The server-assigned unique identifier of this instance.'
+    type: Text
+  boot_disk.disk_encryption_key_sha256:
+    help: ! '- The <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256
+      hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
+      that protects this resource.'
+    type: Text
+  tags_fingerprint:
+    help: ! '- The unique fingerprint of the tags.'
+    type: Text
+  cpu_platform:
+    help: ! '- The CPU platform used by this instance.'
+    type: Text
+  label_fingerprint:
+    help: ! '- The unique fingerprint of the labels.'
+    type: Text
+  network_interface.0.access_config.0.assigned_nat_ip:
+    help: ! '- If the instance has an access config, either the given external ip
+      (in the @nat_ip@ field) or the ephemeral (generated) ip (if you didn''t provide
+      one).'
+    type: Text
+  metadata_fingerprint:
+    help: ! '- The unique fingerprint of the metadata.'
+    type: Text
+  network_interface.0.address:
+    help: ! '- The internal ip address of the instance, either manually or dynamically
+      assigned.'
+    type: Text
+  attached_disk.0.disk_encryption_key_sha256:
+    help: ! '- The <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256
+      hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
+      that protects this resource.'
+    type: Text
+about: Manages a VM instance resource within GCE. For more information see <https://cloud.google.com/compute/docs/instances>
+  and <https://cloud.google.com/compute/docs/reference/latest/instances> .
+examples: []

@@ -53,7 +53,7 @@ data CertificateResource = CertificateResource
       {- ^ (Required) The name of the certificate for identification. -}
     , _private_key :: !(Attr Text)
       {- ^ (Required) The contents of a PEM-formatted private-key corresponding to the SSL certificate. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CertificateResource
     = '[ '("id", Text)
@@ -80,7 +80,7 @@ data DomainResource = DomainResource
       {- ^ (Required) The IP address of the domain. This IP is used to created an initial A record for the domain. It is required upstream by the DigitalOcean API. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the domain -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DomainResource
     = '[ '("id", Text)
@@ -125,7 +125,7 @@ data DropletResource = DropletResource
       {- ^ (Optional) - A string of the desired User Data for the Droplet. -}
     , _volume_ids :: !(Attr Text)
       {- ^ (Optional) - A list of the IDs of each </docs/providers/do/r/volume.html> to be attached to the Droplet. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DropletResource
     = '[ '("disk", Text)
@@ -189,7 +189,7 @@ data FirewallResource = FirewallResource
       {- ^ (Optional) The outbound access rule block for the Firewall. The @outbound_rule@ block is documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) - The names of the Tags assigned to the Firewall. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FirewallResource
     = '[ '("created_at", Text)
@@ -227,7 +227,7 @@ data FloatingIpResource = FloatingIpResource
       {- ^ (Optional) The ID of Droplet that the Floating IP will be assigned to. -}
     , _region :: !(Attr Text)
       {- ^ (Required) The region that the Floating IP is reserved to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FloatingIpResource
     = '[ '("ip_address", Text)
@@ -263,7 +263,7 @@ data LoadbalancerResource = LoadbalancerResource
       {- ^ (Required) The region to start in -}
     , _sticky_sessions :: !(Attr Text)
       {- ^ (Optional) A @sticky_sessions@ block to be assigned to the Load Balancer. The @sticky_sessions@ block is documented below. Only 1 sticky_sessions block is allowed. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LoadbalancerResource
     = '[ '("id", Text)
@@ -298,7 +298,7 @@ data RecordResource = RecordResource
       {- ^ (Optional) The value of the record -}
     , _weight :: !(Attr Text)
       {- ^ (Optional) The weight of the record, for SRV records. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("fqdn", Text)
@@ -323,7 +323,7 @@ data SshKeyResource = SshKeyResource
       {- ^ (Required) The name of the SSH key for identification -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SshKeyResource
     = '[ '("fingerprint", Text)
@@ -351,7 +351,7 @@ droplet configuration via their ID or name.
 data TagResource = TagResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the tag -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TagResource
     = '[ '("id", Text)
@@ -381,7 +381,7 @@ data VolumeResource = VolumeResource
       {- ^ (Required) The region that the block storage volume will be created in. -}
     , _size :: !(Attr Text)
       {- ^ (Required) The size of the block storage volume in GiB. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeResource
     = '[ '("id", Text)

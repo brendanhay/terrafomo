@@ -43,23 +43,17 @@ Creates a A type DNS record set.
 data ARecordSetResource = ARecordSetResource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv4 addresses this record set will point to. -}
-    , _host :: !(Attr Text)
-      {- ^ - (required): Host to look up -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl :: !(Attr Text)
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ARecordSetResource
     = '[ '("addresses", Text)
          {- - See Argument Reference above. -}
-      , '("addrs", Text)
-         {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Text)
-         {- - Set to @host@ . -}
       , '("name", Text)
          {- - See Argument Reference above. -}
       , '("ttl", Text)
@@ -80,23 +74,17 @@ Creates a AAAA type DNS record set.
 data AaaaRecordSetResource = AaaaRecordSetResource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv6 addresses this record set will point to. -}
-    , _host :: !(Attr Text)
-      {- ^ - (required): Host to look up -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
     , _ttl :: !(Attr Text)
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AaaaRecordSetResource
     = '[ '("addresses", Text)
          {- - See Argument Reference above. -}
-      , '("addrs", Text)
-         {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Text)
-         {- - Set to @host@ . -}
       , '("name", Text)
          {- - See Argument Reference above. -}
       , '("ttl", Text)
@@ -123,7 +111,7 @@ data CnameRecordResource = CnameRecordResource
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CnameRecordResource
     = '[ '("cname", Text)
@@ -154,7 +142,7 @@ data PtrRecordResource = PtrRecordResource
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PtrRecordResource
     = '[ '("name", Text)

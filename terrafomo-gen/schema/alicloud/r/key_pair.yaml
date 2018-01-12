@@ -1,0 +1,33 @@
+_name: alicloud_key_pair
+arguments:
+  _key_name_prefix:
+    required: true
+    help: ! '- (Force new resource) The key pair name''s prefix. It is conflict with
+      @key_name@ . If it is specified, terraform will using it to build the only key
+      name.'
+    type: Text
+  _public_key:
+    required: true
+    help: ! '- (Force new resource) You can import an existing public key and using
+      Alicloud key pair to manage it.'
+    type: Text
+  _key_file:
+    required: true
+    help: ! '- (Force new resource) The name of file to save your new key pair''s
+      private key. Strongly suggest you to specified it when you creating key pair,
+      otherwise, you wouldn''t get its private key ever.'
+    type: Text
+  _key_name:
+    required: true
+    help: ! '- (Force new resource) The key pair''s name. It is the only in one Alicloud
+      account.'
+    type: Text
+attributes:
+  key_name:
+    help: ! '- The name of the key pair.'
+    type: Text
+  fingerprint:
+    help: The finger print of the key pair.
+    type: Text
+about: Provides a key pair resource.
+examples: []

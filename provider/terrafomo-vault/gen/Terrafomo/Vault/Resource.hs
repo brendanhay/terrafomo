@@ -48,7 +48,7 @@ data AuthBackendResource = AuthBackendResource
       {- ^ (Optional) The path to mount the auth backend. This defaults to the name. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The name of the policy -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_auth_backend"
@@ -76,7 +76,7 @@ data AwsAuthBackendCertResource = AwsAuthBackendCertResource
       {- ^ (Required) The name of the certificate. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_aws_auth_backend_cert"
@@ -111,12 +111,66 @@ data AwsAuthBackendClientResource = AwsAuthBackendClientResource
       {- ^ (Optional) The AWS secret key that Vault should use for the auth backend. -}
     , _sts_endpoint :: !(Attr Text)
       {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_aws_auth_backend_client"
     ''Qual.Vault
     ''AwsAuthBackendClientResource)
+
+{- | The @vault_aws_auth_backend_login@ Vault resource.
+
+Logs into a Vault server using an AWS auth backend. Login can be
+accomplished using a signed identity request from IAM or using ec2 instance
+metadata. For more informtion, see the
+<https://www.vaultproject.io/docs/auth/aws.html> .
+-}
+data AwsAuthBackendLoginResource = AwsAuthBackendLoginResource
+    { _backend :: !(Attr Text)
+      {- ^ (Optional) The unique name of the AWS auth backend. Defaults to 'aws'. -}
+    , _iam_http_request_method :: !(Attr Text)
+      {- ^ (Optional) The HTTP method used in the signed IAM request. -}
+    , _iam_request_body :: !(Attr Text)
+      {- ^ (Optional) The base64-encoded body of the signed request. -}
+    , _iam_request_headers :: !(Attr Text)
+      {- ^ (Optional) The base64-encoded, JSON serialized representation of the GetCallerIdentity HTTP request headers. -}
+    , _iam_request_url :: !(Attr Text)
+      {- ^ (Optional) The base64-encoded HTTP URL used in the signed request. -}
+    , _identity :: !(Attr Text)
+      {- ^ (Optional) The base64-encoded EC2 instance identity document to authenticate with. Can be retrieved from the EC2 metadata server. -}
+    , _nonce :: !(Attr Text)
+      {- ^ (Optional) The unique nonce to be used for login requests. Can be set to a user-specified value, or will contain the server-generated value once a token is issued. EC2 instances can only acquire a single token until the whitelist is tidied again unless they keep track of this nonce. -}
+    , _pkcs7 :: !(Attr Text)
+      {- ^ (Optional) The PKCS#7 signature of the identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
+    , _role :: !(Attr Text)
+      {- ^ (Optional) The name of the AWS auth backend role to create tokens against. -}
+    , _signature :: !(Attr Text)
+      {- ^ (Optional) The base64-encoded SHA256 RSA signature of the instance identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
+    } deriving (Show, Generic)
+
+type instance Computed AwsAuthBackendLoginResource
+    = '[ '("accessor", Text)
+         {- - The token's accessor. -}
+      , '("auth_type", Text)
+         {- - The authentication type used to generate this token. -}
+      , '("client_token", Text)
+         {- - The token returned by Vault. -}
+      , '("lease_duration", Text)
+         {- - The duration in seconds the token will be valid, relative to the time in @lease_start_time@ . -}
+      , '("lease_start_time", Text)
+         {- - The approximate time at which the token was created, using the clock of the system where Terraform was running. -}
+      , '("metadata", Text)
+         {- - A map of information returned by the Vault server about the authentication used to generate this token. -}
+      , '("policies", Text)
+         {- - The Vault policies assigned to this token. -}
+      , '("renewable", Text)
+         {- - Set to true if the token can be extended through renewal. -}
+       ]
+
+$(TH.makeResource
+    "vault_aws_auth_backend_login"
+    ''Qual.Vault
+    ''AwsAuthBackendLoginResource)
 
 {- | The @vault_aws_auth_backend_role@ Vault resource.
 
@@ -166,7 +220,7 @@ data AwsAuthBackendRoleResource = AwsAuthBackendRoleResource
       {- ^ (Optional) If set, enable role tags for this role. The value set for this field should be the key of the tag on the EC2 instance. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
     , _ttl :: !(Attr Text)
       {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_aws_auth_backend_role"
@@ -192,7 +246,7 @@ data AwsAuthBackendStsRoleResource = AwsAuthBackendStsRoleResource
       {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
     , _sts_role :: !(Attr Text)
       {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_aws_auth_backend_sts_role"
@@ -213,7 +267,7 @@ data AwsSecretBackendResource = AwsSecretBackendResource
       {- ^ (Required) The AWS Access Key ID this backend should use to issue new credentials. -}
     , _secret_key :: !(Attr Text)
       {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_aws_secret_backend"
@@ -238,7 +292,7 @@ data AwsSecretBackendRoleResource = AwsSecretBackendRoleResource
       {- ^ (Optional) The JSON-formatted policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     , _policy_arn :: !(Attr Text)
       {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_aws_secret_backend_role"
@@ -259,12 +313,14 @@ See <../index.html> for more details.
 -}
 data GenericSecretResource = GenericSecretResource
     { _allow_read :: !(Attr Text)
-      {- ^ (Optional) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
+      {- ^ (Optional, Deprecated) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
     , _data_json :: !(Attr Text)
       {- ^ (Required) String containing a JSON-encoded object that will be written as the secret data at the given path. -}
+    , _disable_read :: !(Attr Text)
+      {- ^ (Optional) True/false. Set this to true if your vault authentication is not able to read the data. Setting this to @true@ will break drift detection. Defaults to false. -}
     , _path :: !(Attr Text)
       {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_generic_secret"
@@ -286,7 +342,7 @@ data MountResource = MountResource
       {- ^ (Required) Where the secret backend will be mounted -}
     , _type' :: !(Attr Text)
       {- ^ (Required) Type of the backend, such as "aws" -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_mount"
@@ -302,7 +358,7 @@ data PolicyResource = PolicyResource
       {- ^ (Required) The name of the policy -}
     , _policy :: !(Attr Text)
       {- ^ (Required) String containing a Vault policy -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vault_policy"

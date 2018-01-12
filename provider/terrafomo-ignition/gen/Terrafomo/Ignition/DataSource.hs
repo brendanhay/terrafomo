@@ -47,14 +47,18 @@ data ConfigDataSource = ConfigDataSource
       {- ^ (Optional) Any number of blocks with the configs to be appended to the current config. -}
     , _arrays :: !(Attr Text)
       {- ^ (Optional) The list of RAID arrays to be configured. -}
+    , _directories :: !(Attr Text)
+      {- ^ (Optional) The list of directories to be created. -}
     , _disks :: !(Attr Text)
       {- ^ (Optional) The list of disks to be configured and their options. -}
     , _files :: !(Attr Text)
-      {- ^ (Optional) The list of files, rooted in this particular filesystem, to be written. -}
+      {- ^ (Optional) The list of files to be written. -}
     , _filesystems :: !(Attr Text)
-      {- ^ (Optional) The list of filesystems to be configured and/or used in the ignition_file resource. -}
+      {- ^ (Optional) The list of filesystems to be configured and/or used in the @ignition_file@ , @ignition_directory@ , and @ignition_link@ resources. -}
     , _groups :: !(Attr Text)
       {- ^ (Optional) The list of groups to be added. -}
+    , _links :: !(Attr Text)
+      {- ^ (Optional) The list of links to be created. -}
     , _networkd :: !(Attr Text)
       {- ^ (Optional) The list of networkd units. Describes the desired state of the networkd files. -}
     , _replace :: !(Attr Text)
@@ -63,7 +67,7 @@ data ConfigDataSource = ConfigDataSource
       {- ^ (Optional) The list of systemd units. Describes the desired state of the systemd units. -}
     , _users :: !(Attr Text)
       {- ^ (Optional) The list of accounts to be added. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ConfigDataSource
     = '[ '("rendered", Text)
@@ -90,7 +94,7 @@ data DirectoryDataSource = DirectoryDataSource
       {- ^ (Required) The absolute path to the directory. -}
     , _uid :: !(Attr Text)
       {- ^ (Optional) The user ID of the owner. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DirectoryDataSource
     = '[ '("id", Text)
@@ -113,7 +117,7 @@ data DiskDataSource = DiskDataSource
       {- ^ (Optional) The list of partitions and their configuration for this particular disk.. -}
     , _wipe_table :: !(Attr Text)
       {- ^ (Optional) Whether or not the partition tables shall be wiped. When true, the partition tables are erased before any further manipulation. Otherwise, the existing entries are left intact. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DiskDataSource
     = '[ '("id", Text)
@@ -144,7 +148,7 @@ data FileDataSource = FileDataSource
       {- ^ (Optional) Block to retrieve the file content from a remote location. -}
     , _uid :: !(Attr Text)
       {- ^ (Optional) The user ID of the owner. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FileDataSource
     = '[ '("id", Text)
@@ -168,7 +172,7 @@ data FilesystemDataSource = FilesystemDataSource
       {- ^ (Optional) The identifier for the filesystem, internal to Ignition. This is only required if the filesystem needs to be referenced in the a ignition_files resource. -}
     , _path :: !(Attr Text)
       {- ^ (Optional) The mount-point of the filesystem. A non-null entry indicates that the filesystem has already been mounted by the system at the specified path. This is really only useful for /sysroot . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FilesystemDataSource
     = '[ '("id", Text)
@@ -191,7 +195,7 @@ data GroupDataSource = GroupDataSource
       {- ^ (Required) The groupname for the account. -}
     , _password_hash :: !(Attr Text)
       {- ^ (Optional) The encrypted password for the account. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed GroupDataSource
     = '[ '("id", Text)
@@ -220,7 +224,7 @@ data LinkDataSource = LinkDataSource
       {- ^ (Required) The target path of the link. -}
     , _uid :: !(Attr Text)
       {- ^ (Optional) The user ID of the owner. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LinkDataSource
     = '[ '("id", Text)
@@ -241,7 +245,7 @@ data NetworkdUnitDataSource = NetworkdUnitDataSource
       {- ^ (Required) The contents of the networkd file. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the file. This must be suffixed with a valid unit type (e.g. 00-eth0.network ). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkdUnitDataSource
     = '[ '("id", Text)
@@ -266,7 +270,7 @@ data RaidDataSource = RaidDataSource
       {- ^ (Required) The name to use for the resulting md device. -}
     , _spares :: !(Attr Text)
       {- ^ (Optional) The number of spares (if applicable) in the array. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RaidDataSource
     = '[ '("id", Text)
@@ -293,7 +297,7 @@ data SystemdUnitDataSource = SystemdUnitDataSource
       {- ^ (Optional) Whether or not the service shall be masked. When true, the service is masked by symlinking it to /dev/null . -}
     , _name :: !(Attr Text)
       {- ^ (Required) Tthe name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SystemdUnitDataSource
     = '[ '("id", Text)
@@ -336,7 +340,7 @@ data UserDataSource = UserDataSource
       {- ^ (Optional) Whether or not to make the account a system account. This only has an effect if the account doesn't exist yet. -}
     , _uid :: !(Attr Text)
       {- ^ (Optional) The user ID of the new account. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserDataSource
     = '[ '("id", Text)

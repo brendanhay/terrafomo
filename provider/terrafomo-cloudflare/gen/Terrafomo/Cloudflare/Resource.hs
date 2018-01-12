@@ -51,12 +51,12 @@ data RecordResource = RecordResource
     , _proxied :: !(Attr Text)
       {- ^ (Optional) Whether the record gets Cloudflare's origin protection. -}
     , _ttl :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record -}
+      {- ^ (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record> ) -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of the record -}
     , _value :: !(Attr Text)
       {- ^ (Required) The value of the record -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RecordResource
     = '[ '("hostname", Text)

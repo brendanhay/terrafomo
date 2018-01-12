@@ -67,7 +67,7 @@ data DeviceResource = DeviceResource
       {- ^ (Optional) - Size of allocated subnet, more information is in the <https://help.packet.net/technical/networking/custom-subnet-size> doc. -}
     , _user_data :: !(Attr Text)
       {- ^ (Optional) - A string of the desired User Data for the device. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DeviceResource
     = '[ '("access_private_ipv4", Text)
@@ -131,7 +131,7 @@ data IpAttachmentResource = IpAttachmentResource
       {- ^ (Required) CIDR notation of subnet from block reserved in the same project and facility as the device -}
     , _device_id :: !(Attr Text)
       {- ^ (Required) ID of device to which to assign the subnet -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IpAttachmentResource
     = '[ '("address_family", Text)
@@ -169,7 +169,7 @@ data ProjectResource = ProjectResource
       {- ^ (Required) The name of the Project on Packet.net -}
     , _payment_method :: !(Attr Text)
       {- ^ (Optional) The unique ID of the payment method on file to use for services created in this project. If not given, the project will use the default payment method for your user. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectResource
     = '[ '("created", Text)
@@ -208,7 +208,7 @@ data ReservedIpBlockResource = ReservedIpBlockResource
       {- ^ (Required) The packet project ID where to allocate the address block -}
     , _quantity :: !(Attr Text)
       {- ^ (Required) The number of allocated /32 addresses, a power of 2 -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ReservedIpBlockResource
     = '[ '("address_family", Text)
@@ -249,7 +249,7 @@ data SshKeyResource = SshKeyResource
       {- ^ (Required) The name of the SSH key for identification -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SshKeyResource
     = '[ '("created", Text)
@@ -283,7 +283,7 @@ data VolumeAttachmentResource = VolumeAttachmentResource
       {- ^ (Required) The ID of the device to which the volume should be attached -}
     , _volume_id :: !(Attr Text)
       {- ^ (Required) The ID of the volume to attach -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeAttachmentResource
     = '[ '("id", Text)
@@ -317,7 +317,7 @@ data VolumeResource = VolumeResource
       {- ^ (Required) The size in GB to make the volume -}
     , _snapshot_policies :: !(Attr Text)
       {- ^ - Optional list of snapshot policies -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeResource
     = '[ '("attachments", Text)

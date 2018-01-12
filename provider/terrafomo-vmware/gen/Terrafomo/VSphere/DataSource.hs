@@ -45,13 +45,9 @@ that require a datacenter, such as the </docs/providers/vsphere/d/host.html>
 data source.
 -}
 data DatacenterDataSource = DatacenterDataSource
-    { _folder :: !(Attr Text)
-      {- ^ (Optional) The folder where the datacenter should be created. Forces a new resource if changed. -}
-    , _name :: !(Attr Text)
+    { _name :: !(Attr Text)
       {- ^ - (String) The name of the datacenter. This can be a name or path.	Can be omitted if there is only one datacenter in your inventory. -}
-    , _tags :: !(Attr Text)
-      {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "vsphere_datacenter"
@@ -68,35 +64,11 @@ resource, for which an example is shown below. ~> NOTE: This data source
 requires vCenter and is not available on direct ESXi connections.
 -}
 data DistributedVirtualSwitchDataSource = DistributedVirtualSwitchDataSource
-    { _contact_detail :: !(Attr Text)
-      {- ^ (Optional) The detailed contact information for the person who is responsible for the DVS. -}
-    , _contact_name :: !(Attr Text)
-      {- ^ (Optional) The name of the person who is responsible for the DVS. -}
-    , _datacenter_id :: !(Attr Text)
+    { _datacenter_id :: !(Attr Text)
       {- ^ (Optional) The managed object reference ID of the datacenter the DVS is located in. This can be omitted if the search path used in @name@ is an absolute path, or if there is only one datacenter in the vSphere infrastructure. -}
-    , _description :: !(Attr Text)
-      {- ^ (Optional) A detailed description for the DVS. -}
-    , _folder :: !(Attr Text)
-      {- ^ (Optional) The folder to create the DVS in. Forces a new resource if changed. -}
-    , _ipv4_address :: !(Attr Text)
-      {- ^ (Optional) An IPv4 address to identify the switch. This is mostly useful when used with the <#netflow-arguments> found below. -}
-    , _lacp_api_version :: !(Attr Text)
-      {- ^ (Optional) The Link Aggregation Control Protocol group version to use with the switch. Possible values are @singleLag@ and @multipleLag@ . -}
-    , _link_discovery_operation :: !(Attr Text)
-      {- ^ (Optional) Whether to @advertise@ or @listen@ for link discovery traffic. -}
-    , _link_discovery_protocol :: !(Attr Text)
-      {- ^ (Optional) The discovery protocol type. Valid types are @cdp@ and @lldp@ . -}
-    , _max_mtu :: !(Attr Text)
-      {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. -}
-    , _multicast_filtering_mode :: !(Attr Text)
-      {- ^ (Optional) The multicast filtering mode to use with the switch. Can be one of @legacyFiltering@ or @snooping@ . -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the distributed virtual switch. This can be a name or path. -}
-    , _tags :: !(Attr Text)
-      {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _version :: !(Attr Text)
-      {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DistributedVirtualSwitchDataSource
     = '[ '("id", Text)
@@ -121,7 +93,7 @@ data HostDataSource = HostDataSource
       {- ^ - (String, required) The managed object reference ID of a datacenter. -}
     , _name :: !(Attr Text)
       {- ^ - (String) The name of the host. This can be a name or path.	Can be omitted if there is only one host in your inventory. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "vsphere_host"
@@ -143,7 +115,7 @@ data NetworkDataSource = NetworkDataSource
       {- ^ (Optional) The managed object reference ID of the datacenter the network is located in. This can be omitted if the search path used in @name@ is an absolute path, or if there is only one datacenter in the vSphere infrastructure. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the network. This can be a name or path. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkDataSource
     = '[ '("id", Text)
@@ -168,15 +140,9 @@ Tagging support is unsupported on direct ESXi connections and requires
 vCenter 6.0 or higher.
 -}
 data TagCategoryDataSource = TagCategoryDataSource
-    { _associable_types :: !(Attr Text)
-      {- ^ - (List of strings, required) A list object types that this category is valid to be assigned to. For a full list, click <#associable-object-types> . -}
-    , _cardinality :: !(Attr Text)
-      {- ^ - (String, required, forces new resource) The number of tags that can be assigned from this category to a single object at once. Can be one of @SINGLE@ (object can only be assigned one tag in this category), to @MULTIPLE@ (object can be assigned multiple tags in this category). -}
-    , _description :: !(Attr Text)
-      {- ^ - (String, optional) A description for the category. -}
-    , _name :: !(Attr Text)
+    { _name :: !(Attr Text)
       {- ^ - (String, required) The name of the tag category. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "vsphere_tag_category"
@@ -196,11 +162,9 @@ higher.
 data TagDataSource = TagDataSource
     { _category_id :: !(Attr Text)
       {- ^ - (String, required) The ID of the tag category the tag is located in. -}
-    , _description :: !(Attr Text)
-      {- ^ - (String, optional) A description for the tag. -}
     , _name :: !(Attr Text)
       {- ^ - (String, required) The name of the tag. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "vsphere_tag"
@@ -221,7 +185,7 @@ data VmfsDisksDataSource = VmfsDisksDataSource
       {- ^ - (String, required) The managed object ID of the host to look for disks on. -}
     , _rescan :: !(Attr Text)
       {- ^ - (Boolean, optional) Whether or not to rescan storage adapters before searching for disks. This may lengthen the time it takes to perform the search. Default: @false@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VmfsDisksDataSource
     = '[ '("disks", Text)

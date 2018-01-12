@@ -63,7 +63,7 @@ data CertRequestResource = CertRequestResource
       {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
     , _subject :: !(Attr Text)
       {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure is described below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CertRequestResource
     = '[ '("cert_request_pem", Text)
@@ -100,7 +100,7 @@ data LocallySignedCertResource = LocallySignedCertResource
       {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
     , _validity_period_hours :: !(Attr Text)
       {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LocallySignedCertResource
     = '[ '("cert_pem", Text)
@@ -135,7 +135,7 @@ data PrivateKeyResource = PrivateKeyResource
       {- ^ (Optional) When @algorithm@ is "ECDSA", the name of the elliptic curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the default. -}
     , _rsa_bits :: !(Attr Text)
       {- ^ (Optional) When @algorithm@ is "RSA", the size of the generated RSA key in bits. Defaults to 2048. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PrivateKeyResource
     = '[ '("algorithm", Text)
@@ -184,7 +184,7 @@ data SelfSignedCertResource = SelfSignedCertResource
       {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure matches the corresponding block for <cert_request.html> . -}
     , _validity_period_hours :: !(Attr Text)
       {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SelfSignedCertResource
     = '[ '("cert_pem", Text)

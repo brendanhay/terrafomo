@@ -47,7 +47,7 @@ data CollectorGroupResource = CollectorGroupResource
       {- ^ (Optional) Set description of collector group -}
     , _name :: !(Attr Text)
       {- ^ (Required) Name of collector group -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "logicmonitor_collector_group"
@@ -66,19 +66,13 @@ data DeviceGroupResource = DeviceGroupResource
       {- ^ (Optional) Description of device group -}
     , _disable_alerting :: !(Attr Text)
       {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
-    , _filters :: !(Attr Text)
-      {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
     , _name :: !(Attr Text)
       {- ^ (Required) Name of device group -}
-    , _offset :: !(Attr Text)
-      {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
     , _parent_id :: !(Attr Text)
       {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
     , _properties :: !(Attr Text)
       {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
-    , _size :: !(Attr Text)
-      {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "logicmonitor_device_group"
@@ -103,7 +97,7 @@ data DeviceResource = DeviceResource
       {- ^ (Required) Ip Address/Hostname of device -}
     , _properties :: !(Attr Text)
       {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "logicmonitor_device"

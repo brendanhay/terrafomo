@@ -50,7 +50,7 @@ data AddonResource = AddonResource
       {- ^ (Required) The name of the add-on. -}
     , _src :: !(Attr Text)
       {- ^ (Required) The source URL to display in a frame in the PagerDuty UI. @HTTPS@ is required. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AddonResource
     = '[ '("id", Text)
@@ -81,13 +81,11 @@ data EscalationPolicyResource = EscalationPolicyResource
       {- ^ (Required) An Escalation rule block. Escalation rules documented below. -}
     , _teams :: !(Attr Text)
       {- ^ (Optional) Teams associated with the policy. Account must have the @teams@ ability to use this parameter. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EscalationPolicyResource
     = '[ '("id", Text)
          {- - The ID of the escalation policy. -}
-      , '("name", Text)
-         {- - The short name of the found escalation policy. -}
        ]
 
 $(TH.makeResource
@@ -115,7 +113,7 @@ data MaintenanceWindowResource = MaintenanceWindowResource
       {- ^ (Required) A list of service IDs to include in the maintenance window. -}
     , _start_time :: !(Attr Text)
       {- ^ (Required) The maintenance window's start time. This is when the services will stop creating incidents. If this date is in the past, it will be updated to be the current time. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MaintenanceWindowResource
     = '[ '("id", Text)
@@ -145,13 +143,11 @@ data ScheduleResource = ScheduleResource
       {- ^ (Optional) Any on-call schedule entries that pass the date range bounds will be truncated at the bounds, unless the parameter @overflow@ is passed. For instance, if your schedule is a rotation that changes daily at midnight UTC, and your date range is from @2011-06-01T10:00:00Z@ to @2011-06-01T14:00:00Z@ : If you don't pass the overflow=true parameter, you will get one schedule entry returned with a start of @2011-06-01T10:00:00Z@ and end of @2011-06-01T14:00:00Z@ . If you do pass the @overflow@ parameter, you will get one schedule entry returned with a start of @2011-06-01T00:00:00Z@ and end of @2011-06-02T00:00:00Z@ . -}
     , _time_zone :: !(Attr Text)
       {- ^ (Required) The time zone of the schedule (e.g Europe/Berlin). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ScheduleResource
     = '[ '("id", Text)
          {- - The ID of the schedule -}
-      , '("name", Text)
-         {- - The short name of the found schedule. -}
        ]
 
 $(TH.makeResource
@@ -178,7 +174,7 @@ data ServiceIntegrationResource = ServiceIntegrationResource
       {- ^ (Optional) The service type. Can be: @aws_cloudwatch_inbound_integration@ , @cloudkick_inbound_integration@ , @event_transformer_api_inbound_integration@ , @events_api_v2_inbound_integration@ (requires service @alert_creation@ to be @create_alerts_and_incidents@ ), @generic_email_inbound_integration@ , @generic_events_api_inbound_integration@ , @keynote_inbound_integration@ , @nagios_inbound_integration@ , @pingdom_inbound_integration@ or @sql_monitor_inbound_integration@ . -}
     , _vendor :: !(Attr Text)
       {- ^ (Optional) The ID of the vendor the integration should integrate with (e.g Datadog or Amazon Cloudwatch). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceIntegrationResource
     = '[ '("id", Text)
@@ -215,7 +211,7 @@ data ServiceResource = ServiceResource
       {- ^ (Required) The escalation policy used by this service. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the service. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceResource
     = '[ '("created_at", Text)
@@ -244,7 +240,7 @@ data TeamMembershipResource = TeamMembershipResource
       {- ^ (Required) The ID of the team in which the user will belong. -}
     , _user_id :: !(Attr Text)
       {- ^ (Required) The ID of the user to add to the team. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TeamMembershipResource
     = '[ '("team_id", Text)
@@ -271,7 +267,7 @@ data TeamResource = TeamResource
       {- ^ (Optional) A human-friendly description of the team. If not set, a placeholder of "Managed by Terraform" will be set. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TeamResource
     = '[ '("id", Text)
@@ -305,7 +301,7 @@ data UserResource = UserResource
       {- ^ (Optional) The user role. Account must have the @read_only_users@ ability to set a user as a @read_only_user@ . Can be @admin@ , @limited_user@ , @owner@ , @read_only_user@ , @team_responder@ or @user@ -}
     , _teams :: !(Attr Text)
       {- ^ (Optional) A list of teams the user should belong to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("avatar_url", Text)
@@ -316,8 +312,6 @@ type instance Computed UserResource
          {- - The ID of the user. -}
       , '("invitation_sent", Text)
          {- - If true, the user has an outstanding invitation. -}
-      , '("name", Text)
-         {- - The short name of the found user. -}
       , '("time_zone", Text)
          {- - The timezone of the user -}
        ]

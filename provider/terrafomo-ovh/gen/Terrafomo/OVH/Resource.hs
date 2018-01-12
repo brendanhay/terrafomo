@@ -50,7 +50,7 @@ data PubliccloudPrivateNetworkResource = PubliccloudPrivateNetworkResource
       {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
     , _vlan_id :: !(Attr Text)
       {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PubliccloudPrivateNetworkResource
     = '[ '("name", Text)
@@ -99,7 +99,7 @@ data PubliccloudPrivateNetworkSubnetResource = PubliccloudPrivateNetworkSubnetRe
       {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
     , _start :: !(Attr Text)
       {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PubliccloudPrivateNetworkSubnetResource
     = '[ '("cidr", Text)
@@ -150,7 +150,7 @@ data PubliccloudUserResource = PubliccloudUserResource
       {- ^ - A description associated with the user. -}
     , _project_id :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PubliccloudUserResource
     = '[ '("creation_date", Text)
@@ -183,7 +183,7 @@ data VrackPubliccloudAttachmentResource = VrackPubliccloudAttachmentResource
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     , _vrack_id :: !(Attr Text)
       {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VrackPubliccloudAttachmentResource
     = '[ '("project_id", Text)

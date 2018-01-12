@@ -1,0 +1,9 @@
+_name: aws_dynamodb_table
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the DynamoDB table.
+    type: Text
+attributes: {}
+about: Provides information about a DynamoDB table.
+examples: []

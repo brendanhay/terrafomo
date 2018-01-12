@@ -1,0 +1,46 @@
+_name: oneandone_server
+arguments:
+  _persistence_time:
+    required: false
+    help: (Optional) Persistence duration in seconds
+    type: Text
+  _health_check_path_parser:
+    required: false
+    help: (Optional)
+    type: Text
+  _method:
+    required: true
+    help: (Required)  Balancing procedure Can be @ROUND_ROBIN@ or @LEAST_CONNECTIONS@
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the load balancer.
+    type: Text
+  _health_check_path:
+    required: false
+    help: (Optional)
+    type: Text
+  _description:
+    required: false
+    help: (Optional) Description for the load balancer
+    type: Text
+  _datacenter:
+    required: false
+    help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
+      or @ES@
+    type: Text
+  _health_check_interval:
+    required: false
+    help: (Optional)
+    type: Text
+  _persistence:
+    required: false
+    help: (Optional) True/false defines whether persistence should be turned on/off
+    type: Text
+  _health_check_test:
+    required: false
+    help: (Optional) Can be @TCP@ or @ICMP@ .
+    type: Text
+attributes: {}
+about: Manages a Load Balancer on 1&1
+examples: []

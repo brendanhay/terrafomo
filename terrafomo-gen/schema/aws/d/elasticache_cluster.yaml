@@ -1,0 +1,71 @@
+_name: aws_elasticache_cluster
+arguments:
+  _cluster_id:
+    required: true
+    help: – (Required) Group identifier.
+    type: Text
+attributes:
+  node_type:
+    help: – The cluster node type.
+    type: Text
+  cache_nodes:
+    help: ! '- List of node objects including @id@ , @address@ , @port@ and @availability_zone@
+      . Referenceable e.g. as @${data.aws_elasticache_cluster.bar.cache_nodes.0.address}@'
+    type: Text
+  engine_version:
+    help: – Version number of the cache engine.
+    type: Text
+  engine:
+    help: – Name of the cache engine.
+    type: Text
+  replication_group_id:
+    help: ! '- The replication group to which this cache cluster belongs.'
+    type: Text
+  parameter_group_name:
+    help: – Name of the parameter group associated with this cache cluster.
+    type: Text
+  notification_topic_arn:
+    help: – An Amazon Resource Name (ARN) of an SNS topic that ElastiCache notifications
+      get sent to.
+    type: Text
+  configuration_endpoint:
+    help: ! '- The configuration endpoint to allow host discovery.'
+    type: Text
+  security_group_ids:
+    help: – List VPC security groups associated with the cache cluster.
+    type: Text
+  snapshot_window:
+    help: ! '- The daily time range (in UTC) during which ElastiCache will begin taking
+      a daily snapshot of the cache cluster.'
+    type: Text
+  snapshot_retention_limit:
+    help: ! '- The number of days for which ElastiCache will retain automatic cache
+      cluster snapshots before deleting them.'
+    type: Text
+  security_group_names:
+    help: – List of security group names associated with this cache cluster.
+    type: Text
+  availability_zone:
+    help: ! '- The Availability Zone for the cache cluster.'
+    type: Text
+  cluster_address:
+    help: ! '- The DNS name of the cache cluster without the port appended.'
+    type: Text
+  subnet_group_name:
+    help: – Name of the subnet group associated to the cache cluster.
+    type: Text
+  maintenance_window:
+    help: – Specifies the weekly time range for when maintenance on the cache cluster
+      is performed.
+    type: Text
+  tags:
+    help: ! '- The tags assigned to the resource'
+    type: Text
+  num_cache_nodes:
+    help: – The number of cache nodes that the cache cluster has.
+    type: Text
+  port:
+    help: – The port number on which each of the cache nodes will accept connections.
+    type: Text
+about: Use this data source to get information about an Elasticache Cluster
+examples: []

@@ -1,0 +1,94 @@
+_name: aws_opsworks_java_app_layer
+arguments:
+  _app_server:
+    required: false
+    help: (Optional) Keyword for the application container to use. Defaults to "tomcat".
+    type: Text
+  _system_packages:
+    required: false
+    help: (Optional) Names of a set of system packages to install on the layer's instances.
+    type: Text
+  _auto_healing:
+    required: false
+    help: (Optional) Whether to enable auto-healing for the layer.
+    type: Text
+  _drain_elb_on_shutdown:
+    required: false
+    help: (Optional) Whether to enable Elastic Load Balancing connection draining.
+    type: Text
+  _instance_shutdown_timeout:
+    required: false
+    help: (Optional) The time, in seconds, that OpsWorks will wait for Chef to complete
+      after triggering the Shutdown event.
+    type: Text
+  _name:
+    required: false
+    help: (Optional) A human-readable name for the layer.
+    type: Text
+  _custom_json:
+    required: false
+    help: (Optional) Custom JSON attributes to apply to the layer.
+    type: Text
+  _jvm_type:
+    required: false
+    help: (Optional) Keyword for the type of JVM to use. Defaults to @openjdk@ .
+    type: Text
+  _auto_assign_elastic_ips:
+    required: false
+    help: (Optional) Whether to automatically assign an elastic IP address to the
+      layer's instances.
+    type: Text
+  _custom_security_group_ids:
+    required: false
+    help: (Optional) Ids for a set of security groups to apply to the layer's instances.
+    type: Text
+  _custom_instance_profile_arn:
+    required: false
+    help: (Optional) The ARN of an IAM profile that will be used for the layer's instances.
+    type: Text
+  _ebs_volume:
+    required: false
+    help: (Optional) @ebs_volume@ blocks, as described below, will each create an
+      EBS volume and connect it to the layer's instances.
+    type: Text
+  _install_updates_on_boot:
+    required: false
+    help: (Optional) Whether to install OS and package updates on each instance when
+      it boots.
+    type: Text
+  _auto_assign_public_ips:
+    required: false
+    help: (Optional) For stacks belonging to a VPC, whether to automatically assign
+      a public IP address to each of the layer's instances.
+    type: Text
+  _elastic_load_balancer:
+    required: false
+    help: (Optional) Name of an Elastic Load Balancer to attach to this layer
+    type: Text
+  _use_ebs_optimized_instances:
+    required: false
+    help: (Optional) Whether to use EBS-optimized instances.
+    type: Text
+  _jvm_version:
+    required: false
+    help: (Optional) Version of JVM to use. Defaults to "7".
+    type: Text
+  _stack_id:
+    required: true
+    help: (Required) The id of the stack the layer will belong to.
+    type: Text
+  _jvm_options:
+    required: false
+    help: (Optional) Options to set for the JVM.
+    type: Text
+  _app_server_version:
+    required: false
+    help: (Optional) Version of the selected application container to use. Defaults
+      to "7".
+    type: Text
+attributes:
+  id:
+    help: ! '- The id of the layer.'
+    type: Text
+about: Provides an OpsWorks Java application layer resource.
+examples: []

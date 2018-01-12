@@ -1,0 +1,28 @@
+_name: aws_api_gateway_model
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the model
+    type: Text
+  _schema:
+    required: true
+    help: (Required) The schema of the model in a JSON form
+    type: Text
+  _content_type:
+    required: true
+    help: (Required) The content type of the model
+    type: Text
+  _description:
+    required: false
+    help: (Optional) The description of the model
+    type: Text
+  _rest_api_id:
+    required: true
+    help: (Required) The ID of the associated REST API
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the model'
+    type: Text
+about: Provides a Model for a API Gateway.
+examples: []

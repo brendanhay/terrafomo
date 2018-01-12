@@ -52,7 +52,7 @@ data RecordResource = RecordResource
       {- ^ (Required) The record type. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The name of zone to contain this record. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "powerdns_record"

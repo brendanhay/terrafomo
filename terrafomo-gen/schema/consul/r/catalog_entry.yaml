@@ -1,0 +1,35 @@
+_name: consul_catalog_entry
+arguments:
+  _token:
+    required: false
+    help: (Optional) ACL token.
+    type: Text
+  _service:
+    required: false
+    help: (Optional) A service to optionally associated with the node. Supported values
+      are documented below.
+    type: Text
+  _datacenter:
+    required: false
+    help: (Optional) The datacenter to use. This overrides the datacenter in the provider
+      setup and the agent's default datacenter.
+    type: Text
+  _node:
+    required: true
+    help: (Required) The name of the node being added to, or referenced in the catalog.
+    type: Text
+  _address:
+    required: true
+    help: (Required) The address of the node being added to, or referenced in the
+      catalog.
+    type: Text
+attributes:
+  node:
+    help: ! '- The ID of the service, defaults to the value of @name@ .'
+    type: Text
+  address:
+    help: ! '- The address of the service.'
+    type: Text
+about: Registers a node or service with the <https://www.consul.io/docs/agent/http/catalog.html#catalog_register>
+  . Currently, defining health checks is not supported.
+examples: []

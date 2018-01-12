@@ -1,0 +1,30 @@
+_name: circonus_metric
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the metric.  A @name@ must be unique within a @circonus_check@
+      and its meaning is @circonus_check.type@ specific.
+    type: Text
+  _active:
+    required: false
+    help: (Optional) A boolean indicating if the metric is being filtered out at the
+      @circonus_check@ 's collector(s) or not.
+    type: Text
+  _type':
+    required: true
+    help: ! '(Required) The type of metric.  This value must be present and can be
+      one of the following values: @numeric@ , @text@ , @histogram@ , @composite@
+      , or @caql@ .'
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A list of tags assigned to the metric.
+    type: Text
+  _unit:
+    required: false
+    help: (Optional) The unit of measurement for this @circonus_metric@ .
+    type: Text
+attributes: {}
+about: The @circonus_metric@ resource creates and manages a single <https://login.circonus.com/resources/api/calls/metric>
+  that will be instantiated only once a referencing @circonus_check@ has been created.
+examples: []

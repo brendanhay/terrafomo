@@ -41,31 +41,15 @@ import qualified Terrafomo.Syntax.TH as TH
 Use this data source to get DNS A records of the host.
 -}
 data ARecordSetDataSource = ARecordSetDataSource
-    { _addresses :: !(Attr Text)
-      {- ^ (Required) The IPv4 addresses this record set will point to. -}
-    , _host :: !(Attr Text)
+    { _host :: !(Attr Text)
       {- ^ - (required): Host to look up -}
-    , _name :: !(Attr Text)
-      {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone :: !(Attr Text)
-      {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ARecordSetDataSource
-    = '[ '("addresses", Text)
-         {- - See Argument Reference above. -}
-      , '("addrs", Text)
+    = '[ '("addrs", Text)
          {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
       , '("id", Text)
          {- - Set to @host@ . -}
-      , '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("ttl", Text)
-         {- - See Argument Reference above. -}
-      , '("zone", Text)
-         {- - See Argument Reference above. -}
        ]
 
 $(TH.makeDataSource
@@ -78,31 +62,15 @@ $(TH.makeDataSource
 Use this data source to get DNS AAAA records of the host.
 -}
 data AaaaRecordSetDataSource = AaaaRecordSetDataSource
-    { _addresses :: !(Attr Text)
-      {- ^ (Required) The IPv6 addresses this record set will point to. -}
-    , _host :: !(Attr Text)
+    { _host :: !(Attr Text)
       {- ^ - (required): Host to look up -}
-    , _name :: !(Attr Text)
-      {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl :: !(Attr Text)
-      {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone :: !(Attr Text)
-      {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AaaaRecordSetDataSource
-    = '[ '("addresses", Text)
-         {- - See Argument Reference above. -}
-      , '("addrs", Text)
+    = '[ '("addrs", Text)
          {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
       , '("id", Text)
          {- - Set to @host@ . -}
-      , '("name", Text)
-         {- - See Argument Reference above. -}
-      , '("ttl", Text)
-         {- - See Argument Reference above. -}
-      , '("zone", Text)
-         {- - See Argument Reference above. -}
        ]
 
 $(TH.makeDataSource
@@ -117,7 +85,7 @@ Use this data source to get DNS CNAME record set of the host.
 data CnameRecordSetDataSource = CnameRecordSetDataSource
     { _host :: !(Attr Text)
       {- ^ - (required): Host to look up -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CnameRecordSetDataSource
     = '[ '("cname", Text)
@@ -138,7 +106,7 @@ Use this data source to get DNS TXT record set of the host.
 data TxtRecordSetDataSource = TxtRecordSetDataSource
     { _host :: !(Attr Text)
       {- ^ - (required): Host to look up -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed TxtRecordSetDataSource
     = '[ '("id", Text)

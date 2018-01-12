@@ -55,7 +55,7 @@ data GroupResource = GroupResource
       {- ^ (Required, string) The name or ID of the parent group. Will error if absent or unable to resolve. -}
     , _parent_group_id :: !(Attr Text)
       {- ^ - (Computed) The ID of the parent group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "clc_group"
@@ -69,7 +69,7 @@ Manages a CLC load balancer pool. Manage related frontend with
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
 data LoadBalancerPoolResource = LoadBalancerPoolResource
-    deriving (Show, Eq, Generic)
+    deriving (Show, Generic)
 
 $(TH.makeResource
     "clc_load_balancer_pool"
@@ -93,7 +93,7 @@ data LoadBalancerResource = LoadBalancerResource
       {- ^ (Required, string) The name of the load balancer. -}
     , _status :: !(Attr Text)
       {- ^ (Required, string) Either "enabled" or "disabled" -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "clc_load_balancer"
@@ -114,7 +114,7 @@ data PublicIpResource = PublicIpResource
       {- ^ (Required, string) The name or ID of the server to bind IP to. -}
     , _source_restrictions :: !(Attr Text)
       {- ^ (Optional) See <#source_restrictions> below for details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "clc_public_ip"
@@ -170,7 +170,7 @@ data ServerResource = ServerResource
       {- ^ (Optional, string) Backup and replication strategy for disks. One of "standard", "premium" -}
     , _type' :: !(Attr Text)
       {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "clc_server"

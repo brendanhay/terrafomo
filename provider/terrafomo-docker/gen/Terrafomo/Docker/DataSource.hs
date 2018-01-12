@@ -48,7 +48,7 @@ on the latest available version of the tag.
 data RegistryImageDataSource = RegistryImageDataSource
     { _name :: !(Attr Text)
       {- ^ (Required, string) The name of the Docker image, including any tags. e.g. @alpine:latest@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegistryImageDataSource
     = '[ '("sha256_digest", Text)

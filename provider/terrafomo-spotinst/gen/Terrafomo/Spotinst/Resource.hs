@@ -60,7 +60,7 @@ data AwsGroupResource = AwsGroupResource
       {- ^ (Required) This determines how your group request is fulfilled from the possible On-Demand and Spot pools selected for launch. Only a single block is allowed. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "spotinst_aws_group"
@@ -82,7 +82,7 @@ data HealthcheckResource = HealthcheckResource
       {- ^ (Required) The resource to health check -}
     , _threshold :: !(Attr Text)
       {- ^ (Required) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed HealthcheckResource
     = '[ '("id", Text)
@@ -109,7 +109,7 @@ data SubscriptionResource = SubscriptionResource
       {- ^ (Required) The protocol to use to connect with the instance. Valid values: http, https -}
     , _resource_id :: !(Attr Text)
       {- ^ (Required) The resource to subscribe to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SubscriptionResource
     = '[ '("id", Text)

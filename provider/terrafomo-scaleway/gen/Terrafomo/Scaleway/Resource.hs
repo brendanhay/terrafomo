@@ -46,7 +46,7 @@ deleted. For additional details please refer to
 data IpResource = IpResource
     { _server :: !(Attr Text)
       {- ^ (Optional) ID of server to associate IP with -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IpResource
     = '[ '("id", Text)
@@ -71,7 +71,7 @@ data SecurityGroupResource = SecurityGroupResource
       {- ^ (Required) description of security group -}
     , _name :: !(Attr Text)
       {- ^ (Required) name of security group -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecurityGroupResource
     = '[ '("id", Text)
@@ -102,7 +102,7 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
       {- ^ (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ ) -}
     , _security_group :: !(Attr Text)
       {- ^ (Required) the security group which should be associated with this rule -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecurityGroupRuleResource
     = '[ '("id", Text)
@@ -145,7 +145,7 @@ data ServerResource = ServerResource
       {- ^ (Required) type of server -}
     , _volume :: !(Attr Text)
       {- ^ (Optional) attach additional volumes to your instance (see below) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "scaleway_server"
@@ -163,7 +163,7 @@ data VolumeAttachmentResource = VolumeAttachmentResource
       {- ^ (Required) id of the server -}
     , _volume :: !(Attr Text)
       {- ^ (Required) id of the volume to be attached -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeAttachmentResource
     = '[ '("id", Text)
@@ -190,7 +190,7 @@ data VolumeResource = VolumeResource
       {- ^ (Required) size of the volume in GB -}
     , _type' :: !(Attr Text)
       {- ^ (Required) type of volume -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeResource
     = '[ '("id", Text)

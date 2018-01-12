@@ -1,0 +1,17 @@
+_name: opc_compute_image_list_entry
+arguments:
+  _image_list:
+    required: true
+    help: (Required) - The name of the image list to lookup.
+    type: Text
+  _version:
+    required: true
+    help: (Required) - The version (integer) of the Image List to use.
+    type: Text
+  _entry:
+    required: false
+    help: (Optional) - Which machine image to use. See <#entry> below for more details
+    type: Text
+attributes: {}
+about: Use this data source to access the configuration of an Image List Entry.
+examples: []

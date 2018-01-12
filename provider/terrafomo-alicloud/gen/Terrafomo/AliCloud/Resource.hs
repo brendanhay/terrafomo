@@ -82,7 +82,7 @@ data DbInstanceResource = DbInstanceResource
       {- ^ (Optional) The virtual switch ID to launch in VPC. If you want to create instances in VPC network, this parameter must be set. -}
     , _zone_id :: !(Attr Text)
       {- ^ (Optional) Selected zone to create database instance. You cannot set the ZoneId parameter if the MultiAZ parameter is set to true. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_db_instance"
@@ -101,7 +101,7 @@ data DiskAttachmentResource = DiskAttachmentResource
       {- ^ (Required, Forces new resource) ID of the Disk to be attached. -}
     , _instance_id :: !(Attr Text)
       {- ^ (Required, Forces new resource) ID of the Instance to attach to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DiskAttachmentResource
     = '[ '("device_name", Text)
@@ -139,7 +139,7 @@ data DiskResource = DiskResource
       {- ^ (Optional) A snapshot to base the disk off of. If it is specified, @size@ will be invalid and the disk size is equals to the snapshot size. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DiskResource
     = '[ '("availability_zone", Text)
@@ -180,7 +180,7 @@ data EipAssociationResource = EipAssociationResource
       {- ^ (Optional, Forces new resource) The allocation EIP ID. -}
     , _instance_id :: !(Attr Text)
       {- ^ (Optional, Forces new resource) The ID of the instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EipAssociationResource
     = '[ '("allocation_id", Text)
@@ -203,7 +203,7 @@ data EipResource = EipResource
       {- ^ (Optional) Maximum bandwidth to the elastic public network, measured in Mbps (Mega bit per second). If this value is not specified, then automatically sets it to 5 Mbps. -}
     , _internet_charge_type :: !(Attr Text)
       {- ^ (Optional, Forces new resource) Internet charge type of the EIP, Valid values are @PayByBandwidth@ , @PayByTraffic@ . Default is @PayByBandwidth@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EipResource
     = '[ '("bandwidth", Text)
@@ -258,7 +258,7 @@ data EssScalingConfigurationResource = EssScalingConfigurationResource
       {- ^ (Required) ID of the security group to which a newly created instance belongs. -}
     , _system_disk_category :: !(Attr Text)
       {- ^ (Optional) Category of the system disk. The parameter value options are @cloud_efficiency@ , @cloud_ssd@ and @cloud@ . @cloud@ only is used to some no I/O optimized instance. Default to @cloud_efficiency@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_ess_scaling_configuration"
@@ -288,7 +288,7 @@ data EssScalingGroupResource = EssScalingGroupResource
       {- ^ (Optional) Name shown for the scaling group, which must contain 2-40 characters (English or Chinese). If this parameter is not specified, the default value is ScalingGroupId. -}
     , _vswitch_id :: !(Attr Text)
       {- ^ (Optional) The virtual switch ID which the ecs instance to be create in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EssScalingGroupResource
     = '[ '("db_instance_ids", Text)
@@ -329,7 +329,7 @@ data EssScalingRuleResource = EssScalingRuleResource
       {- ^ (Required) ID of the scaling group of a scaling rule. -}
     , _scaling_rule_name :: !(Attr Text)
       {- ^ (Optional) Name shown for the scaling rule, which is a string containing 2 to 40 English or Chinese characters. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EssScalingRuleResource
     = '[ '("adjustment_type", Text)
@@ -376,7 +376,7 @@ data EssScheduleResource = EssScheduleResource
       {- ^ (Optional) Display name of the scheduled task, which must be 2-40 characters (English or Chinese) long. -}
     , _task_enabled :: !(Attr Text)
       {- ^ (Optional) Whether to enable the scheduled task. The default value is true. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EssScheduleResource
     = '[ '("description", Text)
@@ -415,7 +415,7 @@ data ForwardResource = ForwardResource
       {- ^ (Required) The internal port, valid value is 1~65535|any. -}
     , _ip_protocol :: !(Attr Text)
       {- ^ (Required) The ip protocal, valid value is tcp|udp|any. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_forward"
@@ -477,7 +477,7 @@ data InstanceResource = InstanceResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vswitch_id :: !(Attr Text)
       {- ^ (Optional) The virtual switch ID to launch in VPC. If you want to create instances in VPC network, this parameter must be set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InstanceResource
     = '[ '("availability_zone", Text)
@@ -523,7 +523,7 @@ data KeyPairAttachmentResource = KeyPairAttachmentResource
       {- ^ (Required, Force new resource) The list of ECS instance's IDs. -}
     , _key_name :: !(Attr Text)
       {- ^ (Required, Force new resource) The name of key pair used to bind. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyPairAttachmentResource
     = '[ '("instance_ids", Text)
@@ -550,7 +550,7 @@ data KeyPairResource = KeyPairResource
       {- ^ - (Force new resource) The key pair name's prefix. It is conflict with @key_name@ . If it is specified, terraform will using it to build the only key name. -}
     , _public_key :: !(Attr Text)
       {- ^ - (Force new resource) You can import an existing public key and using Alicloud key pair to manage it. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyPairResource
     = '[ '("fingerprint", Text)
@@ -580,7 +580,7 @@ data NatGatewayResource = NatGatewayResource
       {- ^ (Required, Forces New Resorce) The specification of the nat gateway. Valid values are @Small@ , @Middle@ and @Large@ . Details refer to <https://help.aliyun.com/document_detail/42757.html?spm=5176.doc32322.6.559.kFNBzv> -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required, Forces New Resorce) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_nat_gateway"
@@ -616,7 +616,7 @@ data OssBucketObjectResource = OssBucketObjectResource
       {- ^ (Optional) Specifies server-side encryption of the object in OSS. At present, it valid value is " @AES256@ ". -}
     , _source :: !(Attr Text)
       {- ^ (Required) The path to the source file being uploaded to the bucket. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OssBucketObjectResource
     = '[ '("content_length", Text)
@@ -655,7 +655,7 @@ data OssBucketResource = OssBucketResource
       {- ^ (Optional) The configuration of <https://help.aliyun.com/document_detail/31869.html?spm=5176.doc31963.2.2.a3LZzH> (documented below). -}
     , _website :: !(Attr Text)
       {- ^ (Optional) A website object(documented below). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_oss_bucket"
@@ -678,7 +678,7 @@ data RouteEntryResource = RouteEntryResource
       {- ^ (Required, Forces new resource) The ID of the route table. -}
     , _router_id :: !(Attr Text)
       {- ^ - (Deprecated) This argument has beeb deprecated. Please use other arguments to launch a custom route entry. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouteEntryResource
     = '[ '("destination_cidrblock", Text)
@@ -736,7 +736,7 @@ data RouterInterfaceResource = RouterInterfaceResource
       {- ^ (Required, Forces New) Router Type. Optional value: VRouter, VBR. -}
     , _specification :: !(Attr Text)
       {- ^ (Optional) Specification of router interfaces. If @role@ is @AcceptingSide@ , the value can be ignore or must be @Negative@ . For more about the specification, refer to <https://www.alibabacloud.com/help/doc-detail/52415.htm?spm=a3c0i.o52412zh.b99.10.698e566fdVCfKD> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouterInterfaceResource
     = '[ '("access_point_id", Text)
@@ -789,7 +789,7 @@ data SecurityGroupResource = SecurityGroupResource
       {- ^ (Optional) The name of the security group. Defaults to null. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional, Forces new resource) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecurityGroupResource
     = '[ '("description", Text)
@@ -837,7 +837,7 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
       {- ^ (Optional, Forces new resource) The target security group ID within the same region. If this field is specified, the @nic_type@ can only select @intranet@ . -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SecurityGroupRuleResource
     = '[ '("id", Text)
@@ -866,7 +866,7 @@ data SlbAttachmentResource = SlbAttachmentResource
       {- ^ (Required) A list of instance ids to added backend server in the SLB. If dettachment instances then this value set []. -}
     , _slb_id :: !(Attr Text)
       {- ^ (Required) The ID of the SLB.. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SlbAttachmentResource
     = '[ '("backend_servers", Text)
@@ -895,7 +895,7 @@ data SlbResource = SlbResource
       {- ^ (Optional) The name of the SLB. This name must be unique within your AliCloud account, can have a maximum of 80 characters, must contain only alphanumeric characters or hyphens, such as "-","/",".","_", and must not begin or end with a hyphen. If not specified, Terraform will autogenerate a name beginning with @tf-lb@ . -}
     , _vswitch_id :: !(Attr Text)
       {- ^ (Required for a VPC SLB, Forces New Resource) The VSwitch ID to launch in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_slb"
@@ -913,7 +913,7 @@ data SnatResource = SnatResource
       {- ^ (Required, Forces new resource) The value can get from @alicloud_nat_gateway@ Attributes "snat_table_ids". -}
     , _source_vswitch_id :: !(Attr Text)
       {- ^ (Required, Forces new resource) The vswitch ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "alicloud_snat"
@@ -932,7 +932,7 @@ data VpcResource = VpcResource
       {- ^ (Optional) The VPC description. Defaults to null. -}
     , _name :: !(Attr Text)
       {- ^ (Optional) The name of the VPC. Defaults to null. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpcResource
     = '[ '("cidr_block", Text)
@@ -969,7 +969,7 @@ data VswitchResource = VswitchResource
       {- ^ (Optional) The name of the switch. Defaults to null. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required, Forces new resource) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VswitchResource
     = '[ '("availability_zone", Text)

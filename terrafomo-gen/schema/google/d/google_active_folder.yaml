@@ -1,0 +1,16 @@
+_name: google_active_folder
+arguments:
+  _display_name:
+    required: true
+    help: (Required) The folder's display name.
+    type: Text
+  _parent:
+    required: true
+    help: (Required) The resource name of the parent Folder or Organization.
+    type: Text
+attributes:
+  name:
+    help: ! '- The resource name of the Folder. This uniquely identifies the folder.'
+    type: Text
+about: Get an active folder within GCP by @display_name@ and @parent@ .
+examples: []

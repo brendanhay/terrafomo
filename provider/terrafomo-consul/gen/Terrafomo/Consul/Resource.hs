@@ -52,7 +52,7 @@ data AgentServiceResource = AgentServiceResource
       {- ^ (Optional) The port of the service. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AgentServiceResource
     = '[ '("address", Text)
@@ -89,7 +89,7 @@ data CatalogEntryResource = CatalogEntryResource
       {- ^ (Optional) A service to optionally associated with the node. Supported values are documented below. -}
     , _token :: !(Attr Text)
       {- ^ (Optional) ACL token. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CatalogEntryResource
     = '[ '("address", Text)
@@ -131,7 +131,7 @@ data KeyPrefixResource = KeyPrefixResource
       {- ^ (Required) A mapping from subkey name (which will be appended to the given @path_prefix@ ) to the value that should be stored at that key. Use slashes, as shown in the above example, to create "sub-folders" under the given path prefix. -}
     , _token :: !(Attr Text)
       {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyPrefixResource
     = '[ '("datacenter", Text)
@@ -161,14 +161,7 @@ data KeysResource = KeysResource
       {- ^ (Required) Specifies a key in Consul to be written. Supported values documented below. -}
     , _token :: !(Attr Text)
       {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed KeysResource
-    = '[ '("datacenter", Text)
-         {- - The datacenter the keys are being read from to. -}
-      , '("var.<name>", Text)
-         {- - For each name given, the corresponding attribute has the value of the key. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "consul_keys"
@@ -185,7 +178,7 @@ data NodeResource = NodeResource
       {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NodeResource
     = '[ '("address", Text)
@@ -231,7 +224,7 @@ data PreparedQueryResource = PreparedQueryResource
       {- ^ (Optional) Query templating options. This is used to make a single prepared query respond to many different requests. -}
     , _token :: !(Attr Text)
       {- ^ (Optional) The ACL token to use when saving the prepared query. This overrides the token that the agent provides by default. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PreparedQueryResource
     = '[ '("id", Text)
@@ -259,37 +252,25 @@ instead, which can create an arbitrary service record in the Consul catalog.
 data ServiceResource = ServiceResource
     { _address :: !(Attr Text)
       {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
-    , _datacenter :: !(Attr Text)
-      {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
     , _name :: !(Attr Text)
       {- ^ (Required, string) The name of the service. -}
     , _port :: !(Attr Text)
       {- ^ (Optional, int) The port of the service. -}
-    , _query_options :: !(Attr Text)
-      {- ^ (Optional) See below. -}
     , _service_id :: !(Attr Text)
       {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
-    , _tag :: !(Attr Text)
-      {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceResource
     = '[ '("address", Text)
          {- - The address of the service. -}
-      , '("datacenter", Text)
-         {- - The datacenter the keys are being read from to. -}
       , '("name", Text)
          {- - The name of the service. -}
       , '("port", Text)
          {- - The port of the service. -}
-      , '("service", Text)
-         {- - A list of nodes and details about each endpoint advertising a service.  Each element in the list is a map of attributes that correspond to each individual node.  The list of per-node attributes is detailed below. -}
       , '("service_id", Text)
          {- - The id of the service, defaults to the value of @name@ . -}
-      , '("tag", Text)
-         {- - The name of the tag used to filter the list of nodes in @service@ . -}
       , '("tags", Text)
          {- - The tags of the service. -}
        ]

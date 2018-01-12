@@ -1,0 +1,21 @@
+_name: opsgenie_team
+arguments:
+  _member:
+    required: false
+    help: (Optional) A Member block as documented below.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name associated with this team. OpsGenie defines that this
+      must not be longer than 100 characters.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description for this team.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the OpsGenie User.'
+    type: Text
+about: Manages a Team within OpsGenie.
+examples: []

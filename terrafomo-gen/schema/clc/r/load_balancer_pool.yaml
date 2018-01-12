@@ -1,0 +1,6 @@
+_name: clc_load_balancer_pool
+arguments: {}
+attributes: {}
+about: Manages a CLC load balancer pool. Manage related frontend with <load_balancer.html>
+  See also <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
+examples: []

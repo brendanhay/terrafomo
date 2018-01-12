@@ -48,13 +48,11 @@ please refine your search string so that it is specific enough to return
 only one result.
 -}
 data DatacenterDataSource = DatacenterDataSource
-    { _description :: !(Attr Text)
-      {- ^ (Optional)[string] Description for the data center. -}
-    , _location :: !(Attr Text)
+    { _location :: !(Attr Text)
       {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
     , _name :: !(Attr Text)
       {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DatacenterDataSource
     = '[ '("id", Text)
@@ -80,7 +78,7 @@ data ImageDataSource = ImageDataSource
       {- ^ (Optional) The image type, HDD or CD-ROM. -}
     , _version :: !(Attr Text)
       {- ^ (Optional) Version of the image (see details below). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImageDataSource
     = '[ '("id", Text)
@@ -102,7 +100,7 @@ data LocationDataSource = LocationDataSource
       {- ^ (Optional) A desired feature that the location must be able to provide. -}
     , _name :: !(Attr Text)
       {- ^ (Required) Name or part of the location name to search for. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LocationDataSource
     = '[ '("id", Text)
@@ -130,7 +128,7 @@ data ResourceDataSource = ResourceDataSource
       {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
     , _resource_type :: !(Attr Text)
       {- ^ (Optional) The specific type of resources to retrieve information about. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ResourceDataSource
     = '[ '("id", Text)
@@ -154,7 +152,7 @@ data SnapshotDataSource = SnapshotDataSource
       {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
     , _size :: !(Attr Text)
       {- ^ (Optional) The size of the snapshot to look for. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SnapshotDataSource
     = '[ '("id", Text)

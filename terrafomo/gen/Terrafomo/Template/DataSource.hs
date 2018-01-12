@@ -47,7 +47,7 @@ data CloudinitConfigDataSource = CloudinitConfigDataSource
       {- ^ (Optional) Specify whether or not to gzip the rendered output. Default to @true@ -}
     , _part :: !(Attr Text)
       {- ^ (Required) One may specify this many times, this creates a fragment of the rendered cloud-init config file. The order of the parts is maintained in the configuration is maintained in the rendered template. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudinitConfigDataSource
     = '[ '("rendered", Text)
@@ -68,7 +68,7 @@ data FileDataSource = FileDataSource
       {- ^ (Required) The contents of the template. These can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . -}
     , _vars :: !(Attr Text)
       {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FileDataSource
     = '[ '("rendered", Text)

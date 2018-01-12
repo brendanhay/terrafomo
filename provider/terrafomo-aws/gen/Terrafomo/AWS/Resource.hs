@@ -44,7 +44,7 @@ Provides a Step Function Activity resource
 data ActivityResource = ActivityResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the activity to create. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ActivityResource
     = '[ '("creation_date", Text)
@@ -81,12 +81,7 @@ data AmiCopyResource = AmiCopyResource
       {- ^ (Required) The id of the AMI to copy. This id must be valid in the region given by @source_ami_region@ . -}
     , _source_ami_region :: !(Attr Text)
       {- ^ (Required) The region from which the AMI will be copied. This may be the same as the AWS provider region in order to create a copy within the same region. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed AmiCopyResource
-    = '[ '("id", Text)
-         {- - The ID of the created AMI. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ami_copy"
@@ -116,12 +111,7 @@ data AmiFromInstanceResource = AmiFromInstanceResource
       {- ^ (Optional) Boolean that overrides the behavior of stopping the instance before snapshotting. This is risky since it may cause a snapshot of an inconsistent filesystem state, but can be used to avoid downtime if the user otherwise guarantees that no filesystem writes will be underway at the time of snapshot. -}
     , _source_instance_id :: !(Attr Text)
       {- ^ (Required) The id of the instance to use as the basis of the AMI. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed AmiFromInstanceResource
-    = '[ '("id", Text)
-         {- - The ID of the created AMI. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ami_from_instance"
@@ -138,7 +128,7 @@ data AmiLaunchPermissionResource = AmiLaunchPermissionResource
       {- ^ - (required) An AWS Account ID to add launch permissions. -}
     , _image_id :: !(Attr Text)
       {- ^ - (required) A region-unique name for the AMI. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AmiLaunchPermissionResource
     = '[ '("id", Text)
@@ -167,76 +157,13 @@ data AmiResource = AmiResource
       {- ^ (Optional) Nested block describing an EBS block device that should be attached to created instances. The structure of this block is described below. -}
     , _ephemeral_block_device :: !(Attr Text)
       {- ^ (Optional) Nested block describing an ephemeral block device that should be attached to created instances. The structure of this block is described below. -}
-    , _executable_users :: !(Attr Text)
-      {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _most_recent :: !(Attr Text)
-      {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
     , _name :: !(Attr Text)
       {- ^ (Required) A region-unique name for the AMI. -}
-    , _name_regex :: !(Attr Text)
-      {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners :: !(Attr Text)
-      {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     , _root_device_name :: !(Attr Text)
       {- ^ (Optional) The name of the root device (for example, @/dev/sda1@ , or @/dev/xvda@ ). -}
     , _virtualization_type :: !(Attr Text)
       {- ^ (Optional) Keyword to choose what virtualization mode created instances will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type changes the set of further arguments that are required, as described below. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed AmiResource
-    = '[ '("architecture", Text)
-         {- - The OS architecture of the AMI (ie: @i386@ or @x86_64@ ). -}
-      , '("block_device_mappings", Text)
-         {- - The block device mappings of the AMI. -}
-      , '("creation_date", Text)
-         {- - The date and time the image was created. -}
-      , '("description", Text)
-         {- - The description of the AMI that was provided during image creation. -}
-      , '("hypervisor", Text)
-         {- - The hypervisor type of the image. -}
-      , '("id", Text)
-         {- - The ID of the created AMI. -}
-      , '("image_id", Text)
-         {- - The ID of the AMI. Should be the same as the resource @id@ . -}
-      , '("image_location", Text)
-         {- - The location of the AMI. -}
-      , '("image_owner_alias", Text)
-         {- - The AWS account alias (for example, @amazon@ , @self@ ) or the AWS account ID of the AMI owner. -}
-      , '("image_type", Text)
-         {- - The type of image. -}
-      , '("kernel_id", Text)
-         {- - The kernel associated with the image, if any. Only applicable for machine images. -}
-      , '("name", Text)
-         {- - The name of the AMI that was provided during image creation. -}
-      , '("owner_id", Text)
-         {- - The AWS account ID of the image owner. -}
-      , '("platform", Text)
-         {- - The value is Windows for @Windows@ AMIs; otherwise blank. -}
-      , '("product_codes", Text)
-         {- - Any product codes associated with the AMI. -}
-      , '("public", Text)
-         {- - @true@ if the image has public launch permissions. -}
-      , '("ramdisk_id", Text)
-         {- - The RAM disk associated with the image, if any. Only applicable for machine images. -}
-      , '("root_device_name", Text)
-         {- - The device name of the root device. -}
-      , '("root_device_type", Text)
-         {- - The type of root device (ie: @ebs@ or @instance-store@ ). -}
-      , '("root_snapshot_id", Text)
-         {- - The Snapshot ID for the root volume (for EBS-backed AMIs) -}
-      , '("sriov_net_support", Text)
-         {- - Specifies whether enhanced networking is enabled. -}
-      , '("state", Text)
-         {- - The current state of the AMI. If the state is @available@ , the image is successfully registered and can be used to launch an instance. -}
-      , '("state_reason", Text)
-         {- - Describes a state change. Fields are @UNSET@ if not available. -}
-      , '("tags", Text)
-         {- - Any tags assigned to the image. -}
-      , '("virtualization_type", Text)
-         {- - The type of virtualization of the AMI (ie: @hvm@ or @paravirtual@ ). -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ami"
@@ -253,7 +180,7 @@ resource will keep your account settings intact
 data ApiGatewayAccountResource = ApiGatewayAccountResource
     { _cloudwatch_role_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more <https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-stage-settings.html#how-to-stage-settings-console> . Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayAccountResource
     = '[ '("throttle_settings", Text)
@@ -282,7 +209,7 @@ data ApiGatewayApiKeyResource = ApiGatewayApiKeyResource
       {- ^ (Optional) A list of stage keys associated with the API key - see below -}
     , _value :: !(Attr Text)
       {- ^ (Optional) The value of the API key. If not specified, it will be automatically generated by AWS on creation. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayApiKeyResource
     = '[ '("created_date", Text)
@@ -321,7 +248,7 @@ data ApiGatewayAuthorizerResource = ApiGatewayAuthorizerResource
       {- ^ (Required) The ID of the associated REST API -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) The type of the authorizer. @TOKEN@ is currently the only allowed value. Defaults to @TOKEN@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_authorizer"
@@ -343,7 +270,7 @@ data ApiGatewayBasePathMappingResource = ApiGatewayBasePathMappingResource
       {- ^ (Required) The already-registered domain name to connect the API to. -}
     , _stage_name :: !(Attr Text)
       {- ^ (Optional) The name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_base_path_mapping"
@@ -357,7 +284,7 @@ Provides an API Gateway Client Certificate.
 data ApiGatewayClientCertificateResource = ApiGatewayClientCertificateResource
     { _description :: !(Attr Text)
       {- ^ (Optional) The description of the client certificate. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayClientCertificateResource
     = '[ '("created_date", Text)
@@ -393,7 +320,7 @@ data ApiGatewayDeploymentResource = ApiGatewayDeploymentResource
       {- ^ (Required) The name of the stage -}
     , _variables :: !(Attr Text)
       {- ^ (Optional) A map that defines variables for the stage -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayDeploymentResource
     = '[ '("created_date", Text)
@@ -438,7 +365,7 @@ data ApiGatewayDomainNameResource = ApiGatewayDomainNameResource
       {- ^ (Optional) The private key associated with the domain certificate given in @certificate_body@ . Conflicts with @certificate_arn@ . -}
     , _domain_name :: !(Attr Text)
       {- ^ (Required) The fully-qualified domain name to register -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayDomainNameResource
     = '[ '("certificate_upload_date", Text)
@@ -471,7 +398,7 @@ data ApiGatewayGatewayResponseResource = ApiGatewayGatewayResponseResource
       {- ^ (Required) The string identifier of the associated REST API. -}
     , _status_code :: !(Attr Text)
       {- ^ (Optional) The HTTP status code of the Gateway Response. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_gateway_response"
@@ -508,10 +435,10 @@ data ApiGatewayIntegrationResource = ApiGatewayIntegrationResource
     , _rest_api_id :: !(Attr Text)
       {- ^ (Required) The ID of the associated REST API. -}
     , _type' :: !(Attr Text)
-      {- ^ (Required) The integration input's type (HTTP, MOCK, AWS, AWS_PROXY, HTTP_PROXY) -}
+      {- ^ (Required) The integration input's <https://docs.aws.amazon.com/apigateway/api-reference/resource/integration/> . Valid values are @HTTP@ (for HTTP backends), @MOCK@ (not calling any real backend), @AWS@ (for AWS services), @AWS_PROXY@ (for Lambda proxy integration) and @HTTP_PROXY@ (for HTTP proxy integration). -}
     , _uri :: !(Attr Text)
       {- ^ (Optional) The input's URI (HTTP, AWS). Required if @type@ is @HTTP@ or @AWS@ . For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form @arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}@ . @region@ , @subdomain@ and @service@ are used to determine the right endpoint. e.g. @arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_integration"
@@ -544,7 +471,7 @@ data ApiGatewayIntegrationResponseResource = ApiGatewayIntegrationResponseResour
       {- ^ (Optional) Specifies the regular expression pattern used to choose an integration response based on the response from the backend. Setting this to @-@ makes the integration the default one. If the backend is an @AWS@ Lambda function, the AWS Lambda function error header is matched. For all other @HTTP@ and @AWS@ backends, the HTTP status code is matched. -}
     , _status_code :: !(Attr Text)
       {- ^ (Required) The HTTP status code -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_integration_response"
@@ -574,7 +501,7 @@ data ApiGatewayMethodResource = ApiGatewayMethodResource
       {- ^ (Required) The API resource ID -}
     , _rest_api_id :: !(Attr Text)
       {- ^ (Required) The ID of the associated REST API -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_method"
@@ -600,7 +527,7 @@ data ApiGatewayMethodResponseResource = ApiGatewayMethodResponseResource
       {- ^ (Required) The ID of the associated REST API -}
     , _status_code :: !(Attr Text)
       {- ^ (Required) The HTTP status code -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_method_response"
@@ -620,7 +547,7 @@ data ApiGatewayMethodSettingsResource = ApiGatewayMethodSettingsResource
       {- ^ (Required) The settings block, see below. -}
     , _stage_name :: !(Attr Text)
       {- ^ (Required) The name of the stage -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_method_settings"
@@ -642,7 +569,7 @@ data ApiGatewayModelResource = ApiGatewayModelResource
       {- ^ (Required) The ID of the associated REST API -}
     , _schema :: !(Attr Text)
       {- ^ (Required) The schema of the model in a JSON form -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayModelResource
     = '[ '("id", Text)
@@ -665,7 +592,7 @@ data ApiGatewayResourceResource = ApiGatewayResourceResource
       {- ^ (Required) The last path segment of this API resource. -}
     , _rest_api_id :: !(Attr Text)
       {- ^ (Required) The ID of the associated REST API -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayResourceResource
     = '[ '("id", Text)
@@ -692,7 +619,7 @@ data ApiGatewayRestApiResource = ApiGatewayRestApiResource
       {- ^ (Optional) The description of the REST API -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the REST API -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayRestApiResource
     = '[ '("created_date", Text)
@@ -731,7 +658,7 @@ data ApiGatewayStageResource = ApiGatewayStageResource
       {- ^ (Required) The name of the stage -}
     , _variables :: !(Attr Text)
       {- ^ (Optional) A map that defines the stage variables -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_stage"
@@ -749,7 +676,7 @@ data ApiGatewayUsagePlanKeyResource = ApiGatewayUsagePlanKeyResource
       {- ^ (Required) The type of the API key resource. Currently, the valid key type is API_KEY. -}
     , _usage_plan_id :: !(Attr Text)
       {- ^ (Required) The Id of the usage plan resource representing to associate the key to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApiGatewayUsagePlanKeyResource
     = '[ '("id", Text)
@@ -788,7 +715,7 @@ data ApiGatewayUsagePlanResource = ApiGatewayUsagePlanResource
       {- ^ (Optional) The <#quota-settings-arguments> of the usage plan. -}
     , _throttle_settings :: !(Attr Text)
       {- ^ (Optional) The <#throttling-settings-arguments> of the usage plan. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_api_gateway_usage_plan"
@@ -809,7 +736,7 @@ data AppCookieStickinessPolicyResource = AppCookieStickinessPolicyResource
       {- ^ (Required) The name of load balancer to which the policy should be attached. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the stickiness policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AppCookieStickinessPolicyResource
     = '[ '("cookie_name", Text)
@@ -848,7 +775,7 @@ data AppautoscalingPolicyResource = AppautoscalingPolicyResource
       {- ^ (Optional) Step scaling policy configuration, requires @policy_type = "StepScaling"@ (default). See supported fields below. -}
     , _target_tracking_scaling_policy_configuration :: !(Attr Text)
       {- ^ (Optional) A target tracking policy, requires @policy_type = "TargetTrackingScaling"@ . See supported fields below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_appautoscaling_policy"
@@ -872,12 +799,53 @@ data AppautoscalingTargetResource = AppautoscalingTargetResource
       {- ^ (Required) The scalable dimension of the scalable target. Documentation can be found in the @ScalableDimension@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
     , _service_namespace :: !(Attr Text)
       {- ^ (Required) The AWS service namespace of the scalable target. Documentation can be found in the @ServiceNamespace@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_appautoscaling_target"
     ''Qual.AWS
     ''AppautoscalingTargetResource)
+
+{- | The @aws_athena_database@ AWS resource.
+
+Provides a SSM resource data sync.
+-}
+data AthenaDatabaseResource = AthenaDatabaseResource
+    { _name :: !(Attr Text)
+      {- ^ (Required) Name for the configuration. -}
+    , _s3_destination :: !(Attr Text)
+      {- ^ (Required) Amazon S3 configuration details for the sync. -}
+    } deriving (Show, Generic)
+
+$(TH.makeResource
+    "aws_athena_database"
+    ''Qual.AWS
+    ''AthenaDatabaseResource)
+
+{- | The @aws_athena_named_query@ AWS resource.
+
+Provides an Athena Named Query resource.
+-}
+data AthenaNamedQueryResource = AthenaNamedQueryResource
+    { _database :: !(Attr Text)
+      {- ^ (Required) The database to which the query belongs. -}
+    , _description :: !(Attr Text)
+      {- ^ (Optional) A brief explanation of the query. Maximum length of 1024. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The plain language name for the query. Maximum length of 128. -}
+    , _query :: !(Attr Text)
+      {- ^ (Required) The text of the query itself. In other words, all query statements. Maximum length of 262144. -}
+    } deriving (Show, Generic)
+
+type instance Computed AthenaNamedQueryResource
+    = '[ '("id", Text)
+         {- - The unique ID of the query. -}
+       ]
+
+$(TH.makeResource
+    "aws_athena_named_query"
+    ''Qual.AWS
+    ''AthenaNamedQueryResource)
 
 {- | The @aws_autoscaling_attachment@ AWS resource.
 
@@ -896,7 +864,7 @@ data AutoscalingAttachmentResource = AutoscalingAttachmentResource
       {- ^ (Required) Name of ASG to associate with the ELB. -}
     , _elb :: !(Attr Text)
       {- ^ (Optional) The name of the ELB. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_autoscaling_attachment"
@@ -960,7 +928,7 @@ data AutoscalingGroupResource = AutoscalingGroupResource
       {- ^ (Default: "10m") A maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for ASG instances to be healthy before timing out.  (See also <#waiting-for-capacity> below.) Setting this to "0" causes Terraform to skip all Capacity Waiting behavior. -}
     , _wait_for_elb_capacity :: !(Attr Text)
       {- ^ (Optional) Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations. (Takes precedence over @min_elb_capacity@ behavior.) (See also <#waiting-for-capacity> below.) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutoscalingGroupResource
     = '[ '("arn", Text)
@@ -1029,7 +997,7 @@ data AutoscalingLifecycleHookResource = AutoscalingLifecycleHookResource
       {- ^ (Optional) The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. -}
     , _role_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_autoscaling_lifecycle_hook"
@@ -1051,7 +1019,7 @@ data AutoscalingNotificationResource = AutoscalingNotificationResource
       {- ^ (Required) A list of Notification Types that trigger notifications. Acceptable values are documented <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html> -}
     , _topic_arn :: !(Attr Text)
       {- ^ (Required) The Topic ARN for notifications to be sent through -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_autoscaling_notification"
@@ -1077,7 +1045,7 @@ data AutoscalingPolicyResource = AutoscalingPolicyResource
       {- ^ (Required) The name of the policy. -}
     , _policy_type :: !(Attr Text)
       {- ^ (Optional) The policy type, either "SimpleScaling" or "StepScaling". If this value isn't provided, AWS will default to "SimpleScaling." -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutoscalingPolicyResource
     = '[ '("adjustment_type", Text)
@@ -1118,7 +1086,7 @@ data AutoscalingScheduleResource = AutoscalingScheduleResource
       {- ^ (Required) The name of this scaling action. -}
     , _start_time :: !(Attr Text)
       {- ^ (Optional) The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed AutoscalingScheduleResource
     = '[ '("arn", Text)
@@ -1155,7 +1123,7 @@ data BatchComputeEnvironmentResource = BatchComputeEnvironmentResource
       {- ^ (Optional) The state of the compute environment. If the state is @ENABLED@ , then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are @ENABLED@ or @DISABLED@ . Defaults to @ENABLED@ . -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of the compute environment. Valid items are @MANAGED@ or @UNMANAGED@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BatchComputeEnvironmentResource
     = '[ '("arn", Text)
@@ -1188,7 +1156,7 @@ data BatchJobDefinitionResource = BatchJobDefinitionResource
       {- ^ (Optional) Specifies the retry strategy to use for failed jobs that are submitted with this job definition. Maximum number of @retry_strategy@ is @1@ .  Defined below. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of job definition.  Must be @container@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_batch_job_definition"
@@ -1208,7 +1176,7 @@ data BatchJobQueueResource = BatchJobQueueResource
       {- ^ (Required) The priority of the job queue. Job queues with a higher priority are evaluated first when associated with same compute environment. -}
     , _state :: !(Attr Text)
       {- ^ (Required) The state of the job queue. Must be one of: @ENABLED@ or @DISABLED@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BatchJobQueueResource
     = '[ '("arn", Text)
@@ -1251,31 +1219,13 @@ data CloudformationStackResource = CloudformationStackResource
       {- ^ (Optional) Location of a file containing the template body (max size: 460,800 bytes). -}
     , _timeout_in_minutes :: !(Attr Text)
       {- ^ (Optional) The amount of time that can pass before the stack status becomes @CREATE_FAILED@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudformationStackResource
-    = '[ '("capabilities", Text)
-         {- - A list of capabilities -}
-      , '("description", Text)
-         {- - Description of the stack -}
-      , '("disable_rollback", Text)
-         {- - Whether the rollback of the stack is disabled when stack creation fails -}
-      , '("iam_role_arn", Text)
-         {- - The ARN of the IAM role used to create the stack. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - A unique identifier of the stack. -}
-      , '("notification_arns", Text)
-         {- - A list of SNS topic ARNs to publish stack related events -}
       , '("outputs", Text)
          {- - A map of outputs from the stack. -}
-      , '("parameters", Text)
-         {- - A map of parameters that specify input parameters for the stack. -}
-      , '("tags", Text)
-         {- - A map of tags associated with this stack. -}
-      , '("template_body", Text)
-         {- - Structure containing the template body. -}
-      , '("timeout_in_minutes", Text)
-         {- - The amount of time that can pass before the stack status becomes @CREATE_FAILED@ -}
        ]
 
 $(TH.makeResource
@@ -1332,7 +1282,7 @@ data CloudfrontDistributionResource = CloudfrontDistributionResource
       {- ^ (Required) - The <#viewer-certificate-arguments> for this distribution (maximum one). -}
     , _web_acl_id :: !(Attr Text)
       {- ^ (Optional) - If you're using AWS WAF to filter CloudFront requests, the Id of the AWS WAF web ACL that is associated with the distribution. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_cloudfront_distribution"
@@ -1351,7 +1301,7 @@ CloudFront distributions, see the
 data CloudfrontOriginAccessIdentityResource = CloudfrontOriginAccessIdentityResource
     { _comment :: !(Attr Text)
       {- ^ (Optional) - An optional comment for the origin access identity. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudfrontOriginAccessIdentityResource
     = '[ '("caller_reference", Text)
@@ -1402,7 +1352,7 @@ data CloudtrailResource = CloudtrailResource
       {- ^ (Optional) Specifies the name of the Amazon SNS topic defined for notification of log file delivery. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the trail -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudtrailResource
     = '[ '("arn", Text)
@@ -1427,7 +1377,7 @@ data CloudwatchDashboardResource = CloudwatchDashboardResource
       {- ^ (Required) The detailed information about the dashboard, including what widgets are included and their location on the dashboard. You can read more about the body structure in the <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html> . -}
     , _dashboard_name :: !(Attr Text)
       {- ^ (Required) The name of the dashboard. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchDashboardResource
     = '[ '("dashboard_arn", Text)
@@ -1456,7 +1406,7 @@ data CloudwatchEventRuleResource = CloudwatchEventRuleResource
       {- ^ (Optional) The Amazon Resource Name (ARN) associated with the role that is used for target invocation. -}
     , _schedule_expression :: !(Attr Text)
       {- ^ (Required, if @event_pattern@ isn't specified) The scheduling expression. For example, @cron(0 20 * * ? *)@ or @rate(5 minutes)@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchEventRuleResource
     = '[ '("arn", Text)
@@ -1491,7 +1441,7 @@ data CloudwatchEventTargetResource = CloudwatchEventTargetResource
       {- ^ (Optional) Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed. -}
     , _target_id :: !(Attr Text)
       {- ^ (Optional) The unique target assignment ID.  If missing, will generate a random, unique id. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_cloudwatch_event_target"
@@ -1507,7 +1457,7 @@ data CloudwatchLogDestinationPolicyResource = CloudwatchLogDestinationPolicyReso
       {- ^ (Required) The policy document. This is a JSON formatted string. -}
     , _destination_name :: !(Attr Text)
       {- ^ (Required) A name for the subscription filter -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_cloudwatch_log_destination_policy"
@@ -1525,7 +1475,7 @@ data CloudwatchLogDestinationResource = CloudwatchLogDestinationResource
       {- ^ (Required) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target -}
     , _target_arn :: !(Attr Text)
       {- ^ (Required) The ARN of the target Amazon Kinesis stream or Amazon Lambda resource for the destination -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchLogDestinationResource
     = '[ '("arn", Text)
@@ -1552,7 +1502,7 @@ data CloudwatchLogGroupResource = CloudwatchLogGroupResource
       {- ^ (Optional) Specifies the number of days you want to retain log events in the specified log group. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchLogGroupResource
     = '[ '("arn", Text)
@@ -1577,7 +1527,7 @@ data CloudwatchLogMetricFilterResource = CloudwatchLogMetricFilterResource
       {- ^ (Required) A name for the metric filter. -}
     , _pattern :: !(Attr Text)
       {- ^ (Required) A valid <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/FilterAndPatternSyntax.html> for extracting metric data out of ingested log events. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchLogMetricFilterResource
     = '[ '("id", Text)
@@ -1598,7 +1548,7 @@ data CloudwatchLogStreamResource = CloudwatchLogStreamResource
       {- ^ (Required) The name of the log group under which the log stream is to be created. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the log stream. Must not be longer than 512 characters and must not contain @:@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchLogStreamResource
     = '[ '("arn", Text)
@@ -1625,7 +1575,7 @@ data CloudwatchLogSubscriptionFilterResource = CloudwatchLogSubscriptionFilterRe
       {- ^ (Required) A name for the subscription filter -}
     , _role_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use @aws_lambda_permission@ resource for granting access from CloudWatch logs to the destination Lambda function. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchLogSubscriptionFilterResource
     = '[ '("arn", Text)
@@ -1678,7 +1628,7 @@ data CloudwatchMetricAlarmResource = CloudwatchMetricAlarmResource
       {- ^ (Optional) Sets how this alarm is to handle missing data points. The following values are supported: @missing@ , @ignore@ , @breaching@ and @notBreaching@ . Defaults to @missing@ . -}
     , _unit :: !(Attr Text)
       {- ^ (Optional) The unit for the alarm's associated metric. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CloudwatchMetricAlarmResource
     = '[ '("id", Text)
@@ -1713,7 +1663,7 @@ data CodebuildProjectResource = CodebuildProjectResource
       {- ^ (Required) Information about the project's input source code. Source blocks are documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CodebuildProjectResource
     = '[ '("description", Text)
@@ -1748,7 +1698,7 @@ data CodecommitRepositoryResource = CodecommitRepositoryResource
       {- ^ (Optional) The description of the repository. This needs to be less than 1000 characters -}
     , _repository_name :: !(Attr Text)
       {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CodecommitRepositoryResource
     = '[ '("arn", Text)
@@ -1787,7 +1737,7 @@ data CodecommitTriggerResource = CodecommitTriggerResource
       {- ^ (Required) The name of the trigger. -}
     , _repository_name :: !(Attr Text)
       {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_codecommit_trigger"
@@ -1801,7 +1751,7 @@ Provides a CodeDeploy application to be used as a basis for deployments
 data CodedeployAppResource = CodedeployAppResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the application. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CodedeployAppResource
     = '[ '("id", Text)
@@ -1824,7 +1774,7 @@ data CodedeployDeploymentConfigResource = CodedeployDeploymentConfigResource
       {- ^ (Required) The name of the deployment config. -}
     , _minimum_healthy_hosts :: !(Attr Text)
       {- ^ (Optional) A minimum_healthy_hosts block. Minimum Healthy Hosts are documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CodedeployDeploymentConfigResource
     = '[ '("deployment_config_id", Text)
@@ -1869,7 +1819,7 @@ data CodedeployDeploymentGroupResource = CodedeployDeploymentGroupResource
       {- ^ (Required) The service role ARN that allows deployments. -}
     , _trigger_configuration :: !(Attr Text)
       {- ^ (Optional) Trigger Configurations for the deployment group (documented below). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_codedeploy_deployment_group"
@@ -1891,7 +1841,7 @@ data CodepipelineResource = CodepipelineResource
       {- ^ (Required) A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf. -}
     , _stage :: !(Attr Text)
       {- ^ (Required) A stage block. Stages are documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CodepipelineResource
     = '[ '("id", Text)
@@ -1922,7 +1872,7 @@ data CognitoIdentityPoolResource = CognitoIdentityPoolResource
       {- ^ (Optional) - An array of Amazon Resource Names (ARNs) of the SAML provider for your identity. -}
     , _supported_login_providers :: !(Attr Text)
       {- ^ (Optional) - Key-Value pairs mapping provider names to provider app IDs. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_cognito_identity_pool"
@@ -1940,12 +1890,60 @@ data CognitoIdentityPoolRolesAttachmentResource = CognitoIdentityPoolRolesAttach
       {- ^ (Optional) - A List of <#role-mappings> . -}
     , _roles :: !(Attr Text)
       {- ^ (Required) - The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_cognito_identity_pool_roles_attachment"
     ''Qual.AWS
     ''CognitoIdentityPoolRolesAttachmentResource)
+
+{- | The @aws_cognito_user_pool@ AWS resource.
+
+Provides a Cognito User Pool resource.
+-}
+data CognitoUserPoolResource = CognitoUserPoolResource
+    { _admin_create_user_config :: !(Attr Text)
+      {- ^ (Optional) - The configuration for <#admin-create-user-config> requests. -}
+    , _alias_attributes :: !(Attr Text)
+      {- ^ (Optional) Attributes supported as an alias for this user pool. Possible values: phone_number, email, or preferred_username. Conflicts with @username_attributes@ . -}
+    , _auto_verified_attributes :: !(Attr Text)
+      {- ^ (Optional) The attributes to be auto-verified. Possible values: email, phone_number. -}
+    , _device_configuration :: !(Attr Text)
+      {- ^ (Optional) - The configuration for the <#device-configuration> . -}
+    , _email_configuration :: !(Attr Text)
+      {- ^ (Optional) - The <#email-configuration> . -}
+    , _email_verification_message :: !(Attr Text)
+      {- ^ (Optional) A string representing the email verification message. Must contain the @{####}@ placeholder. -}
+    , _email_verification_subject :: !(Attr Text)
+      {- ^ (Optional) A string representing the email verification subject. -}
+    , _lambda_config :: !(Attr Text)
+      {- ^ (Optional) - A container for the AWS <#lambda-configuration> associated with the user pool. -}
+    , _mfa_configuration :: !(Attr Text)
+      {- ^ (Optional, Default: OFF) Set to enable multi-factor authentication. Must be one of the following values (ON, OFF, OPTIONAL) -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The name of the user pool. -}
+    , _password_policy :: !(Attr Text)
+      {- ^ (Optional) - A container for information about the <#password-policy> . -}
+    , _schema :: !(Attr Text)
+      {- ^ (Optional) - A container with the <#schema-attributes> of a user pool. Maximum of 50 attributes. -}
+    , _sms_authentication_message :: !(Attr Text)
+      {- ^ (Optional) A string representing the SMS authentication message. -}
+    , _sms_configuration :: !(Attr Text)
+      {- ^ (Optional) - The <#sms-configuration> . -}
+    , _sms_verification_message :: !(Attr Text)
+      {- ^ (Optional) A string representing the SMS verification message. -}
+    , _tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the User Pool. -}
+    , _username_attributes :: !(Attr Text)
+      {- ^ (Optional) pecifies whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with @alias_attributes@ . -}
+    , _verification_message_template :: !(Attr Text)
+      {- ^ (Optional) - The <#verification-message-template> configuration. -}
+    } deriving (Show, Generic)
+
+$(TH.makeResource
+    "aws_cognito_user_pool"
+    ''Qual.AWS
+    ''CognitoUserPoolResource)
 
 {- | The @aws_config_config_rule@ AWS resource.
 
@@ -1967,7 +1965,7 @@ data ConfigConfigRuleResource = ConfigConfigRuleResource
       {- ^ (Optional) Scope defines which resources can trigger an evaluation for the rule as documented below. -}
     , _source :: !(Attr Text)
       {- ^ (Required) Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources as documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_config_config_rule"
@@ -1991,7 +1989,7 @@ data ConfigConfigurationRecorderResource = ConfigConfigurationRecorderResource
       {- ^ (Optional) Recording group - see below. -}
     , _role_arn :: !(Attr Text)
       {- ^ (Required) Amazon Resource Name (ARN) of the IAM role. used to make read or write requests to the delivery channel and to describe the AWS resources associated with the account. See <http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html> for more details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_config_configuration_recorder"
@@ -2010,7 +2008,7 @@ data ConfigConfigurationRecorderStatusResource = ConfigConfigurationRecorderStat
       {- ^ (Required) Whether the configuration recorder should be enabled or disabled. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the recorder -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_config_configuration_recorder_status"
@@ -2035,7 +2033,7 @@ data ConfigDeliveryChannelResource = ConfigDeliveryChannelResource
       {- ^ (Optional) Options for how AWS Config delivers configuration snapshots. See below -}
     , _sns_topic_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of the SNS topic that AWS Config delivers notifications to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_config_delivery_channel"
@@ -2057,7 +2055,7 @@ data CustomerGatewayResource = CustomerGatewayResource
       {- ^ (Optional) Tags to apply to the gateway. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of customer gateway. The only type AWS supports at this time is "ipsec.1". -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CustomerGatewayResource
     = '[ '("bgp_asn", Text)
@@ -2096,7 +2094,7 @@ data DbEventSubscriptionResource = DbEventSubscriptionResource
       {- ^ (Optional) The type of source that will be generating the events. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_db_event_subscription"
@@ -2140,8 +2138,6 @@ data DbInstanceResource = DbInstanceResource
       {- ^ (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html> for more information. -}
     , _copy_tags_to_snapshot :: !(Attr Text)
       {- ^ – (Optional, boolean) On delete, copy all Instance @tags@ to the final snapshot (if @final_snapshot_identifier@ is specified). Default is @false@ . -}
-    , _db_instance_identifier :: !(Attr Text)
-      {- ^ (Required) The name of the RDS instance -}
     , _db_subnet_group_name :: !(Attr Text)
       {- ^ (Optional) Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the @default@ VPC, or in EC2 Classic, if available. -}
     , _engine :: !(Attr Text)
@@ -2204,7 +2200,7 @@ data DbInstanceResource = DbInstanceResource
       {- ^ (Required unless a @snapshot_identifier@ or @replicate_source_db@ is provided) Username for the master DB user. -}
     , _vpc_security_group_ids :: !(Attr Text)
       {- ^ (Optional) List of VPC security groups to associate. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DbInstanceResource
     = '[ '("address", Text)
@@ -2213,8 +2209,6 @@ type instance Computed DbInstanceResource
          {- - The amount of allocated storage. -}
       , '("arn", Text)
          {- - The ARN of the RDS instance. -}
-      , '("auto_minor_version_upgrade", Text)
-         {- - Indicates that minor version patches are applied automatically. -}
       , '("availability_zone", Text)
          {- - The availability zone of the instance. -}
       , '("backup_retention_period", Text)
@@ -2223,22 +2217,6 @@ type instance Computed DbInstanceResource
          {- - The backup window. -}
       , '("ca_cert_identifier", Text)
          {- - Specifies the identifier of the CA certificate for the DB instance. -}
-      , '("db_cluster_identifier", Text)
-         {- - If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of. -}
-      , '("db_instance_arn", Text)
-         {- - The Amazon Resource Name (ARN) for the DB instance. -}
-      , '("db_instance_class", Text)
-         {- - Contains the name of the compute and memory capacity class of the DB instance. -}
-      , '("db_instance_port", Text)
-         {- - Specifies the port that the DB instance listens on. -}
-      , '("db_name", Text)
-         {- - Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. -}
-      , '("db_parameter_groups", Text)
-         {- - Provides the list of DB parameter groups applied to this DB instance. -}
-      , '("db_security_groups", Text)
-         {- - Provides List of DB security groups associated to this DB instance. -}
-      , '("db_subnet_group", Text)
-         {- - Specifies the name of the subnet group associated with the DB instance. -}
       , '("endpoint", Text)
          {- - The connection endpoint. -}
       , '("engine", Text)
@@ -2251,50 +2229,22 @@ type instance Computed DbInstanceResource
          {- - The RDS instance ID. -}
       , '("instance_class", Text)
          {- - The RDS instance class. -}
-      , '("iops", Text)
-         {- - Specifies the Provisioned IOPS (I/O operations per second) value. -}
-      , '("kms_key_id", Text)
-         {- - If StorageEncrypted is true, the KMS key identifier for the encrypted DB instance. -}
-      , '("license_model", Text)
-         {- - License model information for this DB instance. -}
       , '("maintenance_window", Text)
          {- - The instance maintenance window. -}
-      , '("master_username", Text)
-         {- - Contains the master username for the DB instance. -}
-      , '("monitoring_interval", Text)
-         {- - The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. -}
-      , '("monitoring_role_arn", Text)
-         {- - The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs. -}
       , '("multi_az", Text)
          {- - If the RDS instance is multi AZ enabled. -}
       , '("name", Text)
          {- - The database name. -}
-      , '("option_group_memberships", Text)
-         {- - Provides the list of option group memberships for this DB instance. -}
       , '("port", Text)
          {- - The database port. -}
-      , '("preferred_backup_window", Text)
-         {- - Specifies the daily time range during which automated backups are created. -}
-      , '("preferred_maintenance_window", Text)
-         {- -  Specifies the weekly time range during which system maintenance can occur in UTC. -}
-      , '("publicly_accessible", Text)
-         {- - Specifies the accessibility options for the DB instance. -}
-      , '("replicate_source_db", Text)
-         {- - The identifier of the source DB that this is a replica of. -}
       , '("resource_id", Text)
          {- - The RDS Resource ID of this instance. -}
       , '("status", Text)
          {- - The RDS instance status. -}
       , '("storage_encrypted", Text)
          {- - Specifies whether the DB instance is encrypted. -}
-      , '("storage_type", Text)
-         {- - Specifies the storage type associated with DB instance. -}
-      , '("timezone", Text)
-         {- - The time zone of the DB instance. -}
       , '("username", Text)
          {- - The master username for the database. -}
-      , '("vpc_security_groups", Text)
-         {- - Provides a list of VPC security group elements that the DB instance belongs to. -}
        ]
 
 $(TH.makeResource
@@ -2321,7 +2271,7 @@ data DbOptionGroupResource = DbOptionGroupResource
       {- ^ (Optional) The description of the option group. Defaults to "Managed by Terraform". -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DbOptionGroupResource
     = '[ '("arn", Text)
@@ -2352,7 +2302,7 @@ data DbParameterGroupResource = DbParameterGroupResource
       {- ^ (Optional) A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html> after initial creation of the group. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DbParameterGroupResource
     = '[ '("arn", Text)
@@ -2382,7 +2332,7 @@ data DbSecurityGroupResource = DbSecurityGroupResource
       {- ^ (Required) The name of the DB security group. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DbSecurityGroupResource
     = '[ '("arn", Text)
@@ -2405,15 +2355,7 @@ data DbSnapshotResource = DbSnapshotResource
       {- ^ (Required) The DB Instance Identifier from which to take the snapshot. -}
     , _db_snapshot_identifier :: !(Attr Text)
       {- ^ (Required) The Identifier for the snapshot. -}
-    , _include_public :: !(Attr Text)
-      {- ^ (Optional) Set this value to true to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to false. The default is @false@ . -}
-    , _include_shared :: !(Attr Text)
-      {- ^ (Optional) Set this value to true to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to false. The default is @false@ . -}
-    , _most_recent :: !(Attr Text)
-      {- ^ (Optional) If more than one result is returned, use the most recent Snapshot. -}
-    , _snapshot_type :: !(Attr Text)
-      {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DbSnapshotResource
     = '[ '("allocated_storage", Text)
@@ -2428,8 +2370,6 @@ type instance Computed DbSnapshotResource
          {- - Specifies the name of the database engine. -}
       , '("engine_version", Text)
          {- - Specifies the version of the database engine. -}
-      , '("id", Text)
-         {- - The snapshot ID. -}
       , '("iops", Text)
          {- - Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot. -}
       , '("kms_key_id", Text)
@@ -2438,8 +2378,6 @@ type instance Computed DbSnapshotResource
          {- - License model information for the restored DB instance. -}
       , '("option_group_name", Text)
          {- - Provides the option group name for the DB snapshot. -}
-      , '("snapshot_create_time", Text)
-         {- - Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). -}
       , '("source_db_snapshot_identifier", Text)
          {- - The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy. -}
       , '("source_region", Text)
@@ -2472,7 +2410,7 @@ data DbSubnetGroupResource = DbSubnetGroupResource
       {- ^ (Required) A list of VPC subnet IDs. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DbSubnetGroupResource
     = '[ '("arn", Text)
@@ -2518,7 +2456,7 @@ data DefaultNetworkAclResource = DefaultNetworkAclResource
       {- ^ (Optional) A list of Subnet IDs to apply the ACL to. See the notes below on managing Subnets in the Default Network ACL -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_default_network_acl"
@@ -2561,7 +2499,7 @@ data DefaultRouteTableResource = DefaultRouteTableResource
       {- ^ (Optional) A list of route objects. Their keys are documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DefaultRouteTableResource
     = '[ '("id", Text)
@@ -2606,7 +2544,7 @@ data DefaultSecurityGroupResource = DefaultSecurityGroupResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional, Forces new resource) The VPC ID. Note that changing the @vpc_id@ will not restore any default security group rules that were modified, added, or removed. It will be left in it's current state -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_default_security_group"
@@ -2624,7 +2562,7 @@ instead "adopts" it into management.
 data DefaultSubnetResource = DefaultSubnetResource
     { _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_default_subnet"
@@ -2649,7 +2587,7 @@ data DefaultVpcDhcpOptionsResource = DefaultVpcDhcpOptionsResource
       {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_default_vpc_dhcp_options"
@@ -2676,7 +2614,7 @@ data DefaultVpcResource = DefaultVpcResource
       {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_default_vpc"
@@ -2695,7 +2633,7 @@ information about Device Farm Projects, see the AWS Documentation on
 data DevicefarmProjectResource = DevicefarmProjectResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the project -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DevicefarmProjectResource
     = '[ '("arn", Text)
@@ -2736,7 +2674,7 @@ data DirectoryServiceDirectoryResource = DirectoryServiceDirectoryResource
       {- ^ (Optional) - The directory type ( @SimpleAD@ or @MicrosoftAD@ are accepted values). Defaults to @SimpleAD@ . -}
     , _vpc_settings :: !(Attr Text)
       {- ^ (Required for @SimpleAD@ and @MicrosoftAD@ ) VPC related information about the directory. Fields documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DirectoryServiceDirectoryResource
     = '[ '("access_url", Text)
@@ -2766,7 +2704,7 @@ data DmsCertificateResource = DmsCertificateResource
       {- ^ (Optional) The contents of the .pem X.509 certificate file for the certificate. Either @certificate_pem@ or @certificate_wallet@ must be set. -}
     , _certificate_wallet :: !(Attr Text)
       {- ^ (Optional) The contents of the Oracle Wallet certificate for use with SSL. Either @certificate_pem@ or @certificate_wallet@ must be set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DmsCertificateResource
     = '[ '("certificate_arn", Text)
@@ -2814,7 +2752,7 @@ data DmsEndpointResource = DmsEndpointResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _username :: !(Attr Text)
       {- ^ (Optional) The user name to be used to login to the endpoint database. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DmsEndpointResource
     = '[ '("endpoint_arn", Text)
@@ -2860,7 +2798,7 @@ data DmsReplicationInstanceResource = DmsReplicationInstanceResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_security_group_ids :: !(Attr Text)
       {- ^ (Optional) A list of VPC security group IDs to be used with the replication instance. The VPC security groups must work with the VPC containing the replication instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DmsReplicationInstanceResource
     = '[ '("replication_instance_arn", Text)
@@ -2889,7 +2827,7 @@ data DmsReplicationSubnetGroupResource = DmsReplicationSubnetGroupResource
       {- ^ (Required) The name for the replication subnet group. This value is stored as a lowercase string. -}
     , _subnet_ids :: !(Attr Text)
       {- ^ (Required) A list of the EC2 subnet IDs for the subnet group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DmsReplicationSubnetGroupResource
     = '[ '("vpc_id", Text)
@@ -2925,7 +2863,7 @@ data DmsReplicationTaskResource = DmsReplicationTaskResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _target_endpoint_arn :: !(Attr Text)
       {- ^ (Required) The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DmsReplicationTaskResource
     = '[ '("replication_task_arn", Text)
@@ -2937,6 +2875,56 @@ $(TH.makeResource
     ''Qual.AWS
     ''DmsReplicationTaskResource)
 
+{- | The @aws_dx_connection@ AWS resource.
+
+Provides a Connection of Direct Connect.
+-}
+data DxConnectionResource = DxConnectionResource
+    { _bandwidth :: !(Attr Text)
+      {- ^ (Required) The bandwidth of the connection. Available values: 1Gbps, 10Gbps. Case sensitive. -}
+    , _location :: !(Attr Text)
+      {- ^ (Required) The AWS Direct Connect location where the connection is located. See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html> for the list of AWS Direct Connect locations. Use @locationCode@ . -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The name of the connection. -}
+    } deriving (Show, Generic)
+
+type instance Computed DxConnectionResource
+    = '[ '("id", Text)
+         {- - The ID of the connection. -}
+       ]
+
+$(TH.makeResource
+    "aws_dx_connection"
+    ''Qual.AWS
+    ''DxConnectionResource)
+
+{- | The @aws_dx_lag@ AWS resource.
+
+Provides a Direct Connect LAG.
+-}
+data DxLagResource = DxLagResource
+    { _connections_bandwidth :: !(Attr Text)
+      {- ^ (Required) The bandwidth of the individual physical connections bundled by the LAG. Available values: 1Gbps, 10Gbps. Case sensitive. -}
+    , _force_destroy :: !(Attr Text)
+      {- ^ (Optional, Default:false) A boolean that indicates all connections associated with the LAG should be deleted so that the LAG can be destroyed without error. These objects are not recoverable. -}
+    , _location :: !(Attr Text)
+      {- ^ (Required) The AWS Direct Connect location in which the LAG should be allocated. See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html> for the list of AWS Direct Connect locations. Use @locationCode@ . -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The name of the LAG. -}
+    , _number_of_connections :: !(Attr Text)
+      {- ^ (Required) The number of physical connections initially provisioned and bundled by the LAG. -}
+    } deriving (Show, Generic)
+
+type instance Computed DxLagResource
+    = '[ '("id", Text)
+         {- - The ID of the LAG. -}
+       ]
+
+$(TH.makeResource
+    "aws_dx_lag"
+    ''Qual.AWS
+    ''DxLagResource)
+
 {- | The @aws_dynamodb_table@ AWS resource.
 
 Provides a DynamoDB table resource ~> Note: It is recommended to use
@@ -2946,7 +2934,7 @@ Provides a DynamoDB table resource ~> Note: It is recommended to use
 -}
 data DynamodbTableResource = DynamodbTableResource
     { _attribute :: !(Attr Text)
-      {- ^ - Define an attribute, has two properties: -}
+      {- ^ (Required) Define an attribute, has two properties: -}
     , _global_secondary_index :: !(Attr Text)
       {- ^ (Optional) Describe a GSO for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. -}
     , _hash_key :: !(Attr Text)
@@ -2969,7 +2957,7 @@ data DynamodbTableResource = DynamodbTableResource
       {- ^ (Optional) Defines ttl, has two properties, and can only be specified once: -}
     , _write_capacity :: !(Attr Text)
       {- ^ (Required) The number of write units for this table -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_dynamodb_table"
@@ -2983,27 +2971,15 @@ Creates a Snapshot of an EBS Volume.
 data EbsSnapshotResource = EbsSnapshotResource
     { _description :: !(Attr Text)
       {- ^ (Optional) A description of what the snapshot is. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _most_recent :: !(Attr Text)
-      {- ^ (Optional) If more than one result is returned, use the most recent snapshot. -}
-    , _owners :: !(Attr Text)
-      {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
-    , _restorable_by_user_ids :: !(Attr Text)
-      {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
-    , _snapshot_ids :: !(Attr Text)
-      {- ^ (Optional) Returns information on a specific snapshot_id. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the snapshot -}
     , _volume_id :: !(Attr Text)
       {- ^ (Required) The Volume ID of which to make a snapshot. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EbsSnapshotResource
     = '[ '("data_encryption_key_id", Text)
          {- - The data encryption key identifier for the snapshot. -}
-      , '("description", Text)
-         {- - A description for the snapshot -}
       , '("encrypted", Text)
          {- - Whether the snapshot is encrypted. -}
       , '("id", Text)
@@ -3014,14 +2990,8 @@ type instance Computed EbsSnapshotResource
          {- - Value from an Amazon-maintained list ( @amazon@ , @aws-marketplace@ , @microsoft@ ) of snapshot owners. -}
       , '("owner_id", Text)
          {- - The AWS account ID of the EBS snapshot owner. -}
-      , '("snapshot_id", Text)
-         {- - The snapshot ID (e.g. snap-59fcb34e). -}
-      , '("state", Text)
-         {- - The snapshot state. -}
       , '("tags", Text)
          {- - A mapping of tags for the snapshot. -}
-      , '("volume_id", Text)
-         {- - The volume ID (e.g. vol-59fcb34e). -}
       , '("volume_size", Text)
          {- - The size of the drive in GiBs. -}
        ]
@@ -3040,14 +3010,10 @@ data EbsVolumeResource = EbsVolumeResource
       {- ^ (Required) The AZ where the EBS volume will exist. -}
     , _encrypted :: !(Attr Text)
       {- ^ (Optional) If true, the disk will be encrypted. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
     , _iops :: !(Attr Text)
       {- ^ (Optional) The amount of IOPS to provision for the disk. -}
     , _kms_key_id :: !(Attr Text)
       {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @encrypted@ needs to be set to true. -}
-    , _most_recent :: !(Attr Text)
-      {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
     , _size :: !(Attr Text)
       {- ^ (Optional) The size of the drive in GiBs. -}
     , _snapshot_id :: !(Attr Text)
@@ -3056,35 +3022,42 @@ data EbsVolumeResource = EbsVolumeResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) The type of EBS volume. Can be "standard", "gp2", "io1", "sc1" or "st1" (Default: "standard"). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EbsVolumeResource
-    = '[ '("availability_zone", Text)
-         {- - The AZ where the EBS volume exists. -}
-      , '("encrypted", Text)
-         {- - Whether the disk is encrypted. -}
+    = '[ '("arn", Text)
+         {- - The volume ARN (e.g. arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e). -}
       , '("id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("iops", Text)
-         {- - The amount of IOPS for the disk. -}
-      , '("kms_key_id", Text)
-         {- - The ARN for the KMS encryption key. -}
-      , '("size", Text)
-         {- - The size of the drive in GiBs. -}
-      , '("snapshot_id", Text)
-         {- - The snapshot_id the EBS volume is based off. -}
-      , '("tags", Text)
-         {- - A mapping of tags for the resource. -}
-      , '("volume_id", Text)
-         {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("volume_type", Text)
-         {- - The type of EBS volume. -}
        ]
 
 $(TH.makeResource
     "aws_ebs_volume"
     ''Qual.AWS
     ''EbsVolumeResource)
+
+{- | The @aws_ecr_lifecycle_policy@ AWS resource.
+
+Provides an ECR lifecycle policy.
+-}
+data EcrLifecyclePolicyResource = EcrLifecyclePolicyResource
+    { _policy :: !(Attr Text)
+      {- ^ (Required) The policy document. This is a JSON formatted string. See more details about <http://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters> in the official AWS docs. -}
+    , _repository :: !(Attr Text)
+      {- ^ (Required) Name of the repository to apply the policy. -}
+    } deriving (Show, Generic)
+
+type instance Computed EcrLifecyclePolicyResource
+    = '[ '("registry_id", Text)
+         {- - The registry ID where the repository was created. -}
+      , '("repository", Text)
+         {- - The name of the repository. -}
+       ]
+
+$(TH.makeResource
+    "aws_ecr_lifecycle_policy"
+    ''Qual.AWS
+    ''EcrLifecyclePolicyResource)
 
 {- | The @aws_ecr_repository_policy@ AWS resource.
 
@@ -3098,7 +3071,7 @@ data EcrRepositoryPolicyResource = EcrRepositoryPolicyResource
       {- ^ (Required) The policy document. This is a JSON formatted string. -}
     , _repository :: !(Attr Text)
       {- ^ (Required) Name of the repository to apply the policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EcrRepositoryPolicyResource
     = '[ '("registry_id", Text)
@@ -3122,7 +3095,7 @@ regions are listed
 data EcrRepositoryResource = EcrRepositoryResource
     { _name :: !(Attr Text)
       {- ^ (Required) Name of the repository. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EcrRepositoryResource
     = '[ '("arn", Text)
@@ -3145,27 +3118,15 @@ $(TH.makeResource
 Provides an ECS cluster.
 -}
 data EcsClusterResource = EcsClusterResource
-    { _cluster_name :: !(Attr Text)
-      {- ^ (Required) The name of the ECS Cluster -}
-    , _name :: !(Attr Text)
+    { _name :: !(Attr Text)
       {- ^ (Required) The name of the cluster (up to 255 letters, numbers, hyphens, and underscores) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EcsClusterResource
-    = '[ '("arn", Text)
-         {- - The ARN of the ECS Cluster -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The Amazon Resource Name (ARN) that identifies the cluster -}
       , '("name", Text)
          {- - The name of the cluster -}
-      , '("pending_tasks_count", Text)
-         {- - The number of pending tasks for the ECS Cluster -}
-      , '("registered_container_instances_count", Text)
-         {- - The number of registered container instances for the ECS Cluster -}
-      , '("running_tasks_count", Text)
-         {- - The number of running tasks for the ECS Cluster -}
-      , '("status", Text)
-         {- - The status of the ECS Cluster -}
        ]
 
 $(TH.makeResource
@@ -3205,7 +3166,7 @@ data EcsServiceResource = EcsServiceResource
       {- ^ (Optional) Service level strategy rules that are taken into consideration during task placement. The maximum number of @placement_strategy@ blocks is @5@ . Defined below. -}
     , _task_definition :: !(Attr Text)
       {- ^ (Required) The family and revision ( @family:revision@ ) or full ARN of the task definition that you want to run in your service. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ecs_service"
@@ -3225,26 +3186,11 @@ data EcsTaskDefinitionResource = EcsTaskDefinitionResource
       {- ^ (Optional) The Docker networking mode to use for the containers in the task. The valid values are @none@ , @bridge@ , and @host@ . -}
     , _placement_constraints :: !(Attr Text)
       {- ^ (Optional) A set of <#placement-constraints-arguments> rules that are taken into consideration during task placement. Maximum number of @placement_constraints@ is @10@ . -}
-    , _task_definition :: !(Attr Text)
-      {- ^ (Required) The family for the latest ACTIVE revision, family and revision (family:revision) for a specific revision in the family, the ARN of the task definition to access to. -}
     , _task_role_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services. -}
     , _volume :: !(Attr Text)
       {- ^ (Optional) A set of <#volume-block-arguments> that containers in your task may use. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed EcsTaskDefinitionResource
-    = '[ '("family", Text)
-         {- - The family of this task definition -}
-      , '("network_mode", Text)
-         {- - The Docker networking mode to use for the containers in this task. -}
-      , '("revision", Text)
-         {- - The revision of this task definition -}
-      , '("status", Text)
-         {- - The status of this task definition -}
-      , '("task_role_arn", Text)
-         {- - The ARN of the IAM role that containers in this task can assume -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ecs_task_definition"
@@ -3260,8 +3206,6 @@ data EfsFileSystemResource = EfsFileSystemResource
       {- ^ (Optional) A unique name (a maximum of 64 characters are allowed) used as reference when creating the Elastic File System to ensure idempotent file system creation. By default generated by Terraform. See [Elastic File System] (http://docs.aws.amazon.com/efs/latest/ug/) user guide for more information. -}
     , _encrypted :: !(Attr Text)
       {- ^ (Optional) If true, the disk will be encrypted. -}
-    , _file_system_id :: !(Attr Text)
-      {- ^ (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65). -}
     , _kms_key_id :: !(Attr Text)
       {- ^ (Optional) The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true. -}
     , _performance_mode :: !(Attr Text)
@@ -3270,21 +3214,15 @@ data EfsFileSystemResource = EfsFileSystemResource
       {- ^ - DEPRECATED (Optional) A reference name used when creating the @Creation Token@ which Amazon EFS uses to ensure idempotent file system creation. By default generated by Terraform. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the file system. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EfsFileSystemResource
     = '[ '("dns_name", Text)
          {- - The DNS name for the filesystem per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-      , '("encrypted", Text)
-         {- - Whether EFS is encrypted. -}
       , '("id", Text)
          {- - The ID that identifies the file system (e.g. fs-ccfc0d65). -}
       , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("performance_mode", Text)
-         {- - The PerformanceMode of the file system. -}
-      , '("tags", Text)
-         {- - The list of tags assigned to the file system. -}
        ]
 
 $(TH.makeResource
@@ -3301,29 +3239,19 @@ data EfsMountTargetResource = EfsMountTargetResource
       {- ^ (Required) The ID of the file system for which the mount target is intended. -}
     , _ip_address :: !(Attr Text)
       {- ^ (Optional) The address (within the address range of the specified subnet) at which the file system may be mounted via the mount target. -}
-    , _mount_target_id :: !(Attr Text)
-      {- ^ (Required) ID of the mount target that you want to have described -}
     , _security_groups :: !(Attr Text)
       {- ^ (Optional) A list of up to 5 VPC security group IDs (that must be for the same VPC as subnet specified) in effect for the mount target. -}
     , _subnet_id :: !(Attr Text)
       {- ^ (Required) The ID of the subnet to add the mount target in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EfsMountTargetResource
     = '[ '("dns_name", Text)
          {- - The DNS name for the given subnet/AZ per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-      , '("file_system_id", Text)
-         {- - ID of the file system for which the mount target is intended. -}
       , '("id", Text)
          {- - The ID of the mount target. -}
-      , '("ip_address", Text)
-         {- - Address at which the file system may be mounted via the mount target. -}
       , '("network_interface_id", Text)
          {- - The ID of the network interface that Amazon EFS created when it created the mount target. -}
-      , '("security_groups", Text)
-         {- - List of VPC security group IDs attached to the mount target. -}
-      , '("subnet_id", Text)
-         {- - ID of the mount target's subnet. -}
        ]
 
 $(TH.makeResource
@@ -3341,7 +3269,7 @@ of your VPC from initiating an IPv6 connection with your instance.
 data EgressOnlyInternetGatewayResource = EgressOnlyInternetGatewayResource
     { _vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC ID to create in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EgressOnlyInternetGatewayResource
     = '[ '("id", Text)
@@ -3374,7 +3302,7 @@ data EipAssociationResource = EipAssociationResource
       {- ^ (Optional) The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address. -}
     , _public_ip :: !(Attr Text)
       {- ^ (Optional) The Elastic IP address. This is required for EC2-Classic. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EipAssociationResource
     = '[ '("allocation_id", Text)
@@ -3398,22 +3326,19 @@ $(TH.makeResource
 
 {- | The @aws_eip@ AWS resource.
 
-Provides an Elastic IP resource.
+Provides an Elastic IP resource. ~> Note: EIP may require IGW to exist prior
+to association. Use @depends_on@ to set an explicit dependency on the IGW.
 -}
 data EipResource = EipResource
     { _associate_with_private_ip :: !(Attr Text)
       {- ^ (Optional) A user specified primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address. -}
-    , _id :: !(Attr Text)
-      {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _instance' :: !(Attr Text)
       {- ^ (Optional) EC2 instance ID. -}
     , _network_interface :: !(Attr Text)
       {- ^ (Optional) Network interface ID to associate with. -}
-    , _public_ip :: !(Attr Text)
-      {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
     , _vpc :: !(Attr Text)
       {- ^ (Optional) Boolean if the EIP is in a VPC or not. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EipResource
     = '[ '("associate_with_private_ip", Text)
@@ -3448,7 +3373,7 @@ data ElasticBeanstalkApplicationResource = ElasticBeanstalkApplicationResource
       {- ^ (Optional) Short description of the application -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the application, must be unique within your account -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elastic_beanstalk_application"
@@ -3480,7 +3405,7 @@ data ElasticBeanstalkApplicationVersionResource = ElasticBeanstalkApplicationVer
       {- ^ (Required) S3 object that is the Application Version source bundle. -}
     , _name :: !(Attr Text)
       {- ^ (Required) A unique name for the this Application Version. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElasticBeanstalkApplicationVersionResource
     = '[ '("name", Text)
@@ -3511,7 +3436,7 @@ data ElasticBeanstalkConfigurationTemplateResource = ElasticBeanstalkConfigurati
       {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
     , _solution_stack_name :: !(Attr Text)
       {- ^ – (Optional) A solution stack to base your Template off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elastic_beanstalk_configuration_template"
@@ -3550,7 +3475,7 @@ data ElasticBeanstalkEnvironmentResource = ElasticBeanstalkEnvironmentResource
       {- ^ (Optional) The name of the Elastic Beanstalk Application Version to use in deployment. -}
     , _wait_for_ready_timeout :: !(Attr Text)
       {- ^ - (Default: @20m@ ) The maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for an Elastic Beanstalk Environment to be in a ready state before timing out. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elastic_beanstalk_environment"
@@ -3613,47 +3538,15 @@ data ElasticacheClusterResource = ElasticacheClusterResource
       {- ^ – (Optional, VPC only) Name of the subnet group to be used for the cache cluster. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElasticacheClusterResource
-    = '[ '("availability_zone", Text)
-         {- - The Availability Zone for the cache cluster. -}
-      , '("cache_nodes", Text)
+    = '[ '("cache_nodes", Text)
          {- - List of node objects including @id@ , @address@ , @port@ and @availability_zone@ . Referenceable e.g. as @${aws_elasticache_cluster.bar.cache_nodes.0.address}@ -}
       , '("cluster_address", Text)
          {- - (Memcached only) The DNS name of the cache cluster without the port appended. -}
       , '("configuration_endpoint", Text)
          {- - (Memcached only) The configuration endpoint to allow host discovery. -}
-      , '("engine", Text)
-         {- – Name of the cache engine. -}
-      , '("engine_version", Text)
-         {- – Version number of the cache engine. -}
-      , '("maintenance_window", Text)
-         {- – Specifies the weekly time range for when maintenance on the cache cluster is performed. -}
-      , '("node_type", Text)
-         {- – The cluster node type. -}
-      , '("notification_topic_arn", Text)
-         {- – An Amazon Resource Name (ARN) of an SNS topic that ElastiCache notifications get sent to. -}
-      , '("num_cache_nodes", Text)
-         {- – The number of cache nodes that the cache cluster has. -}
-      , '("parameter_group_name", Text)
-         {- – Name of the parameter group associated with this cache cluster. -}
-      , '("port", Text)
-         {- – The port number on which each of the cache nodes will accept connections. -}
-      , '("replication_group_id", Text)
-         {- - The replication group to which this cache cluster belongs. -}
-      , '("security_group_ids", Text)
-         {- – List VPC security groups associated with the cache cluster. -}
-      , '("security_group_names", Text)
-         {- – List of security group names associated with this cache cluster. -}
-      , '("snapshot_retention_limit", Text)
-         {- - The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. -}
-      , '("snapshot_window", Text)
-         {- - The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of the cache cluster. -}
-      , '("subnet_group_name", Text)
-         {- – Name of the subnet group associated to the cache cluster. -}
-      , '("tags", Text)
-         {- - The tags assigned to the resource -}
        ]
 
 $(TH.makeResource
@@ -3674,7 +3567,7 @@ data ElasticacheParameterGroupResource = ElasticacheParameterGroupResource
       {- ^ (Required) The name of the ElastiCache parameter group. -}
     , _parameter :: !(Attr Text)
       {- ^ (Optional) A list of ElastiCache parameters to apply. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElasticacheParameterGroupResource
     = '[ '("id", Text)
@@ -3730,12 +3623,12 @@ data ElasticacheReplicationGroupResource = ElasticacheReplicationGroupResource
     , _snapshot_retention_limit :: !(Attr Text)
       {- ^ (Optional, Redis only) The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off. Please note that setting a @snapshot_retention_limit@ is not supported on cache.t1.micro or cache.t2.* cache nodes -}
     , _snapshot_window :: !(Attr Text)
-      {- ^ (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00 -}
+      {- ^ (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum maintenance window is a 60 minute period. Example: @05:00-09:00@ -}
     , _subnet_group_name :: !(Attr Text)
       {- ^ (Optional) The name of the cache subnet group to be used for the replication group. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElasticacheReplicationGroupResource
     = '[ '("configuration_endpoint_address", Text)
@@ -3765,7 +3658,7 @@ data ElasticacheSecurityGroupResource = ElasticacheSecurityGroupResource
       {- ^ – (Required) Name for the cache security group. This value is stored as a lowercase string. -}
     , _security_group_names :: !(Attr Text)
       {- ^ – (Required) List of EC2 security group names to be authorized for ingress to the cache security group -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elasticache_security_group"
@@ -3785,7 +3678,7 @@ data ElasticacheSubnetGroupResource = ElasticacheSubnetGroupResource
       {- ^ – (Required) Name for the cache subnet group. Elasticache converts this name to lowercase. -}
     , _subnet_ids :: !(Attr Text)
       {- ^ – (Required) List of VPC Subnet IDs for the cache subnet group -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elasticache_subnet_group"
@@ -3802,7 +3695,7 @@ data ElasticsearchDomainPolicyResource = ElasticsearchDomainPolicyResource
       {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
     , _domain_name :: !(Attr Text)
       {- ^ (Required) Name of the domain. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elasticsearch_domain_policy"
@@ -3831,8 +3724,8 @@ data ElasticsearchDomainResource = ElasticsearchDomainResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource -}
     , _vpc_options :: !(Attr Text)
-      {- ^ (Optional) VPC related options, see below. -}
-    } deriving (Show, Eq, Generic)
+      {- ^ (Optional) VPC related options, see below. Adding or removing this configuration forces a new resource ( <https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-vpc-limitations> ). -}
+    } deriving (Show, Generic)
 
 type instance Computed ElasticsearchDomainResource
     = '[ '("arn", Text)
@@ -3877,7 +3770,7 @@ data ElastictranscoderPipelineResource = ElastictranscoderPipelineResource
       {- ^ (Optional) The ThumbnailConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. (documented below) -}
     , _thumbnail_config_permissions :: !(Attr Text)
       {- ^ (Optional) The permissions for the @thumbnail_config@ object. (documented below) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elastictranscoder_pipeline"
@@ -3907,7 +3800,7 @@ data ElastictranscoderPresetResource = ElastictranscoderPresetResource
       {- ^ (Optional, Forces new resource) Codec options for the video parameters -}
     , _video_watermarks :: !(Attr Text)
       {- ^ (Optional, Forces new resource) Watermark parameters for the video parameters (documented below) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elastictranscoder_preset"
@@ -3929,7 +3822,7 @@ data ElbAttachmentResource = ElbAttachmentResource
       {- ^ (Required) The name of the ELB. -}
     , _instance' :: !(Attr Text)
       {- ^ (Required) Instance ID to place in the ELB pool. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elb_attachment"
@@ -3947,7 +3840,7 @@ data ElbLoadBalancerBackendServerPolicyResource = ElbLoadBalancerBackendServerPo
       {- ^ (Required) The load balancer to attach the policy to. -}
     , _policy_names :: !(Attr Text)
       {- ^ (Required) List of Policy Names to apply to the backend server. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElbLoadBalancerBackendServerPolicyResource
     = '[ '("id", Text)
@@ -3974,7 +3867,7 @@ data ElbLoadBalancerListenerPolicyResource = ElbLoadBalancerListenerPolicyResour
       {- ^ (Required) The load balancer listener port to apply the policy to. -}
     , _policy_names :: !(Attr Text)
       {- ^ (Required) List of Policy Names to apply to the backend server. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElbLoadBalancerListenerPolicyResource
     = '[ '("id", Text)
@@ -4004,7 +3897,7 @@ data ElbLoadBalancerPolicyResource = ElbLoadBalancerPolicyResource
       {- ^ (Required) The name of the load balancer policy. -}
     , _policy_type_name :: !(Attr Text)
       {- ^ (Required) The policy type. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ElbLoadBalancerPolicyResource
     = '[ '("id", Text)
@@ -4064,7 +3957,7 @@ data ElbResource = ElbResource
       {- ^ (Required for a VPC ELB) A list of subnet IDs to attach to the ELB. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_elb"
@@ -4117,7 +4010,7 @@ data EmrClusterResource = EmrClusterResource
       {- ^ (Optional) Switch on/off termination protection (default is off) -}
     , _visible_to_all_users :: !(Attr Text)
       {- ^ (Optional) Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. Default @true@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_emr_cluster"
@@ -4146,7 +4039,7 @@ data EmrInstanceGroupResource = EmrInstanceGroupResource
       {- ^ (Required) The EC2 instance type for all instances in the instance group. Changing this forces a new resource to be created. -}
     , _name :: !(Attr Text)
       {- ^ (Required) Human friendly name given to the instance group. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EmrInstanceGroupResource
     = '[ '("id", Text)
@@ -4173,7 +4066,7 @@ data EmrSecurityConfigurationResource = EmrSecurityConfigurationResource
       {- ^ (Optional) The name of the EMR Security Configuration. By default generated by Terraform. -}
     , _name_prefix :: !(Attr Text)
       {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EmrSecurityConfigurationResource
     = '[ '("configuration", Text)
@@ -4209,7 +4102,7 @@ data FlowLogResource = FlowLogResource
       {- ^ (Required) The type of traffic to capture. Valid values: @ACCEPT@ , @REJECT@ , @ALL@ -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional) VPC ID to attach to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FlowLogResource
     = '[ '("id", Text)
@@ -4237,7 +4130,7 @@ data GlacierVaultResource = GlacierVaultResource
       {- ^ (Optional) The notifications for the Vault. Fields documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed GlacierVaultResource
     = '[ '("arn", Text)
@@ -4261,7 +4154,7 @@ data IamAccessKeyResource = IamAccessKeyResource
       {- ^ (Optional) Either a base-64 encoded PGP public key, or a keybase username in the form @keybase:some_person_that_exists@ . -}
     , _user :: !(Attr Text)
       {- ^ (Required) The IAM user to associate with this access key. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamAccessKeyResource
     = '[ '("encrypted_secret", Text)
@@ -4293,7 +4186,7 @@ account alias for the AWS Account.
 data IamAccountAliasResource = IamAccountAliasResource
     { _account_alias :: !(Attr Text)
       {- ^ (Required) The account alias -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_iam_account_alias"
@@ -4327,7 +4220,7 @@ data IamAccountPasswordPolicyResource = IamAccountPasswordPolicyResource
       {- ^ (Optional) Whether to require symbols for user passwords. -}
     , _require_uppercase_characters :: !(Attr Text)
       {- ^ (Optional) Whether to require uppercase characters for user passwords. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamAccountPasswordPolicyResource
     = '[ '("expire_passwords", Text)
@@ -4353,7 +4246,7 @@ data IamGroupMembershipResource = IamGroupMembershipResource
       {- ^ (Required) The name to identify the Group Membership -}
     , _users :: !(Attr Text)
       {- ^ (Required) A list of IAM User names to associate with the Group -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamGroupMembershipResource
     = '[ '("group", Text)
@@ -4378,7 +4271,7 @@ data IamGroupPolicyAttachmentResource = IamGroupPolicyAttachmentResource
       {- ^ (Required) - The group the policy should be applied to -}
     , _policy_arn :: !(Attr Text)
       {- ^ (Required) - The ARN of the policy you want to apply -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_iam_group_policy_attachment"
@@ -4398,7 +4291,7 @@ data IamGroupPolicyResource = IamGroupPolicyResource
       {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamGroupPolicyResource
     = '[ '("group", Text)
@@ -4421,19 +4314,15 @@ $(TH.makeResource
 Provides an IAM group.
 -}
 data IamGroupResource = IamGroupResource
-    { _group_name :: !(Attr Text)
-      {- ^ (Required) The friendly IAM group name to match. -}
-    , _name :: !(Attr Text)
+    { _name :: !(Attr Text)
       {- ^ (Required) The group's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: @=,.@-_.@ . Group names are not distinguished by case. For example, you cannot create groups named both "ADMINS" and "admins". -}
     , _path :: !(Attr Text)
       {- ^ (Optional, default "/") Path in which to create the group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamGroupResource
     = '[ '("arn", Text)
          {- - The ARN assigned by AWS for this group. -}
-      , '("group_id", Text)
-         {- - The stable and unique string identifying the group. -}
       , '("id", Text)
          {- - The group's ID. -}
       , '("name", Text)
@@ -4465,7 +4354,7 @@ data IamInstanceProfileResource = IamInstanceProfileResource
       {- ^ (Optional) The role name to include in the profile. -}
     , _roles :: !(Attr Text)
       {- ^ - ( Deprecated ) A list of role names to include in the profile.  The current default is 1.  If you see an error message similar to @Cannot exceed quota for InstanceSessionsPerInstanceProfile: 1@ , then you must contact AWS support and ask for a limit increase. WARNING: This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017> , as >= 2 roles are not possible. See <https://github.com/hashicorp/terraform/issues/11575> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamInstanceProfileResource
     = '[ '("arn", Text)
@@ -4480,8 +4369,6 @@ type instance Computed IamInstanceProfileResource
          {- - The path of the instance profile in IAM. -}
       , '("role", Text)
          {- - The role assigned to the instance profile. -}
-      , '("role_id", Text)
-         {- - The role id associated with this instance profile. -}
       , '("roles", Text)
          {- - The list of roles assigned to the instance profile. ( Deprecated ) -}
       , '("unique_id", Text)
@@ -4504,7 +4391,7 @@ data IamOpenidConnectProviderResource = IamOpenidConnectProviderResource
       {- ^ (Required) A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). -}
     , _url :: !(Attr Text)
       {- ^ (Required) The URL of the identity provider. Corresponds to the iss claim. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamOpenidConnectProviderResource
     = '[ '("arn", Text)
@@ -4540,7 +4427,7 @@ data IamPolicyAttachmentResource = IamPolicyAttachmentResource
       {- ^ (Optional) - The role(s) the policy should be applied to -}
     , _users :: !(Attr Text)
       {- ^ (Optional) - The user(s) the policy should be applied to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamPolicyAttachmentResource
     = '[ '("id", Text)
@@ -4569,7 +4456,7 @@ data IamPolicyResource = IamPolicyResource
       {- ^ (Optional, default "/") Path in which to create the policy. See <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html> for more information. -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax, @file@ function, or the </docs/providers/aws/d/iam_policy_document.html> are all helpful here. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamPolicyResource
     = '[ '("arn", Text)
@@ -4600,7 +4487,7 @@ data IamRolePolicyAttachmentResource = IamRolePolicyAttachmentResource
       {- ^ (Required) - The ARN of the policy you want to apply -}
     , _role :: !(Attr Text)
       {- ^ (Required) - The role the policy should be applied to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_iam_role_policy_attachment"
@@ -4620,7 +4507,7 @@ data IamRolePolicyResource = IamRolePolicyResource
       {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
     , _role :: !(Attr Text)
       {- ^ (Required) The IAM role to attach to the policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamRolePolicyResource
     = '[ '("id", Text)
@@ -4649,23 +4536,17 @@ data IamRoleResource = IamRoleResource
       {- ^ (Optional, Forces new resource) The name of the role. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(Attr Text)
       {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamRoleResource
     = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the role. -}
-      , '("assume_role_policy", Text)
-         {- - The policy document associated with the role. -}
       , '("create_date", Text)
          {- - The creation date of the IAM role. -}
       , '("description", Text)
          {- - The description of the role. -}
-      , '("id", Text)
-         {- - The friendly IAM role name to match. -}
       , '("name", Text)
          {- - The name of the role. -}
-      , '("path", Text)
-         {- - The path to the role. -}
       , '("unique_id", Text)
          {- - The stable and unique string identifying the role. -}
        ]
@@ -4684,7 +4565,7 @@ data IamSamlProviderResource = IamSamlProviderResource
       {- ^ (Required) The name of the provider to create. -}
     , _saml_metadata_document :: !(Attr Text)
       {- ^ (Required) An XML document generated by an identity provider that supports SAML 2.0. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamSamlProviderResource
     = '[ '("arn", Text)
@@ -4708,8 +4589,6 @@ data IamServerCertificateResource = IamServerCertificateResource
       {- ^ – (Required) The contents of the public key certificate in PEM-encoded format. -}
     , _certificate_chain :: !(Attr Text)
       {- ^ – (Optional) The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain. -}
-    , _latest :: !(Attr Text)
-      {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
     , _name :: !(Attr Text)
       {- ^ (Optional) The name of the Server Certificate. Do not include the path in this value. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(Attr Text)
@@ -4718,7 +4597,7 @@ data IamServerCertificateResource = IamServerCertificateResource
       {- ^ (Optional) The IAM path for the server certificate.  If it is not included, it defaults to a slash (/). If this certificate is for use with AWS CloudFront, the path must be in format @/cloudfront/your_path_here@ . See <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html> for more details on IAM Paths. -}
     , _private_key :: !(Attr Text)
       {- ^ – (Required) The contents of the private key in PEM-encoded format. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamServerCertificateResource
     = '[ '("arn", Text)
@@ -4749,7 +4628,7 @@ data IamUserLoginProfileResource = IamUserLoginProfileResource
       {- ^ (Required) Either a base-64 encoded PGP public key, or a keybase username in the form @keybase:username@ . -}
     , _user :: !(Attr Text)
       {- ^ (Required) The IAM user's name. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamUserLoginProfileResource
     = '[ '("encrypted_password", Text)
@@ -4772,7 +4651,7 @@ data IamUserPolicyAttachmentResource = IamUserPolicyAttachmentResource
       {- ^ (Required) - The ARN of the policy you want to apply -}
     , _user :: !(Attr Text)
       {- ^ (Required) - The user the policy should be applied to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_iam_user_policy_attachment"
@@ -4792,7 +4671,7 @@ data IamUserPolicyResource = IamUserPolicyResource
       {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
     , _user :: !(Attr Text)
       {- ^ (Required) IAM user to which to attach this policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_iam_user_policy"
@@ -4810,21 +4689,15 @@ data IamUserResource = IamUserResource
       {- ^ (Required) The user's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: @=,.@-_.@ . User names are not distinguished by case. For example, you cannot create users named both "TESTUSER" and "testuser". -}
     , _path :: !(Attr Text)
       {- ^ (Optional, default "/") Path in which to create the user. -}
-    , _user_name :: !(Attr Text)
-      {- ^ (Required) The friendly IAM user name to match. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamUserResource
     = '[ '("arn", Text)
          {- - The ARN assigned by AWS for this user. -}
       , '("name", Text)
          {- - The user's name. -}
-      , '("path", Text)
-         {- - Path in which this user was created. -}
       , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
-      , '("user_id", Text)
-         {- - The unique ID assigned by AWS for this user. -}
        ]
 
 $(TH.makeResource
@@ -4845,7 +4718,7 @@ data IamUserSshKeyResource = IamUserSshKeyResource
       {- ^ (Optional) The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is @active@ . -}
     , _username :: !(Attr Text)
       {- ^ (Required) The name of the IAM user to associate the SSH public key with. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IamUserSshKeyResource
     = '[ '("fingerprint", Text)
@@ -4868,7 +4741,7 @@ data InspectorAssessmentTargetResource = InspectorAssessmentTargetResource
       {- ^ (Required) The name of the assessment target. -}
     , _resource_group_arn :: !(Attr Text)
       {- ^ (Required )- The resource group ARN stating tags for instance matching. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InspectorAssessmentTargetResource
     = '[ '("arn", Text)
@@ -4893,7 +4766,7 @@ data InspectorAssessmentTemplateResource = InspectorAssessmentTemplateResource
       {- ^ (Required) The rules to be used during the run. -}
     , _target_arn :: !(Attr Text)
       {- ^ (Required) The assessment target ARN to attach the template to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InspectorAssessmentTemplateResource
     = '[ '("arn", Text)
@@ -4912,7 +4785,7 @@ Provides a Inspector resource group
 data InspectorResourceGroupResource = InspectorResourceGroupResource
     { _tags :: !(Attr Text)
       {- ^ (Required) The tags on your EC2 Instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InspectorResourceGroupResource
     = '[ '("arn", Text)
@@ -4945,18 +4818,12 @@ data InstanceResource = InstanceResource
       {- ^ (Optional) If true, the launched EC2 instance will be EBS-optimized. -}
     , _ephemeral_block_device :: !(Attr Text)
       {- ^ (Optional) Customize Ephemeral (also known as "Instance Store") volumes on the instance. See <#block-devices> below for details. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _iam_instance_profile :: !(Attr Text)
-      {- ^ (Optional) The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. -}
-    , _instance_id :: !(Attr Text)
-      {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
+      {- ^ (Optional) The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html#roles-usingrole-ec2instance-permissions> , notably @iam:PassRole@ . -}
     , _instance_initiated_shutdown_behavior :: !(Attr Text)
       {- ^ (Optional) Shutdown behavior for the instance. Amazon defaults this to @stop@ for EBS-backed instances and @terminate@ for instance-store instances. Cannot be set on instance-store instances. See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingInstanceInitiatedShutdownBehavior> for more information. -}
-    , _instance_tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
     , _instance_type :: !(Attr Text)
-      {- ^ (Required) The type of instance to start -}
+      {- ^ (Required) The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance. -}
     , _ipv6_address_count :: !(Attr Text)
       {- ^ (Optional) A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. -}
     , _ipv6_addresses :: !(Attr Text)
@@ -4991,58 +4858,7 @@ data InstanceResource = InstanceResource
       {- ^ (Optional) A mapping of tags to assign to the devices created by the instance at launch time. -}
     , _vpc_security_group_ids :: !(Attr Text)
       {- ^ (Optional) A list of security group IDs to associate with. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed InstanceResource
-    = '[ '("associate_public_ip_address", Text)
-         {- - Whether or not the Instance is associated with a public IP address or not (Boolean). -}
-      , '("availability_zone", Text)
-         {- - The availability zone of the Instance. -}
-      , '("ebs_block_device", Text)
-         {- - The EBS block device mappings of the Instance. -}
-      , '("ebs_optimized", Text)
-         {- - Whether the Instance is EBS optimized or not (Boolean). -}
-      , '("ephemeral_block_device", Text)
-         {- - The ephemeral block device mappings of the Instance. -}
-      , '("iam_instance_profile", Text)
-         {- - The name of the instance profile associated with the Instance. -}
-      , '("instance_type", Text)
-         {- - The type of the Instance. -}
-      , '("ipv6_addresses", Text)
-         {- - The IPv6 addresses associated to the Instance, if applicable. NOTE : Unlike the IPv4 address, this doesn't change if you attach an EIP to the instance. -}
-      , '("key_name", Text)
-         {- - The key name of the Instance. -}
-      , '("monitoring", Text)
-         {- - Whether detailed monitoring is enabled or disabled for the Instance (Boolean). -}
-      , '("network_interface_id", Text)
-         {- - The ID of the network interface that was created with the Instance. -}
-      , '("placement_group", Text)
-         {- - The placement group of the Instance. -}
-      , '("private_dns", Text)
-         {- - The private DNS name assigned to the Instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC. -}
-      , '("private_ip", Text)
-         {- - The private IP address assigned to the Instance. -}
-      , '("public_dns", Text)
-         {- - The public DNS name assigned to the Instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC. -}
-      , '("public_ip", Text)
-         {- - The public IP address assigned to the Instance, if applicable. NOTE : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
-      , '("root_block_device", Text)
-         {- - The root block device mappings of the Instance -}
-      , '("security_groups", Text)
-         {- - The associated security groups. -}
-      , '("source_dest_check", Text)
-         {- - Whether the network interface performs source/destination checking (Boolean). -}
-      , '("subnet_id", Text)
-         {- - The VPC subnet ID. -}
-      , '("tags", Text)
-         {- - A mapping of tags assigned to the Instance. -}
-      , '("tenancy", Text)
-         {- - The tenancy of the instance: @dedicated@ , @default@ , @host@ . -}
-      , '("user_data", Text)
-         {- - The User Data supplied to the Instance. -}
-      , '("vpc_security_group_ids", Text)
-         {- - The associated security groups in a non-default VPC. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_instance"
@@ -5054,23 +4870,15 @@ $(TH.makeResource
 Provides a resource to create a VPC Internet Gateway.
 -}
 data InternetGatewayResource = InternetGatewayResource
-    { _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , _internet_gateway_id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags :: !(Attr Text)
+    { _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC ID to create in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InternetGatewayResource
     = '[ '("id", Text)
          {- - The ID of the Internet Gateway. -}
-      , '("state", Text)
-         {- - The current state of the attachment between the gateway and the VPC. Present only if a VPC is attached -}
-      , '("vpc_id", Text)
-         {- - The ID of an attached VPC. -}
        ]
 
 $(TH.makeResource
@@ -5087,7 +4895,7 @@ data IotCertificateResource = IotCertificateResource
       {- ^ (Required)  Boolean flag to indicate if the certificate should be active -}
     , _csr :: !(Attr Text)
       {- ^ (Required) The certificate signing request. Review the [IoT API Reference Guide] (http://docs.aws.amazon.com/iot/latest/apireference/API_CreateCertificateFromCsr.html) for more information on creating a certificate from a certificate signing request (CSR). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IotCertificateResource
     = '[ '("arn", Text)
@@ -5108,7 +4916,7 @@ data IotPolicyResource = IotPolicyResource
       {- ^ (Required) The name of the policy. -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. Use the [IoT Developer Guide] (http://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) for more information on IoT Policies -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IotPolicyResource
     = '[ '("arn", Text)
@@ -5145,7 +4953,7 @@ data KeyPairResource = KeyPairResource
       {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @key_name@ . -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public key material. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyPairResource
     = '[ '("fingerprint", Text)
@@ -5179,7 +4987,7 @@ data KinesisFirehoseDeliveryStreamResource = KinesisFirehoseDeliveryStreamResour
       {- ^ (Optional) Configuration options if redshift is the destination. Using @redshift_configuration@ requires the user to also specify a @s3_configuration@ block. More details are given below. -}
     , _s3_configuration :: !(Attr Text)
       {- ^ (Optional, Deprecated, see/use @extended_s3_configuration@ unless @destination@ is @redshift@ ) Configuration options for the s3 destination (or the intermediate bucket if the destination is redshift). More details are given below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KinesisFirehoseDeliveryStreamResource
     = '[ '("arn", Text)
@@ -5212,31 +5020,17 @@ data KinesisStreamResource = KinesisStreamResource
       {- ^ (Optional) A list of shard-level CloudWatch metrics which can be enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KinesisStreamResource
     = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the Stream (same as @id@ ) -}
-      , '("closed_shards", Text)
-         {- - The list of shard ids in the CLOSED state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-      , '("creation_timestamp", Text)
-         {- - The approximate UNIX timestamp that the stream was created. -}
       , '("id", Text)
          {- - The unique Stream id -}
       , '("name", Text)
          {- - The unique Stream name -}
-      , '("open_shards", Text)
-         {- - The list of shard ids in the OPEN state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-      , '("retention_period", Text)
-         {- - Length of time (in hours) data records are accessible after they are added to the stream. -}
       , '("shard_count", Text)
          {- - The count of Shards for this Stream -}
-      , '("shard_level_metrics", Text)
-         {- - A list of shard-level CloudWatch metrics which are enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. -}
-      , '("status", Text)
-         {- - The current status of the stream. The stream status is one of CREATING, DELETING, ACTIVE, or UPDATING. -}
-      , '("tags", Text)
-         {- - A mapping of tags to assigned to the stream. -}
        ]
 
 $(TH.makeResource
@@ -5259,13 +5053,11 @@ data KmsAliasResource = KmsAliasResource
       {- ^ (Optional) Creates an unique alias beginning with the specified prefix. The name must start with the word "alias" followed by a forward slash (alias/).  Conflicts with @name@ . -}
     , _target_key_id :: !(Attr Text)
       {- ^ (Required) Identifier for the key for which the alias is for, can be either an ARN or key_id. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KmsAliasResource
     = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) of the key alias. -}
-      , '("target_key_id", Text)
-         {- - Key identifier pointed to by the alias. -}
        ]
 
 $(TH.makeResource
@@ -5292,7 +5084,7 @@ data KmsKeyResource = KmsKeyResource
       {- ^ (Optional) A valid policy JSON document. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the object. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KmsKeyResource
     = '[ '("arn", Text)
@@ -5324,7 +5116,7 @@ data LambdaAliasResource = LambdaAliasResource
       {- ^ (Required) Lambda function version for which you are creating the alias. Pattern: @(\$LATEST|[0-9]+)@ . -}
     , _name :: !(Attr Text)
       {- ^ (Required) Name for the alias you are creating. Pattern: @(?!^[0-9]+$)([a-zA-Z0-9-_]+)@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LambdaAliasResource
     = '[ '("arn", Text)
@@ -5356,7 +5148,7 @@ data LambdaEventSourceMappingResource = LambdaEventSourceMappingResource
       {- ^ (Required) The name or the ARN of the Lambda function that will be subscribing to events. -}
     , _starting_position :: !(Attr Text)
       {- ^ (Required) The position in the stream where AWS Lambda should start reading. Can be one of either @TRIM_HORIZON@ or @LATEST@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LambdaEventSourceMappingResource
     = '[ '("function_arn", Text)
@@ -5422,7 +5214,7 @@ data LambdaFunctionResource = LambdaFunctionResource
       {- ^ (Optional) The amount of time your Lambda Function has to run in seconds. Defaults to @3@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html> -}
     , _vpc_config :: !(Attr Text)
       {- ^ (Optional) Provide this to allow your function to access your VPC. Fields documented below. See <http://docs.aws.amazon.com/lambda/latest/dg/vpc.html> -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LambdaFunctionResource
     = '[ '("arn", Text)
@@ -5466,7 +5258,7 @@ data LambdaPermissionResource = LambdaPermissionResource
       {- ^ (Optional) When granting Amazon S3 or CloudWatch Events permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) for the S3 Bucket or CloudWatch Events Rule as its value.  This ensures that only events generated from the specified bucket or rule can invoke the function. API Gateway ARNs have a unique structure described <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html> . -}
     , _statement_id :: !(Attr Text)
       {- ^ (Required) A unique statement identifier. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_lambda_permission"
@@ -5515,7 +5307,7 @@ data LaunchConfigurationResource = LaunchConfigurationResource
       {- ^ (Optional) The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. @vpc-2730681a@ ) -}
     , _vpc_classic_link_security_groups :: !(Attr Text)
       {- ^ (Optional) The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. @sg-46ae3d11@ ). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_launch_configuration"
@@ -5536,7 +5328,7 @@ data LbCookieStickinessPolicyResource = LbCookieStickinessPolicyResource
       {- ^ (Required) The load balancer to which the policy should be attached. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the stickiness policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbCookieStickinessPolicyResource
     = '[ '("cookie_expiration_period", Text)
@@ -5562,9 +5354,7 @@ Provides a Load Balancer Listener resource. ~> Note:  @aws_alb_listener@ is
 known as @aws_lb_listener@ . The functionality is identical.
 -}
 data LbListenerResource = LbListenerResource
-    { _arn :: !(Attr Text)
-      {- ^ (Required) The ARN of the listener. -}
-    , _certificate_arn :: !(Attr Text)
+    { _certificate_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of the SSL server certificate. Exactly one certificate is required if the protocol is HTTPS. -}
     , _default_action :: !(Attr Text)
       {- ^ (Required) An Action block. Action blocks are documented below. -}
@@ -5576,7 +5366,7 @@ data LbListenerResource = LbListenerResource
       {- ^ (Optional) The protocol for connections from clients to the load balancer. Valid values are @TCP@ , @HTTP@ and @HTTPS@ . Defaults to @HTTP@ . -}
     , _ssl_policy :: !(Attr Text)
       {- ^ (Optional) The name of the SSL Policy for the listener. Required if @protocol@ is @HTTPS@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbListenerResource
     = '[ '("arn", Text)
@@ -5593,7 +5383,7 @@ $(TH.makeResource
 {- | The @aws_lb_listener_rule@ AWS resource.
 
 Provides a Load Balancer Listener Rule resource. ~> Note:
-@aws_alb_listener_rule@ is know as @aws_lb_listener_rule@ . The
+@aws_alb_listener_rule@ is known as @aws_lb_listener_rule@ . The
 functionality is identical.
 -}
 data LbListenerRuleResource = LbListenerRuleResource
@@ -5605,7 +5395,7 @@ data LbListenerRuleResource = LbListenerRuleResource
       {- ^ (Required, Forces New Resource) The ARN of the listener to which to attach the rule. -}
     , _priority :: !(Attr Text)
       {- ^ (Required) The priority for the rule. A listener can't have multiple rules with the same priority. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbListenerRuleResource
     = '[ '("arn", Text)
@@ -5621,14 +5411,12 @@ $(TH.makeResource
 
 {- | The @aws_lb@ AWS resource.
 
-Provides a Load Balancer resource. ~> Note:  @aws_alb@ is know as @aws_lb@ .
-The functionality is identical.
+Provides a Load Balancer resource. ~> Note:  @aws_alb@ is known as @aws_lb@
+. The functionality is identical.
 -}
 data LbResource = LbResource
     { _access_logs :: !(Attr Text)
       {- ^ (Optional) An Access Logs block. Access Logs documented below. -}
-    , _arn :: !(Attr Text)
-      {- ^ (Optional) The full ARN of the load balancer. -}
     , _enable_deletion_protection :: !(Attr Text)
       {- ^ (Optional) If true, deletion of the load balancer will be disabled via the AWS API. This will prevent Terraform from deleting the load balancer. Defaults to @false@ . -}
     , _idle_timeout :: !(Attr Text)
@@ -5644,14 +5432,14 @@ data LbResource = LbResource
     , _name_prefix :: !(Attr Text)
       {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _security_groups :: !(Attr Text)
-      {- ^ (Optional) A list of security group IDs to assign to the LB. -}
+      {- ^ (Optional) A list of security group IDs to assign to the LB. Only valid for Load Balancers of type @application@ . -}
     , _subnet_mapping :: !(Attr Text)
       {- ^ (Optional) A subnet mapping block as documented below. -}
     , _subnets :: !(Attr Text)
-      {- ^ (Optional) A list of subnet IDs to attach to the LB. -}
+      {- ^ (Optional) A list of subnet IDs to attach to the LB. Subnets cannot be updated for Load Balancers of type @network@ . Changing this value will for load balancers of type @network@ will force a recreation of the resource. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbResource
     = '[ '("arn", Text)
@@ -5688,7 +5476,7 @@ data LbSslNegotiationPolicyResource = LbSslNegotiationPolicyResource
       {- ^ (Required) The load balancer to which the policy should be attached. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the SSL negotiation policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbSslNegotiationPolicyResource
     = '[ '("attribute", Text)
@@ -5723,7 +5511,7 @@ data LbTargetGroupAttachmentResource = LbTargetGroupAttachmentResource
       {- ^ (Required) The ARN of the target group with which to register targets -}
     , _target_id :: !(Attr Text)
       {- ^ (Required) The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbTargetGroupAttachmentResource
     = '[ '("id", Text)
@@ -5738,13 +5526,11 @@ $(TH.makeResource
 {- | The @aws_lb_target_group@ AWS resource.
 
 Provides a Target Group resource for use with Load Balancer resources. ~>
-Note:  @aws_alb_target_group@ is know as @aws_lb_target_group@ . The
+Note:  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The
 functionality is identical.
 -}
 data LbTargetGroupResource = LbTargetGroupResource
-    { _arn :: !(Attr Text)
-      {- ^ (Optional) The full ARN of the target group. -}
-    , _deregistration_delay :: !(Attr Text)
+    { _deregistration_delay :: !(Attr Text)
       {- ^ (Optional) The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. -}
     , _health_check :: !(Attr Text)
       {- ^ (Optional) A Health Check block. Health Check blocks are documented below. -}
@@ -5757,14 +5543,14 @@ data LbTargetGroupResource = LbTargetGroupResource
     , _protocol :: !(Attr Text)
       {- ^ (Required) The protocol to use for routing traffic to the targets. -}
     , _stickiness :: !(Attr Text)
-      {- ^ (Optional) A Stickiness block. Stickiness blocks are documented below. -}
+      {- ^ (Optional) A Stickiness block. Stickiness blocks are documented below. @stickiness@ is only valid if used with Load Balancers of type @Application@ -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _target_type :: !(Attr Text)
       {- ^ (Optional) The type of target that you must specify when registering targets with this target group. The possible values are @instance@ (targets are specified by instance ID) or @ip@ (targets are specified by IP address). The default is @instance@ . Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is @ip@ , specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The identifier of the VPC in which to create the target group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbTargetGroupResource
     = '[ '("arn", Text)
@@ -5794,7 +5580,7 @@ for more details
 data LightsailDomainResource = LightsailDomainResource
     { _domain_name :: !(Attr Text)
       {- ^ (Required) The name of the Lightsail domain to manage -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LightsailDomainResource
     = '[ '("arn", Text)
@@ -5831,7 +5617,7 @@ data LightsailInstanceResource = LightsailInstanceResource
       {- ^ (Required) The name of the Lightsail Instance -}
     , _user_data :: !(Attr Text)
       {- ^ (Optional) launch script to configure server with additional user data -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_lightsail_instance"
@@ -5854,7 +5640,7 @@ data LightsailKeyPairResource = LightsailKeyPairResource
       {- ^ – (Optional) An optional PGP key to encrypt the resulting private key material. Only used when creating a new key pair -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public key material. This public key will be imported into Lightsail -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LightsailKeyPairResource
     = '[ '("arn", Text)
@@ -5891,7 +5677,7 @@ data LightsailStaticIpAttachmentResource = LightsailStaticIpAttachmentResource
       {- ^ (Required) The name of the Lightsail instance to attach the IP to -}
     , _static_ip_name :: !(Attr Text)
       {- ^ (Required) The name of the allocated static IP -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LightsailStaticIpAttachmentResource
     = '[ '("arn", Text)
@@ -5917,7 +5703,7 @@ for more details
 data LightsailStaticIpResource = LightsailStaticIpResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name for the allocated static IP -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LightsailStaticIpResource
     = '[ '("arn", Text)
@@ -5942,7 +5728,7 @@ data MainRouteTableAssociationResource = MainRouteTableAssociationResource
       {- ^ (Required) The ID of the Route Table to set as the new main route table for the target VPC -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC whose main route table should be set -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed MainRouteTableAssociationResource
     = '[ '("id", Text)
@@ -5963,23 +5749,11 @@ Provides a resource to create a VPC NAT Gateway.
 data NatGatewayResource = NatGatewayResource
     { _allocation_id :: !(Attr Text)
       {- ^ (Required) The Allocation ID of the Elastic IP address for the gateway. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
-    , _id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific Nat Gateway to retrieve. -}
-    , _name :: !(Attr Text)
-      {- ^ (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html> . -}
-    , _state :: !(Attr Text)
-      {- ^ (Optional) The state of the NAT gateway (pending | failed | available | deleting | deleted ). -}
     , _subnet_id :: !(Attr Text)
       {- ^ (Required) The Subnet ID of the subnet in which to place the gateway. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _values :: !(Attr Text)
-      {- ^ (Required) Set of values that are accepted for the given field. An Nat Gateway will be selected if any one of the given values matches. -}
-    , _vpc_id :: !(Attr Text)
-      {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NatGatewayResource
     = '[ '("allocation_id", Text)
@@ -6020,7 +5794,7 @@ data NetworkAclResource = NetworkAclResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the associated VPC. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkAclResource
     = '[ '("id", Text)
@@ -6059,7 +5833,7 @@ data NetworkAclRuleResource = NetworkAclRuleResource
       {- ^ (Required) The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number. -}
     , _to_port :: !(Attr Text)
       {- ^ (Optional) The to port to match. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkAclRuleResource
     = '[ '("id", Text)
@@ -6082,7 +5856,7 @@ data NetworkInterfaceAttachmentResource = NetworkInterfaceAttachmentResource
       {- ^ (Required) Instance ID to attach. -}
     , _network_interface_id :: !(Attr Text)
       {- ^ (Required) ENI ID to attach. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkInterfaceAttachmentResource
     = '[ '("attachment_id", Text)
@@ -6121,7 +5895,7 @@ data NetworkInterfaceResource = NetworkInterfaceResource
       {- ^ (Required) Subnet ID to create the ENI in. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkInterfaceResource
     = '[ '("attachment", Text)
@@ -6163,7 +5937,7 @@ data NetworkInterfaceSgAttachmentResource = NetworkInterfaceSgAttachmentResource
       {- ^ (Required) The ID of the network interface to attach to. -}
     , _security_group_id :: !(Attr Text)
       {- ^ (Required) The ID of the security group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_network_interface_sg_attachment"
@@ -6209,7 +5983,7 @@ data OpsworksApplicationResource = OpsworksApplicationResource
       {- ^ (Required) The id of the stack the application will belong to. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) Opsworks application type. One of @aws-flow-ruby@ , @java@ , @rails@ , @php@ , @nodejs@ , @static@ or @other@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksApplicationResource
     = '[ '("id", Text)
@@ -6258,7 +6032,7 @@ data OpsworksCustomLayerResource = OpsworksCustomLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksCustomLayerResource
     = '[ '("id", Text)
@@ -6311,7 +6085,7 @@ data OpsworksGangliaLayerResource = OpsworksGangliaLayerResource
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
     , _username :: !(Attr Text)
       {- ^ - (Optiona) The username to use for Ganglia. Defaults to "opsworks". -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksGangliaLayerResource
     = '[ '("id", Text)
@@ -6370,7 +6144,7 @@ data OpsworksHaproxyLayerResource = OpsworksHaproxyLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksHaproxyLayerResource
     = '[ '("id", Text)
@@ -6429,7 +6203,7 @@ data OpsworksInstanceResource = OpsworksInstanceResource
       {- ^ (Optional) Instance tenancy to use. Can be one of @"default"@ , @"dedicated"@ or @"host"@ -}
     , _virtualization_type :: !(Attr Text)
       {- ^ (Optional) Keyword to choose what virtualization mode created instances will use. Can be either @"paravirtual"@ or @"hvm"@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_opsworks_instance"
@@ -6481,7 +6255,7 @@ data OpsworksJavaAppLayerResource = OpsworksJavaAppLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksJavaAppLayerResource
     = '[ '("id", Text)
@@ -6530,7 +6304,7 @@ data OpsworksMemcachedLayerResource = OpsworksMemcachedLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksMemcachedLayerResource
     = '[ '("id", Text)
@@ -6583,7 +6357,7 @@ data OpsworksMysqlLayerResource = OpsworksMysqlLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksMysqlLayerResource
     = '[ '("id", Text)
@@ -6632,7 +6406,7 @@ data OpsworksNodejsAppLayerResource = OpsworksNodejsAppLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksNodejsAppLayerResource
     = '[ '("id", Text)
@@ -6659,7 +6433,7 @@ data OpsworksPermissionResource = OpsworksPermissionResource
       {- ^ (Required) The stack to set the permissions for -}
     , _user_arn :: !(Attr Text)
       {- ^ (Required) The user's IAM ARN to set permissions for -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksPermissionResource
     = '[ '("id", Text)
@@ -6706,7 +6480,7 @@ data OpsworksPhpAppLayerResource = OpsworksPhpAppLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksPhpAppLayerResource
     = '[ '("id", Text)
@@ -6765,7 +6539,7 @@ data OpsworksRailsAppLayerResource = OpsworksRailsAppLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksRailsAppLayerResource
     = '[ '("id", Text)
@@ -6792,7 +6566,7 @@ data OpsworksRdsDbInstanceResource = OpsworksRdsDbInstanceResource
       {- ^ (Required) The db instance to register for this stack. Changing this will force a new resource. -}
     , _stack_id :: !(Attr Text)
       {- ^ (Required) The stack to register a db inatance for. Changing this will force a new resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksRdsDbInstanceResource
     = '[ '("id", Text)
@@ -6853,7 +6627,7 @@ data OpsworksStackResource = OpsworksStackResource
       {- ^ (Optional) Boolean value controlling whether the standard OpsWorks security groups apply to created instances. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional) The id of the VPC that this stack belongs to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksStackResource
     = '[ '("id", Text)
@@ -6898,7 +6672,7 @@ data OpsworksStaticWebLayerResource = OpsworksStaticWebLayerResource
       {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(Attr Text)
       {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksStaticWebLayerResource
     = '[ '("id", Text)
@@ -6923,7 +6697,7 @@ data OpsworksUserProfileResource = OpsworksUserProfileResource
       {- ^ (Required) The ssh username, with witch this user wants to log in -}
     , _user_arn :: !(Attr Text)
       {- ^ (Required) The user's IAM ARN -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OpsworksUserProfileResource
     = '[ '("id", Text)
@@ -6946,7 +6720,7 @@ data PlacementGroupResource = PlacementGroupResource
       {- ^ (Required) The name of the placement group. -}
     , _strategy :: !(Attr Text)
       {- ^ (Required) The placement strategy. The only supported value is @cluster@ -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed PlacementGroupResource
     = '[ '("id", Text)
@@ -6968,7 +6742,7 @@ data ProxyProtocolPolicyResource = ProxyProtocolPolicyResource
       {- ^ (Required) List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP. -}
     , _load_balancer :: !(Attr Text)
       {- ^ (Required) The load balancer to which the policy should be attached. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProxyProtocolPolicyResource
     = '[ '("id", Text)
@@ -7032,7 +6806,7 @@ data RdsClusterInstanceResource = RdsClusterInstanceResource
       {- ^ (Optional) Bool to control if instance is publicly accessible. Default @false@ . See the documentation on <https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html> for more details on controlling this property. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RdsClusterInstanceResource
     = '[ '("allocated_storage", Text)
@@ -7089,7 +6863,7 @@ data RdsClusterParameterGroupResource = RdsClusterParameterGroupResource
       {- ^ (Optional) A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html> after initial creation of the group. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RdsClusterParameterGroupResource
     = '[ '("arn", Text)
@@ -7170,7 +6944,7 @@ data RdsClusterResource = RdsClusterResource
       {- ^ (Optional) Specifies whether the DB cluster is encrypted. The default is @false@ if not specified. -}
     , _vpc_security_group_ids :: !(Attr Text)
       {- ^ (Optional) List of VPC security groups to associate with the Cluster -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RdsClusterResource
     = '[ '("allocated_storage", Text)
@@ -7233,8 +7007,6 @@ data RedshiftClusterResource = RedshiftClusterResource
       {- ^ (Optional) The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1. -}
     , _availability_zone :: !(Attr Text)
       {- ^ (Optional) The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. -}
-    , _bucket_name :: !(Attr Text)
-      {- ^ (Optional, required when @enable_logging@ is @true@ ) The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions. For more information on the permissions required for the bucket, please read the AWS <http://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html#db-auditing-enable-logging> -}
     , _cluster_identifier :: !(Attr Text)
       {- ^ (Required) The Cluster Identifier. Must be a lower case string. -}
     , _cluster_parameter_group_name :: !(Attr Text)
@@ -7251,8 +7023,6 @@ data RedshiftClusterResource = RedshiftClusterResource
       {- ^ (Optional) The name of the first database to be created when the cluster is created. If you do not provide a name, Amazon Redshift will create a default database called @dev@ . -}
     , _elastic_ip :: !(Attr Text)
       {- ^ (Optional) The Elastic IP (EIP) address for the cluster. -}
-    , _enable_logging :: !(Attr Text)
-      {- ^ (Optional) Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster. Defaults to @false@ . -}
     , _encrypted :: !(Attr Text)
       {- ^ (Optional) If true , the data in the cluster is encrypted at rest. -}
     , _enhanced_vpc_routing :: !(Attr Text)
@@ -7263,6 +7033,8 @@ data RedshiftClusterResource = RedshiftClusterResource
       {- ^ (Optional) A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time. -}
     , _kms_key_id :: !(Attr Text)
       {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @encrypted@ needs to be set to true. -}
+    , _logging :: !(Attr Text)
+      {- ^ (Optional) Logging, documented below. -}
     , _master_password :: !(Attr Text)
       {- ^ (Required unless a @snapshot_identifier@ is provided) Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and contain at least one uppercase letter, one lowercase letter, and one number. -}
     , _master_username :: !(Attr Text)
@@ -7279,58 +7051,19 @@ data RedshiftClusterResource = RedshiftClusterResource
       {- ^ (Optional) The weekly time range (in UTC) during which automated cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi -}
     , _publicly_accessible :: !(Attr Text)
       {- ^ (Optional) If true, the cluster can be accessed from a public network. Default is @true@ . -}
-    , _s3_key_prefix :: !(Attr Text)
-      {- ^ (Optional) The prefix applied to the log file names. -}
     , _skip_final_snapshot :: !(Attr Text)
       {- ^ (Optional) Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false. -}
     , _snapshot_cluster_identifier :: !(Attr Text)
       {- ^ (Optional) The name of the cluster the source snapshot was created from. -}
+    , _snapshot_copy :: !(Attr Text)
+      {- ^ (Optional) Configuration of automatic copy of snapshots from one region to another. Documented below. -}
     , _snapshot_identifier :: !(Attr Text)
       {- ^ (Optional) The name of the snapshot from which to create the new cluster. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_security_group_ids :: !(Attr Text)
       {- ^ (Optional) A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed RedshiftClusterResource
-    = '[ '("automated_snapshot_retention_period", Text)
-         {- - The backup retention period -}
-      , '("availability_zone", Text)
-         {- - The availability zone of the Cluster -}
-      , '("cluster_identifier", Text)
-         {- - The Cluster Identifier -}
-      , '("cluster_parameter_group_name", Text)
-         {- - The name of the parameter group to be associated with this cluster -}
-      , '("cluster_public_key", Text)
-         {- - The public key for the cluster -}
-      , '("cluster_revision_number", Text)
-         {- - The specific revision number of the database in the cluster -}
-      , '("cluster_security_groups", Text)
-         {- - The security groups associated with the cluster -}
-      , '("cluster_subnet_group_name", Text)
-         {- - The name of a cluster subnet group to be associated with this cluster -}
-      , '("cluster_type", Text)
-         {- - The cluster type -}
-      , '("cluster_version", Text)
-         {- - The version of Redshift engine software -}
-      , '("database_name", Text)
-         {- - The name of the default database in the Cluster -}
-      , '("encrypted", Text)
-         {- - Whether the data in the cluster is encrypted -}
-      , '("endpoint", Text)
-         {- - The connection endpoint -}
-      , '("id", Text)
-         {- - The Redshift Cluster ID. -}
-      , '("node_type", Text)
-         {- - The type of nodes in the cluster -}
-      , '("port", Text)
-         {- - The Port the cluster responds on -}
-      , '("preferred_maintenance_window", Text)
-         {- - The backup window -}
-      , '("vpc_security_group_ids", Text)
-         {- - The VPC security group Ids associated with the cluster -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_redshift_cluster"
@@ -7350,7 +7083,7 @@ data RedshiftParameterGroupResource = RedshiftParameterGroupResource
       {- ^ (Required) The name of the Redshift parameter group. -}
     , _parameter :: !(Attr Text)
       {- ^ (Optional) A list of Redshift parameters to apply. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RedshiftParameterGroupResource
     = '[ '("id", Text)
@@ -7374,7 +7107,7 @@ data RedshiftSecurityGroupResource = RedshiftSecurityGroupResource
       {- ^ (Optional) A list of ingress rules. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Redshift security group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RedshiftSecurityGroupResource
     = '[ '("id", Text)
@@ -7401,7 +7134,7 @@ data RedshiftSubnetGroupResource = RedshiftSubnetGroupResource
       {- ^ (Required) An array of VPC subnet IDs. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RedshiftSubnetGroupResource
     = '[ '("id", Text)
@@ -7422,7 +7155,7 @@ resource.
 data Route53DelegationSetResource = Route53DelegationSetResource
     { _reference_name :: !(Attr Text)
       {- ^ (Optional) This is a reference name used in Caller Reference (helpful for identifying single delegation set amongst others) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed Route53DelegationSetResource
     = '[ '("id", Text)
@@ -7479,7 +7212,7 @@ data Route53HealthCheckResource = Route53HealthCheckResource
       {- ^ (Optional) A mapping of tags to assign to the health check. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The protocol to use when performing health checks. Valid values are @HTTP@ , @HTTPS@ , @HTTP_STR_MATCH@ , @HTTPS_STR_MATCH@ , @TCP@ , @CALCULATED@ and @CLOUDWATCH_METRIC@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_route53_health_check"
@@ -7517,7 +7250,7 @@ data Route53RecordResource = Route53RecordResource
       {- ^ (Optional) A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below. -}
     , _zone_id :: !(Attr Text)
       {- ^ (Required) The ID of the hosted zone to contain this record. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed Route53RecordResource
     = '[ '("fqdn", Text)
@@ -7540,7 +7273,7 @@ data Route53ZoneAssociationResource = Route53ZoneAssociationResource
       {- ^ (Optional) The VPC's region. Defaults to the region of the AWS provider. -}
     , _zone_id :: !(Attr Text)
       {- ^ (Required) The private hosted zone to associate. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed Route53ZoneAssociationResource
     = '[ '("id", Text)
@@ -7571,27 +7304,17 @@ data Route53ZoneResource = Route53ZoneResource
       {- ^ (Optional) Whether to destroy all records (possibly managed outside of Terraform) in the zone when destroying the zone. -}
     , _name :: !(Attr Text)
       {- ^ (Required) This is the name of the hosted zone. -}
-    , _private_zone :: !(Attr Text)
-      {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the zone. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional) The VPC to associate with a private hosted zone. Specifying @vpc_id@ will create a private hosted zone. Conflicts w/ @delegation_set_id@ as delegation sets can only be used for public zones. -}
     , _vpc_region :: !(Attr Text)
       {- ^ (Optional) The VPC's region. Defaults to the region of the AWS provider. -}
-    , _zone_id :: !(Attr Text)
-      {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed Route53ZoneResource
-    = '[ '("caller_reference", Text)
-         {- - Caller Reference of the Hosted Zone. -}
-      , '("comment", Text)
-         {- - The comment field of the Hosted Zone. -}
-      , '("name_servers", Text)
+    = '[ '("name_servers", Text)
          {- - A list of name servers in associated (or default) delegation set. Find more about delegation sets in <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html> . -}
-      , '("resource_record_set_count", Text)
-         {- - the number of Record Set in the Hosted Zone -}
       , '("zone_id", Text)
          {- - The Hosted Zone ID. This can be referenced by zone records. -}
        ]
@@ -7629,7 +7352,7 @@ data RouteResource = RouteResource
       {- ^ (Required) The ID of the routing table. -}
     , _vpc_peering_connection_id :: !(Attr Text)
       {- ^ (Optional) An ID of a VPC peering connection. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouteResource
     = '[ '("destination_cidr_block", Text)
@@ -7667,7 +7390,7 @@ data RouteTableAssociationResource = RouteTableAssociationResource
       {- ^ (Required) The ID of the routing table to associate with. -}
     , _subnet_id :: !(Attr Text)
       {- ^ (Required) The subnet ID to create an association. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouteTableAssociationResource
     = '[ '("id", Text)
@@ -7701,41 +7424,19 @@ any propagating gateways not explicitly listed in @propagating_vgws@ . Omit
 this argument when defining route propagation using the separate resource.
 -}
 data RouteTableResource = RouteTableResource
-    { _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , _propagating_vgws :: !(Attr Text)
+    { _propagating_vgws :: !(Attr Text)
       {- ^ (Optional) A list of virtual gateways for propagation. -}
     , _route :: !(Attr Text)
       {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , _route_table_id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , _subnet_id :: !(Attr Text)
-      {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RouteTableResource
-    = '[ '("cidr_block", Text)
-         {- - The CIDR block of the route. -}
-      , '("egress_only_gateway_id", Text)
-         {- - The ID of the Egress Only Internet Gateway. -}
-      , '("gateway_id", Text)
-         {- - The Internet Gateway ID. -}
-      , '("id", Text)
+    = '[ '("id", Text)
          {- - The ID of the routing table -}
-      , '("instance_id", Text)
-         {- - The EC2 instance ID. -}
-      , '("ipv6_cidr_block", Text)
-         {- - The IPv6 CIDR block of the route. -}
-      , '("nat_gateway_id", Text)
-         {- - The NAT Gateway ID. -}
-      , '("network_interface_id", Text)
-         {- - The ID of the elastic network interface (eni) to use. -}
-      , '("vpc_peering_connection_id", Text)
-         {- - The VPC Peering ID. -}
        ]
 
 $(TH.makeResource
@@ -7756,7 +7457,7 @@ data S3BucketNotificationResource = S3BucketNotificationResource
       {- ^ (Optional) The notification configuration to SQS Queue (documented below). -}
     , _topic :: !(Attr Text)
       {- ^ (Optional) The notification configuration to SNS Topic (documented below). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_s3_bucket_notification"
@@ -7798,51 +7499,17 @@ data S3BucketObjectResource = S3BucketObjectResource
       {- ^ (Optional) Specifies the desired <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> for the object. Can be either " @STANDARD@ ", " @REDUCED_REDUNDANCY@ ", or " @STANDARD_IA@ ". Defaults to " @STANDARD@ ". -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the object. -}
-    , _version_id :: !(Attr Text)
-      {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
     , _website_redirect :: !(Attr Text)
       {- ^ (Optional) Specifies a target URL for <http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed S3BucketObjectResource
-    = '[ '("body", Text)
-         {- - Object data (see limitations above to understand cases in which this field is actually available) -}
-      , '("cache_control", Text)
-         {- - Specifies caching behavior along the request/reply chain. -}
-      , '("content_disposition", Text)
-         {- - Specifies presentational information for the object. -}
-      , '("content_encoding", Text)
-         {- - Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. -}
-      , '("content_language", Text)
-         {- - The language the content is in. -}
-      , '("content_length", Text)
-         {- - Size of the body in bytes. -}
-      , '("content_type", Text)
-         {- - A standard MIME type describing the format of the object data. -}
-      , '("etag", Text)
+    = '[ '("etag", Text)
          {- - the ETag generated for the object (an MD5 sum of the object content). -}
-      , '("expiration", Text)
-         {- - If the object expiration is configured (see <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html> ), the field includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded. -}
-      , '("expires", Text)
-         {- - The date and time at which the object is no longer cacheable. -}
       , '("id", Text)
          {- - the @key@ of the resource supplied above -}
-      , '("last_modified", Text)
-         {- - Last modified date of the object in RFC1123 format (e.g. @Mon, 02 Jan 2006 15:04:05 MST@ ) -}
-      , '("metadata", Text)
-         {- - A map of metadata stored with the object in S3 -}
-      , '("server_side_encryption", Text)
-         {- - If the object is stored using server-side encryption (KMS or Amazon S3-managed encryption key), this field includes the chosen encryption and algorithm used. -}
-      , '("sse_kms_key_id", Text)
-         {- - If present, specifies the ID of the Key Management Service (KMS) master encryption key that was used for the object. -}
-      , '("storage_class", Text)
-         {- - <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> information of the object. Available for all objects except for @Standard@ storage class objects. -}
-      , '("tags", Text)
-         {- - A mapping of tags assigned to the object. -}
       , '("version_id", Text)
          {- - A unique version ID value for the object, if bucket versioning is enabled. -}
-      , '("website_redirect_location", Text)
-         {- - If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. -}
        ]
 
 $(TH.makeResource
@@ -7859,7 +7526,7 @@ data S3BucketPolicyResource = S3BucketPolicyResource
       {- ^ (Required) The name of the bucket to which to apply the policy. -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The text of the policy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_s3_bucket_policy"
@@ -7901,7 +7568,7 @@ data S3BucketResource = S3BucketResource
       {- ^ (Optional) A state of <https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html> (documented below) -}
     , _website :: !(Attr Text)
       {- ^ (Optional) A website object (documented below). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed S3BucketResource
     = '[ '("arn", Text)
@@ -7940,28 +7607,19 @@ data SecurityGroupResource = SecurityGroupResource
       {- ^ (Optional, Forces new resource) The security group description. Defaults to "Managed by Terraform". Cannot be "". NOTE : This field maps to the AWS @GroupDescription@ attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use @tags@ . -}
     , _egress :: !(Attr Text)
       {- ^ (Optional, VPC only) Can be specified multiple times for each egress rule. Each egress block supports fields documented below. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific security group to retrieve. -}
     , _ingress :: !(Attr Text)
       {- ^ (Optional) Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. -}
     , _name :: !(Attr Text)
       {- ^ (Optional, Forces new resource) The name of the security group. If omitted, Terraform will assign a random, unique name -}
     , _name_prefix :: !(Attr Text)
       {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
+    , _revoke_rules_on_delete :: !(Attr Text)
+      {- ^ (Optional) Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself. This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default @false@ -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional, Forces new resource) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed SecurityGroupResource
-    = '[ '("arn", Text)
-         {- - The computed ARN of the security group. -}
-      , '("description", Text)
-         {- - The description of the security group. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_security_group"
@@ -8002,7 +7660,7 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
       {- ^ (Required) The end port (or ICMP code if protocol is "icmp"). -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_security_group_rule"
@@ -8022,7 +7680,7 @@ data ServicecatalogPortfolioResource = ServicecatalogPortfolioResource
       {- ^ (Required) Name of the person or organization who owns the portfolio. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) Tags to apply to the connection. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServicecatalogPortfolioResource
     = '[ '("id", Text)
@@ -8041,7 +7699,7 @@ Provides a resource to designate the active SES receipt rule set
 data SesActiveReceiptRuleSetResource = SesActiveReceiptRuleSetResource
     { _rule_set_name :: !(Attr Text)
       {- ^ (Required) The name of the rule set -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ses_active_receipt_rule_set"
@@ -8055,7 +7713,7 @@ Provides an SES configuration set resource
 data SesConfigurationSetResource = SesConfigurationSetResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the configuration set -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ses_configuration_set"
@@ -8070,7 +7728,7 @@ be confirmed first using </docs/providers/aws/r/ses_domain_identity.html>
 data SesDomainDkimResource = SesDomainDkimResource
     { _domain :: !(Attr Text)
       {- ^ (Required) Verified domain name to generate DKIM tokens for. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SesDomainDkimResource
     = '[ '("dkim_tokens", Text)
@@ -8089,7 +7747,7 @@ Provides an SES domain identity resource
 data SesDomainIdentityResource = SesDomainIdentityResource
     { _domain :: !(Attr Text)
       {- ^ (Required) The domain name to assign to SES -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SesDomainIdentityResource
     = '[ '("arn", Text)
@@ -8120,7 +7778,7 @@ data SesEventDestinationResource = SesEventDestinationResource
       {- ^ (Required) A list of matching types. May be any of @"send"@ , @"reject"@ , @"bounce"@ , @"complaint"@ , @"delivery"@ , @"open"@ , or @"click"@ . -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the event destination -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ses_event_destination"
@@ -8138,7 +7796,7 @@ data SesReceiptFilterResource = SesReceiptFilterResource
       {- ^ (Required) The name of the filter -}
     , _policy :: !(Attr Text)
       {- ^ (Required) Block or Allow -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ses_receipt_filter"
@@ -8178,7 +7836,7 @@ data SesReceiptRuleResource = SesReceiptRuleResource
       {- ^ (Optional) Require or Optional -}
     , _workmail_action :: !(Attr Text)
       {- ^ (Optional) A list of WorkMail Action blocks. Documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ses_receipt_rule"
@@ -8192,12 +7850,37 @@ Provides an SES receipt rule set resource
 data SesReceiptRuleSetResource = SesReceiptRuleSetResource
     { _rule_set_name :: !(Attr Text)
       {- ^ (Required) The name of the rule set -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_ses_receipt_rule_set"
     ''Qual.AWS
     ''SesReceiptRuleSetResource)
+
+{- | The @aws_ses_template@ AWS resource.
+
+Provides a resource to create a SES template.
+-}
+data SesTemplateResource = SesTemplateResource
+    { _html :: !(Attr Text)
+      {- ^ (Optional) The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The name of the template. Cannot exceed 64 characters. You will refer to this name when you send email. -}
+    , _subject :: !(Attr Text)
+      {- ^ (Optional) The subject line of the email. -}
+    , _text :: !(Attr Text)
+      {- ^ (Optional) The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts. -}
+    } deriving (Show, Generic)
+
+type instance Computed SesTemplateResource
+    = '[ '("id", Text)
+         {- - The name of the SES template -}
+       ]
+
+$(TH.makeResource
+    "aws_ses_template"
+    ''Qual.AWS
+    ''SesTemplateResource)
 
 {- | The @aws_simpledb_domain@ AWS resource.
 
@@ -8206,7 +7889,7 @@ Provides a SimpleDB domain resource
 data SimpledbDomainResource = SimpledbDomainResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the SimpleDB domain -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SimpledbDomainResource
     = '[ '("id", Text)
@@ -8227,7 +7910,7 @@ data SnapshotCreateVolumePermissionResource = SnapshotCreateVolumePermissionReso
       {- ^ - (required) An AWS Account ID to add create volume permissions -}
     , _snapshot_id :: !(Attr Text)
       {- ^ - (required) A snapshot ID -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SnapshotCreateVolumePermissionResource
     = '[ '("id", Text)
@@ -8252,7 +7935,7 @@ data SnsTopicPolicyResource = SnsTopicPolicyResource
       {- ^ (Required) The ARN of the SNS topic -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The fully-formed AWS policy as JSON -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_sns_topic_policy"
@@ -8272,7 +7955,7 @@ data SnsTopicResource = SnsTopicResource
       {- ^ (Required) The friendly name for the SNS topic -}
     , _policy :: !(Attr Text)
       {- ^ (Optional) The fully-formed AWS policy as JSON -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SnsTopicResource
     = '[ '("arn", Text)
@@ -8324,7 +8007,7 @@ data SnsTopicSubscriptionResource = SnsTopicSubscriptionResource
       {- ^ (Optional) Boolean indicating whether or not to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property) (default is false). -}
     , _topic_arn :: !(Attr Text)
       {- ^ (Required) The ARN of the SNS topic to subscribe to -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_sns_topic_subscription"
@@ -8344,7 +8027,7 @@ data SpotDatafeedSubscriptionResource = SpotDatafeedSubscriptionResource
       {- ^ (Required) The Amazon S3 bucket in which to store the Spot instance data feed. -}
     , _prefix :: !(Attr Text)
       {- ^ (Optional) Path of folder inside bucket to place spot pricing data. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_spot_datafeed_subscription"
@@ -8379,7 +8062,7 @@ data SpotFleetRequestResource = SpotFleetRequestResource
       {- ^ - The end date and time of the request, in UTC ISO8601 format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request. Defaults to 24 hours. -}
     , _wait_for_fulfillment :: !(Attr Text)
       {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_spot_fleet_request"
@@ -8415,7 +8098,7 @@ data SpotInstanceRequestResource = SpotInstanceRequestResource
       {- ^ (Optional; Default: "persistent") If set to "one-time", after the instance is terminated, the spot request will be closed. Also, Terraform can't manage one-time spot requests, just launch them. -}
     , _wait_for_fulfillment :: !(Attr Text)
       {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_spot_instance_request"
@@ -8432,7 +8115,7 @@ data SqsQueuePolicyResource = SqsQueuePolicyResource
       {- ^ (Required) The JSON policy for the SQS queue -}
     , _queue_url :: !(Attr Text)
       {- ^ (Required) The URL of the SQS Queue to which to attach the policy -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_sqs_queue_policy"
@@ -8472,7 +8155,7 @@ data SqsQueueResource = SqsQueueResource
       {- ^ (Optional) A mapping of tags to assign to the queue. -}
     , _visibility_timeout_seconds :: !(Attr Text)
       {- ^ (Optional) The visibility timeout for the queue. An integer from 0 to 43200 (12 hours). The default for this attribute is 30. For more information about visibility timeout, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqsQueueResource
     = '[ '("arn", Text)
@@ -8502,7 +8185,7 @@ data SsmActivationResource = SsmActivationResource
       {- ^ (Optional) The default name of the registerd managed instance. -}
     , _registration_limit :: !(Attr Text)
       {- ^ (Optional) The maximum number of managed instances you want to register. The default value is 1 instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmActivationResource
     = '[ '("activation_code", Text)
@@ -8547,7 +8230,7 @@ data SsmAssociationResource = SsmAssociationResource
       {- ^ (Optional) A cron expression when the association will be applied to the target(s). -}
     , _targets :: !(Attr Text)
       {- ^ (Optional) The targets (either instances or tags). Instances are specified using Key=instanceids,Values=instanceid1,instanceid2. Tags are specified using Key=tag name,Values=tag value. Only 1 target is currently supported by AWS. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmAssociationResource
     = '[ '("instance_ids", Text)
@@ -8581,7 +8264,7 @@ data SsmDocumentResource = SsmDocumentResource
       {- ^ (Required) The name of the document. -}
     , _permissions :: !(Attr Text)
       {- ^ (Optional) Additional Permissions to attach to the document. See <#permissions> below for details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmDocumentResource
     = '[ '("content", Text)
@@ -8636,7 +8319,7 @@ data SsmMaintenanceWindowResource = SsmMaintenanceWindowResource
       {- ^ (Required) The name of the maintenance window. -}
     , _schedule :: !(Attr Text)
       {- ^ (Required) The schedule of the Maintenance Window in the form of a <https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-cron.html> or rate expression. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmMaintenanceWindowResource
     = '[ '("id", Text)
@@ -8661,7 +8344,7 @@ data SsmMaintenanceWindowTargetResource = SsmMaintenanceWindowTargetResource
       {- ^ (Required) The targets (either instances or tags). Instances are specified using Key=instanceids,Values=instanceid1,instanceid2. Tags are specified using Key=tag name,Values=tag value. -}
     , _window_id :: !(Attr Text)
       {- ^ (Required) The Id of the maintenance window to register the target with. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmMaintenanceWindowTargetResource
     = '[ '("id", Text)
@@ -8698,7 +8381,7 @@ data SsmMaintenanceWindowTaskResource = SsmMaintenanceWindowTaskResource
       {- ^ (Required) The type of task being registered. The only allowed value is @RUN_COMMAND@ . -}
     , _window_id :: !(Attr Text)
       {- ^ (Required) The Id of the maintenance window to register the task with. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmMaintenanceWindowTaskResource
     = '[ '("id", Text)
@@ -8725,10 +8408,12 @@ data SsmParameterResource = SsmParameterResource
       {- ^ (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
     , _value :: !(Attr Text)
       {- ^ (Required) The value of the parameter. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmParameterResource
-    = '[ '("name", Text)
+    = '[ '("arn", Text)
+         {- - The ARN of the parameter. -}
+      , '("name", Text)
          {- - (Required) The name of the parameter. -}
       , '("type", Text)
          {- - (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
@@ -8764,7 +8449,7 @@ data SsmPatchBaselineResource = SsmPatchBaselineResource
       {- ^ (Optional) Defines the operating system the patch baseline applies to. Supported operating systems include @WINDOWS@ , @AMAZON_LINUX@ , @UBUNTU@ and @REDHAT_ENTERPRISE_LINUX@ . The Default value is @WINDOWS@ . -}
     , _rejected_patches :: !(Attr Text)
       {- ^ (Optional) A list of rejected patches. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmPatchBaselineResource
     = '[ '("id", Text)
@@ -8785,7 +8470,7 @@ data SsmPatchGroupResource = SsmPatchGroupResource
       {- ^ (Required) The ID of the patch baseline to register the patch group with. -}
     , _patch_group :: !(Attr Text)
       {- ^ (Required) The name of the patch group that should be registered with the patch baseline. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SsmPatchGroupResource
     = '[ '("id", Text)
@@ -8808,7 +8493,7 @@ data StateMachineResource = StateMachineResource
       {- ^ (Required) The name of the state machine. -}
     , _role_arn :: !(Attr Text)
       {- ^ (Required) The Amazon Resource Name (ARN) of the IAM role to use for this state machine. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StateMachineResource
     = '[ '("creation_date", Text)
@@ -8835,23 +8520,15 @@ data SubnetResource = SubnetResource
       {- ^ (Optional) The AZ for the subnet. -}
     , _cidr_block :: !(Attr Text)
       {- ^ (Required) The CIDR block for the subnet. -}
-    , _default_for_az :: !(Attr Text)
-      {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific subnet to retrieve. -}
     , _ipv6_cidr_block :: !(Attr Text)
       {- ^ (Optional) The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length. -}
     , _map_public_ip_on_launch :: !(Attr Text)
       {- ^ -  (Optional) Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is @false@ . -}
-    , _state :: !(Attr Text)
-      {- ^ (Optional) The state that the desired subnet must have. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SubnetResource
     = '[ '("availability_zone", Text)
@@ -8894,7 +8571,7 @@ data VolumeAttachmentResource = VolumeAttachmentResource
       {- ^ (Optional, Boolean) Set this to true if you do not wish to detach the volume from the instance to which it is attached at destroy time, and instead just remove the attachment from Terraform state. This is useful when destroying an instance which has volumes created by some other means attached. -}
     , _volume_id :: !(Attr Text)
       {- ^ (Required) ID of the Volume to be attached -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeAttachmentResource
     = '[ '("device_name", Text)
@@ -8919,7 +8596,7 @@ data VpcDhcpOptionsAssociationResource = VpcDhcpOptionsAssociationResource
       {- ^ (Required) The ID of the DHCP Options Set to associate to the VPC. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC to which we would like to associate a DHCP Options Set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_vpc_dhcp_options_association"
@@ -8943,7 +8620,7 @@ data VpcDhcpOptionsResource = VpcDhcpOptionsResource
       {- ^ (Optional) List of NTP servers to configure. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_vpc_dhcp_options"
@@ -8962,31 +8639,23 @@ Doing so will cause a conflict of associations and will overwrite the
 association.
 -}
 data VpcEndpointResource = VpcEndpointResource
-    { _id :: !(Attr Text)
-      {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
-    , _policy :: !(Attr Text)
+    { _policy :: !(Attr Text)
       {- ^ (Optional) A policy to attach to the endpoint that controls access to the service. -}
     , _route_table_ids :: !(Attr Text)
       {- ^ (Optional) One or more route table IDs. -}
     , _service_name :: !(Attr Text)
       {- ^ (Required) The AWS service name, in the form @com.amazonaws.region.service@ . -}
-    , _state :: !(Attr Text)
-      {- ^ (Optional) The state of the specific VPC Endpoint to retrieve. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC in which the endpoint will be used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpcEndpointResource
     = '[ '("cidr_blocks", Text)
          {- - The list of CIDR blocks for the exposed service. -}
       , '("id", Text)
          {- - The ID of the VPC endpoint. -}
-      , '("policy", Text)
-         {- - The policy document associated with the VPC Endpoint. -}
       , '("prefix_list_id", Text)
          {- - The prefix list ID of the exposed service. -}
-      , '("route_table_ids", Text)
-         {- - One or more route tables associated with the VPC Endpoint. -}
        ]
 
 $(TH.makeResource
@@ -9011,7 +8680,7 @@ data VpcEndpointRouteTableAssociationResource = VpcEndpointRouteTableAssociation
       {- ^ (Required) The ID of the routing table to be associated with the VPC endpoint. -}
     , _vpc_endpoint_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC endpoint with which the routing table will be associated. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpcEndpointRouteTableAssociationResource
     = '[ '("id", Text)
@@ -9041,7 +8710,7 @@ data VpcPeeringConnectionAccepterResource = VpcPeeringConnectionAccepterResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_peering_connection_id :: !(Attr Text)
       {- ^ (Required) The VPC Peering Connection ID to manage. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_vpc_peering_connection_accepter"
@@ -9072,7 +8741,7 @@ data VpcPeeringConnectionResource = VpcPeeringConnectionResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the requester VPC. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_vpc_peering_connection"
@@ -9088,10 +8757,6 @@ data VpcResource = VpcResource
       {- ^ (Optional) Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is @false@ . -}
     , _cidr_block :: !(Attr Text)
       {- ^ (Required) The CIDR block for the VPC. -}
-    , _default' :: !(Attr Text)
-      {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
-    , _dhcp_options_id :: !(Attr Text)
-      {- ^ (Optional) The DHCP options id of the desired VPC. -}
     , _enable_classiclink :: !(Attr Text)
       {- ^ (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html> for more information. Defaults false. -}
     , _enable_classiclink_dns_support :: !(Attr Text)
@@ -9100,17 +8765,11 @@ data VpcResource = VpcResource
       {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
     , _enable_dns_support :: !(Attr Text)
       {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific VPC to retrieve. -}
     , _instance_tenancy :: !(Attr Text)
       {- ^ (Optional) A tenancy option for instances launched into the VPC -}
-    , _state :: !(Attr Text)
-      {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpcResource
     = '[ '("cidr_block", Text)
@@ -9163,7 +8822,7 @@ data VpnConnectionResource = VpnConnectionResource
       {- ^ (Required) The type of VPN connection. The only type AWS supports at this time is "ipsec.1". -}
     , _vpn_gateway_id :: !(Attr Text)
       {- ^ (Required) The ID of the virtual private gateway. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnConnectionResource
     = '[ '("customer_gateway_configuration", Text)
@@ -9220,7 +8879,7 @@ data VpnConnectionRouteResource = VpnConnectionRouteResource
       {- ^ (Required) The CIDR block associated with the local subnet of the customer network. -}
     , _vpn_connection_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPN connection. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnConnectionRouteResource
     = '[ '("destination_cidr_block", Text)
@@ -9247,7 +8906,7 @@ data VpnGatewayAttachmentResource = VpnGatewayAttachmentResource
       {- ^ (Required) The ID of the VPC. -}
     , _vpn_gateway_id :: !(Attr Text)
       {- ^ (Required) The ID of the Virtual Private Gateway. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnGatewayAttachmentResource
     = '[ '("vpc_id", Text)
@@ -9266,21 +8925,13 @@ $(TH.makeResource
 Provides a resource to create a VPC VPN Gateway.
 -}
 data VpnGatewayResource = VpnGatewayResource
-    { _attached_vpc_id :: !(Attr Text)
-      {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
-    , _availability_zone :: !(Attr Text)
+    { _availability_zone :: !(Attr Text)
       {- ^ (Optional) The Availability Zone for the virtual private gateway. -}
-    , _filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(Attr Text)
-      {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
-    , _state :: !(Attr Text)
-      {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(Attr Text)
       {- ^ (Optional) The VPC ID to create in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpnGatewayResource
     = '[ '("id", Text)
@@ -9304,7 +8955,7 @@ data VpnGatewayRoutePropagationResource = VpnGatewayRoutePropagationResource
       {- ^ - The id of the @aws_route_table@ to propagate routes into. -}
     , _vpn_gateway_id :: !(Attr Text)
       {- ^ - The id of the @aws_vpn_gateway@ to propagate routes from. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_vpn_gateway_route_propagation"
@@ -9320,7 +8971,7 @@ data WafByteMatchSetResource = WafByteMatchSetResource
       {- ^ - Specifies the bytes (typically a string that corresponds with ASCII characters) that you want to search for in web requests, the location in requests that you want to search, and other settings. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name or description of the Byte Match Set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_byte_match_set"
@@ -9336,7 +8987,7 @@ data WafIpsetResource = WafIpsetResource
       {- ^ (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address range (in CIDR format) that web requests originate from. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name or description of the IPSet. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_ipset"
@@ -9358,7 +9009,7 @@ data WafRateBasedRuleResource = WafRateBasedRuleResource
       {- ^ (Required) Valid value is IP. -}
     , _rate_limit :: !(Attr Text)
       {- ^ (Required) The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 2000. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_rate_based_rule"
@@ -9376,7 +9027,7 @@ data WafRuleResource = WafRuleResource
       {- ^ (Required) The name or description of the rule. -}
     , _predicates :: !(Attr Text)
       {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_rule"
@@ -9392,7 +9043,7 @@ data WafSizeConstraintSetResource = WafSizeConstraintSetResource
       {- ^ (Required) The name or description of the Size Constraint Set. -}
     , _size_constraints :: !(Attr Text)
       {- ^ (Optional) Specifies the parts of web requests that you want to inspect the size of. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_size_constraint_set"
@@ -9408,7 +9059,7 @@ data WafSqlInjectionMatchSetResource = WafSqlInjectionMatchSetResource
       {- ^ (Required) The name or description of the SizeConstraintSet. -}
     , _sql_injection_match_tuples :: !(Attr Text)
       {- ^ (Optional) The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_sql_injection_match_set"
@@ -9428,7 +9079,7 @@ data WafWebAclResource = WafWebAclResource
       {- ^ (Required) The name or description of the web ACL. -}
     , _rules :: !(Attr Text)
       {- ^ (Required) The rules to associate with the web ACL and the settings for each rule. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_web_acl"
@@ -9444,7 +9095,7 @@ data WafXssMatchSetResource = WafXssMatchSetResource
       {- ^ (Required) The name or description of the SizeConstraintSet. -}
     , _xss_match_tuples :: !(Attr Text)
       {- ^ (Optional) The parts of web requests that you want to inspect for cross-site scripting attacks. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_waf_xss_match_set"
@@ -9461,7 +9112,7 @@ data WafregionalByteMatchSetResource = WafregionalByteMatchSetResource
       {- ^ (Optional)Settings for the ByteMatchSet, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests. ByteMatchTuple documented below. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name or description of the ByteMatchSet. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_wafregional_byte_match_set"
@@ -9478,7 +9129,7 @@ data WafregionalIpsetResource = WafregionalIpsetResource
       {- ^ (Optional) The IP address type and IP address range (in CIDR notation) from which web requests originate. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name or description of the IPSet. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "aws_wafregional_ipset"

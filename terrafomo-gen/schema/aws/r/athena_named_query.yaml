@@ -1,0 +1,25 @@
+_name: aws_athena_named_query
+arguments:
+  _name:
+    required: true
+    help: (Required) The plain language name for the query. Maximum length of 128.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A brief explanation of the query. Maximum length of 1024.
+    type: Text
+  _database:
+    required: true
+    help: (Required) The database to which the query belongs.
+    type: Text
+  _query:
+    required: true
+    help: (Required) The text of the query itself. In other words, all query statements.
+      Maximum length of 262144.
+    type: Text
+attributes:
+  id:
+    help: ! '- The unique ID of the query.'
+    type: Text
+about: Provides an Athena Named Query resource.
+examples: []

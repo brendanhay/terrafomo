@@ -1,0 +1,20 @@
+_name: aws_vpn_gateway
+arguments:
+  _availability_zone:
+    required: false
+    help: (Optional) The Availability Zone for the virtual private gateway.
+    type: Text
+  _vpc_id:
+    required: false
+    help: (Optional) The VPC ID to create in.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the VPN Gateway.'
+    type: Text
+about: Provides a resource to create a VPC VPN Gateway.
+examples: []

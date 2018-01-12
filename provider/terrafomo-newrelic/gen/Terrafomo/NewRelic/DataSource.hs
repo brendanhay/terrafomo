@@ -45,7 +45,7 @@ Relic.
 data ApplicationDataSource = ApplicationDataSource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the application in New Relic. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ApplicationDataSource
     = '[ '("host_ids", Text)

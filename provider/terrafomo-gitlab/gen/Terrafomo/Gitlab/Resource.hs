@@ -51,7 +51,7 @@ data DeployKeyResource = DeployKeyResource
       {- ^ (Required, string) The name or id of the project to add the deploy key to. -}
     , _title :: !(Attr Text)
       {- ^ (Required, string) A title to describe the deploy key with. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "gitlab_deploy_key"
@@ -79,7 +79,7 @@ data GroupResource = GroupResource
       {- ^ (Optional) Boolean, defaults to false.  Whether to enable users to request access to the group. -}
     , _visibility_level :: !(Attr Text)
       {- ^ (Optional) Set to @public@ to create a public group. Valid values are @private@ , @internal@ , @public@ . Groups are created as private by default. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed GroupResource
     = '[ '("id", Text)
@@ -106,7 +106,7 @@ data LabelResource = LabelResource
       {- ^ (Required) The name of the label. -}
     , _project :: !(Attr Text)
       {- ^ (Required) The name or id of the project to add the label to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LabelResource
     = '[ '("id", Text)
@@ -149,7 +149,7 @@ data ProjectHookResource = ProjectHookResource
       {- ^ (Required) The url of the hook to invoke. -}
     , _wiki_page_events :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for wiki page events. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectHookResource
     = '[ '("id", Text)
@@ -187,7 +187,7 @@ data ProjectResource = ProjectResource
       {- ^ (Optional) Set to @public@ to create a public project. Valid values are @private@ , @internal@ , @public@ . Repositories are created as private by default. -}
     , _wiki_enabled :: !(Attr Text)
       {- ^ (Optional) Enable wiki for the project. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectResource
     = '[ '("http_url_to_repo", Text)
@@ -228,7 +228,7 @@ data UserResource = UserResource
       {- ^ (Optional) Boolean, defaults to true. Whether to skip confirmation. -}
     , _username :: !(Attr Text)
       {- ^ (Required) The username of the user. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("id", Text)

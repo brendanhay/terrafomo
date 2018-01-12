@@ -55,7 +55,7 @@ data CertificateResource = CertificateResource
       {- ^ (Required) The certificate key. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the certificate. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CertificateResource
     = '[ '("algorithm", Text)
@@ -103,20 +103,7 @@ data EnvironmentResource = EnvironmentResource
       {- ^ (Optional) Must be one of cattle , swarm , mesos , windows or kubernetes . This is a helper for setting the project_template_ids for the included Rancher templates. This will conflict with project_template_id setting. Changing this forces a new resource to be created. -}
     , _project_template_id :: !(Attr Text)
       {- ^ (Optional) This can be any valid project template ID. If this is set, then orchestration can not be. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed EnvironmentResource
-    = '[ '("description", Text)
-         {- - The environment description. -}
-      , '("id", Text)
-         {- - The ID of the resource. -}
-      , '("member", Text)
-         {- - The environment members. -}
-      , '("orchestration", Text)
-         {- - The environment orchestration engine. -}
-      , '("project_template_id", Text)
-         {- - The environment project template ID. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rancher_environment"
@@ -141,7 +128,7 @@ data HostResource = HostResource
       {- ^ (Optional) A dictionary of labels to apply to the host. Computed internal labels are excluded from that list. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the host. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rancher_host"
@@ -164,7 +151,7 @@ data RegistrationTokenResource = RegistrationTokenResource
       {- ^ (Optional) A map of host labels to add to the registration command. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the registration token. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegistrationTokenResource
     = '[ '("command", Text)
@@ -203,7 +190,7 @@ data RegistryCredentialResource = RegistryCredentialResource
       {- ^ (Required) The ID of the registry to create the credential for. -}
     , _secret_value :: !(Attr Text)
       {- ^ (Required) The secret value (password) of the account. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegistryCredentialResource
     = '[ '("id", Text)
@@ -229,7 +216,7 @@ data RegistryResource = RegistryResource
       {- ^ (Required) The name of the registry. -}
     , _server_address :: !(Attr Text)
       {- ^ (Required) The server address for the registry. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegistryResource
     = '[ '("id", Text)
@@ -255,7 +242,7 @@ data SecretsResource = SecretsResource
       {- ^ (Required) The name of the secret. -}
     , _value :: !(Attr Text)
       {- ^ (Required) The secret value. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rancher_secrets"
@@ -288,7 +275,7 @@ data StackResource = StackResource
       {- ^ (Optional) The scope to attach the stack to. Must be one of user or system . Defaults to user . -}
     , _start_on_create :: !(Attr Text)
       {- ^ (Optional) Whether to start the stack automatically. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StackResource
     = '[ '("id", Text)

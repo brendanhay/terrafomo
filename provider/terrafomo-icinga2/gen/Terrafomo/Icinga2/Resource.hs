@@ -51,7 +51,7 @@ data CheckcommandResource = CheckcommandResource
       {- ^ (Required) Name by which to reference the checkcommand -}
     , _templates :: !(Attr Text)
       {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "icinga2_checkcommand"
@@ -74,7 +74,7 @@ data HostResource = HostResource
       {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     , _vars :: !(Attr Text)
       {- ^ (Optional) A mapping of variables to assign to the host. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "icinga2_host"
@@ -91,7 +91,7 @@ data HostgroupResource = HostgroupResource
       {- ^ (Required) The name of the hostgroup to display in the Icinga2 interface. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the hostgroup. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "icinga2_hostgroup"
@@ -110,7 +110,7 @@ data ServiceResource = ServiceResource
       {- ^ (Required) The host to check the service's status on -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Service object. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "icinga2_service"

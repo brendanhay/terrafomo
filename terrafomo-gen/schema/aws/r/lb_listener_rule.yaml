@@ -1,0 +1,30 @@
+_name: aws_lb_listener_rule
+arguments:
+  _action:
+    required: true
+    help: (Required) An Action block. Action blocks are documented below.
+    type: Text
+  _condition:
+    required: true
+    help: (Required) A Condition block. Condition blocks are documented below.
+    type: Text
+  _priority:
+    required: true
+    help: (Required) The priority for the rule. A listener can't have multiple rules
+      with the same priority.
+    type: Text
+  _listener_arn:
+    required: true
+    help: (Required, Forces New Resource) The ARN of the listener to which to attach
+      the rule.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN of the rule (matches @id@ )'
+    type: Text
+  id:
+    help: ! '- The ARN of the rule (matches @arn@ )'
+    type: Text
+about: ! 'Provides a Load Balancer Listener Rule resource. ~> Note:  @aws_alb_listener_rule@
+  is known as @aws_lb_listener_rule@ . The functionality is identical.'
+examples: []

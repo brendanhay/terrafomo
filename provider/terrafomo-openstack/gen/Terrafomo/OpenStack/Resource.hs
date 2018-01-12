@@ -74,7 +74,7 @@ data BlockstorageVolumeAttachV2Resource = BlockstorageVolumeAttachV2Resource
       {- ^ (Optional) A wwnn name. Used for Fibre Channel connections. -}
     , _wwpn :: !(Attr Text)
       {- ^ (Optional) An array of wwpn strings. Used for Fibre Channel connections. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BlockstorageVolumeAttachV2Resource
     = '[ '("data", Text)
@@ -115,7 +115,7 @@ data BlockstorageVolumeV1Resource = BlockstorageVolumeV1Resource
       {- ^ (Optional) The volume ID from which to create the volume. Changing this creates a new volume. -}
     , _volume_type :: !(Attr Text)
       {- ^ (Optional) The type of volume to create. Changing this creates a new volume. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BlockstorageVolumeV1Resource
     = '[ '("attachment", Text)
@@ -176,7 +176,7 @@ data BlockstorageVolumeV2Resource = BlockstorageVolumeV2Resource
       {- ^ (Optional) The volume ID from which to create the volume. Changing this creates a new volume. -}
     , _volume_type :: !(Attr Text)
       {- ^ (Optional) The type of volume to create. Changing this creates a new volume. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BlockstorageVolumeV2Resource
     = '[ '("attachment", Text)
@@ -229,7 +229,7 @@ data ComputeFlavorV2Resource = ComputeFlavorV2Resource
       {- ^ (Optional) The amount of disk space in megabytes to use. If unspecified, the default is 0. Changing this creates a new flavor. -}
     , _vcpus :: !(Attr Text)
       {- ^ (Required) The number of virtual CPUs to use. Changing this creates a new flavor. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeFlavorV2Resource
     = '[ '("disk", Text)
@@ -269,7 +269,7 @@ data ComputeFloatingipAssociateV2Resource = ComputeFloatingipAssociateV2Resource
       {- ^ (Required) The instance to associte the floating IP with. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Compute client. Keypairs are associated with accounts, but a Compute client is needed to create one. If omitted, the @region@ argument of the provider is used. Changing this creates a new floatingip_associate. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeFloatingipAssociateV2Resource
     = '[ '("fixed_ip", Text)
@@ -299,7 +299,7 @@ data ComputeFloatingipV2Resource = ComputeFloatingipV2Resource
       {- ^ (Required) The name of the pool from which to obtain the floating IP. Changing this creates a new floating IP. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Compute client. A Compute client is needed to create a floating IP that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. Changing this creates a new floating IP (which may or may not have a different address). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeFloatingipV2Resource
     = '[ '("address", Text)
@@ -362,7 +362,7 @@ data ComputeInstanceV2Resource = ComputeInstanceV2Resource
       {- ^ (Optional) Whether to try stop instance gracefully before destroying it, thus giving chance for guest OS daemons to stop correctly. If instance doesn't stop within timeout, it will be destroyed anyway. -}
     , _user_data :: !(Attr Text)
       {- ^ (Optional) The user data to provide when launching the instance. Changing this creates a new server. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeInstanceV2Resource
     = '[ '("access_ip_v4", Text)
@@ -415,7 +415,7 @@ data ComputeKeypairV2Resource = ComputeKeypairV2Resource
       {- ^ (Optional) The region in which to obtain the V2 Compute client. Keypairs are associated with accounts, but a Compute client is needed to create one. If omitted, the @region@ argument of the provider is used. Changing this creates a new keypair. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeKeypairV2Resource
     = '[ '("name", Text)
@@ -444,7 +444,7 @@ data ComputeSecgroupV2Resource = ComputeSecgroupV2Resource
       {- ^ (Optional) The region in which to obtain the V2 Compute client. A Compute client is needed to create a security group. If omitted, the @region@ argument of the provider is used. Changing this creates a new security group. -}
     , _rule :: !(Attr Text)
       {- ^ (Optional) A rule describing how the security group operates. The rule object structure is documented below. Changing this updates the security group rules. As shown in the example above, multiple rule blocks may be used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeSecgroupV2Resource
     = '[ '("description", Text)
@@ -475,7 +475,7 @@ data ComputeServergroupV2Resource = ComputeServergroupV2Resource
       {- ^ (Optional) The region in which to obtain the V2 Compute client. If omitted, the @region@ argument of the provider is used. Changing this creates a new server group. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "openstack_compute_servergroup_v2"
@@ -496,7 +496,7 @@ data ComputeVolumeAttachV2Resource = ComputeVolumeAttachV2Resource
       {- ^ (Optional) The region in which to obtain the V2 Compute client. A Compute client is needed to create a volume attachment. If omitted, the @region@ argument of the provider is used. Changing this creates a new volume attachment. -}
     , _volume_id :: !(Attr Text)
       {- ^ (Required) The ID of the Volume to attach to an Instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeVolumeAttachV2Resource
     = '[ '("device", Text)
@@ -535,7 +535,7 @@ data DnsRecordsetV2Resource = DnsRecordsetV2Resource
       {- ^ (Optional) Map of additional options. Changing this creates a new record set. -}
     , _zone_id :: !(Attr Text)
       {- ^ (Required) The ID of the zone in which to create the record set. Changing this creates a new DNS  record set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsRecordsetV2Resource
     = '[ '("description", Text)
@@ -584,7 +584,7 @@ data DnsZoneV2Resource = DnsZoneV2Resource
       {- ^ (Optional) The type of zone. Can either be @PRIMARY@ or @SECONDARY@ . Changing this creates a new zone. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. Changing this creates a new zone. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsZoneV2Resource
     = '[ '("attributes", Text)
@@ -635,7 +635,7 @@ data FwFirewallV1Resource = FwFirewallV1Resource
       {- ^ (Optional) The owner of the floating IP. Required if admin wants to create a firewall for another tenant. Changing this creates a new firewall. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FwFirewallV1Resource
     = '[ '("admin_state_up", Text)
@@ -680,7 +680,7 @@ data FwPolicyV1Resource = FwPolicyV1Resource
       {- ^ (Optional) Sharing status of the firewall policy (must be "true" or "false" if provided). If this is "true" the policy is visible to, and can be used in, firewalls in other tenants. Changing this updates the @shared@ status of an existing firewall policy. Only administrative users can specify if the policy should be shared. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FwPolicyV1Resource
     = '[ '("audited", Text)
@@ -731,7 +731,7 @@ data FwRuleV1Resource = FwRuleV1Resource
       {- ^ (Optional) The owner of the firewall rule. Required if admin wants to create a firewall rule for another tenant. Changing this creates a new firewall rule. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FwRuleV1Resource
     = '[ '("action", Text)
@@ -785,7 +785,7 @@ data IdentityProjectV3Resource = IdentityProjectV3Resource
       {- ^ (Optional) The parent of this project. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. Changing this creates a new User. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IdentityProjectV3Resource
     = '[ '("domain_id", Text)
@@ -831,7 +831,7 @@ data IdentityUserV3Resource = IdentityUserV3Resource
       {- ^ (Optional) The password for the user. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. Changing this creates a new User. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed IdentityUserV3Resource
     = '[ '("domain_id", Text)
@@ -862,33 +862,19 @@ data ImagesImageV2Resource = ImagesImageV2Resource
       {- ^ (Optional) Amount of disk space (in GB) required to boot image. Defaults to 0. -}
     , _min_ram_mb :: !(Attr Text)
       {- ^ (Optional) Amount of ram (in MB) required to boot image. Defauts to 0. -}
-    , _most_recent :: !(Attr Text)
-      {- ^ (Optional) If more than one result is returned, use the most recent image. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the image. -}
-    , _owner :: !(Attr Text)
-      {- ^ (Optional) The owner (UUID) of the image. -}
     , _properties :: !(Attr Text)
       {- ^ (Optional) A map of key/value pairs to set freeform information about an image. -}
     , _protected :: !(Attr Text)
       {- ^ (Optional) If true, image will not be deletable. Defaults to false. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Glance client. A Glance client is needed to create an Image that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. Changing this creates a new Image. -}
-    , _size_max :: !(Attr Text)
-      {- ^ (Optional) The maximum size (in bytes) of the image to return. -}
-    , _size_min :: !(Attr Text)
-      {- ^ (Optional) The minimum size (in bytes) of the image to return. -}
-    , _sort_direction :: !(Attr Text)
-      {- ^ (Optional) Order the results in either @asc@ or @desc@ . -}
-    , _sort_key :: !(Attr Text)
-      {- ^ (Optional) Sort images based on a certain key. Defaults to @name@ . -}
-    , _tag :: !(Attr Text)
-      {- ^ (Optional) Search for images with a specific tag. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) The tags of the image. It must be a list of strings. At this time, it is not possible to delete all tags of an image. -}
     , _visibility :: !(Attr Text)
       {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". The ability to set the visibility depends upon the configuration of the OpenStack cloud. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImagesImageV2Resource
     = '[ '("checksum", Text)
@@ -967,7 +953,7 @@ data LbListenerV2Resource = LbListenerV2Resource
       {- ^ (Optional) A list of references to Barbican Secrets containers which store SNI information. See <https://wiki.openstack.org/wiki/Network/LBaaS/docs/how-to-create-tls-loadbalancer> for more information. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) Required for admins. The UUID of the tenant who owns the Listener.  Only administrative users can specify a tenant UUID other than their own. Changing this creates a new Listener. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbListenerV2Resource
     = '[ '("admin_state_up", Text)
@@ -1024,7 +1010,7 @@ data LbLoadbalancerV2Resource = LbLoadbalancerV2Resource
       {- ^ (Optional) The ip address of the load balancer. Changing this creates a new loadbalancer. -}
     , _vip_subnet_id :: !(Attr Text)
       {- ^ (Required) The network on which to allocate the Loadbalancer's address. A tenant can only create Loadbalancers on networks authorized by policy (e.g. networks that belong to them or networks that are shared).  Changing this creates a new loadbalancer. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbLoadbalancerV2Resource
     = '[ '("admin_state_up", Text)
@@ -1073,7 +1059,7 @@ data LbMemberV1Resource = LbMemberV1Resource
       {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create an LB member. If omitted, the @region@ argument of the provider is used. Changing this creates a new LB member. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the member. Required if admin wants to create a member for another tenant. Changing this creates a new member. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbMemberV1Resource
     = '[ '("address", Text)
@@ -1118,7 +1104,7 @@ data LbMemberV2Resource = LbMemberV2Resource
       {- ^ (Optional) Required for admins. The UUID of the tenant who owns the member.  Only administrative users can specify a tenant UUID other than their own. Changing this creates a new member. -}
     , _weight :: !(Attr Text)
       {- ^ (Optional)  A positive integer value that indicates the relative portion of traffic that this member should receive from the pool. For example, a member with a weight of 10 receives five times as much traffic as a member with a weight of 2. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbMemberV2Resource
     = '[ '("address", Text)
@@ -1171,7 +1157,7 @@ data LbMonitorV1Resource = LbMonitorV1Resource
       {- ^ (Required) The type of probe, which is PING, TCP, HTTP, or HTTPS, that is sent by the monitor to verify the member state. Changing this creates a new monitor. -}
     , _url_path :: !(Attr Text)
       {- ^ (Optional) Required for HTTP(S) types. URI path that will be accessed if monitor type is HTTP or HTTPS. Changing this updates the url_path of the existing monitor. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbMonitorV1Resource
     = '[ '("admin_state_up", Text)
@@ -1230,7 +1216,7 @@ data LbMonitorV2Resource = LbMonitorV2Resource
       {- ^ (Required) The type of probe, which is PING, TCP, HTTP, or HTTPS, that is sent by the load balancer to verify the member state. Changing this creates a new monitor. -}
     , _url_path :: !(Attr Text)
       {- ^ (Optional) Required for HTTP(S) types. URI path that will be accessed if monitor type is HTTP or HTTPS. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbMonitorV2Resource
     = '[ '("admin_state_up", Text)
@@ -1283,7 +1269,7 @@ data LbPoolV1Resource = LbPoolV1Resource
       {- ^ (Required) The network on which the members of the pool will be located. Only members that are on this network can be added to the pool. Changing this creates a new pool. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the pool. Required if admin wants to create a pool member for another tenant. Changing this creates a new pool. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbPoolV1Resource
     = '[ '("lb_method", Text)
@@ -1336,7 +1322,7 @@ data LbPoolV2Resource = LbPoolV2Resource
       {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create an . If omitted, the @region@ argument of the provider is used. Changing this creates a new pool. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) Required for admins. The UUID of the tenant who owns the pool.  Only administrative users can specify a tenant UUID other than their own. Changing this creates a new pool. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbPoolV2Resource
     = '[ '("admin_state_up", Text)
@@ -1393,7 +1379,7 @@ data LbVipV1Resource = LbVipV1Resource
       {- ^ (Required) The network on which to allocate the vip's address. A tenant can only create vips on networks authorized by policy (e.g. networks that belong to them or networks that are shared). Changing this creates a new vip. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the vip. Required if admin wants to create a vip member for another tenant. Changing this creates a new vip. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LbVipV1Resource
     = '[ '("address", Text)
@@ -1451,7 +1437,7 @@ data NetworkingFloatingipV2Resource = NetworkingFloatingipV2Resource
       {- ^ (Optional) The target tenant ID in which to allocate the floating IP, if you specify this together with a port_id, make sure the target port belongs to the same tenant. Changing this creates a new floating IP (which may or may not have a different address) -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingFloatingipV2Resource
     = '[ '("address", Text)
@@ -1480,25 +1466,19 @@ Manages a V2 Neutron network resource within OpenStack.
 data NetworkingNetworkV2Resource = NetworkingNetworkV2Resource
     { _admin_state_up :: !(Attr Text)
       {- ^ (Optional) The administrative state of the network. Acceptable values are "true" and "false". Changing this value updates the state of the existing network. -}
-    , _matching_subnet_cidr :: !(Attr Text)
-      {- ^ (Optional) The CIDR of a subnet within the network. -}
     , _name :: !(Attr Text)
       {- ^ (Optional) The name of the network. Changing this updates the name of the existing network. -}
-    , _network_id :: !(Attr Text)
-      {- ^ (Optional) The ID of the network. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a Neutron network. If omitted, the @region@ argument of the provider is used. Changing this creates a new network. -}
     , _segments :: !(Attr Text)
       {- ^ (Optional) An array of one or more provider segment objects. -}
     , _shared :: !(Attr Text)
       {- ^ (Optional)  Specifies whether the network resource can be accessed by any tenant or not. Changing this updates the sharing capabalities of the existing network. -}
-    , _status :: !(Attr Text)
-      {- ^ (Optional) The status of the network. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the network. Required if admin wants to create a network for another tenant. Changing this creates a new network. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingNetworkV2Resource
     = '[ '("admin_state_up", Text)
@@ -1549,7 +1529,7 @@ data NetworkingPortV2Resource = NetworkingPortV2Resource
       {- ^ (Optional) The owner of the Port. Required if admin wants to create a port for another tenant. Changing this creates a new port. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingPortV2Resource
     = '[ '("admin_state_up", Text)
@@ -1592,7 +1572,7 @@ data NetworkingRouterInterfaceV2Resource = NetworkingRouterInterfaceV2Resource
       {- ^ (Required) ID of the router this interface belongs to. Changing this creates a new router interface. -}
     , _subnet_id :: !(Attr Text)
       {- ^ - ID of the subnet this interface connects to. Changing this creates a new router interface. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingRouterInterfaceV2Resource
     = '[ '("port_id", Text)
@@ -1623,7 +1603,7 @@ data NetworkingRouterRouteV2Resource = NetworkingRouterRouteV2Resource
       {- ^ (Optional) The region in which to obtain the V2 networking client. A networking client is needed to configure a routing entry on a router. If omitted, the @region@ argument of the provider is used. Changing this creates a new routing entry. -}
     , _router_id :: !(Attr Text)
       {- ^ (Required) ID of the router this routing entry belongs to. Changing this creates a new routing entry. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingRouterRouteV2Resource
     = '[ '("destination_cidr", Text)
@@ -1650,6 +1630,8 @@ data NetworkingRouterV2Resource = NetworkingRouterV2Resource
       {- ^ (Optional) Administrative up/down status for the router (must be "true" or "false" if provided). Changing this updates the @admin_state_up@ of an existing router. -}
     , _distributed :: !(Attr Text)
       {- ^ (Optional) Indicates whether or not to create a distributed router. The default policy setting in Neutron restricts usage of this property to administrative users only. -}
+    , _enable_snat :: !(Attr Text)
+      {- ^ (Optional) Enable Source NAT for the router. (must be "true" or "false" if provided). An @external_gateway@ has to be set in order to set the @enable_snat@ property. Changing this updates the @enable_snat@ of an existing router. -}
     , _external_gateway :: !(Attr Text)
       {- ^ (Optional) The network UUID of an external gateway for the router. A router with an external gateway is required if any compute instances or load balancers will be using floating IPs. Changing this updates the @external_gateway@ of an existing router. -}
     , _name :: !(Attr Text)
@@ -1660,10 +1642,12 @@ data NetworkingRouterV2Resource = NetworkingRouterV2Resource
       {- ^ (Optional) The owner of the floating IP. Required if admin wants to create a router for another tenant. Changing this creates a new router. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional driver-specific options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingRouterV2Resource
     = '[ '("admin_state_up", Text)
+         {- - See Argument Reference above. -}
+      , '("enable_snat", Text)
          {- - See Argument Reference above. -}
       , '("external_gateway", Text)
          {- - See Argument Reference above. -}
@@ -1711,7 +1695,7 @@ data NetworkingSecgroupRuleV2Resource = NetworkingSecgroupRuleV2Resource
       {- ^ (Required) The security group id the rule should belong to, the value needs to be an Openstack ID of a security group in the same tenant. Changing this creates a new security group rule. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the security group. Required if admin wants to create a port for another tenant. Changing this creates a new security group rule. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingSecgroupRuleV2Resource
     = '[ '("direction", Text)
@@ -1756,11 +1740,9 @@ data NetworkingSecgroupV2Resource = NetworkingSecgroupV2Resource
       {- ^ (Required) A unique name for the security group. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 networking client. A networking client is needed to create a port. If omitted, the @region@ argument of the provider is used. Changing this creates a new security group. -}
-    , _secgroup_id :: !(Attr Text)
-      {- ^ (Optional) The ID of the security group. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the security group. Required if admin wants to create a port for another tenant. Changing this creates a new security group. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingSecgroupV2Resource
     = '[ '("description", Text)
@@ -1787,10 +1769,6 @@ data NetworkingSubnetV2Resource = NetworkingSubnetV2Resource
       {- ^ (Optional) An array of sub-ranges of CIDR available for dynamic allocation to ports. The allocation_pool object structure is documented below. Changing this creates a new subnet. -}
     , _cidr :: !(Attr Text)
       {- ^ (Required) CIDR representing IP range for this subnet, based on IP version. Changing this creates a new subnet. -}
-    , _dhcp_disabled :: !(Attr Text)
-      {- ^ (Optional) If the subnet has DHCP disabled. -}
-    , _dhcp_enabled :: !(Attr Text)
-      {- ^ (Optional) If the subnet has DHCP enabled. -}
     , _dns_nameservers :: !(Attr Text)
       {- ^ (Optional) An array of DNS name server names used by hosts in this subnet. Changing this updates the DNS name servers for the existing subnet. -}
     , _enable_dhcp :: !(Attr Text)
@@ -1809,13 +1787,11 @@ data NetworkingSubnetV2Resource = NetworkingSubnetV2Resource
       {- ^ (Optional) Do not set a gateway IP on this subnet. Changing this removes or adds a default gateway IP of the existing subnet. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a Neutron subnet. If omitted, the @region@ argument of the provider is used. Changing this creates a new subnet. -}
-    , _subnet_id :: !(Attr Text)
-      {- ^ (Optional) The ID of the subnet. -}
     , _tenant_id :: !(Attr Text)
       {- ^ (Optional) The owner of the subnet. Required if admin wants to create a subnet for another tenant. Changing this creates a new subnet. -}
     , _value_specs :: !(Attr Text)
       {- ^ (Optional) Map of additional options. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkingSubnetV2Resource
     = '[ '("allocation_pools", Text)
@@ -1868,7 +1844,7 @@ data ObjectstorageContainerV1Resource = ObjectstorageContainerV1Resource
       {- ^ (Required) A unique name for the container. Changing this creates a new container. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region in which to create the container. If omitted, the @region@ argument of the provider is used. Changing this creates a new container. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ObjectstorageContainerV1Resource
     = '[ '("container_read", Text)
@@ -1893,3 +1869,84 @@ $(TH.makeResource
     "openstack_objectstorage_container_v1"
     ''Qual.OpenStack
     ''ObjectstorageContainerV1Resource)
+
+{- | The @openstack_objectstorage_object_v1@ OpenStack resource.
+
+Manages a V1 container object resource within OpenStack.
+-}
+data ObjectstorageObjectV1Resource = ObjectstorageObjectV1Resource
+    { _container_name :: !(Attr Text)
+      {- ^ (Required) A unique (within an account) name for the container. The container name must be from 1 to 256 characters long and can start with any character and contain any pattern. Character set must be UTF-8. The container name cannot contain a slash (/) character because this character delimits the container and object name. For example, the path /v1/account/www/pages specifies the www container, not the www/pages container. -}
+    , _content :: !(Attr Text)
+      {- ^ (Optional) A string representing the content of the object. Conflicts with @source@ and @copy_from@ . -}
+    , _content_disposition :: !(Attr Text)
+      {- ^ (Optional) A string which specifies the override behavior for the browser. For example, this header might specify that the browser use a download program to save this file rather than show the file, which is the default. -}
+    , _content_encoding :: !(Attr Text)
+      {- ^ (Optional) A string representing the value of the Content-Encoding metadata. -}
+    , _content_type :: !(Attr Text)
+      {- ^ (Optional) A string which sets the MIME type for the object. -}
+    , _copy_from :: !(Attr Text)
+      {- ^ (Optional) A string representing the name of an object used to create the new object by copying the @copy_from@ object. The value is in form {container}/{object}. You must UTF-8-encode and then URL-encode the names of the container and object before you include them in the header. Conflicts with @source@ and @content@ . -}
+    , _delete_after :: !(Attr Text)
+      {- ^ (Optional) An integer representing the number of seconds after which the system removes the object. Internally, the Object Storage system stores this value in the X-Delete-At metadata item. -}
+    , _delete_at :: !(Attr Text)
+      {- ^ (Optional) An string representing the date when the system removes the object. For example, "2015-08-26" is equivalent to Mon, Wed, 26 Aug 2015 00:00:00 GMT. -}
+    , _detect_content_type :: !(Attr Text)
+      {- ^ (Optional) If set to true, Object Storage guesses the content type based on the file extension and ignores the value sent in the Content-Type header, if present. -}
+    , _etag :: !(Attr Text)
+      {- ^ (Optional) Used to trigger updates. The only meaningful value is ${md5(file("path/to/file"))}. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) A unique name for the object. -}
+    , _object_manifest :: !(Attr Text)
+      {- ^ (Optional) A string set to specify that this is a dynamic large object manifest object. The value is the container and object name prefix of the segment objects in the form container/prefix. You must UTF-8-encode and then URL-encode the names of the container and prefix before you include them in this header. -}
+    , _region :: !(Attr Text)
+      {- ^ (Optional) The region in which to create the container. If omitted, the @region@ argument of the provider is used. Changing this creates a new container. -}
+    , _source :: !(Attr Text)
+      {- ^ (Optional) A string representing the local path of a file which will be used as the object's content. Conflicts with @source@ and @copy_from@ . -}
+    } deriving (Show, Generic)
+
+type instance Computed ObjectstorageObjectV1Resource
+    = '[ '("container_name", Text)
+         {- - See Argument Reference above. -}
+      , '("content", Text)
+         {- - See Argument Reference above. -}
+      , '("content_disposition", Text)
+         {- - See Argument Reference above. -}
+      , '("content_encoding", Text)
+         {- - See Argument Reference above. -}
+      , '("content_length", Text)
+         {- - If the operation succeeds, this value is zero (0) or the length of informational or error text in the response body. -}
+      , '("content_type", Text)
+         {- - If the operation succeeds, this value is the MIME type of the object. If the operation fails, this value is the MIME type of the error text in the response body. -}
+      , '("copy_from", Text)
+         {- - See Argument Reference above. -}
+      , '("date", Text)
+         {- - The date and time the system responded to the request, using the preferred format of RFC 7231 as shown in this example Thu, 16 Jun 2016 15:10:38 GMT. The time is always in UTC. -}
+      , '("delete_after", Text)
+         {- - See Argument Reference above. -}
+      , '("delete_at", Text)
+         {- - See Argument Reference above. -}
+      , '("detect_content_type", Text)
+         {- - See Argument Reference above. -}
+      , '("etag", Text)
+         {- - Whatever the value given in argument, will be overriden by the MD5 checksum of the uploaded object content. The value is not quoted. If it is an SLO, it would be MD5 checksum of the segments’ etags. -}
+      , '("last_modified", Text)
+         {- - The date and time when the object was last modified. The date and time stamp format is ISO 8601: CCYY-MM-DDThh:mm:ss±hh:mm For example, 2015-08-27T09:49:58-05:00. The ±hh:mm value, if included, is the time zone as an offset from UTC. In the previous example, the offset value is -05:00. -}
+      , '("name", Text)
+         {- - See Argument Reference above. -}
+      , '("object_manifest", Text)
+         {- - See Argument Reference above. -}
+      , '("region", Text)
+         {- - See Argument Reference above. -}
+      , '("source", Text)
+         {- - See Argument Reference above. -}
+      , '("static_large_object", Text)
+         {- - True if object is a multipart_manifest. -}
+      , '("trans_id", Text)
+         {- - A unique transaction ID for this request. Your service provider might need this value if you report a problem. -}
+       ]
+
+$(TH.makeResource
+    "openstack_objectstorage_object_v1"
+    ''Qual.OpenStack
+    ''ObjectstorageObjectV1Resource)

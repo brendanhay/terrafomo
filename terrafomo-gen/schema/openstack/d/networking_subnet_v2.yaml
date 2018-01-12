@@ -1,0 +1,62 @@
+_name: openstack_networking_subnet_v2
+arguments:
+  _region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 Neutron client. A Neutron
+      client is needed to retrieve subnet ids. If omitted, the @region@ argument of
+      the provider is used.
+    type: Text
+  _dhcp_disabled:
+    required: false
+    help: (Optional) If the subnet has DHCP disabled.
+    type: Text
+  _name:
+    required: false
+    help: (Optional) The name of the subnet.
+    type: Text
+  _cidr:
+    required: false
+    help: (Optional) The CIDR of the subnet.
+    type: Text
+  _ip_version:
+    required: false
+    help: (Optional) The IP version of the subnet (either 4 or 6).
+    type: Text
+  _network_id:
+    required: false
+    help: (Optional) The ID of the network the subnet belongs to.
+    type: Text
+  _subnet_id:
+    required: false
+    help: (Optional) The ID of the subnet.
+    type: Text
+  _gateway_ip:
+    required: false
+    help: (Optional) The IP of the subnet's gateway.
+    type: Text
+  _dhcp_enabled:
+    required: false
+    help: (Optional) If the subnet has DHCP enabled.
+    type: Text
+  _tenant_id:
+    required: false
+    help: (Optional) The owner of the subnet.
+    type: Text
+attributes:
+  dns_nameservers:
+    help: ! '- DNS Nameservers of the subnet.'
+    type: Text
+  host_routes:
+    help: ! '- Host Routes of the subnet.'
+    type: Text
+  enable_dhcp:
+    help: ! '- Whether the subnet has DHCP enabled or not.'
+    type: Text
+  region:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  allocation_pools:
+    help: ! '- Allocation pools of the subnet.'
+    type: Text
+about: Use this data source to get the ID of an available OpenStack subnet.
+examples: []

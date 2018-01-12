@@ -1,0 +1,9 @@
+_name: IgnitionProvider
+arguments: {}
+attributes: {}
+about: The Ignition provider is used to generate <https://coreos.com/ignition/docs/latest/>
+  configuration files. Ignition is the provisioning utility used by <https://coreos.com/>
+  Linux. The ignition provider is what we call a logical provider and doesn't manage
+  any physical resources. It generates configurations files to be used by other resources.
+  Use the navigation to the left to read about the available resources.
+examples: []

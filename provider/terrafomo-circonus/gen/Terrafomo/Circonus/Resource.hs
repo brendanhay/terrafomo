@@ -41,7 +41,7 @@ import qualified Terrafomo.Syntax.TH as TH
 
 The @circonus_check@ resource creates and manages a
 <https://login.circonus.com/resources/api/calls/check_bundle> . ~> NOTE
-regarding @cirocnus_check@ vs a Circonus Check Bundle: The @circonus_check@
+regarding @circonus_check@ vs a Circonus Check Bundle: The @circonus_check@
 resource is implemented in terms of a
 <https://login.circonus.com/resources/api/calls/check_bundle> . The
 @circonus_check@ creates a higher-level abstraction over the implementation
@@ -91,7 +91,7 @@ data CheckResource = CheckResource
       {- ^ (Optional) A TCP check.  See below for details on how to configure the @tcp@ check (includes TLS support). -}
     , _timeout :: !(Attr Text)
       {- ^ (Optional) A floating point number representing the maximum number of seconds this check should wait for a result.  Defaults to @10.0@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "circonus_check"
@@ -136,7 +136,7 @@ data ContactGroupResource = ContactGroupResource
       {- ^ (Optional) A list of tags attached to the Contact Group. -}
     , _victorops :: !(Attr Text)
       {- ^ (Optional) Zero or more @victorops@ attributes may be present to dispatch to <https://login.circonus.com/user/docs/Alerting/ContactGroups#VictorOps> . See below for details on supported attributes. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "circonus_contact_group"
@@ -170,7 +170,7 @@ data GraphResource = GraphResource
       {- ^ (Optional) A map of graph right axis options.  Valid values in @right@ include: @logarithmic@ can be set to @0@ (default) or @1@ ; @min@ is the @min@ Y axis value on the right; and @max@ is the Y axis max value on the right. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of tags assigned to this graph. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "circonus_graph"
@@ -191,7 +191,7 @@ data MetricClusterResource = MetricClusterResource
       {- ^ (Required) One or more @query@ attributes must be present.  Each @query@ must contain both a @definition@ and a @type@ .  See below for details on supported attributes. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of tags attached to the metric cluster. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "circonus_metric_cluster"
@@ -215,7 +215,7 @@ data MetricResource = MetricResource
       {- ^ (Required) The type of metric.  This value must be present and can be one of the following values: @numeric@ , @text@ , @histogram@ , @composite@ , or @caql@ . -}
     , _unit :: !(Attr Text)
       {- ^ (Optional) The unit of measurement for this @circonus_metric@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "circonus_metric"
@@ -244,7 +244,7 @@ data RuleSetResource = RuleSetResource
       {- ^ (Optional) A Circonus Metric ID that, if specified and active with a severity 1 alert, will silence this rule set until all of the severity 1 alerts on the parent clear.  This value must match the format @${check_id}_${metric_name}@ . -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of tags assigned to this rule set. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "circonus_rule_set"

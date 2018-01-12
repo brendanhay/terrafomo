@@ -58,7 +58,7 @@ data BigqueryDatasetResource = BigqueryDatasetResource
       {- ^ (Optional) The geographic location where the dataset should reside. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BigqueryDatasetResource
     = '[ '("creation_time", Text)
@@ -101,7 +101,7 @@ data BigqueryTableResource = BigqueryTableResource
       {- ^ (Required) A unique ID for the resource. Changing this forces a new resource to be created. -}
     , _time_partitioning :: !(Attr Text)
       {- ^ (Optional) If specified, configures time-based partitioning for this table. Structure is documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BigqueryTableResource
     = '[ '("creation_time", Text)
@@ -152,7 +152,7 @@ data BigtableInstanceResource = BigtableInstanceResource
       {- ^ (Optional) The storage type to use. One of @"SSD"@ or @"HDD"@ . Defaults to @SSD@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone to create the Bigtable instance in. Zones that support Bigtable instances are noted on the <https://cloud.google.com/about/locations/> . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_bigtable_instance"
@@ -174,7 +174,7 @@ data BigtableTableResource = BigtableTableResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _split_keys :: !(Attr Text)
       {- ^ (Optional) A list of predefined keys to split the table on. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_bigtable_table"
@@ -184,18 +184,26 @@ $(TH.makeResource
 {- | The @google_compute_address@ Google resource.
 
 Creates a static IP address resource for Google Compute Engine. For more
-information see
+information see the official documentation for
 <https://cloud.google.com/compute/docs/instances-and-network> and
-<https://cloud.google.com/compute/docs/reference/latest/addresses> .
+<https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address>
+static IP reservations, as well as the
+<https://cloud.google.com/compute/docs/reference/beta/addresses/insert> .
 -}
 data ComputeAddressResource = ComputeAddressResource
-    { _name :: !(Attr Text)
+    { _address :: !(Attr Text)
+      {- ^ (Optional) The IP address to reserve. An address may only be specified for INTERNAL address types. The IP address must be inside the specified subnetwork, if any. -}
+    , _address_type :: !(Attr Text)
+      {- ^ (Optional) The Address Type that should be configured. Specify INTERNAL to reserve an internal static IP address EXTERNAL to specify an external static IP address. Defaults to EXTERNAL if omitted. -}
+    , _name :: !(Attr Text)
       {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The Region in which the created address should reside. If it is not provided, the provider region is used. -}
-    } deriving (Show, Eq, Generic)
+    , _subnetwork :: !(Attr Text)
+      {- ^ (Optional) The self link URI of the subnetwork in which to create the address. A subnetwork may only be specified for INTERNAL address types. -}
+    } deriving (Show, Generic)
 
 type instance Computed ComputeAddressResource
     = '[ '("address", Text)
@@ -233,7 +241,7 @@ data ComputeAutoscalerResource = ComputeAutoscalerResource
       {- ^ (Required) The full URL to the instance group manager whose size we control. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone of the target. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeAutoscalerResource
     = '[ '("self_link", Text)
@@ -264,7 +272,7 @@ data ComputeBackendBucketResource = ComputeBackendBucketResource
       {- ^ (Required) The name of the backend bucket. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeBackendBucketResource
     = '[ '("self_link", Text)
@@ -311,7 +319,7 @@ data ComputeBackendServiceResource = ComputeBackendServiceResource
       {- ^ (Optional) How to distribute load. Options are @NONE@ (no affinity), @CLIENT_IP@ (hash of the source/dest addresses / ports), and @GENERATED_COOKIE@ (distribute load using a generated session cookie). -}
     , _timeout_sec :: !(Attr Text)
       {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeBackendServiceResource
     = '[ '("fingerprint", Text)
@@ -353,7 +361,7 @@ data ComputeDiskResource = ComputeDiskResource
       {- ^ (Optional) The GCE disk type. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone where this disk will be available. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeDiskResource
     = '[ '("disk_encryption_key_sha256", Text)
@@ -398,11 +406,15 @@ data ComputeFirewallResource = ComputeFirewallResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _source_ranges :: !(Attr Text)
       {- ^ (Optional) A list of source CIDR ranges that this firewall applies to. Can't be used for @EGRESS@ . -}
+    , _source_service_accounts :: !(Attr Text)
+      {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) A list of service accounts such that the firewall will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. @source_ranges@ can be set at the same time as @source_service_accounts@ . If both are set, the firewall will apply to traffic that has source IP address within @source_ranges@ OR the source IP belongs to an instance with service account listed in @source_service_accounts@ . The connection does not need to match both properties for the firewall to apply. @source_service_accounts@ cannot be used at the same time as @source_tags@ or @target_tags@ . -}
     , _source_tags :: !(Attr Text)
       {- ^ (Optional) A list of source tags for this firewall. Can't be used for @EGRESS@ . -}
+    , _target_service_accounts :: !(Attr Text)
+      {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) A list of service accounts indicating sets of instances located in the network that may make network connections as specified in @allow@ . @target_service_accounts@ cannot be used at the same time as @source_tags@ or @target_tags@ . If neither @target_service_accounts@ nor @target_tags@ are specified, the firewall rule applies to all instances on the specified network. -}
     , _target_tags :: !(Attr Text)
       {- ^ (Optional) A list of target tags for this firewall. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeFirewallResource
     = '[ '("self_link", Text)
@@ -449,7 +461,7 @@ data ComputeForwardingRuleResource = ComputeForwardingRuleResource
       {- ^ (Optional) Subnetwork that the load balanced IP should belong to. Only used for internal load balancing. Must be specified if the network is in custom subnet mode. -}
     , _target :: !(Attr Text)
       {- ^ (Optional) URL of target pool. Required for external load balancing. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeForwardingRuleResource
     = '[ '("self_link", Text)
@@ -475,7 +487,7 @@ data ComputeGlobalAddressResource = ComputeGlobalAddressResource
       {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeGlobalAddressResource
     = '[ '("address", Text)
@@ -517,7 +529,7 @@ data ComputeGlobalForwardingRuleResource = ComputeGlobalForwardingRuleResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _target :: !(Attr Text)
       {- ^ (Required) URL of target HTTP or HTTPS proxy. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeGlobalForwardingRuleResource
     = '[ '("label_fingerprint", Text)
@@ -562,7 +574,7 @@ data ComputeHealthCheckResource = ComputeHealthCheckResource
       {- ^ (Optional) The number of seconds to wait before declaring failure (default 5). -}
     , _unhealthy_threshold :: !(Attr Text)
       {- ^ (Optional) Consecutive failures required (default 2). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeHealthCheckResource
     = '[ '("self_link", Text)
@@ -609,7 +621,7 @@ data ComputeHttpHealthCheckResource = ComputeHttpHealthCheckResource
       {- ^ (Optional) The number of seconds to wait before declaring failure (default 5). -}
     , _unhealthy_threshold :: !(Attr Text)
       {- ^ (Optional) Consecutive failures required (default 2). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeHttpHealthCheckResource
     = '[ '("self_link", Text)
@@ -656,7 +668,7 @@ data ComputeHttpsHealthCheckResource = ComputeHttpsHealthCheckResource
       {- ^ (Optional) How long before declaring failure (default 5). -}
     , _unhealthy_threshold :: !(Attr Text)
       {- ^ (Optional) Consecutive failures required (default 2). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeHttpsHealthCheckResource
     = '[ '("self_link", Text)
@@ -684,7 +696,7 @@ data ComputeImageResource = ComputeImageResource
       {- ^ - The raw disk that will be used as the source of the image. Changing this forces a new resource to be created. Structure is documented below. -}
     , _source_disk :: !(Attr Text)
       {- ^ - The URL of a disk that will be used as the source of the image. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeImageResource
     = '[ '("label_fingerprint", Text)
@@ -732,7 +744,7 @@ data ComputeInstanceGroupManagerResource = ComputeInstanceGroupManagerResource
       {- ^ (Optional, Default @"RESTART"@ ) If the @instance_template@ resource is modified, a value of @"NONE"@ will prevent any of the managed instances from being restarted by Terraform. A value of @"RESTART"@ will restart all of the instances at once. In the future, as the GCE API matures we will support @"ROLLING_UPDATE"@ as well. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone that instances in this group should be created in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeInstanceGroupManagerResource
     = '[ '("fingerprint", Text)
@@ -750,9 +762,8 @@ $(TH.makeResource
 
 {- | The @google_compute_instance_group@ Google resource.
 
-The Google Compute Engine Instance Group API creates and manages pools of
-homogeneous Compute Engine virtual machine instances from a common instance
-template. For more information, see
+Creates a group of dissimilar Compute Engine virtual machine instances. For
+more information, see
 <https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
 and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
 -}
@@ -771,7 +782,7 @@ data ComputeInstanceGroupResource = ComputeInstanceGroupResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone that this instance group should be created in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeInstanceGroupResource
     = '[ '("self_link", Text)
@@ -826,7 +837,7 @@ data ComputeInstanceResource = ComputeInstanceResource
       {- ^ (Optional) A list of tags to attach to the instance. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone that the machine should be created in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeInstanceResource
     = '[ '("attached_disk.0.disk_encryption_key_sha256", Text)
@@ -897,7 +908,7 @@ data ComputeInstanceTemplateResource = ComputeInstanceTemplateResource
       {- ^ (Optional) Service account to attach to the instance. Structure is documented below. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) Tags to attach to the instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeInstanceTemplateResource
     = '[ '("metadata_fingerprint", Text)
@@ -931,7 +942,7 @@ data ComputeNetworkPeeringResource = ComputeNetworkPeeringResource
       {- ^ (Required) Resource link of the network to add a peering to. -}
     , _peer_network :: !(Attr Text)
       {- ^ (Required) Resource link of the peer network. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeNetworkPeeringResource
     = '[ '("state", Text)
@@ -960,7 +971,7 @@ data ComputeNetworkResource = ComputeNetworkResource
       {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeNetworkResource
     = '[ '("gateway_ipv4", Text)
@@ -990,7 +1001,7 @@ data ComputeProjectMetadataItemResource = ComputeProjectMetadataItemResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _value :: !(Attr Text)
       {- ^ (Required) The value to set for the given metadata key. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_compute_project_metadata_item"
@@ -1012,7 +1023,7 @@ data ComputeProjectMetadataResource = ComputeProjectMetadataResource
       {- ^ (Required) A series of key value pairs. Changing this resource updates the GCE state. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_compute_project_metadata"
@@ -1043,7 +1054,7 @@ data ComputeRegionAutoscalerResource = ComputeRegionAutoscalerResource
       {- ^ (Required) The region of the target. -}
     , _target :: !(Attr Text)
       {- ^ (Required) The full URL to the instance group manager whose size we control. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeRegionAutoscalerResource
     = '[ '("self_link", Text)
@@ -1083,7 +1094,7 @@ data ComputeRegionBackendServiceResource = ComputeRegionBackendServiceResource
       {- ^ (Optional) How to distribute load. Options are @NONE@ (no affinity), @CLIENT_IP@ , @CLIENT_IP_PROTO@ , or @CLIENT_IP_PORT_PROTO@ . Defaults to @NONE@ . -}
     , _timeout_sec :: !(Attr Text)
       {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeRegionBackendServiceResource
     = '[ '("fingerprint", Text)
@@ -1129,7 +1140,7 @@ data ComputeRegionInstanceGroupManagerResource = ComputeRegionInstanceGroupManag
       {- ^ (Optional) The full URL of all target pools to which new instances in the group are added. Updating the target pools attribute does not affect existing instances. -}
     , _target_size :: !(Attr Text)
       {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeRegionInstanceGroupManagerResource
     = '[ '("fingerprint", Text)
@@ -1174,7 +1185,7 @@ data ComputeRouteResource = ComputeRouteResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) The tags that this route applies to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeRouteResource
     = '[ '("next_hop_network", Text)
@@ -1207,7 +1218,7 @@ data ComputeRouterInterfaceResource = ComputeRouterInterfaceResource
       {- ^ (Required) The name of the router this interface will be attached to. Changing this forces a new interface to be created. -}
     , _vpn_tunnel :: !(Attr Text)
       {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_compute_router_interface"
@@ -1233,7 +1244,7 @@ data ComputeRouterResource = ComputeRouterResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. Changing this forces a new router to be created. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region this router should sit in. If not specified, the project region will be used. Changing this forces a new router to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeRouterResource
     = '[ '("self_link", Text)
@@ -1247,17 +1258,16 @@ $(TH.makeResource
 
 {- | The @google_compute_shared_vpc_host_project@ Google resource.
 
-Allows enabling and disabling Shared VPC for the host Google Cloud Platform
-project. For more information see
-<https://cloud.google.com/compute/docs/shared-vpc> and
-<https://cloud.google.com/compute/docs/reference/latest/projects> .
+Enables the Google Compute Engine
+<https://cloud.google.com/compute/docs/shared-vpc> feature for a project,
+assigning it as a Shared VPC host project. For more information, see,
+<https://cloud.google.com/compute/docs/reference/latest/projects> , where
+the Shared VPC feature is referred to by its former name "XPN".
 -}
 data ComputeSharedVpcHostProjectResource = ComputeSharedVpcHostProjectResource
-    { _host_project :: !(Attr Text)
-      {- ^ (Required) The host project ID. -}
-    , _service_project :: !(Attr Text)
-      {- ^ (Required) The service project ID. -}
-    } deriving (Show, Eq, Generic)
+    { _project :: !(Attr Text)
+      {- ^ (Required) The ID of the project that will serve as a Shared VPC host project -}
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_compute_shared_vpc_host_project"
@@ -1266,15 +1276,19 @@ $(TH.makeResource
 
 {- | The @google_compute_shared_vpc_service_project@ Google resource.
 
-Allows enabling and disabling Shared VPC for a service Google Cloud Platform
-project. For more information see
-<https://cloud.google.com/compute/docs/shared-vpc> and
-<https://cloud.google.com/compute/docs/reference/latest/projects> .
+Enables the Google Compute Engine
+<https://cloud.google.com/compute/docs/shared-vpc> feature for a project,
+assigning it as a Shared VPC service project associated with a given host
+project. For more information, see,
+<https://cloud.google.com/compute/docs/reference/latest/projects> , where
+the Shared VPC feature is referred to by its former name "XPN".
 -}
 data ComputeSharedVpcServiceProjectResource = ComputeSharedVpcServiceProjectResource
-    { _project :: !(Attr Text)
-      {- ^ (Required) The host project ID. -}
-    } deriving (Show, Eq, Generic)
+    { _host_project :: !(Attr Text)
+      {- ^ (Required) The ID of a host project to associate. -}
+    , _service_project :: !(Attr Text)
+      {- ^ (Required) The ID of the project that will serve as a Shared VPC service project. -}
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_compute_shared_vpc_service_project"
@@ -1302,7 +1316,7 @@ data ComputeSnapshotResource = ComputeSnapshotResource
       {- ^ (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption), encoded in <https://tools.ietf.org/html/rfc4648#section-4> to decrypt the source disk. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone where the source disk is located. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeSnapshotResource
     = '[ '("label_fingerprint", Text)
@@ -1343,11 +1357,11 @@ data ComputeSslCertificateResource = ComputeSslCertificateResource
       {- ^ (Required) Write only private key in PEM format. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeSslCertificateResource
-    = '[ '("id", Text)
-         {- - A unique ID for the certificated, assigned by GCE. -}
+    = '[ '("certificate_id", Text)
+         {- - A unique ID for the certificate, assigned by GCE. -}
       , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
@@ -1380,7 +1394,7 @@ data ComputeSubnetworkResource = ComputeSubnetworkResource
       {- ^ (Optional) The region this subnetwork will be created in. If unspecified, this defaults to the region configured in the provider. -}
     , _secondary_ip_range :: !(Attr Text)
       {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. Structure is documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeSubnetworkResource
     = '[ '("gateway_address", Text)
@@ -1410,10 +1424,10 @@ data ComputeTargetHttpProxyResource = ComputeTargetHttpProxyResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _url_map :: !(Attr Text)
       {- ^ (Required) The URL of a URL Map resource that defines the mapping from the URL to the BackendService. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeTargetHttpProxyResource
-    = '[ '("id", Text)
+    = '[ '("proxy_id", Text)
          {- - A unique ID assigned by GCE. -}
       , '("self_link", Text)
          {- - The URI of the created resource. -}
@@ -1443,10 +1457,10 @@ data ComputeTargetHttpsProxyResource = ComputeTargetHttpsProxyResource
       {- ^ (Required) The URLs of the SSL Certificate resources that authenticate connections between users and load balancing. -}
     , _url_map :: !(Attr Text)
       {- ^ (Required) The URL of a URL Map resource that defines the mapping from the URL to the BackendService. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeTargetHttpsProxyResource
-    = '[ '("id", Text)
+    = '[ '("proxy_id", Text)
          {- - A unique ID assigned by GCE. -}
       , '("self_link", Text)
          {- - The URI of the created resource. -}
@@ -1473,7 +1487,7 @@ data ComputeTargetPoolResource = ComputeTargetPoolResource
     , _failover_ratio :: !(Attr Text)
       {- ^ (Optional) Ratio (0 to 1) of failed nodes before using the backup pool (which must also be set). -}
     , _health_checks :: !(Attr Text)
-      {- ^ (Optional) List of zero or one healthcheck names. -}
+      {- ^ (Optional) List of zero or one health check name or self_link. Only legacy @google_compute_http_health_check@ is supported. -}
     , _instances :: !(Attr Text)
       {- ^ (Optional) List of instances in the pool. They can be given as URLs, or in the form of "zone/name". Note that the instances need not exist at the time of target pool creation, so there is no need to use the Terraform interpolators to create a dependency on the instances from the target pool. -}
     , _name :: !(Attr Text)
@@ -1484,7 +1498,7 @@ data ComputeTargetPoolResource = ComputeTargetPoolResource
       {- ^ (Optional) Where the target pool resides. Defaults to project region. -}
     , _session_affinity :: !(Attr Text)
       {- ^ (Optional) How to distribute load. Options are "NONE" (no affinity). "CLIENT_IP" (hash of the source/dest addresses / ports), and "CLIENT_IP_PROTO" also includes the protocol (default "NONE"). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeTargetPoolResource
     = '[ '("self_link", Text)
@@ -1515,7 +1529,7 @@ data ComputeTargetSslProxyResource = ComputeTargetSslProxyResource
       {- ^ (Optional) Type of proxy header to append before sending data to the backend, either NONE or PROXY_V1 (default NONE). -}
     , _ssl_certificates :: !(Attr Text)
       {- ^ (Required) The URLs of the SSL Certificate resources that authenticate connections between users and load balancing. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeTargetSslProxyResource
     = '[ '("proxy_id", Text)
@@ -1546,7 +1560,7 @@ data ComputeTargetTcpProxyResource = ComputeTargetTcpProxyResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _proxy_header :: !(Attr Text)
       {- ^ (Optional) Type of proxy header to append before sending data to the backend, either NONE or PROXY_V1 (default NONE). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeTargetTcpProxyResource
     = '[ '("proxy_id", Text)
@@ -1581,12 +1595,12 @@ data ComputeUrlMapResource = ComputeUrlMapResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _test :: !(Attr Text)
       {- ^ (Optional) The test to perform.  Multiple blocks of this type are permitted. Structure is documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeUrlMapResource
     = '[ '("fingerprint", Text)
          {- - The unique fingerprint for this resource. -}
-      , '("id", Text)
+      , '("map_id", Text)
          {- - The GCE assigned ID of the resource. -}
       , '("self_link", Text)
          {- - The URI of the created resource. -}
@@ -1613,7 +1627,7 @@ data ComputeVpnGatewayResource = ComputeVpnGatewayResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _region :: !(Attr Text)
       {- ^ (Optional) The region this gateway should sit in. If not specified, the project region will be used. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeVpnGatewayResource
     = '[ '("self_link", Text)
@@ -1655,7 +1669,7 @@ data ComputeVpnTunnelResource = ComputeVpnTunnelResource
       {- ^ (Required) A passphrase shared between the two VPN gateways. Changing this forces a new resource to be created. -}
     , _target_vpn_gateway :: !(Attr Text)
       {- ^ (Required) A link to the VPN gateway sitting inside GCE. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ComputeVpnTunnelResource
     = '[ '("detailed_status", Text)
@@ -1686,14 +1700,20 @@ data ContainerClusterResource = ContainerClusterResource
       {- ^ (Optional) The IP address range of the container pods in this cluster. Default is an automatically assigned CIDR. -}
     , _description :: !(Attr Text)
       {- ^ (Optional) Description of the cluster. -}
+    , _enable_kubernetes_alpha :: !(Attr Text)
+      {- ^ (Optional) Whether to enable Kubernetes Alpha features for this cluster. Note that when this option is enabled, the cluster cannot be upgraded and will be automatically deleted after 30 days. -}
     , _enable_legacy_abac :: !(Attr Text)
       {- ^ (Optional) Whether the ABAC authorizer is enabled for this cluster. When enabled, identities in the system, including service accounts, nodes, and controllers, will have statically granted permissions beyond those provided by the RBAC configuration or IAM. -}
     , _initial_node_count :: !(Attr Text)
       {- ^ (Optional) The number of nodes to create in this cluster (not including the Kubernetes master). Must be set if @node_pool@ is not set. -}
     , _logging_service :: !(Attr Text)
       {- ^ (Optional) The logging service that the cluster should write logs to. Available options include @logging.googleapis.com@ and @none@ . Defaults to @logging.googleapis.com@ -}
+    , _maintenance_policy :: !(Attr Text)
+      {- ^ (Optional) The maintenance policy to use for the cluster. Structure is documented below. -}
     , _master_auth :: !(Attr Text)
       {- ^ (Optional) The authentication information for accessing the Kubernetes master. Structure is documented below. -}
+    , _master_authorized_networks_config :: !(Attr Text)
+      {- ^ (Optional) The desired configuration options for master authorized networks. Omit the nested @cidr_blocks@ attribute to disallow external access (except the cluster node IPs, which GKE automatically whitelists). -}
     , _min_master_version :: !(Attr Text)
       {- ^ (Optional) The minimum version of the master. GKE will auto-update the master to new versions, so this does not guarantee the current master version--use the read-only @master_version@ field to obtain that. If unset, the cluster's version will be set by GKE to the version of the most recent official release (which is not necessarily the latest version). -}
     , _monitoring_service :: !(Attr Text)
@@ -1714,18 +1734,20 @@ data ContainerClusterResource = ContainerClusterResource
       {- ^ (Optional) The name of the Google Compute Engine subnetwork in which the cluster's instances are launched. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone that the master and the number of nodes specified in @initial_node_count@ should be created in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ContainerClusterResource
     = '[ '("endpoint", Text)
          {- - The IP address of this cluster's Kubernetes master. -}
       , '("instance_group_urls", Text)
          {- - List of instance group URLs which have been assigned to the cluster. -}
-      , '("master_auth.client_certificate", Text)
+      , '("maintenance_policy.0.daily_maintenance_window.0.duration", Text)
+         {- - Duration of the time window, automatically chosen to be smallest possible in the given scenario. Duration will be in <https://www.ietf.org/rfc/rfc3339.txt> format "PTnHnMnS". -}
+      , '("master_auth.0.client_certificate", Text)
          {- - Base64 encoded public certificate used by clients to authenticate to the cluster endpoint. -}
-      , '("master_auth.client_key", Text)
+      , '("master_auth.0.client_key", Text)
          {- - Base64 encoded private key used by clients to authenticate to the cluster endpoint. -}
-      , '("master_auth.cluster_ca_certificate", Text)
+      , '("master_auth.0.cluster_ca_certificate", Text)
          {- - Base64 encoded public certificate that is the root of trust for the cluster. -}
       , '("master_version", Text)
          {- - The current version of the master in the cluster. This may be different than the @min_master_version@ set in the config if the master has been updated by GKE. -}
@@ -1762,12 +1784,52 @@ data ContainerNodePoolResource = ContainerNodePoolResource
       {- ^ (Optional) The project in which to create the node pool. If blank, the provider-configured project will be used. -}
     , _zone :: !(Attr Text)
       {- ^ (Required) The zone in which the cluster resides. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_container_node_pool"
     ''Qual.Google
     ''ContainerNodePoolResource)
+
+{- | The @google_dataproc_cluster@ Google resource.
+
+Manages a Cloud Dataproc cluster resource within GCP. For more information
+see <https://cloud.google.com/dataproc/> . !> Warning: Due to limitations of
+the API, all arguments except @labels@ ,
+@cluster_config.worker_config.num_instances@ and
+@cluster_config.preemptible_worker_config.num_instances@ are non-updateable.
+Changing others will cause recreation of the whole cluster!
+-}
+data DataprocClusterResource = DataprocClusterResource
+    { _cluster_config :: !(Attr Text)
+      {- ^ (Optional) Allows you to configure various aspects of the cluster. Structure defined below. -}
+    , _labels :: !(Attr Text)
+      {- ^ (Optional, Computed) The list of labels (key/value pairs) to be applied to instances in the cluster. GCP generates some itself including @goog-dataproc-cluster-name@ which is the name of the cluster. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The name of the cluster, unique within the project and zone. -}
+    , _project :: !(Attr Text)
+      {- ^ (Optional) The project in which the @cluster@ will exist. If it is not provided, the provider project is used. -}
+    , _region :: !(Attr Text)
+      {- ^ (Optional) The region in which the cluster and associated nodes will be created in. Defaults to @global@ . -}
+    } deriving (Show, Generic)
+
+type instance Computed DataprocClusterResource
+    = '[ '("cluster_config.bucket", Text)
+         {- - The name of the cloud storage bucket ultimately used to house the staging data for the cluster. If @staging_bucket@ is specified, it will contain this value, otherwise it will be the auto generated name. -}
+      , '("cluster_config.master_config.instance_names", Text)
+         {- - List of master instance names which have been assigned to the cluster. -}
+      , '("cluster_config.preemptible_worker_config.instance_names", Text)
+         {- - List of preemptible instance names which have been assigned to the cluster. -}
+      , '("cluster_config.software_config.properties", Text)
+         {- - A list of the properties used to set the daemon config files. This will include any values supplied by the user via @cluster_config.software_config.override_properties@ -}
+      , '("cluster_config.worker_config.instance_names", Text)
+         {- - List of worker instance names which have been assigned to the cluster. -}
+       ]
+
+$(TH.makeResource
+    "google_dataproc_cluster"
+    ''Qual.Google
+    ''DataprocClusterResource)
 
 {- | The @google_dns_managed_zone@ Google resource.
 
@@ -1784,14 +1846,10 @@ data DnsManagedZoneResource = DnsManagedZoneResource
       {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed DnsManagedZoneResource
-    = '[ '("description", Text)
-         {- - A textual description field. -}
-      , '("dns_name", Text)
-         {- - The DNS name of this zone, e.g. "terraform.io". -}
-      , '("name_servers", Text)
+    = '[ '("name_servers", Text)
          {- - The list of nameservers that will be authoritative for this domain. Use NS records to redirect from your DNS provider to these names, thus making Google Cloud DNS authoritative for this zone. -}
        ]
 
@@ -1802,7 +1860,11 @@ $(TH.makeResource
 
 {- | The @google_dns_record_set@ Google resource.
 
-Manages a set of DNS records within Google Cloud DNS.
+Manages a set of DNS records within Google Cloud DNS. ~> Note: The Google
+Cloud DNS API requires NS records be present at all times. To accommodate
+this, when creating NS records, the default records Google automatically
+creates will be silently overwritten.  Also, when destroying NS records,
+Terraform will not actually remove NS records, but will report that it did.
 -}
 data DnsRecordSetResource = DnsRecordSetResource
     { _managed_zone :: !(Attr Text)
@@ -1817,7 +1879,7 @@ data DnsRecordSetResource = DnsRecordSetResource
       {- ^ (Required) The time-to-live of this record set (seconds). -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The DNS record set type. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_dns_record_set"
@@ -1834,7 +1896,7 @@ data FolderIamPolicyResource = FolderIamPolicyResource
       {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
     , _policy_data :: !(Attr Text)
       {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FolderIamPolicyResource
     = '[ '("etag", Text)
@@ -1870,7 +1932,7 @@ data FolderResource = FolderResource
       {- ^ (Required) The folder’s display name. A folder’s display name must be unique amongst its siblings, e.g. no two folders with the same parent can share the same display name. The display name must start and end with a letter or digit, may contain letters, digits, spaces, hyphens and underscores and can be no longer than 30 characters. -}
     , _parent :: !(Attr Text)
       {- ^ (Required) The resource name of the parent Folder or Organization. Must be of the form @folders/{folder_id}@ or @organizations/{org_id}@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed FolderResource
     = '[ '("create_time", Text)
@@ -1885,6 +1947,38 @@ $(TH.makeResource
     "google_folder"
     ''Qual.Google
     ''FolderResource)
+
+{- | The @google_kms_crypto_key@ Google resource.
+
+Allows creation of a Google Cloud Platform KMS CryptoKey. For more
+information see
+<https://cloud.google.com/kms/docs/object-hierarchy#cryptokey> and
+<https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys>
+. A CryptoKey is an interface to key material which can be used to encrypt
+and decrypt data. A CryptoKey belongs to a Google Cloud KMS KeyRing. ~>
+Note: CryptoKeys cannot be deleted from Google Cloud Platform. Destroying a
+Terraform-managed CryptoKey will remove it from state and delete all
+CryptoKeyVersions, rendering the key unusable, but will not delete the
+resource on the server .
+-}
+data KmsCryptoKeyResource = KmsCryptoKeyResource
+    { _key_ring :: !(Attr Text)
+      {- ^ (Required) The id of the Google Cloud Platform KeyRing to which the key shall belong. -}
+    , _name :: !(Attr Text)
+      {- ^ (Required) The CryptoKey's name. A CryptoKey’s name must be unique within a location and match the regular expression @[a-zA-Z0-9_-]{1,63}@ -}
+    , _rotation_period :: !(Attr Text)
+      {- ^ (Optional) Every time this period passes, generate a new CryptoKeyVersion and set it as the primary. The first rotation will take place after the specified period. The rotation period has the format of a decimal number with up to 9 fractional digits, followed by the letter s (seconds). It must be greater than a day (ie, 83400). -}
+    } deriving (Show, Generic)
+
+type instance Computed KmsCryptoKeyResource
+    = '[ '("id", Text)
+         {- - The ID of the created CryptoKey. Its format is @{projectId}/{location}/{keyRingName}/{cryptoKeyName}@ . -}
+       ]
+
+$(TH.makeResource
+    "google_kms_crypto_key"
+    ''Qual.Google
+    ''KmsCryptoKeyResource)
 
 {- | The @google_kms_key_ring@ Google resource.
 
@@ -1904,7 +1998,7 @@ data KmsKeyRingResource = KmsKeyRingResource
       {- ^ (Required) The KeyRing's name. A KeyRing’s name must be unique within a location and match the regular expression @[a-zA-Z0-9_-]{1,63}@ -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KmsKeyRingResource
     = '[ '("id", Text)
@@ -1932,7 +2026,7 @@ data LoggingBillingAccountSinkResource = LoggingBillingAccountSinkResource
       {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the logging sink. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LoggingBillingAccountSinkResource
     = '[ '("writer_identity", Text)
@@ -1960,7 +2054,7 @@ data LoggingFolderSinkResource = LoggingFolderSinkResource
       {- ^ (Required) The folder to be exported to the sink. Note that either [FOLDER_ID] or "folders/[FOLDER_ID]" is accepted. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the logging sink. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LoggingFolderSinkResource
     = '[ '("writer_identity", Text)
@@ -1987,7 +2081,7 @@ data LoggingProjectSinkResource = LoggingProjectSinkResource
       {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the logging sink. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LoggingProjectSinkResource
     = '[ '("writer_identity", Text)
@@ -1998,6 +2092,35 @@ $(TH.makeResource
     "google_logging_project_sink"
     ''Qual.Google
     ''LoggingProjectSinkResource)
+
+{- | The @google_organization_iam_custom_role@ Google resource.
+
+Allows management of a customized Cloud IAM organization role. For more
+information see
+<https://cloud.google.com/iam/docs/understanding-custom-roles> and
+<https://cloud.google.com/iam/reference/rest/v1/organizations.roles> .
+-}
+data OrganizationIamCustomRoleResource = OrganizationIamCustomRoleResource
+    { _deleted :: !(Attr Text)
+      {- ^ (Optional) The current deleted state of the role. Defaults to @false@ . -}
+    , _description :: !(Attr Text)
+      {- ^ (Optional) A human-readable description for the role. -}
+    , _org_id :: !(Attr Text)
+      {- ^ (Required) The numeric ID of the organization in which you want to create a custom role. -}
+    , _permissions :: !(Attr Text)
+      {- ^ (Required) The names of the permissions this role grants when bound in an IAM policy. At least one permission must be specified. -}
+    , _role_id :: !(Attr Text)
+      {- ^ (Required) The role id to use for this role. -}
+    , _stage :: !(Attr Text)
+      {- ^ (Optional) The current launch stage of the role. Defaults to @GA@ . List of possible stages is <https://cloud.google.com/iam/reference/rest/v1/organizations.roles#Role.RoleLaunchStage> . -}
+    , _title :: !(Attr Text)
+      {- ^ (Required) A human-readable title for the role. -}
+    } deriving (Show, Generic)
+
+$(TH.makeResource
+    "google_organization_iam_custom_role"
+    ''Qual.Google
+    ''OrganizationIamCustomRoleResource)
 
 {- | The @google_organization_policy@ Google resource.
 
@@ -2019,7 +2142,7 @@ data OrganizationPolicyResource = OrganizationPolicyResource
       {- ^ (Required) The numeric ID of the organization to set the policy for. -}
     , _version :: !(Attr Text)
       {- ^ (Optional) Version of the Policy. Default version is 0. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed OrganizationPolicyResource
     = '[ '("etag", Text)
@@ -2047,7 +2170,7 @@ data ProjectIamBindingResource = ProjectIamBindingResource
       {- ^ (Optional) The project ID. If not specified, uses the ID of the project configured with the provider. -}
     , _role :: !(Attr Text)
       {- ^ (Required) The role that should be applied. Only one @google_project_iam_binding@ can be used per role. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectIamBindingResource
     = '[ '("etag", Text)
@@ -2058,6 +2181,35 @@ $(TH.makeResource
     "google_project_iam_binding"
     ''Qual.Google
     ''ProjectIamBindingResource)
+
+{- | The @google_project_iam_custom_role@ Google resource.
+
+Allows management of a customized Cloud IAM project role. For more
+information see
+<https://cloud.google.com/iam/docs/understanding-custom-roles> and
+<https://cloud.google.com/iam/reference/rest/v1/projects.roles> .
+-}
+data ProjectIamCustomRoleResource = ProjectIamCustomRoleResource
+    { _deleted :: !(Attr Text)
+      {- ^ (Optional) The current deleted state of the role. Defaults to @false@ . -}
+    , _description :: !(Attr Text)
+      {- ^ (Optional) A human-readable description for the role. -}
+    , _permissions :: !(Attr Text)
+      {- ^ (Required) The names of the permissions this role grants when bound in an IAM policy. At least one permission must be specified. -}
+    , _project :: !(Attr Text)
+      {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
+    , _role_id :: !(Attr Text)
+      {- ^ (Required) The role id to use for this role. -}
+    , _stage :: !(Attr Text)
+      {- ^ (Optional) The current launch stage of the role. Defaults to @GA@ . List of possible stages is <https://cloud.google.com/iam/reference/rest/v1/organizations.roles#Role.RoleLaunchStage> . -}
+    , _title :: !(Attr Text)
+      {- ^ (Required) A human-readable title for the role. -}
+    } deriving (Show, Generic)
+
+$(TH.makeResource
+    "google_project_iam_custom_role"
+    ''Qual.Google
+    ''ProjectIamCustomRoleResource)
 
 {- | The @google_project_iam_member@ Google resource.
 
@@ -2075,7 +2227,7 @@ data ProjectIamMemberResource = ProjectIamMemberResource
       {- ^ (Optional) The project ID. If not specified, uses the ID of the project configured with the provider. -}
     , _role :: !(Attr Text)
       {- ^ (Required) The role that should be applied. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectIamMemberResource
     = '[ '("etag", Text)
@@ -2102,7 +2254,7 @@ data ProjectIamPolicyResource = ProjectIamPolicyResource
       {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the project. The policy will be merged with any existing policy applied to the project. -}
     , _project :: !(Attr Text)
       {- ^ (Required) The project ID. Changing this forces a new project to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectIamPolicyResource
     = '[ '("etag", Text)
@@ -2147,7 +2299,7 @@ data ProjectResource = ProjectResource
       {- ^ (Required) The project ID. Changing this forces a new project to be created. -}
     , _skip_delete :: !(Attr Text)
       {- ^ (Optional) If true, the Terraform resource can be deleted without deleting the Project via the Google API. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ProjectResource
     = '[ '("number", Text)
@@ -2161,20 +2313,44 @@ $(TH.makeResource
     ''Qual.Google
     ''ProjectResource)
 
+{- | The @google_project_service@ Google resource.
+
+Allows management of a single API service for an existing Google Cloud
+Platform project. For a list of services available, visit the
+<https://console.cloud.google.com/apis/library> or run @gcloud
+service-management list@ . ~> Note: This resource must not be used in
+conjunction with @google_project_services@ or they will fight over which
+services should be enabled.
+-}
+data ProjectServiceResource = ProjectServiceResource
+    { _project :: !(Attr Text)
+      {- ^ (Optional) The project ID. If not provided, the provider project is used. -}
+    , _service :: !(Attr Text)
+      {- ^ (Required) The service to enable. -}
+    } deriving (Show, Generic)
+
+$(TH.makeResource
+    "google_project_service"
+    ''Qual.Google
+    ''ProjectServiceResource)
+
 {- | The @google_project_services@ Google resource.
 
 Allows management of enabled API services for an existing Google Cloud
 Platform project. Services in an existing project that are not defined in
 the config will be removed. For a list of services available, visit the
 <https://console.cloud.google.com/apis/library> or run @gcloud
-service-management list@ .
+service-management list@ . ~> Note: This resource attempts to be the
+authoritative source on which APIs are enabled, which can lead to conflicts
+when certain APIs or actions enable other APIs. To just ensure that a
+specific API is enabled, use the <google_project_service.html> resource.
 -}
 data ProjectServicesResource = ProjectServicesResource
     { _project :: !(Attr Text)
       {- ^ (Required) The project ID. Changing this forces Terraform to attempt to disable all previously managed API services in the previous project. -}
     , _services :: !(Attr Text)
       {- ^ (Required) The list of services that are enabled. Supports update. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_project_services"
@@ -2198,8 +2374,8 @@ data PubsubSubscriptionResource = PubsubSubscriptionResource
     , _push_config :: !(Attr Text)
       {- ^ (Optional) Block configuration for push options. More configuration options are detailed below. -}
     , _topic :: !(Attr Text)
-      {- ^ (Required) A topic to bind this subscription to, required by pubsub. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+      {- ^ (Required) The topic name or id to bind this subscription to, required by pubsub. Changing this forces a new resource to be created. -}
+    } deriving (Show, Generic)
 
 type instance Computed PubsubSubscriptionResource
     = '[ '("path", Text)
@@ -2222,7 +2398,7 @@ data PubsubTopicResource = PubsubTopicResource
       {- ^ (Required) A unique name for the resource, required by pubsub. Changing this forces a new resource to be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_pubsub_topic"
@@ -2244,7 +2420,7 @@ data RuntimeconfigConfigResource = RuntimeconfigConfigResource
       {- ^ (Required) The name of the runtime config. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_runtimeconfig_config"
@@ -2268,7 +2444,7 @@ data RuntimeconfigVariableResource = RuntimeconfigVariableResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _text :: !(Attr Text)
       {- ^ or @value@ - (Required) The content to associate with the variable. Exactly one of @text@ or @variable@ must be specified. If @text@ is specified, it must be a valid UTF-8 string and less than 4096 bytes in length. If @value@ is specified, it must be base64 encoded and less than 4096 bytes in length. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RuntimeconfigVariableResource
     = '[ '("update_time", Text)
@@ -2292,16 +2468,16 @@ and
 -}
 data ServiceAccountKeyResource = ServiceAccountKeyResource
     { _key_algorithm :: !(Attr Text)
-      {- ^ (Optional) The output format of the private key. GOOGLE_CREDENTIALS_FILE is the default output format. Valid values are listed at <https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys#ServiceAccountPrivateKeyType> (only used on create) -}
+      {- ^ (Optional) The algorithm used to generate the key. KEY_ALG_RSA_2048 is the default algorithm. Valid values are listed at <https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys#ServiceAccountKeyAlgorithm> (only used on create) -}
     , _pgp_key :: !(Attr Text)
-      {- ^ – (Optional) An optional PGP key to encrypt the resulting private key material. Only used when creating or importing a new key pair -}
+      {- ^ – (Optional) An optional PGP key to encrypt the resulting private key material. Only used when creating or importing a new key pair. May either be a base64-encoded public key or a @keybase:keybaseusername@ string for looking up in Vault. -}
     , _private_key_type :: !(Attr Text)
       {- ^ (Optional) The output format of the private key. GOOGLE_CREDENTIALS_FILE is the default output format. -}
     , _public_key_type :: !(Attr Text)
       {- ^ (Optional) The output format of the public key requested. X509_PEM is the default output format. -}
     , _service_account_id :: !(Attr Text)
       {- ^ (Required) The Service account id of the Key Pair. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceAccountKeyResource
     = '[ '("fingerprint", Text)
@@ -2341,7 +2517,7 @@ data ServiceAccountResource = ServiceAccountResource
       {- ^ - (DEPRECATED, Optional) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the service account. The policy will be merged with any existing policy. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ServiceAccountResource
     = '[ '("email", Text)
@@ -2368,7 +2544,7 @@ data SourcerepoRepositoryResource = SourcerepoRepositoryResource
       {- ^ (Required) The name of the repository that will be created. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SourcerepoRepositoryResource
     = '[ '("size", Text)
@@ -2400,7 +2576,7 @@ data SpannerInstanceResource = SpannerInstanceResource
       {- ^ (Optional, Computed) The number of nodes allocated to this instance. Defaults to @1@ . This can be updated after creation. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SpannerInstanceResource
     = '[ '("state", Text)
@@ -2441,7 +2617,7 @@ data SqlDatabaseInstanceResource = SqlDatabaseInstanceResource
       {- ^ (Optional) The configuration for replication. The configuration is detailed below. -}
     , _settings :: !(Attr Text)
       {- ^ (Required) The settings to use for the database. The configuration is detailed below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqlDatabaseInstanceResource
     = '[ '("ip_address.0.ip_address", Text)
@@ -2478,7 +2654,7 @@ data SqlDatabaseResource = SqlDatabaseResource
       {- ^ (Required) The name of the database. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SqlDatabaseResource
     = '[ '("self_link", Text)
@@ -2510,7 +2686,7 @@ data SqlUserResource = SqlUserResource
       {- ^ (Required) The users password. Can be updated. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_sql_user"
@@ -2533,7 +2709,7 @@ data StorageBucketAclResource = StorageBucketAclResource
       {- ^ (Optional) The <https://cloud.google.com/storage/docs/access-control/lists#predefined-acl> to apply. Must be set if @role_entity@ is not. -}
     , _role_entity :: !(Attr Text)
       {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_storage_bucket_acl"
@@ -2553,7 +2729,7 @@ data StorageBucketObjectResource = StorageBucketObjectResource
       {- ^ (Required) The name of the containing bucket. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the object. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageBucketObjectResource
     = '[ '("crc32c", Text)
@@ -2581,6 +2757,8 @@ data StorageBucketResource = StorageBucketResource
       {- ^ (Optional) The bucket's <https://www.w3.org/TR/cors/> configuration. Multiple blocks of this type are permitted. Structure is documented below. -}
     , _force_destroy :: !(Attr Text)
       {- ^ (Optional, Default: false) When deleting a bucket, this boolean option will delete all contained objects. If you try to delete a bucket that contains objects, Terraform will fail that run. -}
+    , _labels :: !(Attr Text)
+      {- ^ (Optional) A set of key/value label pairs to assign to the bucket. -}
     , _lifecycle_rule :: !(Attr Text)
       {- ^ (Optional) The bucket's <https://cloud.google.com/storage/docs/lifecycle#configuration> configuration. Multiple blocks of this type are permitted. Structure is documented below. -}
     , _location :: !(Attr Text)
@@ -2595,7 +2773,7 @@ data StorageBucketResource = StorageBucketResource
       {- ^ (Optional) The bucket's <https://cloud.google.com/storage/docs/object-versioning> configuration. -}
     , _website :: !(Attr Text)
       {- ^ (Optional) Configuration if the bucket acts as a website. Structure is documented below. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed StorageBucketResource
     = '[ '("self_link", Text)
@@ -2612,7 +2790,9 @@ $(TH.makeResource
 {- | The @google_storage_object_acl@ Google resource.
 
 Creates a new object ACL in Google cloud storage service (GCS). For more
-information see
+information see <https://cloud.google.com/storage/docs/access-control/lists>
+and <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls>
+.
 -}
 data StorageObjectAclResource = StorageObjectAclResource
     { _bucket :: !(Attr Text)
@@ -2623,7 +2803,7 @@ data StorageObjectAclResource = StorageObjectAclResource
       {- ^ (Optional) The <https://cloud.google.com/storage/docs/access-control#predefined-acl> to apply. Must be set if @role_entity@ is not. -}
     , _role_entity :: !(Attr Text)
       {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "google_storage_object_acl"

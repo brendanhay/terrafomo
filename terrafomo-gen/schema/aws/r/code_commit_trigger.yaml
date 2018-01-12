@@ -1,0 +1,38 @@
+_name: aws_codecommit_trigger
+arguments:
+  _repository_name:
+    required: true
+    help: (Required) The name for the repository. This needs to be less than 100 characters.
+    type: Text
+  _events:
+    required: true
+    help: ! '(Required) The repository events that will cause the trigger to run actions
+      in another service, such as sending a notification through Amazon Simple Notification
+      Service (SNS). If no events are specified, the trigger will run for all repository
+      events. Event types include: @all@ , @updateReference@ , @createReference@ ,
+      @deleteReference@ .'
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the trigger.
+    type: Text
+  _custom_data:
+    required: false
+    help: (Optional) Any custom data associated with the trigger that will be included
+      in the information sent to the target of the trigger.
+    type: Text
+  _destination_arn:
+    required: true
+    help: (Required) The ARN of the resource that is the target for a trigger. For
+      example, the ARN of a topic in Amazon Simple Notification Service (SNS).
+    type: Text
+  _branches:
+    required: false
+    help: (Optional) The branches that will be included in the trigger configuration.
+      If no branches are specified, the trigger will apply to all branches.
+    type: Text
+attributes: {}
+about: ! 'Provides a CodeCommit Trigger Resource. ~> NOTE on CodeCommit : The CodeCommit
+  is not yet rolled out in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#codecommit_region>
+  .'
+examples: []

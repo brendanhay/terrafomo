@@ -1,0 +1,32 @@
+_name: aws_iam_group
+arguments:
+  _name:
+    required: true
+    help: ! '(Required) The group''s name. The name must consist of upper and lowercase
+      alphanumeric characters with no spaces. You can also include any of the following
+      characters: @=,.@-_.@ . Group names are not distinguished by case. For example,
+      you cannot create groups named both "ADMINS" and "admins".'
+    type: Text
+  _path:
+    required: false
+    help: (Optional, default "/") Path in which to create the group.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN assigned by AWS for this group.'
+    type: Text
+  path:
+    help: ! '- The path of the group in IAM.'
+    type: Text
+  name:
+    help: ! '- The group''s name.'
+    type: Text
+  id:
+    help: ! '- The group''s ID.'
+    type: Text
+  unique_id:
+    help: ! '- The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs>
+      assigned by AWS.'
+    type: Text
+about: Provides an IAM group.
+examples: []

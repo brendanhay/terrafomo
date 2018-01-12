@@ -1,0 +1,13 @@
+_name: vault_policy
+arguments:
+  _policy:
+    required: true
+    help: (Required) String containing a Vault policy
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the policy
+    type: Text
+attributes: {}
+about: ''
+examples: []

@@ -48,7 +48,7 @@ data InstanceSizeResource = InstanceSizeResource
       {- ^ (Optional) Size of ram in GB -}
     , _vcores :: !(Attr Text)
       {- ^ (Optional)  Number of vcores -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "oneandone_instance_size"
@@ -68,7 +68,7 @@ data IpResource = IpResource
       {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
     , _reverse_dns :: !(Attr Text)
       {- ^ (Optional) -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "oneandone_ip"
@@ -90,7 +90,7 @@ data ServerResource = ServerResource
       {- ^ (Required) Size of the shared storage -}
     , _storage_servers :: !(Attr Text)
       {- ^ (Optional) List of servers that will have access to the stored storage -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "oneandone_server"
@@ -112,7 +112,7 @@ data VpnResource = VpnResource
       {- ^ (Optional) -}
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the VPN -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "oneandone_vpn"

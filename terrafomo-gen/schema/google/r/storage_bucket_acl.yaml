@@ -1,0 +1,25 @@
+_name: google_storage_bucket_acl
+arguments:
+  _default_acl:
+    required: false
+    help: (Optional) Configure this ACL to be the default ACL.
+    type: Text
+  _bucket:
+    required: true
+    help: (Required) The name of the bucket it applies to.
+    type: Text
+  _role_entity:
+    required: false
+    help: (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls>
+      for more details. Must be set if @predefined_acl@ is not.
+    type: Text
+  _predefined_acl:
+    required: false
+    help: (Optional) The <https://cloud.google.com/storage/docs/access-control/lists#predefined-acl>
+      to apply. Must be set if @role_entity@ is not.
+    type: Text
+attributes: {}
+about: Creates a new bucket ACL in Google cloud storage service (GCS). For more information
+  see <https://cloud.google.com/storage/docs/access-control/lists> and <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls>
+  .
+examples: []

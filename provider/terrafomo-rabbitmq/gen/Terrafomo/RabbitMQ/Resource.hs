@@ -55,7 +55,7 @@ data BindingResource = BindingResource
       {- ^ (Required) The source exchange. -}
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BindingResource
     = '[ '("properties_key", Text)
@@ -78,7 +78,7 @@ data ExchangeResource = ExchangeResource
       {- ^ (Required) The settings of the exchange. The structure is described below. -}
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rabbitmq_exchange"
@@ -97,7 +97,7 @@ data PermissionsResource = PermissionsResource
       {- ^ (Required) The user to apply the permissions to. -}
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rabbitmq_permissions"
@@ -116,7 +116,7 @@ data PolicyResource = PolicyResource
       {- ^ (Required) The settings of the policy. The structure is described below. -}
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rabbitmq_policy"
@@ -134,7 +134,7 @@ data QueueResource = QueueResource
       {- ^ (Required) The settings of the queue. The structure is described below. -}
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rabbitmq_queue"
@@ -154,7 +154,7 @@ data UserResource = UserResource
       {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rabbitmq_user"
@@ -168,7 +168,7 @@ The @rabbitmq_vhost@ resource creates and manages a vhost.
 data VhostResource = VhostResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the vhost. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "rabbitmq_vhost"

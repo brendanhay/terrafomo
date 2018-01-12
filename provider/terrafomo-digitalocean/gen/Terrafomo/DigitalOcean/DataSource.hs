@@ -46,7 +46,7 @@ if zero or more than one result is returned by the query.
 data ImageDataSource = ImageDataSource
     { _name :: !(Attr Text)
       {- ^ - The name of the image. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImageDataSource
     = '[ '("image", Text)

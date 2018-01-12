@@ -49,7 +49,7 @@ data DatacenterResource = DatacenterResource
       {- ^ (Required) The name of the datacenter. This name needs to be unique within the folder. Forces a new resource if changed. -}
     , _tags :: !(Attr Text)
       {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_datacenter"
@@ -85,7 +85,7 @@ data DistributedPortGroupResource = DistributedPortGroupResource
       {- ^ (Optional) The number of ports available on this port group. Cannot be decreased below the amount of used ports on the port group. -}
     , _type' :: !(Attr Text)
       {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_distributed_port_group"
@@ -139,14 +139,7 @@ data DistributedVirtualSwitchResource = DistributedVirtualSwitchResource
       {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     , _version :: !(Attr Text)
       {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
-    } deriving (Show, Eq, Generic)
-
-type instance Computed DistributedVirtualSwitchResource
-    = '[ '("id", Text)
-         {- : The UUID of the distributed virtual switch. -}
-      , '("uplinks", Text)
-         {- : The list of the uplinks on this DVS, as per the </docs/providers/vsphere/r/distributed_virtual_switch.html#uplinks> argument to the </docs/providers/vsphere/r/distributed_virtual_switch.html> resource. -}
-       ]
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_distributed_virtual_switch"
@@ -180,7 +173,7 @@ data FileResource = FileResource
       {- ^ (Optional) The name of the Datastore in which file will be copied from. -}
     , _source_file :: !(Attr Text)
       {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_file"
@@ -201,7 +194,7 @@ exists.
 data FolderResource = FolderResource
     { _path :: !(Attr Text)
       {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_folder"
@@ -227,7 +220,7 @@ data HostPortGroupResource = HostPortGroupResource
       {- ^ - (String, required, forces new resource) The name of the virtual switch to bind this port group to. -}
     , _vlan_id :: !(Attr Text)
       {- ^ - (Integer, optional) The VLAN ID/trunk mode for this port group. An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_host_port_group"
@@ -253,7 +246,7 @@ data HostVirtualSwitchResource = HostVirtualSwitchResource
       {- ^ - (String, required, forces new resource) The name of the virtual switch. -}
     , _number_of_ports :: !(Attr Text)
       {- ^ - (Integer, optional) The number of ports to create with this virtual switch. Default: @128@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_host_virtual_switch"
@@ -270,7 +263,7 @@ data LicenseResource = LicenseResource
       {- ^ (Optional) A map of key/value pairs to be attached as labels (tags) to the license key. -}
     , _license_key :: !(Attr Text)
       {- ^ (Required) The license key to add. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed LicenseResource
     = '[ '("edition_key", Text)
@@ -317,7 +310,7 @@ data NasDatastoreResource = NasDatastoreResource
       {- ^ - (List of strings, optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     , _type' :: !(Attr Text)
       {- ^ - (String, optional, forces new resource) The type of NAS volume. Can be one of @NFS@ (to denote v3) or @NFS41@ (to denote NFS v4.1). Default: @NFS@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NasDatastoreResource
     = '[ '("accessible", Text)
@@ -365,7 +358,7 @@ data TagCategoryResource = TagCategoryResource
       {- ^ - (String, optional) A description for the category. -}
     , _name :: !(Attr Text)
       {- ^ - (String, required) The name of the category. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_tag_category"
@@ -389,7 +382,7 @@ data TagResource = TagResource
       {- ^ - (String, optional) A description for the tag. -}
     , _name :: !(Attr Text)
       {- ^ - (String, required) The display name of the tag. The name must be unique within its category. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_tag"
@@ -414,7 +407,7 @@ data VirtualDiskResource = VirtualDiskResource
       {- ^ (Optional) 'eagerZeroedThick' (the default), 'lazy', or 'thin' are supported options. -}
     , _vmdk_path :: !(Attr Text)
       {- ^ (Required) The path, including filename, of the virtual disk to be created.  This should end with '.vmdk'. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_virtual_disk"
@@ -475,7 +468,7 @@ data VirtualMachineResource = VirtualMachineResource
       {- ^ (Optional) The amount of time, in minutes, to wait for guest OS customization to complete before returning with an error. Setting this value to @0@ or a negative value skips the waiter. Default: @10@ (10 minutes). -}
     , _windows_opt_config :: !(Attr Text)
       {- ^ (Optional) Extra options for clones of Windows machines. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_virtual_machine"
@@ -515,7 +508,7 @@ data VirtualMachineSnapshotResource = VirtualMachineSnapshotResource
       {- ^ (Required) The name of the snapshot. -}
     , _virtual_machine_uuid :: !(Attr Text)
       {- ^ (Required) The virtual machine UUID. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "vsphere_virtual_machine_snapshot"
@@ -542,7 +535,7 @@ data VmfsDatastoreResource = VmfsDatastoreResource
       {- ^ - (String, required, forces new resource) The name of the datastore. -}
     , _tags :: !(Attr Text)
       {- ^ - (List of strings, optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VmfsDatastoreResource
     = '[ '("accessible", Text)

@@ -31,8 +31,7 @@ with credentials for the Oracle Public Cloud API. Use the navigation to the
 left to read about the available resources.
 -}
 data OPC = OPC
-    { _database_endpoint :: !Text
-    , _endpoint :: !Text
+    { _endpoint :: !Text
     , _identity_domain :: !Text
     , _insecure :: !Text
     , _max_retries :: !Text
@@ -46,15 +45,6 @@ instance Hashable OPC
 instance Qual.ToValue OPC where
     toValue = Qual.genericToValue
 
-{- | (Optional) The API endpoint to use, associated with Oracle Database Cloud
-account. This is known as the @REST Endpoint@ within the Oracle portal. Can
-also be set via the @OPC_DATABASE_ENDPOINT@ environment variable.
--}
-databaseEndpoint :: Functor f => (Text -> f Text) -> OPC -> f OPC
-databaseEndpoint f s =
-    (\x -> s { _database_endpoint = x })
-        <$> f (_database_endpoint s)
-
 {- | (Optional) The API endpoint to use, associated with your Oracle Public Cloud
 account. This is known as the @REST Endpoint@ within the Oracle portal. It
 can also be sourced from the @OPC_ENDPOINT@ environment variable.
@@ -64,8 +54,9 @@ endpoint f s =
     (\x -> s { _endpoint = x })
         <$> f (_endpoint s)
 
-{- | (Optional) The identity domain to use. It can also be sourced from the
-@OPC_IDENTITY_DOMAIN@ environment variable.
+{- | (Optional) The Identity Domain or Service Instance ID of the environment to
+use. It can also be sourced from the @OPC_IDENTITY_DOMAIN@ environment
+variable.
 -}
 identityDomain :: Functor f => (Text -> f Text) -> OPC -> f OPC
 identityDomain f s =

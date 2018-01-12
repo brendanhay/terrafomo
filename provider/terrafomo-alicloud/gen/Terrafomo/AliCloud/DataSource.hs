@@ -52,7 +52,7 @@ data ImagesDataSource = ImagesDataSource
       {- ^ (Optional) The name of file that can save images data source after running @terraform plan@ . -}
     , _owners :: !(Attr Text)
       {- ^ (Optional) Limit search to specific image owners. Valid items are @system@ , @self@ , @others@ , @marketplace@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImagesDataSource
     = '[ '("architecture", Text)
@@ -107,7 +107,7 @@ data InstanceTypesDataSource = InstanceTypesDataSource
       {- ^ (Optional) Limit search to specific memory size. -}
     , _output_file :: !(Attr Text)
       {- ^ (Optional) The name of file that can save instance types data source after running @terraform plan@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed InstanceTypesDataSource
     = '[ '("cpu_core_count", Text)
@@ -137,7 +137,7 @@ data KeyPairsDataSource = KeyPairsDataSource
       {- ^ - A regex string to apply to the key pair list returned by Alicloud. -}
     , _output_file :: !(Attr Text)
       {- ^ (Optional) The name of file that can save key pairs data source after running @terraform plan@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed KeyPairsDataSource
     = '[ '("finger_print", Text)
@@ -166,7 +166,7 @@ data RegionsDataSource = RegionsDataSource
       {- ^ (Optional) The full name of the region to select. -}
     , _output_file :: !(Attr Text)
       {- ^ (Optional) The name of file that can save regions data source after running @terraform plan@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed RegionsDataSource
     = '[ '("id", Text)
@@ -198,7 +198,7 @@ data VpcsDataSource = VpcsDataSource
       {- ^ (Optional) Limit search to specific status - valid value is "Pending" or "Available". -}
     , _vswitch_id :: !(Attr Text)
       {- ^ (Optional) Retrieving VPC according to the specified VSwitch. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VpcsDataSource
     = '[ '("cidr_block", Text)
@@ -245,7 +245,7 @@ data ZonesDataSource = ZonesDataSource
       {- ^ (Optional) Limit search to specific resource type. The following values are allowed @Instance@ , @Disk@ and @VSwitch@ . -}
     , _output_file :: !(Attr Text)
       {- ^ (Optional) The name of file that can save zones data source after running @terraform plan@ . -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ZonesDataSource
     = '[ '("available_disk_categories", Text)

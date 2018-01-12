@@ -59,7 +59,7 @@ data ImageDataSource = ImageDataSource
       {- ^ - (string) The image type. Must be one of: @zone-dataset@ , @lx-dataset@ , @zvol@ , @docker@ or @other@ . -}
     , _version :: !(Attr Text)
       {- ^ - (string) The version for the image -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "triton_image"
@@ -74,7 +74,7 @@ network ID based on the name of the network.
 data NetworkDataSource = NetworkDataSource
     { _name :: !(Attr Text)
       {- ^ - (string) The name of the network. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed NetworkDataSource
     = '[ '("id", Text)

@@ -1,0 +1,15 @@
+_name: CirconusProvider
+arguments:
+  _key:
+    required: true
+    help: (Required) The Circonus API Key.
+    type: Text
+  _api_url:
+    required: false
+    help: (Optional) The API URL to use to talk with. The default is @https://api.circonus.com/v2@
+      .
+    type: Text
+attributes: {}
+about: The Circonus provider gives the ability to manage a Circonus account. Use the
+  navigation to the left to read about the available resources.
+examples: []

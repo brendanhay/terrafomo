@@ -48,7 +48,7 @@ data DefaultReviewersResource = DefaultReviewersResource
       {- ^ (Required) The name of the repository. -}
     , _reviewers :: !(Attr Text)
       {- ^ (Required) A list of reviewers to use. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "bitbucket_default_reviewers"
@@ -71,7 +71,7 @@ data HookResource = HookResource
       {- ^ (Required) The name of the repository. -}
     , _url :: !(Attr Text)
       {- ^ (Required) Where to POST to. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "bitbucket_hook"
@@ -109,7 +109,7 @@ data RepositoryResource = RepositoryResource
       {- ^ (Optional) The slug of the repository. -}
     , _website :: !(Attr Text)
       {- ^ (Optional) URL of website associated with this repository. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "bitbucket_repository"

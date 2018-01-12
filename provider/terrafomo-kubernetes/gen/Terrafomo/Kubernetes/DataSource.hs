@@ -46,9 +46,7 @@ allows you to pull data about such service.
 data ServiceDataSource = ServiceDataSource
     { _metadata :: !(Attr Text)
       {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
-    , _spec :: !(Attr Text)
-      {- ^ (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "kubernetes_service"
@@ -65,11 +63,7 @@ http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kuber
 data StorageClassDataSource = StorageClassDataSource
     { _metadata :: !(Attr Text)
       {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
-    , _parameters :: !(Attr Text)
-      {- ^ (Optional) The parameters for the provisioner that should create volumes of this storage class. Read more about <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#parameters> . -}
-    , _storage_provisioner :: !(Attr Text)
-      {- ^ (Required) Indicates the type of the provisioner -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeDataSource
     "kubernetes_storage_class"

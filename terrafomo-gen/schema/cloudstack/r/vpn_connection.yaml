@@ -1,0 +1,18 @@
+_name: cloudstack_vpn_connection
+arguments:
+  _vpn_gateway_id:
+    required: true
+    help: (Required) The VPN Gateway ID to connect. Changing this forces a new resource
+      to be created.
+    type: Text
+  _customer_gateway_id:
+    required: true
+    help: (Required) The Customer Gateway ID to connect. Changing this forces a new
+      resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the VPN Connection.'
+    type: Text
+about: Creates a site to site VPN connection.
+examples: []

@@ -1,0 +1,147 @@
+_name: aws_rds_cluster_instance
+arguments:
+  _instance_class:
+    required: true
+    help: (Required) The instance class to use. For details on CPU and memory, see
+      <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html>
+      . Aurora currently supports the below instance classes.
+    type: Text
+  _auto_minor_version_upgrade:
+    required: false
+    help: (Optional) Indicates that minor engine upgrades will be applied automatically
+      to the DB instance during the maintenance window. Default @true@ .
+    type: Text
+  _db_subnet_group_name:
+    required: true
+    help: ! '(Required if @publicly_accessible = false@ , Optional otherwise) A DB
+      subnet group to associate with this DB instance. NOTE: This must match the @db_subnet_group_name@
+      of the attached </docs/providers/aws/r/rds_cluster.html> .'
+    type: Text
+  _preferred_backup_window:
+    required: false
+    help: ! '(Optional) The daily time range during which automated backups are created
+      if automated backups are enabled. Eg: "04:00-09:00"'
+    type: Text
+  _identifier_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique identifier beginning with
+      the specified prefix. Conflicts with @identifer@ .
+    type: Text
+  _engine:
+    required: false
+    help: (Optional) The name of the database engine to be used for the RDS instance.
+      Defaults to @aurora@ .
+    type: Text
+  _cluster_identifier:
+    required: true
+    help: (Required) The identifier of the </docs/providers/aws/r/rds_cluster.html>
+      in which to launch this instance.
+    type: Text
+  _identifier:
+    required: false
+    help: (Optional, Forces new resource) The indentifier for the RDS instance, if
+      omitted, Terraform will assign a random, unique identifier.
+    type: Text
+  _engine_version:
+    required: false
+    help: (Optional) The database engine version.
+    type: Text
+  _db_parameter_group_name:
+    required: false
+    help: (Optional) The name of the DB parameter group to associate with this instance.
+    type: Text
+  _publicly_accessible:
+    required: false
+    help: (Optional) Bool to control if instance is publicly accessible. Default @false@
+      . See the documentation on <https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html>
+      for more details on controlling this property.
+    type: Text
+  _monitoring_role_arn:
+    required: false
+    help: (Optional) The ARN for the IAM role that permits RDS to send enhanced monitoring
+      metrics to CloudWatch Logs. You can find more information on the <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html>
+      what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+    type: Text
+  _apply_immediately:
+    required: false
+    help: (Optional) Specifies whether any database modifications are applied immediately,
+      or during the next maintenance window. Default is @false@ .
+    type: Text
+  _monitoring_interval:
+    required: false
+    help: ! '(Optional) The interval, in seconds, between points when Enhanced Monitoring
+      metrics are collected for the DB instance. To disable collecting Enhanced Monitoring
+      metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+    type: Text
+  _preferred_maintenance_window:
+    required: false
+    help: ! '(Optional) The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+      Eg: "Mon:00:00-Mon:03:00".'
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the instance.
+    type: Text
+  _promotion_tier:
+    required: false
+    help: (Optional) Default 0. Failover Priority setting on instance level. The reader
+      who has lower tier has higher priority to get promoter to writer.
+    type: Text
+attributes:
+  status:
+    help: ! '- The RDS instance status'
+    type: Text
+  kms_key_id:
+    help: ! '- The ARN for the KMS encryption key if one is set to the cluster.'
+    type: Text
+  writer:
+    help: – Boolean indicating if this instance is writable. @False@ indicates this
+      instance is a read replica
+    type: Text
+  allocated_storage:
+    help: ! '- The amount of allocated storage'
+    type: Text
+  dbi_resource_id:
+    help: ! '- The region-unique, immutable identifier for the DB instance.'
+    type: Text
+  identifier:
+    help: ! '- The Instance identifier'
+    type: Text
+  engine_version:
+    help: ! '- The database engine version'
+    type: Text
+  engine:
+    help: ! '- The database engine'
+    type: Text
+  cluster_identifier:
+    help: ! '- The RDS Cluster Identifier'
+    type: Text
+  database_name:
+    help: ! '- The database name'
+    type: Text
+  id:
+    help: ! '- The Instance identifier'
+    type: Text
+  availability_zone:
+    help: ! '- The availability zone of the instance'
+    type: Text
+  storage_encrypted:
+    help: ! '- Specifies whether the DB cluster is encrypted.'
+    type: Text
+  endpoint:
+    help: ! '- The DNS address for this instance. May not be writable'
+    type: Text
+  port:
+    help: ! '- The database port'
+    type: Text
+about: Provides an RDS Cluster Resource Instance. A Cluster Instance Resource defines
+  attributes that are specific to a single instance in a </docs/providers/aws/r/rds_cluster.html>
+  , specifically running Amazon Aurora. Unlike other RDS resources that support replication,
+  with Amazon Aurora you do not designate a primary and subsequent replicas. Instead,
+  you simply add RDS Instances and Aurora manages the replication. You can use the
+  </docs/configuration/resources.html#count> meta-parameter to make multiple instances
+  and join them all to the same RDS Cluster, or you may specify different Cluster
+  Instance resources with various @instance_class@ sizes. For more information on
+  Amazon Aurora, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html>
+  in the Amazon RDS User Guide.
+examples: []

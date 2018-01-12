@@ -1,0 +1,32 @@
+_name: google_compute_target_http_proxy
+arguments:
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description of this resource. Changing this forces a new resource
+      to be created.
+    type: Text
+  _url_map:
+    required: true
+    help: (Required) The URL of a URL Map resource that defines the mapping from the
+      URL to the BackendService.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  proxy_id:
+    help: ! '- A unique ID assigned by GCE.'
+    type: Text
+about: Creates a target HTTP proxy resource in GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/target-proxies>
+  and <https://cloud.google.com/compute/docs/reference/latest/targetHttpProxies> .
+examples: []

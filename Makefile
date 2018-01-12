@@ -11,9 +11,9 @@ default: $(PROVIDERS)
 $(BIN):
 	@stack install terrafomo-gen 1>&2
 
-full-clean: $(addsuffix -full-clean,$(PROVIDERS))
+full-clean: $(addsuffix -full-clean,$(PROVIDERS)) clean
 
-clean: $(addsuffix -clean,$(PROVIDERS))
+clean:
 	rm -f $(BIN)
 	rm -rf provider/*/gen provider/*/package.yaml terrafomo/gen/*
 	@script/generate
@@ -32,9 +32,7 @@ $1: $(VENDOR_DIR)/$1 $(BIN)
  $$(addprefix --resource-file=,$$(wildcard $(VENDOR_DIR)/$1/website/docs/r/*.*)) \
  $$(addprefix --datasource-file=,$$(wildcard $(VENDOR_DIR)/$1/website/docs/d/*.*)) \
 
-$1-clean:
-
-$1-full-clean: $1-clean
+$1-full-clean:
 	rm -rf $(VENDOR_DIR)/$1
 
 $(VENDOR_DIR)/$1:

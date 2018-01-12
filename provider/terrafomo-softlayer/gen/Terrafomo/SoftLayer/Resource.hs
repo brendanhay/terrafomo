@@ -50,7 +50,7 @@ data SshKeyResource = SshKeyResource
       {- ^ (Optional) A small note about an SSH key to use at your discretion. -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public SSH key. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SshKeyResource
     = '[ '("fingerprint", Text)
@@ -111,7 +111,7 @@ data VirtualGuestResource = VirtualGuestResource
       {- ^ (Optional, array) SSH keys to install on the computing instance upon provisioning. -}
     , _user_data :: !(Attr Text)
       {- ^ (Optional, string) Arbitrary data to be made available to the computing instance. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VirtualGuestResource
     = '[ '("id", Text)

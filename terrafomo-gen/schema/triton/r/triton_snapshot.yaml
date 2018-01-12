@@ -1,0 +1,22 @@
+_name: triton_snapshot
+arguments:
+  _machine_id:
+    required: true
+    help: ! '- (string, Required) The ID of the machine of which to take a snapshot.'
+    type: Text
+  _name:
+    required: true
+    help: ! '- (string) The name for the snapshot.'
+    type: Text
+attributes:
+  state:
+    help: ! '- (string) - The current state of the snapshot.'
+    type: Text
+  id:
+    help: ! '- (string) - The identifier representing the snapshot in Triton.'
+    type: Text
+about: The @triton_snapshot@ resource represents a snapshot of a Triton machine. Snapshots
+  are not usable with other instances; they are a point-in-time snapshot of the current
+  instance. Snapshots can also only be taken of instances that are not of brand @kvm@
+  .
+examples: []

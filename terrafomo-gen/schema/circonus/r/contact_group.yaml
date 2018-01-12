@@ -1,0 +1,84 @@
+_name: circonus_contact_group
+arguments:
+  _http:
+    required: false
+    help: (Optional) Zero or more @http@ attributes may be present to dispatch <https://login.circonus.com/user/docs/Alerting/ContactGroups#WebhookNotifications>
+      by Circonus.  See below for details on supported attributes.
+    type: Text
+  _alert_option:
+    required: false
+    help: (Optional) There is one @alert_option@ per severity, where severity can
+      be any number between 1 (high) and 5 (low).  If configured, the alerting system
+      will remind or escalate alerts to further contact groups if an alert sent to
+      this contact group is not acknowledged or resolved.  See below for details.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the contact group.
+    type: Text
+  _email:
+    required: false
+    help: (Optional) Zero or more @email@ attributes may be present to dispatch email
+      to Circonus users by referencing their user ID, or by specifying an email address.  See
+      below for details on supported attributes.
+    type: Text
+  _long_summary:
+    required: false
+    help: (Optional) The brief summary used in long form alert messages.
+    type: Text
+  _short_summary:
+    required: false
+    help: (Optional) The brief summary used in short form alert messages.
+    type: Text
+  _long_subject:
+    required: false
+    help: (Optional) The subject used in long form alert messages.
+    type: Text
+  _long_message:
+    required: false
+    help: (Optional) The bulk of the message used in long form alert messages.
+    type: Text
+  _short_message:
+    required: false
+    help: (Optional) The subject used in short form alert messages.
+    type: Text
+  _irc:
+    required: false
+    help: (Optional) Zero or more @irc@ attributes may be present to dispatch IRC
+      notifications to users.  See below for details on supported attributes.
+    type: Text
+  _sms:
+    required: false
+    help: (Optional) Zero or more @sms@ attributes may be present to dispatch SMS
+      messages to Circonus users by referencing their user ID, or by specifying an
+      SMS Phone Number.  See below for details on supported attributes.
+    type: Text
+  _pager_duty:
+    required: false
+    help: (Optional) Zero or more @pager_duty@ attributes may be present to dispatch
+      to <https://login.circonus.com/user/docs/Alerting/ContactGroups#PagerDutyOptions>
+      . See below for details on supported attributes.
+    type: Text
+  _aggregation_window:
+    required: false
+    help: (Optional) The aggregation window for batching up alert notifications.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A list of tags attached to the Contact Group.
+    type: Text
+  _victorops:
+    required: false
+    help: (Optional) Zero or more @victorops@ attributes may be present to dispatch
+      to <https://login.circonus.com/user/docs/Alerting/ContactGroups#VictorOps> .
+      See below for details on supported attributes.
+    type: Text
+  _slack:
+    required: false
+    help: (Optional) Zero or more @slack@ attributes may be present to dispatch to
+      Slack teams.  See below for details on supported attributes.
+    type: Text
+attributes: {}
+about: The @circonus_contact_group@ resource creates and manages a <https://login.circonus.com/user/docs/Alerting/ContactGroups>
+  .
+examples: []

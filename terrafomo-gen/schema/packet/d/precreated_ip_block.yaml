@@ -1,0 +1,25 @@
+_name: packet_precreated_ip_block
+arguments:
+  _project_id:
+    required: true
+    help: (Required) ID of the project where the searched block should be.
+    type: Text
+  _address_family:
+    required: true
+    help: (Required) 4 or 6, depending on which block you are looking for.
+    type: Text
+  _facility:
+    required: true
+    help: (Required) Facility of the searched block.
+    type: Text
+  _public:
+    required: true
+    help: (Required) Whether to look for public or private block.
+    type: Text
+attributes:
+  cidr_notation:
+    help: ! '- CIDR notation of the looked up block.'
+    type: Text
+about: Use this data source to get CIDR expression for precreated IPv6 and IPv4 blocks
+  in Packet. You can then use the cidrsubnet TF builtin function to derive subnets.
+examples: []

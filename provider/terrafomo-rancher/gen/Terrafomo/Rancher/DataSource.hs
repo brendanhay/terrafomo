@@ -42,19 +42,11 @@ import qualified Terrafomo.Syntax.TH as TH
 Use this data source to retrieve information about a Rancher certificate.
 -}
 data CertificateDataSource = CertificateDataSource
-    { _cert :: !(Attr Text)
-      {- ^ (Required) The certificate content. -}
-    , _cert_chain :: !(Attr Text)
-      {- ^ (Optional) The certificate chain. -}
-    , _description :: !(Attr Text)
-      {- ^ (Optional) A certificate description. -}
-    , _environment_id :: !(Attr Text)
+    { _environment_id :: !(Attr Text)
       {- ^ (Required) The ID of the environment. -}
-    , _key :: !(Attr Text)
-      {- ^ (Required) The certificate key. -}
     , _name :: !(Attr Text)
       {- ^ (Required) The setting name. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed CertificateDataSource
     = '[ '("algorithm", Text)
@@ -71,8 +63,6 @@ type instance Computed CertificateDataSource
          {- - The certificate creation date. -}
       , '("issuer", Text)
          {- - The certificate issuer. -}
-      , '("key_size", Text)
-         {- - The certificate key size. -}
       , '("serial_number", Text)
          {- - The certificate serial number. -}
       , '("subject_alternative_names", Text)
@@ -91,17 +81,9 @@ $(TH.makeDataSource
 Use this data source to retrieve information about a Rancher environment.
 -}
 data EnvironmentDataSource = EnvironmentDataSource
-    { _description :: !(Attr Text)
-      {- ^ (Optional) An environment description. -}
-    , _member :: !(Attr Text)
-      {- ^ (Optional) Members to add to the environment. -}
-    , _name :: !(Attr Text)
+    { _name :: !(Attr Text)
       {- ^ (Required) The setting name. -}
-    , _orchestration :: !(Attr Text)
-      {- ^ (Optional) Must be one of cattle , swarm , mesos , windows or kubernetes . This is a helper for setting the project_template_ids for the included Rancher templates. This will conflict with project_template_id setting. Changing this forces a new resource to be created. -}
-    , _project_template_id :: !(Attr Text)
-      {- ^ (Optional) This can be any valid project template ID. If this is set, then orchestration can not be. Changing this forces a new resource to be created. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed EnvironmentDataSource
     = '[ '("description", Text)
@@ -128,7 +110,7 @@ Use this data source to retrieve information about a Rancher setting.
 data SettingDataSource = SettingDataSource
     { _name :: !(Attr Text)
       {- ^ (Required) The setting name. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed SettingDataSource
     = '[ '("value", Text)

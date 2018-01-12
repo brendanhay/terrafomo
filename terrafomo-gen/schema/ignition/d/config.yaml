@@ -1,0 +1,61 @@
+_name: ignition_config
+arguments:
+  _filesystems:
+    required: false
+    help: (Optional) The list of filesystems to be configured and/or used in the @ignition_file@
+      , @ignition_directory@ , and @ignition_link@ resources.
+    type: Text
+  _users:
+    required: false
+    help: (Optional) The list of accounts to be added.
+    type: Text
+  _directories:
+    required: false
+    help: (Optional) The list of directories to be created.
+    type: Text
+  _replace:
+    required: false
+    help: (Optional) A block with config that will replace the current.
+    type: Text
+  _disks:
+    required: false
+    help: (Optional) The list of disks to be configured and their options.
+    type: Text
+  _links:
+    required: false
+    help: (Optional) The list of links to be created.
+    type: Text
+  _files:
+    required: false
+    help: (Optional) The list of files to be written.
+    type: Text
+  _arrays:
+    required: false
+    help: (Optional) The list of RAID arrays to be configured.
+    type: Text
+  _networkd:
+    required: false
+    help: (Optional) The list of networkd units. Describes the desired state of the
+      networkd files.
+    type: Text
+  _groups:
+    required: false
+    help: (Optional) The list of groups to be added.
+    type: Text
+  _systemd:
+    required: false
+    help: (Optional) The list of systemd units. Describes the desired state of the
+      systemd units.
+    type: Text
+  _append:
+    required: false
+    help: (Optional) Any number of blocks with the configs to be appended to the current
+      config.
+    type: Text
+attributes:
+  rendered:
+    help: ! '- The final rendered template.'
+    type: Text
+about: Renders an ignition configuration as JSON. It  contains all the disks, partitions,
+  arrays, filesystems, files, users, groups and units.
+examples: []

@@ -1,0 +1,19 @@
+_name: alicloud_key_pair_attachment
+arguments:
+  _instance_ids:
+    required: true
+    help: (Required, Force new resource) The list of ECS instance's IDs.
+    type: Text
+  _key_name:
+    required: true
+    help: (Required, Force new resource) The name of key pair used to bind.
+    type: Text
+attributes:
+  key_name:
+    help: ! '- The name of the key pair.'
+    type: Text
+  instance_ids:
+    help: The list of ECS instance's IDs.
+    type: Text
+about: Provides a key pair attachment resource to bind key pair for several ECS instances.
+examples: []

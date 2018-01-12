@@ -49,7 +49,7 @@ data ContinuousQueryResource = ContinuousQueryResource
       {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
     , _query :: !(Attr Text)
       {- ^ (Required) The query for the continuous_query. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "influxdb_continuous_query"
@@ -63,7 +63,7 @@ The database resource allows a database to be created on an InfluxDB server.
 data DatabaseResource = DatabaseResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "influxdb_database"
@@ -83,7 +83,7 @@ data UserResource = UserResource
       {- ^ (Required) The name for the user. -}
     , _password :: !(Attr Text)
       {- ^ (Required) The password for the user. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed UserResource
     = '[ '("admin", Text)

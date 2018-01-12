@@ -1,0 +1,33 @@
+_name: pagerduty_escalation_policy
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the escalation policy.
+    type: Text
+  _rule:
+    required: true
+    help: (Required) An Escalation rule block. Escalation rules documented below.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A human-friendly description of the escalation policy. If not
+      set, a placeholder of "Managed by Terraform" will be set.
+    type: Text
+  _num_loops:
+    required: false
+    help: (Optional) The number of times the escalation policy will repeat after reaching
+      the end of its escalation.
+    type: Text
+  _teams:
+    required: false
+    help: (Optional) Teams associated with the policy. Account must have the @teams@
+      ability to use this parameter.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the escalation policy.'
+    type: Text
+about: An <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Escalation_Policies/get_escalation_policies>
+  determines what user or schedule will be notified first, second, and so on when
+  an incident is triggered. Escalation policies are used by one or more services.
+examples: []

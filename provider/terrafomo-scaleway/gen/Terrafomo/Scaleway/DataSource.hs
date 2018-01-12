@@ -49,7 +49,7 @@ data BootscriptDataSource = BootscriptDataSource
       {- ^ (Optional) Exact name of desired Bootscript -}
     , _name_filter :: !(Attr Text)
       {- ^ (Optional) Regexp to match Bootscript name by -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed BootscriptDataSource
     = '[ '("architecture", Text)
@@ -85,7 +85,7 @@ data ImageDataSource = ImageDataSource
       {- ^ (Optional) Exact name of desired Image -}
     , _name_filter :: !(Attr Text)
       {- ^ (Optional) Regexp to match Image name by -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImageDataSource
     = '[ '("architecture", Text)

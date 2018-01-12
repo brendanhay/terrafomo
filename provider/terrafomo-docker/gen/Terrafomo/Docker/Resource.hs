@@ -106,7 +106,7 @@ data ContainerResource = ContainerResource
       {- ^ (Optional, string) User used for run the first process. Format is @user@ or @user:group@ which user and group can be passed literraly or by name. -}
     , _volumes :: !(Attr Text)
       {- ^ (Optional, block) See <#volumes> below for details. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "docker_container"
@@ -131,7 +131,7 @@ data ImageResource = ImageResource
       {- ^ - Deprecated , use @pull_triggers@ instead. -}
     , _pull_triggers :: !(Attr Text)
       {- ^ (Optional, list of strings) List of values which cause an image pull when changed. This is used to store the image digest from the registry when using the @docker_registry_image@  </docs/providers/docker/d/registry_image.html> to trigger an image update. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed ImageResource
     = '[ '("latest", Text)
@@ -164,7 +164,7 @@ data NetworkResource = NetworkResource
       {- ^ (Required, string) The name of the Docker network. -}
     , _options :: !(Attr Text)
       {- ^ (Optional, map of strings) Network specific options to be used by the drivers. -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 $(TH.makeResource
     "docker_network"
@@ -184,7 +184,7 @@ data VolumeResource = VolumeResource
       {- ^ (Optional, map of strings) Options specific to the driver. -}
     , _name :: !(Attr Text)
       {- ^ (Optional, string) The name of the Docker volume (generated if not provided). -}
-    } deriving (Show, Eq, Generic)
+    } deriving (Show, Generic)
 
 type instance Computed VolumeResource
     = '[ '("mountpoint", Text)
