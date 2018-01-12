@@ -1,5 +1,16 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE DeriveGeneric          #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleContexts       #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TypeFamilies           #-}
+
 module Terraform.Google.DataSource.M00 where
 
 import Data.Text (Text)
@@ -13,6 +24,23 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @google_client_config@ Google datasource.
+--
+-- Use this data source to access the configuration of the Google Cloud provider.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.Google
+-- import Terraform.Google.DataSource
+-- @
+--
+-- @
+-- current <- datasource "current" $
+--     client_config_datasource
+--  
+-- output "project" $
+--     "${data.google_client_config.current.project}"
+-- @
 data Client_Config_DataSource = Client_Config_DataSource
     { project :: !(Attr Text)
       {- ^ - The ID of the project to apply any resources to. -}
@@ -30,6 +58,8 @@ $(TH.makeDataSource
     ''Client_Config_DataSource)
 
 -- | The @google_compute_zones@ Google datasource.
+--
+-- Provides access to available Google Compute zones in a region for a given project. See more about <https://cloud.google.com/compute/docs/regions-zones/regions-zones> in the upstream docs.
 data Compute_Zones_DataSource = Compute_Zones_DataSource
     { region :: !(Attr Text)
       {- ^ (Optional) - Region from which to list available zones. Defaults to region declared in the provider. -}
@@ -49,6 +79,8 @@ $(TH.makeDataSource
     ''Compute_Zones_DataSource)
 
 -- | The @google_dns_managed_zone@ Google datasource.
+--
+-- Provides access to a zone's attributes within Google Cloud DNS. For more information see <https://cloud.google.com/dns/zones/> and <https://cloud.google.com/dns/api/v1/managedZones> .
 data Dns_Managed_Zone_DataSource = Dns_Managed_Zone_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) A unique name for the resource. -}
@@ -72,6 +104,8 @@ $(TH.makeDataSource
     ''Dns_Managed_Zone_DataSource)
 
 -- | The @google_iam_policy@ Google datasource.
+--
+-- Generates an IAM policy document that may be referenced by and applied to other Google Cloud Platform resources, such as the @google_project@ resource.
 data Iam_Policy_DataSource = Iam_Policy_DataSource
     { binding :: !(Attr Text)
       {- ^ (Required) - A nested configuration block (described below) defining a binding to be included in the policy document. Multiple @binding@ arguments are supported. -}
@@ -89,6 +123,26 @@ $(TH.makeDataSource
     ''Iam_Policy_DataSource)
 
 -- | The @google_storage_object_signed_url@ Google datasource.
+--
+-- The Google Cloud storage signed URL data source generates a signed URL for a given storage object. Signed URLs provide a way to give time-limited read or write access to anyone in possession of the URL, regardless of whether they have a Google account.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.Google
+-- import Terraform.Google.DataSource
+-- @
+--
+-- @
+-- get_url <- datasource "get_url" $
+--     storage_object_signed_url_datasource
+--         & bucket .~ "fried_chicken"
+--         & path .~ "path/to/file"
+--         & content_md5 .~ "pRviqwS4c4OTJRTe03FD1w=="
+--         & content_type .~ "text/plain"
+--         & duration .~ "2d"
+--         & credentials .~ file("path/to/credentials.json")
+-- @
 data Storage_Object_Signed_Url_DataSource = Storage_Object_Signed_Url_DataSource
     { bucket :: !(Attr Text)
       {- ^ (Required) The name of the bucket to read the object from -}

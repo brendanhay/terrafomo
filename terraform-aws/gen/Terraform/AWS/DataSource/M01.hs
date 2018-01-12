@@ -1,5 +1,16 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE DeriveGeneric          #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleContexts       #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TypeFamilies           #-}
+
 module Terraform.AWS.DataSource.M01 where
 
 import Data.Text (Text)
@@ -13,6 +24,22 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_acm_certificate@ AWS datasource.
+--
+-- Use this data source to get the ARN of a certificate in AWS Certificate Manager (ACM). The process of requesting and verifying a certificate in ACM requires some manual steps, which means that Terraform cannot automate the creation of ACM certificates. But using this data source, you can reference them by domain without having to hard code the ARNs as input.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- example <- datasource "example" $
+--     acm_certificate_datasource
+--         & domain .~ "tf.example.com"
+--         & statuses .~ ["ISSUED"]
+-- @
 data Acm_Certificate_DataSource = Acm_Certificate_DataSource
     { domain :: !(Attr Text)
       {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
@@ -32,6 +59,8 @@ $(TH.makeDataSource
     ''Acm_Certificate_DataSource)
 
 -- | The @aws_ami@ AWS datasource.
+--
+-- Use this data source to get the ID of a registered AMI for use in other resources.
 data Ami_DataSource = Ami_DataSource
     { executable_users :: !(Attr Text)
       {- ^ (Optional) Limit search to users with launch permission on the image. Valid items are the numeric account ID or @self@ . -}
@@ -103,23 +132,12 @@ $(TH.makeDataSource
     ''Ami_DataSource)
 
 -- | The @aws_availability_zone@ AWS datasource.
+--
+-- @aws_availability_zone@ provides details about a specific availability zone (AZ) in the current region.
 data Availability_Zone_DataSource = Availability_Zone_DataSource
-    { name :: !(Attr Text)
-      {- ^ (Optional) The full name of the availability zone to select. -}
-    , state :: !(Attr Text)
-      {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ , @"impaired"@ or @"available"@ . -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Availability_Zone_DataSource
-    = '[ '("name", Attr Text)
-         {- - The name of the selected availability zone. -}
-      , '("name_suffix", Attr Text)
-         {- - The part of the AZ name that appears after the region name, uniquely identifying the AZ within its region. -}
-      , '("region", Attr Text)
-         {- - The region where the selected availability zone resides. This is always the region selected on the provider, since this data source searches only within that region. -}
-      , '("state", Attr Text)
-         {- - The current state of the AZ. -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_availability_zone"
@@ -128,6 +146,8 @@ $(TH.makeDataSource
     ''Availability_Zone_DataSource)
 
 -- | The @aws_availability_zones@ AWS datasource.
+--
+-- The Availability Zones data source allows access to the list of AWS Availability Zones which can be accessed by an AWS account within the region configured in the provider.
 data Availability_Zones_DataSource = Availability_Zones_DataSource
     { state :: !(Attr Text)
       {- ^ (Optional) Allows to filter list of Availability Zones based on their current state. Can be either @"available"@ , @"information"@ , @"impaired"@ or @"unavailable"@ . By default the list includes a complete set of Availability Zones to which the underlying AWS account has access, regardless of their state. -}
@@ -145,6 +165,23 @@ $(TH.makeDataSource
     ''Availability_Zones_DataSource)
 
 -- | The @aws_canonical_user_id@ AWS datasource.
+--
+-- The Canonical User ID data source allows access to the <http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html> for the effective account in which Terraform is working.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- current <- datasource "current" $
+--     canonical_user_id_datasource
+--  
+-- output "canonical_user_id" $
+--     "${data.aws_canonical_user_id.current.id}"
+-- @
 data Canonical_User_Id_DataSource = Canonical_User_Id_DataSource
     { display_name :: !(Attr Text)
       {- ^ - The human-friendly name linked to the canonical user ID. -}
@@ -162,6 +199,21 @@ $(TH.makeDataSource
     ''Canonical_User_Id_DataSource)
 
 -- | The @aws_dynamodb_table@ AWS datasource.
+--
+-- Provides information about a DynamoDB table.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- tablename <- datasource "tablename" $
+--     dynamodb_table_datasource
+--         & name .~ "tableName"
+-- @
 data Dynamodb_Table_DataSource = Dynamodb_Table_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the DynamoDB table. -}
@@ -177,6 +229,22 @@ $(TH.makeDataSource
     ''Dynamodb_Table_DataSource)
 
 -- | The @aws_ebs_snapshot@ AWS datasource.
+--
+-- Use this data source to get information about an EBS Snapshot for use when provisioning EBS Volumes
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- ebs_volume <- datasource "ebs_volume" $
+--     ebs_snapshot_datasource
+--         & most_recent .~ True
+--         & owners .~ ["self"]
+-- @
 data Ebs_Snapshot_DataSource = Ebs_Snapshot_DataSource
     { filter :: !(Attr Text)
       {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
@@ -224,6 +292,21 @@ $(TH.makeDataSource
     ''Ebs_Snapshot_DataSource)
 
 -- | The @aws_ebs_snapshot_ids@ AWS datasource.
+--
+-- Use this data source to get a list of EBS Snapshot IDs matching the specified criteria.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- ebs_volumes <- datasource "ebs_volumes" $
+--     ebs_snapshot_ids_datasource
+--         & owners .~ ["self"]
+-- @
 data Ebs_Snapshot_Ids_DataSource = Ebs_Snapshot_Ids_DataSource
     { filter :: !(Attr Text)
       {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
@@ -243,6 +326,21 @@ $(TH.makeDataSource
     ''Ebs_Snapshot_Ids_DataSource)
 
 -- | The @aws_ecs_cluster@ AWS datasource.
+--
+-- The ECS Cluster data source allows access to details of a specific cluster within an AWS ECS service.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- ecs-mongo <- datasource "ecs-mongo" $
+--     ecs_cluster_datasource
+--         & cluster_name .~ "ecs-mongo-production"
+-- @
 data Ecs_Cluster_DataSource = Ecs_Cluster_DataSource
     { cluster_name :: !(Attr Text)
       {- ^ (Required) The name of the ECS Cluster -}
@@ -268,6 +366,22 @@ $(TH.makeDataSource
     ''Ecs_Cluster_DataSource)
 
 -- | The @aws_ecs_container_definition@ AWS datasource.
+--
+-- The ECS container definition data source allows access to details of a specific container within an AWS ECS service.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- ecs-mongo <- datasource "ecs-mongo" $
+--     ecs_container_definition_datasource
+--         & task_definition .~ compute mongo @"id"
+--         & container_name .~ "mongodb"
+-- @
 data Ecs_Container_Definition_DataSource = Ecs_Container_Definition_DataSource
     { container_name :: !(Attr Text)
       {- ^ (Required) The name of the container definition -}
@@ -301,6 +415,22 @@ $(TH.makeDataSource
     ''Ecs_Container_Definition_DataSource)
 
 -- | The @aws_efs_file_system@ AWS datasource.
+--
+-- Provides information about an Elastic File System (EFS).
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+--  
+-- by_id <- datasource "by_id" $
+--     efs_file_system_datasource
+--         & file_system_id .~ var.file_system_id
+-- @
 data Efs_File_System_DataSource = Efs_File_System_DataSource
     { creation_token :: !(Attr Text)
       {- ^ (Optional) Restricts the list to the file system with this creation token. -}
@@ -328,12 +458,9 @@ $(TH.makeDataSource
     ''Efs_File_System_DataSource)
 
 -- | The @aws_eip@ AWS datasource.
+--
+-- @aws_eip@ provides details about a specific Elastic IP.
 data Eip_DataSource = Eip_DataSource
-    { id :: !(Attr Text)
-      {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
-    , public_ip :: !(Attr Text)
-      {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Eip_DataSource
     = '[]
@@ -345,6 +472,8 @@ $(TH.makeDataSource
     ''Eip_DataSource)
 
 -- | The @aws_elastic_beanstalk_solution_stack@ AWS datasource.
+--
+-- Use this data source to get the name of a elastic beanstalk solution stack.
 data Elastic_Beanstalk_Solution_Stack_DataSource = Elastic_Beanstalk_Solution_Stack_DataSource
     { most_recent :: !(Attr Text)
       {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
@@ -364,6 +493,21 @@ $(TH.makeDataSource
     ''Elastic_Beanstalk_Solution_Stack_DataSource)
 
 -- | The @aws_iam_group@ AWS datasource.
+--
+-- This data source can be used to fetch information about a specific IAM group. By using this data source, you can reference IAM group properties without having to hard code ARNs as input.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- example <- datasource "example" $
+--     iam_group_datasource
+--         & group_name .~ "an_example_group_name"
+-- @
 data Iam_Group_DataSource = Iam_Group_DataSource
     { group_name :: !(Attr Text)
       {- ^ (Required) The friendly IAM group name to match. -}
@@ -385,6 +529,21 @@ $(TH.makeDataSource
     ''Iam_Group_DataSource)
 
 -- | The @aws_iam_instance_profile@ AWS datasource.
+--
+-- This data source can be used to fetch information about a specific IAM instance profile. By using this data source, you can reference IAM instance profile properties without having to hard code ARNs as input.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- example <- datasource "example" $
+--     iam_instance_profile_datasource
+--         & name .~ "an_example_instance_profile_name"
+-- @
 data Iam_Instance_Profile_DataSource = Iam_Instance_Profile_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The friendly IAM instance profile name to match. -}
@@ -408,6 +567,8 @@ $(TH.makeDataSource
     ''Iam_Instance_Profile_DataSource)
 
 -- | The @aws_iam_policy_document@ AWS datasource.
+--
+-- Generates an IAM policy document in JSON format.
 data Iam_Policy_Document_DataSource = Iam_Policy_Document_DataSource
     { policy_id :: !(Attr Text)
       {- ^ (Optional) - An ID for the policy document. -}
@@ -416,9 +577,7 @@ data Iam_Policy_Document_DataSource = Iam_Policy_Document_DataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Iam_Policy_Document_DataSource
-    = '[ '("json", Attr Text)
-         {- - The above arguments serialized as a standard JSON policy document. -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_iam_policy_document"
@@ -427,6 +586,21 @@ $(TH.makeDataSource
     ''Iam_Policy_Document_DataSource)
 
 -- | The @aws_iam_role@ AWS datasource.
+--
+-- This data source can be used to fetch information about a specific IAM role. By using this data source, you can reference IAM role properties without having to hard code ARNs as input.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- example <- datasource "example" $
+--     iam_role_datasource
+--         & name .~ "an_example_role_name"
+-- @
 data Iam_Role_DataSource = Iam_Role_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The friendly IAM role name to match. -}
@@ -452,6 +626,21 @@ $(TH.makeDataSource
     ''Iam_Role_DataSource)
 
 -- | The @aws_instance@ AWS datasource.
+--
+-- Use this data source to get the ID of an Amazon EC2 Instance for use in other resources.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- foo <- datasource "foo" $
+--     instance_datasource
+--         & instance_id .~ "i-instanceid"
+-- @
 data Instance_DataSource = Instance_DataSource
     { filter :: !(Attr Text)
       {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
@@ -519,6 +708,27 @@ $(TH.makeDataSource
     ''Instance_DataSource)
 
 -- | The @aws_ip_ranges@ AWS datasource.
+--
+-- Use this data source to get the <http://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html> of various AWS products and services.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- european_ec2 <- datasource "european_ec2" $
+--     ip_ranges_datasource
+--         & regions .~ ["eu-west-1"
+--                      ,"eu-central-1"]
+--         & services .~ ["ec2"]
+--  
+-- from_europe <- resource "from_europe" $
+--     security_group_resource
+--         & name .~ "from_europe"
+-- @
 data Ip_Ranges_DataSource = Ip_Ranges_DataSource
     { regions :: !(Attr Text)
       {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
@@ -542,10 +752,9 @@ $(TH.makeDataSource
     ''Ip_Ranges_DataSource)
 
 -- | The @aws_kms_secret@ AWS datasource.
+--
+-- The KMS secret data source allows you to use data encrypted with the AWS KMS service within your resource definitions.
 data Kms_Secret_DataSource = Kms_Secret_DataSource
-    { secret :: !(Attr Text)
-      {- ^ (Required) One or more encrypted payload definitions from the KMS service.  See the Secret Definitions below. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Kms_Secret_DataSource
     = '[]
@@ -557,6 +766,22 @@ $(TH.makeDataSource
     ''Kms_Secret_DataSource)
 
 -- | The @aws_lb_listener@ AWS datasource.
+--
+-- ~>  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality is identical.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+--  
+-- listener <- datasource "listener" $
+--     lb_listener_datasource
+--         & arn .~ var.listener_arn
+-- @
 data Lb_Listener_DataSource = Lb_Listener_DataSource
     { arn :: !(Attr Text)
       {- ^ (Required) The ARN of the listener. -}
@@ -572,6 +797,22 @@ $(TH.makeDataSource
     ''Lb_Listener_DataSource)
 
 -- | The @aws_nat_gateway@ AWS datasource.
+--
+-- Provides details about a specific Nat Gateway.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+--  
+-- default <- datasource "default" $
+--     nat_gateway_datasource
+--         & subnet_id .~ compute public @"id"
+-- @
 data Nat_Gateway_DataSource = Nat_Gateway_DataSource
     { filter :: !(Attr Text)
       {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
@@ -607,6 +848,23 @@ $(TH.makeDataSource
     ''Nat_Gateway_DataSource)
 
 -- | The @aws_partition@ AWS datasource.
+--
+-- Use this data source to lookup current AWS partition in which Terraform is working
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- current <- datasource "current" $
+--     partition_datasource
+--  
+-- s3_policy <- datasource "s3_policy" $
+--     iam_policy_document_datasource
+-- @
 data Partition_DataSource = Partition_DataSource
 
 type instance Computed Partition_DataSource
@@ -619,6 +877,41 @@ $(TH.makeDataSource
     ''Partition_DataSource)
 
 -- | The @aws_prefix_list@ AWS datasource.
+--
+-- @aws_prefix_list@ provides details about a specific prefix list (PL) in the current region.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- private_s3 <- resource "private_s3" $
+--     vpc_endpoint_resource
+--         & vpc_id .~ compute foo @"id"
+--         & service_name .~ "com.amazonaws.us-west-2.s3"
+--  
+-- private_s3 <- datasource "private_s3" $
+--     prefix_list_datasource
+--         & prefix_list_id .~ compute private_s3 @"prefix_list_id"
+--  
+-- bar <- resource "bar" $
+--     network_acl_resource
+--         & vpc_id .~ compute foo @"id"
+--  
+-- private_s3 <- resource "private_s3" $
+--     network_acl_rule_resource
+--         & network_acl_id .~ compute bar @"id"
+--         & rule_number .~ 200
+--         & egress .~ False
+--         & protocol .~ "tcp"
+--         & rule_action .~ "allow"
+--         & cidr_block .~ data.aws_prefix_list.private_s3.cidr_blocks[0]
+--         & from_port .~ 443
+--         & to_port .~ 443
+-- @
 data Prefix_List_DataSource = Prefix_List_DataSource
     { name :: !(Attr Text)
       {- ^ (Optional) The name of the prefix list to select. -}
@@ -642,23 +935,12 @@ $(TH.makeDataSource
     ''Prefix_List_DataSource)
 
 -- | The @aws_region@ AWS datasource.
+--
+-- @aws_region@ provides details about a specific AWS region.
 data Region_DataSource = Region_DataSource
-    { current :: !(Attr Text)
-      {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
-    , endpoint :: !(Attr Text)
-      {- ^ (Optional) The endpoint of the region to select. -}
-    , name :: !(Attr Text)
-      {- ^ (Optional) The full name of the region to select. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Region_DataSource
-    = '[ '("current", Attr Text)
-         {- - @true@ if the selected region is the one configured on the provider, or @false@ otherwise. -}
-      , '("endpoint", Attr Text)
-         {- - The endpoint for the selected region. -}
-      , '("name", Attr Text)
-         {- - The name of the selected region. -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_region"
@@ -667,27 +949,12 @@ $(TH.makeDataSource
     ''Region_DataSource)
 
 -- | The @aws_route53_zone@ AWS datasource.
+--
+-- @aws_route53_zone@ provides details about a specific Route 53 Hosted Zone.
 data Route53_Zone_DataSource = Route53_Zone_DataSource
-    { name :: !(Attr Text)
-      {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
-    , private_zone :: !(Attr Text)
-      {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
-    , zone_id :: !(Attr Text)
-      {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Route53_Zone_DataSource
-    = '[ '("caller_reference", Attr Text)
-         {- - Caller Reference of the Hosted Zone. -}
-      , '("comment", Attr Text)
-         {- - The comment field of the Hosted Zone. -}
-      , '("resource_record_set_count", Attr Text)
-         {- - the number of Record Set in the Hosted Zone -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_route53_zone"
@@ -696,37 +963,12 @@ $(TH.makeDataSource
     ''Route53_Zone_DataSource)
 
 -- | The @aws_route_table@ AWS datasource.
+--
+-- @aws_route_table@ provides details about a specific Route Table.
 data Route_Table_DataSource = Route_Table_DataSource
-    { filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , route_table_id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , subnet_id :: !(Attr Text)
-      {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Route_Table_DataSource
-    = '[ '("cidr_block", Attr Text)
-         {- - The CIDR block of the route. -}
-      , '("egress_only_gateway_id", Attr Text)
-         {- - The ID of the Egress Only Internet Gateway. -}
-      , '("gateway_id", Attr Text)
-         {- - The Internet Gateway ID. -}
-      , '("instance_id", Attr Text)
-         {- - The EC2 instance ID. -}
-      , '("ipv6_cidr_block", Attr Text)
-         {- - The IPv6 CIDR block of the route. -}
-      , '("nat_gateway_id", Attr Text)
-         {- - The NAT Gateway ID. -}
-      , '("network_interface_id", Attr Text)
-         {- - The ID of the elastic network interface (eni) to use. -}
-      , '("vpc_peering_connection_id", Attr Text)
-         {- - The VPC Peering ID. -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_route_table"
@@ -735,6 +977,40 @@ $(TH.makeDataSource
     ''Route_Table_DataSource)
 
 -- | The @aws_s3_bucket@ AWS datasource.
+--
+-- Provides details about a specific S3 bucket.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- selected <- datasource "selected" $
+--     s3_bucket_datasource
+--         & bucket .~ "bucket.test.com"
+--  
+-- test_zone <- datasource "test_zone" $
+--     route53_zone_datasource
+--         & name .~ "test.com."
+--  
+-- example <- resource "example" $
+--     route53_record_resource
+--         & zone_id .~ data.aws_route53_zone.test_zone.id
+--         & name .~ "bucket"
+--         & type .~ "A"
+-- @
+--
+-- @
+-- selected <- datasource "selected" $
+--     s3_bucket_datasource
+--         & bucket .~ "a-test-bucket"
+--  
+-- test <- resource "test" $
+--     cloudfront_distribution_resource
+-- @
 data S3_Bucket_DataSource = S3_Bucket_DataSource
     { bucket :: !(Attr Text)
       {- ^ (Required) The name of the bucket -}
@@ -764,25 +1040,12 @@ $(TH.makeDataSource
     ''S3_Bucket_DataSource)
 
 -- | The @aws_security_group@ AWS datasource.
+--
+-- @aws_security_group@ provides details about a specific Security Group.
 data Security_Group_DataSource = Security_Group_DataSource
-    { filter :: !(Attr Text)
-      {- ^ (Optional) Custom filter block as described below. -}
-    , id :: !(Attr Text)
-      {- ^ (Optional) The id of the specific security group to retrieve. -}
-    , name :: !(Attr Text)
-      {- ^ (Optional) The name that the desired security group must have. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Security_Group_DataSource
-    = '[ '("arn", Attr Text)
-         {- - The computed ARN of the security group. -}
-      , '("description", Attr Text)
-         {- - The description of the security group. -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_security_group"
@@ -791,6 +1054,21 @@ $(TH.makeDataSource
     ''Security_Group_DataSource)
 
 -- | The @aws_sns_topic@ AWS datasource.
+--
+-- Use this data source to get the ARN of a topic in AWS Simple Notification Service (SNS). By using this data source, you can reference SNS topics without having to hard code the ARNs as input.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.DataSource
+-- @
+--
+-- @
+-- example <- datasource "example" $
+--     sns_topic_datasource
+--         & name .~ "an_example_topic"
+-- @
 data Sns_Topic_DataSource = Sns_Topic_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The friendly name of the topic to match. -}
@@ -808,10 +1086,9 @@ $(TH.makeDataSource
     ''Sns_Topic_DataSource)
 
 -- | The @aws_ssm_parameter@ AWS datasource.
+--
+-- Provides an SSM Parameter data source.
 data Ssm_Parameter_DataSource = Ssm_Parameter_DataSource
-    { name :: !(Attr Text)
-      {- ^ (Required) The name of the parameter. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Ssm_Parameter_DataSource
     = '[]
@@ -823,17 +1100,12 @@ $(TH.makeDataSource
     ''Ssm_Parameter_DataSource)
 
 -- | The @aws_subnet_ids@ AWS datasource.
+--
+-- @aws_subnet_ids@ provides a list of ids for a vpc_id
 data Subnet_Ids_DataSource = Subnet_Ids_DataSource
-    { tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Required) The VPC ID that you want to filter from. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Subnet_Ids_DataSource
-    = '[ '("ids", Attr Text)
-         {- - A list of all the subnet ids found. This data source will fail if none are found. -}
-       ]
+    = '[]
 
 $(TH.makeDataSource
     "aws_subnet_ids"

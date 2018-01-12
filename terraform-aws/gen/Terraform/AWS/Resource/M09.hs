@@ -24,6 +24,21 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_api_gateway_client_certificate@ AWS resource.
+--
+-- Provides an API Gateway Client Certificate.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- demo <- resource "demo" $
+--     api_gateway_client_certificate_resource
+--         & description .~ "My client certificate"
+-- @
 data Api_Gateway_Client_Certificate_Resource = Api_Gateway_Client_Certificate_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the client certificate. -}
@@ -47,6 +62,35 @@ $(TH.makeResource
     ''Api_Gateway_Client_Certificate_Resource)
 
 -- | The @aws_api_gateway_method@ AWS resource.
+--
+-- Provides a HTTP Method for an API Gateway Resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- mydemoapi <- resource "mydemoapi" $
+--     api_gateway_rest_api_resource
+--         & name .~ "MyDemoAPI"
+--         & description .~ "This is my API for demonstration purposes"
+--  
+-- mydemoresource <- resource "mydemoresource" $
+--     api_gateway_resource_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & parent_id .~ compute MyDemoAPI @"root_resource_id"
+--         & path_part .~ "mydemoresource"
+--  
+-- mydemomethod <- resource "mydemomethod" $
+--     api_gateway_method_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & resource_id .~ compute MyDemoResource @"id"
+--         & http_method .~ "GET"
+--         & authorization .~ "NONE"
+-- @
 data Api_Gateway_Method_Resource = Api_Gateway_Method_Resource
     { api_key_required :: !(Attr Text)
       {- ^ (Optional) Specify if the method requires an API key -}
@@ -78,6 +122,49 @@ $(TH.makeResource
     ''Api_Gateway_Method_Resource)
 
 -- | The @aws_api_gateway_method_response@ AWS resource.
+--
+-- Provides an HTTP Method Response for an API Gateway Resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- mydemoapi <- resource "mydemoapi" $
+--     api_gateway_rest_api_resource
+--         & name .~ "MyDemoAPI"
+--         & description .~ "This is my API for demonstration purposes"
+--  
+-- mydemoresource <- resource "mydemoresource" $
+--     api_gateway_resource_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & parent_id .~ compute MyDemoAPI @"root_resource_id"
+--         & path_part .~ "mydemoresource"
+--  
+-- mydemomethod <- resource "mydemomethod" $
+--     api_gateway_method_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & resource_id .~ compute MyDemoResource @"id"
+--         & http_method .~ "GET"
+--         & authorization .~ "NONE"
+--  
+-- mydemointegration <- resource "mydemointegration" $
+--     api_gateway_integration_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & resource_id .~ compute MyDemoResource @"id"
+--         & http_method .~ compute MyDemoMethod @"http_method"
+--         & type .~ "MOCK"
+--  
+-- 200 <- resource "200" $
+--     api_gateway_method_response_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & resource_id .~ compute MyDemoResource @"id"
+--         & http_method .~ compute MyDemoMethod @"http_method"
+--         & status_code .~ "200"
+-- @
 data Api_Gateway_Method_Response_Resource = Api_Gateway_Method_Response_Resource
     { http_method :: !(Attr Text)
       {- ^ (Required) The HTTP Method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@ , @OPTION@ , @ANY@ ) -}
@@ -105,6 +192,8 @@ $(TH.makeResource
     ''Api_Gateway_Method_Response_Resource)
 
 -- | The @aws_api_gateway_model@ AWS resource.
+--
+-- Provides a Model for a API Gateway.
 data Api_Gateway_Model_Resource = Api_Gateway_Model_Resource
     { content_type :: !(Attr Text)
       {- ^ (Required) The content type of the model -}
@@ -130,6 +219,8 @@ $(TH.makeResource
     ''Api_Gateway_Model_Resource)
 
 -- | The @aws_cloudwatch_log_destination_policy@ AWS resource.
+--
+-- Provides a CloudWatch Logs destination policy resource.
 data Cloudwatch_Log_Destination_Policy_Resource = Cloudwatch_Log_Destination_Policy_Resource
     { access_policy :: !(Attr Text)
       {- ^ (Required) The policy document. This is a JSON formatted string. -}
@@ -147,6 +238,8 @@ $(TH.makeResource
     ''Cloudwatch_Log_Destination_Policy_Resource)
 
 -- | The @aws_config_config_rule@ AWS resource.
+--
+-- Provides an AWS Config Rule.
 data Config_Config_Rule_Resource = Config_Config_Rule_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) Description of the rule -}
@@ -163,11 +256,7 @@ data Config_Config_Rule_Resource = Config_Config_Rule_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Config_Config_Rule_Resource
-    = '[ '("arn", Attr Text)
-         {- - The ARN of the config rule -}
-      , '("rule_id", Attr Text)
-         {- - The ID of the config rule -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_config_config_rule"
@@ -176,6 +265,22 @@ $(TH.makeResource
     ''Config_Config_Rule_Resource)
 
 -- | The @aws_db_parameter_group@ AWS resource.
+--
+-- Provides an RDS DB parameter group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     db_parameter_group_resource
+--         & name .~ "rds-pg"
+--         & family .~ "mysql5.6"
+-- @
 data Db_Parameter_Group_Resource = Db_Parameter_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the DB parameter group. Defaults to "Managed by Terraform". -}
@@ -205,6 +310,21 @@ $(TH.makeResource
     ''Db_Parameter_Group_Resource)
 
 -- | The @aws_db_security_group@ AWS resource.
+--
+-- Provides an RDS security group resource. This is only for DB instances in the EC2-Classic Platform. For instances inside a VPC, use the </docs/providers/aws/r/db_instance.html#vpc_security_group_ids> attribute instead.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     db_security_group_resource
+--         & name .~ "rds_sg"
+-- @
 data Db_Security_Group_Resource = Db_Security_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the DB security group. Defaults to "Managed by Terraform". -}
@@ -230,19 +350,12 @@ $(TH.makeResource
     ''Db_Security_Group_Resource)
 
 -- | The @aws_default_vpc_dhcp_options@ AWS resource.
+--
+-- Provides a resource to manage the <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html#AmazonDNS> in the current region.
 data Default_Vpc_Dhcp_Options_Resource = Default_Vpc_Dhcp_Options_Resource
-    { netbios_name_servers :: !(Attr Text)
-      {- ^ (Optional) List of NETBIOS name servers. -}
-    , netbios_node_type :: !(Attr Text)
-      {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Default_Vpc_Dhcp_Options_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the DHCP Options Set. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_default_vpc_dhcp_options"
@@ -251,45 +364,12 @@ $(TH.makeResource
     ''Default_Vpc_Dhcp_Options_Resource)
 
 -- | The @aws_default_vpc@ AWS resource.
+--
+-- Provides a resource to manage the <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html> in the current region.
 data Default_Vpc_Resource = Default_Vpc_Resource
-    { enable_classiclink :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html> for more information. Defaults false. -}
-    , enable_dns_hostnames :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
-    , enable_dns_support :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Default_Vpc_Resource
-    = '[ '("assign_generated_ipv6_cidr_block", Attr Text)
-         {- - Whether or not an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC was assigned -}
-      , '("cidr_block", Attr Text)
-         {- - The CIDR block of the VPC -}
-      , '("default_network_acl_id", Attr Text)
-         {- - The ID of the network ACL created by default on VPC creation -}
-      , '("default_route_table_id", Attr Text)
-         {- - The ID of the route table created by default on VPC creation -}
-      , '("default_security_group_id", Attr Text)
-         {- - The ID of the security group created by default on VPC creation -}
-      , '("enable_classiclink", Attr Text)
-         {- - Whether or not the VPC has Classiclink enabled -}
-      , '("enable_dns_hostnames", Attr Text)
-         {- - Whether or not the VPC has DNS hostname support -}
-      , '("enable_dns_support", Attr Text)
-         {- - Whether or not the VPC has DNS support -}
-      , '("id", Attr Text)
-         {- - The ID of the VPC -}
-      , '("instance_tenancy", Attr Text)
-         {- - Tenancy of instances spin up within VPC. -}
-      , '("ipv6_association_id", Attr Text)
-         {- - The association ID for the IPv6 CIDR block of the VPC -}
-      , '("ipv6_cidr_block", Attr Text)
-         {- - The IPv6 CIDR block of the VPC -}
-      , '("main_route_table_id", Attr Text)
-         {- - The ID of the main route table associated with this VPC. Note that you can change a VPC's main route table by using an </docs/providers/aws/r/main_route_table_assoc.html> -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_default_vpc"
@@ -298,6 +378,22 @@ $(TH.makeResource
     ''Default_Vpc_Resource)
 
 -- | The @aws_ebs_volume@ AWS resource.
+--
+-- Manages a single EBS volume.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     ebs_volume_resource
+--         & availability_zone .~ "us-west-2a"
+--         & size .~ 40
+-- @
 data Ebs_Volume_Resource = Ebs_Volume_Resource
     { availability_zone :: !(Attr Text)
       {- ^ (Required) The AZ where the EBS volume will exist. -}
@@ -329,6 +425,8 @@ $(TH.makeResource
     ''Ebs_Volume_Resource)
 
 -- | The @aws_elb_load_balancer_backend_server_policy@ AWS resource.
+--
+-- Attaches a load balancer policy to an ELB backend server.
 data Elb_Load_Balancer_Backend_Server_Policy_Resource = Elb_Load_Balancer_Backend_Server_Policy_Resource
     { instance_port :: !(Attr Text)
       {- ^ (Required) The instance port to apply the policy to. -}
@@ -354,6 +452,8 @@ $(TH.makeResource
     ''Elb_Load_Balancer_Backend_Server_Policy_Resource)
 
 -- | The @aws_elb_load_balancer_policy@ AWS resource.
+--
+-- Provides a load balancer policy, which can be attached to an ELB listener or backend server.
 data Elb_Load_Balancer_Policy_Resource = Elb_Load_Balancer_Policy_Resource
     { load_balancer_name :: !(Attr Text)
       {- ^ (Required) The load balancer on which the policy is defined. -}
@@ -383,6 +483,8 @@ $(TH.makeResource
     ''Elb_Load_Balancer_Policy_Resource)
 
 -- | The @aws_iam_policy_attachment@ AWS resource.
+--
+-- Attaches a Managed IAM Policy to user(s), role(s), and/or group(s)
 data Iam_Policy_Attachment_Resource = Iam_Policy_Attachment_Resource
     { groups :: !(Attr Text)
       {- ^ (Optional) - The group(s) the policy should be applied to -}
@@ -410,6 +512,22 @@ $(TH.makeResource
     ''Iam_Policy_Attachment_Resource)
 
 -- | The @aws_iam_saml_provider@ AWS resource.
+--
+-- Provides an IAM SAML provider.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     iam_saml_provider_resource
+--         & name .~ "myprovider"
+--         & saml_metadata_document .~ file("saml-metadata.xml")
+-- @
 data Iam_Saml_Provider_Resource = Iam_Saml_Provider_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the provider to create. -}
@@ -431,6 +549,8 @@ $(TH.makeResource
     ''Iam_Saml_Provider_Resource)
 
 -- | The @aws_instance@ AWS resource.
+--
+-- Provides an EC2 instance resource. This allows instances to be created, updated, and deleted. Instances also support </docs/provisioners/index.html> .
 data Instance_Resource = Instance_Resource
     { ami :: !(Attr Text)
       {- ^ (Required) The AMI to use for the instance. -}
@@ -489,35 +609,7 @@ data Instance_Resource = Instance_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Instance_Resource
-    = '[ '("availability_zone", Attr Text)
-         {- - The availability zone of the instance. -}
-      , '("id", Attr Text)
-         {- - The instance ID. -}
-      , '("ipv6_addresses", Attr Text)
-         {- - A list of assigned IPv6 addresses, if any -}
-      , '("key_name", Attr Text)
-         {- - The key name of the instance -}
-      , '("network_interface_id", Attr Text)
-         {- - The ID of the network interface that was created with the instance. -}
-      , '("placement_group", Attr Text)
-         {- - The placement group of the instance. -}
-      , '("primary_network_interface_id", Attr Text)
-         {- - The ID of the instance's primary network interface. -}
-      , '("private_dns", Attr Text)
-         {- - The private DNS name assigned to the instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC -}
-      , '("private_ip", Attr Text)
-         {- - The private IP address assigned to the instance -}
-      , '("public_dns", Attr Text)
-         {- - The public DNS name assigned to the instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC -}
-      , '("public_ip", Attr Text)
-         {- - The public IP address assigned to the instance, if applicable. : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
-      , '("security_groups", Attr Text)
-         {- - The associated security groups. -}
-      , '("subnet_id", Attr Text)
-         {- - The VPC subnet ID. -}
-      , '("vpc_security_group_ids", Attr Text)
-         {- - The associated security groups in non-default VPC -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_instance"
@@ -526,6 +618,8 @@ $(TH.makeResource
     ''Instance_Resource)
 
 -- | The @aws_lambda_alias@ AWS resource.
+--
+-- Creates a Lambda function alias. Creates an alias that points to the specified Lambda function version.
 data Lambda_Alias_Resource = Lambda_Alias_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) Description of the alias. -}
@@ -549,6 +643,8 @@ $(TH.makeResource
     ''Lambda_Alias_Resource)
 
 -- | The @aws_lb@ AWS resource.
+--
+-- Provides a Load Balancer resource.
 data Lb_Resource = Lb_Resource
     { access_logs :: !(Attr Text)
       {- ^ (Optional) An Access Logs block. Access Logs documented below. -}
@@ -598,12 +694,9 @@ $(TH.makeResource
     ''Lb_Resource)
 
 -- | The @aws_network_interface_sg_attachment@ AWS resource.
+--
+-- This resource attaches a security group to an Elastic Network Interface (ENI). It can be used to attach a security group to any existing ENI, be it a secondary ENI or one attached as the primary interface on an instance.
 data Network_Interface_Sg_Attachment_Resource = Network_Interface_Sg_Attachment_Resource
-    { network_interface_id :: !(Attr Text)
-      {- ^ (Required) The ID of the network interface to attach to. -}
-    , security_group_id :: !(Attr Text)
-      {- ^ (Required) The ID of the security group. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Network_Interface_Sg_Attachment_Resource
     = '[]
@@ -615,6 +708,39 @@ $(TH.makeResource
     ''Network_Interface_Sg_Attachment_Resource)
 
 -- | The @aws_redshift_subnet_group@ AWS resource.
+--
+-- Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     vpc_resource
+--         & cidr_block .~ "10.1.0.0/16"
+--  
+-- foo <- resource "foo" $
+--     subnet_resource
+--         & cidr_block .~ "10.1.1.0/24"
+--         & availability_zone .~ "us-west-2a"
+--         & vpc_id .~ compute foo @"id"
+--  
+-- bar <- resource "bar" $
+--     subnet_resource
+--         & cidr_block .~ "10.1.2.0/24"
+--         & availability_zone .~ "us-west-2b"
+--         & vpc_id .~ compute foo @"id"
+--  
+-- foo <- resource "foo" $
+--     redshift_subnet_group_resource
+--         & name .~ "foo"
+--         & subnet_ids .~ [compute foo @"id"
+--                         ,compute bar @"id"]
+-- @
 data Redshift_Subnet_Group_Resource = Redshift_Subnet_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the Redshift Subnet group. Defaults to "Managed by Terraform". -}
@@ -638,39 +764,12 @@ $(TH.makeResource
     ''Redshift_Subnet_Group_Resource)
 
 -- | The @aws_security_group@ AWS resource.
+--
+-- Provides a security group resource.
 data Security_Group_Resource = Security_Group_Resource
-    { description :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) The security group description. Defaults to "Managed by Terraform". Cannot be "". : This field maps to the AWS @GroupDescription@ attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use @tags@ . -}
-    , egress :: !(Attr Text)
-      {- ^ (Optional, VPC only) Can be specified multiple times for each egress rule. Each egress block supports fields documented below. -}
-    , ingress :: !(Attr Text)
-      {- ^ (Optional) Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. -}
-    , name :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) The name of the security group. If omitted, Terraform will assign a random, unique name -}
-    , name_prefix :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Security_Group_Resource
-    = '[ '("description", Attr Text)
-         {- - The description of the security group -}
-      , '("egress", Attr Text)
-         {- - The egress rules. See above for more. -}
-      , '("id", Attr Text)
-         {- - The ID of the security group -}
-      , '("ingress", Attr Text)
-         {- - The ingress rules. See above for more. -}
-      , '("name", Attr Text)
-         {- - The name of the security group -}
-      , '("owner_id", Attr Text)
-         {- - The owner ID. -}
-      , '("vpc_id", Attr Text)
-         {- - The VPC ID. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_security_group"
@@ -679,6 +778,21 @@ $(TH.makeResource
     ''Security_Group_Resource)
 
 -- | The @aws_ses_configuration_set@ AWS resource.
+--
+-- Provides an SES configuration set resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test <- resource "test" $
+--     ses_configuration_set_resource
+--         & name .~ "some-configuration-set-test"
+-- @
 data Ses_Configuration_Set_Resource = Ses_Configuration_Set_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the configuration set -}
@@ -694,6 +808,8 @@ $(TH.makeResource
     ''Ses_Configuration_Set_Resource)
 
 -- | The @aws_sns_topic_policy@ AWS resource.
+--
+-- Provides an SNS topic policy resource
 data Sns_Topic_Policy_Resource = Sns_Topic_Policy_Resource
     { arn :: !(Attr Text)
       {- ^ (Required) The ARN of the SNS topic -}
@@ -711,6 +827,8 @@ $(TH.makeResource
     ''Sns_Topic_Policy_Resource)
 
 -- | The @aws_spot_instance_request@ AWS resource.
+--
+-- Provides an EC2 Spot Instance Request resource. This allows instances to be requested on the spot market.
 data Spot_Instance_Request_Resource = Spot_Instance_Request_Resource
     { block_duration_minutes :: !(Attr Text)
       {- ^ (Optional) The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360). The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. Note that you can't specify an Availability Zone group or a launch group if you specify a duration. -}
@@ -727,9 +845,7 @@ data Spot_Instance_Request_Resource = Spot_Instance_Request_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Spot_Instance_Request_Resource
-    = '[ '("id", Attr Text)
-         {- - The Spot Instance Request ID. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_spot_instance_request"
@@ -738,6 +854,8 @@ $(TH.makeResource
     ''Spot_Instance_Request_Resource)
 
 -- | The @aws_ssm_association@ AWS resource.
+--
+-- Associates an SSM Document to an instance.
 data Ssm_Association_Resource = Ssm_Association_Resource
     { document_version :: !(Attr Text)
       {- ^ (Optional) The document version you want to associate with the target(s). Can be a specific version or the default version. -}
@@ -771,6 +889,22 @@ $(TH.makeResource
     ''Ssm_Association_Resource)
 
 -- | The @aws_vpc_dhcp_options_association@ AWS resource.
+--
+-- Provides a VPC DHCP Options Association resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- dns_resolver <- resource "dns_resolver" $
+--     vpc_dhcp_options_association_resource
+--         & vpc_id .~ compute foo @"id"
+--         & dhcp_options_id .~ compute foo @"id"
+-- @
 data Vpc_Dhcp_Options_Association_Resource = Vpc_Dhcp_Options_Association_Resource
     { dhcp_options_id :: !(Attr Text)
       {- ^ (Required) The ID of the DHCP Options Set to associate to the VPC. -}
@@ -779,9 +913,7 @@ data Vpc_Dhcp_Options_Association_Resource = Vpc_Dhcp_Options_Association_Resour
     } deriving (Show, Eq, Generic)
 
 type instance Computed Vpc_Dhcp_Options_Association_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the DHCP Options Set Association. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_vpc_dhcp_options_association"
@@ -790,6 +922,21 @@ $(TH.makeResource
     ''Vpc_Dhcp_Options_Association_Resource)
 
 -- | The @aws_wafregional_ipset@ AWS resource.
+--
+-- Provides a WAF Regional IPSet Resource for use with Application Load Balancer.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- ipset <- resource "ipset" $
+--     wafregional_ipset_resource
+--         & name .~ "tfIPSet"
+-- @
 data Wafregional_Ipset_Resource = Wafregional_Ipset_Resource
     { ip_set_descriptor :: !(Attr Text)
       {- ^ (Optional) The IP address type and IP address range (in CIDR notation) from which web requests originate. -}
@@ -798,9 +945,7 @@ data Wafregional_Ipset_Resource = Wafregional_Ipset_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Wafregional_Ipset_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the WAF IPSet. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_wafregional_ipset"

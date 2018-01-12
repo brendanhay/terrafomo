@@ -24,6 +24,8 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @digitalocean_droplet@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Droplet resource. This can be used to create, modify, and delete Droplets. Droplets also support </docs/provisioners/index.html> .
 data Droplet_Resource = Droplet_Resource
     { backups :: !(Attr Text)
       {- ^ (Optional) Boolean controlling if backups are made. Defaults to false. -}
@@ -101,6 +103,31 @@ $(TH.makeResource
     ''Droplet_Resource)
 
 -- | The @digitalocean_floating_ip@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Floating IP to represent a publicly-accessible static IP addresses that can be mapped to one of your Droplets.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.DigitalOcean
+-- import Terraform.DigitalOcean.Resource
+-- @
+--
+-- @
+-- foobar <- resource "foobar" $
+--     droplet_resource
+--         & name .~ "baz"
+--         & size .~ "1gb"
+--         & image .~ "centos-5-8-x32"
+--         & region .~ "sgp1"
+--         & ipv6 .~ True
+--         & private_networking .~ True
+--  
+-- foobar <- resource "foobar" $
+--     floating_ip_resource
+--         & droplet_id .~ compute foobar @"id"
+--         & region .~ compute foobar @"region"
+-- @
 data Floating_Ip_Resource = Floating_Ip_Resource
     { droplet_id :: !(Attr Text)
       {- ^ (Optional) The ID of Droplet that the Floating IP will be assigned to. -}
@@ -120,6 +147,8 @@ $(TH.makeResource
     ''Floating_Ip_Resource)
 
 -- | The @digitalocean_ssh_key@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean SSH key resource to allow you manage SSH keys for Droplet access. Keys created with this resource can be referenced in your droplet configuration via their ID or fingerprint.
 data Ssh_Key_Resource = Ssh_Key_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the SSH key for identification -}
@@ -145,6 +174,8 @@ $(TH.makeResource
     ''Ssh_Key_Resource)
 
 -- | The @digitalocean_tag@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Tag resource. A Tag is a label that can be applied to a droplet resource in order to better organize or facilitate the lookups and actions on it. Tags created with this resource can be referenced in your droplet configuration via their ID or name.
 data Tag_Resource = Tag_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the tag -}
@@ -164,6 +195,32 @@ $(TH.makeResource
     ''Tag_Resource)
 
 -- | The @digitalocean_volume@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Block Storage volume which can be attached to a Droplet in order to provide expanded storage.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.DigitalOcean
+-- import Terraform.DigitalOcean.Resource
+-- @
+--
+-- @
+-- foobar <- resource "foobar" $
+--     volume_resource
+--         & region .~ "nyc1"
+--         & name .~ "baz"
+--         & size .~ 100
+--         & description .~ "an example volume"
+--  
+-- foobar <- resource "foobar" $
+--     droplet_resource
+--         & name .~ "baz"
+--         & size .~ "1gb"
+--         & image .~ "coreos-stable"
+--         & region .~ "nyc1"
+--         & volume_ids .~ [compute foobar @"id"]
+-- @
 data Volume_Resource = Volume_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) A free-form text field up to a limit of 1024 bytes to describe a block storage volume. -}

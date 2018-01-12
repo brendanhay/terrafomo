@@ -24,6 +24,22 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_ami_from_instance@ AWS resource.
+--
+-- The "AMI from instance" resource allows the creation of an Amazon Machine Image (AMI) modelled after an existing EBS-backed EC2 instance.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     ami_from_instance_resource
+--         & name .~ "terraform-example"
+--         & source_instance_id .~ "i-xxxxxxxx"
+-- @
 data Ami_From_Instance_Resource = Ami_From_Instance_Resource
     { name :: !(Attr Text)
       {- ^ (Required) A region-unique name for the AMI. -}
@@ -45,6 +61,22 @@ $(TH.makeResource
     ''Ami_From_Instance_Resource)
 
 -- | The @aws_ami_launch_permission@ AWS resource.
+--
+-- Adds launch permission to Amazon Machine Image (AMI) from another AWS account.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     ami_launch_permission_resource
+--         & image_id .~ "ami-12345678"
+--         & account_id .~ "123456789012"
+-- @
 data Ami_Launch_Permission_Resource = Ami_Launch_Permission_Resource
     { account_id :: !(Attr Text)
       {- ^ - (required) An AWS Account ID to add launch permissions. -}
@@ -64,6 +96,8 @@ $(TH.makeResource
     ''Ami_Launch_Permission_Resource)
 
 -- | The @aws_api_gateway_account@ AWS resource.
+--
+-- Provides a settings of an API Gateway Account. Settings is applied region-wide per @provider@ block.
 data Api_Gateway_Account_Resource = Api_Gateway_Account_Resource
     { cloudwatch_role_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more <https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-stage-settings.html#how-to-stage-settings-console> . Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level. -}
@@ -81,6 +115,8 @@ $(TH.makeResource
     ''Api_Gateway_Account_Resource)
 
 -- | The @aws_api_gateway_base_path_mapping@ AWS resource.
+--
+-- Connects a custom domain name registered via @aws_api_gateway_domain_name@ with a deployed API so that its methods can be called via the custom domain name.
 data Api_Gateway_Base_Path_Mapping_Resource = Api_Gateway_Base_Path_Mapping_Resource
     { api_id :: !(Attr Text)
       {- ^ (Required) The id of the API to connect. -}
@@ -102,6 +138,8 @@ $(TH.makeResource
     ''Api_Gateway_Base_Path_Mapping_Resource)
 
 -- | The @aws_api_gateway_deployment@ AWS resource.
+--
+-- Provides an API Gateway Deployment.
 data Api_Gateway_Deployment_Resource = Api_Gateway_Deployment_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the deployment -}
@@ -133,6 +171,8 @@ $(TH.makeResource
     ''Api_Gateway_Deployment_Resource)
 
 -- | The @aws_autoscaling_lifecycle_hook@ AWS resource.
+--
+-- Provides an AutoScaling Lifecycle Hook resource.
 data Autoscaling_Lifecycle_Hook_Resource = Autoscaling_Lifecycle_Hook_Resource
     { autoscaling_group_name :: !(Attr Text)
       {- ^ (Required) The name of the Auto Scaling group to which you want to assign the lifecycle hook -}
@@ -162,6 +202,8 @@ $(TH.makeResource
     ''Autoscaling_Lifecycle_Hook_Resource)
 
 -- | The @aws_cloudwatch_dashboard@ AWS resource.
+--
+-- Provides a CloudWatch Dashboard resource.
 data Cloudwatch_Dashboard_Resource = Cloudwatch_Dashboard_Resource
     { dashboard_body :: !(Attr Text)
       {- ^ (Required) The detailed information about the dashboard, including what widgets are included and their location on the dashboard. You can read more about the body structure in the <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html> . -}
@@ -181,31 +223,12 @@ $(TH.makeResource
     ''Cloudwatch_Dashboard_Resource)
 
 -- | The @aws_default_network_acl@ AWS resource.
+--
+-- Provides a resource to manage the default AWS Network ACL. VPC Only.
 data Default_Network_Acl_Resource = Default_Network_Acl_Resource
-    { default_network_acl_id :: !(Attr Text)
-      {- ^ (Required) The Network ACL ID to manage. This attribute is exported from @aws_vpc@ , or manually found via the AWS Console. -}
-    , egress :: !(Attr Text)
-      {- ^ (Optional) Specifies an egress rule. Parameters defined below. -}
-    , ingress :: !(Attr Text)
-      {- ^ (Optional) Specifies an ingress rule. Parameters defined below. -}
-    , subnet_ids :: !(Attr Text)
-      {- ^ (Optional) A list of Subnet IDs to apply the ACL to. See the notes below on managing Subnets in the Default Network ACL -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Default_Network_Acl_Resource
-    = '[ '("egress", Attr Text)
-         {- - Set of egress rules -}
-      , '("id", Attr Text)
-         {- - The ID of the Default Network ACL -}
-      , '("ingress", Attr Text)
-         {- - Set of ingress rules -}
-      , '("subnet_ids", Attr Text)
-         {- – IDs of associated Subnets -}
-      , '("vpc_id", Attr Text)
-         {- -  The ID of the associated VPC -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_default_network_acl"
@@ -214,6 +237,8 @@ $(TH.makeResource
     ''Default_Network_Acl_Resource)
 
 -- | The @aws_dms_endpoint@ AWS resource.
+--
+-- Provides a DMS (Data Migration Service) endpoint resource. DMS endpoints can be created, updated, deleted, and imported.
 data Dms_Endpoint_Resource = Dms_Endpoint_Resource
     { certificate_arn :: !(Attr Text)
       {- ^ (Optional, Default: empty string) The Amazon Resource Name (ARN) for the certificate. -}
@@ -257,43 +282,12 @@ $(TH.makeResource
     ''Dms_Endpoint_Resource)
 
 -- | The @aws_dynamodb_table@ AWS resource.
+--
+-- Provides a DynamoDB table resource
 data Dynamodb_Table_Resource = Dynamodb_Table_Resource
-    { attribute :: !(Attr Text)
-      {- ^ - Define an attribute, has two properties: -}
-    , global_secondary_index :: !(Attr Text)
-      {- ^ (Optional) Describe a GSO for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. -}
-    , hash_key :: !(Attr Text)
-      {- ^ (Required, Forces new resource) The attribute to use as the hash key (the attribute must also be defined as an attribute record -}
-    , local_secondary_index :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) Describe an LSI on the table; these can only be allocated so you cannot change this definition after you have created the resource. -}
-    , name :: !(Attr Text)
-      {- ^ (Required) The name of the table, this needs to be unique within a region. -}
-    , range_key :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) The attribute to use as the range key (must also be defined) -}
-    , read_capacity :: !(Attr Text)
-      {- ^ (Required) The number of read units for this table -}
-    , stream_enabled :: !(Attr Text)
-      {- ^ (Optional) Indicates whether Streams are to be enabled (true) or disabled (false). -}
-    , stream_view_type :: !(Attr Text)
-      {- ^ (Optional) When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A map of tags to populate on the created table. -}
-    , ttl :: !(Attr Text)
-      {- ^ (Optional) Defines ttl, has two properties, and can only be specified once: -}
-    , write_capacity :: !(Attr Text)
-      {- ^ (Required) The number of write units for this table -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Dynamodb_Table_Resource
-    = '[ '("arn", Attr Text)
-         {- - The arn of the table -}
-      , '("id", Attr Text)
-         {- - The name of the table -}
-      , '("stream_arn", Attr Text)
-         {- - The ARN of the Table Stream. Only available when @stream_enabled = true@ -}
-      , '("stream_label", Attr Text)
-         {- - A timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when @stream_enabled = true@ -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_dynamodb_table"
@@ -302,6 +296,26 @@ $(TH.makeResource
     ''Dynamodb_Table_Resource)
 
 -- | The @aws_egress_only_internet_gateway@ AWS resource.
+--
+-- [IPv6 only] Creates an egress-only Internet gateway for your VPC. An egress-only Internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the Internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     vpc_resource
+--         & cidr_block .~ "10.1.0.0/16"
+--         & assign_amazon_ipv6_cidr_block .~ True
+--  
+-- foo <- resource "foo" $
+--     egress_only_internet_gateway_resource
+--         & vpc_id .~ compute foo @"id"
+-- @
 data Egress_Only_Internet_Gateway_Resource = Egress_Only_Internet_Gateway_Resource
     { vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC ID to create in. -}
@@ -319,6 +333,40 @@ $(TH.makeResource
     ''Egress_Only_Internet_Gateway_Resource)
 
 -- | The @aws_elasticache_replication_group@ AWS resource.
+--
+-- Provides an ElastiCache Replication Group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     elasticache_replication_group_resource
+--         & replication_group_id .~ "tf-rep-group-1"
+--         & replication_group_description .~ "test description"
+--         & node_type .~ "cache.m1.small"
+--         & number_cache_clusters .~ 2
+--         & port .~ 6379
+--         & parameter_group_name .~ "default.redis3.2"
+--         & availability_zones .~ ["us-west-2a"
+--                                 ,"us-west-2b"]
+--         & automatic_failover_enabled .~ True
+-- @
+--
+-- @
+-- baz <- resource "baz" $
+--     elasticache_replication_group_resource
+--         & replication_group_id .~ "tf-redis-cluster"
+--         & replication_group_description .~ "test description"
+--         & node_type .~ "cache.m1.small"
+--         & port .~ 6379
+--         & parameter_group_name .~ "default.redis3.2.cluster.on"
+--         & automatic_failover_enabled .~ True
+-- @
 data Elasticache_Replication_Group_Resource = Elasticache_Replication_Group_Resource
     { apply_immediately :: !(Attr Text)
       {- ^ (Optional) Specifies whether any modifications are applied immediately, or during the next maintenance window. Default is @false@ . -}
@@ -382,6 +430,32 @@ $(TH.makeResource
     ''Elasticache_Replication_Group_Resource)
 
 -- | The @aws_elasticache_subnet_group@ AWS resource.
+--
+-- Provides an ElastiCache Subnet Group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     vpc_resource
+--         & cidr_block .~ "10.0.0.0/16"
+--  
+-- foo <- resource "foo" $
+--     subnet_resource
+--         & vpc_id .~ compute foo @"id"
+--         & cidr_block .~ "10.0.0.0/24"
+--         & availability_zone .~ "us-west-2a"
+--  
+-- bar <- resource "bar" $
+--     elasticache_subnet_group_resource
+--         & name .~ "tf-test-cache-subnet"
+--         & subnet_ids .~ [compute foo @"id"]
+-- @
 data Elasticache_Subnet_Group_Resource = Elasticache_Subnet_Group_Resource
     { description :: !(Attr Text)
       {- ^ – (Optional) Description for the cache subnet group. Defaults to "Managed by Terraform". -}
@@ -401,6 +475,8 @@ $(TH.makeResource
     ''Elasticache_Subnet_Group_Resource)
 
 -- | The @aws_glacier_vault@ AWS resource.
+--
+-- Provides a Glacier Vault Resource. You can refer to the <https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-vaults.html> for a full explanation of the Glacier Vault functionality
 data Glacier_Vault_Resource = Glacier_Vault_Resource
     { access_policy :: !(Attr Text)
       {- ^ (Optional) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. Use the <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html> for more information on Glacier Vault Policy -}
@@ -426,6 +502,8 @@ $(TH.makeResource
     ''Glacier_Vault_Resource)
 
 -- | The @aws_iot_policy@ AWS resource.
+--
+-- Provides an IoT policy.
 data Iot_Policy_Resource = Iot_Policy_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the policy. -}
@@ -451,6 +529,25 @@ $(TH.makeResource
     ''Iot_Policy_Resource)
 
 -- | The @aws_kms_alias@ AWS resource.
+--
+-- Provides an alias for a KMS customer master key. AWS Console enforces 1-to-1 mapping between aliases & keys, but API (hence Terraform too) allows you to create as many aliases as the <http://docs.aws.amazon.com/kms/latest/developerguide/limits.html> allow you.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- a <- resource "a" $
+--     kms_key_resource
+--  
+-- a <- resource "a" $
+--     kms_alias_resource
+--         & name .~ "alias/my-key-alias"
+--         & target_key_id .~ compute a @"key_id"
+-- @
 data Kms_Alias_Resource = Kms_Alias_Resource
     { name :: !(Attr Text)
       {- ^ (Optional) The display name of the alias. The name must start with the word "alias" followed by a forward slash (alias/) -}
@@ -472,6 +569,8 @@ $(TH.makeResource
     ''Kms_Alias_Resource)
 
 -- | The @aws_lb_target_group_attachment@ AWS resource.
+--
+-- Provides the ability to register instances and containers with a LB target group
 data Lb_Target_Group_Attachment_Resource = Lb_Target_Group_Attachment_Resource
     { availability_zone :: !(Attr Text)
       {- ^ (Optional) The Availability Zone where the IP address of the target is to be registered. -}
@@ -495,6 +594,28 @@ $(TH.makeResource
     ''Lb_Target_Group_Attachment_Resource)
 
 -- | The @aws_lb_target_group@ AWS resource.
+--
+-- Provides a Target Group resource for use with Load Balancer resources.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test <- resource "test" $
+--     lb_target_group_resource
+--         & name .~ "tf-example-lb-tg"
+--         & port .~ 80
+--         & protocol .~ "HTTP"
+--         & vpc_id .~ compute main @"id"
+--  
+-- main <- resource "main" $
+--     vpc_resource
+--         & cidr_block .~ "10.0.0.0/16"
+-- @
 data Lb_Target_Group_Resource = Lb_Target_Group_Resource
     { deregistration_delay :: !(Attr Text)
       {- ^ (Optional) The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. -}
@@ -534,6 +655,21 @@ $(TH.makeResource
     ''Lb_Target_Group_Resource)
 
 -- | The @aws_network_acl@ AWS resource.
+--
+-- Provides an network ACL resource. You might set up network ACLs with rules similar to your security groups in order to add an additional layer of security to your VPC.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- main <- resource "main" $
+--     network_acl_resource
+--         & vpc_id .~ compute main @"id"
+-- @
 data Network_Acl_Resource = Network_Acl_Resource
     { egress :: !(Attr Text)
       {- ^ (Optional) Specifies an egress rule. Parameters defined below. -}
@@ -561,6 +697,21 @@ $(TH.makeResource
     ''Network_Acl_Resource)
 
 -- | The @aws_opsworks_nodejs_app_layer@ AWS resource.
+--
+-- Provides an OpsWorks NodeJS application layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- app <- resource "app" $
+--     opsworks_nodejs_app_layer_resource
+--         & stack_id .~ compute main @"id"
+-- @
 data Opsworks_Nodejs_App_Layer_Resource = Opsworks_Nodejs_App_Layer_Resource
     { auto_assign_elastic_ips :: !(Attr Text)
       {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
@@ -608,6 +759,31 @@ $(TH.makeResource
     ''Opsworks_Nodejs_App_Layer_Resource)
 
 -- | The @aws_snapshot_create_volume_permission@ AWS resource.
+--
+-- Adds permission to create volumes off of a given EBS Snapshot.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example_perm <- resource "example_perm" $
+--     snapshot_create_volume_permission_resource
+--         & snapshot_id .~ compute example_snapshot @"id"
+--         & account_id .~ "12345678"
+--  
+-- example <- resource "example" $
+--     ebs_volume_resource
+--         & availability_zone .~ "us-west-2a"
+--         & size .~ 40
+--  
+-- example_snapshot <- resource "example_snapshot" $
+--     ebs_snapshot_resource
+--         & volume_id .~ compute example @"id"
+-- @
 data Snapshot_Create_Volume_Permission_Resource = Snapshot_Create_Volume_Permission_Resource
     { account_id :: !(Attr Text)
       {- ^ - (required) An AWS Account ID to add create volume permissions -}
@@ -627,6 +803,8 @@ $(TH.makeResource
     ''Snapshot_Create_Volume_Permission_Resource)
 
 -- | The @aws_sqs_queue_policy@ AWS resource.
+--
+-- Allows you to set a policy of an SQS Queue while referencing ARN of the queue within the policy.
 data Sqs_Queue_Policy_Resource = Sqs_Queue_Policy_Resource
     { policy :: !(Attr Text)
       {- ^ (Required) The JSON policy for the SQS queue -}
@@ -644,6 +822,22 @@ $(TH.makeResource
     ''Sqs_Queue_Policy_Resource)
 
 -- | The @aws_subnet@ AWS resource.
+--
+-- Provides an VPC subnet resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- main <- resource "main" $
+--     subnet_resource
+--         & vpc_id .~ compute main @"id"
+--         & cidr_block .~ "10.0.1.0/24"
+-- @
 data Subnet_Resource = Subnet_Resource
     { assign_ipv6_address_on_creation :: !(Attr Text)
       {- ^ (Optional) Specify true to indicate that network interfaces created in the specified subnet should be assigned an IPv6 address. Default is @false@ -}
@@ -683,25 +877,12 @@ $(TH.makeResource
     ''Subnet_Resource)
 
 -- | The @aws_vpc_endpoint@ AWS resource.
+--
+-- Provides a VPC Endpoint resource.
 data Vpc_Endpoint_Resource = Vpc_Endpoint_Resource
-    { policy :: !(Attr Text)
-      {- ^ (Optional) A policy to attach to the endpoint that controls access to the service. -}
-    , route_table_ids :: !(Attr Text)
-      {- ^ (Optional) One or more route table IDs. -}
-    , service_name :: !(Attr Text)
-      {- ^ (Required) The AWS service name, in the form @com.amazonaws.region.service@ . -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Required) The ID of the VPC in which the endpoint will be used. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Vpc_Endpoint_Resource
-    = '[ '("cidr_blocks", Attr Text)
-         {- - The list of CIDR blocks for the exposed service. -}
-      , '("id", Attr Text)
-         {- - The ID of the VPC endpoint. -}
-      , '("prefix_list_id", Attr Text)
-         {- - The prefix list ID of the exposed service. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_vpc_endpoint"
@@ -710,6 +891,43 @@ $(TH.makeResource
     ''Vpc_Endpoint_Resource)
 
 -- | The @aws_vpn_connection_route@ AWS resource.
+--
+-- Provides a static route between a VPN connection and a customer gateway.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- vpc <- resource "vpc" $
+--     vpc_resource
+--         & cidr_block .~ "10.0.0.0/16"
+--  
+-- vpn_gateway <- resource "vpn_gateway" $
+--     vpn_gateway_resource
+--         & vpc_id .~ compute vpc @"id"
+--  
+-- customer_gateway <- resource "customer_gateway" $
+--     customer_gateway_resource
+--         & bgp_asn .~ 65000
+--         & ip_address .~ "172.0.0.1"
+--         & type .~ "ipsec.1"
+--  
+-- main <- resource "main" $
+--     vpn_connection_resource
+--         & vpn_gateway_id .~ compute vpn_gateway @"id"
+--         & customer_gateway_id .~ compute customer_gateway @"id"
+--         & type .~ "ipsec.1"
+--         & static_routes_only .~ True
+--  
+-- office <- resource "office" $
+--     vpn_connection_route_resource
+--         & destination_cidr_block .~ "192.168.10.0/24"
+--         & vpn_connection_id .~ compute main @"id"
+-- @
 data Vpn_Connection_Route_Resource = Vpn_Connection_Route_Resource
     { destination_cidr_block :: !(Attr Text)
       {- ^ (Required) The CIDR block associated with the local subnet of the customer network. -}
@@ -731,6 +949,21 @@ $(TH.makeResource
     ''Vpn_Connection_Route_Resource)
 
 -- | The @aws_vpn_gateway@ AWS resource.
+--
+-- Provides a resource to create a VPC VPN Gateway.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- vpn_gw <- resource "vpn_gw" $
+--     vpn_gateway_resource
+--         & vpc_id .~ compute main @"id"
+-- @
 data Vpn_Gateway_Resource = Vpn_Gateway_Resource
     { availability_zone :: !(Attr Text)
       {- ^ (Optional) The Availability Zone for the virtual private gateway. -}
@@ -752,6 +985,22 @@ $(TH.makeResource
     ''Vpn_Gateway_Resource)
 
 -- | The @aws_vpn_gateway_route_propagation@ AWS resource.
+--
+-- Requests automatic route propagation between a VPN gateway and a route table.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     vpn_gateway_route_propagation_resource
+--         & vpn_gateway_id .~ compute example @"id"
+--         & route_table_id .~ compute example @"id"
+-- @
 data Vpn_Gateway_Route_Propagation_Resource = Vpn_Gateway_Route_Propagation_Resource
     { route_table_id :: !(Attr Text)
       {- ^ - The id of the @aws_route_table@ to propagate routes into. -}

@@ -24,6 +24,24 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_ami_copy@ AWS resource.
+--
+-- The "AMI copy" resource allows duplication of an Amazon Machine Image (AMI), including cross-region copies.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     ami_copy_resource
+--         & name .~ "terraform-example"
+--         & description .~ "A copy of ami-xxxxxxxx"
+--         & source_ami_id .~ "ami-xxxxxxxx"
+--         & source_ami_region .~ "us-west-1"
+-- @
 data Ami_Copy_Resource = Ami_Copy_Resource
     { encrypted :: !(Attr Text)
       {- ^ (Optional) Specifies whether the destination snapshots of the copied image should be encrypted. Defaults to @false@ -}
@@ -49,6 +67,8 @@ $(TH.makeResource
     ''Ami_Copy_Resource)
 
 -- | The @aws_api_gateway_integration_response@ AWS resource.
+--
+-- Provides an HTTP Method Integration Response for an API Gateway Resource.
 data Api_Gateway_Integration_Response_Resource = Api_Gateway_Integration_Response_Resource
     { content_handling :: !(Attr Text)
       {- ^ (Optional) Specifies how to handle request payload content type conversions. Supported values are @CONVERT_TO_BINARY@ and @CONVERT_TO_TEXT@ . If this property is not defined, the response payload will be passed through from the integration response to the method response without modification. -}
@@ -80,6 +100,22 @@ $(TH.makeResource
     ''Api_Gateway_Integration_Response_Resource)
 
 -- | The @aws_api_gateway_rest_api@ AWS resource.
+--
+-- Provides an API Gateway REST API.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- mydemoapi <- resource "mydemoapi" $
+--     api_gateway_rest_api_resource
+--         & name .~ "MyDemoAPI"
+--         & description .~ "This is my API for demonstration purposes"
+-- @
 data Api_Gateway_Rest_Api_Resource = Api_Gateway_Rest_Api_Resource
     { binary_media_types :: !(Attr Text)
       {- ^ (Optional) The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads. -}
@@ -107,6 +143,8 @@ $(TH.makeResource
     ''Api_Gateway_Rest_Api_Resource)
 
 -- | The @aws_cloudwatch_event_target@ AWS resource.
+--
+-- Provides a CloudWatch Event Target resource.
 data Cloudwatch_Event_Target_Resource = Cloudwatch_Event_Target_Resource
     { arn :: !(Attr Text)
       {- ^ (Required) The Amazon Resource Name (ARN) associated of the target. -}
@@ -138,21 +176,12 @@ $(TH.makeResource
     ''Cloudwatch_Event_Target_Resource)
 
 -- | The @aws_default_route_table@ AWS resource.
+--
+-- Provides a resource to manage a Default VPC Routing Table.
 data Default_Route_Table_Resource = Default_Route_Table_Resource
-    { default_route_table_id :: !(Attr Text)
-      {- ^ (Required) The ID of the Default Routing Table. -}
-    , propagating_vgws :: !(Attr Text)
-      {- ^ (Optional) A list of virtual gateways for propagation. -}
-    , route :: !(Attr Text)
-      {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Default_Route_Table_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the routing table -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_default_route_table"
@@ -161,6 +190,21 @@ $(TH.makeResource
     ''Default_Route_Table_Resource)
 
 -- | The @aws_ecs_cluster@ AWS resource.
+--
+-- Provides an ECS cluster.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     ecs_cluster_resource
+--         & name .~ "white-hart"
+-- @
 data Ecs_Cluster_Resource = Ecs_Cluster_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the cluster (up to 255 letters, numbers, hyphens, and underscores) -}
@@ -180,6 +224,32 @@ $(TH.makeResource
     ''Ecs_Cluster_Resource)
 
 -- | The @aws_efs_mount_target@ AWS resource.
+--
+-- Provides an Elastic File System (EFS) mount target.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- alpha <- resource "alpha" $
+--     efs_mount_target_resource
+--         & file_system_id .~ compute foo @"id"
+--         & subnet_id .~ compute alpha @"id"
+--  
+-- foo <- resource "foo" $
+--     vpc_resource
+--         & cidr_block .~ "10.0.0.0/16"
+--  
+-- alpha <- resource "alpha" $
+--     subnet_resource
+--         & vpc_id .~ compute foo @"id"
+--         & availability_zone .~ "us-west-2a"
+--         & cidr_block .~ "10.0.1.0/24"
+-- @
 data Efs_Mount_Target_Resource = Efs_Mount_Target_Resource
     { file_system_id :: !(Attr Text)
       {- ^ (Required) The ID of the file system for which the mount target is intended. -}
@@ -207,31 +277,12 @@ $(TH.makeResource
     ''Efs_Mount_Target_Resource)
 
 -- | The @aws_eip@ AWS resource.
+--
+-- Provides an Elastic IP resource.
 data Eip_Resource = Eip_Resource
-    { associate_with_private_ip :: !(Attr Text)
-      {- ^ (Optional) A user specified primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address. -}
-    , instance_ :: !(Attr Text)
-      {- ^ (Optional) EC2 instance ID. -}
-    , network_interface :: !(Attr Text)
-      {- ^ (Optional) Network interface ID to associate with. -}
-    , vpc :: !(Attr Text)
-      {- ^ (Optional) Boolean if the EIP is in a VPC or not. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Eip_Resource
-    = '[ '("associate_with_private_ip", Attr Text)
-         {- - Contains the user specified private IP address (if in VPC). -}
-      , '("id", Attr Text)
-         {- - Contains the EIP allocation ID. -}
-      , '("instance", Attr Text)
-         {- - Contains the ID of the attached instance. -}
-      , '("network_interface", Attr Text)
-         {- - Contains the ID of the attached network interface. -}
-      , '("private_ip", Attr Text)
-         {- - Contains the private IP address (if in VPC). -}
-      , '("public_ip", Attr Text)
-         {- - Contains the public IP address. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_eip"
@@ -281,6 +332,31 @@ $(TH.makeResource
     ''Elasticsearch_Domain_Resource)
 
 -- | The @aws_emr_cluster@ AWS resource.
+--
+-- Provides an Elastic MapReduce Cluster, a web service that makes it easy to process large amounts of data efficiently. See <https://aws.amazon.com/documentation/elastic-mapreduce/> for more information.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- emr-test-cluster <- resource "emr-test-cluster" $
+--     emr_cluster_resource
+--         & name .~ "emr-test-arn"
+--         & release_label .~ "emr-4.6.0"
+--         & applications .~ ["Spark"]
+--         & termination_protection .~ False
+--         & keep_job_flow_alive_when_no_steps .~ True
+--         & ebs_root_volume_size .~ 100
+--         & master_instance_type .~ "m3.xlarge"
+--         & core_instance_type .~ "m3.xlarge"
+--         & core_instance_count .~ 1
+--         & configurations .~ "test-fixtures/emr_configurations.json"
+--         & service_role .~ compute iam_emr_service_role @"arn"
+-- @
 data Emr_Cluster_Resource = Emr_Cluster_Resource
     { applications :: !(Attr Text)
       {- ^ (Optional) A list of applications for the cluster. Valid values are: @Flink@ , @Hadoop@ , @Hive@ , @Mahout@ , @Pig@ , and @Spark@ . Case insensitive -}
@@ -323,37 +399,7 @@ data Emr_Cluster_Resource = Emr_Cluster_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Emr_Cluster_Resource
-    = '[ '("applications", Attr Text)
-         {- - The applications installed on this cluster. -}
-      , '("bootstrap_action", Attr Text)
-         {- - A list of bootstrap actions that will be run before Hadoop is started on the cluster nodes. -}
-      , '("configurations", Attr Text)
-         {- - The list of Configurations supplied to the EMR cluster. -}
-      , '("core_instance_count", Attr Text)
-         {- The number of slave nodes, i.e. EC2 instance nodes. -}
-      , '("core_instance_type", Attr Text)
-         {- - The EC2 instance type of the slave nodes. -}
-      , '("ec2_attributes", Attr Text)
-         {- - Provides information about the EC2 instances in a cluster grouped by category: key name, subnet ID, IAM instance profile, and so on. -}
-      , '("id", Attr Text)
-         {- - The ID of the EMR Cluster -}
-      , '("log_uri", Attr Text)
-         {- - The path to the Amazon S3 location where logs for this cluster are stored. -}
-      , '("master_instance_type", Attr Text)
-         {- - The EC2 instance type of the master node. -}
-      , '("master_public_dns", Attr Text)
-         {- - The public DNS name of the master EC2 instance. -}
-      , '("name", Attr Text)
-         {- - The name of the cluster. -}
-      , '("release_label", Attr Text)
-         {- - The release label for the Amazon EMR release. -}
-      , '("service_role", Attr Text)
-         {- - The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf. -}
-      , '("tags", Attr Text)
-         {- - The list of tags associated with a cluster. -}
-      , '("visible_to_all_users", Attr Text)
-         {- - Indicates whether the job flow is visible to all IAM users of the AWS account associated with the job flow. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_emr_cluster"
@@ -362,6 +408,8 @@ $(TH.makeResource
     ''Emr_Cluster_Resource)
 
 -- | The @aws_iam_access_key@ AWS resource.
+--
+-- Provides an IAM access key. This is a set of credentials that allow API requests to be made as an IAM user.
 data Iam_Access_Key_Resource = Iam_Access_Key_Resource
     { pgp_key :: !(Attr Text)
       {- ^ (Optional) Either a base-64 encoded PGP public key, or a keybase username in the form @keybase:some_person_that_exists@ . -}
@@ -393,6 +441,8 @@ $(TH.makeResource
     ''Iam_Access_Key_Resource)
 
 -- | The @aws_iam_policy@ AWS resource.
+--
+-- Provides an IAM policy.
 data Iam_Policy_Resource = Iam_Policy_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) Description of the IAM policy. -}
@@ -428,6 +478,27 @@ $(TH.makeResource
     ''Iam_Policy_Resource)
 
 -- | The @aws_inspector_assessment_template@ AWS resource.
+--
+-- Provides a Inspector assessment template
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     inspector_assessment_template_resource
+--         & name .~ "bar template"
+--         & target_arn .~ compute foo @"arn"
+--         & duration .~ 3600
+--         & rules_package_arns .~ ["arn:aws:inspector:us-west-2:758058086616:rulespackage/0-9hgA516p"
+--                                 ,"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-H5hpSawc"
+--                                 ,"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ"
+--                                 ,"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-vg5GGHSD"]
+-- @
 data Inspector_Assessment_Template_Resource = Inspector_Assessment_Template_Resource
     { duration :: !(Attr Text)
       {- ^ (Required) The duration of the inspector run. -}
@@ -451,6 +522,21 @@ $(TH.makeResource
     ''Inspector_Assessment_Template_Resource)
 
 -- | The @aws_lightsail_static_ip@ AWS resource.
+--
+-- Allocates a static IP address.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test <- resource "test" $
+--     lightsail_static_ip_resource
+--         & name .~ "example"
+-- @
 data Lightsail_Static_Ip_Resource = Lightsail_Static_Ip_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name for the allocated static IP -}
@@ -472,6 +558,32 @@ $(TH.makeResource
     ''Lightsail_Static_Ip_Resource)
 
 -- | The @aws_network_acl_rule@ AWS resource.
+--
+-- Creates an entry (a rule) in a network ACL with the specified rule number.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     network_acl_resource
+--         & vpc_id .~ compute foo @"id"
+--  
+-- bar <- resource "bar" $
+--     network_acl_rule_resource
+--         & network_acl_id .~ compute bar @"id"
+--         & rule_number .~ 200
+--         & egress .~ False
+--         & protocol .~ "tcp"
+--         & rule_action .~ "allow"
+--         & cidr_block .~ "0.0.0.0/0"
+--         & from_port .~ 22
+--         & to_port .~ 22
+-- @
 data Network_Acl_Rule_Resource = Network_Acl_Rule_Resource
     { cidr_block :: !(Attr Text)
       {- ^ (Optional) The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24 ). -}
@@ -509,6 +621,22 @@ $(TH.makeResource
     ''Network_Acl_Rule_Resource)
 
 -- | The @aws_opsworks_ganglia_layer@ AWS resource.
+--
+-- Provides an OpsWorks Ganglia layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- monitor <- resource "monitor" $
+--     opsworks_ganglia_layer_resource
+--         & stack_id .~ compute main @"id"
+--         & password .~ "foobarbaz"
+-- @
 data Opsworks_Ganglia_Layer_Resource = Opsworks_Ganglia_Layer_Resource
     { auto_assign_elastic_ips :: !(Attr Text)
       {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
@@ -560,6 +688,22 @@ $(TH.makeResource
     ''Opsworks_Ganglia_Layer_Resource)
 
 -- | The @aws_placement_group@ AWS resource.
+--
+-- Provides an EC2 placement group. Read more about placement groups in <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html> .
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- web <- resource "web" $
+--     placement_group_resource
+--         & name .~ "hunky-dory-pg"
+--         & strategy .~ "cluster"
+-- @
 data Placement_Group_Resource = Placement_Group_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the placement group. -}
@@ -579,21 +723,12 @@ $(TH.makeResource
     ''Placement_Group_Resource)
 
 -- | The @aws_route_table@ AWS resource.
+--
+-- Provides a resource to create a VPC routing table.
 data Route_Table_Resource = Route_Table_Resource
-    { propagating_vgws :: !(Attr Text)
-      {- ^ (Optional) A list of virtual gateways for propagation. -}
-    , route :: !(Attr Text)
-      {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Required) The VPC ID. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Route_Table_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the routing table -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_route_table"
@@ -602,45 +737,12 @@ $(TH.makeResource
     ''Route_Table_Resource)
 
 -- | The @aws_security_group_rule@ AWS resource.
+--
+-- Provides a security group rule resource. Represents a single @ingress@ or @egress@ group rule, which can be added to external Security Groups.
 data Security_Group_Rule_Resource = Security_Group_Rule_Resource
-    { cidr_blocks :: !(Attr Text)
-      {- ^ (Optional) List of CIDR blocks. Cannot be specified with @source_security_group_id@ . -}
-    , description :: !(Attr Text)
-      {- ^ (Optional) Description of the rule. -}
-    , from_port :: !(Attr Text)
-      {- ^ (Required) The start port (or ICMP type number if protocol is "icmp"). -}
-    , ipv6_cidr_blocks :: !(Attr Text)
-      {- ^ (Optional) List of IPv6 CIDR blocks. -}
-    , prefix_list_ids :: !(Attr Text)
-      {- ^ (Optional) List of prefix list IDs (for allowing access to VPC endpoints). Only valid with @egress@ . -}
-    , protocol :: !(Attr Text)
-      {- ^ (Required) The protocol. If not icmp, tcp, udp, or all use the <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml> -}
-    , security_group_id :: !(Attr Text)
-      {- ^ (Required) The security group to apply this rule to. -}
-    , self :: !(Attr Text)
-      {- ^ (Optional) If true, the security group itself will be added as a source to this ingress rule. -}
-    , source_security_group_id :: !(Attr Text)
-      {- ^ (Optional) The security group id to allow access to/from, depending on the @type@ . Cannot be specified with @cidr_blocks@ . -}
-    , to_port :: !(Attr Text)
-      {- ^ (Required) The end port (or ICMP code if protocol is "icmp"). -}
-    , type_ :: !(Attr Text)
-      {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Security_Group_Rule_Resource
-    = '[ '("description", Attr Text)
-         {- – Description of the rule -}
-      , '("from_port", Attr Text)
-         {- - The start port (or ICMP type number if protocol is "icmp") -}
-      , '("id", Attr Text)
-         {- - The ID of the security group rule -}
-      , '("protocol", Attr Text)
-         {- – The protocol used -}
-      , '("to_port", Attr Text)
-         {- - The end port (or ICMP code if protocol is "icmp") -}
-      , '("type", Attr Text)
-         {- - The type of rule, @ingress@ or @egress@ -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_security_group_rule"
@@ -649,6 +751,23 @@ $(TH.makeResource
     ''Security_Group_Rule_Resource)
 
 -- | The @aws_servicecatalog_portfolio@ AWS resource.
+--
+-- Provides a resource to create a Service Catalog Portfolio.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- portfolio <- resource "portfolio" $
+--     servicecatalog_portfolio_resource
+--         & name .~ "My App Portfolio"
+--         & description .~ "List of my organizations apps"
+--         & provider_name .~ "Brett"
+-- @
 data Servicecatalog_Portfolio_Resource = Servicecatalog_Portfolio_Resource
     { description :: !(Attr Text)
       {- ^ (Required) Description of the portfolio -}
@@ -672,6 +791,21 @@ $(TH.makeResource
     ''Servicecatalog_Portfolio_Resource)
 
 -- | The @aws_ses_receipt_rule_set@ AWS resource.
+--
+-- Provides an SES receipt rule set resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- main <- resource "main" $
+--     ses_receipt_rule_set_resource
+--         & rule_set_name .~ "primary-rules"
+-- @
 data Ses_Receipt_Rule_Set_Resource = Ses_Receipt_Rule_Set_Resource
     { rule_set_name :: !(Attr Text)
       {- ^ (Required) The name of the rule set -}
@@ -687,6 +821,8 @@ $(TH.makeResource
     ''Ses_Receipt_Rule_Set_Resource)
 
 -- | The @aws_ssm_activation@ AWS resource.
+--
+-- Registers an on-premises server or virtual machine with Amazon EC2 so that it can be managed using Run Command.
 data Ssm_Activation_Resource = Ssm_Activation_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the resource that you want to register. -}
@@ -726,6 +862,8 @@ $(TH.makeResource
     ''Ssm_Activation_Resource)
 
 -- | The @aws_ssm_document@ AWS resource.
+--
+-- Provides an SSM Document resource
 data Ssm_Document_Resource = Ssm_Document_Resource
     { content :: !(Attr Text)
       {- ^ (Required) The json content of the document. -}
@@ -777,51 +915,12 @@ $(TH.makeResource
     ''Ssm_Document_Resource)
 
 -- | The @aws_vpc@ AWS resource.
+--
+-- Provides an VPC resource.
 data Vpc_Resource = Vpc_Resource
-    { assign_generated_ipv6_cidr_block :: !(Attr Text)
-      {- ^ (Optional) Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is @false@ . -}
-    , cidr_block :: !(Attr Text)
-      {- ^ (Required) The CIDR block for the VPC. -}
-    , enable_classiclink :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html> for more information. Defaults false. -}
-    , enable_classiclink_dns_support :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable ClassicLink DNS Support for the VPC. Only valid in regions and accounts that support EC2 Classic. -}
-    , enable_dns_hostnames :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
-    , enable_dns_support :: !(Attr Text)
-      {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
-    , instance_tenancy :: !(Attr Text)
-      {- ^ (Optional) A tenancy option for instances launched into the VPC -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Vpc_Resource
-    = '[ '("cidr_block", Attr Text)
-         {- - The CIDR block of the VPC -}
-      , '("default_network_acl_id", Attr Text)
-         {- - The ID of the network ACL created by default on VPC creation -}
-      , '("default_route_table_id", Attr Text)
-         {- - The ID of the route table created by default on VPC creation -}
-      , '("default_security_group_id", Attr Text)
-         {- - The ID of the security group created by default on VPC creation -}
-      , '("enable_classiclink", Attr Text)
-         {- - Whether or not the VPC has Classiclink enabled -}
-      , '("enable_dns_hostnames", Attr Text)
-         {- - Whether or not the VPC has DNS hostname support -}
-      , '("enable_dns_support", Attr Text)
-         {- - Whether or not the VPC has DNS support -}
-      , '("id", Attr Text)
-         {- - The ID of the VPC -}
-      , '("instance_tenancy", Attr Text)
-         {- - Tenancy of instances spin up within VPC. -}
-      , '("ipv6_association_id", Attr Text)
-         {- - The association ID for the IPv6 CIDR block. -}
-      , '("ipv6_cidr_block", Attr Text)
-         {- - The IPv6 CIDR block. -}
-      , '("main_route_table_id", Attr Text)
-         {- - The ID of the main route table associated with this VPC. Note that you can change a VPC's main route table by using an </docs/providers/aws/r/main_route_table_assoc.html> . -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_vpc"
@@ -830,6 +929,34 @@ $(TH.makeResource
     ''Vpc_Resource)
 
 -- | The @aws_waf_web_acl@ AWS resource.
+--
+-- Provides a WAF Web ACL Resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- ipset <- resource "ipset" $
+--     waf_ipset_resource
+--         & name .~ "tfIPSet"
+--  
+-- wafrule <- resource "wafrule" $
+--     waf_rule_resource
+--         & depends_on .~ ["aws_waf_ipset.ipset"]
+--         & name .~ "tfWAFRule"
+--         & metric_name .~ "tfWAFRule"
+--  
+-- waf_acl <- resource "waf_acl" $
+--     waf_web_acl_resource
+--         & depends_on .~ ["aws_waf_ipset.ipset"
+--                         ,"aws_waf_rule.wafrule"]
+--         & name .~ "tfWebACL"
+--         & metric_name .~ "tfWebACL"
+-- @
 data Waf_Web_Acl_Resource = Waf_Web_Acl_Resource
     { default_action :: !(Attr Text)
       {- ^ (Required) The action that you want AWS WAF to take when a request doesn't match the criteria in any of the rules that are associated with the web ACL. -}
@@ -842,9 +969,7 @@ data Waf_Web_Acl_Resource = Waf_Web_Acl_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Waf_Web_Acl_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the WAF WebACL. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_waf_web_acl"
@@ -853,6 +978,21 @@ $(TH.makeResource
     ''Waf_Web_Acl_Resource)
 
 -- | The @aws_wafregional_byte_match_set@ AWS resource.
+--
+-- Provides a WAF Regional Byte Match Set Resource for use with Application Load Balancer.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- byte_set <- resource "byte_set" $
+--     wafregional_byte_match_set_resource
+--         & name .~ "tf_waf_byte_match_set"
+-- @
 data Wafregional_Byte_Match_Set_Resource = Wafregional_Byte_Match_Set_Resource
     { byte_match_tuple :: !(Attr Text)
       {- ^ (Optional)Settings for the ByteMatchSet, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests. ByteMatchTuple documented below. -}
@@ -861,9 +1001,7 @@ data Wafregional_Byte_Match_Set_Resource = Wafregional_Byte_Match_Set_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Wafregional_Byte_Match_Set_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the WAF ByteMatchSet. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_wafregional_byte_match_set"

@@ -24,6 +24,30 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_api_gateway_api_key@ AWS resource.
+--
+-- Provides an API Gateway API Key.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- mydemoapi <- resource "mydemoapi" $
+--     api_gateway_rest_api_resource
+--         & name .~ "MyDemoAPI"
+--  
+-- mydemoapikey <- resource "mydemoapikey" $
+--     api_gateway_api_key_resource
+--         & name .~ "demo"
+--  
+-- mydemodeployment <- resource "mydemodeployment" $
+--     api_gateway_deployment_resource
+--         & rest_api_id .~ compute MyDemoAPI @"id"
+--         & stage_name .~ "test"
+-- @
 data Api_Gateway_Api_Key_Resource = Api_Gateway_Api_Key_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The API key description. Defaults to "Managed by Terraform". -}
@@ -55,6 +79,8 @@ $(TH.makeResource
     ''Api_Gateway_Api_Key_Resource)
 
 -- | The @aws_api_gateway_method_settings@ AWS resource.
+--
+-- Provides an API Gateway Method Settings, e.g. logging or monitoring.
 data Api_Gateway_Method_Settings_Resource = Api_Gateway_Method_Settings_Resource
     { method_path :: !(Attr Text)
       {- ^ (Required) Method path defined as @{resource_path}/{http_method}@ for an individual method override, or @*/*@ for overriding all methods in the stage. -}
@@ -76,6 +102,8 @@ $(TH.makeResource
     ''Api_Gateway_Method_Settings_Resource)
 
 -- | The @aws_autoscaling_attachment@ AWS resource.
+--
+-- Provides an AutoScaling Attachment resource.
 data Autoscaling_Attachment_Resource = Autoscaling_Attachment_Resource
     { alb_target_group_arn :: !(Attr Text)
       {- ^ (Optional) The ARN of an ALB Target Group. -}
@@ -95,6 +123,27 @@ $(TH.makeResource
     ''Autoscaling_Attachment_Resource)
 
 -- | The @aws_cloudwatch_log_metric_filter@ AWS resource.
+--
+-- Provides a CloudWatch Log Metric Filter resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- yada <- resource "yada" $
+--     cloudwatch_log_metric_filter_resource
+--         & name .~ "MyAppAccessCount"
+--         & pattern .~
+--         & log_group_name .~ compute dada @"name"
+--  
+-- dada <- resource "dada" $
+--     cloudwatch_log_group_resource
+--         & name .~ "MyApp/access.log"
+-- @
 data Cloudwatch_Log_Metric_Filter_Resource = Cloudwatch_Log_Metric_Filter_Resource
     { log_group_name :: !(Attr Text)
       {- ^ (Required) The name of the log group to associate the metric filter with. -}
@@ -118,49 +167,34 @@ $(TH.makeResource
     ''Cloudwatch_Log_Metric_Filter_Resource)
 
 -- | The @aws_cloudwatch_metric_alarm@ AWS resource.
+--
+-- Provides a CloudWatch Metric Alarm resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foobar <- resource "foobar" $
+--     cloudwatch_metric_alarm_resource
+--         & alarm_name .~ "terraform-test-foobar5"
+--         & comparison_operator .~ "GreaterThanOrEqualToThreshold"
+--         & evaluation_periods .~ "2"
+--         & metric_name .~ "CPUUtilization"
+--         & namespace .~ "AWS/EC2"
+--         & period .~ "120"
+--         & statistic .~ "Average"
+--         & threshold .~ "80"
+--         & alarm_description .~ "This metric monitors ec2 cpu utilization"
+--         & insufficient_data_actions .~ []
+-- @
 data Cloudwatch_Metric_Alarm_Resource = Cloudwatch_Metric_Alarm_Resource
-    { actions_enabled :: !(Attr Text)
-      {- ^ (Optional) Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to @true@ . -}
-    , alarm_actions :: !(Attr Text)
-      {- ^ (Optional) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Number (ARN). -}
-    , alarm_description :: !(Attr Text)
-      {- ^ (Optional) The description for the alarm. -}
-    , alarm_name :: !(Attr Text)
-      {- ^ (Required) The descriptive name for the alarm. This name must be unique within the user's AWS account -}
-    , comparison_operator :: !(Attr Text)
-      {- ^ (Required) The arithmetic operation to use when comparing the specified Statistic and Threshold. The specified Statistic value is used as the first operand. Either of the following is supported: @GreaterThanOrEqualToThreshold@ , @GreaterThanThreshold@ , @LessThanThreshold@ , @LessThanOrEqualToThreshold@ . -}
-    , dimensions :: !(Attr Text)
-      {- ^ (Optional) The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation <http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html> . -}
-    , evaluate_low_sample_count_percentiles :: !(Attr Text)
-      {- ^ (Optional) Used only for alarms based on percentiles. If you specify @ignore@ , the alarm state will not change during periods with too few data points to be statistically significant. If you specify @evaluate@ or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available. The following values are supported: @ignore@ , and @evaluate@ . -}
-    , evaluation_periods :: !(Attr Text)
-      {- ^ (Required) The number of periods over which data is compared to the specified threshold. -}
-    , extended_statistic :: !(Attr Text)
-      {- ^ (Optional) The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. -}
-    , insufficient_data_actions :: !(Attr Text)
-      {- ^ (Optional) The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Number (ARN). -}
-    , metric_name :: !(Attr Text)
-      {- ^ (Required) The name for the alarm's associated metric. See docs for <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html> . -}
-    , namespace :: !(Attr Text)
-      {- ^ (Required) The namespace for the alarm's associated metric. See docs for the <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/aws-namespaces.html> . See docs for <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html> . -}
-    , ok_actions :: !(Attr Text)
-      {- ^ (Optional) The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Number (ARN). -}
-    , period :: !(Attr Text)
-      {- ^ (Required) The period in seconds over which the specified @statistic@ is applied. -}
-    , statistic :: !(Attr Text)
-      {- ^ (Optional) The statistic to apply to the alarm's associated metric. Either of the following is supported: @SampleCount@ , @Average@ , @Sum@ , @Minimum@ , @Maximum@ -}
-    , threshold :: !(Attr Text)
-      {- ^ (Required) The value against which the specified statistic is compared. -}
-    , treat_missing_data :: !(Attr Text)
-      {- ^ (Optional) Sets how this alarm is to handle missing data points. The following values are supported: @missing@ , @ignore@ , @breaching@ and @notBreaching@ . Defaults to @missing@ . -}
-    , unit :: !(Attr Text)
-      {- ^ (Optional) The unit for the alarm's associated metric. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Cloudwatch_Metric_Alarm_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the health check -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_cloudwatch_metric_alarm"
@@ -169,6 +203,8 @@ $(TH.makeResource
     ''Cloudwatch_Metric_Alarm_Resource)
 
 -- | The @aws_cognito_identity_pool@ AWS resource.
+--
+-- Provides an AWS Cognito Identity Pool.
 data Cognito_Identity_Pool_Resource = Cognito_Identity_Pool_Resource
     { allow_unauthenticated_identities :: !(Attr Text)
       {- ^ (Required) - Whether the identity pool supports unauthenticated logins or not. -}
@@ -187,9 +223,7 @@ data Cognito_Identity_Pool_Resource = Cognito_Identity_Pool_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Cognito_Identity_Pool_Resource
-    = '[ '("id", Attr Text)
-         {- - An identity pool ID in the format REGION:GUID. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_cognito_identity_pool"
@@ -198,6 +232,23 @@ $(TH.makeResource
     ''Cognito_Identity_Pool_Resource)
 
 -- | The @aws_customer_gateway@ AWS resource.
+--
+-- Provides a customer gateway inside a VPC. These objects can be connected to VPN gateways via VPN connections, and allow you to establish tunnels between your network and the VPC.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- main <- resource "main" $
+--     customer_gateway_resource
+--         & bgp_asn .~ 65000
+--         & ip_address .~ "172.83.124.10"
+--         & type .~ "ipsec.1"
+-- @
 data Customer_Gateway_Resource = Customer_Gateway_Resource
     { bgp_asn :: !(Attr Text)
       {- ^ (Required) The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). -}
@@ -229,6 +280,35 @@ $(TH.makeResource
     ''Customer_Gateway_Resource)
 
 -- | The @aws_db_snapshot@ AWS resource.
+--
+-- Creates a Snapshot of an DB Instance.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     db_instance_resource
+--         & allocated_storage .~ 10
+--         & engine .~ "MySQL"
+--         & engine_version .~ "5.6.21"
+--         & instance_class .~ "db.t1.micro"
+--         & name .~ "baz"
+--         & password .~ "barbarbarbar"
+--         & username .~ "foo"
+--         & maintenance_window .~ "Fri:09:00-Fri:09:30"
+--         & backup_retention_period .~ 0
+--         & parameter_group_name .~ "default.mysql5.6"
+--  
+-- test <- resource "test" $
+--     db_snapshot_resource
+--         & db_instance_identifier .~ compute bar @"id"
+--         & db_snapshot_identifier .~ "testsnapshot1234"
+-- @
 data Db_Snapshot_Resource = Db_Snapshot_Resource
     { db_instance_identifier :: !(Attr Text)
       {- ^ (Required) The DB Instance Identifier from which to take the snapshot. -}
@@ -276,6 +356,23 @@ $(TH.makeResource
     ''Db_Snapshot_Resource)
 
 -- | The @aws_db_subnet_group@ AWS resource.
+--
+-- Provides an RDS DB subnet group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     db_subnet_group_resource
+--         & name .~ "main"
+--         & subnet_ids .~ [compute frontend @"id"
+--                         ,compute backend @"id"]
+-- @
 data Db_Subnet_Group_Resource = Db_Subnet_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the DB subnet group. Defaults to "Managed by Terraform". -}
@@ -303,33 +400,12 @@ $(TH.makeResource
     ''Db_Subnet_Group_Resource)
 
 -- | The @aws_default_security_group@ AWS resource.
+--
+-- Provides a resource to manage the default AWS Security Group.
 data Default_Security_Group_Resource = Default_Security_Group_Resource
-    { egress :: !(Attr Text)
-      {- ^ (Optional, VPC only) Can be specified multiple times for each egress rule. Each egress block supports fields documented below. -}
-    , ingress :: !(Attr Text)
-      {- ^ (Optional) Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , vpc_id :: !(Attr Text)
-      {- ^ (Optional, Forces new resource) The VPC ID. It will be left in it's current state -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Default_Security_Group_Resource
-    = '[ '("description", Attr Text)
-         {- - The description of the security group -}
-      , '("egress", Attr Text)
-         {- - The egress rules. See above for more. -}
-      , '("id", Attr Text)
-         {- - The ID of the security group -}
-      , '("ingress", Attr Text)
-         {- - The ingress rules. See above for more. -}
-      , '("name", Attr Text)
-         {- - The name of the security group -}
-      , '("owner_id", Attr Text)
-         {- - The owner ID. -}
-      , '("vpc_id", Attr Text)
-         {- - The VPC ID. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_default_security_group"
@@ -338,15 +414,12 @@ $(TH.makeResource
     ''Default_Security_Group_Resource)
 
 -- | The @aws_devicefarm_project@ AWS resource.
+--
+-- Provides a resource to manage AWS Device Farm Projects. Please keep in mind that this feature is only supported on the "us-west-2" region. This resource will error if you try to create a project in another region.
 data Devicefarm_Project_Resource = Devicefarm_Project_Resource
-    { name :: !(Attr Text)
-      {- ^ (Required) The name of the project -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Devicefarm_Project_Resource
-    = '[ '("arn", Attr Text)
-         {- - The Amazon Resource Name of this project -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_devicefarm_project"
@@ -355,6 +428,8 @@ $(TH.makeResource
     ''Devicefarm_Project_Resource)
 
 -- | The @aws_dms_replication_instance@ AWS resource.
+--
+-- Provides a DMS (Data Migration Service) replication instance resource. DMS replication instances can be created, updated, deleted, and imported.
 data Dms_Replication_Instance_Resource = Dms_Replication_Instance_Resource
     { allocated_storage :: !(Attr Text)
       {- ^ (Optional, Default: 50, Min: 5, Max: 6144) The amount of storage (in gigabytes) to be initially allocated for the replication instance. -}
@@ -402,6 +477,21 @@ $(TH.makeResource
     ''Dms_Replication_Instance_Resource)
 
 -- | The @aws_ecr_repository@ AWS resource.
+--
+-- Provides an EC2 Container Registry Repository.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     ecr_repository_resource
+--         & name .~ "bar"
+-- @
 data Ecr_Repository_Resource = Ecr_Repository_Resource
     { name :: !(Attr Text)
       {- ^ (Required) Name of the repository. -}
@@ -425,6 +515,28 @@ $(TH.makeResource
     ''Ecr_Repository_Resource)
 
 -- | The @aws_elastic_beanstalk_environment@ AWS resource.
+--
+-- Provides an Elastic Beanstalk Environment Resource. Elastic Beanstalk allows you to deploy and manage applications in the AWS cloud without worrying about the infrastructure that runs those applications.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- tftest <- resource "tftest" $
+--     elastic_beanstalk_application_resource
+--         & name .~ "tf-test-name"
+--         & description .~ "tf-test-desc"
+--  
+-- tfenvtest <- resource "tfenvtest" $
+--     elastic_beanstalk_environment_resource
+--         & name .~ "tf-test-name"
+--         & application .~ compute tftest @"name"
+--         & solution_stack_name .~ "64bit Amazon Linux 2015.03 v2.0.3 running Go 1.4"
+-- @
 data Elastic_Beanstalk_Environment_Resource = Elastic_Beanstalk_Environment_Resource
     { application :: !(Attr Text)
       {- ^ – (Required) Name of the application that contains the version to be deployed -}
@@ -453,35 +565,7 @@ data Elastic_Beanstalk_Environment_Resource = Elastic_Beanstalk_Environment_Reso
     } deriving (Show, Eq, Generic)
 
 type instance Computed Elastic_Beanstalk_Environment_Resource
-    = '[ '("all_settings", Attr Text)
-         {- – List of all option settings configured in the Environment. These are a combination of default settings and their overrides from @setting@ in the configuration. -}
-      , '("application", Attr Text)
-         {- – The Elastic Beanstalk Application specified for this environment. -}
-      , '("autoscaling_groups", Attr Text)
-         {- - The autoscaling groups used by this environment. -}
-      , '("cname", Attr Text)
-         {- - Fully qualified DNS name for the Environment. -}
-      , '("description", Attr Text)
-         {- - Description of the Elastic Beanstalk Environment. -}
-      , '("id", Attr Text)
-         {- - ID of the Elastic Beanstalk Environment. -}
-      , '("instances", Attr Text)
-         {- - Instances used by this environment. -}
-      , '("launch_configurations", Attr Text)
-         {- - Launch configurations in use by this environment. -}
-      , '("load_balancers", Attr Text)
-         {- - Elastic load balancers in use by this environment. -}
-      , '("name", Attr Text)
-         {- - Name of the Elastic Beanstalk Environment. -}
-      , '("queues", Attr Text)
-         {- - SQS queues in use by this environment. -}
-      , '("setting", Attr Text)
-         {- – Settings specifically set for this Environment. -}
-      , '("tier", Attr Text)
-         {- - The environment tier specified. -}
-      , '("triggers", Attr Text)
-         {- - Autoscaling triggers in use by this environment. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_elastic_beanstalk_environment"
@@ -490,6 +574,26 @@ $(TH.makeResource
     ''Elastic_Beanstalk_Environment_Resource)
 
 -- | The @aws_iam_account_password_policy@ AWS resource.
+--
+-- -> There is only a single policy allowed per AWS account. An existing policy will be lost when using this resource as an effect of this limitation.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- strict <- resource "strict" $
+--     iam_account_password_policy_resource
+--         & minimum_password_length .~ 8
+--         & require_lowercase_characters .~ True
+--         & require_numbers .~ True
+--         & require_uppercase_characters .~ True
+--         & require_symbols .~ True
+--         & allow_users_to_change_password .~ True
+-- @
 data Iam_Account_Password_Policy_Resource = Iam_Account_Password_Policy_Resource
     { allow_users_to_change_password :: !(Attr Text)
       {- ^ (Optional) Whether to allow users to change their own password -}
@@ -523,6 +627,8 @@ $(TH.makeResource
     ''Iam_Account_Password_Policy_Resource)
 
 -- | The @aws_iam_group_policy@ AWS resource.
+--
+-- Provides an IAM policy attached to a group.
 data Iam_Group_Policy_Resource = Iam_Group_Policy_Resource
     { group :: !(Attr Text)
       {- ^ (Required) The IAM group to attach to the policy. -}
@@ -552,6 +658,23 @@ $(TH.makeResource
     ''Iam_Group_Policy_Resource)
 
 -- | The @aws_iam_openid_connect_provider@ AWS resource.
+--
+-- Provides an IAM OpenID Connect provider.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     iam_openid_connect_provider_resource
+--         & url .~ "https://accounts.google.com"
+--         & client_id_list .~ ["266362248691-342342xasdasdasda-apps.googleusercontent.com"]
+--         & thumbprint_list .~ []
+-- @
 data Iam_Openid_Connect_Provider_Resource = Iam_Openid_Connect_Provider_Resource
     { client_id_list :: !(Attr Text)
       {- ^ (Required) A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.) -}
@@ -573,6 +696,8 @@ $(TH.makeResource
     ''Iam_Openid_Connect_Provider_Resource)
 
 -- | The @aws_iam_user@ AWS resource.
+--
+-- Provides an IAM user.
 data Iam_User_Resource = Iam_User_Resource
     { force_destroy :: !(Attr Text)
       {- ^ (Optional, default false) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without @force_destroy@ a user with non-Terraform-managed access keys and login profile will fail to be destroyed. -}
@@ -598,6 +723,25 @@ $(TH.makeResource
     ''Iam_User_Resource)
 
 -- | The @aws_inspector_assessment_target@ AWS resource.
+--
+-- Provides a Inspector assessment target
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     inspector_resource_group_resource
+--  
+-- foo <- resource "foo" $
+--     inspector_assessment_target_resource
+--         & name .~ "assessment target"
+--         & resource_group_arn .~ compute bar @"arn"
+-- @
 data Inspector_Assessment_Target_Resource = Inspector_Assessment_Target_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the assessment target. -}
@@ -617,6 +761,21 @@ $(TH.makeResource
     ''Inspector_Assessment_Target_Resource)
 
 -- | The @aws_internet_gateway@ AWS resource.
+--
+-- Provides a resource to create a VPC Internet Gateway.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- gw <- resource "gw" $
+--     internet_gateway_resource
+--         & vpc_id .~ compute main @"id"
+-- @
 data Internet_Gateway_Resource = Internet_Gateway_Resource
     { tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
@@ -636,61 +795,12 @@ $(TH.makeResource
     ''Internet_Gateway_Resource)
 
 -- | The @aws_lambda_function@ AWS resource.
+--
+-- Provides a Lambda Function resource. Lambda allows you to trigger execution of code in response to events in AWS. The Lambda Function itself includes source code and runtime configuration.
 data Lambda_Function_Resource = Lambda_Function_Resource
-    { dead_letter_config :: !(Attr Text)
-      {- ^ (Optional) Nested block to configure the function's . See details below. -}
-    , description :: !(Attr Text)
-      {- ^ (Optional) Description of what your Lambda Function does. -}
-    , environment :: !(Attr Text)
-      {- ^ (Optional) The Lambda environment's configuration settings. Fields documented below. -}
-    , filename :: !(Attr Text)
-      {- ^ (Optional) The path to the function's deployment package within the local filesystem. If defined, The @s3_@ -prefixed options cannot be used. -}
-    , function_name :: !(Attr Text)
-      {- ^ (Required) A unique name for your Lambda Function. -}
-    , handler :: !(Attr Text)
-      {- ^ (Required) The function <https://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events-create-test-function.html> in your code. -}
-    , kms_key_arn :: !(Attr Text)
-      {- ^ (Optional) The ARN for the KMS encryption key. -}
-    , memory_size :: !(Attr Text)
-      {- ^ (Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to @128@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html> -}
-    , publish :: !(Attr Text)
-      {- ^ (Optional) Whether to publish creation/change as new Lambda Function Version. Defaults to @false@ . -}
-    , role :: !(Attr Text)
-      {- ^ (Required) IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to. See <https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html> for more details. -}
-    , runtime :: !(Attr Text)
-      {- ^ (Required) See <https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html#SSS-CreateFunction-request-Runtime> for valid values. -}
-    , s3_bucket :: !(Attr Text)
-      {- ^ (Optional) The S3 bucket location containing the function's deployment package. Conflicts with @filename@ . -}
-    , s3_key :: !(Attr Text)
-      {- ^ (Optional) The S3 key of an object containing the function's deployment package. Conflicts with @filename@ . -}
-    , s3_object_version :: !(Attr Text)
-      {- ^ (Optional) The object version containing the function's deployment package. Conflicts with @filename@ . -}
-    , source_code_hash :: !(Attr Text)
-      {- ^ (Optional) Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either @filename@ or @s3_key@ . The usual way to set this is @${base64sha256(file("file.zip"))}@ , where "file.zip" is the local filename of the lambda function source archive. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the object. -}
-    , timeout :: !(Attr Text)
-      {- ^ (Optional) The amount of time your Lambda Function has to run in seconds. Defaults to @3@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html> -}
-    , vpc_config :: !(Attr Text)
-      {- ^ (Optional) Provide this to allow your function to access your VPC. Fields documented below. See <http://docs.aws.amazon.com/lambda/latest/dg/vpc.html> -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Lambda_Function_Resource
-    = '[ '("arn", Attr Text)
-         {- - The Amazon Resource Name (ARN) identifying your Lambda Function. -}
-      , '("invoke_arn", Attr Text)
-         {- - The ARN to be used for invoking Lambda Function from API Gateway - to be used in </docs/providers/aws/r/api_gateway_integration.html> 's @uri@ -}
-      , '("kms_key_arn", Attr Text)
-         {- - (Optional) The ARN for the KMS encryption key. -}
-      , '("last_modified", Attr Text)
-         {- - The date this resource was last modified. -}
-      , '("qualified_arn", Attr Text)
-         {- - The Amazon Resource Name (ARN) identifying your Lambda Function Version (if versioning is enabled via @publish = true@ ). -}
-      , '("source_code_hash", Attr Text)
-         {- - Base64-encoded representation of raw SHA-256 sum of the zip file provided either via @filename@ or @s3_*@ parameters. -}
-      , '("version", Attr Text)
-         {- - Latest published version of your Lambda Function. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_lambda_function"
@@ -699,6 +809,34 @@ $(TH.makeResource
     ''Lambda_Function_Resource)
 
 -- | The @aws_lightsail_static_ip_attachment@ AWS resource.
+--
+-- Provides a static IP address attachment - relationship between a Lightsail static IP & Lightsail instance.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test <- resource "test" $
+--     lightsail_static_ip_attachment_resource
+--         & static_ip_name .~ compute test @"name"
+--         & instance_name .~ compute test @"name"
+--  
+-- test <- resource "test" $
+--     lightsail_static_ip_resource
+--         & name .~ "example"
+--  
+-- test <- resource "test" $
+--     lightsail_instance_resource
+--         & name .~ "example"
+--         & availability_zone .~ "us-east-1b"
+--         & blueprint_id .~ "string"
+--         & bundle_id .~ "string"
+--         & key_pair_name .~ "some_key_name"
+-- @
 data Lightsail_Static_Ip_Attachment_Resource = Lightsail_Static_Ip_Attachment_Resource
     { instance_name :: !(Attr Text)
       {- ^ (Required) The name of the Lightsail instance to attach the IP to -}
@@ -722,6 +860,23 @@ $(TH.makeResource
     ''Lightsail_Static_Ip_Attachment_Resource)
 
 -- | The @aws_network_interface@ AWS resource.
+--
+-- Provides an Elastic network interface (ENI) resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test <- resource "test" $
+--     network_interface_resource
+--         & subnet_id .~ compute public_a @"id"
+--         & private_ips .~ ["10.0.0.50"]
+--         & security_groups .~ [compute web @"id"]
+-- @
 data Network_Interface_Resource = Network_Interface_Resource
     { attachment :: !(Attr Text)
       {- ^ (Optional) Block to define the attachment of the ENI. Documented below. -}
@@ -765,6 +920,22 @@ $(TH.makeResource
     ''Network_Interface_Resource)
 
 -- | The @aws_opsworks_haproxy_layer@ AWS resource.
+--
+-- Provides an OpsWorks haproxy layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- lb <- resource "lb" $
+--     opsworks_haproxy_layer_resource
+--         & stack_id .~ compute main @"id"
+--         & stats_password .~ "foobarbaz"
+-- @
 data Opsworks_Haproxy_Layer_Resource = Opsworks_Haproxy_Layer_Resource
     { auto_assign_elastic_ips :: !(Attr Text)
       {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
@@ -822,6 +993,8 @@ $(TH.makeResource
     ''Opsworks_Haproxy_Layer_Resource)
 
 -- | The @aws_s3_bucket_notification@ AWS resource.
+--
+-- Provides a S3 bucket notification resource.
 data S3_Bucket_Notification_Resource = S3_Bucket_Notification_Resource
     { bucket :: !(Attr Text)
       {- ^ (Required) The name of the bucket to put notification configuration. -}
@@ -843,6 +1016,48 @@ $(TH.makeResource
     ''S3_Bucket_Notification_Resource)
 
 -- | The @aws_s3_bucket@ AWS resource.
+--
+-- Provides a S3 bucket resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- b <- resource "b" $
+--     s3_bucket_resource
+--         & bucket .~ "my-tf-test-bucket"
+--         & acl .~ "private"
+-- @
+--
+-- @
+-- b <- resource "b" $
+--     s3_bucket_resource
+--         & bucket .~ "s3-website-test.hashicorp.com"
+--         & acl .~ "public-read"
+-- @
+--
+-- @
+-- b <- resource "b" $
+--     s3_bucket_resource
+--         & bucket .~ "my-tf-test-bucket"
+--         & acl .~ "private"
+-- @
+--
+-- @
+-- log_bucket <- resource "log_bucket" $
+--     s3_bucket_resource
+--         & bucket .~ "my-tf-log-bucket"
+--         & acl .~ "log-delivery-write"
+--  
+-- b <- resource "b" $
+--     s3_bucket_resource
+--         & bucket .~ "my-tf-test-bucket"
+--         & acl .~ "private"
+-- @
 data S3_Bucket_Resource = S3_Bucket_Resource
     { acceleration_status :: !(Attr Text)
       {- ^ (Optional) Sets the accelerate configuration of an existing bucket. Can be @Enabled@ or @Suspended@ . -}
@@ -900,6 +1115,21 @@ $(TH.makeResource
     ''S3_Bucket_Resource)
 
 -- | The @aws_ses_active_receipt_rule_set@ AWS resource.
+--
+-- Provides a resource to designate the active SES receipt rule set
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- main <- resource "main" $
+--     ses_active_receipt_rule_set_resource
+--         & rule_set_name .~ "primary-rules"
+-- @
 data Ses_Active_Receipt_Rule_Set_Resource = Ses_Active_Receipt_Rule_Set_Resource
     { rule_set_name :: !(Attr Text)
       {- ^ (Required) The name of the rule set -}

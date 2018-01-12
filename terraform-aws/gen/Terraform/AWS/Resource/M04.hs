@@ -24,6 +24,21 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @sfn_activity@ AWS resource.
+--
+-- Provides a Step Function Activity resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- sfn_activity <- resource "sfn_activity" $
+--     sfn_activity_resource
+--         & name .~ "my-activity"
+-- @
 data Activity_Resource = Activity_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the activity to create. -}
@@ -45,6 +60,8 @@ $(TH.makeResource
     ''Activity_Resource)
 
 -- | The @aws_api_gateway_usage_plan@ AWS resource.
+--
+-- Provides an API Gateway Usage Plan.
 data Api_Gateway_Usage_Plan_Resource = Api_Gateway_Usage_Plan_Resource
     { api_stages :: !(Attr Text)
       {- ^ (Optional) The associated <#api-stages-arguments> of the usage plan. -}
@@ -61,21 +78,7 @@ data Api_Gateway_Usage_Plan_Resource = Api_Gateway_Usage_Plan_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Api_Gateway_Usage_Plan_Resource
-    = '[ '("api_stages", Attr Text)
-         {- - The associated API stages of the usage plan. -}
-      , '("description", Attr Text)
-         {- - The description of a usage plan. -}
-      , '("id", Attr Text)
-         {- - The ID of the API resource -}
-      , '("name", Attr Text)
-         {- - The name of the usage plan. -}
-      , '("product_code", Attr Text)
-         {- - The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace. -}
-      , '("quota_settings", Attr Text)
-         {- - The quota of the usage plan. -}
-      , '("throttle_settings", Attr Text)
-         {- - The throttling limits of the usage plan. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_api_gateway_usage_plan"
@@ -84,6 +87,36 @@ $(TH.makeResource
     ''Api_Gateway_Usage_Plan_Resource)
 
 -- | The @aws_autoscaling_policy@ AWS resource.
+--
+-- Provides an AutoScaling Scaling Policy resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bat <- resource "bat" $
+--     autoscaling_policy_resource
+--         & name .~ "foobar3-terraform-test"
+--         & scaling_adjustment .~ 4
+--         & adjustment_type .~ "ChangeInCapacity"
+--         & cooldown .~ 300
+--         & autoscaling_group_name .~ compute bar @"name"
+--  
+-- bar <- resource "bar" $
+--     autoscaling_group_resource
+--         & availability_zones .~ ["us-east-1a"]
+--         & name .~ "foobar3-terraform-test"
+--         & max_size .~ 5
+--         & min_size .~ 2
+--         & health_check_grace_period .~ 300
+--         & health_check_type .~ "ELB"
+--         & force_delete .~ True
+--         & launch_configuration .~ compute foo @"name"
+-- @
 data Autoscaling_Policy_Resource = Autoscaling_Policy_Resource
     { adjustment_type :: !(Attr Text)
       {- ^ (Required) Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are @ChangeInCapacity@ , @ExactCapacity@ , and @PercentChangeInCapacity@ . -}
@@ -115,6 +148,8 @@ $(TH.makeResource
     ''Autoscaling_Policy_Resource)
 
 -- | The @aws_cloudtrail@ AWS resource.
+--
+-- Provides a CloudTrail resource.
 data Cloudtrail_Resource = Cloudtrail_Resource
     { cloud_watch_logs_group_arn :: !(Attr Text)
       {- ^ (Optional) Specifies a log group name using an Amazon Resource Name (ARN), that represents the log group to which CloudTrail logs will be delivered. -}
@@ -158,6 +193,21 @@ $(TH.makeResource
     ''Cloudtrail_Resource)
 
 -- | The @aws_codedeploy_app@ AWS resource.
+--
+-- Provides a CodeDeploy application to be used as a basis for deployments
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     codedeploy_app_resource
+--         & name .~ "foo"
+-- @
 data Codedeploy_App_Resource = Codedeploy_App_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the application. -}
@@ -177,6 +227,8 @@ $(TH.makeResource
     ''Codedeploy_App_Resource)
 
 -- | The @aws_cognito_identity_pool_roles_attachment@ AWS resource.
+--
+-- Provides an AWS Cognito Identity Pool Roles Attachment.
 data Cognito_Identity_Pool_Roles_Attachment_Resource = Cognito_Identity_Pool_Roles_Attachment_Resource
     { identity_pool_id :: !(Attr Text)
       {- ^ (Required) - An identity pool ID in the format REGION:GUID. -}
@@ -187,15 +239,7 @@ data Cognito_Identity_Pool_Roles_Attachment_Resource = Cognito_Identity_Pool_Rol
     } deriving (Show, Eq, Generic)
 
 type instance Computed Cognito_Identity_Pool_Roles_Attachment_Resource
-    = '[ '("id", Attr Text)
-         {- - The identity pool ID. -}
-      , '("identity_pool_id", Attr Text)
-         {- (Required) - An identity pool ID in the format REGION:GUID. -}
-      , '("role_mapping", Attr Text)
-         {- (Optional) - The List of <#role-mappings> . -}
-      , '("roles", Attr Text)
-         {- (Required) - The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_cognito_identity_pool_roles_attachment"
@@ -204,6 +248,24 @@ $(TH.makeResource
     ''Cognito_Identity_Pool_Roles_Attachment_Resource)
 
 -- | The @aws_db_option_group@ AWS resource.
+--
+-- Provides an RDS DB option group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     db_option_group_resource
+--         & name .~ "option-group-test-terraform"
+--         & option_group_description .~ "Terraform Option Group"
+--         & engine_name .~ "sqlserver-ee"
+--         & major_engine_version .~ "11.00"
+-- @
 data Db_Option_Group_Resource = Db_Option_Group_Resource
     { engine_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the engine that this option group should be associated with. -}
@@ -235,6 +297,26 @@ $(TH.makeResource
     ''Db_Option_Group_Resource)
 
 -- | The @aws_ebs_snapshot@ AWS resource.
+--
+-- Creates a Snapshot of an EBS Volume.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     ebs_volume_resource
+--         & availability_zone .~ "us-west-2a"
+--         & size .~ 40
+--  
+-- example_snapshot <- resource "example_snapshot" $
+--     ebs_snapshot_resource
+--         & volume_id .~ compute example @"id"
+-- @
 data Ebs_Snapshot_Resource = Ebs_Snapshot_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) A description of what the snapshot is. -}
@@ -270,6 +352,22 @@ $(TH.makeResource
     ''Ebs_Snapshot_Resource)
 
 -- | The @aws_ecs_task_definition@ AWS resource.
+--
+-- Provides an ECS task definition to be used in @aws_ecs_service@ .
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- service <- resource "service" $
+--     ecs_task_definition_resource
+--         & family .~ "service"
+--         & container_definitions .~ file("task-definitions/service.json")
+-- @
 data Ecs_Task_Definition_Resource = Ecs_Task_Definition_Resource
     { container_definitions :: !(Attr Text)
       {- ^ (Required) A list of valid [container definitions] (http://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html) provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the [Task Definition Parameters] (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html) section from the official <https://docs.aws.amazon.com/AmazonECS/latest/developerguide> . -}
@@ -286,13 +384,7 @@ data Ecs_Task_Definition_Resource = Ecs_Task_Definition_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Ecs_Task_Definition_Resource
-    = '[ '("arn", Attr Text)
-         {- - Full ARN of the Task Definition (including both @family@ and @revision@ ). -}
-      , '("family", Attr Text)
-         {- - The family of the Task Definition. -}
-      , '("revision", Attr Text)
-         {- - The revision of the task in a particular family. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_ecs_task_definition"
@@ -301,6 +393,26 @@ $(TH.makeResource
     ''Ecs_Task_Definition_Resource)
 
 -- | The @aws_elasticache_security_group@ AWS resource.
+--
+-- Provides an ElastiCache Security Group to control access to one or more cache clusters.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     security_group_resource
+--         & name .~ "security-group"
+--  
+-- bar <- resource "bar" $
+--     elasticache_security_group_resource
+--         & name .~ "elasticache-security-group"
+--         & security_group_names .~ [compute bar @"name"]
+-- @
 data Elasticache_Security_Group_Resource = Elasticache_Security_Group_Resource
     { description :: !(Attr Text)
       {- ^ – (Optional) description for the cache security group. Defaults to "Managed by Terraform". -}
@@ -320,6 +432,8 @@ $(TH.makeResource
     ''Elasticache_Security_Group_Resource)
 
 -- | The @aws_elastictranscoder_preset@ AWS resource.
+--
+-- Provides an Elastic Transcoder preset resource.
 data Elastictranscoder_Preset_Resource = Elastictranscoder_Preset_Resource
     { audio :: !(Attr Text)
       {- ^ (Optional, Forces new resource) Audio parameters object (documented below). -}
@@ -351,6 +465,8 @@ $(TH.makeResource
     ''Elastictranscoder_Preset_Resource)
 
 -- | The @aws_elb_attachment@ AWS resource.
+--
+-- Provides an Elastic Load Balancer Attachment resource.
 data Elb_Attachment_Resource = Elb_Attachment_Resource
     { elb :: !(Attr Text)
       {- ^ (Required) The name of the ELB. -}
@@ -368,6 +484,8 @@ $(TH.makeResource
     ''Elb_Attachment_Resource)
 
 -- | The @aws_elb_load_balancer_listener_policy@ AWS resource.
+--
+-- Attaches a load balancer policy to an ELB Listener.
 data Elb_Load_Balancer_Listener_Policy_Resource = Elb_Load_Balancer_Listener_Policy_Resource
     { load_balancer_name :: !(Attr Text)
       {- ^ (Required) The load balancer to attach the policy to. -}
@@ -393,6 +511,24 @@ $(TH.makeResource
     ''Elb_Load_Balancer_Listener_Policy_Resource)
 
 -- | The @aws_emr_instance_group@ AWS resource.
+--
+-- Provides an Elastic MapReduce Cluster Instance Group configuration. See <https://aws.amazon.com/documentation/emr/> for more information.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- task <- resource "task" $
+--     emr_instance_group_resource
+--         & cluster_id .~ compute tf-test-cluster @"id"
+--         & instance_count .~ 1
+--         & instance_type .~ "m3.xlarge"
+--         & name .~ "my little instance group"
+-- @
 data Emr_Instance_Group_Resource = Emr_Instance_Group_Resource
     { cluster_id :: !(Attr Text)
       {- ^ (Required) ID of the EMR Cluster to attach to. Changing this forces a new resource to be created. -}
@@ -424,6 +560,8 @@ $(TH.makeResource
     ''Emr_Instance_Group_Resource)
 
 -- | The @aws_iam_user_policy_attachment@ AWS resource.
+--
+-- Attaches a Managed IAM Policy to an IAM user
 data Iam_User_Policy_Attachment_Resource = Iam_User_Policy_Attachment_Resource
     { policy_arn :: !(Attr Text)
       {- ^ (Required) - The ARN of the policy you want to apply -}
@@ -441,6 +579,22 @@ $(TH.makeResource
     ''Iam_User_Policy_Attachment_Resource)
 
 -- | The @aws_kms_key@ AWS resource.
+--
+-- Provides a KMS customer master key.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- a <- resource "a" $
+--     kms_key_resource
+--         & description .~ "KMS key 1"
+--         & deletion_window_in_days .~ 10
+-- @
 data Kms_Key_Resource = Kms_Key_Resource
     { deletion_window_in_days :: !(Attr Text)
       {- ^ (Optional) Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 30 days. -}
@@ -472,6 +626,29 @@ $(TH.makeResource
     ''Kms_Key_Resource)
 
 -- | The @aws_lb_cookie_stickiness_policy@ AWS resource.
+--
+-- Provides a load balancer cookie stickiness policy, which allows an ELB to control the sticky session lifetime of the browser.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- lb <- resource "lb" $
+--     elb_resource
+--         & name .~ "test-lb"
+--         & availability_zones .~ ["us-east-1a"]
+--  
+-- foo <- resource "foo" $
+--     lb_cookie_stickiness_policy_resource
+--         & name .~ "foo-policy"
+--         & load_balancer .~ compute lb @"id"
+--         & lb_port .~ 80
+--         & cookie_expiration_period .~ 600
+-- @
 data Lb_Cookie_Stickiness_Policy_Resource = Lb_Cookie_Stickiness_Policy_Resource
     { cookie_expiration_period :: !(Attr Text)
       {- ^ (Optional) The time period after which the session cookie should be considered stale, expressed in seconds. -}
@@ -503,6 +680,8 @@ $(TH.makeResource
     ''Lb_Cookie_Stickiness_Policy_Resource)
 
 -- | The @aws_lb_listener_rule@ AWS resource.
+--
+-- Provides a Load Balancer Listener Rule resource.
 data Lb_Listener_Rule_Resource = Lb_Listener_Rule_Resource
     { action :: !(Attr Text)
       {- ^ (Required) An Action block. Action blocks are documented below. -}
@@ -528,31 +707,12 @@ $(TH.makeResource
     ''Lb_Listener_Rule_Resource)
 
 -- | The @aws_lightsail_key_pair@ AWS resource.
+--
+-- Provides a Lightsail Key Pair, for use with Lightsail Instances. These key pairs are seperate from EC2 Key Pairs, and must be created or imported for use with Lightsail.
 data Lightsail_Key_Pair_Resource = Lightsail_Key_Pair_Resource
-    { name :: !(Attr Text)
-      {- ^ (Optional) The name of the Lightsail Key Pair. If omitted, a unique name will be generated by Terraform -}
-    , pgp_key :: !(Attr Text)
-      {- ^ – (Optional) An optional PGP key to encrypt the resulting private key material. Only used when creating a new key pair -}
-    , public_key :: !(Attr Text)
-      {- ^ (Required) The public key material. This public key will be imported into Lightsail -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Lightsail_Key_Pair_Resource
-    = '[ '("arn", Attr Text)
-         {- - The ARN of the Lightsail key pair -}
-      , '("encrypted_fingerprint", Attr Text)
-         {- - The MD5 public key fingerprint for the encrypted private key -}
-      , '("encrypted_private_key", Attr Text)
-         {- – the private key material, base 64 encoded and encrypted with the given @pgp_key@ . This is only populated when creating a new key and @pgp_key@ is supplied -}
-      , '("fingerprint", Attr Text)
-         {- - The MD5 public key fingerprint as specified in section 4 of RFC 4716. -}
-      , '("id", Attr Text)
-         {- - The name used for this key pair -}
-      , '("private_key", Attr Text)
-         {- - the private key, base64 encoded. This is only populated when creating a new key, and when no @pgp_key@ is provided -}
-      , '("public_key", Attr Text)
-         {- - the public key, base64 encoded -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_lightsail_key_pair"
@@ -561,6 +721,23 @@ $(TH.makeResource
     ''Lightsail_Key_Pair_Resource)
 
 -- | The @aws_opsworks_custom_layer@ AWS resource.
+--
+-- Provides an OpsWorks custom layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- custlayer <- resource "custlayer" $
+--     opsworks_custom_layer_resource
+--         & name .~ "My Awesome Custom Layer"
+--         & short_name .~ "awesome"
+--         & stack_id .~ compute main @"id"
+-- @
 data Opsworks_Custom_Layer_Resource = Opsworks_Custom_Layer_Resource
     { auto_assign_elastic_ips :: !(Attr Text)
       {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
@@ -608,6 +785,25 @@ $(TH.makeResource
     ''Opsworks_Custom_Layer_Resource)
 
 -- | The @aws_opsworks_instance@ AWS resource.
+--
+-- Provides an OpsWorks instance resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- my-instance <- resource "my-instance" $
+--     opsworks_instance_resource
+--         & stack_id .~ compute my-stack @"id"
+--         & layer_ids .~ [compute my-layer @"id"]
+--         & instance_type .~ "t2.micro"
+--         & os .~ "Amazon Linux 2015.09"
+--         & state .~ "stopped"
+-- @
 data Opsworks_Instance_Resource = Opsworks_Instance_Resource
     { agent_version :: !(Attr Text)
       {- ^ (Optional) The AWS OpsWorks agent to install.  Defaults to @"INHERIT"@ . -}
@@ -654,29 +850,7 @@ data Opsworks_Instance_Resource = Opsworks_Instance_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Opsworks_Instance_Resource
-    = '[ '("agent_version", Attr Text)
-         {- - The AWS OpsWorks agent version. -}
-      , '("availability_zone", Attr Text)
-         {- - The availability zone of the instance. -}
-      , '("id", Attr Text)
-         {- - The id of the OpsWorks instance. -}
-      , '("private_dns", Attr Text)
-         {- - The private DNS name assigned to the instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC -}
-      , '("private_ip", Attr Text)
-         {- - The private IP address assigned to the instance -}
-      , '("public_dns", Attr Text)
-         {- - The public DNS name assigned to the instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC -}
-      , '("public_ip", Attr Text)
-         {- - The public IP address assigned to the instance, if applicable. -}
-      , '("security_group_ids", Attr Text)
-         {- - The associated security groups. -}
-      , '("ssh_key_name", Attr Text)
-         {- - The key name of the instance -}
-      , '("subnet_id", Attr Text)
-         {- - The VPC subnet ID. -}
-      , '("tenancy", Attr Text)
-         {- - The Instance tenancy -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_opsworks_instance"
@@ -685,6 +859,21 @@ $(TH.makeResource
     ''Opsworks_Instance_Resource)
 
 -- | The @aws_opsworks_java_app_layer@ AWS resource.
+--
+-- Provides an OpsWorks Java application layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- app <- resource "app" $
+--     opsworks_java_app_layer_resource
+--         & stack_id .~ compute main @"id"
+-- @
 data Opsworks_Java_App_Layer_Resource = Opsworks_Java_App_Layer_Resource
     { app_server :: !(Attr Text)
       {- ^ (Optional) Keyword for the application container to use. Defaults to "tomcat". -}
@@ -740,6 +929,39 @@ $(TH.makeResource
     ''Opsworks_Java_App_Layer_Resource)
 
 -- | The @aws_route53_zone_association@ AWS resource.
+--
+-- Provides a Route53 private Hosted Zone to VPC association resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- primary <- resource "primary" $
+--     vpc_resource
+--         & cidr_block .~ "10.6.0.0/16"
+--         & enable_dns_hostnames .~ True
+--         & enable_dns_support .~ True
+--  
+-- secondary <- resource "secondary" $
+--     vpc_resource
+--         & cidr_block .~ "10.7.0.0/16"
+--         & enable_dns_hostnames .~ True
+--         & enable_dns_support .~ True
+--  
+-- example <- resource "example" $
+--     route53_zone_resource
+--         & name .~ "example.com"
+--         & vpc_id .~ compute primary @"id"
+--  
+-- secondary <- resource "secondary" $
+--     route53_zone_association_resource
+--         & zone_id .~ compute example @"zone_id"
+--         & vpc_id .~ compute secondary @"id"
+-- @
 data Route53_Zone_Association_Resource = Route53_Zone_Association_Resource
     { vpc_id :: !(Attr Text)
       {- ^ (Required) The VPC to associate with the private hosted zone. -}
@@ -767,6 +989,57 @@ $(TH.makeResource
     ''Route53_Zone_Association_Resource)
 
 -- | The @aws_s3_bucket_object@ AWS resource.
+--
+-- Provides a S3 bucket object resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- object <- resource "object" $
+--     s3_bucket_object_resource
+--         & bucket .~ "your_bucket_name"
+--         & key .~ "new_object_key"
+--         & source .~ "path/to/file"
+--         & etag .~ md5(file("path/to/file"))
+-- @
+--
+-- @
+-- examplekms <- resource "examplekms" $
+--     kms_key_resource
+--         & description .~ "KMS key 1"
+--         & deletion_window_in_days .~ 7
+--  
+-- examplebucket <- resource "examplebucket" $
+--     s3_bucket_resource
+--         & bucket .~ "examplebuckettftest"
+--         & acl .~ "private"
+--  
+-- examplebucket_object <- resource "examplebucket_object" $
+--     s3_bucket_object_resource
+--         & key .~ "someobject"
+--         & bucket .~ compute examplebucket @"bucket"
+--         & source .~ "index.html"
+--         & kms_key_id .~ compute examplekms @"arn"
+-- @
+--
+-- @
+-- examplebucket <- resource "examplebucket" $
+--     s3_bucket_resource
+--         & bucket .~ "examplebuckettftest"
+--         & acl .~ "private"
+--  
+-- examplebucket_object <- resource "examplebucket_object" $
+--     s3_bucket_object_resource
+--         & key .~ "someobject"
+--         & bucket .~ compute examplebucket @"bucket"
+--         & source .~ "index.html"
+--         & server_side_encryption .~ "aws:kms"
+-- @
 data S3_Bucket_Object_Resource = S3_Bucket_Object_Resource
     { acl :: !(Attr Text)
       {- ^ (Optional) The <https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl> to apply. Defaults to "private". -}
@@ -818,6 +1091,21 @@ $(TH.makeResource
     ''S3_Bucket_Object_Resource)
 
 -- | The @aws_sns_topic@ AWS resource.
+--
+-- Provides an SNS topic resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- user_updates <- resource "user_updates" $
+--     sns_topic_resource
+--         & name .~ "user-updates-topic"
+-- @
 data Sns_Topic_Resource = Sns_Topic_Resource
     { delivery_policy :: !(Attr Text)
       {- ^ (Optional) The SNS delivery policy -}
@@ -843,6 +1131,34 @@ $(TH.makeResource
     ''Sns_Topic_Resource)
 
 -- | The @aws_volume_attachment@ AWS resource.
+--
+-- Provides an AWS EBS Volume Attachment as a top level resource, to attach and detach volumes from AWS Instances.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- ebs_att <- resource "ebs_att" $
+--     volume_attachment_resource
+--         & device_name .~ "/dev/sdh"
+--         & volume_id .~ compute example @"id"
+--         & instance_id .~ compute web @"id"
+--  
+-- web <- resource "web" $
+--     instance_resource
+--         & ami .~ "ami-21f78e11"
+--         & availability_zone .~ "us-west-2a"
+--         & instance_type .~ "t1.micro"
+--  
+-- example <- resource "example" $
+--     ebs_volume_resource
+--         & availability_zone .~ "us-west-2a"
+--         & size .~ 1
+-- @
 data Volume_Attachment_Resource = Volume_Attachment_Resource
     { device_name :: !(Attr Text)
       {- ^ (Required) The device name to expose to the instance (for example, @/dev/sdh@ or @xvdh@ ) -}
@@ -872,6 +1188,38 @@ $(TH.makeResource
     ''Volume_Attachment_Resource)
 
 -- | The @aws_vpn_connection@ AWS resource.
+--
+-- Provides a VPN connection connected to a VPC. These objects can be connected to customer gateways, and allow you to establish tunnels between your network and the VPC.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- vpc <- resource "vpc" $
+--     vpc_resource
+--         & cidr_block .~ "10.0.0.0/16"
+--  
+-- vpn_gateway <- resource "vpn_gateway" $
+--     vpn_gateway_resource
+--         & vpc_id .~ compute vpc @"id"
+--  
+-- customer_gateway <- resource "customer_gateway" $
+--     customer_gateway_resource
+--         & bgp_asn .~ 65000
+--         & ip_address .~ "172.0.0.1"
+--         & type .~ "ipsec.1"
+--  
+-- main <- resource "main" $
+--     vpn_connection_resource
+--         & vpn_gateway_id .~ compute vpn_gateway @"id"
+--         & customer_gateway_id .~ compute customer_gateway @"id"
+--         & type .~ "ipsec.1"
+--         & static_routes_only .~ True
+-- @
 data Vpn_Connection_Resource = Vpn_Connection_Resource
     { customer_gateway_id :: !(Attr Text)
       {- ^ (Required) The ID of the customer gateway. -}

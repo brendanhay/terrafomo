@@ -1,5 +1,16 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE DeriveGeneric          #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleContexts       #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TypeFamilies           #-}
+
 module Terraform.Google.DataSource.M01 where
 
 import Data.Text (Text)
@@ -13,6 +24,8 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @google_compute_instance_group@ Google datasource.
+--
+-- Get a Compute Instance Group within GCE. For more information, see <https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups> and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
 data Compute_Instance_Group_DataSource = Compute_Instance_Group_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the instance group. -}
@@ -42,6 +55,27 @@ $(TH.makeDataSource
     ''Compute_Instance_Group_DataSource)
 
 -- | The @google_compute_lb_ip_ranges@ Google datasource.
+--
+-- Use this data source to access IP ranges in your firewall rules.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.Google
+-- import Terraform.Google.DataSource
+-- @
+--
+-- @
+-- ranges <- datasource "ranges" $
+--     compute_lb_ip_ranges_datasource
+--  
+-- lb <- resource "lb" $
+--     compute_firewall_resource
+--         & name .~ "lb-firewall"
+--         & network .~ compute main @"name"
+--         & source_ranges .~ [data.google_compute_lb_ip_ranges.ranges.network]
+--         & target_tags .~ ["InstanceBehindLoadBalancer"]
+-- @
 data Compute_Lb_Ip_Ranges_DataSource = Compute_Lb_Ip_Ranges_DataSource
     { http_ssl_tcp_internal :: !(Attr Text)
       {- ^ - The IP ranges used for health checks when is used -}
@@ -59,6 +93,21 @@ $(TH.makeDataSource
     ''Compute_Lb_Ip_Ranges_DataSource)
 
 -- | The @google_compute_network@ Google datasource.
+--
+-- Get a network within GCE from its name.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.Google
+-- import Terraform.Google.DataSource
+-- @
+--
+-- @
+-- my-network <- datasource "my-network" $
+--     compute_network_datasource
+--         & name .~ "default-us-east1"
+-- @
 data Compute_Network_DataSource = Compute_Network_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the network. -}
@@ -84,6 +133,22 @@ $(TH.makeDataSource
     ''Compute_Network_DataSource)
 
 -- | The @google_compute_subnetwork@ Google datasource.
+--
+-- Get a subnetwork within GCE from its name and region.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.Google
+-- import Terraform.Google.DataSource
+-- @
+--
+-- @
+-- my-subnetwork <- datasource "my-subnetwork" $
+--     compute_subnetwork_datasource
+--         & name .~ "default-us-east1"
+--         & region .~ "us-east1"
+-- @
 data Compute_Subnetwork_DataSource = Compute_Subnetwork_DataSource
     { name :: !(Attr Text)
       {- ^ - The name of the subnetwork. -}
@@ -111,6 +176,8 @@ $(TH.makeDataSource
     ''Compute_Subnetwork_DataSource)
 
 -- | The @google_container_engine_versions@ Google datasource.
+--
+-- Provides access to available Google Container Engine versions in a zone for a given project.
 data Container_Engine_Versions_DataSource = Container_Engine_Versions_DataSource
     { project :: !(Attr Text)
       {- ^ (optional) - ID of the project to list available cluster versions for. Should match the project the cluster will be deployed to. Defaults to the project that the provider is authenticated with. -}

@@ -24,6 +24,8 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_api_gateway_authorizer@ AWS resource.
+--
+-- Provides an API Gateway Authorizer.
 data Api_Gateway_Authorizer_Resource = Api_Gateway_Authorizer_Resource
     { authorizer_credentials :: !(Attr Text)
       {- ^ (Optional) The credentials required for the authorizer. To specify an IAM Role for API Gateway to assume, use the IAM Role ARN. -}
@@ -53,6 +55,8 @@ $(TH.makeResource
     ''Api_Gateway_Authorizer_Resource)
 
 -- | The @aws_api_gateway_usage_plan_key@ AWS resource.
+--
+-- Provides an API Gateway Usage Plan Key.
 data Api_Gateway_Usage_Plan_Key_Resource = Api_Gateway_Usage_Plan_Key_Resource
     { key_id :: !(Attr Text)
       {- ^ (Required) The identifier of the API key resource. -}
@@ -84,14 +88,9 @@ $(TH.makeResource
     ''Api_Gateway_Usage_Plan_Key_Resource)
 
 -- | The @aws_autoscaling_notification@ AWS resource.
+--
+-- Provides an AutoScaling Group with Notification support, via SNS Topics. Each of the @notifications@ map to a <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_DescribeNotificationConfigurations.html> inside Amazon Web Services, and are applied to each AutoScaling Group you supply.
 data Autoscaling_Notification_Resource = Autoscaling_Notification_Resource
-    { group_names :: !(Attr Text)
-      {- ^ (Required) A list of AutoScaling Group Names -}
-    , notifications :: !(Attr Text)
-      {- ^ (Required) A list of Notification Types that trigger notifications. Acceptable values are documented <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html> -}
-    , topic_arn :: !(Attr Text)
-      {- ^ (Required) The Topic ARN for notifications to be sent through -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Autoscaling_Notification_Resource
     = '[]
@@ -103,6 +102,38 @@ $(TH.makeResource
     ''Autoscaling_Notification_Resource)
 
 -- | The @aws_autoscaling_schedule@ AWS resource.
+--
+-- Provides an AutoScaling Schedule resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foobar <- resource "foobar" $
+--     autoscaling_group_resource
+--         & availability_zones .~ ["us-west-2a"]
+--         & name .~ "terraform-test-foobar5"
+--         & max_size .~ 1
+--         & min_size .~ 1
+--         & health_check_grace_period .~ 300
+--         & health_check_type .~ "ELB"
+--         & force_delete .~ True
+--         & termination_policies .~ ["OldestInstance"]
+--  
+-- foobar <- resource "foobar" $
+--     autoscaling_schedule_resource
+--         & scheduled_action_name .~ "foobar"
+--         & min_size .~ 0
+--         & max_size .~ 1
+--         & desired_capacity .~ 0
+--         & start_time .~ "2016-12-11T18:00:00Z"
+--         & end_time .~ "2016-12-12T06:00:00Z"
+--         & autoscaling_group_name .~ compute foobar @"name"
+-- @
 data Autoscaling_Schedule_Resource = Autoscaling_Schedule_Resource
     { autoscaling_group_name :: !(Attr Text)
       {- ^ (Required) The name or Amazon Resource Name (ARN) of the Auto Scaling group. -}
@@ -130,6 +161,8 @@ $(TH.makeResource
     ''Autoscaling_Schedule_Resource)
 
 -- | The @aws_batch_job_definition@ AWS resource.
+--
+-- Provides a Batch Job Definition resource.
 data Batch_Job_Definition_Resource = Batch_Job_Definition_Resource
     { container_properties :: !(Attr Text)
       {- ^ (Optional) A valid <http://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html> provided as a single valid JSON document. This parameter is required if the @type@ parameter is @container@ . -}
@@ -144,11 +177,7 @@ data Batch_Job_Definition_Resource = Batch_Job_Definition_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Batch_Job_Definition_Resource
-    = '[ '("arn", Attr Text)
-         {- - The Amazon Resource Name of the job definition. -}
-      , '("revision", Attr Text)
-         {- - The revision of the job definition. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_batch_job_definition"
@@ -157,6 +186,8 @@ $(TH.makeResource
     ''Batch_Job_Definition_Resource)
 
 -- | The @aws_cloudformation_stack@ AWS resource.
+--
+-- Provides a CloudFormation Stack resource.
 data Cloudformation_Stack_Resource = Cloudformation_Stack_Resource
     { capabilities :: !(Attr Text)
       {- ^ (Optional) A list of capabilities. Valid values: @CAPABILITY_IAM@ or @CAPABILITY_NAMED_IAM@ -}
@@ -200,25 +231,12 @@ $(TH.makeResource
     ''Cloudformation_Stack_Resource)
 
 -- | The @aws_cloudfront_origin_access_identity@ AWS resource.
+--
+-- Creates an Amazon CloudFront origin access identity.
 data Cloudfront_Origin_Access_Identity_Resource = Cloudfront_Origin_Access_Identity_Resource
-    { comment :: !(Attr Text)
-      {- ^ (Optional) - An optional comment for the origin access identity. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Cloudfront_Origin_Access_Identity_Resource
-    = '[ '("caller_reference", Attr Text)
-         {- - Internal value used by CloudFront to allow future updates to the origin access identity. -}
-      , '("cloudfront_access_identity_path", Attr Text)
-         {- - A shortcut to the full path for the origin access identity to use in CloudFront, see below. -}
-      , '("etag", Attr Text)
-         {- - The current version of the origin access identity's information. For example: @E2QWRUHAPOMQZL@ . -}
-      , '("iam_arn", Attr Text)
-         {- - A pre-generated ARN for use in S3 bucket policies (see below). Example: @arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2QWRUHAPOMQZL@ . -}
-      , '("id", Attr Text)
-         {- - The identifier for the distribution. For example: @EDFDVBD632BHDS5@ . -}
-      , '("s3_canonical_user_id", Attr Text)
-         {- - The Amazon S3 canonical user ID for the origin access identity, which you use when giving the origin access identity read permission to an object in Amazon S3. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_cloudfront_origin_access_identity"
@@ -227,6 +245,21 @@ $(TH.makeResource
     ''Cloudfront_Origin_Access_Identity_Resource)
 
 -- | The @aws_cloudwatch_log_group@ AWS resource.
+--
+-- Provides a CloudWatch Log Group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- yada <- resource "yada" $
+--     cloudwatch_log_group_resource
+--         & name .~ "Yada"
+-- @
 data Cloudwatch_Log_Group_Resource = Cloudwatch_Log_Group_Resource
     { kms_key_id :: !(Attr Text)
       {- ^ (Optional) The ARN of the KMS Key to use when encrypting log data. Please note, after the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. -}
@@ -252,6 +285,26 @@ $(TH.makeResource
     ''Cloudwatch_Log_Group_Resource)
 
 -- | The @aws_cloudwatch_log_stream@ AWS resource.
+--
+-- Provides a CloudWatch Log Stream resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- yada <- resource "yada" $
+--     cloudwatch_log_group_resource
+--         & name .~ "Yada"
+--  
+-- foo <- resource "foo" $
+--     cloudwatch_log_stream_resource
+--         & name .~ "SampleLogStream1234"
+--         & log_group_name .~ compute yada @"name"
+-- @
 data Cloudwatch_Log_Stream_Resource = Cloudwatch_Log_Stream_Resource
     { log_group_name :: !(Attr Text)
       {- ^ (Required) The name of the log group under which the log stream is to be created. -}
@@ -271,6 +324,25 @@ $(TH.makeResource
     ''Cloudwatch_Log_Stream_Resource)
 
 -- | The @aws_cloudwatch_log_subscription_filter@ AWS resource.
+--
+-- Provides a CloudWatch Logs subscription filter resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test_lambdafunction_logfilter <- resource "test_lambdafunction_logfilter" $
+--     cloudwatch_log_subscription_filter_resource
+--         & name .~ "test_lambdafunction_logfilter"
+--         & role_arn .~ compute iam_for_lambda @"arn"
+--         & log_group_name .~ "/aws/lambda/example_lambda_name"
+--         & filter_pattern .~ "logtype test"
+--         & destination_arn .~ compute test_logstream @"arn"
+-- @
 data Cloudwatch_Log_Subscription_Filter_Resource = Cloudwatch_Log_Subscription_Filter_Resource
     { destination_arn :: !(Attr Text)
       {- ^ (Required) The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN. -}
@@ -296,6 +368,27 @@ $(TH.makeResource
     ''Cloudwatch_Log_Subscription_Filter_Resource)
 
 -- | The @aws_codedeploy_deployment_group@ AWS resource.
+--
+-- Provides a CodeDeploy Deployment Group for a CodeDeploy Application
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- example <- resource "example" $
+--     codedeploy_app_resource
+--         & name .~ "example-app"
+--  
+-- example <- resource "example" $
+--     codedeploy_deployment_group_resource
+--         & app_name .~ compute example @"name"
+--         & deployment_group_name .~ "example-group"
+--         & service_role_arn .~ compute example @"arn"
+-- @
 data Codedeploy_Deployment_Group_Resource = Codedeploy_Deployment_Group_Resource
     { alarm_configuration :: !(Attr Text)
       {- ^ (Optional) Information about alarms associated with the deployment group (documented below). -}
@@ -326,19 +419,7 @@ data Codedeploy_Deployment_Group_Resource = Codedeploy_Deployment_Group_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Codedeploy_Deployment_Group_Resource
-    = '[ '("app_name", Attr Text)
-         {- - The group's assigned application. -}
-      , '("autoscaling_groups", Attr Text)
-         {- - The autoscaling groups associated with the deployment group. -}
-      , '("deployment_config_name", Attr Text)
-         {- - The name of the group's deployment config. -}
-      , '("deployment_group_name", Attr Text)
-         {- - The group's name. -}
-      , '("id", Attr Text)
-         {- - The deployment group's ID. -}
-      , '("service_role_arn", Attr Text)
-         {- - The group's service role ARN. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_codedeploy_deployment_group"
@@ -347,6 +428,8 @@ $(TH.makeResource
     ''Codedeploy_Deployment_Group_Resource)
 
 -- | The @aws_codepipeline@ AWS resource.
+--
+-- Provides a CodePipeline.
 data Codepipeline_Resource = Codepipeline_Resource
     { artifact_store :: !(Attr Text)
       {- ^ (Required) An artifact_store block. Artifact stores are documented below. -}
@@ -370,6 +453,8 @@ $(TH.makeResource
     ''Codepipeline_Resource)
 
 -- | The @aws_config_delivery_channel@ AWS resource.
+--
+-- Provides an AWS Config Delivery Channel.
 data Config_Delivery_Channel_Resource = Config_Delivery_Channel_Resource
     { name :: !(Attr Text)
       {- ^ (Optional) The name of the delivery channel. Defaults to @default@ . Changing it recreates the resource. -}
@@ -384,9 +469,7 @@ data Config_Delivery_Channel_Resource = Config_Delivery_Channel_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Config_Delivery_Channel_Resource
-    = '[ '("id", Attr Text)
-         {- - The name of the delivery channel. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_config_delivery_channel"
@@ -395,6 +478,28 @@ $(TH.makeResource
     ''Config_Delivery_Channel_Resource)
 
 -- | The @aws_elastic_beanstalk_configuration_template@ AWS resource.
+--
+-- Provides an Elastic Beanstalk Configuration Template, which are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- tftest <- resource "tftest" $
+--     elastic_beanstalk_application_resource
+--         & name .~ "tf-test-name"
+--         & description .~ "tf-test-desc"
+--  
+-- tf_template <- resource "tf_template" $
+--     elastic_beanstalk_configuration_template_resource
+--         & name .~ "tf-test-template-config"
+--         & application .~ compute tftest @"name"
+--         & solution_stack_name .~ "64bit Amazon Linux 2015.09 v2.0.8 running Go 1.4"
+-- @
 data Elastic_Beanstalk_Configuration_Template_Resource = Elastic_Beanstalk_Configuration_Template_Resource
     { application :: !(Attr Text)
       {- ^ – (Required) name of the application to associate with this configuration template -}
@@ -420,6 +525,8 @@ $(TH.makeResource
     ''Elastic_Beanstalk_Configuration_Template_Resource)
 
 -- | The @aws_elastictranscoder_pipeline@ AWS resource.
+--
+-- Provides an Elastic Transcoder pipeline resource.
 data Elastictranscoder_Pipeline_Resource = Elastictranscoder_Pipeline_Resource
     { aws_kms_key_arn :: !(Attr Text)
       {- ^ (Optional) The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline. -}
@@ -453,6 +560,25 @@ $(TH.makeResource
     ''Elastictranscoder_Pipeline_Resource)
 
 -- | The @aws_lambda_event_source_mapping@ AWS resource.
+--
+-- Provides a Lambda event source mapping. This allows Lambda functions to get events from Kinesis and DynamoDB.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- event_source_mapping <- resource "event_source_mapping" $
+--     lambda_event_source_mapping_resource
+--         & batch_size .~ 100
+--         & event_source_arn .~ "arn:aws:kinesis:REGION:123456789012:stream/stream_name"
+--         & enabled .~ True
+--         & function_name .~ "arn:aws:lambda:REGION:123456789012:function:function_name"
+--         & starting_position .~ "TRIM_HORIZON|LATEST"
+-- @
 data Lambda_Event_Source_Mapping_Resource = Lambda_Event_Source_Mapping_Resource
     { batch_size :: !(Attr Text)
       {- ^ (Optional) The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to @100@ . -}
@@ -488,22 +614,9 @@ $(TH.makeResource
     ''Lambda_Event_Source_Mapping_Resource)
 
 -- | The @aws_lambda_permission@ AWS resource.
+--
+-- Creates a Lambda permission to allow external sources invoking the Lambda function (e.g. CloudWatch Event Rule, SNS or S3).
 data Lambda_Permission_Resource = Lambda_Permission_Resource
-    { action :: !(Attr Text)
-      {- ^ (Required) The AWS Lambda action you want to allow in this statement. (e.g. @lambda:InvokeFunction@ ) -}
-    , function_name :: !(Attr Text)
-      {- ^ (Required) Name of the Lambda function whose resource policy you are updating -}
-    , principal :: !(Attr Text)
-      {- ^ (Required) The principal who is getting this permission. e.g. @s3.amazonaws.com@ , an AWS account ID, or any valid AWS service principal such as @events.amazonaws.com@ or @sns.amazonaws.com@ . -}
-    , qualifier :: !(Attr Text)
-      {- ^ (Optional) Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN. e.g. @arn:aws:lambda:aws-region:acct-id:function:function-name:2@ -}
-    , source_account :: !(Attr Text)
-      {- ^ (Optional) The AWS account ID (without a hyphen) of the source owner. -}
-    , source_arn :: !(Attr Text)
-      {- ^ (Optional) When granting Amazon S3 or CloudWatch Events permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) for the S3 Bucket or CloudWatch Events Rule as its value.  This ensures that only events generated from the specified bucket or rule can invoke the function. API Gateway ARNs have a unique structure described <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html> . -}
-    , statement_id :: !(Attr Text)
-      {- ^ (Required) A unique statement identifier. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Lambda_Permission_Resource
     = '[]
@@ -515,6 +628,28 @@ $(TH.makeResource
     ''Lambda_Permission_Resource)
 
 -- | The @aws_lb_ssl_negotiation_policy@ AWS resource.
+--
+-- Provides a load balancer SSL negotiation policy, which allows an ELB to control the ciphers and protocols that are supported during SSL negotiations between a client and a load balancer.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- lb <- resource "lb" $
+--     elb_resource
+--         & name .~ "test-lb"
+--         & availability_zones .~ ["us-east-1a"]
+--  
+-- foo <- resource "foo" $
+--     lb_ssl_negotiation_policy_resource
+--         & name .~ "foo-policy"
+--         & load_balancer .~ compute lb @"id"
+--         & lb_port .~ 443
+-- @
 data Lb_Ssl_Negotiation_Policy_Resource = Lb_Ssl_Negotiation_Policy_Resource
     { attribute :: !(Attr Text)
       {- ^ (Optional) An SSL Negotiation policy attribute. Each has two properties: -}
@@ -546,6 +681,22 @@ $(TH.makeResource
     ''Lb_Ssl_Negotiation_Policy_Resource)
 
 -- | The @aws_nat_gateway@ AWS resource.
+--
+-- Provides a resource to create a VPC NAT Gateway.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- gw <- resource "gw" $
+--     nat_gateway_resource
+--         & allocation_id .~ compute nat @"id"
+--         & subnet_id .~ compute public @"id"
+-- @
 data Nat_Gateway_Resource = Nat_Gateway_Resource
     { allocation_id :: !(Attr Text)
       {- ^ (Required) The Allocation ID of the Elastic IP address for the gateway. -}
@@ -577,6 +728,21 @@ $(TH.makeResource
     ''Nat_Gateway_Resource)
 
 -- | The @aws_opsworks_memcached_layer@ AWS resource.
+--
+-- Provides an OpsWorks memcached layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- cache <- resource "cache" $
+--     opsworks_memcached_layer_resource
+--         & stack_id .~ compute main @"id"
+-- @
 data Opsworks_Memcached_Layer_Resource = Opsworks_Memcached_Layer_Resource
     { allocated_memory :: !(Attr Text)
       {- ^ (Optional) Amount of memory to allocate for the cache on each instance, in megabytes. Defaults to 512MB. -}
@@ -624,6 +790,21 @@ $(TH.makeResource
     ''Opsworks_Memcached_Layer_Resource)
 
 -- | The @aws_opsworks_static_web_layer@ AWS resource.
+--
+-- Provides an OpsWorks static web server layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- web <- resource "web" $
+--     opsworks_static_web_layer_resource
+--         & stack_id .~ compute main @"id"
+-- @
 data Opsworks_Static_Web_Layer_Resource = Opsworks_Static_Web_Layer_Resource
     { auto_assign_elastic_ips :: !(Attr Text)
       {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
@@ -667,6 +848,34 @@ $(TH.makeResource
     ''Opsworks_Static_Web_Layer_Resource)
 
 -- | The @aws_rds_cluster_instance@ AWS resource.
+--
+-- Provides an RDS Cluster Resource Instance. A Cluster Instance Resource defines attributes that are specific to a single instance in a </docs/providers/aws/r/rds_cluster.html> , specifically running Amazon Aurora.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- cluster_instances <- resource "cluster_instances" $
+--     rds_cluster_instance_resource
+--         & count .~ 2
+--         & identifier .~ "aurora-cluster-demo-"<>count.index
+--         & cluster_identifier .~ compute default @"id"
+--         & instance_class .~ "db.r3.large"
+--  
+-- default <- resource "default" $
+--     rds_cluster_resource
+--         & cluster_identifier .~ "aurora-cluster-demo"
+--         & availability_zones .~ ["us-west-2a"
+--                                 ,"us-west-2b"
+--                                 ,"us-west-2c"]
+--         & database_name .~ "mydb"
+--         & master_username .~ "foo"
+--         & master_password .~ "barbut8chars"
+-- @
 data Rds_Cluster_Instance_Resource = Rds_Cluster_Instance_Resource
     { apply_immediately :: !(Attr Text)
       {- ^ (Optional) Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default is @false@ . -}
@@ -744,6 +953,22 @@ $(TH.makeResource
     ''Rds_Cluster_Instance_Resource)
 
 -- | The @aws_redshift_parameter_group@ AWS resource.
+--
+-- Provides a Redshift Cluster parameter group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- bar <- resource "bar" $
+--     redshift_parameter_group_resource
+--         & name .~ "parameter-group-test-terraform"
+--         & family .~ "redshift-1.0"
+-- @
 data Redshift_Parameter_Group_Resource = Redshift_Parameter_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the Redshift parameter group. Defaults to "Managed by Terraform". -}
@@ -767,6 +992,8 @@ $(TH.makeResource
     ''Redshift_Parameter_Group_Resource)
 
 -- | The @aws_ses_domain_identity@ AWS resource.
+--
+-- Provides an SES domain identity resource
 data Ses_Domain_Identity_Resource = Ses_Domain_Identity_Resource
     { domain :: !(Attr Text)
       {- ^ (Required) The domain name to assign to SES -}
@@ -786,29 +1013,12 @@ $(TH.makeResource
     ''Ses_Domain_Identity_Resource)
 
 -- | The @aws_ssm_patch_baseline@ AWS resource.
+--
+-- Provides an SSM Patch Baseline resource
 data Ssm_Patch_Baseline_Resource = Ssm_Patch_Baseline_Resource
-    { approval_rule :: !(Attr Text)
-      {- ^ (Optional) A set of rules used to include patches in the baseline. up to 10 approval rules can be specified. Each approval_rule block requires the fields documented below. -}
-    , approved_patches :: !(Attr Text)
-      {- ^ (Optional) A list of explicitly approved patches for the baseline. -}
-    , approved_patches_compliance_level :: !(Attr Text)
-      {- ^ (Optional) Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. Valid compliance levels include the following: @CRITICAL@ , @HIGH@ , @MEDIUM@ , @LOW@ , @INFORMATIONAL@ , @UNSPECIFIED@ . The default value is @UNSPECIFIED@ . -}
-    , description :: !(Attr Text)
-      {- ^ (Optional) The description of the patch baseline. -}
-    , global_filter :: !(Attr Text)
-      {- ^ (Optional) A set of global filters used to exclude patches from the baseline. Up to 4 global filters can be specified using Key/Value pairs. Valid Keys are @PRODUCT | CLASSIFICATION | MSRC_SEVERITY | PATCH_ID@ . -}
-    , name :: !(Attr Text)
-      {- ^ (Required) The name of the patch baseline. -}
-    , operating_system :: !(Attr Text)
-      {- ^ (Optional) Defines the operating system the patch baseline applies to. Supported operating systems include @WINDOWS@ , @AMAZON_LINUX@ , @UBUNTU@ and @REDHAT_ENTERPRISE_LINUX@ . The Default value is @WINDOWS@ . -}
-    , rejected_patches :: !(Attr Text)
-      {- ^ (Optional) A list of rejected patches. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Ssm_Patch_Baseline_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the patch baseline. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_ssm_patch_baseline"
@@ -817,6 +1027,21 @@ $(TH.makeResource
     ''Ssm_Patch_Baseline_Resource)
 
 -- | The @aws_waf_size_constraint_set@ AWS resource.
+--
+-- Provides a WAF Size Constraint Set Resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- size_constraint_set <- resource "size_constraint_set" $
+--     waf_size_constraint_set_resource
+--         & name .~ "tfsize_constraints"
+-- @
 data Waf_Size_Constraint_Set_Resource = Waf_Size_Constraint_Set_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name or description of the Size Constraint Set. -}
@@ -825,9 +1050,7 @@ data Waf_Size_Constraint_Set_Resource = Waf_Size_Constraint_Set_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Waf_Size_Constraint_Set_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the WAF Size Constraint Set. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_waf_size_constraint_set"
@@ -836,6 +1059,21 @@ $(TH.makeResource
     ''Waf_Size_Constraint_Set_Resource)
 
 -- | The @aws_waf_sql_injection_match_set@ AWS resource.
+--
+-- Provides a WAF SQL Injection Match Set Resource
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- sql_injection_match_set <- resource "sql_injection_match_set" $
+--     waf_sql_injection_match_set_resource
+--         & name .~ "tf-sql_injection_match_set"
+-- @
 data Waf_Sql_Injection_Match_Set_Resource = Waf_Sql_Injection_Match_Set_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name or description of the SizeConstraintSet. -}
@@ -844,9 +1082,7 @@ data Waf_Sql_Injection_Match_Set_Resource = Waf_Sql_Injection_Match_Set_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Waf_Sql_Injection_Match_Set_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the WAF SQL Injection Match Set. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_waf_sql_injection_match_set"

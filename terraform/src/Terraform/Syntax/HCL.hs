@@ -23,6 +23,7 @@ data Key
     | Quoted !Text
       deriving (Show, Eq)
 
+-- | Provides an instance for _unquoted_ keys.
 instance IsString Key where
     fromString = Ident . fromString
 
@@ -40,12 +41,12 @@ data Value
     | Bool    !Bool
     | Number  !Integer
     | Float   !Double
-    | String  !Text
+    | String  !Interpolate
     | HereDoc !Text !Text
       deriving (Show, Eq)
 
-instance IsString Value where
-    fromString = String . fromString
+-- instance IsString Value where
+--     fromString = String . fromString
 
 instance Pretty Value where
     prettyList = pretty . List
@@ -69,6 +70,18 @@ instance Pretty Value where
 
         HereDoc (pretty -> k) x ->
             "<<" <> k <$$> pretty x <$$> k
+
+data Interpolate
+    = Chunks   ![Interpolate]
+    | Chunk    !String
+    | Template !String
+      deriving (Show, Eq)
+
+instance Pretty Interpolate where
+    pretty = \case
+        Chunks   xs -> PP.hcat (map pretty xs)
+        Chunk    s  -> pretty s
+        Template s  -> "${" <> pretty s <> "}"
 
 render :: [Value] -> Doc
 render = PP.vcat . List.intersperse (PP.text " ") . map pretty

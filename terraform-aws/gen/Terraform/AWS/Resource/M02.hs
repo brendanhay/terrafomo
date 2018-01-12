@@ -24,6 +24,8 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @aws_api_gateway_domain_name@ AWS resource.
+--
+-- Registers a custom domain name for use with AWS API Gateway.
 data Api_Gateway_Domain_Name_Resource = Api_Gateway_Domain_Name_Resource
     { certificate_arn :: !(Attr Text)
       {- ^ (Optional) The ARN for an AWS-managed certificate. Conflicts with @certificate_name@ , @certificate_body@ , @certificate_chain@ and @certificate_private_key@ . -}
@@ -57,6 +59,8 @@ $(TH.makeResource
     ''Api_Gateway_Domain_Name_Resource)
 
 -- | The @aws_api_gateway_gateway_response@ AWS resource.
+--
+-- Provides an API Gateway Gateway Response for a REST API Gateway.
 data Api_Gateway_Gateway_Response_Resource = Api_Gateway_Gateway_Response_Resource
     { response_parameters :: !(Attr Text)
       {- ^ (Optional) A map specifying the templates used to transform the response body. -}
@@ -80,36 +84,9 @@ $(TH.makeResource
     ''Api_Gateway_Gateway_Response_Resource)
 
 -- | The @aws_api_gateway_integration@ AWS resource.
+--
+-- Provides an HTTP Method Integration for an API Gateway Integration.
 data Api_Gateway_Integration_Resource = Api_Gateway_Integration_Resource
-    { cache_key_namespace :: !(Attr Text)
-      {- ^ (Optional) The integration's cache namespace. -}
-    , cache_key_parameters :: !(Attr Text)
-      {- ^ (Optional) A list of cache key parameters for the integration. -}
-    , content_handling :: !(Attr Text)
-      {- ^ (Optional) Specifies how to handle request payload content type conversions. Supported values are @CONVERT_TO_BINARY@ and @CONVERT_TO_TEXT@ . If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through. -}
-    , credentials :: !(Attr Text)
-      {- ^ (Optional) The credentials required for the integration. For @AWS@ integrations, 2 options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's ARN. To require that the caller's identity be passed through from the request, specify the string @arn:aws:iam::\*:user/\*@ . -}
-    , http_method :: !(Attr Text)
-      {- ^ (Required) The HTTP method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@ , @OPTION@ , @ANY@ ) when calling the associated resource. -}
-    , integration_http_method :: !(Attr Text)
-      {- ^ (Optional) The integration HTTP method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@ , @OPTION@ ) specifying how API Gateway will interact with the back end. if @type@ is @AWS@ , @AWS_PROXY@ , @HTTP@ or @HTTP_PROXY@ . Not all methods are compatible with all @AWS@ integrations. e.g. Lambda function <https://github.com/awslabs/aws-apigateway-importer/issues/9#issuecomment-129651005> via @POST@ . -}
-    , passthrough_behavior :: !(Attr Text)
-      {- ^ (Optional) The integration passthrough behavior ( @WHEN_NO_MATCH@ , @WHEN_NO_TEMPLATES@ , @NEVER@ ). if @request_templates@ is used. -}
-    , request_parameters :: !(Attr Text)
-      {- ^ (Optional) A map of request query string parameters and headers that should be passed to the backend responder. For example: @request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }@ -}
-    , request_parameters_in_json :: !(Attr Text)
-      {- ^ - , use @request_parameters@ instead. -}
-    , request_templates :: !(Attr Text)
-      {- ^ (Optional) A map of the integration's request templates. -}
-    , resource_id :: !(Attr Text)
-      {- ^ (Required) The API resource ID. -}
-    , rest_api_id :: !(Attr Text)
-      {- ^ (Required) The ID of the associated REST API. -}
-    , type_ :: !(Attr Text)
-      {- ^ (Required) The integration input's type (HTTP, MOCK, AWS, AWS_PROXY, HTTP_PROXY) -}
-    , uri :: !(Attr Text)
-      {- ^ (Optional) The input's URI (HTTP, AWS). if @type@ is @HTTP@ or @AWS@ . For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form @arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}@ . @region@ , @subdomain@ and @service@ are used to determine the right endpoint. e.g. @arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations@ -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Api_Gateway_Integration_Resource
     = '[]
@@ -121,91 +98,12 @@ $(TH.makeResource
     ''Api_Gateway_Integration_Resource)
 
 -- | The @aws_autoscaling_group@ AWS resource.
+--
+-- Provides an AutoScaling Group resource.
 data Autoscaling_Group_Resource = Autoscaling_Group_Resource
-    { availability_zones :: !(Attr Text)
-      {- ^ (Optional) A list of AZs to launch resources in. Required only if you do not specify any @vpc_zone_identifier@ -}
-    , default_cooldown :: !(Attr Text)
-      {- ^ (Optional) The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. -}
-    , desired_capacity :: !(Attr Text)
-      {- ^ (Optional) The number of Amazon EC2 instances that should be running in the group. (See also <#waiting-for-capacity> below.) -}
-    , enabled_metrics :: !(Attr Text)
-      {- ^ (Optional) A list of metrics to collect. The allowed values are @GroupMinSize@ , @GroupMaxSize@ , @GroupDesiredCapacity@ , @GroupInServiceInstances@ , @GroupPendingInstances@ , @GroupStandbyInstances@ , @GroupTerminatingInstances@ , @GroupTotalInstances@ . -}
-    , force_delete :: !(Attr Text)
-      {- ^ (Optional) Allows deleting the autoscaling group without waiting for all instances in the pool to terminate.  You can force an autoscaling group to delete even if it's in the process of scaling a resource. Normally, Terraform drains all the instances before deleting the group.  This bypasses that behavior and potentially leaves resources dangling. -}
-    , health_check_grace_period :: !(Attr Text)
-      {- ^ (Optional, Default: 300) Time (in seconds) after instance comes into service before checking health. -}
-    , health_check_type :: !(Attr Text)
-      {- ^ (Optional) "EC2" or "ELB". Controls how health checking is done. -}
-    , initial_lifecycle_hook :: !(Attr Text)
-      {- ^ (Optional) One or more <http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html> to attach to the autoscaling group instances are launched. The syntax is exactly the same as the separate </docs/providers/aws/r/autoscaling_lifecycle_hooks.html> resource, without the @autoscaling_group_name@ attribute. Please note that this will only work when creating a new autoscaling group. For all other use-cases, please use @aws_autoscaling_lifecycle_hook@ resource. -}
-    , launch_configuration :: !(Attr Text)
-      {- ^ (Required) The name of the launch configuration to use. -}
-    , load_balancers :: !(Attr Text)
-      {- ^ (Optional) A list of elastic load balancer names to add to the autoscaling group names. -}
-    , max_size :: !(Attr Text)
-      {- ^ (Required) The maximum size of the auto scale group. -}
-    , metrics_granularity :: !(Attr Text)
-      {- ^ (Optional) The granularity to associate with the metrics to collect. The only valid value is @1Minute@ . Default is @1Minute@ . -}
-    , min_elb_capacity :: !(Attr Text)
-      {- ^ (Optional) Setting this causes Terraform to wait for this number of instances to show up healthy in the ELB only on creation. Updates will not wait on ELB instance number changes. (See also <#waiting-for-capacity> below.) -}
-    , min_size :: !(Attr Text)
-      {- ^ (Required) The minimum size of the auto scale group. (See also <#waiting-for-capacity> below.) -}
-    , name :: !(Attr Text)
-      {- ^ (Optional) The name of the auto scaling group. By default generated by Terraform. -}
-    , name_prefix :: !(Attr Text)
-      {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , placement_group :: !(Attr Text)
-      {- ^ (Optional) The name of the placement group into which you'll launch your instances, if any. -}
-    , protect_from_scale_in :: !(Attr Text)
-      {- ^ (Optional) Allows setting instance protection. The autoscaling group will not select instances with this setting for terminination during scale in events. -}
-    , suspended_processes :: !(Attr Text)
-      {- ^ (Optional) A list of processes to suspend for the AutoScaling Group. The allowed values are @Launch@ , @Terminate@ , @HealthCheck@ , @ReplaceUnhealthy@ , @AZRebalance@ , @AlarmNotification@ , @ScheduledActions@ , @AddToLoadBalancer@ . Note that if you suspend either the @Launch@ or @Terminate@ process types, it can prevent your autoscaling group from functioning properly. -}
-    , tag :: !(Attr Text)
-      {- ^ (Optional) A list of tag blocks. Tags documented below. -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A list of tag blocks (maps). Tags documented below. -}
-    , target_group_arns :: !(Attr Text)
-      {- ^ (Optional) A list of @aws_alb_target_group@ ARNs, for use with Application Load Balancing -}
-    , termination_policies :: !(Attr Text)
-      {- ^ (Optional) A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are @OldestInstance@ , @NewestInstance@ , @OldestLaunchConfiguration@ , @ClosestToNextInstanceHour@ , @Default@ . -}
-    , vpc_zone_identifier :: !(Attr Text)
-      {- ^ (Optional) A list of subnet IDs to launch resources in. -}
-    , wait_for_capacity_timeout :: !(Attr Text)
-      {- ^ (Default: "10m") A maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for ASG instances to be healthy before timing out.  (See also <#waiting-for-capacity> below.) Setting this to "0" causes Terraform to skip all Capacity Waiting behavior. -}
-    , wait_for_elb_capacity :: !(Attr Text)
-      {- ^ (Optional) Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations. (Takes precedence over @min_elb_capacity@ behavior.) (See also <#waiting-for-capacity> below.) -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Autoscaling_Group_Resource
-    = '[ '("arn", Attr Text)
-         {- - The ARN for this AutoScaling Group -}
-      , '("availability_zones", Attr Text)
-         {- - The availability zones of the autoscale group. -}
-      , '("default_cooldown", Attr Text)
-         {- - Time between a scaling activity and the succeeding scaling activity. -}
-      , '("desired_capacity", Attr Text)
-         {- -The number of Amazon EC2 instances that should be running in the group. -}
-      , '("health_check_grace_period", Attr Text)
-         {- - Time after instance comes into service before checking health. -}
-      , '("health_check_type", Attr Text)
-         {- - "EC2" or "ELB". Controls how health checking is done. -}
-      , '("id", Attr Text)
-         {- - The autoscaling group id. -}
-      , '("launch_configuration", Attr Text)
-         {- - The launch configuration of the autoscale group -}
-      , '("load_balancers", Attr Text)
-         {- (Optional) The load balancer names associated with the autoscaling group. -}
-      , '("max_size", Attr Text)
-         {- - The maximum size of the autoscale group -}
-      , '("min_size", Attr Text)
-         {- - The minimum size of the autoscale group -}
-      , '("name", Attr Text)
-         {- - The name of the autoscale group -}
-      , '("target_group_arns", Attr Text)
-         {- (Optional) list of Target Group ARNs that apply to this AutoScaling Group -}
-      , '("vpc_zone_identifier", Attr Text)
-         {- (Optional) - The VPC zone identifier -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_autoscaling_group"
@@ -214,65 +112,12 @@ $(TH.makeResource
     ''Autoscaling_Group_Resource)
 
 -- | The @aws_cloudfront_distribution@ AWS resource.
+--
+-- Creates an Amazon CloudFront web distribution.
 data Cloudfront_Distribution_Resource = Cloudfront_Distribution_Resource
-    { aliases :: !(Attr Text)
-      {- ^ (Optional) - Extra CNAMEs (alternate domain names), if any, for this distribution. -}
-    , cache_behavior :: !(Attr Text)
-      {- ^ (Optional) - A <#cache-behavior-arguments> resource for this distribution (multiples allowed). -}
-    , comment :: !(Attr Text)
-      {- ^ (Optional) - Any comments you want to include about the distribution. -}
-    , custom_error_response :: !(Attr Text)
-      {- ^ (Optional) - One or more <#custom-error-response-arguments> elements (multiples allowed). -}
-    , default_cache_behavior :: !(Attr Text)
-      {- ^ (Required) - The <#default-cache-behavior-arguments> for this distribution (maximum one). -}
-    , default_root_object :: !(Attr Text)
-      {- ^ (Optional) - The object that you want CloudFront to return (for example, index.html) when an end user requests the root URL. -}
-    , enabled :: !(Attr Text)
-      {- ^ (Required) - Whether the distribution is enabled to accept end user requests for content. -}
-    , http_version :: !(Attr Text)
-      {- ^ (Optional) - The maximum HTTP version to support on the distribution. Allowed values are @http1.1@ and @http2@ . The default is @http2@ . -}
-    , is_ipv6_enabled :: !(Attr Text)
-      {- ^ (Optional) - Whether the IPv6 is enabled for the distribution. -}
-    , logging_config :: !(Attr Text)
-      {- ^ (Optional) - The <#logging-config-arguments> that controls how logs are written to your distribution (maximum one). -}
-    , origin :: !(Attr Text)
-      {- ^ (Required) - One or more <#origin-arguments> for this distribution (multiples allowed). -}
-    , price_class :: !(Attr Text)
-      {- ^ (Optional) - The price class for this distribution. One of @PriceClass_All@ , @PriceClass_200@ , @PriceClass_100@ -}
-    , restrictions :: !(Attr Text)
-      {- ^ (Required) - The <#restrictions-arguments> for this distribution (maximum one). -}
-    , retain_on_delete :: !(Attr Text)
-      {- ^ (Optional) - Disables the distribution instead of deleting it when destroying the resource through Terraform. If this is set, the distribution needs to be deleted manually afterwards. Default: @false@ . -}
-    , tags :: !(Attr Text)
-      {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , viewer_certificate :: !(Attr Text)
-      {- ^ (Required) - The <#viewer-certificate-arguments> for this distribution (maximum one). -}
-    , web_acl_id :: !(Attr Text)
-      {- ^ (Optional) - If you're using AWS WAF to filter CloudFront requests, the Id of the AWS WAF web ACL that is associated with the distribution. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Cloudfront_Distribution_Resource
-    = '[ '("active_trusted_signers", Attr Text)
-         {- - The key pair IDs that CloudFront is aware of for each trusted signer, if the distribution is set up to serve private content with signed URLs. -}
-      , '("arn", Attr Text)
-         {- - The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID. -}
-      , '("caller_reference", Attr Text)
-         {- - Internal value used by CloudFront to allow future updates to the distribution configuration. -}
-      , '("domain_name", Attr Text)
-         {- - The domain name corresponding to the distribution. For example: @d604721fxaaqy9.cloudfront.net@ . -}
-      , '("etag", Attr Text)
-         {- - The current version of the distribution's information. For example: @E2QWRUHAPOMQZL@ . -}
-      , '("hosted_zone_id", Attr Text)
-         {- - The CloudFront Route 53 zone ID that can be used to route an <http://docs.aws.amazon.com/Route53/latest/APIReference/CreateAliasRRSAPI.html> to. This attribute is simply an alias for the zone ID @Z2FDTNDATAQYW2@ . -}
-      , '("id", Attr Text)
-         {- - The identifier for the distribution. For example: @EDFDVBD632BHDS5@ . -}
-      , '("in_progress_validation_batches", Attr Text)
-         {- - The number of invalidation batches currently in progress. -}
-      , '("last_modified_time", Attr Text)
-         {- - The date and time the distribution was last modified. -}
-      , '("status", Attr Text)
-         {- - The current status of the distribution. @Deployed@ if the distribution's information is fully propagated throughout the Amazon CloudFront system. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_cloudfront_distribution"
@@ -281,6 +126,8 @@ $(TH.makeResource
     ''Cloudfront_Distribution_Resource)
 
 -- | The @aws_cloudwatch_event_rule@ AWS resource.
+--
+-- Provides a CloudWatch Event Rule resource.
 data Cloudwatch_Event_Rule_Resource = Cloudwatch_Event_Rule_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the rule. -}
@@ -308,6 +155,22 @@ $(TH.makeResource
     ''Cloudwatch_Event_Rule_Resource)
 
 -- | The @aws_codecommit_trigger@ AWS resource.
+--
+-- Provides a CodeCommit Trigger Resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test <- resource "test" $
+--     codecommit_trigger_resource
+--         & depends_on .~ ["aws_codecommit_repository.test"]
+--         & repository_name .~ "my_test_repository"
+-- @
 data Codecommit_Trigger_Resource = Codecommit_Trigger_Resource
     { branches :: !(Attr Text)
       {- ^ (Optional) The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches. -}
@@ -333,6 +196,8 @@ $(TH.makeResource
     ''Codecommit_Trigger_Resource)
 
 -- | The @aws_config_configuration_recorder@ AWS resource.
+--
+-- Provides an AWS Config Configuration Recorder. Please note that this resource the created recorder automatically.
 data Config_Configuration_Recorder_Resource = Config_Configuration_Recorder_Resource
     { name :: !(Attr Text)
       {- ^ (Optional) The name of the recorder. Defaults to @default@ . Changing it recreates the resource. -}
@@ -343,9 +208,7 @@ data Config_Configuration_Recorder_Resource = Config_Configuration_Recorder_Reso
     } deriving (Show, Eq, Generic)
 
 type instance Computed Config_Configuration_Recorder_Resource
-    = '[ '("id", Attr Text)
-         {- - Name of the recorder -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_config_configuration_recorder"
@@ -354,6 +217,26 @@ $(TH.makeResource
     ''Config_Configuration_Recorder_Resource)
 
 -- | The @aws_ecs_service@ AWS resource.
+--
+-- -> To prevent a race condition during service deletion, make sure to set @depends_on@ to the related @aws_iam_role_policy@ ; otherwise, the policy may be destroyed too soon and the ECS service will then get stuck in the @DRAINING@ state.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- mongo <- resource "mongo" $
+--     ecs_service_resource
+--         & name .~ "mongodb"
+--         & cluster .~ compute foo @"id"
+--         & task_definition .~ compute mongo @"arn"
+--         & desired_count .~ 3
+--         & iam_role .~ compute foo @"arn"
+--         & depends_on .~ ["aws_iam_role_policy.foo"]
+-- @
 data Ecs_Service_Resource = Ecs_Service_Resource
     { cluster :: !(Attr Text)
       {- ^ (Optional) ARN of an ECS cluster -}
@@ -378,17 +261,7 @@ data Ecs_Service_Resource = Ecs_Service_Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Ecs_Service_Resource
-    = '[ '("cluster", Attr Text)
-         {- - The Amazon Resource Name (ARN) of cluster which the service runs on -}
-      , '("desired_count", Attr Text)
-         {- - The number of instances of the task definition -}
-      , '("iam_role", Attr Text)
-         {- - The ARN of IAM role used for ELB -}
-      , '("id", Attr Text)
-         {- - The Amazon Resource Name (ARN) that identifies the service -}
-      , '("name", Attr Text)
-         {- - The name of the service -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_ecs_service"
@@ -397,6 +270,21 @@ $(TH.makeResource
     ''Ecs_Service_Resource)
 
 -- | The @aws_efs_file_system@ AWS resource.
+--
+-- Provides an Elastic File System (EFS) resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- foo <- resource "foo" $
+--     efs_file_system_resource
+--         & creation_token .~ "my-product"
+-- @
 data Efs_File_System_Resource = Efs_File_System_Resource
     { creation_token :: !(Attr Text)
       {- ^ (Optional) A unique name (a maximum of 64 characters are allowed) used as reference when creating the Elastic File System to ensure idempotent file system creation. By default generated by Terraform. See [Elastic File System] (http://docs.aws.amazon.com/efs/latest/ug/) user guide for more information. -}
@@ -426,6 +314,40 @@ $(TH.makeResource
     ''Efs_File_System_Resource)
 
 -- | The @aws_elastic_beanstalk_application_version@ AWS resource.
+--
+-- Provides an Elastic Beanstalk Application Version Resource. Elastic Beanstalk allows you to deploy and manage applications in the AWS cloud without worrying about the infrastructure that runs those applications.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     s3_bucket_resource
+--         & bucket .~ "tftest.applicationversion.bucket"
+--  
+-- default <- resource "default" $
+--     s3_bucket_object_resource
+--         & bucket .~ compute default @"id"
+--         & key .~ "beanstalk/go-v1.zip"
+--         & source .~ "go-v1.zip"
+--  
+-- default <- resource "default" $
+--     elastic_beanstalk_application_resource
+--         & name .~ "tf-test-name"
+--         & description .~ "tf-test-desc"
+--  
+-- default <- resource "default" $
+--     elastic_beanstalk_application_version_resource
+--         & name .~ "tf-test-version-label"
+--         & application .~ "tf-test-name"
+--         & description .~ "application version created by terraform"
+--         & bucket .~ compute default @"id"
+--         & key .~ compute default @"id"
+-- @
 data Elastic_Beanstalk_Application_Version_Resource = Elastic_Beanstalk_Application_Version_Resource
     { application :: !(Attr Text)
       {- ^ (Required) Name of the Beanstalk Application the version is associated with. -}
@@ -453,6 +375,22 @@ $(TH.makeResource
     ''Elastic_Beanstalk_Application_Version_Resource)
 
 -- | The @aws_iam_group@ AWS resource.
+--
+-- Provides an IAM group.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- developers <- resource "developers" $
+--     iam_group_resource
+--         & name .~ "developers"
+--         & path .~ "/users/"
+-- @
 data Iam_Group_Resource = Iam_Group_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The group's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: @=,.@-_.@ . Group names are not distinguished by case. For example, you cannot create groups named both "ADMINS" and "admins". -}
@@ -480,6 +418,8 @@ $(TH.makeResource
     ''Iam_Group_Resource)
 
 -- | The @aws_iam_instance_profile@ AWS resource.
+--
+-- Provides an IAM instance profile.
 data Iam_Instance_Profile_Resource = Iam_Instance_Profile_Resource
     { name :: !(Attr Text)
       {- ^ (Optional, Forces new resource) The profile's name. If omitted, Terraform will assign a random, unique name. -}
@@ -519,6 +459,8 @@ $(TH.makeResource
     ''Iam_Instance_Profile_Resource)
 
 -- | The @aws_iam_role_policy@ AWS resource.
+--
+-- Provides an IAM role policy.
 data Iam_Role_Policy_Resource = Iam_Role_Policy_Resource
     { name :: !(Attr Text)
       {- ^ (Optional) The name of the role policy. If omitted, Terraform will assign a random, unique name. -}
@@ -548,6 +490,25 @@ $(TH.makeResource
     ''Iam_Role_Policy_Resource)
 
 -- | The @aws_kinesis_stream@ AWS resource.
+--
+-- Provides a Kinesis Stream resource. Amazon Kinesis is a managed service that scales elastically for real-time processing of streaming big data.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- test_stream <- resource "test_stream" $
+--     kinesis_stream_resource
+--         & name .~ "terraform-kinesis-test"
+--         & shard_count .~ 1
+--         & retention_period .~ 48
+--         & shard_level_metrics .~ ["IncomingBytes"
+--                                  ,"OutgoingBytes"]
+-- @
 data Kinesis_Stream_Resource = Kinesis_Stream_Resource
     { encryption_type :: !(Attr Text)
       {- ^ (Optional) The encryption type to use. The only acceptable values are @NONE@ or @KMS@ . The default value is @NONE@ . -}
@@ -583,6 +544,21 @@ $(TH.makeResource
     ''Kinesis_Stream_Resource)
 
 -- | The @aws_opsworks_php_app_layer@ AWS resource.
+--
+-- Provides an OpsWorks PHP application layer resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- app <- resource "app" $
+--     opsworks_php_app_layer_resource
+--         & stack_id .~ compute main @"id"
+-- @
 data Opsworks_Php_App_Layer_Resource = Opsworks_Php_App_Layer_Resource
     { auto_assign_elastic_ips :: !(Attr Text)
       {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
@@ -628,6 +604,22 @@ $(TH.makeResource
     ''Opsworks_Php_App_Layer_Resource)
 
 -- | The @aws_opsworks_user_profile@ AWS resource.
+--
+-- Provides an OpsWorks User Profile resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- my_profile <- resource "my_profile" $
+--     opsworks_user_profile_resource
+--         & user_arn .~ compute user @"arn"
+--         & ssh_username .~ "my_user"
+-- @
 data Opsworks_User_Profile_Resource = Opsworks_User_Profile_Resource
     { allow_self_management :: !(Attr Text)
       {- ^ (Optional) Whether users can specify their own SSH public key through the My Settings page -}
@@ -651,6 +643,27 @@ $(TH.makeResource
     ''Opsworks_User_Profile_Resource)
 
 -- | The @aws_proxy_protocol_policy@ AWS resource.
+--
+-- Provides a proxy protocol policy, which allows an ELB to carry a client connection information to a backend.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- lb <- resource "lb" $
+--     elb_resource
+--         & name .~ "test-lb"
+--         & availability_zones .~ ["us-east-1a"]
+--  
+-- smtp <- resource "smtp" $
+--     proxy_protocol_policy_resource
+--         & load_balancer .~ compute lb @"name"
+--         & instance_ports .~ ["25","587"]
+-- @
 data Proxy_Protocol_Policy_Resource = Proxy_Protocol_Policy_Resource
     { instance_ports :: !(Attr Text)
       {- ^ (Required) List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP. -}
@@ -672,6 +685,23 @@ $(TH.makeResource
     ''Proxy_Protocol_Policy_Resource)
 
 -- | The @aws_rds_cluster_parameter_group@ AWS resource.
+--
+-- Provides an RDS DB cluster parameter group resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     rds_cluster_parameter_group_resource
+--         & name .~ "rds-cluster-pg"
+--         & family .~ "aurora5.6"
+--         & description .~ "RDS default cluster parameter group"
+-- @
 data Rds_Cluster_Parameter_Group_Resource = Rds_Cluster_Parameter_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the DB cluster parameter group. Defaults to "Managed by Terraform". -}
@@ -701,6 +731,31 @@ $(TH.makeResource
     ''Rds_Cluster_Parameter_Group_Resource)
 
 -- | The @aws_route53_delegation_set@ AWS resource.
+--
+-- Provides a <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html> resource.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- main <- resource "main" $
+--     route53_delegation_set_resource
+--         & reference_name .~ "DynDNS"
+--  
+-- primary <- resource "primary" $
+--     route53_zone_resource
+--         & name .~ "hashicorp.com"
+--         & delegation_set_id .~ compute main @"id"
+--  
+-- secondary <- resource "secondary" $
+--     route53_zone_resource
+--         & name .~ "terraform.io"
+--         & delegation_set_id .~ compute main @"id"
+-- @
 data Route53_Delegation_Set_Resource = Route53_Delegation_Set_Resource
     { reference_name :: !(Attr Text)
       {- ^ (Optional) This is a reference name used in Caller Reference (helpful for identifying single delegation set amongst others) -}
@@ -720,6 +775,8 @@ $(TH.makeResource
     ''Route53_Delegation_Set_Resource)
 
 -- | The @aws_s3_bucket_policy@ AWS resource.
+--
+-- Attaches a policy to an S3 bucket resource.
 data S3_Bucket_Policy_Resource = S3_Bucket_Policy_Resource
     { bucket :: !(Attr Text)
       {- ^ (Required) The name of the bucket to which to apply the policy. -}
@@ -737,6 +794,8 @@ $(TH.makeResource
     ''S3_Bucket_Policy_Resource)
 
 -- | The @aws_ses_domain_dkim@ AWS resource.
+--
+-- Provides an SES domain DKIM generation resource.
 data Ses_Domain_Dkim_Resource = Ses_Domain_Dkim_Resource
     { domain :: !(Attr Text)
       {- ^ (Required) Verified domain name to generate DKIM tokens for. -}
@@ -754,33 +813,12 @@ $(TH.makeResource
     ''Ses_Domain_Dkim_Resource)
 
 -- | The @aws_sns_topic_subscription@ AWS resource.
+--
+-- Provides a resource for subscribing to SNS topics. Requires that an SNS topic exist for the subscription to attach to. This resource allows you to automatically place messages sent to SNS topics in SQS queues, send them as HTTP(S) POST requests to a given endpoint, send SMS messages, or notify devices / applications. The most likely use case for Terraform users will probably be SQS queues.
 data Sns_Topic_Subscription_Resource = Sns_Topic_Subscription_Resource
-    { confirmation_timeout_in_minutes :: !(Attr Text)
-      {- ^ (Optional) Integer indicating number of minutes to wait in retying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols (default is 1 minute). -}
-    , endpoint :: !(Attr Text)
-      {- ^ (Required) The endpoint to send data to, the contents will vary with the protocol. (see below for more information) -}
-    , endpoint_auto_confirms :: !(Attr Text)
-      {- ^ (Optional) Boolean indicating whether the end point is capable of <http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.prepare> e.g., PagerDuty (default is false) -}
-    , protocol :: !(Attr Text)
-      {- ^ (Required) The protocol to use. The possible values for this are: @sqs@ , @sms@ , @lambda@ , @application@ . ( @http@ or @https@ are partially supported, see below) ( @email@ is option but unsupported, see below). -}
-    , raw_message_delivery :: !(Attr Text)
-      {- ^ (Optional) Boolean indicating whether or not to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property) (default is false). -}
-    , topic_arn :: !(Attr Text)
-      {- ^ (Required) The ARN of the SNS topic to subscribe to -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Sns_Topic_Subscription_Resource
-    = '[ '("arn", Attr Text)
-         {- - The ARN of the subscription stored as a more user-friendly property -}
-      , '("endpoint", Attr Text)
-         {- - The full endpoint to send data to (SQS ARN, HTTP(S) URL, Application ARN, SMS number, etc.) -}
-      , '("id", Attr Text)
-         {- - The ARN of the subscription -}
-      , '("protocol", Attr Text)
-         {- - The protocol being used -}
-      , '("topic_arn", Attr Text)
-         {- - The ARN of the topic the subscription belongs to -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_sns_topic_subscription"
@@ -789,6 +827,26 @@ $(TH.makeResource
     ''Sns_Topic_Subscription_Resource)
 
 -- | The @aws_spot_datafeed_subscription@ AWS resource.
+--
+-- -> There is only a single subscription allowed per account.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.AWS
+-- import Terraform.AWS.Resource
+-- @
+--
+-- @
+-- default <- resource "default" $
+--     s3_bucket_resource
+--         & bucket .~ "tf-spot-datafeed"
+--  
+-- default <- resource "default" $
+--     spot_datafeed_subscription_resource
+--         & bucket .~ compute default @"bucket"
+--         & prefix .~ "my_subdirectory"
+-- @
 data Spot_Datafeed_Subscription_Resource = Spot_Datafeed_Subscription_Resource
     { bucket :: !(Attr Text)
       {- ^ (Required) The Amazon S3 bucket in which to store the Spot instance data feed. -}
@@ -806,27 +864,12 @@ $(TH.makeResource
     ''Spot_Datafeed_Subscription_Resource)
 
 -- | The @aws_ssm_parameter@ AWS resource.
+--
+-- Provides an SSM Parameter resource.
 data Ssm_Parameter_Resource = Ssm_Parameter_Resource
-    { key_id :: !(Attr Text)
-      {- ^ (Optional) The KMS key id or arn for encrypting a SecureString. -}
-    , name :: !(Attr Text)
-      {- ^ (Required) The name of the parameter. -}
-    , overwrite :: !(Attr Text)
-      {- ^ (Optional) Overwrite an existing parameter. If not specified, will default to @false@ . -}
-    , type_ :: !(Attr Text)
-      {- ^ (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-    , value :: !(Attr Text)
-      {- ^ (Required) The value of the parameter. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Ssm_Parameter_Resource
-    = '[ '("name", Attr Text)
-         {- - (Required) The name of the parameter. -}
-      , '("type", Attr Text)
-         {- - (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-      , '("value", Attr Text)
-         {- - (Required) The value of the parameter. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_ssm_parameter"
@@ -835,17 +878,12 @@ $(TH.makeResource
     ''Ssm_Parameter_Resource)
 
 -- | The @aws_vpc_endpoint_route_table_association@ AWS resource.
+--
+-- Provides a resource to create an association between a VPC endpoint and routing table.
 data Vpc_Endpoint_Route_Table_Association_Resource = Vpc_Endpoint_Route_Table_Association_Resource
-    { route_table_id :: !(Attr Text)
-      {- ^ (Required) The ID of the routing table to be associated with the VPC endpoint. -}
-    , vpc_endpoint_id :: !(Attr Text)
-      {- ^ (Required) The ID of the VPC endpoint with which the routing table will be associated. -}
-    } deriving (Show, Eq, Generic)
 
 type instance Computed Vpc_Endpoint_Route_Table_Association_Resource
-    = '[ '("id", Attr Text)
-         {- - The ID of the association. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_vpc_endpoint_route_table_association"
@@ -854,6 +892,8 @@ $(TH.makeResource
     ''Vpc_Endpoint_Route_Table_Association_Resource)
 
 -- | The @aws_vpc_peering_connection_accepter@ AWS resource.
+--
+-- Provides a resource to manage the accepter's side of a cross-account VPC Peering Connection.
 data Vpc_Peering_Connection_Accepter_Resource = Vpc_Peering_Connection_Accepter_Resource
     { auto_accept :: !(Attr Text)
       {- ^ (Optional) Whether or not to accept the peering request. Defaults to @false@ . -}
@@ -864,21 +904,7 @@ data Vpc_Peering_Connection_Accepter_Resource = Vpc_Peering_Connection_Accepter_
     } deriving (Show, Eq, Generic)
 
 type instance Computed Vpc_Peering_Connection_Accepter_Resource
-    = '[ '("accept_status", Attr Text)
-         {- - The status of the VPC Peering Connection request. -}
-      , '("accepter", Attr Text)
-         {- - A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options set for the accepter VPC. -}
-      , '("id", Attr Text)
-         {- - The ID of the VPC Peering Connection. -}
-      , '("peer_owner_id", Attr Text)
-         {- - The AWS account ID of the owner of the requester VPC. -}
-      , '("peer_vpc_id", Attr Text)
-         {- - The ID of the requester VPC. -}
-      , '("requester", Attr Text)
-         {- - A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options set for the requester VPC. -}
-      , '("vpc_id", Attr Text)
-         {- - The ID of the accepter VPC. -}
-       ]
+    = '[]
 
 $(TH.makeResource
     "aws_vpc_peering_connection_accepter"

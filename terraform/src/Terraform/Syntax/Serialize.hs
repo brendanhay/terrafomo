@@ -21,6 +21,7 @@ import Terraform.Syntax.Output
 import Terraform.Syntax.Resource
 
 import qualified Data.Foldable        as Fold
+import qualified Data.Text            as Text
 import qualified Terraform.Hash       as Hash
 import qualified Terraform.Syntax.HCL as HCL
 
@@ -59,6 +60,9 @@ number = HCL.Number . fromIntegral
 float :: Real a => a -> HCL.Value
 float = HCL.Float . realToFrac
 
+string :: String -> HCL.Value
+string = HCL.String . HCL.Chunk
+
 class ToValue a where
     toValue :: a -> HCL.Value
 
@@ -81,7 +85,7 @@ instance ToValue Integer where
     toValue = number
 
 instance ToValue Text where
-    toValue = HCL.String
+    toValue = string . Text.unpack -- FIXME: return to using 'Text' for chunks.
 
 instance ToValue Alias where
     toValue = toValue . Hash.human
@@ -94,12 +98,12 @@ instance ToValue Key where
 
 instance ToValue Change where
     toValue (Match n) = toValue n
-    toValue Wildcard  = HCL.String "*"
+    toValue Wildcard  = string "*"
 
 instance ToValue a => ToValue (Attr a) where
     toValue = \case
         Present  x           -> toValue x
-        Absent               -> "nil"
+        Absent               -> string "nil"
         Computed (Key t n) x ->
             toValue ( "${"
                    <> fromType t <> "." <> fromName n <> "." <> fromName x

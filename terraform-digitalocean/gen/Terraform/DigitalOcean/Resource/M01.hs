@@ -24,6 +24,8 @@ import Terraform.Syntax.Attribute (Attr, Computed)
 import qualified Terraform.Syntax.TH as TH
 
 -- | The @digitalocean_certificate@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Certificate resource that allows you to manage certificates for configuring TLS termination in Load Balancers. Certificates created with this resource can be referenced in your Load Balancer configuration via their ID.
 data Certificate_Resource = Certificate_Resource
     { certificate_chain :: !(Attr Text)
       {- ^ (Optional) The full PEM-formatted trust chain between the certificate authority's certificate and your domain's TLS certificate. -}
@@ -53,6 +55,8 @@ $(TH.makeResource
     ''Certificate_Resource)
 
 -- | The @digitalocean_domain@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean domain resource.
 data Domain_Resource = Domain_Resource
     { ip_address :: !(Attr Text)
       {- ^ (Required) The IP address of the domain. This IP is used to created an initial A record for the domain. It is required upstream by the DigitalOcean API. -}
@@ -72,6 +76,8 @@ $(TH.makeResource
     ''Domain_Resource)
 
 -- | The @digitalocean_firewall@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Cloud Firewall resource. This can be used to create, modify, and delete Firewalls.
 data Firewall_Resource = Firewall_Resource
     { droplet_ids :: !(Attr Text)
       {- ^ (Optional) - The list of the IDs of the Droplets assigned to the Firewall. -}
@@ -113,6 +119,30 @@ $(TH.makeResource
     ''Firewall_Resource)
 
 -- | The @digitalocean_loadbalancer@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean Load Balancer resource. This can be used to create, modify, and delete Load Balancers.
+--
+-- Example Usage:
+--
+-- @
+-- import Terraform.DigitalOcean
+-- import Terraform.DigitalOcean.Resource
+-- @
+--
+-- @
+-- web <- resource "web" $
+--     droplet_resource
+--         & name .~ "web-1"
+--         & size .~ "512mb"
+--         & image .~ "centos-7-x64"
+--         & region .~ "nyc3"
+--  
+-- public <- resource "public" $
+--     loadbalancer_resource
+--         & name .~ "loadbalancer-1"
+--         & region .~ "nyc3"
+--         & droplet_ids .~ [compute web @"id"]
+-- @
 data Loadbalancer_Resource = Loadbalancer_Resource
     { algorithm :: !(Attr Text)
       {- ^ (Optional) The load balancing algorithm used to determine which backend Droplet will be selected by a client. It must be either @round_robin@ or @least_connections@ . The default value is @round_robin@ . -}
@@ -148,6 +178,8 @@ $(TH.makeResource
     ''Loadbalancer_Resource)
 
 -- | The @digitalocean_record@ DigitalOcean resource.
+--
+-- Provides a DigitalOcean DNS record resource.
 data Record_Resource = Record_Resource
     { domain :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}

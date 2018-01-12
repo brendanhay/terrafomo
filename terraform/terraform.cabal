@@ -48,10 +48,10 @@ library
         , formatting
         , hashable
         , lens
+        , megaparsec
         , mtl
         , random
         , template-haskell
         , text
         , unordered-containers
         , wl-pprint-text
-        , megaparsec
