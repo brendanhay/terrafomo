@@ -24,13 +24,4 @@ about: Provides an alias for a KMS customer master key. AWS Console enforces 1-t
   mapping between aliases & keys, but API (hence Terraform too) allows you to create
   as many aliases as the <http://docs.aws.amazon.com/kms/latest/developerguide/limits.html>
   allow you.
-examples:
-- name: null
-  code:
-  - a <- resource "a" $
-  - ! '    kms_key_resource'
-  - ! ' '
-  - a <- resource "a" $
-  - ! '    kms_alias_resource'
-  - ! '        & name .~ "alias/my-key-alias"'
-  - ! '        & target_key_id .~ compute a @"key_id"'
+examples: []

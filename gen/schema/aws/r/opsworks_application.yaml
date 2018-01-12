@@ -9,11 +9,6 @@ arguments:
     help: (Required if @type@ = @rails@ ) The name of the Rails environment for application
       of type @rails@ .
     type: Text
-  type_:
-    required: true
-    help: (Required) Opsworks application type. One of @aws-flow-ruby@ , @java@ ,
-      @rails@ , @php@ , @nodejs@ , @static@ or @other@ .
-    type: Text
   data_source_type:
     required: false
     help: (Optional) The data source's type one of @AutoSelectOpsworksMysqlInstance@
@@ -40,6 +35,11 @@ arguments:
   name:
     required: true
     help: (Required) A human-readable name for the application.
+    type: Text
+  type':
+    required: true
+    help: (Required) Opsworks application type. One of @aws-flow-ruby@ , @java@ ,
+      @rails@ , @php@ , @nodejs@ , @static@ or @other@ .
     type: Text
   short_name:
     required: true

@@ -1,5 +1,37 @@
 _name: aws_route_table
-arguments: {}
-attributes: {}
-about: Provides a resource to create a VPC routing table.
+arguments:
+  vpc_id:
+    required: true
+    help: (Required) The VPC ID.
+    type: Text
+  route:
+    required: false
+    help: (Optional) A list of route objects. Their keys are documented below.
+    type: Text
+  propagating_vgws:
+    required: false
+    help: (Optional) A list of virtual gateways for propagation.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the routing table'
+    type: Text
+about: Provides a resource to create a VPC routing table. ~> Terraform currently provides
+  both a standalone <route.html> and a Route Table resource with routes defined in-line.
+  At this time you cannot use a Route Table with in-line routes in conjunction with
+  any Route resources. Doing so will cause a conflict of rule settings and will overwrite
+  rules. ~> The AWS API is very forgiving with these two attributes and the @aws_route_table@
+  resource can be created with a NAT ID specified as a Gateway ID attribute. This
+  lead to a permanent diff between your configuration and statefile, as the API returns
+  the correct parameters in the returned route table. If you're experiencing constant
+  diffs in your @aws_route_table@ resources, the first thing to check is whether or
+  not you're specifying a NAT ID instead of a Gateway ID, or vice-versa. ~> If the
+  @propagating_vgws@ argument is present, it's not supported to define route propagations
+  using @aws_vpn_gateway_route_propagation@ , since this resource will delete any
+  propagating gateways not explicitly listed in @propagating_vgws@ . Omit this argument
+  when defining route propagation using the separate resource.
 examples: []

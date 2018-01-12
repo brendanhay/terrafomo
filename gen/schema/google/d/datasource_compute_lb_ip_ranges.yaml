@@ -9,16 +9,5 @@ arguments:
     help: ! '- The IP ranges used for health checks when is used'
     type: Text
 attributes: {}
-about: Use this data source to access IP ranges in your firewall rules.
-examples:
-- name: null
-  code:
-  - ranges <- datasource "ranges" $
-  - ! '    compute_lb_ip_ranges_datasource'
-  - ! ' '
-  - lb <- resource "lb" $
-  - ! '    compute_firewall_resource'
-  - ! '        & name .~ "lb-firewall"'
-  - ! '        & network .~ compute main @"name"'
-  - ! '        & source_ranges .~ [data.google_compute_lb_ip_ranges.ranges.network]'
-  - ! '        & target_tags .~ ["InstanceBehindLoadBalancer"]'
+about: Use this data source to access IP ranges in your firewall rules. https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_source_ips_and_firewall_rules
+examples: []

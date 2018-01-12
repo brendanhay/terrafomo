@@ -15,5 +15,9 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a resource to manage the accepter's side of a cross-account VPC Peering
-  Connection.
+  Connection. When a cross-account (requester's AWS account differs from the accepter's
+  AWS account) VPC Peering Connection is created, a VPC Peering Connection resource
+  is automatically created in the accepter's account. The requester can use the @aws_vpc_peering_connection@
+  resource to manage its side of the connection and the accepter can use the @aws_vpc_peering_connection_accepter@
+  resource to "adopt" its side of the connection into management.
 examples: []

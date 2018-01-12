@@ -278,19 +278,14 @@ attributes:
     help: ! '- The database port.'
     type: Text
 about: Provides an RDS instance resource.  A DB instance is an isolated database environment
-  in the cloud.  A DB instance can contain multiple user-created databases.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    db_instance_resource'
-  - ! '        & allocated_storage .~ 10'
-  - ! '        & storage_type .~ "gp2"'
-  - ! '        & engine .~ "mysql"'
-  - ! '        & engine_version .~ "5.6.17"'
-  - ! '        & instance_class .~ "db.t1.micro"'
-  - ! '        & name .~ "mydb"'
-  - ! '        & username .~ "foo"'
-  - ! '        & password .~ "bar"'
-  - ! '        & db_subnet_group_name .~ "my_database_subnet_group"'
-  - ! '        & parameter_group_name .~ "default.mysql5.6"'
+  in the cloud.  A DB instance can contain multiple user-created databases. Changes
+  to a DB instance can occur when you manually change a parameter, such as @allocated_storage@
+  , and are reflected in the next maintenance window. Because of this, Terraform may
+  report a difference in its planning phase because a modification has not yet taken
+  place. You can use the @apply_immediately@ flag to instruct the service to apply
+  the change immediately (see documentation below). When upgrading the major version
+  of an engine, @allow_major_version_upgrade@ must be set to @true@ . ~> using @apply_immediately@
+  can result in a brief downtime as the server reboots. See the AWS Docs on <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html>
+  for more information. ~> All arguments including the username and password will
+  be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
+examples: []

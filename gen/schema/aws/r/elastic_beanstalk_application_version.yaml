@@ -29,31 +29,12 @@ attributes:
   name:
     help: ! '- The Application Version name.'
     type: Text
-about: Provides an Elastic Beanstalk Application Version Resource. Elastic Beanstalk
+about: ! 'Provides an Elastic Beanstalk Application Version Resource. Elastic Beanstalk
   allows you to deploy and manage applications in the AWS cloud without worrying about
-  the infrastructure that runs those applications.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    s3_bucket_resource'
-  - ! '        & bucket .~ "tftest.applicationversion.bucket"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    s3_bucket_object_resource'
-  - ! '        & bucket .~ compute default @"id"'
-  - ! '        & key .~ "beanstalk/go-v1.zip"'
-  - ! '        & source .~ "go-v1.zip"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    elastic_beanstalk_application_resource'
-  - ! '        & name .~ "tf-test-name"'
-  - ! '        & description .~ "tf-test-desc"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    elastic_beanstalk_application_version_resource'
-  - ! '        & name .~ "tf-test-version-label"'
-  - ! '        & application .~ "tf-test-name"'
-  - ! '        & description .~ "application version created by terraform"'
-  - ! '        & bucket .~ compute default @"id"'
-  - ! '        & key .~ compute default @"id"'
+  the infrastructure that runs those applications. This resource creates a Beanstalk
+  Application Version that can be deployed to a Beanstalk Environment. ~> When using
+  the Application Version resource with multiple <elastic_beanstalk_environment.html>
+  it is possible that an error may be returned when attempting to delete an Application
+  Version while it is still in use by a different environment. To work around this
+  you can:'
+examples: []

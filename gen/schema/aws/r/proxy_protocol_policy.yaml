@@ -18,15 +18,4 @@ attributes:
     type: Text
 about: Provides a proxy protocol policy, which allows an ELB to carry a client connection
   information to a backend.
-examples:
-- name: null
-  code:
-  - lb <- resource "lb" $
-  - ! '    elb_resource'
-  - ! '        & name .~ "test-lb"'
-  - ! '        & availability_zones .~ ["us-east-1a"]'
-  - ! ' '
-  - smtp <- resource "smtp" $
-  - ! '    proxy_protocol_policy_resource'
-  - ! '        & load_balancer .~ compute lb @"name"'
-  - ! '        & instance_ports .~ ["25","587"]'
+examples: []

@@ -11,9 +11,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a WAF XSS Match Set Resource
-examples:
-- name: null
-  code:
-  - xss_match_set <- resource "xss_match_set" $
-  - ! '    waf_xss_match_set_resource'
-  - ! '        & name .~ "xss_match_set"'
+examples: []

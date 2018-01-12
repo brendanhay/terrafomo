@@ -18,9 +18,4 @@ attributes:
     help: ! '- The date when the client certificate will expire.'
     type: Text
 about: Provides an API Gateway Client Certificate.
-examples:
-- name: null
-  code:
-  - demo <- resource "demo" $
-  - ! '    api_gateway_client_certificate_resource'
-  - ! '        & description .~ "My client certificate"'
+examples: []

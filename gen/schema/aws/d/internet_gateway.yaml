@@ -22,9 +22,4 @@ attributes:
     help: ! '- The ID of an attached VPC.'
     type: Text
 about: ! '@aws_internet_gateway@ provides details about a specific Internet Gateway.'
-examples:
-- name: null
-  code:
-  - ! ' '
-  - default <- datasource "default" $
-  - ! '    internet_gateway_datasource'
+examples: []

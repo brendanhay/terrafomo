@@ -91,9 +91,4 @@ attributes:
     help: ! '- The id of the layer.'
     type: Text
 about: Provides an OpsWorks Java application layer resource.
-examples:
-- name: null
-  code:
-  - app <- resource "app" $
-  - ! '    opsworks_java_app_layer_resource'
-  - ! '        & stack_id .~ compute main @"id"'
+examples: []

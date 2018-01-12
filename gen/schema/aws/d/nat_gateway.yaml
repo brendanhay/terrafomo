@@ -47,10 +47,4 @@ attributes:
     help: ! '- The Id of the ENI allocated to the selected Nat Gateway.'
     type: Text
 about: Provides details about a specific Nat Gateway.
-examples:
-- name: null
-  code:
-  - ! ' '
-  - default <- datasource "default" $
-  - ! '    nat_gateway_datasource'
-  - ! '        & subnet_id .~ compute public @"id"'
+examples: []

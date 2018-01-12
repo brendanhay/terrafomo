@@ -11,11 +11,6 @@ arguments:
 attributes: {}
 about: Provides an Elastic Beanstalk Application Resource. Elastic Beanstalk allows
   you to deploy and manage applications in the AWS cloud without worrying about the
-  infrastructure that runs those applications.
-examples:
-- name: null
-  code:
-  - tftest <- resource "tftest" $
-  - ! '    elastic_beanstalk_application_resource'
-  - ! '        & name .~ "tf-test-name"'
-  - ! '        & description .~ "tf-test-desc"'
+  infrastructure that runs those applications. This resource creates an application
+  that has one configuration template named @default@ , and no application versions
+examples: []

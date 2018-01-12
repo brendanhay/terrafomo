@@ -13,10 +13,4 @@ attributes:
     help: ! '- A combination of " @image_id@ - @account_id@ ".'
     type: Text
 about: Adds launch permission to Amazon Machine Image (AMI) from another AWS account.
-examples:
-- name: null
-  code:
-  - example <- resource "example" $
-  - ! '    ami_launch_permission_resource'
-  - ! '        & image_id .~ "ami-12345678"'
-  - ! '        & account_id .~ "123456789012"'
+examples: []

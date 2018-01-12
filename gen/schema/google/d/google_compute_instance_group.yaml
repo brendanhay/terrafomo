@@ -1,5 +1,10 @@
 _name: google_compute_instance_group
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   zone:
     required: true
     help: (Required) The zone of the instance group.

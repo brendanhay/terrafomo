@@ -1,5 +1,34 @@
 _name: google_compute_backend_service
 arguments:
+  connection_draining_timeout_sec:
+    required: false
+    help: (Optional) Time for which instance will be drained (not accept new connections,
+      but still work to finish started ones). Defaults to @300@ .
+    type: Text
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  protocol:
+    required: false
+    help: (Optional) The protocol for incoming requests. Defaults to @HTTP@ .
+    type: Text
+  port_name:
+    required: false
+    help: (Optional) The name of a service that has been added to an instance group
+      in this backend. See <https://cloud.google.com/compute/docs/instance-groups/#specifying_service_endpoints>
+      for details. Defaults to http.
+    type: Text
+  backend:
+    required: false
+    help: (Optional) The list of backends that serve this BackendService. Structure
+      is documented below.
+    type: Text
+  enable_cdn:
+    required: false
+    help: (Optional) Whether or not to enable the Cloud CDN on the backend service.
+    type: Text
   name:
     required: true
     help: (Required) The name of the backend service.
@@ -9,11 +38,26 @@ arguments:
     help: (Optional) The region this backend service has been created in. If unspecified,
       this defaults to the region configured in the provider.
     type: Text
+  session_affinity:
+    required: false
+    help: (Optional) How to distribute load. Options are @NONE@ (no affinity), @CLIENT_IP@
+      (hash of the source/dest addresses / ports), and @GENERATED_COOKIE@ (distribute
+      load using a generated session cookie).
+    type: Text
   health_checks:
     required: true
     help: (Required) Specifies a list of HTTP/HTTPS health checks for checking the
       health of the backend service. Currently at most one health check can be specified,
       and a health check is required.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The textual description for the backend service.
+    type: Text
+  timeout_sec:
+    required: false
+    help: (Optional) The number of secs to wait for a backend to respond to a request
+      before considering the request failed. Defaults to @30@ .
     type: Text
 attributes:
   fingerprint:
@@ -25,36 +69,6 @@ attributes:
 about: A Backend Service defines a group of virtual machines that will serve traffic
   for load balancing. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/backend-service>
   and the <https://cloud.google.com/compute/docs/reference/latest/backendServices>
+  . For internal load balancing, use a </docs/providers/google/r/compute_region_backend_service.html>
   .
-examples:
-- name: null
-  code:
-  - website <- resource "website" $
-  - ! '    compute_backend_service_resource'
-  - ! '        & name .~ "my-backend"'
-  - ! '        & description .~ "Our company website"'
-  - ! '        & port_name .~ "http"'
-  - ! '        & protocol .~ "HTTP"'
-  - ! '        & timeout_sec .~ 10'
-  - ! '        & enable_cdn .~ False'
-  - ! '        & health_checks .~ [compute default @"self_link"]'
-  - ! ' '
-  - webservers <- resource "webservers" $
-  - ! '    compute_instance_group_manager_resource'
-  - ! '        & name .~ "my-webservers"'
-  - ! '        & instance_template .~ compute webserver @"self_link"'
-  - ! '        & base_instance_name .~ "webserver"'
-  - ! '        & zone .~ "us-central1-f"'
-  - ! '        & target_size .~ 1'
-  - ! ' '
-  - webserver <- resource "webserver" $
-  - ! '    compute_instance_template_resource'
-  - ! '        & name .~ "standard-webserver"'
-  - ! '        & machine_type .~ "n1-standard-1"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_http_health_check_resource'
-  - ! '        & name .~ "test"'
-  - ! '        & request_path .~ "/"'
-  - ! '        & check_interval_sec .~ 1'
-  - ! '        & timeout_sec .~ 1'
+examples: []

@@ -5,11 +5,6 @@ arguments:
     help: (Optional) The source of the identity in an incoming request. Defaults to
       @method.request.header.Authorization@ .
     type: Text
-  type_:
-    required: false
-    help: (Optional) The type of the authorizer. @TOKEN@ is currently the only allowed
-      value. Defaults to @TOKEN@ .
-    type: Text
   identity_validation_expression:
     required: false
     help: (Optional) A validation expression for the incoming identity. For @TOKEN@
@@ -20,6 +15,11 @@ arguments:
   name:
     required: true
     help: (Required) The name of the authorizer
+    type: Text
+  type':
+    required: false
+    help: (Optional) The type of the authorizer. @TOKEN@ is currently the only allowed
+      value. Defaults to @TOKEN@ .
     type: Text
   rest_api_id:
     required: true

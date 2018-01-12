@@ -1,19 +1,44 @@
 _name: google_compute_subnetwork
 arguments:
+  secondary_ip_range:
+    required: false
+    help: (Optional, </docs/providers/google/index.html#beta-features> ) An array
+      of configurations for secondary IP ranges for VM instances contained in this
+      subnetwork. Structure is documented below.
+    type: Text
   ip_cidr_range:
     required: true
     help: (Required) The IP address range that machines in this network are assigned
       to, represented as a CIDR block.
+    type: Text
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
     type: Text
   network:
     required: true
     help: (Required) The network name or resource link to the parent network of this
       subnetwork. The parent network must have been created in custom subnet mode.
     type: Text
+  private_ip_google_access:
+    required: false
+    help: (Optional) Whether the VMs in this subnet can access Google services without
+      assigned external IP addresses.
+    type: Text
   name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region this subnetwork will be created in. If unspecified,
+      this defaults to the region configured in the provider.
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description of this subnetwork.
     type: Text
 attributes:
   self_link:
@@ -24,16 +49,4 @@ attributes:
     type: Text
 about: Manages a subnetwork within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/#vpc_networks_and_subnets>
   and <https://cloud.google.com/compute/docs/reference/latest/subnetworks> .
-examples:
-- name: null
-  code:
-  - default-us-east1 <- resource "default-us-east1" $
-  - ! '    compute_subnetwork_resource'
-  - ! '        & name .~ "default-us-east1"'
-  - ! '        & ip_cidr_range .~ "10.0.0.0/16"'
-  - ! '        & network .~ compute default @"self_link"'
-  - ! '        & region .~ "us-east1"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_network_resource'
-  - ! '        & name .~ "test"'
+examples: []

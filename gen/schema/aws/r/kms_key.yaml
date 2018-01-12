@@ -39,10 +39,4 @@ attributes:
     help: ! '- The globally unique identifier for the key.'
     type: Text
 about: Provides a KMS customer master key.
-examples:
-- name: null
-  code:
-  - a <- resource "a" $
-  - ! '    kms_key_resource'
-  - ! '        & description .~ "KMS key 1"'
-  - ! '        & deletion_window_in_days .~ 10'
+examples: []

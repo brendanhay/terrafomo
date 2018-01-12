@@ -47,13 +47,4 @@ attributes:
     type: Text
 about: Creates a dataset resource for Google BigQuery. For more information see <https://cloud.google.com/bigquery/docs/>
   and <https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets> .
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    bigquery_dataset_resource'
-  - ! '        & dataset_id .~ "foo"'
-  - ! '        & friendly_name .~ "test"'
-  - ! '        & description .~ "This is a test description"'
-  - ! '        & location .~ "EU"'
-  - ! '        & default_table_expiration_ms .~ 3600000'
+examples: []

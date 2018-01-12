@@ -12,5 +12,6 @@ attributes:
       Terraform. Find out more about verifying domains in Amazon SES in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html>
       .'
     type: Text
-about: Provides an SES domain DKIM generation resource.
+about: Provides an SES domain DKIM generation resource. Domain ownership needs to
+  be confirmed first using </docs/providers/aws/r/ses_domain_identity.html>
 examples: []

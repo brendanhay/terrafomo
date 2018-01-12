@@ -42,13 +42,4 @@ arguments:
 attributes: {}
 about: Creates a Google Bigtable instance. For more information see <https://cloud.google.com/bigtable/>
   and <https://cloud.google.com/bigtable/docs/go/reference> .
-examples:
-- name: null
-  code:
-  - instance <- resource "instance" $
-  - ! '    bigtable_instance_resource'
-  - ! '        & name .~ "tf-instance"'
-  - ! '        & cluster_id .~ "tf-instance-cluster"'
-  - ! '        & zone .~ "us-central1-b"'
-  - ! '        & num_nodes .~ 3'
-  - ! '        & storage_type .~ "HDD"'
+examples: []

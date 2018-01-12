@@ -4,10 +4,6 @@ arguments:
     required: false
     help: (Optional) The time to live for the record, in seconds.
     type: Text
-  type_:
-    required: true
-    help: (Required) The type of record
-    type: Text
   priority:
     required: false
     help: (Optional) The priority of the record, for MX and SRV records.
@@ -27,6 +23,10 @@ arguments:
   name:
     required: false
     help: (Optional) The name of the record
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of record
     type: Text
   port:
     required: false

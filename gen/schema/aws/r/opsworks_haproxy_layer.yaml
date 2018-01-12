@@ -94,10 +94,4 @@ attributes:
     help: ! '- The id of the layer.'
     type: Text
 about: Provides an OpsWorks haproxy layer resource.
-examples:
-- name: null
-  code:
-  - lb <- resource "lb" $
-  - ! '    opsworks_haproxy_layer_resource'
-  - ! '        & stack_id .~ compute main @"id"'
-  - ! '        & stats_password .~ "foobarbaz"'
+examples: []

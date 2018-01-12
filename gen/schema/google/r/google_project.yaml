@@ -56,12 +56,13 @@ attributes:
   number:
     help: ! '- The numeric identifier of the project.'
     type: Text
-about: Allows creation and management of a Google Cloud Platform project.
-examples:
-- name: null
-  code:
-  - my_project <- resource "my_project" $
-  - ! '    project_resource'
-  - ! '        & name .~ "My Project"'
-  - ! '        & project_id .~ "your-project-id"'
-  - ! '        & org_id .~ "1234567"'
+about: ! 'Allows creation and management of a Google Cloud Platform project. Projects
+  created with this resource must be associated with an Organization. See the <https://cloud.google.com/resource-manager/docs/quickstarts>
+  for more details. The service account used to run Terraform when creating a @google_project@
+  resource must have @roles/resourcemanager.projectCreator@ . See the <https://cloud.google.com/resource-manager/docs/access-control-org>
+  doc for more information. Note that prior to 0.8.5, @google_project@ functioned
+  like a data source, meaning any project referenced by it had to be created and managed
+  outside Terraform. As of 0.8.5, @google_project@ functions like any other Terraform
+  resource, with Terraform creating and managing the project. To replicate the old
+  behavior, either:'
+examples: []

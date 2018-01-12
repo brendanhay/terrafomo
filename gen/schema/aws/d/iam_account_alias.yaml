@@ -7,11 +7,4 @@ arguments:
 attributes: {}
 about: The IAM Account Alias data source allows access to the account alias for the
   effective account in which Terraform is working.
-examples:
-- name: null
-  code:
-  - current <- datasource "current" $
-  - ! '    iam_account_alias_datasource'
-  - ! ' '
-  - output "account_id" $
-  - ! '    "${data.aws_iam_account_alias.current.account_alias}"'
+examples: []

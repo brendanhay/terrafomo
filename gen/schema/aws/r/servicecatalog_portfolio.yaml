@@ -21,11 +21,4 @@ attributes:
     help: ! '- The ID of the Service Catalog Portfolio.'
     type: Text
 about: Provides a resource to create a Service Catalog Portfolio.
-examples:
-- name: null
-  code:
-  - portfolio <- resource "portfolio" $
-  - ! '    servicecatalog_portfolio_resource'
-  - ! '        & name .~ "My App Portfolio"'
-  - ! '        & description .~ "List of my organizations apps"'
-  - ! '        & provider_name .~ "Brett"'
+examples: []

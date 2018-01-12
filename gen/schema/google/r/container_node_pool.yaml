@@ -1,5 +1,47 @@
 _name: google_container_node_pool
-arguments: {}
+arguments:
+  node_count:
+    required: false
+    help: (Optional) The number of nodes per instance group.
+    type: Text
+  cluster:
+    required: true
+    help: (Required) The cluster to create the node pool for.
+    type: Text
+  autoscaling:
+    required: false
+    help: (Optional) Configuration required by cluster autoscaler to adjust the size
+      of the node pool to the current cluster usage. Structure is documented below.
+    type: Text
+  project:
+    required: false
+    help: (Optional) The project in which to create the node pool. If blank, the provider-configured
+      project will be used.
+    type: Text
+  zone:
+    required: true
+    help: (Required) The zone in which the cluster resides.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the node pool. If left blank, Terraform will auto-generate
+      a unique name.
+    type: Text
+  initial_node_count:
+    required: true
+    help: ! '- (Deprecated, Optional) The initial node count for the pool. Use @node_count@
+      instead.'
+    type: Text
+  node_config:
+    required: false
+    help: (Optional) The node configuration of the pool. See [google_container_cluster](container_cluster.html
+      for schema.
+    type: Text
+  name_prefix:
+    required: false
+    help: (Optional) Creates a unique name for the node pool beginning with the specified
+      prefix. Conflicts with @name@ .
+    type: Text
 attributes: {}
 about: Manages a Node Pool resource within GKE. For more information see <https://cloud.google.com/container-engine/docs/node-pools>
   and <https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters.nodePools>

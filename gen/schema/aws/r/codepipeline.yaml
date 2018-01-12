@@ -21,5 +21,6 @@ attributes:
   id:
     help: ! '- The codepipeline ID.'
     type: Text
-about: Provides a CodePipeline.
+about: Provides a CodePipeline. ~> - the @GITHUB_TOKEN@ environment variable must
+  be set if the GitHub provider is specified.
 examples: []

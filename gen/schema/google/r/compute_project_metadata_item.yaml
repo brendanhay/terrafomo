@@ -1,5 +1,10 @@
 _name: google_compute_project_metadata_item
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   value:
     required: true
     help: (Required) The value to set for the given metadata key.
@@ -12,10 +17,4 @@ attributes: {}
 about: Manages a single key/value pair on metadata common to all instances for a project
   in GCE. Using @google_compute_project_metadata_item@ lets you manage a single key/value
   setting in Terraform rather than the entire project metadata map.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    compute_project_metadata_item_resource'
-  - ! '        & key .~ "my_metadata"'
-  - ! '        & value .~ "my_value"'
+examples: []

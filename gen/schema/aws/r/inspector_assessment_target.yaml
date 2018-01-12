@@ -13,13 +13,4 @@ attributes:
     help: ! '- The target assessment ARN.'
     type: Text
 about: Provides a Inspector assessment target
-examples:
-- name: null
-  code:
-  - bar <- resource "bar" $
-  - ! '    inspector_resource_group_resource'
-  - ! ' '
-  - foo <- resource "foo" $
-  - ! '    inspector_assessment_target_resource'
-  - ! '        & name .~ "assessment target"'
-  - ! '        & resource_group_arn .~ compute bar @"arn"'
+examples: []

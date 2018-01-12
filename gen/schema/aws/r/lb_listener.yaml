@@ -34,5 +34,6 @@ attributes:
   id:
     help: ! '- The ARN of the listener (matches @arn@ )'
     type: Text
-about: Provides a Load Balancer Listener resource.
+about: Provides a Load Balancer Listener resource. ~>  @aws_alb_listener@ is known
+  as @aws_lb_listener@ . The functionality is identical.
 examples: []

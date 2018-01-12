@@ -34,37 +34,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides an HTTP Method Response for an API Gateway Resource.
-examples:
-- name: null
-  code:
-  - mydemoapi <- resource "mydemoapi" $
-  - ! '    api_gateway_rest_api_resource'
-  - ! '        & name .~ "MyDemoAPI"'
-  - ! '        & description .~ "This is my API for demonstration purposes"'
-  - ! ' '
-  - mydemoresource <- resource "mydemoresource" $
-  - ! '    api_gateway_resource_resource'
-  - ! '        & rest_api_id .~ compute MyDemoAPI @"id"'
-  - ! '        & parent_id .~ compute MyDemoAPI @"root_resource_id"'
-  - ! '        & path_part .~ "mydemoresource"'
-  - ! ' '
-  - mydemomethod <- resource "mydemomethod" $
-  - ! '    api_gateway_method_resource'
-  - ! '        & rest_api_id .~ compute MyDemoAPI @"id"'
-  - ! '        & resource_id .~ compute MyDemoResource @"id"'
-  - ! '        & http_method .~ "GET"'
-  - ! '        & authorization .~ "NONE"'
-  - ! ' '
-  - mydemointegration <- resource "mydemointegration" $
-  - ! '    api_gateway_integration_resource'
-  - ! '        & rest_api_id .~ compute MyDemoAPI @"id"'
-  - ! '        & resource_id .~ compute MyDemoResource @"id"'
-  - ! '        & http_method .~ compute MyDemoMethod @"http_method"'
-  - ! '        & type .~ "MOCK"'
-  - ! ' '
-  - 200 <- resource "200" $
-  - ! '    api_gateway_method_response_resource'
-  - ! '        & rest_api_id .~ compute MyDemoAPI @"id"'
-  - ! '        & resource_id .~ compute MyDemoResource @"id"'
-  - ! '        & http_method .~ compute MyDemoMethod @"http_method"'
-  - ! '        & status_code .~ "200"'
+examples: []

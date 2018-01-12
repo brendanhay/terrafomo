@@ -1,9 +1,46 @@
 _name: google_compute_https_health_check
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  unhealthy_threshold:
+    required: false
+    help: (Optional) Consecutive failures required (default 2).
+    type: Text
+  check_interval_sec:
+    required: false
+    help: (Optional) How often to poll each instance (default 5).
+    type: Text
   name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    type: Text
+  healthy_threshold:
+    required: false
+    help: (Optional) Consecutive successes required (default 2).
+    type: Text
+  host:
+    required: false
+    help: (Optional) HTTPS host header field (default instance's public ip).
+    type: Text
+  request_path:
+    required: false
+    help: (Optional) URL path to query (default /).
+    type: Text
+  description:
+    required: false
+    help: (Optional) Textual description field.
+    type: Text
+  timeout_sec:
+    required: false
+    help: (Optional) How long before declaring failure (default 5).
+    type: Text
+  port:
+    required: false
+    help: (Optional) TCP port to connect to (default 443).
     type: Text
 attributes:
   self_link:
@@ -13,12 +50,7 @@ about: Manages an HTTPS health check within GCE. This is used to monitor instanc
   behind load balancers. Timeouts or HTTPS errors cause the instance to be removed
   from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks>
   and <https://cloud.google.com/compute/docs/reference/latest/httpsHealthChecks> .
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    compute_https_health_check_resource'
-  - ! '        & name .~ "test"'
-  - ! '        & request_path .~ "/health_check"'
-  - ! '        & timeout_sec .~ 1'
-  - ! '        & check_interval_sec .~ 1'
+  ~> HTTPSHealthChecks/HttpHealthChecks are legacy health checks. The newer </docs/providers/google/r/compute_health_check.html>
+  should be preferred for all uses except except <https://cloud.google.com/compute/docs/load-balancing/network/>
+  which still require the legacy HttpHealthChecks.
+examples: []

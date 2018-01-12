@@ -9,9 +9,4 @@ attributes:
     help: ! '- The name of the SimpleDB domain'
     type: Text
 about: Provides a SimpleDB domain resource
-examples:
-- name: null
-  code:
-  - users <- resource "users" $
-  - ! '    simpledb_domain_resource'
-  - ! '        & name .~ "users"'
+examples: []

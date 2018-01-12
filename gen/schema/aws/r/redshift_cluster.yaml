@@ -224,15 +224,7 @@ attributes:
   port:
     help: ! '- The Port the cluster responds on'
     type: Text
-about: Provides a Redshift Cluster Resource.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    redshift_cluster_resource'
-  - ! '        & cluster_identifier .~ "tf-redshift-cluster"'
-  - ! '        & database_name .~ "mydb"'
-  - ! '        & master_username .~ "foo"'
-  - ! '        & master_password .~ "Mustbe8characters"'
-  - ! '        & node_type .~ "dc1.large"'
-  - ! '        & cluster_type .~ "single-node"'
+about: Provides a Redshift Cluster Resource. ~> All arguments including the username
+  and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .
+examples: []

@@ -29,10 +29,4 @@ attributes:
       assigned by AWS.'
     type: Text
 about: Provides an IAM group.
-examples:
-- name: null
-  code:
-  - developers <- resource "developers" $
-  - ! '    iam_group_resource'
-  - ! '        & name .~ "developers"'
-  - ! '        & path .~ "/users/"'
+examples: []

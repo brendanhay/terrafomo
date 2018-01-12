@@ -20,5 +20,7 @@ attributes:
       write access to the configured @destination@ .'
     type: Text
 about: Manages a billing account logging sink. For more information see <https://cloud.google.com/logging/docs/>
-  and <https://cloud.google.com/logging/docs/api/tasks/exporting-logs> .
+  and <https://cloud.google.com/logging/docs/api/tasks/exporting-logs> . Note that
+  you must have the "Logs Configuration Writer" IAM role ( @roles/logging.configWriter@
+  ) granted to the credentials used with terraform.
 examples: []

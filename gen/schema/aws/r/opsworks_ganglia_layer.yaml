@@ -82,10 +82,4 @@ attributes:
     help: ! '- The id of the layer.'
     type: Text
 about: Provides an OpsWorks Ganglia layer resource.
-examples:
-- name: null
-  code:
-  - monitor <- resource "monitor" $
-  - ! '    opsworks_ganglia_layer_resource'
-  - ! '        & stack_id .~ compute main @"id"'
-  - ! '        & password .~ "foobarbaz"'
+examples: []

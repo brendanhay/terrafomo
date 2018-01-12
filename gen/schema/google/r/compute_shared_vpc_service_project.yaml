@@ -8,9 +8,4 @@ attributes: {}
 about: Allows enabling and disabling Shared VPC for a service Google Cloud Platform
   project. For more information see <https://cloud.google.com/compute/docs/shared-vpc>
   and <https://cloud.google.com/compute/docs/reference/latest/projects> .
-examples:
-- name: null
-  code:
-  - host <- resource "host" $
-  - ! '    compute_shared_vpc_host_project_resource'
-  - ! '        & project .~ "your-project-id"'
+examples: []

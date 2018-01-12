@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.DigitalOcean.Provider (DigitalOcean, newResource)
+import Terraform.DigitalOcean.Provider (DigitalOcean, defaultProvider)
 import Terraform.DigitalOcean.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -99,35 +99,12 @@ type instance Computed Droplet_Resource
 $(TH.makeResource
     "digitalocean_droplet"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Droplet_Resource)
 
 -- | The @digitalocean_floating_ip@ DigitalOcean resource.
 --
 -- Provides a DigitalOcean Floating IP to represent a publicly-accessible static IP addresses that can be mapped to one of your Droplets.
---
--- Example Usage:
---
--- @
--- import Terraform.DigitalOcean
--- import Terraform.DigitalOcean.Resource
--- @
---
--- @
--- foobar <- resource "foobar" $
---     droplet_resource
---         & name .~ "baz"
---         & size .~ "1gb"
---         & image .~ "centos-5-8-x32"
---         & region .~ "sgp1"
---         & ipv6 .~ True
---         & private_networking .~ True
---  
--- foobar <- resource "foobar" $
---     floating_ip_resource
---         & droplet_id .~ compute foobar @"id"
---         & region .~ compute foobar @"region"
--- @
 data Floating_Ip_Resource = Floating_Ip_Resource
     { droplet_id :: !(Attr Text)
       {- ^ (Optional) The ID of Droplet that the Floating IP will be assigned to. -}
@@ -143,7 +120,7 @@ type instance Computed Floating_Ip_Resource
 $(TH.makeResource
     "digitalocean_floating_ip"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Floating_Ip_Resource)
 
 -- | The @digitalocean_ssh_key@ DigitalOcean resource.
@@ -170,7 +147,7 @@ type instance Computed Ssh_Key_Resource
 $(TH.makeResource
     "digitalocean_ssh_key"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Ssh_Key_Resource)
 
 -- | The @digitalocean_tag@ DigitalOcean resource.
@@ -191,36 +168,12 @@ type instance Computed Tag_Resource
 $(TH.makeResource
     "digitalocean_tag"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Tag_Resource)
 
 -- | The @digitalocean_volume@ DigitalOcean resource.
 --
 -- Provides a DigitalOcean Block Storage volume which can be attached to a Droplet in order to provide expanded storage.
---
--- Example Usage:
---
--- @
--- import Terraform.DigitalOcean
--- import Terraform.DigitalOcean.Resource
--- @
---
--- @
--- foobar <- resource "foobar" $
---     volume_resource
---         & region .~ "nyc1"
---         & name .~ "baz"
---         & size .~ 100
---         & description .~ "an example volume"
---  
--- foobar <- resource "foobar" $
---     droplet_resource
---         & name .~ "baz"
---         & size .~ "1gb"
---         & image .~ "coreos-stable"
---         & region .~ "nyc1"
---         & volume_ids .~ [compute foobar @"id"]
--- @
 data Volume_Resource = Volume_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) A free-form text field up to a limit of 1024 bytes to describe a block storage volume. -}
@@ -242,5 +195,5 @@ type instance Computed Volume_Resource
 $(TH.makeResource
     "digitalocean_volume"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Volume_Resource)

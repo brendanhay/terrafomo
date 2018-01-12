@@ -122,9 +122,4 @@ attributes:
     help: ! '- The database port.'
     type: Text
 about: Use this data source to get information about an RDS instance
-examples:
-- name: null
-  code:
-  - database <- datasource "database" $
-  - ! '    db_instance_datasource'
-  - ! '        & db_instance_identifier .~ "my-test-database"'
+examples: []

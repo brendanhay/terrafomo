@@ -64,18 +64,6 @@ arguments:
 attributes: {}
 about: Provides an Elastic Beanstalk Environment Resource. Elastic Beanstalk allows
   you to deploy and manage applications in the AWS cloud without worrying about the
-  infrastructure that runs those applications.
-examples:
-- name: null
-  code:
-  - tftest <- resource "tftest" $
-  - ! '    elastic_beanstalk_application_resource'
-  - ! '        & name .~ "tf-test-name"'
-  - ! '        & description .~ "tf-test-desc"'
-  - ! ' '
-  - tfenvtest <- resource "tfenvtest" $
-  - ! '    elastic_beanstalk_environment_resource'
-  - ! '        & name .~ "tf-test-name"'
-  - ! '        & application .~ compute tftest @"name"'
-  - ! '        & solution_stack_name .~ "64bit Amazon Linux 2015.03 v2.0.3 running
-    Go 1.4"'
+  infrastructure that runs those applications. Environments are often things such
+  as @development@ , @integration@ , or @production@ .
+examples: []

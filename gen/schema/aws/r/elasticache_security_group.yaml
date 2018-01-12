@@ -17,15 +17,7 @@ arguments:
     type: Text
 attributes: {}
 about: Provides an ElastiCache Security Group to control access to one or more cache
-  clusters.
-examples:
-- name: null
-  code:
-  - bar <- resource "bar" $
-  - ! '    security_group_resource'
-  - ! '        & name .~ "security-group"'
-  - ! ' '
-  - bar <- resource "bar" $
-  - ! '    elasticache_security_group_resource'
-  - ! '        & name .~ "elasticache-security-group"'
-  - ! '        & security_group_names .~ [compute bar @"name"]'
+  clusters. ~> ElastiCache Security Groups are for use only when working with an ElastiCache
+  cluster of a VPC. If you are using a VPC, see the <elasticache_subnet_group.html>
+  .
+examples: []

@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.AWS.Provider (AWS, newResource)
+import Terraform.AWS.Provider (AWS, defaultProvider)
 import Terraform.AWS.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -26,58 +26,6 @@ import qualified Terraform.Syntax.TH as TH
 -- | The @aws_api_gateway_stage@ AWS resource.
 --
 -- Provides an API Gateway Stage.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- test <- resource "test" $
---     api_gateway_stage_resource
---         & stage_name .~ "prod"
---         & rest_api_id .~ compute test @"id"
---         & deployment_id .~ compute test @"id"
---  
--- test <- resource "test" $
---     api_gateway_rest_api_resource
---         & name .~ "MyDemoAPI"
---         & description .~ "This is my API for demonstration purposes"
---  
--- test <- resource "test" $
---     api_gateway_deployment_resource
---         & depends_on .~ ["aws_api_gateway_integration.test"]
---         & rest_api_id .~ compute test @"id"
---         & stage_name .~ "dev"
---  
--- test <- resource "test" $
---     api_gateway_resource_resource
---         & rest_api_id .~ compute test @"id"
---         & parent_id .~ compute test @"root_resource_id"
---         & path_part .~ "mytestresource"
---  
--- test <- resource "test" $
---     api_gateway_method_resource
---         & rest_api_id .~ compute test @"id"
---         & resource_id .~ compute test @"id"
---         & http_method .~ "GET"
---         & authorization .~ "NONE"
---  
--- s <- resource "s" $
---     api_gateway_method_settings_resource
---         & rest_api_id .~ compute test @"id"
---         & stage_name .~ compute test @"stage_name"
---         & method_path .~ compute test @"path_part"<>"/"<>compute test @"http_method"
---  
--- test <- resource "test" $
---     api_gateway_integration_resource
---         & rest_api_id .~ compute test @"id"
---         & resource_id .~ compute test @"id"
---         & http_method .~ compute test @"http_method"
---         & type .~ "MOCK"
--- @
 data Api_Gateway_Stage_Resource = Api_Gateway_Stage_Resource
     { cache_cluster_enabled :: !(Attr Text)
       {- ^ (Optional) Specifies whether a cache cluster is enabled for the stage -}
@@ -105,38 +53,12 @@ type instance Computed Api_Gateway_Stage_Resource
 $(TH.makeResource
     "aws_api_gateway_stage"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Api_Gateway_Stage_Resource)
 
 -- | The @aws_appautoscaling_policy@ AWS resource.
 --
 -- Provides an Application AutoScaling Policy resource.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- dynamodb_table_read_target <- resource "dynamodb_table_read_target" $
---     appautoscaling_target_resource
---         & max_capacity .~ 100
---         & min_capacity .~ 5
---         & resource_id .~ "table/tableName"
---         & role_arn .~ data.aws_iam_role.DynamoDBAutoscaleRole.arn
---         & scalable_dimension .~ "dynamodb:table:ReadCapacityUnits"
---         & service_namespace .~ "dynamodb"
---  
--- dynamodb_table_read_policy <- resource "dynamodb_table_read_policy" $
---     appautoscaling_policy_resource
---         & name .~ "DynamoDBReadCapacityUtilization:"<>compute dynamodb_table_read_target @"resource_id"
---         & policy_type .~ "TargetTrackingScaling"
---         & resource_id .~ compute dynamodb_table_read_target @"resource_id"
---         & scalable_dimension .~ compute dynamodb_table_read_target @"scalable_dimension"
---         & service_namespace .~ compute dynamodb_table_read_target @"service_namespace"
--- @
 data Appautoscaling_Policy_Resource = Appautoscaling_Policy_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the policy. -}
@@ -160,41 +82,12 @@ type instance Computed Appautoscaling_Policy_Resource
 $(TH.makeResource
     "aws_appautoscaling_policy"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Appautoscaling_Policy_Resource)
 
 -- | The @aws_appautoscaling_target@ AWS resource.
 --
 -- Provides an Application AutoScaling ScalableTarget resource.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- dynamodb_table_read_target <- resource "dynamodb_table_read_target" $
---     appautoscaling_target_resource
---         & max_capacity .~ 100
---         & min_capacity .~ 5
---         & resource_id .~ "table/tableName"
---         & role_arn .~ data.aws_iam_role.DynamoDBAutoscaleRole.arn
---         & scalable_dimension .~ "dynamodb:table:ReadCapacityUnits"
---         & service_namespace .~ "dynamodb"
--- @
---
--- @
--- ecs_target <- resource "ecs_target" $
---     appautoscaling_target_resource
---         & max_capacity .~ 4
---         & min_capacity .~ 1
---         & resource_id .~ "service/clusterName/serviceName"
---         & role_arn .~ var.ecs_iam_role
---         & scalable_dimension .~ "ecs:service:DesiredCount"
---         & service_namespace .~ "ecs"
--- @
 data Appautoscaling_Target_Resource = Appautoscaling_Target_Resource
     { max_capacity :: !(Attr Text)
       {- ^ (Required) The max capacity of the scalable target. -}
@@ -216,12 +109,12 @@ type instance Computed Appautoscaling_Target_Resource
 $(TH.makeResource
     "aws_appautoscaling_target"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Appautoscaling_Target_Resource)
 
 -- | The @aws_batch_compute_environment@ AWS resource.
 --
--- Creates a AWS Batch compute environment. Compute environments contain the Amazon ECS container instances that are used to run containerized batch jobs.
+-- Creates a AWS Batch compute environment. Compute environments contain the Amazon ECS container instances that are used to run containerized batch jobs. For information about AWS Batch, see <http://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html> . For information about compute environment, see <http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html> . ~> To prevent a race condition during environment deletion, make sure to set @depends_on@ to the related @aws_iam_role_policy_attachment@ ; otherwise, the policy may be destroyed too soon and the compute environment will then get stuck in the @DELETING@ state, see <http://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html> .
 data Batch_Compute_Environment_Resource = Batch_Compute_Environment_Resource
     { compute_environment_name :: !(Attr Text)
       {- ^ (Required) The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed. -}
@@ -231,7 +124,7 @@ data Batch_Compute_Environment_Resource = Batch_Compute_Environment_Resource
       {- ^ (Required) The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. -}
     , state :: !(Attr Text)
       {- ^ (Optional) The state of the compute environment. If the state is @ENABLED@ , then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are @ENABLED@ or @DISABLED@ . Defaults to @ENABLED@ . -}
-    , type_ :: !(Attr Text)
+    , type' :: !(Attr Text)
       {- ^ (Required) The type of the compute environment. Valid items are @MANAGED@ or @UNMANAGED@ . -}
     } deriving (Show, Eq, Generic)
 
@@ -249,29 +142,12 @@ type instance Computed Batch_Compute_Environment_Resource
 $(TH.makeResource
     "aws_batch_compute_environment"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Batch_Compute_Environment_Resource)
 
 -- | The @aws_batch_job_queue@ AWS resource.
 --
 -- Provides a Batch Job Queue resource.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- test_queue <- resource "test_queue" $
---     batch_job_queue_resource
---         & name .~ "tf-test-batch-job-queue"
---         & state .~ "ENABLED"
---         & priority .~ 1
---         & compute_environments .~ [compute test_environment_1 @"arn"
---                                   ,compute test_environment_2 @"arn"]
--- @
 data Batch_Job_Queue_Resource = Batch_Job_Queue_Resource
     { compute_environments :: !(Attr Text)
       {- ^ (Required) Specifies the set of compute environments mapped to a job queue and their order.  The position of the compute environments in the list will dictate the order. You can associate up to 3 compute environments with a job queue. -}
@@ -291,26 +167,12 @@ type instance Computed Batch_Job_Queue_Resource
 $(TH.makeResource
     "aws_batch_job_queue"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Batch_Job_Queue_Resource)
 
 -- | The @aws_codecommit_repository@ AWS resource.
 --
--- Provides a CodeCommit Repository Resource.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- test <- resource "test" $
---     codecommit_repository_resource
---         & repository_name .~ "MyTestRepository"
---         & description .~ "This is the Sample App Repository"
--- @
+-- Provides a CodeCommit Repository Resource. ~> : The CodeCommit is not yet rolled out in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#codecommit_region> .
 data Codecommit_Repository_Resource = Codecommit_Repository_Resource
     { default_branch :: !(Attr Text)
       {- ^ (Optional) The default branch of the repository. The branch specified here needs to exist. -}
@@ -334,54 +196,12 @@ type instance Computed Codecommit_Repository_Resource
 $(TH.makeResource
     "aws_codecommit_repository"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Codecommit_Repository_Resource)
 
 -- | The @aws_db_event_subscription@ AWS resource.
 --
 -- Provides a DB event subscription resource.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- default <- resource "default" $
---     db_instance_resource
---         & allocated_storage .~ 10
---         & engine .~ "mysql"
---         & engine_version .~ "5.6.17"
---         & instance_class .~ "db.t1.micro"
---         & name .~ "mydb"
---         & username .~ "foo"
---         & password .~ "bar"
---         & db_subnet_group_name .~ "my_database_subnet_group"
---         & parameter_group_name .~ "default.mysql5.6"
---  
--- default <- resource "default" $
---     sns_topic_resource
---         & name .~ "rds-events"
---  
--- default <- resource "default" $
---     db_event_subscription_resource
---         & name .~ "rds-event-sub"
---         & sns_topic .~ compute default @"arn"
---         & source_type .~ "db-instance"
---         & source_ids .~ [compute default @"id"]
---         & event_categories .~ ["availability"
---                               ,"deletion"
---                               ,"failover"
---                               ,"failure"
---                               ,"low storage"
---                               ,"maintenance"
---                               ,"notification"
---                               ,"read replica"
---                               ,"recovery"
---                               ,"restoration"]
--- @
 data Db_Event_Subscription_Resource = Db_Event_Subscription_Resource
     { enabled :: !(Attr Text)
       {- ^ (Optional) A boolean flag to enable/disable the subscription. Defaults to true. -}
@@ -405,34 +225,12 @@ type instance Computed Db_Event_Subscription_Resource
 $(TH.makeResource
     "aws_db_event_subscription"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Db_Event_Subscription_Resource)
 
 -- | The @aws_db_instance@ AWS resource.
 --
--- Provides an RDS instance resource.  A DB instance is an isolated database environment in the cloud.  A DB instance can contain multiple user-created databases.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- default <- resource "default" $
---     db_instance_resource
---         & allocated_storage .~ 10
---         & storage_type .~ "gp2"
---         & engine .~ "mysql"
---         & engine_version .~ "5.6.17"
---         & instance_class .~ "db.t1.micro"
---         & name .~ "mydb"
---         & username .~ "foo"
---         & password .~ "bar"
---         & db_subnet_group_name .~ "my_database_subnet_group"
---         & parameter_group_name .~ "default.mysql5.6"
--- @
+-- Provides an RDS instance resource.  A DB instance is an isolated database environment in the cloud.  A DB instance can contain multiple user-created databases. Changes to a DB instance can occur when you manually change a parameter, such as @allocated_storage@ , and are reflected in the next maintenance window. Because of this, Terraform may report a difference in its planning phase because a modification has not yet taken place. You can use the @apply_immediately@ flag to instruct the service to apply the change immediately (see documentation below). When upgrading the major version of an engine, @allow_major_version_upgrade@ must be set to @true@ . ~> using @apply_immediately@ can result in a brief downtime as the server reboots. See the AWS Docs on <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html> for more information. ~> All arguments including the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Db_Instance_Resource = Db_Instance_Resource
     { allocated_storage :: !(Attr Text)
       {- ^ (Required unless a @snapshot_identifier@ or @replicate_source_db@ is provided) The allocated storage in gigabytes. -}
@@ -564,43 +362,12 @@ type instance Computed Db_Instance_Resource
 $(TH.makeResource
     "aws_db_instance"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Db_Instance_Resource)
 
 -- | The @aws_directory_service_directory@ AWS resource.
 --
--- Provides a Simple or Managed Microsoft directory in AWS Directory Service.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- bar <- resource "bar" $
---     directory_service_directory_resource
---         & name .~ "corp.notexample.com"
---         & password .~ "SuperSecretPassw0rd"
---         & size .~ "Small"
---  
--- main <- resource "main" $
---     vpc_resource
---         & cidr_block .~ "10.0.0.0/16"
---  
--- foo <- resource "foo" $
---     subnet_resource
---         & vpc_id .~ compute main @"id"
---         & availability_zone .~ "us-west-2a"
---         & cidr_block .~ "10.0.1.0/24"
---  
--- bar <- resource "bar" $
---     subnet_resource
---         & vpc_id .~ compute main @"id"
---         & availability_zone .~ "us-west-2b"
---         & cidr_block .~ "10.0.2.0/24"
--- @
+-- Provides a Simple or Managed Microsoft directory in AWS Directory Service. ~> All arguments including the password and customer username will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Directory_Service_Directory_Resource = Directory_Service_Directory_Resource
     { alias :: !(Attr Text)
       {- ^ (Optional) The alias for the directory (must be unique amongst all aliases in AWS). Required for @enable_sso@ . -}
@@ -620,7 +387,7 @@ data Directory_Service_Directory_Resource = Directory_Service_Directory_Resource
       {- ^ (Required for @SimpleAD@ and @ADConnector@ ) The size of the directory ( @Small@ or @Large@ are accepted values). -}
     , tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , type_ :: !(Attr Text)
+    , type' :: !(Attr Text)
       {- ^ (Optional) - The directory type ( @SimpleAD@ or @MicrosoftAD@ are accepted values). Defaults to @SimpleAD@ . -}
     , vpc_settings :: !(Attr Text)
       {- ^ (Required for @SimpleAD@ and @MicrosoftAD@ ) VPC related information about the directory. Fields documented below. -}
@@ -638,12 +405,12 @@ type instance Computed Directory_Service_Directory_Resource
 $(TH.makeResource
     "aws_directory_service_directory"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Directory_Service_Directory_Resource)
 
 -- | The @aws_dms_certificate@ AWS resource.
 --
--- Provides a DMS (Data Migration Service) certificate resource. DMS certificates can be created, deleted, and imported.
+-- Provides a DMS (Data Migration Service) certificate resource. DMS certificates can be created, deleted, and imported. ~> All arguments including the PEM encoded certificate will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Dms_Certificate_Resource = Dms_Certificate_Resource
     { certificate_id :: !(Attr Text)
       {- ^ (Required) The certificate identifier. -}
@@ -661,7 +428,7 @@ type instance Computed Dms_Certificate_Resource
 $(TH.makeResource
     "aws_dms_certificate"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Dms_Certificate_Resource)
 
 -- | The @aws_dms_replication_task@ AWS resource.
@@ -696,12 +463,12 @@ type instance Computed Dms_Replication_Task_Resource
 $(TH.makeResource
     "aws_dms_replication_task"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Dms_Replication_Task_Resource)
 
 -- | The @aws_ecr_repository_policy@ AWS resource.
 --
--- Provides an ECR repository policy.
+-- Provides an ECR repository policy. Note that currently only one policy may be applied to a repository. ~> : The EC2 Container Registry is not yet rolled out in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#ecr_region> .
 data Ecr_Repository_Policy_Resource = Ecr_Repository_Policy_Resource
     { policy :: !(Attr Text)
       {- ^ (Required) The policy document. This is a JSON formatted string. -}
@@ -719,26 +486,12 @@ type instance Computed Ecr_Repository_Policy_Resource
 $(TH.makeResource
     "aws_ecr_repository_policy"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Ecr_Repository_Policy_Resource)
 
 -- | The @aws_elastic_beanstalk_application@ AWS resource.
 --
--- Provides an Elastic Beanstalk Application Resource. Elastic Beanstalk allows you to deploy and manage applications in the AWS cloud without worrying about the infrastructure that runs those applications.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- tftest <- resource "tftest" $
---     elastic_beanstalk_application_resource
---         & name .~ "tf-test-name"
---         & description .~ "tf-test-desc"
--- @
+-- Provides an Elastic Beanstalk Application Resource. Elastic Beanstalk allows you to deploy and manage applications in the AWS cloud without worrying about the infrastructure that runs those applications. This resource creates an application that has one configuration template named @default@ , and no application versions
 data Elastic_Beanstalk_Application_Resource = Elastic_Beanstalk_Application_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) Short description of the application -}
@@ -752,30 +505,16 @@ type instance Computed Elastic_Beanstalk_Application_Resource
 $(TH.makeResource
     "aws_elastic_beanstalk_application"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Elastic_Beanstalk_Application_Resource)
 
 -- | The @aws_elasticache_parameter_group@ AWS resource.
 --
 -- Provides an ElastiCache parameter group resource.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- default <- resource "default" $
---     elasticache_parameter_group_resource
---         & name .~ "cache-params"
---         & family .~ "redis2.8"
--- @
 data Elasticache_Parameter_Group_Resource = Elasticache_Parameter_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the ElastiCache parameter group. Defaults to "Managed by Terraform". -}
-    , family_ :: !(Attr Text)
+    , family' :: !(Attr Text)
       {- ^ (Required) The family of the ElastiCache parameter group. -}
     , name :: !(Attr Text)
       {- ^ (Required) The name of the ElastiCache parameter group. -}
@@ -791,40 +530,12 @@ type instance Computed Elasticache_Parameter_Group_Resource
 $(TH.makeResource
     "aws_elasticache_parameter_group"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Elasticache_Parameter_Group_Resource)
 
 -- | The @aws_iam_group_membership@ AWS resource.
 --
 -- Provides a top level resource to manage IAM Group membership for IAM Users. For more information on managing IAM Groups or IAM Users, see </docs/providers/aws/r/iam_group.html> or </docs/providers/aws/r/iam_user.html>
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- team <- resource "team" $
---     iam_group_membership_resource
---         & name .~ "tf-testing-group-membership"
---         & users .~ [compute user_one @"name"
---                    ,compute user_two @"name"]
---         & group .~ compute group @"name"
---  
--- group <- resource "group" $
---     iam_group_resource
---         & name .~ "test-group"
---  
--- user_one <- resource "user_one" $
---     iam_user_resource
---         & name .~ "test-user"
---  
--- user_two <- resource "user_two" $
---     iam_user_resource
---         & name .~ "test-user-two"
--- @
 data Iam_Group_Membership_Resource = Iam_Group_Membership_Resource
     { group :: !(Attr Text)
       {- ^ – (Required) The IAM Group name to attach the list of @users@ to -}
@@ -846,7 +557,7 @@ type instance Computed Iam_Group_Membership_Resource
 $(TH.makeResource
     "aws_iam_group_membership"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Iam_Group_Membership_Resource)
 
 -- | The @aws_iam_role_policy_attachment@ AWS resource.
@@ -865,30 +576,12 @@ type instance Computed Iam_Role_Policy_Attachment_Resource
 $(TH.makeResource
     "aws_iam_role_policy_attachment"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Iam_Role_Policy_Attachment_Resource)
 
 -- | The @aws_kinesis_firehose_delivery_stream@ AWS resource.
 --
--- Provides a Kinesis Firehose Delivery Stream resource. Amazon Kinesis Firehose is a fully managed, elastic service to easily deliver real-time data streams to destinations such as Amazon S3 and Amazon Redshift.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- test_cluster <- resource "test_cluster" $
---     elasticsearch_domain_resource
---         & domain_name .~ "firehose-es-test"
---  
--- test_stream <- resource "test_stream" $
---     kinesis_firehose_delivery_stream_resource
---         & name .~ "terraform-kinesis-firehose-test-stream"
---         & destination .~ "elasticsearch"
--- @
+-- Provides a Kinesis Firehose Delivery Stream resource. Amazon Kinesis Firehose is a fully managed, elastic service to easily deliver real-time data streams to destinations such as Amazon S3 and Amazon Redshift. For more details, see the <https://aws.amazon.com/documentation/firehose/> .
 data Kinesis_Firehose_Delivery_Stream_Resource = Kinesis_Firehose_Delivery_Stream_Resource
     { destination :: !(Attr Text)
       {- ^ – (Required) This is the destination to where the data is delivered. The only options are @s3@ (Deprecated, use @extended_s3@ instead), @extended_s3@ , @redshift@ , and @elasticsearch@ . -}
@@ -912,26 +605,12 @@ type instance Computed Kinesis_Firehose_Delivery_Stream_Resource
 $(TH.makeResource
     "aws_kinesis_firehose_delivery_stream"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Kinesis_Firehose_Delivery_Stream_Resource)
 
 -- | The @aws_main_route_table_association@ AWS resource.
 --
 -- Provides a resource for managing the main routing table of a VPC.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- a <- resource "a" $
---     main_route_table_association_resource
---         & vpc_id .~ compute foo @"id"
---         & route_table_id .~ compute bar @"id"
--- @
 data Main_Route_Table_Association_Resource = Main_Route_Table_Association_Resource
     { route_table_id :: !(Attr Text)
       {- ^ (Required) The ID of the Route Table to set as the new main route table for the target VPC -}
@@ -949,27 +628,12 @@ type instance Computed Main_Route_Table_Association_Resource
 $(TH.makeResource
     "aws_main_route_table_association"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Main_Route_Table_Association_Resource)
 
 -- | The @aws_network_interface_attachment@ AWS resource.
 --
 -- Attach an Elastic network interface (ENI) resource with EC2 instance.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- test <- resource "test" $
---     network_interface_attachment_resource
---         & instance_id .~ compute test @"id"
---         & network_interface_id .~ compute test @"id"
---         & device_index .~ 0
--- @
 data Network_Interface_Attachment_Resource = Network_Interface_Attachment_Resource
     { device_index :: !(Attr Text)
       {- ^ (Required) Network interface index (int). -}
@@ -993,33 +657,12 @@ type instance Computed Network_Interface_Attachment_Resource
 $(TH.makeResource
     "aws_network_interface_attachment"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Network_Interface_Attachment_Resource)
 
 -- | The @aws_rds_cluster@ AWS resource.
 --
--- Provides an RDS Cluster Resource. A Cluster Resource defines attributes that are applied to the entire cluster of </docs/providers/aws/r/rds_cluster_instance.html> . Use the RDS Cluster resource and RDS Cluster Instances to create and use Amazon Aurora, a MySQL-compatible database engine.
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- default <- resource "default" $
---     rds_cluster_resource
---         & cluster_identifier .~ "aurora-cluster-demo"
---         & availability_zones .~ ["us-west-2a"
---                                 ,"us-west-2b"
---                                 ,"us-west-2c"]
---         & database_name .~ "mydb"
---         & master_username .~ "foo"
---         & master_password .~ "bar"
---         & backup_retention_period .~ 5
---         & preferred_backup_window .~ "07:00-09:00"
--- @
+-- Provides an RDS Cluster Resource. A Cluster Resource defines attributes that are applied to the entire cluster of </docs/providers/aws/r/rds_cluster_instance.html> . Use the RDS Cluster resource and RDS Cluster Instances to create and use Amazon Aurora, a MySQL-compatible database engine. For more information on Amazon Aurora, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html> in the Amazon RDS User Guide. Changes to a RDS Cluster can occur when you manually change a parameter, such as @port@ , and are reflected in the next maintenance window. Because of this, Terraform may report a difference in its planning phase because a modification has not yet taken place. You can use the @apply_immediately@ flag to instruct the service to apply the change immediately (see documentation below). ~> using @apply_immediately@ can result in a brief downtime as the server reboots. See the AWS Docs on <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html> for more information. ~> All arguments including the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Rds_Cluster_Resource = Rds_Cluster_Resource
     { apply_immediately :: !(Attr Text)
       {- ^ (Optional) Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is @false@ . See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html> -}
@@ -1115,25 +758,12 @@ type instance Computed Rds_Cluster_Resource
 $(TH.makeResource
     "aws_rds_cluster"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Rds_Cluster_Resource)
 
 -- | The @aws_redshift_security_group@ AWS resource.
 --
 -- Creates a new Amazon Redshift security group. You use security groups to control access to non-VPC clusters
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- default <- resource "default" $
---     redshift_security_group_resource
---         & name .~ "redshift-sg"
--- @
 data Redshift_Security_Group_Resource = Redshift_Security_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) The description of the Redshift security group. Defaults to "Managed by Terraform". -}
@@ -1151,27 +781,12 @@ type instance Computed Redshift_Security_Group_Resource
 $(TH.makeResource
     "aws_redshift_security_group"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Redshift_Security_Group_Resource)
 
 -- | The @aws_ses_receipt_filter@ AWS resource.
 --
 -- Provides an SES receipt filter resource
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- filter <- resource "filter" $
---     ses_receipt_filter_resource
---         & name .~ "block-spammer"
---         & cidr .~ "10.10.10.10"
---         & policy .~ "Block"
--- @
 data Ses_Receipt_Filter_Resource = Ses_Receipt_Filter_Resource
     { cidr :: !(Attr Text)
       {- ^ (Required) The IP address or address range to filter, in CIDR notation -}
@@ -1187,7 +802,7 @@ type instance Computed Ses_Receipt_Filter_Resource
 $(TH.makeResource
     "aws_ses_receipt_filter"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Ses_Receipt_Filter_Resource)
 
 -- | The @aws_ses_receipt_rule@ AWS resource.
@@ -1230,25 +845,12 @@ type instance Computed Ses_Receipt_Rule_Resource
 $(TH.makeResource
     "aws_ses_receipt_rule"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Ses_Receipt_Rule_Resource)
 
 -- | The @aws_simpledb_domain@ AWS resource.
 --
 -- Provides a SimpleDB domain resource
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- users <- resource "users" $
---     simpledb_domain_resource
---         & name .~ "users"
--- @
 data Simpledb_Domain_Resource = Simpledb_Domain_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the SimpleDB domain -}
@@ -1262,7 +864,7 @@ type instance Computed Simpledb_Domain_Resource
 $(TH.makeResource
     "aws_simpledb_domain"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Simpledb_Domain_Resource)
 
 -- | The @sfn_state_machine@ AWS resource.
@@ -1289,33 +891,12 @@ type instance Computed State_Machine_Resource
 $(TH.makeResource
     "sfn_state_machine"
     ''AWS
-    'newResource
+    'defaultProvider
     ''State_Machine_Resource)
 
 -- | The @aws_waf_rate_based_rule@ AWS resource.
 --
 -- Provides a WAF Rate Based Rule Resource
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- ipset <- resource "ipset" $
---     waf_ipset_resource
---         & name .~ "tfIPSet"
---  
--- wafrule <- resource "wafrule" $
---     waf_rate_based_rule_resource
---         & depends_on .~ ["aws_waf_ipset.ipset"]
---         & name .~ "tfWAFRule"
---         & metric_name .~ "tfWAFRule"
---         & rate_key .~ "IP"
---         & rate_limit .~ 2000
--- @
 data Waf_Rate_Based_Rule_Resource = Waf_Rate_Based_Rule_Resource
     { metric_name :: !(Attr Text)
       {- ^ (Required) The name or description for the Amazon CloudWatch metric of this rule. -}
@@ -1335,25 +916,12 @@ type instance Computed Waf_Rate_Based_Rule_Resource
 $(TH.makeResource
     "aws_waf_rate_based_rule"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Waf_Rate_Based_Rule_Resource)
 
 -- | The @aws_waf_xss_match_set@ AWS resource.
 --
 -- Provides a WAF XSS Match Set Resource
---
--- Example Usage:
---
--- @
--- import Terraform.AWS
--- import Terraform.AWS.Resource
--- @
---
--- @
--- xss_match_set <- resource "xss_match_set" $
---     waf_xss_match_set_resource
---         & name .~ "xss_match_set"
--- @
 data Waf_Xss_Match_Set_Resource = Waf_Xss_Match_Set_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name or description of the SizeConstraintSet. -}
@@ -1367,5 +935,5 @@ type instance Computed Waf_Xss_Match_Set_Resource
 $(TH.makeResource
     "aws_waf_xss_match_set"
     ''AWS
-    'newResource
+    'defaultProvider
     ''Waf_Xss_Match_Set_Resource)

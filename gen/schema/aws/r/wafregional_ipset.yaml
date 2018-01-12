@@ -11,9 +11,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a WAF Regional IPSet Resource for use with Application Load Balancer.
-examples:
-- name: null
-  code:
-  - ipset <- resource "ipset" $
-  - ! '    wafregional_ipset_resource'
-  - ! '        & name .~ "tfIPSet"'
+examples: []

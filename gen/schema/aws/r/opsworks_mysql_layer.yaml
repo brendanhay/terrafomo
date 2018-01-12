@@ -78,10 +78,7 @@ attributes:
   id:
     help: ! '- The id of the layer.'
     type: Text
-about: Provides an OpsWorks MySQL layer resource.
-examples:
-- name: null
-  code:
-  - db <- resource "db" $
-  - ! '    opsworks_mysql_layer_resource'
-  - ! '        & stack_id .~ compute main @"id"'
+about: Provides an OpsWorks MySQL layer resource. ~> All arguments including the root
+  password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .
+examples: []

@@ -17,31 +17,4 @@ attributes:
     help: ! '- The CIDR block associated with the local subnet of the customer network.'
     type: Text
 about: Provides a static route between a VPN connection and a customer gateway.
-examples:
-- name: null
-  code:
-  - vpc <- resource "vpc" $
-  - ! '    vpc_resource'
-  - ! '        & cidr_block .~ "10.0.0.0/16"'
-  - ! ' '
-  - vpn_gateway <- resource "vpn_gateway" $
-  - ! '    vpn_gateway_resource'
-  - ! '        & vpc_id .~ compute vpc @"id"'
-  - ! ' '
-  - customer_gateway <- resource "customer_gateway" $
-  - ! '    customer_gateway_resource'
-  - ! '        & bgp_asn .~ 65000'
-  - ! '        & ip_address .~ "172.0.0.1"'
-  - ! '        & type .~ "ipsec.1"'
-  - ! ' '
-  - main <- resource "main" $
-  - ! '    vpn_connection_resource'
-  - ! '        & vpn_gateway_id .~ compute vpn_gateway @"id"'
-  - ! '        & customer_gateway_id .~ compute customer_gateway @"id"'
-  - ! '        & type .~ "ipsec.1"'
-  - ! '        & static_routes_only .~ True'
-  - ! ' '
-  - office <- resource "office" $
-  - ! '    vpn_connection_route_resource'
-  - ! '        & destination_cidr_block .~ "192.168.10.0/24"'
-  - ! '        & vpn_connection_id .~ compute main @"id"'
+examples: []

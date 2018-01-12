@@ -1,5 +1,40 @@
 _name: triton_image
-arguments: {}
+arguments:
+  state:
+    required: true
+    help: ! '- (string) The state of the image. By default, only @active@ images are
+      shown. Must be one of: @active@ , @unactivated@ , @disabled@ , @creating@ ,
+      @failed@ or @all@ , though the default is sufficient in almost every case.'
+    type: Text
+  most_recent:
+    required: true
+    help: ! '- (bool) If more than one result is returned, use the most recent Image.'
+    type: Text
+  owner:
+    required: true
+    help: ! '- (string) The UUID of the account which owns the image'
+    type: Text
+  os:
+    required: true
+    help: ! '- (string) The underlying operating system for the image'
+    type: Text
+  name:
+    required: true
+    help: ! '- (string) The name of the image'
+    type: Text
+  type':
+    required: true
+    help: ! '- (string) The image type. Must be one of: @zone-dataset@ , @lx-dataset@
+      , @zvol@ , @docker@ or @other@ .'
+    type: Text
+  version:
+    required: true
+    help: ! '- (string) The version for the image'
+    type: Text
+  public:
+    required: true
+    help: ! '- (boolean) Whether to return public as well as private images'
+    type: Text
 attributes: {}
 about: The @triton_image@ data source queries the Triton Image API for an image ID
   based on a variety of different parameters.

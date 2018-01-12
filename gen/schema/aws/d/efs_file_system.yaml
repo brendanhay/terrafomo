@@ -26,10 +26,4 @@ attributes:
     help: ! '- The list of tags assigned to the file system.'
     type: Text
 about: Provides information about an Elastic File System (EFS).
-examples:
-- name: null
-  code:
-  - ! ' '
-  - by_id <- datasource "by_id" $
-  - ! '    efs_file_system_datasource'
-  - ! '        & file_system_id .~ var.file_system_id'
+examples: []

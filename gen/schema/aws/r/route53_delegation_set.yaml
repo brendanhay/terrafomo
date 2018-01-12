@@ -15,19 +15,4 @@ attributes:
     type: Text
 about: Provides a <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html>
   resource.
-examples:
-- name: null
-  code:
-  - main <- resource "main" $
-  - ! '    route53_delegation_set_resource'
-  - ! '        & reference_name .~ "DynDNS"'
-  - ! ' '
-  - primary <- resource "primary" $
-  - ! '    route53_zone_resource'
-  - ! '        & name .~ "hashicorp.com"'
-  - ! '        & delegation_set_id .~ compute main @"id"'
-  - ! ' '
-  - secondary <- resource "secondary" $
-  - ! '    route53_zone_resource'
-  - ! '        & name .~ "terraform.io"'
-  - ! '        & delegation_set_id .~ compute main @"id"'
+examples: []

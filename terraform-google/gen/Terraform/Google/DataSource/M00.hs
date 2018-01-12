@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.Google.Provider (Google, newDataSource)
+import Terraform.Google.Provider (Google, defaultProvider)
 import Terraform.Google.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -26,21 +26,6 @@ import qualified Terraform.Syntax.TH as TH
 -- | The @google_client_config@ Google datasource.
 --
 -- Use this data source to access the configuration of the Google Cloud provider.
---
--- Example Usage:
---
--- @
--- import Terraform.Google
--- import Terraform.Google.DataSource
--- @
---
--- @
--- current <- datasource "current" $
---     client_config_datasource
---  
--- output "project" $
---     "${data.google_client_config.current.project}"
--- @
 data Client_Config_DataSource = Client_Config_DataSource
     { project :: !(Attr Text)
       {- ^ - The ID of the project to apply any resources to. -}
@@ -54,7 +39,7 @@ type instance Computed Client_Config_DataSource
 $(TH.makeDataSource
     "google_client_config"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Client_Config_DataSource)
 
 -- | The @google_compute_zones@ Google datasource.
@@ -75,7 +60,7 @@ type instance Computed Compute_Zones_DataSource
 $(TH.makeDataSource
     "google_compute_zones"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Compute_Zones_DataSource)
 
 -- | The @google_dns_managed_zone@ Google datasource.
@@ -100,7 +85,7 @@ type instance Computed Dns_Managed_Zone_DataSource
 $(TH.makeDataSource
     "google_dns_managed_zone"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Dns_Managed_Zone_DataSource)
 
 -- | The @google_iam_policy@ Google datasource.
@@ -119,30 +104,12 @@ type instance Computed Iam_Policy_DataSource
 $(TH.makeDataSource
     "google_iam_policy"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Iam_Policy_DataSource)
 
 -- | The @google_storage_object_signed_url@ Google datasource.
 --
--- The Google Cloud storage signed URL data source generates a signed URL for a given storage object. Signed URLs provide a way to give time-limited read or write access to anyone in possession of the URL, regardless of whether they have a Google account.
---
--- Example Usage:
---
--- @
--- import Terraform.Google
--- import Terraform.Google.DataSource
--- @
---
--- @
--- get_url <- datasource "get_url" $
---     storage_object_signed_url_datasource
---         & bucket .~ "fried_chicken"
---         & path .~ "path/to/file"
---         & content_md5 .~ "pRviqwS4c4OTJRTe03FD1w=="
---         & content_type .~ "text/plain"
---         & duration .~ "2d"
---         & credentials .~ file("path/to/credentials.json")
--- @
+-- The Google Cloud storage signed URL data source generates a signed URL for a given storage object. Signed URLs provide a way to give time-limited read or write access to anyone in possession of the URL, regardless of whether they have a Google account. For more info about signed URL's is available <https://cloud.google.com/storage/docs/access-control/signed-urls> .
 data Storage_Object_Signed_Url_DataSource = Storage_Object_Signed_Url_DataSource
     { bucket :: !(Attr Text)
       {- ^ (Required) The name of the bucket to read the object from -}
@@ -164,5 +131,5 @@ type instance Computed Storage_Object_Signed_Url_DataSource
 $(TH.makeDataSource
     "google_storage_object_signed_url"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Storage_Object_Signed_Url_DataSource)

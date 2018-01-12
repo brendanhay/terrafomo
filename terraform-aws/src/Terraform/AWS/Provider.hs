@@ -10,8 +10,6 @@ import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.Syntax.Name      (Alias, Key, Name, Type)
-import Terraform.Syntax.Resource  (Resource (..))
 import Terraform.Syntax.Serialize ((.=))
 
 import qualified Data.Text                  as Text
@@ -42,11 +40,8 @@ instance HCL.ToValue AWS where
 
 defaultProvider :: AWS
 defaultProvider =
-    AWS { version = "~> 1.0"
+    AWS { version    = "~> 1.0"
         , access_key = "ACCESS_KEY"
         , secret_key = "SECRET_KEY"
         , region     = "eu-central-1"
         }
-
-newResource :: Type -> a -> Resource AWS a
-newResource typ = Resource defaultProvider typ mempty

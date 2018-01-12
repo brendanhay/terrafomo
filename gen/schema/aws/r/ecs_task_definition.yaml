@@ -30,16 +30,10 @@ arguments:
       section from the official <https://docs.aws.amazon.com/AmazonECS/latest/developerguide>
       .
     type: Text
-  family_:
+  family':
     required: true
     help: (Required) A unique name for your task definition.
     type: Text
 attributes: {}
 about: Provides an ECS task definition to be used in @aws_ecs_service@ .
-examples:
-- name: null
-  code:
-  - service <- resource "service" $
-  - ! '    ecs_task_definition_resource'
-  - ! '        & family .~ "service"'
-  - ! '        & container_definitions .~ file("task-definitions/service.json")'
+examples: []

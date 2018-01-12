@@ -10,10 +10,7 @@ arguments:
     type: Text
 attributes: {}
 about: Requests automatic route propagation between a VPN gateway and a route table.
-examples:
-- name: null
-  code:
-  - example <- resource "example" $
-  - ! '    vpn_gateway_route_propagation_resource'
-  - ! '        & vpn_gateway_id .~ compute example @"id"'
-  - ! '        & route_table_id .~ compute example @"id"'
+  ~> This resource should not be used with a route table that has the @propagating_vgws@
+  argument set. If that argument is set, any route propagation not explicitly listed
+  in its value will be removed.
+examples: []

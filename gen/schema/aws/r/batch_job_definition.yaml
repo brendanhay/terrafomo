@@ -1,9 +1,5 @@
 _name: aws_batch_job_definition
 arguments:
-  type_:
-    required: true
-    help: (Required) The type of job definition.  Must be @container@
-    type: Text
   container_properties:
     required: false
     help: (Optional) A valid <http://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html>
@@ -19,6 +15,10 @@ arguments:
   name:
     required: true
     help: (Required) Specifies the name of the job definition.
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of job definition.  Must be @container@
     type: Text
   parameters:
     required: false

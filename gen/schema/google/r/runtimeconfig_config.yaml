@@ -1,5 +1,18 @@
 _name: google_runtimeconfig_config
-arguments: {}
+arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the runtime config.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description to associate with the runtime config.
+    type: Text
 attributes: {}
 about: Manages a RuntimeConfig resource in Google Cloud. For more information, see
   the <https://cloud.google.com/deployment-manager/runtime-configurator/> , or the

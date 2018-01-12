@@ -98,13 +98,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides an OpsWorks instance resource.
-examples:
-- name: null
-  code:
-  - my-instance <- resource "my-instance" $
-  - ! '    opsworks_instance_resource'
-  - ! '        & stack_id .~ compute my-stack @"id"'
-  - ! '        & layer_ids .~ [compute my-layer @"id"]'
-  - ! '        & instance_type .~ "t2.micro"'
-  - ! '        & os .~ "Amazon Linux 2015.09"'
-  - ! '        & state .~ "stopped"'
+examples: []

@@ -35,5 +35,8 @@ attributes:
       ''s @source_arn@ when allowing API Gateway to invoke a Lambda function, e.g.
       @arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod@'
     type: Text
-about: Provides an API Gateway Deployment.
+about: Provides an API Gateway Deployment. -> Depends on having @aws_api_gateway_integration@
+  inside your rest api (which in turn depends on @aws_api_gateway_method@ ). To avoid
+  race conditions you might need to add an explicit @depends_on = ["aws_api_gateway_integration.name"]@
+  .
 examples: []

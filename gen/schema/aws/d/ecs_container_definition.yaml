@@ -37,10 +37,4 @@ attributes:
     type: Text
 about: The ECS container definition data source allows access to details of a specific
   container within an AWS ECS service.
-examples:
-- name: null
-  code:
-  - ecs-mongo <- datasource "ecs-mongo" $
-  - ! '    ecs_container_definition_datasource'
-  - ! '        & task_definition .~ compute mongo @"id"'
-  - ! '        & container_name .~ "mongodb"'
+examples: []

@@ -62,17 +62,6 @@ attributes:
   id:
     help: ! '- The ARN of the Target Group (matches @arn@ )'
     type: Text
-about: Provides a Target Group resource for use with Load Balancer resources.
-examples:
-- name: null
-  code:
-  - test <- resource "test" $
-  - ! '    lb_target_group_resource'
-  - ! '        & name .~ "tf-example-lb-tg"'
-  - ! '        & port .~ 80'
-  - ! '        & protocol .~ "HTTP"'
-  - ! '        & vpc_id .~ compute main @"id"'
-  - ! ' '
-  - main <- resource "main" $
-  - ! '    vpc_resource'
-  - ! '        & cidr_block .~ "10.0.0.0/16"'
+about: Provides a Target Group resource for use with Load Balancer resources. ~>  @aws_alb_target_group@
+  is know as @aws_lb_target_group@ . The functionality is identical.
+examples: []

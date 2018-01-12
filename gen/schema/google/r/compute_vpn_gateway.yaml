@@ -1,5 +1,10 @@
 _name: google_compute_vpn_gateway
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   network:
     required: true
     help: (Required) The name or resource link to the network this VPN gateway is
@@ -10,72 +15,20 @@ arguments:
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+  region:
+    required: false
+    help: (Optional) The region this gateway should sit in. If not specified, the
+      project region will be used. Changing this forces a new resource to be created.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description of the resource. Changing this forces a new resource
+      to be created.
+    type: Text
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
 about: Manages a VPN Gateway in the GCE network. For more info, read the <https://cloud.google.com/compute/docs/vpn>
   .
-examples:
-- name: null
-  code:
-  - network1 <- resource "network1" $
-  - ! '    compute_network_resource'
-  - ! '        & name .~ "network1"'
-  - ! '        & ipv4_range .~ "10.120.0.0/16"'
-  - ! ' '
-  - target_gateway <- resource "target_gateway" $
-  - ! '    compute_vpn_gateway_resource'
-  - ! '        & name .~ "vpn1"'
-  - ! '        & network .~ compute network1 @"self_link"'
-  - ! '        & region .~ var.region'
-  - ! ' '
-  - vpn_static_ip <- resource "vpn_static_ip" $
-  - ! '    compute_address_resource'
-  - ! '        & name .~ "vpn-static-ip"'
-  - ! '        & region .~ var.region'
-  - ! ' '
-  - fr_esp <- resource "fr_esp" $
-  - ! '    compute_forwarding_rule_resource'
-  - ! '        & name .~ "fr-esp"'
-  - ! '        & region .~ var.region'
-  - ! '        & ip_protocol .~ "ESP"'
-  - ! '        & ip_address .~ compute vpn_static_ip @"address"'
-  - ! '        & target .~ compute target_gateway @"self_link"'
-  - ! ' '
-  - fr_udp500 <- resource "fr_udp500" $
-  - ! '    compute_forwarding_rule_resource'
-  - ! '        & name .~ "fr-udp500"'
-  - ! '        & region .~ var.region'
-  - ! '        & ip_protocol .~ "UDP"'
-  - ! '        & port_range .~ "500"'
-  - ! '        & ip_address .~ compute vpn_static_ip @"address"'
-  - ! '        & target .~ compute target_gateway @"self_link"'
-  - ! ' '
-  - fr_udp4500 <- resource "fr_udp4500" $
-  - ! '    compute_forwarding_rule_resource'
-  - ! '        & name .~ "fr-udp4500"'
-  - ! '        & region .~ var.region'
-  - ! '        & ip_protocol .~ "UDP"'
-  - ! '        & port_range .~ "4500"'
-  - ! '        & ip_address .~ compute vpn_static_ip @"address"'
-  - ! '        & target .~ compute target_gateway @"self_link"'
-  - ! ' '
-  - tunnel1 <- resource "tunnel1" $
-  - ! '    compute_vpn_tunnel_resource'
-  - ! '        & name .~ "tunnel1"'
-  - ! '        & region .~ var.region'
-  - ! '        & peer_ip .~ "15.0.0.120"'
-  - ! '        & shared_secret .~ "a secret message"'
-  - ! '        & target_vpn_gateway .~ compute target_gateway @"self_link"'
-  - ! '        & depends_on .~ ["google_compute_forwarding_rule.fr_esp"'
-  - ! '                        ,"google_compute_forwarding_rule.fr_udp500"'
-  - ! '                        ,"google_compute_forwarding_rule.fr_udp4500"]'
-  - ! ' '
-  - route1 <- resource "route1" $
-  - ! '    compute_route_resource'
-  - ! '        & name .~ "route1"'
-  - ! '        & network .~ compute network1 @"name"'
-  - ! '        & dest_range .~ "15.0.0.0/24"'
-  - ! '        & priority .~ 1000'
-  - ! '        & next_hop_vpn_tunnel .~ compute tunnel1 @"self_link"'
+examples: []

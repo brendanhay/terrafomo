@@ -75,11 +75,4 @@ attributes:
     help: ! '- The id of the layer.'
     type: Text
 about: Provides an OpsWorks custom layer resource.
-examples:
-- name: null
-  code:
-  - custlayer <- resource "custlayer" $
-  - ! '    opsworks_custom_layer_resource'
-  - ! '        & name .~ "My Awesome Custom Layer"'
-  - ! '        & short_name .~ "awesome"'
-  - ! '        & stack_id .~ compute main @"id"'
+examples: []

@@ -15,5 +15,8 @@ attributes:
   repository:
     help: ! '- The name of the repository.'
     type: Text
-about: Provides an ECR repository policy.
+about: ! 'Provides an ECR repository policy. Note that currently only one policy may
+  be applied to a repository. ~> : The EC2 Container Registry is not yet rolled out
+  in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#ecr_region>
+  .'
 examples: []

@@ -10,15 +10,8 @@ arguments:
       feed.
     type: Text
 attributes: {}
-about: -> There is only a single subscription allowed per account.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    s3_bucket_resource'
-  - ! '        & bucket .~ "tf-spot-datafeed"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    spot_datafeed_subscription_resource'
-  - ! '        & bucket .~ compute default @"bucket"'
-  - ! '        & prefix .~ "my_subdirectory"'
+about: -> There is only a single subscription allowed per account. To help you understand
+  the charges for your Spot instances, Amazon EC2 provides a data feed that describes
+  your Spot instance usage and pricing. This data feed is sent to an Amazon S3 bucket
+  that you specify when you subscribe to the data feed.
+examples: []

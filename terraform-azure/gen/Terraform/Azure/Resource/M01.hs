@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.Azure.Provider (Azure, newResource)
+import Terraform.Azure.Provider (Azure, defaultProvider)
 import Terraform.Azure.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -26,22 +26,6 @@ import qualified Terraform.Syntax.TH as TH
 -- | The @azure_affinity_group@ Azure resource.
 --
 -- Creates a new affinity group on Azure.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- terraform-main-group <- resource "terraform-main-group" $
---     affinity_group_resource
---         & name .~ "terraform-group"
---         & location .~ "North Europe"
---         & label .~ "tf-group-01"
---         & description .~ "Affinity group created by Terraform."
--- @
 data Affinity_Group_Resource = Affinity_Group_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) A description for the affinity group. -}
@@ -61,28 +45,12 @@ type instance Computed Affinity_Group_Resource
 $(TH.makeResource
     "azure_affinity_group"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Affinity_Group_Resource)
 
 -- | The @azure_data_disk@ Azure resource.
 --
 -- Adds a data disk to a virtual machine. If the name of an existing disk is given, it will attach that disk. Otherwise it will create and attach a new empty disk.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- data <- resource "data" $
---     data_disk_resource
---         & lun .~ 0
---         & size .~ 10
---         & storage_service_name .~ "yourstorage"
---         & virtual_machine .~ "server1"
--- @
 data Data_Disk_Resource = Data_Disk_Resource
     { caching :: !(Attr Text)
       {- ^ (Optional) The caching behavior of data disk. Valid options are: @None@ , @ReadOnly@ and @ReadWrite@ (defaults @None@ ) -}
@@ -118,26 +86,12 @@ type instance Computed Data_Disk_Resource
 $(TH.makeResource
     "azure_data_disk"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Data_Disk_Resource)
 
 -- | The @azure_dns_server@ Azure resource.
 --
 -- Creates a new DNS server definition to be used internally in Azure.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- google-dns <- resource "google-dns" $
---     dns_server_resource
---         & name .~ "google"
---         & dns_address .~ "8.8.8.8"
--- @
 data Dns_Server_Resource = Dns_Server_Resource
     { dns_address :: !(Attr Text)
       {- ^ (Required) The IP address of the DNS server. -}
@@ -153,29 +107,12 @@ type instance Computed Dns_Server_Resource
 $(TH.makeResource
     "azure_dns_server"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Dns_Server_Resource)
 
 -- | The @azure_hosted_service@ Azure resource.
 --
 -- Creates a new hosted service on Azure with its own .cloudapp.net domain.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- terraform-service <- resource "terraform-service" $
---     hosted_service_resource
---         & name .~ "terraform-service"
---         & location .~ "North Europe"
---         & ephemeral_contents .~ False
---         & description .~ "Hosted service created by Terraform."
---         & label .~ "tf-hs-01"
--- @
 data Hosted_Service_Resource = Hosted_Service_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) A description for the hosted service. -}
@@ -199,7 +136,7 @@ type instance Computed Hosted_Service_Resource
 $(TH.makeResource
     "azure_hosted_service"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Hosted_Service_Resource)
 
 -- | The @azure_instance@ Azure resource.
@@ -272,7 +209,7 @@ type instance Computed Instance_Resource
 $(TH.makeResource
     "azure_instance"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Instance_Resource)
 
 -- | The @azure_sql_database_server@ Azure resource.
@@ -297,29 +234,12 @@ type instance Computed Sql_Database_Server_Resource
 $(TH.makeResource
     "azure_sql_database_server"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Sql_Database_Server_Resource)
 
 -- | The @azure_storage_blob@ Azure resource.
 --
 -- Creates a new storage blob within a given storage container on Azure.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- foo <- resource "foo" $
---     storage_blob_resource
---         & name .~ "tftesting-blob"
---         & storage_service_name .~ "tfstorserv"
---         & storage_container_name .~ "terraform-storage-container"
---         & type .~ "PageBlob"
---         & size .~ 1024
--- @
 data Storage_Blob_Resource = Storage_Blob_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the storage blob. Must be unique within the storage service the blob is located. -}
@@ -329,7 +249,7 @@ data Storage_Blob_Resource = Storage_Blob_Resource
       {- ^ (Required) The name of the storage container in which this blob should be created. Must be located on the storage service given with @storage_service_name@ . -}
     , storage_service_name :: !(Attr Text)
       {- ^ (Required) The name of the storage service within which the storage container in which the blob will be created resides. -}
-    , type_ :: !(Attr Text)
+    , type' :: !(Attr Text)
       {- ^ (Required) The type of the storage blob to be created. One of either @BlockBlob@ or @PageBlob@ . -}
     } deriving (Show, Eq, Generic)
 
@@ -341,27 +261,12 @@ type instance Computed Storage_Blob_Resource
 $(TH.makeResource
     "azure_storage_blob"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Storage_Blob_Resource)
 
 -- | The @azure_virtual_network@ Azure resource.
 --
 -- Creates a new virtual network including any configured subnets. Each subnet can optionally be configured with a security group to be associated with the subnet.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- default <- resource "default" $
---     virtual_network_resource
---         & name .~ "test-network"
---         & address_space .~ ["10.1.2.0/24"]
---         & location .~ "West US"
--- @
 data Virtual_Network_Resource = Virtual_Network_Resource
     { address_space :: !(Attr Text)
       {- ^ (Required) The address space that is used the virtual network. You can supply more than one address space. Changing this forces a new resource to be created. -}
@@ -383,5 +288,5 @@ type instance Computed Virtual_Network_Resource
 $(TH.makeResource
     "azure_virtual_network"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Virtual_Network_Resource)

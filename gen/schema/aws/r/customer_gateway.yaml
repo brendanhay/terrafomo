@@ -1,14 +1,14 @@
 _name: aws_customer_gateway
 arguments:
-  type_:
-    required: true
-    help: (Required) The type of customer gateway. The only type AWS supports at this
-      time is "ipsec.1".
-    type: Text
   bgp_asn:
     required: true
     help: (Required) The gateway's Border Gateway Protocol (BGP) Autonomous System
       Number (ASN).
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of customer gateway. The only type AWS supports at this
+      time is "ipsec.1".
     type: Text
   ip_address:
     required: true
@@ -38,11 +38,4 @@ attributes:
 about: Provides a customer gateway inside a VPC. These objects can be connected to
   VPN gateways via VPN connections, and allow you to establish tunnels between your
   network and the VPC.
-examples:
-- name: null
-  code:
-  - main <- resource "main" $
-  - ! '    customer_gateway_resource'
-  - ! '        & bgp_asn .~ 65000'
-  - ! '        & ip_address .~ "172.83.124.10"'
-  - ! '        & type .~ "ipsec.1"'
+examples: []

@@ -1,8 +1,18 @@
 _name: google_compute_subnetwork
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   name:
     required: true
     help: ! '- The name of the subnetwork.'
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region this subnetwork has been created in. If unspecified,
+      this defaults to the region configured in the provider.
     type: Text
 attributes:
   ip_cidr_range:
@@ -26,10 +36,4 @@ attributes:
     help: ! '- The IP address of the gateway.'
     type: Text
 about: Get a subnetwork within GCE from its name and region.
-examples:
-- name: null
-  code:
-  - my-subnetwork <- datasource "my-subnetwork" $
-  - ! '    compute_subnetwork_datasource'
-  - ! '        & name .~ "default-us-east1"'
-  - ! '        & region .~ "us-east1"'
+examples: []

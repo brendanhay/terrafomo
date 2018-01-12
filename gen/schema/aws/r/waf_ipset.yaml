@@ -11,9 +11,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a WAF IPSet Resource
-examples:
-- name: null
-  code:
-  - ipset <- resource "ipset" $
-  - ! '    waf_ipset_resource'
-  - ! '        & name .~ "tfIPSet"'
+examples: []

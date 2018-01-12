@@ -101,9 +101,4 @@ attributes:
     type: Text
 about: Use this data source to get the ID of an Amazon EC2 Instance for use in other
   resources.
-examples:
-- name: null
-  code:
-  - foo <- datasource "foo" $
-  - ! '    instance_datasource'
-  - ! '        & instance_id .~ "i-instanceid"'
+examples: []

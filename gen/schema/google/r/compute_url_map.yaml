@@ -1,5 +1,15 @@
 _name: google_compute_url_map
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  test:
+    required: false
+    help: (Optional) The test to perform.  Multiple blocks of this type are permitted.
+      Structure is documented below.
+    type: Text
   default_service:
     required: true
     help: (Required) The backend service or backend bucket to use when none of the
@@ -9,6 +19,19 @@ arguments:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    type: Text
+  path_matcher:
+    required: false
+    help: (Optional) A list of paths to match. Structure is documented below.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A brief description of this resource.
+    type: Text
+  host_rule:
+    required: false
+    help: (Optional) A list of host rules. Multiple blocks of this type are permitted.
+      Structure is documented below.
     type: Text
 attributes:
   fingerprint:
@@ -22,45 +45,4 @@ attributes:
     type: Text
 about: Manages a URL Map resource within GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/url-map>
   and <https://cloud.google.com/compute/docs/reference/latest/urlMaps> .
-examples:
-- name: null
-  code:
-  - foobar <- resource "foobar" $
-  - ! '    compute_url_map_resource'
-  - ! '        & name .~ "urlmap"'
-  - ! '        & description .~ "a description"'
-  - ! '        & default_service .~ compute home @"self_link"'
-  - ! ' '
-  - login <- resource "login" $
-  - ! '    compute_backend_service_resource'
-  - ! '        & name .~ "login-backend"'
-  - ! '        & port_name .~ "http"'
-  - ! '        & protocol .~ "HTTP"'
-  - ! '        & timeout_sec .~ 10'
-  - ! '        & health_checks .~ [compute default @"self_link"]'
-  - ! ' '
-  - home <- resource "home" $
-  - ! '    compute_backend_service_resource'
-  - ! '        & name .~ "home-backend"'
-  - ! '        & port_name .~ "http"'
-  - ! '        & protocol .~ "HTTP"'
-  - ! '        & timeout_sec .~ 10'
-  - ! '        & health_checks .~ [compute default @"self_link"]'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_http_health_check_resource'
-  - ! '        & name .~ "test"'
-  - ! '        & request_path .~ "/"'
-  - ! '        & check_interval_sec .~ 1'
-  - ! '        & timeout_sec .~ 1'
-  - ! ' '
-  - static <- resource "static" $
-  - ! '    compute_backend_bucket_resource'
-  - ! '        & name .~ "static-asset-backend-bucket"'
-  - ! '        & bucket_name .~ compute static @"name"'
-  - ! '        & enable_cdn .~ True'
-  - ! ' '
-  - static <- resource "static" $
-  - ! '    storage_bucket_resource'
-  - ! '        & name .~ "static-asset-bucket"'
-  - ! '        & location .~ "US"'
+examples: []

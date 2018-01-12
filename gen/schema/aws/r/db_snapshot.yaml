@@ -58,23 +58,4 @@ attributes:
       in at the time of the DB snapshot.'
     type: Text
 about: Creates a Snapshot of an DB Instance.
-examples:
-- name: null
-  code:
-  - bar <- resource "bar" $
-  - ! '    db_instance_resource'
-  - ! '        & allocated_storage .~ 10'
-  - ! '        & engine .~ "MySQL"'
-  - ! '        & engine_version .~ "5.6.21"'
-  - ! '        & instance_class .~ "db.t1.micro"'
-  - ! '        & name .~ "baz"'
-  - ! '        & password .~ "barbarbarbar"'
-  - ! '        & username .~ "foo"'
-  - ! '        & maintenance_window .~ "Fri:09:00-Fri:09:30"'
-  - ! '        & backup_retention_period .~ 0'
-  - ! '        & parameter_group_name .~ "default.mysql5.6"'
-  - ! ' '
-  - test <- resource "test" $
-  - ! '    db_snapshot_resource'
-  - ! '        & db_instance_identifier .~ compute bar @"id"'
-  - ! '        & db_snapshot_identifier .~ "testsnapshot1234"'
+examples: []

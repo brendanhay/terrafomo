@@ -1,5 +1,10 @@
 _name: google_compute_target_https_proxy
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
@@ -15,6 +20,11 @@ arguments:
     help: (Required) The URL of a URL Map resource that defines the mapping from the
       URL to the BackendService.
     type: Text
+  description:
+    required: false
+    help: (Optional) A description of this resource. Changing this forces a new resource
+      to be created.
+    type: Text
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'
@@ -25,40 +35,4 @@ attributes:
 about: Creates a target HTTPS proxy resource in GCE. For more information see <https://cloud.google.com/compute/docs/load-balancing/http/target-proxies>
   and <https://cloud.google.com/compute/docs/reference/latest/targetHttpsProxies>
   .
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    compute_target_https_proxy_resource'
-  - ! '        & name .~ "test-proxy"'
-  - ! '        & description .~ "a description"'
-  - ! '        & url_map .~ compute default @"self_link"'
-  - ! '        & ssl_certificates .~ [compute default @"self_link"]'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_ssl_certificate_resource'
-  - ! '        & name .~ "my-certificate"'
-  - ! '        & description .~ "a description"'
-  - ! '        & private_key .~ file("path/to/private.key")'
-  - ! '        & certificate .~ file("path/to/certificate.crt")'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_url_map_resource'
-  - ! '        & name .~ "url-map"'
-  - ! '        & description .~ "a description"'
-  - ! '        & default_service .~ compute default @"self_link"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_backend_service_resource'
-  - ! '        & name .~ "default-backend"'
-  - ! '        & port_name .~ "http"'
-  - ! '        & protocol .~ "HTTP"'
-  - ! '        & timeout_sec .~ 10'
-  - ! '        & health_checks .~ [compute default @"self_link"]'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_http_health_check_resource'
-  - ! '        & name .~ "test"'
-  - ! '        & request_path .~ "/"'
-  - ! '        & check_interval_sec .~ 1'
-  - ! '        & timeout_sec .~ 1'
+examples: []

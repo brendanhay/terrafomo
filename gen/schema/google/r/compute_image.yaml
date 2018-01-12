@@ -30,15 +30,4 @@ attributes:
 about: Creates a bootable VM image resource for Google Compute Engine from an existing
   tarball. For more information see <https://cloud.google.com/compute/docs/images>
   and <https://cloud.google.com/compute/docs/reference/latest/images> .
-examples:
-- name: null
-  code:
-  - bootable-image <- resource "bootable-image" $
-  - ! '    compute_image_resource'
-  - ! '        & name .~ "my-custom-image"'
-  - ! ' '
-  - vm <- resource "vm" $
-  - ! '    compute_instance_resource'
-  - ! '        & name .~ "vm-from-custom-image"'
-  - ! '        & machine_type .~ "n1-standard-1"'
-  - ! '        & zone .~ "us-east1-c"'
+examples: []

@@ -18,5 +18,6 @@ attributes:
     help: ! '- Base64 encoded ciphertext'
     type: Text
 about: The KMS ciphertext data source allows you to encrypt plaintext into ciphertext
-  by using an AWS KMS customer master key.
+  by using an AWS KMS customer master key. ~> All arguments including the plaintext
+  be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 examples: []

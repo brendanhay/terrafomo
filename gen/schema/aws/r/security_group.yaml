@@ -1,5 +1,45 @@
 _name: aws_security_group
-arguments: {}
+arguments:
+  vpc_id:
+    required: false
+    help: (Optional, Forces new resource) The VPC ID.
+    type: Text
+  name:
+    required: false
+    help: (Optional, Forces new resource) The name of the security group. If omitted,
+      Terraform will assign a random, unique name
+    type: Text
+  ingress:
+    required: false
+    help: (Optional) Can be specified multiple times for each ingress rule. Each ingress
+      block supports fields documented below.
+    type: Text
+  egress:
+    required: false
+    help: (Optional, VPC only) Can be specified multiple times for each egress rule.
+      Each egress block supports fields documented below.
+    type: Text
+  name_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique name beginning with the
+      specified prefix. Conflicts with @name@ .
+    type: Text
+  description:
+    required: false
+    help: ! '(Optional, Forces new resource) The security group description. Defaults
+      to "Managed by Terraform". Cannot be "". : This field maps to the AWS @GroupDescription@
+      attribute, for which there is no Update API. If you''d like to classify your
+      security groups in a way that can be updated, use @tags@ .'
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
 attributes: {}
-about: Provides a security group resource.
+about: Provides a security group resource. ~> Terraform currently provides both a
+  standalone <security_group_rule.html> (a single @ingress@ or @egress@ rule), and
+  a Security Group resource with @ingress@ and @egress@ rules defined in-line. At
+  this time you cannot use a Security Group with in-line rules in conjunction with
+  any Security Group Rule resources. Doing so will cause a conflict of rule settings
+  and will overwrite rules.
 examples: []

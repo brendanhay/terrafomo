@@ -28,13 +28,4 @@ attributes:
       internally to identify the permission. This value is not used in aws.'
     type: Text
 about: Provides an OpsWorks permission resource.
-examples:
-- name: null
-  code:
-  - my_stack_permission <- resource "my_stack_permission" $
-  - ! '    opsworks_permission_resource'
-  - ! '        & allow_ssh .~ True'
-  - ! '        & allow_sudo .~ True'
-  - ! '        & level .~ "iam_only"'
-  - ! '        & user_arn .~ compute user @"arn"'
-  - ! '        & stack_id .~ compute stack @"id"'
+examples: []

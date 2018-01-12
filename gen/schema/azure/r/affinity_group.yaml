@@ -24,12 +24,4 @@ attributes:
     help: ! '- The affinity group ID. Coincides with the given @name@ .'
     type: Text
 about: Creates a new affinity group on Azure.
-examples:
-- name: null
-  code:
-  - terraform-main-group <- resource "terraform-main-group" $
-  - ! '    affinity_group_resource'
-  - ! '        & name .~ "terraform-group"'
-  - ! '        & location .~ "North Europe"'
-  - ! '        & label .~ "tf-group-01"'
-  - ! '        & description .~ "Affinity group created by Terraform."'
+examples: []

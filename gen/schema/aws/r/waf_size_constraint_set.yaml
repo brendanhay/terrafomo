@@ -11,9 +11,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a WAF Size Constraint Set Resource
-examples:
-- name: null
-  code:
-  - size_constraint_set <- resource "size_constraint_set" $
-  - ! '    waf_size_constraint_set_resource'
-  - ! '        & name .~ "tfsize_constraints"'
+examples: []

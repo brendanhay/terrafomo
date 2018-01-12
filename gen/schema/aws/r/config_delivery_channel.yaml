@@ -24,5 +24,7 @@ arguments:
       to.
     type: Text
 attributes: {}
-about: Provides an AWS Config Delivery Channel.
+about: Provides an AWS Config Delivery Channel. ~> Delivery Channel requires a </docs/providers/aws/r/config_configuration_recorder.html>
+  to be present. Use of @depends_on@ (as shown below) is recommended to avoid race
+  conditions.
 examples: []

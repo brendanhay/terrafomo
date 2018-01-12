@@ -64,12 +64,4 @@ attributes:
     type: Text
 about: Adds a data disk to a virtual machine. If the name of an existing disk is given,
   it will attach that disk. Otherwise it will create and attach a new empty disk.
-examples:
-- name: null
-  code:
-  - data <- resource "data" $
-  - ! '    data_disk_resource'
-  - ! '        & lun .~ 0'
-  - ! '        & size .~ 10'
-  - ! '        & storage_service_name .~ "yourstorage"'
-  - ! '        & virtual_machine .~ "server1"'
+examples: []

@@ -6,9 +6,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides an SES configuration set resource
-examples:
-- name: null
-  code:
-  - test <- resource "test" $
-  - ! '    ses_configuration_set_resource'
-  - ! '        & name .~ "some-configuration-set-test"'
+examples: []

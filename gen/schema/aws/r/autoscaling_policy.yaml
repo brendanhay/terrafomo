@@ -35,25 +35,9 @@ attributes:
   adjustment_type:
     help: ! '- The scaling policy''s adjustment type.'
     type: Text
-about: Provides an AutoScaling Scaling Policy resource.
-examples:
-- name: null
-  code:
-  - bat <- resource "bat" $
-  - ! '    autoscaling_policy_resource'
-  - ! '        & name .~ "foobar3-terraform-test"'
-  - ! '        & scaling_adjustment .~ 4'
-  - ! '        & adjustment_type .~ "ChangeInCapacity"'
-  - ! '        & cooldown .~ 300'
-  - ! '        & autoscaling_group_name .~ compute bar @"name"'
-  - ! ' '
-  - bar <- resource "bar" $
-  - ! '    autoscaling_group_resource'
-  - ! '        & availability_zones .~ ["us-east-1a"]'
-  - ! '        & name .~ "foobar3-terraform-test"'
-  - ! '        & max_size .~ 5'
-  - ! '        & min_size .~ 2'
-  - ! '        & health_check_grace_period .~ 300'
-  - ! '        & health_check_type .~ "ELB"'
-  - ! '        & force_delete .~ True'
-  - ! '        & launch_configuration .~ compute foo @"name"'
+about: Provides an AutoScaling Scaling Policy resource. ~> You may want to omit @desired_capacity@
+  attribute from attached @aws_autoscaling_group@ when using autoscaling policies.
+  It's good practice to pick either <https://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-manual-scaling.html>
+  or <https://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html>
+  (policy-based) scaling.
+examples: []

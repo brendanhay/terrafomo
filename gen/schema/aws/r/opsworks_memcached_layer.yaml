@@ -75,9 +75,4 @@ attributes:
     help: ! '- The id of the layer.'
     type: Text
 about: Provides an OpsWorks memcached layer resource.
-examples:
-- name: null
-  code:
-  - cache <- resource "cache" $
-  - ! '    opsworks_memcached_layer_resource'
-  - ! '        & stack_id .~ compute main @"id"'
+examples: []

@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.DigitalOcean.Provider (DigitalOcean, newResource)
+import Terraform.DigitalOcean.Provider (DigitalOcean, defaultProvider)
 import Terraform.DigitalOcean.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -51,7 +51,7 @@ type instance Computed Certificate_Resource
 $(TH.makeResource
     "digitalocean_certificate"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Certificate_Resource)
 
 -- | The @digitalocean_domain@ DigitalOcean resource.
@@ -72,7 +72,7 @@ type instance Computed Domain_Resource
 $(TH.makeResource
     "digitalocean_domain"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Domain_Resource)
 
 -- | The @digitalocean_firewall@ DigitalOcean resource.
@@ -115,34 +115,12 @@ type instance Computed Firewall_Resource
 $(TH.makeResource
     "digitalocean_firewall"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Firewall_Resource)
 
 -- | The @digitalocean_loadbalancer@ DigitalOcean resource.
 --
 -- Provides a DigitalOcean Load Balancer resource. This can be used to create, modify, and delete Load Balancers.
---
--- Example Usage:
---
--- @
--- import Terraform.DigitalOcean
--- import Terraform.DigitalOcean.Resource
--- @
---
--- @
--- web <- resource "web" $
---     droplet_resource
---         & name .~ "web-1"
---         & size .~ "512mb"
---         & image .~ "centos-7-x64"
---         & region .~ "nyc3"
---  
--- public <- resource "public" $
---     loadbalancer_resource
---         & name .~ "loadbalancer-1"
---         & region .~ "nyc3"
---         & droplet_ids .~ [compute web @"id"]
--- @
 data Loadbalancer_Resource = Loadbalancer_Resource
     { algorithm :: !(Attr Text)
       {- ^ (Optional) The load balancing algorithm used to determine which backend Droplet will be selected by a client. It must be either @round_robin@ or @least_connections@ . The default value is @round_robin@ . -}
@@ -174,7 +152,7 @@ type instance Computed Loadbalancer_Resource
 $(TH.makeResource
     "digitalocean_loadbalancer"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Loadbalancer_Resource)
 
 -- | The @digitalocean_record@ DigitalOcean resource.
@@ -191,7 +169,7 @@ data Record_Resource = Record_Resource
       {- ^ (Optional) The priority of the record, for MX and SRV records. -}
     , ttl :: !(Attr Text)
       {- ^ (Optional) The time to live for the record, in seconds. -}
-    , type_ :: !(Attr Text)
+    , type' :: !(Attr Text)
       {- ^ (Required) The type of record -}
     , value :: !(Attr Text)
       {- ^ (Optional) The value of the record -}
@@ -209,5 +187,5 @@ type instance Computed Record_Resource
 $(TH.makeResource
     "digitalocean_record"
     ''DigitalOcean
-    'newResource
+    'defaultProvider
     ''Record_Resource)

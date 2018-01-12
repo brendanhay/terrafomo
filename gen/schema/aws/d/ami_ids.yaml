@@ -26,9 +26,4 @@ arguments:
     type: Text
 attributes: {}
 about: Use this data source to get a list of AMI IDs matching the specified criteria.
-examples:
-- name: null
-  code:
-  - ubuntu <- datasource "ubuntu" $
-  - ! '    ami_ids_datasource'
-  - ! '        & owners .~ ["099720109477"]'
+examples: []

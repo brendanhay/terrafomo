@@ -9,13 +9,8 @@ arguments:
     help: (Optional) The unique name of the load balancer.
     type: Text
 attributes: {}
-about: ~>  @aws_alb@ is known as @aws_lb@ . The functionality is identical.
-examples:
-- name: null
-  code:
-  - ! ' '
-  - ! ' '
-  - test <- datasource "test" $
-  - ! '    lb_datasource'
-  - ! '        & arn .~ var.lb_arn'
-  - ! '        & name .~ var.lb_name'
+about: ~>  @aws_alb@ is known as @aws_lb@ . The functionality is identical. Provides
+  information about a Load Balancer. This data source can prove useful when a module
+  accepts an LB as an input variable and needs to, for example, determine the security
+  groups associated with it, etc.
+examples: []

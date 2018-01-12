@@ -43,9 +43,4 @@ attributes:
     type: Text
 about: Use this data source to get information about an EBS volume for use in other
   resources.
-examples:
-- name: null
-  code:
-  - ebs_volume <- datasource "ebs_volume" $
-  - ! '    ebs_volume_datasource'
-  - ! '        & most_recent .~ True'
+examples: []

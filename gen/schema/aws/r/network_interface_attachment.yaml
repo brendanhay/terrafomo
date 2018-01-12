@@ -26,11 +26,4 @@ attributes:
     help: ! '- Network interface ID.'
     type: Text
 about: Attach an Elastic network interface (ENI) resource with EC2 instance.
-examples:
-- name: null
-  code:
-  - test <- resource "test" $
-  - ! '    network_interface_attachment_resource'
-  - ! '        & instance_id .~ compute test @"id"'
-  - ! '        & network_interface_id .~ compute test @"id"'
-  - ! '        & device_index .~ 0'
+examples: []

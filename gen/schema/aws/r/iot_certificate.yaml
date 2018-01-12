@@ -16,10 +16,4 @@ attributes:
     help: ! '- The ARN of the created AWS IoT certificate'
     type: Text
 about: Creates and manages an AWS IoT certificate.
-examples:
-- name: null
-  code:
-  - cert <- resource "cert" $
-  - ! '    iot_certificate_resource'
-  - ! '        & csr .~ file("/my/csr.pem")'
-  - ! '        & active .~ True'
+examples: []

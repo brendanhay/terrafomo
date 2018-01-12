@@ -1,10 +1,5 @@
 _name: aws_vpn_connection
 arguments:
-  type_:
-    required: true
-    help: (Required) The type of VPN connection. The only type AWS supports at this
-      time is "ipsec.1".
-    type: Text
   vpn_gateway_id:
     required: true
     help: (Required) The ID of the virtual private gateway.
@@ -17,6 +12,11 @@ arguments:
   customer_gateway_id:
     required: true
     help: (Required) The ID of the customer gateway.
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of VPN connection. The only type AWS supports at this
+      time is "ipsec.1".
     type: Text
   tags:
     required: false
@@ -87,27 +87,7 @@ attributes:
     type: Text
 about: Provides a VPN connection connected to a VPC. These objects can be connected
   to customer gateways, and allow you to establish tunnels between your network and
-  the VPC.
-examples:
-- name: null
-  code:
-  - vpc <- resource "vpc" $
-  - ! '    vpc_resource'
-  - ! '        & cidr_block .~ "10.0.0.0/16"'
-  - ! ' '
-  - vpn_gateway <- resource "vpn_gateway" $
-  - ! '    vpn_gateway_resource'
-  - ! '        & vpc_id .~ compute vpc @"id"'
-  - ! ' '
-  - customer_gateway <- resource "customer_gateway" $
-  - ! '    customer_gateway_resource'
-  - ! '        & bgp_asn .~ 65000'
-  - ! '        & ip_address .~ "172.0.0.1"'
-  - ! '        & type .~ "ipsec.1"'
-  - ! ' '
-  - main <- resource "main" $
-  - ! '    vpn_connection_resource'
-  - ! '        & vpn_gateway_id .~ compute vpn_gateway @"id"'
-  - ! '        & customer_gateway_id .~ compute customer_gateway @"id"'
-  - ! '        & type .~ "ipsec.1"'
-  - ! '        & static_routes_only .~ True'
+  the VPC. ~> All arguments including @tunnel1_preshared_key@ and @tunnel2_preshared_key@
+  will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .
+examples: []

@@ -11,10 +11,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a VPC DHCP Options Association resource.
-examples:
-- name: null
-  code:
-  - dns_resolver <- resource "dns_resolver" $
-  - ! '    vpc_dhcp_options_association_resource'
-  - ! '        & vpc_id .~ compute foo @"id"'
-  - ! '        & dhcp_options_id .~ compute foo @"id"'
+examples: []

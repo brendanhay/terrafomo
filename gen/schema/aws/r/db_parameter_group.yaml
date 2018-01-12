@@ -1,9 +1,5 @@
 _name: aws_db_parameter_group
 arguments:
-  family_:
-    required: true
-    help: (Required) The family of the DB parameter group.
-    type: Text
   name:
     required: false
     help: (Optional, Forces new resource) The name of the DB parameter group. If omitted,
@@ -30,6 +26,10 @@ arguments:
       <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html>
       after initial creation of the group.
     type: Text
+  family':
+    required: true
+    help: (Required) The family of the DB parameter group.
+    type: Text
 attributes:
   arn:
     help: ! '- The ARN of the db parameter group.'
@@ -38,10 +38,4 @@ attributes:
     help: ! '- The db parameter group name.'
     type: Text
 about: Provides an RDS DB parameter group resource.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    db_parameter_group_resource'
-  - ! '        & name .~ "rds-pg"'
-  - ! '        & family .~ "mysql5.6"'
+examples: []

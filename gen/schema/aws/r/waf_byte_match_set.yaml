@@ -12,9 +12,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides a WAF Byte Match Set Resource
-examples:
-- name: null
-  code:
-  - byte_set <- resource "byte_set" $
-  - ! '    waf_byte_match_set_resource'
-  - ! '        & name .~ "tf_waf_byte_match_set"'
+examples: []

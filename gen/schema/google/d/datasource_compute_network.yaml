@@ -1,5 +1,10 @@
 _name: google_compute_network
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   name:
     required: true
     help: (Required) The name of the network.
@@ -21,9 +26,4 @@ attributes:
     help: ! '- Description of this network.'
     type: Text
 about: Get a network within GCE from its name.
-examples:
-- name: null
-  code:
-  - my-network <- datasource "my-network" $
-  - ! '    compute_network_datasource'
-  - ! '        & name .~ "default-us-east1"'
+examples: []

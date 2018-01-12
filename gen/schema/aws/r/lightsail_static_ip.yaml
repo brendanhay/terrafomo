@@ -14,10 +14,7 @@ attributes:
   ip_address:
     help: ! '- The allocated static IP address'
     type: Text
-about: Allocates a static IP address.
-examples:
-- name: null
-  code:
-  - test <- resource "test" $
-  - ! '    lightsail_static_ip_resource'
-  - ! '        & name .~ "example"'
+about: Allocates a static IP address. ~> Lightsail is currently only supported in
+  a limited number of AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
+  for more details
+examples: []

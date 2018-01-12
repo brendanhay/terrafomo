@@ -25,28 +25,7 @@ attributes:
     help: ! '- Details about the current state of the peering.'
     type: Text
 about: Manages a network peering within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/vpc-peering>
-  and <https://cloud.google.com/compute/docs/reference/latest/networks> .
-examples:
-- name: null
-  code:
-  - peering1 <- resource "peering1" $
-  - ! '    compute_network_peering_resource'
-  - ! '        & name .~ "peering1"'
-  - ! '        & network .~ compute default @"self_link"'
-  - ! '        & peer_network .~ compute other @"self_link"'
-  - ! ' '
-  - peering2 <- resource "peering2" $
-  - ! '    compute_network_peering_resource'
-  - ! '        & name .~ "peering2"'
-  - ! '        & network .~ compute other @"self_link"'
-  - ! '        & peer_network .~ compute default @"self_link"'
-  - ! ' '
-  - default <- resource "default" $
-  - ! '    compute_network_resource'
-  - ! '        & name .~ "foobar"'
-  - ! '        & auto_create_subnetworks .~ "false"'
-  - ! ' '
-  - other <- resource "other" $
-  - ! '    compute_network_resource'
-  - ! '        & name .~ "other"'
-  - ! '        & auto_create_subnetworks .~ "false"'
+  and <https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Both
+  network must create a peering with each other for the peering to be functional.
+  ~> Subnets IP ranges across peered VPC networks cannot overlap.
+examples: []

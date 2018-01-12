@@ -10,13 +10,8 @@ arguments:
     type: Text
 attributes: {}
 about: ~>  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The functionality
-  is identical.
-examples:
-- name: null
-  code:
-  - ! ' '
-  - ! ' '
-  - test <- datasource "test" $
-  - ! '    lb_target_group_datasource'
-  - ! '        & arn .~ var.lb_tg_arn'
-  - ! '        & name .~ var.lb_tg_name'
+  is identical. Provides information about a Load Balancer Target Group. This data
+  source can prove useful when a module accepts an LB Target Group as an input variable
+  and needs to know its attributes. It can also be used to get the ARN of an LB Target
+  Group for use in other resources, given LB Target Group name.
+examples: []

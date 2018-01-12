@@ -5,11 +5,6 @@ arguments:
     help: (Required for @ADConnector@ ) Connector related information about the directory.
       Fields documented below.
     type: Text
-  type_:
-    required: true
-    help: (Optional) - The directory type ( @SimpleAD@ or @MicrosoftAD@ are accepted
-      values). Defaults to @SimpleAD@ .
-    type: Text
   size:
     required: true
     help: (Required for @SimpleAD@ and @ADConnector@ ) The size of the directory (
@@ -38,6 +33,11 @@ arguments:
     help: (Required for @SimpleAD@ and @MicrosoftAD@ ) VPC related information about
       the directory. Fields documented below.
     type: Text
+  type':
+    required: true
+    help: (Optional) - The directory type ( @SimpleAD@ or @MicrosoftAD@ are accepted
+      values). Defaults to @SimpleAD@ .
+    type: Text
   short_name:
     required: false
     help: (Optional) The short name of the directory, such as @CORP@ .
@@ -62,27 +62,6 @@ attributes:
     help: ! '- A list of IP addresses of the DNS servers for the directory or connector.'
     type: Text
 about: Provides a Simple or Managed Microsoft directory in AWS Directory Service.
-examples:
-- name: null
-  code:
-  - bar <- resource "bar" $
-  - ! '    directory_service_directory_resource'
-  - ! '        & name .~ "corp.notexample.com"'
-  - ! '        & password .~ "SuperSecretPassw0rd"'
-  - ! '        & size .~ "Small"'
-  - ! ' '
-  - main <- resource "main" $
-  - ! '    vpc_resource'
-  - ! '        & cidr_block .~ "10.0.0.0/16"'
-  - ! ' '
-  - foo <- resource "foo" $
-  - ! '    subnet_resource'
-  - ! '        & vpc_id .~ compute main @"id"'
-  - ! '        & availability_zone .~ "us-west-2a"'
-  - ! '        & cidr_block .~ "10.0.1.0/24"'
-  - ! ' '
-  - bar <- resource "bar" $
-  - ! '    subnet_resource'
-  - ! '        & vpc_id .~ compute main @"id"'
-  - ! '        & availability_zone .~ "us-west-2b"'
-  - ! '        & cidr_block .~ "10.0.2.0/24"'
+  ~> All arguments including the password and customer username will be stored in
+  the raw state as plain-text. </docs/state/sensitive-data.html> .
+examples: []

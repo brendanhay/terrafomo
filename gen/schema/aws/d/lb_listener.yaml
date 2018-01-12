@@ -6,11 +6,8 @@ arguments:
     type: Text
 attributes: {}
 about: ~>  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality is
-  identical.
-examples:
-- name: null
-  code:
-  - ! ' '
-  - listener <- datasource "listener" $
-  - ! '    lb_listener_datasource'
-  - ! '        & arn .~ var.listener_arn'
+  identical. Provides information about a Load Balancer Listener. This data source
+  can prove useful when a module accepts an LB Listener as an input variable and needs
+  to know the LB it is attached to, or other information specific to the listener
+  in question.
+examples: []

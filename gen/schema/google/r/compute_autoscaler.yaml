@@ -1,5 +1,10 @@
 _name: google_compute_autoscaler
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   autoscaling_policy:
     required: true
     help: (Required) The parameters of the autoscaling algorithm. Structure is documented
@@ -12,6 +17,10 @@ arguments:
   name:
     required: true
     help: (Required) The name of the autoscaler.
+    type: Text
+  description:
+    required: false
+    help: (Optional) An optional textual description of the instance group manager.
     type: Text
   target:
     required: true

@@ -31,13 +31,4 @@ attributes:
     help: ! '- The Amazon Resource Name (ARN) specifying the log subscription filter.'
     type: Text
 about: Provides a CloudWatch Logs subscription filter resource.
-examples:
-- name: null
-  code:
-  - test_lambdafunction_logfilter <- resource "test_lambdafunction_logfilter" $
-  - ! '    cloudwatch_log_subscription_filter_resource'
-  - ! '        & name .~ "test_lambdafunction_logfilter"'
-  - ! '        & role_arn .~ compute iam_for_lambda @"arn"'
-  - ! '        & log_group_name .~ "/aws/lambda/example_lambda_name"'
-  - ! '        & filter_pattern .~ "logtype test"'
-  - ! '        & destination_arn .~ compute test_logstream @"arn"'
+examples: []

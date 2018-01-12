@@ -55,18 +55,4 @@ attributes:
     type: Text
 about: Provides a DigitalOcean Load Balancer resource. This can be used to create,
   modify, and delete Load Balancers.
-examples:
-- name: null
-  code:
-  - web <- resource "web" $
-  - ! '    droplet_resource'
-  - ! '        & name .~ "web-1"'
-  - ! '        & size .~ "512mb"'
-  - ! '        & image .~ "centos-7-x64"'
-  - ! '        & region .~ "nyc3"'
-  - ! ' '
-  - public <- resource "public" $
-  - ! '    loadbalancer_resource'
-  - ! '        & name .~ "loadbalancer-1"'
-  - ! '        & region .~ "nyc3"'
-  - ! '        & droplet_ids .~ [compute web @"id"]'
+examples: []

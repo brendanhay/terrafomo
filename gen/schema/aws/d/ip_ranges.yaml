@@ -24,15 +24,4 @@ attributes:
     type: Text
 about: Use this data source to get the <http://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html>
   of various AWS products and services.
-examples:
-- name: null
-  code:
-  - european_ec2 <- datasource "european_ec2" $
-  - ! '    ip_ranges_datasource'
-  - ! '        & regions .~ ["eu-west-1"'
-  - ! '                     ,"eu-central-1"]'
-  - ! '        & services .~ ["ec2"]'
-  - ! ' '
-  - from_europe <- resource "from_europe" $
-  - ! '    security_group_resource'
-  - ! '        & name .~ "from_europe"'
+examples: []

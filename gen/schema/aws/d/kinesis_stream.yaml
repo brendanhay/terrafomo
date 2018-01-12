@@ -39,10 +39,6 @@ attributes:
     help: ! '- A mapping of tags to assigned to the stream.'
     type: Text
 about: Use this data source to get information about a Kinesis Stream for use in other
-  resources.
-examples:
-- name: null
-  code:
-  - stream <- datasource "stream" $
-  - ! '    kinesis_stream_datasource'
-  - ! '        & name .~ "stream-name"'
+  resources. For more details, see the <https://aws.amazon.com/documentation/kinesis/>
+  .
+examples: []

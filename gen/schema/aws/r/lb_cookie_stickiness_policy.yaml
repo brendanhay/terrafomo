@@ -37,17 +37,4 @@ attributes:
     type: Text
 about: Provides a load balancer cookie stickiness policy, which allows an ELB to control
   the sticky session lifetime of the browser.
-examples:
-- name: null
-  code:
-  - lb <- resource "lb" $
-  - ! '    elb_resource'
-  - ! '        & name .~ "test-lb"'
-  - ! '        & availability_zones .~ ["us-east-1a"]'
-  - ! ' '
-  - foo <- resource "foo" $
-  - ! '    lb_cookie_stickiness_policy_resource'
-  - ! '        & name .~ "foo-policy"'
-  - ! '        & load_balancer .~ compute lb @"id"'
-  - ! '        & lb_port .~ 80'
-  - ! '        & cookie_expiration_period .~ 600'
+examples: []

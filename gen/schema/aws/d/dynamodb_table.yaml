@@ -6,9 +6,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides information about a DynamoDB table.
-examples:
-- name: null
-  code:
-  - tablename <- datasource "tablename" $
-  - ! '    dynamodb_table_datasource'
-  - ! '        & name .~ "tableName"'
+examples: []

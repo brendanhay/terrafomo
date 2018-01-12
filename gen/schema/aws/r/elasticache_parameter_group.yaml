@@ -1,9 +1,5 @@
 _name: aws_elasticache_parameter_group
 arguments:
-  family_:
-    required: true
-    help: (Required) The family of the ElastiCache parameter group.
-    type: Text
   name:
     required: true
     help: (Required) The name of the ElastiCache parameter group.
@@ -17,15 +13,13 @@ arguments:
     required: false
     help: (Optional) A list of ElastiCache parameters to apply.
     type: Text
+  family':
+    required: true
+    help: (Required) The family of the ElastiCache parameter group.
+    type: Text
 attributes:
   id:
     help: ! '- The ElastiCache parameter group name.'
     type: Text
 about: Provides an ElastiCache parameter group resource.
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    elasticache_parameter_group_resource'
-  - ! '        & name .~ "cache-params"'
-  - ! '        & family .~ "redis2.8"'
+examples: []

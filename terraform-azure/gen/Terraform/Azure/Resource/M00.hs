@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.Azure.Provider (Azure, newResource)
+import Terraform.Azure.Provider (Azure, defaultProvider)
 import Terraform.Azure.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -26,22 +26,6 @@ import qualified Terraform.Syntax.TH as TH
 -- | The @azure_local_network_connection@ Azure resource.
 --
 -- Defines a new connection to a remote network through a VPN tunnel.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- localnet <- resource "localnet" $
---     local_network_connection_resource
---         & name .~ "terraform-local-network-connection"
---         & vpn_gateway_address .~ "45.12.189.2"
---         & address_space_prefixes .~ ["10.10.10.0/24"
---                                     ,"10.10.11.0/24"]
--- @
 data Local_Network_Connection_Resource = Local_Network_Connection_Resource
     { address_space_prefixes :: !(Attr Text)
       {- ^ (Required) List of address spaces accessible through the VPN connection. The elements are in the CIDR format. -}
@@ -59,26 +43,12 @@ type instance Computed Local_Network_Connection_Resource
 $(TH.makeResource
     "azure_local_network_connection"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Local_Network_Connection_Resource)
 
 -- | The @azure_security_group@ Azure resource.
 --
 -- Creates a new network security group within the context of the specified subscription.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- web <- resource "web" $
---     security_group_resource
---         & name .~ "webservers"
---         & location .~ "West US"
--- @
 data Security_Group_Resource = Security_Group_Resource
     { label :: !(Attr Text)
       {- ^ (Optional) The identifier for the security group. The label can be up to 1024 characters long. Changing this forces a new resource to be created (defaults to the security group name) -}
@@ -98,12 +68,12 @@ type instance Computed Security_Group_Resource
 $(TH.makeResource
     "azure_security_group"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Security_Group_Resource)
 
 -- | The @azure_security_group_rule@ Azure resource.
 --
--- Creates a new network Security Group Rule to be associated with a number of given Security Groups.
+-- Creates a new network Security Group Rule to be associated with a number of given Security Groups. ~> : for usability purposes; Terraform allows the addition of a single Security Group Rule to multiple Security Groups, despite it having to define each rule individually per Security Group on Azure. As a result; in the event that one of the Rules on one of the Groups is modified by external factors, Terraform cannot reason as to whether or not that change should be propagated to the others; let alone choose one changed Rule configuration over another in case of a conflic. As such; @terraform refresh@ only checks that the rule is still defined for each of the specified @security_group_names@ ; ignoring the actual parameters of the Rule and updating the state with regards to them.
 data Security_Group_Rule_Resource = Security_Group_Rule_Resource
     { action :: !(Attr Text)
       {- ^ (Optional) The action that is performed when the security rule is matched. Valid options are: @Allow@ and @Deny@ . -}
@@ -123,7 +93,7 @@ data Security_Group_Rule_Resource = Security_Group_Rule_Resource
       {- ^ (Required) The address prefix of packet sources that that should be subjected to the rule. An asterisk (*) can also be used to match all source IPs. -}
     , source_port_range :: !(Attr Text)
       {- ^ (Required) The source port or range. This value can be between 0 and 65535. An asterisk (*) can also be used to match all ports. -}
-    , type_ :: !(Attr Text)
+    , type' :: !(Attr Text)
       {- ^ (Required) The type of the security rule. Valid options are: @Inbound@ and @Outbound@ . -}
     } deriving (Show, Eq, Generic)
 
@@ -133,30 +103,12 @@ type instance Computed Security_Group_Rule_Resource
 $(TH.makeResource
     "azure_security_group_rule"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Security_Group_Rule_Resource)
 
 -- | The @azure_sql_database_server@ Azure resource.
 --
 -- Allocates a new SQL Database Server on Azure.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- sql-serv <- resource "sql-serv" $
---     sql_database_server_resource
---         & name .~ "<computed>"
---         & location .~ "West US"
---         & username .~ "SuperUser"
---         & password .~ "SuperSEKR3T"
---         & version .~ "2.0"
---         & url .~ "<computed>"
--- @
 data Sql_Database_Server_Resource = Sql_Database_Server_Resource
     { location :: !(Attr Text)
       {- ^ (Required) The location where the database server should be created. For a list of all Azure locations, please consult <https://azure.microsoft.com/en-us/regions/> . -}
@@ -180,30 +132,12 @@ type instance Computed Sql_Database_Server_Resource
 $(TH.makeResource
     "azure_sql_database_server"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Sql_Database_Server_Resource)
 
 -- | The @azure_sql_database_service@ Azure resource.
 --
 -- Creates a new SQL database service on an Azure database server.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- sql-server <- resource "sql-server" $
---     sql_database_service_resource
---         & name .~ "terraform-testing-db-renamed"
---         & database_server_name .~ "flibberflabber"
---         & edition .~ "Standard"
---         & collation .~ "SQL_Latin1_General_CP1_CI_AS"
---         & max_size_bytes .~ "5368709120"
---         & service_level_id .~ "f1173c43-91bd-4aaa-973c-54e79e15235b"
--- @
 data Sql_Database_Service_Resource = Sql_Database_Service_Resource
     { collation :: !(Attr Text)
       {- ^ (Optional) The collation to be used within the database service. Defaults to the standard Latin charset. -}
@@ -227,27 +161,12 @@ type instance Computed Sql_Database_Service_Resource
 $(TH.makeResource
     "azure_sql_database_service"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Sql_Database_Service_Resource)
 
 -- | The @azure_storage_container@ Azure resource.
 --
 -- Creates a new storage container within a given storage service on Azure.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- stor-cont <- resource "stor-cont" $
---     storage_container_resource
---         & name .~ "terraform-storage-container"
---         & container_access_type .~ "blob"
---         & storage_service_name .~ "tfstorserv"
--- @
 data Storage_Container_Resource = Storage_Container_Resource
     { container_access_type :: !(Attr Text)
       {- ^ (Required) The 'interface' for access the container provides. Can be either @blob@ , @container@ or ``. -}
@@ -267,26 +186,12 @@ type instance Computed Storage_Container_Resource
 $(TH.makeResource
     "azure_storage_container"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Storage_Container_Resource)
 
 -- | The @azure_storage_queue@ Azure resource.
 --
 -- Creates a new storage queue within a given storage service on Azure.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- stor-queue <- resource "stor-queue" $
---     storage_queue_resource
---         & name .~ "terraform-storage-queue"
---         & storage_service_name .~ "tfstorserv"
--- @
 data Storage_Queue_Resource = Storage_Queue_Resource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the storage queue. Must be unique within the storage service the queue is located. -}
@@ -302,28 +207,12 @@ type instance Computed Storage_Queue_Resource
 $(TH.makeResource
     "azure_storage_queue"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Storage_Queue_Resource)
 
 -- | The @azure_storage_service@ Azure resource.
 --
 -- Creates a new storage service on Azure in which storage containers may be created.
---
--- Example Usage:
---
--- @
--- import Terraform.Azure
--- import Terraform.Azure.Resource
--- @
---
--- @
--- tfstor <- resource "tfstor" $
---     storage_service_resource
---         & name .~ "tfstor"
---         & location .~ "West US"
---         & description .~ "Made by Terraform."
---         & account_type .~ "Standard_LRS"
--- @
 data Storage_Service_Resource = Storage_Service_Resource
     { account_type :: !(Attr Text)
       {- ^ (Required) The type of storage account to be created. Available options include @Standard_LRS@ , @Standard_ZRS@ , @Standard_GRS@ , @Standard_RAGRS@ and @Premium_LRS@ . To learn more about the differences of each storage account type, please consult <http://blogs.msdn.com/b/windowsazurestorage/archive/2013/12/11/introducing-read-access-geo-replicated-storage-ra-grs-for-windows-azure-storage.aspx> . -}
@@ -349,5 +238,5 @@ type instance Computed Storage_Service_Resource
 $(TH.makeResource
     "azure_storage_service"
     ''Azure
-    'newResource
+    'defaultProvider
     ''Storage_Service_Resource)

@@ -32,11 +32,7 @@ arguments:
       example, the ARN of a topic in Amazon Simple Notification Service (SNS).
     type: Text
 attributes: {}
-about: Provides a CodeCommit Trigger Resource.
-examples:
-- name: null
-  code:
-  - test <- resource "test" $
-  - ! '    codecommit_trigger_resource'
-  - ! '        & depends_on .~ ["aws_codecommit_repository.test"]'
-  - ! '        & repository_name .~ "my_test_repository"'
+about: ! 'Provides a CodeCommit Trigger Resource. ~> : The CodeCommit is not yet rolled
+  out in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#codecommit_region>
+  .'
+examples: []

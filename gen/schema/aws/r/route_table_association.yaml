@@ -13,10 +13,4 @@ attributes:
     help: ! '- The ID of the association'
     type: Text
 about: Provides a resource to create an association between a subnet and routing table.
-examples:
-- name: null
-  code:
-  - a <- resource "a" $
-  - ! '    route_table_association_resource'
-  - ! '        & subnet_id .~ compute foo @"id"'
-  - ! '        & route_table_id .~ compute bar @"id"'
+examples: []

@@ -1,5 +1,10 @@
 _name: google_dns_managed_zone
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   dns_name:
     required: true
     help: (Required) The DNS name of this zone, e.g. "terraform.io".
@@ -9,6 +14,10 @@ arguments:
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
     type: Text
+  description:
+    required: false
+    help: (Optional) A textual description field. Defaults to 'Managed by Terraform'.
+    type: Text
 attributes:
   name_servers:
     help: ! '- The list of nameservers that will be authoritative for this domain.
@@ -17,11 +26,4 @@ attributes:
     type: Text
 about: Manages a zone within Google Cloud DNS. For more information see <https://cloud.google.com/dns/zones/>
   and <https://cloud.google.com/dns/api/v1/managedZones> .
-examples:
-- name: null
-  code:
-  - prod <- resource "prod" $
-  - ! '    dns_managed_zone_resource'
-  - ! '        & name .~ "prod-zone"'
-  - ! '        & dns_name .~ "prod.mydomain.com."'
-  - ! '        & description .~ "Production DNS zone"'
+examples: []

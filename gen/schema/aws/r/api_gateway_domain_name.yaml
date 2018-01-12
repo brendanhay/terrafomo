@@ -47,5 +47,14 @@ attributes:
     help: ! '- For convenience, the hosted zone id ( @Z2FDTNDATAQYW2@ ) that can be
       used to create a Route53 alias record for the distribution.'
     type: Text
-about: Registers a custom domain name for use with AWS API Gateway.
+about: Registers a custom domain name for use with AWS API Gateway. This resource
+  just establishes ownership of and the TLS settings for a particular domain name.
+  An API can be attached to a particular path under the registered domain name using
+  <api_gateway_base_path_mapping.html> . Internally API Gateway creates a CloudFront
+  distribution to route requests on the given hostname. In addition to this resource
+  it's necessary to create a DNS record corresponding to the given domain name which
+  is an alias (either Route53 alias or traditional CNAME) to the Cloudfront domain
+  name exported in the @cloudfront_domain_name@ attribute. ~> All arguments including
+  the private key will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .
 examples: []

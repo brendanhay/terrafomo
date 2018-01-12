@@ -1,6 +1,92 @@
 _name: triton_fabric
-arguments: {}
-attributes: {}
+arguments:
+  provision_end_ip:
+    required: true
+    help: ! '- (String, Required, Change forces new resource) Last assignable IP on
+      the network.'
+    type: Text
+  routes:
+    required: true
+    help: ! '- (Map, Optional, Change forces new resource) Map of CIDR block to Gateway
+      IP address.'
+    type: Text
+  provision_start_ip:
+    required: true
+    help: ! '- (String, Required, Change forces new resource) First IP on the network
+      that can be assigned.'
+    type: Text
+  gateway:
+    required: true
+    help: ! '- (String, Optional, Change forces new resource) Optional gateway IP.'
+    type: Text
+  subnet:
+    required: true
+    help: ! '- (String, Required, Change forces new resource) CIDR formatted string
+      describing network.'
+    type: Text
+  name:
+    required: true
+    help: ! '- (String, Required, Change forces new resource) Network name.'
+    type: Text
+  vlan_id:
+    required: true
+    help: ! '- (Int, Required, Change forces new resource) VLAN id the network is
+      on. Number between 0-4095 indicating VLAN ID.'
+    type: Text
+  internet_nat:
+    required: true
+    help: ! '- (Bool, Optional, Change forces new resource) If a NAT zone is provisioned
+      at Gateway IP address. Default is @false@ . This differs from <https://apidocs.joyent.com/cloudapi/#CreateFabricNetwork>
+      which implicitly creates a NAT instance by default. NOTE: There is a known issue
+      in Triton that prevents deletion of fabric networks when @internet_nat@ is enabled.'
+    type: Text
+  resolvers:
+    required: true
+    help: ! '- (List, Optional) Array of IP addresses for resolvers.'
+    type: Text
+  description:
+    required: true
+    help: ! '- (String, Optional, Change forces new resource) Optional description
+      of network.'
+    type: Text
+attributes:
+  provision_end_ip:
+    help: ! '- (String) - Last assignable IP on the network.'
+    type: Text
+  routes:
+    help: ! '- (Map) - Map of CIDR block to Gateway IP address.'
+    type: Text
+  provision_start_ip:
+    help: ! '- (String) - First IP on the network that can be assigned.'
+    type: Text
+  gateway:
+    help: ! '- (String) - Optional gateway IP.'
+    type: Text
+  subnet:
+    help: ! '- (String) - CIDR formatted string describing network.'
+    type: Text
+  name:
+    help: ! '- (String) - Network name.'
+    type: Text
+  vlan_id:
+    help: ! '- (Int) - VLAN id the network is on. Number between 0-4095 indicating
+      VLAN ID.'
+    type: Text
+  internet_nat:
+    help: ! '- (Bool) - If a NAT zone is provisioned at Gateway IP address.'
+    type: Text
+  fabric:
+    help: ! '- (Bool) - Whether or not this network is on a fabric.'
+    type: Text
+  resolvers:
+    help: ! '- (List) - Array of IP addresses for resolvers.'
+    type: Text
+  description:
+    help: ! '- (String) - Optional description of network.'
+    type: Text
+  public:
+    help: ! '- (Bool) - Whether or not this is an RFC1918 network.'
+    type: Text
 about: The @triton_fabric@ resource represents an fabric for a Triton account. The
   fabric is a logical set of interconnected switches.
 examples: []

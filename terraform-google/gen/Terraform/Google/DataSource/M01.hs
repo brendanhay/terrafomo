@@ -17,7 +17,7 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terraform.Google.Provider (Google, newDataSource)
+import Terraform.Google.Provider (Google, defaultProvider)
 import Terraform.Google.Types
 import Terraform.Syntax.Attribute (Attr, Computed)
 
@@ -29,6 +29,8 @@ import qualified Terraform.Syntax.TH as TH
 data Compute_Instance_Group_DataSource = Compute_Instance_Group_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the instance group. -}
+    , project :: !(Attr Text)
+      {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , zone :: !(Attr Text)
       {- ^ (Required) The zone of the instance group. -}
     } deriving (Show, Eq, Generic)
@@ -51,31 +53,12 @@ type instance Computed Compute_Instance_Group_DataSource
 $(TH.makeDataSource
     "google_compute_instance_group"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Compute_Instance_Group_DataSource)
 
 -- | The @google_compute_lb_ip_ranges@ Google datasource.
 --
--- Use this data source to access IP ranges in your firewall rules.
---
--- Example Usage:
---
--- @
--- import Terraform.Google
--- import Terraform.Google.DataSource
--- @
---
--- @
--- ranges <- datasource "ranges" $
---     compute_lb_ip_ranges_datasource
---  
--- lb <- resource "lb" $
---     compute_firewall_resource
---         & name .~ "lb-firewall"
---         & network .~ compute main @"name"
---         & source_ranges .~ [data.google_compute_lb_ip_ranges.ranges.network]
---         & target_tags .~ ["InstanceBehindLoadBalancer"]
--- @
+-- Use this data source to access IP ranges in your firewall rules. https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_source_ips_and_firewall_rules
 data Compute_Lb_Ip_Ranges_DataSource = Compute_Lb_Ip_Ranges_DataSource
     { http_ssl_tcp_internal :: !(Attr Text)
       {- ^ - The IP ranges used for health checks when is used -}
@@ -89,28 +72,17 @@ type instance Computed Compute_Lb_Ip_Ranges_DataSource
 $(TH.makeDataSource
     "google_compute_lb_ip_ranges"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Compute_Lb_Ip_Ranges_DataSource)
 
 -- | The @google_compute_network@ Google datasource.
 --
 -- Get a network within GCE from its name.
---
--- Example Usage:
---
--- @
--- import Terraform.Google
--- import Terraform.Google.DataSource
--- @
---
--- @
--- my-network <- datasource "my-network" $
---     compute_network_datasource
---         & name .~ "default-us-east1"
--- @
 data Compute_Network_DataSource = Compute_Network_DataSource
     { name :: !(Attr Text)
       {- ^ (Required) The name of the network. -}
+    , project :: !(Attr Text)
+      {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq, Generic)
 
 type instance Computed Compute_Network_DataSource
@@ -129,29 +101,19 @@ type instance Computed Compute_Network_DataSource
 $(TH.makeDataSource
     "google_compute_network"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Compute_Network_DataSource)
 
 -- | The @google_compute_subnetwork@ Google datasource.
 --
 -- Get a subnetwork within GCE from its name and region.
---
--- Example Usage:
---
--- @
--- import Terraform.Google
--- import Terraform.Google.DataSource
--- @
---
--- @
--- my-subnetwork <- datasource "my-subnetwork" $
---     compute_subnetwork_datasource
---         & name .~ "default-us-east1"
---         & region .~ "us-east1"
--- @
 data Compute_Subnetwork_DataSource = Compute_Subnetwork_DataSource
     { name :: !(Attr Text)
       {- ^ - The name of the subnetwork. -}
+    , project :: !(Attr Text)
+      {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    , region :: !(Attr Text)
+      {- ^ (Optional) The region this subnetwork has been created in. If unspecified, this defaults to the region configured in the provider. -}
     } deriving (Show, Eq, Generic)
 
 type instance Computed Compute_Subnetwork_DataSource
@@ -172,7 +134,7 @@ type instance Computed Compute_Subnetwork_DataSource
 $(TH.makeDataSource
     "google_compute_subnetwork"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Compute_Subnetwork_DataSource)
 
 -- | The @google_container_engine_versions@ Google datasource.
@@ -199,5 +161,5 @@ type instance Computed Container_Engine_Versions_DataSource
 $(TH.makeDataSource
     "google_container_engine_versions"
     ''Google
-    'newDataSource
+    'defaultProvider
     ''Container_Engine_Versions_DataSource)

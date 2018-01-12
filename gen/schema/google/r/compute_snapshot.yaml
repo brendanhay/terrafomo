@@ -1,8 +1,19 @@
 _name: google_compute_snapshot
 arguments:
+  project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
   zone:
     required: true
     help: (Required) The zone where the source disk is located.
+    type: Text
+  source_disk_encryption_key_raw:
+    required: false
+    help: (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption),
+      encoded in <https://tools.ietf.org/html/rfc4648#section-4> to decrypt the source
+      disk.
     type: Text
   name:
     required: true
@@ -12,6 +23,15 @@ arguments:
   source_disk:
     required: true
     help: (Required) The disk which will be used as the source of the snapshot.
+    type: Text
+  snapshot_encryption_key_raw:
+    required: false
+    help: (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption),
+      encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this snapshot.
+    type: Text
+  labels:
+    required: false
+    help: (Optional) A set of key/value label pairs to assign to the snapshot.
     type: Text
 attributes:
   self_link:
@@ -35,11 +55,4 @@ attributes:
     type: Text
 about: Creates a new snapshot of a disk within GCE. For more information see <https://cloud.google.com/compute/docs/disks/create-snapshots>
   and <https://cloud.google.com/compute/docs/reference/latest/snapshots> .
-examples:
-- name: null
-  code:
-  - default <- resource "default" $
-  - ! '    compute_snapshot_resource'
-  - ! '        & name .~ "test-snapshot"'
-  - ! '        & source_disk .~ "test-disk"'
-  - ! '        & zone .~ "us-central1-a"'
+examples: []

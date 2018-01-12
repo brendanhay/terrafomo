@@ -43,9 +43,4 @@ attributes:
       .'
     type: Text
 about: Provides a Route53 Hosted Zone resource.
-examples:
-- name: null
-  code:
-  - primary <- resource "primary" $
-  - ! '    route53_zone_resource'
-  - ! '        & name .~ "example.com"'
+examples: []

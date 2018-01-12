@@ -43,12 +43,4 @@ attributes:
     help: ! '- The db option group name.'
     type: Text
 about: Provides an RDS DB option group resource.
-examples:
-- name: null
-  code:
-  - bar <- resource "bar" $
-  - ! '    db_option_group_resource'
-  - ! '        & name .~ "option-group-test-terraform"'
-  - ! '        & option_group_description .~ "Terraform Option Group"'
-  - ! '        & engine_name .~ "sqlserver-ee"'
-  - ! '        & major_engine_version .~ "11.00"'
+examples: []

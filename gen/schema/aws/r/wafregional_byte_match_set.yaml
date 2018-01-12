@@ -13,9 +13,4 @@ arguments:
 attributes: {}
 about: Provides a WAF Regional Byte Match Set Resource for use with Application Load
   Balancer.
-examples:
-- name: null
-  code:
-  - byte_set <- resource "byte_set" $
-  - ! '    wafregional_byte_match_set_resource'
-  - ! '        & name .~ "tf_waf_byte_match_set"'
+examples: []

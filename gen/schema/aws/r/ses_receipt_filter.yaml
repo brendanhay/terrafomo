@@ -14,11 +14,4 @@ arguments:
     type: Text
 attributes: {}
 about: Provides an SES receipt filter resource
-examples:
-- name: null
-  code:
-  - filter <- resource "filter" $
-  - ! '    ses_receipt_filter_resource'
-  - ! '        & name .~ "block-spammer"'
-  - ! '        & cidr .~ "10.10.10.10"'
-  - ! '        & policy .~ "Block"'
+examples: []

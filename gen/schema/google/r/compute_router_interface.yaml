@@ -5,6 +5,12 @@ arguments:
     help: (Required) The name or resource link to the VPN tunnel this interface will
       be linked to. Changing this forces a new interface to be created.
     type: Text
+  project:
+    required: false
+    help: (Optional) The project in which this interface's router belongs. If it is
+      not provided, the provider project is used. Changing this forces a new interface
+      to be created.
+    type: Text
   router:
     required: true
     help: (Required) The name of the router this interface will be attached to. Changing
@@ -15,16 +21,19 @@ arguments:
     help: (Required) A unique name for the interface, required by GCE. Changing this
       forces a new interface to be created.
     type: Text
+  region:
+    required: false
+    help: (Optional) The region this interface's router sits in. If not specified,
+      the project region will be used. Changing this forces a new interface to be
+      created.
+    type: Text
+  ip_range:
+    required: false
+    help: (Optional) IP address and range of the interface. The IP range must be in
+      the RFC3927 link-local IP space. Changing this forces a new interface to be
+      created.
+    type: Text
 attributes: {}
 about: Manages a Cloud Router interface. For more information see <https://cloud.google.com/compute/docs/cloudrouter>
   and <https://cloud.google.com/compute/docs/reference/latest/routers> .
-examples:
-- name: null
-  code:
-  - foobar <- resource "foobar" $
-  - ! '    compute_router_interface_resource'
-  - ! '        & name .~ "interface-1"'
-  - ! '        & router .~ "router-1"'
-  - ! '        & region .~ "us-central1"'
-  - ! '        & ip_range .~ "169.254.1.1/30"'
-  - ! '        & vpn_tunnel .~ "tunnel-1"'
+examples: []

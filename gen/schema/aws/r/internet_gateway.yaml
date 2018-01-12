@@ -13,9 +13,4 @@ attributes:
     help: ! '- The ID of the Internet Gateway.'
     type: Text
 about: Provides a resource to create a VPC Internet Gateway.
-examples:
-- name: null
-  code:
-  - gw <- resource "gw" $
-  - ! '    internet_gateway_resource'
-  - ! '        & vpc_id .~ compute main @"id"'
+examples: []
