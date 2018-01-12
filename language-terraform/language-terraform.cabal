@@ -38,3 +38,5 @@ library
         , containers
         , language-hcl
         , transformers
+                , ghc-prim
+                , vinyl

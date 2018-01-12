@@ -1,131 +1,63 @@
-{-# LANGUAGE FlexibleContexts  #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE DataKinds             #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE PartialTypeSignatures #-}
+{-# LANGUAGE TypeApplications      #-}
 
-module Language.Terraform
-    ( module Language.Terraform
-    , module AST
---    , module Parser
---    , module Pretty
+{-# OPTIONS_GHC -fno-warn-partial-type-signatures #-}
+
+module Terraform
+    ( module Terraform.Syntax
+    , module Terraform.Prelude
     ) where
 
-import Prelude (Num (..), Show, undefined, ($), (.))
+import Terraform.Prelude
+import Terraform.Syntax
 
-import Data.Bool       (Bool (False, True))
-import Data.Map.Strict (Map)
-import Data.Maybe      (Maybe (Just, Nothing))
-import Data.String     (fromString)
-import Data.Text       (Text)
+-- Example
 
-import Numeric.Natural (Natural)
+import           Terraform.AWS.Provider (AWS)
+import qualified Terraform.AWS.Resource as AW
 
-import Language.Terraform.AST as AST
--- import Language.Terraform.Parser as Parser
--- import Language.Terraform.Pretty as Pretty
+tags =
+      value @"Name"        (var "name")
+    . value @"Description" (var "description")
+    . value @"Component"   (var "component")
+    . value @"Env"         (map "namespace" "env")
+    . value @"Squad"       (map "namespace" "squad")
+    . value @"Origin"      (map "namespace" "origin")
 
-import qualified Control.Monad.Trans.Writer.Strict as Writer
-import qualified Data.Map.Strict                   as Map
+example1 :: Resource AWS _
+example1 =
+    resource AWS.Instance "example1" $
+          value @"ami" (var "ami" :: Expr Text)
 
--- Variables
+        . block @"root_block_device" (
+              value @"volume_size" (var "volume_size")
+            . value @"volume_type" (var "volume_type")
+          )
 
-var :: Name -> Expr a
-var = Var . VString
+        . value @"subnet_id"            (var "subnet_id")
+        . value @"key_name"             (var "key_name")
+        . value @"iam_instance_profile" (var "iam_instance_profile")
+        . value @"user_data"            (var "user_data_id")
 
-map :: Name -> Name -> Expr (Map Text a)
-map name idx = Var (VMap name idx)
+        . block @"tags" tags
 
-list :: Name -> Expr [a]
-list = Var . VList
+example2 :: Resource AWS _
+example2 =
+    resource AWS.Route53_Record "record" $
+          value @"zone_id" (var "zone_id")
 
-(!) :: Name -> Natural -> Expr a
-(!) name idx = Var (VIndex name idx)
+        . value @"name"
+            (if count == 1
+                then var "common_name"
+                else format("%s-%d", var "common_name", count))
+            -- (var "base_domain_name")
 
--- References
+        . value @"type" "A"
 
-data_ :: Type -> Name -> Name -> Expr a
-data_ typ name attr = Ref (RData typ name Nothing attr)
+        . value @"ttl" 3600
 
--- Resources
+        . value @"records" [refer @"private_ip" example1 :: Expr Text]
 
-type Attributes a = Writer.Writer [(Name, Item a)] ()
-
-resource :: Type -> Name -> Attributes a -> Resource b a
-resource typ name m =
-    Resource (Key typ name) (Map.fromList (Writer.execWriter m)) $
-        Meta { _provider = Provider
-             , _count = Nothing
-             , _dependsOn = []
-             , _lifecycle = Lifecycle
-                 { _createBeforeDestroy = False
-                 , _ignoreChanges       = Attributes []
-                 }
-             }
-
-value :: Show b => Name -> Expr b -> Attributes a
-value name x = Writer.tell [(name, Value (Arg x))]
-
-object :: Name -> Attributes a -> Attributes a
-object name m = Writer.tell [(name, Block (Map.fromList (Writer.execWriter m)))]
-
--- AWS
-
--- json name x =
--- provider ::
-
--- count :: Count ->
--- count = Just
-
--- dependsOn
-
--- lifecycle:
--- createBeforeDestroy
--- ignoreChanges
-
--- Boolean Logic
-
-bool :: Expr a -> Expr a -> Expr Bool -> Expr a
-bool f t p = Cond p t f
-
-true :: Expr Bool
-true = Lit True
-
-false :: Expr Bool
-false = Lit False
-
-not :: Expr Bool -> Expr Bool
-not = Not
-
-(||) :: Expr Bool -> Expr Bool -> Expr Bool
-(||) = Bin Or
-
-(&&) :: Expr Bool -> Expr Bool -> Expr Bool
-(&&) = Bin And
-
--- Equality
-
-(==) :: Expr Bool -> Expr Bool -> Expr Bool
-(==) = Bin Equal
-
-(!=) :: Expr Bool -> Expr Bool -> Expr Bool
-(!=) a b = not (Bin Equal a b)
-
--- Relational
-
-(>) :: Expr Bool -> Expr Bool -> Expr Bool
-(>) = Bin Greater
-
-(>=) :: Expr Bool -> Expr Bool -> Expr Bool
-(>=) = Bin GreaterOrEqual
-
-(<) :: Expr Bool -> Expr Bool -> Expr Bool
-(<) = Bin Less
-
-(<=) :: Expr Bool -> Expr Bool -> Expr Bool
-(<=) = Bin LessOrEqual
-
--- Numeric
-
-(/) :: Expr Bool -> Expr Bool -> Expr Bool
-(/) = Num Div
-
-(%) :: Expr Bool -> Expr Bool -> Expr Bool
-(%) = Num Mod
+-- The whole Vinyl thing doesn't work with non-specified attributes.

@@ -1,25 +1,39 @@
+{-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 {-# LANGUAGE TypeFamilies               #-}
+{-# LANGUAGE TypeOperators              #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE AllowAmbiguousTypes        #-}
+{-# LANGUAGE GADTs                      #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 
 module Terraform.Syntax.Resource where
 
+import Control.Monad.Trans.State.Strict  (State)
 import Control.Monad.Trans.Writer.Strict (Writer)
 
-import Data.Map.Strict (Map)
+import Data.Proxy      (Proxy (Proxy))
 import Data.String     (IsString (fromString))
 import Data.Text       (Text)
+import Data.Vinyl      (Rec ((:&), RNil))
+
+import GHC.TypeLits (KnownSymbol)
 
 import Numeric.Natural (Natural)
 
-import Terraform.Syntax.Expr     (Expr, Value (AnyExpr))
+import Terraform.Syntax.Expr     (Any (Any), Expr)
 import Terraform.Syntax.Name     (HasType (getType), Key (Key), Name, Type)
 import Terraform.Syntax.Provider (Provider)
-import Terraform.Syntax.Ref      (HasRef (getRef), Ref (RRes))
+--import Terraform.Syntax.Ref      (HasRef (getRef), Ref (RRes))
 
+import qualified Control.Monad.Trans.State.Strict  as State
 import qualified Control.Monad.Trans.Writer.Strict as Writer
 import qualified Data.Map.Strict                   as Map
+import qualified Data.Vinyl                        as Vinyl
+import qualified Data.Vinyl.Lens                   as Vinyl (rget)
+import qualified Data.Vinyl.TypeLevel              as Vinyl (RIndex)
 
 -- Resource Naming
 
@@ -36,68 +50,98 @@ data family ResourceName p :: *
 
 -- Resource Smart Constructors
 
-type Attributes a = Writer [(Name, Attr a)] ()
+resource
+    :: ResourceName p
+    -> Name
+    -> (Attributes '[] -> Attributes fs)
+    -> Resource p fs
+resource typ name attrs = Resource
+    { _resourceType  = typ
+    , _resourceName  = name
+    , _resourceAttrs = attrs RNil
+    , _resourceMeta  = Meta
+        { _count     = Nothing
+        , _dependsOn = []
+        , _lifecycle = Lifecycle
+            { _createBeforeDestroy = False
+            , _ignoreChanges       = Match []
+            }
+        }
+    }
 
-resource :: ResourceName p -> Attributes a -> Resource p a
-resource typ m =
-    Resource { _resourceType  = typ
-             , _resourceName  = "<generated>"
-             , _resourceAttrs = Map.fromList (Writer.execWriter m)
-             , _resourceMeta  =
-                 Meta { _count     = Nothing
-                      , _dependsOn = []
-                      , _lifecycle = Lifecycle
-                          { _createBeforeDestroy = False
-                          , _ignoreChanges       = Attributes []
-                          }
-                      }
-             }
+-- Resource Setters
 
-value :: Show b => Name -> Expr b -> Attributes a
-value name x = Writer.tell [(name, Value (AnyExpr x))]
+-- attributes xs r = r { _resourceAttrs = _resourceAttrs r `Vinyl.rappend` xs }
 
-block :: Name -> Attributes a -> Attributes a
-block name m = Writer.tell [(name, Block (Map.fromList (Writer.execWriter m)))]
+value
+    :: KnownSymbol k
+    => Expr v
+    -> Attributes fs
+    -> Attributes (Attr k (Expr v) ': fs)
+value v r = Vinyl.Field v :& r
 
-object :: Name -> a -> Attributes a
-object name x = Writer.tell [(name, Serialize x)]
+block
+    :: KnownSymbol k
+    => (Attributes '[] -> Attributes block)
+    -> Attributes fs
+    -> Attributes (Attr k Block ': fs)
+block attrs r = Vinyl.Field (Block (attrs RNil)) :& r
+
+refer
+    :: forall k v fs p .
+       ( KnownSymbol k
+       , Attr k v Vinyl.∈ fs
+       )
+    => Resource p fs
+    -> v
+refer = Vinyl.getField . Vinyl.rget (Proxy :: Proxy (Attr k v)) . _resourceAttrs
+
+type Attr k v = '(k, v)
+
+data Block where
+    Block :: !a -> Block
+
+-- data Item a where
+--     Value :: !a -> Item a
+
+-- | The canonical set of extensible attributes.
+type Attributes = Vinyl.FieldRec
 
 -- Resources
 
--- FIXME: type family to prevent duplicates assignment?
-data Resource p a = Resource
+data Resource p fs = Resource
     { _resourceType  :: !(ResourceName p)
     , _resourceName  :: !Name
-    , _resourceAttrs :: !(Map Name (Attr a))
+    , _resourceAttrs :: !(Attributes fs)
     , _resourceMeta  :: !(Meta p)
     }
 
-deriving instance (Show (ResourceName p), Show a) => Show (Resource p a)
+-- deriving instance (Show (ResourceName p), Show a) => Show (Resource p ns a)
 
-instance HasType (ResourceName p) => HasType (Resource p a) where
-    getType = getType . _resourceType
+-- instance HasType (ResourceName p) => HasType (Resource p a) where
+--     getType = getType . _resourceType
 
-instance HasType (ResourceName p) => HasRef (Resource p a) where
-    getRef x = RRes (getType x) (_resourceName x) Nothing
+-- instance HasType (ResourceName p) => HasRef (Resource p a) where
+--     getRef x = RRes (getType x) (_resourceName x) Nothing
 
 -- Resource Attributes
 
-data Attr a
-    = Block    !(Map Name (Attr a))
-      -- access_logs {
-      --   bucket   = "${aws_s3_bucket.elb_logs.bucket}"
-      --   interval = 5
-      -- }
-    | Value     !Value
-      -- var = <value>
-    | Serialize !a
-      -- plaintext = <<EOF
-      --  {
-      --     "client_id": "e587DBae22222f55da22",
-      --     "client_secret": "8289575d00000ace55e1815ec13673955721b8a5"
-      --  }
-      -- EOF
-      deriving (Show)
+-- data Attr b a fs
+--     = Block     !(Attributes fs)
+--       -- access_logs {
+--       --   bucket   = "${aws_s3_bucket.elb_logs.bucket}"
+--       --   interval = 5
+--       -- }
+--     | Value     !b
+--       -- var = <value>
+--     | Serialize !a
+--       -- plaintext = <<EOF
+--       --  {
+--       --     "client_id": "e587DBae22222f55da22",
+--       --     "client_secret": "8289575d00000ace55e1815ec13673955721b8a5"
+--       --  }
+--       -- EOF
+--       deriving (Show)
 
 -- Resource 'Meta-parameters'
 
@@ -156,6 +200,6 @@ data Lifecycle = Lifecycle
 -- attribute names. Using a partial string together with a wildcard
 -- (e.g. "rout*") is not supported.
 data Changes
-    = Attributes ![Name]
+    = Match ![Name]
     | Wildcard -- '*'
       deriving (Show, Eq)

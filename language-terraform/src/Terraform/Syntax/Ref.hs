@@ -27,10 +27,10 @@ import Terraform.Syntax.Name (Name, Type)
 --
 -- Parameterized over the result of the interpolation.
 data Var a where
-    VString :: Name            -> Var a
-    VMap    :: Name -> Name    -> Var (Map Text a)
-    VList   :: Name            -> Var [a]
-    VIndex  :: Name -> Natural -> Var a
+    VString :: !Name             -> Var a
+    VMap    :: !Name -> !Name    -> Var (Map Text a)
+    VList   :: !Name             -> Var [a]
+    VIndex  :: !Name -> !Natural -> Var a
 
 deriving instance Show (Var a)
 
