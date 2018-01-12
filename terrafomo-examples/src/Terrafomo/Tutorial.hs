@@ -111,15 +111,15 @@ example1 = do
 --      , '("vars",     Attr Text)
 --      ]
 -- @
-example2 :: Terraform ()
-example2 = do
-    tmpl1 <-
-        datasource "mytemplate1" $
-            T.fileDataSource
-                & T.template .= "foo"
-                & T.vars     .~ Present "bar" -- Same as '.='
+-- example2 :: Terraform ()
+-- example2 = do
+--     tmpl1 <-
+--         datasource "mytemplate1" $
+--             T.fileDataSource
+--                 & T.template .= "foo"
+--                 & T.vars     .~ Present "bar" -- Same as '.='
 
-    void . resource "myfile1" $
-        L.fileResource
-            & L.filename .= "foo"
-            & L.content  .~ attribute tmpl1 (Proxy @"rendered")
+--     void . resource "myfile1" $
+--         L.fileResource
+--             & L.filename .= "foo"
+--             & L.content  .~ attribute tmpl1 (Proxy @"rendered")
