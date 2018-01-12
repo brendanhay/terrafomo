@@ -248,12 +248,18 @@ renderPackage
     -> Provider (Maybe Schema)
     -> Script ()
 renderPackage tmpls dir p = do
-    let packageFile = dir </> "package" <.> "yaml"
-        mainFile    = dir </> "src" </> pathNS (mainNS  p)
-        typesFile   = dir </> "src" </> pathNS (typesNS p)
+    let packageFile = dir    </> "package" <.> "yaml"
+        srcDir      = dir    </> "src"
+        srcGitKeep  = srcDir </> ".gitkeep"
+        mainFile    = srcDir </> pathNS (mainNS  p)
+        typesFile   = srcDir </> pathNS (typesNS p)
+
+
+    echo ("Writing " ++ srcGitKeep)
+    createDirectory srcDir
+    scriptIO (LText.appendFile srcGitKeep "")
 
     echo ("Writing " ++ packageFile)
-    createDirectory (Path.takeDirectory packageFile)
     hoistEither (Render.package tmpls p)
         >>= scriptIO . LText.writeFile packageFile
 
