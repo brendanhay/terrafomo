@@ -1,39 +1,51 @@
-_name: azurerm_eventhub_namespace
 arguments:
   _name:
     required: true
-    help: (Required) Specifies the name of the EventHub Namespace resource . Changing
+    help: (Required) Specifies the name of the EventHub Namespace resource. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _capacity:
     required: false
-    help: (Optional) Specifies the capacity of a Standard namespace. Can be 1, 2 or
-      4
+    help: (Optional) Specifies the Capacity / Throughput Units for a @Standard@ SKU
+      namespace. Valid values range from 1 - 20.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _sku:
     required: true
-    help: (Required) Defines which tier to use. Options are Basic or Standard.
+    help: (Required) Defines which tier to use. Valid options are @Basic@ and @Standard@
+      .
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the namespace.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+  _maximum_throughput_units:
+    required: false
+    help: (Optional) Specifies the maximum number of throughput units when Auto Inflate
+      is Enabled. Valid values range from 1 - 20.
+    ignored: false
+    type: Text
+  _auto_inflate_enabled:
+    required: false
+    help: (Optional) Is Auto Inflate enabled for the EventHub Namespace?
+    ignored: false
+    type: Text
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_eventhub_namespace
 attributes:
   id:
     help: ! '- The EventHub Namespace ID.'

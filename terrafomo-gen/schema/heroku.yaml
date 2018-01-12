@@ -1,17 +1,17 @@
-_name: HerokuProvider
 arguments:
   _api_key:
     required: true
     help: (Required) Heroku API token. It must be provided, but it can also be sourced
       from the @HEROKU_API_KEY@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: true
     help: (Required) Email to be notified by Heroku. It must be provided, but it can
       also be sourced from the @HEROKU_EMAIL@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: HerokuProvider
 attributes: {}
 about: The Heroku provider is used to interact with the resources supported by Heroku.
   The provider needs to be configured with the proper credentials before it can be

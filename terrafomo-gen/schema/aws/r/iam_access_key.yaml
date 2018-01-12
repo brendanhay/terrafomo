@@ -1,16 +1,16 @@
-_name: aws_iam_access_key
 arguments:
   _pgp_key:
     required: false
     help: (Optional) Either a base-64 encoded PGP public key, or a keybase username
       in the form @keybase:some_person_that_exists@ .
+    ignored: false
     type: Text
-    deprecated: false
   _user:
     required: true
     help: (Required) The IAM user to associate with this access key.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_access_key
 attributes:
   status:
     help: ! '- "Active" or "Inactive". Keys are initially active, but can be made

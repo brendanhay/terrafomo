@@ -1,43 +1,43 @@
-_name: pagerduty_user
 arguments:
   _job_title:
     required: false
     help: (Optional) The user's title.
+    ignored: false
     type: Text
-    deprecated: false
   _color:
     required: false
     help: (Optional) The schedule color for the user.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the user.
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: true
     help: (Required) The user's email address.
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: false
     help: (Optional) The user role. Account must have the @read_only_users@ ability
       to set a user as a @read_only_user@ . Can be @admin@ , @limited_user@ , @owner@
       , @read_only_user@ , @team_responder@ or @user@
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A human-friendly description of the user. If not set, a placeholder
       of "Managed by Terraform" will be set.
+    ignored: false
     type: Text
-    deprecated: false
   _teams:
     required: false
     help: (Optional) A list of teams the user should belong to.
+    ignored: false
     type: Text
-    deprecated: false
+name: pagerduty_user
 attributes:
   time_zone:
     help: ! '- The timezone of the user'

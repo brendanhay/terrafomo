@@ -1,74 +1,74 @@
-_name: openstack_blockstorage_volume_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to create the volume. If omitted, the @region@
       argument of the provider is used. Changing this creates a new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _source_vol_id:
     required: false
     help: (Optional) The volume ID from which to create the volume. Changing this
       creates a new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _metadata:
     required: false
     help: (Optional) Metadata key/value pairs to associate with the volume. Changing
       this updates the existing volume metadata.
+    ignored: false
     type: Text
-    deprecated: false
   _image_id:
     required: false
     help: (Optional) The image ID from which to create the volume. Changing this creates
       a new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _source_replica:
     required: false
     help: (Optional) The volume ID to replicate with.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) A unique name for the volume. Changing this updates the volume's
       name.
+    ignored: false
     type: Text
-    deprecated: false
   _volume_type:
     required: false
     help: (Optional) The type of volume to create. Changing this creates a new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the volume. Changing this updates the volume's
       description.
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot_id:
     required: false
     help: (Optional) The snapshot ID from which to create the volume. Changing this
       creates a new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _availability_zone:
     required: false
     help: (Optional) The availability zone for the volume. Changing this creates a
       new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: true
     help: (Required) The size of the volume to create (in gigabytes). Changing this
       creates a new volume.
+    ignored: false
     type: Text
-    deprecated: false
   _consistency_group_id:
     required: false
     help: (Optional) The consistency group to place the volume in.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_blockstorage_volume_v2
 attributes:
   volume_type:
     help: ! '- See Argument Reference above.'

@@ -1,10 +1,10 @@
-_name: aws_sns_topic
 arguments:
   _name:
     required: true
     help: (Required) The friendly name of the topic to match.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_sns_topic
 attributes:
   arn:
     help: ! '- Set to the ARN of the found topic, suitable for referencing in other

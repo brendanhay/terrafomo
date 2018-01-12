@@ -1,10 +1,10 @@
-_name: dns_txt_record_set
 arguments:
   _host:
     required: true
     help: ! '- (required): Host to look up'
+    ignored: false
     type: Text
-    deprecated: false
+name: dns_txt_record_set
 attributes:
   records:
     help: ! '- A list of TXT records.'

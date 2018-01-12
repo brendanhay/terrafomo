@@ -1,0 +1,32 @@
+arguments:
+  _secret_file:
+    required: false
+    help: (Optional, Forces new resource) The name of file that can save access key
+      id and access key secret. Strongly suggest you to specified it when you creating
+      access key, otherwise, you wouldn't get its secret ever.
+    ignored: false
+    type: Text
+  _user_name:
+    required: true
+    help: (Required, Forces new resource) Name of the RAM user. This name can have
+      a string of 1 to 64 characters, must contain only alphanumeric characters or
+      hyphens, such as "-",".","_", and must not begin with a hyphen.
+    ignored: false
+    type: Text
+  _status:
+    required: false
+    help: (Optional) Status of access key. It must be @Active@ or @Inactive@ . Default
+      value is @Active@ .
+    ignored: false
+    type: Text
+name: alicloud_ram_access_key
+attributes:
+  status:
+    help: ! '- The access key status.'
+    type: Text
+  id:
+    help: ! '- The access key ID.'
+    type: Text
+about: ! 'Provides a RAM User access key resource. ~> NOTE: You should set the @secret_file@
+  if you want to get the access key.'
+examples: []

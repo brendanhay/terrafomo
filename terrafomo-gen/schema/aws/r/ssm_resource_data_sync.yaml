@@ -1,15 +1,15 @@
-_name: aws_athena_database
 arguments:
   _s3_destination:
     required: true
     help: (Required) Amazon S3 configuration details for the sync.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Name for the configuration.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_athena_database
 attributes: {}
 about: Provides a SSM resource data sync.
 examples: []

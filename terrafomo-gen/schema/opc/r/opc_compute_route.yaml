@@ -1,32 +1,32 @@
-_name: opc_compute_route
 arguments:
   _ip_address_prefix:
     required: true
     help: (Required) The IPv4 address prefix, in CIDR format, of the external network
       from which to route traffic.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the route.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the route.
+    ignored: false
     type: Text
-    deprecated: false
   _admin_distance:
     required: false
     help: (Optional) The route's administrative distance. Defaults to @0@ .
+    ignored: false
     type: Text
-    deprecated: false
   _next_hop_vnic_set:
     required: true
     help: (Required) Name of the virtual NIC set to route matching packets to. Routed
       flows are load-balanced among all the virtual NICs in the virtual NIC set.
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_route
 attributes:
   ip_address_prefix:
     help: ! '- The IPv4 address prefix, in CIDR format, of the external network from

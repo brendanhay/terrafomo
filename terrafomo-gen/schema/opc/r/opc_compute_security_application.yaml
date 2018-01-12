@@ -1,38 +1,38 @@
-_name: opc_compute_security_application
 arguments:
   _dport:
     required: true
     help: (Required) The port, or range of ports, to enable for this application,
       e.g @8080@ , @6000-7000@ . This must be set if the @protocol@ is set to @tcp@
       or @udp@ .
+    ignored: false
     type: Text
-    deprecated: false
   _icmpcode:
     required: false
     help: (Optional) The ICMP code to enable for this application, if the @protocol@
       is @icmp@ . Must be one of @admin@ , @df@ , @host@ , @network@ , @port@ or @protocol@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _icmptype:
     required: false
     help: (Optional) The ICMP type to enable for this application, if the @protocol@
       is @icmp@ . Must be one of @echo@ , @reply@ , @ttl@ , @traceroute@ , @unreachable@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The unique (within the identity domain) name of the application
+    ignored: false
     type: Text
-    deprecated: false
   _protocol:
     required: true
     help: (Required) The protocol to enable for this application. Must be one of @tcp@
       , @udp@ , @ah@ , @esp@ , @icmp@ , @icmpv6@ , @igmp@ , @ipip@ , @gre@ , @mplsip@
       , @ospf@ , @pim@ , @rdp@ , @sctp@ or @all@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_security_application
 attributes: {}
 about: The @opc_compute_security_application@ resource creates and manages a security
   application in an OPC identity domain.

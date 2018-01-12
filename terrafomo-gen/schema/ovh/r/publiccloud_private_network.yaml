@@ -1,28 +1,28 @@
-_name: ovh_publiccloud_private_network
 arguments:
   _regions:
     required: true
     help: ! '- an array of valid OVH public cloud region ID in which the network will
       be available. Ex.: "GRA1". Defaults to all public cloud regions.'
+    ignored: false
     type: Text
-    deprecated: false
   _project_id:
     required: true
     help: (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@
       environment variable is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the network.
+    ignored: false
     type: Text
-    deprecated: false
   _vlan_id:
     required: true
     help: ! '- a vlan id to associate with the network. Changing this value recreates
       the resource. Defaults to 0.'
+    ignored: false
     type: Text
-    deprecated: false
+name: ovh_publiccloud_private_network
 attributes:
   status:
     help: ! '- the status of the network. should be normally set to ''ACTIVE''.'

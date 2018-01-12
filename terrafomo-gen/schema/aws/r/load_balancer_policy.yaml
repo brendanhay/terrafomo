@@ -1,25 +1,25 @@
-_name: aws_elb_load_balancer_policy
 arguments:
   _policy_attribute:
     required: false
     help: (Optional) Policy attribute to apply to the policy.
+    ignored: false
     type: Text
-    deprecated: false
   _load_balancer_name:
     required: true
     help: (Required) The load balancer on which the policy is defined.
+    ignored: false
     type: Text
-    deprecated: false
   _policy_name:
     required: true
     help: (Required) The name of the load balancer policy.
+    ignored: false
     type: Text
-    deprecated: false
   _policy_type_name:
     required: true
     help: (Required) The policy type.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_elb_load_balancer_policy
 attributes:
   policy_type_name:
     help: ! '- The policy type of the policy.'

@@ -1,21 +1,21 @@
-_name: aws_internet_gateway
 arguments:
   _filter:
     required: false
     help: (Optional) Custom filter block as described below.
+    ignored: false
     type: Text
-    deprecated: false
   _internet_gateway_id:
     required: false
     help: (Optional) The id of the specific Internet Gateway to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired Internet Gateway.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_internet_gateway
 attributes:
   state:
     help: ! '- The current state of the attachment between the gateway and the VPC.

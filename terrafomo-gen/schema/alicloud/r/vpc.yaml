@@ -1,20 +1,20 @@
-_name: alicloud_vpc
 arguments:
   _cidr_block:
     required: true
     help: (Required, Forces new resource) The CIDR block for the VPC.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the VPC. Defaults to null.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The VPC description. Defaults to null.
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_vpc
 attributes:
   route_table_id:
     help: ! '- The route table ID of the router created by default on VPC creation.'

@@ -1,35 +1,35 @@
-_name: google_dataproc_cluster
 arguments:
   _region:
     required: false
     help: (Optional) The region in which the cluster and associated nodes will be
       created in. Defaults to @global@ .
+    ignored: false
     type: Text
-    deprecated: false
   _labels:
     required: false
     help: (Optional, Computed) The list of labels (key/value pairs) to be applied
       to instances in the cluster. GCP generates some itself including @goog-dataproc-cluster-name@
       which is the name of the cluster.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the @cluster@ will exist. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _cluster_config:
     required: false
     help: (Optional) Allows you to configure various aspects of the cluster. Structure
       defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the cluster, unique within the project and zone.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_dataproc_cluster
 attributes:
   cluster_config.software_config.properties:
     help: ! '- A list of the properties used to set the daemon config files. This

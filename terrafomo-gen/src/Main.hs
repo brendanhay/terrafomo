@@ -10,7 +10,7 @@ import Control.Applicative (many)
 import Control.Error       (Script, hoistEither, runScript, scriptIO)
 import Control.Monad       (unless, when)
 
-import Data.Aeson     (FromJSON, ToJSON)
+import Data.Aeson     (FromJSON)
 import Data.Bifunctor (first)
 import Data.Function  ((&))
 import Data.Maybe     (isJust)
@@ -70,13 +70,13 @@ optionsParser :: Option.Parser Options
 optionsParser = Options
     <$> Option.strOption
          ( Option.long "config-dir"
-        <> Option.help "The directory to read provider configuration."
+        <> Option.help "The directory containing provider, resource, and datasource configurations."
         <> Option.metavar "DIR"
          )
 
     <*> Option.strOption
          ( Option.long "schema-dir"
-        <> Option.help "The directory to read/write user modifiable schemas."
+        <> Option.help "The directory containing parsed provider, resource, and datasource schemas."
         <> Option.metavar "DIR"
          )
 
@@ -135,7 +135,7 @@ main = do
     opts <- Option.customExecParser prefs parserInfo
 
     runScript $ do
-        echo "Starting ..."
+        echo "Program" "Starting..."
 
         tmpls       <- loadTemplates   opts
         provider    <- loadProvider    opts
@@ -153,22 +153,21 @@ main = do
         when anyResources $
             renderSchemas tmpls dir provider Resource resources
 
-        echo "Done."
+        echo "Program" "Done."
 
 -- Provider
 
 loadProvider :: Options -> Script (Provider (Maybe Schema))
 loadProvider opts = do
-    let path@Path{markdownFile} = providerPath opts
-        configFile              = configDir opts </> providerAlias opts <.> "yaml"
+    let path@Path{markdownFile, configFile} = providerPath opts
 
-    provider <- parseYAML configFile
+    provider <- parseYAML "Provider" configFile
 
     if not (providerDatatype provider)
         then pure (Nothing <$ provider)
         else do
             exists <- scriptIO (Dir.doesFileExist markdownFile)
-            echo ("Provider " ++ markdownFile ++ " == " ++ show exists)
+            echo "Provider" (markdownFile ++ " == " ++ show exists)
 
             schema <- loadSchema Parser.providerParser path
             pure (Just (applyDeprecations schema) <$ provider)
@@ -185,37 +184,38 @@ loadDataSources =
 
 -- Schema
 
-loadSchema :: (ToJSON a, FromJSON a, Semigroup a) => Parser a -> Path -> Script a
-loadSchema parser path =
-    patchSchema path
-        >> parseSchema parser path
-            >>= updateSchema path
+loadSchema :: Parser Schema -> Path -> Script Schema
+loadSchema parser path = do
+    patchMarkdown path
+    parseMarkdown parser  path
+        >>= writeSchema   path
+        >>= applyOverride path
 
-updateSchema :: (ToJSON a, FromJSON a, Semigroup a) => Path -> a -> Script a
-updateSchema Path{schemaFile} input = do
-    exists <- scriptIO (Dir.doesFileExist schemaFile)
-    echo ("Schema " ++ schemaFile ++ " == " ++ show exists)
+applyOverride :: Path -> Schema -> Script Schema
+applyOverride Path{configFile} other = do
+    exists <- scriptIO (Dir.doesFileExist configFile)
+    echo "Override" (configFile ++ " == " ++ show exists)
 
-    output <-
-        if not exists
-            then pure input
-            else do
-                echo ("Reading " ++ schemaFile)
-                (input <>) <$> parseYAML schemaFile
+    if exists
+        then (other <>) <$> parseYAML "Override" configFile
+        else pure other
 
-    echo ("Writing " ++ schemaFile)
+writeSchema :: Path -> Schema -> Script Schema
+writeSchema Path{schemaFile} output = do
     createDirectory (Path.takeDirectory schemaFile)
+
+    echo "Schema" schemaFile
     scriptIO (YAML.encodeFile schemaFile output)
 
     pure output
 
-patchSchema :: Path -> Script ()
-patchSchema Path{markdownFile, patchFile} = do
+patchMarkdown :: Path -> Script ()
+patchMarkdown Path{markdownFile, patchFile} = do
     exists <- scriptIO (Dir.doesFileExist patchFile)
-    echo ("Patch " ++ patchFile ++ " == " ++ show exists)
+    echo "Patch" (patchFile ++ " == " ++ show exists)
 
     when exists $ do
-        echo ("Patching " ++ markdownFile)
+        echo "Patch" markdownFile
         code <- scriptIO . Process.system $
             unwords [ "patch -N -r"
                     , patchFile <.> "rej"
@@ -225,11 +225,11 @@ patchSchema Path{markdownFile, patchFile} = do
                     ]
 
         when (code /= Exit.ExitSuccess) $
-            echo ("Failure applying patch " ++ patchFile)
+            echo "Error" ("Failure applying patch " ++ patchFile)
 
-parseSchema :: Parser a -> Path -> Script a
-parseSchema parser Path{markdownFile} = do
-    echo ("Parsing " ++ markdownFile)
+parseMarkdown :: Parser a -> Path -> Script a
+parseMarkdown parser Path{markdownFile} = do
+    echo "Markdown" markdownFile
     scriptIO (Text.readFile markdownFile)
         >>= hoistEither . Parser.runParser parser markdownFile
 
@@ -269,18 +269,18 @@ renderPackage tmpls dir p d r = do
 
     createDirectory dir
 
-    echo ("Writing " ++ packageFile)
+    echo "Package" packageFile
     hoistEither (Render.package tmpls p d r)
         >>= scriptIO . LText.writeFile packageFile
 
     mainExists <- scriptIO (Dir.doesFileExist mainFile)
-    echo ("Main " ++ mainFile ++ " == " ++ show mainExists)
+    echo "Main" (mainFile ++ " == " ++ show mainExists)
     unless mainExists $
         hoistEither (Render.main tmpls p)
             >>= writeNS srcDir
 
     typesExists <- scriptIO (Dir.doesFileExist typesFile)
-    echo ("Types " ++ typesFile ++ " == " ++ show typesExists)
+    echo "Types" (typesFile ++ " == " ++ show typesExists)
     unless typesExists $
         hoistEither (Render.types tmpls p)
             >>= writeNS srcDir
@@ -300,7 +300,7 @@ renderSchemas tmpls dir p typ xs = do
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
     let moduleFile = dir </> pathNS ns <.> "hs"
-    echo ("Writing " ++ moduleFile)
+    echo "Module" moduleFile
     createDirectory (Path.takeDirectory moduleFile)
     scriptIO (LText.writeFile moduleFile text)
 
@@ -309,12 +309,14 @@ writeNS dir (ns, text) = do
 data Path = Path
     { markdownFile :: !FilePath
     , schemaFile   :: !FilePath
+    , configFile   :: !FilePath
     , patchFile    :: !FilePath
     }
 
 providerPath :: Options -> Path
 providerPath Options{..} =
     let markdownFile = providerFile
+        configFile   = configDir </> providerAlias <.> "yaml"
         schemaFile   = schemaDir </> providerAlias <.> "yaml"
         patchFile    = patchDir  </> providerAlias <.> "patch"
      in Path{..}
@@ -326,10 +328,11 @@ dataSourcePaths :: Options -> [Path]
 dataSourcePaths opts = map (schemaPath opts DataSource) (dataSourceFiles opts)
 
 schemaPath :: Options -> SchemaType -> FilePath -> Path
-schemaPath Options{providerAlias, schemaDir, patchDir} typ file =
+schemaPath Options{configDir, providerAlias, schemaDir, patchDir} typ file =
     let name         = Path.dropExtensions (Path.takeBaseName file)
         prefix       = [Char.toLower (head (show typ))]
         markdownFile = file
+        configFile   = configDir </> providerAlias </> prefix </> name <.> "yaml"
         schemaFile   = schemaDir </> providerAlias </> prefix </> name <.> "yaml"
         patchFile    = patchDir  </> providerAlias </> prefix </> name <.> "patch"
      in Path{..}
@@ -349,24 +352,30 @@ loadTemplates Options{templateDir} =
 
 parseEDE :: FilePath -> Script EDE.Template
 parseEDE file = do
-    echo ("Parsing EDE from " ++ file)
+    echo "Template" file
     first Text.pack
         <$> scriptIO (EDE.eitherParseFile file)
         >>= hoistEither
 
 -- YAML
 
-parseYAML :: FromJSON a => FilePath -> Script a
-parseYAML file = do
-    echo ("Parsing YAML from " ++ file)
+parseYAML :: FromJSON a => String -> FilePath -> Script a
+parseYAML title file = do
+    echo title file
     first (Text.pack . YAML.prettyPrintParseException)
         <$> scriptIO (YAML.decodeFileEither file)
         >>= hoistEither
 
 -- Standard IO
 
-echo :: String -> Script ()
-echo = scriptIO . IO.putStrLn
+echo :: String -> String -> Script ()
+echo title =
+    scriptIO
+        . IO.putStrLn
+        . showString "[ "
+        . showString title
+        . showString (replicate (8 - length title) ' ')
+        . showString " ] "
 
 createDirectory :: FilePath -> Script ()
 createDirectory = scriptIO . Dir.createDirectoryIfMissing True

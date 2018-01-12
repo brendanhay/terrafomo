@@ -1,15 +1,15 @@
-_name: kubernetes_config_map
 arguments:
   _metadata:
     required: true
     help: ! '(Required) Standard config map''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
+    ignored: false
     type: Text
-    deprecated: false
   _data':
     required: false
     help: (Optional) A map of the configuration data.
+    ignored: false
     type: Text
-    deprecated: false
+name: kubernetes_config_map
 attributes: {}
 about: The resource provides mechanisms to inject containers with configuration data
   while keeping containers agnostic of Kubernetes. Config Map can be used to store

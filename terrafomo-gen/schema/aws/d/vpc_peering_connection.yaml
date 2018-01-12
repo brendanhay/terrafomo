@@ -1,62 +1,62 @@
-_name: aws_vpc_peering_connection
 arguments:
   _owner_id:
     required: false
     help: (Optional) The AWS account ID of the owner of the requester VPC of the specific
       VPC Peering Connection to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _filter:
     required: false
     help: (Optional) Custom filter block as described below.
+    ignored: false
     type: Text
-    deprecated: false
   _id:
     required: false
     help: (Optional) The ID of the specific VPC Peering Connection to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _cidr_block:
     required: false
     help: (Optional) The CIDR block of the requester VPC of the specific VPC Peering
       Connection to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _peer_cidr_block:
     required: false
     help: (Optional) The CIDR block of the accepter VPC of the specific VPC Peering
       Connection to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _peer_owner_id:
     required: false
     help: (Optional) The AWS account ID of the owner of the accepter VPC of the specific
       VPC Peering Connection to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _peer_vpc_id:
     required: false
     help: (Optional) The ID of the accepter VPC of the specific VPC Peering Connection
       to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The ID of the requester VPC of the specific VPC Peering Connection
       to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _status:
     required: false
     help: (Optional) The status of the specific VPC Peering Connection to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired VPC Peering Connection.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_vpc_peering_connection
 attributes:
   accepter:
     help: ! '- A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide)

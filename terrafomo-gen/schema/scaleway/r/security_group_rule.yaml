@@ -1,35 +1,35 @@
-_name: scaleway_security_group_rule
 arguments:
   _direction:
     required: true
     help: (Required) direction of rule ( @inbound@ , @outbound@ )
+    ignored: false
     type: Text
-    deprecated: false
   _action:
     required: true
     help: (Required) action of rule ( @accept@ , @drop@ )
+    ignored: false
     type: Text
-    deprecated: false
   _protocol:
     required: true
     help: (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ )
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: false
     help: (Optional) port of the rule
+    ignored: false
     type: Text
-    deprecated: false
   _ip_range:
     required: true
     help: (Required) ip_range of rule
+    ignored: false
     type: Text
-    deprecated: false
   _security_group:
     required: true
     help: (Required) the security group which should be associated with this rule
+    ignored: false
     type: Text
-    deprecated: false
+name: scaleway_security_group_rule
 attributes:
   id:
     help: ! '- id of the new resource'

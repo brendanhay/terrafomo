@@ -1,4 +1,3 @@
-_name: google_compute_global_forwarding_rule
 arguments:
   _ip_address:
     required: false
@@ -6,54 +5,55 @@ arguments:
       be the literal IP address to be used, not the @self_link@ to a @google_compute_global_address@
       resource. (If using a @google_compute_global_address@ resource, use the @address@
       property instead of the @self_link@ property.)
+    ignored: false
     type: Text
-    deprecated: false
   _labels:
     required: false
     help: (Optional, </docs/providers/google/index.html#beta-features> ) A set of
       key/value label pairs to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_version:
     required: false
     help: (Optional) The IP Version that will be used by this resource's address.
       One of @"IPV4"@ or @"IPV6"@ .
+    ignored: false
     type: Text
-    deprecated: false
   _port_range:
     required: false
     help: (Optional) A range e.g. "1024-2048" or a single port "1024" (defaults to
       all ports!).
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Textual description field.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_protocol:
     required: false
     help: (Optional) The IP protocol to route, one of "TCP" "UDP" "AH" "ESP" or "SCTP".
       (default "TCP").
+    ignored: false
     type: Text
-    deprecated: false
   _target:
     required: true
     help: (Required) URL of target HTTP or HTTPS proxy.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_global_forwarding_rule
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

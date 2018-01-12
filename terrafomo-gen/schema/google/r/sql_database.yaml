@@ -1,21 +1,20 @@
-_name: google_sql_database
 arguments:
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the database.
+    ignored: false
     type: Text
-    deprecated: false
   _instance':
     required: true
     help: (Required) The name of containing instance.
+    ignored: false
     type: Text
-    deprecated: false
   _charset:
     required: false
     help: (Optional) The charset value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html>
@@ -23,8 +22,8 @@ arguments:
       more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features>
       , and have limited @charset@ support; they only support a value of @UTF8@ at
       creation time.
+    ignored: false
     type: Text
-    deprecated: false
   _collation:
     required: false
     help: (Optional) The collation value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html>
@@ -32,8 +31,9 @@ arguments:
       more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features>
       , and have limited @collation@ support; they only support a value of @en_US.UTF8@
       at creation time.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_sql_database
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

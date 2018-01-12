@@ -1,41 +1,41 @@
-_name: librato_alert
 arguments:
   _attributes:
     required: true
     help: ! '- A hash of additional attribtues for the alert. Attributes documented
       below.'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the alert.
+    ignored: false
     type: Text
-    deprecated: false
   _active:
     required: true
     help: ! '- whether the alert is active (can be triggered). Defaults to true.'
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: (Required) Description of the alert.
+    ignored: false
     type: Text
-    deprecated: false
   _condition:
     required: true
     help: ! '- A trigger condition for the alert. Conditions documented below.'
+    ignored: false
     type: Text
-    deprecated: false
   _rearm_seconds:
     required: true
     help: ! '- minimum amount of time between sending alert notifications, in seconds.'
+    ignored: false
     type: Text
-    deprecated: false
   _services:
     required: true
     help: ! '- list of notification service IDs.'
+    ignored: false
     type: Text
-    deprecated: false
+name: librato_alert
 attributes:
   active:
     help: ! '- whether the alert is active (can be triggered). Defaults to true.'

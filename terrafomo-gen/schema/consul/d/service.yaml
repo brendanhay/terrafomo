@@ -1,28 +1,28 @@
-_name: consul_catalog_service
 arguments:
   _query_options:
     required: false
     help: (Optional) See below.
+    ignored: false
     type: Text
-    deprecated: false
   _tag:
     required: false
     help: (Optional) A single tag that can be used to filter the list of nodes to
       return based on a single matching tag..
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The service name to select.
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) The Consul datacenter to query.  Defaults to the same value found
       in @query_options@ parameter specified below, or if that is empty, the @datacenter@
       value found in the Consul agent that this provider is configured to talk to.
+    ignored: false
     type: Text
-    deprecated: false
+name: consul_catalog_service
 attributes:
   tag:
     help: ! '- The name of the tag used to filter the list of nodes in @service@ .'

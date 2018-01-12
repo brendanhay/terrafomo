@@ -1,15 +1,15 @@
-_name: aws_ami_launch_permission
 arguments:
   _account_id:
     required: true
     help: ! '- (required) An AWS Account ID to add launch permissions.'
+    ignored: false
     type: Text
-    deprecated: false
   _image_id:
     required: true
     help: ! '- (required) A region-unique name for the AMI.'
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ami_launch_permission
 attributes:
   id:
     help: ! '- A combination of " @image_id@ - @account_id@ ".'

@@ -1,10 +1,10 @@
-_name: aws_iam_account_alias
 arguments:
   _account_alias:
     required: true
     help: ! '- The alias associated with the AWS account.'
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_account_alias
 attributes: {}
 about: The IAM Account Alias data source allows access to the account alias for the
   effective account in which Terraform is working.

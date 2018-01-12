@@ -1,10 +1,10 @@
-_name: librato_space
 arguments:
   _name:
     required: true
     help: (Required) The name of the space.
+    ignored: false
     type: Text
-    deprecated: false
+name: librato_space
 attributes:
   name:
     help: ! '- The name of the space.'

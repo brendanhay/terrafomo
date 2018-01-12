@@ -1,32 +1,32 @@
-_name: consul_key_prefix
 arguments:
   _token:
     required: false
     help: (Optional) The ACL token to use. This overrides the token that the agent
       provides by default.
+    ignored: false
     type: Text
-    deprecated: false
   _path_prefix:
     required: true
     help: (Required) Specifies the common prefix shared by all keys that will be managed
       by this resource instance. In most cases this will end with a slash, to manage
       a "folder" of keys.
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) The datacenter to use. This overrides the datacenter in the provider
       setup and the agent's default datacenter.
+    ignored: false
     type: Text
-    deprecated: false
   _subkeys:
     required: true
     help: (Required) A mapping from subkey name (which will be appended to the given
       @path_prefix@ ) to the value that should be stored at that key. Use slashes,
       as shown in the above example, to create "sub-folders" under the given path
       prefix.
+    ignored: false
     type: Text
-    deprecated: false
+name: consul_key_prefix
 attributes:
   datacenter:
     help: ! '- The datacenter the keys are being read/written to.'

@@ -1,21 +1,21 @@
-_name: aws_key_pair
 arguments:
   _key_name_prefix:
     required: false
     help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
       with @key_name@ .
+    ignored: false
     type: Text
-    deprecated: false
   _public_key:
     required: true
     help: (Required) The public key material.
+    ignored: false
     type: Text
-    deprecated: false
   _key_name:
     required: false
     help: (Optional) The name for the key pair.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_key_pair
 attributes:
   key_name:
     help: ! '- The key pair name.'

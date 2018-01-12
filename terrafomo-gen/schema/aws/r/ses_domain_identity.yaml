@@ -1,10 +1,10 @@
-_name: aws_ses_domain_identity
 arguments:
   _domain:
     required: true
     help: (Required) The domain name to assign to SES
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ses_domain_identity
 attributes:
   arn:
     help: ! '- The ARN of the domain identity.'

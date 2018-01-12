@@ -1,28 +1,28 @@
-_name: openstack_compute_floatingip_associate_v2
 arguments:
   _instance_id:
     required: true
     help: (Required) The instance to associte the floating IP with.
+    ignored: false
     type: Text
-    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Compute client. Keypairs
       are associated with accounts, but a Compute client is needed to create one.
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new floatingip_associate.
+    ignored: false
     type: Text
-    deprecated: false
   _fixed_ip:
     required: false
     help: (Optional) The specific IP address to direct traffic to.
+    ignored: false
     type: Text
-    deprecated: false
   _floating_ip:
     required: true
     help: (Required) The floating IP to associate.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_compute_floatingip_associate_v2
 attributes:
   instance_id:
     help: ! '- See Argument Reference above.'

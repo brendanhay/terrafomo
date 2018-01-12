@@ -1,25 +1,25 @@
-_name: influxdb_user
 arguments:
   _admin:
     required: false
     help: (Optional) Mark the user as admin.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name for the user.
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: true
     help: (Required) The password for the user.
+    ignored: false
     type: Text
-    deprecated: false
   _grant:
     required: false
     help: (Optional) A list of grants for non-admin users
+    ignored: false
     type: Text
-    deprecated: false
+name: influxdb_user
 attributes:
   admin:
     help: ! '- (Bool) indication if the user is an admin or not.'

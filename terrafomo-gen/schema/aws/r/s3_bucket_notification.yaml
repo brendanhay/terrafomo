@@ -1,26 +1,26 @@
-_name: aws_s3_bucket_notification
 arguments:
   _bucket:
     required: true
     help: (Required) The name of the bucket to put notification configuration.
+    ignored: false
     type: Text
-    deprecated: false
   _lambda_function:
     required: false
     help: (Optional, Multiple) Used to configure notifications to a Lambda Function
       (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _queue:
     required: false
     help: (Optional) The notification configuration to SQS Queue (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _topic:
     required: false
     help: (Optional) The notification configuration to SNS Topic (documented below).
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_s3_bucket_notification
 attributes: {}
 about: Provides a S3 bucket notification resource.
 examples: []

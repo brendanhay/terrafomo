@@ -1,41 +1,41 @@
-_name: librato_metric
 arguments:
   _attributes:
     required: true
     help: ! '- The attributes hash configures specific components of a metric’s visualization.'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The unique identifier of the metric.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: ! '- Text that can be used to explain precisely what the metric is measuring.'
+    ignored: false
     type: Text
-    deprecated: false
   _composite:
     required: true
     help: ! '- The definition of the composite metric.'
+    ignored: false
     type: Text
-    deprecated: false
   _period:
     required: true
     help: ! '- Number of seconds that is the standard reporting period of the metric.'
+    ignored: false
     type: Text
-    deprecated: false
   _display_name:
     required: true
     help: ! '- The name which will be used for the metric when viewing the Metrics
       website.'
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of metric to create (gauge, counter, or composite).
+    ignored: false
     type: Text
-    deprecated: false
+name: librato_metric
 attributes:
   display_name:
     help: ! '- The name which will be used for the metric when viewing the Metrics

@@ -1,20 +1,20 @@
-_name: aws_network_interface_attachment
 arguments:
   _instance_id:
     required: true
     help: (Required) Instance ID to attach.
+    ignored: false
     type: Text
-    deprecated: false
   _device_index:
     required: true
     help: (Required) Network interface index (int).
+    ignored: false
     type: Text
-    deprecated: false
   _network_interface_id:
     required: true
     help: (Required) ENI ID to attach.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_network_interface_attachment
 attributes:
   status:
     help: ! '- The status of the Network Interface Attachment.'

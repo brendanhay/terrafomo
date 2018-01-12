@@ -1,11 +1,11 @@
-_name: NS1Provider
 arguments:
   _apikey:
     required: true
     help: (Required) NS1 API token. It must be provided, but it can also be sourced
       from the @NS1_APIKEY@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: NS1Provider
 attributes: {}
 about: The NS1 provider exposes resources to interact with the NS1 REST API. The provider
   needs to be configured with the proper credentials before it can be used. Use the

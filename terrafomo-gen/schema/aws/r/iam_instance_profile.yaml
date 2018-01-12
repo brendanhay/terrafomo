@@ -1,4 +1,3 @@
-_name: aws_iam_instance_profile
 arguments:
   _roles:
     required: true
@@ -8,30 +7,31 @@ arguments:
       support and ask for a limit increase. WARNING: This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017>
       , as >= 2 roles are not possible. See <https://github.com/hashicorp/terraform/issues/11575>
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional, Forces new resource) The profile's name. If omitted, Terraform
       will assign a random, unique name.
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: false
     help: (Optional) The role name to include in the profile.
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique name beginning with the
       specified prefix. Conflicts with @name@ .
+    ignored: false
     type: Text
-    deprecated: false
   _path:
     required: false
     help: (Optional, default "/") Path in which to create the profile.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_instance_profile
 attributes:
   roles:
     help: ! '- The list of roles assigned to the instance profile. ( Deprecated )'

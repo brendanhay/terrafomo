@@ -1,28 +1,28 @@
-_name: aws_iam_role_policy
 arguments:
   _policy:
     required: true
     help: (Required) The policy document. This is a JSON formatted string. The heredoc
       syntax or @file@ function is helpful here.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the role policy. If omitted, Terraform will assign
       a random, unique name.
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: true
     help: (Required) The IAM role to attach to the policy.
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: false
     help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
       with @name@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_role_policy
 attributes:
   role:
     help: ! '- The name of the role associated with the policy.'

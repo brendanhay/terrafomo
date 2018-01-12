@@ -1,42 +1,42 @@
-_name: azurerm_route
 arguments:
   _next_hop_type:
     required: true
     help: (Required) The type of Azure hop the packet should be sent to. Possible
       values are @VirtualNetworkGateway@ , @VnetLocal@ , @Internet@ , @VirtualAppliance@
       and @None@
+    ignored: false
     type: Text
-    deprecated: false
   _next_hop_in_ip_address:
     required: false
     help: (Optional) Contains the IP address packets should be forwarded to. Next
       hop values are only allowed in routes where the next hop type is @VirtualAppliance@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the route. Changing this forces a new resource to
       be created.
+    ignored: false
     type: Text
-    deprecated: false
   _address_prefix:
     required: true
     help: (Required) The destination CIDR to which the route applies, such as @10.1.0.0/16@
+    ignored: false
     type: Text
-    deprecated: false
   _route_table_name:
     required: true
     help: (Required) The name of the route table within which create the route. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the route.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_route
 attributes:
   id:
     help: ! '- The Route ID.'

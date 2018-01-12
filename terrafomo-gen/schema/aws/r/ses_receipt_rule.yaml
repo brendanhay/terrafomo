@@ -1,75 +1,75 @@
-_name: aws_ses_receipt_rule
 arguments:
   _rule_set_name:
     required: true
     help: (Required) The name of the rule set
+    ignored: false
     type: Text
-    deprecated: false
   _add_header_action:
     required: false
     help: (Optional) A list of Add Header Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _recipients:
     required: false
     help: (Optional) A list of email addresses
+    ignored: false
     type: Text
-    deprecated: false
   _scan_enabled:
     required: false
     help: (Optional) If true, incoming emails will be scanned for spam and viruses
+    ignored: false
     type: Text
-    deprecated: false
   _enabled:
     required: false
     help: (Optional) If true, the rule will be enabled
+    ignored: false
     type: Text
-    deprecated: false
   _sns_action:
     required: false
     help: (Optional) A list of SNS Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the rule
+    ignored: false
     type: Text
-    deprecated: false
   _after:
     required: false
     help: (Optional) The name of the rule to place this rule after
+    ignored: false
     type: Text
-    deprecated: false
   _tls_policy:
     required: false
     help: (Optional) Require or Optional
+    ignored: false
     type: Text
-    deprecated: false
   _s3_action:
     required: false
     help: (Optional) A list of S3 Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _stop_action:
     required: false
     help: (Optional) A list of Stop Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _lambda_action:
     required: false
     help: (Optional) A list of Lambda Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _bounce_action:
     required: false
     help: (Optional) A list of Bounce Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _workmail_action:
     required: false
     help: (Optional) A list of WorkMail Action blocks. Documented below.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ses_receipt_rule
 attributes: {}
 about: Provides an SES receipt rule resource
 examples: []

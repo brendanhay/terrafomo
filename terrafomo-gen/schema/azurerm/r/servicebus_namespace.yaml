@@ -1,38 +1,38 @@
-_name: azurerm_servicebus_namespace
 arguments:
   _name:
     required: true
     help: (Required) Specifies the name of the ServiceBus Namespace resource . Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _capacity:
     required: false
     help: (Optional) Specifies the capacity of a Premium namespace. Can be 1, 2 or
       4.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _sku:
     required: true
     help: (Required) Defines which tier to use. Options are basic, standard or premium.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the namespace.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_servicebus_namespace
 attributes:
   id:
     help: ! '- The ServiceBus Namespace ID.'

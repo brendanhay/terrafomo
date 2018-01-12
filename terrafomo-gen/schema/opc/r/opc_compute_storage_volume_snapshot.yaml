@@ -1,38 +1,38 @@
-_name: opc_compute_storage_volume_snapshot
 arguments:
   _volume_name:
     required: true
     help: (Required) The name of the storage volume to create the snapshot from.
+    ignored: false
     type: Text
-    deprecated: false
   _parent_volume_bootable:
     required: true
     help: (Optional) A string value of whether or not the parent volume is 'bootable'
       or not. Defaults to @"false"@ .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Optional) The name of the storage volume snapshot. Will be generated if
       unspecified.
+    ignored: false
     type: Text
-    deprecated: false
   _collocated:
     required: true
     help: (Optional) Boolean specifying whether the snapshot is collocated or remote.
       Defaults to @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: (Optional) The description of the storage volume snapshot.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) Comma-separated strings that tag the storage volume.
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_storage_volume_snapshot
 attributes:
   status:
     help: ! '- Status of the snapshot.'

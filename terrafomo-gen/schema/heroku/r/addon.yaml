@@ -1,20 +1,20 @@
-_name: heroku_addon
 arguments:
   _plan:
     required: true
     help: (Required) The addon to add.
+    ignored: false
     type: Text
-    deprecated: false
   _config:
     required: false
     help: (Optional) Optional plan configuration.
+    ignored: false
     type: Text
-    deprecated: false
   _app:
     required: true
     help: (Required) The Heroku app to add to.
+    ignored: false
     type: Text
-    deprecated: false
+name: heroku_addon
 attributes:
   provider_id:
     help: ! '- The ID of the plan provider'

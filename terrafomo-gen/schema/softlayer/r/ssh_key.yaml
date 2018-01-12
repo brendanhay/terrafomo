@@ -1,20 +1,20 @@
-_name: softlayer_ssh_key
 arguments:
   _name:
     required: true
     help: (Required) A descriptive name used to identify an SSH key.
+    ignored: false
     type: Text
-    deprecated: false
   _public_key:
     required: true
     help: (Required) The public SSH key.
+    ignored: false
     type: Text
-    deprecated: false
   _notes:
     required: false
     help: (Optional) A small note about an SSH key to use at your discretion.
+    ignored: false
     type: Text
-    deprecated: false
+name: softlayer_ssh_key
 attributes:
   fingerprint:
     help: ! '- sequence of bytes to authenticate or lookup a longer SSH key.'

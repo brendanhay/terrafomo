@@ -1,15 +1,15 @@
-_name: aws_iam_role_policy_attachment
 arguments:
   _policy_arn:
     required: true
     help: (Required) - The ARN of the policy you want to apply
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: true
     help: (Required) - The role the policy should be applied to
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_role_policy_attachment
 attributes: {}
 about: Attaches a Managed IAM Policy to an IAM role
 examples: []

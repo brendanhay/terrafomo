@@ -1,20 +1,20 @@
-_name: vault_auth_backend
 arguments:
   _description:
     required: false
     help: (Optional) A description of the auth backend
+    ignored: false
     type: Text
-    deprecated: false
   _path:
     required: false
     help: (Optional) The path to mount the auth backend. This defaults to the name.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The name of the policy
+    ignored: false
     type: Text
-    deprecated: false
+name: vault_auth_backend
 attributes: {}
 about: ''
 examples: []

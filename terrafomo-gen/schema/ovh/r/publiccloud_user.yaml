@@ -1,16 +1,16 @@
-_name: ovh_publiccloud_user
 arguments:
   _project_id:
     required: true
     help: (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@
       environment variable is used.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: ! '- A description associated with the user.'
+    ignored: false
     type: Text
-    deprecated: false
+name: ovh_publiccloud_user
 attributes:
   openstack_rc:
     help: ! '- a convenient map representing an openstack_rc file. Note: no password

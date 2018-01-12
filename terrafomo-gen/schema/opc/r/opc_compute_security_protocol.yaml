@@ -1,4 +1,3 @@
-_name: opc_compute_security_protocol
 arguments:
   _src_ports:
     required: true
@@ -8,18 +7,18 @@ arguments:
       0 and 65535, inclusive. For ICMP, each port is an ICMP type, between 0 and 255,
       inclusive. If no source ports are specified, all source ports or ICMP types
       are allowed.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the security protocol.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the security protocol.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_protocol:
     required: true
     help: ! '(Optional) The protocol used in the data portion of the IP datagram.
@@ -27,13 +26,13 @@ arguments:
       ospf, pim, sctp, mplsip, all. Traffic is enabled by a security rule when the
       protocol in the packet matches the protocol specified here. If no protocol is
       specified, all protocols are allowed.'
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) List of tags that may be applied to the security protocol.
+    ignored: false
     type: Text
-    deprecated: false
   _dst_ports:
     required: true
     help: (Optional) Enter a list of port numbers or port range strings. Traffic is
@@ -42,8 +41,9 @@ arguments:
       port, between 0 and 65535, inclusive. For ICMP, each port is an ICMP type, between
       0 and 255, inclusive. If no destination ports are specified, all destination
       ports or ICMP types are allowed.
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_security_protocol
 attributes: {}
 about: The @opc_compute_security_protocol@ resource creates and manages a security
   protocol in an OPC identity domain.

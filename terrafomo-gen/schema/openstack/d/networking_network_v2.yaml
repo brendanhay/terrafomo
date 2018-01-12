@@ -1,37 +1,42 @@
-_name: openstack_networking_network_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Neutron client. A Neutron
       client is needed to retrieve networks ids. If omitted, the @region@ argument
       of the provider is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the network.
+    ignored: false
     type: Text
-    deprecated: false
   _matching_subnet_cidr:
     required: false
     help: (Optional) The CIDR of a subnet within the network.
+    ignored: false
     type: Text
-    deprecated: false
   _network_id:
     required: false
     help: (Optional) The ID of the network.
+    ignored: false
     type: Text
-    deprecated: false
+  _availability_zone_hints:
+    required: false
+    help: (Optional) The availability zone candidates for the network.
+    ignored: false
+    type: Text
   _status:
     required: false
     help: (Optional) The status of the network.
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the network.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_networking_network_v2
 attributes:
   admin_state_up:
     help: ! '- (Optional) The administrative state of the network.'
@@ -42,6 +47,9 @@ attributes:
     type: Text
   name:
     help: ! '- See Argument Reference above.'
+    type: Text
+  availability_zone_hints:
+    help: ! '- (Optional) The availability zone candidates for the network.'
     type: Text
   region:
     help: ! '- See Argument Reference above.'

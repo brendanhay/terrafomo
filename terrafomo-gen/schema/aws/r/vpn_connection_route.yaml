@@ -1,16 +1,16 @@
-_name: aws_vpn_connection_route
 arguments:
   _vpn_connection_id:
     required: true
     help: (Required) The ID of the VPN connection.
+    ignored: false
     type: Text
-    deprecated: false
   _destination_cidr_block:
     required: true
     help: (Required) The CIDR block associated with the local subnet of the customer
       network.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_vpn_connection_route
 attributes:
   vpn_connection_id:
     help: ! '- The ID of the VPN connection.'

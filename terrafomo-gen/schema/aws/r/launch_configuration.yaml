@@ -1,104 +1,104 @@
-_name: aws_launch_configuration
 arguments:
   _vpc_classic_link_id:
     required: false
     help: (Optional) The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic
       instances. (eg. @vpc-2730681a@ )
+    ignored: false
     type: Text
-    deprecated: false
   _associate_public_ip_address:
     required: false
     help: (Optional) Associate a public ip address with an instance in a VPC.
+    ignored: false
     type: Text
-    deprecated: false
   _image_id:
     required: true
     help: (Required) The EC2 image ID to launch.
+    ignored: false
     type: Text
-    deprecated: false
   _root_block_device:
     required: false
     help: (Optional) Customize details about the root block device of the instance.
       See <#block-devices> below for details.
+    ignored: false
     type: Text
-    deprecated: false
   _iam_instance_profile:
     required: false
     help: (Optional) The IAM instance profile to associate with launched instances.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the launch configuration. If you leave this blank,
       Terraform will auto-generate a unique name.
+    ignored: false
     type: Text
-    deprecated: false
   _placement_tenancy:
     required: false
     help: (Optional) The tenancy of the instance. Valid values are @"default"@ or
       @"dedicated"@ , see <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_CreateLaunchConfiguration.html>
       for more details
+    ignored: false
     type: Text
-    deprecated: false
   _instance_type:
     required: true
     help: (Required) The size of instance to launch.
+    ignored: false
     type: Text
-    deprecated: false
   _ebs_optimized:
     required: false
     help: (Optional) If true, the launched EC2 instance will be EBS-optimized.
+    ignored: false
     type: Text
-    deprecated: false
   _user_data:
     required: false
     help: (Optional) The user data to provide when launching the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_classic_link_security_groups:
     required: false
     help: (Optional) The IDs of one or more security groups for the specified ClassicLink-enabled
       VPC (eg. @sg-46ae3d11@ ).
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: false
     help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
       with @name@ .
+    ignored: false
     type: Text
-    deprecated: false
   _security_groups:
     required: false
     help: (Optional) A list of associated security group IDS.
+    ignored: false
     type: Text
-    deprecated: false
   _ebs_block_device:
     required: false
     help: (Optional) Additional EBS block devices to attach to the instance.  See
       <#block-devices> below for details.
+    ignored: false
     type: Text
-    deprecated: false
   _enable_monitoring:
     required: false
     help: (Optional) Enables/disables detailed monitoring. This is enabled by default.
+    ignored: false
     type: Text
-    deprecated: false
   _spot_price:
     required: false
     help: (Optional) The price to use for reserving spot instances.
+    ignored: false
     type: Text
-    deprecated: false
   _key_name:
     required: false
     help: (Optional) The key name that should be used for the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _ephemeral_block_device:
     required: false
     help: (Optional) Customize Ephemeral (also known as "Instance Store") volumes
       on the instance. See <#block-devices> below for details.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_launch_configuration
 attributes: {}
 about: Provides a resource to create a new launch configuration, used for autoscaling
   groups.

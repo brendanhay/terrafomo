@@ -1,27 +1,27 @@
-_name: aws_cloudwatch_log_metric_filter
 arguments:
   _pattern:
     required: true
     help: (Required) A valid <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/FilterAndPatternSyntax.html>
       for extracting metric data out of ingested log events.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A name for the metric filter.
+    ignored: false
     type: Text
-    deprecated: false
   _metric_transformation:
     required: true
     help: (Required) A block defining collection of information needed to define how
       metric data gets emitted. See below.
+    ignored: false
     type: Text
-    deprecated: false
   _log_group_name:
     required: true
     help: (Required) The name of the log group to associate the metric filter with.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_cloudwatch_log_metric_filter
 attributes:
   id:
     help: ! '- The name of the metric filter.'

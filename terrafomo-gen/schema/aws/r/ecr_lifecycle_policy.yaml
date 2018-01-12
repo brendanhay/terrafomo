@@ -1,17 +1,17 @@
-_name: aws_ecr_lifecycle_policy
 arguments:
   _policy:
     required: true
     help: (Required) The policy document. This is a JSON formatted string. See more
       details about <http://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters>
       in the official AWS docs.
+    ignored: false
     type: Text
-    deprecated: false
   _repository:
     required: true
     help: (Required) Name of the repository to apply the policy.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ecr_lifecycle_policy
 attributes:
   registry_id:
     help: ! '- The registry ID where the repository was created.'

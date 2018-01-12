@@ -1,28 +1,28 @@
-_name: alicloud_zones
 arguments:
   _available_instance_type:
     required: false
     help: (Optional) Limit search to specific instance type.
+    ignored: false
     type: Text
-    deprecated: false
   _available_resource_creation:
     required: false
     help: (Optional) Limit search to specific resource type. The following values
       are allowed @Instance@ , @Disk@ and @VSwitch@ .
+    ignored: false
     type: Text
-    deprecated: false
   _available_disk_category:
     required: false
     help: (Optional) Limit search to specific disk category. Can be either @cloud@
-      , @ephemeral@ , or @ephemeral_ssd@ .
+      , @cloud_efficiency@ , @cloud_ssd@ .
+    ignored: false
     type: Text
-    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save zones data source after running
       @terraform plan@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_zones
 attributes:
   available_disk_categories:
     help: ! '- Set of supported disk categories.'

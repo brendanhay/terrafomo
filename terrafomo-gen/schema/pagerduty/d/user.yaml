@@ -1,10 +1,10 @@
-_name: pagerduty_user
 arguments:
   _email:
     required: true
     help: (Required) The email to use to find a user in the PagerDuty API.
+    ignored: false
     type: Text
-    deprecated: false
+name: pagerduty_user
 attributes:
   name:
     help: ! '- The short name of the found user.'

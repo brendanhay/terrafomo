@@ -1,26 +1,26 @@
-_name: aws_lb_ssl_negotiation_policy
 arguments:
   _load_balancer:
     required: true
     help: (Required) The load balancer to which the policy should be attached.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the SSL negotiation policy.
+    ignored: false
     type: Text
-    deprecated: false
   _attribute:
     required: false
     help: ! '(Optional) An SSL Negotiation policy attribute. Each has two properties:'
+    ignored: false
     type: Text
-    deprecated: false
   _lb_port:
     required: true
     help: (Required) The load balancer port to which the policy should be applied.
       This must be an active listener on the load balancer.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lb_ssl_negotiation_policy
 attributes:
   attribute:
     help: ! '- The SSL Negotiation policy attributes.'

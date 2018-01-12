@@ -1,16 +1,16 @@
-_name: aws_availability_zone
 arguments:
   _name:
     required: false
     help: (Optional) The full name of the availability zone to select.
+    ignored: false
     type: Text
-    deprecated: false
   _state:
     required: false
     help: (Optional) A specific availability zone state to require. May be any of
       @"available"@ , @"information"@ , @"impaired"@ or @"available"@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_availability_zone
 attributes:
   state:
     help: ! '- The current state of the AZ.'

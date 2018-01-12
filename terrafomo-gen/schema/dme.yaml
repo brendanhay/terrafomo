@@ -1,23 +1,23 @@
-_name: DNSMadeEasyProvider
 arguments:
   _skey:
     required: true
     help: (Required) The DNSMadeEasy Secret key. This can also be specified with the
       @DME_SKEY@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _usesandbox:
     required: false
     help: (Optional) If true, the DNSMadeEasy sandbox will be used. This can also
       be specified with the @DME_USESANDBOX@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _akey:
     required: true
     help: (Required) The DNSMadeEasy API key. This can also be specified with the
       @DME_AKEY@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: DNSMadeEasyProvider
 attributes: {}
 about: The DNSMadeEasy provider is used to interact with the resources supported by
   DNSMadeEasy. The provider needs to be configured with the proper credentials before

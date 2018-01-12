@@ -1,15 +1,15 @@
-_name: aws_placement_group
 arguments:
   _name:
     required: true
     help: (Required) The name of the placement group.
+    ignored: false
     type: Text
-    deprecated: false
   _strategy:
     required: true
-    help: (Required) The placement strategy. The only supported value is @cluster@
+    help: (Required) The placement strategy.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_placement_group
 attributes:
   id:
     help: ! '- The name of the placement group.'

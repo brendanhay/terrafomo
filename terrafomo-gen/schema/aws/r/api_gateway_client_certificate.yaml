@@ -1,10 +1,10 @@
-_name: aws_api_gateway_client_certificate
 arguments:
   _description:
     required: false
     help: (Optional) The description of the client certificate.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_api_gateway_client_certificate
 attributes:
   pem_encoded_certificate:
     help: ! '- The PEM-encoded public key of the client certificate.'

@@ -1,10 +1,10 @@
-_name: aws_devicefarm_project
 arguments:
   _name:
     required: true
     help: (Required) The name of the project
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_devicefarm_project
 attributes:
   arn:
     help: ! '- The Amazon Resource Name of this project'

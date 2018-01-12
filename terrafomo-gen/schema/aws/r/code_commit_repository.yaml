@@ -1,22 +1,22 @@
-_name: aws_codecommit_repository
 arguments:
   _default_branch:
     required: false
     help: (Optional) The default branch of the repository. The branch specified here
       needs to exist.
+    ignored: false
     type: Text
-    deprecated: false
   _repository_name:
     required: true
     help: (Required) The name for the repository. This needs to be less than 100 characters.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the repository. This needs to be less than
       1000 characters
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_codecommit_repository
 attributes:
   arn:
     help: ! '- The ARN of the repository'

@@ -1,35 +1,35 @@
-_name: chef_environment
 arguments:
   _name:
     required: true
     help: (Required) The unique name to assign to the environment. This name will
       be used when nodes are created within the environment.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A human-friendly description of the environment. If not set,
       a placeholder of "Managed by Terraform" will be set.
+    ignored: false
     type: Text
-    deprecated: false
   _override_attributes_json:
     required: false
     help: (Optional) String containing a JSON-serialized object containing the override
       attributes for the environment.
+    ignored: false
     type: Text
-    deprecated: false
   _cookbook_constraints:
     required: false
     help: (Optional) Mapping of cookbook names to cookbook version constraints that
       should apply for this environment.
+    ignored: false
     type: Text
-    deprecated: false
   _default_attributes_json:
     required: false
     help: (Optional) String containing a JSON-serialized object containing the default
       attributes for the environment.
+    ignored: false
     type: Text
-    deprecated: false
+name: chef_environment
 attributes: {}
 about: An <http://docs.chef.io/environments.html> is a container for Chef nodes that
   share a set of attribute values and may have a set of version constraints for which

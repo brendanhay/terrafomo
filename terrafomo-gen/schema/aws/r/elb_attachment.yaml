@@ -1,15 +1,15 @@
-_name: aws_elb_attachment
 arguments:
   _elb:
     required: true
     help: (Required) The name of the ELB.
+    ignored: false
     type: Text
-    deprecated: false
   _instance':
     required: true
     help: (Required) Instance ID to place in the ELB pool.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_elb_attachment
 attributes: {}
 about: ! 'Provides an Elastic Load Balancer Attachment resource. ~> NOTE on ELB Instances
   and ELB Attachments: Terraform currently provides both a standalone ELB Attachment

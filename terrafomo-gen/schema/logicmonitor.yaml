@@ -1,23 +1,23 @@
-_name: LogicMonitorProvider
 arguments:
   _api_key:
     required: true
     help: (Required) LogicMonitor API key. This can also be set via the @LM_API_KEY@
       environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _api_id:
     required: true
     help: (Required) LogicMonitor API id. This can also be set via the @LM_API_ID@
       environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _company:
     required: true
     help: (Required) LogicMonitor company name. This can also be set via the @LM_COMPANY@
       environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: LogicMonitorProvider
 attributes: {}
 about: The LogicMonitor provider is used to interact with the resources supported
   by LogicMonitor. The provider needs to be configured with the proper credentials

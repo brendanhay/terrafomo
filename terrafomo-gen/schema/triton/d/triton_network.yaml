@@ -1,10 +1,10 @@
-_name: triton_network
 arguments:
   _name:
     required: true
     help: ! '- (string) The name of the network.'
+    ignored: false
     type: Text
-    deprecated: false
+name: triton_network
 attributes:
   id:
     help: ! '- (string) The ID of the network.'

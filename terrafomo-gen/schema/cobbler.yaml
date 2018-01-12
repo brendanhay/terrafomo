@@ -1,23 +1,23 @@
-_name: CobblerProvider
 arguments:
   _url:
     required: true
     help: (Required) The url to the Cobbler service. This can also be specified with
       the @COBBLER_URL@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: true
     help: (Required) The password to the Cobbler service. This can also be specified
       with the @COBBLER_PASSWORD@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _username:
     required: true
     help: (Required) The username to the Cobbler service. This can also be specified
       with the @COBBLER_USERNAME@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: CobblerProvider
 attributes: {}
 about: The Cobbler provider is used to interact with a locally installed <http://cobbler.github.io>
   service. The provider needs to be configured with the proper credentials before

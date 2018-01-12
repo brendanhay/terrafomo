@@ -1,22 +1,22 @@
-_name: template_dir
 arguments:
   _source_dir:
     required: true
     help: (Required) Path to the directory where the files to template reside.
+    ignored: false
     type: Text
-    deprecated: false
   _destination_dir:
     required: true
     help: (Required) Path to the directory where the templated files will be written.
+    ignored: false
     type: Text
-    deprecated: false
   _vars:
     required: false
     help: (Optional) Variables for interpolation within the template. Note that variables
       must all be primitives. Direct references to lists or maps will cause a validation
       error.
+    ignored: false
     type: Text
-    deprecated: false
+name: template_dir
 attributes: {}
 about: Renders a directory containing templates into a separate directory of corresponding
   rendered files. @template_dir@ is similar to <../d/file.html> but it walks a given

@@ -1,4 +1,3 @@
-_name: openstack_dns_zone_v2
 arguments:
   _region:
     required: false
@@ -6,52 +5,53 @@ arguments:
       are associated with accounts, but a Compute client is needed to create one.
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new DNS zone.
+    ignored: false
     type: Text
-    deprecated: false
   _attributes:
     required: false
     help: (Optional) Attributes for the DNS Service scheduler. Changing this creates
       a new zone.
+    ignored: false
     type: Text
-    deprecated: false
   _masters:
     required: false
     help: (Optional) An array of master DNS servers. For when @type@ is @SECONDARY@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the zone. Note the @.@ at the end of the name. Changing
       this creates a new DNS zone.
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: false
     help: (Optional) The email contact for the zone record.
+    ignored: false
     type: Text
-    deprecated: false
   _ttl:
     required: false
     help: (Optional) The time to live (TTL) of the zone.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the zone.
+    ignored: false
     type: Text
-    deprecated: false
   _value_specs:
     required: false
     help: (Optional) Map of additional options. Changing this creates a new zone.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: false
     help: (Optional) The type of zone. Can either be @PRIMARY@ or @SECONDARY@ . Changing
       this creates a new zone.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_dns_zone_v2
 attributes:
   ttl:
     help: ! '- See Argument Reference above.'

@@ -1,20 +1,20 @@
-_name: aws_nat_gateway
 arguments:
   _subnet_id:
     required: true
     help: (Required) The Subnet ID of the subnet in which to place the gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _allocation_id:
     required: true
     help: (Required) The Allocation ID of the Elastic IP address for the gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_nat_gateway
 attributes:
   private_ip:
     help: ! '- The private IP address of the NAT Gateway.'

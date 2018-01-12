@@ -1,5 +1,5 @@
-_name: fastly_ip_ranges
 arguments: {}
+name: fastly_ip_ranges
 attributes: {}
 about: Use this data source to get the <https://docs.fastly.com/guides/securing-communications/accessing-fastlys-ip-ranges>
   of Fastly edge nodes.

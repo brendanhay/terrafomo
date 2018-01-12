@@ -1,58 +1,58 @@
-_name: cloudstack_vpn_customer_gateway
 arguments:
   _ike_lifetime:
     required: false
     help: (Optional) The IKE lifetime of phase 2 VPN connection to this VPN Customer
       Gateway in seconds (defaults 86400)
+    ignored: false
     type: Text
-    deprecated: false
   _dpd:
     required: false
     help: (Optional) If DPD is enabled for the related VPN connection (defaults false)
+    ignored: false
     type: Text
-    deprecated: false
   _gateway:
     required: true
     help: (Required) The public IP address of the related VPN Gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The name or ID of the project to create this VPN Customer Gateway
       in. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the VPN Customer Gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _cidr:
     required: true
     help: (Required) The CIDR block that needs to be routed through this gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _ipsec_psk:
     required: true
     help: (Required) The IPSEC pre-shared key used for this gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _ike_policy:
     required: true
     help: (Required) The IKE policy to use for this VPN Customer Gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _esp_lifetime:
     required: false
     help: (Optional) The ESP lifetime of phase 2 VPN connection to this VPN Customer
       Gateway in seconds (defaults 86400)
+    ignored: false
     type: Text
-    deprecated: false
   _esp_policy:
     required: true
     help: (Required) The ESP policy to use for this VPN Customer Gateway.
+    ignored: false
     type: Text
-    deprecated: false
+name: cloudstack_vpn_customer_gateway
 attributes:
   esp_lifetime:
     help: ! '- The ESP lifetime of phase 2 VPN connection to this VPN Customer Gateway.'

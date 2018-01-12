@@ -1,18 +1,18 @@
-_name: aws_elastic_beanstalk_solution_stack
 arguments:
   _name_regex:
     required: true
     help: ! '- A regex string to apply to the solution stack list returned by AWS.
       See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html>
       from AWS documentation for reference solution stack names.'
+    ignored: false
     type: Text
-    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent solution
       stack.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_elastic_beanstalk_solution_stack
 attributes:
   name:
     help: ! '- The name of the solution stack.'

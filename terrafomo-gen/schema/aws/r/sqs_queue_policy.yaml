@@ -1,15 +1,15 @@
-_name: aws_sqs_queue_policy
 arguments:
   _policy:
     required: true
     help: (Required) The JSON policy for the SQS queue
+    ignored: false
     type: Text
-    deprecated: false
   _queue_url:
     required: true
     help: (Required) The URL of the SQS Queue to which to attach the policy
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_sqs_queue_policy
 attributes: {}
 about: Allows you to set a policy of an SQS Queue while referencing ARN of the queue
   within the policy.

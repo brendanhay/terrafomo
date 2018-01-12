@@ -1,4 +1,3 @@
-_name: google_sql_database_instance
 arguments:
   _region:
     required: true
@@ -6,8 +5,8 @@ arguments:
       SQL instance regions do not line up with the Google Compute Engine (GCE) regions,
       and Cloud SQL is not available in all regions - choose from one of the options
       listed <https://cloud.google.com/sql/docs/mysql/instance-locations> .
+    ignored: false
     type: Text
-    deprecated: false
   _database_version:
     required: false
     help: ! '(Optional, Default: @MYSQL_5_6@ ) The MySQL version to use. Can be @MYSQL_5_6@
@@ -15,47 +14,48 @@ arguments:
       or @MYSQL_5_6@ for first-generation instances. See <https://cloud.google.com/sql/docs/1st-2nd-gen-differences>
       for more information. @POSTGRES_9_6@ support is in </docs/providers/google/index.html#beta-features>
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _master_instance_name:
     required: false
     help: (Optional) The name of the instance that will act as the master in the replication
       setup. Note, this requires the master to have @binary_log_enabled@ set, as well
       as existing backups.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional, Computed) The name of the instance. If the name is left blank,
       Terraform will randomly generate one when the instance is first created. This
       is done because after a name is used, it cannot be reused for up to <https://cloud.google.com/sql/docs/delete-instance>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _settings:
     required: true
     help: (Required) The settings to use for the database. The configuration is detailed
       below.
+    ignored: false
     type: Text
-    deprecated: false
   _replica_configuration:
     required: false
     help: (Optional) The configuration for replication. The configuration is detailed
       below.
+    ignored: false
     type: Text
-    deprecated: false
   _connection_name:
     required: false
     help: (Optional) The connection name of the instance to be used in connection
       strings.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_sql_database_instance
 attributes:
   ip_address.0.ip_address:
     help: ! '- The IPv4 address assigned.'

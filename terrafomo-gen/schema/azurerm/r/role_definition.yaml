@@ -1,4 +1,3 @@
-_name: azurerm_role_definition
 arguments:
   _assignable_scopes:
     required: true
@@ -6,38 +5,39 @@ arguments:
       as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@
       , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the Role Definition. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the Role Definition.
+    ignored: false
     type: Text
-    deprecated: false
   _permissions:
     required: true
     help: (Required) A @permissions@ block as defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _scope:
     required: true
     help: (Required) The scope at which the Role Definition applies too, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@
       , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@
       , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@
       . Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _role_definition_id:
     required: true
     help: (Required) A unique UUID/GUID which identifies this role. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_role_definition
 attributes:
   id:
     help: ! '- The Role Definition ID.'

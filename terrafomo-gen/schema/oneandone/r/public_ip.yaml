@@ -1,26 +1,26 @@
-_name: oneandone_ip
 arguments:
   _ip_address:
     required: true
     help: ! '- (Computed) The IP address.'
+    ignored: false
     type: Text
-    deprecated: false
   _reverse_dns:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@ .
+    ignored: false
     type: Text
-    deprecated: false
   _ip_type:
     required: true
     help: (Required) IP type. Can be @IPV4@ or @IPV6@
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_ip
 attributes: {}
 about: Manages a Public IP on 1&1
 examples: []

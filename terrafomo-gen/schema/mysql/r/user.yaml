@@ -1,29 +1,29 @@
-_name: mysql_user
 arguments:
   _host:
     required: false
     help: (Optional) The source host of the user. Defaults to "localhost".
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: false
     help: (Optional) Deprecated alias of @plaintext_password@ , whose value is stored
       as plaintext in state . Prefer to use @plaintext_password@ instead, which stores
       the password as an unsalted hash.
+    ignored: false
     type: Text
-    deprecated: false
   _user:
     required: true
     help: (Required) The name of the user.
+    ignored: false
     type: Text
-    deprecated: false
   _plaintext_password:
     required: false
     help: (Optional) The password for the user. This must be provided in plain text,
       so the data source for it must be secured. An unsalted hash of the provided
       password is stored in state.
+    ignored: false
     type: Text
-    deprecated: false
+name: mysql_user
 attributes: {}
 about: ! 'The @mysql_user@ resource creates and manages a user on a MySQL server.
   ~> Note: The password for the user is provided in plain text, and is obscured by

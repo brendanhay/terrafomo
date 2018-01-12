@@ -1,84 +1,84 @@
-_name: cloudstack_template
 arguments:
   _url:
     required: true
     help: (Required) The URL of where the template is hosted. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _display_text:
     required: false
     help: (Optional) The display name of the template.
+    ignored: false
     type: Text
-    deprecated: false
   _password_enabled:
     required: false
     help: (Optional) Set to indicate if the template should be password enabled (defaults
       false)
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The name or ID of the project to create this template for. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _is_ready_timeout:
     required: false
     help: (Optional) The maximum time in seconds to wait until the template is ready
       for use (defaults 300 seconds)
+    ignored: false
     type: Text
-    deprecated: false
   _is_extractable:
     required: false
     help: (Optional) Set to indicate if the template is extractable (defaults false)
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the template.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (Required) The name or ID of the zone where this template will be created.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _format:
     required: true
     help: (Required) The format of the template. Valid values are @QCOW2@ , @RAW@
       , and @VHD@ .
+    ignored: false
     type: Text
-    deprecated: false
   _os_type:
     required: true
     help: (Required) The OS Type that best represents the OS of this template.
+    ignored: false
     type: Text
-    deprecated: false
   _is_dynamically_scalable:
     required: false
     help: (Optional) Set to indicate if the template contains tools to support dynamic
       scaling of VM cpu/memory (defaults false)
+    ignored: false
     type: Text
-    deprecated: false
   _is_featured:
     required: false
     help: (Optional) Set to indicate if the template is featured (defaults false)
+    ignored: false
     type: Text
-    deprecated: false
   _hypervisor:
     required: true
     help: (Required) The target hypervisor for the template. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _is_public:
     required: false
     help: (Optional) Set to indicate if the template is available for all accounts
       (defaults true)
+    ignored: false
     type: Text
-    deprecated: false
+name: cloudstack_template
 attributes:
   is_public:
     help: ! '- Set to "true" if the template is public.'

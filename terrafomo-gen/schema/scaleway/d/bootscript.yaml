@@ -1,20 +1,20 @@
-_name: scaleway_bootscript
 arguments:
   _name_filter:
     required: false
     help: (Optional) Regexp to match Bootscript name by
+    ignored: false
     type: Text
-    deprecated: false
   _architecture:
     required: false
     help: (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) Exact name of desired Bootscript
+    ignored: false
     type: Text
-    deprecated: false
+name: scaleway_bootscript
 attributes:
   initrd:
     help: ! '- URL to initial ramdisk content'

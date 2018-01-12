@@ -1,65 +1,65 @@
-_name: vcd_edgegateway_vpn
 arguments:
   _peer_id:
     required: true
     help: (Required) - Peer ID
+    ignored: false
     type: Text
-    deprecated: false
   _peer_ip_address:
     required: true
     help: (Required) - Peer IP Address
+    ignored: false
     type: Text
-    deprecated: false
   _local_ip_address:
     required: true
     help: (Required) - Local IP Address
+    ignored: false
     type: Text
-    deprecated: false
   _local_subnets:
     required: true
     help: (Required) - List of Local Subnets see <#localsubnets> below for details.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the VPN
+    ignored: false
     type: Text
-    deprecated: false
   _local_id:
     required: true
     help: (Required) - Local ID
+    ignored: false
     type: Text
-    deprecated: false
   _edge_gateway:
     required: true
     help: (Required) The name of the edge gateway on which to apply the Firewall Rules
+    ignored: false
     type: Text
-    deprecated: false
   _mtu:
     required: true
     help: (Required) - The MTU setting
+    ignored: false
     type: Text
-    deprecated: false
   _encryption_protocol:
     required: true
     help: (Required) - E.g. @AES256@
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: (Required) A description for the VPN
+    ignored: false
     type: Text
-    deprecated: false
   _shared_secret:
     required: true
     help: (Required) - Shared Secret
+    ignored: false
     type: Text
-    deprecated: false
   _peer_subnets:
     required: true
     help: (Required) - List of Peer Subnets see <#peersubnets> below for details.
+    ignored: false
     type: Text
-    deprecated: false
+name: vcd_edgegateway_vpn
 attributes: {}
 about: Provides a vCloud Director IPsec VPN. This can be used to create, modify, and
   delete VPN settings and rules.

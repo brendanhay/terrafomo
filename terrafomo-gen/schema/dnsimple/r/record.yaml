@@ -1,35 +1,35 @@
-_name: dnsimple_record
 arguments:
   _value:
     required: true
     help: (Required) The value of the record
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the record
+    ignored: false
     type: Text
-    deprecated: false
   _ttl:
     required: false
     help: (Optional) The TTL of the record
+    ignored: false
     type: Text
-    deprecated: false
   _domain:
     required: true
     help: (Required) The domain to add the record to
+    ignored: false
     type: Text
-    deprecated: false
   _priority:
     required: false
     help: (Optional) The priority of the record - only useful for some record types
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of the record
+    ignored: false
     type: Text
-    deprecated: false
+name: dnsimple_record
 attributes:
   ttl:
     help: ! '- The TTL of the record'

@@ -1,21 +1,21 @@
-_name: aws_iam_server_certificate
 arguments:
   _latest:
     required: true
     help: ! '- sort results by expiration date. returns the certificate with expiration
       date in furthest in the future.'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: ! '- exact name of the cert to lookup'
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: true
     help: ! '- prefix of cert to filter by'
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_server_certificate
 attributes: {}
 about: Use this data source to lookup information about IAM Server Certificates.
 examples: []

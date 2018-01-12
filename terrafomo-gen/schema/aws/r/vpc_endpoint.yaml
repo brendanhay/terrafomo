@@ -1,27 +1,27 @@
-_name: aws_vpc_endpoint
 arguments:
   _policy:
     required: false
     help: (Optional) A policy to attach to the endpoint that controls access to the
       service.
+    ignored: false
     type: Text
-    deprecated: false
   _service_name:
     required: true
     help: (Required) The AWS service name, in the form @com.amazonaws.region.service@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _route_table_ids:
     required: false
     help: (Optional) One or more route table IDs.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: true
     help: (Required) The ID of the VPC in which the endpoint will be used.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_vpc_endpoint
 attributes:
   prefix_list_id:
     help: ! '- The prefix list ID of the exposed service.'

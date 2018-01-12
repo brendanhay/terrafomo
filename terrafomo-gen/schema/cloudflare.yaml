@@ -1,17 +1,17 @@
-_name: CloudflareProvider
 arguments:
   _token:
     required: true
     help: (Required) The Cloudflare API token. This can also be specified with the
       @CLOUDFLARE_TOKEN@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: true
     help: (Required) The email associated with the account. This can also be specified
       with the @CLOUDFLARE_EMAIL@ shell environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: CloudflareProvider
 attributes: {}
 about: The Cloudflare provider is used to interact with the DNS resources supported
   by Cloudflare. The provider needs to be configured with the proper credentials before

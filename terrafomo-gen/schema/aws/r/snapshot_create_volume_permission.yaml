@@ -1,15 +1,15 @@
-_name: aws_snapshot_create_volume_permission
 arguments:
   _account_id:
     required: true
     help: ! '- (required) An AWS Account ID to add create volume permissions'
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot_id:
     required: true
     help: ! '- (required) A snapshot ID'
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_snapshot_create_volume_permission
 attributes:
   id:
     help: ! '- A combination of " @snapshot_id@ - @account_id@ ".'

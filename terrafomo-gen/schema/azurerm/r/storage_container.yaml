@@ -1,30 +1,30 @@
-_name: azurerm_storage_container
 arguments:
   _storage_account_name:
     required: true
     help: (Required) Specifies the storage account in which to create the storage
       container. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the storage container. Must be unique within the
       storage service the container is located.
+    ignored: false
     type: Text
-    deprecated: false
   _container_access_type:
     required: false
     help: (Optional) The 'interface' for access the container provides. Can be either
       @blob@ , @container@ or @private@ . Defaults to @private@ . Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the storage
       container. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_storage_container
 attributes:
   id:
     help: ! '- The storage container Resource ID.'

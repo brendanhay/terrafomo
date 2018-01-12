@@ -1,18 +1,18 @@
-_name: google_compute_zones
 arguments:
   _region:
     required: true
     help: (Optional) - Region from which to list available zones. Defaults to region
       declared in the provider.
+    ignored: false
     type: Text
-    deprecated: false
   _status:
     required: true
     help: (Optional) - Allows to filter list of zones based on their current status.
       Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available
       zones - both @UP@ and @DOWN@ ).
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_zones
 attributes:
   names:
     help: ! '- A list of zones available in the given region'

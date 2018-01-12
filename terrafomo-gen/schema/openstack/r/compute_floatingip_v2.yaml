@@ -1,4 +1,3 @@
-_name: openstack_compute_floatingip_v2
 arguments:
   _region:
     required: false
@@ -6,14 +5,15 @@ arguments:
       client is needed to create a floating IP that can be used with a compute instance.
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new floating IP (which may or may not have a different address).
+    ignored: false
     type: Text
-    deprecated: false
   _pool:
     required: true
     help: (Required) The name of the pool from which to obtain the floating IP. Changing
       this creates a new floating IP.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_compute_floatingip_v2
 attributes:
   instance_id:
     help: ! '- UUID of the compute instance associated with the floating IP.'
@@ -31,6 +31,8 @@ attributes:
     help: ! '- The fixed IP address corresponding to the floating IP.'
     type: Text
 about: Manages a V2 floating IP resource within OpenStack Nova (compute) that can
-  be used for compute instances. These are similar to Neutron (networking) floating
-  IP resources, but only networking floating IPs can be used with load balancers.
+  be used for compute instances. Please note that managing floating IPs through the
+  OpenStack Compute API has been deprecated. Unless you are using an older OpenStack
+  environment, it is recommended to use the <networking_floatingip_v2.html> resource
+  instead, which uses the OpenStack Networking API.
 examples: []

@@ -1,5 +1,5 @@
-_name: profitbricks_user
 arguments: {}
+name: profitbricks_user
 attributes: {}
 about: Manages users and list users and groups associated.
 examples: []

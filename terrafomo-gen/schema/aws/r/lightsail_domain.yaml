@@ -1,10 +1,10 @@
-_name: aws_lightsail_domain
 arguments:
   _domain_name:
     required: true
     help: (Required) The name of the Lightsail domain to manage
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lightsail_domain
 attributes:
   arn:
     help: ! '- The ARN of the Lightsail domain'

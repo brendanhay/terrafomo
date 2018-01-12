@@ -1,4 +1,3 @@
-_name: opc_compute_ip_association
 arguments:
   _parent_pool:
     required: true
@@ -6,13 +5,14 @@ arguments:
       reserved IP address, use the prefix @ipreservation:@ followed by the name of
       the IP reservation. To allocate an IP address from a pool, use the prefix @ippool:@
       , e.g. @ippool:/oracle/public/ippool@ .
+    ignored: false
     type: Text
-    deprecated: false
   _vcable:
     required: true
     help: (Required) The vcable of the instance to associate the IP address with.
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_ip_association
 attributes:
   name:
     help: The name of the IP Association

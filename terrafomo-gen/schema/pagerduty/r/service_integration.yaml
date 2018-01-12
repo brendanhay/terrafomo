@@ -1,27 +1,26 @@
-_name: pagerduty_service_integration
 arguments:
   _service:
-    required: false
-    help: (Optional) The ID of the service the integration should belong to.
+    required: true
+    help: (Required) The ID of the service the integration should belong to.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the service integration.
+    ignored: false
     type: Text
-    deprecated: false
   _integration_key:
     required: false
     help: (Optional) This is the unique key used to route events to this integration
       when received via the PagerDuty Events API.
+    ignored: false
     type: Text
-    deprecated: false
   _integration_email:
     required: false
     help: (Optional) This is the unique fully-qualified email address used for routing
       emails to this integration for processing.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: false
     help: ! '(Optional) The service type. Can be: @aws_cloudwatch_inbound_integration@
@@ -30,14 +29,15 @@ arguments:
       be @create_alerts_and_incidents@ ), @generic_email_inbound_integration@ , @generic_events_api_inbound_integration@
       , @keynote_inbound_integration@ , @nagios_inbound_integration@ , @pingdom_inbound_integration@
       or @sql_monitor_inbound_integration@ .'
+    ignored: false
     type: Text
-    deprecated: false
   _vendor:
     required: false
     help: (Optional) The ID of the vendor the integration should integrate with (e.g
       Datadog or Amazon Cloudwatch).
+    ignored: false
     type: Text
-    deprecated: false
+name: pagerduty_service_integration
 attributes:
   integration_email:
     help: ! '- This is the unique fully-qualified email address used for routing emails

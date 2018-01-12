@@ -1,55 +1,55 @@
-_name: google_compute_disk
 arguments:
   _labels:
     required: false
     help: (Optional) A set of key/value label pairs to assign to the image.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _image:
     required: false
     help: ! '(Optional) The image from which to initialize this disk. This can be
       one of: the image''s @self_link@ , of a full name and version, e.g. @debian-8-jessie-v20170523@'
+    ignored: false
     type: Text
-    deprecated: false
   _disk_encryption_key_raw:
     required: false
     help: (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption),
       encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this disk.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (Required) The zone where this disk will be available.
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: false
     help: (Optional) The size of the image in gigabytes. If not specified, it will
       inherit the size of its base image.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: false
     help: (Optional) The GCE disk type.
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot:
     required: false
     help: (Optional) Name of snapshot from which to initialize this disk.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_disk
 attributes:
   users:
     help: ! '- The Users of the created resource.'

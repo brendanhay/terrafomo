@@ -1,17 +1,17 @@
-_name: cloudstack_vpn_connection
 arguments:
   _vpn_gateway_id:
     required: true
     help: (Required) The VPN Gateway ID to connect. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _customer_gateway_id:
     required: true
     help: (Required) The Customer Gateway ID to connect. Changing this forces a new
       resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: cloudstack_vpn_connection
 attributes:
   id:
     help: ! '- The ID of the VPN Connection.'

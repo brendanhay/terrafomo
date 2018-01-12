@@ -6,7 +6,7 @@
 
 module Terrafomo.Gen.Schema where
 
-import Data.Aeson      (FromJSON, ToJSON)
+import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:), (.:?))
 import Data.Function   (on)
 import Data.Map.Strict (Map)
 import Data.Monoid     (First, Last (Last))
@@ -35,7 +35,7 @@ instance ToJSON SchemaType where
     toJSON = JSON.toJSON . show
 
 data Schema = Schema
-    { schema_Name      :: !Text
+    { schemaName       :: !Text
     , schemaAbout      :: !(Maybe Text)
     , schemaExamples   :: ![Example]
     , schemaArguments  :: !(Map Text Arg)
@@ -44,7 +44,7 @@ data Schema = Schema
 
 instance Semigroup Schema where
     (<>) parsed saved = Schema
-        { schema_Name      = schema_Name    parsed
+        { schemaName       = schemaName      parsed
         , schemaAbout      = schemaAbout    parsed
         , schemaExamples   = schemaExamples parsed
         , schemaArguments  =
@@ -58,28 +58,34 @@ instance ToJSON Schema where
     toJSON = JSON.genericToJSON (JSON.options "schema")
 
 instance FromJSON Schema where
-    parseJSON = JSON.genericParseJSON (JSON.options "schema")
+    parseJSON = JSON.withObject "Schema" $ \o -> do
+        schemaName       <- o .:  "name"
+        schemaAbout      <- o .:? "about"
+        schemaExamples   <- o .:? "examples"   .!= []
+        schemaArguments  <- o .:? "arguments"  .!= mempty
+        schemaAttributes <- o .:? "attributes" .!= mempty
+        pure Schema{..}
 
 applyDeprecations :: Schema -> Schema
 applyDeprecations x = x
     { schemaArguments =
-        Map.filter ((/= pure True) . argDeprecated) (schemaArguments x)
+        Map.filter ((/= pure True) . argIgnored) (schemaArguments x)
     }
 
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg
-    { argHelp       :: !(First Text)
-    , argRequired   :: !(Last  Bool)
-    , argDeprecated :: !(Last  Bool) -- FIXME: Should be added to 'Attr' too.
-    , argType       :: !(Last  Text)
+    { argHelp     :: !(Last Text)
+    , argRequired :: !(Last Bool)
+    , argIgnored  :: !(Last Bool) -- FIXME: Should be added to 'Attr' too.
+    , argType     :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
 instance Semigroup Arg where
     (<>) parsed saved = Arg
-        { argHelp       = on (<>) argHelp       parsed saved
-        , argRequired   = on (<>) argRequired   parsed saved
-        , argDeprecated = on (<>) argDeprecated parsed saved
-        , argType       = on (<>) argType       parsed saved
+        { argHelp     = on (<>) argHelp     parsed saved
+        , argRequired = on (<>) argRequired parsed saved
+        , argIgnored  = on (<>) argIgnored  parsed saved
+        , argType     = on (<>) argType     parsed saved
         }
 
 instance ToJSON Arg where

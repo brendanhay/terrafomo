@@ -1,45 +1,45 @@
-_name: aws_cognito_identity_pool
 arguments:
   _allow_unauthenticated_identities:
     required: true
     help: (Required) - Whether the identity pool supports unauthenticated logins or
       not.
+    ignored: false
     type: Text
-    deprecated: false
   _developer_provider_name:
     required: true
     help: (Optional) - The "domain" by which Cognito will refer to your users. This
       name acts as a placeholder that allows your backend and the Cognito service
       to communicate about the developer provider.
+    ignored: false
     type: Text
-    deprecated: false
   _identity_pool_name:
     required: true
     help: (Required) - The Cognito Identity Pool name.
+    ignored: false
     type: Text
-    deprecated: false
   _cognito_identity_providers:
     required: true
     help: (Optional) - An array of <#cognito-identity-providers> and their client
       IDs.
+    ignored: false
     type: Text
-    deprecated: false
   _supported_login_providers:
     required: true
     help: (Optional) - Key-Value pairs mapping provider names to provider app IDs.
+    ignored: false
     type: Text
-    deprecated: false
   _openid_connect_provider_arns:
     required: true
     help: (Optional) - A list of OpendID Connect provider ARNs.
+    ignored: false
     type: Text
-    deprecated: false
   _saml_provider_arns:
     required: true
     help: (Optional) - An array of Amazon Resource Names (ARNs) of the SAML provider
       for your identity.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_cognito_identity_pool
 attributes: {}
 about: Provides an AWS Cognito Identity Pool.
 examples: []

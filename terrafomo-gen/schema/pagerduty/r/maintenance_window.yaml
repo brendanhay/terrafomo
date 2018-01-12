@@ -1,29 +1,29 @@
-_name: pagerduty_maintenance_window
 arguments:
   _end_time:
     required: true
     help: (Required) The maintenance window's end time. This is when the services
       will start creating incidents again. This date must be in the future and after
       the @start_time@ .
+    ignored: false
     type: Text
-    deprecated: false
   _start_time:
     required: true
     help: (Required) The maintenance window's start time. This is when the services
       will stop creating incidents. If this date is in the past, it will be updated
       to be the current time.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description for the maintenance window.
+    ignored: false
     type: Text
-    deprecated: false
   _services:
     required: true
     help: (Required) A list of service IDs to include in the maintenance window.
+    ignored: false
     type: Text
-    deprecated: false
+name: pagerduty_maintenance_window
 attributes:
   id:
     help: ! '- The ID of the maintenance window.'

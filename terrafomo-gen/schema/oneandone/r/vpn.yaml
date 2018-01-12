@@ -1,31 +1,31 @@
-_name: oneandone_vpn
 arguments:
   _name:
     required: true
     help: (Required) The name of the VPN
+    ignored: false
     type: Text
-    deprecated: false
   _download_path:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _file_name:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_vpn
 attributes: {}
 about: Manages a VPN on 1&1
 examples: []

@@ -1,20 +1,20 @@
-_name: vcd_snat
 arguments:
   _external_ip:
     required: true
     help: (Required) One of the external IPs available on your Edge Gateway
+    ignored: false
     type: Text
-    deprecated: false
   _edge_gateway:
     required: true
     help: (Required) The name of the edge gateway on which to apply the SNAT
+    ignored: false
     type: Text
-    deprecated: false
   _internal_ip:
     required: true
     help: (Required) The IP or IP Range of the VM(s) to map from
+    ignored: false
     type: Text
-    deprecated: false
+name: vcd_snat
 attributes: {}
 about: Provides a vCloud Director SNAT resource. This can be used to create, modify,
   and delete source NATs to allow vApps to send external traffic.

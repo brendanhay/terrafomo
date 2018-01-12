@@ -1,15 +1,15 @@
-_name: aws_internet_gateway
 arguments:
   _vpc_id:
     required: true
     help: (Required) The VPC ID to create in.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_internet_gateway
 attributes:
   id:
     help: ! '- The ID of the Internet Gateway.'

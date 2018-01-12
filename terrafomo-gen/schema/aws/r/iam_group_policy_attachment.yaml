@@ -1,15 +1,15 @@
-_name: aws_iam_group_policy_attachment
 arguments:
   _policy_arn:
     required: true
     help: (Required) - The ARN of the policy you want to apply
+    ignored: false
     type: Text
-    deprecated: false
   _group:
     required: true
     help: (Required) - The group the policy should be applied to
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_group_policy_attachment
 attributes: {}
 about: Attaches a Managed IAM Policy to an IAM group
 examples: []

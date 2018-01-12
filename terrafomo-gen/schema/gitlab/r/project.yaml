@@ -1,57 +1,57 @@
-_name: gitlab_project
 arguments:
   _default_branch:
     required: false
     help: (Optional) The default branch for the project.
+    ignored: false
     type: Text
-    deprecated: false
   _issues_enabled:
     required: false
     help: (Optional) Enable issue tracking for the project.
+    ignored: false
     type: Text
-    deprecated: false
   _merge_requests_enabled:
     required: false
     help: (Optional) Enable merge requests for the project.
+    ignored: false
     type: Text
-    deprecated: false
   _visibility_level:
     required: false
     help: (Optional) Set to @public@ to create a public project. Valid values are
       @private@ , @internal@ , @public@ . Repositories are created as private by default.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the project.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the project.
+    ignored: false
     type: Text
-    deprecated: false
   _path:
     required: false
     help: (Optional) The path of the repository.
+    ignored: false
     type: Text
-    deprecated: false
   _snippets_enabled:
     required: false
     help: (Optional) Enable snippets for the project.
+    ignored: false
     type: Text
-    deprecated: false
   _namespace_id:
     required: false
     help: (Optional) The namespace (group or user) of the project. Defaults to your
       user. See <group.html> for an example.
+    ignored: false
     type: Text
-    deprecated: false
   _wiki_enabled:
     required: false
     help: (Optional) Enable wiki for the project.
+    ignored: false
     type: Text
-    deprecated: false
+name: gitlab_project
 attributes:
   http_url_to_repo:
     help: ! '- URL that can be provided to @git clone@ to clone the repository via

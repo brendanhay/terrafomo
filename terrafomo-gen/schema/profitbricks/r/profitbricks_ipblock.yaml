@@ -1,5 +1,5 @@
-_name: profitbricks_ipblock
 arguments: {}
+name: profitbricks_ipblock
 attributes: {}
 about: Manages a IP Blocks on ProfitBricks
 examples: []

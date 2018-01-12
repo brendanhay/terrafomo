@@ -1,20 +1,20 @@
-_name: aws_vpn_gateway
 arguments:
   _availability_zone:
     required: false
     help: (Optional) The Availability Zone for the virtual private gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The VPC ID to create in.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_vpn_gateway
 attributes:
   id:
     help: ! '- The ID of the VPN Gateway.'

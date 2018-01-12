@@ -1,15 +1,15 @@
-_name: azurerm_managed_disk
 arguments:
   _name:
     required: true
     help: (Required) Specifies the name of the Managed Disk.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) Specifies the name of the resource group.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_managed_disk
 attributes:
   source_uri:
     help: ! '- The source URI for the managed disk'

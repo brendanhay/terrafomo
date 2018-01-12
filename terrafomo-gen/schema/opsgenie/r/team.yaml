@@ -1,21 +1,21 @@
-_name: opsgenie_team
 arguments:
   _member:
     required: false
     help: (Optional) A Member block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name associated with this team. OpsGenie defines that this
       must not be longer than 100 characters.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description for this team.
+    ignored: false
     type: Text
-    deprecated: false
+name: opsgenie_team
 attributes:
   id:
     help: ! '- The ID of the OpsGenie User.'

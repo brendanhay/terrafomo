@@ -1,10 +1,10 @@
-_name: github_team
 arguments:
   _slug:
     required: true
     help: (Required) The team slug.
+    ignored: false
     type: Text
-    deprecated: false
+name: github_team
 attributes:
   members:
     help: ! '- List of team members'

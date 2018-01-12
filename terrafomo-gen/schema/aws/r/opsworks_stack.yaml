@@ -1,126 +1,126 @@
-_name: aws_opsworks_stack
 arguments:
   _default_instance_profile_arn:
     required: true
     help: (Required) The ARN of an IAM Instance Profile that created instances will
       have by default.
+    ignored: false
     type: Text
-    deprecated: false
   _region:
     required: true
     help: (Required) The name of the region where the stack will exist.
+    ignored: false
     type: Text
-    deprecated: false
   _default_os:
     required: false
     help: (Optional) Name of OS that will be installed on instances by default.
+    ignored: false
     type: Text
-    deprecated: false
   _color:
     required: false
     help: (Optional) Color to paint next to the stack's resources in the OpsWorks
       console.
+    ignored: false
     type: Text
-    deprecated: false
   _default_root_device_type:
     required: false
     help: (Optional) Name of the type of root device instances will have by default.
+    ignored: false
     type: Text
-    deprecated: false
   _use_custom_cookbooks:
     required: false
     help: (Optional) Boolean value controlling whether the custom cookbook settings
       are enabled.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the stack.
+    ignored: false
     type: Text
-    deprecated: false
   _service_role_arn:
     required: true
     help: (Required) The ARN of an IAM role that the OpsWorks service will act as.
+    ignored: false
     type: Text
-    deprecated: false
   _configuration_manager_name:
     required: false
     help: (Optional) Name of the configuration manager to use. Defaults to "Chef".
+    ignored: false
     type: Text
-    deprecated: false
   _default_ssh_key_name:
     required: false
     help: (Optional) Name of the SSH keypair that instances will have by default.
+    ignored: false
     type: Text
-    deprecated: false
   _custom_json:
     required: false
     help: (Optional) Custom JSON attributes to apply to the entire stack.
+    ignored: false
     type: Text
-    deprecated: false
   _use_opsworks_security_groups:
     required: false
     help: (Optional) Boolean value controlling whether the standard OpsWorks security
       groups apply to created instances.
+    ignored: false
     type: Text
-    deprecated: false
   _default_subnet_id:
     required: false
     help: (Optional) Id of the subnet in which instances will be created by default.
       Mandatory if @vpc_id@ is set, and forbidden if it isn't.
+    ignored: false
     type: Text
-    deprecated: false
   _berkshelf_version:
     required: false
     help: (Optional) If @manage_berkshelf@ is enabled, the version of Berkshelf to
       use.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The id of the VPC that this stack belongs to.
+    ignored: false
     type: Text
-    deprecated: false
   _custom_cookbooks_source:
     required: false
     help: (Optional) When @use_custom_cookbooks@ is set, provide this sub-object as
       described below.
+    ignored: false
     type: Text
-    deprecated: false
   _manage_berkshelf:
     required: false
     help: (Optional) Boolean value controlling whether Opsworks will run Berkshelf
       for this stack.
+    ignored: false
     type: Text
-    deprecated: false
   _default_availability_zone:
     required: false
     help: (Optional) Name of the availability zone where instances will be created
       by default. This is required unless you set @vpc_id@ .
+    ignored: false
     type: Text
-    deprecated: false
   _agent_version:
     required: false
     help: (Optional) If set to @"LATEST"@ , OpsWorks will automatically install the
       latest version.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _hostname_theme:
     required: false
     help: (Optional) Keyword representing the naming scheme that will be used for
       instance hostnames within this stack.
+    ignored: false
     type: Text
-    deprecated: false
   _configuration_manager_version:
     required: false
     help: (Optional) Version of the configuration manager to use. Defaults to "11.4".
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_opsworks_stack
 attributes:
   id:
     help: ! '- The id of the stack.'

@@ -1,10 +1,10 @@
-_name: aws_db_instance
 arguments:
   _db_instance_identifier:
     required: true
     help: (Required) The name of the RDS instance
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_db_instance
 attributes:
   preferred_maintenance_window:
     help: ! '-  Specifies the weekly time range during which system maintenance can

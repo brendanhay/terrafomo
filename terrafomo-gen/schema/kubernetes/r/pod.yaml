@@ -1,15 +1,15 @@
-_name: kubernetes_pod
 arguments:
   _metadata:
     required: true
     help: ! '(Required) Standard pod''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
+    ignored: false
     type: Text
-    deprecated: false
   _spec:
     required: true
     help: (Required) Spec of the pod owned by the cluster
+    ignored: false
     type: Text
-    deprecated: false
+name: kubernetes_pod
 attributes: {}
 about: A pod is a group of one or more containers, the shared storage for those containers,
   and options about how to run the containers. Pods are always co-located and co-scheduled,

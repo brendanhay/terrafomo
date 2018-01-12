@@ -1,27 +1,27 @@
-_name: aws_eip
 arguments:
   _network_interface:
     required: false
     help: (Optional) Network interface ID to associate with.
+    ignored: false
     type: Text
-    deprecated: false
   _instance':
     required: false
     help: (Optional) EC2 instance ID.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc:
     required: false
     help: (Optional) Boolean if the EIP is in a VPC or not.
+    ignored: false
     type: Text
-    deprecated: false
   _associate_with_private_ip:
     required: false
     help: (Optional) A user specified primary or secondary private IP address to associate
       with the Elastic IP address. If no private IP address is specified, the Elastic
       IP address is associated with the primary private IP address.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_eip
 attributes:
   network_interface:
     help: ! '- Contains the ID of the attached network interface.'

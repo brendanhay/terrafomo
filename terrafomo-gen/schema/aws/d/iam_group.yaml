@@ -1,10 +1,10 @@
-_name: aws_iam_group
 arguments:
   _group_name:
     required: true
     help: (Required) The friendly IAM group name to match.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_group
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the group.'

@@ -1,20 +1,20 @@
-_name: scaleway_image
 arguments:
   _name_filter:
     required: false
     help: (Optional) Regexp to match Image name by
+    ignored: false
     type: Text
-    deprecated: false
   _architecture:
     required: true
     help: (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) Exact name of desired Image
+    ignored: false
     type: Text
-    deprecated: false
+name: scaleway_image
 attributes:
   creation_date:
     help: ! '- date when image was created'

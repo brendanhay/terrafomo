@@ -1,51 +1,51 @@
-_name: aws_kinesis_stream
 arguments:
   _encryption_type:
     required: false
     help: (Optional) The encryption type to use. The only acceptable values are @NONE@
       or @KMS@ . The default value is @NONE@ .
+    ignored: false
     type: Text
-    deprecated: false
   _shard_count:
     required: true
     help: – (Required) The number of shards that the stream will use. Amazon has guidlines
       for specifying the Stream size that should be referenced when creating a Kinesis
       stream. See <https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html>
       for more.
+    ignored: false
     type: Text
-    deprecated: false
   _shard_level_metrics:
     required: false
     help: (Optional) A list of shard-level CloudWatch metrics which can be enabled
       for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html>
       for more. Note that the value ALL should not be used; instead you should provide
       an explicit list of metrics you wish to enable.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A name to identify the stream. This is unique to the AWS account
       and region the Stream is created in.
+    ignored: false
     type: Text
-    deprecated: false
   _retention_period:
     required: false
     help: (Optional) Length of time data records are accessible after they are added
       to the stream. The maximum value of a stream's retention period is 168 hours.
       Minimum value is 24. Default is 24.
+    ignored: false
     type: Text
-    deprecated: false
   _kms_key_id:
     required: false
     help: (Optional) The GUID for the customer-managed KMS key to use for encryption.
       You can also use a Kinesis-owned master key by specifying the alias aws/kinesis.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_kinesis_stream
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the Stream (same as @id@

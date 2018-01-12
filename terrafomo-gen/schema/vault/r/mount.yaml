@@ -1,30 +1,30 @@
-_name: vault_mount
 arguments:
   _default_lease_ttl_seconds:
     required: false
     help: (Optional) Default lease duration for tokens and secrets in seconds
+    ignored: false
     type: Text
-    deprecated: false
   _max_lease_ttl_seconds:
     required: false
     help: (Optional) Maximum possible lease duration for tokens and secrets in seconds
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Human-friendly description of the mount
+    ignored: false
     type: Text
-    deprecated: false
   _path:
     required: true
     help: (Required) Where the secret backend will be mounted
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) Type of the backend, such as "aws"
+    ignored: false
     type: Text
-    deprecated: false
+name: vault_mount
 attributes: {}
 about: ''
 examples: []

@@ -1,0 +1,28 @@
+arguments:
+  _user_names:
+    required: true
+    help: (Required) Set of user name which will be added to group. Each name can
+      have a string of 1 to 64 characters, must contain only alphanumeric characters
+      or hyphens, such as "-",".","_", and must not begin with a hyphen.
+    ignored: false
+    type: Text
+  _group_name:
+    required: true
+    help: (Required, Forces new resource) Name of the RAM group. This name can have
+      a string of 1 to 64 characters, must contain only alphanumeric characters or
+      hyphen "-", and must not begin with a hyphen.
+    ignored: false
+    type: Text
+name: alicloud_ram_group_membership
+attributes:
+  group_name:
+    help: ! '- The group name.'
+    type: Text
+  user_names:
+    help: ! '- The list of names of users which in the group.'
+    type: Text
+  id:
+    help: ! '- The membership ID.'
+    type: Text
+about: Provides a RAM Group membership resource.
+examples: []

@@ -1,22 +1,22 @@
-_name: google_compute_address
 arguments:
   _region:
     required: false
     help: (Optional) The Region in which the created address reside. If it is not
       provided, the provider region is used.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_address
 attributes:
   status:
     help: ! '- Indicates if the address is used. Possible values are: RESERVED or

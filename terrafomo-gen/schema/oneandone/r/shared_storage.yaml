@@ -1,31 +1,31 @@
-_name: oneandone_server
 arguments:
   _name:
     required: true
     help: (Required) The name of the storage
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Description for the shared storage
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@
+    ignored: false
     type: Text
-    deprecated: false
   _storage_servers:
     required: true
     help: (Optional) List of servers that will have access to the stored storage
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: true
     help: (Required) Size of the shared storage
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_server
 attributes: {}
 about: Manages a Shared Storage on 1&1
 examples: []

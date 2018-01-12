@@ -1,40 +1,39 @@
-_name: aws_cloudwatch_metric_alarm
 arguments:
   _dimensions:
     required: false
     help: (Optional) The dimensions for the alarm's associated metric.  For the list
       of available dimensions see the AWS documentation <http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _namespace:
     required: true
     help: (Required) The namespace for the alarm's associated metric. See docs for
       the <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/aws-namespaces.html>
       . See docs for <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _insufficient_data_actions:
     required: false
     help: (Optional) The list of actions to execute when this alarm transitions into
       an INSUFFICIENT_DATA state from any other state. Each action is specified as
       an Amazon Resource Number (ARN).
+    ignored: false
     type: Text
-    deprecated: false
   _actions_enabled:
     required: false
     help: (Optional) Indicates whether or not actions should be executed during any
       changes to the alarm's state. Defaults to @true@ .
+    ignored: false
     type: Text
-    deprecated: false
   _alarm_actions:
     required: false
     help: (Optional) The list of actions to execute when this alarm transitions into
       an ALARM state from any other state. Each action is specified as an Amazon Resource
       Number (ARN).
+    ignored: false
     type: Text
-    deprecated: false
   _comparison_operator:
     required: true
     help: ! '(Required) The arithmetic operation to use when comparing the specified
@@ -42,39 +41,39 @@ arguments:
       operand. Either of the following is supported: @GreaterThanOrEqualToThreshold@
       , @GreaterThanThreshold@ , @LessThanThreshold@ , @LessThanOrEqualToThreshold@
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _statistic:
     required: false
     help: ! '(Optional) The statistic to apply to the alarm''s associated metric.
       Either of the following is supported: @SampleCount@ , @Average@ , @Sum@ , @Minimum@
       , @Maximum@'
+    ignored: false
     type: Text
-    deprecated: false
   _alarm_name:
     required: true
     help: (Required) The descriptive name for the alarm. This name must be unique
       within the user's AWS account
+    ignored: false
     type: Text
-    deprecated: false
   _period:
     required: true
     help: (Required) The period in seconds over which the specified @statistic@ is
       applied.
+    ignored: false
     type: Text
-    deprecated: false
   _treat_missing_data:
     required: false
     help: ! '(Optional) Sets how this alarm is to handle missing data points. The
       following values are supported: @missing@ , @ignore@ , @breaching@ and @notBreaching@
       . Defaults to @missing@ .'
+    ignored: false
     type: Text
-    deprecated: false
   _alarm_description:
     required: false
     help: (Optional) The description for the alarm.
+    ignored: false
     type: Text
-    deprecated: false
   _evaluate_low_sample_count_percentiles:
     required: false
     help: ! '(Optional) Used only for alarms based on percentiles. If you specify
@@ -83,43 +82,44 @@ arguments:
       parameter, the alarm will always be evaluated and possibly change state no matter
       how many data points are available. The following values are supported: @ignore@
       , and @evaluate@ .'
+    ignored: false
     type: Text
-    deprecated: false
   _threshold:
     required: true
     help: (Required) The value against which the specified statistic is compared.
+    ignored: false
     type: Text
-    deprecated: false
   _evaluation_periods:
     required: true
     help: (Required) The number of periods over which data is compared to the specified
       threshold.
+    ignored: false
     type: Text
-    deprecated: false
   _metric_name:
     required: true
     help: (Required) The name for the alarm's associated metric. See docs for <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _ok_actions:
     required: false
     help: (Optional) The list of actions to execute when this alarm transitions into
       an OK state from any other state. Each action is specified as an Amazon Resource
       Number (ARN).
+    ignored: false
     type: Text
-    deprecated: false
   _unit:
     required: false
     help: (Optional) The unit for the alarm's associated metric.
+    ignored: false
     type: Text
-    deprecated: false
   _extended_statistic:
     required: false
     help: (Optional) The percentile statistic for the metric associated with the alarm.
       Specify a value between p0.0 and p100.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_cloudwatch_metric_alarm
 attributes:
   id:
     help: ! '- The ID of the health check'

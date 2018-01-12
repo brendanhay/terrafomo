@@ -1,15 +1,15 @@
-_name: aws_lb_target_group
 arguments:
   _arn:
     required: false
     help: (Optional) The full ARN of the target group.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The unique name of the target group.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lb_target_group
 attributes: {}
 about: ! '~> Note:  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The
   functionality is identical. Provides information about a Load Balancer Target Group.

@@ -1,21 +1,21 @@
-_name: alicloud_key_pairs
 arguments:
   _name_regex:
     required: true
     help: ! '- A regex string to apply to the key pair list returned by Alicloud.'
+    ignored: false
     type: Text
-    deprecated: false
   _finger_print:
     required: true
     help: ! '- A finger print used to retrieve specified key pair.'
+    ignored: false
     type: Text
-    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save key pairs data source after running
       @terraform plan@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_key_pairs
 attributes:
   key_name:
     help: ! '- Name of the key pair.'

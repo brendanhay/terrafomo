@@ -1,22 +1,22 @@
-_name: google_logging_billing_account_sink
 arguments:
   _name:
     required: true
     help: (Required) The name of the logging sink.
+    ignored: false
     type: Text
-    deprecated: false
   _destination:
     required: true
     help: ! '(Required) The destination of the sink (or, in other words, where logs
       are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery
       dataset. Examples:'
+    ignored: false
     type: Text
-    deprecated: false
   _billing_account:
     required: true
     help: (Required) The billing account exported to the sink.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_logging_billing_account_sink
 attributes:
   writer_identity:
     help: ! '- The identity associated with this sink. This identity must be granted

@@ -1,17 +1,17 @@
-_name: aws_wafregional_byte_match_set
 arguments:
   _name:
     required: true
     help: (Required) The name or description of the ByteMatchSet.
+    ignored: false
     type: Text
-    deprecated: false
   _byte_match_tuple:
     required: false
     help: (Optional)Settings for the ByteMatchSet, such as the bytes (typically a
       string that corresponds with ASCII characters) that you want AWS WAF to search
       for in web requests. ByteMatchTuple documented below.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_wafregional_byte_match_set
 attributes: {}
 about: Provides a WAF Regional Byte Match Set Resource for use with Application Load
   Balancer.

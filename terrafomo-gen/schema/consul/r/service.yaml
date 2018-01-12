@@ -1,33 +1,33 @@
-_name: consul_service
 arguments:
   _service_id:
     required: false
     help: (Optional, string) The ID of the service, defaults to the value of @name@
       if not supplied.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required, string) The name of the service.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional, set of strings) A list of values that are opaque to Consul, but
       can be used to distinguish between services or nodes.
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: false
     help: (Optional, int) The port of the service.
+    ignored: false
     type: Text
-    deprecated: false
   _address:
     required: false
     help: (Optional, string) The address of the service. Defaults to the address of
       the agent.
+    ignored: false
     type: Text
-    deprecated: false
+name: consul_service
 attributes:
   address:
     help: ! '- The address of the service.'

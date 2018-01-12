@@ -1,117 +1,117 @@
-_name: fastly_service_v1
 arguments:
   _s3logging:
     required: false
     help: (Optional) A set of S3 Buckets to send streaming logs too. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _request_setting:
     required: false
     help: (Optional) A set of Request modifiers. Defined below
+    ignored: false
     type: Text
-    deprecated: false
   _default_ttl:
     required: false
     help: (Optional) The default Time-to-live (TTL) for requests.
+    ignored: false
     type: Text
-    deprecated: false
   _syslog:
     required: false
     help: (Optional) A syslog endpoint to send streaming logs too. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _cache_setting:
     required: false
     help: (Optional) A set of Cache Settings, allowing you to override when an item
       is not to be cached based on an above @condition@ . Defined below
+    ignored: false
     type: Text
-    deprecated: false
   _sumologic:
     required: false
     help: (Optional) A Sumologic endpoint to send streaming logs too. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _healthcheck:
     required: false
     help: (Optional) Automated healthchecks on the cache that can change how fastly
       interacts with the cache based on its health.
+    ignored: false
     type: Text
-    deprecated: false
   _header:
     required: false
     help: (Optional) A set of Headers to manipulate for each request. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The unique name for the Service to create.
+    ignored: false
     type: Text
-    deprecated: false
   _default_host:
     required: false
     help: (Optional) The default hostname.
+    ignored: false
     type: Text
-    deprecated: false
   _gzip:
     required: true
     help: (Required) A set of gzip rules to control automatic gzipping of content.
       Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _gcslogging:
     required: false
     help: (Optional) A gcs endpoint to send streaming logs too. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _response_object:
     required: false
     help: (Optional) Allows you to create synthetic responses that exist entirely
       on the varnish machine. Useful for creating error or maintenance pages that
       exists outside the scope of your datacenter. Best when used with Condition objects.
+    ignored: false
     type: Text
-    deprecated: false
   _condition:
     required: false
     help: (Optional) A set of conditions to add logic to any basic configuration object
       in this service. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _domain:
     required: true
     help: (Required) A set of Domain names to serve as entry points for your Service.
       Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _force_destroy:
     required: false
     help: (Optional) Services that are active cannot be destroyed. In order to destroy
       the Service, set @force_destroy@ to @true@ . Default @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _papertrail:
     required: false
     help: (Optional) A Papertrail endpoint to send streaming logs too. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _backend:
     required: false
     help: (Optional) A set of Backends to service requests from your Domains. Defined
       below. Backends must be defined in this argument, or defined in the @vcl@ argument
       below
+    ignored: false
     type: Text
-    deprecated: false
   _vcl:
     required: false
     help: (Optional) A set of custom VCL configuration blocks. The ability to upload
       custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl>
       for details).
+    ignored: false
     type: Text
-    deprecated: false
   _logentries:
     required: false
     help: (Optional) A logentries endpoint to send streaming logs too. Defined below.
+    ignored: false
     type: Text
-    deprecated: false
+name: fastly_service_v1
 attributes:
   papertrail:
     help: – Set of Papertrail configurations. See above for details.

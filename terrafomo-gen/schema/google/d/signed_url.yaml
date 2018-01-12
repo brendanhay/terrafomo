@@ -1,4 +1,3 @@
-_name: google_storage_object_signed_url
 arguments:
   _credentials:
     required: false
@@ -6,31 +5,32 @@ arguments:
       to sign the URL. This data source checks the following locations for credentials,
       in order of preference: data source @credentials@ attribute, provider @credentials@
       attribute and finally the GOOGLE_APPLICATION_CREDENTIALS environment variable.'
+    ignored: false
     type: Text
-    deprecated: false
   _bucket:
     required: true
     help: (Required) The name of the bucket to read the object from
+    ignored: false
     type: Text
-    deprecated: false
   _http_method:
     required: false
     help: (Optional) What HTTP Method will the signed URL allow (defaults to @GET@
       )
+    ignored: false
     type: Text
-    deprecated: false
   _path:
     required: true
     help: (Required) The full path to the object inside the bucket
+    ignored: false
     type: Text
-    deprecated: false
   _duration:
     required: false
     help: (Optional) For how long shall the signed URL be valid (defaults to 1 hour
       - i.e. @1h@ ). See <https://golang.org/pkg/time/#ParseDuration> for info on
       valid duration formats.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_storage_object_signed_url
 attributes:
   signed_url:
     help: ! '- The signed URL that can be used to access the storage object without

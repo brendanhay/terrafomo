@@ -1,44 +1,44 @@
-_name: aws_db_event_subscription
 arguments:
   _enabled:
     required: false
     help: (Optional) A boolean flag to enable/disable the subscription. Defaults to
       true.
+    ignored: false
     type: Text
-    deprecated: false
   _source_type:
     required: false
     help: (Optional) The type of source that will be generating the events.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the DB event subscription.
+    ignored: false
     type: Text
-    deprecated: false
   _sns_topic:
     required: true
     help: (Required) The SNS topic to send events to.
+    ignored: false
     type: Text
-    deprecated: false
   _event_categories:
     required: false
     help: (Optional) A list of event categories for a SourceType that you want to
       subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_Events.html
+    ignored: false
     type: Text
-    deprecated: false
   _source_ids:
     required: false
     help: (Optional) A list of identifiers of the event sources for which events will
       be returned. If not specified, then all sources are included in the response.
       If specified, a source_type must also be specified.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_db_event_subscription
 attributes: {}
 about: Provides a DB event subscription resource.
 examples: []

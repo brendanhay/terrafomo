@@ -1,56 +1,56 @@
-_name: oneandone_server
 arguments:
   _persistence_time:
     required: false
     help: (Optional) Persistence duration in seconds
+    ignored: false
     type: Text
-    deprecated: false
   _health_check_path_parser:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _method:
     required: true
     help: (Required)  Balancing procedure Can be @ROUND_ROBIN@ or @LEAST_CONNECTIONS@
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the load balancer.
+    ignored: false
     type: Text
-    deprecated: false
   _health_check_path:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Description for the load balancer
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@
+    ignored: false
     type: Text
-    deprecated: false
   _health_check_interval:
     required: false
     help: (Optional)
+    ignored: false
     type: Text
-    deprecated: false
   _persistence:
     required: false
     help: (Optional) True/false defines whether persistence should be turned on/off
+    ignored: false
     type: Text
-    deprecated: false
   _health_check_test:
     required: false
     help: (Optional) Can be @TCP@ or @ICMP@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_server
 attributes: {}
 about: Manages a Load Balancer on 1&1
 examples: []

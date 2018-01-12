@@ -1,16 +1,16 @@
-_name: packet_ip_attachment
 arguments:
   _cidr_notation:
     required: true
     help: (Required) CIDR notation of subnet from block reserved in the same project
       and facility as the device
+    ignored: false
     type: Text
-    deprecated: false
   _device_id:
     required: true
     help: (Required) ID of device to which to assign the subnet
+    ignored: false
     type: Text
-    deprecated: false
+name: packet_ip_attachment
 attributes:
   device_id:
     help: ! '- ID of device to which subnet is assigned'

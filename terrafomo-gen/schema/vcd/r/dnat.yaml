@@ -1,25 +1,25 @@
-_name: vcd_dnat
 arguments:
   _external_ip:
     required: true
     help: (Required) One of the external IPs available on your Edge Gateway
+    ignored: false
     type: Text
-    deprecated: false
   _edge_gateway:
     required: true
     help: (Required) The name of the edge gateway on which to apply the DNAT
+    ignored: false
     type: Text
-    deprecated: false
   _internal_ip:
     required: true
     help: (Required) The IP of the VM to map to
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: true
     help: (Required) The port number to map
+    ignored: false
     type: Text
-    deprecated: false
+name: vcd_dnat
 attributes: {}
 about: Provides a vCloud Director DNAT resource. This can be used to create, modify,
   and delete destination NATs to map an external IP/port to an internal IP/port.

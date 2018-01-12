@@ -1,27 +1,27 @@
-_name: logicmonitor_collectors
 arguments:
   _filters:
     required: false
     help: ! '(Optional) Filters the response according to the operator and value specified.
       Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/'
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: false
     help: (Optional) The number of results to display. Max is 1000. Default is 50
+    ignored: false
     type: Text
-    deprecated: false
   _offset:
     required: false
     help: (Optional) The number of results to offset the displayed results by. Default
       is 0
+    ignored: false
     type: Text
-    deprecated: false
   _most_recent:
     required: false
     help: (Optional) The most recent collector installed that is online
+    ignored: false
     type: Text
-    deprecated: false
+name: logicmonitor_collectors
 attributes: {}
 about: Use this datasource to get the ID of an available collector.
 examples: []

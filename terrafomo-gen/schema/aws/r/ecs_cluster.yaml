@@ -1,14 +1,14 @@
-_name: aws_ecs_cluster
 arguments:
   _name:
     required: true
     help: (Required) The name of the cluster (up to 255 letters, numbers, hyphens,
       and underscores)
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ecs_cluster
 attributes:
-  name:
-    help: ! '- The name of the cluster'
+  arn:
+    help: ! '- The Amazon Resource Name (ARN) that identifies the cluster'
     type: Text
   id:
     help: ! '- The Amazon Resource Name (ARN) that identifies the cluster'

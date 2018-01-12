@@ -1,22 +1,22 @@
-_name: aws_api_gateway_usage_plan_key
 arguments:
   _usage_plan_id:
     required: true
     help: (Required) The Id of the usage plan resource representing to associate the
       key to.
+    ignored: false
     type: Text
-    deprecated: false
   _key_type:
     required: true
     help: (Required) The type of the API key resource. Currently, the valid key type
       is API_KEY.
+    ignored: false
     type: Text
-    deprecated: false
   _key_id:
     required: true
     help: (Required) The identifier of the API key resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_api_gateway_usage_plan_key
 attributes:
   key_id:
     help: ! '- The identifier of the API gateway key resource.'

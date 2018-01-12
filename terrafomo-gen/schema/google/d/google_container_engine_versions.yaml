@@ -1,18 +1,18 @@
-_name: google_container_engine_versions
 arguments:
   _project:
     required: true
     help: (optional) - ID of the project to list available cluster versions for. Should
       match the project the cluster will be deployed to. Defaults to the project that
       the provider is authenticated with.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (required) - Zone to list available cluster versions for. Should match the
       zone the cluster will be deployed in.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_container_engine_versions
 attributes:
   valid_master_versions:
     help: ! '- A list of versions available in the given zone for use with master

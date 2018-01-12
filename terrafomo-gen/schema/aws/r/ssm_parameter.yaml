@@ -1,32 +1,32 @@
-_name: aws_ssm_parameter
 arguments:
   _value:
     required: true
     help: (Required) The value of the parameter.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the parameter.
+    ignored: false
     type: Text
-    deprecated: false
   _overwrite:
     required: false
     help: (Optional) Overwrite an existing parameter. If not specified, will default
       to @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _key_id:
     required: false
     help: (Optional) The KMS key id or arn for encrypting a SecureString.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of the parameter. Valid types are @String@ , @StringList@
       and @SecureString@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ssm_parameter
 attributes:
   arn:
     help: ! '- The ARN of the parameter.'

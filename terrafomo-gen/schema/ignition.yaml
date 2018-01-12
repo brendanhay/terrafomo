@@ -1,5 +1,5 @@
-_name: IgnitionProvider
 arguments: {}
+name: IgnitionProvider
 attributes: {}
 about: The Ignition provider is used to generate <https://coreos.com/ignition/docs/latest/>
   configuration files. Ignition is the provisioning utility used by <https://coreos.com/>

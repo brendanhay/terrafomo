@@ -1,22 +1,23 @@
-_name: google_project_iam_binding
 arguments:
   _members:
     required: true
-    help: (Required) A list of users that the role should apply to.
+    help: ! '(Required) - An array of identites that will be granted the privilege
+      in the @role@ . Each entry can have one of the following values:'
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project ID. If not specified, uses the ID of the project
       configured with the provider.
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: true
     help: (Required) The role that should be applied. Only one @google_project_iam_binding@
       can be used per role.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_project_iam_binding
 attributes:
   etag:
     help: ! '- (Computed) The etag of the project''s IAM policy.'

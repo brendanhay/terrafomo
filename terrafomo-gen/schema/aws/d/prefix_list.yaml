@@ -1,15 +1,15 @@
-_name: aws_prefix_list
 arguments:
   _name:
     required: false
     help: (Optional) The name of the prefix list to select.
+    ignored: false
     type: Text
-    deprecated: false
   _prefix_list_id:
     required: false
     help: (Optional) The ID of the prefix list to select.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_prefix_list
 attributes:
   cidr_blocks:
     help: ! '- The list of CIDR blocks for the AWS service associated with the prefix

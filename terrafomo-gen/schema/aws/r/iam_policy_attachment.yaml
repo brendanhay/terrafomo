@@ -1,30 +1,30 @@
-_name: aws_iam_policy_attachment
 arguments:
   _policy_arn:
     required: true
     help: (Required) - The ARN of the policy you want to apply
+    ignored: false
     type: Text
-    deprecated: false
   _users:
     required: true
     help: (Optional) - The user(s) the policy should be applied to
+    ignored: false
     type: Text
-    deprecated: false
   _roles:
     required: true
     help: (Optional) - The role(s) the policy should be applied to
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) - The name of the policy. This cannot be an empty string.
+    ignored: false
     type: Text
-    deprecated: false
   _groups:
     required: true
     help: (Optional) - The group(s) the policy should be applied to
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_policy_attachment
 attributes:
   name:
     help: ! '- The name of the policy.'

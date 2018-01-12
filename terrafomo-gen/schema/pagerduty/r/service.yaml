@@ -1,16 +1,15 @@
-_name: pagerduty_service
 arguments:
   _name:
     required: true
     help: (Required) The name of the service.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A human-friendly description of the escalation policy. If not
       set, a placeholder of "Managed by Terraform" will be set.
+    ignored: false
     type: Text
-    deprecated: false
   _alert_creation:
     required: false
     help: ! '(Optional) Must be one of two values. PagerDuty receives events from
@@ -18,25 +17,26 @@ arguments:
       "create_incidents" is default: events will create an incident that cannot be
       merged. Value "create_alerts_and_incidents" is the alternative: events will
       create an alert and then add it to a new incident, these incidents can be merged.'
+    ignored: false
     type: Text
-    deprecated: false
   _auto_resolve_timeout:
     required: false
     help: (Optional) Time in seconds that an incident is automatically resolved if
-      left open for that long. Disabled if not set.
+      left open for that long. Disabled if set to the @"null"@ string.
+    ignored: false
     type: Text
-    deprecated: false
   _escalation_policy:
     required: true
     help: (Required) The escalation policy used by this service.
+    ignored: false
     type: Text
-    deprecated: false
   _acknowledgement_timeout:
     required: false
     help: (Optional) Time in seconds that an incident changes to the Triggered State
-      after being Acknowledged. Disabled if not set.
+      after being Acknowledged. Disabled if set to the @"null"@ string.
+    ignored: false
     type: Text
-    deprecated: false
+name: pagerduty_service
 attributes:
   status:
     help: ! '- The status of the service'

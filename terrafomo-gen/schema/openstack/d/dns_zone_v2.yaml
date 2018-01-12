@@ -1,43 +1,43 @@
-_name: openstack_dns_zone_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 DNS client. A DNS client
       is needed to retrieve zone ids. If omitted, the @region@ argument of the provider
       is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the zone.
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: false
     help: (Optional) The email contact for the zone record.
+    ignored: false
     type: Text
-    deprecated: false
   _ttl:
     required: false
     help: (Optional) The time to live (TTL) of the zone.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the zone.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: false
     help: (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _status:
     required: false
     help: (Optional) The zone's status.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_dns_zone_v2
 attributes:
   ttl:
     help: ! '- See Argument Reference above.'

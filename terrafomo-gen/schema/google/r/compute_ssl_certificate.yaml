@@ -1,42 +1,42 @@
-_name: google_compute_ssl_certificate
 arguments:
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) A unique name for the SSL certificate. If you leave this blank,
       Terraform will auto-generate a unique name.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) An optional description of this resource. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: false
     help: (Optional) Creates a unique name beginning with the specified prefix. Conflicts
       with @name@ .
+    ignored: false
     type: Text
-    deprecated: false
   _certificate:
     required: true
     help: (Required) A local certificate file in PEM format. The chain may be at most
       5 certs long, and must include at least one intermediate cert. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _private_key:
     required: true
     help: (Required) Write only private key in PEM format. Changing this forces a
       new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_ssl_certificate
 attributes:
   certificate_id:
     help: ! '- A unique ID for the certificate, assigned by GCE.'

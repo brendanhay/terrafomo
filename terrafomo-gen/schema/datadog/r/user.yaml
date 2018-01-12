@@ -1,36 +1,36 @@
-_name: datadog_user
 arguments:
   _is_admin:
     required: false
     help: (Optional) Whether the user is an administrator
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Name for user
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: true
     help: (Required) Email address for user
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: false
     help: ! '(Optional) Role description for user (NOTE: can only be applied on user
       creation)'
+    ignored: false
     type: Text
-    deprecated: false
   _disabled:
     required: false
     help: (Optional) Whether the user is disabled
+    ignored: false
     type: Text
-    deprecated: false
   _handle:
     required: true
     help: (Required) The user handle, must be a valid email.
+    ignored: false
     type: Text
-    deprecated: false
+name: datadog_user
 attributes:
   disabled:
     help: ! '- Returns true if Datadog user is disabled (NOTE: Datadog does not actually

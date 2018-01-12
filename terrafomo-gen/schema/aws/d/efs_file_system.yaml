@@ -1,15 +1,15 @@
-_name: aws_efs_file_system
 arguments:
   _file_system_id:
     required: false
     help: (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65).
+    ignored: false
     type: Text
-    deprecated: false
   _creation_token:
     required: false
     help: (Optional) Restricts the list to the file system with this creation token.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_efs_file_system
 attributes:
   kms_key_id:
     help: ! '- The ARN for the KMS encryption key.'

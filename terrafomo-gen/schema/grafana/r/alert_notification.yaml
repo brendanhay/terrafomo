@@ -1,26 +1,26 @@
-_name: grafana_alert_notification
 arguments:
   _name:
     required: true
     help: (Required) The name of the alert notification channel.
+    ignored: false
     type: Text
-    deprecated: false
   _is_default:
     required: false
     help: (Optional) Is this the default channel for all your alerts.
+    ignored: false
     type: Text
-    deprecated: false
   _settings:
     required: false
     help: (Optional) Additional settings, for full reference lookup <http://docs.grafana.org/http_api/alerting>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of the alert notification channel.
+    ignored: false
     type: Text
-    deprecated: false
+name: grafana_alert_notification
 attributes:
   id:
     help: ! '- The ID of the resource'

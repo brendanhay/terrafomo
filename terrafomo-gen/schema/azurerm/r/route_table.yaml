@@ -1,34 +1,34 @@
-_name: azurerm_route_table
 arguments:
   _name:
     required: true
     help: (Required) The name of the route table. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the route table.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _route:
     required: false
     help: (Optional) Can be specified multiple times to define multiple routes. Each
       @route@ block supports fields documented below.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_route_table
 attributes:
   subnets:
     help: ! '- The collection of Subnets associated with this route table.'

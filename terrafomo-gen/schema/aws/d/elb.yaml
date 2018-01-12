@@ -1,0 +1,14 @@
+arguments:
+  _name:
+    required: true
+    help: (Required) The unique name of the load balancer.
+    ignored: false
+    type: Text
+name: aws_elb
+attributes: {}
+about: Provides information about a "classic" Elastic Load Balancer (ELB). See </docs/providers/aws/d/lb.html>
+  if you are looking for "v2" Application Load Balancer (ALB) or Network Load Balancer
+  (NLB). This data source can prove useful when a module accepts an LB as an input
+  variable and needs to, for example, determine the security groups associated with
+  it, etc.
+examples: []

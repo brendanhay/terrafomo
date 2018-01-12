@@ -1,20 +1,20 @@
-_name: librato_service
 arguments:
   _title:
     required: true
     help: (Required) The alert title.
+    ignored: false
     type: Text
-    deprecated: false
   _settings:
     required: true
     help: (Required) a JSON hash of settings specific to the alert type.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of notificaion.
+    ignored: false
     type: Text
-    deprecated: false
+name: librato_service
 attributes:
   settings:
     help: ! '- a JSON hash of settings specific to the alert type.'

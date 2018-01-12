@@ -1,10 +1,10 @@
-_name: aws_cloudformation_stack
 arguments:
   _name:
     required: true
     help: (Required) The name of the stack
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_cloudformation_stack
 attributes:
   notification_arns:
     help: ! '- A list of SNS topic ARNs to publish stack related events'

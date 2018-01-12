@@ -1,15 +1,15 @@
-_name: digitalocean_floating_ip
 arguments:
   _region:
     required: true
     help: (Required) The region that the Floating IP is reserved to.
+    ignored: false
     type: Text
-    deprecated: false
   _droplet_id:
     required: false
     help: (Optional) The ID of Droplet that the Floating IP will be assigned to.
+    ignored: false
     type: Text
-    deprecated: false
+name: digitalocean_floating_ip
 attributes:
   ip_address:
     help: ! '- The IP Address of the resource'

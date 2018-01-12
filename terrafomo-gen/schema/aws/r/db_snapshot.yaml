@@ -1,15 +1,15 @@
-_name: aws_db_snapshot
 arguments:
   _db_instance_identifier:
     required: true
     help: (Required) The DB Instance Identifier from which to take the snapshot.
+    ignored: false
     type: Text
-    deprecated: false
   _db_snapshot_identifier:
     required: true
     help: (Required) The Identifier for the snapshot.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_db_snapshot
 attributes:
   status:
     help: ! '- Specifies the status of this DB snapshot.'

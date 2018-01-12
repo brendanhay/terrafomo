@@ -1,17 +1,17 @@
-_name: consul_catalog_nodes
 arguments:
   _query_options:
     required: false
     help: (Optional) See below.
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) The Consul datacenter to query.  Defaults to the same value found
       in @query_options@ parameter specified below, or if that is empty, the @datacenter@
       value found in the Consul agent that this provider is configured to talk to.
+    ignored: false
     type: Text
-    deprecated: false
+name: consul_catalog_nodes
 attributes:
   datacenter:
     help: ! '- The datacenter the keys are being read from to.'

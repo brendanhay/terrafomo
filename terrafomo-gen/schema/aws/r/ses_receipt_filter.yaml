@@ -1,20 +1,20 @@
-_name: aws_ses_receipt_filter
 arguments:
   _policy:
     required: true
     help: (Required) Block or Allow
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the filter
+    ignored: false
     type: Text
-    deprecated: false
   _cidr:
     required: true
     help: (Required) The IP address or address range to filter, in CIDR notation
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ses_receipt_filter
 attributes: {}
 about: Provides an SES receipt filter resource
 examples: []

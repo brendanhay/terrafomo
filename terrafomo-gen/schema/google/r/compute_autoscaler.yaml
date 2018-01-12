@@ -1,37 +1,37 @@
-_name: google_compute_autoscaler
 arguments:
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the autoscaler.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (Required) The zone of the target.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) An optional textual description of the instance group manager.
+    ignored: false
     type: Text
-    deprecated: false
   _autoscaling_policy:
     required: true
     help: (Required) The parameters of the autoscaling algorithm. Structure is documented
       below.
+    ignored: false
     type: Text
-    deprecated: false
   _target:
     required: true
     help: (Required) The full URL to the instance group manager whose size we control.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_autoscaler
 attributes:
   self_link:
     help: ! '- The URL of the created resource.'

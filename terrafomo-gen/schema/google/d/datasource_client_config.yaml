@@ -1,15 +1,15 @@
-_name: google_client_config
 arguments:
   _region:
     required: true
     help: ! '- The region to operate under.'
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: true
     help: ! '- The ID of the project to apply any resources to.'
+    ignored: false
     type: Text
-    deprecated: false
+name: google_client_config
 attributes: {}
 about: Use this data source to access the configuration of the Google Cloud provider.
 examples: []

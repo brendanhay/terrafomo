@@ -1,4 +1,3 @@
-_name: alicloud_slb
 arguments:
   _name:
     required: false
@@ -7,39 +6,69 @@ arguments:
       characters or hyphens, such as "-","/",".","_", and must not begin or end with
       a hyphen. If not specified, Terraform will autogenerate a name beginning with
       @tf-lb@ .
+    ignored: false
     type: Text
-    deprecated: false
   _internet:
     required: false
     help: (Optional, Forces New Resource) If true, the SLB addressType will be internet,
       false will be intranet, Default is false. If load balancer launched in VPC,
       this value must be "false".
+    ignored: false
     type: Text
-    deprecated: false
   _bandwidth:
     required: false
     help: (Optional) Valid value is between 1 and 1000, If argument "internet_charge_type"
       is "paybytraffic", then this value will be ignore.
+    ignored: false
     type: Text
-    deprecated: false
   _internet_charge_type:
     required: false
     help: (Optional, Forces New Resource) Valid values are @paybybandwidth@ , @paybytraffic@
       . If this value is "paybybandwidth", then argument "internet" must be "true".
       Default is "paybytraffic". If load balancer launched in VPC, this value must
       be "paybytraffic".
+    ignored: false
     type: Text
-    deprecated: false
   _vswitch_id:
     required: true
     help: (Required for a VPC SLB, Forces New Resource) The VSwitch ID to launch in.
+    ignored: false
     type: Text
-    deprecated: false
   _listener:
     required: false
-    help: (Optional) Additional SLB listener. See <#block-listener> below for details.
+    help: (Deprecated) The field has been deprecated from terraform-alicloud-provider
+      <https://github.com/alibaba/terraform-provider/releases/tag/V1.3.0> , and use
+      resource @alicloud_slb_listener@ to replace.
+    ignored: true
     type: Text
-    deprecated: false
-attributes: {}
-about: Provides an Application Load Balancer resource.
+name: alicloud_slb
+attributes:
+  internet:
+    help: ! '- The internet of the load balancer.'
+    type: Text
+  address:
+    help: ! '- The IP address of the load balancer.'
+    type: Text
+  name:
+    help: ! '- The name of the load balancer.'
+    type: Text
+  bandwidth:
+    help: ! '- The bandwidth of the load balancer.'
+    type: Text
+  id:
+    help: ! '- The ID of the load balancer.'
+    type: Text
+  vswitch_id:
+    help: ! '- The VSwitch ID of the load balancer. Only available on SLB launched
+      in a VPC.'
+    type: Text
+  internet_charge_type:
+    help: ! '- The internet_charge_type of the load balancer.'
+    type: Text
+about: ! 'Provides an Application Load Balancer resource. ~> NOTE: Resource @alicloud_slb@
+  has deprecated ''listener'' filed from terraform-alicloud-provider <https://github.com/alibaba/terraform-provider/releases/tag/V1.3.0>
+  . You can create new listeners for Load Balancer by resource @alicloud_slb_listener@
+  . If you have had several listeners in one load balancer, you can import them via
+  the specified listener ID. In the @alicloud_slb_listener@ , listener ID is consist
+  of load balancer ID and frontend port, and its format is " : ", like "lb-hr2fwnf32t:8080".'
 examples: []

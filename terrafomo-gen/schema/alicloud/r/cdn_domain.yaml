@@ -1,0 +1,47 @@
+arguments:
+  _source_port:
+    required: false
+    help: (Optional) Source port of the accelerated domain. Valid values are @80@
+      and @443@ . Default value is @80@ . You must use @80@ when the @source_type@
+      is @oss@ .
+    ignored: false
+    type: Text
+  _domain_name:
+    required: true
+    help: (Required) Name of the accelerated domain. This name without suffix can
+      have a string of 1 to 63 characters, must contain only alphanumeric characters
+      or "-", and must not begin or end with "-", and "-" must not in the 3th and
+      4th character positions at the same time. Suffix @.sh@ and @.tel@ are not supported.
+    ignored: false
+    type: Text
+  _source_type:
+    required: false
+    help: (Optional) Source type of the accelerated domain. Valid values are @ipaddr@
+      , @domain@ , @oss@ . You must set this parameter when @cdn_type@ value is not
+      @liveStream@ .
+    ignored: false
+    type: Text
+  _scope:
+    required: false
+    help: (Optional) Scope of the accelerated domain. Valid values are @domestic@
+      , @overseas@ , @global@ . Default value is @domestic@ . This parameter's setting
+      is valid Only for the international users and domestic L3 and above users .
+    ignored: false
+    type: Text
+  _cdn_type:
+    required: true
+    help: (Required) Cdn type of the accelerated domain. Valid values are @web@ ,
+      @download@ , @video@ , @liveStream@ .
+    ignored: false
+    type: Text
+  _sources:
+    required: false
+    help: ! '(Optional, Type: list) Sources of the accelerated domain. It''s a list
+      of domain names or IP address and consists of at most 20 items. You must set
+      this parameter when @cdn_type@ value is not @liveStream@ .'
+    ignored: false
+    type: Text
+name: alicloud_cdn_domain
+attributes: {}
+about: Provides a CDN Accelerated Domain resource.
+examples: []

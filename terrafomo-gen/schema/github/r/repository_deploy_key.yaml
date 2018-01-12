@@ -1,25 +1,25 @@
-_name: github_repository_deploy_key
 arguments:
   _read_only:
     required: true
     help: (Required) A boolean qualifying the key to be either read only or read/write.
+    ignored: false
     type: Text
-    deprecated: false
   _title:
     required: true
     help: (Required) A title.
+    ignored: false
     type: Text
-    deprecated: false
   _repository:
     required: true
     help: (Required) Name of the Github repository.
+    ignored: false
     type: Text
-    deprecated: false
   _key:
     required: true
     help: (Required) A ssh key.
+    ignored: false
     type: Text
-    deprecated: false
+name: github_repository_deploy_key
 attributes: {}
 about: ! 'Provides a GitHub repository deploy key resource. A deploy key is an SSH
   key that is stored on your server and grants access to a single GitHub repository.

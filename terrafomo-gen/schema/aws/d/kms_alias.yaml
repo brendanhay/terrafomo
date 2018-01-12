@@ -1,11 +1,11 @@
-_name: aws_kms_alias
 arguments:
   _name:
     required: true
     help: (Required) The display name of the alias. The name must start with the word
       "alias" followed by a forward slash (alias/)
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_kms_alias
 attributes:
   arn:
     help: ! '- The Amazon Resource Name(ARN) of the key alias.'

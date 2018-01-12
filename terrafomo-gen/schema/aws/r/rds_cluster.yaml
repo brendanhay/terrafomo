@@ -1,144 +1,143 @@
-_name: aws_rds_cluster
 arguments:
   _db_cluster_parameter_group_name:
     required: false
     help: (Optional) A cluster parameter group to associate with the cluster.
+    ignored: false
     type: Text
-    deprecated: false
   _iam_roles:
     required: false
     help: (Optional) A List of ARNs for the IAM roles to associate to the RDS Cluster.
+    ignored: false
     type: Text
-    deprecated: false
   _db_subnet_group_name:
     required: false
     help: ! '(Optional) A DB subnet group to associate with this DB instance. NOTE:
       This must match the @db_subnet_group_name@ specified on every </docs/providers/aws/r/rds_cluster_instance.html>
       in the cluster.'
+    ignored: false
     type: Text
-    deprecated: false
   _iam_database_authentication_enabled:
     required: false
     help: (Optional) Specifies whether or mappings of AWS Identity and Access Management
       (IAM) accounts to database accounts is enabled.
+    ignored: false
     type: Text
-    deprecated: false
   _preferred_backup_window:
     required: false
     help: ! '(Optional) The daily time range during which automated backups are created
       if automated backups are enabled using the BackupRetentionPeriod parameter.Time
       in UTC Default: A 30-minute window selected at random from an 8-hour block of
       time per region. e.g. 04:00-09:00'
+    ignored: false
     type: Text
-    deprecated: false
   _skip_final_snapshot:
     required: false
     help: (Optional) Determines whether a final DB snapshot is created before the
       DB cluster is deleted. If true is specified, no DB snapshot is created. If false
       is specified, a DB snapshot is created before the DB cluster is deleted, using
       the value from @final_snapshot_identifier@ . Default is @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _engine:
     required: false
     help: (Optional) The name of the database engine to be used for this DB cluster.
       Defaults to @aurora@ .
+    ignored: false
     type: Text
-    deprecated: false
   _cluster_identifier:
     required: false
     help: (Optional, Forces new resources) The cluster identifier. If omitted, Terraform
       will assign a random, unique identifier.
+    ignored: false
     type: Text
-    deprecated: false
   _final_snapshot_identifier:
     required: false
     help: (Optional) The name of your final DB snapshot when this DB cluster is deleted.
       If omitted, no final snapshot will be made.
+    ignored: false
     type: Text
-    deprecated: false
   _engine_version:
     required: false
     help: (Optional) The database engine version.
+    ignored: false
     type: Text
-    deprecated: false
   _availability_zones:
     required: false
     help: (Optional) A list of EC2 Availability Zones that instances in the DB cluster
       can be created in
+    ignored: false
     type: Text
-    deprecated: false
   _storage_encrypted:
     required: false
     help: (Optional) Specifies whether the DB cluster is encrypted. The default is
       @false@ if not specified.
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot_identifier:
     required: false
     help: ! '(Optional) Specifies whether or not to create this cluster from a snapshot.
       This correlates to the snapshot ID you''d find in the RDS console, e.g: rds:production-2015-06-26-06-05.'
+    ignored: false
     type: Text
-    deprecated: false
   _master_username:
     required: true
     help: (Required unless a @snapshot_identifier@ is provided) Username for the master
       DB user
+    ignored: false
     type: Text
-    deprecated: false
   _database_name:
     required: false
-    help: (Optional) The name for your database of up to 8 alpha-numeric characters.
-      If you do not provide a name, Amazon RDS will not create a database in the DB
-      cluster you are creating
+    help: ! '(Optional) Name for an automatically created database on cluster creation.
+      There are different naming restrictions per database engine: <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints>'
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_security_group_ids:
     required: false
     help: (Optional) List of VPC security groups to associate with the Cluster
+    ignored: false
     type: Text
-    deprecated: false
   _apply_immediately:
     required: false
     help: (Optional) Specifies whether any cluster modifications are applied immediately,
       or during the next maintenance window. Default is @false@ . See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html>
+    ignored: false
     type: Text
-    deprecated: false
   _backup_retention_period:
     required: false
     help: (Optional) The days to retain backups for. Default 1
+    ignored: false
     type: Text
-    deprecated: false
   _kms_key_id:
     required: false
     help: (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@
       , @storage_encrypted@ needs to be set to true.
+    ignored: false
     type: Text
-    deprecated: false
   _master_password:
     required: true
     help: (Required unless a @snapshot_identifier@ is provided) Password for the master
       DB user. Note that this may show up in logs, and it will be stored in the state
       file
+    ignored: false
     type: Text
-    deprecated: false
   _preferred_maintenance_window:
     required: false
     help: (Optional) The weekly time range during which system maintenance can occur,
       in (UTC) e.g. wed:04:00-wed:04:30
+    ignored: false
     type: Text
-    deprecated: false
   _cluster_identifier_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique cluster identifier beginning
       with the specified prefix. Conflicts with @cluster_identifer@ .
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: false
     help: (Optional) The port on which the DB accepts connections
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_rds_cluster
 attributes:
   status:
     help: ! '- The RDS instance status'

@@ -1,20 +1,20 @@
-_name: aws_ebs_snapshot
 arguments:
   _volume_id:
     required: true
     help: (Required) The Volume ID of which to make a snapshot.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of what the snapshot is.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the snapshot
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ebs_snapshot
 attributes:
   kms_key_id:
     help: ! '- The ARN for the KMS encryption key.'

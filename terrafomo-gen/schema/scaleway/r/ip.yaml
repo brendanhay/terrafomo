@@ -1,10 +1,10 @@
-_name: scaleway_ip
 arguments:
   _server:
     required: false
     help: (Optional) ID of server to associate IP with
+    ignored: false
     type: Text
-    deprecated: false
+name: scaleway_ip
 attributes:
   ip:
     help: ! '- IP of the new resource'

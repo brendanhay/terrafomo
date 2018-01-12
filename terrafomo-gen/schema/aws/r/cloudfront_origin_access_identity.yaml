@@ -1,10 +1,10 @@
-_name: aws_cloudfront_origin_access_identity
 arguments:
   _comment:
     required: true
     help: (Optional) - An optional comment for the origin access identity.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_cloudfront_origin_access_identity
 attributes:
   etag:
     help: ! '- The current version of the origin access identity''s information. For

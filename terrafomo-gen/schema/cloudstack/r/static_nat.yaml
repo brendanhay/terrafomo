@@ -1,30 +1,30 @@
-_name: cloudstack_static_nat
 arguments:
   _project:
     required: false
     help: (Optional) The name or ID of the project to deploy this instance to. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _vm_guest_ip:
     required: false
     help: (Optional) The virtual machine IP address to forward the static NAT traffic
       to (useful when the virtual machine has secondary NICs or IP addresses). Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_address_id:
     required: true
     help: (Required) The public IP address ID for which static NAT will be enabled.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _virtual_machine_id:
     required: true
     help: (Required) The virtual machine ID to enable the static NAT feature for.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: cloudstack_static_nat
 attributes:
   vm_guest_ip:
     help: ! '- The IP address of the virtual machine that is used to forward the static

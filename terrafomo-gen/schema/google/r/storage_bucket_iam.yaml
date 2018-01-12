@@ -1,0 +1,25 @@
+arguments:
+  _role:
+    required: true
+    help: (Required) The role that should be applied.
+    ignored: false
+    type: Text
+  _member/members:
+    required: true
+    help: ! '(Required) Identities that will be granted the privilege in @role@ .
+      Each entry can have one of the following values:'
+    ignored: false
+    type: Text
+  _bucket:
+    required: true
+    help: (Required) The name of the bucket it applies to.
+    ignored: false
+    type: Text
+name: IAMpolicyforGooglestoragebucket
+attributes:
+  etag:
+    help: ! '- (Computed) The etag of the storage bucket''s IAM policy.'
+    type: Text
+about: ! 'Two different resources help you manage your IAM policy for storage bucket.
+  Each of these resources serves a different use case:'
+examples: []

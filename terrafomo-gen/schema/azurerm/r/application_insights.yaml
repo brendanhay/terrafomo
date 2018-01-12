@@ -1,34 +1,34 @@
-_name: azurerm_application_insights
 arguments:
   _name:
     required: true
     help: (Required) Specifies the name of the Application Insights component. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _application_type:
     required: true
     help: (Required) Specifies the type of Application Insights to create. Valid values
       are @Web@ and @Other@ .
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the Application
       Insights component.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_application_insights
 attributes:
   id:
     help: ! '- The ID of the Application Insights component.'

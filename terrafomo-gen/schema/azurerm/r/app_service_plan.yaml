@@ -1,45 +1,45 @@
-_name: azurerm_app_service_plan
 arguments:
   _name:
     required: true
     help: (Required) Specifies the name of the App Service Plan component. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _kind:
     required: false
     help: (Optional) The kind of the App Service Plan to create. Possible values are
       @Windows@ and @Linux@ . Defaults to @Windows@ . Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _sku:
     required: true
     help: (Required) A @sku@ block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the App Service
       Plan component.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _properties:
     required: false
     help: (Optional) A @properties@ block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_app_service_plan
 attributes:
   maximum_number_of_workers:
     help: ! '- The maximum number of workers supported with the App Service Plan''s

@@ -1,10 +1,10 @@
-_name: aws_lb_listener
 arguments:
   _arn:
     required: true
     help: (Required) The ARN of the listener.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lb_listener
 attributes: {}
 about: ! '~> Note:  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality
   is identical. Provides information about a Load Balancer Listener. This data source

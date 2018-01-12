@@ -1,0 +1,37 @@
+arguments:
+  _user_name:
+    required: true
+    help: (Required, Forces new resource) Name of the RAM user. This name can have
+      a string of 1 to 64 characters, must contain only alphanumeric characters or
+      hyphens, such as "-",".","_", and must not begin with a hyphen.
+    ignored: false
+    type: Text
+  _policy_name:
+    required: true
+    help: (Required, Forces new resource) Name of the RAM policy. This name can have
+      a string of 1 to 128 characters, must contain only alphanumeric characters or
+      hyphen "-", and must not begin with a hyphen.
+    ignored: false
+    type: Text
+  _policy_type:
+    required: true
+    help: (Required, Forces new resource) Type of the RAM policy. It must be @Custom@
+      or @System@ .
+    ignored: false
+    type: Text
+name: alicloud_ram_user_policy_attachment
+attributes:
+  policy_type:
+    help: ! '- The policy type.'
+    type: Text
+  id:
+    help: ! '- The attachment ID.'
+    type: Text
+  policy_name:
+    help: ! '- The policy name.'
+    type: Text
+  user_name:
+    help: ! '- The user name.'
+    type: Text
+about: Provides a RAM User Policy attachment resource.
+examples: []

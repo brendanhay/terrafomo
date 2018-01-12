@@ -1,25 +1,30 @@
-_name: DockerProvider
 arguments:
   _host:
     required: true
     help: (Required) This is the address to the Docker host. If this is blank, the
       @DOCKER_HOST@ environment variable will also be read.
+    ignored: false
     type: Text
-    deprecated: false
   _cert_path:
     required: false
     help: (Optional) Path to a directory with certificate information for connecting
       to the Docker host via TLS. If this is blank, the @DOCKER_CERT_PATH@ will also
       be checked.
+    ignored: false
     type: Text
-    deprecated: false
+  _registry_auth:
+    required: false
+    help: (Optional) A block specifying the credentials for a target v2 Docker registry.
+    ignored: false
+    type: Text
   _ca_material:
     required: true
     help: ! ', @cert_material@ , @key_material@ , - (Optional) Content of @ca.pem@
       , @cert.pem@ , and @key.pem@ files for TLS authentication. Cannot be used together
       with @cert_path@ .'
+    ignored: false
     type: Text
-    deprecated: false
+name: DockerProvider
 attributes: {}
 about: The Docker provider is used to interact with Docker containers and images.
   It uses the Docker API to manage the lifecycle of Docker containers. Because the

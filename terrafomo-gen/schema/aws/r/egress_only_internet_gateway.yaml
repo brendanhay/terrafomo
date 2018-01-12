@@ -1,10 +1,10 @@
-_name: aws_egress_only_internet_gateway
 arguments:
   _vpc_id:
     required: true
     help: (Required) The VPC ID to create in.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_egress_only_internet_gateway
 attributes:
   id:
     help: ! '- The ID of the Egress Only Internet Gateway.'

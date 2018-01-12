@@ -1,32 +1,32 @@
-_name: aws_route_table
 arguments:
   _filter:
     required: false
     help: (Optional) Custom filter block as described below.
+    ignored: false
     type: Text
-    deprecated: false
   _subnet_id:
     required: false
     help: (Optional) The id of a Subnet which is connected to the Route Table (not
       be exported if not given in parameter).
+    ignored: false
     type: Text
-    deprecated: false
   _route_table_id:
     required: false
     help: (Optional) The id of the specific Route Table to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The id of the VPC that the desired Route Table belongs to.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired Route Table.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_route_table
 attributes:
   gateway_id:
     help: ! '- The Internet Gateway ID.'

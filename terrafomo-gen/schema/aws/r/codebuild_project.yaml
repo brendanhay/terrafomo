@@ -1,58 +1,58 @@
-_name: aws_codebuild_project
 arguments:
   _environment:
     required: true
     help: (Required) Information about the project's build environment. Environment
       blocks are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _source:
     required: true
     help: (Required) Information about the project's input source code. Source blocks
       are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _artifacts:
     required: true
     help: (Required) Information about the project's build output artifacts. Artifact
       blocks are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _build_timeout:
     required: false
     help: (Optional) How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild
       to wait until timing out any related build that does not get marked as completed.
       The default is 60 minutes.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The projects name.
+    ignored: false
     type: Text
-    deprecated: false
   _service_role:
     required: false
     help: (Optional) The Amazon Resource Name (ARN) of the AWS Identity and Access
       Management (IAM) role that enables AWS CodeBuild to interact with dependent
       AWS services on behalf of the AWS account.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A short description of the project.
+    ignored: false
     type: Text
-    deprecated: false
   _encryption_key:
     required: false
     help: (Optional) The AWS Key Management Service (AWS KMS) customer master key
       (CMK) to be used for encrypting the build project's build output artifacts.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_codebuild_project
 attributes:
   encryption_key:
     help: ! '- The AWS Key Management Service (AWS KMS) customer master key (CMK)

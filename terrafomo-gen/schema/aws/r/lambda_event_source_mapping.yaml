@@ -1,34 +1,34 @@
-_name: aws_lambda_event_source_mapping
 arguments:
   _enabled:
     required: false
     help: (Optional) Determines if the mapping will be enabled on creation. Defaults
       to @true@ .
+    ignored: false
     type: Text
-    deprecated: false
   _function_name:
     required: true
     help: (Required) The name or the ARN of the Lambda function that will be subscribing
       to events.
+    ignored: false
     type: Text
-    deprecated: false
   _batch_size:
     required: false
     help: (Optional) The largest number of records that Lambda will retrieve from
       your event source at the time of invocation. Defaults to @100@ .
+    ignored: false
     type: Text
-    deprecated: false
   _starting_position:
     required: true
     help: (Required) The position in the stream where AWS Lambda should start reading.
       Can be one of either @TRIM_HORIZON@ or @LATEST@ .
+    ignored: false
     type: Text
-    deprecated: false
   _event_source_arn:
     required: true
     help: (Required) The event source ARN - can either be a Kinesis or DynamoDB stream.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lambda_event_source_mapping
 attributes:
   last_modified:
     help: ! '- The date this resource was last modified.'

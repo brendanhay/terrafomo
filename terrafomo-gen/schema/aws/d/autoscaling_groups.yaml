@@ -1,11 +1,11 @@
-_name: aws_autoscaling_groups
 arguments:
   _filter:
     required: false
     help: (Optional) A filter used to scope the list e.g. by tags. See <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_Filter.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_autoscaling_groups
 attributes:
   names:
     help: ! '- A list of the Autoscaling Groups in the current region.'

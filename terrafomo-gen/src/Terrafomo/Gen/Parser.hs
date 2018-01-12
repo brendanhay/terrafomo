@@ -2,6 +2,7 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE TupleSections     #-}
 {-# LANGUAGE TypeFamilies      #-}
 {-# LANGUAGE ViewPatterns      #-}
 
@@ -84,7 +85,7 @@ schemaParser = do
     P.skipManyTill node (P.lookAhead (void h1))
 
     -- resource/datasource name
-    schema_Name <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
+    schemaName  <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
 
     -- about/documentation
     schemaAbout <- Just . Text.intercalate " " <$> many (paragraph >>> textual)
@@ -144,7 +145,18 @@ attrHeader =
 argItem :: Parser (Text, Arg)
 argItem = item >>> paragraph >>> argument
   where
-    argument = ((,) <$> fmap fieldName code <*> fmap required textual)
+    argument = do
+        name <- fmap fieldName code
+        arg  <- fmap required textual
+        pure $!
+            case Text.break (== '.') name of
+                (_, "") -> (,) name arg
+                (x, _)  -> (,) x $
+                    arg { argHelp     = pure "(Optional) See datatype documentation."
+                        , argRequired = pure False
+                        , argIgnored  = pure False
+                        , argType     = pure ("Qual." <> dataTypeName x <> "Type")
+                        }
 
     -- should use Parsec.Char here and rethrow errors.
     required h

@@ -1,36 +1,36 @@
-_name: aws_ses_event_destination
 arguments:
   _cloudwatch_destination:
     required: false
     help: (Optional) CloudWatch destination for the events
+    ignored: false
     type: Text
-    deprecated: false
   _enabled:
     required: false
     help: (Optional) If true, the event destination will be enabled
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the event destination
+    ignored: false
     type: Text
-    deprecated: false
   _kinesis_destination:
     required: false
     help: (Optional) Send the events to a kinesis firehose destination
+    ignored: false
     type: Text
-    deprecated: false
   _configuration_set_name:
     required: true
     help: (Required) The name of the configuration set
+    ignored: false
     type: Text
-    deprecated: false
   _matching_types:
     required: true
     help: (Required) A list of matching types. May be any of @"send"@ , @"reject"@
       , @"bounce"@ , @"complaint"@ , @"delivery"@ , @"open"@ , or @"click"@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ses_event_destination
 attributes: {}
 about: Provides an SES event destination
 examples: []

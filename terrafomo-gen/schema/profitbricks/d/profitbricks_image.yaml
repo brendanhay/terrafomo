@@ -1,26 +1,26 @@
-_name: profitbricks_image
 arguments:
   _name:
     required: true
     help: (Required) Name or part of the name of an existing image that you want to
       search for.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: false
     help: (Optional) Id of the existing image's location.
+    ignored: false
     type: Text
-    deprecated: false
   _version:
     required: false
     help: (Optional) Version of the image (see details below).
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: false
     help: (Optional) The image type, HDD or CD-ROM.
+    ignored: false
     type: Text
-    deprecated: false
+name: profitbricks_image
 attributes:
   id:
     help: ! '- UUID of the image'

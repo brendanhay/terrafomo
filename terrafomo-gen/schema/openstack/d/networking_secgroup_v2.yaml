@@ -1,27 +1,27 @@
-_name: openstack_networking_secgroup_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Neutron client. A Neutron
       client is needed to retrieve security groups ids. If omitted, the @region@ argument
       of the provider is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the security group.
+    ignored: false
     type: Text
-    deprecated: false
   _secgroup_id:
     required: false
     help: (Optional) The ID of the security group.
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the security group.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_networking_secgroup_v2
 attributes:
   name:
     help: ! '- See Argument Reference above.'

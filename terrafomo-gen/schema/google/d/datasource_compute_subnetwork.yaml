@@ -1,22 +1,22 @@
-_name: google_compute_subnetwork
 arguments:
   _region:
     required: false
     help: (Optional) The region this subnetwork has been created in. If unspecified,
       this defaults to the region configured in the provider.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: ! '- The name of the subnetwork.'
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_subnetwork
 attributes:
   secondary_ip_range:
     help: ! '- An array of configurations for secondary IP ranges for VM instances

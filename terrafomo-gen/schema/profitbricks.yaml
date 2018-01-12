@@ -1,5 +1,5 @@
-_name: ProfitBricksProvider
 arguments: {}
+name: ProfitBricksProvider
 attributes: {}
 about: The ProfitBricks provider gives the ability to deploy and configure resources
   using ProfitBricks Cloud API. Use the navigation to the left to read about the available

@@ -1,0 +1,16 @@
+arguments:
+  _name:
+    required: true
+    help: (Required) Name of the domain group.
+    ignored: false
+    type: Text
+name: alicloud_dns_group
+attributes:
+  name:
+    help: ! '- The group name.'
+    type: Text
+  id:
+    help: ! '- The group id.'
+    type: Text
+about: Provides a DNS Group resource.
+examples: []

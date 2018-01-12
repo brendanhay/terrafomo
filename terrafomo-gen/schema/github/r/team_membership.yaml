@@ -1,21 +1,21 @@
-_name: github_team_membership
 arguments:
   _team_id:
     required: true
     help: (Required) The GitHub team id
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: false
     help: (Optional) The role of the user within the team. Must be one of @member@
       or @maintainer@ . Defaults to @member@ .
+    ignored: false
     type: Text
-    deprecated: false
   _username:
     required: true
     help: (Required) The user to add to the team.
+    ignored: false
     type: Text
-    deprecated: false
+name: github_team_membership
 attributes: {}
 about: Provides a GitHub team membership resource. This resource allows you to add/remove
   users from teams in your organization. When applied, the user will be added to the

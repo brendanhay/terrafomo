@@ -1,24 +1,24 @@
-_name: tls_private_key
 arguments:
   _rsa_bits:
     required: false
     help: (Optional) When @algorithm@ is "RSA", the size of the generated RSA key
       in bits. Defaults to 2048.
+    ignored: false
     type: Text
-    deprecated: false
   _ecdsa_curve:
     required: false
     help: (Optional) When @algorithm@ is "ECDSA", the name of the elliptic curve to
       use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
       default.
+    ignored: false
     type: Text
-    deprecated: false
   _algorithm:
     required: true
     help: (Required) The name of the algorithm to use for the key. Currently-supported
       values are "RSA" and "ECDSA".
+    ignored: false
     type: Text
-    deprecated: false
+name: tls_private_key
 attributes:
   algorithm:
     help: ! '- The algorithm that was selected for the key.'

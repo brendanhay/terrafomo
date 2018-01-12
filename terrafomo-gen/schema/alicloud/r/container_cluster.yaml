@@ -1,0 +1,78 @@
+arguments:
+  _image_id:
+    required: true
+    help: ! '- (Force new resource) The image ID of ECS instance node used. Default
+      to System automate allocated.'
+    ignored: false
+    type: Text
+  _cidr_block:
+    required: true
+    help: (Required, Force new resource) The CIDR block for the Container. Its valid
+      value are @192.168.X.0/24@ or @172.16.X.0/24@ ~ @172.31.X.0/24@ , and it can't
+      be conflict with VSwitch's.
+    ignored: false
+    type: Text
+  _disk_category:
+    required: true
+    help: ! '- (Force new resource) The data disk category of ECS instance node. Its
+      valid value are @cloud_ssd@ and @cloud_efficiency@ . Default to @cloud_efficiency@
+      .'
+    ignored: false
+    type: Text
+  _name:
+    required: true
+    help: ! '- (Force new resource) The container cluster''s name. It is the only
+      in one Alicloud account.'
+    ignored: false
+    type: Text
+  _password:
+    required: true
+    help: (Required, Force new resource) The password of ECS instance node.
+    ignored: false
+    type: Text
+  _disk_size:
+    required: true
+    help: ! '- (Force new resource) The data disk size of ECS instance node. Its valid
+      value is 20~32768 GB. Default to 20.'
+    ignored: false
+    type: Text
+  _instance_type:
+    required: true
+    help: (Required, Force new resource) The type of ECS instance node.
+    ignored: false
+    type: Text
+  _name_prefix:
+    required: true
+    help: ! '- (Force new resource) The container cluster name''s prefix. It is conflict
+      with @name@ . If it is specified, terraform will using it to build the only
+      cluster name.'
+    ignored: false
+    type: Text
+  _size:
+    required: true
+    help: ! '- The ECS node number of the container cluster. Its value choices are
+      1~20, and default to 1.'
+    ignored: false
+    type: Text
+  _vswitch_id:
+    required: true
+    help: ! '- (Force new resource) The password of ECS instance node. If it is not
+      specified, the container cluster''s network mode will be @Classic@ .'
+    ignored: false
+    type: Text
+name: alicloud_container_cluster
+attributes:
+  vpc_id:
+    help: ! '- The ID of VPC that current cluster launched.'
+    type: Text
+  size:
+    help: The ECS instance node number in the current container cluster.
+    type: Text
+  name:
+    help: ! '- The name of the container cluster.'
+    type: Text
+  vswitch_id:
+    help: ! '- The ID of VSwitch that current cluster launched.'
+    type: Text
+about: Provides a container cluster resource.
+examples: []

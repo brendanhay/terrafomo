@@ -1,10 +1,10 @@
-_name: opc_compute_storage_volume_snapshot
 arguments:
   _name:
     required: true
     help: is the name of the storage volume snapshot.
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_storage_volume_snapshot
 attributes:
   status:
     help: ! '- Status of the snapshot.'

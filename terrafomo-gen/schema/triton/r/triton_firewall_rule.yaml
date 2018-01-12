@@ -1,16 +1,16 @@
-_name: triton_firewall_rule
 arguments:
   _enabled:
     required: true
     help: ! '- (boolean)  Default: @false@ Whether the rule should be effective.'
+    ignored: false
     type: Text
-    deprecated: false
   _rule:
     required: true
     help: ! '- (string, Required) The firewall rule described using the Cloud API
       rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference.'
+    ignored: false
     type: Text
-    deprecated: false
+name: triton_firewall_rule
 attributes:
   id:
     help: ! '- (string) - The identifier representing the firewall rule in Triton.'

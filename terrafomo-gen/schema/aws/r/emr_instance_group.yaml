@@ -1,41 +1,41 @@
-_name: aws_emr_instance_group
 arguments:
   _instance_count:
     required: true
     help: (Optional) Target number of instances for the instance group. Defaults to
       0.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Human friendly name given to the instance group. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ebs_config:
     required: true
     help: (Optional) One or more @ebs_config@ blocks as defined below. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _instance_type:
     required: true
     help: (Required) The EC2 instance type for all instances in the instance group.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ebs_optimized:
     required: true
     help: (Optional) Indicates whether an Amazon EBS volume is EBS-optimized. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _cluster_id:
     required: true
     help: (Required) ID of the EMR Cluster to attach to. Changing this forces a new
       resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_emr_instance_group
 attributes:
   status:
     help: The current status of the instance group.

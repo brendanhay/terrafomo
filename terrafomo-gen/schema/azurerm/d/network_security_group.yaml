@@ -1,0 +1,28 @@
+arguments:
+  _name:
+    required: true
+    help: (Required) Specifies the Name of the Network Security Group.
+    ignored: false
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) Specifies the Name of the Resource Group within which the Network
+      Security Group exists
+    ignored: false
+    type: Text
+name: azurerm_network_security_group
+attributes:
+  security_rule:
+    help: ! '- One or more @security_rule@ blocks as defined below.'
+    type: Text
+  location:
+    help: ! '- The supported Azure location where the resource exists.'
+    type: Text
+  id:
+    help: ! '- The ID of the Network Security Group.'
+    type: Text
+  tags:
+    help: ! '- A mapping of tags to assign to the resource.'
+    type: Text
+about: Use this data source to access the properties of a Network Security Group.
+examples: []

@@ -1,30 +1,45 @@
-_name: google_compute_network
 arguments:
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A brief description of this resource.
+    ignored: false
     type: Text
-    deprecated: false
+  _ipv4_range:
+    required: false
+    help: (Optional) If set to a CIDR block, uses the legacy VPC API with the specified
+      range. This API is deprecated. If set, @auto_create_subnetworks@ must be explicitly
+      set to false.
+    ignored: false
+    type: Text
+  _routing_mode:
+    required: false
+    help: (Optional) Sets the network-wide routing mode for Cloud Routers to use.
+      Accepted values are @"GLOBAL"@ or @"REGIONAL"@ . Defaults to @"REGIONAL"@ .
+      Refer to the <https://cloud.google.com/router/docs/concepts/overview#dynamic-routing-mode>
+      for more details.
+    ignored: false
+    type: Text
   _auto_create_subnetworks:
     required: false
     help: (Optional) If set to true, this network will be created in auto subnet mode,
       and Google will create a subnet for each region automatically. If set to false,
       a custom subnetted network will be created that can support @google_compute_subnetwork@
-      resources.
+      resources. Defaults to true.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_network
 attributes:
   gateway_ipv4:
     help: ! '- The IPv4 address of the gateway.'

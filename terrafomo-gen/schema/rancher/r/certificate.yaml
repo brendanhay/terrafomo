@@ -1,35 +1,35 @@
-_name: rancher_certificate
 arguments:
   _cert:
     required: true
     help: (Required) The certificate content.
+    ignored: false
     type: Text
-    deprecated: false
   _environment_id:
     required: true
     help: (Required) The ID of the environment to create the certificate for.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the certificate.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A certificate description.
+    ignored: false
     type: Text
-    deprecated: false
   _cert_chain:
     required: false
     help: (Optional) The certificate chain.
+    ignored: false
     type: Text
-    deprecated: false
   _key:
     required: true
     help: (Required) The certificate key.
+    ignored: false
     type: Text
-    deprecated: false
+name: rancher_certificate
 attributes:
   serial_number:
     help: ! '- The certificate serial number.'

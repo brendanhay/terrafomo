@@ -1,31 +1,31 @@
-_name: opc_compute_vnic_set
 arguments:
   _applied_acls:
     required: false
     help: (Optional) A list of the ACLs to apply to the virtual nics in the set.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The unique (within this identity domain) name of the virtual
       nic set.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the virtual nic set.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A list of tags to apply to the storage volume.
+    ignored: false
     type: Text
-    deprecated: false
   _virtual_nics:
     required: false
     help: (Optional) List of virtual NICs associated with this virtual NIC set.
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_vnic_set
 attributes: {}
 about: The @opc_compute_vnic_set@ resource creates and manages a virtual NIC set in
   an OPC identity domain.

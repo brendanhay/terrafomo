@@ -1,4 +1,3 @@
-_name: aws_ami
 arguments:
   _virtualization_type:
     required: false
@@ -6,41 +5,42 @@ arguments:
       will use. Can be either "paravirtual" (the default) or "hvm". The choice of
       virtualization type changes the set of further arguments that are required,
       as described below.
+    ignored: false
     type: Text
-    deprecated: false
   _architecture:
     required: false
     help: (Optional) Machine architecture for created instances. Defaults to "x86_64".
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A region-unique name for the AMI.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A longer, human-readable description for the AMI.
+    ignored: false
     type: Text
-    deprecated: false
   _ebs_block_device:
     required: false
     help: (Optional) Nested block describing an EBS block device that should be attached
       to created instances. The structure of this block is described below.
+    ignored: false
     type: Text
-    deprecated: false
   _root_device_name:
     required: false
     help: (Optional) The name of the root device (for example, @/dev/sda1@ , or @/dev/xvda@
       ).
+    ignored: false
     type: Text
-    deprecated: false
   _ephemeral_block_device:
     required: false
     help: (Optional) Nested block describing an ephemeral block device that should
       be attached to created instances. The structure of this block is described below.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ami
 attributes: {}
 about: The AMI resource allows the creation and management of a completely-custom
   Amazon Machine Image (AMI). If you just want to duplicate an existing AMI, possibly

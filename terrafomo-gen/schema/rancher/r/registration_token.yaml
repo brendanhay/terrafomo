@@ -1,31 +1,31 @@
-_name: rancher_registration_token
 arguments:
   _environment_id:
     required: true
     help: (Required) The ID of the environment to create the token for.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the registration token.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A registration token description.
+    ignored: false
     type: Text
-    deprecated: false
   _host_labels:
     required: false
     help: (Optional) A map of host labels to add to the registration command.
+    ignored: false
     type: Text
-    deprecated: false
   _agent_ip:
     required: false
     help: (Optional) A string containing the CATTLE_AGENT_IP to add to the registration
       command.
+    ignored: false
     type: Text
-    deprecated: false
+name: rancher_registration_token
 attributes:
   image:
     help: ! '- (Computed)'

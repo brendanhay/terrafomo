@@ -1,28 +1,28 @@
-_name: postgresql_schema
 arguments:
   _policy:
     required: false
     help: (Optional) Can be specified multiple times for each policy.  Each policy
       block supports fields documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _if_not_exists:
     required: false
     help: ! '(Optional) When true, use the existing schema if it exists. (Default:
       true)'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the schema. Must be unique in the PostgreSQL database
       instance where it is configured.
+    ignored: false
     type: Text
-    deprecated: false
   _owner:
     required: false
     help: (Optional) The ROLE who owns the schema.
+    ignored: false
     type: Text
-    deprecated: false
+name: postgresql_schema
 attributes: {}
 about: The @postgresql_schema@ resource creates and manages <https://www.postgresql.org/docs/current/static/ddl-schemas.html>
   within a PostgreSQL database.

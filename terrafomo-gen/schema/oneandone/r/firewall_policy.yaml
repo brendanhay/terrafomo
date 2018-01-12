@@ -1,15 +1,15 @@
-_name: oneandone_server
 arguments:
   _name:
     required: true
     help: (Required) The name of the VPN.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Description for the VPN
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_server
 attributes: {}
 about: Manages a Firewall Policy on 1&1
 examples: []

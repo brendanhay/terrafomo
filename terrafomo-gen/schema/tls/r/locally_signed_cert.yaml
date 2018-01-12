@@ -1,46 +1,45 @@
-_name: tls_locally_signed_cert
 arguments:
   _ca_cert_pem:
     required: true
     help: (Required) PEM-encoded certificate data for the CA.
+    ignored: false
     type: Text
-    deprecated: false
   _ca_private_key_pem:
     required: true
     help: (Required) PEM-encoded private key data for the CA. This can be read from
       a separate file using the @file@ interpolation function.
+    ignored: false
     type: Text
-    deprecated: false
   _validity_period_hours:
     required: true
     help: (Required) The number of hours after initial issuing that the certificate
       will become invalid.
+    ignored: false
     type: Text
-    deprecated: false
   _cert_request_pem:
     required: true
     help: (Required) PEM-encoded request certificate data.
+    ignored: false
     type: Text
-    deprecated: false
   _is_ca_certificate:
     required: false
     help: (Optional) Boolean controlling whether the CA flag will be set in the generated
       certificate. Defaults to @false@ , meaning that the certificate does not represent
       a certificate authority.
+    ignored: false
     type: Text
-    deprecated: false
   _ca_key_algorithm:
     required: true
     help: (Required) The name of the algorithm for the key provided in @ca_private_key_pem@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _allowed_uses:
     required: true
     help: (Required) List of keywords each describing a use that is permitted for
       the issued certificate. The valid keywords are listed below.
+    ignored: false
     type: Text
-    deprecated: false
   _early_renewal_hours:
     required: false
     help: (Optional) If set, the resource will consider the certificate to have expired
@@ -50,8 +49,9 @@ arguments:
       expiration time, since this resource does not (and cannot) support certificate
       revocation. Note also that this advance update can only be performed should
       the Terraform configuration be applied during the early renewal period.
+    ignored: false
     type: Text
-    deprecated: false
+name: tls_locally_signed_cert
 attributes:
   cert_pem:
     help: ! '- The certificate data in PEM format.'

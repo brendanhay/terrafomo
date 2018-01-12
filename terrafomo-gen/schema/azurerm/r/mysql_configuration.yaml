@@ -1,29 +1,29 @@
-_name: azurerm_mysql_configuration
 arguments:
   _value:
     required: true
     help: (Required) Specifies the value of the MySQL Configuration. See the MySQL
       documentation for valid values.
+    ignored: false
     type: Text
-    deprecated: false
   _server_name:
     required: true
     help: (Required) Specifies the name of the MySQL Server. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the MySQL Configuration, which needs <https://dev.mysql.com/doc/refman/5.7/en/server-configuration.html>
       . Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the MySQL Server exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_mysql_configuration
 attributes:
   id:
     help: ! '- The ID of the MySQL Configuration.'

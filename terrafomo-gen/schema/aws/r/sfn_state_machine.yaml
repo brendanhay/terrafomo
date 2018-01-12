@@ -1,21 +1,21 @@
-_name: sfn_state_machine
 arguments:
   _name:
     required: true
     help: (Required) The name of the state machine.
+    ignored: false
     type: Text
-    deprecated: false
   _role_arn:
     required: true
     help: (Required) The Amazon Resource Name (ARN) of the IAM role to use for this
       state machine.
+    ignored: false
     type: Text
-    deprecated: false
   _definition:
     required: true
     help: (Required) The Amazon States Language definition of the state machine.
+    ignored: false
     type: Text
-    deprecated: false
+name: sfn_state_machine
 attributes:
   status:
     help: ! '- The current status of the state machine. Either "ACTIVE" or "DELETING".'

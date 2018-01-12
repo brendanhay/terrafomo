@@ -1,0 +1,23 @@
+arguments:
+  _name_regex:
+    required: false
+    help: (Optional) A regex string to apply to the group list returned by Alicloud.
+    ignored: false
+    type: Text
+  _output_file:
+    required: false
+    help: (Optional) The name of file that can save groups data source after running
+      @terraform plan@ .
+    ignored: false
+    type: Text
+name: alicloud_dns_groups
+attributes:
+  group_name:
+    help: ! '- Name of the group .'
+    type: Text
+  group_id:
+    help: ! '- Id of the group .'
+    type: Text
+about: The Dns Domain Groups data source provides a list of Alicloud Dns Domain Groups
+  in an Alicloud account according to the specified filters.
+examples: []

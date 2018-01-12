@@ -1,0 +1,41 @@
+arguments:
+  _data':
+    required: true
+    help: (Required) The broker configuration in XML format. See <https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-broker-configuration-parameters.html>
+      for supported parameters and format of the XML.
+    ignored: false
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the configuration
+    ignored: false
+    type: Text
+  _engine_type:
+    required: true
+    help: (Required) The type of broker engine.
+    ignored: false
+    type: Text
+  _description:
+    required: false
+    help: (Optional) The description of the configuration.
+    ignored: false
+    type: Text
+  _engine_version:
+    required: true
+    help: (Required) The version of the broker engine.
+    ignored: false
+    type: Text
+name: aws_mq_configuration
+attributes:
+  latest_revision:
+    help: ! '- The latest revision of the configuration.'
+    type: Text
+  arn:
+    help: ! '- The ARN of the configuration.'
+    type: Text
+  id:
+    help: ! '- The unique ID that Amazon MQ generates for the configuration.'
+    type: Text
+about: Provides an MQ Configuration Resource. For more information on Amazon MQ, see
+  <https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/welcome.html> .
+examples: []

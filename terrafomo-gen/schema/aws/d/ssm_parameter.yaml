@@ -1,10 +1,10 @@
-_name: aws_ssm_parameter
 arguments:
   _name:
     required: true
     help: (Required) The name of the parameter.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ssm_parameter
 attributes: {}
 about: Provides an SSM Parameter data source.
 examples: []

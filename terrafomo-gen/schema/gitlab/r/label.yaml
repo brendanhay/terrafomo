@@ -1,27 +1,27 @@
-_name: gitlab_label
 arguments:
   _color:
     required: true
     help: ! '(Required) The color of the label given in 6-digit hex notation with
       leading ''#'' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords>
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: true
     help: (Required) The name or id of the project to add the label to.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the label.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the label.
+    ignored: false
     type: Text
-    deprecated: false
+name: gitlab_label
 attributes:
   id:
     help: ! '- The unique id assigned to the label by the GitLab server (the name

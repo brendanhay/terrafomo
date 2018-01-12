@@ -1,15 +1,15 @@
-_name: google_project_service
 arguments:
   _service:
     required: true
     help: (Required) The service to enable.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project ID. If not provided, the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_project_service
 attributes: {}
 about: ! 'Allows management of a single API service for an existing Google Cloud Platform
   project. For a list of services available, visit the <https://console.cloud.google.com/apis/library>

@@ -1,15 +1,15 @@
-_name: aws_lightsail_static_ip_attachment
 arguments:
   _static_ip_name:
     required: true
     help: (Required) The name of the allocated static IP
+    ignored: false
     type: Text
-    deprecated: false
   _instance_name:
     required: true
     help: (Required) The name of the Lightsail instance to attach the IP to
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lightsail_static_ip_attachment
 attributes:
   arn:
     help: ! '- The ARN of the Lightsail static IP'

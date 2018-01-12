@@ -1,10 +1,10 @@
-_name: opsgenie_user
 arguments:
   _username:
     required: true
     help: (Required) The username (email) to use to find a user in OpsGenie.
+    ignored: false
     type: Text
-    deprecated: false
+name: opsgenie_user
 attributes:
   full_name:
     help: ! '- The full name of the found user.'

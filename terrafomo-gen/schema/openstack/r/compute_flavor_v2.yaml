@@ -1,53 +1,53 @@
-_name: openstack_compute_flavor_v2
 arguments:
   _rx_tx_factor:
     required: false
     help: (Optional) RX/TX bandwith factor. The default is 1. Changing this creates
       a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Compute client. Flavors
       are associated with accounts, but a Compute client is needed to create one.
       If omitted, the @region@ argument of the provider is used. Changing this creates
       a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _swap:
     required: false
     help: (Optional) The amount of disk space in megabytes to use. If unspecified,
       the default is 0. Changing this creates a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the flavor. Changing this creates a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _ram:
     required: true
     help: (Required) The amount of RAM to use, in megabytes. Changing this creates
       a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _vcpus:
     required: true
     help: (Required) The number of virtual CPUs to use. Changing this creates a new
       flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _disk:
     required: true
     help: (Required) The amount of disk space in gigabytes to use for the root (/)
       partition. Changing this creates a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
   _is_public:
     required: false
     help: (Optional) Whether the flavor is public. Changing this creates a new flavor.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_compute_flavor_v2
 attributes:
   disk:
     help: ! '- See Argument Reference above.'

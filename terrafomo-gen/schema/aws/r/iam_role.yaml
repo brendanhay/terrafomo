@@ -1,22 +1,22 @@
-_name: aws_iam_role
 arguments:
   _name:
     required: false
     help: (Optional, Forces new resource) The name of the role. If omitted, Terraform
       will assign a random, unique name.
+    ignored: false
     type: Text
-    deprecated: false
   _assume_role_policy:
     required: true
     help: (Required) The policy that grants an entity permission to assume the role.
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique name beginning with the
       specified prefix. Conflicts with @name@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_role
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the role.'

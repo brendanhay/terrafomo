@@ -1,15 +1,15 @@
-_name: scaleway_security_group
 arguments:
   _name:
     required: true
     help: (Required) name of security group
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: (Required) description of security group
+    ignored: false
     type: Text
-    deprecated: false
+name: scaleway_security_group
 attributes:
   id:
     help: ! '- id of the new resource'

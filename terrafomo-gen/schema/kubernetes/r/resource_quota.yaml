@@ -1,15 +1,15 @@
-_name: kubernetes_resource_quota
 arguments:
   _metadata:
     required: true
     help: ! '(Required) Standard resource quota''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
+    ignored: false
     type: Text
-    deprecated: false
   _spec:
     required: false
     help: (Optional) Spec defines the desired quota. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
+    ignored: false
     type: Text
-    deprecated: false
+name: kubernetes_resource_quota
 attributes: {}
 about: A resource quota provides constraints that limit aggregate resource consumption
   per namespace. It can limit the quantity of objects that can be created in a namespace

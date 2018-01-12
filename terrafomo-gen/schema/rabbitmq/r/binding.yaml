@@ -1,35 +1,35 @@
-_name: rabbitmq_binding
 arguments:
   _arguments:
     required: false
     help: (Optional) Additional key/value arguments for the binding.
+    ignored: false
     type: Text
-    deprecated: false
   _source:
     required: true
     help: (Required) The source exchange.
+    ignored: false
     type: Text
-    deprecated: false
   _routing_key:
     required: false
     help: (Optional) A routing key for the binding.
+    ignored: false
     type: Text
-    deprecated: false
   _destination:
     required: true
     help: (Required) The destination queue or exchange.
+    ignored: false
     type: Text
-    deprecated: false
   _destination_type:
     required: true
     help: (Required) The type of destination (queue or exchange).
+    ignored: false
     type: Text
-    deprecated: false
   _vhost:
     required: true
     help: (Required) The vhost to create the resource in.
+    ignored: false
     type: Text
-    deprecated: false
+name: rabbitmq_binding
 attributes:
   properties_key:
     help: ! '- A unique key to refer to the binding.'

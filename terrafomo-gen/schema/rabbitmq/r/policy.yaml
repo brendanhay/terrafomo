@@ -1,20 +1,20 @@
-_name: rabbitmq_policy
 arguments:
   _policy:
     required: true
     help: (Required) The settings of the policy. The structure is described below.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the policy.
+    ignored: false
     type: Text
-    deprecated: false
   _vhost:
     required: true
     help: (Required) The vhost to create the resource in.
+    ignored: false
     type: Text
-    deprecated: false
+name: rabbitmq_policy
 attributes: {}
 about: The @rabbitmq_policy@ resource creates and manages policies for exchanges and
   queues.

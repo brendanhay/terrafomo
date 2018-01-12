@@ -1,26 +1,26 @@
-_name: random_integer
 arguments:
   _keepers:
     required: false
     help: (Optional) Arbitrary map of values that, when changed, will trigger a new
       id to be generated. See <../index.html> for more information.
+    ignored: false
     type: Text
-    deprecated: false
   _max:
     required: true
     help: ! '- (int) The maximum inclusive value of the range.'
+    ignored: false
     type: Text
-    deprecated: false
   _min:
     required: true
     help: ! '- (int) The minimum inclusive value of the range.'
+    ignored: false
     type: Text
-    deprecated: false
   _seed:
     required: false
     help: (Optional) A custom seed to always produce the same value.
+    ignored: false
     type: Text
-    deprecated: false
+name: random_integer
 attributes:
   result:
     help: ! '- (int) The random Integer result.'

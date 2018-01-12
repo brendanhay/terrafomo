@@ -1,21 +1,21 @@
-_name: aws_redshift_security_group
 arguments:
   _name:
     required: true
     help: (Required) The name of the Redshift security group.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the Redshift security group. Defaults to "Managed
       by Terraform".
+    ignored: false
     type: Text
-    deprecated: false
   _ingress:
     required: false
     help: (Optional) A list of ingress rules.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_redshift_security_group
 attributes:
   id:
     help: ! '- The Redshift security group ID.'

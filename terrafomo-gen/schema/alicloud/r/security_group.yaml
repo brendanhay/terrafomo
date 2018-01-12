@@ -1,21 +1,21 @@
-_name: alicloud_security_group
 arguments:
   _name:
     required: false
     help: (Optional) The name of the security group. Defaults to null.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional, Forces new resource) The security group description. Defaults
       to null.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional, Forces new resource) The VPC ID.
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_security_group
 attributes:
   vpc_id:
     help: ! '- The VPC ID.'

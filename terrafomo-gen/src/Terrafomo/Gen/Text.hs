@@ -13,16 +13,22 @@ fieldName :: Text -> Text
 fieldName = Text.cons '_' . unreserved
 
 resourceName :: Text -> Text
-resourceName = (<> "Resource") . dataTypeName
+resourceName = (<> "Resource") . schemaTypeName
 
 dataSourceName :: Text -> Text
-dataSourceName = (<> "DataSource") . dataTypeName
+dataSourceName = (<> "DataSource") . schemaTypeName
+
+schemaTypeName :: Text -> Text
+schemaTypeName x =
+    case Text.split (== '_') x of
+        []   -> x
+        _:xs -> foldMap upperHead xs
 
 dataTypeName :: Text -> Text
 dataTypeName x =
     case Text.split (== '_') x of
-        []   -> x
-        _:xs -> foldMap upperHead xs
+        [] -> x
+        xs -> foldMap upperHead xs
 
 upperHead :: Text -> Text
 upperHead x =

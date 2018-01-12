@@ -1,20 +1,22 @@
-_name: vsphere_network
 arguments:
   _name:
     required: true
     help: (Required) The name of the network. This can be a name or path.
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter_id:
     required: false
-    help: (Optional) The managed object reference ID of the datacenter the network
-      is located in. This can be omitted if the search path used in @name@ is an absolute
-      path, or if there is only one datacenter in the vSphere infrastructure.
+    help: (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the datacenter the network is located in. This can be omitted if the search
+      path used in @name@ is an absolute path. For default datacenters, use the id
+      attribute from an empty @vsphere_datacenter@ data source.
+    ignored: false
     type: Text
-    deprecated: false
+name: vsphere_network
 attributes:
   id:
-    help: ! ': The managed object ID of the network in question.'
+    help: ! ': The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the network in question.'
     type: Text
   type:
     help: ! ': The managed object type for the discovered network. This will be one
@@ -22,10 +24,9 @@ attributes:
       (host-based) port groups, or @OpaqueNetwork@ for networks managed externally
       by features such as NSX.'
     type: Text
-about: ! 'The @vsphere_network@ data source can be used to discover the ID of a network
+about: The @vsphere_network@ data source can be used to discover the ID of a network
   in vSphere. This can be any network that can be used as the backing for a network
   interface for @vsphere_virtual_machine@ or any other vSphere resource that requires
   a network. This includes standard (host-based) port groups, DVS port groups, or
-  opaque networks such as those managed by NSX. ~> NOTE: This data source requires
-  vCenter and is not available on direct ESXi connections.'
+  opaque networks such as those managed by NSX.
 examples: []

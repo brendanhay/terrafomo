@@ -1,10 +1,10 @@
-_name: aws_iam_role
 arguments:
   _name:
     required: true
     help: (Required) The friendly IAM role name to match.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_role
 attributes:
   arn:
     help: ! '- The Amazon Resource Name (ARN) specifying the role.'

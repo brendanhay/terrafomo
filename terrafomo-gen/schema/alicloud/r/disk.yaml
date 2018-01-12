@@ -1,4 +1,3 @@
-_name: alicloud_disk
 arguments:
   _name:
     required: false
@@ -6,44 +5,43 @@ arguments:
       characters, must contain only alphanumeric characters or hyphens, such as "-",".","_",
       and must not begin or end with a hyphen, and must not begin with http:// or
       https://. Default value is null.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the disk. This description can have a string of
       2 to 256 characters, It cannot begin with http:// or https://. Default value
       is null.
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot_id:
     required: false
     help: (Optional) A snapshot to base the disk off of. If it is specified, @size@
       will be invalid and the disk size is equals to the snapshot size.
+    ignored: false
     type: Text
-    deprecated: false
   _availability_zone:
     required: true
     help: (Required, Forces new resource) The Zone to create the disk in.
+    ignored: false
     type: Text
-    deprecated: false
   _category:
     required: false
     help: (Optional, Forces new resource) Category of the disk. Valid values are @cloud@
-      , @cloud_efficiency@ and @cloud_ssd@ . Default is @cloud@ .
+      , @cloud_efficiency@ and @cloud_ssd@ . Default is @cloud_efficiency@ .
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: true
-    help: ! '(Required) The size of the disk in GiBs, and its value depends on @Category@
-      . @cloud@ disk value range: 5GB ~ 2000GB and other category disk value range:
-      20 ~ 32768.'
+    help: ! '(Required) The size of the disk in GiBs, and it value range: 20 ~ 32768.'
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_disk
 attributes:
   status:
     help: ! '- The disk status.'

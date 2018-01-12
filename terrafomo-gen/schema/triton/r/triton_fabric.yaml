@@ -1,64 +1,64 @@
-_name: triton_fabric
 arguments:
   _gateway:
     required: true
     help: ! '- (String, Optional, Change forces new resource) Optional gateway IP.'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: ! '- (String, Required, Change forces new resource) Network name.'
+    ignored: false
     type: Text
-    deprecated: false
   _internet_nat:
     required: true
     help: ! '- (Bool, Optional, Change forces new resource) If a NAT zone is provisioned
       at Gateway IP address. Default is @false@ . This differs from <https://apidocs.joyent.com/cloudapi/#CreateFabricNetwork>
       which implicitly creates a NAT instance by default. NOTE: There is a known issue
       in Triton that prevents deletion of fabric networks when @internet_nat@ is enabled.'
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: ! '- (String, Optional, Change forces new resource) Optional description
       of network.'
+    ignored: false
     type: Text
-    deprecated: false
   _subnet:
     required: true
     help: ! '- (String, Required, Change forces new resource) CIDR formatted string
       describing network.'
+    ignored: false
     type: Text
-    deprecated: false
   _provision_start_ip:
     required: true
     help: ! '- (String, Required, Change forces new resource) First IP on the network
       that can be assigned.'
+    ignored: false
     type: Text
-    deprecated: false
   _resolvers:
     required: true
     help: ! '- (List, Optional) Array of IP addresses for resolvers.'
+    ignored: false
     type: Text
-    deprecated: false
   _routes:
     required: true
     help: ! '- (Map, Optional, Change forces new resource) Map of CIDR block to Gateway
       IP address.'
+    ignored: false
     type: Text
-    deprecated: false
   _vlan_id:
     required: true
     help: ! '- (Int, Required, Change forces new resource) VLAN id the network is
       on. Number between 0-4095 indicating VLAN ID.'
+    ignored: false
     type: Text
-    deprecated: false
   _provision_end_ip:
     required: true
     help: ! '- (String, Required, Change forces new resource) Last assignable IP on
       the network.'
+    ignored: false
     type: Text
-    deprecated: false
+name: triton_fabric
 attributes:
   provision_end_ip:
     help: ! '- (String) - Last assignable IP on the network.'

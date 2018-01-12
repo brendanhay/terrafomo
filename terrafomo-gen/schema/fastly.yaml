@@ -1,11 +1,11 @@
-_name: FastlyProvider
 arguments:
   _api_key:
     required: false
     help: (Optional) This is the API key. It must be provided, but it can also be
       sourced from the @FASTLY_API_KEY@ environment variable
+    ignored: false
     type: Text
-    deprecated: false
+name: FastlyProvider
 attributes: {}
 about: The Fastly provider is used to interact with the content delivery network (CDN)
   provided by Fastly. In order to use this Provider, you must have an active account

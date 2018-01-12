@@ -1,11 +1,11 @@
-_name: azurerm_subscription
 arguments:
   _subscription_id:
     required: false
     help: (Optional) Specifies the ID of the subscription. If this argument is omitted,
       the subscription ID of the current Azure Resource Manager provider is used.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_subscription
 attributes:
   quota_id:
     help: ! '- The subscription quota ID.'

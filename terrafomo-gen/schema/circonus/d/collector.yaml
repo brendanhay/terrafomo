@@ -1,10 +1,10 @@
-_name: circonus_collector
 arguments:
   _id:
     required: false
     help: (Optional) The Circonus ID of a given collector.
+    ignored: false
     type: Text
-    deprecated: false
+name: circonus_collector
 attributes:
   latitude:
     help: ! '- The latitude of the selected Collector.'

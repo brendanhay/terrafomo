@@ -1,10 +1,10 @@
-_name: rancher_environment
 arguments:
   _name:
     required: true
     help: (Required) The setting name.
+    ignored: false
     type: Text
-    deprecated: false
+name: rancher_environment
 attributes:
   orchestration:
     help: ! '- The environment orchestration engine.'

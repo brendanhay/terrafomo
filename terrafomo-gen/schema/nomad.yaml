@@ -1,39 +1,46 @@
-_name: NomadProvider
 arguments:
   _region:
     required: true
     help: ! ' @(string: "")@ - The Nomad region to target. This can also be specified
       as the @NOMAD_REGION@ environment variable.'
+    ignored: false
     type: Text
-    deprecated: false
   _key_file:
     required: true
     help: ! ' @(string: "")@ - A local file path to a PEM-encoded private key. This
       is required if @cert_file@ is specified. This can also be specified via the
       @NOMAD_CLIENT_KEY@ environment variable.'
+    ignored: false
     type: Text
-    deprecated: false
   _ca_file:
     required: true
     help: ! ' @(string: "")@ - A local file path to a PEM-encoded certificate authority
       used to verify the remote agent''s certificate. This can also be specified as
       the @NOMAD_CACERT@ environment variable.'
+    ignored: false
     type: Text
-    deprecated: false
+  _secret_id:
+    required: true
+    help: ! ' @(string: "")@ - The Secret ID of an ACL token to make requests with,
+      for ACL-enabled clusters. This can also be specified via the @NOMAD_TOKEN@ environment
+      variable.'
+    ignored: false
+    type: Text
   _cert_file:
     required: true
     help: ! ' @(string: "")@ - A local file path to a PEM-encoded certificate provided
       to the remote agent. If this is specified, @key_file@ is also required. This
       can also be specified as the @NOMAD_CLIENT_CERT@ environment variable.'
+    ignored: false
     type: Text
-    deprecated: false
   _address:
     required: true
     help: ! ' @(string: "http://127.0.0.1:4646")@ - The HTTP(S) API address of the
       Nomad agent. This must include the leading protocol (e.g. @https://@ ). This
       can also be specified as the @NOMAD_ADDR@ environment variable.'
+    ignored: false
     type: Text
-    deprecated: false
+name: NomadProvider
 attributes: {}
 about: <https://www.nomadproject.io> is an application scheduler. The Nomad provider
   exposes resources to interact with a Nomad cluster. Use the navigation to the left

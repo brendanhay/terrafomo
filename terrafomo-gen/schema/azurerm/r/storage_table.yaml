@@ -1,23 +1,23 @@
-_name: azurerm_storage_table
 arguments:
   _storage_account_name:
     required: true
     help: (Required) Specifies the storage account in which to create the storage
       table. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the storage table. Must be unique within the storage
       account the table is located.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the storage
       table. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_storage_table
 attributes:
   id:
     help: ! '- The storage table Resource ID.'

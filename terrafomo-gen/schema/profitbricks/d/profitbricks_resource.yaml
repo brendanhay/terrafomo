@@ -1,15 +1,15 @@
-_name: profitbricks_resource
 arguments:
   _resource_id:
     required: false
     help: (Optional) The ID of the specific resource to retrieve information about.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_type:
     required: false
     help: (Optional) The specific type of resources to retrieve information about.
+    ignored: false
     type: Text
-    deprecated: false
+name: profitbricks_resource
 attributes:
   id:
     help: ! '- UUID of the Resource'

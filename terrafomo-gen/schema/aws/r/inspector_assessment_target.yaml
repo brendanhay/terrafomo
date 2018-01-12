@@ -1,15 +1,15 @@
-_name: aws_inspector_assessment_target
 arguments:
   _resource_group_arn:
     required: true
     help: (Required )- The resource group ARN stating tags for instance matching.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the assessment target.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_inspector_assessment_target
 attributes:
   arn:
     help: ! '- The target assessment ARN.'

@@ -1,18 +1,18 @@
-_name: template_file
 arguments:
   _template:
     required: true
     help: (Required) The contents of the template. These can be loaded from a file
       on disk using the </docs/configuration/interpolation.html#file_path_> .
+    ignored: false
     type: Text
-    deprecated: false
   _vars:
     required: false
     help: (Optional) Variables for interpolation within the template. Note that variables
       must all be primitives. Direct references to lists or maps will cause a validation
       error.
+    ignored: false
     type: Text
-    deprecated: false
+name: template_file
 attributes:
   rendered:
     help: ! '- The final rendered template.'

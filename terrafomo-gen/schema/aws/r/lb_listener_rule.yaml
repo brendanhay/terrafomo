@@ -1,27 +1,27 @@
-_name: aws_lb_listener_rule
 arguments:
   _action:
     required: true
     help: (Required) An Action block. Action blocks are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _condition:
     required: true
     help: (Required) A Condition block. Condition blocks are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _priority:
     required: true
     help: (Required) The priority for the rule. A listener can't have multiple rules
       with the same priority.
+    ignored: false
     type: Text
-    deprecated: false
   _listener_arn:
     required: true
     help: (Required, Forces New Resource) The ARN of the listener to which to attach
       the rule.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lb_listener_rule
 attributes:
   arn:
     help: ! '- The ARN of the rule (matches @id@ )'

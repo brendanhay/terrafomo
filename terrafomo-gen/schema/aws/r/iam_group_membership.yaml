@@ -1,20 +1,20 @@
-_name: aws_iam_group_membership
 arguments:
   _users:
     required: true
     help: (Required) A list of IAM User names to associate with the Group
+    ignored: false
     type: Text
-    deprecated: false
   _group:
     required: true
     help: – (Required) The IAM Group name to attach the list of @users@ to
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name to identify the Group Membership
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_group_membership
 attributes:
   group:
     help: – IAM Group name

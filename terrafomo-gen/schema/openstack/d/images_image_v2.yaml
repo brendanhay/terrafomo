@@ -1,64 +1,64 @@
-_name: openstack_images_image_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Glance client. A Glance
       client is needed to create an Image that can be used with a compute instance.
       If omitted, the @region@ argument of the provider is used.
+    ignored: false
     type: Text
-    deprecated: false
   _sort_direction:
     required: false
     help: (Optional) Order the results in either @asc@ or @desc@ .
+    ignored: false
     type: Text
-    deprecated: false
   _size_min:
     required: false
     help: (Optional) The minimum size (in bytes) of the image to return.
+    ignored: false
     type: Text
-    deprecated: false
   _tag:
     required: false
     help: (Optional) Search for images with a specific tag.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the image.
+    ignored: false
     type: Text
-    deprecated: false
   _visibility:
     required: false
     help: (Optional) The visibility of the image. Must be one of "public", "private",
       "community", or "shared". Defaults to "private".
+    ignored: false
     type: Text
-    deprecated: false
   _sort_key:
     required: false
     help: (Optional) Sort images based on a certain key. Defaults to @name@ .
+    ignored: false
     type: Text
-    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent image.
+    ignored: false
     type: Text
-    deprecated: false
   _owner:
     required: false
     help: (Optional) The owner (UUID) of the image.
+    ignored: false
     type: Text
-    deprecated: false
   _properties:
     required: false
     help: (Optional) a map of key/value pairs to match an image with. All specified
       properties must be matched.
+    ignored: false
     type: Text
-    deprecated: false
   _size_max:
     required: false
     help: (Optional) The maximum size (in bytes) of the image to return.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_images_image_v2
 attributes:
   protected:
     help: ! '- Whether or not the image is protected.'

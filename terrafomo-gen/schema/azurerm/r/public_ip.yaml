@@ -1,29 +1,29 @@
-_name: azurerm_public_ip
 arguments:
   _name:
     required: true
     help: (Required) Specifies the name of the Public IP resource . Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _public_ip_address_allocation:
     required: true
     help: (Required) Defines whether the IP address is stable or dynamic. Options
       are Static or Dynamic.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the public
       ip.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_public_ip
 attributes:
   id:
     help: ! '- The Public IP ID.'

@@ -1,11 +1,11 @@
-_name: chef_data_bag
 arguments:
   _name:
     required: true
     help: (Required) The unique name to assign to the data bag. This is the name that
       other server clients will use to find and retrieve data from the data bag.
+    ignored: false
     type: Text
-    deprecated: false
+name: chef_data_bag
 attributes:
   api_uri:
     help: ! '- The URI representing this data bag in the Chef server API.'

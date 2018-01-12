@@ -1,22 +1,22 @@
-_name: vault_aws_auth_backend_sts_role
 arguments:
   _account_id:
     required: false
     help: (Optional) The AWS account ID to configure the STS role for.
+    ignored: false
     type: Text
-    deprecated: false
   _sts_role:
     required: false
     help: (Optional) The STS role to assume when verifying requests made by EC2 instances
       in the account specified by @account_id@ .
+    ignored: false
     type: Text
-    deprecated: false
   _backend:
     required: false
     help: (Optional) The path the AWS auth backend being configured was mounted at.  Defaults
       to @aws@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: vault_aws_auth_backend_sts_role
 attributes: {}
 about: Manages an STS role in a Vault server. STS roles are mappings between account
   IDs and STS ARNs. When a login attempt is made from an EC2 instance in the account

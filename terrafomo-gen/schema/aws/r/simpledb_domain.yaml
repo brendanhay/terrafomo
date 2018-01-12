@@ -1,10 +1,10 @@
-_name: aws_simpledb_domain
 arguments:
   _name:
     required: true
     help: (Required) The name of the SimpleDB domain
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_simpledb_domain
 attributes:
   id:
     help: ! '- The name of the SimpleDB domain'

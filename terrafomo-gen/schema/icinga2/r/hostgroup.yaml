@@ -1,15 +1,15 @@
-_name: icinga2_hostgroup
 arguments:
   _name:
     required: true
     help: (Required) The name of the hostgroup.
+    ignored: false
     type: Text
-    deprecated: false
   _display_name:
     required: true
     help: (Required) The name of the hostgroup to display in the Icinga2 interface.
+    ignored: false
     type: Text
-    deprecated: false
+name: icinga2_hostgroup
 attributes: {}
 about: Configures an Icinga2 hostgroup resource. This allows hostgroup to be configured,
   updated, and deleted.

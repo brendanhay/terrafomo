@@ -1,120 +1,120 @@
-_name: AWSProvider
 arguments:
   _profile:
     required: false
     help: (Optional) This is the AWS profile name as set in the shared credentials
       file.
+    ignored: false
     type: Text
-    deprecated: false
   _skip_requesting_account_id:
     required: false
     help: (Optional) Skip requesting the account ID.  Useful for AWS API implementations
       that do not have the IAM, STS API, or metadata API.  When set to @true@ , prevents
       you from managing any resource that requires Account ID to construct an ARN,
       e.g.
+    ignored: false
     type: Text
-    deprecated: false
   _token:
     required: false
     help: (Optional) Use this to set an MFA token. It can also be sourced from the
       @AWS_SESSION_TOKEN@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _region:
     required: true
     help: (Required) This is the AWS region. It must be provided, but it can also
       be sourced from the @AWS_DEFAULT_REGION@ environment variables, or via a shared
       credentials file if @profile@ is specified.
+    ignored: false
     type: Text
-    deprecated: false
   _skip_get_ec2_platforms:
     required: false
     help: (Optional) Skip getting the supported EC2 platforms. Used by users that
       don't have ec2:DescribeAccountAttributes permissions.
+    ignored: false
     type: Text
-    deprecated: false
   _s3_force_path_style:
     required: false
     help: (Optional) Set this to @true@ to force the request to use path-style addressing,
       i.e., @http://s3.amazonaws.com/BUCKET/KEY@ . By default, the S3 client will
       use virtual hosted bucket addressing, @http://BUCKET.s3.amazonaws.com/KEY@ ,
       when possible. Specific to the Amazon S3 service.
+    ignored: false
     type: Text
-    deprecated: false
   _insecure:
     required: false
     help: (Optional) Explicitly allow the provider to perform "insecure" SSL requests.
       If omitted, default value is @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _skip_credentials_validation:
     required: false
     help: (Optional) Skip the credentials validation via the STS API. Useful for AWS
       API implementations that do not have STS available or implemented.
+    ignored: false
     type: Text
-    deprecated: false
   _skip_region_validation:
     required: false
     help: (Optional) Skip validation of provided region name. Useful for AWS-like
       implementations that use their own region names or to bypass the validation
       for regions that aren't publicly available yet.
+    ignored: false
     type: Text
-    deprecated: false
   _allowed_account_ids:
     required: false
     help: (Optional) List of allowed, white listed, AWS account IDs to prevent you
       from mistakenly using an incorrect one (and potentially end up destroying a
       live environment). Conflicts with @forbidden_account_ids@ .
+    ignored: false
     type: Text
-    deprecated: false
   _access_key:
     required: false
     help: (Optional) This is the AWS access key. It must be provided, but it can also
       be sourced from the @AWS_ACCESS_KEY_ID@ environment variable, or via a shared
       credentials file if @profile@ is specified.
+    ignored: false
     type: Text
-    deprecated: false
   _max_retries:
     required: false
     help: (Optional) This is the maximum number of times an API call is retried, in
       the case where requests are being throttled or experiencing transient failures.
       The delay between the subsequent API calls increases exponentially.
+    ignored: false
     type: Text
-    deprecated: false
   _skip_metadata_api_check:
     required: false
     help: (Optional) Skip the AWS Metadata API check.  Useful for AWS API implementations
       that do not have a metadata API endpoint.  Setting to @true@ prevents Terraform
       from authenticating via the Metadata API. You may need to use other authentication
       methods like static credentials, configuration variables, or environment variables.
+    ignored: false
     type: Text
-    deprecated: false
   _shared_credentials_file:
     required: true
     help: = (Optional) This is the path to the shared credentials file. If this is
       not set and a profile is specified, @~/.aws/credentials@ will be used.
+    ignored: false
     type: Text
-    deprecated: false
   _assume_role:
     required: false
     help: (Optional) An @assume_role@ block (documented below). Only one @assume_role@
       block may be in the configuration.
+    ignored: false
     type: Text
-    deprecated: false
   _forbidden_account_ids:
     required: false
     help: (Optional) List of forbidden, blacklisted, AWS account IDs to prevent you
       mistakenly using a wrong one (and potentially end up destroying a live environment).
       Conflicts with @allowed_account_ids@ .
+    ignored: false
     type: Text
-    deprecated: false
   _secret_key:
     required: false
     help: (Optional) This is the AWS secret key. It must be provided, but it can also
       be sourced from the @AWS_SECRET_ACCESS_KEY@ environment variable, or via a shared
       credentials file if @profile@ is specified.
+    ignored: false
     type: Text
-    deprecated: false
+name: AWSProvider
 attributes: {}
 about: The Amazon Web Services (AWS) provider is used to interact with the many resources
   supported by AWS. The provider needs to be configured with the proper credentials

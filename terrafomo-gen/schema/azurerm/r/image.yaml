@@ -1,43 +1,43 @@
-_name: azurerm_image
 arguments:
   _source_virtual_machine_id:
     required: false
     help: (Optional) The Virtual Machine ID from which to create the image.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the image. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _os_disk:
     required: false
     help: (Optional) One or more @os_disk@ elements as defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specified the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _data_disk:
     required: false
     help: (Optional) One or more @data_disk@ elements as defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the image.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_image
 attributes:
   id:
     help: ! '- The managed image ID.'

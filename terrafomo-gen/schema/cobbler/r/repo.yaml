@@ -1,82 +1,82 @@
-_name: cobbler_repo
 arguments:
   _arch:
     required: false
     help: ! '(Optional) The architecture of the repo. Valid options are: i386, x86_64,
       ia64, ppc, ppc64, s390, arm.'
+    ignored: false
     type: Text
-    deprecated: false
   _environment:
     required: false
     help: (Optional) Environment variables to use during repo command execution.
+    ignored: false
     type: Text
-    deprecated: false
   _rpm_list:
     required: false
     help: (Optional) List of specific RPMs to mirror.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A name for the repo.
+    ignored: false
     type: Text
-    deprecated: false
   _breed:
     required: true
     help: ! '(Required) The "breed" of distribution. Valid options are: rsync, rhn,
       yum, apt, and wget. These choices may vary depending on the version of Cobbler
       in use.'
+    ignored: false
     type: Text
-    deprecated: false
   _proxy:
     required: false
     help: (Optional) Proxy to use for downloading the repo. This argument does not
       work on older versions of Cobbler.
+    ignored: false
     type: Text
-    deprecated: false
   _apt_components:
     required: false
     help: (Optional) List of Apt components such as main, restricted, universe. Applicable
       to apt breeds only.
+    ignored: false
     type: Text
-    deprecated: false
   _apt_dists:
     required: false
     help: (Optional) List of Apt distribution names such as trusty, trusty-updates.
       Applicable to apt breeds only.
+    ignored: false
     type: Text
-    deprecated: false
   _comment:
     required: false
     help: (Optional) Free form text description.
+    ignored: false
     type: Text
-    deprecated: false
   _owners:
     required: false
     help: (Optional) List of Owners for authz_ownership.
+    ignored: false
     type: Text
-    deprecated: false
   _createrepo_flags:
     required: false
     help: (Optional) Flags to use with @createrepo@ .
+    ignored: false
     type: Text
-    deprecated: false
   _mirror:
     required: true
     help: (Required) Address of the repo to mirror.
+    ignored: false
     type: Text
-    deprecated: false
   _keep_updated:
     required: false
     help: (Optional) Update the repo upon Cobbler sync. Valid values are true or false.
+    ignored: false
     type: Text
-    deprecated: false
   _mirror_locally:
     required: true
     help: (Required) Whether to copy the files locally or just references to the external
       files. Valid values are true or false.
+    ignored: false
     type: Text
-    deprecated: false
+name: cobbler_repo
 attributes: {}
 about: Manages a repo within Cobbler.
 examples: []

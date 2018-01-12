@@ -1,25 +1,25 @@
-_name: packet_precreated_ip_block
 arguments:
   _project_id:
     required: true
     help: (Required) ID of the project where the searched block should be.
+    ignored: false
     type: Text
-    deprecated: false
   _address_family:
     required: true
     help: (Required) 4 or 6, depending on which block you are looking for.
+    ignored: false
     type: Text
-    deprecated: false
   _facility:
     required: true
     help: (Required) Facility of the searched block.
+    ignored: false
     type: Text
-    deprecated: false
   _public:
     required: true
     help: (Required) Whether to look for public or private block.
+    ignored: false
     type: Text
-    deprecated: false
+name: packet_precreated_ip_block
 attributes:
   cidr_notation:
     help: ! '- CIDR notation of the looked up block.'

@@ -1,15 +1,15 @@
-_name: scaleway_volume_attachment
 arguments:
   _server:
     required: true
     help: (Required) id of the server
+    ignored: false
     type: Text
-    deprecated: false
   _volume:
     required: true
     help: (Required) id of the volume to be attached
+    ignored: false
     type: Text
-    deprecated: false
+name: scaleway_volume_attachment
 attributes:
   id:
     help: ! '- id of the new resource'

@@ -1,11 +1,11 @@
-_name: publiccloud_regions
 arguments:
   _project_id:
     required: true
     help: (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@
       environment variable is used.
+    ignored: false
     type: Text
-    deprecated: false
+name: publiccloud_regions
 attributes:
   names:
     help: ! '- The list of regions associated with the project'

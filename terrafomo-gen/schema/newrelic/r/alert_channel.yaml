@@ -1,21 +1,21 @@
-_name: newrelic_alert_channel
 arguments:
   _name:
     required: true
     help: (Required) The name of the channel.
+    ignored: false
     type: Text
-    deprecated: false
   _configuration:
     required: true
     help: (Required) A map of key / value pairs with channel type specific values.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: ! '(Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@
       , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ .'
+    ignored: false
     type: Text
-    deprecated: false
+name: newrelic_alert_channel
 attributes:
   id:
     help: ! '- The ID of the channel.'

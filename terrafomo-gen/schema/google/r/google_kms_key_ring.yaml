@@ -1,23 +1,23 @@
-_name: google_kms_key_ring
 arguments:
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The KeyRing's name. A KeyRing’s name must be unique within a
       location and match the regular expression @[a-zA-Z0-9_-]{1,63}@
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) The Google Cloud Platform location for the KeyRing. A full list
       of valid locations can be found by running @gcloud kms locations list@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: google_kms_key_ring
 attributes:
   id:
     help: ! '- The ID of the created KeyRing. Its format is @{projectId}/{location}/{keyRingName}@

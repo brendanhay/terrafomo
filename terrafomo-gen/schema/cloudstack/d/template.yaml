@@ -1,0 +1,5 @@
+arguments: {}
+name: cloudstack_template
+attributes: {}
+about: Use this datasource to get the ID of a template for use in other resources.
+examples: []

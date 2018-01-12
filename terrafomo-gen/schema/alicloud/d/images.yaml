@@ -1,27 +1,27 @@
-_name: alicloud_images
 arguments:
   _name_regex:
     required: false
     help: (Optional) A regex string to apply to the image list returned by Alicloud.
+    ignored: false
     type: Text
-    deprecated: false
   _owners:
     required: false
     help: (Optional) Limit search to specific image owners. Valid items are @system@
       , @self@ , @others@ , @marketplace@ .
+    ignored: false
     type: Text
-    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent image.
+    ignored: false
     type: Text
-    deprecated: false
   _output_file:
     required: false
     help: (Optional) The name of file that can save images data source after running
       @terraform plan@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_images
 attributes:
   status:
     help: ! '- Status of the image, with possible values: @UnAvailable@ , @Available@

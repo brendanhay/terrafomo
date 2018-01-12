@@ -1,21 +1,21 @@
-_name: aws_s3_bucket_object
 arguments:
   _version_id:
     required: false
     help: (Optional) Specific version ID of the object returned (defaults to latest
       version)
+    ignored: false
     type: Text
-    deprecated: false
   _bucket:
     required: true
     help: (Required) The name of the bucket to read the object from
+    ignored: false
     type: Text
-    deprecated: false
   _key:
     required: true
     help: (Required) The full path to the object inside the bucket
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_s3_bucket_object
 attributes:
   website_redirect_location:
     help: ! '- If the bucket is configured as a website, redirects requests for this

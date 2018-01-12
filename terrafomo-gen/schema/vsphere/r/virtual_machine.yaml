@@ -1,142 +1,117 @@
-_name: vsphere_virtual_machine
 arguments:
-  _skip_customization:
+  _clone:
     required: false
-    help: (Optional) Skip virtual machine customization (useful if OS is not in the
-      guest OS support matrix of VMware like "other3xLinux64Guest").
+    help: (Optional) When specified, the VM will be created as a clone of a specified
+      template. Optional customization options can be submitted as well. See <#creating-a-virtual-machine-from-a-template>
+      for more details.
+    ignored: false
     type: Text
-    deprecated: false
-  _dns_servers:
+  _scsi_type:
     required: false
-    help: (Optional) List of DNS servers for the virtual network adapter; defaults
-      to 8.8.8.8, 8.8.4.4
+    help: ! '(Optional) The type of SCSI bus this virtual machine will have. Can be
+      one of lsilogic (LSI Logic Parallel), lsilogic-sas (LSI Logic SAS) or pvscsi
+      (VMware Paravirtual). Defualt: @lsilogic@ .'
+    ignored: false
     type: Text
-    deprecated: false
-  _gateway:
-    required: true
-    help: ! '- Deprecated, please use @network_interface.ipv4_gateway@ instead .'
-    type: Text
-    deprecated: false
-  _linked_clone:
+  _extra_config:
     required: false
-    help: (Optional) Specifies if the new machine is a <https://www.vmware.com/support/ws5/doc/ws_clone_overview.html#wp1036396>
-      of another machine or not.
+    help: (Optional) Extra configuration data for this virtual machine. Can be used
+      to supply advanced parameters not normally in configuration, such as data for
+      cloud-config (under the guestinfo namespace), or configuration data for OVF
+      images.
+    ignored: false
     type: Text
-    deprecated: false
-  _cluster:
-    required: false
-    help: (Optional) Name of a Cluster in which to launch the virtual machine
-    type: Text
-    deprecated: false
   _name:
     required: true
-    help: (Required) The virtual machine name (cannot contain underscores and must
-      be less than 15 characters)
+    help: (Required) The name of the virtual machine.
+    ignored: false
     type: Text
-    deprecated: false
   _network_interface:
     required: true
-    help: (Required) Configures virtual network interfaces; see <#network-interfaces>
-      below for details.
+    help: (Required) A specification for a virtual NIC on this virtual machine. See
+      <#network-interface-options> below.
+    ignored: false
     type: Text
-    deprecated: false
-  _custom_configuration_parameters:
-    required: false
-    help: (Optional) Map of values that is set as virtual machine custom configurations.
-    type: Text
-    deprecated: false
-  _memory:
-    required: true
-    help: (Required) The amount of RAM (in MB) to allocate to the virtual machine
-    type: Text
-    deprecated: false
-  _enable_disk_uuid:
-    required: false
-    help: (Optional) This option causes the vm to mount disks by uuid on the guest
-      OS.
-    type: Text
-    deprecated: false
-  _resource_pool:
-    required: true
-    help: (Optional) The name of a Resource Pool in which to launch the virtual machine.
-      Requires full path (see cluster example).
-    type: Text
-    deprecated: false
-  _detach_unknown_disks_on_delete:
-    required: false
-    help: (Optional) will detach disks not managed by this resource on delete (avoids
-      deletion of disks attached after resource creation outside of Terraform scope).
-    type: Text
-    deprecated: false
   _folder:
     required: false
-    help: (Optional) The folder to group the VM in.
+    help: (Optional) The path to the folder to put this virtual machine in, relative
+      to the datacenter that the resource pool is in.
+    ignored: false
     type: Text
-    deprecated: false
-  _windows_opt_config:
-    required: false
-    help: (Optional) Extra options for clones of Windows machines.
-    type: Text
-    deprecated: false
-  _datacenter:
-    required: false
-    help: (Optional) The name of a Datacenter in which to launch the virtual machine
-    type: Text
-    deprecated: false
-  _domain:
-    required: false
-    help: (Optional) A FQDN for the virtual machine; defaults to "vsphere.local"
-    type: Text
-    deprecated: false
-  _vcpu:
+  _resource_pool_id:
     required: true
-    help: (Required) The number of virtual CPUs to allocate to the virtual machine
+    help: (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the resource pool to put this virtual machine in. See the section on <#virtual-machine-migration>
+      for details on changing this value.
+    ignored: false
     type: Text
-    deprecated: false
+  _host_system_id:
+    required: false
+    help: (Optional) An optional </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of a host to put this virtual machine on. See the section on <#virtual-machine-migration>
+      for details on changing this value. If a @host_system_id@ is not supplied, vSphere
+      will select a host in the resource pool to place the virtual machine, according
+      to any defaults or DRS policies in place.
+    ignored: false
+    type: Text
   _disk:
     required: true
-    help: (Required) Configures virtual disks; see <#disks> below for details
+    help: (Required) A specification for a virtual disk device on this virtual machine.
+      See <#disk-options> below.
+    ignored: false
     type: Text
-    deprecated: false
+  _datastore_id:
+    required: true
+    help: (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the virtual machine's datastore. The virtual machine configuration is placed
+      here, along with any virtual disks that are created where a datastore is not
+      explicitly specified. See the section on <#virtual-machine-migration> for details
+      on changing this value.
+    ignored: false
+    type: Text
+  _guest_id:
+    required: false
+    help: ! '(Optional) The guest ID for the operating system type. For a full list
+      of possible values, see <https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.wssdk.apiref.doc/vim.vm.GuestOsDescriptor.GuestOsIdentifier.html>
+      . Default: @other-64@ .'
+    ignored: false
+    type: Text
   _cdrom:
     required: false
-    help: (Optional) Configures a CDROM device and mounts an image as its media; see
-      <#cdrom> below for more details.
+    help: (Optional) A specification for a CDROM device on this virtual machine. See
+      <#cdrom-options> below.
+    ignored: false
     type: Text
-    deprecated: false
-  _hostname:
+  _annotation:
     required: false
-    help: (Optional) The virtual machine hostname used during the OS customization.
-      Defaults to the @name@ attribute.
+    help: (Optional) A user-provided description of the virtual machine. The default
+      is no annotation.
+    ignored: false
     type: Text
-    deprecated: false
-  _dns_suffixes:
+  _alternate_guest_name:
     required: false
-    help: ! '(Optional) List of name resolution suffixes for the virtual network adapter.
-      Default: The value of @domain@ if defined, otherwise @vsphere.local@ .'
+    help: (Optional) The guest name for the operating system when @guest_id@ is @other@
+      or @other-64@ .
+    ignored: false
     type: Text
-    deprecated: false
-  _time_zone:
+  _firmware:
     required: false
-    help: (Optional) The <https://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/timezone.html>
-      or <https://msdn.microsoft.com/en-us/library/ms912391.aspx> time zone to set
-      on the virtual machine. Defaults to "Etc/UTC"
+    help: ! '(Optional) The firmware interface to use on the virtual machine. Can
+      be one of @bios@ or @EFI@ . Default: @bios@ .'
+    ignored: false
     type: Text
-    deprecated: false
-  _wait_for_customization_timeout:
+  _tags:
     required: false
-    help: ! '(Optional) The amount of time, in minutes, to wait for guest OS customization
-      to complete before returning with an error. Setting this value to @0@ or a negative
-      value skips the waiter. Default: @10@ (10 minutes).'
+    help: (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource>
+      for a reference on how to apply tags.
+    ignored: false
     type: Text
-    deprecated: false
-  _memory_reservation:
-    required: false
-    help: (Optional) The amount of RAM (in MB) to reserve physical memory resource;
-      defaults to 0 (means not to reserve)
-    type: Text
-    deprecated: false
+name: vsphere_virtual_machine
 attributes: {}
-about: Provides a VMware vSphere virtual machine resource. This can be used to create,
-  modify, and delete virtual machines.
+about: The @vsphere_virtual_machine@ resource can be used to manage the complex lifecycle
+  of a virtual machine. It supports management of disk, network interface, and CDROM
+  devices, creation from scratch or cloning from template, and migration through both
+  host and storage vMotion. For more details on working with virtual machines in vSphere,
+  see <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-55238059-912E-411F-A0E9-A7A536972A91.html>
+  .
 examples: []

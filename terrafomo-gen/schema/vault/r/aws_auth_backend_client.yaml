@@ -1,42 +1,42 @@
-_name: vault_aws_auth_backend_client
 arguments:
   _sts_endpoint:
     required: false
     help: (Optional) Override the URL Vault uses when making STS API calls.
+    ignored: false
     type: Text
-    deprecated: false
   _access_key:
     required: false
     help: (Optional) The AWS access key that Vault should use for the auth backend.
+    ignored: false
     type: Text
-    deprecated: false
   _ec2_endpoint:
     required: false
     help: (Optional) Override the URL Vault uses when making EC2 API calls.
+    ignored: false
     type: Text
-    deprecated: false
   _backend:
     required: false
     help: (Optional) The path the AWS auth backend being configured was mounted at.  Defaults
       to @aws@ .
+    ignored: false
     type: Text
-    deprecated: false
   _iam_endpoint:
     required: false
     help: (Optional) Override the URL Vault uses when making IAM API calls.
+    ignored: false
     type: Text
-    deprecated: false
   _iam_server_id_header_value:
     required: false
     help: (Optional) The value to require in the @X-Vault-AWS-IAM-Server-ID@ header
       as part of @GetCallerIdentity@ requests that are used in the IAM auth method.
+    ignored: false
     type: Text
-    deprecated: false
   _secret_key:
     required: false
     help: (Optional) The AWS secret key that Vault should use for the auth backend.
+    ignored: false
     type: Text
-    deprecated: false
+name: vault_aws_auth_backend_client
 attributes: {}
 about: Configures the client used by an AWS Auth Backend in Vault. This resource sets
   the access key and secret key that Vault will use when making API requests on behalf

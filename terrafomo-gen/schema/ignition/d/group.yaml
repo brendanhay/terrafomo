@@ -1,20 +1,20 @@
-_name: ignition_group
 arguments:
   _name:
     required: true
     help: (Required) The groupname for the account.
+    ignored: false
     type: Text
-    deprecated: false
   _password_hash:
     required: false
     help: (Optional) The encrypted password for the account.
+    ignored: false
     type: Text
-    deprecated: false
   _gid:
     required: false
     help: (Optional) The group ID of the new account.
+    ignored: false
     type: Text
-    deprecated: false
+name: ignition_group
 attributes:
   id:
     help: ! '- ID used to reference this resource in ignition_config .'

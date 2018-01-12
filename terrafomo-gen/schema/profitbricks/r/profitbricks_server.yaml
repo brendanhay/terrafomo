@@ -1,5 +1,5 @@
-_name: profitbricks_server
 arguments: {}
+name: profitbricks_server
 attributes: {}
 about: Manages a Servers on ProfitBricks
 examples: []

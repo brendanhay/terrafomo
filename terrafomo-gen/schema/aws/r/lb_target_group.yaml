@@ -1,17 +1,16 @@
-_name: aws_lb_target_group
 arguments:
   _name:
     required: false
     help: (Optional, Forces new resource) The name of the target group. If omitted,
       Terraform will assign a random, unique name.
+    ignored: false
     type: Text
-    deprecated: false
   _stickiness:
     required: false
     help: (Optional) A Stickiness block. Stickiness blocks are documented below. @stickiness@
       is only valid if used with Load Balancers of type @Application@
+    ignored: false
     type: Text
-    deprecated: false
   _target_type:
     required: false
     help: (Optional) The type of target that you must specify when registering targets
@@ -22,53 +21,57 @@ arguments:
       from the subnets of the virtual private cloud (VPC) for the target group, the
       RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC
       6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.
+    ignored: false
     type: Text
-    deprecated: false
   _protocol:
     required: true
     help: (Required) The protocol to use for routing traffic to the targets.
+    ignored: false
     type: Text
-    deprecated: false
   _name_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique name beginning with the
       specified prefix. Conflicts with @name@ .
+    ignored: false
     type: Text
-    deprecated: false
   _health_check:
     required: false
     help: (Optional) A Health Check block. Health Check blocks are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _deregistration_delay:
     required: false
     help: (Optional) The amount time for Elastic Load Balancing to wait before changing
       the state of a deregistering target from draining to unused. The range is 0-3600
       seconds. The default value is 300 seconds.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: true
     help: (Required) The identifier of the VPC in which to create the target group.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: true
     help: (Required) The port on which targets receive traffic, unless overridden
       when registering a specific target.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_lb_target_group
 attributes:
   arn:
     help: ! '- The ARN of the Target Group (matches @id@ )'
     type: Text
   arn_suffix:
     help: ! '- The ARN suffix for use with CloudWatch Metrics.'
+    type: Text
+  name:
+    help: ! '- The name of the Target Group'
     type: Text
   id:
     help: ! '- The ARN of the Target Group (matches @arn@ )'

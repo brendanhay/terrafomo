@@ -1,16 +1,16 @@
-_name: aws_waf_size_constraint_set
 arguments:
   _name:
     required: true
     help: (Required) The name or description of the Size Constraint Set.
+    ignored: false
     type: Text
-    deprecated: false
   _size_constraints:
     required: false
     help: (Optional) Specifies the parts of web requests that you want to inspect
       the size of.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_waf_size_constraint_set
 attributes: {}
 about: Provides a WAF Size Constraint Set Resource
 examples: []

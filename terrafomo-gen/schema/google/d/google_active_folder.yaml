@@ -1,15 +1,15 @@
-_name: google_active_folder
 arguments:
   _display_name:
     required: true
     help: (Required) The folder's display name.
+    ignored: false
     type: Text
-    deprecated: false
   _parent:
     required: true
     help: (Required) The resource name of the parent Folder or Organization.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_active_folder
 attributes:
   name:
     help: ! '- The resource name of the Folder. This uniquely identifies the folder.'

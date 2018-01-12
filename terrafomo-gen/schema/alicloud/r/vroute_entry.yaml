@@ -1,33 +1,33 @@
-_name: alicloud_route_entry
 arguments:
   _router_id:
     required: false
     help: (Deprecated) This argument has beeb deprecated. Please use other arguments
       to launch a custom route entry.
+    ignored: true
     type: Text
-    deprecated: true
   _nexthop_id:
     required: true
     help: (Required, Forces new resource) The route entry's next hop. ECS instance
       ID or VPC router interface ID.
+    ignored: false
     type: Text
-    deprecated: false
   _route_table_id:
     required: true
     help: (Required, Forces new resource) The ID of the route table.
+    ignored: false
     type: Text
-    deprecated: false
   _nexthop_type:
     required: true
     help: (Required, Forces new resource) The next hop type. Available value is @Instance@
       and @RouterInterface@ . @Instance@ points to ECS Instance.
+    ignored: false
     type: Text
-    deprecated: false
   _destination_cidrblock:
     required: true
     help: (Required, Forces new resource) The RouteEntry's target network segment.
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_route_entry
 attributes:
   nexthop_type:
     help: ! '- The next hop type.'

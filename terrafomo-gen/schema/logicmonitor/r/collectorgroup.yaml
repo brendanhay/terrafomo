@@ -1,15 +1,15 @@
-_name: logicmonitor_collector_group
 arguments:
   _name:
     required: true
     help: (Required) Name of collector group
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Set description of collector group
+    ignored: false
     type: Text
-    deprecated: false
+name: logicmonitor_collector_group
 attributes: {}
 about: Provides a LogicMonitor collector group resource. This can be used to create
   and manage LogicMonitor users

@@ -1,37 +1,37 @@
-_name: aws_batch_compute_environment
 arguments:
   _compute_resources:
     required: false
     help: (Optional) Details of the compute resources managed by the compute environment.
       This parameter is required for managed compute environments. See details below.
+    ignored: false
     type: Text
-    deprecated: false
   _compute_environment_name:
     required: true
     help: (Required) The name for your compute environment. Up to 128 letters (uppercase
       and lowercase), numbers, and underscores are allowed.
+    ignored: false
     type: Text
-    deprecated: false
   _state:
     required: false
     help: (Optional) The state of the compute environment. If the state is @ENABLED@
       , then the compute environment accepts jobs from a queue and can scale out automatically
       based on queues. Valid items are @ENABLED@ or @DISABLED@ . Defaults to @ENABLED@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _service_role:
     required: true
     help: (Required) The full Amazon Resource Name (ARN) of the IAM role that allows
       AWS Batch to make calls to other AWS services on your behalf.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of the compute environment. Valid items are @MANAGED@
       or @UNMANAGED@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_batch_compute_environment
 attributes:
   status:
     help: ! '- The current status of the compute environment (for example, CREATING

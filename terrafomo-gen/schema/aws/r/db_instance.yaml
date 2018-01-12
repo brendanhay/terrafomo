@@ -1,191 +1,190 @@
-_name: aws_db_instance
 arguments:
   _option_group_name:
     required: false
     help: (Optional) Name of the DB option group to associate.
+    ignored: false
     type: Text
-    deprecated: false
   _timezone:
     required: false
     help: (Optional) Time zone of the DB instance. @timezone@ is currently only supported
       by Microsoft SQL Server. The @timezone@ can only be set on creation. See <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone>
       for more information.
+    ignored: false
     type: Text
-    deprecated: false
   _license_model:
     required: false
     help: (Optional, but required for some DB engines, i.e. Oracle SE1) License model
       information for this DB instance.
+    ignored: false
     type: Text
-    deprecated: false
   _instance_class:
     required: true
     help: (Required) The instance type of the RDS instance.
+    ignored: false
     type: Text
-    deprecated: false
   _backup_window:
     required: false
     help: ! '(Optional) The daily time range (in UTC) during which automated backups
       are created if they are enabled. Example: "09:46-10:16". Must not overlap with
       @maintenance_window@ .'
+    ignored: false
     type: Text
-    deprecated: false
   _multi_az:
     required: false
     help: (Optional) Specifies if the RDS instance is multi-AZ
+    ignored: false
     type: Text
-    deprecated: false
   _security_group_names:
     required: false
     help: (Optional/Deprecated) List of DB Security Groups to associate. Only used
       for <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html#USER_VPC.FindDefaultVPC>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _auto_minor_version_upgrade:
     required: false
     help: (Optional) Indicates that minor engine upgrades will be applied automatically
       to the DB instance during the maintenance window. Defaults to true.
+    ignored: false
     type: Text
-    deprecated: false
   _db_subnet_group_name:
     required: false
     help: (Optional) Name of DB subnet group. DB instance will be created in the VPC
       associated with the DB subnet group. If unspecified, will be created in the
       @default@ VPC, or in EC2 Classic, if available.
+    ignored: false
     type: Text
-    deprecated: false
   _iam_database_authentication_enabled:
     required: false
     help: (Optional) Specifies whether or mappings of AWS Identity and Access Management
       (IAM) accounts to database accounts is enabled.
+    ignored: false
     type: Text
-    deprecated: false
   _allocated_storage:
     required: true
     help: (Required unless a @snapshot_identifier@ or @replicate_source_db@ is provided)
       The allocated storage in gigabytes.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the database to create when the DB instance is created.
       If this parameter is not specified, no database is created in the DB instance.
       Note that this does not apply for Oracle or SQL Server engines. See the <http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html>
       for more details on what applies for those engines.
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: true
     help: (Required unless a @snapshot_identifier@ or @replicate_source_db@ is provided)
       Password for the master DB user. Note that this may show up in logs, and it
       will be stored in the state file.
+    ignored: false
     type: Text
-    deprecated: false
   _character_set_name:
     required: false
     help: (Optional) The character set name to use for DB encoding in Oracle instances.
       This can't be changed. See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html>
       for more information.
+    ignored: false
     type: Text
-    deprecated: false
   _identifier_prefix:
     required: false
     help: (Optional, Forces new resource) Creates a unique identifier beginning with
       the specified prefix. Conflicts with @identifer@ .
+    ignored: false
     type: Text
-    deprecated: false
   _parameter_group_name:
     required: false
     help: (Optional) Name of the DB parameter group to associate.
+    ignored: false
     type: Text
-    deprecated: false
   _skip_final_snapshot:
     required: false
     help: (Optional) Determines whether a final DB snapshot is created before the
       DB instance is deleted. If true is specified, no DBSnapshot is created. If false
       is specified, a DB snapshot is created before the DB instance is deleted, using
       the value from @final_snapshot_identifier@ . Default is @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _engine:
     required: true
     help: (Required unless a @snapshot_identifier@ or @replicate_source_db@ is provided)
       The database engine to use.
+    ignored: false
     type: Text
-    deprecated: false
   _storage_type:
     required: false
     help: (Optional) One of "standard" (magnetic), "gp2" (general purpose SSD), or
       "io1" (provisioned IOPS SSD). The default is "io1" if @iops@ is specified, "standard"
       if not. Note that this behaviour is different from the AWS web console, where
       the default is "gp2".
+    ignored: false
     type: Text
-    deprecated: false
   _username:
     required: true
     help: (Required unless a @snapshot_identifier@ or @replicate_source_db@ is provided)
       Username for the master DB user.
+    ignored: false
     type: Text
-    deprecated: false
   _identifier:
     required: false
     help: (Optional, Forces new resource) The name of the RDS instance, if omitted,
       Terraform will assign a random, unique identifier.
+    ignored: false
     type: Text
-    deprecated: false
   _final_snapshot_identifier:
     required: false
     help: (Optional) The name of your final DB snapshot when this DB instance is deleted.
       If omitted, no final snapshot will be made.
+    ignored: false
     type: Text
-    deprecated: false
   _engine_version:
     required: false
     help: (Optional) The engine version to use.
+    ignored: false
     type: Text
-    deprecated: false
   _storage_encrypted:
     required: false
     help: (Optional) Specifies whether the DB instance is encrypted. The default is
       @false@ if not specified.
+    ignored: false
     type: Text
-    deprecated: false
   _availability_zone:
     required: false
     help: (Optional) The AZ for the RDS instance.
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot_identifier:
     required: false
     help: ! '(Optional) Specifies whether or not to create this database from a snapshot.
       This correlates to the snapshot ID you''d find in the RDS console, e.g: rds:production-2015-06-26-06-05.'
+    ignored: false
     type: Text
-    deprecated: false
   _iops:
     required: false
     help: (Optional) The amount of provisioned IOPS. Setting this implies a storage_type
       of "io1".
+    ignored: false
     type: Text
-    deprecated: false
   _publicly_accessible:
     required: false
     help: (Optional) Bool to control if instance is publicly accessible. Default is
       @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_security_group_ids:
     required: false
     help: (Optional) List of VPC security groups to associate.
+    ignored: false
     type: Text
-    deprecated: false
   _monitoring_role_arn:
     required: false
     help: (Optional) The ARN for the IAM role that permits RDS to send enhanced monitoring
       metrics to CloudWatch Logs. You can find more information on the <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html>
       what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+    ignored: false
     type: Text
-    deprecated: false
   _replicate_source_db:
     required: false
     help: (Optional) Specifies that this resource is a Replicate database, and to
@@ -193,65 +192,66 @@ arguments:
       another Amazon RDS Database to replicate. See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Replication.html>
       and <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html>
       for more information on using Replication.
+    ignored: false
     type: Text
-    deprecated: false
   _apply_immediately:
     required: false
     help: (Optional) Specifies whether any database modifications are applied immediately,
       or during the next maintenance window. Default is @false@ . See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html>
       for more information.
+    ignored: false
     type: Text
-    deprecated: false
   _allow_major_version_upgrade:
     required: false
     help: (Optional) Indicates that major version upgrades are allowed. Changing this
       parameter does not result in an outage and the change is asynchronously applied
       as soon as possible.
+    ignored: false
     type: Text
-    deprecated: false
   _backup_retention_period:
     required: false
     help: (Optional) The days to retain backups for. Must be @1@ or greater to be
       a source for a <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Replication.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _kms_key_id:
     required: false
     help: (Optional) The ARN for the KMS encryption key. If creating an encrypted
       replica, set this to the destination KMS ARN.
+    ignored: false
     type: Text
-    deprecated: false
   _monitoring_interval:
     required: false
     help: ! '(Optional) The interval, in seconds, between points when Enhanced Monitoring
       metrics are collected for the DB instance. To disable collecting Enhanced Monitoring
       metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+    ignored: false
     type: Text
-    deprecated: false
   _copy_tags_to_snapshot:
     required: true
     help: – (Optional, boolean) On delete, copy all Instance @tags@ to the final snapshot
       (if @final_snapshot_identifier@ is specified). Default is @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: false
     help: (Optional) The port on which the DB accepts connections.
+    ignored: false
     type: Text
-    deprecated: false
   _maintenance_window:
     required: false
     help: ! '(Optional) The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
       Eg: "Mon:00:00-Mon:03:00". See <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow>
       for more information.'
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_db_instance
 attributes:
   status:
     help: ! '- The RDS instance status.'

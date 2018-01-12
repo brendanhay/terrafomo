@@ -1,0 +1,84 @@
+arguments:
+  _ram_users:
+    required: false
+    help: ! '(Optional, Type: list, Conflicts with @document@ ) List of ram users
+      who can assume the RAM role. The format of each item in this list is @acs:ram::${account_id}:root@
+      or @acs:ram::${account_id}:user/${user_name}@ , such as @acs:ram::1234567890000:root@
+      and @acs:ram::1234567890001:user/Mary@ . The @${user_name}@ is the name of a
+      RAM user which must exists in the Alicloud account indicated by the @${account_id}@
+      .'
+    ignored: false
+    type: Text
+  _force:
+    required: false
+    help: (Optional) This parameter is used for resource destroy. Default value is
+      @false@ .
+    ignored: false
+    type: Text
+  _document:
+    required: false
+    help: (Optional, Conflicts with @services@ , @ram_users@ and @version@ ) Authorization
+      strategy of the RAM role. It is required when the @services@ and @ram_users@
+      are not specified.
+    ignored: false
+    type: Text
+  _name:
+    required: true
+    help: (Required, Forces new resource) Name of the RAM role. This name can have
+      a string of 1 to 64 characters, must contain only alphanumeric characters or
+      hyphens, such as "-", "_", and must not begin with a hyphen.
+    ignored: false
+    type: Text
+  _description:
+    required: false
+    help: (Optional, Forces new resource) Description of the RAM role. This name can
+      have a string of 1 to 1024 characters.
+    ignored: false
+    type: Text
+  _version:
+    required: false
+    help: (Optional, Conflicts with @document@ ) Version of the RAM role policy document.
+      Valid value is @1@ . Default value is @1@ .
+    ignored: false
+    type: Text
+  _services:
+    required: false
+    help: ! '(Optional, Type: list, Conflicts with @document@ ) List of services which
+      can assume the RAM role. The format of each item in this list is @${service}.aliyuncs.com@
+      or @${account_id}@${service}.aliyuncs.com@ , such as @ecs.aliyuncs.com@ and
+      @1234567890000@ots.aliyuncs.com@ . The @${service}@ can be @ecs@ , @log@ , @apigateway@
+      and so on, the @${account_id}@ refers to someone''s Alicloud account id.'
+    ignored: false
+    type: Text
+name: alicloud_ram_role
+attributes:
+  arn:
+    help: ! '- The role arn.'
+    type: Text
+  ram_users:
+    help: ! '- List of services which can assume the RAM role.'
+    type: Text
+  name:
+    help: ! '- The role name.'
+    type: Text
+  document:
+    help: ! '- Authorization strategy of the role.'
+    type: Text
+  version:
+    help: ! '- The role policy document version.'
+    type: Text
+  id:
+    help: ! '- The role ID.'
+    type: Text
+  services:
+    help: ! '- List of services which can assume the RAM role.'
+    type: Text
+  description:
+    help: ! '- The role description.'
+    type: Text
+about: ! 'Provides a RAM Role resource. ~> NOTE: When you want to destroy this resource
+  forcefully(means remove all the relationships associated with it automatically and
+  then destroy it) without set @force@ with @true@ at beginning, you need add @force
+  = true@ to configuration file and run @terraform plan@ , then you can delete resource
+  forcefully.'
+examples: []

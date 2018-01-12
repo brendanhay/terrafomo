@@ -1,16 +1,16 @@
-_name: circonus_account
 arguments:
   _id:
     required: false
     help: (Optional) The Circonus ID of a given account.
+    ignored: false
     type: Text
-    deprecated: false
   _current:
     required: false
     help: (Optional) Automatically use the current Circonus Account attached to the
       API token making the request.
+    ignored: false
     type: Text
-    deprecated: false
+name: circonus_account
 attributes:
   address2:
     help: ! '- The second line of the address associated with the account.'

@@ -1,33 +1,33 @@
-_name: opc_compute_ip_network
 arguments:
   _ip_address_prefix:
     required: true
     help: (Required) The IPv4 address prefix, in CIDR format.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the IP Network. Changing this name forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_network_exchange:
     required: false
     help: (Optional) Specify the IP Network exchange to which the IP Network belongs
       to.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the IP Network.
+    ignored: false
     type: Text
-    deprecated: false
   _public_napt_enabled:
     required: false
     help: (Optional) If true, enable public internet access using NAPT for VNICs without
       any public IP Reservation. Defaults to @false@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: opc_compute_ip_network
 attributes:
   ip_network_exchange:
     help: ! '- The IP Network Exchange for the IP Network'

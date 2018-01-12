@@ -1,30 +1,30 @@
-_name: dyn_record
 arguments:
   _value:
     required: true
     help: (Required) The value of the record.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the record.
+    ignored: false
     type: Text
-    deprecated: false
   _ttl:
     required: false
     help: (Optional) The TTL of the record. Default uses the zone default.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (Required) The DNS zone to add the record to.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of the record.
+    ignored: false
     type: Text
-    deprecated: false
+name: dyn_record
 attributes:
   fqdn:
     help: ! '- The FQDN of the record, built from the @name@ and the @zone@ .'

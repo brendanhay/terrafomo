@@ -1,35 +1,35 @@
-_name: google_compute_target_tcp_proxy
 arguments:
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of this resource. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _proxy_header:
     required: false
     help: (Optional) Type of proxy header to append before sending data to the backend,
       either NONE or PROXY_V1 (default NONE).
+    ignored: false
     type: Text
-    deprecated: false
   _backend_service:
     required: true
     help: (Required) The URL of a Backend Service resource to receive the matched
       traffic.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_target_tcp_proxy
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

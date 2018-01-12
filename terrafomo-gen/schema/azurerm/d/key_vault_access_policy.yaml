@@ -1,4 +1,3 @@
-_name: azurerm_key_vault_access_policy
 arguments:
   _name:
     required: true
@@ -6,8 +5,9 @@ arguments:
       are: @Key Management@ , @Secret Management@ , @Certificate Management@ , @Key
       & Secret Management@ , @Key & Certificate Management@ , @Secret & Certificate
       Management@ , @Key, Secret, & Certificate Management@'
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_key_vault_access_policy
 attributes:
   certificate_permissions:
     help: ! '- the certificate permissions for the access policy'

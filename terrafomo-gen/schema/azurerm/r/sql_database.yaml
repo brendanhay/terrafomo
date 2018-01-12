@@ -1,41 +1,40 @@
-_name: azurerm_sql_database
 arguments:
   _create_mode:
     required: false
     help: (Optional) Specifies the type of database to create. Defaults to @Default@
       . See below for the accepted values/
+    ignored: false
     type: Text
-    deprecated: false
   _server_name:
     required: true
     help: (Required) The name of the SQL Server on which to create the database.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the database.
+    ignored: false
     type: Text
-    deprecated: false
   _edition:
     required: false
     help: ! '(Optional) The edition of the database to be created. Applies only if
       @create_mode@ is @Default@ . Valid values are: @Basic@ , @Standard@ , @Premium@
       , or @DataWarehouse@ . Please see <https://azure.microsoft.com/en-gb/documentation/articles/sql-database-service-tiers/>
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _elastic_pool_name:
     required: false
     help: (Optional) The name of the elastic database pool.
+    ignored: false
     type: Text
-    deprecated: false
   _max_size_bytes:
     required: false
     help: (Optional) The maximum size that the database can grow to. Applies only
       if @create_mode@ is @Default@ .  Please see <https://azure.microsoft.com/en-gb/documentation/articles/sql-database-service-tiers/>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _requested_service_objective_id:
     required: false
     help: ! '(Optional) Use @requested_service_objective_id@ or @requested_service_objective_name@
@@ -43,56 +42,57 @@ arguments:
       , @S2@ , @S3@ , @P1@ , @P2@ , @P4@ , @P6@ , @P11@ and @ElasticPool@ .  Please
       see <https://azure.microsoft.com/en-gb/documentation/articles/sql-database-service-tiers/>
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _source_database_id:
     required: false
     help: (Optional) The URI of the source database if @create_mode@ value is not
       @Default@ .
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the database.  This
       must be the same as Database Server resource group currently.
+    ignored: false
     type: Text
-    deprecated: false
   _requested_service_objective_name:
     required: false
     help: (Optional) Use @requested_service_objective_name@ or @requested_service_objective_id@
       to set the performance level for the database.  Please see <https://azure.microsoft.com/en-gb/documentation/articles/sql-database-service-tiers/>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _source_database_deletion_date:
     required: false
     help: (Optional) The deletion date time of the source database. Only applies to
       deleted databases where @create_mode@ is @PointInTimeRestore@ .
+    ignored: false
     type: Text
-    deprecated: false
   _collation:
     required: false
     help: (Optional) The name of the collation. Applies only if @create_mode@ is @Default@
       .  Azure default is @SQL_LATIN1_GENERAL_CP1_CI_AS@
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _restore_point_in_time:
     required: false
     help: (Optional) The point in time for the restore. Only applies if @create_mode@
       is @PointInTimeRestore@ e.g. 2013-11-08T22:00:40Z
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_sql_database
 attributes:
   default_secondary_location:
     help: ! '- The default secondary location of the SQL Database.'

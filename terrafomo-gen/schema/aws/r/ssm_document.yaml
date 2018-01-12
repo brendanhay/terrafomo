@@ -1,27 +1,27 @@
-_name: aws_ssm_document
 arguments:
   _document_type:
     required: true
     help: ! '(Required) The type of the document. Valid document types include: @Command@
       , @Policy@ and @Automation@'
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the document.
+    ignored: false
     type: Text
-    deprecated: false
   _permissions:
     required: false
     help: (Optional) Additional Permissions to attach to the document. See <#permissions>
       below for details.
+    ignored: false
     type: Text
-    deprecated: false
   _content:
     required: true
     help: (Required) The json content of the document.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ssm_document
 attributes:
   status:
     help: ! '- "Creating", "Active" or "Deleting". The current status of the document.'

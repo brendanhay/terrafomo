@@ -1,20 +1,20 @@
-_name: heroku_cert
 arguments:
   _certificate_chain:
     required: true
     help: (Required) The certificate chain to add
+    ignored: false
     type: Text
-    deprecated: false
   _private_key:
     required: true
     help: (Required) The private key for a given certificate chain
+    ignored: false
     type: Text
-    deprecated: false
   _app:
     required: true
     help: (Required) The Heroku app to add to.
+    ignored: false
     type: Text
-    deprecated: false
+name: heroku_cert
 attributes:
   cname:
     help: ! '- The CNAME for the SSL endpoint'

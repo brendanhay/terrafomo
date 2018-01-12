@@ -1,40 +1,39 @@
-_name: vsphere_vmfs_datastore
 arguments:
   _name:
     required: true
-    help: ! '- (String, required, forces new resource) The name of the datastore.'
+    help: (Required) The name of the datastore. Forces a new resource if changed.
+    ignored: false
     type: Text
-    deprecated: false
   _folder:
-    required: true
-    help: ! '- (String, optional) The relative path to a folder to put this datastore
-      in. This is a path relative to the datacenter you are deploying the datastore
-      to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@
-      , Terraform will place a datastore named @terraform-test@ in a datastore folder
-      located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@
+    required: false
+    help: ! '(Optional) The relative path to a folder to put this datastore in. This
+      is a path relative to the datacenter you are deploying the datastore to. Example:
+      for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will
+      place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@
+      , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@
       .'
+    ignored: false
     type: Text
-    deprecated: false
   _disks:
     required: true
-    help: ! '- (List of strings, required) The disks to use with the datastore.'
+    help: (Required) The disks to use with the datastore.
+    ignored: false
     type: Text
-    deprecated: false
   _host_system_id:
     required: true
-    help: ! '- (String, required, forces new resource) The managed object ID of the
-      host to set the datastore up on. Note that this is not necessarily the only
-      host that the datastore will be set up on - see <#auto-mounting-of-datastores-within-vcenter>
-      for more info.'
+    help: (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the host to set the datastore up on. Note that this is not necessarily the
+      only host that the datastore will be set up on - see <#auto-mounting-of-datastores-within-vcenter>
+      for more info. Forces a new resource if changed.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
-    required: true
-    help: ! '- (List of strings, optional) The IDs of any tags to attach to this resource.
-      See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource>
-      for a reference on how to apply tags.'
+    required: false
+    help: (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource>
+      for a reference on how to apply tags.
+    ignored: false
     type: Text
-    deprecated: false
+name: vsphere_vmfs_datastore
 attributes:
   multiple_host_access:
     help: ! '- If @true@ , more than one host in the datacenter has been configured
@@ -57,7 +56,8 @@ attributes:
     help: ! '- Maximum capacity of the datastore, in megabytes.'
     type: Text
   id:
-    help: ! '- The managed object reference ID of the datastore.'
+    help: ! '- The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the datastore.'
     type: Text
   accessible:
     help: ! '- The connectivity status of the datastore. If this is @false@ , some

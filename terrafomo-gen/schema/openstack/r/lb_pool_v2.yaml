@@ -1,68 +1,68 @@
-_name: openstack_lb_pool_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Networking client. A Networking
       client is needed to create an . If omitted, the @region@ argument of the provider
       is used. Changing this creates a new pool.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) Human-readable name for the pool.
+    ignored: false
     type: Text
-    deprecated: false
   _listener_id:
     required: false
     help: ! '(Optional) The Listener on which the members of the pool will be associated
       with. Changing this creates a new pool. Note:  One of LoadbalancerID or ListenerID
       must be provided.'
+    ignored: false
     type: Text
-    deprecated: false
   _protocol:
     required: true
     help: = (Required) The protocol - can either be TCP, HTTP or HTTPS. Changing this
       creates a new pool.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Human-readable description for the pool.
+    ignored: false
     type: Text
-    deprecated: false
   _loadbalancer_id:
     required: false
     help: ! '(Optional) The load balancer on which to provision this pool. Changing
       this creates a new pool. Note:  One of LoadbalancerID or ListenerID must be
       provided.'
+    ignored: false
     type: Text
-    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) The administrative state of the pool. A valid value is true (UP)
       or false (DOWN).
+    ignored: false
     type: Text
-    deprecated: false
   _persistence:
     required: true
     help: ! '- Omit this field to prevent session persistence.  Indicates whether
       connections in the same session will be processed by the same Pool member or
       not. Changing this creates a new pool.'
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) Required for admins. The UUID of the tenant who owns the pool.  Only
       administrative users can specify a tenant UUID other than their own. Changing
       this creates a new pool.
+    ignored: false
     type: Text
-    deprecated: false
   _lb_method:
     required: true
     help: (Required) The load balancing algorithm to distribute traffic to the pool's
       members. Must be one of ROUND_ROBIN, LEAST_CONNECTIONS, or SOURCE_IP.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_lb_pool_v2
 attributes:
   admin_state_up:
     help: ! '- See Argument Reference above.'

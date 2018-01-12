@@ -1,25 +1,25 @@
-_name: aws_sns_topic
 arguments:
   _delivery_policy:
     required: false
     help: (Optional) The SNS delivery policy
+    ignored: false
     type: Text
-    deprecated: false
   _policy:
     required: false
     help: (Optional) The fully-formed AWS policy as JSON
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The friendly name for the SNS topic
+    ignored: false
     type: Text
-    deprecated: false
   _display_name:
     required: false
     help: (Optional) The display name for the SNS topic
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_sns_topic
 attributes:
   arn:
     help: ! '- The ARN of the SNS topic, as a more obvious property (clone of id)'

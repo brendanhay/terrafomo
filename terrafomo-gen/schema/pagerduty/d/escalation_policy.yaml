@@ -1,11 +1,11 @@
-_name: pagerduty_escalation_policy
 arguments:
   _name:
     required: true
     help: (Required) The name to use to find an escalation policy in the PagerDuty
       API.
+    ignored: false
     type: Text
-    deprecated: false
+name: pagerduty_escalation_policy
 attributes:
   name:
     help: ! '- The short name of the found escalation policy.'

@@ -1,67 +1,67 @@
-_name: bitbucket_repository
 arguments:
   _website:
     required: false
     help: (Optional) URL of website associated with this repository.
+    ignored: false
     type: Text
-    deprecated: false
   _is_private:
     required: false
     help: (Optional) If this should be private or not. Defaults to @true@ .
+    ignored: false
     type: Text
-    deprecated: false
   _language:
     required: false
     help: (Optional) What the language of this repository should be.
+    ignored: false
     type: Text
-    deprecated: false
   _has_issues:
     required: false
     help: (Optional) If this should have issues turned on or not.
+    ignored: false
     type: Text
-    deprecated: false
   _fork_policy:
     required: false
     help: (Optional) What the fork policy should be. Defaults to allow_forks.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the repository.
+    ignored: false
     type: Text
-    deprecated: false
   _has_wiki:
     required: false
     help: (Optional) If this should have wiki turned on or not.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) What the description of the repo is.
+    ignored: false
     type: Text
-    deprecated: false
   _scm:
     required: false
     help: (Optional) What SCM you want to use. Valid options are hg or git. Defaults
       to git.
+    ignored: false
     type: Text
-    deprecated: false
   _slug:
     required: false
     help: (Optional) The slug of the repository.
+    ignored: false
     type: Text
-    deprecated: false
   _project_key:
     required: false
     help: (Optional) If you want to have this repo associated with a project.
+    ignored: false
     type: Text
-    deprecated: false
   _owner:
     required: true
     help: (Required) The owner of this repository. Can be you or any team you have
       write access to.
+    ignored: false
     type: Text
-    deprecated: false
+name: bitbucket_repository
 attributes: {}
 about: Provides a Bitbucket repository resource. This resource allows you manage your
   repositories such as scm type, if it is private, how to fork the repository and

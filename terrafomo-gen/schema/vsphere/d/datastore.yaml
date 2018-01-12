@@ -1,0 +1,21 @@
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the datastore. This can be a name or path.
+    ignored: false
+    type: Text
+  _datacenter_id:
+    required: false
+    help: (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider>
+      of the datacenter the datastore is located in. This can be omitted if the search
+      path used in @name@ is an absolute path. For default datacenters, use the id
+      attribute from an empty @vsphere_datacenter@ data source.
+    ignored: false
+    type: Text
+name: vsphere_datastore
+attributes: {}
+about: The @vsphere_datastore@ data source can be used to discover the ID of a datastore
+  in vSphere. This is useful to fetch the ID of a datastore that you want to use to
+  create virtual machines in using the </docs/providers/vsphere/r/virtual_machine.html>
+  resource.
+examples: []

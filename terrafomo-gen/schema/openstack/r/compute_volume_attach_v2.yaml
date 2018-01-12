@@ -1,22 +1,21 @@
-_name: openstack_compute_volume_attach_v2
 arguments:
   _instance_id:
     required: true
     help: (Required) The ID of the Instance to attach the Volume to.
+    ignored: false
     type: Text
-    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Compute client. A Compute
       client is needed to create a volume attachment. If omitted, the @region@ argument
       of the provider is used. Changing this creates a new volume attachment.
+    ignored: false
     type: Text
-    deprecated: false
   _volume_id:
     required: true
     help: (Required) The ID of the Volume to attach to an Instance.
+    ignored: false
     type: Text
-    deprecated: false
   _device:
     required: false
     help: ! '(Optional) The device of the volume attachment (ex: @/dev/vdc@ ). NOTE
@@ -25,8 +24,9 @@ arguments:
       the hypervisor chose. If this happens, Terraform will wish to update the device
       upon subsequent applying which will cause the volume to be detached and reattached
       indefinitely. Please use with caution.'
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_compute_volume_attach_v2
 attributes:
   volume_id:
     help: ! '- See Argument Reference above.'

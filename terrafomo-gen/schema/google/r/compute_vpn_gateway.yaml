@@ -1,35 +1,35 @@
-_name: google_compute_vpn_gateway
 arguments:
   _region:
     required: false
     help: (Optional) The region this gateway should sit in. If not specified, the
       project region will be used. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource, required by GCE. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A description of the resource. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _network:
     required: true
     help: (Required) The name or resource link to the network this VPN gateway is
       accepting traffic for. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_vpn_gateway
 attributes:
   self_link:
     help: ! '- The URI of the created resource.'

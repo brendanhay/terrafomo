@@ -1,20 +1,20 @@
-_name: aws_route53_zone_association
 arguments:
   _vpc_region:
     required: false
     help: (Optional) The VPC's region. Defaults to the region of the AWS provider.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: true
     help: (Required) The VPC to associate with the private hosted zone.
+    ignored: false
     type: Text
-    deprecated: false
   _zone_id:
     required: true
     help: (Required) The private hosted zone to associate.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_route53_zone_association
 attributes:
   vpc_id:
     help: ! '- The ID of the VPC for the association.'

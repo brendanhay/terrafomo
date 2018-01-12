@@ -1,30 +1,30 @@
-_name: powerdns_record
 arguments:
   _name:
     required: true
     help: (Required) The name of the record.
+    ignored: false
     type: Text
-    deprecated: false
   _ttl:
     required: true
     help: (Required) The TTL of the record.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (Required) The name of zone to contain this record.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The record type.
+    ignored: false
     type: Text
-    deprecated: false
   _records:
     required: true
     help: (Required) A string list of records.
+    ignored: false
     type: Text
-    deprecated: false
+name: powerdns_record
 attributes: {}
 about: Provides a PowerDNS record resource.
 examples: []

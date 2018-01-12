@@ -1,32 +1,32 @@
-_name: aws_route53_zone
 arguments:
   _name:
     required: false
     help: (Optional) The Hosted Zone name of the desired Hosted Zone.
+    ignored: false
     type: Text
-    deprecated: false
   _private_zone:
     required: false
     help: (Optional) Used with @name@ field to get a private Hosted Zone.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) Used with @name@ field to get a private Hosted Zone associated
       with the vpc_id (in this case, private_zone is not mandatory).
+    ignored: false
     type: Text
-    deprecated: false
   _zone_id:
     required: false
     help: (Optional) The Hosted Zone id of the desired Hosted Zone.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) Used with @name@ field. A mapping of tags, each pair of which
       must exactly match a pair on the desired Hosted Zone.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_route53_zone
 attributes:
   comment:
     help: ! '- The comment field of the Hosted Zone.'

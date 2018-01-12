@@ -1,16 +1,16 @@
-_name: profitbricks_datacenter
 arguments:
   _name:
     required: true
     help: (Required) Name or part of the name of an existing Virtual Data Center that
       you want to search for.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: false
     help: (Optional) Id of the existing Virtual Data Center's location.
+    ignored: false
     type: Text
-    deprecated: false
+name: profitbricks_datacenter
 attributes:
   id:
     help: ! '- UUID of the Virtual Data Center'

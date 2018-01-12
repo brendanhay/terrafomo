@@ -1,20 +1,20 @@
-_name: oneandone_instance_size
 arguments:
   _name:
     required: true
     help: -(Optional) Number of cores per processor
+    ignored: false
     type: Text
-    deprecated: false
   _ram:
     required: false
     help: (Optional) Size of ram in GB
+    ignored: false
     type: Text
-    deprecated: false
   _vcores:
     required: false
     help: (Optional)  Number of vcores
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_instance_size
 attributes: {}
 about: Fetches a predefined instance type for 1&1 servers
 examples: []

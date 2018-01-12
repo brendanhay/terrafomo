@@ -1,0 +1,56 @@
+arguments:
+  _name_regex:
+    required: false
+    help: (Optional) A regex string to apply to the role list returned by Alicloud.
+    ignored: false
+    type: Text
+  _policy_name:
+    required: false
+    help: (Optional) Limit search to specific the policy name. If you set this parameter
+      without set @policy_type@ , we will specified it as @System@ . Found the roles
+      which attached with the specified policy.
+    ignored: false
+    type: Text
+  _policy_type:
+    required: false
+    help: (Optional) Limit search to specific the policy type. Valid items are @Custom@
+      and @System@ . If you set this parameter, you must set @policy_name@ at one
+      time.
+    ignored: false
+    type: Text
+  _output_file:
+    required: false
+    help: (Optional) The name of file that can save roles data source after running
+      @terraform plan@ .
+    ignored: false
+    type: Text
+name: alicloud_ram_roles
+attributes:
+  update_date:
+    help: ! '- Update date of the role.'
+    type: Text
+  arn:
+    help: ! '- Resource descriptor of the role.'
+    type: Text
+  assume_role_policy_document:
+    help: ! '- Authorization strategy of the role. This parameter is deprecated and
+      replaced by @document@ .'
+    type: Text
+  create_date:
+    help: ! '- Create date of the role.'
+    type: Text
+  name:
+    help: ! '- Name of the role.'
+    type: Text
+  document:
+    help: ! '- Authorization strategy of the role.'
+    type: Text
+  id:
+    help: ! '- Id of the role.'
+    type: Text
+  description:
+    help: ! '- Description of the role.'
+    type: Text
+about: The Ram Roles data source provides a list of Alicloud Ram Roles in an Alicloud
+  account according to the specified filters.
+examples: []

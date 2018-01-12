@@ -1,20 +1,20 @@
-_name: aws_elb_load_balancer_listener_policy
 arguments:
   _load_balancer_port:
     required: true
     help: (Required) The load balancer listener port to apply the policy to.
+    ignored: false
     type: Text
-    deprecated: false
   _load_balancer_name:
     required: true
     help: (Required) The load balancer to attach the policy to.
+    ignored: false
     type: Text
-    deprecated: false
   _policy_names:
     required: true
     help: (Required) List of Policy Names to apply to the backend server.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_elb_load_balancer_listener_policy
 attributes:
   id:
     help: ! '- The ID of the policy.'

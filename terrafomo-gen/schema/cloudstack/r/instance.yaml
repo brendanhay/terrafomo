@@ -1,101 +1,101 @@
-_name: cloudstack_instance
 arguments:
   _affinity_group_ids:
     required: false
     help: (Optional) List of affinity group IDs to apply to this instance.
+    ignored: false
     type: Text
-    deprecated: false
   _template:
     required: true
     help: (Required) The name or ID of the template used for this instance. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_address:
     required: false
     help: (Optional) The IP address to assign to this instance. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _keypair:
     required: false
     help: (Optional) The name of the SSH key pair that will be used to access this
       instance.
+    ignored: false
     type: Text
-    deprecated: false
   _security_group_names:
     required: false
     help: (Optional) List of security group names to apply to this instance. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The name or ID of the project to deploy this instance to. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _security_group_ids:
     required: false
     help: (Optional) List of security group IDs to apply to this instance. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _group:
     required: false
     help: (Optional) The group name of the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _network_id:
     required: false
     help: (Optional) The ID of the network to connect this instance to. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _root_disk_size:
     required: false
     help: (Optional) The size of the root disk in gigabytes. The root disk is resized
       on deploy. Only applies to template-based deployments. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _zone:
     required: true
     help: (Required) The name or ID of the zone where this instance will be created.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _user_data:
     required: false
     help: (Optional) The user data to provide when launching the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _service_offering:
     required: true
     help: (Required) The name or ID of the service offering used for this instance.
+    ignored: false
     type: Text
-    deprecated: false
   _display_name:
     required: false
     help: (Optional) The display name of the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _expunge:
     required: false
     help: (Optional) This determines if the instance is expunged when it is destroyed
       (defaults false)
+    ignored: false
     type: Text
-    deprecated: false
   _affinity_group_names:
     required: false
     help: (Optional) List of affinity group names to apply to this instance.
+    ignored: false
     type: Text
-    deprecated: false
+name: cloudstack_instance
 attributes:
   display_name:
     help: ! '- The display name of the instance.'

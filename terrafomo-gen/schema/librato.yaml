@@ -1,17 +1,17 @@
-_name: LibratoProvider
 arguments:
   _token:
     required: true
     help: (Required) Librato API token. It must be provided, but it can also be sourced
       from the @LIBRATO_TOKEN@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _email:
     required: true
     help: (Required) Librato email address. It must be provided, but it can also be
       sourced from the @LIBRATO_EMAIL@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: LibratoProvider
 attributes: {}
 about: The Librato provider is used to interact with the resources supported by Librato.
   The provider needs to be configured with the proper credentials before it can be

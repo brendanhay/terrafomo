@@ -1,5 +1,5 @@
-_name: VaultProvider
 arguments: {}
+name: VaultProvider
 attributes: {}
 about: The Vault provider allows Terraform to read from, write to, and configure <https://vaultproject.io/>
   . ~> Important Interacting with Vault from Terraform causes any secrets that you

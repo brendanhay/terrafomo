@@ -1,21 +1,22 @@
-_name: google_project_iam_member
 arguments:
   _member:
     required: true
-    help: (Required) The user that the role should apply to.
+    help: ! '(Required) The identity that will be granted the privilege in the @role@
+      . This field can have one of the following values:'
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project ID. If not specified, uses the ID of the project
       configured with the provider.
+    ignored: false
     type: Text
-    deprecated: false
   _role:
     required: true
     help: (Required) The role that should be applied.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_project_iam_member
 attributes:
   etag:
     help: ! '- (Computed) The etag of the project''s IAM policy.'

@@ -1,34 +1,34 @@
-_name: aws_ebs_snapshot
 arguments:
   _filter:
     required: false
     help: (Optional) One or more name/value pairs to filter off of. There are several
       valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _snapshot_ids:
     required: false
     help: (Optional) Returns information on a specific snapshot_id.
+    ignored: false
     type: Text
-    deprecated: false
   _owners:
     required: false
     help: (Optional) Returns the snapshots owned by the specified owner id. Multiple
       owners can be specified.
+    ignored: false
     type: Text
-    deprecated: false
   _restorable_by_user_ids:
     required: false
     help: (Optional) One or more AWS accounts IDs that can create volumes from the
       snapshot.
+    ignored: false
     type: Text
-    deprecated: false
   _most_recent:
     required: false
     help: (Optional) If more than one result is returned, use the most recent snapshot.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ebs_snapshot
 attributes:
   kms_key_id:
     help: ! '- The ARN for the KMS encryption key.'

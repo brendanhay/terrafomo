@@ -1,20 +1,20 @@
-_name: profitbricks_datacenter
 arguments:
   _name:
     required: true
     help: (Required)[string] The name of the Virtual Data Center.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional)[string] Description for the data center.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required)[string] The physical location where the data center will be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: profitbricks_datacenter
 attributes: {}
 about: Manages a Virtual Data Center on ProfitBricks
 examples: []

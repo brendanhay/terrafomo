@@ -1,10 +1,10 @@
-_name: aws_elasticache_cluster
 arguments:
   _cluster_id:
     required: true
     help: – (Required) Group identifier.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_elasticache_cluster
 attributes:
   node_type:
     help: – The cluster node type.

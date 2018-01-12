@@ -1,96 +1,96 @@
-_name: oneandone_server
 arguments:
   _firewall_policy_id:
     required: false
     help: (Optional) ID of firewall policy
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: -(Required) The name of the server.
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: false
     help: (Optional) Desired password.
+    ignored: false
     type: Text
-    deprecated: false
   _image:
     required: true
     help: -(Required) The name of a desired image to be provisioned with the server
+    ignored: false
     type: Text
-    deprecated: false
   _ip:
     required: false
     help: (Optional) IP address for the server
+    ignored: false
     type: Text
-    deprecated: false
   _cores_per_processor:
     required: true
     help: -(Optional) Number of cores per processor
+    ignored: false
     type: Text
-    deprecated: false
   _monitoring_policy_id:
     required: false
     help: (Optional) ID of monitoring policy
+    ignored: false
     type: Text
-    deprecated: false
   _ssh_key_public:
     required: false
     help: (Optional) The public key data in OpenSSH authorized_keys format.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Description of the server
+    ignored: false
     type: Text
-    deprecated: false
   _ram:
     required: true
     help: -(Optional) Size of ram.
+    ignored: false
     type: Text
-    deprecated: false
   _vcores:
     required: true
     help: -(Optional) Number of virtual cores.
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@
+    ignored: false
     type: Text
-    deprecated: false
   _hdds:
     required: false
     help: (Optional) List of HDDs. One HDD must be main.
+    ignored: false
     type: Text
-    deprecated: false
   _loadbalancer_id:
     required: false
     help: (Optional) ID of the load balancer
+    ignored: false
     type: Text
-    deprecated: false
   _*disk_size:
     required: true
     help: -(Required) The size of HDD
+    ignored: false
     type: Text
-    deprecated: false
   _ssh_key_path:
     required: false
     help: (Optional) Path to private ssh key
+    ignored: false
     type: Text
-    deprecated: false
   _fixed_instance_size:
     required: false
     help: (Optional) ID of a fixed instance size
+    ignored: false
     type: Text
-    deprecated: false
   _*is_main:
     required: false
     help: (Optional) Indicates if HDD is to be used as main hard disk of the server
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_server
 attributes: {}
 about: Manages a Server on 1&1
 examples: []

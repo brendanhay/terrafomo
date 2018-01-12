@@ -1,15 +1,15 @@
-_name: google_dns_managed_zone
 arguments:
   _project:
     required: false
     help: (Optional) ID of the project for the Google Cloud DNS zone.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_dns_managed_zone
 attributes:
   dns_name:
     help: ! '- The DNS name of this zone, e.g. "terraform.io".'

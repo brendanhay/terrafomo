@@ -1,51 +1,51 @@
-_name: OraclePublicCloudProvider
 arguments:
   _endpoint:
     required: false
     help: (Optional) The API endpoint to use, associated with your Oracle Public Cloud
       account. This is known as the @REST Endpoint@ within the Oracle portal. It can
       also be sourced from the @OPC_ENDPOINT@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _insecure:
     required: false
     help: (Optional) Skips TLS Verification for using self-signed certificates. Should
       only be used if absolutely needed. Can also via setting the @OPC_INSECURE@ environment
       variable to @true@ .
+    ignored: false
     type: Text
-    deprecated: false
   _storage_endpoint:
     required: false
     help: (Optional) The API endpoint to use, associated with your Oracle Storage
       Cloud account. This is known as the @REST Endpoint@ within the Oracle portal.
       Can also be set via the @OPC_STORAGE_ENDPOINT@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: false
     help: (Optional) The password associated with the username to use. It can also
       be sourced from the @OPC_PASSWORD@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _identity_domain:
     required: false
     help: (Optional) The Identity Domain or Service Instance ID of the environment
       to use. It can also be sourced from the @OPC_IDENTITY_DOMAIN@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _user:
     required: false
     help: (Optional) The username to use, generally your email address. It can also
       be sourced from the @OPC_USERNAME@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _max_retries:
     required: false
     help: (Optional) The maximum number of tries to make for a successful response
       when operating on resources within Oracle Public Cloud. It can also be sourced
       from the @OPC_MAX_RETRIES@ environment variable. Defaults to 1.
+    ignored: false
     type: Text
-    deprecated: false
+name: OraclePublicCloudProvider
 attributes: {}
 about: The Oracle Public Cloud provider is used to interact with the many resources
   supported by the Oracle Public Cloud. The provider needs to be configured with credentials

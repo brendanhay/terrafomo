@@ -1,31 +1,31 @@
-_name: spotinst_subscription
 arguments:
   _endpoint:
     required: true
     help: (Required) The destination for the request
+    ignored: false
     type: Text
-    deprecated: false
   _protocol:
     required: true
     help: ! '(Required) The protocol to use to connect with the instance. Valid values:
       http, https'
+    ignored: false
     type: Text
-    deprecated: false
   _format:
     required: false
     help: (Optional) The structure of the payload.
+    ignored: false
     type: Text
-    deprecated: false
   _event_type:
     required: true
     help: (Required) The events to subscribe to
+    ignored: false
     type: Text
-    deprecated: false
   _resource_id:
     required: true
     help: (Required) The resource to subscribe to
+    ignored: false
     type: Text
-    deprecated: false
+name: spotinst_subscription
 attributes:
   id:
     help: ! '- The subscription ID.'

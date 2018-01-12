@@ -1,17 +1,17 @@
-_name: google_compute_project_metadata
 arguments:
   _metadata:
     required: true
     help: (Required) A series of key value pairs. Changing this resource updates the
       GCE state.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_project_metadata
 attributes: {}
 about: ! 'Manages metadata common to all instances for a project in GCE. For more
   information see <https://cloud.google.com/compute/docs/storing-retrieving-metadata>

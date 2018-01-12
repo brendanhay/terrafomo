@@ -1,21 +1,21 @@
-_name: google_compute_project_metadata_item
 arguments:
   _value:
     required: true
     help: (Required) The value to set for the given metadata key.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _key:
     required: true
     help: (Required) The metadata key to set.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_compute_project_metadata_item
 attributes: {}
 about: Manages a single key/value pair on metadata common to all instances for a project
   in GCE. Using @google_compute_project_metadata_item@ lets you manage a single key/value

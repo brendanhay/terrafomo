@@ -1,41 +1,41 @@
-_name: azurerm_virtual_machine_extension
 arguments:
   _virtual_machine_name:
     required: true
     help: (Required) The name of the virtual machine. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the virtual machine extension peering. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _publisher:
     required: true
     help: (Required) The publisher of the extension, available publishers can be found
       by using the Azure CLI.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) The location where the extension is created. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the virtual
       network. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of extension, available types for a publisher can be
       found using the Azure CLI.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_virtual_machine_extension
 attributes:
   id:
     help: ! '- The Virtual Machine Extension ID.'

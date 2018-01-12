@@ -1,10 +1,10 @@
-_name: dns_cname_record_set
 arguments:
   _host:
     required: true
     help: ! '- (required): Host to look up'
+    ignored: false
     type: Text
-    deprecated: false
+name: dns_cname_record_set
 attributes:
   cname:
     help: ! '- A CNAME record associated with host.'

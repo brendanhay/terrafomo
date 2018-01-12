@@ -1,37 +1,36 @@
-_name: VMwarevCloudDirectorProvider
 arguments:
   _url:
     required: true
     help: (Required) This is the URL for the vCloud Director API endpoint. e.g. https://server.domain.com/api.
       Can also be specified with the @VCD_URL@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _allow_unverified_ssl:
     required: false
     help: (Optional) Boolean that can be set to true to disable SSL certificate verification.
       This should be used with care as it could allow an attacker to intercept your
       auth token. If omitted, default value is false. Can also be specified with the
       @VCD_ALLOW_UNVERIFIED_SSL@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _org:
     required: true
     help: (Required) This is the vCloud Director Org on which to run API operations.
       Can also be specified with the @VCD_ORG@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: true
     help: (Required) This is the password for vCloud Director API operations. Can
       also be specified with the @VCD_PASSWORD@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _user:
     required: true
     help: (Required) This is the username for vCloud Director API operations. Can
       also be specified with the @VCD_USER@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _max_retry_timeout:
     required: false
     help: (Optional) This provides you with the ability to specify the maximum amount
@@ -40,21 +39,22 @@ arguments:
       action will be retried (as long as it is still within the @max_retry_timeout@
       value) to try and ensure success. Defaults to 60 seconds if not set. Can also
       be specified with the @VCD_MAX_RETRY_TIMEOUT@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _maxRetryTimeout:
     required: false
     help: (Deprecated) Use @max_retry_timeout@ instead.
+    ignored: true
     type: Text
-    deprecated: true
   _vdc:
     required: false
     help: (Optional) This is the virtual datacenter within vCloud Director to run
       API operations against. If not set the plugin will select the first virtual
       datacenter available to your Org. Can also be specified with the @VCD_VDC@ environment
       variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: VMwarevCloudDirectorProvider
 attributes: {}
 about: ! 'The VMware vCloud Director provider is used to interact with the resources
   supported by VMware vCloud Director. The provider needs to be configured with the

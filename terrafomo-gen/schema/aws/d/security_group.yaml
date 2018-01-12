@@ -1,31 +1,31 @@
-_name: aws_security_group
 arguments:
   _filter:
     required: false
     help: (Optional) Custom filter block as described below.
+    ignored: false
     type: Text
-    deprecated: false
   _id:
     required: false
     help: (Optional) The id of the specific security group to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name that the desired security group must have.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The id of the VPC that the desired security group belongs to.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired security group.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_security_group
 attributes:
   arn:
     help: ! '- The computed ARN of the security group.'

@@ -1,0 +1,17 @@
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the container. Must contain alphanumeric characters
+      or underscores.
+    ignored: false
+    type: Text
+name: aws_media_store_container
+attributes:
+  arn:
+    help: ! '- The ARN of the container.'
+    type: Text
+  endpoint:
+    help: ! '- The DNS endpoint of the container.'
+    type: Text
+about: Provides a MediaStore Container.
+examples: []

@@ -1,33 +1,33 @@
-_name: azurerm_key_vault_certificate
 arguments:
   _vault_uri:
     required: true
     help: (Required) Specifies the URI used to access the Key Vault instance, available
       on the @azurerm_key_vault@ resource.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the Key Vault Certificate. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _certificate:
     required: false
     help: (Optional) A @certificate@ block as defined below, used to Import an existing
       certificate.
+    ignored: false
     type: Text
-    deprecated: false
   _certificate_policy:
     required: true
     help: (Required) A @certificate_policy@ block as defined below.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_key_vault_certificate
 attributes:
   version:
     help: ! '- The current version of the Key Vault Certificate.'

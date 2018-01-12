@@ -1,27 +1,27 @@
-_name: aws_iam_user_login_profile
 arguments:
   _password_reset_required:
     required: false
     help: (Optional, default "true") Whether the user should be forced to reset the
       generated password on first login.
+    ignored: false
     type: Text
-    deprecated: false
   _pgp_key:
     required: true
     help: (Required) Either a base-64 encoded PGP public key, or a keybase username
       in the form @keybase:username@ .
+    ignored: false
     type: Text
-    deprecated: false
   _user:
     required: true
     help: (Required) The IAM user's name.
+    ignored: false
     type: Text
-    deprecated: false
   _password_length:
     required: false
     help: (Optional, default 20) The length of the generated password.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_user_login_profile
 attributes:
   encrypted_password:
     help: ! '- The encrypted password, base64 encoded.'

@@ -1,34 +1,34 @@
-_name: datadog_timeboard
 arguments:
   _graph:
     required: true
     help: (Required) Nested block describing a graph definition. The structure of
       this block is described below. Multiple graph blocks are allowed within a datadog_timeboard
       resource.
+    ignored: false
     type: Text
-    deprecated: false
   _template_variable:
     required: false
     help: (Optional) Nested block describing a template variable. The structure of
       this block is described below. Multiple template_variable blocks are allowed
       within a datadog_timeboard resource.
+    ignored: false
     type: Text
-    deprecated: false
   _read_only:
     required: false
     help: (Optional) The read-only status of the timeboard. Default is false.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: true
     help: (Required) A description of the dashboard's content.
+    ignored: false
     type: Text
-    deprecated: false
   _title:
     required: true
     help: (Required) The name of the dashboard.
+    ignored: false
     type: Text
-    deprecated: false
+name: datadog_timeboard
 attributes: {}
 about: Provides a Datadog timeboard resource. This can be used to create and manage
   Datadog timeboards.

@@ -1,11 +1,10 @@
-_name: openstack_networking_floatingip_v2
 arguments:
   _port_id:
     required: false
     help: (Optional) ID of an existing port with at least one IP address to associate
       with this floating IP.
+    ignored: false
     type: Text
-    deprecated: false
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Networking client. A Networking
@@ -13,33 +12,34 @@ arguments:
       resource, such as a load balancer. If omitted, the @region@ argument of the
       provider is used. Changing this creates a new floating IP (which may or may
       not have a different address).
+    ignored: false
     type: Text
-    deprecated: false
   _fixed_ip:
     required: true
     help: ! '- Fixed IP of the port to associate with this floating IP. Required if
       the port has multiple fixed IPs.'
+    ignored: false
     type: Text
-    deprecated: false
   _pool:
     required: true
     help: (Required) The name of the pool from which to obtain the floating IP. Changing
       this creates a new floating IP.
+    ignored: false
     type: Text
-    deprecated: false
   _value_specs:
     required: false
     help: (Optional) Map of additional options.
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The target tenant ID in which to allocate the floating IP, if
       you specify this together with a port_id, make sure the target port belongs
       to the same tenant. Changing this creates a new floating IP (which may or may
       not have a different address)
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_networking_floatingip_v2
 attributes:
   port_id:
     help: ! '- ID of associated port.'

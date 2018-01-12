@@ -1,15 +1,15 @@
-_name: alicloud_eip_association
 arguments:
   _instance_id:
     required: false
     help: (Optional, Forces new resource) The ID of the instance.
+    ignored: false
     type: Text
-    deprecated: false
   _allocation_id:
     required: false
     help: (Optional, Forces new resource) The allocation EIP ID.
+    ignored: false
     type: Text
-    deprecated: false
+name: alicloud_eip_association
 attributes:
   instance_id:
     help: ! '- As above.'

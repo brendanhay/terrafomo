@@ -1,80 +1,79 @@
-_name: azurerm_virtual_machine_scale_set
 arguments:
   _upgrade_policy_mode:
     required: true
     help: (Required) Specifies the mode of an upgrade to virtual machines in the scale
       set. Possible values, @Manual@ or @Automatic@ .
+    ignored: false
     type: Text
-    deprecated: false
   _os_profile:
     required: true
     help: (Required) A Virtual Machine OS Profile block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _os_profile_secrets:
     required: false
     help: (Optional) A collection of Secret blocks as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _overprovision:
     required: false
     help: (Optional) Specifies whether the virtual machine scale set should be overprovisioned.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the virtual machine scale set resource.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _storage_profile_os_disk:
     required: true
     help: (Required) A storage profile os disk block as documented below
+    ignored: false
     type: Text
-    deprecated: false
   _plan:
     required: false
     help: (Optional) A plan block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _storage_profile_data_disk:
     required: false
     help: (Optional) A storage profile data disk block as documented below
+    ignored: false
     type: Text
-    deprecated: false
   _os_profile_windows_config:
     required: true
     help: (Required, when a windows machine) A Windows config block as documented
       below.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _boot_diagnostics:
     required: false
     help: (Optional) A boot diagnostics profile block as referenced below.
+    ignored: false
     type: Text
-    deprecated: false
   _sku:
     required: true
     help: (Required) A sku block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _network_profile:
     required: true
     help: (Required) A collection of network profile block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the virtual
       machine scale set. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _single_placement_group:
     required: false
     help: (Optional) Specifies whether the scale set is limited to a single placement
@@ -82,29 +81,30 @@ arguments:
       disks must be used. Default is true. Changing this forces a new resource to
       be created. See <http://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-placement-groups>
       for more information.
+    ignored: false
     type: Text
-    deprecated: false
   _os_profile_linux_config:
     required: true
     help: (Required, when a linux machine) A Linux config block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _storage_profile_image_reference:
     required: false
     help: (Optional) A storage profile image reference block as documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _extension:
     required: false
     help: (Optional) Can be specified multiple times to add extension profiles to
       the scale set. Each @extension@ block supports the fields documented below.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_virtual_machine_scale_set
 attributes: {}
 about: ! 'Create a virtual machine scale set. ~> Note: All arguments including the
   administrator login and password will be stored in the raw state as plain-text.

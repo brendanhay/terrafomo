@@ -1,0 +1,81 @@
+arguments:
+  _domain_name:
+    required: true
+    help: (Required) A domain name which is the necessary parameter for the records
+      query.
+    ignored: false
+    type: Text
+  _is_locked:
+    required: false
+    help: ! '(Optional, type: bool) Limit search to specific record lock status.'
+    ignored: false
+    type: Text
+  _line:
+    required: false
+    help: (Optional) Limit search to specific parsing line. Valid items are @default@
+      , @telecom@ , @unicom@ , @mobile@ , @oversea@ , @edu@ .
+    ignored: false
+    type: Text
+  _host_record_regex:
+    required: false
+    help: (Optional) Limit search to provide host record regex.
+    ignored: false
+    type: Text
+  _type':
+    required: false
+    help: (Optional) Limit search to specific record type. Valid items are @A@ , @NS@
+      , @MX@ , @TXT@ , @CNAME@ , @SRV@ , @AAAA@ , @REDIRECT_URL@ , @FORWORD_URL@ .
+    ignored: false
+    type: Text
+  _status:
+    required: false
+    help: (Optional) Limit search to specific record status. Valid items are @ENABLE@
+      and @DISABLE@ .
+    ignored: false
+    type: Text
+  _value_regex:
+    required: false
+    help: (Optional) Limit search to provide host record value regex.
+    ignored: false
+    type: Text
+  _output_file:
+    required: false
+    help: (Optional) The name of file that can save records data source after running
+      @terraform plan@ .
+    ignored: false
+    type: Text
+name: alicloud_dns_records
+attributes:
+  ttl:
+    help: ! '- TTL of the record.'
+    type: Text
+  status:
+    help: ! '- Status of the record.'
+    type: Text
+  record_id:
+    help: ! '- ID of the record.'
+    type: Text
+  locked:
+    help: ! '- Indicates whether the record is locked.'
+    type: Text
+  priority:
+    help: ! '- Priority of the @MX@ record.'
+    type: Text
+  domain_name:
+    help: ! '- Name of the domain which the record belong to.'
+    type: Text
+  value:
+    help: ! '- Host record value of the record.'
+    type: Text
+  line:
+    help: ! '- Parsing line of the record.'
+    type: Text
+  host_record:
+    help: ! '- Host record of the record.'
+    type: Text
+  type:
+    help: ! '- Type of the record.'
+    type: Text
+about: The Dns Domain Records data source provides a list of Alicloud Dns Domain Records
+  in an Alicloud account according to the specified filters.
+examples: []

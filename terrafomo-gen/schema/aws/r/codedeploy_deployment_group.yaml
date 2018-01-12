@@ -1,77 +1,77 @@
-_name: aws_codedeploy_deployment_group
 arguments:
   _trigger_configuration:
     required: false
     help: (Optional) Trigger Configurations for the deployment group (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _service_role_arn:
     required: true
     help: (Required) The service role ARN that allows deployments.
+    ignored: false
     type: Text
-    deprecated: false
   _deployment_config_name:
     required: false
     help: (Optional) The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime".
+    ignored: false
     type: Text
-    deprecated: false
   _alarm_configuration:
     required: false
     help: (Optional) Information about alarms associated with the deployment group
       (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _blue_green_deployment_config:
     required: false
     help: (Optional) Information about blue/green deployment options for a deployment
       group (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _ec2_tag_filter:
     required: false
     help: (Optional) Tag filters associated with the group. See the AWS docs for details.
+    ignored: false
     type: Text
-    deprecated: false
   _load_balancer_info:
     required: false
     help: (Optional) Information about the load balancer to use in a blue/green deployment
       (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _on_premises_instance_tag_filter:
     required: false
     help: (Optional) On premise tag filters associated with the group. See the AWS
       docs for details.
+    ignored: false
     type: Text
-    deprecated: false
   _deployment_style:
     required: false
     help: (Optional) Information about the type of deployment, either in-place or
       blue/green, you want to run and whether to route deployment traffic behind a
       load balancer (documented below).
+    ignored: false
     type: Text
-    deprecated: false
   _deployment_group_name:
     required: true
     help: (Required) The name of the deployment group.
+    ignored: false
     type: Text
-    deprecated: false
   _app_name:
     required: true
     help: (Required) The name of the application.
+    ignored: false
     type: Text
-    deprecated: false
   _autoscaling_groups:
     required: false
     help: (Optional) Autoscaling groups associated with the deployment group.
+    ignored: false
     type: Text
-    deprecated: false
   _auto_rollback_configuration:
     required: false
     help: (Optional) The automatic rollback configuration associated with the deployment
       group (documented below).
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_codedeploy_deployment_group
 attributes: {}
 about: Provides a CodeDeploy Deployment Group for a CodeDeploy Application
 examples: []

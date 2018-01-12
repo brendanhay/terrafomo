@@ -1,4 +1,3 @@
-_name: aws_acm_certificate
 arguments:
   _statuses:
     required: false
@@ -6,14 +5,15 @@ arguments:
       values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@
       , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the
       @ISSUED@ state are returned.
+    ignored: false
     type: Text
-    deprecated: false
   _domain:
     required: true
     help: (Required) The domain of the certificate to look up. If no certificate is
       found with this name, an error will be returned.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_acm_certificate
 attributes:
   arn:
     help: ! '- Set to the ARN of the found certificate, suitable for referencing in

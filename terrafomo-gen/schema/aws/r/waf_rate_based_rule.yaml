@@ -1,34 +1,34 @@
-_name: aws_waf_rate_based_rule
 arguments:
   _name:
     required: true
     help: (Required) The name or description of the rule.
+    ignored: false
     type: Text
-    deprecated: false
   _rate_limit:
     required: true
     help: (Required) The maximum number of requests, which have an identical value
       in the field specified by the RateKey, allowed in a five-minute period. Minimum
       value is 2000.
+    ignored: false
     type: Text
-    deprecated: false
   _predicates:
     required: false
     help: (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet,
       or XssMatchSet objects to include in a rule.
+    ignored: false
     type: Text
-    deprecated: false
   _rate_key:
     required: true
     help: (Required) Valid value is IP.
+    ignored: false
     type: Text
-    deprecated: false
   _metric_name:
     required: true
     help: (Required) The name or description for the Amazon CloudWatch metric of this
       rule.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_waf_rate_based_rule
 attributes: {}
 about: Provides a WAF Rate Based Rule Resource
 examples: []

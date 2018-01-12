@@ -1,63 +1,63 @@
-_name: azurerm_key_vault
 arguments:
   _enabled_for_disk_encryption:
     required: false
     help: (Optional) Boolean flag to specify whether Azure Disk Encryption is permitted
       to retrieve secrets from the vault and unwrap keys. Defaults to false.
+    ignored: false
     type: Text
-    deprecated: false
   _access_policy:
     required: true
     help: (Required) An access policy block as described below. At least one policy
       is required up to a maximum of 16.
+    ignored: false
     type: Text
-    deprecated: false
   _enabled_for_template_deployment:
     required: false
     help: (Optional) Boolean flag to specify whether Azure Resource Manager is permitted
       to retrieve secrets from the key vault. Defaults to false.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the Key Vault resource. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) Specifies the supported Azure location where the resource exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _sku:
     required: true
     help: (Required) An SKU block as described below.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the namespace.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _enabled_for_deployment:
     required: false
     help: (Optional) Boolean flag to specify whether Azure Virtual Machines are permitted
       to retrieve certificates stored as secrets from the key vault. Defaults to false.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: true
     help: (Required) The Azure Active Directory tenant ID that should be used for
       authenticating requests to the key vault.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_key_vault
 attributes:
   vault_uri:
     help: ! '- The URI of the vault for performing operations on keys and secrets.'

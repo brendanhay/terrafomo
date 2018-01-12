@@ -1,10 +1,10 @@
-_name: aws_kinesis_stream
 arguments:
   _name:
     required: true
     help: (Required) The name of the Kinesis Stream.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_kinesis_stream
 attributes:
   status:
     help: ! '- The current status of the stream. The stream status is one of CREATING,

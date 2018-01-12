@@ -1,34 +1,40 @@
-_name: azurerm_local_network_gateway
 arguments:
   _name:
     required: true
     help: (Required) The name of the local network gateway. Changing this forces a
       new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _gateway_address:
     required: true
     help: (Required) The IP address of the gateway to which to connect.
+    ignored: false
     type: Text
-    deprecated: false
   _address_space:
     required: true
     help: (Required) The list of string CIDRs representing the address spaces the
       gateway exposes.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) The location/region where the local network gatway is created.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the local network
       gateway.
+    ignored: false
     type: Text
-    deprecated: false
+  _bgp_settings:
+    required: false
+    help: (Optional) A @bgp_settings@ block as defined below containing the Local
+      Network Gateway's BGP speaker settings.
+    ignored: false
+    type: Text
+name: azurerm_local_network_gateway
 attributes:
   id:
     help: ! '- The local network gateway unique ID within Azure.'

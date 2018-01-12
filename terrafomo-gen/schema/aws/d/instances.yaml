@@ -1,18 +1,18 @@
-_name: aws_instances
 arguments:
   _filter:
     required: false
     help: (Optional) One or more name/value pairs to use as filters. There are several
       valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _instance_tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on desired instances.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_instances
 attributes:
   private_ips:
     help: ! '- Private IP addresses of instances found through the filter'

@@ -1,57 +1,57 @@
-_name: azurerm_network_interface
 arguments:
   _enable_ip_forwarding:
     required: false
     help: (Optional) Enables IP Forwarding on the NIC. Defaults to @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _dns_servers:
     required: false
     help: (Optional) List of DNS servers IP addresses to use for this NIC, overrides
       the VNet-level server list
+    ignored: false
     type: Text
-    deprecated: false
   _internal_dns_name_label:
     required: false
     help: (Optional) Relative DNS name for this NIC used for internal communications
       between VMs in the same VNet
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the network interface. Changing this forces a new
       resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_configuration:
     required: true
     help: (Required) One or more @ip_configuration@ associated with this NIC as documented
       below.
+    ignored: false
     type: Text
-    deprecated: false
   _network_security_group_id:
     required: false
     help: (Optional) The ID of the Network Security Group to associate with the network
       interface.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: true
     help: (Required) The location/region where the network interface is created. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which to create the network
       interface. Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_network_interface
 attributes:
   applied_dns_servers:
     help: ! '- If the VM that uses this NIC is part of an Availability Set, then this

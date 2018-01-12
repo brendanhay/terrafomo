@@ -1,11 +1,11 @@
-_name: aws_route53_delegation_set
 arguments:
   _reference_name:
     required: false
     help: (Optional) This is a reference name used in Caller Reference (helpful for
       identifying single delegation set amongst others)
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_route53_delegation_set
 attributes:
   id:
     help: ! '- The delegation set ID'

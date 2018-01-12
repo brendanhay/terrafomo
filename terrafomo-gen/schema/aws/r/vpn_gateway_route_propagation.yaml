@@ -1,15 +1,15 @@
-_name: aws_vpn_gateway_route_propagation
 arguments:
   _vpn_gateway_id:
     required: true
     help: ! '- The id of the @aws_vpn_gateway@ to propagate routes from.'
+    ignored: false
     type: Text
-    deprecated: false
   _route_table_id:
     required: true
     help: ! '- The id of the @aws_route_table@ to propagate routes into.'
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_vpn_gateway_route_propagation
 attributes: {}
 about: ! 'Requests automatic route propagation between a VPN gateway and a route table.
   ~> Note: This resource should not be used with a route table that has the @propagating_vgws@

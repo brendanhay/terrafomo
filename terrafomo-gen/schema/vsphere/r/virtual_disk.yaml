@@ -1,39 +1,44 @@
-_name: vsphere_virtual_disk
 arguments:
   _vmdk_path:
     required: true
     help: (Required) The path, including filename, of the virtual disk to be created.  This
-      should end with '.vmdk'.
+      needs to end in @.vmdk@ .
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
-    help: (Optional) The name of a Datacenter in which to create the disk.
+    help: (Optional) The name of the datacenter in which to create the disk. Can be
+      omitted when when ESXi or if there is only one datacenter in your infrastructure.
+    ignored: false
     type: Text
-    deprecated: false
   _adapter_type:
     required: false
-    help: (Optional) set adapter type, 'ide' (the default), 'lsiLogic', or 'busLogic'
-      are supported options.
+    help: ! '(Optional) The adapter type for this virtual disk. Can be one of @ide@
+      , @lsiLogic@ , or @busLogic@ .  Default: @lsiLogic@ .'
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: true
     help: (Required) Size of the disk (in GB).
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: false
-    help: (Optional) 'eagerZeroedThick' (the default), 'lazy', or 'thin' are supported
-      options.
+    help: ! '(Optional) The type of disk to create. Can be one of @eagerZeroedThick@
+      , @lazy@ , or @thin@ . Default: @eagerZeroedThick@ . For information on what
+      each kind of disk provisioning policy means, click <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-4C0F4D73-82F2-4B81-8AA7-1DD752A8A5AC.html>
+      .'
+    ignored: false
     type: Text
-    deprecated: false
   _datastore:
     required: true
-    help: (Required) The name of the Datastore in which to create the disk.
+    help: (Required) The name of the datastore in which to create the disk.
+    ignored: false
     type: Text
-    deprecated: false
+name: vsphere_virtual_disk
 attributes: {}
-about: Provides a VMware virtual disk resource.  This can be used to create and delete
-  virtual disks.
+about: The @vsphere_virtual_disk@ resource can be used to create virtual disks outside
+  of any given </docs/providers/vsphere/r/virtual_machine.html> resource. These disks
+  can be attached to a virtual machine by creating a disk sub-resource with the </docs/providers/vsphere/r/virtual_machine.html#attach>
+  parameter.
 examples: []

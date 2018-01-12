@@ -1,33 +1,33 @@
-_name: consul_catalog_entry
 arguments:
   _token:
     required: false
     help: (Optional) ACL token.
+    ignored: false
     type: Text
-    deprecated: false
   _service:
     required: false
     help: (Optional) A service to optionally associated with the node. Supported values
       are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) The datacenter to use. This overrides the datacenter in the provider
       setup and the agent's default datacenter.
+    ignored: false
     type: Text
-    deprecated: false
   _node:
     required: true
     help: (Required) The name of the node being added to, or referenced in the catalog.
+    ignored: false
     type: Text
-    deprecated: false
   _address:
     required: true
     help: (Required) The address of the node being added to, or referenced in the
       catalog.
+    ignored: false
     type: Text
-    deprecated: false
+name: consul_catalog_entry
 attributes:
   node:
     help: ! '- The ID of the service, defaults to the value of @name@ .'

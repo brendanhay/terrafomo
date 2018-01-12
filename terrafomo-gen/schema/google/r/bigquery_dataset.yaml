@@ -1,43 +1,43 @@
-_name: google_bigquery_dataset
 arguments:
   _labels:
     required: false
     help: (Optional) A mapping of labels to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _project:
     required: false
     help: (Optional) The project in which the resource belongs. If it is not provided,
       the provider project is used.
+    ignored: false
     type: Text
-    deprecated: false
   _default_table_expiration_ms:
     required: false
     help: (Optional) The default lifetime of all tables in the dataset, in milliseconds.
       The minimum value is 3600000 milliseconds (one hour).
+    ignored: false
     type: Text
-    deprecated: false
   _friendly_name:
     required: false
     help: (Optional) A descriptive name for the dataset.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A user-friendly description of the dataset.
+    ignored: false
     type: Text
-    deprecated: false
   _dataset_id:
     required: true
     help: (Required) A unique ID for the resource. Changing this forces a new resource
       to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _location:
     required: false
     help: (Optional) The geographic location where the dataset should reside.
+    ignored: false
     type: Text
-    deprecated: false
+name: google_bigquery_dataset
 attributes:
   etag:
     help: ! '- A hash of the resource.'

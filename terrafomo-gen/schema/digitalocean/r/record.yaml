@@ -1,45 +1,45 @@
-_name: digitalocean_record
 arguments:
   _value:
     required: false
     help: (Optional) The value of the record
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the record
+    ignored: false
     type: Text
-    deprecated: false
   _ttl:
     required: false
     help: (Optional) The time to live for the record, in seconds.
+    ignored: false
     type: Text
-    deprecated: false
   _domain:
     required: true
     help: (Required) The domain to add the record to
+    ignored: false
     type: Text
-    deprecated: false
   _weight:
     required: false
     help: (Optional) The weight of the record, for SRV records.
+    ignored: false
     type: Text
-    deprecated: false
   _priority:
     required: false
     help: (Optional) The priority of the record, for MX and SRV records.
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Required) The type of record
+    ignored: false
     type: Text
-    deprecated: false
   _port:
     required: false
     help: (Optional) The port of the record, for SRV records.
+    ignored: false
     type: Text
-    deprecated: false
+name: digitalocean_record
 attributes:
   fqdn:
     help: ! '- The FQDN of the record'

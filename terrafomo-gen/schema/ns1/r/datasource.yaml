@@ -1,20 +1,20 @@
-_name: ns1_datasource
 arguments:
   _name:
     required: true
     help: (Required) The free form name of the data source.
+    ignored: false
     type: Text
-    deprecated: false
   _sourcetype:
     required: true
     help: (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes.
+    ignored: false
     type: Text
-    deprecated: false
   _config:
     required: false
     help: (Optional) The data source configuration, determined by its type.
+    ignored: false
     type: Text
-    deprecated: false
+name: ns1_datasource
 attributes: {}
 about: Provides a NS1 Data Source resource. This can be used to create, modify, and
   delete data sources.

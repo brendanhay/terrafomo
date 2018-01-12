@@ -1,30 +1,30 @@
-_name: openstack_compute_servergroup_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Compute client. If omitted,
       the @region@ argument of the provider is used. Changing this creates a new server
       group.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) A unique name for the server group. Changing this creates a new
       server group.
+    ignored: false
     type: Text
-    deprecated: false
   _value_specs:
     required: false
     help: (Optional) Map of additional options.
+    ignored: false
     type: Text
-    deprecated: false
   _policies:
     required: true
     help: (Required) The set of policies for the server group. Only two two policies
       are available right now, and both are mutually exclusive. See the Policies section
       for more information. Changing this creates a new server group.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_compute_servergroup_v2
 attributes: {}
 about: Manages a V2 Server Group resource within OpenStack.
 examples: []

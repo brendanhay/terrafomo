@@ -1,4 +1,3 @@
-_name: google_folder
 arguments:
   _display_name:
     required: true
@@ -7,14 +6,15 @@ arguments:
       same display name. The display name must start and end with a letter or digit,
       may contain letters, digits, spaces, hyphens and underscores and can be no longer
       than 30 characters.
+    ignored: false
     type: Text
-    deprecated: false
   _parent:
     required: true
     help: (Required) The resource name of the parent Folder or Organization. Must
       be of the form @folders/{folder_id}@ or @organizations/{org_id}@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: google_folder
 attributes:
   lifecycle_state:
     help: ! '- The lifecycle state of the folder such as @ACTIVE@ or @DELETE_REQUESTED@

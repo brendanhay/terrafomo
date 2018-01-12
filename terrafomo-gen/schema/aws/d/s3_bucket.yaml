@@ -1,10 +1,10 @@
-_name: aws_s3_bucket
 arguments:
   _bucket:
     required: true
     help: (Required) The name of the bucket
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_s3_bucket
 attributes:
   website_domain:
     help: ! '- The domain of the website endpoint, if the bucket is configured with

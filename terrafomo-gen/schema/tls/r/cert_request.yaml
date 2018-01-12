@@ -1,34 +1,34 @@
-_name: tls_cert_request
 arguments:
   _dns_names:
     required: false
     help: (Optional) List of DNS names for which a certificate is being requested.
+    ignored: false
     type: Text
-    deprecated: false
   _key_algorithm:
     required: true
     help: (Required) The name of the algorithm for the key provided in @private_key_pem@
       .
+    ignored: false
     type: Text
-    deprecated: false
   _subject:
     required: true
     help: (Required) The subject for which a certificate is being requested. This
       is a nested configuration block whose structure is described below.
+    ignored: false
     type: Text
-    deprecated: false
   _private_key_pem:
     required: true
     help: (Required) PEM-encoded private key data. This can be read from a separate
       file using the @file@ interpolation function. Only an irreversable secure hash
       of the private key will be stored in the Terraform state.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_addresses:
     required: false
     help: (Optional) List of IP addresses for which a certificate is being requested.
+    ignored: false
     type: Text
-    deprecated: false
+name: tls_cert_request
 attributes:
   cert_request_pem:
     help: ! '- The certificate request data in PEM format.'

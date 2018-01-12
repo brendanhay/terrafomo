@@ -1,15 +1,22 @@
-_name: aws_athena_database
 arguments:
   _name:
     required: true
     help: (Required) Name of the database to create.
+    ignored: false
     type: Text
-    deprecated: false
   _bucket:
     required: true
     help: (Required) Name of s3 bucket to save the results of the query execution.
+    ignored: false
     type: Text
-    deprecated: false
+  _force_destroy:
+    required: false
+    help: ! '(Optional, Default: false) A boolean that indicates all tables should
+      be deleted from the database so that the database can be destroyed without error.
+      The tables are not recoverable.'
+    ignored: false
+    type: Text
+name: aws_athena_database
 attributes:
   id:
     help: ! '- The database name'

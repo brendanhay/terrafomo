@@ -1,21 +1,21 @@
-_name: azurerm_dns_zone
 arguments:
   _name:
     required: true
     help: (Required) The name of the DNS Zone. Must be a valid domain name.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) Specifies the resource group where the resource exists. Changing
       this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_dns_zone
 attributes:
   max_number_of_record_sets:
     help: ! '- (Optional) Maximum number of Records in the zone. Defaults to @1000@

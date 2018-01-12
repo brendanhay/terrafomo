@@ -1,16 +1,16 @@
-_name: aws_waf_ipset
 arguments:
   _ip_set_descriptors:
     required: false
     help: (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address
       range (in CIDR format) that web requests originate from.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name or description of the IPSet.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_waf_ipset
 attributes: {}
 about: Provides a WAF IPSet Resource
 examples: []

@@ -1,21 +1,21 @@
-_name: aws_kms_ciphertext
 arguments:
   _context:
     required: false
     help: (Optional) An optional mapping that makes up the encryption context.
+    ignored: false
     type: Text
-    deprecated: false
   _key_id:
     required: true
     help: (Required) Globally unique key ID for the customer master key.
+    ignored: false
     type: Text
-    deprecated: false
   _plaintext:
     required: true
     help: (Required) Data to be encrypted. Note that this may show up in logs, and
       it will be stored in the state file.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_kms_ciphertext
 attributes:
   ciphertext_blob:
     help: ! '- Base64 encoded ciphertext'

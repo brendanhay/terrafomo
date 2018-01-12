@@ -33,7 +33,7 @@ import qualified {{ import.value }} as Qual
 import qualified Terrafomo.Syntax.TH as TH
 {% for schema in schemas %}
 
-{% let original = schema.value._name %}
+{% let original = schema.value.name %}
 {- | The @{{ original }}@ {{ provider.name }} {{ type | toLower }}.
 {% if schema.value.about %}
 
@@ -55,7 +55,7 @@ import qualified Terrafomo.Syntax.TH as TH
 data {{ schema.key }} = {{ schema.key }}
   {% for arg in schema.value.arguments %}
     {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(Attr {{ arg.value.type }})
-      {- ^ {{ arg.value.help }} -}
+    {- ^ {{ arg.value.help }} -}
     {% if arg.last %}
     } deriving (Show, Generic)
     {% endif %}
@@ -67,8 +67,8 @@ data {{ schema.key }} = {{ schema.key }}
 
 type instance Computed {{ schema.key }}
   {% endif %}
-    {% if attr.first %}= '[{% else %}  ,{% endif %} '("{{ attr.key }}", {{ attr.value.type }})
-         {- {{ attr.value.help }} -}
+    {% if attr.first %}= '[{% else %}   ,{% endif %} '("{{ attr.key }}", {{ attr.value.type }})
+       {- {{ attr.value.help }} -}
     {% if attr.last %}
        ]
     {% endif %}

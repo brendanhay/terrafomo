@@ -1,15 +1,15 @@
-_name: profitbricks_location
 arguments:
   _name:
     required: true
     help: (Required) Name or part of the location name to search for.
+    ignored: false
     type: Text
-    deprecated: false
   _feature:
     required: false
     help: (Optional) A desired feature that the location must be able to provide.
+    ignored: false
     type: Text
-    deprecated: false
+name: profitbricks_location
 attributes:
   id:
     help: ! '- UUID of the location'

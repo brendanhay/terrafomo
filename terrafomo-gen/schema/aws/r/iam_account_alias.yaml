@@ -1,10 +1,10 @@
-_name: aws_iam_account_alias
 arguments:
   _account_alias:
     required: true
     help: (Required) The account alias
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iam_account_alias
 attributes: {}
 about: ! '-> Note: There is only a single account alias per AWS account. Manages the
   account alias for the AWS Account.'

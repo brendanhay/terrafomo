@@ -1,64 +1,64 @@
-_name: packet_device
 arguments:
   _public_ipv4_subnet_size:
     required: true
     help: (Optional) - Size of allocated subnet, more information is in the <https://help.packet.net/technical/networking/custom-subnet-size>
       doc.
+    ignored: false
     type: Text
-    deprecated: false
   _always_pxe:
     required: true
     help: (Optional) - If true, a device with OS @custom_ipxe@ will continue to boot
       via iPXE on reboots.
+    ignored: false
     type: Text
-    deprecated: false
   _project_id:
     required: true
     help: (Required) The id of the project in which to create the device
+    ignored: false
     type: Text
-    deprecated: false
   _billing_cycle:
     required: true
     help: (Required) monthly or hourly
+    ignored: false
     type: Text
-    deprecated: false
   _user_data:
     required: true
     help: (Optional) - A string of the desired User Data for the device.
+    ignored: false
     type: Text
-    deprecated: false
   _hardware_reservation_id:
     required: true
     help: (Optional) - The id of hardware reservation where you want this device deployed,
       or @next-available@ if you want to pick your next available reservation automatically.
+    ignored: false
     type: Text
-    deprecated: false
   _plan:
     required: true
     help: (Required) The hardware config slug
+    ignored: false
     type: Text
-    deprecated: false
   _ipxe_script_url:
     required: true
     help: (Optional) - URL pointing to a hosted iPXE script. More information is in
       the <https://help.packet.net/technical/infrastructure/custom-ipxe> doc.
+    ignored: false
     type: Text
-    deprecated: false
   _facility:
     required: true
     help: (Required) The facility in which to create the device
+    ignored: false
     type: Text
-    deprecated: false
   _operating_system:
     required: true
     help: (Required) The operating system slug
+    ignored: false
     type: Text
-    deprecated: false
   _hostname:
     required: true
     help: (Required) The device name
+    ignored: false
     type: Text
-    deprecated: false
+name: packet_device
 attributes:
   billing_cycle:
     help: ! '- The billing cycle of the device (monthly or hourly)'

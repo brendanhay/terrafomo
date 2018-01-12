@@ -93,10 +93,10 @@ provider tmpls p =
         , "provider"  .= p
         , "schema"    .= providerDatatype p
         , "imports"   .=
-            [ syntaxNS
-            , serializeNS
-            , typesNS p
-            ]
+            ([ syntaxNS
+             , serializeNS
+             , typesNS p
+             ] :: [NS])
         ]
 
 schemas
@@ -128,8 +128,8 @@ render tmpl =
 
 getTypeName :: SchemaType -> Schema -> Text
 getTypeName = \case
-    Resource   -> resourceName   . schema_Name
-    DataSource -> dataSourceName . schema_Name
+    Resource   -> resourceName   . schemaName
+    DataSource -> dataSourceName . schemaName
 
 createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
 createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]

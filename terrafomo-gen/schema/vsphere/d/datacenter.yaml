@@ -1,11 +1,11 @@
-_name: vsphere_datacenter
 arguments:
   _name:
-    required: true
-    help: ! "- (String) The name of the datacenter. This can be a name or path.\tCan
-      be omitted if there is only one datacenter in your inventory."
+    required: false
+    help: (Optional) The name of the datacenter. This can be a name or path. Can be
+      omitted if there is only one datacenter in your inventory.
+    ignored: false
     type: Text
-    deprecated: false
+name: vsphere_datacenter
 attributes: {}
 about: The @vsphere_datacenter@ data source can be used to discover the ID of a vSphere
   datacenter. This can then be used with resources or data sources that require a

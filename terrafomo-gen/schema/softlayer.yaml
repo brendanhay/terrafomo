@@ -1,5 +1,5 @@
-_name: SoftLayerProvider
 arguments: {}
+name: SoftLayerProvider
 attributes: {}
 about: ! 'The SoftLayer provider is used to manage SoftLayer resources. Use the navigation
   to the left to read about the available resources. -> Note: The SoftLayer provider

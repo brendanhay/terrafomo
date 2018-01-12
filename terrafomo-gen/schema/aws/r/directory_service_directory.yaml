@@ -1,66 +1,66 @@
-_name: aws_directory_service_directory
 arguments:
   _short_name:
     required: false
     help: (Optional) The short name of the directory, such as @CORP@ .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The fully qualified name for the directory, such as @corp.example.com@
+    ignored: false
     type: Text
-    deprecated: false
   _password:
     required: true
     help: (Required) The password for the directory administrator or connector user.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_settings:
     required: true
     help: (Required for @SimpleAD@ and @MicrosoftAD@ ) VPC related information about
       the directory. Fields documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _enable_sso:
     required: false
     help: (Optional) Whether to enable single-sign on for the directory. Requires
       @alias@ . Defaults to @false@ .
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) A textual description for the directory.
+    ignored: false
     type: Text
-    deprecated: false
   _size:
     required: true
     help: (Required for @SimpleAD@ and @ADConnector@ ) The size of the directory (
       @Small@ or @Large@ are accepted values).
+    ignored: false
     type: Text
-    deprecated: false
   _type':
     required: true
     help: (Optional) - The directory type ( @SimpleAD@ or @MicrosoftAD@ are accepted
       values). Defaults to @SimpleAD@ .
+    ignored: false
     type: Text
-    deprecated: false
   _connect_settings:
     required: true
     help: (Required for @ADConnector@ ) Connector related information about the directory.
       Fields documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags to assign to the resource.
+    ignored: false
     type: Text
-    deprecated: false
   _alias:
     required: false
     help: (Optional) The alias for the directory (must be unique amongst all aliases
       in AWS). Required for @enable_sso@ .
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_directory_service_directory
 attributes:
   access_url:
     help: ! '- The access URL for the directory, such as @http://alias.awsapps.com@

@@ -1,23 +1,23 @@
-_name: CLCProvider
 arguments:
   _clc_account:
     required: false
     help: (Optional) Override CLC account alias. Also taken from the @CLC_ACCOUNT@
       environment variable if provided.
+    ignored: false
     type: Text
-    deprecated: false
   _clc_username:
     required: true
     help: (Required) This is the CLC account username. It must be provided, but it
       can also be sourced from the @CLC_USERNAME@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
   _clc_password:
     required: true
     help: (Required) This is the CLC account password. It must be provided, but it
       can also be sourced from the @CLC_PASSWORD@ environment variable.
+    ignored: false
     type: Text
-    deprecated: false
+name: CLCProvider
 attributes: {}
 about: The clc provider is used to interact with the many resources supported by CenturyLinkCloud.
   The provider needs to be configured with account credentials before it can be used.

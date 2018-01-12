@@ -1,36 +1,36 @@
-_name: oneandone_server
 arguments:
   _network_address:
     required: false
     help: (Optional) Network address for the private network
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the private network
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Description for the shared storage
+    ignored: false
     type: Text
-    deprecated: false
   _datacenter:
     required: false
     help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
       or @ES@ .
+    ignored: false
     type: Text
-    deprecated: false
   _subnet_mask:
     required: false
     help: (Optional) Subnet mask for the private network
+    ignored: false
     type: Text
-    deprecated: false
   _server_ids:
     required: true
     help: (Optional) List of servers that are to be associated with the private network
+    ignored: false
     type: Text
-    deprecated: false
+name: oneandone_server
 attributes: {}
 about: Manages a Private Network on 1&1
 examples: []

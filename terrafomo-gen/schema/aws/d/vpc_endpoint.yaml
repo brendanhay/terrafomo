@@ -1,25 +1,25 @@
-_name: aws_vpc_endpoint
 arguments:
   _service_name:
     required: false
     help: (Optional) The AWS service name of the specific VPC Endpoint to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _id:
     required: false
     help: (Optional) The ID of the specific VPC Endpoint to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _state:
     required: false
     help: (Optional) The state of the specific VPC Endpoint to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The ID of the VPC in which the specific VPC Endpoint is used.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_vpc_endpoint
 attributes:
   prefix_list_id:
     help: ! '- The prefix list ID of the exposed service.'

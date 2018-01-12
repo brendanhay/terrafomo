@@ -1,0 +1,56 @@
+arguments:
+  _scalable_target_action:
+    required: false
+    help: (Optional) The new minimum and maximum capacity. You can set both values
+      or just one. See <#scalable-target-action-arguments>
+    ignored: false
+    type: Text
+  _scalable_dimension:
+    required: false
+    help: ! '(Optional) The scalable dimension. Documentation can be found in the
+      parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ScalableDimension>
+      Example: ecs:service:DesiredCount'
+    ignored: false
+    type: Text
+  _end_time:
+    required: false
+    help: ! '(Optional) The date and time for the scheduled action to end. Specify
+      the following format: 2006-01-02T15:04:05Z'
+    ignored: false
+    type: Text
+  _start_time:
+    required: false
+    help: ! '(Optional) The date and time for the scheduled action to start. Specify
+      the following format: 2006-01-02T15:04:05Z'
+    ignored: false
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the scheduled action.
+    ignored: false
+    type: Text
+  _resource_id:
+    required: true
+    help: ! '(Required) The identifier of the resource associated with the scheduled
+      action. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ResourceId>'
+    ignored: false
+    type: Text
+  _schedule:
+    required: false
+    help: ! '(Optional) The schedule for this action. The following formats are supported:
+      At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit),
+      Cron expressions - cron(fields). In UTC. Documentation can be found in the parameter
+      at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-Schedule>'
+    ignored: false
+    type: Text
+  _service_namespace:
+    required: true
+    help: ! '(Required) The namespace of the AWS service. Documentation can be found
+      in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ServiceNamespace>
+      Example: ecs'
+    ignored: false
+    type: Text
+name: aws_appautoscaling_scheduled_action
+attributes: {}
+about: Provides an Application AutoScaling ScheduledAction resource.
+examples: []

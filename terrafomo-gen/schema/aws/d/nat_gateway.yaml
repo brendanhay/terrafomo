@@ -1,45 +1,45 @@
-_name: aws_nat_gateway
 arguments:
   _filter:
     required: false
     help: ! '(Optional) Custom filter block as described below. More complex filters
       can be expressed using one or more @filter@ sub-blocks, which take the following
       arguments:'
+    ignored: false
     type: Text
-    deprecated: false
   _id:
     required: false
     help: (Optional) The id of the specific Nat Gateway to retrieve.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html>
       .
+    ignored: false
     type: Text
-    deprecated: false
   _state:
     required: false
     help: (Optional) The state of the NAT gateway (pending | failed | available |
       deleting | deleted ).
+    ignored: false
     type: Text
-    deprecated: false
   _subnet_id:
     required: false
     help: (Optional) The id of subnet that the Nat Gateway resides in.
+    ignored: false
     type: Text
-    deprecated: false
   _values:
     required: true
     help: (Required) Set of values that are accepted for the given field. An Nat Gateway
       will be selected if any one of the given values matches.
+    ignored: false
     type: Text
-    deprecated: false
   _vpc_id:
     required: false
     help: (Optional) The id of the VPC that the Nat Gateway resides in.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_nat_gateway
 attributes:
   private_ip:
     help: ! '- The private Ip address of the selected Nat Gateway.'

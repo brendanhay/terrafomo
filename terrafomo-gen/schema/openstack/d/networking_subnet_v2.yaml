@@ -1,57 +1,57 @@
-_name: openstack_networking_subnet_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Neutron client. A Neutron
       client is needed to retrieve subnet ids. If omitted, the @region@ argument of
       the provider is used.
+    ignored: false
     type: Text
-    deprecated: false
   _dhcp_disabled:
     required: false
     help: (Optional) If the subnet has DHCP disabled.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The name of the subnet.
+    ignored: false
     type: Text
-    deprecated: false
   _cidr:
     required: false
     help: (Optional) The CIDR of the subnet.
+    ignored: false
     type: Text
-    deprecated: false
   _ip_version:
     required: false
     help: (Optional) The IP version of the subnet (either 4 or 6).
+    ignored: false
     type: Text
-    deprecated: false
   _network_id:
     required: false
     help: (Optional) The ID of the network the subnet belongs to.
+    ignored: false
     type: Text
-    deprecated: false
   _subnet_id:
     required: false
     help: (Optional) The ID of the subnet.
+    ignored: false
     type: Text
-    deprecated: false
   _gateway_ip:
     required: false
     help: (Optional) The IP of the subnet's gateway.
+    ignored: false
     type: Text
-    deprecated: false
   _dhcp_enabled:
     required: false
     help: (Optional) If the subnet has DHCP enabled.
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) The owner of the subnet.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_networking_subnet_v2
 attributes:
   dns_nameservers:
     help: ! '- DNS Nameservers of the subnet.'

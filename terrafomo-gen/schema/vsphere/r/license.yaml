@@ -1,16 +1,16 @@
-_name: vsphere_license
 arguments:
   _license_key:
     required: true
     help: (Required) The license key to add.
+    ignored: false
     type: Text
-    deprecated: false
   _labels:
     required: false
     help: (Optional) A map of key/value pairs to be attached as labels (tags) to the
       license key.
+    ignored: false
     type: Text
-    deprecated: false
+name: vsphere_license
 attributes:
   used:
     help: ! '- The number of units (example: CPUs) assigned to this license.'

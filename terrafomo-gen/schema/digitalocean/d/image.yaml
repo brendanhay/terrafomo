@@ -1,10 +1,10 @@
-_name: digitalocean_image
 arguments:
   _name:
     required: true
     help: ! '- The name of the image.'
+    ignored: false
     type: Text
-    deprecated: false
+name: digitalocean_image
 attributes:
   image:
     help: ! '- The id of the image.'

@@ -1,43 +1,43 @@
-_name: gitlab_group
 arguments:
   _request_access_enabled:
     required: false
     help: (Optional) Boolean, defaults to false.  Whether to enable users to request
       access to the group.
+    ignored: false
     type: Text
-    deprecated: false
   _visibility_level:
     required: false
     help: (Optional) Set to @public@ to create a public group. Valid values are @private@
       , @internal@ , @public@ . Groups are created as private by default.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) The name of this group.
+    ignored: false
     type: Text
-    deprecated: false
   _parent_id:
     required: false
     help: (Optional) Integer, id of the parent group (creates a nested group).
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the group.
+    ignored: false
     type: Text
-    deprecated: false
   _lfs_enabled:
     required: false
     help: (Optional) Boolean, defaults to true.  Whether to enable LFS support for
       projects in this group.
+    ignored: false
     type: Text
-    deprecated: false
   _path:
     required: true
     help: (Required) The url of the hook to invoke.
+    ignored: false
     type: Text
-    deprecated: false
+name: gitlab_group
 attributes:
   id:
     help: ! '- The unique id assigned to the group by the GitLab server.  Serves as

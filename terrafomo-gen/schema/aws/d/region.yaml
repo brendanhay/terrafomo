@@ -1,21 +1,21 @@
-_name: aws_region
 arguments:
   _endpoint:
     required: false
     help: (Optional) The endpoint of the region to select.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) The full name of the region to select.
+    ignored: false
     type: Text
-    deprecated: false
   _current:
     required: false
     help: (Optional) Set to @true@ to match only the region configured in the provider.
       (It is not meaningful to set this to @false@ .)
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_region
 attributes:
   current:
     help: ! '- @true@ if the selected region is the one configured on the provider,

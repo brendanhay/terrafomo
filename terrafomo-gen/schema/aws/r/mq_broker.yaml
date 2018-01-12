@@ -1,0 +1,88 @@
+arguments:
+  _broker_name:
+    required: true
+    help: (Required) The name of the broker.
+    ignored: false
+    type: Text
+  _maintenance_window_start_time:
+    required: false
+    help: (Optional) Maintenance window start time. See below.
+    ignored: false
+    type: Text
+  _auto_minor_version_upgrade:
+    required: false
+    help: (Optional) Enables automatic upgrades to new minor versions for brokers,
+      as Apache releases the versions.
+    ignored: false
+    type: Text
+  _subnet_ids:
+    required: false
+    help: (Optional) The list of subnet IDs in which to launch the broker. A @SINGLE_INSTANCE@
+      deployment requires one subnet. An @ACTIVE_STANDBY_MULTI_AZ@ deployment requires
+      two subnets.
+    ignored: false
+    type: Text
+  _user:
+    required: false
+    help: (Optional) The list of all ActiveMQ usernames for the specified broker.
+      See below.
+    ignored: false
+    type: Text
+  _engine_type:
+    required: true
+    help: (Required) The type of broker engine. Currently, Amazon MQ supports only
+      @ActiveMQ@ .
+    ignored: false
+    type: Text
+  _engine_version:
+    required: true
+    help: (Required) The version of the broker engine. Currently, Amazon MQ supports
+      only @5.15.0@ .
+    ignored: false
+    type: Text
+  _configuration:
+    required: false
+    help: (Optional) Configuration of the broker. See below.
+    ignored: false
+    type: Text
+  _security_groups:
+    required: true
+    help: (Required) The list of security group IDs assigned to the broker.
+    ignored: false
+    type: Text
+  _deployment_mode:
+    required: false
+    help: ! '(Optional) The deployment mode of the broker. Supported: @SINGLE_INSTANCE@
+      and @ACTIVE_STANDBY_MULTI_AZ@ . Defaults to @SINGLE_INSTANCE@ .'
+    ignored: false
+    type: Text
+  _publicly_accessible:
+    required: false
+    help: (Optional) Whether to enable connections from applications outside of the
+      VPC that hosts the broker's subnets.
+    ignored: false
+    type: Text
+  _apply_immediately:
+    required: false
+    help: (Optional) Specifies whether any broker modifications are applied immediately,
+      or during the next maintenance window. Default is @false@ .
+    ignored: false
+    type: Text
+  _host_instance_type:
+    required: true
+    help: (Required) The broker's instance type. e.g. @mq.t2.micro@ or @mq.m4.large@
+    ignored: false
+    type: Text
+name: aws_mq_broker
+attributes: {}
+about: ! 'Provides an MQ Broker Resource. This resources also manages users for the
+  broker. For more information on Amazon MQ, see <https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/welcome.html>
+  . Changes to an MQ Broker can occur when you change a parameter, such as @configuration@
+  or @user@ , and are reflected in the next maintenance window. Because of this, Terraform
+  may report a difference in its planning phase because a modification has not yet
+  taken place. You can use the @apply_immediately@ flag to instruct the service to
+  apply the change immediately (see documentation below). ~> Note: using @apply_immediately@
+  can result in a brief downtime as the broker reboots. ~> Note: All arguments including
+  the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .'
+examples: []

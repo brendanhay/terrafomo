@@ -1,67 +1,67 @@
-_name: openstack_lb_loadbalancer_v2
 arguments:
   _region:
     required: false
     help: (Optional) The region in which to obtain the V2 Networking client. A Networking
       client is needed to create an LB member. If omitted, the @region@ argument of
       the provider is used. Changing this creates a new LB member.
+    ignored: false
     type: Text
-    deprecated: false
   _security_group_ids:
     required: false
     help: (Optional) A list of security group IDs to apply to the loadbalancer. The
       security groups must be specified by ID and not name (as opposed to how they
       are configured with the Compute Instance).
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: false
     help: (Optional) Human-readable name for the Loadbalancer. Does not have to be
       unique.
+    ignored: false
     type: Text
-    deprecated: false
   _vip_subnet_id:
     required: true
     help: (Required) The network on which to allocate the Loadbalancer's address.
       A tenant can only create Loadbalancers on networks authorized by policy (e.g.
       networks that belong to them or networks that are shared).  Changing this creates
       a new loadbalancer.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) Human-readable description for the Loadbalancer.
+    ignored: false
     type: Text
-    deprecated: false
   _flavor:
     required: false
     help: (Optional) The UUID of a flavor. Changing this creates a new loadbalancer.
+    ignored: false
     type: Text
-    deprecated: false
   _admin_state_up:
     required: false
     help: (Optional) The administrative state of the Loadbalancer. A valid value is
       true (UP) or false (DOWN).
+    ignored: false
     type: Text
-    deprecated: false
   _loadbalancer_provider:
     required: false
     help: (Optional) The name of the provider. Changing this creates a new loadbalancer.
+    ignored: false
     type: Text
-    deprecated: false
   _vip_address:
     required: false
     help: (Optional) The ip address of the load balancer. Changing this creates a
       new loadbalancer.
+    ignored: false
     type: Text
-    deprecated: false
   _tenant_id:
     required: false
     help: (Optional) Required for admins. The UUID of the tenant who owns the Loadbalancer.  Only
       administrative users can specify a tenant UUID other than their own.  Changing
       this creates a new loadbalancer.
+    ignored: false
     type: Text
-    deprecated: false
+name: openstack_lb_loadbalancer_v2
 attributes:
   admin_state_up:
     help: ! '- See Argument Reference above.'

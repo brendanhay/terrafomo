@@ -1,0 +1,31 @@
+arguments:
+  _name:
+    required: true
+    help: (Required) Specifies the name of the Virtual Network.
+    ignored: false
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) Specifies the name of the resource group the Virtual Network
+      is located in.
+    ignored: false
+    type: Text
+name: azurerm_virtual_network
+attributes:
+  subnets:
+    help: ! '- The list of name of the subnets that are attached to this virtual network.'
+    type: Text
+  dns_servers:
+    help: ! '- The list of DNS servers used by the virtual network.'
+    type: Text
+  address_spaces:
+    help: ! '- The list of address spaces used by the virtual network.'
+    type: Text
+  vnet_peerings:
+    help: ! '- A mapping of name - virtual network id of the virtual network peerings.'
+    type: Text
+  id:
+    help: ! '- The ID of the virtual network.'
+    type: Text
+about: Use this data source to access the properties of an Azure Virtual Network.
+examples: []

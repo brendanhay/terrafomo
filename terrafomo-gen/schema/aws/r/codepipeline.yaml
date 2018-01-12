@@ -1,26 +1,26 @@
-_name: aws_codepipeline
 arguments:
   _name:
     required: true
     help: (Required) The name of the pipeline.
+    ignored: false
     type: Text
-    deprecated: false
   _stage:
     required: true
     help: (Required) A stage block. Stages are documented below.
+    ignored: false
     type: Text
-    deprecated: false
   _role_arn:
     required: true
     help: (Required) A service role Amazon Resource Name (ARN) that grants AWS CodePipeline
       permission to make calls to AWS services on your behalf.
+    ignored: false
     type: Text
-    deprecated: false
   _artifact_store:
     required: true
     help: (Required) An artifact_store block. Artifact stores are documented below.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_codepipeline
 attributes:
   id:
     help: ! '- The codepipeline ID.'

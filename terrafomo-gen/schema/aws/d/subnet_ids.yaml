@@ -1,16 +1,16 @@
-_name: aws_subnet_ids
 arguments:
   _vpc_id:
     required: true
     help: (Required) The VPC ID that you want to filter from.
+    ignored: false
     type: Text
-    deprecated: false
   _tags:
     required: false
     help: (Optional) A mapping of tags, each pair of which must exactly match a pair
       on the desired subnets.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_subnet_ids
 attributes:
   ids:
     help: ! '- A list of all the subnet ids found. This data source will fail if none

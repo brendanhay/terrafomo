@@ -1,4 +1,3 @@
-_name: aws_iot_certificate
 arguments:
   _csr:
     required: true
@@ -6,13 +5,14 @@ arguments:
       Guide] (http://docs.aws.amazon.com/iot/latest/apireference/API_CreateCertificateFromCsr.html)
       for more information on creating a certificate from a certificate signing request
       (CSR).
+    ignored: false
     type: Text
-    deprecated: false
   _active:
     required: true
     help: (Required)  Boolean flag to indicate if the certificate should be active
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_iot_certificate
 attributes:
   arn:
     help: ! '- The ARN of the created AWS IoT certificate'

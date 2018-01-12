@@ -1,47 +1,47 @@
-_name: random_string
 arguments:
   _number:
     required: false
     help: (Optional) (default true) Include numeric characters in random string.
+    ignored: false
     type: Text
-    deprecated: false
   _override_special:
     required: false
     help: (Optional) Supply your own list of special characters to use for string
       generation.  This overrides characters list in the special argument.  The special
       argument must still be set to true for any overwritten characters to be used
       in generation.
+    ignored: false
     type: Text
-    deprecated: false
   _upper:
     required: false
     help: (Optional) (default true) Include uppercase alphabet characters in random
       string.
+    ignored: false
     type: Text
-    deprecated: false
   _keepers:
     required: false
     help: (Optional) Arbitrary map of values that, when changed, will trigger a new
       id to be generated. See <../index.html> for more information.
+    ignored: false
     type: Text
-    deprecated: false
   _lower:
     required: false
     help: (Optional) (default true) Include lowercase alphabet characters in random
       string.
+    ignored: false
     type: Text
-    deprecated: false
   _length:
     required: true
     help: (Required) The length of the string desired
+    ignored: false
     type: Text
-    deprecated: false
   _special:
     required: false
     help: (Optional) (default true) Include special characters in random string. These
       are '!@#$%&*()-_=+[]{}<>:?'
+    ignored: false
     type: Text
-    deprecated: false
+name: random_string
 attributes:
   result:
     help: ! '- Random string generated.'

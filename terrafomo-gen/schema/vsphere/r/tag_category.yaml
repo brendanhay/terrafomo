@@ -1,30 +1,29 @@
-_name: vsphere_tag_category
 arguments:
   _associable_types:
     required: true
-    help: ! '- (List of strings, required) A list object types that this category
-      is valid to be assigned to. For a full list, click <#associable-object-types>
-      .'
+    help: (Required) A list object types that this category is valid to be assigned
+      to. For a full list, click <#associable-object-types> .
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
-    help: ! '- (String, required) The name of the category.'
+    help: (Required) The name of the category.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
-    required: true
-    help: ! '- (String, optional) A description for the category.'
+    required: false
+    help: (Optional) A description for the category.
+    ignored: false
     type: Text
-    deprecated: false
   _cardinality:
     required: true
-    help: ! '- (String, required, forces new resource) The number of tags that can
-      be assigned from this category to a single object at once. Can be one of @SINGLE@
-      (object can only be assigned one tag in this category), to @MULTIPLE@ (object
-      can be assigned multiple tags in this category).'
+    help: (Required) The number of tags that can be assigned from this category to
+      a single object at once. Can be one of @SINGLE@ (object can only be assigned
+      one tag in this category), to @MULTIPLE@ (object can be assigned multiple tags
+      in this category). Forces a new resource if changed.
+    ignored: false
     type: Text
-    deprecated: false
+name: vsphere_tag_category
 attributes: {}
 about: ! 'The @vsphere_tag_category@ resource can be used to create and manage tag
   categories, which determine how tags are grouped together and applied to specific

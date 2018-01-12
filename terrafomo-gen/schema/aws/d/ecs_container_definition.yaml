@@ -1,15 +1,15 @@
-_name: aws_ecs_container_definition
 arguments:
   _task_definition:
     required: true
     help: (Required) The ARN of the task definition which contains the container
+    ignored: false
     type: Text
-    deprecated: false
   _container_name:
     required: true
     help: (Required) The name of the container definition
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ecs_container_definition
 attributes:
   image:
     help: ! '- The docker image in use, including the digest'

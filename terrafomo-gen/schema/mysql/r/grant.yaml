@@ -1,34 +1,34 @@
-_name: mysql_grant
 arguments:
   _host:
     required: false
     help: (Optional) The source host of the user. Defaults to "localhost".
+    ignored: false
     type: Text
-    deprecated: false
   _user:
     required: true
     help: (Required) The name of the user.
+    ignored: false
     type: Text
-    deprecated: false
   _database:
     required: true
     help: (Required) The database to grant privileges on. At this time, privileges
       are given to all tables on the database ( @mydb.*@ ).
+    ignored: false
     type: Text
-    deprecated: false
   _privileges:
     required: true
     help: (Required) A list of privileges to grant to the user. Refer to a list of
       privileges (such as <https://dev.mysql.com/doc/refman/5.5/en/grant.html> ) for
       applicable privileges.
+    ignored: false
     type: Text
-    deprecated: false
   _grant:
     required: false
     help: (Optional) Whether to also give the user privileges to grant the same privileges
       to other users.
+    ignored: false
     type: Text
-    deprecated: false
+name: mysql_grant
 attributes: {}
 about: The @mysql_grant@ resource creates and manages privileges given to a user on
   a MySQL server.

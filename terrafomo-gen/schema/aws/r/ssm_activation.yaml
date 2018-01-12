@@ -1,32 +1,32 @@
-_name: aws_ssm_activation
 arguments:
   _name:
     required: false
     help: (Optional) The default name of the registerd managed instance.
+    ignored: false
     type: Text
-    deprecated: false
   _description:
     required: false
     help: (Optional) The description of the resource that you want to register.
+    ignored: false
     type: Text
-    deprecated: false
   _iam_role:
     required: true
     help: (Required) The IAM Role to attach to the managed instance.
+    ignored: false
     type: Text
-    deprecated: false
   _registration_limit:
     required: false
     help: (Optional) The maximum number of managed instances you want to register.
       The default value is 1 instance.
+    ignored: false
     type: Text
-    deprecated: false
   _expiration_date:
     required: false
     help: (Optional) The date by which this activation request should expire. The
       default value is 24 hours.
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_ssm_activation
 attributes:
   expired:
     help: ! '- If the current activation has expired.'

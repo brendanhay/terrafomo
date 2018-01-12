@@ -1,0 +1,38 @@
+arguments:
+  _self_link:
+    required: false
+    help: (Optional) The link to the instance group.  One of @name@ or @self_link@
+      must be provided.
+    ignored: false
+    type: Text
+  _region:
+    required: false
+    help: (Optional) The region in which the resource belongs.  If @self_link@ is
+      provided, this value is ignored.  If neither @self_link@ nor @region@ are provided,
+      the provider region is used.
+    ignored: false
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    ignored: false
+    type: Text
+  _name:
+    required: false
+    help: (Optional) The name of the instance group.  One of @name@ or @self_link@
+      must be provided.
+    ignored: false
+    type: Text
+name: google_compute_region_instance_group
+attributes:
+  size:
+    help: ! '- The number of instances in the group.'
+    type: Text
+  instances:
+    help: ! '- List of instances in the group, as a list of resources, each containing:'
+    type: Text
+about: Get a Compute Region Instance Group within GCE. For more information, see <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups>
+  and <https://cloud.google.com/compute/docs/reference/latest/regionInstanceGroups>
+  .
+examples: []

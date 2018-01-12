@@ -109,7 +109,7 @@ quotedParser =
 stringLiteral :: Parser Interpolate
 stringLiteral = Chunks <$> (P.char '"' >> P.manyTill (b <|> a) (P.char '"'))
   where
-    a = Chunk <$> P.some (P.noneOf ['$', '{', '}', '\n', '"'])
+    a = Chunk <$> P.some (P.noneOf ("${}\n\"" :: [Char]))
     b = stringTemplate
 
 stringTemplate :: Parser Interpolate

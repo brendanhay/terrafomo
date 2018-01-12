@@ -1,35 +1,35 @@
-_name: azurerm_mysql_firewall_rule
 arguments:
   _server_name:
     required: true
     help: (Required) Specifies the name of the MySQL Server. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _name:
     required: true
     help: (Required) Specifies the name of the MySQL Firewall Rule. Changing this
       forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _end_ip_address:
     required: true
     help: (Required) Specifies the End IP Address associated with this Firewall Rule.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _resource_group_name:
     required: true
     help: (Required) The name of the resource group in which the MySQL Server exists.
       Changing this forces a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
   _start_ip_address:
     required: true
     help: (Required) Specifies the Charset for the MySQL Database. Changing this forces
       a new resource to be created.
+    ignored: false
     type: Text
-    deprecated: false
+name: azurerm_mysql_firewall_rule
 attributes:
   id:
     help: ! '- The ID of the MySQL Firewall Rule.'

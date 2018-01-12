@@ -1,26 +1,26 @@
-_name: aws_opsworks_user_profile
 arguments:
   _ssh_username:
     required: true
     help: (Required) The ssh username, with witch this user wants to log in
+    ignored: false
     type: Text
-    deprecated: false
   _ssh_public_key:
     required: false
     help: (Optional) The users public key
+    ignored: false
     type: Text
-    deprecated: false
   _allow_self_management:
     required: false
     help: (Optional) Whether users can specify their own SSH public key through the
       My Settings page
+    ignored: false
     type: Text
-    deprecated: false
   _user_arn:
     required: true
     help: (Required) The user's IAM ARN
+    ignored: false
     type: Text
-    deprecated: false
+name: aws_opsworks_user_profile
 attributes:
   id:
     help: ! '- Same value as @user_arn@'
