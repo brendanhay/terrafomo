@@ -48,4 +48,10 @@ unreserved x
         , "foreign"
         , "default"
         , "import"
+        , "if"
+        , "then"
+        , "else"
+        , "let"
+        , "in"
+        , "do"
         ]

@@ -15,7 +15,7 @@ arguments:
       important) when a notification is sent.  This value will show up in email alerts
       and the Circonus UI.
     type: Text
-  _if:
+  _if':
     required: true
     help: (Required) One or more ordered predicate clauses that describe when Circonus
       should generate a notification.  See below for details on the structure of an
