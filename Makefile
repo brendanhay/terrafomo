@@ -1,8 +1,10 @@
 VENDOR_DIR := vendor
 BIN        := ./bin/terrafomo-gen
 PROVIDERS  := $(basename $(notdir $(wildcard terrafomo-gen/schema/*.yaml)))
+CONFIGS    := .stack.yaml .travis.yml
 
 default: $(PROVIDERS)
+	@script/generate
 
 .PHONY: $(BIN)
 
@@ -12,11 +14,10 @@ $(BIN):
 full-clean: $(addsuffix -full-clean,$(PROVIDERS))
 
 clean: $(addsuffix -clean,$(PROVIDERS))
-	rm -f $(BIN)
-
-define lowercase
-$$(shell echo $1 | tr a-z A-Z)
-endef
+	@rm -f $(BIN)
+	@rm -f  provider/package.yaml
+	@rm -rf provider/*/gen
+	@script/generate
 
 define provider
 .PHONY: $1

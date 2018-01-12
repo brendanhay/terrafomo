@@ -5,6 +5,7 @@
 *.rej
 
 # hpack
-/terrafomo-*/*.cabal
+/provider/terrafomo-*/*.cabal
 
 # Temporary
+/provider
