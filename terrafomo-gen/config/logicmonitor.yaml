@@ -1,3 +1,3 @@
-package: terraform-logicmonitor
+package: terrafomo-logicmonitor
 provider: LogicMonitor
 

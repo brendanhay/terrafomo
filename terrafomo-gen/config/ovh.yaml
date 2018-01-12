@@ -1,3 +1,3 @@
-package: terraform-ovh
+package: terrafomo-ovh
 provider: OVH
 

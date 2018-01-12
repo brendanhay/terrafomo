@@ -1,2 +1,2 @@
-package: terraform-google
+package: terrafomo-google
 provider: Google

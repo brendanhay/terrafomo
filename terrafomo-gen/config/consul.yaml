@@ -1,3 +1,3 @@
-package: terraform-consul
+package: terrafomo-consul
 provider: Consul
 

@@ -1,2 +1,2 @@
-package: terraform-digitalocean
+package: terrafomo-digitalocean
 provider: DigitalOcean

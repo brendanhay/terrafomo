@@ -1,3 +1,3 @@
-package: terraform-bitbucket
+package: terrafomo-bitbucket
 provider: Bitbucket
 

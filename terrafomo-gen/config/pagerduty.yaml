@@ -1,3 +1,3 @@
-package: terraform-pagerduty
+package: terrafomo-pagerduty
 provider: PagerDuty
 

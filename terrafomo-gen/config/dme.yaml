@@ -1,3 +1,3 @@
-package: terraform-dnsmadeeasy
+package: terrafomo-dnsmadeeasy
 provider: DNSMadeEasy
 

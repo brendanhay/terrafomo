@@ -1,3 +1,3 @@
-package: terraform-ignition
+package: terrafomo-ignition
 provider: Ignition
 

@@ -1,3 +1,3 @@
-package: terraform-postgresql
+package: terrafomo-postgresql
 provider: PostgreSQL
 

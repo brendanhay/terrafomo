@@ -1,3 +1,3 @@
-package: terraform-scaleway
+package: terrafomo-scaleway
 provider: Scaleway
 

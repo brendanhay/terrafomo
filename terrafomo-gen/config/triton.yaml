@@ -1,2 +1,2 @@
-package: terraform-triton
+package: terrafomo-triton
 provider: Triton

@@ -1,3 +1,3 @@
-package: terraform-cloudstack
+package: terrafomo-cloudstack
 provider: CloudStack
 

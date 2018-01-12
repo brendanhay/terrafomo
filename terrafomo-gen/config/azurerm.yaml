@@ -1,3 +1,3 @@
-package: terraform-azure
+package: terrafomo-azure
 provider: AzureRM
 

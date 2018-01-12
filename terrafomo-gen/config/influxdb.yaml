@@ -1,3 +1,3 @@
-package: terraform-influxdb
+package: terrafomo-influxdb
 provider: InfluxDB
 

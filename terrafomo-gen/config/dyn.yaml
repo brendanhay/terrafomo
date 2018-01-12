@@ -1,3 +1,3 @@
-package: terraform-dyn
+package: terrafomo-dyn
 provider: Dyn
 
