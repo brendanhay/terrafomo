@@ -9,6 +9,8 @@ import Data.Void          (Void)
 
 import Terraform.Syntax.HCL
 
+import Text.Megaparsec ((<?>))
+
 import qualified Data.Char                  as Char
 import qualified Data.Text                  as Text
 import qualified Text.Megaparsec            as P
@@ -23,49 +25,57 @@ runParser p file source = P.parseErrorPretty `first` P.parse p file source
 type Parser = P.Parsec Void Text
 
 parseKey :: Parser Key
-parseKey = quoted <|> ident
+parseKey = skipSpaces quoted <|> skipSpaces ident
   where
-    quoted = Quoted <$> parseQuoted
-    ident  = Ident  <$> parseIdent
+    quoted = Quoted <$> parseQuoted <?> "quoted identifier"
+    ident  = Ident  <$> parseIdent <?>  "identifier"
+
+parseStatements :: Parser [Value]
+parseStatements = P.sepBy (skipSpaces parseValue) (P.optional P.newline)
 
 parseValue :: Parser Value
 parseValue =
-      ( bool
+     ( bool
     <|> P.try number
     <|> float
     <|> string
     <|> heredoc
     <|> list
-    <|> assign
-    <|> object
+    <|> parseAssign
+    <|> parseObject
       )
   where
-
     bool = Bool
         <$> ( True  <$ P.string "true"
           <|> False <$ P.string "false"
             )
 
-    number = Number <$> P.decimal
-    float  = Float  <$> P.float
-    string = String <$> parseQuoted
+    number = Number <$> P.decimal   <?> "number"
+    float  = Float  <$> P.float     <?> "float"
+    string = String <$> parseQuoted <?> "quoted string"
 
     heredoc = do
         k <- P.try (P.string "<<") *> parseIdent <* P.newline
         HereDoc k . Text.pack
             <$> P.many P.anyChar
             <*  P.string k
+            <?> "heredoc"
 
     list = List <$>
-        between '[' ']' (P.sepBy parseValue (skipSpaces (P.char ',')))
+        P.try (between '[' ']' (P.sepBy parseValue (skipSpaces (P.char ','))))
+            <?> "list"
 
-    assign =
-        Assign <$> P.try (parseKey <* skipSpaces (P.char '='))
-               <*> parseValue
+parseAssign :: Parser Value
+parseAssign =
+    Assign <$> P.try (parseKey <* P.char '=')
+           <*> skipSpaces parseValue
+           <?> "assignment"
 
-    object = do
-        Object <$> ((:|) <$> parseKey <*> many (skipSpaces parseKey))
-               <*> between '{' '}' (many parseValue)
+parseObject :: Parser Value
+parseObject = do
+    Object <$> ((:|) <$> parseKey <*> many parseKey)
+           <*> between '{' '}' (many (skipSpaces parseValue))
+           <?> "object"
 
 skipSpaces :: Parser a -> Parser a
 skipSpaces p = P.space *> p <* P.space
@@ -84,5 +94,5 @@ parseQuoted =
 between :: Char -> Char -> Parser a -> Parser a
 between start end p =
     P.try (skipSpaces (P.char start))
-        *> p
-        <* skipSpaces (P.char end)
+        *> skipSpaces p
+        <* P.char end
