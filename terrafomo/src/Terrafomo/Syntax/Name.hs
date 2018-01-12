@@ -1,4 +1,3 @@
-{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Terrafomo.Syntax.Name
@@ -11,8 +10,6 @@ module Terrafomo.Syntax.Name
 
     , Reference (..)
     ) where
-
-import GHC.Generics (Generic)
 
 import Data.Hashable  (Hashable (hash))
 import Data.Semigroup (Semigroup)
@@ -36,9 +33,12 @@ newtype Type = Type { fromType :: Text }
 data Key = Key
     { keyType :: !Type
     , keyName :: !Name
-    } deriving (Show, Eq, Ord, Generic)
+    } deriving (Show, Eq, Ord)
 
-instance Hashable Key
+instance Hashable Key where
+    hashWithSalt s k =
+        s `hashWithSalt` keyType k
+          `hashWithSalt` keyName k
 
 -- An auto-generated + serialized provider alias.
 -- should be efficient to obtain this from a data type to avoid needing to

@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveFunctor              #-}
-{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase                 #-}
 
 module Terrafomo.Syntax.Variable
     ( Attribute (..)
@@ -9,8 +9,6 @@ module Terrafomo.Syntax.Variable
     ) where
 
 import Data.Hashable (Hashable)
-
-import GHC.Generics (Generic)
 
 import Terrafomo.Syntax.Name (Key, Name)
 
@@ -29,9 +27,13 @@ data Argument a
     = Compute !Key !(Attribute a)
     | Present !a
     | Absent
-      deriving (Show, Eq, Functor, Generic)
+      deriving (Show, Eq, Functor)
 
-instance Hashable a => Hashable (Argument a)
+instance Hashable a => Hashable (Argument a) where
+    hashWithSalt s = \case
+        Compute k a -> s `hashWithSalt` (0 :: Int) `hashWithSalt` a
+        Present   x -> s `hashWithSalt` (1 :: Int) `hashWithSalt` x
+        Absent      -> s `hashWithSalt` (2 :: Int)
 
 -- | An explicitly declared output variable of the form:
 --
