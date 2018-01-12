@@ -39,3 +39,4 @@ executable terraform-gen
         , pretty-show
         , text
         , yaml
+        , ede

@@ -1,7 +1,0 @@
-arguments:
-- required: true
-  help: The name of the configuration set
-  name: name
-  type: Text
-name: aws_ses_configuration_set
-attributes: []

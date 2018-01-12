@@ -19,6 +19,8 @@ import qualified Data.Char        as Char
 import qualified Data.Foldable    as Fold
 import qualified Data.Map.Strict  as Map
 import qualified Data.Set         as Set
+import qualified Data.Text        as Text
+import qualified Text.EDE         as EDE
 
 -- Syntax Types
 
@@ -29,7 +31,7 @@ data Schema = Schema
     } deriving (Show)
 
 defaultType :: Last Text
-defaultType = Last "Text"
+defaultType = Last "Attr Text"
 
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg
@@ -89,6 +91,10 @@ data Config = Config
     , configAttributes :: !(Set Attr)
     } deriving (Show, Generic)
 
+- If the config was a Monoid proper?
+- If the generated config was separate from a more 'partial/incomplete' config specified by hand?
+    this is primarily to reduce noise, probably not important right now.
+
 instance Semigroup Config where
     (<>) parsed config     = Config
         { configName       = configName parsed
@@ -104,18 +110,26 @@ instance ToJSON Config where
 instance FromJSON Config where
     parseJSON = JSON.genericParseJSON (options "config")
 
-schemaConfig :: Schema -> Config
-schemaConfig Schema{..} =
+schemaToConfig :: Schema -> Config
+schemaToConfig Schema{..} =
     let configName       = schemaName
         configArguments  = Set.fromList schemaArgs
         configAttributes = Set.fromList schemaAttrs
      in Config{..}
 
+configsToEnv :: [Config] -> JSON.Object
+configsToEnv xs =
+    EDE.fromPairs
+        [ Text.pack "configs" .= createMap configName xs
+        ]
+
 mergeSets :: (Ord k, Ord v, Semigroup v) => (v -> k) -> Set v -> Set v -> Set v
 mergeSets f a b =
-    Set.fromList . Map.elems $ Map.unionWith (<>) (go a) (go b)
-  where
-    go xs = Map.fromList [(f x, x) | x <- Fold.toList xs]
+    Set.fromList . Map.elems $
+        Map.unionWith (<>) (createMap f a) (createMap f b)
+
+createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
+createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]
 
 options :: String -> JSON.Options
 options prefix =

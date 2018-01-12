@@ -1,0 +1,33 @@
+-- This module is auto-generated.
+
+module Terraform.AWS.Resource where
+
+import Data.Text (Text)
+
+import GHC.Generics (Generic)
+
+import Terraform.AWS.Provider     (AWS, newResource)
+import Terraform.AWS.Types
+import Terraform.Syntax.Attribute (Attr)
+
+import qualified Terraform.Syntax.TH as TH
+{% for config in configs %}
+
+-- {{ config.value.name }}
+{% let datatype = config.value.name | toResourceName %}
+data {{ datatype }} = {{ datatype }}
+  {% for arg in config.value.arguments %}
+    {% if arg.first %}{ {% else %}, {% endif %} {{ arg.value.name }} :: {{ arg.value.type }}
+      -- ^ {{ arg.value.help }}
+    {% if arg.last %}
+    } deriving (Show, Eq, Generic)
+    {% endif %}
+  {% endfor %}
+
+$(TH.makeResource
+    "{{ config.value.name }}"
+    ''AWS
+    'newResource
+    ''{{ datatype }})
+{% endlet %}
+{% endfor %}
