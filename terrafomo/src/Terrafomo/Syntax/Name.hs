@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Terrafomo.Syntax.Name
@@ -11,6 +12,8 @@ module Terrafomo.Syntax.Name
     , Reference (..)
     ) where
 
+import GHC.Generics (Generic)
+
 import Data.Hashable  (Hashable (hash))
 import Data.Semigroup (Semigroup)
 import Data.String    (IsString)
@@ -19,21 +22,23 @@ import Data.Text      (Text)
 -- Names: resource.<NAME>.TYPE
 
 newtype Name = Name { fromName :: Text }
-    deriving (Show, Eq, Ord, Semigroup, IsString)
+    deriving (Show, Eq, Ord, Semigroup, IsString, Hashable)
 
 -- FIXME: formatting library with name formatters to assist in .count style naming
 
 -- Types: resource.NAME.<TYPE>
 
 newtype Type = Type { fromType :: Text }
-    deriving (Show, Eq, Ord, IsString)
+    deriving (Show, Eq, Ord, IsString, Hashable)
 
 -- Composite Keys: resource.<NAME.TYPE>
 
 data Key = Key
     { keyType :: !Type
     , keyName :: !Name
-    } deriving (Show, Eq, Ord)
+    } deriving (Show, Eq, Ord, Generic)
+
+instance Hashable Key
 
 -- An auto-generated + serialized provider alias.
 -- should be efficient to obtain this from a data type to avoid needing to

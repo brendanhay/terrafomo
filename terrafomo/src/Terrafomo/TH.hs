@@ -5,6 +5,7 @@
 
 module Terrafomo.TH
     ( makeSchemaLenses
+    , TH.makeClassy
     ) where
 
 import Data.Maybe (listToMaybe, mapMaybe, maybeToList)
