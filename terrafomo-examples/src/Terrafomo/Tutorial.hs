@@ -236,24 +236,24 @@ west = mempty & region .~ constant "us-west-1"
 -- }
 -- @
 example1 :: Terraform ()
-example1 =
-    defaultProvider east $ do
-        ipranges <-
+example1 = do
+    ipranges <-
+        defaultProvider east $
             datasource "myipranges" $
                 D.ipRangesDataSource
                     & D.regions  .~ constant "us-west-1"
                     & D.services .~ nil
 
-        myami <-
-            datasource "myami" $
-                D.amiDataSource
-                    & D.mostRecent .~ constant "true"
-                    & provider     ?~ west
+    myami <-
+        datasource "myami" $
+            D.amiDataSource
+                & D.mostRecent .~ constant "true"
+                & provider     ?~ west
 
-        myinstance <-
-            resource "myhost" $
-                R.instanceResource
-                    & R.ami .~ attribute myami D.computedImageId
+    myinstance <-
+        resource "myhost" $
+            R.instanceResource
+                & R.ami .~ attribute myami D.computedImageId
 
-        output "ipranges" $
-            attribute ipranges D.computedCidrBlocks
+    output "ipranges" $
+        attribute ipranges D.computedCidrBlocks

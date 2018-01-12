@@ -146,7 +146,7 @@ renderOutput s =
 type Terraform a = TerraformT Identity a
 
 instance Show a => Show (Terraform a) where
-   show = show . renderTerraform
+   show = show . runTerraform
 
 renderTerraform
     :: Terraform a
@@ -303,6 +303,8 @@ class Monad m => MonadTerraform m where
     -- computation.
     throw :: TerraformError -> m a
 
+    -- | Default instance for any transformer satisfying the 'MFunctor'
+    -- constraint, with a 'MonadTerraform' instance for the wrapped monad.
     default local
         :: ( MFunctor t
            , MonadTerraform n
@@ -314,6 +316,8 @@ class Monad m => MonadTerraform m where
     local f m = hoist (local f) m
     {-# INLINEABLE local #-}
 
+    -- | Default instance for any transformer with a 'MonadTerraform' instance
+    -- for the wrapped monad.
     default ask
         :: ( MonadTrans t
            , MonadTerraform n
@@ -323,6 +327,8 @@ class Monad m => MonadTerraform m where
     ask = lift ask
     {-# INLINEABLE ask #-}
 
+    -- | Default instance for any transformer with a 'MonadTerraform' instance
+    -- for the wrapped monad.
     default put
         :: ( MonadTrans t
            , MonadTerraform n
@@ -333,6 +339,8 @@ class Monad m => MonadTerraform m where
     put = lift . put
     {-# INLINEABLE put #-}
 
+    -- | Default instance for any transformer with a 'MonadTerraform' instance
+    -- for the wrapped monad.
     default get
         :: ( MonadTrans t
            , MonadTerraform n
@@ -342,6 +350,8 @@ class Monad m => MonadTerraform m where
     get = lift get
     {-# INLINEABLE get #-}
 
+    -- | Default instance for any transformer with a 'MonadTerraform' instance
+    -- for the wrapped monad.
     default throw
         :: ( MonadTrans t
            , MonadTerraform n

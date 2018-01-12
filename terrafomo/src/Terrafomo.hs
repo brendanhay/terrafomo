@@ -25,7 +25,7 @@ module Terrafomo
     , renderOutput
 
     -- * Terraform Syntax
-    , Name
+    , Name            (..)
     , Reference
 
     -- ** Count
