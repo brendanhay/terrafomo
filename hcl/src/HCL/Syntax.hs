@@ -52,13 +52,15 @@ instance Pretty Value where
     pretty     = \case
         Assign k v   -> pretty k <+> "=" <+> pretty v
         Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
-        Block vs     -> PP.vcat (map pretty vs)
+        Block  vs    -> PP.vcat (map pretty vs)
 
-        List []                      -> "[]"
-        List (reverse       -> v:vs) ->
-            let xs = map (flip mappend ", " . pretty) vs
-                y  = pretty v
-             in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : xs))) <$$> "]"
+        List (reverse -> vs) ->
+            case vs of
+                []   -> "[]"
+                x:xs ->
+                    let ys = map (flip mappend ", " . pretty) xs
+                        y  = pretty x
+                     in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : ys))) <$$> "]"
 
         Bool   x -> prettyBool x
         Number x -> pretty x
@@ -69,7 +71,7 @@ instance Pretty Value where
             "<<" <> k <$$> pretty x <$$> k
 
 render :: [Value] -> Doc
-render = PP.vcat . List.intersperse PP.line . map pretty
+render = PP.vcat . List.intersperse (PP.text " ") . map pretty
 
 prettyObject :: [Value] -> Doc
 prettyObject xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"

@@ -26,4 +26,4 @@ instance IsList Tags where
     toList   = Map.toList . fromTags
 
 instance HCL.ToValue Tags where
-    toValue = HCL.block . map (\(k, v) -> HCL.unquoted k HCL.=: v) . toList
+    toValue = HCL.block . map (\(k, v) -> HCL.unquoted k HCL..= v) . toList

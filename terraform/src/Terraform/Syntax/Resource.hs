@@ -6,40 +6,32 @@
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE PolyKinds                  #-}
 {-# LANGUAGE StandaloneDeriving         #-}
+{-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE TypeFamilies               #-}
 
 module Terraform.Syntax.Resource where
 
-import Control.Lens (Lens', lens)
+import Control.Lens (Lens', Setter, lens)
 
 import Data.Bifunctor (Bifunctor (bimap, second))
 import Data.Function  (on)
+import Data.Monoid    ((<>))
 import Data.Set       (Set)
 import Data.String    (IsString (fromString))
 
-import Terraform.Syntax.Name     (HasType (getType), Key, Name, Type)
-import Terraform.Syntax.Required (Placeholder, Required)
+import Terraform.Syntax.Name (Key, Name, Type)
 
--- FIXME: break meta back up into blocks like lifecycle.{...} etc.
+import qualified Control.Lens.TH as TH
 
--- | Whether the instantiated value is in an initial or valid state.
-data InitialSchema
-data CompletedSchema
+class IsResource b a s | s -> b, s -> a where
+    fromSchema :: s -> Resource b a
 
-type instance Required InitialSchema   a = Placeholder
-type instance Required CompletedSchema a = a
-
-type Schema r = r CompletedSchema
-
-class IsResource p b a | p -> b, p -> a where
-    newResource :: p -> Resource b a
-
-instance IsResource (Resource b a) b a where
-    newResource = id
+instance IsResource b a (Resource b a) where
+    fromSchema = id
 
 data Resource b a = Resource
     { _provider :: !b
-    , _type     :: !Type
+    , _type'    :: !Type
     , _metadata :: !Meta
     , _schema   :: !a
     } deriving (Show, Eq)
@@ -50,20 +42,25 @@ instance Functor (Resource b) where
 instance Bifunctor Resource where
     bimap f g (Resource p t m s) = Resource (f p) t m (g s)
 
-instance HasType (Resource b a) where
-    getType = _type
-
-instance HasMeta (Resource b a) where
-    metadata = lens _metadata (\s a -> s { _metadata = a })
-
--- | A resource schema's underlying common metadata.
+-- | A resource schema's underlying common meta-parameters.
 data Meta = Meta
-    { _dependsOn           :: !(Set Key)
+    { _lifecycle' :: !Lifecycle
+
+    , _dependsOn  :: !(Set Key)
     -- ^ Explicit dependencies that this resource has. These dependencies
     -- will be created before this resource. For syntax and other details,
     -- see the section below on explicit dependencies.
+    } deriving (Show, Eq)
 
-    , _preventDestroy      :: !Bool
+instance Monoid Meta where
+    mempty      = Meta mempty mempty
+    mappend a b = Meta
+        { _lifecycle' = on (<>) _lifecycle' a b
+        , _dependsOn  = on (<>) _dependsOn  a b
+        }
+
+data Lifecycle = Lifecycle
+    { _preventDestroy      :: !Bool
     -- ^ prevent_destroy (bool) - This flag provides extra protection against
     -- the destruction of a given resource. When this is set to true, any plan
     -- that includes a destroy of this resource will return an error message.
@@ -91,37 +88,13 @@ data Meta = Meta
     -- cannot be ignored.
     } deriving (Show, Eq)
 
-instance Monoid Meta where
-    mempty      = Meta mempty False False mempty
-    mappend a b = Meta
-        { _dependsOn           = on mappend _dependsOn        a b
-        , _preventDestroy      = on (||) _preventDestroy      a b
+instance Monoid Lifecycle where
+    mempty      = Lifecycle False False mempty
+    mappend a b = Lifecycle
+        { _preventDestroy      = on (||) _preventDestroy      a b
         , _createBeforeDestroy = on (||) _createBeforeDestroy a b
-        , _ignoreChanges      = on mappend _ignoreChanges   a b
+        , _ignoreChanges       = on (<>) _ignoreChanges       a b
         }
-
-class HasMeta a where
-    metadata :: Lens' a Meta
-
-    dependsOn :: Lens' a (Set Key)
-    dependsOn =
-        metadata . lens _dependsOn
-            (\s a -> s { _dependsOn = a })
-
-    preventDestroy :: Lens' a Bool
-    preventDestroy =
-        metadata . lens _preventDestroy
-            (\s a -> s { _preventDestroy = a })
-
-    createBeforeDestroy :: Lens' a Bool
-    createBeforeDestroy =
-        metadata . lens _createBeforeDestroy
-            (\s a -> s { _createBeforeDestroy = a })
-
-    ignoreChanges :: Lens' a (Set Change)
-    ignoreChanges =
-        metadata . lens _ignoreChanges
-            (\s a -> s { _ignoreChanges = a })
 
 -- TODO: Only supported on some resources.
 data Timeouts
@@ -140,3 +113,13 @@ data Change
 instance IsString Change where
     fromString "*" = Wildcard
     fromString n   = Match (fromString n)
+
+-- Classy Lenses
+
+$(TH.makeLenses ''Resource)
+$(TH.makeClassy ''Meta)
+$(TH.makeClassy ''Lifecycle)
+
+instance HasMeta      (Resource b a) where meta      = metadata
+instance HasLifecycle (Resource b a) where lifecycle = metadata . lifecycle
+instance HasLifecycle Meta           where lifecycle = lifecycle'

@@ -1,62 +1,52 @@
-{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
 
 module Terraform.AWS.Provider where
 
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
--- import Terraform.Monad            (Ref, TerraformT)
-import Terraform.Syntax.Name      (HasType (getType), Key (Key), Name, Type)
-import Terraform.Syntax.Provider  (newAlias)
-import Terraform.Syntax.Resource  (Resource (..), Schema)
-import Terraform.Syntax.Serialize ((=:))
+import Terraform.Syntax.Name      (Alias, Key, Name, Type)
+import Terraform.Syntax.Resource  (Resource (..))
+import Terraform.Syntax.Serialize ((.=))
 
 import qualified Data.Text                  as Text
+import qualified Terraform.Syntax.Name      as Name
 import qualified Terraform.Syntax.Serialize as HCL
 
 -- FIXME: Need to utilise versioning.
 
--- provider "aws" {
---   version = "~> 1.0"
-
---   access_key = "foo"
---   secret_key = "bar"
---   region     = "us-east-1"
--- }
-
 data AWS = AWS
-    deriving (Show, Eq, Ord, Generic)
+    { version    :: !Text
+    , access_key :: !Text
+    , secret_key :: !Text
+    , region     :: !Text
+    } deriving (Show, Eq, Ord, Generic)
 
 instance Hashable AWS
 
 -- Basic example.
 instance HCL.ToValue AWS where
-    toValue x@AWS =
+    toValue x@AWS{..} =
         HCL.object ("provider" :| [HCL.quoted "aws"])
-            [ "alias"      =: newAlias x
-            , "version"    =: Text.pack "~> 1.0"
-            , "access_key" =: Text.pack "foo"
-            , "secret_key" =: Text.pack "bar"
-            , "region"     =: Text.pack "us-east-1"
+            [ "alias"      .= Name.newAlias x
+            , "version"    .= version
+            , "access_key" .= access_key
+            , "secret_key" .= secret_key
+            , "region"     .= region
             ]
 
-newAWSResource
-    :: Type
-    -> a
-    -> Resource AWS a
-newAWSResource typ = Resource AWS typ mempty
+defaultProvider :: AWS
+defaultProvider =
+    AWS { version = "~> 1.0"
+        , access_key = "ACCESS_KEY"
+        , secret_key = "SECRET_KEY"
+        , region     = "eu-central-1"
+        }
 
--- resource
---     :: ( Monad m
---        , HasType (Schema r)
---        , HCL.ToValue (Schema r)
---        )
---     => Name
---     -> Schema r
---     -> TerraformT m (Ref AWS (Schema r))
--- resource n x = Terraform.resourceWith (Resource AWS (Key (getType x) n) x)
+newResource :: Type -> a -> Resource AWS a
+newResource typ = Resource defaultProvider typ mempty

@@ -1,65 +1,75 @@
--- {-# LANGUAGE FlexibleContexts  #-}
--- {-# LANGUAGE NoImplicitPrelude #-}
-
-{-
-{-# LANGUAGE DataKinds             #-}
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedLabels      #-}
-{-# LANGUAGE PolyKinds             #-}
-{-# LANGUAGE TypeApplications      #-}
-{-# LANGUAGE TypeOperators         #-}
--}
-
+-- | The intention here is to have a somewhat bash-esque suite of
+-- functionality.  Rather than requiring heavily curated imports etc. that a
+-- batteries-included environment tailored to matching Terraform's builtin
+-- functions + common system engineering tasks.
 module Terraform.Prelude
-    ( module Terraform.Prelude
-    , module Terraform.Syntax
-
-    -- * Re-exported Types
+    (
+    -- * Primitive Types
+      Text
     , Natural
     , Map
-    , Text
+    , Set
 
+    -- * Terraform Syntax
+    , Name.Name
+
+    -- ** Providers
+    , Name.Alias
+
+    -- ** Resources
+    , Resource.IsResource
+    , Resource.Resource
+    , Monad.Ref
+    , Monad.resource
+
+    -- -- *** Resource Metadata
+    -- , Monad.dependsOn
+    -- , Monad.preventDestroy
+    -- , Monad.createBeforeDestroy
+    -- , Monad.ignoreChange
+    -- , Monad.provider
+
+    -- ** Attributes
+    -- , Attribute.Attr
+    -- , Attribute.Computed
+    , Monad.attribute
+
+    -- ** Defining Outputs
+    , Monad.output
+
+    -- * Terraform Monad
+    , Monad.Terraform
+    , Monad.runTerraform
+    , Monad.evalTerraform
+    -- ** Monad Transformer
+    , Monad.TerraformT
+    , Monad.runTerraformT
+    , Monad.evalTerraformT
+    -- ** Count
+    , Monad.count
+
+    -- * Formatting Strings
+    , (Format.%)
+    , Format.format
+    , Format.sformat
+    , Format.nformat
+
+    -- * Re-exported Functions
     , (Prelude.&)
-    -- , (Prelude.$)
-    -- , (Prelude..)
-    -- , Prelude.Bool  (..)
-    -- , Prelude.Maybe (..)
-    -- , Prelude.Num   (..)
-    -- , Prelude.Int
     ) where
 
--- import Prelude ((.))
-
--- import Data.Bool       (Bool (..))
 import Data.Map.Strict (Map)
+import Data.Set        (Set)
 import Data.Text       (Text)
--- import Data.Void       (Void)
 
 import Numeric.Natural (Natural)
 
-import Terraform.Syntax
-
-import qualified Data.Function as Prelude
--- import qualified Prelude       as Prelude
-
--- FIXME: Rename Expr -> HCL
-
--- FIXME: 'var' should be used in practice similarly to 'refer'
-
--- Variables
-
--- var :: Name -> Expr a
--- var = Var . VString
-
--- map :: Name -> Name -> Expr (Map Text a)
--- map name idx = Var (VMap name idx)
-
--- list :: Name -> Expr [a]
--- list = Var . VList
-
--- (!) :: Name -> Natural -> Expr a
--- (!) name idx = Var (VIndex name idx)
+import qualified Data.Function              as Prelude
+import qualified Terraform.Format           as Format
+import qualified Terraform.Monad            as Monad
+import qualified Terraform.Syntax.Attribute as Attribute
+import qualified Terraform.Syntax.Name      as Name
+import qualified Terraform.Syntax.Resource  as Resource
 
 -- -- Boolean Logic
 

@@ -27,20 +27,19 @@ library
     ghc-options:      -Wall -Wincomplete-uni-patterns
 
     exposed-modules:
---          Terraform
-          Terraform.AST
-          -- Terraform.Parser
---          Teraform.Printer
+          Terraform.Tutorial
 
     build-depends:
           aeson
         , base >= 4.9 && < 5
         , containers
+        , formatting
         , hashable
         , hcl
         , lens
         , mtl
+        , random
         , template-haskell
         , text
         , unordered-containers
-        , random
+

@@ -2,8 +2,9 @@
 
 module Terraform.Syntax.Name where
 
-import Data.String (IsString)
-import Data.Text   (Text)
+import Data.Hashable (Hashable (hash))
+import Data.String   (IsString)
+import Data.Text     (Text)
 
 -- Names: resource.<NAME>.TYPE
 
@@ -17,12 +18,6 @@ newtype Name = Name { fromName :: Text }
 newtype Type = Type { fromType :: Text }
     deriving (Show, Eq, Ord, IsString)
 
-class HasType a where
-    getType :: a -> Type
-
-instance HasType Type where getType = id
-instance HasType Key  where getType = keyType
-
 -- Composite Keys: resource.<NAME.TYPE>
 
 data Key = Key
@@ -30,5 +25,11 @@ data Key = Key
     , keyName :: !Name
     } deriving (Show, Eq, Ord)
 
-renameKey :: Name -> Key -> Key
-renameKey n k = k { keyName = n }
+-- An auto-generated + serialized provider alias.
+-- should be efficient to obtain this from a data type to avoid needing to
+-- check the serialized form. Hashable?
+newtype Alias = Alias Int
+    deriving (Show, Eq, Ord, Hashable)
+
+newAlias :: Hashable a => a -> Alias
+newAlias = Alias . hash
