@@ -9,13 +9,12 @@ cache:
     - .stack-work/
     - .stack-root/
 # GENERATED
-    - provider/terrafomo-aws/.stack-work/
 # END GENERATED
 
 before_script:
   - apt-get update && apt-get install xz-utils make
-  - stack setup
-  - stack install --only-dependencies
+  - stack --no-terminal --skip-ghc-check setup
+  - stack --no-terminal --skip-ghc-check install --only-dependencies --fast
 
 stages:
   - build
@@ -23,4 +22,4 @@ stages:
 build:
   stage: build
   script:
-    - stack build --install-ghc
+    - stack --no-terminal --skip-ghc-check build -j2 --fast --test
