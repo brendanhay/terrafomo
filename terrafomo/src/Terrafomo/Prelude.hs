@@ -29,8 +29,7 @@ module Terrafomo.Prelude
     -- , Monad.provider
 
     -- ** Attributes
-    -- , Attribute.Attr
-    -- , Attribute.Computed
+    , Attr (..)
     , attribute
 
     -- ** Defining Outputs
@@ -40,10 +39,6 @@ module Terrafomo.Prelude
     , Terraform
     , runTerraform
     , evalTerraform
-    -- ** Monad Transformer
-    , TerraformT
-    , runTerraformT
-    , evalTerraformT
     -- ** Count
     , count
 

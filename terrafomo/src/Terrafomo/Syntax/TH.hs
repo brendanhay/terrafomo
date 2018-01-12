@@ -5,14 +5,18 @@
 
 module Terrafomo.Syntax.TH where
 
-import Data.Maybe (listToMaybe, mapMaybe)
+import Data.Maybe (listToMaybe, mapMaybe, maybeToList)
 
-import qualified Control.Lens.TH            as TH
-import qualified Data.Char                  as Char
-import qualified Language.Haskell.TH        as TH
-import qualified Terrafomo.Syntax.Attribute as Attribute
-import qualified Terrafomo.Syntax.Resource  as Resource
-import qualified Terrafomo.Syntax.Serialize as Serialize
+import Lens.Micro ((&), (.~))
+
+import qualified Data.Char                   as Char
+import qualified Data.List                   as List
+import qualified Language.Haskell.TH         as TH
+import qualified Lens.Micro.TH               as TH
+import qualified Terrafomo.Syntax.Attribute  as Attribute
+import qualified Terrafomo.Syntax.DataSource as DataSource
+import qualified Terrafomo.Syntax.Resource   as Resource
+import qualified Terrafomo.Syntax.Serialize  as Serialize
 
 makeDataSource
     :: String
@@ -24,7 +28,14 @@ makeDataSource
     -> TH.Name
     -- ^ The Haskell data type to create datasource-related instances for.
     -> TH.DecsQ
-makeDataSource _ _ _ _ = pure []
+makeDataSource original provider mkprovider datatype =
+    makeSchema datatype (TH.conT provider) (TH.conT ''DataSource.DataSource) (TH.varE 'DataSource.schema) $
+        TH.normalB ( TH.conE 'DataSource.DataSource
+           `TH.appE` TH.varE mkprovider
+           `TH.appE` TH.varE 'mempty
+           `TH.appE` TH.stringE original
+           `TH.appE` TH.varE 'Attribute.genericAttributes
+                   )
 
 makeResource
     :: String
@@ -36,8 +47,25 @@ makeResource
     -> TH.Name
     -- ^ The Haskell data type to create resource-related instances for.
     -> TH.DecsQ
-makeResource original provider mk datatype = do
-    let lowered     = map Char.toLower (TH.nameBase datatype)
+makeResource original provider mkprovider datatype =
+    makeSchema datatype (TH.conT provider) (TH.conT ''Resource.Resource) (TH.varE 'Resource.schema) $
+        TH.normalB ( TH.conE 'Resource.Resource
+           `TH.appE` TH.varE mkprovider
+           `TH.appE` TH.varE 'mempty
+           `TH.appE` TH.varE 'mempty
+           `TH.appE` TH.stringE original
+           `TH.appE` TH.varE 'Attribute.genericAttributes
+                   )
+
+makeSchema
+    :: TH.Name  -- ^ Datatype name.
+    -> TH.TypeQ -- ^ Provider ConT, such as AWS.
+    -> TH.TypeQ -- ^ Schematype ConT, such as DataSource/Resource.
+    -> TH.ExpQ  -- ^ Schema lens Exp, such as 'Resource.schema'.
+    -> TH.BodyQ -- ^ The smart constructor's body expression.
+    -> TH.Q [TH.Dec]
+makeSchema datatype provider schematype schemafield mkconstructor = do
+    let lowered  = map Char.toLower (TH.nameBase datatype)
         constructor = TH.mkName lowered
 
     let getSig = \case
@@ -53,14 +81,14 @@ makeResource original provider mk datatype = do
             let a      = TH.varT (TH.mkName "a")
                 cxt    = TH.conT name `TH.appT` TH.conT datatype `TH.appT` a
                 class_ = TH.conT name `TH.appT`
-                             TH.parensT ( TH.conT ''Resource.Resource
-                                `TH.appT` TH.conT provider
+                             TH.parensT ( schematype
+                                `TH.appT` provider
                                 `TH.appT` TH.conT datatype
                                         ) `TH.appT` a
 
                 body   = TH.normalB
                              (TH.infixApp
-                                (TH.varE 'Resource.schema)
+                                schemafield
                                 (TH.varE '(.))
                                 (TH.varE field))
 
@@ -68,7 +96,7 @@ makeResource original provider mk datatype = do
 
            in TH.instanceD (TH.cxt [cxt]) class_ [fun]
 
-    fields  <- TH.makeFieldsNoPrefix datatype
+    fields  <- makeFields datatype
     classes <- traverse (uncurry resourceField) (mapMaybe getClass fields)
 
     mappend fields . mappend classes <$> sequenceA
@@ -83,19 +111,42 @@ makeResource original provider mk datatype = do
                   ]
 
         -- constructor :: ...
-        , let type_ = TH.conT ''Resource.Resource
-                          `TH.appT` TH.conT provider
-                          `TH.appT` TH.conT datatype
-
+        , let type_ = schematype `TH.appT` provider `TH.appT` TH.conT datatype
            in TH.sigD constructor type_
 
         -- constructor = ...
-        , let body = TH.normalB ( TH.conE 'Resource.Resource
-                        `TH.appE` TH.varE mk
-                        `TH.appE` TH.stringE original
-                        `TH.appE` TH.varE 'mempty
-                        `TH.appE` TH.varE 'Attribute.genericAttributes
-                                )
-
-           in TH.funD constructor [TH.clause [] body []]
+        , TH.funD constructor [TH.clause [] mkconstructor []]
         ]
+
+-- Strips the leading underscore and then camelizes the field label.
+makeFields :: TH.Name -> TH.DecsQ
+makeFields =
+   TH.makeLensesWith
+       ( TH.abbreviatedFields
+       & TH.lensField .~ \_ _ field ->
+           maybeToList (renameField (TH.nameBase field))
+       )
+
+renameField :: String -> Maybe TH.DefName
+renameField s = do
+    n <- List.stripPrefix "_" s
+    case underscores n of
+        []   -> Nothing
+        x:xs -> do
+           let method = List.concat (x : map upperHead xs)
+               cls    = upperHead method
+           Just (TH.MethodName (TH.mkName ("Has" ++ cls))
+                               (TH.mkName method))
+
+upperHead :: String -> String
+upperHead = \case
+    x:xs | Char.isLower x -> Char.toUpper x : xs
+    x                     -> x
+
+underscores :: String -> [String]
+underscores s =
+    case dropWhile (== '_') s of
+        "" -> []
+        s' -> w : underscores s''
+          where
+            (w, s'') = List.break (== '_') s'

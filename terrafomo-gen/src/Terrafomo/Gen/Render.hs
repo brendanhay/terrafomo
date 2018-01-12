@@ -91,8 +91,10 @@ schemas tmpls p typ = Map.traverseWithKey go
             , "provider"  .= p
             , "schemas"   .= createMap (getTypeName typ) xs
             , "imports"   .=
-                (NS ("Terrafomo" :| ["Syntax", "Provider"])
-                    : [providerNS p | providerDatatype p])
+                    ( NS ("Terrafomo" :| ["Syntax", "Provider"])
+                    : NS ("Terrafomo" :| ["Syntax", Text.pack (show typ)])
+                    : [providerNS p | providerDatatype p]
+                    )
             ]
 
     createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a

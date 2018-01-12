@@ -15,7 +15,7 @@ full-clean: $(addsuffix -full-clean,$(PROVIDERS))
 
 clean: $(addsuffix -clean,$(PROVIDERS))
 	rm -f $(BIN)
-	rm -rf provider/*/gen provider/*/package.yaml
+	rm -rf provider/*/gen provider/*/package.yaml terrafomo/gen/*
 	@script/generate
 
 define provider

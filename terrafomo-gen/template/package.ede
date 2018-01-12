@@ -25,5 +25,4 @@ library:
 
   reexported-modules: >
     terrafomo:Terrafomo.Format,
-    terrafomo:Terrafomo.Prelude,
-    terrafomo:Terrafomo.Tutorial
+    terrafomo:Terrafomo.Prelude

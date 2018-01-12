@@ -7,5 +7,7 @@ extra-deps: []
 packages:
   - terrafomo
   - terrafomo-gen
+  - terrafomo-examples
+
 # GENERATED
 # END GENERATED

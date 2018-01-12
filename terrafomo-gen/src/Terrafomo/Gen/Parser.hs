@@ -145,7 +145,7 @@ attrHeader =
 argItem :: Parser (Text, Arg)
 argItem = item >>> paragraph >>> argument
   where
-    argument = ((,) <$> fmap unreserved code <*> fmap required textual)
+    argument = ((,) <$> fmap fieldName code <*> fmap required textual)
 
     -- should use Parsec.Char here and rethrow errors.
     required h
@@ -165,6 +165,9 @@ attrItem = item >>> paragraph >>> attribute
                 )
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)
+
+fieldName :: Text -> Text
+fieldName = unreserved . Text.cons '_'
 
 unreserved :: Text -> Text
 unreserved x

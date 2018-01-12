@@ -9,11 +9,12 @@
 module Terrafomo.Syntax.Serialize where
 
 import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Maybe         (fromMaybe)
 import Data.Monoid        ((<>))
 import Data.String        (fromString)
 import Data.Text          (Text)
 
-import GHC.Generics hiding (Meta)
+import GHC.Generics
 
 import Terrafomo.Syntax.Attribute
 import Terrafomo.Syntax.Name
@@ -21,6 +22,7 @@ import Terrafomo.Syntax.Output
 import Terrafomo.Syntax.Resource
 
 import qualified Data.Foldable        as Fold
+import qualified Data.List            as List
 import qualified Data.Text            as Text
 import qualified Terrafomo.Hash       as Hash
 import qualified Terrafomo.Syntax.HCL as HCL
@@ -117,19 +119,19 @@ instance ToValue Output where
             ]
 
 instance ToValue a => ToValue (Resource Alias (Key, a)) where
-    toValue Resource  {..} =
-        let Meta      {..} = _metadata
-            Lifecycle {..} = _lifecycle'
-         in object (key "resource" (fst _schema))
-            [ "provider" .= _provider
-            , toValue       (snd _schema)
-            , "depends_on" .= list _dependsOn
-            , object (pure "lifecycle")
-                [ "prevent_destroy"       .= _preventDestroy
-                , "create_before_destroy" .= _createBeforeDestroy
-                , "ignore_changes"        .= list _ignoreChanges
-                ]
-            ]
+    toValue Resource  {..} = undefined
+        -- let Meta      {..} = _metadata
+        --     Lifecycle {..} = _lifecycle'
+        --  in object (key "resource" (fst _schema))
+        --     [ "provider" .= _provider
+        --     , toValue       (snd _schema)
+        --     , "depends_on" .= list _dependsOn
+        --     , object (pure "lifecycle")
+        --         [ "prevent_destroy"       .= _preventDestroy
+        --         , "create_before_destroy" .= _createBeforeDestroy
+        --         , "ignore_changes"        .= list _ignoreChanges
+        --         ]
+        --     ]
 
 -- No 'ToValue' DefaultSignatures because of the use of 'block'
 genericToValue :: (Generic a, GToValue (Rep a)) => a -> HCL.Value
@@ -158,7 +160,9 @@ instance ( Selector s
          ) => GToValue (M1 S s f) where
     gToValues p = map assign (gToValues (unM1 p))
       where
-        label  = fromString (selName p)
+        label   = fromString (strip (selName p))
+        strip x = fromMaybe x (List.stripPrefix "_" x)
+
         assign = \case
             HCL.Block vs -> HCL.Object (pure label) vs
             v            -> HCL.Assign label v

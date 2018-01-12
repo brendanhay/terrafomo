@@ -20,7 +20,6 @@ library:
     - Terrafomo.Format
     - Terrafomo.Monad
     - Terrafomo.Prelude
-    - Terrafomo.Tutorial
 
     - Terrafomo.Syntax.Attribute
     - Terrafomo.Syntax.HCL
@@ -32,15 +31,14 @@ library:
     - Terrafomo.Syntax.TH
 
   dependencies:
-    - aeson
-    - base       >= 4.9 && < 5
+    - base >= 4.9 && < 5
     - containers
     - formatting
     - hashable
-    - lens
-    - mtl
+    - microlens
+    - microlens-th
     - random
     - template-haskell
     - text
-    - unordered-containers
+    - transformers
     - wl-pprint-text

@@ -24,13 +24,10 @@ module Terrafomo.Format
     , Format.bytes
     ) where
 
-import Data.Text (Text)
-
 import Formatting (Format, (%), (%.))
 
 import Terrafomo.Syntax.Name
 
-import qualified Data.Text              as Text
 import qualified Data.Text.Lazy         as LText
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format

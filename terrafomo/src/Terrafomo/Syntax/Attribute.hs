@@ -14,30 +14,22 @@
 -- That is, attributes are 'computed' as outputs of a resource or data source.
 module Terrafomo.Syntax.Attribute where
 
-import Control.Lens (Setter')
-
 import GHC.Generics
 import GHC.TypeLits
 
 import Terrafomo.Syntax.Name (Key, Name)
 
-import qualified Control.Lens.TH as TH
-
 -- Computed "aws_instance.foo.instance_id" :: Attr Text
-
 data Attr a
     = Computed !Key !Name
     | Present  !a
     | Absent
       deriving (Show, Eq)
 
-$(TH.makePrisms ''Attr)
-
-type family Computed a :: [(Symbol, *)]
-
 -- type instance Computed Instance_Resource
 --     = '[ '("instance_id", Text)
 --        ]
+type family Computed a :: [(Symbol, *)]
 
 type family HasAttribute k a :: * where
     HasAttribute k a = GetType a (Computed a) k (Computed a)
