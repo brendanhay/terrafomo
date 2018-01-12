@@ -1,7 +1,0 @@
-_name: google_compute_shared_vpc_service_project
-arguments:
-  project:
-    required: true
-    help: (Required) The host project ID.
-    type: Text
-attributes: {}

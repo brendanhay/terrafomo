@@ -6,3 +6,4 @@
 
 # Temporary
 /terraform-*
+/gen/schema

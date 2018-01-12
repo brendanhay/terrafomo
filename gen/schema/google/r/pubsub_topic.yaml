@@ -1,8 +1,0 @@
-_name: google_pubsub_topic
-arguments:
-  name:
-    required: true
-    help: (Required) A unique name for the resource, required by pubsub. Changing
-      this forces a new resource to be created.
-    type: Text
-attributes: {}
