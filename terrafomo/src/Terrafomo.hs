@@ -27,7 +27,7 @@ module Terrafomo
     , Alias
 
     -- ** DataSources and Resources
-    , Ref
+    , Reference
 
     , DataSource
     , datasource
@@ -43,11 +43,12 @@ module Terrafomo
     -- , Monad.provider
 
     -- ** Attributes
-    , Attr (..)
-    , attribute
+    , Attribute (..)
+    , Argument  (..)
+    -- , attribute
 
     -- ** Defining Outputs
-    , output
+--    , output
 
     -- * Terraform Monad
     , Terraform
@@ -75,86 +76,32 @@ import Numeric.Natural (Natural)
 
 import Terrafomo.Format
 import Terrafomo.Monad
-import Terrafomo.Syntax.Attribute
 import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
+import Terrafomo.Syntax.Variable
 
 import qualified Data.Traversable as Traverse
 import qualified Lens.Micro       as Lens
 
 infixr 6 .=
 
--- FIXME: probably use ':=' to avoid ambiguity with aeson.
+-- FIXME: probably use ':=' or '=:' to avoid ambiguity with aeson and lens.
+
 -- | @setter .= x@ is equivalent to @setter .~ Present x@.
-(.=) :: Lens.ASetter s t a (Attr b) -> b -> s -> t
+(.=) :: Lens.ASetter s t a (Argument b) -> b -> s -> t
 (.=) l x = l Lens..~ Present x
 
-attribute
-    :: ( KnownSymbol  k
-       , HasAttribute k a ~ v
-       )
-    => Ref b a
-    -> proxy k
-    -> Attr v
-attribute (Ref key) p = Computed key (fromString (symbolVal p))
+-- -- attribute
+-- --     :: ( KnownSymbol k
+-- --        )
+-- --     => Ref p s
+-- --     -> proxy k
+-- --     -> Attr v
+-- attribute (Ref k x) field = Computed k (field x)
 
 -- | Example of replacing terraform's count attribute.
 --
 -- Uses a specialized type signature for the most common usecase.
-count :: Applicative f => [Int] -> (Int -> f (Ref b a)) -> f [Ref b a]
+count :: Applicative f => [Int] -> (Int -> f (Reference p s)) -> f [Reference p s]
 count = Traverse.for
-
--- -- Boolean Logic
-
--- -- Is this necessary? Possibly more natural?
--- ifThenElse :: Expr Bool -> Expr a -> Expr a -> Expr a
--- ifThenElse p t f = Cond p t f
-
--- bool :: Expr a -> Expr a -> Expr Bool -> Expr a
--- bool f t p = Cond p t f
-
--- true :: Expr Bool
--- true = Lit True
-
--- false :: Expr Bool
--- false = Lit False
-
--- not :: Expr Bool -> Expr Bool
--- not = Not
-
--- (||) :: Expr Bool -> Expr Bool -> Expr Bool
--- (||) = Bin Or
-
--- (&&) :: Expr Bool -> Expr Bool -> Expr Bool
--- (&&) = Bin And
-
--- -- Equality
-
--- (==) :: Expr Bool -> Expr Bool -> Expr Bool
--- (==) = Bin Equal
-
--- (!=) :: Expr Bool -> Expr Bool -> Expr Bool
--- (!=) a b = not (Bin Equal a b)
-
--- -- Relational
-
--- (>) :: Expr Bool -> Expr Bool -> Expr Bool
--- (>) = Bin Greater
-
--- (>=) :: Expr Bool -> Expr Bool -> Expr Bool
--- (>=) = Bin GreaterOrEqual
-
--- (<) :: Expr Bool -> Expr Bool -> Expr Bool
--- (<) = Bin Less
-
--- (<=) :: Expr Bool -> Expr Bool -> Expr Bool
--- (<=) = Bin LessOrEqual
-
--- -- Numeric
-
--- (/) :: Expr Bool -> Expr Bool -> Expr Bool
--- (/) = Num Div
-
--- (%) :: Expr Bool -> Expr Bool -> Expr Bool
--- (%) = Num Mod

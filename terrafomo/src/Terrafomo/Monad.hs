@@ -7,17 +7,20 @@
 {-# LANGUAGE TupleSections              #-}
 
 module Terrafomo.Monad
-    ( MonadTerraform (..)
+    ( TerraformError (..)
+
     , TerraformState (..)
-    , TerraformError (..)
+    , render
+
+    , MonadTerraform (..)
+
     , Terraform
     , runTerraform
     , evalTerraform
 
-    , Ref
     , datasource
     , resource
-    , output
+--    , output
     ) where
 
 import Control.Exception                (Exception)
@@ -26,7 +29,7 @@ import Control.Monad.Trans.Class        (lift)
 import Control.Monad.Trans.Except       (Except)
 import Control.Monad.Trans.State.Strict (StateT)
 
-import Data.Bifunctor  (Bifunctor (bimap, second))
+import Data.Bifunctor  (Bifunctor (bimap))
 import Data.DList      (DList)
 import Data.Hashable   (Hashable)
 import Data.Map.Strict (Map)
@@ -35,24 +38,11 @@ import Data.Typeable   (Typeable)
 
 import Lens.Micro (ASetter', Lens')
 
-import Terrafomo.Syntax.Attribute
-import Terrafomo.Syntax.DataSource
+import Terrafomo.Syntax.DataSource (DataSource (..))
 import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Output
-import Terrafomo.Syntax.Resource
+import Terrafomo.Syntax.Resource   (Resource (..))
 
-import qualified Control.Monad.Trans.Except       as Except
-import qualified Control.Monad.Trans.State.Strict as State
-import qualified Data.DList                       as DList
-import qualified Data.Map.Strict                  as Map
-import qualified Data.Set                         as Set
-import qualified Lens.Micro                       as Lens
-import qualified Lens.Micro.Extras                as Lens
-import qualified Lens.Micro.TH                    as TH
-import qualified Terrafomo.Syntax.HCL             as HCL
-import qualified Terrafomo.Syntax.Name            as Name
-import qualified Terrafomo.Syntax.Serialize       as HCL
-
+import qualified Control.Monad.Trans.Except        as Except
 import qualified Control.Monad.Trans.Except        as Trans
 import qualified Control.Monad.Trans.Identity      as Trans
 import qualified Control.Monad.Trans.Maybe         as Trans
@@ -60,9 +50,20 @@ import qualified Control.Monad.Trans.Reader        as Trans
 import qualified Control.Monad.Trans.RWS.Lazy      as Lazy
 import qualified Control.Monad.Trans.RWS.Strict    as Strict
 import qualified Control.Monad.Trans.State.Lazy    as Lazy
+import qualified Control.Monad.Trans.State.Strict  as State
 import qualified Control.Monad.Trans.State.Strict  as Strict
 import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
+import qualified Data.DList                        as DList
+import qualified Data.Map.Strict                   as Map
+import qualified Data.Set                          as Set
+import qualified Data.Text.Lazy                    as LText
+import qualified Lens.Micro                        as Lens
+import qualified Lens.Micro.Extras                 as Lens
+import qualified Lens.Micro.TH                     as TH
+import qualified Terrafomo.Syntax.HCL              as HCL
+import qualified Terrafomo.Syntax.Name             as Name
+import qualified Text.PrettyPrint.Leijen.Text      as PP
 
 -- State
 
@@ -79,20 +80,18 @@ data TerraformState = UnsafeTerraformState
 
 $(TH.makeLenses ''TerraformState)
 
--- FIXME: The following instances only exist for debuging.
--- Proper rendering functions pending.
-
 instance Show TerraformState where
-    show tfs =
-        show $ HCL.render
-             ( Map.elems    (_providers   tfs)
-            ++ DList.toList (_datasources tfs)
-            ++ DList.toList (_resources   tfs)
-            ++ DList.toList (_outputs     tfs)
-             )
+    show = LText.unpack . render
 
-instance Show (Terraform ()) where
-    show = show . evalTerraform
+render :: TerraformState -> LText.Text
+render s =
+    PP.displayT . PP.renderPretty 0.4 250 $
+        HCL.render
+             ( Map.elems    (_providers   s)
+            ++ DList.toList (_datasources s)
+            ++ DList.toList (_resources   s)
+            ++ DList.toList (_outputs     s)
+             )
 
 -- Errors
 
@@ -109,8 +108,12 @@ newtype Terraform a = Terraform
     { unTerraform :: StateT TerraformState (Except TerraformError) a
     } deriving (Functor, Applicative, Monad)
 
+-- FIXME: The following instances only exist for debugging.
+instance Show a => Show (Terraform a) where
+    show = show . evalTerraform
+
 evalTerraform :: Terraform a -> Either TerraformError TerraformState
-evalTerraform  = second snd . runTerraform
+evalTerraform  = fmap snd . runTerraform
 
 runTerraform :: Terraform a -> Either TerraformError (a, TerraformState)
 runTerraform = Except.runExcept . flip State.runStateT inital . unTerraform
@@ -127,6 +130,8 @@ runTerraform = Except.runExcept . flip State.runStateT inital . unTerraform
 
 -- Terraform Monad Homomorphism
 
+-- FIXME: Not convinced providing this is a sound idea. Probably the idea of
+-- a terraform monad should be quite restrictive - since determinism is the goal.
 class Monad m => MonadTerraform m where
     liftTerraform :: Terraform a -> m a
 
@@ -171,56 +176,57 @@ instance (MonadTerraform m, Monoid w) => MonadTerraform (Lazy.RWST r w s m) wher
 datasource
     :: ( MonadTerraform m
        , Hashable p
-       , HCL.ToValue p
-       , HCL.ToValue a
+       , HCL.ToHCL p
+       , HCL.ToHCL a
        )
     => Name
     -> DataSource p a
-    -> m (Ref p a)
+    -> m (Reference p a)
 datasource name x =
     insertItem datasourceKeys datasources
-        name (_dsProvider x) (_dsType x) x
+        name (_dsProvider x) (_dsType x) x (_dsSchema x)
 
 resource
     :: ( MonadTerraform m
        , Hashable p
-       , HCL.ToValue p
-       , HCL.ToValue a
+       , HCL.ToHCL p
+       , HCL.ToHCL a
        )
     => Name
     -> Resource p a
-    -> m (Ref p a)
+    -> m (Reference p a)
 resource name x =
     insertItem resourceKeys resources
-        name (_rsProvider x) (_rsType x) x
+        name (_rsProvider x) (_rsType x) x (_rsSchema x)
 
--- FIXME: currently no mechanism(s) whereby this can be tied back into the
--- dependency graph and automatically create a datasource.
---
--- | Emit an output variable.
-output
-    :: ( MonadTerraform m
-       , HCL.ToValue a
-       )
-    => Name
-    -> Attr a
-    -> m ()
-output name attr =
-    liftTerraform $ do
-        let value = HCL.toValue (Output name (HCL.toValue attr))
+-- -- FIXME: currently no mechanism(s) whereby this can be tied back into the
+-- -- dependency graph and automatically create a datasource.
+-- --
+-- -- | Emit an output variable.
+-- output
+--     :: ( MonadTerraform m
+--        , HCL.ToHCL a
+--        )
+--     => Name
+--     -> Argument a
+--     -> m ()
+-- output name arg =
+--     liftTerraform $ do
+--         let value = HCL.toHCL (Output name (HCL.toHCL arg))
 
-        throwWhenM (insertNewKey outputNames name) $
-            NonUniqueOutput name value
+--         throwWhenM (insertNewKey outputNames name) $
+--             NonUniqueOutput name value
 
-        modifying outputs $
-            flip DList.snoc value
+--         modifying outputs $
+--             flip DList.snoc value
 
 insertItem
     :: ( MonadTerraform m
        , Bifunctor b
-       , Hashable p
-       , HCL.ToValue p
-       , HCL.ToValue (b Alias (Key, a))
+       , Hashable  p
+       , HCL.ToHCL p
+       , HCL.ToHCL a
+       , HCL.ToHCL (b Alias (Key, HCL.Value))
        )
     => Lens'    TerraformState (Set Key)
     -> ASetter' TerraformState (DList HCL.Value)
@@ -228,12 +234,13 @@ insertItem
     -> Maybe p
     -> Type
     -> b p a
-    -> m (Ref p a)
-insertItem keys items name mprovider typ item =
+    -> a
+    -> m (Reference p a)
+insertItem keys items name mprovider typ item x =
     liftTerraform $ do
         let alias = Name.newAlias mprovider
             key   = Name.Key typ name
-            value = HCL.toValue (bimap (const alias) (key,) item)
+            value = HCL.toHCL (bimap (const alias) ((key,) . HCL.toHCL) item)
 
         throwWhenM (insertNewKey keys key) $
             NonUniqueKey key value
@@ -245,9 +252,9 @@ insertItem keys items name mprovider typ item =
             Nothing -> pure ()
             Just p  ->
                 modifying providers $
-                    Map.insert alias (HCL.toValue p)
+                    Map.insert alias (HCL.toHCL p)
 
-        pure (Ref key)
+        pure (Reference key x)
 
 insertNewKey
     :: Ord a

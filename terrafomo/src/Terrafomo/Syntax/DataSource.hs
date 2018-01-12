@@ -1,11 +1,22 @@
-module Terrafomo.Syntax.DataSource where
+module Terrafomo.Syntax.DataSource
+    ( DataSource (..)
+    , newDataSource
+
+    -- * Setters
+    , dependOn
+
+    -- * Lenses
+    , provider
+    , schema
+    , dependsOn
+    ) where
 
 import Lens.Micro (Lens', lens, (%~))
 
 import Data.Bifunctor (Bifunctor (bimap, second))
 import Data.Set       (Set)
 
-import Terrafomo.Syntax.Name (Key, Ref (Ref), Type)
+import Terrafomo.Syntax.Name (Key, Reference (Reference), Type)
 
 import qualified Data.Set as Set
 
@@ -27,11 +38,14 @@ instance Bifunctor DataSource where
 instance Functor (DataSource p) where
     fmap = second
 
+newDataSource :: Type -> a -> DataSource p a
+newDataSource = DataSource Nothing mempty
+
 -- Meta Parameter Function Setters
 
 -- | TODO:
-dependOn :: Ref p' a' -> DataSource p a -> DataSource p a
-dependOn (Ref x) = dependsOn %~ Set.insert x
+dependOn :: Reference p' a' -> DataSource p a -> DataSource p a
+dependOn (Reference k _) = dependsOn %~ Set.insert k
 
 -- Meta Parameter Lenses
 

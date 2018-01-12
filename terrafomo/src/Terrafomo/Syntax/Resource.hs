@@ -1,6 +1,27 @@
+{-# LANGUAGE LambdaCase      #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Terrafomo.Syntax.Resource where
+module Terrafomo.Syntax.Resource
+    ( Change       (..)
+
+    , Lifecycle    (..)
+    , HasLifecycle (..)
+
+    , Resource (..)
+    , newResource
+
+    -- * Setters
+    , dependOn
+    , ignoreChange
+
+    -- * Lenses
+    , provider
+    , schema
+    , dependsOn
+    , preventDestroy
+    , createBeforeDestroy
+    , ignoreChanges
+    ) where
 
 import Lens.Micro (ASetter', Lens', lens, (%~))
 
@@ -10,7 +31,7 @@ import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 import Data.String    (IsString (fromString))
 
-import Terrafomo.Syntax.Name (Key, Name, Ref (Ref), Type)
+import Terrafomo.Syntax.Name (Key, Name, Reference (Reference), Type)
 
 import qualified Data.Set      as Set
 import qualified Lens.Micro.TH as TH
@@ -29,8 +50,9 @@ data Change
       deriving (Show, Eq, Ord)
 
 instance IsString Change where
-    fromString "*" = Wildcard
-    fromString n   = Match (fromString n)
+    fromString = \case
+        "*" -> Wildcard
+        n   -> Match (fromString n)
 
 -- Lifecycle
 
@@ -75,6 +97,9 @@ instance Functor (Resource p) where
 instance HasLifecycle (Resource p a) where
     lifecycle = lens _rsLifecycle (\s a -> s { _rsLifecycle = a })
 
+newResource :: Type -> a -> Resource p a
+newResource = Resource Nothing mempty mempty
+
 -- Meta Parameter Function Setters
 
 -- | TODO:
@@ -82,8 +107,8 @@ ignoreChange :: Change -> Resource p a -> Resource p a
 ignoreChange x = ignoreChanges %~ Set.insert x
 
 -- | TODO:
-dependOn :: Ref p' a' -> Resource p a -> Resource p a
-dependOn (Ref x) = dependsOn %~ Set.insert x
+dependOn :: Reference p' a' -> Resource p a -> Resource p a
+dependOn (Reference k _) = dependsOn %~ Set.insert k
 
 -- Meta Parameter Lenses
 

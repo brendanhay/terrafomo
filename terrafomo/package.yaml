@@ -20,15 +20,14 @@ library:
     - Terrafomo
     - Terrafomo.Format
     - Terrafomo.Monad
+    - Terrafomo.TH
 
-    - Terrafomo.Syntax.Attribute
+    - Terrafomo.Syntax.DataSource
     - Terrafomo.Syntax.HCL
     - Terrafomo.Syntax.Name
-    - Terrafomo.Syntax.Output
     - Terrafomo.Syntax.Provider
     - Terrafomo.Syntax.Resource
-    - Terrafomo.Syntax.Serialize
-    - Terrafomo.Syntax.TH
+    - Terrafomo.Syntax.Variable
 
     # FIXME: Most of these should in fact be replaced by
     # equivalent Haskell-isms, such as 'readFile', 'genRandom', and so on.

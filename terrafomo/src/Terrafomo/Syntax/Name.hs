@@ -1,6 +1,15 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Terrafomo.Syntax.Name where
+module Terrafomo.Syntax.Name
+    ( Name      (..)
+    , Type      (..)
+    , Key       (..)
+
+    , Alias
+    , newAlias
+
+    , Reference (..)
+    ) where
 
 import Data.Hashable  (Hashable (hash))
 import Data.Semigroup (Semigroup)
@@ -35,7 +44,5 @@ newtype Alias = Alias Int
 newAlias :: Hashable a => a -> Alias
 newAlias = Alias . hash
 
--- Opaque output DataSource/Resource references.
-
-newtype Ref p s = Ref Key
-    deriving (Show, Eq, Ord)
+data Reference p a = Reference !Key !a
+    deriving (Show, Eq)
