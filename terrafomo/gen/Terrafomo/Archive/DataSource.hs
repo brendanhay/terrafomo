@@ -18,7 +18,7 @@ import Data.Text (Text)
 import GHC.Generics (Generic)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
-import Terrafomo.Provider
+import Terrafomo.Syntax.Provider
 
 import qualified Terrafomo.Syntax.TH as TH
 
