@@ -230,7 +230,7 @@ The @circonus_rule_set@ resource creates and manages a
 data RuleSetResource = RuleSetResource
     { _check :: !(Attr Text)
       {- ^ (Required) The Circonus ID that this Rule Set will use to search for a metric stream to alert on. -}
-    , _if :: !(Attr Text)
+    , _if' :: !(Attr Text)
       {- ^ (Required) One or more ordered predicate clauses that describe when Circonus should generate a notification.  See below for details on the structure of an @if@ configuration clause. -}
     , _link :: !(Attr Text)
       {- ^ (Optional) A link to external documentation (or anything else you feel is important) when a notification is sent.  This value will show up in email alerts and the Circonus UI. -}
