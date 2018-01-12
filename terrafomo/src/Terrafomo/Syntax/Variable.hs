@@ -8,7 +8,7 @@ module Terrafomo.Syntax.Variable
     , Output    (..)
     ) where
 
-import Data.Hashable (Hashable)
+import Data.Hashable (Hashable (hashWithSalt))
 
 import Terrafomo.Syntax.Name (Key, Name)
 
