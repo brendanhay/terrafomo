@@ -52,9 +52,6 @@ data CollectorsDataSource = CollectorsDataSource
       {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CollectorsDataSource
-    = '[]
-
 $(TH.makeDataSource
     "logicmonitor_collectors"
     ''Qual.LogicMonitor
@@ -84,9 +81,6 @@ data DeviceGroupDataSource = DeviceGroupDataSource
     , _size :: !(Attr Text)
       {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DeviceGroupDataSource
-    = '[]
 
 $(TH.makeDataSource
     "logicmonitor_device_group"

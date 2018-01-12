@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OpsGenie
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.OpsGenie.Types
     , module Terrafomo.OpsGenie.Provider
     ) where

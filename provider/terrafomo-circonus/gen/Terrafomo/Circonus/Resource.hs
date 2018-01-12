@@ -93,9 +93,6 @@ data CheckResource = CheckResource
       {- ^ (Optional) A floating point number representing the maximum number of seconds this check should wait for a result.  Defaults to @10.0@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CheckResource
-    = '[]
-
 $(TH.makeResource
     "circonus_check"
     ''Qual.Circonus
@@ -141,9 +138,6 @@ data ContactGroupResource = ContactGroupResource
       {- ^ (Optional) Zero or more @victorops@ attributes may be present to dispatch to <https://login.circonus.com/user/docs/Alerting/ContactGroups#VictorOps> . See below for details on supported attributes. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ContactGroupResource
-    = '[]
-
 $(TH.makeResource
     "circonus_contact_group"
     ''Qual.Circonus
@@ -178,9 +172,6 @@ data GraphResource = GraphResource
       {- ^ (Optional) A list of tags assigned to this graph. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed GraphResource
-    = '[]
-
 $(TH.makeResource
     "circonus_graph"
     ''Qual.Circonus
@@ -201,9 +192,6 @@ data MetricClusterResource = MetricClusterResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of tags attached to the metric cluster. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed MetricClusterResource
-    = '[]
 
 $(TH.makeResource
     "circonus_metric_cluster"
@@ -228,9 +216,6 @@ data MetricResource = MetricResource
     , _unit :: !(Attr Text)
       {- ^ (Optional) The unit of measurement for this @circonus_metric@ . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed MetricResource
-    = '[]
 
 $(TH.makeResource
     "circonus_metric"
@@ -260,9 +245,6 @@ data RuleSetResource = RuleSetResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A list of tags assigned to this rule set. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed RuleSetResource
-    = '[]
 
 $(TH.makeResource
     "circonus_rule_set"

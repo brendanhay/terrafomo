@@ -53,7 +53,7 @@ data AcmCertificateDataSource = AcmCertificateDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AcmCertificateDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - Set to the ARN of the found certificate, suitable for referencing in other resources that support ACM certificates. -}
        ]
 
@@ -95,55 +95,55 @@ data AmiDataSource = AmiDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AmiDataSource
-    = '[ '("architecture", Attr Text)
+    = '[ '("architecture", Text)
          {- - The OS architecture of the AMI (ie: @i386@ or @x86_64@ ). -}
-      , '("block_device_mappings", Attr Text)
+      , '("block_device_mappings", Text)
          {- - The block device mappings of the AMI. -}
-      , '("creation_date", Attr Text)
+      , '("creation_date", Text)
          {- - The date and time the image was created. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the AMI that was provided during image creation. -}
-      , '("hypervisor", Attr Text)
+      , '("hypervisor", Text)
          {- - The hypervisor type of the image. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the created AMI. -}
-      , '("image_id", Attr Text)
+      , '("image_id", Text)
          {- - The ID of the AMI. Should be the same as the resource @id@ . -}
-      , '("image_location", Attr Text)
+      , '("image_location", Text)
          {- - The location of the AMI. -}
-      , '("image_owner_alias", Attr Text)
+      , '("image_owner_alias", Text)
          {- - The AWS account alias (for example, @amazon@ , @self@ ) or the AWS account ID of the AMI owner. -}
-      , '("image_type", Attr Text)
+      , '("image_type", Text)
          {- - The type of image. -}
-      , '("kernel_id", Attr Text)
+      , '("kernel_id", Text)
          {- - The kernel associated with the image, if any. Only applicable for machine images. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the AMI that was provided during image creation. -}
-      , '("owner_id", Attr Text)
+      , '("owner_id", Text)
          {- - The AWS account ID of the image owner. -}
-      , '("platform", Attr Text)
+      , '("platform", Text)
          {- - The value is Windows for @Windows@ AMIs; otherwise blank. -}
-      , '("product_codes", Attr Text)
+      , '("product_codes", Text)
          {- - Any product codes associated with the AMI. -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - @true@ if the image has public launch permissions. -}
-      , '("ramdisk_id", Attr Text)
+      , '("ramdisk_id", Text)
          {- - The RAM disk associated with the image, if any. Only applicable for machine images. -}
-      , '("root_device_name", Attr Text)
+      , '("root_device_name", Text)
          {- - The device name of the root device. -}
-      , '("root_device_type", Attr Text)
+      , '("root_device_type", Text)
          {- - The type of root device (ie: @ebs@ or @instance-store@ ). -}
-      , '("root_snapshot_id", Attr Text)
+      , '("root_snapshot_id", Text)
          {- - The snapshot id associated with the root device, if any (only applies to @ebs@ root devices). -}
-      , '("sriov_net_support", Attr Text)
+      , '("sriov_net_support", Text)
          {- - Specifies whether enhanced networking is enabled. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The current state of the AMI. If the state is @available@ , the image is successfully registered and can be used to launch an instance. -}
-      , '("state_reason", Attr Text)
+      , '("state_reason", Text)
          {- - Describes a state change. Fields are @UNSET@ if not available. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Any tags assigned to the image. -}
-      , '("virtualization_type", Attr Text)
+      , '("virtualization_type", Text)
          {- - The type of virtualization of the AMI (ie: @hvm@ or @paravirtual@ ). -}
        ]
 
@@ -168,9 +168,6 @@ data AmiIdsDataSource = AmiIdsDataSource
       {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AmiIdsDataSource
-    = '[]
-
 $(TH.makeDataSource
     "aws_ami_ids"
     ''Qual.AWS
@@ -188,7 +185,7 @@ data AutoscalingGroupsDataSource = AutoscalingGroupsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutoscalingGroupsDataSource
-    = '[ '("names", Attr Text)
+    = '[ '("names", Text)
          {- - A list of the Autoscaling Groups in the current region. -}
        ]
 
@@ -216,13 +213,13 @@ data AvailabilityZoneDataSource = AvailabilityZoneDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AvailabilityZoneDataSource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - The name of the selected availability zone. -}
-      , '("name_suffix", Attr Text)
+      , '("name_suffix", Text)
          {- - The part of the AZ name that appears after the region name, uniquely identifying the AZ within its region. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - The region where the selected availability zone resides. This is always the region selected on the provider, since this data source searches only within that region. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The current state of the AZ. -}
        ]
 
@@ -245,7 +242,7 @@ data AvailabilityZonesDataSource = AvailabilityZonesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AvailabilityZonesDataSource
-    = '[ '("names", Attr Text)
+    = '[ '("names", Text)
          {- - A list of the Availability Zone names available to the account. -}
        ]
 
@@ -261,9 +258,7 @@ Use this data source to get the Account ID of the
 for the purpose of whitelisting in S3 bucket policy.
 -}
 data BillingServiceAccountDataSource = BillingServiceAccountDataSource
-
-type instance Computed BillingServiceAccountDataSource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeDataSource
     "aws_billing_service_account"
@@ -284,9 +279,6 @@ data CallerIdentityDataSource = CallerIdentityDataSource
       {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CallerIdentityDataSource
-    = '[]
-
 $(TH.makeDataSource
     "aws_caller_identity"
     ''Qual.AWS
@@ -304,9 +296,6 @@ data CanonicalUserIdDataSource = CanonicalUserIdDataSource
     , _id :: !(Attr Text)
       {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed CanonicalUserIdDataSource
-    = '[]
 
 $(TH.makeDataSource
     "aws_canonical_user_id"
@@ -348,27 +337,27 @@ data CloudformationStackDataSource = CloudformationStackDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudformationStackDataSource
-    = '[ '("capabilities", Attr Text)
+    = '[ '("capabilities", Text)
          {- - A list of capabilities -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Description of the stack -}
-      , '("disable_rollback", Attr Text)
+      , '("disable_rollback", Text)
          {- - Whether the rollback of the stack is disabled when stack creation fails -}
-      , '("iam_role_arn", Attr Text)
+      , '("iam_role_arn", Text)
          {- - The ARN of the IAM role used to create the stack. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - A unique identifier of the stack. -}
-      , '("notification_arns", Attr Text)
+      , '("notification_arns", Text)
          {- - A list of SNS topic ARNs to publish stack related events -}
-      , '("outputs", Attr Text)
+      , '("outputs", Text)
          {- - A map of outputs from the stack. -}
-      , '("parameters", Attr Text)
+      , '("parameters", Text)
          {- - A map of parameters that specify input parameters for the stack. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A map of tags associated with this stack. -}
-      , '("template_body", Attr Text)
+      , '("template_body", Text)
          {- - Structure containing the template body. -}
-      , '("timeout_in_minutes", Attr Text)
+      , '("timeout_in_minutes", Text)
          {- - The amount of time that can pass before the stack status becomes @CREATE_FAILED@ -}
        ]
 
@@ -390,9 +379,9 @@ data CloudtrailServiceAccountDataSource = CloudtrailServiceAccountDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudtrailServiceAccountDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the AWS CloudTrail service account in the selected region. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the AWS CloudTrail service account in the selected region. -}
        ]
 
@@ -491,93 +480,93 @@ data DbInstanceDataSource = DbInstanceDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbInstanceDataSource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The address of the RDS instance. -}
-      , '("allocated_storage", Attr Text)
+      , '("allocated_storage", Text)
          {- - Specifies the allocated storage size specified in gigabytes. -}
-      , '("arn", Attr Text)
+      , '("arn", Text)
          {- - The ARN of the RDS instance. -}
-      , '("auto_minor_version_upgrade", Attr Text)
+      , '("auto_minor_version_upgrade", Text)
          {- - Indicates that minor version patches are applied automatically. -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - Specifies the name of the Availability Zone the DB instance is located in. -}
-      , '("backup_retention_period", Attr Text)
+      , '("backup_retention_period", Text)
          {- - Specifies the number of days for which automatic DB snapshots are retained. -}
-      , '("backup_window", Attr Text)
+      , '("backup_window", Text)
          {- - The backup window. -}
-      , '("ca_cert_identifier", Attr Text)
+      , '("ca_cert_identifier", Text)
          {- - Specifies the identifier of the CA certificate for the DB instance. -}
-      , '("db_cluster_identifier", Attr Text)
+      , '("db_cluster_identifier", Text)
          {- - If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of. -}
-      , '("db_instance_arn", Attr Text)
+      , '("db_instance_arn", Text)
          {- - The Amazon Resource Name (ARN) for the DB instance. -}
-      , '("db_instance_class", Attr Text)
+      , '("db_instance_class", Text)
          {- - Contains the name of the compute and memory capacity class of the DB instance. -}
-      , '("db_instance_port", Attr Text)
+      , '("db_instance_port", Text)
          {- - Specifies the port that the DB instance listens on. -}
-      , '("db_name", Attr Text)
+      , '("db_name", Text)
          {- - Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. -}
-      , '("db_parameter_groups", Attr Text)
+      , '("db_parameter_groups", Text)
          {- - Provides the list of DB parameter groups applied to this DB instance. -}
-      , '("db_security_groups", Attr Text)
+      , '("db_security_groups", Text)
          {- - Provides List of DB security groups associated to this DB instance. -}
-      , '("db_subnet_group", Attr Text)
+      , '("db_subnet_group", Text)
          {- - Specifies the name of the subnet group associated with the DB instance. -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - The connection endpoint. -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- - Provides the name of the database engine to be used for this DB instance. -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- - Indicates the database engine version. -}
-      , '("hosted_zone_id", Attr Text)
+      , '("hosted_zone_id", Text)
          {- - The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record). -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The RDS instance ID. -}
-      , '("instance_class", Attr Text)
+      , '("instance_class", Text)
          {- - The RDS instance class. -}
-      , '("iops", Attr Text)
+      , '("iops", Text)
          {- - Specifies the Provisioned IOPS (I/O operations per second) value. -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - If StorageEncrypted is true, the KMS key identifier for the encrypted DB instance. -}
-      , '("license_model", Attr Text)
+      , '("license_model", Text)
          {- - License model information for this DB instance. -}
-      , '("maintenance_window", Attr Text)
+      , '("maintenance_window", Text)
          {- - The instance maintenance window. -}
-      , '("master_username", Attr Text)
+      , '("master_username", Text)
          {- - Contains the master username for the DB instance. -}
-      , '("monitoring_interval", Attr Text)
+      , '("monitoring_interval", Text)
          {- - The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. -}
-      , '("monitoring_role_arn", Attr Text)
+      , '("monitoring_role_arn", Text)
          {- - The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs. -}
-      , '("multi_az", Attr Text)
+      , '("multi_az", Text)
          {- - Specifies if the DB instance is a Multi-AZ deployment. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The database name. -}
-      , '("option_group_memberships", Attr Text)
+      , '("option_group_memberships", Text)
          {- - Provides the list of option group memberships for this DB instance. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - The database port. -}
-      , '("preferred_backup_window", Attr Text)
+      , '("preferred_backup_window", Text)
          {- - Specifies the daily time range during which automated backups are created. -}
-      , '("preferred_maintenance_window", Attr Text)
+      , '("preferred_maintenance_window", Text)
          {- -  Specifies the weekly time range during which system maintenance can occur in UTC. -}
-      , '("publicly_accessible", Attr Text)
+      , '("publicly_accessible", Text)
          {- - Specifies the accessibility options for the DB instance. -}
-      , '("replicate_source_db", Attr Text)
+      , '("replicate_source_db", Text)
          {- - The identifier of the source DB that this is a replica of. -}
-      , '("resource_id", Attr Text)
+      , '("resource_id", Text)
          {- - The RDS Resource ID of this instance. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The RDS instance status. -}
-      , '("storage_encrypted", Attr Text)
+      , '("storage_encrypted", Text)
          {- - Specifies whether the DB instance is encrypted. -}
-      , '("storage_type", Attr Text)
+      , '("storage_type", Text)
          {- - Specifies the storage type associated with DB instance. -}
-      , '("timezone", Attr Text)
+      , '("timezone", Text)
          {- - The time zone of the DB instance. -}
-      , '("username", Attr Text)
+      , '("username", Text)
          {- - The master username for the database. -}
-      , '("vpc_security_groups", Attr Text)
+      , '("vpc_security_groups", Text)
          {- - Provides a list of VPC security group elements that the DB instance belongs to. -}
        ]
 
@@ -608,39 +597,39 @@ data DbSnapshotDataSource = DbSnapshotDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbSnapshotDataSource
-    = '[ '("allocated_storage", Attr Text)
+    = '[ '("allocated_storage", Text)
          {- - Specifies the allocated storage size in gigabytes (GB). -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot. -}
-      , '("db_snapshot_arn", Attr Text)
+      , '("db_snapshot_arn", Text)
          {- - The Amazon Resource Name (ARN) for the DB snapshot. -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Specifies whether the DB snapshot is encrypted. -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- - Specifies the name of the database engine. -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- - Specifies the version of the database engine. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The snapshot ID. -}
-      , '("iops", Attr Text)
+      , '("iops", Text)
          {- - Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot. -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("license_model", Attr Text)
+      , '("license_model", Text)
          {- - License model information for the restored DB instance. -}
-      , '("option_group_name", Attr Text)
+      , '("option_group_name", Text)
          {- - Provides the option group name for the DB snapshot. -}
-      , '("snapshot_create_time", Attr Text)
+      , '("snapshot_create_time", Text)
          {- - Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). -}
-      , '("source_db_snapshot_identifier", Attr Text)
+      , '("source_db_snapshot_identifier", Text)
          {- - The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy. -}
-      , '("source_region", Attr Text)
+      , '("source_region", Text)
          {- - The region that the DB snapshot was created in or copied from. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - Specifies the status of this DB snapshot. -}
-      , '("storage_type", Attr Text)
+      , '("storage_type", Text)
          {- - Specifies the storage type associated with DB snapshot. -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - Specifies the storage type associated with DB snapshot. -}
        ]
 
@@ -680,9 +669,6 @@ data DynamodbTableDataSource = DynamodbTableDataSource
       {- ^ (Required) The number of write units for this table -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DynamodbTableDataSource
-    = '[]
-
 $(TH.makeDataSource
     "aws_dynamodb_table"
     ''Qual.AWS
@@ -713,29 +699,29 @@ data EbsSnapshotDataSource = EbsSnapshotDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EbsSnapshotDataSource
-    = '[ '("data_encryption_key_id", Attr Text)
+    = '[ '("data_encryption_key_id", Text)
          {- - The data encryption key identifier for the snapshot. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - A description for the snapshot -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether the snapshot is encrypted. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The snapshot ID (e.g. snap-59fcb34e). -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("owner_alias", Attr Text)
+      , '("owner_alias", Text)
          {- - Value from an Amazon-maintained list ( @amazon@ , @aws-marketplace@ , @microsoft@ ) of snapshot owners. -}
-      , '("owner_id", Attr Text)
+      , '("owner_id", Text)
          {- - The AWS account ID of the EBS snapshot owner. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - The snapshot ID (e.g. snap-59fcb34e). -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The snapshot state. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags for the resource. -}
-      , '("volume_id", Attr Text)
+      , '("volume_id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("volume_size", Attr Text)
+      , '("volume_size", Text)
          {- - The size of the drive in GiBs. -}
        ]
 
@@ -757,9 +743,6 @@ data EbsSnapshotIdsDataSource = EbsSnapshotIdsDataSource
     , _restorable_by_user_ids :: !(Attr Text)
       {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed EbsSnapshotIdsDataSource
-    = '[]
 
 $(TH.makeDataSource
     "aws_ebs_snapshot_ids"
@@ -795,25 +778,25 @@ data EbsVolumeDataSource = EbsVolumeDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EbsVolumeDataSource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The AZ where the EBS volume exists. -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether the disk is encrypted. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("iops", Attr Text)
+      , '("iops", Text)
          {- - The amount of IOPS for the disk. -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The size of the drive in GiBs. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - The snapshot_id the EBS volume is based off. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags for the resource. -}
-      , '("volume_id", Attr Text)
+      , '("volume_id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("volume_type", Attr Text)
+      , '("volume_type", Text)
          {- - The type of EBS volume. -}
        ]
 
@@ -833,13 +816,13 @@ data EcrRepositoryDataSource = EcrRepositoryDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcrRepositoryDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - Full ARN of the repository. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the repository. -}
-      , '("registry_id", Attr Text)
+      , '("registry_id", Text)
          {- - The registry ID where the repository was created. -}
-      , '("repository_url", Attr Text)
+      , '("repository_url", Text)
          {- - The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@ ). -}
        ]
 
@@ -861,19 +844,19 @@ data EcsClusterDataSource = EcsClusterDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcsClusterDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the ECS Cluster -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Amazon Resource Name (ARN) that identifies the cluster -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the cluster -}
-      , '("pending_tasks_count", Attr Text)
+      , '("pending_tasks_count", Text)
          {- - The number of pending tasks for the ECS Cluster -}
-      , '("registered_container_instances_count", Attr Text)
+      , '("registered_container_instances_count", Text)
          {- - The number of registered container instances for the ECS Cluster -}
-      , '("running_tasks_count", Attr Text)
+      , '("running_tasks_count", Text)
          {- - The number of running tasks for the ECS Cluster -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the ECS Cluster -}
        ]
 
@@ -895,21 +878,21 @@ data EcsContainerDefinitionDataSource = EcsContainerDefinitionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcsContainerDefinitionDataSource
-    = '[ '("cpu", Attr Text)
+    = '[ '("cpu", Text)
          {- - The CPU limit for this container definition -}
-      , '("disable_networking", Attr Text)
+      , '("disable_networking", Text)
          {- - Indicator if networking is disabled -}
-      , '("docker_labels", Attr Text)
+      , '("docker_labels", Text)
          {- - Set docker labels -}
-      , '("environment", Attr Text)
+      , '("environment", Text)
          {- - The environment in use -}
-      , '("image", Attr Text)
+      , '("image", Text)
          {- - The docker image in use, including the digest -}
-      , '("image_digest", Attr Text)
+      , '("image_digest", Text)
          {- - The digest of the docker image in use -}
-      , '("memory", Attr Text)
+      , '("memory", Text)
          {- - The memory limit for this container definition -}
-      , '("memory_reservation", Attr Text)
+      , '("memory_reservation", Text)
          {- - The soft limit (in MiB) of memory to reserve for the container. When system memory is under contention, Docker attempts to keep the container memory to this soft limit -}
        ]
 
@@ -941,15 +924,15 @@ data EcsTaskDefinitionDataSource = EcsTaskDefinitionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcsTaskDefinitionDataSource
-    = '[ '("family", Attr Text)
+    = '[ '("family", Text)
          {- - The family of this task definition -}
-      , '("network_mode", Attr Text)
+      , '("network_mode", Text)
          {- - The Docker networking mode to use for the containers in this task. -}
-      , '("revision", Attr Text)
+      , '("revision", Text)
          {- - The revision of this task definition -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of this task definition -}
-      , '("task_role_arn", Attr Text)
+      , '("task_role_arn", Text)
          {- - The ARN of the IAM role that containers in this task can assume -}
        ]
 
@@ -980,17 +963,17 @@ data EfsFileSystemDataSource = EfsFileSystemDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EfsFileSystemDataSource
-    = '[ '("dns_name", Attr Text)
+    = '[ '("dns_name", Text)
          {- - The DNS name for the filesystem per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether EFS is encrypted. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID that identifies the file system (e.g. fs-ccfc0d65). -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("performance_mode", Attr Text)
+      , '("performance_mode", Text)
          {- - The PerformanceMode of the file system. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The list of tags assigned to the file system. -}
        ]
 
@@ -1017,19 +1000,19 @@ data EfsMountTargetDataSource = EfsMountTargetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EfsMountTargetDataSource
-    = '[ '("dns_name", Attr Text)
+    = '[ '("dns_name", Text)
          {- - The DNS name for the given subnet/AZ per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-      , '("file_system_id", Attr Text)
+      , '("file_system_id", Text)
          {- - ID of the file system for which the mount target is intended. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the mount target. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - Address at which the file system may be mounted via the mount target. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ID of the network interface that Amazon EFS created when it created the mount target. -}
-      , '("security_groups", Attr Text)
+      , '("security_groups", Text)
          {- - List of VPC security group IDs attached to the mount target. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - ID of the mount target's subnet. -}
        ]
 
@@ -1060,17 +1043,17 @@ data EipDataSource = EipDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EipDataSource
-    = '[ '("associate_with_private_ip", Attr Text)
+    = '[ '("associate_with_private_ip", Text)
          {- - Contains the user specified private IP address (if in VPC). -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Contains the EIP allocation ID. -}
-      , '("instance", Attr Text)
+      , '("instance", Text)
          {- - Contains the ID of the attached instance. -}
-      , '("network_interface", Attr Text)
+      , '("network_interface", Text)
          {- - Contains the ID of the attached network interface. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - Contains the private IP address (if in VPC). -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - Contains the public IP address. -}
        ]
 
@@ -1091,7 +1074,7 @@ data ElasticBeanstalkSolutionStackDataSource = ElasticBeanstalkSolutionStackData
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticBeanstalkSolutionStackDataSource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - The name of the solution stack. -}
        ]
 
@@ -1150,43 +1133,43 @@ data ElasticacheClusterDataSource = ElasticacheClusterDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticacheClusterDataSource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The Availability Zone for the cache cluster. -}
-      , '("cache_nodes", Attr Text)
+      , '("cache_nodes", Text)
          {- - List of node objects including @id@ , @address@ , @port@ and @availability_zone@ . Referenceable e.g. as @${data.aws_elasticache_cluster.bar.cache_nodes.0.address}@ -}
-      , '("cluster_address", Attr Text)
+      , '("cluster_address", Text)
          {- - The DNS name of the cache cluster without the port appended. -}
-      , '("configuration_endpoint", Attr Text)
+      , '("configuration_endpoint", Text)
          {- - The configuration endpoint to allow host discovery. -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- – Name of the cache engine. -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- – Version number of the cache engine. -}
-      , '("maintenance_window", Attr Text)
+      , '("maintenance_window", Text)
          {- – Specifies the weekly time range for when maintenance on the cache cluster is performed. -}
-      , '("node_type", Attr Text)
+      , '("node_type", Text)
          {- – The cluster node type. -}
-      , '("notification_topic_arn", Attr Text)
+      , '("notification_topic_arn", Text)
          {- – An Amazon Resource Name (ARN) of an SNS topic that ElastiCache notifications get sent to. -}
-      , '("num_cache_nodes", Attr Text)
+      , '("num_cache_nodes", Text)
          {- – The number of cache nodes that the cache cluster has. -}
-      , '("parameter_group_name", Attr Text)
+      , '("parameter_group_name", Text)
          {- – Name of the parameter group associated with this cache cluster. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- – The port number on which each of the cache nodes will accept connections. -}
-      , '("replication_group_id", Attr Text)
+      , '("replication_group_id", Text)
          {- - The replication group to which this cache cluster belongs. -}
-      , '("security_group_ids", Attr Text)
+      , '("security_group_ids", Text)
          {- – List VPC security groups associated with the cache cluster. -}
-      , '("security_group_names", Attr Text)
+      , '("security_group_names", Text)
          {- – List of security group names associated with this cache cluster. -}
-      , '("snapshot_retention_limit", Attr Text)
+      , '("snapshot_retention_limit", Text)
          {- - The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. -}
-      , '("snapshot_window", Attr Text)
+      , '("snapshot_window", Text)
          {- - The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of the cache cluster. -}
-      , '("subnet_group_name", Attr Text)
+      , '("subnet_group_name", Text)
          {- – Name of the subnet group associated to the cache cluster. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The tags assigned to the resource -}
        ]
 
@@ -1207,7 +1190,7 @@ data ElbHostedZoneIdDataSource = ElbHostedZoneIdDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElbHostedZoneIdDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the AWS ELB HostedZoneId in the selected region. -}
        ]
 
@@ -1228,9 +1211,9 @@ data ElbServiceAccountDataSource = ElbServiceAccountDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElbServiceAccountDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the AWS ELB service account in the selected region. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the AWS ELB service account in the selected region. -}
        ]
 
@@ -1248,9 +1231,6 @@ data IamAccountAliasDataSource = IamAccountAliasDataSource
     { _account_alias :: !(Attr Text)
       {- ^ - The alias associated with the AWS account. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IamAccountAliasDataSource
-    = '[]
 
 $(TH.makeDataSource
     "aws_iam_account_alias"
@@ -1273,17 +1253,17 @@ data IamGroupDataSource = IamGroupDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamGroupDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the group. -}
-      , '("group_id", Attr Text)
+      , '("group_id", Text)
          {- - The stable and unique string identifying the group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The group's ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The group's name. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path to the group. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
        ]
 
@@ -1312,23 +1292,23 @@ data IamInstanceProfileDataSource = IamInstanceProfileDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamInstanceProfileDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the instance profile. -}
-      , '("create_date", Attr Text)
+      , '("create_date", Text)
          {- - The string representation of the date the instance profile was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The instance profile's ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The instance profile's name. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path to the instance profile. -}
-      , '("role", Attr Text)
+      , '("role", Text)
          {- - The role assigned to the instance profile. -}
-      , '("role_id", Attr Text)
+      , '("role_id", Text)
          {- - The role id associated with this instance profile. -}
-      , '("roles", Attr Text)
+      , '("roles", Text)
          {- - The list of roles assigned to the instance profile. ( Deprecated ) -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
        ]
 
@@ -1351,9 +1331,6 @@ data IamPolicyDocumentDataSource = IamPolicyDocumentDataSource
       {- ^ (Required) - A nested configuration block (described below) configuring one statement to be included in the policy document. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed IamPolicyDocumentDataSource
-    = '[]
-
 $(TH.makeDataSource
     "aws_iam_policy_document"
     ''Qual.AWS
@@ -1375,21 +1352,21 @@ data IamRoleDataSource = IamRoleDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamRoleDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the role. -}
-      , '("assume_role_policy", Attr Text)
+      , '("assume_role_policy", Text)
          {- - The policy document associated with the role. -}
-      , '("create_date", Attr Text)
+      , '("create_date", Text)
          {- - The creation date of the IAM role. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the role. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The friendly IAM role name to match. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the role. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path to the role. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The stable and unique string identifying the role. -}
        ]
 
@@ -1420,11 +1397,11 @@ data IamServerCertificateDataSource = IamServerCertificateDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamServerCertificateDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the server certificate. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique Server Certificate name -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the Server Certificate -}
        ]
 
@@ -1451,15 +1428,15 @@ data IamUserDataSource = IamUserDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamUserDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) assigned by AWS for this user. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The user's name. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - Path in which this user was created. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
-      , '("user_id", Attr Text)
+      , '("user_id", Text)
          {- - The unique ID assigned by AWS for this user. -}
        ]
 
@@ -1537,53 +1514,53 @@ data InstanceDataSource = InstanceDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InstanceDataSource
-    = '[ '("associate_public_ip_address", Attr Text)
+    = '[ '("associate_public_ip_address", Text)
          {- - Whether or not the Instance is associated with a public IP address or not (Boolean). -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - The availability zone of the Instance. -}
-      , '("ebs_block_device", Attr Text)
+      , '("ebs_block_device", Text)
          {- - The EBS block device mappings of the Instance. -}
-      , '("ebs_optimized", Attr Text)
+      , '("ebs_optimized", Text)
          {- - Whether the Instance is EBS optimized or not (Boolean). -}
-      , '("ephemeral_block_device", Attr Text)
+      , '("ephemeral_block_device", Text)
          {- - The ephemeral block device mappings of the Instance. -}
-      , '("iam_instance_profile", Attr Text)
+      , '("iam_instance_profile", Text)
          {- - The name of the instance profile associated with the Instance. -}
-      , '("instance_type", Attr Text)
+      , '("instance_type", Text)
          {- - The type of the Instance. -}
-      , '("ipv6_addresses", Attr Text)
+      , '("ipv6_addresses", Text)
          {- - The IPv6 addresses associated to the Instance, if applicable. NOTE : Unlike the IPv4 address, this doesn't change if you attach an EIP to the instance. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - The key name of the Instance. -}
-      , '("monitoring", Attr Text)
+      , '("monitoring", Text)
          {- - Whether detailed monitoring is enabled or disabled for the Instance (Boolean). -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ID of the network interface that was created with the Instance. -}
-      , '("placement_group", Attr Text)
+      , '("placement_group", Text)
          {- - The placement group of the Instance. -}
-      , '("private_dns", Attr Text)
+      , '("private_dns", Text)
          {- - The private DNS name assigned to the Instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - The private IP address assigned to the Instance. -}
-      , '("public_dns", Attr Text)
+      , '("public_dns", Text)
          {- - The public DNS name assigned to the Instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC. -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - The public IP address assigned to the Instance, if applicable. NOTE : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
-      , '("root_block_device", Attr Text)
+      , '("root_block_device", Text)
          {- - The root block device mappings of the Instance -}
-      , '("security_groups", Attr Text)
+      , '("security_groups", Text)
          {- - The associated security groups. -}
-      , '("source_dest_check", Attr Text)
+      , '("source_dest_check", Text)
          {- - Whether the network interface performs source/destination checking (Boolean). -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - The VPC subnet ID. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the Instance. -}
-      , '("tenancy", Attr Text)
+      , '("tenancy", Text)
          {- - The tenancy of the instance: @dedicated@ , @default@ , @host@ . -}
-      , '("user_data", Attr Text)
+      , '("user_data", Text)
          {- - The User Data supplied to the Instance. -}
-      , '("vpc_security_group_ids", Attr Text)
+      , '("vpc_security_group_ids", Text)
          {- - The associated security groups in a non-default VPC. -}
        ]
 
@@ -1608,11 +1585,11 @@ data InternetGatewayDataSource = InternetGatewayDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InternetGatewayDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Internet Gateway. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The current state of the attachment between the gateway and the VPC. Present only if a VPC is attached -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The ID of an attached VPC. -}
        ]
 
@@ -1635,11 +1612,11 @@ data IpRangesDataSource = IpRangesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IpRangesDataSource
-    = '[ '("cidr_blocks", Attr Text)
+    = '[ '("cidr_blocks", Text)
          {- - The lexically ordered list of CIDR blocks. -}
-      , '("create_date", Attr Text)
+      , '("create_date", Text)
          {- - The publication time of the IP ranges (e.g. @2016-08-03-23-46-05@ ). -}
-      , '("sync_token", Attr Text)
+      , '("sync_token", Text)
          {- - The publication time of the IP ranges, in Unix epoch time format (e.g. @1470267965@ ). -}
        ]
 
@@ -1672,27 +1649,27 @@ data KinesisStreamDataSource = KinesisStreamDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KinesisStreamDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) of the Kinesis Stream (same as id). -}
-      , '("closed_shards", Attr Text)
+      , '("closed_shards", Text)
          {- - The list of shard ids in the CLOSED state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-      , '("creation_timestamp", Attr Text)
+      , '("creation_timestamp", Text)
          {- - The approximate UNIX timestamp that the stream was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique Stream id -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the Kinesis Stream. -}
-      , '("open_shards", Attr Text)
+      , '("open_shards", Text)
          {- - The list of shard ids in the OPEN state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-      , '("retention_period", Attr Text)
+      , '("retention_period", Text)
          {- - Length of time (in hours) data records are accessible after they are added to the stream. -}
-      , '("shard_count", Attr Text)
+      , '("shard_count", Text)
          {- - The count of Shards for this Stream -}
-      , '("shard_level_metrics", Attr Text)
+      , '("shard_level_metrics", Text)
          {- - A list of shard-level CloudWatch metrics which are enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The current status of the stream. The stream status is one of CREATING, DELETING, ACTIVE, or UPDATING. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags to assigned to the stream. -}
        ]
 
@@ -1717,9 +1694,9 @@ data KmsAliasDataSource = KmsAliasDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KmsAliasDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name(ARN) of the key alias. -}
-      , '("target_key_id", Attr Text)
+      , '("target_key_id", Text)
          {- - Key identifier pointed to by the alias. -}
        ]
 
@@ -1745,7 +1722,7 @@ data KmsCiphertextDataSource = KmsCiphertextDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KmsCiphertextDataSource
-    = '[ '("ciphertext_blob", Attr Text)
+    = '[ '("ciphertext_blob", Text)
          {- - Base64 encoded ciphertext -}
        ]
 
@@ -1767,9 +1744,6 @@ data KmsSecretDataSource = KmsSecretDataSource
     { _secret :: !(Attr Text)
       {- ^ (Required) One or more encrypted payload definitions from the KMS service.  See the Secret Definitions below. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed KmsSecretDataSource
-    = '[]
 
 $(TH.makeDataSource
     "aws_kms_secret"
@@ -1813,17 +1787,17 @@ data LbDataSource = LbDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the load balancer (matches @id@ ). -}
-      , '("arn_suffix", Attr Text)
+      , '("arn_suffix", Text)
          {- - The ARN suffix for use with CloudWatch Metrics. -}
-      , '("canonical_hosted_zone_id", Attr Text)
+      , '("canonical_hosted_zone_id", Text)
          {- - The canonical hosted zone ID of the load balancer. -}
-      , '("dns_name", Attr Text)
+      , '("dns_name", Text)
          {- - The DNS name of the load balancer. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the load balancer (matches @arn@ ). -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record). -}
        ]
 
@@ -1858,9 +1832,9 @@ data LbListenerDataSource = LbListenerDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbListenerDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the listener (matches @id@ ) -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the listener (matches @arn@ ) -}
        ]
 
@@ -1904,11 +1878,11 @@ data LbTargetGroupDataSource = LbTargetGroupDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbTargetGroupDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the Target Group (matches @id@ ) -}
-      , '("arn_suffix", Attr Text)
+      , '("arn_suffix", Text)
          {- - The ARN suffix for use with CloudWatch Metrics. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the Target Group (matches @arn@ ) -}
        ]
 
@@ -1943,17 +1917,17 @@ data NatGatewayDataSource = NatGatewayDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NatGatewayDataSource
-    = '[ '("allocation_id", Attr Text)
+    = '[ '("allocation_id", Text)
          {- - The Id of the EIP allocated to the selected Nat Gateway. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the NAT Gateway. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The Id of the ENI allocated to the selected Nat Gateway. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - The private Ip address of the selected Nat Gateway. -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - The public Ip (EIP) address of the selected Nat Gateway. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - The Subnet ID of the subnet in which the NAT gateway is placed. -}
        ]
 
@@ -1968,9 +1942,7 @@ Use this data source to lookup current AWS partition in which Terraform is
 working
 -}
 data PartitionDataSource = PartitionDataSource
-
-type instance Computed PartitionDataSource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeDataSource
     "aws_partition"
@@ -1993,11 +1965,11 @@ data PrefixListDataSource = PrefixListDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PrefixListDataSource
-    = '[ '("cidr_blocks", Attr Text)
+    = '[ '("cidr_blocks", Text)
          {- - The list of CIDR blocks for the AWS service associated with the prefix list. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the selected prefix list. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the selected prefix list. -}
        ]
 
@@ -2019,9 +1991,9 @@ data RedshiftServiceAccountDataSource = RedshiftServiceAccountDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RedshiftServiceAccountDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the AWS Redshift service account in the selected region. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the AWS Redshift service account in the selected region. -}
        ]
 
@@ -2048,11 +2020,11 @@ data RegionDataSource = RegionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegionDataSource
-    = '[ '("current", Attr Text)
+    = '[ '("current", Text)
          {- - @true@ if the selected region is the one configured on the provider, or @false@ otherwise. -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - The endpoint for the selected region. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the selected region. -}
        ]
 
@@ -2089,15 +2061,15 @@ data Route53ZoneDataSource = Route53ZoneDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Route53ZoneDataSource
-    = '[ '("caller_reference", Attr Text)
+    = '[ '("caller_reference", Text)
          {- - Caller Reference of the Hosted Zone. -}
-      , '("comment", Attr Text)
+      , '("comment", Text)
          {- - The comment field of the Hosted Zone. -}
-      , '("name_servers", Attr Text)
+      , '("name_servers", Text)
          {- - A list of name servers in associated (or default) delegation set. Find more about delegation sets in <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html> . -}
-      , '("resource_record_set_count", Attr Text)
+      , '("resource_record_set_count", Text)
          {- - the number of Record Set in the Hosted Zone -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - The Hosted Zone ID. This can be referenced by zone records. -}
        ]
 
@@ -2130,23 +2102,23 @@ data RouteTableDataSource = RouteTableDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteTableDataSource
-    = '[ '("cidr_block", Attr Text)
+    = '[ '("cidr_block", Text)
          {- - The CIDR block of the route. -}
-      , '("egress_only_gateway_id", Attr Text)
+      , '("egress_only_gateway_id", Text)
          {- - The ID of the Egress Only Internet Gateway. -}
-      , '("gateway_id", Attr Text)
+      , '("gateway_id", Text)
          {- - The Internet Gateway ID. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the routing table -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - The EC2 instance ID. -}
-      , '("ipv6_cidr_block", Attr Text)
+      , '("ipv6_cidr_block", Text)
          {- - The IPv6 CIDR block of the route. -}
-      , '("nat_gateway_id", Attr Text)
+      , '("nat_gateway_id", Text)
          {- - The NAT Gateway ID. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ID of the elastic network interface (eni) to use. -}
-      , '("vpc_peering_connection_id", Attr Text)
+      , '("vpc_peering_connection_id", Text)
          {- - The VPC Peering ID. -}
        ]
 
@@ -2195,19 +2167,19 @@ data S3BucketDataSource = S3BucketDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed S3BucketDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the bucket. Will be of format @arn:aws:s3:::bucketname@ . -}
-      , '("bucket_domain_name", Attr Text)
+      , '("bucket_domain_name", Text)
          {- - The bucket domain name. Will be of format @bucketname.s3.amazonaws.com@ . -}
-      , '("hosted_zone_id", Attr Text)
+      , '("hosted_zone_id", Text)
          {- - The <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints> for this bucket's region. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The name of the bucket. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - The AWS region this bucket resides in. -}
-      , '("website_domain", Attr Text)
+      , '("website_domain", Text)
          {- - The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. -}
-      , '("website_endpoint", Attr Text)
+      , '("website_endpoint", Text)
          {- - The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. -}
        ]
 
@@ -2263,43 +2235,43 @@ data S3BucketObjectDataSource = S3BucketObjectDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed S3BucketObjectDataSource
-    = '[ '("body", Attr Text)
+    = '[ '("body", Text)
          {- - Object data (see limitations above to understand cases in which this field is actually available) -}
-      , '("cache_control", Attr Text)
+      , '("cache_control", Text)
          {- - Specifies caching behavior along the request/reply chain. -}
-      , '("content_disposition", Attr Text)
+      , '("content_disposition", Text)
          {- - Specifies presentational information for the object. -}
-      , '("content_encoding", Attr Text)
+      , '("content_encoding", Text)
          {- - Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. -}
-      , '("content_language", Attr Text)
+      , '("content_language", Text)
          {- - The language the content is in. -}
-      , '("content_length", Attr Text)
+      , '("content_length", Text)
          {- - Size of the body in bytes. -}
-      , '("content_type", Attr Text)
+      , '("content_type", Text)
          {- - A standard MIME type describing the format of the object data. -}
-      , '("etag", Attr Text)
+      , '("etag", Text)
          {- - <https://en.wikipedia.org/wiki/HTTP_ETag> generated for the object (an MD5 sum of the object content in case it's not encrypted) -}
-      , '("expiration", Attr Text)
+      , '("expiration", Text)
          {- - If the object expiration is configured (see <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html> ), the field includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded. -}
-      , '("expires", Attr Text)
+      , '("expires", Text)
          {- - The date and time at which the object is no longer cacheable. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the @key@ of the resource supplied above -}
-      , '("last_modified", Attr Text)
+      , '("last_modified", Text)
          {- - Last modified date of the object in RFC1123 format (e.g. @Mon, 02 Jan 2006 15:04:05 MST@ ) -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - A map of metadata stored with the object in S3 -}
-      , '("server_side_encryption", Attr Text)
+      , '("server_side_encryption", Text)
          {- - If the object is stored using server-side encryption (KMS or Amazon S3-managed encryption key), this field includes the chosen encryption and algorithm used. -}
-      , '("sse_kms_key_id", Attr Text)
+      , '("sse_kms_key_id", Text)
          {- - If present, specifies the ID of the Key Management Service (KMS) master encryption key that was used for the object. -}
-      , '("storage_class", Attr Text)
+      , '("storage_class", Text)
          {- - <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> information of the object. Available for all objects except for @Standard@ storage class objects. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the object. -}
-      , '("version_id", Attr Text)
+      , '("version_id", Text)
          {- - The latest version ID of the object returned. -}
-      , '("website_redirect_location", Attr Text)
+      , '("website_redirect_location", Text)
          {- - If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. -}
        ]
 
@@ -2337,9 +2309,9 @@ data SecurityGroupDataSource = SecurityGroupDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The computed ARN of the security group. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the security group. -}
        ]
 
@@ -2366,9 +2338,9 @@ data SnsTopicDataSource = SnsTopicDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnsTopicDataSource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - Set to the ARN of the found topic, suitable for referencing in other resources that support SNS topics. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the SNS topic -}
        ]
 
@@ -2395,11 +2367,11 @@ data SsmParameterDataSource = SsmParameterDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmParameterDataSource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - (Required) The name of the parameter. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-      , '("value", Attr Text)
+      , '("value", Text)
          {- - (Required) The value of the parameter. -}
        ]
 
@@ -2441,17 +2413,17 @@ data SubnetDataSource = SubnetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubnetDataSource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The AZ for the subnet. -}
-      , '("cidr_block", Attr Text)
+      , '("cidr_block", Text)
          {- - The CIDR block for the subnet. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the subnet -}
-      , '("ipv6_association_id", Attr Text)
+      , '("ipv6_association_id", Text)
          {- - The association ID for the IPv6 CIDR block. -}
-      , '("ipv6_cidr_block", Attr Text)
+      , '("ipv6_cidr_block", Text)
          {- - The IPv6 CIDR block. -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The VPC ID. -}
        ]
 
@@ -2473,7 +2445,7 @@ data SubnetIdsDataSource = SubnetIdsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubnetIdsDataSource
-    = '[ '("ids", Attr Text)
+    = '[ '("ids", Text)
          {- - A list of all the subnet ids found. This data source will fail if none are found. -}
        ]
 
@@ -2518,29 +2490,29 @@ data VpcDataSource = VpcDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcDataSource
-    = '[ '("cidr_block", Attr Text)
+    = '[ '("cidr_block", Text)
          {- - The CIDR block of the VPC -}
-      , '("default_network_acl_id", Attr Text)
+      , '("default_network_acl_id", Text)
          {- - The ID of the network ACL created by default on VPC creation -}
-      , '("default_route_table_id", Attr Text)
+      , '("default_route_table_id", Text)
          {- - The ID of the route table created by default on VPC creation -}
-      , '("default_security_group_id", Attr Text)
+      , '("default_security_group_id", Text)
          {- - The ID of the security group created by default on VPC creation -}
-      , '("enable_classiclink", Attr Text)
+      , '("enable_classiclink", Text)
          {- - Whether or not the VPC has Classiclink enabled -}
-      , '("enable_dns_hostnames", Attr Text)
+      , '("enable_dns_hostnames", Text)
          {- - Whether or not the VPC has DNS hostname support -}
-      , '("enable_dns_support", Attr Text)
+      , '("enable_dns_support", Text)
          {- - Whether or not the VPC has DNS support -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPC -}
-      , '("instance_tenancy", Attr Text)
+      , '("instance_tenancy", Text)
          {- - The allowed tenancy of instances launched into the selected VPC. May be any of @"default"@ , @"dedicated"@ , or @"host"@ . -}
-      , '("ipv6_association_id", Attr Text)
+      , '("ipv6_association_id", Text)
          {- - The association ID for the IPv6 CIDR block. -}
-      , '("ipv6_cidr_block", Attr Text)
+      , '("ipv6_cidr_block", Text)
          {- - The IPv6 CIDR block. -}
-      , '("main_route_table_id", Attr Text)
+      , '("main_route_table_id", Text)
          {- - The ID of the main route table associated with this VPC. Note that you can change a VPC's main route table by using an </docs/providers/aws/r/main_route_table_assoc.html> . -}
        ]
 
@@ -2569,15 +2541,15 @@ data VpcEndpointDataSource = VpcEndpointDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcEndpointDataSource
-    = '[ '("cidr_blocks", Attr Text)
+    = '[ '("cidr_blocks", Text)
          {- - The list of CIDR blocks for the exposed service. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPC endpoint. -}
-      , '("policy", Attr Text)
+      , '("policy", Text)
          {- - The policy document associated with the VPC Endpoint. -}
-      , '("prefix_list_id", Attr Text)
+      , '("prefix_list_id", Text)
          {- - The prefix list ID of the exposed service. -}
-      , '("route_table_ids", Attr Text)
+      , '("route_table_ids", Text)
          {- - One or more route tables associated with the VPC Endpoint. -}
        ]
 
@@ -2598,7 +2570,7 @@ data VpcEndpointServiceDataSource = VpcEndpointServiceDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcEndpointServiceDataSource
-    = '[ '("service_name", Attr Text)
+    = '[ '("service_name", Text)
          {- - The service name of the AWS service that can be specified when creating a VPC endpoint. -}
        ]
 
@@ -2636,9 +2608,9 @@ data VpcPeeringConnectionDataSource = VpcPeeringConnectionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcPeeringConnectionDataSource
-    = '[ '("accepter", Attr Text)
+    = '[ '("accepter", Text)
          {- - A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options set for the accepter VPC. -}
-      , '("requester", Attr Text)
+      , '("requester", Text)
          {- - A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options set for the requester VPC. -}
        ]
 
@@ -2669,7 +2641,7 @@ data VpnGatewayDataSource = VpnGatewayDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnGatewayDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the VPN Gateway. -}
        ]
 

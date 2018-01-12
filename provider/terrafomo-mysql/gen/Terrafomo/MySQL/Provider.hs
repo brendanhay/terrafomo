@@ -14,12 +14,14 @@
 --
 module Terrafomo.MySQL.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.MySQL.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.MySQL.Types as Qual
 
 {- | MySQL Terraform provider.
 
@@ -33,6 +35,11 @@ data MySQL = MySQL
     , _password :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable MySQL
+
+instance Qual.ToValue MySQL where
+    toValue = Qual.genericToValue
 
 {- | (Required) The address of the MySQL server to use. Most often a
 "hostname:port" pair, but may also be an absolute path to a Unix socket when

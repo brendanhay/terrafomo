@@ -8,6 +8,7 @@ name: terrafomo-ns1
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

@@ -50,9 +50,6 @@ data ServiceDataSource = ServiceDataSource
       {- ^ (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ServiceDataSource
-    = '[]
-
 $(TH.makeDataSource
     "kubernetes_service"
     ''Qual.Kubernetes
@@ -73,9 +70,6 @@ data StorageClassDataSource = StorageClassDataSource
     , _storage_provisioner :: !(Attr Text)
       {- ^ (Required) Indicates the type of the provisioner -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed StorageClassDataSource
-    = '[]
 
 $(TH.makeDataSource
     "kubernetes_storage_class"

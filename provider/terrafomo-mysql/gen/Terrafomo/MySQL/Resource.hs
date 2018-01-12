@@ -54,9 +54,6 @@ data DatabaseResource = DatabaseResource
       {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DatabaseResource
-    = '[]
-
 $(TH.makeResource
     "mysql_database"
     ''Qual.MySQL
@@ -80,9 +77,6 @@ data GrantResource = GrantResource
       {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed GrantResource
-    = '[]
-
 $(TH.makeResource
     "mysql_grant"
     ''Qual.MySQL
@@ -105,9 +99,6 @@ data UserResource = UserResource
     , _user :: !(Attr Text)
       {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed UserResource
-    = '[]
 
 $(TH.makeResource
     "mysql_user"

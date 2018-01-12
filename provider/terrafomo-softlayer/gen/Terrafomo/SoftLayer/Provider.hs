@@ -14,12 +14,14 @@
 --
 module Terrafomo.SoftLayer.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.SoftLayer.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.SoftLayer.Types as Qual
 
 {- | SoftLayer Terraform provider.
 
@@ -30,3 +32,8 @@ many features are still being added. If there is a SoftLayer feature
 missing, please report it in the GitHub repo.
 -}
 data SoftLayer = SoftLayer
+
+instance Hashable SoftLayer
+
+instance Qual.ToValue SoftLayer where
+    toValue = Qual.genericToValue

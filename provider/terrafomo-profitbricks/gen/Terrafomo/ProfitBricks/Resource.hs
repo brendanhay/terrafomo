@@ -51,7 +51,7 @@ data DatacenterResource = DatacenterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DatacenterResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the Virtual Data Center -}
        ]
 
@@ -65,9 +65,7 @@ $(TH.makeResource
 Manages a Firewall Rules on ProfitBricks
 -}
 data FirewallResource = FirewallResource
-
-type instance Computed FirewallResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_firewall"
@@ -79,9 +77,7 @@ $(TH.makeResource
 Manages groups and group priviliages on ProfitBricks
 -}
 data GroupResource = GroupResource
-
-type instance Computed GroupResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_group"
@@ -93,9 +89,7 @@ $(TH.makeResource
 Manages a IP Blocks on ProfitBricks
 -}
 data IpblockResource = IpblockResource
-
-type instance Computed IpblockResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_ipblock"
@@ -107,9 +101,7 @@ $(TH.makeResource
 Manages Ip Failover groups on ProfitBricks
 -}
 data IpfailoverResource = IpfailoverResource
-
-type instance Computed IpfailoverResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_ipfailover"
@@ -121,9 +113,7 @@ $(TH.makeResource
 Manages a LANs on ProfitBricks
 -}
 data LanResource = LanResource
-
-type instance Computed LanResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_lan"
@@ -135,9 +125,7 @@ $(TH.makeResource
 Manages a Load Balancers on ProfitBricks
 -}
 data LoadbalancerResource = LoadbalancerResource
-
-type instance Computed LoadbalancerResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_loadbalancer"
@@ -149,9 +137,7 @@ $(TH.makeResource
 Manages a NICs on ProfitBricks
 -}
 data NicResource = NicResource
-
-type instance Computed NicResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_nic"
@@ -163,9 +149,7 @@ $(TH.makeResource
 Manages a Servers on ProfitBricks
 -}
 data ServerResource = ServerResource
-
-type instance Computed ServerResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_server"
@@ -178,9 +162,7 @@ Manages shares and list shares permissions granted to the group members for
 each shared resource.
 -}
 data ShareResource = ShareResource
-
-type instance Computed ShareResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_share"
@@ -201,7 +183,7 @@ data SnapshotResource = SnapshotResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnapshotResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the snapshot -}
        ]
 
@@ -215,9 +197,7 @@ $(TH.makeResource
 Manages users and list users and groups associated.
 -}
 data UserResource = UserResource
-
-type instance Computed UserResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_user"
@@ -229,9 +209,7 @@ $(TH.makeResource
 Manages a Volumes on ProfitBricks
 -}
 data VolumeResource = VolumeResource
-
-type instance Computed VolumeResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "profitbricks_volume"

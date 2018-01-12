@@ -53,7 +53,7 @@ data AddonResource = AddonResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AddonResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the add-on. -}
        ]
 
@@ -84,9 +84,9 @@ data EscalationPolicyResource = EscalationPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EscalationPolicyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the escalation policy. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The short name of the found escalation policy. -}
        ]
 
@@ -118,7 +118,7 @@ data MaintenanceWindowResource = MaintenanceWindowResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MaintenanceWindowResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the maintenance window. -}
        ]
 
@@ -148,9 +148,9 @@ data ScheduleResource = ScheduleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ScheduleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the schedule -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The short name of the found schedule. -}
        ]
 
@@ -181,11 +181,11 @@ data ServiceIntegrationResource = ServiceIntegrationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServiceIntegrationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the service integration. -}
-      , '("integration_email", Attr Text)
+      , '("integration_email", Text)
          {- - This is the unique fully-qualified email address used for routing emails to this integration for processing. -}
-      , '("integration_key", Attr Text)
+      , '("integration_key", Text)
          {- - This is the unique key used to route events to this integration when received via the PagerDuty Events API. -}
        ]
 
@@ -218,13 +218,13 @@ data ServiceResource = ServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServiceResource
-    = '[ '("created_at", Attr Text)
+    = '[ '("created_at", Text)
          {- - Creation timestamp of the service -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the service. -}
-      , '("last_incident_timestamp", Attr Text)
+      , '("last_incident_timestamp", Text)
          {- - Last incident timestamp of the service -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the service -}
        ]
 
@@ -247,9 +247,9 @@ data TeamMembershipResource = TeamMembershipResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TeamMembershipResource
-    = '[ '("team_id", Attr Text)
+    = '[ '("team_id", Text)
          {- - The team ID the user belongs to. -}
-      , '("user_id", Attr Text)
+      , '("user_id", Text)
          {- - The ID of the user belonging to the team. -}
        ]
 
@@ -274,7 +274,7 @@ data TeamResource = TeamResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TeamResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the team. -}
        ]
 
@@ -308,17 +308,17 @@ data UserResource = UserResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserResource
-    = '[ '("avatar_url", Attr Text)
+    = '[ '("avatar_url", Text)
          {- - The URL of the user's avatar. -}
-      , '("html_url", Attr Text)
+      , '("html_url", Text)
          {- - URL at which the entity is uniquely displayed in the Web app -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the user. -}
-      , '("invitation_sent", Attr Text)
+      , '("invitation_sent", Text)
          {- - If true, the user has an outstanding invitation. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The short name of the found user. -}
-      , '("time_zone", Attr Text)
+      , '("time_zone", Text)
          {- - The timezone of the user -}
        ]
 

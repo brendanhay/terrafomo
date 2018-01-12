@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.SoftLayer
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.SoftLayer.Types
     , module Terrafomo.SoftLayer.Provider
     ) where

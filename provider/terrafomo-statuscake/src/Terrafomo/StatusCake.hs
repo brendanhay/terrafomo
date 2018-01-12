@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.StatusCake
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.StatusCake.Types
     , module Terrafomo.StatusCake.Provider
     ) where

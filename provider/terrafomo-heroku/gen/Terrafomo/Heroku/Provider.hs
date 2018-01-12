@@ -14,12 +14,14 @@
 --
 module Terrafomo.Heroku.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Heroku.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Heroku.Types as Qual
 
 {- | Heroku Terraform provider.
 
@@ -32,6 +34,11 @@ data Heroku = Heroku
     { _api_key :: !Text
     , _email :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Heroku
+
+instance Qual.ToValue Heroku where
+    toValue = Qual.genericToValue
 
 {- | (Required) Heroku API token. It must be provided, but it can also be sourced
 from the @HEROKU_API_KEY@ environment variable.

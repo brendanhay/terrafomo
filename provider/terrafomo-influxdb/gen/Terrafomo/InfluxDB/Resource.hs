@@ -51,9 +51,6 @@ data ContinuousQueryResource = ContinuousQueryResource
       {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ContinuousQueryResource
-    = '[]
-
 $(TH.makeResource
     "influxdb_continuous_query"
     ''Qual.InfluxDB
@@ -67,9 +64,6 @@ data DatabaseResource = DatabaseResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DatabaseResource
-    = '[]
 
 $(TH.makeResource
     "influxdb_database"
@@ -92,7 +86,7 @@ data UserResource = UserResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserResource
-    = '[ '("admin", Attr Text)
+    = '[ '("admin", Text)
          {- - (Bool) indication if the user is an admin or not. -}
        ]
 

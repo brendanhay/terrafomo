@@ -66,7 +66,7 @@ data ConfigDataSource = ConfigDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ConfigDataSource
-    = '[ '("rendered", Attr Text)
+    = '[ '("rendered", Text)
          {- - The final rendered template. -}
        ]
 
@@ -93,7 +93,7 @@ data DirectoryDataSource = DirectoryDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DirectoryDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -116,7 +116,7 @@ data DiskDataSource = DiskDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DiskDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -147,7 +147,7 @@ data FileDataSource = FileDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FileDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -171,7 +171,7 @@ data FilesystemDataSource = FilesystemDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FilesystemDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -194,7 +194,7 @@ data GroupDataSource = GroupDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed GroupDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -223,7 +223,7 @@ data LinkDataSource = LinkDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LinkDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -244,7 +244,7 @@ data NetworkdUnitDataSource = NetworkdUnitDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkdUnitDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -269,7 +269,7 @@ data RaidDataSource = RaidDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RaidDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config -}
        ]
 
@@ -296,7 +296,7 @@ data SystemdUnitDataSource = SystemdUnitDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SystemdUnitDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 
@@ -339,7 +339,7 @@ data UserDataSource = UserDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID used to reference this resource in ignition_config . -}
        ]
 

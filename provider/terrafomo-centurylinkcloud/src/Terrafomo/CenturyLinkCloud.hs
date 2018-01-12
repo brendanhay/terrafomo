@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.CenturyLinkCloud
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.CenturyLinkCloud.Types
     , module Terrafomo.CenturyLinkCloud.Provider
     ) where

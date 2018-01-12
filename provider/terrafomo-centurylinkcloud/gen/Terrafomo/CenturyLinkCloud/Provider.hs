@@ -14,12 +14,14 @@
 --
 module Terrafomo.CenturyLinkCloud.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.CenturyLinkCloud.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.CenturyLinkCloud.Types as Qual
 
 {- | CenturyLinkCloud Terraform provider.
 
@@ -34,6 +36,11 @@ data CenturyLinkCloud = CenturyLinkCloud
     , _clc_password :: !Text
     , _clc_username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable CenturyLinkCloud
+
+instance Qual.ToValue CenturyLinkCloud where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Override CLC account alias. Also taken from the @CLC_ACCOUNT@
 environment variable if provided.

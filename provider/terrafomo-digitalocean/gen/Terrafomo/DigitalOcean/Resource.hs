@@ -56,13 +56,13 @@ data CertificateResource = CertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CertificateResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique ID of the certificate -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the certificate -}
-      , '("not_after", Attr Text)
+      , '("not_after", Text)
          {- - The expiration date of the certificate -}
-      , '("sha1_fingerprint", Attr Text)
+      , '("sha1_fingerprint", Text)
          {- - The SHA-1 fingerprint of the certificate -}
        ]
 
@@ -83,7 +83,7 @@ data DomainResource = DomainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DomainResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The name of the domain -}
        ]
 
@@ -128,43 +128,43 @@ data DropletResource = DropletResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DropletResource
-    = '[ '("disk", Attr Text)
+    = '[ '("disk", Text)
          {- - The size of the instance's disk in GB -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the Droplet -}
-      , '("image", Attr Text)
+      , '("image", Text)
          {- - The image of the Droplet -}
-      , '("ipv4_address", Attr Text)
+      , '("ipv4_address", Text)
          {- - The IPv4 address -}
-      , '("ipv4_address_private", Attr Text)
+      , '("ipv4_address_private", Text)
          {- - The private networking IPv4 address -}
-      , '("ipv6", Attr Text)
+      , '("ipv6", Text)
          {- - Is IPv6 enabled -}
-      , '("ipv6_address", Attr Text)
+      , '("ipv6_address", Text)
          {- - The IPv6 address -}
-      , '("ipv6_address_private", Attr Text)
+      , '("ipv6_address_private", Text)
          {- - The private networking IPv6 address -}
-      , '("locked", Attr Text)
+      , '("locked", Text)
          {- - Is the Droplet locked -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the Droplet -}
-      , '("price_hourly", Attr Text)
+      , '("price_hourly", Text)
          {- - Droplet hourly price -}
-      , '("price_monthly", Attr Text)
+      , '("price_monthly", Text)
          {- - Droplet monthly price -}
-      , '("private_networking", Attr Text)
+      , '("private_networking", Text)
          {- - Is private networking enabled -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - The region of the Droplet -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The instance size -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the droplet -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The tags associated with the droplet -}
-      , '("vcpus", Attr Text)
+      , '("vcpus", Text)
          {- - The number of the instance's virtual CPUs -}
-      , '("volume_ids", Attr Text)
+      , '("volume_ids", Text)
          {- - A list of the attached block storage volumes -}
        ]
 
@@ -192,23 +192,23 @@ data FirewallResource = FirewallResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FirewallResource
-    = '[ '("created_at", Attr Text)
+    = '[ '("created_at", Text)
          {- - A time value given in ISO8601 combined date and time format that represents when the Firewall was created. -}
-      , '("droplet_ids", Attr Text)
+      , '("droplet_ids", Text)
          {- - The list of the IDs of the Droplets assigned to the Firewall. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - A unique ID that can be used to identify and reference a Firewall. -}
-      , '("inbound_rules", Attr Text)
+      , '("inbound_rules", Text)
          {- - The inbound access rule block for the Firewall. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the Firewall. -}
-      , '("outbound_rules", Attr Text)
+      , '("outbound_rules", Text)
          {- - The outbound access rule block for the Firewall. -}
-      , '("pending_changes", Attr Text)
+      , '("pending_changes", Text)
          {- - An list of object containing the fields, "droplet_id", "removing", and "status".  It is provided to detail exactly which Droplets are having their security policies updated.  When empty, all changes have been successfully applied. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - A status string indicating the current state of the Firewall. This can be "waiting", "succeeded", or "failed". -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The names of the Tags assigned to the Firewall. -}
        ]
 
@@ -230,7 +230,7 @@ data FloatingIpResource = FloatingIpResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FloatingIpResource
-    = '[ '("ip_address", Attr Text)
+    = '[ '("ip_address", Text)
          {- - The IP Address of the resource -}
        ]
 
@@ -266,9 +266,9 @@ data LoadbalancerResource = LoadbalancerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LoadbalancerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Load Balancer -}
-      , '("ip", Attr Text)
+      , '("ip", Text)
          {- - The ip of the Load Balancer -}
        ]
 
@@ -301,9 +301,9 @@ data RecordResource = RecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RecordResource
-    = '[ '("fqdn", Attr Text)
+    = '[ '("fqdn", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
        ]
 
@@ -326,13 +326,13 @@ data SshKeyResource = SshKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SshKeyResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The fingerprint of the SSH key -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID of the key -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the SSH key -}
-      , '("public_key", Attr Text)
+      , '("public_key", Text)
          {- - The text of the public key -}
        ]
 
@@ -354,9 +354,9 @@ data TagResource = TagResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TagResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the tag -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the tag -}
        ]
 
@@ -384,7 +384,7 @@ data VolumeResource = VolumeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique identifier for the block storage volume. -}
        ]
 

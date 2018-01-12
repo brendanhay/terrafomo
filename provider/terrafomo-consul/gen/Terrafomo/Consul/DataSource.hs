@@ -44,9 +44,7 @@ The @consul_agent_self@ data source returns
 specified in the @provider@ .
 -}
 data AgentSelfDataSource = AgentSelfDataSource
-
-type instance Computed AgentSelfDataSource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeDataSource
     "consul_agent__self"
@@ -68,13 +66,13 @@ data CatalogNodesDataSource = CatalogNodesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CatalogNodesDataSource
-    = '[ '("datacenter", Attr Text)
+    = '[ '("datacenter", Text)
          {- - The datacenter the keys are being read from to. -}
-      , '("node_ids", Attr Text)
+      , '("node_ids", Text)
          {- - A list of the Consul node IDs. -}
-      , '("node_names", Attr Text)
+      , '("node_names", Text)
          {- - A list of the Consul node names. -}
-      , '("nodes", Attr Text)
+      , '("nodes", Text)
          {- - A list of nodes and details about each Consul agent.  The list of per-node attributes is detailed below. -}
        ]
 
@@ -113,21 +111,21 @@ data CatalogServiceDataSource = CatalogServiceDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CatalogServiceDataSource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The address of the service. -}
-      , '("datacenter", Attr Text)
+      , '("datacenter", Text)
          {- - The datacenter the keys are being read from to. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the service -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - The port of the service. -}
-      , '("service", Attr Text)
+      , '("service", Text)
          {- - A list of nodes and details about each endpoint advertising a service.  Each element in the list is a map of attributes that correspond to each individual node.  The list of per-node attributes is detailed below. -}
-      , '("service_id", Attr Text)
+      , '("service_id", Text)
          {- - The id of the service, defaults to the value of @name@ . -}
-      , '("tag", Attr Text)
+      , '("tag", Text)
          {- - The name of the tag used to filter the list of nodes in @service@ . -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The tags of the service. -}
        ]
 
@@ -154,13 +152,13 @@ data CatalogServicesDataSource = CatalogServicesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CatalogServicesDataSource
-    = '[ '("datacenter", Attr Text)
+    = '[ '("datacenter", Text)
          {- - The datacenter the keys are being read from to. -}
-      , '("names", Attr Text)
+      , '("names", Text)
          {- - A list of the Consul services found.  This will always contain the list of services found. -}
-      , '("services.<service>", Attr Text)
+      , '("services.<service>", Text)
          {- - For each name given, the corresponding attribute is a Terraform map of services and their tags.  The value is an alphanumerically sorted, whitespace delimited set of tags associated with the service. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A map of the tags found for each service.  If more than one service shares the same tag, unique service names will be joined by whitespace (this is the inverse of @services@ and can be used to lookup the services that match a single tag). -}
        ]
 
@@ -184,9 +182,9 @@ data KeysDataSource = KeysDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeysDataSource
-    = '[ '("datacenter", Attr Text)
+    = '[ '("datacenter", Text)
          {- - The datacenter the keys are being read from to. -}
-      , '("var.<name>", Attr Text)
+      , '("var.<name>", Text)
          {- - For each name given, the corresponding attribute has the value of the key. -}
        ]
 

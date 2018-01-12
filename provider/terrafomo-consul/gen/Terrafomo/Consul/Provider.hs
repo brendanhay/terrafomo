@@ -14,12 +14,14 @@
 --
 module Terrafomo.Consul.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Consul.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Consul.Types as Qual
 
 {- | Consul Terraform provider.
 
@@ -39,6 +41,11 @@ data Consul = Consul
     , _scheme :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Consul
+
+instance Qual.ToValue Consul where
+    toValue = Qual.genericToValue
 
 {- | (Optional) The HTTP(S) API address of the agent to use. Defaults to
 "127.0.0.1:8500".

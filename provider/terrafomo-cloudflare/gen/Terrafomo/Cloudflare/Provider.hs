@@ -14,12 +14,14 @@
 --
 module Terrafomo.Cloudflare.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Cloudflare.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Cloudflare.Types as Qual
 
 {- | Cloudflare Terraform provider.
 
@@ -32,6 +34,11 @@ data Cloudflare = Cloudflare
     { _email :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Cloudflare
+
+instance Qual.ToValue Cloudflare where
+    toValue = Qual.genericToValue
 
 {- | (Required) The email associated with the account. This can also be specified
 with the @CLOUDFLARE_EMAIL@ shell environment variable.

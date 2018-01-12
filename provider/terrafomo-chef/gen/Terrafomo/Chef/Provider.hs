@@ -14,12 +14,14 @@
 --
 module Terrafomo.Chef.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Chef.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Chef.Types as Qual
 
 {- | Chef Terraform provider.
 
@@ -34,6 +36,11 @@ data Chef = Chef
     , _key_material :: !Text
     , _server_url :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Chef
+
+instance Qual.ToValue Chef where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Boolean indicating whether to make requests to a Chef server
 whose SSL certicate cannot be verified. Defaults to @false@ .

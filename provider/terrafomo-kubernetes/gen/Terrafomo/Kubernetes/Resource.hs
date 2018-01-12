@@ -51,9 +51,6 @@ data ConfigMapResource = ConfigMapResource
       {- ^ (Required) Standard config map's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ConfigMapResource
-    = '[]
-
 $(TH.makeResource
     "kubernetes_config_map"
     ''Qual.Kubernetes
@@ -71,9 +68,6 @@ data HorizontalPodAutoscalerResource = HorizontalPodAutoscalerResource
     , _spec :: !(Attr Text)
       {- ^ (Required) Behaviour of the autoscaler. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed HorizontalPodAutoscalerResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_horizontal_pod_autoscaler"
@@ -94,9 +88,6 @@ data LimitRangeResource = LimitRangeResource
       {- ^ (Optional) Spec defines the limits enforced. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed LimitRangeResource
-    = '[]
-
 $(TH.makeResource
     "kubernetes_limit_range"
     ''Qual.Kubernetes
@@ -112,9 +103,6 @@ data NamespaceResource = NamespaceResource
     { _metadata :: !(Attr Text)
       {- ^ (Required) Standard namespace's <https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata> . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed NamespaceResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_namespace"
@@ -134,9 +122,6 @@ data PersistentVolumeClaimResource = PersistentVolumeClaimResource
     , _wait_until_bound :: !(Attr Text)
       {- ^ (Optional) Whether to wait for the claim to reach @Bound@ state (to find volume in which to claim the space) -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PersistentVolumeClaimResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_persistent_volume_claim"
@@ -158,9 +143,6 @@ data PersistentVolumeResource = PersistentVolumeResource
       {- ^ (Required) Spec of the persistent volume owned by the cluster. See below. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed PersistentVolumeResource
-    = '[]
-
 $(TH.makeResource
     "kubernetes_persistent_volume"
     ''Qual.Kubernetes
@@ -179,9 +161,6 @@ data PodResource = PodResource
     , _spec :: !(Attr Text)
       {- ^ (Required) Spec of the pod owned by the cluster -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PodResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_pod"
@@ -203,9 +182,6 @@ data ReplicationControllerResource = ReplicationControllerResource
       {- ^ (Required) Spec defines the specification of the desired behavior of the replication controller. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ReplicationControllerResource
-    = '[]
-
 $(TH.makeResource
     "kubernetes_replication_controller"
     ''Qual.Kubernetes
@@ -224,9 +200,6 @@ data ResourceQuotaResource = ResourceQuotaResource
     , _spec :: !(Attr Text)
       {- ^ (Optional) Spec defines the desired quota. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ResourceQuotaResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_resource_quota"
@@ -255,9 +228,6 @@ data SecretResource = SecretResource
       {- ^ (Optional) The secret type. Defaults to @Opaque@ . More info: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/secrets.md#proposed-design -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SecretResource
-    = '[]
-
 $(TH.makeResource
     "kubernetes_secret"
     ''Qual.Kubernetes
@@ -277,9 +247,6 @@ data ServiceAccountResource = ServiceAccountResource
       {- ^ (Optional) A list of secrets allowed to be used by pods running using this Service Account. More info: http://kubernetes.io/docs/user-guide/secrets -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ServiceAccountResource
-    = '[]
-
 $(TH.makeResource
     "kubernetes_service_account"
     ''Qual.Kubernetes
@@ -296,9 +263,6 @@ data ServiceResource = ServiceResource
     , _spec :: !(Attr Text)
       {- ^ (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ServiceResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_service"
@@ -320,9 +284,6 @@ data StorageClassResource = StorageClassResource
     , _storage_provisioner :: !(Attr Text)
       {- ^ (Required) Indicates the type of the provisioner -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed StorageClassResource
-    = '[]
 
 $(TH.makeResource
     "kubernetes_storage_class"

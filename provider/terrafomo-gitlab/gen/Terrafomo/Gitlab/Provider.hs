@@ -14,12 +14,14 @@
 --
 module Terrafomo.Gitlab.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Gitlab.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Gitlab.Types as Qual
 
 {- | Gitlab Terraform provider.
 
@@ -33,6 +35,11 @@ data Gitlab = Gitlab
     , _insecure :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Gitlab
+
+instance Qual.ToValue Gitlab where
+    toValue = Qual.genericToValue
 
 {- | (Optional) This is the target GitLab base API endpoint. Providing a value is
 a requirement when working with GitLab CE or GitLab Enterprise e.g.

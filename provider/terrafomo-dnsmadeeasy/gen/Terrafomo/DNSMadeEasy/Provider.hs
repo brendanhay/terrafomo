@@ -14,12 +14,14 @@
 --
 module Terrafomo.DNSMadeEasy.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.DNSMadeEasy.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.DNSMadeEasy.Types as Qual
 
 {- | DNSMadeEasy Terraform provider.
 
@@ -33,6 +35,11 @@ data DNSMadeEasy = DNSMadeEasy
     , _skey :: !Text
     , _usesandbox :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable DNSMadeEasy
+
+instance Qual.ToValue DNSMadeEasy where
+    toValue = Qual.genericToValue
 
 {- | (Required) The DNSMadeEasy API key. This can also be specified with the
 @DME_AKEY@ shell environment variable.

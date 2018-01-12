@@ -55,9 +55,9 @@ data RecordResource = RecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RecordResource
-    = '[ '("fqdn", Attr Text)
+    = '[ '("fqdn", Text)
          {- - The FQDN of the record, built from the @name@ and the @zone@ . -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID. -}
        ]
 

@@ -8,6 +8,7 @@ name: terrafomo-scaleway
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

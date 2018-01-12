@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Spotinst
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Spotinst.Types
     , module Terrafomo.Spotinst.Provider
     ) where

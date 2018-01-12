@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rancher
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Rancher.Types
     , module Terrafomo.Rancher.Provider
     ) where

@@ -53,9 +53,9 @@ data SshKeyResource = SshKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SshKeyResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - sequence of bytes to authenticate or lookup a longer SSH key. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the new SSH key -}
        ]
 
@@ -114,7 +114,7 @@ data VirtualGuestResource = VirtualGuestResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VirtualGuestResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the virtual guest. -}
        ]
 

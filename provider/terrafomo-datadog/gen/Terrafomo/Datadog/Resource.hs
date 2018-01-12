@@ -60,7 +60,7 @@ data DowntimeResource = DowntimeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DowntimeResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID of the Datadog downtime -}
        ]
 
@@ -88,9 +88,6 @@ data MetricMetadataResource = MetricMetadataResource
     , _unit :: !(Attr Text)
       {- ^ (Optional) Primary unit of the metric such as 'byte' or 'operation'. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed MetricMetadataResource
-    = '[]
 
 $(TH.makeResource
     "datadog_metric_metadata"
@@ -142,7 +139,7 @@ data MonitorResource = MonitorResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MonitorResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID of the Datadog monitor -}
        ]
 
@@ -168,9 +165,6 @@ data TimeboardResource = TimeboardResource
     , _title :: !(Attr Text)
       {- ^ (Required) The name of the dashboard. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed TimeboardResource
-    = '[]
 
 $(TH.makeResource
     "datadog_timeboard"
@@ -198,11 +192,11 @@ data UserResource = UserResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserResource
-    = '[ '("disabled", Attr Text)
+    = '[ '("disabled", Text)
          {- - Returns true if Datadog user is disabled (NOTE: Datadog does not actually delete users so this will be true for those as well) -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the Datadog user -}
-      , '("verified", Attr Text)
+      , '("verified", Text)
          {- - Returns true if Datadog user is verified -}
        ]
 

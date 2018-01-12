@@ -57,7 +57,7 @@ data LogResource = LogResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LogResource
-    = '[ '("token", Attr Text)
+    = '[ '("token", Text)
          {- - If the log @source@ is @token@ , this value holds the generated log token that is used by logging clients. See the Logentries <https://logentries.com/doc/input-token/> for more information. -}
        ]
 
@@ -77,9 +77,6 @@ data LogsetResource = LogsetResource
     , _name :: !(Attr Text)
       {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed LogsetResource
-    = '[]
 
 $(TH.makeResource
     "logentries_logset"

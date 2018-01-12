@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Consul
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Consul.Types
     , module Terrafomo.Consul.Provider
     ) where

@@ -14,12 +14,14 @@
 --
 module Terrafomo.VSphere.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.VSphere.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.VSphere.Types as Qual
 
 {- | VSphere Terraform provider.
 
@@ -40,6 +42,11 @@ data VSphere = VSphere
     , _user :: !Text
     , _vsphere_server :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable VSphere
+
+instance Qual.ToValue VSphere where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Boolean that can be set to true to disable SSL certificate
 verification. This should be used with care as it could allow an attacker to

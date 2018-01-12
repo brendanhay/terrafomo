@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VCloudDirector
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.VCloudDirector.Types
     , module Terrafomo.VCloudDirector.Provider
     ) where

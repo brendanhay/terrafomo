@@ -14,12 +14,14 @@
 --
 module Terrafomo.AliCloud.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.AliCloud.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.AliCloud.Types as Qual
 
 {- | AliCloud Terraform provider.
 
@@ -33,6 +35,11 @@ data AliCloud = AliCloud
     , _region :: !Text
     , _secret_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable AliCloud
+
+instance Qual.ToValue AliCloud where
+    toValue = Qual.genericToValue
 
 {- | (Optional) This is the Alicloud access key. It must be provided, but it can
 also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable.

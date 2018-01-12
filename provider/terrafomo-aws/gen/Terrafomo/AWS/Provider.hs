@@ -14,12 +14,14 @@
 --
 module Terrafomo.AWS.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.AWS.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.AWS.Types as Qual
 
 {- | AWS Terraform provider.
 
@@ -47,6 +49,11 @@ data AWS = AWS
     , _skip_requesting_account_id :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable AWS
+
+instance Qual.ToValue AWS where
+    toValue = Qual.genericToValue
 
 {- | (Optional) This is the AWS access key. It must be provided, but it can also
 be sourced from the @AWS_ACCESS_KEY_ID@ environment variable, or via a

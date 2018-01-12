@@ -8,6 +8,7 @@ name: terrafomo-opc
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

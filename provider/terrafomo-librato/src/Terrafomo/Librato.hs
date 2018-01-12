@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Librato
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Librato.Types
     , module Terrafomo.Librato.Provider
     ) where

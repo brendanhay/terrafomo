@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Docker
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Docker.Types
     , module Terrafomo.Docker.Provider
     ) where

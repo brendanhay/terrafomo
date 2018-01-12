@@ -14,12 +14,14 @@
 --
 module Terrafomo.PowerDNS.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.PowerDNS.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.PowerDNS.Types as Qual
 
 {- | PowerDNS Terraform provider.
 
@@ -35,6 +37,11 @@ data PowerDNS = PowerDNS
     { _api_key :: !Text
     , _server_url :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable PowerDNS
+
+instance Qual.ToValue PowerDNS where
+    toValue = Qual.genericToValue
 
 {- | (Required) The PowerDNS API key. This can also be specified with
 @PDNS_API_KEY@ environment variable.

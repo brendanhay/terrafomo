@@ -82,7 +82,7 @@ data JobResource = JobResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed JobResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A unique identifier for the job. -}
        ]
 
@@ -103,9 +103,6 @@ data PrivateKeyResource = PrivateKeyResource
     , _path :: !(Attr Text)
       {- ^ (Required) The path within the key store where the key will be stored. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PrivateKeyResource
-    = '[]
 
 $(TH.makeResource
     "rundeck_private_key"
@@ -140,9 +137,9 @@ data ProjectResource = ProjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - The unique name that identifies the project, as set in the arguments. -}
-      , '("ui_url", Attr Text)
+      , '("ui_url", Text)
          {- - The URL of the index page for this project in the Rundeck UI. -}
        ]
 
@@ -169,9 +166,9 @@ data PublicKeyResource = PublicKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PublicKeyResource
-    = '[ '("key_material", Attr Text)
+    = '[ '("key_material", Text)
          {- - If @key_material@ is omitted in the configuration, it becomes an attribute that exposes the key material already stored at the given @path@ . -}
-      , '("url", Attr Text)
+      , '("url", Text)
          {- - The URL at which the key material can be retrieved from the key store by other clients. -}
        ]
 

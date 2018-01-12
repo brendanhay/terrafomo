@@ -14,12 +14,14 @@
 --
 module Terrafomo.Packet.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Packet.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Packet.Types as Qual
 
 {- | Packet Terraform provider.
 
@@ -31,6 +33,11 @@ available resources.
 data Packet = Packet
     { _auth_token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Packet
+
+instance Qual.ToValue Packet where
+    toValue = Qual.genericToValue
 
 {- | (Required) This is your Packet API Auth token. This can also be specified
 with the @PACKET_AUTH_TOKEN@ shell environment variable.

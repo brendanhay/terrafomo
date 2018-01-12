@@ -8,6 +8,7 @@ name: terrafomo-ovh
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

@@ -14,12 +14,14 @@
 --
 module Terrafomo.Icinga2.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Icinga2.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Icinga2.Types as Qual
 
 {- | Icinga2 Terraform provider.
 
@@ -34,6 +36,11 @@ data Icinga2 = Icinga2
     , _api_user :: !Text
     , _insecure_skip_tls_verify :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Icinga2
+
+instance Qual.ToValue Icinga2 where
+    toValue = Qual.genericToValue
 
 {- | (Required) The password to use to authenticate to the Icinga2 server. May
 alternatively be set via the @ICINGA2_API_PASSWORD@ environment variable.

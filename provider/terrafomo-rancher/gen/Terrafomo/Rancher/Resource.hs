@@ -58,27 +58,27 @@ data CertificateResource = CertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CertificateResource
-    = '[ '("algorithm", Attr Text)
+    = '[ '("algorithm", Text)
          {- - The certificate algorithm. -}
-      , '("cert_fingerprint", Attr Text)
+      , '("cert_fingerprint", Text)
          {- - The certificate fingerprint. -}
-      , '("cn", Attr Text)
+      , '("cn", Text)
          {- - The certificate CN. -}
-      , '("expires_at", Attr Text)
+      , '("expires_at", Text)
          {- - The certificate expiration date. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - (Computed) The ID of the resource. -}
-      , '("issued_at", Attr Text)
+      , '("issued_at", Text)
          {- - The certificate creation date. -}
-      , '("issuer", Attr Text)
+      , '("issuer", Text)
          {- - The certificate issuer. -}
-      , '("key_size", Attr Text)
+      , '("key_size", Text)
          {- - The certificate key size. -}
-      , '("serial_number", Attr Text)
+      , '("serial_number", Text)
          {- - The certificate serial number. -}
-      , '("subject_alternative_names", Attr Text)
+      , '("subject_alternative_names", Text)
          {- - The list of certificate Subject Alternative Names. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - The certificate version. -}
        ]
 
@@ -106,15 +106,15 @@ data EnvironmentResource = EnvironmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EnvironmentResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The environment description. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the resource. -}
-      , '("member", Attr Text)
+      , '("member", Text)
          {- - The environment members. -}
-      , '("orchestration", Attr Text)
+      , '("orchestration", Text)
          {- - The environment orchestration engine. -}
-      , '("project_template_id", Attr Text)
+      , '("project_template_id", Text)
          {- - The environment project template ID. -}
        ]
 
@@ -143,9 +143,6 @@ data HostResource = HostResource
       {- ^ (Required) The name of the host. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed HostResource
-    = '[]
-
 $(TH.makeResource
     "rancher_host"
     ''Qual.Rancher
@@ -170,15 +167,15 @@ data RegistrationTokenResource = RegistrationTokenResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegistrationTokenResource
-    = '[ '("command", Attr Text)
+    = '[ '("command", Text)
          {- - The command used to start a rancher agent for this environment. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - (Computed) The ID of the resource. -}
-      , '("image", Attr Text)
+      , '("image", Text)
          {- - (Computed) -}
-      , '("registration_url", Attr Text)
+      , '("registration_url", Text)
          {- - The URL to use to register new nodes to the environment. -}
-      , '("token", Attr Text)
+      , '("token", Text)
          {- - The token to use to register new nodes to the environment. -}
        ]
 
@@ -209,7 +206,7 @@ data RegistryCredentialResource = RegistryCredentialResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegistryCredentialResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - (Computed) The ID of the resource. -}
        ]
 
@@ -235,7 +232,7 @@ data RegistryResource = RegistryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegistryResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - (Computed) The ID of the resource. -}
        ]
 
@@ -259,9 +256,6 @@ data SecretsResource = SecretsResource
     , _value :: !(Attr Text)
       {- ^ (Required) The secret value. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SecretsResource
-    = '[]
 
 $(TH.makeResource
     "rancher_secrets"
@@ -297,11 +291,11 @@ data StackResource = StackResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StackResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - (Computed) The ID of the resource. -}
-      , '("rendered_docker_compose", Attr Text)
+      , '("rendered_docker_compose", Text)
          {- - The interpolated @docker_compose@ applied to the stack. -}
-      , '("rendered_rancher_compose", Attr Text)
+      , '("rendered_rancher_compose", Text)
          {- - The interpolated @rancher_compose@ applied to the stack. -}
        ]
 

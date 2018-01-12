@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Heroku
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Heroku.Types
     , module Terrafomo.Heroku.Provider
     ) where

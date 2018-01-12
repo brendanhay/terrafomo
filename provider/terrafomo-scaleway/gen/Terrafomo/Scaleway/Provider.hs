@@ -14,12 +14,14 @@
 --
 module Terrafomo.Scaleway.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Scaleway.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Scaleway.Types as Qual
 
 {- | Scaleway Terraform provider.
 
@@ -27,3 +29,8 @@ The Scaleway provider is used to manage Scaleway resources. Use the
 navigation to the left to read about the available resources.
 -}
 data Scaleway = Scaleway
+
+instance Hashable Scaleway
+
+instance Qual.ToValue Scaleway where
+    toValue = Qual.genericToValue

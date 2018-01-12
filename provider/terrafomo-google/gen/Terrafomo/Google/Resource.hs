@@ -61,13 +61,13 @@ data BigqueryDatasetResource = BigqueryDatasetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BigqueryDatasetResource
-    = '[ '("creation_time", Attr Text)
+    = '[ '("creation_time", Text)
          {- - The time when this dataset was created, in milliseconds since the epoch. -}
-      , '("etag", Attr Text)
+      , '("etag", Text)
          {- - A hash of the resource. -}
-      , '("last_modified_time", Attr Text)
+      , '("last_modified_time", Text)
          {- -  The date when this dataset or any of its tables was last modified, in milliseconds since the epoch. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -104,23 +104,23 @@ data BigqueryTableResource = BigqueryTableResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BigqueryTableResource
-    = '[ '("creation_time", Attr Text)
+    = '[ '("creation_time", Text)
          {- - The time when this table was created, in milliseconds since the epoch. -}
-      , '("etag", Attr Text)
+      , '("etag", Text)
          {- - A hash of the resource. -}
-      , '("last_modified_time", Attr Text)
+      , '("last_modified_time", Text)
          {- - The time when this table was last modified, in milliseconds since the epoch. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - The geographic location where the table resides. This value is inherited from the dataset. -}
-      , '("num_bytes", Attr Text)
+      , '("num_bytes", Text)
          {- - The size of this table in bytes, excluding any data in the streaming buffer. -}
-      , '("num_long_term_bytes", Attr Text)
+      , '("num_long_term_bytes", Text)
          {- - The number of bytes in the table that are considered "long-term storage". -}
-      , '("num_rows", Attr Text)
+      , '("num_rows", Text)
          {- - The number of rows of data in this table, excluding any data in the streaming buffer. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - Describes the table type. -}
        ]
 
@@ -154,9 +154,6 @@ data BigtableInstanceResource = BigtableInstanceResource
       {- ^ (Required) The zone to create the Bigtable instance in. Zones that support Bigtable instances are noted on the <https://cloud.google.com/about/locations/> . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed BigtableInstanceResource
-    = '[]
-
 $(TH.makeResource
     "google_bigtable_instance"
     ''Qual.Google
@@ -178,9 +175,6 @@ data BigtableTableResource = BigtableTableResource
     , _split_keys :: !(Attr Text)
       {- ^ (Optional) A list of predefined keys to split the table on. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed BigtableTableResource
-    = '[]
 
 $(TH.makeResource
     "google_bigtable_table"
@@ -204,9 +198,9 @@ data ComputeAddressResource = ComputeAddressResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeAddressResource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The IP of the created resource. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -242,7 +236,7 @@ data ComputeAutoscalerResource = ComputeAutoscalerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeAutoscalerResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URL of the created resource. -}
        ]
 
@@ -273,7 +267,7 @@ data ComputeBackendBucketResource = ComputeBackendBucketResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeBackendBucketResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -320,9 +314,9 @@ data ComputeBackendServiceResource = ComputeBackendServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeBackendServiceResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The fingerprint of the backend service. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -362,13 +356,13 @@ data ComputeDiskResource = ComputeDiskResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeDiskResource
-    = '[ '("disk_encryption_key_sha256", Attr Text)
+    = '[ '("disk_encryption_key_sha256", Text)
          {- - The [RFC 4648 base64] (https://tools.ietf.org/html/rfc4648#section-4) encoded SHA-256 hash of the <https://cloud.google.com/compute/docs/disks/customer-supplied-encryption> that protects this resource. -}
-      , '("label_fingerprint", Attr Text)
+      , '("label_fingerprint", Text)
          {- - The fingerprint of the assigned labels. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("users", Attr Text)
+      , '("users", Text)
          {- - The Users of the created resource. -}
        ]
 
@@ -411,7 +405,7 @@ data ComputeFirewallResource = ComputeFirewallResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeFirewallResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -458,7 +452,7 @@ data ComputeForwardingRuleResource = ComputeForwardingRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeForwardingRuleResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -484,9 +478,9 @@ data ComputeGlobalAddressResource = ComputeGlobalAddressResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeGlobalAddressResource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The assigned address. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -526,9 +520,9 @@ data ComputeGlobalForwardingRuleResource = ComputeGlobalForwardingRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeGlobalForwardingRuleResource
-    = '[ '("label_fingerprint", Attr Text)
+    = '[ '("label_fingerprint", Text)
          {- - ( </docs/providers/google/index.html#beta-features> ) The current label fingerprint. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -571,7 +565,7 @@ data ComputeHealthCheckResource = ComputeHealthCheckResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeHealthCheckResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -618,7 +612,7 @@ data ComputeHttpHealthCheckResource = ComputeHttpHealthCheckResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeHttpHealthCheckResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -665,7 +659,7 @@ data ComputeHttpsHealthCheckResource = ComputeHttpsHealthCheckResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeHttpsHealthCheckResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URL of the created resource. -}
        ]
 
@@ -693,9 +687,9 @@ data ComputeImageResource = ComputeImageResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeImageResource
-    = '[ '("label_fingerprint", Attr Text)
+    = '[ '("label_fingerprint", Text)
          {- - The fingerprint of the assigned labels. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -741,11 +735,11 @@ data ComputeInstanceGroupManagerResource = ComputeInstanceGroupManagerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeInstanceGroupManagerResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The fingerprint of the instance group manager. -}
-      , '("instance_group", Attr Text)
+      , '("instance_group", Text)
          {- - The full URL of the instance group created by the manager. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URL of the created resource. -}
        ]
 
@@ -780,9 +774,9 @@ data ComputeInstanceGroupResource = ComputeInstanceGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeInstanceGroupResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The number of instances in the group. -}
        ]
 
@@ -835,27 +829,27 @@ data ComputeInstanceResource = ComputeInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeInstanceResource
-    = '[ '("attached_disk.0.disk_encryption_key_sha256", Attr Text)
+    = '[ '("attached_disk.0.disk_encryption_key_sha256", Text)
          {- - The <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256 hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption) that protects this resource. -}
-      , '("boot_disk.disk_encryption_key_sha256", Attr Text)
+      , '("boot_disk.disk_encryption_key_sha256", Text)
          {- - The <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256 hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption) that protects this resource. -}
-      , '("cpu_platform", Attr Text)
+      , '("cpu_platform", Text)
          {- - The CPU platform used by this instance. -}
-      , '("disk.0.disk_encryption_key_sha256", Attr Text)
+      , '("disk.0.disk_encryption_key_sha256", Text)
          {- - The <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256 hash of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption) that protects this resource. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - The server-assigned unique identifier of this instance. -}
-      , '("label_fingerprint", Attr Text)
+      , '("label_fingerprint", Text)
          {- - The unique fingerprint of the labels. -}
-      , '("metadata_fingerprint", Attr Text)
+      , '("metadata_fingerprint", Text)
          {- - The unique fingerprint of the metadata. -}
-      , '("network_interface.0.access_config.0.assigned_nat_ip", Attr Text)
+      , '("network_interface.0.access_config.0.assigned_nat_ip", Text)
          {- - If the instance has an access config, either the given external ip (in the @nat_ip@ field) or the ephemeral (generated) ip (if you didn't provide one). -}
-      , '("network_interface.0.address", Attr Text)
+      , '("network_interface.0.address", Text)
          {- - The internal ip address of the instance, either manually or dynamically assigned. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("tags_fingerprint", Attr Text)
+      , '("tags_fingerprint", Text)
          {- - The unique fingerprint of the tags. -}
        ]
 
@@ -906,11 +900,11 @@ data ComputeInstanceTemplateResource = ComputeInstanceTemplateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeInstanceTemplateResource
-    = '[ '("metadata_fingerprint", Attr Text)
+    = '[ '("metadata_fingerprint", Text)
          {- - The unique fingerprint of the metadata. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("tags_fingerprint", Attr Text)
+      , '("tags_fingerprint", Text)
          {- - The unique fingerprint of the tags. -}
        ]
 
@@ -940,9 +934,9 @@ data ComputeNetworkPeeringResource = ComputeNetworkPeeringResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeNetworkPeeringResource
-    = '[ '("state", Attr Text)
+    = '[ '("state", Text)
          {- - State for the peering. -}
-      , '("state_details", Attr Text)
+      , '("state_details", Text)
          {- - Details about the current state of the peering. -}
        ]
 
@@ -969,11 +963,11 @@ data ComputeNetworkResource = ComputeNetworkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeNetworkResource
-    = '[ '("gateway_ipv4", Attr Text)
+    = '[ '("gateway_ipv4", Text)
          {- - The IPv4 address of the gateway. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The unique name of the network. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -998,9 +992,6 @@ data ComputeProjectMetadataItemResource = ComputeProjectMetadataItemResource
       {- ^ (Required) The value to set for the given metadata key. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeProjectMetadataItemResource
-    = '[]
-
 $(TH.makeResource
     "google_compute_project_metadata_item"
     ''Qual.Google
@@ -1022,9 +1013,6 @@ data ComputeProjectMetadataResource = ComputeProjectMetadataResource
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeProjectMetadataResource
-    = '[]
 
 $(TH.makeResource
     "google_compute_project_metadata"
@@ -1058,7 +1046,7 @@ data ComputeRegionAutoscalerResource = ComputeRegionAutoscalerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeRegionAutoscalerResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URL of the created resource. -}
        ]
 
@@ -1098,9 +1086,9 @@ data ComputeRegionBackendServiceResource = ComputeRegionBackendServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeRegionBackendServiceResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The fingerprint of the backend service. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1144,11 +1132,11 @@ data ComputeRegionInstanceGroupManagerResource = ComputeRegionInstanceGroupManag
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeRegionInstanceGroupManagerResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The fingerprint of the instance group manager. -}
-      , '("instance_group", Attr Text)
+      , '("instance_group", Text)
          {- - The full URL of the instance group created by the manager. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URL of the created resource. -}
        ]
 
@@ -1189,9 +1177,9 @@ data ComputeRouteResource = ComputeRouteResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeRouteResource
-    = '[ '("next_hop_network", Attr Text)
+    = '[ '("next_hop_network", Text)
          {- - The name of the next hop network, if available. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1221,9 +1209,6 @@ data ComputeRouterInterfaceResource = ComputeRouterInterfaceResource
       {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeRouterInterfaceResource
-    = '[]
-
 $(TH.makeResource
     "google_compute_router_interface"
     ''Qual.Google
@@ -1251,7 +1236,7 @@ data ComputeRouterResource = ComputeRouterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeRouterResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1274,9 +1259,6 @@ data ComputeSharedVpcHostProjectResource = ComputeSharedVpcHostProjectResource
       {- ^ (Required) The service project ID. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeSharedVpcHostProjectResource
-    = '[]
-
 $(TH.makeResource
     "google_compute_shared_vpc_host_project"
     ''Qual.Google
@@ -1293,9 +1275,6 @@ data ComputeSharedVpcServiceProjectResource = ComputeSharedVpcServiceProjectReso
     { _project :: !(Attr Text)
       {- ^ (Required) The host project ID. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeSharedVpcServiceProjectResource
-    = '[]
 
 $(TH.makeResource
     "google_compute_shared_vpc_service_project"
@@ -1326,15 +1305,15 @@ data ComputeSnapshotResource = ComputeSnapshotResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeSnapshotResource
-    = '[ '("label_fingerprint", Attr Text)
+    = '[ '("label_fingerprint", Text)
          {- - The unique fingerprint of the labels. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("snapshot_encryption_key_sha256", Attr Text)
+      , '("snapshot_encryption_key_sha256", Text)
          {- - The [RFC 4648 base64] (https://tools.ietf.org/html/rfc4648#section-4) encoded SHA-256 hash of the <https://cloud.google.com/compute/docs/disks/customer-supplied-encryption> that protects this resource. -}
-      , '("source_disk_encryption_key_sha256", Attr Text)
+      , '("source_disk_encryption_key_sha256", Text)
          {- - The [RFC 4648 base64] (https://tools.ietf.org/html/rfc4648#section-4) encoded SHA-256 hash of the <https://cloud.google.com/compute/docs/disks/customer-supplied-encryption> that protects the source disk. -}
-      , '("source_disk_link", Attr Text)
+      , '("source_disk_link", Text)
          {- - The URI of the source disk. -}
        ]
 
@@ -1367,9 +1346,9 @@ data ComputeSslCertificateResource = ComputeSslCertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeSslCertificateResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A unique ID for the certificated, assigned by GCE. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1404,9 +1383,9 @@ data ComputeSubnetworkResource = ComputeSubnetworkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeSubnetworkResource
-    = '[ '("gateway_address", Attr Text)
+    = '[ '("gateway_address", Text)
          {- - The IP address of the gateway. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1434,9 +1413,9 @@ data ComputeTargetHttpProxyResource = ComputeTargetHttpProxyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeTargetHttpProxyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A unique ID assigned by GCE. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1467,9 +1446,9 @@ data ComputeTargetHttpsProxyResource = ComputeTargetHttpsProxyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeTargetHttpsProxyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A unique ID assigned by GCE. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1508,7 +1487,7 @@ data ComputeTargetPoolResource = ComputeTargetPoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeTargetPoolResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1539,9 +1518,9 @@ data ComputeTargetSslProxyResource = ComputeTargetSslProxyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeTargetSslProxyResource
-    = '[ '("proxy_id", Attr Text)
+    = '[ '("proxy_id", Text)
          {- - A unique ID assigned by GCE. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1570,9 +1549,9 @@ data ComputeTargetTcpProxyResource = ComputeTargetTcpProxyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeTargetTcpProxyResource
-    = '[ '("proxy_id", Attr Text)
+    = '[ '("proxy_id", Text)
          {- - A unique ID assigned by GCE. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1605,11 +1584,11 @@ data ComputeUrlMapResource = ComputeUrlMapResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeUrlMapResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The unique fingerprint for this resource. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The GCE assigned ID of the resource. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1637,7 +1616,7 @@ data ComputeVpnGatewayResource = ComputeVpnGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeVpnGatewayResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1679,9 +1658,9 @@ data ComputeVpnTunnelResource = ComputeVpnTunnelResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeVpnTunnelResource
-    = '[ '("detailed_status", Attr Text)
+    = '[ '("detailed_status", Text)
          {- - Information about the status of the VPN tunnel. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -1738,17 +1717,17 @@ data ContainerClusterResource = ContainerClusterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ContainerClusterResource
-    = '[ '("endpoint", Attr Text)
+    = '[ '("endpoint", Text)
          {- - The IP address of this cluster's Kubernetes master. -}
-      , '("instance_group_urls", Attr Text)
+      , '("instance_group_urls", Text)
          {- - List of instance group URLs which have been assigned to the cluster. -}
-      , '("master_auth.client_certificate", Attr Text)
+      , '("master_auth.client_certificate", Text)
          {- - Base64 encoded public certificate used by clients to authenticate to the cluster endpoint. -}
-      , '("master_auth.client_key", Attr Text)
+      , '("master_auth.client_key", Text)
          {- - Base64 encoded private key used by clients to authenticate to the cluster endpoint. -}
-      , '("master_auth.cluster_ca_certificate", Attr Text)
+      , '("master_auth.cluster_ca_certificate", Text)
          {- - Base64 encoded public certificate that is the root of trust for the cluster. -}
-      , '("master_version", Attr Text)
+      , '("master_version", Text)
          {- - The current version of the master in the cluster. This may be different than the @min_master_version@ set in the config if the master has been updated by GKE. -}
        ]
 
@@ -1785,9 +1764,6 @@ data ContainerNodePoolResource = ContainerNodePoolResource
       {- ^ (Required) The zone in which the cluster resides. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ContainerNodePoolResource
-    = '[]
-
 $(TH.makeResource
     "google_container_node_pool"
     ''Qual.Google
@@ -1811,11 +1787,11 @@ data DnsManagedZoneResource = DnsManagedZoneResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsManagedZoneResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - A textual description field. -}
-      , '("dns_name", Attr Text)
+      , '("dns_name", Text)
          {- - The DNS name of this zone, e.g. "terraform.io". -}
-      , '("name_servers", Attr Text)
+      , '("name_servers", Text)
          {- - The list of nameservers that will be authoritative for this domain. Use NS records to redirect from your DNS provider to these names, thus making Google Cloud DNS authoritative for this zone. -}
        ]
 
@@ -1843,9 +1819,6 @@ data DnsRecordSetResource = DnsRecordSetResource
       {- ^ (Required) The DNS record set type. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DnsRecordSetResource
-    = '[]
-
 $(TH.makeResource
     "google_dns_record_set"
     ''Qual.Google
@@ -1864,7 +1837,7 @@ data FolderIamPolicyResource = FolderIamPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FolderIamPolicyResource
-    = '[ '("etag", Attr Text)
+    = '[ '("etag", Text)
          {- - (Computed) The etag of the folder's IAM policy. @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. -}
        ]
 
@@ -1900,11 +1873,11 @@ data FolderResource = FolderResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FolderResource
-    = '[ '("create_time", Attr Text)
+    = '[ '("create_time", Text)
          {- - Timestamp when the Folder was created. Assigned by the server. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z". -}
-      , '("lifecycle_state", Attr Text)
+      , '("lifecycle_state", Text)
          {- - The lifecycle state of the folder such as @ACTIVE@ or @DELETE_REQUESTED@ . -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The resource name of the Folder. Its format is folders/{folder_id}. -}
        ]
 
@@ -1934,7 +1907,7 @@ data KmsKeyRingResource = KmsKeyRingResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KmsKeyRingResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the created KeyRing. Its format is @{projectId}/{location}/{keyRingName}@ . -}
        ]
 
@@ -1962,7 +1935,7 @@ data LoggingBillingAccountSinkResource = LoggingBillingAccountSinkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LoggingBillingAccountSinkResource
-    = '[ '("writer_identity", Attr Text)
+    = '[ '("writer_identity", Text)
          {- - The identity associated with this sink. This identity must be granted write access to the configured @destination@ . -}
        ]
 
@@ -1990,7 +1963,7 @@ data LoggingFolderSinkResource = LoggingFolderSinkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LoggingFolderSinkResource
-    = '[ '("writer_identity", Attr Text)
+    = '[ '("writer_identity", Text)
          {- - The identity associated with this sink. This identity must be granted write access to the configured @destination@ . -}
        ]
 
@@ -2017,7 +1990,7 @@ data LoggingProjectSinkResource = LoggingProjectSinkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LoggingProjectSinkResource
-    = '[ '("writer_identity", Attr Text)
+    = '[ '("writer_identity", Text)
          {- - The identity associated with this sink. This identity must be granted write access to the configured @destination@ . -}
        ]
 
@@ -2049,9 +2022,9 @@ data OrganizationPolicyResource = OrganizationPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OrganizationPolicyResource
-    = '[ '("etag", Attr Text)
+    = '[ '("etag", Text)
          {- - (Computed) The etag of the organization policy. @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. -}
-      , '("update_time", Attr Text)
+      , '("update_time", Text)
          {- - (Computed) The timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds, representing when the variable was last updated. Example: "2016-10-09T12:33:37.578138407Z". -}
        ]
 
@@ -2077,7 +2050,7 @@ data ProjectIamBindingResource = ProjectIamBindingResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectIamBindingResource
-    = '[ '("etag", Attr Text)
+    = '[ '("etag", Text)
          {- - (Computed) The etag of the project's IAM policy. -}
        ]
 
@@ -2105,7 +2078,7 @@ data ProjectIamMemberResource = ProjectIamMemberResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectIamMemberResource
-    = '[ '("etag", Attr Text)
+    = '[ '("etag", Text)
          {- - (Computed) The etag of the project's IAM policy. -}
        ]
 
@@ -2132,9 +2105,9 @@ data ProjectIamPolicyResource = ProjectIamPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectIamPolicyResource
-    = '[ '("etag", Attr Text)
+    = '[ '("etag", Text)
          {- - (Computed) The etag of the project's IAM policy. -}
-      , '("restore_policy", Attr Text)
+      , '("restore_policy", Text)
          {- - (DEPRECATED) (Computed) The IAM policy that will be restored when a non-authoritative policy resource is deleted. -}
        ]
 
@@ -2177,9 +2150,9 @@ data ProjectResource = ProjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectResource
-    = '[ '("number", Attr Text)
+    = '[ '("number", Text)
          {- - The numeric identifier of the project. -}
-      , '("policy_etag", Attr Text)
+      , '("policy_etag", Text)
          {- - (Deprecated) The etag of the project's IAM policy, used to determine if the IAM policy has changed. Please use @google_project_iam_policy@ 's @etag@ property instead; future versions of Terraform will remove the @policy_etag@ attribute -}
        ]
 
@@ -2202,9 +2175,6 @@ data ProjectServicesResource = ProjectServicesResource
     , _services :: !(Attr Text)
       {- ^ (Required) The list of services that are enabled. Supports update. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ProjectServicesResource
-    = '[]
 
 $(TH.makeResource
     "google_project_services"
@@ -2232,7 +2202,7 @@ data PubsubSubscriptionResource = PubsubSubscriptionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PubsubSubscriptionResource
-    = '[ '("path", Attr Text)
+    = '[ '("path", Text)
          {- - Path of the subscription in the format @projects/{project}/subscriptions/{sub}@ -}
        ]
 
@@ -2253,9 +2223,6 @@ data PubsubTopicResource = PubsubTopicResource
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PubsubTopicResource
-    = '[]
 
 $(TH.makeResource
     "google_pubsub_topic"
@@ -2278,9 +2245,6 @@ data RuntimeconfigConfigResource = RuntimeconfigConfigResource
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed RuntimeconfigConfigResource
-    = '[]
 
 $(TH.makeResource
     "google_runtimeconfig_config"
@@ -2307,7 +2271,7 @@ data RuntimeconfigVariableResource = RuntimeconfigVariableResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RuntimeconfigVariableResource
-    = '[ '("update_time", Attr Text)
+    = '[ '("update_time", Text)
          {- - (Computed) The timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds, representing when the variable was last updated. Example: "2016-10-09T12:33:37.578138407Z". -}
        ]
 
@@ -2340,21 +2304,21 @@ data ServiceAccountKeyResource = ServiceAccountKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServiceAccountKeyResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The MD5 public key fingerprint as specified in section 4 of RFC 4716. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name used for this key pair -}
-      , '("private_key", Attr Text)
+      , '("private_key", Text)
          {- - The private key, base64 encoded. This is only populated when creating a new key, and when no @pgp_key@ is provided -}
-      , '("private_key_encrypted", Attr Text)
+      , '("private_key_encrypted", Text)
          {- – The private key material, base 64 encoded and encrypted with the given @pgp_key@ . This is only populated when creating a new key and @pgp_key@ is supplied -}
-      , '("private_key_fingerprint", Attr Text)
+      , '("private_key_fingerprint", Text)
          {- - The MD5 public key fingerprint for the encrypted private key -}
-      , '("public_key", Attr Text)
+      , '("public_key", Text)
          {- - The public key, base64 encoded -}
-      , '("valid_after", Attr Text)
+      , '("valid_after", Text)
          {- - The key can be used after this timestamp. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z". -}
-      , '("valid_before", Attr Text)
+      , '("valid_before", Text)
          {- - The key can be used before this timestamp. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z". -}
        ]
 
@@ -2380,11 +2344,11 @@ data ServiceAccountResource = ServiceAccountResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServiceAccountResource
-    = '[ '("email", Attr Text)
+    = '[ '("email", Text)
          {- - The e-mail address of the service account. This value should be referenced from any @google_iam_policy@ data sources that would grant the service account privileges. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The fully-qualified name of the service account. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The unique id of the service account. -}
        ]
 
@@ -2407,7 +2371,7 @@ data SourcerepoRepositoryResource = SourcerepoRepositoryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SourcerepoRepositoryResource
-    = '[ '("size", Attr Text)
+    = '[ '("size", Text)
          {- - The size of the repository. -}
        ]
 
@@ -2439,7 +2403,7 @@ data SpannerInstanceResource = SpannerInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SpannerInstanceResource
-    = '[ '("state", Attr Text)
+    = '[ '("state", Text)
          {- - The current state of the instance. -}
        ]
 
@@ -2480,13 +2444,13 @@ data SqlDatabaseInstanceResource = SqlDatabaseInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqlDatabaseInstanceResource
-    = '[ '("ip_address.0.ip_address", Attr Text)
+    = '[ '("ip_address.0.ip_address", Text)
          {- - The IPv4 address assigned. -}
-      , '("ip_address.0.time_to_retire", Attr Text)
+      , '("ip_address.0.time_to_retire", Text)
          {- - The time this IP address will be retired, in RFC 3339 format. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("settings.version", Attr Text)
+      , '("settings.version", Text)
          {- - Used to make sure changes to the @settings@ block are atomic. -}
        ]
 
@@ -2517,7 +2481,7 @@ data SqlDatabaseResource = SqlDatabaseResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqlDatabaseResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -2548,9 +2512,6 @@ data SqlUserResource = SqlUserResource
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SqlUserResource
-    = '[]
-
 $(TH.makeResource
     "google_sql_user"
     ''Qual.Google
@@ -2574,9 +2535,6 @@ data StorageBucketAclResource = StorageBucketAclResource
       {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed StorageBucketAclResource
-    = '[]
-
 $(TH.makeResource
     "google_storage_bucket_acl"
     ''Qual.Google
@@ -2598,9 +2556,9 @@ data StorageBucketObjectResource = StorageBucketObjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageBucketObjectResource
-    = '[ '("crc32c", Attr Text)
+    = '[ '("crc32c", Text)
          {- - (Computed) Base 64 CRC32 hash of the uploaded data. -}
-      , '("md5hash", Attr Text)
+      , '("md5hash", Text)
          {- - (Computed) Base 64 MD5 hash of the uploaded data. -}
        ]
 
@@ -2640,9 +2598,9 @@ data StorageBucketResource = StorageBucketResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageBucketResource
-    = '[ '("self_link", Attr Text)
+    = '[ '("self_link", Text)
          {- - The URI of the created resource. -}
-      , '("url", Attr Text)
+      , '("url", Text)
          {- - The base URL of the bucket, in the format @gs://<bucket-name>@ . -}
        ]
 
@@ -2666,9 +2624,6 @@ data StorageObjectAclResource = StorageObjectAclResource
     , _role_entity :: !(Attr Text)
       {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed StorageObjectAclResource
-    = '[]
 
 $(TH.makeResource
     "google_storage_object_acl"

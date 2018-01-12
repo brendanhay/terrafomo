@@ -14,12 +14,14 @@
 --
 module Terrafomo.DigitalOcean.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.DigitalOcean.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.DigitalOcean.Types as Qual
 
 {- | DigitalOcean Terraform provider.
 
@@ -31,6 +33,11 @@ read about the available resources.
 data DigitalOcean = DigitalOcean
     { _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable DigitalOcean
+
+instance Qual.ToValue DigitalOcean where
+    toValue = Qual.genericToValue
 
 {- | (Required) This is the DO API token. This can also be specified with the
 @DIGITALOCEAN_TOKEN@ shell environment variable.

@@ -70,41 +70,41 @@ data DeviceResource = DeviceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DeviceResource
-    = '[ '("access_private_ipv4", Attr Text)
+    = '[ '("access_private_ipv4", Text)
          {- - The ipv4 private IP assigned to the device -}
-      , '("access_public_ipv4", Attr Text)
+      , '("access_public_ipv4", Text)
          {- - The ipv4 maintenance IP assigned to the device -}
-      , '("access_public_ipv6", Attr Text)
+      , '("access_public_ipv6", Text)
          {- - The ipv6 maintenance IP assigned to the device -}
-      , '("billing_cycle", Attr Text)
+      , '("billing_cycle", Text)
          {- - The billing cycle of the device (monthly or hourly) -}
-      , '("created", Attr Text)
+      , '("created", Text)
          {- - The timestamp for when the device was created -}
-      , '("facility", Attr Text)
+      , '("facility", Text)
          {- - The facility the device is in -}
-      , '("hardware_reservation_id", Attr Text)
+      , '("hardware_reservation_id", Text)
          {- - The id of hardware reservation which this device occupies -}
-      , '("hostname", Attr Text)
+      , '("hostname", Text)
          {- - The hostname of the device -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the device -}
-      , '("locked", Attr Text)
+      , '("locked", Text)
          {- - Whether the device is locked -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - The device's private and public IP (v4 and v6) network details -}
-      , '("operating_system", Attr Text)
+      , '("operating_system", Text)
          {- - The operating system running on the device -}
-      , '("plan", Attr Text)
+      , '("plan", Text)
          {- - The hardware config of the device -}
-      , '("project_id", Attr Text)
+      , '("project_id", Text)
          {- - The ID of the project the device belongs to -}
-      , '("root_password", Attr Text)
+      , '("root_password", Text)
          {- - Root password to the server (disabled after 24 hours) -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The status of the device -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Tags attached to the device -}
-      , '("updated", Attr Text)
+      , '("updated", Text)
          {- - The timestamp for the last time the device was updated -}
        ]
 
@@ -134,23 +134,23 @@ data IpAttachmentResource = IpAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IpAttachmentResource
-    = '[ '("address_family", Attr Text)
+    = '[ '("address_family", Text)
          {- - Address family as integer (4 or 6) -}
-      , '("cidr", Attr Text)
+      , '("cidr", Text)
          {- - length of CIDR prefix of the subnet as integer -}
-      , '("cidr_notation", Attr Text)
+      , '("cidr_notation", Text)
          {- - Assigned subnet in CIDR notation, e.g. "147.229.15.30/31" -}
-      , '("device_id", Attr Text)
+      , '("device_id", Text)
          {- - ID of device to which subnet is assigned -}
-      , '("gateway", Attr Text)
+      , '("gateway", Text)
          {- - IP address of gateway for the subnet -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID of the assignment -}
-      , '("netmask", Attr Text)
+      , '("netmask", Text)
          {- - Subnet mask in decimal notation, e.g. "255.255.255.0" -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - Subnet network address -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - boolean flag whether subnet is reachable from the Internet -}
        ]
 
@@ -172,13 +172,13 @@ data ProjectResource = ProjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectResource
-    = '[ '("created", Attr Text)
+    = '[ '("created", Text)
          {- - The timestamp for when the Project was created -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID of the project -}
-      , '("payment_method", Attr Text)
+      , '("payment_method", Text)
          {- - The unique ID of the payment method on file to use for services created in this project. -}
-      , '("updated", Attr Text)
+      , '("updated", Text)
          {- - The timestamp for the last time the Project was updated -}
        ]
 
@@ -211,25 +211,25 @@ data ReservedIpBlockResource = ReservedIpBlockResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ReservedIpBlockResource
-    = '[ '("address_family", Attr Text)
+    = '[ '("address_family", Text)
          {- - Address family as integer (4 or 6) -}
-      , '("cidr", Attr Text)
+      , '("cidr", Text)
          {- - length of CIDR prefix of the block as integer -}
-      , '("cidr_notation", Attr Text)
+      , '("cidr_notation", Text)
          {- - Address and mask in CIDR notation, e.g. "147.229.15.30/31" -}
-      , '("facility", Attr Text)
+      , '("facility", Text)
          {- - The facility where the addresses are -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID of the block -}
-      , '("netmask", Attr Text)
+      , '("netmask", Text)
          {- - Mask in decimal notation, e.g. "255.255.255.0" -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - Network IP address portion of the block specification -}
-      , '("project_id", Attr Text)
+      , '("project_id", Text)
          {- - To which project the addresses beling -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - boolean flag whether addresses from a block are public -}
-      , '("quantity", Attr Text)
+      , '("quantity", Text)
          {- - Number of /32 addresses in the block -}
        ]
 
@@ -252,17 +252,17 @@ data SshKeyResource = SshKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SshKeyResource
-    = '[ '("created", Attr Text)
+    = '[ '("created", Text)
          {- - The timestamp for when the SSH key was created -}
-      , '("fingerprint", Attr Text)
+      , '("fingerprint", Text)
          {- - The fingerprint of the SSH key -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID of the key -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the SSH key -}
-      , '("public_key", Attr Text)
+      , '("public_key", Text)
          {- - The text of the public key -}
-      , '("updated", Attr Text)
+      , '("updated", Text)
          {- - The timestamp for the last time the SSH key was updated -}
        ]
 
@@ -286,7 +286,7 @@ data VolumeAttachmentResource = VolumeAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeAttachmentResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique ID of the volume attachment -}
        ]
 
@@ -320,31 +320,31 @@ data VolumeResource = VolumeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeResource
-    = '[ '("attachments", Attr Text)
+    = '[ '("attachments", Text)
          {- - A list of attachments, each with it's own @href@ attribute -}
-      , '("billing_cycle", Attr Text)
+      , '("billing_cycle", Text)
          {- - The billing cycle, defaults to hourly -}
-      , '("created", Attr Text)
+      , '("created", Text)
          {- - The timestamp for when the volume was created -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the volume -}
-      , '("facility", Attr Text)
+      , '("facility", Text)
          {- - The facility slug the volume resides in -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID of the volume -}
-      , '("locked", Attr Text)
+      , '("locked", Text)
          {- - Whether the volume is locked or not -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the volume -}
-      , '("plan", Attr Text)
+      , '("plan", Text)
          {- - Performance plan the volume is on -}
-      , '("project_id", Attr Text)
+      , '("project_id", Text)
          {- - The project id the volume is in -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The size in GB of the volume -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The state of the volume -}
-      , '("updated", Attr Text)
+      , '("updated", Text)
          {- - The timestamp for the last time the volume was updated -}
        ]
 

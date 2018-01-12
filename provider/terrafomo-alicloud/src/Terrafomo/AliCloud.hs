@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AliCloud
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.AliCloud.Types
     , module Terrafomo.AliCloud.Provider
     ) where

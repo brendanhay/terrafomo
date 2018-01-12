@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VSphere
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.VSphere.Types
     , module Terrafomo.VSphere.Provider
     ) where

@@ -50,9 +50,6 @@ data InstanceSizeResource = InstanceSizeResource
       {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed InstanceSizeResource
-    = '[]
-
 $(TH.makeResource
     "oneandone_instance_size"
     ''Qual.OneAndOne
@@ -72,9 +69,6 @@ data IpResource = IpResource
     , _reverse_dns :: !(Attr Text)
       {- ^ (Optional) -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IpResource
-    = '[]
 
 $(TH.makeResource
     "oneandone_ip"
@@ -98,9 +92,6 @@ data ServerResource = ServerResource
       {- ^ (Optional) List of servers that will have access to the stored storage -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ServerResource
-    = '[]
-
 $(TH.makeResource
     "oneandone_server"
     ''Qual.OneAndOne
@@ -122,9 +113,6 @@ data VpnResource = VpnResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the VPN -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VpnResource
-    = '[]
 
 $(TH.makeResource
     "oneandone_vpn"

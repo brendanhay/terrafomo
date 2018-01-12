@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Packet
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Packet.Types
     , module Terrafomo.Packet.Provider
     ) where

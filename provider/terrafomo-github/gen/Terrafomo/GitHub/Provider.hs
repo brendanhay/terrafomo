@@ -14,12 +14,14 @@
 --
 module Terrafomo.GitHub.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.GitHub.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.GitHub.Types as Qual
 
 {- | GitHub Terraform provider.
 
@@ -34,6 +36,11 @@ data GitHub = GitHub
     , _organization :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable GitHub
+
+instance Qual.ToValue GitHub where
+    toValue = Qual.genericToValue
 
 {- | (Optional) This is the target GitHub base API endpoint. Providing a value is
 a requirement when working with GitHub Enterprise.  It is optional to

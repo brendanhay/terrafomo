@@ -65,7 +65,7 @@ data TestResource = TestResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TestResource
-    = '[ '("test_id", Attr Text)
+    = '[ '("test_id", Text)
          {- - A unique identifier for the test. -}
        ]
 

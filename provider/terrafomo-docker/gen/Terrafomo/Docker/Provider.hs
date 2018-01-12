@@ -14,12 +14,14 @@
 --
 module Terrafomo.Docker.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Docker.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Docker.Types as Qual
 
 {- | Docker Terraform provider.
 
@@ -35,6 +37,11 @@ data Docker = Docker
     , _cert_path :: !Text
     , _host :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Docker
+
+instance Qual.ToValue Docker where
+    toValue = Qual.genericToValue
 
 {- | , @cert_material@ , @key_material@ , - (Optional) Content of @ca.pem@ ,
 @cert.pem@ , and @key.pem@ files for TLS authentication. Cannot be used

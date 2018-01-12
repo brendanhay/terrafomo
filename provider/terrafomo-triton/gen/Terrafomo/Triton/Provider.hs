@@ -14,12 +14,14 @@
 --
 module Terrafomo.Triton.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Triton.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Triton.Types as Qual
 
 {- | Triton Terraform provider.
 
@@ -36,6 +38,11 @@ data Triton = Triton
     , _key_material :: !Text
     , _url :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Triton
+
+instance Qual.ToValue Triton where
+    toValue = Qual.genericToValue
 
 {- | (Required) This is the name of the Triton account. It can also be provided
 via the @SDC_ACCOUNT@ environment variable.

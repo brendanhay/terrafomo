@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Bitbucket
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Bitbucket.Types
     , module Terrafomo.Bitbucket.Provider
     ) where

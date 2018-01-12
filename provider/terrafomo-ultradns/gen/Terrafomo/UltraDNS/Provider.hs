@@ -14,12 +14,14 @@
 --
 module Terrafomo.UltraDNS.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.UltraDNS.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.UltraDNS.Types as Qual
 
 {- | UltraDNS Terraform provider.
 
@@ -33,6 +35,11 @@ data UltraDNS = UltraDNS
     , _password :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable UltraDNS
+
+instance Qual.ToValue UltraDNS where
+    toValue = Qual.genericToValue
 
 {- | (Required) The base url for the UltraDNS REST API, but it can also be
 sourced from the @ULTRADNS_BASEURL@ environment variable.

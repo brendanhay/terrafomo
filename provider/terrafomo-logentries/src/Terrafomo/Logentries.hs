@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Logentries
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Logentries.Types
     , module Terrafomo.Logentries.Provider
     ) where

@@ -85,45 +85,45 @@ data ImagesImageV2DataSource = ImagesImageV2DataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImagesImageV2DataSource
-    = '[ '("checksum", Attr Text)
+    = '[ '("checksum", Text)
          {- - The checksum of the data associated with the image. -}
-      , '("container_format", Attr Text)
+      , '("container_format", Text)
          {- : The format of the image's container. -}
-      , '("created_at", Attr Text)
+      , '("created_at", Text)
          {- - The date the image was created. -}
-      , '("disk_format", Attr Text)
+      , '("disk_format", Text)
          {- : The format of the image's disk. -}
-      , '("file", Attr Text)
+      , '("file", Text)
          {- - the trailing path after the glance endpoint that represent the location of the image or the path to retrieve it. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - A unique ID assigned by Glance. -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - The metadata associated with the image. Image metadata allow for meaningfully define the image properties and tags. See http://docs.openstack.org/developer/glance/metadefs-concepts.html. -}
-      , '("min_disk_gb", Attr Text)
+      , '("min_disk_gb", Text)
          {- - The minimum amount of disk space required to use the image. -}
-      , '("min_ram_mb", Attr Text)
+      , '("min_ram_mb", Text)
          {- - The minimum amount of ram required to use the image. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("owner", Attr Text)
+      , '("owner", Text)
          {- - The id of the openstack user who owns the image. -}
-      , '("properties", Attr Text)
+      , '("properties", Text)
          {- - Freeform information about the image. -}
-      , '("protected", Attr Text)
+      , '("protected", Text)
          {- - Whether or not the image is protected. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("schema", Attr Text)
+      , '("schema", Text)
          {- - The path to the JSON-schema that represent the image or image -}
-      , '("size_bytes", Attr Text)
+      , '("size_bytes", Text)
          {- - The size of the image (in bytes). -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the image. It can be "queued", "active" or "saving". -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - See Argument Reference above. -}
-      , '("update_at", Attr Text)
+      , '("update_at", Text)
          {- - The date the image was last updated. -}
-      , '("visibility", Attr Text)
+      , '("visibility", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -160,15 +160,15 @@ data NetworkingNetworkV2DataSource = NetworkingNetworkV2DataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingNetworkV2DataSource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - (Optional) The administrative state of the network. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("shared", Attr Text)
+      , '("shared", Text)
          {- - (Optional)  Specifies whether the network resource can be accessed by any tenant or not. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -197,13 +197,13 @@ data NetworkingSecgroupV2DataSource = NetworkingSecgroupV2DataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingSecgroupV2DataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The description of the security group. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -252,27 +252,27 @@ data NetworkingSubnetV2DataSource = NetworkingSubnetV2DataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingSubnetV2DataSource
-    = '[ '("allocation_pools", Attr Text)
+    = '[ '("allocation_pools", Text)
          {- - Allocation pools of the subnet. -}
-      , '("cidr", Attr Text)
+      , '("cidr", Text)
          {- - See Argument Reference above. -}
-      , '("dns_nameservers", Attr Text)
+      , '("dns_nameservers", Text)
          {- - DNS Nameservers of the subnet. -}
-      , '("enable_dhcp", Attr Text)
+      , '("enable_dhcp", Text)
          {- - Whether the subnet has DHCP enabled or not. -}
-      , '("gateway_ip", Attr Text)
+      , '("gateway_ip", Text)
          {- - See Argument Reference above. -}
-      , '("host_routes", Attr Text)
+      , '("host_routes", Text)
          {- - Host Routes of the subnet. -}
-      , '("ip_version", Attr Text)
+      , '("ip_version", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("network_id", Attr Text)
+      , '("network_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 

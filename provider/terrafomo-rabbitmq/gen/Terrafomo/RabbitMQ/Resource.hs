@@ -58,7 +58,7 @@ data BindingResource = BindingResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BindingResource
-    = '[ '("properties_key", Attr Text)
+    = '[ '("properties_key", Text)
          {- - A unique key to refer to the binding. -}
        ]
 
@@ -80,9 +80,6 @@ data ExchangeResource = ExchangeResource
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ExchangeResource
-    = '[]
-
 $(TH.makeResource
     "rabbitmq_exchange"
     ''Qual.RabbitMQ
@@ -101,9 +98,6 @@ data PermissionsResource = PermissionsResource
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PermissionsResource
-    = '[]
 
 $(TH.makeResource
     "rabbitmq_permissions"
@@ -124,9 +118,6 @@ data PolicyResource = PolicyResource
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed PolicyResource
-    = '[]
-
 $(TH.makeResource
     "rabbitmq_policy"
     ''Qual.RabbitMQ
@@ -144,9 +135,6 @@ data QueueResource = QueueResource
     , _vhost :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed QueueResource
-    = '[]
 
 $(TH.makeResource
     "rabbitmq_queue"
@@ -168,9 +156,6 @@ data UserResource = UserResource
       {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed UserResource
-    = '[]
-
 $(TH.makeResource
     "rabbitmq_user"
     ''Qual.RabbitMQ
@@ -184,9 +169,6 @@ data VhostResource = VhostResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VhostResource
-    = '[]
 
 $(TH.makeResource
     "rabbitmq_vhost"

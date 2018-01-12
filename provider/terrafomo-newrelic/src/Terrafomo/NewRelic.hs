@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.NewRelic
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.NewRelic.Types
     , module Terrafomo.NewRelic.Provider
     ) where

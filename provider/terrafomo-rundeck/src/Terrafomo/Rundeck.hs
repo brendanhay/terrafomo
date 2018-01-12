@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rundeck
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Rundeck.Types
     , module Terrafomo.Rundeck.Provider
     ) where

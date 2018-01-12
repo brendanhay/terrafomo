@@ -42,9 +42,7 @@ import qualified Terrafomo.Syntax.TH as TH
 Provides a DNSMadeEasy record resource.
 -}
 data RecordResource = RecordResource
-
-type instance Computed RecordResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "dme_record"

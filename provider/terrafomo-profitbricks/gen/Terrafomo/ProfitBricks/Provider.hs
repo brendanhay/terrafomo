@@ -14,12 +14,14 @@
 --
 module Terrafomo.ProfitBricks.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.ProfitBricks.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.ProfitBricks.Types as Qual
 
 {- | ProfitBricks Terraform provider.
 
@@ -28,3 +30,8 @@ resources using ProfitBricks Cloud API. Use the navigation to the left to
 read about the available resources.
 -}
 data ProfitBricks = ProfitBricks
+
+instance Hashable ProfitBricks
+
+instance Qual.ToValue ProfitBricks where
+    toValue = Qual.genericToValue

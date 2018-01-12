@@ -77,11 +77,11 @@ data BlockstorageVolumeAttachV2Resource = BlockstorageVolumeAttachV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BlockstorageVolumeAttachV2Resource
-    = '[ '("data", Attr Text)
+    = '[ '("data", Text)
          {- - This is a map of key/value pairs that contain the connection information. You will want to pass this information to a provisioner script to finalize the connection. See below for more information. -}
-      , '("driver_volume_type", Attr Text)
+      , '("driver_volume_type", Text)
          {- - The storage driver that the volume is based on. -}
-      , '("mount_point_base", Attr Text)
+      , '("mount_point_base", Text)
          {- - A mount point base name for shared storage. -}
        ]
 
@@ -118,27 +118,27 @@ data BlockstorageVolumeV1Resource = BlockstorageVolumeV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BlockstorageVolumeV1Resource
-    = '[ '("attachment", Attr Text)
+    = '[ '("attachment", Text)
          {- - If a volume is attached to an instance, this attribute will display the Attachment ID, Instance ID, and the Device as the Instance sees it. -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("image_id", Attr Text)
+      , '("image_id", Text)
          {- - See Argument Reference above. -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - See Argument Reference above. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - See Argument Reference above. -}
-      , '("source_vol_id", Attr Text)
+      , '("source_vol_id", Text)
          {- - See Argument Reference above. -}
-      , '("volume_type", Attr Text)
+      , '("volume_type", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -179,27 +179,27 @@ data BlockstorageVolumeV2Resource = BlockstorageVolumeV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BlockstorageVolumeV2Resource
-    = '[ '("attachment", Attr Text)
+    = '[ '("attachment", Text)
          {- - If a volume is attached to an instance, this attribute will display the Attachment ID, Instance ID, and the Device as the Instance sees it. -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("image_id", Attr Text)
+      , '("image_id", Text)
          {- - See Argument Reference above. -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - See Argument Reference above. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - See Argument Reference above. -}
-      , '("source_vol_id", Attr Text)
+      , '("source_vol_id", Text)
          {- - See Argument Reference above. -}
-      , '("volume_type", Attr Text)
+      , '("volume_type", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -232,21 +232,21 @@ data ComputeFlavorV2Resource = ComputeFlavorV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeFlavorV2Resource
-    = '[ '("disk", Attr Text)
+    = '[ '("disk", Text)
          {- - See Argument Reference above. -}
-      , '("is_public", Attr Text)
+      , '("is_public", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ram", Attr Text)
+      , '("ram", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("rx_tx_factor", Attr Text)
+      , '("rx_tx_factor", Text)
          {- - See Argument Reference above. -}
-      , '("swap", Attr Text)
+      , '("swap", Text)
          {- - See Argument Reference above. -}
-      , '("vcpus", Attr Text)
+      , '("vcpus", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -272,13 +272,13 @@ data ComputeFloatingipAssociateV2Resource = ComputeFloatingipAssociateV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeFloatingipAssociateV2Resource
-    = '[ '("fixed_ip", Attr Text)
+    = '[ '("fixed_ip", Text)
          {- - See Argument Reference above. -}
-      , '("floating_ip", Attr Text)
+      , '("floating_ip", Text)
          {- - See Argument Reference above. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -302,15 +302,15 @@ data ComputeFloatingipV2Resource = ComputeFloatingipV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeFloatingipV2Resource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The actual floating IP address itself. -}
-      , '("fixed_ip", Attr Text)
+      , '("fixed_ip", Text)
          {- - The fixed IP address corresponding to the floating IP. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - UUID of the compute instance associated with the floating IP. -}
-      , '("pool", Attr Text)
+      , '("pool", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -365,35 +365,35 @@ data ComputeInstanceV2Resource = ComputeInstanceV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeInstanceV2Resource
-    = '[ '("access_ip_v4", Attr Text)
+    = '[ '("access_ip_v4", Text)
          {- - The first detected Fixed IPv4 address or the Floating IP. -}
-      , '("access_ip_v6", Attr Text)
+      , '("access_ip_v6", Text)
          {- - The first detected Fixed IPv6 address. -}
-      , '("all_metadata", Attr Text)
+      , '("all_metadata", Text)
          {- - Contains all instance metadata, even metadata not set by Terraform. -}
-      , '("flavor_id", Attr Text)
+      , '("flavor_id", Text)
          {- - See Argument Reference above. -}
-      , '("flavor_name", Attr Text)
+      , '("flavor_name", Text)
          {- - See Argument Reference above. -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("network/fixed_ip_v4", Attr Text)
+      , '("network/fixed_ip_v4", Text)
          {- - The Fixed IPv4 address of the Instance on that network. -}
-      , '("network/fixed_ip_v6", Attr Text)
+      , '("network/fixed_ip_v6", Text)
          {- - The Fixed IPv6 address of the Instance on that network. -}
-      , '("network/mac", Attr Text)
+      , '("network/mac", Text)
          {- - The MAC address of the NIC on that network. -}
-      , '("network/name", Attr Text)
+      , '("network/name", Text)
          {- - See Argument Reference above. -}
-      , '("network/port", Attr Text)
+      , '("network/port", Text)
          {- - See Argument Reference above. -}
-      , '("network/uuid", Attr Text)
+      , '("network/uuid", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("security_groups", Attr Text)
+      , '("security_groups", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -418,11 +418,11 @@ data ComputeKeypairV2Resource = ComputeKeypairV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeKeypairV2Resource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - See Argument Reference above. -}
-      , '("public_key", Attr Text)
+      , '("public_key", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -447,13 +447,13 @@ data ComputeSecgroupV2Resource = ComputeSecgroupV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeSecgroupV2Resource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("rule", Attr Text)
+      , '("rule", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -477,9 +477,6 @@ data ComputeServergroupV2Resource = ComputeServergroupV2Resource
       {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeServergroupV2Resource
-    = '[]
-
 $(TH.makeResource
     "openstack_compute_servergroup_v2"
     ''Qual.OpenStack
@@ -502,13 +499,13 @@ data ComputeVolumeAttachV2Resource = ComputeVolumeAttachV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeVolumeAttachV2Resource
-    = '[ '("device", Attr Text)
+    = '[ '("device", Text)
          {- - See Argument Reference above. NOTE : The correctness of this information is dependent upon the hypervisor in use. In some cases, this should not be used as an authoritative piece of information. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("volume_id", Attr Text)
+      , '("volume_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -541,21 +538,21 @@ data DnsRecordsetV2Resource = DnsRecordsetV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsRecordsetV2Resource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("records", Attr Text)
+      , '("records", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - See Argument Reference above. -}
-      , '("value_specs", Attr Text)
+      , '("value_specs", Text)
          {- - See Argument Reference above. -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -590,23 +587,23 @@ data DnsZoneV2Resource = DnsZoneV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsZoneV2Resource
-    = '[ '("attributes", Attr Text)
+    = '[ '("attributes", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("email", Attr Text)
+      , '("email", Text)
          {- - See Argument Reference above. -}
-      , '("masters", Attr Text)
+      , '("masters", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - See Argument Reference above. -}
-      , '("value_specs", Attr Text)
+      , '("value_specs", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -641,21 +638,21 @@ data FwFirewallV1Resource = FwFirewallV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FwFirewallV1Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("associated_routers", Attr Text)
+      , '("associated_routers", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("no_routers", Attr Text)
+      , '("no_routers", Text)
          {- - See Argument Reference above. -}
-      , '("policy_id", Attr Text)
+      , '("policy_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -686,15 +683,15 @@ data FwPolicyV1Resource = FwPolicyV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FwPolicyV1Resource
-    = '[ '("audited", Attr Text)
+    = '[ '("audited", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("shared", Attr Text)
+      , '("shared", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -737,29 +734,29 @@ data FwRuleV1Resource = FwRuleV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FwRuleV1Resource
-    = '[ '("action", Attr Text)
+    = '[ '("action", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("destination_ip_address", Attr Text)
+      , '("destination_ip_address", Text)
          {- - See Argument Reference above. -}
-      , '("destination_port", Attr Text)
+      , '("destination_port", Text)
          {- - See Argument Reference above. -}
-      , '("enabled", Attr Text)
+      , '("enabled", Text)
          {- - See Argument Reference above. -}
-      , '("ip_version", Attr Text)
+      , '("ip_version", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("protocol", Attr Text)
+      , '("protocol", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("source_ip_address", Attr Text)
+      , '("source_ip_address", Text)
          {- - See Argument Reference above. -}
-      , '("source_port", Attr Text)
+      , '("source_port", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -791,9 +788,9 @@ data IdentityProjectV3Resource = IdentityProjectV3Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IdentityProjectV3Resource
-    = '[ '("domain_id", Attr Text)
+    = '[ '("domain_id", Text)
          {- - See Argument Reference above. -}
-      , '("parent_id", Attr Text)
+      , '("parent_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -837,7 +834,7 @@ data IdentityUserV3Resource = IdentityUserV3Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IdentityUserV3Resource
-    = '[ '("domain_id", Attr Text)
+    = '[ '("domain_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -894,45 +891,45 @@ data ImagesImageV2Resource = ImagesImageV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImagesImageV2Resource
-    = '[ '("checksum", Attr Text)
+    = '[ '("checksum", Text)
          {- - The checksum of the data associated with the image. -}
-      , '("container_format", Attr Text)
+      , '("container_format", Text)
          {- - See Argument Reference above. -}
-      , '("created_at", Attr Text)
+      , '("created_at", Text)
          {- - The date the image was created. -}
-      , '("disk_format", Attr Text)
+      , '("disk_format", Text)
          {- - See Argument Reference above. -}
-      , '("file", Attr Text)
+      , '("file", Text)
          {- - the trailing path after the glance endpoint that represent the location of the image or the path to retrieve it. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - A unique ID assigned by Glance. -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - The metadata associated with the image. Image metadata allow for meaningfully define the image properties and tags. See http://docs.openstack.org/developer/glance/metadefs-concepts.html. -}
-      , '("min_disk_gb", Attr Text)
+      , '("min_disk_gb", Text)
          {- - See Argument Reference above. -}
-      , '("min_ram_mb", Attr Text)
+      , '("min_ram_mb", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("owner", Attr Text)
+      , '("owner", Text)
          {- - The id of the openstack user who owns the image. -}
-      , '("properties", Attr Text)
+      , '("properties", Text)
          {- - See Argument Reference above. -}
-      , '("protected", Attr Text)
+      , '("protected", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("schema", Attr Text)
+      , '("schema", Text)
          {- - The path to the JSON-schema that represent the image or image -}
-      , '("size_bytes", Attr Text)
+      , '("size_bytes", Text)
          {- - The size in bytes of the data associated with the image. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the image. It can be "queued", "active" or "saving". -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - See Argument Reference above. -}
-      , '("update_at", Attr Text)
+      , '("update_at", Text)
          {- - The date the image was last updated. -}
-      , '("visibility", Attr Text)
+      , '("visibility", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -973,27 +970,27 @@ data LbListenerV2Resource = LbListenerV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbListenerV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("connection_limit", Attr Text)
+      , '("connection_limit", Text)
          {- - See Argument Reference above. -}
-      , '("default_port_id", Attr Text)
+      , '("default_port_id", Text)
          {- - See Argument Reference above. -}
-      , '("default_tls_container_ref", Attr Text)
+      , '("default_tls_container_ref", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID for the Listener. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("protocol", Attr Text)
+      , '("protocol", Text)
          {- - See Argument Reference above. -}
-      , '("protocol_port", Attr Text)
+      , '("protocol_port", Text)
          {- - See Argument Reference above. -}
-      , '("sni_container_refs", Attr Text)
+      , '("sni_container_refs", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1030,27 +1027,27 @@ data LbLoadbalancerV2Resource = LbLoadbalancerV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbLoadbalancerV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("flavor", Attr Text)
+      , '("flavor", Text)
          {- - See Argument Reference above. -}
-      , '("loadbalancer_provider", Attr Text)
+      , '("loadbalancer_provider", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("security_group_ids", Attr Text)
+      , '("security_group_ids", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
-      , '("vip_address", Attr Text)
+      , '("vip_address", Text)
          {- - See Argument Reference above. -}
-      , '("vip_port_id", Attr Text)
+      , '("vip_port_id", Text)
          {- - The Port ID of the Load Balancer IP. -}
-      , '("vip_subnet_id", Attr Text)
+      , '("vip_subnet_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1079,17 +1076,17 @@ data LbMemberV1Resource = LbMemberV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbMemberV1Resource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - See Argument Reference above. -}
-      , '("admin_state_up", Attr Text)
+      , '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("pool_id", Attr Text)
+      , '("pool_id", Text)
          {- - See Argument Reference above. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("weight", Attr Text)
+      , '("weight", Text)
          {- - The load balancing weight of the member. This is currently unable to be set through Terraform. -}
        ]
 
@@ -1124,23 +1121,23 @@ data LbMemberV2Resource = LbMemberV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbMemberV2Resource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - See Argument Reference above. -}
-      , '("admin_state_up", Attr Text)
+      , '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID for the member. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("pool_id", Attr Text)
+      , '("pool_id", Text)
          {- - See Argument Reference above. -}
-      , '("protocol_port", Attr Text)
+      , '("protocol_port", Text)
          {- - See Argument Reference above. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
-      , '("weight", Attr Text)
+      , '("weight", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1177,25 +1174,25 @@ data LbMonitorV1Resource = LbMonitorV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbMonitorV1Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("delay", Attr Text)
+      , '("delay", Text)
          {- - See Argument Reference above. -}
-      , '("expected_codes", Attr Text)
+      , '("expected_codes", Text)
          {- - See Argument Reference above. -}
-      , '("http_method", Attr Text)
+      , '("http_method", Text)
          {- - See Argument Reference above. -}
-      , '("max_retries", Attr Text)
+      , '("max_retries", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
-      , '("timeout", Attr Text)
+      , '("timeout", Text)
          {- - See Argument Reference above. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - See Argument Reference above. -}
-      , '("url_path", Attr Text)
+      , '("url_path", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1236,25 +1233,25 @@ data LbMonitorV2Resource = LbMonitorV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbMonitorV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("delay", Attr Text)
+      , '("delay", Text)
          {- - See Argument Reference above. -}
-      , '("expected_codes", Attr Text)
+      , '("expected_codes", Text)
          {- - See Argument Reference above. -}
-      , '("http_method", Attr Text)
+      , '("http_method", Text)
          {- - See Argument Reference above. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID for the monitor. -}
-      , '("max_retries", Attr Text)
+      , '("max_retries", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
-      , '("timeout", Attr Text)
+      , '("timeout", Text)
          {- - See Argument Reference above. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - See Argument Reference above. -}
-      , '("url_path", Attr Text)
+      , '("url_path", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1289,23 +1286,23 @@ data LbPoolV1Resource = LbPoolV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbPoolV1Resource
-    = '[ '("lb_method", Attr Text)
+    = '[ '("lb_method", Text)
          {- - See Argument Reference above. -}
-      , '("lb_provider", Attr Text)
+      , '("lb_provider", Text)
          {- - See Argument Reference above. -}
-      , '("member", Attr Text)
+      , '("member", Text)
          {- - See Argument Reference above. -}
-      , '("monitor_id", Attr Text)
+      , '("monitor_id", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("protocol", Attr Text)
+      , '("protocol", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1342,21 +1339,21 @@ data LbPoolV2Resource = LbPoolV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbPoolV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique ID for the pool. -}
-      , '("lb_method", Attr Text)
+      , '("lb_method", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("persistence", Attr Text)
+      , '("persistence", Text)
          {- - See Argument Reference above. -}
-      , '("protocol", Attr Text)
+      , '("protocol", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1399,33 +1396,33 @@ data LbVipV1Resource = LbVipV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbVipV1Resource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - See Argument Reference above. -}
-      , '("admin_state_up", Attr Text)
+      , '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("conn_limit", Attr Text)
+      , '("conn_limit", Text)
          {- - See Argument Reference above. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("floating_ip", Attr Text)
+      , '("floating_ip", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("persistence", Attr Text)
+      , '("persistence", Text)
          {- - See Argument Reference above. -}
-      , '("pool_id", Attr Text)
+      , '("pool_id", Text)
          {- - See Argument Reference above. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - See Argument Reference above. -}
-      , '("port_id", Attr Text)
+      , '("port_id", Text)
          {- - Port UUID for this VIP at associated floating IP (if any). -}
-      , '("protocol", Attr Text)
+      , '("protocol", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1457,17 +1454,17 @@ data NetworkingFloatingipV2Resource = NetworkingFloatingipV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingFloatingipV2Resource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The actual floating IP address itself. -}
-      , '("fixed_ip", Attr Text)
+      , '("fixed_ip", Text)
          {- - The fixed IP which the floating IP maps to. -}
-      , '("pool", Attr Text)
+      , '("pool", Text)
          {- - See Argument Reference above. -}
-      , '("port_id", Attr Text)
+      , '("port_id", Text)
          {- - ID of associated port. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - the ID of the tenant in which to create the floating IP. -}
        ]
 
@@ -1504,15 +1501,15 @@ data NetworkingNetworkV2Resource = NetworkingNetworkV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingNetworkV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("shared", Attr Text)
+      , '("shared", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1555,25 +1552,25 @@ data NetworkingPortV2Resource = NetworkingPortV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingPortV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("all fixed_ips", Attr Text)
+      , '("all fixed_ips", Text)
          {- - The collection of Fixed IP addresses on the port in the order returned by the Network v2 API. -}
-      , '("all_security_group_ids", Attr Text)
+      , '("all_security_group_ids", Text)
          {- - The collection of Security Group IDs on the port which have been explicitly and implicitly added. -}
-      , '("device_id", Attr Text)
+      , '("device_id", Text)
          {- - See Argument Reference above. -}
-      , '("device_owner", Attr Text)
+      , '("device_owner", Text)
          {- - See Argument Reference above. -}
-      , '("fixed_ip", Attr Text)
+      , '("fixed_ip", Text)
          {- - See Argument Reference above. -}
-      , '("mac_address", Attr Text)
+      , '("mac_address", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("security_group_ids", Attr Text)
+      , '("security_group_ids", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1598,13 +1595,13 @@ data NetworkingRouterInterfaceV2Resource = NetworkingRouterInterfaceV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingRouterInterfaceV2Resource
-    = '[ '("port_id", Attr Text)
+    = '[ '("port_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("router_id", Attr Text)
+      , '("router_id", Text)
          {- - See Argument Reference above. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1629,13 +1626,13 @@ data NetworkingRouterRouteV2Resource = NetworkingRouterRouteV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingRouterRouteV2Resource
-    = '[ '("destination_cidr", Attr Text)
+    = '[ '("destination_cidr", Text)
          {- - See Argument Reference above. -}
-      , '("next_hop", Attr Text)
+      , '("next_hop", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("router_id", Attr Text)
+      , '("router_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1666,19 +1663,19 @@ data NetworkingRouterV2Resource = NetworkingRouterV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingRouterV2Resource
-    = '[ '("admin_state_up", Attr Text)
+    = '[ '("admin_state_up", Text)
          {- - See Argument Reference above. -}
-      , '("external_gateway", Attr Text)
+      , '("external_gateway", Text)
          {- - See Argument Reference above. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the router. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
-      , '("value_specs", Attr Text)
+      , '("value_specs", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1717,25 +1714,25 @@ data NetworkingSecgroupRuleV2Resource = NetworkingSecgroupRuleV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingSecgroupRuleV2Resource
-    = '[ '("direction", Attr Text)
+    = '[ '("direction", Text)
          {- - See Argument Reference above. -}
-      , '("ethertype", Attr Text)
+      , '("ethertype", Text)
          {- - See Argument Reference above. -}
-      , '("port_range_max", Attr Text)
+      , '("port_range_max", Text)
          {- - See Argument Reference above. -}
-      , '("port_range_min", Attr Text)
+      , '("port_range_min", Text)
          {- - See Argument Reference above. -}
-      , '("protocol", Attr Text)
+      , '("protocol", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("remote_group_id", Attr Text)
+      , '("remote_group_id", Text)
          {- - See Argument Reference above. -}
-      , '("remote_ip_prefix", Attr Text)
+      , '("remote_ip_prefix", Text)
          {- - See Argument Reference above. -}
-      , '("security_group_id", Attr Text)
+      , '("security_group_id", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1766,13 +1763,13 @@ data NetworkingSecgroupV2Resource = NetworkingSecgroupV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingSecgroupV2Resource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1821,27 +1818,27 @@ data NetworkingSubnetV2Resource = NetworkingSubnetV2Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkingSubnetV2Resource
-    = '[ '("allocation_pools", Attr Text)
+    = '[ '("allocation_pools", Text)
          {- - See Argument Reference above. -}
-      , '("cidr", Attr Text)
+      , '("cidr", Text)
          {- - See Argument Reference above. -}
-      , '("dns_nameservers", Attr Text)
+      , '("dns_nameservers", Text)
          {- - See Argument Reference above. -}
-      , '("enable_dhcp", Attr Text)
+      , '("enable_dhcp", Text)
          {- - See Argument Reference above. -}
-      , '("gateway_ip", Attr Text)
+      , '("gateway_ip", Text)
          {- - See Argument Reference above. -}
-      , '("host_routes", Attr Text)
+      , '("host_routes", Text)
          {- - See Argument Reference above. -}
-      , '("ip_version", Attr Text)
+      , '("ip_version", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("network_id", Attr Text)
+      , '("network_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("tenant_id", Attr Text)
+      , '("tenant_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -1874,21 +1871,21 @@ data ObjectstorageContainerV1Resource = ObjectstorageContainerV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ObjectstorageContainerV1Resource
-    = '[ '("container_read", Attr Text)
+    = '[ '("container_read", Text)
          {- - See Argument Reference above. -}
-      , '("container_sync_key", Attr Text)
+      , '("container_sync_key", Text)
          {- - See Argument Reference above. -}
-      , '("container_sync_to", Attr Text)
+      , '("container_sync_to", Text)
          {- - See Argument Reference above. -}
-      , '("container_write", Attr Text)
+      , '("container_write", Text)
          {- - See Argument Reference above. -}
-      , '("content_type", Attr Text)
+      , '("content_type", Text)
          {- - See Argument Reference above. -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
        ]
 

@@ -49,19 +49,19 @@ data ImageDataSource = ImageDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImageDataSource
-    = '[ '("image", Attr Text)
+    = '[ '("image", Text)
          {- - The id of the image. -}
-      , '("min_disk_size", Attr Text)
+      , '("min_disk_size", Text)
          {- : The minimum 'disk' required for the image. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("private", Attr Text)
+      , '("private", Text)
          {- - Is image a public image or not. Public images represents Linux distributions or Application, while non-public images represent snapshots and backups and are only available within your account. -}
-      , '("regions", Attr Text)
+      , '("regions", Text)
          {- : The regions that the image is available in. -}
-      , '("size_gigabytes", Attr Text)
+      , '("size_gigabytes", Text)
          {- : The size of the image in gigabytes. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- : Type of the image. Can be "snapshot" or "backup". -}
        ]
 

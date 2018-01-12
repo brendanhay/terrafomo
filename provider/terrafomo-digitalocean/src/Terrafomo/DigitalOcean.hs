@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DigitalOcean
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.DigitalOcean.Types
     , module Terrafomo.DigitalOcean.Provider
     ) where

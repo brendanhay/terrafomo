@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PostgreSQL
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.PostgreSQL.Types
     , module Terrafomo.PostgreSQL.Provider
     ) where

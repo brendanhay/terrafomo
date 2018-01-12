@@ -14,12 +14,14 @@
 --
 module Terrafomo.CloudStack.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.CloudStack.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.CloudStack.Types as Qual
 
 {- | CloudStack Terraform provider.
 
@@ -41,6 +43,11 @@ data CloudStack = CloudStack
     , _secret_key :: !Text
     , _timeout :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable CloudStack
+
+instance Qual.ToValue CloudStack where
+    toValue = Qual.genericToValue
 
 {- | (Optional) This is the CloudStack API key. It can also be sourced from the
 @CLOUDSTACK_API_KEY@ environment variable.

@@ -10,7 +10,6 @@ cache:
     - .stack-root/
 # GENERATED
     - provider/terrafomo-alicloud/.stack-work/
-    - provider/terrafomo-arukas/.stack-work/
     - provider/terrafomo-aws/.stack-work/
     - provider/terrafomo-azurerm/.stack-work/
     - provider/terrafomo-bitbucket/.stack-work/
@@ -79,4 +78,4 @@ stages:
 build:
   stage: build
   script:
-    - stack --no-terminal --skip-ghc-check build -j2 --fast --test
+    - stack --no-terminal --skip-ghc-check build --fast --test

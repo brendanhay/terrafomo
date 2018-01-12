@@ -49,9 +49,9 @@ data IpResource = IpResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IpResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - id of the new resource -}
-      , '("ip", Attr Text)
+      , '("ip", Text)
          {- - IP of the new resource -}
        ]
 
@@ -74,7 +74,7 @@ data SecurityGroupResource = SecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - id of the new resource -}
        ]
 
@@ -105,7 +105,7 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - id of the new resource -}
        ]
 
@@ -147,9 +147,6 @@ data ServerResource = ServerResource
       {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ServerResource
-    = '[]
-
 $(TH.makeResource
     "scaleway_server"
     ''Qual.Scaleway
@@ -169,7 +166,7 @@ data VolumeAttachmentResource = VolumeAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeAttachmentResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - id of the new resource -}
        ]
 
@@ -196,7 +193,7 @@ data VolumeResource = VolumeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - id of the new resource -}
        ]
 

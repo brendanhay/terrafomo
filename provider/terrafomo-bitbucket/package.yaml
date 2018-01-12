@@ -8,6 +8,7 @@ name: terrafomo-bitbucket
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

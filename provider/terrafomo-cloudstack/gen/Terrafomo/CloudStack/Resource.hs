@@ -53,9 +53,9 @@ data AffinityGroupResource = AffinityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AffinityGroupResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The description of the affinity group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The id of the affinity group. -}
        ]
 
@@ -91,9 +91,9 @@ data DiskResource = DiskResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DiskResource
-    = '[ '("device_id", Attr Text)
+    = '[ '("device_id", Text)
          {- - The device ID the disk volume is mapped to within the guest OS. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the disk volume. -}
        ]
 
@@ -118,7 +118,7 @@ data EgressFirewallResource = EgressFirewallResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EgressFirewallResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The network ID for which the egress firewall rules are created. -}
        ]
 
@@ -143,7 +143,7 @@ data FirewallResource = FirewallResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FirewallResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The IP address ID for which the firewall rules are created. -}
        ]
 
@@ -195,9 +195,9 @@ data InstanceResource = InstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InstanceResource
-    = '[ '("display_name", Attr Text)
+    = '[ '("display_name", Text)
          {- - The display name of the instance. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The instance ID. -}
        ]
 
@@ -224,9 +224,9 @@ data IpaddressResource = IpaddressResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IpaddressResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the acquired and associated IP address. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The IP address that was acquired and associated. -}
        ]
 
@@ -261,9 +261,9 @@ data LoadbalancerRuleResource = LoadbalancerRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LoadbalancerRuleResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The description of the load balancer rule. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The load balancer rule ID. -}
        ]
 
@@ -288,7 +288,7 @@ data NetworkAclResource = NetworkAclResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkAclResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Network ACL -}
        ]
 
@@ -315,7 +315,7 @@ data NetworkAclRuleResource = NetworkAclRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkAclRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ACL ID for which the rules are created. -}
        ]
 
@@ -360,11 +360,11 @@ data NetworkResource = NetworkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkResource
-    = '[ '("display_text", Attr Text)
+    = '[ '("display_text", Text)
          {- - The display text of the network. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the network. -}
-      , '("network_domain", Attr Text)
+      , '("network_domain", Text)
          {- - DNS domain for the network. -}
        ]
 
@@ -387,9 +387,9 @@ data NicResource = NicResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NicResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the NIC. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The assigned IP address. -}
        ]
 
@@ -414,9 +414,9 @@ data PortForwardResource = PortForwardResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PortForwardResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the IP address for which the port forwards are created. -}
-      , '("vm_guest_ip", Attr Text)
+      , '("vm_guest_ip", Text)
          {- - The IP address of the virtual machine that is used for the port forwarding rule. -}
        ]
 
@@ -450,7 +450,7 @@ data PrivateGatewayResource = PrivateGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PrivateGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the private gateway. -}
        ]
 
@@ -473,7 +473,7 @@ data SecondaryIpaddressResource = SecondaryIpaddressResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecondaryIpaddressResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The secondary IP address ID. -}
        ]
 
@@ -496,7 +496,7 @@ data SecurityGroupResource = SecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the security group. -}
        ]
 
@@ -522,7 +522,7 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The security group ID for which the rules are created. -}
        ]
 
@@ -545,11 +545,11 @@ data SshKeypairResource = SshKeypairResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SshKeypairResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The fingerprint of the public key specified or created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The key pair ID. -}
-      , '("private_key", Attr Text)
+      , '("private_key", Text)
          {- - The private key generated by CloudStack. Only available if CloudStack generated the key pair. -}
        ]
 
@@ -574,9 +574,9 @@ data StaticNatResource = StaticNatResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StaticNatResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The static nat ID. -}
-      , '("vm_guest_ip", Attr Text)
+      , '("vm_guest_ip", Text)
          {- - The IP address of the virtual machine that is used to forward the static NAT traffic to. -}
        ]
 
@@ -597,7 +597,7 @@ data StaticRouteResource = StaticRouteResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StaticRouteResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the static route. -}
        ]
 
@@ -642,21 +642,21 @@ data TemplateResource = TemplateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TemplateResource
-    = '[ '("display_text", Attr Text)
+    = '[ '("display_text", Text)
          {- - The display text of the template. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The template ID. -}
-      , '("is_dynamically_scalable", Attr Text)
+      , '("is_dynamically_scalable", Text)
          {- - Set to "true" if the template is dynamically scalable. -}
-      , '("is_extractable", Attr Text)
+      , '("is_extractable", Text)
          {- - Set to "true" if the template is extractable. -}
-      , '("is_featured", Attr Text)
+      , '("is_featured", Text)
          {- - Set to "true" if the template is featured. -}
-      , '("is_public", Attr Text)
+      , '("is_public", Text)
          {- - Set to "true" if the template is public. -}
-      , '("is_ready", Attr Text)
+      , '("is_ready", Text)
          {- - Set to "true" once the template is ready for use. -}
-      , '("password_enabled", Attr Text)
+      , '("password_enabled", Text)
          {- - Set to "true" if the template is password enabled. -}
        ]
 
@@ -687,11 +687,11 @@ data VpcResource = VpcResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcResource
-    = '[ '("display_text", Attr Text)
+    = '[ '("display_text", Text)
          {- - The display text of the VPC. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPC. -}
-      , '("source_nat_ip", Attr Text)
+      , '("source_nat_ip", Text)
          {- - The source NAT IP assigned to the VPC. -}
        ]
 
@@ -712,7 +712,7 @@ data VpnConnectionResource = VpnConnectionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnConnectionResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the VPN Connection. -}
        ]
 
@@ -749,13 +749,13 @@ data VpnCustomerGatewayResource = VpnCustomerGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnCustomerGatewayResource
-    = '[ '("dpd", Attr Text)
+    = '[ '("dpd", Text)
          {- - Enable or disable DPD is enabled for the related VPN connection. -}
-      , '("esp_lifetime", Attr Text)
+      , '("esp_lifetime", Text)
          {- - The ESP lifetime of phase 2 VPN connection to this VPN Customer Gateway. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPN Customer Gateway. -}
-      , '("ike_lifetime", Attr Text)
+      , '("ike_lifetime", Text)
          {- - The IKE lifetime of phase 2 VPN connection to this VPN Customer Gateway. -}
        ]
 
@@ -774,9 +774,9 @@ data VpnGatewayResource = VpnGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the VPN Gateway. -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - The public IP address associated with the VPN Gateway. -}
        ]
 

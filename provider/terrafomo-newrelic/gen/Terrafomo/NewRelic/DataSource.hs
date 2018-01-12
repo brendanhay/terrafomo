@@ -48,11 +48,11 @@ data ApplicationDataSource = ApplicationDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApplicationDataSource
-    = '[ '("host_ids", Attr Text)
+    = '[ '("host_ids", Text)
          {- - A list of host IDs associated with the application. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the application. -}
-      , '("instance_ids", Attr Text)
+      , '("instance_ids", Text)
          {- - A list of instance IDs associated with the application. -}
        ]
 

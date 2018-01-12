@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Datadog
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Datadog.Types
     , module Terrafomo.Datadog.Provider
     ) where

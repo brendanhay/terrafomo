@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.InfluxDB
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.InfluxDB.Types
     , module Terrafomo.InfluxDB.Provider
     ) where

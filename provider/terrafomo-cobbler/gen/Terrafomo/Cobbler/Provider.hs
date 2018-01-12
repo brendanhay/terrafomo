@@ -14,12 +14,14 @@
 --
 module Terrafomo.Cobbler.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Cobbler.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Cobbler.Types as Qual
 
 {- | Cobbler Terraform provider.
 
@@ -33,6 +35,11 @@ data Cobbler = Cobbler
     , _url :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Cobbler
+
+instance Qual.ToValue Cobbler where
+    toValue = Qual.genericToValue
 
 {- | (Required) The password to the Cobbler service. This can also be specified
 with the @COBBLER_PASSWORD@ shell environment variable.

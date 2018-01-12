@@ -14,12 +14,14 @@
 --
 module Terrafomo.Nomad.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Nomad.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Nomad.Types as Qual
 
 {- | Nomad Terraform provider.
 
@@ -34,6 +36,11 @@ data Nomad = Nomad
     , _key_file :: !Text
     , _region :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Nomad
+
+instance Qual.ToValue Nomad where
+    toValue = Qual.genericToValue
 
 {- |  @(string: "http://127.0.0.1:4646")@ - The HTTP(S) API address of the Nomad
 agent. This must include the leading protocol (e.g. @https://@ ). This can

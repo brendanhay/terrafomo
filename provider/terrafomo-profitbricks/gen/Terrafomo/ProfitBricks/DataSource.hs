@@ -57,7 +57,7 @@ data DatacenterDataSource = DatacenterDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DatacenterDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the Virtual Data Center -}
        ]
 
@@ -83,7 +83,7 @@ data ImageDataSource = ImageDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImageDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the image -}
        ]
 
@@ -105,7 +105,7 @@ data LocationDataSource = LocationDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LocationDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the location -}
        ]
 
@@ -133,7 +133,7 @@ data ResourceDataSource = ResourceDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ResourceDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the Resource -}
        ]
 
@@ -157,7 +157,7 @@ data SnapshotDataSource = SnapshotDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnapshotDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - UUID of the snapshot -}
        ]
 

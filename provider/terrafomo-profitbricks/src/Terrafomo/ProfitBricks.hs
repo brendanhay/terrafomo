@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.ProfitBricks
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.ProfitBricks.Types
     , module Terrafomo.ProfitBricks.Provider
     ) where

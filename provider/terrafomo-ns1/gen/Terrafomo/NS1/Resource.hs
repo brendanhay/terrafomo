@@ -53,9 +53,6 @@ data ApikeyResource = ApikeyResource
       {- ^ (Required) The teams that the apikey belongs to. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApikeyResource
-    = '[]
-
 $(TH.makeResource
     "ns1_apikey"
     ''Qual.NS1
@@ -75,9 +72,6 @@ data DatafeedResource = DatafeedResource
       {- ^ (Required) The data source id that this feed is connected to. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DatafeedResource
-    = '[]
-
 $(TH.makeResource
     "ns1_datafeed"
     ''Qual.NS1
@@ -96,9 +90,6 @@ data DatasourceResource = DatasourceResource
     , _sourcetype :: !(Attr Text)
       {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DatasourceResource
-    = '[]
 
 $(TH.makeResource
     "ns1_datasource"
@@ -143,9 +134,6 @@ data MonitoringjobResource = MonitoringjobResource
       {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed MonitoringjobResource
-    = '[]
-
 $(TH.makeResource
     "ns1_monitoringjob"
     ''Qual.NS1
@@ -162,9 +150,6 @@ data NotifylistResource = NotifylistResource
     , _notifications :: !(Attr Text)
       {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed NotifylistResource
-    = '[]
 
 $(TH.makeResource
     "ns1_notifylist"
@@ -195,9 +180,6 @@ data RecordResource = RecordResource
       {- ^ (Required) The zone the record belongs to. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed RecordResource
-    = '[]
-
 $(TH.makeResource
     "ns1_record"
     ''Qual.NS1
@@ -214,9 +196,6 @@ data TeamResource = TeamResource
     , _permissions :: !(Attr Text)
       {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed TeamResource
-    = '[]
 
 $(TH.makeResource
     "ns1_team"
@@ -243,9 +222,6 @@ data UserResource = UserResource
     , _username :: !(Attr Text)
       {- ^ (Required) The users login name. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed UserResource
-    = '[]
 
 $(TH.makeResource
     "ns1_user"
@@ -275,9 +251,6 @@ data ZoneResource = ZoneResource
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain name of the zone. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ZoneResource
-    = '[]
 
 $(TH.makeResource
     "ns1_zone"

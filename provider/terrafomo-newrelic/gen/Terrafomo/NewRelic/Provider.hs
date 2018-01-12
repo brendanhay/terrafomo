@@ -14,12 +14,14 @@
 --
 module Terrafomo.NewRelic.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.NewRelic.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.NewRelic.Types as Qual
 
 {- | NewRelic Terraform provider.
 
@@ -30,6 +32,11 @@ time. Use the navigation to the left to read about the available resources.
 data NewRelic = NewRelic
     { _api_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable NewRelic
+
+instance Qual.ToValue NewRelic where
+    toValue = Qual.genericToValue
 
 {- | (Required) Your New Relic API key. Can also use @NEWRELIC_API_KEY@
 environment variable.

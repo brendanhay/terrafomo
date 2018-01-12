@@ -8,6 +8,7 @@ name: terrafomo-heroku
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Vault
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Vault.Types
     , module Terrafomo.Vault.Provider
     ) where

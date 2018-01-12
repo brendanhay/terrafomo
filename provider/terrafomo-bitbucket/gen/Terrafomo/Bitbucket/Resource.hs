@@ -50,9 +50,6 @@ data DefaultReviewersResource = DefaultReviewersResource
       {- ^ (Required) A list of reviewers to use. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DefaultReviewersResource
-    = '[]
-
 $(TH.makeResource
     "bitbucket_default_reviewers"
     ''Qual.Bitbucket
@@ -75,9 +72,6 @@ data HookResource = HookResource
     , _url :: !(Attr Text)
       {- ^ (Required) Where to POST to. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed HookResource
-    = '[]
 
 $(TH.makeResource
     "bitbucket_hook"
@@ -116,9 +110,6 @@ data RepositoryResource = RepositoryResource
     , _website :: !(Attr Text)
       {- ^ (Optional) URL of website associated with this repository. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed RepositoryResource
-    = '[]
 
 $(TH.makeResource
     "bitbucket_repository"

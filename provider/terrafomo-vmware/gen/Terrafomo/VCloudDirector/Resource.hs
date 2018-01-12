@@ -54,9 +54,6 @@ data DnatResource = DnatResource
       {- ^ (Required) The port number to map -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DnatResource
-    = '[]
-
 $(TH.makeResource
     "vcd_dnat"
     ''Qual.VCloudDirector
@@ -94,9 +91,6 @@ data EdgegatewayVpnResource = EdgegatewayVpnResource
       {- ^ (Required) - Shared Secret -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed EdgegatewayVpnResource
-    = '[]
-
 $(TH.makeResource
     "vcd_edgegateway_vpn"
     ''Qual.VCloudDirector
@@ -115,9 +109,6 @@ data FirewallRulesResource = FirewallRulesResource
     , _rule :: !(Attr Text)
       {- ^ (Optional) Configures a firewall rule; see <#rules> below for details. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed FirewallRulesResource
-    = '[]
 
 $(TH.makeResource
     "vcd_firewall_rules"
@@ -152,9 +143,6 @@ data NetworkResource = NetworkResource
       {- ^ (Optional) A range of IPs permitted to be used as static IPs for virtual machines; see <#ip-pools> below for details. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed NetworkResource
-    = '[]
-
 $(TH.makeResource
     "vcd_network"
     ''Qual.VCloudDirector
@@ -173,9 +161,6 @@ data SnatResource = SnatResource
     , _internal_ip :: !(Attr Text)
       {- ^ (Required) The IP or IP Range of the VM(s) to map from -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SnatResource
-    = '[]
 
 $(TH.makeResource
     "vcd_snat"
@@ -214,9 +199,6 @@ data VappResource = VappResource
       {- ^ (Optional) The name of the vApp Template to use -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed VappResource
-    = '[]
-
 $(TH.makeResource
     "vcd_vapp"
     ''Qual.VCloudDirector
@@ -250,9 +232,6 @@ data VappVmResource = VappVmResource
     , _vapp_name :: !(Attr Text)
       {- ^ (Required) The vApp this VM should belong to. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VappVmResource
-    = '[]
 
 $(TH.makeResource
     "vcd_vapp_vm"

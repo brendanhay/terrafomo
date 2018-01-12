@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.CloudStack
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.CloudStack.Types
     , module Terrafomo.CloudStack.Provider
     ) where

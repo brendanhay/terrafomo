@@ -52,15 +52,15 @@ data AddonResource = AddonResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AddonResource
-    = '[ '("config_vars", Attr Text)
+    = '[ '("config_vars", Text)
          {- - The Configuration variables of the add-on -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the add-on -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The add-on name -}
-      , '("plan", Attr Text)
+      , '("plan", Text)
          {- - The plan name -}
-      , '("provider_id", Attr Text)
+      , '("provider_id", Text)
          {- - The ID of the plan provider -}
        ]
 
@@ -82,9 +82,6 @@ data AppFeatureResource = AppFeatureResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the App Feature to manage. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AppFeatureResource
-    = '[]
 
 $(TH.makeResource
     "heroku_app_feature"
@@ -114,23 +111,23 @@ data AppResource = AppResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AppResource
-    = '[ '("all_config_vars", Attr Text)
+    = '[ '("all_config_vars", Text)
          {- - A map of all of the configuration variables that exist for the app, containing both those set by Terraform and those set externally. -}
-      , '("git_url", Attr Text)
+      , '("git_url", Text)
          {- - The Git URL for the application. This is used for deploying new versions of the app. -}
-      , '("heroku_hostname", Attr Text)
+      , '("heroku_hostname", Text)
          {- - A hostname for the Heroku application, suitable for pointing DNS records. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the app. This is also the name of the application. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the application. In Heroku, this is also the unique ID. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - The region that the app should be deployed in. -}
-      , '("space", Attr Text)
+      , '("space", Text)
          {- - The private space the app should run in. -}
-      , '("stack", Attr Text)
+      , '("stack", Text)
          {- - The application stack is what platform to run the application in. -}
-      , '("web_url", Attr Text)
+      , '("web_url", Text)
          {- - The web (HTTP) URL that the application can be accessed at by default. -}
        ]
 
@@ -154,11 +151,11 @@ data CertResource = CertResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CertResource
-    = '[ '("cname", Attr Text)
+    = '[ '("cname", Text)
          {- - The CNAME for the SSL endpoint -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the add-on -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the SSL certificate -}
        ]
 
@@ -180,11 +177,11 @@ data DomainResource = DomainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DomainResource
-    = '[ '("cname", Attr Text)
+    = '[ '("cname", Text)
          {- - The CNAME traffic should route to. -}
-      , '("hostname", Attr Text)
+      , '("hostname", Text)
          {- - The hostname traffic will be served as. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the of the domain record. -}
        ]
 
@@ -206,7 +203,7 @@ data DrainResource = DrainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DrainResource
-    = '[ '("token", Attr Text)
+    = '[ '("token", Text)
          {- - The unique token for your created drain. -}
        ]
 
@@ -233,15 +230,15 @@ data PipelineCouplingResource = PipelineCouplingResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PipelineCouplingResource
-    = '[ '("app", Attr Text)
+    = '[ '("app", Text)
          {- - The name of the application. -}
-      , '("app_id", Attr Text)
+      , '("app_id", Text)
          {- - The ID of the application. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The UUID of this pipeline coupling. -}
-      , '("pipeline", Attr Text)
+      , '("pipeline", Text)
          {- - The UUID of the pipeline. -}
-      , '("stage", Attr Text)
+      , '("stage", Text)
          {- - The stage for this coupling. -}
        ]
 
@@ -263,9 +260,9 @@ data PipelineResource = PipelineResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PipelineResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The UUID of the pipeline. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the pipeline. -}
        ]
 
@@ -289,13 +286,13 @@ data SpaceResource = SpaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SpaceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the space. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The space's name. -}
-      , '("organization", Attr Text)
+      , '("organization", Text)
          {- - The space's organization. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - The space's region. -}
        ]
 

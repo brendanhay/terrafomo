@@ -14,12 +14,14 @@
 --
 module Terrafomo.Ignition.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Ignition.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Ignition.Types as Qual
 
 {- | Ignition Terraform provider.
 
@@ -31,3 +33,8 @@ resources. It generates configurations files to be used by other resources.
 Use the navigation to the left to read about the available resources.
 -}
 data Ignition = Ignition
+
+instance Hashable Ignition
+
+instance Qual.ToValue Ignition where
+    toValue = Qual.genericToValue

@@ -14,12 +14,14 @@
 --
 module Terrafomo.StatusCake.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.StatusCake.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.StatusCake.Types as Qual
 
 {- | StatusCake Terraform provider.
 
@@ -29,3 +31,8 @@ the uptime of your service via a network of monitoring centers throughout
 the world The provider configuration block accepts the following arguments:
 -}
 data StatusCake = StatusCake
+
+instance Hashable StatusCake
+
+instance Qual.ToValue StatusCake where
+    toValue = Qual.genericToValue

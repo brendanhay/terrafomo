@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OPC
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.OPC.Types
     , module Terrafomo.OPC.Provider
     ) where

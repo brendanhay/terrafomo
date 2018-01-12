@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OVH
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.OVH.Types
     , module Terrafomo.OVH.Provider
     ) where

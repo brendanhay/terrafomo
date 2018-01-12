@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OneAndOne
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.OneAndOne.Types
     , module Terrafomo.OneAndOne.Provider
     ) where

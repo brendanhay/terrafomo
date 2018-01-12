@@ -61,9 +61,9 @@ data DirpoolResource = DirpoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DirpoolResource
-    = '[ '("hostname", Attr Text)
+    = '[ '("hostname", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
        ]
 
@@ -93,9 +93,6 @@ data ProbeHttpResource = ProbeHttpResource
       {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ProbeHttpResource
-    = '[]
-
 $(TH.makeResource
     "ultradns_probe_http"
     ''Qual.UltraDNS
@@ -121,9 +118,6 @@ data ProbePingResource = ProbePingResource
     , _zone :: !(Attr Text)
       {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ProbePingResource
-    = '[]
 
 $(TH.makeResource
     "ultradns_probe_ping"
@@ -152,9 +146,9 @@ data RdpoolResource = RdpoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RdpoolResource
-    = '[ '("hostname", Attr Text)
+    = '[ '("hostname", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
        ]
 
@@ -181,19 +175,19 @@ data RecordResource = RecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RecordResource
-    = '[ '("hostname", Attr Text)
+    = '[ '("hostname", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the record -}
-      , '("rdata", Attr Text)
+      , '("rdata", Text)
          {- - An array containing the values of the record -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - The TTL of the record -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of the record -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - The domain of the record -}
        ]
 
@@ -230,9 +224,9 @@ data TcpoolResource = TcpoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TcpoolResource
-    = '[ '("hostname", Attr Text)
+    = '[ '("hostname", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
        ]
 

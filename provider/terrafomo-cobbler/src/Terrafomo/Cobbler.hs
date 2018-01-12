@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cobbler
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Cobbler.Types
     , module Terrafomo.Cobbler.Provider
     ) where

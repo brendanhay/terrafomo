@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Nomad
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Nomad.Types
     , module Terrafomo.Nomad.Provider
     ) where

@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Chef
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Chef.Types
     , module Terrafomo.Chef.Provider
     ) where

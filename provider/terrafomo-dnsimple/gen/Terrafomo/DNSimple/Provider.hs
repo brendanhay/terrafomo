@@ -14,12 +14,14 @@
 --
 module Terrafomo.DNSimple.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.DNSimple.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.DNSimple.Types as Qual
 
 {- | DNSimple Terraform provider.
 
@@ -32,6 +34,11 @@ data DNSimple = DNSimple
     { _account :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable DNSimple
+
+instance Qual.ToValue DNSimple where
+    toValue = Qual.genericToValue
 
 {- | (Required) The ID of the account associated with the token. It must be
 provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment

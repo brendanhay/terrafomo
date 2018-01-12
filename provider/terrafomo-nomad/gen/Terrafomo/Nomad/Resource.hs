@@ -56,9 +56,6 @@ data JobResource = JobResource
       {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed JobResource
-    = '[]
-
 $(TH.makeResource
     "nomad_job"
     ''Qual.Nomad

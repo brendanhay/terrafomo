@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Dyn
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Dyn.Types
     , module Terrafomo.Dyn.Provider
     ) where

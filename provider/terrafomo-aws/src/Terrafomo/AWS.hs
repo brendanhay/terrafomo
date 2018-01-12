@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AWS
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.AWS.Types
     , module Terrafomo.AWS.Provider
     ) where

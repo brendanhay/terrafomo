@@ -56,11 +56,11 @@ data UserDataSource = UserDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserDataSource
-    = '[ '("full_name", Attr Text)
+    = '[ '("full_name", Text)
          {- - The full name of the found user. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the OpsGenie User. -}
-      , '("role", Attr Text)
+      , '("role", Text)
          {- - The role of the found user. -}
        ]
 

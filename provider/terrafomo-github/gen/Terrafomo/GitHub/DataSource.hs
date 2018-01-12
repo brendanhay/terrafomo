@@ -55,17 +55,17 @@ data TeamDataSource = TeamDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TeamDataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - the team's description. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the ID of the team. -}
-      , '("members", Attr Text)
+      , '("members", Text)
          {- - List of team members -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - the team's full name. -}
-      , '("permission", Attr Text)
+      , '("permission", Text)
          {- - the team's permission level. -}
-      , '("privacy", Attr Text)
+      , '("privacy", Text)
          {- - the team's privacy type. -}
        ]
 
@@ -84,41 +84,41 @@ data UserDataSource = UserDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserDataSource
-    = '[ '("avatar_url", Attr Text)
+    = '[ '("avatar_url", Text)
          {- - the user's avatar URL. -}
-      , '("bio", Attr Text)
+      , '("bio", Text)
          {- - the user's bio. -}
-      , '("blog", Attr Text)
+      , '("blog", Text)
          {- - the user's blog location. -}
-      , '("company", Attr Text)
+      , '("company", Text)
          {- - the user's company name. -}
-      , '("created_at", Attr Text)
+      , '("created_at", Text)
          {- - the creation date. -}
-      , '("email", Attr Text)
+      , '("email", Text)
          {- - the user's email. -}
-      , '("followers", Attr Text)
+      , '("followers", Text)
          {- - the number of followers. -}
-      , '("following", Attr Text)
+      , '("following", Text)
          {- - the number of following users. -}
-      , '("gpg_keys", Attr Text)
+      , '("gpg_keys", Text)
          {- - list of user's GPG keys -}
-      , '("gravatar_id", Attr Text)
+      , '("gravatar_id", Text)
          {- - the user's gravatar ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - the user's location. -}
-      , '("login", Attr Text)
+      , '("login", Text)
          {- - the user's login. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - the user's full name. -}
-      , '("public_gists", Attr Text)
+      , '("public_gists", Text)
          {- - the number of public gists. -}
-      , '("public_repos", Attr Text)
+      , '("public_repos", Text)
          {- - the number of public repositories. -}
-      , '("site_admin", Attr Text)
+      , '("site_admin", Text)
          {- - whether the user is a Github admin. -}
-      , '("ssh_keys", Attr Text)
+      , '("ssh_keys", Text)
          {- - list of user's SSH keys -}
-      , '("updated_at", Attr Text)
+      , '("updated_at", Text)
          {- - the update date. -}
        ]
 

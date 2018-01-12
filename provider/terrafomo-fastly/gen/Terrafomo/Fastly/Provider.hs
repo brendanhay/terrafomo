@@ -14,12 +14,14 @@
 --
 module Terrafomo.Fastly.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Fastly.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Fastly.Types as Qual
 
 {- | Fastly Terraform provider.
 
@@ -32,6 +34,11 @@ the available resources.
 data Fastly = Fastly
     { _api_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Fastly
+
+instance Qual.ToValue Fastly where
+    toValue = Qual.genericToValue
 
 {- | (Optional) This is the API key. It must be provided, but it can also be
 sourced from the @FASTLY_API_KEY@ environment variable

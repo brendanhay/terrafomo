@@ -14,12 +14,14 @@
 --
 module Terrafomo.OneAndOne.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.OneAndOne.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.OneAndOne.Types as Qual
 
 {- | OneAndOne Terraform provider.
 
@@ -28,3 +30,8 @@ the 1&1 Cloud Server API. Use the navigation to the left to read about the
 available resources.
 -}
 data OneAndOne = OneAndOne
+
+instance Hashable OneAndOne
+
+instance Qual.ToValue OneAndOne where
+    toValue = Qual.genericToValue

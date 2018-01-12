@@ -14,12 +14,14 @@
 --
 module Terrafomo.Spotinst.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Spotinst.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Spotinst.Types as Qual
 
 {- | Spotinst Terraform provider.
 
@@ -35,6 +37,11 @@ data Spotinst = Spotinst
     , _password :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Spotinst
+
+instance Qual.ToValue Spotinst where
+    toValue = Qual.genericToValue
 
 {- | (Optional; Required if not using @token@ ) The OAuth client ID associated
 with the username. It can be sourced from the @SPOTINST_CLIENT_ID@

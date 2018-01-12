@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSimple
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.DNSimple.Types
     , module Terrafomo.DNSimple.Provider
     ) where

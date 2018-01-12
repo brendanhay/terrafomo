@@ -51,7 +51,7 @@ data RegistryImageDataSource = RegistryImageDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegistryImageDataSource
-    = '[ '("sha256_digest", Attr Text)
+    = '[ '("sha256_digest", Text)
          {- (string) - The content digest of the image, as stored on the registry. -}
        ]
 

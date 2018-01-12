@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Circonus
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Circonus.Types
     , module Terrafomo.Circonus.Provider
     ) where

@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Icinga2
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Icinga2.Types
     , module Terrafomo.Icinga2.Provider
     ) where

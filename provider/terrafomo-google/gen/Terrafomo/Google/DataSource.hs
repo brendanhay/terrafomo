@@ -49,9 +49,6 @@ data ClientConfigDataSource = ClientConfigDataSource
       {- ^ - The region to operate under. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ClientConfigDataSource
-    = '[]
-
 $(TH.makeDataSource
     "google_client_config"
     ''Qual.Google
@@ -73,17 +70,17 @@ data ComputeInstanceGroupDataSource = ComputeInstanceGroupDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeInstanceGroupDataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - Textual description of the instance group. -}
-      , '("instances", Attr Text)
+      , '("instances", Text)
          {- - List of instances in the group. -}
-      , '("named_port", Attr Text)
+      , '("named_port", Text)
          {- - List of named ports in the group. -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - The URL of the network the instance group is in. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the resource. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The number of instances in the group. -}
        ]
 
@@ -104,9 +101,6 @@ data ComputeLbIpRangesDataSource = ComputeLbIpRangesDataSource
       {- ^ - The IP ranges used for health checks when Network load balancing is used -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeLbIpRangesDataSource
-    = '[]
-
 $(TH.makeDataSource
     "google_compute_lb_ip_ranges"
     ''Qual.Google
@@ -124,15 +118,15 @@ data ComputeNetworkDataSource = ComputeNetworkDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeNetworkDataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - Description of this network. -}
-      , '("gateway_ipv4", Attr Text)
+      , '("gateway_ipv4", Text)
          {- - The IP address of the gateway. -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - The network name or resource link to the parent network of this network. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the resource. -}
-      , '("subnetworks_self_links", Attr Text)
+      , '("subnetworks_self_links", Text)
          {- - the list of subnetworks which belong to the network -}
        ]
 
@@ -155,17 +149,17 @@ data ComputeSubnetworkDataSource = ComputeSubnetworkDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeSubnetworkDataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - Description of this subnetwork. -}
-      , '("gateway_address", Attr Text)
+      , '("gateway_address", Text)
          {- - The IP address of the gateway. -}
-      , '("ip_cidr_range", Attr Text)
+      , '("ip_cidr_range", Text)
          {- - The IP address range that machines in this network are assigned to, represented as a CIDR block. -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - The network name or resource link to the parent network of this subnetwork. -}
-      , '("private_ip_google_access", Attr Text)
+      , '("private_ip_google_access", Text)
          {- - Whether the VMs in this subnet can access Google services without assigned external IP addresses. -}
-      , '("self_link", Attr Text)
+      , '("self_link", Text)
          {- - The URI of the created resource. -}
        ]
 
@@ -189,7 +183,7 @@ data ComputeZonesDataSource = ComputeZonesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeZonesDataSource
-    = '[ '("names", Attr Text)
+    = '[ '("names", Text)
          {- - A list of zones available in the given region -}
        ]
 
@@ -211,13 +205,13 @@ data ContainerEngineVersionsDataSource = ContainerEngineVersionsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ContainerEngineVersionsDataSource
-    = '[ '("latest_master_version", Attr Text)
+    = '[ '("latest_master_version", Text)
          {- - The latest version available in the given zone for use with master instances. -}
-      , '("latest_node_version", Attr Text)
+      , '("latest_node_version", Text)
          {- - The latest version available in the given zone for use with node instances. -}
-      , '("valid_master_versions", Attr Text)
+      , '("valid_master_versions", Text)
          {- - A list of versions available in the given zone for use with master instances. -}
-      , '("valid_node_versions", Attr Text)
+      , '("valid_node_versions", Text)
          {- - A list of versions available in the given zone for use with node instances. -}
        ]
 
@@ -244,11 +238,11 @@ data DnsManagedZoneDataSource = DnsManagedZoneDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsManagedZoneDataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - A textual description field. -}
-      , '("dns_name", Attr Text)
+      , '("dns_name", Text)
          {- - The DNS name of this zone, e.g. "terraform.io". -}
-      , '("name_servers", Attr Text)
+      , '("name_servers", Text)
          {- - The list of nameservers that will be authoritative for this domain. Use NS records to redirect from your DNS provider to these names, thus making Google Cloud DNS authoritative for this zone. -}
        ]
 
@@ -269,7 +263,7 @@ data IamPolicyDataSource = IamPolicyDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamPolicyDataSource
-    = '[ '("policy_data", Attr Text)
+    = '[ '("policy_data", Text)
          {- - The above bindings serialized in a format suitable for referencing from a resource that supports IAM. -}
        ]
 
@@ -300,7 +294,7 @@ data StorageObjectSignedUrlDataSource = StorageObjectSignedUrlDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageObjectSignedUrlDataSource
-    = '[ '("signed_url", Attr Text)
+    = '[ '("signed_url", Text)
          {- - The signed URL that can be used to access the storage object without authentication. -}
        ]
 

@@ -53,9 +53,6 @@ data CheckcommandResource = CheckcommandResource
       {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CheckcommandResource
-    = '[]
-
 $(TH.makeResource
     "icinga2_checkcommand"
     ''Qual.Icinga2
@@ -79,9 +76,6 @@ data HostResource = HostResource
       {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed HostResource
-    = '[]
-
 $(TH.makeResource
     "icinga2_host"
     ''Qual.Icinga2
@@ -98,9 +92,6 @@ data HostgroupResource = HostgroupResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed HostgroupResource
-    = '[]
 
 $(TH.makeResource
     "icinga2_hostgroup"
@@ -120,9 +111,6 @@ data ServiceResource = ServiceResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ServiceResource
-    = '[]
 
 $(TH.makeResource
     "icinga2_service"

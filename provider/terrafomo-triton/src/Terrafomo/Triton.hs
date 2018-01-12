@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Triton
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Triton.Types
     , module Terrafomo.Triton.Provider
     ) where

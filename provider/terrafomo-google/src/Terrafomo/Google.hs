@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Google
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Google.Types
     , module Terrafomo.Google.Provider
     ) where

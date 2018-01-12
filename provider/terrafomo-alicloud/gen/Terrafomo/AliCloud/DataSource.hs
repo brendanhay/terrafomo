@@ -55,31 +55,31 @@ data ImagesDataSource = ImagesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImagesDataSource
-    = '[ '("architecture", Attr Text)
+    = '[ '("architecture", Text)
          {- - Platform type of the image system:i386 | x86_64. -}
-      , '("creation_time", Attr Text)
+      , '("creation_time", Text)
          {- - Time of creation. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Description of the image. -}
-      , '("disk_device_mappings", Attr Text)
+      , '("disk_device_mappings", Text)
          {- - Description of the system with disks and snapshots under an image. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the image. -}
-      , '("image_owner_alias", Attr Text)
+      , '("image_owner_alias", Text)
          {- - Alias of the image owner. -}
-      , '("image_version", Attr Text)
+      , '("image_version", Text)
          {- - Version of the image. -}
-      , '("is_subscribed", Attr Text)
+      , '("is_subscribed", Text)
          {- - Whether the user has subscribed to the terms of service for the image product corresponding to the ProductCode. -}
-      , '("os_name", Attr Text)
+      , '("os_name", Text)
          {- - Display name of the OS. -}
-      , '("product_code", Attr Text)
+      , '("product_code", Text)
          {- - Product code of the image on the image market. -}
-      , '("progress", Attr Text)
+      , '("progress", Text)
          {- - Progress of image creation, presented in percentages. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - Size of the image. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - Status of the image, with possible values: @UnAvailable@ , @Available@ , @Creating@ or @CreateFailed@ . -}
        ]
 
@@ -110,13 +110,13 @@ data InstanceTypesDataSource = InstanceTypesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InstanceTypesDataSource
-    = '[ '("cpu_core_count", Attr Text)
+    = '[ '("cpu_core_count", Text)
          {- - Number of CPU cores. -}
-      , '("family", Attr Text)
+      , '("family", Text)
          {- - The instance type family. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the instance type. -}
-      , '("memory_size", Attr Text)
+      , '("memory_size", Text)
          {- - Size of memory, measured in GB. -}
        ]
 
@@ -140,13 +140,13 @@ data KeyPairsDataSource = KeyPairsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyPairsDataSource
-    = '[ '("finger_print", Attr Text)
+    = '[ '("finger_print", Text)
          {- - Finger print of the key pair. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the key pair. -}
-      , '("instances", Attr Text)
+      , '("instances", Text)
          {- - A List of ECS instances that has been bound a specified key pair. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - Name of the key pair. -}
        ]
 
@@ -169,9 +169,9 @@ data RegionsDataSource = RegionsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegionsDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - ID of the region. -}
-      , '("local_name", Attr Text)
+      , '("local_name", Text)
          {- - Name of the region in the local language. -}
        ]
 
@@ -201,27 +201,27 @@ data VpcsDataSource = VpcsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcsDataSource
-    = '[ '("cidr_block", Attr Text)
+    = '[ '("cidr_block", Text)
          {- - CIDR block of the VPC. -}
-      , '("creation_time", Attr Text)
+      , '("creation_time", Text)
          {- - Time of creation. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Description of the VPC -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the VPC. -}
-      , '("is_default", Attr Text)
+      , '("is_default", Text)
          {- - Whether the VPC is the default VPC in the belonging region. -}
-      , '("region_id", Attr Text)
+      , '("region_id", Text)
          {- - ID of the region where VPC belongs. -}
-      , '("route_table_id", Attr Text)
+      , '("route_table_id", Text)
          {- - Route table ID of the VRouter -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - Status of the VPC. -}
-      , '("vpc_name", Attr Text)
+      , '("vpc_name", Text)
          {- - Name of the VPC. -}
-      , '("vrouter_id", Attr Text)
+      , '("vrouter_id", Text)
          {- - ID of the VRouter -}
-      , '("vswitch_ids", Attr Text)
+      , '("vswitch_ids", Text)
          {- - List of VSwitch IDs in the specified VPC -}
        ]
 
@@ -248,15 +248,15 @@ data ZonesDataSource = ZonesDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ZonesDataSource
-    = '[ '("available_disk_categories", Attr Text)
+    = '[ '("available_disk_categories", Text)
          {- - Set of supported disk categories. -}
-      , '("available_instance_types", Attr Text)
+      , '("available_instance_types", Text)
          {- - Instance types allowed. -}
-      , '("available_resource_creation", Attr Text)
+      , '("available_resource_creation", Text)
          {- - Type of resource that can be created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - ID of the zone. -}
-      , '("local_name", Attr Text)
+      , '("local_name", Text)
          {- - Name of the zone in the local language. -}
        ]
 

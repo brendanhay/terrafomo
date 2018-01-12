@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSMadeEasy
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.DNSMadeEasy.Types
     , module Terrafomo.DNSMadeEasy.Provider
     ) where

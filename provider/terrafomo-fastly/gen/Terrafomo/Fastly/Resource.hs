@@ -91,31 +91,31 @@ data ServiceV1Resource = ServiceV1Resource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServiceV1Resource
-    = '[ '("active_version", Attr Text)
+    = '[ '("active_version", Text)
          {- - The currently active version of your Fastly Service. -}
-      , '("backend", Attr Text)
+      , '("backend", Text)
          {- – Set of Backends. See above for details. -}
-      , '("default_host", Attr Text)
+      , '("default_host", Text)
          {- – Default host specified. -}
-      , '("default_ttl", Attr Text)
+      , '("default_ttl", Text)
          {- - Default TTL. -}
-      , '("domain", Attr Text)
+      , '("domain", Text)
          {- – Set of Domains. See above for details. -}
-      , '("force_destroy", Attr Text)
+      , '("force_destroy", Text)
          {- - Force the destruction of the Service on delete. -}
-      , '("header", Attr Text)
+      , '("header", Text)
          {- – Set of Headers. See above for details. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the Service. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- – Name of this service. -}
-      , '("papertrail", Attr Text)
+      , '("papertrail", Text)
          {- – Set of Papertrail configurations. See above for details. -}
-      , '("response_object", Attr Text)
+      , '("response_object", Text)
          {- - Set of Response Object configurations. See above for details. -}
-      , '("s3logging", Attr Text)
+      , '("s3logging", Text)
          {- – Set of S3 Logging configurations. See above for details. -}
-      , '("vcl", Attr Text)
+      , '("vcl", Text)
          {- – Set of custom VCL configurations. See above for details. -}
        ]
 

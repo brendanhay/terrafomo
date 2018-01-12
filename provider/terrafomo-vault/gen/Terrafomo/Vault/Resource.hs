@@ -50,9 +50,6 @@ data AuthBackendResource = AuthBackendResource
       {- ^ (Required) The name of the policy -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AuthBackendResource
-    = '[]
-
 $(TH.makeResource
     "vault_auth_backend"
     ''Qual.Vault
@@ -80,9 +77,6 @@ data AwsAuthBackendCertResource = AwsAuthBackendCertResource
     , _type' :: !(Attr Text)
       {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AwsAuthBackendCertResource
-    = '[]
 
 $(TH.makeResource
     "vault_aws_auth_backend_cert"
@@ -118,9 +112,6 @@ data AwsAuthBackendClientResource = AwsAuthBackendClientResource
     , _sts_endpoint :: !(Attr Text)
       {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AwsAuthBackendClientResource
-    = '[]
 
 $(TH.makeResource
     "vault_aws_auth_backend_client"
@@ -177,9 +168,6 @@ data AwsAuthBackendRoleResource = AwsAuthBackendRoleResource
       {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AwsAuthBackendRoleResource
-    = '[]
-
 $(TH.makeResource
     "vault_aws_auth_backend_role"
     ''Qual.Vault
@@ -206,9 +194,6 @@ data AwsAuthBackendStsRoleResource = AwsAuthBackendStsRoleResource
       {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AwsAuthBackendStsRoleResource
-    = '[]
-
 $(TH.makeResource
     "vault_aws_auth_backend_sts_role"
     ''Qual.Vault
@@ -229,9 +214,6 @@ data AwsSecretBackendResource = AwsSecretBackendResource
     , _secret_key :: !(Attr Text)
       {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AwsSecretBackendResource
-    = '[]
 
 $(TH.makeResource
     "vault_aws_secret_backend"
@@ -257,9 +239,6 @@ data AwsSecretBackendRoleResource = AwsSecretBackendRoleResource
     , _policy_arn :: !(Attr Text)
       {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AwsSecretBackendRoleResource
-    = '[]
 
 $(TH.makeResource
     "vault_aws_secret_backend_role"
@@ -287,9 +266,6 @@ data GenericSecretResource = GenericSecretResource
       {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed GenericSecretResource
-    = '[]
-
 $(TH.makeResource
     "vault_generic_secret"
     ''Qual.Vault
@@ -312,9 +288,6 @@ data MountResource = MountResource
       {- ^ (Required) Type of the backend, such as "aws" -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed MountResource
-    = '[]
-
 $(TH.makeResource
     "vault_mount"
     ''Qual.Vault
@@ -330,9 +303,6 @@ data PolicyResource = PolicyResource
     , _policy :: !(Attr Text)
       {- ^ (Required) String containing a Vault policy -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PolicyResource
-    = '[]
 
 $(TH.makeResource
     "vault_policy"

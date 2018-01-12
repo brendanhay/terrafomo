@@ -14,12 +14,14 @@
 --
 module Terrafomo.Datadog.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Datadog.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Datadog.Types as Qual
 
 {- | Datadog Terraform provider.
 
@@ -32,6 +34,11 @@ data Datadog = Datadog
     { _api_key :: !Text
     , _app_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Datadog
+
+instance Qual.ToValue Datadog where
+    toValue = Qual.genericToValue
 
 {- | (Required) Datadog API key. This can also be set via the @DATADOG_API_KEY@
 environment variable.

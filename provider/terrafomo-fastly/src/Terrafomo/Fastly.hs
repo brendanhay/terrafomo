@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Fastly
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Fastly.Types
     , module Terrafomo.Fastly.Provider
     ) where

@@ -14,12 +14,14 @@
 --
 module Terrafomo.Rancher.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Rancher.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Rancher.Types as Qual
 
 {- | Rancher Terraform provider.
 
@@ -33,6 +35,11 @@ data Rancher = Rancher
     , _api_url :: !Text
     , _secret_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Rancher
+
+instance Qual.ToValue Rancher where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Rancher API access key. It can also be sourced from the
 @RANCHER_ACCESS_KEY@ environment variable.

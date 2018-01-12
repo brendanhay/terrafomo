@@ -14,12 +14,14 @@
 --
 module Terrafomo.AzureRM.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.AzureRM.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.AzureRM.Types as Qual
 
 {- | AzureRM Terraform provider.
 
@@ -40,6 +42,11 @@ data AzureRM = AzureRM
     , _subscription_id :: !Text
     , _tenant_id :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable AzureRM
+
+instance Qual.ToValue AzureRM where
+    toValue = Qual.genericToValue
 
 {- | (Optional) The client ID to use. It can also be sourced from the
 @ARM_CLIENT_ID@ environment variable.

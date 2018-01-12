@@ -62,9 +62,6 @@ data AwsGroupResource = AwsGroupResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AwsGroupResource
-    = '[]
-
 $(TH.makeResource
     "spotinst_aws_group"
     ''Qual.Spotinst
@@ -88,7 +85,7 @@ data HealthcheckResource = HealthcheckResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed HealthcheckResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The healthcheck ID. -}
        ]
 
@@ -115,7 +112,7 @@ data SubscriptionResource = SubscriptionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubscriptionResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The subscription ID. -}
        ]
 

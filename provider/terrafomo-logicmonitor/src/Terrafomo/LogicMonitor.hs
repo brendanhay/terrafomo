@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.LogicMonitor
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.LogicMonitor.Types
     , module Terrafomo.LogicMonitor.Provider
     ) where

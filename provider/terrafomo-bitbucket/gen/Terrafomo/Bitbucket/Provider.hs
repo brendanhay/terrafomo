@@ -14,12 +14,14 @@
 --
 module Terrafomo.Bitbucket.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Bitbucket.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Bitbucket.Types as Qual
 
 {- | Bitbucket Terraform provider.
 
@@ -31,6 +33,11 @@ data Bitbucket = Bitbucket
     { _password :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Bitbucket
+
+instance Qual.ToValue Bitbucket where
+    toValue = Qual.genericToValue
 
 {- | (Required) Your password used to connect to bitbucket. You can also set this
 via the environment variable. @BITBUCKET_PASSWORD@

@@ -57,9 +57,9 @@ data EscalationPolicyDataSource = EscalationPolicyDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EscalationPolicyDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the escalation policy. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The short name of the found escalation policy. -}
        ]
 
@@ -88,9 +88,9 @@ data ScheduleDataSource = ScheduleDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ScheduleDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the schedule -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The short name of the found schedule. -}
        ]
 
@@ -123,17 +123,17 @@ data UserDataSource = UserDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserDataSource
-    = '[ '("avatar_url", Attr Text)
+    = '[ '("avatar_url", Text)
          {- - The URL of the user's avatar. -}
-      , '("html_url", Attr Text)
+      , '("html_url", Text)
          {- - URL at which the entity is uniquely displayed in the Web app -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the user. -}
-      , '("invitation_sent", Attr Text)
+      , '("invitation_sent", Text)
          {- - If true, the user has an outstanding invitation. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The short name of the found user. -}
-      , '("time_zone", Attr Text)
+      , '("time_zone", Text)
          {- - The timezone of the user -}
        ]
 
@@ -155,9 +155,9 @@ data VendorDataSource = VendorDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VendorDataSource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - The short name of the found vendor. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The generic service type for this vendor. -}
        ]
 

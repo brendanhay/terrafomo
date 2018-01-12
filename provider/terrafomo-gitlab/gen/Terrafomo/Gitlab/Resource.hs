@@ -53,9 +53,6 @@ data DeployKeyResource = DeployKeyResource
       {- ^ (Required, string) A title to describe the deploy key with. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DeployKeyResource
-    = '[]
-
 $(TH.makeResource
     "gitlab_deploy_key"
     ''Qual.Gitlab
@@ -85,7 +82,7 @@ data GroupResource = GroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed GroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique id assigned to the group by the GitLab server.  Serves as a namespace id where one is needed. -}
        ]
 
@@ -112,7 +109,7 @@ data LabelResource = LabelResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LabelResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique id assigned to the label by the GitLab server (the name of the label). -}
        ]
 
@@ -155,7 +152,7 @@ data ProjectHookResource = ProjectHookResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectHookResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique id assigned to the hook by the GitLab server. -}
        ]
 
@@ -193,13 +190,13 @@ data ProjectResource = ProjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProjectResource
-    = '[ '("http_url_to_repo", Attr Text)
+    = '[ '("http_url_to_repo", Text)
          {- - URL that can be provided to @git clone@ to clone the repository via HTTP. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Integer that uniquely identifies the project within the gitlab install. -}
-      , '("ssh_url_to_repo", Attr Text)
+      , '("ssh_url_to_repo", Text)
          {- - URL that can be provided to @git clone@ to clone the repository via SSH. -}
-      , '("web_url", Attr Text)
+      , '("web_url", Text)
          {- - URL that can be used to find the project in a browser. -}
        ]
 
@@ -234,7 +231,7 @@ data UserResource = UserResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed UserResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The unique id assigned to the user by the GitLab server. -}
        ]
 

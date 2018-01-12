@@ -14,12 +14,14 @@
 --
 module Terrafomo.LogicMonitor.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.LogicMonitor.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.LogicMonitor.Types as Qual
 
 {- | LogicMonitor Terraform provider.
 
@@ -33,6 +35,11 @@ data LogicMonitor = LogicMonitor
     , _api_key :: !Text
     , _company :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable LogicMonitor
+
+instance Qual.ToValue LogicMonitor where
+    toValue = Qual.genericToValue
 
 {- | (Required) LogicMonitor API id. This can also be set via the @LM_API_ID@
 environment variable.

@@ -59,9 +59,9 @@ data AppServicePlanResource = AppServicePlanResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AppServicePlanResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the App Service Plan component. -}
-      , '("maximum_number_of_workers", Attr Text)
+      , '("maximum_number_of_workers", Text)
          {- - The maximum number of workers supported with the App Service Plan's sku. -}
        ]
 
@@ -98,7 +98,7 @@ data AppServiceResource = AppServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AppServiceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the App Service. -}
        ]
 
@@ -150,13 +150,13 @@ data ApplicationGatewayResource = ApplicationGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApplicationGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The application gatewayConfiguration ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - The location/region where the application gateway is created -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the application gateway. -}
-      , '("resource_group_name", Attr Text)
+      , '("resource_group_name", Text)
          {- - The name of the resource group in which to create the application gateway. -}
        ]
 
@@ -183,11 +183,11 @@ data ApplicationInsightsResource = ApplicationInsightsResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApplicationInsightsResource
-    = '[ '("app_id", Attr Text)
+    = '[ '("app_id", Text)
          {- - The App ID associated with this Application Insights component. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the Application Insights component. -}
-      , '("instrumentation_key", Attr Text)
+      , '("instrumentation_key", Text)
          {- - The Instrumentation Key for this Application Insights component. -}
        ]
 
@@ -214,7 +214,7 @@ data AutomationAccountResource = AutomationAccountResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutomationAccountResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Automation Account ID. -}
        ]
 
@@ -243,7 +243,7 @@ data AutomationCredentialResource = AutomationCredentialResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutomationCredentialResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Automation Credential ID. -}
        ]
 
@@ -278,7 +278,7 @@ data AutomationRunbookResource = AutomationRunbookResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutomationRunbookResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Automation Runbook ID. -}
        ]
 
@@ -311,7 +311,7 @@ data AutomationScheduleResource = AutomationScheduleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutomationScheduleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Automation Schedule ID. -}
        ]
 
@@ -342,7 +342,7 @@ data AvailabilitySetResource = AvailabilitySetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AvailabilitySetResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The virtual Availability Set ID. -}
        ]
 
@@ -388,7 +388,7 @@ data CdnEndpointResource = CdnEndpointResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CdnEndpointResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The CDN Endpoint ID. -}
        ]
 
@@ -415,7 +415,7 @@ data CdnProfileResource = CdnProfileResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CdnProfileResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The CDN Profile ID. -}
        ]
 
@@ -444,9 +444,9 @@ data ContainerGroupResource = ContainerGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ContainerGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The container group ID. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The IP address allocated to the container group. -}
        ]
 
@@ -479,13 +479,13 @@ data ContainerRegistryResource = ContainerRegistryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ContainerRegistryResource
-    = '[ '("admin_password", Attr Text)
+    = '[ '("admin_password", Text)
          {- - The Password associated with the Container Registry Admin account - if the admin account is enabled. -}
-      , '("admin_username", Attr Text)
+      , '("admin_username", Text)
          {- - The Username associated with the Container Registry Admin account - if the admin account is enabled. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Container Registry ID. -}
-      , '("login_server", Attr Text)
+      , '("login_server", Text)
          {- - The URL that can be used to log into the container registry. -}
        ]
 
@@ -524,13 +524,13 @@ data ContainerServiceResource = ContainerServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ContainerServiceResource
-    = '[ '("agent_pool_profile.fqdn", Attr Text)
+    = '[ '("agent_pool_profile.fqdn", Text)
          {- - FDQN for the agent pool. -}
-      , '("diagnostics_profile.storage_uri", Attr Text)
+      , '("diagnostics_profile.storage_uri", Text)
          {- - The URI of the storage account where diagnostics are stored. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Container Service ID. -}
-      , '("master_profile.fqdn", Attr Text)
+      , '("master_profile.fqdn", Text)
          {- - FDQN for the master. -}
        ]
 
@@ -565,15 +565,15 @@ data CosmosDbAccountResource = CosmosDbAccountResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CosmosDbAccountResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The CosmosDB Account ID. -}
-      , '("primary_master_key", Attr Text)
+      , '("primary_master_key", Text)
          {- - The Primary master key for the CosmosDB Account. -}
-      , '("primary_readonly_master_key", Attr Text)
+      , '("primary_readonly_master_key", Text)
          {- - The Primary read-only master Key for the CosmosDB Account. -}
-      , '("secondary_master_key", Attr Text)
+      , '("secondary_master_key", Text)
          {- - The Secondary master key for the CosmosDB Account. -}
-      , '("secondary_readonly_master_key", Attr Text)
+      , '("secondary_readonly_master_key", Text)
          {- - The Secondary read-only master key for the CosmosDB Account. -}
        ]
 
@@ -602,7 +602,7 @@ data DnsARecordResource = DnsARecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsARecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS A Record ID. -}
        ]
 
@@ -631,7 +631,7 @@ data DnsAaaaRecordResource = DnsAaaaRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsAaaaRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS AAAA Record ID. -}
        ]
 
@@ -660,7 +660,7 @@ data DnsCnameRecordResource = DnsCnameRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsCnameRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS CName Record ID. -}
        ]
 
@@ -689,7 +689,7 @@ data DnsMxRecordResource = DnsMxRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsMxRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS MX Record ID. -}
        ]
 
@@ -718,7 +718,7 @@ data DnsNsRecordResource = DnsNsRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsNsRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS NS Record ID. -}
        ]
 
@@ -747,7 +747,7 @@ data DnsPtrRecordResource = DnsPtrRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsPtrRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS PTR Record ID. -}
        ]
 
@@ -776,7 +776,7 @@ data DnsSrvRecordResource = DnsSrvRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsSrvRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS SRV Record ID. -}
        ]
 
@@ -805,7 +805,7 @@ data DnsTxtRecordResource = DnsTxtRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsTxtRecordResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS TXT Record ID. -}
        ]
 
@@ -830,13 +830,13 @@ data DnsZoneResource = DnsZoneResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DnsZoneResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The DNS Zone ID. -}
-      , '("max_number_of_record_sets", Attr Text)
+      , '("max_number_of_record_sets", Text)
          {- - (Optional) Maximum number of Records in the zone. Defaults to @1000@ . -}
-      , '("name_servers", Attr Text)
+      , '("name_servers", Text)
          {- - (Optional) A list of values that make up the NS record for the zone. -}
-      , '("number_of_record_sets", Attr Text)
+      , '("number_of_record_sets", Text)
          {- - (Optional) The number of records already in the zone. -}
        ]
 
@@ -862,13 +862,13 @@ data EventgridTopicResource = EventgridTopicResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EventgridTopicResource
-    = '[ '("endpoint", Attr Text)
+    = '[ '("endpoint", Text)
          {- - The Endpoint associated with the EventGrid Topic. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The EventGrid Topic ID. -}
-      , '("primary_access_key", Attr Text)
+      , '("primary_access_key", Text)
          {- - The Primary Shared Access Key associated with the EventGrid Topic. -}
-      , '("secondary_access_key", Attr Text)
+      , '("secondary_access_key", Text)
          {- - The Secondary Shared Access Key associated with the EventGrid Topic. -}
        ]
 
@@ -893,15 +893,15 @@ data EventhubAuthorizationRuleResource = EventhubAuthorizationRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EventhubAuthorizationRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The EventHub ID. -}
-      , '("primary_connection_string", Attr Text)
+      , '("primary_connection_string", Text)
          {- - The Primary Connection String for the Event Hubs authorization Rule. -}
-      , '("primary_key", Attr Text)
+      , '("primary_key", Text)
          {- - The Primary Key for the Event Hubs authorization Rule. -}
-      , '("secondary_connection_string", Attr Text)
+      , '("secondary_connection_string", Text)
          {- - The Secondary Connection String for the Event Hubs authorization Rule. -}
-      , '("secondary_key", Attr Text)
+      , '("secondary_key", Text)
          {- - The Secondary Key for the Event Hubs authorization Rule. -}
        ]
 
@@ -929,7 +929,7 @@ data EventhubConsumerGroupResource = EventhubConsumerGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EventhubConsumerGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The EventHub Consumer Group ID. -}
        ]
 
@@ -958,7 +958,7 @@ data EventhubNamespaceResource = EventhubNamespaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EventhubNamespaceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The EventHub Namespace ID. -}
        ]
 
@@ -985,9 +985,9 @@ data EventhubResource = EventhubResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EventhubResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The EventHub ID. -}
-      , '("partition_ids", Attr Text)
+      , '("partition_ids", Text)
          {- - The identifiers for partitions created for Event Hubs. -}
        ]
 
@@ -1022,11 +1022,11 @@ data ExpressRouteCircuitResource = ExpressRouteCircuitResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ExpressRouteCircuitResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Resource ID of the ExpressRoute circuit. -}
-      , '("service_key", Attr Text)
+      , '("service_key", Text)
          {- - The string needed by the service provider to provision the ExpressRoute circuit. -}
-      , '("service_provider_provisioning_state", Attr Text)
+      , '("service_provider_provisioning_state", Text)
          {- - The ExpressRoute circuit provisioning state from your chosen service provider. Possible values are "NotProvisioned", "Provisioning", "Provisioned", and "Deprovisioning". -}
        ]
 
@@ -1058,15 +1058,15 @@ data ImageResource = ImageResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImageResource
-    = '[ '("data_disk", Attr Text)
+    = '[ '("data_disk", Text)
          {- - a collection of @data_disk@ blocks as defined below. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The managed image ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - the Azure Location where this Image exists. -}
-      , '("os_disk", Attr Text)
+      , '("os_disk", Text)
          {- - a @os_disk@ block as defined below. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - a mapping of tags to assigned to the resource. -}
        ]
 
@@ -1093,9 +1093,9 @@ data KeyVaultCertificateResource = KeyVaultCertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyVaultCertificateResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Key Vault Certificate ID. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - The current version of the Key Vault Certificate. -}
        ]
 
@@ -1124,13 +1124,13 @@ data KeyVaultKeyResource = KeyVaultKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyVaultKeyResource
-    = '[ '("e", Attr Text)
+    = '[ '("e", Text)
          {- - The RSA public exponent of this Key Vault Key. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Key Vault Key ID. -}
-      , '("n", Attr Text)
+      , '("n", Text)
          {- - The RSA modulus of this Key Vault Key. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - The current version of the Key Vault Key. -}
        ]
 
@@ -1167,9 +1167,9 @@ data KeyVaultResource = KeyVaultResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyVaultResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Vault ID. -}
-      , '("vault_uri", Attr Text)
+      , '("vault_uri", Text)
          {- - The URI of the vault for performing operations on keys and secrets. -}
        ]
 
@@ -1196,9 +1196,9 @@ data KeyVaultSecretResource = KeyVaultSecretResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyVaultSecretResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Key Vault Secret ID. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - The current version of the Key Vault Secret. -}
        ]
 
@@ -1223,7 +1223,7 @@ data LbBackendAddressPoolResource = LbBackendAddressPoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbBackendAddressPoolResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the LoadBalancer to which the resource is attached. -}
        ]
 
@@ -1257,7 +1257,7 @@ data LbNatPoolResource = LbNatPoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbNatPoolResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the LoadBalancer to which the resource is attached. -}
        ]
 
@@ -1289,7 +1289,7 @@ data LbNatRuleResource = LbNatRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbNatRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the LoadBalancer to which the resource is attached. -}
        ]
 
@@ -1323,7 +1323,7 @@ data LbProbeResource = LbProbeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbProbeResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the LoadBalancer to which the resource is attached. -}
        ]
 
@@ -1350,9 +1350,9 @@ data LbResource = LbResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The LoadBalancer ID. -}
-      , '("private_ip_address", Attr Text)
+      , '("private_ip_address", Text)
          {- - The private IP address assigned to the load balancer, if any. -}
        ]
 
@@ -1394,7 +1394,7 @@ data LbRuleResource = LbRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the LoadBalancer to which the resource is attached. -}
        ]
 
@@ -1422,7 +1422,7 @@ data LocalNetworkGatewayResource = LocalNetworkGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LocalNetworkGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The local network gateway unique ID within Azure. -}
        ]
 
@@ -1451,15 +1451,15 @@ data LogAnalyticsWorkspaceResource = LogAnalyticsWorkspaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LogAnalyticsWorkspaceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Log Analytics Workspace ID. -}
-      , '("portal_url", Attr Text)
+      , '("portal_url", Text)
          {- - The Portal URL for the Log Analytics Workspace. -}
-      , '("primary_shared_key", Attr Text)
+      , '("primary_shared_key", Text)
          {- - The Primary shared key for the Log Analytics Workspace. -}
-      , '("secondary_shared_key", Attr Text)
+      , '("secondary_shared_key", Text)
          {- - The Secondary shared key for the Log Analytics Workspace. -}
-      , '("workspace_id", Attr Text)
+      , '("workspace_id", Text)
          {- - The Workspace (or Customer) ID for the Log Analytics Workspace. -}
        ]
 
@@ -1508,19 +1508,19 @@ data ManagedDiskResource = ManagedDiskResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ManagedDiskResource
-    = '[ '("disk_size_gb", Attr Text)
+    = '[ '("disk_size_gb", Text)
          {- - The size of the managed disk in gigabytes. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The managed disk ID. -}
-      , '("os_type", Attr Text)
+      , '("os_type", Text)
          {- - The operating system for managed disk. Valid values are @Linux@ or @Windows@ -}
-      , '("source_resource_id", Attr Text)
+      , '("source_resource_id", Text)
          {- - ID of an existing managed disk that the current resource was created from. -}
-      , '("source_uri", Attr Text)
+      , '("source_uri", Text)
          {- - The source URI for the managed disk -}
-      , '("storage_account_type", Attr Text)
+      , '("storage_account_type", Text)
          {- - The storage account type for the managed disk. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the resource. -}
        ]
 
@@ -1545,7 +1545,7 @@ data MysqlConfigurationResource = MysqlConfigurationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MysqlConfigurationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the MySQL Configuration. -}
        ]
 
@@ -1572,7 +1572,7 @@ data MysqlDatabaseResource = MysqlDatabaseResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MysqlDatabaseResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the MySQL Database. -}
        ]
 
@@ -1599,7 +1599,7 @@ data MysqlFirewallRuleResource = MysqlFirewallRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MysqlFirewallRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the MySQL Firewall Rule. -}
        ]
 
@@ -1632,9 +1632,9 @@ data MysqlServerResource = MysqlServerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MysqlServerResource
-    = '[ '("fqdn", Attr Text)
+    = '[ '("fqdn", Text)
          {- - The FQDN of the MySQL Server. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the MySQL Server. -}
        ]
 
@@ -1670,17 +1670,17 @@ data NetworkInterfaceResource = NetworkInterfaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkInterfaceResource
-    = '[ '("applied_dns_servers", Attr Text)
+    = '[ '("applied_dns_servers", Text)
          {- - If the VM that uses this NIC is part of an Availability Set, then this list will have the union of all DNS servers from all NICs that are part of the Availability Set -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Virtual Network Interface ID. -}
-      , '("internal_fqdn", Attr Text)
+      , '("internal_fqdn", Text)
          {- - Fully qualified DNS name supporting internal communications between VMs in the same VNet -}
-      , '("mac_address", Attr Text)
+      , '("mac_address", Text)
          {- - The media access control (MAC) address of the network interface. -}
-      , '("private_ip_address", Attr Text)
+      , '("private_ip_address", Text)
          {- - The private ip address of the network interface. -}
-      , '("virtual_machine_id", Attr Text)
+      , '("virtual_machine_id", Text)
          {- - Reference to a VM with which this NIC has been associated. -}
        ]
 
@@ -1715,7 +1715,7 @@ data NetworkSecurityGroupResource = NetworkSecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkSecurityGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Network Security Group ID. -}
        ]
 
@@ -1762,7 +1762,7 @@ data NetworkSecurityRuleResource = NetworkSecurityRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkSecurityRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Network Security Rule ID. -}
        ]
 
@@ -1787,7 +1787,7 @@ data PostgresqlConfigurationResource = PostgresqlConfigurationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PostgresqlConfigurationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the PostgreSQL Configuration. -}
        ]
 
@@ -1814,7 +1814,7 @@ data PostgresqlDatabaseResource = PostgresqlDatabaseResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PostgresqlDatabaseResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the PostgreSQL Database. -}
        ]
 
@@ -1841,7 +1841,7 @@ data PostgresqlFirewallRuleResource = PostgresqlFirewallRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PostgresqlFirewallRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the PostgreSQL Firewall Rule. -}
        ]
 
@@ -1874,9 +1874,9 @@ data PostgresqlServerResource = PostgresqlServerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PostgresqlServerResource
-    = '[ '("fqdn", Attr Text)
+    = '[ '("fqdn", Text)
          {- - The FQDN of the PostgreSQL Server. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the PostgreSQL Server. -}
        ]
 
@@ -1901,17 +1901,17 @@ data PublicIpResource = PublicIpResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PublicIpResource
-    = '[ '("domain_name_label", Attr Text)
+    = '[ '("domain_name_label", Text)
          {- - The label for the Domain Name. -}
-      , '("fqdn", Attr Text)
+      , '("fqdn", Text)
          {- - Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Public IP ID. -}
-      , '("idle_timeout_in_minutes", Attr Text)
+      , '("idle_timeout_in_minutes", Text)
          {- - Specifies the timeout for the TCP idle connection. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The IP address value that was allocated. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags to assigned to the resource. -}
        ]
 
@@ -1937,9 +1937,6 @@ data RedisCacheResource = RedisCacheResource
       {- ^ (Required) The name of the resource group in which to create the Redis instance. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed RedisCacheResource
-    = '[]
-
 $(TH.makeResource
     "azurerm_redis_cache"
     ''Qual.AzureRM
@@ -1959,11 +1956,11 @@ data ResourceGroupResource = ResourceGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ResourceGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The resource group ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - The location of the resource group. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the resource group. -}
        ]
 
@@ -1988,7 +1985,7 @@ data RoleAssignmentResource = RoleAssignmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RoleAssignmentResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Role Assignment ID. -}
        ]
 
@@ -2017,15 +2014,15 @@ data RoleDefinitionResource = RoleDefinitionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RoleDefinitionResource
-    = '[ '("assignable_scopes", Attr Text)
+    = '[ '("assignable_scopes", Text)
          {- - One or more assignable scopes for this Role Definition, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@ , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@ . -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - the Description of the built-in Role. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Role Definition ID. -}
-      , '("permissions", Attr Text)
+      , '("permissions", Text)
          {- - a @permissions@ block as documented below. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - the Type of the Role. -}
        ]
 
@@ -2054,7 +2051,7 @@ data RouteResource = RouteResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Route ID. -}
        ]
 
@@ -2081,9 +2078,9 @@ data RouteTableResource = RouteTableResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteTableResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Route Table ID. -}
-      , '("subnets", Attr Text)
+      , '("subnets", Text)
          {- - The collection of Subnets associated with this route table. -}
        ]
 
@@ -2114,7 +2111,7 @@ data SearchServiceResource = SearchServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SearchServiceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Search Service ID. -}
        ]
 
@@ -2143,7 +2140,7 @@ data ServicebusNamespaceResource = ServicebusNamespaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServicebusNamespaceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ServiceBus Namespace ID. -}
        ]
 
@@ -2174,9 +2171,6 @@ data ServicebusQueueResource = ServicebusQueueResource
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ServicebusQueueResource
-    = '[]
 
 $(TH.makeResource
     "azurerm_servicebus_queue"
@@ -2213,9 +2207,6 @@ data ServicebusSubscriptionResource = ServicebusSubscriptionResource
     , _topic_name :: !(Attr Text)
       {- ^ (Required) The name of the ServiceBus Topic to create this Subscription in. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ServicebusSubscriptionResource
-    = '[]
 
 $(TH.makeResource
     "azurerm_servicebus_subscription"
@@ -2258,9 +2249,6 @@ data ServicebusTopicResource = ServicebusTopicResource
       {- ^ (Optional) Boolean flag which controls whether the Topic supports ordering. Defaults to false. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ServicebusTopicResource
-    = '[]
-
 $(TH.makeResource
     "azurerm_servicebus_topic"
     ''Qual.AzureRM
@@ -2282,17 +2270,17 @@ data SnapshotResource = SnapshotResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnapshotResource
-    = '[ '("create_option", Attr Text)
+    = '[ '("create_option", Text)
          {- - How the snapshot was created. -}
-      , '("disk_size_gb", Attr Text)
+      , '("disk_size_gb", Text)
          {- - The Size of the Snapshotted Disk in GB. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Snapshot ID. -}
-      , '("source_resource_id", Attr Text)
+      , '("source_resource_id", Text)
          {- - The reference to an existing snapshot. -}
-      , '("source_uri", Attr Text)
+      , '("source_uri", Text)
          {- - The URI to a Managed or Unmanaged Disk. -}
-      , '("storage_account_id", Attr Text)
+      , '("storage_account_id", Text)
          {- - The ID of an storage account. -}
        ]
 
@@ -2339,11 +2327,11 @@ data SqlDatabaseResource = SqlDatabaseResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqlDatabaseResource
-    = '[ '("creation_data", Attr Text)
+    = '[ '("creation_data", Text)
          {- - The creation date of the SQL Database. -}
-      , '("default_secondary_location", Attr Text)
+      , '("default_secondary_location", Text)
          {- - The default secondary location of the SQL Database. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The SQL Database ID. -}
        ]
 
@@ -2380,9 +2368,9 @@ data SqlElasticpoolResource = SqlElasticpoolResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqlElasticpoolResource
-    = '[ '("creation_date", Attr Text)
+    = '[ '("creation_date", Text)
          {- - The creation date of the SQL Elastic Pool. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The SQL Elastic Pool ID. -}
        ]
 
@@ -2409,7 +2397,7 @@ data SqlFirewallRuleResource = SqlFirewallRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqlFirewallRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The SQL Firewall Rule ID. -}
        ]
 
@@ -2442,9 +2430,9 @@ data SqlServerResource = SqlServerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqlServerResource
-    = '[ '("fully_qualified_domain_name", Attr Text)
+    = '[ '("fully_qualified_domain_name", Text)
          {- - The fully qualified domain name of the Azure SQL Server (e.g. myServerName.database.windows.net) -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The SQL Server ID. -}
        ]
 
@@ -2489,33 +2477,33 @@ data StorageAccountResource = StorageAccountResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageAccountResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The storage account Resource ID. -}
-      , '("primary_access_key", Attr Text)
+      , '("primary_access_key", Text)
          {- - The primary access key for the storage account -}
-      , '("primary_blob_connection_string", Attr Text)
+      , '("primary_blob_connection_string", Text)
          {- - The connection string associated with the primary blob location -}
-      , '("primary_blob_endpoint", Attr Text)
+      , '("primary_blob_endpoint", Text)
          {- - The endpoint URL for blob storage in the primary location. -}
-      , '("primary_file_endpoint", Attr Text)
+      , '("primary_file_endpoint", Text)
          {- - The endpoint URL for file storage in the primary location. -}
-      , '("primary_location", Attr Text)
+      , '("primary_location", Text)
          {- - The primary location of the storage account. -}
-      , '("primary_queue_endpoint", Attr Text)
+      , '("primary_queue_endpoint", Text)
          {- - The endpoint URL for queue storage in the primary location. -}
-      , '("primary_table_endpoint", Attr Text)
+      , '("primary_table_endpoint", Text)
          {- - The endpoint URL for table storage in the primary location. -}
-      , '("secondary_access_key", Attr Text)
+      , '("secondary_access_key", Text)
          {- - The secondary access key for the storage account -}
-      , '("secondary_blob_connection_string", Attr Text)
+      , '("secondary_blob_connection_string", Text)
          {- - The connection string associated with the secondary blob location -}
-      , '("secondary_blob_endpoint", Attr Text)
+      , '("secondary_blob_endpoint", Text)
          {- - The endpoint URL for blob storage in the secondary location. -}
-      , '("secondary_location", Attr Text)
+      , '("secondary_location", Text)
          {- - The secondary location of the storage account. -}
-      , '("secondary_queue_endpoint", Attr Text)
+      , '("secondary_queue_endpoint", Text)
          {- - The endpoint URL for queue storage in the secondary location. -}
-      , '("secondary_table_endpoint", Attr Text)
+      , '("secondary_table_endpoint", Text)
          {- - The endpoint URL for table storage in the secondary location. -}
        ]
 
@@ -2552,9 +2540,9 @@ data StorageBlobResource = StorageBlobResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageBlobResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The storage blob Resource ID. -}
-      , '("url", Attr Text)
+      , '("url", Text)
          {- - The URL of the blob -}
        ]
 
@@ -2579,9 +2567,9 @@ data StorageContainerResource = StorageContainerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageContainerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The storage container Resource ID. -}
-      , '("properties", Attr Text)
+      , '("properties", Text)
          {- - Key-value definition of additional properties associated to the storage container -}
        ]
 
@@ -2604,7 +2592,7 @@ data StorageQueueResource = StorageQueueResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageQueueResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The storage queue Resource ID. -}
        ]
 
@@ -2629,9 +2617,9 @@ data StorageShareResource = StorageShareResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageShareResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The storage share Resource ID. -}
-      , '("url", Attr Text)
+      , '("url", Text)
          {- - The URL of the share -}
        ]
 
@@ -2654,7 +2642,7 @@ data StorageTableResource = StorageTableResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageTableResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The storage table Resource ID. -}
        ]
 
@@ -2689,21 +2677,21 @@ data SubnetResource = SubnetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubnetResource
-    = '[ '("address_prefix", Attr Text)
+    = '[ '("address_prefix", Text)
          {- - The address prefix for the subnet -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The subnet ID. -}
-      , '("ip_configurations", Attr Text)
+      , '("ip_configurations", Text)
          {- - The collection of IP Configurations with IPs within this subnet. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the subnet. -}
-      , '("network_security_group_id", Attr Text)
+      , '("network_security_group_id", Text)
          {- - The ID of the Network Security Group associated with the subnet. -}
-      , '("resource_group_name", Attr Text)
+      , '("resource_group_name", Text)
          {- - The name of the resource group in which the subnet is created in. -}
-      , '("route_table_id", Attr Text)
+      , '("route_table_id", Text)
          {- - The ID of the Route Table associated with this subnet. -}
-      , '("virtual_network_name", Attr Text)
+      , '("virtual_network_name", Text)
          {- - The name of the virtual network in which the subnet is created in -}
        ]
 
@@ -2739,9 +2727,9 @@ data TemplateDeploymentResource = TemplateDeploymentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TemplateDeploymentResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Template Deployment ID. -}
-      , '("outputs", Attr Text)
+      , '("outputs", Text)
          {- - A map of supported scalar output types returned from the deployment (currently, Azure Template Deployment outputs of type String, Int and Bool are supported, and are converted to strings - others will be ignored) and can be accessed using @.outputs["name"]@ . -}
        ]
 
@@ -2780,7 +2768,7 @@ data TrafficManagerEndpointResource = TrafficManagerEndpointResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TrafficManagerEndpointResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Traffic Manager Endpoint id. -}
        ]
 
@@ -2812,9 +2800,9 @@ data TrafficManagerProfileResource = TrafficManagerProfileResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TrafficManagerProfileResource
-    = '[ '("fqdn", Attr Text)
+    = '[ '("fqdn", Text)
          {- - The FQDN of the created Profile. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Traffic Manager Profile id. -}
        ]
 
@@ -2844,7 +2832,7 @@ data VirtualMachineExtensionResource = VirtualMachineExtensionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VirtualMachineExtensionResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Virtual Machine Extension ID. -}
        ]
 
@@ -2901,7 +2889,7 @@ data VirtualMachineResource = VirtualMachineResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VirtualMachineResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The virtual machine ID. -}
        ]
 
@@ -2957,9 +2945,6 @@ data VirtualMachineScaleSetResource = VirtualMachineScaleSetResource
       {- ^ (Required) Specifies the mode of an upgrade to virtual machines in the scale set. Possible values, @Manual@ or @Automatic@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed VirtualMachineScaleSetResource
-    = '[]
-
 $(TH.makeResource
     "azurerm_virtual_machine_scale_set"
     ''Qual.AzureRM
@@ -2990,7 +2975,7 @@ data VirtualNetworkPeeringResource = VirtualNetworkPeeringResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VirtualNetworkPeeringResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Virtual Network Peering resource ID. -}
        ]
 
@@ -3028,15 +3013,15 @@ data VirtualNetworkResource = VirtualNetworkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VirtualNetworkResource
-    = '[ '("address_space", Attr Text)
+    = '[ '("address_space", Text)
          {- - The address space that is used the virtual network. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The virtual NetworkConfiguration ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - The location/region where the virtual network is created -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the virtual network. -}
-      , '("resource_group_name", Attr Text)
+      , '("resource_group_name", Text)
          {- - The name of the resource group in which to create the virtual network. -}
        ]
 

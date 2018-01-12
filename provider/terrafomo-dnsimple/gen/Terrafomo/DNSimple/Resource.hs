@@ -57,21 +57,21 @@ data RecordResource = RecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RecordResource
-    = '[ '("domain_id", Attr Text)
+    = '[ '("domain_id", Text)
          {- - The domain ID of the record -}
-      , '("hostname", Attr Text)
+      , '("hostname", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the record -}
-      , '("priority", Attr Text)
+      , '("priority", Text)
          {- - The priority of the record -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - The TTL of the record -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of the record -}
-      , '("value", Attr Text)
+      , '("value", Text)
          {- - The value of the record -}
        ]
 

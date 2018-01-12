@@ -14,12 +14,14 @@
 --
 module Terrafomo.Logentries.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Logentries.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Logentries.Types as Qual
 
 {- | Logentries Terraform provider.
 
@@ -31,6 +33,11 @@ navigation to the left to read about the available resources.
 data Logentries = Logentries
     { _account_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Logentries
+
+instance Qual.ToValue Logentries where
+    toValue = Qual.genericToValue
 
 {- | (Required) The Logentries account key. This can also be specified with the
 @LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries

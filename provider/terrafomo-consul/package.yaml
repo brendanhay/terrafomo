@@ -8,6 +8,7 @@ name: terrafomo-consul
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

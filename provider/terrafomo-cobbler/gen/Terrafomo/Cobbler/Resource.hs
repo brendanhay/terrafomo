@@ -76,9 +76,6 @@ data DistroResource = DistroResource
       {- ^ (Optional) File mappings for built-in config management. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DistroResource
-    = '[]
-
 $(TH.makeResource
     "cobbler_distro"
     ''Qual.Cobbler
@@ -94,9 +91,6 @@ data KickstartFileResource = KickstartFileResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the kickstart file. This must be the full path, including @/var/lib/cobbler/kickstarts@ . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed KickstartFileResource
-    = '[]
 
 $(TH.makeResource
     "cobbler_kickstart_file"
@@ -174,9 +168,6 @@ data ProfileResource = ProfileResource
       {- ^ (Optional) The type of virtual machine. Valid options are: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ProfileResource
-    = '[]
-
 $(TH.makeResource
     "cobbler_profile"
     ''Qual.Cobbler
@@ -192,9 +183,6 @@ data SnippetResource = SnippetResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the snippet. This must be the full path, including @/var/lib/cobbler/snippets@ . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SnippetResource
-    = '[]
 
 $(TH.makeResource
     "cobbler_snippet"
@@ -293,9 +281,6 @@ data SystemResource = SystemResource
     , _virt_type :: !(Attr Text)
       {- ^ (Optional) Virtualization technology to use: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SystemResource
-    = '[]
 
 $(TH.makeResource
     "cobbler_system"

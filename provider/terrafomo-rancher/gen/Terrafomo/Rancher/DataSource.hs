@@ -57,27 +57,27 @@ data CertificateDataSource = CertificateDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CertificateDataSource
-    = '[ '("algorithm", Attr Text)
+    = '[ '("algorithm", Text)
          {- - The certificate algorithm. -}
-      , '("cert_fingerprint", Attr Text)
+      , '("cert_fingerprint", Text)
          {- - The certificate fingerprint. -}
-      , '("cn", Attr Text)
+      , '("cn", Text)
          {- - The certificate CN. -}
-      , '("expires_at", Attr Text)
+      , '("expires_at", Text)
          {- - The certificate expiration date. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the resource. -}
-      , '("issued_at", Attr Text)
+      , '("issued_at", Text)
          {- - The certificate creation date. -}
-      , '("issuer", Attr Text)
+      , '("issuer", Text)
          {- - The certificate issuer. -}
-      , '("key_size", Attr Text)
+      , '("key_size", Text)
          {- - The certificate key size. -}
-      , '("serial_number", Attr Text)
+      , '("serial_number", Text)
          {- - The certificate serial number. -}
-      , '("subject_alternative_names", Attr Text)
+      , '("subject_alternative_names", Text)
          {- - The list of certificate Subject Alternative Names. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - The certificate version. -}
        ]
 
@@ -104,15 +104,15 @@ data EnvironmentDataSource = EnvironmentDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EnvironmentDataSource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The environment description. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the resource. -}
-      , '("member", Attr Text)
+      , '("member", Text)
          {- - The environment members. -}
-      , '("orchestration", Attr Text)
+      , '("orchestration", Text)
          {- - The environment orchestration engine. -}
-      , '("project_template_id", Attr Text)
+      , '("project_template_id", Text)
          {- - The environment project template ID. -}
        ]
 
@@ -131,7 +131,7 @@ data SettingDataSource = SettingDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SettingDataSource
-    = '[ '("value", Attr Text)
+    = '[ '("value", Text)
          {- - the settting's value. -}
        ]
 

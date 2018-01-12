@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Kubernetes
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Kubernetes.Types
     , module Terrafomo.Kubernetes.Provider
     ) where

@@ -56,19 +56,19 @@ data AwsAccessCredentialsDataSource = AwsAccessCredentialsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AwsAccessCredentialsDataSource
-    = '[ '("access_key", Attr Text)
+    = '[ '("access_key", Text)
          {- - The AWS Access Key ID returned by Vault. -}
-      , '("lease_duration", Attr Text)
+      , '("lease_duration", Text)
          {- - The duration of the secret lease, in seconds relative to the time the data was requested. Once this time has passed any plan generated with this data may fail to apply. -}
-      , '("lease_id", Attr Text)
+      , '("lease_id", Text)
          {- - The lease identifier assigned by Vault. -}
-      , '("lease_renewable", Attr Text)
+      , '("lease_renewable", Text)
          {- - @true@ if the lease can be renewed using Vault's @sys/renew/{lease-id}@ endpoint. Terraform does not currently support lease renewal, and so it will request a new lease each time this data source is refreshed. -}
-      , '("lease_start_time", Attr Text)
+      , '("lease_start_time", Text)
          {- - As a convenience, this records the current time on the computer where Terraform is running when the data is requested. This can be used to approximate the absolute time represented by @lease_duration@ , though users must allow for any clock drift and response latency relative to the Vault server. -}
-      , '("secret_key", Attr Text)
+      , '("secret_key", Text)
          {- - The AWS Secret Key returned by Vault. -}
-      , '("security_token", Attr Text)
+      , '("security_token", Text)
          {- - The STS token returned by Vault, if any. -}
        ]
 
@@ -97,9 +97,6 @@ data GenericSecretDataSource = GenericSecretDataSource
     , _path :: !(Attr Text)
       {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed GenericSecretDataSource
-    = '[]
 
 $(TH.makeDataSource
     "vault_generic_secret"

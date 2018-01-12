@@ -14,12 +14,14 @@
 --
 module Terrafomo.Circonus.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Circonus.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Circonus.Types as Qual
 
 {- | Circonus Terraform provider.
 
@@ -30,6 +32,11 @@ data Circonus = Circonus
     { _api_url :: !Text
     , _key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Circonus
+
+instance Qual.ToValue Circonus where
+    toValue = Qual.genericToValue
 
 {- | (Optional) The API URL to use to talk with. The default is
 @https://api.circonus.com/v2@ .

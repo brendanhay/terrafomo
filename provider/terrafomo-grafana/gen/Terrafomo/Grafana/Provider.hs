@@ -14,12 +14,14 @@
 --
 module Terrafomo.Grafana.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Grafana.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Grafana.Types as Qual
 
 {- | Grafana Terraform provider.
 
@@ -29,3 +31,8 @@ sharing metrics dashboards. The provider configuration block accepts the
 following arguments:
 -}
 data Grafana = Grafana
+
+instance Hashable Grafana
+
+instance Qual.ToValue Grafana where
+    toValue = Qual.genericToValue

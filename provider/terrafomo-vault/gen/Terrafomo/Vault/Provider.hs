@@ -14,12 +14,14 @@
 --
 module Terrafomo.Vault.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Vault.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Vault.Types as Qual
 
 {- | Vault Terraform provider.
 
@@ -34,3 +36,8 @@ caveats that are covered in the sections that follow. Consider these
 carefully before using this provider within your Terraform configuration.
 -}
 data Vault = Vault
+
+instance Hashable Vault
+
+instance Qual.ToValue Vault where
+    toValue = Qual.genericToValue

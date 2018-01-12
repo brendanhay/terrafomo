@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.RabbitMQ
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.RabbitMQ.Types
     , module Terrafomo.RabbitMQ.Provider
     ) where

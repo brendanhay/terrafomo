@@ -54,9 +54,6 @@ data RecordResource = RecordResource
       {- ^ (Required) The name of zone to contain this record. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed RecordResource
-    = '[]
-
 $(TH.makeResource
     "powerdns_record"
     ''Qual.PowerDNS

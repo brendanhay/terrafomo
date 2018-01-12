@@ -52,19 +52,19 @@ data BootscriptDataSource = BootscriptDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BootscriptDataSource
-    = '[ '("architecture", Attr Text)
+    = '[ '("architecture", Text)
          {- - architecture of the Bootscript, e.g. @arm@ or @x86_64@ -}
-      , '("boot_cmd_args", Attr Text)
+      , '("boot_cmd_args", Text)
          {- - command line arguments used for booting -}
-      , '("dtb", Attr Text)
+      , '("dtb", Text)
          {- - path to Device Tree Blob detailing hardware information -}
-      , '("initrd", Attr Text)
+      , '("initrd", Text)
          {- - URL to initial ramdisk content -}
-      , '("kernel", Attr Text)
+      , '("kernel", Text)
          {- - URL to used kernel -}
-      , '("organization", Attr Text)
+      , '("organization", Text)
          {- - uuid of the organization owning this Bootscript -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - is this a public bootscript -}
        ]
 
@@ -88,13 +88,13 @@ data ImageDataSource = ImageDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImageDataSource
-    = '[ '("architecture", Attr Text)
+    = '[ '("architecture", Text)
          {- - architecture of the Image, e.g. @arm@ or @x86_64@ -}
-      , '("creation_date", Attr Text)
+      , '("creation_date", Text)
          {- - date when image was created -}
-      , '("organization", Attr Text)
+      , '("organization", Text)
          {- - uuid of the organization owning this Image -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - is this a public bootscript -}
        ]
 

@@ -8,6 +8,7 @@ name: terrafomo-rundeck
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

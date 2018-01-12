@@ -52,7 +52,7 @@ data DataBagItemResource = DataBagItemResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DataBagItemResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The value of the "id" property in the @content_json@ JSON object, which can be used by clients to retrieve this item's content. -}
        ]
 
@@ -75,7 +75,7 @@ data DataBagResource = DataBagResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DataBagResource
-    = '[ '("api_uri", Attr Text)
+    = '[ '("api_uri", Text)
          {- - The URI representing this data bag in the Chef server API. -}
        ]
 
@@ -102,9 +102,6 @@ data EnvironmentResource = EnvironmentResource
     , _override_attributes_json :: !(Attr Text)
       {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed EnvironmentResource
-    = '[]
 
 $(TH.makeResource
     "chef_environment"
@@ -137,9 +134,6 @@ data NodeResource = NodeResource
       {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed NodeResource
-    = '[]
-
 $(TH.makeResource
     "chef_node"
     ''Qual.Chef
@@ -162,9 +156,6 @@ data RoleResource = RoleResource
     , _run_list :: !(Attr Text)
       {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed RoleResource
-    = '[]
 
 $(TH.makeResource
     "chef_role"

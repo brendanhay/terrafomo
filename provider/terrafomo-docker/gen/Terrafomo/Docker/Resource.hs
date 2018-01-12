@@ -108,9 +108,6 @@ data ContainerResource = ContainerResource
       {- ^ (Optional, block) See <#volumes> below for details. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ContainerResource
-    = '[]
-
 $(TH.makeResource
     "docker_container"
     ''Qual.Docker
@@ -137,7 +134,7 @@ data ImageResource = ImageResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImageResource
-    = '[ '("latest", Attr Text)
+    = '[ '("latest", Text)
          {- (string) - The ID of the image. -}
        ]
 
@@ -169,9 +166,6 @@ data NetworkResource = NetworkResource
       {- ^ (Optional, map of strings) Network specific options to be used by the drivers. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed NetworkResource
-    = '[]
-
 $(TH.makeResource
     "docker_network"
     ''Qual.Docker
@@ -193,7 +187,7 @@ data VolumeResource = VolumeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeResource
-    = '[ '("mountpoint", Attr Text)
+    = '[ '("mountpoint", Text)
          {- (string) - The mountpoint of the volume. -}
        ]
 

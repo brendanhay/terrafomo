@@ -59,23 +59,23 @@ data RecordResource = RecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RecordResource
-    = '[ '("hostname", Attr Text)
+    = '[ '("hostname", Text)
          {- - The FQDN of the record -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The record ID -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the record -}
-      , '("priority", Attr Text)
+      , '("priority", Text)
          {- - The priority of the record -}
-      , '("proxied", Attr Text)
+      , '("proxied", Text)
          {- - (Optional) Whether the record gets Cloudflare's origin protection; defaults to @false@ . -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - The TTL of the record -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of the record -}
-      , '("value", Attr Text)
+      , '("value", Text)
          {- - The value of the record -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - (Computed) the zone id of the record -}
        ]
 

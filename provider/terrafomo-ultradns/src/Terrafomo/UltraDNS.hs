@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.UltraDNS
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.UltraDNS.Types
     , module Terrafomo.UltraDNS.Provider
     ) where

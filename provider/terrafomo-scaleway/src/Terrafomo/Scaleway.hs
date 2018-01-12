@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Scaleway
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Scaleway.Types
     , module Terrafomo.Scaleway.Provider
     ) where

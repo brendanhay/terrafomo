@@ -57,9 +57,6 @@ data GroupResource = GroupResource
       {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed GroupResource
-    = '[]
-
 $(TH.makeResource
     "clc_group"
     ''Qual.CenturyLinkCloud
@@ -72,9 +69,7 @@ Manages a CLC load balancer pool. Manage related frontend with
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
 data LoadBalancerPoolResource = LoadBalancerPoolResource
-
-type instance Computed LoadBalancerPoolResource
-    = '[]
+    deriving (Show, Eq, Generic)
 
 $(TH.makeResource
     "clc_load_balancer_pool"
@@ -100,9 +95,6 @@ data LoadBalancerResource = LoadBalancerResource
       {- ^ (Required, string) Either "enabled" or "disabled" -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed LoadBalancerResource
-    = '[]
-
 $(TH.makeResource
     "clc_load_balancer"
     ''Qual.CenturyLinkCloud
@@ -123,9 +115,6 @@ data PublicIpResource = PublicIpResource
     , _source_restrictions :: !(Attr Text)
       {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed PublicIpResource
-    = '[]
 
 $(TH.makeResource
     "clc_public_ip"
@@ -182,9 +171,6 @@ data ServerResource = ServerResource
     , _type' :: !(Attr Text)
       {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ServerResource
-    = '[]
 
 $(TH.makeResource
     "clc_server"

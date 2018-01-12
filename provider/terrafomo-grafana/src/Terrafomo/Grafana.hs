@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Grafana
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Grafana.Types
     , module Terrafomo.Grafana.Provider
     ) where

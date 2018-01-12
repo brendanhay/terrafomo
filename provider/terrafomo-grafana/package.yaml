@@ -8,6 +8,7 @@ name: terrafomo-grafana
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

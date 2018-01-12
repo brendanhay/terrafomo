@@ -53,9 +53,6 @@ data ComputeAclResource = ComputeAclResource
       {- ^ (Optional) List of tags that may be applied to the ACL. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeAclResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_acl"
     ''Qual.OPC
@@ -82,7 +79,7 @@ data ComputeImageListEntryResource = ComputeImageListEntryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeImageListEntryResource
-    = '[ '("uri", Attr Text)
+    = '[ '("uri", Text)
          {- - The Unique Resource Identifier for the Image List Entry. -}
        ]
 
@@ -104,9 +101,6 @@ data ComputeImageListResource = ComputeImageListResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the Image List. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeImageListResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_image_list"
@@ -149,9 +143,6 @@ data ComputeInstanceResource = ComputeInstanceResource
       {- ^ (Optional) A list of strings that should be supplied to the instance as tags. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeInstanceResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_instance"
     ''Qual.OPC
@@ -176,9 +167,6 @@ data ComputeIpAddressAssociationResource = ComputeIpAddressAssociationResource
       {- ^ (Optional) The name of the virtual NIC associated with this NAT IP reservation. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeIpAddressAssociationResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_ip_address_association"
     ''Qual.OPC
@@ -199,9 +187,6 @@ data ComputeIpAddressPrefixSetResource = ComputeIpAddressPrefixSetResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the ip address prefix set. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeIpAddressPrefixSetResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_ip_address_prefix_set"
@@ -224,9 +209,6 @@ data ComputeIpAddressReservationResource = ComputeIpAddressReservationResource
       {- ^ (Optional) List of tags that may be applied to the IP address reservation. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeIpAddressReservationResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_ip_address_reservation"
     ''Qual.OPC
@@ -246,7 +228,7 @@ data ComputeIpAssociationResource = ComputeIpAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeIpAssociationResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- The name of the IP Association -}
        ]
 
@@ -268,9 +250,6 @@ data ComputeIpNetworkExchangeResource = ComputeIpNetworkExchangeResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the IP network exchange. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeIpNetworkExchangeResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_ip_network_exchange"
@@ -295,17 +274,17 @@ data ComputeIpNetworkResource = ComputeIpNetworkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeIpNetworkResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The description of the IP Network. -}
-      , '("ip_address_prefix", Attr Text)
+      , '("ip_address_prefix", Text)
          {- - The IPv4 address prefix, in CIDR format. -}
-      , '("ip_network_exchange", Attr Text)
+      , '("ip_network_exchange", Text)
          {- - The IP Network Exchange for the IP Network -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the IP Network -}
-      , '("public_napt_enabled", Attr Text)
+      , '("public_napt_enabled", Text)
          {- - Whether public internet access using NAPT for VNICs without any public IP Reservation or not. -}
-      , '("uri", Attr Text)
+      , '("uri", Text)
          {- - Uniform Resource Identifier for the IP Network -}
        ]
 
@@ -329,9 +308,6 @@ data ComputeIpReservationResource = ComputeIpReservationResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the IP reservation. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeIpReservationResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_ip_reservation"
@@ -357,15 +333,15 @@ data ComputeRouteResource = ComputeRouteResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeRouteResource
-    = '[ '("admin_distance", Attr Text)
+    = '[ '("admin_distance", Text)
          {- - The route's administrative distance. Defaults to @0@ . -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the route. -}
-      , '("ip_address_prefix", Attr Text)
+      , '("ip_address_prefix", Text)
          {- - The IPv4 address prefix, in CIDR format, of the external network from which to route traffic. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- The name of the route -}
-      , '("next_hop_vnic_set", Attr Text)
+      , '("next_hop_vnic_set", Text)
          {- - Name of the virtual NIC set to route matching packets to. Routed flows are load-balanced among all the virtual NICs in the virtual NIC set. -}
        ]
 
@@ -398,9 +374,6 @@ data ComputeSecRuleResource = ComputeSecRuleResource
       {- ^ (Required) The source security list (prefixed with @seclist:@ ), or security IP list (prefixed with @seciplist:@ ). -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeSecRuleResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_sec_rule"
     ''Qual.OPC
@@ -424,9 +397,6 @@ data ComputeSecurityApplicationResource = ComputeSecurityApplicationResource
       {- ^ (Required) The protocol to enable for this application. Must be one of @tcp@ , @udp@ , @ah@ , @esp@ , @icmp@ , @icmpv6@ , @igmp@ , @ipip@ , @gre@ , @mplsip@ , @ospf@ , @pim@ , @rdp@ , @sctp@ or @all@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeSecurityApplicationResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_security_application"
     ''Qual.OPC
@@ -447,9 +417,6 @@ data ComputeSecurityAssociationResource = ComputeSecurityAssociationResource
       {- ^ (Required) The @vcable@ of the instance to associate to the security list. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeSecurityAssociationResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_security_association"
     ''Qual.OPC
@@ -469,9 +436,6 @@ data ComputeSecurityIpListResource = ComputeSecurityIpListResource
       {- ^ (Required) The unique (within the identity domain) name of the security IP list. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ComputeSecurityIpListResource
-    = '[]
-
 $(TH.makeResource
     "opc_compute_security_ip_list"
     ''Qual.OPC
@@ -490,9 +454,6 @@ data ComputeSecurityListResource = ComputeSecurityListResource
     , _policy :: !(Attr Text)
       {- ^ (Required) The policy to apply to instances associated with this list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeSecurityListResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_security_list"
@@ -518,9 +479,6 @@ data ComputeSecurityProtocolResource = ComputeSecurityProtocolResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) List of tags that may be applied to the security protocol. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeSecurityProtocolResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_security_protocol"
@@ -558,7 +516,7 @@ data ComputeSecurityRuleResource = ComputeSecurityRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeSecurityRuleResource
-    = '[ '("uri", Attr Text)
+    = '[ '("uri", Text)
          {- - The Uniform Resource Identifier of the security rule. -}
        ]
 
@@ -580,9 +538,6 @@ data ComputeSshKeyResource = ComputeSshKeyResource
     , _name :: !(Attr Text)
       {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeSshKeyResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_ssh_key"
@@ -624,21 +579,21 @@ data ComputeStorageVolumeResource = ComputeStorageVolumeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeStorageVolumeResource
-    = '[ '("hypervisor", Attr Text)
+    = '[ '("hypervisor", Text)
          {- - The hypervisor that this volume is compatible with. -}
-      , '("machine_image", Attr Text)
+      , '("machine_image", Text)
          {- - Name of the Machine Image - available if the volume is a bootable storage volume. -}
-      , '("managed", Attr Text)
+      , '("managed", Text)
          {- - Is this a Managed Volume? -}
-      , '("platform", Attr Text)
+      , '("platform", Text)
          {- - The OS platform this volume is compatible with. -}
-      , '("readonly", Attr Text)
+      , '("readonly", Text)
          {- - Can this Volume be attached as readonly? -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The current state of the storage volume. -}
-      , '("storage_pool", Attr Text)
+      , '("storage_pool", Text)
          {- - The storage pool from which this volume is allocated. -}
-      , '("uri", Attr Text)
+      , '("uri", Text)
          {- - Unique Resource Identifier of the Storage Volume. -}
        ]
 
@@ -668,39 +623,39 @@ data ComputeStorageVolumeSnapshotResource = ComputeStorageVolumeSnapshotResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ComputeStorageVolumeSnapshotResource
-    = '[ '("account", Attr Text)
+    = '[ '("account", Text)
          {- - Account to use for snapshots. -}
-      , '("collocated", Attr Text)
+      , '("collocated", Text)
          {- - Boolean specifying whether the snapshot is collocated or remote. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the storage volume snapshot. -}
-      , '("machine_image_name", Attr Text)
+      , '("machine_image_name", Text)
          {- - The name of the machine image that's used in the boot volume from which this snapshot is taken. -}
-      , '("parent_volume_bootable", Attr Text)
+      , '("parent_volume_bootable", Text)
          {- - Boolean specifying whether or not the snapshot's parent volume was bootable. -}
-      , '("platform", Attr Text)
+      , '("platform", Text)
          {- - The OS platform this snapshot is compatible with -}
-      , '("property", Attr Text)
+      , '("property", Text)
          {- - Where the snapshot is stored, whether collocated, or in the Oracle Storage Cloud Service instance. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The size of the snapshot in GB. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - The Oracle ID of the snapshot. -}
-      , '("snapshot_timestamp", Attr Text)
+      , '("snapshot_timestamp", Text)
          {- - Timestamp of the storage snapshot, generated by storage server. The snapshot will contain data written to the original volume before this time. -}
-      , '("start_timestamp", Attr Text)
+      , '("start_timestamp", Text)
          {- - Timestamp when the snapshot was started. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - Status of the snapshot. -}
-      , '("status_detail", Attr Text)
+      , '("status_detail", Text)
          {- - Details about the latest state of the storage volume snapshot. -}
-      , '("status_timestamp", Attr Text)
+      , '("status_timestamp", Text)
          {- - Indicates the time that the current view of the storage volume snapshot was generated. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Comma-separated strings that tag the storage volume. -}
-      , '("uri", Attr Text)
+      , '("uri", Text)
          {- - Uniform Resource Identifier -}
-      , '("volume_name", Attr Text)
+      , '("volume_name", Text)
          {- - The name of the storage volume that the snapshot was created from -}
        ]
 
@@ -726,9 +681,6 @@ data ComputeVnicSetResource = ComputeVnicSetResource
     , _virtual_nics :: !(Attr Text)
       {- ^ (Optional) List of virtual NICs associated with this virtual NIC set. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ComputeVnicSetResource
-    = '[]
 
 $(TH.makeResource
     "opc_compute_vnic_set"
@@ -765,9 +717,6 @@ data DatabaseServiceInstanceResource = DatabaseServiceInstanceResource
       {- ^ (Required) Public key for the secure shell (SSH). This key will be used for authentication when connecting to the Database Cloud Service instance using an SSH client. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DatabaseServiceInstanceResource
-    = '[]
-
 $(TH.makeResource
     "opc_database_service_instance"
     ''Qual.OPC
@@ -796,9 +745,6 @@ data StorageContainerResource = StorageContainerResource
       {- ^ (Optional) The list of ACLs that grant write access. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed StorageContainerResource
-    = '[]
-
 $(TH.makeResource
     "opc_storage_container"
     ''Qual.OPC
@@ -818,17 +764,17 @@ data StorageObjectResource = StorageObjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StorageObjectResource
-    = '[ '("accept_ranges", Attr Text)
+    = '[ '("accept_ranges", Text)
          {- - Type of ranges that the object accepts. -}
-      , '("content_length", Attr Text)
+      , '("content_length", Text)
          {- - Length of the Storage Object in bytes. -}
-      , '("last_modified", Attr Text)
+      , '("last_modified", Text)
          {- - Date and time that the object was created/modified in ISO 8601. -}
-      , '("object_manifest", Attr Text)
+      , '("object_manifest", Text)
          {- - The dynamic large-object manifest object. -}
-      , '("timestamp", Attr Text)
+      , '("timestamp", Text)
          {- - Date and Time in UNIX EPOCH when the account, container, or object was initially created at the current version. -}
-      , '("transaction_id", Attr Text)
+      , '("transaction_id", Text)
          {- - Transaction ID of the request. Used for bug reports. -}
        ]
 

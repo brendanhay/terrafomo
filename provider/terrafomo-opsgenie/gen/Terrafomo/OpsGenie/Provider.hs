@@ -14,12 +14,14 @@
 --
 module Terrafomo.OpsGenie.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.OpsGenie.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.OpsGenie.Types as Qual
 
 {- | OpsGenie Terraform provider.
 
@@ -29,3 +31,8 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data OpsGenie = OpsGenie
+
+instance Hashable OpsGenie
+
+instance Qual.ToValue OpsGenie where
+    toValue = Qual.genericToValue

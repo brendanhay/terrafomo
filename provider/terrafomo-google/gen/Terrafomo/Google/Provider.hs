@@ -14,12 +14,14 @@
 --
 module Terrafomo.Google.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Google.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Google.Types as Qual
 
 {- | Google Terraform provider.
 
@@ -29,3 +31,8 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data Google = Google
+
+instance Hashable Google
+
+instance Qual.ToValue Google where
+    toValue = Qual.genericToValue

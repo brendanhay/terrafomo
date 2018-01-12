@@ -14,12 +14,14 @@
 --
 module Terrafomo.Lailgun.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Lailgun.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Lailgun.Types as Qual
 
 {- | Lailgun Terraform provider.
 
@@ -31,6 +33,11 @@ available resources.
 data Lailgun = Lailgun
     { _api_key :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Lailgun
+
+instance Qual.ToValue Lailgun where
+    toValue = Qual.genericToValue
 
 {- | (Required) Mailgun API key
 -}

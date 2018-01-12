@@ -51,9 +51,6 @@ data DatacenterResource = DatacenterResource
       {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DatacenterResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_datacenter"
     ''Qual.VSphere
@@ -89,9 +86,6 @@ data DistributedPortGroupResource = DistributedPortGroupResource
     , _type' :: !(Attr Text)
       {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DistributedPortGroupResource
-    = '[]
 
 $(TH.makeResource
     "vsphere_distributed_port_group"
@@ -148,9 +142,9 @@ data DistributedVirtualSwitchResource = DistributedVirtualSwitchResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DistributedVirtualSwitchResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- : The UUID of the distributed virtual switch. -}
-      , '("uplinks", Attr Text)
+      , '("uplinks", Text)
          {- : The list of the uplinks on this DVS, as per the </docs/providers/vsphere/r/distributed_virtual_switch.html#uplinks> argument to the </docs/providers/vsphere/r/distributed_virtual_switch.html> resource. -}
        ]
 
@@ -188,9 +182,6 @@ data FileResource = FileResource
       {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed FileResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_file"
     ''Qual.VSphere
@@ -211,9 +202,6 @@ data FolderResource = FolderResource
     { _path :: !(Attr Text)
       {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed FolderResource
-    = '[]
 
 $(TH.makeResource
     "vsphere_folder"
@@ -241,9 +229,6 @@ data HostPortGroupResource = HostPortGroupResource
       {- ^ - (Integer, optional) The VLAN ID/trunk mode for this port group. An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed HostPortGroupResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_host_port_group"
     ''Qual.VSphere
@@ -270,9 +255,6 @@ data HostVirtualSwitchResource = HostVirtualSwitchResource
       {- ^ - (Integer, optional) The number of ports to create with this virtual switch. Default: @128@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed HostVirtualSwitchResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_host_virtual_switch"
     ''Qual.VSphere
@@ -291,13 +273,13 @@ data LicenseResource = LicenseResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LicenseResource
-    = '[ '("edition_key", Attr Text)
+    = '[ '("edition_key", Text)
          {- - The product edition of the license key. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The display name for the license. -}
-      , '("total", Attr Text)
+      , '("total", Text)
          {- - Total number of units (example: CPUs) contained in the license. -}
-      , '("used", Attr Text)
+      , '("used", Text)
          {- - The number of units (example: CPUs) assigned to this license. -}
        ]
 
@@ -338,23 +320,23 @@ data NasDatastoreResource = NasDatastoreResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NasDatastoreResource
-    = '[ '("accessible", Attr Text)
+    = '[ '("accessible", Text)
          {- - The connectivity status of the datastore. If this is @false@ , some other computed attributes may be out of date. -}
-      , '("capacity", Attr Text)
+      , '("capacity", Text)
          {- - Maximum capacity of the datastore, in megabytes. -}
-      , '("free_space", Attr Text)
+      , '("free_space", Text)
          {- - Available space of this datastore, in megabytes. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The managed object reference ID of the datastore. -}
-      , '("maintenance_mode", Attr Text)
+      , '("maintenance_mode", Text)
          {- - The current maintenance mode state of the datastore. -}
-      , '("multiple_host_access", Attr Text)
+      , '("multiple_host_access", Text)
          {- - If @true@ , more than one host in the datacenter has been configured with access to the datastore. -}
-      , '("protocol_endpoint", Attr Text)
+      , '("protocol_endpoint", Text)
          {- - Indicates that this NAS volume is a protocol endpoint. This field is only populated if the host supports virtual datastores. -}
-      , '("uncommitted_space", Attr Text)
+      , '("uncommitted_space", Text)
          {- - Total additional storage space, in megabytes, potentially used by all virtual machines on this datastore. -}
-      , '("url", Attr Text)
+      , '("url", Text)
          {- - The unique locator for the datastore. -}
        ]
 
@@ -385,9 +367,6 @@ data TagCategoryResource = TagCategoryResource
       {- ^ - (String, required) The name of the category. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed TagCategoryResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_tag_category"
     ''Qual.VSphere
@@ -411,9 +390,6 @@ data TagResource = TagResource
     , _name :: !(Attr Text)
       {- ^ - (String, required) The display name of the tag. The name must be unique within its category. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed TagResource
-    = '[]
 
 $(TH.makeResource
     "vsphere_tag"
@@ -439,9 +415,6 @@ data VirtualDiskResource = VirtualDiskResource
     , _vmdk_path :: !(Attr Text)
       {- ^ (Required) The path, including filename, of the virtual disk to be created.  This should end with '.vmdk'. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VirtualDiskResource
-    = '[]
 
 $(TH.makeResource
     "vsphere_virtual_disk"
@@ -504,9 +477,6 @@ data VirtualMachineResource = VirtualMachineResource
       {- ^ (Optional) Extra options for clones of Windows machines. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed VirtualMachineResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_virtual_machine"
     ''Qual.VSphere
@@ -547,9 +517,6 @@ data VirtualMachineSnapshotResource = VirtualMachineSnapshotResource
       {- ^ (Required) The virtual machine UUID. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed VirtualMachineSnapshotResource
-    = '[]
-
 $(TH.makeResource
     "vsphere_virtual_machine_snapshot"
     ''Qual.VSphere
@@ -578,21 +545,21 @@ data VmfsDatastoreResource = VmfsDatastoreResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VmfsDatastoreResource
-    = '[ '("accessible", Attr Text)
+    = '[ '("accessible", Text)
          {- - The connectivity status of the datastore. If this is @false@ , some other computed attributes may be out of date. -}
-      , '("capacity", Attr Text)
+      , '("capacity", Text)
          {- - Maximum capacity of the datastore, in megabytes. -}
-      , '("free_space", Attr Text)
+      , '("free_space", Text)
          {- - Available space of this datastore, in megabytes. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The managed object reference ID of the datastore. -}
-      , '("maintenance_mode", Attr Text)
+      , '("maintenance_mode", Text)
          {- - The current maintenance mode state of the datastore. -}
-      , '("multiple_host_access", Attr Text)
+      , '("multiple_host_access", Text)
          {- - If @true@ , more than one host in the datacenter has been configured with access to the datastore. -}
-      , '("uncommitted_space", Attr Text)
+      , '("uncommitted_space", Text)
          {- - Total additional storage space, in megabytes, potentially used by all virtual machines on this datastore. -}
-      , '("url", Attr Text)
+      , '("url", Text)
          {- - The unique locator for the datastore. -}
        ]
 

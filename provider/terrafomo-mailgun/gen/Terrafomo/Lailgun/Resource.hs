@@ -54,19 +54,19 @@ data DomainResource = DomainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DomainResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - The name of the domain. -}
-      , '("receiving_records", Attr Text)
+      , '("receiving_records", Text)
          {- - A list of DNS records for receiving validation. -}
-      , '("sending_records", Attr Text)
+      , '("sending_records", Text)
          {- - A list of DNS records for sending validation. -}
-      , '("smtp_login", Attr Text)
+      , '("smtp_login", Text)
          {- - The login email for the SMTP server. -}
-      , '("smtp_password", Attr Text)
+      , '("smtp_password", Text)
          {- - The password to the SMTP server. -}
-      , '("spam_action", Attr Text)
+      , '("spam_action", Text)
          {- - The spam filtering setting. -}
-      , '("wildcard", Attr Text)
+      , '("wildcard", Text)
          {- - Whether or not the domain will accept email for sub-domains. -}
        ]
 

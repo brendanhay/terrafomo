@@ -8,6 +8,7 @@ name: terrafomo-pagerduty
 
 dependencies:
   - base
+  - hashable
   - terrafomo
   - text
 

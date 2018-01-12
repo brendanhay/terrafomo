@@ -47,11 +47,11 @@ data ActivityResource = ActivityResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ActivityResource
-    = '[ '("creation_date", Attr Text)
+    = '[ '("creation_date", Text)
          {- - The date the activity was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Amazon Resource Name (ARN) that identifies the created activity. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the activity. -}
        ]
 
@@ -84,7 +84,7 @@ data AmiCopyResource = AmiCopyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AmiCopyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the created AMI. -}
        ]
 
@@ -119,7 +119,7 @@ data AmiFromInstanceResource = AmiFromInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AmiFromInstanceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the created AMI. -}
        ]
 
@@ -141,7 +141,7 @@ data AmiLaunchPermissionResource = AmiLaunchPermissionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AmiLaunchPermissionResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A combination of " @image_id@ - @account_id@ ". -}
        ]
 
@@ -186,55 +186,55 @@ data AmiResource = AmiResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AmiResource
-    = '[ '("architecture", Attr Text)
+    = '[ '("architecture", Text)
          {- - The OS architecture of the AMI (ie: @i386@ or @x86_64@ ). -}
-      , '("block_device_mappings", Attr Text)
+      , '("block_device_mappings", Text)
          {- - The block device mappings of the AMI. -}
-      , '("creation_date", Attr Text)
+      , '("creation_date", Text)
          {- - The date and time the image was created. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the AMI that was provided during image creation. -}
-      , '("hypervisor", Attr Text)
+      , '("hypervisor", Text)
          {- - The hypervisor type of the image. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the created AMI. -}
-      , '("image_id", Attr Text)
+      , '("image_id", Text)
          {- - The ID of the AMI. Should be the same as the resource @id@ . -}
-      , '("image_location", Attr Text)
+      , '("image_location", Text)
          {- - The location of the AMI. -}
-      , '("image_owner_alias", Attr Text)
+      , '("image_owner_alias", Text)
          {- - The AWS account alias (for example, @amazon@ , @self@ ) or the AWS account ID of the AMI owner. -}
-      , '("image_type", Attr Text)
+      , '("image_type", Text)
          {- - The type of image. -}
-      , '("kernel_id", Attr Text)
+      , '("kernel_id", Text)
          {- - The kernel associated with the image, if any. Only applicable for machine images. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the AMI that was provided during image creation. -}
-      , '("owner_id", Attr Text)
+      , '("owner_id", Text)
          {- - The AWS account ID of the image owner. -}
-      , '("platform", Attr Text)
+      , '("platform", Text)
          {- - The value is Windows for @Windows@ AMIs; otherwise blank. -}
-      , '("product_codes", Attr Text)
+      , '("product_codes", Text)
          {- - Any product codes associated with the AMI. -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - @true@ if the image has public launch permissions. -}
-      , '("ramdisk_id", Attr Text)
+      , '("ramdisk_id", Text)
          {- - The RAM disk associated with the image, if any. Only applicable for machine images. -}
-      , '("root_device_name", Attr Text)
+      , '("root_device_name", Text)
          {- - The device name of the root device. -}
-      , '("root_device_type", Attr Text)
+      , '("root_device_type", Text)
          {- - The type of root device (ie: @ebs@ or @instance-store@ ). -}
-      , '("root_snapshot_id", Attr Text)
+      , '("root_snapshot_id", Text)
          {- - The Snapshot ID for the root volume (for EBS-backed AMIs) -}
-      , '("sriov_net_support", Attr Text)
+      , '("sriov_net_support", Text)
          {- - Specifies whether enhanced networking is enabled. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The current state of the AMI. If the state is @available@ , the image is successfully registered and can be used to launch an instance. -}
-      , '("state_reason", Attr Text)
+      , '("state_reason", Text)
          {- - Describes a state change. Fields are @UNSET@ if not available. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Any tags assigned to the image. -}
-      , '("virtualization_type", Attr Text)
+      , '("virtualization_type", Text)
          {- - The type of virtualization of the AMI (ie: @hvm@ or @paravirtual@ ). -}
        ]
 
@@ -256,7 +256,7 @@ data ApiGatewayAccountResource = ApiGatewayAccountResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayAccountResource
-    = '[ '("throttle_settings", Attr Text)
+    = '[ '("throttle_settings", Text)
          {- - Account-Level throttle settings. See exported fields below. -}
        ]
 
@@ -285,13 +285,13 @@ data ApiGatewayApiKeyResource = ApiGatewayApiKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayApiKeyResource
-    = '[ '("created_date", Attr Text)
+    = '[ '("created_date", Text)
          {- - The creation date of the API key -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the API key -}
-      , '("last_updated_date", Attr Text)
+      , '("last_updated_date", Text)
          {- - The last update date of the API key -}
-      , '("value", Attr Text)
+      , '("value", Text)
          {- - The value of the API key -}
        ]
 
@@ -323,9 +323,6 @@ data ApiGatewayAuthorizerResource = ApiGatewayAuthorizerResource
       {- ^ (Optional) The type of the authorizer. @TOKEN@ is currently the only allowed value. Defaults to @TOKEN@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayAuthorizerResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_authorizer"
     ''Qual.AWS
@@ -348,9 +345,6 @@ data ApiGatewayBasePathMappingResource = ApiGatewayBasePathMappingResource
       {- ^ (Optional) The name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayBasePathMappingResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_base_path_mapping"
     ''Qual.AWS
@@ -366,13 +360,13 @@ data ApiGatewayClientCertificateResource = ApiGatewayClientCertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayClientCertificateResource
-    = '[ '("created_date", Attr Text)
+    = '[ '("created_date", Text)
          {- - The date when the client certificate was created. -}
-      , '("expiration_date", Attr Text)
+      , '("expiration_date", Text)
          {- - The date when the client certificate will expire. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The identifier of the client certificate. -}
-      , '("pem_encoded_certificate", Attr Text)
+      , '("pem_encoded_certificate", Text)
          {- - The PEM-encoded public key of the client certificate. -}
        ]
 
@@ -402,13 +396,13 @@ data ApiGatewayDeploymentResource = ApiGatewayDeploymentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayDeploymentResource
-    = '[ '("created_date", Attr Text)
+    = '[ '("created_date", Text)
          {- - The creation date of the deployment -}
-      , '("execution_arn", Attr Text)
+      , '("execution_arn", Text)
          {- - The execution ARN to be used in </docs/providers/aws/r/lambda_permission.html> 's @source_arn@ when allowing API Gateway to invoke a Lambda function, e.g. @arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod@ -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the deployment -}
-      , '("invoke_url", Attr Text)
+      , '("invoke_url", Text)
          {- - The URL to invoke the API pointing to the stage, e.g. @https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod@ -}
        ]
 
@@ -447,13 +441,13 @@ data ApiGatewayDomainNameResource = ApiGatewayDomainNameResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayDomainNameResource
-    = '[ '("certificate_upload_date", Attr Text)
+    = '[ '("certificate_upload_date", Text)
          {- - The upload date associated with the domain certificate. -}
-      , '("cloudfront_domain_name", Attr Text)
+      , '("cloudfront_domain_name", Text)
          {- - The hostname created by Cloudfront to represent the distribution that implements this domain name mapping. -}
-      , '("cloudfront_zone_id", Attr Text)
+      , '("cloudfront_zone_id", Text)
          {- - For convenience, the hosted zone id ( @Z2FDTNDATAQYW2@ ) that can be used to create a Route53 alias record for the distribution. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The internal id assigned to this domain name by API Gateway. -}
        ]
 
@@ -478,9 +472,6 @@ data ApiGatewayGatewayResponseResource = ApiGatewayGatewayResponseResource
     , _status_code :: !(Attr Text)
       {- ^ (Optional) The HTTP status code of the Gateway Response. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ApiGatewayGatewayResponseResource
-    = '[]
 
 $(TH.makeResource
     "aws_api_gateway_gateway_response"
@@ -522,9 +513,6 @@ data ApiGatewayIntegrationResource = ApiGatewayIntegrationResource
       {- ^ (Optional) The input's URI (HTTP, AWS). Required if @type@ is @HTTP@ or @AWS@ . For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form @arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}@ . @region@ , @subdomain@ and @service@ are used to determine the right endpoint. e.g. @arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations@ -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayIntegrationResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_integration"
     ''Qual.AWS
@@ -558,9 +546,6 @@ data ApiGatewayIntegrationResponseResource = ApiGatewayIntegrationResponseResour
       {- ^ (Required) The HTTP status code -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayIntegrationResponseResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_integration_response"
     ''Qual.AWS
@@ -591,9 +576,6 @@ data ApiGatewayMethodResource = ApiGatewayMethodResource
       {- ^ (Required) The ID of the associated REST API -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayMethodResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_method"
     ''Qual.AWS
@@ -620,9 +602,6 @@ data ApiGatewayMethodResponseResource = ApiGatewayMethodResponseResource
       {- ^ (Required) The HTTP status code -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayMethodResponseResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_method_response"
     ''Qual.AWS
@@ -642,9 +621,6 @@ data ApiGatewayMethodSettingsResource = ApiGatewayMethodSettingsResource
     , _stage_name :: !(Attr Text)
       {- ^ (Required) The name of the stage -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ApiGatewayMethodSettingsResource
-    = '[]
 
 $(TH.makeResource
     "aws_api_gateway_method_settings"
@@ -669,7 +645,7 @@ data ApiGatewayModelResource = ApiGatewayModelResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayModelResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the model -}
        ]
 
@@ -692,9 +668,9 @@ data ApiGatewayResourceResource = ApiGatewayResourceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayResourceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The resource's identifier. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The complete path for this API resource, including all parent paths. -}
        ]
 
@@ -719,11 +695,11 @@ data ApiGatewayRestApiResource = ApiGatewayRestApiResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayRestApiResource
-    = '[ '("created_date", Attr Text)
+    = '[ '("created_date", Text)
          {- - The creation date of the REST API -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the REST API -}
-      , '("root_resource_id", Attr Text)
+      , '("root_resource_id", Text)
          {- - The resource ID of the REST API's root -}
        ]
 
@@ -757,9 +733,6 @@ data ApiGatewayStageResource = ApiGatewayStageResource
       {- ^ (Optional) A map that defines the stage variables -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayStageResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_stage"
     ''Qual.AWS
@@ -779,17 +752,17 @@ data ApiGatewayUsagePlanKeyResource = ApiGatewayUsagePlanKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ApiGatewayUsagePlanKeyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Id of a usage plan key. -}
-      , '("key_id", Attr Text)
+      , '("key_id", Text)
          {- - The identifier of the API gateway key resource. -}
-      , '("key_type", Attr Text)
+      , '("key_type", Text)
          {- - The type of a usage plan key. Currently, the valid key type is API_KEY. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of a usage plan key. -}
-      , '("usage_plan_id", Attr Text)
+      , '("usage_plan_id", Text)
          {- - The ID of the API resource -}
-      , '("value", Attr Text)
+      , '("value", Text)
          {- - The value of a usage plan key. -}
        ]
 
@@ -817,9 +790,6 @@ data ApiGatewayUsagePlanResource = ApiGatewayUsagePlanResource
       {- ^ (Optional) The <#throttling-settings-arguments> of the usage plan. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ApiGatewayUsagePlanResource
-    = '[]
-
 $(TH.makeResource
     "aws_api_gateway_usage_plan"
     ''Qual.AWS
@@ -842,15 +812,15 @@ data AppCookieStickinessPolicyResource = AppCookieStickinessPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AppCookieStickinessPolicyResource
-    = '[ '("cookie_name", Attr Text)
+    = '[ '("cookie_name", Text)
          {- - The application cookie whose lifetime the ELB's cookie should follow. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the policy. -}
-      , '("lb_port", Attr Text)
+      , '("lb_port", Text)
          {- - The load balancer port to which the policy is applied. -}
-      , '("load_balancer", Attr Text)
+      , '("load_balancer", Text)
          {- - The name of load balancer to which the policy is attached. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the stickiness policy. -}
        ]
 
@@ -880,9 +850,6 @@ data AppautoscalingPolicyResource = AppautoscalingPolicyResource
       {- ^ (Optional) A target tracking policy, requires @policy_type = "TargetTrackingScaling"@ . See supported fields below. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AppautoscalingPolicyResource
-    = '[]
-
 $(TH.makeResource
     "aws_appautoscaling_policy"
     ''Qual.AWS
@@ -907,9 +874,6 @@ data AppautoscalingTargetResource = AppautoscalingTargetResource
       {- ^ (Required) The AWS service namespace of the scalable target. Documentation can be found in the @ServiceNamespace@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AppautoscalingTargetResource
-    = '[]
-
 $(TH.makeResource
     "aws_appautoscaling_target"
     ''Qual.AWS
@@ -933,9 +897,6 @@ data AutoscalingAttachmentResource = AutoscalingAttachmentResource
     , _elb :: !(Attr Text)
       {- ^ (Optional) The name of the ELB. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AutoscalingAttachmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_autoscaling_attachment"
@@ -1002,33 +963,33 @@ data AutoscalingGroupResource = AutoscalingGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutoscalingGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN for this AutoScaling Group -}
-      , '("availability_zones", Attr Text)
+      , '("availability_zones", Text)
          {- - The availability zones of the autoscale group. -}
-      , '("default_cooldown", Attr Text)
+      , '("default_cooldown", Text)
          {- - Time between a scaling activity and the succeeding scaling activity. -}
-      , '("desired_capacity", Attr Text)
+      , '("desired_capacity", Text)
          {- -The number of Amazon EC2 instances that should be running in the group. -}
-      , '("health_check_grace_period", Attr Text)
+      , '("health_check_grace_period", Text)
          {- - Time after instance comes into service before checking health. -}
-      , '("health_check_type", Attr Text)
+      , '("health_check_type", Text)
          {- - "EC2" or "ELB". Controls how health checking is done. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The autoscaling group id. -}
-      , '("launch_configuration", Attr Text)
+      , '("launch_configuration", Text)
          {- - The launch configuration of the autoscale group -}
-      , '("load_balancers", Attr Text)
+      , '("load_balancers", Text)
          {- (Optional) The load balancer names associated with the autoscaling group. -}
-      , '("max_size", Attr Text)
+      , '("max_size", Text)
          {- - The maximum size of the autoscale group -}
-      , '("min_size", Attr Text)
+      , '("min_size", Text)
          {- - The minimum size of the autoscale group -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the autoscale group -}
-      , '("target_group_arns", Attr Text)
+      , '("target_group_arns", Text)
          {- (Optional) list of Target Group ARNs that apply to this AutoScaling Group -}
-      , '("vpc_zone_identifier", Attr Text)
+      , '("vpc_zone_identifier", Text)
          {- (Optional) - The VPC zone identifier -}
        ]
 
@@ -1070,9 +1031,6 @@ data AutoscalingLifecycleHookResource = AutoscalingLifecycleHookResource
       {- ^ (Optional) The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AutoscalingLifecycleHookResource
-    = '[]
-
 $(TH.makeResource
     "aws_autoscaling_lifecycle_hook"
     ''Qual.AWS
@@ -1094,9 +1052,6 @@ data AutoscalingNotificationResource = AutoscalingNotificationResource
     , _topic_arn :: !(Attr Text)
       {- ^ (Required) The Topic ARN for notifications to be sent through -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AutoscalingNotificationResource
-    = '[]
 
 $(TH.makeResource
     "aws_autoscaling_notification"
@@ -1125,15 +1080,15 @@ data AutoscalingPolicyResource = AutoscalingPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutoscalingPolicyResource
-    = '[ '("adjustment_type", Attr Text)
+    = '[ '("adjustment_type", Text)
          {- - The scaling policy's adjustment type. -}
-      , '("arn", Attr Text)
+      , '("arn", Text)
          {- - The ARN assigned by AWS to the scaling policy. -}
-      , '("autoscaling_group_name", Attr Text)
+      , '("autoscaling_group_name", Text)
          {- - The scaling policy's assigned autoscaling group. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The scaling policy's name. -}
-      , '("policy_type", Attr Text)
+      , '("policy_type", Text)
          {- - The scaling policy's type. -}
        ]
 
@@ -1166,7 +1121,7 @@ data AutoscalingScheduleResource = AutoscalingScheduleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AutoscalingScheduleResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS to the autoscaling schedule. -}
        ]
 
@@ -1203,13 +1158,13 @@ data BatchComputeEnvironmentResource = BatchComputeEnvironmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BatchComputeEnvironmentResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) of the compute environment. -}
-      , '("ecs_cluster_arn", Attr Text)
+      , '("ecs_cluster_arn", Text)
          {- - The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The current status of the compute environment (for example, CREATING or VALID). -}
-      , '("status_reason", Attr Text)
+      , '("status_reason", Text)
          {- - A short, human-readable string to provide additional details about the current status of the compute environment. -}
        ]
 
@@ -1235,9 +1190,6 @@ data BatchJobDefinitionResource = BatchJobDefinitionResource
       {- ^ (Required) The type of job definition.  Must be @container@ -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed BatchJobDefinitionResource
-    = '[]
-
 $(TH.makeResource
     "aws_batch_job_definition"
     ''Qual.AWS
@@ -1259,7 +1211,7 @@ data BatchJobQueueResource = BatchJobQueueResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BatchJobQueueResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name of the job queue. -}
        ]
 
@@ -1302,27 +1254,27 @@ data CloudformationStackResource = CloudformationStackResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudformationStackResource
-    = '[ '("capabilities", Attr Text)
+    = '[ '("capabilities", Text)
          {- - A list of capabilities -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Description of the stack -}
-      , '("disable_rollback", Attr Text)
+      , '("disable_rollback", Text)
          {- - Whether the rollback of the stack is disabled when stack creation fails -}
-      , '("iam_role_arn", Attr Text)
+      , '("iam_role_arn", Text)
          {- - The ARN of the IAM role used to create the stack. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - A unique identifier of the stack. -}
-      , '("notification_arns", Attr Text)
+      , '("notification_arns", Text)
          {- - A list of SNS topic ARNs to publish stack related events -}
-      , '("outputs", Attr Text)
+      , '("outputs", Text)
          {- - A map of outputs from the stack. -}
-      , '("parameters", Attr Text)
+      , '("parameters", Text)
          {- - A map of parameters that specify input parameters for the stack. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A map of tags associated with this stack. -}
-      , '("template_body", Attr Text)
+      , '("template_body", Text)
          {- - Structure containing the template body. -}
-      , '("timeout_in_minutes", Attr Text)
+      , '("timeout_in_minutes", Text)
          {- - The amount of time that can pass before the stack status becomes @CREATE_FAILED@ -}
        ]
 
@@ -1382,9 +1334,6 @@ data CloudfrontDistributionResource = CloudfrontDistributionResource
       {- ^ (Optional) - If you're using AWS WAF to filter CloudFront requests, the Id of the AWS WAF web ACL that is associated with the distribution. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CloudfrontDistributionResource
-    = '[]
-
 $(TH.makeResource
     "aws_cloudfront_distribution"
     ''Qual.AWS
@@ -1405,17 +1354,17 @@ data CloudfrontOriginAccessIdentityResource = CloudfrontOriginAccessIdentityReso
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudfrontOriginAccessIdentityResource
-    = '[ '("caller_reference", Attr Text)
+    = '[ '("caller_reference", Text)
          {- - Internal value used by CloudFront to allow future updates to the origin access identity. -}
-      , '("cloudfront_access_identity_path", Attr Text)
+      , '("cloudfront_access_identity_path", Text)
          {- - A shortcut to the full path for the origin access identity to use in CloudFront, see below. -}
-      , '("etag", Attr Text)
+      , '("etag", Text)
          {- - The current version of the origin access identity's information. For example: @E2QWRUHAPOMQZL@ . -}
-      , '("iam_arn", Attr Text)
+      , '("iam_arn", Text)
          {- - A pre-generated ARN for use in S3 bucket policies (see below). Example: @arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2QWRUHAPOMQZL@ . -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The identifier for the distribution. For example: @EDFDVBD632BHDS5@ . -}
-      , '("s3_canonical_user_id", Attr Text)
+      , '("s3_canonical_user_id", Text)
          {- - The Amazon S3 canonical user ID for the origin access identity, which you use when giving the origin access identity read permission to an object in Amazon S3. -}
        ]
 
@@ -1456,11 +1405,11 @@ data CloudtrailResource = CloudtrailResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudtrailResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name of the trail. -}
-      , '("home_region", Attr Text)
+      , '("home_region", Text)
          {- - The region in which the trail was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The name of the trail. -}
        ]
 
@@ -1481,7 +1430,7 @@ data CloudwatchDashboardResource = CloudwatchDashboardResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchDashboardResource
-    = '[ '("dashboard_arn", Attr Text)
+    = '[ '("dashboard_arn", Text)
          {- - The Amazon Resource Name (ARN) of the dashboard. -}
        ]
 
@@ -1510,7 +1459,7 @@ data CloudwatchEventRuleResource = CloudwatchEventRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchEventRuleResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) of the rule. -}
        ]
 
@@ -1544,9 +1493,6 @@ data CloudwatchEventTargetResource = CloudwatchEventTargetResource
       {- ^ (Optional) The unique target assignment ID.  If missing, will generate a random, unique id. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CloudwatchEventTargetResource
-    = '[]
-
 $(TH.makeResource
     "aws_cloudwatch_event_target"
     ''Qual.AWS
@@ -1562,9 +1508,6 @@ data CloudwatchLogDestinationPolicyResource = CloudwatchLogDestinationPolicyReso
     , _destination_name :: !(Attr Text)
       {- ^ (Required) A name for the subscription filter -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed CloudwatchLogDestinationPolicyResource
-    = '[]
 
 $(TH.makeResource
     "aws_cloudwatch_log_destination_policy"
@@ -1585,7 +1528,7 @@ data CloudwatchLogDestinationResource = CloudwatchLogDestinationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchLogDestinationResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the log destination. -}
        ]
 
@@ -1612,7 +1555,7 @@ data CloudwatchLogGroupResource = CloudwatchLogGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchLogGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the log group. -}
        ]
 
@@ -1637,7 +1580,7 @@ data CloudwatchLogMetricFilterResource = CloudwatchLogMetricFilterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchLogMetricFilterResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The name of the metric filter. -}
        ]
 
@@ -1658,7 +1601,7 @@ data CloudwatchLogStreamResource = CloudwatchLogStreamResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchLogStreamResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the log stream. -}
        ]
 
@@ -1685,7 +1628,7 @@ data CloudwatchLogSubscriptionFilterResource = CloudwatchLogSubscriptionFilterRe
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchLogSubscriptionFilterResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the log subscription filter. -}
        ]
 
@@ -1738,7 +1681,7 @@ data CloudwatchMetricAlarmResource = CloudwatchMetricAlarmResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudwatchMetricAlarmResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the health check -}
        ]
 
@@ -1773,15 +1716,15 @@ data CodebuildProjectResource = CodebuildProjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CodebuildProjectResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - A short description of the project. -}
-      , '("encryption_key", Attr Text)
+      , '("encryption_key", Text)
          {- - The AWS Key Management Service (AWS KMS) customer master key (CMK) that was used for encrypting the build project's build output artifacts. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the CodeBuild project. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The projects name. -}
-      , '("service_role", Attr Text)
+      , '("service_role", Text)
          {- - The ARN of the IAM service role. -}
        ]
 
@@ -1808,13 +1751,13 @@ data CodecommitRepositoryResource = CodecommitRepositoryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CodecommitRepositoryResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the repository -}
-      , '("clone_url_http", Attr Text)
+      , '("clone_url_http", Text)
          {- - The URL to use for cloning the repository over HTTPS. -}
-      , '("clone_url_ssh", Attr Text)
+      , '("clone_url_ssh", Text)
          {- - The URL to use for cloning the repository over SSH. -}
-      , '("repository_id", Attr Text)
+      , '("repository_id", Text)
          {- - The ID of the repository -}
        ]
 
@@ -1846,9 +1789,6 @@ data CodecommitTriggerResource = CodecommitTriggerResource
       {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CodecommitTriggerResource
-    = '[]
-
 $(TH.makeResource
     "aws_codecommit_trigger"
     ''Qual.AWS
@@ -1864,9 +1804,9 @@ data CodedeployAppResource = CodedeployAppResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CodedeployAppResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - Amazon's assigned ID for the application. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The application's name. -}
        ]
 
@@ -1887,9 +1827,9 @@ data CodedeployDeploymentConfigResource = CodedeployDeploymentConfigResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CodedeployDeploymentConfigResource
-    = '[ '("deployment_config_id", Attr Text)
+    = '[ '("deployment_config_id", Text)
          {- - The AWS Assigned deployment config id -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The deployment group's config name. -}
        ]
 
@@ -1931,9 +1871,6 @@ data CodedeployDeploymentGroupResource = CodedeployDeploymentGroupResource
       {- ^ (Optional) Trigger Configurations for the deployment group (documented below). -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CodedeployDeploymentGroupResource
-    = '[]
-
 $(TH.makeResource
     "aws_codedeploy_deployment_group"
     ''Qual.AWS
@@ -1957,7 +1894,7 @@ data CodepipelineResource = CodepipelineResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CodepipelineResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The codepipeline ID. -}
        ]
 
@@ -1987,9 +1924,6 @@ data CognitoIdentityPoolResource = CognitoIdentityPoolResource
       {- ^ (Optional) - Key-Value pairs mapping provider names to provider app IDs. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CognitoIdentityPoolResource
-    = '[]
-
 $(TH.makeResource
     "aws_cognito_identity_pool"
     ''Qual.AWS
@@ -2007,9 +1941,6 @@ data CognitoIdentityPoolRolesAttachmentResource = CognitoIdentityPoolRolesAttach
     , _roles :: !(Attr Text)
       {- ^ (Required) - The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed CognitoIdentityPoolRolesAttachmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_cognito_identity_pool_roles_attachment"
@@ -2038,9 +1969,6 @@ data ConfigConfigRuleResource = ConfigConfigRuleResource
       {- ^ (Required) Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources as documented below. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ConfigConfigRuleResource
-    = '[]
-
 $(TH.makeResource
     "aws_config_config_rule"
     ''Qual.AWS
@@ -2065,9 +1993,6 @@ data ConfigConfigurationRecorderResource = ConfigConfigurationRecorderResource
       {- ^ (Required) Amazon Resource Name (ARN) of the IAM role. used to make read or write requests to the delivery channel and to describe the AWS resources associated with the account. See <http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html> for more details. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ConfigConfigurationRecorderResource
-    = '[]
-
 $(TH.makeResource
     "aws_config_configuration_recorder"
     ''Qual.AWS
@@ -2086,9 +2011,6 @@ data ConfigConfigurationRecorderStatusResource = ConfigConfigurationRecorderStat
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the recorder -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ConfigConfigurationRecorderStatusResource
-    = '[]
 
 $(TH.makeResource
     "aws_config_configuration_recorder_status"
@@ -2115,9 +2037,6 @@ data ConfigDeliveryChannelResource = ConfigDeliveryChannelResource
       {- ^ (Optional) The ARN of the SNS topic that AWS Config delivers notifications to. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ConfigDeliveryChannelResource
-    = '[]
-
 $(TH.makeResource
     "aws_config_delivery_channel"
     ''Qual.AWS
@@ -2141,15 +2060,15 @@ data CustomerGatewayResource = CustomerGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CustomerGatewayResource
-    = '[ '("bgp_asn", Attr Text)
+    = '[ '("bgp_asn", Text)
          {- - The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The amazon-assigned ID of the gateway. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The IP address of the gateway's Internet-routable external interface. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Tags applied to the gateway. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of customer gateway. -}
        ]
 
@@ -2178,9 +2097,6 @@ data DbEventSubscriptionResource = DbEventSubscriptionResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DbEventSubscriptionResource
-    = '[]
 
 $(TH.makeResource
     "aws_db_event_subscription"
@@ -2291,93 +2207,93 @@ data DbInstanceResource = DbInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbInstanceResource
-    = '[ '("address", Attr Text)
+    = '[ '("address", Text)
          {- - The address of the RDS instance. -}
-      , '("allocated_storage", Attr Text)
+      , '("allocated_storage", Text)
          {- - The amount of allocated storage. -}
-      , '("arn", Attr Text)
+      , '("arn", Text)
          {- - The ARN of the RDS instance. -}
-      , '("auto_minor_version_upgrade", Attr Text)
+      , '("auto_minor_version_upgrade", Text)
          {- - Indicates that minor version patches are applied automatically. -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - The availability zone of the instance. -}
-      , '("backup_retention_period", Attr Text)
+      , '("backup_retention_period", Text)
          {- - The backup retention period. -}
-      , '("backup_window", Attr Text)
+      , '("backup_window", Text)
          {- - The backup window. -}
-      , '("ca_cert_identifier", Attr Text)
+      , '("ca_cert_identifier", Text)
          {- - Specifies the identifier of the CA certificate for the DB instance. -}
-      , '("db_cluster_identifier", Attr Text)
+      , '("db_cluster_identifier", Text)
          {- - If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of. -}
-      , '("db_instance_arn", Attr Text)
+      , '("db_instance_arn", Text)
          {- - The Amazon Resource Name (ARN) for the DB instance. -}
-      , '("db_instance_class", Attr Text)
+      , '("db_instance_class", Text)
          {- - Contains the name of the compute and memory capacity class of the DB instance. -}
-      , '("db_instance_port", Attr Text)
+      , '("db_instance_port", Text)
          {- - Specifies the port that the DB instance listens on. -}
-      , '("db_name", Attr Text)
+      , '("db_name", Text)
          {- - Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. -}
-      , '("db_parameter_groups", Attr Text)
+      , '("db_parameter_groups", Text)
          {- - Provides the list of DB parameter groups applied to this DB instance. -}
-      , '("db_security_groups", Attr Text)
+      , '("db_security_groups", Text)
          {- - Provides List of DB security groups associated to this DB instance. -}
-      , '("db_subnet_group", Attr Text)
+      , '("db_subnet_group", Text)
          {- - Specifies the name of the subnet group associated with the DB instance. -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - The connection endpoint. -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- - The database engine. -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- - The database engine version. -}
-      , '("hosted_zone_id", Attr Text)
+      , '("hosted_zone_id", Text)
          {- - The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record). -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The RDS instance ID. -}
-      , '("instance_class", Attr Text)
+      , '("instance_class", Text)
          {- - The RDS instance class. -}
-      , '("iops", Attr Text)
+      , '("iops", Text)
          {- - Specifies the Provisioned IOPS (I/O operations per second) value. -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - If StorageEncrypted is true, the KMS key identifier for the encrypted DB instance. -}
-      , '("license_model", Attr Text)
+      , '("license_model", Text)
          {- - License model information for this DB instance. -}
-      , '("maintenance_window", Attr Text)
+      , '("maintenance_window", Text)
          {- - The instance maintenance window. -}
-      , '("master_username", Attr Text)
+      , '("master_username", Text)
          {- - Contains the master username for the DB instance. -}
-      , '("monitoring_interval", Attr Text)
+      , '("monitoring_interval", Text)
          {- - The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. -}
-      , '("monitoring_role_arn", Attr Text)
+      , '("monitoring_role_arn", Text)
          {- - The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs. -}
-      , '("multi_az", Attr Text)
+      , '("multi_az", Text)
          {- - If the RDS instance is multi AZ enabled. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The database name. -}
-      , '("option_group_memberships", Attr Text)
+      , '("option_group_memberships", Text)
          {- - Provides the list of option group memberships for this DB instance. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - The database port. -}
-      , '("preferred_backup_window", Attr Text)
+      , '("preferred_backup_window", Text)
          {- - Specifies the daily time range during which automated backups are created. -}
-      , '("preferred_maintenance_window", Attr Text)
+      , '("preferred_maintenance_window", Text)
          {- -  Specifies the weekly time range during which system maintenance can occur in UTC. -}
-      , '("publicly_accessible", Attr Text)
+      , '("publicly_accessible", Text)
          {- - Specifies the accessibility options for the DB instance. -}
-      , '("replicate_source_db", Attr Text)
+      , '("replicate_source_db", Text)
          {- - The identifier of the source DB that this is a replica of. -}
-      , '("resource_id", Attr Text)
+      , '("resource_id", Text)
          {- - The RDS Resource ID of this instance. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The RDS instance status. -}
-      , '("storage_encrypted", Attr Text)
+      , '("storage_encrypted", Text)
          {- - Specifies whether the DB instance is encrypted. -}
-      , '("storage_type", Attr Text)
+      , '("storage_type", Text)
          {- - Specifies the storage type associated with DB instance. -}
-      , '("timezone", Attr Text)
+      , '("timezone", Text)
          {- - The time zone of the DB instance. -}
-      , '("username", Attr Text)
+      , '("username", Text)
          {- - The master username for the database. -}
-      , '("vpc_security_groups", Attr Text)
+      , '("vpc_security_groups", Text)
          {- - Provides a list of VPC security group elements that the DB instance belongs to. -}
        ]
 
@@ -2408,9 +2324,9 @@ data DbOptionGroupResource = DbOptionGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbOptionGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the db option group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The db option group name. -}
        ]
 
@@ -2439,9 +2355,9 @@ data DbParameterGroupResource = DbParameterGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbParameterGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the db parameter group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The db parameter group name. -}
        ]
 
@@ -2469,9 +2385,9 @@ data DbSecurityGroupResource = DbSecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbSecurityGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The arn of the DB security group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The db security group ID. -}
        ]
 
@@ -2500,39 +2416,39 @@ data DbSnapshotResource = DbSnapshotResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbSnapshotResource
-    = '[ '("allocated_storage", Attr Text)
+    = '[ '("allocated_storage", Text)
          {- - Specifies the allocated storage size in gigabytes (GB). -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot. -}
-      , '("db_snapshot_arn", Attr Text)
+      , '("db_snapshot_arn", Text)
          {- - The Amazon Resource Name (ARN) for the DB snapshot. -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Specifies whether the DB snapshot is encrypted. -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- - Specifies the name of the database engine. -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- - Specifies the version of the database engine. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The snapshot ID. -}
-      , '("iops", Attr Text)
+      , '("iops", Text)
          {- - Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot. -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("license_model", Attr Text)
+      , '("license_model", Text)
          {- - License model information for the restored DB instance. -}
-      , '("option_group_name", Attr Text)
+      , '("option_group_name", Text)
          {- - Provides the option group name for the DB snapshot. -}
-      , '("snapshot_create_time", Attr Text)
+      , '("snapshot_create_time", Text)
          {- - Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). -}
-      , '("source_db_snapshot_identifier", Attr Text)
+      , '("source_db_snapshot_identifier", Text)
          {- - The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy. -}
-      , '("source_region", Attr Text)
+      , '("source_region", Text)
          {- - The region that the DB snapshot was created in or copied from. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - Specifies the status of this DB snapshot. -}
-      , '("storage_type", Attr Text)
+      , '("storage_type", Text)
          {- - Specifies the storage type associated with DB snapshot. -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - Specifies the storage type associated with DB snapshot. -}
        ]
 
@@ -2559,9 +2475,9 @@ data DbSubnetGroupResource = DbSubnetGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DbSubnetGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the db subnet group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The db subnet group name. -}
        ]
 
@@ -2603,9 +2519,6 @@ data DefaultNetworkAclResource = DefaultNetworkAclResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DefaultNetworkAclResource
-    = '[]
 
 $(TH.makeResource
     "aws_default_network_acl"
@@ -2651,7 +2564,7 @@ data DefaultRouteTableResource = DefaultRouteTableResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DefaultRouteTableResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the routing table -}
        ]
 
@@ -2695,9 +2608,6 @@ data DefaultSecurityGroupResource = DefaultSecurityGroupResource
       {- ^ (Optional, Forces new resource) The VPC ID. Note that changing the @vpc_id@ will not restore any default security group rules that were modified, added, or removed. It will be left in it's current state -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DefaultSecurityGroupResource
-    = '[]
-
 $(TH.makeResource
     "aws_default_security_group"
     ''Qual.AWS
@@ -2715,9 +2625,6 @@ data DefaultSubnetResource = DefaultSubnetResource
     { _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DefaultSubnetResource
-    = '[]
 
 $(TH.makeResource
     "aws_default_subnet"
@@ -2743,9 +2650,6 @@ data DefaultVpcDhcpOptionsResource = DefaultVpcDhcpOptionsResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DefaultVpcDhcpOptionsResource
-    = '[]
 
 $(TH.makeResource
     "aws_default_vpc_dhcp_options"
@@ -2774,9 +2678,6 @@ data DefaultVpcResource = DefaultVpcResource
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DefaultVpcResource
-    = '[]
-
 $(TH.makeResource
     "aws_default_vpc"
     ''Qual.AWS
@@ -2797,7 +2698,7 @@ data DevicefarmProjectResource = DevicefarmProjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DevicefarmProjectResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name of this project -}
        ]
 
@@ -2838,11 +2739,11 @@ data DirectoryServiceDirectoryResource = DirectoryServiceDirectoryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DirectoryServiceDirectoryResource
-    = '[ '("access_url", Attr Text)
+    = '[ '("access_url", Text)
          {- - The access URL for the directory, such as @http://alias.awsapps.com@ . -}
-      , '("dns_ip_addresses", Attr Text)
+      , '("dns_ip_addresses", Text)
          {- - A list of IP addresses of the DNS servers for the directory or connector. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The directory identifier. -}
        ]
 
@@ -2868,7 +2769,7 @@ data DmsCertificateResource = DmsCertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DmsCertificateResource
-    = '[ '("certificate_arn", Attr Text)
+    = '[ '("certificate_arn", Text)
          {- - The Amazon Resource Name (ARN) for the certificate. -}
        ]
 
@@ -2916,7 +2817,7 @@ data DmsEndpointResource = DmsEndpointResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DmsEndpointResource
-    = '[ '("endpoint_arn", Attr Text)
+    = '[ '("endpoint_arn", Text)
          {- - The Amazon Resource Name (ARN) for the endpoint. -}
        ]
 
@@ -2962,11 +2863,11 @@ data DmsReplicationInstanceResource = DmsReplicationInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DmsReplicationInstanceResource
-    = '[ '("replication_instance_arn", Attr Text)
+    = '[ '("replication_instance_arn", Text)
          {- - The Amazon Resource Name (ARN) of the replication instance. -}
-      , '("replication_instance_private_ips", Attr Text)
+      , '("replication_instance_private_ips", Text)
          {- -  A list of the private IP addresses of the replication instance. -}
-      , '("replication_instance_public_ips", Attr Text)
+      , '("replication_instance_public_ips", Text)
          {- - A list of the public IP addresses of the replication instance. -}
        ]
 
@@ -2991,7 +2892,7 @@ data DmsReplicationSubnetGroupResource = DmsReplicationSubnetGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DmsReplicationSubnetGroupResource
-    = '[ '("vpc_id", Attr Text)
+    = '[ '("vpc_id", Text)
          {- - The ID of the VPC the subnet group is in. -}
        ]
 
@@ -3027,7 +2928,7 @@ data DmsReplicationTaskResource = DmsReplicationTaskResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DmsReplicationTaskResource
-    = '[ '("replication_task_arn", Attr Text)
+    = '[ '("replication_task_arn", Text)
          {- - The Amazon Resource Name (ARN) for the replication task. -}
        ]
 
@@ -3070,9 +2971,6 @@ data DynamodbTableResource = DynamodbTableResource
       {- ^ (Required) The number of write units for this table -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DynamodbTableResource
-    = '[]
-
 $(TH.makeResource
     "aws_dynamodb_table"
     ''Qual.AWS
@@ -3102,29 +3000,29 @@ data EbsSnapshotResource = EbsSnapshotResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EbsSnapshotResource
-    = '[ '("data_encryption_key_id", Attr Text)
+    = '[ '("data_encryption_key_id", Text)
          {- - The data encryption key identifier for the snapshot. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - A description for the snapshot -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether the snapshot is encrypted. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The snapshot ID (e.g. snap-59fcb34e). -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("owner_alias", Attr Text)
+      , '("owner_alias", Text)
          {- - Value from an Amazon-maintained list ( @amazon@ , @aws-marketplace@ , @microsoft@ ) of snapshot owners. -}
-      , '("owner_id", Attr Text)
+      , '("owner_id", Text)
          {- - The AWS account ID of the EBS snapshot owner. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - The snapshot ID (e.g. snap-59fcb34e). -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The snapshot state. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags for the snapshot. -}
-      , '("volume_id", Attr Text)
+      , '("volume_id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("volume_size", Attr Text)
+      , '("volume_size", Text)
          {- - The size of the drive in GiBs. -}
        ]
 
@@ -3161,25 +3059,25 @@ data EbsVolumeResource = EbsVolumeResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EbsVolumeResource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The AZ where the EBS volume exists. -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether the disk is encrypted. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("iops", Attr Text)
+      , '("iops", Text)
          {- - The amount of IOPS for the disk. -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The size of the drive in GiBs. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - The snapshot_id the EBS volume is based off. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags for the resource. -}
-      , '("volume_id", Attr Text)
+      , '("volume_id", Text)
          {- - The volume ID (e.g. vol-59fcb34e). -}
-      , '("volume_type", Attr Text)
+      , '("volume_type", Text)
          {- - The type of EBS volume. -}
        ]
 
@@ -3203,9 +3101,9 @@ data EcrRepositoryPolicyResource = EcrRepositoryPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcrRepositoryPolicyResource
-    = '[ '("registry_id", Attr Text)
+    = '[ '("registry_id", Text)
          {- - The registry ID where the repository was created. -}
-      , '("repository", Attr Text)
+      , '("repository", Text)
          {- - The name of the repository. -}
        ]
 
@@ -3227,13 +3125,13 @@ data EcrRepositoryResource = EcrRepositoryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcrRepositoryResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - Full ARN of the repository. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the repository. -}
-      , '("registry_id", Attr Text)
+      , '("registry_id", Text)
          {- - The registry ID where the repository was created. -}
-      , '("repository_url", Attr Text)
+      , '("repository_url", Text)
          {- - The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@ -}
        ]
 
@@ -3254,19 +3152,19 @@ data EcsClusterResource = EcsClusterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcsClusterResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the ECS Cluster -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Amazon Resource Name (ARN) that identifies the cluster -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the cluster -}
-      , '("pending_tasks_count", Attr Text)
+      , '("pending_tasks_count", Text)
          {- - The number of pending tasks for the ECS Cluster -}
-      , '("registered_container_instances_count", Attr Text)
+      , '("registered_container_instances_count", Text)
          {- - The number of registered container instances for the ECS Cluster -}
-      , '("running_tasks_count", Attr Text)
+      , '("running_tasks_count", Text)
          {- - The number of running tasks for the ECS Cluster -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the ECS Cluster -}
        ]
 
@@ -3309,9 +3207,6 @@ data EcsServiceResource = EcsServiceResource
       {- ^ (Required) The family and revision ( @family:revision@ ) or full ARN of the task definition that you want to run in your service. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed EcsServiceResource
-    = '[]
-
 $(TH.makeResource
     "aws_ecs_service"
     ''Qual.AWS
@@ -3339,15 +3234,15 @@ data EcsTaskDefinitionResource = EcsTaskDefinitionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EcsTaskDefinitionResource
-    = '[ '("family", Attr Text)
+    = '[ '("family", Text)
          {- - The family of this task definition -}
-      , '("network_mode", Attr Text)
+      , '("network_mode", Text)
          {- - The Docker networking mode to use for the containers in this task. -}
-      , '("revision", Attr Text)
+      , '("revision", Text)
          {- - The revision of this task definition -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of this task definition -}
-      , '("task_role_arn", Attr Text)
+      , '("task_role_arn", Text)
          {- - The ARN of the IAM role that containers in this task can assume -}
        ]
 
@@ -3378,17 +3273,17 @@ data EfsFileSystemResource = EfsFileSystemResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EfsFileSystemResource
-    = '[ '("dns_name", Attr Text)
+    = '[ '("dns_name", Text)
          {- - The DNS name for the filesystem per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether EFS is encrypted. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID that identifies the file system (e.g. fs-ccfc0d65). -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key. -}
-      , '("performance_mode", Attr Text)
+      , '("performance_mode", Text)
          {- - The PerformanceMode of the file system. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The list of tags assigned to the file system. -}
        ]
 
@@ -3415,19 +3310,19 @@ data EfsMountTargetResource = EfsMountTargetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EfsMountTargetResource
-    = '[ '("dns_name", Attr Text)
+    = '[ '("dns_name", Text)
          {- - The DNS name for the given subnet/AZ per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-      , '("file_system_id", Attr Text)
+      , '("file_system_id", Text)
          {- - ID of the file system for which the mount target is intended. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the mount target. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - Address at which the file system may be mounted via the mount target. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ID of the network interface that Amazon EFS created when it created the mount target. -}
-      , '("security_groups", Attr Text)
+      , '("security_groups", Text)
          {- - List of VPC security group IDs attached to the mount target. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - ID of the mount target's subnet. -}
        ]
 
@@ -3449,7 +3344,7 @@ data EgressOnlyInternetGatewayResource = EgressOnlyInternetGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EgressOnlyInternetGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Egress Only Internet Gateway. -}
        ]
 
@@ -3482,17 +3377,17 @@ data EipAssociationResource = EipAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EipAssociationResource
-    = '[ '("allocation_id", Attr Text)
+    = '[ '("allocation_id", Text)
          {- - As above -}
-      , '("association_id", Attr Text)
+      , '("association_id", Text)
          {- - The ID that represents the association of the Elastic IP address with an instance. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - As above -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - As above -}
-      , '("private_ip_address", Attr Text)
+      , '("private_ip_address", Text)
          {- - As above -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - As above -}
        ]
 
@@ -3521,17 +3416,17 @@ data EipResource = EipResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EipResource
-    = '[ '("associate_with_private_ip", Attr Text)
+    = '[ '("associate_with_private_ip", Text)
          {- - Contains the user specified private IP address (if in VPC). -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Contains the EIP allocation ID. -}
-      , '("instance", Attr Text)
+      , '("instance", Text)
          {- - Contains the ID of the attached instance. -}
-      , '("network_interface", Attr Text)
+      , '("network_interface", Text)
          {- - Contains the ID of the attached network interface. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - Contains the private IP address (if in VPC). -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - Contains the public IP address. -}
        ]
 
@@ -3554,9 +3449,6 @@ data ElasticBeanstalkApplicationResource = ElasticBeanstalkApplicationResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name of the application, must be unique within your account -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ElasticBeanstalkApplicationResource
-    = '[]
 
 $(TH.makeResource
     "aws_elastic_beanstalk_application"
@@ -3591,7 +3483,7 @@ data ElasticBeanstalkApplicationVersionResource = ElasticBeanstalkApplicationVer
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticBeanstalkApplicationVersionResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - The Application Version name. -}
        ]
 
@@ -3620,9 +3512,6 @@ data ElasticBeanstalkConfigurationTemplateResource = ElasticBeanstalkConfigurati
     , _solution_stack_name :: !(Attr Text)
       {- ^ – (Optional) A solution stack to base your Template off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ElasticBeanstalkConfigurationTemplateResource
-    = '[]
 
 $(TH.makeResource
     "aws_elastic_beanstalk_configuration_template"
@@ -3662,9 +3551,6 @@ data ElasticBeanstalkEnvironmentResource = ElasticBeanstalkEnvironmentResource
     , _wait_for_ready_timeout :: !(Attr Text)
       {- ^ - (Default: @20m@ ) The maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for an Elastic Beanstalk Environment to be in a ready state before timing out. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ElasticBeanstalkEnvironmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_elastic_beanstalk_environment"
@@ -3730,43 +3616,43 @@ data ElasticacheClusterResource = ElasticacheClusterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticacheClusterResource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The Availability Zone for the cache cluster. -}
-      , '("cache_nodes", Attr Text)
+      , '("cache_nodes", Text)
          {- - List of node objects including @id@ , @address@ , @port@ and @availability_zone@ . Referenceable e.g. as @${aws_elasticache_cluster.bar.cache_nodes.0.address}@ -}
-      , '("cluster_address", Attr Text)
+      , '("cluster_address", Text)
          {- - (Memcached only) The DNS name of the cache cluster without the port appended. -}
-      , '("configuration_endpoint", Attr Text)
+      , '("configuration_endpoint", Text)
          {- - (Memcached only) The configuration endpoint to allow host discovery. -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- – Name of the cache engine. -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- – Version number of the cache engine. -}
-      , '("maintenance_window", Attr Text)
+      , '("maintenance_window", Text)
          {- – Specifies the weekly time range for when maintenance on the cache cluster is performed. -}
-      , '("node_type", Attr Text)
+      , '("node_type", Text)
          {- – The cluster node type. -}
-      , '("notification_topic_arn", Attr Text)
+      , '("notification_topic_arn", Text)
          {- – An Amazon Resource Name (ARN) of an SNS topic that ElastiCache notifications get sent to. -}
-      , '("num_cache_nodes", Attr Text)
+      , '("num_cache_nodes", Text)
          {- – The number of cache nodes that the cache cluster has. -}
-      , '("parameter_group_name", Attr Text)
+      , '("parameter_group_name", Text)
          {- – Name of the parameter group associated with this cache cluster. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- – The port number on which each of the cache nodes will accept connections. -}
-      , '("replication_group_id", Attr Text)
+      , '("replication_group_id", Text)
          {- - The replication group to which this cache cluster belongs. -}
-      , '("security_group_ids", Attr Text)
+      , '("security_group_ids", Text)
          {- – List VPC security groups associated with the cache cluster. -}
-      , '("security_group_names", Attr Text)
+      , '("security_group_names", Text)
          {- – List of security group names associated with this cache cluster. -}
-      , '("snapshot_retention_limit", Attr Text)
+      , '("snapshot_retention_limit", Text)
          {- - The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. -}
-      , '("snapshot_window", Attr Text)
+      , '("snapshot_window", Text)
          {- - The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of the cache cluster. -}
-      , '("subnet_group_name", Attr Text)
+      , '("subnet_group_name", Text)
          {- – Name of the subnet group associated to the cache cluster. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The tags assigned to the resource -}
        ]
 
@@ -3791,7 +3677,7 @@ data ElasticacheParameterGroupResource = ElasticacheParameterGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticacheParameterGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ElastiCache parameter group name. -}
        ]
 
@@ -3852,11 +3738,11 @@ data ElasticacheReplicationGroupResource = ElasticacheReplicationGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticacheReplicationGroupResource
-    = '[ '("configuration_endpoint_address", Attr Text)
+    = '[ '("configuration_endpoint_address", Text)
          {- - The address of the endpoint for the primary node in the replication group. If Redis, only present when cluster mode is disabled. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the ElastiCache Replication Group. -}
-      , '("primary_endpoint_address", Attr Text)
+      , '("primary_endpoint_address", Text)
          {- - (Redis only) The address of the replication group configuration endpoint when cluster mode is enabled. -}
        ]
 
@@ -3881,9 +3767,6 @@ data ElasticacheSecurityGroupResource = ElasticacheSecurityGroupResource
       {- ^ – (Required) List of EC2 security group names to be authorized for ingress to the cache security group -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ElasticacheSecurityGroupResource
-    = '[]
-
 $(TH.makeResource
     "aws_elasticache_security_group"
     ''Qual.AWS
@@ -3904,9 +3787,6 @@ data ElasticacheSubnetGroupResource = ElasticacheSubnetGroupResource
       {- ^ – (Required) List of VPC Subnet IDs for the cache subnet group -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ElasticacheSubnetGroupResource
-    = '[]
-
 $(TH.makeResource
     "aws_elasticache_subnet_group"
     ''Qual.AWS
@@ -3923,9 +3803,6 @@ data ElasticsearchDomainPolicyResource = ElasticsearchDomainPolicyResource
     , _domain_name :: !(Attr Text)
       {- ^ (Required) Name of the domain. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ElasticsearchDomainPolicyResource
-    = '[]
 
 $(TH.makeResource
     "aws_elasticsearch_domain_policy"
@@ -3958,15 +3835,15 @@ data ElasticsearchDomainResource = ElasticsearchDomainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElasticsearchDomainResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - Amazon Resource Name (ARN) of the domain. -}
-      , '("domain_id", Attr Text)
+      , '("domain_id", Text)
          {- - Unique identifier for the domain. -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - Domain-specific endpoint used to submit index, search, and data upload requests. -}
-      , '("vpc_options.0.availability_zones", Attr Text)
+      , '("vpc_options.0.availability_zones", Text)
          {- - If the domain was created inside a VPC, the names of the availability zones the configured @subnet_ids@ were created inside. -}
-      , '("vpc_options.0.vpc_id", Attr Text)
+      , '("vpc_options.0.vpc_id", Text)
          {- - If the domain was created inside a VPC, the ID of the VPC. -}
        ]
 
@@ -4002,9 +3879,6 @@ data ElastictranscoderPipelineResource = ElastictranscoderPipelineResource
       {- ^ (Optional) The permissions for the @thumbnail_config@ object. (documented below) -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ElastictranscoderPipelineResource
-    = '[]
-
 $(TH.makeResource
     "aws_elastictranscoder_pipeline"
     ''Qual.AWS
@@ -4035,9 +3909,6 @@ data ElastictranscoderPresetResource = ElastictranscoderPresetResource
       {- ^ (Optional, Forces new resource) Watermark parameters for the video parameters (documented below) -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ElastictranscoderPresetResource
-    = '[]
-
 $(TH.makeResource
     "aws_elastictranscoder_preset"
     ''Qual.AWS
@@ -4060,9 +3931,6 @@ data ElbAttachmentResource = ElbAttachmentResource
       {- ^ (Required) Instance ID to place in the ELB pool. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ElbAttachmentResource
-    = '[]
-
 $(TH.makeResource
     "aws_elb_attachment"
     ''Qual.AWS
@@ -4082,11 +3950,11 @@ data ElbLoadBalancerBackendServerPolicyResource = ElbLoadBalancerBackendServerPo
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElbLoadBalancerBackendServerPolicyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the policy. -}
-      , '("instance_port", Attr Text)
+      , '("instance_port", Text)
          {- - The backend port the policies are applied to -}
-      , '("load_balancer_name", Attr Text)
+      , '("load_balancer_name", Text)
          {- - The load balancer on which the policy is defined. -}
        ]
 
@@ -4109,11 +3977,11 @@ data ElbLoadBalancerListenerPolicyResource = ElbLoadBalancerListenerPolicyResour
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElbLoadBalancerListenerPolicyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the policy. -}
-      , '("load_balancer_name", Attr Text)
+      , '("load_balancer_name", Text)
          {- - The load balancer on which the policy is defined. -}
-      , '("load_balancer_port", Attr Text)
+      , '("load_balancer_port", Text)
          {- - The load balancer listener port the policies are applied to -}
        ]
 
@@ -4139,13 +4007,13 @@ data ElbLoadBalancerPolicyResource = ElbLoadBalancerPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ElbLoadBalancerPolicyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the policy. -}
-      , '("load_balancer_name", Attr Text)
+      , '("load_balancer_name", Text)
          {- - The load balancer on which the policy is defined. -}
-      , '("policy_name", Attr Text)
+      , '("policy_name", Text)
          {- - The name of the stickiness policy. -}
-      , '("policy_type_name", Attr Text)
+      , '("policy_type_name", Text)
          {- - The policy type of the policy. -}
        ]
 
@@ -4197,9 +4065,6 @@ data ElbResource = ElbResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ElbResource
-    = '[]
 
 $(TH.makeResource
     "aws_elb"
@@ -4254,9 +4119,6 @@ data EmrClusterResource = EmrClusterResource
       {- ^ (Optional) Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. Default @true@ -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed EmrClusterResource
-    = '[]
-
 $(TH.makeResource
     "aws_emr_cluster"
     ''Qual.AWS
@@ -4287,11 +4149,11 @@ data EmrInstanceGroupResource = EmrInstanceGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EmrInstanceGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The EMR Instance ID -}
-      , '("running_instance_count", Attr Text)
+      , '("running_instance_count", Text)
          {- The number of instances currently running in this instance group. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- The current status of the instance group. -}
        ]
 
@@ -4314,13 +4176,13 @@ data EmrSecurityConfigurationResource = EmrSecurityConfigurationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EmrSecurityConfigurationResource
-    = '[ '("configuration", Attr Text)
+    = '[ '("configuration", Text)
          {- - The JSON formatted Security Configuration -}
-      , '("creation_date", Attr Text)
+      , '("creation_date", Text)
          {- - Date the Security Configuration was created -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the EMR Security Configuration (Same as the @name@ ) -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The Name of the EMR Security Configuration -}
        ]
 
@@ -4350,7 +4212,7 @@ data FlowLogResource = FlowLogResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FlowLogResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Flow Log ID -}
        ]
 
@@ -4378,9 +4240,9 @@ data GlacierVaultResource = GlacierVaultResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed GlacierVaultResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the vault. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - The URI of the vault that was created. -}
        ]
 
@@ -4402,19 +4264,19 @@ data IamAccessKeyResource = IamAccessKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamAccessKeyResource
-    = '[ '("encrypted_secret", Attr Text)
+    = '[ '("encrypted_secret", Text)
          {- - The encrypted secret, base64 encoded. ~> NOTE: The encrypted secret may be decrypted using the command line, for example: @terraform output secret | base64 --decode | keybase pgp decrypt@ . -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The access key ID. -}
-      , '("key_fingerprint", Attr Text)
+      , '("key_fingerprint", Text)
          {- - The fingerprint of the PGP key used to encrypt the secret -}
-      , '("secret", Attr Text)
+      , '("secret", Text)
          {- - The secret access key. Note that this will be written to the state file. Please supply a @pgp_key@ instead, which will prevent the secret from being stored in plain text -}
-      , '("ses_smtp_password", Attr Text)
+      , '("ses_smtp_password", Text)
          {- - The secret access key converted into an SES SMTP password by applying <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html#smtp-credentials-convert> . -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - "Active" or "Inactive". Keys are initially active, but can be made inactive by other means. -}
-      , '("user", Attr Text)
+      , '("user", Text)
          {- - The IAM user associated with this access key. -}
        ]
 
@@ -4432,9 +4294,6 @@ data IamAccountAliasResource = IamAccountAliasResource
     { _account_alias :: !(Attr Text)
       {- ^ (Required) The account alias -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IamAccountAliasResource
-    = '[]
 
 $(TH.makeResource
     "aws_iam_account_alias"
@@ -4471,7 +4330,7 @@ data IamAccountPasswordPolicyResource = IamAccountPasswordPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamAccountPasswordPolicyResource
-    = '[ '("expire_passwords", Attr Text)
+    = '[ '("expire_passwords", Text)
          {- - Indicates whether passwords in the account expire. Returns @true@ if @max_password_age@ contains a value greater than @0@ . Returns @false@ if it is @0@ or not present . -}
        ]
 
@@ -4497,11 +4356,11 @@ data IamGroupMembershipResource = IamGroupMembershipResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamGroupMembershipResource
-    = '[ '("group", Attr Text)
+    = '[ '("group", Text)
          {- – IAM Group name -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name to identifing the Group Membership -}
-      , '("users", Attr Text)
+      , '("users", Text)
          {- - list of IAM User names -}
        ]
 
@@ -4520,9 +4379,6 @@ data IamGroupPolicyAttachmentResource = IamGroupPolicyAttachmentResource
     , _policy_arn :: !(Attr Text)
       {- ^ (Required) - The ARN of the policy you want to apply -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IamGroupPolicyAttachmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_iam_group_policy_attachment"
@@ -4545,13 +4401,13 @@ data IamGroupPolicyResource = IamGroupPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamGroupPolicyResource
-    = '[ '("group", Attr Text)
+    = '[ '("group", Text)
          {- - The group to which this policy applies. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The group policy ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the policy. -}
-      , '("policy", Attr Text)
+      , '("policy", Text)
          {- - The policy document attached to the group. -}
        ]
 
@@ -4574,17 +4430,17 @@ data IamGroupResource = IamGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS for this group. -}
-      , '("group_id", Attr Text)
+      , '("group_id", Text)
          {- - The stable and unique string identifying the group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The group's ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The group's name. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path of the group in IAM. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
        ]
 
@@ -4612,23 +4468,23 @@ data IamInstanceProfileResource = IamInstanceProfileResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamInstanceProfileResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS to the instance profile. -}
-      , '("create_date", Attr Text)
+      , '("create_date", Text)
          {- - The creation timestamp of the instance profile. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The instance profile's ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The instance profile's name. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path of the instance profile in IAM. -}
-      , '("role", Attr Text)
+      , '("role", Text)
          {- - The role assigned to the instance profile. -}
-      , '("role_id", Attr Text)
+      , '("role_id", Text)
          {- - The role id associated with this instance profile. -}
-      , '("roles", Attr Text)
+      , '("roles", Text)
          {- - The list of roles assigned to the instance profile. ( Deprecated ) -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
        ]
 
@@ -4651,7 +4507,7 @@ data IamOpenidConnectProviderResource = IamOpenidConnectProviderResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamOpenidConnectProviderResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS for this provider. -}
        ]
 
@@ -4687,9 +4543,9 @@ data IamPolicyAttachmentResource = IamPolicyAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamPolicyAttachmentResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The policy's ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the policy. -}
        ]
 
@@ -4716,17 +4572,17 @@ data IamPolicyResource = IamPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamPolicyResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS to this policy. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the policy. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The policy's ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the policy. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path of the policy in IAM. -}
-      , '("policy", Attr Text)
+      , '("policy", Text)
          {- - The policy document. -}
        ]
 
@@ -4745,9 +4601,6 @@ data IamRolePolicyAttachmentResource = IamRolePolicyAttachmentResource
     , _role :: !(Attr Text)
       {- ^ (Required) - The role the policy should be applied to -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IamRolePolicyAttachmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_iam_role_policy_attachment"
@@ -4770,13 +4623,13 @@ data IamRolePolicyResource = IamRolePolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamRolePolicyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The role policy ID, in the form of @role_name:role_policy_name@ . -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the policy. -}
-      , '("policy", Attr Text)
+      , '("policy", Text)
          {- - The policy document attached to the role. -}
-      , '("role", Attr Text)
+      , '("role", Text)
          {- - The name of the role associated with the policy. -}
        ]
 
@@ -4799,21 +4652,21 @@ data IamRoleResource = IamRoleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamRoleResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the role. -}
-      , '("assume_role_policy", Attr Text)
+      , '("assume_role_policy", Text)
          {- - The policy document associated with the role. -}
-      , '("create_date", Attr Text)
+      , '("create_date", Text)
          {- - The creation date of the IAM role. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the role. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The friendly IAM role name to match. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the role. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - The path to the role. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The stable and unique string identifying the role. -}
        ]
 
@@ -4834,9 +4687,9 @@ data IamSamlProviderResource = IamSamlProviderResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamSamlProviderResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS for this provider. -}
-      , '("valid_until", Attr Text)
+      , '("valid_until", Text)
          {- - The expiration date and time for the SAML provider in RFC1123 format, e.g. @Mon, 02 Jan 2006 15:04:05 MST@ . -}
        ]
 
@@ -4868,11 +4721,11 @@ data IamServerCertificateResource = IamServerCertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamServerCertificateResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the server certificate. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique Server Certificate name -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the Server Certificate -}
        ]
 
@@ -4899,9 +4752,9 @@ data IamUserLoginProfileResource = IamUserLoginProfileResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamUserLoginProfileResource
-    = '[ '("encrypted_password", Attr Text)
+    = '[ '("encrypted_password", Text)
          {- - The encrypted password, base64 encoded. -}
-      , '("key_fingerprint", Attr Text)
+      , '("key_fingerprint", Text)
          {- - The fingerprint of the PGP key used to encrypt the password -}
        ]
 
@@ -4920,9 +4773,6 @@ data IamUserPolicyAttachmentResource = IamUserPolicyAttachmentResource
     , _user :: !(Attr Text)
       {- ^ (Required) - The user the policy should be applied to -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IamUserPolicyAttachmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_iam_user_policy_attachment"
@@ -4943,9 +4793,6 @@ data IamUserPolicyResource = IamUserPolicyResource
     , _user :: !(Attr Text)
       {- ^ (Required) IAM user to which to attach this policy. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed IamUserPolicyResource
-    = '[]
 
 $(TH.makeResource
     "aws_iam_user_policy"
@@ -4968,15 +4815,15 @@ data IamUserResource = IamUserResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamUserResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS for this user. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The user's name. -}
-      , '("path", Attr Text)
+      , '("path", Text)
          {- - Path in which this user was created. -}
-      , '("unique_id", Attr Text)
+      , '("unique_id", Text)
          {- - The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs> assigned by AWS. -}
-      , '("user_id", Attr Text)
+      , '("user_id", Text)
          {- - The unique ID assigned by AWS for this user. -}
        ]
 
@@ -5001,9 +4848,9 @@ data IamUserSshKeyResource = IamUserSshKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IamUserSshKeyResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The MD5 message digest of the SSH public key. -}
-      , '("ssh_public_key_id", Attr Text)
+      , '("ssh_public_key_id", Text)
          {- - The unique identifier for the SSH public key. -}
        ]
 
@@ -5024,7 +4871,7 @@ data InspectorAssessmentTargetResource = InspectorAssessmentTargetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InspectorAssessmentTargetResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The target assessment ARN. -}
        ]
 
@@ -5049,7 +4896,7 @@ data InspectorAssessmentTemplateResource = InspectorAssessmentTemplateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InspectorAssessmentTemplateResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The template assessment ARN. -}
        ]
 
@@ -5068,7 +4915,7 @@ data InspectorResourceGroupResource = InspectorResourceGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InspectorResourceGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The resource group ARN. -}
        ]
 
@@ -5147,53 +4994,53 @@ data InstanceResource = InstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InstanceResource
-    = '[ '("associate_public_ip_address", Attr Text)
+    = '[ '("associate_public_ip_address", Text)
          {- - Whether or not the Instance is associated with a public IP address or not (Boolean). -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - The availability zone of the Instance. -}
-      , '("ebs_block_device", Attr Text)
+      , '("ebs_block_device", Text)
          {- - The EBS block device mappings of the Instance. -}
-      , '("ebs_optimized", Attr Text)
+      , '("ebs_optimized", Text)
          {- - Whether the Instance is EBS optimized or not (Boolean). -}
-      , '("ephemeral_block_device", Attr Text)
+      , '("ephemeral_block_device", Text)
          {- - The ephemeral block device mappings of the Instance. -}
-      , '("iam_instance_profile", Attr Text)
+      , '("iam_instance_profile", Text)
          {- - The name of the instance profile associated with the Instance. -}
-      , '("instance_type", Attr Text)
+      , '("instance_type", Text)
          {- - The type of the Instance. -}
-      , '("ipv6_addresses", Attr Text)
+      , '("ipv6_addresses", Text)
          {- - The IPv6 addresses associated to the Instance, if applicable. NOTE : Unlike the IPv4 address, this doesn't change if you attach an EIP to the instance. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - The key name of the Instance. -}
-      , '("monitoring", Attr Text)
+      , '("monitoring", Text)
          {- - Whether detailed monitoring is enabled or disabled for the Instance (Boolean). -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ID of the network interface that was created with the Instance. -}
-      , '("placement_group", Attr Text)
+      , '("placement_group", Text)
          {- - The placement group of the Instance. -}
-      , '("private_dns", Attr Text)
+      , '("private_dns", Text)
          {- - The private DNS name assigned to the Instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - The private IP address assigned to the Instance. -}
-      , '("public_dns", Attr Text)
+      , '("public_dns", Text)
          {- - The public DNS name assigned to the Instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC. -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - The public IP address assigned to the Instance, if applicable. NOTE : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
-      , '("root_block_device", Attr Text)
+      , '("root_block_device", Text)
          {- - The root block device mappings of the Instance -}
-      , '("security_groups", Attr Text)
+      , '("security_groups", Text)
          {- - The associated security groups. -}
-      , '("source_dest_check", Attr Text)
+      , '("source_dest_check", Text)
          {- - Whether the network interface performs source/destination checking (Boolean). -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - The VPC subnet ID. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the Instance. -}
-      , '("tenancy", Attr Text)
+      , '("tenancy", Text)
          {- - The tenancy of the instance: @dedicated@ , @default@ , @host@ . -}
-      , '("user_data", Attr Text)
+      , '("user_data", Text)
          {- - The User Data supplied to the Instance. -}
-      , '("vpc_security_group_ids", Attr Text)
+      , '("vpc_security_group_ids", Text)
          {- - The associated security groups in a non-default VPC. -}
        ]
 
@@ -5218,11 +5065,11 @@ data InternetGatewayResource = InternetGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InternetGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Internet Gateway. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The current state of the attachment between the gateway and the VPC. Present only if a VPC is attached -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The ID of an attached VPC. -}
        ]
 
@@ -5243,7 +5090,7 @@ data IotCertificateResource = IotCertificateResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IotCertificateResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the created AWS IoT certificate -}
        ]
 
@@ -5264,13 +5111,13 @@ data IotPolicyResource = IotPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IotPolicyResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN assigned by AWS to this policy. -}
-      , '("default_version_id", Attr Text)
+      , '("default_version_id", Text)
          {- - The default version of this policy. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of this policy. -}
-      , '("policy", Attr Text)
+      , '("policy", Text)
          {- - The policy document. -}
        ]
 
@@ -5301,9 +5148,9 @@ data KeyPairResource = KeyPairResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyPairResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- - The MD5 public key fingerprint as specified in section 4 of RFC 4716. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - The key pair name. -}
        ]
 
@@ -5335,7 +5182,7 @@ data KinesisFirehoseDeliveryStreamResource = KinesisFirehoseDeliveryStreamResour
     } deriving (Show, Eq, Generic)
 
 type instance Computed KinesisFirehoseDeliveryStreamResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the Stream -}
        ]
 
@@ -5368,27 +5215,27 @@ data KinesisStreamResource = KinesisStreamResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KinesisStreamResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) specifying the Stream (same as @id@ ) -}
-      , '("closed_shards", Attr Text)
+      , '("closed_shards", Text)
          {- - The list of shard ids in the CLOSED state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-      , '("creation_timestamp", Attr Text)
+      , '("creation_timestamp", Text)
          {- - The approximate UNIX timestamp that the stream was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The unique Stream id -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The unique Stream name -}
-      , '("open_shards", Attr Text)
+      , '("open_shards", Text)
          {- - The list of shard ids in the OPEN state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-      , '("retention_period", Attr Text)
+      , '("retention_period", Text)
          {- - Length of time (in hours) data records are accessible after they are added to the stream. -}
-      , '("shard_count", Attr Text)
+      , '("shard_count", Text)
          {- - The count of Shards for this Stream -}
-      , '("shard_level_metrics", Attr Text)
+      , '("shard_level_metrics", Text)
          {- - A list of shard-level CloudWatch metrics which are enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The current status of the stream. The stream status is one of CREATING, DELETING, ACTIVE, or UPDATING. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags to assigned to the stream. -}
        ]
 
@@ -5415,9 +5262,9 @@ data KmsAliasResource = KmsAliasResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KmsAliasResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) of the key alias. -}
-      , '("target_key_id", Attr Text)
+      , '("target_key_id", Text)
          {- - Key identifier pointed to by the alias. -}
        ]
 
@@ -5448,9 +5295,9 @@ data KmsKeyResource = KmsKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KmsKeyResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) of the key. -}
-      , '("key_id", Attr Text)
+      , '("key_id", Text)
          {- - The globally unique identifier for the key. -}
        ]
 
@@ -5480,7 +5327,7 @@ data LambdaAliasResource = LambdaAliasResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LambdaAliasResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) identifying your Lambda function alias. -}
        ]
 
@@ -5512,17 +5359,17 @@ data LambdaEventSourceMappingResource = LambdaEventSourceMappingResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LambdaEventSourceMappingResource
-    = '[ '("function_arn", Attr Text)
+    = '[ '("function_arn", Text)
          {- - The the ARN of the Lambda function the event source mapping is sending events to. (Note: this is a computed value that differs from @function_name@ above.) -}
-      , '("last_modified", Attr Text)
+      , '("last_modified", Text)
          {- - The date this resource was last modified. -}
-      , '("last_processing_result", Attr Text)
+      , '("last_processing_result", Text)
          {- - The result of the last AWS Lambda invocation of your Lambda function. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The state of the event source mapping. -}
-      , '("state_transition_reason", Attr Text)
+      , '("state_transition_reason", Text)
          {- - The reason the event source mapping is in its current state. -}
-      , '("uuid", Attr Text)
+      , '("uuid", Text)
          {- - The UUID of the created event source mapping. -}
        ]
 
@@ -5578,19 +5425,19 @@ data LambdaFunctionResource = LambdaFunctionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LambdaFunctionResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The Amazon Resource Name (ARN) identifying your Lambda Function. -}
-      , '("invoke_arn", Attr Text)
+      , '("invoke_arn", Text)
          {- - The ARN to be used for invoking Lambda Function from API Gateway - to be used in </docs/providers/aws/r/api_gateway_integration.html> 's @uri@ -}
-      , '("kms_key_arn", Attr Text)
+      , '("kms_key_arn", Text)
          {- - (Optional) The ARN for the KMS encryption key. -}
-      , '("last_modified", Attr Text)
+      , '("last_modified", Text)
          {- - The date this resource was last modified. -}
-      , '("qualified_arn", Attr Text)
+      , '("qualified_arn", Text)
          {- - The Amazon Resource Name (ARN) identifying your Lambda Function Version (if versioning is enabled via @publish = true@ ). -}
-      , '("source_code_hash", Attr Text)
+      , '("source_code_hash", Text)
          {- - Base64-encoded representation of raw SHA-256 sum of the zip file provided either via @filename@ or @s3_*@ parameters. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - Latest published version of your Lambda Function. -}
        ]
 
@@ -5620,9 +5467,6 @@ data LambdaPermissionResource = LambdaPermissionResource
     , _statement_id :: !(Attr Text)
       {- ^ (Required) A unique statement identifier. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed LambdaPermissionResource
-    = '[]
 
 $(TH.makeResource
     "aws_lambda_permission"
@@ -5673,9 +5517,6 @@ data LaunchConfigurationResource = LaunchConfigurationResource
       {- ^ (Optional) The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. @sg-46ae3d11@ ). -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed LaunchConfigurationResource
-    = '[]
-
 $(TH.makeResource
     "aws_launch_configuration"
     ''Qual.AWS
@@ -5698,15 +5539,15 @@ data LbCookieStickinessPolicyResource = LbCookieStickinessPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbCookieStickinessPolicyResource
-    = '[ '("cookie_expiration_period", Attr Text)
+    = '[ '("cookie_expiration_period", Text)
          {- - The time period after which the session cookie is considered stale, expressed in seconds. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the policy. -}
-      , '("lb_port", Attr Text)
+      , '("lb_port", Text)
          {- - The load balancer port to which the policy is applied. -}
-      , '("load_balancer", Attr Text)
+      , '("load_balancer", Text)
          {- - The load balancer to which the policy is attached. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the stickiness policy. -}
        ]
 
@@ -5738,9 +5579,9 @@ data LbListenerResource = LbListenerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbListenerResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the listener (matches @id@ ) -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the listener (matches @arn@ ) -}
        ]
 
@@ -5767,9 +5608,9 @@ data LbListenerRuleResource = LbListenerRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbListenerRuleResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the rule (matches @id@ ) -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the rule (matches @arn@ ) -}
        ]
 
@@ -5813,17 +5654,17 @@ data LbResource = LbResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the load balancer (matches @id@ ). -}
-      , '("arn_suffix", Attr Text)
+      , '("arn_suffix", Text)
          {- - The ARN suffix for use with CloudWatch Metrics. -}
-      , '("canonical_hosted_zone_id", Attr Text)
+      , '("canonical_hosted_zone_id", Text)
          {- - The canonical hosted zone ID of the load balancer. -}
-      , '("dns_name", Attr Text)
+      , '("dns_name", Text)
          {- - The DNS name of the load balancer. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the load balancer (matches @arn@ ). -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record). -}
        ]
 
@@ -5850,15 +5691,15 @@ data LbSslNegotiationPolicyResource = LbSslNegotiationPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbSslNegotiationPolicyResource
-    = '[ '("attribute", Attr Text)
+    = '[ '("attribute", Text)
          {- - The SSL Negotiation policy attributes. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the policy. -}
-      , '("lb_port", Attr Text)
+      , '("lb_port", Text)
          {- - The load balancer port to which the policy is applied. -}
-      , '("load_balancer", Attr Text)
+      , '("load_balancer", Text)
          {- - The load balancer to which the policy is attached. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the stickiness policy. -}
        ]
 
@@ -5885,7 +5726,7 @@ data LbTargetGroupAttachmentResource = LbTargetGroupAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbTargetGroupAttachmentResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A unique identifier for the attachment -}
        ]
 
@@ -5926,11 +5767,11 @@ data LbTargetGroupResource = LbTargetGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LbTargetGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the Target Group (matches @id@ ) -}
-      , '("arn_suffix", Attr Text)
+      , '("arn_suffix", Text)
          {- - The ARN suffix for use with CloudWatch Metrics. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the Target Group (matches @arn@ ) -}
        ]
 
@@ -5956,9 +5797,9 @@ data LightsailDomainResource = LightsailDomainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LightsailDomainResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the Lightsail domain -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The name used for this domain -}
        ]
 
@@ -5992,9 +5833,6 @@ data LightsailInstanceResource = LightsailInstanceResource
       {- ^ (Optional) launch script to configure server with additional user data -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed LightsailInstanceResource
-    = '[]
-
 $(TH.makeResource
     "aws_lightsail_instance"
     ''Qual.AWS
@@ -6019,19 +5857,19 @@ data LightsailKeyPairResource = LightsailKeyPairResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LightsailKeyPairResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the Lightsail key pair -}
-      , '("encrypted_fingerprint", Attr Text)
+      , '("encrypted_fingerprint", Text)
          {- - The MD5 public key fingerprint for the encrypted private key -}
-      , '("encrypted_private_key", Attr Text)
+      , '("encrypted_private_key", Text)
          {- – the private key material, base 64 encoded and encrypted with the given @pgp_key@ . This is only populated when creating a new key and @pgp_key@ is supplied -}
-      , '("fingerprint", Attr Text)
+      , '("fingerprint", Text)
          {- - The MD5 public key fingerprint as specified in section 4 of RFC 4716. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The name used for this key pair -}
-      , '("private_key", Attr Text)
+      , '("private_key", Text)
          {- - the private key, base64 encoded. This is only populated when creating a new key, and when no @pgp_key@ is provided -}
-      , '("public_key", Attr Text)
+      , '("public_key", Text)
          {- - the public key, base64 encoded -}
        ]
 
@@ -6056,11 +5894,11 @@ data LightsailStaticIpAttachmentResource = LightsailStaticIpAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LightsailStaticIpAttachmentResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the Lightsail static IP -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The allocated static IP address -}
-      , '("support_code", Attr Text)
+      , '("support_code", Text)
          {- - The support code. -}
        ]
 
@@ -6082,11 +5920,11 @@ data LightsailStaticIpResource = LightsailStaticIpResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LightsailStaticIpResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the Lightsail static IP -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The allocated static IP address -}
-      , '("support_code", Attr Text)
+      , '("support_code", Text)
          {- - The support code. -}
        ]
 
@@ -6107,9 +5945,9 @@ data MainRouteTableAssociationResource = MainRouteTableAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MainRouteTableAssociationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Route Table Association -}
-      , '("original_route_table_id", Attr Text)
+      , '("original_route_table_id", Text)
          {- - Used internally, see Notes below -}
        ]
 
@@ -6144,17 +5982,17 @@ data NatGatewayResource = NatGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NatGatewayResource
-    = '[ '("allocation_id", Attr Text)
+    = '[ '("allocation_id", Text)
          {- - The Allocation ID of the Elastic IP address for the gateway. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the NAT Gateway. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ENI ID of the network interface created by the NAT gateway. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - The private IP address of the NAT Gateway. -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - The public IP address of the NAT Gateway. -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - The Subnet ID of the subnet in which the NAT gateway is placed. -}
        ]
 
@@ -6185,7 +6023,7 @@ data NetworkAclResource = NetworkAclResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkAclResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the network ACL -}
        ]
 
@@ -6224,7 +6062,7 @@ data NetworkAclRuleResource = NetworkAclRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkAclRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the network ACL Rule -}
        ]
 
@@ -6247,13 +6085,13 @@ data NetworkInterfaceAttachmentResource = NetworkInterfaceAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkInterfaceAttachmentResource
-    = '[ '("attachment_id", Attr Text)
+    = '[ '("attachment_id", Text)
          {- - The ENI Attachment ID. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - Instance ID. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - Network interface ID. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The status of the Network Interface Attachment. -}
        ]
 
@@ -6286,19 +6124,19 @@ data NetworkInterfaceResource = NetworkInterfaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkInterfaceResource
-    = '[ '("attachment", Attr Text)
+    = '[ '("attachment", Text)
          {- - Block defining the attachment of the ENI. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - A description for the network interface. -}
-      , '("private_ips", Attr Text)
+      , '("private_ips", Text)
          {- - List of private IPs assigned to the ENI. -}
-      , '("security_groups", Attr Text)
+      , '("security_groups", Text)
          {- - List of security groups attached to the ENI. -}
-      , '("source_dest_check", Attr Text)
+      , '("source_dest_check", Text)
          {- - Whether source destination checking is enabled -}
-      , '("subnet_id", Attr Text)
+      , '("subnet_id", Text)
          {- - Subnet ID the ENI is in. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Tags assigned to the ENI. -}
        ]
 
@@ -6326,9 +6164,6 @@ data NetworkInterfaceSgAttachmentResource = NetworkInterfaceSgAttachmentResource
     , _security_group_id :: !(Attr Text)
       {- ^ (Required) The ID of the security group. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed NetworkInterfaceSgAttachmentResource
-    = '[]
 
 $(TH.makeResource
     "aws_network_interface_sg_attachment"
@@ -6377,7 +6212,7 @@ data OpsworksApplicationResource = OpsworksApplicationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksApplicationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the application. -}
        ]
 
@@ -6426,7 +6261,7 @@ data OpsworksCustomLayerResource = OpsworksCustomLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksCustomLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6479,7 +6314,7 @@ data OpsworksGangliaLayerResource = OpsworksGangliaLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksGangliaLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6538,7 +6373,7 @@ data OpsworksHaproxyLayerResource = OpsworksHaproxyLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksHaproxyLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6596,9 +6431,6 @@ data OpsworksInstanceResource = OpsworksInstanceResource
       {- ^ (Optional) Keyword to choose what virtualization mode created instances will use. Can be either @"paravirtual"@ or @"hvm"@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed OpsworksInstanceResource
-    = '[]
-
 $(TH.makeResource
     "aws_opsworks_instance"
     ''Qual.AWS
@@ -6652,7 +6484,7 @@ data OpsworksJavaAppLayerResource = OpsworksJavaAppLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksJavaAppLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6701,7 +6533,7 @@ data OpsworksMemcachedLayerResource = OpsworksMemcachedLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksMemcachedLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6754,7 +6586,7 @@ data OpsworksMysqlLayerResource = OpsworksMysqlLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksMysqlLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6803,7 +6635,7 @@ data OpsworksNodejsAppLayerResource = OpsworksNodejsAppLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksNodejsAppLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6830,7 +6662,7 @@ data OpsworksPermissionResource = OpsworksPermissionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksPermissionResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The computed id of the permission. Please note that this is only used internally to identify the permission. This value is not used in aws. -}
        ]
 
@@ -6877,7 +6709,7 @@ data OpsworksPhpAppLayerResource = OpsworksPhpAppLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksPhpAppLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6936,7 +6768,7 @@ data OpsworksRailsAppLayerResource = OpsworksRailsAppLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksRailsAppLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -6963,7 +6795,7 @@ data OpsworksRdsDbInstanceResource = OpsworksRdsDbInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksRdsDbInstanceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The computed id. Please note that this is only used internally to identify the stack <-> instance relation. This value is not used in aws. -}
        ]
 
@@ -7024,7 +6856,7 @@ data OpsworksStackResource = OpsworksStackResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksStackResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the stack. -}
        ]
 
@@ -7069,7 +6901,7 @@ data OpsworksStaticWebLayerResource = OpsworksStaticWebLayerResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksStaticWebLayerResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The id of the layer. -}
        ]
 
@@ -7094,7 +6926,7 @@ data OpsworksUserProfileResource = OpsworksUserProfileResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OpsworksUserProfileResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - Same value as @user_arn@ -}
        ]
 
@@ -7117,7 +6949,7 @@ data PlacementGroupResource = PlacementGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PlacementGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The name of the placement group. -}
        ]
 
@@ -7139,9 +6971,9 @@ data ProxyProtocolPolicyResource = ProxyProtocolPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ProxyProtocolPolicyResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the policy. -}
-      , '("load_balancer", Attr Text)
+      , '("load_balancer", Text)
          {- - The load balancer to which the policy is attached. -}
        ]
 
@@ -7203,35 +7035,35 @@ data RdsClusterInstanceResource = RdsClusterInstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RdsClusterInstanceResource
-    = '[ '("allocated_storage", Attr Text)
+    = '[ '("allocated_storage", Text)
          {- - The amount of allocated storage -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - The availability zone of the instance -}
-      , '("cluster_identifier", Attr Text)
+      , '("cluster_identifier", Text)
          {- - The RDS Cluster Identifier -}
-      , '("database_name", Attr Text)
+      , '("database_name", Text)
          {- - The database name -}
-      , '("dbi_resource_id", Attr Text)
+      , '("dbi_resource_id", Text)
          {- - The region-unique, immutable identifier for the DB instance. -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - The DNS address for this instance. May not be writable -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- - The database engine -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- - The database engine version -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Instance identifier -}
-      , '("identifier", Attr Text)
+      , '("identifier", Text)
          {- - The Instance identifier -}
-      , '("kms_key_id", Attr Text)
+      , '("kms_key_id", Text)
          {- - The ARN for the KMS encryption key if one is set to the cluster. -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - The database port -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The RDS instance status -}
-      , '("storage_encrypted", Attr Text)
+      , '("storage_encrypted", Text)
          {- - Specifies whether the DB cluster is encrypted. -}
-      , '("writer", Attr Text)
+      , '("writer", Text)
          {- – Boolean indicating if this instance is writable. @False@ indicates this instance is a read replica -}
        ]
 
@@ -7260,9 +7092,9 @@ data RdsClusterParameterGroupResource = RdsClusterParameterGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RdsClusterParameterGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the db cluster parameter group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The db cluster parameter group name. -}
        ]
 
@@ -7341,45 +7173,45 @@ data RdsClusterResource = RdsClusterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RdsClusterResource
-    = '[ '("allocated_storage", Attr Text)
+    = '[ '("allocated_storage", Text)
          {- - The amount of allocated storage -}
-      , '("availability_zones", Attr Text)
+      , '("availability_zones", Text)
          {- - The availability zone of the instance -}
-      , '("backup_retention_period", Attr Text)
+      , '("backup_retention_period", Text)
          {- - The backup retention period -}
-      , '("cluster_identifier", Attr Text)
+      , '("cluster_identifier", Text)
          {- - The RDS Cluster Identifier -}
-      , '("cluster_members", Attr Text)
+      , '("cluster_members", Text)
          {- – List of RDS Instances that are a part of this cluster -}
-      , '("cluster_resource_id", Attr Text)
+      , '("cluster_resource_id", Text)
          {- - The RDS Cluster Resource ID -}
-      , '("database_name", Attr Text)
+      , '("database_name", Text)
          {- - The database name -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - The DNS address of the RDS instance -}
-      , '("engine", Attr Text)
+      , '("engine", Text)
          {- - The database engine -}
-      , '("engine_version", Attr Text)
+      , '("engine_version", Text)
          {- - The database engine version -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The RDS Cluster Identifier -}
-      , '("maintenance_window", Attr Text)
+      , '("maintenance_window", Text)
          {- - The instance maintenance window -}
-      , '("master_username", Attr Text)
+      , '("master_username", Text)
          {- - The master username for the database -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - The database port -}
-      , '("preferred_backup_window", Attr Text)
+      , '("preferred_backup_window", Text)
          {- - The daily time range during which the backups happen -}
-      , '("preferred_maintenance_window", Attr Text)
+      , '("preferred_maintenance_window", Text)
          {- - The maintenance window -}
-      , '("reader_endpoint", Attr Text)
+      , '("reader_endpoint", Text)
          {- - A read-only endpoint for the Aurora cluster, automatically load-balanced across replicas -}
-      , '("replication_source_identifier", Attr Text)
+      , '("replication_source_identifier", Text)
          {- - ARN  of the source DB cluster if this DB cluster is created as a Read Replica. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The RDS instance status -}
-      , '("storage_encrypted", Attr Text)
+      , '("storage_encrypted", Text)
          {- - Specifies whether the DB cluster is encrypted -}
        ]
 
@@ -7462,41 +7294,41 @@ data RedshiftClusterResource = RedshiftClusterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RedshiftClusterResource
-    = '[ '("automated_snapshot_retention_period", Attr Text)
+    = '[ '("automated_snapshot_retention_period", Text)
          {- - The backup retention period -}
-      , '("availability_zone", Attr Text)
+      , '("availability_zone", Text)
          {- - The availability zone of the Cluster -}
-      , '("cluster_identifier", Attr Text)
+      , '("cluster_identifier", Text)
          {- - The Cluster Identifier -}
-      , '("cluster_parameter_group_name", Attr Text)
+      , '("cluster_parameter_group_name", Text)
          {- - The name of the parameter group to be associated with this cluster -}
-      , '("cluster_public_key", Attr Text)
+      , '("cluster_public_key", Text)
          {- - The public key for the cluster -}
-      , '("cluster_revision_number", Attr Text)
+      , '("cluster_revision_number", Text)
          {- - The specific revision number of the database in the cluster -}
-      , '("cluster_security_groups", Attr Text)
+      , '("cluster_security_groups", Text)
          {- - The security groups associated with the cluster -}
-      , '("cluster_subnet_group_name", Attr Text)
+      , '("cluster_subnet_group_name", Text)
          {- - The name of a cluster subnet group to be associated with this cluster -}
-      , '("cluster_type", Attr Text)
+      , '("cluster_type", Text)
          {- - The cluster type -}
-      , '("cluster_version", Attr Text)
+      , '("cluster_version", Text)
          {- - The version of Redshift engine software -}
-      , '("database_name", Attr Text)
+      , '("database_name", Text)
          {- - The name of the default database in the Cluster -}
-      , '("encrypted", Attr Text)
+      , '("encrypted", Text)
          {- - Whether the data in the cluster is encrypted -}
-      , '("endpoint", Attr Text)
+      , '("endpoint", Text)
          {- - The connection endpoint -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Redshift Cluster ID. -}
-      , '("node_type", Attr Text)
+      , '("node_type", Text)
          {- - The type of nodes in the cluster -}
-      , '("port", Attr Text)
+      , '("port", Text)
          {- - The Port the cluster responds on -}
-      , '("preferred_maintenance_window", Attr Text)
+      , '("preferred_maintenance_window", Text)
          {- - The backup window -}
-      , '("vpc_security_group_ids", Attr Text)
+      , '("vpc_security_group_ids", Text)
          {- - The VPC security group Ids associated with the cluster -}
        ]
 
@@ -7521,7 +7353,7 @@ data RedshiftParameterGroupResource = RedshiftParameterGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RedshiftParameterGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Redshift parameter group name. -}
        ]
 
@@ -7545,7 +7377,7 @@ data RedshiftSecurityGroupResource = RedshiftSecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RedshiftSecurityGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Redshift security group ID. -}
        ]
 
@@ -7572,7 +7404,7 @@ data RedshiftSubnetGroupResource = RedshiftSubnetGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RedshiftSubnetGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The Redshift Subnet group ID. -}
        ]
 
@@ -7593,9 +7425,9 @@ data Route53DelegationSetResource = Route53DelegationSetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Route53DelegationSetResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The delegation set ID -}
-      , '("name_servers", Attr Text)
+      , '("name_servers", Text)
          {- - A list of authoritative name servers for the hosted zone (effectively a list of NS records). -}
        ]
 
@@ -7649,9 +7481,6 @@ data Route53HealthCheckResource = Route53HealthCheckResource
       {- ^ (Required) The protocol to use when performing health checks. Valid values are @HTTP@ , @HTTPS@ , @HTTP_STR_MATCH@ , @HTTPS_STR_MATCH@ , @TCP@ , @CALCULATED@ and @CLOUDWATCH_METRIC@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed Route53HealthCheckResource
-    = '[]
-
 $(TH.makeResource
     "aws_route53_health_check"
     ''Qual.AWS
@@ -7691,7 +7520,7 @@ data Route53RecordResource = Route53RecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Route53RecordResource
-    = '[ '("fqdn", Attr Text)
+    = '[ '("fqdn", Text)
          {- - <https://en.wikipedia.org/wiki/Fully_qualified_domain_name> built using the zone domain and @name@ -}
        ]
 
@@ -7714,13 +7543,13 @@ data Route53ZoneAssociationResource = Route53ZoneAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Route53ZoneAssociationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The calculated unique identifier for the association. -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The ID of the VPC for the association. -}
-      , '("vpc_region", Attr Text)
+      , '("vpc_region", Text)
          {- - The region in which the VPC identified by @vpc_id@ was created. -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - The ID of the hosted zone for the association. -}
        ]
 
@@ -7755,15 +7584,15 @@ data Route53ZoneResource = Route53ZoneResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed Route53ZoneResource
-    = '[ '("caller_reference", Attr Text)
+    = '[ '("caller_reference", Text)
          {- - Caller Reference of the Hosted Zone. -}
-      , '("comment", Attr Text)
+      , '("comment", Text)
          {- - The comment field of the Hosted Zone. -}
-      , '("name_servers", Attr Text)
+      , '("name_servers", Text)
          {- - A list of name servers in associated (or default) delegation set. Find more about delegation sets in <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html> . -}
-      , '("resource_record_set_count", Attr Text)
+      , '("resource_record_set_count", Text)
          {- - the number of Record Set in the Hosted Zone -}
-      , '("zone_id", Attr Text)
+      , '("zone_id", Text)
          {- - The Hosted Zone ID. This can be referenced by zone records. -}
        ]
 
@@ -7803,23 +7632,23 @@ data RouteResource = RouteResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteResource
-    = '[ '("destination_cidr_block", Attr Text)
+    = '[ '("destination_cidr_block", Text)
          {- - The destination CIDR block. -}
-      , '("destination_ipv6_cidr_block", Attr Text)
+      , '("destination_ipv6_cidr_block", Text)
          {- - The destination IPv6 CIDR block. -}
-      , '("egress_only_gateway_id", Attr Text)
+      , '("egress_only_gateway_id", Text)
          {- - An ID of a VPC Egress Only Internet Gateway. -}
-      , '("gateway_id", Attr Text)
+      , '("gateway_id", Text)
          {- - An ID of a VPC internet gateway or a virtual private gateway. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - An ID of a NAT instance. -}
-      , '("nat_gateway_id", Attr Text)
+      , '("nat_gateway_id", Text)
          {- - An ID of a VPC NAT gateway. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - An ID of a network interface. -}
-      , '("route_table_id", Attr Text)
+      , '("route_table_id", Text)
          {- - The ID of the routing table. -}
-      , '("vpc_peering_connection_id", Attr Text)
+      , '("vpc_peering_connection_id", Text)
          {- - An ID of a VPC peering connection. -}
        ]
 
@@ -7841,7 +7670,7 @@ data RouteTableAssociationResource = RouteTableAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteTableAssociationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the association -}
        ]
 
@@ -7889,23 +7718,23 @@ data RouteTableResource = RouteTableResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteTableResource
-    = '[ '("cidr_block", Attr Text)
+    = '[ '("cidr_block", Text)
          {- - The CIDR block of the route. -}
-      , '("egress_only_gateway_id", Attr Text)
+      , '("egress_only_gateway_id", Text)
          {- - The ID of the Egress Only Internet Gateway. -}
-      , '("gateway_id", Attr Text)
+      , '("gateway_id", Text)
          {- - The Internet Gateway ID. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the routing table -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - The EC2 instance ID. -}
-      , '("ipv6_cidr_block", Attr Text)
+      , '("ipv6_cidr_block", Text)
          {- - The IPv6 CIDR block of the route. -}
-      , '("nat_gateway_id", Attr Text)
+      , '("nat_gateway_id", Text)
          {- - The NAT Gateway ID. -}
-      , '("network_interface_id", Attr Text)
+      , '("network_interface_id", Text)
          {- - The ID of the elastic network interface (eni) to use. -}
-      , '("vpc_peering_connection_id", Attr Text)
+      , '("vpc_peering_connection_id", Text)
          {- - The VPC Peering ID. -}
        ]
 
@@ -7928,9 +7757,6 @@ data S3BucketNotificationResource = S3BucketNotificationResource
     , _topic :: !(Attr Text)
       {- ^ (Optional) The notification configuration to SNS Topic (documented below). -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed S3BucketNotificationResource
-    = '[]
 
 $(TH.makeResource
     "aws_s3_bucket_notification"
@@ -7979,43 +7805,43 @@ data S3BucketObjectResource = S3BucketObjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed S3BucketObjectResource
-    = '[ '("body", Attr Text)
+    = '[ '("body", Text)
          {- - Object data (see limitations above to understand cases in which this field is actually available) -}
-      , '("cache_control", Attr Text)
+      , '("cache_control", Text)
          {- - Specifies caching behavior along the request/reply chain. -}
-      , '("content_disposition", Attr Text)
+      , '("content_disposition", Text)
          {- - Specifies presentational information for the object. -}
-      , '("content_encoding", Attr Text)
+      , '("content_encoding", Text)
          {- - Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. -}
-      , '("content_language", Attr Text)
+      , '("content_language", Text)
          {- - The language the content is in. -}
-      , '("content_length", Attr Text)
+      , '("content_length", Text)
          {- - Size of the body in bytes. -}
-      , '("content_type", Attr Text)
+      , '("content_type", Text)
          {- - A standard MIME type describing the format of the object data. -}
-      , '("etag", Attr Text)
+      , '("etag", Text)
          {- - the ETag generated for the object (an MD5 sum of the object content). -}
-      , '("expiration", Attr Text)
+      , '("expiration", Text)
          {- - If the object expiration is configured (see <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html> ), the field includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded. -}
-      , '("expires", Attr Text)
+      , '("expires", Text)
          {- - The date and time at which the object is no longer cacheable. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the @key@ of the resource supplied above -}
-      , '("last_modified", Attr Text)
+      , '("last_modified", Text)
          {- - Last modified date of the object in RFC1123 format (e.g. @Mon, 02 Jan 2006 15:04:05 MST@ ) -}
-      , '("metadata", Attr Text)
+      , '("metadata", Text)
          {- - A map of metadata stored with the object in S3 -}
-      , '("server_side_encryption", Attr Text)
+      , '("server_side_encryption", Text)
          {- - If the object is stored using server-side encryption (KMS or Amazon S3-managed encryption key), this field includes the chosen encryption and algorithm used. -}
-      , '("sse_kms_key_id", Attr Text)
+      , '("sse_kms_key_id", Text)
          {- - If present, specifies the ID of the Key Management Service (KMS) master encryption key that was used for the object. -}
-      , '("storage_class", Attr Text)
+      , '("storage_class", Text)
          {- - <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> information of the object. Available for all objects except for @Standard@ storage class objects. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the object. -}
-      , '("version_id", Attr Text)
+      , '("version_id", Text)
          {- - A unique version ID value for the object, if bucket versioning is enabled. -}
-      , '("website_redirect_location", Attr Text)
+      , '("website_redirect_location", Text)
          {- - If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. -}
        ]
 
@@ -8034,9 +7860,6 @@ data S3BucketPolicyResource = S3BucketPolicyResource
     , _policy :: !(Attr Text)
       {- ^ (Required) The text of the policy. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed S3BucketPolicyResource
-    = '[]
 
 $(TH.makeResource
     "aws_s3_bucket_policy"
@@ -8081,19 +7904,19 @@ data S3BucketResource = S3BucketResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed S3BucketResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the bucket. Will be of format @arn:aws:s3:::bucketname@ . -}
-      , '("bucket_domain_name", Attr Text)
+      , '("bucket_domain_name", Text)
          {- - The bucket domain name. Will be of format @bucketname.s3.amazonaws.com@ . -}
-      , '("hosted_zone_id", Attr Text)
+      , '("hosted_zone_id", Text)
          {- - The <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints> for this bucket's region. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The name of the bucket. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - The AWS region this bucket resides in. -}
-      , '("website_domain", Attr Text)
+      , '("website_domain", Text)
          {- - The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. -}
-      , '("website_endpoint", Attr Text)
+      , '("website_endpoint", Text)
          {- - The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. -}
        ]
 
@@ -8134,9 +7957,9 @@ data SecurityGroupResource = SecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The computed ARN of the security group. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the security group. -}
        ]
 
@@ -8181,9 +8004,6 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
       {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SecurityGroupRuleResource
-    = '[]
-
 $(TH.makeResource
     "aws_security_group_rule"
     ''Qual.AWS
@@ -8205,7 +8025,7 @@ data ServicecatalogPortfolioResource = ServicecatalogPortfolioResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServicecatalogPortfolioResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Service Catalog Portfolio. -}
        ]
 
@@ -8223,9 +8043,6 @@ data SesActiveReceiptRuleSetResource = SesActiveReceiptRuleSetResource
       {- ^ (Required) The name of the rule set -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SesActiveReceiptRuleSetResource
-    = '[]
-
 $(TH.makeResource
     "aws_ses_active_receipt_rule_set"
     ''Qual.AWS
@@ -8239,9 +8056,6 @@ data SesConfigurationSetResource = SesConfigurationSetResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the configuration set -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SesConfigurationSetResource
-    = '[]
 
 $(TH.makeResource
     "aws_ses_configuration_set"
@@ -8259,7 +8073,7 @@ data SesDomainDkimResource = SesDomainDkimResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SesDomainDkimResource
-    = '[ '("dkim_tokens", Attr Text)
+    = '[ '("dkim_tokens", Text)
          {- - DKIM tokens generated by SES. These tokens should be used to create CNAME records used to verify SES Easy DKIM. See below for an example of how this might be achieved when the domain is hosted in Route 53 and managed by Terraform. Find out more about verifying domains in Amazon SES in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html> . -}
        ]
 
@@ -8278,9 +8092,9 @@ data SesDomainIdentityResource = SesDomainIdentityResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SesDomainIdentityResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the domain identity. -}
-      , '("verification_token", Attr Text)
+      , '("verification_token", Text)
          {- - A code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorised SES to act on their behalf. The domain identity will be in state "verification pending" until this is done. See below for an example of how this might be achieved when the domain is hosted in Route 53 and managed by Terraform.  Find out more about verifying domains in Amazon SES in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html> . -}
        ]
 
@@ -8308,9 +8122,6 @@ data SesEventDestinationResource = SesEventDestinationResource
       {- ^ (Required) The name of the event destination -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SesEventDestinationResource
-    = '[]
-
 $(TH.makeResource
     "aws_ses_event_destination"
     ''Qual.AWS
@@ -8328,9 +8139,6 @@ data SesReceiptFilterResource = SesReceiptFilterResource
     , _policy :: !(Attr Text)
       {- ^ (Required) Block or Allow -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SesReceiptFilterResource
-    = '[]
 
 $(TH.makeResource
     "aws_ses_receipt_filter"
@@ -8372,9 +8180,6 @@ data SesReceiptRuleResource = SesReceiptRuleResource
       {- ^ (Optional) A list of WorkMail Action blocks. Documented below. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SesReceiptRuleResource
-    = '[]
-
 $(TH.makeResource
     "aws_ses_receipt_rule"
     ''Qual.AWS
@@ -8388,9 +8193,6 @@ data SesReceiptRuleSetResource = SesReceiptRuleSetResource
     { _rule_set_name :: !(Attr Text)
       {- ^ (Required) The name of the rule set -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SesReceiptRuleSetResource
-    = '[]
 
 $(TH.makeResource
     "aws_ses_receipt_rule_set"
@@ -8407,7 +8209,7 @@ data SimpledbDomainResource = SimpledbDomainResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SimpledbDomainResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The name of the SimpleDB domain -}
        ]
 
@@ -8428,7 +8230,7 @@ data SnapshotCreateVolumePermissionResource = SnapshotCreateVolumePermissionReso
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnapshotCreateVolumePermissionResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - A combination of " @snapshot_id@ - @account_id@ ". -}
        ]
 
@@ -8452,9 +8254,6 @@ data SnsTopicPolicyResource = SnsTopicPolicyResource
       {- ^ (Required) The fully-formed AWS policy as JSON -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SnsTopicPolicyResource
-    = '[]
-
 $(TH.makeResource
     "aws_sns_topic_policy"
     ''Qual.AWS
@@ -8476,9 +8275,9 @@ data SnsTopicResource = SnsTopicResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnsTopicResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the SNS topic, as a more obvious property (clone of id) -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the SNS topic -}
        ]
 
@@ -8527,9 +8326,6 @@ data SnsTopicSubscriptionResource = SnsTopicSubscriptionResource
       {- ^ (Required) The ARN of the SNS topic to subscribe to -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SnsTopicSubscriptionResource
-    = '[]
-
 $(TH.makeResource
     "aws_sns_topic_subscription"
     ''Qual.AWS
@@ -8549,9 +8345,6 @@ data SpotDatafeedSubscriptionResource = SpotDatafeedSubscriptionResource
     , _prefix :: !(Attr Text)
       {- ^ (Optional) Path of folder inside bucket to place spot pricing data. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SpotDatafeedSubscriptionResource
-    = '[]
 
 $(TH.makeResource
     "aws_spot_datafeed_subscription"
@@ -8587,9 +8380,6 @@ data SpotFleetRequestResource = SpotFleetRequestResource
     , _wait_for_fulfillment :: !(Attr Text)
       {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SpotFleetRequestResource
-    = '[]
 
 $(TH.makeResource
     "aws_spot_fleet_request"
@@ -8627,9 +8417,6 @@ data SpotInstanceRequestResource = SpotInstanceRequestResource
       {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SpotInstanceRequestResource
-    = '[]
-
 $(TH.makeResource
     "aws_spot_instance_request"
     ''Qual.AWS
@@ -8646,9 +8433,6 @@ data SqsQueuePolicyResource = SqsQueuePolicyResource
     , _queue_url :: !(Attr Text)
       {- ^ (Required) The URL of the SQS Queue to which to attach the policy -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SqsQueuePolicyResource
-    = '[]
 
 $(TH.makeResource
     "aws_sqs_queue_policy"
@@ -8691,9 +8475,9 @@ data SqsQueueResource = SqsQueueResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SqsQueueResource
-    = '[ '("arn", Attr Text)
+    = '[ '("arn", Text)
          {- - The ARN of the SQS queue -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The URL for the created Amazon SQS queue. -}
        ]
 
@@ -8721,21 +8505,21 @@ data SsmActivationResource = SsmActivationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmActivationResource
-    = '[ '("activation_code", Attr Text)
+    = '[ '("activation_code", Text)
          {- - The code the system generates when it processes the activation. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the resource that was registered. -}
-      , '("expiration_date", Attr Text)
+      , '("expiration_date", Text)
          {- - The date by which this activation request should expire. The default value is 24 hours. -}
-      , '("expired", Attr Text)
+      , '("expired", Text)
          {- - If the current activation has expired. -}
-      , '("iam_role", Attr Text)
+      , '("iam_role", Text)
          {- - The IAM Role attached to the managed instance. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The default name of the registerd managed instance. -}
-      , '("registration_count", Attr Text)
+      , '("registration_count", Text)
          {- - The number of managed instances that are currently registered using this activation. -}
-      , '("registration_limit", Attr Text)
+      , '("registration_limit", Text)
          {- - The maximum number of managed instances you want to be registered. The default value is 1 instance. -}
        ]
 
@@ -8766,11 +8550,11 @@ data SsmAssociationResource = SsmAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmAssociationResource
-    = '[ '("instance_ids", Attr Text)
+    = '[ '("instance_ids", Text)
          {- - The instance id that the SSM document was applied to. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the SSM document to apply. -}
-      , '("parameters", Attr Text)
+      , '("parameters", Text)
          {- - Additional parameters passed to the SSM document. -}
        ]
 
@@ -8800,35 +8584,35 @@ data SsmDocumentResource = SsmDocumentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmDocumentResource
-    = '[ '("content", Attr Text)
+    = '[ '("content", Text)
          {- -  The json content of the document. -}
-      , '("created_date", Attr Text)
+      , '("created_date", Text)
          {- - The date the document was created. -}
-      , '("default_version", Attr Text)
+      , '("default_version", Text)
          {- - The default version of the document. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the document. -}
-      , '("document_type", Attr Text)
+      , '("document_type", Text)
          {- - The type of document created. -}
-      , '("hash", Attr Text)
+      , '("hash", Text)
          {- - The sha1 or sha256 of the document content -}
-      , '("hash_type", Attr Text)
+      , '("hash_type", Text)
          {- - "Sha1" "Sha256". The hashing algorithm used when hashing the content. -}
-      , '("latest_version", Attr Text)
+      , '("latest_version", Text)
          {- - The latest version of the document. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the document. -}
-      , '("owner", Attr Text)
+      , '("owner", Text)
          {- - The AWS user account of the person who created the document. -}
-      , '("parameter", Attr Text)
+      , '("parameter", Text)
          {- - The parameters that are available to this document. -}
-      , '("permissions", Attr Text)
+      , '("permissions", Text)
          {- - The permissions of how this document should be shared. -}
-      , '("platform_types", Attr Text)
+      , '("platform_types", Text)
          {- - A list of OS platforms compatible with this SSM document, either "Windows" or "Linux". -}
-      , '("schema_version", Attr Text)
+      , '("schema_version", Text)
          {- - The schema version of the document. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - "Creating", "Active" or "Deleting". The current status of the document. -}
        ]
 
@@ -8855,7 +8639,7 @@ data SsmMaintenanceWindowResource = SsmMaintenanceWindowResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmMaintenanceWindowResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the maintenance window. -}
        ]
 
@@ -8880,7 +8664,7 @@ data SsmMaintenanceWindowTargetResource = SsmMaintenanceWindowTargetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmMaintenanceWindowTargetResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the maintenance window target. -}
        ]
 
@@ -8917,7 +8701,7 @@ data SsmMaintenanceWindowTaskResource = SsmMaintenanceWindowTaskResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmMaintenanceWindowTaskResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the maintenance window task. -}
        ]
 
@@ -8944,11 +8728,11 @@ data SsmParameterResource = SsmParameterResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmParameterResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - (Required) The name of the parameter. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-      , '("value", Attr Text)
+      , '("value", Text)
          {- - (Required) The value of the parameter. -}
        ]
 
@@ -8983,7 +8767,7 @@ data SsmPatchBaselineResource = SsmPatchBaselineResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmPatchBaselineResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the patch baseline. -}
        ]
 
@@ -9004,7 +8788,7 @@ data SsmPatchGroupResource = SsmPatchGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SsmPatchGroupResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the patch baseline. -}
        ]
 
@@ -9027,11 +8811,11 @@ data StateMachineResource = StateMachineResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StateMachineResource
-    = '[ '("creation_date", Attr Text)
+    = '[ '("creation_date", Text)
          {- - The date the state machine was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ARN of the state machine. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The current status of the state machine. Either "ACTIVE" or "DELETING". -}
        ]
 
@@ -9070,17 +8854,17 @@ data SubnetResource = SubnetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubnetResource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The AZ for the subnet. -}
-      , '("cidr_block", Attr Text)
+      , '("cidr_block", Text)
          {- - The CIDR block for the subnet. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the subnet -}
-      , '("ipv6_association_id", Attr Text)
+      , '("ipv6_association_id", Text)
          {- - The association ID for the IPv6 CIDR block. -}
-      , '("ipv6_cidr_block", Attr Text)
+      , '("ipv6_cidr_block", Text)
          {- - The IPv6 CIDR block. -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The VPC ID. -}
        ]
 
@@ -9113,11 +8897,11 @@ data VolumeAttachmentResource = VolumeAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VolumeAttachmentResource
-    = '[ '("device_name", Attr Text)
+    = '[ '("device_name", Text)
          {- - The device name exposed to the instance -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - ID of the Instance -}
-      , '("volume_id", Attr Text)
+      , '("volume_id", Text)
          {- - ID of the Volume -}
        ]
 
@@ -9136,9 +8920,6 @@ data VpcDhcpOptionsAssociationResource = VpcDhcpOptionsAssociationResource
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the VPC to which we would like to associate a DHCP Options Set. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VpcDhcpOptionsAssociationResource
-    = '[]
 
 $(TH.makeResource
     "aws_vpc_dhcp_options_association"
@@ -9163,9 +8944,6 @@ data VpcDhcpOptionsResource = VpcDhcpOptionsResource
     , _tags :: !(Attr Text)
       {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VpcDhcpOptionsResource
-    = '[]
 
 $(TH.makeResource
     "aws_vpc_dhcp_options"
@@ -9199,15 +8977,15 @@ data VpcEndpointResource = VpcEndpointResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcEndpointResource
-    = '[ '("cidr_blocks", Attr Text)
+    = '[ '("cidr_blocks", Text)
          {- - The list of CIDR blocks for the exposed service. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPC endpoint. -}
-      , '("policy", Attr Text)
+      , '("policy", Text)
          {- - The policy document associated with the VPC Endpoint. -}
-      , '("prefix_list_id", Attr Text)
+      , '("prefix_list_id", Text)
          {- - The prefix list ID of the exposed service. -}
-      , '("route_table_ids", Attr Text)
+      , '("route_table_ids", Text)
          {- - One or more route tables associated with the VPC Endpoint. -}
        ]
 
@@ -9236,7 +9014,7 @@ data VpcEndpointRouteTableAssociationResource = VpcEndpointRouteTableAssociation
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcEndpointRouteTableAssociationResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the association. -}
        ]
 
@@ -9264,9 +9042,6 @@ data VpcPeeringConnectionAccepterResource = VpcPeeringConnectionAccepterResource
     , _vpc_peering_connection_id :: !(Attr Text)
       {- ^ (Required) The VPC Peering Connection ID to manage. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VpcPeeringConnectionAccepterResource
-    = '[]
 
 $(TH.makeResource
     "aws_vpc_peering_connection_accepter"
@@ -9298,9 +9073,6 @@ data VpcPeeringConnectionResource = VpcPeeringConnectionResource
     , _vpc_id :: !(Attr Text)
       {- ^ (Required) The ID of the requester VPC. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VpcPeeringConnectionResource
-    = '[]
 
 $(TH.makeResource
     "aws_vpc_peering_connection"
@@ -9341,29 +9113,29 @@ data VpcResource = VpcResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcResource
-    = '[ '("cidr_block", Attr Text)
+    = '[ '("cidr_block", Text)
          {- - The CIDR block of the VPC -}
-      , '("default_network_acl_id", Attr Text)
+      , '("default_network_acl_id", Text)
          {- - The ID of the network ACL created by default on VPC creation -}
-      , '("default_route_table_id", Attr Text)
+      , '("default_route_table_id", Text)
          {- - The ID of the route table created by default on VPC creation -}
-      , '("default_security_group_id", Attr Text)
+      , '("default_security_group_id", Text)
          {- - The ID of the security group created by default on VPC creation -}
-      , '("enable_classiclink", Attr Text)
+      , '("enable_classiclink", Text)
          {- - Whether or not the VPC has Classiclink enabled -}
-      , '("enable_dns_hostnames", Attr Text)
+      , '("enable_dns_hostnames", Text)
          {- - Whether or not the VPC has DNS hostname support -}
-      , '("enable_dns_support", Attr Text)
+      , '("enable_dns_support", Text)
          {- - Whether or not the VPC has DNS support -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPC -}
-      , '("instance_tenancy", Attr Text)
+      , '("instance_tenancy", Text)
          {- - Tenancy of instances spin up within VPC. -}
-      , '("ipv6_association_id", Attr Text)
+      , '("ipv6_association_id", Text)
          {- - The association ID for the IPv6 CIDR block. -}
-      , '("ipv6_cidr_block", Attr Text)
+      , '("ipv6_cidr_block", Text)
          {- - The IPv6 CIDR block. -}
-      , '("main_route_table_id", Attr Text)
+      , '("main_route_table_id", Text)
          {- - The ID of the main route table associated with this VPC. Note that you can change a VPC's main route table by using an </docs/providers/aws/r/main_route_table_assoc.html> . -}
        ]
 
@@ -9394,43 +9166,43 @@ data VpnConnectionResource = VpnConnectionResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnConnectionResource
-    = '[ '("customer_gateway_configuration", Attr Text)
+    = '[ '("customer_gateway_configuration", Text)
          {- - The configuration information for the VPN connection's customer gateway (in the native XML format). -}
-      , '("customer_gateway_id", Attr Text)
+      , '("customer_gateway_id", Text)
          {- - The ID of the customer gateway to which the connection is attached. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The amazon-assigned ID of the VPN connection. -}
-      , '("static_routes_only", Attr Text)
+      , '("static_routes_only", Text)
          {- - Whether the VPN connection uses static routes exclusively. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - Tags applied to the connection. -}
-      , '("tunnel1_address", Attr Text)
+      , '("tunnel1_address", Text)
          {- - The public IP address of the first VPN tunnel. -}
-      , '("tunnel1_bgp_asn", Attr Text)
+      , '("tunnel1_bgp_asn", Text)
          {- - The bgp asn number of the first VPN tunnel. -}
-      , '("tunnel1_bgp_holdtime", Attr Text)
+      , '("tunnel1_bgp_holdtime", Text)
          {- - The bgp holdtime of the first VPN tunnel. -}
-      , '("tunnel1_cgw_inside_address", Attr Text)
+      , '("tunnel1_cgw_inside_address", Text)
          {- - The RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side). -}
-      , '("tunnel1_preshared_key", Attr Text)
+      , '("tunnel1_preshared_key", Text)
          {- - The preshared key of the first VPN tunnel. -}
-      , '("tunnel1_vgw_inside_address", Attr Text)
+      , '("tunnel1_vgw_inside_address", Text)
          {- - The RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side). -}
-      , '("tunnel2_address", Attr Text)
+      , '("tunnel2_address", Text)
          {- - The public IP address of the second VPN tunnel. -}
-      , '("tunnel2_bgp_asn", Attr Text)
+      , '("tunnel2_bgp_asn", Text)
          {- - The bgp asn number of the second VPN tunnel. -}
-      , '("tunnel2_bgp_holdtime", Attr Text)
+      , '("tunnel2_bgp_holdtime", Text)
          {- - The bgp holdtime of the second VPN tunnel. -}
-      , '("tunnel2_cgw_inside_address", Attr Text)
+      , '("tunnel2_cgw_inside_address", Text)
          {- - The RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side). -}
-      , '("tunnel2_preshared_key", Attr Text)
+      , '("tunnel2_preshared_key", Text)
          {- - The preshared key of the second VPN tunnel. -}
-      , '("tunnel2_vgw_inside_address", Attr Text)
+      , '("tunnel2_vgw_inside_address", Text)
          {- - The RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side). -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of VPN connection. -}
-      , '("vpn_gateway_id", Attr Text)
+      , '("vpn_gateway_id", Text)
          {- - The ID of the virtual private gateway to which the connection is attached. -}
        ]
 
@@ -9451,9 +9223,9 @@ data VpnConnectionRouteResource = VpnConnectionRouteResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnConnectionRouteResource
-    = '[ '("destination_cidr_block", Attr Text)
+    = '[ '("destination_cidr_block", Text)
          {- - The CIDR block associated with the local subnet of the customer network. -}
-      , '("vpn_connection_id", Attr Text)
+      , '("vpn_connection_id", Text)
          {- - The ID of the VPN connection. -}
        ]
 
@@ -9478,9 +9250,9 @@ data VpnGatewayAttachmentResource = VpnGatewayAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnGatewayAttachmentResource
-    = '[ '("vpc_id", Attr Text)
+    = '[ '("vpc_id", Text)
          {- - The ID of the VPC that Virtual Private Gateway is attached to. -}
-      , '("vpn_gateway_id", Attr Text)
+      , '("vpn_gateway_id", Text)
          {- - The ID of the Virtual Private Gateway. -}
        ]
 
@@ -9511,7 +9283,7 @@ data VpnGatewayResource = VpnGatewayResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpnGatewayResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the VPN Gateway. -}
        ]
 
@@ -9534,9 +9306,6 @@ data VpnGatewayRoutePropagationResource = VpnGatewayRoutePropagationResource
       {- ^ - The id of the @aws_vpn_gateway@ to propagate routes from. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed VpnGatewayRoutePropagationResource
-    = '[]
-
 $(TH.makeResource
     "aws_vpn_gateway_route_propagation"
     ''Qual.AWS
@@ -9553,9 +9322,6 @@ data WafByteMatchSetResource = WafByteMatchSetResource
       {- ^ (Required) The name or description of the Byte Match Set. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed WafByteMatchSetResource
-    = '[]
-
 $(TH.makeResource
     "aws_waf_byte_match_set"
     ''Qual.AWS
@@ -9571,9 +9337,6 @@ data WafIpsetResource = WafIpsetResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name or description of the IPSet. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed WafIpsetResource
-    = '[]
 
 $(TH.makeResource
     "aws_waf_ipset"
@@ -9597,9 +9360,6 @@ data WafRateBasedRuleResource = WafRateBasedRuleResource
       {- ^ (Required) The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 2000. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed WafRateBasedRuleResource
-    = '[]
-
 $(TH.makeResource
     "aws_waf_rate_based_rule"
     ''Qual.AWS
@@ -9618,9 +9378,6 @@ data WafRuleResource = WafRuleResource
       {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed WafRuleResource
-    = '[]
-
 $(TH.makeResource
     "aws_waf_rule"
     ''Qual.AWS
@@ -9637,9 +9394,6 @@ data WafSizeConstraintSetResource = WafSizeConstraintSetResource
       {- ^ (Optional) Specifies the parts of web requests that you want to inspect the size of. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed WafSizeConstraintSetResource
-    = '[]
-
 $(TH.makeResource
     "aws_waf_size_constraint_set"
     ''Qual.AWS
@@ -9655,9 +9409,6 @@ data WafSqlInjectionMatchSetResource = WafSqlInjectionMatchSetResource
     , _sql_injection_match_tuples :: !(Attr Text)
       {- ^ (Optional) The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed WafSqlInjectionMatchSetResource
-    = '[]
 
 $(TH.makeResource
     "aws_waf_sql_injection_match_set"
@@ -9679,9 +9430,6 @@ data WafWebAclResource = WafWebAclResource
       {- ^ (Required) The rules to associate with the web ACL and the settings for each rule. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed WafWebAclResource
-    = '[]
-
 $(TH.makeResource
     "aws_waf_web_acl"
     ''Qual.AWS
@@ -9697,9 +9445,6 @@ data WafXssMatchSetResource = WafXssMatchSetResource
     , _xss_match_tuples :: !(Attr Text)
       {- ^ (Optional) The parts of web requests that you want to inspect for cross-site scripting attacks. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed WafXssMatchSetResource
-    = '[]
 
 $(TH.makeResource
     "aws_waf_xss_match_set"
@@ -9718,9 +9463,6 @@ data WafregionalByteMatchSetResource = WafregionalByteMatchSetResource
       {- ^ (Required) The name or description of the ByteMatchSet. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed WafregionalByteMatchSetResource
-    = '[]
-
 $(TH.makeResource
     "aws_wafregional_byte_match_set"
     ''Qual.AWS
@@ -9737,9 +9479,6 @@ data WafregionalIpsetResource = WafregionalIpsetResource
     , _name :: !(Attr Text)
       {- ^ (Required) The name or description of the IPSet. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed WafregionalIpsetResource
-    = '[]
 
 $(TH.makeResource
     "aws_wafregional_ipset"

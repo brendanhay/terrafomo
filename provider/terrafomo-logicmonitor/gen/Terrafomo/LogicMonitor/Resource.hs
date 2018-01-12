@@ -49,9 +49,6 @@ data CollectorGroupResource = CollectorGroupResource
       {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed CollectorGroupResource
-    = '[]
-
 $(TH.makeResource
     "logicmonitor_collector_group"
     ''Qual.LogicMonitor
@@ -83,9 +80,6 @@ data DeviceGroupResource = DeviceGroupResource
       {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DeviceGroupResource
-    = '[]
-
 $(TH.makeResource
     "logicmonitor_device_group"
     ''Qual.LogicMonitor
@@ -110,9 +104,6 @@ data DeviceResource = DeviceResource
     , _properties :: !(Attr Text)
       {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed DeviceResource
-    = '[]
 
 $(TH.makeResource
     "logicmonitor_device"

@@ -14,12 +14,14 @@
 --
 module Terrafomo.Librato.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.Librato.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Librato.Types as Qual
 
 {- | Librato Terraform provider.
 
@@ -32,6 +34,11 @@ data Librato = Librato
     { _email :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable Librato
+
+instance Qual.ToValue Librato where
+    toValue = Qual.genericToValue
 
 {- | (Required) Librato email address. It must be provided, but it can also be
 sourced from the @LIBRATO_EMAIL@ environment variable.

@@ -14,12 +14,14 @@
 --
 module Terrafomo.NS1.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.NS1.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.NS1.Types as Qual
 
 {- | NS1 Terraform provider.
 
@@ -30,6 +32,11 @@ used. Use the navigation to the left to read about the available resources.
 data NS1 = NS1
     { _apikey :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable NS1
+
+instance Qual.ToValue NS1 where
+    toValue = Qual.genericToValue
 
 {- | (Required) NS1 API token. It must be provided, but it can also be sourced
 from the @NS1_APIKEY@ environment variable.

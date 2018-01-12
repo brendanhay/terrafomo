@@ -14,12 +14,14 @@
 --
 module Terrafomo.VCloudDirector.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.VCloudDirector.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.VCloudDirector.Types as Qual
 
 {- | VCloudDirector Terraform provider.
 
@@ -40,6 +42,11 @@ data VCloudDirector = VCloudDirector
     , _user :: !Text
     , _vdc :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable VCloudDirector
+
+instance Qual.ToValue VCloudDirector where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Boolean that can be set to true to disable SSL certificate
 verification. This should be used with care as it could allow an attacker to

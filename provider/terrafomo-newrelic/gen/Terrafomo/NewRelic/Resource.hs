@@ -51,7 +51,7 @@ data AlertChannelResource = AlertChannelResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AlertChannelResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the channel. -}
        ]
 
@@ -87,9 +87,6 @@ data AlertConditionResource = AlertConditionResource
       {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed AlertConditionResource
-    = '[]
-
 $(TH.makeResource
     "newrelic_alert_condition"
     ''Qual.NewRelic
@@ -105,9 +102,6 @@ data AlertPolicyChannelResource = AlertPolicyChannelResource
     , _policy_id :: !(Attr Text)
       {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed AlertPolicyChannelResource
-    = '[]
 
 $(TH.makeResource
     "newrelic_alert_policy_channel"
@@ -126,11 +120,11 @@ data AlertPolicyResource = AlertPolicyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AlertPolicyResource
-    = '[ '("created_at", Attr Text)
+    = '[ '("created_at", Text)
          {- - The time the policy was created. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the policy. -}
-      , '("updated_at", Attr Text)
+      , '("updated_at", Text)
          {- - The time the policy was last updated. -}
        ]
 
@@ -159,9 +153,6 @@ data NrqlAlertConditionResource = NrqlAlertConditionResource
     , _value_function :: !(Attr Text)
       {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed NrqlAlertConditionResource
-    = '[]
 
 $(TH.makeResource
     "newrelic_nrql_alert_condition"

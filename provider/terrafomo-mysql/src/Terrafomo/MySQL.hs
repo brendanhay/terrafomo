@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.MySQL
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.MySQL.Types
     , module Terrafomo.MySQL.Provider
     ) where

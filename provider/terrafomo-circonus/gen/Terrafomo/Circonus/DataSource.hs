@@ -53,37 +53,37 @@ data AccountDataSource = AccountDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AccountDataSource
-    = '[ '("address1", Attr Text)
+    = '[ '("address1", Text)
          {- - The first line of the address associated with the account. -}
-      , '("address2", Attr Text)
+      , '("address2", Text)
          {- - The second line of the address associated with the account. -}
-      , '("cc_email", Attr Text)
+      , '("cc_email", Text)
          {- - An optionally specified email address used in the CC line of invoices. -}
-      , '("city", Attr Text)
+      , '("city", Text)
          {- - The city part of the address associated with the account. -}
-      , '("contact_groups", Attr Text)
+      , '("contact_groups", Text)
          {- - A list of IDs for each contact group in the account. -}
-      , '("country", Attr Text)
+      , '("country", Text)
          {- - The country of the user's address. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Description of the account. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Circonus ID of the selected Account. -}
-      , '("invites", Attr Text)
+      , '("invites", Text)
          {- - An list of users invited to use the platform.  Each element in the list has both an @email@ and @role@ attribute. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the account. -}
-      , '("owner", Attr Text)
+      , '("owner", Text)
          {- - The Circonus ID of the user who owns this account. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The state or province of the address associated with the account. -}
-      , '("timezone", Attr Text)
+      , '("timezone", Text)
          {- - The timezone that events will be displayed in the web interface for this account. -}
-      , '("ui_base_url", Attr Text)
+      , '("ui_base_url", Text)
          {- - The base URL of this account. -}
-      , '("usage", Attr Text)
+      , '("usage", Text)
          {- - A list of account usage limits.  Each element in the list will have a @limit@ attribute, a limit @type@ , and a @used@ attribute. -}
-      , '("users", Attr Text)
+      , '("users", Text)
          {- - A list of users who have access to this account.  Each element in the list has both an @id@ and a @role@ .  The @id@ is a Circonus ID referencing the user. -}
        ]
 
@@ -115,19 +115,19 @@ data CollectorDataSource = CollectorDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CollectorDataSource
-    = '[ '("details", Attr Text)
+    = '[ '("details", Text)
          {- - A list of details about the individual Collector instances that make up the group of collectors.  See below for a list of attributes within each collector. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Circonus ID of the selected Collector. -}
-      , '("latitude", Attr Text)
+      , '("latitude", Text)
          {- - The latitude of the selected Collector. -}
-      , '("longitude", Attr Text)
+      , '("longitude", Text)
          {- - The longitude of the selected Collector. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the selected Collector. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A list of tags assigned to the selected Collector. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The of the selected Collector.  This value is either @circonus@ for a Circonus-managed, public Collector, or @enterprise@ for a private collector that is private to an account. -}
        ]
 

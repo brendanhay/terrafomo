@@ -66,29 +66,29 @@ data FabricResource = FabricResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FabricResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - (String) - Optional description of network. -}
-      , '("fabric", Attr Text)
+      , '("fabric", Text)
          {- - (Bool) - Whether or not this network is on a fabric. -}
-      , '("gateway", Attr Text)
+      , '("gateway", Text)
          {- - (String) - Optional gateway IP. -}
-      , '("internet_nat", Attr Text)
+      , '("internet_nat", Text)
          {- - (Bool) - If a NAT zone is provisioned at Gateway IP address. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - (String) - Network name. -}
-      , '("provision_end_ip", Attr Text)
+      , '("provision_end_ip", Text)
          {- - (String) - Last assignable IP on the network. -}
-      , '("provision_start_ip", Attr Text)
+      , '("provision_start_ip", Text)
          {- - (String) - First IP on the network that can be assigned. -}
-      , '("public", Attr Text)
+      , '("public", Text)
          {- - (Bool) - Whether or not this is an RFC1918 network. -}
-      , '("resolvers", Attr Text)
+      , '("resolvers", Text)
          {- - (List) - Array of IP addresses for resolvers. -}
-      , '("routes", Attr Text)
+      , '("routes", Text)
          {- - (Map) - Map of CIDR block to Gateway IP address. -}
-      , '("subnet", Attr Text)
+      , '("subnet", Text)
          {- - (String) - CIDR formatted string describing network. -}
-      , '("vlan_id", Attr Text)
+      , '("vlan_id", Text)
          {- - (Int) - VLAN id the network is on. Number between 0-4095 indicating VLAN ID. -}
        ]
 
@@ -110,7 +110,7 @@ data FirewallRuleResource = FirewallRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FirewallRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - (string) - The identifier representing the firewall rule in Triton. -}
        ]
 
@@ -129,9 +129,6 @@ data KeyResource = KeyResource
     , _name :: !(Attr Text)
       {- ^ - (string, Change forces new resource) The name of the key. If this is left empty, the name is inferred from the comment in the SSH key material. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed KeyResource
-    = '[]
 
 $(TH.makeResource
     "triton_key"
@@ -179,39 +176,39 @@ data MachineResource = MachineResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MachineResource
-    = '[ '("created", Attr Text)
+    = '[ '("created", Text)
          {- - (string) - The time at which the machine was created. -}
-      , '("dataset", Attr Text)
+      , '("dataset", Text)
          {- - (string) - The dataset URN with which the machine was provisioned. -}
-      , '("disk", Attr Text)
+      , '("disk", Text)
          {- - (int) - The amount of disk the machine has (in Gb). -}
-      , '("gateway", Attr Text)
+      , '("gateway", Text)
          {- - IPv4 Gateway -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - (string) - The identifier representing the firewall rule in Triton. -}
-      , '("ip", Attr Text)
+      , '("ip", Text)
          {- - The NIC's IPv4 address -}
-      , '("ips", Attr Text)
+      , '("ips", Text)
          {- - (list of strings) - IP addresses of the machine. -}
-      , '("mac", Attr Text)
+      , '("mac", Text)
          {- - The NIC's MAC address -}
-      , '("memory", Attr Text)
+      , '("memory", Text)
          {- - (int) - The amount of memory the machine has (in Mb). -}
-      , '("netmask", Attr Text)
+      , '("netmask", Text)
          {- - IPv4 netmask -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - The ID of the network to which the NIC is attached -}
-      , '("nic", Attr Text)
+      , '("nic", Text)
          {- - A list of the networks that the machine is attached to. Each network is represented by a @nic@ , each of which has the following properties: -}
-      , '("primary", Attr Text)
+      , '("primary", Text)
          {- - Whether this is the machine's primary NIC -}
-      , '("primaryip", Attr Text)
+      , '("primaryip", Text)
          {- - (string) - The primary (public) IP address for the machine. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The provisioning state of the NIC -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - (string) - The type of the machine ( @smartmachine@ or @virtualmachine@ ). -}
-      , '("updated", Attr Text)
+      , '("updated", Text)
          {- - (string) - The time at which the machine was last updated. -}
        ]
 
@@ -234,9 +231,6 @@ data VlanResource = VlanResource
     , _vlan_id :: !(Attr Text)
       {- ^ - (int, Required, Change forces new resource) Number between 0-4095 indicating VLAN ID -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed VlanResource
-    = '[]
 
 $(TH.makeResource
     "triton_vlan"

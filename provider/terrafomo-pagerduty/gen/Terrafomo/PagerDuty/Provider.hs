@@ -14,12 +14,14 @@
 --
 module Terrafomo.PagerDuty.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.PagerDuty.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.PagerDuty.Types as Qual
 
 {- | PagerDuty Terraform provider.
 
@@ -33,6 +35,11 @@ data PagerDuty = PagerDuty
     { _skip_credentials_validation :: !Text
     , _token :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable PagerDuty
+
+instance Qual.ToValue PagerDuty where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Skip validation of the token against the PagerDuty API.
 -}

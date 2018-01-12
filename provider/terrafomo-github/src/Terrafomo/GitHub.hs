@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.GitHub
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.GitHub.Types
     , module Terrafomo.GitHub.Provider
     ) where

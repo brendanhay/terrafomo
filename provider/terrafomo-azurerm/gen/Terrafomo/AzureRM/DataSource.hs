@@ -49,15 +49,15 @@ data BuiltinRoleDefinitionDataSource = BuiltinRoleDefinitionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed BuiltinRoleDefinitionDataSource
-    = '[ '("assignable_scopes", Attr Text)
+    = '[ '("assignable_scopes", Text)
          {- - One or more assignable scopes for this Role Definition, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@ , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@ . -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - the Description of the built-in Role. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the ID of the built-in Role Definition. -}
-      , '("permissions", Attr Text)
+      , '("permissions", Text)
          {- - a @permissions@ block as documented below. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - the Type of the Role. -}
        ]
 
@@ -79,9 +79,6 @@ data ClientConfigDataSource = ClientConfigDataSource
     , _tenant_id :: !(Attr Text)
       {- ^ is set to the Azure Tenant ID. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ClientConfigDataSource
-    = '[]
 
 $(TH.makeDataSource
     "azurerm_client_config"
@@ -110,15 +107,15 @@ data ImageDataSource = ImageDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ImageDataSource
-    = '[ '("data_disk", Attr Text)
+    = '[ '("data_disk", Text)
          {- - a collection of @data_disk@ blocks as defined below. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The managed image ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - the Azure Location where this Image exists. -}
-      , '("os_disk", Attr Text)
+      , '("os_disk", Text)
          {- - a @os_disk@ block as defined below. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - a mapping of tags to assigned to the resource. -}
        ]
 
@@ -138,13 +135,13 @@ data KeyVaultAccessPolicyDataSource = KeyVaultAccessPolicyDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyVaultAccessPolicyDataSource
-    = '[ '("certificate_permissions", Attr Text)
+    = '[ '("certificate_permissions", Text)
          {- - the certificate permissions for the access policy -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the ID of the Key Vault Access Policy -}
-      , '("key_permissions", Attr Text)
+      , '("key_permissions", Text)
          {- - the key permissions for the access policy -}
-      , '("secret_permissions", Attr Text)
+      , '("secret_permissions", Text)
          {- - the secret permissions for the access policy -}
        ]
 
@@ -194,19 +191,19 @@ data ManagedDiskDataSource = ManagedDiskDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ManagedDiskDataSource
-    = '[ '("disk_size_gb", Attr Text)
+    = '[ '("disk_size_gb", Text)
          {- - The size of the managed disk in gigabytes. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The managed disk ID. -}
-      , '("os_type", Attr Text)
+      , '("os_type", Text)
          {- - The operating system for managed disk. Valid values are @Linux@ or @Windows@ -}
-      , '("source_resource_id", Attr Text)
+      , '("source_resource_id", Text)
          {- - ID of an existing managed disk that the current resource was created from. -}
-      , '("source_uri", Attr Text)
+      , '("source_uri", Text)
          {- - The source URI for the managed disk -}
-      , '("storage_account_type", Attr Text)
+      , '("storage_account_type", Text)
          {- - The storage account type for the managed disk. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the resource. -}
        ]
 
@@ -231,9 +228,9 @@ data PlatformImageDataSource = PlatformImageDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PlatformImageDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the Platform Image. -}
-      , '("version", Attr Text)
+      , '("version", Text)
          {- - The latest version of the Platform Image. -}
        ]
 
@@ -259,17 +256,17 @@ data PublicIpDataSource = PublicIpDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PublicIpDataSource
-    = '[ '("domain_name_label", Attr Text)
+    = '[ '("domain_name_label", Text)
          {- - The label for the Domain Name. -}
-      , '("fqdn", Attr Text)
+      , '("fqdn", Text)
          {- - Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The Public IP ID. -}
-      , '("idle_timeout_in_minutes", Attr Text)
+      , '("idle_timeout_in_minutes", Text)
          {- - Specifies the timeout for the TCP idle connection. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The IP address value that was allocated. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags to assigned to the resource. -}
        ]
 
@@ -292,11 +289,11 @@ data ResourceGroupDataSource = ResourceGroupDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ResourceGroupDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The resource group ID. -}
-      , '("location", Attr Text)
+      , '("location", Text)
          {- - The location of the resource group. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - A mapping of tags assigned to the resource group. -}
        ]
 
@@ -327,15 +324,15 @@ data RoleDefinitionDataSource = RoleDefinitionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RoleDefinitionDataSource
-    = '[ '("assignable_scopes", Attr Text)
+    = '[ '("assignable_scopes", Text)
          {- - One or more assignable scopes for this Role Definition, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@ , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@ , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@ . -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - the Description of the built-in Role. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the ID of the built-in Role Definition. -}
-      , '("permissions", Attr Text)
+      , '("permissions", Text)
          {- - a @permissions@ block as documented below. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - the Type of the Role. -}
        ]
 
@@ -360,17 +357,17 @@ data SnapshotDataSource = SnapshotDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SnapshotDataSource
-    = '[ '("create_option", Attr Text)
+    = '[ '("create_option", Text)
          {- - How the snapshot was created. -}
-      , '("disk_size_gb", Attr Text)
+      , '("disk_size_gb", Text)
          {- - The size of the Snapshotted Disk in GB. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the Snapshot. -}
-      , '("source_resource_id", Attr Text)
+      , '("source_resource_id", Text)
          {- - The reference to an existing snapshot. -}
-      , '("source_uri", Attr Text)
+      , '("source_uri", Text)
          {- - The URI to a Managed or Unmanaged Disk. -}
-      , '("storage_account_id", Attr Text)
+      , '("storage_account_id", Text)
          {- - The ID of an storage account. -}
        ]
 
@@ -400,21 +397,21 @@ data SubnetDataSource = SubnetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubnetDataSource
-    = '[ '("address_prefix", Attr Text)
+    = '[ '("address_prefix", Text)
          {- - The address prefix used for the subnet. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the Subnet. -}
-      , '("ip_configurations", Attr Text)
+      , '("ip_configurations", Text)
          {- - The collection of IP Configurations with IPs within this subnet. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the subnet. -}
-      , '("network_security_group_id", Attr Text)
+      , '("network_security_group_id", Text)
          {- - The ID of the Network Security Group associated with the subnet. -}
-      , '("resource_group_name", Attr Text)
+      , '("resource_group_name", Text)
          {- - The name of the resource group in which the subnet is created in. -}
-      , '("route_table_id", Attr Text)
+      , '("route_table_id", Text)
          {- - The ID of the Route Table associated with this subnet. -}
-      , '("virtual_network_name", Attr Text)
+      , '("virtual_network_name", Text)
          {- - The name of the virtual network in which the subnet is created in -}
        ]
 
@@ -433,15 +430,15 @@ data SubscriptionDataSource = SubscriptionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SubscriptionDataSource
-    = '[ '("display_name", Attr Text)
+    = '[ '("display_name", Text)
          {- - The subscription display name. -}
-      , '("location_placement_id", Attr Text)
+      , '("location_placement_id", Text)
          {- - The subscription location placement ID. -}
-      , '("quota_id", Attr Text)
+      , '("quota_id", Text)
          {- - The subscription quota ID. -}
-      , '("spending_limit", Attr Text)
+      , '("spending_limit", Text)
          {- - The subscription spending limit. -}
-      , '("state", Attr Text)
+      , '("state", Text)
          {- - The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted. -}
        ]
 

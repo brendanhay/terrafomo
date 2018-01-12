@@ -14,12 +14,14 @@
 --
 module Terrafomo.OPC.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.OPC.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.OPC.Types as Qual
 
 {- | OPC Terraform provider.
 
@@ -38,6 +40,11 @@ data OPC = OPC
     , _storage_endpoint :: !Text
     , _user :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable OPC
+
+instance Qual.ToValue OPC where
+    toValue = Qual.genericToValue
 
 {- | (Optional) The API endpoint to use, associated with Oracle Database Cloud
 account. This is known as the @REST Endpoint@ within the Oracle portal. Can

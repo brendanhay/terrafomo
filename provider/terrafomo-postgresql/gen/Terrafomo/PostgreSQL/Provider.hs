@@ -14,12 +14,14 @@
 --
 module Terrafomo.PostgreSQL.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.PostgreSQL.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.PostgreSQL.Types as Qual
 
 {- | PostgreSQL Terraform provider.
 
@@ -38,6 +40,11 @@ data PostgreSQL = PostgreSQL
     , _sslmode :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable PostgreSQL
+
+instance Qual.ToValue PostgreSQL where
+    toValue = Qual.genericToValue
 
 {- | (Optional) Maximum wait for connection, in seconds. The default is @180s@ .
 Zero or not specified means wait indefinitely.

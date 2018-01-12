@@ -60,19 +60,19 @@ data AlertResource = AlertResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AlertResource
-    = '[ '("active", Attr Text)
+    = '[ '("active", Text)
          {- - whether the alert is active (can be triggered). Defaults to true. -}
-      , '("condition", Attr Text)
+      , '("condition", Text)
          {- - A trigger condition for the alert. Conditions documented below. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - (Required) Description of the alert. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the alert. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the alert. -}
-      , '("rearm_seconds", Attr Text)
+      , '("rearm_seconds", Text)
          {- - minimum amount of time between sending alert notifications, in seconds. -}
-      , '("services", Attr Text)
+      , '("services", Text)
          {- - list of notification service IDs. -}
        ]
 
@@ -104,19 +104,19 @@ data MetricResource = MetricResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed MetricResource
-    = '[ '("composite", Attr Text)
+    = '[ '("composite", Text)
          {- - The composite definition. Only used when type is composite. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Text that describes precisely what the metric is measuring. -}
-      , '("display_name", Attr Text)
+      , '("display_name", Text)
          {- - The name which will be used for the metric when viewing the Metrics website. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The identifier for the metric. -}
-      , '("period", Attr Text)
+      , '("period", Text)
          {- - Number of seconds that is the standard reporting period of the metric. Setting the period enables Metrics to detect abnormal interruptions in reporting and aids in analytics. For gauge metrics that have service-side aggregation enabled, this option will define the period that aggregation occurs on. -}
-      , '("source_lag", Attr Text)
+      , '("source_lag", Text)
          {- - -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of metric to create (gauge, counter, or composite). -}
        ]
 
@@ -140,13 +140,13 @@ data ServiceResource = ServiceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ServiceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the alert. -}
-      , '("settings", Attr Text)
+      , '("settings", Text)
          {- - a JSON hash of settings specific to the alert type. -}
-      , '("title", Attr Text)
+      , '("title", Text)
          {- - The alert title. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of notificaion. -}
        ]
 
@@ -180,11 +180,11 @@ data SpaceChartResource = SpaceChartResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SpaceChartResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the chart. -}
-      , '("space_id", Attr Text)
+      , '("space_id", Text)
          {- - The ID of the space this chart should be in. -}
-      , '("title", Attr Text)
+      , '("title", Text)
          {- - The title of the chart when it is displayed. -}
        ]
 
@@ -204,9 +204,9 @@ data SpaceResource = SpaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SpaceResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the space. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the space. -}
        ]
 

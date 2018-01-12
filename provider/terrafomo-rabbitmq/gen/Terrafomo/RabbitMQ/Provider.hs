@@ -14,12 +14,14 @@
 --
 module Terrafomo.RabbitMQ.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.RabbitMQ.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.RabbitMQ.Types as Qual
 
 {- | RabbitMQ Terraform provider.
 
@@ -35,6 +37,11 @@ data RabbitMQ = RabbitMQ
     , _password :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
+
+instance Hashable RabbitMQ
+
+instance Qual.ToValue RabbitMQ where
+    toValue = Qual.genericToValue
 
 {- | (Optional) The path to a custom CA / intermediate certificate.
 -}

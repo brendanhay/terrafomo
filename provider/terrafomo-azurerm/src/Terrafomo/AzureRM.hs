@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AzureRM
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.AzureRM.Types
     , module Terrafomo.AzureRM.Provider
     ) where

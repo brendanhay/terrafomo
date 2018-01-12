@@ -61,9 +61,6 @@ data ImageDataSource = ImageDataSource
       {- ^ - (string) The version for the image -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed ImageDataSource
-    = '[]
-
 $(TH.makeDataSource
     "triton_image"
     ''Qual.Triton
@@ -80,7 +77,7 @@ data NetworkDataSource = NetworkDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - (string) The ID of the network. -}
        ]
 

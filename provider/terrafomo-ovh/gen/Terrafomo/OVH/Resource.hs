@@ -53,23 +53,23 @@ data PubliccloudPrivateNetworkResource = PubliccloudPrivateNetworkResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PubliccloudPrivateNetworkResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - See Argument Reference above. -}
-      , '("project_id", Attr Text)
+      , '("project_id", Text)
          {- - See Argument Reference above. -}
-      , '("regions", Attr Text)
+      , '("regions", Text)
          {- - See Argument Reference above. -}
-      , '("regions_status", Attr Text)
+      , '("regions_status", Text)
          {- - A map representing the status of the network per region. -}
-      , '("regions_status/region", Attr Text)
+      , '("regions_status/region", Text)
          {- - The id of the region. -}
-      , '("regions_status/status", Attr Text)
+      , '("regions_status/status", Text)
          {- - The status of the network in the region. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - the status of the network. should be normally set to 'ACTIVE'. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - the type of the network. Either 'private' or 'public'. -}
-      , '("vlan_id", Attr Text)
+      , '("vlan_id", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -102,37 +102,37 @@ data PubliccloudPrivateNetworkSubnetResource = PubliccloudPrivateNetworkSubnetRe
     } deriving (Show, Eq, Generic)
 
 type instance Computed PubliccloudPrivateNetworkSubnetResource
-    = '[ '("cidr", Attr Text)
+    = '[ '("cidr", Text)
          {- - Ip Block representing the subnet cidr. -}
-      , '("dhcp_id", Attr Text)
+      , '("dhcp_id", Text)
          {- - See Argument Reference above. -}
-      , '("end", Attr Text)
+      , '("end", Text)
          {- - See Argument Reference above. -}
-      , '("gateway_ip", Attr Text)
+      , '("gateway_ip", Text)
          {- - The IP of the gateway -}
-      , '("ip_pools", Attr Text)
+      , '("ip_pools", Text)
          {- - List of ip pools allocated in the subnet. -}
-      , '("ip_pools/dhcp", Attr Text)
+      , '("ip_pools/dhcp", Text)
          {- - DHCP enabled. -}
-      , '("ip_pools/end", Attr Text)
+      , '("ip_pools/end", Text)
          {- - Last ip for this region. -}
-      , '("ip_pools/network", Attr Text)
+      , '("ip_pools/network", Text)
          {- - Global network with cidr. -}
-      , '("ip_pools/region", Attr Text)
+      , '("ip_pools/region", Text)
          {- - Region where this subnet is created. -}
-      , '("ip_pools/start", Attr Text)
+      , '("ip_pools/start", Text)
          {- - First ip for this region. -}
-      , '("network", Attr Text)
+      , '("network", Text)
          {- - See Argument Reference above. -}
-      , '("network_id", Attr Text)
+      , '("network_id", Text)
          {- - See Argument Reference above. -}
-      , '("no_gateway", Attr Text)
+      , '("no_gateway", Text)
          {- - See Argument Reference above. -}
-      , '("project_id", Attr Text)
+      , '("project_id", Text)
          {- - See Argument Reference above. -}
-      , '("region", Attr Text)
+      , '("region", Text)
          {- - See Argument Reference above. -}
-      , '("start", Attr Text)
+      , '("start", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -153,19 +153,19 @@ data PubliccloudUserResource = PubliccloudUserResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PubliccloudUserResource
-    = '[ '("creation_date", Attr Text)
+    = '[ '("creation_date", Text)
          {- - the date the user was created. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - See Argument Reference above. -}
-      , '("openstack_rc", Attr Text)
+      , '("openstack_rc", Text)
          {- - a convenient map representing an openstack_rc file. Note: no password nor sensitive token is set in this map. -}
-      , '("password", Attr Text)
+      , '("password", Text)
          {- - (Sensitive) the password generated for the user. The password can be used with the Openstack API. This attribute is sensitive and will only be retrieve once during creation. -}
-      , '("project_id", Attr Text)
+      , '("project_id", Text)
          {- - See Argument Reference above. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - the status of the user. should be normally set to 'ok'. -}
-      , '("username", Attr Text)
+      , '("username", Text)
          {- - the username generated for the user. This username can be used with the Openstack API. -}
        ]
 
@@ -186,9 +186,9 @@ data VrackPubliccloudAttachmentResource = VrackPubliccloudAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VrackPubliccloudAttachmentResource
-    = '[ '("project_id", Attr Text)
+    = '[ '("project_id", Text)
          {- - See Argument Reference above. -}
-      , '("vrack_id", Attr Text)
+      , '("vrack_id", Text)
          {- - See Argument Reference above. -}
        ]
 

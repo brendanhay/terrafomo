@@ -14,12 +14,14 @@
 --
 module Terrafomo.OpenStack.Provider where
 
-import Data.Text (Text)
+import Data.Text     (Text)
+import Data.Hashable (Hashable)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Syntax.Provider
-import Terrafomo.OpenStack.Types
+import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.OpenStack.Types as Qual
 
 {- | OpenStack Terraform provider.
 
@@ -29,3 +31,8 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data OpenStack = OpenStack
+
+instance Hashable OpenStack
+
+instance Qual.ToValue OpenStack where
+    toValue = Qual.genericToValue

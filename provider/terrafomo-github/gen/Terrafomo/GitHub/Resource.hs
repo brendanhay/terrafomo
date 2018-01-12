@@ -60,9 +60,6 @@ data BranchProtectionResource = BranchProtectionResource
       {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed BranchProtectionResource
-    = '[]
-
 $(TH.makeResource
     "github_branch_protection"
     ''Qual.GitHub
@@ -90,9 +87,6 @@ data IssueLabelResource = IssueLabelResource
       {- ^ - (Computed) The URL to the issue label -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed IssueLabelResource
-    = '[]
-
 $(TH.makeResource
     "github_issue_label"
     ''Qual.GitHub
@@ -111,9 +105,6 @@ data MembershipResource = MembershipResource
     , _username :: !(Attr Text)
       {- ^ (Required) The user to add to the organization. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed MembershipResource
-    = '[]
 
 $(TH.makeResource
     "github_membership"
@@ -137,7 +128,7 @@ data OrganizationWebhookResource = OrganizationWebhookResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OrganizationWebhookResource
-    = '[ '("url", Attr Text)
+    = '[ '("url", Text)
          {- - URL of the webhook -}
        ]
 
@@ -167,9 +158,6 @@ data RepositoryCollaboratorResource = RepositoryCollaboratorResource
       {- ^ (Required) The user to add to the repository as a collaborator. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed RepositoryCollaboratorResource
-    = '[]
-
 $(TH.makeResource
     "github_repository_collaborator"
     ''Qual.GitHub
@@ -193,9 +181,6 @@ data RepositoryDeployKeyResource = RepositoryDeployKeyResource
     , _title :: !(Attr Text)
       {- ^ (Required) A title. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed RepositoryDeployKeyResource
-    = '[]
 
 $(TH.makeResource
     "github_repository_deploy_key"
@@ -240,15 +225,15 @@ data RepositoryResource = RepositoryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RepositoryResource
-    = '[ '("full_name", Attr Text)
+    = '[ '("full_name", Text)
          {- - A string of the form "orgname/reponame". -}
-      , '("git_clone_url", Attr Text)
+      , '("git_clone_url", Text)
          {- - URL that can be provided to @git clone@ to clone the repository anonymously via the git protocol. -}
-      , '("http_clone_url", Attr Text)
+      , '("http_clone_url", Text)
          {- - URL that can be provided to @git clone@ to clone the repository via HTTPS. -}
-      , '("ssh_clone_url", Attr Text)
+      , '("ssh_clone_url", Text)
          {- - URL that can be provided to @git clone@ to clone the repository via SSH. -}
-      , '("svn_url", Attr Text)
+      , '("svn_url", Text)
          {- - URL that can be provided to @svn checkout@ to check out the repository via Github's Subversion protocol emulation. -}
        ]
 
@@ -277,7 +262,7 @@ data RepositoryWebhookResource = RepositoryWebhookResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RepositoryWebhookResource
-    = '[ '("url", Attr Text)
+    = '[ '("url", Text)
          {- - URL of the webhook -}
        ]
 
@@ -303,9 +288,6 @@ data TeamMembershipResource = TeamMembershipResource
       {- ^ (Required) The user to add to the team. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed TeamMembershipResource
-    = '[]
-
 $(TH.makeResource
     "github_team_membership"
     ''Qual.GitHub
@@ -327,9 +309,6 @@ data TeamRepositoryResource = TeamRepositoryResource
     , _team_id :: !(Attr Text)
       {- ^ (Required) The GitHub team id -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed TeamRepositoryResource
-    = '[]
 
 $(TH.makeResource
     "github_team_repository"
@@ -356,17 +335,17 @@ data TeamResource = TeamResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TeamResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - the team's description. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the created team. -}
-      , '("members", Attr Text)
+      , '("members", Text)
          {- - List of team members -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - the team's full name. -}
-      , '("permission", Attr Text)
+      , '("permission", Text)
          {- - the team's permission level. -}
-      , '("privacy", Attr Text)
+      , '("privacy", Text)
          {- - the team's privacy type. -}
        ]
 

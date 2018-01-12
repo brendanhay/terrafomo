@@ -53,9 +53,6 @@ data DatacenterDataSource = DatacenterDataSource
       {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DatacenterDataSource
-    = '[]
-
 $(TH.makeDataSource
     "vsphere_datacenter"
     ''Qual.VSphere
@@ -102,9 +99,9 @@ data DistributedVirtualSwitchDataSource = DistributedVirtualSwitchDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DistributedVirtualSwitchDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- : The UUID of the distributed virtual switch. -}
-      , '("uplinks", Attr Text)
+      , '("uplinks", Text)
          {- : The list of the uplinks on this DVS, as per the </docs/providers/vsphere/r/distributed_virtual_switch.html#uplinks> argument to the </docs/providers/vsphere/r/distributed_virtual_switch.html> resource. -}
        ]
 
@@ -125,9 +122,6 @@ data HostDataSource = HostDataSource
     , _name :: !(Attr Text)
       {- ^ - (String) The name of the host. This can be a name or path.	Can be omitted if there is only one host in your inventory. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed HostDataSource
-    = '[]
 
 $(TH.makeDataSource
     "vsphere_host"
@@ -152,9 +146,9 @@ data NetworkDataSource = NetworkDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed NetworkDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- : The managed object ID of the network in question. -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- : The managed object type for the discovered network. This will be one of @DistributedVirtualPortgroup@ for DVS port groups, @Network@ for standard (host-based) port groups, or @OpaqueNetwork@ for networks managed externally by features such as NSX. -}
        ]
 
@@ -184,9 +178,6 @@ data TagCategoryDataSource = TagCategoryDataSource
       {- ^ - (String, required) The name of the tag category. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed TagCategoryDataSource
-    = '[]
-
 $(TH.makeDataSource
     "vsphere_tag_category"
     ''Qual.VSphere
@@ -211,9 +202,6 @@ data TagDataSource = TagDataSource
       {- ^ - (String, required) The name of the tag. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed TagDataSource
-    = '[]
-
 $(TH.makeDataSource
     "vsphere_tag"
     ''Qual.VSphere
@@ -236,7 +224,7 @@ data VmfsDisksDataSource = VmfsDisksDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VmfsDisksDataSource
-    = '[ '("disks", Attr Text)
+    = '[ '("disks", Text)
          {- - (List of strings) A lexicographically sorted list of devices discovered by the operation, matching the supplied @filter@ , if provided. -}
        ]
 

@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Lailgun
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Lailgun.Types
     , module Terrafomo.Lailgun.Provider
     ) where

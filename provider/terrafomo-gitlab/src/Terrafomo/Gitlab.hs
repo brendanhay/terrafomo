@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Gitlab
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Gitlab.Types
     , module Terrafomo.Gitlab.Provider
     ) where

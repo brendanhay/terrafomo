@@ -50,15 +50,15 @@ data RegionDataSource = RegionDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegionDataSource
-    = '[ '("continentCode", Attr Text)
+    = '[ '("continentCode", Text)
          {- - (Deprecated) Use @continent_code@ instead. -}
-      , '("continent_code", Attr Text)
+      , '("continent_code", Text)
          {- - the code of the geographic continent the region is running. E.g.: EU for Europe, US for America... -}
-      , '("datacenterLocation", Attr Text)
+      , '("datacenterLocation", Text)
          {- - (Deprecated) Use @datacenter_location@ instead. -}
-      , '("datacenter_location", Attr Text)
+      , '("datacenter_location", Text)
          {- - The location code of the datacenter. E.g.: "GRA", meaning Gravelines, for region "GRA1" -}
-      , '("services", Attr Text)
+      , '("services", Text)
          {- - The list of public cloud services running within the region -}
        ]
 
@@ -77,7 +77,7 @@ data RegionsDataSource = RegionsDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RegionsDataSource
-    = '[ '("names", Attr Text)
+    = '[ '("names", Text)
          {- - The list of regions associated with the project -}
        ]
 

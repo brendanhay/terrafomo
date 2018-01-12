@@ -12,8 +12,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cloudflare
-    (
-      module Terrafomo
+    ( module Terrafomo
     , module Terrafomo.Cloudflare.Types
     , module Terrafomo.Cloudflare.Provider
     ) where

@@ -84,9 +84,6 @@ data DbInstanceResource = DbInstanceResource
       {- ^ (Optional) Selected zone to create database instance. You cannot set the ZoneId parameter if the MultiAZ parameter is set to true. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DbInstanceResource
-    = '[]
-
 $(TH.makeResource
     "alicloud_db_instance"
     ''Qual.AliCloud
@@ -107,11 +104,11 @@ data DiskAttachmentResource = DiskAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DiskAttachmentResource
-    = '[ '("device_name", Attr Text)
+    = '[ '("device_name", Text)
          {- - The device name exposed to the instance. -}
-      , '("disk_id", Attr Text)
+      , '("disk_id", Text)
          {- - ID of the Disk. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - ID of the Instance. -}
        ]
 
@@ -145,23 +142,23 @@ data DiskResource = DiskResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed DiskResource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The Zone to create the disk in. -}
-      , '("category", Attr Text)
+      , '("category", Text)
          {- - The disk category. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The disk description. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The disk ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The disk name. -}
-      , '("size", Attr Text)
+      , '("size", Text)
          {- - The disk size. -}
-      , '("snapshot_id", Attr Text)
+      , '("snapshot_id", Text)
          {- - The disk snapshot ID. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The disk status. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The disk tags. -}
        ]
 
@@ -186,9 +183,9 @@ data EipAssociationResource = EipAssociationResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EipAssociationResource
-    = '[ '("allocation_id", Attr Text)
+    = '[ '("allocation_id", Text)
          {- - As above. -}
-      , '("instance_id", Attr Text)
+      , '("instance_id", Text)
          {- - As above. -}
        ]
 
@@ -209,15 +206,15 @@ data EipResource = EipResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EipResource
-    = '[ '("bandwidth", Attr Text)
+    = '[ '("bandwidth", Text)
          {- - The elastic public network bandwidth. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The EIP ID. -}
-      , '("internet_charge_type", Attr Text)
+      , '("internet_charge_type", Text)
          {- - The EIP internet charge type. -}
-      , '("ip_address", Attr Text)
+      , '("ip_address", Text)
          {- - The elastic ip address -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The EIP current status. -}
        ]
 
@@ -263,9 +260,6 @@ data EssScalingConfigurationResource = EssScalingConfigurationResource
       {- ^ (Optional) Category of the system disk. The parameter value options are @cloud_efficiency@ , @cloud_ssd@ and @cloud@ . @cloud@ only is used to some no I/O optimized instance. Default to @cloud_efficiency@ . -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed EssScalingConfigurationResource
-    = '[]
-
 $(TH.makeResource
     "alicloud_ess_scaling_configuration"
     ''Qual.AliCloud
@@ -297,21 +291,21 @@ data EssScalingGroupResource = EssScalingGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EssScalingGroupResource
-    = '[ '("db_instance_ids", Attr Text)
+    = '[ '("db_instance_ids", Text)
          {- - The db instance id which the ECS instance attached to. -}
-      , '("default_cooldown", Attr Text)
+      , '("default_cooldown", Text)
          {- - The default cool-down of the scaling group. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The scaling group ID. -}
-      , '("loadbalancer_ids", Attr Text)
+      , '("loadbalancer_ids", Text)
          {- - The slb instance id which the ECS instance attached to. -}
-      , '("max_size", Attr Text)
+      , '("max_size", Text)
          {- - The maximum number of ECS instances. -}
-      , '("min_size", Attr Text)
+      , '("min_size", Text)
          {- - The minimum number of ECS instances. -}
-      , '("removal_policies", Attr Text)
+      , '("removal_policies", Text)
          {- - The removal policy used to select the ECS instance to remove from the scaling group. -}
-      , '("scaling_group_name", Attr Text)
+      , '("scaling_group_name", Text)
          {- - The name of the scaling group. -}
        ]
 
@@ -338,19 +332,19 @@ data EssScalingRuleResource = EssScalingRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EssScalingRuleResource
-    = '[ '("adjustment_type", Attr Text)
+    = '[ '("adjustment_type", Text)
          {- - Adjustment mode of a scaling rule. -}
-      , '("adjustment_value", Attr Text)
+      , '("adjustment_value", Text)
          {- - Adjustment value of a scaling rule. -}
-      , '("ari", Attr Text)
+      , '("ari", Text)
          {- - Unique identifier of a scaling rule. -}
-      , '("cooldown", Attr Text)
+      , '("cooldown", Text)
          {- - Cool-down time of a scaling rule. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The scaling rule ID. -}
-      , '("scaling_group_id", Attr Text)
+      , '("scaling_group_id", Text)
          {- - The id of scaling group. -}
-      , '("scaling_rule_name", Attr Text)
+      , '("scaling_rule_name", Text)
          {- - Name of a scaling rule. -}
        ]
 
@@ -385,17 +379,17 @@ data EssScheduleResource = EssScheduleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed EssScheduleResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The description of schedule task. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The schedule task ID. -}
-      , '("launch_time", Attr Text)
+      , '("launch_time", Text)
          {- - The time of schedule task be triggered. -}
-      , '("scheduled_action", Attr Text)
+      , '("scheduled_action", Text)
          {- - The action of schedule task. -}
-      , '("scheduled_task_name", Attr Text)
+      , '("scheduled_task_name", Text)
          {- - The name of schedule task. -}
-      , '("task_enabled", Attr Text)
+      , '("task_enabled", Text)
          {- - Wether the task is enabled. -}
        ]
 
@@ -422,9 +416,6 @@ data ForwardResource = ForwardResource
     , _ip_protocol :: !(Attr Text)
       {- ^ (Required) The ip protocal, valid value is tcp|udp|any. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed ForwardResource
-    = '[]
 
 $(TH.makeResource
     "alicloud_forward"
@@ -489,31 +480,31 @@ data InstanceResource = InstanceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed InstanceResource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- - The Zone to start the instance in. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The instance description. -}
-      , '("host_name", Attr Text)
+      , '("host_name", Text)
          {- - The instance host name. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The instance ID. -}
-      , '("image_id", Attr Text)
+      , '("image_id", Text)
          {- - The instance Image Id. -}
-      , '("instance_name", Attr Text)
+      , '("instance_name", Text)
          {- - The instance name. -}
-      , '("instance_type", Attr Text)
+      , '("instance_type", Text)
          {- - The instance type. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - The name of key pair that has been bound in ECS instance. -}
-      , '("private_ip", Attr Text)
+      , '("private_ip", Text)
          {- - The instance private ip. -}
-      , '("public_ip", Attr Text)
+      , '("public_ip", Text)
          {- - The instance public ip. -}
-      , '("status", Attr Text)
+      , '("status", Text)
          {- - The instance status. -}
-      , '("tags", Attr Text)
+      , '("tags", Text)
          {- - The instance tags, use jsonencode(item) to display the value. -}
-      , '("vswitch_id", Attr Text)
+      , '("vswitch_id", Text)
          {- - If the instance created in VPC, then this value is  virtual switch ID. -}
        ]
 
@@ -535,9 +526,9 @@ data KeyPairAttachmentResource = KeyPairAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyPairAttachmentResource
-    = '[ '("instance_ids", Attr Text)
+    = '[ '("instance_ids", Text)
          {- The list of ECS instance's IDs. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - The name of the key pair. -}
        ]
 
@@ -562,9 +553,9 @@ data KeyPairResource = KeyPairResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed KeyPairResource
-    = '[ '("fingerprint", Attr Text)
+    = '[ '("fingerprint", Text)
          {- The finger print of the key pair. -}
-      , '("key_name", Attr Text)
+      , '("key_name", Text)
          {- - The name of the key pair. -}
        ]
 
@@ -590,9 +581,6 @@ data NatGatewayResource = NatGatewayResource
     , _vpc_id :: !(Attr Text)
       {- ^ (Required, Forces New Resorce) The VPC ID. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed NatGatewayResource
-    = '[]
 
 $(TH.makeResource
     "alicloud_nat_gateway"
@@ -631,11 +619,11 @@ data OssBucketObjectResource = OssBucketObjectResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed OssBucketObjectResource
-    = '[ '("content_length", Attr Text)
+    = '[ '("content_length", Text)
          {- - the content length of request. -}
-      , '("etag", Attr Text)
+      , '("etag", Text)
          {- - the ETag generated for the object (an MD5 sum of the object content). -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - the @key@ of the resource supplied above -}
        ]
 
@@ -669,9 +657,6 @@ data OssBucketResource = OssBucketResource
       {- ^ (Optional) A website object(documented below). -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed OssBucketResource
-    = '[]
-
 $(TH.makeResource
     "alicloud_oss_bucket"
     ''Qual.AliCloud
@@ -696,15 +681,15 @@ data RouteEntryResource = RouteEntryResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouteEntryResource
-    = '[ '("destination_cidrblock", Attr Text)
+    = '[ '("destination_cidrblock", Text)
          {- - The RouteEntry's target network segment. -}
-      , '("nexthop_id", Attr Text)
+      , '("nexthop_id", Text)
          {- - The route entry's next hop. -}
-      , '("nexthop_type", Attr Text)
+      , '("nexthop_type", Text)
          {- - The next hop type. -}
-      , '("route_table_id", Attr Text)
+      , '("route_table_id", Text)
          {- - The ID of the route table. -}
-      , '("router_id", Attr Text)
+      , '("router_id", Text)
          {- - The ID of the virtual router attached to Vpc. -}
        ]
 
@@ -754,35 +739,35 @@ data RouterInterfaceResource = RouterInterfaceResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed RouterInterfaceResource
-    = '[ '("access_point_id", Attr Text)
+    = '[ '("access_point_id", Text)
          {- - Access point of the router interface. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - Router interface description. -}
-      , '("health_check_source_ip", Attr Text)
+      , '("health_check_source_ip", Text)
          {- - Source IP of Packet of Line HealthCheck. -}
-      , '("health_check_target_ip", Attr Text)
+      , '("health_check_target_ip", Text)
          {- - Target IP of Packet of Line HealthCheck. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Router interface ID. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - Router interface name. -}
-      , '("opposite_access_point_id", Attr Text)
+      , '("opposite_access_point_id", Text)
          {- - Access point of the opposite router interface. -}
-      , '("opposite_interface_id", Attr Text)
+      , '("opposite_interface_id", Text)
          {- - Peer router interface ID. -}
-      , '("opposite_interface_owner_id", Attr Text)
+      , '("opposite_interface_owner_id", Text)
          {- - Peer account ID. -}
-      , '("opposite_router_id", Attr Text)
+      , '("opposite_router_id", Text)
          {- - Peer router ID. -}
-      , '("opposite_router_type", Attr Text)
+      , '("opposite_router_type", Text)
          {- - Peer router type. -}
-      , '("role", Attr Text)
+      , '("role", Text)
          {- - Router interface role. -}
-      , '("router_id", Attr Text)
+      , '("router_id", Text)
          {- - Router ID. -}
-      , '("router_type", Attr Text)
+      , '("router_type", Text)
          {- - Router type. -}
-      , '("specification", Attr Text)
+      , '("specification", Text)
          {- - Router nterface specification. -}
        ]
 
@@ -807,13 +792,13 @@ data SecurityGroupResource = SecurityGroupResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupResource
-    = '[ '("description", Attr Text)
+    = '[ '("description", Text)
          {- - The description of the security group -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the security group -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the security group -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The VPC ID. -}
        ]
 
@@ -855,15 +840,15 @@ data SecurityGroupRuleResource = SecurityGroupRuleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SecurityGroupRuleResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - The ID of the security group rule -}
-      , '("ip_protocol", Attr Text)
+      , '("ip_protocol", Text)
          {- - The protocol of the security group rule -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the security group -}
-      , '("port_range", Attr Text)
+      , '("port_range", Text)
          {- - The range of port numbers -}
-      , '("type", Attr Text)
+      , '("type", Text)
          {- - The type of rule, @ingress@ or @egress@ -}
        ]
 
@@ -884,7 +869,7 @@ data SlbAttachmentResource = SlbAttachmentResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SlbAttachmentResource
-    = '[ '("backend_servers", Attr Text)
+    = '[ '("backend_servers", Text)
          {- - The backend servers of the load balancer. -}
        ]
 
@@ -912,9 +897,6 @@ data SlbResource = SlbResource
       {- ^ (Required for a VPC SLB, Forces New Resource) The VSwitch ID to launch in. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed SlbResource
-    = '[]
-
 $(TH.makeResource
     "alicloud_slb"
     ''Qual.AliCloud
@@ -932,9 +914,6 @@ data SnatResource = SnatResource
     , _source_vswitch_id :: !(Attr Text)
       {- ^ (Required, Forces new resource) The vswitch ID. -}
     } deriving (Show, Eq, Generic)
-
-type instance Computed SnatResource
-    = '[]
 
 $(TH.makeResource
     "alicloud_snat"
@@ -956,17 +935,17 @@ data VpcResource = VpcResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VpcResource
-    = '[ '("cidr_block", Attr Text)
+    = '[ '("cidr_block", Text)
          {- - The CIDR block for the VPC. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the VPC. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the VPC. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the VPC. -}
-      , '("route_table_id", Attr Text)
+      , '("route_table_id", Text)
          {- - The route table ID of the router created by default on VPC creation. -}
-      , '("router_id", Attr Text)
+      , '("router_id", Text)
          {- - The ID of the router created by default on VPC creation. -}
        ]
 
@@ -993,17 +972,17 @@ data VswitchResource = VswitchResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed VswitchResource
-    = '[ '("availability_zone", Attr Text)
+    = '[ '("availability_zone", Text)
          {- The AZ for the switch. -}
-      , '("cidr_block", Attr Text)
+      , '("cidr_block", Text)
          {- - The CIDR block for the switch. -}
-      , '("description", Attr Text)
+      , '("description", Text)
          {- - The description of the switch. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - The ID of the switch. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - The name of the switch. -}
-      , '("vpc_id", Attr Text)
+      , '("vpc_id", Text)
          {- - The VPC ID. -}
        ]
 
