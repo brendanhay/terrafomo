@@ -1,0 +1,15 @@
+_name: aws_ssm_patch_group
+arguments:
+  patch_group:
+    required: true
+    help: (Required) The name of the patch group that should be registered with the
+      patch baseline.
+    type: Text
+  baseline_id:
+    required: true
+    help: (Required) The ID of the patch baseline to register the patch group with.
+    type: Text
+attributes:
+  id:
+    help: The ID of the patch baseline.
+    type: Text

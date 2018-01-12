@@ -1,0 +1,27 @@
+_name: librato_service
+arguments:
+  type_:
+    required: true
+    help: (Required) The type of notificaion.
+    type: Text
+  settings:
+    required: true
+    help: (Required) a JSON hash of settings specific to the alert type.
+    type: Text
+  title:
+    required: true
+    help: (Required) The alert title.
+    type: Text
+attributes:
+  settings:
+    help: a JSON hash of settings specific to the alert type.
+    type: Text
+  id:
+    help: The ID of the alert.
+    type: Text
+  title:
+    help: The alert title.
+    type: Text
+  type:
+    help: The type of notificaion.
+    type: Text

@@ -1,0 +1,18 @@
+_name: docker_volume
+arguments:
+  driver:
+    required: false
+    help: (Optional, string) Driver type for the volume (defaults to local).
+    type: Text
+  driver_opts:
+    required: false
+    help: (Optional, map of strings) Options specific to the driver.
+    type: Text
+  name:
+    required: false
+    help: (Optional, string) The name of the Docker volume (generated if not provided).
+    type: Text
+attributes:
+  mountpoint:
+    help: ! ' (string) - The mountpoint of the volume.'
+    type: Text

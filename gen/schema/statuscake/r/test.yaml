@@ -1,0 +1,49 @@
+_name: statuscake_test
+arguments:
+  website_url:
+    required: true
+    help: (Required) The URL of the website to be monitored
+    type: Text
+  contact_id:
+    required: false
+    help: (Optional) The id of the contact group to be add to the test.  Each test
+      can have only one.
+    type: Text
+  confirmations:
+    required: false
+    help: (Optional) The number of confirmation servers to use in order to detect
+      downtime. Defaults to 0.
+    type: Text
+  trigger_rate:
+    required: false
+    help: (Optional) The number of minutes to wait before sending an alert. Default
+      is  @5@ .
+    type: Text
+  website_name:
+    required: true
+    help: (Required) This is the name of the test and the website to be monitored.
+    type: Text
+  check_rate:
+    required: false
+    help: (Optional) Test check rate in seconds. Defaults to 300
+    type: Text
+  timeout:
+    required: false
+    help: (Optional) The timeout of the test in seconds.
+    type: Text
+  paused:
+    required: false
+    help: (Optional) Whether or not the test is paused. Defaults to false.
+    type: Text
+  test_type:
+    required: true
+    help: (Required) The type of Test. Either HTTP or TCP
+    type: Text
+  port:
+    required: false
+    help: (Optional) The port to use when specifying a TCP test.
+    type: Text
+attributes:
+  test_id:
+    help: A unique identifier for the test.
+    type: Text

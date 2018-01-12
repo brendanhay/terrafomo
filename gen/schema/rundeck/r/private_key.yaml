@@ -1,0 +1,12 @@
+_name: rundeck_private_key
+arguments:
+  path:
+    required: true
+    help: (Required) The path within the key store where the key will be stored.
+    type: Text
+  key_material:
+    required: true
+    help: (Required) The private key material to store, serialized in any way that
+      is accepted by OpenSSH.
+    type: Text
+attributes: {}

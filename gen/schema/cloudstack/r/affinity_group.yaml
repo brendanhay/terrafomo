@@ -1,0 +1,28 @@
+_name: cloudstack_affinity_group
+arguments:
+  type_:
+    required: true
+    help: (Required) The affinity group type. Changing this forces a new resource
+      to be created.
+    type: Text
+  project:
+    required: false
+    help: (Optional) The name or ID of the project to register this affinity group
+      to. Changing this forces a new resource to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the affinity group. Changing this forces a new resource
+      to be created.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description of the affinity group.
+    type: Text
+attributes:
+  id:
+    help: The id of the affinity group.
+    type: Text
+  description:
+    help: The description of the affinity group.
+    type: Text

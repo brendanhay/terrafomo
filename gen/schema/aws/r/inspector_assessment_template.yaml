@@ -1,0 +1,22 @@
+_name: aws_inspector_assessment_template
+arguments:
+  rules_package_arns:
+    required: true
+    help: (Required) The rules to be used during the run.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the assessment template.
+    type: Text
+  target_arn:
+    required: true
+    help: (Required) The assessment target ARN to attach the template to.
+    type: Text
+  duration:
+    required: true
+    help: (Required) The duration of the inspector run.
+    type: Text
+attributes:
+  arn:
+    help: The template assessment ARN.
+    type: Text

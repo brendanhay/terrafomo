@@ -1,0 +1,36 @@
+_name: vsphere_virtual_machine_snapshot
+arguments:
+  snapshot_name:
+    required: true
+    help: (Required) The name of the snapshot.
+    type: Text
+  remove_children:
+    required: false
+    help: (Optional) If set to  @true@ , the entire snapshot subtree is removed when
+      this resource is destroyed.
+    type: Text
+  memory:
+    required: true
+    help: (Required) If set to  @true@ , a dump of the internal state of the virtual
+      machine is included in the snapshot.
+    type: Text
+  virtual_machine_uuid:
+    required: true
+    help: (Required) The virtual machine UUID.
+    type: Text
+  consolidate:
+    required: false
+    help: (Optional) If set to  @true@ , the delta disks involved in this snapshot
+      will be consolidated into the parent when this resource is destroyed.
+    type: Text
+  quiesce:
+    required: true
+    help: (Required) If set to  @true@ , and the virtual machine is powered on when
+      the snapshot is taken, VMware Tools is used to quiesce the file system in the
+      virtual machine.
+    type: Text
+  description:
+    required: true
+    help: (Required) A description for the snapshot.
+    type: Text
+attributes: {}

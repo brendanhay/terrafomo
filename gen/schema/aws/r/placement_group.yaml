@@ -1,0 +1,14 @@
+_name: aws_placement_group
+arguments:
+  strategy:
+    required: true
+    help: (Required) The placement strategy. The only supported value is  @cluster@
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the placement group.
+    type: Text
+attributes:
+  id:
+    help: The name of the placement group.
+    type: Text

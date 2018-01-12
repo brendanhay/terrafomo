@@ -1,0 +1,46 @@
+_name: spotinst_aws_group
+arguments:
+  strategy:
+    required: true
+    help: (Required) This determines how your group request is fulfilled from the
+      possible On-Demand and Spot pools selected for launch. Only a single block is
+      allowed.
+    type: Text
+  capacity:
+    required: true
+    help: (Required) The group capacity. Only a single block is allowed.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The group description.
+    type: Text
+  launch_specification:
+    required: true
+    help: (Required) Describes the launch specification for an instance.
+    type: Text
+  instance_types:
+    required: true
+    help: ! ' - The type of instance determines your instance''s CPU capacity, memory
+      and storage (e.g., m1.small, c1.xlarge).'
+    type: Text
+  elastic_ips:
+    required: false
+    help: (Optional) A list of  <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>  allocation
+      IDs to associate to the group instances.
+    type: Text
+  product:
+    required: true
+    help: (Required) Operation system type.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The group description.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  id:
+    help: The group ID.
+    type: Text

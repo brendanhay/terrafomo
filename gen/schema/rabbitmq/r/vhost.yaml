@@ -1,0 +1,7 @@
+_name: rabbitmq_vhost
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the vhost.
+    type: Text
+attributes: {}

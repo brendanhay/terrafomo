@@ -1,0 +1,23 @@
+_name: vault_aws_auth_backend_cert
+arguments:
+  aws_public_cert:
+    required: true
+    help: (Required) The  Base64 encoded AWS Public key required to verify PKCS7 signature
+      of the EC2 instance metadata. You can find this key in the  <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html>
+      .
+    type: Text
+  type_:
+    required: false
+    help: (Optional) Either "pkcs7" or "identity", indicating the type of document
+      which can be verified using the given certificate. Defaults to "pkcs7".
+    type: Text
+  backend:
+    required: false
+    help: (Optional) The path the AWS auth backend being configured was mounted at.  Defaults
+      to  @aws@ .
+    type: Text
+  cert_name:
+    required: true
+    help: (Required) The name of the certificate.
+    type: Text
+attributes: {}

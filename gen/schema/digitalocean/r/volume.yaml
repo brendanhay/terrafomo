@@ -1,0 +1,28 @@
+_name: digitalocean_volume
+arguments:
+  size:
+    required: true
+    help: (Required) The size of the block storage volume in GiB.
+    type: Text
+  name:
+    required: true
+    help: (Required) A name for the block storage volume. Must be lowercase and be
+      composed only of numbers, letters and "-", up to a limit of 64 characters.
+    type: Text
+  droplet_ids:
+    required: true
+    help: ! ' - (Computed) A list of associated droplet ids'
+    type: Text
+  region:
+    required: true
+    help: (Required) The region that the block storage volume will be created in.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A free-form text field up to a limit of 1024 bytes to describe
+      a block storage volume.
+    type: Text
+attributes:
+  id:
+    help: The unique identifier for the block storage volume.
+    type: Text

@@ -1,0 +1,34 @@
+_name: aws_batch_job_definition
+arguments:
+  type_:
+    required: true
+    help: (Required) The type of job definition.  Must be  @container@
+    type: Text
+  container_properties:
+    required: false
+    help: (Optional) A valid  <http://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html>
+      provided as a single valid JSON document. This parameter is required if the  @type@  parameter
+      is  @container@ .
+    type: Text
+  retry_strategy:
+    required: false
+    help: (Optional) Specifies the retry strategy to use for failed jobs that are
+      submitted with this job definition. Maximum number of  @retry_strategy@  is  @1@
+      .  Defined below.
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the job definition.
+    type: Text
+  parameters:
+    required: false
+    help: (Optional) Specifies the parameter substitution placeholders to set in the
+      job definition.
+    type: Text
+attributes:
+  arn:
+    help: The Amazon Resource Name of the job definition.
+    type: Text
+  revision:
+    help: The revision of the job definition.
+    type: Text

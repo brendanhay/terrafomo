@@ -1,0 +1,155 @@
+_name: vsphere_virtual_machine
+arguments:
+  network_interface:
+    required: true
+    help: (Required) Configures virtual network interfaces; see <#network-interfaces>  below
+      for details.
+    type: Text
+  dns_suffixes:
+    required: false
+    help: ! '(Optional) List of name resolution suffixes for the virtual network adapter.
+      Default: The value of  @domain@  if defined, otherwise @vsphere.local@ .'
+    type: Text
+  hostname:
+    required: false
+    help: (Optional) The virtual machine hostname used during the OS customization.
+      Defaults to the  @name@  attribute.
+    type: Text
+  cluster:
+    required: false
+    help: (Optional) Name of a Cluster in which to launch the virtual machine
+    type: Text
+  disk:
+    required: true
+    help: (Required) Configures virtual disks; see  <#disks>  below for details
+    type: Text
+  vcpu:
+    required: true
+    help: (Required) The number of virtual CPUs to allocate to the virtual machine
+    type: Text
+  gateway:
+    required: true
+    help: ! ' -  .'
+    type: Text
+  dns_servers:
+    required: false
+    help: (Optional) List of DNS servers for the virtual network adapter; defaults
+      to 8.8.8.8, 8.8.4.4
+    type: Text
+  domain:
+    required: false
+    help: (Optional) A FQDN for the virtual machine; defaults to "vsphere.local"
+    type: Text
+  datacenter:
+    required: false
+    help: (Optional) The name of a Datacenter in which to launch the virtual machine
+    type: Text
+  folder:
+    required: false
+    help: (Optional) The folder to group the VM in.
+    type: Text
+  windows_opt_config:
+    required: false
+    help: (Optional) Extra options for clones of Windows machines.
+    type: Text
+  enable_disk_uuid:
+    required: false
+    help: (Optional) This option causes the vm to mount disks by uuid on the guest
+      OS.
+    type: Text
+  detach_unknown_disks_on_delete:
+    required: false
+    help: (Optional) will detach disks not managed by this resource on delete (avoids
+      deletion of disks attached after resource creation outside of Terraform scope).
+    type: Text
+  memory:
+    required: true
+    help: (Required) The amount of RAM (in MB) to allocate to the virtual machine
+    type: Text
+  time_zone:
+    required: false
+    help: (Optional) The <https://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/timezone.html>
+      or  <https://msdn.microsoft.com/en-us/library/ms912391.aspx>  time zone to set
+      on the virtual machine. Defaults to "Etc/UTC"
+    type: Text
+  name:
+    required: true
+    help: (Required) The virtual machine name (cannot contain underscores and must
+      be less than 15 characters)
+    type: Text
+  cdrom:
+    required: false
+    help: (Optional) Configures a CDROM device and mounts an image as its media; see  <#cdrom>  below
+      for more details.
+    type: Text
+  linked_clone:
+    required: false
+    help: (Optional) Specifies if the new machine is a  <https://www.vmware.com/support/ws5/doc/ws_clone_overview.html#wp1036396>
+      of another machine or not.
+    type: Text
+  skip_customization:
+    required: false
+    help: (Optional) Skip virtual machine customization (useful if OS is not in the
+      guest OS support matrix of VMware like "other3xLinux64Guest").
+    type: Text
+  memory_reservation:
+    required: false
+    help: (Optional) The amount of RAM (in MB) to reserve physical memory resource;
+      defaults to 0 (means not to reserve)
+    type: Text
+  custom_configuration_parameters:
+    required: false
+    help: (Optional) Map of values that is set as virtual machine custom configurations.
+    type: Text
+  resource_pool:
+    required: true
+    help: ! ' (Optional) The name of a Resource Pool in which to launch the virtual
+      machine. Requires full path (see cluster example).'
+    type: Text
+  wait_for_customization_timeout:
+    required: false
+    help: ! '(Optional) The amount of time, in minutes, to wait for guest OS customization
+      to complete before returning with an error. Setting this value to  @0@  or a
+      negative value skips the waiter. Default:  @10@  (10 minutes).'
+    type: Text
+attributes:
+  network_interface/label:
+    help: See Argument Reference above.
+    type: Text
+  uuid:
+    help: The instance UUID.
+    type: Text
+  vcpu:
+    help: See Argument Reference above.
+    type: Text
+  network_interface/ipv6_address:
+    help: Assigned static IPv6 address.
+    type: Text
+  datacenter:
+    help: See Argument Reference above.
+    type: Text
+  memory:
+    help: See Argument Reference above.
+    type: Text
+  network_interface/ipv4_prefix_length:
+    help: See Argument Reference above.
+    type: Text
+  power_state:
+    help: The power state of the virtual machine. Can be one of @poweredOff@ ,  @poweredOn@
+      , or  @suspended@ .
+    type: Text
+  name:
+    help: See Argument Reference above.
+    type: Text
+  moid:
+    help: The instance MOID (Managed Object Reference ID).
+    type: Text
+  id:
+    help: The instance ID.
+    type: Text
+  network_interface/ipv6_prefix_length:
+    help: Prefix length of assigned static IPv6 address.
+    type: Text
+  network_interface/ipv4_address:
+    help: See Argument Reference above.
+    type: Text

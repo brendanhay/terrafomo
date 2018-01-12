@@ -1,0 +1,60 @@
+_name: rancher_certificate
+arguments:
+  cert_chain:
+    required: false
+    help: (Optional) The certificate chain.
+    type: Text
+  key:
+    required: true
+    help: (Required) The certificate key.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the certificate.
+    type: Text
+  environment_id:
+    required: true
+    help: (Required) The ID of the environment to create the certificate for.
+    type: Text
+  cert:
+    required: true
+    help: (Required) The certificate content.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A certificate description.
+    type: Text
+attributes:
+  serial_number:
+    help: The certificate serial number.
+    type: Text
+  cert_fingerprint:
+    help: The certificate fingerprint.
+    type: Text
+  algorithm:
+    help: The certificate algorithm.
+    type: Text
+  subject_alternative_names:
+    help: The list of certificate Subject Alternative Names.
+    type: Text
+  issued_at:
+    help: The certificate creation date.
+    type: Text
+  version:
+    help: The certificate version.
+    type: Text
+  expires_at:
+    help: The certificate expiration date.
+    type: Text
+  cn:
+    help: The certificate CN.
+    type: Text
+  key_size:
+    help: The certificate key size.
+    type: Text
+  id:
+    help: (Computed) The ID of the resource.
+    type: Text
+  issuer:
+    help: The certificate issuer.
+    type: Text

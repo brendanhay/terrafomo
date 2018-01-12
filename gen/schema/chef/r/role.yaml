@@ -1,0 +1,27 @@
+_name: chef_role
+arguments:
+  run_list:
+    required: false
+    help: (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html>  for
+      any nodes that belong to this role.
+    type: Text
+  override_attributes_json:
+    required: false
+    help: (Optional) String containing a JSON-serialized object containing the override
+      attributes for the role.
+    type: Text
+  default_attributes_json:
+    required: false
+    help: (Optional) String containing a JSON-serialized object containing the default
+      attributes for the role.
+    type: Text
+  name:
+    required: true
+    help: (Required) The unique name to assign to the role.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A human-friendly description of the role. If not set, a placeholder
+      of "Managed by Terraform" will be set.
+    type: Text
+attributes: {}

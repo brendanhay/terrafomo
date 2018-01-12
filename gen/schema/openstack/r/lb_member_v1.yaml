@@ -1,0 +1,51 @@
+_name: openstack_lb_member_v1
+arguments:
+  admin_state_up:
+    required: false
+    help: (Optional) The administrative state of the member. Acceptable values are
+      'true' and 'false'. Changing this value updates the state of the existing member.
+    type: Text
+  pool_id:
+    required: true
+    help: (Required)  The ID of the LB pool. Changing this creates a new member.
+    type: Text
+  address:
+    required: true
+    help: (Required) The IP address of the member. Changing this creates a new member.
+    type: Text
+  tenant_id:
+    required: false
+    help: (Optional) The owner of the member. Required if admin wants to create a
+      member for another tenant. Changing this creates a new member.
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 Networking client. A Networking
+      client is needed to create an LB member. If omitted, the @region@  argument
+      of the provider is used. Changing this creates a new LB member.
+    type: Text
+  port:
+    required: true
+    help: (Required) An integer representing the port on which the member is hosted.
+      Changing this creates a new member.
+    type: Text
+attributes:
+  admin_state_up:
+    help: See Argument Reference above.
+    type: Text
+  weight:
+    help: The load balancing weight of the member. This is currently unable to be
+      set through Terraform.
+    type: Text
+  pool_id:
+    help: See Argument Reference above.
+    type: Text
+  address:
+    help: See Argument Reference above.
+    type: Text
+  region:
+    help: See Argument Reference above.
+    type: Text
+  port:
+    help: See Argument Reference above.
+    type: Text

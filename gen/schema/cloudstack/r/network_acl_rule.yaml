@@ -1,0 +1,32 @@
+_name: cloudstack_network_acl_rule
+arguments:
+  acl_id:
+    required: true
+    help: (Required) The network ACL ID for which to create the rules. Changing this
+      forces a new resource to be created.
+    type: Text
+  project:
+    required: false
+    help: (Optional) The name or ID of the project to deploy this instance to. Changing
+      this forces a new resource to be created.
+    type: Text
+  managed:
+    required: false
+    help: (Optional) USE WITH CAUTION! If enabled all the firewall rules for this
+      network ACL will be managed by this resource. This means it will delete all
+      firewall rules that are not in your config! (defaults false)
+    type: Text
+  rule:
+    required: false
+    help: (Optional) Can be specified multiple times. Each rule block supports fields
+      documented below. If  @managed = false@  at least one rule is required!
+    type: Text
+  parallelism:
+    required: true
+    help: ! ' (Optional) Specifies how much rules will be created or deleted concurrently.
+      (defaults 2)'
+    type: Text
+attributes:
+  id:
+    help: The ACL ID for which the rules are created.
+    type: Text

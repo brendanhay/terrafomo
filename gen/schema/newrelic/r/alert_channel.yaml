@@ -1,0 +1,19 @@
+_name: newrelic_alert_channel
+arguments:
+  type_:
+    required: true
+    help: ! '(Required) The type of channel.  One of:  @campfire@ ,  @email@ ,  @hipchat@
+      ,  @opsgenie@ ,  @pagerduty@ ,  @slack@ ,  @victorops@ , or  @webhook@ .'
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the channel.
+    type: Text
+  configuration:
+    required: true
+    help: (Required) A map of key / value pairs with channel type specific values.
+    type: Text
+attributes:
+  id:
+    help: The ID of the channel.
+    type: Text

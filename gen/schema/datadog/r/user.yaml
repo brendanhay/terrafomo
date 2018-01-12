@@ -1,0 +1,38 @@
+_name: datadog_user
+arguments:
+  email:
+    required: true
+    help: (Required) Email address for user
+    type: Text
+  handle:
+    required: true
+    help: (Required) The user handle, must be a valid email.
+    type: Text
+  disabled:
+    required: false
+    help: (Optional) Whether the user is disabled
+    type: Text
+  role:
+    required: false
+    help: ! '(Optional) Role description for user (NOTE: can only be applied on user
+      creation)'
+    type: Text
+  name:
+    required: true
+    help: (Required) Name for user
+    type: Text
+  is_admin:
+    required: false
+    help: (Optional) Whether the user is an administrator
+    type: Text
+attributes:
+  disabled:
+    help: ! 'Returns true if Datadog user is disabled (NOTE: Datadog does not actually
+      delete users so this will be true for those as well)'
+    type: Text
+  verified:
+    help: Returns true if Datadog user is verified
+    type: Text
+  id:
+    help: ID of the Datadog user
+    type: Text

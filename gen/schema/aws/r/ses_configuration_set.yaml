@@ -1,0 +1,7 @@
+_name: aws_ses_configuration_set
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the configuration set
+    type: Text
+attributes: {}

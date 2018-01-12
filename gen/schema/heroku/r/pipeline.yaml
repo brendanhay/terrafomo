@@ -1,0 +1,13 @@
+_name: heroku_pipeline
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the pipeline.
+    type: Text
+attributes:
+  name:
+    help: The name of the pipeline.
+    type: Text
+  id:
+    help: The UUID of the pipeline.
+    type: Text

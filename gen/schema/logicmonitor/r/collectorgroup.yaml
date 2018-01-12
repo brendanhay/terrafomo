@@ -1,0 +1,11 @@
+_name: logicmonitor_collector_group
+arguments:
+  name:
+    required: true
+    help: (Required) Name of collector group
+    type: Text
+  description:
+    required: false
+    help: (Optional) Set description of collector group
+    type: Text
+attributes: {}

@@ -1,0 +1,20 @@
+_name: azure_local_network_connection
+arguments:
+  address_space_prefixes:
+    required: true
+    help: (Required) List of address spaces accessible through the VPN connection.
+      The elements are in the CIDR format.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name by which this local network connection will be referenced
+      by. Changing this forces a new resource to be created.
+    type: Text
+  vpn_gateway_address:
+    required: true
+    help: (Required) The public IPv4 of the VPN endpoint.
+    type: Text
+attributes:
+  id:
+    help: The local network connection ID.
+    type: Text

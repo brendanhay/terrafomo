@@ -1,0 +1,17 @@
+_name: alicloud_eip_association
+arguments:
+  instance_id:
+    required: false
+    help: (Optional, Forces new resource) The ID of the instance.
+    type: Text
+  allocation_id:
+    required: false
+    help: (Optional, Forces new resource) The allocation EIP ID.
+    type: Text
+attributes:
+  instance_id:
+    help: As above.
+    type: Text
+  allocation_id:
+    help: As above.
+    type: Text

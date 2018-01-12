@@ -1,0 +1,8 @@
+_name: kubernetes_namespace
+arguments:
+  metadata:
+    required: true
+    help: (Required) Standard namespace's  <https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata>
+      .
+    type: Text
+attributes: {}

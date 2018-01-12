@@ -1,0 +1,25 @@
+_name: aws_default_subnet
+arguments:
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  vpc_id:
+    help: The VPC ID.
+    type: Text
+  ipv6_association_id:
+    help: The association ID for the IPv6 CIDR block.
+    type: Text
+  ipv6_cidr_block:
+    help: The IPv6 CIDR block.
+    type: Text
+  cidr_block:
+    help: The CIDR block for the subnet.
+    type: Text
+  id:
+    help: The ID of the subnet
+    type: Text
+  availability_zone:
+    help: ! '- The AZ for the subnet.'
+    type: Text

@@ -1,0 +1,15 @@
+_name: vault_auth_backend
+arguments:
+  type_:
+    required: true
+    help: (Required) The name of the policy
+    type: Text
+  path:
+    required: false
+    help: (Optional) The path to mount the auth backend. This defaults to the name.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description of the auth backend
+    type: Text
+attributes: {}

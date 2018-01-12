@@ -1,0 +1,39 @@
+_name: aws_eip
+arguments:
+  network_interface:
+    required: false
+    help: (Optional) Network interface ID to associate with.
+    type: Text
+  instance_:
+    required: false
+    help: (Optional) EC2 instance ID.
+    type: Text
+  associate_with_private_ip:
+    required: false
+    help: (Optional) A user specified primary or secondary private IP address to associate
+      with the Elastic IP address. If no private IP address is specified, the Elastic
+      IP address is associated with the primary private IP address.
+    type: Text
+  vpc:
+    required: false
+    help: (Optional) Boolean if the EIP is in a VPC or not.
+    type: Text
+attributes:
+  network_interface:
+    help: Contains the ID of the attached network interface.
+    type: Text
+  private_ip:
+    help: Contains the private IP address (if in VPC).
+    type: Text
+  public_ip:
+    help: Contains the public IP address.
+    type: Text
+  id:
+    help: Contains the EIP allocation ID.
+    type: Text
+  associate_with_private_ip:
+    help: Contains the user specified private IP address (if in VPC).
+    type: Text
+  instance:
+    help: Contains the ID of the attached instance.
+    type: Text

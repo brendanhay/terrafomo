@@ -1,0 +1,23 @@
+_name: grafana_alert_notification
+arguments:
+  type_:
+    required: true
+    help: (Required) The type of the alert notification channel.
+    type: Text
+  settings:
+    required: false
+    help: (Optional) Additional settings, for full reference lookup  <http://docs.grafana.org/http_api/alerting>
+      .
+    type: Text
+  is_default:
+    required: false
+    help: (Optional) Is this the default channel for all your alerts.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the alert notification channel.
+    type: Text
+attributes:
+  id:
+    help: The ID of the resource
+    type: Text

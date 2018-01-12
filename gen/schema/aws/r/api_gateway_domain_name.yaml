@@ -1,0 +1,50 @@
+_name: aws_api_gateway_domain_name
+arguments:
+  certificate_private_key:
+    required: false
+    help: (Optional) The private key associated with the domain certificate given
+      in  @certificate_body@ . Conflicts with  @certificate_arn@ .
+    type: Text
+  certificate_chain:
+    required: false
+    help: (Optional) The certificate for the CA that issued the certificate, along
+      with any intermediate CA certificates required to create an unbroken chain to
+      a certificate trusted by the intended API clients. Conflicts with  @certificate_arn@
+      .
+    type: Text
+  certificate_name:
+    required: false
+    help: (Optional) The unique name to use when registering this cert as an IAM server
+      certificate. Conflicts with  @certificate_arn@ . Required if  @certificate_arn@  is
+      not set.
+    type: Text
+  domain_name:
+    required: true
+    help: (Required) The fully-qualified domain name to register
+    type: Text
+  certificate_arn:
+    required: false
+    help: (Optional) The ARN for an AWS-managed certificate. Conflicts with  @certificate_name@
+      ,  @certificate_body@ ,  @certificate_chain@  and  @certificate_private_key@
+      .
+    type: Text
+  certificate_body:
+    required: false
+    help: (Optional) The certificate issued for the domain name being registered,
+      in PEM format. Conflicts with  @certificate_arn@ .
+    type: Text
+attributes:
+  cloudfront_domain_name:
+    help: The hostname created by Cloudfront to represent the distribution that implements
+      this domain name mapping.
+    type: Text
+  certificate_upload_date:
+    help: The upload date associated with the domain certificate.
+    type: Text
+  id:
+    help: The internal id assigned to this domain name by API Gateway.
+    type: Text
+  cloudfront_zone_id:
+    help: For convenience, the hosted zone id ( @Z2FDTNDATAQYW2@ ) that can be used
+      to create a Route53 alias record for the distribution.
+    type: Text

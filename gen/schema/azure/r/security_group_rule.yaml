@@ -1,0 +1,52 @@
+_name: azure_security_group_rule
+arguments:
+  type_:
+    required: true
+    help: ! '(Required) The type of the security rule. Valid options are: @Inbound@  and  @Outbound@
+      .'
+    type: Text
+  priority:
+    required: true
+    help: (Required) The priority of the network security rule. Rules with lower priority
+      are evaluated first. This value can be between 100 and 4096.
+    type: Text
+  action:
+    required: false
+    help: ! '(Optional) The action that is performed when the security rule is matched.
+      Valid options are:  @Allow@  and  @Deny@ .'
+    type: Text
+  protocol:
+    required: false
+    help: ! '(Optional) The protocol of the security rule. Valid options are: @TCP@
+      ,  @UDP@  and  @*@ .'
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the security group rule.
+    type: Text
+  destination_port_range:
+    required: true
+    help: (Required) The destination port or range. This value can be between 0 and
+      65535. An asterisk (*) can also be used to match all ports.
+    type: Text
+  destination_address_prefix:
+    required: true
+    help: (Required) The address prefix of packet destinations that should be subjected
+      to the rule. An asterisk (*) can also be used to match all destination IPs.
+    type: Text
+  security_group_names:
+    required: true
+    help: (Required) A list of the names of the security groups the rule should be
+      applied to. Changing this list forces the creation of a new resource.
+    type: Text
+  source_port_range:
+    required: true
+    help: (Required) The source port or range. This value can be between 0 and 65535.
+      An asterisk (*) can also be used to match all ports.
+    type: Text
+  source_address_prefix:
+    required: true
+    help: (Required) The address prefix of packet sources that that should be subjected
+      to the rule. An asterisk (*) can also be used to match all source IPs.
+    type: Text
+attributes: {}

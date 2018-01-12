@@ -1,0 +1,39 @@
+_name: aws_kinesis_firehose_delivery_stream
+arguments:
+  destination:
+    required: true
+    help: ! ' – (Required) This is the destination to where the data is delivered.
+      The only options are  @s3@  (Deprecated, use  @extended_s3@  instead),  @extended_s3@
+      ,  @redshift@ , and  @elasticsearch@ .'
+    type: Text
+  redshift_configuration:
+    required: false
+    help: (Optional) Configuration options if redshift is the destination. Using  @redshift_configuration@  requires
+      the user to also specify a @s3_configuration@  block. More details are given
+      below.
+    type: Text
+  extended_s3_configuration:
+    required: false
+    help: (Optional, only Required when  @destination@  is  @extended_s3@ ) Enhanced
+      configuration options for the s3 destination. More details are given below.
+    type: Text
+  s3_configuration:
+    required: false
+    help: (Optional, Deprecated, see/use  @extended_s3_configuration@  unless  @destination@  is  @redshift@
+      ) Configuration options for the s3 destination (or the intermediate bucket if
+      the destination is redshift). More details are given below.
+    type: Text
+  kinesis_source_configuration:
+    required: false
+    help: (Optional) Allows the ability to specify the kinesis stream that is used
+      as the source of the firehose delivery stream.
+    type: Text
+  name:
+    required: true
+    help: (Required) A name to identify the stream. This is unique to the AWS account
+      and region the Stream is created in.
+    type: Text
+attributes:
+  arn:
+    help: The Amazon Resource Name (ARN) specifying the Stream
+    type: Text

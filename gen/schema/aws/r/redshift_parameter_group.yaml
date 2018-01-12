@@ -1,0 +1,23 @@
+_name: aws_redshift_parameter_group
+arguments:
+  family_:
+    required: true
+    help: (Required) The family of the Redshift parameter group.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the Redshift parameter group.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description of the Redshift parameter group. Defaults to
+      "Managed by Terraform".
+    type: Text
+  parameter:
+    required: false
+    help: (Optional) A list of Redshift parameters to apply.
+    type: Text
+attributes:
+  id:
+    help: The Redshift parameter group name.
+    type: Text

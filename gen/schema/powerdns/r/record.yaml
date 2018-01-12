@@ -1,0 +1,23 @@
+_name: powerdns_record
+arguments:
+  ttl:
+    required: true
+    help: (Required) The TTL of the record.
+    type: Text
+  type_:
+    required: true
+    help: (Required) The record type.
+    type: Text
+  records:
+    required: true
+    help: (Required) A string list of records.
+    type: Text
+  zone:
+    required: true
+    help: (Required) The name of zone to contain this record.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the record.
+    type: Text
+attributes: {}

@@ -1,0 +1,44 @@
+_name: aws_ssm_association
+arguments:
+  document_version:
+    required: false
+    help: (Optional) The document version you want to associate with the target(s).
+      Can be a specific version or the default version.
+    type: Text
+  instance_id:
+    required: false
+    help: (Optional) The instance id to apply an SSM document to.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the SSM document to apply.
+    type: Text
+  parameters:
+    required: false
+    help: (Optional) Additional parameters to pass to the SSM document.
+    type: Text
+  targets:
+    required: false
+    help: (Optional) The targets (either instances or tags). Instances are specified
+      using Key=instanceids,Values=instanceid1,instanceid2. Tags are specified using
+      Key=tag name,Values=tag value. Only 1 target is currently supported by AWS.
+    type: Text
+  output_location:
+    required: false
+    help: (Optional) An output location block. OutputLocation documented below.
+    type: Text
+  schedule_expression:
+    required: false
+    help: (Optional) A cron expression when the association will be applied to the
+      target(s).
+    type: Text
+attributes:
+  instance_ids:
+    help: The instance id that the SSM document was applied to.
+    type: Text
+  name:
+    help: The name of the SSM document to apply.
+    type: Text
+  parameters:
+    help: Additional parameters passed to the SSM document.
+    type: Text

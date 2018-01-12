@@ -1,0 +1,36 @@
+_name: chef_node
+arguments:
+  run_list:
+    required: false
+    help: (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html>  for
+      the node.
+    type: Text
+  override_attributes_json:
+    required: false
+    help: (Optional) String containing a JSON-serialized object containing the override
+      attributes for the node.
+    type: Text
+  default_attributes_json:
+    required: false
+    help: (Optional) String containing a JSON-serialized object containing the default
+      attributes for the node.
+    type: Text
+  normal_attributes_json:
+    required: false
+    help: (Optional) String containing a JSON-serialized object containing the normal
+      attributes for the node.
+    type: Text
+  name:
+    required: true
+    help: (Required) The unique name to assign to the node.
+    type: Text
+  automatic_attributes_json:
+    required: false
+    help: (Optional) String containing a JSON-serialized object containing the automatic
+      attributes for the node.
+    type: Text
+  environment_name:
+    required: true
+    help: ! '- (Optional) the nodes environment name (default: _default)'
+    type: Text
+attributes: {}

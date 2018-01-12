@@ -1,0 +1,21 @@
+_name: google_compute_router
+arguments:
+  bgp:
+    required: true
+    help: (Required) BGP information specific to this router. Changing this forces
+      a new router to be created. Structure is documented below.
+    type: Text
+  network:
+    required: true
+    help: (Required) The name or resource link to the network this Cloud Router will
+      use to learn and announce routes. Changing this forces a new router to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the router, required by GCE. Changing this
+      forces a new router to be created.
+    type: Text
+attributes:
+  self_link:
+    help: The URI of the created resource.
+    type: Text

@@ -1,0 +1,16 @@
+_name: github_team_repository
+arguments:
+  team_id:
+    required: true
+    help: (Required) The GitHub team id
+    type: Text
+  repository:
+    required: true
+    help: (Required) The repository to add to the team.
+    type: Text
+  permission:
+    required: false
+    help: (Optional) The permissions of team members regarding the repository. Must
+      be one of  @pull@ ,  @push@ , or  @admin@ . Defaults to  @pull@ .
+    type: Text
+attributes: {}

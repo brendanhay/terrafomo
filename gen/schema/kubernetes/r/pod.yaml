@@ -1,0 +1,11 @@
+_name: kubernetes_pod
+arguments:
+  spec:
+    required: true
+    help: (Required) Spec of the pod owned by the cluster
+    type: Text
+  metadata:
+    required: true
+    help: ! '(Required) Standard pod''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
+    type: Text
+attributes: {}

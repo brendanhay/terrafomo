@@ -9,7 +9,4 @@ packages:
   - gen
   - terraform
 # GENERATED
-  - terraform-aws
-  - terraform-digitalocean
-  - terraform-google
 # END GENERATED

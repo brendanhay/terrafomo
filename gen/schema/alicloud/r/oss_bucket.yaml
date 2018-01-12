@@ -1,0 +1,65 @@
+_name: alicloud_oss_bucket
+arguments:
+  logging_isenable:
+    required: false
+    help: (Optional) The flag of using logging enable container. Defaults true.
+    type: Text
+  core_rule:
+    required: false
+    help: (Optional) A rule of  <https://help.aliyun.com/document_detail/32001.html?spm=5176.doc32000.6.886.Hd5dYP>  (documented
+      below). The items of core rule are no more than 10 for every OSS bucket.
+    type: Text
+  website:
+    required: false
+    help: (Optional) A website object(documented below).
+    type: Text
+  bucket:
+    required: false
+    help: (Optional, Forces New Resorce) The name of the bucket. If omitted, Terraform
+      will assign a random and unique name.
+    type: Text
+  referer_config:
+    required: false
+    help: (Optional) The configuration of  <https://help.aliyun.com/document_detail/31869.html?spm=5176.doc31963.2.2.a3LZzH>  (documented
+      below).
+    type: Text
+  lifecycle_rule:
+    required: false
+    help: (Optional) A configuration of  <https://help.aliyun.com/document_detail/31964.html?spm=5176.doc31869.6.846.ZxpE3x>  (documented
+      below).
+    type: Text
+  logging:
+    required: false
+    help: (Optional) A Settings of  <https://help.aliyun.com/document_detail/31961.html?spm=5176.doc31868.2.4.jjuG5O>  (documented
+      below).
+    type: Text
+  acl:
+    required: false
+    help: (Optional) The  <https://help.aliyun.com/document_detail/31843.html?spm=5176.doc31842.2.2.j7C2nn>  to
+      apply. Defaults to "private".
+    type: Text
+attributes:
+  location:
+    help: The location of the bucket.
+    type: Text
+  storage_class:
+    help: The bucket storage type.
+    type: Text
+  owner:
+    help: The bucket owner.
+    type: Text
+  creation_date:
+    help: The creation date of the bucket.
+    type: Text
+  id:
+    help: The name of the bucket.
+    type: Text
+  intranet_endpoint:
+    help: The intranet access endpoint of the bucket.
+    type: Text
+  acl:
+    help: The acl of the bucket.
+    type: Text
+  extranet_endpoint:
+    help: The extranet access endpoint of the bucket.
+    type: Text

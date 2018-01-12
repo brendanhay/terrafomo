@@ -1,0 +1,11 @@
+_name: ultradns_probe_http
+arguments:
+  zone:
+    required: true
+    help: (Required) The domain of the pool to probe.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the pool to probe.
+    type: Text
+attributes: {}

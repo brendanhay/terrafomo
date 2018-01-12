@@ -1,0 +1,35 @@
+_name: aws_api_gateway_method_response
+arguments:
+  response_parameters:
+    required: false
+    help: ! '(Optional) A map of response parameters that can be sent to the caller.
+      For example:  @response_parameters = { "method.response.header.X-Some-Header"
+      = true }@ would define that the header  @X-Some-Header@  can be provided on
+      the response.'
+    type: Text
+  response_parameters_in_json:
+    required: true
+    help: ! ' -  , use  @response_parameters@  instead.'
+    type: Text
+  rest_api_id:
+    required: true
+    help: (Required) The ID of the associated REST API
+    type: Text
+  http_method:
+    required: true
+    help: (Required) The HTTP Method ( @GET@ ,  @POST@ ,  @PUT@ ,  @DELETE@ ,  @HEAD@
+      ,  @OPTION@ ,  @ANY@ )
+    type: Text
+  resource_id:
+    required: true
+    help: (Required) The API resource ID
+    type: Text
+  response_models:
+    required: false
+    help: (Optional) A map of the API models used for the response's content type
+    type: Text
+  status_code:
+    required: true
+    help: (Required) The HTTP status code
+    type: Text
+attributes: {}

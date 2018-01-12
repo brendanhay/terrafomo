@@ -1,0 +1,7 @@
+_name: google_runtimeconfig_config
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the runtime config.
+    type: Text
+attributes: {}

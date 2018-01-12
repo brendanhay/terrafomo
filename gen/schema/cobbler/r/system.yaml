@@ -1,0 +1,177 @@
+_name: cobbler_system
+arguments:
+  mgmt_classes:
+    required: false
+    help: (Optional) Management classes for external config management.
+    type: Text
+  boot_files:
+    required: false
+    help: (Optional) TFTP boot files copied into tftpboot.
+    type: Text
+  fetchable_files:
+    required: false
+    help: (Optional) Templates for tftp or wget.
+    type: Text
+  proxy:
+    required: false
+    help: (Optional) Proxy URL.
+    type: Text
+  status:
+    required: false
+    help: (Optional) System status (development, testing, acceptance, production).
+    type: Text
+  image:
+    required: false
+    help: (Optional) Parent image (if no profile is used).
+    type: Text
+  hostname:
+    required: false
+    help: (Optional) Hostname of the system.
+    type: Text
+  ks_meta:
+    required: false
+    help: (Optional) Kickstart metadata.
+    type: Text
+  virt_pxe_boot:
+    required: false
+    help: (Optional) Use PXE to build this VM?
+    type: Text
+  virt_file_size:
+    required: false
+    help: (Optional) Virt file size.
+    type: Text
+  redhat_management_key:
+    required: false
+    help: (Optional) Red Hat management key.
+    type: Text
+  owners:
+    required: false
+    help: (Optional) Owners list for authz_ownership.
+    type: Text
+  ipv6_default_device:
+    required: false
+    help: (Optional) IPv6 default device.
+    type: Text
+  template_files:
+    required: false
+    help: (Optional) File mappings for built-in configuration management.
+    type: Text
+  kickstart:
+    required: false
+    help: (Optional) Path to kickstart template.
+    type: Text
+  virt_disk_driver:
+    required: false
+    help: (Optional) The on-disk format for the virtualization disk.
+    type: Text
+  power_id:
+    required: false
+    help: (Optional) Usually a plug number or blade name if power type requires it.
+    type: Text
+  power_type:
+    required: false
+    help: (Optional) Power management type.
+    type: Text
+  gateway:
+    required: false
+    help: (Optional) Network gateway.
+    type: Text
+  virt_auto_boot:
+    required: false
+    help: (Optional) Auto boot the VM.
+    type: Text
+  virt_cpus:
+    required: false
+    help: (Optional) Number of virtual CPUs in the VM.
+    type: Text
+  kernel_options_post:
+    required: false
+    help: (Optional) Kernel options (post install).
+    type: Text
+  profile:
+    required: true
+    help: (Required) Parent profile.
+    type: Text
+  ldap_enabled:
+    required: false
+    help: (Optional) Configure LDAP at next config update.
+    type: Text
+  monit_enabled:
+    required: false
+    help: (Optional) Configure monit on this machine at next config update.
+    type: Text
+  ldap_type:
+    required: false
+    help: (Optional) LDAP management type.
+    type: Text
+  power_pass:
+    required: false
+    help: (Optional) Power management password.
+    type: Text
+  kernel_options:
+    required: false
+    help: ! '(Optional) Kernel options. ex: selinux=permissive.'
+    type: Text
+  enable_gpxe:
+    required: false
+    help: (Optional) Use gPXE instead of PXELINUX.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the system.
+    type: Text
+  name_servers_search:
+    required: false
+    help: (Optional) Name servers search path.
+    type: Text
+  interface:
+    required: false
+    help: (Optional)
+    type: Text
+  template_remote_kickstarts:
+    required: false
+    help: (Optional) template remote kickstarts.
+    type: Text
+  redhat_management_server:
+    required: false
+    help: (Optional) Red Hat management server.
+    type: Text
+  virt_ram:
+    required: false
+    help: (Optional) The amount of RAM for the VM.
+    type: Text
+  netboot_enabled:
+    required: false
+    help: (Optional) (re)Install this machine at next boot.
+    type: Text
+  virt_path:
+    required: false
+    help: (Optional) Path to the VM.
+    type: Text
+  comment:
+    required: false
+    help: (Optional) Free form text description
+    type: Text
+  name_servers:
+    required: false
+    help: (Optional) Name servers.
+    type: Text
+  power_address:
+    required: false
+    help: (Optional) Power management address.
+    type: Text
+  virt_type:
+    required: false
+    help: ! '(Optional) Virtualization technology to use: xenpv, xenfv, qemu, kvm,
+      vmware, openvz.'
+    type: Text
+  mgmt_parameters:
+    required: false
+    help: (Optional) Parameters which will be handed to your management application.
+      Must be a valid YAML dictionary.
+    type: Text
+  power_user:
+    required: false
+    help: (Optional) Power management user.
+    type: Text
+attributes: {}

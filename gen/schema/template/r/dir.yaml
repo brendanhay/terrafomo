@@ -1,0 +1,17 @@
+_name: template_dir
+arguments:
+  destination_dir:
+    required: true
+    help: (Required) Path to the directory where the templated files will be written.
+    type: Text
+  source_dir:
+    required: true
+    help: (Required) Path to the directory where the files to template reside.
+    type: Text
+  vars:
+    required: false
+    help: (Optional) Variables for interpolation within the template. Note that variables
+      must all be primitives. Direct references to lists or maps will cause a validation
+      error.
+    type: Text
+attributes: {}

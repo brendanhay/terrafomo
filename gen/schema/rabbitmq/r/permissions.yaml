@@ -1,0 +1,15 @@
+_name: rabbitmq_permissions
+arguments:
+  vhost:
+    required: true
+    help: (Required) The vhost to create the resource in.
+    type: Text
+  user:
+    required: true
+    help: (Required) The user to apply the permissions to.
+    type: Text
+  permissions:
+    required: true
+    help: (Required) The settings of the permissions. The structure is described below.
+    type: Text
+attributes: {}

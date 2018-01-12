@@ -1,0 +1,54 @@
+_name: gitlab_project_hook
+arguments:
+  job_events:
+    required: false
+    help: (Optional) Invoke the hook for job events.
+    type: Text
+  project:
+    required: true
+    help: (Required) The name or id of the project to add the hook to.
+    type: Text
+  merge_requests_events:
+    required: false
+    help: (Optional) Invoke the hook for merge requests.
+    type: Text
+  note_events:
+    required: false
+    help: (Optional) Invoke the hook for notes events.
+    type: Text
+  url:
+    required: true
+    help: (Required) The url of the hook to invoke.
+    type: Text
+  tag_push_events:
+    required: false
+    help: (Optional) Invoke the hook for tag push events.
+    type: Text
+  token:
+    required: false
+    help: (Optional) A token to present when invoking the hook.
+    type: Text
+  enable_ssl_verification:
+    required: false
+    help: (Optional) Enable ssl verification when invoking the hook.
+    type: Text
+  issues_events:
+    required: false
+    help: (Optional) Invoke the hook for issues events.
+    type: Text
+  pipeline_events:
+    required: false
+    help: (Optional) Invoke the hook for pipeline events.
+    type: Text
+  wiki_page_events:
+    required: false
+    help: (Optional) Invoke the hook for wiki page events.
+    type: Text
+  push_events:
+    required: false
+    help: (Optional) Invoke the hook for push events.
+    type: Text
+attributes:
+  id:
+    help: The unique id assigned to the hook by the GitLab server.
+    type: Text

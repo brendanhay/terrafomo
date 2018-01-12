@@ -1,0 +1,17 @@
+_name: vsphere_tag
+arguments:
+  category_id:
+    required: true
+    help: ! ' - (String, required, forces new resource) The unique identifier of the
+      parent category in which this tag will be created.'
+    type: Text
+  name:
+    required: true
+    help: ! ' - (String, required) The display name of the tag. The name must be unique
+      within its category.'
+    type: Text
+  description:
+    required: true
+    help: ! ' - (String, optional) A description for the tag.'
+    type: Text
+attributes: {}

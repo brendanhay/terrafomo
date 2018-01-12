@@ -1,0 +1,67 @@
+_name: openstack_identity_user_v3
+arguments:
+  ignore_lockout_failure_attempts:
+    required: false
+    help: (Optional) User will not have a failure lockout placed on their account.
+      Valid values are  @true@  and  @false@ .
+    type: Text
+  domain_id:
+    required: false
+    help: (Optional) The domain this user belongs to.
+    type: Text
+  extra:
+    required: false
+    help: (Optional) Free-form key/value pairs of extra information.
+    type: Text
+  multi_factor_auth_rule:
+    required: false
+    help: (Optional) A multi-factor authentication rule. The structure is documented
+      below. Please see the <https://docs.openstack.org/releasenotes/keystone/ocata.html>
+      for more information on how to use mulit-factor rules.
+    type: Text
+  enabled:
+    required: false
+    help: (Optional) Whether the user is enabled or disabled. Valid values are  @true@  and  @false@
+      .
+    type: Text
+  ignore_change_password_upon_first_use:
+    required: false
+    help: (Optional) User will not have to change their password upon first use. Valid
+      values are  @true@  and  @false@ .
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the user.
+    type: Text
+  password:
+    required: false
+    help: (Optional) The password for the user.
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region in which to obtain the V3 Keystone client. If omitted,
+      the  @region@  argument of the provider is used. Changing this creates a new
+      User.
+    type: Text
+  ignore_password_expiry:
+    required: false
+    help: (Optional) User's password will not expire. Valid values are  @true@  and  @false@
+      .
+    type: Text
+  default_project_id:
+    required: false
+    help: (Optional) The default project this user belongs to.
+    type: Text
+  multi_factor_auth_enabled:
+    required: false
+    help: (Optional) Whether to enable multi-factor authentication. Valid values are  @true@  and  @false@
+      .
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description of the user.
+    type: Text
+attributes:
+  domain_id:
+    help: See Argument Reference above.
+    type: Text

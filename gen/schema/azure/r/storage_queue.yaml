@@ -1,0 +1,16 @@
+_name: azure_storage_queue
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the storage queue. Must be unique within the storage
+      service the queue is located.
+    type: Text
+  storage_service_name:
+    required: true
+    help: (Required) The name of the storage service within which the storage queue
+      should be created.
+    type: Text
+attributes:
+  id:
+    help: The storage queue ID. Coincides with the given  @name@ .
+    type: Text

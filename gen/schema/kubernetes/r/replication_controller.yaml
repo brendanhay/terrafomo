@@ -1,0 +1,12 @@
+_name: kubernetes_replication_controller
+arguments:
+  spec:
+    required: true
+    help: ! '(Required) Spec defines the specification of the desired behavior of
+      the replication controller. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status'
+    type: Text
+  metadata:
+    required: true
+    help: ! '(Required) Standard replication controller''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
+    type: Text
+attributes: {}

@@ -1,0 +1,34 @@
+_name: tls_private_key
+arguments:
+  rsa_bits:
+    required: false
+    help: (Optional) When  @algorithm@  is "RSA", the size of the generated RSA key
+      in bits. Defaults to 2048.
+    type: Text
+  algorithm:
+    required: true
+    help: (Required) The name of the algorithm to use for the key. Currently-supported
+      values are "RSA" and "ECDSA".
+    type: Text
+  ecdsa_curve:
+    required: false
+    help: (Optional) When  @algorithm@  is "ECDSA", the name of the elliptic curve
+      to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
+      default.
+    type: Text
+attributes:
+  algorithm:
+    help: The algorithm that was selected for the key.
+    type: Text
+  private_key_pem:
+    help: The private key data in PEM format.
+    type: Text
+  public_key_openssh:
+    help: The public key data in OpenSSH  @authorized_keys@ format, if the selected
+      private key format is compatible. All RSA keys are supported, and ECDSA keys
+      with curves "P256", "P384" and "P251" are supported. This attribute is empty
+      if an incompatible ECDSA curve is selected.
+    type: Text
+  public_key_pem:
+    help: The public key data in PEM format.
+    type: Text

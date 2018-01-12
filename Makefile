@@ -1,6 +1,77 @@
 VENDOR_DIR := vendor
-PROVIDERS  := aws digitalocean google
 BIN        := ./bin/terraform-gen
+
+# Not working:
+# azurerm      \
+# clc          \
+# dme          \
+# opc          \
+# profitbricks \
+
+
+PROVIDERS  := \
+ alicloud     \
+ archive      \
+ arukas       \
+ aws          \
+ azure        \
+ bitbucket    \
+ chef         \
+ circonus     \
+ cloudflare   \
+ cloudstack   \
+ cobbler      \
+ consul       \
+ datadog      \
+ digitalocean \
+ dns          \
+ dnsimple     \
+ docker       \
+ dyn          \
+ external     \
+ fastly       \
+ github       \
+ gitlab       \
+ google       \
+ grafana      \
+ heroku       \
+ http         \
+ icinga2      \
+ ignition     \
+ influxdb     \
+ kubernetes   \
+ librato      \
+ local        \
+ logentries   \
+ logicmonitor \
+ mailgun      \
+ mysql        \
+ newrelic     \
+ nomad        \
+ ns1          \
+ oneandone    \
+ openstack    \
+ opsgenie     \
+ ovh          \
+ packet       \
+ pagerduty    \
+ postgresql   \
+ powerdns     \
+ rabbitmq     \
+ rancher      \
+ random       \
+ rundeck      \
+ scaleway     \
+ softlayer    \
+ spotinst     \
+ statuscake   \
+ template     \
+ tls          \
+ triton       \
+ ultradns     \
+ vault        \
+ vcd          \
+ vsphere
 
 default: $(PROVIDERS)
 

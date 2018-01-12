@@ -1,0 +1,27 @@
+_name: mysql_grant
+arguments:
+  privileges:
+    required: true
+    help: (Required) A list of privileges to grant to the user. Refer to a list of
+      privileges (such as <https://dev.mysql.com/doc/refman/5.5/en/grant.html> ) for
+      applicable privileges.
+    type: Text
+  database:
+    required: true
+    help: (Required) The database to grant privileges on. At this time, privileges
+      are given to all tables on the database ( @mydb.*@ ).
+    type: Text
+  grant:
+    required: false
+    help: (Optional) Whether to also give the user privileges to grant the same privileges
+      to other users.
+    type: Text
+  user:
+    required: true
+    help: (Required) The name of the user.
+    type: Text
+  host:
+    required: false
+    help: (Optional) The source host of the user. Defaults to "localhost".
+    type: Text
+attributes: {}

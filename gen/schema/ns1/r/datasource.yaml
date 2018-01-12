@@ -1,0 +1,15 @@
+_name: ns1_datasource
+arguments:
+  config:
+    required: false
+    help: (Optional) The data source configuration, determined by its type.
+    type: Text
+  sourcetype:
+    required: true
+    help: (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes.
+    type: Text
+  name:
+    required: true
+    help: (Required) The free form name of the data source.
+    type: Text
+attributes: {}

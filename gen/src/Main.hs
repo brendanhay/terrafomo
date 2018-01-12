@@ -4,7 +4,7 @@
 
 module Main (main) where
 
-import Control.Applicative (some)
+import Control.Applicative (many)
 import Control.Monad       (when)
 
 import Data.Bifunctor   (bimap)
@@ -39,6 +39,10 @@ import qualified Text.EDE               as EDE
 --     - convert to DSL/Haskell and have as examples too
 
 -- Options Parsing
+
+-- FIXME: Shouldn't have to configure providers here.
+-- add configuration containing the clc -> CenturyLinkCloud mapping, and the
+-- library name, namespace, etc.
 
 data Options = Options
     { optionsProvider     :: !Provider
@@ -95,7 +99,7 @@ optionsParser = Options
         <> Option.metavar "DIR"
          )
 
-    <*> some (Option.strArgument
+    <*> many (Option.strArgument
          ( Option.help "Input markdown file to parse schema information from."
         <> Option.metavar "FILE"
          ))

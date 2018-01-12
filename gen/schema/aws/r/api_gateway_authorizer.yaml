@@ -1,0 +1,44 @@
+_name: aws_api_gateway_authorizer
+arguments:
+  identity_source:
+    required: false
+    help: (Optional) The source of the identity in an incoming request. Defaults to  @method.request.header.Authorization@
+      .
+    type: Text
+  type_:
+    required: false
+    help: (Optional) The type of the authorizer.  @TOKEN@  is currently the only allowed
+      value. Defaults to  @TOKEN@ .
+    type: Text
+  identity_validation_expression:
+    required: false
+    help: (Optional) A validation expression for the incoming identity. For  @TOKEN@  type,
+      this value should be a regular expression. The incoming token from the client
+      is matched against this expression, and will proceed if the token matches. If
+      the token doesn't match, the client receives a 401 Unauthorized response.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the authorizer
+    type: Text
+  rest_api_id:
+    required: true
+    help: (Required) The ID of the associated REST API
+    type: Text
+  authorizer_result_ttl_in_seconds:
+    required: false
+    help: (Optional) The TTL of cached authorizer results in seconds. Defaults to  @300@
+      .
+    type: Text
+  authorizer_uri:
+    required: true
+    help: (Required) The authorizer's Uniform Resource Identifier (URI). For  @TOKEN@  type,
+      this must be a well-formed Lambda function URI in the form of @arn:aws:apigateway:{region}:lambda:path/{service_api}@
+      . e.g.  @arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations@
+    type: Text
+  authorizer_credentials:
+    required: false
+    help: (Optional) The credentials required for the authorizer. To specify an IAM
+      Role for API Gateway to assume, use the IAM Role ARN.
+    type: Text
+attributes: {}

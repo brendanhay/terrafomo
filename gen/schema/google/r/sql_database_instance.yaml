@@ -1,0 +1,27 @@
+_name: google_sql_database_instance
+arguments:
+  settings:
+    required: true
+    help: (Required) The settings to use for the database. The configuration is detailed
+      below.
+    type: Text
+  region:
+    required: true
+    help: (Required) The region the instance will sit in. Note, first-generation Cloud
+      SQL instance regions do not line up with the Google Compute Engine (GCE) regions,
+      and Cloud SQL is not available in all regions - choose from one of the options
+      listed  <https://cloud.google.com/sql/docs/mysql/instance-locations> .
+    type: Text
+attributes:
+  ip_address.0.ip_address:
+    help: The IPv4 address assigned.
+    type: Text
+  self_link:
+    help: The URI of the created resource.
+    type: Text
+  settings.version:
+    help: Used to make sure changes to the  @settings@  block are atomic.
+    type: Text
+  ip_address.0.time_to_retire:
+    help: The time this IP address will be retired, in RFC 3339 format.
+    type: Text

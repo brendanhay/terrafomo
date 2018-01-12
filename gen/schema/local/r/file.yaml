@@ -1,0 +1,11 @@
+_name: local_file
+arguments:
+  content:
+    required: true
+    help: (Required) The content of file to create.
+    type: Text
+  filename:
+    required: true
+    help: (Required) The path of the file to create.
+    type: Text
+attributes: {}

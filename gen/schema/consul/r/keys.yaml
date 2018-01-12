@@ -1,0 +1,21 @@
+_name: consul_keys
+arguments:
+  token:
+    required: false
+    help: (Optional) The ACL token to use. This overrides the token that the agent
+      provides by default.
+    type: Text
+  datacenter:
+    required: false
+    help: (Optional) The datacenter to use. This overrides the datacenter in the provider
+      setup and the agent's default datacenter.
+    type: Text
+  key:
+    required: true
+    help: (Required) Specifies a key in Consul to be written. Supported values documented
+      below.
+    type: Text
+attributes:
+  datacenter:
+    help: The datacenter the keys are being written to.
+    type: Text

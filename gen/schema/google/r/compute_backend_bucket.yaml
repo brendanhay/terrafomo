@@ -1,0 +1,15 @@
+_name: google_compute_backend_bucket
+arguments:
+  bucket_name:
+    required: true
+    help: (Required) The name of the Google Cloud Storage bucket to be used as a backend
+      bucket.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the backend bucket.
+    type: Text
+attributes:
+  self_link:
+    help: The URI of the created resource.
+    type: Text

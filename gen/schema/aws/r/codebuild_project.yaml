@@ -1,0 +1,63 @@
+_name: aws_codebuild_project
+arguments:
+  encryption_key:
+    required: false
+    help: (Optional) The AWS Key Management Service (AWS KMS) customer master key
+      (CMK) to be used for encrypting the build project's build output artifacts.
+    type: Text
+  build_timeout:
+    required: false
+    help: (Optional) How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild
+      to wait until timing out any related build that does not get marked as completed.
+      The default is 60 minutes.
+    type: Text
+  artifacts:
+    required: true
+    help: (Required) Information about the project's build output artifacts. Artifact
+      blocks are documented below.
+    type: Text
+  environment:
+    required: true
+    help: (Required) Information about the project's build environment. Environment
+      blocks are documented below.
+    type: Text
+  service_role:
+    required: false
+    help: (Optional) The Amazon Resource Name (ARN) of the AWS Identity and Access
+      Management (IAM) role that enables AWS CodeBuild to interact with dependent
+      AWS services on behalf of the AWS account.
+    type: Text
+  name:
+    required: true
+    help: (Required) The projects name.
+    type: Text
+  source:
+    required: true
+    help: (Required) Information about the project's input source code. Source blocks
+      are documented below.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A short description of the project.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  encryption_key:
+    help: The AWS Key Management Service (AWS KMS) customer master key (CMK) that
+      was used for encrypting the build project's build output artifacts.
+    type: Text
+  service_role:
+    help: The ARN of the IAM service role.
+    type: Text
+  name:
+    help: The projects name.
+    type: Text
+  id:
+    help: The ARN of the CodeBuild project.
+    type: Text
+  description:
+    help: A short description of the project.
+    type: Text

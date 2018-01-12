@@ -1,0 +1,22 @@
+_name: cloudstack_secondary_ipaddress
+arguments:
+  ip_address:
+    required: false
+    help: ! "(Optional) The IP address to bind the to NIC. If not supplied an IP address
+      will be selected randomly. Changing this forces a new resource to be\tcreated."
+    type: Text
+  nic_id:
+    required: false
+    help: (Optional) The NIC ID to which you want to attach the secondary IP address.
+      Changing this forces a new resource to be created (defaults to the ID of the
+      primary NIC)
+    type: Text
+  virtual_machine_id:
+    required: true
+    help: (Required) The ID of the virtual machine to which you want to attach the
+      secondary IP address. Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  id:
+    help: The secondary IP address ID.
+    type: Text

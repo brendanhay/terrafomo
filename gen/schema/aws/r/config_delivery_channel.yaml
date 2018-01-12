@@ -1,0 +1,29 @@
+_name: aws_config_delivery_channel
+arguments:
+  s3_bucket_name:
+    required: true
+    help: (Required) The name of the S3 bucket used to store the configuration history.
+    type: Text
+  snapshot_delivery_properties:
+    required: false
+    help: (Optional) Options for how AWS Config delivers configuration snapshots.
+      See below
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the delivery channel. Defaults to  @default@ . Changing
+      it recreates the resource.
+    type: Text
+  s3_key_prefix:
+    required: false
+    help: (Optional) The prefix for the specified S3 bucket.
+    type: Text
+  sns_topic_arn:
+    required: false
+    help: (Optional) The ARN of the SNS topic that AWS Config delivers notifications
+      to.
+    type: Text
+attributes:
+  id:
+    help: The name of the delivery channel.
+    type: Text

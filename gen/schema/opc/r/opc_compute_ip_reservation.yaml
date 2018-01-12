@@ -1,0 +1,23 @@
+_name: opc_compute_ip_reservation
+arguments:
+  parent_pool:
+    required: false
+    help: (Optional) The pool from which to allocate the IP address. Defaults to  @/oracle/public/ippool@
+      , and is currently the only acceptable input.
+    type: Text
+  permanent:
+    required: true
+    help: (Required) Whether the IP address remains reserved even when it is no longer
+      associated with an instance (if true), or may be returned to the pool and replaced
+      with a different IP address when an instance is restarted, or deleted and recreated
+      (if false).
+    type: Text
+  name:
+    required: false
+    help: (Optional) Name of the IP Reservation. Will be generated if unspecified.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) List of tags that may be applied to the IP reservation.
+    type: Text
+attributes: {}

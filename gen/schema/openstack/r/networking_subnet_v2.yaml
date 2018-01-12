@@ -1,0 +1,105 @@
+_name: openstack_networking_subnet_v2
+arguments:
+  dns_nameservers:
+    required: false
+    help: (Optional) An array of DNS name server names used by hosts in this subnet.
+      Changing this updates the DNS name servers for the existing subnet.
+    type: Text
+  host_routes:
+    required: false
+    help: (Optional) An array of routes that should be used by devices with IPs from
+      this subnet (not including local subnet route). The host_route object structure
+      is documented below. Changing this updates the host routes for the existing
+      subnet.
+    type: Text
+  tenant_id:
+    required: false
+    help: (Optional) The owner of the subnet. Required if admin wants to create a
+      subnet for another tenant. Changing this creates a new subnet.
+    type: Text
+  gateway_ip:
+    required: false
+    help: (Optional)  Default gateway used by devices in this subnet. Leaving this
+      blank and not setting  @no_gateway@  will cause a default gateway of  @.1@  to
+      be used. Changing this updates the gateway IP of the existing subnet.
+    type: Text
+  enable_dhcp:
+    required: false
+    help: (Optional) The administrative state of the network. Acceptable values are
+      "true" and "false". Changing this value enables or disables the DHCP capabilities
+      of the existing subnet. Defaults to true.
+    type: Text
+  ip_version:
+    required: false
+    help: (Optional) IP version, either 4 (default) or 6. Changing this creates a
+      new subnet.
+    type: Text
+  network_id:
+    required: true
+    help: (Required) The UUID of the parent network. Changing this creates a new subnet.
+    type: Text
+  cidr:
+    required: true
+    help: (Required) CIDR representing IP range for this subnet, based on IP version.
+      Changing this creates a new subnet.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the subnet. Changing this updates the name of the
+      existing subnet.
+    type: Text
+  value_specs:
+    required: false
+    help: (Optional) Map of additional options.
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 Networking client. A Networking
+      client is needed to create a Neutron subnet. If omitted, the @region@  argument
+      of the provider is used. Changing this creates a new subnet.
+    type: Text
+  allocation_pools:
+    required: false
+    help: (Optional) An array of sub-ranges of CIDR available for dynamic allocation
+      to ports. The allocation_pool object structure is documented below. Changing
+      this creates a new subnet.
+    type: Text
+  no_gateway:
+    required: false
+    help: (Optional) Do not set a gateway IP on this subnet. Changing this removes
+      or adds a default gateway IP of the existing subnet.
+    type: Text
+attributes:
+  dns_nameservers:
+    help: See Argument Reference above.
+    type: Text
+  host_routes:
+    help: See Argument Reference above.
+    type: Text
+  tenant_id:
+    help: See Argument Reference above.
+    type: Text
+  gateway_ip:
+    help: See Argument Reference above.
+    type: Text
+  enable_dhcp:
+    help: See Argument Reference above.
+    type: Text
+  ip_version:
+    help: See Argument Reference above.
+    type: Text
+  network_id:
+    help: See Argument Reference above.
+    type: Text
+  cidr:
+    help: See Argument Reference above.
+    type: Text
+  name:
+    help: See Argument Reference above.
+    type: Text
+  region:
+    help: See Argument Reference above.
+    type: Text
+  allocation_pools:
+    help: See Argument Reference above.
+    type: Text

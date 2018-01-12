@@ -1,0 +1,27 @@
+_name: spotinst_subscription
+arguments:
+  format:
+    required: false
+    help: (Optional) The structure of the payload.
+    type: Text
+  event_type:
+    required: true
+    help: (Required) The events to subscribe to
+    type: Text
+  protocol:
+    required: true
+    help: ! '(Required) The protocol to use to connect with the instance. Valid values:
+      http, https'
+    type: Text
+  resource_id:
+    required: true
+    help: (Required) The resource to subscribe to
+    type: Text
+  endpoint:
+    required: true
+    help: (Required) The destination for the request
+    type: Text
+attributes:
+  id:
+    help: The subscription ID.
+    type: Text

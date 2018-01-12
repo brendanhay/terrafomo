@@ -1,0 +1,89 @@
+_name: ovh_publiccloud_private_network_subnet
+arguments:
+  dhcp:
+    required: false
+    help: (Optional) Enable DHCP. Changing this forces a new resource to be created.
+      Defaults to false. _
+    type: Text
+  start:
+    required: true
+    help: (Required) First ip for this region. Changing this value recreates the subnet.
+    type: Text
+  network:
+    required: true
+    help: (Required) Global network in CIDR format. Changing this value recreates
+      the subnet
+    type: Text
+  network_id:
+    required: true
+    help: (Required) The id of the network. Changing this forces a new resource to
+      be created.
+    type: Text
+  end:
+    required: true
+    help: (Required) Last ip for this region. Changing this value recreates the subnet.
+    type: Text
+  project_id:
+    required: true
+    help: (Required) The id of the public cloud project. If omitted, the  @OVH_PROJECT_ID@  environment
+      variable is used. Changing this forces a new resource to be created.
+    type: Text
+  region:
+    required: true
+    help: ! ' - The region in which the network subnet will be created. Ex.: "GRA1".
+      Changing this value recreates the resource.'
+    type: Text
+  no_gateway:
+    required: true
+    help: ! ' - Set to true if you don''t want to set a default gateway IP. Changing
+      this value recreates the resource. Defaults to false.'
+    type: Text
+attributes:
+  start:
+    help: See Argument Reference above.
+    type: Text
+  network:
+    help: See Argument Reference above.
+    type: Text
+  ip_pools/region:
+    help: Region where this subnet is created.
+    type: Text
+  gateway_ip:
+    help: The IP of the gateway
+    type: Text
+  ip_pools/dhcp:
+    help: DHCP enabled.
+    type: Text
+  ip_pools:
+    help: List of ip pools allocated in the subnet.
+    type: Text
+  network_id:
+    help: See Argument Reference above.
+    type: Text
+  cidr:
+    help: Ip Block representing the subnet cidr.
+    type: Text
+  end:
+    help: See Argument Reference above.
+    type: Text
+  project_id:
+    help: See Argument Reference above.
+    type: Text
+  dhcp_id:
+    help: See Argument Reference above.
+    type: Text
+  ip_pools/network:
+    help: Global network with cidr.
+    type: Text
+  region:
+    help: See Argument Reference above.
+    type: Text
+  no_gateway:
+    help: See Argument Reference above.
+    type: Text
+  ip_pools/start:
+    help: First ip for this region.
+    type: Text
+  ip_pools/end:
+    help: Last ip for this region.
+    type: Text

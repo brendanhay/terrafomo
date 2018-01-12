@@ -1,0 +1,23 @@
+_name: oneandone_server
+arguments:
+  size:
+    required: true
+    help: (Required) Size of the shared storage
+    type: Text
+  datacenter:
+    required: false
+    help: (Optional) Location of desired 1and1 datacenter. Can be  @DE@ ,  @GB@ ,  @US@  or  @ES@
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the storage
+    type: Text
+  storage_servers:
+    required: true
+    help: ! '  (Optional) List of servers that will have access to the stored storage'
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description for the shared storage
+    type: Text
+attributes: {}

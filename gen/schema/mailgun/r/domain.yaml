@@ -1,0 +1,42 @@
+_name: mailgun_domain
+arguments:
+  name:
+    required: true
+    help: (Required) The domain to add to Mailgun
+    type: Text
+  wildcard:
+    required: false
+    help: (Optional) Boolean that determines whether the domain will accept email
+      for sub-domains.
+    type: Text
+  smtp_password:
+    required: true
+    help: (Required) Password for SMTP authentication
+    type: Text
+  spam_action:
+    required: false
+    help: (Optional)  @disabled@  or  @tag@  Disable, no spam filtering will occur
+      for inbound messages. Tag, messages will be tagged with a spam header.
+    type: Text
+attributes:
+  receiving_records:
+    help: A list of DNS records for receiving validation.
+    type: Text
+  sending_records:
+    help: A list of DNS records for sending validation.
+    type: Text
+  name:
+    help: The name of the domain.
+    type: Text
+  wildcard:
+    help: Whether or not the domain will accept email for sub-domains.
+    type: Text
+  smtp_password:
+    help: The password to the SMTP server.
+    type: Text
+  smtp_login:
+    help: The login email for the SMTP server.
+    type: Text
+  spam_action:
+    help: The spam filtering setting.
+    type: Text

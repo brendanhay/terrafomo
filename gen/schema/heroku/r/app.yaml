@@ -1,0 +1,67 @@
+_name: heroku_app
+arguments:
+  space:
+    required: false
+    help: (Optional) The name of a private space to create the app in.
+    type: Text
+  buildpacks:
+    required: false
+    help: (Optional) Buildpack names or URLs for the application. Buildpacks configured
+      externally won't be altered if this is not present.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the application. In Heroku, this is also the unique
+      ID, so it must be unique and have a minimum of 3 characters.
+    type: Text
+  region:
+    required: true
+    help: (Required) The region that the app should be deployed in.
+    type: Text
+  config_vars:
+    required: false
+    help: (Optional) Configuration variables for the application. The config variables
+      in this map are not the final set of configuration variables, but rather variables
+      you want present. That is, other configuration variables set externally won't
+      be removed by Terraform if they aren't present in this list.
+    type: Text
+  organization:
+    required: false
+    help: (Optional) A block that can be specified once to define organization settings
+      for this app. The fields for this block are documented below.
+    type: Text
+  stack:
+    required: false
+    help: (Optional) The application stack is what platform to run the application
+      in.
+    type: Text
+attributes:
+  space:
+    help: The private space the app should run in.
+    type: Text
+  git_url:
+    help: The Git URL for the application. This is used for deploying new versions
+      of the app.
+    type: Text
+  heroku_hostname:
+    help: A hostname for the Heroku application, suitable for pointing DNS records.
+    type: Text
+  web_url:
+    help: The web (HTTP) URL that the application can be accessed at by default.
+    type: Text
+  name:
+    help: The name of the application. In Heroku, this is also the unique ID.
+    type: Text
+  all_config_vars:
+    help: A map of all of the configuration variables that exist for the app, containing
+      both those set by Terraform and those set externally.
+    type: Text
+  id:
+    help: The ID of the app. This is also the name of the application.
+    type: Text
+  region:
+    help: The region that the app should be deployed in.
+    type: Text
+  stack:
+    help: The application stack is what platform to run the application in.
+    type: Text

@@ -1,0 +1,56 @@
+_name: aws_elasticsearch_domain
+arguments:
+  vpc_options:
+    required: false
+    help: (Optional) VPC related options, see below.
+    type: Text
+  domain_name:
+    required: true
+    help: (Required) Name of the domain.
+    type: Text
+  ebs_options:
+    required: false
+    help: (Optional) EBS related options, may be required based on chosen  <https://aws.amazon.com/elasticsearch-service/pricing/>
+      . See below.
+    type: Text
+  advanced_options:
+    required: false
+    help: (Optional) Key-value string pairs to specify advanced configuration options.
+    type: Text
+  cluster_config:
+    required: false
+    help: (Optional) Cluster configuration of the domain, see below.
+    type: Text
+  access_policies:
+    required: false
+    help: (Optional) IAM policy document specifying the access policies for the domain
+    type: Text
+  snapshot_options:
+    required: false
+    help: (Optional) Snapshot related options, see below.
+    type: Text
+  elasticsearch_version:
+    required: false
+    help: (Optional) The version of ElasticSearch to deploy. Defaults to  @1.5@
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource
+    type: Text
+attributes:
+  domain_id:
+    help: Unique identifier for the domain.
+    type: Text
+  arn:
+    help: Amazon Resource Name (ARN) of the domain.
+    type: Text
+  vpc_options.0.vpc_id:
+    help: If the domain was created inside a VPC, the ID of the VPC.
+    type: Text
+  vpc_options.0.availability_zones:
+    help: If the domain was created inside a VPC, the names of the availability zones
+      the configured  @subnet_ids@  were created inside.
+    type: Text
+  endpoint:
+    help: Domain-specific endpoint used to submit index, search, and data upload requests.
+    type: Text

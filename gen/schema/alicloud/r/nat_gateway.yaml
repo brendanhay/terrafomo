@@ -1,0 +1,55 @@
+_name: alicloud_nat_gateway
+arguments:
+  vpc_id:
+    required: true
+    help: (Required, Forces New Resorce) The VPC ID.
+    type: Text
+  name:
+    required: false
+    help: (Optional) Name of the nat gateway. The value can have a string of 2 to
+      128 characters, must contain only alphanumeric characters or hyphens, such as
+      "-",".","_", and must not begin or end with a hyphen, and must not begin with
+      http:// or https://. Defaults to null.
+    type: Text
+  spec:
+    required: true
+    help: (Required, Forces New Resorce) The specification of the nat gateway. Valid
+      values are  @Small@ ,  @Middle@  and  @Large@ . Details refer to  <https://help.aliyun.com/document_detail/42757.html?spm=5176.doc32322.6.559.kFNBzv>
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description of the nat gateway, This description can have a string
+      of 2 to 256 characters, It cannot begin with http:// or https://. Defaults to
+      null.
+    type: Text
+  bandwidth_packages:
+    required: true
+    help: (Required) A list of bandwidth packages for the nat gatway.
+    type: Text
+attributes:
+  vpc_id:
+    help: The VPC ID for the nat gateway.
+    type: Text
+  snat_table_ids:
+    help: The nat gateway will auto create a snap and forward item, the  @snat_table_ids@  is
+      the created one.
+    type: Text
+  name:
+    help: The name of the nat gateway.
+    type: Text
+  spec:
+    help: The specification of the nat gateway.
+    type: Text
+  id:
+    help: The ID of the nat gateway.
+    type: Text
+  forward_table_ids:
+    help: The nat gateway will auto create a snap and forward item, the  @forward_table_ids@  is
+      the created one.
+    type: Text
+  bandwidth_package_ids:
+    help: A list ID of the bandwidth packages, and split them with commas
+    type: Text
+  description:
+    help: The description of the nat gateway.
+    type: Text

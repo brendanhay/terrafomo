@@ -1,0 +1,23 @@
+_name: opc_compute_image_list_entry
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the Image List.
+    type: Text
+  attributes:
+    required: false
+    help: (Optional) JSON String of optional data that will be passed to an instance
+      of this machine image when it is launched.
+    type: Text
+  version:
+    required: true
+    help: (Required) The unique version of the image list entry, as an integer.
+    type: Text
+  machine_images:
+    required: true
+    help: (Required) An array of machine images.
+    type: Text
+attributes:
+  uri:
+    help: The Unique Resource Identifier for the Image List Entry.
+    type: Text

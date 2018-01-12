@@ -1,0 +1,71 @@
+_name: alicloud_ess_scaling_group
+arguments:
+  scaling_group_name:
+    required: false
+    help: (Optional) Name shown for the scaling group, which must contain 2-40 characters
+      (English or Chinese). If this parameter is not specified, the default value
+      is ScalingGroupId.
+    type: Text
+  min_size:
+    required: true
+    help: ! '(Required) Minimum number of ECS instances in the scaling group. Value
+      range: [0, 100].'
+    type: Text
+  loadbalancer_ids:
+    required: false
+    help: (Optional) If a Server Load Balancer instance is specified in the scaling
+      group, the scaling group automatically attaches its ECS instances to the Server
+      Load Balancer instance.
+    type: Text
+  max_size:
+    required: true
+    help: ! '(Required) Maximum number of ECS instances in the scaling group. Value
+      range: [0, 100].'
+    type: Text
+  removal_policies:
+    required: false
+    help: ! '(Optional) RemovalPolicy is used to select the ECS instances you want
+      to remove from the scaling group when multiple candidates for removal exist.
+      Optional values:'
+    type: Text
+  vswitch_id:
+    required: false
+    help: (Optional) The virtual switch ID which the ecs instance to be create in.
+    type: Text
+  db_instance_ids:
+    required: false
+    help: (Optional) If an RDS instance is specified in the scaling group, the scaling
+      group automatically attaches the Intranet IP addresses of its ECS instances
+      to the RDS access whitelist.
+    type: Text
+  default_cooldown:
+    required: false
+    help: ! '(Optional) Default cool-down time (in seconds) of the scaling group.
+      Value range: [0, 86400]. The default value is 300s.'
+    type: Text
+attributes:
+  scaling_group_name:
+    help: The name of the scaling group.
+    type: Text
+  min_size:
+    help: The minimum number of ECS instances.
+    type: Text
+  loadbalancer_ids:
+    help: The slb instance id which the ECS instance attached to.
+    type: Text
+  max_size:
+    help: The maximum number of ECS instances.
+    type: Text
+  removal_policies:
+    help: The removal policy used to select the ECS instance to remove from the scaling
+      group.
+    type: Text
+  id:
+    help: The scaling group ID.
+    type: Text
+  db_instance_ids:
+    help: The db instance id which the ECS instance attached to.
+    type: Text
+  default_cooldown:
+    help: The default cool-down of the scaling group.
+    type: Text

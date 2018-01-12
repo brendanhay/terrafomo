@@ -1,0 +1,37 @@
+_name: openstack_compute_secgroup_v2
+arguments:
+  rule:
+    required: false
+    help: (Optional) A rule describing how the security group operates. The rule object
+      structure is documented below. Changing this updates the security group rules.
+      As shown in the example above, multiple rule blocks may be used.
+    type: Text
+  name:
+    required: true
+    help: (Required) A unique name for the security group. Changing this updates the  @name@  of
+      an existing security group.
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 Compute client. A Compute
+      client is needed to create a security group. If omitted, the @region@  argument
+      of the provider is used. Changing this creates a new security group.
+    type: Text
+  description:
+    required: true
+    help: (Required) A description for the security group. Changing this updates the  @description@  of
+      an existing security group.
+    type: Text
+attributes:
+  rule:
+    help: See Argument Reference above.
+    type: Text
+  name:
+    help: See Argument Reference above.
+    type: Text
+  region:
+    help: See Argument Reference above.
+    type: Text
+  description:
+    help: See Argument Reference above.
+    type: Text

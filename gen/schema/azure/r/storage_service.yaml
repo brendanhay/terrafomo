@@ -1,0 +1,43 @@
+_name: azure_storage_service
+arguments:
+  affinity_group:
+    required: false
+    help: (Optional) The affinity group the storage service should belong to.
+    type: Text
+  location:
+    required: true
+    help: (Required) The location where the storage service should be created. For
+      a list of all Azure locations, please consult  <https://azure.microsoft.com/en-us/regions/>
+      .
+    type: Text
+  account_type:
+    required: true
+    help: (Required) The type of storage account to be created. Available options
+      include  @Standard_LRS@ ,  @Standard_ZRS@ ,  @Standard_GRS@ , @Standard_RAGRS@  and  @Premium_LRS@
+      . To learn more about the differences of each storage account type, please consult  <http://blogs.msdn.com/b/windowsazurestorage/archive/2013/12/11/introducing-read-access-geo-replicated-storage-ra-grs-for-windows-azure-storage.aspx>
+      .
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the storage service. Must be between 4 and 24 lowercase-only
+      characters or digits. Must be unique on Azure.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description for the storage service.
+    type: Text
+  label:
+    required: false
+    help: (Optional) A label to be used for tracking purposes. Must be non-void. Defaults
+      to  @Made by Terraform.@ .
+    type: Text
+  properties:
+    required: false
+    help: (Optional) Key-value definition of additional properties associated to the
+      storage service. For additional information on what these properties do, please
+      consult  <https://msdn.microsoft.com/en-us/library/azure/hh452235.aspx> .
+    type: Text
+attributes:
+  id:
+    help: The storage service ID. Coincides with the given  @name@ .
+    type: Text

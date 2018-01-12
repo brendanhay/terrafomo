@@ -1,0 +1,16 @@
+_name: triton_vlan
+arguments:
+  name:
+    required: true
+    help: ! ' - (string, Required) Unique name to identify VLAN'
+    type: Text
+  vlan_id:
+    required: true
+    help: ! ' - (int, Required, Change forces new resource) Number between 0-4095
+      indicating VLAN ID'
+    type: Text
+  description:
+    required: true
+    help: ! ' - (string, Optional) Description of the VLAN'
+    type: Text
+attributes: {}

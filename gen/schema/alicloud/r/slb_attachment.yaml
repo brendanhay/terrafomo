@@ -1,0 +1,15 @@
+_name: alicloud_slb_attachment
+arguments:
+  slb_id:
+    required: true
+    help: (Required) The ID of the SLB..
+    type: Text
+  instances:
+    required: true
+    help: (Required) A list of instance ids to added backend server in the SLB. If
+      dettachment instances then this value set [].
+    type: Text
+attributes:
+  backend_servers:
+    help: The backend servers of the load balancer.
+    type: Text

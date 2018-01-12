@@ -1,0 +1,87 @@
+_name: vsphere_nas_datastore
+arguments:
+  type_:
+    required: true
+    help: ! ' - (String, optional, forces new resource) The type of NAS volume. Can
+      be one of  @NFS@  (to denote v3) or  @NFS41@  (to denote NFS v4.1). Default:
+      @NFS@ .'
+    type: Text
+  remote_hosts:
+    required: true
+    help: ! ' - (List of strings, required, forces new resource) The hostnames or
+      IP addresses of the remote server or servers. Only one element should be present
+      for NFS v3 but multiple can be present for NFS v4.1.'
+    type: Text
+  folder:
+    required: true
+    help: ! ' - (String, optional) The relative path to a folder to put this datastore
+      in. This is a path relative to the datacenter you are deploying the datastore
+      to. Example: for the  @dc1@  datacenter, and a provided  @folder@  of @foo/bar@
+      , Terraform will place a datastore named  @terraform-test@  in a datastore folder
+      located at  @/dc1/datastore/foo/bar@ , with the final inventory path being  @/dc1/datastore/foo/bar/terraform-test@
+      .'
+    type: Text
+  remote_path:
+    required: true
+    help: ! ' - (String, required, forces new resource) The remote path of the mount
+      point.'
+    type: Text
+  security_type:
+    required: true
+    help: ! ' - (String, optional, forces new resource) The security type to use when
+      using NFS v4.1. Can be one of  @AUTH_SYS@ ,  @SEC_KRB5@ , or @SEC_KRB5I@ .'
+    type: Text
+  name:
+    required: true
+    help: ! ' - (String, required, forces new resource) The name of the datastore.'
+    type: Text
+  access_mode:
+    required: true
+    help: ! ' - (String, optional, forces new resource) Access mode for the mount
+      point. Can be one of  @readOnly@  or  @readWrite@ . Note that  @readWrite@ does
+      not necessarily mean that the datastore will be read-write depending on the
+      permissions of the actual share. Default:  @readWrite@ .'
+    type: Text
+  host_system_ids:
+    required: true
+    help: ! ' - (List of strings, required) The managed object IDs of the hosts to
+      mount the datastore on.'
+    type: Text
+  tags:
+    required: true
+    help: ! ' - (List of strings, optional) The IDs of any tags to attach to this
+      resource. See  </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource>  for
+      a reference on how to apply tags.'
+    type: Text
+attributes:
+  multiple_host_access:
+    help: If  @true@ , more than one host in the datacenter has been configured with
+      access to the datastore.
+    type: Text
+  uncommitted_space:
+    help: Total additional storage space, in megabytes, potentially used by all virtual
+      machines on this datastore.
+    type: Text
+  free_space:
+    help: Available space of this datastore, in megabytes.
+    type: Text
+  url:
+    help: The unique locator for the datastore.
+    type: Text
+  maintenance_mode:
+    help: The current maintenance mode state of the datastore.
+    type: Text
+  capacity:
+    help: Maximum capacity of the datastore, in megabytes.
+    type: Text
+  protocol_endpoint:
+    help: Indicates that this NAS volume is a protocol endpoint. This field is only
+      populated if the host supports virtual datastores.
+    type: Text
+  id:
+    help: The managed object reference ID of the datastore.
+    type: Text
+  accessible:
+    help: The connectivity status of the datastore. If this is  @false@ , some other
+      computed attributes may be out of date.
+    type: Text

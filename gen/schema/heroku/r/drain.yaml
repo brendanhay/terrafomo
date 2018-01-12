@@ -1,0 +1,14 @@
+_name: heroku_drain
+arguments:
+  url:
+    required: true
+    help: (Required) The URL for Heroku to drain your logs to.
+    type: Text
+  app:
+    required: true
+    help: (Required) The Heroku app to link to.
+    type: Text
+attributes:
+  token:
+    help: The unique token for your created drain.
+    type: Text

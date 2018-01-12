@@ -1,0 +1,22 @@
+_name: aws_iam_openid_connect_provider
+arguments:
+  url:
+    required: true
+    help: (Required) The URL of the identity provider. Corresponds to the   claim.
+    type: Text
+  thumbprint_list:
+    required: true
+    help: (Required) A list of server certificate thumbprints for the OpenID Connect
+      (OIDC) identity provider's server certificate(s).
+    type: Text
+  client_id_list:
+    required: true
+    help: (Required) A list of client IDs (also known as audiences). When a mobile
+      or web app registers with an OpenID Connect provider, they establish a value
+      that identifies the application. (This is the value that's sent as the client_id
+      parameter on OAuth requests.)
+    type: Text
+attributes:
+  arn:
+    help: The ARN assigned by AWS for this provider.
+    type: Text

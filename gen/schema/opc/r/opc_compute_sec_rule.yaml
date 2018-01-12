@@ -1,0 +1,37 @@
+_name: opc_compute_sec_rule
+arguments:
+  application:
+    required: true
+    help: (Required) The name of the application to which the rule applies.
+    type: Text
+  disabled:
+    required: false
+    help: (Optional) Whether to disable this security rule. This is useful if you
+      want to temporarily disable a rule without removing it outright from your Terraform
+      resource definition. Defaults to  @false@ .
+    type: Text
+  action:
+    required: true
+    help: (Required) Whether to  @permit@ ,  @refuse@  or  @deny@  packets to which
+      this rule applies. This will ordinarily be  @permit@ .
+    type: Text
+  name:
+    required: true
+    help: (Required) The unique (within the identity domain) name of the security
+      rule.
+    type: Text
+  source_list:
+    required: true
+    help: (Required) The source security list (prefixed with  @seclist:@ ), or security
+      IP list (prefixed with @seciplist:@ ).
+    type: Text
+  description:
+    required: false
+    help: (Optional) A description for this security rule.
+    type: Text
+  destination_list:
+    required: true
+    help: (Required) The destination security list (prefixed with  @seclist:@ ), or
+      security IP list (prefixed with @seciplist:@ ).
+    type: Text
+attributes: {}

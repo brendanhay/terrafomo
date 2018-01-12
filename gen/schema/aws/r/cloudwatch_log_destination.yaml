@@ -1,0 +1,20 @@
+_name: aws_cloudwatch_log_destination
+arguments:
+  role_arn:
+    required: true
+    help: (Required) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions
+      to put data into the target
+    type: Text
+  name:
+    required: true
+    help: (Required) A name for the log destination
+    type: Text
+  target_arn:
+    required: true
+    help: (Required) The ARN of the target Amazon Kinesis stream or Amazon Lambda
+      resource for the destination
+    type: Text
+attributes:
+  arn:
+    help: The Amazon Resource Name (ARN) specifying the log destination.
+    type: Text

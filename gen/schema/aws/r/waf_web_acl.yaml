@@ -1,0 +1,25 @@
+_name: aws_waf_web_acl
+arguments:
+  rules:
+    required: true
+    help: (Required) The rules to associate with the web ACL and the settings for
+      each rule.
+    type: Text
+  metric_name:
+    required: true
+    help: (Required) The name or description for the Amazon CloudWatch metric of this
+      web ACL.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name or description of the web ACL.
+    type: Text
+  default_action:
+    required: true
+    help: (Required) The action that you want AWS WAF to take when a request doesn't
+      match the criteria in any of the rules that are associated with the web ACL.
+    type: Text
+attributes:
+  id:
+    help: The ID of the WAF WebACL.
+    type: Text

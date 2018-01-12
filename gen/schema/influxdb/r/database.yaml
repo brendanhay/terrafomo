@@ -1,0 +1,8 @@
+_name: influxdb_database
+arguments:
+  name:
+    required: true
+    help: (Required) The name for the database. This must be unique on the InfluxDB
+      server.
+    type: Text
+attributes: {}
