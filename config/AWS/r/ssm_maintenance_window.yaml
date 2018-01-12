@@ -1,0 +1,30 @@
+_name: aws_ssm_maintenance_window
+schema:
+  arguments:
+    schedule:
+      required: true
+      help: (Required) The schedule of the Maintenance Window in the form of a  <https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-cron.html>  or
+        rate expression.
+      type: Text
+    name:
+      required: true
+      help: (Required) The name of the maintenance window.
+      type: Text
+    cutoff:
+      required: true
+      help: (Required) The number of hours before the end of the Maintenance Window
+        that Systems Manager stops scheduling new tasks for execution.
+      type: Text
+    allow_unassociated_targets:
+      required: false
+      help: (Optional) Whether targets must be registered with the Maintenance Window
+        before tasks can be defined for those targets.
+      type: Text
+    duration:
+      required: true
+      help: (Required) The duration of the Maintenance Window in hours.
+      type: Text
+  attributes:
+    id:
+      help: The ID of the maintenance window.
+      type: Text

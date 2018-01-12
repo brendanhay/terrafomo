@@ -79,16 +79,6 @@ west = defaultProvider
     { region = "eu-west-2"
     }
 
-common :: Tags
-common =
-    [ ("Name",        "foo")
-    , ("Description", "bar")
-    , ("Component",   "baz")
-    , ("Env",         "prod")
-    , ("Squad",       "Operations")
-    , ("Origin",      "http://github.com/brendanhay/terrorform")
-    ]
-
 -- iso :: (Functor f, Profunctor p) => (s -> a) -> (b -> t) -> p a (f b) -> p s (f t)
 -- lens :: Functor f => (s -> a) -> (s -> b -> t) -> (a -> f b) -> s -> f t
 
@@ -119,33 +109,24 @@ common =
 -- resource_ :: IsResource p a a => Name -> a -> Resource p a
 -- resource_ _ = fromSchema
 
+common :: Tags
+common =
+    [ ("Name",        "foo")
+    , ("Description", "bar")
+    , ("Component",   "baz")
+    , ("Env",         "prod")
+    , ("Squad",       "Operations")
+    , ("Origin",      "http://github.com/brendanhay/terrorform")
+    ]
+
 base :: Terraform ()
 base = do
     resource "foo" $
         R.instance_resource
-            & R.ami                         .~ Present "123"
-            & R.associate_public_ip_address .~ Present True
-            & R.tags                        .~ Present common
-            & preventDestroy .~ True
-
-    pure ()
-
-        -- & resource "foo"
-        -- & provider       .~ west
-        -- & preventDestroy .~ True
-
-        -- & provider                           =: west
-        -- & Syn.metadata . Syn.preventDestroy      =: True
-        -- & Syn.metadata . Syn.createBeforeDestroy =: True
-
--- base =
---     R.instance_resource
---         & R.ami                                  =: "123"
---         & R.associate_public_ip_address          =: True
---         & R.tags                                 =: common
---         & provider                           =: west
---         & Syn.metadata . Syn.preventDestroy      =: True
---         & Syn.metadata . Syn.createBeforeDestroy =: True
+            & R.ami                         .~ "123"
+            & R.associate_public_ip_address .~ True
+            & R.tags                        .~ common
+            & preventDestroy                .~ True
 
 -- example :: Terraform ()
 -- example = do
@@ -156,6 +137,7 @@ base = do
 --                 & R.tags              .~ Just common
 --                 & prevent_destroy      .~ True
 --                 & create_before_destroy .~ True
+--                 & R.instance_id .~
 
 --     bucket2 <-
 --         resource "mybucket2" $
@@ -179,13 +161,13 @@ base = do
 --     --         base & dependsOn instance1
 --     --              & provider (defaultProvider { region = "us-central-2" })
 
---     instances <-
---         count [0..3] $ \n ->
---             resource (Format.nformat ("myinstance-" % Format.intp 3) n) $
---                 R.instance_resource
---                     { R.ami  = "abdefg"
---                     , R.tags = Just common
---                     }
+    -- instances <-
+    --     count [0..3] $ \n ->
+    --         resource (Format.nformat ("myinstance-" % Format.intp 3) n) $
+    --             R.instance_resource
+    --                 { R.ami  = "abdefg"
+    --                 , R.tags = Just common
+    --                 }
 
 --     output "ip" mempty
 

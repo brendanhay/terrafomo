@@ -1,0 +1,71 @@
+_name: aws_security_group_rule
+schema:
+  arguments:
+    prefix_list_ids:
+      required: false
+      help: (Optional) List of prefix list IDs (for allowing access to VPC endpoints).
+        Only valid with  @egress@ .
+      type: Text
+    security_group_id:
+      required: true
+      help: (Required) The security group to apply this rule to.
+      type: Text
+    ipv6_cidr_blocks:
+      required: false
+      help: (Optional) List of IPv6 CIDR blocks.
+      type: Text
+    type_:
+      required: true
+      help: (Required) The type of rule being created. Valid options are  @ingress@  (inbound)
+        or  @egress@  (outbound).
+      type: Text
+    source_security_group_id:
+      required: false
+      help: (Optional) The security group id to allow access to/from, depending on
+        the  @type@ . Cannot be specified with  @cidr_blocks@ .
+      type: Text
+    protocol:
+      required: true
+      help: (Required) The protocol. If not icmp, tcp, udp, or all use the  <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>
+      type: Text
+    cidr_blocks:
+      required: false
+      help: (Optional) List of CIDR blocks. Cannot be specified with  @source_security_group_id@
+        .
+      type: Text
+    self:
+      required: false
+      help: (Optional) If true, the security group itself will be added as a source
+        to this ingress rule.
+      type: Text
+    to_port:
+      required: true
+      help: (Required) The end port (or ICMP code if protocol is "icmp").
+      type: Text
+    from_port:
+      required: true
+      help: (Required) The start port (or ICMP type number if protocol is "icmp").
+      type: Text
+    description:
+      required: false
+      help: (Optional) Description of the rule.
+      type: Text
+  attributes:
+    type_:
+      help: The type of rule,  @ingress@  or  @egress@
+      type: Text
+    protocol:
+      help: ! ' – The protocol used'
+      type: Text
+    to_port:
+      help: The end port (or ICMP code if protocol is "icmp")
+      type: Text
+    id:
+      help: The ID of the security group rule
+      type: Text
+    from_port:
+      help: The start port (or ICMP type number if protocol is "icmp")
+      type: Text
+    description:
+      help: ! ' – Description of the rule'
+      type: Text

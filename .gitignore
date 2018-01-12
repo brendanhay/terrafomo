@@ -2,3 +2,4 @@
 .stack-work
 /vendor
 /bin
+*.rej

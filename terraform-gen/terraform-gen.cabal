@@ -27,16 +27,23 @@ executable terraform-gen
 
     ghc-options:      -Wall -Wincomplete-uni-patterns
 
+    other-modules:
+        Terraform.Gen.Config
+        Terraform.Gen.Markdown
+        Terraform.Gen.Parser
+        Terraform.Gen.Template
+
     build-depends:
           aeson
         , base       >= 4.9 && < 5
         , cmark
         , containers
         , directory
+        , ede
         , filepath
         , megaparsec >= 6.2
         , optparse-applicative
         , pretty-show
+        , process
         , text
         , yaml
-        , ede

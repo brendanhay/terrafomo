@@ -1,0 +1,36 @@
+_name: aws_db_event_subscription
+schema:
+  arguments:
+    source_ids:
+      required: false
+      help: (Optional) A list of identifiers of the event sources for which events
+        will be returned. If not specified, then all sources are included in the response.
+        If specified, a source_type must also be specified.
+      type: Text
+    source_type:
+      required: false
+      help: (Optional) The type of source that will be generating the events.
+      type: Text
+    enabled:
+      required: false
+      help: (Optional) A boolean flag to enable/disable the subscription. Defaults
+        to true.
+      type: Text
+    event_categories:
+      required: false
+      help: (Optional) A list of event categories for a SourceType that you want to
+        subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_Events.html
+      type: Text
+    name:
+      required: true
+      help: (Required) The name of the DB event subscription.
+      type: Text
+    sns_topic:
+      required: true
+      help: (Required) The SNS topic to send events to.
+      type: Text
+    tags:
+      required: false
+      help: (Optional) A mapping of tags to assign to the resource.
+      type: Text
+  attributes: {}

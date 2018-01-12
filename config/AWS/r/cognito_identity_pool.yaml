@@ -1,0 +1,41 @@
+_name: aws_cognito_identity_pool
+schema:
+  arguments:
+    saml_provider_arns:
+      required: true
+      help: ! ' (Optional) - An array of Amazon Resource Names (ARNs) of the SAML
+        provider for your identity.'
+      type: Text
+    openid_connect_provider_arns:
+      required: true
+      help: ! ' (Optional) - A list of OpendID Connect provider ARNs.'
+      type: Text
+    developer_provider_name:
+      required: true
+      help: ! ' (Optional) - The "domain" by which Cognito will refer to your users.
+        This name acts as a placeholder that allows your backend and the Cognito service
+        to communicate about the developer provider.'
+      type: Text
+    cognito_identity_providers:
+      required: true
+      help: ! ' (Optional) - An array of  <#cognito-identity-providers>  and their
+        client IDs.'
+      type: Text
+    supported_login_providers:
+      required: true
+      help: ! ' (Optional) - Key-Value pairs mapping provider names to provider app
+        IDs.'
+      type: Text
+    identity_pool_name:
+      required: true
+      help: ! ' (Required) - The Cognito Identity Pool name.'
+      type: Text
+    allow_unauthenticated_identities:
+      required: true
+      help: ! ' (Required) - Whether the identity pool supports unauthenticated logins
+        or not.'
+      type: Text
+  attributes:
+    id:
+      help: An identity pool ID in the format REGION:GUID.
+      type: Text

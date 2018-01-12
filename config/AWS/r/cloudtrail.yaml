@@ -1,0 +1,71 @@
+_name: aws_cloudtrail
+schema:
+  arguments:
+    enable_log_file_validation:
+      required: false
+      help: (Optional) Specifies whether log file integrity validation is enabled.
+        Defaults to  @false@ .
+      type: Text
+    kms_key_id:
+      required: false
+      help: (Optional) Specifies the KMS key ARN to use to encrypt the logs delivered
+        by CloudTrail.
+      type: Text
+    include_global_service_events:
+      required: false
+      help: (Optional) Specifies whether the trail is publishing events from global
+        services such as IAM to the log files. Defaults to  @true@ .
+      type: Text
+    is_multi_region_trail:
+      required: false
+      help: (Optional) Specifies whether the trail is created in the current region
+        or in all regions. Defaults to  @false@ .
+      type: Text
+    s3_bucket_name:
+      required: true
+      help: (Required) Specifies the name of the S3 bucket designated for publishing
+        log files.
+      type: Text
+    name:
+      required: true
+      help: (Required) Specifies the name of the trail.
+      type: Text
+    s3_key_prefix:
+      required: false
+      help: (Optional) Specifies the S3 key prefix that precedes the name of the bucket
+        you have designated for log file delivery.
+      type: Text
+    enable_logging:
+      required: false
+      help: (Optional) Enables logging for the trail. Defaults to  @true@ . Setting
+        this to  @false@  will pause logging.
+      type: Text
+    cloud_watch_logs_group_arn:
+      required: false
+      help: (Optional) Specifies a log group name using an Amazon Resource Name (ARN),
+        that represents the log group to which CloudTrail logs will be delivered.
+      type: Text
+    sns_topic_name:
+      required: false
+      help: (Optional) Specifies the name of the Amazon SNS topic defined for notification
+        of log file delivery.
+      type: Text
+    cloud_watch_logs_role_arn:
+      required: false
+      help: (Optional) Specifies the role for the CloudWatch Logs endpoint to assume
+        to write to a user’s log group.
+      type: Text
+    tags:
+      required: false
+      help: (Optional) A mapping of tags to assign to the trail
+      type: Text
+  attributes:
+    arn:
+      help: The Amazon Resource Name of the trail.
+      type: Text
+    id:
+      help: The name of the trail.
+      type: Text
+    home_region:
+      help: The region in which the trail was created.
+      type: Text

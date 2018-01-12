@@ -23,6 +23,8 @@ import Terraform.Syntax.Name (Key, Name)
 
 import qualified Control.Lens.TH as TH
 
+-- Computed "aws_instance.foo.instance_id" :: Attr Text
+
 data Attr a
     = Computed !Key !Name
     | Present  !a

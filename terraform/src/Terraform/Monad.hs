@@ -35,7 +35,7 @@ import qualified Data.HashMap.Strict        as HashMap
 import qualified Data.Map.Strict            as Map
 import qualified Data.Set                   as Set
 import qualified Data.Traversable           as Traverse
-import qualified HCL
+import qualified Terraform.Syntax.HCL       as HCL
 import qualified Terraform.Syntax.Name      as Name
 import qualified Terraform.Syntax.Resource  as Resource
 import qualified Terraform.Syntax.Serialize as HCL

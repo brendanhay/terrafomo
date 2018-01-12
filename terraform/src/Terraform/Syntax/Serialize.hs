@@ -20,9 +20,9 @@ import Terraform.Syntax.Name
 import Terraform.Syntax.Output
 import Terraform.Syntax.Resource
 
-import qualified Data.Foldable  as Fold
-import qualified HCL
-import qualified Terraform.Hash as Hash
+import qualified Data.Foldable        as Fold
+import qualified Terraform.Hash       as Hash
+import qualified Terraform.Syntax.HCL as HCL
 
 infixr 8 .=
 

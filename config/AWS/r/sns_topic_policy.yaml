@@ -1,0 +1,12 @@
+_name: aws_sns_topic_policy
+schema:
+  arguments:
+    arn:
+      required: true
+      help: (Required) The ARN of the SNS topic
+      type: Text
+    policy:
+      required: true
+      help: (Required) The fully-formed AWS policy as JSON
+      type: Text
+  attributes: {}

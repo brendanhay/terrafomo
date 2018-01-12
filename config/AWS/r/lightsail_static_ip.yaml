@@ -1,0 +1,17 @@
+_name: aws_lightsail_static_ip
+schema:
+  arguments:
+    name:
+      required: true
+      help: (Required) The name for the allocated static IP
+      type: Text
+  attributes:
+    arn:
+      help: The ARN of the Lightsail static IP
+      type: Text
+    support_code:
+      help: The support code.
+      type: Text
+    ip_address:
+      help: The allocated static IP address
+      type: Text

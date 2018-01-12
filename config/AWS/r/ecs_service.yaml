@@ -1,0 +1,70 @@
+_name: aws_ecs_service
+schema:
+  arguments:
+    desired_count:
+      required: true
+      help: (Required) The number of instances of the task definition to place and
+        keep running
+      type: Text
+    cluster:
+      required: false
+      help: (Optional) ARN of an ECS cluster
+      type: Text
+    load_balancer:
+      required: false
+      help: (Optional) A load balancer block. Load balancers documented below.
+      type: Text
+    placement_constraints:
+      required: false
+      help: (Optional) rules that are taken into consideration during task placement.
+        Maximum number of @placement_constraints@  is  @10@ . Defined below.
+      type: Text
+    iam_role:
+      required: false
+      help: (Optional) The ARN of IAM role that allows your Amazon ECS container agent
+        to make calls to your load balancer on your behalf. This parameter is only
+        required if you are using a load balancer with your service.
+      type: Text
+    name:
+      required: true
+      help: (Required) The name of the service (up to 255 letters, numbers, hyphens,
+        and underscores)
+      type: Text
+    task_definition:
+      required: true
+      help: (Required) The family and revision ( @family:revision@ ) or full ARN of
+        the task definition that you want to run in your service.
+      type: Text
+    deployment_maximum_percent:
+      required: false
+      help: (Optional) The upper limit (as a percentage of the service's desiredCount)
+        of the number of running tasks that can be running in a service during a deployment.
+      type: Text
+    placement_strategy:
+      required: false
+      help: (Optional) Service level strategy rules that are taken into consideration
+        during task placement. The maximum number of @placement_strategy@  blocks
+        is  @5@ . Defined below.
+      type: Text
+    deployment_minimum_healthy_percent:
+      required: false
+      help: (Optional) The lower limit (as a percentage of the service's desiredCount)
+        of the number of running tasks that must remain running and healthy in a service
+        during a deployment.
+      type: Text
+  attributes:
+    desired_count:
+      help: The number of instances of the task definition
+      type: Text
+    cluster:
+      help: The Amazon Resource Name (ARN) of cluster which the service runs on
+      type: Text
+    iam_role:
+      help: The ARN of IAM role used for ELB
+      type: Text
+    name:
+      help: The name of the service
+      type: Text
+    id:
+      help: The Amazon Resource Name (ARN) that identifies the service
+      type: Text

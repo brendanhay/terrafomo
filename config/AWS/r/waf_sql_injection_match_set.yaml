@@ -1,0 +1,17 @@
+_name: aws_waf_sql_injection_match_set
+schema:
+  arguments:
+    sql_injection_match_tuples:
+      required: false
+      help: (Optional) The parts of web requests that you want AWS WAF to inspect
+        for malicious SQL code and, if you want AWS WAF to inspect a header, the name
+        of the header.
+      type: Text
+    name:
+      required: true
+      help: (Required) The name or description of the SizeConstraintSet.
+      type: Text
+  attributes:
+    id:
+      help: The ID of the WAF SQL Injection Match Set.
+      type: Text

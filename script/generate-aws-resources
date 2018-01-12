@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-stack install terraform-gen && \
-    stack exec terraform-gen -- \
-        --config config \
-        --template template/r/aws.ede \
-        --type Resource \
-        "$@"

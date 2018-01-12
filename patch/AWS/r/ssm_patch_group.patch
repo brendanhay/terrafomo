@@ -1,0 +1,19 @@
+--- ssm_patch_group.html.markdown	2017-10-26 16:03:50.975873814 -0700
++++ ssm_patch_group.html.markdown.new	2017-10-26 16:05:18.696034633 -0700
+@@ -21,7 +21,8 @@
+ resource "aws_ssm_patch_group" "patchgroup" {
+   baseline_id = "${aws_ssm_patch_baseline.production.id}"
+   patch_group = "patch-group-name"
+-}```
++}
++```
+ 
+ ## Argument Reference
+ 
+@@ -34,4 +35,4 @@
+ 
+ The following attributes are exported:
+ 
+-* `id` - The ID of the patch baseline.
+\ No newline at end of file
++* `id` - The ID of the patch baseline.

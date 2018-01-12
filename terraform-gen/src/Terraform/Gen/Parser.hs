@@ -3,6 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE TypeFamilies      #-}
+{-# LANGUAGE ViewPatterns      #-}
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -28,6 +29,8 @@ import Text.Show.Pretty (ppShow)
 
 import qualified Data.Foldable   as Fold
 import qualified Data.List       as List
+import qualified Data.Map.Strict as Map
+import qualified Data.Set        as Set
 import qualified Data.Text       as Text
 import qualified Text.Megaparsec as P
 
@@ -75,26 +78,26 @@ instance P.Stream [Node] where
 
 -- Abstract Syntax Parsers
 
-schemaParser :: Parser Schema
+schemaParser :: Parser (Text, Schema)
 schemaParser = do
     -- preamble
     void h2
 
     -- resource/datasource name
-    schemaName  <- h1 >>> text
+    schemaName <- h1 >>> text
 
     -- argument name/help/required
-    schemaArgs  <-
+    (Map.fromList -> schemaArguments) <-
         (do P.skipManyTill node (P.try argHeader)
             P.skipManyTill node list >>> many argItem)
 
     -- attribute name/help
-    schemaAttrs <-
+    (Map.fromList -> schemaAttributes) <-
         P.try (do P.skipManyTill node (P.try attrHeader)
                   P.skipManyTill node list >>> many attrItem)
-           <|> pure []
+           <|> pure mempty
 
-    pure Schema{..}
+    pure (schemaName, Schema{..})
 
 argHeader :: Parser ()
 argHeader =
@@ -106,26 +109,42 @@ attrHeader =
               <|> string "Attribute Reference"
                 ) <?> "Attribute(s) Reference"
 
-argItem :: Parser Arg
-argItem = item >>> paragraph >>> (required <$> code <*> textual)
+argItem :: Parser (Text, Arg)
+argItem = item >>> paragraph >>> argument
   where
+    argument = ((,) <$> fmap unreserved code <*> fmap required textual)
+
     -- should use Parsec.Char here and rethrow errors.
-    required n h
-        | Text.isPrefixOf " - (Required" h =
-            Arg n (Text.drop 3 h) True  defaultType
+    required h
+        | Text.isPrefixOf " - (Required" h = mk (Text.drop 3 h) True
+        | Text.isPrefixOf " - (Optional" h = mk (Text.drop 3 h) False
+        | otherwise                        = mk h True
+      where
+        mk h' req = Arg (pure h') (pure req) defaultType
 
-        | Text.isPrefixOf " - (Optional" h =
-            Arg n (Text.drop 3 h) False defaultType
-
-        | otherwise =
-            Arg n h True  defaultType
-
-attrItem :: Parser Attr
+attrItem :: Parser (Text, Attr)
 attrItem = item >>> paragraph >>> attribute
   where
-    attribute = Attr <$> code <*> fmap strip textual <*> pure defaultType
+    attribute =
+        (,) <$> fmap unreserved code
+            <*> ( Attr <$> fmap (pure . strip) textual
+                       <*> pure defaultType
+                )
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)
+
+unreserved :: Text -> Text
+unreserved x
+     | x `Set.member` reserved = x `Text.snoc` '_'
+     | otherwise               = x
+  where
+    reserved = Set.fromList
+        [ "type"
+        , "instance"
+        , "family"
+        , "data"
+        , "foreign"
+        ]
 
 -- Markdown Syntax Parsers
 
@@ -150,7 +169,12 @@ paragraph :: Parser Node
 paragraph = match PARAGRAPH <?> "paragraph"
 
 textual :: Parser Text
-textual = Text.intercalate " " <$> some (link <|> text <|> code)
+textual =
+    Text.intercalate " "
+        <$> some ( fmap (surround '<' '>') link
+               <|> fmap (surround '@' '@') code
+               <|> text
+                 )
 
 codeblock :: Parser Text
 codeblock = do
@@ -230,3 +254,8 @@ parse' p n = P.runParser' p . initial . filter valid
         , P.stateTokensProcessed = 0
         , P.stateTabWidth        = P.defaultTabWidth
         }
+
+-- Text utilities
+
+surround :: Char -> Char -> Text -> Text
+surround start end x = Text.cons start x `Text.snoc` end

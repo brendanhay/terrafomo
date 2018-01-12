@@ -1,0 +1,16 @@
+_name: aws_waf_ipset
+schema:
+  arguments:
+    name:
+      required: true
+      help: (Required) The name or description of the IPSet.
+      type: Text
+    ip_set_descriptors:
+      required: false
+      help: (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address
+        range (in CIDR format) that web requests originate from.
+      type: Text
+  attributes:
+    id:
+      help: The ID of the WAF IPSet.
+      type: Text

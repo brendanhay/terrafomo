@@ -1,0 +1,64 @@
+_name: aws_directory_service_directory
+schema:
+  arguments:
+    connect_settings:
+      required: true
+      help: (Required for  @ADConnector@ ) Connector related information about the
+        directory. Fields documented below.
+      type: Text
+    type_:
+      required: true
+      help: ! ' (Optional) - The directory type ( @SimpleAD@  or  @MicrosoftAD@  are
+        accepted values). Defaults to  @SimpleAD@ .'
+      type: Text
+    size:
+      required: true
+      help: (Required for  @SimpleAD@  and  @ADConnector@ ) The size of the directory
+        ( @Small@  or  @Large@  are accepted values).
+      type: Text
+    alias:
+      required: false
+      help: (Optional) The alias for the directory (must be unique amongst all aliases
+        in AWS). Required for  @enable_sso@ .
+      type: Text
+    enable_sso:
+      required: false
+      help: (Optional) Whether to enable single-sign on for the directory. Requires  @alias@
+        . Defaults to  @false@ .
+      type: Text
+    name:
+      required: true
+      help: (Required) The fully qualified name for the directory, such as  @corp.example.com@
+      type: Text
+    password:
+      required: true
+      help: (Required) The password for the directory administrator or connector user.
+      type: Text
+    vpc_settings:
+      required: true
+      help: (Required for  @SimpleAD@  and  @MicrosoftAD@ ) VPC related information
+        about the directory. Fields documented below.
+      type: Text
+    short_name:
+      required: false
+      help: (Optional) The short name of the directory, such as  @CORP@ .
+      type: Text
+    description:
+      required: false
+      help: (Optional) A textual description for the directory.
+      type: Text
+    tags:
+      required: false
+      help: (Optional) A mapping of tags to assign to the resource.
+      type: Text
+  attributes:
+    access_url:
+      help: The access URL for the directory, such as  @http://alias.awsapps.com@
+        .
+      type: Text
+    id:
+      help: The directory identifier.
+      type: Text
+    dns_ip_addresses:
+      help: A list of IP addresses of the DNS servers for the directory or connector.
+      type: Text

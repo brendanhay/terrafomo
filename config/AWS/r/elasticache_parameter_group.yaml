@@ -1,0 +1,24 @@
+_name: aws_elasticache_parameter_group
+schema:
+  arguments:
+    family_:
+      required: true
+      help: (Required) The family of the ElastiCache parameter group.
+      type: Text
+    name:
+      required: true
+      help: (Required) The name of the ElastiCache parameter group.
+      type: Text
+    description:
+      required: false
+      help: (Optional) The description of the ElastiCache parameter group. Defaults
+        to "Managed by Terraform".
+      type: Text
+    parameter:
+      required: false
+      help: (Optional) A list of ElastiCache parameters to apply.
+      type: Text
+  attributes:
+    id:
+      help: The ElastiCache parameter group name.
+      type: Text

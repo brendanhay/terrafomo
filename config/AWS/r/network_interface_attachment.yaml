@@ -1,0 +1,28 @@
+_name: aws_network_interface_attachment
+schema:
+  arguments:
+    instance_id:
+      required: true
+      help: (Required) Instance ID to attach.
+      type: Text
+    device_index:
+      required: true
+      help: (Required) Network interface index (int).
+      type: Text
+    network_interface_id:
+      required: true
+      help: (Required) ENI ID to attach.
+      type: Text
+  attributes:
+    status:
+      help: The status of the Network Interface Attachment.
+      type: Text
+    instance_id:
+      help: Instance ID.
+      type: Text
+    attachment_id:
+      help: The ENI Attachment ID.
+      type: Text
+    network_interface_id:
+      help: Network interface ID.
+      type: Text

@@ -1,0 +1,12 @@
+_name: aws_elb_attachment
+schema:
+  arguments:
+    elb:
+      required: true
+      help: (Required) The name of the ELB.
+      type: Text
+    instance_:
+      required: true
+      help: (Required) Instance ID to place in the ELB pool.
+      type: Text
+  attributes: {}

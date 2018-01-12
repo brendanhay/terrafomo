@@ -8,7 +8,7 @@ module Terraform.Syntax.Output where
 import Terraform.Syntax.Attribute (Attr)
 import Terraform.Syntax.Name      (Name)
 
-import qualified HCL
+import qualified Terraform.Syntax.HCL as HCL
 
 data Attribute = Attribute
 

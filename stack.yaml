@@ -6,6 +6,5 @@ extra-deps:
   - megaparsec-6.2.0
 
 packages:
-  - hcl
   - terraform
   - terraform-gen

@@ -1,0 +1,12 @@
+_name: aws_config_configuration_recorder_status
+schema:
+  arguments:
+    name:
+      required: true
+      help: (Required) The name of the recorder
+      type: Text
+    is_enabled:
+      required: true
+      help: (Required) Whether the configuration recorder should be enabled or disabled.
+      type: Text
+  attributes: {}
