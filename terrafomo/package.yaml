@@ -14,7 +14,7 @@ description: >
 library:
   source-dirs:
     - src
-#    - gen
+    - gen
 
   exposed-modules:
     - Terrafomo
@@ -31,7 +31,7 @@ library:
     - Terrafomo.Syntax.TH
 
     # FIXME: Most of these should in fact be replaced by
-    # equivalent Haskell-isms, such as 'readFile', 'getRandom', and so on.
+    # equivalent Haskell-isms, such as 'readFile', 'genRandom', and so on.
     # - Terrafomo.Archive.DataSource
     # - Terrafomo.DNS.DataSource
     # - Terrafomo.DNS.Resource
