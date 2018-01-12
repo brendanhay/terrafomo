@@ -56,7 +56,7 @@ $(TH.makeClassy ''Lifecycle)
 -- Resource
 
 data Resource p a = Resource
-    { _rsProvider  :: !p
+    { _rsProvider  :: !(Maybe p)
     , _rsLifecycle :: !Lifecycle
     , _rsDependsOn :: !(Set Key)
     , _rsType      :: !Type
@@ -65,8 +65,8 @@ data Resource p a = Resource
 
 instance Bifunctor Resource where
     bimap f g x =
-        x { _rsProvider = f (_rsProvider x)
-          , _rsSchema   = g (_rsSchema   x)
+        x { _rsProvider = fmap f (_rsProvider x)
+          , _rsSchema   = g (_rsSchema x)
           }
 
 instance Functor (Resource p) where
@@ -88,7 +88,7 @@ dependOn (Ref x) = dependsOn %~ Set.insert x
 -- Meta Parameter Lenses
 
 -- | The specific provider to use for this resource.
-provider :: Lens' (Resource p a) p
+provider :: Lens' (Resource p a) (Maybe p)
 provider = lens _rsProvider (\s a -> s { _rsProvider = a })
 
 -- | The schema of this resource.

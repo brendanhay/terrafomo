@@ -31,6 +31,9 @@ data SchemaType
     | DataSource
       deriving (Show, Read, Eq)
 
+instance ToJSON SchemaType where
+    toJSON = JSON.toJSON . show
+
 data Schema = Schema
     { schema_Name      :: !Text
     , schemaAbout      :: !(Maybe Text)

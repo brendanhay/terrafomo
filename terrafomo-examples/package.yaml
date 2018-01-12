@@ -22,3 +22,5 @@ library:
     - base >= 4.9 && < 5
     - terrafomo
     # - terrafomo-aws
+
+    - microlens

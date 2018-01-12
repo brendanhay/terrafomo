@@ -40,21 +40,18 @@ import qualified Terrafomo.Gen.Parser as Parser
 import qualified Terrafomo.Gen.Render as Render
 import qualified Text.EDE             as EDE
 
--- TODO:
--- * Switch to using Megaparsec.Char to parse Required/Optional and add Haddockisms.
+-- TODO: FIXME:
+--
+-- * Removing the following providers and expose Haskell functionality to replace:
+--     - * template
+--     - * random
+--     - * local
+--     - * archive?
+--
 -- * Continue investigating having a Dhall frontend
--- * Extract all the usage examples and write out tests
---     - convert to DSL/Haskell and have as examples too
---     - ! just write them out as doctests
 -- * Provide an 'Unsafe' constructor/lens for 'Attr' which allows arbitrary
 --   insertion of HCL as 'Text'.
 -- * Re-enable usage example parser.
--- * Have the TH.makeResource/DataSource take a defaultProvider only.
--- * Provide config to control which dir generated files end up in,
---   this would allow template, random, local, etc. to be housed in the main
---   terraform package.
--- * Generate providers from the index.html.markdown file.
--- * Merge contents and resource/datasource if only 1 module is needed?
 
 -- Options Parsing
 
@@ -321,11 +318,10 @@ loadTemplates :: Options -> Script (Templates EDE.Template)
 loadTemplates Options{templateDir} =
     traverse (parseEDE . Path.combine templateDir) $
         Templates
-            { packageTemplate   = "package.ede"
-            , providerTemplate   = "provider.ede"
-            , contentsTemplate   = "contents.ede"
-            , resourceTemplate   = "resource.ede"
-            , dataSourceTemplate = "datasource.ede"
+            { packageTemplate  = "package.ede"
+            , providerTemplate = "provider.ede"
+            , contentsTemplate = "contents.ede"
+            , schemaTemplate   = "schema.ede"
             }
 
 parseEDE :: FilePath -> Script EDE.Template

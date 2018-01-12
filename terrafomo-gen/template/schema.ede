@@ -7,6 +7,7 @@
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE TypeFamilies           #-}
@@ -16,7 +17,9 @@ module {{ namespace }} where
 
 import Data.Text (Text)
 
+import GHC.Base     (Eq)
 import GHC.Generics (Generic)
+import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 {% for import in imports %}
@@ -27,7 +30,7 @@ import qualified Terrafomo.Syntax.TH as TH
 {% for schema in schemas %}
 
 {% let original = schema.value._name %}
--- | The @{{ original }}@ {{ provider.name }} resource.
+-- | The @{{ original }}@ {{ provider.name }} {{ type | toLower }}.
 {% if schema.value.about %}
 --
 -- {{ schema.value.about }}
@@ -64,7 +67,7 @@ type instance Computed {{ schema.key }}
     = '[]
   {% endfor %}
 
-$(TH.makeResource
+$(TH.make{{ type }}
     "{{ original }}"
     ''{{ provider.type }}
     'defaultProvider

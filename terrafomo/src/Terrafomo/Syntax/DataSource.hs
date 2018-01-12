@@ -12,7 +12,7 @@ import qualified Data.Set as Set
 -- Data Source
 
 data DataSource p a = DataSource
-    { _dsProvider  :: !p
+    { _dsProvider  :: !(Maybe p)
     , _dsDependsOn :: !(Set Key)
     , _dsType      :: !Type
     , _dsSchema    :: !a
@@ -20,8 +20,8 @@ data DataSource p a = DataSource
 
 instance Bifunctor DataSource where
     bimap f g x =
-        x { _dsProvider = f (_dsProvider x)
-          , _dsSchema   = g (_dsSchema   x)
+        x { _dsProvider = fmap f (_dsProvider x)
+          , _dsSchema   = g (_dsSchema x)
           }
 
 instance Functor (DataSource p) where
@@ -36,7 +36,7 @@ dependOn (Ref x) = dependsOn %~ Set.insert x
 -- Meta Parameter Lenses
 
 -- | The specific provider to use for this datasource.
-provider :: Lens' (DataSource p a) p
+provider :: Lens' (DataSource p a) (Maybe p)
 provider = lens _dsProvider (\s a -> s { _dsProvider = a })
 
 -- | The schema of this datasourcen.

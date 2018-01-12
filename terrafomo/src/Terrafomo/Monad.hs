@@ -14,6 +14,7 @@ module Terrafomo.Monad
     , evalTerraform
 
     , Ref
+    , datasource
     , resource
     , output
     , attribute
@@ -35,6 +36,7 @@ import GHC.TypeLits (KnownSymbol, symbolVal)
 import Lens.Micro (Lens')
 
 import Terrafomo.Syntax.Attribute
+import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Output
 import Terrafomo.Syntax.Resource
@@ -168,6 +170,31 @@ instance (MonadTerraform m, Monoid w) => MonadTerraform (Lazy.RWST r w s m) wher
 
 -- FIXME: additional validation logic can run when storing a ref,
 -- for example checking the reference changes exist, etc.
+
+datasource
+    :: ( MonadTerraform m
+       , Hashable p
+       , HCL.ToValue p
+       , HCL.ToValue a
+       )
+    => Name
+    -> DataSource p a
+    -> m (Ref p a)
+datasource name x@DataSource{_dsProvider, _dsType, _dsSchema} =
+    liftTerraform $ do
+        let alias = Name.newAlias _dsProvider
+            key   = Name.Key _dsType name
+
+        _exists <- insertNewKey resourceKeys key
+        -- error handling
+
+        modifying providers $
+            Map.insert alias (HCL.toValue _dsProvider)
+
+        modifying resources $
+            (HCL.toValue (bimap (const alias) (key,) x) :)
+
+        pure (Ref key)
 
 -- The equality constraint ensures either 'Resource' or 'IsResource' can be
 -- used interchangeably here with no ambiguity.

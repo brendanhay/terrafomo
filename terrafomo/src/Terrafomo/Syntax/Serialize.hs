@@ -9,7 +9,7 @@
 module Terrafomo.Syntax.Serialize where
 
 import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (fromMaybe)
+import Data.Maybe         (catMaybes, fromMaybe)
 import Data.Monoid        ((<>))
 import Data.String        (fromString)
 import Data.Text          (Text)
@@ -17,8 +17,10 @@ import Data.Text          (Text)
 import GHC.Generics
 
 import Terrafomo.Syntax.Attribute
+import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Output
+import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource
 
 import qualified Data.Foldable        as Fold
@@ -118,20 +120,30 @@ instance ToValue Output where
             [ "value" .= x
             ]
 
+instance ToValue Provider where
+    toValue = const $ block []
+
+instance ToValue a => ToValue (DataSource Alias (Key, a)) where
+    toValue DataSource{..} =
+        object (key "resource" (fst _dsSchema)) $ catMaybes
+            [ fmap ("provider" .=) _dsProvider
+            , Just $ toValue (snd _dsSchema)
+            , Just $ "depends_on" .= list _dsDependsOn
+            ]
+
 instance ToValue a => ToValue (Resource Alias (Key, a)) where
-    toValue Resource  {..} = undefined
-        -- let Meta      {..} = _metadata
-        --     Lifecycle {..} = _lifecycle'
-        --  in object (key "resource" (fst _schema))
-        --     [ "provider" .= _provider
-        --     , toValue       (snd _schema)
-        --     , "depends_on" .= list _dependsOn
-        --     , object (pure "lifecycle")
-        --         [ "prevent_destroy"       .= _preventDestroy
-        --         , "create_before_destroy" .= _createBeforeDestroy
-        --         , "ignore_changes"        .= list _ignoreChanges
-        --         ]
-        --     ]
+    toValue Resource{..} =
+        let Lifecycle{..} = _rsLifecycle
+         in object (key "resource" (fst _rsSchema)) $ catMaybes
+            [ fmap ("provider" .=) _rsProvider
+            , Just $ toValue (snd _rsSchema)
+            , Just $ "depends_on" .= list _rsDependsOn
+            , Just $ object (pure "lifecycle")
+                [ "prevent_destroy"       .= _lfPreventDestroy
+                , "create_before_destroy" .= _lfCreateBeforeDestroy
+                , "ignore_changes"        .= list _lfIgnoreChanges
+                ]
+            ]
 
 -- No 'ToValue' DefaultSignatures because of the use of 'block'
 genericToValue :: (Generic a, GToValue (Rep a)) => a -> HCL.Value
@@ -160,12 +172,15 @@ instance ( Selector s
          ) => GToValue (M1 S s f) where
     gToValues p = map assign (gToValues (unM1 p))
       where
-        label   = fromString (strip (selName p))
-        strip x = fromMaybe x (List.stripPrefix "_" x)
-
+        label  = HCL.Ident . strip . fromString $ selName p
         assign = \case
             HCL.Block vs -> HCL.Object (pure label) vs
             v            -> HCL.Assign label v
+
+        -- FIXME: Share this (+ isomorphism) with the generator code.
+        strip x =
+            let y = fromMaybe x (Text.stripPrefix "_" x)
+             in fromMaybe y (Text.stripSuffix "'" y)
 
 instance ( GToValue a
          , GToValue b

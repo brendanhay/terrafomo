@@ -65,16 +65,16 @@ makeSchema
     -> TH.BodyQ -- ^ The smart constructor's body expression.
     -> TH.Q [TH.Dec]
 makeSchema datatype provider schematype schemafield mkconstructor = do
-    let lowered  = map Char.toLower (TH.nameBase datatype)
-        constructor = TH.mkName lowered
-
     let getSig = \case
             TH.SigD name _ -> Just name
             _              -> Nothing
 
-        getClass = \case
+    let getClass = \case
             TH.ClassD _ name _ _ ds -> (name,) <$> listToMaybe (mapMaybe getSig ds)
             _                       -> Nothing
+
+    let constructor =
+            TH.mkName (lowerHead (TH.nameBase datatype))
 
     -- instance Has<field> <type> a => Has<field> (Resource <provider> a) ...
     let resourceField name field =
@@ -111,7 +111,10 @@ makeSchema datatype provider schematype schemafield mkconstructor = do
                   ]
 
         -- constructor :: ...
-        , let type_ = schematype `TH.appT` provider `TH.appT` TH.conT datatype
+        , let type_       = schematype
+                  `TH.appT` provider
+                  `TH.appT` TH.conT datatype
+
            in TH.sigD constructor type_
 
         -- constructor = ...
@@ -141,6 +144,11 @@ renameField s = do
 upperHead :: String -> String
 upperHead = \case
     x:xs | Char.isLower x -> Char.toUpper x : xs
+    x                     -> x
+
+lowerHead :: String -> String
+lowerHead = \case
+    x:xs | Char.isUpper x -> Char.toLower x : xs
     x                     -> x
 
 underscores :: String -> [String]

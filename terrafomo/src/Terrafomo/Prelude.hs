@@ -10,15 +10,24 @@ module Terrafomo.Prelude
     , Map
     , Set
 
+    -- * Lenses
+    , (Lens.&)
+    , (Lens..~)
+    , (Lens.%~)
+
     -- * Terraform Syntax
     , Name
 
     -- ** Providers
     , Alias
 
-    -- ** Resources
-    , Resource
+    -- ** DataSources and Resources
     , Ref
+
+    , DataSource
+    , datasource
+
+    , Resource
     , resource
 
     -- -- *** Resource Metadata
@@ -47,24 +56,24 @@ module Terrafomo.Prelude
     , format
     , sformat
     , nformat
-
-    -- * Re-exported Functions
-    , (Prelude.&)
     ) where
 
 import Data.Map.Strict (Map)
 import Data.Set        (Set)
 import Data.Text       (Text)
 
+
 import Numeric.Natural (Natural)
 
 import Terrafomo.Format
 import Terrafomo.Monad
 import Terrafomo.Syntax.Attribute
+import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
 
 import qualified Data.Function as Prelude
+import qualified Lens.Micro    as Lens
 
 -- -- Boolean Logic
 

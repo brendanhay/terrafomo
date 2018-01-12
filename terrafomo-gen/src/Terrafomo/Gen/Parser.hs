@@ -32,7 +32,6 @@ import qualified Data.Char       as Char
 import qualified Data.Foldable   as Fold
 import qualified Data.List       as List
 import qualified Data.Map.Strict as Map
-import qualified Data.Set        as Set
 import qualified Data.Text       as Text
 import qualified Text.Megaparsec as P
 
@@ -166,22 +165,6 @@ attrItem = item >>> paragraph >>> attribute
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)
 
-fieldName :: Text -> Text
-fieldName = unreserved . Text.cons '_'
-
-unreserved :: Text -> Text
-unreserved x
-     | x `Set.member` reserved = x `Text.snoc` '\''
-     | otherwise               = x
-  where
-    reserved = Set.fromList
-        [ "type"
-        , "instance"
-        , "family"
-        , "data"
-        , "foreign"
-        , "default"
-        ]
 
 -- Markdown Syntax Parsers
 

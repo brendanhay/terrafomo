@@ -26,24 +26,6 @@ import qualified Data.Map.Strict    as Map
 import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.JSON as JSON
 
--- Haskell NSs
-
-newtype NS = NS (NonEmpty Text)
-    deriving (Show, Eq, Ord, Semigroup)
-
-instance ToJSON NS where
-    toJSON = JSON.toJSON . fromNS '.'
-
-instance ToJSONKey NS where
-    toJSONKey = JSON.toJSONKeyText (Text.pack . fromNS '.')
-
-fromNS :: Char -> NS -> String
-fromNS c (NS xs) =
-    Text.unpack $ Text.intercalate (Text.singleton c) (Fold.toList xs)
-
-pathNS :: NS -> String
-pathNS = fromNS '/'
-
 -- Provider Configuration
 
 data Provider = Provider
@@ -64,6 +46,26 @@ instance ToJSON Provider where
                     then providerName
                     else "Provider"
             ]
+
+-- Haskell Namespace
+
+newtype NS = NS (NonEmpty Text)
+    deriving (Show, Eq, Ord, Semigroup)
+
+instance ToJSON NS where
+    toJSON = JSON.toJSON . fromNS '.'
+
+instance ToJSONKey NS where
+    toJSONKey = JSON.toJSONKeyText (Text.pack . fromNS '.')
+
+fromNS :: Char -> NS -> String
+fromNS c (NS xs) =
+    Text.unpack $ Text.intercalate (Text.singleton c) (Fold.toList xs)
+
+pathNS :: NS -> String
+pathNS = fromNS '/'
+
+-- Package Namespaces
 
 mainNS :: Provider -> NS
 mainNS p = NS ("Terrafomo" :| [providerName p])

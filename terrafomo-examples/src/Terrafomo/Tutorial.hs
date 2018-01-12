@@ -1,24 +1,57 @@
--- {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances      #-}
+{-
 
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE OverloadedLists        #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE TypeFamilies           #-}
-
 {-# LANGUAGE UndecidableInstances   #-}
-
 {-# LANGUAGE RankNTypes             #-}
-{-
-{-# LANGUAGE DataKinds             #-}
-{-# LANGUAGE TypeApplications      #-}
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE TypeApplications       #-}
+
 -}
 
 module Terrafomo.Tutorial where
 
-import Data.Proxy (Proxy (Proxy))
-import Data.Void
+import Terrafomo.Prelude
+
+-- import qualified Lens.Micro as Lens
+
+import qualified Terrafomo.Template.DataSource as D
+import qualified Terrafomo.Template.Resource   as R
+
+-- Example of using MonadTerraform homomorphism to lift into any monad.
+
+-- infixr 7 =:
+--
+-- -- | Equivalent to @l .~ Present x@
+-- (=:) :: Lens.ASetter s t a (Attr b) -> b -> s -> t
+-- (=:) l x = l .~ Present x
+
+example :: Terraform ()
+example = do
+    _a <-
+        datasource "mytemplate1" $
+            D.fileDataSource
+                & D.template .~ Present "foo"
+                & D.vars     .~ Present "bar"
+
+    _b <-
+        resource "mytemplate2" $
+            R.dirResource
+                & R.destinationDir .~ Present "foo"
+                & R.sourceDir      .~ Present "baz"
+                & R.vars           .~ Present "bar"
+
+    -- output "ip" mempty
+
+    pure ()
+
+-- import Data.Proxy (Proxy (Proxy))
+-- import Data.Void
 
 -- import Lens.Micro
 
@@ -95,17 +128,6 @@ import Data.Void
 -- preventDestroy
 -- createBeforeDestroy
 -- ignoreChanges
-
--- infixr 7 =:
-
--- (=:) :: ( IsResource p a b
---         , IsAttribute v' v
---         )
---      => Setter' (Resource p a) v'
---      -> v
---      -> b
---      -> Resource p a
--- (=:) l x = Lens.set (l . _Present) x . fromSchema
 
 -- resource_ :: IsResource p a a => Name -> a -> Resource p a
 -- resource_ _ = fromSchema

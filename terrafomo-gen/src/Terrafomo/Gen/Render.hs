@@ -26,11 +26,10 @@ import qualified Data.Text.Lazy   as LText
 import qualified Text.EDE         as EDE
 
 data Templates a = Templates
-    { packageTemplate    :: !a
-    , providerTemplate   :: !a
-    , contentsTemplate   :: !a
-    , resourceTemplate   :: !a
-    , dataSourceTemplate :: !a
+    { packageTemplate  :: !a
+    , providerTemplate :: !a
+    , contentsTemplate :: !a
+    , schemaTemplate   :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
 package
@@ -74,6 +73,7 @@ contents tmpls p typ xs =
     let ns = schemaNS p typ
      in second (ns,) $ render (contentsTemplate tmpls)
         [ "namespace" .= ns
+        , "type"      .= typ
         , "reexports" .= Map.keys xs
         ]
 
@@ -86,15 +86,15 @@ schemas
 schemas tmpls p typ = Map.traverseWithKey go
   where
     go ns xs =
-        render (getTypeTemplate typ tmpls)
+        render (schemaTemplate tmpls)
             [ "namespace" .= ns
             , "provider"  .= p
+            , "type"      .= typ
             , "schemas"   .= createMap (getTypeName typ) xs
             , "imports"   .=
-                    ( NS ("Terrafomo" :| ["Syntax", "Provider"])
-                    : NS ("Terrafomo" :| ["Syntax", Text.pack (show typ)])
-                    : [providerNS p | providerDatatype p]
-                    )
+                ( NS ("Terrafomo" :| ["Syntax", "Provider"])
+                : [providerNS p | providerDatatype p]
+                )
             ]
 
     createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
@@ -102,11 +102,6 @@ schemas tmpls p typ = Map.traverseWithKey go
 
 render :: EDE.Template -> [JSON.Pair] -> Either Text LText.Text
 render tmpl = first Text.pack . EDE.eitherRender tmpl . EDE.fromPairs
-
-getTypeTemplate :: SchemaType -> Templates a -> a
-getTypeTemplate = \case
-    Resource   -> resourceTemplate
-    DataSource -> dataSourceTemplate
 
 getTypeName :: SchemaType -> Schema -> Text
 getTypeName = \case
