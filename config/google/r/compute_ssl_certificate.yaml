@@ -1,0 +1,21 @@
+_name: google_compute_ssl_certificate
+schema:
+  arguments:
+    private_key:
+      required: true
+      help: (Required) Write only private key in PEM format. Changing this forces
+        a new resource to be created.
+      type: Text
+    certificate:
+      required: true
+      help: (Required) A local certificate file in PEM format. The chain may be at
+        most 5 certs long, and must include at least one intermediate cert. Changing
+        this forces a new resource to be created.
+      type: Text
+  attributes:
+    self_link:
+      help: The URI of the created resource.
+      type: Text
+    id:
+      help: A unique ID for the certificated, assigned by GCE.
+      type: Text

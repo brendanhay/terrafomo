@@ -1,0 +1,9 @@
+_name: google_compute_project_metadata
+schema:
+  arguments:
+    metadata:
+      required: true
+      help: (Required) A series of key value pairs. Changing this resource updates
+        the GCE state.
+      type: Text
+  attributes: {}

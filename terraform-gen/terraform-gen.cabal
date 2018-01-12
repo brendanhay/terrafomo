@@ -45,5 +45,6 @@ executable terraform-gen
         , optparse-applicative
         , pretty-show
         , process
+        , split
         , text
         , yaml

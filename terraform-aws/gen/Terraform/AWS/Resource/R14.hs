@@ -1,0 +1,269 @@
+-- This module is auto-generated.
+
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE DeriveGeneric          #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleContexts       #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TypeFamilies           #-}
+
+module Terraform.AWS.Resource.R14 where
+
+import Data.Text (Text)
+
+import GHC.Generics (Generic)
+
+import Terraform.AWS.Provider (AWS, newResource)
+import Terraform.AWS.Types
+import Terraform.Syntax.Attribute (Attr, Computed)
+
+import qualified Terraform.Syntax.TH as TH
+
+-- | The @aws_api_gateway_authorizer@ Terraform AWS provider resource.
+data Api_Gateway_Authorizer_Resource = Api_Gateway_Authorizer_Resource
+    { authorizer_credentials :: !(Attr Text)
+      {- ^ (Optional) The credentials required for the authorizer. To specify an IAM Role for API Gateway to assume, use the IAM Role ARN. -}
+    , authorizer_result_ttl_in_seconds :: !(Attr Text)
+      {- ^ (Optional) The TTL of cached authorizer results in seconds. Defaults to  @300@ . -}
+    , authorizer_uri :: !(Attr Text)
+      {- ^ (Required) The authorizer's Uniform Resource Identifier (URI). For  @TOKEN@  type, this must be a well-formed Lambda function URI in the form of @arn:aws:apigateway:{region}:lambda:path/{service_api}@ . e.g.  @arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations@ -}
+    , identity_source :: !(Attr Text)
+      {- ^ (Optional) The source of the identity in an incoming request. Defaults to  @method.request.header.Authorization@ . -}
+    , identity_validation_expression :: !(Attr Text)
+      {- ^ (Optional) A validation expression for the incoming identity. For  @TOKEN@  type, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the authorizer -}
+    , rest_api_id :: !(Attr Text)
+      {- ^ (Required) The ID of the associated REST API -}
+    , type_ :: !(Attr Text)
+      {- ^ (Optional) The type of the authorizer.  @TOKEN@  is currently the only allowed value. Defaults to  @TOKEN@ . -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Api_Gateway_Authorizer_Resource
+    = '[]
+
+$(TH.makeResource
+    "aws_api_gateway_authorizer"
+    ''AWS
+    'newResource
+    ''Api_Gateway_Authorizer_Resource)
+
+-- | The @aws_cloudwatch_log_destination@ Terraform AWS provider resource.
+data Cloudwatch_Log_Destination_Resource = Cloudwatch_Log_Destination_Resource
+    { name :: !(Attr Text)
+      {- ^ (Required) A name for the log destination -}
+    , role_arn :: !(Attr Text)
+      {- ^ (Required) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target -}
+    , target_arn :: !(Attr Text)
+      {- ^ (Required) The ARN of the target Amazon Kinesis stream or Amazon Lambda resource for the destination -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Cloudwatch_Log_Destination_Resource
+    = '[ '("arn", Attr Text)
+         {- The Amazon Resource Name (ARN) specifying the log destination. -}
+       ]
+
+$(TH.makeResource
+    "aws_cloudwatch_log_destination"
+    ''AWS
+    'newResource
+    ''Cloudwatch_Log_Destination_Resource)
+
+-- | The @aws_cloudwatch_log_metric_filter@ Terraform AWS provider resource.
+data Cloudwatch_Log_Metric_Filter_Resource = Cloudwatch_Log_Metric_Filter_Resource
+    { log_group_name :: !(Attr Text)
+      {- ^ (Required) The name of the log group to associate the metric filter with. -}
+    , metric_transformation :: !(Attr Text)
+      {- ^ (Required) A block defining collection of information needed to define how metric data gets emitted. See below. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) A name for the metric filter. -}
+    , pattern :: !(Attr Text)
+      {- ^ (Required) A valid  <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/FilterAndPatternSyntax.html> for extracting metric data out of ingested log events. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Cloudwatch_Log_Metric_Filter_Resource
+    = '[ '("id", Attr Text)
+         {- The name of the metric filter. -}
+       ]
+
+$(TH.makeResource
+    "aws_cloudwatch_log_metric_filter"
+    ''AWS
+    'newResource
+    ''Cloudwatch_Log_Metric_Filter_Resource)
+
+-- | The @aws_efs_file_system@ Terraform AWS provider resource.
+data Efs_File_System_Resource = Efs_File_System_Resource
+    { creation_token :: !(Attr Text)
+      {- ^ (Optional) A unique name (a maximum of 64 characters are allowed) used as reference when creating the Elastic File System to ensure idempotent file system creation. By default generated by Terraform. See [Elastic File System] (http://docs.aws.amazon.com/efs/latest/ug/) user guide for more information. -}
+    , encrypted :: !(Attr Text)
+      {- ^ (Optional) If true, the disk will be encrypted. -}
+    , kms_key_id :: !(Attr Text)
+      {- ^ (Optional) The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true. -}
+    , performance_mode :: !(Attr Text)
+      {- ^ (Optional) The file system performance mode. Can be either @"generalPurpose"@  or  @"maxIO"@  (Default:  @"generalPurpose"@ ). -}
+    , reference_name :: !(Attr Text)
+      {- ^  -   (Optional) A reference name used when creating the @Creation Token@  which Amazon EFS uses to ensure idempotent file system creation. By default generated by Terraform. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the file system. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Efs_File_System_Resource
+    = '[ '("id", Attr Text)
+         {- The ID that identifies the file system (e.g. fs-ccfc0d65). -}
+      , '("kms_key_id", Attr Text)
+         {- The ARN for the KMS encryption key. -}
+       ]
+
+$(TH.makeResource
+    "aws_efs_file_system"
+    ''AWS
+    'newResource
+    ''Efs_File_System_Resource)
+
+-- | The @aws_elb_load_balancer_listener_policy@ Terraform AWS provider resource.
+data Elb_Load_Balancer_Listener_Policy_Resource = Elb_Load_Balancer_Listener_Policy_Resource
+    { load_balancer_name :: !(Attr Text)
+      {- ^ (Required) The load balancer to attach the policy to. -}
+    , load_balancer_port :: !(Attr Text)
+      {- ^ (Required) The load balancer listener port to apply the policy to. -}
+    , policy_names :: !(Attr Text)
+      {- ^ (Required) List of Policy Names to apply to the backend server. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Elb_Load_Balancer_Listener_Policy_Resource
+    = '[ '("id", Attr Text)
+         {- The ID of the policy. -}
+      , '("load_balancer_name", Attr Text)
+         {- The load balancer on which the policy is defined. -}
+      , '("load_balancer_port", Attr Text)
+         {- The load balancer listener port the policies are applied to -}
+       ]
+
+$(TH.makeResource
+    "aws_elb_load_balancer_listener_policy"
+    ''AWS
+    'newResource
+    ''Elb_Load_Balancer_Listener_Policy_Resource)
+
+-- | The @aws_kms_alias@ Terraform AWS provider resource.
+data Kms_Alias_Resource = Kms_Alias_Resource
+    { name :: !(Attr Text)
+      {- ^ (Optional) The display name of the alias. The name must start with the word "alias" followed by a forward slash (alias/) -}
+    , name_prefix :: !(Attr Text)
+      {- ^ (Optional) Creates an unique alias beginning with the specified prefix. The name must start with the word "alias" followed by a forward slash (alias/).  Conflicts with  @name@ . -}
+    , target_key_id :: !(Attr Text)
+      {- ^ (Required) Identifier for the key for which the alias is for, can be either an ARN or key_id. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Kms_Alias_Resource
+    = '[ '("arn", Attr Text)
+         {- The Amazon Resource Name (ARN) of the key alias. -}
+       ]
+
+$(TH.makeResource
+    "aws_kms_alias"
+    ''AWS
+    'newResource
+    ''Kms_Alias_Resource)
+
+-- | The @aws_launch_configuration@ Terraform AWS provider resource.
+data Launch_Configuration_Resource = Launch_Configuration_Resource
+    { associate_public_ip_address :: !(Attr Text)
+      {- ^ (Optional) Associate a public ip address with an instance in a VPC. -}
+    , ebs_block_device :: !(Attr Text)
+      {- ^ (Optional) Additional EBS block devices to attach to the instance.  See  <#block-devices>  below for details. -}
+    , ebs_optimized :: !(Attr Text)
+      {- ^ (Optional) If true, the launched EC2 instance will be EBS-optimized. -}
+    , enable_monitoring :: !(Attr Text)
+      {- ^ (Optional) Enables/disables detailed monitoring. This is enabled by default. -}
+    , ephemeral_block_device :: !(Attr Text)
+      {- ^ (Optional) Customize Ephemeral (also known as "Instance Store") volumes on the instance. See  <#block-devices>  below for details. -}
+    , iam_instance_profile :: !(Attr Text)
+      {- ^ (Optional) The IAM instance profile to associate with launched instances. -}
+    , image_id :: !(Attr Text)
+      {- ^ (Required) The EC2 image ID to launch. -}
+    , instance_type :: !(Attr Text)
+      {- ^ (Required) The size of instance to launch. -}
+    , key_name :: !(Attr Text)
+      {- ^ (Optional) The key name that should be used for the instance. -}
+    , name :: !(Attr Text)
+      {- ^ (Optional) The name of the launch configuration. If you leave this blank, Terraform will auto-generate a unique name. -}
+    , name_prefix :: !(Attr Text)
+      {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with  @name@ . -}
+    , placement_tenancy :: !(Attr Text)
+      {- ^ (Optional) The tenancy of the instance. Valid values are @"default"@  or  @"dedicated"@ , see  <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_CreateLaunchConfiguration.html> for more details -}
+    , root_block_device :: !(Attr Text)
+      {- ^ (Optional) Customize details about the root block device of the instance. See  <#block-devices>  below for details. -}
+    , security_groups :: !(Attr Text)
+      {- ^ (Optional) A list of associated security group IDS. -}
+    , spot_price :: !(Attr Text)
+      {- ^ (Optional) The price to use for reserving spot instances. -}
+    , user_data :: !(Attr Text)
+      {- ^ (Optional) The user data to provide when launching the instance. -}
+    , vpc_classic_link_id :: !(Attr Text)
+      {- ^ (Optional) The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg.  @vpc-2730681a@ ) -}
+    , vpc_classic_link_security_groups :: !(Attr Text)
+      {- ^ (Optional) The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg.  @sg-46ae3d11@ ). -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Launch_Configuration_Resource
+    = '[ '("id", Attr Text)
+         {- The ID of the launch configuration. -}
+      , '("name", Attr Text)
+         {- The name of the launch configuration. -}
+       ]
+
+$(TH.makeResource
+    "aws_launch_configuration"
+    ''AWS
+    'newResource
+    ''Launch_Configuration_Resource)
+
+-- | The @aws_redshift_security_group@ Terraform AWS provider resource.
+data Redshift_Security_Group_Resource = Redshift_Security_Group_Resource
+    { description :: !(Attr Text)
+      {- ^ (Optional) The description of the Redshift security group. Defaults to "Managed by Terraform". -}
+    , ingress :: !(Attr Text)
+      {- ^ (Optional) A list of ingress rules. -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the Redshift security group. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Redshift_Security_Group_Resource
+    = '[ '("id", Attr Text)
+         {- The Redshift security group ID. -}
+       ]
+
+$(TH.makeResource
+    "aws_redshift_security_group"
+    ''AWS
+    'newResource
+    ''Redshift_Security_Group_Resource)
+
+-- | The @aws_redshift_subnet_group@ Terraform AWS provider resource.
+data Redshift_Subnet_Group_Resource = Redshift_Subnet_Group_Resource
+    { description :: !(Attr Text)
+      {- ^ (Optional) The description of the Redshift Subnet group. Defaults to "Managed by Terraform". -}
+    , name :: !(Attr Text)
+      {- ^ (Required) The name of the Redshift Subnet group. -}
+    , subnet_ids :: !(Attr Text)
+      {- ^ (Required) An array of VPC subnet IDs. -}
+    , tags :: !(Attr Text)
+      {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    } deriving (Show, Eq, Generic)
+
+type instance Computed Redshift_Subnet_Group_Resource
+    = '[ '("id", Attr Text)
+         {- The Redshift Subnet group ID. -}
+       ]
+
+$(TH.makeResource
+    "aws_redshift_subnet_group"
+    ''AWS
+    'newResource
+    ''Redshift_Subnet_Group_Resource)

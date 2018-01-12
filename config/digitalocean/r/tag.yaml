@@ -1,0 +1,14 @@
+_name: digitalocean_tag
+schema:
+  arguments:
+    name:
+      required: true
+      help: (Required) The name of the tag
+      type: Text
+  attributes:
+    name:
+      help: The name of the tag
+      type: Text
+    id:
+      help: The id of the tag
+      type: Text

@@ -1,0 +1,69 @@
+_name: google_compute_instance
+schema:
+  arguments:
+    network_interface:
+      required: true
+      help: (Required) Networks to attach to the instance. This can be specified multiple
+        times. Structure is documented below.
+      type: Text
+    boot_disk:
+      required: true
+      help: (Required) The boot disk for the instance. Structure is documented below.
+      type: Text
+    zone:
+      required: true
+      help: (Required) The zone that the machine should be created in.
+      type: Text
+    name:
+      required: true
+      help: (Required) A unique name for the resource, required by GCE. Changing this
+        forces a new resource to be created.
+      type: Text
+    machine_type:
+      required: true
+      help: (Required) The machine type to create. To create a custom machine type,
+        value should be set as specified <https://cloud.google.com/compute/docs/reference/latest/instances#machineType>
+      type: Text
+  attributes:
+    disk.0.disk_encryption_key_sha256:
+      help: The  <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256 hash
+        of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
+        that protects this resource.
+      type: Text
+    self_link:
+      help: The URI of the created resource.
+      type: Text
+    instance_id:
+      help: The server-assigned unique identifier of this instance.
+      type: Text
+    boot_disk.disk_encryption_key_sha256:
+      help: The  <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256 hash
+        of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
+        that protects this resource.
+      type: Text
+    tags_fingerprint:
+      help: The unique fingerprint of the tags.
+      type: Text
+    cpu_platform:
+      help: The CPU platform used by this instance.
+      type: Text
+    label_fingerprint:
+      help: The unique fingerprint of the labels.
+      type: Text
+    network_interface.0.access_config.0.assigned_nat_ip:
+      help: If the instance has an access config, either the given external ip (in
+        the  @nat_ip@  field) or the ephemeral (generated) ip (if you didn't provide
+        one).
+      type: Text
+    metadata_fingerprint:
+      help: The unique fingerprint of the metadata.
+      type: Text
+    network_interface.0.address:
+      help: The internal ip address of the instance, either manually or dynamically
+        assigned.
+      type: Text
+    attached_disk.0.disk_encryption_key_sha256:
+      help: The  <https://tools.ietf.org/html/rfc4648#section-4> encoded SHA-256 hash
+        of the [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption)
+        that protects this resource.
+      type: Text

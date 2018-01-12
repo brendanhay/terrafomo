@@ -1,22 +1,36 @@
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TupleSections     #-}
 
 module Terraform.Gen.Template where
 
-import Data.Text (Text)
+import Data.Aeson      ((.=))
+import Data.Map.Strict (Map)
+import Data.Text       (Text)
 
 import Terraform.Gen.Config
 
 import qualified Data.Char        as Char
+import qualified Data.Map.Strict  as Map
 import qualified Data.Text        as Text
 import qualified Data.Text.Lazy   as LText
 import qualified Text.EDE         as EDE
 import qualified Text.EDE.Filters as EDE
 
-render :: EDE.Template -> [Config] -> Either String LText.Text
-render tmpl = EDE.eitherRenderWith filters tmpl . configsToEnv
+renderConfigs
+    :: EDE.Template
+    -> Provider
+    -> Map NS [Config]
+    -> Either String (Map NS LText.Text)
+renderConfigs tmpl p = Map.traverseWithKey go
   where
-    filters = ["toResourceName" EDE.@: toResourceName]
+    go ns xs =
+        EDE.eitherRenderWith ["toResourceName" EDE.@: toResourceName] tmpl $
+            EDE.fromPairs
+                [ "configs"   .= createMap config_Name xs
+                , "namespace" .= ns
+                , "provider"  .= p
+                ]
 
 toResourceName :: Text -> Text
 toResourceName =

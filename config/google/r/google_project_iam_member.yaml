@@ -1,0 +1,20 @@
+_name: google_project_iam_member
+schema:
+  arguments:
+    project:
+      required: false
+      help: (Optional) The project ID. If not specified, uses the ID of the project
+        configured with the provider.
+      type: Text
+    role:
+      required: true
+      help: (Required) The role that should be applied.
+      type: Text
+    member:
+      required: true
+      help: (Required) The user that the role should apply to.
+      type: Text
+  attributes:
+    etag:
+      help: (Computed) The etag of the project's IAM policy.
+      type: Text

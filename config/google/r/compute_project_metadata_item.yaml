@@ -1,0 +1,12 @@
+_name: google_compute_project_metadata_item
+schema:
+  arguments:
+    value:
+      required: true
+      help: (Required) The value to set for the given metadata key.
+      type: Text
+    key:
+      required: true
+      help: (Required) The metadata key to set.
+      type: Text
+  attributes: {}

@@ -1,0 +1,58 @@
+_name: digitalocean_firewall
+schema:
+  arguments:
+    outbound_rule:
+      required: false
+      help: (Optional) The outbound access rule block for the Firewall. The  @outbound_rule@  block
+        is documented below.
+      type: Text
+    inbound_rule:
+      required: false
+      help: (Optional) The inbound access rule block for the Firewall. The  @inbound_rule@  block
+        is documented below.
+      type: Text
+    name:
+      required: true
+      help: (Required) The Firewall name
+      type: Text
+    droplet_ids:
+      required: true
+      help: ! ' (Optional) - The list of the IDs of the Droplets assigned to the Firewall.'
+      type: Text
+    tags:
+      required: true
+      help: ! ' (Optional) - The names of the Tags assigned to the Firewall.'
+      type: Text
+  attributes:
+    status:
+      help: A status string indicating the current state of the Firewall. This can
+        be "waiting", "succeeded", or "failed".
+      type: Text
+    inbound_rules:
+      help: The inbound access rule block for the Firewall.
+      type: Text
+    pending_changes:
+      help: An list of object containing the fields, "droplet_id", "removing", and
+        "status".  It is provided to detail exactly which Droplets are having their
+        security policies updated.  When empty, all changes have been successfully
+        applied.
+      type: Text
+    name:
+      help: The name of the Firewall.
+      type: Text
+    created_at:
+      help: A time value given in ISO8601 combined date and time format that represents
+        when the Firewall was created.
+      type: Text
+    id:
+      help: A unique ID that can be used to identify and reference a Firewall.
+      type: Text
+    droplet_ids:
+      help: The list of the IDs of the Droplets assigned to the Firewall.
+      type: Text
+    outbound_rules:
+      help: The outbound access rule block for the Firewall.
+      type: Text
+    tags:
+      help: The names of the Tags assigned to the Firewall.
+      type: Text

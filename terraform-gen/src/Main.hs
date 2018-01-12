@@ -8,6 +8,7 @@ import Control.Applicative (some)
 import Control.Monad       (when)
 
 import Data.Bifunctor   (first)
+import Data.Foldable    (for_)
 import Data.Function    ((&))
 import Data.Monoid      ((<>))
 import Data.Traversable (for)
@@ -16,8 +17,8 @@ import System.FilePath ((<.>), (</>))
 
 import Terraform.Gen.Config
 
+import qualified Data.Map.Strict        as Map
 import qualified Data.Text.IO           as Text
-import qualified Data.Text.Lazy         as LText
 import qualified Data.Text.Lazy.IO      as LText
 import qualified Data.Yaml              as YAML
 import qualified Options.Applicative    as Option
@@ -30,13 +31,20 @@ import qualified Terraform.Gen.Parser   as Parser
 import qualified Terraform.Gen.Template as Template
 import qualified Text.EDE               as EDE
 
+-- TODO:
+-- * Switch to using Megaparsec.Char to parse Required/Optional and add Haddockisms.
+-- * Continue investigating having a Dhall frontend
+
 -- Options Parsing
 
 data Options = Options
-    { optionsConfigDir :: !FilePath
-    , optionsPatchDir  :: !FilePath
-    , optionsTemplate  :: !FilePath
-    , optionsFiles     :: ![FilePath]
+    { optionsConfigDir  :: !FilePath
+    , optionsPatchDir   :: !FilePath
+    , optionsTemplate   :: !FilePath
+    , optionsProvider   :: !Provider
+    , optionsSchemaType :: !SchemaType
+    , optionsOutputDir  :: !FilePath
+    , optionsFiles      :: ![FilePath]
     } deriving (Show)
 
 optionsParser :: Option.Parser Options
@@ -57,6 +65,24 @@ optionsParser = Options
          ( Option.long "template"
         <> Option.help "EDE template to render on stdout."
         <> Option.metavar "FILE"
+         )
+
+    <*> Option.option Option.auto
+         ( Option.long "provider"
+        <> Option.help "Terraform provider."
+        <> Option.metavar "PROVIDER"
+         )
+
+    <*> Option.option Option.auto
+         ( Option.long "schema-type"
+        <> Option.help "Resource or DataSource."
+        <> Option.metavar "Resource|DataSource"
+         )
+
+    <*> Option.strOption
+         ( Option.long "output-dir"
+        <> Option.help "Output directory."
+        <> Option.metavar "DIR"
          )
 
     <*> some (Option.strArgument
@@ -138,8 +164,18 @@ main = do
         pure config
 
     say ("Rendering " ++ templatePath)
-    handleError templatePath (Template.render template configs)
-        >>= emit
+    rendered <- handleError templatePath
+              . Template.renderConfigs template (optionsProvider opts)
+              $ groupConfigs (optionsProvider opts)
+                             (optionsSchemaType opts)
+                             configs
+
+    for_ (Map.toList rendered) $ \(ns, contents) -> do
+        let modulePath = optionsOutputDir opts </> namespace '/' ns <.> "hs"
+
+        say ("Writing " ++ modulePath)
+        Dir.createDirectoryIfMissing True (Path.takeDirectory modulePath)
+        LText.writeFile modulePath contents
 
 handleError :: FilePath -> Either String a -> IO a
 handleError path = \case
@@ -151,6 +187,3 @@ handleError path = \case
 
 say :: String -> IO ()
 say = IO.hPutStrLn IO.stderr
-
-emit :: LText.Text -> IO ()
-emit = LText.hPutStrLn IO.stdout

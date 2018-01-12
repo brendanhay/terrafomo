@@ -1,0 +1,23 @@
+_name: google_compute_url_map
+schema:
+  arguments:
+    default_service:
+      required: true
+      help: (Required) The backend service or backend bucket to use when none of the
+        given rules match.
+      type: Text
+    name:
+      required: true
+      help: (Required) A unique name for the resource, required by GCE. Changing this
+        forces a new resource to be created.
+      type: Text
+  attributes:
+    fingerprint:
+      help: The unique fingerprint for this resource.
+      type: Text
+    self_link:
+      help: The URI of the created resource.
+      type: Text
+    id:
+      help: The GCE assigned ID of the resource.
+      type: Text

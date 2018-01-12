@@ -1,0 +1,25 @@
+_name: google_runtimeconfig_variable
+schema:
+  arguments:
+    parent:
+      required: true
+      help: (Required) The name of the RuntimeConfig resource containing this variable.
+      type: Text
+    text:
+      required: true
+      help: ! ' or  @value@  - (Required) The content to associate with the variable.
+        Exactly one of  @text@  or  @variable@  must be specified. If  @text@  is
+        specified, it must be a valid UTF-8 string and less than 4096 bytes in length.
+        If  @value@ is specified, it must be base64 encoded and less than 4096 bytes
+        in length.'
+      type: Text
+    name:
+      required: true
+      help: (Required) The name of the variable to manage. Note that variable names
+        can be hierarchical using slashes (e.g. "prod-variables/hostname").
+      type: Text
+  attributes:
+    update_time:
+      help: ! '(Computed) The timestamp in RFC3339 UTC "Zulu" format, accurate to
+        nanoseconds, representing when the variable was last updated. Example: "2016-10-09T12:33:37.578138407Z".'
+      type: Text

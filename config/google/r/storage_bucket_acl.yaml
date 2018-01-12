@@ -1,0 +1,8 @@
+_name: google_storage_bucket_acl
+schema:
+  arguments:
+    bucket:
+      required: true
+      help: (Required) The name of the bucket it applies to.
+      type: Text
+  attributes: {}

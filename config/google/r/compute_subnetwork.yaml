@@ -1,0 +1,26 @@
+_name: google_compute_subnetwork
+schema:
+  arguments:
+    ip_cidr_range:
+      required: true
+      help: (Required) The IP address range that machines in this network are assigned
+        to, represented as a CIDR block.
+      type: Text
+    network:
+      required: true
+      help: (Required) The network name or resource link to the parent network of
+        this subnetwork. The parent network must have been created in custom subnet
+        mode.
+      type: Text
+    name:
+      required: true
+      help: (Required) A unique name for the resource, required by GCE. Changing this
+        forces a new resource to be created.
+      type: Text
+  attributes:
+    self_link:
+      help: The URI of the created resource.
+      type: Text
+    gateway_address:
+      help: The IP address of the gateway.
+      type: Text

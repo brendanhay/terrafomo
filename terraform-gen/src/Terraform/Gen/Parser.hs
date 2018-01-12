@@ -84,7 +84,7 @@ schemaParser = do
     void h2
 
     -- resource/datasource name
-    schemaName <- h1 >>> text
+    schemaName <- h1 >>> textual
 
     -- argument name/help/required
     (Map.fromList -> schemaArguments) <-
@@ -238,6 +238,7 @@ parse' p n = P.runParser' p . initial . filter valid
   where
     valid (NodeType t) =
         case t of
+            HTML_INLINE  _   -> False
             HTML_BLOCK   _   -> False
             CUSTOM_BLOCK _ _ -> False
             THEMATIC_BREAK   -> False

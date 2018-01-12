@@ -1,31 +1,33 @@
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE DeriveGeneric       #-}
+{-# LANGUAGE LambdaCase          #-}
+{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE RecordWildCards     #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Terraform.Gen.Config where
 
-import Data.Aeson      (FromJSON, ToJSON, (.=))
-import Data.Function   (on)
-import Data.Map.Strict (Map)
-import Data.Monoid     (First, Last (Last))
-import Data.Text       (Text)
+import Control.Applicative ((<|>))
+
+import Data.Aeson         (FromJSON, ToJSON)
+import Data.Function      (on)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Map.Strict    (Map)
+import Data.Monoid        (First, Last (Last), (<>))
+import Data.Text          (Text)
 
 import GHC.Generics (Generic)
+
+import Text.Printf (printf)
 
 import qualified Data.Aeson       as JSON
 import qualified Data.Aeson.Types as JSON
 import qualified Data.Char        as Char
 import qualified Data.Foldable    as Fold
+import qualified Data.List.Split  as List
 import qualified Data.Map.Strict  as Map
-import qualified Text.EDE         as EDE
-
--- * Does it make sense to group configs by common prefixes? say,
---   aws_<this>_... if there is a) more than n configs b) groups of configs are >= 3?
--- * Switch to using Megaparsec.Char to parse Required/Optional and add Haddockisms.
--- * Continue investigating having a Dhall frontend
--- * Add a Makefile
---     - apply patches (like fixing the code block ``` in r/ssm_patch_group)
---     - clone the provider repo, run for that provider
+import qualified Data.Text        as Text
+import qualified GHC.Read         as Read
+import qualified Text.Read.Lex    as Read
 
 -- Syntax Types
 
@@ -92,11 +94,6 @@ instance FromJSON Attr where
 
 -- Configuration Types
 
--- data SchemaType
---     = Resource
---     | DataSource
---       deriving (Show, Read)
-
 data Config = Config
     { config_Name  :: !Text
     , configSchema :: !Schema
@@ -118,8 +115,63 @@ instance FromJSON Config where
 schemaToConfig :: Text -> Schema -> Config
 schemaToConfig config_Name configSchema = Config{..}
 
-configsToEnv :: [Config] -> JSON.Object
-configsToEnv xs = EDE.fromPairs ["configs" .= createMap config_Name xs]
+data Provider
+    = AWS
+    | DigitalOcean
+    | Google
+
+instance Show Provider where
+    show = \case
+        AWS          -> "aws"
+        DigitalOcean -> "digitalocean"
+        Google       -> "google"
+
+instance Read Provider where
+    readPrec = Read.parens $
+        let match x = Read.expectP (Read.Ident (show x)) >> pure x
+         in match AWS
+        <|> match DigitalOcean
+        <|> match Google
+
+instance ToJSON Provider where
+    toJSON = JSON.toJSON . providerName
+
+providerName :: Provider -> Text
+providerName = \case
+    AWS          -> "AWS"
+    DigitalOcean -> "DigitalOcean"
+    Google       -> "Google"
+
+data NS = NS (NonEmpty Text)
+    deriving (Show, Eq, Ord)
+
+instance ToJSON NS where
+    toJSON = JSON.toJSON . namespace '.'
+
+namespace :: Char -> NS -> String
+namespace c (NS xs) =
+    Text.unpack $ Text.intercalate (Text.singleton c) (Fold.toList xs)
+
+data SchemaType
+    = Resource
+    | DataSource
+      deriving (Show, Read, Eq)
+
+groupConfigs :: Provider -> SchemaType -> [Config] -> Map NS [Config]
+groupConfigs p t xs
+    | length xs > 200 = mod 10
+    | length xs > 100 = mod 5
+    | length xs > 50  = mod 2
+    | otherwise       = single module
+
+    Map.fromListWith (<>) . zipWith assignNamespace [1..] . List.chunksOf 20
+  where
+    ns  s = NS ("Terraform" :| s)
+    type_ = Text.pack (show t)
+
+    assignNamespace (n :: Int) xs =
+        (,) (ns [providerName p, type_, Text.pack (printf "R%02d" n)])
+            xs
 
 -- JSON De/serialization
 

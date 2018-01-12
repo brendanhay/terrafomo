@@ -1,0 +1,8 @@
+_name: google_runtimeconfig_config
+schema:
+  arguments:
+    name:
+      required: true
+      help: (Required) The name of the runtime config.
+      type: Text
+  attributes: {}

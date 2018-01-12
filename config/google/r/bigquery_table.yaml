@@ -1,0 +1,76 @@
+_name: google_bigquery_table
+schema:
+  arguments:
+    table_id:
+      required: true
+      help: (Required) A unique ID for the resource. Changing this forces a new resource
+        to be created.
+      type: Text
+    friendly_name:
+      required: false
+      help: (Optional) A descriptive name for the table.
+      type: Text
+    project:
+      required: false
+      help: (Optional) The project in which the resource belongs. If it is not provided,
+        the provider project is used.
+      type: Text
+    dataset_id:
+      required: true
+      help: (Required) The dataset ID to create the table in. Changing this forces
+        a new resource to be created.
+      type: Text
+    expiration_time:
+      required: false
+      help: (Optional) The time when this table expires, in milliseconds since the
+        epoch. If not present, the table will persist indefinitely. Expired tables
+        will be deleted and their storage reclaimed.
+      type: Text
+    schema:
+      required: false
+      help: (Optional) A JSON schema for the table.
+      type: Text
+    labels:
+      required: false
+      help: (Optional) A mapping of labels to assign to the resource.
+      type: Text
+    time_partitioning:
+      required: false
+      help: (Optional) If specified, configures time-based partitioning for this table.
+        Structure is documented below.
+      type: Text
+    description:
+      required: false
+      help: (Optional) The field description.
+      type: Text
+  attributes:
+    num_long_term_bytes:
+      help: The number of bytes in the table that are considered "long-term storage".
+      type: Text
+    etag:
+      help: A hash of the resource.
+      type: Text
+    type_:
+      help: Describes the table type.
+      type: Text
+    location:
+      help: The geographic location where the table resides. This value is inherited
+        from the dataset.
+      type: Text
+    num_rows:
+      help: The number of rows of data in this table, excluding any data in the streaming
+        buffer.
+      type: Text
+    num_bytes:
+      help: The size of this table in bytes, excluding any data in the streaming buffer.
+      type: Text
+    self_link:
+      help: The URI of the created resource.
+      type: Text
+    creation_time:
+      help: The time when this table was created, in milliseconds since the epoch.
+      type: Text
+    last_modified_time:
+      help: The time when this table was last modified, in milliseconds since the
+        epoch.
+      type: Text
