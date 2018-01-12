@@ -1,13 +1,13 @@
-{-# LANGUAGE DeriveGeneric       #-}
-{-# LANGUAGE LambdaCase          #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE RecordWildCards     #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE RecordWildCards            #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 
 module Terrafomo.Gen.Provider where
 
 import Data.Aeson         (FromJSON, ToJSON, ToJSONKey)
-import Data.Function      (on)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
 import Data.Semigroup     (Semigroup ((<>)))
@@ -24,23 +24,25 @@ import qualified Data.Aeson.Types   as JSON
 import qualified Data.Foldable      as Fold
 import qualified Data.Map.Strict    as Map
 import qualified Data.Text          as Text
-import qualified System.FilePath    as Path
 import qualified Terrafomo.Gen.JSON as JSON
 
--- Haskell Namespaces
+-- Haskell NSs
 
-data NS = NS (NonEmpty Text)
-    deriving (Show, Eq, Ord)
+newtype NS = NS (NonEmpty Text)
+    deriving (Show, Eq, Ord, Semigroup)
 
 instance ToJSON NS where
-    toJSON = JSON.toJSON . fromNamespace '.'
+    toJSON = JSON.toJSON . fromNS '.'
 
 instance ToJSONKey NS where
-    toJSONKey = JSON.toJSONKeyText (Text.pack . fromNamespace '.')
+    toJSONKey = JSON.toJSONKeyText (Text.pack . fromNS '.')
 
-fromNamespace :: Char -> NS -> String
-fromNamespace c (NS xs) =
+fromNS :: Char -> NS -> String
+fromNS c (NS xs) =
     Text.unpack $ Text.intercalate (Text.singleton c) (Fold.toList xs)
+
+pathNS :: NS -> String
+pathNS = fromNS '/'
 
 -- Provider Configuration
 
@@ -52,25 +54,32 @@ data Provider = Provider
 instance FromJSON Provider where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
-provider_Namespace :: Provider -> NS
-provider_Namespace p = NS ("Terrafomo" :| [provider_Name p, "Provider"])
+mainNS :: Provider -> NS
+mainNS p = NS ("Terrafomo" :| [provider_Name p])
 
-schemaNamespaces :: Provider -> SchemaType -> [a] -> (NS, Map NS [a])
-schemaNamespaces p t xs
-    | length xs > 200 = (,) contents (partition 8 xs)
-    | length xs > 100 = (,) contents (partition 4 xs)
-    | length xs > 50  = (,) contents (partition 2 xs)
-    | otherwise       = (,) contents (Map.singleton contents xs)
+typesNS :: Provider -> NS
+typesNS p = mainNS p <> NS (pure "Types")
+
+providerNS :: Provider -> NS
+providerNS p = mainNS p <> NS (pure "Provider")
+
+schemaNS :: Provider -> SchemaType -> NS
+schemaNS p typ = mainNS p <> NS (pure (Text.pack (show typ)))
+
+moduleNS :: Provider -> SchemaType -> [a] -> Map NS [a]
+moduleNS p typ xs
+    | length xs > 200 = partition 8 xs
+    | length xs > 100 = partition 4 xs
+    | length xs > 50  = partition 2 xs
+    | otherwise       = Map.singleton namespace xs
   where
-    contents = namespace []
-
     partition m =
         Map.fromListWith (<>)
             . zipWith assign (map (flip mod m) [1..])
 
     assign (n :: Int) x =
-        (,) (namespace [Text.pack (printf "M%02d" n)])
+        (,) (namespace <> NS (pure $ Text.pack (printf "M%02d" n)))
             [x]
 
-    namespace s = NS ("Terrafomo" :| provider_Name p : Text.pack (show t) : s)
+    namespace = schemaNS p typ
 

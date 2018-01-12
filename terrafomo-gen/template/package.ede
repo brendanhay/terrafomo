@@ -10,10 +10,9 @@ library:
     - gen
 
   exposed-modules:
-    - Terrafomo.{{ provider }}
-    - Terrafomo.{{ provider }}.DataSource
-    - Terrafomo.{{ provider }}.Provider
-    - Terrafomo.{{ provider }}.Resource
+{% for module in exposed %}
+    - {{ module.value }}
+{% endfor %}
 
   reexported-modules: >
     terrafomo:Terrafomo.Format,

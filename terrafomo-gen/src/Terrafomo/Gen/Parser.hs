@@ -22,7 +22,6 @@ import Control.Applicative (many, some, (<|>))
 import Control.Monad       (unless, void)
 
 import Terrafomo.Gen.Markdown
-import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
 
@@ -76,6 +75,9 @@ instance P.Stream [Node] where
     takeWhile_ = List.span
 
 -- Abstract Syntax Parsers
+
+providerParser :: Parser Schema
+providerParser = schemaParser
 
 schemaParser :: Parser Schema
 schemaParser = do

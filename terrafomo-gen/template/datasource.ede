@@ -17,8 +17,10 @@ import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.{{ provider }}
 import Terrafomo.Syntax.Attribute (Attr, Computed)
+{% for import in imports %}
+import {{ import.value }}
+{% endfor %}
 
 import qualified Terrafomo.Syntax.TH as TH
 {% for schema in schemas %}

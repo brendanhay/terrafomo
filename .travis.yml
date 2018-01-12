@@ -37,4 +37,8 @@ matrix:
     # Core
     - env: GHCVER=8.2 LIBRARY=terrafomo
       addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
+
+    # Libraries
+    - env: GHCVER=8.2 LIBRARY=provider/terrafomo-aws
+      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
 # END GENERATED

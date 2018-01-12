@@ -12,7 +12,6 @@ import Control.Monad       (unless, when, (>=>))
 import Data.Aeson          (FromJSON, ToJSON)
 
 import Data.Bifunctor (first)
-import Data.Foldable  (for_)
 import Data.Function  ((&))
 import Data.Semigroup (Semigroup ((<>)))
 
@@ -23,9 +22,8 @@ import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Template (Templates (Templates))
 
-import qualified Data.Foldable as Fold
-
 import qualified Control.Error          as Error
+import qualified Data.Foldable          as Fold
 import qualified Data.Map.Strict        as Map
 import qualified Data.Text              as Text
 import qualified Data.Text.IO           as Text
@@ -123,7 +121,7 @@ optionsParser = Options
 
 parserInfo :: Option.ParserInfo Options
 parserInfo =
-     ( Option.header "Terraform Haskell Types Generator"
+     ( Option.header "Terrafomo Haskell Types Generator"
     <> Option.fullDesc
           & Option.info
               ( Option.helper
@@ -166,7 +164,7 @@ loadProvider opts = do
     echo ("Provider " ++ markdownFile ++ " == " ++ show exists)
 
     if exists
-        then (provider,) . Just <$> loadSchema Parser.schemaParser path
+        then (provider,) . Just <$> loadSchema Parser.providerParser path
         else pure (provider, Nothing)
 
 loadResources :: Options -> Script [Schema]
@@ -237,12 +235,12 @@ renderProvider tmpls p@Provider{providerPackage} schema = do
     let dir = maybe "terrafomo" (Path.combine "provider" . Text.unpack)
                     providerPackage
 
-    for_ providerPackage $
+    Fold.for_ providerPackage $
         const (renderPackage tmpls dir p)
 
-    for_ schema $
+    Fold.for_ schema $
         hoistEither . Template.renderProvider tmpls p
-            >=> writeNamespace dir
+            >=> writeNS dir
 
     pure dir
 
@@ -252,21 +250,18 @@ renderPackage
     -> Provider
     -> Script ()
 renderPackage tmpls dir p = do
-    let packageFile = dir    </> "package" <.> "yaml"
-        srcDir      = dir    </> "src"
-        gitKeepFile = srcDir </> ".gitkeep"
+    let packageFile  = dir </> "package" <.> "yaml"
+        srcDir       = dir </> "src"
 
     pkg <- hoistEither (Template.renderPackage tmpls p)
 
+    Fold.traverse_ (touch . Path.combine srcDir)
+        [ pathNS (mainNS  p) <.> "hs"
+        , pathNS (typesNS p) <.> "hs"
+        ]
+
     echo ("Writing " ++ packageFile)
-    scriptIO $ do
-        Dir.createDirectoryIfMissing True srcDir
-
-        exists <- Dir.doesFileExist gitKeepFile
-        unless exists $
-            appendFile gitKeepFile mempty
-
-        LText.writeFile packageFile pkg
+    scriptIO (LText.writeFile packageFile pkg)
 
 renderSchemas
     :: Templates EDE.Template
@@ -276,18 +271,18 @@ renderSchemas
     -> [Schema]
     -> Script ()
 renderSchemas tmpls dir p typ xs = do
-    let writeModule         = writeNamespace dir
-        (contents, modules) = schemaNamespaces p typ xs
+    let writeModule = writeNS dir
+        modules     = moduleNS p typ xs
 
-    hoistEither (Template.renderSchemas tmpls p Resource modules)
+    hoistEither (Template.renderSchemas tmpls p typ modules)
         >>= Fold.traverse_ writeModule . Map.toList
 
-    hoistEither (Template.renderContents tmpls Resource contents modules)
+    hoistEither (Template.renderContents tmpls p typ modules)
         >>= writeModule
 
-writeNamespace :: FilePath -> (NS, LText.Text) -> Script ()
-writeNamespace dir (ns, text) = do
-    let moduleFile = dir </> "gen" </> fromNamespace '/' ns <.> "hs"
+writeNS :: FilePath -> (NS, LText.Text) -> Script ()
+writeNS dir (ns, text) = do
+    let moduleFile = dir </> "gen" </> pathNS ns <.> "hs"
 
     echo ("Writing " ++ moduleFile)
     scriptIO $ do
@@ -356,3 +351,11 @@ parseYAML file = do
 
 echo :: String -> Script ()
 echo = Error.scriptIO . IO.putStrLn
+
+touch :: FilePath -> Script ()
+touch file =
+    scriptIO $ do
+        Dir.createDirectoryIfMissing True (Path.takeDirectory file)
+        exists <- Dir.doesFileExist file
+        unless exists $
+            appendFile file mempty

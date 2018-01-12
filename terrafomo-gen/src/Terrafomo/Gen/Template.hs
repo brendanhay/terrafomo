@@ -38,8 +38,15 @@ renderPackage
     -> Either Text LText.Text
 renderPackage tmpls p =
     render (packageTemplate tmpls)
-        [ "provider" .= provider_Name p
+        [ "provider" .= provider_Name   p
         , "package"  .= providerPackage p
+        , "exposed"  .=
+            [ mainNS     p
+            , typesNS    p
+            , providerNS p
+            , schemaNS   p DataSource
+            , schemaNS   p Resource
+            ]
         ]
 
 renderProvider
@@ -48,22 +55,25 @@ renderProvider
     -> Schema
     -> Either Text (NS, LText.Text)
 renderProvider tmpls p x =
-    second (provider_Namespace p,) $ render (providerTemplate tmpls)
-        [ "namespace" .= provider_Namespace p
+    let ns = providerNS p
+     in second (ns,) $ render (providerTemplate tmpls)
+        [ "namespace" .= ns
         , "provider"  .= provider_Name p
         , "schema"    .= x
+        , "imports"   .= [typesNS p]
         ]
 
 renderContents
     :: Templates EDE.Template
+    -> Provider
     -> SchemaType
-    -> NS
-    -> Map NS [Schema]
+    -> Map NS a
     -> Either Text (NS, LText.Text)
-renderContents tmpls typ ns xs =
-    second (ns,) $ render (contentsTemplate tmpls)
+renderContents tmpls p typ xs =
+    let ns = schemaNS p typ
+     in second (ns,) $ render (contentsTemplate tmpls)
         [ "namespace" .= ns
-        , "contents"  .= fmap (map (getTypeName typ)) xs
+        , "imports"   .= Map.keys xs
         ]
 
 renderSchemas
@@ -79,6 +89,7 @@ renderSchemas tmpls p typ = Map.traverseWithKey go
             [ "namespace" .= ns
             , "provider"  .= provider_Name p
             , "schemas"   .= createMap (getTypeName typ) xs
+            , "imports"   .= [mainNS p]
             ]
 
     createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a

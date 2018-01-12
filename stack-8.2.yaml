@@ -8,4 +8,5 @@ packages:
   - terrafomo
   - terrafomo-gen
 # GENERATED
+  - provider/terrafomo-aws
 # END GENERATED

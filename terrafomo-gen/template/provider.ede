@@ -1,13 +1,19 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DeriveGeneric #-}
+
 module {{ namespace }} where
 
 import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.{{ provider }}.Types
+{% for import in imports %}
+import {{ import.value }}
+{% if import.last %}
 
+{% endif %}
+{% endfor %}
 -- | {{ provider }} Terraform provider.
 {% if schema.about %}
 --
@@ -27,7 +33,7 @@ import Terrafomo.{{ provider }}.Types
 {% endfor %}
 data {{ provider }} = {{ provider }}
   {% for arg in schema.arguments %}
-    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(Attr {{ arg.value.type }})
+    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !{{ arg.value.type }}
       {- ^ {{ arg.value.help }} -}
     {% if arg.last %}
     } deriving (Show, Eq, Generic)

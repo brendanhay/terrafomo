@@ -4,6 +4,6 @@ module {{ namespace }}
     ( module Export
     ) where
 
-{% for schemas in contents %}
-import {{ schemas.key }} as Export
+{% for import in imports %}
+import {{ import.value }} as Export
 {% endfor %}
