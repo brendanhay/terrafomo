@@ -60,14 +60,21 @@ makeResource prefix meta name = do
             (pure <$> lens)
 
         , TH.instanceD (TH.cxt [])
-            (TH.conT ''HCL.ToValue `TH.appT` TH.conT alias) []
+            (TH.conT ''HCL.ToValue `TH.appT` TH.conT alias)
+            [ TH.funD 'HCL.toValue
+                [ TH.clause []
+                    (TH.normalB
+                        (TH.varE 'HCL.genericSerialize `TH.appE` TH.listE [TH.stringE meta]))
+                    []
+                ]
+            ]
 
         , TH.sigD ctor
             (TH.parensT (TH.conT name `TH.appT` TH.conT ''Resource.InitialSchema))
         , TH.funD ctor
             [ TH.clause []
                 (TH.normalB
-                     (TH.varE 'Generic.to `TH.appE` TH.varE 'Required.gInitialState))
+                    (TH.varE 'Generic.to `TH.appE` TH.varE 'Required.gInitialState))
                 []
             ]
         ]

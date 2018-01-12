@@ -102,4 +102,7 @@ example = do
                   & dependsOn bucket1
                   & ignoreChange "ami"
 
+  -- example of modifying the provider
+  --     have the provider in the metadata again?
+
     pure ()

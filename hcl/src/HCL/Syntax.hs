@@ -32,17 +32,11 @@ instance Pretty Key where
         Ident  k -> pretty k
         Quoted k -> PP.dquotes (pretty k)
 
--- instance Pretty Statement where
---     prettyList = render
---     pretty     = \case
---         Assign k  v  -> pretty k <+> "=" <+> pretty v
---         Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
-
 data Value
     = Assign  !Key            !Value   -- foo = bar
-    | Object  !(NonEmpty Key) ![Value] -- resource foo bar { ... }
-    | Block   ![Value]                 -- { foo = bar }
-    | List    ![Value]
+    | Object  !(NonEmpty Key) ![Value] -- foo bar { ... }
+    | Block   ![Value]                 -- { ... }
+    | List    ![Value]                 -- [ ... ]
     | Bool    !Bool
     | Number  !Integer
     | Float   !Double
@@ -56,7 +50,8 @@ instance IsString Value where
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
-        Assign k  v  -> pretty k <+> "=" <+> pretty v
+        Assign k v          -> pretty k <+> "=" <+> pretty v
+
         Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
 
         Block vs            -> PP.vcat (map pretty vs)

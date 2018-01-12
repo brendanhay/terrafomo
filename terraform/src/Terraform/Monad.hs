@@ -28,17 +28,13 @@ import qualified HCL
 import qualified Terraform.Syntax.Resource  as Resource
 import qualified Terraform.Syntax.Serialize as HCL
 
-type Serialized = HCL.Value
-
-type Res = ()
-
 -- Tagged by some resource/data differentiator, and the provider type.
 data Ref b a = Ref Key
     deriving (Show, Eq, Ord)
 
 data TerraformState = TerraformState
-    { _providers :: !(HashMap Alias Serialized)
-    , _resources :: !(Map Key Serialized)
+    { _providers :: !(HashMap Alias HCL.Value)
+    , _resources :: !(Map Key HCL.Value)
     }
 
 $(TH.makeLenses ''TerraformState)
@@ -95,6 +91,8 @@ resourceWith x@Resource{_provider, _key, _schema} = do
             HCL.toValue _provider
 
     pure (Ref _key)
+
+-- FIXME: move to Syntax.Resource
 
 -- Depends on is only used to set the actual dependencies from a value like:
 -- dependsOn (resource "foo" def)
