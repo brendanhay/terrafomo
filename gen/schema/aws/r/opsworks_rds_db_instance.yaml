@@ -23,7 +23,7 @@ attributes:
     help: ! '- The computed id. Please note that this is only used internally to identify
       the stack <-> instance relation. This value is not used in aws.'
     type: Text
-about: Provides an OpsWorks RDS DB Instance resource. ~> All arguments including the
-  username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
-  .
+about: ! 'Provides an OpsWorks RDS DB Instance resource. ~> Note: All arguments including
+  the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .'
 examples: []

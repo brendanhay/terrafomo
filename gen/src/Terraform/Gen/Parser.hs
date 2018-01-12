@@ -82,7 +82,7 @@ instance P.Stream [Node] where
 schemaParser :: Parser Schema
 schemaParser = do
     -- preamble
-    void h2
+    P.skipManyTill node (P.lookAhead (void h1))
 
     -- resource/datasource name
     schema_Name <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
@@ -192,7 +192,7 @@ heading = satisfy (\case; Heading _ -> True; _ -> False) <?> "heading"
 
 string :: Text -> Parser Text
 string s = do
-    x <- text
+    x <- textual
     unless (x == s) $
        fail ("Expected text: " ++ show s)
     pure x
@@ -208,8 +208,13 @@ paragraph = match PARAGRAPH <?> "paragraph"
 
 textual :: Parser Text
 textual =
-    Text.intercalate " " . map Text.strip
-        <$> some ( fmap (surround '<' '>') link
+    let emph = satisfy $ \case
+            Emph   -> True
+            Strong -> True
+            _      -> False
+     in Text.intercalate " " . map Text.strip
+        <$> some ( P.try (emph >>> textual)
+               <|> fmap (surround '<' '>') link
                <|> fmap (surround '@' '@') code
                <|> text
                  )
@@ -282,8 +287,6 @@ parse' p n = P.runParser' p . initial . filter valid
             THEMATIC_BREAK   -> False
             LINEBREAK        -> False
             SOFTBREAK        -> False
-            STRONG           -> False
-            EMPH             -> False
             _                -> True
     valid _            = True
 

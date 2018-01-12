@@ -1,0 +1,94 @@
+_name: cloudstack_template
+arguments:
+  hypervisor:
+    required: true
+    help: (Required) The target hypervisor for the template. Changing this forces
+      a new resource to be created.
+    type: Text
+  project:
+    required: false
+    help: (Optional) The name or ID of the project to create this template for. Changing
+      this forces a new resource to be created.
+    type: Text
+  url:
+    required: true
+    help: (Required) The URL of where the template is hosted. Changing this forces
+      a new resource to be created.
+    type: Text
+  format:
+    required: true
+    help: (Required) The format of the template. Valid values are @QCOW2@ , @RAW@
+      , and @VHD@ .
+    type: Text
+  zone:
+    required: true
+    help: (Required) The name or ID of the zone where this template will be created.
+      Changing this forces a new resource to be created.
+    type: Text
+  is_public:
+    required: false
+    help: (Optional) Set to indicate if the template is available for all accounts
+      (defaults true)
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the template.
+    type: Text
+  is_ready_timeout:
+    required: false
+    help: (Optional) The maximum time in seconds to wait until the template is ready
+      for use (defaults 300 seconds)
+    type: Text
+  is_extractable:
+    required: false
+    help: (Optional) Set to indicate if the template is extractable (defaults false)
+    type: Text
+  is_featured:
+    required: false
+    help: (Optional) Set to indicate if the template is featured (defaults false)
+    type: Text
+  password_enabled:
+    required: false
+    help: (Optional) Set to indicate if the template should be password enabled (defaults
+      false)
+    type: Text
+  display_text:
+    required: false
+    help: (Optional) The display name of the template.
+    type: Text
+  is_dynamically_scalable:
+    required: false
+    help: (Optional) Set to indicate if the template contains tools to support dynamic
+      scaling of VM cpu/memory (defaults false)
+    type: Text
+  os_type:
+    required: true
+    help: (Required) The OS Type that best represents the OS of this template.
+    type: Text
+attributes:
+  is_public:
+    help: ! '- Set to "true" if the template is public.'
+    type: Text
+  is_extractable:
+    help: ! '- Set to "true" if the template is extractable.'
+    type: Text
+  is_featured:
+    help: ! '- Set to "true" if the template is featured.'
+    type: Text
+  id:
+    help: ! '- The template ID.'
+    type: Text
+  password_enabled:
+    help: ! '- Set to "true" if the template is password enabled.'
+    type: Text
+  display_text:
+    help: ! '- The display text of the template.'
+    type: Text
+  is_dynamically_scalable:
+    help: ! '- Set to "true" if the template is dynamically scalable.'
+    type: Text
+  is_ready:
+    help: ! '- Set to "true" once the template is ready for use.'
+    type: Text
+about: Registers an existing template into the CloudStack cloud.
+examples: []

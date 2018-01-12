@@ -44,7 +44,8 @@ arguments:
     required: false
     help: (Optional) Boolean controlling whether to increase the disk size when resizing
       a Droplet. It defaults to @true@ . When set to @false@ , only the Droplet's
-      RAM and CPU will be resized. . Increasing only RAM and CPU is reversible.
+      RAM and CPU will be resized. Increasing a Droplet's disk size is a permanent
+      change . Increasing only RAM and CPU is reversible.
     type: Text
   user_data:
     required: true

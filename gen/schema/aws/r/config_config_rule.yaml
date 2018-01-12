@@ -30,7 +30,7 @@ arguments:
     help: (Optional) Description of the rule
     type: Text
 attributes: {}
-about: Provides an AWS Config Rule. ~> Config Rule requires an existing </docs/providers/aws/r/config_configuration_recorder.html>
+about: ! 'Provides an AWS Config Rule. ~> Note: Config Rule requires an existing </docs/providers/aws/r/config_configuration_recorder.html>
   to be present. Use of @depends_on@ is recommended (as shown below) to avoid race
-  conditions.
+  conditions.'
 examples: []

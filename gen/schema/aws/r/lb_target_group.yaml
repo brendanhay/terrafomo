@@ -62,6 +62,7 @@ attributes:
   id:
     help: ! '- The ARN of the Target Group (matches @arn@ )'
     type: Text
-about: Provides a Target Group resource for use with Load Balancer resources. ~>  @aws_alb_target_group@
-  is know as @aws_lb_target_group@ . The functionality is identical.
+about: ! 'Provides a Target Group resource for use with Load Balancer resources. ~>
+  Note:  @aws_alb_target_group@ is know as @aws_lb_target_group@ . The functionality
+  is identical.'
 examples: []

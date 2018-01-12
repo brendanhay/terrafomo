@@ -1,0 +1,52 @@
+_name: azurerm_virtual_network_peering
+arguments:
+  use_remote_gateways:
+    required: false
+    help: (Optional) Controls if remote gateways can be used on the local virtual
+      network. If the flag is set to true, and allowGatewayTransit on the remote peering
+      is also true, virtual network will use gateways of remote virtual network for
+      transit. Only one peering can have this flag set to true. This flag cannot be
+      set if virtual network already has a gateway. Defaults to false.
+    type: Text
+  allow_virtual_network_access:
+    required: false
+    help: (Optional) Controls if the VMs in the remote virtual network can access
+      VMs in the local virtual network. Defaults to false.
+    type: Text
+  allow_gateway_transit:
+    required: false
+    help: (Optional) Controls gatewayLinks can be used in the remote virtual network’s
+      link to the local virtual network.
+    type: Text
+  remote_virtual_network_id:
+    required: true
+    help: (Required) The full Azure resource ID of the remote virtual network.  Changing
+      this forces a new resource to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the virtual network peering. Changing this forces
+      a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the virtual
+      network. Changing this forces a new resource to be created.
+    type: Text
+  virtual_network_name:
+    required: true
+    help: (Required) The name of the virtual network. Changing this forces a new resource
+      to be created.
+    type: Text
+  allow_forwarded_traffic:
+    required: false
+    help: (Optional) Controls if forwarded traffic from  VMs in the remote virtual
+      network is allowed. Defaults to false.
+    type: Text
+attributes:
+  id:
+    help: ! '- The Virtual Network Peering resource ID.'
+    type: Text
+about: Creates a new virtual network peering which allows resources to access other
+  resources in the linked virtual network.
+examples: []

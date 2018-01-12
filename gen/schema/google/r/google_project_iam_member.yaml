@@ -17,9 +17,9 @@ attributes:
   etag:
     help: ! '- (Computed) The etag of the project''s IAM policy.'
     type: Text
-about: Allows creation and management of a single member for a single binding within
-  the IAM policy for an existing Google Cloud Platform project. ~> This resource be
-  used in conjunction with @google_project_iam_policy@ or they will fight over what
-  your policy should be. Similarly, roles controlled by @google_project_iam_binding@
-  should not be assigned to using @google_project_iam_member@ .
+about: ! 'Allows creation and management of a single member for a single binding within
+  the IAM policy for an existing Google Cloud Platform project. ~> Note: This resource
+  must not be used in conjunction with @google_project_iam_policy@ or they will fight
+  over what your policy should be. Similarly, roles controlled by @google_project_iam_binding@
+  should not be assigned to using @google_project_iam_member@ .'
 examples: []

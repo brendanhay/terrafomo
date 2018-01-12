@@ -1,0 +1,25 @@
+_name: azurerm_image
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the Image.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The Name of the Resource Group where this Image exists.
+    type: Text
+attributes:
+  location:
+    help: ! '- the Azure Location where this Image exists.'
+    type: Text
+  data_disk:
+    help: ! '- a collection of @data_disk@ blocks as defined below.'
+    type: Text
+  os_disk:
+    help: ! '- a @os_disk@ block as defined below.'
+    type: Text
+  tags:
+    help: ! '- a mapping of tags to assigned to the resource.'
+    type: Text
+about: Use this data source to access information about an Image.
+examples: []

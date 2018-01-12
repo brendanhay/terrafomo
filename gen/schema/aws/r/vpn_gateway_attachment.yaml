@@ -15,8 +15,9 @@ attributes:
   vpn_gateway_id:
     help: ! '- The ID of the Virtual Private Gateway.'
     type: Text
-about: Provides a Virtual Private Gateway attachment resource, allowing for an existing
-  hardware VPN gateway to be attached and/or detached from a VPC. -> The <vpn_gateway.html>
-  resource can also automatically attach the Virtual Private Gateway it creates to
-  an existing VPC by setting the <vpn_gateway.html#vpc_id> attribute accordingly.
+about: ! 'Provides a Virtual Private Gateway attachment resource, allowing for an
+  existing hardware VPN gateway to be attached and/or detached from a VPC. -> Note:
+  The <vpn_gateway.html> resource can also automatically attach the Virtual Private
+  Gateway it creates to an existing VPC by setting the <vpn_gateway.html#vpc_id> attribute
+  accordingly.'
 examples: []

@@ -1,0 +1,33 @@
+_name: azurerm_postgresql_firewall_rule
+arguments:
+  start_ip_address:
+    required: true
+    help: (Required) Specifies the Charset for the PostgreSQL Database. Changing this
+      forces a new resource to be created.
+    type: Text
+  server_name:
+    required: true
+    help: (Required) Specifies the name of the PostgreSQL Server. Changing this forces
+      a new resource to be created.
+    type: Text
+  end_ip_address:
+    required: true
+    help: (Required) Specifies the End IP Address associated with this Firewall Rule.
+      Changing this forces a new resource to be created.
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the PostgreSQL Firewall Rule. Changing
+      this forces a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which the PostgreSQL Server
+      exists. Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the PostgreSQL Firewall Rule.'
+    type: Text
+about: Creates a Firewall Rule for a PostgreSQL Server
+examples: []

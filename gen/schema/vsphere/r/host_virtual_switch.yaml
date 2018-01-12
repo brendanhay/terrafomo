@@ -1,0 +1,28 @@
+_name: vsphere_host_virtual_switch
+arguments:
+  mtu:
+    required: true
+    help: ! '- (Integer, optional) The maximum transmission unit (MTU) for the virtual
+      switch. Default: @1500@ .'
+    type: Text
+  host_system_id:
+    required: true
+    help: ! '- (String, required, forces new resource) The managed object ID of the
+      host to set the virtual switch up on.'
+    type: Text
+  number_of_ports:
+    required: true
+    help: ! '- (Integer, optional) The number of ports to create with this virtual
+      switch. Default: @128@ .'
+    type: Text
+  name:
+    required: true
+    help: ! '- (String, required, forces new resource) The name of the virtual switch.'
+    type: Text
+attributes: {}
+about: The @vsphere_host_virtual_switch@ resource can be used to manage vSphere standard
+  switches on an ESXi host. These switches can be used as a backing for standard port
+  groups, which can be managed by the </docs/providers/vsphere/r/host_port_group.html>
+  resource. For an overview on vSphere networking concepts, see <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-2B11DBB8-CB3C-4AFF-8885-EFEA0FC562F4.html>
+  .
+examples: []

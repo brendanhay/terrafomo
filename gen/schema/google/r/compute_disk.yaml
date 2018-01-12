@@ -56,8 +56,9 @@ attributes:
       encoded SHA-256 hash of the <https://cloud.google.com/compute/docs/disks/customer-supplied-encryption>
       that protects this resource.'
     type: Text
-about: Creates a new persistent disk within GCE, based on another disk. For more information
-  see <https://cloud.google.com/compute/docs/disks/add-persistent-disk> and <https://cloud.google.com/compute/docs/reference/latest/disks>
-  . ~> All arguments including the disk encryption key will be stored in the raw state
-  as plain-text. </docs/state/sensitive-data.html> .
+about: ! 'Creates a new persistent disk within GCE, based on another disk. For more
+  information see <https://cloud.google.com/compute/docs/disks/add-persistent-disk>
+  and <https://cloud.google.com/compute/docs/reference/latest/disks> . ~> Note: All
+  arguments including the disk encryption key will be stored in the raw state as plain-text.
+  </docs/state/sensitive-data.html> .'
 examples: []

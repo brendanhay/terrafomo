@@ -42,6 +42,11 @@ import qualified Text.EDE               as EDE
 --   insertion of HCL as 'Text'.
 -- * Re-enable usage example parser.
 -- * Have the TH.makeResource/DataSource take a defaultProvider only.
+-- * Provide config to control which dir generated files end up in,
+--   this would allow template, random, local, etc. to be housed in the main
+--   terraform package.
+-- * Generate providers from the index.html.markdown file.
+-- * Merge contents and resource/datasource if only 1 module is needed?
 
 -- Options Parsing
 

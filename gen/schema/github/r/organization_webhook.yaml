@@ -1,0 +1,28 @@
+_name: github_organization_webhook
+arguments:
+  active:
+    required: false
+    help: (Optional) Indicate of the webhook should receive events. Defaults to @true@
+      .
+    type: Text
+  name:
+    required: true
+    help: (Required) The type of the webhook. See a list of <https://api.github.com/hooks>
+      .
+    type: Text
+  events:
+    required: true
+    help: (Required) A list of events which should trigger the webhook. Defaults to
+      @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/>
+    type: Text
+  configuration:
+    required: true
+    help: (Required) key/value pair of configuration for this webhook. Available keys
+      are @url@ , @content_type@ , @secret@ and @insecure_ssl@ .
+    type: Text
+attributes:
+  url:
+    help: ! '- URL of the webhook'
+    type: Text
+about: This resource allows you to create and manage webhooks for Github organization.
+examples: []

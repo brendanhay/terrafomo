@@ -1,0 +1,154 @@
+_name: docker_container
+arguments:
+  image:
+    required: true
+    help: (Required, string) The ID of the image to back this container. The easiest
+      way to get this value is to use the @docker_image@ resource as is shown in the
+      example above.
+    type: Text
+  max_retry_count:
+    required: false
+    help: (Optional, int) The maximum amount of times to an attempt a restart when
+      @restart@ is set to "on-failure"
+    type: Text
+  network_alias:
+    required: false
+    help: (Optional, set of strings) Network aliases of the container for user-defined
+      networks only.
+    type: Text
+  command:
+    required: false
+    help: (Optional, list of strings) The command to use to start the container. For
+      example, to run @/usr/bin/myprogram -f baz.conf@ set the command to be @["/usr/bin/myprogram",
+      "-f", "baz.conf"]@ .
+    type: Text
+  hostname:
+    required: false
+    help: (Optional, string) Hostname of the container.
+    type: Text
+  publish_all_ports:
+    required: false
+    help: (Optional, bool) Publish all ports of the container.
+    type: Text
+  network_mode:
+    required: false
+    help: (Optional, string) Network mode of the container.
+    type: Text
+  env:
+    required: false
+    help: (Optional, set of strings) Environment variables to set.
+    type: Text
+  log_driver:
+    required: false
+    help: (Optional, string) The logging driver to use for the container. Defaults
+      to "json-file".
+    type: Text
+  networks:
+    required: false
+    help: (Optional, set of strings) Id of the networks in which the container is.
+    type: Text
+  entrypoint:
+    required: false
+    help: (Optional, list of strings) The command to use as the Entrypoint for the
+      container. The Entrypoint allows you to configure a container to run as an executable.
+      For example, to run @/usr/bin/myprogram@ when starting a container, set the
+      entrypoint to be @["/usr/bin/myprogram"]@ .
+    type: Text
+  destroy_grace_seconds:
+    required: false
+    help: (Optional, int) If defined will attempt to stop the container before destroying.
+      Container will be destroyed after @n@ seconds or on successful stop.
+    type: Text
+  privileged:
+    required: false
+    help: (Optional, bool) Run container in privileged mode.
+    type: Text
+  dns_opts:
+    required: false
+    help: (Optional, set of strings) Set of DNS options used by the DNS provider(s),
+      see @resolv.conf@ documentation for valid list of options.
+    type: Text
+  memory:
+    required: false
+    help: (Optional, int) The memory limit for the container in MBs.
+    type: Text
+  user:
+    required: false
+    help: (Optional, string) User used for run the first process. Format is @user@
+      or @user:group@ which user and group can be passed literraly or by name.
+    type: Text
+  name:
+    required: true
+    help: (Required, string) The name of the Docker container.
+    type: Text
+  domainname:
+    required: false
+    help: (Optional, string) Domain name of the container.
+    type: Text
+  restart:
+    required: false
+    help: (Optional, string) The restart policy for the container. Must be one of
+      "no", "on-failure", "always", "unless-stopped".
+    type: Text
+  cpu_shares:
+    required: false
+    help: (Optional, int) CPU shares (relative weight) for the container.
+    type: Text
+  ports:
+    required: false
+    help: (Optional, block) See <#ports> below for details.
+    type: Text
+  labels:
+    required: false
+    help: (Optional, map of strings) Key/value pairs to set as labels on the container.
+    type: Text
+  host:
+    required: false
+    help: (Optional, block) See <#extra_hosts> below for details.
+    type: Text
+  dns_search:
+    required: false
+    help: (Optional, set of strings) Set of DNS search domains that are used when
+      bare unqualified hostnames are used inside of the container.
+    type: Text
+  links:
+    required: false
+    help: (Optional, set of strings) Set of links for link based connectivity between
+      containers that are running on the same host.
+    type: Text
+  upload:
+    required: false
+    help: (Optional, block) See <#upload> below for details.
+    type: Text
+  memory_swap:
+    required: false
+    help: (Optional, int) The total memory limit (memory + swap) for the container
+      in MBs. This setting may compute to @-1@ after @terraform apply@ if the target
+      host doesn't support memory swap, when that is the case docker will use a soft
+      limitation.
+    type: Text
+  volumes:
+    required: false
+    help: (Optional, block) See <#volumes> below for details.
+    type: Text
+  log_opts:
+    required: false
+    help: (Optional, map of strings) Key/value pairs to use as options for the logging
+      driver.
+    type: Text
+  capabilities:
+    required: false
+    help: (Optional, block) See <#capabilities> below for details.
+    type: Text
+  must_run:
+    required: false
+    help: (Optional, bool) If true, then the Docker container will be kept running.
+      If false, then as long as the container exists, Terraform assumes it is successful.
+    type: Text
+  dns:
+    required: false
+    help: (Optional, set of strings) Set of DNS servers.
+    type: Text
+attributes: {}
+about: Manages the lifecycle of a Docker container.
+examples: []

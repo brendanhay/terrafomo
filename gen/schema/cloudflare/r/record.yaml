@@ -1,0 +1,61 @@
+_name: cloudflare_record
+arguments:
+  ttl:
+    required: false
+    help: (Optional) The TTL of the record
+    type: Text
+  priority:
+    required: false
+    help: (Optional) The priority of the record
+    type: Text
+  domain:
+    required: true
+    help: (Required) The domain to add the record to
+    type: Text
+  value:
+    required: true
+    help: (Required) The value of the record
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the record
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of the record
+    type: Text
+  proxied:
+    required: false
+    help: (Optional) Whether the record gets Cloudflare's origin protection.
+    type: Text
+attributes:
+  ttl:
+    help: ! '- The TTL of the record'
+    type: Text
+  hostname:
+    help: ! '- The FQDN of the record'
+    type: Text
+  priority:
+    help: ! '- The priority of the record'
+    type: Text
+  value:
+    help: ! '- The value of the record'
+    type: Text
+  zone_id:
+    help: ! '- (Computed) the zone id of the record'
+    type: Text
+  name:
+    help: ! '- The name of the record'
+    type: Text
+  id:
+    help: ! '- The record ID'
+    type: Text
+  proxied:
+    help: ! '- (Optional) Whether the record gets Cloudflare''s origin protection;
+      defaults to @false@ .'
+    type: Text
+  type:
+    help: ! '- The type of the record'
+    type: Text
+about: Provides a Cloudflare record resource.
+examples: []

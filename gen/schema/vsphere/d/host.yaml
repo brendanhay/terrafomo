@@ -1,0 +1,16 @@
+_name: vsphere_host
+arguments:
+  name:
+    required: true
+    help: ! "- (String) The name of the host. This can be a name or path.\tCan be
+      omitted if there is only one host in your inventory."
+    type: Text
+  datacenter_id:
+    required: true
+    help: ! '- (String, required) The managed object reference ID of a datacenter.'
+    type: Text
+attributes: {}
+about: The @vsphere_host@ data source can be used to discover the ID of a vSphere
+  host. This can then be used with resources or data sources that require a host managed
+  object reference ID.
+examples: []

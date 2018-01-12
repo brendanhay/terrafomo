@@ -126,12 +126,12 @@ attributes:
     help: ! '- (Memcached only) The DNS name of the cache cluster without the port
       appended.'
     type: Text
-about: Provides an ElastiCache Cluster resource. Changes to a Cache Cluster can occur
-  when you manually change a parameter, such as @node_type@ , and are reflected in
-  the next maintenance window. Because of this, Terraform may report a difference
+about: ! 'Provides an ElastiCache Cluster resource. Changes to a Cache Cluster can
+  occur when you manually change a parameter, such as @node_type@ , and are reflected
+  in the next maintenance window. Because of this, Terraform may report a difference
   in its planning phase because a modification has not yet taken place. You can use
   the @apply_immediately@ flag to instruct the service to apply the change immediately
-  (see documentation below). ~> using @apply_immediately@ can result in a brief downtime
-  as the server reboots. See the AWS Docs on <https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Modify.html>
-  for more information.
+  (see documentation below). ~> Note: using @apply_immediately@ can result in a brief
+  downtime as the server reboots. See the AWS Docs on <https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Modify.html>
+  for more information.'
 examples: []

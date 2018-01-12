@@ -2,10 +2,10 @@ _name: aws_iam_instance_profile
 arguments:
   roles:
     required: true
-    help: ! '- ( ) A list of role names to include in the profile.  The current default
-      is 1.  If you see an error message similar to @Cannot exceed quota for InstanceSessionsPerInstanceProfile:
-      1@ , then you must contact AWS support and ask for a limit increase. WARNING:
-      This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017>
+    help: ! '- ( Deprecated ) A list of role names to include in the profile.  The
+      current default is 1.  If you see an error message similar to @Cannot exceed
+      quota for InstanceSessionsPerInstanceProfile: 1@ , then you must contact AWS
+      support and ask for a limit increase. WARNING: This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017>
       , as >= 2 roles are not possible. See <https://github.com/hashicorp/terraform/issues/11575>
       .'
     type: Text
@@ -29,7 +29,7 @@ arguments:
     type: Text
 attributes:
   roles:
-    help: ! '- The list of roles assigned to the instance profile. ( )'
+    help: ! '- The list of roles assigned to the instance profile. ( Deprecated )'
     type: Text
   arn:
     help: ! '- The ARN assigned by AWS to the instance profile.'
@@ -53,5 +53,6 @@ attributes:
     help: ! '- The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs>
       assigned by AWS.'
     type: Text
-about: Provides an IAM instance profile. ~> Either @role@ or @roles@ ( ) must be specified.
+about: ! 'Provides an IAM instance profile. ~> NOTE: Either @role@ or @roles@ ( deprecated
+  ) must be specified.'
 examples: []

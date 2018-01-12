@@ -1,0 +1,34 @@
+_name: opc_storage_container
+arguments:
+  primary_key:
+    required: false
+    help: (Optional) The primary secret key value for temporary URLs.
+    type: Text
+  allowed_origins:
+    required: false
+    help: (Optional) List of origins that are allowed to make cross-origin requests.
+    type: Text
+  max_age:
+    required: false
+    help: (Optional) Maximum age in seconds for the origin to hold the preflight results.
+    type: Text
+  read_acls:
+    required: false
+    help: (Optional) The list of ACLs that grant read access.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the Storage Container.
+    type: Text
+  write_acls:
+    required: false
+    help: (Optional) The list of ACLs that grant write access.
+    type: Text
+  secondary_key:
+    required: false
+    help: (Optional) The secondary secret key value for temporary URLs.
+    type: Text
+attributes: {}
+about: Creates and manages a Container in the OPC Storage Domain. @storage_endpoint@
+  must be set in the provider or environment to manage these resources.
+examples: []

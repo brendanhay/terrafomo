@@ -1,0 +1,42 @@
+_name: arukas_container
+arguments:
+  image:
+    required: true
+    help: (Required, string) The ID of the image to back this container.It must be
+      a public image on DockerHub.
+    type: Text
+  memory:
+    required: false
+    help: (Optional, int) The size of the instance RAM.It must be @256@ or @512@ .
+    type: Text
+  name:
+    required: true
+    help: (Required, string) The name of the container.
+    type: Text
+  instances:
+    required: false
+    help: (Optional, int) The count of the instance. It must be between @1@ and @10@
+      .
+    type: Text
+  cmd:
+    required: false
+    help: (Optional , string) The command of the container.
+    type: Text
+  ports:
+    required: true
+    help: (Required , block) See <#ports> below for details.
+    type: Text
+  endpoint:
+    required: false
+    help: (Optional,string) The subdomain part of the endpoint assigned by Arukas.
+      If it is not set, Arukas will do automatic assignment.
+    type: Text
+  environments:
+    required: true
+    help: (Required , block) See <#environments> below for details.
+    type: Text
+attributes: {}
+about: Provides container resource. This allows container to be created, updated and
+  deleted. For additional details please refer to <https://arukas.io/en/documents-en/arukas-api-reference-en/#containers>
+  .
+examples: []

@@ -1,0 +1,23 @@
+_name: ns1_apikey
+arguments:
+  teams:
+    required: true
+    help: (Required) The teams that the apikey belongs to.
+    type: Text
+  key:
+    required: true
+    help: (Required) The apikeys authentication token.
+    type: Text
+  name:
+    required: true
+    help: (Required) The free form name of the apikey.
+    type: Text
+  permissions:
+    required: false
+    help: (Optional) The allowed permissions of the apikey. Permissions documented
+      below.
+    type: Text
+attributes: {}
+about: Provides a NS1 Api Key resource. This can be used to create, modify, and delete
+  api keys.
+examples: []

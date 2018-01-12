@@ -1,0 +1,72 @@
+_name: alicloud_disk
+arguments:
+  size:
+    required: true
+    help: ! '(Required) The size of the disk in GiBs, and its value depends on @Category@
+      . @cloud@ disk value range: 5GB ~ 2000GB and other category disk value range:
+      20 ~ 32768.'
+    type: Text
+  category:
+    required: false
+    help: (Optional, Forces new resource) Category of the disk. Valid values are @cloud@
+      , @cloud_efficiency@ and @cloud_ssd@ . Default is @cloud@ .
+    type: Text
+  name:
+    required: false
+    help: (Optional) Name of the ECS disk. This name can have a string of 2 to 128
+      characters, must contain only alphanumeric characters or hyphens, such as "-",".","_",
+      and must not begin or end with a hyphen, and must not begin with http:// or
+      https://. Default value is null.
+    type: Text
+  availability_zone:
+    required: true
+    help: (Required, Forces new resource) The Zone to create the disk in.
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description of the disk. This description can have a string of
+      2 to 256 characters, It cannot begin with http:// or https://. Default value
+      is null.
+    type: Text
+  snapshot_id:
+    required: false
+    help: (Optional) A snapshot to base the disk off of. If it is specified, @size@
+      will be invalid and the disk size is equals to the snapshot size.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  status:
+    help: ! '- The disk status.'
+    type: Text
+  size:
+    help: ! '- The disk size.'
+    type: Text
+  category:
+    help: ! '- The disk category.'
+    type: Text
+  name:
+    help: ! '- The disk name.'
+    type: Text
+  id:
+    help: ! '- The disk ID.'
+    type: Text
+  availability_zone:
+    help: ! '- The Zone to create the disk in.'
+    type: Text
+  description:
+    help: ! '- The disk description.'
+    type: Text
+  snapshot_id:
+    help: ! '- The disk snapshot ID.'
+    type: Text
+  tags:
+    help: ! '- The disk tags.'
+    type: Text
+about: ! 'Provides a ECS disk resource. ~> NOTE: One of @size@ or @snapshot_id@ is
+  required when specifying an ECS disk. If all of them be specified, @size@ must more
+  than the size of snapshot which @snapshot_id@ represents. Currently, @alicloud_disk@
+  doesn''t resize disk.'
+examples: []

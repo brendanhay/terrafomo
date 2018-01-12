@@ -1,0 +1,110 @@
+_name: softlayer_virtual_guest
+arguments:
+  backend_vlan_id:
+    required: false
+    help: (Optional, int) Specifies the network VLAN which is to be used for the back
+      end interface of the computing instance.
+    type: Text
+  local_disk:
+    required: true
+    help: (Required, boolean) Specifies the disk type for the instance. When @true@
+      , the disks for the computing instance will be provisioned on the host which
+      it runs, otherwise SAN disks will be provisioned.
+    type: Text
+  private_network_only:
+    required: false
+    help: (Optional, boolean, default false) Specifies whether or not the instance
+      only has access to the private network. When true this flag specifies that a
+      compute instance is to only have access to the private network.
+    type: Text
+  image:
+    required: true
+    help: ! '- (Conditionally required, string) An identifier for the operating system
+      to provision the computing instance with. Disallowed when @blockDeviceTemplateGroup.globalIdentifier@
+      is provided, as the template will specify the operating system.'
+    type: Text
+  post_install_script_uri:
+    required: false
+    help: (Optional, string) As defined in the <https://sldn.softlayer.com/reference/datatypes/SoftLayer_Virtual_Guest_SupplementalCreateObjectOptions>
+      .
+    type: Text
+  ipv4_address:
+    required: false
+    help: (Optional, string) Uses @editObject@ call, template data <https://sldn.softlayer.com/reference/datatypes/SoftLayer_Virtual_Guest>
+      .
+    type: Text
+  ipv4_address_private:
+    required: false
+    help: (Optional, string) Uses @editObject@ call, template data <https://sldn.softlayer.com/reference/datatypes/SoftLayer_Virtual_Guest>
+      .
+    type: Text
+  domain:
+    required: true
+    help: (Required, string) Domain for the computing instance.
+    type: Text
+  ssh_keys:
+    required: false
+    help: (Optional, array) SSH keys to install on the computing instance upon provisioning.
+    type: Text
+  frontend_vlan_id:
+    required: false
+    help: (Optional, int) Specifies the network VLAN which is to be used for the front
+      end interface of the computing instance.
+    type: Text
+  block_device_template_group_gid:
+    required: true
+    help: ! '- (Conditionally required, string) A global identifier for the template
+      to be used to provision the computing instance. Disallowed when @operatingSystemReferenceCode@
+      is provided, as the template will specify the operating system.'
+    type: Text
+  name:
+    required: true
+    help: (Required, string) Hostname for the computing instance.
+    type: Text
+  dedicated_acct_host_only:
+    required: false
+    help: (Optional, boolean) Specifies whether or not the instance must only run
+      on hosts with instances from the same account
+    type: Text
+  public_network_speed:
+    required: false
+    help: (Optional, int, default 10) Specifies the connection speed for the instance's
+      network components.
+    type: Text
+  region:
+    required: true
+    help: (Required, string) Specifies which datacenter the instance is to be provisioned
+      in.
+    type: Text
+  disks:
+    required: false
+    help: (Optional, array) Block device and disk image settings for the computing
+      instance
+    type: Text
+  user_data:
+    required: false
+    help: (Optional, string) Arbitrary data to be made available to the computing
+      instance.
+    type: Text
+  ram:
+    required: true
+    help: (Required, int) The amount of memory to allocate in megabytes.
+    type: Text
+  cpu:
+    required: true
+    help: (Required, int) The number of CPU cores to allocate.
+    type: Text
+  hourly_billing:
+    required: true
+    help: (Required, boolean) Specifies the billing type for the instance. When @true@
+      , the computing instance will be billed on hourly usage, otherwise it will be
+      billed on a monthly basis.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the virtual guest.'
+    type: Text
+about: Provides virtual guest resource. This allows virtual guests to be created,
+  updated and deleted. For additional details please refer to <http://sldn.softlayer.com/reference/services/SoftLayer_Virtual_Guest>
+  .
+examples: []

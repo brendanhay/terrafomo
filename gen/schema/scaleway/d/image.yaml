@@ -1,0 +1,30 @@
+_name: scaleway_image
+arguments:
+  name_filter:
+    required: false
+    help: (Optional) Regexp to match Image name by
+    type: Text
+  name:
+    required: false
+    help: (Optional) Exact name of desired Image
+    type: Text
+  architecture:
+    required: true
+    help: (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@
+    type: Text
+attributes:
+  creation_date:
+    help: ! '- date when image was created'
+    type: Text
+  architecture:
+    help: ! '- architecture of the Image, e.g. @arm@ or @x86_64@'
+    type: Text
+  organization:
+    help: ! '- uuid of the organization owning this Image'
+    type: Text
+  public:
+    help: ! '- is this a public bootscript'
+    type: Text
+about: Use this data source to get the ID of a registered Image for use with the @scaleway_server@
+  resource.
+examples: []

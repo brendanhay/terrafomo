@@ -35,9 +35,9 @@ arguments:
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
 attributes: {}
-about: Provides a resource to manage a VPC Peering Connection resource. -> For cross-account
-  (requester's AWS account differs from the accepter's AWS account) VPC Peering Connections
-  use the @aws_vpc_peering_connection@ resource to manage the requester's side of
-  the connection and use the @aws_vpc_peering_connection_accepter@ resource to manage
-  the accepter's side of the connection.
+about: ! 'Provides a resource to manage a VPC Peering Connection resource. -> Note:
+  For cross-account (requester''s AWS account differs from the accepter''s AWS account)
+  VPC Peering Connections use the @aws_vpc_peering_connection@ resource to manage
+  the requester''s side of the connection and use the @aws_vpc_peering_connection_accepter@
+  resource to manage the accepter''s side of the connection.'
 examples: []

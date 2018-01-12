@@ -1,0 +1,19 @@
+_name: heroku_app_feature
+arguments:
+  enabled:
+    required: false
+    help: (Optional) Whether to enable or disable the App Feature. The default value
+      is true.
+    type: Text
+  app:
+    required: true
+    help: (Required) The Heroku app to link to.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the App Feature to manage.
+    type: Text
+attributes: {}
+about: Provides a Heroku App Feature resource. This can be used to create and manage
+  App Features on Heroku.
+examples: []

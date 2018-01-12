@@ -1,0 +1,28 @@
+_name: clc_load_balancer
+arguments:
+  status:
+    required: true
+    help: (Required, string) Either "enabled" or "disabled"
+    type: Text
+  data_center:
+    required: true
+    help: (Required, string) The datacenter location of both parent group and this
+      group.
+    type: Text
+  name:
+    required: true
+    help: (Required, string) The name of the load balancer.
+    type: Text
+  ip_address:
+    required: true
+    help: ! '- (Computed) The IP of the load balancer.'
+    type: Text
+  description:
+    required: false
+    help: (Optional, string) Description for server group (visible in control portal
+      only)
+    type: Text
+attributes: {}
+about: Manages a CLC load balancer. Manage connected backends with <load_balancer_pool.html>
+  See also <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
+examples: []

@@ -61,7 +61,7 @@ attributes:
   dns_ip_addresses:
     help: ! '- A list of IP addresses of the DNS servers for the directory or connector.'
     type: Text
-about: Provides a Simple or Managed Microsoft directory in AWS Directory Service.
-  ~> All arguments including the password and customer username will be stored in
-  the raw state as plain-text. </docs/state/sensitive-data.html> .
+about: ! 'Provides a Simple or Managed Microsoft directory in AWS Directory Service.
+  ~> Note: All arguments including the password and customer username will be stored
+  in the raw state as plain-text. </docs/state/sensitive-data.html> .'
 examples: []

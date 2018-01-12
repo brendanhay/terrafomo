@@ -1,0 +1,25 @@
+_name: circonus_metric_cluster
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the metric cluster.  This name must be unique across
+      all metric clusters in a given Circonus Account.
+    type: Text
+  query:
+    required: true
+    help: (Required) One or more @query@ attributes must be present.  Each @query@
+      must contain both a @definition@ and a @type@ .  See below for details on supported
+      attributes.
+    type: Text
+  description:
+    required: false
+    help: (Optional) A long-form description of the metric cluster.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A list of tags attached to the metric cluster.
+    type: Text
+attributes: {}
+about: The @circonus_metric_cluster@ resource creates and manages a <https://login.circonus.com/user/docs/Data/View/MetricClusters>
+  .
+examples: []

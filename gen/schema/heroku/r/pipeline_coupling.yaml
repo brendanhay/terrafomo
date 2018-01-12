@@ -1,0 +1,36 @@
+_name: heroku_pipeline_coupling
+arguments:
+  stage:
+    required: true
+    help: (Required) The stage to couple this app to. Must be one of @review@ , @development@
+      , @staging@ , or @production@ .
+    type: Text
+  app:
+    required: true
+    help: (Required) The name of the app for this coupling.
+    type: Text
+  pipeline:
+    required: true
+    help: (Required) The ID of the pipeline to add this app to.
+    type: Text
+attributes:
+  stage:
+    help: ! '- The stage for this coupling.'
+    type: Text
+  app:
+    help: ! '- The name of the application.'
+    type: Text
+  pipeline:
+    help: ! '- The UUID of the pipeline.'
+    type: Text
+  id:
+    help: ! '- The UUID of this pipeline coupling.'
+    type: Text
+  app_id:
+    help: ! '- The ID of the application.'
+    type: Text
+about: Provides a <https://devcenter.heroku.com/articles/pipelines> resource. A pipeline
+  is a group of Heroku apps that share the same codebase. Once a pipeline is created
+  using <./pipeline.html> , and apps are added to different stages using @heroku_pipeline_coupling@
+  , you can promote app slugs to the downstream stages.
+examples: []

@@ -17,8 +17,9 @@ arguments:
       recreates the resource.
     type: Text
 attributes: {}
-about: Provides an AWS Config Configuration Recorder. Please note that this resource
-  the created recorder automatically. ~>  the Configuration Recorder requires a </docs/providers/aws/r/config_delivery_channel.html>
-  (while delivery channel creation requires Configuration Recorder). This is why </docs/providers/aws/r/config_configuration_recorder_status.html>
-  is a separate resource.
+about: ! 'Provides an AWS Config Configuration Recorder. Please note that this resource
+  does not start the created recorder automatically. ~> Note:  Starting the Configuration
+  Recorder requires a </docs/providers/aws/r/config_delivery_channel.html> (while
+  delivery channel creation requires Configuration Recorder). This is why </docs/providers/aws/r/config_configuration_recorder_status.html>
+  is a separate resource.'
 examples: []

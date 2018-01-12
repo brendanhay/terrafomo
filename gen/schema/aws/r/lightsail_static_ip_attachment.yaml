@@ -18,8 +18,8 @@ attributes:
   ip_address:
     help: ! '- The allocated static IP address'
     type: Text
-about: Provides a static IP address attachment - relationship between a Lightsail
-  static IP & Lightsail instance. ~> Lightsail is currently only supported in a limited
-  number of AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
-  for more details
+about: ! 'Provides a static IP address attachment - relationship between a Lightsail
+  static IP & Lightsail instance. ~> Note: Lightsail is currently only supported in
+  a limited number of AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
+  for more details'
 examples: []

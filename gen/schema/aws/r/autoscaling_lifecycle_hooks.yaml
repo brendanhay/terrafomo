@@ -44,13 +44,13 @@ arguments:
       hook. This ARN target can be either an SQS queue or an SNS topic.
     type: Text
 attributes: {}
-about: Provides an AutoScaling Lifecycle Hook resource. ~> Terraform has two types
-  of ways you can add lifecycle hooks - via the @initial_lifecycle_hook@ attribute
-  from the </docs/providers/aws/r/autoscaling_group.html> resource, or via this one.
-  Hooks added via this resource will not be added until the autoscaling group has
-  been created, and depending on your </docs/providers/aws/r/autoscaling_group.html#waiting-for-capacity>
+about: ! 'Provides an AutoScaling Lifecycle Hook resource. ~> NOTE: Terraform has
+  two types of ways you can add lifecycle hooks - via the @initial_lifecycle_hook@
+  attribute from the </docs/providers/aws/r/autoscaling_group.html> resource, or via
+  this one. Hooks added via this resource will not be added until the autoscaling
+  group has been created, and depending on your </docs/providers/aws/r/autoscaling_group.html#waiting-for-capacity>
   settings, after the initial instances have been launched, creating unintended behavior.
   If you need hooks to run on all instances, add them with @initial_lifecycle_hook@
   in </docs/providers/aws/r/autoscaling_group.html> , but take care to not duplicate
-  those hooks with this resource.
+  those hooks with this resource.'
 examples: []

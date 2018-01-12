@@ -1,0 +1,44 @@
+_name: vsphere_file
+arguments:
+  source_datastore:
+    required: false
+    help: (Optional) The name of the Datastore in which file will be copied from.
+    type: Text
+  datacenter:
+    required: false
+    help: (Optional) The name of a Datacenter in which the file will be uploaded to.
+    type: Text
+  source_file:
+    required: true
+    help: (Required) The path to the file being uploaded from the Terraform host to
+      vSphere or copied within vSphere.
+    type: Text
+  create_directories:
+    required: false
+    help: ! '(Optional) Create directories in @destination_file@ path parameter if
+      any missing for copy operation.  *Note: Directories are not deleted on destroy
+      operation.'
+    type: Text
+  datastore:
+    required: true
+    help: (Required) The name of the Datastore in which to upload the file to.
+    type: Text
+  destination_file:
+    required: true
+    help: (Required) The path to where the file should be uploaded or copied to on
+      vSphere.
+    type: Text
+  source_datacenter:
+    required: false
+    help: (Optional) The name of a Datacenter in which the file will be copied from.
+    type: Text
+attributes: {}
+about: Provides a VMware vSphere virtual machine file resource. This can be used to
+  upload files (e.g. vmdk disks) from the Terraform host machine to a remote vSphere.  The
+  file resource can also be used to copy files within vSphere.  Files can be copied
+  between Datacenters and/or Datastores. Updates to file resources will handle moving
+  a file to a new destination (datacenter and/or datastore and/or destination_file).  If
+  any source parameter (e.g. @source_datastore@ , @source_datacenter@ or @source_file@
+  ) are changed, this results in a new resource (new file uploaded or copied and old
+  one being deleted).
+examples: []

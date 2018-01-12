@@ -1,0 +1,23 @@
+_name: azurerm_storage_table
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the storage table. Must be unique within the storage
+      account the table is located.
+    type: Text
+  storage_account_name:
+    required: true
+    help: (Required) Specifies the storage account in which to create the storage
+      table. Changing this forces a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the storage
+      table. Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The storage table Resource ID.'
+    type: Text
+about: Create an Azure Storage Table.
+examples: []

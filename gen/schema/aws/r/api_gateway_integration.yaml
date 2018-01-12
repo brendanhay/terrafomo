@@ -20,17 +20,17 @@ arguments:
     type: Text
   uri:
     required: false
-    help: (Optional) The input's URI (HTTP, AWS). if @type@ is @HTTP@ or @AWS@ . For
-      HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according
-      to the RFC-3986 specification . For AWS integrations, the URI should be of the
-      form @arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}@
+    help: (Optional) The input's URI (HTTP, AWS). Required if @type@ is @HTTP@ or
+      @AWS@ . For HTTP integrations, the URI must be a fully formed, encoded HTTP(S)
+      URL according to the RFC-3986 specification . For AWS integrations, the URI
+      should be of the form @arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}@
       . @region@ , @subdomain@ and @service@ are used to determine the right endpoint.
       e.g. @arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations@
     type: Text
   passthrough_behavior:
     required: false
     help: (Optional) The integration passthrough behavior ( @WHEN_NO_MATCH@ , @WHEN_NO_TEMPLATES@
-      , @NEVER@ ). if @request_templates@ is used.
+      , @NEVER@ ). Required if @request_templates@ is used.
     type: Text
   cache_key_parameters:
     required: false
@@ -40,8 +40,9 @@ arguments:
     required: false
     help: (Optional) The integration HTTP method ( @GET@ , @POST@ , @PUT@ , @DELETE@
       , @HEAD@ , @OPTION@ ) specifying how API Gateway will interact with the back
-      end. if @type@ is @AWS@ , @AWS_PROXY@ , @HTTP@ or @HTTP_PROXY@ . Not all methods
-      are compatible with all @AWS@ integrations. e.g. Lambda function <https://github.com/awslabs/aws-apigateway-importer/issues/9#issuecomment-129651005>
+      end. Required if @type@ is @AWS@ , @AWS_PROXY@ , @HTTP@ or @HTTP_PROXY@ . Not
+      all methods are compatible with all @AWS@ integrations. e.g. Lambda function
+      <https://github.com/awslabs/aws-apigateway-importer/issues/9#issuecomment-129651005>
       via @POST@ .
     type: Text
   type':
@@ -67,7 +68,7 @@ arguments:
     type: Text
   request_parameters_in_json:
     required: true
-    help: ! '- , use @request_parameters@ instead.'
+    help: ! '- Deprecated , use @request_parameters@ instead.'
     type: Text
   content_handling:
     required: false

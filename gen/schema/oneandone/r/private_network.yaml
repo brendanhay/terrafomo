@@ -1,0 +1,30 @@
+_name: oneandone_server
+arguments:
+  server_ids:
+    required: true
+    help: (Optional) List of servers that are to be associated with the private network
+    type: Text
+  network_address:
+    required: false
+    help: (Optional) Network address for the private network
+    type: Text
+  datacenter:
+    required: false
+    help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
+      or @ES@ .
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the private network
+    type: Text
+  subnet_mask:
+    required: false
+    help: (Optional) Subnet mask for the private network
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description for the shared storage
+    type: Text
+attributes: {}
+about: Manages a Private Network on 1&1
+examples: []

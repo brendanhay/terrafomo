@@ -28,10 +28,11 @@ attributes:
   id:
     help: ! '- The ID of the VPC endpoint.'
     type: Text
-about: Provides a VPC Endpoint resource. ~> Terraform provides both a standalone <vpc_endpoint_route_table_association.html>
+about: ! 'Provides a VPC Endpoint resource. ~> NOTE on VPC Endpoints and VPC Endpoint
+  Route Table Associations: Terraform provides both a standalone <vpc_endpoint_route_table_association.html>
   (an association between a VPC endpoint and a single @route_table_id@ ) and a VPC
   Endpoint resource with a @route_table_ids@ attribute. Do not use the same route
   table ID in both a VPC Endpoint resource and a VPC Endpoint Route Table Association
   resource. Doing so will cause a conflict of associations and will overwrite the
-  association.
+  association.'
 examples: []

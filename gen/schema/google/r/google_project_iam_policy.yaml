@@ -18,14 +18,14 @@ arguments:
   authoritative:
     required: true
     help: ! '- (DEPRECATED) (Optional) A boolean value indicating if this policy should
-      overwrite any existing IAM policy on the project. When set to true, . This can
-      of your project until an Organization Administrator grants you access again,
-      so please exercise caution. If this argument is @true@ and you want to delete
-      the resource, you must set the @disable_project@ argument to @true@ , acknowledging
-      that the project will be inaccessible to anyone but the Organization Admins,
-      as it will no longer have an IAM policy. Rather than using this, you should
-      use @google_project_iam_policy_binding@ and @google_project_iam_policy_member@
-      .'
+      overwrite any existing IAM policy on the project. When set to true, any policies
+      not in your config file will be removed . This can lock you out of your project
+      until an Organization Administrator grants you access again, so please exercise
+      caution. If this argument is @true@ and you want to delete the resource, you
+      must set the @disable_project@ argument to @true@ , acknowledging that the project
+      will be inaccessible to anyone but the Organization Admins, as it will no longer
+      have an IAM policy. Rather than using this, you should use @google_project_iam_policy_binding@
+      and @google_project_iam_policy_member@ .'
     type: Text
 attributes:
   etag:
@@ -36,6 +36,6 @@ attributes:
       non-authoritative policy resource is deleted.'
     type: Text
 about: Allows creation and management of an IAM policy for an existing Google Cloud
-  Platform project. ~> You can accidentally lock yourself out of your project using
-  this resource. Proceed with caution.
+  Platform project. ~> Be careful! You can accidentally lock yourself out of your
+  project using this resource. Proceed with caution.
 examples: []

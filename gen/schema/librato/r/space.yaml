@@ -1,0 +1,16 @@
+_name: librato_space
+arguments:
+  name:
+    required: true
+    help: (Required) The name of the space.
+    type: Text
+attributes:
+  name:
+    help: ! '- The name of the space.'
+    type: Text
+  id:
+    help: ! '- The ID of the space.'
+    type: Text
+about: Provides a Librato Space resource. This can be used to create and manage spaces
+  on Librato.
+examples: []

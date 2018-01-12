@@ -1,0 +1,42 @@
+_name: tls_cert_request
+arguments:
+  subject:
+    required: true
+    help: (Required) The subject for which a certificate is being requested. This
+      is a nested configuration block whose structure is described below.
+    type: Text
+  key_algorithm:
+    required: true
+    help: (Required) The name of the algorithm for the key provided in @private_key_pem@
+      .
+    type: Text
+  dns_names:
+    required: false
+    help: (Optional) List of DNS names for which a certificate is being requested.
+    type: Text
+  private_key_pem:
+    required: true
+    help: (Required) PEM-encoded private key data. This can be read from a separate
+      file using the @file@ interpolation function. Only an irreversable secure hash
+      of the private key will be stored in the Terraform state.
+    type: Text
+  ip_addresses:
+    required: false
+    help: (Optional) List of IP addresses for which a certificate is being requested.
+    type: Text
+attributes:
+  cert_request_pem:
+    help: ! '- The certificate request data in PEM format.'
+    type: Text
+about: Generates a Certificate Signing Request (CSR) in PEM format, which is the typical
+  format used to request a certificate from a certificate authority. This resource
+  is intended to be used in conjunction with a Terraform provider for a particular
+  certificate authority in order to provision a new certificate. This is a logical
+  resource , so it contributes only to the current Terraform state and does not create
+  any external managed resources. ~> Compatibility Note From Terraform 0.7.0 to 0.7.4
+  this resource was converted to a data source, and the resource form of it was deprecated.
+  This turned out to be a design error since a cert request includes a random number
+  in the form of the signature nonce, and so the data source form of this resource
+  caused non-convergent configuration. The data source form is no longer supported
+  as of Terraform 0.7.5 and any users should return to using the resource form.
+examples: []

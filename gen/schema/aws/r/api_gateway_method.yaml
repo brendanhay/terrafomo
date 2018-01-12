@@ -41,7 +41,7 @@ arguments:
     type: Text
   request_parameters_in_json:
     required: true
-    help: ! '- , use @request_parameters@ instead.'
+    help: ! '- Deprecated , use @request_parameters@ instead.'
     type: Text
 attributes: {}
 about: Provides a HTTP Method for an API Gateway Resource.

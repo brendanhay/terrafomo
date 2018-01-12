@@ -25,8 +25,9 @@ about: The "AMI from instance" resource allows the creation of an Amazon Machine
   block device configuration at the time the resource is created. This resource is
   best applied to an instance that is stopped when this instance is created, so that
   the contents of the created image are predictable. When applied to an instance that
-  is running, , resulting in a period of downtime. Note that the source instance is
-  inspected only at the initial creation of this resource. Ongoing updates to the
+  is running, the instance will be stopped before taking the snapshots and then started
+  back up again , resulting in a period of downtime. Note that the source instance
+  is inspected only at the initial creation of this resource. Ongoing updates to the
   referenced instance will not be propagated into the generated AMI. Users may taint
   or otherwise recreate the resource in order to produce a fresh snapshot.
 examples: []

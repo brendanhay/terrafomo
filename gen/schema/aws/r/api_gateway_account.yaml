@@ -11,8 +11,8 @@ attributes:
   throttle_settings:
     help: ! '- Account-Level throttle settings. See exported fields below.'
     type: Text
-about: Provides a settings of an API Gateway Account. Settings is applied region-wide
-  per @provider@ block. -> As there is no API method for deleting account settings
+about: ! 'Provides a settings of an API Gateway Account. Settings is applied region-wide
+  per @provider@ block. -> Note: As there is no API method for deleting account settings
   or resetting it to defaults, destroying this resource will keep your account settings
-  intact
+  intact'
 examples: []

@@ -29,9 +29,9 @@ arguments:
     help: (Optional) launch script to configure server with additional user data
     type: Text
 attributes: {}
-about: Provides a Lightsail Instance. Amazon Lightsail is a service to provide easy
-  virtual private servers with custom software already setup. See <https://lightsail.aws.amazon.com/ls/docs/getting-started/article/what-is-amazon-lightsail>
-  for more information. ~> Lightsail is currently only supported in a limited number
-  of AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
-  for more details
+about: ! 'Provides a Lightsail Instance. Amazon Lightsail is a service to provide
+  easy virtual private servers with custom software already setup. See <https://lightsail.aws.amazon.com/ls/docs/getting-started/article/what-is-amazon-lightsail>
+  for more information. ~> Note: Lightsail is currently only supported in a limited
+  number of AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
+  for more details'
 examples: []

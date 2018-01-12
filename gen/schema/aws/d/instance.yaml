@@ -48,10 +48,10 @@ attributes:
     help: ! '- The name of the instance profile associated with the Instance.'
     type: Text
   public_ip:
-    help: ! '- The public IP address assigned to the Instance, if applicable. : If
-      you are using an </docs/providers/aws/r/eip.html> with your instance, you should
-      refer to the EIP''s address directly and not use @public_ip@ , as this field
-      will change after the EIP is attached.'
+    help: ! '- The public IP address assigned to the Instance, if applicable. NOTE
+      : If you are using an </docs/providers/aws/r/eip.html> with your instance, you
+      should refer to the EIP''s address directly and not use @public_ip@ , as this
+      field will change after the EIP is attached.'
     type: Text
   tenancy:
     help: ! '- The tenancy of the instance: @dedicated@ , @default@ , @host@ .'
@@ -87,8 +87,9 @@ attributes:
     help: ! '- The ephemeral block device mappings of the Instance.'
     type: Text
   ipv6_addresses:
-    help: ! '- The IPv6 addresses associated to the Instance, if applicable. : Unlike
-      the IPv4 address, this doesn''t change if you attach an EIP to the instance.'
+    help: ! '- The IPv6 addresses associated to the Instance, if applicable. NOTE
+      : Unlike the IPv4 address, this doesn''t change if you attach an EIP to the
+      instance.'
     type: Text
   subnet_id:
     help: ! '- The VPC subnet ID.'

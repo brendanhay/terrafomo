@@ -1,0 +1,19 @@
+_name: alicloud_snat
+arguments:
+  snat_table_id:
+    required: true
+    help: (Required, Forces new resource) The value can get from @alicloud_nat_gateway@
+      Attributes "snat_table_ids".
+    type: Text
+  source_vswitch_id:
+    required: true
+    help: (Required, Forces new resource) The vswitch ID.
+    type: Text
+  snat_ip:
+    required: true
+    help: (Required) The SNAT ip address, the ip must along bandwidth package public
+      ip which @alicloud_nat_gateway@ argument @bandwidth_packages@ .
+    type: Text
+attributes: {}
+about: Provides a snat resource.
+examples: []

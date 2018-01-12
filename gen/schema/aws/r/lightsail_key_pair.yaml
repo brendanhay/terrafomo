@@ -40,9 +40,9 @@ attributes:
   encrypted_fingerprint:
     help: ! '- The MD5 public key fingerprint for the encrypted private key'
     type: Text
-about: Provides a Lightsail Key Pair, for use with Lightsail Instances. These key
+about: ! 'Provides a Lightsail Key Pair, for use with Lightsail Instances. These key
   pairs are seperate from EC2 Key Pairs, and must be created or imported for use with
-  Lightsail. ~> Lightsail is currently only supported in a limited number of AWS Regions,
-  please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
-  for more details
+  Lightsail. ~> Note: Lightsail is currently only supported in a limited number of
+  AWS Regions, please see <https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail>
+  for more details'
 examples: []

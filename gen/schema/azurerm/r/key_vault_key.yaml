@@ -1,0 +1,48 @@
+_name: azurerm_key_vault_key
+arguments:
+  key_type:
+    required: true
+    help: (Required) Specifies the Key Type to use for this Key Vault Key. Possible
+      values are @EC@ (Elliptic Curve), @Oct@ (Octet), @RSA@ and @RSA-HSM@ . Changing
+      this forces a new resource to be created.
+    type: Text
+  vault_uri:
+    required: true
+    help: (Required) Specifies the URI used to access the Key Vault instance, available
+      on the @azurerm_key_vault@ resource.
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the Key Vault Key. Changing this forces
+      a new resource to be created.
+    type: Text
+  key_size:
+    required: true
+    help: (Required) Specifies the Size of the Key to create in bytes. For example,
+      1024 or 2048. Changing this forces a new resource to be created.
+    type: Text
+  key_opts:
+    required: true
+    help: ! '(Required) A list of JSON web key operations. Possible values include:
+      @decrypt@ , @encrypt@ , @sign@ , @unwrapKey@ , @verify@ and @wrapKey@ . Please
+      note these values are case sensitive.'
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  n:
+    help: ! '- The RSA modulus of this Key Vault Key.'
+    type: Text
+  version:
+    help: ! '- The current version of the Key Vault Key.'
+    type: Text
+  id:
+    help: ! '- The Key Vault Key ID.'
+    type: Text
+  e:
+    help: ! '- The RSA public exponent of this Key Vault Key.'
+    type: Text
+about: Manages a Key Vault Key.
+examples: []

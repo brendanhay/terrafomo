@@ -1,0 +1,59 @@
+_name: azurerm_key_vault
+arguments:
+  enabled_for_deployment:
+    required: false
+    help: (Optional) Boolean flag to specify whether Azure Virtual Machines are permitted
+      to retrieve certificates stored as secrets from the key vault. Defaults to false.
+    type: Text
+  location:
+    required: true
+    help: (Required) Specifies the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  enabled_for_template_deployment:
+    required: false
+    help: (Optional) Boolean flag to specify whether Azure Resource Manager is permitted
+      to retrieve secrets from the key vault. Defaults to false.
+    type: Text
+  access_policy:
+    required: true
+    help: (Required) An access policy block as described below. At least one policy
+      is required up to a maximum of 16.
+    type: Text
+  enabled_for_disk_encryption:
+    required: false
+    help: (Optional) Boolean flag to specify whether Azure Disk Encryption is permitted
+      to retrieve secrets from the vault and unwrap keys. Defaults to false.
+    type: Text
+  tenant_id:
+    required: true
+    help: (Required) The Azure Active Directory tenant ID that should be used for
+      authenticating requests to the key vault.
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the Key Vault resource. Changing this forces
+      a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the namespace.
+      Changing this forces a new resource to be created.
+    type: Text
+  sku:
+    required: true
+    help: (Required) An SKU block as described below.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  vault_uri:
+    help: ! '- The URI of the vault for performing operations on keys and secrets.'
+    type: Text
+  id:
+    help: ! '- The Vault ID.'
+    type: Text
+about: Create a Key Vault.
+examples: []

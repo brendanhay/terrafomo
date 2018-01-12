@@ -1,0 +1,29 @@
+_name: random_pet
+arguments:
+  length:
+    required: false
+    help: (Optional) The length (in words) of the pet name.
+    type: Text
+  keepers:
+    required: false
+    help: (Optional) Arbitrary map of values that, when changed, will trigger a new
+      id to be generated. See <../index.html> for more information.
+    type: Text
+  separator:
+    required: false
+    help: (Optional) The character to separate words in the pet name.
+    type: Text
+  prefix:
+    required: false
+    help: (Optional) A string to prefix the name with.
+    type: Text
+attributes:
+  id:
+    help: ! '- (string) The random pet name'
+    type: Text
+about: The resource @random_pet@ generates random pet names that are intended to be
+  used as unique identifiers for other resources. This resource can be used in conjunction
+  with resources that have the @create_before_destroy@ lifecycle flag set, to avoid
+  conflicts with unique names during the brief period where both the old and new resources
+  exist concurrently.
+examples: []

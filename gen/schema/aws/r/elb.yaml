@@ -65,10 +65,11 @@ arguments:
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
 attributes: {}
-about: Provides an Elastic Load Balancer resource, also known as a "Classic Load Balancer"
-  after the release of </docs/providers/aws/r/lb.html> . ~> Terraform currently provides
-  both a standalone <elb_attachment.html> (describing an instance attached to an ELB),
-  and an ELB resource with @instances@ defined in-line. At this time you cannot use
-  an ELB with in-line instances in conjunction with a ELB Attachment resources. Doing
-  so will cause a conflict and will overwrite attachments.
+about: ! 'Provides an Elastic Load Balancer resource, also known as a "Classic Load
+  Balancer" after the release of </docs/providers/aws/r/lb.html> . ~> NOTE on ELB
+  Instances and ELB Attachments: Terraform currently provides both a standalone <elb_attachment.html>
+  (describing an instance attached to an ELB), and an ELB resource with @instances@
+  defined in-line. At this time you cannot use an ELB with in-line instances in conjunction
+  with a ELB Attachment resources. Doing so will cause a conflict and will overwrite
+  attachments.'
 examples: []

@@ -40,8 +40,8 @@ attributes:
       class objects.'
     type: Text
   body:
-    help: ! '- Object data (see to understand cases in which this field is actually
-      available)'
+    help: ! '- Object data (see limitations above to understand cases in which this
+      field is actually available)'
     type: Text
   expires:
     help: ! '- The date and time at which the object is no longer cacheable.'
@@ -83,9 +83,10 @@ attributes:
   tags:
     help: ! '- A mapping of tags assigned to the object.'
     type: Text
-about: The S3 object data source allows access to the metadata and (see below) content
-  of an object stored inside S3 bucket. ~> The content of an object ( @body@ field)
-  is available only for objects which have a human-readable @Content-Type@ ( @text/*@
-  and @application/json@ ). This is to prevent printing unsafe characters and potentially
-  downloading large amount of data which would be thrown away in favour of metadata.
+about: ! 'The S3 object data source allows access to the metadata and optionally (see
+  below) content of an object stored inside S3 bucket. ~> Note: The content of an
+  object ( @body@ field) is available only for objects which have a human-readable
+  @Content-Type@ ( @text/*@ and @application/json@ ). This is to prevent printing
+  unsafe characters and potentially downloading large amount of data which would be
+  thrown away in favour of metadata.'
 examples: []

@@ -1,0 +1,51 @@
+_name: consul_service
+arguments:
+  address:
+    required: false
+    help: (Optional, string) The address of the service. Defaults to the address of
+      the agent.
+    type: Text
+  name:
+    required: true
+    help: (Required, string) The name of the service.
+    type: Text
+  service_id:
+    required: false
+    help: (Optional, string) The ID of the service, defaults to the value of @name@
+      if not supplied.
+    type: Text
+  tags:
+    required: false
+    help: (Optional, set of strings) A list of values that are opaque to Consul, but
+      can be used to distinguish between services or nodes.
+    type: Text
+  port:
+    required: false
+    help: (Optional, int) The port of the service.
+    type: Text
+attributes:
+  address:
+    help: ! '- The address of the service.'
+    type: Text
+  name:
+    help: ! '- The name of the service.'
+    type: Text
+  service_id:
+    help: ! '- The id of the service, defaults to the value of @name@ .'
+    type: Text
+  tags:
+    help: ! '- The tags of the service.'
+    type: Text
+  port:
+    help: ! '- The port of the service.'
+    type: Text
+about: A high-level resource for creating a Service in Consul. Currently, defining
+  health checks for a service is not supported. Most users should not use this resource
+  . When using Consul with compute instances, it's better to install <https://www.consul.io/docs/agent/basics.html>
+  on these machines and register services via the agent. This ensures that services
+  get assigned to the appropriate Consul "nodes" and allows service health to integrate
+  with general node health as reported by the agent. To register a non-compute resource,
+  such as a hosted database, as a service, as described in <https://www.consul.io/docs/guides/external.html>
+  , use <catalog_entry.html> instead, which can create an arbitrary service record
+  in the Consul catalog.
+examples: []

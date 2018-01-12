@@ -7,8 +7,8 @@ arguments:
     type: Text
   executable_users:
     required: false
-    help: (Optional) Limit search to users with launch permission on  the image. Valid
-      items are the numeric account ID or @self@ .
+    help: (Optional) Limit search to users with explicit launch permission on  the
+      image. Valid items are the numeric account ID or @self@ .
     type: Text
   name_regex:
     required: false

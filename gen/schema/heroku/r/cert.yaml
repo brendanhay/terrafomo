@@ -1,0 +1,27 @@
+_name: heroku_cert
+arguments:
+  certificate_chain:
+    required: true
+    help: (Required) The certificate chain to add
+    type: Text
+  app:
+    required: true
+    help: (Required) The Heroku app to add to.
+    type: Text
+  private_key:
+    required: true
+    help: (Required) The private key for a given certificate chain
+    type: Text
+attributes:
+  cname:
+    help: ! '- The CNAME for the SSL endpoint'
+    type: Text
+  name:
+    help: ! '- The name of the SSL certificate'
+    type: Text
+  id:
+    help: ! '- The ID of the add-on'
+    type: Text
+about: Provides a Heroku SSL certificate resource. It allows to set a given certificate
+  for a Heroku app.
+examples: []

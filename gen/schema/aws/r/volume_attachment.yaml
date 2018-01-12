@@ -8,7 +8,7 @@ arguments:
     required: false
     help: (Optional, Boolean) Set to @true@ if you want to force the volume to detach.
       Useful if previous attempts failed, but use this option only as a last resort,
-      as this can result in . See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html>
+      as this can result in data loss . See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html>
       for more information.
     type: Text
   device_name:
@@ -37,10 +37,10 @@ attributes:
   instance_id:
     help: ! '- ID of the Instance'
     type: Text
-about: Provides an AWS EBS Volume Attachment as a top level resource, to attach and
-  detach volumes from AWS Instances. ~> If you use @ebs_block_device@ on an @aws_instance@
-  , Terraform will assume management over the full set of non-root EBS block devices
-  for the instance, and treats additional block devices as drift. For this reason,
-  @ebs_block_device@ cannot be mixed with external @aws_ebs_volume@ + @aws_ebs_volume_attachment@
-  resources for a given instance.
+about: ! 'Provides an AWS EBS Volume Attachment as a top level resource, to attach
+  and detach volumes from AWS Instances. ~> NOTE on EBS block devices: If you use
+  @ebs_block_device@ on an @aws_instance@ , Terraform will assume management over
+  the full set of non-root EBS block devices for the instance, and treats additional
+  block devices as drift. For this reason, @ebs_block_device@ cannot be mixed with
+  external @aws_ebs_volume@ + @aws_ebs_volume_attachment@ resources for a given instance.'
 examples: []

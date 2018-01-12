@@ -25,8 +25,8 @@ arguments:
   local_secondary_index:
     required: false
     help: (Optional, Forces new resource) Describe an LSI on the table; these can
-      only be allocated so you cannot change this definition after you have created
-      the resource.
+      only be allocated at creation so you cannot change this definition after you
+      have created the resource.
     type: Text
   stream_view_type:
     required: false
@@ -58,7 +58,7 @@ arguments:
     help: (Optional) A map of tags to populate on the created table.
     type: Text
 attributes: {}
-about: Provides a DynamoDB table resource ~> It is recommended to use @lifecycle@  </docs/configuration/resources.html#ignore_changes>
-  for @read_capacity@ and/or @write_capacity@ if there's </docs/providers/aws/r/appautoscaling_policy.html>
-  attached to the table.
+about: ! 'Provides a DynamoDB table resource ~> Note: It is recommended to use @lifecycle@  </docs/configuration/resources.html#ignore_changes>
+  for @read_capacity@ and/or @write_capacity@ if there''s </docs/providers/aws/r/appautoscaling_policy.html>
+  attached to the table.'
 examples: []

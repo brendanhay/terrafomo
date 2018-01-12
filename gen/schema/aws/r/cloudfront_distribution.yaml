@@ -83,12 +83,13 @@ arguments:
     help: (Optional) A mapping of tags to assign to the resource.
     type: Text
 attributes: {}
-about: Creates an Amazon CloudFront web distribution. For information about CloudFront
+about: ! 'Creates an Amazon CloudFront web distribution. For information about CloudFront
   distributions, see the <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>
   . For specific information about creating CloudFront web distributions, see the
   <http://docs.aws.amazon.com/AmazonCloudFront/latest/APIReference/CreateDistribution.html>
-  page in the Amazon CloudFront API Reference. ~> CloudFront distributions take about
-  15 minutes to a deployed state after creation or modification. During this time,
-  deletes to resources will be blocked. If you need to delete a distribution that
-  is enabled and you do not want to wait, you need to use the @retain_on_delete@ flag.
+  page in the Amazon CloudFront API Reference. ~> NOTE: CloudFront distributions take
+  about 15 minutes to a deployed state after creation or modification. During this
+  time, deletes to resources will be blocked. If you need to delete a distribution
+  that is enabled and you do not want to wait, you need to use the @retain_on_delete@
+  flag.'
 examples: []

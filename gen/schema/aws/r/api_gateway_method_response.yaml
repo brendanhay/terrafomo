@@ -9,7 +9,7 @@ arguments:
     type: Text
   response_parameters_in_json:
     required: true
-    help: ! '- , use @response_parameters@ instead.'
+    help: ! '- Deprecated , use @response_parameters@ instead.'
     type: Text
   rest_api_id:
     required: true

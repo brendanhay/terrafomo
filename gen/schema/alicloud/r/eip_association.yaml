@@ -1,0 +1,22 @@
+_name: alicloud_eip_association
+arguments:
+  instance_id:
+    required: false
+    help: (Optional, Forces new resource) The ID of the instance.
+    type: Text
+  allocation_id:
+    required: false
+    help: (Optional, Forces new resource) The allocation EIP ID.
+    type: Text
+attributes:
+  instance_id:
+    help: ! '- As above.'
+    type: Text
+  allocation_id:
+    help: ! '- As above.'
+    type: Text
+about: ! 'Provides an Alicloud EIP Association resource, to associate and disassociate
+  Elastic IPs from ECS Instances. ~> NOTE:  @alicloud_eip_association@ is useful in
+  scenarios where EIPs are either pre-existing or distributed to customers or users
+  and therefore cannot be changed. In addition, it only supports ECS-VPC.'
+examples: []

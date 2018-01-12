@@ -1,0 +1,70 @@
+_name: circonus_account
+arguments:
+  current:
+    required: false
+    help: (Optional) Automatically use the current Circonus Account attached to the
+      API token making the request.
+    type: Text
+  id:
+    required: false
+    help: (Optional) The Circonus ID of a given account.
+    type: Text
+attributes:
+  address2:
+    help: ! '- The second line of the address associated with the account.'
+    type: Text
+  state:
+    help: ! '- The state or province of the address associated with the account.'
+    type: Text
+  users:
+    help: ! '- A list of users who have access to this account.  Each element in the
+      list has both an @id@ and a @role@ .  The @id@ is a Circonus ID referencing
+      the user.'
+    type: Text
+  invites:
+    help: ! '- An list of users invited to use the platform.  Each element in the
+      list has both an @email@ and @role@ attribute.'
+    type: Text
+  ui_base_url:
+    help: ! '- The base URL of this account.'
+    type: Text
+  country:
+    help: ! '- The country of the user''s address.'
+    type: Text
+  owner:
+    help: ! '- The Circonus ID of the user who owns this account.'
+    type: Text
+  name:
+    help: ! '- The name of the account.'
+    type: Text
+  city:
+    help: ! '- The city part of the address associated with the account.'
+    type: Text
+  address1:
+    help: ! '- The first line of the address associated with the account.'
+    type: Text
+  id:
+    help: ! '- The Circonus ID of the selected Account.'
+    type: Text
+  usage:
+    help: ! '- A list of account usage limits.  Each element in the list will have
+      a @limit@ attribute, a limit @type@ , and a @used@ attribute.'
+    type: Text
+  cc_email:
+    help: ! '- An optionally specified email address used in the CC line of invoices.'
+    type: Text
+  contact_groups:
+    help: ! '- A list of IDs for each contact group in the account.'
+    type: Text
+  timezone:
+    help: ! '- The timezone that events will be displayed in the web interface for
+      this account.'
+    type: Text
+  description:
+    help: ! '- Description of the account.'
+    type: Text
+about: ! '@circonus_account@ provides <https://login.circonus.com/resources/api/calls/account>
+  about a specific <https://login.circonus.com/user/docs/Administration/Account> .
+  The @circonus_account@ data source can be used for pulling various attributes about
+  a specific Circonus Account.'
+examples: []

@@ -38,6 +38,12 @@ pattern Item <- CMark.Node _ ITEM _
 pattern Text :: Text -> Node
 pattern Text x <- CMark.Node _ (TEXT x) _
 
+pattern Emph :: Node
+pattern Emph <- CMark.Node _ EMPH   _
+
+pattern Strong :: Node
+pattern Strong <- CMark.Node _ STRONG _
+
 pattern Link :: Text -> Node
 pattern Link x <- CMark.Node _ (LINK x _) _
 

@@ -1,0 +1,49 @@
+_name: vsphere_virtual_machine_snapshot
+arguments:
+  snapshot_name:
+    required: true
+    help: (Required) The name of the snapshot.
+    type: Text
+  remove_children:
+    required: false
+    help: (Optional) If set to @true@ , the entire snapshot subtree is removed when
+      this resource is destroyed.
+    type: Text
+  memory:
+    required: true
+    help: (Required) If set to @true@ , a dump of the internal state of the virtual
+      machine is included in the snapshot.
+    type: Text
+  virtual_machine_uuid:
+    required: true
+    help: (Required) The virtual machine UUID.
+    type: Text
+  consolidate:
+    required: false
+    help: (Optional) If set to @true@ , the delta disks involved in this snapshot
+      will be consolidated into the parent when this resource is destroyed.
+    type: Text
+  quiesce:
+    required: true
+    help: (Required) If set to @true@ , and the virtual machine is powered on when
+      the snapshot is taken, VMware Tools is used to quiesce the file system in the
+      virtual machine.
+    type: Text
+  description:
+    required: true
+    help: (Required) A description for the snapshot.
+    type: Text
+attributes: {}
+about: ! 'The @vsphere_virtual_machine_snapshot@ resource can be used to manage snapshots
+  for a virtual machine. For more information on managing snapshots and how they work
+  in VMware, see <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-CA948C69-7F58-4519-AEB1-739545EA94E5.html>
+  . ~> NOTE: A snapshot in VMware differs from traditional disk snapshots in that
+  the actual running state of the virtual machine can be taken with the snapshot as
+  well, all non-independent disks are included in the snapshot (including any disks
+  that have been attached externally but are not independent), and VM and disk activity
+  post-snapshot is not included in the original state. Use this resource with care!
+  VMware nor HashiCorp recommends retaining snapshots for a extended period of time
+  and does NOT recommend using them as as backup feature. For more information on
+  the limitation of virtual machine snapshots, see <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-53F65726-A23B-4CF0-A7D5-48E584B88613.html>
+  .'
+examples: []

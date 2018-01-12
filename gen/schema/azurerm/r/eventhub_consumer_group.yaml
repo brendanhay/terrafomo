@@ -1,0 +1,34 @@
+_name: azurerm_eventhub_consumer_group
+arguments:
+  name:
+    required: true
+    help: (Required) Specifies the name of the EventHub Consumer Group resource. Changing
+      this forces a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which the EventHub Consumer
+      Group's grandparent Namespace exists. Changing this forces a new resource to
+      be created.
+    type: Text
+  user_metadata:
+    required: false
+    help: (Optional) Specifies the user metadata.
+    type: Text
+  namespace_name:
+    required: true
+    help: (Required) Specifies the name of the grandparent EventHub Namespace. Changing
+      this forces a new resource to be created.
+    type: Text
+  eventhub_name:
+    required: true
+    help: (Required) Specifies the name of the EventHub. Changing this forces a new
+      resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The EventHub Consumer Group ID.'
+    type: Text
+about: Creates a new Event Hubs Consumer Group as a nested resource within an Event
+  Hub.
+examples: []

@@ -1,0 +1,25 @@
+_name: vault_mount
+arguments:
+  max_lease_ttl_seconds:
+    required: false
+    help: (Optional) Maximum possible lease duration for tokens and secrets in seconds
+    type: Text
+  path:
+    required: true
+    help: (Required) Where the secret backend will be mounted
+    type: Text
+  default_lease_ttl_seconds:
+    required: false
+    help: (Optional) Default lease duration for tokens and secrets in seconds
+    type: Text
+  type':
+    required: true
+    help: (Required) Type of the backend, such as "aws"
+    type: Text
+  description:
+    required: false
+    help: (Optional) Human-friendly description of the mount
+    type: Text
+attributes: {}
+about: ''
+examples: []

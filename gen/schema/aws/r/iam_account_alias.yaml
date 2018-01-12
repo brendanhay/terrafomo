@@ -5,6 +5,6 @@ arguments:
     help: (Required) The account alias
     type: Text
 attributes: {}
-about: -> There is only a single account alias per AWS account. Manages the account
-  alias for the AWS Account.
+about: ! '-> Note: There is only a single account alias per AWS account. Manages the
+  account alias for the AWS Account.'
 examples: []

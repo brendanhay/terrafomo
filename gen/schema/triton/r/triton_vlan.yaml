@@ -15,6 +15,6 @@ arguments:
     type: Text
 attributes: {}
 about: The @triton_vlan@ resource represents an Triton VLAN. A VLAN provides a low
-  level way to segregate and subdivide the network. Traffic on one VLAN cannot, ,
-  reach another VLAN.
+  level way to segregate and subdivide the network. Traffic on one VLAN cannot, on
+  its own , reach another VLAN.
 examples: []

@@ -1,0 +1,14 @@
+_name: pagerduty_escalation_policy
+arguments:
+  name:
+    required: true
+    help: (Required) The name to use to find an escalation policy in the PagerDuty
+      API.
+    type: Text
+attributes:
+  name:
+    help: ! '- The short name of the found escalation policy.'
+    type: Text
+about: Use this data source to get information about a specific <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Escalation_Policies/get_escalation_policies>
+  that you can use for other PagerDuty resources.
+examples: []

@@ -17,7 +17,8 @@ attributes:
   repository_url:
     help: ! '- The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@'
     type: Text
-about: ! 'Provides an EC2 Container Registry Repository. ~> : The EC2 Container Registry
-  is not yet rolled out in all regions - available regions are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#ecr_region>
+about: ! 'Provides an EC2 Container Registry Repository. ~> NOTE on ECR Availability
+  : The EC2 Container Registry is not yet rolled out in all regions - available regions
+  are listed <https://docs.aws.amazon.com/general/latest/gr/rande.html#ecr_region>
   .'
 examples: []

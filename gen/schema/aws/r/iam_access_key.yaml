@@ -23,9 +23,9 @@ attributes:
     help: ! '- The IAM user associated with this access key.'
     type: Text
   encrypted_secret:
-    help: ! '- The encrypted secret, base64 encoded. ~> The encrypted secret may be
-      decrypted using the command line, for example: @terraform output secret | base64
-      --decode | keybase pgp decrypt@ .'
+    help: ! '- The encrypted secret, base64 encoded. ~> NOTE: The encrypted secret
+      may be decrypted using the command line, for example: @terraform output secret
+      | base64 --decode | keybase pgp decrypt@ .'
     type: Text
   id:
     help: ! '- The access key ID.'

@@ -57,9 +57,9 @@ arguments:
     type: Text
   tags:
     required: true
-    help: – (Optional) A set of tags to apply to the Environment. at this time the
-      Elastic Beanstalk API does not provide a programatic way of changing these tags
-      after initial application
+    help: ! '– (Optional) A set of tags to apply to the Environment. Note: at this
+      time the Elastic Beanstalk API does not provide a programatic way of changing
+      these tags after initial application'
     type: Text
 attributes: {}
 about: Provides an Elastic Beanstalk Environment Resource. Elastic Beanstalk allows

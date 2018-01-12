@@ -1,0 +1,31 @@
+_name: dyn_record
+arguments:
+  ttl:
+    required: false
+    help: (Optional) The TTL of the record. Default uses the zone default.
+    type: Text
+  value:
+    required: true
+    help: (Required) The value of the record.
+    type: Text
+  zone:
+    required: true
+    help: (Required) The DNS zone to add the record to.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the record.
+    type: Text
+  type':
+    required: true
+    help: (Required) The type of the record.
+    type: Text
+attributes:
+  fqdn:
+    help: ! '- The FQDN of the record, built from the @name@ and the @zone@ .'
+    type: Text
+  id:
+    help: ! '- The record ID.'
+    type: Text
+about: Provides a Dyn DNS record resource.
+examples: []

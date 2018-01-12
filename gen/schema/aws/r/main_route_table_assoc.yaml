@@ -11,7 +11,7 @@ arguments:
     type: Text
 attributes:
   original_route_table_id:
-    help: ! '- Used internally, see below'
+    help: ! '- Used internally, see Notes below'
     type: Text
   id:
     help: ! '- The ID of the Route Table Association'

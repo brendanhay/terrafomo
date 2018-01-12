@@ -1,0 +1,46 @@
+_name: ultradns_dirpool
+arguments:
+  ttl:
+    required: false
+    help: ! '(Optional) The TTL of the record. Default: @3600@ .'
+    type: Text
+  no_response:
+    required: false
+    help: (Optional) a single Record Data block, without any @host@ attribute. Record
+      Data documented below.
+    type: Text
+  zone:
+    required: true
+    help: (Required) The domain to add the record to
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the record
+    type: Text
+  type':
+    required: true
+    help: (Required) The Record Type of the record
+    type: Text
+  rdata:
+    required: true
+    help: (Required) a list of Record Data blocks, one for each member in the pool.
+      Record Data documented below.
+    type: Text
+  conflict_resolve:
+    required: false
+    help: ! '(Optional) String. Valid: @"GEO"@ or @"IP"@ . Default: @"GEO"@ .'
+    type: Text
+  description:
+    required: true
+    help: (Required) Description of the Traffic Controller pool. Valid values are
+      strings less than 256 characters.
+    type: Text
+attributes:
+  hostname:
+    help: ! '- The FQDN of the record'
+    type: Text
+  id:
+    help: ! '- The record ID'
+    type: Text
+about: Provides an UltraDNS Directional Controller pool resource.
+examples: []

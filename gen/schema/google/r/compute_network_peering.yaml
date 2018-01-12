@@ -24,8 +24,8 @@ attributes:
   state_details:
     help: ! '- Details about the current state of the peering.'
     type: Text
-about: Manages a network peering within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/vpc-peering>
-  and <https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Both
-  network must create a peering with each other for the peering to be functional.
-  ~> Subnets IP ranges across peered VPC networks cannot overlap.
+about: ! 'Manages a network peering within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/vpc-peering>
+  and <https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Note:
+  Both network must create a peering with each other for the peering to be functional.
+  ~> Note: Subnets IP ranges across peered VPC networks cannot overlap.'
 examples: []

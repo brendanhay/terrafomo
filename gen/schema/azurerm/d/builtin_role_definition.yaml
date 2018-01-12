@@ -1,0 +1,30 @@
+_name: azurerm_builtin_role_definition
+arguments:
+  name:
+    required: true
+    help: ! '(Required) Specifies the name of the built-in Role Definition. Possible
+      values are: @Contributor@ , @Owner@ , @Reader@ and @VirtualMachineContributor@
+      .'
+    type: Text
+attributes:
+  assignable_scopes:
+    help: ! '- One or more assignable scopes for this Role Definition, such as @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333@
+      , @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup@
+      , or @/subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM@
+      .'
+    type: Text
+  id:
+    help: ! '- the ID of the built-in Role Definition.'
+    type: Text
+  permissions:
+    help: ! '- a @permissions@ block as documented below.'
+    type: Text
+  type:
+    help: ! '- the Type of the Role.'
+    type: Text
+  description:
+    help: ! '- the Description of the built-in Role.'
+    type: Text
+about: Use this data source to access the properties of a built-in Role Definition.
+  To access information about a custom Role Definition, <role_definition.html> instead.
+examples: []

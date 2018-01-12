@@ -48,11 +48,12 @@ attributes:
   self_link:
     help: ! '- The URI of the created resource.'
     type: Text
-about: Manages an HTTP health check within GCE. This is used to monitor instances
+about: ! 'Manages an HTTP health check within GCE. This is used to monitor instances
   behind load balancers. Timeouts or HTTP errors cause the instance to be removed
   from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks>
   and <https://cloud.google.com/compute/docs/reference/latest/httpHealthChecks> .
-  ~> HttpHealthChecks/HTTPSHealthChecks are legacy health checks. The newer </docs/providers/google/r/compute_health_check.html>
-  should be preferred for all uses except except <https://cloud.google.com/compute/docs/load-balancing/network/>
-  which still require the legacy HttpHealthChecks.
+  ~> Note: HttpHealthChecks/HTTPSHealthChecks are legacy health checks. The newer
+  </docs/providers/google/r/compute_health_check.html> should be preferred for all
+  uses except except <https://cloud.google.com/compute/docs/load-balancing/network/>
+  which still require the legacy HttpHealthChecks.'
 examples: []

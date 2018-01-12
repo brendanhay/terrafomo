@@ -35,7 +35,7 @@ attributes:
   id:
     help: ! '- The ID of the API key'
     type: Text
-about: Provides an API Gateway API Key. ~> Since the API Gateway usage plans feature
-  was launched on August 11, 2016, usage plans are now to associate an API key with
-  an API stage.
+about: ! 'Provides an API Gateway API Key. ~> Warning: Since the API Gateway usage
+  plans feature was launched on August 11, 2016, usage plans are now required to associate
+  an API key with an API stage.'
 examples: []

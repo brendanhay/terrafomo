@@ -1,0 +1,78 @@
+_name: oneandone_server
+arguments:
+  ! '*is_main':
+    required: false
+    help: (Optional) Indicates if HDD is to be used as main hard disk of the server
+    type: Text
+  image:
+    required: true
+    help: -(Required) The name of a desired image to be provisioned with the server
+    type: Text
+  ssh_key_path:
+    required: false
+    help: (Optional) Path to private ssh key
+    type: Text
+  ! '*disk_size':
+    required: true
+    help: -(Required) The size of HDD
+    type: Text
+  hdds:
+    required: false
+    help: (Optional) List of HDDs. One HDD must be main.
+    type: Text
+  datacenter:
+    required: false
+    help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
+      or @ES@
+    type: Text
+  ssh_key_public:
+    required: false
+    help: (Optional) The public key data in OpenSSH authorized_keys format.
+    type: Text
+  vcores:
+    required: true
+    help: -(Optional) Number of virtual cores.
+    type: Text
+  ip:
+    required: false
+    help: (Optional) IP address for the server
+    type: Text
+  monitoring_policy_id:
+    required: false
+    help: (Optional) ID of monitoring policy
+    type: Text
+  name:
+    required: true
+    help: -(Required) The name of the server.
+    type: Text
+  password:
+    required: false
+    help: (Optional) Desired password.
+    type: Text
+  fixed_instance_size:
+    required: false
+    help: (Optional) ID of a fixed instance size
+    type: Text
+  loadbalancer_id:
+    required: false
+    help: (Optional) ID of the load balancer
+    type: Text
+  firewall_policy_id:
+    required: false
+    help: (Optional) ID of firewall policy
+    type: Text
+  description:
+    required: false
+    help: (Optional) Description of the server
+    type: Text
+  ram:
+    required: true
+    help: -(Optional) Size of ram.
+    type: Text
+  cores_per_processor:
+    required: true
+    help: -(Optional) Number of cores per processor
+    type: Text
+attributes: {}
+about: Manages a Server on 1&1
+examples: []

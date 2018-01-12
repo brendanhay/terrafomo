@@ -1,0 +1,5 @@
+_name: profitbricks_nic
+arguments: {}
+attributes: {}
+about: Manages a NICs on ProfitBricks
+examples: []

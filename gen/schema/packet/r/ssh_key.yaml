@@ -1,0 +1,34 @@
+_name: packet_ssh_key
+arguments:
+  public_key:
+    required: true
+    help: (Required) The public key. If this is a file, it can be read using the file
+      interpolation function
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the SSH key for identification
+    type: Text
+attributes:
+  created:
+    help: ! '- The timestamp for when the SSH key was created'
+    type: Text
+  fingerprint:
+    help: ! '- The fingerprint of the SSH key'
+    type: Text
+  public_key:
+    help: ! '- The text of the public key'
+    type: Text
+  name:
+    help: ! '- The name of the SSH key'
+    type: Text
+  id:
+    help: ! '- The unique ID of the key'
+    type: Text
+  updated:
+    help: ! '- The timestamp for the last time the SSH key was updated'
+    type: Text
+about: Provides a Packet SSH key resource to allow you manage SSH keys on your account.
+  All SSH keys on your account are loaded on all new devices, they do not have to
+  be explicitly declared on device creation.
+examples: []

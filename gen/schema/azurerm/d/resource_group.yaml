@@ -1,0 +1,15 @@
+_name: azurerm_resource_group
+arguments:
+  name:
+    required: true
+    help: (Required) Specifies the name of the resource group.
+    type: Text
+attributes:
+  location:
+    help: ! '- The location of the resource group.'
+    type: Text
+  tags:
+    help: ! '- A mapping of tags assigned to the resource group.'
+    type: Text
+about: Use this data source to access the properties of an Azure resource group.
+examples: []

@@ -47,9 +47,9 @@ arguments:
     type: Text
   db_subnet_group_name:
     required: true
-    help: (Required if @publicly_accessible = false@ , Optional otherwise) A DB subnet
-      group to associate with this DB instance. This must match the @db_subnet_group_name@
-      of the attached </docs/providers/aws/r/rds_cluster.html> .
+    help: ! '(Required if @publicly_accessible = false@ , Optional otherwise) A DB
+      subnet group to associate with this DB instance. NOTE: This must match the @db_subnet_group_name@
+      of the attached </docs/providers/aws/r/rds_cluster.html> .'
     type: Text
   publicly_accessible:
     required: false

@@ -1,0 +1,27 @@
+_name: github_team
+arguments:
+  slug:
+    required: true
+    help: (Required) The team slug.
+    type: Text
+attributes:
+  members:
+    help: ! '- List of team members'
+    type: Text
+  privacy:
+    help: ! '- the team''s privacy type.'
+    type: Text
+  name:
+    help: ! '- the team''s full name.'
+    type: Text
+  id:
+    help: ! '- the ID of the team.'
+    type: Text
+  permission:
+    help: ! '- the team''s permission level.'
+    type: Text
+  description:
+    help: ! '- the team''s description.'
+    type: Text
+about: Use this data source to retrieve information about a Github team.
+examples: []

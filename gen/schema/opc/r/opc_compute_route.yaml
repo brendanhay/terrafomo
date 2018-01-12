@@ -1,0 +1,44 @@
+_name: opc_compute_route
+arguments:
+  ip_address_prefix:
+    required: true
+    help: (Required) The IPv4 address prefix, in CIDR format, of the external network
+      from which to route traffic.
+    type: Text
+  admin_distance:
+    required: false
+    help: (Optional) The route's administrative distance. Defaults to @0@ .
+    type: Text
+  next_hop_vnic_set:
+    required: true
+    help: (Required) Name of the virtual NIC set to route matching packets to. Routed
+      flows are load-balanced among all the virtual NICs in the virtual NIC set.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the route.
+    type: Text
+  description:
+    required: false
+    help: (Optional) The description of the route.
+    type: Text
+attributes:
+  ip_address_prefix:
+    help: ! '- The IPv4 address prefix, in CIDR format, of the external network from
+      which to route traffic.'
+    type: Text
+  admin_distance:
+    help: ! '- The route''s administrative distance. Defaults to @0@ .'
+    type: Text
+  next_hop_vnic_set:
+    help: ! '- Name of the virtual NIC set to route matching packets to. Routed flows
+      are load-balanced among all the virtual NICs in the virtual NIC set.'
+    type: Text
+  name:
+    help: The name of the route
+    type: Text
+  description:
+    help: ! '- The description of the route.'
+    type: Text
+about: The @opc_compute_route@ resource creates and manages a route for an IP Network.
+examples: []

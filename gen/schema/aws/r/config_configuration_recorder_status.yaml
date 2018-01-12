@@ -9,8 +9,8 @@ arguments:
     help: (Required) Whether the configuration recorder should be enabled or disabled.
     type: Text
 attributes: {}
-about: Manages status (recording / stopped) of an AWS Config Configuration Recorder.
-  ~> Starting Configuration Recorder requires a </docs/providers/aws/r/config_delivery_channel.html>
+about: ! 'Manages status (recording / stopped) of an AWS Config Configuration Recorder.
+  ~> Note: Starting Configuration Recorder requires a </docs/providers/aws/r/config_delivery_channel.html>
   to be present. Use of @depends_on@ (as shown below) is recommended to avoid race
-  conditions.
+  conditions.'
 examples: []

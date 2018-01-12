@@ -1,0 +1,28 @@
+_name: spotinst_healthcheck
+arguments:
+  proxy:
+    required: true
+    help: (Required)
+    type: Text
+  check:
+    required: true
+    help: (Required) Describes the check to execute.
+    type: Text
+  name:
+    required: false
+    help: (Optional) the name of the healthcheck
+    type: Text
+  threshold:
+    required: true
+    help: (Required)
+    type: Text
+  resource_id:
+    required: true
+    help: (Required) The resource to health check
+    type: Text
+attributes:
+  id:
+    help: ! '- The healthcheck ID.'
+    type: Text
+about: Provides a Spotinst healthcheck resource.
+examples: []

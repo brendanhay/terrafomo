@@ -1,0 +1,18 @@
+_name: azurerm_client_config
+arguments:
+  client_id:
+    required: true
+    help: is set to the Azure Client ID (Application Object ID).
+    type: Text
+  tenant_id:
+    required: true
+    help: is set to the Azure Tenant ID.
+    type: Text
+  subscription_id:
+    required: true
+    help: is set to the Azure Subscription ID.
+    type: Text
+attributes: {}
+about: Use this data source to access the configuration of the Azure Resource Manager
+  provider.
+examples: []

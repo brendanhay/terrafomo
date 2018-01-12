@@ -1,0 +1,41 @@
+_name: vsphere_distributed_port_group
+arguments:
+  distributed_virtual_switch_uuid:
+    required: true
+    help: (Required) The ID of the DVS to add the port group to. Forces a new resource
+      if changed.
+    type: Text
+  number_of_ports:
+    required: false
+    help: (Optional) The number of ports available on this port group. Cannot be decreased
+      below the amount of used ports on the port group.
+    type: Text
+  auto_expand:
+    required: false
+    help: ! '(Optional) Allows the port group to create additional ports past the
+      limit specified in @number_of_ports@ if necessary. Default: @true@ .'
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the port group.
+    type: Text
+  type':
+    required: false
+    help: ! '(Optional) The port group type. Can be one of @earlyBinding@ (static
+      binding) or @ephemeral@ . Default: @earlyBinding@ .'
+    type: Text
+  description:
+    required: false
+    help: (Optional) An optional description for the port group.
+    type: Text
+attributes: {}
+about: ! 'The @vsphere_distributed_port_group@ resource can be used to manage vSphere
+  distributed virtual port groups. These port groups are connected to distributed
+  virtual switches, which can be managed by the </docs/providers/vsphere/r/distributed_virtual_switch.html>
+  resource. Distributed port groups can be used as networks for virtual machines,
+  allowing VMs to use the networking supplied by a distributed virtual switch (DVS),
+  with a set of policies that apply to that individual newtork, if desired. For an
+  overview on vSphere networking concepts, see <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-2B11DBB8-CB3C-4AFF-8885-EFEA0FC562F4.html>
+  . For more information on vSphere DVS portgroups, see <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-69933F6E-2442-46CF-AA17-1196CB9A0A09.html>
+  . ~> NOTE: This resource requires vCenter and is not available on direct ESXi connections.'
+examples: []

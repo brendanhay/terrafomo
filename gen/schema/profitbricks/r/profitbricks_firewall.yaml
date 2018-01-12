@@ -1,0 +1,5 @@
+_name: profitbricks_firewall
+arguments: {}
+attributes: {}
+about: Manages a Firewall Rules on ProfitBricks
+examples: []

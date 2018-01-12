@@ -2,7 +2,7 @@ _name: aws_iam_openid_connect_provider
 arguments:
   url:
     required: true
-    help: (Required) The URL of the identity provider. Corresponds to the claim.
+    help: (Required) The URL of the identity provider. Corresponds to the iss claim.
     type: Text
   thumbprint_list:
     required: true

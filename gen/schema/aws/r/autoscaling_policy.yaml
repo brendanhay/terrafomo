@@ -35,9 +35,9 @@ attributes:
   adjustment_type:
     help: ! '- The scaling policy''s adjustment type.'
     type: Text
-about: Provides an AutoScaling Scaling Policy resource. ~> You may want to omit @desired_capacity@
-  attribute from attached @aws_autoscaling_group@ when using autoscaling policies.
-  It's good practice to pick either <https://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-manual-scaling.html>
+about: ! 'Provides an AutoScaling Scaling Policy resource. ~> NOTE: You may want to
+  omit @desired_capacity@ attribute from attached @aws_autoscaling_group@ when using
+  autoscaling policies. It''s good practice to pick either <https://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-manual-scaling.html>
   or <https://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html>
-  (policy-based) scaling.
+  (policy-based) scaling.'
 examples: []

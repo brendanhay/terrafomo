@@ -1,0 +1,36 @@
+_name: azurerm_eventhub_namespace
+arguments:
+  location:
+    required: true
+    help: (Required) Specifies the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  capacity:
+    required: false
+    help: (Optional) Specifies the capacity of a Standard namespace. Can be 1, 2 or
+      4
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the EventHub Namespace resource . Changing
+      this forces a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the namespace.
+      Changing this forces a new resource to be created.
+    type: Text
+  sku:
+    required: true
+    help: (Required) Defines which tier to use. Options are Basic or Standard.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  id:
+    help: ! '- The EventHub Namespace ID.'
+    type: Text
+about: Create an EventHub Namespace.
+examples: []

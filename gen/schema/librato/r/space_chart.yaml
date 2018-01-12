@@ -1,0 +1,49 @@
+_name: librato_space_chart
+arguments:
+  stream:
+    required: false
+    help: (Optional) Nested block describing a metric to use for data in the chart.
+      The structure of this block is described below.
+    type: Text
+  max:
+    required: false
+    help: (Optional) The maximum display value of the chart's Y-axis.
+    type: Text
+  related_space:
+    required: false
+    help: (Optional) The ID of another space to which this chart is related.
+    type: Text
+  name:
+    required: true
+    help: (Required) The title of the chart when it is displayed.
+    type: Text
+  type':
+    required: false
+    help: (Optional) Indicates the type of chart. Must be one of line or stacked (default
+      to line).
+    type: Text
+  min:
+    required: false
+    help: (Optional) The minimum display value of the chart's Y-axis.
+    type: Text
+  space_id:
+    required: true
+    help: (Required) The ID of the space this chart should be in.
+    type: Text
+  label:
+    required: false
+    help: (Optional) The Y-axis label.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the chart.'
+    type: Text
+  title:
+    help: ! '- The title of the chart when it is displayed.'
+    type: Text
+  space_id:
+    help: ! '- The ID of the space this chart should be in.'
+    type: Text
+about: Provides a Librato Space Chart resource. This can be used to create and manage
+  charts in Librato Spaces.
+examples: []

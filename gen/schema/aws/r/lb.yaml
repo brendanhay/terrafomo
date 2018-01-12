@@ -77,6 +77,6 @@ attributes:
   id:
     help: ! '- The ARN of the load balancer (matches @arn@ ).'
     type: Text
-about: Provides a Load Balancer resource. ~>  @aws_alb@ is know as @aws_lb@ . The
-  functionality is identical.
+about: ! 'Provides a Load Balancer resource. ~> Note:  @aws_alb@ is know as @aws_lb@
+  . The functionality is identical.'
 examples: []

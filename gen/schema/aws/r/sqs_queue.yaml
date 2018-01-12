@@ -14,9 +14,9 @@ arguments:
     type: Text
   redrive_policy:
     required: false
-    help: (Optional) The JSON policy to set up the Dead Letter Queue, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html>
-      . when specifying @maxReceiveCount@ , you must specify it as an integer ( @5@
-      ), and not a string ( @"5"@ ).
+    help: ! '(Optional) The JSON policy to set up the Dead Letter Queue, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html>
+      . Note: when specifying @maxReceiveCount@ , you must specify it as an integer
+      ( @5@ ), and not a string ( @"5"@ ).'
     type: Text
   max_message_size:
     required: false

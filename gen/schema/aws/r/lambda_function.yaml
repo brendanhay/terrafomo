@@ -49,7 +49,8 @@ arguments:
     type: Text
   dead_letter_config:
     required: false
-    help: (Optional) Nested block to configure the function's . See details below.
+    help: (Optional) Nested block to configure the function's dead letter queue .
+      See details below.
     type: Text
   handler:
     required: true

@@ -13,7 +13,7 @@ arguments:
     type: Text
   response_parameters_in_json:
     required: true
-    help: ! '- , use @response_parameters@ instead.'
+    help: ! '- Deprecated , use @response_parameters@ instead.'
     type: Text
   selection_pattern:
     required: false
@@ -48,7 +48,7 @@ arguments:
       response to the method response without modification.
     type: Text
 attributes: {}
-about: Provides an HTTP Method Integration Response for an API Gateway Resource. ->
-  Depends on having @aws_api_gateway_integration@ inside your rest api. To ensure
-  this you might need to add an explicit @depends_on@ for clean runs.
+about: ! 'Provides an HTTP Method Integration Response for an API Gateway Resource.
+  -> Note: Depends on having @aws_api_gateway_integration@ inside your rest api. To
+  ensure this you might need to add an explicit @depends_on@ for clean runs.'
 examples: []

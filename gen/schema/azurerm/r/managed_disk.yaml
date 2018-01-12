@@ -1,0 +1,86 @@
+_name: azurerm_managed_disk
+arguments:
+  source_uri:
+    required: false
+    help: (Optional) URI to a valid VHD file to be used when @create_option@ is @Import@
+      .
+    type: Text
+  source_resource_id:
+    required: false
+    help: (Optional) ID of an existing managed disk to copy when @create_option@ is
+      @Copy@ .
+    type: Text
+  location:
+    required: true
+    help: (Required) Specified the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  disk_size_gb:
+    required: false
+    help: (Optional, Required for a new managed disk) Specifies the size of the managed
+      disk to create in gigabytes. If @create_option@ is @Copy@ or @FromImage@ , then
+      the value must be equal to or greater than the source's size.
+    type: Text
+  Copy:
+    required: true
+    help: ! '- Copy an existing managed disk or snapshot (specified with @source_resource_id@
+      ).'
+    type: Text
+  Empty:
+    required: true
+    help: ! '- Create an empty managed disk.'
+    type: Text
+  name:
+    required: true
+    help: (Required) Specifies the name of the managed disk. Changing this forces
+      a new resource to be created.
+    type: Text
+  resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the managed
+      disk.
+    type: Text
+  encryption_settings:
+    required: false
+    help: (Optional) an @encryption_settings@ block as defined below.
+    type: Text
+  Import:
+    required: true
+    help: ! '- Import a VHD file in to the managed disk (VHD specified with @source_uri@
+      ).'
+    type: Text
+  create_option:
+    required: true
+    help: ! '(Required) The method to use when creating the managed disk. Possible
+      values include:'
+    type: Text
+  storage_account_type:
+    required: true
+    help: (Required) The type of storage to use for the managed disk. Allowable values
+      are @Standard_LRS@ or @Premium_LRS@ .
+    type: Text
+  os_type:
+    required: false
+    help: (Optional) Specify a value when the source of an @Import@ or @Copy@ operation
+      targets a source that contains an operating system. Valid values are @Linux@
+      or @Windows@
+    type: Text
+  image_reference_id:
+    required: false
+    help: (Optional) ID of an existing platform disk image to copy when @create_option@
+      is @FromImage@ .
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+  FromImage:
+    required: true
+    help: ! '- Copy a Platform Image (specified with @image_reference_id@ )'
+    type: Text
+attributes:
+  id:
+    help: ! '- The managed disk ID.'
+    type: Text
+about: Create a managed disk.
+examples: []

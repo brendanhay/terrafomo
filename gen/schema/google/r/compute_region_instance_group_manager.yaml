@@ -66,10 +66,10 @@ attributes:
   instance_group:
     help: ! '- The full URL of the instance group created by the manager.'
     type: Text
-about: The Google Compute Engine Regional Instance Group Manager API creates and manages
-  pools of homogeneous Compute Engine virtual machine instances from a common instance
-  template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups>
+about: ! 'The Google Compute Engine Regional Instance Group Manager API creates and
+  manages pools of homogeneous Compute Engine virtual machine instances from a common
+  instance template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups>
   and <https://cloud.google.com/compute/docs/reference/latest/regionInstanceGroupManagers>
-  ~> Use </docs/providers/google/r/compute_instance_group_manager.html> to create
-  a single-zone instance group manager.
+  ~> Note: Use </docs/providers/google/r/compute_instance_group_manager.html> to create
+  a single-zone instance group manager.'
 examples: []

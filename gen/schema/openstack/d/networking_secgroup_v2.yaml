@@ -1,0 +1,32 @@
+_name: openstack_networking_secgroup_v2
+arguments:
+  tenant_id:
+    required: false
+    help: (Optional) The owner of the security group.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the security group.
+    type: Text
+  region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 Neutron client. A Neutron
+      client is needed to retrieve security groups ids. If omitted, the @region@ argument
+      of the provider is used.
+    type: Text
+  secgroup_id:
+    required: false
+    help: (Optional) The ID of the security group.
+    type: Text
+attributes:
+  name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  region:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  description:
+    help: ! '- The description of the security group.'
+    type: Text
+about: Use this data source to get the ID of an available OpenStack security group.
+examples: []

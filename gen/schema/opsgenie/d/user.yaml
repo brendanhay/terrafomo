@@ -1,0 +1,15 @@
+_name: opsgenie_user
+arguments:
+  username:
+    required: true
+    help: (Required) The username (email) to use to find a user in OpsGenie.
+    type: Text
+attributes:
+  full_name:
+    help: ! '- The full name of the found user.'
+    type: Text
+  role:
+    help: ! '- The role of the found user.'
+    type: Text
+about: Use this data source to get information about a specific user within OpsGenie.
+examples: []

@@ -1,0 +1,18 @@
+_name: scaleway_volume_attachment
+arguments:
+  volume:
+    required: true
+    help: (Required) id of the volume to be attached
+    type: Text
+  server:
+    required: true
+    help: (Required) id of the server
+    type: Text
+attributes:
+  id:
+    help: ! '- id of the new resource'
+    type: Text
+about: ! 'This allows volumes to be attached to servers. Warning: Attaching volumes
+  requires the servers to be powered off. This will lead to downtime if the server
+  is already in use.'
+examples: []

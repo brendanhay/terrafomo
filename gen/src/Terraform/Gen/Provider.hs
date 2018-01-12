@@ -9,6 +9,7 @@ module Terraform.Gen.Provider where
 import Data.Aeson         (FromJSON, ToJSON, ToJSONKey)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
+import Data.Maybe         (fromMaybe)
 import Data.Monoid        ((<>))
 import Data.Text          (Text)
 
@@ -44,7 +45,7 @@ namespace c (NS xs) =
 
 data Provider = Provider
     { providerName    :: !Text
-    , providerPackage :: !Text
+    , providerPackage :: !(Maybe Text)
     , providerPrefix  :: !(Maybe Text)
     } deriving (Show, Generic)
 
@@ -52,7 +53,7 @@ instance FromJSON Provider where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
 providerDir :: Provider -> FilePath
-providerDir = Text.unpack . providerPackage
+providerDir = Text.unpack . fromMaybe "terraform" . providerPackage
 
 providerNamespace :: Provider -> SchemaType -> [Text] -> NS
 providerNamespace p t s =
@@ -63,9 +64,10 @@ contentsNamespace p t = providerNamespace p t []
 
 schemaNamespaces :: Provider -> SchemaType -> [a] -> Map NS [a]
 schemaNamespaces p t xs
-    | length xs > 200 = partition 10 xs
-    | length xs > 100 = partition 5  xs
-    | otherwise       = partition 2  xs
+    | length xs > 200 = partition 8 xs
+    | length xs > 100 = partition 4 xs
+    | length xs > 50  = partition 2 xs
+    | otherwise       = Map.singleton (providerNamespace p t []) xs
   where
     partition m =
         Map.fromListWith (<>)

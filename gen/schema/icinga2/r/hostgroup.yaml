@@ -1,0 +1,14 @@
+_name: icinga2_hostgroup
+arguments:
+  display_name:
+    required: true
+    help: (Required) The name of the hostgroup to display in the Icinga2 interface.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the hostgroup.
+    type: Text
+attributes: {}
+about: Configures an Icinga2 hostgroup resource. This allows hostgroup to be configured,
+  updated, and deleted.
+examples: []

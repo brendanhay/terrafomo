@@ -75,9 +75,9 @@ arguments:
     type: Text
   db_subnet_group_name:
     required: false
-    help: (Optional) A DB subnet group to associate with this DB instance. This must
-      match the @db_subnet_group_name@ specified on every </docs/providers/aws/r/rds_cluster_instance.html>
-      in the cluster.
+    help: ! '(Optional) A DB subnet group to associate with this DB instance. NOTE:
+      This must match the @db_subnet_group_name@ specified on every </docs/providers/aws/r/rds_cluster_instance.html>
+      in the cluster.'
     type: Text
   database_name:
     required: false
@@ -179,8 +179,8 @@ attributes:
   port:
     help: ! '- The database port'
     type: Text
-about: Provides an RDS Cluster Resource. A Cluster Resource defines attributes that
-  are applied to the entire cluster of </docs/providers/aws/r/rds_cluster_instance.html>
+about: ! 'Provides an RDS Cluster Resource. A Cluster Resource defines attributes
+  that are applied to the entire cluster of </docs/providers/aws/r/rds_cluster_instance.html>
   . Use the RDS Cluster resource and RDS Cluster Instances to create and use Amazon
   Aurora, a MySQL-compatible database engine. For more information on Amazon Aurora,
   see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html> in
@@ -189,8 +189,9 @@ about: Provides an RDS Cluster Resource. A Cluster Resource defines attributes t
   Because of this, Terraform may report a difference in its planning phase because
   a modification has not yet taken place. You can use the @apply_immediately@ flag
   to instruct the service to apply the change immediately (see documentation below).
-  ~> using @apply_immediately@ can result in a brief downtime as the server reboots.
-  See the AWS Docs on <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html>
-  for more information. ~> All arguments including the username and password will
-  be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
+  ~> Note: using @apply_immediately@ can result in a brief downtime as the server
+  reboots. See the AWS Docs on <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html>
+  for more information. ~> Note: All arguments including the username and password
+  will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .'
 examples: []
