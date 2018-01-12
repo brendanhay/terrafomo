@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.NS1
-    - Terrafomo.NS1.DataSource
     - Terrafomo.NS1.Resource
 
   reexported-modules: >

@@ -33,20 +33,20 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OPC             as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OPC as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @opc_compute_image_list_entry@ OPC datasource.
 
 Use this data source to access the configuration of an Image List Entry.
 -}
 data ComputeImageListEntryDataSource = ComputeImageListEntryDataSource
-    { _entry :: !(Attr Text)
+    { _entry      :: !(Attr Text)
       {- ^ (Optional) - Which machine image to use. See <#entry> below for more details -}
     , _image_list :: !(Attr Text)
       {- ^ (Required) - The name of the image list to lookup. -}
-    , _version :: !(Attr Text)
+    , _version    :: !(Attr Text)
       {- ^ (Required) - The version (integer) of the Image List to use. -}
     } deriving (Show, Generic)
 
@@ -61,11 +61,11 @@ Use this data source to access the configuration of an instance's network
 interface
 -}
 data ComputeNetworkInterfaceDataSource = ComputeNetworkInterfaceDataSource
-    { _instance_id :: !(Attr Text)
+    { _instance_id   :: !(Attr Text)
       {- ^ is the id of the instance. -}
     , _instance_name :: !(Attr Text)
       {- ^ is the name of the instance. -}
-    , _interface :: !(Attr Text)
+    , _interface     :: !(Attr Text)
       {- ^ is the name of the attached interface. @eth0@ , @eth1@ , ... @eth9@ . -}
     } deriving (Show, Generic)
 

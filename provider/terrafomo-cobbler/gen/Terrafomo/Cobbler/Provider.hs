@@ -14,14 +14,14 @@
 --
 module Terrafomo.Cobbler.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Cobbler.Types    as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Cobbler.Types as Qual
 
 {- | Cobbler Terraform provider.
 
@@ -32,7 +32,7 @@ to read about the available resources.
 -}
 data Cobbler = Cobbler
     { _password :: !Text
-    , _url :: !Text
+    , _url      :: !Text
     , _username :: !Text
     } deriving (Show, Eq, Generic)
 

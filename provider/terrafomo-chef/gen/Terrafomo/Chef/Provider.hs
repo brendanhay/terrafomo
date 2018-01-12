@@ -14,14 +14,14 @@
 --
 module Terrafomo.Chef.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Chef.Types       as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Chef.Types as Qual
 
 {- | Chef Terraform provider.
 
@@ -32,9 +32,9 @@ navigation to the left to read about the available resources.
 -}
 data Chef = Chef
     { _allow_unverified_ssl :: !Text
-    , _client_name :: !Text
-    , _key_material :: !Text
-    , _server_url :: !Text
+    , _client_name          :: !Text
+    , _key_material         :: !Text
+    , _server_url           :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Chef

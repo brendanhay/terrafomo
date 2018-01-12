@@ -18,5 +18,5 @@ module Terrafomo.Circonus
     ) where
 
 import Terrafomo
-import Terrafomo.Circonus.Types
 import Terrafomo.Circonus.Provider
+import Terrafomo.Circonus.Types

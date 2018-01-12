@@ -18,5 +18,5 @@ module Terrafomo.Spotinst
     ) where
 
 import Terrafomo
-import Terrafomo.Spotinst.Types
 import Terrafomo.Spotinst.Provider
+import Terrafomo.Spotinst.Types

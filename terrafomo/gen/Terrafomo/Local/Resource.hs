@@ -34,7 +34,7 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @local_file@ Local resource.
 
@@ -46,7 +46,7 @@ diffs in environments where configurations are routinely applied by many
 different users or within automation systems.
 -}
 data FileResource = FileResource
-    { _content :: !(Attr Text)
+    { _content  :: !(Attr Text)
       {- ^ (Required) The content of file to create. -}
     , _filename :: !(Attr Text)
       {- ^ (Required) The path of the file to create. -}

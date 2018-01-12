@@ -18,5 +18,5 @@ module Terrafomo.Docker
     ) where
 
 import Terrafomo
-import Terrafomo.Docker.Types
 import Terrafomo.Docker.Provider
+import Terrafomo.Docker.Types

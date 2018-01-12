@@ -34,8 +34,8 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.VSphere as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.VSphere         as Qual
 
 {- | The @vsphere_datacenter@ VSphere datasource.
 
@@ -66,7 +66,7 @@ requires vCenter and is not available on direct ESXi connections.
 data DistributedVirtualSwitchDataSource = DistributedVirtualSwitchDataSource
     { _datacenter_id :: !(Attr Text)
       {- ^ (Optional) The managed object reference ID of the datacenter the DVS is located in. This can be omitted if the search path used in @name@ is an absolute path, or if there is only one datacenter in the vSphere infrastructure. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The name of the distributed virtual switch. This can be a name or path. -}
     } deriving (Show, Generic)
 
@@ -91,7 +91,7 @@ host managed object reference ID.
 data HostDataSource = HostDataSource
     { _datacenter_id :: !(Attr Text)
       {- ^ - (String, required) The managed object reference ID of a datacenter. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ - (String) The name of the host. This can be a name or path.	Can be omitted if there is only one host in your inventory. -}
     } deriving (Show, Generic)
 
@@ -113,7 +113,7 @@ connections.
 data NetworkDataSource = NetworkDataSource
     { _datacenter_id :: !(Attr Text)
       {- ^ (Optional) The managed object reference ID of the datacenter the network is located in. This can be omitted if the search path used in @name@ is an absolute path, or if there is only one datacenter in the vSphere infrastructure. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The name of the network. This can be a name or path. -}
     } deriving (Show, Generic)
 
@@ -162,7 +162,7 @@ higher.
 data TagDataSource = TagDataSource
     { _category_id :: !(Attr Text)
       {- ^ - (String, required) The ID of the tag category the tag is located in. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ - (String, required) The name of the tag. -}
     } deriving (Show, Generic)
 
@@ -179,11 +179,11 @@ devices available on an ESXi host. This data source can be combined with the
 datastores based off a set of discovered disks.
 -}
 data VmfsDisksDataSource = VmfsDisksDataSource
-    { _filter :: !(Attr Text)
+    { _filter         :: !(Attr Text)
       {- ^ - (String, optional) A regular expression to filter the disks against. Only disks with canonical names that match will be included. -}
     , _host_system_id :: !(Attr Text)
       {- ^ - (String, required) The managed object ID of the host to look for disks on. -}
-    , _rescan :: !(Attr Text)
+    , _rescan         :: !(Attr Text)
       {- ^ - (Boolean, optional) Whether or not to rescan storage adapters before searching for disks. This may lengthen the time it takes to perform the search. Default: @false@ . -}
     } deriving (Show, Generic)
 

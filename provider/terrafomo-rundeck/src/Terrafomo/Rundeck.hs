@@ -18,5 +18,5 @@ module Terrafomo.Rundeck
     ) where
 
 import Terrafomo
-import Terrafomo.Rundeck.Types
 import Terrafomo.Rundeck.Provider
+import Terrafomo.Rundeck.Types

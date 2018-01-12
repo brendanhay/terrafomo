@@ -18,5 +18,5 @@ module Terrafomo.LogicMonitor
     ) where
 
 import Terrafomo
-import Terrafomo.LogicMonitor.Types
 import Terrafomo.LogicMonitor.Provider
+import Terrafomo.LogicMonitor.Types

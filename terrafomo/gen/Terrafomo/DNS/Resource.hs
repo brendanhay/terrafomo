@@ -34,7 +34,7 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @dns_a_record_set@ DNS resource.
 
@@ -43,11 +43,11 @@ Creates a A type DNS record set.
 data ARecordSetResource = ARecordSetResource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv4 addresses this record set will point to. -}
-    , _name :: !(Attr Text)
+    , _name      :: !(Attr Text)
       {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl :: !(Attr Text)
+    , _ttl       :: !(Attr Text)
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone :: !(Attr Text)
+    , _zone      :: !(Attr Text)
       {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
@@ -74,11 +74,11 @@ Creates a AAAA type DNS record set.
 data AaaaRecordSetResource = AaaaRecordSetResource
     { _addresses :: !(Attr Text)
       {- ^ (Required) The IPv6 addresses this record set will point to. -}
-    , _name :: !(Attr Text)
+    , _name      :: !(Attr Text)
       {- ^ (Required) The name of the record set. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl :: !(Attr Text)
+    , _ttl       :: !(Attr Text)
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone :: !(Attr Text)
+    , _zone      :: !(Attr Text)
       {- ^ (Required) DNS zone the record set belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
@@ -105,11 +105,11 @@ Creates a CNAME type DNS record.
 data CnameRecordResource = CnameRecordResource
     { _cname :: !(Attr Text)
       {- ^ (Required) The canonical name this record will point to. -}
-    , _name :: !(Attr Text)
+    , _name  :: !(Attr Text)
       {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ttl :: !(Attr Text)
+    , _ttl   :: !(Attr Text)
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
-    , _zone :: !(Attr Text)
+    , _zone  :: !(Attr Text)
       {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}
     } deriving (Show, Generic)
 
@@ -136,9 +136,9 @@ Creates a PTR type DNS record.
 data PtrRecordResource = PtrRecordResource
     { _name :: !(Attr Text)
       {- ^ (Required) The name of the record. The @zone@ argument will be appended to this value to create the full record path. -}
-    , _ptr :: !(Attr Text)
+    , _ptr  :: !(Attr Text)
       {- ^ (Required) The canonical name this record will point to. -}
-    , _ttl :: !(Attr Text)
+    , _ttl  :: !(Attr Text)
       {- ^ (Optional) The TTL of the record set. Defaults to @3600@ . -}
     , _zone :: !(Attr Text)
       {- ^ (Required) DNS zone the record belongs to. It must be an FQDN, that is, include the trailing dot. -}

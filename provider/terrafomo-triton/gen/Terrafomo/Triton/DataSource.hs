@@ -34,8 +34,8 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Triton as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Triton          as Qual
 
 {- | The @triton_image@ Triton datasource.
 
@@ -45,19 +45,19 @@ based on a variety of different parameters.
 data ImageDataSource = ImageDataSource
     { _most_recent :: !(Attr Text)
       {- ^ - (bool) If more than one result is returned, use the most recent Image. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ - (string) The name of the image -}
-    , _os :: !(Attr Text)
+    , _os          :: !(Attr Text)
       {- ^ - (string) The underlying operating system for the image -}
-    , _owner :: !(Attr Text)
+    , _owner       :: !(Attr Text)
       {- ^ - (string) The UUID of the account which owns the image -}
-    , _public :: !(Attr Text)
+    , _public      :: !(Attr Text)
       {- ^ - (boolean) Whether to return public as well as private images -}
-    , _state :: !(Attr Text)
+    , _state       :: !(Attr Text)
       {- ^ - (string) The state of the image. By default, only @active@ images are shown. Must be one of: @active@ , @unactivated@ , @disabled@ , @creating@ , @failed@ or @all@ , though the default is sufficient in almost every case. -}
-    , _type' :: !(Attr Text)
+    , _type'       :: !(Attr Text)
       {- ^ - (string) The image type. Must be one of: @zone-dataset@ , @lx-dataset@ , @zvol@ , @docker@ or @other@ . -}
-    , _version :: !(Attr Text)
+    , _version     :: !(Attr Text)
       {- ^ - (string) The version for the image -}
     } deriving (Show, Generic)
 

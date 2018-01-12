@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Gitlab          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Gitlab as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @gitlab_deploy_key@ Gitlab resource.
 
@@ -45,11 +45,11 @@ projects.
 data DeployKeyResource = DeployKeyResource
     { _can_push :: !(Attr Text)
       {- ^ (Optional, boolean) Allow this deploy key to be used to push changes to the project.  Defaults to @false@ . NOTE:: this cannot currently be managed. -}
-    , _key :: !(Attr Text)
+    , _key      :: !(Attr Text)
       {- ^ (Required, string) The public ssh key body. -}
-    , _project :: !(Attr Text)
+    , _project  :: !(Attr Text)
       {- ^ (Required, string) The name or id of the project to add the deploy key to. -}
-    , _title :: !(Attr Text)
+    , _title    :: !(Attr Text)
       {- ^ (Required, string) A title to describe the deploy key with. -}
     } deriving (Show, Generic)
 
@@ -65,19 +65,19 @@ provider will need to be configured with admin-level access for this
 resource to work.
 -}
 data GroupResource = GroupResource
-    { _description :: !(Attr Text)
+    { _description            :: !(Attr Text)
       {- ^ (Optional) The description of the group. -}
-    , _lfs_enabled :: !(Attr Text)
+    , _lfs_enabled            :: !(Attr Text)
       {- ^ (Optional) Boolean, defaults to true.  Whether to enable LFS support for projects in this group. -}
-    , _name :: !(Attr Text)
+    , _name                   :: !(Attr Text)
       {- ^ (Required) The name of this group. -}
-    , _parent_id :: !(Attr Text)
+    , _parent_id              :: !(Attr Text)
       {- ^ (Optional) Integer, id of the parent group (creates a nested group). -}
-    , _path :: !(Attr Text)
+    , _path                   :: !(Attr Text)
       {- ^ (Required) The url of the hook to invoke. -}
     , _request_access_enabled :: !(Attr Text)
       {- ^ (Optional) Boolean, defaults to false.  Whether to enable users to request access to the group. -}
-    , _visibility_level :: !(Attr Text)
+    , _visibility_level       :: !(Attr Text)
       {- ^ (Optional) Set to @public@ to create a public group. Valid values are @private@ , @internal@ , @public@ . Groups are created as private by default. -}
     } deriving (Show, Generic)
 
@@ -98,13 +98,13 @@ projects. For further information on labels, consult the
 <https://docs.gitlab.com/ee/user/project/labels.htm> .
 -}
 data LabelResource = LabelResource
-    { _color :: !(Attr Text)
+    { _color       :: !(Attr Text)
       {- ^ (Required) The color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords> . -}
     , _description :: !(Attr Text)
       {- ^ (Optional) The description of the label. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required) The name of the label. -}
-    , _project :: !(Attr Text)
+    , _project     :: !(Attr Text)
       {- ^ (Required) The name or id of the project to add the label to. -}
     } deriving (Show, Generic)
 
@@ -127,27 +127,27 @@ projects. For further information on hooks, consult the
 data ProjectHookResource = ProjectHookResource
     { _enable_ssl_verification :: !(Attr Text)
       {- ^ (Optional) Enable ssl verification when invoking the hook. -}
-    , _issues_events :: !(Attr Text)
+    , _issues_events           :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for issues events. -}
-    , _job_events :: !(Attr Text)
+    , _job_events              :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for job events. -}
-    , _merge_requests_events :: !(Attr Text)
+    , _merge_requests_events   :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for merge requests. -}
-    , _note_events :: !(Attr Text)
+    , _note_events             :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for notes events. -}
-    , _pipeline_events :: !(Attr Text)
+    , _pipeline_events         :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for pipeline events. -}
-    , _project :: !(Attr Text)
+    , _project                 :: !(Attr Text)
       {- ^ (Required) The name or id of the project to add the hook to. -}
-    , _push_events :: !(Attr Text)
+    , _push_events             :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for push events. -}
-    , _tag_push_events :: !(Attr Text)
+    , _tag_push_events         :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for tag push events. -}
-    , _token :: !(Attr Text)
+    , _token                   :: !(Attr Text)
       {- ^ (Optional) A token to present when invoking the hook. -}
-    , _url :: !(Attr Text)
+    , _url                     :: !(Attr Text)
       {- ^ (Required) The url of the hook to invoke. -}
-    , _wiki_page_events :: !(Attr Text)
+    , _wiki_page_events        :: !(Attr Text)
       {- ^ (Optional) Invoke the hook for wiki page events. -}
     } deriving (Show, Generic)
 
@@ -167,25 +167,25 @@ This resource allows you to create and manage projects within your GitLab
 group or within your user.
 -}
 data ProjectResource = ProjectResource
-    { _default_branch :: !(Attr Text)
+    { _default_branch         :: !(Attr Text)
       {- ^ (Optional) The default branch for the project. -}
-    , _description :: !(Attr Text)
+    , _description            :: !(Attr Text)
       {- ^ (Optional) A description of the project. -}
-    , _issues_enabled :: !(Attr Text)
+    , _issues_enabled         :: !(Attr Text)
       {- ^ (Optional) Enable issue tracking for the project. -}
     , _merge_requests_enabled :: !(Attr Text)
       {- ^ (Optional) Enable merge requests for the project. -}
-    , _name :: !(Attr Text)
+    , _name                   :: !(Attr Text)
       {- ^ (Required) The name of the project. -}
-    , _namespace_id :: !(Attr Text)
+    , _namespace_id           :: !(Attr Text)
       {- ^ (Optional) The namespace (group or user) of the project. Defaults to your user. See <group.html> for an example. -}
-    , _path :: !(Attr Text)
+    , _path                   :: !(Attr Text)
       {- ^ (Optional) The path of the repository. -}
-    , _snippets_enabled :: !(Attr Text)
+    , _snippets_enabled       :: !(Attr Text)
       {- ^ (Optional) Enable snippets for the project. -}
-    , _visibility_level :: !(Attr Text)
+    , _visibility_level       :: !(Attr Text)
       {- ^ (Optional) Set to @public@ to create a public project. Valid values are @private@ , @internal@ , @public@ . Repositories are created as private by default. -}
-    , _wiki_enabled :: !(Attr Text)
+    , _wiki_enabled           :: !(Attr Text)
       {- ^ (Optional) Enable wiki for the project. -}
     } deriving (Show, Generic)
 
@@ -212,21 +212,21 @@ provider will need to be configured with admin-level access for this
 resource to work.
 -}
 data UserResource = UserResource
-    { _can_create_group :: !(Attr Text)
+    { _can_create_group  :: !(Attr Text)
       {- ^ (Optional) Boolean, defaults to false. Whether to allow the user to create groups. -}
-    , _email :: !(Attr Text)
+    , _email             :: !(Attr Text)
       {- ^ (Required) The e-mail address of the user. -}
-    , _is_admin :: !(Attr Text)
+    , _is_admin          :: !(Attr Text)
       {- ^ (Optional) Boolean, defaults to false.  Whether to enable administrative priviledges for the user. -}
-    , _name :: !(Attr Text)
+    , _name              :: !(Attr Text)
       {- ^ (Required) The name of the user. -}
-    , _password :: !(Attr Text)
+    , _password          :: !(Attr Text)
       {- ^ (Required) The password of the user. -}
-    , _projects_limit :: !(Attr Text)
+    , _projects_limit    :: !(Attr Text)
       {- ^ (Optional) Integer, defaults to 0.  Number of projects user can create. -}
     , _skip_confirmation :: !(Attr Text)
       {- ^ (Optional) Boolean, defaults to true. Whether to skip confirmation. -}
-    , _username :: !(Attr Text)
+    , _username          :: !(Attr Text)
       {- ^ (Required) The username of the user. -}
     } deriving (Show, Generic)
 

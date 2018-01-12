@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OVH             as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OVH as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @publiccloud_region@ OVH datasource.
 
@@ -45,7 +45,7 @@ a public cloud project. The region must be associated with the project.
 data RegionDataSource = RegionDataSource
     { _project_id :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _region :: !(Attr Text)
+    , _region     :: !(Attr Text)
       {- ^ (Required) The name of the region associated with the public cloud project. -}
     } deriving (Show, Generic)
 

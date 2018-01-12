@@ -14,14 +14,14 @@
 --
 module Terrafomo.GitHub.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.GitHub.Types     as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.GitHub.Types as Qual
 
 {- | GitHub Terraform provider.
 
@@ -32,9 +32,9 @@ it can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data GitHub = GitHub
-    { _base_url :: !Text
+    { _base_url     :: !Text
     , _organization :: !Text
-    , _token :: !Text
+    , _token        :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable GitHub

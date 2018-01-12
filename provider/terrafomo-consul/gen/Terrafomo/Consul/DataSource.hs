@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Consul          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Consul as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @consul_agent__self@ Consul datasource.
 
@@ -59,7 +59,7 @@ specifying a different datacenter in the @query_options@ it is possible to
 retrieve a list of nodes from a different WAN-attached Consul datacenter.
 -}
 data CatalogNodesDataSource = CatalogNodesDataSource
-    { _datacenter :: !(Attr Text)
+    { _datacenter    :: !(Attr Text)
       {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
     , _query_options :: !(Attr Text)
       {- ^ (Optional) See below. -}
@@ -92,13 +92,13 @@ This data source is different from the @consul_catalog_services@ (plural)
 data source, which provides a summary of the current Consul services.
 -}
 data CatalogServiceDataSource = CatalogServiceDataSource
-    { _datacenter :: !(Attr Text)
+    { _datacenter    :: !(Attr Text)
       {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The service name to select. -}
     , _query_options :: !(Attr Text)
       {- ^ (Optional) See below. -}
-    , _tag :: !(Attr Text)
+    , _tag           :: !(Attr Text)
       {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
     } deriving (Show, Generic)
 
@@ -129,7 +129,7 @@ data source, which provides a detailed response about a specific Consul
 service.
 -}
 data CatalogServicesDataSource = CatalogServicesDataSource
-    { _datacenter :: !(Attr Text)
+    { _datacenter    :: !(Attr Text)
       {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
     , _query_options :: !(Attr Text)
       {- ^ (Optional) See below. -}
@@ -159,9 +159,9 @@ This is a powerful way dynamically set values in templates.
 data KeysDataSource = KeysDataSource
     { _datacenter :: !(Attr Text)
       {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _key :: !(Attr Text)
+    , _key        :: !(Attr Text)
       {- ^ (Required) Specifies a key in Consul to be read or written. Supported values documented below. -}
-    , _token :: !(Attr Text)
+    , _token      :: !(Attr Text)
       {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Generic)
 

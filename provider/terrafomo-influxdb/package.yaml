@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.InfluxDB
-    - Terrafomo.InfluxDB.DataSource
     - Terrafomo.InfluxDB.Resource
 
   reexported-modules: >

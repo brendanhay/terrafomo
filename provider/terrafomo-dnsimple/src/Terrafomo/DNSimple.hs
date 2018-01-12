@@ -18,5 +18,5 @@ module Terrafomo.DNSimple
     ) where
 
 import Terrafomo
-import Terrafomo.DNSimple.Types
 import Terrafomo.DNSimple.Provider
+import Terrafomo.DNSimple.Types

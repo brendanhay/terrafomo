@@ -18,5 +18,5 @@ module Terrafomo.Nomad
     ) where
 
 import Terrafomo
-import Terrafomo.Nomad.Types
 import Terrafomo.Nomad.Provider
+import Terrafomo.Nomad.Types

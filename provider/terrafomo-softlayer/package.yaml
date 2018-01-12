@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.SoftLayer
-    - Terrafomo.SoftLayer.DataSource
     - Terrafomo.SoftLayer.Resource
 
   reexported-modules: >

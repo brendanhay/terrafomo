@@ -18,5 +18,5 @@ module Terrafomo.Consul
     ) where
 
 import Terrafomo
-import Terrafomo.Consul.Types
 import Terrafomo.Consul.Provider
+import Terrafomo.Consul.Types

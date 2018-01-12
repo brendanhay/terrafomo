@@ -18,5 +18,5 @@ module Terrafomo.Lailgun
     ) where
 
 import Terrafomo
-import Terrafomo.Lailgun.Types
 import Terrafomo.Lailgun.Provider
+import Terrafomo.Lailgun.Types

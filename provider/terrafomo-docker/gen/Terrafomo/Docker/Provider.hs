@@ -14,14 +14,14 @@
 --
 module Terrafomo.Docker.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Docker.Types     as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Docker.Types as Qual
 
 {- | Docker Terraform provider.
 
@@ -34,8 +34,8 @@ the available resources.
 -}
 data Docker = Docker
     { _ca_material :: !Text
-    , _cert_path :: !Text
-    , _host :: !Text
+    , _cert_path   :: !Text
+    , _host        :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Docker

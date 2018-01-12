@@ -33,22 +33,22 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OVH             as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OVH as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @ovh_publiccloud_private_network@ OVH resource.
 
 Creates a private network in a public cloud project.
 -}
 data PubliccloudPrivateNetworkResource = PubliccloudPrivateNetworkResource
-    { _name :: !(Attr Text)
+    { _name       :: !(Attr Text)
       {- ^ (Required) The name of the network. -}
     , _project_id :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _regions :: !(Attr Text)
+    , _regions    :: !(Attr Text)
       {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
-    , _vlan_id :: !(Attr Text)
+    , _vlan_id    :: !(Attr Text)
       {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
     } deriving (Show, Generic)
 
@@ -83,11 +83,11 @@ $(TH.makeResource
 Creates a subnet in a private network of a public cloud project.
 -}
 data PubliccloudPrivateNetworkSubnetResource = PubliccloudPrivateNetworkSubnetResource
-    { _dhcp :: !(Attr Text)
+    { _dhcp       :: !(Attr Text)
       {- ^ (Optional) Enable DHCP. Changing this forces a new resource to be created. Defaults to false. _ -}
-    , _end :: !(Attr Text)
+    , _end        :: !(Attr Text)
       {- ^ (Required) Last ip for this region. Changing this value recreates the subnet. -}
-    , _network :: !(Attr Text)
+    , _network    :: !(Attr Text)
       {- ^ (Required) Global network in CIDR format. Changing this value recreates the subnet -}
     , _network_id :: !(Attr Text)
       {- ^ (Required) The id of the network. Changing this forces a new resource to be created. -}
@@ -95,9 +95,9 @@ data PubliccloudPrivateNetworkSubnetResource = PubliccloudPrivateNetworkSubnetRe
       {- ^ - Set to true if you don't want to set a default gateway IP. Changing this value recreates the resource. Defaults to false. -}
     , _project_id :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. Changing this forces a new resource to be created. -}
-    , _region :: !(Attr Text)
+    , _region     :: !(Attr Text)
       {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
-    , _start :: !(Attr Text)
+    , _start      :: !(Attr Text)
       {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
     } deriving (Show, Generic)
 
@@ -148,7 +148,7 @@ Creates a user in a public cloud project.
 data PubliccloudUserResource = PubliccloudUserResource
     { _description :: !(Attr Text)
       {- ^ - A description associated with the user. -}
-    , _project_id :: !(Attr Text)
+    , _project_id  :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Generic)
 
@@ -181,7 +181,7 @@ Attach an existing PublicCloud project to an existing VRack.
 data VrackPubliccloudAttachmentResource = VrackPubliccloudAttachmentResource
     { _project_id :: !(Attr Text)
       {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _vrack_id :: !(Attr Text)
+    , _vrack_id   :: !(Attr Text)
       {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
     } deriving (Show, Generic)
 

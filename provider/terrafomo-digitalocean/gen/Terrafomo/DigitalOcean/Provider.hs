@@ -14,14 +14,14 @@
 --
 module Terrafomo.DigitalOcean.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.DigitalOcean.Types as Qual
+import qualified Terrafomo.Syntax.Provider    as Qual
+import qualified Terrafomo.Syntax.Serialize   as Qual
 
 {- | DigitalOcean Terraform provider.
 

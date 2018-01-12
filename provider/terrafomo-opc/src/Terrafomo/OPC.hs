@@ -18,5 +18,5 @@ module Terrafomo.OPC
     ) where
 
 import Terrafomo
-import Terrafomo.OPC.Types
 import Terrafomo.OPC.Provider
+import Terrafomo.OPC.Types

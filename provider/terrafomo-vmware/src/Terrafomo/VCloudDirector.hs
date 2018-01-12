@@ -18,5 +18,5 @@ module Terrafomo.VCloudDirector
     ) where
 
 import Terrafomo
-import Terrafomo.VCloudDirector.Types
 import Terrafomo.VCloudDirector.Provider
+import Terrafomo.VCloudDirector.Types

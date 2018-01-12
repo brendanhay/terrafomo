@@ -14,14 +14,14 @@
 --
 module Terrafomo.Nomad.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Nomad.Types      as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Nomad.Types as Qual
 
 {- | Nomad Terraform provider.
 
@@ -30,11 +30,11 @@ provider exposes resources to interact with a Nomad cluster. Use the
 navigation to the left to read about the available resources.
 -}
 data Nomad = Nomad
-    { _address :: !Text
-    , _ca_file :: !Text
+    { _address   :: !Text
+    , _ca_file   :: !Text
     , _cert_file :: !Text
-    , _key_file :: !Text
-    , _region :: !Text
+    , _key_file  :: !Text
+    , _region    :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Nomad

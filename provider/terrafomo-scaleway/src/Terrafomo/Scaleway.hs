@@ -18,5 +18,5 @@ module Terrafomo.Scaleway
     ) where
 
 import Terrafomo
-import Terrafomo.Scaleway.Types
 import Terrafomo.Scaleway.Provider
+import Terrafomo.Scaleway.Types

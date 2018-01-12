@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Heroku          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Heroku as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @heroku_addon_attachment@ Heroku resource.
 
@@ -44,9 +44,9 @@ Attaches a Heroku Addon Resource to an additional Heroku App.
 data AddonAttachmentResource = AddonAttachmentResource
     { _addon_id :: !(Attr Text)
       {- ^ (Required) The ID of the existing Heroku Addon to attach. -}
-    , _app_id :: !(Attr Text)
+    , _app_id   :: !(Attr Text)
       {- ^ (Required) The ID of the Heroku App to attach to. -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Optional) A friendly name for the Heroku Addon Attachment. -}
     } deriving (Show, Generic)
 
@@ -66,11 +66,11 @@ Provides a Heroku Add-On resource. These can be attach services to a Heroku
 app.
 -}
 data AddonResource = AddonResource
-    { _app :: !(Attr Text)
+    { _app    :: !(Attr Text)
       {- ^ (Required) The Heroku app to add to. -}
     , _config :: !(Attr Text)
       {- ^ (Optional) Optional plan configuration. -}
-    , _plan :: !(Attr Text)
+    , _plan   :: !(Attr Text)
       {- ^ (Required) The addon to add. -}
     } deriving (Show, Generic)
 
@@ -98,11 +98,11 @@ Provides a Heroku App Feature resource. This can be used to create and
 manage App Features on Heroku.
 -}
 data AppFeatureResource = AppFeatureResource
-    { _app :: !(Attr Text)
+    { _app     :: !(Attr Text)
       {- ^ (Required) The Heroku app to link to. -}
     , _enabled :: !(Attr Text)
       {- ^ (Optional) Whether to enable or disable the App Feature. The default value is true. -}
-    , _name :: !(Attr Text)
+    , _name    :: !(Attr Text)
       {- ^ (Required) The name of the App Feature to manage. -}
     } deriving (Show, Generic)
 
@@ -117,19 +117,19 @@ Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
 data AppResource = AppResource
-    { _buildpacks :: !(Attr Text)
+    { _buildpacks   :: !(Attr Text)
       {- ^ (Optional) Buildpack names or URLs for the application. Buildpacks configured externally won't be altered if this is not present. -}
-    , _config_vars :: !(Attr Text)
+    , _config_vars  :: !(Attr Text)
       {- ^ (Optional) Configuration variables for the application. The config variables in this map are not the final set of configuration variables, but rather variables you want present. That is, other configuration variables set externally won't be removed by Terraform if they aren't present in this list. -}
-    , _name :: !(Attr Text)
+    , _name         :: !(Attr Text)
       {- ^ (Required) The name of the application. In Heroku, this is also the unique ID, so it must be unique and have a minimum of 3 characters. -}
     , _organization :: !(Attr Text)
       {- ^ (Optional) A block that can be specified once to define organization settings for this app. The fields for this block are documented below. -}
-    , _region :: !(Attr Text)
+    , _region       :: !(Attr Text)
       {- ^ (Required) The region that the app should be deployed in. -}
-    , _space :: !(Attr Text)
+    , _space        :: !(Attr Text)
       {- ^ (Optional) The name of a private space to create the app in. -}
-    , _stack :: !(Attr Text)
+    , _stack        :: !(Attr Text)
       {- ^ (Optional) The application stack is what platform to run the application in. -}
     } deriving (Show, Generic)
 
@@ -165,11 +165,11 @@ Provides a Heroku SSL certificate resource. It allows to set a given
 certificate for a Heroku app.
 -}
 data CertResource = CertResource
-    { _app :: !(Attr Text)
+    { _app               :: !(Attr Text)
       {- ^ (Required) The Heroku app to add to. -}
     , _certificate_chain :: !(Attr Text)
       {- ^ (Required) The certificate chain to add -}
-    , _private_key :: !(Attr Text)
+    , _private_key       :: !(Attr Text)
       {- ^ (Required) The private key for a given certificate chain -}
     } deriving (Show, Generic)
 
@@ -193,7 +193,7 @@ Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
 data DomainResource = DomainResource
-    { _app :: !(Attr Text)
+    { _app      :: !(Attr Text)
       {- ^ (Required) The Heroku app to link to. -}
     , _hostname :: !(Attr Text)
       {- ^ (Required) The hostname to serve requests from. -}
@@ -244,11 +244,11 @@ different stages using @heroku_pipeline_coupling@ , you can promote app
 slugs to the downstream stages.
 -}
 data PipelineCouplingResource = PipelineCouplingResource
-    { _app :: !(Attr Text)
+    { _app      :: !(Attr Text)
       {- ^ (Required) The name of the app for this coupling. -}
     , _pipeline :: !(Attr Text)
       {- ^ (Required) The ID of the pipeline to add this app to. -}
-    , _stage :: !(Attr Text)
+    , _stage    :: !(Attr Text)
       {- ^ (Required) The stage to couple this app to. Must be one of @review@ , @development@ , @staging@ , or @production@ . -}
     } deriving (Show, Generic)
 
@@ -300,11 +300,11 @@ Provides a Heroku Space resource for running apps in isolated, highly
 available, secure app execution environments.
 -}
 data SpaceResource = SpaceResource
-    { _name :: !(Attr Text)
+    { _name         :: !(Attr Text)
       {- ^ (Required) The name of the space. -}
     , _organization :: !(Attr Text)
       {- ^ (Required) The name of the organization which will own the space. -}
-    , _region :: !(Attr Text)
+    , _region       :: !(Attr Text)
       {- ^ (Optional) The region that the space should be created in. -}
     } deriving (Show, Generic)
 

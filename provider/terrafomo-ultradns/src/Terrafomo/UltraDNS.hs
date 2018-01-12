@@ -18,5 +18,5 @@ module Terrafomo.UltraDNS
     ) where
 
 import Terrafomo
-import Terrafomo.UltraDNS.Types
 import Terrafomo.UltraDNS.Provider
+import Terrafomo.UltraDNS.Types

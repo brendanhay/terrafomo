@@ -33,24 +33,24 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.PowerDNS        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.PowerDNS as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @powerdns_record@ PowerDNS resource.
 
 Provides a PowerDNS record resource.
 -}
 data RecordResource = RecordResource
-    { _name :: !(Attr Text)
+    { _name    :: !(Attr Text)
       {- ^ (Required) The name of the record. -}
     , _records :: !(Attr Text)
       {- ^ (Required) A string list of records. -}
-    , _ttl :: !(Attr Text)
+    , _ttl     :: !(Attr Text)
       {- ^ (Required) The TTL of the record. -}
-    , _type' :: !(Attr Text)
+    , _type'   :: !(Attr Text)
       {- ^ (Required) The record type. -}
-    , _zone :: !(Attr Text)
+    , _zone    :: !(Attr Text)
       {- ^ (Required) The name of zone to contain this record. -}
     } deriving (Show, Generic)
 

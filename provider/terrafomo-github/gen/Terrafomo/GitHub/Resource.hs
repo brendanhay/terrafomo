@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.GitHub          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.GitHub as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @github_branch_protection@ GitHub resource.
 
@@ -46,17 +46,17 @@ such as required status checks or restrictions on users and teams, can also
 be configured.
 -}
 data BranchProtectionResource = BranchProtectionResource
-    { _branch :: !(Attr Text)
+    { _branch                        :: !(Attr Text)
       {- ^ (Required) The Git branch to protect. -}
-    , _enforce_admins :: !(Attr Text)
+    , _enforce_admins                :: !(Attr Text)
       {- ^ (Optional) Boolean, setting this to @true@ enforces status checks for repository administrators. -}
-    , _repository :: !(Attr Text)
+    , _repository                    :: !(Attr Text)
       {- ^ (Required) The GitHub repository name. -}
     , _required_pull_request_reviews :: !(Attr Text)
       {- ^ (Optional) Enforce restrictions for pull request reviews. See <#required-pull-request-reviews> below for details. -}
-    , _required_status_checks :: !(Attr Text)
+    , _required_status_checks        :: !(Attr Text)
       {- ^ (Optional) Enforce restrictions for required status checks. See <#required-status-checks> below for details. -}
-    , _restrictions :: !(Attr Text)
+    , _restrictions                  :: !(Attr Text)
       {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
     } deriving (Show, Generic)
 
@@ -77,13 +77,13 @@ check if the label exists, and then issue an update, otherwise it will
 create.
 -}
 data IssueLabelResource = IssueLabelResource
-    { _color :: !(Attr Text)
+    { _color      :: !(Attr Text)
       {- ^ (Required) A 6 character hex code, without the leading # , identifying the color of the label. -}
-    , _name :: !(Attr Text)
+    , _name       :: !(Attr Text)
       {- ^ (Required) The name of the label. -}
     , _repository :: !(Attr Text)
       {- ^ (Required) The GitHub repository -}
-    , _url :: !(Attr Text)
+    , _url        :: !(Attr Text)
       {- ^ - (Computed) The URL to the issue label -}
     } deriving (Show, Generic)
 
@@ -100,7 +100,7 @@ sent to the user to become part of the organization. When destroyed, either
 the invitation will be cancelled or the user will be removed.
 -}
 data MembershipResource = MembershipResource
-    { _role :: !(Attr Text)
+    { _role     :: !(Attr Text)
       {- ^ (Optional) The role of the user within the organization. Must be one of @member@ or @admin@ . Defaults to @member@ . -}
     , _username :: !(Attr Text)
       {- ^ (Required) The user to add to the organization. -}
@@ -117,13 +117,13 @@ This resource allows you to create and manage webhooks for Github
 organization.
 -}
 data OrganizationWebhookResource = OrganizationWebhookResource
-    { _active :: !(Attr Text)
+    { _active        :: !(Attr Text)
       {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
     , _configuration :: !(Attr Text)
       {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
-    , _events :: !(Attr Text)
+    , _events        :: !(Attr Text)
       {- ^ (Required) A list of events which should trigger the webhook. Defaults to @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/> -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
     } deriving (Show, Generic)
 
@@ -154,7 +154,7 @@ data RepositoryCollaboratorResource = RepositoryCollaboratorResource
       {- ^ (Optional) The permission of the outside collaborator for the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @push@ . -}
     , _repository :: !(Attr Text)
       {- ^ (Required) The GitHub repository -}
-    , _username :: !(Attr Text)
+    , _username   :: !(Attr Text)
       {- ^ (Required) The user to add to the repository as a collaborator. -}
     } deriving (Show, Generic)
 
@@ -172,13 +172,13 @@ personal user account. This resource allows you to add/remove repository
 deploy keys. Further documentation on GitHub repository deploy keys:
 -}
 data RepositoryDeployKeyResource = RepositoryDeployKeyResource
-    { _key :: !(Attr Text)
+    { _key        :: !(Attr Text)
       {- ^ (Required) A ssh key. -}
-    , _read_only :: !(Attr Text)
+    , _read_only  :: !(Attr Text)
       {- ^ (Required) A boolean qualifying the key to be either read only or read/write. -}
     , _repository :: !(Attr Text)
       {- ^ (Required) Name of the Github repository. -}
-    , _title :: !(Attr Text)
+    , _title      :: !(Attr Text)
       {- ^ (Required) A title. -}
     } deriving (Show, Generic)
 
@@ -200,27 +200,27 @@ data RepositoryResource = RepositoryResource
       {- ^ (Optional) Set to @false@ to disable rebase merges on the repository. -}
     , _allow_squash_merge :: !(Attr Text)
       {- ^ (Optional) Set to @false@ to disable squash merges on the repository. -}
-    , _auto_init :: !(Attr Text)
+    , _auto_init          :: !(Attr Text)
       {- ^ (Optional) Meaningful only during create; set to @true@ to produce an initial commit in the repository. -}
-    , _default_branch :: !(Attr Text)
+    , _default_branch     :: !(Attr Text)
       {- ^ (Optional) The name of the default branch of the repository. NOTE: This can only be set after a repository has already been created, and after a correct reference has been created for the target branch inside the repository. This means a user will have to omit this parameter from the initial repository creation and create the target branch inside of the repository prior to setting this attribute. -}
-    , _description :: !(Attr Text)
+    , _description        :: !(Attr Text)
       {- ^ (Optional) A description of the repository. -}
     , _gitignore_template :: !(Attr Text)
       {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/gitignore> without the extension. For example, "Haskell". -}
-    , _has_downloads :: !(Attr Text)
+    , _has_downloads      :: !(Attr Text)
       {- ^ (Optional) Set to @true@ to enable the (deprecated) downloads features on the repository. -}
-    , _has_issues :: !(Attr Text)
+    , _has_issues         :: !(Attr Text)
       {- ^ (Optional) Set to @true@ to enable the Github Issues features on the repository. -}
-    , _has_wiki :: !(Attr Text)
+    , _has_wiki           :: !(Attr Text)
       {- ^ (Optional) Set to @true@ to enable the Github Wiki features on the repository. -}
-    , _homepage_url :: !(Attr Text)
+    , _homepage_url       :: !(Attr Text)
       {- ^ (Optional) URL of a page describing the project. -}
-    , _license_template :: !(Attr Text)
+    , _license_template   :: !(Attr Text)
       {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses> without the extension. For example, "mit" or "mozilla". -}
-    , _name :: !(Attr Text)
+    , _name               :: !(Attr Text)
       {- ^ (Required) The name of the repository. -}
-    , _private :: !(Attr Text)
+    , _private            :: !(Attr Text)
       {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
     } deriving (Show, Generic)
 
@@ -249,15 +249,15 @@ within your Github organization. This resource cannot currently be used to
 manage webhooks for personal repositories, outside of organizations.
 -}
 data RepositoryWebhookResource = RepositoryWebhookResource
-    { _active :: !(Attr Text)
+    { _active        :: !(Attr Text)
       {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
     , _configuration :: !(Attr Text)
       {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
-    , _events :: !(Attr Text)
+    , _events        :: !(Attr Text)
       {- ^ (Required) A list of events which should trigger the webhook. Defaults to @["push"]@ . See a list of <https://developer.github.com/v3/activity/events/types/> -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
-    , _repository :: !(Attr Text)
+    , _repository    :: !(Attr Text)
       {- ^ (Required) The repository of the webhook. -}
     } deriving (Show, Generic)
 
@@ -280,9 +280,9 @@ the organization, they won't be part of the team until they do. When
 destroyed, the user will be removed from the team.
 -}
 data TeamMembershipResource = TeamMembershipResource
-    { _role :: !(Attr Text)
+    { _role     :: !(Attr Text)
       {- ^ (Optional) The role of the user within the team. Must be one of @member@ or @maintainer@ . Defaults to @member@ . -}
-    , _team_id :: !(Attr Text)
+    , _team_id  :: !(Attr Text)
       {- ^ (Required) The GitHub team id -}
     , _username :: !(Attr Text)
       {- ^ (Required) The user to add to the team. -}
@@ -306,7 +306,7 @@ data TeamRepositoryResource = TeamRepositoryResource
       {- ^ (Optional) The permissions of team members regarding the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @pull@ . -}
     , _repository :: !(Attr Text)
       {- ^ (Required) The repository to add to the team. -}
-    , _team_id :: !(Attr Text)
+    , _team_id    :: !(Attr Text)
       {- ^ (Required) The GitHub team id -}
     } deriving (Show, Generic)
 
@@ -324,11 +324,11 @@ destroyed, that team will be removed.
 data TeamResource = TeamResource
     { _description :: !(Attr Text)
       {- ^ (Optional) A description of the team. -}
-    , _ldap_dn :: !(Attr Text)
+    , _ldap_dn     :: !(Attr Text)
       {- ^ (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required) The name of the team. -}
-    , _privacy :: !(Attr Text)
+    , _privacy     :: !(Attr Text)
       {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
     } deriving (Show, Generic)
 

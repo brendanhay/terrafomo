@@ -14,14 +14,14 @@
 --
 module Terrafomo.DNSMadeEasy.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.DNSMadeEasy.Types as Qual
+import qualified Terrafomo.Syntax.Provider   as Qual
+import qualified Terrafomo.Syntax.Serialize  as Qual
 
 {- | DNSMadeEasy Terraform provider.
 
@@ -31,8 +31,8 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSMadeEasy = DNSMadeEasy
-    { _akey :: !Text
-    , _skey :: !Text
+    { _akey       :: !Text
+    , _skey       :: !Text
     , _usesandbox :: !Text
     } deriving (Show, Eq, Generic)
 

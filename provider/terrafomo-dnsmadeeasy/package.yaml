@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.DNSMadeEasy
-    - Terrafomo.DNSMadeEasy.DataSource
     - Terrafomo.DNSMadeEasy.Resource
 
   reexported-modules: >

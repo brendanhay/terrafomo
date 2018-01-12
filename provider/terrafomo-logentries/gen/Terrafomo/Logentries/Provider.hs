@@ -14,14 +14,14 @@
 --
 module Terrafomo.Logentries.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.Logentries.Types as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
 
 {- | Logentries Terraform provider.
 

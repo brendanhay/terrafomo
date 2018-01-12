@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.ProfitBricks    as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.ProfitBricks as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @profitbricks_datacenter@ ProfitBricks resource.
 
@@ -44,9 +44,9 @@ Manages a Virtual Data Center on ProfitBricks
 data DatacenterResource = DatacenterResource
     { _description :: !(Attr Text)
       {- ^ (Optional)[string] Description for the data center. -}
-    , _location :: !(Attr Text)
+    , _location    :: !(Attr Text)
       {- ^ (Required)[string] The physical location where the data center will be created. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Generic)
 

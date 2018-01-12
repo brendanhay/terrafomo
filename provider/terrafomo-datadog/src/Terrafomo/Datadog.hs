@@ -18,5 +18,5 @@ module Terrafomo.Datadog
     ) where
 
 import Terrafomo
-import Terrafomo.Datadog.Types
 import Terrafomo.Datadog.Provider
+import Terrafomo.Datadog.Types

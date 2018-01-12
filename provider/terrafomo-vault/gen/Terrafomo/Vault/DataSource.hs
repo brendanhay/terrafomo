@@ -34,8 +34,8 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Vault as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
+import qualified Terrafomo.Vault           as Qual
 
 {- | The @vault_aws_access_credentials@ Vault datasource.
 
@@ -49,9 +49,9 @@ resource attributes. Protect these artifacts accordingly. See
 data AwsAccessCredentialsDataSource = AwsAccessCredentialsDataSource
     { _backend :: !(Attr Text)
       {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
-    , _role :: !(Attr Text)
+    , _role    :: !(Attr Text)
       {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
-    , _type' :: !(Attr Text)
+    , _type'   :: !(Attr Text)
       {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
     } deriving (Show, Generic)
 

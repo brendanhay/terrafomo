@@ -14,14 +14,14 @@
 --
 module Terrafomo.AWS.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.AWS.Types        as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.AWS.Types as Qual
 
 {- | AWS Terraform provider.
 
@@ -31,23 +31,23 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AWS = AWS
-    { _access_key :: !Text
-    , _allowed_account_ids :: !Text
-    , _assume_role :: !Text
-    , _forbidden_account_ids :: !Text
-    , _insecure :: !Text
-    , _max_retries :: !Text
-    , _profile :: !Text
-    , _region :: !Text
-    , _s3_force_path_style :: !Text
-    , _secret_key :: !Text
-    , _shared_credentials_file :: !Text
+    { _access_key                  :: !Text
+    , _allowed_account_ids         :: !Text
+    , _assume_role                 :: !Text
+    , _forbidden_account_ids       :: !Text
+    , _insecure                    :: !Text
+    , _max_retries                 :: !Text
+    , _profile                     :: !Text
+    , _region                      :: !Text
+    , _s3_force_path_style         :: !Text
+    , _secret_key                  :: !Text
+    , _shared_credentials_file     :: !Text
     , _skip_credentials_validation :: !Text
-    , _skip_get_ec2_platforms :: !Text
-    , _skip_metadata_api_check :: !Text
-    , _skip_region_validation :: !Text
-    , _skip_requesting_account_id :: !Text
-    , _token :: !Text
+    , _skip_get_ec2_platforms      :: !Text
+    , _skip_metadata_api_check     :: !Text
+    , _skip_region_validation      :: !Text
+    , _skip_requesting_account_id  :: !Text
+    , _token                       :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable AWS

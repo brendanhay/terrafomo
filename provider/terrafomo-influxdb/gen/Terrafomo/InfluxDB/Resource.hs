@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.InfluxDB        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.InfluxDB as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @influxdb_continuous_query@ InfluxDB resource.
 
@@ -45,9 +45,9 @@ InfluxDB server.
 data ContinuousQueryResource = ContinuousQueryResource
     { _database :: !(Attr Text)
       {- ^ (Required) The database for the continuous_query. This must be an existing influxdb database. -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
-    , _query :: !(Attr Text)
+    , _query    :: !(Attr Text)
       {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Generic)
 
@@ -75,11 +75,11 @@ $(TH.makeResource
 The user resource allows a user to be created on an InfluxDB server.
 -}
 data UserResource = UserResource
-    { _admin :: !(Attr Text)
+    { _admin    :: !(Attr Text)
       {- ^ (Optional) Mark the user as admin. -}
-    , _grant :: !(Attr Text)
+    , _grant    :: !(Attr Text)
       {- ^ (Optional) A list of grants for non-admin users -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) The name for the user. -}
     , _password :: !(Attr Text)
       {- ^ (Required) The password for the user. -}

@@ -14,14 +14,14 @@
 --
 module Terrafomo.CenturyLinkCloud.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.CenturyLinkCloud.Types as Qual
+import qualified Terrafomo.Syntax.Provider        as Qual
+import qualified Terrafomo.Syntax.Serialize       as Qual
 
 {- | CenturyLinkCloud Terraform provider.
 
@@ -32,7 +32,7 @@ about the available resources. For additional documentation, see the
 <https://www.ctl.io/developers/>
 -}
 data CenturyLinkCloud = CenturyLinkCloud
-    { _clc_account :: !Text
+    { _clc_account  :: !Text
     , _clc_password :: !Text
     , _clc_username :: !Text
     } deriving (Show, Eq, Generic)

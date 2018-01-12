@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.VCloudDirector
-    - Terrafomo.VCloudDirector.DataSource
     - Terrafomo.VCloudDirector.Resource
 
   reexported-modules: >

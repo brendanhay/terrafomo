@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OpenStack       as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OpenStack as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @openstack_dns_zone_v2@ OpenStack datasource.
 
@@ -44,17 +44,17 @@ Use this data source to get the ID of an available OpenStack DNS zone.
 data DnsZoneV2DataSource = DnsZoneV2DataSource
     { _description :: !(Attr Text)
       {- ^ (Optional) A description of the zone. -}
-    , _email :: !(Attr Text)
+    , _email       :: !(Attr Text)
       {- ^ (Optional) The email contact for the zone record. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Optional) The name of the zone. -}
-    , _region :: !(Attr Text)
+    , _region      :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 DNS client. A DNS client is needed to retrieve zone ids. If omitted, the @region@ argument of the provider is used. -}
-    , _status :: !(Attr Text)
+    , _status      :: !(Attr Text)
       {- ^ (Optional) The zone's status. -}
-    , _ttl :: !(Attr Text)
+    , _ttl         :: !(Attr Text)
       {- ^ (Optional) The time to live (TTL) of the zone. -}
-    , _type' :: !(Attr Text)
+    , _type'       :: !(Attr Text)
       {- ^ (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@ . -}
     } deriving (Show, Generic)
 
@@ -103,27 +103,27 @@ $(TH.makeDataSource
 Use this data source to get the ID of an available OpenStack image.
 -}
 data ImagesImageV2DataSource = ImagesImageV2DataSource
-    { _most_recent :: !(Attr Text)
+    { _most_recent    :: !(Attr Text)
       {- ^ (Optional) If more than one result is returned, use the most recent image. -}
-    , _name :: !(Attr Text)
+    , _name           :: !(Attr Text)
       {- ^ (Optional) The name of the image. -}
-    , _owner :: !(Attr Text)
+    , _owner          :: !(Attr Text)
       {- ^ (Optional) The owner (UUID) of the image. -}
-    , _properties :: !(Attr Text)
+    , _properties     :: !(Attr Text)
       {- ^ (Optional) a map of key/value pairs to match an image with. All specified properties must be matched. -}
-    , _region :: !(Attr Text)
+    , _region         :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Glance client. A Glance client is needed to create an Image that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. -}
-    , _size_max :: !(Attr Text)
+    , _size_max       :: !(Attr Text)
       {- ^ (Optional) The maximum size (in bytes) of the image to return. -}
-    , _size_min :: !(Attr Text)
+    , _size_min       :: !(Attr Text)
       {- ^ (Optional) The minimum size (in bytes) of the image to return. -}
     , _sort_direction :: !(Attr Text)
       {- ^ (Optional) Order the results in either @asc@ or @desc@ . -}
-    , _sort_key :: !(Attr Text)
+    , _sort_key       :: !(Attr Text)
       {- ^ (Optional) Sort images based on a certain key. Defaults to @name@ . -}
-    , _tag :: !(Attr Text)
+    , _tag            :: !(Attr Text)
       {- ^ (Optional) Search for images with a specific tag. -}
-    , _visibility :: !(Attr Text)
+    , _visibility     :: !(Attr Text)
       {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". Defaults to "private". -}
     } deriving (Show, Generic)
 
@@ -170,15 +170,15 @@ Use this data source to get the ID of an available OpenStack network.
 data NetworkingNetworkV2DataSource = NetworkingNetworkV2DataSource
     { _matching_subnet_cidr :: !(Attr Text)
       {- ^ (Optional) The CIDR of a subnet within the network. -}
-    , _name :: !(Attr Text)
+    , _name                 :: !(Attr Text)
       {- ^ (Optional) The name of the network. -}
-    , _network_id :: !(Attr Text)
+    , _network_id           :: !(Attr Text)
       {- ^ (Optional) The ID of the network. -}
-    , _region :: !(Attr Text)
+    , _region               :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve networks ids. If omitted, the @region@ argument of the provider is used. -}
-    , _status :: !(Attr Text)
+    , _status               :: !(Attr Text)
       {- ^ (Optional) The status of the network. -}
-    , _tenant_id :: !(Attr Text)
+    , _tenant_id            :: !(Attr Text)
       {- ^ (Optional) The owner of the network. -}
     } deriving (Show, Generic)
 
@@ -203,13 +203,13 @@ $(TH.makeDataSource
 Use this data source to get the ID of an available OpenStack security group.
 -}
 data NetworkingSecgroupV2DataSource = NetworkingSecgroupV2DataSource
-    { _name :: !(Attr Text)
+    { _name        :: !(Attr Text)
       {- ^ (Optional) The name of the security group. -}
-    , _region :: !(Attr Text)
+    , _region      :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve security groups ids. If omitted, the @region@ argument of the provider is used. -}
     , _secgroup_id :: !(Attr Text)
       {- ^ (Optional) The ID of the security group. -}
-    , _tenant_id :: !(Attr Text)
+    , _tenant_id   :: !(Attr Text)
       {- ^ (Optional) The owner of the security group. -}
     } deriving (Show, Generic)
 
@@ -232,25 +232,25 @@ $(TH.makeDataSource
 Use this data source to get the ID of an available OpenStack subnet.
 -}
 data NetworkingSubnetV2DataSource = NetworkingSubnetV2DataSource
-    { _cidr :: !(Attr Text)
+    { _cidr          :: !(Attr Text)
       {- ^ (Optional) The CIDR of the subnet. -}
     , _dhcp_disabled :: !(Attr Text)
       {- ^ (Optional) If the subnet has DHCP disabled. -}
-    , _dhcp_enabled :: !(Attr Text)
+    , _dhcp_enabled  :: !(Attr Text)
       {- ^ (Optional) If the subnet has DHCP enabled. -}
-    , _gateway_ip :: !(Attr Text)
+    , _gateway_ip    :: !(Attr Text)
       {- ^ (Optional) The IP of the subnet's gateway. -}
-    , _ip_version :: !(Attr Text)
+    , _ip_version    :: !(Attr Text)
       {- ^ (Optional) The IP version of the subnet (either 4 or 6). -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Optional) The name of the subnet. -}
-    , _network_id :: !(Attr Text)
+    , _network_id    :: !(Attr Text)
       {- ^ (Optional) The ID of the network the subnet belongs to. -}
-    , _region :: !(Attr Text)
+    , _region        :: !(Attr Text)
       {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve subnet ids. If omitted, the @region@ argument of the provider is used. -}
-    , _subnet_id :: !(Attr Text)
+    , _subnet_id     :: !(Attr Text)
       {- ^ (Optional) The ID of the subnet. -}
-    , _tenant_id :: !(Attr Text)
+    , _tenant_id     :: !(Attr Text)
       {- ^ (Optional) The owner of the subnet. -}
     } deriving (Show, Generic)
 

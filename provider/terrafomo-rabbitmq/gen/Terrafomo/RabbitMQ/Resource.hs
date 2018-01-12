@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.RabbitMQ        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.RabbitMQ as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @rabbitmq_binding@ RabbitMQ resource.
 
@@ -43,17 +43,17 @@ The @rabbitmq_binding@ resource creates and manages a binding relationship
 between a queue an exchange.
 -}
 data BindingResource = BindingResource
-    { _arguments :: !(Attr Text)
+    { _arguments        :: !(Attr Text)
       {- ^ (Optional) Additional key/value arguments for the binding. -}
-    , _destination :: !(Attr Text)
+    , _destination      :: !(Attr Text)
       {- ^ (Required) The destination queue or exchange. -}
     , _destination_type :: !(Attr Text)
       {- ^ (Required) The type of destination (queue or exchange). -}
-    , _routing_key :: !(Attr Text)
+    , _routing_key      :: !(Attr Text)
       {- ^ (Optional) A routing key for the binding. -}
-    , _source :: !(Attr Text)
+    , _source           :: !(Attr Text)
       {- ^ (Required) The source exchange. -}
-    , _vhost :: !(Attr Text)
+    , _vhost            :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
@@ -72,11 +72,11 @@ $(TH.makeResource
 The @rabbitmq_exchange@ resource creates and manages an exchange.
 -}
 data ExchangeResource = ExchangeResource
-    { _name :: !(Attr Text)
+    { _name     :: !(Attr Text)
       {- ^ (Required) The name of the exchange. -}
     , _settings :: !(Attr Text)
       {- ^ (Required) The settings of the exchange. The structure is described below. -}
-    , _vhost :: !(Attr Text)
+    , _vhost    :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
@@ -93,9 +93,9 @@ permissions.
 data PermissionsResource = PermissionsResource
     { _permissions :: !(Attr Text)
       {- ^ (Required) The settings of the permissions. The structure is described below. -}
-    , _user :: !(Attr Text)
+    , _user        :: !(Attr Text)
       {- ^ (Required) The user to apply the permissions to. -}
-    , _vhost :: !(Attr Text)
+    , _vhost       :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
@@ -110,11 +110,11 @@ The @rabbitmq_policy@ resource creates and manages policies for exchanges
 and queues.
 -}
 data PolicyResource = PolicyResource
-    { _name :: !(Attr Text)
+    { _name   :: !(Attr Text)
       {- ^ (Required) The name of the policy. -}
     , _policy :: !(Attr Text)
       {- ^ (Required) The settings of the policy. The structure is described below. -}
-    , _vhost :: !(Attr Text)
+    , _vhost  :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
@@ -128,11 +128,11 @@ $(TH.makeResource
 The @rabbitmq_queue@ resource creates and manages a queue.
 -}
 data QueueResource = QueueResource
-    { _name :: !(Attr Text)
+    { _name     :: !(Attr Text)
       {- ^ (Required) The name of the queue. -}
     , _settings :: !(Attr Text)
       {- ^ (Required) The settings of the queue. The structure is described below. -}
-    , _vhost :: !(Attr Text)
+    , _vhost    :: !(Attr Text)
       {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Generic)
 
@@ -148,11 +148,11 @@ arguments including username and password will be stored in the raw state as
 plain-text. </docs/state/sensitive-data.html> .
 -}
 data UserResource = UserResource
-    { _name :: !(Attr Text)
+    { _name     :: !(Attr Text)
       {- ^ (Required) The name of the user. -}
     , _password :: !(Attr Text)
       {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
-    , _tags :: !(Attr Text)
+    , _tags     :: !(Attr Text)
       {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Generic)
 

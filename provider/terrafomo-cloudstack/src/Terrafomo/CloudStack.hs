@@ -18,5 +18,5 @@ module Terrafomo.CloudStack
     ) where
 
 import Terrafomo
-import Terrafomo.CloudStack.Types
 import Terrafomo.CloudStack.Provider
+import Terrafomo.CloudStack.Types

@@ -34,7 +34,7 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @template_dir@ Template resource.
 
@@ -52,9 +52,9 @@ automation systems.
 data DirResource = DirResource
     { _destination_dir :: !(Attr Text)
       {- ^ (Required) Path to the directory where the templated files will be written. -}
-    , _source_dir :: !(Attr Text)
+    , _source_dir      :: !(Attr Text)
       {- ^ (Required) Path to the directory where the files to template reside. -}
-    , _vars :: !(Attr Text)
+    , _vars            :: !(Attr Text)
       {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Generic)
 

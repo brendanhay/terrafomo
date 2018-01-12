@@ -18,5 +18,5 @@ module Terrafomo.Rancher
     ) where
 
 import Terrafomo
-import Terrafomo.Rancher.Types
 import Terrafomo.Rancher.Provider
+import Terrafomo.Rancher.Types

@@ -18,5 +18,5 @@ module Terrafomo.RabbitMQ
     ) where
 
 import Terrafomo
-import Terrafomo.RabbitMQ.Types
 import Terrafomo.RabbitMQ.Provider
+import Terrafomo.RabbitMQ.Types

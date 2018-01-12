@@ -18,5 +18,5 @@ module Terrafomo.InfluxDB
     ) where
 
 import Terrafomo
-import Terrafomo.InfluxDB.Types
 import Terrafomo.InfluxDB.Provider
+import Terrafomo.InfluxDB.Types

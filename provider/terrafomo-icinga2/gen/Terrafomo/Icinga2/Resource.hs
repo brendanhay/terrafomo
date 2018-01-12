@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Icinga2         as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Icinga2 as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @icinga2_checkcommand@ Icinga2 resource.
 
@@ -45,9 +45,9 @@ configured, updated, and deleted.
 data CheckcommandResource = CheckcommandResource
     { _arguments :: !(Attr Text)
       {- ^ (Optional) A mapping of arguments to include with the command. -}
-    , _command :: !(Attr Text)
+    , _command   :: !(Attr Text)
       {- ^ (Required) Path to the command te be executed. -}
-    , _name :: !(Attr Text)
+    , _name      :: !(Attr Text)
       {- ^ (Required) Name by which to reference the checkcommand -}
     , _templates :: !(Attr Text)
       {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
@@ -64,15 +64,15 @@ Configures an Icinga2 host resource. This allows hosts to be configured,
 updated, and deleted.
 -}
 data HostResource = HostResource
-    { _address :: !(Attr Text)
+    { _address       :: !(Attr Text)
       {- ^ (Required) The address of the host. -}
     , _check_command :: !(Attr Text)
       {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the host is available or not. -}
-    , _hostname :: !(Attr Text)
+    , _hostname      :: !(Attr Text)
       {- ^ (Required) The hostname of the host. -}
-    , _templates :: !(Attr Text)
+    , _templates     :: !(Attr Text)
       {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
-    , _vars :: !(Attr Text)
+    , _vars          :: !(Attr Text)
       {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Generic)
 
@@ -89,7 +89,7 @@ configured, updated, and deleted.
 data HostgroupResource = HostgroupResource
     { _display_name :: !(Attr Text)
       {- ^ (Required) The name of the hostgroup to display in the Icinga2 interface. -}
-    , _name :: !(Attr Text)
+    , _name         :: !(Attr Text)
       {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Generic)
 
@@ -106,9 +106,9 @@ configured, updated, and deleted.
 data ServiceResource = ServiceResource
     { _check_command :: !(Attr Text)
       {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the service is available on the host. -}
-    , _hostname :: !(Attr Text)
+    , _hostname      :: !(Attr Text)
       {- ^ (Required) The host to check the service's status on -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Generic)
 

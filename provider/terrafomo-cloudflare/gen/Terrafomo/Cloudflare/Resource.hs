@@ -33,28 +33,28 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Cloudflare      as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Cloudflare as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @cloudflare_record@ Cloudflare resource.
 
 Provides a Cloudflare record resource.
 -}
 data RecordResource = RecordResource
-    { _domain :: !(Attr Text)
+    { _domain   :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) The name of the record -}
     , _priority :: !(Attr Text)
       {- ^ (Optional) The priority of the record -}
-    , _proxied :: !(Attr Text)
+    , _proxied  :: !(Attr Text)
       {- ^ (Optional) Whether the record gets Cloudflare's origin protection. -}
-    , _ttl :: !(Attr Text)
+    , _ttl      :: !(Attr Text)
       {- ^ (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record> ) -}
-    , _type' :: !(Attr Text)
+    , _type'    :: !(Attr Text)
       {- ^ (Required) The type of the record -}
-    , _value :: !(Attr Text)
+    , _value    :: !(Attr Text)
       {- ^ (Required) The value of the record -}
     } deriving (Show, Generic)
 

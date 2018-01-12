@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OpsGenie        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OpsGenie as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @opsgenie_team@ OpsGenie resource.
 
@@ -44,9 +44,9 @@ Manages a Team within OpsGenie.
 data TeamResource = TeamResource
     { _description :: !(Attr Text)
       {- ^ (Optional) A description for this team. -}
-    , _member :: !(Attr Text)
+    , _member      :: !(Attr Text)
       {- ^ (Optional) A Member block as documented below. -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Generic)
 
@@ -67,13 +67,13 @@ Manages a User within OpsGenie.
 data UserResource = UserResource
     { _full_name :: !(Attr Text)
       {- ^ (Required) The Full Name of the User. -}
-    , _locale :: !(Attr Text)
+    , _locale    :: !(Attr Text)
       {- ^ (Optional) Location information for the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-locales> for available locales - Defaults to "en_US". -}
-    , _role :: !(Attr Text)
+    , _role      :: !(Attr Text)
       {- ^ (Required) The Role assigned to the User. Either a built-in such as 'Owner', 'Admin' or 'User' - or the name of a custom role. -}
-    , _timezone :: !(Attr Text)
+    , _timezone  :: !(Attr Text)
       {- ^ (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids> for available timezones - Defaults to "America/New_York". -}
-    , _username :: !(Attr Text)
+    , _username  :: !(Attr Text)
       {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Generic)
 

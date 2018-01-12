@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.Cobbler
-    - Terrafomo.Cobbler.DataSource
     - Terrafomo.Cobbler.Resource
 
   reexported-modules: >

@@ -14,14 +14,14 @@
 --
 module Terrafomo.AzureRM.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.AzureRM.Types    as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.AzureRM.Types as Qual
 
 {- | AzureRM Terraform provider.
 
@@ -34,13 +34,13 @@ Service Management API. Use the navigation to the left to read about the
 available resources.
 -}
 data AzureRM = AzureRM
-    { _client_id :: !Text
-    , _client_secret :: !Text
-    , _environment :: !Text
+    { _client_id                   :: !Text
+    , _client_secret               :: !Text
+    , _environment                 :: !Text
     , _skip_credentials_validation :: !Text
-    , _skip_provider_registration :: !Text
-    , _subscription_id :: !Text
-    , _tenant_id :: !Text
+    , _skip_provider_registration  :: !Text
+    , _subscription_id             :: !Text
+    , _tenant_id                   :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable AzureRM

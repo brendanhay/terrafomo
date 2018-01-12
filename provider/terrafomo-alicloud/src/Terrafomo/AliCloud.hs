@@ -18,5 +18,5 @@ module Terrafomo.AliCloud
     ) where
 
 import Terrafomo
-import Terrafomo.AliCloud.Types
 import Terrafomo.AliCloud.Provider
+import Terrafomo.AliCloud.Types

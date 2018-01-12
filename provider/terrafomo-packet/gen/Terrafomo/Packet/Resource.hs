@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Packet          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Packet as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @packet_device@ Packet resource.
 
@@ -45,27 +45,27 @@ user_data will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data DeviceResource = DeviceResource
-    { _always_pxe :: !(Attr Text)
+    { _always_pxe              :: !(Attr Text)
       {- ^ (Optional) - If true, a device with OS @custom_ipxe@ will continue to boot via iPXE on reboots. -}
-    , _billing_cycle :: !(Attr Text)
+    , _billing_cycle           :: !(Attr Text)
       {- ^ (Required) monthly or hourly -}
-    , _facility :: !(Attr Text)
+    , _facility                :: !(Attr Text)
       {- ^ (Required) The facility in which to create the device -}
     , _hardware_reservation_id :: !(Attr Text)
       {- ^ (Optional) - The id of hardware reservation where you want this device deployed, or @next-available@ if you want to pick your next available reservation automatically. -}
-    , _hostname :: !(Attr Text)
+    , _hostname                :: !(Attr Text)
       {- ^ (Required) The device name -}
-    , _ipxe_script_url :: !(Attr Text)
+    , _ipxe_script_url         :: !(Attr Text)
       {- ^ (Optional) - URL pointing to a hosted iPXE script. More information is in the <https://help.packet.net/technical/infrastructure/custom-ipxe> doc. -}
-    , _operating_system :: !(Attr Text)
+    , _operating_system        :: !(Attr Text)
       {- ^ (Required) The operating system slug -}
-    , _plan :: !(Attr Text)
+    , _plan                    :: !(Attr Text)
       {- ^ (Required) The hardware config slug -}
-    , _project_id :: !(Attr Text)
+    , _project_id              :: !(Attr Text)
       {- ^ (Required) The id of the project in which to create the device -}
     , _public_ipv4_subnet_size :: !(Attr Text)
       {- ^ (Optional) - Size of allocated subnet, more information is in the <https://help.packet.net/technical/networking/custom-subnet-size> doc. -}
-    , _user_data :: !(Attr Text)
+    , _user_data               :: !(Attr Text)
       {- ^ (Optional) - A string of the desired User Data for the device. -}
     } deriving (Show, Generic)
 
@@ -129,7 +129,7 @@ reserved block must be in the same facility.
 data IpAttachmentResource = IpAttachmentResource
     { _cidr_notation :: !(Attr Text)
       {- ^ (Required) CIDR notation of subnet from block reserved in the same project and facility as the device -}
-    , _device_id :: !(Attr Text)
+    , _device_id     :: !(Attr Text)
       {- ^ (Required) ID of device to which to assign the subnet -}
     } deriving (Show, Generic)
 
@@ -165,7 +165,7 @@ Provides a Packet Project resource to allow you manage devices in your
 projects.
 -}
 data ProjectResource = ProjectResource
-    { _name :: !(Attr Text)
+    { _name           :: !(Attr Text)
       {- ^ (Required) The name of the Project on Packet.net -}
     , _payment_method :: !(Attr Text)
       {- ^ (Optional) The unique ID of the payment method on file to use for services created in this project. If not given, the project will use the default payment method for your user. -}
@@ -202,11 +202,11 @@ address from it can be assigned to device with the @packet_ip_attachment@
 resource.
 -}
 data ReservedIpBlockResource = ReservedIpBlockResource
-    { _facility :: !(Attr Text)
+    { _facility   :: !(Attr Text)
       {- ^ (Required) The facility where to allocate the address block -}
     , _project_id :: !(Attr Text)
       {- ^ (Required) The packet project ID where to allocate the address block -}
-    , _quantity :: !(Attr Text)
+    , _quantity   :: !(Attr Text)
       {- ^ (Required) The number of allocated /32 addresses, a power of 2 -}
     } deriving (Show, Generic)
 
@@ -245,7 +245,7 @@ account. All SSH keys on your account are loaded on all new devices, they do
 not have to be explicitly declared on device creation.
 -}
 data SshKeyResource = SshKeyResource
-    { _name :: !(Attr Text)
+    { _name       :: !(Attr Text)
       {- ^ (Required) The name of the SSH key for identification -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
@@ -303,17 +303,17 @@ attached and mounted using the api and @packet_block_attach@ and
 @packet_block_detach@ scripts.
 -}
 data VolumeResource = VolumeResource
-    { _billing_cycle :: !(Attr Text)
+    { _billing_cycle     :: !(Attr Text)
       {- ^ - The billing cycle, defaults to "hourly" -}
-    , _description :: !(Attr Text)
+    , _description       :: !(Attr Text)
       {- ^ - Optional description for the volume -}
-    , _facility :: !(Attr Text)
+    , _facility          :: !(Attr Text)
       {- ^ (Required) The facility to create the volume in -}
-    , _plan :: !(Attr Text)
+    , _plan              :: !(Attr Text)
       {- ^ (Required) The service plan slug of the volume -}
-    , _project_id :: !(Attr Text)
+    , _project_id        :: !(Attr Text)
       {- ^ (Required) The packet project ID to deploy the volume in -}
-    , _size :: !(Attr Text)
+    , _size              :: !(Attr Text)
       {- ^ (Required) The size in GB to make the volume -}
     , _snapshot_policies :: !(Attr Text)
       {- ^ - Optional list of snapshot policies -}

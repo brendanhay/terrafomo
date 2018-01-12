@@ -18,5 +18,5 @@ module Terrafomo.SoftLayer
     ) where
 
 import Terrafomo
-import Terrafomo.SoftLayer.Types
 import Terrafomo.SoftLayer.Provider
+import Terrafomo.SoftLayer.Types

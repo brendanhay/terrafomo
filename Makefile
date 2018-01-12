@@ -1,28 +1,43 @@
+SHELL      := /usr/bin/env bash
 VENDOR_DIR := vendor
-BIN        := ./bin/terrafomo-gen
+STYLISH    := ./bin/stylish-haskell
+GENERATE   := ./bin/terrafomo-gen
 PROVIDERS  := $(basename $(notdir $(wildcard terrafomo-gen/config/*.yaml)))
 CONFIGS    := .stack.yaml .travis.yml
 
 default: $(PROVIDERS)
 	@script/generate
 
-.PHONY: $(BIN)
+.PHONY: $(GENERATE)
 
-$(BIN):
+$(GENERATE):
 	@stack install terrafomo-gen 1>&2
 
 full-clean: $(addsuffix -full-clean,$(PROVIDERS)) clean
 
 clean:
-	rm -f $(BIN)
+	rm -f $(GENERATE)
 	rm -rf provider/*/gen provider/*/package.yaml terrafomo/gen/*
 	@script/generate
+
+format: $(STYLISH)
+	@echo -e '\nFormatting...'
+	@find \
+ $(wildcard terrafomo/gen) \
+ $(wildcard provider/*/gen) \
+ -type f \
+ -name '*.hs' \
+ -printf ' -> %p\n' \
+ -exec $(STYLISH) -i {} \;
+
+$(STYLISH):
+	@stack install stylish-haskell
 
 define provider
 .PHONY: $1
 
-$1: $(VENDOR_DIR)/$1 $(BIN)
-	@$(BIN) \
+$1: $(VENDOR_DIR)/$1 $(GENERATE)
+	@$(GENERATE) \
  --config-dir=terrafomo-gen/config \
  --schema-dir=terrafomo-gen/schema \
  --patch-dir=terrafomo-gen/patch \

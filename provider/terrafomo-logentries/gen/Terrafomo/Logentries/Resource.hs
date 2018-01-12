@@ -33,26 +33,26 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Logentries      as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Logentries as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @logentries_log@ Logentries resource.
 
 Provides a Logentries log resource.
 -}
 data LogResource = LogResource
-    { _filename :: !(Attr Text)
+    { _filename         :: !(Attr Text)
       {- ^ (Optional) the filename of the log. -}
-    , _logset_id :: !(Attr Text)
+    , _logset_id        :: !(Attr Text)
       {- ^ (Required) The id of the @logentries_logset@ resource. -}
-    , _name :: !(Attr Text)
+    , _name             :: !(Attr Text)
       {- ^ (Required) The name of the log. The name should be short and descriptive. For example, Apache Access, Hadoop Namenode. -}
     , _retention_period :: !(Attr Text)
       {- ^ (Optional, default @ACCOUNT_DEFAULT@ ) The retention period ( @1W@ , @2W@ , @1M@ , @2M@ , @6M@ , @1Y@ , @2Y@ , @UNLIMITED@ , @ACCOUNT_DEFAULT@ ) -}
-    , _source :: !(Attr Text)
+    , _source           :: !(Attr Text)
       {- ^ (Optional, default @token@ ) The log source ( @token@ , @syslog@ , @agent@ , @api@ ). Review the Logentries <https://docs.logentries.com/docs/> for more information. -}
-    , _type' :: !(Attr Text)
+    , _type'            :: !(Attr Text)
       {- ^ (Optional) The log type. See the Logentries <https://logentries.com/doc/log-types/> for more information. -}
     } deriving (Show, Generic)
 
@@ -74,7 +74,7 @@ Provides a Logentries logset resource. A logset is a collection of
 data LogsetResource = LogsetResource
     { _location :: !(Attr Text)
       {- ^ (Optional, default "nonlocation") A location is for your convenience only. You can specify a DNS entry such as web.example.com, IP address or arbitrary comment. -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
     } deriving (Show, Generic)
 

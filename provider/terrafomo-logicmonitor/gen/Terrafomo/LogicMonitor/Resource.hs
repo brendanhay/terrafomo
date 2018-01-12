@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.LogicMonitor    as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.LogicMonitor as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @logicmonitor_collector_group@ LogicMonitor resource.
 
@@ -45,7 +45,7 @@ and manage LogicMonitor users
 data CollectorGroupResource = CollectorGroupResource
     { _description :: !(Attr Text)
       {- ^ (Optional) Set description of collector group -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required) Name of collector group -}
     } deriving (Show, Generic)
 
@@ -60,17 +60,17 @@ Provides a LogicMonitor device group resource. This can be used to create
 and manage LogicMonitor device groups
 -}
 data DeviceGroupResource = DeviceGroupResource
-    { _applies_to :: !(Attr Text)
+    { _applies_to       :: !(Attr Text)
       {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
-    , _description :: !(Attr Text)
+    , _description      :: !(Attr Text)
       {- ^ (Optional) Description of device group -}
     , _disable_alerting :: !(Attr Text)
       {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
-    , _name :: !(Attr Text)
+    , _name             :: !(Attr Text)
       {- ^ (Required) Name of device group -}
-    , _parent_id :: !(Attr Text)
+    , _parent_id        :: !(Attr Text)
       {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
-    , _properties :: !(Attr Text)
+    , _properties       :: !(Attr Text)
       {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Generic)
 
@@ -85,17 +85,17 @@ Provides a LogicMonitor device resource. This can be used to create and
 manage LogicMonitor devices
 -}
 data DeviceResource = DeviceResource
-    { _collector :: !(Attr Text)
+    { _collector        :: !(Attr Text)
       {- ^ - (required) The id of the collector that will monitoring the device -}
     , _disable_alerting :: !(Attr Text)
       {- ^ (Optional) The host is created with alerting disabled (default is true) -}
-    , _display_name :: !(Attr Text)
+    , _display_name     :: !(Attr Text)
       {- ^ (Optional) Display name of device, (default is ip_addr) -}
-    , _hostgroup_id :: !(Attr Text)
+    , _hostgroup_id     :: !(Attr Text)
       {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
-    , _ip_addr :: !(Attr Text)
+    , _ip_addr          :: !(Attr Text)
       {- ^ (Required) Ip Address/Hostname of device -}
-    , _properties :: !(Attr Text)
+    , _properties       :: !(Attr Text)
       {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Generic)
 

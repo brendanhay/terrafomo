@@ -18,5 +18,5 @@ module Terrafomo.ProfitBricks
     ) where
 
 import Terrafomo
-import Terrafomo.ProfitBricks.Types
 import Terrafomo.ProfitBricks.Provider
+import Terrafomo.ProfitBricks.Types

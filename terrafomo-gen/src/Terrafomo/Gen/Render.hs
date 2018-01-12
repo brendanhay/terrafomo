@@ -40,16 +40,18 @@ data Templates a = Templates
 package
     :: Templates EDE.Template
     -> Provider a
+    -> Bool -- ^ Any datasource module?
+    -> Bool -- ^ Any resource module?
     -> Either Text LText.Text
-package tmpls p =
+package tmpls p d r =
     render (packageTemplate tmpls)
         [ "provider" .= fmap Just p
         , "package"  .= providerPackage p
         , "exposed"  .=
-            [ mainNS   p
-            , schemaNS p DataSource
-            , schemaNS p Resource
-            ]
+            ( mainNS p
+            : [schemaNS p DataSource | d]
+           ++ [schemaNS p Resource   | r]
+            )
         ]
 
 main

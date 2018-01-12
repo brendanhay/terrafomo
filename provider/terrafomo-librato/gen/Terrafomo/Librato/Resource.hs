@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Librato         as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Librato as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @librato_alert@ Librato resource.
 
@@ -43,19 +43,19 @@ Provides a Librato Alert resource. This can be used to create and manage
 alerts on Librato.
 -}
 data AlertResource = AlertResource
-    { _active :: !(Attr Text)
+    { _active        :: !(Attr Text)
       {- ^ - whether the alert is active (can be triggered). Defaults to true. -}
-    , _attributes :: !(Attr Text)
+    , _attributes    :: !(Attr Text)
       {- ^ - A hash of additional attribtues for the alert. Attributes documented below. -}
-    , _condition :: !(Attr Text)
+    , _condition     :: !(Attr Text)
       {- ^ - A trigger condition for the alert. Conditions documented below. -}
-    , _description :: !(Attr Text)
+    , _description   :: !(Attr Text)
       {- ^ (Required) Description of the alert. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The name of the alert. -}
     , _rearm_seconds :: !(Attr Text)
       {- ^ - minimum amount of time between sending alert notifications, in seconds. -}
-    , _services :: !(Attr Text)
+    , _services      :: !(Attr Text)
       {- ^ - list of notification service IDs. -}
     } deriving (Show, Generic)
 
@@ -87,19 +87,19 @@ Provides a Librato Metric resource. This can be used to create and manage
 metrics on Librato.
 -}
 data MetricResource = MetricResource
-    { _attributes :: !(Attr Text)
+    { _attributes   :: !(Attr Text)
       {- ^ - The attributes hash configures specific components of a metric’s visualization. -}
-    , _composite :: !(Attr Text)
+    , _composite    :: !(Attr Text)
       {- ^ - The definition of the composite metric. -}
-    , _description :: !(Attr Text)
+    , _description  :: !(Attr Text)
       {- ^ - Text that can be used to explain precisely what the metric is measuring. -}
     , _display_name :: !(Attr Text)
       {- ^ - The name which will be used for the metric when viewing the Metrics website. -}
-    , _name :: !(Attr Text)
+    , _name         :: !(Attr Text)
       {- ^ (Required) The unique identifier of the metric. -}
-    , _period :: !(Attr Text)
+    , _period       :: !(Attr Text)
       {- ^ - Number of seconds that is the standard reporting period of the metric. -}
-    , _type' :: !(Attr Text)
+    , _type'        :: !(Attr Text)
       {- ^ (Required) The type of metric to create (gauge, counter, or composite). -}
     } deriving (Show, Generic)
 
@@ -133,9 +133,9 @@ notification services on Librato.
 data ServiceResource = ServiceResource
     { _settings :: !(Attr Text)
       {- ^ (Required) a JSON hash of settings specific to the alert type. -}
-    , _title :: !(Attr Text)
+    , _title    :: !(Attr Text)
       {- ^ (Required) The alert title. -}
-    , _type' :: !(Attr Text)
+    , _type'    :: !(Attr Text)
       {- ^ (Required) The type of notificaion. -}
     } deriving (Show, Generic)
 
@@ -161,21 +161,21 @@ Provides a Librato Space Chart resource. This can be used to create and
 manage charts in Librato Spaces.
 -}
 data SpaceChartResource = SpaceChartResource
-    { _label :: !(Attr Text)
+    { _label         :: !(Attr Text)
       {- ^ (Optional) The Y-axis label. -}
-    , _max :: !(Attr Text)
+    , _max           :: !(Attr Text)
       {- ^ (Optional) The maximum display value of the chart's Y-axis. -}
-    , _min :: !(Attr Text)
+    , _min           :: !(Attr Text)
       {- ^ (Optional) The minimum display value of the chart's Y-axis. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The title of the chart when it is displayed. -}
     , _related_space :: !(Attr Text)
       {- ^ (Optional) The ID of another space to which this chart is related. -}
-    , _space_id :: !(Attr Text)
+    , _space_id      :: !(Attr Text)
       {- ^ (Required) The ID of the space this chart should be in. -}
-    , _stream :: !(Attr Text)
+    , _stream        :: !(Attr Text)
       {- ^ (Optional) Nested block describing a metric to use for data in the chart. The structure of this block is described below. -}
-    , _type' :: !(Attr Text)
+    , _type'         :: !(Attr Text)
       {- ^ (Optional) Indicates the type of chart. Must be one of line or stacked (default to line). -}
     } deriving (Show, Generic)
 

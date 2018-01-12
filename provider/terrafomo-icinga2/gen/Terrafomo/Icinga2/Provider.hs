@@ -14,14 +14,14 @@
 --
 module Terrafomo.Icinga2.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Icinga2.Types    as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Icinga2.Types as Qual
 
 {- | Icinga2 Terraform provider.
 
@@ -31,9 +31,9 @@ be configured with the API URL of the Icinga2 server and credentials for an
 API user with the appropriate permissions.
 -}
 data Icinga2 = Icinga2
-    { _api_password :: !Text
-    , _api_url :: !Text
-    , _api_user :: !Text
+    { _api_password             :: !Text
+    , _api_url                  :: !Text
+    , _api_user                 :: !Text
     , _insecure_skip_tls_verify :: !Text
     } deriving (Show, Eq, Generic)
 

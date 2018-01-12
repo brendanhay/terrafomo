@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Packet          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Packet as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @packet_precreated_ip_block@ Packet datasource.
 
@@ -46,11 +46,11 @@ derive subnets.
 data PrecreatedIpBlockDataSource = PrecreatedIpBlockDataSource
     { _address_family :: !(Attr Text)
       {- ^ (Required) 4 or 6, depending on which block you are looking for. -}
-    , _facility :: !(Attr Text)
+    , _facility       :: !(Attr Text)
       {- ^ (Required) Facility of the searched block. -}
-    , _project_id :: !(Attr Text)
+    , _project_id     :: !(Attr Text)
       {- ^ (Required) ID of the project where the searched block should be. -}
-    , _public :: !(Attr Text)
+    , _public         :: !(Attr Text)
       {- ^ (Required) Whether to look for public or private block. -}
     } deriving (Show, Generic)
 

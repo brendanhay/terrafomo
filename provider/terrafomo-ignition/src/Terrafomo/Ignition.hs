@@ -18,5 +18,5 @@ module Terrafomo.Ignition
     ) where
 
 import Terrafomo
-import Terrafomo.Ignition.Types
 import Terrafomo.Ignition.Provider
+import Terrafomo.Ignition.Types

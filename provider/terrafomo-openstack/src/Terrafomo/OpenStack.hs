@@ -18,5 +18,5 @@ module Terrafomo.OpenStack
     ) where
 
 import Terrafomo
-import Terrafomo.OpenStack.Types
 import Terrafomo.OpenStack.Provider
+import Terrafomo.OpenStack.Types

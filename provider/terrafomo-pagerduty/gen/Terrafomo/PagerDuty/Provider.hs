@@ -14,14 +14,14 @@
 --
 module Terrafomo.PagerDuty.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.PagerDuty.Types  as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.PagerDuty.Types as Qual
 
 {- | PagerDuty Terraform provider.
 
@@ -33,7 +33,7 @@ navigation to the left to read about the available resources.
 -}
 data PagerDuty = PagerDuty
     { _skip_credentials_validation :: !Text
-    , _token :: !Text
+    , _token                       :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable PagerDuty

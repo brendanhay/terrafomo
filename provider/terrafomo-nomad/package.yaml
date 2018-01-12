@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.Nomad
-    - Terrafomo.Nomad.DataSource
     - Terrafomo.Nomad.Resource
 
   reexported-modules: >

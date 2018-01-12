@@ -18,5 +18,5 @@ module Terrafomo.MySQL
     ) where
 
 import Terrafomo
-import Terrafomo.MySQL.Types
 import Terrafomo.MySQL.Provider
+import Terrafomo.MySQL.Types

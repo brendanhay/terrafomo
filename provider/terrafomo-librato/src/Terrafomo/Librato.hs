@@ -18,5 +18,5 @@ module Terrafomo.Librato
     ) where
 
 import Terrafomo
-import Terrafomo.Librato.Types
 import Terrafomo.Librato.Provider
+import Terrafomo.Librato.Types

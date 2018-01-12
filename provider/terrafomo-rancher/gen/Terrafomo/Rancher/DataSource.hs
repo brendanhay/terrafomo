@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Rancher         as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Rancher as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @rancher_certificate@ Rancher datasource.
 
@@ -44,7 +44,7 @@ Use this data source to retrieve information about a Rancher certificate.
 data CertificateDataSource = CertificateDataSource
     { _environment_id :: !(Attr Text)
       {- ^ (Required) The ID of the environment. -}
-    , _name :: !(Attr Text)
+    , _name           :: !(Attr Text)
       {- ^ (Required) The setting name. -}
     } deriving (Show, Generic)
 

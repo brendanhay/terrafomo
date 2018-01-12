@@ -14,14 +14,14 @@
 --
 module Terrafomo.PostgreSQL.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.PostgreSQL.Types as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
 
 {- | PostgreSQL Terraform provider.
 
@@ -30,15 +30,15 @@ in a PostgreSQL server. Use the navigation to the left to read about the
 available resources.
 -}
 data PostgreSQL = PostgreSQL
-    { _connect_timeout :: !Text
-    , _database :: !Text
+    { _connect_timeout  :: !Text
+    , _database         :: !Text
     , _expected_version :: !Text
-    , _host :: !Text
-    , _max_connections :: !Text
-    , _password :: !Text
-    , _port :: !Text
-    , _sslmode :: !Text
-    , _username :: !Text
+    , _host             :: !Text
+    , _max_connections  :: !Text
+    , _password         :: !Text
+    , _port             :: !Text
+    , _sslmode          :: !Text
+    , _username         :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable PostgreSQL

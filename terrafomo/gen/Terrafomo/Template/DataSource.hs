@@ -34,7 +34,7 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @template_cloudinit_config@ Template datasource.
 
@@ -43,9 +43,9 @@ Renders a multi-part cloud-init config from source files.
 data CloudinitConfigDataSource = CloudinitConfigDataSource
     { _base64_encode :: !(Attr Text)
       {- ^ (Optional) Base64 encoding of the rendered output. Default to @true@ -}
-    , _gzip :: !(Attr Text)
+    , _gzip          :: !(Attr Text)
       {- ^ (Optional) Specify whether or not to gzip the rendered output. Default to @true@ -}
-    , _part :: !(Attr Text)
+    , _part          :: !(Attr Text)
       {- ^ (Required) One may specify this many times, this creates a fragment of the rendered cloud-init config file. The order of the parts is maintained in the configuration is maintained in the rendered template. -}
     } deriving (Show, Generic)
 
@@ -66,7 +66,7 @@ Renders a template from a file.
 data FileDataSource = FileDataSource
     { _template :: !(Attr Text)
       {- ^ (Required) The contents of the template. These can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . -}
-    , _vars :: !(Attr Text)
+    , _vars     :: !(Attr Text)
       {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Generic)
 

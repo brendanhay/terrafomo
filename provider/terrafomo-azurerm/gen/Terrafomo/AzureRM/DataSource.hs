@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.AzureRM         as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.AzureRM as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @azurerm_builtin_role_definition@ AzureRM datasource.
 
@@ -72,11 +72,11 @@ Use this data source to access the configuration of the Azure Resource
 Manager provider.
 -}
 data ClientConfigDataSource = ClientConfigDataSource
-    { _client_id :: !(Attr Text)
+    { _client_id       :: !(Attr Text)
       {- ^ is set to the Azure Client ID (Application Object ID). -}
     , _subscription_id :: !(Attr Text)
       {- ^ is set to the Azure Subscription ID. -}
-    , _tenant_id :: !(Attr Text)
+    , _tenant_id       :: !(Attr Text)
       {- ^ is set to the Azure Tenant ID. -}
     } deriving (Show, Generic)
 
@@ -90,7 +90,7 @@ $(TH.makeDataSource
 Use this data source to access information about an Image.
 -}
 data ImageDataSource = ImageDataSource
-    { _name :: !(Attr Text)
+    { _name                :: !(Attr Text)
       {- ^ (Required) The name of the Image. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) The Name of the Resource Group where this Image exists. -}
@@ -144,7 +144,7 @@ Use this data source to access the properties of an existing Azure Managed
 Disk.
 -}
 data ManagedDiskDataSource = ManagedDiskDataSource
-    { _name :: !(Attr Text)
+    { _name                :: !(Attr Text)
       {- ^ (Required) Specifies the name of the Managed Disk. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the resource group. -}
@@ -175,13 +175,13 @@ $(TH.makeDataSource
 Use this data source to access the properties of an Azure Platform Image.
 -}
 data PlatformImageDataSource = PlatformImageDataSource
-    { _location :: !(Attr Text)
+    { _location  :: !(Attr Text)
       {- ^ (Required) Specifies the Location to pull information about this Platform Image from. -}
-    , _offer :: !(Attr Text)
+    , _offer     :: !(Attr Text)
       {- ^ (Required) Specifies the Offer associated with the Platform Image. -}
     , _publisher :: !(Attr Text)
       {- ^ (Required) Specifies the Publisher associated with the Platform Image. -}
-    , _sku :: !(Attr Text)
+    , _sku       :: !(Attr Text)
       {- ^ (Required) Specifies the SKU of the Platform Image. -}
     } deriving (Show, Generic)
 
@@ -203,7 +203,7 @@ Use this data source to access the properties of an existing Azure Public IP
 Address.
 -}
 data PublicIpDataSource = PublicIpDataSource
-    { _name :: !(Attr Text)
+    { _name                :: !(Attr Text)
       {- ^ (Required) Specifies the name of the public IP address. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the resource group. -}
@@ -257,7 +257,7 @@ To access information about a built-in Role Definition,
 data RoleDefinitionDataSource = RoleDefinitionDataSource
     { _role_definition_id :: !(Attr Text)
       {- ^ (Required) Specifies the ID of the Role Definition as a UUID/GUID. -}
-    , _scope :: !(Attr Text)
+    , _scope              :: !(Attr Text)
       {- ^ (Required) Specifies the Scope at which the Custom Role Definition exists. -}
     } deriving (Show, Generic)
 
@@ -284,7 +284,7 @@ $(TH.makeDataSource
 Use this data source to access the properties of a Snapshot of an Disk.
 -}
 data SnapshotDataSource = SnapshotDataSource
-    { _name :: !(Attr Text)
+    { _name                :: !(Attr Text)
       {- ^ (Required) Specifies the name of the Snapshot. -}
     , _resource_group_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the resource group the Snapshot is located in. -}
@@ -316,9 +316,9 @@ Use this data source to access the properties of an Azure Subnet located
 within a Virtual Network.
 -}
 data SubnetDataSource = SubnetDataSource
-    { _name :: !(Attr Text)
+    { _name                 :: !(Attr Text)
       {- ^ (Required) Specifies the name of the Subnet. -}
-    , _resource_group_name :: !(Attr Text)
+    , _resource_group_name  :: !(Attr Text)
       {- ^ (Required) Specifies the name of the resource group the Virtual Network is located in. -}
     , _virtual_network_name :: !(Attr Text)
       {- ^ (Required) Specifies the name of the Virtual Network this Subnet is located within. -}

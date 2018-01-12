@@ -14,14 +14,14 @@
 --
 module Terrafomo.DNSimple.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.DNSimple.Types   as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.DNSimple.Types as Qual
 
 {- | DNSimple Terraform provider.
 
@@ -32,7 +32,7 @@ available resources.
 -}
 data DNSimple = DNSimple
     { _account :: !Text
-    , _token :: !Text
+    , _token   :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable DNSimple

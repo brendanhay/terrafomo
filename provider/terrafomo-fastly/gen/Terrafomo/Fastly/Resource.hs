@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Fastly          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Fastly as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @fastly_service_v1@ Fastly resource.
 
@@ -48,45 +48,45 @@ Fastly's guide on
 documentation site for guidance.
 -}
 data ServiceV1Resource = ServiceV1Resource
-    { _backend :: !(Attr Text)
+    { _backend         :: !(Attr Text)
       {- ^ (Optional) A set of Backends to service requests from your Domains. Defined below. Backends must be defined in this argument, or defined in the @vcl@ argument below -}
-    , _cache_setting :: !(Attr Text)
+    , _cache_setting   :: !(Attr Text)
       {- ^ (Optional) A set of Cache Settings, allowing you to override when an item is not to be cached based on an above @condition@ . Defined below -}
-    , _condition :: !(Attr Text)
+    , _condition       :: !(Attr Text)
       {- ^ (Optional) A set of conditions to add logic to any basic configuration object in this service. Defined below. -}
-    , _default_host :: !(Attr Text)
+    , _default_host    :: !(Attr Text)
       {- ^ (Optional) The default hostname. -}
-    , _default_ttl :: !(Attr Text)
+    , _default_ttl     :: !(Attr Text)
       {- ^ (Optional) The default Time-to-live (TTL) for requests. -}
-    , _domain :: !(Attr Text)
+    , _domain          :: !(Attr Text)
       {- ^ (Required) A set of Domain names to serve as entry points for your Service. Defined below. -}
-    , _force_destroy :: !(Attr Text)
+    , _force_destroy   :: !(Attr Text)
       {- ^ (Optional) Services that are active cannot be destroyed. In order to destroy the Service, set @force_destroy@ to @true@ . Default @false@ . -}
-    , _gcslogging :: !(Attr Text)
+    , _gcslogging      :: !(Attr Text)
       {- ^ (Optional) A gcs endpoint to send streaming logs too. Defined below. -}
-    , _gzip :: !(Attr Text)
+    , _gzip            :: !(Attr Text)
       {- ^ (Required) A set of gzip rules to control automatic gzipping of content. Defined below. -}
-    , _header :: !(Attr Text)
+    , _header          :: !(Attr Text)
       {- ^ (Optional) A set of Headers to manipulate for each request. Defined below. -}
-    , _healthcheck :: !(Attr Text)
+    , _healthcheck     :: !(Attr Text)
       {- ^ (Optional) Automated healthchecks on the cache that can change how fastly interacts with the cache based on its health. -}
-    , _logentries :: !(Attr Text)
+    , _logentries      :: !(Attr Text)
       {- ^ (Optional) A logentries endpoint to send streaming logs too. Defined below. -}
-    , _name :: !(Attr Text)
+    , _name            :: !(Attr Text)
       {- ^ (Required) The unique name for the Service to create. -}
-    , _papertrail :: !(Attr Text)
+    , _papertrail      :: !(Attr Text)
       {- ^ (Optional) A Papertrail endpoint to send streaming logs too. Defined below. -}
     , _request_setting :: !(Attr Text)
       {- ^ (Optional) A set of Request modifiers. Defined below -}
     , _response_object :: !(Attr Text)
       {- ^ (Optional) Allows you to create synthetic responses that exist entirely on the varnish machine. Useful for creating error or maintenance pages that exists outside the scope of your datacenter. Best when used with Condition objects. -}
-    , _s3logging :: !(Attr Text)
+    , _s3logging       :: !(Attr Text)
       {- ^ (Optional) A set of S3 Buckets to send streaming logs too. Defined below. -}
-    , _sumologic :: !(Attr Text)
+    , _sumologic       :: !(Attr Text)
       {- ^ (Optional) A Sumologic endpoint to send streaming logs too. Defined below. -}
-    , _syslog :: !(Attr Text)
+    , _syslog          :: !(Attr Text)
       {- ^ (Optional) A syslog endpoint to send streaming logs too. Defined below. -}
-    , _vcl :: !(Attr Text)
+    , _vcl             :: !(Attr Text)
       {- ^ (Optional) A set of custom VCL configuration blocks. The ability to upload custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl> for details). -}
     } deriving (Show, Generic)
 

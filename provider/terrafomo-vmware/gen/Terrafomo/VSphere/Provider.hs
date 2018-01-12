@@ -14,14 +14,14 @@
 --
 module Terrafomo.VSphere.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.VSphere.Types as Qual
+import qualified Terrafomo.VSphere.Types    as Qual
 
 {- | VSphere Terraform provider.
 
@@ -34,13 +34,13 @@ changes as the community improves it. This provider at this time only
 supports IPv4 addresses on virtual machines.
 -}
 data VSphere = VSphere
-    { _allow_unverified_ssl :: !Text
-    , _client_debug :: !Text
-    , _client_debug_path :: !Text
+    { _allow_unverified_ssl  :: !Text
+    , _client_debug          :: !Text
+    , _client_debug_path     :: !Text
     , _client_debug_path_run :: !Text
-    , _password :: !Text
-    , _user :: !Text
-    , _vsphere_server :: !Text
+    , _password              :: !Text
+    , _user                  :: !Text
+    , _vsphere_server        :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable VSphere

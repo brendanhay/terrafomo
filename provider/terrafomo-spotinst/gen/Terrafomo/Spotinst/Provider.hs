@@ -14,14 +14,14 @@
 --
 module Terrafomo.Spotinst.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Spotinst.Types   as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Spotinst.Types as Qual
 
 {- | Spotinst Terraform provider.
 
@@ -31,11 +31,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Spotinst = Spotinst
-    { _client_id :: !Text
+    { _client_id     :: !Text
     , _client_secret :: !Text
-    , _email :: !Text
-    , _password :: !Text
-    , _token :: !Text
+    , _email         :: !Text
+    , _password      :: !Text
+    , _token         :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Spotinst

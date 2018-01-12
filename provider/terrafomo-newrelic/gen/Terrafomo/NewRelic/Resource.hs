@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.NewRelic        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.NewRelic as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @newrelic_alert_channel@ NewRelic resource.
 
@@ -44,9 +44,9 @@ import qualified Terrafomo.Syntax.TH as TH
 data AlertChannelResource = AlertChannelResource
     { _configuration :: !(Attr Text)
       {- ^ (Required) A map of key / value pairs with channel type specific values. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The name of the channel. -}
-    , _type' :: !(Attr Text)
+    , _type'         :: !(Attr Text)
       {- ^ (Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@ , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ . -}
     } deriving (Show, Generic)
 
@@ -65,23 +65,23 @@ $(TH.makeResource
 
 -}
 data AlertConditionResource = AlertConditionResource
-    { _condition_scope :: !(Attr Text)
+    { _condition_scope             :: !(Attr Text)
       {- ^ (Optional) @instance@ or @application@ .  This is required if you are using the JVM plugin in New Relic. -}
-    , _entities :: !(Attr Text)
+    , _entities                    :: !(Attr Text)
       {- ^ (Required) The instance IDS associated with this condition. -}
-    , _metric :: !(Attr Text)
+    , _metric                      :: !(Attr Text)
       {- ^ (Required) The metric field accepts parameters based on the @type@ set. -}
-    , _name :: !(Attr Text)
+    , _name                        :: !(Attr Text)
       {- ^ (Required) The title of the condition -}
-    , _policy_id :: !(Attr Text)
+    , _policy_id                   :: !(Attr Text)
       {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url :: !(Attr Text)
+    , _runbook_url                 :: !(Attr Text)
       {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term :: !(Attr Text)
+    , _term                        :: !(Attr Text)
       {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
-    , _type' :: !(Attr Text)
+    , _type'                       :: !(Attr Text)
       {- ^ (Required) The type of condition. One of: @apm_app_metric@ , @apm_kt_metric@ , @servers_metric@ , @browser_metric@ , @mobile_metric@ -}
-    , _user_defined_metric :: !(Attr Text)
+    , _user_defined_metric         :: !(Attr Text)
       {- ^ (Optional) A custom metric to be evaluated. -}
     , _user_defined_value_function :: !(Attr Text)
       {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
@@ -99,7 +99,7 @@ $(TH.makeResource
 data AlertPolicyChannelResource = AlertPolicyChannelResource
     { _channel_id :: !(Attr Text)
       {- ^ (Required) The ID of the channel. -}
-    , _policy_id :: !(Attr Text)
+    , _policy_id  :: !(Attr Text)
       {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Generic)
 
@@ -115,7 +115,7 @@ $(TH.makeResource
 data AlertPolicyResource = AlertPolicyResource
     { _incident_preference :: !(Attr Text)
       {- ^ (Optional) The rollup strategy for the policy.  Options include: @PER_POLICY@ , @PER_CONDITION@ , or @PER_CONDITION_AND_TARGET@ .  The default is @PER_POLICY@ . -}
-    , _name :: !(Attr Text)
+    , _name                :: !(Attr Text)
       {- ^ (Required) The name of the policy. -}
     } deriving (Show, Generic)
 
@@ -138,17 +138,17 @@ $(TH.makeResource
 
 -}
 data NrqlAlertConditionResource = NrqlAlertConditionResource
-    { _enabled :: !(Attr Text)
+    { _enabled        :: !(Attr Text)
       {- ^ (Optional) Set whether to enable the alert condition. Defaults to @true@ . -}
-    , _name :: !(Attr Text)
+    , _name           :: !(Attr Text)
       {- ^ (Required) The title of the condition -}
-    , _nrql :: !(Attr Text)
+    , _nrql           :: !(Attr Text)
       {- ^ (Required) A NRQL query. See <#nrql> below for details. -}
-    , _policy_id :: !(Attr Text)
+    , _policy_id      :: !(Attr Text)
       {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url :: !(Attr Text)
+    , _runbook_url    :: !(Attr Text)
       {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term :: !(Attr Text)
+    , _term           :: !(Attr Text)
       {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
     , _value_function :: !(Attr Text)
       {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}

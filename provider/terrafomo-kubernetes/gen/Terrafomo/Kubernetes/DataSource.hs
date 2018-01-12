@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Kubernetes      as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Kubernetes as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 

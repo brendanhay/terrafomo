@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.Heroku
-    - Terrafomo.Heroku.DataSource
     - Terrafomo.Heroku.Resource
 
   reexported-modules: >

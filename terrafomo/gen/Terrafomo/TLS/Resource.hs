@@ -34,7 +34,7 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @tls_cert_request@ TLS resource.
 
@@ -53,15 +53,15 @@ no longer supported as of Terraform 0.7.5 and any users should return to
 using the resource form.
 -}
 data CertRequestResource = CertRequestResource
-    { _dns_names :: !(Attr Text)
+    { _dns_names       :: !(Attr Text)
       {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
-    , _ip_addresses :: !(Attr Text)
+    , _ip_addresses    :: !(Attr Text)
       {- ^ (Optional) List of IP addresses for which a certificate is being requested. -}
-    , _key_algorithm :: !(Attr Text)
+    , _key_algorithm   :: !(Attr Text)
       {- ^ (Required) The name of the algorithm for the key provided in @private_key_pem@ . -}
     , _private_key_pem :: !(Attr Text)
       {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
-    , _subject :: !(Attr Text)
+    , _subject         :: !(Attr Text)
       {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure is described below. -}
     } deriving (Show, Generic)
 
@@ -84,19 +84,19 @@ when setup to use the provided CA. They are normally used in development
 environments or when deployed internally to an organization.
 -}
 data LocallySignedCertResource = LocallySignedCertResource
-    { _allowed_uses :: !(Attr Text)
+    { _allowed_uses          :: !(Attr Text)
       {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
-    , _ca_cert_pem :: !(Attr Text)
+    , _ca_cert_pem           :: !(Attr Text)
       {- ^ (Required) PEM-encoded certificate data for the CA. -}
-    , _ca_key_algorithm :: !(Attr Text)
+    , _ca_key_algorithm      :: !(Attr Text)
       {- ^ (Required) The name of the algorithm for the key provided in @ca_private_key_pem@ . -}
-    , _ca_private_key_pem :: !(Attr Text)
+    , _ca_private_key_pem    :: !(Attr Text)
       {- ^ (Required) PEM-encoded private key data for the CA. This can be read from a separate file using the @file@ interpolation function. -}
-    , _cert_request_pem :: !(Attr Text)
+    , _cert_request_pem      :: !(Attr Text)
       {- ^ (Required) PEM-encoded request certificate data. -}
-    , _early_renewal_hours :: !(Attr Text)
+    , _early_renewal_hours   :: !(Attr Text)
       {- ^ (Optional) If set, the resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. Note however that the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Note also that this advance update can only be performed should the Terraform configuration be applied during the early renewal period. -}
-    , _is_ca_certificate :: !(Attr Text)
+    , _is_ca_certificate     :: !(Attr Text)
       {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
     , _validity_period_hours :: !(Attr Text)
       {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
@@ -129,11 +129,11 @@ it contributes only to the current Terraform state and does not create any
 external managed resources.
 -}
 data PrivateKeyResource = PrivateKeyResource
-    { _algorithm :: !(Attr Text)
+    { _algorithm   :: !(Attr Text)
       {- ^ (Required) The name of the algorithm to use for the key. Currently-supported values are "RSA" and "ECDSA". -}
     , _ecdsa_curve :: !(Attr Text)
       {- ^ (Optional) When @algorithm@ is "ECDSA", the name of the elliptic curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the default. -}
-    , _rsa_bits :: !(Attr Text)
+    , _rsa_bits    :: !(Attr Text)
       {- ^ (Optional) When @algorithm@ is "RSA", the size of the generated RSA key in bits. Defaults to 2048. -}
     } deriving (Show, Generic)
 
@@ -166,21 +166,21 @@ Terraform provider that has a resource that requires a TLS certificate, such
 as:
 -}
 data SelfSignedCertResource = SelfSignedCertResource
-    { _allowed_uses :: !(Attr Text)
+    { _allowed_uses          :: !(Attr Text)
       {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
-    , _dns_names :: !(Attr Text)
+    , _dns_names             :: !(Attr Text)
       {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
-    , _early_renewal_hours :: !(Attr Text)
+    , _early_renewal_hours   :: !(Attr Text)
       {- ^ (Optional) If set, the resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. Note however that the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Note also that this advance update can only be performed should the Terraform configuration be applied during the early renewal period. -}
-    , _ip_addresses :: !(Attr Text)
+    , _ip_addresses          :: !(Attr Text)
       {- ^ (Optional) List of IP addresses for which a certificate is being requested. -}
-    , _is_ca_certificate :: !(Attr Text)
+    , _is_ca_certificate     :: !(Attr Text)
       {- ^ (Optional) Boolean controlling whether the CA flag will be set in the generated certificate. Defaults to @false@ , meaning that the certificate does not represent a certificate authority. -}
-    , _key_algorithm :: !(Attr Text)
+    , _key_algorithm         :: !(Attr Text)
       {- ^ (Required) The name of the algorithm for the key provided in @private_key_pem@ . -}
-    , _private_key_pem :: !(Attr Text)
+    , _private_key_pem       :: !(Attr Text)
       {- ^ (Required) PEM-encoded private key data. This can be read from a separate file using the @file@ interpolation function. If the certificate is being generated to be used for a throwaway development environment or other non-critical application, the @tls_private_key@ resource can be used to generate a TLS private key from within Terraform. Only an irreversable secure hash of the private key will be stored in the Terraform state. -}
-    , _subject :: !(Attr Text)
+    , _subject               :: !(Attr Text)
       {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure matches the corresponding block for <cert_request.html> . -}
     , _validity_period_hours :: !(Attr Text)
       {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}

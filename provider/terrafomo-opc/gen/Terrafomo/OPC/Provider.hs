@@ -14,14 +14,14 @@
 --
 module Terrafomo.OPC.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.OPC.Types        as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.OPC.Types as Qual
 
 {- | OPC Terraform provider.
 
@@ -31,13 +31,13 @@ with credentials for the Oracle Public Cloud API. Use the navigation to the
 left to read about the available resources.
 -}
 data OPC = OPC
-    { _endpoint :: !Text
-    , _identity_domain :: !Text
-    , _insecure :: !Text
-    , _max_retries :: !Text
-    , _password :: !Text
+    { _endpoint         :: !Text
+    , _identity_domain  :: !Text
+    , _insecure         :: !Text
+    , _max_retries      :: !Text
+    , _password         :: !Text
     , _storage_endpoint :: !Text
-    , _user :: !Text
+    , _user             :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable OPC

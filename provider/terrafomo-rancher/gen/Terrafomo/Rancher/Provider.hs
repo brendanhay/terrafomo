@@ -14,14 +14,14 @@
 --
 module Terrafomo.Rancher.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Rancher.Types    as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Rancher.Types as Qual
 
 {- | Rancher Terraform provider.
 
@@ -32,7 +32,7 @@ server.
 -}
 data Rancher = Rancher
     { _access_key :: !Text
-    , _api_url :: !Text
+    , _api_url    :: !Text
     , _secret_key :: !Text
     } deriving (Show, Eq, Generic)
 

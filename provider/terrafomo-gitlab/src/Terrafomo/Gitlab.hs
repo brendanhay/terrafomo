@@ -18,5 +18,5 @@ module Terrafomo.Gitlab
     ) where
 
 import Terrafomo
-import Terrafomo.Gitlab.Types
 import Terrafomo.Gitlab.Provider
+import Terrafomo.Gitlab.Types

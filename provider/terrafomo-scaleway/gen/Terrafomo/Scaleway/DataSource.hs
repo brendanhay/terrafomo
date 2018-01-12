@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Scaleway        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Scaleway as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @scaleway_bootscript@ Scaleway datasource.
 
@@ -45,9 +45,9 @@ the @scaleway_server@ resource.
 data BootscriptDataSource = BootscriptDataSource
     { _architecture :: !(Attr Text)
       {- ^ (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
-    , _name :: !(Attr Text)
+    , _name         :: !(Attr Text)
       {- ^ (Optional) Exact name of desired Bootscript -}
-    , _name_filter :: !(Attr Text)
+    , _name_filter  :: !(Attr Text)
       {- ^ (Optional) Regexp to match Bootscript name by -}
     } deriving (Show, Generic)
 
@@ -81,9 +81,9 @@ Use this data source to get the ID of a registered Image for use with the
 data ImageDataSource = ImageDataSource
     { _architecture :: !(Attr Text)
       {- ^ (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
-    , _name :: !(Attr Text)
+    , _name         :: !(Attr Text)
       {- ^ (Optional) Exact name of desired Image -}
-    , _name_filter :: !(Attr Text)
+    , _name_filter  :: !(Attr Text)
       {- ^ (Optional) Regexp to match Image name by -}
     } deriving (Show, Generic)
 

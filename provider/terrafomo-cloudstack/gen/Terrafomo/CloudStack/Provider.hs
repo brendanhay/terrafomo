@@ -14,14 +14,14 @@
 --
 module Terrafomo.CloudStack.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.CloudStack.Types as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
+import qualified Terrafomo.Syntax.Serialize as Qual
 
 {- | CloudStack Terraform provider.
 
@@ -35,13 +35,13 @@ allowed and will not work. Use the navigation to the left to read about the
 available resources.
 -}
 data CloudStack = CloudStack
-    { _api_key :: !Text
-    , _api_url :: !Text
-    , _config :: !Text
+    { _api_key       :: !Text
+    , _api_url       :: !Text
+    , _config        :: !Text
     , _http_get_only :: !Text
-    , _profile :: !Text
-    , _secret_key :: !Text
-    , _timeout :: !Text
+    , _profile       :: !Text
+    , _secret_key    :: !Text
+    , _timeout       :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable CloudStack

@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Circonus        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Circonus as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @circonus_account@ Circonus datasource.
 
@@ -48,7 +48,7 @@ about a specific Circonus Account.
 data AccountDataSource = AccountDataSource
     { _current :: !(Attr Text)
       {- ^ (Optional) Automatically use the current Circonus Account attached to the API token making the request. -}
-    , _id :: !(Attr Text)
+    , _id      :: !(Attr Text)
       {- ^ (Optional) The Circonus ID of a given account. -}
     } deriving (Show, Generic)
 

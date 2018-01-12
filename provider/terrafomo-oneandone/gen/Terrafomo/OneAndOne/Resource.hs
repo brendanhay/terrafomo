@@ -33,18 +33,18 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OneAndOne       as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OneAndOne as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @oneandone_instance_size@ OneAndOne resource.
 
 Fetches a predefined instance type for 1&1 servers
 -}
 data InstanceSizeResource = InstanceSizeResource
-    { _name :: !(Attr Text)
+    { _name   :: !(Attr Text)
       {- ^ -(Optional) Number of cores per processor -}
-    , _ram :: !(Attr Text)
+    , _ram    :: !(Attr Text)
       {- ^ (Optional) Size of ram in GB -}
     , _vcores :: !(Attr Text)
       {- ^ (Optional)  Number of vcores -}
@@ -60,11 +60,11 @@ $(TH.makeResource
 Manages a Public IP on 1&1
 -}
 data IpResource = IpResource
-    { _datacenter :: !(Attr Text)
+    { _datacenter  :: !(Attr Text)
       {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _ip_address :: !(Attr Text)
+    , _ip_address  :: !(Attr Text)
       {- ^ - (Computed) The IP address. -}
-    , _ip_type :: !(Attr Text)
+    , _ip_type     :: !(Attr Text)
       {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
     , _reverse_dns :: !(Attr Text)
       {- ^ (Optional) -}
@@ -80,13 +80,13 @@ $(TH.makeResource
 Manages a Shared Storage on 1&1
 -}
 data ServerResource = ServerResource
-    { _datacenter :: !(Attr Text)
+    { _datacenter      :: !(Attr Text)
       {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
-    , _description :: !(Attr Text)
+    , _description     :: !(Attr Text)
       {- ^ (Optional) Description for the shared storage -}
-    , _name :: !(Attr Text)
+    , _name            :: !(Attr Text)
       {- ^ (Required) The name of the storage -}
-    , _size :: !(Attr Text)
+    , _size            :: !(Attr Text)
       {- ^ (Required) Size of the shared storage -}
     , _storage_servers :: !(Attr Text)
       {- ^ (Optional) List of servers that will have access to the stored storage -}
@@ -102,15 +102,15 @@ $(TH.makeResource
 Manages a VPN on 1&1
 -}
 data VpnResource = VpnResource
-    { _datacenter :: !(Attr Text)
+    { _datacenter    :: !(Attr Text)
       {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _description :: !(Attr Text)
+    , _description   :: !(Attr Text)
       {- ^ (Optional) -}
     , _download_path :: !(Attr Text)
       {- ^ (Optional) -}
-    , _file_name :: !(Attr Text)
+    , _file_name     :: !(Attr Text)
       {- ^ (Optional) -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The name of the VPN -}
     } deriving (Show, Generic)
 

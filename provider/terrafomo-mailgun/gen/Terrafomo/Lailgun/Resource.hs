@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Lailgun         as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Lailgun as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @mailgun_domain@ Lailgun resource.
 
@@ -43,13 +43,13 @@ Provides a Mailgun App resource. This can be used to create and manage
 applications on Mailgun.
 -}
 data DomainResource = DomainResource
-    { _name :: !(Attr Text)
+    { _name          :: !(Attr Text)
       {- ^ (Required) The domain to add to Mailgun -}
     , _smtp_password :: !(Attr Text)
       {- ^ (Required) Password for SMTP authentication -}
-    , _spam_action :: !(Attr Text)
+    , _spam_action   :: !(Attr Text)
       {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
-    , _wildcard :: !(Attr Text)
+    , _wildcard      :: !(Attr Text)
       {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
     } deriving (Show, Generic)
 

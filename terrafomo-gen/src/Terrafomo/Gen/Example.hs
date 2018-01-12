@@ -22,8 +22,7 @@ import Terrafomo.Gen.Text
 import Terrafomo.Syntax.HCL
 
 import Text.Megaparsec              ((<?>))
-import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty), (<$$>), (<$$>),
-                                     (<+>))
+import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty), (<$$>), (<+>))
 
 import qualified Data.Aeson                   as JSON
 import qualified Data.Char                    as Char

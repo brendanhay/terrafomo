@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.Spotinst
-    - Terrafomo.Spotinst.DataSource
     - Terrafomo.Spotinst.Resource
 
   reexported-modules: >

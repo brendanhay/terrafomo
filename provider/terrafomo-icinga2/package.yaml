@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.Icinga2
-    - Terrafomo.Icinga2.DataSource
     - Terrafomo.Icinga2.Resource
 
   reexported-modules: >

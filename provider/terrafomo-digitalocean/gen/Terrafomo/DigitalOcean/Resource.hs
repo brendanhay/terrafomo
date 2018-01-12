@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.DigitalOcean    as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.DigitalOcean as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @digitalocean_certificate@ DigitalOcean resource.
 
@@ -47,11 +47,11 @@ configuration via their ID.
 data CertificateResource = CertificateResource
     { _certificate_chain :: !(Attr Text)
       {- ^ (Optional) The full PEM-formatted trust chain between the certificate authority's certificate and your domain's TLS certificate. -}
-    , _leaf_certificate :: !(Attr Text)
+    , _leaf_certificate  :: !(Attr Text)
       {- ^ (Required) The contents of a PEM-formatted public TLS certificate. -}
-    , _name :: !(Attr Text)
+    , _name              :: !(Attr Text)
       {- ^ (Required) The name of the certificate for identification. -}
-    , _private_key :: !(Attr Text)
+    , _private_key       :: !(Attr Text)
       {- ^ (Required) The contents of a PEM-formatted private-key corresponding to the SSL certificate. -}
     } deriving (Show, Generic)
 
@@ -78,7 +78,7 @@ Provides a DigitalOcean domain resource.
 data DomainResource = DomainResource
     { _ip_address :: !(Attr Text)
       {- ^ (Required) The IP address of the domain. This IP is used to created an initial A record for the domain. It is required upstream by the DigitalOcean API. -}
-    , _name :: !(Attr Text)
+    , _name       :: !(Attr Text)
       {- ^ (Required) The name of the domain -}
     } deriving (Show, Generic)
 
@@ -99,31 +99,31 @@ modify, and delete Droplets. Droplets also support
 </docs/provisioners/index.html> .
 -}
 data DropletResource = DropletResource
-    { _backups :: !(Attr Text)
+    { _backups            :: !(Attr Text)
       {- ^ (Optional) Boolean controlling if backups are made. Defaults to false. -}
-    , _image :: !(Attr Text)
+    , _image              :: !(Attr Text)
       {- ^ (Required) The Droplet image ID or slug. -}
-    , _ipv6 :: !(Attr Text)
+    , _ipv6               :: !(Attr Text)
       {- ^ (Optional) Boolean controlling if IPv6 is enabled. Defaults to false. -}
-    , _monitoring :: !(Attr Text)
+    , _monitoring         :: !(Attr Text)
       {- ^ (Optional) Boolean controlling whether monitoring agent is installed. Defaults to false. -}
-    , _name :: !(Attr Text)
+    , _name               :: !(Attr Text)
       {- ^ (Required) The Droplet name -}
     , _private_networking :: !(Attr Text)
       {- ^ (Optional) Boolean controlling if private networks are enabled. Defaults to false. -}
-    , _region :: !(Attr Text)
+    , _region             :: !(Attr Text)
       {- ^ (Required) The region to start in -}
-    , _resize_disk :: !(Attr Text)
+    , _resize_disk        :: !(Attr Text)
       {- ^ (Optional) Boolean controlling whether to increase the disk size when resizing a Droplet. It defaults to @true@ . When set to @false@ , only the Droplet's RAM and CPU will be resized. Increasing a Droplet's disk size is a permanent change . Increasing only RAM and CPU is reversible. -}
-    , _size :: !(Attr Text)
+    , _size               :: !(Attr Text)
       {- ^ (Required) The instance size to start -}
-    , _ssh_keys :: !(Attr Text)
+    , _ssh_keys           :: !(Attr Text)
       {- ^ (Optional) A list of SSH IDs or fingerprints to enable in the format @[12345, 123456]@ . To retrieve this info, use a tool such as @curl@ with the <https://developers.digitalocean.com/#keys> , to retrieve them. -}
-    , _tags :: !(Attr Text)
+    , _tags               :: !(Attr Text)
       {- ^ (Optional) A list of the tags to label this droplet. A tag resource must exist before it can be associated with a droplet. -}
-    , _user_data :: !(Attr Text)
+    , _user_data          :: !(Attr Text)
       {- ^ (Optional) - A string of the desired User Data for the Droplet. -}
-    , _volume_ids :: !(Attr Text)
+    , _volume_ids         :: !(Attr Text)
       {- ^ (Optional) - A list of the IDs of each </docs/providers/do/r/volume.html> to be attached to the Droplet. -}
     } deriving (Show, Generic)
 
@@ -179,15 +179,15 @@ Provides a DigitalOcean Cloud Firewall resource. This can be used to create,
 modify, and delete Firewalls.
 -}
 data FirewallResource = FirewallResource
-    { _droplet_ids :: !(Attr Text)
+    { _droplet_ids   :: !(Attr Text)
       {- ^ (Optional) - The list of the IDs of the Droplets assigned to the Firewall. -}
-    , _inbound_rule :: !(Attr Text)
+    , _inbound_rule  :: !(Attr Text)
       {- ^ (Optional) The inbound access rule block for the Firewall. The @inbound_rule@ block is documented below. -}
-    , _name :: !(Attr Text)
+    , _name          :: !(Attr Text)
       {- ^ (Required) The Firewall name -}
     , _outbound_rule :: !(Attr Text)
       {- ^ (Optional) The outbound access rule block for the Firewall. The @outbound_rule@ block is documented below. -}
-    , _tags :: !(Attr Text)
+    , _tags          :: !(Attr Text)
       {- ^ (Optional) - The names of the Tags assigned to the Firewall. -}
     } deriving (Show, Generic)
 
@@ -225,7 +225,7 @@ static IP addresses that can be mapped to one of your Droplets.
 data FloatingIpResource = FloatingIpResource
     { _droplet_id :: !(Attr Text)
       {- ^ (Optional) The ID of Droplet that the Floating IP will be assigned to. -}
-    , _region :: !(Attr Text)
+    , _region     :: !(Attr Text)
       {- ^ (Required) The region that the Floating IP is reserved to. -}
     } deriving (Show, Generic)
 
@@ -245,23 +245,23 @@ Provides a DigitalOcean Load Balancer resource. This can be used to create,
 modify, and delete Load Balancers.
 -}
 data LoadbalancerResource = LoadbalancerResource
-    { _algorithm :: !(Attr Text)
+    { _algorithm              :: !(Attr Text)
       {- ^ (Optional) The load balancing algorithm used to determine which backend Droplet will be selected by a client. It must be either @round_robin@ or @least_connections@ . The default value is @round_robin@ . -}
-    , _droplet_ids :: !(Attr Text)
+    , _droplet_ids            :: !(Attr Text)
       {- ^ (Optional) - A list of the IDs of each droplet to be attached to the Load Balancer. -}
-    , _droplet_tag :: !(Attr Text)
+    , _droplet_tag            :: !(Attr Text)
       {- ^ (Optional) - The name of a Droplet tag corresponding to Droplets to be assigned to the Load Balancer. -}
-    , _forwarding_rule :: !(Attr Text)
+    , _forwarding_rule        :: !(Attr Text)
       {- ^ (Required) A list of @forwarding_rule@ to be assigned to the Load Balancer. The @forwarding_rule@ block is documented below. -}
-    , _healthcheck :: !(Attr Text)
+    , _healthcheck            :: !(Attr Text)
       {- ^ (Optional) A @healthcheck@ block to be assigned to the Load Balancer. The @healthcheck@ block is documented below. Only 1 healthcheck is allowed. -}
-    , _name :: !(Attr Text)
+    , _name                   :: !(Attr Text)
       {- ^ (Required) The Load Balancer name -}
     , _redirect_http_to_https :: !(Attr Text)
       {- ^ (Optional) A boolean value indicating whether HTTP requests to the Load Balancer on port 80 will be redirected to HTTPS on port 443. Default value is @false@ . -}
-    , _region :: !(Attr Text)
+    , _region                 :: !(Attr Text)
       {- ^ (Required) The region to start in -}
-    , _sticky_sessions :: !(Attr Text)
+    , _sticky_sessions        :: !(Attr Text)
       {- ^ (Optional) A @sticky_sessions@ block to be assigned to the Load Balancer. The @sticky_sessions@ block is documented below. Only 1 sticky_sessions block is allowed. -}
     } deriving (Show, Generic)
 
@@ -282,21 +282,21 @@ $(TH.makeResource
 Provides a DigitalOcean DNS record resource.
 -}
 data RecordResource = RecordResource
-    { _domain :: !(Attr Text)
+    { _domain   :: !(Attr Text)
       {- ^ (Required) The domain to add the record to -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Optional) The name of the record -}
-    , _port :: !(Attr Text)
+    , _port     :: !(Attr Text)
       {- ^ (Optional) The port of the record, for SRV records. -}
     , _priority :: !(Attr Text)
       {- ^ (Optional) The priority of the record, for MX and SRV records. -}
-    , _ttl :: !(Attr Text)
+    , _ttl      :: !(Attr Text)
       {- ^ (Optional) The time to live for the record, in seconds. -}
-    , _type' :: !(Attr Text)
+    , _type'    :: !(Attr Text)
       {- ^ (Required) The type of record -}
-    , _value :: !(Attr Text)
+    , _value    :: !(Attr Text)
       {- ^ (Optional) The value of the record -}
-    , _weight :: !(Attr Text)
+    , _weight   :: !(Attr Text)
       {- ^ (Optional) The weight of the record, for SRV records. -}
     } deriving (Show, Generic)
 
@@ -319,7 +319,7 @@ Droplet access. Keys created with this resource can be referenced in your
 droplet configuration via their ID or fingerprint.
 -}
 data SshKeyResource = SshKeyResource
-    { _name :: !(Attr Text)
+    { _name       :: !(Attr Text)
       {- ^ (Required) The name of the SSH key for identification -}
     , _public_key :: !(Attr Text)
       {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
@@ -375,11 +375,11 @@ data VolumeResource = VolumeResource
       {- ^ (Optional) A free-form text field up to a limit of 1024 bytes to describe a block storage volume. -}
     , _droplet_ids :: !(Attr Text)
       {- ^ - (Computed) A list of associated droplet ids -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required) A name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. -}
-    , _region :: !(Attr Text)
+    , _region      :: !(Attr Text)
       {- ^ (Required) The region that the block storage volume will be created in. -}
-    , _size :: !(Attr Text)
+    , _size        :: !(Attr Text)
       {- ^ (Required) The size of the block storage volume in GiB. -}
     } deriving (Show, Generic)
 

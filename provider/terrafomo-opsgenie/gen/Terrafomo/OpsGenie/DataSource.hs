@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.OpsGenie        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.OpsGenie as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @opsgenie_user@ OpsGenie datasource.
 

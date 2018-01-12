@@ -18,5 +18,5 @@ module Terrafomo.Kubernetes
     ) where
 
 import Terrafomo
-import Terrafomo.Kubernetes.Types
 import Terrafomo.Kubernetes.Provider
+import Terrafomo.Kubernetes.Types

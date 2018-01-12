@@ -14,14 +14,14 @@
 --
 module Terrafomo.AliCloud.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.AliCloud.Types   as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.AliCloud.Types as Qual
 
 {- | AliCloud Terraform provider.
 
@@ -32,7 +32,7 @@ read about the available resources.
 -}
 data AliCloud = AliCloud
     { _access_key :: !Text
-    , _region :: !Text
+    , _region     :: !Text
     , _secret_key :: !Text
     } deriving (Show, Eq, Generic)
 

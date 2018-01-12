@@ -18,5 +18,5 @@ module Terrafomo.VSphere
     ) where
 
 import Terrafomo
-import Terrafomo.VSphere.Types
 import Terrafomo.VSphere.Provider
+import Terrafomo.VSphere.Types

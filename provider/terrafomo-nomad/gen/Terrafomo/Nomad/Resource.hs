@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Nomad           as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Nomad as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @nomad_job@ Nomad resource.
 
@@ -48,11 +48,11 @@ creation. This resource is ideal for the latter type of job, but can be used
 to manage any job within Nomad.
 -}
 data JobResource = JobResource
-    { _deregister_on_destroy :: !(Attr Text)
+    { _deregister_on_destroy   :: !(Attr Text)
       {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
     , _deregister_on_id_change :: !(Attr Text)
       {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
-    , _jobspec :: !(Attr Text)
+    , _jobspec                 :: !(Attr Text)
       {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Generic)
 

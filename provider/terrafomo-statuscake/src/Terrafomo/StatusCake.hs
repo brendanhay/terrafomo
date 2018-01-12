@@ -18,5 +18,5 @@ module Terrafomo.StatusCake
     ) where
 
 import Terrafomo
-import Terrafomo.StatusCake.Types
 import Terrafomo.StatusCake.Provider
+import Terrafomo.StatusCake.Types

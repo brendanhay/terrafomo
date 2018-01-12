@@ -14,14 +14,14 @@
 --
 module Terrafomo.Gitlab.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Gitlab.Types     as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Gitlab.Types as Qual
 
 {- | Gitlab Terraform provider.
 
@@ -30,10 +30,10 @@ It needs to be configured with the proper credentials before it can be used.
 Use the navigation to the left to read about the available resources.
 -}
 data Gitlab = Gitlab
-    { _base_url :: !Text
+    { _base_url    :: !Text
     , _cacert_file :: !Text
-    , _insecure :: !Text
-    , _token :: !Text
+    , _insecure    :: !Text
+    , _token       :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Gitlab

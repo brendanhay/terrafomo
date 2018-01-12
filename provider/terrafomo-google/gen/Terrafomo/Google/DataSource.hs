@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Google          as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Google as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @google_active_folder@ Google datasource.
 
@@ -44,7 +44,7 @@ Get an active folder within GCP by @display_name@ and @parent@ .
 data ActiveFolderDataSource = ActiveFolderDataSource
     { _display_name :: !(Attr Text)
       {- ^ (Required) The folder's display name. -}
-    , _parent :: !(Attr Text)
+    , _parent       :: !(Attr Text)
       {- ^ (Required) The resource name of the parent Folder or Organization. -}
     } deriving (Show, Generic)
 
@@ -66,7 +66,7 @@ provider.
 data ClientConfigDataSource = ClientConfigDataSource
     { _project :: !(Attr Text)
       {- ^ - The ID of the project to apply any resources to. -}
-    , _region :: !(Attr Text)
+    , _region  :: !(Attr Text)
       {- ^ - The region to operate under. -}
     } deriving (Show, Generic)
 
@@ -83,11 +83,11 @@ official
 documentation.
 -}
 data ComputeAddressDataSource = ComputeAddressDataSource
-    { _name :: !(Attr Text)
+    { _name    :: !(Attr Text)
       {- ^ (Required) A unique name for the resource, required by GCE. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(Attr Text)
+    , _region  :: !(Attr Text)
       {- ^ (Optional) The Region in which the created address reside. If it is not provided, the provider region is used. -}
     } deriving (Show, Generic)
 
@@ -112,11 +112,11 @@ Get a Compute Instance Group within GCE. For more information, see
 and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
 -}
 data ComputeInstanceGroupDataSource = ComputeInstanceGroupDataSource
-    { _name :: !(Attr Text)
+    { _name    :: !(Attr Text)
       {- ^ (Required) The name of the instance group. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone :: !(Attr Text)
+    , _zone    :: !(Attr Text)
       {- ^ (Required) The zone of the instance group. -}
     } deriving (Show, Generic)
 
@@ -148,7 +148,7 @@ https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_
 data ComputeLbIpRangesDataSource = ComputeLbIpRangesDataSource
     { _http_ssl_tcp_internal :: !(Attr Text)
       {- ^ - The IP ranges used for health checks when HTTP(S), SSL proxy, TCP proxy, and Internal load balancing is used -}
-    , _network :: !(Attr Text)
+    , _network               :: !(Attr Text)
       {- ^ - The IP ranges used for health checks when Network load balancing is used -}
     } deriving (Show, Generic)
 
@@ -162,7 +162,7 @@ $(TH.makeDataSource
 Get a network within GCE from its name.
 -}
 data ComputeNetworkDataSource = ComputeNetworkDataSource
-    { _name :: !(Attr Text)
+    { _name    :: !(Attr Text)
       {- ^ (Required) The name of the network. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
@@ -191,11 +191,11 @@ $(TH.makeDataSource
 Get a subnetwork within GCE from its name and region.
 -}
 data ComputeSubnetworkDataSource = ComputeSubnetworkDataSource
-    { _name :: !(Attr Text)
+    { _name    :: !(Attr Text)
       {- ^ - The name of the subnetwork. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(Attr Text)
+    , _region  :: !(Attr Text)
       {- ^ (Optional) The region this subnetwork has been created in. If unspecified, this defaults to the region configured in the provider. -}
     } deriving (Show, Generic)
 
@@ -253,7 +253,7 @@ a given project.
 data ContainerEngineVersionsDataSource = ContainerEngineVersionsDataSource
     { _project :: !(Attr Text)
       {- ^ (optional) - ID of the project to list available cluster versions for. Should match the project the cluster will be deployed to. Defaults to the project that the provider is authenticated with. -}
-    , _zone :: !(Attr Text)
+    , _zone    :: !(Attr Text)
       {- ^ (required) - Zone to list available cluster versions for. Should match the zone the cluster will be deployed in. -}
     } deriving (Show, Generic)
 
@@ -280,7 +280,7 @@ information see <https://cloud.google.com/dns/zones/> and
 <https://cloud.google.com/dns/api/v1/managedZones> .
 -}
 data DnsManagedZoneDataSource = DnsManagedZoneDataSource
-    { _name :: !(Attr Text)
+    { _name    :: !(Attr Text)
       {- ^ (Required) A unique name for the resource. -}
     , _project :: !(Attr Text)
       {- ^ (Optional) ID of the project for the Google Cloud DNS zone. -}
@@ -330,15 +330,15 @@ have a Google account. For more info about signed URL's is available
 <https://cloud.google.com/storage/docs/access-control/signed-urls> .
 -}
 data StorageObjectSignedUrlDataSource = StorageObjectSignedUrlDataSource
-    { _bucket :: !(Attr Text)
+    { _bucket      :: !(Attr Text)
       {- ^ (Required) The name of the bucket to read the object from -}
     , _credentials :: !(Attr Text)
       {- ^ (Optional) What Google service account credentials json should be used to sign the URL. This data source checks the following locations for credentials, in order of preference: data source @credentials@ attribute, provider @credentials@ attribute and finally the GOOGLE_APPLICATION_CREDENTIALS environment variable. -}
-    , _duration :: !(Attr Text)
+    , _duration    :: !(Attr Text)
       {- ^ (Optional) For how long shall the signed URL be valid (defaults to 1 hour - i.e. @1h@ ). See <https://golang.org/pkg/time/#ParseDuration> for info on valid duration formats. -}
     , _http_method :: !(Attr Text)
       {- ^ (Optional) What HTTP Method will the signed URL allow (defaults to @GET@ ) -}
-    , _path :: !(Attr Text)
+    , _path        :: !(Attr Text)
       {- ^ (Required) The full path to the object inside the bucket -}
     } deriving (Show, Generic)
 

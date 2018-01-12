@@ -34,26 +34,26 @@ import GHC.Show     (Show)
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @archive_file@ Archive datasource.
 
 Generates an archive from content, a file, or directory of files.
 -}
 data FileDataSource = FileDataSource
-    { _output_path :: !(Attr Text)
+    { _output_path             :: !(Attr Text)
       {- ^ (Required) The output of the archive file. -}
-    , _source :: !(Attr Text)
+    , _source                  :: !(Attr Text)
       {- ^ (Optional) Specifies attributes of a single source file to include into the archive. -}
-    , _source_content :: !(Attr Text)
+    , _source_content          :: !(Attr Text)
       {- ^ (Optional) Add only this content to the archive with @source_content_filename@ as the filename. -}
     , _source_content_filename :: !(Attr Text)
       {- ^ (Optional) Set this as the filename when using @source_content@ . -}
-    , _source_dir :: !(Attr Text)
+    , _source_dir              :: !(Attr Text)
       {- ^ (Optional) Package entire contents of this directory into the archive. -}
-    , _source_file :: !(Attr Text)
+    , _source_file             :: !(Attr Text)
       {- ^ (Optional) Package this file into the archive. -}
-    , _type' :: !(Attr Text)
+    , _type'                   :: !(Attr Text)
       {- ^ (Required) The type of archive to generate. NOTE: @zip@ is supported. -}
     } deriving (Show, Generic)
 

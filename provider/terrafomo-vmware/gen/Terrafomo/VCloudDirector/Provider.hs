@@ -14,13 +14,13 @@
 --
 module Terrafomo.VCloudDirector.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
+import qualified Terrafomo.Syntax.Provider      as Qual
+import qualified Terrafomo.Syntax.Serialize     as Qual
 import qualified Terrafomo.VCloudDirector.Types as Qual
 
 {- | VCloudDirector Terraform provider.
@@ -34,13 +34,13 @@ undergo significant changes as the community improves it.
 -}
 data VCloudDirector = VCloudDirector
     { _allow_unverified_ssl :: !Text
-    , _maxRetryTimeout :: !Text
-    , _max_retry_timeout :: !Text
-    , _org :: !Text
-    , _password :: !Text
-    , _url :: !Text
-    , _user :: !Text
-    , _vdc :: !Text
+    , _maxRetryTimeout      :: !Text
+    , _max_retry_timeout    :: !Text
+    , _org                  :: !Text
+    , _password             :: !Text
+    , _url                  :: !Text
+    , _user                 :: !Text
+    , _vdc                  :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable VCloudDirector

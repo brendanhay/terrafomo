@@ -14,14 +14,14 @@
 --
 module Terrafomo.Consul.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
+import qualified Terrafomo.Consul.Types     as Qual
+import qualified Terrafomo.Syntax.Provider  as Qual
 import qualified Terrafomo.Syntax.Serialize as Qual
-import qualified Terrafomo.Consul.Types as Qual
 
 {- | Consul Terraform provider.
 
@@ -32,14 +32,14 @@ defaults for all arguments. Use the navigation to the left to read about the
 available resources.
 -}
 data Consul = Consul
-    { _address :: !Text
-    , _ca_file :: !Text
-    , _cert_file :: !Text
+    { _address    :: !Text
+    , _ca_file    :: !Text
+    , _cert_file  :: !Text
     , _datacenter :: !Text
-    , _http_auth :: !Text
-    , _key_file :: !Text
-    , _scheme :: !Text
-    , _token :: !Text
+    , _http_auth  :: !Text
+    , _key_file   :: !Text
+    , _scheme     :: !Text
+    , _token      :: !Text
     } deriving (Show, Eq, Generic)
 
 instance Hashable Consul

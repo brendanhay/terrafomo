@@ -137,15 +137,21 @@ main = do
     runScript $ do
         echo "Starting ..."
 
-        tmpls    <- loadTemplates opts
-        provider <- loadProvider opts
-        dir      <- renderProvider tmpls provider
+        tmpls       <- loadTemplates   opts
+        provider    <- loadProvider    opts
+        datasources <- loadDataSources opts
+        resources   <- loadResources   opts
 
-        renderSchemas tmpls dir provider Resource
-            =<< loadResources opts
+        let anyDataSources = not (null datasources)
+            anyResources   = not (null resources)
 
-        renderSchemas tmpls dir provider DataSource
-            =<< loadDataSources opts
+        dir         <- renderProvider tmpls provider anyDataSources anyResources
+
+        when anyDataSources $
+            renderSchemas tmpls dir provider DataSource datasources
+
+        when anyResources $
+            renderSchemas tmpls dir provider Resource resources
 
         echo "Done."
 
@@ -228,13 +234,15 @@ parseSchema parser Path{markdownFile} = do
 renderProvider
     :: Templates EDE.Template
     -> Provider (Maybe Schema)
+    -> Bool -- ^ Any datasource module?
+    -> Bool -- ^ Any resource module?
     -> Script FilePath
-renderProvider tmpls p@Provider{providerPackage, providerDatatype} = do
+renderProvider tmpls p@Provider{providerPackage, providerDatatype} d r = do
     let dir = maybe "terrafomo" (Path.combine "provider" . Text.unpack)
                     providerPackage
 
     Fold.for_ providerPackage $
-        const (renderPackage tmpls dir p)
+        const (renderPackage tmpls dir p d r)
 
     when (isJust providerDatatype) $
         hoistEither (Render.provider tmpls p)
@@ -246,8 +254,10 @@ renderPackage
     :: Templates EDE.Template
     -> FilePath
     -> Provider (Maybe Schema)
+    -> Bool -- ^ Any datasource module?
+    -> Bool -- ^ Any resource module?
     -> Script ()
-renderPackage tmpls dir p = do
+renderPackage tmpls dir p d r = do
     let packageFile = dir    </> "package" <.> "yaml"
         srcDir      = dir    </> "src"
         mainFile    = srcDir </> pathNS (mainNS  p)
@@ -256,7 +266,7 @@ renderPackage tmpls dir p = do
     createDirectory dir
 
     echo ("Writing " ++ packageFile)
-    hoistEither (Render.package tmpls p)
+    hoistEither (Render.package tmpls p d r)
         >>= scriptIO . LText.writeFile packageFile
 
     mainExists <- scriptIO (Dir.doesFileExist mainFile)
@@ -278,12 +288,10 @@ renderSchemas
     -> SchemaType
     -> [Schema]
     -> Script ()
-renderSchemas tmpls dir p typ xs
-    | null xs   = pure ()
-    | otherwise = do
-        let writeModule = writeNS (dir </> "gen")
-        hoistEither (Render.schemas tmpls p typ xs)
-            >>= writeModule
+renderSchemas tmpls dir p typ xs = do
+    let writeModule = writeNS (dir </> "gen")
+    hoistEither (Render.schemas tmpls p typ xs)
+        >>= writeModule
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do

@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.PowerDNS
-    - Terrafomo.PowerDNS.DataSource
     - Terrafomo.PowerDNS.Resource
 
   reexported-modules: >

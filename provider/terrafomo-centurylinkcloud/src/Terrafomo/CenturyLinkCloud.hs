@@ -18,5 +18,5 @@ module Terrafomo.CenturyLinkCloud
     ) where
 
 import Terrafomo
-import Terrafomo.CenturyLinkCloud.Types
 import Terrafomo.CenturyLinkCloud.Provider
+import Terrafomo.CenturyLinkCloud.Types

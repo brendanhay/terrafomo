@@ -18,5 +18,5 @@ module Terrafomo.Cloudflare
     ) where
 
 import Terrafomo
-import Terrafomo.Cloudflare.Types
 import Terrafomo.Cloudflare.Provider
+import Terrafomo.Cloudflare.Types

@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.MySQL
-    - Terrafomo.MySQL.DataSource
     - Terrafomo.MySQL.Resource
 
   reexported-modules: >

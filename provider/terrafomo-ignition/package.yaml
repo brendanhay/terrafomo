@@ -20,7 +20,6 @@ library:
   exposed-modules:
     - Terrafomo.Ignition
     - Terrafomo.Ignition.DataSource
-    - Terrafomo.Ignition.Resource
 
   reexported-modules: >
     terrafomo:Terrafomo.Format

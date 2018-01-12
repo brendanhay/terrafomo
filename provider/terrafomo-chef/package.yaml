@@ -19,7 +19,6 @@ library:
 
   exposed-modules:
     - Terrafomo.Chef
-    - Terrafomo.Chef.DataSource
     - Terrafomo.Chef.Resource
 
   reexported-modules: >

@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.ProfitBricks    as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.ProfitBricks as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @profitbricks_datacenter@ ProfitBricks datasource.
 
@@ -50,7 +50,7 @@ only one result.
 data DatacenterDataSource = DatacenterDataSource
     { _location :: !(Attr Text)
       {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
     } deriving (Show, Generic)
 
@@ -72,11 +72,11 @@ image which can then be used to provision a server.
 data ImageDataSource = ImageDataSource
     { _location :: !(Attr Text)
       {- ^ (Optional) Id of the existing image's location. -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) Name or part of the name of an existing image that you want to search for. -}
-    , _type' :: !(Attr Text)
+    , _type'    :: !(Attr Text)
       {- ^ (Optional) The image type, HDD or CD-ROM. -}
-    , _version :: !(Attr Text)
+    , _version  :: !(Attr Text)
       {- ^ (Optional) Version of the image (see details below). -}
     } deriving (Show, Generic)
 
@@ -98,7 +98,7 @@ location which can then be used elsewhere in the configuration.
 data LocationDataSource = LocationDataSource
     { _feature :: !(Attr Text)
       {- ^ (Optional) A desired feature that the location must be able to provide. -}
-    , _name :: !(Attr Text)
+    , _name    :: !(Attr Text)
       {- ^ (Required) Name or part of the location name to search for. -}
     } deriving (Show, Generic)
 
@@ -124,7 +124,7 @@ please refine your search string so that it is specific enough to return
 only one result.
 -}
 data ResourceDataSource = ResourceDataSource
-    { _resource_id :: !(Attr Text)
+    { _resource_id   :: !(Attr Text)
       {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
     , _resource_type :: !(Attr Text)
       {- ^ (Optional) The specific type of resources to retrieve information about. -}
@@ -148,9 +148,9 @@ snapshot which can then be used to provision a server.
 data SnapshotDataSource = SnapshotDataSource
     { _location :: !(Attr Text)
       {- ^ (Optional) Id of the existing snapshot's location. -}
-    , _name :: !(Attr Text)
+    , _name     :: !(Attr Text)
       {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
-    , _size :: !(Attr Text)
+    , _size     :: !(Attr Text)
       {- ^ (Optional) The size of the snapshot to look for. -}
     } deriving (Show, Generic)
 

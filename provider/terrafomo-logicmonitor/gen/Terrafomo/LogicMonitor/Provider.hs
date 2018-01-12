@@ -14,14 +14,14 @@
 --
 module Terrafomo.LogicMonitor.Provider where
 
-import Data.Text     (Text)
 import Data.Hashable (Hashable)
+import Data.Text     (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Syntax.Serialize as Qual
 import qualified Terrafomo.LogicMonitor.Types as Qual
+import qualified Terrafomo.Syntax.Provider    as Qual
+import qualified Terrafomo.Syntax.Serialize   as Qual
 
 {- | LogicMonitor Terraform provider.
 
@@ -31,7 +31,7 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data LogicMonitor = LogicMonitor
-    { _api_id :: !Text
+    { _api_id  :: !Text
     , _api_key :: !Text
     , _company :: !Text
     } deriving (Show, Eq, Generic)

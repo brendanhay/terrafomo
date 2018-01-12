@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Scaleway        as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Scaleway as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @scaleway_ip@ Scaleway resource.
 
@@ -69,7 +69,7 @@ and deleted. For additional details please refer to
 data SecurityGroupResource = SecurityGroupResource
     { _description :: !(Attr Text)
       {- ^ (Required) description of security group -}
-    , _name :: !(Attr Text)
+    , _name        :: !(Attr Text)
       {- ^ (Required) name of security group -}
     } deriving (Show, Generic)
 
@@ -90,15 +90,15 @@ created, updated and deleted. For additional details please refer to
 <https://developer.scaleway.com/#security-groups-manage-rules> .
 -}
 data SecurityGroupRuleResource = SecurityGroupRuleResource
-    { _action :: !(Attr Text)
+    { _action         :: !(Attr Text)
       {- ^ (Required) action of rule ( @accept@ , @drop@ ) -}
-    , _direction :: !(Attr Text)
+    , _direction      :: !(Attr Text)
       {- ^ (Required) direction of rule ( @inbound@ , @outbound@ ) -}
-    , _ip_range :: !(Attr Text)
+    , _ip_range       :: !(Attr Text)
       {- ^ (Required) ip_range of rule -}
-    , _port :: !(Attr Text)
+    , _port           :: !(Attr Text)
       {- ^ (Optional) port of the rule -}
-    , _protocol :: !(Attr Text)
+    , _protocol       :: !(Attr Text)
       {- ^ (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ ) -}
     , _security_group :: !(Attr Text)
       {- ^ (Required) the security group which should be associated with this rule -}
@@ -121,29 +121,29 @@ For additional details please refer to
 <https://developer.scaleway.com/#servers> .
 -}
 data ServerResource = ServerResource
-    { _bootscript :: !(Attr Text)
+    { _bootscript          :: !(Attr Text)
       {- ^ (Optional) server bootscript -}
     , _dynamic_ip_required :: !(Attr Text)
       {- ^ (Optional) make server publicly available -}
-    , _enable_ipv6 :: !(Attr Text)
+    , _enable_ipv6         :: !(Attr Text)
       {- ^ (Optional) enable ipv6 -}
-    , _image :: !(Attr Text)
+    , _image               :: !(Attr Text)
       {- ^ (Required) base image of server -}
-    , _name :: !(Attr Text)
+    , _name                :: !(Attr Text)
       {- ^ (Required) name of server -}
-    , _public_ipv6 :: !(Attr Text)
+    , _public_ipv6         :: !(Attr Text)
       {- ^ - (Read Only) if @enable_ipv6@ is set this contains the ipv6 address of your instance -}
-    , _security_group :: !(Attr Text)
+    , _security_group      :: !(Attr Text)
       {- ^ (Optional) assign security group to server -}
-    , _state :: !(Attr Text)
+    , _state               :: !(Attr Text)
       {- ^ (Optional) allows you to define the desired state of your server. Valid values include ( @stopped@ , @running@ ) -}
-    , _state_detail :: !(Attr Text)
+    , _state_detail        :: !(Attr Text)
       {- ^ - (Read Only) contains details from the scaleway API the state of your instance -}
-    , _tags :: !(Attr Text)
+    , _tags                :: !(Attr Text)
       {- ^ (Optional) list of tags for server -}
-    , _type' :: !(Attr Text)
+    , _type'               :: !(Attr Text)
       {- ^ (Required) type of server -}
-    , _volume :: !(Attr Text)
+    , _volume              :: !(Attr Text)
       {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Generic)
 
@@ -182,13 +182,13 @@ For additional details please refer to
 <https://developer.scaleway.com/#volumes> .
 -}
 data VolumeResource = VolumeResource
-    { _name :: !(Attr Text)
+    { _name       :: !(Attr Text)
       {- ^ (Required) name of volume -}
-    , _server :: !(Attr Text)
+    , _server     :: !(Attr Text)
       {- ^ - (Read Only) the @scaleway_server@ instance which has this volume mounted right now -}
     , _size_in_gb :: !(Attr Text)
       {- ^ (Required) size of the volume in GB -}
-    , _type' :: !(Attr Text)
+    , _type'      :: !(Attr Text)
       {- ^ (Required) type of volume -}
     } deriving (Show, Generic)
 

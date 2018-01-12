@@ -33,24 +33,24 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.Dyn             as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.Dyn as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @dyn_record@ Dyn resource.
 
 Provides a Dyn DNS record resource.
 -}
 data RecordResource = RecordResource
-    { _name :: !(Attr Text)
+    { _name  :: !(Attr Text)
       {- ^ (Required) The name of the record. -}
-    , _ttl :: !(Attr Text)
+    , _ttl   :: !(Attr Text)
       {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
     , _type' :: !(Attr Text)
       {- ^ (Required) The type of the record. -}
     , _value :: !(Attr Text)
       {- ^ (Required) The value of the record. -}
-    , _zone :: !(Attr Text)
+    , _zone  :: !(Attr Text)
       {- ^ (Required) The DNS zone to add the record to. -}
     } deriving (Show, Generic)
 

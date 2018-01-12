@@ -18,5 +18,5 @@ module Terrafomo.Fastly
     ) where
 
 import Terrafomo
-import Terrafomo.Fastly.Types
 import Terrafomo.Fastly.Provider
+import Terrafomo.Fastly.Types

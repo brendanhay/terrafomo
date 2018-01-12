@@ -33,9 +33,9 @@ import GHC.Show     (Show)
 
 import Terrafomo.Syntax.Attribute (Attr, Computed)
 
+import qualified Terrafomo.DigitalOcean    as Qual
 import qualified Terrafomo.Syntax.Provider as Qual
-import qualified Terrafomo.DigitalOcean as Qual
-import qualified Terrafomo.Syntax.TH as TH
+import qualified Terrafomo.Syntax.TH       as TH
 
 {- | The @digitalocean_image@ DigitalOcean datasource.
 
