@@ -69,15 +69,13 @@ evalTerraformT = fmap snd . runTerraformT
 -- FIXME: additional validation logic can run when storing a ref,
 -- for example checking the reference changes exist, etc.
 
+-- The equality constraint ensures either 'Resource' or 'IsResource' can be
+-- used interchangeably here with no ambiguity.
 resource
     :: ( Monad m
        , Hashable b
        , IsResource p b a
-       , a ~ Schema r
-         -- This constraint ensures either 'Resource' or 'IsResource' can be
-         -- used interchangeably here with no ambiguity.
-
-
+       , Schema r ~ a
        , HCL.ToValue b
        , HCL.ToValue (Resource Alias (Schema r))
        )
@@ -101,7 +99,7 @@ resource name (newResource -> x@Resource{_provider, _type, _schema}) = do
 
     pure (Ref key)
 
--- -- FIXME: move to Syntax.Resource
+ -- FIXME: move to Syntax.Resource
 
 -- Depends on is only used to set the actual dependencies from a value like:
 -- dependsOn (resource "foo" def)
@@ -114,23 +112,22 @@ dependsOn
     -> Resource b a
 dependsOn (Ref key) = (Resource.dependsOn %~ Set.insert key) . newResource
 
--- preventDestroy
---     :: HasMeta a
---     => Bool
---     -> a
---     -> a
--- preventDestroy = Lens.set Resource.preventDestroy
+preventDestroy
+    :: IsResource p b a
+    -> p
+    -> Resource b a
+preventDestroy b = Lens.set Resource.preventDestroy b . newResource
 
--- createBeforeDestroy
---     :: HasMeta (Schema r)
---     => Bool
---     -> Schema r
---     -> Schema r
--- createBeforeDestroy = Lens.set Resource.createBeforeDestroy
+createBeforeDestroy
+    :: IsResource p b a
+    => Bool
+    -> p
+    -> Resource b a
+createBeforeDestroy b = Lens.set Resource.createBeforeDestroy b . newResource
 
--- ignoreChange
---     :: HasMeta (Schema r)
---     => Change
---     -> Schema r
---     -> Schema r
--- ignoreChange x = Resource.ignoreChanges %~ Set.insert x
+ignoreChange
+    :: IsResource p b a
+    => Change
+    -> p
+    -> Resource b a
+ignoreChange x = (Resource.ignoreChanges %~ Set.insert x) . newResource

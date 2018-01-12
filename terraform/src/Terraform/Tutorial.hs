@@ -61,7 +61,6 @@ import Terraform.Monad
 --
 -- * provider aliases
 
-
 -- Equivalent to: @provider "aws" { alias = "west" }@
 -- west :: AWS
 -- west = AWS.provider
@@ -84,13 +83,14 @@ example = do
         resource "mybucket" $
             AWS.resource_s3_bucket
                 { AWS.bucket = Just "foo"
-                }
+                } & preventDestroy True
+                  & createBeforeDestroy True
 
     bucket2 <-
         resource "mybucket2" $
             AWS.resource_s3_bucket
                 { AWS.bucket = Just "bar"
-                }
+                } & preventDestroy True
 
     myinstance <-
         resource "myinstance" $
@@ -100,9 +100,6 @@ example = do
                 , AWS.tags                        = Just common
                 } & dependsOn bucket2
                   & dependsOn bucket1
---                  & ignoreChange "ami"
-
-  -- example of modifying the provider
-  --     have the provider in the metadata again?
+                  & ignoreChange "ami"
 
     pure ()
