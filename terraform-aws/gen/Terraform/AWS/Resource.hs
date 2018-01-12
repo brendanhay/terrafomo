@@ -12,5 +12,3 @@ import Terraform.AWS.Resource.M04 as Export
 import Terraform.AWS.Resource.M05 as Export
 import Terraform.AWS.Resource.M06 as Export
 import Terraform.AWS.Resource.M07 as Export
-import Terraform.AWS.Resource.M08 as Export
-import Terraform.AWS.Resource.M09 as Export

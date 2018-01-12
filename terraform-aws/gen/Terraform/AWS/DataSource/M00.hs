@@ -28,7 +28,7 @@ import qualified Terraform.Syntax.TH as TH
 -- Use this data source to get a list of AMI IDs matching the specified criteria.
 data Ami_Ids_DataSource = Ami_Ids_DataSource
     { executable_users :: !(Attr Text)
-      {- ^ (Optional) Limit search to users with launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
+      {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
     , filter :: !(Attr Text)
       {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
     , name_regex :: !(Attr Text)
@@ -247,7 +247,7 @@ $(TH.makeDataSource
 
 -- | The @aws_db_snapshot@ AWS datasource.
 --
--- Use this data source to get information about a DB Snapshot for use when provisioning DB instances ~> This data source does not apply to snapshots created on Aurora DB clusters.
+-- Use this data source to get information about a DB Snapshot for use when provisioning DB instances ~> NOTE: This data source does not apply to snapshots created on Aurora DB clusters.
 data Db_Snapshot_DataSource = Db_Snapshot_DataSource
     { db_instance_identifier :: !(Attr Text)
       {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
@@ -663,7 +663,7 @@ $(TH.makeDataSource
 
 -- | The @aws_kms_ciphertext@ AWS datasource.
 --
--- The KMS ciphertext data source allows you to encrypt plaintext into ciphertext by using an AWS KMS customer master key. ~> All arguments including the plaintext be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
+-- The KMS ciphertext data source allows you to encrypt plaintext into ciphertext by using an AWS KMS customer master key. ~> Note: All arguments including the plaintext be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Kms_Ciphertext_DataSource = Kms_Ciphertext_DataSource
     { context :: !(Attr Text)
       {- ^ (Optional) An optional mapping that makes up the encryption context. -}
@@ -686,7 +686,7 @@ $(TH.makeDataSource
 
 -- | The @aws_lb@ AWS datasource.
 --
--- ~>  @aws_alb@ is known as @aws_lb@ . The functionality is identical. Provides information about a Load Balancer. This data source can prove useful when a module accepts an LB as an input variable and needs to, for example, determine the security groups associated with it, etc.
+-- ~> Note:  @aws_alb@ is known as @aws_lb@ . The functionality is identical. Provides information about a Load Balancer. This data source can prove useful when a module accepts an LB as an input variable and needs to, for example, determine the security groups associated with it, etc.
 data Lb_DataSource = Lb_DataSource
     { arn :: !(Attr Text)
       {- ^ (Optional) The full ARN of the load balancer. -}
@@ -705,7 +705,7 @@ $(TH.makeDataSource
 
 -- | The @aws_lb_target_group@ AWS datasource.
 --
--- ~>  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The functionality is identical. Provides information about a Load Balancer Target Group. This data source can prove useful when a module accepts an LB Target Group as an input variable and needs to know its attributes. It can also be used to get the ARN of an LB Target Group for use in other resources, given LB Target Group name.
+-- ~> Note:  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The functionality is identical. Provides information about a Load Balancer Target Group. This data source can prove useful when a module accepts an LB Target Group as an input variable and needs to know its attributes. It can also be used to get the ARN of an LB Target Group for use in other resources, given LB Target Group name.
 data Lb_Target_Group_DataSource = Lb_Target_Group_DataSource
     { arn :: !(Attr Text)
       {- ^ (Optional) The full ARN of the target group. -}
@@ -745,7 +745,7 @@ $(TH.makeDataSource
 
 -- | The @aws_s3_bucket_object@ AWS datasource.
 --
--- The S3 object data source allows access to the metadata and (see below) content of an object stored inside S3 bucket. ~> The content of an object ( @body@ field) is available only for objects which have a human-readable @Content-Type@ ( @text/*@ and @application/json@ ). This is to prevent printing unsafe characters and potentially downloading large amount of data which would be thrown away in favour of metadata.
+-- The S3 object data source allows access to the metadata and optionally (see below) content of an object stored inside S3 bucket. ~> Note: The content of an object ( @body@ field) is available only for objects which have a human-readable @Content-Type@ ( @text/*@ and @application/json@ ). This is to prevent printing unsafe characters and potentially downloading large amount of data which would be thrown away in favour of metadata.
 data S3_Bucket_Object_DataSource = S3_Bucket_Object_DataSource
     { bucket :: !(Attr Text)
       {- ^ (Required) The name of the bucket to read the object from -}
@@ -757,7 +757,7 @@ data S3_Bucket_Object_DataSource = S3_Bucket_Object_DataSource
 
 type instance Computed S3_Bucket_Object_DataSource
     = '[ '("body", Attr Text)
-         {- - Object data (see to understand cases in which this field is actually available) -}
+         {- - Object data (see limitations above to understand cases in which this field is actually available) -}
       , '("cache_control", Attr Text)
          {- - Specifies caching behavior along the request/reply chain. -}
       , '("content_disposition", Attr Text)

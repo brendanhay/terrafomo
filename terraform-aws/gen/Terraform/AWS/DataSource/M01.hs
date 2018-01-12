@@ -49,7 +49,7 @@ $(TH.makeDataSource
 -- Use this data source to get the ID of a registered AMI for use in other resources.
 data Ami_DataSource = Ami_DataSource
     { executable_users :: !(Attr Text)
-      {- ^ (Optional) Limit search to users with launch permission on the image. Valid items are the numeric account ID or @self@ . -}
+      {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
     , filter :: !(Attr Text)
       {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
     , most_recent :: !(Attr Text)
@@ -455,7 +455,7 @@ data Iam_Policy_Document_DataSource = Iam_Policy_Document_DataSource
     { policy_id :: !(Attr Text)
       {- ^ (Optional) - An ID for the policy document. -}
     , statement :: !(Attr Text)
-      {- ^ (Required) - A nested configuration block (described below) configuring one to be included in the policy document. -}
+      {- ^ (Required) - A nested configuration block (described below) configuring one statement to be included in the policy document. -}
     } deriving (Show, Eq, Generic)
 
 type instance Computed Iam_Policy_Document_DataSource
@@ -522,7 +522,7 @@ type instance Computed Instance_DataSource
       , '("instance_type", Attr Text)
          {- - The type of the Instance. -}
       , '("ipv6_addresses", Attr Text)
-         {- - The IPv6 addresses associated to the Instance, if applicable. : Unlike the IPv4 address, this doesn't change if you attach an EIP to the instance. -}
+         {- - The IPv6 addresses associated to the Instance, if applicable. NOTE : Unlike the IPv4 address, this doesn't change if you attach an EIP to the instance. -}
       , '("key_name", Attr Text)
          {- - The key name of the Instance. -}
       , '("monitoring", Attr Text)
@@ -538,7 +538,7 @@ type instance Computed Instance_DataSource
       , '("public_dns", Attr Text)
          {- - The public DNS name assigned to the Instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC. -}
       , '("public_ip", Attr Text)
-         {- - The public IP address assigned to the Instance, if applicable. : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
+         {- - The public IP address assigned to the Instance, if applicable. NOTE : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
       , '("root_block_device", Attr Text)
          {- - The root block device mappings of the Instance -}
       , '("security_groups", Attr Text)
@@ -590,7 +590,7 @@ $(TH.makeDataSource
 
 -- | The @aws_kms_secret@ AWS datasource.
 --
--- The KMS secret data source allows you to use data encrypted with the AWS KMS service within your resource definitions. ~> : Using this data provider will allow you to conceal secret data within your resource definitions but does not take care of protecting that data in the logging output, plan output or state output. Please take care to secure your secret data outside of resource definitions.
+-- The KMS secret data source allows you to use data encrypted with the AWS KMS service within your resource definitions. ~> NOTE : Using this data provider will allow you to conceal secret data within your resource definitions but does not take care of protecting that data in the logging output, plan output or state output. Please take care to secure your secret data outside of resource definitions.
 data Kms_Secret_DataSource = Kms_Secret_DataSource
     { secret :: !(Attr Text)
       {- ^ (Required) One or more encrypted payload definitions from the KMS service.  See the Secret Definitions below. -}
@@ -607,7 +607,7 @@ $(TH.makeDataSource
 
 -- | The @aws_lb_listener@ AWS datasource.
 --
--- ~>  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality is identical. Provides information about a Load Balancer Listener. This data source can prove useful when a module accepts an LB Listener as an input variable and needs to know the LB it is attached to, or other information specific to the listener in question.
+-- ~> Note:  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality is identical. Provides information about a Load Balancer Listener. This data source can prove useful when a module accepts an LB Listener as an input variable and needs to know the LB it is attached to, or other information specific to the listener in question.
 data Lb_Listener_DataSource = Lb_Listener_DataSource
     { arn :: !(Attr Text)
       {- ^ (Required) The ARN of the listener. -}

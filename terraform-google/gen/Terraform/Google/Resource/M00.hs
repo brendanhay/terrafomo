@@ -120,7 +120,7 @@ $(TH.makeResource
 
 -- | The @google_compute_disk@ Google resource.
 --
--- Creates a new persistent disk within GCE, based on another disk. For more information see <https://cloud.google.com/compute/docs/disks/add-persistent-disk> and <https://cloud.google.com/compute/docs/reference/latest/disks> . ~> All arguments including the disk encryption key will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
+-- Creates a new persistent disk within GCE, based on another disk. For more information see <https://cloud.google.com/compute/docs/disks/add-persistent-disk> and <https://cloud.google.com/compute/docs/reference/latest/disks> . ~> Note: All arguments including the disk encryption key will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Compute_Disk_Resource = Compute_Disk_Resource
     { disk_encryption_key_raw :: !(Attr Text)
       {- ^ (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption), encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this disk. -}
@@ -229,7 +229,7 @@ $(TH.makeResource
 
 -- | The @google_compute_instance_group_manager@ Google resource.
 --
--- The Google Compute Engine Instance Group Manager API creates and manages pools of homogeneous Compute Engine virtual machine instances from a common instance template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/manager> and <https://cloud.google.com/compute/docs/reference/latest/instanceGroupManagers> ~> Use </docs/providers/google/r/compute_region_instance_group_manager.html> to create a regional (multi-zone) instance group manager.
+-- The Google Compute Engine Instance Group Manager API creates and manages pools of homogeneous Compute Engine virtual machine instances from a common instance template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/manager> and <https://cloud.google.com/compute/docs/reference/latest/instanceGroupManagers> ~> Note: Use </docs/providers/google/r/compute_region_instance_group_manager.html> to create a regional (multi-zone) instance group manager.
 data Compute_Instance_Group_Manager_Resource = Compute_Instance_Group_Manager_Resource
     { auto_healing_policies :: !(Attr Text)
       {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
@@ -751,7 +751,7 @@ $(TH.makeResource
 
 -- | The @google_compute_vpn_tunnel@ Google resource.
 --
--- Manages a VPN Tunnel to the GCE network. For more info, read the <https://cloud.google.com/compute/docs/vpn> . ~> All arguments including the @shared_secret@ will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
+-- Manages a VPN Tunnel to the GCE network. For more info, read the <https://cloud.google.com/compute/docs/vpn> . ~> Note: All arguments including the @shared_secret@ will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Compute_Vpn_Tunnel_Resource = Compute_Vpn_Tunnel_Resource
     { description :: !(Attr Text)
       {- ^ (Optional) A description of the resource. Changing this forces a new resource to be created. -}
@@ -840,7 +840,7 @@ $(TH.makeResource
 
 -- | The @google_kms_key_ring@ Google resource.
 --
--- Allows creation of a Google Cloud Platform KMS KeyRing. For more information see <https://cloud.google.com/kms/docs/object-hierarchy#keyring> and <https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings> . A KeyRing is a grouping of CryptoKeys for organizational purposes. A KeyRing belongs to a Google Cloud Platform Project and resides in a specific location. ~> Note: KeyRings cannot be deleted from Google Cloud Platform. Destroying a Terraform-managed KeyRing will remove it from state but .
+-- Allows creation of a Google Cloud Platform KMS KeyRing. For more information see <https://cloud.google.com/kms/docs/object-hierarchy#keyring> and <https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings> . A KeyRing is a grouping of CryptoKeys for organizational purposes. A KeyRing belongs to a Google Cloud Platform Project and resides in a specific location. ~> Note: KeyRings cannot be deleted from Google Cloud Platform. Destroying a Terraform-managed KeyRing will remove it from state but will not delete the resource on the server .
 data Kms_Key_Ring_Resource = Kms_Key_Ring_Resource
     { location :: !(Attr Text)
       {- ^ (Required) The Google Cloud Platform location for the KeyRing. A full list of valid locations can be found by running @gcloud kms locations list@ . -}
@@ -886,7 +886,7 @@ $(TH.makeResource
 
 -- | The @google_project_iam_binding@ Google resource.
 --
--- Allows creation and management of a single binding within IAM policy for an existing Google Cloud Platform project. ~> This resource be used in conjunction with @google_project_iam_policy@ or they will fight over what your policy should be.
+-- Allows creation and management of a single binding within IAM policy for an existing Google Cloud Platform project. ~> Note: This resource must not be used in conjunction with @google_project_iam_policy@ or they will fight over what your policy should be.
 data Project_Iam_Binding_Resource = Project_Iam_Binding_Resource
     { members :: !(Attr Text)
       {- ^ (Required) A list of users that the role should apply to. -}
@@ -909,10 +909,10 @@ $(TH.makeResource
 
 -- | The @google_project_iam_policy@ Google resource.
 --
--- Allows creation and management of an IAM policy for an existing Google Cloud Platform project. ~> You can accidentally lock yourself out of your project using this resource. Proceed with caution.
+-- Allows creation and management of an IAM policy for an existing Google Cloud Platform project. ~> Be careful! You can accidentally lock yourself out of your project using this resource. Proceed with caution.
 data Project_Iam_Policy_Resource = Project_Iam_Policy_Resource
     { authoritative :: !(Attr Text)
-      {- ^ - (DEPRECATED) (Optional) A boolean value indicating if this policy should overwrite any existing IAM policy on the project. When set to true, . This can of your project until an Organization Administrator grants you access again, so please exercise caution. If this argument is @true@ and you want to delete the resource, you must set the @disable_project@ argument to @true@ , acknowledging that the project will be inaccessible to anyone but the Organization Admins, as it will no longer have an IAM policy. Rather than using this, you should use @google_project_iam_policy_binding@ and @google_project_iam_policy_member@ . -}
+      {- ^ - (DEPRECATED) (Optional) A boolean value indicating if this policy should overwrite any existing IAM policy on the project. When set to true, any policies not in your config file will be removed . This can lock you out of your project until an Organization Administrator grants you access again, so please exercise caution. If this argument is @true@ and you want to delete the resource, you must set the @disable_project@ argument to @true@ , acknowledging that the project will be inaccessible to anyone but the Organization Admins, as it will no longer have an IAM policy. Rather than using this, you should use @google_project_iam_policy_binding@ and @google_project_iam_policy_member@ . -}
     , disable_project :: !(Attr Text)
       {- ^ - (DEPRECATED) (Optional) A boolean value that must be set to @true@ if you want to delete a @google_project_iam_policy@ that is authoritative. -}
     , policy_data :: !(Attr Text)
@@ -1083,7 +1083,7 @@ $(TH.makeResource
 
 -- | The @google_sql_user@ Google resource.
 --
--- Creates a new Google SQL User on a Google SQL User Instance. For more information, see the <https://cloud.google.com/sql/> , or the <https://cloud.google.com/sql/docs/admin-api/v1beta4/users> . ~> All arguments including the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> . Passwords will not be retrieved when running "terraform import".
+-- Creates a new Google SQL User on a Google SQL User Instance. For more information, see the <https://cloud.google.com/sql/> , or the <https://cloud.google.com/sql/docs/admin-api/v1beta4/users> . ~> Note: All arguments including the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> . Passwords will not be retrieved when running "terraform import".
 data Sql_User_Resource = Sql_User_Resource
     { host :: !(Attr Text)
       {- ^ (Required) The host the user can connect from. Can be an IP address. Changing this forces a new resource to be created. -}

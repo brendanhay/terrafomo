@@ -340,7 +340,7 @@ $(TH.makeResource
 
 -- | The @google_compute_http_health_check@ Google resource.
 --
--- Manages an HTTP health check within GCE. This is used to monitor instances behind load balancers. Timeouts or HTTP errors cause the instance to be removed from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks> and <https://cloud.google.com/compute/docs/reference/latest/httpHealthChecks> . ~> HttpHealthChecks/HTTPSHealthChecks are legacy health checks. The newer </docs/providers/google/r/compute_health_check.html> should be preferred for all uses except except <https://cloud.google.com/compute/docs/load-balancing/network/> which still require the legacy HttpHealthChecks.
+-- Manages an HTTP health check within GCE. This is used to monitor instances behind load balancers. Timeouts or HTTP errors cause the instance to be removed from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks> and <https://cloud.google.com/compute/docs/reference/latest/httpHealthChecks> . ~> Note: HttpHealthChecks/HTTPSHealthChecks are legacy health checks. The newer </docs/providers/google/r/compute_health_check.html> should be preferred for all uses except except <https://cloud.google.com/compute/docs/load-balancing/network/> which still require the legacy HttpHealthChecks.
 data Compute_Http_Health_Check_Resource = Compute_Http_Health_Check_Resource
     { check_interval_sec :: !(Attr Text)
       {- ^ (Optional) The number of seconds between each poll of the instance instance (default 5). -}
@@ -377,7 +377,7 @@ $(TH.makeResource
 
 -- | The @google_compute_https_health_check@ Google resource.
 --
--- Manages an HTTPS health check within GCE. This is used to monitor instances behind load balancers. Timeouts or HTTPS errors cause the instance to be removed from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks> and <https://cloud.google.com/compute/docs/reference/latest/httpsHealthChecks> . ~> HTTPSHealthChecks/HttpHealthChecks are legacy health checks. The newer </docs/providers/google/r/compute_health_check.html> should be preferred for all uses except except <https://cloud.google.com/compute/docs/load-balancing/network/> which still require the legacy HttpHealthChecks.
+-- Manages an HTTPS health check within GCE. This is used to monitor instances behind load balancers. Timeouts or HTTPS errors cause the instance to be removed from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks> and <https://cloud.google.com/compute/docs/reference/latest/httpsHealthChecks> . ~> Note: HTTPSHealthChecks/HttpHealthChecks are legacy health checks. The newer </docs/providers/google/r/compute_health_check.html> should be preferred for all uses except except <https://cloud.google.com/compute/docs/load-balancing/network/> which still require the legacy HttpHealthChecks.
 data Compute_Https_Health_Check_Resource = Compute_Https_Health_Check_Resource
     { check_interval_sec :: !(Attr Text)
       {- ^ (Optional) How often to poll each instance (default 5). -}
@@ -485,7 +485,7 @@ $(TH.makeResource
 
 -- | The @google_compute_network_peering@ Google resource.
 --
--- Manages a network peering within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/vpc-peering> and <https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Both network must create a peering with each other for the peering to be functional. ~> Subnets IP ranges across peered VPC networks cannot overlap.
+-- Manages a network peering within GCE. For more information see <https://cloud.google.com/compute/docs/vpc/vpc-peering> and <https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Note: Both network must create a peering with each other for the peering to be functional. ~> Note: Subnets IP ranges across peered VPC networks cannot overlap.
 data Compute_Network_Peering_Resource = Compute_Network_Peering_Resource
     { auto_create_routes :: !(Attr Text)
       {- ^ (Optional) If set to @true@ , the routes between the two networks will be created and managed automatically. Defaults to @true@ . -}
@@ -512,7 +512,7 @@ $(TH.makeResource
 
 -- | The @google_compute_project_metadata@ Google resource.
 --
--- Manages metadata common to all instances for a project in GCE. For more information see <https://cloud.google.com/compute/docs/storing-retrieving-metadata> and <https://cloud.google.com/compute/docs/reference/latest/projects/setCommonInstanceMetadata> . ~> If you want to manage only single key/value pairs within the project metadata rather than the entire set, then use <compute_project_metadata_item.html> .
+-- Manages metadata common to all instances for a project in GCE. For more information see <https://cloud.google.com/compute/docs/storing-retrieving-metadata> and <https://cloud.google.com/compute/docs/reference/latest/projects/setCommonInstanceMetadata> . ~> Note: If you want to manage only single key/value pairs within the project metadata rather than the entire set, then use <compute_project_metadata_item.html> .
 data Compute_Project_Metadata_Resource = Compute_Project_Metadata_Resource
     { metadata :: !(Attr Text)
       {- ^ (Required) A series of key value pairs. Changing this resource updates the GCE state. -}
@@ -560,7 +560,7 @@ $(TH.makeResource
 
 -- | The @google_compute_region_instance_group_manager@ Google resource.
 --
--- The Google Compute Engine Regional Instance Group Manager API creates and manages pools of homogeneous Compute Engine virtual machine instances from a common instance template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups> and <https://cloud.google.com/compute/docs/reference/latest/regionInstanceGroupManagers> ~> Use </docs/providers/google/r/compute_instance_group_manager.html> to create a single-zone instance group manager.
+-- The Google Compute Engine Regional Instance Group Manager API creates and manages pools of homogeneous Compute Engine virtual machine instances from a common instance template. For more information, see <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups> and <https://cloud.google.com/compute/docs/reference/latest/regionInstanceGroupManagers> ~> Note: Use </docs/providers/google/r/compute_instance_group_manager.html> to create a single-zone instance group manager.
 data Compute_Region_Instance_Group_Manager_Resource = Compute_Region_Instance_Group_Manager_Resource
     { auto_healing_policies :: !(Attr Text)
       {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
@@ -752,7 +752,7 @@ $(TH.makeResource
 
 -- | The @google_container_cluster@ Google resource.
 --
--- Creates a GKE cluster. For more information see <https://cloud.google.com/container-engine/docs/clusters> and <https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters> . ~> All arguments including the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
+-- Creates a GKE cluster. For more information see <https://cloud.google.com/container-engine/docs/clusters> and <https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters> . ~> Note: All arguments including the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 data Container_Cluster_Resource = Container_Cluster_Resource
     { additional_zones :: !(Attr Text)
       {- ^ (Optional) The list of additional Google Compute Engine locations in which the cluster's nodes should be located. If additional zones are configured, the number of nodes specified in @initial_node_count@ is created in all specified zones. -}
@@ -971,7 +971,7 @@ $(TH.makeResource
 
 -- | The @google_project_iam_member@ Google resource.
 --
--- Allows creation and management of a single member for a single binding within the IAM policy for an existing Google Cloud Platform project. ~> This resource be used in conjunction with @google_project_iam_policy@ or they will fight over what your policy should be. Similarly, roles controlled by @google_project_iam_binding@ should not be assigned to using @google_project_iam_member@ .
+-- Allows creation and management of a single member for a single binding within the IAM policy for an existing Google Cloud Platform project. ~> Note: This resource must not be used in conjunction with @google_project_iam_policy@ or they will fight over what your policy should be. Similarly, roles controlled by @google_project_iam_binding@ should not be assigned to using @google_project_iam_member@ .
 data Project_Iam_Member_Resource = Project_Iam_Member_Resource
     { member :: !(Attr Text)
       {- ^ (Required) The user that the role should apply to. -}
@@ -1136,7 +1136,7 @@ $(TH.makeResource
 
 -- | The @google_sql_database_instance@ Google resource.
 --
--- Creates a new Google SQL Database Instance. For more information, see the <https://cloud.google.com/sql/> , or the <https://cloud.google.com/sql/docs/admin-api/v1beta4/instances> . Postgres support for @google_sql_database_instance@ is in </docs/providers/google/index.html#beta-features> . ~> - Second-generation instances include a default 'root'@'%' user with no password. This user will be deleted by Terraform on instance creation. You should use @google_sql_user@ to define a custom user with a restricted host and strong password.
+-- Creates a new Google SQL Database Instance. For more information, see the <https://cloud.google.com/sql/> , or the <https://cloud.google.com/sql/docs/admin-api/v1beta4/instances> . Postgres support for @google_sql_database_instance@ is in </docs/providers/google/index.html#beta-features> . ~> NOTE on @google_sql_database_instance@ : - Second-generation instances include a default 'root'@'%' user with no password. This user will be deleted by Terraform on instance creation. You should use @google_sql_user@ to define a custom user with a restricted host and strong password.
 data Sql_Database_Instance_Resource = Sql_Database_Instance_Resource
     { connection_name :: !(Attr Text)
       {- ^ (Optional) The connection name of the instance to be used in connection strings. -}
