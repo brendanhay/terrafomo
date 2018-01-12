@@ -3,6 +3,7 @@
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE RecordWildCards     #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE ViewPatterns        #-}
 
 module Terraform.Gen.Example
     ( Example (..)
@@ -28,6 +29,7 @@ import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<$$>), (<+>))
 
 import qualified Data.Aeson                   as JSON
+import qualified Data.Char                    as Char
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
 import qualified Data.Map.Strict              as Map
@@ -63,18 +65,23 @@ renderHCL = fmap render . HCL.runParser HCL.statementsParser "<renderHCL>"
     resource   = pretty . Text.toLower . resourceName
     datasource = pretty . Text.toLower . dataSourceName
 
+    identifier = Text.map valid . Text.toLower
+      where
+        valid c =
+            if c == '_' || Char.isAlphaNum c
+                then c
+                else '_'
+
     value = \case
-        Object (Ident "resource" :| [Quoted r, Quoted n]) vs ->
-            let name = Text.toLower n
-             in pretty name <+> "<-" <+> "resource" <+> PP.dquotes (pretty (name)) <+> PP.nest 4
+        Object (Ident "resource" :| [Quoted r, Quoted (identifier -> n)]) vs ->
+            pretty n <+> "<-" <+> "resource" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> PP.nest 4
                     ( resource r <$$> PP.vcat (map value vs)
                     )
                 )
 
-        Object (Ident "data" :| [Quoted d, Quoted n]) vs ->
-            let name = Text.toLower n
-             in pretty name <+> "<-" <+> "datasource" <+> PP.dquotes (pretty (name)) <+> PP.nest 4
+        Object (Ident "data" :| [Quoted d, Quoted (identifier -> n)]) vs ->
+            pretty n <+> "<-" <+> "datasource" <+> PP.dquotes (pretty n) <+> PP.nest 4
                 ( "$" <$$> PP.nest 4
                     ( datasource d <$$> PP.vcat (map value vs)
                     )

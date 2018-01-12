@@ -46,6 +46,8 @@ valueParser =
     <|> string
     <|> heredoc
     <|> list
+    <|> block
+    <|> commentParser
     <|> assignParser
     <|> objectParser
       )
@@ -70,6 +72,13 @@ valueParser =
         <$> P.try (between '[' ']'
                 (P.sepEndBy (skipSpaces valueParser)
                             (skipSpaces (P.char ',')))) <?> "list"
+
+    block = Block
+        <$> between '{' '}' (many (skipSpaces valueParser))
+
+commentParser :: Parser Value
+commentParser =
+    Comment <$> (P.string "//" *> P.takeWhileP Nothing (/= '\n'))
 
 assignParser :: Parser Value
 assignParser =

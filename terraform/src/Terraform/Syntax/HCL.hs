@@ -43,6 +43,7 @@ data Value
     | Float   !Double
     | String  !Interpolate
     | HereDoc !Text !Text
+    | Comment !Text
       deriving (Show, Eq)
 
 -- instance IsString Value where
@@ -70,6 +71,8 @@ instance Pretty Value where
 
         HereDoc (pretty -> k) x ->
             "<<" <> k <$$> pretty x <$$> k
+
+        Comment x -> "//" <+> pretty x
 
 data Interpolate
     = Chunks   ![Interpolate]

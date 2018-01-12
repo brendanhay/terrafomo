@@ -88,30 +88,37 @@ schemaParser = do
     schema_Name <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
 
     -- about/documentation
-    schemaAbout <- P.optional (paragraph >>> textual)
+    schemaAbout <- Just . Text.intercalate " " <$> many (paragraph >>> textual)
 
-    -- skip any non-headers
-    void $ P.skipManyTill node (P.lookAhead heading)
+    -- let item = do
+    --       name <- P.optional (heading >>> textual)
+    --       void (P.many paragraph) <|> pure ()
+    --       hcl  <- codeblock
+    --       case renderHCL hcl of
+    --           Left  _ -> pure Nothing
+    --           Right x -> pure $! Just (Example name x)
+
+    -- let example = do
+    --        P.try (P.skipManyTill node (P.lookAhead heading))
+    --        P.try (heading >>> void (string "Example Usage")) <|> pure ()
+    --        (P.try (P.lookAhead argHeader) >> pure [])
+    --           <|> (P.try (P.lookAhead attrHeader) >> pure [])
+    --           <|> ((:) <$> item <*> example)
+    --           <|> pure []
 
     -- example usage
-    schemaExamples' <-
-        P.try ( do usageHeader
-                   fmap catMaybes (P.some exampleItem)
-              ) <|> pure []
-
-    -- full example
-    schemaExamples <- fmap (mappend schemaExamples') $
-        P.try ( do exampleHeader
-                   fmap catMaybes (P.some exampleItem)
-              ) <|> pure []
+--    schemaExamples <- catMaybes <$> example
+    let schemaExamples = mempty
 
     -- skip any non-headers
-    void $ P.skipManyTill node (P.lookAhead heading)
+    P.skipManyTill node $
+        P.try ( P.lookAhead (void argHeader <|> void attrHeader <|> P.eof)
+              )
 
     -- argument name/help/required
     (Map.fromList -> schemaArguments) <-
         P.try ( do argHeader
-                   P.skipManyTill node list >>> many argItem
+                   P.skipManyTill node (concat <$> some (list >>> many argItem))
               ) <|> pure mempty
 
     -- skip any non-headers
@@ -120,18 +127,10 @@ schemaParser = do
     -- attribute name/help
     (Map.fromList -> schemaAttributes) <-
         P.try ( do attrHeader
-                   P.skipManyTill node list >>> many attrItem
+                   P.skipManyTill node (concat <$> some (list >>> many attrItem))
               ) <|> pure mempty
 
     pure Schema{..}
-
-usageHeader :: Parser ()
-usageHeader =
-    h2 >>> void (string "Example Usage") <?> "Example Usage"
-
-exampleHeader :: Parser ()
-exampleHeader =
-    h2 >>> void (string "Full Example") <?> "Full Example"
 
 argHeader :: Parser ()
 argHeader =
@@ -142,14 +141,6 @@ attrHeader =
     h2 >>> void ( P.try (string "Attributes Reference")
               <|> string "Attribute Reference"
                 ) <?> "Attribute(s) Reference"
-
-exampleItem :: Parser (Maybe Example)
-exampleItem = do
-   name <- P.try (P.optional (h3 >>> text))
-   hcl  <- codeblock
-   case renderHCL hcl of
-       Left  _ -> pure Nothing
-       Right x -> pure $! Just (Example name x)
 
 argItem :: Parser (Text, Arg)
 argItem = item >>> paragraph >>> argument
@@ -177,7 +168,7 @@ attrItem = item >>> paragraph >>> attribute
 
 unreserved :: Text -> Text
 unreserved x
-     | x `Set.member` reserved = x `Text.snoc` '_'
+     | x `Set.member` reserved = x `Text.snoc` '\''
      | otherwise               = x
   where
     reserved = Set.fromList
@@ -186,6 +177,7 @@ unreserved x
         , "family"
         , "data"
         , "foreign"
+        , "default"
         ]
 
 -- Markdown Syntax Parsers

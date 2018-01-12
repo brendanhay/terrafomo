@@ -14,17 +14,29 @@ import qualified Terraform.Syntax.Attribute as Attribute
 import qualified Terraform.Syntax.Resource  as Resource
 import qualified Terraform.Syntax.Serialize as HCL
 
+makeDataSource
+    :: String
+    -- ^ The original terraform @TYPE@.
+    -> TH.Name
+    -- ^ The provider's Haskell data type, such as ''AWS, etc.
+    -> TH.Name
+    -- ^ The provider's 'defaultProvider' function.
+    -> TH.Name
+    -- ^ The Haskell data type to create datasource-related instances for.
+    -> TH.DecsQ
+makeDataSource _ _ _ _ = pure []
+
 makeResource
     :: String
     -- ^ The original terraform @TYPE@.
     -> TH.Name
     -- ^ The provider's Haskell data type, such as ''AWS, etc.
     -> TH.Name
-    -- ^ The provider's 'Resource.fromSchema' function.
+    -- ^ The provider's 'defaultProvider' function.
     -> TH.Name
     -- ^ The Haskell data type to create resource-related instances for.
     -> TH.DecsQ
-makeResource original provider newResource datatype = do
+makeResource original provider mk datatype = do
     let lowered     = map Char.toLower (TH.nameBase datatype)
         constructor = TH.mkName lowered
 
@@ -81,8 +93,10 @@ makeResource original provider newResource datatype = do
            in TH.sigD constructor type_
 
         -- constructor = ...
-        , let body = TH.normalB ( TH.varE newResource
+        , let body = TH.normalB ( TH.conE 'Resource.Resource
+                        `TH.appE` TH.varE mk
                         `TH.appE` TH.stringE original
+                        `TH.appE` TH.varE 'mempty
                         `TH.appE` TH.varE 'Attribute.genericAttributes
                                 )
 

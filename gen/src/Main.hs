@@ -38,6 +38,10 @@ import qualified Text.EDE               as EDE
 -- * Extract all the usage examples and write out tests
 --     - convert to DSL/Haskell and have as examples too
 --     - ! just write them out as doctests
+-- * Provide an 'Unsafe' constructor/lens for 'Attr' which allows arbitrary
+--   insertion of HCL as 'Text'.
+-- * Re-enable usage example parser.
+-- * Have the TH.makeResource/DataSource take a defaultProvider only.
 
 -- Options Parsing
 
