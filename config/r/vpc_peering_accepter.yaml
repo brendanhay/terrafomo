@@ -1,0 +1,38 @@
+arguments:
+- required: false
+  help: Whether or not to accept the peering request. Defaults to  false .
+  name: auto_accept
+  type: Attr Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Attr Text
+- required: true
+  help: The VPC Peering Connection ID to manage.
+  name: vpc_peering_connection_id
+  type: Attr Text
+name: aws_vpc_peering_connection_accepter
+attributes:
+- help: The status of the VPC Peering Connection request.
+  name: accept_status
+  type: Attr Text
+- help: A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide)
+    options set for the accepter VPC.
+  name: accepter
+  type: Attr Text
+- help: The ID of the VPC Peering Connection.
+  name: id
+  type: Attr Text
+- help: The AWS account ID of the owner of the requester VPC.
+  name: peer_owner_id
+  type: Attr Text
+- help: The ID of the requester VPC.
+  name: peer_vpc_id
+  type: Attr Text
+- help: A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide)
+    options set for the requester VPC.
+  name: requester
+  type: Attr Text
+- help: The ID of the accepter VPC.
+  name: vpc_id
+  type: Attr Text

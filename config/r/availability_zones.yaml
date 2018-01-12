@@ -1,0 +1,13 @@
+arguments:
+- required: false
+  help: Allows to filter list of Availability Zones based on their current state.
+    Can be either  "available" ,  "information" ,  "impaired"  or "unavailable" .
+    By default the list includes a complete set of Availability Zones to which the
+    underlying AWS account has access, regardless of their state.
+  name: state
+  type: Attr Text
+name: aws_availability_zones
+attributes:
+- help: A list of the Availability Zone names available to the account.
+  name: names
+  type: Attr Text

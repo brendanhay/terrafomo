@@ -1,0 +1,17 @@
+arguments:
+- required: true
+  help: The CIDR block associated with the local subnet of the customer network.
+  name: destination_cidr_block
+  type: Attr Text
+- required: true
+  help: The ID of the VPN connection.
+  name: vpn_connection_id
+  type: Attr Text
+name: aws_vpn_connection_route
+attributes:
+- help: The CIDR block associated with the local subnet of the customer network.
+  name: destination_cidr_block
+  type: Attr Text
+- help: The ID of the VPN connection.
+  name: vpn_connection_id
+  type: Attr Text

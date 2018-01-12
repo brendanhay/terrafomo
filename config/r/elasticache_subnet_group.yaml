@@ -1,0 +1,17 @@
+arguments:
+- required: true
+  help: ! ' – (Optional) Description for the cache subnet group. Defaults to "Managed
+    by Terraform".'
+  name: description
+  type: Attr Text
+- required: true
+  help: ! ' – (Required) Name for the cache subnet group. Elasticache converts this
+    name to lowercase.'
+  name: name
+  type: Attr Text
+- required: true
+  help: ! ' – (Required) List of VPC Subnet IDs for the cache subnet group'
+  name: subnet_ids
+  type: Attr Text
+name: aws_elasticache_subnet_group
+attributes: []

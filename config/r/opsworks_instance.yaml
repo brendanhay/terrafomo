@@ -1,0 +1,131 @@
+arguments:
+- required: false
+  help: The AWS OpsWorks agent to install.  Defaults to  "INHERIT" .
+  name: agent_version
+  type: Attr Text
+- required: false
+  help: The AMI to use for the instance.  If an AMI is specified,  os  must be  "Custom"
+    .
+  name: ami_id
+  type: Attr Text
+- required: false
+  help: Machine architecture for created instances.  Can be either  "x86_64"  (the
+    default) or  "i386"
+  name: architecture
+  type: Attr Text
+- required: false
+  help: ! 'Creates load-based or time-based instances.  If set, can be either:  "load"  or  "timer"
+    .'
+  name: auto_scaling_type
+  type: Attr Text
+- required: false
+  help: Name of the availability zone where instances will be created by default.
+  name: availability_zone
+  type: Attr Text
+- required: false
+  help: ! 'Additional EBS block devices to attach to the instance.  See  #block-devices  below
+    for details.'
+  name: ebs_block_device
+  type: Attr Text
+- required: false
+  help: If true, the launched EC2 instance will be EBS-optimized.
+  name: ebs_optimized
+  type: Attr Text
+- required: false
+  help: ! 'Customize Ephemeral (also known as "Instance Store") volumes on the instance.
+    See  #block-devices  below for details.'
+  name: ephemeral_block_device
+  type: Attr Text
+- required: false
+  help: The instance's host name.
+  name: hostname
+  type: Attr Text
+- required: false
+  help: Controls where to install OS and package updates when the instance boots.  Defaults
+    to  true .
+  name: install_updates_on_boot
+  type: Attr Text
+- required: true
+  help: The type of instance to start
+  name: instance_type
+  type: Attr Text
+- required: true
+  help: The ids of the layers the instance will belong to.
+  name: layer_ids
+  type: Attr Text
+- required: false
+  help: Name of operating system that will be installed.
+  name: os
+  type: Attr Text
+- required: false
+  help: ! 'Customize details about the root block device of the instance. See  #block-devices  below
+    for details.'
+  name: root_block_device
+  type: Attr Text
+- required: false
+  help: Name of the type of root device instances will have by default.  Can be either  "ebs"  or  "instance-store"
+  name: root_device_type
+  type: Attr Text
+- required: false
+  help: Name of the SSH keypair that instances will have by default.
+  name: ssh_key_name
+  type: Attr Text
+- required: true
+  help: The id of the stack the instance will belong to.
+  name: stack_id
+  type: Attr Text
+- required: false
+  help: The desired state of the instance.  Can be either  "running"  or  "stopped"
+    .
+  name: state
+  type: Attr Text
+- required: false
+  help: Subnet ID to attach to
+  name: subnet_id
+  type: Attr Text
+- required: false
+  help: Instance tenancy to use. Can be one of  "default" ,  "dedicated"  or  "host"
+  name: tenancy
+  type: Attr Text
+- required: false
+  help: Keyword to choose what virtualization mode created instances will use. Can
+    be either  "paravirtual"  or  "hvm" .
+  name: virtualization_type
+  type: Attr Text
+name: aws_opsworks_instance
+attributes:
+- help: The AWS OpsWorks agent version.
+  name: agent_version
+  type: Attr Text
+- help: The availability zone of the instance.
+  name: availability_zone
+  type: Attr Text
+- help: The id of the OpsWorks instance.
+  name: id
+  type: Attr Text
+- help: The private DNS name assigned to the instance. Can only be used inside the
+    Amazon EC2, and only available if you've enabled DNS hostnames for your VPC
+  name: private_dns
+  type: Attr Text
+- help: The private IP address assigned to the instance
+  name: private_ip
+  type: Attr Text
+- help: The public DNS name assigned to the instance. For EC2-VPC, this is only available
+    if you've enabled DNS hostnames for your VPC
+  name: public_dns
+  type: Attr Text
+- help: The public IP address assigned to the instance, if applicable.
+  name: public_ip
+  type: Attr Text
+- help: The associated security groups.
+  name: security_group_ids
+  type: Attr Text
+- help: The key name of the instance
+  name: ssh_key_name
+  type: Attr Text
+- help: The VPC subnet ID.
+  name: subnet_id
+  type: Attr Text
+- help: The Instance tenancy
+  name: tenancy
+  type: Attr Text

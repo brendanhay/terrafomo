@@ -1,0 +1,15 @@
+arguments:
+- required: false
+  help: This is a reference name used in Caller Reference (helpful for identifying
+    single delegation set amongst others)
+  name: reference_name
+  type: Attr Text
+name: aws_route53_delegation_set
+attributes:
+- help: The delegation set ID
+  name: id
+  type: Attr Text
+- help: A list of authoritative name servers for the hosted zone (effectively a list
+    of NS records).
+  name: name_servers
+  type: Attr Text

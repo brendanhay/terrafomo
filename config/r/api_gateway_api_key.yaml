@@ -1,0 +1,36 @@
+arguments:
+- required: false
+  help: The API key description. Defaults to "Managed by Terraform".
+  name: description
+  type: Attr Text
+- required: false
+  help: Specifies whether the API key can be used by callers. Defaults to  true .
+  name: enabled
+  type: Attr Text
+- required: true
+  help: The name of the API key
+  name: name
+  type: Attr Text
+- required: false
+  help: A list of stage keys associated with the API key - see below
+  name: stage_key
+  type: Attr Text
+- required: false
+  help: The value of the API key. If not specified, it will be automatically generated
+    by AWS on creation.
+  name: value
+  type: Attr Text
+name: aws_api_gateway_api_key
+attributes:
+- help: The creation date of the API key
+  name: created_date
+  type: Attr Text
+- help: The ID of the API key
+  name: id
+  type: Attr Text
+- help: The last update date of the API key
+  name: last_updated_date
+  type: Attr Text
+- help: The value of the API key
+  name: value
+  type: Attr Text

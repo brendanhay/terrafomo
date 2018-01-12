@@ -1,0 +1,17 @@
+arguments:
+- required: true
+  help: The policy document. This is a JSON formatted string.
+  name: policy
+  type: Attr Text
+- required: true
+  help: Name of the repository to apply the policy.
+  name: repository
+  type: Attr Text
+name: aws_ecr_repository_policy
+attributes:
+- help: The registry ID where the repository was created.
+  name: registry_id
+  type: Attr Text
+- help: The name of the repository.
+  name: repository
+  type: Attr Text

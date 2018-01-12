@@ -1,0 +1,31 @@
+arguments:
+- required: false
+  help: Elastic Network Interface ID to attach to
+  name: eni_id
+  type: Attr Text
+- required: true
+  help: The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs
+    log group
+  name: iam_role_arn
+  type: Attr Text
+- required: true
+  help: The name of the CloudWatch log group
+  name: log_group_name
+  type: Attr Text
+- required: false
+  help: Subnet ID to attach to
+  name: subnet_id
+  type: Attr Text
+- required: true
+  help: ! 'The type of traffic to capture. Valid values: ACCEPT , REJECT ,  ALL'
+  name: traffic_type
+  type: Attr Text
+- required: false
+  help: VPC ID to attach to
+  name: vpc_id
+  type: Attr Text
+name: aws_flow_log
+attributes:
+- help: The Flow Log ID
+  name: id
+  type: Attr Text

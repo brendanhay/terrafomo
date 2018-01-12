@@ -1,0 +1,19 @@
+arguments:
+- required: true
+  help: The name or description for the Amazon CloudWatch metric of this rule.
+  name: metric_name
+  type: Attr Text
+- required: true
+  help: The name or description of the rule.
+  name: name
+  type: Attr Text
+- required: false
+  help: One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet
+    objects to include in a rule.
+  name: predicates
+  type: Attr Text
+name: aws_waf_rule
+attributes:
+- help: The ID of the WAF rule.
+  name: id
+  type: Attr Text

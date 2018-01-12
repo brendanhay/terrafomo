@@ -1,0 +1,11 @@
+arguments:
+- required: true
+  help: ! "\t(Required) - The ARN of the policy you want to apply"
+  name: policy_arn
+  type: Attr Text
+- required: true
+  help: ! "\t\t(Required) - The user the policy should be applied to"
+  name: user
+  type: Attr Text
+name: aws_iam_user_policy_attachment
+attributes: []

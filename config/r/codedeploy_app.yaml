@@ -1,0 +1,13 @@
+arguments:
+- required: true
+  help: The name of the application.
+  name: name
+  type: Attr Text
+name: aws_codedeploy_app
+attributes:
+- help: Amazon's assigned ID for the application.
+  name: id
+  type: Attr Text
+- help: The application's name.
+  name: name
+  type: Attr Text

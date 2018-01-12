@@ -1,0 +1,29 @@
+arguments:
+- required: false
+  help: Whether targets must be registered with the Maintenance Window before tasks
+    can be defined for those targets.
+  name: allow_unassociated_targets
+  type: Attr Text
+- required: true
+  help: The number of hours before the end of the Maintenance Window that Systems
+    Manager stops scheduling new tasks for execution.
+  name: cutoff
+  type: Attr Text
+- required: true
+  help: The duration of the Maintenance Window in hours.
+  name: duration
+  type: Attr Text
+- required: true
+  help: The name of the maintenance window.
+  name: name
+  type: Attr Text
+- required: true
+  help: The schedule of the Maintenance Window in the form of a  https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-cron.html  or
+    rate expression.
+  name: schedule
+  type: Attr Text
+name: aws_ssm_maintenance_window
+attributes:
+- help: The ID of the maintenance window.
+  name: id
+  type: Attr Text

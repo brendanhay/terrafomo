@@ -1,0 +1,11 @@
+arguments:
+- required: false
+  help: Short description of the application
+  name: description
+  type: Attr Text
+- required: true
+  help: The name of the application, must be unique within your account
+  name: name
+  type: Attr Text
+name: aws_elastic_beanstalk_
+attributes: []

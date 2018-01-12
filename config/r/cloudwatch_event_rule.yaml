@@ -1,0 +1,34 @@
+arguments:
+- required: false
+  help: The description of the rule.
+  name: description
+  type: Attr Text
+- required: true
+  help: ! ' - (Required, if  schedule_expression  isn''t specified) Event pattern
+    described a JSON object. See full documentation of  http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatchEventsandEventPatterns.html  for
+    details.'
+  name: event_pattern
+  type: Attr Text
+- required: false
+  help: Whether the rule should be enabled (defaults to  true ).
+  name: is_enabled
+  type: Attr Text
+- required: true
+  help: The rule's name.
+  name: name
+  type: Attr Text
+- required: false
+  help: The Amazon Resource Name (ARN) associated with the role that is used for target
+    invocation.
+  name: role_arn
+  type: Attr Text
+- required: true
+  help: ! ' - (Required, if  event_pattern  isn''t specified) The scheduling expression.
+    For example,  cron(0 20 * * ? *)  or  rate(5 minutes) .'
+  name: schedule_expression
+  type: Attr Text
+name: aws_cloudwatch_event_rule
+attributes:
+- help: The Amazon Resource Name (ARN) of the rule.
+  name: arn
+  type: Attr Text

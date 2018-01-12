@@ -1,0 +1,53 @@
+arguments:
+- required: false
+  help: The amount time for Elastic Load Balancing to wait before changing the state
+    of a deregistering target from draining to unused. The range is 0-3600 seconds.
+    The default value is 300 seconds.
+  name: deregistration_delay
+  type: Attr Text
+- required: false
+  help: A Health Check block. Health Check blocks are documented below.
+  name: health_check
+  type: Attr Text
+- required: true
+  help: ! ' - (Optional, Forces new resource) The name of the target group. If omitted,
+    Terraform will assign a random, unique name.'
+  name: name
+  type: Attr Text
+- required: true
+  help: ! ' - (Optional, Forces new resource) Creates a unique name beginning with
+    the specified prefix. Conflicts with  name .'
+  name: name_prefix
+  type: Attr Text
+- required: true
+  help: The port on which targets receive traffic, unless overridden when registering
+    a specific target.
+  name: port
+  type: Attr Text
+- required: true
+  help: The protocol to use for routing traffic to the targets.
+  name: protocol
+  type: Attr Text
+- required: false
+  help: A Stickiness block. Stickiness blocks are documented below.
+  name: stickiness
+  type: Attr Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Attr Text
+- required: true
+  help: The identifier of the VPC in which to create the target group.
+  name: vpc_id
+  type: Attr Text
+name: aws_lb_target_group
+attributes:
+- help: The ARN of the Target Group (matches  id )
+  name: arn
+  type: Attr Text
+- help: The ARN suffix for use with CloudWatch Metrics.
+  name: arn_suffix
+  type: Attr Text
+- help: The ARN of the Target Group (matches  arn )
+  name: id
+  type: Attr Text

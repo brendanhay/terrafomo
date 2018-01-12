@@ -1,0 +1,10 @@
+arguments:
+- required: true
+  help: The name of the project
+  name: name
+  type: Attr Text
+name: aws_devicefarm_project
+attributes:
+- help: The Amazon Resource Name of this project
+  name: arn
+  type: Attr Text

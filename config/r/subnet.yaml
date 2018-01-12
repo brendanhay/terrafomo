@@ -1,0 +1,52 @@
+arguments:
+- required: false
+  help: Specify true to indicate that network interfaces created in the specified
+    subnet should be assigned an IPv6 address. Default is  false
+  name: assign_ipv6_address_on_creation
+  type: Attr Text
+- required: true
+  help: ! '- (Optional) The AZ for the subnet.'
+  name: availability_zone
+  type: Attr Text
+- required: true
+  help: The CIDR block for the subnet.
+  name: cidr_block
+  type: Attr Text
+- required: false
+  help: The IPv6 network range for the subnet, in CIDR notation. The subnet size must
+    use a /64 prefix length.
+  name: ipv6_cidr_block
+  type: Attr Text
+- required: true
+  help: ! ' -  (Optional) Specify true to indicate that instances launched into the
+    subnet should be assigned a public IP address. Default is  false .'
+  name: map_public_ip_on_launch
+  type: Attr Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Attr Text
+- required: true
+  help: The VPC ID.
+  name: vpc_id
+  type: Attr Text
+name: aws_subnet
+attributes:
+- help: ! '- The AZ for the subnet.'
+  name: availability_zone
+  type: Attr Text
+- help: The CIDR block for the subnet.
+  name: cidr_block
+  type: Attr Text
+- help: The ID of the subnet
+  name: id
+  type: Attr Text
+- help: The association ID for the IPv6 CIDR block.
+  name: ipv6_association_id
+  type: Attr Text
+- help: The IPv6 CIDR block.
+  name: ipv6_cidr_block
+  type: Attr Text
+- help: The VPC ID.
+  name: vpc_id
+  type: Attr Text

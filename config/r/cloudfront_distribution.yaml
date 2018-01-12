@@ -1,0 +1,122 @@
+arguments:
+- required: true
+  help: ! ' (Optional) - Extra CNAMEs (alternate domain names), if any, for this distribution.'
+  name: aliases
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - A  #cache-behavior-arguments resource for this distribution
+    (multiples allowed).'
+  name: cache_behavior
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - Any comments you want to include about the distribution.'
+  name: comment
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - One or more  #custom-error-response-arguments  elements (multiples
+    allowed).'
+  name: custom_error_response
+  type: Attr Text
+- required: true
+  help: ! ' (Required) - The  #default-cache-behavior-arguments  for this distribution
+    (maximum one).'
+  name: default_cache_behavior
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - The object that you want CloudFront to return (for example,
+    index.html) when an end user requests the root URL.'
+  name: default_root_object
+  type: Attr Text
+- required: true
+  help: ! ' (Required) - Whether the distribution is enabled to accept end user requests
+    for content.'
+  name: enabled
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - The maximum HTTP version to support on the distribution.
+    Allowed values are  http1.1  and  http2 . The default is http2 .'
+  name: http_version
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - Whether the IPv6 is enabled for the distribution.'
+  name: is_ipv6_enabled
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - The  #logging-config-arguments  that controls how logs are
+    written to your distribution (maximum one).'
+  name: logging_config
+  type: Attr Text
+- required: true
+  help: ! ' (Required) - One or more  #origin-arguments  for this distribution (multiples
+    allowed).'
+  name: origin
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - The price class for this distribution. One of PriceClass_All
+    ,  PriceClass_200 ,  PriceClass_100'
+  name: price_class
+  type: Attr Text
+- required: true
+  help: ! ' (Required) - The  #restrictions-arguments  for this distribution (maximum
+    one).'
+  name: restrictions
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - Disables the distribution instead of deleting it when destroying
+    the resource through Terraform. If this is set, the distribution needs to be deleted
+    manually afterwards. Default:  false .'
+  name: retain_on_delete
+  type: Attr Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Attr Text
+- required: true
+  help: ! ' (Required) - The  #viewer-certificate-arguments  for this distribution
+    (maximum one).'
+  name: viewer_certificate
+  type: Attr Text
+- required: true
+  help: ! ' (Optional) - If you''re using AWS WAF to filter CloudFront requests, the
+    Id of the AWS WAF web ACL that is associated with the distribution.'
+  name: web_acl_id
+  type: Attr Text
+name: aws_cloudfront_distribution
+attributes:
+- help: The key pair IDs that CloudFront is aware of for each trusted signer, if the
+    distribution is set up to serve private content with signed URLs.
+  name: active_trusted_signers
+  type: Attr Text
+- help: ! 'The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
+    where 123456789012 is your AWS account ID.'
+  name: arn
+  type: Attr Text
+- help: Internal value used by CloudFront to allow future updates to the distribution
+    configuration.
+  name: caller_reference
+  type: Attr Text
+- help: ! 'The domain name corresponding to the distribution. For example:  d604721fxaaqy9.cloudfront.net
+    .'
+  name: domain_name
+  type: Attr Text
+- help: ! 'The current version of the distribution''s information. For example: E2QWRUHAPOMQZL
+    .'
+  name: etag
+  type: Attr Text
+- help: The CloudFront Route 53 zone ID that can be used to route an  http://docs.aws.amazon.com/Route53/latest/APIReference/CreateAliasRRSAPI.html  to.
+    This attribute is simply an alias for the zone ID  Z2FDTNDATAQYW2 .
+  name: hosted_zone_id
+  type: Attr Text
+- help: ! 'The identifier for the distribution. For example:  EDFDVBD632BHDS5 .'
+  name: id
+  type: Attr Text
+- help: The number of invalidation batches currently in progress.
+  name: in_progress_validation_batches
+  type: Attr Text
+- help: The date and time the distribution was last modified.
+  name: last_modified_time
+  type: Attr Text
+- help: The current status of the distribution.  Deployed  if the distribution's information
+    is fully propagated throughout the Amazon CloudFront system.
+  name: status
+  type: Attr Text

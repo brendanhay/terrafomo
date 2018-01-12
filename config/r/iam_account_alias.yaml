@@ -1,0 +1,7 @@
+arguments:
+- required: true
+  help: The account alias
+  name: account_alias
+  type: Attr Text
+name: aws_iam_account_alias
+attributes: []

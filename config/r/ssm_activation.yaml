@@ -1,0 +1,51 @@
+arguments:
+- required: false
+  help: The description of the resource that you want to register.
+  name: description
+  type: Attr Text
+- required: false
+  help: The date by which this activation request should expire. The default value
+    is 24 hours.
+  name: expiration_date
+  type: Attr Text
+- required: true
+  help: The IAM Role to attach to the managed instance.
+  name: iam_role
+  type: Attr Text
+- required: false
+  help: The default name of the registerd managed instance.
+  name: name
+  type: Attr Text
+- required: false
+  help: The maximum number of managed instances you want to register. The default
+    value is 1 instance.
+  name: registration_limit
+  type: Attr Text
+name: aws_ssm_activation
+attributes:
+- help: The code the system generates when it processes the activation.
+  name: activation_code
+  type: Attr Text
+- help: The description of the resource that was registered.
+  name: description
+  type: Attr Text
+- help: The date by which this activation request should expire. The default value
+    is 24 hours.
+  name: expiration_date
+  type: Attr Text
+- help: If the current activation has expired.
+  name: expired
+  type: Attr Text
+- help: The IAM Role attached to the managed instance.
+  name: iam_role
+  type: Attr Text
+- help: The default name of the registerd managed instance.
+  name: name
+  type: Attr Text
+- help: The number of managed instances that are currently registered using this activation.
+  name: registration_count
+  type: Attr Text
+- help: The maximum number of managed instances you want to be registered. The default
+    value is 1 instance.
+  name: registration_limit
+  type: Attr Text

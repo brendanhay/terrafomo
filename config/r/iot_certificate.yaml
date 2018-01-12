@@ -1,0 +1,16 @@
+arguments:
+- required: true
+  help: ! ' Boolean flag to indicate if the certificate should be active'
+  name: active
+  type: Attr Text
+- required: true
+  help: The certificate signing request. Review the [IoT API Reference Guide] (http://docs.aws.amazon.com/iot/latest/apireference/API_CreateCertificateFromCsr.html)
+    for more information on creating a certificate from a certificate signing request
+    (CSR).
+  name: csr
+  type: Attr Text
+name: aws_iot_certificate
+attributes:
+- help: The ARN of the created AWS IoT certificate
+  name: arn
+  type: Attr Text

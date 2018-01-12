@@ -1,0 +1,23 @@
+arguments:
+- required: true
+  help: ! ' (Required) An artifact_store block. Artifact stores are documented below.'
+  name: artifact_store
+  type: Attr Text
+- required: true
+  help: The name of the pipeline.
+  name: name
+  type: Attr Text
+- required: true
+  help: A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission
+    to make calls to AWS services on your behalf.
+  name: role_arn
+  type: Attr Text
+- required: true
+  help: ! ' (Required) A stage block. Stages are documented below.'
+  name: stage
+  type: Attr Text
+name: aws_codepipeline
+attributes:
+- help: The codepipeline ID.
+  name: id
+  type: Attr Text

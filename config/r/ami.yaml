@@ -1,0 +1,142 @@
+arguments:
+- required: false
+  help: Machine architecture for created instances. Defaults to "x86_64".
+  name: architecture
+  type: Attr Text
+- required: false
+  help: A longer, human-readable description for the AMI.
+  name: description
+  type: Attr Text
+- required: false
+  help: Nested block describing an EBS block device that should be attached to created
+    instances. The structure of this block is described below.
+  name: ebs_block_device
+  type: Attr Text
+- required: false
+  help: Nested block describing an ephemeral block device that should be attached
+    to created instances. The structure of this block is described below.
+  name: ephemeral_block_device
+  type: Attr Text
+- required: false
+  help: Limit search to users with   launch permission on the image. Valid items are
+    the numeric account ID or  self .
+  name: executable_users
+  type: Attr Text
+- required: false
+  help: One or more name/value pairs to filter off of. There are several valid keys,
+    for a full reference, check out http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
+    .
+  name: filter
+  type: Attr Text
+- required: false
+  help: If more than one result is returned, use the most recent AMI.
+  name: most_recent
+  type: Attr Text
+- required: true
+  help: A region-unique name for the AMI.
+  name: name
+  type: Attr Text
+- required: false
+  help: A regex string to apply to the AMI list returned by AWS. This allows more
+    advanced filtering not supported from the AWS API. This filtering is done locally
+    on what AWS returns, and could have a performance impact if the result is large.
+    It is recommended to combine this with other options to narrow down the list AWS
+    returns.
+  name: name_regex
+  type: Attr Text
+- required: false
+  help: Limit search to specific AMI owners. Valid items are the numeric account ID,  amazon
+    , or  self .
+  name: owners
+  type: Attr Text
+- required: false
+  help: The name of the root device (for example,  /dev/sda1 , or  /dev/xvda ).
+  name: root_device_name
+  type: Attr Text
+- required: false
+  help: Keyword to choose what virtualization mode created instances will use. Can
+    be either "paravirtual" (the default) or "hvm". The choice of virtualization type
+    changes the set of further arguments that are required, as described below.
+  name: virtualization_type
+  type: Attr Text
+name: aws_ami
+attributes:
+- help: ! 'The OS architecture of the AMI (ie:  i386  or  x86_64 ).'
+  name: architecture
+  type: Attr Text
+- help: The block device mappings of the AMI.
+  name: block_device_mappings
+  type: Attr Text
+- help: The date and time the image was created.
+  name: creation_date
+  type: Attr Text
+- help: The description of the AMI that was provided during image creation.
+  name: description
+  type: Attr Text
+- help: The hypervisor type of the image.
+  name: hypervisor
+  type: Attr Text
+- help: The ID of the created AMI.
+  name: id
+  type: Attr Text
+- help: The ID of the AMI. Should be the same as the resource  id .
+  name: image_id
+  type: Attr Text
+- help: The location of the AMI.
+  name: image_location
+  type: Attr Text
+- help: The AWS account alias (for example,  amazon ,  self ) or the AWS account ID
+    of the AMI owner.
+  name: image_owner_alias
+  type: Attr Text
+- help: The type of image.
+  name: image_type
+  type: Attr Text
+- help: The kernel associated with the image, if any. Only applicable for machine
+    images.
+  name: kernel_id
+  type: Attr Text
+- help: The name of the AMI that was provided during image creation.
+  name: name
+  type: Attr Text
+- help: The AWS account ID of the image owner.
+  name: owner_id
+  type: Attr Text
+- help: The value is Windows for  Windows  AMIs; otherwise blank.
+  name: platform
+  type: Attr Text
+- help: Any product codes associated with the AMI.
+  name: product_codes
+  type: Attr Text
+- help: ! ' true  if the image has public launch permissions.'
+  name: public
+  type: Attr Text
+- help: The RAM disk associated with the image, if any. Only applicable for machine
+    images.
+  name: ramdisk_id
+  type: Attr Text
+- help: The device name of the root device.
+  name: root_device_name
+  type: Attr Text
+- help: ! 'The type of root device (ie:  ebs  or  instance-store ).'
+  name: root_device_type
+  type: Attr Text
+- help: The Snapshot ID for the root volume (for EBS-backed AMIs)
+  name: root_snapshot_id
+  type: Attr Text
+- help: Specifies whether enhanced networking is enabled.
+  name: sriov_net_support
+  type: Attr Text
+- help: The current state of the AMI. If the state is  available , the image is successfully
+    registered and can be used to launch an instance.
+  name: state
+  type: Attr Text
+- help: Describes a state change. Fields are  UNSET  if not available.
+  name: state_reason
+  type: Attr Text
+- help: Any tags assigned to the image.
+  name: tags
+  type: Attr Text
+- help: ! 'The type of virtualization of the AMI (ie:  hvm  or paravirtual ).'
+  name: virtualization_type
+  type: Attr Text

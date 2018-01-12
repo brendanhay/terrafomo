@@ -1,0 +1,28 @@
+arguments:
+- required: false
+  help: A policy to attach to the endpoint that controls access to the service.
+  name: policy
+  type: Attr Text
+- required: false
+  help: One or more route table IDs.
+  name: route_table_ids
+  type: Attr Text
+- required: true
+  help: The AWS service name, in the form  com.amazonaws.region.service .
+  name: service_name
+  type: Attr Text
+- required: true
+  help: The ID of the VPC in which the endpoint will be used.
+  name: vpc_id
+  type: Attr Text
+name: aws_vpc_endpoint
+attributes:
+- help: The list of CIDR blocks for the exposed service.
+  name: cidr_blocks
+  type: Attr Text
+- help: The ID of the VPC endpoint.
+  name: id
+  type: Attr Text
+- help: The prefix list ID of the exposed service.
+  name: prefix_list_id
+  type: Attr Text

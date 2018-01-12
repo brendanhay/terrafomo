@@ -1,0 +1,68 @@
+arguments:
+- required: true
+  help: ! ' - Indicates how to allocate the target capacity across the Spot pools
+    specified by the Spot fleet request. The default is lowestPrice.'
+  name: allocation_strategy
+  type: Attr Text
+- required: true
+  help: ! ' - Indicates whether running Spot instances should be terminated if the
+    target capacity of the Spot fleet request is decreased below the current size
+    of the Spot fleet.'
+  name: excess_capacity_termination_policy
+  type: Attr Text
+- required: true
+  help: Grants the Spot fleet permission to terminate Spot instances on your behalf
+    when you cancel its Spot fleet request using CancelSpotFleetRequests or when the
+    Spot fleet request expires, if you set terminateInstancesWithExpiration.
+  name: iam_fleet_role
+  type: Attr Text
+- required: false
+  help: Indicates whether a Spot instance stops or terminates when it is interrupted.
+    Default is terminate .
+  name: instance_interruption_behavior
+  type: Attr Text
+- required: true
+  help: ! ' - Used to define the launch configuration of the spot-fleet request. Can
+    be specified multiple times to define different bids across different markets
+    and instance types.'
+  name: launch_specification
+  type: Attr Text
+- required: false
+  help: Indicates whether Spot fleet should replace unhealthy instances. Default  false
+    .
+  name: replace_unhealthy_instances
+  type: Attr Text
+- required: true
+  help: The bid price per unit hour.
+  name: spot_price
+  type: Attr Text
+- required: true
+  help: ! ' - The number of units to request. You can choose to set the target capacity
+    in terms of instances or a performance characteristic that is important to your
+    application workload, such as vCPUs, memory, or I/O.'
+  name: target_capacity
+  type: Attr Text
+- required: true
+  help: ! ' - Indicates whether running Spot instances should be terminated when the
+    Spot fleet request expires.'
+  name: terminate_instances_with_expiration
+  type: Attr Text
+- required: true
+  help: ! ' - The end date and time of the request, in UTC ISO8601 format (for example,
+    YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed
+    or enabled to fulfill the request. Defaults to 24 hours.'
+  name: valid_until
+  type: Attr Text
+- required: true
+  help: ! ' - (Optional; Default: false) If set, Terraform will wait for the Spot
+    Request to be fulfilled, and will throw an error if the timeout of 10m is reached.'
+  name: wait_for_fulfillment
+  type: Attr Text
+name: aws_spot_fleet_request
+attributes:
+- help: The Spot fleet request ID
+  name: id
+  type: Attr Text
+- help: The state of the Spot fleet request.
+  name: spot_request_state
+  type: Attr Text

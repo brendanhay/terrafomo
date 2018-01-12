@@ -1,0 +1,27 @@
+arguments:
+- required: false
+  help: Limit search to users with   launch permission on  the image. Valid items
+    are the numeric account ID or  self .
+  name: executable_users
+  type: Attr Text
+- required: false
+  help: One or more name/value pairs to filter off of. There are several valid keys,
+    for a full reference, check out http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
+    .
+  name: filter
+  type: Attr Text
+- required: false
+  help: A regex string to apply to the AMI list returned by AWS. This allows more
+    advanced filtering not supported from the AWS API. This filtering is done locally
+    on what AWS returns, and could have a performance impact if the result is large.
+    It is recommended to combine this with other options to narrow down the list AWS
+    returns.
+  name: name_regex
+  type: Attr Text
+- required: false
+  help: Limit search to specific AMI owners. Valid items are the numeric account ID,  amazon
+    , or  self .
+  name: owners
+  type: Attr Text
+name: aws_ami_ids
+attributes: []

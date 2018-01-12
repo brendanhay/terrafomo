@@ -1,0 +1,31 @@
+arguments:
+- required: false
+  help: The description of the DB subnet group. Defaults to "Managed by Terraform".
+  name: description
+  type: Attr Text
+- required: true
+  help: ! ' - (Optional, Forces new resource) The name of the DB subnet group. If
+    omitted, Terraform will assign a random, unique name.'
+  name: name
+  type: Attr Text
+- required: true
+  help: ! ' - (Optional, Forces new resource) Creates a unique name beginning with
+    the specified prefix. Conflicts with  name .'
+  name: name_prefix
+  type: Attr Text
+- required: true
+  help: A list of VPC subnet IDs.
+  name: subnet_ids
+  type: Attr Text
+- required: false
+  help: A mapping of tags to assign to the resource.
+  name: tags
+  type: Attr Text
+name: aws_db_subnet_group
+attributes:
+- help: The ARN of the db subnet group.
+  name: arn
+  type: Attr Text
+- help: The db subnet group name.
+  name: id
+  type: Attr Text

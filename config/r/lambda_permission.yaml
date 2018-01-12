@@ -1,0 +1,40 @@
+arguments:
+- required: true
+  help: The AWS Lambda action you want to allow in this statement. (e.g.  lambda:InvokeFunction
+    )
+  name: action
+  type: Attr Text
+- required: true
+  help: Name of the Lambda function whose resource policy you are updating
+  name: function_name
+  type: Attr Text
+- required: true
+  help: The principal who is getting this permission. e.g.  s3.amazonaws.com , an
+    AWS account ID, or any valid AWS service principal such as  events.amazonaws.com  or  sns.amazonaws.com
+    .
+  name: principal
+  type: Attr Text
+- required: false
+  help: Query parameter to specify function version or alias name. The permission
+    will then apply to the specific qualified ARN. e.g.  arn:aws:lambda:aws-region:acct-id:function:function-name:2
+  name: qualifier
+  type: Attr Text
+- required: false
+  help: The AWS account ID (without a hyphen) of the source owner.
+  name: source_account
+  type: Attr Text
+- required: false
+  help: When granting Amazon S3 or CloudWatch Events permission to invoke your function,
+    you should specify this field with the Amazon Resource Name (ARN) for the S3 Bucket
+    or CloudWatch Events Rule as its value.  This ensures that only events generated
+    from the specified bucket or rule can invoke the function. API Gateway ARNs have
+    a unique structure described http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
+    .
+  name: source_arn
+  type: Attr Text
+- required: true
+  help: A unique statement identifier.
+  name: statement_id
+  type: Attr Text
+name: aws_lambda_permission
+attributes: []

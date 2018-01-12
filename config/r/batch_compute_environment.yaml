@@ -1,0 +1,44 @@
+arguments:
+- required: true
+  help: The name for your compute environment. Up to 128 letters (uppercase and lowercase),
+    numbers, and underscores are allowed.
+  name: compute_environment_name
+  type: Attr Text
+- required: false
+  help: Details of the compute resources managed by the compute environment. This
+    parameter is required for managed compute environments. See details below.
+  name: compute_resources
+  type: Attr Text
+- required: true
+  help: The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch
+    to make calls to other AWS services on your behalf.
+  name: service_role
+  type: Attr Text
+- required: false
+  help: The state of the compute environment. If the state is  ENABLED , then the
+    compute environment accepts jobs from a queue and can scale out automatically
+    based on queues. Valid items are  ENABLED  or  DISABLED . Defaults to  ENABLED
+    .
+  name: state
+  type: Attr Text
+- required: true
+  help: The type of the compute environment. Valid items are  MANAGED  or  UNMANAGED
+    .
+  name: type
+  type: Attr Text
+name: aws_batch_compute_environment
+attributes:
+- help: The Amazon Resource Name (ARN) of the compute environment.
+  name: arn
+  type: Attr Text
+- help: The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by
+    the compute environment.
+  name: ecs_cluster_arn
+  type: Attr Text
+- help: The current status of the compute environment (for example, CREATING or VALID).
+  name: status
+  type: Attr Text
+- help: A short, human-readable string to provide additional details about the current
+    status of the compute environment.
+  name: status_reason
+  type: Attr Text

@@ -1,0 +1,45 @@
+arguments:
+- required: false
+  help: Specify if the method requires an API key
+  name: api_key_required
+  type: Attr Text
+- required: true
+  help: The type of authorization used for the method ( NONE ,  CUSTOM ,  AWS_IAM
+    )
+  name: authorization
+  type: Attr Text
+- required: false
+  help: The authorizer id to be used when the authorization is  CUSTOM
+  name: authorizer_id
+  type: Attr Text
+- required: true
+  help: The HTTP Method ( GET ,  POST ,  PUT ,  DELETE ,  HEAD ,  OPTION ,  ANY )
+  name: http_method
+  type: Attr Text
+- required: false
+  help: A map of the API models used for the request's content type where key is the
+    content type (e.g.  application/json ) and value is either  Error ,  Empty  (built-in
+    models) or  aws_api_gateway_model 's  name .
+  name: request_models
+  type: Attr Text
+- required: false
+  help: ! 'A map of request query string parameters and headers that should be passed
+    to the integration. For example:  request_parameters = { "method.request.header.X-Some-Header"
+    = true } would define that the header  X-Some-Header  must be provided on the
+    request.'
+  name: request_parameters
+  type: Attr Text
+- required: true
+  help: ! ' -  , use  request_parameters  instead.'
+  name: request_parameters_in_json
+  type: Attr Text
+- required: true
+  help: The API resource ID
+  name: resource_id
+  type: Attr Text
+- required: true
+  help: The ID of the associated REST API
+  name: rest_api_id
+  type: Attr Text
+name: aws_api_gateway_method
+attributes: []

@@ -1,0 +1,18 @@
+arguments:
+- required: true
+  help: ! ' – (Optional) description for the cache security group. Defaults to "Managed
+    by Terraform".'
+  name: description
+  type: Attr Text
+- required: true
+  help: ! ' – (Required) Name for the cache security group. This value is stored as
+    a lowercase string.'
+  name: name
+  type: Attr Text
+- required: true
+  help: ! ' – (Required) List of EC2 security group names to be authorized for ingress
+    to the cache security group'
+  name: security_group_names
+  type: Attr Text
+name: aws_elasticache_security_
+attributes: []

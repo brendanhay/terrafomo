@@ -1,0 +1,19 @@
+arguments:
+- required: true
+  help: Name of the repository.
+  name: name
+  type: Attr Text
+name: aws_ecr_repository
+attributes:
+- help: Full ARN of the repository.
+  name: arn
+  type: Attr Text
+- help: The name of the repository.
+  name: name
+  type: Attr Text
+- help: The registry ID where the repository was created.
+  name: registry_id
+  type: Attr Text
+- help: The URL of the repository (in the form  aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName
+  name: repository_url
+  type: Attr Text

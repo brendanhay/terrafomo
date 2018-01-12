@@ -1,0 +1,31 @@
+arguments:
+- required: true
+  help: Name of the Beanstalk Application the version is associated with.
+  name: application
+  type: Attr Text
+- required: true
+  help: S3 bucket that contains the Application Version source bundle.
+  name: bucket
+  type: Attr Text
+- required: false
+  help: Short description of the Application Version.
+  name: description
+  type: Attr Text
+- required: false
+  help: On delete, force an Application Version to be deleted when it may be in use
+    by multiple Elastic Beanstalk Environments.
+  name: force_delete
+  type: Attr Text
+- required: true
+  help: S3 object that is the Application Version source bundle.
+  name: key
+  type: Attr Text
+- required: true
+  help: A unique name for the this Application Version.
+  name: name
+  type: Attr Text
+name: aws_elastic_beanstalk_application_
+attributes:
+- help: The Application Version name.
+  name: name
+  type: Attr Text

@@ -1,0 +1,56 @@
+arguments:
+- required: false
+  help: The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24
+    ).
+  name: cidr_block
+  type: Attr Text
+- required: true
+  help: ! ' - (Optional, bool) Indicates whether this is an egress rule (rule is applied
+    to traffic leaving the subnet). Default  false .'
+  name: egress
+  type: Attr Text
+- required: false
+  help: The from port to match.
+  name: from_port
+  type: Attr Text
+- required: false
+  help: ! 'ICMP protocol: The ICMP code. Required if specifying ICMP for the protocol.
+    e.g. -1'
+  name: icmp_code
+  type: Attr Text
+- required: false
+  help: ! 'ICMP protocol: The ICMP type. Required if specifying ICMP for the protocol.
+    e.g. -1'
+  name: icmp_type
+  type: Attr Text
+- required: false
+  help: The IPv6 CIDR block to allow or deny.
+  name: ipv6_cidr_block
+  type: Attr Text
+- required: true
+  help: The ID of the network ACL.
+  name: network_acl_id
+  type: Attr Text
+- required: true
+  help: The protocol. A value of -1 means all protocols.
+  name: protocol
+  type: Attr Text
+- required: true
+  help: ! 'Indicates whether to allow or deny the traffic that matches the rule. Accepted
+    values:  allow  |  deny'
+  name: rule_action
+  type: Attr Text
+- required: true
+  help: The rule number for the entry (for example, 100). ACL entries are processed
+    in ascending order by rule number.
+  name: rule_number
+  type: Attr Text
+- required: false
+  help: The to port to match.
+  name: to_port
+  type: Attr Text
+name: aws_network_acl_rule
+attributes:
+- help: The ID of the network ACL Rule
+  name: id
+  type: Attr Text

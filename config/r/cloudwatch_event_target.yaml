@@ -1,0 +1,45 @@
+arguments:
+- required: true
+  help: The Amazon Resource Name (ARN) associated of the target.
+  name: arn
+  type: Attr Text
+- required: false
+  help: Parameters used when you are using the rule to invoke Amazon ECS Task. Documented
+    below. A maximum of 1 are allowed.
+  name: ecs_target
+  type: Attr Text
+- required: false
+  help: Valid JSON text passed to the target.
+  name: input
+  type: Attr Text
+- required: false
+  help: The value of the  http://goessner.net/articles/JsonPath/ that is used for
+    extracting part of the matched event when passing it to the target.
+  name: input_path
+  type: Attr Text
+- required: false
+  help: Parameters used when you are providing a custom input to a target based on
+    certain event data.
+  name: input_transformer
+  type: Attr Text
+- required: false
+  help: The Amazon Resource Name (ARN) of the IAM role to be used for this target
+    when the rule is triggered. Required if  ecs_target  is used.
+  name: role_arn
+  type: Attr Text
+- required: true
+  help: The name of the rule you want to add targets to.
+  name: rule
+  type: Attr Text
+- required: false
+  help: Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
+    Documented below. A maximum of 5 are allowed.
+  name: run_command_targets
+  type: Attr Text
+- required: false
+  help: The unique target assignment ID.  If missing, will generate a random, unique
+    id.
+  name: target_id
+  type: Attr Text
+name: aws_cloudwatch_event_target
+attributes: []

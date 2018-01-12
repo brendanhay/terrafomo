@@ -1,0 +1,68 @@
+arguments:
+- required: false
+  help: Specifies a log group name using an Amazon Resource Name (ARN), that represents
+    the log group to which CloudTrail logs will be delivered.
+  name: cloud_watch_logs_group_arn
+  type: Attr Text
+- required: false
+  help: Specifies the role for the CloudWatch Logs endpoint to assume to write to
+    a user’s log group.
+  name: cloud_watch_logs_role_arn
+  type: Attr Text
+- required: false
+  help: Specifies whether log file integrity validation is enabled. Defaults to  false
+    .
+  name: enable_log_file_validation
+  type: Attr Text
+- required: false
+  help: Enables logging for the trail. Defaults to  true . Setting this to  false  will
+    pause logging.
+  name: enable_logging
+  type: Attr Text
+- required: false
+  help: Specifies whether the trail is publishing events from global services such
+    as IAM to the log files. Defaults to  true .
+  name: include_global_service_events
+  type: Attr Text
+- required: false
+  help: Specifies whether the trail is created in the current region or in all regions.
+    Defaults to  false .
+  name: is_multi_region_trail
+  type: Attr Text
+- required: false
+  help: Specifies the KMS key ARN to use to encrypt the logs delivered by CloudTrail.
+  name: kms_key_id
+  type: Attr Text
+- required: true
+  help: Specifies the name of the trail.
+  name: name
+  type: Attr Text
+- required: true
+  help: Specifies the name of the S3 bucket designated for publishing log files.
+  name: s3_bucket_name
+  type: Attr Text
+- required: false
+  help: Specifies the S3 key prefix that precedes the name of the bucket you have
+    designated for log file delivery.
+  name: s3_key_prefix
+  type: Attr Text
+- required: false
+  help: Specifies the name of the Amazon SNS topic defined for notification of log
+    file delivery.
+  name: sns_topic_name
+  type: Attr Text
+- required: false
+  help: A mapping of tags to assign to the trail
+  name: tags
+  type: Attr Text
+name: aws_cloudtrail
+attributes:
+- help: The Amazon Resource Name of the trail.
+  name: arn
+  type: Attr Text
+- help: The region in which the trail was created.
+  name: home_region
+  type: Attr Text
+- help: The name of the trail.
+  name: id
+  type: Attr Text

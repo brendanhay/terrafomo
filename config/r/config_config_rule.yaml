@@ -1,0 +1,35 @@
+arguments:
+- required: false
+  help: Description of the rule
+  name: description
+  type: Attr Text
+- required: false
+  help: A string in JSON format that is passed to the AWS Config rule Lambda function.
+  name: input_parameters
+  type: Attr Text
+- required: false
+  help: The maximum frequency with which AWS Config runs evaluations for a rule.
+  name: maximum_execution_frequency
+  type: Attr Text
+- required: true
+  help: The name of the rule
+  name: name
+  type: Attr Text
+- required: false
+  help: Scope defines which resources can trigger an evaluation for the rule as documented
+    below.
+  name: scope
+  type: Attr Text
+- required: true
+  help: Source specifies the rule owner, the rule identifier, and the notifications
+    that cause the function to evaluate your AWS resources as documented below.
+  name: source
+  type: Attr Text
+name: aws_config_config_rule
+attributes:
+- help: The ARN of the config rule
+  name: arn
+  type: Attr Text
+- help: The ID of the config rule
+  name: rule_id
+  type: Attr Text

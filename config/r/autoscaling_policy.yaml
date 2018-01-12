@@ -1,0 +1,37 @@
+arguments:
+- required: true
+  help: Specifies whether the adjustment is an absolute number or a percentage of
+    the current capacity. Valid values are  ChangeInCapacity ,  ExactCapacity , and  PercentChangeInCapacity
+    .
+  name: adjustment_type
+  type: Attr Text
+- required: true
+  help: The name of the autoscaling group.
+  name: autoscaling_group_name
+  type: Attr Text
+- required: true
+  help: The name of the policy.
+  name: name
+  type: Attr Text
+- required: false
+  help: The policy type, either "SimpleScaling" or "StepScaling". If this value isn't
+    provided, AWS will default to "SimpleScaling."
+  name: policy_type
+  type: Attr Text
+name: aws_autoscaling_policy
+attributes:
+- help: The scaling policy's adjustment type.
+  name: adjustment_type
+  type: Attr Text
+- help: The ARN assigned by AWS to the scaling policy.
+  name: arn
+  type: Attr Text
+- help: The scaling policy's assigned autoscaling group.
+  name: autoscaling_group_name
+  type: Attr Text
+- help: The scaling policy's name.
+  name: name
+  type: Attr Text
+- help: The scaling policy's type.
+  name: policy_type
+  type: Attr Text

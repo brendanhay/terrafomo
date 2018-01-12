@@ -1,0 +1,15 @@
+arguments:
+- required: false
+  help: The ARN of an ALB Target Group.
+  name: alb_target_group_arn
+  type: Attr Text
+- required: true
+  help: Name of ASG to associate with the ELB.
+  name: autoscaling_group_name
+  type: Attr Text
+- required: false
+  help: The name of the ELB.
+  name: elb
+  type: Attr Text
+name: aws_autoscaling_attachment
+attributes: []
