@@ -58,9 +58,6 @@ data DirResource = DirResource
       {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq, Generic)
 
-type instance Computed DirResource
-    = '[]
-
 $(TH.makeResource
     "template_dir"
     ''Qual.Provider

@@ -58,13 +58,13 @@ data IdResource = IdResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed IdResource
-    = '[ '("b64_std", Attr Text)
+    = '[ '("b64_std", Text)
          {- - The generated id presented in base64 without additional transformations. -}
-      , '("b64_url", Attr Text)
+      , '("b64_url", Text)
          {- - The generated id presented in base64, using the URL-friendly character set: case-sensitive letters, digits and the characters @_@ and @-@ . -}
-      , '("dec", Attr Text)
+      , '("dec", Text)
          {- - The generated id presented in non-padded decimal digits. -}
-      , '("hex", Attr Text)
+      , '("hex", Text)
          {- - The generated id presented in padded hexadecimal digits. This result will always be twice as long as the requested byte length. -}
        ]
 
@@ -93,7 +93,7 @@ data PetResource = PetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PetResource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - (string) The random pet name -}
        ]
 
@@ -119,7 +119,7 @@ data ShuffleResource = ShuffleResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ShuffleResource
-    = '[ '("result", Attr Text)
+    = '[ '("result", Text)
          {- - Random permutation of the list of strings given in @input@ . -}
        ]
 
@@ -154,7 +154,7 @@ data StringResource = StringResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed StringResource
-    = '[ '("result", Attr Text)
+    = '[ '("result", Text)
          {- - Random string generated. -}
        ]
 

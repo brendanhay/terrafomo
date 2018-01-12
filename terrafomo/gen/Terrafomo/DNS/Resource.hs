@@ -54,17 +54,17 @@ data ARecordSetResource = ARecordSetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ARecordSetResource
-    = '[ '("addresses", Attr Text)
+    = '[ '("addresses", Text)
          {- - See Argument Reference above. -}
-      , '("addrs", Attr Text)
+      , '("addrs", Text)
          {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Set to @host@ . -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -91,17 +91,17 @@ data AaaaRecordSetResource = AaaaRecordSetResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AaaaRecordSetResource
-    = '[ '("addresses", Attr Text)
+    = '[ '("addresses", Text)
          {- - See Argument Reference above. -}
-      , '("addrs", Attr Text)
+      , '("addrs", Text)
          {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Set to @host@ . -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -126,13 +126,13 @@ data CnameRecordResource = CnameRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CnameRecordResource
-    = '[ '("cname", Attr Text)
+    = '[ '("cname", Text)
          {- - See Argument Reference above. -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -157,13 +157,13 @@ data PtrRecordResource = PtrRecordResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PtrRecordResource
-    = '[ '("name", Attr Text)
+    = '[ '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ptr", Attr Text)
+      , '("ptr", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - See Argument Reference above. -}
        ]
 

@@ -5,11 +5,8 @@
 -- > }
 module Terrafomo.Syntax.Output where
 
-import Terrafomo.Syntax.Attribute (Attr)
-import Terrafomo.Syntax.Name      (Name)
+import Terrafomo.Syntax.Name (Name)
 
 import qualified Terrafomo.Syntax.HCL as HCL
 
-data Attribute = Attribute
-
-data Output = Output Name (Attr HCL.Value)
+data Output = Output Name HCL.Value

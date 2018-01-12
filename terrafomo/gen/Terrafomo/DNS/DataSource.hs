@@ -54,17 +54,17 @@ data ARecordSetDataSource = ARecordSetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed ARecordSetDataSource
-    = '[ '("addresses", Attr Text)
+    = '[ '("addresses", Text)
          {- - See Argument Reference above. -}
-      , '("addrs", Attr Text)
+      , '("addrs", Text)
          {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Set to @host@ . -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -91,17 +91,17 @@ data AaaaRecordSetDataSource = AaaaRecordSetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed AaaaRecordSetDataSource
-    = '[ '("addresses", Attr Text)
+    = '[ '("addresses", Text)
          {- - See Argument Reference above. -}
-      , '("addrs", Attr Text)
+      , '("addrs", Text)
          {- - A list of IP addresses. IP addresses are always sorted to avoid constant changing plans. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Set to @host@ . -}
-      , '("name", Attr Text)
+      , '("name", Text)
          {- - See Argument Reference above. -}
-      , '("ttl", Attr Text)
+      , '("ttl", Text)
          {- - See Argument Reference above. -}
-      , '("zone", Attr Text)
+      , '("zone", Text)
          {- - See Argument Reference above. -}
        ]
 
@@ -120,9 +120,9 @@ data CnameRecordSetDataSource = CnameRecordSetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CnameRecordSetDataSource
-    = '[ '("cname", Attr Text)
+    = '[ '("cname", Text)
          {- - A CNAME record associated with host. -}
-      , '("id", Attr Text)
+      , '("id", Text)
          {- - Set to @host@ . -}
        ]
 
@@ -141,11 +141,11 @@ data TxtRecordSetDataSource = TxtRecordSetDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed TxtRecordSetDataSource
-    = '[ '("id", Attr Text)
+    = '[ '("id", Text)
          {- - Set to @host@ . -}
-      , '("record", Attr Text)
+      , '("record", Text)
          {- - The first TXT record. -}
-      , '("records", Attr Text)
+      , '("records", Text)
          {- - A list of TXT records. -}
        ]
 

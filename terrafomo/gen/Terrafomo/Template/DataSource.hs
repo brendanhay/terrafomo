@@ -50,7 +50,7 @@ data CloudinitConfigDataSource = CloudinitConfigDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CloudinitConfigDataSource
-    = '[ '("rendered", Attr Text)
+    = '[ '("rendered", Text)
          {- - The final rendered multi-part cloudinit config. -}
        ]
 
@@ -71,11 +71,11 @@ data FileDataSource = FileDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FileDataSource
-    = '[ '("rendered", Attr Text)
+    = '[ '("rendered", Text)
          {- - The final rendered template. -}
-      , '("template", Attr Text)
+      , '("template", Text)
          {- - See Argument Reference above. -}
-      , '("vars", Attr Text)
+      , '("vars", Text)
          {- - See Argument Reference above. -}
        ]
 

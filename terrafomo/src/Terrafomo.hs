@@ -1,3 +1,6 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeFamilies        #-}
+
 -- | The intention here is to have a somewhat bash-esque suite of
 -- functionality.  Rather than requiring heavily curated imports etc. that a
 -- batteries-included environment tailored to matching Terraform's builtin
@@ -9,11 +12,13 @@ module Terrafomo
     , Natural
     , Map
     , Set
+    , Proxy (Proxy)
 
     -- * Lenses
     , (Lens.&)
     , (Lens..~)
     , (Lens.%~)
+    , (.=)
 
     -- * Terraform Syntax
     , Name
@@ -59,8 +64,12 @@ module Terrafomo
     ) where
 
 import Data.Map.Strict (Map)
+import Data.Proxy      (Proxy (Proxy))
 import Data.Set        (Set)
+import Data.String     (fromString)
 import Data.Text       (Text)
+
+import GHC.TypeLits (KnownSymbol, symbolVal)
 
 import Numeric.Natural (Natural)
 
@@ -71,7 +80,30 @@ import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
 
-import qualified Lens.Micro as Lens
+import qualified Data.Traversable as Traverse
+import qualified Lens.Micro       as Lens
+
+infixr 6 .=
+
+-- FIXME: probably use ':=' to avoid ambiguity with aeson.
+-- | @setter .= x@ is equivalent to @setter .~ Present x@.
+(.=) :: Lens.ASetter s t a (Attr b) -> b -> s -> t
+(.=) l x = l Lens..~ Present x
+
+attribute
+    :: ( KnownSymbol  k
+       , HasAttribute k a ~ v
+       )
+    => Ref b a
+    -> proxy k
+    -> Attr v
+attribute (Ref key) p = Computed key (fromString (symbolVal p))
+
+-- | Example of replacing terraform's count attribute.
+--
+-- Uses a specialized type signature for the most common usecase.
+count :: Applicative f => [Int] -> (Int -> f (Ref b a)) -> f [Ref b a]
+count = Traverse.for
 
 -- -- Boolean Logic
 

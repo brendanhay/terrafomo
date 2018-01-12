@@ -66,7 +66,7 @@ data CertRequestResource = CertRequestResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed CertRequestResource
-    = '[ '("cert_request_pem", Attr Text)
+    = '[ '("cert_request_pem", Text)
          {- - The certificate request data in PEM format. -}
        ]
 
@@ -103,11 +103,11 @@ data LocallySignedCertResource = LocallySignedCertResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed LocallySignedCertResource
-    = '[ '("cert_pem", Attr Text)
+    = '[ '("cert_pem", Text)
          {- - The certificate data in PEM format. -}
-      , '("validity_end_time", Attr Text)
+      , '("validity_end_time", Text)
          {- - The time until which the certificate is invalid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
-      , '("validity_start_time", Attr Text)
+      , '("validity_start_time", Text)
          {- - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
        ]
 
@@ -138,13 +138,13 @@ data PrivateKeyResource = PrivateKeyResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed PrivateKeyResource
-    = '[ '("algorithm", Attr Text)
+    = '[ '("algorithm", Text)
          {- - The algorithm that was selected for the key. -}
-      , '("private_key_pem", Attr Text)
+      , '("private_key_pem", Text)
          {- - The private key data in PEM format. -}
-      , '("public_key_openssh", Attr Text)
+      , '("public_key_openssh", Text)
          {- - The public key data in OpenSSH @authorized_keys@ format, if the selected private key format is compatible. All RSA keys are supported, and ECDSA keys with curves "P256", "P384" and "P251" are supported. This attribute is empty if an incompatible ECDSA curve is selected. -}
-      , '("public_key_pem", Attr Text)
+      , '("public_key_pem", Text)
          {- - The public key data in PEM format. -}
        ]
 
@@ -187,11 +187,11 @@ data SelfSignedCertResource = SelfSignedCertResource
     } deriving (Show, Eq, Generic)
 
 type instance Computed SelfSignedCertResource
-    = '[ '("cert_pem", Attr Text)
+    = '[ '("cert_pem", Text)
          {- - The certificate data in PEM format. -}
-      , '("validity_end_time", Attr Text)
+      , '("validity_end_time", Text)
          {- - The time until which the certificate is invalid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
-      , '("validity_start_time", Attr Text)
+      , '("validity_start_time", Text)
          {- - The time after which the certificate is valid, as an <https://tools.ietf.org/html/rfc3339> timestamp. -}
        ]
 

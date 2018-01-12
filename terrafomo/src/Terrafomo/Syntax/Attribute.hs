@@ -38,11 +38,10 @@ type family GetType a as b bs :: * where
     GetType a as k ('(k, v) ': xs) = v
     GetType a as k (x       ': xs) = GetType a as k xs
     GetType a as k '[]             =
-        TypeError ( 'Text "Computed attribute "
-              ':<>: 'ShowType k
-              ':<>: 'Text " does not exist for "
+        TypeError ( 'ShowType a
+              ':<>: 'Text " does not expose computed attribute "
               ':<>: 'ShowType a
-              ':<>: 'Text " which supports the following: "
+              ':<>: 'Text ". Supported atttributes: "
               ':$$: 'ShowType as
                   )
 

@@ -58,13 +58,13 @@ data FileDataSource = FileDataSource
     } deriving (Show, Eq, Generic)
 
 type instance Computed FileDataSource
-    = '[ '("output_base64sha256", Attr Text)
+    = '[ '("output_base64sha256", Text)
          {- - The base64-encoded SHA256 checksum of output archive file. -}
-      , '("output_md5", Attr Text)
+      , '("output_md5", Text)
          {- - The MD5 checksum of output archive file. -}
-      , '("output_sha", Attr Text)
+      , '("output_sha", Text)
          {- - The SHA1 checksum of output archive file. -}
-      , '("output_size", Attr Text)
+      , '("output_size", Text)
          {- - The size of the output archive file. -}
        ]
 

@@ -14,7 +14,7 @@ description: >
 library:
   source-dirs:
     - src
-    # - gen
+#    - gen
 
   exposed-modules:
     - Terrafomo
@@ -44,6 +44,7 @@ library:
   dependencies:
     - base >= 4.9 && < 5
     - containers
+    - dlist
     - formatting
     - hashable
     - microlens
