@@ -1,0 +1,29 @@
+_name: google_compute_instance_group
+arguments:
+  zone:
+    required: true
+    help: (Required) The zone of the instance group.
+    type: Text
+  name:
+    required: true
+    help: (Required) The name of the instance group.
+    type: Text
+attributes:
+  named_port:
+    help: ! '- List of named ports in the group.'
+    type: Text
+  size:
+    help: ! '- The number of instances in the group.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the resource.'
+    type: Text
+  network:
+    help: ! '- The URL of the network the instance group is in.'
+    type: Text
+  instances:
+    help: ! '- List of instances in the group.'
+    type: Text
+  description:
+    help: ! '- Textual description of the instance group.'
+    type: Text

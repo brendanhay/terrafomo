@@ -1,0 +1,11 @@
+_name: aws_canonical_user_id
+arguments:
+  display_name:
+    required: true
+    help: ! '- The human-friendly name linked to the canonical user ID.'
+    type: Text
+  id:
+    required: true
+    help: ! '- The canonical user ID associated with the AWS account.'
+    type: Text
+attributes: {}

@@ -1,0 +1,30 @@
+_name: aws_security_group
+arguments:
+  vpc_id:
+    required: false
+    help: (Optional) The id of the VPC that the desired security group belongs to.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name that the desired security group must have.
+    type: Text
+  id:
+    required: false
+    help: (Optional) The id of the specific security group to retrieve.
+    type: Text
+  filter:
+    required: false
+    help: (Optional) Custom filter block as described below.
+    type: Text
+  tags:
+    required: false
+    help: (Optional) A mapping of tags, each pair of which must exactly match a pair
+      on the desired security group.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The computed ARN of the security group.'
+    type: Text
+  description:
+    help: ! '- The description of the security group.'
+    type: Text

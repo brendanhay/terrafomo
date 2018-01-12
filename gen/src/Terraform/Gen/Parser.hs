@@ -89,8 +89,9 @@ schemaParser = do
 
     -- argument name/help/required
     (Map.fromList -> schemaArguments) <-
-        (do P.skipManyTill node (P.try argHeader)
-            P.skipManyTill node list >>> many argItem)
+        P.try (do P.skipManyTill node (P.try argHeader)
+                  P.skipManyTill node list >>> many argItem)
+           <|> pure mempty
 
     -- attribute name/help
     (Map.fromList -> schemaAttributes) <-

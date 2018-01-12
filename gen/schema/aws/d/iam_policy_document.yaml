@@ -1,0 +1,15 @@
+_name: aws_iam_policy_document
+arguments:
+  statement:
+    required: true
+    help: (Required) - A nested configuration block (described below) configuring
+      one to be included in the policy document.
+    type: Text
+  policy_id:
+    required: true
+    help: (Optional) - An ID for the policy document.
+    type: Text
+attributes:
+  json:
+    help: ! '- The above arguments serialized as a standard JSON policy document.'
+    type: Text

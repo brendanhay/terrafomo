@@ -1,0 +1,11 @@
+_name: aws_lb
+arguments:
+  arn:
+    required: false
+    help: (Optional) The full ARN of the load balancer.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The unique name of the load balancer.
+    type: Text
+attributes: {}

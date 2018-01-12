@@ -21,7 +21,7 @@ endef
 define provider
 .PHONY: $1
 
-$1: $1-resources
+$1: $1-resources $1-datasources
 
 $1-resources: $(VENDOR_DIR)/$1 $(BIN)
 	@$(BIN) \
@@ -32,6 +32,16 @@ $1-resources: $(VENDOR_DIR)/$1 $(BIN)
  --schema-template gen/template/resource.ede \
  --contents-template gen/template/contents.ede \
  $$(wildcard $(VENDOR_DIR)/$1/website/docs/r/*.*)
+
+$1-datasources: $(VENDOR_DIR)/$1 $(BIN)
+	@$(BIN) \
+ --config-file gen/config/$1.yaml \
+ --schema-type DataSource \
+ --schema-dir gen/schema/$1/d \
+ --patch-dir gen/patch/$1/d \
+ --schema-template gen/template/datasource.ede \
+ --contents-template gen/template/contents.ede \
+ $$(wildcard $(VENDOR_DIR)/$1/website/docs/d/*.*)
 
 $1-clean:
 	rm -rf terraform-$1/gen

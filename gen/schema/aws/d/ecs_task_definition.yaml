@@ -1,0 +1,24 @@
+_name: aws_ecs_task_definition
+arguments:
+  task_definition:
+    required: true
+    help: (Required) The family for the latest ACTIVE revision, family and revision
+      (family:revision) for a specific revision in the family, the ARN of the task
+      definition to access to.
+    type: Text
+attributes:
+  status:
+    help: ! '- The status of this task definition'
+    type: Text
+  task_role_arn:
+    help: ! '- The ARN of the IAM role that containers in this task can assume'
+    type: Text
+  network_mode:
+    help: ! '- The Docker networking mode to use for the containers in this task.'
+    type: Text
+  family:
+    help: ! '- The family of this task definition'
+    type: Text
+  revision:
+    help: ! '- The revision of this task definition'
+    type: Text

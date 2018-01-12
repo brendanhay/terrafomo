@@ -1,0 +1,19 @@
+_name: aws_acm_certificate
+arguments:
+  domain:
+    required: true
+    help: (Required) The domain of the certificate to look up. If no certificate is
+      found with this name, an error will be returned.
+    type: Text
+  statuses:
+    required: false
+    help: (Optional) A list of statuses on which to filter the returned list. Valid
+      values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@
+      , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the
+      @ISSUED@ state are returned.
+    type: Text
+attributes:
+  arn:
+    help: ! '- Set to the ARN of the found certificate, suitable for referencing in
+      other resources that support ACM certificates.'
+    type: Text

@@ -179,12 +179,12 @@ main = do
     say ("Rendering " ++ schemaTmplPath)
     rendered <-
         handleError schemaTmplPath $
-            Template.renderSchemas schemaTmpl provider schemaNS
+            Template.renderSchemas schemaTmpl provider schemaType schemaNS
 
     say ("Rendering " ++ contentsTmplPath)
     contents <-
         handleError contentsTmplPath $
-            Template.renderContents contentsTmpl contentsNS schemaNS
+            Template.renderContents contentsTmpl schemaType contentsNS schemaNS
 
     let outputDir = providerDir provider </> "gen"
 

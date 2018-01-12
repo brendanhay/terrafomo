@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections     #-}
 
@@ -11,48 +10,56 @@ import Data.Text       (Text)
 import Terraform.Gen.Provider
 import Terraform.Gen.Schema
 
-import qualified Data.Char        as Char
-import qualified Data.Foldable    as Fold
-import qualified Data.Map.Strict  as Map
-import qualified Data.Text        as Text
-import qualified Data.Text.Lazy   as LText
-import qualified Text.EDE         as EDE
-import qualified Text.EDE.Filters as EDE
+import qualified Data.Char       as Char
+import qualified Data.Foldable   as Fold
+import qualified Data.Map.Strict as Map
+import qualified Data.Text       as Text
+import qualified Data.Text.Lazy  as LText
+import qualified Text.EDE        as EDE
 
 renderContents
     :: EDE.Template
+    -> SchemaType
     -> NS
     -> Map NS [Schema]
     -> Either String LText.Text
-renderContents tmpl ns xs =
-    EDE.eitherRenderWith mempty tmpl $
+renderContents tmpl typ ns xs =
+    EDE.eitherRender tmpl $
         EDE.fromPairs
-            [ "contents"  .= fmap (map schema_Name) xs
+            [ "contents"  .= fmap (map (dataTypeName typ)) xs
             , "namespace" .= ns
             ]
 
 renderSchemas
     :: EDE.Template
     -> Provider
+    -> SchemaType
     -> Map NS [Schema]
     -> Either String (Map NS LText.Text)
-renderSchemas tmpl p = Map.traverseWithKey go
+renderSchemas tmpl p typ = Map.traverseWithKey go
   where
     go ns xs =
-        EDE.eitherRenderWith ["toResourceName" EDE.@: toResourceName] tmpl $
+        EDE.eitherRender tmpl $
             EDE.fromPairs
-                [ "schemas"   .= createMap schema_Name xs
+                [ "schemas"   .= createMap (dataTypeName typ) xs
                 , "namespace" .= ns
                 , "provider"  .= providerName p
                 ]
 
-toResourceName :: Text -> Text
-toResourceName =
-      flip mappend "_Resource"
-    . Text.intercalate "_"
-    . map upperHead
-    . tail
-    . Text.split (== '_')
+dataTypeName :: SchemaType -> Schema -> Text
+dataTypeName typ = go
+  where
+    go = flip mappend suffix
+       . Text.intercalate "_"
+       . map upperHead
+       . tail
+       . Text.split (== '_')
+       . schema_Name
+
+    suffix =
+        case typ of
+            Resource   -> "_Resource"
+            DataSource -> "_DataSource"
 
 upperHead :: Text -> Text
 upperHead x =

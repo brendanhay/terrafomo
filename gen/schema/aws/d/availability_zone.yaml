@@ -1,0 +1,27 @@
+_name: aws_availability_zone
+arguments:
+  state:
+    required: false
+    help: (Optional) A specific availability zone state to require. May be any of
+      @"available"@ , @"information"@ , @"impaired"@ or @"available"@ .
+    type: Text
+  name:
+    required: false
+    help: (Optional) The full name of the availability zone to select.
+    type: Text
+attributes:
+  state:
+    help: ! '- The current state of the AZ.'
+    type: Text
+  name:
+    help: ! '- The name of the selected availability zone.'
+    type: Text
+  name_suffix:
+    help: ! '- The part of the AZ name that appears after the region name, uniquely
+      identifying the AZ within its region.'
+    type: Text
+  region:
+    help: ! '- The region where the selected availability zone resides. This is always
+      the region selected on the provider, since this data source searches only within
+      that region.'
+    type: Text

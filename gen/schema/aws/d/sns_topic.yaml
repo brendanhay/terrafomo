@@ -1,0 +1,11 @@
+_name: aws_sns_topic
+arguments:
+  name:
+    required: true
+    help: (Required) The friendly name of the topic to match.
+    type: Text
+attributes:
+  arn:
+    help: ! '- Set to the ARN of the found topic, suitable for referencing in other
+      resources that support SNS topics.'
+    type: Text

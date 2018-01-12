@@ -1,0 +1,11 @@
+_name: google_client_config
+arguments:
+  project:
+    required: true
+    help: ! '- The ID of the project to apply any resources to.'
+    type: Text
+  region:
+    required: true
+    help: ! '- The region to operate under.'
+    type: Text
+attributes: {}

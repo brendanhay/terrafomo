@@ -1,0 +1,21 @@
+_name: aws_prefix_list
+arguments:
+  prefix_list_id:
+    required: false
+    help: (Optional) The ID of the prefix list to select.
+    type: Text
+  name:
+    required: false
+    help: (Optional) The name of the prefix list to select.
+    type: Text
+attributes:
+  cidr_blocks:
+    help: ! '- The list of CIDR blocks for the AWS service associated with the prefix
+      list.'
+    type: Text
+  name:
+    help: ! '- The name of the selected prefix list.'
+    type: Text
+  id:
+    help: ! '- The ID of the selected prefix list.'
+    type: Text

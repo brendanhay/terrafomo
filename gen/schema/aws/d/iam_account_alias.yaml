@@ -1,0 +1,7 @@
+_name: aws_iam_account_alias
+arguments:
+  account_alias:
+    required: true
+    help: ! '- The alias associated with the AWS account.'
+    type: Text
+attributes: {}

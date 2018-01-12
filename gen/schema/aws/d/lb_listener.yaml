@@ -1,0 +1,7 @@
+_name: aws_lb_listener
+arguments:
+  arn:
+    required: true
+    help: (Required) The ARN of the listener.
+    type: Text
+attributes: {}

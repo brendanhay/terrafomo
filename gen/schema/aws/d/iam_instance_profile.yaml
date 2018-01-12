@@ -1,0 +1,19 @@
+_name: aws_iam_instance_profile
+arguments:
+  name:
+    required: true
+    help: (Required) The friendly IAM instance profile name to match.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name (ARN) specifying the instance profile.'
+    type: Text
+  path:
+    help: ! '- The path to the instance profile.'
+    type: Text
+  role_id:
+    help: ! '- The role id associated with this instance profile.'
+    type: Text
+  create_date:
+    help: ! '- The string representation of the date the instance profile was created.'
+    type: Text

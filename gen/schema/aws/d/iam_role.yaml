@@ -1,0 +1,22 @@
+_name: aws_iam_role
+arguments:
+  name:
+    required: true
+    help: (Required) The friendly IAM role name to match.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name (ARN) specifying the role.'
+    type: Text
+  path:
+    help: ! '- The path to the role.'
+    type: Text
+  assume_role_policy:
+    help: ! '- The policy document associated with the role.'
+    type: Text
+  id:
+    help: ! '- The friendly IAM role name to match.'
+    type: Text
+  unique_id:
+    help: ! '- The stable and unique string identifying the role.'
+    type: Text

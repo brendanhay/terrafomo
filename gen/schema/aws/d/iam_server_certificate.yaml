@@ -1,0 +1,16 @@
+_name: aws_iam_server_certificate
+arguments:
+  name:
+    required: true
+    help: ! '- exact name of the cert to lookup'
+    type: Text
+  name_prefix:
+    required: true
+    help: ! '- prefix of cert to filter by'
+    type: Text
+  latest:
+    required: true
+    help: ! '- sort results by expiration date. returns the certificate with expiration
+      date in furthest in the future.'
+    type: Text
+attributes: {}

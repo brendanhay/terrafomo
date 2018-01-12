@@ -1,0 +1,34 @@
+_name: aws_s3_bucket
+arguments:
+  bucket:
+    required: true
+    help: (Required) The name of the bucket
+    type: Text
+attributes:
+  website_domain:
+    help: ! '- The domain of the website endpoint, if the bucket is configured with
+      a website. If not, this will be an empty string. This is used to create Route
+      53 alias records.'
+    type: Text
+  arn:
+    help: ! '- The ARN of the bucket. Will be of format @arn:aws:s3:::bucketname@
+      .'
+    type: Text
+  website_endpoint:
+    help: ! '- The website endpoint, if the bucket is configured with a website. If
+      not, this will be an empty string.'
+    type: Text
+  hosted_zone_id:
+    help: ! '- The <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints>
+      for this bucket''s region.'
+    type: Text
+  id:
+    help: ! '- The name of the bucket.'
+    type: Text
+  region:
+    help: ! '- The AWS region this bucket resides in.'
+    type: Text
+  bucket_domain_name:
+    help: ! '- The bucket domain name. Will be of format @bucketname.s3.amazonaws.com@
+      .'
+    type: Text

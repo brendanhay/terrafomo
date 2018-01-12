@@ -1,0 +1,11 @@
+_name: google_compute_lb_ip_ranges
+arguments:
+  network:
+    required: true
+    help: ! '- The IP ranges used for health checks when is used'
+    type: Text
+  http_ssl_tcp_internal:
+    required: true
+    help: ! '- The IP ranges used for health checks when is used'
+    type: Text
+attributes: {}

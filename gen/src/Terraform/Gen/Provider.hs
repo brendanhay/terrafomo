@@ -6,13 +6,10 @@
 
 module Terraform.Gen.Provider where
 
-import Control.Applicative ((<|>))
-
 import Data.Aeson         (FromJSON, ToJSON, ToJSONKey)
-import Data.Function      (on)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
-import Data.Monoid        (First, Last (Last), (<>))
+import Data.Monoid        ((<>))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
@@ -23,36 +20,12 @@ import Text.Printf (printf)
 
 import qualified Data.Aeson         as JSON
 import qualified Data.Aeson.Types   as JSON
-import qualified Data.Char          as Char
 import qualified Data.Foldable      as Fold
 import qualified Data.Map.Strict    as Map
 import qualified Data.Text          as Text
-import qualified GHC.Read           as Read
 import qualified Terraform.Gen.JSON as JSON
-import qualified Text.Read.Lex      as Read
 
--- Configuration Types
-
--- data Config = Config
---     { config_Name  :: !Text
---     , configSchema :: !Schema
---     } deriving (Show, Generic)
-
--- instance Monoid Config where
---     mempty      = Config mempty mempty
---     mappend a b = Config
---         { config_Name   = config_Name   a
---         , configSchema  = on mappend configSchema a b
---         }
-
--- instance ToJSON Config where
---     toJSON = JSON.genericToJSON (JSON.options "config")
-
--- instance FromJSON Config where
---     parseJSON = JSON.genericParseJSON (JSON.options "config")
-
--- schemaToConfig :: Text -> Schema -> Config
--- schemaToConfig config_Name configSchema = Config{..}
+-- Haskell Namespaces
 
 data NS = NS (NonEmpty Text)
     deriving (Show, Eq, Ord)
@@ -67,9 +40,12 @@ namespace :: Char -> NS -> String
 namespace c (NS xs) =
     Text.unpack $ Text.intercalate (Text.singleton c) (Fold.toList xs)
 
+-- Provider Configuration
+
 data Provider = Provider
     { providerName    :: !Text
     , providerPackage :: !Text
+    , providerPrefix  :: !(Maybe Text)
     } deriving (Show, Generic)
 
 instance FromJSON Provider where
@@ -96,5 +72,5 @@ schemaNamespaces p t xs
             . zipWith assign (map (flip mod m) [1..])
 
     assign (n :: Int) x =
-        (,) (providerNamespace p t [Text.pack (printf "R%02d" n)])
+        (,) (providerNamespace p t [Text.pack (printf "M%02d" n)])
             [x]

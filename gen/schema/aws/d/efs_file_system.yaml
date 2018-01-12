@@ -1,0 +1,27 @@
+_name: aws_efs_file_system
+arguments:
+  creation_token:
+    required: false
+    help: (Optional) Restricts the list to the file system with this creation token.
+    type: Text
+  file_system_id:
+    required: false
+    help: (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65).
+    type: Text
+attributes:
+  kms_key_id:
+    help: ! '- The ARN for the KMS encryption key.'
+    type: Text
+  encrypted:
+    help: ! '- Whether EFS is encrypted.'
+    type: Text
+  dns_name:
+    help: ! '- The DNS name for the filesystem per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html>
+      .'
+    type: Text
+  performance_mode:
+    help: ! '- The PerformanceMode of the file system.'
+    type: Text
+  tags:
+    help: ! '- The list of tags assigned to the file system.'
+    type: Text
