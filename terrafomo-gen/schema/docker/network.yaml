@@ -1,0 +1,36 @@
+_name: docker_network
+arguments:
+  _name:
+    required: true
+    help: (Required, string) The name of the Docker network.
+    type: Text
+  _ipam_driver:
+    required: false
+    help: (Optional, string) Driver used by the custom IP scheme of the network.
+    type: Text
+  _driver:
+    required: false
+    help: (Optional, string) Name of the network driver to use. Defaults to @bridge@
+      driver.
+    type: Text
+  _ipam_config:
+    required: false
+    help: (Optional, block) See <#ipam_config> below for details.
+    type: Text
+  _options:
+    required: false
+    help: (Optional, map of strings) Network specific options to be used by the drivers.
+    type: Text
+  _internal:
+    required: false
+    help: (Optional, boolean) Restrict external access to the network. Defaults to
+      @false@ .
+    type: Text
+  _check_duplicate:
+    required: false
+    help: (Optional, boolean) Requests daemon to check for networks with same name.
+    type: Text
+attributes: {}
+about: Manages a Docker Network. This can be used alongside </docs/providers/docker/r/container.html>
+  to create virtual networks within the docker environment.
+examples: []

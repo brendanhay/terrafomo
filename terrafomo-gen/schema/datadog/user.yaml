@@ -1,0 +1,41 @@
+_name: datadog_user
+arguments:
+  _is_admin:
+    required: false
+    help: (Optional) Whether the user is an administrator
+    type: Text
+  _name:
+    required: true
+    help: (Required) Name for user
+    type: Text
+  _email:
+    required: true
+    help: (Required) Email address for user
+    type: Text
+  _role:
+    required: false
+    help: ! '(Optional) Role description for user (NOTE: can only be applied on user
+      creation)'
+    type: Text
+  _disabled:
+    required: false
+    help: (Optional) Whether the user is disabled
+    type: Text
+  _handle:
+    required: true
+    help: (Required) The user handle, must be a valid email.
+    type: Text
+attributes:
+  disabled:
+    help: ! '- Returns true if Datadog user is disabled (NOTE: Datadog does not actually
+      delete users so this will be true for those as well)'
+    type: Text
+  verified:
+    help: ! '- Returns true if Datadog user is verified'
+    type: Text
+  id:
+    help: ! '- ID of the Datadog user'
+    type: Text
+about: Provides a Datadog user resource. This can be used to create and manage Datadog
+  users.
+examples: []

@@ -1,0 +1,80 @@
+_name: aws_ebs_volume
+arguments:
+  _filter:
+    required: false
+    help: (Optional) One or more name/value pairs to filter off of. There are several
+      valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html>
+      .
+    type: Text
+  _snapshot_id:
+    required: true
+    help: (Optional) A snapshot to base the EBS volume off of.
+    type: Text
+  _availability_zone:
+    required: true
+    help: (Required) The AZ where the EBS volume will exist.
+    type: Text
+  _iops:
+    required: false
+    help: (Optional) The amount of IOPS to provision for the disk.
+    type: Text
+  _size:
+    required: false
+    help: (Optional) The size of the drive in GiBs.
+    type: Text
+  _type':
+    required: false
+    help: ! '(Optional) The type of EBS volume. Can be "standard", "gp2", "io1", "sc1"
+      or "st1" (Default: "standard").'
+    type: Text
+  _kms_key_id:
+    required: false
+    help: (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@
+      , @encrypted@ needs to be set to true.
+    type: Text
+  _most_recent:
+    required: false
+    help: (Optional) If more than one result is returned, use the most recent Volume.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+  _encrypted:
+    required: false
+    help: (Optional) If true, the disk will be encrypted.
+    type: Text
+attributes:
+  volume_type:
+    help: ! '- The type of EBS volume.'
+    type: Text
+  kms_key_id:
+    help: ! '- The ARN for the KMS encryption key.'
+    type: Text
+  volume_id:
+    help: ! '- The volume ID (e.g. vol-59fcb34e).'
+    type: Text
+  size:
+    help: ! '- The size of the drive in GiBs.'
+    type: Text
+  iops:
+    help: ! '- The amount of IOPS for the disk.'
+    type: Text
+  encrypted:
+    help: ! '- Whether the disk is encrypted.'
+    type: Text
+  id:
+    help: ! '- The volume ID (e.g. vol-59fcb34e).'
+    type: Text
+  availability_zone:
+    help: ! '- The AZ where the EBS volume exists.'
+    type: Text
+  snapshot_id:
+    help: ! '- The snapshot_id the EBS volume is based off.'
+    type: Text
+  tags:
+    help: ! '- A mapping of tags for the resource.'
+    type: Text
+about: Use this data source to get information about an EBS volume for use in other
+  resources.
+examples: []

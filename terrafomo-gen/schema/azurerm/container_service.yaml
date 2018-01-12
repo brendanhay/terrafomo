@@ -1,0 +1,65 @@
+_name: azurerm_container_service
+arguments:
+  _master_profile:
+    required: true
+    help: (Required) A Master Profile block as documented below.
+    type: Text
+  _linux_profile:
+    required: true
+    help: (Required) A Linux Profile block as documented below.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the Container Service instance to create. Changing
+      this forces a new resource to be created.
+    type: Text
+  _agent_pool_profile:
+    required: true
+    help: (Required) One or more Agent Pool Profile's block as documented below.
+    type: Text
+  _orchestration_platform:
+    required: true
+    help: (Required) Specifies the Container Orchestration Platform to use. Currently
+      can be either @DCOS@ , @Kubernetes@ or @Swarm@ . Changing this forces a new
+      resource to be created.
+    type: Text
+  _diagnostics_profile:
+    required: true
+    help: (Required) A VM Diagnostics Profile block as documented below.
+    type: Text
+  _service_principal:
+    required: true
+    help: ! '- (only Required when you''re using @Kubernetes@ as an Orchestration
+      Platform) A Service Principal block as documented below.'
+    type: Text
+  _location:
+    required: true
+    help: (Required) The location where the Container Service instance should be created.
+      Changing this forces a new resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) Specifies the resource group where the resource exists. Changing
+      this forces a new resource to be created.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  agent_pool_profile.fqdn:
+    help: ! '- FDQN for the agent pool.'
+    type: Text
+  master_profile.fqdn:
+    help: ! '- FDQN for the master.'
+    type: Text
+  diagnostics_profile.storage_uri:
+    help: ! '- The URI of the storage account where diagnostics are stored.'
+    type: Text
+  id:
+    help: ! '- The Container Service ID.'
+    type: Text
+about: ! 'Creates an Azure Container Service Instance ~> Note: All arguments including
+  the client secret will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  . ## Example Usage (DCOS)'
+examples: []

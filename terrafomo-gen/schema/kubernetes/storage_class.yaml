@@ -1,0 +1,20 @@
+_name: kubernetes_storage_class
+arguments:
+  _storage_provisioner:
+    required: true
+    help: (Required) Indicates the type of the provisioner
+    type: Text
+  _metadata:
+    required: true
+    help: ! '(Required) Standard storage class''s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata'
+    type: Text
+  _parameters:
+    required: false
+    help: (Optional) The parameters for the provisioner that should create volumes
+      of this storage class. Read more about <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#parameters>
+      .
+    type: Text
+attributes: {}
+about: Storage class is the foundation of dynamic provisioning, allowing cluster administrators
+  to define abstractions for the underlying storage platform. Read more at http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kubernetes.html
+examples: []

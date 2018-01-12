@@ -1,0 +1,70 @@
+_name: google_compute_vpn_tunnel
+arguments:
+  _region:
+    required: false
+    help: (Optional) The region this tunnel should sit in. If not specified, the project
+      region will be used. Changing this forces a new resource to be created.
+    type: Text
+  _local_traffic_selector:
+    required: false
+    help: (Optional) Specifies which CIDR ranges are announced to the VPN peer. Mandatory
+      if the VPN gateway is attached to a custom subnetted network. Refer to Google
+      documentation for more information.
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _ike_version:
+    required: false
+    help: (Optional) Either version 1 or 2. Default is 2. Changing this forces a new
+      resource to be created.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  _remote_traffic_selector:
+    required: false
+    help: (Optional) Specifies which CIDR ranges the VPN tunnel can route to the remote
+      side. Mandatory if the VPN gateway is attached to a custom subnetted network.
+      Refer to Google documentation for more information.
+    type: Text
+  _target_vpn_gateway:
+    required: true
+    help: (Required) A link to the VPN gateway sitting inside GCE. Changing this forces
+      a new resource to be created.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description of the resource. Changing this forces a new resource
+      to be created.
+    type: Text
+  _router:
+    required: false
+    help: (Optional) Name of a Cloud Router in the same region to be used for dynamic
+      routing. Refer to Google documentation for more information.
+    type: Text
+  _shared_secret:
+    required: true
+    help: (Required) A passphrase shared between the two VPN gateways. Changing this
+      forces a new resource to be created.
+    type: Text
+  _peer_ip:
+    required: true
+    help: (Required) The VPN gateway sitting outside of GCE. Changing this forces
+      a new resource to be created.
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  detailed_status:
+    help: ! '- Information about the status of the VPN tunnel.'
+    type: Text
+about: ! 'Manages a VPN Tunnel to the GCE network. For more info, read the <https://cloud.google.com/compute/docs/vpn>
+  . ~> Note: All arguments including the @shared_secret@ will be stored in the raw
+  state as plain-text. </docs/state/sensitive-data.html> .'
+examples: []

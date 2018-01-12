@@ -1,0 +1,29 @@
+_name: aws_opsworks_rds_db_instance
+arguments:
+  _db_password:
+    required: true
+    help: (Required) A db password
+    type: Text
+  _db_user:
+    required: true
+    help: (Required) A db username
+    type: Text
+  _rds_db_instance_arn:
+    required: true
+    help: (Required) The db instance to register for this stack. Changing this will
+      force a new resource.
+    type: Text
+  _stack_id:
+    required: true
+    help: (Required) The stack to register a db inatance for. Changing this will force
+      a new resource.
+    type: Text
+attributes:
+  id:
+    help: ! '- The computed id. Please note that this is only used internally to identify
+      the stack <-> instance relation. This value is not used in aws.'
+    type: Text
+about: ! 'Provides an OpsWorks RDS DB Instance resource. ~> Note: All arguments including
+  the username and password will be stored in the raw state as plain-text. </docs/state/sensitive-data.html>
+  .'
+examples: []

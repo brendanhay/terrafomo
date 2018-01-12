@@ -1,0 +1,62 @@
+_name: gitlab_project
+arguments:
+  _default_branch:
+    required: false
+    help: (Optional) The default branch for the project.
+    type: Text
+  _issues_enabled:
+    required: false
+    help: (Optional) Enable issue tracking for the project.
+    type: Text
+  _merge_requests_enabled:
+    required: false
+    help: (Optional) Enable merge requests for the project.
+    type: Text
+  _visibility_level:
+    required: false
+    help: (Optional) Set to @public@ to create a public project. Valid values are
+      @private@ , @internal@ , @public@ . Repositories are created as private by default.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the project.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description of the project.
+    type: Text
+  _path:
+    required: false
+    help: (Optional) The path of the repository.
+    type: Text
+  _snippets_enabled:
+    required: false
+    help: (Optional) Enable snippets for the project.
+    type: Text
+  _namespace_id:
+    required: false
+    help: (Optional) The namespace (group or user) of the project. Defaults to your
+      user. See <group.html> for an example.
+    type: Text
+  _wiki_enabled:
+    required: false
+    help: (Optional) Enable wiki for the project.
+    type: Text
+attributes:
+  http_url_to_repo:
+    help: ! '- URL that can be provided to @git clone@ to clone the repository via
+      HTTP.'
+    type: Text
+  web_url:
+    help: ! '- URL that can be used to find the project in a browser.'
+    type: Text
+  ssh_url_to_repo:
+    help: ! '- URL that can be provided to @git clone@ to clone the repository via
+      SSH.'
+    type: Text
+  id:
+    help: ! '- Integer that uniquely identifies the project within the gitlab install.'
+    type: Text
+about: This resource allows you to create and manage projects within your GitLab group
+  or within your user.
+examples: []

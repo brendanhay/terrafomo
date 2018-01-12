@@ -1,0 +1,37 @@
+_name: azurerm_eventgrid_topic
+arguments:
+  _name:
+    required: true
+    help: (Required) Specifies the name of the EventGrid Topic resource. Changing
+      this forces a new resource to be created.
+    type: Text
+  _location:
+    required: true
+    help: (Required) Specifies the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which the EventGrid Topic exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  secondary_access_key:
+    help: ! '- The Secondary Shared Access Key associated with the EventGrid Topic.'
+    type: Text
+  primary_access_key:
+    help: ! '- The Primary Shared Access Key associated with the EventGrid Topic.'
+    type: Text
+  id:
+    help: ! '- The EventGrid Topic ID.'
+    type: Text
+  endpoint:
+    help: ! '- The Endpoint associated with the EventGrid Topic.'
+    type: Text
+about: ! 'Manages an EventGrid Topic ~> Note: at this time EventGrid Topic''s are
+  only available in a limited number of regions.'
+examples: []

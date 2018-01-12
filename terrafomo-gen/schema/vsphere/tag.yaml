@@ -1,0 +1,22 @@
+_name: vsphere_tag
+arguments:
+  _category_id:
+    required: true
+    help: ! '- (String, required) The ID of the tag category the tag is located in.'
+    type: Text
+  _name:
+    required: true
+    help: ! '- (String, required) The name of the tag.'
+    type: Text
+  _description:
+    required: true
+    help: ! '- (String, optional) A description for the tag.'
+    type: Text
+attributes: {}
+about: ! 'The @vsphere_tag@ data source can be used to reference tags that are not
+  managed by Terraform. Its attributes are exactly the same as the </docs/providers/vsphere/r/tag.html>
+  , and, like importing, the data source takes a name and category to search on. The
+  @id@ and other attributes are then populated with the data found by the search.
+  ~> NOTE: Tagging support is unsupported on direct ESXi connections and requires
+  vCenter 6.0 or higher.'
+examples: []

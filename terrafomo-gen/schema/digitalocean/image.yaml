@@ -1,0 +1,34 @@
+_name: digitalocean_image
+arguments:
+  _name:
+    required: true
+    help: ! '- The name of the image.'
+    type: Text
+attributes:
+  image:
+    help: ! '- The id of the image.'
+    type: Text
+  private:
+    help: ! '- Is image a public image or not. Public images represents Linux distributions
+      or Application, while non-public images represent snapshots and backups and
+      are only available within your account.'
+    type: Text
+  size_gigabytes:
+    help: ! ': The size of the image in gigabytes.'
+    type: Text
+  regions:
+    help: ! ': The regions that the image is available in.'
+    type: Text
+  name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  min_disk_size:
+    help: ! ': The minimum ''disk'' required for the image.'
+    type: Text
+  type:
+    help: ! ': Type of the image. Can be "snapshot" or "backup".'
+    type: Text
+about: Get information on an snapshot images. The aim of this datasource is to enable
+  you to build droplets based on snapshot names. An error is triggered if zero or
+  more than one result is returned by the query.
+examples: []

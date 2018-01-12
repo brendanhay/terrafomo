@@ -1,0 +1,39 @@
+_name: azurerm_virtual_machine_extension
+arguments:
+  _virtual_machine_name:
+    required: true
+    help: (Required) The name of the virtual machine. Changing this forces a new resource
+      to be created.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the virtual machine extension peering. Changing this
+      forces a new resource to be created.
+    type: Text
+  _publisher:
+    required: true
+    help: (Required) The publisher of the extension, available publishers can be found
+      by using the Azure CLI.
+    type: Text
+  _location:
+    required: true
+    help: (Required) The location where the extension is created. Changing this forces
+      a new resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the virtual
+      network. Changing this forces a new resource to be created.
+    type: Text
+  _type':
+    required: true
+    help: (Required) The type of extension, available types for a publisher can be
+      found using the Azure CLI.
+    type: Text
+attributes:
+  id:
+    help: ! '- The Virtual Machine Extension ID.'
+    type: Text
+about: Creates a new Virtual Machine Extension to provide post deployment configuration
+  and run automated tasks.
+examples: []

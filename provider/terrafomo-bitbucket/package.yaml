@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-bitbucket
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Bitbucket
+    - Terrafomo.Bitbucket.DataSource
+    - Terrafomo.Bitbucket.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

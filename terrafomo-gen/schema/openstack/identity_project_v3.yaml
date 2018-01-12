@@ -1,0 +1,43 @@
+_name: openstack_identity_project_v3
+arguments:
+  _region:
+    required: false
+    help: (Optional) The region in which to obtain the V3 Keystone client. If omitted,
+      the @region@ argument of the provider is used. Changing this creates a new User.
+    type: Text
+  _is_domain:
+    required: false
+    help: (Optional) Whether this project is a domain. Valid values are @true@ and
+      @false@ .
+    type: Text
+  _enabled:
+    required: false
+    help: (Optional) Whether the project is enabled or disabled. Valid values are
+      @true@ and @false@ .
+    type: Text
+  _domain_id:
+    required: false
+    help: (Optional) The domain this project belongs to.
+    type: Text
+  _name:
+    required: false
+    help: (Optional) The name of the project.
+    type: Text
+  _parent_id:
+    required: false
+    help: (Optional) The parent of this project.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A description of the project.
+    type: Text
+attributes:
+  domain_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  parent_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+about: ! 'Manages a V3 Project resource within OpenStack Keystone. Note: You must
+  have admin privileges in your OpenStack cloud to use this resource.'
+examples: []

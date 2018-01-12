@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-scaleway
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Scaleway
+    - Terrafomo.Scaleway.DataSource
+    - Terrafomo.Scaleway.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

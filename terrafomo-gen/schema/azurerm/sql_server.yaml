@@ -1,0 +1,46 @@
+_name: azurerm_sql_server
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the SQL Server. This needs to be globally unique
+      within Azure.
+    type: Text
+  _location:
+    required: true
+    help: (Required) Specifies the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the SQL Server.
+    type: Text
+  _version:
+    required: true
+    help: ! '(Required) The version for the new server. Valid values are: 2.0 (for
+      v11 server) and 12.0 (for v12 server).'
+    type: Text
+  _administrator_login:
+    required: true
+    help: (Required) The administrator login name for the new server. Changing this
+      forces a new resource to be created.
+    type: Text
+  _administrator_login_password:
+    required: true
+    help: (Required) The password associated with the @administrator_login@ user.
+      Needs to comply with Azure's <https://msdn.microsoft.com/library/ms161959.aspx>
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  fully_qualified_domain_name:
+    help: ! '- The fully qualified domain name of the Azure SQL Server (e.g. myServerName.database.windows.net)'
+    type: Text
+  id:
+    help: ! '- The SQL Server ID.'
+    type: Text
+about: ! 'Manages a SQL Azure Database Server. ~> Note: All arguments including the
+  administrator login and password will be stored in the raw state as plain-text.
+  </docs/state/sensitive-data.html> .'
+examples: []

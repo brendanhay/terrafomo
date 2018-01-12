@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-dnsmadeeasy
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.DNSMadeEasy
+    - Terrafomo.DNSMadeEasy.DataSource
+    - Terrafomo.DNSMadeEasy.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

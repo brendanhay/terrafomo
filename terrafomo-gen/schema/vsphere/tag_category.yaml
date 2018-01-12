@@ -1,0 +1,30 @@
+_name: vsphere_tag_category
+arguments:
+  _associable_types:
+    required: true
+    help: ! '- (List of strings, required) A list object types that this category
+      is valid to be assigned to. For a full list, click <#associable-object-types>
+      .'
+    type: Text
+  _name:
+    required: true
+    help: ! '- (String, required) The name of the tag category.'
+    type: Text
+  _description:
+    required: true
+    help: ! '- (String, optional) A description for the category.'
+    type: Text
+  _cardinality:
+    required: true
+    help: ! '- (String, required, forces new resource) The number of tags that can
+      be assigned from this category to a single object at once. Can be one of @SINGLE@
+      (object can only be assigned one tag in this category), to @MULTIPLE@ (object
+      can be assigned multiple tags in this category).'
+    type: Text
+attributes: {}
+about: ! 'The @vsphere_tag_category@ data source can be used to reference tag categories
+  that are not managed by Terraform. Its attributes are exactly the same as the </docs/providers/vsphere/r/tag_category.html>
+  , and, like importing, the data source takes a name to search on. The @id@ and other
+  attributes are then populated with the data found by the search. ~> NOTE: Tagging
+  support is unsupported on direct ESXi connections and requires vCenter 6.0 or higher.'
+examples: []

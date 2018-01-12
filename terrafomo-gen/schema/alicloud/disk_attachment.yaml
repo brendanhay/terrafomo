@@ -1,0 +1,28 @@
+_name: alicloud_disk_attachment
+arguments:
+  _instance_id:
+    required: true
+    help: (Required, Forces new resource) ID of the Instance to attach to.
+    type: Text
+  _device_name:
+    required: true
+    help: (Required, Forces new resource) The device name to expose to the instance
+      (for example, /dev/xvdb).
+    type: Text
+  _disk_id:
+    required: true
+    help: (Required, Forces new resource) ID of the Disk to be attached.
+    type: Text
+attributes:
+  device_name:
+    help: ! '- The device name exposed to the instance.'
+    type: Text
+  instance_id:
+    help: ! '- ID of the Instance.'
+    type: Text
+  disk_id:
+    help: ! '- ID of the Disk.'
+    type: Text
+about: Provides an Alicloud ECS Disk Attachment as a resource, to attach and detach
+  disks from ECS Instances.
+examples: []

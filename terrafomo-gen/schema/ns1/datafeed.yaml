@@ -1,0 +1,19 @@
+_name: ns1_datafeed
+arguments:
+  _source_id:
+    required: true
+    help: (Required) The data source id that this feed is connected to.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The free form name of the data feed.
+    type: Text
+  _config:
+    required: false
+    help: (Optional) The feeds configuration matching the specification in 'feed_config'
+      from /data/sourcetypes.
+    type: Text
+attributes: {}
+about: Provides a NS1 Data Feed resource. This can be used to create, modify, and
+  delete data feeds.
+examples: []

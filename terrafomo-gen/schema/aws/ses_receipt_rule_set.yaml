@@ -1,0 +1,9 @@
+_name: aws_ses_receipt_rule_set
+arguments:
+  _rule_set_name:
+    required: true
+    help: (Required) The name of the rule set
+    type: Text
+attributes: {}
+about: Provides an SES receipt rule set resource
+examples: []

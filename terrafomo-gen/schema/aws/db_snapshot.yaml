@@ -1,0 +1,93 @@
+_name: aws_db_snapshot
+arguments:
+  _snapshot_type:
+    required: false
+    help: (Optional) The type of snapshots to be returned. If you don't specify a
+      SnapshotType value, then both automated and manual snapshots are returned. Shared
+      and public DB snapshots are not included in the returned results by default.
+      Possible values are, @automated@ , @manual@ , @shared@ and @public@ .
+    type: Text
+  _include_shared:
+    required: false
+    help: (Optional) Set this value to true to include shared manual DB snapshots
+      from other AWS accounts that this AWS account has been given permission to copy
+      or restore, otherwise set this value to false. The default is @false@ .
+    type: Text
+  _db_instance_identifier:
+    required: true
+    help: (Optional) Returns the list of snapshots created by the specific db_instance
+    type: Text
+  _include_public:
+    required: false
+    help: (Optional) Set this value to true to include manual DB snapshots that are
+      public and can be copied or restored by any AWS account, otherwise set this
+      value to false. The default is @false@ .
+    type: Text
+  _most_recent:
+    required: false
+    help: (Optional) If more than one result is returned, use the most recent Snapshot.
+    type: Text
+  _db_snapshot_identifier:
+    required: true
+    help: (Optional) Returns information on a specific snapshot_id.
+    type: Text
+attributes:
+  status:
+    help: ! '- Specifies the status of this DB snapshot.'
+    type: Text
+  kms_key_id:
+    help: ! '- The ARN for the KMS encryption key.'
+    type: Text
+  allocated_storage:
+    help: ! '- Specifies the allocated storage size in gigabytes (GB).'
+    type: Text
+  vpc_id:
+    help: ! '- Specifies the storage type associated with DB snapshot.'
+    type: Text
+  source_region:
+    help: ! '- The region that the DB snapshot was created in or copied from.'
+    type: Text
+  snapshot_create_time:
+    help: ! '- Provides the time when the snapshot was taken, in Universal Coordinated
+      Time (UTC).'
+    type: Text
+  iops:
+    help: ! '- Specifies the Provisioned IOPS (I/O operations per second) value of
+      the DB instance at the time of the snapshot.'
+    type: Text
+  option_group_name:
+    help: ! '- Provides the option group name for the DB snapshot.'
+    type: Text
+  license_model:
+    help: ! '- License model information for the restored DB instance.'
+    type: Text
+  source_db_snapshot_identifier:
+    help: ! '- The DB snapshot Arn that the DB snapshot was copied from. It only has
+      value in case of cross customer or cross region copy.'
+    type: Text
+  engine_version:
+    help: ! '- Specifies the version of the database engine.'
+    type: Text
+  storage_type:
+    help: ! '- Specifies the storage type associated with DB snapshot.'
+    type: Text
+  engine:
+    help: ! '- Specifies the name of the database engine.'
+    type: Text
+  encrypted:
+    help: ! '- Specifies whether the DB snapshot is encrypted.'
+    type: Text
+  db_snapshot_arn:
+    help: ! '- The Amazon Resource Name (ARN) for the DB snapshot.'
+    type: Text
+  id:
+    help: ! '- The snapshot ID.'
+    type: Text
+  availability_zone:
+    help: ! '- Specifies the name of the Availability Zone the DB instance was located
+      in at the time of the DB snapshot.'
+    type: Text
+about: ! 'Use this data source to get information about a DB Snapshot for use when
+  provisioning DB instances ~> NOTE: This data source does not apply to snapshots
+  created on Aurora DB clusters.'
+examples: []

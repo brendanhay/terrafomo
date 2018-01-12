@@ -1,0 +1,19 @@
+_name: newrelic_application
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the application in New Relic.
+    type: Text
+attributes:
+  instance_ids:
+    help: ! '- A list of instance IDs associated with the application.'
+    type: Text
+  host_ids:
+    help: ! '- A list of host IDs associated with the application.'
+    type: Text
+  id:
+    help: ! '- The ID of the application.'
+    type: Text
+about: Use this data source to get information about a specific application in New
+  Relic.
+examples: []

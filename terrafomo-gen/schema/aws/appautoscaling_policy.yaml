@@ -1,0 +1,41 @@
+_name: aws_appautoscaling_policy
+arguments:
+  _target_tracking_scaling_policy_configuration:
+    required: false
+    help: (Optional) A target tracking policy, requires @policy_type = "TargetTrackingScaling"@
+      . See supported fields below.
+    type: Text
+  _scalable_dimension:
+    required: true
+    help: ! '(Required) The scalable dimension of the scalable target. Documentation
+      can be found in the @ScalableDimension@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters>'
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the policy.
+    type: Text
+  _resource_id:
+    required: true
+    help: ! '(Required) The resource type and unique identifier string for the resource
+      associated with the scaling policy. Documentation can be found in the @ResourceId@
+      parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters>'
+    type: Text
+  _step_scaling_policy_configuration:
+    required: false
+    help: (Optional) Step scaling policy configuration, requires @policy_type = "StepScaling"@
+      (default). See supported fields below.
+    type: Text
+  _policy_type:
+    required: false
+    help: (Optional) For DynamoDB, only @TargetTrackingScaling@ is supported. For
+      any other service, only @StepScaling@ is supported. Defaults to @StepScaling@
+      .
+    type: Text
+  _service_namespace:
+    required: true
+    help: ! '(Required) The AWS service namespace of the scalable target. Documentation
+      can be found in the @ServiceNamespace@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters>'
+    type: Text
+attributes: {}
+about: Provides an Application AutoScaling Policy resource.
+examples: []

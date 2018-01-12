@@ -1,0 +1,26 @@
+_name: scaleway_volume
+arguments:
+  _server:
+    required: true
+    help: ! '- (Read Only) the @scaleway_server@ instance which has this volume mounted
+      right now'
+    type: Text
+  _size_in_gb:
+    required: true
+    help: (Required) size of the volume in GB
+    type: Text
+  _name:
+    required: true
+    help: (Required) name of volume
+    type: Text
+  _type':
+    required: true
+    help: (Required) type of volume
+    type: Text
+attributes:
+  id:
+    help: ! '- id of the new resource'
+    type: Text
+about: Provides volumes. This allows volumes to be created, updated and deleted. For
+  additional details please refer to <https://developer.scaleway.com/#volumes> .
+examples: []

@@ -1,0 +1,46 @@
+_name: dns_a_record_set
+arguments:
+  _host:
+    required: true
+    help: ! '- (required): Host to look up'
+    type: Text
+  _addresses:
+    required: true
+    help: (Required) The IPv4 addresses this record set will point to.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the record set. The @zone@ argument will be appended
+      to this value to create the full record path.
+    type: Text
+  _ttl:
+    required: false
+    help: (Optional) The TTL of the record set. Defaults to @3600@ .
+    type: Text
+  _zone:
+    required: true
+    help: (Required) DNS zone the record set belongs to. It must be an FQDN, that
+      is, include the trailing dot.
+    type: Text
+attributes:
+  ttl:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  addrs:
+    help: ! '- A list of IP addresses. IP addresses are always sorted to avoid constant
+      changing plans.'
+    type: Text
+  addresses:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  zone:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  id:
+    help: ! '- Set to @host@ .'
+    type: Text
+about: Use this data source to get DNS A records of the host.
+examples: []

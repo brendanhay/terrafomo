@@ -1,0 +1,15 @@
+_name: aws_vpc_endpoint_service
+arguments:
+  _service:
+    required: true
+    help: (Required) The common name of the AWS service (e.g. @s3@ ).
+    type: Text
+attributes:
+  service_name:
+    help: ! '- The service name of the AWS service that can be specified when creating
+      a VPC endpoint.'
+    type: Text
+about: The VPC Endpoint Service data source allows access to a specific AWS service
+  that can be specified when creating a VPC endpoint within the region configured
+  in the provider.
+examples: []

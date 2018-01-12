@@ -1,0 +1,21 @@
+_name: ovh_vrack_publiccloud_attachment
+arguments:
+  _project_id:
+    required: true
+    help: (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@
+      environment variable is used.
+    type: Text
+  _vrack_id:
+    required: true
+    help: (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment
+      variable is used.
+    type: Text
+attributes:
+  vrack_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  project_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+about: Attach an existing PublicCloud project to an existing VRack.
+examples: []

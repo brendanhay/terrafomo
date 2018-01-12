@@ -1,0 +1,49 @@
+_name: azurerm_image
+arguments:
+  _source_virtual_machine_id:
+    required: false
+    help: (Optional) The Virtual Machine ID from which to create the image.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the Image.
+    type: Text
+  _os_disk:
+    required: false
+    help: (Optional) One or more @os_disk@ elements as defined below.
+    type: Text
+  _location:
+    required: true
+    help: (Required) Specified the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _data_disk:
+    required: false
+    help: (Optional) One or more @data_disk@ elements as defined below.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The Name of the Resource Group where this Image exists.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  location:
+    help: ! '- the Azure Location where this Image exists.'
+    type: Text
+  data_disk:
+    help: ! '- a collection of @data_disk@ blocks as defined below.'
+    type: Text
+  id:
+    help: ! '- The managed image ID.'
+    type: Text
+  os_disk:
+    help: ! '- a @os_disk@ block as defined below.'
+    type: Text
+  tags:
+    help: ! '- a mapping of tags to assigned to the resource.'
+    type: Text
+about: Use this data source to access information about an Image.
+examples: []

@@ -1,0 +1,78 @@
+_name: oneandone_server
+arguments:
+  _firewall_policy_id:
+    required: false
+    help: (Optional) ID of firewall policy
+    type: Text
+  _name:
+    required: true
+    help: -(Required) The name of the server.
+    type: Text
+  _password:
+    required: false
+    help: (Optional) Desired password.
+    type: Text
+  _image:
+    required: true
+    help: -(Required) The name of a desired image to be provisioned with the server
+    type: Text
+  _ip:
+    required: false
+    help: (Optional) IP address for the server
+    type: Text
+  _cores_per_processor:
+    required: true
+    help: -(Optional) Number of cores per processor
+    type: Text
+  _monitoring_policy_id:
+    required: false
+    help: (Optional) ID of monitoring policy
+    type: Text
+  _ssh_key_public:
+    required: false
+    help: (Optional) The public key data in OpenSSH authorized_keys format.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) Description of the server
+    type: Text
+  _ram:
+    required: true
+    help: -(Optional) Size of ram.
+    type: Text
+  _vcores:
+    required: true
+    help: -(Optional) Number of virtual cores.
+    type: Text
+  _datacenter:
+    required: false
+    help: (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@
+      or @ES@
+    type: Text
+  _hdds:
+    required: false
+    help: (Optional) List of HDDs. One HDD must be main.
+    type: Text
+  _loadbalancer_id:
+    required: false
+    help: (Optional) ID of the load balancer
+    type: Text
+  _*disk_size:
+    required: true
+    help: -(Required) The size of HDD
+    type: Text
+  _ssh_key_path:
+    required: false
+    help: (Optional) Path to private ssh key
+    type: Text
+  _fixed_instance_size:
+    required: false
+    help: (Optional) ID of a fixed instance size
+    type: Text
+  _*is_main:
+    required: false
+    help: (Optional) Indicates if HDD is to be used as main hard disk of the server
+    type: Text
+attributes: {}
+about: Manages a Server on 1&1
+examples: []

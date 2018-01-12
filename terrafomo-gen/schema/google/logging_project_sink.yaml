@@ -1,0 +1,22 @@
+_name: google_logging_project_sink
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the logging sink.
+    type: Text
+  _destination:
+    required: true
+    help: ! '(Required) The destination of the sink (or, in other words, where logs
+      are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery
+      dataset. Examples:'
+    type: Text
+attributes:
+  writer_identity:
+    help: ! '- The identity associated with this sink. This identity must be granted
+      write access to the configured @destination@ .'
+    type: Text
+about: Manages a project-level logging sink. For more information see <https://cloud.google.com/logging/docs/>
+  , <https://cloud.google.com/logging/docs/api/tasks/exporting-logs> and <https://cloud.google.com/compute/docs/reference/latest/instances>
+  . Note that you must have the "Logs Configuration Writer" IAM role ( @roles/logging.configWriter@
+  ) granted to the credentials used with terraform.
+examples: []

@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-datadog
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Datadog
+    - Terrafomo.Datadog.DataSource
+    - Terrafomo.Datadog.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

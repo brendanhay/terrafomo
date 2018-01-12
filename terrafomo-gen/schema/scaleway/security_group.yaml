@@ -1,0 +1,18 @@
+_name: scaleway_security_group
+arguments:
+  _name:
+    required: true
+    help: (Required) name of security group
+    type: Text
+  _description:
+    required: true
+    help: (Required) description of security group
+    type: Text
+attributes:
+  id:
+    help: ! '- id of the new resource'
+    type: Text
+about: Provides security groups. This allows security groups to be created, updated
+  and deleted. For additional details please refer to <https://developer.scaleway.com/#security-groups>
+  .
+examples: []

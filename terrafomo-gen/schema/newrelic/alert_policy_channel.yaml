@@ -1,0 +1,13 @@
+_name: newrelic_alert_policy_channel
+arguments:
+  _policy_id:
+    required: true
+    help: (Required) The ID of the policy.
+    type: Text
+  _channel_id:
+    required: true
+    help: (Required) The ID of the channel.
+    type: Text
+attributes: {}
+about: ''
+examples: []

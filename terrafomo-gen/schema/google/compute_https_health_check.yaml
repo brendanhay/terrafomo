@@ -1,0 +1,57 @@
+_name: google_compute_https_health_check
+arguments:
+  _request_path:
+    required: false
+    help: (Optional) URL path to query (default /).
+    type: Text
+  _host:
+    required: false
+    help: (Optional) HTTPS host header field (default instance's public ip).
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource, required by GCE. Changing this
+      forces a new resource to be created.
+    type: Text
+  _check_interval_sec:
+    required: false
+    help: (Optional) How often to poll each instance (default 5).
+    type: Text
+  _timeout_sec:
+    required: false
+    help: (Optional) How long before declaring failure (default 5).
+    type: Text
+  _description:
+    required: false
+    help: (Optional) Textual description field.
+    type: Text
+  _healthy_threshold:
+    required: false
+    help: (Optional) Consecutive successes required (default 2).
+    type: Text
+  _port:
+    required: false
+    help: (Optional) TCP port to connect to (default 443).
+    type: Text
+  _unhealthy_threshold:
+    required: false
+    help: (Optional) Consecutive failures required (default 2).
+    type: Text
+attributes:
+  self_link:
+    help: ! '- The URL of the created resource.'
+    type: Text
+about: ! 'Manages an HTTPS health check within GCE. This is used to monitor instances
+  behind load balancers. Timeouts or HTTPS errors cause the instance to be removed
+  from the pool. For more information, see <https://cloud.google.com/compute/docs/load-balancing/health-checks#legacy_health_checks>
+  and <https://cloud.google.com/compute/docs/reference/latest/httpsHealthChecks> .
+  ~> Note: HTTPSHealthChecks/HttpHealthChecks are legacy health checks. The newer
+  </docs/providers/google/r/compute_health_check.html> should be preferred for all
+  uses except except <https://cloud.google.com/compute/docs/load-balancing/network/>
+  which still require the legacy HttpHealthChecks.'
+examples: []

@@ -1,0 +1,23 @@
+_name: clc_public_ip
+arguments:
+  _source_restrictions:
+    required: false
+    help: (Optional) See <#source_restrictions> below for details.
+    type: Text
+  _server_id:
+    required: true
+    help: (Required, string) The name or ID of the server to bind IP to.
+    type: Text
+  _internal_ip_address:
+    required: true
+    help: (Required, string) The internal IP of the NIC to attach to. If not provided,
+      a new internal NIC will be provisioned and used.
+    type: Text
+  _ports:
+    required: false
+    help: (Optional) See <#ports> below for details.
+    type: Text
+attributes: {}
+about: Manages a CLC public ip (for an existing server). See also <https://www.ctl.io/api-docs/v2/#public-ip>
+  .
+examples: []

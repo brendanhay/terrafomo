@@ -1,0 +1,60 @@
+_name: cloudstack_vpn_customer_gateway
+arguments:
+  _ike_lifetime:
+    required: false
+    help: (Optional) The IKE lifetime of phase 2 VPN connection to this VPN Customer
+      Gateway in seconds (defaults 86400)
+    type: Text
+  _dpd:
+    required: false
+    help: (Optional) If DPD is enabled for the related VPN connection (defaults false)
+    type: Text
+  _gateway:
+    required: true
+    help: (Required) The public IP address of the related VPN Gateway.
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The name or ID of the project to create this VPN Customer Gateway
+      in. Changing this forces a new resource to be created.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the VPN Customer Gateway.
+    type: Text
+  _cidr:
+    required: true
+    help: (Required) The CIDR block that needs to be routed through this gateway.
+    type: Text
+  _ipsec_psk:
+    required: true
+    help: (Required) The IPSEC pre-shared key used for this gateway.
+    type: Text
+  _ike_policy:
+    required: true
+    help: (Required) The IKE policy to use for this VPN Customer Gateway.
+    type: Text
+  _esp_lifetime:
+    required: false
+    help: (Optional) The ESP lifetime of phase 2 VPN connection to this VPN Customer
+      Gateway in seconds (defaults 86400)
+    type: Text
+  _esp_policy:
+    required: true
+    help: (Required) The ESP policy to use for this VPN Customer Gateway.
+    type: Text
+attributes:
+  esp_lifetime:
+    help: ! '- The ESP lifetime of phase 2 VPN connection to this VPN Customer Gateway.'
+    type: Text
+  dpd:
+    help: ! '- Enable or disable DPD is enabled for the related VPN connection.'
+    type: Text
+  id:
+    help: ! '- The ID of the VPN Customer Gateway.'
+    type: Text
+  ike_lifetime:
+    help: ! '- The IKE lifetime of phase 2 VPN connection to this VPN Customer Gateway.'
+    type: Text
+about: Creates a site to site VPN local customer gateway.
+examples: []

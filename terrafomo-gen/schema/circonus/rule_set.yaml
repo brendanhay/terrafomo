@@ -1,0 +1,48 @@
+_name: circonus_rule_set
+arguments:
+  _notes:
+    required: false
+    help: (Optional) Notes about this rule set.
+    type: Text
+  _metric_type:
+    required: false
+    help: (Optional) The type of metric this rule set will operate on. Valid values
+      are @numeric@ (the default) and @text@ .
+    type: Text
+  _link:
+    required: false
+    help: (Optional) A link to external documentation (or anything else you feel is
+      important) when a notification is sent.  This value will show up in email alerts
+      and the Circonus UI.
+    type: Text
+  _if:
+    required: true
+    help: (Required) One or more ordered predicate clauses that describe when Circonus
+      should generate a notification.  See below for details on the structure of an
+      @if@ configuration clause.
+    type: Text
+  _parent:
+    required: false
+    help: (Optional) A Circonus Metric ID that, if specified and active with a severity
+      1 alert, will silence this rule set until all of the severity 1 alerts on the
+      parent clear.  This value must match the format @${check_id}_${metric_name}@
+      .
+    type: Text
+  _metric_name:
+    required: true
+    help: (Required) The name of the metric stream within a given check that this
+      rule set is active on.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A list of tags assigned to this rule set.
+    type: Text
+  _check:
+    required: true
+    help: (Required) The Circonus ID that this Rule Set will use to search for a metric
+      stream to alert on.
+    type: Text
+attributes: {}
+about: The @circonus_rule_set@ resource creates and manages a <https://login.circonus.com/resources/api/calls/rule_set>
+  .
+examples: []

@@ -1,0 +1,28 @@
+_name: aws_iam_group_membership
+arguments:
+  _users:
+    required: true
+    help: (Required) A list of IAM User names to associate with the Group
+    type: Text
+  _group:
+    required: true
+    help: – (Required) The IAM Group name to attach the list of @users@ to
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name to identify the Group Membership
+    type: Text
+attributes:
+  group:
+    help: – IAM Group name
+    type: Text
+  users:
+    help: ! '- list of IAM User names'
+    type: Text
+  name:
+    help: ! '- The name to identifing the Group Membership'
+    type: Text
+about: Provides a top level resource to manage IAM Group membership for IAM Users.
+  For more information on managing IAM Groups or IAM Users, see </docs/providers/aws/r/iam_group.html>
+  or </docs/providers/aws/r/iam_user.html>
+examples: []

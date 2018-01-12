@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-newrelic
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.NewRelic
+    - Terrafomo.NewRelic.DataSource
+    - Terrafomo.NewRelic.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

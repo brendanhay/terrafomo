@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-cloudstack
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.CloudStack
+    - Terrafomo.CloudStack.DataSource
+    - Terrafomo.CloudStack.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

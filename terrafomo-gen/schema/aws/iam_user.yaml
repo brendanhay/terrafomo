@@ -1,0 +1,45 @@
+_name: aws_iam_user
+arguments:
+  _name:
+    required: true
+    help: ! '(Required) The user''s name. The name must consist of upper and lowercase
+      alphanumeric characters with no spaces. You can also include any of the following
+      characters: @=,.@-_.@ . User names are not distinguished by case. For example,
+      you cannot create users named both "TESTUSER" and "testuser".'
+    type: Text
+  _user_name:
+    required: true
+    help: (Required) The friendly IAM user name to match.
+    type: Text
+  _force_destroy:
+    required: false
+    help: (Optional, default false) When destroying this user, destroy even if it
+      has non-Terraform-managed IAM access keys, login profile or MFA devices. Without
+      @force_destroy@ a user with non-Terraform-managed access keys and login profile
+      will fail to be destroyed.
+    type: Text
+  _path:
+    required: false
+    help: (Optional, default "/") Path in which to create the user.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The Amazon Resource Name (ARN) assigned by AWS for this user.'
+    type: Text
+  path:
+    help: ! '- Path in which this user was created.'
+    type: Text
+  name:
+    help: ! '- The user''s name.'
+    type: Text
+  user_id:
+    help: ! '- The unique ID assigned by AWS for this user.'
+    type: Text
+  unique_id:
+    help: ! '- The <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#GUIDs>
+      assigned by AWS.'
+    type: Text
+about: This data source can be used to fetch information about a specific IAM user.
+  By using this data source, you can reference IAM user properties without having
+  to hard code ARNs or unique IDs as input.
+examples: []

@@ -1,0 +1,21 @@
+_name: MySQLProvider
+arguments:
+  _endpoint:
+    required: true
+    help: (Required) The address of the MySQL server to use. Most often a "hostname:port"
+      pair, but may also be an absolute path to a Unix socket when the host OS is
+      Unix-compatible.
+    type: Text
+  _password:
+    required: false
+    help: (Optional) Password for the given user, if that user has a password.
+    type: Text
+  _username:
+    required: true
+    help: (Required) Username to use to authenticate with the server.
+    type: Text
+attributes: {}
+about: <http://www.mysql.com> is a relational database server. The MySQL provider
+  exposes resources used to manage the configuration of resources in a MySQL server.
+  Use the navigation to the left to read about the available resources.
+examples: []

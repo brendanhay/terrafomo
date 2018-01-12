@@ -1,0 +1,28 @@
+_name: cloudstack_security_group_rule
+arguments:
+  _project:
+    required: false
+    help: (Optional) The name or ID of the project in which the security group is
+      created. Changing this forces a new resource to be created.
+    type: Text
+  _security_group_id:
+    required: true
+    help: (Required) The security group ID for which to create the rules. Changing
+      this forces a new resource to be created.
+    type: Text
+  _rule:
+    required: true
+    help: (Required) Can be specified multiple times. Each rule block supports fields
+      documented below.
+    type: Text
+  _parallelism:
+    required: true
+    help: (Optional) Specifies how much rules will be created or deleted concurrently.
+      (defaults 2)
+    type: Text
+attributes:
+  id:
+    help: ! '- The security group ID for which the rules are created.'
+    type: Text
+about: Authorizes and revokes both ingress and egress rulea for a given security group.
+examples: []

@@ -1,0 +1,30 @@
+_name: google_spanner_instance
+arguments:
+  _project:
+    required: false
+    help: (Optional) The project in which to look for the @instance@ specified. If
+      it is not provided, the provider project is used.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the database.
+    type: Text
+  _ddl:
+    required: false
+    help: ! '(Optional) An optional list of DDL statements to run inside the newly
+      created database. Statements can create tables, indexes, etc. These statements
+      execute atomically with the creation of the database: if there is an error in
+      any statement, the database is not created.'
+    type: Text
+  _instance':
+    required: true
+    help: (Required) The name of the instance that will serve the new database.
+    type: Text
+attributes:
+  state:
+    help: ! '- The current state of the database.'
+    type: Text
+about: Creates a Google Spanner Database within a Spanner Instance. For more information,
+  see the <https://cloud.google.com/spanner/> , or the <https://cloud.google.com/spanner/docs/reference/rest/v1/projects.instances.databases>
+  .
+examples: []

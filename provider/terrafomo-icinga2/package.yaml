@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-icinga2
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Icinga2
+    - Terrafomo.Icinga2.DataSource
+    - Terrafomo.Icinga2.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

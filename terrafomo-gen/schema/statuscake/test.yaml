@@ -1,0 +1,51 @@
+_name: statuscake_test
+arguments:
+  _website_name:
+    required: true
+    help: (Required) This is the name of the test and the website to be monitored.
+    type: Text
+  _check_rate:
+    required: false
+    help: (Optional) Test check rate in seconds. Defaults to 300
+    type: Text
+  _trigger_rate:
+    required: false
+    help: (Optional) The number of minutes to wait before sending an alert. Default
+      is @5@ .
+    type: Text
+  _website_url:
+    required: true
+    help: (Required) The URL of the website to be monitored
+    type: Text
+  _test_type:
+    required: true
+    help: (Required) The type of Test. Either HTTP or TCP
+    type: Text
+  _timeout:
+    required: false
+    help: (Optional) The timeout of the test in seconds.
+    type: Text
+  _contact_id:
+    required: false
+    help: (Optional) The id of the contact group to be add to the test.  Each test
+      can have only one.
+    type: Text
+  _confirmations:
+    required: false
+    help: (Optional) The number of confirmation servers to use in order to detect
+      downtime. Defaults to 0.
+    type: Text
+  _port:
+    required: false
+    help: (Optional) The port to use when specifying a TCP test.
+    type: Text
+  _paused:
+    required: false
+    help: (Optional) Whether or not the test is paused. Defaults to false.
+    type: Text
+attributes:
+  test_id:
+    help: ! '- A unique identifier for the test.'
+    type: Text
+about: The test resource allows StatusCake tests to be managed by Terraform.
+examples: []

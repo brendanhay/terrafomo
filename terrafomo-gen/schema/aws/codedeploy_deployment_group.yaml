@@ -1,0 +1,64 @@
+_name: aws_codedeploy_deployment_group
+arguments:
+  _trigger_configuration:
+    required: false
+    help: (Optional) Trigger Configurations for the deployment group (documented below).
+    type: Text
+  _service_role_arn:
+    required: true
+    help: (Required) The service role ARN that allows deployments.
+    type: Text
+  _deployment_config_name:
+    required: false
+    help: (Optional) The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime".
+    type: Text
+  _alarm_configuration:
+    required: false
+    help: (Optional) Information about alarms associated with the deployment group
+      (documented below).
+    type: Text
+  _blue_green_deployment_config:
+    required: false
+    help: (Optional) Information about blue/green deployment options for a deployment
+      group (documented below).
+    type: Text
+  _ec2_tag_filter:
+    required: false
+    help: (Optional) Tag filters associated with the group. See the AWS docs for details.
+    type: Text
+  _load_balancer_info:
+    required: false
+    help: (Optional) Information about the load balancer to use in a blue/green deployment
+      (documented below).
+    type: Text
+  _on_premises_instance_tag_filter:
+    required: false
+    help: (Optional) On premise tag filters associated with the group. See the AWS
+      docs for details.
+    type: Text
+  _deployment_style:
+    required: false
+    help: (Optional) Information about the type of deployment, either in-place or
+      blue/green, you want to run and whether to route deployment traffic behind a
+      load balancer (documented below).
+    type: Text
+  _deployment_group_name:
+    required: true
+    help: (Required) The name of the deployment group.
+    type: Text
+  _app_name:
+    required: true
+    help: (Required) The name of the application.
+    type: Text
+  _autoscaling_groups:
+    required: false
+    help: (Optional) Autoscaling groups associated with the deployment group.
+    type: Text
+  _auto_rollback_configuration:
+    required: false
+    help: (Optional) The automatic rollback configuration associated with the deployment
+      group (documented below).
+    type: Text
+attributes: {}
+about: Provides a CodeDeploy Deployment Group for a CodeDeploy Application
+examples: []

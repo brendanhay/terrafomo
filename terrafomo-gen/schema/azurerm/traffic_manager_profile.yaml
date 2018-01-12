@@ -1,0 +1,45 @@
+_name: azurerm_traffic_manager_profile
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the virtual network. Changing this forces a new resource
+      to be created.
+    type: Text
+  _dns_config:
+    required: true
+    help: (Required) This block specifies the DNS configuration of the Profile, it
+      supports the fields documented below.
+    type: Text
+  _monitor_config:
+    required: true
+    help: (Required) This block specifies the Endpoint monitoring configuration for
+      the Profile, it supports the fields documented below.
+    type: Text
+  _profile_status:
+    required: false
+    help: (Optional) The status of the profile, can be set to either @Enabled@ or
+      @Disabled@ . Defaults to @Enabled@ .
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the virtual
+      network.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+  _traffic_routing_method:
+    required: true
+    help: ! '(Required) Specifies the algorithm used to route traffic, possible values
+      are:'
+    type: Text
+attributes:
+  fqdn:
+    help: ! '- The FQDN of the created Profile.'
+    type: Text
+  id:
+    help: ! '- The Traffic Manager Profile id.'
+    type: Text
+about: Creates a Traffic Manager Profile to which multiple endpoints can be attached.
+examples: []

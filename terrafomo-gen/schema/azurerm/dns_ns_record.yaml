@@ -1,0 +1,35 @@
+_name: azurerm_dns_ns_record
+arguments:
+  _record:
+    required: true
+    help: (Required) A list of values that make up the NS record. Each @record@ block
+      supports fields documented below.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the DNS NS Record.
+    type: Text
+  _ttl:
+    required: true
+    help: (Required) The Time To Live (TTL) of the DNS record.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) Specifies the resource group where the resource exists. Changing
+      this forces a new resource to be created.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+  _zone_name:
+    required: true
+    help: (Required) Specifies the DNS Zone where the resource exists. Changing this
+      forces a new resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The DNS NS Record ID.'
+    type: Text
+about: Enables you to manage DNS NS Records within Azure DNS.
+examples: []

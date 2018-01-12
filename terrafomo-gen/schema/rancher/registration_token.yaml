@@ -1,0 +1,42 @@
+_name: rancher_registration_token
+arguments:
+  _environment_id:
+    required: true
+    help: (Required) The ID of the environment to create the token for.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the registration token.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A registration token description.
+    type: Text
+  _host_labels:
+    required: false
+    help: (Optional) A map of host labels to add to the registration command.
+    type: Text
+  _agent_ip:
+    required: false
+    help: (Optional) A string containing the CATTLE_AGENT_IP to add to the registration
+      command.
+    type: Text
+attributes:
+  image:
+    help: ! '- (Computed)'
+    type: Text
+  command:
+    help: ! '- The command used to start a rancher agent for this environment.'
+    type: Text
+  token:
+    help: ! '- The token to use to register new nodes to the environment.'
+    type: Text
+  id:
+    help: ! '- (Computed) The ID of the resource.'
+    type: Text
+  registration_url:
+    help: ! '- The URL to use to register new nodes to the environment.'
+    type: Text
+about: Provides a Rancher Registration Token resource. This can be used to create
+  registration tokens for rancher environments and retrieve their information.
+examples: []

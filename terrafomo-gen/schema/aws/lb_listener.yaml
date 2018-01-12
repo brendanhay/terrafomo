@@ -1,0 +1,46 @@
+_name: aws_lb_listener
+arguments:
+  _ssl_policy:
+    required: false
+    help: (Optional) The name of the SSL Policy for the listener. Required if @protocol@
+      is @HTTPS@ .
+    type: Text
+  _arn:
+    required: true
+    help: (Required) The ARN of the listener.
+    type: Text
+  _default_action:
+    required: true
+    help: (Required) An Action block. Action blocks are documented below.
+    type: Text
+  _load_balancer_arn:
+    required: true
+    help: (Required, Forces New Resource) The ARN of the load balancer.
+    type: Text
+  _protocol:
+    required: false
+    help: (Optional) The protocol for connections from clients to the load balancer.
+      Valid values are @TCP@ , @HTTP@ and @HTTPS@ . Defaults to @HTTP@ .
+    type: Text
+  _certificate_arn:
+    required: false
+    help: (Optional) The ARN of the SSL server certificate. Exactly one certificate
+      is required if the protocol is HTTPS.
+    type: Text
+  _port:
+    required: true
+    help: (Required) The port on which the load balancer is listening.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN of the listener (matches @id@ )'
+    type: Text
+  id:
+    help: ! '- The ARN of the listener (matches @arn@ )'
+    type: Text
+about: ! '~> Note:  @aws_alb_listener@ is known as @aws_lb_listener@ . The functionality
+  is identical. Provides information about a Load Balancer Listener. This data source
+  can prove useful when a module accepts an LB Listener as an input variable and needs
+  to know the LB it is attached to, or other information specific to the listener
+  in question.'
+examples: []

@@ -1,0 +1,153 @@
+_name: openstack_compute_instance_v2
+arguments:
+  _stop_before_destroy:
+    required: false
+    help: (Optional) Whether to try stop instance gracefully before destroying it,
+      thus giving chance for guest OS daemons to stop correctly. If instance doesn't
+      stop within timeout, it will be destroyed anyway.
+    type: Text
+  _force_delete:
+    required: false
+    help: (Optional) Whether to force the OpenStack instance to be forcefully deleted.
+      This is useful for environments that have reclaim / soft deletion enabled.
+    type: Text
+  _region:
+    required: false
+    help: (Optional) The region in which to create the server instance. If omitted,
+      the @region@ argument of the provider is used. Changing this creates a new server.
+    type: Text
+  _flavor_name:
+    required: false
+    help: (Optional; Required if @flavor_id@ is empty) The name of the desired flavor
+      for the server. Changing this resizes the existing server.
+    type: Text
+  _scheduler_hints:
+    required: false
+    help: (Optional) Provide the Nova scheduler with hints on how the instance should
+      be launched. The available hints are described below.
+    type: Text
+  _metadata:
+    required: false
+    help: (Optional) Metadata key/value pairs to make available from within the instance.
+      Changing this updates the existing server metadata.
+    type: Text
+  _image_id:
+    required: false
+    help: (Optional; Required if @image_name@ is empty and not booting from a volume.
+      Do not specify if booting from a volume.) The image ID of the desired image
+      for the server. Changing this creates a new server.
+    type: Text
+  _flavor_id:
+    required: false
+    help: (Optional; Required if @flavor_name@ is empty) The flavor ID of the desired
+      flavor for the server. Changing this resizes the existing server.
+    type: Text
+  _image_name:
+    required: false
+    help: (Optional; Required if @image_id@ is empty and not booting from a volume.
+      Do not specify if booting from a volume.) The name of the desired image for
+      the server. Changing this creates a new server.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the resource.
+    type: Text
+  _personality:
+    required: false
+    help: (Optional) Customize the personality of an instance by defining one or more
+      files and their contents. The personality structure is described below.
+    type: Text
+  _config_drive:
+    required: false
+    help: (Optional) Whether to use the config_drive feature to configure the instance.
+      Changing this creates a new server.
+    type: Text
+  _user_data:
+    required: false
+    help: (Optional) The user data to provide when launching the instance. Changing
+      this creates a new server.
+    type: Text
+  _availability_zone:
+    required: false
+    help: (Optional) The availability zone in which to create the server. Changing
+      this creates a new server.
+    type: Text
+  _security_groups:
+    required: false
+    help: ! '(Optional) An array of one or more security group names to associate
+      with the server. Changing this results in adding/removing security groups from
+      the existing server. Note : When attaching the instance to networks using Ports,
+      place the security groups on the Port and not the instance.'
+    type: Text
+  _key_pair:
+    required: false
+    help: (Optional) The name of a key pair to put on the server. The key pair must
+      already be created and associated with the tenant's account. Changing this creates
+      a new server.
+    type: Text
+  _admin_pass:
+    required: false
+    help: (Optional) The administrative password to assign to the server. Changing
+      this changes the root password on the existing server.
+    type: Text
+  _block_device:
+    required: false
+    help: (Optional) Configuration of block devices. The block_device structure is
+      documented below. Changing this creates a new server. You can specify multiple
+      block devices which will create an instance with multiple disks. This configuration
+      is very flexible, so please see the following <http://docs.openstack.org/developer/nova/block_device_mapping.html>
+      for more information.
+    type: Text
+  _network:
+    required: false
+    help: (Optional) An array of one or more networks to attach to the instance. The
+      network object structure is documented below. Changing this creates a new server.
+    type: Text
+attributes:
+  network/uuid:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  network/fixed_ip_v4:
+    help: ! '- The Fixed IPv4 address of the Instance on that network.'
+    type: Text
+  flavor_id:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  access_ip_v6:
+    help: ! '- The first detected Fixed IPv6 address.'
+    type: Text
+  flavor_name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  network/name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  network/fixed_ip_v6:
+    help: ! '- The Fixed IPv6 address of the Instance on that network.'
+    type: Text
+  network/mac:
+    help: ! '- The MAC address of the NIC on that network.'
+    type: Text
+  name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  access_ip_v4:
+    help: ! '- The first detected Fixed IPv4 address or the Floating IP.'
+    type: Text
+  metadata:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  security_groups:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  region:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  network/port:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  all_metadata:
+    help: ! '- Contains all instance metadata, even metadata not set by Terraform.'
+    type: Text
+about: Manages a V2 VM instance resource within OpenStack.
+examples: []

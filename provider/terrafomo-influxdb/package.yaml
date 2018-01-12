@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-influxdb
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.InfluxDB
+    - Terrafomo.InfluxDB.DataSource
+    - Terrafomo.InfluxDB.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

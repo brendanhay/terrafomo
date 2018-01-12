@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-triton
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Triton
+    - Terrafomo.Triton.DataSource
+    - Terrafomo.Triton.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

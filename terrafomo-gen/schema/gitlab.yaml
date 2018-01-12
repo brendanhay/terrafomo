@@ -1,0 +1,30 @@
+_name: GitLabProvider
+arguments:
+  _cacert_file:
+    required: false
+    help: (Optional) This is a file containing the ca cert to verify the gitlab instance.  This
+      is available for use when working with GitLab CE or Gitlab Enterprise with a
+      locally-issued or self-signed certificate chain.
+    type: Text
+  _token:
+    required: false
+    help: (Optional) This is the GitLab personal access token. It must be provided,
+      but it can also be sourced from the @GITLAB_TOKEN@ environment variable.
+    type: Text
+  _insecure:
+    required: false
+    help: (Optional; boolean, defaults to false) When set to true this disables SSL
+      verification of the connection to the GitLab instance.
+    type: Text
+  _base_url:
+    required: false
+    help: (Optional) This is the target GitLab base API endpoint. Providing a value
+      is a requirement when working with GitLab CE or GitLab Enterprise e.g. https://my.gitlab.server/api/v3/.
+      It is optional to provide this value and it can also be sourced from the @GITLAB_BASE_URL@
+      environment variable. The value must end with a slash.
+    type: Text
+attributes: {}
+about: The GitLab provider is used to interact with GitLab group or user resources.
+  It needs to be configured with the proper credentials before it can be used. Use
+  the navigation to the left to read about the available resources.
+examples: []

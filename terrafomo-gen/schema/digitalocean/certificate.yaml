@@ -1,0 +1,37 @@
+_name: digitalocean_certificate
+arguments:
+  _certificate_chain:
+    required: false
+    help: (Optional) The full PEM-formatted trust chain between the certificate authority's
+      certificate and your domain's TLS certificate.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the certificate for identification.
+    type: Text
+  _leaf_certificate:
+    required: true
+    help: (Required) The contents of a PEM-formatted public TLS certificate.
+    type: Text
+  _private_key:
+    required: true
+    help: (Required) The contents of a PEM-formatted private-key corresponding to
+      the SSL certificate.
+    type: Text
+attributes:
+  sha1_fingerprint:
+    help: ! '- The SHA-1 fingerprint of the certificate'
+    type: Text
+  name:
+    help: ! '- The name of the certificate'
+    type: Text
+  id:
+    help: ! '- The unique ID of the certificate'
+    type: Text
+  not_after:
+    help: ! '- The expiration date of the certificate'
+    type: Text
+about: Provides a DigitalOcean Certificate resource that allows you to manage certificates
+  for configuring TLS termination in Load Balancers. Certificates created with this
+  resource can be referenced in your Load Balancer configuration via their ID.
+examples: []

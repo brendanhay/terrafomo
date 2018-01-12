@@ -1,0 +1,7 @@
+_name: 1&1Provider
+arguments: {}
+attributes: {}
+about: The 1&1 provider gives the ability to deploy and configure resources using
+  the 1&1 Cloud Server API. Use the navigation to the left to read about the available
+  resources.
+examples: []

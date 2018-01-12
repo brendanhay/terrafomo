@@ -1,0 +1,48 @@
+_name: aws_iam_policy
+arguments:
+  _policy:
+    required: true
+    help: (Required) The policy document. This is a JSON formatted string. The heredoc
+      syntax, @file@ function, or the </docs/providers/aws/d/iam_policy_document.html>
+      are all helpful here.
+    type: Text
+  _name:
+    required: false
+    help: (Optional, Forces new resource) The name of the policy. If omitted, Terraform
+      will assign a random, unique name.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) Description of the IAM policy.
+    type: Text
+  _name_prefix:
+    required: false
+    help: (Optional, Forces new resource) Creates a unique name beginning with the
+      specified prefix. Conflicts with @name@ .
+    type: Text
+  _path:
+    required: false
+    help: (Optional, default "/") Path in which to create the policy. See <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>
+      for more information.
+    type: Text
+attributes:
+  arn:
+    help: ! '- The ARN assigned by AWS to this policy.'
+    type: Text
+  path:
+    help: ! '- The path of the policy in IAM.'
+    type: Text
+  name:
+    help: ! '- The name of the policy.'
+    type: Text
+  id:
+    help: ! '- The policy''s ID.'
+    type: Text
+  policy:
+    help: ! '- The policy document.'
+    type: Text
+  description:
+    help: ! '- The description of the policy.'
+    type: Text
+about: Provides an IAM policy.
+examples: []

@@ -1,0 +1,15 @@
+_name: google_compute_lb_ip_ranges
+arguments:
+  _http_ssl_tcp_internal:
+    required: true
+    help: ! '- The IP ranges used for health checks when HTTP(S), SSL proxy, TCP proxy,
+      and Internal load balancing is used'
+    type: Text
+  _network:
+    required: true
+    help: ! '- The IP ranges used for health checks when Network load balancing is
+      used'
+    type: Text
+attributes: {}
+about: Use this data source to access IP ranges in your firewall rules. https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_source_ips_and_firewall_rules
+examples: []

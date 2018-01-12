@@ -1,0 +1,33 @@
+_name: azurerm_mysql_database
+arguments:
+  _server_name:
+    required: true
+    help: (Required) Specifies the name of the MySQL Server. Changing this forces
+      a new resource to be created.
+    type: Text
+  _name:
+    required: true
+    help: (Required) Specifies the name of the MySQL Database, which needs <https://dev.mysql.com/doc/refman/5.7/en/identifiers.html>
+      . Changing this forces a new resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which the MySQL Server exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _charset:
+    required: true
+    help: (Required) Specifies the Charset for the MySQL Database, which needs <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html>
+      . Changing this forces a new resource to be created.
+    type: Text
+  _collation:
+    required: true
+    help: (Required) Specifies the Collation for the MySQL Database, which needs <https://dev.mysql.com/doc/refman/5.7/en/charset-mysql.html>
+      . Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the MySQL Database.'
+    type: Text
+about: Creates a MySQL Database within a MySQL Server
+examples: []

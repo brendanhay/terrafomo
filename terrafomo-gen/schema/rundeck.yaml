@@ -1,0 +1,9 @@
+_name: RundeckProvider
+arguments: {}
+attributes: {}
+about: ! 'The Rundeck provider allows Terraform to create and configure Projects,
+  Jobs and Keys in <http://rundeck.org/> . Rundeck is a tool for runbook automation
+  and execution of arbitrary management tasks, allowing operators to avoid logging
+  in to individual machines directly via SSH. The provider configuration block accepts
+  the following arguments:'
+examples: []

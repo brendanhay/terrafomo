@@ -1,0 +1,30 @@
+_name: aws_sns_topic
+arguments:
+  _delivery_policy:
+    required: false
+    help: (Optional) The SNS delivery policy
+    type: Text
+  _policy:
+    required: false
+    help: (Optional) The fully-formed AWS policy as JSON
+    type: Text
+  _name:
+    required: true
+    help: (Required) The friendly name of the topic to match.
+    type: Text
+  _display_name:
+    required: false
+    help: (Optional) The display name for the SNS topic
+    type: Text
+attributes:
+  arn:
+    help: ! '- Set to the ARN of the found topic, suitable for referencing in other
+      resources that support SNS topics.'
+    type: Text
+  id:
+    help: ! '- The ARN of the SNS topic'
+    type: Text
+about: Use this data source to get the ARN of a topic in AWS Simple Notification Service
+  (SNS). By using this data source, you can reference SNS topics without having to
+  hard code the ARNs as input.
+examples: []

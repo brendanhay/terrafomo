@@ -1,0 +1,40 @@
+_name: azurerm_eventhub_authorization_rule
+arguments:
+  _namespace_name:
+    required: true
+    help: (Required) Specifies the name of the grandparent EventHub Namespace. Changing
+      this forces a new resource to be created.
+    type: Text
+  _name:
+    required: true
+    help: (Required) Specifies the name of the EventHub Authorization Rule resource.
+      Changing this forces a new resource to be created.
+    type: Text
+  _eventhub_name:
+    required: true
+    help: (Required) Specifies the name of the EventHub. Changing this forces a new
+      resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which the EventHub Namespace
+      exists. Changing this forces a new resource to be created.
+    type: Text
+attributes:
+  primary_key:
+    help: ! '- The Primary Key for the Event Hubs authorization Rule.'
+    type: Text
+  secondary_connection_string:
+    help: ! '- The Secondary Connection String for the Event Hubs authorization Rule.'
+    type: Text
+  primary_connection_string:
+    help: ! '- The Primary Connection String for the Event Hubs authorization Rule.'
+    type: Text
+  secondary_key:
+    help: ! '- The Secondary Key for the Event Hubs authorization Rule.'
+    type: Text
+  id:
+    help: ! '- The EventHub ID.'
+    type: Text
+about: Creates a new Event Hubs authorization Rule within an Event Hub.
+examples: []

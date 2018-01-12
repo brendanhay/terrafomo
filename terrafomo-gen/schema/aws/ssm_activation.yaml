@@ -1,0 +1,55 @@
+_name: aws_ssm_activation
+arguments:
+  _name:
+    required: false
+    help: (Optional) The default name of the registerd managed instance.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) The description of the resource that you want to register.
+    type: Text
+  _iam_role:
+    required: true
+    help: (Required) The IAM Role to attach to the managed instance.
+    type: Text
+  _registration_limit:
+    required: false
+    help: (Optional) The maximum number of managed instances you want to register.
+      The default value is 1 instance.
+    type: Text
+  _expiration_date:
+    required: false
+    help: (Optional) The date by which this activation request should expire. The
+      default value is 24 hours.
+    type: Text
+attributes:
+  expired:
+    help: ! '- If the current activation has expired.'
+    type: Text
+  registration_limit:
+    help: ! '- The maximum number of managed instances you want to be registered.
+      The default value is 1 instance.'
+    type: Text
+  activation_code:
+    help: ! '- The code the system generates when it processes the activation.'
+    type: Text
+  iam_role:
+    help: ! '- The IAM Role attached to the managed instance.'
+    type: Text
+  name:
+    help: ! '- The default name of the registerd managed instance.'
+    type: Text
+  registration_count:
+    help: ! '- The number of managed instances that are currently registered using
+      this activation.'
+    type: Text
+  expiration_date:
+    help: ! '- The date by which this activation request should expire. The default
+      value is 24 hours.'
+    type: Text
+  description:
+    help: ! '- The description of the resource that was registered.'
+    type: Text
+about: Registers an on-premises server or virtual machine with Amazon EC2 so that
+  it can be managed using Run Command.
+examples: []

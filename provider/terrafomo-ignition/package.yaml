@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-ignition
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Ignition
+    - Terrafomo.Ignition.DataSource
+    - Terrafomo.Ignition.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

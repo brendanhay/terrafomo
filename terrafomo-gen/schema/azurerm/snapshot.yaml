@@ -1,0 +1,42 @@
+_name: azurerm_snapshot
+arguments:
+  _name:
+    required: true
+    help: (Required) Specifies the name of the Snapshot.
+    type: Text
+  _create_option:
+    required: true
+    help: (Required) Indicates how the snapshot is to be created. Possible values
+      are @Copy@ or @Import@ . Changing this forces a new resource to be created.
+    type: Text
+  _location:
+    required: true
+    help: (Required) Specifies the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) Specifies the name of the resource group the Snapshot is located
+      in.
+    type: Text
+attributes:
+  source_uri:
+    help: ! '- The URI to a Managed or Unmanaged Disk.'
+    type: Text
+  source_resource_id:
+    help: ! '- The reference to an existing snapshot.'
+    type: Text
+  disk_size_gb:
+    help: ! '- The size of the Snapshotted Disk in GB.'
+    type: Text
+  id:
+    help: ! '- The ID of the Snapshot.'
+    type: Text
+  storage_account_id:
+    help: ! '- The ID of an storage account.'
+    type: Text
+  create_option:
+    help: ! '- How the snapshot was created.'
+    type: Text
+about: Use this data source to access the properties of a Snapshot of an Disk.
+examples: []

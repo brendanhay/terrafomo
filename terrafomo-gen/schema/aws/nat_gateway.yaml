@@ -1,0 +1,64 @@
+_name: aws_nat_gateway
+arguments:
+  _filter:
+    required: false
+    help: ! '(Optional) Custom filter block as described below. More complex filters
+      can be expressed using one or more @filter@ sub-blocks, which take the following
+      arguments:'
+    type: Text
+  _id:
+    required: false
+    help: (Optional) The id of the specific Nat Gateway to retrieve.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html>
+      .
+    type: Text
+  _state:
+    required: false
+    help: (Optional) The state of the NAT gateway (pending | failed | available |
+      deleting | deleted ).
+    type: Text
+  _subnet_id:
+    required: true
+    help: (Optional) The id of subnet that the Nat Gateway resides in.
+    type: Text
+  _values:
+    required: true
+    help: (Required) Set of values that are accepted for the given field. An Nat Gateway
+      will be selected if any one of the given values matches.
+    type: Text
+  _allocation_id:
+    required: true
+    help: (Required) The Allocation ID of the Elastic IP address for the gateway.
+    type: Text
+  _vpc_id:
+    required: false
+    help: (Optional) The id of the VPC that the Nat Gateway resides in.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  private_ip:
+    help: ! '- The private Ip address of the selected Nat Gateway.'
+    type: Text
+  public_ip:
+    help: ! '- The public Ip (EIP) address of the selected Nat Gateway.'
+    type: Text
+  allocation_id:
+    help: ! '- The Id of the EIP allocated to the selected Nat Gateway.'
+    type: Text
+  id:
+    help: ! '- The ID of the NAT Gateway.'
+    type: Text
+  network_interface_id:
+    help: ! '- The Id of the ENI allocated to the selected Nat Gateway.'
+    type: Text
+  subnet_id:
+    help: ! '- The Subnet ID of the subnet in which the NAT gateway is placed.'
+    type: Text
+about: Provides details about a specific Nat Gateway.
+examples: []

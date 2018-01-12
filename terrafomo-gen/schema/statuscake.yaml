@@ -1,0 +1,8 @@
+_name: StatusCakeProvider
+arguments: {}
+attributes: {}
+about: ! 'The StatusCake provider allows Terraform to create and configure tests in
+  <https://www.statuscake.com/> . StatusCake is a tool that helps to monitor the uptime
+  of your service via a network of monitoring centers throughout the world The provider
+  configuration block accepts the following arguments:'
+examples: []

@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-cobbler
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Cobbler
+    - Terrafomo.Cobbler.DataSource
+    - Terrafomo.Cobbler.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

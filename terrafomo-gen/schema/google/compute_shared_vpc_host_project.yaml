@@ -1,0 +1,15 @@
+_name: google_compute_shared_vpc_host_project
+arguments:
+  _host_project:
+    required: true
+    help: (Required) The host project ID.
+    type: Text
+  _service_project:
+    required: true
+    help: (Required) The service project ID.
+    type: Text
+attributes: {}
+about: Allows enabling and disabling Shared VPC for the host Google Cloud Platform
+  project. For more information see <https://cloud.google.com/compute/docs/shared-vpc>
+  and <https://cloud.google.com/compute/docs/reference/latest/projects> .
+examples: []

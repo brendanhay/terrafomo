@@ -1,0 +1,32 @@
+_name: alicloud_forward
+arguments:
+  _external_ip:
+    required: true
+    help: (Required, Forces new resource) The external ip address, the ip must along
+      bandwidth package public ip which @alicloud_nat_gateway@ argument @bandwidth_packages@
+      .
+    type: Text
+  _internal_port:
+    required: true
+    help: (Required) The internal port, valid value is 1~65535|any.
+    type: Text
+  _external_port:
+    required: true
+    help: (Required) The external port, valid value is 1~65535|any.
+    type: Text
+  _forward_table_id:
+    required: true
+    help: (Required, Forces new resource) The value can get from @alicloud_nat_gateway@
+      Attributes "forward_table_ids".
+    type: Text
+  _ip_protocol:
+    required: true
+    help: (Required) The ip protocal, valid value is tcp|udp|any.
+    type: Text
+  _internal_ip:
+    required: true
+    help: (Required) The internal ip, must a private ip.
+    type: Text
+attributes: {}
+about: Provides a forward resource.
+examples: []

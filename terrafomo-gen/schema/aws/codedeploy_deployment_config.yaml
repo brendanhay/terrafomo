@@ -1,0 +1,20 @@
+_name: aws_codedeploy_deployment_config
+arguments:
+  _deployment_config_name:
+    required: true
+    help: (Required) The name of the deployment config.
+    type: Text
+  _minimum_healthy_hosts:
+    required: false
+    help: (Optional) A minimum_healthy_hosts block. Minimum Healthy Hosts are documented
+      below.
+    type: Text
+attributes:
+  deployment_config_id:
+    help: ! '- The AWS Assigned deployment config id'
+    type: Text
+  id:
+    help: ! '- The deployment group''s config name.'
+    type: Text
+about: Provides a CodeDeploy deployment config for an application
+examples: []

@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-opsgenie
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.OpsGenie
+    - Terrafomo.OpsGenie.DataSource
+    - Terrafomo.OpsGenie.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

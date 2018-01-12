@@ -1,0 +1,37 @@
+_name: aws_vpn_gateway
+arguments:
+  _filter:
+    required: false
+    help: (Optional) Custom filter block as described below.
+    type: Text
+  _id:
+    required: false
+    help: (Optional) The ID of the specific VPN Gateway to retrieve.
+    type: Text
+  _attached_vpc_id:
+    required: false
+    help: (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve.
+    type: Text
+  _state:
+    required: false
+    help: (Optional) The state of the specific VPN Gateway to retrieve.
+    type: Text
+  _availability_zone:
+    required: false
+    help: (Optional) The Availability Zone of the specific VPN Gateway to retrieve.
+    type: Text
+  _vpc_id:
+    required: false
+    help: (Optional) The VPC ID to create in.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags, each pair of which must exactly match a pair
+      on the desired VPN Gateway.
+    type: Text
+attributes:
+  id:
+    help: ! '- The ID of the VPN Gateway.'
+    type: Text
+about: The VPN Gateway data source provides details about a specific VPN gateway.
+examples: []

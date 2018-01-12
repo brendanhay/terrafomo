@@ -1,0 +1,18 @@
+_name: packet_volume_attachment
+arguments:
+  _device_id:
+    required: true
+    help: (Required) The ID of the device to which the volume should be attached
+    type: Text
+  _volume_id:
+    required: true
+    help: (Required) The ID of the volume to attach
+    type: Text
+attributes:
+  id:
+    help: ! '- The unique ID of the volume attachment'
+    type: Text
+about: Provides attachment of Packet Block Storage Volume to Devices. Device and volume
+  must be in the same location (facility). Once attached by Terraform, they must then
+  be mounted using the @packet_block_attach@ and @packet_block_detach@ scripts.
+examples: []

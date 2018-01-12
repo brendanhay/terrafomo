@@ -1,0 +1,37 @@
+_name: aws_ssm_parameter
+arguments:
+  _value:
+    required: true
+    help: (Required) The value of the parameter.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the parameter.
+    type: Text
+  _overwrite:
+    required: false
+    help: (Optional) Overwrite an existing parameter. If not specified, will default
+      to @false@ .
+    type: Text
+  _key_id:
+    required: false
+    help: (Optional) The KMS key id or arn for encrypting a SecureString.
+    type: Text
+  _type':
+    required: true
+    help: (Required) The type of the parameter. Valid types are @String@ , @StringList@
+      and @SecureString@ .
+    type: Text
+attributes:
+  value:
+    help: ! '- (Required) The value of the parameter.'
+    type: Text
+  name:
+    help: ! '- (Required) The name of the parameter.'
+    type: Text
+  type:
+    help: ! '- (Required) The type of the parameter. Valid types are @String@ , @StringList@
+      and @SecureString@ .'
+    type: Text
+about: Provides an SSM Parameter data source.
+examples: []

@@ -1,0 +1,28 @@
+_name: azurerm_platform_image
+arguments:
+  _offer:
+    required: true
+    help: (Required) Specifies the Offer associated with the Platform Image.
+    type: Text
+  _publisher:
+    required: true
+    help: (Required) Specifies the Publisher associated with the Platform Image.
+    type: Text
+  _location:
+    required: true
+    help: (Required) Specifies the Location to pull information about this Platform
+      Image from.
+    type: Text
+  _sku:
+    required: true
+    help: (Required) Specifies the SKU of the Platform Image.
+    type: Text
+attributes:
+  version:
+    help: ! '- The latest version of the Platform Image.'
+    type: Text
+  id:
+    help: ! '- The ID of the Platform Image.'
+    type: Text
+about: Use this data source to access the properties of an Azure Platform Image.
+examples: []

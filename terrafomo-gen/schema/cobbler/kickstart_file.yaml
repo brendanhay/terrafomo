@@ -1,0 +1,14 @@
+_name: cobbler_kickstart_file
+arguments:
+  _name:
+    required: true
+    help: (Required) The name of the kickstart file. This must be the full path, including
+      @/var/lib/cobbler/kickstarts@ .
+    type: Text
+  _body:
+    required: true
+    help: (Required) The body of the kickstart file.
+    type: Text
+attributes: {}
+about: Manages a Kickstart File within Cobbler.
+examples: []

@@ -1,0 +1,34 @@
+_name: openstack_compute_keypair_v2
+arguments:
+  _region:
+    required: false
+    help: (Optional) The region in which to obtain the V2 Compute client. Keypairs
+      are associated with accounts, but a Compute client is needed to create one.
+      If omitted, the @region@ argument of the provider is used. Changing this creates
+      a new keypair.
+    type: Text
+  _name:
+    required: true
+    help: (Required) A unique name for the keypair. Changing this creates a new keypair.
+    type: Text
+  _public_key:
+    required: true
+    help: (Required) A pregenerated OpenSSH-formatted public key. Changing this creates
+      a new keypair.
+    type: Text
+  _value_specs:
+    required: false
+    help: (Optional) Map of additional options.
+    type: Text
+attributes:
+  public_key:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  name:
+    help: ! '- See Argument Reference above.'
+    type: Text
+  region:
+    help: ! '- See Argument Reference above.'
+    type: Text
+about: Manages a V2 keypair resource within OpenStack.
+examples: []

@@ -1,0 +1,50 @@
+_name: google_bigquery_dataset
+arguments:
+  _labels:
+    required: false
+    help: (Optional) A mapping of labels to assign to the resource.
+    type: Text
+  _project:
+    required: false
+    help: (Optional) The project in which the resource belongs. If it is not provided,
+      the provider project is used.
+    type: Text
+  _default_table_expiration_ms:
+    required: false
+    help: (Optional) The default lifetime of all tables in the dataset, in milliseconds.
+      The minimum value is 3600000 milliseconds (one hour).
+    type: Text
+  _friendly_name:
+    required: false
+    help: (Optional) A descriptive name for the dataset.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) A user-friendly description of the dataset.
+    type: Text
+  _dataset_id:
+    required: true
+    help: (Required) A unique ID for the resource. Changing this forces a new resource
+      to be created.
+    type: Text
+  _location:
+    required: false
+    help: (Optional) The geographic location where the dataset should reside.
+    type: Text
+attributes:
+  etag:
+    help: ! '- A hash of the resource.'
+    type: Text
+  self_link:
+    help: ! '- The URI of the created resource.'
+    type: Text
+  creation_time:
+    help: ! '- The time when this dataset was created, in milliseconds since the epoch.'
+    type: Text
+  last_modified_time:
+    help: ! '-  The date when this dataset or any of its tables was last modified,
+      in milliseconds since the epoch.'
+    type: Text
+about: Creates a dataset resource for Google BigQuery. For more information see <https://cloud.google.com/bigquery/docs/>
+  and <https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets> .
+examples: []

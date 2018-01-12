@@ -1,0 +1,47 @@
+_name: logicmonitor_device_group
+arguments:
+  _filters:
+    required: false
+    help: ! '(Optional) Filters the response according to the operator and value specified.
+      Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/'
+    type: Text
+  _disable_alerting:
+    required: false
+    help: (Optional) Indicates whether alerting is disabled (true) or enabled (false)
+      for this device group
+    type: Text
+  _name:
+    required: true
+    help: (Required) Name of device group
+    type: Text
+  _applies_to:
+    required: false
+    help: (Optional) The Applies to custom query for this group. Setting this field
+      will make this a dynamic group.
+    type: Text
+  _parent_id:
+    required: false
+    help: (Optional) The id of the parent group for this device group (the root device
+      group has an Id of 1)
+    type: Text
+  _description:
+    required: false
+    help: (Optional) Description of device group
+    type: Text
+  _size:
+    required: false
+    help: (Optional) The number of results to display. Max is 1000. Default is 50
+    type: Text
+  _offset:
+    required: false
+    help: (Optional) The number of results to offset the displayed results by. Default
+      is 0
+    type: Text
+  _properties:
+    required: false
+    help: (Optional) The properties associated with this device group. Any string
+      value pair will work (see example).
+    type: Text
+attributes: {}
+about: Use this datasource to get the ID of an available device group.
+examples: []

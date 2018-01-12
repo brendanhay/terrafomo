@@ -1,0 +1,59 @@
+_name: azurerm_express_route_circuit
+arguments:
+  _service_provider_name:
+    required: true
+    help: (Required) The name of the ExpressRoute Service Provider.
+    type: Text
+  _peering_location:
+    required: true
+    help: (Required) The name of the peering location and not the ARM resource location.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the ExpressRoute circuit. Changing this forces a
+      new resource to be created.
+    type: Text
+  _allow_classic_operations:
+    required: false
+    help: (Optional) Allow the circuit to interact with classic (RDFE) resources.
+      The default value is false.
+    type: Text
+  _location:
+    required: true
+    help: (Required) Specifies the supported Azure location where the resource exists.
+      Changing this forces a new resource to be created.
+    type: Text
+  _sku:
+    required: true
+    help: (Required) Chosen SKU of ExpressRoute circuit as documented below.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the namespace.
+      Changing this forces a new resource to be created.
+    type: Text
+  _bandwidth_in_mbps:
+    required: true
+    help: (Required) The bandwidth in Mbps of the circuit being created. Once you
+      increase your bandwidth, you will not be able to decrease it to its previous
+      value.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) A mapping of tags to assign to the resource.
+    type: Text
+attributes:
+  service_key:
+    help: ! '- The string needed by the service provider to provision the ExpressRoute
+      circuit.'
+    type: Text
+  id:
+    help: ! '- The Resource ID of the ExpressRoute circuit.'
+    type: Text
+  service_provider_provisioning_state:
+    help: ! '- The ExpressRoute circuit provisioning state from your chosen service
+      provider. Possible values are "NotProvisioned", "Provisioning", "Provisioned",
+      and "Deprovisioning".'
+    type: Text
+about: Creates an ExpressRoute circuit.
+examples: []

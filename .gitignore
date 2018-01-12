@@ -6,7 +6,3 @@
 
 # hpack
 *.cabal
-
-# Temporary
-/provider
-/terrafomo-gen/schema

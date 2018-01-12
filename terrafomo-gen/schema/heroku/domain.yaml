@@ -1,0 +1,23 @@
+_name: heroku_domain
+arguments:
+  _hostname:
+    required: true
+    help: (Required) The hostname to serve requests from.
+    type: Text
+  _app:
+    required: true
+    help: (Required) The Heroku app to link to.
+    type: Text
+attributes:
+  cname:
+    help: ! '- The CNAME traffic should route to.'
+    type: Text
+  hostname:
+    help: ! '- The hostname traffic will be served as.'
+    type: Text
+  id:
+    help: ! '- The ID of the of the domain record.'
+    type: Text
+about: Provides a Heroku App resource. This can be used to create and manage applications
+  on Heroku.
+examples: []

@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-rancher
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Rancher
+    - Terrafomo.Rancher.DataSource
+    - Terrafomo.Rancher.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

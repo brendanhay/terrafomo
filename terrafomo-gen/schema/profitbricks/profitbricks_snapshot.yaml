@@ -1,0 +1,22 @@
+_name: profitbricks_snapshot
+arguments:
+  _name:
+    required: true
+    help: (Required) Name or part of the name of an existing snapshot that you want
+      to search for.
+    type: Text
+  _size:
+    required: false
+    help: (Optional) The size of the snapshot to look for.
+    type: Text
+  _location:
+    required: false
+    help: (Optional) Id of the existing snapshot's location.
+    type: Text
+attributes:
+  id:
+    help: ! '- UUID of the snapshot'
+    type: Text
+about: The snapshots data source can be used to search for and return an existing
+  snapshot which can then be used to provision a server.
+examples: []

@@ -1,0 +1,25 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-vmware
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.VCloudDirector
+    - Terrafomo.VCloudDirector.DataSource
+    - Terrafomo.VCloudDirector.Resource
+
+  reexported-modules: >
+    terrafomo:Terrafomo.Format

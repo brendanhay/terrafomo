@@ -1,0 +1,24 @@
+_name: opc_compute_vnic
+arguments:
+  _name:
+    required: true
+    help: is the name of the Virtual NIC.
+    type: Text
+attributes:
+  transit_flag:
+    help: is @true@ if the Virtual NIC is of the type @transit@ .
+    type: Text
+  uri:
+    help: is the Unique Resource Locator of the Virtual NIC.
+    type: Text
+  mac_address:
+    help: is the MAC Address of the Virtual NIC.
+    type: Text
+  description:
+    help: is a description of the Virtual NIC.
+    type: Text
+  tags:
+    help: is a list of Tags associated with the Virtual NIC.
+    type: Text
+about: Use this data source to access the configuration of a Virtual NIC.
+examples: []

@@ -1,0 +1,29 @@
+_name: gitlab_label
+arguments:
+  _color:
+    required: true
+    help: ! '(Required) The color of the label given in 6-digit hex notation with
+      leading ''#'' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords>
+      .'
+    type: Text
+  _project:
+    required: true
+    help: (Required) The name or id of the project to add the label to.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the label.
+    type: Text
+  _description:
+    required: false
+    help: (Optional) The description of the label.
+    type: Text
+attributes:
+  id:
+    help: ! '- The unique id assigned to the label by the GitLab server (the name
+      of the label).'
+    type: Text
+about: This resource allows you to create and manage labels for your GitLab projects.
+  For further information on labels, consult the <https://docs.gitlab.com/ee/user/project/labels.htm>
+  .
+examples: []

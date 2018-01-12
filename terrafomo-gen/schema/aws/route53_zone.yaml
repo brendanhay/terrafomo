@@ -1,0 +1,65 @@
+_name: aws_route53_zone
+arguments:
+  _delegation_set_id:
+    required: false
+    help: (Optional) The ID of the reusable delegation set whose NS records you want
+      to assign to the hosted zone. Conflicts w/ @vpc_id@ as delegation sets can only
+      be used for public zones.
+    type: Text
+  _name:
+    required: true
+    help: (Optional) The Hosted Zone name of the desired Hosted Zone.
+    type: Text
+  _private_zone:
+    required: false
+    help: (Optional) Used with @name@ field to get a private Hosted Zone.
+    type: Text
+  _comment:
+    required: false
+    help: (Optional) A comment for the hosted zone. Defaults to 'Managed by Terraform'.
+    type: Text
+  _force_destroy:
+    required: false
+    help: (Optional) Whether to destroy all records (possibly managed outside of Terraform)
+      in the zone when destroying the zone.
+    type: Text
+  _vpc_region:
+    required: false
+    help: (Optional) The VPC's region. Defaults to the region of the AWS provider.
+    type: Text
+  _vpc_id:
+    required: false
+    help: (Optional) Used with @name@ field to get a private Hosted Zone associated
+      with the vpc_id (in this case, private_zone is not mandatory).
+    type: Text
+  _zone_id:
+    required: false
+    help: (Optional) The Hosted Zone id of the desired Hosted Zone.
+    type: Text
+  _tags:
+    required: false
+    help: (Optional) Used with @name@ field. A mapping of tags, each pair of which
+      must exactly match a pair on the desired Hosted Zone.
+    type: Text
+attributes:
+  zone_id:
+    help: ! '- The Hosted Zone ID. This can be referenced by zone records.'
+    type: Text
+  comment:
+    help: ! '- The comment field of the Hosted Zone.'
+    type: Text
+  name_servers:
+    help: ! '- A list of name servers in associated (or default) delegation set. Find
+      more about delegation sets in <https://docs.aws.amazon.com/Route53/latest/APIReference/actions-on-reusable-delegation-sets.html>
+      .'
+    type: Text
+  resource_record_set_count:
+    help: ! '- the number of Record Set in the Hosted Zone'
+    type: Text
+  caller_reference:
+    help: ! '- Caller Reference of the Hosted Zone.'
+    type: Text
+about: ! '@aws_route53_zone@ provides details about a specific Route 53 Hosted Zone.
+  This data source allows to find a Hosted Zone ID given Hosted Zone name and certain
+  search criteria.'
+examples: []

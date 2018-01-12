@@ -1,0 +1,30 @@
+_name: azurerm_sql_firewall_rule
+arguments:
+  _server_name:
+    required: true
+    help: (Required) The name of the SQL Server on which to create the Firewall Rule.
+    type: Text
+  _name:
+    required: true
+    help: (Required) The name of the SQL Server.
+    type: Text
+  _end_ip_address:
+    required: true
+    help: (Required) The ending IP address to allow through the firewall for this
+      rule.
+    type: Text
+  _resource_group_name:
+    required: true
+    help: (Required) The name of the resource group in which to create the sql server.
+    type: Text
+  _start_ip_address:
+    required: true
+    help: (Required) The starting IP address to allow through the firewall for this
+      rule.
+    type: Text
+attributes:
+  id:
+    help: ! '- The SQL Firewall Rule ID.'
+    type: Text
+about: Allows you to manage an Azure SQL Firewall Rule
+examples: []
