@@ -2,5 +2,6 @@
 
 set -euo pipefail
 
-./script/generate-travis-config
 ./script/generate-stack-config
+./script/generate-travis-config
+./script/generate-gitlab-config

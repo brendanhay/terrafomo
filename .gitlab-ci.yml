@@ -1,0 +1,25 @@
+image: registry.gitlab.fpcomplete.com/fpco/default-build-image:1037
+
+cache:
+  key: "$CI_BUILD_NAME"
+  paths:
+    - .stack-work/
+    - .stack-root/
+# GENERATED
+    - provider/terrafomo-aws/.stack-work
+    - provider/terrafomo-azure/.stack-work
+    - provider/terrafomo-digitalocean/.stack-work
+    - provider/terrafomo-google/.stack-work
+# END GENERATED
+
+stages:
+  # - generate
+  - build
+
+variables:
+    STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
+
+build:
+  stage: build
+  script:
+    - stack build --install-ghc
