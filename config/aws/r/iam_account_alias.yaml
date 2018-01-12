@@ -1,8 +1,0 @@
-_name: aws_iam_account_alias
-schema:
-  arguments:
-    account_alias:
-      required: true
-      help: (Required) The account alias
-      type: Text
-  attributes: {}

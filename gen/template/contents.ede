@@ -1,0 +1,9 @@
+-- This module is auto-generated.
+
+module {{ namespace }}
+    ( module Export
+    ) where
+
+{% for schemas in contents %}
+import {{ schemas.key }} as Export
+{% endfor %}

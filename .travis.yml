@@ -1,0 +1,52 @@
+sudo: false
+
+language: c
+
+cache:
+  directories:
+    - $HOME/.ghc
+    - $HOME/.cabal
+    - $HOME/.stack
+
+env:
+  global:
+    - secure: ''
+
+branches:
+  only:
+    - master
+    - develop
+
+before_install:
+    - export PATH=/opt/ghc/$GHCVER/bin:$PATH
+    - export PATH=~/.local/bin:$PATH
+    - ./script/travis-lifecycle-before_install
+
+install:
+    - ./script/travis-lifecycle-install
+
+script:
+    - ./script/travis-lifecycle-script
+
+matrix:
+  fast_finish: true
+
+  include:
+# GENERATED
+
+    # Documentation
+    - env: GHCVER=8.2 LIBRARY=documentation
+      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
+
+    # Core
+    - env: GHCVER=8.2 LIBRARY=terraform
+      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
+
+    # Libraries
+    - env: GHCVER=8.2 LIBRARY=terraform-aws
+      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2 LIBRARY=terraform-digitalocean
+      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2 LIBRARY=terraform-google
+      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
+# END GENERATED

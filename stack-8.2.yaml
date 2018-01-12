@@ -1,0 +1,15 @@
+resolver: lts-9.9
+
+local-bin-path: bin
+
+extra-deps:
+  - megaparsec-6.2.0
+
+packages:
+  - gen
+  - terraform
+# GENERATED
+  - terraform-aws
+  - terraform-digitalocean
+  - terraform-google
+# END GENERATED

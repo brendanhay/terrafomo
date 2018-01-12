@@ -25,11 +25,12 @@ $1: $1-resources
 
 $1-resources: $(VENDOR_DIR)/$1 $(BIN)
 	@$(BIN) \
- --config-dir config/$1/r \
- --patch-dir patch/$1/r \
- --template template/r.ede \
  --provider $1 \
  --schema-type Resource \
+ --schema-dir gen/schema/$1/r \
+ --patch-dir gen/patch/$1/r \
+ --schema-template gen/template/resource.ede \
+ --contents-template gen/template/contents.ede \
  --output-dir terraform-$1/gen \
  $$(wildcard $(VENDOR_DIR)/$1/website/docs/r/*.*)
 
