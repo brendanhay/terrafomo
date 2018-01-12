@@ -6,7 +6,3 @@
 
 # hpack
 /terraform-*/*.cabal
-
-# Temporary
-/terraform-*
-/gen/schema
