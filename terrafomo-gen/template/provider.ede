@@ -1,0 +1,35 @@
+-- This module is auto-generated.
+
+module {{ namespace }} where
+
+import Data.Text (Text)
+
+import GHC.Generics (Generic)
+
+import Terraform.{{ provider }}.Types
+
+-- | {{ provider }} Terraform provider.
+{% if schema.about %}
+--
+-- {{ schema.about }}
+{% endif %}
+{% for example in schema.examples %}
+--
+{% if example.value.title %}
+-- {{ example.value.title }}
+--
+{% endif %}
+-- @
+{% for line in example.value.code %}
+-- {{ line.value }}
+{% endfor %}
+-- @
+{% endfor %}
+data {{ provider }} = {{ provider }}
+  {% for arg in schema.arguments %}
+    {% if arg.first %}{ {% else %}, {% endif %}{{ arg.key }} :: !(Attr {{ arg.value.type }})
+      {- ^ {{ arg.value.help }} -}
+    {% if arg.last %}
+    } deriving (Show, Eq, Generic)
+    {% endif %}
+  {% endfor %}

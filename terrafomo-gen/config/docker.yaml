@@ -1,0 +1,3 @@
+package: terraform-docker
+provider: Docker
+

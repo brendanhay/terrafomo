@@ -1,14 +1,11 @@
-resolver: lts-9.9
+resolver: nightly-2017-11-01
 
 local-bin-path: bin
 
-extra-deps:
-  - megaparsec-6.2.0
+extra-deps: []
 
 packages:
-  - gen
-  - terraform
+  - terrafomo
+  - terrafomo-gen
 # GENERATED
-  - terraform-aws
-  - terraform-google
 # END GENERATED

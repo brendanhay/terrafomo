@@ -1,0 +1,3 @@
+package: terraform-librato
+provider: Librato
+

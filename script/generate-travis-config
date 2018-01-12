@@ -5,7 +5,7 @@ set -euo pipefail
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 docs=( documentation )
-core=( terraform )
+core=( terrafomo )
 libraries=( $(${dir}/list-packages) )
 
 entry() {

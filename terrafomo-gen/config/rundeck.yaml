@@ -1,0 +1,3 @@
+package: terraform-rundeck
+provider: Rundeck
+

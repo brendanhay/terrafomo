@@ -1,0 +1,3 @@
+package: terraform-statuscake
+provider: StatusCake
+

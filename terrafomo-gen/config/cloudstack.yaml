@@ -1,0 +1,3 @@
+package: terraform-cloudstack
+provider: CloudStack
+

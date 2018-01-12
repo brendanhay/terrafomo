@@ -1,0 +1,3 @@
+package: terraform-openstack
+provider: OpenStack
+

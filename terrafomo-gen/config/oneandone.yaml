@@ -1,0 +1,3 @@
+package: terraform-oneandone
+provider: OneAndOne
+

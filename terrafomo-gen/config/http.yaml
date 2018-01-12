@@ -1,0 +1,3 @@
+package: terraform-http
+provider: HTTP
+

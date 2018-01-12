@@ -1,13 +1,13 @@
 VENDOR_DIR := vendor
-BIN        := ./bin/terraform-gen
-PROVIDERS  := $(basename $(notdir $(wildcard gen/config/*.yaml)))
+BIN        := ./bin/terrafomo-gen
+PROVIDERS  := aws google digitalocean # $(basename $(notdir $(wildcard terrafomo-gen/config/*.yaml)))
 
 default: $(PROVIDERS)
 
 .PHONY: $(BIN)
 
 $(BIN):
-	@stack install terraform-gen 1>&2
+	@stack install terrafomo-gen 1>&2
 
 full-clean: $(addsuffix -full-clean,$(PROVIDERS))
 
@@ -21,33 +21,21 @@ endef
 define provider
 .PHONY: $1
 
-$1: $1-resources $1-datasources
-
-$1-resources: $(VENDOR_DIR)/$1 $(BIN)
+$1: $(VENDOR_DIR)/$1 $(BIN)
 	@$(BIN) \
- --config-file gen/config/$1.yaml \
- --schema-type Resource \
- --schema-dir gen/schema/$1/r \
- --patch-dir gen/patch/$1/r \
- --schema-template gen/template/resource.ede \
- --contents-template gen/template/contents.ede \
- $$(wildcard $(VENDOR_DIR)/$1/website/docs/r/*.*)
-
-$1-datasources: $(VENDOR_DIR)/$1 $(BIN)
-	@$(BIN) \
- --config-file gen/config/$1.yaml \
- --schema-type DataSource \
- --schema-dir gen/schema/$1/d \
- --patch-dir gen/patch/$1/d \
- --schema-template gen/template/datasource.ede \
- --contents-template gen/template/contents.ede \
- $$(wildcard $(VENDOR_DIR)/$1/website/docs/d/*.*)
+ --schema-dir=terrafomo-gen/schema \
+ --patch-dir=terrafomo-gen/patch \
+ --template-dir=terrafomo-gen/template \
+ --provider-name=$1 \
+ --provider-file=$(VENDOR_DIR)/$1/website/docs/index.html.markdown \
+ $$(addprefix --resource-file=,$$(wildcard $(VENDOR_DIR)/$1/website/docs/r/*.*)) \
+ $$(addprefix --datasource-file=,$$(wildcard $(VENDOR_DIR)/$1/website/docs/d/*.*)) \
 
 $1-clean:
-	rm -rf terraform-$1/gen
+	rm -rf terrafomo-$1/gen
 
 $1-full-clean: $1-clean
-	rm -rf $(VENDOR_DIR)/$1 terraform-$1/gen
+	rm -rf $(VENDOR_DIR)/$1 terrafomo-$1/gen
 
 $(VENDOR_DIR)/$1:
 	git clone https://github.com/terraform-providers/terraform-provider-$1 \

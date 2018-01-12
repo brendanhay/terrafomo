@@ -1,0 +1,3 @@
+package: terraform-dnsimple
+provider: DNSimple
+

@@ -1,0 +1,3 @@
+package: terraform-opc
+provider: OPC
+

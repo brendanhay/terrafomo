@@ -1,0 +1,3 @@
+package: terraform-ignition
+provider: Ignition
+

@@ -1,0 +1,3 @@
+package: terraform-logentries
+provider: Logentries
+

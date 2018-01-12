@@ -1,0 +1,3 @@
+package: terraform-vcloud-director
+provider: VCloudDirector
+

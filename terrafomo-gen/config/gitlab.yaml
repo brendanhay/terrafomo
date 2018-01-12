@@ -1,0 +1,3 @@
+package: terraform-gitlab
+provider: Gitlab
+

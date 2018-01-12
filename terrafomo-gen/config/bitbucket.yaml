@@ -1,0 +1,3 @@
+package: terraform-bitbucket
+provider: Bitbucket
+

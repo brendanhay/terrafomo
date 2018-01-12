@@ -35,12 +35,6 @@ matrix:
 # GENERATED
 
     # Core
-    - env: GHCVER=8.2 LIBRARY=terraform
-      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
-
-    # Libraries
-    - env: GHCVER=8.2 LIBRARY=terraform-aws
-      addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.2 LIBRARY=terraform-google
+    - env: GHCVER=8.2 LIBRARY=terrafomo
       addons: { apt: { packages: [ghc-8.2], sources: [hvr-ghc] } }
 # END GENERATED

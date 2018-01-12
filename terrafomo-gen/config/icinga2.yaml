@@ -1,0 +1,3 @@
+package: terraform-icinga2
+provider: Icinga2
+

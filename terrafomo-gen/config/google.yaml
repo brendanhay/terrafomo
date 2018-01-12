@@ -1,0 +1,2 @@
+package: terraform-google
+provider: Google

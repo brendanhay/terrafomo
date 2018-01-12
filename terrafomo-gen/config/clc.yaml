@@ -1,0 +1,3 @@
+package: terraform-centurylinkcloud
+provider: CenturyLinkCloud
+

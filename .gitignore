@@ -5,4 +5,6 @@
 *.rej
 
 # hpack
-/terraform-*/*.cabal
+/terrafomo-*/*.cabal
+
+# Temporary

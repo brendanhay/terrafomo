@@ -1,0 +1,3 @@
+package: terraform-alicloud
+provider: AliCloud
+

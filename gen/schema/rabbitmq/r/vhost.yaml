@@ -1,9 +1,0 @@
-_name: rabbitmq_vhost
-arguments:
-  name:
-    required: true
-    help: (Required) The name of the vhost.
-    type: Text
-attributes: {}
-about: The @rabbitmq_vhost@ resource creates and manages a vhost.
-examples: []
