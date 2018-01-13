@@ -8,12 +8,9 @@ module Terrafomo.Syntax.Provider
     , providerAlias
     ) where
 
-import Data.Function  (on)
-import Data.Hashable  (Hashable)
-import Data.Proxy     (Proxy (..))
-import Data.Semigroup (Semigroup ((<>)))
-import Data.Set       (Set)
-import Data.String    (IsString (fromString))
+import Data.Hashable (Hashable)
+import Data.Proxy    (Proxy (..))
+import Data.String   (fromString)
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 

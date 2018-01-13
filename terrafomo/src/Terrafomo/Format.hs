@@ -31,8 +31,7 @@ import Terrafomo.Syntax.Name
 import qualified Data.Text.Lazy         as LText
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
--- import qualified Formatting.Formatters  as Export
-import qualified Terrafomo.Syntax.Name as Name
+import qualified Terrafomo.Syntax.Name  as Name
 
 -- Conversions
 
@@ -40,6 +39,8 @@ import qualified Terrafomo.Syntax.Name as Name
 --
 -- > -- format("web-%03d", count.index + 1)
 -- > nformat ("web-" % intp 3) (count + 1)
+--
+-- /Note/: Requires formatting >= 6.2.5
 nformat :: Format Name a -> a
 nformat m = Format.runFormat m (Name . LText.toStrict . Build.toLazyText)
 
@@ -56,7 +57,7 @@ name :: Format r (Name -> r)
 name = Format.later (Build.fromText . Name.fromName)
 
 -- | Output a zero-padded 'Integral'.
-intp :: Integral a => Int -> Format r (a -> r)
+intp :: (Integral a, Format.Buildable a) => Int -> Format r (a -> r)
 intp n = Format.left n '0' %. Format.int
 
 -- -- -- | Output an AWS 'Region'. -- FIXME: into AWS namespace?

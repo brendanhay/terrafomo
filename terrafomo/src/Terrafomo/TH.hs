@@ -15,7 +15,6 @@ import Lens.Micro ((&), (.~))
 import qualified Data.Char             as Char
 import qualified Data.List             as List
 import qualified Language.Haskell.TH   as TH
-import qualified Lens.Micro            as Lens
 import qualified Lens.Micro.TH         as TH
 import qualified Terrafomo.Syntax.Meta as Meta
 
@@ -86,11 +85,6 @@ renameField s = do
 upperHead :: String -> String
 upperHead = \case
     x:xs | Char.isLower x -> Char.toUpper x : xs
-    x                     -> x
-
-lowerHead :: String -> String
-lowerHead = \case
-    x:xs | Char.isUpper x -> Char.toLower x : xs
     x                     -> x
 
 underscores :: String -> [String]

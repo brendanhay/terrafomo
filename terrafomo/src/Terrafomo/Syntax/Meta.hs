@@ -8,13 +8,9 @@ module Terrafomo.Syntax.Meta
     )where
 
 import Data.Function  (on)
-import Data.Hashable  (Hashable)
-import Data.Proxy     (Proxy (..))
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 import Data.String    (IsString (fromString))
-
-import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
 import Lens.Micro (ASetter', Lens, Lens', lens)
 

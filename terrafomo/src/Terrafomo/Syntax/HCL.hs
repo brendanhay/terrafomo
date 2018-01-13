@@ -30,7 +30,6 @@ module Terrafomo.Syntax.HCL
     , string
     ) where
 
-import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Monoid        ((<>))

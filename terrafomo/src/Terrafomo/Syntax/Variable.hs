@@ -1,4 +1,3 @@
-{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 
@@ -9,7 +8,7 @@ module Terrafomo.Syntax.Variable
     ) where
 
 import Data.Hashable  (Hashable (hashWithSalt))
-import Data.Semigroup (Last (..), Semigroup ((<>)))
+import Data.Semigroup (Semigroup ((<>)))
 
 import Terrafomo.Syntax.Name (Key, Name)
 

@@ -42,10 +42,10 @@ library:
     # - Terrafomo.Template.Resource
 
   dependencies:
-    - base >= 4.9
+    - base       >= 4.9
     - containers
     - dlist
-    - formatting
+    - formatting >= 6.2.5
     - hashable
     - microlens
     - microlens-th

@@ -6,12 +6,10 @@ module Terrafomo.ValueMap
     , values
     ) where
 
-import Data.DList      (DList)
-import Data.Map.Strict (Map)
-import Data.Set        (Set)
+import Data.DList (DList)
+import Data.Set   (Set)
 
 import qualified Data.DList           as DList
-import qualified Data.Map.Strict      as Map
 import qualified Data.Set             as Set
 import qualified Terrafomo.Syntax.HCL as HCL
 
