@@ -1,7 +1,7 @@
 module Terrafomo.Format
     (
     -- * Composition
-       (%) -- FIXME: re-export from Prelude?
+       (%) -- re-exported from Prelude.
 
     -- * Conversions
     , Format.format
@@ -40,9 +40,9 @@ import qualified Terrafomo.Syntax.Name  as Name
 -- > -- format("web-%03d", count.index + 1)
 -- > nformat ("web-" % intp 3) (count + 1)
 --
--- /Note/: Requires formatting >= 6.2.5
 nformat :: Format Name a -> a
 nformat m = Format.runFormat m (Name . LText.toStrict . Build.toLazyText)
+-- Note: 'runFormat' requires formatting >= 6.2.5
 
 -- -- |
 -- -- > -- formatlist("https://%s:%s/", aws_instance.foo.*.public_dns, var.port)

@@ -14,7 +14,6 @@ description: >
 library:
   source-dirs:
     - src
-    # - gen
 
   exposed-modules:
     - Terrafomo
@@ -56,3 +55,8 @@ library:
     - text
     - transformers
     - wl-pprint-text
+
+    - directory
+    - filepath
+    - optparse-applicative
+    - process
