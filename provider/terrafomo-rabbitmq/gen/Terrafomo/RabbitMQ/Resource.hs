@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,61 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.RabbitMQ.Resource where
+module Terrafomo.RabbitMQ.Resource
+    (
+    -- * Types
+      BindingResource (..)
+    , bindingResource
 
-import Data.Functor ((<$>))
+    , ExchangeResource (..)
+    , exchangeResource
+
+    , PermissionsResource (..)
+    , permissionsResource
+
+    , PolicyResource (..)
+    , policyResource
+
+    , QueueResource (..)
+    , queueResource
+
+    , UserResource (..)
+    , userResource
+
+    , VhostResource (..)
+    , vhostResource
+
+    -- * Overloaded Fields
+    , HasArguments (..)
+    , HasComputedPropertiesKey (..)
+    , HasDestination (..)
+    , HasDestinationType (..)
+    , HasName (..)
+    , HasPassword (..)
+    , HasPermissions (..)
+    , HasPolicy (..)
+    , HasRoutingKey (..)
+    , HasSettings (..)
+    , HasSource (..)
+    , HasTags (..)
+    , HasUser (..)
+    , HasVhost (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.RabbitMQ.Provider as TF
 import qualified Terrafomo.RabbitMQ.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @rabbitmq_binding@ RabbitMQ resource.
 
@@ -70,10 +107,40 @@ instance TF.ToHCL BindingResource where
         , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
-$(TF.makeSchemaLenses
-    ''BindingResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasArguments BindingResource (TF.Argument Text) where
+    arguments f s@BindingResource{..} =
+        (\a -> s { _arguments = a } :: BindingResource)
+             <$> f _arguments
+
+instance HasDestination BindingResource (TF.Argument Text) where
+    destination f s@BindingResource{..} =
+        (\a -> s { _destination = a } :: BindingResource)
+             <$> f _destination
+
+instance HasDestinationType BindingResource (TF.Argument Text) where
+    destinationType f s@BindingResource{..} =
+        (\a -> s { _destination_type = a } :: BindingResource)
+             <$> f _destination_type
+
+instance HasRoutingKey BindingResource (TF.Argument Text) where
+    routingKey f s@BindingResource{..} =
+        (\a -> s { _routing_key = a } :: BindingResource)
+             <$> f _routing_key
+
+instance HasSource BindingResource (TF.Argument Text) where
+    source f s@BindingResource{..} =
+        (\a -> s { _source = a } :: BindingResource)
+             <$> f _source
+
+instance HasVhost BindingResource (TF.Argument Text) where
+    vhost f s@BindingResource{..} =
+        (\a -> s { _vhost = a } :: BindingResource)
+             <$> f _vhost
+
+instance HasComputedPropertiesKey BindingResource (TF.Attribute Text) where
+    computedPropertiesKey f s@BindingResource{..} =
+        (\a -> s { _computed_properties_key = a } :: BindingResource)
+             <$> f _computed_properties_key
 
 bindingResource :: TF.Resource TF.RabbitMQ BindingResource
 bindingResource =
@@ -108,10 +175,20 @@ instance TF.ToHCL ExchangeResource where
         , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
-$(TF.makeSchemaLenses
-    ''ExchangeResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasName ExchangeResource (TF.Argument Text) where
+    name f s@ExchangeResource{..} =
+        (\a -> s { _name = a } :: ExchangeResource)
+             <$> f _name
+
+instance HasSettings ExchangeResource (TF.Argument Text) where
+    settings f s@ExchangeResource{..} =
+        (\a -> s { _settings = a } :: ExchangeResource)
+             <$> f _settings
+
+instance HasVhost ExchangeResource (TF.Argument Text) where
+    vhost f s@ExchangeResource{..} =
+        (\a -> s { _vhost = a } :: ExchangeResource)
+             <$> f _vhost
 
 exchangeResource :: TF.Resource TF.RabbitMQ ExchangeResource
 exchangeResource =
@@ -143,10 +220,20 @@ instance TF.ToHCL PermissionsResource where
         , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
-$(TF.makeSchemaLenses
-    ''PermissionsResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasPermissions PermissionsResource (TF.Argument Text) where
+    permissions f s@PermissionsResource{..} =
+        (\a -> s { _permissions = a } :: PermissionsResource)
+             <$> f _permissions
+
+instance HasUser PermissionsResource (TF.Argument Text) where
+    user f s@PermissionsResource{..} =
+        (\a -> s { _user = a } :: PermissionsResource)
+             <$> f _user
+
+instance HasVhost PermissionsResource (TF.Argument Text) where
+    vhost f s@PermissionsResource{..} =
+        (\a -> s { _vhost = a } :: PermissionsResource)
+             <$> f _vhost
 
 permissionsResource :: TF.Resource TF.RabbitMQ PermissionsResource
 permissionsResource =
@@ -178,10 +265,20 @@ instance TF.ToHCL PolicyResource where
         , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
-$(TF.makeSchemaLenses
-    ''PolicyResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasName PolicyResource (TF.Argument Text) where
+    name f s@PolicyResource{..} =
+        (\a -> s { _name = a } :: PolicyResource)
+             <$> f _name
+
+instance HasPolicy PolicyResource (TF.Argument Text) where
+    policy f s@PolicyResource{..} =
+        (\a -> s { _policy = a } :: PolicyResource)
+             <$> f _policy
+
+instance HasVhost PolicyResource (TF.Argument Text) where
+    vhost f s@PolicyResource{..} =
+        (\a -> s { _vhost = a } :: PolicyResource)
+             <$> f _vhost
 
 policyResource :: TF.Resource TF.RabbitMQ PolicyResource
 policyResource =
@@ -212,10 +309,20 @@ instance TF.ToHCL QueueResource where
         , TF.assign "vhost" <$> TF.argument _vhost
         ]
 
-$(TF.makeSchemaLenses
-    ''QueueResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasName QueueResource (TF.Argument Text) where
+    name f s@QueueResource{..} =
+        (\a -> s { _name = a } :: QueueResource)
+             <$> f _name
+
+instance HasSettings QueueResource (TF.Argument Text) where
+    settings f s@QueueResource{..} =
+        (\a -> s { _settings = a } :: QueueResource)
+             <$> f _settings
+
+instance HasVhost QueueResource (TF.Argument Text) where
+    vhost f s@QueueResource{..} =
+        (\a -> s { _vhost = a } :: QueueResource)
+             <$> f _vhost
 
 queueResource :: TF.Resource TF.RabbitMQ QueueResource
 queueResource =
@@ -248,10 +355,20 @@ instance TF.ToHCL UserResource where
         , TF.assign "tags" <$> TF.argument _tags
         ]
 
-$(TF.makeSchemaLenses
-    ''UserResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasName UserResource (TF.Argument Text) where
+    name f s@UserResource{..} =
+        (\a -> s { _name = a } :: UserResource)
+             <$> f _name
+
+instance HasPassword UserResource (TF.Argument Text) where
+    password f s@UserResource{..} =
+        (\a -> s { _password = a } :: UserResource)
+             <$> f _password
+
+instance HasTags UserResource (TF.Argument Text) where
+    tags f s@UserResource{..} =
+        (\a -> s { _tags = a } :: UserResource)
+             <$> f _tags
 
 userResource :: TF.Resource TF.RabbitMQ UserResource
 userResource =
@@ -276,10 +393,10 @@ instance TF.ToHCL VhostResource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''VhostResource
-    ''TF.RabbitMQ
-    ''TF.Resource)
+instance HasName VhostResource (TF.Argument Text) where
+    name f s@VhostResource{..} =
+        (\a -> s { _name = a } :: VhostResource)
+             <$> f _name
 
 vhostResource :: TF.Resource TF.RabbitMQ VhostResource
 vhostResource =
@@ -287,3 +404,87 @@ vhostResource =
         VhostResource {
             _name = TF.Nil
             }
+
+class HasArguments s a | s -> a where
+    arguments :: Functor f => (a -> f a) -> s -> f s
+
+instance HasArguments s a => HasArguments (TF.Resource p s) a where
+    arguments = TF.configuration . arguments
+
+class HasComputedPropertiesKey s a | s -> a where
+    computedPropertiesKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPropertiesKey s a => HasComputedPropertiesKey (TF.Resource p s) a where
+    computedPropertiesKey = TF.configuration . computedPropertiesKey
+
+class HasDestination s a | s -> a where
+    destination :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDestination s a => HasDestination (TF.Resource p s) a where
+    destination = TF.configuration . destination
+
+class HasDestinationType s a | s -> a where
+    destinationType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDestinationType s a => HasDestinationType (TF.Resource p s) a where
+    destinationType = TF.configuration . destinationType
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasPassword s a | s -> a where
+    password :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPassword s a => HasPassword (TF.Resource p s) a where
+    password = TF.configuration . password
+
+class HasPermissions s a | s -> a where
+    permissions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPermissions s a => HasPermissions (TF.Resource p s) a where
+    permissions = TF.configuration . permissions
+
+class HasPolicy s a | s -> a where
+    policy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicy s a => HasPolicy (TF.Resource p s) a where
+    policy = TF.configuration . policy
+
+class HasRoutingKey s a | s -> a where
+    routingKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRoutingKey s a => HasRoutingKey (TF.Resource p s) a where
+    routingKey = TF.configuration . routingKey
+
+class HasSettings s a | s -> a where
+    settings :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSettings s a => HasSettings (TF.Resource p s) a where
+    settings = TF.configuration . settings
+
+class HasSource s a | s -> a where
+    source :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSource s a => HasSource (TF.Resource p s) a where
+    source = TF.configuration . source
+
+class HasTags s a | s -> a where
+    tags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags = TF.configuration . tags
+
+class HasUser s a | s -> a where
+    user :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUser s a => HasUser (TF.Resource p s) a where
+    user = TF.configuration . user
+
+class HasVhost s a | s -> a where
+    vhost :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVhost s a => HasVhost (TF.Resource p s) a where
+    vhost = TF.configuration . vhost

@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSMadeEasy.Provider
-    ( DNSMadeEasy    (..)
-    , HasDNSMadeEasy (..)
+    (
+    -- * Provider Datatype
+      DNSMadeEasy (..)
+
+    -- * Lenses
+    , akey
+    , skey
+    , usesandbox
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.DNSMadeEasy.Types as TF
 import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Meta       as TF
 import qualified Terrafomo.Syntax.Name       as TF
+import qualified Terrafomo.Syntax.Provider   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | DNSMadeEasy Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid DNSMadeEasy where
 instance TF.IsProvider DNSMadeEasy where
     type ProviderName DNSMadeEasy = "dme"
 
-$(TF.makeProviderLenses ''DNSMadeEasy)
+akey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> DNSMadeEasy
+    -> f DNSMadeEasy
+akey f s =
+        (\a -> s { _akey = a } :: DNSMadeEasy)
+             <$> f (_akey s)
+
+skey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> DNSMadeEasy
+    -> f DNSMadeEasy
+skey f s =
+        (\a -> s { _skey = a } :: DNSMadeEasy)
+             <$> f (_skey s)
+
+usesandbox
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> DNSMadeEasy
+    -> f DNSMadeEasy
+usesandbox f s =
+        (\a -> s { _usesandbox = a } :: DNSMadeEasy)
+             <$> f (_usesandbox s)

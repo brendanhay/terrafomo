@@ -8,6 +8,7 @@ name: terrafomo-postgresql
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

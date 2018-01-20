@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.NS1.Provider
-    ( NS1    (..)
-    , HasNS1 (..)
+    (
+    -- * Provider Datatype
+      NS1 (..)
+
+    -- * Lenses
+    , apikey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +37,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.NS1.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | NS1 Terraform provider.
 
@@ -73,4 +75,11 @@ instance Monoid NS1 where
 instance TF.IsProvider NS1 where
     type ProviderName NS1 = "ns1"
 
-$(TF.makeProviderLenses ''NS1)
+apikey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> NS1
+    -> f NS1
+apikey f s =
+        (\a -> s { _apikey = a } :: NS1)
+             <$> f (_apikey s)

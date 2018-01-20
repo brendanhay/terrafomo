@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,74 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Consul.Resource where
+module Terrafomo.Consul.Resource
+    (
+    -- * Types
+      AgentServiceResource (..)
+    , agentServiceResource
 
-import Data.Functor ((<$>))
+    , CatalogEntryResource (..)
+    , catalogEntryResource
+
+    , KeyPrefixResource (..)
+    , keyPrefixResource
+
+    , KeysResource (..)
+    , keysResource
+
+    , NodeResource (..)
+    , nodeResource
+
+    , PreparedQueryResource (..)
+    , preparedQueryResource
+
+    , ServiceResource (..)
+    , serviceResource
+
+    -- * Overloaded Fields
+    , HasAddress (..)
+    , HasComputedAddress (..)
+    , HasComputedDatacenter (..)
+    , HasComputedId (..)
+    , HasComputedName (..)
+    , HasComputedNode (..)
+    , HasComputedPort (..)
+    , HasComputedServiceId (..)
+    , HasComputedTags (..)
+    , HasDatacenter (..)
+    , HasDns (..)
+    , HasFailover (..)
+    , HasKey (..)
+    , HasName (..)
+    , HasNear (..)
+    , HasNode (..)
+    , HasOnlyPassing (..)
+    , HasPathPrefix (..)
+    , HasPort (..)
+    , HasService (..)
+    , HasServiceId (..)
+    , HasSession (..)
+    , HasStoredToken (..)
+    , HasSubkeys (..)
+    , HasTags (..)
+    , HasTemplate (..)
+    , HasToken (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Consul.Provider as TF
 import qualified Terrafomo.Consul.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | The @consul_agent_service@ Consul resource.
 
@@ -73,10 +123,50 @@ instance TF.ToHCL AgentServiceResource where
         , TF.assign "tags" <$> TF.argument _tags
         ]
 
-$(TF.makeSchemaLenses
-    ''AgentServiceResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasAddress AgentServiceResource (TF.Argument Text) where
+    address f s@AgentServiceResource{..} =
+        (\a -> s { _address = a } :: AgentServiceResource)
+             <$> f _address
+
+instance HasName AgentServiceResource (TF.Argument Text) where
+    name f s@AgentServiceResource{..} =
+        (\a -> s { _name = a } :: AgentServiceResource)
+             <$> f _name
+
+instance HasPort AgentServiceResource (TF.Argument Text) where
+    port f s@AgentServiceResource{..} =
+        (\a -> s { _port = a } :: AgentServiceResource)
+             <$> f _port
+
+instance HasTags AgentServiceResource (TF.Argument Text) where
+    tags f s@AgentServiceResource{..} =
+        (\a -> s { _tags = a } :: AgentServiceResource)
+             <$> f _tags
+
+instance HasComputedAddress AgentServiceResource (TF.Attribute Text) where
+    computedAddress f s@AgentServiceResource{..} =
+        (\a -> s { _computed_address = a } :: AgentServiceResource)
+             <$> f _computed_address
+
+instance HasComputedId AgentServiceResource (TF.Attribute Text) where
+    computedId f s@AgentServiceResource{..} =
+        (\a -> s { _computed_id = a } :: AgentServiceResource)
+             <$> f _computed_id
+
+instance HasComputedName AgentServiceResource (TF.Attribute Text) where
+    computedName f s@AgentServiceResource{..} =
+        (\a -> s { _computed_name = a } :: AgentServiceResource)
+             <$> f _computed_name
+
+instance HasComputedPort AgentServiceResource (TF.Attribute Text) where
+    computedPort f s@AgentServiceResource{..} =
+        (\a -> s { _computed_port = a } :: AgentServiceResource)
+             <$> f _computed_port
+
+instance HasComputedTags AgentServiceResource (TF.Attribute Text) where
+    computedTags f s@AgentServiceResource{..} =
+        (\a -> s { _computed_tags = a } :: AgentServiceResource)
+             <$> f _computed_tags
 
 agentServiceResource :: TF.Resource TF.Consul AgentServiceResource
 agentServiceResource =
@@ -125,10 +215,40 @@ instance TF.ToHCL CatalogEntryResource where
         , TF.assign "token" <$> TF.argument _token
         ]
 
-$(TF.makeSchemaLenses
-    ''CatalogEntryResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasAddress CatalogEntryResource (TF.Argument Text) where
+    address f s@CatalogEntryResource{..} =
+        (\a -> s { _address = a } :: CatalogEntryResource)
+             <$> f _address
+
+instance HasDatacenter CatalogEntryResource (TF.Argument Text) where
+    datacenter f s@CatalogEntryResource{..} =
+        (\a -> s { _datacenter = a } :: CatalogEntryResource)
+             <$> f _datacenter
+
+instance HasNode CatalogEntryResource (TF.Argument Text) where
+    node f s@CatalogEntryResource{..} =
+        (\a -> s { _node = a } :: CatalogEntryResource)
+             <$> f _node
+
+instance HasService CatalogEntryResource (TF.Argument Text) where
+    service f s@CatalogEntryResource{..} =
+        (\a -> s { _service = a } :: CatalogEntryResource)
+             <$> f _service
+
+instance HasToken CatalogEntryResource (TF.Argument Text) where
+    token f s@CatalogEntryResource{..} =
+        (\a -> s { _token = a } :: CatalogEntryResource)
+             <$> f _token
+
+instance HasComputedAddress CatalogEntryResource (TF.Attribute Text) where
+    computedAddress f s@CatalogEntryResource{..} =
+        (\a -> s { _computed_address = a } :: CatalogEntryResource)
+             <$> f _computed_address
+
+instance HasComputedNode CatalogEntryResource (TF.Attribute Text) where
+    computedNode f s@CatalogEntryResource{..} =
+        (\a -> s { _computed_node = a } :: CatalogEntryResource)
+             <$> f _computed_node
 
 catalogEntryResource :: TF.Resource TF.Consul CatalogEntryResource
 catalogEntryResource =
@@ -183,10 +303,30 @@ instance TF.ToHCL KeyPrefixResource where
         , TF.assign "token" <$> TF.argument _token
         ]
 
-$(TF.makeSchemaLenses
-    ''KeyPrefixResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasDatacenter KeyPrefixResource (TF.Argument Text) where
+    datacenter f s@KeyPrefixResource{..} =
+        (\a -> s { _datacenter = a } :: KeyPrefixResource)
+             <$> f _datacenter
+
+instance HasPathPrefix KeyPrefixResource (TF.Argument Text) where
+    pathPrefix f s@KeyPrefixResource{..} =
+        (\a -> s { _path_prefix = a } :: KeyPrefixResource)
+             <$> f _path_prefix
+
+instance HasSubkeys KeyPrefixResource (TF.Argument Text) where
+    subkeys f s@KeyPrefixResource{..} =
+        (\a -> s { _subkeys = a } :: KeyPrefixResource)
+             <$> f _subkeys
+
+instance HasToken KeyPrefixResource (TF.Argument Text) where
+    token f s@KeyPrefixResource{..} =
+        (\a -> s { _token = a } :: KeyPrefixResource)
+             <$> f _token
+
+instance HasComputedDatacenter KeyPrefixResource (TF.Attribute Text) where
+    computedDatacenter f s@KeyPrefixResource{..} =
+        (\a -> s { _computed_datacenter = a } :: KeyPrefixResource)
+             <$> f _computed_datacenter
 
 keyPrefixResource :: TF.Resource TF.Consul KeyPrefixResource
 keyPrefixResource =
@@ -226,10 +366,20 @@ instance TF.ToHCL KeysResource where
         , TF.assign "token" <$> TF.argument _token
         ]
 
-$(TF.makeSchemaLenses
-    ''KeysResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasDatacenter KeysResource (TF.Argument Text) where
+    datacenter f s@KeysResource{..} =
+        (\a -> s { _datacenter = a } :: KeysResource)
+             <$> f _datacenter
+
+instance HasKey KeysResource (TF.Argument Text) where
+    key f s@KeysResource{..} =
+        (\a -> s { _key = a } :: KeysResource)
+             <$> f _key
+
+instance HasToken KeysResource (TF.Argument Text) where
+    token f s@KeysResource{..} =
+        (\a -> s { _token = a } :: KeysResource)
+             <$> f _token
 
 keysResource :: TF.Resource TF.Consul KeysResource
 keysResource =
@@ -262,10 +412,25 @@ instance TF.ToHCL NodeResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''NodeResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasAddress NodeResource (TF.Argument Text) where
+    address f s@NodeResource{..} =
+        (\a -> s { _address = a } :: NodeResource)
+             <$> f _address
+
+instance HasName NodeResource (TF.Argument Text) where
+    name f s@NodeResource{..} =
+        (\a -> s { _name = a } :: NodeResource)
+             <$> f _name
+
+instance HasComputedAddress NodeResource (TF.Attribute Text) where
+    computedAddress f s@NodeResource{..} =
+        (\a -> s { _computed_address = a } :: NodeResource)
+             <$> f _computed_address
+
+instance HasComputedName NodeResource (TF.Attribute Text) where
+    computedName f s@NodeResource{..} =
+        (\a -> s { _computed_name = a } :: NodeResource)
+             <$> f _computed_name
 
 nodeResource :: TF.Resource TF.Consul NodeResource
 nodeResource =
@@ -329,10 +494,70 @@ instance TF.ToHCL PreparedQueryResource where
         , TF.assign "token" <$> TF.argument _token
         ]
 
-$(TF.makeSchemaLenses
-    ''PreparedQueryResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasDatacenter PreparedQueryResource (TF.Argument Text) where
+    datacenter f s@PreparedQueryResource{..} =
+        (\a -> s { _datacenter = a } :: PreparedQueryResource)
+             <$> f _datacenter
+
+instance HasDns PreparedQueryResource (TF.Argument Text) where
+    dns f s@PreparedQueryResource{..} =
+        (\a -> s { _dns = a } :: PreparedQueryResource)
+             <$> f _dns
+
+instance HasFailover PreparedQueryResource (TF.Argument Text) where
+    failover f s@PreparedQueryResource{..} =
+        (\a -> s { _failover = a } :: PreparedQueryResource)
+             <$> f _failover
+
+instance HasName PreparedQueryResource (TF.Argument Text) where
+    name f s@PreparedQueryResource{..} =
+        (\a -> s { _name = a } :: PreparedQueryResource)
+             <$> f _name
+
+instance HasNear PreparedQueryResource (TF.Argument Text) where
+    near f s@PreparedQueryResource{..} =
+        (\a -> s { _near = a } :: PreparedQueryResource)
+             <$> f _near
+
+instance HasOnlyPassing PreparedQueryResource (TF.Argument Text) where
+    onlyPassing f s@PreparedQueryResource{..} =
+        (\a -> s { _only_passing = a } :: PreparedQueryResource)
+             <$> f _only_passing
+
+instance HasService PreparedQueryResource (TF.Argument Text) where
+    service f s@PreparedQueryResource{..} =
+        (\a -> s { _service = a } :: PreparedQueryResource)
+             <$> f _service
+
+instance HasSession PreparedQueryResource (TF.Argument Text) where
+    session f s@PreparedQueryResource{..} =
+        (\a -> s { _session = a } :: PreparedQueryResource)
+             <$> f _session
+
+instance HasStoredToken PreparedQueryResource (TF.Argument Text) where
+    storedToken f s@PreparedQueryResource{..} =
+        (\a -> s { _stored_token = a } :: PreparedQueryResource)
+             <$> f _stored_token
+
+instance HasTags PreparedQueryResource (TF.Argument Text) where
+    tags f s@PreparedQueryResource{..} =
+        (\a -> s { _tags = a } :: PreparedQueryResource)
+             <$> f _tags
+
+instance HasTemplate PreparedQueryResource (TF.Argument Text) where
+    template f s@PreparedQueryResource{..} =
+        (\a -> s { _template = a } :: PreparedQueryResource)
+             <$> f _template
+
+instance HasToken PreparedQueryResource (TF.Argument Text) where
+    token f s@PreparedQueryResource{..} =
+        (\a -> s { _token = a } :: PreparedQueryResource)
+             <$> f _token
+
+instance HasComputedId PreparedQueryResource (TF.Attribute Text) where
+    computedId f s@PreparedQueryResource{..} =
+        (\a -> s { _computed_id = a } :: PreparedQueryResource)
+             <$> f _computed_id
 
 preparedQueryResource :: TF.Resource TF.Consul PreparedQueryResource
 preparedQueryResource =
@@ -398,10 +623,55 @@ instance TF.ToHCL ServiceResource where
         , TF.assign "tags" <$> TF.argument _tags
         ]
 
-$(TF.makeSchemaLenses
-    ''ServiceResource
-    ''TF.Consul
-    ''TF.Resource)
+instance HasAddress ServiceResource (TF.Argument Text) where
+    address f s@ServiceResource{..} =
+        (\a -> s { _address = a } :: ServiceResource)
+             <$> f _address
+
+instance HasName ServiceResource (TF.Argument Text) where
+    name f s@ServiceResource{..} =
+        (\a -> s { _name = a } :: ServiceResource)
+             <$> f _name
+
+instance HasPort ServiceResource (TF.Argument Text) where
+    port f s@ServiceResource{..} =
+        (\a -> s { _port = a } :: ServiceResource)
+             <$> f _port
+
+instance HasServiceId ServiceResource (TF.Argument Text) where
+    serviceId f s@ServiceResource{..} =
+        (\a -> s { _service_id = a } :: ServiceResource)
+             <$> f _service_id
+
+instance HasTags ServiceResource (TF.Argument Text) where
+    tags f s@ServiceResource{..} =
+        (\a -> s { _tags = a } :: ServiceResource)
+             <$> f _tags
+
+instance HasComputedAddress ServiceResource (TF.Attribute Text) where
+    computedAddress f s@ServiceResource{..} =
+        (\a -> s { _computed_address = a } :: ServiceResource)
+             <$> f _computed_address
+
+instance HasComputedName ServiceResource (TF.Attribute Text) where
+    computedName f s@ServiceResource{..} =
+        (\a -> s { _computed_name = a } :: ServiceResource)
+             <$> f _computed_name
+
+instance HasComputedPort ServiceResource (TF.Attribute Text) where
+    computedPort f s@ServiceResource{..} =
+        (\a -> s { _computed_port = a } :: ServiceResource)
+             <$> f _computed_port
+
+instance HasComputedServiceId ServiceResource (TF.Attribute Text) where
+    computedServiceId f s@ServiceResource{..} =
+        (\a -> s { _computed_service_id = a } :: ServiceResource)
+             <$> f _computed_service_id
+
+instance HasComputedTags ServiceResource (TF.Attribute Text) where
+    computedTags f s@ServiceResource{..} =
+        (\a -> s { _computed_tags = a } :: ServiceResource)
+             <$> f _computed_tags
 
 serviceResource :: TF.Resource TF.Consul ServiceResource
 serviceResource =
@@ -418,3 +688,165 @@ serviceResource =
             , _computed_service_id = TF.Compute "service_id"
             , _computed_tags = TF.Compute "tags"
             }
+
+class HasAddress s a | s -> a where
+    address :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAddress s a => HasAddress (TF.Resource p s) a where
+    address = TF.configuration . address
+
+class HasComputedAddress s a | s -> a where
+    computedAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddress s a => HasComputedAddress (TF.Resource p s) a where
+    computedAddress = TF.configuration . computedAddress
+
+class HasComputedDatacenter s a | s -> a where
+    computedDatacenter :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDatacenter s a => HasComputedDatacenter (TF.Resource p s) a where
+    computedDatacenter = TF.configuration . computedDatacenter
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedNode s a | s -> a where
+    computedNode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNode s a => HasComputedNode (TF.Resource p s) a where
+    computedNode = TF.configuration . computedNode
+
+class HasComputedPort s a | s -> a where
+    computedPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPort s a => HasComputedPort (TF.Resource p s) a where
+    computedPort = TF.configuration . computedPort
+
+class HasComputedServiceId s a | s -> a where
+    computedServiceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedServiceId s a => HasComputedServiceId (TF.Resource p s) a where
+    computedServiceId = TF.configuration . computedServiceId
+
+class HasComputedTags s a | s -> a where
+    computedTags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTags s a => HasComputedTags (TF.Resource p s) a where
+    computedTags = TF.configuration . computedTags
+
+class HasDatacenter s a | s -> a where
+    datacenter :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDatacenter s a => HasDatacenter (TF.Resource p s) a where
+    datacenter = TF.configuration . datacenter
+
+class HasDns s a | s -> a where
+    dns :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDns s a => HasDns (TF.Resource p s) a where
+    dns = TF.configuration . dns
+
+class HasFailover s a | s -> a where
+    failover :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFailover s a => HasFailover (TF.Resource p s) a where
+    failover = TF.configuration . failover
+
+class HasKey s a | s -> a where
+    key :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKey s a => HasKey (TF.Resource p s) a where
+    key = TF.configuration . key
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNear s a | s -> a where
+    near :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNear s a => HasNear (TF.Resource p s) a where
+    near = TF.configuration . near
+
+class HasNode s a | s -> a where
+    node :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNode s a => HasNode (TF.Resource p s) a where
+    node = TF.configuration . node
+
+class HasOnlyPassing s a | s -> a where
+    onlyPassing :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOnlyPassing s a => HasOnlyPassing (TF.Resource p s) a where
+    onlyPassing = TF.configuration . onlyPassing
+
+class HasPathPrefix s a | s -> a where
+    pathPrefix :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPathPrefix s a => HasPathPrefix (TF.Resource p s) a where
+    pathPrefix = TF.configuration . pathPrefix
+
+class HasPort s a | s -> a where
+    port :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPort s a => HasPort (TF.Resource p s) a where
+    port = TF.configuration . port
+
+class HasService s a | s -> a where
+    service :: Functor f => (a -> f a) -> s -> f s
+
+instance HasService s a => HasService (TF.Resource p s) a where
+    service = TF.configuration . service
+
+class HasServiceId s a | s -> a where
+    serviceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasServiceId s a => HasServiceId (TF.Resource p s) a where
+    serviceId = TF.configuration . serviceId
+
+class HasSession s a | s -> a where
+    session :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSession s a => HasSession (TF.Resource p s) a where
+    session = TF.configuration . session
+
+class HasStoredToken s a | s -> a where
+    storedToken :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStoredToken s a => HasStoredToken (TF.Resource p s) a where
+    storedToken = TF.configuration . storedToken
+
+class HasSubkeys s a | s -> a where
+    subkeys :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSubkeys s a => HasSubkeys (TF.Resource p s) a where
+    subkeys = TF.configuration . subkeys
+
+class HasTags s a | s -> a where
+    tags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags = TF.configuration . tags
+
+class HasTemplate s a | s -> a where
+    template :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTemplate s a => HasTemplate (TF.Resource p s) a where
+    template = TF.configuration . template
+
+class HasToken s a | s -> a where
+    token :: Functor f => (a -> f a) -> s -> f s
+
+instance HasToken s a => HasToken (TF.Resource p s) a where
+    token = TF.configuration . token

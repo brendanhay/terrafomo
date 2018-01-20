@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,107 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cobbler.Resource where
+module Terrafomo.Cobbler.Resource
+    (
+    -- * Types
+      DistroResource (..)
+    , distroResource
 
-import Data.Functor ((<$>))
+    , KickstartFileResource (..)
+    , kickstartFileResource
+
+    , ProfileResource (..)
+    , profileResource
+
+    , RepoResource (..)
+    , repoResource
+
+    , SnippetResource (..)
+    , snippetResource
+
+    , SystemResource (..)
+    , systemResource
+
+    -- * Overloaded Fields
+    , HasAptComponents (..)
+    , HasAptDists (..)
+    , HasArch (..)
+    , HasBody (..)
+    , HasBootFiles (..)
+    , HasBreed (..)
+    , HasComment (..)
+    , HasCreaterepoFlags (..)
+    , HasDistro (..)
+    , HasEnableGpxe (..)
+    , HasEnableMenu (..)
+    , HasEnvironment (..)
+    , HasFetchableFiles (..)
+    , HasGateway (..)
+    , HasHostname (..)
+    , HasImage (..)
+    , HasInitrd (..)
+    , HasInterface (..)
+    , HasIpv6DefaultDevice (..)
+    , HasKeepUpdated (..)
+    , HasKernel (..)
+    , HasKernelOptions (..)
+    , HasKernelOptionsPost (..)
+    , HasKickstart (..)
+    , HasKsMeta (..)
+    , HasLdapEnabled (..)
+    , HasLdapType (..)
+    , HasMgmtClasses (..)
+    , HasMgmtParameters (..)
+    , HasMirror (..)
+    , HasMirrorLocally (..)
+    , HasMonitEnabled (..)
+    , HasName (..)
+    , HasNameServers (..)
+    , HasNameServersSearch (..)
+    , HasNetbootEnabled (..)
+    , HasOsVersion (..)
+    , HasOwners (..)
+    , HasParent (..)
+    , HasPowerAddress (..)
+    , HasPowerId (..)
+    , HasPowerPass (..)
+    , HasPowerType (..)
+    , HasPowerUser (..)
+    , HasProfile (..)
+    , HasProxy (..)
+    , HasRedhatManagementKey (..)
+    , HasRedhatManagementServer (..)
+    , HasRepos (..)
+    , HasRpmList (..)
+    , HasServer (..)
+    , HasStatus (..)
+    , HasTemplateFiles (..)
+    , HasTemplateRemoteKickstarts (..)
+    , HasVirtAutoBoot (..)
+    , HasVirtBridge (..)
+    , HasVirtCpus (..)
+    , HasVirtDiskDriver (..)
+    , HasVirtFileSize (..)
+    , HasVirtPath (..)
+    , HasVirtPxeBoot (..)
+    , HasVirtRam (..)
+    , HasVirtType (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Cobbler.Provider as TF
 import qualified Terrafomo.Cobbler.Types    as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Meta      as TF (configuration)
 import qualified Terrafomo.Syntax.Resource  as TF
 import qualified Terrafomo.Syntax.Resource  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | The @cobbler_distro@ Cobbler resource.
 
@@ -97,10 +180,85 @@ instance TF.ToHCL DistroResource where
         , TF.assign "template_files" <$> TF.argument _template_files
         ]
 
-$(TF.makeSchemaLenses
-    ''DistroResource
-    ''TF.Cobbler
-    ''TF.Resource)
+instance HasArch DistroResource (TF.Argument Text) where
+    arch f s@DistroResource{..} =
+        (\a -> s { _arch = a } :: DistroResource)
+             <$> f _arch
+
+instance HasBootFiles DistroResource (TF.Argument Text) where
+    bootFiles f s@DistroResource{..} =
+        (\a -> s { _boot_files = a } :: DistroResource)
+             <$> f _boot_files
+
+instance HasBreed DistroResource (TF.Argument Text) where
+    breed f s@DistroResource{..} =
+        (\a -> s { _breed = a } :: DistroResource)
+             <$> f _breed
+
+instance HasComment DistroResource (TF.Argument Text) where
+    comment f s@DistroResource{..} =
+        (\a -> s { _comment = a } :: DistroResource)
+             <$> f _comment
+
+instance HasFetchableFiles DistroResource (TF.Argument Text) where
+    fetchableFiles f s@DistroResource{..} =
+        (\a -> s { _fetchable_files = a } :: DistroResource)
+             <$> f _fetchable_files
+
+instance HasInitrd DistroResource (TF.Argument Text) where
+    initrd f s@DistroResource{..} =
+        (\a -> s { _initrd = a } :: DistroResource)
+             <$> f _initrd
+
+instance HasKernel DistroResource (TF.Argument Text) where
+    kernel f s@DistroResource{..} =
+        (\a -> s { _kernel = a } :: DistroResource)
+             <$> f _kernel
+
+instance HasKernelOptions DistroResource (TF.Argument Text) where
+    kernelOptions f s@DistroResource{..} =
+        (\a -> s { _kernel_options = a } :: DistroResource)
+             <$> f _kernel_options
+
+instance HasKernelOptionsPost DistroResource (TF.Argument Text) where
+    kernelOptionsPost f s@DistroResource{..} =
+        (\a -> s { _kernel_options_post = a } :: DistroResource)
+             <$> f _kernel_options_post
+
+instance HasMgmtClasses DistroResource (TF.Argument Text) where
+    mgmtClasses f s@DistroResource{..} =
+        (\a -> s { _mgmt_classes = a } :: DistroResource)
+             <$> f _mgmt_classes
+
+instance HasName DistroResource (TF.Argument Text) where
+    name f s@DistroResource{..} =
+        (\a -> s { _name = a } :: DistroResource)
+             <$> f _name
+
+instance HasOsVersion DistroResource (TF.Argument Text) where
+    osVersion f s@DistroResource{..} =
+        (\a -> s { _os_version = a } :: DistroResource)
+             <$> f _os_version
+
+instance HasOwners DistroResource (TF.Argument Text) where
+    owners f s@DistroResource{..} =
+        (\a -> s { _owners = a } :: DistroResource)
+             <$> f _owners
+
+instance HasRedhatManagementKey DistroResource (TF.Argument Text) where
+    redhatManagementKey f s@DistroResource{..} =
+        (\a -> s { _redhat_management_key = a } :: DistroResource)
+             <$> f _redhat_management_key
+
+instance HasRedhatManagementServer DistroResource (TF.Argument Text) where
+    redhatManagementServer f s@DistroResource{..} =
+        (\a -> s { _redhat_management_server = a } :: DistroResource)
+             <$> f _redhat_management_server
+
+instance HasTemplateFiles DistroResource (TF.Argument Text) where
+    templateFiles f s@DistroResource{..} =
+        (\a -> s { _template_files = a } :: DistroResource)
+             <$> f _template_files
 
 distroResource :: TF.Resource TF.Cobbler DistroResource
 distroResource =
@@ -141,10 +299,15 @@ instance TF.ToHCL KickstartFileResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''KickstartFileResource
-    ''TF.Cobbler
-    ''TF.Resource)
+instance HasBody KickstartFileResource (TF.Argument Text) where
+    body f s@KickstartFileResource{..} =
+        (\a -> s { _body = a } :: KickstartFileResource)
+             <$> f _body
+
+instance HasName KickstartFileResource (TF.Argument Text) where
+    name f s@KickstartFileResource{..} =
+        (\a -> s { _name = a } :: KickstartFileResource)
+             <$> f _name
 
 kickstartFileResource :: TF.Resource TF.Cobbler KickstartFileResource
 kickstartFileResource =
@@ -261,10 +424,165 @@ instance TF.ToHCL ProfileResource where
         , TF.assign "virt_type" <$> TF.argument _virt_type
         ]
 
-$(TF.makeSchemaLenses
-    ''ProfileResource
-    ''TF.Cobbler
-    ''TF.Resource)
+instance HasBootFiles ProfileResource (TF.Argument Text) where
+    bootFiles f s@ProfileResource{..} =
+        (\a -> s { _boot_files = a } :: ProfileResource)
+             <$> f _boot_files
+
+instance HasComment ProfileResource (TF.Argument Text) where
+    comment f s@ProfileResource{..} =
+        (\a -> s { _comment = a } :: ProfileResource)
+             <$> f _comment
+
+instance HasDistro ProfileResource (TF.Argument Text) where
+    distro f s@ProfileResource{..} =
+        (\a -> s { _distro = a } :: ProfileResource)
+             <$> f _distro
+
+instance HasEnableGpxe ProfileResource (TF.Argument Text) where
+    enableGpxe f s@ProfileResource{..} =
+        (\a -> s { _enable_gpxe = a } :: ProfileResource)
+             <$> f _enable_gpxe
+
+instance HasEnableMenu ProfileResource (TF.Argument Text) where
+    enableMenu f s@ProfileResource{..} =
+        (\a -> s { _enable_menu = a } :: ProfileResource)
+             <$> f _enable_menu
+
+instance HasFetchableFiles ProfileResource (TF.Argument Text) where
+    fetchableFiles f s@ProfileResource{..} =
+        (\a -> s { _fetchable_files = a } :: ProfileResource)
+             <$> f _fetchable_files
+
+instance HasKernelOptions ProfileResource (TF.Argument Text) where
+    kernelOptions f s@ProfileResource{..} =
+        (\a -> s { _kernel_options = a } :: ProfileResource)
+             <$> f _kernel_options
+
+instance HasKernelOptionsPost ProfileResource (TF.Argument Text) where
+    kernelOptionsPost f s@ProfileResource{..} =
+        (\a -> s { _kernel_options_post = a } :: ProfileResource)
+             <$> f _kernel_options_post
+
+instance HasKickstart ProfileResource (TF.Argument Text) where
+    kickstart f s@ProfileResource{..} =
+        (\a -> s { _kickstart = a } :: ProfileResource)
+             <$> f _kickstart
+
+instance HasKsMeta ProfileResource (TF.Argument Text) where
+    ksMeta f s@ProfileResource{..} =
+        (\a -> s { _ks_meta = a } :: ProfileResource)
+             <$> f _ks_meta
+
+instance HasMgmtClasses ProfileResource (TF.Argument Text) where
+    mgmtClasses f s@ProfileResource{..} =
+        (\a -> s { _mgmt_classes = a } :: ProfileResource)
+             <$> f _mgmt_classes
+
+instance HasMgmtParameters ProfileResource (TF.Argument Text) where
+    mgmtParameters f s@ProfileResource{..} =
+        (\a -> s { _mgmt_parameters = a } :: ProfileResource)
+             <$> f _mgmt_parameters
+
+instance HasName ProfileResource (TF.Argument Text) where
+    name f s@ProfileResource{..} =
+        (\a -> s { _name = a } :: ProfileResource)
+             <$> f _name
+
+instance HasNameServers ProfileResource (TF.Argument Text) where
+    nameServers f s@ProfileResource{..} =
+        (\a -> s { _name_servers = a } :: ProfileResource)
+             <$> f _name_servers
+
+instance HasNameServersSearch ProfileResource (TF.Argument Text) where
+    nameServersSearch f s@ProfileResource{..} =
+        (\a -> s { _name_servers_search = a } :: ProfileResource)
+             <$> f _name_servers_search
+
+instance HasOwners ProfileResource (TF.Argument Text) where
+    owners f s@ProfileResource{..} =
+        (\a -> s { _owners = a } :: ProfileResource)
+             <$> f _owners
+
+instance HasParent ProfileResource (TF.Argument Text) where
+    parent f s@ProfileResource{..} =
+        (\a -> s { _parent = a } :: ProfileResource)
+             <$> f _parent
+
+instance HasProxy ProfileResource (TF.Argument Text) where
+    proxy f s@ProfileResource{..} =
+        (\a -> s { _proxy = a } :: ProfileResource)
+             <$> f _proxy
+
+instance HasRedhatManagementKey ProfileResource (TF.Argument Text) where
+    redhatManagementKey f s@ProfileResource{..} =
+        (\a -> s { _redhat_management_key = a } :: ProfileResource)
+             <$> f _redhat_management_key
+
+instance HasRedhatManagementServer ProfileResource (TF.Argument Text) where
+    redhatManagementServer f s@ProfileResource{..} =
+        (\a -> s { _redhat_management_server = a } :: ProfileResource)
+             <$> f _redhat_management_server
+
+instance HasRepos ProfileResource (TF.Argument Text) where
+    repos f s@ProfileResource{..} =
+        (\a -> s { _repos = a } :: ProfileResource)
+             <$> f _repos
+
+instance HasServer ProfileResource (TF.Argument Text) where
+    server f s@ProfileResource{..} =
+        (\a -> s { _server = a } :: ProfileResource)
+             <$> f _server
+
+instance HasTemplateFiles ProfileResource (TF.Argument Text) where
+    templateFiles f s@ProfileResource{..} =
+        (\a -> s { _template_files = a } :: ProfileResource)
+             <$> f _template_files
+
+instance HasTemplateRemoteKickstarts ProfileResource (TF.Argument Text) where
+    templateRemoteKickstarts f s@ProfileResource{..} =
+        (\a -> s { _template_remote_kickstarts = a } :: ProfileResource)
+             <$> f _template_remote_kickstarts
+
+instance HasVirtAutoBoot ProfileResource (TF.Argument Text) where
+    virtAutoBoot f s@ProfileResource{..} =
+        (\a -> s { _virt_auto_boot = a } :: ProfileResource)
+             <$> f _virt_auto_boot
+
+instance HasVirtBridge ProfileResource (TF.Argument Text) where
+    virtBridge f s@ProfileResource{..} =
+        (\a -> s { _virt_bridge = a } :: ProfileResource)
+             <$> f _virt_bridge
+
+instance HasVirtCpus ProfileResource (TF.Argument Text) where
+    virtCpus f s@ProfileResource{..} =
+        (\a -> s { _virt_cpus = a } :: ProfileResource)
+             <$> f _virt_cpus
+
+instance HasVirtDiskDriver ProfileResource (TF.Argument Text) where
+    virtDiskDriver f s@ProfileResource{..} =
+        (\a -> s { _virt_disk_driver = a } :: ProfileResource)
+             <$> f _virt_disk_driver
+
+instance HasVirtFileSize ProfileResource (TF.Argument Text) where
+    virtFileSize f s@ProfileResource{..} =
+        (\a -> s { _virt_file_size = a } :: ProfileResource)
+             <$> f _virt_file_size
+
+instance HasVirtPath ProfileResource (TF.Argument Text) where
+    virtPath f s@ProfileResource{..} =
+        (\a -> s { _virt_path = a } :: ProfileResource)
+             <$> f _virt_path
+
+instance HasVirtRam ProfileResource (TF.Argument Text) where
+    virtRam f s@ProfileResource{..} =
+        (\a -> s { _virt_ram = a } :: ProfileResource)
+             <$> f _virt_ram
+
+instance HasVirtType ProfileResource (TF.Argument Text) where
+    virtType f s@ProfileResource{..} =
+        (\a -> s { _virt_type = a } :: ProfileResource)
+             <$> f _virt_type
 
 profileResource :: TF.Resource TF.Cobbler ProfileResource
 profileResource =
@@ -357,10 +675,75 @@ instance TF.ToHCL RepoResource where
         , TF.assign "rpm_list" <$> TF.argument _rpm_list
         ]
 
-$(TF.makeSchemaLenses
-    ''RepoResource
-    ''TF.Cobbler
-    ''TF.Resource)
+instance HasAptComponents RepoResource (TF.Argument Text) where
+    aptComponents f s@RepoResource{..} =
+        (\a -> s { _apt_components = a } :: RepoResource)
+             <$> f _apt_components
+
+instance HasAptDists RepoResource (TF.Argument Text) where
+    aptDists f s@RepoResource{..} =
+        (\a -> s { _apt_dists = a } :: RepoResource)
+             <$> f _apt_dists
+
+instance HasArch RepoResource (TF.Argument Text) where
+    arch f s@RepoResource{..} =
+        (\a -> s { _arch = a } :: RepoResource)
+             <$> f _arch
+
+instance HasBreed RepoResource (TF.Argument Text) where
+    breed f s@RepoResource{..} =
+        (\a -> s { _breed = a } :: RepoResource)
+             <$> f _breed
+
+instance HasComment RepoResource (TF.Argument Text) where
+    comment f s@RepoResource{..} =
+        (\a -> s { _comment = a } :: RepoResource)
+             <$> f _comment
+
+instance HasCreaterepoFlags RepoResource (TF.Argument Text) where
+    createrepoFlags f s@RepoResource{..} =
+        (\a -> s { _createrepo_flags = a } :: RepoResource)
+             <$> f _createrepo_flags
+
+instance HasEnvironment RepoResource (TF.Argument Text) where
+    environment f s@RepoResource{..} =
+        (\a -> s { _environment = a } :: RepoResource)
+             <$> f _environment
+
+instance HasKeepUpdated RepoResource (TF.Argument Text) where
+    keepUpdated f s@RepoResource{..} =
+        (\a -> s { _keep_updated = a } :: RepoResource)
+             <$> f _keep_updated
+
+instance HasMirror RepoResource (TF.Argument Text) where
+    mirror f s@RepoResource{..} =
+        (\a -> s { _mirror = a } :: RepoResource)
+             <$> f _mirror
+
+instance HasMirrorLocally RepoResource (TF.Argument Text) where
+    mirrorLocally f s@RepoResource{..} =
+        (\a -> s { _mirror_locally = a } :: RepoResource)
+             <$> f _mirror_locally
+
+instance HasName RepoResource (TF.Argument Text) where
+    name f s@RepoResource{..} =
+        (\a -> s { _name = a } :: RepoResource)
+             <$> f _name
+
+instance HasOwners RepoResource (TF.Argument Text) where
+    owners f s@RepoResource{..} =
+        (\a -> s { _owners = a } :: RepoResource)
+             <$> f _owners
+
+instance HasProxy RepoResource (TF.Argument Text) where
+    proxy f s@RepoResource{..} =
+        (\a -> s { _proxy = a } :: RepoResource)
+             <$> f _proxy
+
+instance HasRpmList RepoResource (TF.Argument Text) where
+    rpmList f s@RepoResource{..} =
+        (\a -> s { _rpm_list = a } :: RepoResource)
+             <$> f _rpm_list
 
 repoResource :: TF.Resource TF.Cobbler RepoResource
 repoResource =
@@ -399,10 +782,15 @@ instance TF.ToHCL SnippetResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''SnippetResource
-    ''TF.Cobbler
-    ''TF.Resource)
+instance HasBody SnippetResource (TF.Argument Text) where
+    body f s@SnippetResource{..} =
+        (\a -> s { _body = a } :: SnippetResource)
+             <$> f _body
+
+instance HasName SnippetResource (TF.Argument Text) where
+    name f s@SnippetResource{..} =
+        (\a -> s { _name = a } :: SnippetResource)
+             <$> f _name
 
 snippetResource :: TF.Resource TF.Cobbler SnippetResource
 snippetResource =
@@ -552,10 +940,220 @@ instance TF.ToHCL SystemResource where
         , TF.assign "virt_type" <$> TF.argument _virt_type
         ]
 
-$(TF.makeSchemaLenses
-    ''SystemResource
-    ''TF.Cobbler
-    ''TF.Resource)
+instance HasBootFiles SystemResource (TF.Argument Text) where
+    bootFiles f s@SystemResource{..} =
+        (\a -> s { _boot_files = a } :: SystemResource)
+             <$> f _boot_files
+
+instance HasComment SystemResource (TF.Argument Text) where
+    comment f s@SystemResource{..} =
+        (\a -> s { _comment = a } :: SystemResource)
+             <$> f _comment
+
+instance HasEnableGpxe SystemResource (TF.Argument Text) where
+    enableGpxe f s@SystemResource{..} =
+        (\a -> s { _enable_gpxe = a } :: SystemResource)
+             <$> f _enable_gpxe
+
+instance HasFetchableFiles SystemResource (TF.Argument Text) where
+    fetchableFiles f s@SystemResource{..} =
+        (\a -> s { _fetchable_files = a } :: SystemResource)
+             <$> f _fetchable_files
+
+instance HasGateway SystemResource (TF.Argument Text) where
+    gateway f s@SystemResource{..} =
+        (\a -> s { _gateway = a } :: SystemResource)
+             <$> f _gateway
+
+instance HasHostname SystemResource (TF.Argument Text) where
+    hostname f s@SystemResource{..} =
+        (\a -> s { _hostname = a } :: SystemResource)
+             <$> f _hostname
+
+instance HasImage SystemResource (TF.Argument Text) where
+    image f s@SystemResource{..} =
+        (\a -> s { _image = a } :: SystemResource)
+             <$> f _image
+
+instance HasInterface SystemResource (TF.Argument Text) where
+    interface f s@SystemResource{..} =
+        (\a -> s { _interface = a } :: SystemResource)
+             <$> f _interface
+
+instance HasIpv6DefaultDevice SystemResource (TF.Argument Text) where
+    ipv6DefaultDevice f s@SystemResource{..} =
+        (\a -> s { _ipv6_default_device = a } :: SystemResource)
+             <$> f _ipv6_default_device
+
+instance HasKernelOptions SystemResource (TF.Argument Text) where
+    kernelOptions f s@SystemResource{..} =
+        (\a -> s { _kernel_options = a } :: SystemResource)
+             <$> f _kernel_options
+
+instance HasKernelOptionsPost SystemResource (TF.Argument Text) where
+    kernelOptionsPost f s@SystemResource{..} =
+        (\a -> s { _kernel_options_post = a } :: SystemResource)
+             <$> f _kernel_options_post
+
+instance HasKickstart SystemResource (TF.Argument Text) where
+    kickstart f s@SystemResource{..} =
+        (\a -> s { _kickstart = a } :: SystemResource)
+             <$> f _kickstart
+
+instance HasKsMeta SystemResource (TF.Argument Text) where
+    ksMeta f s@SystemResource{..} =
+        (\a -> s { _ks_meta = a } :: SystemResource)
+             <$> f _ks_meta
+
+instance HasLdapEnabled SystemResource (TF.Argument Text) where
+    ldapEnabled f s@SystemResource{..} =
+        (\a -> s { _ldap_enabled = a } :: SystemResource)
+             <$> f _ldap_enabled
+
+instance HasLdapType SystemResource (TF.Argument Text) where
+    ldapType f s@SystemResource{..} =
+        (\a -> s { _ldap_type = a } :: SystemResource)
+             <$> f _ldap_type
+
+instance HasMgmtClasses SystemResource (TF.Argument Text) where
+    mgmtClasses f s@SystemResource{..} =
+        (\a -> s { _mgmt_classes = a } :: SystemResource)
+             <$> f _mgmt_classes
+
+instance HasMgmtParameters SystemResource (TF.Argument Text) where
+    mgmtParameters f s@SystemResource{..} =
+        (\a -> s { _mgmt_parameters = a } :: SystemResource)
+             <$> f _mgmt_parameters
+
+instance HasMonitEnabled SystemResource (TF.Argument Text) where
+    monitEnabled f s@SystemResource{..} =
+        (\a -> s { _monit_enabled = a } :: SystemResource)
+             <$> f _monit_enabled
+
+instance HasName SystemResource (TF.Argument Text) where
+    name f s@SystemResource{..} =
+        (\a -> s { _name = a } :: SystemResource)
+             <$> f _name
+
+instance HasNameServers SystemResource (TF.Argument Text) where
+    nameServers f s@SystemResource{..} =
+        (\a -> s { _name_servers = a } :: SystemResource)
+             <$> f _name_servers
+
+instance HasNameServersSearch SystemResource (TF.Argument Text) where
+    nameServersSearch f s@SystemResource{..} =
+        (\a -> s { _name_servers_search = a } :: SystemResource)
+             <$> f _name_servers_search
+
+instance HasNetbootEnabled SystemResource (TF.Argument Text) where
+    netbootEnabled f s@SystemResource{..} =
+        (\a -> s { _netboot_enabled = a } :: SystemResource)
+             <$> f _netboot_enabled
+
+instance HasOwners SystemResource (TF.Argument Text) where
+    owners f s@SystemResource{..} =
+        (\a -> s { _owners = a } :: SystemResource)
+             <$> f _owners
+
+instance HasPowerAddress SystemResource (TF.Argument Text) where
+    powerAddress f s@SystemResource{..} =
+        (\a -> s { _power_address = a } :: SystemResource)
+             <$> f _power_address
+
+instance HasPowerId SystemResource (TF.Argument Text) where
+    powerId f s@SystemResource{..} =
+        (\a -> s { _power_id = a } :: SystemResource)
+             <$> f _power_id
+
+instance HasPowerPass SystemResource (TF.Argument Text) where
+    powerPass f s@SystemResource{..} =
+        (\a -> s { _power_pass = a } :: SystemResource)
+             <$> f _power_pass
+
+instance HasPowerType SystemResource (TF.Argument Text) where
+    powerType f s@SystemResource{..} =
+        (\a -> s { _power_type = a } :: SystemResource)
+             <$> f _power_type
+
+instance HasPowerUser SystemResource (TF.Argument Text) where
+    powerUser f s@SystemResource{..} =
+        (\a -> s { _power_user = a } :: SystemResource)
+             <$> f _power_user
+
+instance HasProfile SystemResource (TF.Argument Text) where
+    profile f s@SystemResource{..} =
+        (\a -> s { _profile = a } :: SystemResource)
+             <$> f _profile
+
+instance HasProxy SystemResource (TF.Argument Text) where
+    proxy f s@SystemResource{..} =
+        (\a -> s { _proxy = a } :: SystemResource)
+             <$> f _proxy
+
+instance HasRedhatManagementKey SystemResource (TF.Argument Text) where
+    redhatManagementKey f s@SystemResource{..} =
+        (\a -> s { _redhat_management_key = a } :: SystemResource)
+             <$> f _redhat_management_key
+
+instance HasRedhatManagementServer SystemResource (TF.Argument Text) where
+    redhatManagementServer f s@SystemResource{..} =
+        (\a -> s { _redhat_management_server = a } :: SystemResource)
+             <$> f _redhat_management_server
+
+instance HasStatus SystemResource (TF.Argument Text) where
+    status f s@SystemResource{..} =
+        (\a -> s { _status = a } :: SystemResource)
+             <$> f _status
+
+instance HasTemplateFiles SystemResource (TF.Argument Text) where
+    templateFiles f s@SystemResource{..} =
+        (\a -> s { _template_files = a } :: SystemResource)
+             <$> f _template_files
+
+instance HasTemplateRemoteKickstarts SystemResource (TF.Argument Text) where
+    templateRemoteKickstarts f s@SystemResource{..} =
+        (\a -> s { _template_remote_kickstarts = a } :: SystemResource)
+             <$> f _template_remote_kickstarts
+
+instance HasVirtAutoBoot SystemResource (TF.Argument Text) where
+    virtAutoBoot f s@SystemResource{..} =
+        (\a -> s { _virt_auto_boot = a } :: SystemResource)
+             <$> f _virt_auto_boot
+
+instance HasVirtCpus SystemResource (TF.Argument Text) where
+    virtCpus f s@SystemResource{..} =
+        (\a -> s { _virt_cpus = a } :: SystemResource)
+             <$> f _virt_cpus
+
+instance HasVirtDiskDriver SystemResource (TF.Argument Text) where
+    virtDiskDriver f s@SystemResource{..} =
+        (\a -> s { _virt_disk_driver = a } :: SystemResource)
+             <$> f _virt_disk_driver
+
+instance HasVirtFileSize SystemResource (TF.Argument Text) where
+    virtFileSize f s@SystemResource{..} =
+        (\a -> s { _virt_file_size = a } :: SystemResource)
+             <$> f _virt_file_size
+
+instance HasVirtPath SystemResource (TF.Argument Text) where
+    virtPath f s@SystemResource{..} =
+        (\a -> s { _virt_path = a } :: SystemResource)
+             <$> f _virt_path
+
+instance HasVirtPxeBoot SystemResource (TF.Argument Text) where
+    virtPxeBoot f s@SystemResource{..} =
+        (\a -> s { _virt_pxe_boot = a } :: SystemResource)
+             <$> f _virt_pxe_boot
+
+instance HasVirtRam SystemResource (TF.Argument Text) where
+    virtRam f s@SystemResource{..} =
+        (\a -> s { _virt_ram = a } :: SystemResource)
+             <$> f _virt_ram
+
+instance HasVirtType SystemResource (TF.Argument Text) where
+    virtType f s@SystemResource{..} =
+        (\a -> s { _virt_type = a } :: SystemResource)
+             <$> f _virt_type
 
 systemResource :: TF.Resource TF.Cobbler SystemResource
 systemResource =
@@ -605,3 +1203,381 @@ systemResource =
             , _virt_ram = TF.Nil
             , _virt_type = TF.Nil
             }
+
+class HasAptComponents s a | s -> a where
+    aptComponents :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAptComponents s a => HasAptComponents (TF.Resource p s) a where
+    aptComponents = TF.configuration . aptComponents
+
+class HasAptDists s a | s -> a where
+    aptDists :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAptDists s a => HasAptDists (TF.Resource p s) a where
+    aptDists = TF.configuration . aptDists
+
+class HasArch s a | s -> a where
+    arch :: Functor f => (a -> f a) -> s -> f s
+
+instance HasArch s a => HasArch (TF.Resource p s) a where
+    arch = TF.configuration . arch
+
+class HasBody s a | s -> a where
+    body :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBody s a => HasBody (TF.Resource p s) a where
+    body = TF.configuration . body
+
+class HasBootFiles s a | s -> a where
+    bootFiles :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBootFiles s a => HasBootFiles (TF.Resource p s) a where
+    bootFiles = TF.configuration . bootFiles
+
+class HasBreed s a | s -> a where
+    breed :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBreed s a => HasBreed (TF.Resource p s) a where
+    breed = TF.configuration . breed
+
+class HasComment s a | s -> a where
+    comment :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComment s a => HasComment (TF.Resource p s) a where
+    comment = TF.configuration . comment
+
+class HasCreaterepoFlags s a | s -> a where
+    createrepoFlags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCreaterepoFlags s a => HasCreaterepoFlags (TF.Resource p s) a where
+    createrepoFlags = TF.configuration . createrepoFlags
+
+class HasDistro s a | s -> a where
+    distro :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDistro s a => HasDistro (TF.Resource p s) a where
+    distro = TF.configuration . distro
+
+class HasEnableGpxe s a | s -> a where
+    enableGpxe :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnableGpxe s a => HasEnableGpxe (TF.Resource p s) a where
+    enableGpxe = TF.configuration . enableGpxe
+
+class HasEnableMenu s a | s -> a where
+    enableMenu :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnableMenu s a => HasEnableMenu (TF.Resource p s) a where
+    enableMenu = TF.configuration . enableMenu
+
+class HasEnvironment s a | s -> a where
+    environment :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnvironment s a => HasEnvironment (TF.Resource p s) a where
+    environment = TF.configuration . environment
+
+class HasFetchableFiles s a | s -> a where
+    fetchableFiles :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFetchableFiles s a => HasFetchableFiles (TF.Resource p s) a where
+    fetchableFiles = TF.configuration . fetchableFiles
+
+class HasGateway s a | s -> a where
+    gateway :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGateway s a => HasGateway (TF.Resource p s) a where
+    gateway = TF.configuration . gateway
+
+class HasHostname s a | s -> a where
+    hostname :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostname s a => HasHostname (TF.Resource p s) a where
+    hostname = TF.configuration . hostname
+
+class HasImage s a | s -> a where
+    image :: Functor f => (a -> f a) -> s -> f s
+
+instance HasImage s a => HasImage (TF.Resource p s) a where
+    image = TF.configuration . image
+
+class HasInitrd s a | s -> a where
+    initrd :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInitrd s a => HasInitrd (TF.Resource p s) a where
+    initrd = TF.configuration . initrd
+
+class HasInterface s a | s -> a where
+    interface :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInterface s a => HasInterface (TF.Resource p s) a where
+    interface = TF.configuration . interface
+
+class HasIpv6DefaultDevice s a | s -> a where
+    ipv6DefaultDevice :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIpv6DefaultDevice s a => HasIpv6DefaultDevice (TF.Resource p s) a where
+    ipv6DefaultDevice = TF.configuration . ipv6DefaultDevice
+
+class HasKeepUpdated s a | s -> a where
+    keepUpdated :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKeepUpdated s a => HasKeepUpdated (TF.Resource p s) a where
+    keepUpdated = TF.configuration . keepUpdated
+
+class HasKernel s a | s -> a where
+    kernel :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKernel s a => HasKernel (TF.Resource p s) a where
+    kernel = TF.configuration . kernel
+
+class HasKernelOptions s a | s -> a where
+    kernelOptions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKernelOptions s a => HasKernelOptions (TF.Resource p s) a where
+    kernelOptions = TF.configuration . kernelOptions
+
+class HasKernelOptionsPost s a | s -> a where
+    kernelOptionsPost :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKernelOptionsPost s a => HasKernelOptionsPost (TF.Resource p s) a where
+    kernelOptionsPost = TF.configuration . kernelOptionsPost
+
+class HasKickstart s a | s -> a where
+    kickstart :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKickstart s a => HasKickstart (TF.Resource p s) a where
+    kickstart = TF.configuration . kickstart
+
+class HasKsMeta s a | s -> a where
+    ksMeta :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKsMeta s a => HasKsMeta (TF.Resource p s) a where
+    ksMeta = TF.configuration . ksMeta
+
+class HasLdapEnabled s a | s -> a where
+    ldapEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLdapEnabled s a => HasLdapEnabled (TF.Resource p s) a where
+    ldapEnabled = TF.configuration . ldapEnabled
+
+class HasLdapType s a | s -> a where
+    ldapType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLdapType s a => HasLdapType (TF.Resource p s) a where
+    ldapType = TF.configuration . ldapType
+
+class HasMgmtClasses s a | s -> a where
+    mgmtClasses :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMgmtClasses s a => HasMgmtClasses (TF.Resource p s) a where
+    mgmtClasses = TF.configuration . mgmtClasses
+
+class HasMgmtParameters s a | s -> a where
+    mgmtParameters :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMgmtParameters s a => HasMgmtParameters (TF.Resource p s) a where
+    mgmtParameters = TF.configuration . mgmtParameters
+
+class HasMirror s a | s -> a where
+    mirror :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMirror s a => HasMirror (TF.Resource p s) a where
+    mirror = TF.configuration . mirror
+
+class HasMirrorLocally s a | s -> a where
+    mirrorLocally :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMirrorLocally s a => HasMirrorLocally (TF.Resource p s) a where
+    mirrorLocally = TF.configuration . mirrorLocally
+
+class HasMonitEnabled s a | s -> a where
+    monitEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMonitEnabled s a => HasMonitEnabled (TF.Resource p s) a where
+    monitEnabled = TF.configuration . monitEnabled
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNameServers s a | s -> a where
+    nameServers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNameServers s a => HasNameServers (TF.Resource p s) a where
+    nameServers = TF.configuration . nameServers
+
+class HasNameServersSearch s a | s -> a where
+    nameServersSearch :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNameServersSearch s a => HasNameServersSearch (TF.Resource p s) a where
+    nameServersSearch = TF.configuration . nameServersSearch
+
+class HasNetbootEnabled s a | s -> a where
+    netbootEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNetbootEnabled s a => HasNetbootEnabled (TF.Resource p s) a where
+    netbootEnabled = TF.configuration . netbootEnabled
+
+class HasOsVersion s a | s -> a where
+    osVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOsVersion s a => HasOsVersion (TF.Resource p s) a where
+    osVersion = TF.configuration . osVersion
+
+class HasOwners s a | s -> a where
+    owners :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOwners s a => HasOwners (TF.Resource p s) a where
+    owners = TF.configuration . owners
+
+class HasParent s a | s -> a where
+    parent :: Functor f => (a -> f a) -> s -> f s
+
+instance HasParent s a => HasParent (TF.Resource p s) a where
+    parent = TF.configuration . parent
+
+class HasPowerAddress s a | s -> a where
+    powerAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPowerAddress s a => HasPowerAddress (TF.Resource p s) a where
+    powerAddress = TF.configuration . powerAddress
+
+class HasPowerId s a | s -> a where
+    powerId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPowerId s a => HasPowerId (TF.Resource p s) a where
+    powerId = TF.configuration . powerId
+
+class HasPowerPass s a | s -> a where
+    powerPass :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPowerPass s a => HasPowerPass (TF.Resource p s) a where
+    powerPass = TF.configuration . powerPass
+
+class HasPowerType s a | s -> a where
+    powerType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPowerType s a => HasPowerType (TF.Resource p s) a where
+    powerType = TF.configuration . powerType
+
+class HasPowerUser s a | s -> a where
+    powerUser :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPowerUser s a => HasPowerUser (TF.Resource p s) a where
+    powerUser = TF.configuration . powerUser
+
+class HasProfile s a | s -> a where
+    profile :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProfile s a => HasProfile (TF.Resource p s) a where
+    profile = TF.configuration . profile
+
+class HasProxy s a | s -> a where
+    proxy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProxy s a => HasProxy (TF.Resource p s) a where
+    proxy = TF.configuration . proxy
+
+class HasRedhatManagementKey s a | s -> a where
+    redhatManagementKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRedhatManagementKey s a => HasRedhatManagementKey (TF.Resource p s) a where
+    redhatManagementKey = TF.configuration . redhatManagementKey
+
+class HasRedhatManagementServer s a | s -> a where
+    redhatManagementServer :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRedhatManagementServer s a => HasRedhatManagementServer (TF.Resource p s) a where
+    redhatManagementServer = TF.configuration . redhatManagementServer
+
+class HasRepos s a | s -> a where
+    repos :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRepos s a => HasRepos (TF.Resource p s) a where
+    repos = TF.configuration . repos
+
+class HasRpmList s a | s -> a where
+    rpmList :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRpmList s a => HasRpmList (TF.Resource p s) a where
+    rpmList = TF.configuration . rpmList
+
+class HasServer s a | s -> a where
+    server :: Functor f => (a -> f a) -> s -> f s
+
+instance HasServer s a => HasServer (TF.Resource p s) a where
+    server = TF.configuration . server
+
+class HasStatus s a | s -> a where
+    status :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStatus s a => HasStatus (TF.Resource p s) a where
+    status = TF.configuration . status
+
+class HasTemplateFiles s a | s -> a where
+    templateFiles :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTemplateFiles s a => HasTemplateFiles (TF.Resource p s) a where
+    templateFiles = TF.configuration . templateFiles
+
+class HasTemplateRemoteKickstarts s a | s -> a where
+    templateRemoteKickstarts :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTemplateRemoteKickstarts s a => HasTemplateRemoteKickstarts (TF.Resource p s) a where
+    templateRemoteKickstarts = TF.configuration . templateRemoteKickstarts
+
+class HasVirtAutoBoot s a | s -> a where
+    virtAutoBoot :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtAutoBoot s a => HasVirtAutoBoot (TF.Resource p s) a where
+    virtAutoBoot = TF.configuration . virtAutoBoot
+
+class HasVirtBridge s a | s -> a where
+    virtBridge :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtBridge s a => HasVirtBridge (TF.Resource p s) a where
+    virtBridge = TF.configuration . virtBridge
+
+class HasVirtCpus s a | s -> a where
+    virtCpus :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtCpus s a => HasVirtCpus (TF.Resource p s) a where
+    virtCpus = TF.configuration . virtCpus
+
+class HasVirtDiskDriver s a | s -> a where
+    virtDiskDriver :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtDiskDriver s a => HasVirtDiskDriver (TF.Resource p s) a where
+    virtDiskDriver = TF.configuration . virtDiskDriver
+
+class HasVirtFileSize s a | s -> a where
+    virtFileSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtFileSize s a => HasVirtFileSize (TF.Resource p s) a where
+    virtFileSize = TF.configuration . virtFileSize
+
+class HasVirtPath s a | s -> a where
+    virtPath :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtPath s a => HasVirtPath (TF.Resource p s) a where
+    virtPath = TF.configuration . virtPath
+
+class HasVirtPxeBoot s a | s -> a where
+    virtPxeBoot :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtPxeBoot s a => HasVirtPxeBoot (TF.Resource p s) a where
+    virtPxeBoot = TF.configuration . virtPxeBoot
+
+class HasVirtRam s a | s -> a where
+    virtRam :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtRam s a => HasVirtRam (TF.Resource p s) a where
+    virtRam = TF.configuration . virtRam
+
+class HasVirtType s a | s -> a where
+    virtType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtType s a => HasVirtType (TF.Resource p s) a where
+    virtType = TF.configuration . virtType

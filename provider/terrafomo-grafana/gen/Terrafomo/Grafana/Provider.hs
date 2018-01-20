@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Grafana.Provider
-    ( Grafana    (..)
-    , HasGrafana (..)
+    (
+    -- * Provider Datatype
+      Grafana (..)
+
+    -- * Lenses
     ) where
 
 import Data.Function      (on)
@@ -34,10 +36,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Grafana.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Grafana Terraform provider.
 
@@ -68,5 +69,3 @@ instance Monoid Grafana where
 
 instance TF.IsProvider Grafana where
     type ProviderName Grafana = "grafana"
-
-$(TF.makeProviderLenses ''Grafana)

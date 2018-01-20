@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.CenturyLinkCloud.Provider
-    ( CenturyLinkCloud    (..)
-    , HasCenturyLinkCloud (..)
+    (
+    -- * Provider Datatype
+      CenturyLinkCloud (..)
+
+    -- * Lenses
+    , clcAccount
+    , clcPassword
+    , clcUsername
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.CenturyLinkCloud.Types as TF
 import qualified Terrafomo.Syntax.HCL             as TF
-import qualified Terrafomo.Syntax.Meta            as TF
 import qualified Terrafomo.Syntax.Name            as TF
+import qualified Terrafomo.Syntax.Provider        as TF
 import qualified Terrafomo.Syntax.Variable        as TF
-import qualified Terrafomo.TH                     as TF
 
 {- | CenturyLinkCloud Terraform provider.
 
@@ -85,4 +89,29 @@ instance Monoid CenturyLinkCloud where
 instance TF.IsProvider CenturyLinkCloud where
     type ProviderName CenturyLinkCloud = "clc"
 
-$(TF.makeProviderLenses ''CenturyLinkCloud)
+clcAccount
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CenturyLinkCloud
+    -> f CenturyLinkCloud
+clcAccount f s =
+        (\a -> s { _clc_account = a } :: CenturyLinkCloud)
+             <$> f (_clc_account s)
+
+clcPassword
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CenturyLinkCloud
+    -> f CenturyLinkCloud
+clcPassword f s =
+        (\a -> s { _clc_password = a } :: CenturyLinkCloud)
+             <$> f (_clc_password s)
+
+clcUsername
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CenturyLinkCloud
+    -> f CenturyLinkCloud
+clcUsername f s =
+        (\a -> s { _clc_username = a } :: CenturyLinkCloud)
+             <$> f (_clc_username s)

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,56 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.SoftLayer.Resource where
+module Terrafomo.SoftLayer.Resource
+    (
+    -- * Types
+      SshKeyResource (..)
+    , sshKeyResource
 
-import Data.Functor ((<$>))
+    , VirtualGuestResource (..)
+    , virtualGuestResource
+
+    -- * Overloaded Fields
+    , HasBackendVlanId (..)
+    , HasBlockDeviceTemplateGroupGid (..)
+    , HasComputedFingerprint (..)
+    , HasComputedId (..)
+    , HasCpu (..)
+    , HasDedicatedAcctHostOnly (..)
+    , HasDisks (..)
+    , HasDomain (..)
+    , HasFrontendVlanId (..)
+    , HasHourlyBilling (..)
+    , HasImage (..)
+    , HasIpv4Address (..)
+    , HasIpv4AddressPrivate (..)
+    , HasLocalDisk (..)
+    , HasName (..)
+    , HasNotes (..)
+    , HasPostInstallScriptUri (..)
+    , HasPrivateNetworkOnly (..)
+    , HasPublicKey (..)
+    , HasPublicNetworkSpeed (..)
+    , HasRam (..)
+    , HasRegion (..)
+    , HasSshKeys (..)
+    , HasUserData (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.SoftLayer.Provider as TF
 import qualified Terrafomo.SoftLayer.Types    as TF
 import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Meta        as TF (configuration)
 import qualified Terrafomo.Syntax.Resource    as TF
 import qualified Terrafomo.Syntax.Resource    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
-import qualified Terrafomo.TH                 as TF
 
 {- | The @softlayer_ssh_key@ SoftLayer resource.
 
@@ -64,10 +96,30 @@ instance TF.ToHCL SshKeyResource where
         , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
-$(TF.makeSchemaLenses
-    ''SshKeyResource
-    ''TF.SoftLayer
-    ''TF.Resource)
+instance HasName SshKeyResource (TF.Argument Text) where
+    name f s@SshKeyResource{..} =
+        (\a -> s { _name = a } :: SshKeyResource)
+             <$> f _name
+
+instance HasNotes SshKeyResource (TF.Argument Text) where
+    notes f s@SshKeyResource{..} =
+        (\a -> s { _notes = a } :: SshKeyResource)
+             <$> f _notes
+
+instance HasPublicKey SshKeyResource (TF.Argument Text) where
+    publicKey f s@SshKeyResource{..} =
+        (\a -> s { _public_key = a } :: SshKeyResource)
+             <$> f _public_key
+
+instance HasComputedFingerprint SshKeyResource (TF.Attribute Text) where
+    computedFingerprint f s@SshKeyResource{..} =
+        (\a -> s { _computed_fingerprint = a } :: SshKeyResource)
+             <$> f _computed_fingerprint
+
+instance HasComputedId SshKeyResource (TF.Attribute Text) where
+    computedId f s@SshKeyResource{..} =
+        (\a -> s { _computed_id = a } :: SshKeyResource)
+             <$> f _computed_id
 
 sshKeyResource :: TF.Resource TF.SoftLayer SshKeyResource
 sshKeyResource =
@@ -155,10 +207,110 @@ instance TF.ToHCL VirtualGuestResource where
         , TF.assign "user_data" <$> TF.argument _user_data
         ]
 
-$(TF.makeSchemaLenses
-    ''VirtualGuestResource
-    ''TF.SoftLayer
-    ''TF.Resource)
+instance HasBackendVlanId VirtualGuestResource (TF.Argument Text) where
+    backendVlanId f s@VirtualGuestResource{..} =
+        (\a -> s { _backend_vlan_id = a } :: VirtualGuestResource)
+             <$> f _backend_vlan_id
+
+instance HasBlockDeviceTemplateGroupGid VirtualGuestResource (TF.Argument Text) where
+    blockDeviceTemplateGroupGid f s@VirtualGuestResource{..} =
+        (\a -> s { _block_device_template_group_gid = a } :: VirtualGuestResource)
+             <$> f _block_device_template_group_gid
+
+instance HasCpu VirtualGuestResource (TF.Argument Text) where
+    cpu f s@VirtualGuestResource{..} =
+        (\a -> s { _cpu = a } :: VirtualGuestResource)
+             <$> f _cpu
+
+instance HasDedicatedAcctHostOnly VirtualGuestResource (TF.Argument Text) where
+    dedicatedAcctHostOnly f s@VirtualGuestResource{..} =
+        (\a -> s { _dedicated_acct_host_only = a } :: VirtualGuestResource)
+             <$> f _dedicated_acct_host_only
+
+instance HasDisks VirtualGuestResource (TF.Argument Text) where
+    disks f s@VirtualGuestResource{..} =
+        (\a -> s { _disks = a } :: VirtualGuestResource)
+             <$> f _disks
+
+instance HasDomain VirtualGuestResource (TF.Argument Text) where
+    domain f s@VirtualGuestResource{..} =
+        (\a -> s { _domain = a } :: VirtualGuestResource)
+             <$> f _domain
+
+instance HasFrontendVlanId VirtualGuestResource (TF.Argument Text) where
+    frontendVlanId f s@VirtualGuestResource{..} =
+        (\a -> s { _frontend_vlan_id = a } :: VirtualGuestResource)
+             <$> f _frontend_vlan_id
+
+instance HasHourlyBilling VirtualGuestResource (TF.Argument Text) where
+    hourlyBilling f s@VirtualGuestResource{..} =
+        (\a -> s { _hourly_billing = a } :: VirtualGuestResource)
+             <$> f _hourly_billing
+
+instance HasImage VirtualGuestResource (TF.Argument Text) where
+    image f s@VirtualGuestResource{..} =
+        (\a -> s { _image = a } :: VirtualGuestResource)
+             <$> f _image
+
+instance HasIpv4Address VirtualGuestResource (TF.Argument Text) where
+    ipv4Address f s@VirtualGuestResource{..} =
+        (\a -> s { _ipv4_address = a } :: VirtualGuestResource)
+             <$> f _ipv4_address
+
+instance HasIpv4AddressPrivate VirtualGuestResource (TF.Argument Text) where
+    ipv4AddressPrivate f s@VirtualGuestResource{..} =
+        (\a -> s { _ipv4_address_private = a } :: VirtualGuestResource)
+             <$> f _ipv4_address_private
+
+instance HasLocalDisk VirtualGuestResource (TF.Argument Text) where
+    localDisk f s@VirtualGuestResource{..} =
+        (\a -> s { _local_disk = a } :: VirtualGuestResource)
+             <$> f _local_disk
+
+instance HasName VirtualGuestResource (TF.Argument Text) where
+    name f s@VirtualGuestResource{..} =
+        (\a -> s { _name = a } :: VirtualGuestResource)
+             <$> f _name
+
+instance HasPostInstallScriptUri VirtualGuestResource (TF.Argument Text) where
+    postInstallScriptUri f s@VirtualGuestResource{..} =
+        (\a -> s { _post_install_script_uri = a } :: VirtualGuestResource)
+             <$> f _post_install_script_uri
+
+instance HasPrivateNetworkOnly VirtualGuestResource (TF.Argument Text) where
+    privateNetworkOnly f s@VirtualGuestResource{..} =
+        (\a -> s { _private_network_only = a } :: VirtualGuestResource)
+             <$> f _private_network_only
+
+instance HasPublicNetworkSpeed VirtualGuestResource (TF.Argument Text) where
+    publicNetworkSpeed f s@VirtualGuestResource{..} =
+        (\a -> s { _public_network_speed = a } :: VirtualGuestResource)
+             <$> f _public_network_speed
+
+instance HasRam VirtualGuestResource (TF.Argument Text) where
+    ram f s@VirtualGuestResource{..} =
+        (\a -> s { _ram = a } :: VirtualGuestResource)
+             <$> f _ram
+
+instance HasRegion VirtualGuestResource (TF.Argument Text) where
+    region f s@VirtualGuestResource{..} =
+        (\a -> s { _region = a } :: VirtualGuestResource)
+             <$> f _region
+
+instance HasSshKeys VirtualGuestResource (TF.Argument Text) where
+    sshKeys f s@VirtualGuestResource{..} =
+        (\a -> s { _ssh_keys = a } :: VirtualGuestResource)
+             <$> f _ssh_keys
+
+instance HasUserData VirtualGuestResource (TF.Argument Text) where
+    userData f s@VirtualGuestResource{..} =
+        (\a -> s { _user_data = a } :: VirtualGuestResource)
+             <$> f _user_data
+
+instance HasComputedId VirtualGuestResource (TF.Attribute Text) where
+    computedId f s@VirtualGuestResource{..} =
+        (\a -> s { _computed_id = a } :: VirtualGuestResource)
+             <$> f _computed_id
 
 virtualGuestResource :: TF.Resource TF.SoftLayer VirtualGuestResource
 virtualGuestResource =
@@ -186,3 +338,147 @@ virtualGuestResource =
             , _user_data = TF.Nil
             , _computed_id = TF.Compute "id"
             }
+
+class HasBackendVlanId s a | s -> a where
+    backendVlanId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBackendVlanId s a => HasBackendVlanId (TF.Resource p s) a where
+    backendVlanId = TF.configuration . backendVlanId
+
+class HasBlockDeviceTemplateGroupGid s a | s -> a where
+    blockDeviceTemplateGroupGid :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBlockDeviceTemplateGroupGid s a => HasBlockDeviceTemplateGroupGid (TF.Resource p s) a where
+    blockDeviceTemplateGroupGid = TF.configuration . blockDeviceTemplateGroupGid
+
+class HasComputedFingerprint s a | s -> a where
+    computedFingerprint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFingerprint s a => HasComputedFingerprint (TF.Resource p s) a where
+    computedFingerprint = TF.configuration . computedFingerprint
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasCpu s a | s -> a where
+    cpu :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCpu s a => HasCpu (TF.Resource p s) a where
+    cpu = TF.configuration . cpu
+
+class HasDedicatedAcctHostOnly s a | s -> a where
+    dedicatedAcctHostOnly :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDedicatedAcctHostOnly s a => HasDedicatedAcctHostOnly (TF.Resource p s) a where
+    dedicatedAcctHostOnly = TF.configuration . dedicatedAcctHostOnly
+
+class HasDisks s a | s -> a where
+    disks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisks s a => HasDisks (TF.Resource p s) a where
+    disks = TF.configuration . disks
+
+class HasDomain s a | s -> a where
+    domain :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDomain s a => HasDomain (TF.Resource p s) a where
+    domain = TF.configuration . domain
+
+class HasFrontendVlanId s a | s -> a where
+    frontendVlanId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFrontendVlanId s a => HasFrontendVlanId (TF.Resource p s) a where
+    frontendVlanId = TF.configuration . frontendVlanId
+
+class HasHourlyBilling s a | s -> a where
+    hourlyBilling :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHourlyBilling s a => HasHourlyBilling (TF.Resource p s) a where
+    hourlyBilling = TF.configuration . hourlyBilling
+
+class HasImage s a | s -> a where
+    image :: Functor f => (a -> f a) -> s -> f s
+
+instance HasImage s a => HasImage (TF.Resource p s) a where
+    image = TF.configuration . image
+
+class HasIpv4Address s a | s -> a where
+    ipv4Address :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIpv4Address s a => HasIpv4Address (TF.Resource p s) a where
+    ipv4Address = TF.configuration . ipv4Address
+
+class HasIpv4AddressPrivate s a | s -> a where
+    ipv4AddressPrivate :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIpv4AddressPrivate s a => HasIpv4AddressPrivate (TF.Resource p s) a where
+    ipv4AddressPrivate = TF.configuration . ipv4AddressPrivate
+
+class HasLocalDisk s a | s -> a where
+    localDisk :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLocalDisk s a => HasLocalDisk (TF.Resource p s) a where
+    localDisk = TF.configuration . localDisk
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNotes s a | s -> a where
+    notes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNotes s a => HasNotes (TF.Resource p s) a where
+    notes = TF.configuration . notes
+
+class HasPostInstallScriptUri s a | s -> a where
+    postInstallScriptUri :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPostInstallScriptUri s a => HasPostInstallScriptUri (TF.Resource p s) a where
+    postInstallScriptUri = TF.configuration . postInstallScriptUri
+
+class HasPrivateNetworkOnly s a | s -> a where
+    privateNetworkOnly :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPrivateNetworkOnly s a => HasPrivateNetworkOnly (TF.Resource p s) a where
+    privateNetworkOnly = TF.configuration . privateNetworkOnly
+
+class HasPublicKey s a | s -> a where
+    publicKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPublicKey s a => HasPublicKey (TF.Resource p s) a where
+    publicKey = TF.configuration . publicKey
+
+class HasPublicNetworkSpeed s a | s -> a where
+    publicNetworkSpeed :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPublicNetworkSpeed s a => HasPublicNetworkSpeed (TF.Resource p s) a where
+    publicNetworkSpeed = TF.configuration . publicNetworkSpeed
+
+class HasRam s a | s -> a where
+    ram :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRam s a => HasRam (TF.Resource p s) a where
+    ram = TF.configuration . ram
+
+class HasRegion s a | s -> a where
+    region :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRegion s a => HasRegion (TF.Resource p s) a where
+    region = TF.configuration . region
+
+class HasSshKeys s a | s -> a where
+    sshKeys :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSshKeys s a => HasSshKeys (TF.Resource p s) a where
+    sshKeys = TF.configuration . sshKeys
+
+class HasUserData s a | s -> a where
+    userData :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserData s a => HasUserData (TF.Resource p s) a where
+    userData = TF.configuration . userData

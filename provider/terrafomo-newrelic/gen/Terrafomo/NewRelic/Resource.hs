@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,60 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.NewRelic.Resource where
+module Terrafomo.NewRelic.Resource
+    (
+    -- * Types
+      AlertChannelResource (..)
+    , alertChannelResource
 
-import Data.Functor ((<$>))
+    , AlertConditionResource (..)
+    , alertConditionResource
+
+    , AlertPolicyChannelResource (..)
+    , alertPolicyChannelResource
+
+    , AlertPolicyResource (..)
+    , alertPolicyResource
+
+    , NrqlAlertConditionResource (..)
+    , nrqlAlertConditionResource
+
+    -- * Overloaded Fields
+    , HasChannelId (..)
+    , HasComputedCreatedAt (..)
+    , HasComputedId (..)
+    , HasComputedUpdatedAt (..)
+    , HasConditionScope (..)
+    , HasConfiguration (..)
+    , HasEnabled (..)
+    , HasEntities (..)
+    , HasIncidentPreference (..)
+    , HasMetric (..)
+    , HasName (..)
+    , HasNrql (..)
+    , HasPolicyId (..)
+    , HasRunbookUrl (..)
+    , HasTerm (..)
+    , HasType' (..)
+    , HasUserDefinedMetric (..)
+    , HasUserDefinedValueFunction (..)
+    , HasValueFunction (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.NewRelic.Provider as TF
 import qualified Terrafomo.NewRelic.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @newrelic_alert_channel@ NewRelic resource.
 
@@ -60,10 +96,25 @@ instance TF.ToHCL AlertChannelResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''AlertChannelResource
-    ''TF.NewRelic
-    ''TF.Resource)
+instance HasConfiguration AlertChannelResource (TF.Argument Text) where
+    configuration f s@AlertChannelResource{..} =
+        (\a -> s { _configuration = a } :: AlertChannelResource)
+             <$> f _configuration
+
+instance HasName AlertChannelResource (TF.Argument Text) where
+    name f s@AlertChannelResource{..} =
+        (\a -> s { _name = a } :: AlertChannelResource)
+             <$> f _name
+
+instance HasType' AlertChannelResource (TF.Argument Text) where
+    type' f s@AlertChannelResource{..} =
+        (\a -> s { _type' = a } :: AlertChannelResource)
+             <$> f _type'
+
+instance HasComputedId AlertChannelResource (TF.Attribute Text) where
+    computedId f s@AlertChannelResource{..} =
+        (\a -> s { _computed_id = a } :: AlertChannelResource)
+             <$> f _computed_id
 
 alertChannelResource :: TF.Resource TF.NewRelic AlertChannelResource
 alertChannelResource =
@@ -116,10 +167,55 @@ instance TF.ToHCL AlertConditionResource where
         , TF.assign "user_defined_value_function" <$> TF.argument _user_defined_value_function
         ]
 
-$(TF.makeSchemaLenses
-    ''AlertConditionResource
-    ''TF.NewRelic
-    ''TF.Resource)
+instance HasConditionScope AlertConditionResource (TF.Argument Text) where
+    conditionScope f s@AlertConditionResource{..} =
+        (\a -> s { _condition_scope = a } :: AlertConditionResource)
+             <$> f _condition_scope
+
+instance HasEntities AlertConditionResource (TF.Argument Text) where
+    entities f s@AlertConditionResource{..} =
+        (\a -> s { _entities = a } :: AlertConditionResource)
+             <$> f _entities
+
+instance HasMetric AlertConditionResource (TF.Argument Text) where
+    metric f s@AlertConditionResource{..} =
+        (\a -> s { _metric = a } :: AlertConditionResource)
+             <$> f _metric
+
+instance HasName AlertConditionResource (TF.Argument Text) where
+    name f s@AlertConditionResource{..} =
+        (\a -> s { _name = a } :: AlertConditionResource)
+             <$> f _name
+
+instance HasPolicyId AlertConditionResource (TF.Argument Text) where
+    policyId f s@AlertConditionResource{..} =
+        (\a -> s { _policy_id = a } :: AlertConditionResource)
+             <$> f _policy_id
+
+instance HasRunbookUrl AlertConditionResource (TF.Argument Text) where
+    runbookUrl f s@AlertConditionResource{..} =
+        (\a -> s { _runbook_url = a } :: AlertConditionResource)
+             <$> f _runbook_url
+
+instance HasTerm AlertConditionResource (TF.Argument Text) where
+    term f s@AlertConditionResource{..} =
+        (\a -> s { _term = a } :: AlertConditionResource)
+             <$> f _term
+
+instance HasType' AlertConditionResource (TF.Argument Text) where
+    type' f s@AlertConditionResource{..} =
+        (\a -> s { _type' = a } :: AlertConditionResource)
+             <$> f _type'
+
+instance HasUserDefinedMetric AlertConditionResource (TF.Argument Text) where
+    userDefinedMetric f s@AlertConditionResource{..} =
+        (\a -> s { _user_defined_metric = a } :: AlertConditionResource)
+             <$> f _user_defined_metric
+
+instance HasUserDefinedValueFunction AlertConditionResource (TF.Argument Text) where
+    userDefinedValueFunction f s@AlertConditionResource{..} =
+        (\a -> s { _user_defined_value_function = a } :: AlertConditionResource)
+             <$> f _user_defined_value_function
 
 alertConditionResource :: TF.Resource TF.NewRelic AlertConditionResource
 alertConditionResource =
@@ -154,10 +250,15 @@ instance TF.ToHCL AlertPolicyChannelResource where
         , TF.assign "policy_id" <$> TF.argument _policy_id
         ]
 
-$(TF.makeSchemaLenses
-    ''AlertPolicyChannelResource
-    ''TF.NewRelic
-    ''TF.Resource)
+instance HasChannelId AlertPolicyChannelResource (TF.Argument Text) where
+    channelId f s@AlertPolicyChannelResource{..} =
+        (\a -> s { _channel_id = a } :: AlertPolicyChannelResource)
+             <$> f _channel_id
+
+instance HasPolicyId AlertPolicyChannelResource (TF.Argument Text) where
+    policyId f s@AlertPolicyChannelResource{..} =
+        (\a -> s { _policy_id = a } :: AlertPolicyChannelResource)
+             <$> f _policy_id
 
 alertPolicyChannelResource :: TF.Resource TF.NewRelic AlertPolicyChannelResource
 alertPolicyChannelResource =
@@ -190,10 +291,30 @@ instance TF.ToHCL AlertPolicyResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''AlertPolicyResource
-    ''TF.NewRelic
-    ''TF.Resource)
+instance HasIncidentPreference AlertPolicyResource (TF.Argument Text) where
+    incidentPreference f s@AlertPolicyResource{..} =
+        (\a -> s { _incident_preference = a } :: AlertPolicyResource)
+             <$> f _incident_preference
+
+instance HasName AlertPolicyResource (TF.Argument Text) where
+    name f s@AlertPolicyResource{..} =
+        (\a -> s { _name = a } :: AlertPolicyResource)
+             <$> f _name
+
+instance HasComputedCreatedAt AlertPolicyResource (TF.Attribute Text) where
+    computedCreatedAt f s@AlertPolicyResource{..} =
+        (\a -> s { _computed_created_at = a } :: AlertPolicyResource)
+             <$> f _computed_created_at
+
+instance HasComputedId AlertPolicyResource (TF.Attribute Text) where
+    computedId f s@AlertPolicyResource{..} =
+        (\a -> s { _computed_id = a } :: AlertPolicyResource)
+             <$> f _computed_id
+
+instance HasComputedUpdatedAt AlertPolicyResource (TF.Attribute Text) where
+    computedUpdatedAt f s@AlertPolicyResource{..} =
+        (\a -> s { _computed_updated_at = a } :: AlertPolicyResource)
+             <$> f _computed_updated_at
 
 alertPolicyResource :: TF.Resource TF.NewRelic AlertPolicyResource
 alertPolicyResource =
@@ -238,10 +359,40 @@ instance TF.ToHCL NrqlAlertConditionResource where
         , TF.assign "value_function" <$> TF.argument _value_function
         ]
 
-$(TF.makeSchemaLenses
-    ''NrqlAlertConditionResource
-    ''TF.NewRelic
-    ''TF.Resource)
+instance HasEnabled NrqlAlertConditionResource (TF.Argument Text) where
+    enabled f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _enabled = a } :: NrqlAlertConditionResource)
+             <$> f _enabled
+
+instance HasName NrqlAlertConditionResource (TF.Argument Text) where
+    name f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _name = a } :: NrqlAlertConditionResource)
+             <$> f _name
+
+instance HasNrql NrqlAlertConditionResource (TF.Argument Text) where
+    nrql f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _nrql = a } :: NrqlAlertConditionResource)
+             <$> f _nrql
+
+instance HasPolicyId NrqlAlertConditionResource (TF.Argument Text) where
+    policyId f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _policy_id = a } :: NrqlAlertConditionResource)
+             <$> f _policy_id
+
+instance HasRunbookUrl NrqlAlertConditionResource (TF.Argument Text) where
+    runbookUrl f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _runbook_url = a } :: NrqlAlertConditionResource)
+             <$> f _runbook_url
+
+instance HasTerm NrqlAlertConditionResource (TF.Argument Text) where
+    term f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _term = a } :: NrqlAlertConditionResource)
+             <$> f _term
+
+instance HasValueFunction NrqlAlertConditionResource (TF.Argument Text) where
+    valueFunction f s@NrqlAlertConditionResource{..} =
+        (\a -> s { _value_function = a } :: NrqlAlertConditionResource)
+             <$> f _value_function
 
 nrqlAlertConditionResource :: TF.Resource TF.NewRelic NrqlAlertConditionResource
 nrqlAlertConditionResource =
@@ -255,3 +406,117 @@ nrqlAlertConditionResource =
             , _term = TF.Nil
             , _value_function = TF.Nil
             }
+
+class HasChannelId s a | s -> a where
+    channelId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasChannelId s a => HasChannelId (TF.Resource p s) a where
+    channelId = TF.configuration . channelId
+
+class HasComputedCreatedAt s a | s -> a where
+    computedCreatedAt :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreatedAt s a => HasComputedCreatedAt (TF.Resource p s) a where
+    computedCreatedAt = TF.configuration . computedCreatedAt
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedUpdatedAt s a | s -> a where
+    computedUpdatedAt :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUpdatedAt s a => HasComputedUpdatedAt (TF.Resource p s) a where
+    computedUpdatedAt = TF.configuration . computedUpdatedAt
+
+class HasConditionScope s a | s -> a where
+    conditionScope :: Functor f => (a -> f a) -> s -> f s
+
+instance HasConditionScope s a => HasConditionScope (TF.Resource p s) a where
+    conditionScope = TF.configuration . conditionScope
+
+class HasConfiguration s a | s -> a where
+    configuration :: Functor f => (a -> f a) -> s -> f s
+
+instance HasConfiguration s a => HasConfiguration (TF.Resource p s) a where
+    configuration = TF.configuration . configuration
+
+class HasEnabled s a | s -> a where
+    enabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnabled s a => HasEnabled (TF.Resource p s) a where
+    enabled = TF.configuration . enabled
+
+class HasEntities s a | s -> a where
+    entities :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEntities s a => HasEntities (TF.Resource p s) a where
+    entities = TF.configuration . entities
+
+class HasIncidentPreference s a | s -> a where
+    incidentPreference :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIncidentPreference s a => HasIncidentPreference (TF.Resource p s) a where
+    incidentPreference = TF.configuration . incidentPreference
+
+class HasMetric s a | s -> a where
+    metric :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMetric s a => HasMetric (TF.Resource p s) a where
+    metric = TF.configuration . metric
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNrql s a | s -> a where
+    nrql :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNrql s a => HasNrql (TF.Resource p s) a where
+    nrql = TF.configuration . nrql
+
+class HasPolicyId s a | s -> a where
+    policyId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicyId s a => HasPolicyId (TF.Resource p s) a where
+    policyId = TF.configuration . policyId
+
+class HasRunbookUrl s a | s -> a where
+    runbookUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRunbookUrl s a => HasRunbookUrl (TF.Resource p s) a where
+    runbookUrl = TF.configuration . runbookUrl
+
+class HasTerm s a | s -> a where
+    term :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTerm s a => HasTerm (TF.Resource p s) a where
+    term = TF.configuration . term
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' = TF.configuration . type'
+
+class HasUserDefinedMetric s a | s -> a where
+    userDefinedMetric :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserDefinedMetric s a => HasUserDefinedMetric (TF.Resource p s) a where
+    userDefinedMetric = TF.configuration . userDefinedMetric
+
+class HasUserDefinedValueFunction s a | s -> a where
+    userDefinedValueFunction :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserDefinedValueFunction s a => HasUserDefinedValueFunction (TF.Resource p s) a where
+    userDefinedValueFunction = TF.configuration . userDefinedValueFunction
+
+class HasValueFunction s a | s -> a where
+    valueFunction :: Functor f => (a -> f a) -> s -> f s
+
+instance HasValueFunction s a => HasValueFunction (TF.Resource p s) a where
+    valueFunction = TF.configuration . valueFunction

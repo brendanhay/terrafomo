@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,40 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Logentries.Resource where
+module Terrafomo.Logentries.Resource
+    (
+    -- * Types
+      LogResource (..)
+    , logResource
 
-import Data.Functor ((<$>))
+    , LogsetResource (..)
+    , logsetResource
+
+    -- * Overloaded Fields
+    , HasComputedToken (..)
+    , HasFilename (..)
+    , HasLocation (..)
+    , HasLogsetId (..)
+    , HasName (..)
+    , HasRetentionPeriod (..)
+    , HasSource (..)
+    , HasType' (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Logentries.Provider as TF
 import qualified Terrafomo.Logentries.Types    as TF
 import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Meta         as TF (configuration)
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Variable     as TF
-import qualified Terrafomo.TH                  as TF
 
 {- | The @logentries_log@ Logentries resource.
 
@@ -69,10 +85,40 @@ instance TF.ToHCL LogResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''LogResource
-    ''TF.Logentries
-    ''TF.Resource)
+instance HasFilename LogResource (TF.Argument Text) where
+    filename f s@LogResource{..} =
+        (\a -> s { _filename = a } :: LogResource)
+             <$> f _filename
+
+instance HasLogsetId LogResource (TF.Argument Text) where
+    logsetId f s@LogResource{..} =
+        (\a -> s { _logset_id = a } :: LogResource)
+             <$> f _logset_id
+
+instance HasName LogResource (TF.Argument Text) where
+    name f s@LogResource{..} =
+        (\a -> s { _name = a } :: LogResource)
+             <$> f _name
+
+instance HasRetentionPeriod LogResource (TF.Argument Text) where
+    retentionPeriod f s@LogResource{..} =
+        (\a -> s { _retention_period = a } :: LogResource)
+             <$> f _retention_period
+
+instance HasSource LogResource (TF.Argument Text) where
+    source f s@LogResource{..} =
+        (\a -> s { _source = a } :: LogResource)
+             <$> f _source
+
+instance HasType' LogResource (TF.Argument Text) where
+    type' f s@LogResource{..} =
+        (\a -> s { _type' = a } :: LogResource)
+             <$> f _type'
+
+instance HasComputedToken LogResource (TF.Attribute Text) where
+    computedToken f s@LogResource{..} =
+        (\a -> s { _computed_token = a } :: LogResource)
+             <$> f _computed_token
 
 logResource :: TF.Resource TF.Logentries LogResource
 logResource =
@@ -105,10 +151,15 @@ instance TF.ToHCL LogsetResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''LogsetResource
-    ''TF.Logentries
-    ''TF.Resource)
+instance HasLocation LogsetResource (TF.Argument Text) where
+    location f s@LogsetResource{..} =
+        (\a -> s { _location = a } :: LogsetResource)
+             <$> f _location
+
+instance HasName LogsetResource (TF.Argument Text) where
+    name f s@LogsetResource{..} =
+        (\a -> s { _name = a } :: LogsetResource)
+             <$> f _name
 
 logsetResource :: TF.Resource TF.Logentries LogsetResource
 logsetResource =
@@ -117,3 +168,51 @@ logsetResource =
             _location = TF.Nil
             , _name = TF.Nil
             }
+
+class HasComputedToken s a | s -> a where
+    computedToken :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedToken s a => HasComputedToken (TF.Resource p s) a where
+    computedToken = TF.configuration . computedToken
+
+class HasFilename s a | s -> a where
+    filename :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFilename s a => HasFilename (TF.Resource p s) a where
+    filename = TF.configuration . filename
+
+class HasLocation s a | s -> a where
+    location :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLocation s a => HasLocation (TF.Resource p s) a where
+    location = TF.configuration . location
+
+class HasLogsetId s a | s -> a where
+    logsetId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLogsetId s a => HasLogsetId (TF.Resource p s) a where
+    logsetId = TF.configuration . logsetId
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasRetentionPeriod s a | s -> a where
+    retentionPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRetentionPeriod s a => HasRetentionPeriod (TF.Resource p s) a where
+    retentionPeriod = TF.configuration . retentionPeriod
+
+class HasSource s a | s -> a where
+    source :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSource s a => HasSource (TF.Resource p s) a where
+    source = TF.configuration . source
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' = TF.configuration . type'

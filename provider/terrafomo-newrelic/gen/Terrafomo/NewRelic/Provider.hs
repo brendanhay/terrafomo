@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.NewRelic.Provider
-    ( NewRelic    (..)
-    , HasNewRelic (..)
+    (
+    -- * Provider Datatype
+      NewRelic (..)
+
+    -- * Lenses
+    , apiKey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +37,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.NewRelic.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | NewRelic Terraform provider.
 
@@ -73,4 +75,11 @@ instance Monoid NewRelic where
 instance TF.IsProvider NewRelic where
     type ProviderName NewRelic = "newrelic"
 
-$(TF.makeProviderLenses ''NewRelic)
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> NewRelic
+    -> f NewRelic
+apiKey f s =
+        (\a -> s { _api_key = a } :: NewRelic)
+             <$> f (_api_key s)

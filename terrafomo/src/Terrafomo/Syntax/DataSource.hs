@@ -30,9 +30,9 @@ instance Functor (DataSource p) where
     fmap = second
 
 instance HasMeta DataSource where
-    provider  = lens _dataProvider  (\s a -> s { _dataProvider  = a })
-    config    = lens _dataConfig    (\s a -> s { _dataConfig    = a })
-    dependsOn = lens _dataDependsOn (\s a -> s { _dataDependsOn = a })
+    provider      = lens _dataProvider  (\s a -> s { _dataProvider  = a })
+    configuration = lens _dataConfig    (\s a -> s { _dataConfig    = a })
+    dependsOn     = lens _dataDependsOn (\s a -> s { _dataDependsOn = a })
 
 newDataSource :: Type -> a -> DataSource p a
 newDataSource = DataSource Nothing mempty

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,30 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Fastly.DataSource where
+module Terrafomo.Fastly.DataSource
+    (
+    -- * Types
+      IpRangesDataSource (..)
+    , ipRangesDataSource
 
-import Data.Functor ((<$>))
+    -- * Overloaded Fields
+    , HasComputedCidrBlocks (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Fastly.Provider   as TF
 import qualified Terrafomo.Fastly.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @fastly_ip_ranges@ Fastly datasource.
 
@@ -52,10 +58,10 @@ data IpRangesDataSource = IpRangesDataSource {
 instance TF.ToHCL IpRangesDataSource where
     toHCL _ = TF.block []
 
-$(TF.makeSchemaLenses
-    ''IpRangesDataSource
-    ''TF.Fastly
-    ''TF.DataSource)
+instance HasComputedCidrBlocks IpRangesDataSource (TF.Attribute Text) where
+    computedCidrBlocks f s@IpRangesDataSource{..} =
+        (\a -> s { _computed_cidr_blocks = a } :: IpRangesDataSource)
+             <$> f _computed_cidr_blocks
 
 ipRangesDataSource :: TF.DataSource TF.Fastly IpRangesDataSource
 ipRangesDataSource =
@@ -63,3 +69,9 @@ ipRangesDataSource =
         IpRangesDataSource {
               _computed_cidr_blocks = TF.Compute "cidr_blocks"
             }
+
+class HasComputedCidrBlocks s a | s -> a where
+    computedCidrBlocks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCidrBlocks s a => HasComputedCidrBlocks (TF.DataSource p s) a where
+    computedCidrBlocks = TF.configuration . computedCidrBlocks

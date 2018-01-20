@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cloudflare.Provider
-    ( Cloudflare    (..)
-    , HasCloudflare (..)
+    (
+    -- * Provider Datatype
+      Cloudflare (..)
+
+    -- * Lenses
+    , email
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Cloudflare.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.Meta      as TF
 import qualified Terrafomo.Syntax.Name      as TF
+import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | Cloudflare Terraform provider.
 
@@ -79,4 +82,20 @@ instance Monoid Cloudflare where
 instance TF.IsProvider Cloudflare where
     type ProviderName Cloudflare = "cloudflare"
 
-$(TF.makeProviderLenses ''Cloudflare)
+email
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Cloudflare
+    -> f Cloudflare
+email f s =
+        (\a -> s { _email = a } :: Cloudflare)
+             <$> f (_email s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Cloudflare
+    -> f Cloudflare
+token f s =
+        (\a -> s { _token = a } :: Cloudflare)
+             <$> f (_token s)

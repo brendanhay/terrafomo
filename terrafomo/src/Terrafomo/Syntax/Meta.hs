@@ -25,7 +25,7 @@ class HasMeta b where
 
     -- | The underlying type/data config representing the specific resource or
     -- datasource configuration.
-    config :: Lens (b p a) (b p a') a a'
+    configuration :: Lens (b p a) (b p a') a a'
 
     -- | Explicit dependencies that this resource or datasource has. These
     -- dependencies will be created _before_.

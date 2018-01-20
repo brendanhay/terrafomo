@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Docker.Provider
-    ( Docker    (..)
-    , HasDocker (..)
+    (
+    -- * Provider Datatype
+      Docker (..)
+
+    -- * Lenses
+    , caMaterial
+    , certPath
+    , host
+    , registryAuth
     ) where
 
 import Data.Function      (on)
@@ -34,10 +40,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Docker.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Docker Terraform provider.
 
@@ -91,4 +96,38 @@ instance Monoid Docker where
 instance TF.IsProvider Docker where
     type ProviderName Docker = "docker"
 
-$(TF.makeProviderLenses ''Docker)
+caMaterial
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Docker
+    -> f Docker
+caMaterial f s =
+        (\a -> s { _ca_material = a } :: Docker)
+             <$> f (_ca_material s)
+
+certPath
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Docker
+    -> f Docker
+certPath f s =
+        (\a -> s { _cert_path = a } :: Docker)
+             <$> f (_cert_path s)
+
+host
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Docker
+    -> f Docker
+host f s =
+        (\a -> s { _host = a } :: Docker)
+             <$> f (_host s)
+
+registryAuth
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Docker
+    -> f Docker
+registryAuth f s =
+        (\a -> s { _registry_auth = a } :: Docker)
+             <$> f (_registry_auth s)

@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DigitalOcean.Provider
-    ( DigitalOcean    (..)
-    , HasDigitalOcean (..)
+    (
+    -- * Provider Datatype
+      DigitalOcean (..)
+
+    -- * Lenses
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +37,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.DigitalOcean.Types as TF
 import qualified Terrafomo.Syntax.HCL         as TF
-import qualified Terrafomo.Syntax.Meta        as TF
 import qualified Terrafomo.Syntax.Name        as TF
+import qualified Terrafomo.Syntax.Provider    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
-import qualified Terrafomo.TH                 as TF
 
 {- | DigitalOcean Terraform provider.
 
@@ -74,4 +76,11 @@ instance Monoid DigitalOcean where
 instance TF.IsProvider DigitalOcean where
     type ProviderName DigitalOcean = "digitalocean"
 
-$(TF.makeProviderLenses ''DigitalOcean)
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> DigitalOcean
+    -> f DigitalOcean
+token f s =
+        (\a -> s { _token = a } :: DigitalOcean)
+             <$> f (_token s)

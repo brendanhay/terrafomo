@@ -8,6 +8,7 @@ name: terrafomo-spotinst
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Google.Provider
-    ( Google    (..)
-    , HasGoogle (..)
+    (
+    -- * Provider Datatype
+      Google (..)
+
+    -- * Lenses
     ) where
 
 import Data.Function      (on)
@@ -34,10 +36,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Google.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Google Terraform provider.
 
@@ -68,5 +69,3 @@ instance Monoid Google where
 
 instance TF.IsProvider Google where
     type ProviderName Google = "google"
-
-$(TF.makeProviderLenses ''Google)

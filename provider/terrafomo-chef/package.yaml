@@ -8,6 +8,7 @@ name: terrafomo-chef
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

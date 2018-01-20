@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,45 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.Resource where
+module Terrafomo.LogicMonitor.Resource
+    (
+    -- * Types
+      CollectorGroupResource (..)
+    , collectorGroupResource
 
-import Data.Functor ((<$>))
+    , DeviceGroupResource (..)
+    , deviceGroupResource
+
+    , DeviceResource (..)
+    , deviceResource
+
+    -- * Overloaded Fields
+    , HasAppliesTo (..)
+    , HasCollector (..)
+    , HasDescription (..)
+    , HasDisableAlerting (..)
+    , HasDisplayName (..)
+    , HasHostgroupId (..)
+    , HasIpAddr (..)
+    , HasName (..)
+    , HasParentId (..)
+    , HasProperties (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.LogicMonitor.Provider as TF
 import qualified Terrafomo.LogicMonitor.Types    as TF
 import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Meta           as TF (configuration)
 import qualified Terrafomo.Syntax.Resource       as TF
 import qualified Terrafomo.Syntax.Resource       as TF
 import qualified Terrafomo.Syntax.Variable       as TF
-import qualified Terrafomo.TH                    as TF
 
 {- | The @logicmonitor_collector_group@ LogicMonitor resource.
 
@@ -56,10 +77,15 @@ instance TF.ToHCL CollectorGroupResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''CollectorGroupResource
-    ''TF.LogicMonitor
-    ''TF.Resource)
+instance HasDescription CollectorGroupResource (TF.Argument Text) where
+    description f s@CollectorGroupResource{..} =
+        (\a -> s { _description = a } :: CollectorGroupResource)
+             <$> f _description
+
+instance HasName CollectorGroupResource (TF.Argument Text) where
+    name f s@CollectorGroupResource{..} =
+        (\a -> s { _name = a } :: CollectorGroupResource)
+             <$> f _name
 
 collectorGroupResource :: TF.Resource TF.LogicMonitor CollectorGroupResource
 collectorGroupResource =
@@ -99,10 +125,35 @@ instance TF.ToHCL DeviceGroupResource where
         , TF.assign "properties" <$> TF.argument _properties
         ]
 
-$(TF.makeSchemaLenses
-    ''DeviceGroupResource
-    ''TF.LogicMonitor
-    ''TF.Resource)
+instance HasAppliesTo DeviceGroupResource (TF.Argument Text) where
+    appliesTo f s@DeviceGroupResource{..} =
+        (\a -> s { _applies_to = a } :: DeviceGroupResource)
+             <$> f _applies_to
+
+instance HasDescription DeviceGroupResource (TF.Argument Text) where
+    description f s@DeviceGroupResource{..} =
+        (\a -> s { _description = a } :: DeviceGroupResource)
+             <$> f _description
+
+instance HasDisableAlerting DeviceGroupResource (TF.Argument Text) where
+    disableAlerting f s@DeviceGroupResource{..} =
+        (\a -> s { _disable_alerting = a } :: DeviceGroupResource)
+             <$> f _disable_alerting
+
+instance HasName DeviceGroupResource (TF.Argument Text) where
+    name f s@DeviceGroupResource{..} =
+        (\a -> s { _name = a } :: DeviceGroupResource)
+             <$> f _name
+
+instance HasParentId DeviceGroupResource (TF.Argument Text) where
+    parentId f s@DeviceGroupResource{..} =
+        (\a -> s { _parent_id = a } :: DeviceGroupResource)
+             <$> f _parent_id
+
+instance HasProperties DeviceGroupResource (TF.Argument Text) where
+    properties f s@DeviceGroupResource{..} =
+        (\a -> s { _properties = a } :: DeviceGroupResource)
+             <$> f _properties
 
 deviceGroupResource :: TF.Resource TF.LogicMonitor DeviceGroupResource
 deviceGroupResource =
@@ -146,10 +197,35 @@ instance TF.ToHCL DeviceResource where
         , TF.assign "properties" <$> TF.argument _properties
         ]
 
-$(TF.makeSchemaLenses
-    ''DeviceResource
-    ''TF.LogicMonitor
-    ''TF.Resource)
+instance HasCollector DeviceResource (TF.Argument Text) where
+    collector f s@DeviceResource{..} =
+        (\a -> s { _collector = a } :: DeviceResource)
+             <$> f _collector
+
+instance HasDisableAlerting DeviceResource (TF.Argument Text) where
+    disableAlerting f s@DeviceResource{..} =
+        (\a -> s { _disable_alerting = a } :: DeviceResource)
+             <$> f _disable_alerting
+
+instance HasDisplayName DeviceResource (TF.Argument Text) where
+    displayName f s@DeviceResource{..} =
+        (\a -> s { _display_name = a } :: DeviceResource)
+             <$> f _display_name
+
+instance HasHostgroupId DeviceResource (TF.Argument Text) where
+    hostgroupId f s@DeviceResource{..} =
+        (\a -> s { _hostgroup_id = a } :: DeviceResource)
+             <$> f _hostgroup_id
+
+instance HasIpAddr DeviceResource (TF.Argument Text) where
+    ipAddr f s@DeviceResource{..} =
+        (\a -> s { _ip_addr = a } :: DeviceResource)
+             <$> f _ip_addr
+
+instance HasProperties DeviceResource (TF.Argument Text) where
+    properties f s@DeviceResource{..} =
+        (\a -> s { _properties = a } :: DeviceResource)
+             <$> f _properties
 
 deviceResource :: TF.Resource TF.LogicMonitor DeviceResource
 deviceResource =
@@ -162,3 +238,63 @@ deviceResource =
             , _ip_addr = TF.Nil
             , _properties = TF.Nil
             }
+
+class HasAppliesTo s a | s -> a where
+    appliesTo :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAppliesTo s a => HasAppliesTo (TF.Resource p s) a where
+    appliesTo = TF.configuration . appliesTo
+
+class HasCollector s a | s -> a where
+    collector :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCollector s a => HasCollector (TF.Resource p s) a where
+    collector = TF.configuration . collector
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasDisableAlerting s a | s -> a where
+    disableAlerting :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisableAlerting s a => HasDisableAlerting (TF.Resource p s) a where
+    disableAlerting = TF.configuration . disableAlerting
+
+class HasDisplayName s a | s -> a where
+    displayName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisplayName s a => HasDisplayName (TF.Resource p s) a where
+    displayName = TF.configuration . displayName
+
+class HasHostgroupId s a | s -> a where
+    hostgroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostgroupId s a => HasHostgroupId (TF.Resource p s) a where
+    hostgroupId = TF.configuration . hostgroupId
+
+class HasIpAddr s a | s -> a where
+    ipAddr :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIpAddr s a => HasIpAddr (TF.Resource p s) a where
+    ipAddr = TF.configuration . ipAddr
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasParentId s a | s -> a where
+    parentId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasParentId s a => HasParentId (TF.Resource p s) a where
+    parentId = TF.configuration . parentId
+
+class HasProperties s a | s -> a where
+    properties :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProperties s a => HasProperties (TF.Resource p s) a where
+    properties = TF.configuration . properties

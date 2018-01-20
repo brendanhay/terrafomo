@@ -8,6 +8,7 @@ name: terrafomo-digitalocean
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

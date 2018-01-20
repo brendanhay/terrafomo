@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Librato.Provider
-    ( Librato    (..)
-    , HasLibrato (..)
+    (
+    -- * Provider Datatype
+      Librato (..)
+
+    -- * Lenses
+    , email
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Librato.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Librato Terraform provider.
 
@@ -79,4 +82,20 @@ instance Monoid Librato where
 instance TF.IsProvider Librato where
     type ProviderName Librato = "librato"
 
-$(TF.makeProviderLenses ''Librato)
+email
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Librato
+    -> f Librato
+email f s =
+        (\a -> s { _email = a } :: Librato)
+             <$> f (_email s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Librato
+    -> f Librato
+token f s =
+        (\a -> s { _token = a } :: Librato)
+             <$> f (_token s)

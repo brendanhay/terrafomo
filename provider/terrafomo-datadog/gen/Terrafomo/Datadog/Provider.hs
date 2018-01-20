@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Datadog.Provider
-    ( Datadog    (..)
-    , HasDatadog (..)
+    (
+    -- * Provider Datatype
+      Datadog (..)
+
+    -- * Lenses
+    , apiKey
+    , appKey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Datadog.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Datadog Terraform provider.
 
@@ -79,4 +82,20 @@ instance Monoid Datadog where
 instance TF.IsProvider Datadog where
     type ProviderName Datadog = "datadog"
 
-$(TF.makeProviderLenses ''Datadog)
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Datadog
+    -> f Datadog
+apiKey f s =
+        (\a -> s { _api_key = a } :: Datadog)
+             <$> f (_api_key s)
+
+appKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Datadog
+    -> f Datadog
+appKey f s =
+        (\a -> s { _app_key = a } :: Datadog)
+             <$> f (_app_key s)

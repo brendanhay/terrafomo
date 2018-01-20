@@ -8,6 +8,7 @@ name: terrafomo-mysql
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

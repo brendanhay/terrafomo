@@ -8,6 +8,7 @@ name: terrafomo-logicmonitor
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,40 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CloudStack.DataSource where
+module Terrafomo.CloudStack.DataSource
+    (
+    -- * Types
+      TemplateDataSource (..)
+    , templateDataSource
 
-import Data.Functor ((<$>))
+    -- * Overloaded Fields
+    , HasComputedAccount (..)
+    , HasComputedCreated (..)
+    , HasComputedDisplayText (..)
+    , HasComputedFormat (..)
+    , HasComputedHypervisor (..)
+    , HasComputedId (..)
+    , HasComputedName (..)
+    , HasComputedSize (..)
+    , HasComputedTags (..)
+    , HasFilter (..)
+    , HasTemplateFilter (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.CloudStack.Provider as TF
 import qualified Terrafomo.CloudStack.Types    as TF
 import qualified Terrafomo.Syntax.DataSource   as TF
 import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Meta         as TF (configuration)
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Variable     as TF
-import qualified Terrafomo.TH                  as TF
 
 {- | The @cloudstack_template@ CloudStack datasource.
 
@@ -73,10 +89,60 @@ instance TF.ToHCL TemplateDataSource where
         , TF.assign "template_filter" <$> TF.argument _template_filter
         ]
 
-$(TF.makeSchemaLenses
-    ''TemplateDataSource
-    ''TF.CloudStack
-    ''TF.DataSource)
+instance HasFilter TemplateDataSource (TF.Argument Text) where
+    filter f s@TemplateDataSource{..} =
+        (\a -> s { _filter = a } :: TemplateDataSource)
+             <$> f _filter
+
+instance HasTemplateFilter TemplateDataSource (TF.Argument Text) where
+    templateFilter f s@TemplateDataSource{..} =
+        (\a -> s { _template_filter = a } :: TemplateDataSource)
+             <$> f _template_filter
+
+instance HasComputedAccount TemplateDataSource (TF.Attribute Text) where
+    computedAccount f s@TemplateDataSource{..} =
+        (\a -> s { _computed_account = a } :: TemplateDataSource)
+             <$> f _computed_account
+
+instance HasComputedCreated TemplateDataSource (TF.Attribute Text) where
+    computedCreated f s@TemplateDataSource{..} =
+        (\a -> s { _computed_created = a } :: TemplateDataSource)
+             <$> f _computed_created
+
+instance HasComputedDisplayText TemplateDataSource (TF.Attribute Text) where
+    computedDisplayText f s@TemplateDataSource{..} =
+        (\a -> s { _computed_display_text = a } :: TemplateDataSource)
+             <$> f _computed_display_text
+
+instance HasComputedFormat TemplateDataSource (TF.Attribute Text) where
+    computedFormat f s@TemplateDataSource{..} =
+        (\a -> s { _computed_format = a } :: TemplateDataSource)
+             <$> f _computed_format
+
+instance HasComputedHypervisor TemplateDataSource (TF.Attribute Text) where
+    computedHypervisor f s@TemplateDataSource{..} =
+        (\a -> s { _computed_hypervisor = a } :: TemplateDataSource)
+             <$> f _computed_hypervisor
+
+instance HasComputedId TemplateDataSource (TF.Attribute Text) where
+    computedId f s@TemplateDataSource{..} =
+        (\a -> s { _computed_id = a } :: TemplateDataSource)
+             <$> f _computed_id
+
+instance HasComputedName TemplateDataSource (TF.Attribute Text) where
+    computedName f s@TemplateDataSource{..} =
+        (\a -> s { _computed_name = a } :: TemplateDataSource)
+             <$> f _computed_name
+
+instance HasComputedSize TemplateDataSource (TF.Attribute Text) where
+    computedSize f s@TemplateDataSource{..} =
+        (\a -> s { _computed_size = a } :: TemplateDataSource)
+             <$> f _computed_size
+
+instance HasComputedTags TemplateDataSource (TF.Attribute Text) where
+    computedTags f s@TemplateDataSource{..} =
+        (\a -> s { _computed_tags = a } :: TemplateDataSource)
+             <$> f _computed_tags
 
 templateDataSource :: TF.DataSource TF.CloudStack TemplateDataSource
 templateDataSource =
@@ -94,3 +160,69 @@ templateDataSource =
             , _computed_size = TF.Compute "size"
             , _computed_tags = TF.Compute "tags"
             }
+
+class HasComputedAccount s a | s -> a where
+    computedAccount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAccount s a => HasComputedAccount (TF.DataSource p s) a where
+    computedAccount = TF.configuration . computedAccount
+
+class HasComputedCreated s a | s -> a where
+    computedCreated :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreated s a => HasComputedCreated (TF.DataSource p s) a where
+    computedCreated = TF.configuration . computedCreated
+
+class HasComputedDisplayText s a | s -> a where
+    computedDisplayText :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDisplayText s a => HasComputedDisplayText (TF.DataSource p s) a where
+    computedDisplayText = TF.configuration . computedDisplayText
+
+class HasComputedFormat s a | s -> a where
+    computedFormat :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFormat s a => HasComputedFormat (TF.DataSource p s) a where
+    computedFormat = TF.configuration . computedFormat
+
+class HasComputedHypervisor s a | s -> a where
+    computedHypervisor :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHypervisor s a => HasComputedHypervisor (TF.DataSource p s) a where
+    computedHypervisor = TF.configuration . computedHypervisor
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedSize s a | s -> a where
+    computedSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
+    computedSize = TF.configuration . computedSize
+
+class HasComputedTags s a | s -> a where
+    computedTags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTags s a => HasComputedTags (TF.DataSource p s) a where
+    computedTags = TF.configuration . computedTags
+
+class HasFilter s a | s -> a where
+    filter :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFilter s a => HasFilter (TF.DataSource p s) a where
+    filter = TF.configuration . filter
+
+class HasTemplateFilter s a | s -> a where
+    templateFilter :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTemplateFilter s a => HasTemplateFilter (TF.DataSource p s) a where
+    templateFilter = TF.configuration . templateFilter

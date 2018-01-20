@@ -8,6 +8,7 @@ name: terrafomo-newrelic
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

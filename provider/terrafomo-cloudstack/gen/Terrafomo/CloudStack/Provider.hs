@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,18 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.CloudStack.Provider
-    ( CloudStack    (..)
-    , HasCloudStack (..)
+    (
+    -- * Provider Datatype
+      CloudStack (..)
+
+    -- * Lenses
+    , apiKey
+    , apiUrl
+    , config
+    , httpGetOnly
+    , profile
+    , secretKey
+    , timeout
     ) where
 
 import Data.Function      (on)
@@ -34,10 +43,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.CloudStack.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.Meta      as TF
 import qualified Terrafomo.Syntax.Name      as TF
+import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | CloudStack Terraform provider.
 
@@ -108,4 +116,65 @@ instance Monoid CloudStack where
 instance TF.IsProvider CloudStack where
     type ProviderName CloudStack = "cloudstack"
 
-$(TF.makeProviderLenses ''CloudStack)
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+apiKey f s =
+        (\a -> s { _api_key = a } :: CloudStack)
+             <$> f (_api_key s)
+
+apiUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+apiUrl f s =
+        (\a -> s { _api_url = a } :: CloudStack)
+             <$> f (_api_url s)
+
+config
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+config f s =
+        (\a -> s { _config = a } :: CloudStack)
+             <$> f (_config s)
+
+httpGetOnly
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+httpGetOnly f s =
+        (\a -> s { _http_get_only = a } :: CloudStack)
+             <$> f (_http_get_only s)
+
+profile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+profile f s =
+        (\a -> s { _profile = a } :: CloudStack)
+             <$> f (_profile s)
+
+secretKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+secretKey f s =
+        (\a -> s { _secret_key = a } :: CloudStack)
+             <$> f (_secret_key s)
+
+timeout
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> CloudStack
+    -> f CloudStack
+timeout f s =
+        (\a -> s { _timeout = a } :: CloudStack)
+             <$> f (_timeout s)

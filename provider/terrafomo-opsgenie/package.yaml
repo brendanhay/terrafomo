@@ -8,6 +8,7 @@ name: terrafomo-opsgenie
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

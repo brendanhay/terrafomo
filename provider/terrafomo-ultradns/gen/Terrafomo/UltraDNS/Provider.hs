@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.UltraDNS.Provider
-    ( UltraDNS    (..)
-    , HasUltraDNS (..)
+    (
+    -- * Provider Datatype
+      UltraDNS (..)
+
+    -- * Lenses
+    , baseurl
+    , password
+    , username
     ) where
 
 import Data.Function      (on)
@@ -33,10 +38,9 @@ import Data.Text          (Text)
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 import qualified Terrafomo.UltraDNS.Types  as TF
 
 {- | UltraDNS Terraform provider.
@@ -84,4 +88,29 @@ instance Monoid UltraDNS where
 instance TF.IsProvider UltraDNS where
     type ProviderName UltraDNS = "ultradns"
 
-$(TF.makeProviderLenses ''UltraDNS)
+baseurl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> UltraDNS
+    -> f UltraDNS
+baseurl f s =
+        (\a -> s { _baseurl = a } :: UltraDNS)
+             <$> f (_baseurl s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> UltraDNS
+    -> f UltraDNS
+password f s =
+        (\a -> s { _password = a } :: UltraDNS)
+             <$> f (_password s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> UltraDNS
+    -> f UltraDNS
+username f s =
+        (\a -> s { _username = a } :: UltraDNS)
+             <$> f (_username s)

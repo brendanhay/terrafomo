@@ -2,6 +2,7 @@
 
 module Terrafomo.Gen.Text where
 
+import Data.Maybe  (fromMaybe)
 import Data.Monoid ((<>))
 import Data.Text   (Text)
 
@@ -40,6 +41,16 @@ dataTypeName x =
     case Text.split (== '_') x of
         [] -> x
         xs -> foldMap upperHead xs
+
+fieldClassName :: Text -> Text
+fieldClassName = mappend "Has" . upperHead . fieldMethodName
+
+fieldMethodName :: Text -> Text
+fieldMethodName x =
+    let y = fromMaybe x (Text.stripPrefix "_" x)
+     in case Text.split (== '_') y of
+           []   -> y
+           z:zs -> mconcat (z : map upperHead zs)
 
 upperHead :: Text -> Text
 upperHead x =

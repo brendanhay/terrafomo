@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Nomad.Provider
-    ( Nomad    (..)
-    , HasNomad (..)
+    (
+    -- * Provider Datatype
+      Nomad (..)
+
+    -- * Lenses
+    , address
+    , caFile
+    , certFile
+    , keyFile
+    , region
+    , secretId
     ) where
 
 import Data.Function      (on)
@@ -34,10 +42,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Nomad.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Nomad Terraform provider.
 
@@ -98,4 +105,56 @@ instance Monoid Nomad where
 instance TF.IsProvider Nomad where
     type ProviderName Nomad = "nomad"
 
-$(TF.makeProviderLenses ''Nomad)
+address
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Nomad
+    -> f Nomad
+address f s =
+        (\a -> s { _address = a } :: Nomad)
+             <$> f (_address s)
+
+caFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Nomad
+    -> f Nomad
+caFile f s =
+        (\a -> s { _ca_file = a } :: Nomad)
+             <$> f (_ca_file s)
+
+certFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Nomad
+    -> f Nomad
+certFile f s =
+        (\a -> s { _cert_file = a } :: Nomad)
+             <$> f (_cert_file s)
+
+keyFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Nomad
+    -> f Nomad
+keyFile f s =
+        (\a -> s { _key_file = a } :: Nomad)
+             <$> f (_key_file s)
+
+region
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Nomad
+    -> f Nomad
+region f s =
+        (\a -> s { _region = a } :: Nomad)
+             <$> f (_region s)
+
+secretId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Nomad
+    -> f Nomad
+secretId f s =
+        (\a -> s { _secret_id = a } :: Nomad)
+             <$> f (_secret_id s)

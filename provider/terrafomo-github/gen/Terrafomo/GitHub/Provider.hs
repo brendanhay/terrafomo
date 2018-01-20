@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.GitHub.Provider
-    ( GitHub    (..)
-    , HasGitHub (..)
+    (
+    -- * Provider Datatype
+      GitHub (..)
+
+    -- * Lenses
+    , baseUrl
+    , organization
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.GitHub.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | GitHub Terraform provider.
 
@@ -85,4 +89,29 @@ instance Monoid GitHub where
 instance TF.IsProvider GitHub where
     type ProviderName GitHub = "github"
 
-$(TF.makeProviderLenses ''GitHub)
+baseUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> GitHub
+    -> f GitHub
+baseUrl f s =
+        (\a -> s { _base_url = a } :: GitHub)
+             <$> f (_base_url s)
+
+organization
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> GitHub
+    -> f GitHub
+organization f s =
+        (\a -> s { _organization = a } :: GitHub)
+             <$> f (_organization s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> GitHub
+    -> f GitHub
+token f s =
+        (\a -> s { _token = a } :: GitHub)
+             <$> f (_token s)

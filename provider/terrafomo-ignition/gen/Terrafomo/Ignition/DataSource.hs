@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,103 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Ignition.DataSource where
+module Terrafomo.Ignition.DataSource
+    (
+    -- * Types
+      ConfigDataSource (..)
+    , configDataSource
 
-import Data.Functor ((<$>))
+    , DirectoryDataSource (..)
+    , directoryDataSource
+
+    , DiskDataSource (..)
+    , diskDataSource
+
+    , FileDataSource (..)
+    , fileDataSource
+
+    , FilesystemDataSource (..)
+    , filesystemDataSource
+
+    , GroupDataSource (..)
+    , groupDataSource
+
+    , LinkDataSource (..)
+    , linkDataSource
+
+    , NetworkdUnitDataSource (..)
+    , networkdUnitDataSource
+
+    , RaidDataSource (..)
+    , raidDataSource
+
+    , SystemdUnitDataSource (..)
+    , systemdUnitDataSource
+
+    , UserDataSource (..)
+    , userDataSource
+
+    -- * Overloaded Fields
+    , HasAppend (..)
+    , HasArrays (..)
+    , HasComputedId (..)
+    , HasComputedRendered (..)
+    , HasContent (..)
+    , HasDevice (..)
+    , HasDevices (..)
+    , HasDirectories (..)
+    , HasDisks (..)
+    , HasDropin (..)
+    , HasEnabled (..)
+    , HasFiles (..)
+    , HasFilesystem (..)
+    , HasFilesystems (..)
+    , HasGecos (..)
+    , HasGid (..)
+    , HasGroups (..)
+    , HasHard (..)
+    , HasHomeDir (..)
+    , HasLevel (..)
+    , HasLinks (..)
+    , HasMask (..)
+    , HasMode (..)
+    , HasMount (..)
+    , HasName (..)
+    , HasNetworkd (..)
+    , HasNoCreateHome (..)
+    , HasNoLogInit (..)
+    , HasNoUserGroup (..)
+    , HasPartition (..)
+    , HasPasswordHash (..)
+    , HasPath (..)
+    , HasPrimaryGroup (..)
+    , HasReplace (..)
+    , HasShell (..)
+    , HasSource (..)
+    , HasSpares (..)
+    , HasSshAuthorizedKeys (..)
+    , HasSystem (..)
+    , HasSystemd (..)
+    , HasTarget (..)
+    , HasUid (..)
+    , HasUsers (..)
+    , HasWipeTable (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Ignition.Provider as TF
 import qualified Terrafomo.Ignition.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @ignition_config@ Ignition datasource.
 
@@ -88,10 +167,70 @@ instance TF.ToHCL ConfigDataSource where
         , TF.assign "users" <$> TF.argument _users
         ]
 
-$(TF.makeSchemaLenses
-    ''ConfigDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasAppend ConfigDataSource (TF.Argument Text) where
+    append f s@ConfigDataSource{..} =
+        (\a -> s { _append = a } :: ConfigDataSource)
+             <$> f _append
+
+instance HasArrays ConfigDataSource (TF.Argument Text) where
+    arrays f s@ConfigDataSource{..} =
+        (\a -> s { _arrays = a } :: ConfigDataSource)
+             <$> f _arrays
+
+instance HasDirectories ConfigDataSource (TF.Argument Text) where
+    directories f s@ConfigDataSource{..} =
+        (\a -> s { _directories = a } :: ConfigDataSource)
+             <$> f _directories
+
+instance HasDisks ConfigDataSource (TF.Argument Text) where
+    disks f s@ConfigDataSource{..} =
+        (\a -> s { _disks = a } :: ConfigDataSource)
+             <$> f _disks
+
+instance HasFiles ConfigDataSource (TF.Argument Text) where
+    files f s@ConfigDataSource{..} =
+        (\a -> s { _files = a } :: ConfigDataSource)
+             <$> f _files
+
+instance HasFilesystems ConfigDataSource (TF.Argument Text) where
+    filesystems f s@ConfigDataSource{..} =
+        (\a -> s { _filesystems = a } :: ConfigDataSource)
+             <$> f _filesystems
+
+instance HasGroups ConfigDataSource (TF.Argument Text) where
+    groups f s@ConfigDataSource{..} =
+        (\a -> s { _groups = a } :: ConfigDataSource)
+             <$> f _groups
+
+instance HasLinks ConfigDataSource (TF.Argument Text) where
+    links f s@ConfigDataSource{..} =
+        (\a -> s { _links = a } :: ConfigDataSource)
+             <$> f _links
+
+instance HasNetworkd ConfigDataSource (TF.Argument Text) where
+    networkd f s@ConfigDataSource{..} =
+        (\a -> s { _networkd = a } :: ConfigDataSource)
+             <$> f _networkd
+
+instance HasReplace ConfigDataSource (TF.Argument Text) where
+    replace f s@ConfigDataSource{..} =
+        (\a -> s { _replace = a } :: ConfigDataSource)
+             <$> f _replace
+
+instance HasSystemd ConfigDataSource (TF.Argument Text) where
+    systemd f s@ConfigDataSource{..} =
+        (\a -> s { _systemd = a } :: ConfigDataSource)
+             <$> f _systemd
+
+instance HasUsers ConfigDataSource (TF.Argument Text) where
+    users f s@ConfigDataSource{..} =
+        (\a -> s { _users = a } :: ConfigDataSource)
+             <$> f _users
+
+instance HasComputedRendered ConfigDataSource (TF.Attribute Text) where
+    computedRendered f s@ConfigDataSource{..} =
+        (\a -> s { _computed_rendered = a } :: ConfigDataSource)
+             <$> f _computed_rendered
 
 configDataSource :: TF.DataSource TF.Ignition ConfigDataSource
 configDataSource =
@@ -140,10 +279,35 @@ instance TF.ToHCL DirectoryDataSource where
         , TF.assign "uid" <$> TF.argument _uid
         ]
 
-$(TF.makeSchemaLenses
-    ''DirectoryDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasFilesystem DirectoryDataSource (TF.Argument Text) where
+    filesystem f s@DirectoryDataSource{..} =
+        (\a -> s { _filesystem = a } :: DirectoryDataSource)
+             <$> f _filesystem
+
+instance HasGid DirectoryDataSource (TF.Argument Text) where
+    gid f s@DirectoryDataSource{..} =
+        (\a -> s { _gid = a } :: DirectoryDataSource)
+             <$> f _gid
+
+instance HasMode DirectoryDataSource (TF.Argument Text) where
+    mode f s@DirectoryDataSource{..} =
+        (\a -> s { _mode = a } :: DirectoryDataSource)
+             <$> f _mode
+
+instance HasPath DirectoryDataSource (TF.Argument Text) where
+    path f s@DirectoryDataSource{..} =
+        (\a -> s { _path = a } :: DirectoryDataSource)
+             <$> f _path
+
+instance HasUid DirectoryDataSource (TF.Argument Text) where
+    uid f s@DirectoryDataSource{..} =
+        (\a -> s { _uid = a } :: DirectoryDataSource)
+             <$> f _uid
+
+instance HasComputedId DirectoryDataSource (TF.Attribute Text) where
+    computedId f s@DirectoryDataSource{..} =
+        (\a -> s { _computed_id = a } :: DirectoryDataSource)
+             <$> f _computed_id
 
 directoryDataSource :: TF.DataSource TF.Ignition DirectoryDataSource
 directoryDataSource =
@@ -179,10 +343,25 @@ instance TF.ToHCL DiskDataSource where
         , TF.assign "wipe_table" <$> TF.argument _wipe_table
         ]
 
-$(TF.makeSchemaLenses
-    ''DiskDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasDevice DiskDataSource (TF.Argument Text) where
+    device f s@DiskDataSource{..} =
+        (\a -> s { _device = a } :: DiskDataSource)
+             <$> f _device
+
+instance HasPartition DiskDataSource (TF.Argument Text) where
+    partition f s@DiskDataSource{..} =
+        (\a -> s { _partition = a } :: DiskDataSource)
+             <$> f _partition
+
+instance HasWipeTable DiskDataSource (TF.Argument Text) where
+    wipeTable f s@DiskDataSource{..} =
+        (\a -> s { _wipe_table = a } :: DiskDataSource)
+             <$> f _wipe_table
+
+instance HasComputedId DiskDataSource (TF.Attribute Text) where
+    computedId f s@DiskDataSource{..} =
+        (\a -> s { _computed_id = a } :: DiskDataSource)
+             <$> f _computed_id
 
 diskDataSource :: TF.DataSource TF.Ignition DiskDataSource
 diskDataSource =
@@ -228,10 +407,45 @@ instance TF.ToHCL FileDataSource where
         , TF.assign "uid" <$> TF.argument _uid
         ]
 
-$(TF.makeSchemaLenses
-    ''FileDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasContent FileDataSource (TF.Argument Text) where
+    content f s@FileDataSource{..} =
+        (\a -> s { _content = a } :: FileDataSource)
+             <$> f _content
+
+instance HasFilesystem FileDataSource (TF.Argument Text) where
+    filesystem f s@FileDataSource{..} =
+        (\a -> s { _filesystem = a } :: FileDataSource)
+             <$> f _filesystem
+
+instance HasGid FileDataSource (TF.Argument Text) where
+    gid f s@FileDataSource{..} =
+        (\a -> s { _gid = a } :: FileDataSource)
+             <$> f _gid
+
+instance HasMode FileDataSource (TF.Argument Text) where
+    mode f s@FileDataSource{..} =
+        (\a -> s { _mode = a } :: FileDataSource)
+             <$> f _mode
+
+instance HasPath FileDataSource (TF.Argument Text) where
+    path f s@FileDataSource{..} =
+        (\a -> s { _path = a } :: FileDataSource)
+             <$> f _path
+
+instance HasSource FileDataSource (TF.Argument Text) where
+    source f s@FileDataSource{..} =
+        (\a -> s { _source = a } :: FileDataSource)
+             <$> f _source
+
+instance HasUid FileDataSource (TF.Argument Text) where
+    uid f s@FileDataSource{..} =
+        (\a -> s { _uid = a } :: FileDataSource)
+             <$> f _uid
+
+instance HasComputedId FileDataSource (TF.Attribute Text) where
+    computedId f s@FileDataSource{..} =
+        (\a -> s { _computed_id = a } :: FileDataSource)
+             <$> f _computed_id
 
 fileDataSource :: TF.DataSource TF.Ignition FileDataSource
 fileDataSource =
@@ -270,10 +484,25 @@ instance TF.ToHCL FilesystemDataSource where
         , TF.assign "path" <$> TF.argument _path
         ]
 
-$(TF.makeSchemaLenses
-    ''FilesystemDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasMount FilesystemDataSource (TF.Argument Text) where
+    mount f s@FilesystemDataSource{..} =
+        (\a -> s { _mount = a } :: FilesystemDataSource)
+             <$> f _mount
+
+instance HasName FilesystemDataSource (TF.Argument Text) where
+    name f s@FilesystemDataSource{..} =
+        (\a -> s { _name = a } :: FilesystemDataSource)
+             <$> f _name
+
+instance HasPath FilesystemDataSource (TF.Argument Text) where
+    path f s@FilesystemDataSource{..} =
+        (\a -> s { _path = a } :: FilesystemDataSource)
+             <$> f _path
+
+instance HasComputedId FilesystemDataSource (TF.Attribute Text) where
+    computedId f s@FilesystemDataSource{..} =
+        (\a -> s { _computed_id = a } :: FilesystemDataSource)
+             <$> f _computed_id
 
 filesystemDataSource :: TF.DataSource TF.Ignition FilesystemDataSource
 filesystemDataSource =
@@ -307,10 +536,25 @@ instance TF.ToHCL GroupDataSource where
         , TF.assign "password_hash" <$> TF.argument _password_hash
         ]
 
-$(TF.makeSchemaLenses
-    ''GroupDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasGid GroupDataSource (TF.Argument Text) where
+    gid f s@GroupDataSource{..} =
+        (\a -> s { _gid = a } :: GroupDataSource)
+             <$> f _gid
+
+instance HasName GroupDataSource (TF.Argument Text) where
+    name f s@GroupDataSource{..} =
+        (\a -> s { _name = a } :: GroupDataSource)
+             <$> f _name
+
+instance HasPasswordHash GroupDataSource (TF.Argument Text) where
+    passwordHash f s@GroupDataSource{..} =
+        (\a -> s { _password_hash = a } :: GroupDataSource)
+             <$> f _password_hash
+
+instance HasComputedId GroupDataSource (TF.Attribute Text) where
+    computedId f s@GroupDataSource{..} =
+        (\a -> s { _computed_id = a } :: GroupDataSource)
+             <$> f _computed_id
 
 groupDataSource :: TF.DataSource TF.Ignition GroupDataSource
 groupDataSource =
@@ -353,10 +597,40 @@ instance TF.ToHCL LinkDataSource where
         , TF.assign "uid" <$> TF.argument _uid
         ]
 
-$(TF.makeSchemaLenses
-    ''LinkDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasFilesystem LinkDataSource (TF.Argument Text) where
+    filesystem f s@LinkDataSource{..} =
+        (\a -> s { _filesystem = a } :: LinkDataSource)
+             <$> f _filesystem
+
+instance HasGid LinkDataSource (TF.Argument Text) where
+    gid f s@LinkDataSource{..} =
+        (\a -> s { _gid = a } :: LinkDataSource)
+             <$> f _gid
+
+instance HasHard LinkDataSource (TF.Argument Text) where
+    hard f s@LinkDataSource{..} =
+        (\a -> s { _hard = a } :: LinkDataSource)
+             <$> f _hard
+
+instance HasPath LinkDataSource (TF.Argument Text) where
+    path f s@LinkDataSource{..} =
+        (\a -> s { _path = a } :: LinkDataSource)
+             <$> f _path
+
+instance HasTarget LinkDataSource (TF.Argument Text) where
+    target f s@LinkDataSource{..} =
+        (\a -> s { _target = a } :: LinkDataSource)
+             <$> f _target
+
+instance HasUid LinkDataSource (TF.Argument Text) where
+    uid f s@LinkDataSource{..} =
+        (\a -> s { _uid = a } :: LinkDataSource)
+             <$> f _uid
+
+instance HasComputedId LinkDataSource (TF.Attribute Text) where
+    computedId f s@LinkDataSource{..} =
+        (\a -> s { _computed_id = a } :: LinkDataSource)
+             <$> f _computed_id
 
 linkDataSource :: TF.DataSource TF.Ignition LinkDataSource
 linkDataSource =
@@ -390,10 +664,20 @@ instance TF.ToHCL NetworkdUnitDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''NetworkdUnitDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasContent NetworkdUnitDataSource (TF.Argument Text) where
+    content f s@NetworkdUnitDataSource{..} =
+        (\a -> s { _content = a } :: NetworkdUnitDataSource)
+             <$> f _content
+
+instance HasName NetworkdUnitDataSource (TF.Argument Text) where
+    name f s@NetworkdUnitDataSource{..} =
+        (\a -> s { _name = a } :: NetworkdUnitDataSource)
+             <$> f _name
+
+instance HasComputedId NetworkdUnitDataSource (TF.Attribute Text) where
+    computedId f s@NetworkdUnitDataSource{..} =
+        (\a -> s { _computed_id = a } :: NetworkdUnitDataSource)
+             <$> f _computed_id
 
 networkdUnitDataSource :: TF.DataSource TF.Ignition NetworkdUnitDataSource
 networkdUnitDataSource =
@@ -429,10 +713,30 @@ instance TF.ToHCL RaidDataSource where
         , TF.assign "spares" <$> TF.argument _spares
         ]
 
-$(TF.makeSchemaLenses
-    ''RaidDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasDevices RaidDataSource (TF.Argument Text) where
+    devices f s@RaidDataSource{..} =
+        (\a -> s { _devices = a } :: RaidDataSource)
+             <$> f _devices
+
+instance HasLevel RaidDataSource (TF.Argument Text) where
+    level f s@RaidDataSource{..} =
+        (\a -> s { _level = a } :: RaidDataSource)
+             <$> f _level
+
+instance HasName RaidDataSource (TF.Argument Text) where
+    name f s@RaidDataSource{..} =
+        (\a -> s { _name = a } :: RaidDataSource)
+             <$> f _name
+
+instance HasSpares RaidDataSource (TF.Argument Text) where
+    spares f s@RaidDataSource{..} =
+        (\a -> s { _spares = a } :: RaidDataSource)
+             <$> f _spares
+
+instance HasComputedId RaidDataSource (TF.Attribute Text) where
+    computedId f s@RaidDataSource{..} =
+        (\a -> s { _computed_id = a } :: RaidDataSource)
+             <$> f _computed_id
 
 raidDataSource :: TF.DataSource TF.Ignition RaidDataSource
 raidDataSource =
@@ -473,10 +777,35 @@ instance TF.ToHCL SystemdUnitDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''SystemdUnitDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasContent SystemdUnitDataSource (TF.Argument Text) where
+    content f s@SystemdUnitDataSource{..} =
+        (\a -> s { _content = a } :: SystemdUnitDataSource)
+             <$> f _content
+
+instance HasDropin SystemdUnitDataSource (TF.Argument Text) where
+    dropin f s@SystemdUnitDataSource{..} =
+        (\a -> s { _dropin = a } :: SystemdUnitDataSource)
+             <$> f _dropin
+
+instance HasEnabled SystemdUnitDataSource (TF.Argument Text) where
+    enabled f s@SystemdUnitDataSource{..} =
+        (\a -> s { _enabled = a } :: SystemdUnitDataSource)
+             <$> f _enabled
+
+instance HasMask SystemdUnitDataSource (TF.Argument Text) where
+    mask f s@SystemdUnitDataSource{..} =
+        (\a -> s { _mask = a } :: SystemdUnitDataSource)
+             <$> f _mask
+
+instance HasName SystemdUnitDataSource (TF.Argument Text) where
+    name f s@SystemdUnitDataSource{..} =
+        (\a -> s { _name = a } :: SystemdUnitDataSource)
+             <$> f _name
+
+instance HasComputedId SystemdUnitDataSource (TF.Attribute Text) where
+    computedId f s@SystemdUnitDataSource{..} =
+        (\a -> s { _computed_id = a } :: SystemdUnitDataSource)
+             <$> f _computed_id
 
 systemdUnitDataSource :: TF.DataSource TF.Ignition SystemdUnitDataSource
 systemdUnitDataSource =
@@ -542,10 +871,75 @@ instance TF.ToHCL UserDataSource where
         , TF.assign "uid" <$> TF.argument _uid
         ]
 
-$(TF.makeSchemaLenses
-    ''UserDataSource
-    ''TF.Ignition
-    ''TF.DataSource)
+instance HasGecos UserDataSource (TF.Argument Text) where
+    gecos f s@UserDataSource{..} =
+        (\a -> s { _gecos = a } :: UserDataSource)
+             <$> f _gecos
+
+instance HasGroups UserDataSource (TF.Argument Text) where
+    groups f s@UserDataSource{..} =
+        (\a -> s { _groups = a } :: UserDataSource)
+             <$> f _groups
+
+instance HasHomeDir UserDataSource (TF.Argument Text) where
+    homeDir f s@UserDataSource{..} =
+        (\a -> s { _home_dir = a } :: UserDataSource)
+             <$> f _home_dir
+
+instance HasName UserDataSource (TF.Argument Text) where
+    name f s@UserDataSource{..} =
+        (\a -> s { _name = a } :: UserDataSource)
+             <$> f _name
+
+instance HasNoCreateHome UserDataSource (TF.Argument Text) where
+    noCreateHome f s@UserDataSource{..} =
+        (\a -> s { _no_create_home = a } :: UserDataSource)
+             <$> f _no_create_home
+
+instance HasNoLogInit UserDataSource (TF.Argument Text) where
+    noLogInit f s@UserDataSource{..} =
+        (\a -> s { _no_log_init = a } :: UserDataSource)
+             <$> f _no_log_init
+
+instance HasNoUserGroup UserDataSource (TF.Argument Text) where
+    noUserGroup f s@UserDataSource{..} =
+        (\a -> s { _no_user_group = a } :: UserDataSource)
+             <$> f _no_user_group
+
+instance HasPasswordHash UserDataSource (TF.Argument Text) where
+    passwordHash f s@UserDataSource{..} =
+        (\a -> s { _password_hash = a } :: UserDataSource)
+             <$> f _password_hash
+
+instance HasPrimaryGroup UserDataSource (TF.Argument Text) where
+    primaryGroup f s@UserDataSource{..} =
+        (\a -> s { _primary_group = a } :: UserDataSource)
+             <$> f _primary_group
+
+instance HasShell UserDataSource (TF.Argument Text) where
+    shell f s@UserDataSource{..} =
+        (\a -> s { _shell = a } :: UserDataSource)
+             <$> f _shell
+
+instance HasSshAuthorizedKeys UserDataSource (TF.Argument Text) where
+    sshAuthorizedKeys f s@UserDataSource{..} =
+        (\a -> s { _ssh_authorized_keys = a } :: UserDataSource)
+             <$> f _ssh_authorized_keys
+
+instance HasSystem UserDataSource (TF.Argument Text) where
+    system f s@UserDataSource{..} =
+        (\a -> s { _system = a } :: UserDataSource)
+             <$> f _system
+
+instance HasUid UserDataSource (TF.Argument Text) where
+    uid f s@UserDataSource{..} =
+        (\a -> s { _uid = a } :: UserDataSource)
+             <$> f _uid
+
+instance HasComputedId UserDataSource (TF.Attribute Text) where
+    computedId f s@UserDataSource{..} =
+        (\a -> s { _computed_id = a } :: UserDataSource)
+             <$> f _computed_id
 
 userDataSource :: TF.DataSource TF.Ignition UserDataSource
 userDataSource =
@@ -566,3 +960,267 @@ userDataSource =
             , _uid = TF.Nil
             , _computed_id = TF.Compute "id"
             }
+
+class HasAppend s a | s -> a where
+    append :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAppend s a => HasAppend (TF.DataSource p s) a where
+    append = TF.configuration . append
+
+class HasArrays s a | s -> a where
+    arrays :: Functor f => (a -> f a) -> s -> f s
+
+instance HasArrays s a => HasArrays (TF.DataSource p s) a where
+    arrays = TF.configuration . arrays
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedRendered s a | s -> a where
+    computedRendered :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRendered s a => HasComputedRendered (TF.DataSource p s) a where
+    computedRendered = TF.configuration . computedRendered
+
+class HasContent s a | s -> a where
+    content :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContent s a => HasContent (TF.DataSource p s) a where
+    content = TF.configuration . content
+
+class HasDevice s a | s -> a where
+    device :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDevice s a => HasDevice (TF.DataSource p s) a where
+    device = TF.configuration . device
+
+class HasDevices s a | s -> a where
+    devices :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDevices s a => HasDevices (TF.DataSource p s) a where
+    devices = TF.configuration . devices
+
+class HasDirectories s a | s -> a where
+    directories :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDirectories s a => HasDirectories (TF.DataSource p s) a where
+    directories = TF.configuration . directories
+
+class HasDisks s a | s -> a where
+    disks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisks s a => HasDisks (TF.DataSource p s) a where
+    disks = TF.configuration . disks
+
+class HasDropin s a | s -> a where
+    dropin :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDropin s a => HasDropin (TF.DataSource p s) a where
+    dropin = TF.configuration . dropin
+
+class HasEnabled s a | s -> a where
+    enabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnabled s a => HasEnabled (TF.DataSource p s) a where
+    enabled = TF.configuration . enabled
+
+class HasFiles s a | s -> a where
+    files :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFiles s a => HasFiles (TF.DataSource p s) a where
+    files = TF.configuration . files
+
+class HasFilesystem s a | s -> a where
+    filesystem :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFilesystem s a => HasFilesystem (TF.DataSource p s) a where
+    filesystem = TF.configuration . filesystem
+
+class HasFilesystems s a | s -> a where
+    filesystems :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFilesystems s a => HasFilesystems (TF.DataSource p s) a where
+    filesystems = TF.configuration . filesystems
+
+class HasGecos s a | s -> a where
+    gecos :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGecos s a => HasGecos (TF.DataSource p s) a where
+    gecos = TF.configuration . gecos
+
+class HasGid s a | s -> a where
+    gid :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGid s a => HasGid (TF.DataSource p s) a where
+    gid = TF.configuration . gid
+
+class HasGroups s a | s -> a where
+    groups :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGroups s a => HasGroups (TF.DataSource p s) a where
+    groups = TF.configuration . groups
+
+class HasHard s a | s -> a where
+    hard :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHard s a => HasHard (TF.DataSource p s) a where
+    hard = TF.configuration . hard
+
+class HasHomeDir s a | s -> a where
+    homeDir :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHomeDir s a => HasHomeDir (TF.DataSource p s) a where
+    homeDir = TF.configuration . homeDir
+
+class HasLevel s a | s -> a where
+    level :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLevel s a => HasLevel (TF.DataSource p s) a where
+    level = TF.configuration . level
+
+class HasLinks s a | s -> a where
+    links :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLinks s a => HasLinks (TF.DataSource p s) a where
+    links = TF.configuration . links
+
+class HasMask s a | s -> a where
+    mask :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMask s a => HasMask (TF.DataSource p s) a where
+    mask = TF.configuration . mask
+
+class HasMode s a | s -> a where
+    mode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMode s a => HasMode (TF.DataSource p s) a where
+    mode = TF.configuration . mode
+
+class HasMount s a | s -> a where
+    mount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMount s a => HasMount (TF.DataSource p s) a where
+    mount = TF.configuration . mount
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name
+
+class HasNetworkd s a | s -> a where
+    networkd :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNetworkd s a => HasNetworkd (TF.DataSource p s) a where
+    networkd = TF.configuration . networkd
+
+class HasNoCreateHome s a | s -> a where
+    noCreateHome :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNoCreateHome s a => HasNoCreateHome (TF.DataSource p s) a where
+    noCreateHome = TF.configuration . noCreateHome
+
+class HasNoLogInit s a | s -> a where
+    noLogInit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNoLogInit s a => HasNoLogInit (TF.DataSource p s) a where
+    noLogInit = TF.configuration . noLogInit
+
+class HasNoUserGroup s a | s -> a where
+    noUserGroup :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNoUserGroup s a => HasNoUserGroup (TF.DataSource p s) a where
+    noUserGroup = TF.configuration . noUserGroup
+
+class HasPartition s a | s -> a where
+    partition :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPartition s a => HasPartition (TF.DataSource p s) a where
+    partition = TF.configuration . partition
+
+class HasPasswordHash s a | s -> a where
+    passwordHash :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPasswordHash s a => HasPasswordHash (TF.DataSource p s) a where
+    passwordHash = TF.configuration . passwordHash
+
+class HasPath s a | s -> a where
+    path :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPath s a => HasPath (TF.DataSource p s) a where
+    path = TF.configuration . path
+
+class HasPrimaryGroup s a | s -> a where
+    primaryGroup :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPrimaryGroup s a => HasPrimaryGroup (TF.DataSource p s) a where
+    primaryGroup = TF.configuration . primaryGroup
+
+class HasReplace s a | s -> a where
+    replace :: Functor f => (a -> f a) -> s -> f s
+
+instance HasReplace s a => HasReplace (TF.DataSource p s) a where
+    replace = TF.configuration . replace
+
+class HasShell s a | s -> a where
+    shell :: Functor f => (a -> f a) -> s -> f s
+
+instance HasShell s a => HasShell (TF.DataSource p s) a where
+    shell = TF.configuration . shell
+
+class HasSource s a | s -> a where
+    source :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSource s a => HasSource (TF.DataSource p s) a where
+    source = TF.configuration . source
+
+class HasSpares s a | s -> a where
+    spares :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSpares s a => HasSpares (TF.DataSource p s) a where
+    spares = TF.configuration . spares
+
+class HasSshAuthorizedKeys s a | s -> a where
+    sshAuthorizedKeys :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSshAuthorizedKeys s a => HasSshAuthorizedKeys (TF.DataSource p s) a where
+    sshAuthorizedKeys = TF.configuration . sshAuthorizedKeys
+
+class HasSystem s a | s -> a where
+    system :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSystem s a => HasSystem (TF.DataSource p s) a where
+    system = TF.configuration . system
+
+class HasSystemd s a | s -> a where
+    systemd :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSystemd s a => HasSystemd (TF.DataSource p s) a where
+    systemd = TF.configuration . systemd
+
+class HasTarget s a | s -> a where
+    target :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTarget s a => HasTarget (TF.DataSource p s) a where
+    target = TF.configuration . target
+
+class HasUid s a | s -> a where
+    uid :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUid s a => HasUid (TF.DataSource p s) a where
+    uid = TF.configuration . uid
+
+class HasUsers s a | s -> a where
+    users :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUsers s a => HasUsers (TF.DataSource p s) a where
+    users = TF.configuration . users
+
+class HasWipeTable s a | s -> a where
+    wipeTable :: Functor f => (a -> f a) -> s -> f s
+
+instance HasWipeTable s a => HasWipeTable (TF.DataSource p s) a where
+    wipeTable = TF.configuration . wipeTable

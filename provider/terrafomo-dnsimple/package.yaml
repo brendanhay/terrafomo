@@ -8,6 +8,7 @@ name: terrafomo-dnsimple
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

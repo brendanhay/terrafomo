@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,42 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.PagerDuty.DataSource where
+module Terrafomo.PagerDuty.DataSource
+    (
+    -- * Types
+      EscalationPolicyDataSource (..)
+    , escalationPolicyDataSource
 
-import Data.Functor ((<$>))
+    , ScheduleDataSource (..)
+    , scheduleDataSource
+
+    , UserDataSource (..)
+    , userDataSource
+
+    , VendorDataSource (..)
+    , vendorDataSource
+
+    -- * Overloaded Fields
+    , HasComputedName (..)
+    , HasComputedType' (..)
+    , HasEmail (..)
+    , HasName (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.PagerDuty.Provider as TF
 import qualified Terrafomo.PagerDuty.Types    as TF
 import qualified Terrafomo.Syntax.DataSource  as TF
 import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.Meta        as TF (configuration)
 import qualified Terrafomo.Syntax.Resource    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
-import qualified Terrafomo.TH                 as TF
 
 {- | The @pagerduty_escalation_policy@ PagerDuty datasource.
 
@@ -56,10 +74,15 @@ instance TF.ToHCL EscalationPolicyDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''EscalationPolicyDataSource
-    ''TF.PagerDuty
-    ''TF.DataSource)
+instance HasName EscalationPolicyDataSource (TF.Argument Text) where
+    name f s@EscalationPolicyDataSource{..} =
+        (\a -> s { _name = a } :: EscalationPolicyDataSource)
+             <$> f _name
+
+instance HasComputedName EscalationPolicyDataSource (TF.Attribute Text) where
+    computedName f s@EscalationPolicyDataSource{..} =
+        (\a -> s { _computed_name = a } :: EscalationPolicyDataSource)
+             <$> f _computed_name
 
 escalationPolicyDataSource :: TF.DataSource TF.PagerDuty EscalationPolicyDataSource
 escalationPolicyDataSource =
@@ -87,10 +110,15 @@ instance TF.ToHCL ScheduleDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''ScheduleDataSource
-    ''TF.PagerDuty
-    ''TF.DataSource)
+instance HasName ScheduleDataSource (TF.Argument Text) where
+    name f s@ScheduleDataSource{..} =
+        (\a -> s { _name = a } :: ScheduleDataSource)
+             <$> f _name
+
+instance HasComputedName ScheduleDataSource (TF.Attribute Text) where
+    computedName f s@ScheduleDataSource{..} =
+        (\a -> s { _computed_name = a } :: ScheduleDataSource)
+             <$> f _computed_name
 
 scheduleDataSource :: TF.DataSource TF.PagerDuty ScheduleDataSource
 scheduleDataSource =
@@ -118,10 +146,15 @@ instance TF.ToHCL UserDataSource where
         [ TF.assign "email" <$> TF.argument _email
         ]
 
-$(TF.makeSchemaLenses
-    ''UserDataSource
-    ''TF.PagerDuty
-    ''TF.DataSource)
+instance HasEmail UserDataSource (TF.Argument Text) where
+    email f s@UserDataSource{..} =
+        (\a -> s { _email = a } :: UserDataSource)
+             <$> f _email
+
+instance HasComputedName UserDataSource (TF.Attribute Text) where
+    computedName f s@UserDataSource{..} =
+        (\a -> s { _computed_name = a } :: UserDataSource)
+             <$> f _computed_name
 
 userDataSource :: TF.DataSource TF.PagerDuty UserDataSource
 userDataSource =
@@ -152,10 +185,20 @@ instance TF.ToHCL VendorDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''VendorDataSource
-    ''TF.PagerDuty
-    ''TF.DataSource)
+instance HasName VendorDataSource (TF.Argument Text) where
+    name f s@VendorDataSource{..} =
+        (\a -> s { _name = a } :: VendorDataSource)
+             <$> f _name
+
+instance HasComputedName VendorDataSource (TF.Attribute Text) where
+    computedName f s@VendorDataSource{..} =
+        (\a -> s { _computed_name = a } :: VendorDataSource)
+             <$> f _computed_name
+
+instance HasComputedType' VendorDataSource (TF.Attribute Text) where
+    computedType' f s@VendorDataSource{..} =
+        (\a -> s { _computed_type' = a } :: VendorDataSource)
+             <$> f _computed_type'
 
 vendorDataSource :: TF.DataSource TF.PagerDuty VendorDataSource
 vendorDataSource =
@@ -165,3 +208,27 @@ vendorDataSource =
             , _computed_name = TF.Compute "name"
             , _computed_type' = TF.Compute "type"
             }
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasEmail s a | s -> a where
+    email :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEmail s a => HasEmail (TF.DataSource p s) a where
+    email = TF.configuration . email
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name

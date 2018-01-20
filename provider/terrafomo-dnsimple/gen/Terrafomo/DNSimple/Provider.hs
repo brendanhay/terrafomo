@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSimple.Provider
-    ( DNSimple    (..)
-    , HasDNSimple (..)
+    (
+    -- * Provider Datatype
+      DNSimple (..)
+
+    -- * Lenses
+    , account
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.DNSimple.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | DNSimple Terraform provider.
 
@@ -79,4 +82,20 @@ instance Monoid DNSimple where
 instance TF.IsProvider DNSimple where
     type ProviderName DNSimple = "dnsimple"
 
-$(TF.makeProviderLenses ''DNSimple)
+account
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> DNSimple
+    -> f DNSimple
+account f s =
+        (\a -> s { _account = a } :: DNSimple)
+             <$> f (_account s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> DNSimple
+    -> f DNSimple
+token f s =
+        (\a -> s { _token = a } :: DNSimple)
+             <$> f (_token s)

@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AliCloud.Provider
-    ( AliCloud    (..)
-    , HasAliCloud (..)
+    (
+    -- * Provider Datatype
+      AliCloud (..)
+
+    -- * Lenses
+    , accessKey
+    , region
+    , secretKey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.AliCloud.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | AliCloud Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid AliCloud where
 instance TF.IsProvider AliCloud where
     type ProviderName AliCloud = "alicloud"
 
-$(TF.makeProviderLenses ''AliCloud)
+accessKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AliCloud
+    -> f AliCloud
+accessKey f s =
+        (\a -> s { _access_key = a } :: AliCloud)
+             <$> f (_access_key s)
+
+region
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AliCloud
+    -> f AliCloud
+region f s =
+        (\a -> s { _region = a } :: AliCloud)
+             <$> f (_region s)
+
+secretKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AliCloud
+    -> f AliCloud
+secretKey f s =
+        (\a -> s { _secret_key = a } :: AliCloud)
+             <$> f (_secret_key s)

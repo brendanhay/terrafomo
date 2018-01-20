@@ -44,7 +44,7 @@ module Terrafomo
     -- * Providers
     , IsProvider      (..)
     , Alias
-    , defaultProvider
+    , withProvider
 
     -- * Meta Parameters
     , HasMeta         (..)

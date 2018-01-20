@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PowerDNS.Provider
-    ( PowerDNS    (..)
-    , HasPowerDNS (..)
+    (
+    -- * Provider Datatype
+      PowerDNS (..)
+
+    -- * Lenses
+    , apiKey
+    , serverUrl
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.PowerDNS.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | PowerDNS Terraform provider.
 
@@ -82,4 +85,20 @@ instance Monoid PowerDNS where
 instance TF.IsProvider PowerDNS where
     type ProviderName PowerDNS = "powerdns"
 
-$(TF.makeProviderLenses ''PowerDNS)
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PowerDNS
+    -> f PowerDNS
+apiKey f s =
+        (\a -> s { _api_key = a } :: PowerDNS)
+             <$> f (_api_key s)
+
+serverUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PowerDNS
+    -> f PowerDNS
+serverUrl f s =
+        (\a -> s { _server_url = a } :: PowerDNS)
+             <$> f (_server_url s)

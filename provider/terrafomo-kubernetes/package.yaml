@@ -8,6 +8,7 @@ name: terrafomo-kubernetes
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

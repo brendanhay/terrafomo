@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,16 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Spotinst.Provider
-    ( Spotinst    (..)
-    , HasSpotinst (..)
+    (
+    -- * Provider Datatype
+      Spotinst (..)
+
+    -- * Lenses
+    , clientId
+    , clientSecret
+    , email
+    , password
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +41,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Spotinst.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Spotinst Terraform provider.
 
@@ -94,4 +100,47 @@ instance Monoid Spotinst where
 instance TF.IsProvider Spotinst where
     type ProviderName Spotinst = "spotinst"
 
-$(TF.makeProviderLenses ''Spotinst)
+clientId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Spotinst
+    -> f Spotinst
+clientId f s =
+        (\a -> s { _client_id = a } :: Spotinst)
+             <$> f (_client_id s)
+
+clientSecret
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Spotinst
+    -> f Spotinst
+clientSecret f s =
+        (\a -> s { _client_secret = a } :: Spotinst)
+             <$> f (_client_secret s)
+
+email
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Spotinst
+    -> f Spotinst
+email f s =
+        (\a -> s { _email = a } :: Spotinst)
+             <$> f (_email s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Spotinst
+    -> f Spotinst
+password f s =
+        (\a -> s { _password = a } :: Spotinst)
+             <$> f (_password s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Spotinst
+    -> f Spotinst
+token f s =
+        (\a -> s { _token = a } :: Spotinst)
+             <$> f (_token s)

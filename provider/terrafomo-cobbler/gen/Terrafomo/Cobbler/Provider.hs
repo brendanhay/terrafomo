@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cobbler.Provider
-    ( Cobbler    (..)
-    , HasCobbler (..)
+    (
+    -- * Provider Datatype
+      Cobbler (..)
+
+    -- * Lenses
+    , password
+    , url
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Cobbler.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Cobbler Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid Cobbler where
 instance TF.IsProvider Cobbler where
     type ProviderName Cobbler = "cobbler"
 
-$(TF.makeProviderLenses ''Cobbler)
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Cobbler
+    -> f Cobbler
+password f s =
+        (\a -> s { _password = a } :: Cobbler)
+             <$> f (_password s)
+
+url
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Cobbler
+    -> f Cobbler
+url f s =
+        (\a -> s { _url = a } :: Cobbler)
+             <$> f (_url s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Cobbler
+    -> f Cobbler
+username f s =
+        (\a -> s { _username = a } :: Cobbler)
+             <$> f (_username s)

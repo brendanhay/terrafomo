@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Logentries.Provider
-    ( Logentries    (..)
-    , HasLogentries (..)
+    (
+    -- * Provider Datatype
+      Logentries (..)
+
+    -- * Lenses
+    , accountKey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +37,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Logentries.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.Meta      as TF
 import qualified Terrafomo.Syntax.Name      as TF
+import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | Logentries Terraform provider.
 
@@ -74,4 +76,11 @@ instance Monoid Logentries where
 instance TF.IsProvider Logentries where
     type ProviderName Logentries = "logentries"
 
-$(TF.makeProviderLenses ''Logentries)
+accountKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Logentries
+    -> f Logentries
+accountKey f s =
+        (\a -> s { _account_key = a } :: Logentries)
+             <$> f (_account_key s)

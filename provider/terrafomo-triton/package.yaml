@@ -8,6 +8,7 @@ name: terrafomo-triton
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

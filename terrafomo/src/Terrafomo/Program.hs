@@ -1,9 +1,9 @@
 {-# LANGUAGE LambdaCase #-}
 
-module Terrafomo.Program where
-    -- ( runIO
-    -- , runCommandPure
-    -- ) where
+module Terrafomo.Program
+    ( run
+    , command
+    ) where
 
 import Control.Monad              ((>=>))
 import Control.Monad.Trans        (lift)
@@ -29,10 +29,10 @@ import qualified System.Process      as Proc
 run :: TerraformT IO () -> IO ()
 run m =
     Options.customExecParser (Options.prefs Options.showHelpOnError) info
-        >>= flip runCommand m
+        >>= flip command m
 
-runCommand :: Command -> TerraformT IO a -> IO ()
-runCommand cmd m =
+command :: Command -> TerraformT IO a -> IO ()
+command cmd m =
     renderTerraformT m >>= \case
         Left  err -> do
             IO.hPutStrLn IO.stderr (show err)
@@ -40,7 +40,7 @@ runCommand cmd m =
         Right txt -> do
             case cmd of
                 Render  -> do
-                    LText.hPutStrLn IO.stdout txt
+                    LText.hPutStr IO.stdout txt
                     Exit.exitSuccess
                 Exec path xs -> do
                     Dir.createDirectoryIfMissing True path

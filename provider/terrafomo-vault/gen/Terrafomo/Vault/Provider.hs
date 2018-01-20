@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Vault.Provider
-    ( Vault    (..)
-    , HasVault (..)
+    (
+    -- * Provider Datatype
+      Vault (..)
+
+    -- * Lenses
     ) where
 
 import Data.Function      (on)
@@ -33,10 +35,9 @@ import Data.Text          (Text)
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 import qualified Terrafomo.Vault.Types     as TF
 
 {- | Vault Terraform provider.
@@ -73,5 +74,3 @@ instance Monoid Vault where
 
 instance TF.IsProvider Vault where
     type ProviderName Vault = "vault"
-
-$(TF.makeProviderLenses ''Vault)

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,148 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Google.DataSource where
+module Terrafomo.Google.DataSource
+    (
+    -- * Types
+      ActiveFolderDataSource (..)
+    , activeFolderDataSource
 
-import Data.Functor ((<$>))
+    , BillingAccountDataSource (..)
+    , billingAccountDataSource
+
+    , ClientConfigDataSource (..)
+    , clientConfigDataSource
+
+    , ComputeAddressDataSource (..)
+    , computeAddressDataSource
+
+    , ComputeGlobalAddressDataSource (..)
+    , computeGlobalAddressDataSource
+
+    , ComputeImageDataSource (..)
+    , computeImageDataSource
+
+    , ComputeInstanceGroupDataSource (..)
+    , computeInstanceGroupDataSource
+
+    , ComputeLbIpRangesDataSource (..)
+    , computeLbIpRangesDataSource
+
+    , ComputeNetworkDataSource (..)
+    , computeNetworkDataSource
+
+    , ComputeRegionInstanceGroupDataSource (..)
+    , computeRegionInstanceGroupDataSource
+
+    , ComputeSubnetworkDataSource (..)
+    , computeSubnetworkDataSource
+
+    , ComputeZonesDataSource (..)
+    , computeZonesDataSource
+
+    , ContainerClusterDataSource (..)
+    , containerClusterDataSource
+
+    , ContainerEngineVersionsDataSource (..)
+    , containerEngineVersionsDataSource
+
+    , DnsManagedZoneDataSource (..)
+    , dnsManagedZoneDataSource
+
+    , IamPolicyDataSource (..)
+    , iamPolicyDataSource
+
+    , KmsSecretDataSource (..)
+    , kmsSecretDataSource
+
+    , OrganizationDataSource (..)
+    , organizationDataSource
+
+    , StorageObjectSignedUrlDataSource (..)
+    , storageObjectSignedUrlDataSource
+
+    -- * Overloaded Fields
+    , HasBillingAccount (..)
+    , HasBinding (..)
+    , HasBucket (..)
+    , HasCiphertext (..)
+    , HasComputedAddress (..)
+    , HasComputedArchiveSizeBytes (..)
+    , HasComputedCreateTime (..)
+    , HasComputedCreationTimestamp (..)
+    , HasComputedDescription (..)
+    , HasComputedDirectoryCustomerId (..)
+    , HasComputedDiskSizeGb (..)
+    , HasComputedDnsName (..)
+    , HasComputedFamily' (..)
+    , HasComputedGatewayAddress (..)
+    , HasComputedGatewayIpv4 (..)
+    , HasComputedId (..)
+    , HasComputedImageEncryptionKeySha256 (..)
+    , HasComputedImageId (..)
+    , HasComputedInstances (..)
+    , HasComputedIpCidrRange (..)
+    , HasComputedLabelFingerprint (..)
+    , HasComputedLabels (..)
+    , HasComputedLatestMasterVersion (..)
+    , HasComputedLatestNodeVersion (..)
+    , HasComputedLicenses (..)
+    , HasComputedLifecycleState (..)
+    , HasComputedName (..)
+    , HasComputedNameServers (..)
+    , HasComputedNamedPort (..)
+    , HasComputedNames (..)
+    , HasComputedNetwork (..)
+    , HasComputedPlaintext (..)
+    , HasComputedPolicyData (..)
+    , HasComputedPrivateIpGoogleAccess (..)
+    , HasComputedProjectIds (..)
+    , HasComputedSecondaryIpRange (..)
+    , HasComputedSelfLink (..)
+    , HasComputedSignedUrl (..)
+    , HasComputedSize (..)
+    , HasComputedSourceDisk (..)
+    , HasComputedSourceDiskEncryptionKeySha256 (..)
+    , HasComputedSourceDiskId (..)
+    , HasComputedSourceImageId (..)
+    , HasComputedStatus (..)
+    , HasComputedSubnetworksSelfLinks (..)
+    , HasComputedValidMasterVersions (..)
+    , HasComputedValidNodeVersions (..)
+    , HasCredentials (..)
+    , HasCryptoKey (..)
+    , HasDisplayName (..)
+    , HasDomain (..)
+    , HasDuration (..)
+    , HasHttpMethod (..)
+    , HasHttpSslTcpInternal (..)
+    , HasName (..)
+    , HasNetwork (..)
+    , HasOpen (..)
+    , HasOrganization (..)
+    , HasParent (..)
+    , HasPath (..)
+    , HasProject (..)
+    , HasRegion (..)
+    , HasSelfLink (..)
+    , HasStatus (..)
+    , HasZone (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Google.Provider   as TF
 import qualified Terrafomo.Google.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @google_active_folder@ Google datasource.
 
@@ -57,10 +181,20 @@ instance TF.ToHCL ActiveFolderDataSource where
         , TF.assign "parent" <$> TF.argument _parent
         ]
 
-$(TF.makeSchemaLenses
-    ''ActiveFolderDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasDisplayName ActiveFolderDataSource (TF.Argument Text) where
+    displayName f s@ActiveFolderDataSource{..} =
+        (\a -> s { _display_name = a } :: ActiveFolderDataSource)
+             <$> f _display_name
+
+instance HasParent ActiveFolderDataSource (TF.Argument Text) where
+    parent f s@ActiveFolderDataSource{..} =
+        (\a -> s { _parent = a } :: ActiveFolderDataSource)
+             <$> f _parent
+
+instance HasComputedName ActiveFolderDataSource (TF.Attribute Text) where
+    computedName f s@ActiveFolderDataSource{..} =
+        (\a -> s { _computed_name = a } :: ActiveFolderDataSource)
+             <$> f _computed_name
 
 activeFolderDataSource :: TF.DataSource TF.Google ActiveFolderDataSource
 activeFolderDataSource =
@@ -69,6 +203,74 @@ activeFolderDataSource =
             _display_name = TF.Nil
             , _parent = TF.Nil
             , _computed_name = TF.Compute "name"
+            }
+
+{- | The @google_billing_account@ Google datasource.
+
+Use this data source to get information about a Google Billing Account.
+-}
+data BillingAccountDataSource = BillingAccountDataSource {
+      _billing_account      :: !(TF.Argument Text)
+    {- ^ (Optional) - The name of the billing account in the form @{billing_account_id}@ or @billingAccounts/{billing_account_id}@ . -}
+    , _display_name         :: !(TF.Argument Text)
+    {- ^ (Optional) - The display name of the billing account. -}
+    , _open                 :: !(TF.Argument Text)
+    {- ^ (Optional) - @true@ if the billing account is open, @false@ if the billing account is closed. -}
+    , _computed_id          :: !(TF.Attribute Text)
+    {- ^ - The billing account ID. -}
+    , _computed_name        :: !(TF.Attribute Text)
+    {- ^ - The resource name of the billing account in the form @billingAccounts/{billing_account_id}@ . -}
+    , _computed_project_ids :: !(TF.Attribute Text)
+    {- ^ - The IDs of any projects associated with the billing account. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL BillingAccountDataSource where
+    toHCL BillingAccountDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "billing_account" <$> TF.argument _billing_account
+        , TF.assign "display_name" <$> TF.argument _display_name
+        , TF.assign "open" <$> TF.argument _open
+        ]
+
+instance HasBillingAccount BillingAccountDataSource (TF.Argument Text) where
+    billingAccount f s@BillingAccountDataSource{..} =
+        (\a -> s { _billing_account = a } :: BillingAccountDataSource)
+             <$> f _billing_account
+
+instance HasDisplayName BillingAccountDataSource (TF.Argument Text) where
+    displayName f s@BillingAccountDataSource{..} =
+        (\a -> s { _display_name = a } :: BillingAccountDataSource)
+             <$> f _display_name
+
+instance HasOpen BillingAccountDataSource (TF.Argument Text) where
+    open f s@BillingAccountDataSource{..} =
+        (\a -> s { _open = a } :: BillingAccountDataSource)
+             <$> f _open
+
+instance HasComputedId BillingAccountDataSource (TF.Attribute Text) where
+    computedId f s@BillingAccountDataSource{..} =
+        (\a -> s { _computed_id = a } :: BillingAccountDataSource)
+             <$> f _computed_id
+
+instance HasComputedName BillingAccountDataSource (TF.Attribute Text) where
+    computedName f s@BillingAccountDataSource{..} =
+        (\a -> s { _computed_name = a } :: BillingAccountDataSource)
+             <$> f _computed_name
+
+instance HasComputedProjectIds BillingAccountDataSource (TF.Attribute Text) where
+    computedProjectIds f s@BillingAccountDataSource{..} =
+        (\a -> s { _computed_project_ids = a } :: BillingAccountDataSource)
+             <$> f _computed_project_ids
+
+billingAccountDataSource :: TF.DataSource TF.Google BillingAccountDataSource
+billingAccountDataSource =
+    TF.newDataSource "google_billing_account" $
+        BillingAccountDataSource {
+            _billing_account = TF.Nil
+            , _display_name = TF.Nil
+            , _open = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_name = TF.Compute "name"
+            , _computed_project_ids = TF.Compute "project_ids"
             }
 
 {- | The @google_client_config@ Google datasource.
@@ -89,10 +291,15 @@ instance TF.ToHCL ClientConfigDataSource where
         , TF.assign "region" <$> TF.argument _region
         ]
 
-$(TF.makeSchemaLenses
-    ''ClientConfigDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasProject ClientConfigDataSource (TF.Argument Text) where
+    project f s@ClientConfigDataSource{..} =
+        (\a -> s { _project = a } :: ClientConfigDataSource)
+             <$> f _project
+
+instance HasRegion ClientConfigDataSource (TF.Argument Text) where
+    region f s@ClientConfigDataSource{..} =
+        (\a -> s { _region = a } :: ClientConfigDataSource)
+             <$> f _region
 
 clientConfigDataSource :: TF.DataSource TF.Google ClientConfigDataSource
 clientConfigDataSource =
@@ -131,10 +338,35 @@ instance TF.ToHCL ComputeAddressDataSource where
         , TF.assign "region" <$> TF.argument _region
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeAddressDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeAddressDataSource (TF.Argument Text) where
+    name f s@ComputeAddressDataSource{..} =
+        (\a -> s { _name = a } :: ComputeAddressDataSource)
+             <$> f _name
+
+instance HasProject ComputeAddressDataSource (TF.Argument Text) where
+    project f s@ComputeAddressDataSource{..} =
+        (\a -> s { _project = a } :: ComputeAddressDataSource)
+             <$> f _project
+
+instance HasRegion ComputeAddressDataSource (TF.Argument Text) where
+    region f s@ComputeAddressDataSource{..} =
+        (\a -> s { _region = a } :: ComputeAddressDataSource)
+             <$> f _region
+
+instance HasComputedAddress ComputeAddressDataSource (TF.Attribute Text) where
+    computedAddress f s@ComputeAddressDataSource{..} =
+        (\a -> s { _computed_address = a } :: ComputeAddressDataSource)
+             <$> f _computed_address
+
+instance HasComputedSelfLink ComputeAddressDataSource (TF.Attribute Text) where
+    computedSelfLink f s@ComputeAddressDataSource{..} =
+        (\a -> s { _computed_self_link = a } :: ComputeAddressDataSource)
+             <$> f _computed_self_link
+
+instance HasComputedStatus ComputeAddressDataSource (TF.Attribute Text) where
+    computedStatus f s@ComputeAddressDataSource{..} =
+        (\a -> s { _computed_status = a } :: ComputeAddressDataSource)
+             <$> f _computed_status
 
 computeAddressDataSource :: TF.DataSource TF.Google ComputeAddressDataSource
 computeAddressDataSource =
@@ -175,10 +407,30 @@ instance TF.ToHCL ComputeGlobalAddressDataSource where
         , TF.assign "project" <$> TF.argument _project
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeGlobalAddressDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeGlobalAddressDataSource (TF.Argument Text) where
+    name f s@ComputeGlobalAddressDataSource{..} =
+        (\a -> s { _name = a } :: ComputeGlobalAddressDataSource)
+             <$> f _name
+
+instance HasProject ComputeGlobalAddressDataSource (TF.Argument Text) where
+    project f s@ComputeGlobalAddressDataSource{..} =
+        (\a -> s { _project = a } :: ComputeGlobalAddressDataSource)
+             <$> f _project
+
+instance HasComputedAddress ComputeGlobalAddressDataSource (TF.Attribute Text) where
+    computedAddress f s@ComputeGlobalAddressDataSource{..} =
+        (\a -> s { _computed_address = a } :: ComputeGlobalAddressDataSource)
+             <$> f _computed_address
+
+instance HasComputedSelfLink ComputeGlobalAddressDataSource (TF.Attribute Text) where
+    computedSelfLink f s@ComputeGlobalAddressDataSource{..} =
+        (\a -> s { _computed_self_link = a } :: ComputeGlobalAddressDataSource)
+             <$> f _computed_self_link
+
+instance HasComputedStatus ComputeGlobalAddressDataSource (TF.Attribute Text) where
+    computedStatus f s@ComputeGlobalAddressDataSource{..} =
+        (\a -> s { _computed_status = a } :: ComputeGlobalAddressDataSource)
+             <$> f _computed_status
 
 computeGlobalAddressDataSource :: TF.DataSource TF.Google ComputeGlobalAddressDataSource
 computeGlobalAddressDataSource =
@@ -249,10 +501,100 @@ instance TF.ToHCL ComputeImageDataSource where
         , TF.assign "project" <$> TF.argument _project
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeImageDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeImageDataSource (TF.Argument Text) where
+    name f s@ComputeImageDataSource{..} =
+        (\a -> s { _name = a } :: ComputeImageDataSource)
+             <$> f _name
+
+instance HasProject ComputeImageDataSource (TF.Argument Text) where
+    project f s@ComputeImageDataSource{..} =
+        (\a -> s { _project = a } :: ComputeImageDataSource)
+             <$> f _project
+
+instance HasComputedArchiveSizeBytes ComputeImageDataSource (TF.Attribute Text) where
+    computedArchiveSizeBytes f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_archive_size_bytes = a } :: ComputeImageDataSource)
+             <$> f _computed_archive_size_bytes
+
+instance HasComputedCreationTimestamp ComputeImageDataSource (TF.Attribute Text) where
+    computedCreationTimestamp f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_creation_timestamp = a } :: ComputeImageDataSource)
+             <$> f _computed_creation_timestamp
+
+instance HasComputedDescription ComputeImageDataSource (TF.Attribute Text) where
+    computedDescription f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_description = a } :: ComputeImageDataSource)
+             <$> f _computed_description
+
+instance HasComputedDiskSizeGb ComputeImageDataSource (TF.Attribute Text) where
+    computedDiskSizeGb f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_disk_size_gb = a } :: ComputeImageDataSource)
+             <$> f _computed_disk_size_gb
+
+instance HasComputedFamily' ComputeImageDataSource (TF.Attribute Text) where
+    computedFamily' f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_family' = a } :: ComputeImageDataSource)
+             <$> f _computed_family'
+
+instance HasComputedImageEncryptionKeySha256 ComputeImageDataSource (TF.Attribute Text) where
+    computedImageEncryptionKeySha256 f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_image_encryption_key_sha256 = a } :: ComputeImageDataSource)
+             <$> f _computed_image_encryption_key_sha256
+
+instance HasComputedImageId ComputeImageDataSource (TF.Attribute Text) where
+    computedImageId f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_image_id = a } :: ComputeImageDataSource)
+             <$> f _computed_image_id
+
+instance HasComputedLabelFingerprint ComputeImageDataSource (TF.Attribute Text) where
+    computedLabelFingerprint f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_label_fingerprint = a } :: ComputeImageDataSource)
+             <$> f _computed_label_fingerprint
+
+instance HasComputedLabels ComputeImageDataSource (TF.Attribute Text) where
+    computedLabels f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_labels = a } :: ComputeImageDataSource)
+             <$> f _computed_labels
+
+instance HasComputedLicenses ComputeImageDataSource (TF.Attribute Text) where
+    computedLicenses f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_licenses = a } :: ComputeImageDataSource)
+             <$> f _computed_licenses
+
+instance HasComputedName ComputeImageDataSource (TF.Attribute Text) where
+    computedName f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_name = a } :: ComputeImageDataSource)
+             <$> f _computed_name
+
+instance HasComputedSelfLink ComputeImageDataSource (TF.Attribute Text) where
+    computedSelfLink f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_self_link = a } :: ComputeImageDataSource)
+             <$> f _computed_self_link
+
+instance HasComputedSourceDisk ComputeImageDataSource (TF.Attribute Text) where
+    computedSourceDisk f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_source_disk = a } :: ComputeImageDataSource)
+             <$> f _computed_source_disk
+
+instance HasComputedSourceDiskEncryptionKeySha256 ComputeImageDataSource (TF.Attribute Text) where
+    computedSourceDiskEncryptionKeySha256 f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_source_disk_encryption_key_sha256 = a } :: ComputeImageDataSource)
+             <$> f _computed_source_disk_encryption_key_sha256
+
+instance HasComputedSourceDiskId ComputeImageDataSource (TF.Attribute Text) where
+    computedSourceDiskId f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_source_disk_id = a } :: ComputeImageDataSource)
+             <$> f _computed_source_disk_id
+
+instance HasComputedSourceImageId ComputeImageDataSource (TF.Attribute Text) where
+    computedSourceImageId f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_source_image_id = a } :: ComputeImageDataSource)
+             <$> f _computed_source_image_id
+
+instance HasComputedStatus ComputeImageDataSource (TF.Attribute Text) where
+    computedStatus f s@ComputeImageDataSource{..} =
+        (\a -> s { _computed_status = a } :: ComputeImageDataSource)
+             <$> f _computed_status
 
 computeImageDataSource :: TF.DataSource TF.Google ComputeImageDataSource
 computeImageDataSource =
@@ -313,10 +655,50 @@ instance TF.ToHCL ComputeInstanceGroupDataSource where
         , TF.assign "zone" <$> TF.argument _zone
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeInstanceGroupDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeInstanceGroupDataSource (TF.Argument Text) where
+    name f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _name = a } :: ComputeInstanceGroupDataSource)
+             <$> f _name
+
+instance HasProject ComputeInstanceGroupDataSource (TF.Argument Text) where
+    project f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _project = a } :: ComputeInstanceGroupDataSource)
+             <$> f _project
+
+instance HasZone ComputeInstanceGroupDataSource (TF.Argument Text) where
+    zone f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _zone = a } :: ComputeInstanceGroupDataSource)
+             <$> f _zone
+
+instance HasComputedDescription ComputeInstanceGroupDataSource (TF.Attribute Text) where
+    computedDescription f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _computed_description = a } :: ComputeInstanceGroupDataSource)
+             <$> f _computed_description
+
+instance HasComputedInstances ComputeInstanceGroupDataSource (TF.Attribute Text) where
+    computedInstances f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _computed_instances = a } :: ComputeInstanceGroupDataSource)
+             <$> f _computed_instances
+
+instance HasComputedNamedPort ComputeInstanceGroupDataSource (TF.Attribute Text) where
+    computedNamedPort f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _computed_named_port = a } :: ComputeInstanceGroupDataSource)
+             <$> f _computed_named_port
+
+instance HasComputedNetwork ComputeInstanceGroupDataSource (TF.Attribute Text) where
+    computedNetwork f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _computed_network = a } :: ComputeInstanceGroupDataSource)
+             <$> f _computed_network
+
+instance HasComputedSelfLink ComputeInstanceGroupDataSource (TF.Attribute Text) where
+    computedSelfLink f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _computed_self_link = a } :: ComputeInstanceGroupDataSource)
+             <$> f _computed_self_link
+
+instance HasComputedSize ComputeInstanceGroupDataSource (TF.Attribute Text) where
+    computedSize f s@ComputeInstanceGroupDataSource{..} =
+        (\a -> s { _computed_size = a } :: ComputeInstanceGroupDataSource)
+             <$> f _computed_size
 
 computeInstanceGroupDataSource :: TF.DataSource TF.Google ComputeInstanceGroupDataSource
 computeInstanceGroupDataSource =
@@ -351,10 +733,15 @@ instance TF.ToHCL ComputeLbIpRangesDataSource where
         , TF.assign "network" <$> TF.argument _network
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeLbIpRangesDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasHttpSslTcpInternal ComputeLbIpRangesDataSource (TF.Argument Text) where
+    httpSslTcpInternal f s@ComputeLbIpRangesDataSource{..} =
+        (\a -> s { _http_ssl_tcp_internal = a } :: ComputeLbIpRangesDataSource)
+             <$> f _http_ssl_tcp_internal
+
+instance HasNetwork ComputeLbIpRangesDataSource (TF.Argument Text) where
+    network f s@ComputeLbIpRangesDataSource{..} =
+        (\a -> s { _network = a } :: ComputeLbIpRangesDataSource)
+             <$> f _network
 
 computeLbIpRangesDataSource :: TF.DataSource TF.Google ComputeLbIpRangesDataSource
 computeLbIpRangesDataSource =
@@ -391,10 +778,40 @@ instance TF.ToHCL ComputeNetworkDataSource where
         , TF.assign "project" <$> TF.argument _project
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeNetworkDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeNetworkDataSource (TF.Argument Text) where
+    name f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _name = a } :: ComputeNetworkDataSource)
+             <$> f _name
+
+instance HasProject ComputeNetworkDataSource (TF.Argument Text) where
+    project f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _project = a } :: ComputeNetworkDataSource)
+             <$> f _project
+
+instance HasComputedDescription ComputeNetworkDataSource (TF.Attribute Text) where
+    computedDescription f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _computed_description = a } :: ComputeNetworkDataSource)
+             <$> f _computed_description
+
+instance HasComputedGatewayIpv4 ComputeNetworkDataSource (TF.Attribute Text) where
+    computedGatewayIpv4 f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _computed_gateway_ipv4 = a } :: ComputeNetworkDataSource)
+             <$> f _computed_gateway_ipv4
+
+instance HasComputedNetwork ComputeNetworkDataSource (TF.Attribute Text) where
+    computedNetwork f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _computed_network = a } :: ComputeNetworkDataSource)
+             <$> f _computed_network
+
+instance HasComputedSelfLink ComputeNetworkDataSource (TF.Attribute Text) where
+    computedSelfLink f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _computed_self_link = a } :: ComputeNetworkDataSource)
+             <$> f _computed_self_link
+
+instance HasComputedSubnetworksSelfLinks ComputeNetworkDataSource (TF.Attribute Text) where
+    computedSubnetworksSelfLinks f s@ComputeNetworkDataSource{..} =
+        (\a -> s { _computed_subnetworks_self_links = a } :: ComputeNetworkDataSource)
+             <$> f _computed_subnetworks_self_links
 
 computeNetworkDataSource :: TF.DataSource TF.Google ComputeNetworkDataSource
 computeNetworkDataSource =
@@ -440,10 +857,35 @@ instance TF.ToHCL ComputeRegionInstanceGroupDataSource where
         , TF.assign "self_link" <$> TF.argument _self_link
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeRegionInstanceGroupDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeRegionInstanceGroupDataSource (TF.Argument Text) where
+    name f s@ComputeRegionInstanceGroupDataSource{..} =
+        (\a -> s { _name = a } :: ComputeRegionInstanceGroupDataSource)
+             <$> f _name
+
+instance HasProject ComputeRegionInstanceGroupDataSource (TF.Argument Text) where
+    project f s@ComputeRegionInstanceGroupDataSource{..} =
+        (\a -> s { _project = a } :: ComputeRegionInstanceGroupDataSource)
+             <$> f _project
+
+instance HasRegion ComputeRegionInstanceGroupDataSource (TF.Argument Text) where
+    region f s@ComputeRegionInstanceGroupDataSource{..} =
+        (\a -> s { _region = a } :: ComputeRegionInstanceGroupDataSource)
+             <$> f _region
+
+instance HasSelfLink ComputeRegionInstanceGroupDataSource (TF.Argument Text) where
+    selfLink f s@ComputeRegionInstanceGroupDataSource{..} =
+        (\a -> s { _self_link = a } :: ComputeRegionInstanceGroupDataSource)
+             <$> f _self_link
+
+instance HasComputedInstances ComputeRegionInstanceGroupDataSource (TF.Attribute Text) where
+    computedInstances f s@ComputeRegionInstanceGroupDataSource{..} =
+        (\a -> s { _computed_instances = a } :: ComputeRegionInstanceGroupDataSource)
+             <$> f _computed_instances
+
+instance HasComputedSize ComputeRegionInstanceGroupDataSource (TF.Attribute Text) where
+    computedSize f s@ComputeRegionInstanceGroupDataSource{..} =
+        (\a -> s { _computed_size = a } :: ComputeRegionInstanceGroupDataSource)
+             <$> f _computed_size
 
 computeRegionInstanceGroupDataSource :: TF.DataSource TF.Google ComputeRegionInstanceGroupDataSource
 computeRegionInstanceGroupDataSource =
@@ -491,10 +933,55 @@ instance TF.ToHCL ComputeSubnetworkDataSource where
         , TF.assign "region" <$> TF.argument _region
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeSubnetworkDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName ComputeSubnetworkDataSource (TF.Argument Text) where
+    name f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _name = a } :: ComputeSubnetworkDataSource)
+             <$> f _name
+
+instance HasProject ComputeSubnetworkDataSource (TF.Argument Text) where
+    project f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _project = a } :: ComputeSubnetworkDataSource)
+             <$> f _project
+
+instance HasRegion ComputeSubnetworkDataSource (TF.Argument Text) where
+    region f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _region = a } :: ComputeSubnetworkDataSource)
+             <$> f _region
+
+instance HasComputedDescription ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedDescription f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_description = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_description
+
+instance HasComputedGatewayAddress ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedGatewayAddress f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_gateway_address = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_gateway_address
+
+instance HasComputedIpCidrRange ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedIpCidrRange f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_ip_cidr_range = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_ip_cidr_range
+
+instance HasComputedNetwork ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedNetwork f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_network = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_network
+
+instance HasComputedPrivateIpGoogleAccess ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedPrivateIpGoogleAccess f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_private_ip_google_access = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_private_ip_google_access
+
+instance HasComputedSecondaryIpRange ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedSecondaryIpRange f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_secondary_ip_range = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_secondary_ip_range
+
+instance HasComputedSelfLink ComputeSubnetworkDataSource (TF.Attribute Text) where
+    computedSelfLink f s@ComputeSubnetworkDataSource{..} =
+        (\a -> s { _computed_self_link = a } :: ComputeSubnetworkDataSource)
+             <$> f _computed_self_link
 
 computeSubnetworkDataSource :: TF.DataSource TF.Google ComputeSubnetworkDataSource
 computeSubnetworkDataSource =
@@ -534,10 +1021,20 @@ instance TF.ToHCL ComputeZonesDataSource where
         , TF.assign "status" <$> TF.argument _status
         ]
 
-$(TF.makeSchemaLenses
-    ''ComputeZonesDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasRegion ComputeZonesDataSource (TF.Argument Text) where
+    region f s@ComputeZonesDataSource{..} =
+        (\a -> s { _region = a } :: ComputeZonesDataSource)
+             <$> f _region
+
+instance HasStatus ComputeZonesDataSource (TF.Argument Text) where
+    status f s@ComputeZonesDataSource{..} =
+        (\a -> s { _status = a } :: ComputeZonesDataSource)
+             <$> f _status
+
+instance HasComputedNames ComputeZonesDataSource (TF.Attribute Text) where
+    computedNames f s@ComputeZonesDataSource{..} =
+        (\a -> s { _computed_names = a } :: ComputeZonesDataSource)
+             <$> f _computed_names
 
 computeZonesDataSource :: TF.DataSource TF.Google ComputeZonesDataSource
 computeZonesDataSource =
@@ -546,6 +1043,50 @@ computeZonesDataSource =
             _region = TF.Nil
             , _status = TF.Nil
             , _computed_names = TF.Compute "names"
+            }
+
+{- | The @google_container_cluster@ Google datasource.
+
+Get info about a cluster within GKE from its name and zone.
+-}
+data ContainerClusterDataSource = ContainerClusterDataSource {
+      _name    :: !(TF.Argument Text)
+    {- ^ - The name of the cluster. -}
+    , _project :: !(TF.Argument Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    , _zone    :: !(TF.Argument Text)
+    {- ^ - The zones this cluster has been created in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL ContainerClusterDataSource where
+    toHCL ContainerClusterDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "project" <$> TF.argument _project
+        , TF.assign "zone" <$> TF.argument _zone
+        ]
+
+instance HasName ContainerClusterDataSource (TF.Argument Text) where
+    name f s@ContainerClusterDataSource{..} =
+        (\a -> s { _name = a } :: ContainerClusterDataSource)
+             <$> f _name
+
+instance HasProject ContainerClusterDataSource (TF.Argument Text) where
+    project f s@ContainerClusterDataSource{..} =
+        (\a -> s { _project = a } :: ContainerClusterDataSource)
+             <$> f _project
+
+instance HasZone ContainerClusterDataSource (TF.Argument Text) where
+    zone f s@ContainerClusterDataSource{..} =
+        (\a -> s { _zone = a } :: ContainerClusterDataSource)
+             <$> f _zone
+
+containerClusterDataSource :: TF.DataSource TF.Google ContainerClusterDataSource
+containerClusterDataSource =
+    TF.newDataSource "google_container_cluster" $
+        ContainerClusterDataSource {
+            _name = TF.Nil
+            , _project = TF.Nil
+            , _zone = TF.Nil
             }
 
 {- | The @google_container_engine_versions@ Google datasource.
@@ -574,10 +1115,35 @@ instance TF.ToHCL ContainerEngineVersionsDataSource where
         , TF.assign "zone" <$> TF.argument _zone
         ]
 
-$(TF.makeSchemaLenses
-    ''ContainerEngineVersionsDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasProject ContainerEngineVersionsDataSource (TF.Argument Text) where
+    project f s@ContainerEngineVersionsDataSource{..} =
+        (\a -> s { _project = a } :: ContainerEngineVersionsDataSource)
+             <$> f _project
+
+instance HasZone ContainerEngineVersionsDataSource (TF.Argument Text) where
+    zone f s@ContainerEngineVersionsDataSource{..} =
+        (\a -> s { _zone = a } :: ContainerEngineVersionsDataSource)
+             <$> f _zone
+
+instance HasComputedLatestMasterVersion ContainerEngineVersionsDataSource (TF.Attribute Text) where
+    computedLatestMasterVersion f s@ContainerEngineVersionsDataSource{..} =
+        (\a -> s { _computed_latest_master_version = a } :: ContainerEngineVersionsDataSource)
+             <$> f _computed_latest_master_version
+
+instance HasComputedLatestNodeVersion ContainerEngineVersionsDataSource (TF.Attribute Text) where
+    computedLatestNodeVersion f s@ContainerEngineVersionsDataSource{..} =
+        (\a -> s { _computed_latest_node_version = a } :: ContainerEngineVersionsDataSource)
+             <$> f _computed_latest_node_version
+
+instance HasComputedValidMasterVersions ContainerEngineVersionsDataSource (TF.Attribute Text) where
+    computedValidMasterVersions f s@ContainerEngineVersionsDataSource{..} =
+        (\a -> s { _computed_valid_master_versions = a } :: ContainerEngineVersionsDataSource)
+             <$> f _computed_valid_master_versions
+
+instance HasComputedValidNodeVersions ContainerEngineVersionsDataSource (TF.Attribute Text) where
+    computedValidNodeVersions f s@ContainerEngineVersionsDataSource{..} =
+        (\a -> s { _computed_valid_node_versions = a } :: ContainerEngineVersionsDataSource)
+             <$> f _computed_valid_node_versions
 
 containerEngineVersionsDataSource :: TF.DataSource TF.Google ContainerEngineVersionsDataSource
 containerEngineVersionsDataSource =
@@ -616,10 +1182,30 @@ instance TF.ToHCL DnsManagedZoneDataSource where
         , TF.assign "project" <$> TF.argument _project
         ]
 
-$(TF.makeSchemaLenses
-    ''DnsManagedZoneDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasName DnsManagedZoneDataSource (TF.Argument Text) where
+    name f s@DnsManagedZoneDataSource{..} =
+        (\a -> s { _name = a } :: DnsManagedZoneDataSource)
+             <$> f _name
+
+instance HasProject DnsManagedZoneDataSource (TF.Argument Text) where
+    project f s@DnsManagedZoneDataSource{..} =
+        (\a -> s { _project = a } :: DnsManagedZoneDataSource)
+             <$> f _project
+
+instance HasComputedDescription DnsManagedZoneDataSource (TF.Attribute Text) where
+    computedDescription f s@DnsManagedZoneDataSource{..} =
+        (\a -> s { _computed_description = a } :: DnsManagedZoneDataSource)
+             <$> f _computed_description
+
+instance HasComputedDnsName DnsManagedZoneDataSource (TF.Attribute Text) where
+    computedDnsName f s@DnsManagedZoneDataSource{..} =
+        (\a -> s { _computed_dns_name = a } :: DnsManagedZoneDataSource)
+             <$> f _computed_dns_name
+
+instance HasComputedNameServers DnsManagedZoneDataSource (TF.Attribute Text) where
+    computedNameServers f s@DnsManagedZoneDataSource{..} =
+        (\a -> s { _computed_name_servers = a } :: DnsManagedZoneDataSource)
+             <$> f _computed_name_servers
 
 dnsManagedZoneDataSource :: TF.DataSource TF.Google DnsManagedZoneDataSource
 dnsManagedZoneDataSource =
@@ -650,10 +1236,15 @@ instance TF.ToHCL IamPolicyDataSource where
         [ TF.assign "binding" <$> TF.argument _binding
         ]
 
-$(TF.makeSchemaLenses
-    ''IamPolicyDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasBinding IamPolicyDataSource (TF.Argument Text) where
+    binding f s@IamPolicyDataSource{..} =
+        (\a -> s { _binding = a } :: IamPolicyDataSource)
+             <$> f _binding
+
+instance HasComputedPolicyData IamPolicyDataSource (TF.Attribute Text) where
+    computedPolicyData f s@IamPolicyDataSource{..} =
+        (\a -> s { _computed_policy_data = a } :: IamPolicyDataSource)
+             <$> f _computed_policy_data
 
 iamPolicyDataSource :: TF.DataSource TF.Google IamPolicyDataSource
 iamPolicyDataSource =
@@ -661,6 +1252,130 @@ iamPolicyDataSource =
         IamPolicyDataSource {
             _binding = TF.Nil
             , _computed_policy_data = TF.Compute "policy_data"
+            }
+
+{- | The @google_kms_secret@ Google datasource.
+
+This data source allows you to use data encrypted with Google Cloud KMS
+within your resource definitions. For more information see
+<https://cloud.google.com/kms/docs/encrypt-decrypt> . ~> NOTE : Using this
+data provider will allow you to conceal secret data within your resource
+definitions, but it does not take care of protecting that data in the
+logging output, plan output, or state output.  Please take care to secure
+your secret data outside of resource definitions.
+-}
+data KmsSecretDataSource = KmsSecretDataSource {
+      _ciphertext         :: !(TF.Argument Text)
+    {- ^ (Required) - The ciphertext to be decrypted, encoded in base64 -}
+    , _crypto_key         :: !(TF.Argument Text)
+    {- ^ (Required) - The id of the CryptoKey that will be used to decrypt the provided ciphertext. This is represented by the format @{projectId}/{location}/{keyRingName}/{cryptoKeyName}@ . -}
+    , _computed_plaintext :: !(TF.Attribute Text)
+    {- ^ - Contains the result of decrypting the provided ciphertext. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL KmsSecretDataSource where
+    toHCL KmsSecretDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "ciphertext" <$> TF.argument _ciphertext
+        , TF.assign "crypto_key" <$> TF.argument _crypto_key
+        ]
+
+instance HasCiphertext KmsSecretDataSource (TF.Argument Text) where
+    ciphertext f s@KmsSecretDataSource{..} =
+        (\a -> s { _ciphertext = a } :: KmsSecretDataSource)
+             <$> f _ciphertext
+
+instance HasCryptoKey KmsSecretDataSource (TF.Argument Text) where
+    cryptoKey f s@KmsSecretDataSource{..} =
+        (\a -> s { _crypto_key = a } :: KmsSecretDataSource)
+             <$> f _crypto_key
+
+instance HasComputedPlaintext KmsSecretDataSource (TF.Attribute Text) where
+    computedPlaintext f s@KmsSecretDataSource{..} =
+        (\a -> s { _computed_plaintext = a } :: KmsSecretDataSource)
+             <$> f _computed_plaintext
+
+kmsSecretDataSource :: TF.DataSource TF.Google KmsSecretDataSource
+kmsSecretDataSource =
+    TF.newDataSource "google_kms_secret" $
+        KmsSecretDataSource {
+            _ciphertext = TF.Nil
+            , _crypto_key = TF.Nil
+            , _computed_plaintext = TF.Compute "plaintext"
+            }
+
+{- | The @google_organization@ Google datasource.
+
+Use this data source to get information about a Google Cloud Organization.
+-}
+data OrganizationDataSource = OrganizationDataSource {
+      _domain                         :: !(TF.Argument Text)
+    {- ^ (Optional) - The domain name of the Organization. -}
+    , _organization                   :: !(TF.Argument Text)
+    {- ^ (Optional) - The name of the Organization in the form @{organization_id}@ or @organizations/{organization_id}@ . -}
+    , _computed_create_time           :: !(TF.Attribute Text)
+    {- ^ - Timestamp when the Organization was created. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z". -}
+    , _computed_directory_customer_id :: !(TF.Attribute Text)
+    {- ^ - The Google for Work customer ID of the Organization. -}
+    , _computed_id                    :: !(TF.Attribute Text)
+    {- ^ - The Organization ID. -}
+    , _computed_lifecycle_state       :: !(TF.Attribute Text)
+    {- ^ - The Organization's current lifecycle state. -}
+    , _computed_name                  :: !(TF.Attribute Text)
+    {- ^ - The resource name of the Organization in the form @organizations/{organization_id}@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL OrganizationDataSource where
+    toHCL OrganizationDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "domain" <$> TF.argument _domain
+        , TF.assign "organization" <$> TF.argument _organization
+        ]
+
+instance HasDomain OrganizationDataSource (TF.Argument Text) where
+    domain f s@OrganizationDataSource{..} =
+        (\a -> s { _domain = a } :: OrganizationDataSource)
+             <$> f _domain
+
+instance HasOrganization OrganizationDataSource (TF.Argument Text) where
+    organization f s@OrganizationDataSource{..} =
+        (\a -> s { _organization = a } :: OrganizationDataSource)
+             <$> f _organization
+
+instance HasComputedCreateTime OrganizationDataSource (TF.Attribute Text) where
+    computedCreateTime f s@OrganizationDataSource{..} =
+        (\a -> s { _computed_create_time = a } :: OrganizationDataSource)
+             <$> f _computed_create_time
+
+instance HasComputedDirectoryCustomerId OrganizationDataSource (TF.Attribute Text) where
+    computedDirectoryCustomerId f s@OrganizationDataSource{..} =
+        (\a -> s { _computed_directory_customer_id = a } :: OrganizationDataSource)
+             <$> f _computed_directory_customer_id
+
+instance HasComputedId OrganizationDataSource (TF.Attribute Text) where
+    computedId f s@OrganizationDataSource{..} =
+        (\a -> s { _computed_id = a } :: OrganizationDataSource)
+             <$> f _computed_id
+
+instance HasComputedLifecycleState OrganizationDataSource (TF.Attribute Text) where
+    computedLifecycleState f s@OrganizationDataSource{..} =
+        (\a -> s { _computed_lifecycle_state = a } :: OrganizationDataSource)
+             <$> f _computed_lifecycle_state
+
+instance HasComputedName OrganizationDataSource (TF.Attribute Text) where
+    computedName f s@OrganizationDataSource{..} =
+        (\a -> s { _computed_name = a } :: OrganizationDataSource)
+             <$> f _computed_name
+
+organizationDataSource :: TF.DataSource TF.Google OrganizationDataSource
+organizationDataSource =
+    TF.newDataSource "google_organization" $
+        OrganizationDataSource {
+            _domain = TF.Nil
+            , _organization = TF.Nil
+            , _computed_create_time = TF.Compute "create_time"
+            , _computed_directory_customer_id = TF.Compute "directory_customer_id"
+            , _computed_id = TF.Compute "id"
+            , _computed_lifecycle_state = TF.Compute "lifecycle_state"
+            , _computed_name = TF.Compute "name"
             }
 
 {- | The @google_storage_object_signed_url@ Google datasource.
@@ -695,10 +1410,35 @@ instance TF.ToHCL StorageObjectSignedUrlDataSource where
         , TF.assign "path" <$> TF.argument _path
         ]
 
-$(TF.makeSchemaLenses
-    ''StorageObjectSignedUrlDataSource
-    ''TF.Google
-    ''TF.DataSource)
+instance HasBucket StorageObjectSignedUrlDataSource (TF.Argument Text) where
+    bucket f s@StorageObjectSignedUrlDataSource{..} =
+        (\a -> s { _bucket = a } :: StorageObjectSignedUrlDataSource)
+             <$> f _bucket
+
+instance HasCredentials StorageObjectSignedUrlDataSource (TF.Argument Text) where
+    credentials f s@StorageObjectSignedUrlDataSource{..} =
+        (\a -> s { _credentials = a } :: StorageObjectSignedUrlDataSource)
+             <$> f _credentials
+
+instance HasDuration StorageObjectSignedUrlDataSource (TF.Argument Text) where
+    duration f s@StorageObjectSignedUrlDataSource{..} =
+        (\a -> s { _duration = a } :: StorageObjectSignedUrlDataSource)
+             <$> f _duration
+
+instance HasHttpMethod StorageObjectSignedUrlDataSource (TF.Argument Text) where
+    httpMethod f s@StorageObjectSignedUrlDataSource{..} =
+        (\a -> s { _http_method = a } :: StorageObjectSignedUrlDataSource)
+             <$> f _http_method
+
+instance HasPath StorageObjectSignedUrlDataSource (TF.Argument Text) where
+    path f s@StorageObjectSignedUrlDataSource{..} =
+        (\a -> s { _path = a } :: StorageObjectSignedUrlDataSource)
+             <$> f _path
+
+instance HasComputedSignedUrl StorageObjectSignedUrlDataSource (TF.Attribute Text) where
+    computedSignedUrl f s@StorageObjectSignedUrlDataSource{..} =
+        (\a -> s { _computed_signed_url = a } :: StorageObjectSignedUrlDataSource)
+             <$> f _computed_signed_url
 
 storageObjectSignedUrlDataSource :: TF.DataSource TF.Google StorageObjectSignedUrlDataSource
 storageObjectSignedUrlDataSource =
@@ -711,3 +1451,393 @@ storageObjectSignedUrlDataSource =
             , _path = TF.Nil
             , _computed_signed_url = TF.Compute "signed_url"
             }
+
+class HasBillingAccount s a | s -> a where
+    billingAccount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBillingAccount s a => HasBillingAccount (TF.DataSource p s) a where
+    billingAccount = TF.configuration . billingAccount
+
+class HasBinding s a | s -> a where
+    binding :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBinding s a => HasBinding (TF.DataSource p s) a where
+    binding = TF.configuration . binding
+
+class HasBucket s a | s -> a where
+    bucket :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBucket s a => HasBucket (TF.DataSource p s) a where
+    bucket = TF.configuration . bucket
+
+class HasCiphertext s a | s -> a where
+    ciphertext :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCiphertext s a => HasCiphertext (TF.DataSource p s) a where
+    ciphertext = TF.configuration . ciphertext
+
+class HasComputedAddress s a | s -> a where
+    computedAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddress s a => HasComputedAddress (TF.DataSource p s) a where
+    computedAddress = TF.configuration . computedAddress
+
+class HasComputedArchiveSizeBytes s a | s -> a where
+    computedArchiveSizeBytes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedArchiveSizeBytes s a => HasComputedArchiveSizeBytes (TF.DataSource p s) a where
+    computedArchiveSizeBytes = TF.configuration . computedArchiveSizeBytes
+
+class HasComputedCreateTime s a | s -> a where
+    computedCreateTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreateTime s a => HasComputedCreateTime (TF.DataSource p s) a where
+    computedCreateTime = TF.configuration . computedCreateTime
+
+class HasComputedCreationTimestamp s a | s -> a where
+    computedCreationTimestamp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreationTimestamp s a => HasComputedCreationTimestamp (TF.DataSource p s) a where
+    computedCreationTimestamp = TF.configuration . computedCreationTimestamp
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDirectoryCustomerId s a | s -> a where
+    computedDirectoryCustomerId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDirectoryCustomerId s a => HasComputedDirectoryCustomerId (TF.DataSource p s) a where
+    computedDirectoryCustomerId = TF.configuration . computedDirectoryCustomerId
+
+class HasComputedDiskSizeGb s a | s -> a where
+    computedDiskSizeGb :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDiskSizeGb s a => HasComputedDiskSizeGb (TF.DataSource p s) a where
+    computedDiskSizeGb = TF.configuration . computedDiskSizeGb
+
+class HasComputedDnsName s a | s -> a where
+    computedDnsName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDnsName s a => HasComputedDnsName (TF.DataSource p s) a where
+    computedDnsName = TF.configuration . computedDnsName
+
+class HasComputedFamily' s a | s -> a where
+    computedFamily' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFamily' s a => HasComputedFamily' (TF.DataSource p s) a where
+    computedFamily' = TF.configuration . computedFamily'
+
+class HasComputedGatewayAddress s a | s -> a where
+    computedGatewayAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGatewayAddress s a => HasComputedGatewayAddress (TF.DataSource p s) a where
+    computedGatewayAddress = TF.configuration . computedGatewayAddress
+
+class HasComputedGatewayIpv4 s a | s -> a where
+    computedGatewayIpv4 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGatewayIpv4 s a => HasComputedGatewayIpv4 (TF.DataSource p s) a where
+    computedGatewayIpv4 = TF.configuration . computedGatewayIpv4
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedImageEncryptionKeySha256 s a | s -> a where
+    computedImageEncryptionKeySha256 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedImageEncryptionKeySha256 s a => HasComputedImageEncryptionKeySha256 (TF.DataSource p s) a where
+    computedImageEncryptionKeySha256 = TF.configuration . computedImageEncryptionKeySha256
+
+class HasComputedImageId s a | s -> a where
+    computedImageId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedImageId s a => HasComputedImageId (TF.DataSource p s) a where
+    computedImageId = TF.configuration . computedImageId
+
+class HasComputedInstances s a | s -> a where
+    computedInstances :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstances s a => HasComputedInstances (TF.DataSource p s) a where
+    computedInstances = TF.configuration . computedInstances
+
+class HasComputedIpCidrRange s a | s -> a where
+    computedIpCidrRange :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIpCidrRange s a => HasComputedIpCidrRange (TF.DataSource p s) a where
+    computedIpCidrRange = TF.configuration . computedIpCidrRange
+
+class HasComputedLabelFingerprint s a | s -> a where
+    computedLabelFingerprint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLabelFingerprint s a => HasComputedLabelFingerprint (TF.DataSource p s) a where
+    computedLabelFingerprint = TF.configuration . computedLabelFingerprint
+
+class HasComputedLabels s a | s -> a where
+    computedLabels :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLabels s a => HasComputedLabels (TF.DataSource p s) a where
+    computedLabels = TF.configuration . computedLabels
+
+class HasComputedLatestMasterVersion s a | s -> a where
+    computedLatestMasterVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLatestMasterVersion s a => HasComputedLatestMasterVersion (TF.DataSource p s) a where
+    computedLatestMasterVersion = TF.configuration . computedLatestMasterVersion
+
+class HasComputedLatestNodeVersion s a | s -> a where
+    computedLatestNodeVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLatestNodeVersion s a => HasComputedLatestNodeVersion (TF.DataSource p s) a where
+    computedLatestNodeVersion = TF.configuration . computedLatestNodeVersion
+
+class HasComputedLicenses s a | s -> a where
+    computedLicenses :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLicenses s a => HasComputedLicenses (TF.DataSource p s) a where
+    computedLicenses = TF.configuration . computedLicenses
+
+class HasComputedLifecycleState s a | s -> a where
+    computedLifecycleState :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLifecycleState s a => HasComputedLifecycleState (TF.DataSource p s) a where
+    computedLifecycleState = TF.configuration . computedLifecycleState
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedNameServers s a | s -> a where
+    computedNameServers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNameServers s a => HasComputedNameServers (TF.DataSource p s) a where
+    computedNameServers = TF.configuration . computedNameServers
+
+class HasComputedNamedPort s a | s -> a where
+    computedNamedPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNamedPort s a => HasComputedNamedPort (TF.DataSource p s) a where
+    computedNamedPort = TF.configuration . computedNamedPort
+
+class HasComputedNames s a | s -> a where
+    computedNames :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNames s a => HasComputedNames (TF.DataSource p s) a where
+    computedNames = TF.configuration . computedNames
+
+class HasComputedNetwork s a | s -> a where
+    computedNetwork :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNetwork s a => HasComputedNetwork (TF.DataSource p s) a where
+    computedNetwork = TF.configuration . computedNetwork
+
+class HasComputedPlaintext s a | s -> a where
+    computedPlaintext :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPlaintext s a => HasComputedPlaintext (TF.DataSource p s) a where
+    computedPlaintext = TF.configuration . computedPlaintext
+
+class HasComputedPolicyData s a | s -> a where
+    computedPolicyData :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPolicyData s a => HasComputedPolicyData (TF.DataSource p s) a where
+    computedPolicyData = TF.configuration . computedPolicyData
+
+class HasComputedPrivateIpGoogleAccess s a | s -> a where
+    computedPrivateIpGoogleAccess :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPrivateIpGoogleAccess s a => HasComputedPrivateIpGoogleAccess (TF.DataSource p s) a where
+    computedPrivateIpGoogleAccess = TF.configuration . computedPrivateIpGoogleAccess
+
+class HasComputedProjectIds s a | s -> a where
+    computedProjectIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProjectIds s a => HasComputedProjectIds (TF.DataSource p s) a where
+    computedProjectIds = TF.configuration . computedProjectIds
+
+class HasComputedSecondaryIpRange s a | s -> a where
+    computedSecondaryIpRange :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSecondaryIpRange s a => HasComputedSecondaryIpRange (TF.DataSource p s) a where
+    computedSecondaryIpRange = TF.configuration . computedSecondaryIpRange
+
+class HasComputedSelfLink s a | s -> a where
+    computedSelfLink :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSelfLink s a => HasComputedSelfLink (TF.DataSource p s) a where
+    computedSelfLink = TF.configuration . computedSelfLink
+
+class HasComputedSignedUrl s a | s -> a where
+    computedSignedUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSignedUrl s a => HasComputedSignedUrl (TF.DataSource p s) a where
+    computedSignedUrl = TF.configuration . computedSignedUrl
+
+class HasComputedSize s a | s -> a where
+    computedSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
+    computedSize = TF.configuration . computedSize
+
+class HasComputedSourceDisk s a | s -> a where
+    computedSourceDisk :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSourceDisk s a => HasComputedSourceDisk (TF.DataSource p s) a where
+    computedSourceDisk = TF.configuration . computedSourceDisk
+
+class HasComputedSourceDiskEncryptionKeySha256 s a | s -> a where
+    computedSourceDiskEncryptionKeySha256 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSourceDiskEncryptionKeySha256 s a => HasComputedSourceDiskEncryptionKeySha256 (TF.DataSource p s) a where
+    computedSourceDiskEncryptionKeySha256 = TF.configuration . computedSourceDiskEncryptionKeySha256
+
+class HasComputedSourceDiskId s a | s -> a where
+    computedSourceDiskId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSourceDiskId s a => HasComputedSourceDiskId (TF.DataSource p s) a where
+    computedSourceDiskId = TF.configuration . computedSourceDiskId
+
+class HasComputedSourceImageId s a | s -> a where
+    computedSourceImageId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSourceImageId s a => HasComputedSourceImageId (TF.DataSource p s) a where
+    computedSourceImageId = TF.configuration . computedSourceImageId
+
+class HasComputedStatus s a | s -> a where
+    computedStatus :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStatus s a => HasComputedStatus (TF.DataSource p s) a where
+    computedStatus = TF.configuration . computedStatus
+
+class HasComputedSubnetworksSelfLinks s a | s -> a where
+    computedSubnetworksSelfLinks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSubnetworksSelfLinks s a => HasComputedSubnetworksSelfLinks (TF.DataSource p s) a where
+    computedSubnetworksSelfLinks = TF.configuration . computedSubnetworksSelfLinks
+
+class HasComputedValidMasterVersions s a | s -> a where
+    computedValidMasterVersions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedValidMasterVersions s a => HasComputedValidMasterVersions (TF.DataSource p s) a where
+    computedValidMasterVersions = TF.configuration . computedValidMasterVersions
+
+class HasComputedValidNodeVersions s a | s -> a where
+    computedValidNodeVersions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedValidNodeVersions s a => HasComputedValidNodeVersions (TF.DataSource p s) a where
+    computedValidNodeVersions = TF.configuration . computedValidNodeVersions
+
+class HasCredentials s a | s -> a where
+    credentials :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCredentials s a => HasCredentials (TF.DataSource p s) a where
+    credentials = TF.configuration . credentials
+
+class HasCryptoKey s a | s -> a where
+    cryptoKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCryptoKey s a => HasCryptoKey (TF.DataSource p s) a where
+    cryptoKey = TF.configuration . cryptoKey
+
+class HasDisplayName s a | s -> a where
+    displayName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisplayName s a => HasDisplayName (TF.DataSource p s) a where
+    displayName = TF.configuration . displayName
+
+class HasDomain s a | s -> a where
+    domain :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDomain s a => HasDomain (TF.DataSource p s) a where
+    domain = TF.configuration . domain
+
+class HasDuration s a | s -> a where
+    duration :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDuration s a => HasDuration (TF.DataSource p s) a where
+    duration = TF.configuration . duration
+
+class HasHttpMethod s a | s -> a where
+    httpMethod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHttpMethod s a => HasHttpMethod (TF.DataSource p s) a where
+    httpMethod = TF.configuration . httpMethod
+
+class HasHttpSslTcpInternal s a | s -> a where
+    httpSslTcpInternal :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHttpSslTcpInternal s a => HasHttpSslTcpInternal (TF.DataSource p s) a where
+    httpSslTcpInternal = TF.configuration . httpSslTcpInternal
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name
+
+class HasNetwork s a | s -> a where
+    network :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNetwork s a => HasNetwork (TF.DataSource p s) a where
+    network = TF.configuration . network
+
+class HasOpen s a | s -> a where
+    open :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOpen s a => HasOpen (TF.DataSource p s) a where
+    open = TF.configuration . open
+
+class HasOrganization s a | s -> a where
+    organization :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOrganization s a => HasOrganization (TF.DataSource p s) a where
+    organization = TF.configuration . organization
+
+class HasParent s a | s -> a where
+    parent :: Functor f => (a -> f a) -> s -> f s
+
+instance HasParent s a => HasParent (TF.DataSource p s) a where
+    parent = TF.configuration . parent
+
+class HasPath s a | s -> a where
+    path :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPath s a => HasPath (TF.DataSource p s) a where
+    path = TF.configuration . path
+
+class HasProject s a | s -> a where
+    project :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProject s a => HasProject (TF.DataSource p s) a where
+    project = TF.configuration . project
+
+class HasRegion s a | s -> a where
+    region :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRegion s a => HasRegion (TF.DataSource p s) a where
+    region = TF.configuration . region
+
+class HasSelfLink s a | s -> a where
+    selfLink :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSelfLink s a => HasSelfLink (TF.DataSource p s) a where
+    selfLink = TF.configuration . selfLink
+
+class HasStatus s a | s -> a where
+    status :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStatus s a => HasStatus (TF.DataSource p s) a where
+    status = TF.configuration . status
+
+class HasZone s a | s -> a where
+    zone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasZone s a => HasZone (TF.DataSource p s) a where
+    zone = TF.configuration . zone

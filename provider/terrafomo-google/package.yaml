@@ -8,6 +8,7 @@ name: terrafomo-google
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

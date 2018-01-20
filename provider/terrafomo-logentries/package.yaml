@@ -8,6 +8,7 @@ name: terrafomo-logentries
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

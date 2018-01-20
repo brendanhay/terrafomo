@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,24 +19,216 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AzureRM.DataSource where
+module Terrafomo.AzureRM.DataSource
+    (
+    -- * Types
+      AppServicePlanDataSource (..)
+    , appServicePlanDataSource
 
-import Data.Functor ((<$>))
+    , BuiltinRoleDefinitionDataSource (..)
+    , builtinRoleDefinitionDataSource
+
+    , ClientConfigDataSource (..)
+    , clientConfigDataSource
+
+    , EventhubNamespaceDataSource (..)
+    , eventhubNamespaceDataSource
+
+    , ImageDataSource (..)
+    , imageDataSource
+
+    , KeyVaultAccessPolicyDataSource (..)
+    , keyVaultAccessPolicyDataSource
+
+    , ManagedDiskDataSource (..)
+    , managedDiskDataSource
+
+    , NetworkSecurityGroupDataSource (..)
+    , networkSecurityGroupDataSource
+
+    , PlatformImageDataSource (..)
+    , platformImageDataSource
+
+    , PublicIpDataSource (..)
+    , publicIpDataSource
+
+    , ResourceGroupDataSource (..)
+    , resourceGroupDataSource
+
+    , RoleDefinitionDataSource (..)
+    , roleDefinitionDataSource
+
+    , SnapshotDataSource (..)
+    , snapshotDataSource
+
+    , SubnetDataSource (..)
+    , subnetDataSource
+
+    , SubscriptionDataSource (..)
+    , subscriptionDataSource
+
+    , VirtualNetworkDataSource (..)
+    , virtualNetworkDataSource
+
+    -- * Overloaded Fields
+    , HasClientId (..)
+    , HasComputedAddressPrefix (..)
+    , HasComputedAddressSpaces (..)
+    , HasComputedAssignableScopes (..)
+    , HasComputedAutoInflateEnabled (..)
+    , HasComputedCapacity (..)
+    , HasComputedCertificatePermissions (..)
+    , HasComputedCreateOption (..)
+    , HasComputedDataDisk (..)
+    , HasComputedDescription (..)
+    , HasComputedDiskSizeGb (..)
+    , HasComputedDisplayName (..)
+    , HasComputedDnsServers (..)
+    , HasComputedDomainNameLabel (..)
+    , HasComputedFqdn (..)
+    , HasComputedId (..)
+    , HasComputedIdleTimeoutInMinutes (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIpConfigurations (..)
+    , HasComputedKeyPermissions (..)
+    , HasComputedKind (..)
+    , HasComputedLocation (..)
+    , HasComputedLocationPlacementId (..)
+    , HasComputedMaximumThroughputUnits (..)
+    , HasComputedNetworkSecurityGroupId (..)
+    , HasComputedOsDisk (..)
+    , HasComputedOsType (..)
+    , HasComputedPermissions (..)
+    , HasComputedProperties (..)
+    , HasComputedQuotaId (..)
+    , HasComputedRouteTableId (..)
+    , HasComputedSecretPermissions (..)
+    , HasComputedSecurityRule (..)
+    , HasComputedSku (..)
+    , HasComputedSourceResourceId (..)
+    , HasComputedSourceUri (..)
+    , HasComputedSpendingLimit (..)
+    , HasComputedState (..)
+    , HasComputedStorageAccountId (..)
+    , HasComputedStorageAccountType (..)
+    , HasComputedSubnets (..)
+    , HasComputedTags (..)
+    , HasComputedType' (..)
+    , HasComputedVersion (..)
+    , HasComputedVnetPeerings (..)
+    , HasLocation (..)
+    , HasName (..)
+    , HasOffer (..)
+    , HasPublisher (..)
+    , HasResourceGroupName (..)
+    , HasRoleDefinitionId (..)
+    , HasScope (..)
+    , HasSku (..)
+    , HasSubscriptionId (..)
+    , HasTenantId (..)
+    , HasVirtualNetworkName (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.AzureRM.Provider  as TF
 import qualified Terrafomo.AzureRM.Types     as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
-{- | The @azurerm_builtin_role_definition@ AzureRM datasource.
+{- | The @DataSource:azurerm_app_service_plan@ AzureRM datasource.
+
+Use this data source to obtain information about an App Service Plan
+(formerly known as a @Server Farm@ ).
+-}
+data AppServicePlanDataSource = AppServicePlanDataSource {
+      _name                :: !(TF.Argument Text)
+    {- ^ (Required) The name of the App Service Plan. -}
+    , _resource_group_name :: !(TF.Argument Text)
+    {- ^ (Required) The Name of the Resource Group where the App Service Plan exists. -}
+    , _computed_id         :: !(TF.Attribute Text)
+    {- ^ - The ID of the App Service Plan. -}
+    , _computed_kind       :: !(TF.Attribute Text)
+    {- ^ - The Operating System type of the App Service Plan -}
+    , _computed_location   :: !(TF.Attribute Text)
+    {- ^ - The Azure location where the App Service Plan exists -}
+    , _computed_properties :: !(TF.Attribute Text)
+    {- ^ - A @properties@ block as documented below. -}
+    , _computed_sku        :: !(TF.Attribute Text)
+    {- ^ - A @sku@ block as documented below. -}
+    , _computed_tags       :: !(TF.Attribute Text)
+    {- ^ - A mapping of tags to assign to the resource. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL AppServicePlanDataSource where
+    toHCL AppServicePlanDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        ]
+
+instance HasName AppServicePlanDataSource (TF.Argument Text) where
+    name f s@AppServicePlanDataSource{..} =
+        (\a -> s { _name = a } :: AppServicePlanDataSource)
+             <$> f _name
+
+instance HasResourceGroupName AppServicePlanDataSource (TF.Argument Text) where
+    resourceGroupName f s@AppServicePlanDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: AppServicePlanDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedId AppServicePlanDataSource (TF.Attribute Text) where
+    computedId f s@AppServicePlanDataSource{..} =
+        (\a -> s { _computed_id = a } :: AppServicePlanDataSource)
+             <$> f _computed_id
+
+instance HasComputedKind AppServicePlanDataSource (TF.Attribute Text) where
+    computedKind f s@AppServicePlanDataSource{..} =
+        (\a -> s { _computed_kind = a } :: AppServicePlanDataSource)
+             <$> f _computed_kind
+
+instance HasComputedLocation AppServicePlanDataSource (TF.Attribute Text) where
+    computedLocation f s@AppServicePlanDataSource{..} =
+        (\a -> s { _computed_location = a } :: AppServicePlanDataSource)
+             <$> f _computed_location
+
+instance HasComputedProperties AppServicePlanDataSource (TF.Attribute Text) where
+    computedProperties f s@AppServicePlanDataSource{..} =
+        (\a -> s { _computed_properties = a } :: AppServicePlanDataSource)
+             <$> f _computed_properties
+
+instance HasComputedSku AppServicePlanDataSource (TF.Attribute Text) where
+    computedSku f s@AppServicePlanDataSource{..} =
+        (\a -> s { _computed_sku = a } :: AppServicePlanDataSource)
+             <$> f _computed_sku
+
+instance HasComputedTags AppServicePlanDataSource (TF.Attribute Text) where
+    computedTags f s@AppServicePlanDataSource{..} =
+        (\a -> s { _computed_tags = a } :: AppServicePlanDataSource)
+             <$> f _computed_tags
+
+appServicePlanDataSource :: TF.DataSource TF.AzureRM AppServicePlanDataSource
+appServicePlanDataSource =
+    TF.newDataSource "DataSource:azurerm_app_service_plan" $
+        AppServicePlanDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_id = TF.Compute "id"
+            , _computed_kind = TF.Compute "kind"
+            , _computed_location = TF.Compute "location"
+            , _computed_properties = TF.Compute "properties"
+            , _computed_sku = TF.Compute "sku"
+            , _computed_tags = TF.Compute "tags"
+            }
+
+{- | The @DataSource:azurerm_builtin_role_definition@ AzureRM datasource.
 
 Use this data source to access the properties of a built-in Role Definition.
 To access information about a custom Role Definition, <role_definition.html>
@@ -64,14 +254,39 @@ instance TF.ToHCL BuiltinRoleDefinitionDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''BuiltinRoleDefinitionDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName BuiltinRoleDefinitionDataSource (TF.Argument Text) where
+    name f s@BuiltinRoleDefinitionDataSource{..} =
+        (\a -> s { _name = a } :: BuiltinRoleDefinitionDataSource)
+             <$> f _name
+
+instance HasComputedAssignableScopes BuiltinRoleDefinitionDataSource (TF.Attribute Text) where
+    computedAssignableScopes f s@BuiltinRoleDefinitionDataSource{..} =
+        (\a -> s { _computed_assignable_scopes = a } :: BuiltinRoleDefinitionDataSource)
+             <$> f _computed_assignable_scopes
+
+instance HasComputedDescription BuiltinRoleDefinitionDataSource (TF.Attribute Text) where
+    computedDescription f s@BuiltinRoleDefinitionDataSource{..} =
+        (\a -> s { _computed_description = a } :: BuiltinRoleDefinitionDataSource)
+             <$> f _computed_description
+
+instance HasComputedId BuiltinRoleDefinitionDataSource (TF.Attribute Text) where
+    computedId f s@BuiltinRoleDefinitionDataSource{..} =
+        (\a -> s { _computed_id = a } :: BuiltinRoleDefinitionDataSource)
+             <$> f _computed_id
+
+instance HasComputedPermissions BuiltinRoleDefinitionDataSource (TF.Attribute Text) where
+    computedPermissions f s@BuiltinRoleDefinitionDataSource{..} =
+        (\a -> s { _computed_permissions = a } :: BuiltinRoleDefinitionDataSource)
+             <$> f _computed_permissions
+
+instance HasComputedType' BuiltinRoleDefinitionDataSource (TF.Attribute Text) where
+    computedType' f s@BuiltinRoleDefinitionDataSource{..} =
+        (\a -> s { _computed_type' = a } :: BuiltinRoleDefinitionDataSource)
+             <$> f _computed_type'
 
 builtinRoleDefinitionDataSource :: TF.DataSource TF.AzureRM BuiltinRoleDefinitionDataSource
 builtinRoleDefinitionDataSource =
-    TF.newDataSource "azurerm_builtin_role_definition" $
+    TF.newDataSource "DataSource:azurerm_builtin_role_definition" $
         BuiltinRoleDefinitionDataSource {
             _name = TF.Nil
             , _computed_assignable_scopes = TF.Compute "assignable_scopes"
@@ -81,7 +296,7 @@ builtinRoleDefinitionDataSource =
             , _computed_type' = TF.Compute "type"
             }
 
-{- | The @azurerm_client_config@ AzureRM datasource.
+{- | The @DataSource:azurerm_client_config@ AzureRM datasource.
 
 Use this data source to access the configuration of the Azure Resource
 Manager provider.
@@ -102,21 +317,122 @@ instance TF.ToHCL ClientConfigDataSource where
         , TF.assign "tenant_id" <$> TF.argument _tenant_id
         ]
 
-$(TF.makeSchemaLenses
-    ''ClientConfigDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasClientId ClientConfigDataSource (TF.Argument Text) where
+    clientId f s@ClientConfigDataSource{..} =
+        (\a -> s { _client_id = a } :: ClientConfigDataSource)
+             <$> f _client_id
+
+instance HasSubscriptionId ClientConfigDataSource (TF.Argument Text) where
+    subscriptionId f s@ClientConfigDataSource{..} =
+        (\a -> s { _subscription_id = a } :: ClientConfigDataSource)
+             <$> f _subscription_id
+
+instance HasTenantId ClientConfigDataSource (TF.Argument Text) where
+    tenantId f s@ClientConfigDataSource{..} =
+        (\a -> s { _tenant_id = a } :: ClientConfigDataSource)
+             <$> f _tenant_id
 
 clientConfigDataSource :: TF.DataSource TF.AzureRM ClientConfigDataSource
 clientConfigDataSource =
-    TF.newDataSource "azurerm_client_config" $
+    TF.newDataSource "DataSource:azurerm_client_config" $
         ClientConfigDataSource {
             _client_id = TF.Nil
             , _subscription_id = TF.Nil
             , _tenant_id = TF.Nil
             }
 
-{- | The @azurerm_image@ AzureRM datasource.
+{- | The @DataSource:azurerm_eventhub_namespace@ AzureRM datasource.
+
+Use this data source to obtain information about an EventHub Namespace.
+-}
+data EventhubNamespaceDataSource = EventhubNamespaceDataSource {
+      _name                              :: !(TF.Argument Text)
+    {- ^ (Required) The name of the EventHub Namespace. -}
+    , _resource_group_name               :: !(TF.Argument Text)
+    {- ^ (Required) The Name of the Resource Group where the EventHub Namespace exists. -}
+    , _computed_auto_inflate_enabled     :: !(TF.Attribute Text)
+    {- ^ - Is Auto Inflate enabled for the EventHub Namespace? -}
+    , _computed_capacity                 :: !(TF.Attribute Text)
+    {- ^ - The Capacity / Throughput Units for a @Standard@ SKU namespace. -}
+    , _computed_id                       :: !(TF.Attribute Text)
+    {- ^ - The ID of the EventHub Namespace. -}
+    , _computed_location                 :: !(TF.Attribute Text)
+    {- ^ - The Azure location where the EventHub Namespace exists -}
+    , _computed_maximum_throughput_units :: !(TF.Attribute Text)
+    {- ^ -  Specifies the maximum number of throughput units when Auto Inflate is Enabled. -}
+    , _computed_sku                      :: !(TF.Attribute Text)
+    {- ^ - Defines which tier to use. -}
+    , _computed_tags                     :: !(TF.Attribute Text)
+    {- ^ - A mapping of tags to assign to the EventHub Namespace. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL EventhubNamespaceDataSource where
+    toHCL EventhubNamespaceDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
+        ]
+
+instance HasName EventhubNamespaceDataSource (TF.Argument Text) where
+    name f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _name = a } :: EventhubNamespaceDataSource)
+             <$> f _name
+
+instance HasResourceGroupName EventhubNamespaceDataSource (TF.Argument Text) where
+    resourceGroupName f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: EventhubNamespaceDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedAutoInflateEnabled EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedAutoInflateEnabled f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_auto_inflate_enabled = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_auto_inflate_enabled
+
+instance HasComputedCapacity EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedCapacity f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_capacity = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_capacity
+
+instance HasComputedId EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedId f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_id = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_id
+
+instance HasComputedLocation EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedLocation f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_location = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_location
+
+instance HasComputedMaximumThroughputUnits EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedMaximumThroughputUnits f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_maximum_throughput_units = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_maximum_throughput_units
+
+instance HasComputedSku EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedSku f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_sku = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_sku
+
+instance HasComputedTags EventhubNamespaceDataSource (TF.Attribute Text) where
+    computedTags f s@EventhubNamespaceDataSource{..} =
+        (\a -> s { _computed_tags = a } :: EventhubNamespaceDataSource)
+             <$> f _computed_tags
+
+eventhubNamespaceDataSource :: TF.DataSource TF.AzureRM EventhubNamespaceDataSource
+eventhubNamespaceDataSource =
+    TF.newDataSource "DataSource:azurerm_eventhub_namespace" $
+        EventhubNamespaceDataSource {
+            _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            , _computed_auto_inflate_enabled = TF.Compute "auto_inflate_enabled"
+            , _computed_capacity = TF.Compute "capacity"
+            , _computed_id = TF.Compute "id"
+            , _computed_location = TF.Compute "location"
+            , _computed_maximum_throughput_units = TF.Compute "maximum_throughput_units"
+            , _computed_sku = TF.Compute "sku"
+            , _computed_tags = TF.Compute "tags"
+            }
+
+{- | The @DataSource:azurerm_image@ AzureRM datasource.
 
 Use this data source to access information about an Image.
 -}
@@ -141,14 +457,39 @@ instance TF.ToHCL ImageDataSource where
         , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
-$(TF.makeSchemaLenses
-    ''ImageDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName ImageDataSource (TF.Argument Text) where
+    name f s@ImageDataSource{..} =
+        (\a -> s { _name = a } :: ImageDataSource)
+             <$> f _name
+
+instance HasResourceGroupName ImageDataSource (TF.Argument Text) where
+    resourceGroupName f s@ImageDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: ImageDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedDataDisk ImageDataSource (TF.Attribute Text) where
+    computedDataDisk f s@ImageDataSource{..} =
+        (\a -> s { _computed_data_disk = a } :: ImageDataSource)
+             <$> f _computed_data_disk
+
+instance HasComputedLocation ImageDataSource (TF.Attribute Text) where
+    computedLocation f s@ImageDataSource{..} =
+        (\a -> s { _computed_location = a } :: ImageDataSource)
+             <$> f _computed_location
+
+instance HasComputedOsDisk ImageDataSource (TF.Attribute Text) where
+    computedOsDisk f s@ImageDataSource{..} =
+        (\a -> s { _computed_os_disk = a } :: ImageDataSource)
+             <$> f _computed_os_disk
+
+instance HasComputedTags ImageDataSource (TF.Attribute Text) where
+    computedTags f s@ImageDataSource{..} =
+        (\a -> s { _computed_tags = a } :: ImageDataSource)
+             <$> f _computed_tags
 
 imageDataSource :: TF.DataSource TF.AzureRM ImageDataSource
 imageDataSource =
-    TF.newDataSource "azurerm_image" $
+    TF.newDataSource "DataSource:azurerm_image" $
         ImageDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -158,7 +499,7 @@ imageDataSource =
             , _computed_tags = TF.Compute "tags"
             }
 
-{- | The @azurerm_key_vault_access_policy@ AzureRM datasource.
+{- | The @DataSource:azurerm_key_vault_access_policy@ AzureRM datasource.
 
 Use this data source to access information about the permissions from the
 Management Key Vault Templates.
@@ -181,14 +522,34 @@ instance TF.ToHCL KeyVaultAccessPolicyDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''KeyVaultAccessPolicyDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName KeyVaultAccessPolicyDataSource (TF.Argument Text) where
+    name f s@KeyVaultAccessPolicyDataSource{..} =
+        (\a -> s { _name = a } :: KeyVaultAccessPolicyDataSource)
+             <$> f _name
+
+instance HasComputedCertificatePermissions KeyVaultAccessPolicyDataSource (TF.Attribute Text) where
+    computedCertificatePermissions f s@KeyVaultAccessPolicyDataSource{..} =
+        (\a -> s { _computed_certificate_permissions = a } :: KeyVaultAccessPolicyDataSource)
+             <$> f _computed_certificate_permissions
+
+instance HasComputedId KeyVaultAccessPolicyDataSource (TF.Attribute Text) where
+    computedId f s@KeyVaultAccessPolicyDataSource{..} =
+        (\a -> s { _computed_id = a } :: KeyVaultAccessPolicyDataSource)
+             <$> f _computed_id
+
+instance HasComputedKeyPermissions KeyVaultAccessPolicyDataSource (TF.Attribute Text) where
+    computedKeyPermissions f s@KeyVaultAccessPolicyDataSource{..} =
+        (\a -> s { _computed_key_permissions = a } :: KeyVaultAccessPolicyDataSource)
+             <$> f _computed_key_permissions
+
+instance HasComputedSecretPermissions KeyVaultAccessPolicyDataSource (TF.Attribute Text) where
+    computedSecretPermissions f s@KeyVaultAccessPolicyDataSource{..} =
+        (\a -> s { _computed_secret_permissions = a } :: KeyVaultAccessPolicyDataSource)
+             <$> f _computed_secret_permissions
 
 keyVaultAccessPolicyDataSource :: TF.DataSource TF.AzureRM KeyVaultAccessPolicyDataSource
 keyVaultAccessPolicyDataSource =
-    TF.newDataSource "azurerm_key_vault_access_policy" $
+    TF.newDataSource "DataSource:azurerm_key_vault_access_policy" $
         KeyVaultAccessPolicyDataSource {
             _name = TF.Nil
             , _computed_certificate_permissions = TF.Compute "certificate_permissions"
@@ -197,7 +558,7 @@ keyVaultAccessPolicyDataSource =
             , _computed_secret_permissions = TF.Compute "secret_permissions"
             }
 
-{- | The @azurerm_managed_disk@ AzureRM datasource.
+{- | The @DataSource:azurerm_managed_disk@ AzureRM datasource.
 
 Use this data source to access the properties of an existing Azure Managed
 Disk.
@@ -227,14 +588,49 @@ instance TF.ToHCL ManagedDiskDataSource where
         , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
-$(TF.makeSchemaLenses
-    ''ManagedDiskDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName ManagedDiskDataSource (TF.Argument Text) where
+    name f s@ManagedDiskDataSource{..} =
+        (\a -> s { _name = a } :: ManagedDiskDataSource)
+             <$> f _name
+
+instance HasResourceGroupName ManagedDiskDataSource (TF.Argument Text) where
+    resourceGroupName f s@ManagedDiskDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: ManagedDiskDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedDiskSizeGb ManagedDiskDataSource (TF.Attribute Text) where
+    computedDiskSizeGb f s@ManagedDiskDataSource{..} =
+        (\a -> s { _computed_disk_size_gb = a } :: ManagedDiskDataSource)
+             <$> f _computed_disk_size_gb
+
+instance HasComputedOsType ManagedDiskDataSource (TF.Attribute Text) where
+    computedOsType f s@ManagedDiskDataSource{..} =
+        (\a -> s { _computed_os_type = a } :: ManagedDiskDataSource)
+             <$> f _computed_os_type
+
+instance HasComputedSourceResourceId ManagedDiskDataSource (TF.Attribute Text) where
+    computedSourceResourceId f s@ManagedDiskDataSource{..} =
+        (\a -> s { _computed_source_resource_id = a } :: ManagedDiskDataSource)
+             <$> f _computed_source_resource_id
+
+instance HasComputedSourceUri ManagedDiskDataSource (TF.Attribute Text) where
+    computedSourceUri f s@ManagedDiskDataSource{..} =
+        (\a -> s { _computed_source_uri = a } :: ManagedDiskDataSource)
+             <$> f _computed_source_uri
+
+instance HasComputedStorageAccountType ManagedDiskDataSource (TF.Attribute Text) where
+    computedStorageAccountType f s@ManagedDiskDataSource{..} =
+        (\a -> s { _computed_storage_account_type = a } :: ManagedDiskDataSource)
+             <$> f _computed_storage_account_type
+
+instance HasComputedTags ManagedDiskDataSource (TF.Attribute Text) where
+    computedTags f s@ManagedDiskDataSource{..} =
+        (\a -> s { _computed_tags = a } :: ManagedDiskDataSource)
+             <$> f _computed_tags
 
 managedDiskDataSource :: TF.DataSource TF.AzureRM ManagedDiskDataSource
 managedDiskDataSource =
-    TF.newDataSource "azurerm_managed_disk" $
+    TF.newDataSource "DataSource:azurerm_managed_disk" $
         ManagedDiskDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -246,7 +642,7 @@ managedDiskDataSource =
             , _computed_tags = TF.Compute "tags"
             }
 
-{- | The @azurerm_network_security_group@ AzureRM datasource.
+{- | The @DataSource:azurerm_network_security_group@ AzureRM datasource.
 
 Use this data source to access the properties of a Network Security Group.
 -}
@@ -271,14 +667,39 @@ instance TF.ToHCL NetworkSecurityGroupDataSource where
         , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
-$(TF.makeSchemaLenses
-    ''NetworkSecurityGroupDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName NetworkSecurityGroupDataSource (TF.Argument Text) where
+    name f s@NetworkSecurityGroupDataSource{..} =
+        (\a -> s { _name = a } :: NetworkSecurityGroupDataSource)
+             <$> f _name
+
+instance HasResourceGroupName NetworkSecurityGroupDataSource (TF.Argument Text) where
+    resourceGroupName f s@NetworkSecurityGroupDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: NetworkSecurityGroupDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedId NetworkSecurityGroupDataSource (TF.Attribute Text) where
+    computedId f s@NetworkSecurityGroupDataSource{..} =
+        (\a -> s { _computed_id = a } :: NetworkSecurityGroupDataSource)
+             <$> f _computed_id
+
+instance HasComputedLocation NetworkSecurityGroupDataSource (TF.Attribute Text) where
+    computedLocation f s@NetworkSecurityGroupDataSource{..} =
+        (\a -> s { _computed_location = a } :: NetworkSecurityGroupDataSource)
+             <$> f _computed_location
+
+instance HasComputedSecurityRule NetworkSecurityGroupDataSource (TF.Attribute Text) where
+    computedSecurityRule f s@NetworkSecurityGroupDataSource{..} =
+        (\a -> s { _computed_security_rule = a } :: NetworkSecurityGroupDataSource)
+             <$> f _computed_security_rule
+
+instance HasComputedTags NetworkSecurityGroupDataSource (TF.Attribute Text) where
+    computedTags f s@NetworkSecurityGroupDataSource{..} =
+        (\a -> s { _computed_tags = a } :: NetworkSecurityGroupDataSource)
+             <$> f _computed_tags
 
 networkSecurityGroupDataSource :: TF.DataSource TF.AzureRM NetworkSecurityGroupDataSource
 networkSecurityGroupDataSource =
-    TF.newDataSource "azurerm_network_security_group" $
+    TF.newDataSource "DataSource:azurerm_network_security_group" $
         NetworkSecurityGroupDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -288,7 +709,7 @@ networkSecurityGroupDataSource =
             , _computed_tags = TF.Compute "tags"
             }
 
-{- | The @azurerm_platform_image@ AzureRM datasource.
+{- | The @DataSource:azurerm_platform_image@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Platform Image.
 -}
@@ -315,14 +736,39 @@ instance TF.ToHCL PlatformImageDataSource where
         , TF.assign "sku" <$> TF.argument _sku
         ]
 
-$(TF.makeSchemaLenses
-    ''PlatformImageDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasLocation PlatformImageDataSource (TF.Argument Text) where
+    location f s@PlatformImageDataSource{..} =
+        (\a -> s { _location = a } :: PlatformImageDataSource)
+             <$> f _location
+
+instance HasOffer PlatformImageDataSource (TF.Argument Text) where
+    offer f s@PlatformImageDataSource{..} =
+        (\a -> s { _offer = a } :: PlatformImageDataSource)
+             <$> f _offer
+
+instance HasPublisher PlatformImageDataSource (TF.Argument Text) where
+    publisher f s@PlatformImageDataSource{..} =
+        (\a -> s { _publisher = a } :: PlatformImageDataSource)
+             <$> f _publisher
+
+instance HasSku PlatformImageDataSource (TF.Argument Text) where
+    sku f s@PlatformImageDataSource{..} =
+        (\a -> s { _sku = a } :: PlatformImageDataSource)
+             <$> f _sku
+
+instance HasComputedId PlatformImageDataSource (TF.Attribute Text) where
+    computedId f s@PlatformImageDataSource{..} =
+        (\a -> s { _computed_id = a } :: PlatformImageDataSource)
+             <$> f _computed_id
+
+instance HasComputedVersion PlatformImageDataSource (TF.Attribute Text) where
+    computedVersion f s@PlatformImageDataSource{..} =
+        (\a -> s { _computed_version = a } :: PlatformImageDataSource)
+             <$> f _computed_version
 
 platformImageDataSource :: TF.DataSource TF.AzureRM PlatformImageDataSource
 platformImageDataSource =
-    TF.newDataSource "azurerm_platform_image" $
+    TF.newDataSource "DataSource:azurerm_platform_image" $
         PlatformImageDataSource {
             _location = TF.Nil
             , _offer = TF.Nil
@@ -332,7 +778,7 @@ platformImageDataSource =
             , _computed_version = TF.Compute "version"
             }
 
-{- | The @azurerm_public_ip@ AzureRM datasource.
+{- | The @DataSource:azurerm_public_ip@ AzureRM datasource.
 
 Use this data source to access the properties of an existing Azure Public IP
 Address.
@@ -360,14 +806,44 @@ instance TF.ToHCL PublicIpDataSource where
         , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
-$(TF.makeSchemaLenses
-    ''PublicIpDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName PublicIpDataSource (TF.Argument Text) where
+    name f s@PublicIpDataSource{..} =
+        (\a -> s { _name = a } :: PublicIpDataSource)
+             <$> f _name
+
+instance HasResourceGroupName PublicIpDataSource (TF.Argument Text) where
+    resourceGroupName f s@PublicIpDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: PublicIpDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedDomainNameLabel PublicIpDataSource (TF.Attribute Text) where
+    computedDomainNameLabel f s@PublicIpDataSource{..} =
+        (\a -> s { _computed_domain_name_label = a } :: PublicIpDataSource)
+             <$> f _computed_domain_name_label
+
+instance HasComputedFqdn PublicIpDataSource (TF.Attribute Text) where
+    computedFqdn f s@PublicIpDataSource{..} =
+        (\a -> s { _computed_fqdn = a } :: PublicIpDataSource)
+             <$> f _computed_fqdn
+
+instance HasComputedIdleTimeoutInMinutes PublicIpDataSource (TF.Attribute Text) where
+    computedIdleTimeoutInMinutes f s@PublicIpDataSource{..} =
+        (\a -> s { _computed_idle_timeout_in_minutes = a } :: PublicIpDataSource)
+             <$> f _computed_idle_timeout_in_minutes
+
+instance HasComputedIpAddress PublicIpDataSource (TF.Attribute Text) where
+    computedIpAddress f s@PublicIpDataSource{..} =
+        (\a -> s { _computed_ip_address = a } :: PublicIpDataSource)
+             <$> f _computed_ip_address
+
+instance HasComputedTags PublicIpDataSource (TF.Attribute Text) where
+    computedTags f s@PublicIpDataSource{..} =
+        (\a -> s { _computed_tags = a } :: PublicIpDataSource)
+             <$> f _computed_tags
 
 publicIpDataSource :: TF.DataSource TF.AzureRM PublicIpDataSource
 publicIpDataSource =
-    TF.newDataSource "azurerm_public_ip" $
+    TF.newDataSource "DataSource:azurerm_public_ip" $
         PublicIpDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -378,7 +854,7 @@ publicIpDataSource =
             , _computed_tags = TF.Compute "tags"
             }
 
-{- | The @azurerm_resource_group@ AzureRM datasource.
+{- | The @DataSource:azurerm_resource_group@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure resource group.
 -}
@@ -396,21 +872,31 @@ instance TF.ToHCL ResourceGroupDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''ResourceGroupDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName ResourceGroupDataSource (TF.Argument Text) where
+    name f s@ResourceGroupDataSource{..} =
+        (\a -> s { _name = a } :: ResourceGroupDataSource)
+             <$> f _name
+
+instance HasComputedLocation ResourceGroupDataSource (TF.Attribute Text) where
+    computedLocation f s@ResourceGroupDataSource{..} =
+        (\a -> s { _computed_location = a } :: ResourceGroupDataSource)
+             <$> f _computed_location
+
+instance HasComputedTags ResourceGroupDataSource (TF.Attribute Text) where
+    computedTags f s@ResourceGroupDataSource{..} =
+        (\a -> s { _computed_tags = a } :: ResourceGroupDataSource)
+             <$> f _computed_tags
 
 resourceGroupDataSource :: TF.DataSource TF.AzureRM ResourceGroupDataSource
 resourceGroupDataSource =
-    TF.newDataSource "azurerm_resource_group" $
+    TF.newDataSource "DataSource:azurerm_resource_group" $
         ResourceGroupDataSource {
             _name = TF.Nil
             , _computed_location = TF.Compute "location"
             , _computed_tags = TF.Compute "tags"
             }
 
-{- | The @azurerm_role_definition@ AzureRM datasource.
+{- | The @DataSource:azurerm_role_definition@ AzureRM datasource.
 
 Use this data source to access the properties of a custom Role Definition.
 To access information about a built-in Role Definition,
@@ -439,14 +925,44 @@ instance TF.ToHCL RoleDefinitionDataSource where
         , TF.assign "scope" <$> TF.argument _scope
         ]
 
-$(TF.makeSchemaLenses
-    ''RoleDefinitionDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasRoleDefinitionId RoleDefinitionDataSource (TF.Argument Text) where
+    roleDefinitionId f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _role_definition_id = a } :: RoleDefinitionDataSource)
+             <$> f _role_definition_id
+
+instance HasScope RoleDefinitionDataSource (TF.Argument Text) where
+    scope f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _scope = a } :: RoleDefinitionDataSource)
+             <$> f _scope
+
+instance HasComputedAssignableScopes RoleDefinitionDataSource (TF.Attribute Text) where
+    computedAssignableScopes f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _computed_assignable_scopes = a } :: RoleDefinitionDataSource)
+             <$> f _computed_assignable_scopes
+
+instance HasComputedDescription RoleDefinitionDataSource (TF.Attribute Text) where
+    computedDescription f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _computed_description = a } :: RoleDefinitionDataSource)
+             <$> f _computed_description
+
+instance HasComputedId RoleDefinitionDataSource (TF.Attribute Text) where
+    computedId f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _computed_id = a } :: RoleDefinitionDataSource)
+             <$> f _computed_id
+
+instance HasComputedPermissions RoleDefinitionDataSource (TF.Attribute Text) where
+    computedPermissions f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _computed_permissions = a } :: RoleDefinitionDataSource)
+             <$> f _computed_permissions
+
+instance HasComputedType' RoleDefinitionDataSource (TF.Attribute Text) where
+    computedType' f s@RoleDefinitionDataSource{..} =
+        (\a -> s { _computed_type' = a } :: RoleDefinitionDataSource)
+             <$> f _computed_type'
 
 roleDefinitionDataSource :: TF.DataSource TF.AzureRM RoleDefinitionDataSource
 roleDefinitionDataSource =
-    TF.newDataSource "azurerm_role_definition" $
+    TF.newDataSource "DataSource:azurerm_role_definition" $
         RoleDefinitionDataSource {
             _role_definition_id = TF.Nil
             , _scope = TF.Nil
@@ -457,7 +973,7 @@ roleDefinitionDataSource =
             , _computed_type' = TF.Compute "type"
             }
 
-{- | The @azurerm_snapshot@ AzureRM datasource.
+{- | The @DataSource:azurerm_snapshot@ AzureRM datasource.
 
 Use this data source to access the properties of a Snapshot of an Disk.
 -}
@@ -486,14 +1002,49 @@ instance TF.ToHCL SnapshotDataSource where
         , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
-$(TF.makeSchemaLenses
-    ''SnapshotDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName SnapshotDataSource (TF.Argument Text) where
+    name f s@SnapshotDataSource{..} =
+        (\a -> s { _name = a } :: SnapshotDataSource)
+             <$> f _name
+
+instance HasResourceGroupName SnapshotDataSource (TF.Argument Text) where
+    resourceGroupName f s@SnapshotDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: SnapshotDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedCreateOption SnapshotDataSource (TF.Attribute Text) where
+    computedCreateOption f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_create_option = a } :: SnapshotDataSource)
+             <$> f _computed_create_option
+
+instance HasComputedDiskSizeGb SnapshotDataSource (TF.Attribute Text) where
+    computedDiskSizeGb f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_disk_size_gb = a } :: SnapshotDataSource)
+             <$> f _computed_disk_size_gb
+
+instance HasComputedId SnapshotDataSource (TF.Attribute Text) where
+    computedId f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_id = a } :: SnapshotDataSource)
+             <$> f _computed_id
+
+instance HasComputedSourceResourceId SnapshotDataSource (TF.Attribute Text) where
+    computedSourceResourceId f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_source_resource_id = a } :: SnapshotDataSource)
+             <$> f _computed_source_resource_id
+
+instance HasComputedSourceUri SnapshotDataSource (TF.Attribute Text) where
+    computedSourceUri f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_source_uri = a } :: SnapshotDataSource)
+             <$> f _computed_source_uri
+
+instance HasComputedStorageAccountId SnapshotDataSource (TF.Attribute Text) where
+    computedStorageAccountId f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_storage_account_id = a } :: SnapshotDataSource)
+             <$> f _computed_storage_account_id
 
 snapshotDataSource :: TF.DataSource TF.AzureRM SnapshotDataSource
 snapshotDataSource =
-    TF.newDataSource "azurerm_snapshot" $
+    TF.newDataSource "DataSource:azurerm_snapshot" $
         SnapshotDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -505,7 +1056,7 @@ snapshotDataSource =
             , _computed_storage_account_id = TF.Compute "storage_account_id"
             }
 
-{- | The @azurerm_subnet@ AzureRM datasource.
+{- | The @DataSource:azurerm_subnet@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Subnet located
 within a Virtual Network.
@@ -536,14 +1087,49 @@ instance TF.ToHCL SubnetDataSource where
         , TF.assign "virtual_network_name" <$> TF.argument _virtual_network_name
         ]
 
-$(TF.makeSchemaLenses
-    ''SubnetDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName SubnetDataSource (TF.Argument Text) where
+    name f s@SubnetDataSource{..} =
+        (\a -> s { _name = a } :: SubnetDataSource)
+             <$> f _name
+
+instance HasResourceGroupName SubnetDataSource (TF.Argument Text) where
+    resourceGroupName f s@SubnetDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: SubnetDataSource)
+             <$> f _resource_group_name
+
+instance HasVirtualNetworkName SubnetDataSource (TF.Argument Text) where
+    virtualNetworkName f s@SubnetDataSource{..} =
+        (\a -> s { _virtual_network_name = a } :: SubnetDataSource)
+             <$> f _virtual_network_name
+
+instance HasComputedAddressPrefix SubnetDataSource (TF.Attribute Text) where
+    computedAddressPrefix f s@SubnetDataSource{..} =
+        (\a -> s { _computed_address_prefix = a } :: SubnetDataSource)
+             <$> f _computed_address_prefix
+
+instance HasComputedId SubnetDataSource (TF.Attribute Text) where
+    computedId f s@SubnetDataSource{..} =
+        (\a -> s { _computed_id = a } :: SubnetDataSource)
+             <$> f _computed_id
+
+instance HasComputedIpConfigurations SubnetDataSource (TF.Attribute Text) where
+    computedIpConfigurations f s@SubnetDataSource{..} =
+        (\a -> s { _computed_ip_configurations = a } :: SubnetDataSource)
+             <$> f _computed_ip_configurations
+
+instance HasComputedNetworkSecurityGroupId SubnetDataSource (TF.Attribute Text) where
+    computedNetworkSecurityGroupId f s@SubnetDataSource{..} =
+        (\a -> s { _computed_network_security_group_id = a } :: SubnetDataSource)
+             <$> f _computed_network_security_group_id
+
+instance HasComputedRouteTableId SubnetDataSource (TF.Attribute Text) where
+    computedRouteTableId f s@SubnetDataSource{..} =
+        (\a -> s { _computed_route_table_id = a } :: SubnetDataSource)
+             <$> f _computed_route_table_id
 
 subnetDataSource :: TF.DataSource TF.AzureRM SubnetDataSource
 subnetDataSource =
-    TF.newDataSource "azurerm_subnet" $
+    TF.newDataSource "DataSource:azurerm_subnet" $
         SubnetDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -555,7 +1141,7 @@ subnetDataSource =
             , _computed_route_table_id = TF.Compute "route_table_id"
             }
 
-{- | The @azurerm_subscription@ AzureRM datasource.
+{- | The @DataSource:azurerm_subscription@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure subscription.
 -}
@@ -579,14 +1165,39 @@ instance TF.ToHCL SubscriptionDataSource where
         [ TF.assign "subscription_id" <$> TF.argument _subscription_id
         ]
 
-$(TF.makeSchemaLenses
-    ''SubscriptionDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasSubscriptionId SubscriptionDataSource (TF.Argument Text) where
+    subscriptionId f s@SubscriptionDataSource{..} =
+        (\a -> s { _subscription_id = a } :: SubscriptionDataSource)
+             <$> f _subscription_id
+
+instance HasComputedDisplayName SubscriptionDataSource (TF.Attribute Text) where
+    computedDisplayName f s@SubscriptionDataSource{..} =
+        (\a -> s { _computed_display_name = a } :: SubscriptionDataSource)
+             <$> f _computed_display_name
+
+instance HasComputedLocationPlacementId SubscriptionDataSource (TF.Attribute Text) where
+    computedLocationPlacementId f s@SubscriptionDataSource{..} =
+        (\a -> s { _computed_location_placement_id = a } :: SubscriptionDataSource)
+             <$> f _computed_location_placement_id
+
+instance HasComputedQuotaId SubscriptionDataSource (TF.Attribute Text) where
+    computedQuotaId f s@SubscriptionDataSource{..} =
+        (\a -> s { _computed_quota_id = a } :: SubscriptionDataSource)
+             <$> f _computed_quota_id
+
+instance HasComputedSpendingLimit SubscriptionDataSource (TF.Attribute Text) where
+    computedSpendingLimit f s@SubscriptionDataSource{..} =
+        (\a -> s { _computed_spending_limit = a } :: SubscriptionDataSource)
+             <$> f _computed_spending_limit
+
+instance HasComputedState SubscriptionDataSource (TF.Attribute Text) where
+    computedState f s@SubscriptionDataSource{..} =
+        (\a -> s { _computed_state = a } :: SubscriptionDataSource)
+             <$> f _computed_state
 
 subscriptionDataSource :: TF.DataSource TF.AzureRM SubscriptionDataSource
 subscriptionDataSource =
-    TF.newDataSource "azurerm_subscription" $
+    TF.newDataSource "DataSource:azurerm_subscription" $
         SubscriptionDataSource {
             _subscription_id = TF.Nil
             , _computed_display_name = TF.Compute "display_name"
@@ -596,7 +1207,7 @@ subscriptionDataSource =
             , _computed_state = TF.Compute "state"
             }
 
-{- | The @azurerm_virtual_network@ AzureRM datasource.
+{- | The @DataSource:azurerm_virtual_network@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Virtual Network.
 -}
@@ -623,14 +1234,44 @@ instance TF.ToHCL VirtualNetworkDataSource where
         , TF.assign "resource_group_name" <$> TF.argument _resource_group_name
         ]
 
-$(TF.makeSchemaLenses
-    ''VirtualNetworkDataSource
-    ''TF.AzureRM
-    ''TF.DataSource)
+instance HasName VirtualNetworkDataSource (TF.Argument Text) where
+    name f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _name = a } :: VirtualNetworkDataSource)
+             <$> f _name
+
+instance HasResourceGroupName VirtualNetworkDataSource (TF.Argument Text) where
+    resourceGroupName f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _resource_group_name = a } :: VirtualNetworkDataSource)
+             <$> f _resource_group_name
+
+instance HasComputedAddressSpaces VirtualNetworkDataSource (TF.Attribute Text) where
+    computedAddressSpaces f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _computed_address_spaces = a } :: VirtualNetworkDataSource)
+             <$> f _computed_address_spaces
+
+instance HasComputedDnsServers VirtualNetworkDataSource (TF.Attribute Text) where
+    computedDnsServers f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _computed_dns_servers = a } :: VirtualNetworkDataSource)
+             <$> f _computed_dns_servers
+
+instance HasComputedId VirtualNetworkDataSource (TF.Attribute Text) where
+    computedId f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _computed_id = a } :: VirtualNetworkDataSource)
+             <$> f _computed_id
+
+instance HasComputedSubnets VirtualNetworkDataSource (TF.Attribute Text) where
+    computedSubnets f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _computed_subnets = a } :: VirtualNetworkDataSource)
+             <$> f _computed_subnets
+
+instance HasComputedVnetPeerings VirtualNetworkDataSource (TF.Attribute Text) where
+    computedVnetPeerings f s@VirtualNetworkDataSource{..} =
+        (\a -> s { _computed_vnet_peerings = a } :: VirtualNetworkDataSource)
+             <$> f _computed_vnet_peerings
 
 virtualNetworkDataSource :: TF.DataSource TF.AzureRM VirtualNetworkDataSource
 virtualNetworkDataSource =
-    TF.newDataSource "azurerm_virtual_network" $
+    TF.newDataSource "DataSource:azurerm_virtual_network" $
         VirtualNetworkDataSource {
             _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -640,3 +1281,339 @@ virtualNetworkDataSource =
             , _computed_subnets = TF.Compute "subnets"
             , _computed_vnet_peerings = TF.Compute "vnet_peerings"
             }
+
+class HasClientId s a | s -> a where
+    clientId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasClientId s a => HasClientId (TF.DataSource p s) a where
+    clientId = TF.configuration . clientId
+
+class HasComputedAddressPrefix s a | s -> a where
+    computedAddressPrefix :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddressPrefix s a => HasComputedAddressPrefix (TF.DataSource p s) a where
+    computedAddressPrefix = TF.configuration . computedAddressPrefix
+
+class HasComputedAddressSpaces s a | s -> a where
+    computedAddressSpaces :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddressSpaces s a => HasComputedAddressSpaces (TF.DataSource p s) a where
+    computedAddressSpaces = TF.configuration . computedAddressSpaces
+
+class HasComputedAssignableScopes s a | s -> a where
+    computedAssignableScopes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAssignableScopes s a => HasComputedAssignableScopes (TF.DataSource p s) a where
+    computedAssignableScopes = TF.configuration . computedAssignableScopes
+
+class HasComputedAutoInflateEnabled s a | s -> a where
+    computedAutoInflateEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAutoInflateEnabled s a => HasComputedAutoInflateEnabled (TF.DataSource p s) a where
+    computedAutoInflateEnabled = TF.configuration . computedAutoInflateEnabled
+
+class HasComputedCapacity s a | s -> a where
+    computedCapacity :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCapacity s a => HasComputedCapacity (TF.DataSource p s) a where
+    computedCapacity = TF.configuration . computedCapacity
+
+class HasComputedCertificatePermissions s a | s -> a where
+    computedCertificatePermissions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCertificatePermissions s a => HasComputedCertificatePermissions (TF.DataSource p s) a where
+    computedCertificatePermissions = TF.configuration . computedCertificatePermissions
+
+class HasComputedCreateOption s a | s -> a where
+    computedCreateOption :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreateOption s a => HasComputedCreateOption (TF.DataSource p s) a where
+    computedCreateOption = TF.configuration . computedCreateOption
+
+class HasComputedDataDisk s a | s -> a where
+    computedDataDisk :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDataDisk s a => HasComputedDataDisk (TF.DataSource p s) a where
+    computedDataDisk = TF.configuration . computedDataDisk
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDiskSizeGb s a | s -> a where
+    computedDiskSizeGb :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDiskSizeGb s a => HasComputedDiskSizeGb (TF.DataSource p s) a where
+    computedDiskSizeGb = TF.configuration . computedDiskSizeGb
+
+class HasComputedDisplayName s a | s -> a where
+    computedDisplayName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDisplayName s a => HasComputedDisplayName (TF.DataSource p s) a where
+    computedDisplayName = TF.configuration . computedDisplayName
+
+class HasComputedDnsServers s a | s -> a where
+    computedDnsServers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDnsServers s a => HasComputedDnsServers (TF.DataSource p s) a where
+    computedDnsServers = TF.configuration . computedDnsServers
+
+class HasComputedDomainNameLabel s a | s -> a where
+    computedDomainNameLabel :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDomainNameLabel s a => HasComputedDomainNameLabel (TF.DataSource p s) a where
+    computedDomainNameLabel = TF.configuration . computedDomainNameLabel
+
+class HasComputedFqdn s a | s -> a where
+    computedFqdn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFqdn s a => HasComputedFqdn (TF.DataSource p s) a where
+    computedFqdn = TF.configuration . computedFqdn
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedIdleTimeoutInMinutes s a | s -> a where
+    computedIdleTimeoutInMinutes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIdleTimeoutInMinutes s a => HasComputedIdleTimeoutInMinutes (TF.DataSource p s) a where
+    computedIdleTimeoutInMinutes = TF.configuration . computedIdleTimeoutInMinutes
+
+class HasComputedIpAddress s a | s -> a where
+    computedIpAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIpAddress s a => HasComputedIpAddress (TF.DataSource p s) a where
+    computedIpAddress = TF.configuration . computedIpAddress
+
+class HasComputedIpConfigurations s a | s -> a where
+    computedIpConfigurations :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIpConfigurations s a => HasComputedIpConfigurations (TF.DataSource p s) a where
+    computedIpConfigurations = TF.configuration . computedIpConfigurations
+
+class HasComputedKeyPermissions s a | s -> a where
+    computedKeyPermissions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedKeyPermissions s a => HasComputedKeyPermissions (TF.DataSource p s) a where
+    computedKeyPermissions = TF.configuration . computedKeyPermissions
+
+class HasComputedKind s a | s -> a where
+    computedKind :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedKind s a => HasComputedKind (TF.DataSource p s) a where
+    computedKind = TF.configuration . computedKind
+
+class HasComputedLocation s a | s -> a where
+    computedLocation :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLocation s a => HasComputedLocation (TF.DataSource p s) a where
+    computedLocation = TF.configuration . computedLocation
+
+class HasComputedLocationPlacementId s a | s -> a where
+    computedLocationPlacementId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLocationPlacementId s a => HasComputedLocationPlacementId (TF.DataSource p s) a where
+    computedLocationPlacementId = TF.configuration . computedLocationPlacementId
+
+class HasComputedMaximumThroughputUnits s a | s -> a where
+    computedMaximumThroughputUnits :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMaximumThroughputUnits s a => HasComputedMaximumThroughputUnits (TF.DataSource p s) a where
+    computedMaximumThroughputUnits = TF.configuration . computedMaximumThroughputUnits
+
+class HasComputedNetworkSecurityGroupId s a | s -> a where
+    computedNetworkSecurityGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNetworkSecurityGroupId s a => HasComputedNetworkSecurityGroupId (TF.DataSource p s) a where
+    computedNetworkSecurityGroupId = TF.configuration . computedNetworkSecurityGroupId
+
+class HasComputedOsDisk s a | s -> a where
+    computedOsDisk :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOsDisk s a => HasComputedOsDisk (TF.DataSource p s) a where
+    computedOsDisk = TF.configuration . computedOsDisk
+
+class HasComputedOsType s a | s -> a where
+    computedOsType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOsType s a => HasComputedOsType (TF.DataSource p s) a where
+    computedOsType = TF.configuration . computedOsType
+
+class HasComputedPermissions s a | s -> a where
+    computedPermissions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPermissions s a => HasComputedPermissions (TF.DataSource p s) a where
+    computedPermissions = TF.configuration . computedPermissions
+
+class HasComputedProperties s a | s -> a where
+    computedProperties :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProperties s a => HasComputedProperties (TF.DataSource p s) a where
+    computedProperties = TF.configuration . computedProperties
+
+class HasComputedQuotaId s a | s -> a where
+    computedQuotaId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedQuotaId s a => HasComputedQuotaId (TF.DataSource p s) a where
+    computedQuotaId = TF.configuration . computedQuotaId
+
+class HasComputedRouteTableId s a | s -> a where
+    computedRouteTableId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRouteTableId s a => HasComputedRouteTableId (TF.DataSource p s) a where
+    computedRouteTableId = TF.configuration . computedRouteTableId
+
+class HasComputedSecretPermissions s a | s -> a where
+    computedSecretPermissions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSecretPermissions s a => HasComputedSecretPermissions (TF.DataSource p s) a where
+    computedSecretPermissions = TF.configuration . computedSecretPermissions
+
+class HasComputedSecurityRule s a | s -> a where
+    computedSecurityRule :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSecurityRule s a => HasComputedSecurityRule (TF.DataSource p s) a where
+    computedSecurityRule = TF.configuration . computedSecurityRule
+
+class HasComputedSku s a | s -> a where
+    computedSku :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSku s a => HasComputedSku (TF.DataSource p s) a where
+    computedSku = TF.configuration . computedSku
+
+class HasComputedSourceResourceId s a | s -> a where
+    computedSourceResourceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSourceResourceId s a => HasComputedSourceResourceId (TF.DataSource p s) a where
+    computedSourceResourceId = TF.configuration . computedSourceResourceId
+
+class HasComputedSourceUri s a | s -> a where
+    computedSourceUri :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSourceUri s a => HasComputedSourceUri (TF.DataSource p s) a where
+    computedSourceUri = TF.configuration . computedSourceUri
+
+class HasComputedSpendingLimit s a | s -> a where
+    computedSpendingLimit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSpendingLimit s a => HasComputedSpendingLimit (TF.DataSource p s) a where
+    computedSpendingLimit = TF.configuration . computedSpendingLimit
+
+class HasComputedState s a | s -> a where
+    computedState :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedState s a => HasComputedState (TF.DataSource p s) a where
+    computedState = TF.configuration . computedState
+
+class HasComputedStorageAccountId s a | s -> a where
+    computedStorageAccountId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStorageAccountId s a => HasComputedStorageAccountId (TF.DataSource p s) a where
+    computedStorageAccountId = TF.configuration . computedStorageAccountId
+
+class HasComputedStorageAccountType s a | s -> a where
+    computedStorageAccountType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStorageAccountType s a => HasComputedStorageAccountType (TF.DataSource p s) a where
+    computedStorageAccountType = TF.configuration . computedStorageAccountType
+
+class HasComputedSubnets s a | s -> a where
+    computedSubnets :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSubnets s a => HasComputedSubnets (TF.DataSource p s) a where
+    computedSubnets = TF.configuration . computedSubnets
+
+class HasComputedTags s a | s -> a where
+    computedTags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTags s a => HasComputedTags (TF.DataSource p s) a where
+    computedTags = TF.configuration . computedTags
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasComputedVersion s a | s -> a where
+    computedVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVersion s a => HasComputedVersion (TF.DataSource p s) a where
+    computedVersion = TF.configuration . computedVersion
+
+class HasComputedVnetPeerings s a | s -> a where
+    computedVnetPeerings :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVnetPeerings s a => HasComputedVnetPeerings (TF.DataSource p s) a where
+    computedVnetPeerings = TF.configuration . computedVnetPeerings
+
+class HasLocation s a | s -> a where
+    location :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLocation s a => HasLocation (TF.DataSource p s) a where
+    location = TF.configuration . location
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name
+
+class HasOffer s a | s -> a where
+    offer :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOffer s a => HasOffer (TF.DataSource p s) a where
+    offer = TF.configuration . offer
+
+class HasPublisher s a | s -> a where
+    publisher :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPublisher s a => HasPublisher (TF.DataSource p s) a where
+    publisher = TF.configuration . publisher
+
+class HasResourceGroupName s a | s -> a where
+    resourceGroupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResourceGroupName s a => HasResourceGroupName (TF.DataSource p s) a where
+    resourceGroupName = TF.configuration . resourceGroupName
+
+class HasRoleDefinitionId s a | s -> a where
+    roleDefinitionId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRoleDefinitionId s a => HasRoleDefinitionId (TF.DataSource p s) a where
+    roleDefinitionId = TF.configuration . roleDefinitionId
+
+class HasScope s a | s -> a where
+    scope :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScope s a => HasScope (TF.DataSource p s) a where
+    scope = TF.configuration . scope
+
+class HasSku s a | s -> a where
+    sku :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSku s a => HasSku (TF.DataSource p s) a where
+    sku = TF.configuration . sku
+
+class HasSubscriptionId s a | s -> a where
+    subscriptionId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSubscriptionId s a => HasSubscriptionId (TF.DataSource p s) a where
+    subscriptionId = TF.configuration . subscriptionId
+
+class HasTenantId s a | s -> a where
+    tenantId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTenantId s a => HasTenantId (TF.DataSource p s) a where
+    tenantId = TF.configuration . tenantId
+
+class HasVirtualNetworkName s a | s -> a where
+    virtualNetworkName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVirtualNetworkName s a => HasVirtualNetworkName (TF.DataSource p s) a where
+    virtualNetworkName = TF.configuration . virtualNetworkName

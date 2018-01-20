@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,45 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.MySQL.Resource where
+module Terrafomo.MySQL.Resource
+    (
+    -- * Types
+      DatabaseResource (..)
+    , databaseResource
 
-import Data.Functor ((<$>))
+    , GrantResource (..)
+    , grantResource
+
+    , UserResource (..)
+    , userResource
+
+    -- * Overloaded Fields
+    , HasDatabase (..)
+    , HasDefaultCharacterSet (..)
+    , HasDefaultCollation (..)
+    , HasGrant (..)
+    , HasHost (..)
+    , HasName (..)
+    , HasPassword (..)
+    , HasPlaintextPassword (..)
+    , HasPrivileges (..)
+    , HasUser (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.MySQL.Provider  as TF
 import qualified Terrafomo.MySQL.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | The @mysql_database@ MySQL resource.
 
@@ -62,10 +83,20 @@ instance TF.ToHCL DatabaseResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''DatabaseResource
-    ''TF.MySQL
-    ''TF.Resource)
+instance HasDefaultCharacterSet DatabaseResource (TF.Argument Text) where
+    defaultCharacterSet f s@DatabaseResource{..} =
+        (\a -> s { _default_character_set = a } :: DatabaseResource)
+             <$> f _default_character_set
+
+instance HasDefaultCollation DatabaseResource (TF.Argument Text) where
+    defaultCollation f s@DatabaseResource{..} =
+        (\a -> s { _default_collation = a } :: DatabaseResource)
+             <$> f _default_collation
+
+instance HasName DatabaseResource (TF.Argument Text) where
+    name f s@DatabaseResource{..} =
+        (\a -> s { _name = a } :: DatabaseResource)
+             <$> f _name
 
 databaseResource :: TF.Resource TF.MySQL DatabaseResource
 databaseResource =
@@ -103,10 +134,30 @@ instance TF.ToHCL GrantResource where
         , TF.assign "user" <$> TF.argument _user
         ]
 
-$(TF.makeSchemaLenses
-    ''GrantResource
-    ''TF.MySQL
-    ''TF.Resource)
+instance HasDatabase GrantResource (TF.Argument Text) where
+    database f s@GrantResource{..} =
+        (\a -> s { _database = a } :: GrantResource)
+             <$> f _database
+
+instance HasGrant GrantResource (TF.Argument Text) where
+    grant f s@GrantResource{..} =
+        (\a -> s { _grant = a } :: GrantResource)
+             <$> f _grant
+
+instance HasHost GrantResource (TF.Argument Text) where
+    host f s@GrantResource{..} =
+        (\a -> s { _host = a } :: GrantResource)
+             <$> f _host
+
+instance HasPrivileges GrantResource (TF.Argument Text) where
+    privileges f s@GrantResource{..} =
+        (\a -> s { _privileges = a } :: GrantResource)
+             <$> f _privileges
+
+instance HasUser GrantResource (TF.Argument Text) where
+    user f s@GrantResource{..} =
+        (\a -> s { _user = a } :: GrantResource)
+             <$> f _user
 
 grantResource :: TF.Resource TF.MySQL GrantResource
 grantResource =
@@ -145,10 +196,25 @@ instance TF.ToHCL UserResource where
         , TF.assign "user" <$> TF.argument _user
         ]
 
-$(TF.makeSchemaLenses
-    ''UserResource
-    ''TF.MySQL
-    ''TF.Resource)
+instance HasHost UserResource (TF.Argument Text) where
+    host f s@UserResource{..} =
+        (\a -> s { _host = a } :: UserResource)
+             <$> f _host
+
+instance HasPassword UserResource (TF.Argument Text) where
+    password f s@UserResource{..} =
+        (\a -> s { _password = a } :: UserResource)
+             <$> f _password
+
+instance HasPlaintextPassword UserResource (TF.Argument Text) where
+    plaintextPassword f s@UserResource{..} =
+        (\a -> s { _plaintext_password = a } :: UserResource)
+             <$> f _plaintext_password
+
+instance HasUser UserResource (TF.Argument Text) where
+    user f s@UserResource{..} =
+        (\a -> s { _user = a } :: UserResource)
+             <$> f _user
 
 userResource :: TF.Resource TF.MySQL UserResource
 userResource =
@@ -159,3 +225,63 @@ userResource =
             , _plaintext_password = TF.Nil
             , _user = TF.Nil
             }
+
+class HasDatabase s a | s -> a where
+    database :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDatabase s a => HasDatabase (TF.Resource p s) a where
+    database = TF.configuration . database
+
+class HasDefaultCharacterSet s a | s -> a where
+    defaultCharacterSet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDefaultCharacterSet s a => HasDefaultCharacterSet (TF.Resource p s) a where
+    defaultCharacterSet = TF.configuration . defaultCharacterSet
+
+class HasDefaultCollation s a | s -> a where
+    defaultCollation :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDefaultCollation s a => HasDefaultCollation (TF.Resource p s) a where
+    defaultCollation = TF.configuration . defaultCollation
+
+class HasGrant s a | s -> a where
+    grant :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGrant s a => HasGrant (TF.Resource p s) a where
+    grant = TF.configuration . grant
+
+class HasHost s a | s -> a where
+    host :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHost s a => HasHost (TF.Resource p s) a where
+    host = TF.configuration . host
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasPassword s a | s -> a where
+    password :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPassword s a => HasPassword (TF.Resource p s) a where
+    password = TF.configuration . password
+
+class HasPlaintextPassword s a | s -> a where
+    plaintextPassword :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPlaintextPassword s a => HasPlaintextPassword (TF.Resource p s) a where
+    plaintextPassword = TF.configuration . plaintextPassword
+
+class HasPrivileges s a | s -> a where
+    privileges :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPrivileges s a => HasPrivileges (TF.Resource p s) a where
+    privileges = TF.configuration . privileges
+
+class HasUser s a | s -> a where
+    user :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUser s a => HasUser (TF.Resource p s) a where
+    user = TF.configuration . user

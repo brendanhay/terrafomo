@@ -8,6 +8,7 @@ name: terrafomo-openstack
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

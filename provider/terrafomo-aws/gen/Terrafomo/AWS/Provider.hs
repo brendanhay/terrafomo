@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,28 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AWS.Provider
-    ( AWS    (..)
-    , HasAWS (..)
+    (
+    -- * Provider Datatype
+      AWS (..)
+
+    -- * Lenses
+    , accessKey
+    , allowedAccountIds
+    , assumeRole
+    , forbiddenAccountIds
+    , insecure
+    , maxRetries
+    , profile
+    , region
+    , s3ForcePathStyle
+    , secretKey
+    , sharedCredentialsFile
+    , skipCredentialsValidation
+    , skipGetEc2Platforms
+    , skipMetadataApiCheck
+    , skipRegionValidation
+    , skipRequestingAccountId
+    , token
     ) where
 
 import Data.Function      (on)
@@ -32,13 +51,11 @@ import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.AWS.Types as TF
+import qualified Terrafomo.AWS.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | AWS Terraform provider.
 
@@ -48,39 +65,39 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AWS = AWS {
-      _access_key :: !(TF.Argument Text)
+      _access_key                  :: !(TF.Argument Text)
     {- ^ (Optional) This is the AWS access key. It must be provided, but it can also be sourced from the @AWS_ACCESS_KEY_ID@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _allowed_account_ids :: !(TF.Argument Text)
+    , _allowed_account_ids         :: !(TF.Argument Text)
     {- ^ (Optional) List of allowed, white listed, AWS account IDs to prevent you from mistakenly using an incorrect one (and potentially end up destroying a live environment). Conflicts with @forbidden_account_ids@ . -}
-    , _assume_role :: !(TF.Argument Text)
+    , _assume_role                 :: !(TF.Argument Text)
     {- ^ (Optional) An @assume_role@ block (documented below). Only one @assume_role@ block may be in the configuration. -}
-    , _forbidden_account_ids :: !(TF.Argument Text)
+    , _forbidden_account_ids       :: !(TF.Argument Text)
     {- ^ (Optional) List of forbidden, blacklisted, AWS account IDs to prevent you mistakenly using a wrong one (and potentially end up destroying a live environment). Conflicts with @allowed_account_ids@ . -}
-    , _insecure :: !(TF.Argument Text)
+    , _insecure                    :: !(TF.Argument Text)
     {- ^ (Optional) Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is @false@ . -}
-    , _max_retries :: !(TF.Argument Text)
+    , _max_retries                 :: !(TF.Argument Text)
     {- ^ (Optional) This is the maximum number of times an API call is retried, in the case where requests are being throttled or experiencing transient failures. The delay between the subsequent API calls increases exponentially. -}
-    , _profile :: !(TF.Argument Text)
+    , _profile                     :: !(TF.Argument Text)
     {- ^ (Optional) This is the AWS profile name as set in the shared credentials file. -}
-    , _region :: !(TF.Argument Text)
+    , _region                      :: !(TF.Argument Text)
     {- ^ (Required) This is the AWS region. It must be provided, but it can also be sourced from the @AWS_DEFAULT_REGION@ environment variables, or via a shared credentials file if @profile@ is specified. -}
-    , _s3_force_path_style :: !(TF.Argument Text)
+    , _s3_force_path_style         :: !(TF.Argument Text)
     {- ^ (Optional) Set this to @true@ to force the request to use path-style addressing, i.e., @http://s3.amazonaws.com/BUCKET/KEY@ . By default, the S3 client will use virtual hosted bucket addressing, @http://BUCKET.s3.amazonaws.com/KEY@ , when possible. Specific to the Amazon S3 service. -}
-    , _secret_key :: !(TF.Argument Text)
+    , _secret_key                  :: !(TF.Argument Text)
     {- ^ (Optional) This is the AWS secret key. It must be provided, but it can also be sourced from the @AWS_SECRET_ACCESS_KEY@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _shared_credentials_file :: !(TF.Argument Text)
+    , _shared_credentials_file     :: !(TF.Argument Text)
     {- ^ = (Optional) This is the path to the shared credentials file. If this is not set and a profile is specified, @~/.aws/credentials@ will be used. -}
     , _skip_credentials_validation :: !(TF.Argument Text)
     {- ^ (Optional) Skip the credentials validation via the STS API. Useful for AWS API implementations that do not have STS available or implemented. -}
-    , _skip_get_ec2_platforms :: !(TF.Argument Text)
+    , _skip_get_ec2_platforms      :: !(TF.Argument Text)
     {- ^ (Optional) Skip getting the supported EC2 platforms. Used by users that don't have ec2:DescribeAccountAttributes permissions. -}
-    , _skip_metadata_api_check :: !(TF.Argument Text)
+    , _skip_metadata_api_check     :: !(TF.Argument Text)
     {- ^ (Optional) Skip the AWS Metadata API check.  Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to @true@ prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables. -}
-    , _skip_region_validation :: !(TF.Argument Text)
+    , _skip_region_validation      :: !(TF.Argument Text)
     {- ^ (Optional) Skip validation of provided region name. Useful for AWS-like implementations that use their own region names or to bypass the validation for regions that aren't publicly available yet. -}
-    , _skip_requesting_account_id :: !(TF.Argument Text)
+    , _skip_requesting_account_id  :: !(TF.Argument Text)
     {- ^ (Optional) Skip requesting the account ID.  Useful for AWS API implementations that do not have the IAM, STS API, or metadata API.  When set to @true@ , prevents you from managing any resource that requires Account ID to construct an ARN, e.g. -}
-    , _token :: !(TF.Argument Text)
+    , _token                       :: !(TF.Argument Text)
     {- ^ (Optional) Use this to set an MFA token. It can also be sourced from the @AWS_SESSION_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -155,4 +172,155 @@ instance Monoid AWS where
 instance TF.IsProvider AWS where
     type ProviderName AWS = "aws"
 
-$(TF.makeProviderLenses ''AWS)
+accessKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+accessKey f s =
+        (\a -> s { _access_key = a } :: AWS)
+             <$> f (_access_key s)
+
+allowedAccountIds
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+allowedAccountIds f s =
+        (\a -> s { _allowed_account_ids = a } :: AWS)
+             <$> f (_allowed_account_ids s)
+
+assumeRole
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+assumeRole f s =
+        (\a -> s { _assume_role = a } :: AWS)
+             <$> f (_assume_role s)
+
+forbiddenAccountIds
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+forbiddenAccountIds f s =
+        (\a -> s { _forbidden_account_ids = a } :: AWS)
+             <$> f (_forbidden_account_ids s)
+
+insecure
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+insecure f s =
+        (\a -> s { _insecure = a } :: AWS)
+             <$> f (_insecure s)
+
+maxRetries
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+maxRetries f s =
+        (\a -> s { _max_retries = a } :: AWS)
+             <$> f (_max_retries s)
+
+profile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+profile f s =
+        (\a -> s { _profile = a } :: AWS)
+             <$> f (_profile s)
+
+region
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+region f s =
+        (\a -> s { _region = a } :: AWS)
+             <$> f (_region s)
+
+s3ForcePathStyle
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+s3ForcePathStyle f s =
+        (\a -> s { _s3_force_path_style = a } :: AWS)
+             <$> f (_s3_force_path_style s)
+
+secretKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+secretKey f s =
+        (\a -> s { _secret_key = a } :: AWS)
+             <$> f (_secret_key s)
+
+sharedCredentialsFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+sharedCredentialsFile f s =
+        (\a -> s { _shared_credentials_file = a } :: AWS)
+             <$> f (_shared_credentials_file s)
+
+skipCredentialsValidation
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+skipCredentialsValidation f s =
+        (\a -> s { _skip_credentials_validation = a } :: AWS)
+             <$> f (_skip_credentials_validation s)
+
+skipGetEc2Platforms
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+skipGetEc2Platforms f s =
+        (\a -> s { _skip_get_ec2_platforms = a } :: AWS)
+             <$> f (_skip_get_ec2_platforms s)
+
+skipMetadataApiCheck
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+skipMetadataApiCheck f s =
+        (\a -> s { _skip_metadata_api_check = a } :: AWS)
+             <$> f (_skip_metadata_api_check s)
+
+skipRegionValidation
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+skipRegionValidation f s =
+        (\a -> s { _skip_region_validation = a } :: AWS)
+             <$> f (_skip_region_validation s)
+
+skipRequestingAccountId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+skipRequestingAccountId f s =
+        (\a -> s { _skip_requesting_account_id = a } :: AWS)
+             <$> f (_skip_requesting_account_id s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AWS
+    -> f AWS
+token f s =
+        (\a -> s { _token = a } :: AWS)
+             <$> f (_token s)

@@ -19,7 +19,8 @@ library:
     - Terrafomo
     - Terrafomo.Format
     - Terrafomo.Monad
-    - Terrafomo.TH
+    - Terrafomo.Options
+    - Terrafomo.Program
 
     - Terrafomo.Syntax.DataSource
     - Terrafomo.Syntax.HCL
@@ -47,7 +48,6 @@ library:
     - formatting >= 6.2.5
     - hashable
     - microlens
-    - microlens-th
     - mmorph
     - mtl
     - random

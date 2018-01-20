@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,36 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.DataSource where
+module Terrafomo.LogicMonitor.DataSource
+    (
+    -- * Types
+      CollectorsDataSource (..)
+    , collectorsDataSource
 
-import Data.Functor ((<$>))
+    , DeviceGroupDataSource (..)
+    , deviceGroupDataSource
+
+    -- * Overloaded Fields
+    , HasFilters (..)
+    , HasMostRecent (..)
+    , HasOffset (..)
+    , HasSize (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.LogicMonitor.Provider as TF
 import qualified Terrafomo.LogicMonitor.Types    as TF
 import qualified Terrafomo.Syntax.DataSource     as TF
 import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Meta           as TF (configuration)
 import qualified Terrafomo.Syntax.Resource       as TF
 import qualified Terrafomo.Syntax.Variable       as TF
-import qualified Terrafomo.TH                    as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
@@ -61,10 +73,25 @@ instance TF.ToHCL CollectorsDataSource where
         , TF.assign "size" <$> TF.argument _size
         ]
 
-$(TF.makeSchemaLenses
-    ''CollectorsDataSource
-    ''TF.LogicMonitor
-    ''TF.DataSource)
+instance HasFilters CollectorsDataSource (TF.Argument Text) where
+    filters f s@CollectorsDataSource{..} =
+        (\a -> s { _filters = a } :: CollectorsDataSource)
+             <$> f _filters
+
+instance HasMostRecent CollectorsDataSource (TF.Argument Text) where
+    mostRecent f s@CollectorsDataSource{..} =
+        (\a -> s { _most_recent = a } :: CollectorsDataSource)
+             <$> f _most_recent
+
+instance HasOffset CollectorsDataSource (TF.Argument Text) where
+    offset f s@CollectorsDataSource{..} =
+        (\a -> s { _offset = a } :: CollectorsDataSource)
+             <$> f _offset
+
+instance HasSize CollectorsDataSource (TF.Argument Text) where
+    size f s@CollectorsDataSource{..} =
+        (\a -> s { _size = a } :: CollectorsDataSource)
+             <$> f _size
 
 collectorsDataSource :: TF.DataSource TF.LogicMonitor CollectorsDataSource
 collectorsDataSource =
@@ -96,10 +123,20 @@ instance TF.ToHCL DeviceGroupDataSource where
         , TF.assign "size" <$> TF.argument _size
         ]
 
-$(TF.makeSchemaLenses
-    ''DeviceGroupDataSource
-    ''TF.LogicMonitor
-    ''TF.DataSource)
+instance HasFilters DeviceGroupDataSource (TF.Argument Text) where
+    filters f s@DeviceGroupDataSource{..} =
+        (\a -> s { _filters = a } :: DeviceGroupDataSource)
+             <$> f _filters
+
+instance HasOffset DeviceGroupDataSource (TF.Argument Text) where
+    offset f s@DeviceGroupDataSource{..} =
+        (\a -> s { _offset = a } :: DeviceGroupDataSource)
+             <$> f _offset
+
+instance HasSize DeviceGroupDataSource (TF.Argument Text) where
+    size f s@DeviceGroupDataSource{..} =
+        (\a -> s { _size = a } :: DeviceGroupDataSource)
+             <$> f _size
 
 deviceGroupDataSource :: TF.DataSource TF.LogicMonitor DeviceGroupDataSource
 deviceGroupDataSource =
@@ -109,3 +146,27 @@ deviceGroupDataSource =
             , _offset = TF.Nil
             , _size = TF.Nil
             }
+
+class HasFilters s a | s -> a where
+    filters :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFilters s a => HasFilters (TF.DataSource p s) a where
+    filters = TF.configuration . filters
+
+class HasMostRecent s a | s -> a where
+    mostRecent :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMostRecent s a => HasMostRecent (TF.DataSource p s) a where
+    mostRecent = TF.configuration . mostRecent
+
+class HasOffset s a | s -> a where
+    offset :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOffset s a => HasOffset (TF.DataSource p s) a where
+    offset = TF.configuration . offset
+
+class HasSize s a | s -> a where
+    size :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSize s a => HasSize (TF.DataSource p s) a where
+    size = TF.configuration . size

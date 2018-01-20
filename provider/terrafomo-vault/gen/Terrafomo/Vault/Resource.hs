@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,20 +19,115 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Vault.Resource where
+module Terrafomo.Vault.Resource
+    (
+    -- * Types
+      AuthBackendResource (..)
+    , authBackendResource
 
-import Data.Functor ((<$>))
+    , AwsAuthBackendCertResource (..)
+    , awsAuthBackendCertResource
+
+    , AwsAuthBackendClientResource (..)
+    , awsAuthBackendClientResource
+
+    , AwsAuthBackendLoginResource (..)
+    , awsAuthBackendLoginResource
+
+    , AwsAuthBackendRoleResource (..)
+    , awsAuthBackendRoleResource
+
+    , AwsAuthBackendStsRoleResource (..)
+    , awsAuthBackendStsRoleResource
+
+    , AwsSecretBackendResource (..)
+    , awsSecretBackendResource
+
+    , AwsSecretBackendRoleResource (..)
+    , awsSecretBackendRoleResource
+
+    , GenericSecretResource (..)
+    , genericSecretResource
+
+    , MountResource (..)
+    , mountResource
+
+    , PolicyResource (..)
+    , policyResource
+
+    -- * Overloaded Fields
+    , HasAccessKey (..)
+    , HasAccountId (..)
+    , HasAllowInstanceMigration (..)
+    , HasAllowRead (..)
+    , HasAuthType (..)
+    , HasAwsPublicCert (..)
+    , HasBackend (..)
+    , HasBoundAccountId (..)
+    , HasBoundAmiId (..)
+    , HasBoundIamInstanceProfileArn (..)
+    , HasBoundIamPrincipalArn (..)
+    , HasBoundIamRoleArn (..)
+    , HasBoundRegion (..)
+    , HasBoundSubnetId (..)
+    , HasBoundVpcId (..)
+    , HasCertName (..)
+    , HasComputedAccessor (..)
+    , HasComputedAuthType (..)
+    , HasComputedClientToken (..)
+    , HasComputedLeaseDuration (..)
+    , HasComputedLeaseStartTime (..)
+    , HasComputedMetadata (..)
+    , HasComputedPolicies (..)
+    , HasComputedRenewable (..)
+    , HasDataJson (..)
+    , HasDefaultLeaseTtlSeconds (..)
+    , HasDescription (..)
+    , HasDisableRead (..)
+    , HasDisallowReauthentication (..)
+    , HasEc2Endpoint (..)
+    , HasIamEndpoint (..)
+    , HasIamHttpRequestMethod (..)
+    , HasIamRequestBody (..)
+    , HasIamRequestHeaders (..)
+    , HasIamRequestUrl (..)
+    , HasIamServerIdHeaderValue (..)
+    , HasIdentity (..)
+    , HasInferredAwsRegion (..)
+    , HasInferredEntityType (..)
+    , HasMaxLeaseTtlSeconds (..)
+    , HasMaxTtl (..)
+    , HasName (..)
+    , HasNonce (..)
+    , HasPath (..)
+    , HasPeriod (..)
+    , HasPkcs7 (..)
+    , HasPolicies (..)
+    , HasPolicy (..)
+    , HasPolicyArn (..)
+    , HasResolveAwsUniqueIds (..)
+    , HasRole (..)
+    , HasRoleTag (..)
+    , HasSecretKey (..)
+    , HasSignature (..)
+    , HasStsEndpoint (..)
+    , HasStsRole (..)
+    , HasTtl (..)
+    , HasType' (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 import qualified Terrafomo.Vault.Provider  as TF
 import qualified Terrafomo.Vault.Types     as TF
 
@@ -58,10 +151,20 @@ instance TF.ToHCL AuthBackendResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''AuthBackendResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasDescription AuthBackendResource (TF.Argument Text) where
+    description f s@AuthBackendResource{..} =
+        (\a -> s { _description = a } :: AuthBackendResource)
+             <$> f _description
+
+instance HasPath AuthBackendResource (TF.Argument Text) where
+    path f s@AuthBackendResource{..} =
+        (\a -> s { _path = a } :: AuthBackendResource)
+             <$> f _path
+
+instance HasType' AuthBackendResource (TF.Argument Text) where
+    type' f s@AuthBackendResource{..} =
+        (\a -> s { _type' = a } :: AuthBackendResource)
+             <$> f _type'
 
 authBackendResource :: TF.Resource TF.Vault AuthBackendResource
 authBackendResource =
@@ -103,10 +206,25 @@ instance TF.ToHCL AwsAuthBackendCertResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsAuthBackendCertResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasAwsPublicCert AwsAuthBackendCertResource (TF.Argument Text) where
+    awsPublicCert f s@AwsAuthBackendCertResource{..} =
+        (\a -> s { _aws_public_cert = a } :: AwsAuthBackendCertResource)
+             <$> f _aws_public_cert
+
+instance HasBackend AwsAuthBackendCertResource (TF.Argument Text) where
+    backend f s@AwsAuthBackendCertResource{..} =
+        (\a -> s { _backend = a } :: AwsAuthBackendCertResource)
+             <$> f _backend
+
+instance HasCertName AwsAuthBackendCertResource (TF.Argument Text) where
+    certName f s@AwsAuthBackendCertResource{..} =
+        (\a -> s { _cert_name = a } :: AwsAuthBackendCertResource)
+             <$> f _cert_name
+
+instance HasType' AwsAuthBackendCertResource (TF.Argument Text) where
+    type' f s@AwsAuthBackendCertResource{..} =
+        (\a -> s { _type' = a } :: AwsAuthBackendCertResource)
+             <$> f _type'
 
 awsAuthBackendCertResource :: TF.Resource TF.Vault AwsAuthBackendCertResource
 awsAuthBackendCertResource =
@@ -159,10 +277,40 @@ instance TF.ToHCL AwsAuthBackendClientResource where
         , TF.assign "sts_endpoint" <$> TF.argument _sts_endpoint
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsAuthBackendClientResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasAccessKey AwsAuthBackendClientResource (TF.Argument Text) where
+    accessKey f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _access_key = a } :: AwsAuthBackendClientResource)
+             <$> f _access_key
+
+instance HasBackend AwsAuthBackendClientResource (TF.Argument Text) where
+    backend f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _backend = a } :: AwsAuthBackendClientResource)
+             <$> f _backend
+
+instance HasEc2Endpoint AwsAuthBackendClientResource (TF.Argument Text) where
+    ec2Endpoint f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _ec2_endpoint = a } :: AwsAuthBackendClientResource)
+             <$> f _ec2_endpoint
+
+instance HasIamEndpoint AwsAuthBackendClientResource (TF.Argument Text) where
+    iamEndpoint f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _iam_endpoint = a } :: AwsAuthBackendClientResource)
+             <$> f _iam_endpoint
+
+instance HasIamServerIdHeaderValue AwsAuthBackendClientResource (TF.Argument Text) where
+    iamServerIdHeaderValue f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _iam_server_id_header_value = a } :: AwsAuthBackendClientResource)
+             <$> f _iam_server_id_header_value
+
+instance HasSecretKey AwsAuthBackendClientResource (TF.Argument Text) where
+    secretKey f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _secret_key = a } :: AwsAuthBackendClientResource)
+             <$> f _secret_key
+
+instance HasStsEndpoint AwsAuthBackendClientResource (TF.Argument Text) where
+    stsEndpoint f s@AwsAuthBackendClientResource{..} =
+        (\a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource)
+             <$> f _sts_endpoint
 
 awsAuthBackendClientResource :: TF.Resource TF.Vault AwsAuthBackendClientResource
 awsAuthBackendClientResource =
@@ -237,10 +385,95 @@ instance TF.ToHCL AwsAuthBackendLoginResource where
         , TF.assign "signature" <$> TF.argument _signature
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsAuthBackendLoginResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasBackend AwsAuthBackendLoginResource (TF.Argument Text) where
+    backend f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _backend = a } :: AwsAuthBackendLoginResource)
+             <$> f _backend
+
+instance HasIamHttpRequestMethod AwsAuthBackendLoginResource (TF.Argument Text) where
+    iamHttpRequestMethod f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _iam_http_request_method = a } :: AwsAuthBackendLoginResource)
+             <$> f _iam_http_request_method
+
+instance HasIamRequestBody AwsAuthBackendLoginResource (TF.Argument Text) where
+    iamRequestBody f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _iam_request_body = a } :: AwsAuthBackendLoginResource)
+             <$> f _iam_request_body
+
+instance HasIamRequestHeaders AwsAuthBackendLoginResource (TF.Argument Text) where
+    iamRequestHeaders f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _iam_request_headers = a } :: AwsAuthBackendLoginResource)
+             <$> f _iam_request_headers
+
+instance HasIamRequestUrl AwsAuthBackendLoginResource (TF.Argument Text) where
+    iamRequestUrl f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _iam_request_url = a } :: AwsAuthBackendLoginResource)
+             <$> f _iam_request_url
+
+instance HasIdentity AwsAuthBackendLoginResource (TF.Argument Text) where
+    identity f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _identity = a } :: AwsAuthBackendLoginResource)
+             <$> f _identity
+
+instance HasNonce AwsAuthBackendLoginResource (TF.Argument Text) where
+    nonce f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _nonce = a } :: AwsAuthBackendLoginResource)
+             <$> f _nonce
+
+instance HasPkcs7 AwsAuthBackendLoginResource (TF.Argument Text) where
+    pkcs7 f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _pkcs7 = a } :: AwsAuthBackendLoginResource)
+             <$> f _pkcs7
+
+instance HasRole AwsAuthBackendLoginResource (TF.Argument Text) where
+    role f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _role = a } :: AwsAuthBackendLoginResource)
+             <$> f _role
+
+instance HasSignature AwsAuthBackendLoginResource (TF.Argument Text) where
+    signature f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _signature = a } :: AwsAuthBackendLoginResource)
+             <$> f _signature
+
+instance HasComputedAccessor AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedAccessor f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_accessor = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_accessor
+
+instance HasComputedAuthType AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedAuthType f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_auth_type = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_auth_type
+
+instance HasComputedClientToken AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedClientToken f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_client_token = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_client_token
+
+instance HasComputedLeaseDuration AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedLeaseDuration f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_lease_duration = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_lease_duration
+
+instance HasComputedLeaseStartTime AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedLeaseStartTime f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_lease_start_time = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_lease_start_time
+
+instance HasComputedMetadata AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedMetadata f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_metadata = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_metadata
+
+instance HasComputedPolicies AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedPolicies f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_policies = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_policies
+
+instance HasComputedRenewable AwsAuthBackendLoginResource (TF.Attribute Text) where
+    computedRenewable f s@AwsAuthBackendLoginResource{..} =
+        (\a -> s { _computed_renewable = a } :: AwsAuthBackendLoginResource)
+             <$> f _computed_renewable
 
 awsAuthBackendLoginResource :: TF.Resource TF.Vault AwsAuthBackendLoginResource
 awsAuthBackendLoginResource =
@@ -340,10 +573,105 @@ instance TF.ToHCL AwsAuthBackendRoleResource where
         , TF.assign "ttl" <$> TF.argument _ttl
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsAuthBackendRoleResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasAllowInstanceMigration AwsAuthBackendRoleResource (TF.Argument Text) where
+    allowInstanceMigration f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleResource)
+             <$> f _allow_instance_migration
+
+instance HasAuthType AwsAuthBackendRoleResource (TF.Argument Text) where
+    authType f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _auth_type = a } :: AwsAuthBackendRoleResource)
+             <$> f _auth_type
+
+instance HasBoundAccountId AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundAccountId f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_account_id = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_account_id
+
+instance HasBoundAmiId AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundAmiId f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_ami_id = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_ami_id
+
+instance HasBoundIamInstanceProfileArn AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundIamInstanceProfileArn f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_iam_instance_profile_arn = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_iam_instance_profile_arn
+
+instance HasBoundIamPrincipalArn AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundIamPrincipalArn f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_iam_principal_arn = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_iam_principal_arn
+
+instance HasBoundIamRoleArn AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundIamRoleArn f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_iam_role_arn = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_iam_role_arn
+
+instance HasBoundRegion AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundRegion f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_region = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_region
+
+instance HasBoundSubnetId AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundSubnetId f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_subnet_id = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_subnet_id
+
+instance HasBoundVpcId AwsAuthBackendRoleResource (TF.Argument Text) where
+    boundVpcId f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _bound_vpc_id = a } :: AwsAuthBackendRoleResource)
+             <$> f _bound_vpc_id
+
+instance HasDisallowReauthentication AwsAuthBackendRoleResource (TF.Argument Text) where
+    disallowReauthentication f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleResource)
+             <$> f _disallow_reauthentication
+
+instance HasInferredAwsRegion AwsAuthBackendRoleResource (TF.Argument Text) where
+    inferredAwsRegion f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _inferred_aws_region = a } :: AwsAuthBackendRoleResource)
+             <$> f _inferred_aws_region
+
+instance HasInferredEntityType AwsAuthBackendRoleResource (TF.Argument Text) where
+    inferredEntityType f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _inferred_entity_type = a } :: AwsAuthBackendRoleResource)
+             <$> f _inferred_entity_type
+
+instance HasMaxTtl AwsAuthBackendRoleResource (TF.Argument Text) where
+    maxTtl f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _max_ttl = a } :: AwsAuthBackendRoleResource)
+             <$> f _max_ttl
+
+instance HasPeriod AwsAuthBackendRoleResource (TF.Argument Text) where
+    period f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _period = a } :: AwsAuthBackendRoleResource)
+             <$> f _period
+
+instance HasPolicies AwsAuthBackendRoleResource (TF.Argument Text) where
+    policies f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _policies = a } :: AwsAuthBackendRoleResource)
+             <$> f _policies
+
+instance HasResolveAwsUniqueIds AwsAuthBackendRoleResource (TF.Argument Text) where
+    resolveAwsUniqueIds f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _resolve_aws_unique_ids = a } :: AwsAuthBackendRoleResource)
+             <$> f _resolve_aws_unique_ids
+
+instance HasRole AwsAuthBackendRoleResource (TF.Argument Text) where
+    role f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _role = a } :: AwsAuthBackendRoleResource)
+             <$> f _role
+
+instance HasRoleTag AwsAuthBackendRoleResource (TF.Argument Text) where
+    roleTag f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _role_tag = a } :: AwsAuthBackendRoleResource)
+             <$> f _role_tag
+
+instance HasTtl AwsAuthBackendRoleResource (TF.Argument Text) where
+    ttl f s@AwsAuthBackendRoleResource{..} =
+        (\a -> s { _ttl = a } :: AwsAuthBackendRoleResource)
+             <$> f _ttl
 
 awsAuthBackendRoleResource :: TF.Resource TF.Vault AwsAuthBackendRoleResource
 awsAuthBackendRoleResource =
@@ -399,10 +727,20 @@ instance TF.ToHCL AwsAuthBackendStsRoleResource where
         , TF.assign "sts_role" <$> TF.argument _sts_role
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsAuthBackendStsRoleResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasAccountId AwsAuthBackendStsRoleResource (TF.Argument Text) where
+    accountId f s@AwsAuthBackendStsRoleResource{..} =
+        (\a -> s { _account_id = a } :: AwsAuthBackendStsRoleResource)
+             <$> f _account_id
+
+instance HasBackend AwsAuthBackendStsRoleResource (TF.Argument Text) where
+    backend f s@AwsAuthBackendStsRoleResource{..} =
+        (\a -> s { _backend = a } :: AwsAuthBackendStsRoleResource)
+             <$> f _backend
+
+instance HasStsRole AwsAuthBackendStsRoleResource (TF.Argument Text) where
+    stsRole f s@AwsAuthBackendStsRoleResource{..} =
+        (\a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource)
+             <$> f _sts_role
 
 awsAuthBackendStsRoleResource :: TF.Resource TF.Vault AwsAuthBackendStsRoleResource
 awsAuthBackendStsRoleResource =
@@ -435,10 +773,15 @@ instance TF.ToHCL AwsSecretBackendResource where
         , TF.assign "secret_key" <$> TF.argument _secret_key
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsSecretBackendResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasAccessKey AwsSecretBackendResource (TF.Argument Text) where
+    accessKey f s@AwsSecretBackendResource{..} =
+        (\a -> s { _access_key = a } :: AwsSecretBackendResource)
+             <$> f _access_key
+
+instance HasSecretKey AwsSecretBackendResource (TF.Argument Text) where
+    secretKey f s@AwsSecretBackendResource{..} =
+        (\a -> s { _secret_key = a } :: AwsSecretBackendResource)
+             <$> f _secret_key
 
 awsSecretBackendResource :: TF.Resource TF.Vault AwsSecretBackendResource
 awsSecretBackendResource =
@@ -476,10 +819,25 @@ instance TF.ToHCL AwsSecretBackendRoleResource where
         , TF.assign "policy_arn" <$> TF.argument _policy_arn
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsSecretBackendRoleResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasBackend AwsSecretBackendRoleResource (TF.Argument Text) where
+    backend f s@AwsSecretBackendRoleResource{..} =
+        (\a -> s { _backend = a } :: AwsSecretBackendRoleResource)
+             <$> f _backend
+
+instance HasName AwsSecretBackendRoleResource (TF.Argument Text) where
+    name f s@AwsSecretBackendRoleResource{..} =
+        (\a -> s { _name = a } :: AwsSecretBackendRoleResource)
+             <$> f _name
+
+instance HasPolicy AwsSecretBackendRoleResource (TF.Argument Text) where
+    policy f s@AwsSecretBackendRoleResource{..} =
+        (\a -> s { _policy = a } :: AwsSecretBackendRoleResource)
+             <$> f _policy
+
+instance HasPolicyArn AwsSecretBackendRoleResource (TF.Argument Text) where
+    policyArn f s@AwsSecretBackendRoleResource{..} =
+        (\a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource)
+             <$> f _policy_arn
 
 awsSecretBackendRoleResource :: TF.Resource TF.Vault AwsSecretBackendRoleResource
 awsSecretBackendRoleResource =
@@ -522,10 +880,25 @@ instance TF.ToHCL GenericSecretResource where
         , TF.assign "path" <$> TF.argument _path
         ]
 
-$(TF.makeSchemaLenses
-    ''GenericSecretResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasAllowRead GenericSecretResource (TF.Argument Text) where
+    allowRead f s@GenericSecretResource{..} =
+        (\a -> s { _allow_read = a } :: GenericSecretResource)
+             <$> f _allow_read
+
+instance HasDataJson GenericSecretResource (TF.Argument Text) where
+    dataJson f s@GenericSecretResource{..} =
+        (\a -> s { _data_json = a } :: GenericSecretResource)
+             <$> f _data_json
+
+instance HasDisableRead GenericSecretResource (TF.Argument Text) where
+    disableRead f s@GenericSecretResource{..} =
+        (\a -> s { _disable_read = a } :: GenericSecretResource)
+             <$> f _disable_read
+
+instance HasPath GenericSecretResource (TF.Argument Text) where
+    path f s@GenericSecretResource{..} =
+        (\a -> s { _path = a } :: GenericSecretResource)
+             <$> f _path
 
 genericSecretResource :: TF.Resource TF.Vault GenericSecretResource
 genericSecretResource =
@@ -563,10 +936,30 @@ instance TF.ToHCL MountResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''MountResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasDefaultLeaseTtlSeconds MountResource (TF.Argument Text) where
+    defaultLeaseTtlSeconds f s@MountResource{..} =
+        (\a -> s { _default_lease_ttl_seconds = a } :: MountResource)
+             <$> f _default_lease_ttl_seconds
+
+instance HasDescription MountResource (TF.Argument Text) where
+    description f s@MountResource{..} =
+        (\a -> s { _description = a } :: MountResource)
+             <$> f _description
+
+instance HasMaxLeaseTtlSeconds MountResource (TF.Argument Text) where
+    maxLeaseTtlSeconds f s@MountResource{..} =
+        (\a -> s { _max_lease_ttl_seconds = a } :: MountResource)
+             <$> f _max_lease_ttl_seconds
+
+instance HasPath MountResource (TF.Argument Text) where
+    path f s@MountResource{..} =
+        (\a -> s { _path = a } :: MountResource)
+             <$> f _path
+
+instance HasType' MountResource (TF.Argument Text) where
+    type' f s@MountResource{..} =
+        (\a -> s { _type' = a } :: MountResource)
+             <$> f _type'
 
 mountResource :: TF.Resource TF.Vault MountResource
 mountResource =
@@ -596,10 +989,15 @@ instance TF.ToHCL PolicyResource where
         , TF.assign "policy" <$> TF.argument _policy
         ]
 
-$(TF.makeSchemaLenses
-    ''PolicyResource
-    ''TF.Vault
-    ''TF.Resource)
+instance HasName PolicyResource (TF.Argument Text) where
+    name f s@PolicyResource{..} =
+        (\a -> s { _name = a } :: PolicyResource)
+             <$> f _name
+
+instance HasPolicy PolicyResource (TF.Argument Text) where
+    policy f s@PolicyResource{..} =
+        (\a -> s { _policy = a } :: PolicyResource)
+             <$> f _policy
 
 policyResource :: TF.Resource TF.Vault PolicyResource
 policyResource =
@@ -608,3 +1006,351 @@ policyResource =
             _name = TF.Nil
             , _policy = TF.Nil
             }
+
+class HasAccessKey s a | s -> a where
+    accessKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAccessKey s a => HasAccessKey (TF.Resource p s) a where
+    accessKey = TF.configuration . accessKey
+
+class HasAccountId s a | s -> a where
+    accountId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAccountId s a => HasAccountId (TF.Resource p s) a where
+    accountId = TF.configuration . accountId
+
+class HasAllowInstanceMigration s a | s -> a where
+    allowInstanceMigration :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAllowInstanceMigration s a => HasAllowInstanceMigration (TF.Resource p s) a where
+    allowInstanceMigration = TF.configuration . allowInstanceMigration
+
+class HasAllowRead s a | s -> a where
+    allowRead :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAllowRead s a => HasAllowRead (TF.Resource p s) a where
+    allowRead = TF.configuration . allowRead
+
+class HasAuthType s a | s -> a where
+    authType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAuthType s a => HasAuthType (TF.Resource p s) a where
+    authType = TF.configuration . authType
+
+class HasAwsPublicCert s a | s -> a where
+    awsPublicCert :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAwsPublicCert s a => HasAwsPublicCert (TF.Resource p s) a where
+    awsPublicCert = TF.configuration . awsPublicCert
+
+class HasBackend s a | s -> a where
+    backend :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBackend s a => HasBackend (TF.Resource p s) a where
+    backend = TF.configuration . backend
+
+class HasBoundAccountId s a | s -> a where
+    boundAccountId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundAccountId s a => HasBoundAccountId (TF.Resource p s) a where
+    boundAccountId = TF.configuration . boundAccountId
+
+class HasBoundAmiId s a | s -> a where
+    boundAmiId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundAmiId s a => HasBoundAmiId (TF.Resource p s) a where
+    boundAmiId = TF.configuration . boundAmiId
+
+class HasBoundIamInstanceProfileArn s a | s -> a where
+    boundIamInstanceProfileArn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundIamInstanceProfileArn s a => HasBoundIamInstanceProfileArn (TF.Resource p s) a where
+    boundIamInstanceProfileArn = TF.configuration . boundIamInstanceProfileArn
+
+class HasBoundIamPrincipalArn s a | s -> a where
+    boundIamPrincipalArn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundIamPrincipalArn s a => HasBoundIamPrincipalArn (TF.Resource p s) a where
+    boundIamPrincipalArn = TF.configuration . boundIamPrincipalArn
+
+class HasBoundIamRoleArn s a | s -> a where
+    boundIamRoleArn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundIamRoleArn s a => HasBoundIamRoleArn (TF.Resource p s) a where
+    boundIamRoleArn = TF.configuration . boundIamRoleArn
+
+class HasBoundRegion s a | s -> a where
+    boundRegion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundRegion s a => HasBoundRegion (TF.Resource p s) a where
+    boundRegion = TF.configuration . boundRegion
+
+class HasBoundSubnetId s a | s -> a where
+    boundSubnetId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundSubnetId s a => HasBoundSubnetId (TF.Resource p s) a where
+    boundSubnetId = TF.configuration . boundSubnetId
+
+class HasBoundVpcId s a | s -> a where
+    boundVpcId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBoundVpcId s a => HasBoundVpcId (TF.Resource p s) a where
+    boundVpcId = TF.configuration . boundVpcId
+
+class HasCertName s a | s -> a where
+    certName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCertName s a => HasCertName (TF.Resource p s) a where
+    certName = TF.configuration . certName
+
+class HasComputedAccessor s a | s -> a where
+    computedAccessor :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAccessor s a => HasComputedAccessor (TF.Resource p s) a where
+    computedAccessor = TF.configuration . computedAccessor
+
+class HasComputedAuthType s a | s -> a where
+    computedAuthType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAuthType s a => HasComputedAuthType (TF.Resource p s) a where
+    computedAuthType = TF.configuration . computedAuthType
+
+class HasComputedClientToken s a | s -> a where
+    computedClientToken :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedClientToken s a => HasComputedClientToken (TF.Resource p s) a where
+    computedClientToken = TF.configuration . computedClientToken
+
+class HasComputedLeaseDuration s a | s -> a where
+    computedLeaseDuration :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLeaseDuration s a => HasComputedLeaseDuration (TF.Resource p s) a where
+    computedLeaseDuration = TF.configuration . computedLeaseDuration
+
+class HasComputedLeaseStartTime s a | s -> a where
+    computedLeaseStartTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLeaseStartTime s a => HasComputedLeaseStartTime (TF.Resource p s) a where
+    computedLeaseStartTime = TF.configuration . computedLeaseStartTime
+
+class HasComputedMetadata s a | s -> a where
+    computedMetadata :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMetadata s a => HasComputedMetadata (TF.Resource p s) a where
+    computedMetadata = TF.configuration . computedMetadata
+
+class HasComputedPolicies s a | s -> a where
+    computedPolicies :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPolicies s a => HasComputedPolicies (TF.Resource p s) a where
+    computedPolicies = TF.configuration . computedPolicies
+
+class HasComputedRenewable s a | s -> a where
+    computedRenewable :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRenewable s a => HasComputedRenewable (TF.Resource p s) a where
+    computedRenewable = TF.configuration . computedRenewable
+
+class HasDataJson s a | s -> a where
+    dataJson :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDataJson s a => HasDataJson (TF.Resource p s) a where
+    dataJson = TF.configuration . dataJson
+
+class HasDefaultLeaseTtlSeconds s a | s -> a where
+    defaultLeaseTtlSeconds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDefaultLeaseTtlSeconds s a => HasDefaultLeaseTtlSeconds (TF.Resource p s) a where
+    defaultLeaseTtlSeconds = TF.configuration . defaultLeaseTtlSeconds
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasDisableRead s a | s -> a where
+    disableRead :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisableRead s a => HasDisableRead (TF.Resource p s) a where
+    disableRead = TF.configuration . disableRead
+
+class HasDisallowReauthentication s a | s -> a where
+    disallowReauthentication :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisallowReauthentication s a => HasDisallowReauthentication (TF.Resource p s) a where
+    disallowReauthentication = TF.configuration . disallowReauthentication
+
+class HasEc2Endpoint s a | s -> a where
+    ec2Endpoint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEc2Endpoint s a => HasEc2Endpoint (TF.Resource p s) a where
+    ec2Endpoint = TF.configuration . ec2Endpoint
+
+class HasIamEndpoint s a | s -> a where
+    iamEndpoint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIamEndpoint s a => HasIamEndpoint (TF.Resource p s) a where
+    iamEndpoint = TF.configuration . iamEndpoint
+
+class HasIamHttpRequestMethod s a | s -> a where
+    iamHttpRequestMethod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIamHttpRequestMethod s a => HasIamHttpRequestMethod (TF.Resource p s) a where
+    iamHttpRequestMethod = TF.configuration . iamHttpRequestMethod
+
+class HasIamRequestBody s a | s -> a where
+    iamRequestBody :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIamRequestBody s a => HasIamRequestBody (TF.Resource p s) a where
+    iamRequestBody = TF.configuration . iamRequestBody
+
+class HasIamRequestHeaders s a | s -> a where
+    iamRequestHeaders :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIamRequestHeaders s a => HasIamRequestHeaders (TF.Resource p s) a where
+    iamRequestHeaders = TF.configuration . iamRequestHeaders
+
+class HasIamRequestUrl s a | s -> a where
+    iamRequestUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIamRequestUrl s a => HasIamRequestUrl (TF.Resource p s) a where
+    iamRequestUrl = TF.configuration . iamRequestUrl
+
+class HasIamServerIdHeaderValue s a | s -> a where
+    iamServerIdHeaderValue :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIamServerIdHeaderValue s a => HasIamServerIdHeaderValue (TF.Resource p s) a where
+    iamServerIdHeaderValue = TF.configuration . iamServerIdHeaderValue
+
+class HasIdentity s a | s -> a where
+    identity :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIdentity s a => HasIdentity (TF.Resource p s) a where
+    identity = TF.configuration . identity
+
+class HasInferredAwsRegion s a | s -> a where
+    inferredAwsRegion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInferredAwsRegion s a => HasInferredAwsRegion (TF.Resource p s) a where
+    inferredAwsRegion = TF.configuration . inferredAwsRegion
+
+class HasInferredEntityType s a | s -> a where
+    inferredEntityType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInferredEntityType s a => HasInferredEntityType (TF.Resource p s) a where
+    inferredEntityType = TF.configuration . inferredEntityType
+
+class HasMaxLeaseTtlSeconds s a | s -> a where
+    maxLeaseTtlSeconds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMaxLeaseTtlSeconds s a => HasMaxLeaseTtlSeconds (TF.Resource p s) a where
+    maxLeaseTtlSeconds = TF.configuration . maxLeaseTtlSeconds
+
+class HasMaxTtl s a | s -> a where
+    maxTtl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMaxTtl s a => HasMaxTtl (TF.Resource p s) a where
+    maxTtl = TF.configuration . maxTtl
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNonce s a | s -> a where
+    nonce :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNonce s a => HasNonce (TF.Resource p s) a where
+    nonce = TF.configuration . nonce
+
+class HasPath s a | s -> a where
+    path :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPath s a => HasPath (TF.Resource p s) a where
+    path = TF.configuration . path
+
+class HasPeriod s a | s -> a where
+    period :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPeriod s a => HasPeriod (TF.Resource p s) a where
+    period = TF.configuration . period
+
+class HasPkcs7 s a | s -> a where
+    pkcs7 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPkcs7 s a => HasPkcs7 (TF.Resource p s) a where
+    pkcs7 = TF.configuration . pkcs7
+
+class HasPolicies s a | s -> a where
+    policies :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicies s a => HasPolicies (TF.Resource p s) a where
+    policies = TF.configuration . policies
+
+class HasPolicy s a | s -> a where
+    policy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicy s a => HasPolicy (TF.Resource p s) a where
+    policy = TF.configuration . policy
+
+class HasPolicyArn s a | s -> a where
+    policyArn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicyArn s a => HasPolicyArn (TF.Resource p s) a where
+    policyArn = TF.configuration . policyArn
+
+class HasResolveAwsUniqueIds s a | s -> a where
+    resolveAwsUniqueIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResolveAwsUniqueIds s a => HasResolveAwsUniqueIds (TF.Resource p s) a where
+    resolveAwsUniqueIds = TF.configuration . resolveAwsUniqueIds
+
+class HasRole s a | s -> a where
+    role :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRole s a => HasRole (TF.Resource p s) a where
+    role = TF.configuration . role
+
+class HasRoleTag s a | s -> a where
+    roleTag :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRoleTag s a => HasRoleTag (TF.Resource p s) a where
+    roleTag = TF.configuration . roleTag
+
+class HasSecretKey s a | s -> a where
+    secretKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSecretKey s a => HasSecretKey (TF.Resource p s) a where
+    secretKey = TF.configuration . secretKey
+
+class HasSignature s a | s -> a where
+    signature :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSignature s a => HasSignature (TF.Resource p s) a where
+    signature = TF.configuration . signature
+
+class HasStsEndpoint s a | s -> a where
+    stsEndpoint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStsEndpoint s a => HasStsEndpoint (TF.Resource p s) a where
+    stsEndpoint = TF.configuration . stsEndpoint
+
+class HasStsRole s a | s -> a where
+    stsRole :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStsRole s a => HasStsRole (TF.Resource p s) a where
+    stsRole = TF.configuration . stsRole
+
+class HasTtl s a | s -> a where
+    ttl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl = TF.configuration . ttl
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' = TF.configuration . type'

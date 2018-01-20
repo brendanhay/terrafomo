@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,34 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Packet.DataSource where
+module Terrafomo.Packet.DataSource
+    (
+    -- * Types
+      PrecreatedIpBlockDataSource (..)
+    , precreatedIpBlockDataSource
 
-import Data.Functor ((<$>))
+    -- * Overloaded Fields
+    , HasAddressFamily (..)
+    , HasComputedCidrNotation (..)
+    , HasFacility (..)
+    , HasProjectId (..)
+    , HasPublic (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Packet.Provider   as TF
 import qualified Terrafomo.Packet.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @packet_precreated_ip_block@ Packet datasource.
 
@@ -65,10 +75,30 @@ instance TF.ToHCL PrecreatedIpBlockDataSource where
         , TF.assign "public" <$> TF.argument _public
         ]
 
-$(TF.makeSchemaLenses
-    ''PrecreatedIpBlockDataSource
-    ''TF.Packet
-    ''TF.DataSource)
+instance HasAddressFamily PrecreatedIpBlockDataSource (TF.Argument Text) where
+    addressFamily f s@PrecreatedIpBlockDataSource{..} =
+        (\a -> s { _address_family = a } :: PrecreatedIpBlockDataSource)
+             <$> f _address_family
+
+instance HasFacility PrecreatedIpBlockDataSource (TF.Argument Text) where
+    facility f s@PrecreatedIpBlockDataSource{..} =
+        (\a -> s { _facility = a } :: PrecreatedIpBlockDataSource)
+             <$> f _facility
+
+instance HasProjectId PrecreatedIpBlockDataSource (TF.Argument Text) where
+    projectId f s@PrecreatedIpBlockDataSource{..} =
+        (\a -> s { _project_id = a } :: PrecreatedIpBlockDataSource)
+             <$> f _project_id
+
+instance HasPublic PrecreatedIpBlockDataSource (TF.Argument Text) where
+    public f s@PrecreatedIpBlockDataSource{..} =
+        (\a -> s { _public = a } :: PrecreatedIpBlockDataSource)
+             <$> f _public
+
+instance HasComputedCidrNotation PrecreatedIpBlockDataSource (TF.Attribute Text) where
+    computedCidrNotation f s@PrecreatedIpBlockDataSource{..} =
+        (\a -> s { _computed_cidr_notation = a } :: PrecreatedIpBlockDataSource)
+             <$> f _computed_cidr_notation
 
 precreatedIpBlockDataSource :: TF.DataSource TF.Packet PrecreatedIpBlockDataSource
 precreatedIpBlockDataSource =
@@ -80,3 +110,33 @@ precreatedIpBlockDataSource =
             , _public = TF.Nil
             , _computed_cidr_notation = TF.Compute "cidr_notation"
             }
+
+class HasAddressFamily s a | s -> a where
+    addressFamily :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAddressFamily s a => HasAddressFamily (TF.DataSource p s) a where
+    addressFamily = TF.configuration . addressFamily
+
+class HasComputedCidrNotation s a | s -> a where
+    computedCidrNotation :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCidrNotation s a => HasComputedCidrNotation (TF.DataSource p s) a where
+    computedCidrNotation = TF.configuration . computedCidrNotation
+
+class HasFacility s a | s -> a where
+    facility :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFacility s a => HasFacility (TF.DataSource p s) a where
+    facility = TF.configuration . facility
+
+class HasProjectId s a | s -> a where
+    projectId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProjectId s a => HasProjectId (TF.DataSource p s) a where
+    projectId = TF.configuration . projectId
+
+class HasPublic s a | s -> a where
+    public :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPublic s a => HasPublic (TF.DataSource p s) a where
+    public = TF.configuration . public

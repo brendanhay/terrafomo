@@ -8,6 +8,7 @@ name: terrafomo-powerdns
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

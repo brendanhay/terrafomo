@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,34 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.PowerDNS.Resource where
+module Terrafomo.PowerDNS.Resource
+    (
+    -- * Types
+      RecordResource (..)
+    , recordResource
 
-import Data.Functor ((<$>))
+    -- * Overloaded Fields
+    , HasName (..)
+    , HasRecords (..)
+    , HasTtl (..)
+    , HasType' (..)
+    , HasZone (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.PowerDNS.Provider as TF
 import qualified Terrafomo.PowerDNS.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @powerdns_record@ PowerDNS resource.
 
@@ -64,10 +74,30 @@ instance TF.ToHCL RecordResource where
         , TF.assign "zone" <$> TF.argument _zone
         ]
 
-$(TF.makeSchemaLenses
-    ''RecordResource
-    ''TF.PowerDNS
-    ''TF.Resource)
+instance HasName RecordResource (TF.Argument Text) where
+    name f s@RecordResource{..} =
+        (\a -> s { _name = a } :: RecordResource)
+             <$> f _name
+
+instance HasRecords RecordResource (TF.Argument Text) where
+    records f s@RecordResource{..} =
+        (\a -> s { _records = a } :: RecordResource)
+             <$> f _records
+
+instance HasTtl RecordResource (TF.Argument Text) where
+    ttl f s@RecordResource{..} =
+        (\a -> s { _ttl = a } :: RecordResource)
+             <$> f _ttl
+
+instance HasType' RecordResource (TF.Argument Text) where
+    type' f s@RecordResource{..} =
+        (\a -> s { _type' = a } :: RecordResource)
+             <$> f _type'
+
+instance HasZone RecordResource (TF.Argument Text) where
+    zone f s@RecordResource{..} =
+        (\a -> s { _zone = a } :: RecordResource)
+             <$> f _zone
 
 recordResource :: TF.Resource TF.PowerDNS RecordResource
 recordResource =
@@ -79,3 +109,33 @@ recordResource =
             , _type' = TF.Nil
             , _zone = TF.Nil
             }
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasRecords s a | s -> a where
+    records :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRecords s a => HasRecords (TF.Resource p s) a where
+    records = TF.configuration . records
+
+class HasTtl s a | s -> a where
+    ttl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl = TF.configuration . ttl
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' = TF.configuration . type'
+
+class HasZone s a | s -> a where
+    zone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasZone s a => HasZone (TF.Resource p s) a where
+    zone = TF.configuration . zone

@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Heroku.Provider
-    ( Heroku    (..)
-    , HasHeroku (..)
+    (
+    -- * Provider Datatype
+      Heroku (..)
+
+    -- * Lenses
+    , apiKey
+    , email
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Heroku.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Heroku Terraform provider.
 
@@ -79,4 +82,20 @@ instance Monoid Heroku where
 instance TF.IsProvider Heroku where
     type ProviderName Heroku = "heroku"
 
-$(TF.makeProviderLenses ''Heroku)
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Heroku
+    -> f Heroku
+apiKey f s =
+        (\a -> s { _api_key = a } :: Heroku)
+             <$> f (_api_key s)
+
+email
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Heroku
+    -> f Heroku
+email f s =
+        (\a -> s { _email = a } :: Heroku)
+             <$> f (_email s)

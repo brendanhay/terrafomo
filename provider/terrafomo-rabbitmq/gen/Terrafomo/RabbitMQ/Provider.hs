@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,16 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.RabbitMQ.Provider
-    ( RabbitMQ    (..)
-    , HasRabbitMQ (..)
+    (
+    -- * Provider Datatype
+      RabbitMQ (..)
+
+    -- * Lenses
+    , cacertFile
+    , endpoint
+    , insecure
+    , password
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +41,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.RabbitMQ.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | RabbitMQ Terraform provider.
 
@@ -94,4 +100,47 @@ instance Monoid RabbitMQ where
 instance TF.IsProvider RabbitMQ where
     type ProviderName RabbitMQ = "rabbitmq"
 
-$(TF.makeProviderLenses ''RabbitMQ)
+cacertFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> RabbitMQ
+    -> f RabbitMQ
+cacertFile f s =
+        (\a -> s { _cacert_file = a } :: RabbitMQ)
+             <$> f (_cacert_file s)
+
+endpoint
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> RabbitMQ
+    -> f RabbitMQ
+endpoint f s =
+        (\a -> s { _endpoint = a } :: RabbitMQ)
+             <$> f (_endpoint s)
+
+insecure
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> RabbitMQ
+    -> f RabbitMQ
+insecure f s =
+        (\a -> s { _insecure = a } :: RabbitMQ)
+             <$> f (_insecure s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> RabbitMQ
+    -> f RabbitMQ
+password f s =
+        (\a -> s { _password = a } :: RabbitMQ)
+             <$> f (_password s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> RabbitMQ
+    -> f RabbitMQ
+username f s =
+        (\a -> s { _username = a } :: RabbitMQ)
+             <$> f (_username s)

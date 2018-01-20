@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,95 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Heroku.Resource where
+module Terrafomo.Heroku.Resource
+    (
+    -- * Types
+      AddonAttachmentResource (..)
+    , addonAttachmentResource
 
-import Data.Functor ((<$>))
+    , AddonResource (..)
+    , addonResource
+
+    , AppFeatureResource (..)
+    , appFeatureResource
+
+    , AppResource (..)
+    , appResource
+
+    , CertResource (..)
+    , certResource
+
+    , DomainResource (..)
+    , domainResource
+
+    , DrainResource (..)
+    , drainResource
+
+    , PipelineCouplingResource (..)
+    , pipelineCouplingResource
+
+    , PipelineResource (..)
+    , pipelineResource
+
+    , SpaceResource (..)
+    , spaceResource
+
+    -- * Overloaded Fields
+    , HasAddonId (..)
+    , HasApp (..)
+    , HasAppId (..)
+    , HasBuildpacks (..)
+    , HasCertificateChain (..)
+    , HasComputedAllConfigVars (..)
+    , HasComputedApp (..)
+    , HasComputedAppId (..)
+    , HasComputedCname (..)
+    , HasComputedConfigVars (..)
+    , HasComputedGitUrl (..)
+    , HasComputedHerokuHostname (..)
+    , HasComputedHostname (..)
+    , HasComputedId (..)
+    , HasComputedName (..)
+    , HasComputedOrganization (..)
+    , HasComputedPipeline (..)
+    , HasComputedPlan (..)
+    , HasComputedProviderId (..)
+    , HasComputedRegion (..)
+    , HasComputedSpace (..)
+    , HasComputedStack (..)
+    , HasComputedStage (..)
+    , HasComputedToken (..)
+    , HasComputedWebUrl (..)
+    , HasConfig (..)
+    , HasConfigVars (..)
+    , HasEnabled (..)
+    , HasHostname (..)
+    , HasName (..)
+    , HasOrganization (..)
+    , HasPipeline (..)
+    , HasPlan (..)
+    , HasPrivateKey (..)
+    , HasRegion (..)
+    , HasSpace (..)
+    , HasStack (..)
+    , HasStage (..)
+    , HasUrl (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Heroku.Provider as TF
 import qualified Terrafomo.Heroku.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | The @heroku_addon_attachment@ Heroku resource.
 
@@ -60,10 +131,25 @@ instance TF.ToHCL AddonAttachmentResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''AddonAttachmentResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasAddonId AddonAttachmentResource (TF.Argument Text) where
+    addonId f s@AddonAttachmentResource{..} =
+        (\a -> s { _addon_id = a } :: AddonAttachmentResource)
+             <$> f _addon_id
+
+instance HasAppId AddonAttachmentResource (TF.Argument Text) where
+    appId f s@AddonAttachmentResource{..} =
+        (\a -> s { _app_id = a } :: AddonAttachmentResource)
+             <$> f _app_id
+
+instance HasName AddonAttachmentResource (TF.Argument Text) where
+    name f s@AddonAttachmentResource{..} =
+        (\a -> s { _name = a } :: AddonAttachmentResource)
+             <$> f _name
+
+instance HasComputedId AddonAttachmentResource (TF.Attribute Text) where
+    computedId f s@AddonAttachmentResource{..} =
+        (\a -> s { _computed_id = a } :: AddonAttachmentResource)
+             <$> f _computed_id
 
 addonAttachmentResource :: TF.Resource TF.Heroku AddonAttachmentResource
 addonAttachmentResource =
@@ -106,10 +192,45 @@ instance TF.ToHCL AddonResource where
         , TF.assign "plan" <$> TF.argument _plan
         ]
 
-$(TF.makeSchemaLenses
-    ''AddonResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasApp AddonResource (TF.Argument Text) where
+    app f s@AddonResource{..} =
+        (\a -> s { _app = a } :: AddonResource)
+             <$> f _app
+
+instance HasConfig AddonResource (TF.Argument Text) where
+    config f s@AddonResource{..} =
+        (\a -> s { _config = a } :: AddonResource)
+             <$> f _config
+
+instance HasPlan AddonResource (TF.Argument Text) where
+    plan f s@AddonResource{..} =
+        (\a -> s { _plan = a } :: AddonResource)
+             <$> f _plan
+
+instance HasComputedConfigVars AddonResource (TF.Attribute Text) where
+    computedConfigVars f s@AddonResource{..} =
+        (\a -> s { _computed_config_vars = a } :: AddonResource)
+             <$> f _computed_config_vars
+
+instance HasComputedId AddonResource (TF.Attribute Text) where
+    computedId f s@AddonResource{..} =
+        (\a -> s { _computed_id = a } :: AddonResource)
+             <$> f _computed_id
+
+instance HasComputedName AddonResource (TF.Attribute Text) where
+    computedName f s@AddonResource{..} =
+        (\a -> s { _computed_name = a } :: AddonResource)
+             <$> f _computed_name
+
+instance HasComputedPlan AddonResource (TF.Attribute Text) where
+    computedPlan f s@AddonResource{..} =
+        (\a -> s { _computed_plan = a } :: AddonResource)
+             <$> f _computed_plan
+
+instance HasComputedProviderId AddonResource (TF.Attribute Text) where
+    computedProviderId f s@AddonResource{..} =
+        (\a -> s { _computed_provider_id = a } :: AddonResource)
+             <$> f _computed_provider_id
 
 addonResource :: TF.Resource TF.Heroku AddonResource
 addonResource =
@@ -146,10 +267,20 @@ instance TF.ToHCL AppFeatureResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''AppFeatureResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasApp AppFeatureResource (TF.Argument Text) where
+    app f s@AppFeatureResource{..} =
+        (\a -> s { _app = a } :: AppFeatureResource)
+             <$> f _app
+
+instance HasEnabled AppFeatureResource (TF.Argument Text) where
+    enabled f s@AppFeatureResource{..} =
+        (\a -> s { _enabled = a } :: AppFeatureResource)
+             <$> f _enabled
+
+instance HasName AppFeatureResource (TF.Argument Text) where
+    name f s@AppFeatureResource{..} =
+        (\a -> s { _name = a } :: AppFeatureResource)
+             <$> f _name
 
 appFeatureResource :: TF.Resource TF.Heroku AppFeatureResource
 appFeatureResource =
@@ -211,10 +342,85 @@ instance TF.ToHCL AppResource where
         , TF.assign "stack" <$> TF.argument _stack
         ]
 
-$(TF.makeSchemaLenses
-    ''AppResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasBuildpacks AppResource (TF.Argument Text) where
+    buildpacks f s@AppResource{..} =
+        (\a -> s { _buildpacks = a } :: AppResource)
+             <$> f _buildpacks
+
+instance HasConfigVars AppResource (TF.Argument Text) where
+    configVars f s@AppResource{..} =
+        (\a -> s { _config_vars = a } :: AppResource)
+             <$> f _config_vars
+
+instance HasName AppResource (TF.Argument Text) where
+    name f s@AppResource{..} =
+        (\a -> s { _name = a } :: AppResource)
+             <$> f _name
+
+instance HasOrganization AppResource (TF.Argument Text) where
+    organization f s@AppResource{..} =
+        (\a -> s { _organization = a } :: AppResource)
+             <$> f _organization
+
+instance HasRegion AppResource (TF.Argument Text) where
+    region f s@AppResource{..} =
+        (\a -> s { _region = a } :: AppResource)
+             <$> f _region
+
+instance HasSpace AppResource (TF.Argument Text) where
+    space f s@AppResource{..} =
+        (\a -> s { _space = a } :: AppResource)
+             <$> f _space
+
+instance HasStack AppResource (TF.Argument Text) where
+    stack f s@AppResource{..} =
+        (\a -> s { _stack = a } :: AppResource)
+             <$> f _stack
+
+instance HasComputedAllConfigVars AppResource (TF.Attribute Text) where
+    computedAllConfigVars f s@AppResource{..} =
+        (\a -> s { _computed_all_config_vars = a } :: AppResource)
+             <$> f _computed_all_config_vars
+
+instance HasComputedGitUrl AppResource (TF.Attribute Text) where
+    computedGitUrl f s@AppResource{..} =
+        (\a -> s { _computed_git_url = a } :: AppResource)
+             <$> f _computed_git_url
+
+instance HasComputedHerokuHostname AppResource (TF.Attribute Text) where
+    computedHerokuHostname f s@AppResource{..} =
+        (\a -> s { _computed_heroku_hostname = a } :: AppResource)
+             <$> f _computed_heroku_hostname
+
+instance HasComputedId AppResource (TF.Attribute Text) where
+    computedId f s@AppResource{..} =
+        (\a -> s { _computed_id = a } :: AppResource)
+             <$> f _computed_id
+
+instance HasComputedName AppResource (TF.Attribute Text) where
+    computedName f s@AppResource{..} =
+        (\a -> s { _computed_name = a } :: AppResource)
+             <$> f _computed_name
+
+instance HasComputedRegion AppResource (TF.Attribute Text) where
+    computedRegion f s@AppResource{..} =
+        (\a -> s { _computed_region = a } :: AppResource)
+             <$> f _computed_region
+
+instance HasComputedSpace AppResource (TF.Attribute Text) where
+    computedSpace f s@AppResource{..} =
+        (\a -> s { _computed_space = a } :: AppResource)
+             <$> f _computed_space
+
+instance HasComputedStack AppResource (TF.Attribute Text) where
+    computedStack f s@AppResource{..} =
+        (\a -> s { _computed_stack = a } :: AppResource)
+             <$> f _computed_stack
+
+instance HasComputedWebUrl AppResource (TF.Attribute Text) where
+    computedWebUrl f s@AppResource{..} =
+        (\a -> s { _computed_web_url = a } :: AppResource)
+             <$> f _computed_web_url
 
 appResource :: TF.Resource TF.Heroku AppResource
 appResource =
@@ -265,10 +471,35 @@ instance TF.ToHCL CertResource where
         , TF.assign "private_key" <$> TF.argument _private_key
         ]
 
-$(TF.makeSchemaLenses
-    ''CertResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasApp CertResource (TF.Argument Text) where
+    app f s@CertResource{..} =
+        (\a -> s { _app = a } :: CertResource)
+             <$> f _app
+
+instance HasCertificateChain CertResource (TF.Argument Text) where
+    certificateChain f s@CertResource{..} =
+        (\a -> s { _certificate_chain = a } :: CertResource)
+             <$> f _certificate_chain
+
+instance HasPrivateKey CertResource (TF.Argument Text) where
+    privateKey f s@CertResource{..} =
+        (\a -> s { _private_key = a } :: CertResource)
+             <$> f _private_key
+
+instance HasComputedCname CertResource (TF.Attribute Text) where
+    computedCname f s@CertResource{..} =
+        (\a -> s { _computed_cname = a } :: CertResource)
+             <$> f _computed_cname
+
+instance HasComputedId CertResource (TF.Attribute Text) where
+    computedId f s@CertResource{..} =
+        (\a -> s { _computed_id = a } :: CertResource)
+             <$> f _computed_id
+
+instance HasComputedName CertResource (TF.Attribute Text) where
+    computedName f s@CertResource{..} =
+        (\a -> s { _computed_name = a } :: CertResource)
+             <$> f _computed_name
 
 certResource :: TF.Resource TF.Heroku CertResource
 certResource =
@@ -306,10 +537,30 @@ instance TF.ToHCL DomainResource where
         , TF.assign "hostname" <$> TF.argument _hostname
         ]
 
-$(TF.makeSchemaLenses
-    ''DomainResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasApp DomainResource (TF.Argument Text) where
+    app f s@DomainResource{..} =
+        (\a -> s { _app = a } :: DomainResource)
+             <$> f _app
+
+instance HasHostname DomainResource (TF.Argument Text) where
+    hostname f s@DomainResource{..} =
+        (\a -> s { _hostname = a } :: DomainResource)
+             <$> f _hostname
+
+instance HasComputedCname DomainResource (TF.Attribute Text) where
+    computedCname f s@DomainResource{..} =
+        (\a -> s { _computed_cname = a } :: DomainResource)
+             <$> f _computed_cname
+
+instance HasComputedHostname DomainResource (TF.Attribute Text) where
+    computedHostname f s@DomainResource{..} =
+        (\a -> s { _computed_hostname = a } :: DomainResource)
+             <$> f _computed_hostname
+
+instance HasComputedId DomainResource (TF.Attribute Text) where
+    computedId f s@DomainResource{..} =
+        (\a -> s { _computed_id = a } :: DomainResource)
+             <$> f _computed_id
 
 domainResource :: TF.Resource TF.Heroku DomainResource
 domainResource =
@@ -342,10 +593,20 @@ instance TF.ToHCL DrainResource where
         , TF.assign "url" <$> TF.argument _url
         ]
 
-$(TF.makeSchemaLenses
-    ''DrainResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasApp DrainResource (TF.Argument Text) where
+    app f s@DrainResource{..} =
+        (\a -> s { _app = a } :: DrainResource)
+             <$> f _app
+
+instance HasUrl DrainResource (TF.Argument Text) where
+    url f s@DrainResource{..} =
+        (\a -> s { _url = a } :: DrainResource)
+             <$> f _url
+
+instance HasComputedToken DrainResource (TF.Attribute Text) where
+    computedToken f s@DrainResource{..} =
+        (\a -> s { _computed_token = a } :: DrainResource)
+             <$> f _computed_token
 
 drainResource :: TF.Resource TF.Heroku DrainResource
 drainResource =
@@ -390,10 +651,45 @@ instance TF.ToHCL PipelineCouplingResource where
         , TF.assign "stage" <$> TF.argument _stage
         ]
 
-$(TF.makeSchemaLenses
-    ''PipelineCouplingResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasApp PipelineCouplingResource (TF.Argument Text) where
+    app f s@PipelineCouplingResource{..} =
+        (\a -> s { _app = a } :: PipelineCouplingResource)
+             <$> f _app
+
+instance HasPipeline PipelineCouplingResource (TF.Argument Text) where
+    pipeline f s@PipelineCouplingResource{..} =
+        (\a -> s { _pipeline = a } :: PipelineCouplingResource)
+             <$> f _pipeline
+
+instance HasStage PipelineCouplingResource (TF.Argument Text) where
+    stage f s@PipelineCouplingResource{..} =
+        (\a -> s { _stage = a } :: PipelineCouplingResource)
+             <$> f _stage
+
+instance HasComputedApp PipelineCouplingResource (TF.Attribute Text) where
+    computedApp f s@PipelineCouplingResource{..} =
+        (\a -> s { _computed_app = a } :: PipelineCouplingResource)
+             <$> f _computed_app
+
+instance HasComputedAppId PipelineCouplingResource (TF.Attribute Text) where
+    computedAppId f s@PipelineCouplingResource{..} =
+        (\a -> s { _computed_app_id = a } :: PipelineCouplingResource)
+             <$> f _computed_app_id
+
+instance HasComputedId PipelineCouplingResource (TF.Attribute Text) where
+    computedId f s@PipelineCouplingResource{..} =
+        (\a -> s { _computed_id = a } :: PipelineCouplingResource)
+             <$> f _computed_id
+
+instance HasComputedPipeline PipelineCouplingResource (TF.Attribute Text) where
+    computedPipeline f s@PipelineCouplingResource{..} =
+        (\a -> s { _computed_pipeline = a } :: PipelineCouplingResource)
+             <$> f _computed_pipeline
+
+instance HasComputedStage PipelineCouplingResource (TF.Attribute Text) where
+    computedStage f s@PipelineCouplingResource{..} =
+        (\a -> s { _computed_stage = a } :: PipelineCouplingResource)
+             <$> f _computed_stage
 
 pipelineCouplingResource :: TF.Resource TF.Heroku PipelineCouplingResource
 pipelineCouplingResource =
@@ -430,10 +726,20 @@ instance TF.ToHCL PipelineResource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''PipelineResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasName PipelineResource (TF.Argument Text) where
+    name f s@PipelineResource{..} =
+        (\a -> s { _name = a } :: PipelineResource)
+             <$> f _name
+
+instance HasComputedId PipelineResource (TF.Attribute Text) where
+    computedId f s@PipelineResource{..} =
+        (\a -> s { _computed_id = a } :: PipelineResource)
+             <$> f _computed_id
+
+instance HasComputedName PipelineResource (TF.Attribute Text) where
+    computedName f s@PipelineResource{..} =
+        (\a -> s { _computed_name = a } :: PipelineResource)
+             <$> f _computed_name
 
 pipelineResource :: TF.Resource TF.Heroku PipelineResource
 pipelineResource =
@@ -473,10 +779,40 @@ instance TF.ToHCL SpaceResource where
         , TF.assign "region" <$> TF.argument _region
         ]
 
-$(TF.makeSchemaLenses
-    ''SpaceResource
-    ''TF.Heroku
-    ''TF.Resource)
+instance HasName SpaceResource (TF.Argument Text) where
+    name f s@SpaceResource{..} =
+        (\a -> s { _name = a } :: SpaceResource)
+             <$> f _name
+
+instance HasOrganization SpaceResource (TF.Argument Text) where
+    organization f s@SpaceResource{..} =
+        (\a -> s { _organization = a } :: SpaceResource)
+             <$> f _organization
+
+instance HasRegion SpaceResource (TF.Argument Text) where
+    region f s@SpaceResource{..} =
+        (\a -> s { _region = a } :: SpaceResource)
+             <$> f _region
+
+instance HasComputedId SpaceResource (TF.Attribute Text) where
+    computedId f s@SpaceResource{..} =
+        (\a -> s { _computed_id = a } :: SpaceResource)
+             <$> f _computed_id
+
+instance HasComputedName SpaceResource (TF.Attribute Text) where
+    computedName f s@SpaceResource{..} =
+        (\a -> s { _computed_name = a } :: SpaceResource)
+             <$> f _computed_name
+
+instance HasComputedOrganization SpaceResource (TF.Attribute Text) where
+    computedOrganization f s@SpaceResource{..} =
+        (\a -> s { _computed_organization = a } :: SpaceResource)
+             <$> f _computed_organization
+
+instance HasComputedRegion SpaceResource (TF.Attribute Text) where
+    computedRegion f s@SpaceResource{..} =
+        (\a -> s { _computed_region = a } :: SpaceResource)
+             <$> f _computed_region
 
 spaceResource :: TF.Resource TF.Heroku SpaceResource
 spaceResource =
@@ -490,3 +826,237 @@ spaceResource =
             , _computed_organization = TF.Compute "organization"
             , _computed_region = TF.Compute "region"
             }
+
+class HasAddonId s a | s -> a where
+    addonId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAddonId s a => HasAddonId (TF.Resource p s) a where
+    addonId = TF.configuration . addonId
+
+class HasApp s a | s -> a where
+    app :: Functor f => (a -> f a) -> s -> f s
+
+instance HasApp s a => HasApp (TF.Resource p s) a where
+    app = TF.configuration . app
+
+class HasAppId s a | s -> a where
+    appId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAppId s a => HasAppId (TF.Resource p s) a where
+    appId = TF.configuration . appId
+
+class HasBuildpacks s a | s -> a where
+    buildpacks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBuildpacks s a => HasBuildpacks (TF.Resource p s) a where
+    buildpacks = TF.configuration . buildpacks
+
+class HasCertificateChain s a | s -> a where
+    certificateChain :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCertificateChain s a => HasCertificateChain (TF.Resource p s) a where
+    certificateChain = TF.configuration . certificateChain
+
+class HasComputedAllConfigVars s a | s -> a where
+    computedAllConfigVars :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAllConfigVars s a => HasComputedAllConfigVars (TF.Resource p s) a where
+    computedAllConfigVars = TF.configuration . computedAllConfigVars
+
+class HasComputedApp s a | s -> a where
+    computedApp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedApp s a => HasComputedApp (TF.Resource p s) a where
+    computedApp = TF.configuration . computedApp
+
+class HasComputedAppId s a | s -> a where
+    computedAppId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAppId s a => HasComputedAppId (TF.Resource p s) a where
+    computedAppId = TF.configuration . computedAppId
+
+class HasComputedCname s a | s -> a where
+    computedCname :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCname s a => HasComputedCname (TF.Resource p s) a where
+    computedCname = TF.configuration . computedCname
+
+class HasComputedConfigVars s a | s -> a where
+    computedConfigVars :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedConfigVars s a => HasComputedConfigVars (TF.Resource p s) a where
+    computedConfigVars = TF.configuration . computedConfigVars
+
+class HasComputedGitUrl s a | s -> a where
+    computedGitUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGitUrl s a => HasComputedGitUrl (TF.Resource p s) a where
+    computedGitUrl = TF.configuration . computedGitUrl
+
+class HasComputedHerokuHostname s a | s -> a where
+    computedHerokuHostname :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHerokuHostname s a => HasComputedHerokuHostname (TF.Resource p s) a where
+    computedHerokuHostname = TF.configuration . computedHerokuHostname
+
+class HasComputedHostname s a | s -> a where
+    computedHostname :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHostname s a => HasComputedHostname (TF.Resource p s) a where
+    computedHostname = TF.configuration . computedHostname
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedOrganization s a | s -> a where
+    computedOrganization :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOrganization s a => HasComputedOrganization (TF.Resource p s) a where
+    computedOrganization = TF.configuration . computedOrganization
+
+class HasComputedPipeline s a | s -> a where
+    computedPipeline :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPipeline s a => HasComputedPipeline (TF.Resource p s) a where
+    computedPipeline = TF.configuration . computedPipeline
+
+class HasComputedPlan s a | s -> a where
+    computedPlan :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPlan s a => HasComputedPlan (TF.Resource p s) a where
+    computedPlan = TF.configuration . computedPlan
+
+class HasComputedProviderId s a | s -> a where
+    computedProviderId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProviderId s a => HasComputedProviderId (TF.Resource p s) a where
+    computedProviderId = TF.configuration . computedProviderId
+
+class HasComputedRegion s a | s -> a where
+    computedRegion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRegion s a => HasComputedRegion (TF.Resource p s) a where
+    computedRegion = TF.configuration . computedRegion
+
+class HasComputedSpace s a | s -> a where
+    computedSpace :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSpace s a => HasComputedSpace (TF.Resource p s) a where
+    computedSpace = TF.configuration . computedSpace
+
+class HasComputedStack s a | s -> a where
+    computedStack :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStack s a => HasComputedStack (TF.Resource p s) a where
+    computedStack = TF.configuration . computedStack
+
+class HasComputedStage s a | s -> a where
+    computedStage :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStage s a => HasComputedStage (TF.Resource p s) a where
+    computedStage = TF.configuration . computedStage
+
+class HasComputedToken s a | s -> a where
+    computedToken :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedToken s a => HasComputedToken (TF.Resource p s) a where
+    computedToken = TF.configuration . computedToken
+
+class HasComputedWebUrl s a | s -> a where
+    computedWebUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedWebUrl s a => HasComputedWebUrl (TF.Resource p s) a where
+    computedWebUrl = TF.configuration . computedWebUrl
+
+class HasConfig s a | s -> a where
+    config :: Functor f => (a -> f a) -> s -> f s
+
+instance HasConfig s a => HasConfig (TF.Resource p s) a where
+    config = TF.configuration . config
+
+class HasConfigVars s a | s -> a where
+    configVars :: Functor f => (a -> f a) -> s -> f s
+
+instance HasConfigVars s a => HasConfigVars (TF.Resource p s) a where
+    configVars = TF.configuration . configVars
+
+class HasEnabled s a | s -> a where
+    enabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnabled s a => HasEnabled (TF.Resource p s) a where
+    enabled = TF.configuration . enabled
+
+class HasHostname s a | s -> a where
+    hostname :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostname s a => HasHostname (TF.Resource p s) a where
+    hostname = TF.configuration . hostname
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasOrganization s a | s -> a where
+    organization :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOrganization s a => HasOrganization (TF.Resource p s) a where
+    organization = TF.configuration . organization
+
+class HasPipeline s a | s -> a where
+    pipeline :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPipeline s a => HasPipeline (TF.Resource p s) a where
+    pipeline = TF.configuration . pipeline
+
+class HasPlan s a | s -> a where
+    plan :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPlan s a => HasPlan (TF.Resource p s) a where
+    plan = TF.configuration . plan
+
+class HasPrivateKey s a | s -> a where
+    privateKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPrivateKey s a => HasPrivateKey (TF.Resource p s) a where
+    privateKey = TF.configuration . privateKey
+
+class HasRegion s a | s -> a where
+    region :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRegion s a => HasRegion (TF.Resource p s) a where
+    region = TF.configuration . region
+
+class HasSpace s a | s -> a where
+    space :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSpace s a => HasSpace (TF.Resource p s) a where
+    space = TF.configuration . space
+
+class HasStack s a | s -> a where
+    stack :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStack s a => HasStack (TF.Resource p s) a where
+    stack = TF.configuration . stack
+
+class HasStage s a | s -> a where
+    stage :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStage s a => HasStage (TF.Resource p s) a where
+    stage = TF.configuration . stage
+
+class HasUrl s a | s -> a where
+    url :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUrl s a => HasUrl (TF.Resource p s) a where
+    url = TF.configuration . url

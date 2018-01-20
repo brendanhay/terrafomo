@@ -8,6 +8,7 @@ name: terrafomo-azurerm
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

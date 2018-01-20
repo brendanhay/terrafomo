@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Fastly.Provider
-    ( Fastly    (..)
-    , HasFastly (..)
+    (
+    -- * Provider Datatype
+      Fastly (..)
+
+    -- * Lenses
+    , apiKey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +37,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Fastly.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Fastly Terraform provider.
 
@@ -75,4 +77,11 @@ instance Monoid Fastly where
 instance TF.IsProvider Fastly where
     type ProviderName Fastly = "fastly"
 
-$(TF.makeProviderLenses ''Fastly)
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Fastly
+    -> f Fastly
+apiKey f s =
+        (\a -> s { _api_key = a } :: Fastly)
+             <$> f (_api_key s)

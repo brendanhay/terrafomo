@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,41 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OpsGenie.Resource where
+module Terrafomo.OpsGenie.Resource
+    (
+    -- * Types
+      TeamResource (..)
+    , teamResource
 
-import Data.Functor ((<$>))
+    , UserResource (..)
+    , userResource
+
+    -- * Overloaded Fields
+    , HasComputedId (..)
+    , HasDescription (..)
+    , HasFullName (..)
+    , HasLocale (..)
+    , HasMember (..)
+    , HasName (..)
+    , HasRole (..)
+    , HasTimezone (..)
+    , HasUsername (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.OpsGenie.Provider as TF
 import qualified Terrafomo.OpsGenie.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @opsgenie_team@ OpsGenie resource.
 
@@ -60,10 +77,25 @@ instance TF.ToHCL TeamResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''TeamResource
-    ''TF.OpsGenie
-    ''TF.Resource)
+instance HasDescription TeamResource (TF.Argument Text) where
+    description f s@TeamResource{..} =
+        (\a -> s { _description = a } :: TeamResource)
+             <$> f _description
+
+instance HasMember TeamResource (TF.Argument Text) where
+    member f s@TeamResource{..} =
+        (\a -> s { _member = a } :: TeamResource)
+             <$> f _member
+
+instance HasName TeamResource (TF.Argument Text) where
+    name f s@TeamResource{..} =
+        (\a -> s { _name = a } :: TeamResource)
+             <$> f _name
+
+instance HasComputedId TeamResource (TF.Attribute Text) where
+    computedId f s@TeamResource{..} =
+        (\a -> s { _computed_id = a } :: TeamResource)
+             <$> f _computed_id
 
 teamResource :: TF.Resource TF.OpsGenie TeamResource
 teamResource =
@@ -103,10 +135,35 @@ instance TF.ToHCL UserResource where
         , TF.assign "username" <$> TF.argument _username
         ]
 
-$(TF.makeSchemaLenses
-    ''UserResource
-    ''TF.OpsGenie
-    ''TF.Resource)
+instance HasFullName UserResource (TF.Argument Text) where
+    fullName f s@UserResource{..} =
+        (\a -> s { _full_name = a } :: UserResource)
+             <$> f _full_name
+
+instance HasLocale UserResource (TF.Argument Text) where
+    locale f s@UserResource{..} =
+        (\a -> s { _locale = a } :: UserResource)
+             <$> f _locale
+
+instance HasRole UserResource (TF.Argument Text) where
+    role f s@UserResource{..} =
+        (\a -> s { _role = a } :: UserResource)
+             <$> f _role
+
+instance HasTimezone UserResource (TF.Argument Text) where
+    timezone f s@UserResource{..} =
+        (\a -> s { _timezone = a } :: UserResource)
+             <$> f _timezone
+
+instance HasUsername UserResource (TF.Argument Text) where
+    username f s@UserResource{..} =
+        (\a -> s { _username = a } :: UserResource)
+             <$> f _username
+
+instance HasComputedId UserResource (TF.Attribute Text) where
+    computedId f s@UserResource{..} =
+        (\a -> s { _computed_id = a } :: UserResource)
+             <$> f _computed_id
 
 userResource :: TF.Resource TF.OpsGenie UserResource
 userResource =
@@ -119,3 +176,57 @@ userResource =
             , _username = TF.Nil
             , _computed_id = TF.Compute "id"
             }
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasFullName s a | s -> a where
+    fullName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFullName s a => HasFullName (TF.Resource p s) a where
+    fullName = TF.configuration . fullName
+
+class HasLocale s a | s -> a where
+    locale :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLocale s a => HasLocale (TF.Resource p s) a where
+    locale = TF.configuration . locale
+
+class HasMember s a | s -> a where
+    member :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMember s a => HasMember (TF.Resource p s) a where
+    member = TF.configuration . member
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasRole s a | s -> a where
+    role :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRole s a => HasRole (TF.Resource p s) a where
+    role = TF.configuration . role
+
+class HasTimezone s a | s -> a where
+    timezone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTimezone s a => HasTimezone (TF.Resource p s) a where
+    timezone = TF.configuration . timezone
+
+class HasUsername s a | s -> a where
+    username :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUsername s a => HasUsername (TF.Resource p s) a where
+    username = TF.configuration . username

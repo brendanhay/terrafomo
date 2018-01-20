@@ -116,6 +116,7 @@ schemas tmpls p typ xs =
         , "provider"  .= p
         , "type"      .= typ
         , "schemas"   .= createMap (getTypeName typ) xs
+        , "classes"   .= getClasses xs
         , "imports"   .=
             ( NS.types p
             : [NS.provider p <> "Provider"   | isJust (providerDatatype p)]

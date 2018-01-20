@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,109 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.VSphere.DataSource where
+module Terrafomo.VSphere.DataSource
+    (
+    -- * Types
+      CustomAttributeDataSource (..)
+    , customAttributeDataSource
 
-import Data.Functor ((<$>))
+    , DatacenterDataSource (..)
+    , datacenterDataSource
+
+    , DatastoreDataSource (..)
+    , datastoreDataSource
+
+    , DistributedVirtualSwitchDataSource (..)
+    , distributedVirtualSwitchDataSource
+
+    , HostDataSource (..)
+    , hostDataSource
+
+    , NetworkDataSource (..)
+    , networkDataSource
+
+    , ResourcePoolDataSource (..)
+    , resourcePoolDataSource
+
+    , TagCategoryDataSource (..)
+    , tagCategoryDataSource
+
+    , TagDataSource (..)
+    , tagDataSource
+
+    , VirtualMachineDataSource (..)
+    , virtualMachineDataSource
+
+    , VmfsDisksDataSource (..)
+    , vmfsDisksDataSource
+
+    -- * Overloaded Fields
+    , HasCategoryId (..)
+    , HasComputedAlternateGuestName (..)
+    , HasComputedDisks (..)
+    , HasComputedEagerlyScrub (..)
+    , HasComputedGuestId (..)
+    , HasComputedId (..)
+    , HasComputedNetworkInterfaceTypes (..)
+    , HasComputedScsiType (..)
+    , HasComputedSize (..)
+    , HasComputedThinProvisioned (..)
+    , HasComputedType' (..)
+    , HasComputedUplinks (..)
+    , HasDatacenterId (..)
+    , HasFilter (..)
+    , HasHostSystemId (..)
+    , HasName (..)
+    , HasRescan (..)
+    , HasScsiControllerScanCount (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 import qualified Terrafomo.VSphere.Provider  as TF
 import qualified Terrafomo.VSphere.Types     as TF
+
+{- | The @vsphere_custom_attribute@ VSphere datasource.
+
+The @vsphere_custom_attribute@ data source can be used to reference custom
+attributes that are not managed by Terraform. Its attributes are exactly the
+same as the </docs/providers/vsphere/r/custom_attribute.html> , and, like
+importing, the data source takes a name to search on. The @id@ and other
+attributes are then populated with the data found by the search. ~> NOTE:
+Custom attributes are unsupported on direct ESXi connections and require
+vCenter.
+-}
+data CustomAttributeDataSource = CustomAttributeDataSource {
+      _name :: !(TF.Argument Text)
+    {- ^ (Required) The name of the custom attribute. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL CustomAttributeDataSource where
+    toHCL CustomAttributeDataSource{..} = TF.block $ catMaybes
+        [ TF.assign "name" <$> TF.argument _name
+        ]
+
+instance HasName CustomAttributeDataSource (TF.Argument Text) where
+    name f s@CustomAttributeDataSource{..} =
+        (\a -> s { _name = a } :: CustomAttributeDataSource)
+             <$> f _name
+
+customAttributeDataSource :: TF.DataSource TF.VSphere CustomAttributeDataSource
+customAttributeDataSource =
+    TF.newDataSource "vsphere_custom_attribute" $
+        CustomAttributeDataSource {
+            _name = TF.Nil
+            }
 
 {- | The @vsphere_datacenter@ VSphere datasource.
 
@@ -55,10 +140,10 @@ instance TF.ToHCL DatacenterDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''DatacenterDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasName DatacenterDataSource (TF.Argument Text) where
+    name f s@DatacenterDataSource{..} =
+        (\a -> s { _name = a } :: DatacenterDataSource)
+             <$> f _name
 
 datacenterDataSource :: TF.DataSource TF.VSphere DatacenterDataSource
 datacenterDataSource =
@@ -87,10 +172,15 @@ instance TF.ToHCL DatastoreDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''DatastoreDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasDatacenterId DatastoreDataSource (TF.Argument Text) where
+    datacenterId f s@DatastoreDataSource{..} =
+        (\a -> s { _datacenter_id = a } :: DatastoreDataSource)
+             <$> f _datacenter_id
+
+instance HasName DatastoreDataSource (TF.Argument Text) where
+    name f s@DatastoreDataSource{..} =
+        (\a -> s { _name = a } :: DatastoreDataSource)
+             <$> f _name
 
 datastoreDataSource :: TF.DataSource TF.VSphere DatastoreDataSource
 datastoreDataSource =
@@ -126,10 +216,25 @@ instance TF.ToHCL DistributedVirtualSwitchDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''DistributedVirtualSwitchDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasDatacenterId DistributedVirtualSwitchDataSource (TF.Argument Text) where
+    datacenterId f s@DistributedVirtualSwitchDataSource{..} =
+        (\a -> s { _datacenter_id = a } :: DistributedVirtualSwitchDataSource)
+             <$> f _datacenter_id
+
+instance HasName DistributedVirtualSwitchDataSource (TF.Argument Text) where
+    name f s@DistributedVirtualSwitchDataSource{..} =
+        (\a -> s { _name = a } :: DistributedVirtualSwitchDataSource)
+             <$> f _name
+
+instance HasComputedId DistributedVirtualSwitchDataSource (TF.Attribute Text) where
+    computedId f s@DistributedVirtualSwitchDataSource{..} =
+        (\a -> s { _computed_id = a } :: DistributedVirtualSwitchDataSource)
+             <$> f _computed_id
+
+instance HasComputedUplinks DistributedVirtualSwitchDataSource (TF.Attribute Text) where
+    computedUplinks f s@DistributedVirtualSwitchDataSource{..} =
+        (\a -> s { _computed_uplinks = a } :: DistributedVirtualSwitchDataSource)
+             <$> f _computed_uplinks
 
 distributedVirtualSwitchDataSource :: TF.DataSource TF.VSphere DistributedVirtualSwitchDataSource
 distributedVirtualSwitchDataSource =
@@ -160,10 +265,15 @@ instance TF.ToHCL HostDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''HostDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasDatacenterId HostDataSource (TF.Argument Text) where
+    datacenterId f s@HostDataSource{..} =
+        (\a -> s { _datacenter_id = a } :: HostDataSource)
+             <$> f _datacenter_id
+
+instance HasName HostDataSource (TF.Argument Text) where
+    name f s@HostDataSource{..} =
+        (\a -> s { _name = a } :: HostDataSource)
+             <$> f _name
 
 hostDataSource :: TF.DataSource TF.VSphere HostDataSource
 hostDataSource =
@@ -198,10 +308,25 @@ instance TF.ToHCL NetworkDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''NetworkDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasDatacenterId NetworkDataSource (TF.Argument Text) where
+    datacenterId f s@NetworkDataSource{..} =
+        (\a -> s { _datacenter_id = a } :: NetworkDataSource)
+             <$> f _datacenter_id
+
+instance HasName NetworkDataSource (TF.Argument Text) where
+    name f s@NetworkDataSource{..} =
+        (\a -> s { _name = a } :: NetworkDataSource)
+             <$> f _name
+
+instance HasComputedId NetworkDataSource (TF.Attribute Text) where
+    computedId f s@NetworkDataSource{..} =
+        (\a -> s { _computed_id = a } :: NetworkDataSource)
+             <$> f _computed_id
+
+instance HasComputedType' NetworkDataSource (TF.Attribute Text) where
+    computedType' f s@NetworkDataSource{..} =
+        (\a -> s { _computed_type' = a } :: NetworkDataSource)
+             <$> f _computed_type'
 
 networkDataSource :: TF.DataSource TF.VSphere NetworkDataSource
 networkDataSource =
@@ -233,10 +358,15 @@ instance TF.ToHCL ResourcePoolDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''ResourcePoolDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasDatacenterId ResourcePoolDataSource (TF.Argument Text) where
+    datacenterId f s@ResourcePoolDataSource{..} =
+        (\a -> s { _datacenter_id = a } :: ResourcePoolDataSource)
+             <$> f _datacenter_id
+
+instance HasName ResourcePoolDataSource (TF.Argument Text) where
+    name f s@ResourcePoolDataSource{..} =
+        (\a -> s { _name = a } :: ResourcePoolDataSource)
+             <$> f _name
 
 resourcePoolDataSource :: TF.DataSource TF.VSphere ResourcePoolDataSource
 resourcePoolDataSource =
@@ -266,10 +396,10 @@ instance TF.ToHCL TagCategoryDataSource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''TagCategoryDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasName TagCategoryDataSource (TF.Argument Text) where
+    name f s@TagCategoryDataSource{..} =
+        (\a -> s { _name = a } :: TagCategoryDataSource)
+             <$> f _name
 
 tagCategoryDataSource :: TF.DataSource TF.VSphere TagCategoryDataSource
 tagCategoryDataSource =
@@ -301,10 +431,15 @@ instance TF.ToHCL TagDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''TagDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasCategoryId TagDataSource (TF.Argument Text) where
+    categoryId f s@TagDataSource{..} =
+        (\a -> s { _category_id = a } :: TagDataSource)
+             <$> f _category_id
+
+instance HasName TagDataSource (TF.Argument Text) where
+    name f s@TagDataSource{..} =
+        (\a -> s { _name = a } :: TagDataSource)
+             <$> f _name
 
 tagDataSource :: TF.DataSource TF.VSphere TagDataSource
 tagDataSource =
@@ -356,10 +491,65 @@ instance TF.ToHCL VirtualMachineDataSource where
         , TF.assign "scsi_controller_scan_count" <$> TF.argument _scsi_controller_scan_count
         ]
 
-$(TF.makeSchemaLenses
-    ''VirtualMachineDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasDatacenterId VirtualMachineDataSource (TF.Argument Text) where
+    datacenterId f s@VirtualMachineDataSource{..} =
+        (\a -> s { _datacenter_id = a } :: VirtualMachineDataSource)
+             <$> f _datacenter_id
+
+instance HasName VirtualMachineDataSource (TF.Argument Text) where
+    name f s@VirtualMachineDataSource{..} =
+        (\a -> s { _name = a } :: VirtualMachineDataSource)
+             <$> f _name
+
+instance HasScsiControllerScanCount VirtualMachineDataSource (TF.Argument Text) where
+    scsiControllerScanCount f s@VirtualMachineDataSource{..} =
+        (\a -> s { _scsi_controller_scan_count = a } :: VirtualMachineDataSource)
+             <$> f _scsi_controller_scan_count
+
+instance HasComputedAlternateGuestName VirtualMachineDataSource (TF.Attribute Text) where
+    computedAlternateGuestName f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_alternate_guest_name = a } :: VirtualMachineDataSource)
+             <$> f _computed_alternate_guest_name
+
+instance HasComputedDisks VirtualMachineDataSource (TF.Attribute Text) where
+    computedDisks f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_disks = a } :: VirtualMachineDataSource)
+             <$> f _computed_disks
+
+instance HasComputedEagerlyScrub VirtualMachineDataSource (TF.Attribute Text) where
+    computedEagerlyScrub f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_eagerly_scrub = a } :: VirtualMachineDataSource)
+             <$> f _computed_eagerly_scrub
+
+instance HasComputedGuestId VirtualMachineDataSource (TF.Attribute Text) where
+    computedGuestId f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_guest_id = a } :: VirtualMachineDataSource)
+             <$> f _computed_guest_id
+
+instance HasComputedId VirtualMachineDataSource (TF.Attribute Text) where
+    computedId f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_id = a } :: VirtualMachineDataSource)
+             <$> f _computed_id
+
+instance HasComputedNetworkInterfaceTypes VirtualMachineDataSource (TF.Attribute Text) where
+    computedNetworkInterfaceTypes f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_network_interface_types = a } :: VirtualMachineDataSource)
+             <$> f _computed_network_interface_types
+
+instance HasComputedScsiType VirtualMachineDataSource (TF.Attribute Text) where
+    computedScsiType f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_scsi_type = a } :: VirtualMachineDataSource)
+             <$> f _computed_scsi_type
+
+instance HasComputedSize VirtualMachineDataSource (TF.Attribute Text) where
+    computedSize f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_size = a } :: VirtualMachineDataSource)
+             <$> f _computed_size
+
+instance HasComputedThinProvisioned VirtualMachineDataSource (TF.Attribute Text) where
+    computedThinProvisioned f s@VirtualMachineDataSource{..} =
+        (\a -> s { _computed_thin_provisioned = a } :: VirtualMachineDataSource)
+             <$> f _computed_thin_provisioned
 
 virtualMachineDataSource :: TF.DataSource TF.VSphere VirtualMachineDataSource
 virtualMachineDataSource =
@@ -404,10 +594,25 @@ instance TF.ToHCL VmfsDisksDataSource where
         , TF.assign "rescan" <$> TF.argument _rescan
         ]
 
-$(TF.makeSchemaLenses
-    ''VmfsDisksDataSource
-    ''TF.VSphere
-    ''TF.DataSource)
+instance HasFilter VmfsDisksDataSource (TF.Argument Text) where
+    filter f s@VmfsDisksDataSource{..} =
+        (\a -> s { _filter = a } :: VmfsDisksDataSource)
+             <$> f _filter
+
+instance HasHostSystemId VmfsDisksDataSource (TF.Argument Text) where
+    hostSystemId f s@VmfsDisksDataSource{..} =
+        (\a -> s { _host_system_id = a } :: VmfsDisksDataSource)
+             <$> f _host_system_id
+
+instance HasRescan VmfsDisksDataSource (TF.Argument Text) where
+    rescan f s@VmfsDisksDataSource{..} =
+        (\a -> s { _rescan = a } :: VmfsDisksDataSource)
+             <$> f _rescan
+
+instance HasComputedDisks VmfsDisksDataSource (TF.Attribute Text) where
+    computedDisks f s@VmfsDisksDataSource{..} =
+        (\a -> s { _computed_disks = a } :: VmfsDisksDataSource)
+             <$> f _computed_disks
 
 vmfsDisksDataSource :: TF.DataSource TF.VSphere VmfsDisksDataSource
 vmfsDisksDataSource =
@@ -418,3 +623,111 @@ vmfsDisksDataSource =
             , _rescan = TF.Nil
             , _computed_disks = TF.Compute "disks"
             }
+
+class HasCategoryId s a | s -> a where
+    categoryId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCategoryId s a => HasCategoryId (TF.DataSource p s) a where
+    categoryId = TF.configuration . categoryId
+
+class HasComputedAlternateGuestName s a | s -> a where
+    computedAlternateGuestName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAlternateGuestName s a => HasComputedAlternateGuestName (TF.DataSource p s) a where
+    computedAlternateGuestName = TF.configuration . computedAlternateGuestName
+
+class HasComputedDisks s a | s -> a where
+    computedDisks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDisks s a => HasComputedDisks (TF.DataSource p s) a where
+    computedDisks = TF.configuration . computedDisks
+
+class HasComputedEagerlyScrub s a | s -> a where
+    computedEagerlyScrub :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedEagerlyScrub s a => HasComputedEagerlyScrub (TF.DataSource p s) a where
+    computedEagerlyScrub = TF.configuration . computedEagerlyScrub
+
+class HasComputedGuestId s a | s -> a where
+    computedGuestId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGuestId s a => HasComputedGuestId (TF.DataSource p s) a where
+    computedGuestId = TF.configuration . computedGuestId
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedNetworkInterfaceTypes s a | s -> a where
+    computedNetworkInterfaceTypes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNetworkInterfaceTypes s a => HasComputedNetworkInterfaceTypes (TF.DataSource p s) a where
+    computedNetworkInterfaceTypes = TF.configuration . computedNetworkInterfaceTypes
+
+class HasComputedScsiType s a | s -> a where
+    computedScsiType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedScsiType s a => HasComputedScsiType (TF.DataSource p s) a where
+    computedScsiType = TF.configuration . computedScsiType
+
+class HasComputedSize s a | s -> a where
+    computedSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
+    computedSize = TF.configuration . computedSize
+
+class HasComputedThinProvisioned s a | s -> a where
+    computedThinProvisioned :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedThinProvisioned s a => HasComputedThinProvisioned (TF.DataSource p s) a where
+    computedThinProvisioned = TF.configuration . computedThinProvisioned
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasComputedUplinks s a | s -> a where
+    computedUplinks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUplinks s a => HasComputedUplinks (TF.DataSource p s) a where
+    computedUplinks = TF.configuration . computedUplinks
+
+class HasDatacenterId s a | s -> a where
+    datacenterId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDatacenterId s a => HasDatacenterId (TF.DataSource p s) a where
+    datacenterId = TF.configuration . datacenterId
+
+class HasFilter s a | s -> a where
+    filter :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFilter s a => HasFilter (TF.DataSource p s) a where
+    filter = TF.configuration . filter
+
+class HasHostSystemId s a | s -> a where
+    hostSystemId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostSystemId s a => HasHostSystemId (TF.DataSource p s) a where
+    hostSystemId = TF.configuration . hostSystemId
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name
+
+class HasRescan s a | s -> a where
+    rescan :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRescan s a => HasRescan (TF.DataSource p s) a where
+    rescan = TF.configuration . rescan
+
+class HasScsiControllerScanCount s a | s -> a where
+    scsiControllerScanCount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScsiControllerScanCount s a => HasScsiControllerScanCount (TF.DataSource p s) a where
+    scsiControllerScanCount = TF.configuration . scsiControllerScanCount

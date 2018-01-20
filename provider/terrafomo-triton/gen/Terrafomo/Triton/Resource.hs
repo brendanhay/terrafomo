@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,20 +19,98 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Triton.Resource where
+module Terrafomo.Triton.Resource
+    (
+    -- * Types
+      FabricResource (..)
+    , fabricResource
 
-import Data.Functor ((<$>))
+    , FirewallRuleResource (..)
+    , firewallRuleResource
+
+    , KeyResource (..)
+    , keyResource
+
+    , MachineResource (..)
+    , machineResource
+
+    , SnapshotResource (..)
+    , snapshotResource
+
+    , VlanResource (..)
+    , vlanResource
+
+    -- * Overloaded Fields
+    , HasAdministratorPw (..)
+    , HasAffinity (..)
+    , HasCloudConfig (..)
+    , HasCns (..)
+    , HasComputedCreated (..)
+    , HasComputedDataset (..)
+    , HasComputedDescription (..)
+    , HasComputedDisk (..)
+    , HasComputedFabric (..)
+    , HasComputedGateway (..)
+    , HasComputedId (..)
+    , HasComputedInternetNat (..)
+    , HasComputedIp (..)
+    , HasComputedIps (..)
+    , HasComputedMac (..)
+    , HasComputedMemory (..)
+    , HasComputedName (..)
+    , HasComputedNetmask (..)
+    , HasComputedNetwork (..)
+    , HasComputedNic (..)
+    , HasComputedPrimary (..)
+    , HasComputedPrimaryip (..)
+    , HasComputedProvisionEndIp (..)
+    , HasComputedProvisionStartIp (..)
+    , HasComputedPublic (..)
+    , HasComputedResolvers (..)
+    , HasComputedRoutes (..)
+    , HasComputedState (..)
+    , HasComputedSubnet (..)
+    , HasComputedType' (..)
+    , HasComputedUpdated (..)
+    , HasComputedVlanId (..)
+    , HasDescription (..)
+    , HasEnabled (..)
+    , HasFirewallEnabled (..)
+    , HasGateway (..)
+    , HasImage (..)
+    , HasInternetNat (..)
+    , HasKey (..)
+    , HasLocality (..)
+    , HasMachineId (..)
+    , HasMetadata (..)
+    , HasName (..)
+    , HasNetworks (..)
+    , HasPackage (..)
+    , HasProvisionEndIp (..)
+    , HasProvisionStartIp (..)
+    , HasResolvers (..)
+    , HasRootAuthorizedKeys (..)
+    , HasRoutes (..)
+    , HasRule (..)
+    , HasSubnet (..)
+    , HasTags (..)
+    , HasUserData (..)
+    , HasUserScript (..)
+    , HasVlanId (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 import qualified Terrafomo.Triton.Provider as TF
 import qualified Terrafomo.Triton.Types    as TF
 
@@ -104,10 +180,115 @@ instance TF.ToHCL FabricResource where
         , TF.assign "vlan_id" <$> TF.argument _vlan_id
         ]
 
-$(TF.makeSchemaLenses
-    ''FabricResource
-    ''TF.Triton
-    ''TF.Resource)
+instance HasDescription FabricResource (TF.Argument Text) where
+    description f s@FabricResource{..} =
+        (\a -> s { _description = a } :: FabricResource)
+             <$> f _description
+
+instance HasGateway FabricResource (TF.Argument Text) where
+    gateway f s@FabricResource{..} =
+        (\a -> s { _gateway = a } :: FabricResource)
+             <$> f _gateway
+
+instance HasInternetNat FabricResource (TF.Argument Text) where
+    internetNat f s@FabricResource{..} =
+        (\a -> s { _internet_nat = a } :: FabricResource)
+             <$> f _internet_nat
+
+instance HasName FabricResource (TF.Argument Text) where
+    name f s@FabricResource{..} =
+        (\a -> s { _name = a } :: FabricResource)
+             <$> f _name
+
+instance HasProvisionEndIp FabricResource (TF.Argument Text) where
+    provisionEndIp f s@FabricResource{..} =
+        (\a -> s { _provision_end_ip = a } :: FabricResource)
+             <$> f _provision_end_ip
+
+instance HasProvisionStartIp FabricResource (TF.Argument Text) where
+    provisionStartIp f s@FabricResource{..} =
+        (\a -> s { _provision_start_ip = a } :: FabricResource)
+             <$> f _provision_start_ip
+
+instance HasResolvers FabricResource (TF.Argument Text) where
+    resolvers f s@FabricResource{..} =
+        (\a -> s { _resolvers = a } :: FabricResource)
+             <$> f _resolvers
+
+instance HasRoutes FabricResource (TF.Argument Text) where
+    routes f s@FabricResource{..} =
+        (\a -> s { _routes = a } :: FabricResource)
+             <$> f _routes
+
+instance HasSubnet FabricResource (TF.Argument Text) where
+    subnet f s@FabricResource{..} =
+        (\a -> s { _subnet = a } :: FabricResource)
+             <$> f _subnet
+
+instance HasVlanId FabricResource (TF.Argument Text) where
+    vlanId f s@FabricResource{..} =
+        (\a -> s { _vlan_id = a } :: FabricResource)
+             <$> f _vlan_id
+
+instance HasComputedDescription FabricResource (TF.Attribute Text) where
+    computedDescription f s@FabricResource{..} =
+        (\a -> s { _computed_description = a } :: FabricResource)
+             <$> f _computed_description
+
+instance HasComputedFabric FabricResource (TF.Attribute Text) where
+    computedFabric f s@FabricResource{..} =
+        (\a -> s { _computed_fabric = a } :: FabricResource)
+             <$> f _computed_fabric
+
+instance HasComputedGateway FabricResource (TF.Attribute Text) where
+    computedGateway f s@FabricResource{..} =
+        (\a -> s { _computed_gateway = a } :: FabricResource)
+             <$> f _computed_gateway
+
+instance HasComputedInternetNat FabricResource (TF.Attribute Text) where
+    computedInternetNat f s@FabricResource{..} =
+        (\a -> s { _computed_internet_nat = a } :: FabricResource)
+             <$> f _computed_internet_nat
+
+instance HasComputedName FabricResource (TF.Attribute Text) where
+    computedName f s@FabricResource{..} =
+        (\a -> s { _computed_name = a } :: FabricResource)
+             <$> f _computed_name
+
+instance HasComputedProvisionEndIp FabricResource (TF.Attribute Text) where
+    computedProvisionEndIp f s@FabricResource{..} =
+        (\a -> s { _computed_provision_end_ip = a } :: FabricResource)
+             <$> f _computed_provision_end_ip
+
+instance HasComputedProvisionStartIp FabricResource (TF.Attribute Text) where
+    computedProvisionStartIp f s@FabricResource{..} =
+        (\a -> s { _computed_provision_start_ip = a } :: FabricResource)
+             <$> f _computed_provision_start_ip
+
+instance HasComputedPublic FabricResource (TF.Attribute Text) where
+    computedPublic f s@FabricResource{..} =
+        (\a -> s { _computed_public = a } :: FabricResource)
+             <$> f _computed_public
+
+instance HasComputedResolvers FabricResource (TF.Attribute Text) where
+    computedResolvers f s@FabricResource{..} =
+        (\a -> s { _computed_resolvers = a } :: FabricResource)
+             <$> f _computed_resolvers
+
+instance HasComputedRoutes FabricResource (TF.Attribute Text) where
+    computedRoutes f s@FabricResource{..} =
+        (\a -> s { _computed_routes = a } :: FabricResource)
+             <$> f _computed_routes
+
+instance HasComputedSubnet FabricResource (TF.Attribute Text) where
+    computedSubnet f s@FabricResource{..} =
+        (\a -> s { _computed_subnet = a } :: FabricResource)
+             <$> f _computed_subnet
+
+instance HasComputedVlanId FabricResource (TF.Attribute Text) where
+    computedVlanId f s@FabricResource{..} =
+        (\a -> s { _computed_vlan_id = a } :: FabricResource)
+             <$> f _computed_vlan_id
 
 fabricResource :: TF.Resource TF.Triton FabricResource
 fabricResource =
@@ -157,10 +338,20 @@ instance TF.ToHCL FirewallRuleResource where
         , TF.assign "rule" <$> TF.argument _rule
         ]
 
-$(TF.makeSchemaLenses
-    ''FirewallRuleResource
-    ''TF.Triton
-    ''TF.Resource)
+instance HasEnabled FirewallRuleResource (TF.Argument Text) where
+    enabled f s@FirewallRuleResource{..} =
+        (\a -> s { _enabled = a } :: FirewallRuleResource)
+             <$> f _enabled
+
+instance HasRule FirewallRuleResource (TF.Argument Text) where
+    rule f s@FirewallRuleResource{..} =
+        (\a -> s { _rule = a } :: FirewallRuleResource)
+             <$> f _rule
+
+instance HasComputedId FirewallRuleResource (TF.Attribute Text) where
+    computedId f s@FirewallRuleResource{..} =
+        (\a -> s { _computed_id = a } :: FirewallRuleResource)
+             <$> f _computed_id
 
 firewallRuleResource :: TF.Resource TF.Triton FirewallRuleResource
 firewallRuleResource =
@@ -188,10 +379,15 @@ instance TF.ToHCL KeyResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''KeyResource
-    ''TF.Triton
-    ''TF.Resource)
+instance HasKey KeyResource (TF.Argument Text) where
+    key f s@KeyResource{..} =
+        (\a -> s { _key = a } :: KeyResource)
+             <$> f _key
+
+instance HasName KeyResource (TF.Argument Text) where
+    name f s@KeyResource{..} =
+        (\a -> s { _name = a } :: KeyResource)
+             <$> f _name
 
 keyResource :: TF.Resource TF.Triton KeyResource
 keyResource =
@@ -294,10 +490,165 @@ instance TF.ToHCL MachineResource where
         , TF.assign "user_script" <$> TF.argument _user_script
         ]
 
-$(TF.makeSchemaLenses
-    ''MachineResource
-    ''TF.Triton
-    ''TF.Resource)
+instance HasAdministratorPw MachineResource (TF.Argument Text) where
+    administratorPw f s@MachineResource{..} =
+        (\a -> s { _administrator_pw = a } :: MachineResource)
+             <$> f _administrator_pw
+
+instance HasAffinity MachineResource (TF.Argument Text) where
+    affinity f s@MachineResource{..} =
+        (\a -> s { _affinity = a } :: MachineResource)
+             <$> f _affinity
+
+instance HasCloudConfig MachineResource (TF.Argument Text) where
+    cloudConfig f s@MachineResource{..} =
+        (\a -> s { _cloud_config = a } :: MachineResource)
+             <$> f _cloud_config
+
+instance HasCns MachineResource (TF.Argument Text) where
+    cns f s@MachineResource{..} =
+        (\a -> s { _cns = a } :: MachineResource)
+             <$> f _cns
+
+instance HasFirewallEnabled MachineResource (TF.Argument Text) where
+    firewallEnabled f s@MachineResource{..} =
+        (\a -> s { _firewall_enabled = a } :: MachineResource)
+             <$> f _firewall_enabled
+
+instance HasImage MachineResource (TF.Argument Text) where
+    image f s@MachineResource{..} =
+        (\a -> s { _image = a } :: MachineResource)
+             <$> f _image
+
+instance HasLocality MachineResource (TF.Argument Text) where
+    locality f s@MachineResource{..} =
+        (\a -> s { _locality = a } :: MachineResource)
+             <$> f _locality
+
+instance HasMetadata MachineResource (TF.Argument Text) where
+    metadata f s@MachineResource{..} =
+        (\a -> s { _metadata = a } :: MachineResource)
+             <$> f _metadata
+
+instance HasName MachineResource (TF.Argument Text) where
+    name f s@MachineResource{..} =
+        (\a -> s { _name = a } :: MachineResource)
+             <$> f _name
+
+instance HasNetworks MachineResource (TF.Argument Text) where
+    networks f s@MachineResource{..} =
+        (\a -> s { _networks = a } :: MachineResource)
+             <$> f _networks
+
+instance HasPackage MachineResource (TF.Argument Text) where
+    package f s@MachineResource{..} =
+        (\a -> s { _package = a } :: MachineResource)
+             <$> f _package
+
+instance HasRootAuthorizedKeys MachineResource (TF.Argument Text) where
+    rootAuthorizedKeys f s@MachineResource{..} =
+        (\a -> s { _root_authorized_keys = a } :: MachineResource)
+             <$> f _root_authorized_keys
+
+instance HasTags MachineResource (TF.Argument Text) where
+    tags f s@MachineResource{..} =
+        (\a -> s { _tags = a } :: MachineResource)
+             <$> f _tags
+
+instance HasUserData MachineResource (TF.Argument Text) where
+    userData f s@MachineResource{..} =
+        (\a -> s { _user_data = a } :: MachineResource)
+             <$> f _user_data
+
+instance HasUserScript MachineResource (TF.Argument Text) where
+    userScript f s@MachineResource{..} =
+        (\a -> s { _user_script = a } :: MachineResource)
+             <$> f _user_script
+
+instance HasComputedCreated MachineResource (TF.Attribute Text) where
+    computedCreated f s@MachineResource{..} =
+        (\a -> s { _computed_created = a } :: MachineResource)
+             <$> f _computed_created
+
+instance HasComputedDataset MachineResource (TF.Attribute Text) where
+    computedDataset f s@MachineResource{..} =
+        (\a -> s { _computed_dataset = a } :: MachineResource)
+             <$> f _computed_dataset
+
+instance HasComputedDisk MachineResource (TF.Attribute Text) where
+    computedDisk f s@MachineResource{..} =
+        (\a -> s { _computed_disk = a } :: MachineResource)
+             <$> f _computed_disk
+
+instance HasComputedGateway MachineResource (TF.Attribute Text) where
+    computedGateway f s@MachineResource{..} =
+        (\a -> s { _computed_gateway = a } :: MachineResource)
+             <$> f _computed_gateway
+
+instance HasComputedId MachineResource (TF.Attribute Text) where
+    computedId f s@MachineResource{..} =
+        (\a -> s { _computed_id = a } :: MachineResource)
+             <$> f _computed_id
+
+instance HasComputedIp MachineResource (TF.Attribute Text) where
+    computedIp f s@MachineResource{..} =
+        (\a -> s { _computed_ip = a } :: MachineResource)
+             <$> f _computed_ip
+
+instance HasComputedIps MachineResource (TF.Attribute Text) where
+    computedIps f s@MachineResource{..} =
+        (\a -> s { _computed_ips = a } :: MachineResource)
+             <$> f _computed_ips
+
+instance HasComputedMac MachineResource (TF.Attribute Text) where
+    computedMac f s@MachineResource{..} =
+        (\a -> s { _computed_mac = a } :: MachineResource)
+             <$> f _computed_mac
+
+instance HasComputedMemory MachineResource (TF.Attribute Text) where
+    computedMemory f s@MachineResource{..} =
+        (\a -> s { _computed_memory = a } :: MachineResource)
+             <$> f _computed_memory
+
+instance HasComputedNetmask MachineResource (TF.Attribute Text) where
+    computedNetmask f s@MachineResource{..} =
+        (\a -> s { _computed_netmask = a } :: MachineResource)
+             <$> f _computed_netmask
+
+instance HasComputedNetwork MachineResource (TF.Attribute Text) where
+    computedNetwork f s@MachineResource{..} =
+        (\a -> s { _computed_network = a } :: MachineResource)
+             <$> f _computed_network
+
+instance HasComputedNic MachineResource (TF.Attribute Text) where
+    computedNic f s@MachineResource{..} =
+        (\a -> s { _computed_nic = a } :: MachineResource)
+             <$> f _computed_nic
+
+instance HasComputedPrimary MachineResource (TF.Attribute Text) where
+    computedPrimary f s@MachineResource{..} =
+        (\a -> s { _computed_primary = a } :: MachineResource)
+             <$> f _computed_primary
+
+instance HasComputedPrimaryip MachineResource (TF.Attribute Text) where
+    computedPrimaryip f s@MachineResource{..} =
+        (\a -> s { _computed_primaryip = a } :: MachineResource)
+             <$> f _computed_primaryip
+
+instance HasComputedState MachineResource (TF.Attribute Text) where
+    computedState f s@MachineResource{..} =
+        (\a -> s { _computed_state = a } :: MachineResource)
+             <$> f _computed_state
+
+instance HasComputedType' MachineResource (TF.Attribute Text) where
+    computedType' f s@MachineResource{..} =
+        (\a -> s { _computed_type' = a } :: MachineResource)
+             <$> f _computed_type'
+
+instance HasComputedUpdated MachineResource (TF.Attribute Text) where
+    computedUpdated f s@MachineResource{..} =
+        (\a -> s { _computed_updated = a } :: MachineResource)
+             <$> f _computed_updated
 
 machineResource :: TF.Resource TF.Triton MachineResource
 machineResource =
@@ -361,10 +712,25 @@ instance TF.ToHCL SnapshotResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''SnapshotResource
-    ''TF.Triton
-    ''TF.Resource)
+instance HasMachineId SnapshotResource (TF.Argument Text) where
+    machineId f s@SnapshotResource{..} =
+        (\a -> s { _machine_id = a } :: SnapshotResource)
+             <$> f _machine_id
+
+instance HasName SnapshotResource (TF.Argument Text) where
+    name f s@SnapshotResource{..} =
+        (\a -> s { _name = a } :: SnapshotResource)
+             <$> f _name
+
+instance HasComputedId SnapshotResource (TF.Attribute Text) where
+    computedId f s@SnapshotResource{..} =
+        (\a -> s { _computed_id = a } :: SnapshotResource)
+             <$> f _computed_id
+
+instance HasComputedState SnapshotResource (TF.Attribute Text) where
+    computedState f s@SnapshotResource{..} =
+        (\a -> s { _computed_state = a } :: SnapshotResource)
+             <$> f _computed_state
 
 snapshotResource :: TF.Resource TF.Triton SnapshotResource
 snapshotResource =
@@ -398,10 +764,20 @@ instance TF.ToHCL VlanResource where
         , TF.assign "vlan_id" <$> TF.argument _vlan_id
         ]
 
-$(TF.makeSchemaLenses
-    ''VlanResource
-    ''TF.Triton
-    ''TF.Resource)
+instance HasDescription VlanResource (TF.Argument Text) where
+    description f s@VlanResource{..} =
+        (\a -> s { _description = a } :: VlanResource)
+             <$> f _description
+
+instance HasName VlanResource (TF.Argument Text) where
+    name f s@VlanResource{..} =
+        (\a -> s { _name = a } :: VlanResource)
+             <$> f _name
+
+instance HasVlanId VlanResource (TF.Argument Text) where
+    vlanId f s@VlanResource{..} =
+        (\a -> s { _vlan_id = a } :: VlanResource)
+             <$> f _vlan_id
 
 vlanResource :: TF.Resource TF.Triton VlanResource
 vlanResource =
@@ -411,3 +787,339 @@ vlanResource =
             , _name = TF.Nil
             , _vlan_id = TF.Nil
             }
+
+class HasAdministratorPw s a | s -> a where
+    administratorPw :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAdministratorPw s a => HasAdministratorPw (TF.Resource p s) a where
+    administratorPw = TF.configuration . administratorPw
+
+class HasAffinity s a | s -> a where
+    affinity :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAffinity s a => HasAffinity (TF.Resource p s) a where
+    affinity = TF.configuration . affinity
+
+class HasCloudConfig s a | s -> a where
+    cloudConfig :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCloudConfig s a => HasCloudConfig (TF.Resource p s) a where
+    cloudConfig = TF.configuration . cloudConfig
+
+class HasCns s a | s -> a where
+    cns :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCns s a => HasCns (TF.Resource p s) a where
+    cns = TF.configuration . cns
+
+class HasComputedCreated s a | s -> a where
+    computedCreated :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreated s a => HasComputedCreated (TF.Resource p s) a where
+    computedCreated = TF.configuration . computedCreated
+
+class HasComputedDataset s a | s -> a where
+    computedDataset :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDataset s a => HasComputedDataset (TF.Resource p s) a where
+    computedDataset = TF.configuration . computedDataset
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDescription s a => HasComputedDescription (TF.Resource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDisk s a | s -> a where
+    computedDisk :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDisk s a => HasComputedDisk (TF.Resource p s) a where
+    computedDisk = TF.configuration . computedDisk
+
+class HasComputedFabric s a | s -> a where
+    computedFabric :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFabric s a => HasComputedFabric (TF.Resource p s) a where
+    computedFabric = TF.configuration . computedFabric
+
+class HasComputedGateway s a | s -> a where
+    computedGateway :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGateway s a => HasComputedGateway (TF.Resource p s) a where
+    computedGateway = TF.configuration . computedGateway
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedInternetNat s a | s -> a where
+    computedInternetNat :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInternetNat s a => HasComputedInternetNat (TF.Resource p s) a where
+    computedInternetNat = TF.configuration . computedInternetNat
+
+class HasComputedIp s a | s -> a where
+    computedIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIp s a => HasComputedIp (TF.Resource p s) a where
+    computedIp = TF.configuration . computedIp
+
+class HasComputedIps s a | s -> a where
+    computedIps :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIps s a => HasComputedIps (TF.Resource p s) a where
+    computedIps = TF.configuration . computedIps
+
+class HasComputedMac s a | s -> a where
+    computedMac :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMac s a => HasComputedMac (TF.Resource p s) a where
+    computedMac = TF.configuration . computedMac
+
+class HasComputedMemory s a | s -> a where
+    computedMemory :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMemory s a => HasComputedMemory (TF.Resource p s) a where
+    computedMemory = TF.configuration . computedMemory
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedNetmask s a | s -> a where
+    computedNetmask :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNetmask s a => HasComputedNetmask (TF.Resource p s) a where
+    computedNetmask = TF.configuration . computedNetmask
+
+class HasComputedNetwork s a | s -> a where
+    computedNetwork :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNetwork s a => HasComputedNetwork (TF.Resource p s) a where
+    computedNetwork = TF.configuration . computedNetwork
+
+class HasComputedNic s a | s -> a where
+    computedNic :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNic s a => HasComputedNic (TF.Resource p s) a where
+    computedNic = TF.configuration . computedNic
+
+class HasComputedPrimary s a | s -> a where
+    computedPrimary :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPrimary s a => HasComputedPrimary (TF.Resource p s) a where
+    computedPrimary = TF.configuration . computedPrimary
+
+class HasComputedPrimaryip s a | s -> a where
+    computedPrimaryip :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPrimaryip s a => HasComputedPrimaryip (TF.Resource p s) a where
+    computedPrimaryip = TF.configuration . computedPrimaryip
+
+class HasComputedProvisionEndIp s a | s -> a where
+    computedProvisionEndIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProvisionEndIp s a => HasComputedProvisionEndIp (TF.Resource p s) a where
+    computedProvisionEndIp = TF.configuration . computedProvisionEndIp
+
+class HasComputedProvisionStartIp s a | s -> a where
+    computedProvisionStartIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProvisionStartIp s a => HasComputedProvisionStartIp (TF.Resource p s) a where
+    computedProvisionStartIp = TF.configuration . computedProvisionStartIp
+
+class HasComputedPublic s a | s -> a where
+    computedPublic :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPublic s a => HasComputedPublic (TF.Resource p s) a where
+    computedPublic = TF.configuration . computedPublic
+
+class HasComputedResolvers s a | s -> a where
+    computedResolvers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedResolvers s a => HasComputedResolvers (TF.Resource p s) a where
+    computedResolvers = TF.configuration . computedResolvers
+
+class HasComputedRoutes s a | s -> a where
+    computedRoutes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRoutes s a => HasComputedRoutes (TF.Resource p s) a where
+    computedRoutes = TF.configuration . computedRoutes
+
+class HasComputedState s a | s -> a where
+    computedState :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedState s a => HasComputedState (TF.Resource p s) a where
+    computedState = TF.configuration . computedState
+
+class HasComputedSubnet s a | s -> a where
+    computedSubnet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSubnet s a => HasComputedSubnet (TF.Resource p s) a where
+    computedSubnet = TF.configuration . computedSubnet
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.Resource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasComputedUpdated s a | s -> a where
+    computedUpdated :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUpdated s a => HasComputedUpdated (TF.Resource p s) a where
+    computedUpdated = TF.configuration . computedUpdated
+
+class HasComputedVlanId s a | s -> a where
+    computedVlanId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVlanId s a => HasComputedVlanId (TF.Resource p s) a where
+    computedVlanId = TF.configuration . computedVlanId
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasEnabled s a | s -> a where
+    enabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnabled s a => HasEnabled (TF.Resource p s) a where
+    enabled = TF.configuration . enabled
+
+class HasFirewallEnabled s a | s -> a where
+    firewallEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFirewallEnabled s a => HasFirewallEnabled (TF.Resource p s) a where
+    firewallEnabled = TF.configuration . firewallEnabled
+
+class HasGateway s a | s -> a where
+    gateway :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGateway s a => HasGateway (TF.Resource p s) a where
+    gateway = TF.configuration . gateway
+
+class HasImage s a | s -> a where
+    image :: Functor f => (a -> f a) -> s -> f s
+
+instance HasImage s a => HasImage (TF.Resource p s) a where
+    image = TF.configuration . image
+
+class HasInternetNat s a | s -> a where
+    internetNat :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternetNat s a => HasInternetNat (TF.Resource p s) a where
+    internetNat = TF.configuration . internetNat
+
+class HasKey s a | s -> a where
+    key :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKey s a => HasKey (TF.Resource p s) a where
+    key = TF.configuration . key
+
+class HasLocality s a | s -> a where
+    locality :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLocality s a => HasLocality (TF.Resource p s) a where
+    locality = TF.configuration . locality
+
+class HasMachineId s a | s -> a where
+    machineId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMachineId s a => HasMachineId (TF.Resource p s) a where
+    machineId = TF.configuration . machineId
+
+class HasMetadata s a | s -> a where
+    metadata :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMetadata s a => HasMetadata (TF.Resource p s) a where
+    metadata = TF.configuration . metadata
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNetworks s a | s -> a where
+    networks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNetworks s a => HasNetworks (TF.Resource p s) a where
+    networks = TF.configuration . networks
+
+class HasPackage s a | s -> a where
+    package :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPackage s a => HasPackage (TF.Resource p s) a where
+    package = TF.configuration . package
+
+class HasProvisionEndIp s a | s -> a where
+    provisionEndIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProvisionEndIp s a => HasProvisionEndIp (TF.Resource p s) a where
+    provisionEndIp = TF.configuration . provisionEndIp
+
+class HasProvisionStartIp s a | s -> a where
+    provisionStartIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProvisionStartIp s a => HasProvisionStartIp (TF.Resource p s) a where
+    provisionStartIp = TF.configuration . provisionStartIp
+
+class HasResolvers s a | s -> a where
+    resolvers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResolvers s a => HasResolvers (TF.Resource p s) a where
+    resolvers = TF.configuration . resolvers
+
+class HasRootAuthorizedKeys s a | s -> a where
+    rootAuthorizedKeys :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRootAuthorizedKeys s a => HasRootAuthorizedKeys (TF.Resource p s) a where
+    rootAuthorizedKeys = TF.configuration . rootAuthorizedKeys
+
+class HasRoutes s a | s -> a where
+    routes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRoutes s a => HasRoutes (TF.Resource p s) a where
+    routes = TF.configuration . routes
+
+class HasRule s a | s -> a where
+    rule :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRule s a => HasRule (TF.Resource p s) a where
+    rule = TF.configuration . rule
+
+class HasSubnet s a | s -> a where
+    subnet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSubnet s a => HasSubnet (TF.Resource p s) a where
+    subnet = TF.configuration . subnet
+
+class HasTags s a | s -> a where
+    tags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags = TF.configuration . tags
+
+class HasUserData s a | s -> a where
+    userData :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserData s a => HasUserData (TF.Resource p s) a where
+    userData = TF.configuration . userData
+
+class HasUserScript s a | s -> a where
+    userScript :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserScript s a => HasUserScript (TF.Resource p s) a where
+    userScript = TF.configuration . userScript
+
+class HasVlanId s a | s -> a where
+    vlanId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVlanId s a => HasVlanId (TF.Resource p s) a where
+    vlanId = TF.configuration . vlanId

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,161 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AliCloud.DataSource where
+module Terrafomo.AliCloud.DataSource
+    (
+    -- * Types
+      DnsDomainsDataSource (..)
+    , dnsDomainsDataSource
 
-import Data.Functor ((<$>))
+    , DnsGroupsDataSource (..)
+    , dnsGroupsDataSource
+
+    , DnsRecordsDataSource (..)
+    , dnsRecordsDataSource
+
+    , ImagesDataSource (..)
+    , imagesDataSource
+
+    , InstanceTypesDataSource (..)
+    , instanceTypesDataSource
+
+    , KeyPairsDataSource (..)
+    , keyPairsDataSource
+
+    , RamAccountAliasesDataSource (..)
+    , ramAccountAliasesDataSource
+
+    , RamGroupsDataSource (..)
+    , ramGroupsDataSource
+
+    , RamPoliciesDataSource (..)
+    , ramPoliciesDataSource
+
+    , RamRolesDataSource (..)
+    , ramRolesDataSource
+
+    , RamUsersDataSource (..)
+    , ramUsersDataSource
+
+    , RegionsDataSource (..)
+    , regionsDataSource
+
+    , VpcsDataSource (..)
+    , vpcsDataSource
+
+    , ZonesDataSource (..)
+    , zonesDataSource
+
+    -- * Overloaded Fields
+    , HasAliDomain (..)
+    , HasAvailabilityZone (..)
+    , HasAvailableDiskCategory (..)
+    , HasAvailableInstanceType (..)
+    , HasAvailableResourceCreation (..)
+    , HasCidrBlock (..)
+    , HasComputedAccountAlias (..)
+    , HasComputedAliDomain (..)
+    , HasComputedArchitecture (..)
+    , HasComputedArn (..)
+    , HasComputedAssumeRolePolicyDocument (..)
+    , HasComputedAttachmentCount (..)
+    , HasComputedAvailableDiskCategories (..)
+    , HasComputedAvailableInstanceTypes (..)
+    , HasComputedAvailableResourceCreation (..)
+    , HasComputedCidrBlock (..)
+    , HasComputedComments (..)
+    , HasComputedCpuCoreCount (..)
+    , HasComputedCreateDate (..)
+    , HasComputedCreationTime (..)
+    , HasComputedDefaultVersion (..)
+    , HasComputedDescription (..)
+    , HasComputedDiskDeviceMappings (..)
+    , HasComputedDnsServers (..)
+    , HasComputedDocument (..)
+    , HasComputedDomainId (..)
+    , HasComputedDomainName (..)
+    , HasComputedFamily' (..)
+    , HasComputedFingerPrint (..)
+    , HasComputedGroupId (..)
+    , HasComputedGroupName (..)
+    , HasComputedHostRecord (..)
+    , HasComputedId (..)
+    , HasComputedImageOwnerAlias (..)
+    , HasComputedImageVersion (..)
+    , HasComputedInstanceId (..)
+    , HasComputedInstances (..)
+    , HasComputedIsDefault (..)
+    , HasComputedIsSubscribed (..)
+    , HasComputedKeyName (..)
+    , HasComputedLastLoginDate (..)
+    , HasComputedLine (..)
+    , HasComputedLocalName (..)
+    , HasComputedLocked (..)
+    , HasComputedMemorySize (..)
+    , HasComputedName (..)
+    , HasComputedOsName (..)
+    , HasComputedPriority (..)
+    , HasComputedProductCode (..)
+    , HasComputedProgress (..)
+    , HasComputedPunyCode (..)
+    , HasComputedRecordId (..)
+    , HasComputedRegionId (..)
+    , HasComputedRouteTableId (..)
+    , HasComputedSize (..)
+    , HasComputedStatus (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedUpdateDate (..)
+    , HasComputedValue (..)
+    , HasComputedVersionCode (..)
+    , HasComputedVpcName (..)
+    , HasComputedVrouterId (..)
+    , HasComputedVswitchIds (..)
+    , HasCpuCoreCount (..)
+    , HasCurrent (..)
+    , HasDomainName (..)
+    , HasDomainNameRegex (..)
+    , HasFingerPrint (..)
+    , HasGroupName (..)
+    , HasGroupNameRegex (..)
+    , HasHostRecordRegex (..)
+    , HasInstanceId (..)
+    , HasInstanceTypeFamily (..)
+    , HasIsDefault (..)
+    , HasIsLocked (..)
+    , HasIsOutdated (..)
+    , HasLine (..)
+    , HasMemorySize (..)
+    , HasMostRecent (..)
+    , HasName (..)
+    , HasNameRegex (..)
+    , HasOutputFile (..)
+    , HasOwners (..)
+    , HasPolicyName (..)
+    , HasPolicyType (..)
+    , HasRoleName (..)
+    , HasStatus (..)
+    , HasType' (..)
+    , HasUserName (..)
+    , HasValueRegex (..)
+    , HasVersionCode (..)
+    , HasVswitchId (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.AliCloud.Provider as TF
 import qualified Terrafomo.AliCloud.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @alicloud_dns_domains@ AliCloud datasource.
 
@@ -86,10 +223,80 @@ instance TF.ToHCL DnsDomainsDataSource where
         , TF.assign "version_code" <$> TF.argument _version_code
         ]
 
-$(TF.makeSchemaLenses
-    ''DnsDomainsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasAliDomain DnsDomainsDataSource (TF.Argument Text) where
+    aliDomain f s@DnsDomainsDataSource{..} =
+        (\a -> s { _ali_domain = a } :: DnsDomainsDataSource)
+             <$> f _ali_domain
+
+instance HasDomainNameRegex DnsDomainsDataSource (TF.Argument Text) where
+    domainNameRegex f s@DnsDomainsDataSource{..} =
+        (\a -> s { _domain_name_regex = a } :: DnsDomainsDataSource)
+             <$> f _domain_name_regex
+
+instance HasGroupNameRegex DnsDomainsDataSource (TF.Argument Text) where
+    groupNameRegex f s@DnsDomainsDataSource{..} =
+        (\a -> s { _group_name_regex = a } :: DnsDomainsDataSource)
+             <$> f _group_name_regex
+
+instance HasInstanceId DnsDomainsDataSource (TF.Argument Text) where
+    instanceId f s@DnsDomainsDataSource{..} =
+        (\a -> s { _instance_id = a } :: DnsDomainsDataSource)
+             <$> f _instance_id
+
+instance HasOutputFile DnsDomainsDataSource (TF.Argument Text) where
+    outputFile f s@DnsDomainsDataSource{..} =
+        (\a -> s { _output_file = a } :: DnsDomainsDataSource)
+             <$> f _output_file
+
+instance HasVersionCode DnsDomainsDataSource (TF.Argument Text) where
+    versionCode f s@DnsDomainsDataSource{..} =
+        (\a -> s { _version_code = a } :: DnsDomainsDataSource)
+             <$> f _version_code
+
+instance HasComputedAliDomain DnsDomainsDataSource (TF.Attribute Text) where
+    computedAliDomain f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_ali_domain = a } :: DnsDomainsDataSource)
+             <$> f _computed_ali_domain
+
+instance HasComputedDnsServers DnsDomainsDataSource (TF.Attribute Text) where
+    computedDnsServers f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_dns_servers = a } :: DnsDomainsDataSource)
+             <$> f _computed_dns_servers
+
+instance HasComputedDomainId DnsDomainsDataSource (TF.Attribute Text) where
+    computedDomainId f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_domain_id = a } :: DnsDomainsDataSource)
+             <$> f _computed_domain_id
+
+instance HasComputedDomainName DnsDomainsDataSource (TF.Attribute Text) where
+    computedDomainName f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_domain_name = a } :: DnsDomainsDataSource)
+             <$> f _computed_domain_name
+
+instance HasComputedGroupId DnsDomainsDataSource (TF.Attribute Text) where
+    computedGroupId f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_group_id = a } :: DnsDomainsDataSource)
+             <$> f _computed_group_id
+
+instance HasComputedGroupName DnsDomainsDataSource (TF.Attribute Text) where
+    computedGroupName f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_group_name = a } :: DnsDomainsDataSource)
+             <$> f _computed_group_name
+
+instance HasComputedInstanceId DnsDomainsDataSource (TF.Attribute Text) where
+    computedInstanceId f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_instance_id = a } :: DnsDomainsDataSource)
+             <$> f _computed_instance_id
+
+instance HasComputedPunyCode DnsDomainsDataSource (TF.Attribute Text) where
+    computedPunyCode f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_puny_code = a } :: DnsDomainsDataSource)
+             <$> f _computed_puny_code
+
+instance HasComputedVersionCode DnsDomainsDataSource (TF.Attribute Text) where
+    computedVersionCode f s@DnsDomainsDataSource{..} =
+        (\a -> s { _computed_version_code = a } :: DnsDomainsDataSource)
+             <$> f _computed_version_code
 
 dnsDomainsDataSource :: TF.DataSource TF.AliCloud DnsDomainsDataSource
 dnsDomainsDataSource =
@@ -134,10 +341,25 @@ instance TF.ToHCL DnsGroupsDataSource where
         , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
-$(TF.makeSchemaLenses
-    ''DnsGroupsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasNameRegex DnsGroupsDataSource (TF.Argument Text) where
+    nameRegex f s@DnsGroupsDataSource{..} =
+        (\a -> s { _name_regex = a } :: DnsGroupsDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile DnsGroupsDataSource (TF.Argument Text) where
+    outputFile f s@DnsGroupsDataSource{..} =
+        (\a -> s { _output_file = a } :: DnsGroupsDataSource)
+             <$> f _output_file
+
+instance HasComputedGroupId DnsGroupsDataSource (TF.Attribute Text) where
+    computedGroupId f s@DnsGroupsDataSource{..} =
+        (\a -> s { _computed_group_id = a } :: DnsGroupsDataSource)
+             <$> f _computed_group_id
+
+instance HasComputedGroupName DnsGroupsDataSource (TF.Attribute Text) where
+    computedGroupName f s@DnsGroupsDataSource{..} =
+        (\a -> s { _computed_group_name = a } :: DnsGroupsDataSource)
+             <$> f _computed_group_name
 
 dnsGroupsDataSource :: TF.DataSource TF.AliCloud DnsGroupsDataSource
 dnsGroupsDataSource =
@@ -205,10 +427,95 @@ instance TF.ToHCL DnsRecordsDataSource where
         , TF.assign "value_regex" <$> TF.argument _value_regex
         ]
 
-$(TF.makeSchemaLenses
-    ''DnsRecordsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasDomainName DnsRecordsDataSource (TF.Argument Text) where
+    domainName f s@DnsRecordsDataSource{..} =
+        (\a -> s { _domain_name = a } :: DnsRecordsDataSource)
+             <$> f _domain_name
+
+instance HasHostRecordRegex DnsRecordsDataSource (TF.Argument Text) where
+    hostRecordRegex f s@DnsRecordsDataSource{..} =
+        (\a -> s { _host_record_regex = a } :: DnsRecordsDataSource)
+             <$> f _host_record_regex
+
+instance HasIsLocked DnsRecordsDataSource (TF.Argument Text) where
+    isLocked f s@DnsRecordsDataSource{..} =
+        (\a -> s { _is_locked = a } :: DnsRecordsDataSource)
+             <$> f _is_locked
+
+instance HasLine DnsRecordsDataSource (TF.Argument Text) where
+    line f s@DnsRecordsDataSource{..} =
+        (\a -> s { _line = a } :: DnsRecordsDataSource)
+             <$> f _line
+
+instance HasOutputFile DnsRecordsDataSource (TF.Argument Text) where
+    outputFile f s@DnsRecordsDataSource{..} =
+        (\a -> s { _output_file = a } :: DnsRecordsDataSource)
+             <$> f _output_file
+
+instance HasStatus DnsRecordsDataSource (TF.Argument Text) where
+    status f s@DnsRecordsDataSource{..} =
+        (\a -> s { _status = a } :: DnsRecordsDataSource)
+             <$> f _status
+
+instance HasType' DnsRecordsDataSource (TF.Argument Text) where
+    type' f s@DnsRecordsDataSource{..} =
+        (\a -> s { _type' = a } :: DnsRecordsDataSource)
+             <$> f _type'
+
+instance HasValueRegex DnsRecordsDataSource (TF.Argument Text) where
+    valueRegex f s@DnsRecordsDataSource{..} =
+        (\a -> s { _value_regex = a } :: DnsRecordsDataSource)
+             <$> f _value_regex
+
+instance HasComputedDomainName DnsRecordsDataSource (TF.Attribute Text) where
+    computedDomainName f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_domain_name = a } :: DnsRecordsDataSource)
+             <$> f _computed_domain_name
+
+instance HasComputedHostRecord DnsRecordsDataSource (TF.Attribute Text) where
+    computedHostRecord f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_host_record = a } :: DnsRecordsDataSource)
+             <$> f _computed_host_record
+
+instance HasComputedLine DnsRecordsDataSource (TF.Attribute Text) where
+    computedLine f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_line = a } :: DnsRecordsDataSource)
+             <$> f _computed_line
+
+instance HasComputedLocked DnsRecordsDataSource (TF.Attribute Text) where
+    computedLocked f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_locked = a } :: DnsRecordsDataSource)
+             <$> f _computed_locked
+
+instance HasComputedPriority DnsRecordsDataSource (TF.Attribute Text) where
+    computedPriority f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_priority = a } :: DnsRecordsDataSource)
+             <$> f _computed_priority
+
+instance HasComputedRecordId DnsRecordsDataSource (TF.Attribute Text) where
+    computedRecordId f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_record_id = a } :: DnsRecordsDataSource)
+             <$> f _computed_record_id
+
+instance HasComputedStatus DnsRecordsDataSource (TF.Attribute Text) where
+    computedStatus f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_status = a } :: DnsRecordsDataSource)
+             <$> f _computed_status
+
+instance HasComputedTtl DnsRecordsDataSource (TF.Attribute Text) where
+    computedTtl f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_ttl = a } :: DnsRecordsDataSource)
+             <$> f _computed_ttl
+
+instance HasComputedType' DnsRecordsDataSource (TF.Attribute Text) where
+    computedType' f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_type' = a } :: DnsRecordsDataSource)
+             <$> f _computed_type'
+
+instance HasComputedValue DnsRecordsDataSource (TF.Attribute Text) where
+    computedValue f s@DnsRecordsDataSource{..} =
+        (\a -> s { _computed_value = a } :: DnsRecordsDataSource)
+             <$> f _computed_value
 
 dnsRecordsDataSource :: TF.DataSource TF.AliCloud DnsRecordsDataSource
 dnsRecordsDataSource =
@@ -285,10 +592,90 @@ instance TF.ToHCL ImagesDataSource where
         , TF.assign "owners" <$> TF.argument _owners
         ]
 
-$(TF.makeSchemaLenses
-    ''ImagesDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasMostRecent ImagesDataSource (TF.Argument Text) where
+    mostRecent f s@ImagesDataSource{..} =
+        (\a -> s { _most_recent = a } :: ImagesDataSource)
+             <$> f _most_recent
+
+instance HasNameRegex ImagesDataSource (TF.Argument Text) where
+    nameRegex f s@ImagesDataSource{..} =
+        (\a -> s { _name_regex = a } :: ImagesDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile ImagesDataSource (TF.Argument Text) where
+    outputFile f s@ImagesDataSource{..} =
+        (\a -> s { _output_file = a } :: ImagesDataSource)
+             <$> f _output_file
+
+instance HasOwners ImagesDataSource (TF.Argument Text) where
+    owners f s@ImagesDataSource{..} =
+        (\a -> s { _owners = a } :: ImagesDataSource)
+             <$> f _owners
+
+instance HasComputedArchitecture ImagesDataSource (TF.Attribute Text) where
+    computedArchitecture f s@ImagesDataSource{..} =
+        (\a -> s { _computed_architecture = a } :: ImagesDataSource)
+             <$> f _computed_architecture
+
+instance HasComputedCreationTime ImagesDataSource (TF.Attribute Text) where
+    computedCreationTime f s@ImagesDataSource{..} =
+        (\a -> s { _computed_creation_time = a } :: ImagesDataSource)
+             <$> f _computed_creation_time
+
+instance HasComputedDescription ImagesDataSource (TF.Attribute Text) where
+    computedDescription f s@ImagesDataSource{..} =
+        (\a -> s { _computed_description = a } :: ImagesDataSource)
+             <$> f _computed_description
+
+instance HasComputedDiskDeviceMappings ImagesDataSource (TF.Attribute Text) where
+    computedDiskDeviceMappings f s@ImagesDataSource{..} =
+        (\a -> s { _computed_disk_device_mappings = a } :: ImagesDataSource)
+             <$> f _computed_disk_device_mappings
+
+instance HasComputedId ImagesDataSource (TF.Attribute Text) where
+    computedId f s@ImagesDataSource{..} =
+        (\a -> s { _computed_id = a } :: ImagesDataSource)
+             <$> f _computed_id
+
+instance HasComputedImageOwnerAlias ImagesDataSource (TF.Attribute Text) where
+    computedImageOwnerAlias f s@ImagesDataSource{..} =
+        (\a -> s { _computed_image_owner_alias = a } :: ImagesDataSource)
+             <$> f _computed_image_owner_alias
+
+instance HasComputedImageVersion ImagesDataSource (TF.Attribute Text) where
+    computedImageVersion f s@ImagesDataSource{..} =
+        (\a -> s { _computed_image_version = a } :: ImagesDataSource)
+             <$> f _computed_image_version
+
+instance HasComputedIsSubscribed ImagesDataSource (TF.Attribute Text) where
+    computedIsSubscribed f s@ImagesDataSource{..} =
+        (\a -> s { _computed_is_subscribed = a } :: ImagesDataSource)
+             <$> f _computed_is_subscribed
+
+instance HasComputedOsName ImagesDataSource (TF.Attribute Text) where
+    computedOsName f s@ImagesDataSource{..} =
+        (\a -> s { _computed_os_name = a } :: ImagesDataSource)
+             <$> f _computed_os_name
+
+instance HasComputedProductCode ImagesDataSource (TF.Attribute Text) where
+    computedProductCode f s@ImagesDataSource{..} =
+        (\a -> s { _computed_product_code = a } :: ImagesDataSource)
+             <$> f _computed_product_code
+
+instance HasComputedProgress ImagesDataSource (TF.Attribute Text) where
+    computedProgress f s@ImagesDataSource{..} =
+        (\a -> s { _computed_progress = a } :: ImagesDataSource)
+             <$> f _computed_progress
+
+instance HasComputedSize ImagesDataSource (TF.Attribute Text) where
+    computedSize f s@ImagesDataSource{..} =
+        (\a -> s { _computed_size = a } :: ImagesDataSource)
+             <$> f _computed_size
+
+instance HasComputedStatus ImagesDataSource (TF.Attribute Text) where
+    computedStatus f s@ImagesDataSource{..} =
+        (\a -> s { _computed_status = a } :: ImagesDataSource)
+             <$> f _computed_status
 
 imagesDataSource :: TF.DataSource TF.AliCloud ImagesDataSource
 imagesDataSource =
@@ -352,10 +739,55 @@ instance TF.ToHCL InstanceTypesDataSource where
         , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
-$(TF.makeSchemaLenses
-    ''InstanceTypesDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasAvailabilityZone InstanceTypesDataSource (TF.Argument Text) where
+    availabilityZone f s@InstanceTypesDataSource{..} =
+        (\a -> s { _availability_zone = a } :: InstanceTypesDataSource)
+             <$> f _availability_zone
+
+instance HasCpuCoreCount InstanceTypesDataSource (TF.Argument Text) where
+    cpuCoreCount f s@InstanceTypesDataSource{..} =
+        (\a -> s { _cpu_core_count = a } :: InstanceTypesDataSource)
+             <$> f _cpu_core_count
+
+instance HasInstanceTypeFamily InstanceTypesDataSource (TF.Argument Text) where
+    instanceTypeFamily f s@InstanceTypesDataSource{..} =
+        (\a -> s { _instance_type_family = a } :: InstanceTypesDataSource)
+             <$> f _instance_type_family
+
+instance HasIsOutdated InstanceTypesDataSource (TF.Argument Text) where
+    isOutdated f s@InstanceTypesDataSource{..} =
+        (\a -> s { _is_outdated = a } :: InstanceTypesDataSource)
+             <$> f _is_outdated
+
+instance HasMemorySize InstanceTypesDataSource (TF.Argument Text) where
+    memorySize f s@InstanceTypesDataSource{..} =
+        (\a -> s { _memory_size = a } :: InstanceTypesDataSource)
+             <$> f _memory_size
+
+instance HasOutputFile InstanceTypesDataSource (TF.Argument Text) where
+    outputFile f s@InstanceTypesDataSource{..} =
+        (\a -> s { _output_file = a } :: InstanceTypesDataSource)
+             <$> f _output_file
+
+instance HasComputedCpuCoreCount InstanceTypesDataSource (TF.Attribute Text) where
+    computedCpuCoreCount f s@InstanceTypesDataSource{..} =
+        (\a -> s { _computed_cpu_core_count = a } :: InstanceTypesDataSource)
+             <$> f _computed_cpu_core_count
+
+instance HasComputedFamily' InstanceTypesDataSource (TF.Attribute Text) where
+    computedFamily' f s@InstanceTypesDataSource{..} =
+        (\a -> s { _computed_family' = a } :: InstanceTypesDataSource)
+             <$> f _computed_family'
+
+instance HasComputedId InstanceTypesDataSource (TF.Attribute Text) where
+    computedId f s@InstanceTypesDataSource{..} =
+        (\a -> s { _computed_id = a } :: InstanceTypesDataSource)
+             <$> f _computed_id
+
+instance HasComputedMemorySize InstanceTypesDataSource (TF.Attribute Text) where
+    computedMemorySize f s@InstanceTypesDataSource{..} =
+        (\a -> s { _computed_memory_size = a } :: InstanceTypesDataSource)
+             <$> f _computed_memory_size
 
 instanceTypesDataSource :: TF.DataSource TF.AliCloud InstanceTypesDataSource
 instanceTypesDataSource =
@@ -402,10 +834,40 @@ instance TF.ToHCL KeyPairsDataSource where
         , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
-$(TF.makeSchemaLenses
-    ''KeyPairsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasFingerPrint KeyPairsDataSource (TF.Argument Text) where
+    fingerPrint f s@KeyPairsDataSource{..} =
+        (\a -> s { _finger_print = a } :: KeyPairsDataSource)
+             <$> f _finger_print
+
+instance HasNameRegex KeyPairsDataSource (TF.Argument Text) where
+    nameRegex f s@KeyPairsDataSource{..} =
+        (\a -> s { _name_regex = a } :: KeyPairsDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile KeyPairsDataSource (TF.Argument Text) where
+    outputFile f s@KeyPairsDataSource{..} =
+        (\a -> s { _output_file = a } :: KeyPairsDataSource)
+             <$> f _output_file
+
+instance HasComputedFingerPrint KeyPairsDataSource (TF.Attribute Text) where
+    computedFingerPrint f s@KeyPairsDataSource{..} =
+        (\a -> s { _computed_finger_print = a } :: KeyPairsDataSource)
+             <$> f _computed_finger_print
+
+instance HasComputedId KeyPairsDataSource (TF.Attribute Text) where
+    computedId f s@KeyPairsDataSource{..} =
+        (\a -> s { _computed_id = a } :: KeyPairsDataSource)
+             <$> f _computed_id
+
+instance HasComputedInstances KeyPairsDataSource (TF.Attribute Text) where
+    computedInstances f s@KeyPairsDataSource{..} =
+        (\a -> s { _computed_instances = a } :: KeyPairsDataSource)
+             <$> f _computed_instances
+
+instance HasComputedKeyName KeyPairsDataSource (TF.Attribute Text) where
+    computedKeyName f s@KeyPairsDataSource{..} =
+        (\a -> s { _computed_key_name = a } :: KeyPairsDataSource)
+             <$> f _computed_key_name
 
 keyPairsDataSource :: TF.DataSource TF.AliCloud KeyPairsDataSource
 keyPairsDataSource =
@@ -437,10 +899,15 @@ instance TF.ToHCL RamAccountAliasesDataSource where
         [ TF.assign "output_file" <$> TF.argument _output_file
         ]
 
-$(TF.makeSchemaLenses
-    ''RamAccountAliasesDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasOutputFile RamAccountAliasesDataSource (TF.Argument Text) where
+    outputFile f s@RamAccountAliasesDataSource{..} =
+        (\a -> s { _output_file = a } :: RamAccountAliasesDataSource)
+             <$> f _output_file
+
+instance HasComputedAccountAlias RamAccountAliasesDataSource (TF.Attribute Text) where
+    computedAccountAlias f s@RamAccountAliasesDataSource{..} =
+        (\a -> s { _computed_account_alias = a } :: RamAccountAliasesDataSource)
+             <$> f _computed_account_alias
 
 ramAccountAliasesDataSource :: TF.DataSource TF.AliCloud RamAccountAliasesDataSource
 ramAccountAliasesDataSource =
@@ -481,10 +948,40 @@ instance TF.ToHCL RamGroupsDataSource where
         , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamGroupsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasNameRegex RamGroupsDataSource (TF.Argument Text) where
+    nameRegex f s@RamGroupsDataSource{..} =
+        (\a -> s { _name_regex = a } :: RamGroupsDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile RamGroupsDataSource (TF.Argument Text) where
+    outputFile f s@RamGroupsDataSource{..} =
+        (\a -> s { _output_file = a } :: RamGroupsDataSource)
+             <$> f _output_file
+
+instance HasPolicyName RamGroupsDataSource (TF.Argument Text) where
+    policyName f s@RamGroupsDataSource{..} =
+        (\a -> s { _policy_name = a } :: RamGroupsDataSource)
+             <$> f _policy_name
+
+instance HasPolicyType RamGroupsDataSource (TF.Argument Text) where
+    policyType f s@RamGroupsDataSource{..} =
+        (\a -> s { _policy_type = a } :: RamGroupsDataSource)
+             <$> f _policy_type
+
+instance HasUserName RamGroupsDataSource (TF.Argument Text) where
+    userName f s@RamGroupsDataSource{..} =
+        (\a -> s { _user_name = a } :: RamGroupsDataSource)
+             <$> f _user_name
+
+instance HasComputedComments RamGroupsDataSource (TF.Attribute Text) where
+    computedComments f s@RamGroupsDataSource{..} =
+        (\a -> s { _computed_comments = a } :: RamGroupsDataSource)
+             <$> f _computed_comments
+
+instance HasComputedName RamGroupsDataSource (TF.Attribute Text) where
+    computedName f s@RamGroupsDataSource{..} =
+        (\a -> s { _computed_name = a } :: RamGroupsDataSource)
+             <$> f _computed_name
 
 ramGroupsDataSource :: TF.DataSource TF.AliCloud RamGroupsDataSource
 ramGroupsDataSource =
@@ -545,10 +1042,75 @@ instance TF.ToHCL RamPoliciesDataSource where
         , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamPoliciesDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasGroupName RamPoliciesDataSource (TF.Argument Text) where
+    groupName f s@RamPoliciesDataSource{..} =
+        (\a -> s { _group_name = a } :: RamPoliciesDataSource)
+             <$> f _group_name
+
+instance HasNameRegex RamPoliciesDataSource (TF.Argument Text) where
+    nameRegex f s@RamPoliciesDataSource{..} =
+        (\a -> s { _name_regex = a } :: RamPoliciesDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile RamPoliciesDataSource (TF.Argument Text) where
+    outputFile f s@RamPoliciesDataSource{..} =
+        (\a -> s { _output_file = a } :: RamPoliciesDataSource)
+             <$> f _output_file
+
+instance HasRoleName RamPoliciesDataSource (TF.Argument Text) where
+    roleName f s@RamPoliciesDataSource{..} =
+        (\a -> s { _role_name = a } :: RamPoliciesDataSource)
+             <$> f _role_name
+
+instance HasType' RamPoliciesDataSource (TF.Argument Text) where
+    type' f s@RamPoliciesDataSource{..} =
+        (\a -> s { _type' = a } :: RamPoliciesDataSource)
+             <$> f _type'
+
+instance HasUserName RamPoliciesDataSource (TF.Argument Text) where
+    userName f s@RamPoliciesDataSource{..} =
+        (\a -> s { _user_name = a } :: RamPoliciesDataSource)
+             <$> f _user_name
+
+instance HasComputedAttachmentCount RamPoliciesDataSource (TF.Attribute Text) where
+    computedAttachmentCount f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_attachment_count = a } :: RamPoliciesDataSource)
+             <$> f _computed_attachment_count
+
+instance HasComputedCreateDate RamPoliciesDataSource (TF.Attribute Text) where
+    computedCreateDate f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_create_date = a } :: RamPoliciesDataSource)
+             <$> f _computed_create_date
+
+instance HasComputedDefaultVersion RamPoliciesDataSource (TF.Attribute Text) where
+    computedDefaultVersion f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_default_version = a } :: RamPoliciesDataSource)
+             <$> f _computed_default_version
+
+instance HasComputedDescription RamPoliciesDataSource (TF.Attribute Text) where
+    computedDescription f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_description = a } :: RamPoliciesDataSource)
+             <$> f _computed_description
+
+instance HasComputedDocument RamPoliciesDataSource (TF.Attribute Text) where
+    computedDocument f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_document = a } :: RamPoliciesDataSource)
+             <$> f _computed_document
+
+instance HasComputedName RamPoliciesDataSource (TF.Attribute Text) where
+    computedName f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_name = a } :: RamPoliciesDataSource)
+             <$> f _computed_name
+
+instance HasComputedType' RamPoliciesDataSource (TF.Attribute Text) where
+    computedType' f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_type' = a } :: RamPoliciesDataSource)
+             <$> f _computed_type'
+
+instance HasComputedUpdateDate RamPoliciesDataSource (TF.Attribute Text) where
+    computedUpdateDate f s@RamPoliciesDataSource{..} =
+        (\a -> s { _computed_update_date = a } :: RamPoliciesDataSource)
+             <$> f _computed_update_date
 
 ramPoliciesDataSource :: TF.DataSource TF.AliCloud RamPoliciesDataSource
 ramPoliciesDataSource =
@@ -610,10 +1172,65 @@ instance TF.ToHCL RamRolesDataSource where
         , TF.assign "policy_type" <$> TF.argument _policy_type
         ]
 
-$(TF.makeSchemaLenses
-    ''RamRolesDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasNameRegex RamRolesDataSource (TF.Argument Text) where
+    nameRegex f s@RamRolesDataSource{..} =
+        (\a -> s { _name_regex = a } :: RamRolesDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile RamRolesDataSource (TF.Argument Text) where
+    outputFile f s@RamRolesDataSource{..} =
+        (\a -> s { _output_file = a } :: RamRolesDataSource)
+             <$> f _output_file
+
+instance HasPolicyName RamRolesDataSource (TF.Argument Text) where
+    policyName f s@RamRolesDataSource{..} =
+        (\a -> s { _policy_name = a } :: RamRolesDataSource)
+             <$> f _policy_name
+
+instance HasPolicyType RamRolesDataSource (TF.Argument Text) where
+    policyType f s@RamRolesDataSource{..} =
+        (\a -> s { _policy_type = a } :: RamRolesDataSource)
+             <$> f _policy_type
+
+instance HasComputedArn RamRolesDataSource (TF.Attribute Text) where
+    computedArn f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_arn = a } :: RamRolesDataSource)
+             <$> f _computed_arn
+
+instance HasComputedAssumeRolePolicyDocument RamRolesDataSource (TF.Attribute Text) where
+    computedAssumeRolePolicyDocument f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_assume_role_policy_document = a } :: RamRolesDataSource)
+             <$> f _computed_assume_role_policy_document
+
+instance HasComputedCreateDate RamRolesDataSource (TF.Attribute Text) where
+    computedCreateDate f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_create_date = a } :: RamRolesDataSource)
+             <$> f _computed_create_date
+
+instance HasComputedDescription RamRolesDataSource (TF.Attribute Text) where
+    computedDescription f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_description = a } :: RamRolesDataSource)
+             <$> f _computed_description
+
+instance HasComputedDocument RamRolesDataSource (TF.Attribute Text) where
+    computedDocument f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_document = a } :: RamRolesDataSource)
+             <$> f _computed_document
+
+instance HasComputedId RamRolesDataSource (TF.Attribute Text) where
+    computedId f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_id = a } :: RamRolesDataSource)
+             <$> f _computed_id
+
+instance HasComputedName RamRolesDataSource (TF.Attribute Text) where
+    computedName f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_name = a } :: RamRolesDataSource)
+             <$> f _computed_name
+
+instance HasComputedUpdateDate RamRolesDataSource (TF.Attribute Text) where
+    computedUpdateDate f s@RamRolesDataSource{..} =
+        (\a -> s { _computed_update_date = a } :: RamRolesDataSource)
+             <$> f _computed_update_date
 
 ramRolesDataSource :: TF.DataSource TF.AliCloud RamRolesDataSource
 ramRolesDataSource =
@@ -668,10 +1285,50 @@ instance TF.ToHCL RamUsersDataSource where
         , TF.assign "policy_type" <$> TF.argument _policy_type
         ]
 
-$(TF.makeSchemaLenses
-    ''RamUsersDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasGroupName RamUsersDataSource (TF.Argument Text) where
+    groupName f s@RamUsersDataSource{..} =
+        (\a -> s { _group_name = a } :: RamUsersDataSource)
+             <$> f _group_name
+
+instance HasNameRegex RamUsersDataSource (TF.Argument Text) where
+    nameRegex f s@RamUsersDataSource{..} =
+        (\a -> s { _name_regex = a } :: RamUsersDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile RamUsersDataSource (TF.Argument Text) where
+    outputFile f s@RamUsersDataSource{..} =
+        (\a -> s { _output_file = a } :: RamUsersDataSource)
+             <$> f _output_file
+
+instance HasPolicyName RamUsersDataSource (TF.Argument Text) where
+    policyName f s@RamUsersDataSource{..} =
+        (\a -> s { _policy_name = a } :: RamUsersDataSource)
+             <$> f _policy_name
+
+instance HasPolicyType RamUsersDataSource (TF.Argument Text) where
+    policyType f s@RamUsersDataSource{..} =
+        (\a -> s { _policy_type = a } :: RamUsersDataSource)
+             <$> f _policy_type
+
+instance HasComputedCreateDate RamUsersDataSource (TF.Attribute Text) where
+    computedCreateDate f s@RamUsersDataSource{..} =
+        (\a -> s { _computed_create_date = a } :: RamUsersDataSource)
+             <$> f _computed_create_date
+
+instance HasComputedId RamUsersDataSource (TF.Attribute Text) where
+    computedId f s@RamUsersDataSource{..} =
+        (\a -> s { _computed_id = a } :: RamUsersDataSource)
+             <$> f _computed_id
+
+instance HasComputedLastLoginDate RamUsersDataSource (TF.Attribute Text) where
+    computedLastLoginDate f s@RamUsersDataSource{..} =
+        (\a -> s { _computed_last_login_date = a } :: RamUsersDataSource)
+             <$> f _computed_last_login_date
+
+instance HasComputedName RamUsersDataSource (TF.Attribute Text) where
+    computedName f s@RamUsersDataSource{..} =
+        (\a -> s { _computed_name = a } :: RamUsersDataSource)
+             <$> f _computed_name
 
 ramUsersDataSource :: TF.DataSource TF.AliCloud RamUsersDataSource
 ramUsersDataSource =
@@ -712,10 +1369,30 @@ instance TF.ToHCL RegionsDataSource where
         , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
-$(TF.makeSchemaLenses
-    ''RegionsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasCurrent RegionsDataSource (TF.Argument Text) where
+    current f s@RegionsDataSource{..} =
+        (\a -> s { _current = a } :: RegionsDataSource)
+             <$> f _current
+
+instance HasName RegionsDataSource (TF.Argument Text) where
+    name f s@RegionsDataSource{..} =
+        (\a -> s { _name = a } :: RegionsDataSource)
+             <$> f _name
+
+instance HasOutputFile RegionsDataSource (TF.Argument Text) where
+    outputFile f s@RegionsDataSource{..} =
+        (\a -> s { _output_file = a } :: RegionsDataSource)
+             <$> f _output_file
+
+instance HasComputedId RegionsDataSource (TF.Attribute Text) where
+    computedId f s@RegionsDataSource{..} =
+        (\a -> s { _computed_id = a } :: RegionsDataSource)
+             <$> f _computed_id
+
+instance HasComputedLocalName RegionsDataSource (TF.Attribute Text) where
+    computedLocalName f s@RegionsDataSource{..} =
+        (\a -> s { _computed_local_name = a } :: RegionsDataSource)
+             <$> f _computed_local_name
 
 regionsDataSource :: TF.DataSource TF.AliCloud RegionsDataSource
 regionsDataSource =
@@ -780,10 +1457,90 @@ instance TF.ToHCL VpcsDataSource where
         , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
-$(TF.makeSchemaLenses
-    ''VpcsDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasCidrBlock VpcsDataSource (TF.Argument Text) where
+    cidrBlock f s@VpcsDataSource{..} =
+        (\a -> s { _cidr_block = a } :: VpcsDataSource)
+             <$> f _cidr_block
+
+instance HasIsDefault VpcsDataSource (TF.Argument Text) where
+    isDefault f s@VpcsDataSource{..} =
+        (\a -> s { _is_default = a } :: VpcsDataSource)
+             <$> f _is_default
+
+instance HasNameRegex VpcsDataSource (TF.Argument Text) where
+    nameRegex f s@VpcsDataSource{..} =
+        (\a -> s { _name_regex = a } :: VpcsDataSource)
+             <$> f _name_regex
+
+instance HasOutputFile VpcsDataSource (TF.Argument Text) where
+    outputFile f s@VpcsDataSource{..} =
+        (\a -> s { _output_file = a } :: VpcsDataSource)
+             <$> f _output_file
+
+instance HasStatus VpcsDataSource (TF.Argument Text) where
+    status f s@VpcsDataSource{..} =
+        (\a -> s { _status = a } :: VpcsDataSource)
+             <$> f _status
+
+instance HasVswitchId VpcsDataSource (TF.Argument Text) where
+    vswitchId f s@VpcsDataSource{..} =
+        (\a -> s { _vswitch_id = a } :: VpcsDataSource)
+             <$> f _vswitch_id
+
+instance HasComputedCidrBlock VpcsDataSource (TF.Attribute Text) where
+    computedCidrBlock f s@VpcsDataSource{..} =
+        (\a -> s { _computed_cidr_block = a } :: VpcsDataSource)
+             <$> f _computed_cidr_block
+
+instance HasComputedCreationTime VpcsDataSource (TF.Attribute Text) where
+    computedCreationTime f s@VpcsDataSource{..} =
+        (\a -> s { _computed_creation_time = a } :: VpcsDataSource)
+             <$> f _computed_creation_time
+
+instance HasComputedDescription VpcsDataSource (TF.Attribute Text) where
+    computedDescription f s@VpcsDataSource{..} =
+        (\a -> s { _computed_description = a } :: VpcsDataSource)
+             <$> f _computed_description
+
+instance HasComputedId VpcsDataSource (TF.Attribute Text) where
+    computedId f s@VpcsDataSource{..} =
+        (\a -> s { _computed_id = a } :: VpcsDataSource)
+             <$> f _computed_id
+
+instance HasComputedIsDefault VpcsDataSource (TF.Attribute Text) where
+    computedIsDefault f s@VpcsDataSource{..} =
+        (\a -> s { _computed_is_default = a } :: VpcsDataSource)
+             <$> f _computed_is_default
+
+instance HasComputedRegionId VpcsDataSource (TF.Attribute Text) where
+    computedRegionId f s@VpcsDataSource{..} =
+        (\a -> s { _computed_region_id = a } :: VpcsDataSource)
+             <$> f _computed_region_id
+
+instance HasComputedRouteTableId VpcsDataSource (TF.Attribute Text) where
+    computedRouteTableId f s@VpcsDataSource{..} =
+        (\a -> s { _computed_route_table_id = a } :: VpcsDataSource)
+             <$> f _computed_route_table_id
+
+instance HasComputedStatus VpcsDataSource (TF.Attribute Text) where
+    computedStatus f s@VpcsDataSource{..} =
+        (\a -> s { _computed_status = a } :: VpcsDataSource)
+             <$> f _computed_status
+
+instance HasComputedVpcName VpcsDataSource (TF.Attribute Text) where
+    computedVpcName f s@VpcsDataSource{..} =
+        (\a -> s { _computed_vpc_name = a } :: VpcsDataSource)
+             <$> f _computed_vpc_name
+
+instance HasComputedVrouterId VpcsDataSource (TF.Attribute Text) where
+    computedVrouterId f s@VpcsDataSource{..} =
+        (\a -> s { _computed_vrouter_id = a } :: VpcsDataSource)
+             <$> f _computed_vrouter_id
+
+instance HasComputedVswitchIds VpcsDataSource (TF.Attribute Text) where
+    computedVswitchIds f s@VpcsDataSource{..} =
+        (\a -> s { _computed_vswitch_ids = a } :: VpcsDataSource)
+             <$> f _computed_vswitch_ids
 
 vpcsDataSource :: TF.DataSource TF.AliCloud VpcsDataSource
 vpcsDataSource =
@@ -843,10 +1600,50 @@ instance TF.ToHCL ZonesDataSource where
         , TF.assign "output_file" <$> TF.argument _output_file
         ]
 
-$(TF.makeSchemaLenses
-    ''ZonesDataSource
-    ''TF.AliCloud
-    ''TF.DataSource)
+instance HasAvailableDiskCategory ZonesDataSource (TF.Argument Text) where
+    availableDiskCategory f s@ZonesDataSource{..} =
+        (\a -> s { _available_disk_category = a } :: ZonesDataSource)
+             <$> f _available_disk_category
+
+instance HasAvailableInstanceType ZonesDataSource (TF.Argument Text) where
+    availableInstanceType f s@ZonesDataSource{..} =
+        (\a -> s { _available_instance_type = a } :: ZonesDataSource)
+             <$> f _available_instance_type
+
+instance HasAvailableResourceCreation ZonesDataSource (TF.Argument Text) where
+    availableResourceCreation f s@ZonesDataSource{..} =
+        (\a -> s { _available_resource_creation = a } :: ZonesDataSource)
+             <$> f _available_resource_creation
+
+instance HasOutputFile ZonesDataSource (TF.Argument Text) where
+    outputFile f s@ZonesDataSource{..} =
+        (\a -> s { _output_file = a } :: ZonesDataSource)
+             <$> f _output_file
+
+instance HasComputedAvailableDiskCategories ZonesDataSource (TF.Attribute Text) where
+    computedAvailableDiskCategories f s@ZonesDataSource{..} =
+        (\a -> s { _computed_available_disk_categories = a } :: ZonesDataSource)
+             <$> f _computed_available_disk_categories
+
+instance HasComputedAvailableInstanceTypes ZonesDataSource (TF.Attribute Text) where
+    computedAvailableInstanceTypes f s@ZonesDataSource{..} =
+        (\a -> s { _computed_available_instance_types = a } :: ZonesDataSource)
+             <$> f _computed_available_instance_types
+
+instance HasComputedAvailableResourceCreation ZonesDataSource (TF.Attribute Text) where
+    computedAvailableResourceCreation f s@ZonesDataSource{..} =
+        (\a -> s { _computed_available_resource_creation = a } :: ZonesDataSource)
+             <$> f _computed_available_resource_creation
+
+instance HasComputedId ZonesDataSource (TF.Attribute Text) where
+    computedId f s@ZonesDataSource{..} =
+        (\a -> s { _computed_id = a } :: ZonesDataSource)
+             <$> f _computed_id
+
+instance HasComputedLocalName ZonesDataSource (TF.Attribute Text) where
+    computedLocalName f s@ZonesDataSource{..} =
+        (\a -> s { _computed_local_name = a } :: ZonesDataSource)
+             <$> f _computed_local_name
 
 zonesDataSource :: TF.DataSource TF.AliCloud ZonesDataSource
 zonesDataSource =
@@ -862,3 +1659,561 @@ zonesDataSource =
             , _computed_id = TF.Compute "id"
             , _computed_local_name = TF.Compute "local_name"
             }
+
+class HasAliDomain s a | s -> a where
+    aliDomain :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAliDomain s a => HasAliDomain (TF.DataSource p s) a where
+    aliDomain = TF.configuration . aliDomain
+
+class HasAvailabilityZone s a | s -> a where
+    availabilityZone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAvailabilityZone s a => HasAvailabilityZone (TF.DataSource p s) a where
+    availabilityZone = TF.configuration . availabilityZone
+
+class HasAvailableDiskCategory s a | s -> a where
+    availableDiskCategory :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAvailableDiskCategory s a => HasAvailableDiskCategory (TF.DataSource p s) a where
+    availableDiskCategory = TF.configuration . availableDiskCategory
+
+class HasAvailableInstanceType s a | s -> a where
+    availableInstanceType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAvailableInstanceType s a => HasAvailableInstanceType (TF.DataSource p s) a where
+    availableInstanceType = TF.configuration . availableInstanceType
+
+class HasAvailableResourceCreation s a | s -> a where
+    availableResourceCreation :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAvailableResourceCreation s a => HasAvailableResourceCreation (TF.DataSource p s) a where
+    availableResourceCreation = TF.configuration . availableResourceCreation
+
+class HasCidrBlock s a | s -> a where
+    cidrBlock :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCidrBlock s a => HasCidrBlock (TF.DataSource p s) a where
+    cidrBlock = TF.configuration . cidrBlock
+
+class HasComputedAccountAlias s a | s -> a where
+    computedAccountAlias :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAccountAlias s a => HasComputedAccountAlias (TF.DataSource p s) a where
+    computedAccountAlias = TF.configuration . computedAccountAlias
+
+class HasComputedAliDomain s a | s -> a where
+    computedAliDomain :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAliDomain s a => HasComputedAliDomain (TF.DataSource p s) a where
+    computedAliDomain = TF.configuration . computedAliDomain
+
+class HasComputedArchitecture s a | s -> a where
+    computedArchitecture :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedArchitecture s a => HasComputedArchitecture (TF.DataSource p s) a where
+    computedArchitecture = TF.configuration . computedArchitecture
+
+class HasComputedArn s a | s -> a where
+    computedArn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedArn s a => HasComputedArn (TF.DataSource p s) a where
+    computedArn = TF.configuration . computedArn
+
+class HasComputedAssumeRolePolicyDocument s a | s -> a where
+    computedAssumeRolePolicyDocument :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAssumeRolePolicyDocument s a => HasComputedAssumeRolePolicyDocument (TF.DataSource p s) a where
+    computedAssumeRolePolicyDocument = TF.configuration . computedAssumeRolePolicyDocument
+
+class HasComputedAttachmentCount s a | s -> a where
+    computedAttachmentCount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAttachmentCount s a => HasComputedAttachmentCount (TF.DataSource p s) a where
+    computedAttachmentCount = TF.configuration . computedAttachmentCount
+
+class HasComputedAvailableDiskCategories s a | s -> a where
+    computedAvailableDiskCategories :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAvailableDiskCategories s a => HasComputedAvailableDiskCategories (TF.DataSource p s) a where
+    computedAvailableDiskCategories = TF.configuration . computedAvailableDiskCategories
+
+class HasComputedAvailableInstanceTypes s a | s -> a where
+    computedAvailableInstanceTypes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAvailableInstanceTypes s a => HasComputedAvailableInstanceTypes (TF.DataSource p s) a where
+    computedAvailableInstanceTypes = TF.configuration . computedAvailableInstanceTypes
+
+class HasComputedAvailableResourceCreation s a | s -> a where
+    computedAvailableResourceCreation :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAvailableResourceCreation s a => HasComputedAvailableResourceCreation (TF.DataSource p s) a where
+    computedAvailableResourceCreation = TF.configuration . computedAvailableResourceCreation
+
+class HasComputedCidrBlock s a | s -> a where
+    computedCidrBlock :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCidrBlock s a => HasComputedCidrBlock (TF.DataSource p s) a where
+    computedCidrBlock = TF.configuration . computedCidrBlock
+
+class HasComputedComments s a | s -> a where
+    computedComments :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedComments s a => HasComputedComments (TF.DataSource p s) a where
+    computedComments = TF.configuration . computedComments
+
+class HasComputedCpuCoreCount s a | s -> a where
+    computedCpuCoreCount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCpuCoreCount s a => HasComputedCpuCoreCount (TF.DataSource p s) a where
+    computedCpuCoreCount = TF.configuration . computedCpuCoreCount
+
+class HasComputedCreateDate s a | s -> a where
+    computedCreateDate :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreateDate s a => HasComputedCreateDate (TF.DataSource p s) a where
+    computedCreateDate = TF.configuration . computedCreateDate
+
+class HasComputedCreationTime s a | s -> a where
+    computedCreationTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCreationTime s a => HasComputedCreationTime (TF.DataSource p s) a where
+    computedCreationTime = TF.configuration . computedCreationTime
+
+class HasComputedDefaultVersion s a | s -> a where
+    computedDefaultVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDefaultVersion s a => HasComputedDefaultVersion (TF.DataSource p s) a where
+    computedDefaultVersion = TF.configuration . computedDefaultVersion
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDiskDeviceMappings s a | s -> a where
+    computedDiskDeviceMappings :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDiskDeviceMappings s a => HasComputedDiskDeviceMappings (TF.DataSource p s) a where
+    computedDiskDeviceMappings = TF.configuration . computedDiskDeviceMappings
+
+class HasComputedDnsServers s a | s -> a where
+    computedDnsServers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDnsServers s a => HasComputedDnsServers (TF.DataSource p s) a where
+    computedDnsServers = TF.configuration . computedDnsServers
+
+class HasComputedDocument s a | s -> a where
+    computedDocument :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDocument s a => HasComputedDocument (TF.DataSource p s) a where
+    computedDocument = TF.configuration . computedDocument
+
+class HasComputedDomainId s a | s -> a where
+    computedDomainId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDomainId s a => HasComputedDomainId (TF.DataSource p s) a where
+    computedDomainId = TF.configuration . computedDomainId
+
+class HasComputedDomainName s a | s -> a where
+    computedDomainName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDomainName s a => HasComputedDomainName (TF.DataSource p s) a where
+    computedDomainName = TF.configuration . computedDomainName
+
+class HasComputedFamily' s a | s -> a where
+    computedFamily' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFamily' s a => HasComputedFamily' (TF.DataSource p s) a where
+    computedFamily' = TF.configuration . computedFamily'
+
+class HasComputedFingerPrint s a | s -> a where
+    computedFingerPrint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFingerPrint s a => HasComputedFingerPrint (TF.DataSource p s) a where
+    computedFingerPrint = TF.configuration . computedFingerPrint
+
+class HasComputedGroupId s a | s -> a where
+    computedGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGroupId s a => HasComputedGroupId (TF.DataSource p s) a where
+    computedGroupId = TF.configuration . computedGroupId
+
+class HasComputedGroupName s a | s -> a where
+    computedGroupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGroupName s a => HasComputedGroupName (TF.DataSource p s) a where
+    computedGroupName = TF.configuration . computedGroupName
+
+class HasComputedHostRecord s a | s -> a where
+    computedHostRecord :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHostRecord s a => HasComputedHostRecord (TF.DataSource p s) a where
+    computedHostRecord = TF.configuration . computedHostRecord
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedImageOwnerAlias s a | s -> a where
+    computedImageOwnerAlias :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedImageOwnerAlias s a => HasComputedImageOwnerAlias (TF.DataSource p s) a where
+    computedImageOwnerAlias = TF.configuration . computedImageOwnerAlias
+
+class HasComputedImageVersion s a | s -> a where
+    computedImageVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedImageVersion s a => HasComputedImageVersion (TF.DataSource p s) a where
+    computedImageVersion = TF.configuration . computedImageVersion
+
+class HasComputedInstanceId s a | s -> a where
+    computedInstanceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceId s a => HasComputedInstanceId (TF.DataSource p s) a where
+    computedInstanceId = TF.configuration . computedInstanceId
+
+class HasComputedInstances s a | s -> a where
+    computedInstances :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstances s a => HasComputedInstances (TF.DataSource p s) a where
+    computedInstances = TF.configuration . computedInstances
+
+class HasComputedIsDefault s a | s -> a where
+    computedIsDefault :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIsDefault s a => HasComputedIsDefault (TF.DataSource p s) a where
+    computedIsDefault = TF.configuration . computedIsDefault
+
+class HasComputedIsSubscribed s a | s -> a where
+    computedIsSubscribed :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIsSubscribed s a => HasComputedIsSubscribed (TF.DataSource p s) a where
+    computedIsSubscribed = TF.configuration . computedIsSubscribed
+
+class HasComputedKeyName s a | s -> a where
+    computedKeyName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedKeyName s a => HasComputedKeyName (TF.DataSource p s) a where
+    computedKeyName = TF.configuration . computedKeyName
+
+class HasComputedLastLoginDate s a | s -> a where
+    computedLastLoginDate :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLastLoginDate s a => HasComputedLastLoginDate (TF.DataSource p s) a where
+    computedLastLoginDate = TF.configuration . computedLastLoginDate
+
+class HasComputedLine s a | s -> a where
+    computedLine :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLine s a => HasComputedLine (TF.DataSource p s) a where
+    computedLine = TF.configuration . computedLine
+
+class HasComputedLocalName s a | s -> a where
+    computedLocalName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLocalName s a => HasComputedLocalName (TF.DataSource p s) a where
+    computedLocalName = TF.configuration . computedLocalName
+
+class HasComputedLocked s a | s -> a where
+    computedLocked :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLocked s a => HasComputedLocked (TF.DataSource p s) a where
+    computedLocked = TF.configuration . computedLocked
+
+class HasComputedMemorySize s a | s -> a where
+    computedMemorySize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMemorySize s a => HasComputedMemorySize (TF.DataSource p s) a where
+    computedMemorySize = TF.configuration . computedMemorySize
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedOsName s a | s -> a where
+    computedOsName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOsName s a => HasComputedOsName (TF.DataSource p s) a where
+    computedOsName = TF.configuration . computedOsName
+
+class HasComputedPriority s a | s -> a where
+    computedPriority :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPriority s a => HasComputedPriority (TF.DataSource p s) a where
+    computedPriority = TF.configuration . computedPriority
+
+class HasComputedProductCode s a | s -> a where
+    computedProductCode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProductCode s a => HasComputedProductCode (TF.DataSource p s) a where
+    computedProductCode = TF.configuration . computedProductCode
+
+class HasComputedProgress s a | s -> a where
+    computedProgress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedProgress s a => HasComputedProgress (TF.DataSource p s) a where
+    computedProgress = TF.configuration . computedProgress
+
+class HasComputedPunyCode s a | s -> a where
+    computedPunyCode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPunyCode s a => HasComputedPunyCode (TF.DataSource p s) a where
+    computedPunyCode = TF.configuration . computedPunyCode
+
+class HasComputedRecordId s a | s -> a where
+    computedRecordId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRecordId s a => HasComputedRecordId (TF.DataSource p s) a where
+    computedRecordId = TF.configuration . computedRecordId
+
+class HasComputedRegionId s a | s -> a where
+    computedRegionId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRegionId s a => HasComputedRegionId (TF.DataSource p s) a where
+    computedRegionId = TF.configuration . computedRegionId
+
+class HasComputedRouteTableId s a | s -> a where
+    computedRouteTableId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRouteTableId s a => HasComputedRouteTableId (TF.DataSource p s) a where
+    computedRouteTableId = TF.configuration . computedRouteTableId
+
+class HasComputedSize s a | s -> a where
+    computedSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
+    computedSize = TF.configuration . computedSize
+
+class HasComputedStatus s a | s -> a where
+    computedStatus :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStatus s a => HasComputedStatus (TF.DataSource p s) a where
+    computedStatus = TF.configuration . computedStatus
+
+class HasComputedTtl s a | s -> a where
+    computedTtl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTtl s a => HasComputedTtl (TF.DataSource p s) a where
+    computedTtl = TF.configuration . computedTtl
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasComputedUpdateDate s a | s -> a where
+    computedUpdateDate :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUpdateDate s a => HasComputedUpdateDate (TF.DataSource p s) a where
+    computedUpdateDate = TF.configuration . computedUpdateDate
+
+class HasComputedValue s a | s -> a where
+    computedValue :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedValue s a => HasComputedValue (TF.DataSource p s) a where
+    computedValue = TF.configuration . computedValue
+
+class HasComputedVersionCode s a | s -> a where
+    computedVersionCode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVersionCode s a => HasComputedVersionCode (TF.DataSource p s) a where
+    computedVersionCode = TF.configuration . computedVersionCode
+
+class HasComputedVpcName s a | s -> a where
+    computedVpcName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVpcName s a => HasComputedVpcName (TF.DataSource p s) a where
+    computedVpcName = TF.configuration . computedVpcName
+
+class HasComputedVrouterId s a | s -> a where
+    computedVrouterId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVrouterId s a => HasComputedVrouterId (TF.DataSource p s) a where
+    computedVrouterId = TF.configuration . computedVrouterId
+
+class HasComputedVswitchIds s a | s -> a where
+    computedVswitchIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVswitchIds s a => HasComputedVswitchIds (TF.DataSource p s) a where
+    computedVswitchIds = TF.configuration . computedVswitchIds
+
+class HasCpuCoreCount s a | s -> a where
+    cpuCoreCount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCpuCoreCount s a => HasCpuCoreCount (TF.DataSource p s) a where
+    cpuCoreCount = TF.configuration . cpuCoreCount
+
+class HasCurrent s a | s -> a where
+    current :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCurrent s a => HasCurrent (TF.DataSource p s) a where
+    current = TF.configuration . current
+
+class HasDomainName s a | s -> a where
+    domainName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDomainName s a => HasDomainName (TF.DataSource p s) a where
+    domainName = TF.configuration . domainName
+
+class HasDomainNameRegex s a | s -> a where
+    domainNameRegex :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDomainNameRegex s a => HasDomainNameRegex (TF.DataSource p s) a where
+    domainNameRegex = TF.configuration . domainNameRegex
+
+class HasFingerPrint s a | s -> a where
+    fingerPrint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFingerPrint s a => HasFingerPrint (TF.DataSource p s) a where
+    fingerPrint = TF.configuration . fingerPrint
+
+class HasGroupName s a | s -> a where
+    groupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGroupName s a => HasGroupName (TF.DataSource p s) a where
+    groupName = TF.configuration . groupName
+
+class HasGroupNameRegex s a | s -> a where
+    groupNameRegex :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGroupNameRegex s a => HasGroupNameRegex (TF.DataSource p s) a where
+    groupNameRegex = TF.configuration . groupNameRegex
+
+class HasHostRecordRegex s a | s -> a where
+    hostRecordRegex :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostRecordRegex s a => HasHostRecordRegex (TF.DataSource p s) a where
+    hostRecordRegex = TF.configuration . hostRecordRegex
+
+class HasInstanceId s a | s -> a where
+    instanceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceId s a => HasInstanceId (TF.DataSource p s) a where
+    instanceId = TF.configuration . instanceId
+
+class HasInstanceTypeFamily s a | s -> a where
+    instanceTypeFamily :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceTypeFamily s a => HasInstanceTypeFamily (TF.DataSource p s) a where
+    instanceTypeFamily = TF.configuration . instanceTypeFamily
+
+class HasIsDefault s a | s -> a where
+    isDefault :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIsDefault s a => HasIsDefault (TF.DataSource p s) a where
+    isDefault = TF.configuration . isDefault
+
+class HasIsLocked s a | s -> a where
+    isLocked :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIsLocked s a => HasIsLocked (TF.DataSource p s) a where
+    isLocked = TF.configuration . isLocked
+
+class HasIsOutdated s a | s -> a where
+    isOutdated :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIsOutdated s a => HasIsOutdated (TF.DataSource p s) a where
+    isOutdated = TF.configuration . isOutdated
+
+class HasLine s a | s -> a where
+    line :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLine s a => HasLine (TF.DataSource p s) a where
+    line = TF.configuration . line
+
+class HasMemorySize s a | s -> a where
+    memorySize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMemorySize s a => HasMemorySize (TF.DataSource p s) a where
+    memorySize = TF.configuration . memorySize
+
+class HasMostRecent s a | s -> a where
+    mostRecent :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMostRecent s a => HasMostRecent (TF.DataSource p s) a where
+    mostRecent = TF.configuration . mostRecent
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name
+
+class HasNameRegex s a | s -> a where
+    nameRegex :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNameRegex s a => HasNameRegex (TF.DataSource p s) a where
+    nameRegex = TF.configuration . nameRegex
+
+class HasOutputFile s a | s -> a where
+    outputFile :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOutputFile s a => HasOutputFile (TF.DataSource p s) a where
+    outputFile = TF.configuration . outputFile
+
+class HasOwners s a | s -> a where
+    owners :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOwners s a => HasOwners (TF.DataSource p s) a where
+    owners = TF.configuration . owners
+
+class HasPolicyName s a | s -> a where
+    policyName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicyName s a => HasPolicyName (TF.DataSource p s) a where
+    policyName = TF.configuration . policyName
+
+class HasPolicyType s a | s -> a where
+    policyType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicyType s a => HasPolicyType (TF.DataSource p s) a where
+    policyType = TF.configuration . policyType
+
+class HasRoleName s a | s -> a where
+    roleName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRoleName s a => HasRoleName (TF.DataSource p s) a where
+    roleName = TF.configuration . roleName
+
+class HasStatus s a | s -> a where
+    status :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStatus s a => HasStatus (TF.DataSource p s) a where
+    status = TF.configuration . status
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.DataSource p s) a where
+    type' = TF.configuration . type'
+
+class HasUserName s a | s -> a where
+    userName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserName s a => HasUserName (TF.DataSource p s) a where
+    userName = TF.configuration . userName
+
+class HasValueRegex s a | s -> a where
+    valueRegex :: Functor f => (a -> f a) -> s -> f s
+
+instance HasValueRegex s a => HasValueRegex (TF.DataSource p s) a where
+    valueRegex = TF.configuration . valueRegex
+
+class HasVersionCode s a | s -> a where
+    versionCode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVersionCode s a => HasVersionCode (TF.DataSource p s) a where
+    versionCode = TF.configuration . versionCode
+
+class HasVswitchId s a | s -> a where
+    vswitchId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVswitchId s a => HasVswitchId (TF.DataSource p s) a where
+    vswitchId = TF.configuration . vswitchId

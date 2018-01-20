@@ -2,3 +2,32 @@ name: AWS
 package: terrafomo-aws
 datatype: true
 original: aws
+
+rules:
+  - mode: exact
+    match: tags
+    type: TF.Tags
+
+  - mode: suffix
+    match: _port
+    type: TF.Word16
+
+  # - mode: suffix
+  #   match: region
+  #   type: Region
+
+  # - mode: suffix
+  #   match: regions
+  #   type: [Region]
+
+  - mode: prefix
+    match: enable
+    type: TF.Bool
+
+  - mode: suffix
+    match: enable
+    type: TF.Bool
+
+  - mode: suffix
+    match: enabled
+    type: TF.Bool

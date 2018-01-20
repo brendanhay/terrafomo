@@ -23,6 +23,7 @@ import Control.Applicative (many, some, (<|>))
 import Control.Monad       (unless, void)
 
 import Terrafomo.Gen.Markdown
+import Terrafomo.Gen.Provider (Rule, guessType)
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
 
@@ -76,11 +77,11 @@ instance P.Stream [Node] where
 
 -- Abstract Syntax Parsers
 
-providerParser :: Parser Schema
+providerParser :: [Rule] -> Parser Schema
 providerParser = schemaParser
 
-schemaParser :: Parser Schema
-schemaParser = do
+schemaParser :: [Rule] -> Parser Schema
+schemaParser rules = do
     -- preamble
     P.skipManyTill node (P.lookAhead (void h1))
 
@@ -123,7 +124,7 @@ schemaParser = do
     -- argument name/help/required
     (Map.fromList -> schemaArguments) <-
         P.try ( do argHeader
-                   P.skipManyTill node (concat <$> some (list >>> many argItem))
+                   P.skipManyTill node (concat <$> some (list >>> many (argItem rules)))
               ) <|> pure mempty
 
     -- skip any non-headers
@@ -132,7 +133,7 @@ schemaParser = do
     -- attribute name/help
     (Map.fromList -> schemaAttributes) <-
         P.try ( do attrHeader
-                   P.skipManyTill node (concat <$> some (list >>> many attrItem))
+                   P.skipManyTill node (concat <$> some (list >>> many (attrItem rules)))
               ) <|> pure mempty
 
     pure Schema{..}
@@ -149,13 +150,13 @@ attrHeader =
                <|> string "Attribute Reference"
                   ) <?> "Attribute(s) Reference"
 
-argItem :: Parser (Text, Arg)
-argItem = item >>> paragraph >>> argument
+argItem :: [Rule] -> Parser (Text, Arg)
+argItem rules = item >>> paragraph >>> argument
   where
     argument = do
         name <- code
         let field = safeArgName name
-        arg  <- fmap required textual
+        arg  <- fmap (required name) textual
         pure $!
             case Text.break (== '.') name of
                 (_, "") -> (,) field (arg { argName = pure name })
@@ -168,7 +169,7 @@ argItem = item >>> paragraph >>> argument
                         }
 
     -- should use Parsec.Char here and rethrow errors.
-    required h
+    required name h
         | Text.isPrefixOf "- (Required"   h = mk (Text.drop 2 h) True  False
         | Text.isPrefixOf "- (Optional"   h = mk (Text.drop 2 h) False False
         | Text.isPrefixOf "- (Deprecated" h = mk (Text.drop 2 h) False True
@@ -176,16 +177,16 @@ argItem = item >>> paragraph >>> argument
       where
         mk h' require deprecate =
             Arg (pure mempty) (pure h') (pure require) (pure deprecate)
-                defaultType
+                (guessType rules name)
 
-attrItem :: Parser (Text, Attr)
-attrItem = item >>> paragraph >>> attribute
+attrItem :: [Rule] -> Parser (Text, Attr)
+attrItem rules = item >>> paragraph >>> attribute
   where
     attribute = do
         name <- code
         attr <- Attr (pure name)
             <$> fmap (pure . strip) textual
-            <*> pure defaultType
+            <*> pure (guessType rules name)
         pure (safeAttrName name, attr)
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)

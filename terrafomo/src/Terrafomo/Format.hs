@@ -10,7 +10,7 @@ module Terrafomo.Format
 
     -- * Formatters
     -- ** Terraform Syntax
-    , name
+    , fname
     -- ** Strings
     , Format.text
     , Format.stext
@@ -53,8 +53,8 @@ nformat m = Format.runFormat m (Name . LText.toStrict . Build.toLazyText)
 -- Formatters
 
 -- | Output a Terraform 'Name'.
-name :: Format r (Name -> r)
-name = Format.later (Build.fromText . Name.fromName)
+fname :: Format r (Name -> r)
+fname = Format.later (Build.fromText . Name.fromName)
 
 -- | Output a zero-padded 'Integral'.
 intp :: (Integral a, Format.Buildable a) => Int -> Format r (a -> r)

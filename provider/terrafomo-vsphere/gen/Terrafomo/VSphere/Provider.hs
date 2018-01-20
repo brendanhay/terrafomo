@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VSphere.Provider
-    ( VSphere    (..)
-    , HasVSphere (..)
+    (
+    -- * Provider Datatype
+      VSphere (..)
+
+    -- * Lenses
+    , allowUnverifiedSsl
+    , password
+    , user
+    , vsphereServer
     ) where
 
 import Data.Function      (on)
@@ -33,10 +39,9 @@ import Data.Text          (Text)
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 import qualified Terrafomo.VSphere.Types   as TF
 
 {- | VSphere Terraform provider.
@@ -94,4 +99,38 @@ instance Monoid VSphere where
 instance TF.IsProvider VSphere where
     type ProviderName VSphere = "vsphere"
 
-$(TF.makeProviderLenses ''VSphere)
+allowUnverifiedSsl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VSphere
+    -> f VSphere
+allowUnverifiedSsl f s =
+        (\a -> s { _allow_unverified_ssl = a } :: VSphere)
+             <$> f (_allow_unverified_ssl s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VSphere
+    -> f VSphere
+password f s =
+        (\a -> s { _password = a } :: VSphere)
+             <$> f (_password s)
+
+user
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VSphere
+    -> f VSphere
+user f s =
+        (\a -> s { _user = a } :: VSphere)
+             <$> f (_user s)
+
+vsphereServer
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VSphere
+    -> f VSphere
+vsphereServer f s =
+        (\a -> s { _vsphere_server = a } :: VSphere)
+             <$> f (_vsphere_server s)

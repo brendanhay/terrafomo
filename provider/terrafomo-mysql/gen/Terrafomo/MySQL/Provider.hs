@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.MySQL.Provider
-    ( MySQL    (..)
-    , HasMySQL (..)
+    (
+    -- * Provider Datatype
+      MySQL (..)
+
+    -- * Lenses
+    , endpoint
+    , password
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.MySQL.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | MySQL Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid MySQL where
 instance TF.IsProvider MySQL where
     type ProviderName MySQL = "mysql"
 
-$(TF.makeProviderLenses ''MySQL)
+endpoint
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> MySQL
+    -> f MySQL
+endpoint f s =
+        (\a -> s { _endpoint = a } :: MySQL)
+             <$> f (_endpoint s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> MySQL
+    -> f MySQL
+password f s =
+        (\a -> s { _password = a } :: MySQL)
+             <$> f (_password s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> MySQL
+    -> f MySQL
+username f s =
+        (\a -> s { _username = a } :: MySQL)
+             <$> f (_username s)

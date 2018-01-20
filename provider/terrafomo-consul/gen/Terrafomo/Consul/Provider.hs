@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,19 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Consul.Provider
-    ( Consul    (..)
-    , HasConsul (..)
+    (
+    -- * Provider Datatype
+      Consul (..)
+
+    -- * Lenses
+    , address
+    , caFile
+    , certFile
+    , datacenter
+    , httpAuth
+    , keyFile
+    , scheme
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +44,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Consul.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Consul Terraform provider.
 
@@ -110,4 +119,74 @@ instance Monoid Consul where
 instance TF.IsProvider Consul where
     type ProviderName Consul = "consul"
 
-$(TF.makeProviderLenses ''Consul)
+address
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+address f s =
+        (\a -> s { _address = a } :: Consul)
+             <$> f (_address s)
+
+caFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+caFile f s =
+        (\a -> s { _ca_file = a } :: Consul)
+             <$> f (_ca_file s)
+
+certFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+certFile f s =
+        (\a -> s { _cert_file = a } :: Consul)
+             <$> f (_cert_file s)
+
+datacenter
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+datacenter f s =
+        (\a -> s { _datacenter = a } :: Consul)
+             <$> f (_datacenter s)
+
+httpAuth
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+httpAuth f s =
+        (\a -> s { _http_auth = a } :: Consul)
+             <$> f (_http_auth s)
+
+keyFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+keyFile f s =
+        (\a -> s { _key_file = a } :: Consul)
+             <$> f (_key_file s)
+
+scheme
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+scheme f s =
+        (\a -> s { _scheme = a } :: Consul)
+             <$> f (_scheme s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Consul
+    -> f Consul
+token f s =
+        (\a -> s { _token = a } :: Consul)
+             <$> f (_token s)

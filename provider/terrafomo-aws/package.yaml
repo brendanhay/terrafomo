@@ -8,6 +8,7 @@ name: terrafomo-aws
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

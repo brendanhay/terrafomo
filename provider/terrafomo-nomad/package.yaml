@@ -8,6 +8,7 @@ name: terrafomo-nomad
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

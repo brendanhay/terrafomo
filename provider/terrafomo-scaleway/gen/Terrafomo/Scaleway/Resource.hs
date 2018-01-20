@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,66 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Scaleway.Resource where
+module Terrafomo.Scaleway.Resource
+    (
+    -- * Types
+      IpResource (..)
+    , ipResource
 
-import Data.Functor ((<$>))
+    , SecurityGroupResource (..)
+    , securityGroupResource
+
+    , SecurityGroupRuleResource (..)
+    , securityGroupRuleResource
+
+    , ServerResource (..)
+    , serverResource
+
+    , VolumeAttachmentResource (..)
+    , volumeAttachmentResource
+
+    , VolumeResource (..)
+    , volumeResource
+
+    -- * Overloaded Fields
+    , HasAction (..)
+    , HasBootscript (..)
+    , HasComputedId (..)
+    , HasComputedIp (..)
+    , HasDescription (..)
+    , HasDirection (..)
+    , HasDynamicIpRequired (..)
+    , HasEnableIpv6 (..)
+    , HasImage (..)
+    , HasIpRange (..)
+    , HasName (..)
+    , HasPort (..)
+    , HasProtocol (..)
+    , HasPublicIpv6 (..)
+    , HasSecurityGroup (..)
+    , HasServer (..)
+    , HasSizeInGb (..)
+    , HasState (..)
+    , HasStateDetail (..)
+    , HasTags (..)
+    , HasType' (..)
+    , HasVolume (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Scaleway.Provider as TF
 import qualified Terrafomo.Scaleway.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @scaleway_ip@ Scaleway resource.
 
@@ -58,10 +100,20 @@ instance TF.ToHCL IpResource where
         [ TF.assign "server" <$> TF.argument _server
         ]
 
-$(TF.makeSchemaLenses
-    ''IpResource
-    ''TF.Scaleway
-    ''TF.Resource)
+instance HasServer IpResource (TF.Argument Text) where
+    server f s@IpResource{..} =
+        (\a -> s { _server = a } :: IpResource)
+             <$> f _server
+
+instance HasComputedId IpResource (TF.Attribute Text) where
+    computedId f s@IpResource{..} =
+        (\a -> s { _computed_id = a } :: IpResource)
+             <$> f _computed_id
+
+instance HasComputedIp IpResource (TF.Attribute Text) where
+    computedIp f s@IpResource{..} =
+        (\a -> s { _computed_ip = a } :: IpResource)
+             <$> f _computed_ip
 
 ipResource :: TF.Resource TF.Scaleway IpResource
 ipResource =
@@ -93,10 +145,20 @@ instance TF.ToHCL SecurityGroupResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''SecurityGroupResource
-    ''TF.Scaleway
-    ''TF.Resource)
+instance HasDescription SecurityGroupResource (TF.Argument Text) where
+    description f s@SecurityGroupResource{..} =
+        (\a -> s { _description = a } :: SecurityGroupResource)
+             <$> f _description
+
+instance HasName SecurityGroupResource (TF.Argument Text) where
+    name f s@SecurityGroupResource{..} =
+        (\a -> s { _name = a } :: SecurityGroupResource)
+             <$> f _name
+
+instance HasComputedId SecurityGroupResource (TF.Attribute Text) where
+    computedId f s@SecurityGroupResource{..} =
+        (\a -> s { _computed_id = a } :: SecurityGroupResource)
+             <$> f _computed_id
 
 securityGroupResource :: TF.Resource TF.Scaleway SecurityGroupResource
 securityGroupResource =
@@ -140,10 +202,40 @@ instance TF.ToHCL SecurityGroupRuleResource where
         , TF.assign "security_group" <$> TF.argument _security_group
         ]
 
-$(TF.makeSchemaLenses
-    ''SecurityGroupRuleResource
-    ''TF.Scaleway
-    ''TF.Resource)
+instance HasAction SecurityGroupRuleResource (TF.Argument Text) where
+    action f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _action = a } :: SecurityGroupRuleResource)
+             <$> f _action
+
+instance HasDirection SecurityGroupRuleResource (TF.Argument Text) where
+    direction f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _direction = a } :: SecurityGroupRuleResource)
+             <$> f _direction
+
+instance HasIpRange SecurityGroupRuleResource (TF.Argument Text) where
+    ipRange f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _ip_range = a } :: SecurityGroupRuleResource)
+             <$> f _ip_range
+
+instance HasPort SecurityGroupRuleResource (TF.Argument Text) where
+    port f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _port = a } :: SecurityGroupRuleResource)
+             <$> f _port
+
+instance HasProtocol SecurityGroupRuleResource (TF.Argument Text) where
+    protocol f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _protocol = a } :: SecurityGroupRuleResource)
+             <$> f _protocol
+
+instance HasSecurityGroup SecurityGroupRuleResource (TF.Argument Text) where
+    securityGroup f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _security_group = a } :: SecurityGroupRuleResource)
+             <$> f _security_group
+
+instance HasComputedId SecurityGroupRuleResource (TF.Attribute Text) where
+    computedId f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _computed_id = a } :: SecurityGroupRuleResource)
+             <$> f _computed_id
 
 securityGroupRuleResource :: TF.Resource TF.Scaleway SecurityGroupRuleResource
 securityGroupRuleResource =
@@ -207,10 +299,65 @@ instance TF.ToHCL ServerResource where
         , TF.assign "volume" <$> TF.argument _volume
         ]
 
-$(TF.makeSchemaLenses
-    ''ServerResource
-    ''TF.Scaleway
-    ''TF.Resource)
+instance HasBootscript ServerResource (TF.Argument Text) where
+    bootscript f s@ServerResource{..} =
+        (\a -> s { _bootscript = a } :: ServerResource)
+             <$> f _bootscript
+
+instance HasDynamicIpRequired ServerResource (TF.Argument Text) where
+    dynamicIpRequired f s@ServerResource{..} =
+        (\a -> s { _dynamic_ip_required = a } :: ServerResource)
+             <$> f _dynamic_ip_required
+
+instance HasEnableIpv6 ServerResource (TF.Argument Text) where
+    enableIpv6 f s@ServerResource{..} =
+        (\a -> s { _enable_ipv6 = a } :: ServerResource)
+             <$> f _enable_ipv6
+
+instance HasImage ServerResource (TF.Argument Text) where
+    image f s@ServerResource{..} =
+        (\a -> s { _image = a } :: ServerResource)
+             <$> f _image
+
+instance HasName ServerResource (TF.Argument Text) where
+    name f s@ServerResource{..} =
+        (\a -> s { _name = a } :: ServerResource)
+             <$> f _name
+
+instance HasPublicIpv6 ServerResource (TF.Argument Text) where
+    publicIpv6 f s@ServerResource{..} =
+        (\a -> s { _public_ipv6 = a } :: ServerResource)
+             <$> f _public_ipv6
+
+instance HasSecurityGroup ServerResource (TF.Argument Text) where
+    securityGroup f s@ServerResource{..} =
+        (\a -> s { _security_group = a } :: ServerResource)
+             <$> f _security_group
+
+instance HasState ServerResource (TF.Argument Text) where
+    state f s@ServerResource{..} =
+        (\a -> s { _state = a } :: ServerResource)
+             <$> f _state
+
+instance HasStateDetail ServerResource (TF.Argument Text) where
+    stateDetail f s@ServerResource{..} =
+        (\a -> s { _state_detail = a } :: ServerResource)
+             <$> f _state_detail
+
+instance HasTags ServerResource (TF.Argument Text) where
+    tags f s@ServerResource{..} =
+        (\a -> s { _tags = a } :: ServerResource)
+             <$> f _tags
+
+instance HasType' ServerResource (TF.Argument Text) where
+    type' f s@ServerResource{..} =
+        (\a -> s { _type' = a } :: ServerResource)
+             <$> f _type'
+
+instance HasVolume ServerResource (TF.Argument Text) where
+    volume f s@ServerResource{..} =
+        (\a -> s { _volume = a } :: ServerResource)
+             <$> f _volume
 
 serverResource :: TF.Resource TF.Scaleway ServerResource
 serverResource =
@@ -251,10 +398,20 @@ instance TF.ToHCL VolumeAttachmentResource where
         , TF.assign "volume" <$> TF.argument _volume
         ]
 
-$(TF.makeSchemaLenses
-    ''VolumeAttachmentResource
-    ''TF.Scaleway
-    ''TF.Resource)
+instance HasServer VolumeAttachmentResource (TF.Argument Text) where
+    server f s@VolumeAttachmentResource{..} =
+        (\a -> s { _server = a } :: VolumeAttachmentResource)
+             <$> f _server
+
+instance HasVolume VolumeAttachmentResource (TF.Argument Text) where
+    volume f s@VolumeAttachmentResource{..} =
+        (\a -> s { _volume = a } :: VolumeAttachmentResource)
+             <$> f _volume
+
+instance HasComputedId VolumeAttachmentResource (TF.Attribute Text) where
+    computedId f s@VolumeAttachmentResource{..} =
+        (\a -> s { _computed_id = a } :: VolumeAttachmentResource)
+             <$> f _computed_id
 
 volumeAttachmentResource :: TF.Resource TF.Scaleway VolumeAttachmentResource
 volumeAttachmentResource =
@@ -292,10 +449,30 @@ instance TF.ToHCL VolumeResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''VolumeResource
-    ''TF.Scaleway
-    ''TF.Resource)
+instance HasName VolumeResource (TF.Argument Text) where
+    name f s@VolumeResource{..} =
+        (\a -> s { _name = a } :: VolumeResource)
+             <$> f _name
+
+instance HasServer VolumeResource (TF.Argument Text) where
+    server f s@VolumeResource{..} =
+        (\a -> s { _server = a } :: VolumeResource)
+             <$> f _server
+
+instance HasSizeInGb VolumeResource (TF.Argument Text) where
+    sizeInGb f s@VolumeResource{..} =
+        (\a -> s { _size_in_gb = a } :: VolumeResource)
+             <$> f _size_in_gb
+
+instance HasType' VolumeResource (TF.Argument Text) where
+    type' f s@VolumeResource{..} =
+        (\a -> s { _type' = a } :: VolumeResource)
+             <$> f _type'
+
+instance HasComputedId VolumeResource (TF.Attribute Text) where
+    computedId f s@VolumeResource{..} =
+        (\a -> s { _computed_id = a } :: VolumeResource)
+             <$> f _computed_id
 
 volumeResource :: TF.Resource TF.Scaleway VolumeResource
 volumeResource =
@@ -307,3 +484,135 @@ volumeResource =
             , _type' = TF.Nil
             , _computed_id = TF.Compute "id"
             }
+
+class HasAction s a | s -> a where
+    action :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAction s a => HasAction (TF.Resource p s) a where
+    action = TF.configuration . action
+
+class HasBootscript s a | s -> a where
+    bootscript :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBootscript s a => HasBootscript (TF.Resource p s) a where
+    bootscript = TF.configuration . bootscript
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedIp s a | s -> a where
+    computedIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIp s a => HasComputedIp (TF.Resource p s) a where
+    computedIp = TF.configuration . computedIp
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasDirection s a | s -> a where
+    direction :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDirection s a => HasDirection (TF.Resource p s) a where
+    direction = TF.configuration . direction
+
+class HasDynamicIpRequired s a | s -> a where
+    dynamicIpRequired :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDynamicIpRequired s a => HasDynamicIpRequired (TF.Resource p s) a where
+    dynamicIpRequired = TF.configuration . dynamicIpRequired
+
+class HasEnableIpv6 s a | s -> a where
+    enableIpv6 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnableIpv6 s a => HasEnableIpv6 (TF.Resource p s) a where
+    enableIpv6 = TF.configuration . enableIpv6
+
+class HasImage s a | s -> a where
+    image :: Functor f => (a -> f a) -> s -> f s
+
+instance HasImage s a => HasImage (TF.Resource p s) a where
+    image = TF.configuration . image
+
+class HasIpRange s a | s -> a where
+    ipRange :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIpRange s a => HasIpRange (TF.Resource p s) a where
+    ipRange = TF.configuration . ipRange
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasPort s a | s -> a where
+    port :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPort s a => HasPort (TF.Resource p s) a where
+    port = TF.configuration . port
+
+class HasProtocol s a | s -> a where
+    protocol :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
+    protocol = TF.configuration . protocol
+
+class HasPublicIpv6 s a | s -> a where
+    publicIpv6 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPublicIpv6 s a => HasPublicIpv6 (TF.Resource p s) a where
+    publicIpv6 = TF.configuration . publicIpv6
+
+class HasSecurityGroup s a | s -> a where
+    securityGroup :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSecurityGroup s a => HasSecurityGroup (TF.Resource p s) a where
+    securityGroup = TF.configuration . securityGroup
+
+class HasServer s a | s -> a where
+    server :: Functor f => (a -> f a) -> s -> f s
+
+instance HasServer s a => HasServer (TF.Resource p s) a where
+    server = TF.configuration . server
+
+class HasSizeInGb s a | s -> a where
+    sizeInGb :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSizeInGb s a => HasSizeInGb (TF.Resource p s) a where
+    sizeInGb = TF.configuration . sizeInGb
+
+class HasState s a | s -> a where
+    state :: Functor f => (a -> f a) -> s -> f s
+
+instance HasState s a => HasState (TF.Resource p s) a where
+    state = TF.configuration . state
+
+class HasStateDetail s a | s -> a where
+    stateDetail :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStateDetail s a => HasStateDetail (TF.Resource p s) a where
+    stateDetail = TF.configuration . stateDetail
+
+class HasTags s a | s -> a where
+    tags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags = TF.configuration . tags
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' = TF.configuration . type'
+
+class HasVolume s a | s -> a where
+    volume :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVolume s a => HasVolume (TF.Resource p s) a where
+    volume = TF.configuration . volume

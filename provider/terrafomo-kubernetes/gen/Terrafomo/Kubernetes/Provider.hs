@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Kubernetes.Provider
-    ( Kubernetes    (..)
-    , HasKubernetes (..)
+    (
+    -- * Provider Datatype
+      Kubernetes (..)
+
+    -- * Lenses
+    , clientCertificate
+    , clientKey
+    , clusterCaCertificate
+    , configContext
+    , configContextAuthInfo
+    , configContextCluster
+    , configPath
+    , host
+    , insecure
+    , loadConfigFile
+    , password
+    , token
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +49,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Kubernetes.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.Meta      as TF
 import qualified Terrafomo.Syntax.Name      as TF
+import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | Kubernetes Terraform provider.
 
@@ -134,4 +148,119 @@ instance Monoid Kubernetes where
 instance TF.IsProvider Kubernetes where
     type ProviderName Kubernetes = "kubernetes"
 
-$(TF.makeProviderLenses ''Kubernetes)
+clientCertificate
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+clientCertificate f s =
+        (\a -> s { _client_certificate = a } :: Kubernetes)
+             <$> f (_client_certificate s)
+
+clientKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+clientKey f s =
+        (\a -> s { _client_key = a } :: Kubernetes)
+             <$> f (_client_key s)
+
+clusterCaCertificate
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+clusterCaCertificate f s =
+        (\a -> s { _cluster_ca_certificate = a } :: Kubernetes)
+             <$> f (_cluster_ca_certificate s)
+
+configContext
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+configContext f s =
+        (\a -> s { _config_context = a } :: Kubernetes)
+             <$> f (_config_context s)
+
+configContextAuthInfo
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+configContextAuthInfo f s =
+        (\a -> s { _config_context_auth_info = a } :: Kubernetes)
+             <$> f (_config_context_auth_info s)
+
+configContextCluster
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+configContextCluster f s =
+        (\a -> s { _config_context_cluster = a } :: Kubernetes)
+             <$> f (_config_context_cluster s)
+
+configPath
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+configPath f s =
+        (\a -> s { _config_path = a } :: Kubernetes)
+             <$> f (_config_path s)
+
+host
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+host f s =
+        (\a -> s { _host = a } :: Kubernetes)
+             <$> f (_host s)
+
+insecure
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+insecure f s =
+        (\a -> s { _insecure = a } :: Kubernetes)
+             <$> f (_insecure s)
+
+loadConfigFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+loadConfigFile f s =
+        (\a -> s { _load_config_file = a } :: Kubernetes)
+             <$> f (_load_config_file s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+password f s =
+        (\a -> s { _password = a } :: Kubernetes)
+             <$> f (_password s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+token f s =
+        (\a -> s { _token = a } :: Kubernetes)
+             <$> f (_token s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Kubernetes
+    -> f Kubernetes
+username f s =
+        (\a -> s { _username = a } :: Kubernetes)
+             <$> f (_username s)

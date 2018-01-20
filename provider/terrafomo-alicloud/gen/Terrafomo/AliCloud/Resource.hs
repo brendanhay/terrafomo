@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,503 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AliCloud.Resource where
+module Terrafomo.AliCloud.Resource
+    (
+    -- * Types
+      CdnDomainResource (..)
+    , cdnDomainResource
 
-import Data.Functor ((<$>))
+    , ContainerClusterResource (..)
+    , containerClusterResource
+
+    , DbAccountPrivilegeResource (..)
+    , dbAccountPrivilegeResource
+
+    , DbAccountResource (..)
+    , dbAccountResource
+
+    , DbBackupPolicyResource (..)
+    , dbBackupPolicyResource
+
+    , DbConnectionResource (..)
+    , dbConnectionResource
+
+    , DbDatabaseResource (..)
+    , dbDatabaseResource
+
+    , DbInstanceResource (..)
+    , dbInstanceResource
+
+    , DiskAttachmentResource (..)
+    , diskAttachmentResource
+
+    , DiskResource (..)
+    , diskResource
+
+    , DnsGroupResource (..)
+    , dnsGroupResource
+
+    , DnsResource (..)
+    , dnsResource
+
+    , EipAssociationResource (..)
+    , eipAssociationResource
+
+    , EipResource (..)
+    , eipResource
+
+    , EssScalingConfigurationResource (..)
+    , essScalingConfigurationResource
+
+    , EssScalingGroupResource (..)
+    , essScalingGroupResource
+
+    , EssScalingRuleResource (..)
+    , essScalingRuleResource
+
+    , EssScheduleResource (..)
+    , essScheduleResource
+
+    , ForwardResource (..)
+    , forwardResource
+
+    , InstanceResource (..)
+    , instanceResource
+
+    , KeyPairAttachmentResource (..)
+    , keyPairAttachmentResource
+
+    , KeyPairResource (..)
+    , keyPairResource
+
+    , NatGatewayResource (..)
+    , natGatewayResource
+
+    , OssBucketObjectResource (..)
+    , ossBucketObjectResource
+
+    , OssBucketResource (..)
+    , ossBucketResource
+
+    , RamAccessKeyResource (..)
+    , ramAccessKeyResource
+
+    , RamAccountAliasResource (..)
+    , ramAccountAliasResource
+
+    , RamAliasResource (..)
+    , ramAliasResource
+
+    , RamGroupMembershipResource (..)
+    , ramGroupMembershipResource
+
+    , RamGroupPolicyAttachmentResource (..)
+    , ramGroupPolicyAttachmentResource
+
+    , RamGroupResource (..)
+    , ramGroupResource
+
+    , RamLoginProfileResource (..)
+    , ramLoginProfileResource
+
+    , RamPolicyResource (..)
+    , ramPolicyResource
+
+    , RamRoleAttachmentResource (..)
+    , ramRoleAttachmentResource
+
+    , RamRolePolicyAttachmentResource (..)
+    , ramRolePolicyAttachmentResource
+
+    , RamRoleResource (..)
+    , ramRoleResource
+
+    , RamUserPolicyAttachmentResource (..)
+    , ramUserPolicyAttachmentResource
+
+    , RamUserResource (..)
+    , ramUserResource
+
+    , RouteEntryResource (..)
+    , routeEntryResource
+
+    , RouterInterfaceResource (..)
+    , routerInterfaceResource
+
+    , SecurityGroupResource (..)
+    , securityGroupResource
+
+    , SecurityGroupRuleResource (..)
+    , securityGroupRuleResource
+
+    , SlbAttachmentResource (..)
+    , slbAttachmentResource
+
+    , SlbListenerResource (..)
+    , slbListenerResource
+
+    , SlbResource (..)
+    , slbResource
+
+    , SlbServerGroupResource (..)
+    , slbServerGroupResource
+
+    , SnatResource (..)
+    , snatResource
+
+    , VpcResource (..)
+    , vpcResource
+
+    , VswitchResource (..)
+    , vswitchResource
+
+    -- * Overloaded Fields
+    , HasAccessPointId (..)
+    , HasAccountAlias (..)
+    , HasAccountName (..)
+    , HasAcl (..)
+    , HasActive (..)
+    , HasAdjustmentType (..)
+    , HasAdjustmentValue (..)
+    , HasAllocatePublicIp (..)
+    , HasAllocationId (..)
+    , HasAvailabilityZone (..)
+    , HasBackendPort (..)
+    , HasBackupPeriod (..)
+    , HasBackupTime (..)
+    , HasBandwidth (..)
+    , HasBandwidthPackages (..)
+    , HasBucket (..)
+    , HasCacheControl (..)
+    , HasCategory (..)
+    , HasCdnType (..)
+    , HasCharacterSet (..)
+    , HasCidrBlock (..)
+    , HasCidrIp (..)
+    , HasComments (..)
+    , HasComputedAccessPointId (..)
+    , HasComputedAccountAlias (..)
+    , HasComputedAccountName (..)
+    , HasComputedAddress (..)
+    , HasComputedAdjustmentType (..)
+    , HasComputedAdjustmentValue (..)
+    , HasComputedAllocationId (..)
+    , HasComputedAri (..)
+    , HasComputedArn (..)
+    , HasComputedAttachmentCount (..)
+    , HasComputedAvailabilityZone (..)
+    , HasComputedBackendServers (..)
+    , HasComputedBackupPeriod (..)
+    , HasComputedBackupRetentionPeriod (..)
+    , HasComputedBackupTime (..)
+    , HasComputedBandwidth (..)
+    , HasComputedCategory (..)
+    , HasComputedCharacterSet (..)
+    , HasComputedCidrBlock (..)
+    , HasComputedComments (..)
+    , HasComputedConnectionPrefix (..)
+    , HasComputedConnectionString (..)
+    , HasComputedConnections (..)
+    , HasComputedContentLength (..)
+    , HasComputedCooldown (..)
+    , HasComputedDbInstanceClass (..)
+    , HasComputedDbInstanceIds (..)
+    , HasComputedDbInstanceNetType (..)
+    , HasComputedDbInstanceStorage (..)
+    , HasComputedDbMappings (..)
+    , HasComputedDbNames (..)
+    , HasComputedDefaultCooldown (..)
+    , HasComputedDescription (..)
+    , HasComputedDestinationCidrblock (..)
+    , HasComputedDeviceName (..)
+    , HasComputedDiskId (..)
+    , HasComputedDisplayName (..)
+    , HasComputedDnsServer (..)
+    , HasComputedDocument (..)
+    , HasComputedDryRun (..)
+    , HasComputedEmail (..)
+    , HasComputedEngine (..)
+    , HasComputedEngineVersion (..)
+    , HasComputedEtag (..)
+    , HasComputedFingerprint (..)
+    , HasComputedGroupId (..)
+    , HasComputedGroupName (..)
+    , HasComputedHealthCheckSourceIp (..)
+    , HasComputedHealthCheckTargetIp (..)
+    , HasComputedHostName (..)
+    , HasComputedHostRecord (..)
+    , HasComputedId (..)
+    , HasComputedImageId (..)
+    , HasComputedInstanceChargeType (..)
+    , HasComputedInstanceId (..)
+    , HasComputedInstanceIds (..)
+    , HasComputedInstanceName (..)
+    , HasComputedInstanceNetworkType (..)
+    , HasComputedInstanceStorage (..)
+    , HasComputedInstanceType (..)
+    , HasComputedInternet (..)
+    , HasComputedInternetChargeType (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIpProtocol (..)
+    , HasComputedKeyName (..)
+    , HasComputedLaunchTime (..)
+    , HasComputedLoadbalancerIds (..)
+    , HasComputedLocked (..)
+    , HasComputedLogBackup (..)
+    , HasComputedLogRetentionPeriod (..)
+    , HasComputedMasterUserName (..)
+    , HasComputedMaxSize (..)
+    , HasComputedMfaBindRequired (..)
+    , HasComputedMinSize (..)
+    , HasComputedMobile (..)
+    , HasComputedName (..)
+    , HasComputedNexthopId (..)
+    , HasComputedNexthopType (..)
+    , HasComputedOppositeAccessPointId (..)
+    , HasComputedOppositeInterfaceId (..)
+    , HasComputedOppositeInterfaceOwnerId (..)
+    , HasComputedOppositeRouterId (..)
+    , HasComputedOppositeRouterType (..)
+    , HasComputedPasswordResetRequired (..)
+    , HasComputedPeriod (..)
+    , HasComputedPeriodUnit (..)
+    , HasComputedPolicyName (..)
+    , HasComputedPolicyType (..)
+    , HasComputedPort (..)
+    , HasComputedPortRange (..)
+    , HasComputedPreferredBackupPeriod (..)
+    , HasComputedPreferredBackupTime (..)
+    , HasComputedPriority (..)
+    , HasComputedPrivateIp (..)
+    , HasComputedPrivilege (..)
+    , HasComputedPublicIp (..)
+    , HasComputedRamUsers (..)
+    , HasComputedRemovalPolicies (..)
+    , HasComputedRetentionPeriod (..)
+    , HasComputedRole (..)
+    , HasComputedRoleName (..)
+    , HasComputedRouteTableId (..)
+    , HasComputedRouterId (..)
+    , HasComputedRouterType (..)
+    , HasComputedRouting (..)
+    , HasComputedScalingGroupId (..)
+    , HasComputedScalingGroupName (..)
+    , HasComputedScalingRuleName (..)
+    , HasComputedScheduledAction (..)
+    , HasComputedScheduledTaskName (..)
+    , HasComputedSecurityIps (..)
+    , HasComputedServices (..)
+    , HasComputedSize (..)
+    , HasComputedSnapshotId (..)
+    , HasComputedSpecification (..)
+    , HasComputedSpotPriceLimit (..)
+    , HasComputedSpotStrategy (..)
+    , HasComputedStatement (..)
+    , HasComputedStatus (..)
+    , HasComputedTags (..)
+    , HasComputedTaskEnabled (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedUserData (..)
+    , HasComputedUserName (..)
+    , HasComputedUserNames (..)
+    , HasComputedValue (..)
+    , HasComputedVersion (..)
+    , HasComputedVpcId (..)
+    , HasComputedVswitchId (..)
+    , HasComputedZoneId (..)
+    , HasConnectionPrefix (..)
+    , HasContent (..)
+    , HasContentDisposition (..)
+    , HasContentEncoding (..)
+    , HasContentMd5 (..)
+    , HasContentType (..)
+    , HasCookie (..)
+    , HasCookieTimeout (..)
+    , HasCooldown (..)
+    , HasCoreRule (..)
+    , HasDataDisk (..)
+    , HasDbInstanceIds (..)
+    , HasDbNames (..)
+    , HasDefaultCooldown (..)
+    , HasDescription (..)
+    , HasDestinationCidrblock (..)
+    , HasDiskCategory (..)
+    , HasDiskId (..)
+    , HasDiskSize (..)
+    , HasDisplayName (..)
+    , HasDocument (..)
+    , HasDomainName (..)
+    , HasDryRun (..)
+    , HasEmail (..)
+    , HasEnable (..)
+    , HasEngine (..)
+    , HasEngineVersion (..)
+    , HasExpires (..)
+    , HasExternalIp (..)
+    , HasExternalPort (..)
+    , HasForce (..)
+    , HasForceDelete (..)
+    , HasForwardTableId (..)
+    , HasFrontendPort (..)
+    , HasGroupId (..)
+    , HasGroupName (..)
+    , HasHealthCheck (..)
+    , HasHealthCheckConnectPort (..)
+    , HasHealthCheckDomain (..)
+    , HasHealthCheckHttpCode (..)
+    , HasHealthCheckInterval (..)
+    , HasHealthCheckSourceIp (..)
+    , HasHealthCheckTargetIp (..)
+    , HasHealthCheckTimeout (..)
+    , HasHealthCheckType (..)
+    , HasHealthCheckUri (..)
+    , HasHealthyThreshold (..)
+    , HasHostName (..)
+    , HasHostRecord (..)
+    , HasImageId (..)
+    , HasIncludeDataDisks (..)
+    , HasInstanceChargeType (..)
+    , HasInstanceId (..)
+    , HasInstanceIds (..)
+    , HasInstanceName (..)
+    , HasInstanceStorage (..)
+    , HasInstanceType (..)
+    , HasInstances (..)
+    , HasInternalIp (..)
+    , HasInternalPort (..)
+    , HasInternet (..)
+    , HasInternetChargeType (..)
+    , HasInternetMaxBandwidthIn (..)
+    , HasInternetMaxBandwidthOut (..)
+    , HasIpProtocol (..)
+    , HasIsOutdated (..)
+    , HasKey (..)
+    , HasKeyFile (..)
+    , HasKeyName (..)
+    , HasKeyNamePrefix (..)
+    , HasLaunchExpirationTime (..)
+    , HasLaunchTime (..)
+    , HasLifecycleRule (..)
+    , HasLoadBalancerId (..)
+    , HasLoadbalancerIds (..)
+    , HasLogBackup (..)
+    , HasLogRetentionPeriod (..)
+    , HasLogging (..)
+    , HasLoggingIsenable (..)
+    , HasMaxSize (..)
+    , HasMfaBindRequired (..)
+    , HasMinSize (..)
+    , HasMobile (..)
+    , HasMultiAz (..)
+    , HasName (..)
+    , HasNamePrefix (..)
+    , HasNexthopId (..)
+    , HasNexthopType (..)
+    , HasNicType (..)
+    , HasOppositeAccessPointId (..)
+    , HasOppositeInterfaceId (..)
+    , HasOppositeInterfaceOwnerId (..)
+    , HasOppositeRegion (..)
+    , HasOppositeRouterId (..)
+    , HasOppositeRouterType (..)
+    , HasPassword (..)
+    , HasPasswordResetRequired (..)
+    , HasPeriod (..)
+    , HasPeriodUnit (..)
+    , HasPersistenceTimeout (..)
+    , HasPolicy (..)
+    , HasPolicyName (..)
+    , HasPolicyType (..)
+    , HasPort (..)
+    , HasPortRange (..)
+    , HasPriority (..)
+    , HasPrivateIp (..)
+    , HasPrivilege (..)
+    , HasProtocol (..)
+    , HasPublicKey (..)
+    , HasRamUsers (..)
+    , HasRecurrenceEndTime (..)
+    , HasRecurrenceType (..)
+    , HasRecurrenceValue (..)
+    , HasRefererConfig (..)
+    , HasRemovalPolicies (..)
+    , HasRetentionPeriod (..)
+    , HasRole (..)
+    , HasRoleName (..)
+    , HasRouteTableId (..)
+    , HasRouterId (..)
+    , HasRouterType (..)
+    , HasRouting (..)
+    , HasScalingConfigurationName (..)
+    , HasScalingGroupId (..)
+    , HasScalingGroupName (..)
+    , HasScalingRuleName (..)
+    , HasScheduledAction (..)
+    , HasScheduledTaskName (..)
+    , HasScheduler (..)
+    , HasScope (..)
+    , HasSecretFile (..)
+    , HasSecurityGroupId (..)
+    , HasSecurityGroups (..)
+    , HasSecurityIps (..)
+    , HasServerSideEncryption (..)
+    , HasServers (..)
+    , HasServices (..)
+    , HasSize (..)
+    , HasSlbId (..)
+    , HasSnapshotId (..)
+    , HasSnatIp (..)
+    , HasSnatTableId (..)
+    , HasSource (..)
+    , HasSourceGroupOwnerAccount (..)
+    , HasSourcePort (..)
+    , HasSourceSecurityGroupId (..)
+    , HasSourceType (..)
+    , HasSourceVswitchId (..)
+    , HasSources (..)
+    , HasSpec (..)
+    , HasSpecification (..)
+    , HasSpotPriceLimit (..)
+    , HasSpotStrategy (..)
+    , HasSslCertificateId (..)
+    , HasStatement (..)
+    , HasStatus (..)
+    , HasStickySession (..)
+    , HasStickySessionType (..)
+    , HasSubstitute (..)
+    , HasSystemDiskCategory (..)
+    , HasSystemDiskSize (..)
+    , HasTags (..)
+    , HasTaskEnabled (..)
+    , HasTtl (..)
+    , HasType' (..)
+    , HasUnhealthyThreshold (..)
+    , HasUserData (..)
+    , HasUserName (..)
+    , HasUserNames (..)
+    , HasValue (..)
+    , HasVersion (..)
+    , HasVpcId (..)
+    , HasVswitchId (..)
+    , HasWebsite (..)
+    , HasZoneId (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.AliCloud.Provider as TF
 import qualified Terrafomo.AliCloud.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @alicloud_cdn_domain@ AliCloud resource.
 
@@ -67,10 +546,35 @@ instance TF.ToHCL CdnDomainResource where
         , TF.assign "sources" <$> TF.argument _sources
         ]
 
-$(TF.makeSchemaLenses
-    ''CdnDomainResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasCdnType CdnDomainResource (TF.Argument Text) where
+    cdnType f s@CdnDomainResource{..} =
+        (\a -> s { _cdn_type = a } :: CdnDomainResource)
+             <$> f _cdn_type
+
+instance HasDomainName CdnDomainResource (TF.Argument Text) where
+    domainName f s@CdnDomainResource{..} =
+        (\a -> s { _domain_name = a } :: CdnDomainResource)
+             <$> f _domain_name
+
+instance HasScope CdnDomainResource (TF.Argument Text) where
+    scope f s@CdnDomainResource{..} =
+        (\a -> s { _scope = a } :: CdnDomainResource)
+             <$> f _scope
+
+instance HasSourcePort CdnDomainResource (TF.Argument Text) where
+    sourcePort f s@CdnDomainResource{..} =
+        (\a -> s { _source_port = a } :: CdnDomainResource)
+             <$> f _source_port
+
+instance HasSourceType CdnDomainResource (TF.Argument Text) where
+    sourceType f s@CdnDomainResource{..} =
+        (\a -> s { _source_type = a } :: CdnDomainResource)
+             <$> f _source_type
+
+instance HasSources CdnDomainResource (TF.Argument Text) where
+    sources f s@CdnDomainResource{..} =
+        (\a -> s { _sources = a } :: CdnDomainResource)
+             <$> f _sources
 
 cdnDomainResource :: TF.Resource TF.AliCloud CdnDomainResource
 cdnDomainResource =
@@ -133,10 +637,75 @@ instance TF.ToHCL ContainerClusterResource where
         , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
-$(TF.makeSchemaLenses
-    ''ContainerClusterResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasCidrBlock ContainerClusterResource (TF.Argument Text) where
+    cidrBlock f s@ContainerClusterResource{..} =
+        (\a -> s { _cidr_block = a } :: ContainerClusterResource)
+             <$> f _cidr_block
+
+instance HasDiskCategory ContainerClusterResource (TF.Argument Text) where
+    diskCategory f s@ContainerClusterResource{..} =
+        (\a -> s { _disk_category = a } :: ContainerClusterResource)
+             <$> f _disk_category
+
+instance HasDiskSize ContainerClusterResource (TF.Argument Text) where
+    diskSize f s@ContainerClusterResource{..} =
+        (\a -> s { _disk_size = a } :: ContainerClusterResource)
+             <$> f _disk_size
+
+instance HasImageId ContainerClusterResource (TF.Argument Text) where
+    imageId f s@ContainerClusterResource{..} =
+        (\a -> s { _image_id = a } :: ContainerClusterResource)
+             <$> f _image_id
+
+instance HasInstanceType ContainerClusterResource (TF.Argument Text) where
+    instanceType f s@ContainerClusterResource{..} =
+        (\a -> s { _instance_type = a } :: ContainerClusterResource)
+             <$> f _instance_type
+
+instance HasName ContainerClusterResource (TF.Argument Text) where
+    name f s@ContainerClusterResource{..} =
+        (\a -> s { _name = a } :: ContainerClusterResource)
+             <$> f _name
+
+instance HasNamePrefix ContainerClusterResource (TF.Argument Text) where
+    namePrefix f s@ContainerClusterResource{..} =
+        (\a -> s { _name_prefix = a } :: ContainerClusterResource)
+             <$> f _name_prefix
+
+instance HasPassword ContainerClusterResource (TF.Argument Text) where
+    password f s@ContainerClusterResource{..} =
+        (\a -> s { _password = a } :: ContainerClusterResource)
+             <$> f _password
+
+instance HasSize ContainerClusterResource (TF.Argument Text) where
+    size f s@ContainerClusterResource{..} =
+        (\a -> s { _size = a } :: ContainerClusterResource)
+             <$> f _size
+
+instance HasVswitchId ContainerClusterResource (TF.Argument Text) where
+    vswitchId f s@ContainerClusterResource{..} =
+        (\a -> s { _vswitch_id = a } :: ContainerClusterResource)
+             <$> f _vswitch_id
+
+instance HasComputedName ContainerClusterResource (TF.Attribute Text) where
+    computedName f s@ContainerClusterResource{..} =
+        (\a -> s { _computed_name = a } :: ContainerClusterResource)
+             <$> f _computed_name
+
+instance HasComputedSize ContainerClusterResource (TF.Attribute Text) where
+    computedSize f s@ContainerClusterResource{..} =
+        (\a -> s { _computed_size = a } :: ContainerClusterResource)
+             <$> f _computed_size
+
+instance HasComputedVpcId ContainerClusterResource (TF.Attribute Text) where
+    computedVpcId f s@ContainerClusterResource{..} =
+        (\a -> s { _computed_vpc_id = a } :: ContainerClusterResource)
+             <$> f _computed_vpc_id
+
+instance HasComputedVswitchId ContainerClusterResource (TF.Attribute Text) where
+    computedVswitchId f s@ContainerClusterResource{..} =
+        (\a -> s { _computed_vswitch_id = a } :: ContainerClusterResource)
+             <$> f _computed_vswitch_id
 
 containerClusterResource :: TF.Resource TF.AliCloud ContainerClusterResource
 containerClusterResource =
@@ -158,104 +727,798 @@ containerClusterResource =
             , _computed_vswitch_id = TF.Compute "vswitch_id"
             }
 
+{- | The @alicloud_db_account_privilege@ AliCloud resource.
+
+Provides an RDS account privilege resource and used to grant several
+database some access privilege. A database can be granted by multiple
+account.
+-}
+data DbAccountPrivilegeResource = DbAccountPrivilegeResource {
+      _account_name          :: !(TF.Argument Text)
+    {- ^ (Required) A specified account name. -}
+    , _db_names              :: !(TF.Argument Text)
+    {- ^ (Optional) List of specified database name. -}
+    , _instance_id           :: !(TF.Argument Text)
+    {- ^ (Required) The Id of instance in which account belongs. -}
+    , _privilege             :: !(TF.Argument Text)
+    {- ^ - The privilege of one account access database. Valid values: ["ReadOnly", "ReadWrite"]. Default to "ReadOnly". -}
+    , _computed_account_name :: !(TF.Attribute Text)
+    {- ^ - The name of DB account. -}
+    , _computed_db_names     :: !(TF.Attribute Text)
+    {- ^ - List of granted privilege database names. -}
+    , _computed_id           :: !(TF.Attribute Text)
+    {- ^ - The current account resource ID. Composed of instance ID, account name and privilege with format "<instance_id>: : ". -}
+    , _computed_instance_id  :: !(TF.Attribute Text)
+    {- ^ - The Id of DB instance. -}
+    , _computed_privilege    :: !(TF.Attribute Text)
+    {- ^ - The specified account privilege. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL DbAccountPrivilegeResource where
+    toHCL DbAccountPrivilegeResource{..} = TF.block $ catMaybes
+        [ TF.assign "account_name" <$> TF.argument _account_name
+        , TF.assign "db_names" <$> TF.argument _db_names
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "privilege" <$> TF.argument _privilege
+        ]
+
+instance HasAccountName DbAccountPrivilegeResource (TF.Argument Text) where
+    accountName f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _account_name = a } :: DbAccountPrivilegeResource)
+             <$> f _account_name
+
+instance HasDbNames DbAccountPrivilegeResource (TF.Argument Text) where
+    dbNames f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _db_names = a } :: DbAccountPrivilegeResource)
+             <$> f _db_names
+
+instance HasInstanceId DbAccountPrivilegeResource (TF.Argument Text) where
+    instanceId f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _instance_id = a } :: DbAccountPrivilegeResource)
+             <$> f _instance_id
+
+instance HasPrivilege DbAccountPrivilegeResource (TF.Argument Text) where
+    privilege f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _privilege = a } :: DbAccountPrivilegeResource)
+             <$> f _privilege
+
+instance HasComputedAccountName DbAccountPrivilegeResource (TF.Attribute Text) where
+    computedAccountName f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _computed_account_name = a } :: DbAccountPrivilegeResource)
+             <$> f _computed_account_name
+
+instance HasComputedDbNames DbAccountPrivilegeResource (TF.Attribute Text) where
+    computedDbNames f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _computed_db_names = a } :: DbAccountPrivilegeResource)
+             <$> f _computed_db_names
+
+instance HasComputedId DbAccountPrivilegeResource (TF.Attribute Text) where
+    computedId f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _computed_id = a } :: DbAccountPrivilegeResource)
+             <$> f _computed_id
+
+instance HasComputedInstanceId DbAccountPrivilegeResource (TF.Attribute Text) where
+    computedInstanceId f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _computed_instance_id = a } :: DbAccountPrivilegeResource)
+             <$> f _computed_instance_id
+
+instance HasComputedPrivilege DbAccountPrivilegeResource (TF.Attribute Text) where
+    computedPrivilege f s@DbAccountPrivilegeResource{..} =
+        (\a -> s { _computed_privilege = a } :: DbAccountPrivilegeResource)
+             <$> f _computed_privilege
+
+dbAccountPrivilegeResource :: TF.Resource TF.AliCloud DbAccountPrivilegeResource
+dbAccountPrivilegeResource =
+    TF.newResource "alicloud_db_account_privilege" $
+        DbAccountPrivilegeResource {
+            _account_name = TF.Nil
+            , _db_names = TF.Nil
+            , _instance_id = TF.Nil
+            , _privilege = TF.Nil
+            , _computed_account_name = TF.Compute "account_name"
+            , _computed_db_names = TF.Compute "db_names"
+            , _computed_id = TF.Compute "id"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_privilege = TF.Compute "privilege"
+            }
+
+{- | The @alicloud_db_account@ AliCloud resource.
+
+Provides an RDS account resource and used to manage databases. A RDS
+instance supports multiple database account.
+-}
+data DbAccountResource = DbAccountResource {
+      _description          :: !(TF.Argument Text)
+    {- ^ (Optional) Database description. It cannot begin with https://. It must start with a Chinese character or English letter. It can include Chinese and English characters, underlines (_), hyphens (-), and numbers. The length may be 2-256 characters. -}
+    , _instance_id          :: !(TF.Argument Text)
+    {- ^ (Required) The Id of instance in which account belongs. -}
+    , _name                 :: !(TF.Argument Text)
+    {- ^ (Required) Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters. -}
+    , _password             :: !(TF.Argument Text)
+    {- ^ (Required) Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters. -}
+    , _type'                :: !(TF.Argument Text)
+    {- ^ - Privilege type of account. -}
+    , _computed_description :: !(TF.Attribute Text)
+    {- ^ - The account description. -}
+    , _computed_id          :: !(TF.Attribute Text)
+    {- ^ - The current account resource ID. Composed of instance ID and account name with format "<instance_id>: ". -}
+    , _computed_instance_id :: !(TF.Attribute Text)
+    {- ^ - The Id of DB instance. -}
+    , _computed_name        :: !(TF.Attribute Text)
+    {- ^ - The name of DB account. -}
+    , _computed_type'       :: !(TF.Attribute Text)
+    {- ^ - Privilege type of account. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL DbAccountResource where
+    toHCL DbAccountResource{..} = TF.block $ catMaybes
+        [ TF.assign "description" <$> TF.argument _description
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "password" <$> TF.argument _password
+        , TF.assign "type" <$> TF.argument _type'
+        ]
+
+instance HasDescription DbAccountResource (TF.Argument Text) where
+    description f s@DbAccountResource{..} =
+        (\a -> s { _description = a } :: DbAccountResource)
+             <$> f _description
+
+instance HasInstanceId DbAccountResource (TF.Argument Text) where
+    instanceId f s@DbAccountResource{..} =
+        (\a -> s { _instance_id = a } :: DbAccountResource)
+             <$> f _instance_id
+
+instance HasName DbAccountResource (TF.Argument Text) where
+    name f s@DbAccountResource{..} =
+        (\a -> s { _name = a } :: DbAccountResource)
+             <$> f _name
+
+instance HasPassword DbAccountResource (TF.Argument Text) where
+    password f s@DbAccountResource{..} =
+        (\a -> s { _password = a } :: DbAccountResource)
+             <$> f _password
+
+instance HasType' DbAccountResource (TF.Argument Text) where
+    type' f s@DbAccountResource{..} =
+        (\a -> s { _type' = a } :: DbAccountResource)
+             <$> f _type'
+
+instance HasComputedDescription DbAccountResource (TF.Attribute Text) where
+    computedDescription f s@DbAccountResource{..} =
+        (\a -> s { _computed_description = a } :: DbAccountResource)
+             <$> f _computed_description
+
+instance HasComputedId DbAccountResource (TF.Attribute Text) where
+    computedId f s@DbAccountResource{..} =
+        (\a -> s { _computed_id = a } :: DbAccountResource)
+             <$> f _computed_id
+
+instance HasComputedInstanceId DbAccountResource (TF.Attribute Text) where
+    computedInstanceId f s@DbAccountResource{..} =
+        (\a -> s { _computed_instance_id = a } :: DbAccountResource)
+             <$> f _computed_instance_id
+
+instance HasComputedName DbAccountResource (TF.Attribute Text) where
+    computedName f s@DbAccountResource{..} =
+        (\a -> s { _computed_name = a } :: DbAccountResource)
+             <$> f _computed_name
+
+instance HasComputedType' DbAccountResource (TF.Attribute Text) where
+    computedType' f s@DbAccountResource{..} =
+        (\a -> s { _computed_type' = a } :: DbAccountResource)
+             <$> f _computed_type'
+
+dbAccountResource :: TF.Resource TF.AliCloud DbAccountResource
+dbAccountResource =
+    TF.newResource "alicloud_db_account" $
+        DbAccountResource {
+            _description = TF.Nil
+            , _instance_id = TF.Nil
+            , _name = TF.Nil
+            , _password = TF.Nil
+            , _type' = TF.Nil
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_name = TF.Compute "name"
+            , _computed_type' = TF.Compute "type"
+            }
+
+{- | The @alicloud_db_backup_policy@ AliCloud resource.
+
+Provides an RDS instance backup policy resource and used to configure
+instance backup policy. ~> NOTE: Each DB instance has a backup policy and it
+will be set default values when destroying the resource.
+-}
+data DbBackupPolicyResource = DbBackupPolicyResource {
+      _backup_period                 :: !(TF.Argument Text)
+    {- ^ (Optional) DB Instance backup period. Valid values: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]. Default to ["Tuesday", "Thursday", "Saturday"]. -}
+    , _backup_time                   :: !(TF.Argument Text)
+    {- ^ (Optional) DB instance backup time, in the format of HH:mmZ- HH:mmZ. Time setting interval is one hour. Default to "02:00Z-03:00Z". China time is 8 hours behind it. -}
+    , _instance_id                   :: !(TF.Argument Text)
+    {- ^ (Required) The Id of instance that can run database. -}
+    , _log_backup                    :: !(TF.Argument Text)
+    {- ^ (Optional) Whether to backup instance log. Default to true. -}
+    , _log_retention_period          :: !(TF.Argument Text)
+    {- ^ (Optional) Instance log backup retention days. Valid values: [7-730]. Default to 7. It can be larger than 'retention_period'. -}
+    , _retention_period              :: !(TF.Argument Text)
+    {- ^ (Optional) Instance backup retention days. Valid values: [7-730]. Default to 7. -}
+    , _computed_backup_period        :: !(TF.Attribute Text)
+    {- ^ - DB Instance backup period. -}
+    , _computed_backup_time          :: !(TF.Attribute Text)
+    {- ^ - DB instance backup time. -}
+    , _computed_id                   :: !(TF.Attribute Text)
+    {- ^ - The current backup policy resource ID. It is same as 'instance_id'. -}
+    , _computed_instance_id          :: !(TF.Attribute Text)
+    {- ^ - The Id of DB instance. -}
+    , _computed_log_backup           :: !(TF.Attribute Text)
+    {- ^ - Whether to backup instance log. -}
+    , _computed_log_retention_period :: !(TF.Attribute Text)
+    {- ^ - Instance log backup retention days. -}
+    , _computed_retention_period     :: !(TF.Attribute Text)
+    {- ^ - Instance backup retention days. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL DbBackupPolicyResource where
+    toHCL DbBackupPolicyResource{..} = TF.block $ catMaybes
+        [ TF.assign "backup_period" <$> TF.argument _backup_period
+        , TF.assign "backup_time" <$> TF.argument _backup_time
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "log_backup" <$> TF.argument _log_backup
+        , TF.assign "log_retention_period" <$> TF.argument _log_retention_period
+        , TF.assign "retention_period" <$> TF.argument _retention_period
+        ]
+
+instance HasBackupPeriod DbBackupPolicyResource (TF.Argument Text) where
+    backupPeriod f s@DbBackupPolicyResource{..} =
+        (\a -> s { _backup_period = a } :: DbBackupPolicyResource)
+             <$> f _backup_period
+
+instance HasBackupTime DbBackupPolicyResource (TF.Argument Text) where
+    backupTime f s@DbBackupPolicyResource{..} =
+        (\a -> s { _backup_time = a } :: DbBackupPolicyResource)
+             <$> f _backup_time
+
+instance HasInstanceId DbBackupPolicyResource (TF.Argument Text) where
+    instanceId f s@DbBackupPolicyResource{..} =
+        (\a -> s { _instance_id = a } :: DbBackupPolicyResource)
+             <$> f _instance_id
+
+instance HasLogBackup DbBackupPolicyResource (TF.Argument Text) where
+    logBackup f s@DbBackupPolicyResource{..} =
+        (\a -> s { _log_backup = a } :: DbBackupPolicyResource)
+             <$> f _log_backup
+
+instance HasLogRetentionPeriod DbBackupPolicyResource (TF.Argument Text) where
+    logRetentionPeriod f s@DbBackupPolicyResource{..} =
+        (\a -> s { _log_retention_period = a } :: DbBackupPolicyResource)
+             <$> f _log_retention_period
+
+instance HasRetentionPeriod DbBackupPolicyResource (TF.Argument Text) where
+    retentionPeriod f s@DbBackupPolicyResource{..} =
+        (\a -> s { _retention_period = a } :: DbBackupPolicyResource)
+             <$> f _retention_period
+
+instance HasComputedBackupPeriod DbBackupPolicyResource (TF.Attribute Text) where
+    computedBackupPeriod f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_backup_period = a } :: DbBackupPolicyResource)
+             <$> f _computed_backup_period
+
+instance HasComputedBackupTime DbBackupPolicyResource (TF.Attribute Text) where
+    computedBackupTime f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_backup_time = a } :: DbBackupPolicyResource)
+             <$> f _computed_backup_time
+
+instance HasComputedId DbBackupPolicyResource (TF.Attribute Text) where
+    computedId f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_id = a } :: DbBackupPolicyResource)
+             <$> f _computed_id
+
+instance HasComputedInstanceId DbBackupPolicyResource (TF.Attribute Text) where
+    computedInstanceId f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_instance_id = a } :: DbBackupPolicyResource)
+             <$> f _computed_instance_id
+
+instance HasComputedLogBackup DbBackupPolicyResource (TF.Attribute Text) where
+    computedLogBackup f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_log_backup = a } :: DbBackupPolicyResource)
+             <$> f _computed_log_backup
+
+instance HasComputedLogRetentionPeriod DbBackupPolicyResource (TF.Attribute Text) where
+    computedLogRetentionPeriod f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_log_retention_period = a } :: DbBackupPolicyResource)
+             <$> f _computed_log_retention_period
+
+instance HasComputedRetentionPeriod DbBackupPolicyResource (TF.Attribute Text) where
+    computedRetentionPeriod f s@DbBackupPolicyResource{..} =
+        (\a -> s { _computed_retention_period = a } :: DbBackupPolicyResource)
+             <$> f _computed_retention_period
+
+dbBackupPolicyResource :: TF.Resource TF.AliCloud DbBackupPolicyResource
+dbBackupPolicyResource =
+    TF.newResource "alicloud_db_backup_policy" $
+        DbBackupPolicyResource {
+            _backup_period = TF.Nil
+            , _backup_time = TF.Nil
+            , _instance_id = TF.Nil
+            , _log_backup = TF.Nil
+            , _log_retention_period = TF.Nil
+            , _retention_period = TF.Nil
+            , _computed_backup_period = TF.Compute "backup_period"
+            , _computed_backup_time = TF.Compute "backup_time"
+            , _computed_id = TF.Compute "id"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_log_backup = TF.Compute "log_backup"
+            , _computed_log_retention_period = TF.Compute "log_retention_period"
+            , _computed_retention_period = TF.Compute "retention_period"
+            }
+
+{- | The @alicloud_db_connection@ AliCloud resource.
+
+Provides an RDS connection resource to allocate an Internet connection
+string for RDS instance. ~> NOTE: Each RDS instance will allocate a intranet
+connnection string automatically and its prifix is RDS instance ID. To avoid
+unnecessary conflict, please specified a internet connection prefix before
+applying the resource.
+-}
+data DbConnectionResource = DbConnectionResource {
+      _connection_prefix          :: !(TF.Argument Text)
+    {- ^ (Optional) Prefix of an Internet connection string. Default to <instance_id> + '0o'. -}
+    , _instance_id                :: !(TF.Argument Text)
+    {- ^ (Required) The Id of instance that can run database. -}
+    , _port                       :: !(TF.Argument Text)
+    {- ^ (Optional) Internet connection port. Valid value: [3001-3999]. Default to 3306. -}
+    , _computed_connection_prefix :: !(TF.Attribute Text)
+    {- ^ - Prefix of a connection string. -}
+    , _computed_connection_string :: !(TF.Attribute Text)
+    {- ^ - Connection instance string. -}
+    , _computed_id                :: !(TF.Attribute Text)
+    {- ^ - The current instance connection resource ID. Composed of instance ID and connection string with format "<instance_id>:<connection_string>". -}
+    , _computed_ip_address        :: !(TF.Attribute Text)
+    {- ^ - The ip address of connection string. -}
+    , _computed_port              :: !(TF.Attribute Text)
+    {- ^ - Connection instance port. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL DbConnectionResource where
+    toHCL DbConnectionResource{..} = TF.block $ catMaybes
+        [ TF.assign "connection_prefix" <$> TF.argument _connection_prefix
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "port" <$> TF.argument _port
+        ]
+
+instance HasConnectionPrefix DbConnectionResource (TF.Argument Text) where
+    connectionPrefix f s@DbConnectionResource{..} =
+        (\a -> s { _connection_prefix = a } :: DbConnectionResource)
+             <$> f _connection_prefix
+
+instance HasInstanceId DbConnectionResource (TF.Argument Text) where
+    instanceId f s@DbConnectionResource{..} =
+        (\a -> s { _instance_id = a } :: DbConnectionResource)
+             <$> f _instance_id
+
+instance HasPort DbConnectionResource (TF.Argument Text) where
+    port f s@DbConnectionResource{..} =
+        (\a -> s { _port = a } :: DbConnectionResource)
+             <$> f _port
+
+instance HasComputedConnectionPrefix DbConnectionResource (TF.Attribute Text) where
+    computedConnectionPrefix f s@DbConnectionResource{..} =
+        (\a -> s { _computed_connection_prefix = a } :: DbConnectionResource)
+             <$> f _computed_connection_prefix
+
+instance HasComputedConnectionString DbConnectionResource (TF.Attribute Text) where
+    computedConnectionString f s@DbConnectionResource{..} =
+        (\a -> s { _computed_connection_string = a } :: DbConnectionResource)
+             <$> f _computed_connection_string
+
+instance HasComputedId DbConnectionResource (TF.Attribute Text) where
+    computedId f s@DbConnectionResource{..} =
+        (\a -> s { _computed_id = a } :: DbConnectionResource)
+             <$> f _computed_id
+
+instance HasComputedIpAddress DbConnectionResource (TF.Attribute Text) where
+    computedIpAddress f s@DbConnectionResource{..} =
+        (\a -> s { _computed_ip_address = a } :: DbConnectionResource)
+             <$> f _computed_ip_address
+
+instance HasComputedPort DbConnectionResource (TF.Attribute Text) where
+    computedPort f s@DbConnectionResource{..} =
+        (\a -> s { _computed_port = a } :: DbConnectionResource)
+             <$> f _computed_port
+
+dbConnectionResource :: TF.Resource TF.AliCloud DbConnectionResource
+dbConnectionResource =
+    TF.newResource "alicloud_db_connection" $
+        DbConnectionResource {
+            _connection_prefix = TF.Nil
+            , _instance_id = TF.Nil
+            , _port = TF.Nil
+            , _computed_connection_prefix = TF.Compute "connection_prefix"
+            , _computed_connection_string = TF.Compute "connection_string"
+            , _computed_id = TF.Compute "id"
+            , _computed_ip_address = TF.Compute "ip_address"
+            , _computed_port = TF.Compute "port"
+            }
+
+{- | The @alicloud_db_database@ AliCloud resource.
+
+Provides an RDS database resource. A DB database deployed in a DB instance.
+A DB instance can own multiple databases.
+-}
+data DbDatabaseResource = DbDatabaseResource {
+      _character_set          :: !(TF.Argument Text)
+    {- ^ (Required) Character set. The value range is limited to the following: -}
+    , _description            :: !(TF.Argument Text)
+    {- ^ (Optional) Database description. It cannot begin with https://. It must start with a Chinese character or English letter. It can include Chinese and English characters, underlines (_), hyphens (-), and numbers. The length may be 2-256 characters. -}
+    , _instance_id            :: !(TF.Argument Text)
+    {- ^ (Required) The Id of instance that can run database. -}
+    , _name                   :: !(TF.Argument Text)
+    {- ^ (Required) Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters. -}
+    , _computed_character_set :: !(TF.Attribute Text)
+    {- ^ - Character set that database used. -}
+    , _computed_description   :: !(TF.Attribute Text)
+    {- ^ - The database description. -}
+    , _computed_id            :: !(TF.Attribute Text)
+    {- ^ - The current database resource ID. Composed of instance ID and database name with format "<instance_id>: ". -}
+    , _computed_instance_id   :: !(TF.Attribute Text)
+    {- ^ - The Id of DB instance. -}
+    , _computed_name          :: !(TF.Attribute Text)
+    {- ^ - The name of DB database. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL DbDatabaseResource where
+    toHCL DbDatabaseResource{..} = TF.block $ catMaybes
+        [ TF.assign "character_set" <$> TF.argument _character_set
+        , TF.assign "description" <$> TF.argument _description
+        , TF.assign "instance_id" <$> TF.argument _instance_id
+        , TF.assign "name" <$> TF.argument _name
+        ]
+
+instance HasCharacterSet DbDatabaseResource (TF.Argument Text) where
+    characterSet f s@DbDatabaseResource{..} =
+        (\a -> s { _character_set = a } :: DbDatabaseResource)
+             <$> f _character_set
+
+instance HasDescription DbDatabaseResource (TF.Argument Text) where
+    description f s@DbDatabaseResource{..} =
+        (\a -> s { _description = a } :: DbDatabaseResource)
+             <$> f _description
+
+instance HasInstanceId DbDatabaseResource (TF.Argument Text) where
+    instanceId f s@DbDatabaseResource{..} =
+        (\a -> s { _instance_id = a } :: DbDatabaseResource)
+             <$> f _instance_id
+
+instance HasName DbDatabaseResource (TF.Argument Text) where
+    name f s@DbDatabaseResource{..} =
+        (\a -> s { _name = a } :: DbDatabaseResource)
+             <$> f _name
+
+instance HasComputedCharacterSet DbDatabaseResource (TF.Attribute Text) where
+    computedCharacterSet f s@DbDatabaseResource{..} =
+        (\a -> s { _computed_character_set = a } :: DbDatabaseResource)
+             <$> f _computed_character_set
+
+instance HasComputedDescription DbDatabaseResource (TF.Attribute Text) where
+    computedDescription f s@DbDatabaseResource{..} =
+        (\a -> s { _computed_description = a } :: DbDatabaseResource)
+             <$> f _computed_description
+
+instance HasComputedId DbDatabaseResource (TF.Attribute Text) where
+    computedId f s@DbDatabaseResource{..} =
+        (\a -> s { _computed_id = a } :: DbDatabaseResource)
+             <$> f _computed_id
+
+instance HasComputedInstanceId DbDatabaseResource (TF.Attribute Text) where
+    computedInstanceId f s@DbDatabaseResource{..} =
+        (\a -> s { _computed_instance_id = a } :: DbDatabaseResource)
+             <$> f _computed_instance_id
+
+instance HasComputedName DbDatabaseResource (TF.Attribute Text) where
+    computedName f s@DbDatabaseResource{..} =
+        (\a -> s { _computed_name = a } :: DbDatabaseResource)
+             <$> f _computed_name
+
+dbDatabaseResource :: TF.Resource TF.AliCloud DbDatabaseResource
+dbDatabaseResource =
+    TF.newResource "alicloud_db_database" $
+        DbDatabaseResource {
+            _character_set = TF.Nil
+            , _description = TF.Nil
+            , _instance_id = TF.Nil
+            , _name = TF.Nil
+            , _computed_character_set = TF.Compute "character_set"
+            , _computed_description = TF.Compute "description"
+            , _computed_id = TF.Compute "id"
+            , _computed_instance_id = TF.Compute "instance_id"
+            , _computed_name = TF.Compute "name"
+            }
+
 {- | The @alicloud_db_instance@ AliCloud resource.
 
-Provides an RDS instance resource.  A DB instance is an isolated database
-environment in the cloud.  A DB instance can contain multiple user-created
+Provides an RDS instance resource. A DB instance is an isolated database
+environment in the cloud. A DB instance can contain multiple user-created
 databases.
 -}
 data DbInstanceResource = DbInstanceResource {
-      _allocate_public_connection :: !(TF.Argument Text)
-    {- ^ (Optional) If set to true will applies for an Internet connection string of an instance. -}
-    , _backup_retention_period    :: !(TF.Argument Text)
-    {- ^ (Optional) Retention days of the backup (7 to 730 days). The default value is 7 days. -}
-    , _db_instance_class          :: !(TF.Argument Text)
-    {- ^ (Required) Instance type. For details, see <https://intl.aliyun.com/help/doc-detail/26312.htm?spm=a3c0i.o26228en.a3.2.bRUHF3> . -}
-    , _db_instance_net_type       :: !(TF.Argument Text)
-    {- ^ (Optional) Network connection type of an instance. Internet: public network; Intranet: private network -}
-    , _db_instance_storage        :: !(TF.Argument Text)
-    {- ^ (Required) User-defined storage space. Value range: -}
-    , _db_mappings                :: !(TF.Argument Text)
-    {- ^ (Optional) Database mappings to attach to db instance. See <#block-database> below for details. -}
-    , _engine                     :: !(TF.Argument Text)
+      _engine                           :: !(TF.Argument Text)
     {- ^ (Required) Database type. Value options: MySQL, SQLServer, PostgreSQL, and PPAS. -}
-    , _engine_version             :: !(TF.Argument Text)
+    , _engine_version                   :: !(TF.Argument Text)
     {- ^ (Required) Database version. Value options: -}
-    , _instance_charge_type       :: !(TF.Argument Text)
-    {- ^ (Optional) Valid values are @Prepaid@ , @Postpaid@ , The default is @Postpaid@ . -}
-    , _instance_network_type      :: !(TF.Argument Text)
-    {- ^ (Optional) VPC: VPC instance; Classic: classic instance. If no value is specified, a classic instance will be created by default. -}
-    , _master_user_name           :: !(TF.Argument Text)
-    {- ^ (Optional) The master user name for the database instance. Operation account requiring a uniqueness check. It may consist of lower case letters, numbers and underlines, and must start with a letter and have no more than 16 characters. -}
-    , _master_user_password       :: !(TF.Argument Text)
-    {- ^ (Optional) The master password for the database instance. Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters. -}
-    , _multi_az                   :: !(TF.Argument Text)
-    {- ^ (Optional) Specifies if the database instance is a multiple Availability Zone deployment. -}
-    , _period                     :: !(TF.Argument Text)
-    {- ^ (Optional) The time that you have bought the resource, in month. Only valid when instance_charge_type is set as @PrePaid@ . Value range [1, 12]. -}
-    , _preferred_backup_period    :: !(TF.Argument Text)
-    {- ^ (Optional) Backup period. Values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday. -}
-    , _preferred_backup_time      :: !(TF.Argument Text)
-    {- ^ (Optional) Backup time, in the format ofHH:mmZ- HH:mm Z. -}
-    , _security_ips               :: !(TF.Argument Text)
-    {- ^ (Optional) List of IP addresses under the IP address white list array. The list contains up to 1,000 IP addresses, separated by commas. Supported formats include 0.0.0.0/0, 10.23.12.24 (IP), and 10.23.12.24/24 (Classless Inter-Domain Routing (CIDR) mode. /24 represents the length of the prefix in an IP address. The range of the prefix length is [1,32]). -}
-    , _vswitch_id                 :: !(TF.Argument Text)
-    {- ^ (Optional) The virtual switch ID to launch in VPC. If you want to create instances in VPC network, this parameter must be set. -}
-    , _zone_id                    :: !(TF.Argument Text)
-    {- ^ (Optional) Selected zone to create database instance. You cannot set the ZoneId parameter if the MultiAZ parameter is set to true. -}
+    , _instance_charge_type             :: !(TF.Argument Text)
+    {- ^ (Optional) Valid values are @Prepaid@ , @Postpaid@ , Default to @Postpaid@ . -}
+    , _instance_storage                 :: !(TF.Argument Text)
+    {- ^ (Required) User-defined DB instance storage space. Value range: -}
+    , _instance_type                    :: !(TF.Argument Text)
+    {- ^ (Required) DB Instance type. For details, see <https://www.alibabacloud.com/help/doc-detail/26312.htm> . -}
+    , _multi_az                         :: !(TF.Argument Text)
+    {- ^ (Optional) Whether to use multiple availability zone in specified region. It conflict with @zone_id@ . -}
+    , _period                           :: !(TF.Argument Text)
+    {- ^ (Optional) The duration that you will buy DB instance (in month). It is valid when instance_charge_type is @PrePaid@ . Valid values: [1~9], 12, 24, 36. Default to 1. -}
+    , _security_ips                     :: !(TF.Argument Text)
+    {- ^ (Optional) List of IP addresses allowed to access all databases of an instance. The list contains up to 1,000 IP addresses, separated by commas. Supported formats include 0.0.0.0/0, 10.23.12.24 (IP), and 10.23.12.24/24 (Classless Inter-Domain Routing (CIDR) mode. /24 represents the length of the prefix in an IP address. The range of the prefix length is [1,32]). -}
+    , _vswitch_id                       :: !(TF.Argument Text)
+    {- ^ (Optional) The virtual switch ID to launch DB instances in one VPC. -}
+    , _zone_id                          :: !(TF.Argument Text)
+    {- ^ (Optional) The Zone to launch the DB instance. It is ignored and will be computed when set @vswitch_id@ . It conflict with @multi_az@ . -}
+    , _computed_backup_retention_period :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_connection_string       :: !(TF.Attribute Text)
+    {- ^ - RDS database connection string. -}
+    , _computed_connections             :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_db_instance_class       :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0) -}
+    , _computed_db_instance_net_type    :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_db_instance_storage     :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0) -}
+    , _computed_db_mappings             :: !(TF.Attribute Text)
+    {- ^ - - (Deprecated from version 1.5.0). -}
+    , _computed_engine                  :: !(TF.Attribute Text)
+    {- ^ - Database type. -}
+    , _computed_engine_version          :: !(TF.Attribute Text)
+    {- ^ - The database engine version. -}
+    , _computed_id                      :: !(TF.Attribute Text)
+    {- ^ - The RDS instance ID. -}
+    , _computed_instance_charge_type    :: !(TF.Attribute Text)
+    {- ^ - The instance charge type. -}
+    , _computed_instance_network_type   :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_instance_storage        :: !(TF.Attribute Text)
+    {- ^ - The RDS instance storage space. -}
+    , _computed_instance_type           :: !(TF.Attribute Text)
+    {- ^ - The RDS instance type. -}
+    , _computed_master_user_name        :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_period                  :: !(TF.Attribute Text)
+    {- ^ - The DB instance using duration. -}
+    , _computed_port                    :: !(TF.Attribute Text)
+    {- ^ - RDS database connection port. -}
+    , _computed_preferred_backup_period :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_preferred_backup_time   :: !(TF.Attribute Text)
+    {- ^ - (Deprecated from version 1.5.0). -}
+    , _computed_security_ips            :: !(TF.Attribute Text)
+    {- ^ - Security ips of instance whitelist. -}
+    , _computed_vswitch_id              :: !(TF.Attribute Text)
+    {- ^ - If the rds instance created in VPC, then this value is virtual switch ID. -}
+    , _computed_zone_id                 :: !(TF.Attribute Text)
+    {- ^ - The zone ID of the RDS instance. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DbInstanceResource where
     toHCL DbInstanceResource{..} = TF.block $ catMaybes
-        [ TF.assign "allocate_public_connection" <$> TF.argument _allocate_public_connection
-        , TF.assign "backup_retention_period" <$> TF.argument _backup_retention_period
-        , TF.assign "db_instance_class" <$> TF.argument _db_instance_class
-        , TF.assign "db_instance_net_type" <$> TF.argument _db_instance_net_type
-        , TF.assign "db_instance_storage" <$> TF.argument _db_instance_storage
-        , TF.assign "db_mappings" <$> TF.argument _db_mappings
-        , TF.assign "engine" <$> TF.argument _engine
+        [ TF.assign "engine" <$> TF.argument _engine
         , TF.assign "engine_version" <$> TF.argument _engine_version
         , TF.assign "instance_charge_type" <$> TF.argument _instance_charge_type
-        , TF.assign "instance_network_type" <$> TF.argument _instance_network_type
-        , TF.assign "master_user_name" <$> TF.argument _master_user_name
-        , TF.assign "master_user_password" <$> TF.argument _master_user_password
+        , TF.assign "instance_storage" <$> TF.argument _instance_storage
+        , TF.assign "instance_type" <$> TF.argument _instance_type
         , TF.assign "multi_az" <$> TF.argument _multi_az
         , TF.assign "period" <$> TF.argument _period
-        , TF.assign "preferred_backup_period" <$> TF.argument _preferred_backup_period
-        , TF.assign "preferred_backup_time" <$> TF.argument _preferred_backup_time
         , TF.assign "security_ips" <$> TF.argument _security_ips
         , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         , TF.assign "zone_id" <$> TF.argument _zone_id
         ]
 
-$(TF.makeSchemaLenses
-    ''DbInstanceResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasEngine DbInstanceResource (TF.Argument Text) where
+    engine f s@DbInstanceResource{..} =
+        (\a -> s { _engine = a } :: DbInstanceResource)
+             <$> f _engine
+
+instance HasEngineVersion DbInstanceResource (TF.Argument Text) where
+    engineVersion f s@DbInstanceResource{..} =
+        (\a -> s { _engine_version = a } :: DbInstanceResource)
+             <$> f _engine_version
+
+instance HasInstanceChargeType DbInstanceResource (TF.Argument Text) where
+    instanceChargeType f s@DbInstanceResource{..} =
+        (\a -> s { _instance_charge_type = a } :: DbInstanceResource)
+             <$> f _instance_charge_type
+
+instance HasInstanceStorage DbInstanceResource (TF.Argument Text) where
+    instanceStorage f s@DbInstanceResource{..} =
+        (\a -> s { _instance_storage = a } :: DbInstanceResource)
+             <$> f _instance_storage
+
+instance HasInstanceType DbInstanceResource (TF.Argument Text) where
+    instanceType f s@DbInstanceResource{..} =
+        (\a -> s { _instance_type = a } :: DbInstanceResource)
+             <$> f _instance_type
+
+instance HasMultiAz DbInstanceResource (TF.Argument Text) where
+    multiAz f s@DbInstanceResource{..} =
+        (\a -> s { _multi_az = a } :: DbInstanceResource)
+             <$> f _multi_az
+
+instance HasPeriod DbInstanceResource (TF.Argument Text) where
+    period f s@DbInstanceResource{..} =
+        (\a -> s { _period = a } :: DbInstanceResource)
+             <$> f _period
+
+instance HasSecurityIps DbInstanceResource (TF.Argument Text) where
+    securityIps f s@DbInstanceResource{..} =
+        (\a -> s { _security_ips = a } :: DbInstanceResource)
+             <$> f _security_ips
+
+instance HasVswitchId DbInstanceResource (TF.Argument Text) where
+    vswitchId f s@DbInstanceResource{..} =
+        (\a -> s { _vswitch_id = a } :: DbInstanceResource)
+             <$> f _vswitch_id
+
+instance HasZoneId DbInstanceResource (TF.Argument Text) where
+    zoneId f s@DbInstanceResource{..} =
+        (\a -> s { _zone_id = a } :: DbInstanceResource)
+             <$> f _zone_id
+
+instance HasComputedBackupRetentionPeriod DbInstanceResource (TF.Attribute Text) where
+    computedBackupRetentionPeriod f s@DbInstanceResource{..} =
+        (\a -> s { _computed_backup_retention_period = a } :: DbInstanceResource)
+             <$> f _computed_backup_retention_period
+
+instance HasComputedConnectionString DbInstanceResource (TF.Attribute Text) where
+    computedConnectionString f s@DbInstanceResource{..} =
+        (\a -> s { _computed_connection_string = a } :: DbInstanceResource)
+             <$> f _computed_connection_string
+
+instance HasComputedConnections DbInstanceResource (TF.Attribute Text) where
+    computedConnections f s@DbInstanceResource{..} =
+        (\a -> s { _computed_connections = a } :: DbInstanceResource)
+             <$> f _computed_connections
+
+instance HasComputedDbInstanceClass DbInstanceResource (TF.Attribute Text) where
+    computedDbInstanceClass f s@DbInstanceResource{..} =
+        (\a -> s { _computed_db_instance_class = a } :: DbInstanceResource)
+             <$> f _computed_db_instance_class
+
+instance HasComputedDbInstanceNetType DbInstanceResource (TF.Attribute Text) where
+    computedDbInstanceNetType f s@DbInstanceResource{..} =
+        (\a -> s { _computed_db_instance_net_type = a } :: DbInstanceResource)
+             <$> f _computed_db_instance_net_type
+
+instance HasComputedDbInstanceStorage DbInstanceResource (TF.Attribute Text) where
+    computedDbInstanceStorage f s@DbInstanceResource{..} =
+        (\a -> s { _computed_db_instance_storage = a } :: DbInstanceResource)
+             <$> f _computed_db_instance_storage
+
+instance HasComputedDbMappings DbInstanceResource (TF.Attribute Text) where
+    computedDbMappings f s@DbInstanceResource{..} =
+        (\a -> s { _computed_db_mappings = a } :: DbInstanceResource)
+             <$> f _computed_db_mappings
+
+instance HasComputedEngine DbInstanceResource (TF.Attribute Text) where
+    computedEngine f s@DbInstanceResource{..} =
+        (\a -> s { _computed_engine = a } :: DbInstanceResource)
+             <$> f _computed_engine
+
+instance HasComputedEngineVersion DbInstanceResource (TF.Attribute Text) where
+    computedEngineVersion f s@DbInstanceResource{..} =
+        (\a -> s { _computed_engine_version = a } :: DbInstanceResource)
+             <$> f _computed_engine_version
+
+instance HasComputedId DbInstanceResource (TF.Attribute Text) where
+    computedId f s@DbInstanceResource{..} =
+        (\a -> s { _computed_id = a } :: DbInstanceResource)
+             <$> f _computed_id
+
+instance HasComputedInstanceChargeType DbInstanceResource (TF.Attribute Text) where
+    computedInstanceChargeType f s@DbInstanceResource{..} =
+        (\a -> s { _computed_instance_charge_type = a } :: DbInstanceResource)
+             <$> f _computed_instance_charge_type
+
+instance HasComputedInstanceNetworkType DbInstanceResource (TF.Attribute Text) where
+    computedInstanceNetworkType f s@DbInstanceResource{..} =
+        (\a -> s { _computed_instance_network_type = a } :: DbInstanceResource)
+             <$> f _computed_instance_network_type
+
+instance HasComputedInstanceStorage DbInstanceResource (TF.Attribute Text) where
+    computedInstanceStorage f s@DbInstanceResource{..} =
+        (\a -> s { _computed_instance_storage = a } :: DbInstanceResource)
+             <$> f _computed_instance_storage
+
+instance HasComputedInstanceType DbInstanceResource (TF.Attribute Text) where
+    computedInstanceType f s@DbInstanceResource{..} =
+        (\a -> s { _computed_instance_type = a } :: DbInstanceResource)
+             <$> f _computed_instance_type
+
+instance HasComputedMasterUserName DbInstanceResource (TF.Attribute Text) where
+    computedMasterUserName f s@DbInstanceResource{..} =
+        (\a -> s { _computed_master_user_name = a } :: DbInstanceResource)
+             <$> f _computed_master_user_name
+
+instance HasComputedPeriod DbInstanceResource (TF.Attribute Text) where
+    computedPeriod f s@DbInstanceResource{..} =
+        (\a -> s { _computed_period = a } :: DbInstanceResource)
+             <$> f _computed_period
+
+instance HasComputedPort DbInstanceResource (TF.Attribute Text) where
+    computedPort f s@DbInstanceResource{..} =
+        (\a -> s { _computed_port = a } :: DbInstanceResource)
+             <$> f _computed_port
+
+instance HasComputedPreferredBackupPeriod DbInstanceResource (TF.Attribute Text) where
+    computedPreferredBackupPeriod f s@DbInstanceResource{..} =
+        (\a -> s { _computed_preferred_backup_period = a } :: DbInstanceResource)
+             <$> f _computed_preferred_backup_period
+
+instance HasComputedPreferredBackupTime DbInstanceResource (TF.Attribute Text) where
+    computedPreferredBackupTime f s@DbInstanceResource{..} =
+        (\a -> s { _computed_preferred_backup_time = a } :: DbInstanceResource)
+             <$> f _computed_preferred_backup_time
+
+instance HasComputedSecurityIps DbInstanceResource (TF.Attribute Text) where
+    computedSecurityIps f s@DbInstanceResource{..} =
+        (\a -> s { _computed_security_ips = a } :: DbInstanceResource)
+             <$> f _computed_security_ips
+
+instance HasComputedVswitchId DbInstanceResource (TF.Attribute Text) where
+    computedVswitchId f s@DbInstanceResource{..} =
+        (\a -> s { _computed_vswitch_id = a } :: DbInstanceResource)
+             <$> f _computed_vswitch_id
+
+instance HasComputedZoneId DbInstanceResource (TF.Attribute Text) where
+    computedZoneId f s@DbInstanceResource{..} =
+        (\a -> s { _computed_zone_id = a } :: DbInstanceResource)
+             <$> f _computed_zone_id
 
 dbInstanceResource :: TF.Resource TF.AliCloud DbInstanceResource
 dbInstanceResource =
     TF.newResource "alicloud_db_instance" $
         DbInstanceResource {
-            _allocate_public_connection = TF.Nil
-            , _backup_retention_period = TF.Nil
-            , _db_instance_class = TF.Nil
-            , _db_instance_net_type = TF.Nil
-            , _db_instance_storage = TF.Nil
-            , _db_mappings = TF.Nil
-            , _engine = TF.Nil
+            _engine = TF.Nil
             , _engine_version = TF.Nil
             , _instance_charge_type = TF.Nil
-            , _instance_network_type = TF.Nil
-            , _master_user_name = TF.Nil
-            , _master_user_password = TF.Nil
+            , _instance_storage = TF.Nil
+            , _instance_type = TF.Nil
             , _multi_az = TF.Nil
             , _period = TF.Nil
-            , _preferred_backup_period = TF.Nil
-            , _preferred_backup_time = TF.Nil
             , _security_ips = TF.Nil
             , _vswitch_id = TF.Nil
             , _zone_id = TF.Nil
+            , _computed_backup_retention_period = TF.Compute "backup_retention_period"
+            , _computed_connection_string = TF.Compute "connection_string"
+            , _computed_connections = TF.Compute "connections"
+            , _computed_db_instance_class = TF.Compute "db_instance_class"
+            , _computed_db_instance_net_type = TF.Compute "db_instance_net_type"
+            , _computed_db_instance_storage = TF.Compute "db_instance_storage"
+            , _computed_db_mappings = TF.Compute "db_mappings"
+            , _computed_engine = TF.Compute "engine"
+            , _computed_engine_version = TF.Compute "engine_version"
+            , _computed_id = TF.Compute "id"
+            , _computed_instance_charge_type = TF.Compute "instance_charge_type"
+            , _computed_instance_network_type = TF.Compute "instance_network_type"
+            , _computed_instance_storage = TF.Compute "instance_storage"
+            , _computed_instance_type = TF.Compute "instance_type"
+            , _computed_master_user_name = TF.Compute "master_user_name"
+            , _computed_period = TF.Compute "period"
+            , _computed_port = TF.Compute "port"
+            , _computed_preferred_backup_period = TF.Compute "preferred_backup_period"
+            , _computed_preferred_backup_time = TF.Compute "preferred_backup_time"
+            , _computed_security_ips = TF.Compute "security_ips"
+            , _computed_vswitch_id = TF.Compute "vswitch_id"
+            , _computed_zone_id = TF.Compute "zone_id"
             }
 
 {- | The @alicloud_disk_attachment@ AliCloud resource.
@@ -282,10 +1545,30 @@ instance TF.ToHCL DiskAttachmentResource where
         , TF.assign "instance_id" <$> TF.argument _instance_id
         ]
 
-$(TF.makeSchemaLenses
-    ''DiskAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDiskId DiskAttachmentResource (TF.Argument Text) where
+    diskId f s@DiskAttachmentResource{..} =
+        (\a -> s { _disk_id = a } :: DiskAttachmentResource)
+             <$> f _disk_id
+
+instance HasInstanceId DiskAttachmentResource (TF.Argument Text) where
+    instanceId f s@DiskAttachmentResource{..} =
+        (\a -> s { _instance_id = a } :: DiskAttachmentResource)
+             <$> f _instance_id
+
+instance HasComputedDeviceName DiskAttachmentResource (TF.Attribute Text) where
+    computedDeviceName f s@DiskAttachmentResource{..} =
+        (\a -> s { _computed_device_name = a } :: DiskAttachmentResource)
+             <$> f _computed_device_name
+
+instance HasComputedDiskId DiskAttachmentResource (TF.Attribute Text) where
+    computedDiskId f s@DiskAttachmentResource{..} =
+        (\a -> s { _computed_disk_id = a } :: DiskAttachmentResource)
+             <$> f _computed_disk_id
+
+instance HasComputedInstanceId DiskAttachmentResource (TF.Attribute Text) where
+    computedInstanceId f s@DiskAttachmentResource{..} =
+        (\a -> s { _computed_instance_id = a } :: DiskAttachmentResource)
+             <$> f _computed_instance_id
 
 diskAttachmentResource :: TF.Resource TF.AliCloud DiskAttachmentResource
 diskAttachmentResource =
@@ -351,10 +1634,85 @@ instance TF.ToHCL DiskResource where
         , TF.assign "tags" <$> TF.argument _tags
         ]
 
-$(TF.makeSchemaLenses
-    ''DiskResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAvailabilityZone DiskResource (TF.Argument Text) where
+    availabilityZone f s@DiskResource{..} =
+        (\a -> s { _availability_zone = a } :: DiskResource)
+             <$> f _availability_zone
+
+instance HasCategory DiskResource (TF.Argument Text) where
+    category f s@DiskResource{..} =
+        (\a -> s { _category = a } :: DiskResource)
+             <$> f _category
+
+instance HasDescription DiskResource (TF.Argument Text) where
+    description f s@DiskResource{..} =
+        (\a -> s { _description = a } :: DiskResource)
+             <$> f _description
+
+instance HasName DiskResource (TF.Argument Text) where
+    name f s@DiskResource{..} =
+        (\a -> s { _name = a } :: DiskResource)
+             <$> f _name
+
+instance HasSize DiskResource (TF.Argument Text) where
+    size f s@DiskResource{..} =
+        (\a -> s { _size = a } :: DiskResource)
+             <$> f _size
+
+instance HasSnapshotId DiskResource (TF.Argument Text) where
+    snapshotId f s@DiskResource{..} =
+        (\a -> s { _snapshot_id = a } :: DiskResource)
+             <$> f _snapshot_id
+
+instance HasTags DiskResource (TF.Argument Text) where
+    tags f s@DiskResource{..} =
+        (\a -> s { _tags = a } :: DiskResource)
+             <$> f _tags
+
+instance HasComputedAvailabilityZone DiskResource (TF.Attribute Text) where
+    computedAvailabilityZone f s@DiskResource{..} =
+        (\a -> s { _computed_availability_zone = a } :: DiskResource)
+             <$> f _computed_availability_zone
+
+instance HasComputedCategory DiskResource (TF.Attribute Text) where
+    computedCategory f s@DiskResource{..} =
+        (\a -> s { _computed_category = a } :: DiskResource)
+             <$> f _computed_category
+
+instance HasComputedDescription DiskResource (TF.Attribute Text) where
+    computedDescription f s@DiskResource{..} =
+        (\a -> s { _computed_description = a } :: DiskResource)
+             <$> f _computed_description
+
+instance HasComputedId DiskResource (TF.Attribute Text) where
+    computedId f s@DiskResource{..} =
+        (\a -> s { _computed_id = a } :: DiskResource)
+             <$> f _computed_id
+
+instance HasComputedName DiskResource (TF.Attribute Text) where
+    computedName f s@DiskResource{..} =
+        (\a -> s { _computed_name = a } :: DiskResource)
+             <$> f _computed_name
+
+instance HasComputedSize DiskResource (TF.Attribute Text) where
+    computedSize f s@DiskResource{..} =
+        (\a -> s { _computed_size = a } :: DiskResource)
+             <$> f _computed_size
+
+instance HasComputedSnapshotId DiskResource (TF.Attribute Text) where
+    computedSnapshotId f s@DiskResource{..} =
+        (\a -> s { _computed_snapshot_id = a } :: DiskResource)
+             <$> f _computed_snapshot_id
+
+instance HasComputedStatus DiskResource (TF.Attribute Text) where
+    computedStatus f s@DiskResource{..} =
+        (\a -> s { _computed_status = a } :: DiskResource)
+             <$> f _computed_status
+
+instance HasComputedTags DiskResource (TF.Attribute Text) where
+    computedTags f s@DiskResource{..} =
+        (\a -> s { _computed_tags = a } :: DiskResource)
+             <$> f _computed_tags
 
 diskResource :: TF.Resource TF.AliCloud DiskResource
 diskResource =
@@ -396,10 +1754,20 @@ instance TF.ToHCL DnsGroupResource where
         [ TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''DnsGroupResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasName DnsGroupResource (TF.Argument Text) where
+    name f s@DnsGroupResource{..} =
+        (\a -> s { _name = a } :: DnsGroupResource)
+             <$> f _name
+
+instance HasComputedId DnsGroupResource (TF.Attribute Text) where
+    computedId f s@DnsGroupResource{..} =
+        (\a -> s { _computed_id = a } :: DnsGroupResource)
+             <$> f _computed_id
+
+instance HasComputedName DnsGroupResource (TF.Attribute Text) where
+    computedName f s@DnsGroupResource{..} =
+        (\a -> s { _computed_name = a } :: DnsGroupResource)
+             <$> f _computed_name
 
 dnsGroupResource :: TF.Resource TF.AliCloud DnsGroupResource
 dnsGroupResource =
@@ -462,10 +1830,90 @@ instance TF.ToHCL DnsResource where
         , TF.assign "value" <$> TF.argument _value
         ]
 
-$(TF.makeSchemaLenses
-    ''DnsResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasHostRecord DnsResource (TF.Argument Text) where
+    hostRecord f s@DnsResource{..} =
+        (\a -> s { _host_record = a } :: DnsResource)
+             <$> f _host_record
+
+instance HasName DnsResource (TF.Argument Text) where
+    name f s@DnsResource{..} =
+        (\a -> s { _name = a } :: DnsResource)
+             <$> f _name
+
+instance HasPriority DnsResource (TF.Argument Text) where
+    priority f s@DnsResource{..} =
+        (\a -> s { _priority = a } :: DnsResource)
+             <$> f _priority
+
+instance HasRouting DnsResource (TF.Argument Text) where
+    routing f s@DnsResource{..} =
+        (\a -> s { _routing = a } :: DnsResource)
+             <$> f _routing
+
+instance HasTtl DnsResource (TF.Argument Text) where
+    ttl f s@DnsResource{..} =
+        (\a -> s { _ttl = a } :: DnsResource)
+             <$> f _ttl
+
+instance HasType' DnsResource (TF.Argument Text) where
+    type' f s@DnsResource{..} =
+        (\a -> s { _type' = a } :: DnsResource)
+             <$> f _type'
+
+instance HasValue DnsResource (TF.Argument Text) where
+    value f s@DnsResource{..} =
+        (\a -> s { _value = a } :: DnsResource)
+             <$> f _value
+
+instance HasComputedLocked DnsResource (TF.Attribute Text) where
+    computedLocked f s@DnsResource{..} =
+        (\a -> s { _computed_Locked = a } :: DnsResource)
+             <$> f _computed_Locked
+
+instance HasComputedHostRecord DnsResource (TF.Attribute Text) where
+    computedHostRecord f s@DnsResource{..} =
+        (\a -> s { _computed_host_record = a } :: DnsResource)
+             <$> f _computed_host_record
+
+instance HasComputedId DnsResource (TF.Attribute Text) where
+    computedId f s@DnsResource{..} =
+        (\a -> s { _computed_id = a } :: DnsResource)
+             <$> f _computed_id
+
+instance HasComputedName DnsResource (TF.Attribute Text) where
+    computedName f s@DnsResource{..} =
+        (\a -> s { _computed_name = a } :: DnsResource)
+             <$> f _computed_name
+
+instance HasComputedPriority DnsResource (TF.Attribute Text) where
+    computedPriority f s@DnsResource{..} =
+        (\a -> s { _computed_priority = a } :: DnsResource)
+             <$> f _computed_priority
+
+instance HasComputedRouting DnsResource (TF.Attribute Text) where
+    computedRouting f s@DnsResource{..} =
+        (\a -> s { _computed_routing = a } :: DnsResource)
+             <$> f _computed_routing
+
+instance HasComputedStatus DnsResource (TF.Attribute Text) where
+    computedStatus f s@DnsResource{..} =
+        (\a -> s { _computed_status = a } :: DnsResource)
+             <$> f _computed_status
+
+instance HasComputedTtl DnsResource (TF.Attribute Text) where
+    computedTtl f s@DnsResource{..} =
+        (\a -> s { _computed_ttl = a } :: DnsResource)
+             <$> f _computed_ttl
+
+instance HasComputedType' DnsResource (TF.Attribute Text) where
+    computedType' f s@DnsResource{..} =
+        (\a -> s { _computed_type' = a } :: DnsResource)
+             <$> f _computed_type'
+
+instance HasComputedValue DnsResource (TF.Attribute Text) where
+    computedValue f s@DnsResource{..} =
+        (\a -> s { _computed_value = a } :: DnsResource)
+             <$> f _computed_value
 
 dnsResource :: TF.Resource TF.AliCloud DnsResource
 dnsResource =
@@ -515,10 +1963,25 @@ instance TF.ToHCL EipAssociationResource where
         , TF.assign "instance_id" <$> TF.argument _instance_id
         ]
 
-$(TF.makeSchemaLenses
-    ''EipAssociationResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAllocationId EipAssociationResource (TF.Argument Text) where
+    allocationId f s@EipAssociationResource{..} =
+        (\a -> s { _allocation_id = a } :: EipAssociationResource)
+             <$> f _allocation_id
+
+instance HasInstanceId EipAssociationResource (TF.Argument Text) where
+    instanceId f s@EipAssociationResource{..} =
+        (\a -> s { _instance_id = a } :: EipAssociationResource)
+             <$> f _instance_id
+
+instance HasComputedAllocationId EipAssociationResource (TF.Attribute Text) where
+    computedAllocationId f s@EipAssociationResource{..} =
+        (\a -> s { _computed_allocation_id = a } :: EipAssociationResource)
+             <$> f _computed_allocation_id
+
+instance HasComputedInstanceId EipAssociationResource (TF.Attribute Text) where
+    computedInstanceId f s@EipAssociationResource{..} =
+        (\a -> s { _computed_instance_id = a } :: EipAssociationResource)
+             <$> f _computed_instance_id
 
 eipAssociationResource :: TF.Resource TF.AliCloud EipAssociationResource
 eipAssociationResource =
@@ -557,10 +2020,40 @@ instance TF.ToHCL EipResource where
         , TF.assign "internet_charge_type" <$> TF.argument _internet_charge_type
         ]
 
-$(TF.makeSchemaLenses
-    ''EipResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasBandwidth EipResource (TF.Argument Text) where
+    bandwidth f s@EipResource{..} =
+        (\a -> s { _bandwidth = a } :: EipResource)
+             <$> f _bandwidth
+
+instance HasInternetChargeType EipResource (TF.Argument Text) where
+    internetChargeType f s@EipResource{..} =
+        (\a -> s { _internet_charge_type = a } :: EipResource)
+             <$> f _internet_charge_type
+
+instance HasComputedBandwidth EipResource (TF.Attribute Text) where
+    computedBandwidth f s@EipResource{..} =
+        (\a -> s { _computed_bandwidth = a } :: EipResource)
+             <$> f _computed_bandwidth
+
+instance HasComputedId EipResource (TF.Attribute Text) where
+    computedId f s@EipResource{..} =
+        (\a -> s { _computed_id = a } :: EipResource)
+             <$> f _computed_id
+
+instance HasComputedInternetChargeType EipResource (TF.Attribute Text) where
+    computedInternetChargeType f s@EipResource{..} =
+        (\a -> s { _computed_internet_charge_type = a } :: EipResource)
+             <$> f _computed_internet_charge_type
+
+instance HasComputedIpAddress EipResource (TF.Attribute Text) where
+    computedIpAddress f s@EipResource{..} =
+        (\a -> s { _computed_ip_address = a } :: EipResource)
+             <$> f _computed_ip_address
+
+instance HasComputedStatus EipResource (TF.Attribute Text) where
+    computedStatus f s@EipResource{..} =
+        (\a -> s { _computed_status = a } :: EipResource)
+             <$> f _computed_status
 
 eipResource :: TF.Resource TF.AliCloud EipResource
 eipResource =
@@ -650,10 +2143,105 @@ instance TF.ToHCL EssScalingConfigurationResource where
         , TF.assign "user_data" <$> TF.argument _user_data
         ]
 
-$(TF.makeSchemaLenses
-    ''EssScalingConfigurationResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasActive EssScalingConfigurationResource (TF.Argument Text) where
+    active f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _active = a } :: EssScalingConfigurationResource)
+             <$> f _active
+
+instance HasDataDisk EssScalingConfigurationResource (TF.Argument Text) where
+    dataDisk f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _data_disk = a } :: EssScalingConfigurationResource)
+             <$> f _data_disk
+
+instance HasEnable EssScalingConfigurationResource (TF.Argument Text) where
+    enable f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _enable = a } :: EssScalingConfigurationResource)
+             <$> f _enable
+
+instance HasForceDelete EssScalingConfigurationResource (TF.Argument Text) where
+    forceDelete f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _force_delete = a } :: EssScalingConfigurationResource)
+             <$> f _force_delete
+
+instance HasImageId EssScalingConfigurationResource (TF.Argument Text) where
+    imageId f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _image_id = a } :: EssScalingConfigurationResource)
+             <$> f _image_id
+
+instance HasInstanceIds EssScalingConfigurationResource (TF.Argument Text) where
+    instanceIds f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _instance_ids = a } :: EssScalingConfigurationResource)
+             <$> f _instance_ids
+
+instance HasInstanceType EssScalingConfigurationResource (TF.Argument Text) where
+    instanceType f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _instance_type = a } :: EssScalingConfigurationResource)
+             <$> f _instance_type
+
+instance HasInternetChargeType EssScalingConfigurationResource (TF.Argument Text) where
+    internetChargeType f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _internet_charge_type = a } :: EssScalingConfigurationResource)
+             <$> f _internet_charge_type
+
+instance HasInternetMaxBandwidthIn EssScalingConfigurationResource (TF.Argument Text) where
+    internetMaxBandwidthIn f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _internet_max_bandwidth_in = a } :: EssScalingConfigurationResource)
+             <$> f _internet_max_bandwidth_in
+
+instance HasInternetMaxBandwidthOut EssScalingConfigurationResource (TF.Argument Text) where
+    internetMaxBandwidthOut f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _internet_max_bandwidth_out = a } :: EssScalingConfigurationResource)
+             <$> f _internet_max_bandwidth_out
+
+instance HasIsOutdated EssScalingConfigurationResource (TF.Argument Text) where
+    isOutdated f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _is_outdated = a } :: EssScalingConfigurationResource)
+             <$> f _is_outdated
+
+instance HasKeyName EssScalingConfigurationResource (TF.Argument Text) where
+    keyName f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _key_name = a } :: EssScalingConfigurationResource)
+             <$> f _key_name
+
+instance HasRoleName EssScalingConfigurationResource (TF.Argument Text) where
+    roleName f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _role_name = a } :: EssScalingConfigurationResource)
+             <$> f _role_name
+
+instance HasScalingConfigurationName EssScalingConfigurationResource (TF.Argument Text) where
+    scalingConfigurationName f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _scaling_configuration_name = a } :: EssScalingConfigurationResource)
+             <$> f _scaling_configuration_name
+
+instance HasScalingGroupId EssScalingConfigurationResource (TF.Argument Text) where
+    scalingGroupId f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _scaling_group_id = a } :: EssScalingConfigurationResource)
+             <$> f _scaling_group_id
+
+instance HasSecurityGroupId EssScalingConfigurationResource (TF.Argument Text) where
+    securityGroupId f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _security_group_id = a } :: EssScalingConfigurationResource)
+             <$> f _security_group_id
+
+instance HasSubstitute EssScalingConfigurationResource (TF.Argument Text) where
+    substitute f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _substitute = a } :: EssScalingConfigurationResource)
+             <$> f _substitute
+
+instance HasSystemDiskCategory EssScalingConfigurationResource (TF.Argument Text) where
+    systemDiskCategory f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _system_disk_category = a } :: EssScalingConfigurationResource)
+             <$> f _system_disk_category
+
+instance HasTags EssScalingConfigurationResource (TF.Argument Text) where
+    tags f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _tags = a } :: EssScalingConfigurationResource)
+             <$> f _tags
+
+instance HasUserData EssScalingConfigurationResource (TF.Argument Text) where
+    userData f s@EssScalingConfigurationResource{..} =
+        (\a -> s { _user_data = a } :: EssScalingConfigurationResource)
+             <$> f _user_data
 
 essScalingConfigurationResource :: TF.Resource TF.AliCloud EssScalingConfigurationResource
 essScalingConfigurationResource =
@@ -734,10 +2322,85 @@ instance TF.ToHCL EssScalingGroupResource where
         , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
-$(TF.makeSchemaLenses
-    ''EssScalingGroupResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDbInstanceIds EssScalingGroupResource (TF.Argument Text) where
+    dbInstanceIds f s@EssScalingGroupResource{..} =
+        (\a -> s { _db_instance_ids = a } :: EssScalingGroupResource)
+             <$> f _db_instance_ids
+
+instance HasDefaultCooldown EssScalingGroupResource (TF.Argument Text) where
+    defaultCooldown f s@EssScalingGroupResource{..} =
+        (\a -> s { _default_cooldown = a } :: EssScalingGroupResource)
+             <$> f _default_cooldown
+
+instance HasLoadbalancerIds EssScalingGroupResource (TF.Argument Text) where
+    loadbalancerIds f s@EssScalingGroupResource{..} =
+        (\a -> s { _loadbalancer_ids = a } :: EssScalingGroupResource)
+             <$> f _loadbalancer_ids
+
+instance HasMaxSize EssScalingGroupResource (TF.Argument Text) where
+    maxSize f s@EssScalingGroupResource{..} =
+        (\a -> s { _max_size = a } :: EssScalingGroupResource)
+             <$> f _max_size
+
+instance HasMinSize EssScalingGroupResource (TF.Argument Text) where
+    minSize f s@EssScalingGroupResource{..} =
+        (\a -> s { _min_size = a } :: EssScalingGroupResource)
+             <$> f _min_size
+
+instance HasRemovalPolicies EssScalingGroupResource (TF.Argument Text) where
+    removalPolicies f s@EssScalingGroupResource{..} =
+        (\a -> s { _removal_policies = a } :: EssScalingGroupResource)
+             <$> f _removal_policies
+
+instance HasScalingGroupName EssScalingGroupResource (TF.Argument Text) where
+    scalingGroupName f s@EssScalingGroupResource{..} =
+        (\a -> s { _scaling_group_name = a } :: EssScalingGroupResource)
+             <$> f _scaling_group_name
+
+instance HasVswitchId EssScalingGroupResource (TF.Argument Text) where
+    vswitchId f s@EssScalingGroupResource{..} =
+        (\a -> s { _vswitch_id = a } :: EssScalingGroupResource)
+             <$> f _vswitch_id
+
+instance HasComputedDbInstanceIds EssScalingGroupResource (TF.Attribute Text) where
+    computedDbInstanceIds f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_db_instance_ids = a } :: EssScalingGroupResource)
+             <$> f _computed_db_instance_ids
+
+instance HasComputedDefaultCooldown EssScalingGroupResource (TF.Attribute Text) where
+    computedDefaultCooldown f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_default_cooldown = a } :: EssScalingGroupResource)
+             <$> f _computed_default_cooldown
+
+instance HasComputedId EssScalingGroupResource (TF.Attribute Text) where
+    computedId f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_id = a } :: EssScalingGroupResource)
+             <$> f _computed_id
+
+instance HasComputedLoadbalancerIds EssScalingGroupResource (TF.Attribute Text) where
+    computedLoadbalancerIds f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_loadbalancer_ids = a } :: EssScalingGroupResource)
+             <$> f _computed_loadbalancer_ids
+
+instance HasComputedMaxSize EssScalingGroupResource (TF.Attribute Text) where
+    computedMaxSize f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_max_size = a } :: EssScalingGroupResource)
+             <$> f _computed_max_size
+
+instance HasComputedMinSize EssScalingGroupResource (TF.Attribute Text) where
+    computedMinSize f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_min_size = a } :: EssScalingGroupResource)
+             <$> f _computed_min_size
+
+instance HasComputedRemovalPolicies EssScalingGroupResource (TF.Attribute Text) where
+    computedRemovalPolicies f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_removal_policies = a } :: EssScalingGroupResource)
+             <$> f _computed_removal_policies
+
+instance HasComputedScalingGroupName EssScalingGroupResource (TF.Attribute Text) where
+    computedScalingGroupName f s@EssScalingGroupResource{..} =
+        (\a -> s { _computed_scaling_group_name = a } :: EssScalingGroupResource)
+             <$> f _computed_scaling_group_name
 
 essScalingGroupResource :: TF.Resource TF.AliCloud EssScalingGroupResource
 essScalingGroupResource =
@@ -801,10 +2464,65 @@ instance TF.ToHCL EssScalingRuleResource where
         , TF.assign "scaling_rule_name" <$> TF.argument _scaling_rule_name
         ]
 
-$(TF.makeSchemaLenses
-    ''EssScalingRuleResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAdjustmentType EssScalingRuleResource (TF.Argument Text) where
+    adjustmentType f s@EssScalingRuleResource{..} =
+        (\a -> s { _adjustment_type = a } :: EssScalingRuleResource)
+             <$> f _adjustment_type
+
+instance HasAdjustmentValue EssScalingRuleResource (TF.Argument Text) where
+    adjustmentValue f s@EssScalingRuleResource{..} =
+        (\a -> s { _adjustment_value = a } :: EssScalingRuleResource)
+             <$> f _adjustment_value
+
+instance HasCooldown EssScalingRuleResource (TF.Argument Text) where
+    cooldown f s@EssScalingRuleResource{..} =
+        (\a -> s { _cooldown = a } :: EssScalingRuleResource)
+             <$> f _cooldown
+
+instance HasScalingGroupId EssScalingRuleResource (TF.Argument Text) where
+    scalingGroupId f s@EssScalingRuleResource{..} =
+        (\a -> s { _scaling_group_id = a } :: EssScalingRuleResource)
+             <$> f _scaling_group_id
+
+instance HasScalingRuleName EssScalingRuleResource (TF.Argument Text) where
+    scalingRuleName f s@EssScalingRuleResource{..} =
+        (\a -> s { _scaling_rule_name = a } :: EssScalingRuleResource)
+             <$> f _scaling_rule_name
+
+instance HasComputedAdjustmentType EssScalingRuleResource (TF.Attribute Text) where
+    computedAdjustmentType f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_adjustment_type = a } :: EssScalingRuleResource)
+             <$> f _computed_adjustment_type
+
+instance HasComputedAdjustmentValue EssScalingRuleResource (TF.Attribute Text) where
+    computedAdjustmentValue f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_adjustment_value = a } :: EssScalingRuleResource)
+             <$> f _computed_adjustment_value
+
+instance HasComputedAri EssScalingRuleResource (TF.Attribute Text) where
+    computedAri f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_ari = a } :: EssScalingRuleResource)
+             <$> f _computed_ari
+
+instance HasComputedCooldown EssScalingRuleResource (TF.Attribute Text) where
+    computedCooldown f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_cooldown = a } :: EssScalingRuleResource)
+             <$> f _computed_cooldown
+
+instance HasComputedId EssScalingRuleResource (TF.Attribute Text) where
+    computedId f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_id = a } :: EssScalingRuleResource)
+             <$> f _computed_id
+
+instance HasComputedScalingGroupId EssScalingRuleResource (TF.Attribute Text) where
+    computedScalingGroupId f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_scaling_group_id = a } :: EssScalingRuleResource)
+             <$> f _computed_scaling_group_id
+
+instance HasComputedScalingRuleName EssScalingRuleResource (TF.Attribute Text) where
+    computedScalingRuleName f s@EssScalingRuleResource{..} =
+        (\a -> s { _computed_scaling_rule_name = a } :: EssScalingRuleResource)
+             <$> f _computed_scaling_rule_name
 
 essScalingRuleResource :: TF.Resource TF.AliCloud EssScalingRuleResource
 essScalingRuleResource =
@@ -874,10 +2592,80 @@ instance TF.ToHCL EssScheduleResource where
         , TF.assign "task_enabled" <$> TF.argument _task_enabled
         ]
 
-$(TF.makeSchemaLenses
-    ''EssScheduleResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDescription EssScheduleResource (TF.Argument Text) where
+    description f s@EssScheduleResource{..} =
+        (\a -> s { _description = a } :: EssScheduleResource)
+             <$> f _description
+
+instance HasLaunchExpirationTime EssScheduleResource (TF.Argument Text) where
+    launchExpirationTime f s@EssScheduleResource{..} =
+        (\a -> s { _launch_expiration_time = a } :: EssScheduleResource)
+             <$> f _launch_expiration_time
+
+instance HasLaunchTime EssScheduleResource (TF.Argument Text) where
+    launchTime f s@EssScheduleResource{..} =
+        (\a -> s { _launch_time = a } :: EssScheduleResource)
+             <$> f _launch_time
+
+instance HasRecurrenceEndTime EssScheduleResource (TF.Argument Text) where
+    recurrenceEndTime f s@EssScheduleResource{..} =
+        (\a -> s { _recurrence_end_time = a } :: EssScheduleResource)
+             <$> f _recurrence_end_time
+
+instance HasRecurrenceType EssScheduleResource (TF.Argument Text) where
+    recurrenceType f s@EssScheduleResource{..} =
+        (\a -> s { _recurrence_type = a } :: EssScheduleResource)
+             <$> f _recurrence_type
+
+instance HasRecurrenceValue EssScheduleResource (TF.Argument Text) where
+    recurrenceValue f s@EssScheduleResource{..} =
+        (\a -> s { _recurrence_value = a } :: EssScheduleResource)
+             <$> f _recurrence_value
+
+instance HasScheduledAction EssScheduleResource (TF.Argument Text) where
+    scheduledAction f s@EssScheduleResource{..} =
+        (\a -> s { _scheduled_action = a } :: EssScheduleResource)
+             <$> f _scheduled_action
+
+instance HasScheduledTaskName EssScheduleResource (TF.Argument Text) where
+    scheduledTaskName f s@EssScheduleResource{..} =
+        (\a -> s { _scheduled_task_name = a } :: EssScheduleResource)
+             <$> f _scheduled_task_name
+
+instance HasTaskEnabled EssScheduleResource (TF.Argument Text) where
+    taskEnabled f s@EssScheduleResource{..} =
+        (\a -> s { _task_enabled = a } :: EssScheduleResource)
+             <$> f _task_enabled
+
+instance HasComputedDescription EssScheduleResource (TF.Attribute Text) where
+    computedDescription f s@EssScheduleResource{..} =
+        (\a -> s { _computed_description = a } :: EssScheduleResource)
+             <$> f _computed_description
+
+instance HasComputedId EssScheduleResource (TF.Attribute Text) where
+    computedId f s@EssScheduleResource{..} =
+        (\a -> s { _computed_id = a } :: EssScheduleResource)
+             <$> f _computed_id
+
+instance HasComputedLaunchTime EssScheduleResource (TF.Attribute Text) where
+    computedLaunchTime f s@EssScheduleResource{..} =
+        (\a -> s { _computed_launch_time = a } :: EssScheduleResource)
+             <$> f _computed_launch_time
+
+instance HasComputedScheduledAction EssScheduleResource (TF.Attribute Text) where
+    computedScheduledAction f s@EssScheduleResource{..} =
+        (\a -> s { _computed_scheduled_action = a } :: EssScheduleResource)
+             <$> f _computed_scheduled_action
+
+instance HasComputedScheduledTaskName EssScheduleResource (TF.Attribute Text) where
+    computedScheduledTaskName f s@EssScheduleResource{..} =
+        (\a -> s { _computed_scheduled_task_name = a } :: EssScheduleResource)
+             <$> f _computed_scheduled_task_name
+
+instance HasComputedTaskEnabled EssScheduleResource (TF.Attribute Text) where
+    computedTaskEnabled f s@EssScheduleResource{..} =
+        (\a -> s { _computed_task_enabled = a } :: EssScheduleResource)
+             <$> f _computed_task_enabled
 
 essScheduleResource :: TF.Resource TF.AliCloud EssScheduleResource
 essScheduleResource =
@@ -929,10 +2717,35 @@ instance TF.ToHCL ForwardResource where
         , TF.assign "ip_protocol" <$> TF.argument _ip_protocol
         ]
 
-$(TF.makeSchemaLenses
-    ''ForwardResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasExternalIp ForwardResource (TF.Argument Text) where
+    externalIp f s@ForwardResource{..} =
+        (\a -> s { _external_ip = a } :: ForwardResource)
+             <$> f _external_ip
+
+instance HasExternalPort ForwardResource (TF.Argument Text) where
+    externalPort f s@ForwardResource{..} =
+        (\a -> s { _external_port = a } :: ForwardResource)
+             <$> f _external_port
+
+instance HasForwardTableId ForwardResource (TF.Argument Text) where
+    forwardTableId f s@ForwardResource{..} =
+        (\a -> s { _forward_table_id = a } :: ForwardResource)
+             <$> f _forward_table_id
+
+instance HasInternalIp ForwardResource (TF.Argument Text) where
+    internalIp f s@ForwardResource{..} =
+        (\a -> s { _internal_ip = a } :: ForwardResource)
+             <$> f _internal_ip
+
+instance HasInternalPort ForwardResource (TF.Argument Text) where
+    internalPort f s@ForwardResource{..} =
+        (\a -> s { _internal_port = a } :: ForwardResource)
+             <$> f _internal_port
+
+instance HasIpProtocol ForwardResource (TF.Argument Text) where
+    ipProtocol f s@ForwardResource{..} =
+        (\a -> s { _ip_protocol = a } :: ForwardResource)
+             <$> f _ip_protocol
 
 forwardResource :: TF.Resource TF.AliCloud ForwardResource
 forwardResource =
@@ -956,19 +2769,25 @@ creating an instance, SecurityGroupId and VSwitchId must belong to one VPC.
 availability zones, such as @ecs.t1.*@ , @ecs.s2.*@ , @ecs.n1.*@ and so on.
 If you want to keep them, you should set @is_outdated@ to true. For more
 about the upgraded instance type, refer to @alicloud_instance_types@
-datasource.
+datasource. ~> NOTE: At present, 'PrePaid' instance cannot be deleted and
+must wait it to be outdated and release it automatically. ~> NOTE: The
+resource supports Spot Instance from version 1.5.4.
 -}
 data InstanceResource = InstanceResource {
       _allocate_public_ip         :: !(TF.Argument Text)
     {- ^ (Optional) Associate a public ip address with an instance in a VPC or Classic. Boolean value, Default is false. -}
     , _availability_zone          :: !(TF.Argument Text)
-    {- ^ (Optional) The Zone to start the instance in. -}
+    {- ^ (Optional) The Zone to start the instance in. It is ignored and will be computed when set @vswitch_id@ . -}
     , _description                :: !(TF.Argument Text)
     {- ^ (Optional) Description of the instance, This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Default value is null. -}
+    , _dry_run                    :: !(TF.Argument Text)
+    {- ^ (Optional) Whether to pre-detection. When it is true, only pre-detection and not actually modify the payment type operation. It is valid when @instance_charge_type@ is 'PrePaid'. Default to false. -}
     , _host_name                  :: !(TF.Argument Text)
     {- ^ (Optional) Host name of the ECS, which is a string of at least two characters. “hostname” cannot start or end with “.” or “-“. In addition, two or more consecutive “.” or “-“ symbols are not allowed. On Windows, the host name can contain a maximum of 15 characters, which can be a combination of uppercase/lowercase letters, numerals, and “-“. The host name cannot contain dots (“.”) or contain only numeric characters. On other OSs such as Linux, the host name can contain a maximum of 30 characters, which can be segments separated by dots (“.”), where each segment can contain uppercase/lowercase letters, numerals, or “_“. -}
     , _image_id                   :: !(TF.Argument Text)
     {- ^ (Required) The Image to use for the instance. ECS instance's image can be replaced via changing 'image_id'. -}
+    , _include_data_disks         :: !(TF.Argument Text)
+    {- ^ (Optional) Whether to change instance disks charge type when changing instance charge type. -}
     , _instance_charge_type       :: !(TF.Argument Text)
     {- ^ (Optional) Valid values are @PrePaid@ , @PostPaid@ , The default is @PostPaid@ . -}
     , _instance_name              :: !(TF.Argument Text)
@@ -988,11 +2807,19 @@ data InstanceResource = InstanceResource {
     , _password                   :: !(TF.Argument Text)
     {- ^ (Optional) Password to an instance is a string of 8 to 30 characters. It must contain uppercase/lowercase letters and numerals, but cannot contain special symbols. In order to take effect new password, the instance will be restarted after modifying the password. -}
     , _period                     :: !(TF.Argument Text)
-    {- ^ (Optional) The time that you have bought the resource, in month. Only valid when instance_charge_type is set as @PrePaid@ . Value range [1, 12]. -}
+    {- ^ (Optional) The duration that you will buy the resource, in month. It is valid when instance_charge_type is set as @PrePaid@ . Default to 1. Valid values: -}
+    , _period_unit                :: !(TF.Argument Text)
+    {- ^ (Optional) The duration unit that you will buy the resource. It is valid when @instance_charge_type@ is 'PrePaid'. Valid value: ["Week", "Month"]. Default to "Month". -}
+    , _private_ip                 :: !(TF.Argument Text)
+    {- ^ (Optional) Instance private IP address can be specified when you creating new instance. It is valid when @vswitch_id@ is specified. -}
     , _role_name                  :: !(TF.Argument Text)
     {- ^ (Optional, Force new resource) Instance RAM role name. The name is provided and maintained by RAM. You can use @alicloud_ram_role@ to create a new one. -}
     , _security_groups            :: !(TF.Argument Text)
     {- ^ (Required)  A list of security group ids to associate with. -}
+    , _spot_price_limit           :: !(TF.Argument Text)
+    {- ^ (Optional, Float, Force New) The hourly price threshold of a instance, and it takes effect only when parameter 'spot_strategy' is 'SpotWithPriceLimit'. Three decimals is allowed at most. -}
+    , _spot_strategy              :: !(TF.Argument Text)
+    {- ^ (Optional, Force New) The spot strategy of a Pay-As-You-Go instance, and it takes effect only when parameter @instance_charge_type@ is 'PostPaid'. Value range: -}
     , _system_disk_category       :: !(TF.Argument Text)
     {- ^ (Optional) Valid values are @cloud_efficiency@ , @cloud_ssd@ and @cloud@ . @cloud@ only is used to some none I/O optimized instance. Default to @cloud_efficiency@ . -}
     , _system_disk_size           :: !(TF.Argument Text)
@@ -1007,6 +2834,8 @@ data InstanceResource = InstanceResource {
     {- ^ - The Zone to start the instance in. -}
     , _computed_description       :: !(TF.Attribute Text)
     {- ^ - The instance description. -}
+    , _computed_dry_run           :: !(TF.Attribute Text)
+    {- ^ - Whether to pre-detection. -}
     , _computed_host_name         :: !(TF.Attribute Text)
     {- ^ - The instance host name. -}
     , _computed_id                :: !(TF.Attribute Text)
@@ -1019,12 +2848,20 @@ data InstanceResource = InstanceResource {
     {- ^ - The instance type. -}
     , _computed_key_name          :: !(TF.Attribute Text)
     {- ^ - The name of key pair that has been bound in ECS instance. -}
+    , _computed_period            :: !(TF.Attribute Text)
+    {- ^ - The ECS instance using duration. -}
+    , _computed_period_unit       :: !(TF.Attribute Text)
+    {- ^ - The ECS instance using duration unit. -}
     , _computed_private_ip        :: !(TF.Attribute Text)
     {- ^ - The instance private ip. -}
     , _computed_public_ip         :: !(TF.Attribute Text)
     {- ^ - The instance public ip. -}
     , _computed_role_name         :: !(TF.Attribute Text)
     {- ^ - The name of RAM role that has been bound in ECS instance. -}
+    , _computed_spot_price_limit  :: !(TF.Attribute Text)
+    {- ^ - The hourly price threshold of a instance. -}
+    , _computed_spot_strategy     :: !(TF.Attribute Text)
+    {- ^ - The spot strategy of a Pay-As-You-Go instance -}
     , _computed_status            :: !(TF.Attribute Text)
     {- ^ - The instance status. -}
     , _computed_tags              :: !(TF.Attribute Text)
@@ -1040,8 +2877,10 @@ instance TF.ToHCL InstanceResource where
         [ TF.assign "allocate_public_ip" <$> TF.argument _allocate_public_ip
         , TF.assign "availability_zone" <$> TF.argument _availability_zone
         , TF.assign "description" <$> TF.argument _description
+        , TF.assign "dry_run" <$> TF.argument _dry_run
         , TF.assign "host_name" <$> TF.argument _host_name
         , TF.assign "image_id" <$> TF.argument _image_id
+        , TF.assign "include_data_disks" <$> TF.argument _include_data_disks
         , TF.assign "instance_charge_type" <$> TF.argument _instance_charge_type
         , TF.assign "instance_name" <$> TF.argument _instance_name
         , TF.assign "instance_type" <$> TF.argument _instance_type
@@ -1052,8 +2891,12 @@ instance TF.ToHCL InstanceResource where
         , TF.assign "key_name" <$> TF.argument _key_name
         , TF.assign "password" <$> TF.argument _password
         , TF.assign "period" <$> TF.argument _period
+        , TF.assign "period_unit" <$> TF.argument _period_unit
+        , TF.assign "private_ip" <$> TF.argument _private_ip
         , TF.assign "role_name" <$> TF.argument _role_name
         , TF.assign "security_groups" <$> TF.argument _security_groups
+        , TF.assign "spot_price_limit" <$> TF.argument _spot_price_limit
+        , TF.assign "spot_strategy" <$> TF.argument _spot_strategy
         , TF.assign "system_disk_category" <$> TF.argument _system_disk_category
         , TF.assign "system_disk_size" <$> TF.argument _system_disk_size
         , TF.assign "tags" <$> TF.argument _tags
@@ -1061,10 +2904,245 @@ instance TF.ToHCL InstanceResource where
         , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
-$(TF.makeSchemaLenses
-    ''InstanceResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAllocatePublicIp InstanceResource (TF.Argument Text) where
+    allocatePublicIp f s@InstanceResource{..} =
+        (\a -> s { _allocate_public_ip = a } :: InstanceResource)
+             <$> f _allocate_public_ip
+
+instance HasAvailabilityZone InstanceResource (TF.Argument Text) where
+    availabilityZone f s@InstanceResource{..} =
+        (\a -> s { _availability_zone = a } :: InstanceResource)
+             <$> f _availability_zone
+
+instance HasDescription InstanceResource (TF.Argument Text) where
+    description f s@InstanceResource{..} =
+        (\a -> s { _description = a } :: InstanceResource)
+             <$> f _description
+
+instance HasDryRun InstanceResource (TF.Argument Text) where
+    dryRun f s@InstanceResource{..} =
+        (\a -> s { _dry_run = a } :: InstanceResource)
+             <$> f _dry_run
+
+instance HasHostName InstanceResource (TF.Argument Text) where
+    hostName f s@InstanceResource{..} =
+        (\a -> s { _host_name = a } :: InstanceResource)
+             <$> f _host_name
+
+instance HasImageId InstanceResource (TF.Argument Text) where
+    imageId f s@InstanceResource{..} =
+        (\a -> s { _image_id = a } :: InstanceResource)
+             <$> f _image_id
+
+instance HasIncludeDataDisks InstanceResource (TF.Argument Text) where
+    includeDataDisks f s@InstanceResource{..} =
+        (\a -> s { _include_data_disks = a } :: InstanceResource)
+             <$> f _include_data_disks
+
+instance HasInstanceChargeType InstanceResource (TF.Argument Text) where
+    instanceChargeType f s@InstanceResource{..} =
+        (\a -> s { _instance_charge_type = a } :: InstanceResource)
+             <$> f _instance_charge_type
+
+instance HasInstanceName InstanceResource (TF.Argument Text) where
+    instanceName f s@InstanceResource{..} =
+        (\a -> s { _instance_name = a } :: InstanceResource)
+             <$> f _instance_name
+
+instance HasInstanceType InstanceResource (TF.Argument Text) where
+    instanceType f s@InstanceResource{..} =
+        (\a -> s { _instance_type = a } :: InstanceResource)
+             <$> f _instance_type
+
+instance HasInternetChargeType InstanceResource (TF.Argument Text) where
+    internetChargeType f s@InstanceResource{..} =
+        (\a -> s { _internet_charge_type = a } :: InstanceResource)
+             <$> f _internet_charge_type
+
+instance HasInternetMaxBandwidthIn InstanceResource (TF.Argument Text) where
+    internetMaxBandwidthIn f s@InstanceResource{..} =
+        (\a -> s { _internet_max_bandwidth_in = a } :: InstanceResource)
+             <$> f _internet_max_bandwidth_in
+
+instance HasInternetMaxBandwidthOut InstanceResource (TF.Argument Text) where
+    internetMaxBandwidthOut f s@InstanceResource{..} =
+        (\a -> s { _internet_max_bandwidth_out = a } :: InstanceResource)
+             <$> f _internet_max_bandwidth_out
+
+instance HasIsOutdated InstanceResource (TF.Argument Text) where
+    isOutdated f s@InstanceResource{..} =
+        (\a -> s { _is_outdated = a } :: InstanceResource)
+             <$> f _is_outdated
+
+instance HasKeyName InstanceResource (TF.Argument Text) where
+    keyName f s@InstanceResource{..} =
+        (\a -> s { _key_name = a } :: InstanceResource)
+             <$> f _key_name
+
+instance HasPassword InstanceResource (TF.Argument Text) where
+    password f s@InstanceResource{..} =
+        (\a -> s { _password = a } :: InstanceResource)
+             <$> f _password
+
+instance HasPeriod InstanceResource (TF.Argument Text) where
+    period f s@InstanceResource{..} =
+        (\a -> s { _period = a } :: InstanceResource)
+             <$> f _period
+
+instance HasPeriodUnit InstanceResource (TF.Argument Text) where
+    periodUnit f s@InstanceResource{..} =
+        (\a -> s { _period_unit = a } :: InstanceResource)
+             <$> f _period_unit
+
+instance HasPrivateIp InstanceResource (TF.Argument Text) where
+    privateIp f s@InstanceResource{..} =
+        (\a -> s { _private_ip = a } :: InstanceResource)
+             <$> f _private_ip
+
+instance HasRoleName InstanceResource (TF.Argument Text) where
+    roleName f s@InstanceResource{..} =
+        (\a -> s { _role_name = a } :: InstanceResource)
+             <$> f _role_name
+
+instance HasSecurityGroups InstanceResource (TF.Argument Text) where
+    securityGroups f s@InstanceResource{..} =
+        (\a -> s { _security_groups = a } :: InstanceResource)
+             <$> f _security_groups
+
+instance HasSpotPriceLimit InstanceResource (TF.Argument Text) where
+    spotPriceLimit f s@InstanceResource{..} =
+        (\a -> s { _spot_price_limit = a } :: InstanceResource)
+             <$> f _spot_price_limit
+
+instance HasSpotStrategy InstanceResource (TF.Argument Text) where
+    spotStrategy f s@InstanceResource{..} =
+        (\a -> s { _spot_strategy = a } :: InstanceResource)
+             <$> f _spot_strategy
+
+instance HasSystemDiskCategory InstanceResource (TF.Argument Text) where
+    systemDiskCategory f s@InstanceResource{..} =
+        (\a -> s { _system_disk_category = a } :: InstanceResource)
+             <$> f _system_disk_category
+
+instance HasSystemDiskSize InstanceResource (TF.Argument Text) where
+    systemDiskSize f s@InstanceResource{..} =
+        (\a -> s { _system_disk_size = a } :: InstanceResource)
+             <$> f _system_disk_size
+
+instance HasTags InstanceResource (TF.Argument Text) where
+    tags f s@InstanceResource{..} =
+        (\a -> s { _tags = a } :: InstanceResource)
+             <$> f _tags
+
+instance HasUserData InstanceResource (TF.Argument Text) where
+    userData f s@InstanceResource{..} =
+        (\a -> s { _user_data = a } :: InstanceResource)
+             <$> f _user_data
+
+instance HasVswitchId InstanceResource (TF.Argument Text) where
+    vswitchId f s@InstanceResource{..} =
+        (\a -> s { _vswitch_id = a } :: InstanceResource)
+             <$> f _vswitch_id
+
+instance HasComputedAvailabilityZone InstanceResource (TF.Attribute Text) where
+    computedAvailabilityZone f s@InstanceResource{..} =
+        (\a -> s { _computed_availability_zone = a } :: InstanceResource)
+             <$> f _computed_availability_zone
+
+instance HasComputedDescription InstanceResource (TF.Attribute Text) where
+    computedDescription f s@InstanceResource{..} =
+        (\a -> s { _computed_description = a } :: InstanceResource)
+             <$> f _computed_description
+
+instance HasComputedDryRun InstanceResource (TF.Attribute Text) where
+    computedDryRun f s@InstanceResource{..} =
+        (\a -> s { _computed_dry_run = a } :: InstanceResource)
+             <$> f _computed_dry_run
+
+instance HasComputedHostName InstanceResource (TF.Attribute Text) where
+    computedHostName f s@InstanceResource{..} =
+        (\a -> s { _computed_host_name = a } :: InstanceResource)
+             <$> f _computed_host_name
+
+instance HasComputedId InstanceResource (TF.Attribute Text) where
+    computedId f s@InstanceResource{..} =
+        (\a -> s { _computed_id = a } :: InstanceResource)
+             <$> f _computed_id
+
+instance HasComputedImageId InstanceResource (TF.Attribute Text) where
+    computedImageId f s@InstanceResource{..} =
+        (\a -> s { _computed_image_id = a } :: InstanceResource)
+             <$> f _computed_image_id
+
+instance HasComputedInstanceName InstanceResource (TF.Attribute Text) where
+    computedInstanceName f s@InstanceResource{..} =
+        (\a -> s { _computed_instance_name = a } :: InstanceResource)
+             <$> f _computed_instance_name
+
+instance HasComputedInstanceType InstanceResource (TF.Attribute Text) where
+    computedInstanceType f s@InstanceResource{..} =
+        (\a -> s { _computed_instance_type = a } :: InstanceResource)
+             <$> f _computed_instance_type
+
+instance HasComputedKeyName InstanceResource (TF.Attribute Text) where
+    computedKeyName f s@InstanceResource{..} =
+        (\a -> s { _computed_key_name = a } :: InstanceResource)
+             <$> f _computed_key_name
+
+instance HasComputedPeriod InstanceResource (TF.Attribute Text) where
+    computedPeriod f s@InstanceResource{..} =
+        (\a -> s { _computed_period = a } :: InstanceResource)
+             <$> f _computed_period
+
+instance HasComputedPeriodUnit InstanceResource (TF.Attribute Text) where
+    computedPeriodUnit f s@InstanceResource{..} =
+        (\a -> s { _computed_period_unit = a } :: InstanceResource)
+             <$> f _computed_period_unit
+
+instance HasComputedPrivateIp InstanceResource (TF.Attribute Text) where
+    computedPrivateIp f s@InstanceResource{..} =
+        (\a -> s { _computed_private_ip = a } :: InstanceResource)
+             <$> f _computed_private_ip
+
+instance HasComputedPublicIp InstanceResource (TF.Attribute Text) where
+    computedPublicIp f s@InstanceResource{..} =
+        (\a -> s { _computed_public_ip = a } :: InstanceResource)
+             <$> f _computed_public_ip
+
+instance HasComputedRoleName InstanceResource (TF.Attribute Text) where
+    computedRoleName f s@InstanceResource{..} =
+        (\a -> s { _computed_role_name = a } :: InstanceResource)
+             <$> f _computed_role_name
+
+instance HasComputedSpotPriceLimit InstanceResource (TF.Attribute Text) where
+    computedSpotPriceLimit f s@InstanceResource{..} =
+        (\a -> s { _computed_spot_price_limit = a } :: InstanceResource)
+             <$> f _computed_spot_price_limit
+
+instance HasComputedSpotStrategy InstanceResource (TF.Attribute Text) where
+    computedSpotStrategy f s@InstanceResource{..} =
+        (\a -> s { _computed_spot_strategy = a } :: InstanceResource)
+             <$> f _computed_spot_strategy
+
+instance HasComputedStatus InstanceResource (TF.Attribute Text) where
+    computedStatus f s@InstanceResource{..} =
+        (\a -> s { _computed_status = a } :: InstanceResource)
+             <$> f _computed_status
+
+instance HasComputedTags InstanceResource (TF.Attribute Text) where
+    computedTags f s@InstanceResource{..} =
+        (\a -> s { _computed_tags = a } :: InstanceResource)
+             <$> f _computed_tags
+
+instance HasComputedUserData InstanceResource (TF.Attribute Text) where
+    computedUserData f s@InstanceResource{..} =
+        (\a -> s { _computed_user_data = a } :: InstanceResource)
+             <$> f _computed_user_data
+
+instance HasComputedVswitchId InstanceResource (TF.Attribute Text) where
+    computedVswitchId f s@InstanceResource{..} =
+        (\a -> s { _computed_vswitch_id = a } :: InstanceResource)
+             <$> f _computed_vswitch_id
 
 instanceResource :: TF.Resource TF.AliCloud InstanceResource
 instanceResource =
@@ -1073,8 +3151,10 @@ instanceResource =
             _allocate_public_ip = TF.Nil
             , _availability_zone = TF.Nil
             , _description = TF.Nil
+            , _dry_run = TF.Nil
             , _host_name = TF.Nil
             , _image_id = TF.Nil
+            , _include_data_disks = TF.Nil
             , _instance_charge_type = TF.Nil
             , _instance_name = TF.Nil
             , _instance_type = TF.Nil
@@ -1085,8 +3165,12 @@ instanceResource =
             , _key_name = TF.Nil
             , _password = TF.Nil
             , _period = TF.Nil
+            , _period_unit = TF.Nil
+            , _private_ip = TF.Nil
             , _role_name = TF.Nil
             , _security_groups = TF.Nil
+            , _spot_price_limit = TF.Nil
+            , _spot_strategy = TF.Nil
             , _system_disk_category = TF.Nil
             , _system_disk_size = TF.Nil
             , _tags = TF.Nil
@@ -1094,15 +3178,20 @@ instanceResource =
             , _vswitch_id = TF.Nil
             , _computed_availability_zone = TF.Compute "availability_zone"
             , _computed_description = TF.Compute "description"
+            , _computed_dry_run = TF.Compute "dry_run"
             , _computed_host_name = TF.Compute "host_name"
             , _computed_id = TF.Compute "id"
             , _computed_image_id = TF.Compute "image_id"
             , _computed_instance_name = TF.Compute "instance_name"
             , _computed_instance_type = TF.Compute "instance_type"
             , _computed_key_name = TF.Compute "key_name"
+            , _computed_period = TF.Compute "period"
+            , _computed_period_unit = TF.Compute "period_unit"
             , _computed_private_ip = TF.Compute "private_ip"
             , _computed_public_ip = TF.Compute "public_ip"
             , _computed_role_name = TF.Compute "role_name"
+            , _computed_spot_price_limit = TF.Compute "spot_price_limit"
+            , _computed_spot_strategy = TF.Compute "spot_strategy"
             , _computed_status = TF.Compute "status"
             , _computed_tags = TF.Compute "tags"
             , _computed_user_data = TF.Compute "user_data"
@@ -1131,10 +3220,25 @@ instance TF.ToHCL KeyPairAttachmentResource where
         , TF.assign "key_name" <$> TF.argument _key_name
         ]
 
-$(TF.makeSchemaLenses
-    ''KeyPairAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasInstanceIds KeyPairAttachmentResource (TF.Argument Text) where
+    instanceIds f s@KeyPairAttachmentResource{..} =
+        (\a -> s { _instance_ids = a } :: KeyPairAttachmentResource)
+             <$> f _instance_ids
+
+instance HasKeyName KeyPairAttachmentResource (TF.Argument Text) where
+    keyName f s@KeyPairAttachmentResource{..} =
+        (\a -> s { _key_name = a } :: KeyPairAttachmentResource)
+             <$> f _key_name
+
+instance HasComputedInstanceIds KeyPairAttachmentResource (TF.Attribute Text) where
+    computedInstanceIds f s@KeyPairAttachmentResource{..} =
+        (\a -> s { _computed_instance_ids = a } :: KeyPairAttachmentResource)
+             <$> f _computed_instance_ids
+
+instance HasComputedKeyName KeyPairAttachmentResource (TF.Attribute Text) where
+    computedKeyName f s@KeyPairAttachmentResource{..} =
+        (\a -> s { _computed_key_name = a } :: KeyPairAttachmentResource)
+             <$> f _computed_key_name
 
 keyPairAttachmentResource :: TF.Resource TF.AliCloud KeyPairAttachmentResource
 keyPairAttachmentResource =
@@ -1173,10 +3277,35 @@ instance TF.ToHCL KeyPairResource where
         , TF.assign "public_key" <$> TF.argument _public_key
         ]
 
-$(TF.makeSchemaLenses
-    ''KeyPairResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasKeyFile KeyPairResource (TF.Argument Text) where
+    keyFile f s@KeyPairResource{..} =
+        (\a -> s { _key_file = a } :: KeyPairResource)
+             <$> f _key_file
+
+instance HasKeyName KeyPairResource (TF.Argument Text) where
+    keyName f s@KeyPairResource{..} =
+        (\a -> s { _key_name = a } :: KeyPairResource)
+             <$> f _key_name
+
+instance HasKeyNamePrefix KeyPairResource (TF.Argument Text) where
+    keyNamePrefix f s@KeyPairResource{..} =
+        (\a -> s { _key_name_prefix = a } :: KeyPairResource)
+             <$> f _key_name_prefix
+
+instance HasPublicKey KeyPairResource (TF.Argument Text) where
+    publicKey f s@KeyPairResource{..} =
+        (\a -> s { _public_key = a } :: KeyPairResource)
+             <$> f _public_key
+
+instance HasComputedFingerprint KeyPairResource (TF.Attribute Text) where
+    computedFingerprint f s@KeyPairResource{..} =
+        (\a -> s { _computed_fingerprint = a } :: KeyPairResource)
+             <$> f _computed_fingerprint
+
+instance HasComputedKeyName KeyPairResource (TF.Attribute Text) where
+    computedKeyName f s@KeyPairResource{..} =
+        (\a -> s { _computed_key_name = a } :: KeyPairResource)
+             <$> f _computed_key_name
 
 keyPairResource :: TF.Resource TF.AliCloud KeyPairResource
 keyPairResource =
@@ -1217,10 +3346,30 @@ instance TF.ToHCL NatGatewayResource where
         , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
-$(TF.makeSchemaLenses
-    ''NatGatewayResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasBandwidthPackages NatGatewayResource (TF.Argument Text) where
+    bandwidthPackages f s@NatGatewayResource{..} =
+        (\a -> s { _bandwidth_packages = a } :: NatGatewayResource)
+             <$> f _bandwidth_packages
+
+instance HasDescription NatGatewayResource (TF.Argument Text) where
+    description f s@NatGatewayResource{..} =
+        (\a -> s { _description = a } :: NatGatewayResource)
+             <$> f _description
+
+instance HasName NatGatewayResource (TF.Argument Text) where
+    name f s@NatGatewayResource{..} =
+        (\a -> s { _name = a } :: NatGatewayResource)
+             <$> f _name
+
+instance HasSpec NatGatewayResource (TF.Argument Text) where
+    spec f s@NatGatewayResource{..} =
+        (\a -> s { _spec = a } :: NatGatewayResource)
+             <$> f _spec
+
+instance HasVpcId NatGatewayResource (TF.Argument Text) where
+    vpcId f s@NatGatewayResource{..} =
+        (\a -> s { _vpc_id = a } :: NatGatewayResource)
+             <$> f _vpc_id
 
 natGatewayResource :: TF.Resource TF.AliCloud NatGatewayResource
 natGatewayResource =
@@ -1286,10 +3435,80 @@ instance TF.ToHCL OssBucketObjectResource where
         , TF.assign "source" <$> TF.argument _source
         ]
 
-$(TF.makeSchemaLenses
-    ''OssBucketObjectResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAcl OssBucketObjectResource (TF.Argument Text) where
+    acl f s@OssBucketObjectResource{..} =
+        (\a -> s { _acl = a } :: OssBucketObjectResource)
+             <$> f _acl
+
+instance HasBucket OssBucketObjectResource (TF.Argument Text) where
+    bucket f s@OssBucketObjectResource{..} =
+        (\a -> s { _bucket = a } :: OssBucketObjectResource)
+             <$> f _bucket
+
+instance HasCacheControl OssBucketObjectResource (TF.Argument Text) where
+    cacheControl f s@OssBucketObjectResource{..} =
+        (\a -> s { _cache_control = a } :: OssBucketObjectResource)
+             <$> f _cache_control
+
+instance HasContent OssBucketObjectResource (TF.Argument Text) where
+    content f s@OssBucketObjectResource{..} =
+        (\a -> s { _content = a } :: OssBucketObjectResource)
+             <$> f _content
+
+instance HasContentDisposition OssBucketObjectResource (TF.Argument Text) where
+    contentDisposition f s@OssBucketObjectResource{..} =
+        (\a -> s { _content_disposition = a } :: OssBucketObjectResource)
+             <$> f _content_disposition
+
+instance HasContentEncoding OssBucketObjectResource (TF.Argument Text) where
+    contentEncoding f s@OssBucketObjectResource{..} =
+        (\a -> s { _content_encoding = a } :: OssBucketObjectResource)
+             <$> f _content_encoding
+
+instance HasContentMd5 OssBucketObjectResource (TF.Argument Text) where
+    contentMd5 f s@OssBucketObjectResource{..} =
+        (\a -> s { _content_md5 = a } :: OssBucketObjectResource)
+             <$> f _content_md5
+
+instance HasContentType OssBucketObjectResource (TF.Argument Text) where
+    contentType f s@OssBucketObjectResource{..} =
+        (\a -> s { _content_type = a } :: OssBucketObjectResource)
+             <$> f _content_type
+
+instance HasExpires OssBucketObjectResource (TF.Argument Text) where
+    expires f s@OssBucketObjectResource{..} =
+        (\a -> s { _expires = a } :: OssBucketObjectResource)
+             <$> f _expires
+
+instance HasKey OssBucketObjectResource (TF.Argument Text) where
+    key f s@OssBucketObjectResource{..} =
+        (\a -> s { _key = a } :: OssBucketObjectResource)
+             <$> f _key
+
+instance HasServerSideEncryption OssBucketObjectResource (TF.Argument Text) where
+    serverSideEncryption f s@OssBucketObjectResource{..} =
+        (\a -> s { _server_side_encryption = a } :: OssBucketObjectResource)
+             <$> f _server_side_encryption
+
+instance HasSource OssBucketObjectResource (TF.Argument Text) where
+    source f s@OssBucketObjectResource{..} =
+        (\a -> s { _source = a } :: OssBucketObjectResource)
+             <$> f _source
+
+instance HasComputedContentLength OssBucketObjectResource (TF.Attribute Text) where
+    computedContentLength f s@OssBucketObjectResource{..} =
+        (\a -> s { _computed_content_length = a } :: OssBucketObjectResource)
+             <$> f _computed_content_length
+
+instance HasComputedEtag OssBucketObjectResource (TF.Attribute Text) where
+    computedEtag f s@OssBucketObjectResource{..} =
+        (\a -> s { _computed_etag = a } :: OssBucketObjectResource)
+             <$> f _computed_etag
+
+instance HasComputedId OssBucketObjectResource (TF.Attribute Text) where
+    computedId f s@OssBucketObjectResource{..} =
+        (\a -> s { _computed_id = a } :: OssBucketObjectResource)
+             <$> f _computed_id
 
 ossBucketObjectResource :: TF.Resource TF.AliCloud OssBucketObjectResource
 ossBucketObjectResource =
@@ -1349,10 +3568,45 @@ instance TF.ToHCL OssBucketResource where
         , TF.assign "website" <$> TF.argument _website
         ]
 
-$(TF.makeSchemaLenses
-    ''OssBucketResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAcl OssBucketResource (TF.Argument Text) where
+    acl f s@OssBucketResource{..} =
+        (\a -> s { _acl = a } :: OssBucketResource)
+             <$> f _acl
+
+instance HasBucket OssBucketResource (TF.Argument Text) where
+    bucket f s@OssBucketResource{..} =
+        (\a -> s { _bucket = a } :: OssBucketResource)
+             <$> f _bucket
+
+instance HasCoreRule OssBucketResource (TF.Argument Text) where
+    coreRule f s@OssBucketResource{..} =
+        (\a -> s { _core_rule = a } :: OssBucketResource)
+             <$> f _core_rule
+
+instance HasLifecycleRule OssBucketResource (TF.Argument Text) where
+    lifecycleRule f s@OssBucketResource{..} =
+        (\a -> s { _lifecycle_rule = a } :: OssBucketResource)
+             <$> f _lifecycle_rule
+
+instance HasLogging OssBucketResource (TF.Argument Text) where
+    logging f s@OssBucketResource{..} =
+        (\a -> s { _logging = a } :: OssBucketResource)
+             <$> f _logging
+
+instance HasLoggingIsenable OssBucketResource (TF.Argument Text) where
+    loggingIsenable f s@OssBucketResource{..} =
+        (\a -> s { _logging_isenable = a } :: OssBucketResource)
+             <$> f _logging_isenable
+
+instance HasRefererConfig OssBucketResource (TF.Argument Text) where
+    refererConfig f s@OssBucketResource{..} =
+        (\a -> s { _referer_config = a } :: OssBucketResource)
+             <$> f _referer_config
+
+instance HasWebsite OssBucketResource (TF.Argument Text) where
+    website f s@OssBucketResource{..} =
+        (\a -> s { _website = a } :: OssBucketResource)
+             <$> f _website
 
 ossBucketResource :: TF.Resource TF.AliCloud OssBucketResource
 ossBucketResource =
@@ -1393,10 +3647,30 @@ instance TF.ToHCL RamAccessKeyResource where
         , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamAccessKeyResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasSecretFile RamAccessKeyResource (TF.Argument Text) where
+    secretFile f s@RamAccessKeyResource{..} =
+        (\a -> s { _secret_file = a } :: RamAccessKeyResource)
+             <$> f _secret_file
+
+instance HasStatus RamAccessKeyResource (TF.Argument Text) where
+    status f s@RamAccessKeyResource{..} =
+        (\a -> s { _status = a } :: RamAccessKeyResource)
+             <$> f _status
+
+instance HasUserName RamAccessKeyResource (TF.Argument Text) where
+    userName f s@RamAccessKeyResource{..} =
+        (\a -> s { _user_name = a } :: RamAccessKeyResource)
+             <$> f _user_name
+
+instance HasComputedId RamAccessKeyResource (TF.Attribute Text) where
+    computedId f s@RamAccessKeyResource{..} =
+        (\a -> s { _computed_id = a } :: RamAccessKeyResource)
+             <$> f _computed_id
+
+instance HasComputedStatus RamAccessKeyResource (TF.Attribute Text) where
+    computedStatus f s@RamAccessKeyResource{..} =
+        (\a -> s { _computed_status = a } :: RamAccessKeyResource)
+             <$> f _computed_status
 
 ramAccessKeyResource :: TF.Resource TF.AliCloud RamAccessKeyResource
 ramAccessKeyResource =
@@ -1425,10 +3699,15 @@ instance TF.ToHCL RamAccountAliasResource where
         [ TF.assign "account_alias" <$> TF.argument _account_alias
         ]
 
-$(TF.makeSchemaLenses
-    ''RamAccountAliasResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAccountAlias RamAccountAliasResource (TF.Argument Text) where
+    accountAlias f s@RamAccountAliasResource{..} =
+        (\a -> s { _account_alias = a } :: RamAccountAliasResource)
+             <$> f _account_alias
+
+instance HasComputedAccountAlias RamAccountAliasResource (TF.Attribute Text) where
+    computedAccountAlias f s@RamAccountAliasResource{..} =
+        (\a -> s { _computed_account_alias = a } :: RamAccountAliasResource)
+             <$> f _computed_account_alias
 
 ramAccountAliasResource :: TF.Resource TF.AliCloud RamAccountAliasResource
 ramAccountAliasResource =
@@ -1436,6 +3715,24 @@ ramAccountAliasResource =
         RamAccountAliasResource {
             _account_alias = TF.Nil
             , _computed_account_alias = TF.Compute "account_alias"
+            }
+
+{- | The @alicloud_ram_alias@ AliCloud resource.
+
+~> NOTE: This resource has been deprecated from
+<https://github.com/alibaba/terraform-provider/releases/tag/V1.3.2> . New
+resource @alicloud_ram_account_alias@ will replace.
+-}
+data RamAliasResource = RamAliasResource {
+    } deriving (Show, Eq)
+
+instance TF.ToHCL RamAliasResource where
+    toHCL _ = TF.block []
+
+ramAliasResource :: TF.Resource TF.AliCloud RamAliasResource
+ramAliasResource =
+    TF.newResource "alicloud_ram_alias" $
+        RamAliasResource {
             }
 
 {- | The @alicloud_ram_group_membership@ AliCloud resource.
@@ -1461,10 +3758,30 @@ instance TF.ToHCL RamGroupMembershipResource where
         , TF.assign "user_names" <$> TF.argument _user_names
         ]
 
-$(TF.makeSchemaLenses
-    ''RamGroupMembershipResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasGroupName RamGroupMembershipResource (TF.Argument Text) where
+    groupName f s@RamGroupMembershipResource{..} =
+        (\a -> s { _group_name = a } :: RamGroupMembershipResource)
+             <$> f _group_name
+
+instance HasUserNames RamGroupMembershipResource (TF.Argument Text) where
+    userNames f s@RamGroupMembershipResource{..} =
+        (\a -> s { _user_names = a } :: RamGroupMembershipResource)
+             <$> f _user_names
+
+instance HasComputedGroupName RamGroupMembershipResource (TF.Attribute Text) where
+    computedGroupName f s@RamGroupMembershipResource{..} =
+        (\a -> s { _computed_group_name = a } :: RamGroupMembershipResource)
+             <$> f _computed_group_name
+
+instance HasComputedId RamGroupMembershipResource (TF.Attribute Text) where
+    computedId f s@RamGroupMembershipResource{..} =
+        (\a -> s { _computed_id = a } :: RamGroupMembershipResource)
+             <$> f _computed_id
+
+instance HasComputedUserNames RamGroupMembershipResource (TF.Attribute Text) where
+    computedUserNames f s@RamGroupMembershipResource{..} =
+        (\a -> s { _computed_user_names = a } :: RamGroupMembershipResource)
+             <$> f _computed_user_names
 
 ramGroupMembershipResource :: TF.Resource TF.AliCloud RamGroupMembershipResource
 ramGroupMembershipResource =
@@ -1505,10 +3822,40 @@ instance TF.ToHCL RamGroupPolicyAttachmentResource where
         , TF.assign "policy_type" <$> TF.argument _policy_type
         ]
 
-$(TF.makeSchemaLenses
-    ''RamGroupPolicyAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasGroupName RamGroupPolicyAttachmentResource (TF.Argument Text) where
+    groupName f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _group_name = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _group_name
+
+instance HasPolicyName RamGroupPolicyAttachmentResource (TF.Argument Text) where
+    policyName f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _policy_name = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _policy_name
+
+instance HasPolicyType RamGroupPolicyAttachmentResource (TF.Argument Text) where
+    policyType f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _policy_type = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _policy_type
+
+instance HasComputedGroupName RamGroupPolicyAttachmentResource (TF.Attribute Text) where
+    computedGroupName f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _computed_group_name = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _computed_group_name
+
+instance HasComputedId RamGroupPolicyAttachmentResource (TF.Attribute Text) where
+    computedId f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _computed_id = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _computed_id
+
+instance HasComputedPolicyName RamGroupPolicyAttachmentResource (TF.Attribute Text) where
+    computedPolicyName f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _computed_policy_name = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _computed_policy_name
+
+instance HasComputedPolicyType RamGroupPolicyAttachmentResource (TF.Attribute Text) where
+    computedPolicyType f s@RamGroupPolicyAttachmentResource{..} =
+        (\a -> s { _computed_policy_type = a } :: RamGroupPolicyAttachmentResource)
+             <$> f _computed_policy_type
 
 ramGroupPolicyAttachmentResource :: TF.Resource TF.AliCloud RamGroupPolicyAttachmentResource
 ramGroupPolicyAttachmentResource =
@@ -1553,10 +3900,35 @@ instance TF.ToHCL RamGroupResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamGroupResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasComments RamGroupResource (TF.Argument Text) where
+    comments f s@RamGroupResource{..} =
+        (\a -> s { _comments = a } :: RamGroupResource)
+             <$> f _comments
+
+instance HasForce RamGroupResource (TF.Argument Text) where
+    force f s@RamGroupResource{..} =
+        (\a -> s { _force = a } :: RamGroupResource)
+             <$> f _force
+
+instance HasName RamGroupResource (TF.Argument Text) where
+    name f s@RamGroupResource{..} =
+        (\a -> s { _name = a } :: RamGroupResource)
+             <$> f _name
+
+instance HasComputedComments RamGroupResource (TF.Attribute Text) where
+    computedComments f s@RamGroupResource{..} =
+        (\a -> s { _computed_comments = a } :: RamGroupResource)
+             <$> f _computed_comments
+
+instance HasComputedId RamGroupResource (TF.Attribute Text) where
+    computedId f s@RamGroupResource{..} =
+        (\a -> s { _computed_id = a } :: RamGroupResource)
+             <$> f _computed_id
+
+instance HasComputedName RamGroupResource (TF.Attribute Text) where
+    computedName f s@RamGroupResource{..} =
+        (\a -> s { _computed_name = a } :: RamGroupResource)
+             <$> f _computed_name
 
 ramGroupResource :: TF.Resource TF.AliCloud RamGroupResource
 ramGroupResource =
@@ -1601,10 +3973,45 @@ instance TF.ToHCL RamLoginProfileResource where
         , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamLoginProfileResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasMfaBindRequired RamLoginProfileResource (TF.Argument Text) where
+    mfaBindRequired f s@RamLoginProfileResource{..} =
+        (\a -> s { _mfa_bind_required = a } :: RamLoginProfileResource)
+             <$> f _mfa_bind_required
+
+instance HasPassword RamLoginProfileResource (TF.Argument Text) where
+    password f s@RamLoginProfileResource{..} =
+        (\a -> s { _password = a } :: RamLoginProfileResource)
+             <$> f _password
+
+instance HasPasswordResetRequired RamLoginProfileResource (TF.Argument Text) where
+    passwordResetRequired f s@RamLoginProfileResource{..} =
+        (\a -> s { _password_reset_required = a } :: RamLoginProfileResource)
+             <$> f _password_reset_required
+
+instance HasUserName RamLoginProfileResource (TF.Argument Text) where
+    userName f s@RamLoginProfileResource{..} =
+        (\a -> s { _user_name = a } :: RamLoginProfileResource)
+             <$> f _user_name
+
+instance HasComputedId RamLoginProfileResource (TF.Attribute Text) where
+    computedId f s@RamLoginProfileResource{..} =
+        (\a -> s { _computed_id = a } :: RamLoginProfileResource)
+             <$> f _computed_id
+
+instance HasComputedMfaBindRequired RamLoginProfileResource (TF.Attribute Text) where
+    computedMfaBindRequired f s@RamLoginProfileResource{..} =
+        (\a -> s { _computed_mfa_bind_required = a } :: RamLoginProfileResource)
+             <$> f _computed_mfa_bind_required
+
+instance HasComputedPasswordResetRequired RamLoginProfileResource (TF.Attribute Text) where
+    computedPasswordResetRequired f s@RamLoginProfileResource{..} =
+        (\a -> s { _computed_password_reset_required = a } :: RamLoginProfileResource)
+             <$> f _computed_password_reset_required
+
+instance HasComputedUserName RamLoginProfileResource (TF.Attribute Text) where
+    computedUserName f s@RamLoginProfileResource{..} =
+        (\a -> s { _computed_user_name = a } :: RamLoginProfileResource)
+             <$> f _computed_user_name
 
 ramLoginProfileResource :: TF.Resource TF.AliCloud RamLoginProfileResource
 ramLoginProfileResource =
@@ -1669,10 +4076,75 @@ instance TF.ToHCL RamPolicyResource where
         , TF.assign "version" <$> TF.argument _version
         ]
 
-$(TF.makeSchemaLenses
-    ''RamPolicyResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDescription RamPolicyResource (TF.Argument Text) where
+    description f s@RamPolicyResource{..} =
+        (\a -> s { _description = a } :: RamPolicyResource)
+             <$> f _description
+
+instance HasDocument RamPolicyResource (TF.Argument Text) where
+    document f s@RamPolicyResource{..} =
+        (\a -> s { _document = a } :: RamPolicyResource)
+             <$> f _document
+
+instance HasForce RamPolicyResource (TF.Argument Text) where
+    force f s@RamPolicyResource{..} =
+        (\a -> s { _force = a } :: RamPolicyResource)
+             <$> f _force
+
+instance HasName RamPolicyResource (TF.Argument Text) where
+    name f s@RamPolicyResource{..} =
+        (\a -> s { _name = a } :: RamPolicyResource)
+             <$> f _name
+
+instance HasStatement RamPolicyResource (TF.Argument Text) where
+    statement f s@RamPolicyResource{..} =
+        (\a -> s { _statement = a } :: RamPolicyResource)
+             <$> f _statement
+
+instance HasVersion RamPolicyResource (TF.Argument Text) where
+    version f s@RamPolicyResource{..} =
+        (\a -> s { _version = a } :: RamPolicyResource)
+             <$> f _version
+
+instance HasComputedAttachmentCount RamPolicyResource (TF.Attribute Text) where
+    computedAttachmentCount f s@RamPolicyResource{..} =
+        (\a -> s { _computed_attachment_count = a } :: RamPolicyResource)
+             <$> f _computed_attachment_count
+
+instance HasComputedDescription RamPolicyResource (TF.Attribute Text) where
+    computedDescription f s@RamPolicyResource{..} =
+        (\a -> s { _computed_description = a } :: RamPolicyResource)
+             <$> f _computed_description
+
+instance HasComputedDocument RamPolicyResource (TF.Attribute Text) where
+    computedDocument f s@RamPolicyResource{..} =
+        (\a -> s { _computed_document = a } :: RamPolicyResource)
+             <$> f _computed_document
+
+instance HasComputedId RamPolicyResource (TF.Attribute Text) where
+    computedId f s@RamPolicyResource{..} =
+        (\a -> s { _computed_id = a } :: RamPolicyResource)
+             <$> f _computed_id
+
+instance HasComputedName RamPolicyResource (TF.Attribute Text) where
+    computedName f s@RamPolicyResource{..} =
+        (\a -> s { _computed_name = a } :: RamPolicyResource)
+             <$> f _computed_name
+
+instance HasComputedStatement RamPolicyResource (TF.Attribute Text) where
+    computedStatement f s@RamPolicyResource{..} =
+        (\a -> s { _computed_statement = a } :: RamPolicyResource)
+             <$> f _computed_statement
+
+instance HasComputedType' RamPolicyResource (TF.Attribute Text) where
+    computedType' f s@RamPolicyResource{..} =
+        (\a -> s { _computed_type' = a } :: RamPolicyResource)
+             <$> f _computed_type'
+
+instance HasComputedVersion RamPolicyResource (TF.Attribute Text) where
+    computedVersion f s@RamPolicyResource{..} =
+        (\a -> s { _computed_version = a } :: RamPolicyResource)
+             <$> f _computed_version
 
 ramPolicyResource :: TF.Resource TF.AliCloud RamPolicyResource
 ramPolicyResource =
@@ -1716,10 +4188,25 @@ instance TF.ToHCL RamRoleAttachmentResource where
         , TF.assign "role_name" <$> TF.argument _role_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamRoleAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasInstanceIds RamRoleAttachmentResource (TF.Argument Text) where
+    instanceIds f s@RamRoleAttachmentResource{..} =
+        (\a -> s { _instance_ids = a } :: RamRoleAttachmentResource)
+             <$> f _instance_ids
+
+instance HasRoleName RamRoleAttachmentResource (TF.Argument Text) where
+    roleName f s@RamRoleAttachmentResource{..} =
+        (\a -> s { _role_name = a } :: RamRoleAttachmentResource)
+             <$> f _role_name
+
+instance HasComputedInstanceIds RamRoleAttachmentResource (TF.Attribute Text) where
+    computedInstanceIds f s@RamRoleAttachmentResource{..} =
+        (\a -> s { _computed_instance_ids = a } :: RamRoleAttachmentResource)
+             <$> f _computed_instance_ids
+
+instance HasComputedRoleName RamRoleAttachmentResource (TF.Attribute Text) where
+    computedRoleName f s@RamRoleAttachmentResource{..} =
+        (\a -> s { _computed_role_name = a } :: RamRoleAttachmentResource)
+             <$> f _computed_role_name
 
 ramRoleAttachmentResource :: TF.Resource TF.AliCloud RamRoleAttachmentResource
 ramRoleAttachmentResource =
@@ -1759,10 +4246,40 @@ instance TF.ToHCL RamRolePolicyAttachmentResource where
         , TF.assign "role_name" <$> TF.argument _role_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamRolePolicyAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasPolicyName RamRolePolicyAttachmentResource (TF.Argument Text) where
+    policyName f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _policy_name = a } :: RamRolePolicyAttachmentResource)
+             <$> f _policy_name
+
+instance HasPolicyType RamRolePolicyAttachmentResource (TF.Argument Text) where
+    policyType f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _policy_type = a } :: RamRolePolicyAttachmentResource)
+             <$> f _policy_type
+
+instance HasRoleName RamRolePolicyAttachmentResource (TF.Argument Text) where
+    roleName f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _role_name = a } :: RamRolePolicyAttachmentResource)
+             <$> f _role_name
+
+instance HasComputedId RamRolePolicyAttachmentResource (TF.Attribute Text) where
+    computedId f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _computed_id = a } :: RamRolePolicyAttachmentResource)
+             <$> f _computed_id
+
+instance HasComputedPolicyName RamRolePolicyAttachmentResource (TF.Attribute Text) where
+    computedPolicyName f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _computed_policy_name = a } :: RamRolePolicyAttachmentResource)
+             <$> f _computed_policy_name
+
+instance HasComputedPolicyType RamRolePolicyAttachmentResource (TF.Attribute Text) where
+    computedPolicyType f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _computed_policy_type = a } :: RamRolePolicyAttachmentResource)
+             <$> f _computed_policy_type
+
+instance HasComputedRoleName RamRolePolicyAttachmentResource (TF.Attribute Text) where
+    computedRoleName f s@RamRolePolicyAttachmentResource{..} =
+        (\a -> s { _computed_role_name = a } :: RamRolePolicyAttachmentResource)
+             <$> f _computed_role_name
 
 ramRolePolicyAttachmentResource :: TF.Resource TF.AliCloud RamRolePolicyAttachmentResource
 ramRolePolicyAttachmentResource =
@@ -1829,10 +4346,80 @@ instance TF.ToHCL RamRoleResource where
         , TF.assign "version" <$> TF.argument _version
         ]
 
-$(TF.makeSchemaLenses
-    ''RamRoleResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDescription RamRoleResource (TF.Argument Text) where
+    description f s@RamRoleResource{..} =
+        (\a -> s { _description = a } :: RamRoleResource)
+             <$> f _description
+
+instance HasDocument RamRoleResource (TF.Argument Text) where
+    document f s@RamRoleResource{..} =
+        (\a -> s { _document = a } :: RamRoleResource)
+             <$> f _document
+
+instance HasForce RamRoleResource (TF.Argument Text) where
+    force f s@RamRoleResource{..} =
+        (\a -> s { _force = a } :: RamRoleResource)
+             <$> f _force
+
+instance HasName RamRoleResource (TF.Argument Text) where
+    name f s@RamRoleResource{..} =
+        (\a -> s { _name = a } :: RamRoleResource)
+             <$> f _name
+
+instance HasRamUsers RamRoleResource (TF.Argument Text) where
+    ramUsers f s@RamRoleResource{..} =
+        (\a -> s { _ram_users = a } :: RamRoleResource)
+             <$> f _ram_users
+
+instance HasServices RamRoleResource (TF.Argument Text) where
+    services f s@RamRoleResource{..} =
+        (\a -> s { _services = a } :: RamRoleResource)
+             <$> f _services
+
+instance HasVersion RamRoleResource (TF.Argument Text) where
+    version f s@RamRoleResource{..} =
+        (\a -> s { _version = a } :: RamRoleResource)
+             <$> f _version
+
+instance HasComputedArn RamRoleResource (TF.Attribute Text) where
+    computedArn f s@RamRoleResource{..} =
+        (\a -> s { _computed_arn = a } :: RamRoleResource)
+             <$> f _computed_arn
+
+instance HasComputedDescription RamRoleResource (TF.Attribute Text) where
+    computedDescription f s@RamRoleResource{..} =
+        (\a -> s { _computed_description = a } :: RamRoleResource)
+             <$> f _computed_description
+
+instance HasComputedDocument RamRoleResource (TF.Attribute Text) where
+    computedDocument f s@RamRoleResource{..} =
+        (\a -> s { _computed_document = a } :: RamRoleResource)
+             <$> f _computed_document
+
+instance HasComputedId RamRoleResource (TF.Attribute Text) where
+    computedId f s@RamRoleResource{..} =
+        (\a -> s { _computed_id = a } :: RamRoleResource)
+             <$> f _computed_id
+
+instance HasComputedName RamRoleResource (TF.Attribute Text) where
+    computedName f s@RamRoleResource{..} =
+        (\a -> s { _computed_name = a } :: RamRoleResource)
+             <$> f _computed_name
+
+instance HasComputedRamUsers RamRoleResource (TF.Attribute Text) where
+    computedRamUsers f s@RamRoleResource{..} =
+        (\a -> s { _computed_ram_users = a } :: RamRoleResource)
+             <$> f _computed_ram_users
+
+instance HasComputedServices RamRoleResource (TF.Attribute Text) where
+    computedServices f s@RamRoleResource{..} =
+        (\a -> s { _computed_services = a } :: RamRoleResource)
+             <$> f _computed_services
+
+instance HasComputedVersion RamRoleResource (TF.Attribute Text) where
+    computedVersion f s@RamRoleResource{..} =
+        (\a -> s { _computed_version = a } :: RamRoleResource)
+             <$> f _computed_version
 
 ramRoleResource :: TF.Resource TF.AliCloud RamRoleResource
 ramRoleResource =
@@ -1883,10 +4470,40 @@ instance TF.ToHCL RamUserPolicyAttachmentResource where
         , TF.assign "user_name" <$> TF.argument _user_name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamUserPolicyAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasPolicyName RamUserPolicyAttachmentResource (TF.Argument Text) where
+    policyName f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _policy_name = a } :: RamUserPolicyAttachmentResource)
+             <$> f _policy_name
+
+instance HasPolicyType RamUserPolicyAttachmentResource (TF.Argument Text) where
+    policyType f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _policy_type = a } :: RamUserPolicyAttachmentResource)
+             <$> f _policy_type
+
+instance HasUserName RamUserPolicyAttachmentResource (TF.Argument Text) where
+    userName f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _user_name = a } :: RamUserPolicyAttachmentResource)
+             <$> f _user_name
+
+instance HasComputedId RamUserPolicyAttachmentResource (TF.Attribute Text) where
+    computedId f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _computed_id = a } :: RamUserPolicyAttachmentResource)
+             <$> f _computed_id
+
+instance HasComputedPolicyName RamUserPolicyAttachmentResource (TF.Attribute Text) where
+    computedPolicyName f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _computed_policy_name = a } :: RamUserPolicyAttachmentResource)
+             <$> f _computed_policy_name
+
+instance HasComputedPolicyType RamUserPolicyAttachmentResource (TF.Attribute Text) where
+    computedPolicyType f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _computed_policy_type = a } :: RamUserPolicyAttachmentResource)
+             <$> f _computed_policy_type
+
+instance HasComputedUserName RamUserPolicyAttachmentResource (TF.Attribute Text) where
+    computedUserName f s@RamUserPolicyAttachmentResource{..} =
+        (\a -> s { _computed_user_name = a } :: RamUserPolicyAttachmentResource)
+             <$> f _computed_user_name
 
 ramUserPolicyAttachmentResource :: TF.Resource TF.AliCloud RamUserPolicyAttachmentResource
 ramUserPolicyAttachmentResource =
@@ -1946,10 +4563,65 @@ instance TF.ToHCL RamUserResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''RamUserResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasComments RamUserResource (TF.Argument Text) where
+    comments f s@RamUserResource{..} =
+        (\a -> s { _comments = a } :: RamUserResource)
+             <$> f _comments
+
+instance HasDisplayName RamUserResource (TF.Argument Text) where
+    displayName f s@RamUserResource{..} =
+        (\a -> s { _display_name = a } :: RamUserResource)
+             <$> f _display_name
+
+instance HasEmail RamUserResource (TF.Argument Text) where
+    email f s@RamUserResource{..} =
+        (\a -> s { _email = a } :: RamUserResource)
+             <$> f _email
+
+instance HasForce RamUserResource (TF.Argument Text) where
+    force f s@RamUserResource{..} =
+        (\a -> s { _force = a } :: RamUserResource)
+             <$> f _force
+
+instance HasMobile RamUserResource (TF.Argument Text) where
+    mobile f s@RamUserResource{..} =
+        (\a -> s { _mobile = a } :: RamUserResource)
+             <$> f _mobile
+
+instance HasName RamUserResource (TF.Argument Text) where
+    name f s@RamUserResource{..} =
+        (\a -> s { _name = a } :: RamUserResource)
+             <$> f _name
+
+instance HasComputedComments RamUserResource (TF.Attribute Text) where
+    computedComments f s@RamUserResource{..} =
+        (\a -> s { _computed_comments = a } :: RamUserResource)
+             <$> f _computed_comments
+
+instance HasComputedDisplayName RamUserResource (TF.Attribute Text) where
+    computedDisplayName f s@RamUserResource{..} =
+        (\a -> s { _computed_display_name = a } :: RamUserResource)
+             <$> f _computed_display_name
+
+instance HasComputedEmail RamUserResource (TF.Attribute Text) where
+    computedEmail f s@RamUserResource{..} =
+        (\a -> s { _computed_email = a } :: RamUserResource)
+             <$> f _computed_email
+
+instance HasComputedId RamUserResource (TF.Attribute Text) where
+    computedId f s@RamUserResource{..} =
+        (\a -> s { _computed_id = a } :: RamUserResource)
+             <$> f _computed_id
+
+instance HasComputedMobile RamUserResource (TF.Attribute Text) where
+    computedMobile f s@RamUserResource{..} =
+        (\a -> s { _computed_mobile = a } :: RamUserResource)
+             <$> f _computed_mobile
+
+instance HasComputedName RamUserResource (TF.Attribute Text) where
+    computedName f s@RamUserResource{..} =
+        (\a -> s { _computed_name = a } :: RamUserResource)
+             <$> f _computed_name
 
 ramUserResource :: TF.Resource TF.AliCloud RamUserResource
 ramUserResource =
@@ -2003,10 +4675,50 @@ instance TF.ToHCL RouteEntryResource where
         , TF.assign "route_table_id" <$> TF.argument _route_table_id
         ]
 
-$(TF.makeSchemaLenses
-    ''RouteEntryResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDestinationCidrblock RouteEntryResource (TF.Argument Text) where
+    destinationCidrblock f s@RouteEntryResource{..} =
+        (\a -> s { _destination_cidrblock = a } :: RouteEntryResource)
+             <$> f _destination_cidrblock
+
+instance HasNexthopId RouteEntryResource (TF.Argument Text) where
+    nexthopId f s@RouteEntryResource{..} =
+        (\a -> s { _nexthop_id = a } :: RouteEntryResource)
+             <$> f _nexthop_id
+
+instance HasNexthopType RouteEntryResource (TF.Argument Text) where
+    nexthopType f s@RouteEntryResource{..} =
+        (\a -> s { _nexthop_type = a } :: RouteEntryResource)
+             <$> f _nexthop_type
+
+instance HasRouteTableId RouteEntryResource (TF.Argument Text) where
+    routeTableId f s@RouteEntryResource{..} =
+        (\a -> s { _route_table_id = a } :: RouteEntryResource)
+             <$> f _route_table_id
+
+instance HasComputedDestinationCidrblock RouteEntryResource (TF.Attribute Text) where
+    computedDestinationCidrblock f s@RouteEntryResource{..} =
+        (\a -> s { _computed_destination_cidrblock = a } :: RouteEntryResource)
+             <$> f _computed_destination_cidrblock
+
+instance HasComputedNexthopId RouteEntryResource (TF.Attribute Text) where
+    computedNexthopId f s@RouteEntryResource{..} =
+        (\a -> s { _computed_nexthop_id = a } :: RouteEntryResource)
+             <$> f _computed_nexthop_id
+
+instance HasComputedNexthopType RouteEntryResource (TF.Attribute Text) where
+    computedNexthopType f s@RouteEntryResource{..} =
+        (\a -> s { _computed_nexthop_type = a } :: RouteEntryResource)
+             <$> f _computed_nexthop_type
+
+instance HasComputedRouteTableId RouteEntryResource (TF.Attribute Text) where
+    computedRouteTableId f s@RouteEntryResource{..} =
+        (\a -> s { _computed_route_table_id = a } :: RouteEntryResource)
+             <$> f _computed_route_table_id
+
+instance HasComputedRouterId RouteEntryResource (TF.Attribute Text) where
+    computedRouterId f s@RouteEntryResource{..} =
+        (\a -> s { _computed_router_id = a } :: RouteEntryResource)
+             <$> f _computed_router_id
 
 routeEntryResource :: TF.Resource TF.AliCloud RouteEntryResource
 routeEntryResource =
@@ -2112,10 +4824,155 @@ instance TF.ToHCL RouterInterfaceResource where
         , TF.assign "specification" <$> TF.argument _specification
         ]
 
-$(TF.makeSchemaLenses
-    ''RouterInterfaceResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAccessPointId RouterInterfaceResource (TF.Argument Text) where
+    accessPointId f s@RouterInterfaceResource{..} =
+        (\a -> s { _access_point_id = a } :: RouterInterfaceResource)
+             <$> f _access_point_id
+
+instance HasDescription RouterInterfaceResource (TF.Argument Text) where
+    description f s@RouterInterfaceResource{..} =
+        (\a -> s { _description = a } :: RouterInterfaceResource)
+             <$> f _description
+
+instance HasHealthCheckSourceIp RouterInterfaceResource (TF.Argument Text) where
+    healthCheckSourceIp f s@RouterInterfaceResource{..} =
+        (\a -> s { _health_check_source_ip = a } :: RouterInterfaceResource)
+             <$> f _health_check_source_ip
+
+instance HasHealthCheckTargetIp RouterInterfaceResource (TF.Argument Text) where
+    healthCheckTargetIp f s@RouterInterfaceResource{..} =
+        (\a -> s { _health_check_target_ip = a } :: RouterInterfaceResource)
+             <$> f _health_check_target_ip
+
+instance HasName RouterInterfaceResource (TF.Argument Text) where
+    name f s@RouterInterfaceResource{..} =
+        (\a -> s { _name = a } :: RouterInterfaceResource)
+             <$> f _name
+
+instance HasOppositeAccessPointId RouterInterfaceResource (TF.Argument Text) where
+    oppositeAccessPointId f s@RouterInterfaceResource{..} =
+        (\a -> s { _opposite_access_point_id = a } :: RouterInterfaceResource)
+             <$> f _opposite_access_point_id
+
+instance HasOppositeInterfaceId RouterInterfaceResource (TF.Argument Text) where
+    oppositeInterfaceId f s@RouterInterfaceResource{..} =
+        (\a -> s { _opposite_interface_id = a } :: RouterInterfaceResource)
+             <$> f _opposite_interface_id
+
+instance HasOppositeInterfaceOwnerId RouterInterfaceResource (TF.Argument Text) where
+    oppositeInterfaceOwnerId f s@RouterInterfaceResource{..} =
+        (\a -> s { _opposite_interface_owner_id = a } :: RouterInterfaceResource)
+             <$> f _opposite_interface_owner_id
+
+instance HasOppositeRegion RouterInterfaceResource (TF.Argument Text) where
+    oppositeRegion f s@RouterInterfaceResource{..} =
+        (\a -> s { _opposite_region = a } :: RouterInterfaceResource)
+             <$> f _opposite_region
+
+instance HasOppositeRouterId RouterInterfaceResource (TF.Argument Text) where
+    oppositeRouterId f s@RouterInterfaceResource{..} =
+        (\a -> s { _opposite_router_id = a } :: RouterInterfaceResource)
+             <$> f _opposite_router_id
+
+instance HasOppositeRouterType RouterInterfaceResource (TF.Argument Text) where
+    oppositeRouterType f s@RouterInterfaceResource{..} =
+        (\a -> s { _opposite_router_type = a } :: RouterInterfaceResource)
+             <$> f _opposite_router_type
+
+instance HasRole RouterInterfaceResource (TF.Argument Text) where
+    role f s@RouterInterfaceResource{..} =
+        (\a -> s { _role = a } :: RouterInterfaceResource)
+             <$> f _role
+
+instance HasRouterId RouterInterfaceResource (TF.Argument Text) where
+    routerId f s@RouterInterfaceResource{..} =
+        (\a -> s { _router_id = a } :: RouterInterfaceResource)
+             <$> f _router_id
+
+instance HasRouterType RouterInterfaceResource (TF.Argument Text) where
+    routerType f s@RouterInterfaceResource{..} =
+        (\a -> s { _router_type = a } :: RouterInterfaceResource)
+             <$> f _router_type
+
+instance HasSpecification RouterInterfaceResource (TF.Argument Text) where
+    specification f s@RouterInterfaceResource{..} =
+        (\a -> s { _specification = a } :: RouterInterfaceResource)
+             <$> f _specification
+
+instance HasComputedAccessPointId RouterInterfaceResource (TF.Attribute Text) where
+    computedAccessPointId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_access_point_id = a } :: RouterInterfaceResource)
+             <$> f _computed_access_point_id
+
+instance HasComputedDescription RouterInterfaceResource (TF.Attribute Text) where
+    computedDescription f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_description = a } :: RouterInterfaceResource)
+             <$> f _computed_description
+
+instance HasComputedHealthCheckSourceIp RouterInterfaceResource (TF.Attribute Text) where
+    computedHealthCheckSourceIp f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_health_check_source_ip = a } :: RouterInterfaceResource)
+             <$> f _computed_health_check_source_ip
+
+instance HasComputedHealthCheckTargetIp RouterInterfaceResource (TF.Attribute Text) where
+    computedHealthCheckTargetIp f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_health_check_target_ip = a } :: RouterInterfaceResource)
+             <$> f _computed_health_check_target_ip
+
+instance HasComputedId RouterInterfaceResource (TF.Attribute Text) where
+    computedId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_id = a } :: RouterInterfaceResource)
+             <$> f _computed_id
+
+instance HasComputedName RouterInterfaceResource (TF.Attribute Text) where
+    computedName f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_name = a } :: RouterInterfaceResource)
+             <$> f _computed_name
+
+instance HasComputedOppositeAccessPointId RouterInterfaceResource (TF.Attribute Text) where
+    computedOppositeAccessPointId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_opposite_access_point_id = a } :: RouterInterfaceResource)
+             <$> f _computed_opposite_access_point_id
+
+instance HasComputedOppositeInterfaceId RouterInterfaceResource (TF.Attribute Text) where
+    computedOppositeInterfaceId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_opposite_interface_id = a } :: RouterInterfaceResource)
+             <$> f _computed_opposite_interface_id
+
+instance HasComputedOppositeInterfaceOwnerId RouterInterfaceResource (TF.Attribute Text) where
+    computedOppositeInterfaceOwnerId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_opposite_interface_owner_id = a } :: RouterInterfaceResource)
+             <$> f _computed_opposite_interface_owner_id
+
+instance HasComputedOppositeRouterId RouterInterfaceResource (TF.Attribute Text) where
+    computedOppositeRouterId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_opposite_router_id = a } :: RouterInterfaceResource)
+             <$> f _computed_opposite_router_id
+
+instance HasComputedOppositeRouterType RouterInterfaceResource (TF.Attribute Text) where
+    computedOppositeRouterType f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_opposite_router_type = a } :: RouterInterfaceResource)
+             <$> f _computed_opposite_router_type
+
+instance HasComputedRole RouterInterfaceResource (TF.Attribute Text) where
+    computedRole f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_role = a } :: RouterInterfaceResource)
+             <$> f _computed_role
+
+instance HasComputedRouterId RouterInterfaceResource (TF.Attribute Text) where
+    computedRouterId f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_router_id = a } :: RouterInterfaceResource)
+             <$> f _computed_router_id
+
+instance HasComputedRouterType RouterInterfaceResource (TF.Attribute Text) where
+    computedRouterType f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_router_type = a } :: RouterInterfaceResource)
+             <$> f _computed_router_type
+
+instance HasComputedSpecification RouterInterfaceResource (TF.Attribute Text) where
+    computedSpecification f s@RouterInterfaceResource{..} =
+        (\a -> s { _computed_specification = a } :: RouterInterfaceResource)
+             <$> f _computed_specification
 
 routerInterfaceResource :: TF.Resource TF.AliCloud RouterInterfaceResource
 routerInterfaceResource =
@@ -2183,10 +5040,40 @@ instance TF.ToHCL SecurityGroupResource where
         , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
-$(TF.makeSchemaLenses
-    ''SecurityGroupResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasDescription SecurityGroupResource (TF.Argument Text) where
+    description f s@SecurityGroupResource{..} =
+        (\a -> s { _description = a } :: SecurityGroupResource)
+             <$> f _description
+
+instance HasName SecurityGroupResource (TF.Argument Text) where
+    name f s@SecurityGroupResource{..} =
+        (\a -> s { _name = a } :: SecurityGroupResource)
+             <$> f _name
+
+instance HasVpcId SecurityGroupResource (TF.Argument Text) where
+    vpcId f s@SecurityGroupResource{..} =
+        (\a -> s { _vpc_id = a } :: SecurityGroupResource)
+             <$> f _vpc_id
+
+instance HasComputedDescription SecurityGroupResource (TF.Attribute Text) where
+    computedDescription f s@SecurityGroupResource{..} =
+        (\a -> s { _computed_description = a } :: SecurityGroupResource)
+             <$> f _computed_description
+
+instance HasComputedId SecurityGroupResource (TF.Attribute Text) where
+    computedId f s@SecurityGroupResource{..} =
+        (\a -> s { _computed_id = a } :: SecurityGroupResource)
+             <$> f _computed_id
+
+instance HasComputedName SecurityGroupResource (TF.Attribute Text) where
+    computedName f s@SecurityGroupResource{..} =
+        (\a -> s { _computed_name = a } :: SecurityGroupResource)
+             <$> f _computed_name
+
+instance HasComputedVpcId SecurityGroupResource (TF.Attribute Text) where
+    computedVpcId f s@SecurityGroupResource{..} =
+        (\a -> s { _computed_vpc_id = a } :: SecurityGroupResource)
+             <$> f _computed_vpc_id
 
 securityGroupResource :: TF.Resource TF.AliCloud SecurityGroupResource
 securityGroupResource =
@@ -2257,10 +5144,80 @@ instance TF.ToHCL SecurityGroupRuleResource where
         , TF.assign "type" <$> TF.argument _type'
         ]
 
-$(TF.makeSchemaLenses
-    ''SecurityGroupRuleResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasCidrIp SecurityGroupRuleResource (TF.Argument Text) where
+    cidrIp f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _cidr_ip = a } :: SecurityGroupRuleResource)
+             <$> f _cidr_ip
+
+instance HasIpProtocol SecurityGroupRuleResource (TF.Argument Text) where
+    ipProtocol f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _ip_protocol = a } :: SecurityGroupRuleResource)
+             <$> f _ip_protocol
+
+instance HasNicType SecurityGroupRuleResource (TF.Argument Text) where
+    nicType f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _nic_type = a } :: SecurityGroupRuleResource)
+             <$> f _nic_type
+
+instance HasPolicy SecurityGroupRuleResource (TF.Argument Text) where
+    policy f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _policy = a } :: SecurityGroupRuleResource)
+             <$> f _policy
+
+instance HasPortRange SecurityGroupRuleResource (TF.Argument Text) where
+    portRange f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _port_range = a } :: SecurityGroupRuleResource)
+             <$> f _port_range
+
+instance HasPriority SecurityGroupRuleResource (TF.Argument Text) where
+    priority f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _priority = a } :: SecurityGroupRuleResource)
+             <$> f _priority
+
+instance HasSecurityGroupId SecurityGroupRuleResource (TF.Argument Text) where
+    securityGroupId f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _security_group_id = a } :: SecurityGroupRuleResource)
+             <$> f _security_group_id
+
+instance HasSourceGroupOwnerAccount SecurityGroupRuleResource (TF.Argument Text) where
+    sourceGroupOwnerAccount f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _source_group_owner_account = a } :: SecurityGroupRuleResource)
+             <$> f _source_group_owner_account
+
+instance HasSourceSecurityGroupId SecurityGroupRuleResource (TF.Argument Text) where
+    sourceSecurityGroupId f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _source_security_group_id = a } :: SecurityGroupRuleResource)
+             <$> f _source_security_group_id
+
+instance HasType' SecurityGroupRuleResource (TF.Argument Text) where
+    type' f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _type' = a } :: SecurityGroupRuleResource)
+             <$> f _type'
+
+instance HasComputedId SecurityGroupRuleResource (TF.Attribute Text) where
+    computedId f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _computed_id = a } :: SecurityGroupRuleResource)
+             <$> f _computed_id
+
+instance HasComputedIpProtocol SecurityGroupRuleResource (TF.Attribute Text) where
+    computedIpProtocol f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _computed_ip_protocol = a } :: SecurityGroupRuleResource)
+             <$> f _computed_ip_protocol
+
+instance HasComputedName SecurityGroupRuleResource (TF.Attribute Text) where
+    computedName f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _computed_name = a } :: SecurityGroupRuleResource)
+             <$> f _computed_name
+
+instance HasComputedPortRange SecurityGroupRuleResource (TF.Attribute Text) where
+    computedPortRange f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _computed_port_range = a } :: SecurityGroupRuleResource)
+             <$> f _computed_port_range
+
+instance HasComputedType' SecurityGroupRuleResource (TF.Attribute Text) where
+    computedType' f s@SecurityGroupRuleResource{..} =
+        (\a -> s { _computed_type' = a } :: SecurityGroupRuleResource)
+             <$> f _computed_type'
 
 securityGroupRuleResource :: TF.Resource TF.AliCloud SecurityGroupRuleResource
 securityGroupRuleResource =
@@ -2302,10 +5259,20 @@ instance TF.ToHCL SlbAttachmentResource where
         , TF.assign "slb_id" <$> TF.argument _slb_id
         ]
 
-$(TF.makeSchemaLenses
-    ''SlbAttachmentResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasInstances SlbAttachmentResource (TF.Argument Text) where
+    instances f s@SlbAttachmentResource{..} =
+        (\a -> s { _instances = a } :: SlbAttachmentResource)
+             <$> f _instances
+
+instance HasSlbId SlbAttachmentResource (TF.Argument Text) where
+    slbId f s@SlbAttachmentResource{..} =
+        (\a -> s { _slb_id = a } :: SlbAttachmentResource)
+             <$> f _slb_id
+
+instance HasComputedBackendServers SlbAttachmentResource (TF.Attribute Text) where
+    computedBackendServers f s@SlbAttachmentResource{..} =
+        (\a -> s { _computed_backend_servers = a } :: SlbAttachmentResource)
+             <$> f _computed_backend_servers
 
 slbAttachmentResource :: TF.Resource TF.AliCloud SlbAttachmentResource
 slbAttachmentResource =
@@ -2393,10 +5360,115 @@ instance TF.ToHCL SlbListenerResource where
         , TF.assign "unhealthy_threshold" <$> TF.argument _unhealthy_threshold
         ]
 
-$(TF.makeSchemaLenses
-    ''SlbListenerResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasBackendPort SlbListenerResource (TF.Argument Text) where
+    backendPort f s@SlbListenerResource{..} =
+        (\a -> s { _backend_port = a } :: SlbListenerResource)
+             <$> f _backend_port
+
+instance HasBandwidth SlbListenerResource (TF.Argument Text) where
+    bandwidth f s@SlbListenerResource{..} =
+        (\a -> s { _bandwidth = a } :: SlbListenerResource)
+             <$> f _bandwidth
+
+instance HasCookie SlbListenerResource (TF.Argument Text) where
+    cookie f s@SlbListenerResource{..} =
+        (\a -> s { _cookie = a } :: SlbListenerResource)
+             <$> f _cookie
+
+instance HasCookieTimeout SlbListenerResource (TF.Argument Text) where
+    cookieTimeout f s@SlbListenerResource{..} =
+        (\a -> s { _cookie_timeout = a } :: SlbListenerResource)
+             <$> f _cookie_timeout
+
+instance HasFrontendPort SlbListenerResource (TF.Argument Text) where
+    frontendPort f s@SlbListenerResource{..} =
+        (\a -> s { _frontend_port = a } :: SlbListenerResource)
+             <$> f _frontend_port
+
+instance HasHealthCheck SlbListenerResource (TF.Argument Text) where
+    healthCheck f s@SlbListenerResource{..} =
+        (\a -> s { _health_check = a } :: SlbListenerResource)
+             <$> f _health_check
+
+instance HasHealthCheckConnectPort SlbListenerResource (TF.Argument Text) where
+    healthCheckConnectPort f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_connect_port = a } :: SlbListenerResource)
+             <$> f _health_check_connect_port
+
+instance HasHealthCheckDomain SlbListenerResource (TF.Argument Text) where
+    healthCheckDomain f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_domain = a } :: SlbListenerResource)
+             <$> f _health_check_domain
+
+instance HasHealthCheckHttpCode SlbListenerResource (TF.Argument Text) where
+    healthCheckHttpCode f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_http_code = a } :: SlbListenerResource)
+             <$> f _health_check_http_code
+
+instance HasHealthCheckInterval SlbListenerResource (TF.Argument Text) where
+    healthCheckInterval f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_interval = a } :: SlbListenerResource)
+             <$> f _health_check_interval
+
+instance HasHealthCheckTimeout SlbListenerResource (TF.Argument Text) where
+    healthCheckTimeout f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_timeout = a } :: SlbListenerResource)
+             <$> f _health_check_timeout
+
+instance HasHealthCheckType SlbListenerResource (TF.Argument Text) where
+    healthCheckType f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_type = a } :: SlbListenerResource)
+             <$> f _health_check_type
+
+instance HasHealthCheckUri SlbListenerResource (TF.Argument Text) where
+    healthCheckUri f s@SlbListenerResource{..} =
+        (\a -> s { _health_check_uri = a } :: SlbListenerResource)
+             <$> f _health_check_uri
+
+instance HasHealthyThreshold SlbListenerResource (TF.Argument Text) where
+    healthyThreshold f s@SlbListenerResource{..} =
+        (\a -> s { _healthy_threshold = a } :: SlbListenerResource)
+             <$> f _healthy_threshold
+
+instance HasLoadBalancerId SlbListenerResource (TF.Argument Text) where
+    loadBalancerId f s@SlbListenerResource{..} =
+        (\a -> s { _load_balancer_id = a } :: SlbListenerResource)
+             <$> f _load_balancer_id
+
+instance HasPersistenceTimeout SlbListenerResource (TF.Argument Text) where
+    persistenceTimeout f s@SlbListenerResource{..} =
+        (\a -> s { _persistence_timeout = a } :: SlbListenerResource)
+             <$> f _persistence_timeout
+
+instance HasProtocol SlbListenerResource (TF.Argument Text) where
+    protocol f s@SlbListenerResource{..} =
+        (\a -> s { _protocol = a } :: SlbListenerResource)
+             <$> f _protocol
+
+instance HasScheduler SlbListenerResource (TF.Argument Text) where
+    scheduler f s@SlbListenerResource{..} =
+        (\a -> s { _scheduler = a } :: SlbListenerResource)
+             <$> f _scheduler
+
+instance HasSslCertificateId SlbListenerResource (TF.Argument Text) where
+    sslCertificateId f s@SlbListenerResource{..} =
+        (\a -> s { _ssl_certificate_id = a } :: SlbListenerResource)
+             <$> f _ssl_certificate_id
+
+instance HasStickySession SlbListenerResource (TF.Argument Text) where
+    stickySession f s@SlbListenerResource{..} =
+        (\a -> s { _sticky_session = a } :: SlbListenerResource)
+             <$> f _sticky_session
+
+instance HasStickySessionType SlbListenerResource (TF.Argument Text) where
+    stickySessionType f s@SlbListenerResource{..} =
+        (\a -> s { _sticky_session_type = a } :: SlbListenerResource)
+             <$> f _sticky_session_type
+
+instance HasUnhealthyThreshold SlbListenerResource (TF.Argument Text) where
+    unhealthyThreshold f s@SlbListenerResource{..} =
+        (\a -> s { _unhealthy_threshold = a } :: SlbListenerResource)
+             <$> f _unhealthy_threshold
 
 slbListenerResource :: TF.Resource TF.AliCloud SlbListenerResource
 slbListenerResource =
@@ -2436,7 +5508,9 @@ can create new listeners for Load Balancer by resource
 @alicloud_slb_listener@ . If you have had several listeners in one load
 balancer, you can import them via the specified listener ID. In the
 @alicloud_slb_listener@ , listener ID is consist of load balancer ID and
-frontend port, and its format is " : ", like "lb-hr2fwnf32t:8080".
+frontend port, and its format is " : ", like "lb-hr2fwnf32t:8080". ~> NOTE:
+At present, to avoid some unnecessary regulation confusion, SLB can not
+support alicloud international account to create "paybybandwidth" instance.
 -}
 data SlbResource = SlbResource {
       _bandwidth                     :: !(TF.Argument Text)
@@ -2474,10 +5548,65 @@ instance TF.ToHCL SlbResource where
         , TF.assign "vswitch_id" <$> TF.argument _vswitch_id
         ]
 
-$(TF.makeSchemaLenses
-    ''SlbResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasBandwidth SlbResource (TF.Argument Text) where
+    bandwidth f s@SlbResource{..} =
+        (\a -> s { _bandwidth = a } :: SlbResource)
+             <$> f _bandwidth
+
+instance HasInternet SlbResource (TF.Argument Text) where
+    internet f s@SlbResource{..} =
+        (\a -> s { _internet = a } :: SlbResource)
+             <$> f _internet
+
+instance HasInternetChargeType SlbResource (TF.Argument Text) where
+    internetChargeType f s@SlbResource{..} =
+        (\a -> s { _internet_charge_type = a } :: SlbResource)
+             <$> f _internet_charge_type
+
+instance HasName SlbResource (TF.Argument Text) where
+    name f s@SlbResource{..} =
+        (\a -> s { _name = a } :: SlbResource)
+             <$> f _name
+
+instance HasVswitchId SlbResource (TF.Argument Text) where
+    vswitchId f s@SlbResource{..} =
+        (\a -> s { _vswitch_id = a } :: SlbResource)
+             <$> f _vswitch_id
+
+instance HasComputedAddress SlbResource (TF.Attribute Text) where
+    computedAddress f s@SlbResource{..} =
+        (\a -> s { _computed_address = a } :: SlbResource)
+             <$> f _computed_address
+
+instance HasComputedBandwidth SlbResource (TF.Attribute Text) where
+    computedBandwidth f s@SlbResource{..} =
+        (\a -> s { _computed_bandwidth = a } :: SlbResource)
+             <$> f _computed_bandwidth
+
+instance HasComputedId SlbResource (TF.Attribute Text) where
+    computedId f s@SlbResource{..} =
+        (\a -> s { _computed_id = a } :: SlbResource)
+             <$> f _computed_id
+
+instance HasComputedInternet SlbResource (TF.Attribute Text) where
+    computedInternet f s@SlbResource{..} =
+        (\a -> s { _computed_internet = a } :: SlbResource)
+             <$> f _computed_internet
+
+instance HasComputedInternetChargeType SlbResource (TF.Attribute Text) where
+    computedInternetChargeType f s@SlbResource{..} =
+        (\a -> s { _computed_internet_charge_type = a } :: SlbResource)
+             <$> f _computed_internet_charge_type
+
+instance HasComputedName SlbResource (TF.Attribute Text) where
+    computedName f s@SlbResource{..} =
+        (\a -> s { _computed_name = a } :: SlbResource)
+             <$> f _computed_name
+
+instance HasComputedVswitchId SlbResource (TF.Attribute Text) where
+    computedVswitchId f s@SlbResource{..} =
+        (\a -> s { _computed_vswitch_id = a } :: SlbResource)
+             <$> f _computed_vswitch_id
 
 slbResource :: TF.Resource TF.AliCloud SlbResource
 slbResource =
@@ -2495,6 +5624,59 @@ slbResource =
             , _computed_internet_charge_type = TF.Compute "internet_charge_type"
             , _computed_name = TF.Compute "name"
             , _computed_vswitch_id = TF.Compute "vswitch_id"
+            }
+
+{- | The @alicloud_slb_server_group@ AliCloud resource.
+
+A virtual server group contains several ECS instances. The virtual server
+group can help you to define multiple listening dimension, and to meet the
+personalized requirements of domain name and URL forwarding. ~> NOTE: One
+ECS instance can be added into multiple virtual server groups. ~> NOTE: One
+virtual server group can be attached with multiple listeners in one load
+balancer. ~> NOTE: One Classic and Internet load balancer, its virtual
+server group can add Classic and VPC ECS instances. ~> NOTE: One Classic and
+Intranet load balancer, its virtual server group can only add Classic ECS
+instances. ~> NOTE: One VPC load balancer, its virtual server group can only
+add the same VPC ECS instances.
+-}
+data SlbServerGroupResource = SlbServerGroupResource {
+      _load_balancer_id :: !(TF.Argument Text)
+    {- ^ (Required, ForceNew) The Load Balancer ID which is used to launch a new virtual server group. -}
+    , _name             :: !(TF.Argument Text)
+    {- ^ (Optional) Name of the virtual server group. Our plugin provides a default name: "tf-server-group". -}
+    , _servers          :: !(TF.Argument Text)
+    {- ^ (Required) A list of ECS instances to be added. At most 20 ECS instances can be supported in one resource. It contains three sub-fields as @Block server@ follows. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL SlbServerGroupResource where
+    toHCL SlbServerGroupResource{..} = TF.block $ catMaybes
+        [ TF.assign "load_balancer_id" <$> TF.argument _load_balancer_id
+        , TF.assign "name" <$> TF.argument _name
+        , TF.assign "servers" <$> TF.argument _servers
+        ]
+
+instance HasLoadBalancerId SlbServerGroupResource (TF.Argument Text) where
+    loadBalancerId f s@SlbServerGroupResource{..} =
+        (\a -> s { _load_balancer_id = a } :: SlbServerGroupResource)
+             <$> f _load_balancer_id
+
+instance HasName SlbServerGroupResource (TF.Argument Text) where
+    name f s@SlbServerGroupResource{..} =
+        (\a -> s { _name = a } :: SlbServerGroupResource)
+             <$> f _name
+
+instance HasServers SlbServerGroupResource (TF.Argument Text) where
+    servers f s@SlbServerGroupResource{..} =
+        (\a -> s { _servers = a } :: SlbServerGroupResource)
+             <$> f _servers
+
+slbServerGroupResource :: TF.Resource TF.AliCloud SlbServerGroupResource
+slbServerGroupResource =
+    TF.newResource "alicloud_slb_server_group" $
+        SlbServerGroupResource {
+            _load_balancer_id = TF.Nil
+            , _name = TF.Nil
+            , _servers = TF.Nil
             }
 
 {- | The @alicloud_snat@ AliCloud resource.
@@ -2517,10 +5699,20 @@ instance TF.ToHCL SnatResource where
         , TF.assign "source_vswitch_id" <$> TF.argument _source_vswitch_id
         ]
 
-$(TF.makeSchemaLenses
-    ''SnatResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasSnatIp SnatResource (TF.Argument Text) where
+    snatIp f s@SnatResource{..} =
+        (\a -> s { _snat_ip = a } :: SnatResource)
+             <$> f _snat_ip
+
+instance HasSnatTableId SnatResource (TF.Argument Text) where
+    snatTableId f s@SnatResource{..} =
+        (\a -> s { _snat_table_id = a } :: SnatResource)
+             <$> f _snat_table_id
+
+instance HasSourceVswitchId SnatResource (TF.Argument Text) where
+    sourceVswitchId f s@SnatResource{..} =
+        (\a -> s { _source_vswitch_id = a } :: SnatResource)
+             <$> f _source_vswitch_id
 
 snatResource :: TF.Resource TF.AliCloud SnatResource
 snatResource =
@@ -2564,10 +5756,50 @@ instance TF.ToHCL VpcResource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''VpcResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasCidrBlock VpcResource (TF.Argument Text) where
+    cidrBlock f s@VpcResource{..} =
+        (\a -> s { _cidr_block = a } :: VpcResource)
+             <$> f _cidr_block
+
+instance HasDescription VpcResource (TF.Argument Text) where
+    description f s@VpcResource{..} =
+        (\a -> s { _description = a } :: VpcResource)
+             <$> f _description
+
+instance HasName VpcResource (TF.Argument Text) where
+    name f s@VpcResource{..} =
+        (\a -> s { _name = a } :: VpcResource)
+             <$> f _name
+
+instance HasComputedCidrBlock VpcResource (TF.Attribute Text) where
+    computedCidrBlock f s@VpcResource{..} =
+        (\a -> s { _computed_cidr_block = a } :: VpcResource)
+             <$> f _computed_cidr_block
+
+instance HasComputedDescription VpcResource (TF.Attribute Text) where
+    computedDescription f s@VpcResource{..} =
+        (\a -> s { _computed_description = a } :: VpcResource)
+             <$> f _computed_description
+
+instance HasComputedId VpcResource (TF.Attribute Text) where
+    computedId f s@VpcResource{..} =
+        (\a -> s { _computed_id = a } :: VpcResource)
+             <$> f _computed_id
+
+instance HasComputedName VpcResource (TF.Attribute Text) where
+    computedName f s@VpcResource{..} =
+        (\a -> s { _computed_name = a } :: VpcResource)
+             <$> f _computed_name
+
+instance HasComputedRouteTableId VpcResource (TF.Attribute Text) where
+    computedRouteTableId f s@VpcResource{..} =
+        (\a -> s { _computed_route_table_id = a } :: VpcResource)
+             <$> f _computed_route_table_id
+
+instance HasComputedRouterId VpcResource (TF.Attribute Text) where
+    computedRouterId f s@VpcResource{..} =
+        (\a -> s { _computed_router_id = a } :: VpcResource)
+             <$> f _computed_router_id
 
 vpcResource :: TF.Resource TF.AliCloud VpcResource
 vpcResource =
@@ -2622,10 +5854,60 @@ instance TF.ToHCL VswitchResource where
         , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
-$(TF.makeSchemaLenses
-    ''VswitchResource
-    ''TF.AliCloud
-    ''TF.Resource)
+instance HasAvailabilityZone VswitchResource (TF.Argument Text) where
+    availabilityZone f s@VswitchResource{..} =
+        (\a -> s { _availability_zone = a } :: VswitchResource)
+             <$> f _availability_zone
+
+instance HasCidrBlock VswitchResource (TF.Argument Text) where
+    cidrBlock f s@VswitchResource{..} =
+        (\a -> s { _cidr_block = a } :: VswitchResource)
+             <$> f _cidr_block
+
+instance HasDescription VswitchResource (TF.Argument Text) where
+    description f s@VswitchResource{..} =
+        (\a -> s { _description = a } :: VswitchResource)
+             <$> f _description
+
+instance HasName VswitchResource (TF.Argument Text) where
+    name f s@VswitchResource{..} =
+        (\a -> s { _name = a } :: VswitchResource)
+             <$> f _name
+
+instance HasVpcId VswitchResource (TF.Argument Text) where
+    vpcId f s@VswitchResource{..} =
+        (\a -> s { _vpc_id = a } :: VswitchResource)
+             <$> f _vpc_id
+
+instance HasComputedAvailabilityZone VswitchResource (TF.Attribute Text) where
+    computedAvailabilityZone f s@VswitchResource{..} =
+        (\a -> s { _computed_availability_zone = a } :: VswitchResource)
+             <$> f _computed_availability_zone
+
+instance HasComputedCidrBlock VswitchResource (TF.Attribute Text) where
+    computedCidrBlock f s@VswitchResource{..} =
+        (\a -> s { _computed_cidr_block = a } :: VswitchResource)
+             <$> f _computed_cidr_block
+
+instance HasComputedDescription VswitchResource (TF.Attribute Text) where
+    computedDescription f s@VswitchResource{..} =
+        (\a -> s { _computed_description = a } :: VswitchResource)
+             <$> f _computed_description
+
+instance HasComputedId VswitchResource (TF.Attribute Text) where
+    computedId f s@VswitchResource{..} =
+        (\a -> s { _computed_id = a } :: VswitchResource)
+             <$> f _computed_id
+
+instance HasComputedName VswitchResource (TF.Attribute Text) where
+    computedName f s@VswitchResource{..} =
+        (\a -> s { _computed_name = a } :: VswitchResource)
+             <$> f _computed_name
+
+instance HasComputedVpcId VswitchResource (TF.Attribute Text) where
+    computedVpcId f s@VswitchResource{..} =
+        (\a -> s { _computed_vpc_id = a } :: VswitchResource)
+             <$> f _computed_vpc_id
 
 vswitchResource :: TF.Resource TF.AliCloud VswitchResource
 vswitchResource =
@@ -2643,3 +5925,1983 @@ vswitchResource =
             , _computed_name = TF.Compute "name"
             , _computed_vpc_id = TF.Compute "vpc_id"
             }
+
+class HasAccessPointId s a | s -> a where
+    accessPointId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAccessPointId s a => HasAccessPointId (TF.Resource p s) a where
+    accessPointId = TF.configuration . accessPointId
+
+class HasAccountAlias s a | s -> a where
+    accountAlias :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAccountAlias s a => HasAccountAlias (TF.Resource p s) a where
+    accountAlias = TF.configuration . accountAlias
+
+class HasAccountName s a | s -> a where
+    accountName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAccountName s a => HasAccountName (TF.Resource p s) a where
+    accountName = TF.configuration . accountName
+
+class HasAcl s a | s -> a where
+    acl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAcl s a => HasAcl (TF.Resource p s) a where
+    acl = TF.configuration . acl
+
+class HasActive s a | s -> a where
+    active :: Functor f => (a -> f a) -> s -> f s
+
+instance HasActive s a => HasActive (TF.Resource p s) a where
+    active = TF.configuration . active
+
+class HasAdjustmentType s a | s -> a where
+    adjustmentType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAdjustmentType s a => HasAdjustmentType (TF.Resource p s) a where
+    adjustmentType = TF.configuration . adjustmentType
+
+class HasAdjustmentValue s a | s -> a where
+    adjustmentValue :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAdjustmentValue s a => HasAdjustmentValue (TF.Resource p s) a where
+    adjustmentValue = TF.configuration . adjustmentValue
+
+class HasAllocatePublicIp s a | s -> a where
+    allocatePublicIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAllocatePublicIp s a => HasAllocatePublicIp (TF.Resource p s) a where
+    allocatePublicIp = TF.configuration . allocatePublicIp
+
+class HasAllocationId s a | s -> a where
+    allocationId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAllocationId s a => HasAllocationId (TF.Resource p s) a where
+    allocationId = TF.configuration . allocationId
+
+class HasAvailabilityZone s a | s -> a where
+    availabilityZone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAvailabilityZone s a => HasAvailabilityZone (TF.Resource p s) a where
+    availabilityZone = TF.configuration . availabilityZone
+
+class HasBackendPort s a | s -> a where
+    backendPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBackendPort s a => HasBackendPort (TF.Resource p s) a where
+    backendPort = TF.configuration . backendPort
+
+class HasBackupPeriod s a | s -> a where
+    backupPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBackupPeriod s a => HasBackupPeriod (TF.Resource p s) a where
+    backupPeriod = TF.configuration . backupPeriod
+
+class HasBackupTime s a | s -> a where
+    backupTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBackupTime s a => HasBackupTime (TF.Resource p s) a where
+    backupTime = TF.configuration . backupTime
+
+class HasBandwidth s a | s -> a where
+    bandwidth :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBandwidth s a => HasBandwidth (TF.Resource p s) a where
+    bandwidth = TF.configuration . bandwidth
+
+class HasBandwidthPackages s a | s -> a where
+    bandwidthPackages :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBandwidthPackages s a => HasBandwidthPackages (TF.Resource p s) a where
+    bandwidthPackages = TF.configuration . bandwidthPackages
+
+class HasBucket s a | s -> a where
+    bucket :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBucket s a => HasBucket (TF.Resource p s) a where
+    bucket = TF.configuration . bucket
+
+class HasCacheControl s a | s -> a where
+    cacheControl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCacheControl s a => HasCacheControl (TF.Resource p s) a where
+    cacheControl = TF.configuration . cacheControl
+
+class HasCategory s a | s -> a where
+    category :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCategory s a => HasCategory (TF.Resource p s) a where
+    category = TF.configuration . category
+
+class HasCdnType s a | s -> a where
+    cdnType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCdnType s a => HasCdnType (TF.Resource p s) a where
+    cdnType = TF.configuration . cdnType
+
+class HasCharacterSet s a | s -> a where
+    characterSet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCharacterSet s a => HasCharacterSet (TF.Resource p s) a where
+    characterSet = TF.configuration . characterSet
+
+class HasCidrBlock s a | s -> a where
+    cidrBlock :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCidrBlock s a => HasCidrBlock (TF.Resource p s) a where
+    cidrBlock = TF.configuration . cidrBlock
+
+class HasCidrIp s a | s -> a where
+    cidrIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCidrIp s a => HasCidrIp (TF.Resource p s) a where
+    cidrIp = TF.configuration . cidrIp
+
+class HasComments s a | s -> a where
+    comments :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComments s a => HasComments (TF.Resource p s) a where
+    comments = TF.configuration . comments
+
+class HasComputedAccessPointId s a | s -> a where
+    computedAccessPointId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAccessPointId s a => HasComputedAccessPointId (TF.Resource p s) a where
+    computedAccessPointId = TF.configuration . computedAccessPointId
+
+class HasComputedAccountAlias s a | s -> a where
+    computedAccountAlias :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAccountAlias s a => HasComputedAccountAlias (TF.Resource p s) a where
+    computedAccountAlias = TF.configuration . computedAccountAlias
+
+class HasComputedAccountName s a | s -> a where
+    computedAccountName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAccountName s a => HasComputedAccountName (TF.Resource p s) a where
+    computedAccountName = TF.configuration . computedAccountName
+
+class HasComputedAddress s a | s -> a where
+    computedAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddress s a => HasComputedAddress (TF.Resource p s) a where
+    computedAddress = TF.configuration . computedAddress
+
+class HasComputedAdjustmentType s a | s -> a where
+    computedAdjustmentType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAdjustmentType s a => HasComputedAdjustmentType (TF.Resource p s) a where
+    computedAdjustmentType = TF.configuration . computedAdjustmentType
+
+class HasComputedAdjustmentValue s a | s -> a where
+    computedAdjustmentValue :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAdjustmentValue s a => HasComputedAdjustmentValue (TF.Resource p s) a where
+    computedAdjustmentValue = TF.configuration . computedAdjustmentValue
+
+class HasComputedAllocationId s a | s -> a where
+    computedAllocationId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAllocationId s a => HasComputedAllocationId (TF.Resource p s) a where
+    computedAllocationId = TF.configuration . computedAllocationId
+
+class HasComputedAri s a | s -> a where
+    computedAri :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAri s a => HasComputedAri (TF.Resource p s) a where
+    computedAri = TF.configuration . computedAri
+
+class HasComputedArn s a | s -> a where
+    computedArn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedArn s a => HasComputedArn (TF.Resource p s) a where
+    computedArn = TF.configuration . computedArn
+
+class HasComputedAttachmentCount s a | s -> a where
+    computedAttachmentCount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAttachmentCount s a => HasComputedAttachmentCount (TF.Resource p s) a where
+    computedAttachmentCount = TF.configuration . computedAttachmentCount
+
+class HasComputedAvailabilityZone s a | s -> a where
+    computedAvailabilityZone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAvailabilityZone s a => HasComputedAvailabilityZone (TF.Resource p s) a where
+    computedAvailabilityZone = TF.configuration . computedAvailabilityZone
+
+class HasComputedBackendServers s a | s -> a where
+    computedBackendServers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedBackendServers s a => HasComputedBackendServers (TF.Resource p s) a where
+    computedBackendServers = TF.configuration . computedBackendServers
+
+class HasComputedBackupPeriod s a | s -> a where
+    computedBackupPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedBackupPeriod s a => HasComputedBackupPeriod (TF.Resource p s) a where
+    computedBackupPeriod = TF.configuration . computedBackupPeriod
+
+class HasComputedBackupRetentionPeriod s a | s -> a where
+    computedBackupRetentionPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedBackupRetentionPeriod s a => HasComputedBackupRetentionPeriod (TF.Resource p s) a where
+    computedBackupRetentionPeriod = TF.configuration . computedBackupRetentionPeriod
+
+class HasComputedBackupTime s a | s -> a where
+    computedBackupTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedBackupTime s a => HasComputedBackupTime (TF.Resource p s) a where
+    computedBackupTime = TF.configuration . computedBackupTime
+
+class HasComputedBandwidth s a | s -> a where
+    computedBandwidth :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedBandwidth s a => HasComputedBandwidth (TF.Resource p s) a where
+    computedBandwidth = TF.configuration . computedBandwidth
+
+class HasComputedCategory s a | s -> a where
+    computedCategory :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCategory s a => HasComputedCategory (TF.Resource p s) a where
+    computedCategory = TF.configuration . computedCategory
+
+class HasComputedCharacterSet s a | s -> a where
+    computedCharacterSet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCharacterSet s a => HasComputedCharacterSet (TF.Resource p s) a where
+    computedCharacterSet = TF.configuration . computedCharacterSet
+
+class HasComputedCidrBlock s a | s -> a where
+    computedCidrBlock :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCidrBlock s a => HasComputedCidrBlock (TF.Resource p s) a where
+    computedCidrBlock = TF.configuration . computedCidrBlock
+
+class HasComputedComments s a | s -> a where
+    computedComments :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedComments s a => HasComputedComments (TF.Resource p s) a where
+    computedComments = TF.configuration . computedComments
+
+class HasComputedConnectionPrefix s a | s -> a where
+    computedConnectionPrefix :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedConnectionPrefix s a => HasComputedConnectionPrefix (TF.Resource p s) a where
+    computedConnectionPrefix = TF.configuration . computedConnectionPrefix
+
+class HasComputedConnectionString s a | s -> a where
+    computedConnectionString :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedConnectionString s a => HasComputedConnectionString (TF.Resource p s) a where
+    computedConnectionString = TF.configuration . computedConnectionString
+
+class HasComputedConnections s a | s -> a where
+    computedConnections :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedConnections s a => HasComputedConnections (TF.Resource p s) a where
+    computedConnections = TF.configuration . computedConnections
+
+class HasComputedContentLength s a | s -> a where
+    computedContentLength :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedContentLength s a => HasComputedContentLength (TF.Resource p s) a where
+    computedContentLength = TF.configuration . computedContentLength
+
+class HasComputedCooldown s a | s -> a where
+    computedCooldown :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCooldown s a => HasComputedCooldown (TF.Resource p s) a where
+    computedCooldown = TF.configuration . computedCooldown
+
+class HasComputedDbInstanceClass s a | s -> a where
+    computedDbInstanceClass :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDbInstanceClass s a => HasComputedDbInstanceClass (TF.Resource p s) a where
+    computedDbInstanceClass = TF.configuration . computedDbInstanceClass
+
+class HasComputedDbInstanceIds s a | s -> a where
+    computedDbInstanceIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDbInstanceIds s a => HasComputedDbInstanceIds (TF.Resource p s) a where
+    computedDbInstanceIds = TF.configuration . computedDbInstanceIds
+
+class HasComputedDbInstanceNetType s a | s -> a where
+    computedDbInstanceNetType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDbInstanceNetType s a => HasComputedDbInstanceNetType (TF.Resource p s) a where
+    computedDbInstanceNetType = TF.configuration . computedDbInstanceNetType
+
+class HasComputedDbInstanceStorage s a | s -> a where
+    computedDbInstanceStorage :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDbInstanceStorage s a => HasComputedDbInstanceStorage (TF.Resource p s) a where
+    computedDbInstanceStorage = TF.configuration . computedDbInstanceStorage
+
+class HasComputedDbMappings s a | s -> a where
+    computedDbMappings :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDbMappings s a => HasComputedDbMappings (TF.Resource p s) a where
+    computedDbMappings = TF.configuration . computedDbMappings
+
+class HasComputedDbNames s a | s -> a where
+    computedDbNames :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDbNames s a => HasComputedDbNames (TF.Resource p s) a where
+    computedDbNames = TF.configuration . computedDbNames
+
+class HasComputedDefaultCooldown s a | s -> a where
+    computedDefaultCooldown :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDefaultCooldown s a => HasComputedDefaultCooldown (TF.Resource p s) a where
+    computedDefaultCooldown = TF.configuration . computedDefaultCooldown
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDescription s a => HasComputedDescription (TF.Resource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDestinationCidrblock s a | s -> a where
+    computedDestinationCidrblock :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDestinationCidrblock s a => HasComputedDestinationCidrblock (TF.Resource p s) a where
+    computedDestinationCidrblock = TF.configuration . computedDestinationCidrblock
+
+class HasComputedDeviceName s a | s -> a where
+    computedDeviceName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDeviceName s a => HasComputedDeviceName (TF.Resource p s) a where
+    computedDeviceName = TF.configuration . computedDeviceName
+
+class HasComputedDiskId s a | s -> a where
+    computedDiskId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDiskId s a => HasComputedDiskId (TF.Resource p s) a where
+    computedDiskId = TF.configuration . computedDiskId
+
+class HasComputedDisplayName s a | s -> a where
+    computedDisplayName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDisplayName s a => HasComputedDisplayName (TF.Resource p s) a where
+    computedDisplayName = TF.configuration . computedDisplayName
+
+class HasComputedDnsServer s a | s -> a where
+    computedDnsServer :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDnsServer s a => HasComputedDnsServer (TF.Resource p s) a where
+    computedDnsServer = TF.configuration . computedDnsServer
+
+class HasComputedDocument s a | s -> a where
+    computedDocument :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDocument s a => HasComputedDocument (TF.Resource p s) a where
+    computedDocument = TF.configuration . computedDocument
+
+class HasComputedDryRun s a | s -> a where
+    computedDryRun :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDryRun s a => HasComputedDryRun (TF.Resource p s) a where
+    computedDryRun = TF.configuration . computedDryRun
+
+class HasComputedEmail s a | s -> a where
+    computedEmail :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedEmail s a => HasComputedEmail (TF.Resource p s) a where
+    computedEmail = TF.configuration . computedEmail
+
+class HasComputedEngine s a | s -> a where
+    computedEngine :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedEngine s a => HasComputedEngine (TF.Resource p s) a where
+    computedEngine = TF.configuration . computedEngine
+
+class HasComputedEngineVersion s a | s -> a where
+    computedEngineVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedEngineVersion s a => HasComputedEngineVersion (TF.Resource p s) a where
+    computedEngineVersion = TF.configuration . computedEngineVersion
+
+class HasComputedEtag s a | s -> a where
+    computedEtag :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedEtag s a => HasComputedEtag (TF.Resource p s) a where
+    computedEtag = TF.configuration . computedEtag
+
+class HasComputedFingerprint s a | s -> a where
+    computedFingerprint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFingerprint s a => HasComputedFingerprint (TF.Resource p s) a where
+    computedFingerprint = TF.configuration . computedFingerprint
+
+class HasComputedGroupId s a | s -> a where
+    computedGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGroupId s a => HasComputedGroupId (TF.Resource p s) a where
+    computedGroupId = TF.configuration . computedGroupId
+
+class HasComputedGroupName s a | s -> a where
+    computedGroupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedGroupName s a => HasComputedGroupName (TF.Resource p s) a where
+    computedGroupName = TF.configuration . computedGroupName
+
+class HasComputedHealthCheckSourceIp s a | s -> a where
+    computedHealthCheckSourceIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHealthCheckSourceIp s a => HasComputedHealthCheckSourceIp (TF.Resource p s) a where
+    computedHealthCheckSourceIp = TF.configuration . computedHealthCheckSourceIp
+
+class HasComputedHealthCheckTargetIp s a | s -> a where
+    computedHealthCheckTargetIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHealthCheckTargetIp s a => HasComputedHealthCheckTargetIp (TF.Resource p s) a where
+    computedHealthCheckTargetIp = TF.configuration . computedHealthCheckTargetIp
+
+class HasComputedHostName s a | s -> a where
+    computedHostName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHostName s a => HasComputedHostName (TF.Resource p s) a where
+    computedHostName = TF.configuration . computedHostName
+
+class HasComputedHostRecord s a | s -> a where
+    computedHostRecord :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedHostRecord s a => HasComputedHostRecord (TF.Resource p s) a where
+    computedHostRecord = TF.configuration . computedHostRecord
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedImageId s a | s -> a where
+    computedImageId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedImageId s a => HasComputedImageId (TF.Resource p s) a where
+    computedImageId = TF.configuration . computedImageId
+
+class HasComputedInstanceChargeType s a | s -> a where
+    computedInstanceChargeType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceChargeType s a => HasComputedInstanceChargeType (TF.Resource p s) a where
+    computedInstanceChargeType = TF.configuration . computedInstanceChargeType
+
+class HasComputedInstanceId s a | s -> a where
+    computedInstanceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceId s a => HasComputedInstanceId (TF.Resource p s) a where
+    computedInstanceId = TF.configuration . computedInstanceId
+
+class HasComputedInstanceIds s a | s -> a where
+    computedInstanceIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceIds s a => HasComputedInstanceIds (TF.Resource p s) a where
+    computedInstanceIds = TF.configuration . computedInstanceIds
+
+class HasComputedInstanceName s a | s -> a where
+    computedInstanceName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceName s a => HasComputedInstanceName (TF.Resource p s) a where
+    computedInstanceName = TF.configuration . computedInstanceName
+
+class HasComputedInstanceNetworkType s a | s -> a where
+    computedInstanceNetworkType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceNetworkType s a => HasComputedInstanceNetworkType (TF.Resource p s) a where
+    computedInstanceNetworkType = TF.configuration . computedInstanceNetworkType
+
+class HasComputedInstanceStorage s a | s -> a where
+    computedInstanceStorage :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceStorage s a => HasComputedInstanceStorage (TF.Resource p s) a where
+    computedInstanceStorage = TF.configuration . computedInstanceStorage
+
+class HasComputedInstanceType s a | s -> a where
+    computedInstanceType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInstanceType s a => HasComputedInstanceType (TF.Resource p s) a where
+    computedInstanceType = TF.configuration . computedInstanceType
+
+class HasComputedInternet s a | s -> a where
+    computedInternet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInternet s a => HasComputedInternet (TF.Resource p s) a where
+    computedInternet = TF.configuration . computedInternet
+
+class HasComputedInternetChargeType s a | s -> a where
+    computedInternetChargeType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInternetChargeType s a => HasComputedInternetChargeType (TF.Resource p s) a where
+    computedInternetChargeType = TF.configuration . computedInternetChargeType
+
+class HasComputedIpAddress s a | s -> a where
+    computedIpAddress :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIpAddress s a => HasComputedIpAddress (TF.Resource p s) a where
+    computedIpAddress = TF.configuration . computedIpAddress
+
+class HasComputedIpProtocol s a | s -> a where
+    computedIpProtocol :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedIpProtocol s a => HasComputedIpProtocol (TF.Resource p s) a where
+    computedIpProtocol = TF.configuration . computedIpProtocol
+
+class HasComputedKeyName s a | s -> a where
+    computedKeyName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedKeyName s a => HasComputedKeyName (TF.Resource p s) a where
+    computedKeyName = TF.configuration . computedKeyName
+
+class HasComputedLaunchTime s a | s -> a where
+    computedLaunchTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLaunchTime s a => HasComputedLaunchTime (TF.Resource p s) a where
+    computedLaunchTime = TF.configuration . computedLaunchTime
+
+class HasComputedLoadbalancerIds s a | s -> a where
+    computedLoadbalancerIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLoadbalancerIds s a => HasComputedLoadbalancerIds (TF.Resource p s) a where
+    computedLoadbalancerIds = TF.configuration . computedLoadbalancerIds
+
+class HasComputedLocked s a | s -> a where
+    computedLocked :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLocked s a => HasComputedLocked (TF.Resource p s) a where
+    computedLocked = TF.configuration . computedLocked
+
+class HasComputedLogBackup s a | s -> a where
+    computedLogBackup :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLogBackup s a => HasComputedLogBackup (TF.Resource p s) a where
+    computedLogBackup = TF.configuration . computedLogBackup
+
+class HasComputedLogRetentionPeriod s a | s -> a where
+    computedLogRetentionPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLogRetentionPeriod s a => HasComputedLogRetentionPeriod (TF.Resource p s) a where
+    computedLogRetentionPeriod = TF.configuration . computedLogRetentionPeriod
+
+class HasComputedMasterUserName s a | s -> a where
+    computedMasterUserName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMasterUserName s a => HasComputedMasterUserName (TF.Resource p s) a where
+    computedMasterUserName = TF.configuration . computedMasterUserName
+
+class HasComputedMaxSize s a | s -> a where
+    computedMaxSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMaxSize s a => HasComputedMaxSize (TF.Resource p s) a where
+    computedMaxSize = TF.configuration . computedMaxSize
+
+class HasComputedMfaBindRequired s a | s -> a where
+    computedMfaBindRequired :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMfaBindRequired s a => HasComputedMfaBindRequired (TF.Resource p s) a where
+    computedMfaBindRequired = TF.configuration . computedMfaBindRequired
+
+class HasComputedMinSize s a | s -> a where
+    computedMinSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMinSize s a => HasComputedMinSize (TF.Resource p s) a where
+    computedMinSize = TF.configuration . computedMinSize
+
+class HasComputedMobile s a | s -> a where
+    computedMobile :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedMobile s a => HasComputedMobile (TF.Resource p s) a where
+    computedMobile = TF.configuration . computedMobile
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedNexthopId s a | s -> a where
+    computedNexthopId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNexthopId s a => HasComputedNexthopId (TF.Resource p s) a where
+    computedNexthopId = TF.configuration . computedNexthopId
+
+class HasComputedNexthopType s a | s -> a where
+    computedNexthopType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedNexthopType s a => HasComputedNexthopType (TF.Resource p s) a where
+    computedNexthopType = TF.configuration . computedNexthopType
+
+class HasComputedOppositeAccessPointId s a | s -> a where
+    computedOppositeAccessPointId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOppositeAccessPointId s a => HasComputedOppositeAccessPointId (TF.Resource p s) a where
+    computedOppositeAccessPointId = TF.configuration . computedOppositeAccessPointId
+
+class HasComputedOppositeInterfaceId s a | s -> a where
+    computedOppositeInterfaceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOppositeInterfaceId s a => HasComputedOppositeInterfaceId (TF.Resource p s) a where
+    computedOppositeInterfaceId = TF.configuration . computedOppositeInterfaceId
+
+class HasComputedOppositeInterfaceOwnerId s a | s -> a where
+    computedOppositeInterfaceOwnerId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOppositeInterfaceOwnerId s a => HasComputedOppositeInterfaceOwnerId (TF.Resource p s) a where
+    computedOppositeInterfaceOwnerId = TF.configuration . computedOppositeInterfaceOwnerId
+
+class HasComputedOppositeRouterId s a | s -> a where
+    computedOppositeRouterId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOppositeRouterId s a => HasComputedOppositeRouterId (TF.Resource p s) a where
+    computedOppositeRouterId = TF.configuration . computedOppositeRouterId
+
+class HasComputedOppositeRouterType s a | s -> a where
+    computedOppositeRouterType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOppositeRouterType s a => HasComputedOppositeRouterType (TF.Resource p s) a where
+    computedOppositeRouterType = TF.configuration . computedOppositeRouterType
+
+class HasComputedPasswordResetRequired s a | s -> a where
+    computedPasswordResetRequired :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPasswordResetRequired s a => HasComputedPasswordResetRequired (TF.Resource p s) a where
+    computedPasswordResetRequired = TF.configuration . computedPasswordResetRequired
+
+class HasComputedPeriod s a | s -> a where
+    computedPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPeriod s a => HasComputedPeriod (TF.Resource p s) a where
+    computedPeriod = TF.configuration . computedPeriod
+
+class HasComputedPeriodUnit s a | s -> a where
+    computedPeriodUnit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPeriodUnit s a => HasComputedPeriodUnit (TF.Resource p s) a where
+    computedPeriodUnit = TF.configuration . computedPeriodUnit
+
+class HasComputedPolicyName s a | s -> a where
+    computedPolicyName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPolicyName s a => HasComputedPolicyName (TF.Resource p s) a where
+    computedPolicyName = TF.configuration . computedPolicyName
+
+class HasComputedPolicyType s a | s -> a where
+    computedPolicyType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPolicyType s a => HasComputedPolicyType (TF.Resource p s) a where
+    computedPolicyType = TF.configuration . computedPolicyType
+
+class HasComputedPort s a | s -> a where
+    computedPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPort s a => HasComputedPort (TF.Resource p s) a where
+    computedPort = TF.configuration . computedPort
+
+class HasComputedPortRange s a | s -> a where
+    computedPortRange :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPortRange s a => HasComputedPortRange (TF.Resource p s) a where
+    computedPortRange = TF.configuration . computedPortRange
+
+class HasComputedPreferredBackupPeriod s a | s -> a where
+    computedPreferredBackupPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPreferredBackupPeriod s a => HasComputedPreferredBackupPeriod (TF.Resource p s) a where
+    computedPreferredBackupPeriod = TF.configuration . computedPreferredBackupPeriod
+
+class HasComputedPreferredBackupTime s a | s -> a where
+    computedPreferredBackupTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPreferredBackupTime s a => HasComputedPreferredBackupTime (TF.Resource p s) a where
+    computedPreferredBackupTime = TF.configuration . computedPreferredBackupTime
+
+class HasComputedPriority s a | s -> a where
+    computedPriority :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPriority s a => HasComputedPriority (TF.Resource p s) a where
+    computedPriority = TF.configuration . computedPriority
+
+class HasComputedPrivateIp s a | s -> a where
+    computedPrivateIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPrivateIp s a => HasComputedPrivateIp (TF.Resource p s) a where
+    computedPrivateIp = TF.configuration . computedPrivateIp
+
+class HasComputedPrivilege s a | s -> a where
+    computedPrivilege :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPrivilege s a => HasComputedPrivilege (TF.Resource p s) a where
+    computedPrivilege = TF.configuration . computedPrivilege
+
+class HasComputedPublicIp s a | s -> a where
+    computedPublicIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedPublicIp s a => HasComputedPublicIp (TF.Resource p s) a where
+    computedPublicIp = TF.configuration . computedPublicIp
+
+class HasComputedRamUsers s a | s -> a where
+    computedRamUsers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRamUsers s a => HasComputedRamUsers (TF.Resource p s) a where
+    computedRamUsers = TF.configuration . computedRamUsers
+
+class HasComputedRemovalPolicies s a | s -> a where
+    computedRemovalPolicies :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRemovalPolicies s a => HasComputedRemovalPolicies (TF.Resource p s) a where
+    computedRemovalPolicies = TF.configuration . computedRemovalPolicies
+
+class HasComputedRetentionPeriod s a | s -> a where
+    computedRetentionPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRetentionPeriod s a => HasComputedRetentionPeriod (TF.Resource p s) a where
+    computedRetentionPeriod = TF.configuration . computedRetentionPeriod
+
+class HasComputedRole s a | s -> a where
+    computedRole :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRole s a => HasComputedRole (TF.Resource p s) a where
+    computedRole = TF.configuration . computedRole
+
+class HasComputedRoleName s a | s -> a where
+    computedRoleName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRoleName s a => HasComputedRoleName (TF.Resource p s) a where
+    computedRoleName = TF.configuration . computedRoleName
+
+class HasComputedRouteTableId s a | s -> a where
+    computedRouteTableId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRouteTableId s a => HasComputedRouteTableId (TF.Resource p s) a where
+    computedRouteTableId = TF.configuration . computedRouteTableId
+
+class HasComputedRouterId s a | s -> a where
+    computedRouterId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRouterId s a => HasComputedRouterId (TF.Resource p s) a where
+    computedRouterId = TF.configuration . computedRouterId
+
+class HasComputedRouterType s a | s -> a where
+    computedRouterType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRouterType s a => HasComputedRouterType (TF.Resource p s) a where
+    computedRouterType = TF.configuration . computedRouterType
+
+class HasComputedRouting s a | s -> a where
+    computedRouting :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRouting s a => HasComputedRouting (TF.Resource p s) a where
+    computedRouting = TF.configuration . computedRouting
+
+class HasComputedScalingGroupId s a | s -> a where
+    computedScalingGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedScalingGroupId s a => HasComputedScalingGroupId (TF.Resource p s) a where
+    computedScalingGroupId = TF.configuration . computedScalingGroupId
+
+class HasComputedScalingGroupName s a | s -> a where
+    computedScalingGroupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedScalingGroupName s a => HasComputedScalingGroupName (TF.Resource p s) a where
+    computedScalingGroupName = TF.configuration . computedScalingGroupName
+
+class HasComputedScalingRuleName s a | s -> a where
+    computedScalingRuleName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedScalingRuleName s a => HasComputedScalingRuleName (TF.Resource p s) a where
+    computedScalingRuleName = TF.configuration . computedScalingRuleName
+
+class HasComputedScheduledAction s a | s -> a where
+    computedScheduledAction :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedScheduledAction s a => HasComputedScheduledAction (TF.Resource p s) a where
+    computedScheduledAction = TF.configuration . computedScheduledAction
+
+class HasComputedScheduledTaskName s a | s -> a where
+    computedScheduledTaskName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedScheduledTaskName s a => HasComputedScheduledTaskName (TF.Resource p s) a where
+    computedScheduledTaskName = TF.configuration . computedScheduledTaskName
+
+class HasComputedSecurityIps s a | s -> a where
+    computedSecurityIps :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSecurityIps s a => HasComputedSecurityIps (TF.Resource p s) a where
+    computedSecurityIps = TF.configuration . computedSecurityIps
+
+class HasComputedServices s a | s -> a where
+    computedServices :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedServices s a => HasComputedServices (TF.Resource p s) a where
+    computedServices = TF.configuration . computedServices
+
+class HasComputedSize s a | s -> a where
+    computedSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSize s a => HasComputedSize (TF.Resource p s) a where
+    computedSize = TF.configuration . computedSize
+
+class HasComputedSnapshotId s a | s -> a where
+    computedSnapshotId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSnapshotId s a => HasComputedSnapshotId (TF.Resource p s) a where
+    computedSnapshotId = TF.configuration . computedSnapshotId
+
+class HasComputedSpecification s a | s -> a where
+    computedSpecification :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSpecification s a => HasComputedSpecification (TF.Resource p s) a where
+    computedSpecification = TF.configuration . computedSpecification
+
+class HasComputedSpotPriceLimit s a | s -> a where
+    computedSpotPriceLimit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSpotPriceLimit s a => HasComputedSpotPriceLimit (TF.Resource p s) a where
+    computedSpotPriceLimit = TF.configuration . computedSpotPriceLimit
+
+class HasComputedSpotStrategy s a | s -> a where
+    computedSpotStrategy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedSpotStrategy s a => HasComputedSpotStrategy (TF.Resource p s) a where
+    computedSpotStrategy = TF.configuration . computedSpotStrategy
+
+class HasComputedStatement s a | s -> a where
+    computedStatement :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStatement s a => HasComputedStatement (TF.Resource p s) a where
+    computedStatement = TF.configuration . computedStatement
+
+class HasComputedStatus s a | s -> a where
+    computedStatus :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedStatus s a => HasComputedStatus (TF.Resource p s) a where
+    computedStatus = TF.configuration . computedStatus
+
+class HasComputedTags s a | s -> a where
+    computedTags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTags s a => HasComputedTags (TF.Resource p s) a where
+    computedTags = TF.configuration . computedTags
+
+class HasComputedTaskEnabled s a | s -> a where
+    computedTaskEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTaskEnabled s a => HasComputedTaskEnabled (TF.Resource p s) a where
+    computedTaskEnabled = TF.configuration . computedTaskEnabled
+
+class HasComputedTtl s a | s -> a where
+    computedTtl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTtl s a => HasComputedTtl (TF.Resource p s) a where
+    computedTtl = TF.configuration . computedTtl
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.Resource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasComputedUserData s a | s -> a where
+    computedUserData :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUserData s a => HasComputedUserData (TF.Resource p s) a where
+    computedUserData = TF.configuration . computedUserData
+
+class HasComputedUserName s a | s -> a where
+    computedUserName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUserName s a => HasComputedUserName (TF.Resource p s) a where
+    computedUserName = TF.configuration . computedUserName
+
+class HasComputedUserNames s a | s -> a where
+    computedUserNames :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUserNames s a => HasComputedUserNames (TF.Resource p s) a where
+    computedUserNames = TF.configuration . computedUserNames
+
+class HasComputedValue s a | s -> a where
+    computedValue :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedValue s a => HasComputedValue (TF.Resource p s) a where
+    computedValue = TF.configuration . computedValue
+
+class HasComputedVersion s a | s -> a where
+    computedVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVersion s a => HasComputedVersion (TF.Resource p s) a where
+    computedVersion = TF.configuration . computedVersion
+
+class HasComputedVpcId s a | s -> a where
+    computedVpcId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVpcId s a => HasComputedVpcId (TF.Resource p s) a where
+    computedVpcId = TF.configuration . computedVpcId
+
+class HasComputedVswitchId s a | s -> a where
+    computedVswitchId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedVswitchId s a => HasComputedVswitchId (TF.Resource p s) a where
+    computedVswitchId = TF.configuration . computedVswitchId
+
+class HasComputedZoneId s a | s -> a where
+    computedZoneId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedZoneId s a => HasComputedZoneId (TF.Resource p s) a where
+    computedZoneId = TF.configuration . computedZoneId
+
+class HasConnectionPrefix s a | s -> a where
+    connectionPrefix :: Functor f => (a -> f a) -> s -> f s
+
+instance HasConnectionPrefix s a => HasConnectionPrefix (TF.Resource p s) a where
+    connectionPrefix = TF.configuration . connectionPrefix
+
+class HasContent s a | s -> a where
+    content :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContent s a => HasContent (TF.Resource p s) a where
+    content = TF.configuration . content
+
+class HasContentDisposition s a | s -> a where
+    contentDisposition :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContentDisposition s a => HasContentDisposition (TF.Resource p s) a where
+    contentDisposition = TF.configuration . contentDisposition
+
+class HasContentEncoding s a | s -> a where
+    contentEncoding :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContentEncoding s a => HasContentEncoding (TF.Resource p s) a where
+    contentEncoding = TF.configuration . contentEncoding
+
+class HasContentMd5 s a | s -> a where
+    contentMd5 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContentMd5 s a => HasContentMd5 (TF.Resource p s) a where
+    contentMd5 = TF.configuration . contentMd5
+
+class HasContentType s a | s -> a where
+    contentType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContentType s a => HasContentType (TF.Resource p s) a where
+    contentType = TF.configuration . contentType
+
+class HasCookie s a | s -> a where
+    cookie :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCookie s a => HasCookie (TF.Resource p s) a where
+    cookie = TF.configuration . cookie
+
+class HasCookieTimeout s a | s -> a where
+    cookieTimeout :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCookieTimeout s a => HasCookieTimeout (TF.Resource p s) a where
+    cookieTimeout = TF.configuration . cookieTimeout
+
+class HasCooldown s a | s -> a where
+    cooldown :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCooldown s a => HasCooldown (TF.Resource p s) a where
+    cooldown = TF.configuration . cooldown
+
+class HasCoreRule s a | s -> a where
+    coreRule :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCoreRule s a => HasCoreRule (TF.Resource p s) a where
+    coreRule = TF.configuration . coreRule
+
+class HasDataDisk s a | s -> a where
+    dataDisk :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDataDisk s a => HasDataDisk (TF.Resource p s) a where
+    dataDisk = TF.configuration . dataDisk
+
+class HasDbInstanceIds s a | s -> a where
+    dbInstanceIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDbInstanceIds s a => HasDbInstanceIds (TF.Resource p s) a where
+    dbInstanceIds = TF.configuration . dbInstanceIds
+
+class HasDbNames s a | s -> a where
+    dbNames :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDbNames s a => HasDbNames (TF.Resource p s) a where
+    dbNames = TF.configuration . dbNames
+
+class HasDefaultCooldown s a | s -> a where
+    defaultCooldown :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDefaultCooldown s a => HasDefaultCooldown (TF.Resource p s) a where
+    defaultCooldown = TF.configuration . defaultCooldown
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasDestinationCidrblock s a | s -> a where
+    destinationCidrblock :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDestinationCidrblock s a => HasDestinationCidrblock (TF.Resource p s) a where
+    destinationCidrblock = TF.configuration . destinationCidrblock
+
+class HasDiskCategory s a | s -> a where
+    diskCategory :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDiskCategory s a => HasDiskCategory (TF.Resource p s) a where
+    diskCategory = TF.configuration . diskCategory
+
+class HasDiskId s a | s -> a where
+    diskId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDiskId s a => HasDiskId (TF.Resource p s) a where
+    diskId = TF.configuration . diskId
+
+class HasDiskSize s a | s -> a where
+    diskSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDiskSize s a => HasDiskSize (TF.Resource p s) a where
+    diskSize = TF.configuration . diskSize
+
+class HasDisplayName s a | s -> a where
+    displayName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDisplayName s a => HasDisplayName (TF.Resource p s) a where
+    displayName = TF.configuration . displayName
+
+class HasDocument s a | s -> a where
+    document :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDocument s a => HasDocument (TF.Resource p s) a where
+    document = TF.configuration . document
+
+class HasDomainName s a | s -> a where
+    domainName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDomainName s a => HasDomainName (TF.Resource p s) a where
+    domainName = TF.configuration . domainName
+
+class HasDryRun s a | s -> a where
+    dryRun :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDryRun s a => HasDryRun (TF.Resource p s) a where
+    dryRun = TF.configuration . dryRun
+
+class HasEmail s a | s -> a where
+    email :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEmail s a => HasEmail (TF.Resource p s) a where
+    email = TF.configuration . email
+
+class HasEnable s a | s -> a where
+    enable :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEnable s a => HasEnable (TF.Resource p s) a where
+    enable = TF.configuration . enable
+
+class HasEngine s a | s -> a where
+    engine :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEngine s a => HasEngine (TF.Resource p s) a where
+    engine = TF.configuration . engine
+
+class HasEngineVersion s a | s -> a where
+    engineVersion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEngineVersion s a => HasEngineVersion (TF.Resource p s) a where
+    engineVersion = TF.configuration . engineVersion
+
+class HasExpires s a | s -> a where
+    expires :: Functor f => (a -> f a) -> s -> f s
+
+instance HasExpires s a => HasExpires (TF.Resource p s) a where
+    expires = TF.configuration . expires
+
+class HasExternalIp s a | s -> a where
+    externalIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasExternalIp s a => HasExternalIp (TF.Resource p s) a where
+    externalIp = TF.configuration . externalIp
+
+class HasExternalPort s a | s -> a where
+    externalPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasExternalPort s a => HasExternalPort (TF.Resource p s) a where
+    externalPort = TF.configuration . externalPort
+
+class HasForce s a | s -> a where
+    force :: Functor f => (a -> f a) -> s -> f s
+
+instance HasForce s a => HasForce (TF.Resource p s) a where
+    force = TF.configuration . force
+
+class HasForceDelete s a | s -> a where
+    forceDelete :: Functor f => (a -> f a) -> s -> f s
+
+instance HasForceDelete s a => HasForceDelete (TF.Resource p s) a where
+    forceDelete = TF.configuration . forceDelete
+
+class HasForwardTableId s a | s -> a where
+    forwardTableId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasForwardTableId s a => HasForwardTableId (TF.Resource p s) a where
+    forwardTableId = TF.configuration . forwardTableId
+
+class HasFrontendPort s a | s -> a where
+    frontendPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFrontendPort s a => HasFrontendPort (TF.Resource p s) a where
+    frontendPort = TF.configuration . frontendPort
+
+class HasGroupId s a | s -> a where
+    groupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGroupId s a => HasGroupId (TF.Resource p s) a where
+    groupId = TF.configuration . groupId
+
+class HasGroupName s a | s -> a where
+    groupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGroupName s a => HasGroupName (TF.Resource p s) a where
+    groupName = TF.configuration . groupName
+
+class HasHealthCheck s a | s -> a where
+    healthCheck :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheck s a => HasHealthCheck (TF.Resource p s) a where
+    healthCheck = TF.configuration . healthCheck
+
+class HasHealthCheckConnectPort s a | s -> a where
+    healthCheckConnectPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckConnectPort s a => HasHealthCheckConnectPort (TF.Resource p s) a where
+    healthCheckConnectPort = TF.configuration . healthCheckConnectPort
+
+class HasHealthCheckDomain s a | s -> a where
+    healthCheckDomain :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckDomain s a => HasHealthCheckDomain (TF.Resource p s) a where
+    healthCheckDomain = TF.configuration . healthCheckDomain
+
+class HasHealthCheckHttpCode s a | s -> a where
+    healthCheckHttpCode :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckHttpCode s a => HasHealthCheckHttpCode (TF.Resource p s) a where
+    healthCheckHttpCode = TF.configuration . healthCheckHttpCode
+
+class HasHealthCheckInterval s a | s -> a where
+    healthCheckInterval :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckInterval s a => HasHealthCheckInterval (TF.Resource p s) a where
+    healthCheckInterval = TF.configuration . healthCheckInterval
+
+class HasHealthCheckSourceIp s a | s -> a where
+    healthCheckSourceIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckSourceIp s a => HasHealthCheckSourceIp (TF.Resource p s) a where
+    healthCheckSourceIp = TF.configuration . healthCheckSourceIp
+
+class HasHealthCheckTargetIp s a | s -> a where
+    healthCheckTargetIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckTargetIp s a => HasHealthCheckTargetIp (TF.Resource p s) a where
+    healthCheckTargetIp = TF.configuration . healthCheckTargetIp
+
+class HasHealthCheckTimeout s a | s -> a where
+    healthCheckTimeout :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckTimeout s a => HasHealthCheckTimeout (TF.Resource p s) a where
+    healthCheckTimeout = TF.configuration . healthCheckTimeout
+
+class HasHealthCheckType s a | s -> a where
+    healthCheckType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckType s a => HasHealthCheckType (TF.Resource p s) a where
+    healthCheckType = TF.configuration . healthCheckType
+
+class HasHealthCheckUri s a | s -> a where
+    healthCheckUri :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthCheckUri s a => HasHealthCheckUri (TF.Resource p s) a where
+    healthCheckUri = TF.configuration . healthCheckUri
+
+class HasHealthyThreshold s a | s -> a where
+    healthyThreshold :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHealthyThreshold s a => HasHealthyThreshold (TF.Resource p s) a where
+    healthyThreshold = TF.configuration . healthyThreshold
+
+class HasHostName s a | s -> a where
+    hostName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostName s a => HasHostName (TF.Resource p s) a where
+    hostName = TF.configuration . hostName
+
+class HasHostRecord s a | s -> a where
+    hostRecord :: Functor f => (a -> f a) -> s -> f s
+
+instance HasHostRecord s a => HasHostRecord (TF.Resource p s) a where
+    hostRecord = TF.configuration . hostRecord
+
+class HasImageId s a | s -> a where
+    imageId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasImageId s a => HasImageId (TF.Resource p s) a where
+    imageId = TF.configuration . imageId
+
+class HasIncludeDataDisks s a | s -> a where
+    includeDataDisks :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIncludeDataDisks s a => HasIncludeDataDisks (TF.Resource p s) a where
+    includeDataDisks = TF.configuration . includeDataDisks
+
+class HasInstanceChargeType s a | s -> a where
+    instanceChargeType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceChargeType s a => HasInstanceChargeType (TF.Resource p s) a where
+    instanceChargeType = TF.configuration . instanceChargeType
+
+class HasInstanceId s a | s -> a where
+    instanceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceId s a => HasInstanceId (TF.Resource p s) a where
+    instanceId = TF.configuration . instanceId
+
+class HasInstanceIds s a | s -> a where
+    instanceIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceIds s a => HasInstanceIds (TF.Resource p s) a where
+    instanceIds = TF.configuration . instanceIds
+
+class HasInstanceName s a | s -> a where
+    instanceName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceName s a => HasInstanceName (TF.Resource p s) a where
+    instanceName = TF.configuration . instanceName
+
+class HasInstanceStorage s a | s -> a where
+    instanceStorage :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceStorage s a => HasInstanceStorage (TF.Resource p s) a where
+    instanceStorage = TF.configuration . instanceStorage
+
+class HasInstanceType s a | s -> a where
+    instanceType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceType s a => HasInstanceType (TF.Resource p s) a where
+    instanceType = TF.configuration . instanceType
+
+class HasInstances s a | s -> a where
+    instances :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstances s a => HasInstances (TF.Resource p s) a where
+    instances = TF.configuration . instances
+
+class HasInternalIp s a | s -> a where
+    internalIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternalIp s a => HasInternalIp (TF.Resource p s) a where
+    internalIp = TF.configuration . internalIp
+
+class HasInternalPort s a | s -> a where
+    internalPort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternalPort s a => HasInternalPort (TF.Resource p s) a where
+    internalPort = TF.configuration . internalPort
+
+class HasInternet s a | s -> a where
+    internet :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternet s a => HasInternet (TF.Resource p s) a where
+    internet = TF.configuration . internet
+
+class HasInternetChargeType s a | s -> a where
+    internetChargeType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternetChargeType s a => HasInternetChargeType (TF.Resource p s) a where
+    internetChargeType = TF.configuration . internetChargeType
+
+class HasInternetMaxBandwidthIn s a | s -> a where
+    internetMaxBandwidthIn :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternetMaxBandwidthIn s a => HasInternetMaxBandwidthIn (TF.Resource p s) a where
+    internetMaxBandwidthIn = TF.configuration . internetMaxBandwidthIn
+
+class HasInternetMaxBandwidthOut s a | s -> a where
+    internetMaxBandwidthOut :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInternetMaxBandwidthOut s a => HasInternetMaxBandwidthOut (TF.Resource p s) a where
+    internetMaxBandwidthOut = TF.configuration . internetMaxBandwidthOut
+
+class HasIpProtocol s a | s -> a where
+    ipProtocol :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIpProtocol s a => HasIpProtocol (TF.Resource p s) a where
+    ipProtocol = TF.configuration . ipProtocol
+
+class HasIsOutdated s a | s -> a where
+    isOutdated :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIsOutdated s a => HasIsOutdated (TF.Resource p s) a where
+    isOutdated = TF.configuration . isOutdated
+
+class HasKey s a | s -> a where
+    key :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKey s a => HasKey (TF.Resource p s) a where
+    key = TF.configuration . key
+
+class HasKeyFile s a | s -> a where
+    keyFile :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKeyFile s a => HasKeyFile (TF.Resource p s) a where
+    keyFile = TF.configuration . keyFile
+
+class HasKeyName s a | s -> a where
+    keyName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKeyName s a => HasKeyName (TF.Resource p s) a where
+    keyName = TF.configuration . keyName
+
+class HasKeyNamePrefix s a | s -> a where
+    keyNamePrefix :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKeyNamePrefix s a => HasKeyNamePrefix (TF.Resource p s) a where
+    keyNamePrefix = TF.configuration . keyNamePrefix
+
+class HasLaunchExpirationTime s a | s -> a where
+    launchExpirationTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLaunchExpirationTime s a => HasLaunchExpirationTime (TF.Resource p s) a where
+    launchExpirationTime = TF.configuration . launchExpirationTime
+
+class HasLaunchTime s a | s -> a where
+    launchTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLaunchTime s a => HasLaunchTime (TF.Resource p s) a where
+    launchTime = TF.configuration . launchTime
+
+class HasLifecycleRule s a | s -> a where
+    lifecycleRule :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLifecycleRule s a => HasLifecycleRule (TF.Resource p s) a where
+    lifecycleRule = TF.configuration . lifecycleRule
+
+class HasLoadBalancerId s a | s -> a where
+    loadBalancerId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLoadBalancerId s a => HasLoadBalancerId (TF.Resource p s) a where
+    loadBalancerId = TF.configuration . loadBalancerId
+
+class HasLoadbalancerIds s a | s -> a where
+    loadbalancerIds :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLoadbalancerIds s a => HasLoadbalancerIds (TF.Resource p s) a where
+    loadbalancerIds = TF.configuration . loadbalancerIds
+
+class HasLogBackup s a | s -> a where
+    logBackup :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLogBackup s a => HasLogBackup (TF.Resource p s) a where
+    logBackup = TF.configuration . logBackup
+
+class HasLogRetentionPeriod s a | s -> a where
+    logRetentionPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLogRetentionPeriod s a => HasLogRetentionPeriod (TF.Resource p s) a where
+    logRetentionPeriod = TF.configuration . logRetentionPeriod
+
+class HasLogging s a | s -> a where
+    logging :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLogging s a => HasLogging (TF.Resource p s) a where
+    logging = TF.configuration . logging
+
+class HasLoggingIsenable s a | s -> a where
+    loggingIsenable :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLoggingIsenable s a => HasLoggingIsenable (TF.Resource p s) a where
+    loggingIsenable = TF.configuration . loggingIsenable
+
+class HasMaxSize s a | s -> a where
+    maxSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMaxSize s a => HasMaxSize (TF.Resource p s) a where
+    maxSize = TF.configuration . maxSize
+
+class HasMfaBindRequired s a | s -> a where
+    mfaBindRequired :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMfaBindRequired s a => HasMfaBindRequired (TF.Resource p s) a where
+    mfaBindRequired = TF.configuration . mfaBindRequired
+
+class HasMinSize s a | s -> a where
+    minSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMinSize s a => HasMinSize (TF.Resource p s) a where
+    minSize = TF.configuration . minSize
+
+class HasMobile s a | s -> a where
+    mobile :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMobile s a => HasMobile (TF.Resource p s) a where
+    mobile = TF.configuration . mobile
+
+class HasMultiAz s a | s -> a where
+    multiAz :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMultiAz s a => HasMultiAz (TF.Resource p s) a where
+    multiAz = TF.configuration . multiAz
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNamePrefix s a | s -> a where
+    namePrefix :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNamePrefix s a => HasNamePrefix (TF.Resource p s) a where
+    namePrefix = TF.configuration . namePrefix
+
+class HasNexthopId s a | s -> a where
+    nexthopId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNexthopId s a => HasNexthopId (TF.Resource p s) a where
+    nexthopId = TF.configuration . nexthopId
+
+class HasNexthopType s a | s -> a where
+    nexthopType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNexthopType s a => HasNexthopType (TF.Resource p s) a where
+    nexthopType = TF.configuration . nexthopType
+
+class HasNicType s a | s -> a where
+    nicType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNicType s a => HasNicType (TF.Resource p s) a where
+    nicType = TF.configuration . nicType
+
+class HasOppositeAccessPointId s a | s -> a where
+    oppositeAccessPointId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOppositeAccessPointId s a => HasOppositeAccessPointId (TF.Resource p s) a where
+    oppositeAccessPointId = TF.configuration . oppositeAccessPointId
+
+class HasOppositeInterfaceId s a | s -> a where
+    oppositeInterfaceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOppositeInterfaceId s a => HasOppositeInterfaceId (TF.Resource p s) a where
+    oppositeInterfaceId = TF.configuration . oppositeInterfaceId
+
+class HasOppositeInterfaceOwnerId s a | s -> a where
+    oppositeInterfaceOwnerId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOppositeInterfaceOwnerId s a => HasOppositeInterfaceOwnerId (TF.Resource p s) a where
+    oppositeInterfaceOwnerId = TF.configuration . oppositeInterfaceOwnerId
+
+class HasOppositeRegion s a | s -> a where
+    oppositeRegion :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOppositeRegion s a => HasOppositeRegion (TF.Resource p s) a where
+    oppositeRegion = TF.configuration . oppositeRegion
+
+class HasOppositeRouterId s a | s -> a where
+    oppositeRouterId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOppositeRouterId s a => HasOppositeRouterId (TF.Resource p s) a where
+    oppositeRouterId = TF.configuration . oppositeRouterId
+
+class HasOppositeRouterType s a | s -> a where
+    oppositeRouterType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOppositeRouterType s a => HasOppositeRouterType (TF.Resource p s) a where
+    oppositeRouterType = TF.configuration . oppositeRouterType
+
+class HasPassword s a | s -> a where
+    password :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPassword s a => HasPassword (TF.Resource p s) a where
+    password = TF.configuration . password
+
+class HasPasswordResetRequired s a | s -> a where
+    passwordResetRequired :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPasswordResetRequired s a => HasPasswordResetRequired (TF.Resource p s) a where
+    passwordResetRequired = TF.configuration . passwordResetRequired
+
+class HasPeriod s a | s -> a where
+    period :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPeriod s a => HasPeriod (TF.Resource p s) a where
+    period = TF.configuration . period
+
+class HasPeriodUnit s a | s -> a where
+    periodUnit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPeriodUnit s a => HasPeriodUnit (TF.Resource p s) a where
+    periodUnit = TF.configuration . periodUnit
+
+class HasPersistenceTimeout s a | s -> a where
+    persistenceTimeout :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPersistenceTimeout s a => HasPersistenceTimeout (TF.Resource p s) a where
+    persistenceTimeout = TF.configuration . persistenceTimeout
+
+class HasPolicy s a | s -> a where
+    policy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicy s a => HasPolicy (TF.Resource p s) a where
+    policy = TF.configuration . policy
+
+class HasPolicyName s a | s -> a where
+    policyName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicyName s a => HasPolicyName (TF.Resource p s) a where
+    policyName = TF.configuration . policyName
+
+class HasPolicyType s a | s -> a where
+    policyType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicyType s a => HasPolicyType (TF.Resource p s) a where
+    policyType = TF.configuration . policyType
+
+class HasPort s a | s -> a where
+    port :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPort s a => HasPort (TF.Resource p s) a where
+    port = TF.configuration . port
+
+class HasPortRange s a | s -> a where
+    portRange :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPortRange s a => HasPortRange (TF.Resource p s) a where
+    portRange = TF.configuration . portRange
+
+class HasPriority s a | s -> a where
+    priority :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPriority s a => HasPriority (TF.Resource p s) a where
+    priority = TF.configuration . priority
+
+class HasPrivateIp s a | s -> a where
+    privateIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPrivateIp s a => HasPrivateIp (TF.Resource p s) a where
+    privateIp = TF.configuration . privateIp
+
+class HasPrivilege s a | s -> a where
+    privilege :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPrivilege s a => HasPrivilege (TF.Resource p s) a where
+    privilege = TF.configuration . privilege
+
+class HasProtocol s a | s -> a where
+    protocol :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
+    protocol = TF.configuration . protocol
+
+class HasPublicKey s a | s -> a where
+    publicKey :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPublicKey s a => HasPublicKey (TF.Resource p s) a where
+    publicKey = TF.configuration . publicKey
+
+class HasRamUsers s a | s -> a where
+    ramUsers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRamUsers s a => HasRamUsers (TF.Resource p s) a where
+    ramUsers = TF.configuration . ramUsers
+
+class HasRecurrenceEndTime s a | s -> a where
+    recurrenceEndTime :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRecurrenceEndTime s a => HasRecurrenceEndTime (TF.Resource p s) a where
+    recurrenceEndTime = TF.configuration . recurrenceEndTime
+
+class HasRecurrenceType s a | s -> a where
+    recurrenceType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRecurrenceType s a => HasRecurrenceType (TF.Resource p s) a where
+    recurrenceType = TF.configuration . recurrenceType
+
+class HasRecurrenceValue s a | s -> a where
+    recurrenceValue :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRecurrenceValue s a => HasRecurrenceValue (TF.Resource p s) a where
+    recurrenceValue = TF.configuration . recurrenceValue
+
+class HasRefererConfig s a | s -> a where
+    refererConfig :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRefererConfig s a => HasRefererConfig (TF.Resource p s) a where
+    refererConfig = TF.configuration . refererConfig
+
+class HasRemovalPolicies s a | s -> a where
+    removalPolicies :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRemovalPolicies s a => HasRemovalPolicies (TF.Resource p s) a where
+    removalPolicies = TF.configuration . removalPolicies
+
+class HasRetentionPeriod s a | s -> a where
+    retentionPeriod :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRetentionPeriod s a => HasRetentionPeriod (TF.Resource p s) a where
+    retentionPeriod = TF.configuration . retentionPeriod
+
+class HasRole s a | s -> a where
+    role :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRole s a => HasRole (TF.Resource p s) a where
+    role = TF.configuration . role
+
+class HasRoleName s a | s -> a where
+    roleName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRoleName s a => HasRoleName (TF.Resource p s) a where
+    roleName = TF.configuration . roleName
+
+class HasRouteTableId s a | s -> a where
+    routeTableId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRouteTableId s a => HasRouteTableId (TF.Resource p s) a where
+    routeTableId = TF.configuration . routeTableId
+
+class HasRouterId s a | s -> a where
+    routerId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRouterId s a => HasRouterId (TF.Resource p s) a where
+    routerId = TF.configuration . routerId
+
+class HasRouterType s a | s -> a where
+    routerType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRouterType s a => HasRouterType (TF.Resource p s) a where
+    routerType = TF.configuration . routerType
+
+class HasRouting s a | s -> a where
+    routing :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRouting s a => HasRouting (TF.Resource p s) a where
+    routing = TF.configuration . routing
+
+class HasScalingConfigurationName s a | s -> a where
+    scalingConfigurationName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScalingConfigurationName s a => HasScalingConfigurationName (TF.Resource p s) a where
+    scalingConfigurationName = TF.configuration . scalingConfigurationName
+
+class HasScalingGroupId s a | s -> a where
+    scalingGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScalingGroupId s a => HasScalingGroupId (TF.Resource p s) a where
+    scalingGroupId = TF.configuration . scalingGroupId
+
+class HasScalingGroupName s a | s -> a where
+    scalingGroupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScalingGroupName s a => HasScalingGroupName (TF.Resource p s) a where
+    scalingGroupName = TF.configuration . scalingGroupName
+
+class HasScalingRuleName s a | s -> a where
+    scalingRuleName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScalingRuleName s a => HasScalingRuleName (TF.Resource p s) a where
+    scalingRuleName = TF.configuration . scalingRuleName
+
+class HasScheduledAction s a | s -> a where
+    scheduledAction :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScheduledAction s a => HasScheduledAction (TF.Resource p s) a where
+    scheduledAction = TF.configuration . scheduledAction
+
+class HasScheduledTaskName s a | s -> a where
+    scheduledTaskName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScheduledTaskName s a => HasScheduledTaskName (TF.Resource p s) a where
+    scheduledTaskName = TF.configuration . scheduledTaskName
+
+class HasScheduler s a | s -> a where
+    scheduler :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScheduler s a => HasScheduler (TF.Resource p s) a where
+    scheduler = TF.configuration . scheduler
+
+class HasScope s a | s -> a where
+    scope :: Functor f => (a -> f a) -> s -> f s
+
+instance HasScope s a => HasScope (TF.Resource p s) a where
+    scope = TF.configuration . scope
+
+class HasSecretFile s a | s -> a where
+    secretFile :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSecretFile s a => HasSecretFile (TF.Resource p s) a where
+    secretFile = TF.configuration . secretFile
+
+class HasSecurityGroupId s a | s -> a where
+    securityGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSecurityGroupId s a => HasSecurityGroupId (TF.Resource p s) a where
+    securityGroupId = TF.configuration . securityGroupId
+
+class HasSecurityGroups s a | s -> a where
+    securityGroups :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSecurityGroups s a => HasSecurityGroups (TF.Resource p s) a where
+    securityGroups = TF.configuration . securityGroups
+
+class HasSecurityIps s a | s -> a where
+    securityIps :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSecurityIps s a => HasSecurityIps (TF.Resource p s) a where
+    securityIps = TF.configuration . securityIps
+
+class HasServerSideEncryption s a | s -> a where
+    serverSideEncryption :: Functor f => (a -> f a) -> s -> f s
+
+instance HasServerSideEncryption s a => HasServerSideEncryption (TF.Resource p s) a where
+    serverSideEncryption = TF.configuration . serverSideEncryption
+
+class HasServers s a | s -> a where
+    servers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasServers s a => HasServers (TF.Resource p s) a where
+    servers = TF.configuration . servers
+
+class HasServices s a | s -> a where
+    services :: Functor f => (a -> f a) -> s -> f s
+
+instance HasServices s a => HasServices (TF.Resource p s) a where
+    services = TF.configuration . services
+
+class HasSize s a | s -> a where
+    size :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSize s a => HasSize (TF.Resource p s) a where
+    size = TF.configuration . size
+
+class HasSlbId s a | s -> a where
+    slbId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSlbId s a => HasSlbId (TF.Resource p s) a where
+    slbId = TF.configuration . slbId
+
+class HasSnapshotId s a | s -> a where
+    snapshotId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSnapshotId s a => HasSnapshotId (TF.Resource p s) a where
+    snapshotId = TF.configuration . snapshotId
+
+class HasSnatIp s a | s -> a where
+    snatIp :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSnatIp s a => HasSnatIp (TF.Resource p s) a where
+    snatIp = TF.configuration . snatIp
+
+class HasSnatTableId s a | s -> a where
+    snatTableId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSnatTableId s a => HasSnatTableId (TF.Resource p s) a where
+    snatTableId = TF.configuration . snatTableId
+
+class HasSource s a | s -> a where
+    source :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSource s a => HasSource (TF.Resource p s) a where
+    source = TF.configuration . source
+
+class HasSourceGroupOwnerAccount s a | s -> a where
+    sourceGroupOwnerAccount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSourceGroupOwnerAccount s a => HasSourceGroupOwnerAccount (TF.Resource p s) a where
+    sourceGroupOwnerAccount = TF.configuration . sourceGroupOwnerAccount
+
+class HasSourcePort s a | s -> a where
+    sourcePort :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSourcePort s a => HasSourcePort (TF.Resource p s) a where
+    sourcePort = TF.configuration . sourcePort
+
+class HasSourceSecurityGroupId s a | s -> a where
+    sourceSecurityGroupId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSourceSecurityGroupId s a => HasSourceSecurityGroupId (TF.Resource p s) a where
+    sourceSecurityGroupId = TF.configuration . sourceSecurityGroupId
+
+class HasSourceType s a | s -> a where
+    sourceType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSourceType s a => HasSourceType (TF.Resource p s) a where
+    sourceType = TF.configuration . sourceType
+
+class HasSourceVswitchId s a | s -> a where
+    sourceVswitchId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSourceVswitchId s a => HasSourceVswitchId (TF.Resource p s) a where
+    sourceVswitchId = TF.configuration . sourceVswitchId
+
+class HasSources s a | s -> a where
+    sources :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSources s a => HasSources (TF.Resource p s) a where
+    sources = TF.configuration . sources
+
+class HasSpec s a | s -> a where
+    spec :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSpec s a => HasSpec (TF.Resource p s) a where
+    spec = TF.configuration . spec
+
+class HasSpecification s a | s -> a where
+    specification :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSpecification s a => HasSpecification (TF.Resource p s) a where
+    specification = TF.configuration . specification
+
+class HasSpotPriceLimit s a | s -> a where
+    spotPriceLimit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSpotPriceLimit s a => HasSpotPriceLimit (TF.Resource p s) a where
+    spotPriceLimit = TF.configuration . spotPriceLimit
+
+class HasSpotStrategy s a | s -> a where
+    spotStrategy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSpotStrategy s a => HasSpotStrategy (TF.Resource p s) a where
+    spotStrategy = TF.configuration . spotStrategy
+
+class HasSslCertificateId s a | s -> a where
+    sslCertificateId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSslCertificateId s a => HasSslCertificateId (TF.Resource p s) a where
+    sslCertificateId = TF.configuration . sslCertificateId
+
+class HasStatement s a | s -> a where
+    statement :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStatement s a => HasStatement (TF.Resource p s) a where
+    statement = TF.configuration . statement
+
+class HasStatus s a | s -> a where
+    status :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStatus s a => HasStatus (TF.Resource p s) a where
+    status = TF.configuration . status
+
+class HasStickySession s a | s -> a where
+    stickySession :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStickySession s a => HasStickySession (TF.Resource p s) a where
+    stickySession = TF.configuration . stickySession
+
+class HasStickySessionType s a | s -> a where
+    stickySessionType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStickySessionType s a => HasStickySessionType (TF.Resource p s) a where
+    stickySessionType = TF.configuration . stickySessionType
+
+class HasSubstitute s a | s -> a where
+    substitute :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSubstitute s a => HasSubstitute (TF.Resource p s) a where
+    substitute = TF.configuration . substitute
+
+class HasSystemDiskCategory s a | s -> a where
+    systemDiskCategory :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSystemDiskCategory s a => HasSystemDiskCategory (TF.Resource p s) a where
+    systemDiskCategory = TF.configuration . systemDiskCategory
+
+class HasSystemDiskSize s a | s -> a where
+    systemDiskSize :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSystemDiskSize s a => HasSystemDiskSize (TF.Resource p s) a where
+    systemDiskSize = TF.configuration . systemDiskSize
+
+class HasTags s a | s -> a where
+    tags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags = TF.configuration . tags
+
+class HasTaskEnabled s a | s -> a where
+    taskEnabled :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTaskEnabled s a => HasTaskEnabled (TF.Resource p s) a where
+    taskEnabled = TF.configuration . taskEnabled
+
+class HasTtl s a | s -> a where
+    ttl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl = TF.configuration . ttl
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' = TF.configuration . type'
+
+class HasUnhealthyThreshold s a | s -> a where
+    unhealthyThreshold :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUnhealthyThreshold s a => HasUnhealthyThreshold (TF.Resource p s) a where
+    unhealthyThreshold = TF.configuration . unhealthyThreshold
+
+class HasUserData s a | s -> a where
+    userData :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserData s a => HasUserData (TF.Resource p s) a where
+    userData = TF.configuration . userData
+
+class HasUserName s a | s -> a where
+    userName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserName s a => HasUserName (TF.Resource p s) a where
+    userName = TF.configuration . userName
+
+class HasUserNames s a | s -> a where
+    userNames :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUserNames s a => HasUserNames (TF.Resource p s) a where
+    userNames = TF.configuration . userNames
+
+class HasValue s a | s -> a where
+    value :: Functor f => (a -> f a) -> s -> f s
+
+instance HasValue s a => HasValue (TF.Resource p s) a where
+    value = TF.configuration . value
+
+class HasVersion s a | s -> a where
+    version :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVersion s a => HasVersion (TF.Resource p s) a where
+    version = TF.configuration . version
+
+class HasVpcId s a | s -> a where
+    vpcId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVpcId s a => HasVpcId (TF.Resource p s) a where
+    vpcId = TF.configuration . vpcId
+
+class HasVswitchId s a | s -> a where
+    vswitchId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVswitchId s a => HasVswitchId (TF.Resource p s) a where
+    vswitchId = TF.configuration . vswitchId
+
+class HasWebsite s a | s -> a where
+    website :: Functor f => (a -> f a) -> s -> f s
+
+instance HasWebsite s a => HasWebsite (TF.Resource p s) a where
+    website = TF.configuration . website
+
+class HasZoneId s a | s -> a where
+    zoneId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasZoneId s a => HasZoneId (TF.Resource p s) a where
+    zoneId = TF.configuration . zoneId

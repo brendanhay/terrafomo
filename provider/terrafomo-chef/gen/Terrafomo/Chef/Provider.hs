@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Chef.Provider
-    ( Chef    (..)
-    , HasChef (..)
+    (
+    -- * Provider Datatype
+      Chef (..)
+
+    -- * Lenses
+    , allowUnverifiedSsl
+    , clientName
+    , keyMaterial
+    , serverUrl
     ) where
 
 import Data.Function      (on)
@@ -34,10 +40,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Chef.Types      as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Chef Terraform provider.
 
@@ -89,4 +94,38 @@ instance Monoid Chef where
 instance TF.IsProvider Chef where
     type ProviderName Chef = "chef"
 
-$(TF.makeProviderLenses ''Chef)
+allowUnverifiedSsl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Chef
+    -> f Chef
+allowUnverifiedSsl f s =
+        (\a -> s { _allow_unverified_ssl = a } :: Chef)
+             <$> f (_allow_unverified_ssl s)
+
+clientName
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Chef
+    -> f Chef
+clientName f s =
+        (\a -> s { _client_name = a } :: Chef)
+             <$> f (_client_name s)
+
+keyMaterial
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Chef
+    -> f Chef
+keyMaterial f s =
+        (\a -> s { _key_material = a } :: Chef)
+             <$> f (_key_material s)
+
+serverUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Chef
+    -> f Chef
+serverUrl f s =
+        (\a -> s { _server_url = a } :: Chef)
+             <$> f (_server_url s)

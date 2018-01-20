@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Bitbucket.Provider
-    ( Bitbucket    (..)
-    , HasBitbucket (..)
+    (
+    -- * Provider Datatype
+      Bitbucket (..)
+
+    -- * Lenses
+    , password
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Bitbucket.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Bitbucket Terraform provider.
 
@@ -78,4 +81,20 @@ instance Monoid Bitbucket where
 instance TF.IsProvider Bitbucket where
     type ProviderName Bitbucket = "bitbucket"
 
-$(TF.makeProviderLenses ''Bitbucket)
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Bitbucket
+    -> f Bitbucket
+password f s =
+        (\a -> s { _password = a } :: Bitbucket)
+             <$> f (_password s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Bitbucket
+    -> f Bitbucket
+username f s =
+        (\a -> s { _username = a } :: Bitbucket)
+             <$> f (_username s)

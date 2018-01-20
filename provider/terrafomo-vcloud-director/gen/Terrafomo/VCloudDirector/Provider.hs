@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,18 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VCloudDirector.Provider
-    ( VCloudDirector    (..)
-    , HasVCloudDirector (..)
+    (
+    -- * Provider Datatype
+      VCloudDirector (..)
+
+    -- * Lenses
+    , allowUnverifiedSsl
+    , maxRetryTimeout
+    , org
+    , password
+    , url
+    , user
+    , vdc
     ) where
 
 import Data.Function      (on)
@@ -33,10 +42,9 @@ import Data.Text          (Text)
 import GHC.Generics (Generic)
 
 import qualified Terrafomo.Syntax.HCL           as TF
-import qualified Terrafomo.Syntax.Meta          as TF
 import qualified Terrafomo.Syntax.Name          as TF
+import qualified Terrafomo.Syntax.Provider      as TF
 import qualified Terrafomo.Syntax.Variable      as TF
-import qualified Terrafomo.TH                   as TF
 import qualified Terrafomo.VCloudDirector.Types as TF
 
 {- | VCloudDirector Terraform provider.
@@ -106,4 +114,65 @@ instance Monoid VCloudDirector where
 instance TF.IsProvider VCloudDirector where
     type ProviderName VCloudDirector = "vcd"
 
-$(TF.makeProviderLenses ''VCloudDirector)
+allowUnverifiedSsl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+allowUnverifiedSsl f s =
+        (\a -> s { _allow_unverified_ssl = a } :: VCloudDirector)
+             <$> f (_allow_unverified_ssl s)
+
+maxRetryTimeout
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+maxRetryTimeout f s =
+        (\a -> s { _max_retry_timeout = a } :: VCloudDirector)
+             <$> f (_max_retry_timeout s)
+
+org
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+org f s =
+        (\a -> s { _org = a } :: VCloudDirector)
+             <$> f (_org s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+password f s =
+        (\a -> s { _password = a } :: VCloudDirector)
+             <$> f (_password s)
+
+url
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+url f s =
+        (\a -> s { _url = a } :: VCloudDirector)
+             <$> f (_url s)
+
+user
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+user f s =
+        (\a -> s { _user = a } :: VCloudDirector)
+             <$> f (_user s)
+
+vdc
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> VCloudDirector
+    -> f VCloudDirector
+vdc f s =
+        (\a -> s { _vdc = a } :: VCloudDirector)
+             <$> f (_vdc s)

@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Icinga2.Provider
-    ( Icinga2    (..)
-    , HasIcinga2 (..)
+    (
+    -- * Provider Datatype
+      Icinga2 (..)
+
+    -- * Lenses
+    , apiPassword
+    , apiUrl
+    , apiUser
+    , insecureSkipTlsVerify
     ) where
 
 import Data.Function      (on)
@@ -34,10 +40,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Icinga2.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Icinga2 Terraform provider.
 
@@ -89,4 +94,38 @@ instance Monoid Icinga2 where
 instance TF.IsProvider Icinga2 where
     type ProviderName Icinga2 = "icinga2"
 
-$(TF.makeProviderLenses ''Icinga2)
+apiPassword
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Icinga2
+    -> f Icinga2
+apiPassword f s =
+        (\a -> s { _api_password = a } :: Icinga2)
+             <$> f (_api_password s)
+
+apiUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Icinga2
+    -> f Icinga2
+apiUrl f s =
+        (\a -> s { _api_url = a } :: Icinga2)
+             <$> f (_api_url s)
+
+apiUser
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Icinga2
+    -> f Icinga2
+apiUser f s =
+        (\a -> s { _api_user = a } :: Icinga2)
+             <$> f (_api_user s)
+
+insecureSkipTlsVerify
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Icinga2
+    -> f Icinga2
+insecureSkipTlsVerify f s =
+        (\a -> s { _insecure_skip_tls_verify = a } :: Icinga2)
+             <$> f (_insecure_skip_tls_verify s)

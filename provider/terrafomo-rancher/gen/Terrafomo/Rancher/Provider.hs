@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rancher.Provider
-    ( Rancher    (..)
-    , HasRancher (..)
+    (
+    -- * Provider Datatype
+      Rancher (..)
+
+    -- * Lenses
+    , accessKey
+    , apiUrl
+    , secretKey
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Rancher.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Rancher Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid Rancher where
 instance TF.IsProvider Rancher where
     type ProviderName Rancher = "rancher"
 
-$(TF.makeProviderLenses ''Rancher)
+accessKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Rancher
+    -> f Rancher
+accessKey f s =
+        (\a -> s { _access_key = a } :: Rancher)
+             <$> f (_access_key s)
+
+apiUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Rancher
+    -> f Rancher
+apiUrl f s =
+        (\a -> s { _api_url = a } :: Rancher)
+             <$> f (_api_url s)
+
+secretKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Rancher
+    -> f Rancher
+secretKey f s =
+        (\a -> s { _secret_key = a } :: Rancher)
+             <$> f (_secret_key s)

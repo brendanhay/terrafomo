@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,29 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.DNSMadeEasy.Resource where
+module Terrafomo.DNSMadeEasy.Resource
+    (
+    -- * Types
+      RecordResource (..)
+    , recordResource
 
-import Data.Functor ((<$>))
+    -- * Overloaded Fields
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.DNSMadeEasy.Provider as TF
 import qualified Terrafomo.DNSMadeEasy.Types    as TF
 import qualified Terrafomo.Syntax.HCL           as TF
+import qualified Terrafomo.Syntax.Meta          as TF (configuration)
 import qualified Terrafomo.Syntax.Resource      as TF
 import qualified Terrafomo.Syntax.Resource      as TF
 import qualified Terrafomo.Syntax.Variable      as TF
-import qualified Terrafomo.TH                   as TF
 
 {- | The @dme_record@ DNSMadeEasy resource.
 
@@ -47,11 +52,6 @@ data RecordResource = RecordResource {
 
 instance TF.ToHCL RecordResource where
     toHCL _ = TF.block []
-
-$(TF.makeSchemaLenses
-    ''RecordResource
-    ''TF.DNSMadeEasy
-    ''TF.Resource)
 
 recordResource :: TF.Resource TF.DNSMadeEasy RecordResource
 recordResource =

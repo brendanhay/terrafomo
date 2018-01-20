@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Gitlab.Provider
-    ( Gitlab    (..)
-    , HasGitlab (..)
+    (
+    -- * Provider Datatype
+      Gitlab (..)
+
+    -- * Lenses
+    , baseUrl
+    , cacertFile
+    , insecure
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +40,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Gitlab.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Gitlab Terraform provider.
 
@@ -88,4 +93,38 @@ instance Monoid Gitlab where
 instance TF.IsProvider Gitlab where
     type ProviderName Gitlab = "gitlab"
 
-$(TF.makeProviderLenses ''Gitlab)
+baseUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Gitlab
+    -> f Gitlab
+baseUrl f s =
+        (\a -> s { _base_url = a } :: Gitlab)
+             <$> f (_base_url s)
+
+cacertFile
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Gitlab
+    -> f Gitlab
+cacertFile f s =
+        (\a -> s { _cacert_file = a } :: Gitlab)
+             <$> f (_cacert_file s)
+
+insecure
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Gitlab
+    -> f Gitlab
+insecure f s =
+        (\a -> s { _insecure = a } :: Gitlab)
+             <$> f (_insecure s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Gitlab
+    -> f Gitlab
+token f s =
+        (\a -> s { _token = a } :: Gitlab)
+             <$> f (_token s)

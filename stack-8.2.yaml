@@ -1,4 +1,5 @@
-resolver: lts-10.3
+resolver:  nightly-2018-01-09
+# resolver: lts-10.3
 
 local-bin-path: bin
 

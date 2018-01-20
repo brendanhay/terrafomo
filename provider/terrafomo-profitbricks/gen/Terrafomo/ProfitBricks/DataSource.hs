@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,50 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.ProfitBricks.DataSource where
+module Terrafomo.ProfitBricks.DataSource
+    (
+    -- * Types
+      DatacenterDataSource (..)
+    , datacenterDataSource
 
-import Data.Functor ((<$>))
+    , ImageDataSource (..)
+    , imageDataSource
+
+    , LocationDataSource (..)
+    , locationDataSource
+
+    , ResourceDataSource (..)
+    , resourceDataSource
+
+    , SnapshotDataSource (..)
+    , snapshotDataSource
+
+    -- * Overloaded Fields
+    , HasComputedId (..)
+    , HasFeature (..)
+    , HasLocation (..)
+    , HasName (..)
+    , HasResourceId (..)
+    , HasResourceType (..)
+    , HasSize (..)
+    , HasType' (..)
+    , HasVersion (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.ProfitBricks.Provider as TF
 import qualified Terrafomo.ProfitBricks.Types    as TF
 import qualified Terrafomo.Syntax.DataSource     as TF
 import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.Meta           as TF (configuration)
 import qualified Terrafomo.Syntax.Resource       as TF
 import qualified Terrafomo.Syntax.Variable       as TF
-import qualified Terrafomo.TH                    as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks datasource.
 
@@ -63,10 +89,20 @@ instance TF.ToHCL DatacenterDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''DatacenterDataSource
-    ''TF.ProfitBricks
-    ''TF.DataSource)
+instance HasLocation DatacenterDataSource (TF.Argument Text) where
+    location f s@DatacenterDataSource{..} =
+        (\a -> s { _location = a } :: DatacenterDataSource)
+             <$> f _location
+
+instance HasName DatacenterDataSource (TF.Argument Text) where
+    name f s@DatacenterDataSource{..} =
+        (\a -> s { _name = a } :: DatacenterDataSource)
+             <$> f _name
+
+instance HasComputedId DatacenterDataSource (TF.Attribute Text) where
+    computedId f s@DatacenterDataSource{..} =
+        (\a -> s { _computed_id = a } :: DatacenterDataSource)
+             <$> f _computed_id
 
 datacenterDataSource :: TF.DataSource TF.ProfitBricks DatacenterDataSource
 datacenterDataSource =
@@ -103,10 +139,30 @@ instance TF.ToHCL ImageDataSource where
         , TF.assign "version" <$> TF.argument _version
         ]
 
-$(TF.makeSchemaLenses
-    ''ImageDataSource
-    ''TF.ProfitBricks
-    ''TF.DataSource)
+instance HasLocation ImageDataSource (TF.Argument Text) where
+    location f s@ImageDataSource{..} =
+        (\a -> s { _location = a } :: ImageDataSource)
+             <$> f _location
+
+instance HasName ImageDataSource (TF.Argument Text) where
+    name f s@ImageDataSource{..} =
+        (\a -> s { _name = a } :: ImageDataSource)
+             <$> f _name
+
+instance HasType' ImageDataSource (TF.Argument Text) where
+    type' f s@ImageDataSource{..} =
+        (\a -> s { _type' = a } :: ImageDataSource)
+             <$> f _type'
+
+instance HasVersion ImageDataSource (TF.Argument Text) where
+    version f s@ImageDataSource{..} =
+        (\a -> s { _version = a } :: ImageDataSource)
+             <$> f _version
+
+instance HasComputedId ImageDataSource (TF.Attribute Text) where
+    computedId f s@ImageDataSource{..} =
+        (\a -> s { _computed_id = a } :: ImageDataSource)
+             <$> f _computed_id
 
 imageDataSource :: TF.DataSource TF.ProfitBricks ImageDataSource
 imageDataSource =
@@ -139,10 +195,20 @@ instance TF.ToHCL LocationDataSource where
         , TF.assign "name" <$> TF.argument _name
         ]
 
-$(TF.makeSchemaLenses
-    ''LocationDataSource
-    ''TF.ProfitBricks
-    ''TF.DataSource)
+instance HasFeature LocationDataSource (TF.Argument Text) where
+    feature f s@LocationDataSource{..} =
+        (\a -> s { _feature = a } :: LocationDataSource)
+             <$> f _feature
+
+instance HasName LocationDataSource (TF.Argument Text) where
+    name f s@LocationDataSource{..} =
+        (\a -> s { _name = a } :: LocationDataSource)
+             <$> f _name
+
+instance HasComputedId LocationDataSource (TF.Attribute Text) where
+    computedId f s@LocationDataSource{..} =
+        (\a -> s { _computed_id = a } :: LocationDataSource)
+             <$> f _computed_id
 
 locationDataSource :: TF.DataSource TF.ProfitBricks LocationDataSource
 locationDataSource =
@@ -179,10 +245,20 @@ instance TF.ToHCL ResourceDataSource where
         , TF.assign "resource_type" <$> TF.argument _resource_type
         ]
 
-$(TF.makeSchemaLenses
-    ''ResourceDataSource
-    ''TF.ProfitBricks
-    ''TF.DataSource)
+instance HasResourceId ResourceDataSource (TF.Argument Text) where
+    resourceId f s@ResourceDataSource{..} =
+        (\a -> s { _resource_id = a } :: ResourceDataSource)
+             <$> f _resource_id
+
+instance HasResourceType ResourceDataSource (TF.Argument Text) where
+    resourceType f s@ResourceDataSource{..} =
+        (\a -> s { _resource_type = a } :: ResourceDataSource)
+             <$> f _resource_type
+
+instance HasComputedId ResourceDataSource (TF.Attribute Text) where
+    computedId f s@ResourceDataSource{..} =
+        (\a -> s { _computed_id = a } :: ResourceDataSource)
+             <$> f _computed_id
 
 resourceDataSource :: TF.DataSource TF.ProfitBricks ResourceDataSource
 resourceDataSource =
@@ -216,10 +292,25 @@ instance TF.ToHCL SnapshotDataSource where
         , TF.assign "size" <$> TF.argument _size
         ]
 
-$(TF.makeSchemaLenses
-    ''SnapshotDataSource
-    ''TF.ProfitBricks
-    ''TF.DataSource)
+instance HasLocation SnapshotDataSource (TF.Argument Text) where
+    location f s@SnapshotDataSource{..} =
+        (\a -> s { _location = a } :: SnapshotDataSource)
+             <$> f _location
+
+instance HasName SnapshotDataSource (TF.Argument Text) where
+    name f s@SnapshotDataSource{..} =
+        (\a -> s { _name = a } :: SnapshotDataSource)
+             <$> f _name
+
+instance HasSize SnapshotDataSource (TF.Argument Text) where
+    size f s@SnapshotDataSource{..} =
+        (\a -> s { _size = a } :: SnapshotDataSource)
+             <$> f _size
+
+instance HasComputedId SnapshotDataSource (TF.Attribute Text) where
+    computedId f s@SnapshotDataSource{..} =
+        (\a -> s { _computed_id = a } :: SnapshotDataSource)
+             <$> f _computed_id
 
 snapshotDataSource :: TF.DataSource TF.ProfitBricks SnapshotDataSource
 snapshotDataSource =
@@ -230,3 +321,57 @@ snapshotDataSource =
             , _size = TF.Nil
             , _computed_id = TF.Compute "id"
             }
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasFeature s a | s -> a where
+    feature :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFeature s a => HasFeature (TF.DataSource p s) a where
+    feature = TF.configuration . feature
+
+class HasLocation s a | s -> a where
+    location :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLocation s a => HasLocation (TF.DataSource p s) a where
+    location = TF.configuration . location
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.DataSource p s) a where
+    name = TF.configuration . name
+
+class HasResourceId s a | s -> a where
+    resourceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResourceId s a => HasResourceId (TF.DataSource p s) a where
+    resourceId = TF.configuration . resourceId
+
+class HasResourceType s a | s -> a where
+    resourceType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResourceType s a => HasResourceType (TF.DataSource p s) a where
+    resourceType = TF.configuration . resourceType
+
+class HasSize s a | s -> a where
+    size :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSize s a => HasSize (TF.DataSource p s) a where
+    size = TF.configuration . size
+
+class HasType' s a | s -> a where
+    type' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasType' s a => HasType' (TF.DataSource p s) a where
+    type' = TF.configuration . type'
+
+class HasVersion s a | s -> a where
+    version :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVersion s a => HasVersion (TF.DataSource p s) a where
+    version = TF.configuration . version

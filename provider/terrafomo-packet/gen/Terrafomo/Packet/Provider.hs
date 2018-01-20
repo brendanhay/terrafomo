@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Packet.Provider
-    ( Packet    (..)
-    , HasPacket (..)
+    (
+    -- * Provider Datatype
+      Packet (..)
+
+    -- * Lenses
+    , authToken
     ) where
 
 import Data.Function      (on)
@@ -34,10 +37,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Packet.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Packet Terraform provider.
 
@@ -74,4 +76,11 @@ instance Monoid Packet where
 instance TF.IsProvider Packet where
     type ProviderName Packet = "packet"
 
-$(TF.makeProviderLenses ''Packet)
+authToken
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Packet
+    -> f Packet
+authToken f s =
+        (\a -> s { _auth_token = a } :: Packet)
+             <$> f (_auth_token s)

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,32 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OpsGenie.DataSource where
+module Terrafomo.OpsGenie.DataSource
+    (
+    -- * Types
+      UserDataSource (..)
+    , userDataSource
 
-import Data.Functor ((<$>))
+    -- * Overloaded Fields
+    , HasComputedFullName (..)
+    , HasComputedRole (..)
+    , HasUsername (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.OpsGenie.Provider as TF
 import qualified Terrafomo.OpsGenie.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @opsgenie_user@ OpsGenie datasource.
 
@@ -57,10 +65,20 @@ instance TF.ToHCL UserDataSource where
         [ TF.assign "username" <$> TF.argument _username
         ]
 
-$(TF.makeSchemaLenses
-    ''UserDataSource
-    ''TF.OpsGenie
-    ''TF.DataSource)
+instance HasUsername UserDataSource (TF.Argument Text) where
+    username f s@UserDataSource{..} =
+        (\a -> s { _username = a } :: UserDataSource)
+             <$> f _username
+
+instance HasComputedFullName UserDataSource (TF.Attribute Text) where
+    computedFullName f s@UserDataSource{..} =
+        (\a -> s { _computed_full_name = a } :: UserDataSource)
+             <$> f _computed_full_name
+
+instance HasComputedRole UserDataSource (TF.Attribute Text) where
+    computedRole f s@UserDataSource{..} =
+        (\a -> s { _computed_role = a } :: UserDataSource)
+             <$> f _computed_role
 
 userDataSource :: TF.DataSource TF.OpsGenie UserDataSource
 userDataSource =
@@ -70,3 +88,21 @@ userDataSource =
             , _computed_full_name = TF.Compute "full_name"
             , _computed_role = TF.Compute "role"
             }
+
+class HasComputedFullName s a | s -> a where
+    computedFullName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedFullName s a => HasComputedFullName (TF.DataSource p s) a where
+    computedFullName = TF.configuration . computedFullName
+
+class HasComputedRole s a | s -> a where
+    computedRole :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedRole s a => HasComputedRole (TF.DataSource p s) a where
+    computedRole = TF.configuration . computedRole
+
+class HasUsername s a | s -> a where
+    username :: Functor f => (a -> f a) -> s -> f s
+
+instance HasUsername s a => HasUsername (TF.DataSource p s) a where
+    username = TF.configuration . username

@@ -31,9 +31,9 @@ instance Functor (Resource p) where
     fmap = second
 
 instance HasMeta Resource where
-    provider  = lens _resourceProvider  (\s a -> s { _resourceProvider  = a })
-    config    = lens _resourceConfig    (\s a -> s { _resourceConfig    = a })
-    dependsOn = lens _resourceDependsOn (\s a -> s { _resourceDependsOn = a })
+    provider      = lens _resourceProvider  (\s a -> s { _resourceProvider  = a })
+    configuration = lens _resourceConfig    (\s a -> s { _resourceConfig    = a })
+    dependsOn     = lens _resourceDependsOn (\s a -> s { _resourceDependsOn = a })
 
 instance HasLifecycle (Resource p a) where
     lifecycle = lens _resourceLifecycle (\s a -> s { _resourceLifecycle = a })

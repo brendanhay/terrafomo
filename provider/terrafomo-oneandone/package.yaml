@@ -8,6 +8,7 @@ name: terrafomo-oneandone
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,70 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rundeck.Resource where
+module Terrafomo.Rundeck.Resource
+    (
+    -- * Types
+      JobResource (..)
+    , jobResource
 
-import Data.Functor ((<$>))
+    , PrivateKeyResource (..)
+    , privateKeyResource
+
+    , ProjectResource (..)
+    , projectResource
+
+    , PublicKeyResource (..)
+    , publicKeyResource
+
+    -- * Overloaded Fields
+    , HasAllowConcurrentExecutions (..)
+    , HasCommand (..)
+    , HasCommandOrderingStrategy (..)
+    , HasComputedId (..)
+    , HasComputedKeyMaterial (..)
+    , HasComputedName (..)
+    , HasComputedUiUrl (..)
+    , HasComputedUrl (..)
+    , HasContinueOnError (..)
+    , HasDefaultNodeExecutorPlugin (..)
+    , HasDefaultNodeFileCopierPlugin (..)
+    , HasDelete (..)
+    , HasDescription (..)
+    , HasExtraConfig (..)
+    , HasGroupName (..)
+    , HasKeyMaterial (..)
+    , HasLogLevel (..)
+    , HasMaxThreadCount (..)
+    , HasName (..)
+    , HasNodeFilterExcludePrecedence (..)
+    , HasNodeFilterQuery (..)
+    , HasOption (..)
+    , HasPath (..)
+    , HasPreserveOptionsOrder (..)
+    , HasProjectName (..)
+    , HasRankAttribute (..)
+    , HasRankOrder (..)
+    , HasResourceModelSource (..)
+    , HasSchedule (..)
+    , HasSshAuthenticationType (..)
+    , HasSshKeyFilePath (..)
+    , HasSshKeyStoragePath (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Rundeck.Provider as TF
 import qualified Terrafomo.Rundeck.Types    as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.Meta      as TF (configuration)
 import qualified Terrafomo.Syntax.Resource  as TF
 import qualified Terrafomo.Syntax.Resource  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | The @rundeck_job@ Rundeck resource.
 
@@ -105,10 +151,95 @@ instance TF.ToHCL JobResource where
         , TF.assign "schedule" <$> TF.argument _schedule
         ]
 
-$(TF.makeSchemaLenses
-    ''JobResource
-    ''TF.Rundeck
-    ''TF.Resource)
+instance HasAllowConcurrentExecutions JobResource (TF.Argument Text) where
+    allowConcurrentExecutions f s@JobResource{..} =
+        (\a -> s { _allow_concurrent_executions = a } :: JobResource)
+             <$> f _allow_concurrent_executions
+
+instance HasCommand JobResource (TF.Argument Text) where
+    command f s@JobResource{..} =
+        (\a -> s { _command = a } :: JobResource)
+             <$> f _command
+
+instance HasCommandOrderingStrategy JobResource (TF.Argument Text) where
+    commandOrderingStrategy f s@JobResource{..} =
+        (\a -> s { _command_ordering_strategy = a } :: JobResource)
+             <$> f _command_ordering_strategy
+
+instance HasContinueOnError JobResource (TF.Argument Text) where
+    continueOnError f s@JobResource{..} =
+        (\a -> s { _continue_on_error = a } :: JobResource)
+             <$> f _continue_on_error
+
+instance HasDescription JobResource (TF.Argument Text) where
+    description f s@JobResource{..} =
+        (\a -> s { _description = a } :: JobResource)
+             <$> f _description
+
+instance HasGroupName JobResource (TF.Argument Text) where
+    groupName f s@JobResource{..} =
+        (\a -> s { _group_name = a } :: JobResource)
+             <$> f _group_name
+
+instance HasLogLevel JobResource (TF.Argument Text) where
+    logLevel f s@JobResource{..} =
+        (\a -> s { _log_level = a } :: JobResource)
+             <$> f _log_level
+
+instance HasMaxThreadCount JobResource (TF.Argument Text) where
+    maxThreadCount f s@JobResource{..} =
+        (\a -> s { _max_thread_count = a } :: JobResource)
+             <$> f _max_thread_count
+
+instance HasName JobResource (TF.Argument Text) where
+    name f s@JobResource{..} =
+        (\a -> s { _name = a } :: JobResource)
+             <$> f _name
+
+instance HasNodeFilterExcludePrecedence JobResource (TF.Argument Text) where
+    nodeFilterExcludePrecedence f s@JobResource{..} =
+        (\a -> s { _node_filter_exclude_precedence = a } :: JobResource)
+             <$> f _node_filter_exclude_precedence
+
+instance HasNodeFilterQuery JobResource (TF.Argument Text) where
+    nodeFilterQuery f s@JobResource{..} =
+        (\a -> s { _node_filter_query = a } :: JobResource)
+             <$> f _node_filter_query
+
+instance HasOption JobResource (TF.Argument Text) where
+    option f s@JobResource{..} =
+        (\a -> s { _option = a } :: JobResource)
+             <$> f _option
+
+instance HasPreserveOptionsOrder JobResource (TF.Argument Text) where
+    preserveOptionsOrder f s@JobResource{..} =
+        (\a -> s { _preserve_options_order = a } :: JobResource)
+             <$> f _preserve_options_order
+
+instance HasProjectName JobResource (TF.Argument Text) where
+    projectName f s@JobResource{..} =
+        (\a -> s { _project_name = a } :: JobResource)
+             <$> f _project_name
+
+instance HasRankAttribute JobResource (TF.Argument Text) where
+    rankAttribute f s@JobResource{..} =
+        (\a -> s { _rank_attribute = a } :: JobResource)
+             <$> f _rank_attribute
+
+instance HasRankOrder JobResource (TF.Argument Text) where
+    rankOrder f s@JobResource{..} =
+        (\a -> s { _rank_order = a } :: JobResource)
+             <$> f _rank_order
+
+instance HasSchedule JobResource (TF.Argument Text) where
+    schedule f s@JobResource{..} =
+        (\a -> s { _schedule = a } :: JobResource)
+             <$> f _schedule
+
+instance HasComputedId JobResource (TF.Attribute Text) where
+    computedId f s@JobResource{..} =
+        (\a -> s { _computed_id = a } :: JobResource)
+             <$> f _computed_id
 
 jobResource :: TF.Resource TF.Rundeck JobResource
 jobResource =
@@ -153,10 +284,15 @@ instance TF.ToHCL PrivateKeyResource where
         , TF.assign "path" <$> TF.argument _path
         ]
 
-$(TF.makeSchemaLenses
-    ''PrivateKeyResource
-    ''TF.Rundeck
-    ''TF.Resource)
+instance HasKeyMaterial PrivateKeyResource (TF.Argument Text) where
+    keyMaterial f s@PrivateKeyResource{..} =
+        (\a -> s { _key_material = a } :: PrivateKeyResource)
+             <$> f _key_material
+
+instance HasPath PrivateKeyResource (TF.Argument Text) where
+    path f s@PrivateKeyResource{..} =
+        (\a -> s { _path = a } :: PrivateKeyResource)
+             <$> f _path
 
 privateKeyResource :: TF.Resource TF.Rundeck PrivateKeyResource
 privateKeyResource =
@@ -210,10 +346,60 @@ instance TF.ToHCL ProjectResource where
         , TF.assign "ssh_key_storage_path" <$> TF.argument _ssh_key_storage_path
         ]
 
-$(TF.makeSchemaLenses
-    ''ProjectResource
-    ''TF.Rundeck
-    ''TF.Resource)
+instance HasDefaultNodeExecutorPlugin ProjectResource (TF.Argument Text) where
+    defaultNodeExecutorPlugin f s@ProjectResource{..} =
+        (\a -> s { _default_node_executor_plugin = a } :: ProjectResource)
+             <$> f _default_node_executor_plugin
+
+instance HasDefaultNodeFileCopierPlugin ProjectResource (TF.Argument Text) where
+    defaultNodeFileCopierPlugin f s@ProjectResource{..} =
+        (\a -> s { _default_node_file_copier_plugin = a } :: ProjectResource)
+             <$> f _default_node_file_copier_plugin
+
+instance HasDescription ProjectResource (TF.Argument Text) where
+    description f s@ProjectResource{..} =
+        (\a -> s { _description = a } :: ProjectResource)
+             <$> f _description
+
+instance HasExtraConfig ProjectResource (TF.Argument Text) where
+    extraConfig f s@ProjectResource{..} =
+        (\a -> s { _extra_config = a } :: ProjectResource)
+             <$> f _extra_config
+
+instance HasName ProjectResource (TF.Argument Text) where
+    name f s@ProjectResource{..} =
+        (\a -> s { _name = a } :: ProjectResource)
+             <$> f _name
+
+instance HasResourceModelSource ProjectResource (TF.Argument Text) where
+    resourceModelSource f s@ProjectResource{..} =
+        (\a -> s { _resource_model_source = a } :: ProjectResource)
+             <$> f _resource_model_source
+
+instance HasSshAuthenticationType ProjectResource (TF.Argument Text) where
+    sshAuthenticationType f s@ProjectResource{..} =
+        (\a -> s { _ssh_authentication_type = a } :: ProjectResource)
+             <$> f _ssh_authentication_type
+
+instance HasSshKeyFilePath ProjectResource (TF.Argument Text) where
+    sshKeyFilePath f s@ProjectResource{..} =
+        (\a -> s { _ssh_key_file_path = a } :: ProjectResource)
+             <$> f _ssh_key_file_path
+
+instance HasSshKeyStoragePath ProjectResource (TF.Argument Text) where
+    sshKeyStoragePath f s@ProjectResource{..} =
+        (\a -> s { _ssh_key_storage_path = a } :: ProjectResource)
+             <$> f _ssh_key_storage_path
+
+instance HasComputedName ProjectResource (TF.Attribute Text) where
+    computedName f s@ProjectResource{..} =
+        (\a -> s { _computed_name = a } :: ProjectResource)
+             <$> f _computed_name
+
+instance HasComputedUiUrl ProjectResource (TF.Attribute Text) where
+    computedUiUrl f s@ProjectResource{..} =
+        (\a -> s { _computed_ui_url = a } :: ProjectResource)
+             <$> f _computed_ui_url
 
 projectResource :: TF.Resource TF.Rundeck ProjectResource
 projectResource =
@@ -260,10 +446,30 @@ instance TF.ToHCL PublicKeyResource where
         , TF.assign "path" <$> TF.argument _path
         ]
 
-$(TF.makeSchemaLenses
-    ''PublicKeyResource
-    ''TF.Rundeck
-    ''TF.Resource)
+instance HasDelete PublicKeyResource (TF.Argument Text) where
+    delete f s@PublicKeyResource{..} =
+        (\a -> s { _delete = a } :: PublicKeyResource)
+             <$> f _delete
+
+instance HasKeyMaterial PublicKeyResource (TF.Argument Text) where
+    keyMaterial f s@PublicKeyResource{..} =
+        (\a -> s { _key_material = a } :: PublicKeyResource)
+             <$> f _key_material
+
+instance HasPath PublicKeyResource (TF.Argument Text) where
+    path f s@PublicKeyResource{..} =
+        (\a -> s { _path = a } :: PublicKeyResource)
+             <$> f _path
+
+instance HasComputedKeyMaterial PublicKeyResource (TF.Attribute Text) where
+    computedKeyMaterial f s@PublicKeyResource{..} =
+        (\a -> s { _computed_key_material = a } :: PublicKeyResource)
+             <$> f _computed_key_material
+
+instance HasComputedUrl PublicKeyResource (TF.Attribute Text) where
+    computedUrl f s@PublicKeyResource{..} =
+        (\a -> s { _computed_url = a } :: PublicKeyResource)
+             <$> f _computed_url
 
 publicKeyResource :: TF.Resource TF.Rundeck PublicKeyResource
 publicKeyResource =
@@ -275,3 +481,195 @@ publicKeyResource =
             , _computed_key_material = TF.Compute "key_material"
             , _computed_url = TF.Compute "url"
             }
+
+class HasAllowConcurrentExecutions s a | s -> a where
+    allowConcurrentExecutions :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAllowConcurrentExecutions s a => HasAllowConcurrentExecutions (TF.Resource p s) a where
+    allowConcurrentExecutions = TF.configuration . allowConcurrentExecutions
+
+class HasCommand s a | s -> a where
+    command :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCommand s a => HasCommand (TF.Resource p s) a where
+    command = TF.configuration . command
+
+class HasCommandOrderingStrategy s a | s -> a where
+    commandOrderingStrategy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCommandOrderingStrategy s a => HasCommandOrderingStrategy (TF.Resource p s) a where
+    commandOrderingStrategy = TF.configuration . commandOrderingStrategy
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedKeyMaterial s a | s -> a where
+    computedKeyMaterial :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedKeyMaterial s a => HasComputedKeyMaterial (TF.Resource p s) a where
+    computedKeyMaterial = TF.configuration . computedKeyMaterial
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedUiUrl s a | s -> a where
+    computedUiUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUiUrl s a => HasComputedUiUrl (TF.Resource p s) a where
+    computedUiUrl = TF.configuration . computedUiUrl
+
+class HasComputedUrl s a | s -> a where
+    computedUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUrl s a => HasComputedUrl (TF.Resource p s) a where
+    computedUrl = TF.configuration . computedUrl
+
+class HasContinueOnError s a | s -> a where
+    continueOnError :: Functor f => (a -> f a) -> s -> f s
+
+instance HasContinueOnError s a => HasContinueOnError (TF.Resource p s) a where
+    continueOnError = TF.configuration . continueOnError
+
+class HasDefaultNodeExecutorPlugin s a | s -> a where
+    defaultNodeExecutorPlugin :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDefaultNodeExecutorPlugin s a => HasDefaultNodeExecutorPlugin (TF.Resource p s) a where
+    defaultNodeExecutorPlugin = TF.configuration . defaultNodeExecutorPlugin
+
+class HasDefaultNodeFileCopierPlugin s a | s -> a where
+    defaultNodeFileCopierPlugin :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDefaultNodeFileCopierPlugin s a => HasDefaultNodeFileCopierPlugin (TF.Resource p s) a where
+    defaultNodeFileCopierPlugin = TF.configuration . defaultNodeFileCopierPlugin
+
+class HasDelete s a | s -> a where
+    delete :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDelete s a => HasDelete (TF.Resource p s) a where
+    delete = TF.configuration . delete
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasExtraConfig s a | s -> a where
+    extraConfig :: Functor f => (a -> f a) -> s -> f s
+
+instance HasExtraConfig s a => HasExtraConfig (TF.Resource p s) a where
+    extraConfig = TF.configuration . extraConfig
+
+class HasGroupName s a | s -> a where
+    groupName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasGroupName s a => HasGroupName (TF.Resource p s) a where
+    groupName = TF.configuration . groupName
+
+class HasKeyMaterial s a | s -> a where
+    keyMaterial :: Functor f => (a -> f a) -> s -> f s
+
+instance HasKeyMaterial s a => HasKeyMaterial (TF.Resource p s) a where
+    keyMaterial = TF.configuration . keyMaterial
+
+class HasLogLevel s a | s -> a where
+    logLevel :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLogLevel s a => HasLogLevel (TF.Resource p s) a where
+    logLevel = TF.configuration . logLevel
+
+class HasMaxThreadCount s a | s -> a where
+    maxThreadCount :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMaxThreadCount s a => HasMaxThreadCount (TF.Resource p s) a where
+    maxThreadCount = TF.configuration . maxThreadCount
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasNodeFilterExcludePrecedence s a | s -> a where
+    nodeFilterExcludePrecedence :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNodeFilterExcludePrecedence s a => HasNodeFilterExcludePrecedence (TF.Resource p s) a where
+    nodeFilterExcludePrecedence = TF.configuration . nodeFilterExcludePrecedence
+
+class HasNodeFilterQuery s a | s -> a where
+    nodeFilterQuery :: Functor f => (a -> f a) -> s -> f s
+
+instance HasNodeFilterQuery s a => HasNodeFilterQuery (TF.Resource p s) a where
+    nodeFilterQuery = TF.configuration . nodeFilterQuery
+
+class HasOption s a | s -> a where
+    option :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOption s a => HasOption (TF.Resource p s) a where
+    option = TF.configuration . option
+
+class HasPath s a | s -> a where
+    path :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPath s a => HasPath (TF.Resource p s) a where
+    path = TF.configuration . path
+
+class HasPreserveOptionsOrder s a | s -> a where
+    preserveOptionsOrder :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPreserveOptionsOrder s a => HasPreserveOptionsOrder (TF.Resource p s) a where
+    preserveOptionsOrder = TF.configuration . preserveOptionsOrder
+
+class HasProjectName s a | s -> a where
+    projectName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProjectName s a => HasProjectName (TF.Resource p s) a where
+    projectName = TF.configuration . projectName
+
+class HasRankAttribute s a | s -> a where
+    rankAttribute :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRankAttribute s a => HasRankAttribute (TF.Resource p s) a where
+    rankAttribute = TF.configuration . rankAttribute
+
+class HasRankOrder s a | s -> a where
+    rankOrder :: Functor f => (a -> f a) -> s -> f s
+
+instance HasRankOrder s a => HasRankOrder (TF.Resource p s) a where
+    rankOrder = TF.configuration . rankOrder
+
+class HasResourceModelSource s a | s -> a where
+    resourceModelSource :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResourceModelSource s a => HasResourceModelSource (TF.Resource p s) a where
+    resourceModelSource = TF.configuration . resourceModelSource
+
+class HasSchedule s a | s -> a where
+    schedule :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSchedule s a => HasSchedule (TF.Resource p s) a where
+    schedule = TF.configuration . schedule
+
+class HasSshAuthenticationType s a | s -> a where
+    sshAuthenticationType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSshAuthenticationType s a => HasSshAuthenticationType (TF.Resource p s) a where
+    sshAuthenticationType = TF.configuration . sshAuthenticationType
+
+class HasSshKeyFilePath s a | s -> a where
+    sshKeyFilePath :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSshKeyFilePath s a => HasSshKeyFilePath (TF.Resource p s) a where
+    sshKeyFilePath = TF.configuration . sshKeyFilePath
+
+class HasSshKeyStoragePath s a | s -> a where
+    sshKeyStoragePath :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSshKeyStoragePath s a => HasSshKeyStoragePath (TF.Resource p s) a where
+    sshKeyStoragePath = TF.configuration . sshKeyStoragePath

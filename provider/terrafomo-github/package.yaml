@@ -8,6 +8,7 @@ name: terrafomo-github
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

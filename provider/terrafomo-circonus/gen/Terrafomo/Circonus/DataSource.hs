@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,55 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Circonus.DataSource where
+module Terrafomo.Circonus.DataSource
+    (
+    -- * Types
+      AccountDataSource (..)
+    , accountDataSource
 
-import Data.Functor ((<$>))
+    , CollectorDataSource (..)
+    , collectorDataSource
+
+    -- * Overloaded Fields
+    , HasComputedAddress1 (..)
+    , HasComputedAddress2 (..)
+    , HasComputedCcEmail (..)
+    , HasComputedCity (..)
+    , HasComputedContactGroups (..)
+    , HasComputedCountry (..)
+    , HasComputedDescription (..)
+    , HasComputedDetails (..)
+    , HasComputedId (..)
+    , HasComputedInvites (..)
+    , HasComputedLatitude (..)
+    , HasComputedLongitude (..)
+    , HasComputedName (..)
+    , HasComputedOwner (..)
+    , HasComputedState (..)
+    , HasComputedTags (..)
+    , HasComputedTimezone (..)
+    , HasComputedType' (..)
+    , HasComputedUiBaseUrl (..)
+    , HasComputedUsage (..)
+    , HasComputedUsers (..)
+    , HasCurrent (..)
+    , HasId (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Circonus.Provider as TF
 import qualified Terrafomo.Circonus.Types    as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @circonus_account@ Circonus datasource.
 
@@ -91,10 +122,95 @@ instance TF.ToHCL AccountDataSource where
         , TF.assign "id" <$> TF.argument _id
         ]
 
-$(TF.makeSchemaLenses
-    ''AccountDataSource
-    ''TF.Circonus
-    ''TF.DataSource)
+instance HasCurrent AccountDataSource (TF.Argument Text) where
+    current f s@AccountDataSource{..} =
+        (\a -> s { _current = a } :: AccountDataSource)
+             <$> f _current
+
+instance HasId AccountDataSource (TF.Argument Text) where
+    id f s@AccountDataSource{..} =
+        (\a -> s { _id = a } :: AccountDataSource)
+             <$> f _id
+
+instance HasComputedAddress1 AccountDataSource (TF.Attribute Text) where
+    computedAddress1 f s@AccountDataSource{..} =
+        (\a -> s { _computed_address1 = a } :: AccountDataSource)
+             <$> f _computed_address1
+
+instance HasComputedAddress2 AccountDataSource (TF.Attribute Text) where
+    computedAddress2 f s@AccountDataSource{..} =
+        (\a -> s { _computed_address2 = a } :: AccountDataSource)
+             <$> f _computed_address2
+
+instance HasComputedCcEmail AccountDataSource (TF.Attribute Text) where
+    computedCcEmail f s@AccountDataSource{..} =
+        (\a -> s { _computed_cc_email = a } :: AccountDataSource)
+             <$> f _computed_cc_email
+
+instance HasComputedCity AccountDataSource (TF.Attribute Text) where
+    computedCity f s@AccountDataSource{..} =
+        (\a -> s { _computed_city = a } :: AccountDataSource)
+             <$> f _computed_city
+
+instance HasComputedContactGroups AccountDataSource (TF.Attribute Text) where
+    computedContactGroups f s@AccountDataSource{..} =
+        (\a -> s { _computed_contact_groups = a } :: AccountDataSource)
+             <$> f _computed_contact_groups
+
+instance HasComputedCountry AccountDataSource (TF.Attribute Text) where
+    computedCountry f s@AccountDataSource{..} =
+        (\a -> s { _computed_country = a } :: AccountDataSource)
+             <$> f _computed_country
+
+instance HasComputedDescription AccountDataSource (TF.Attribute Text) where
+    computedDescription f s@AccountDataSource{..} =
+        (\a -> s { _computed_description = a } :: AccountDataSource)
+             <$> f _computed_description
+
+instance HasComputedId AccountDataSource (TF.Attribute Text) where
+    computedId f s@AccountDataSource{..} =
+        (\a -> s { _computed_id = a } :: AccountDataSource)
+             <$> f _computed_id
+
+instance HasComputedInvites AccountDataSource (TF.Attribute Text) where
+    computedInvites f s@AccountDataSource{..} =
+        (\a -> s { _computed_invites = a } :: AccountDataSource)
+             <$> f _computed_invites
+
+instance HasComputedName AccountDataSource (TF.Attribute Text) where
+    computedName f s@AccountDataSource{..} =
+        (\a -> s { _computed_name = a } :: AccountDataSource)
+             <$> f _computed_name
+
+instance HasComputedOwner AccountDataSource (TF.Attribute Text) where
+    computedOwner f s@AccountDataSource{..} =
+        (\a -> s { _computed_owner = a } :: AccountDataSource)
+             <$> f _computed_owner
+
+instance HasComputedState AccountDataSource (TF.Attribute Text) where
+    computedState f s@AccountDataSource{..} =
+        (\a -> s { _computed_state = a } :: AccountDataSource)
+             <$> f _computed_state
+
+instance HasComputedTimezone AccountDataSource (TF.Attribute Text) where
+    computedTimezone f s@AccountDataSource{..} =
+        (\a -> s { _computed_timezone = a } :: AccountDataSource)
+             <$> f _computed_timezone
+
+instance HasComputedUiBaseUrl AccountDataSource (TF.Attribute Text) where
+    computedUiBaseUrl f s@AccountDataSource{..} =
+        (\a -> s { _computed_ui_base_url = a } :: AccountDataSource)
+             <$> f _computed_ui_base_url
+
+instance HasComputedUsage AccountDataSource (TF.Attribute Text) where
+    computedUsage f s@AccountDataSource{..} =
+        (\a -> s { _computed_usage = a } :: AccountDataSource)
+             <$> f _computed_usage
+
+instance HasComputedUsers AccountDataSource (TF.Attribute Text) where
+    computedUsers f s@AccountDataSource{..} =
+        (\a -> s { _computed_users = a } :: AccountDataSource)
+             <$> f _computed_users
 
 accountDataSource :: TF.DataSource TF.Circonus AccountDataSource
 accountDataSource =
@@ -161,10 +277,45 @@ instance TF.ToHCL CollectorDataSource where
         [ TF.assign "id" <$> TF.argument _id
         ]
 
-$(TF.makeSchemaLenses
-    ''CollectorDataSource
-    ''TF.Circonus
-    ''TF.DataSource)
+instance HasId CollectorDataSource (TF.Argument Text) where
+    id f s@CollectorDataSource{..} =
+        (\a -> s { _id = a } :: CollectorDataSource)
+             <$> f _id
+
+instance HasComputedDetails CollectorDataSource (TF.Attribute Text) where
+    computedDetails f s@CollectorDataSource{..} =
+        (\a -> s { _computed_details = a } :: CollectorDataSource)
+             <$> f _computed_details
+
+instance HasComputedId CollectorDataSource (TF.Attribute Text) where
+    computedId f s@CollectorDataSource{..} =
+        (\a -> s { _computed_id = a } :: CollectorDataSource)
+             <$> f _computed_id
+
+instance HasComputedLatitude CollectorDataSource (TF.Attribute Text) where
+    computedLatitude f s@CollectorDataSource{..} =
+        (\a -> s { _computed_latitude = a } :: CollectorDataSource)
+             <$> f _computed_latitude
+
+instance HasComputedLongitude CollectorDataSource (TF.Attribute Text) where
+    computedLongitude f s@CollectorDataSource{..} =
+        (\a -> s { _computed_longitude = a } :: CollectorDataSource)
+             <$> f _computed_longitude
+
+instance HasComputedName CollectorDataSource (TF.Attribute Text) where
+    computedName f s@CollectorDataSource{..} =
+        (\a -> s { _computed_name = a } :: CollectorDataSource)
+             <$> f _computed_name
+
+instance HasComputedTags CollectorDataSource (TF.Attribute Text) where
+    computedTags f s@CollectorDataSource{..} =
+        (\a -> s { _computed_tags = a } :: CollectorDataSource)
+             <$> f _computed_tags
+
+instance HasComputedType' CollectorDataSource (TF.Attribute Text) where
+    computedType' f s@CollectorDataSource{..} =
+        (\a -> s { _computed_type' = a } :: CollectorDataSource)
+             <$> f _computed_type'
 
 collectorDataSource :: TF.DataSource TF.Circonus CollectorDataSource
 collectorDataSource =
@@ -179,3 +330,141 @@ collectorDataSource =
             , _computed_tags = TF.Compute "tags"
             , _computed_type' = TF.Compute "type"
             }
+
+class HasComputedAddress1 s a | s -> a where
+    computedAddress1 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddress1 s a => HasComputedAddress1 (TF.DataSource p s) a where
+    computedAddress1 = TF.configuration . computedAddress1
+
+class HasComputedAddress2 s a | s -> a where
+    computedAddress2 :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedAddress2 s a => HasComputedAddress2 (TF.DataSource p s) a where
+    computedAddress2 = TF.configuration . computedAddress2
+
+class HasComputedCcEmail s a | s -> a where
+    computedCcEmail :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCcEmail s a => HasComputedCcEmail (TF.DataSource p s) a where
+    computedCcEmail = TF.configuration . computedCcEmail
+
+class HasComputedCity s a | s -> a where
+    computedCity :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCity s a => HasComputedCity (TF.DataSource p s) a where
+    computedCity = TF.configuration . computedCity
+
+class HasComputedContactGroups s a | s -> a where
+    computedContactGroups :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedContactGroups s a => HasComputedContactGroups (TF.DataSource p s) a where
+    computedContactGroups = TF.configuration . computedContactGroups
+
+class HasComputedCountry s a | s -> a where
+    computedCountry :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedCountry s a => HasComputedCountry (TF.DataSource p s) a where
+    computedCountry = TF.configuration . computedCountry
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDetails s a | s -> a where
+    computedDetails :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedDetails s a => HasComputedDetails (TF.DataSource p s) a where
+    computedDetails = TF.configuration . computedDetails
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedInvites s a | s -> a where
+    computedInvites :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedInvites s a => HasComputedInvites (TF.DataSource p s) a where
+    computedInvites = TF.configuration . computedInvites
+
+class HasComputedLatitude s a | s -> a where
+    computedLatitude :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLatitude s a => HasComputedLatitude (TF.DataSource p s) a where
+    computedLatitude = TF.configuration . computedLatitude
+
+class HasComputedLongitude s a | s -> a where
+    computedLongitude :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedLongitude s a => HasComputedLongitude (TF.DataSource p s) a where
+    computedLongitude = TF.configuration . computedLongitude
+
+class HasComputedName s a | s -> a where
+    computedName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedOwner s a | s -> a where
+    computedOwner :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedOwner s a => HasComputedOwner (TF.DataSource p s) a where
+    computedOwner = TF.configuration . computedOwner
+
+class HasComputedState s a | s -> a where
+    computedState :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedState s a => HasComputedState (TF.DataSource p s) a where
+    computedState = TF.configuration . computedState
+
+class HasComputedTags s a | s -> a where
+    computedTags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTags s a => HasComputedTags (TF.DataSource p s) a where
+    computedTags = TF.configuration . computedTags
+
+class HasComputedTimezone s a | s -> a where
+    computedTimezone :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedTimezone s a => HasComputedTimezone (TF.DataSource p s) a where
+    computedTimezone = TF.configuration . computedTimezone
+
+class HasComputedType' s a | s -> a where
+    computedType' :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
+    computedType' = TF.configuration . computedType'
+
+class HasComputedUiBaseUrl s a | s -> a where
+    computedUiBaseUrl :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUiBaseUrl s a => HasComputedUiBaseUrl (TF.DataSource p s) a where
+    computedUiBaseUrl = TF.configuration . computedUiBaseUrl
+
+class HasComputedUsage s a | s -> a where
+    computedUsage :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUsage s a => HasComputedUsage (TF.DataSource p s) a where
+    computedUsage = TF.configuration . computedUsage
+
+class HasComputedUsers s a | s -> a where
+    computedUsers :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedUsers s a => HasComputedUsers (TF.DataSource p s) a where
+    computedUsers = TF.configuration . computedUsers
+
+class HasCurrent s a | s -> a where
+    current :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCurrent s a => HasCurrent (TF.DataSource p s) a where
+    current = TF.configuration . current
+
+class HasId s a | s -> a where
+    id :: Functor f => (a -> f a) -> s -> f s
+
+instance HasId s a => HasId (TF.DataSource p s) a where
+    id = TF.configuration . id

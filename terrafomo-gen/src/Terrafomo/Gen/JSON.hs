@@ -6,5 +6,6 @@ import qualified Data.Char  as Char
 options :: String -> JSON.Options
 options prefix =
     JSON.defaultOptions
-        { JSON.fieldLabelModifier = map Char.toLower . drop (length prefix)
+        { JSON.fieldLabelModifier     = map Char.toLower . drop (length prefix)
+        , JSON.constructorTagModifier = JSON.camelTo2 '_'
         }

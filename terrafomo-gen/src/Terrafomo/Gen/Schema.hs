@@ -3,10 +3,12 @@
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE RecordWildCards     #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TupleSections       #-}
 
 module Terrafomo.Gen.Schema where
 
-import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:), (.:?))
+import Control.Arrow   ((&&&))
+import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:), (.:?), (.=))
 import Data.Function   (on)
 import Data.Map.Strict (Map)
 import Data.Monoid     (Last (..))
@@ -16,15 +18,13 @@ import Data.Text       (Text)
 import GHC.Generics (Generic)
 
 import Terrafomo.Gen.Example
+import Terrafomo.Gen.Text
 
 import qualified Data.Aeson         as JSON
 import qualified Data.Map.Strict    as Map
 import qualified Terrafomo.Gen.JSON as JSON
 
 -- Syntax Types
-
-defaultType :: Last Text
-defaultType = Last (Just "Text")
 
 data SchemaType
     = Resource
@@ -43,6 +43,35 @@ data Schema = Schema
     , schemaAttributes :: !(Map Text Attr)
     } deriving (Show, Generic)
 
+data Field = Field
+    { fieldClass  :: !Text
+    , fieldMethod :: !Text
+    , fieldLabel  :: !Text
+    , fieldType   :: !(Last Text)
+    } deriving (Show, Eq, Ord, Generic)
+
+instance ToJSON Field where
+    toJSON = JSON.genericToJSON (JSON.options "field")
+
+getFields :: Schema -> [Field]
+getFields Schema{..} =
+    let go name wrap ty =
+            Field { fieldClass  = fieldClassName  name
+                  , fieldMethod = fieldMethodName name
+                  , fieldLabel  = name
+                  , fieldType   = (\x -> "(" <> wrap <> " " <> x <> ")") <$> ty
+                  }
+     in map (\(k, v) -> go k "TF.Argument"  (argType  v))
+            (Map.toList schemaArguments)
+     <> map (\(k, v) -> go k "TF.Attribute" (attrType v))
+            (Map.toList schemaAttributes)
+
+getClasses :: [Schema] -> Map Text Text
+getClasses =
+      Map.fromList
+    . map (fieldClass &&& fieldMethod)
+    . concatMap getFields
+
 instance Semigroup Schema where
     (<>) parsed saved = Schema
         { schemaName       = schemaName     parsed
@@ -57,7 +86,15 @@ instance Semigroup Schema where
         }
 
 instance ToJSON Schema where
-    toJSON = JSON.genericToJSON (JSON.options "schema")
+    toJSON x@Schema{..} = JSON.object
+        [ "name"       .= schemaName
+        , "about"      .= schemaAbout
+        , "examples"   .= schemaExamples
+        , "deprecated" .= schemaDeprecated
+        , "arguments"  .= schemaArguments
+        , "attributes" .= schemaAttributes
+        , "fields"     .= getFields x
+        ]
 
 instance FromJSON Schema where
     parseJSON = JSON.withObject "Schema" $ \o -> do

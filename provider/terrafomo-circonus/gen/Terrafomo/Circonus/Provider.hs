@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Circonus.Provider
-    ( Circonus    (..)
-    , HasCirconus (..)
+    (
+    -- * Provider Datatype
+      Circonus (..)
+
+    -- * Lenses
+    , apiUrl
+    , key
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Circonus.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Circonus Terraform provider.
 
@@ -77,4 +80,20 @@ instance Monoid Circonus where
 instance TF.IsProvider Circonus where
     type ProviderName Circonus = "circonus"
 
-$(TF.makeProviderLenses ''Circonus)
+apiUrl
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Circonus
+    -> f Circonus
+apiUrl f s =
+        (\a -> s { _api_url = a } :: Circonus)
+             <$> f (_api_url s)
+
+key
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Circonus
+    -> f Circonus
+key f s =
+        (\a -> s { _key = a } :: Circonus)
+             <$> f (_key s)

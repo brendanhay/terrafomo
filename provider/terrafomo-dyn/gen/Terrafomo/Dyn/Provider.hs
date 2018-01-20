@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Dyn.Provider
-    ( Dyn    (..)
-    , HasDyn (..)
+    (
+    -- * Provider Datatype
+      Dyn (..)
+
+    -- * Lenses
+    , customerName
+    , password
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.Dyn.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | Dyn Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid Dyn where
 instance TF.IsProvider Dyn where
     type ProviderName Dyn = "dyn"
 
-$(TF.makeProviderLenses ''Dyn)
+customerName
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Dyn
+    -> f Dyn
+customerName f s =
+        (\a -> s { _customer_name = a } :: Dyn)
+             <$> f (_customer_name s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Dyn
+    -> f Dyn
+password f s =
+        (\a -> s { _password = a } :: Dyn)
+             <$> f (_password s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> Dyn
+    -> f Dyn
+username f s =
+        (\a -> s { _username = a } :: Dyn)
+             <$> f (_username s)

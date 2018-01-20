@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PagerDuty.Provider
-    ( PagerDuty    (..)
-    , HasPagerDuty (..)
+    (
+    -- * Provider Datatype
+      PagerDuty (..)
+
+    -- * Lenses
+    , skipCredentialsValidation
+    , token
     ) where
 
 import Data.Function      (on)
@@ -34,10 +38,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.PagerDuty.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | PagerDuty Terraform provider.
 
@@ -80,4 +83,20 @@ instance Monoid PagerDuty where
 instance TF.IsProvider PagerDuty where
     type ProviderName PagerDuty = "pagerduty"
 
-$(TF.makeProviderLenses ''PagerDuty)
+skipCredentialsValidation
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PagerDuty
+    -> f PagerDuty
+skipCredentialsValidation f s =
+        (\a -> s { _skip_credentials_validation = a } :: PagerDuty)
+             <$> f (_skip_credentials_validation s)
+
+token
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PagerDuty
+    -> f PagerDuty
+token f s =
+        (\a -> s { _token = a } :: PagerDuty)
+             <$> f (_token s)

@@ -35,7 +35,7 @@ module Terrafomo.Monad
     , renderOutput
 
     -- * Providers
-    , defaultProvider
+    , withProvider
 
     -- * References
     , Reference
@@ -438,12 +438,15 @@ false = constant True
 
 -- Providers
 
-defaultProvider
-    :: forall p a. IsProvider p
+withProvider
+    :: forall m p a.
+       ( MonadTerraform m
+       , IsProvider p
+       )
     => p
-    -> Terraform a
-    -> Terraform a
-defaultProvider p m =
+    -> m a
+    -> m a
+withProvider p m =
     insertProvider (Just p) >>= \case
         Nothing    -> m
         Just alias ->

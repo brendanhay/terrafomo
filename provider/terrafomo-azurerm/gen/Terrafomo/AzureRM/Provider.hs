@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,18 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AzureRM.Provider
-    ( AzureRM    (..)
-    , HasAzureRM (..)
+    (
+    -- * Provider Datatype
+      AzureRM (..)
+
+    -- * Lenses
+    , clientId
+    , clientSecret
+    , environment
+    , skipCredentialsValidation
+    , skipProviderRegistration
+    , subscriptionId
+    , tenantId
     ) where
 
 import Data.Function      (on)
@@ -34,20 +43,17 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.AzureRM.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.Meta     as TF
 import qualified Terrafomo.Syntax.Name     as TF
+import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.TH              as TF
 
 {- | AzureRM Terraform provider.
 
-The Microsoft AzureRM provider is used to interact with the many resources
-supported by Azure Resource Manager via the AzureRM API's. The provider
-needs to be configured with the credentials needed to generate OAuth tokens
-for the AzureRM API's. ~> Note: This supercedes the
-</docs/providers/azure/index.html> , which interacts with Azure using the
-Service Management API. Use the navigation to the left to read about the
-available resources.
+The Azure Provider is used to interact with the many resources supported by
+Azure Resource Manager (AzureRM) through it's API's. ~> Note: This
+supercedes the </docs/providers/azure/index.html> , which interacts with
+Azure using the Service Management API. Use the navigation to the left to
+read about the available resources.
 -}
 data AzureRM = AzureRM {
       _client_id                   :: !(TF.Argument Text)
@@ -107,4 +113,65 @@ instance Monoid AzureRM where
 instance TF.IsProvider AzureRM where
     type ProviderName AzureRM = "azurerm"
 
-$(TF.makeProviderLenses ''AzureRM)
+clientId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+clientId f s =
+        (\a -> s { _client_id = a } :: AzureRM)
+             <$> f (_client_id s)
+
+clientSecret
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+clientSecret f s =
+        (\a -> s { _client_secret = a } :: AzureRM)
+             <$> f (_client_secret s)
+
+environment
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+environment f s =
+        (\a -> s { _environment = a } :: AzureRM)
+             <$> f (_environment s)
+
+skipCredentialsValidation
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+skipCredentialsValidation f s =
+        (\a -> s { _skip_credentials_validation = a } :: AzureRM)
+             <$> f (_skip_credentials_validation s)
+
+skipProviderRegistration
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+skipProviderRegistration f s =
+        (\a -> s { _skip_provider_registration = a } :: AzureRM)
+             <$> f (_skip_provider_registration s)
+
+subscriptionId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+subscriptionId f s =
+        (\a -> s { _subscription_id = a } :: AzureRM)
+             <$> f (_subscription_id s)
+
+tenantId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> AzureRM
+    -> f AzureRM
+tenantId f s =
+        (\a -> s { _tenant_id = a } :: AzureRM)
+             <$> f (_tenant_id s)

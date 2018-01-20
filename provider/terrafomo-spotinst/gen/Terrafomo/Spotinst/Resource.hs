@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,53 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Spotinst.Resource where
+module Terrafomo.Spotinst.Resource
+    (
+    -- * Types
+      AwsGroupResource (..)
+    , awsGroupResource
 
-import Data.Functor ((<$>))
+    , HealthcheckResource (..)
+    , healthcheckResource
+
+    , SubscriptionResource (..)
+    , subscriptionResource
+
+    -- * Overloaded Fields
+    , HasCapacity (..)
+    , HasCheck (..)
+    , HasComputedId (..)
+    , HasDescription (..)
+    , HasElasticIps (..)
+    , HasEndpoint (..)
+    , HasEventType (..)
+    , HasFormat (..)
+    , HasInstanceTypes (..)
+    , HasLaunchSpecification (..)
+    , HasName (..)
+    , HasProduct (..)
+    , HasProtocol (..)
+    , HasProxy (..)
+    , HasResourceId (..)
+    , HasStrategy (..)
+    , HasTags (..)
+    , HasThreshold (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Spotinst.Provider as TF
 import qualified Terrafomo.Spotinst.Types    as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
-import qualified Terrafomo.TH                as TF
 
 {- | The @spotinst_aws_group@ Spotinst resource.
 
@@ -76,10 +105,50 @@ instance TF.ToHCL AwsGroupResource where
         , TF.assign "tags" <$> TF.argument _tags
         ]
 
-$(TF.makeSchemaLenses
-    ''AwsGroupResource
-    ''TF.Spotinst
-    ''TF.Resource)
+instance HasCapacity AwsGroupResource (TF.Argument Text) where
+    capacity f s@AwsGroupResource{..} =
+        (\a -> s { _capacity = a } :: AwsGroupResource)
+             <$> f _capacity
+
+instance HasDescription AwsGroupResource (TF.Argument Text) where
+    description f s@AwsGroupResource{..} =
+        (\a -> s { _description = a } :: AwsGroupResource)
+             <$> f _description
+
+instance HasElasticIps AwsGroupResource (TF.Argument Text) where
+    elasticIps f s@AwsGroupResource{..} =
+        (\a -> s { _elastic_ips = a } :: AwsGroupResource)
+             <$> f _elastic_ips
+
+instance HasInstanceTypes AwsGroupResource (TF.Argument Text) where
+    instanceTypes f s@AwsGroupResource{..} =
+        (\a -> s { _instance_types = a } :: AwsGroupResource)
+             <$> f _instance_types
+
+instance HasLaunchSpecification AwsGroupResource (TF.Argument Text) where
+    launchSpecification f s@AwsGroupResource{..} =
+        (\a -> s { _launch_specification = a } :: AwsGroupResource)
+             <$> f _launch_specification
+
+instance HasName AwsGroupResource (TF.Argument Text) where
+    name f s@AwsGroupResource{..} =
+        (\a -> s { _name = a } :: AwsGroupResource)
+             <$> f _name
+
+instance HasProduct AwsGroupResource (TF.Argument Text) where
+    product f s@AwsGroupResource{..} =
+        (\a -> s { _product = a } :: AwsGroupResource)
+             <$> f _product
+
+instance HasStrategy AwsGroupResource (TF.Argument Text) where
+    strategy f s@AwsGroupResource{..} =
+        (\a -> s { _strategy = a } :: AwsGroupResource)
+             <$> f _strategy
+
+instance HasTags AwsGroupResource (TF.Argument Text) where
+    tags f s@AwsGroupResource{..} =
+        (\a -> s { _tags = a } :: AwsGroupResource)
+             <$> f _tags
 
 awsGroupResource :: TF.Resource TF.Spotinst AwsGroupResource
 awsGroupResource =
@@ -124,10 +193,35 @@ instance TF.ToHCL HealthcheckResource where
         , TF.assign "threshold" <$> TF.argument _threshold
         ]
 
-$(TF.makeSchemaLenses
-    ''HealthcheckResource
-    ''TF.Spotinst
-    ''TF.Resource)
+instance HasCheck HealthcheckResource (TF.Argument Text) where
+    check f s@HealthcheckResource{..} =
+        (\a -> s { _check = a } :: HealthcheckResource)
+             <$> f _check
+
+instance HasName HealthcheckResource (TF.Argument Text) where
+    name f s@HealthcheckResource{..} =
+        (\a -> s { _name = a } :: HealthcheckResource)
+             <$> f _name
+
+instance HasProxy HealthcheckResource (TF.Argument Text) where
+    proxy f s@HealthcheckResource{..} =
+        (\a -> s { _proxy = a } :: HealthcheckResource)
+             <$> f _proxy
+
+instance HasResourceId HealthcheckResource (TF.Argument Text) where
+    resourceId f s@HealthcheckResource{..} =
+        (\a -> s { _resource_id = a } :: HealthcheckResource)
+             <$> f _resource_id
+
+instance HasThreshold HealthcheckResource (TF.Argument Text) where
+    threshold f s@HealthcheckResource{..} =
+        (\a -> s { _threshold = a } :: HealthcheckResource)
+             <$> f _threshold
+
+instance HasComputedId HealthcheckResource (TF.Attribute Text) where
+    computedId f s@HealthcheckResource{..} =
+        (\a -> s { _computed_id = a } :: HealthcheckResource)
+             <$> f _computed_id
 
 healthcheckResource :: TF.Resource TF.Spotinst HealthcheckResource
 healthcheckResource =
@@ -169,10 +263,35 @@ instance TF.ToHCL SubscriptionResource where
         , TF.assign "resource_id" <$> TF.argument _resource_id
         ]
 
-$(TF.makeSchemaLenses
-    ''SubscriptionResource
-    ''TF.Spotinst
-    ''TF.Resource)
+instance HasEndpoint SubscriptionResource (TF.Argument Text) where
+    endpoint f s@SubscriptionResource{..} =
+        (\a -> s { _endpoint = a } :: SubscriptionResource)
+             <$> f _endpoint
+
+instance HasEventType SubscriptionResource (TF.Argument Text) where
+    eventType f s@SubscriptionResource{..} =
+        (\a -> s { _event_type = a } :: SubscriptionResource)
+             <$> f _event_type
+
+instance HasFormat SubscriptionResource (TF.Argument Text) where
+    format f s@SubscriptionResource{..} =
+        (\a -> s { _format = a } :: SubscriptionResource)
+             <$> f _format
+
+instance HasProtocol SubscriptionResource (TF.Argument Text) where
+    protocol f s@SubscriptionResource{..} =
+        (\a -> s { _protocol = a } :: SubscriptionResource)
+             <$> f _protocol
+
+instance HasResourceId SubscriptionResource (TF.Argument Text) where
+    resourceId f s@SubscriptionResource{..} =
+        (\a -> s { _resource_id = a } :: SubscriptionResource)
+             <$> f _resource_id
+
+instance HasComputedId SubscriptionResource (TF.Attribute Text) where
+    computedId f s@SubscriptionResource{..} =
+        (\a -> s { _computed_id = a } :: SubscriptionResource)
+             <$> f _computed_id
 
 subscriptionResource :: TF.Resource TF.Spotinst SubscriptionResource
 subscriptionResource =
@@ -185,3 +304,111 @@ subscriptionResource =
             , _resource_id = TF.Nil
             , _computed_id = TF.Compute "id"
             }
+
+class HasCapacity s a | s -> a where
+    capacity :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCapacity s a => HasCapacity (TF.Resource p s) a where
+    capacity = TF.configuration . capacity
+
+class HasCheck s a | s -> a where
+    check :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCheck s a => HasCheck (TF.Resource p s) a where
+    check = TF.configuration . check
+
+class HasComputedId s a | s -> a where
+    computedId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasDescription s a | s -> a where
+    description :: Functor f => (a -> f a) -> s -> f s
+
+instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description = TF.configuration . description
+
+class HasElasticIps s a | s -> a where
+    elasticIps :: Functor f => (a -> f a) -> s -> f s
+
+instance HasElasticIps s a => HasElasticIps (TF.Resource p s) a where
+    elasticIps = TF.configuration . elasticIps
+
+class HasEndpoint s a | s -> a where
+    endpoint :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEndpoint s a => HasEndpoint (TF.Resource p s) a where
+    endpoint = TF.configuration . endpoint
+
+class HasEventType s a | s -> a where
+    eventType :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEventType s a => HasEventType (TF.Resource p s) a where
+    eventType = TF.configuration . eventType
+
+class HasFormat s a | s -> a where
+    format :: Functor f => (a -> f a) -> s -> f s
+
+instance HasFormat s a => HasFormat (TF.Resource p s) a where
+    format = TF.configuration . format
+
+class HasInstanceTypes s a | s -> a where
+    instanceTypes :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInstanceTypes s a => HasInstanceTypes (TF.Resource p s) a where
+    instanceTypes = TF.configuration . instanceTypes
+
+class HasLaunchSpecification s a | s -> a where
+    launchSpecification :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLaunchSpecification s a => HasLaunchSpecification (TF.Resource p s) a where
+    launchSpecification = TF.configuration . launchSpecification
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasProduct s a | s -> a where
+    product :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProduct s a => HasProduct (TF.Resource p s) a where
+    product = TF.configuration . product
+
+class HasProtocol s a | s -> a where
+    protocol :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
+    protocol = TF.configuration . protocol
+
+class HasProxy s a | s -> a where
+    proxy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasProxy s a => HasProxy (TF.Resource p s) a where
+    proxy = TF.configuration . proxy
+
+class HasResourceId s a | s -> a where
+    resourceId :: Functor f => (a -> f a) -> s -> f s
+
+instance HasResourceId s a => HasResourceId (TF.Resource p s) a where
+    resourceId = TF.configuration . resourceId
+
+class HasStrategy s a | s -> a where
+    strategy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasStrategy s a => HasStrategy (TF.Resource p s) a where
+    strategy = TF.configuration . strategy
+
+class HasTags s a | s -> a where
+    tags :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags = TF.configuration . tags
+
+class HasThreshold s a | s -> a where
+    threshold :: Functor f => (a -> f a) -> s -> f s
+
+instance HasThreshold s a => HasThreshold (TF.Resource p s) a where
+    threshold = TF.configuration . threshold

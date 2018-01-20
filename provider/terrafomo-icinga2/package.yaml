@@ -8,6 +8,7 @@ name: terrafomo-icinga2
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

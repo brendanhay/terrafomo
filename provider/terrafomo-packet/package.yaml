@@ -8,6 +8,7 @@ name: terrafomo-packet
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

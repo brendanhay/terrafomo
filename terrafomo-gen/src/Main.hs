@@ -141,8 +141,8 @@ main = do
 
         tmpls       <- loadTemplates   opts
         provider    <- loadProvider    opts
-        datasources <- loadDataSources opts
-        resources   <- loadResources   opts
+        datasources <- loadDataSources (providerRules provider) opts
+        resources   <- loadResources   (providerRules provider) opts
 
         let anyDataSources = not (null datasources)
             anyResources   = not (null resources)
@@ -171,20 +171,20 @@ loadProvider opts = do
             exists <- scriptIO (Dir.doesFileExist markdownFile)
             echo "Provider" (markdownFile ++ " == " ++ show exists)
 
-            schema <- loadSchema Parser.providerParser path
+            schema <- loadSchema (Parser.providerParser (providerRules provider)) path
             pure (applyDeprecations schema <$ provider)
 
-loadResources :: Options -> Script [Schema]
-loadResources =
-    fmap catMaybes
-        . traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
-        . resourcePaths
+loadResources :: [Rule] -> Options-> Script [Schema]
+loadResources rules =
+      fmap catMaybes
+    . traverse (fmap applyDeprecations . loadSchema (Parser.schemaParser rules))
+    . resourcePaths
 
-loadDataSources :: Options -> Script [Schema]
-loadDataSources =
-    fmap catMaybes
-        . traverse (fmap applyDeprecations . loadSchema Parser.schemaParser)
-        . dataSourcePaths
+loadDataSources :: [Rule] -> Options -> Script [Schema]
+loadDataSources rules =
+      fmap catMaybes
+    . traverse (fmap applyDeprecations . loadSchema (Parser.schemaParser rules))
+    . dataSourcePaths
 
 -- Schema
 

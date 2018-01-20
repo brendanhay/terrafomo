@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.LogicMonitor.Provider
-    ( LogicMonitor    (..)
-    , HasLogicMonitor (..)
+    (
+    -- * Provider Datatype
+      LogicMonitor (..)
+
+    -- * Lenses
+    , apiId
+    , apiKey
+    , company
     ) where
 
 import Data.Function      (on)
@@ -34,10 +39,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.LogicMonitor.Types as TF
 import qualified Terrafomo.Syntax.HCL         as TF
-import qualified Terrafomo.Syntax.Meta        as TF
 import qualified Terrafomo.Syntax.Name        as TF
+import qualified Terrafomo.Syntax.Provider    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
-import qualified Terrafomo.TH                 as TF
 
 {- | LogicMonitor Terraform provider.
 
@@ -84,4 +88,29 @@ instance Monoid LogicMonitor where
 instance TF.IsProvider LogicMonitor where
     type ProviderName LogicMonitor = "logicmonitor"
 
-$(TF.makeProviderLenses ''LogicMonitor)
+apiId
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> LogicMonitor
+    -> f LogicMonitor
+apiId f s =
+        (\a -> s { _api_id = a } :: LogicMonitor)
+             <$> f (_api_id s)
+
+apiKey
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> LogicMonitor
+    -> f LogicMonitor
+apiKey f s =
+        (\a -> s { _api_key = a } :: LogicMonitor)
+             <$> f (_api_key s)
+
+company
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> LogicMonitor
+    -> f LogicMonitor
+company f s =
+        (\a -> s { _company = a } :: LogicMonitor)
+             <$> f (_company s)

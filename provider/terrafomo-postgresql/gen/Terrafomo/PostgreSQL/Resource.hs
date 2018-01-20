@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,64 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.PostgreSQL.Resource where
+module Terrafomo.PostgreSQL.Resource
+    (
+    -- * Types
+      DatabaseResource (..)
+    , databaseResource
 
-import Data.Functor ((<$>))
+    , ExtensionResource (..)
+    , extensionResource
+
+    , RoleResource (..)
+    , roleResource
+
+    , SchemaResource (..)
+    , schemaResource
+
+    -- * Overloaded Fields
+    , HasAllowConnections (..)
+    , HasBypassRowLevelSecurity (..)
+    , HasConnectionLimit (..)
+    , HasCreateDatabase (..)
+    , HasCreateRole (..)
+    , HasEncoding (..)
+    , HasEncryptedPassword (..)
+    , HasIfNotExists (..)
+    , HasInherit (..)
+    , HasIsTemplate (..)
+    , HasLcCollate (..)
+    , HasLcCtype (..)
+    , HasLogin (..)
+    , HasName (..)
+    , HasOwner (..)
+    , HasPassword (..)
+    , HasPolicy (..)
+    , HasReplication (..)
+    , HasSchema (..)
+    , HasSkipDropRole (..)
+    , HasSkipReassignOwned (..)
+    , HasSuperuser (..)
+    , HasTablespaceName (..)
+    , HasTemplate (..)
+    , HasValidUntil (..)
+    , HasVersion (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.PostgreSQL.Provider as TF
 import qualified Terrafomo.PostgreSQL.Types    as TF
 import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Meta         as TF (configuration)
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Variable     as TF
-import qualified Terrafomo.TH                  as TF
 
 {- | The @postgresql_database@ PostgreSQL resource.
 
@@ -81,10 +121,55 @@ instance TF.ToHCL DatabaseResource where
         , TF.assign "template" <$> TF.argument _template
         ]
 
-$(TF.makeSchemaLenses
-    ''DatabaseResource
-    ''TF.PostgreSQL
-    ''TF.Resource)
+instance HasAllowConnections DatabaseResource (TF.Argument Text) where
+    allowConnections f s@DatabaseResource{..} =
+        (\a -> s { _allow_connections = a } :: DatabaseResource)
+             <$> f _allow_connections
+
+instance HasConnectionLimit DatabaseResource (TF.Argument Text) where
+    connectionLimit f s@DatabaseResource{..} =
+        (\a -> s { _connection_limit = a } :: DatabaseResource)
+             <$> f _connection_limit
+
+instance HasEncoding DatabaseResource (TF.Argument Text) where
+    encoding f s@DatabaseResource{..} =
+        (\a -> s { _encoding = a } :: DatabaseResource)
+             <$> f _encoding
+
+instance HasIsTemplate DatabaseResource (TF.Argument Text) where
+    isTemplate f s@DatabaseResource{..} =
+        (\a -> s { _is_template = a } :: DatabaseResource)
+             <$> f _is_template
+
+instance HasLcCollate DatabaseResource (TF.Argument Text) where
+    lcCollate f s@DatabaseResource{..} =
+        (\a -> s { _lc_collate = a } :: DatabaseResource)
+             <$> f _lc_collate
+
+instance HasLcCtype DatabaseResource (TF.Argument Text) where
+    lcCtype f s@DatabaseResource{..} =
+        (\a -> s { _lc_ctype = a } :: DatabaseResource)
+             <$> f _lc_ctype
+
+instance HasName DatabaseResource (TF.Argument Text) where
+    name f s@DatabaseResource{..} =
+        (\a -> s { _name = a } :: DatabaseResource)
+             <$> f _name
+
+instance HasOwner DatabaseResource (TF.Argument Text) where
+    owner f s@DatabaseResource{..} =
+        (\a -> s { _owner = a } :: DatabaseResource)
+             <$> f _owner
+
+instance HasTablespaceName DatabaseResource (TF.Argument Text) where
+    tablespaceName f s@DatabaseResource{..} =
+        (\a -> s { _tablespace_name = a } :: DatabaseResource)
+             <$> f _tablespace_name
+
+instance HasTemplate DatabaseResource (TF.Argument Text) where
+    template f s@DatabaseResource{..} =
+        (\a -> s { _template = a } :: DatabaseResource)
+             <$> f _template
 
 databaseResource :: TF.Resource TF.PostgreSQL DatabaseResource
 databaseResource =
@@ -123,10 +208,20 @@ instance TF.ToHCL ExtensionResource where
         , TF.assign "version" <$> TF.argument _version
         ]
 
-$(TF.makeSchemaLenses
-    ''ExtensionResource
-    ''TF.PostgreSQL
-    ''TF.Resource)
+instance HasName ExtensionResource (TF.Argument Text) where
+    name f s@ExtensionResource{..} =
+        (\a -> s { _name = a } :: ExtensionResource)
+             <$> f _name
+
+instance HasSchema ExtensionResource (TF.Argument Text) where
+    schema f s@ExtensionResource{..} =
+        (\a -> s { _schema = a } :: ExtensionResource)
+             <$> f _schema
+
+instance HasVersion ExtensionResource (TF.Argument Text) where
+    version f s@ExtensionResource{..} =
+        (\a -> s { _version = a } :: ExtensionResource)
+             <$> f _version
 
 extensionResource :: TF.Resource TF.PostgreSQL ExtensionResource
 extensionResource =
@@ -201,10 +296,75 @@ instance TF.ToHCL RoleResource where
         , TF.assign "valid_until" <$> TF.argument _valid_until
         ]
 
-$(TF.makeSchemaLenses
-    ''RoleResource
-    ''TF.PostgreSQL
-    ''TF.Resource)
+instance HasBypassRowLevelSecurity RoleResource (TF.Argument Text) where
+    bypassRowLevelSecurity f s@RoleResource{..} =
+        (\a -> s { _bypass_row_level_security = a } :: RoleResource)
+             <$> f _bypass_row_level_security
+
+instance HasConnectionLimit RoleResource (TF.Argument Text) where
+    connectionLimit f s@RoleResource{..} =
+        (\a -> s { _connection_limit = a } :: RoleResource)
+             <$> f _connection_limit
+
+instance HasCreateDatabase RoleResource (TF.Argument Text) where
+    createDatabase f s@RoleResource{..} =
+        (\a -> s { _create_database = a } :: RoleResource)
+             <$> f _create_database
+
+instance HasCreateRole RoleResource (TF.Argument Text) where
+    createRole f s@RoleResource{..} =
+        (\a -> s { _create_role = a } :: RoleResource)
+             <$> f _create_role
+
+instance HasEncryptedPassword RoleResource (TF.Argument Text) where
+    encryptedPassword f s@RoleResource{..} =
+        (\a -> s { _encrypted_password = a } :: RoleResource)
+             <$> f _encrypted_password
+
+instance HasInherit RoleResource (TF.Argument Text) where
+    inherit f s@RoleResource{..} =
+        (\a -> s { _inherit = a } :: RoleResource)
+             <$> f _inherit
+
+instance HasLogin RoleResource (TF.Argument Text) where
+    login f s@RoleResource{..} =
+        (\a -> s { _login = a } :: RoleResource)
+             <$> f _login
+
+instance HasName RoleResource (TF.Argument Text) where
+    name f s@RoleResource{..} =
+        (\a -> s { _name = a } :: RoleResource)
+             <$> f _name
+
+instance HasPassword RoleResource (TF.Argument Text) where
+    password f s@RoleResource{..} =
+        (\a -> s { _password = a } :: RoleResource)
+             <$> f _password
+
+instance HasReplication RoleResource (TF.Argument Text) where
+    replication f s@RoleResource{..} =
+        (\a -> s { _replication = a } :: RoleResource)
+             <$> f _replication
+
+instance HasSkipDropRole RoleResource (TF.Argument Text) where
+    skipDropRole f s@RoleResource{..} =
+        (\a -> s { _skip_drop_role = a } :: RoleResource)
+             <$> f _skip_drop_role
+
+instance HasSkipReassignOwned RoleResource (TF.Argument Text) where
+    skipReassignOwned f s@RoleResource{..} =
+        (\a -> s { _skip_reassign_owned = a } :: RoleResource)
+             <$> f _skip_reassign_owned
+
+instance HasSuperuser RoleResource (TF.Argument Text) where
+    superuser f s@RoleResource{..} =
+        (\a -> s { _superuser = a } :: RoleResource)
+             <$> f _superuser
+
+instance HasValidUntil RoleResource (TF.Argument Text) where
+    validUntil f s@RoleResource{..} =
+        (\a -> s { _valid_until = a } :: RoleResource)
+             <$> f _valid_until
 
 roleResource :: TF.Resource TF.PostgreSQL RoleResource
 roleResource =
@@ -251,10 +411,25 @@ instance TF.ToHCL SchemaResource where
         , TF.assign "policy" <$> TF.argument _policy
         ]
 
-$(TF.makeSchemaLenses
-    ''SchemaResource
-    ''TF.PostgreSQL
-    ''TF.Resource)
+instance HasIfNotExists SchemaResource (TF.Argument Text) where
+    ifNotExists f s@SchemaResource{..} =
+        (\a -> s { _if_not_exists = a } :: SchemaResource)
+             <$> f _if_not_exists
+
+instance HasName SchemaResource (TF.Argument Text) where
+    name f s@SchemaResource{..} =
+        (\a -> s { _name = a } :: SchemaResource)
+             <$> f _name
+
+instance HasOwner SchemaResource (TF.Argument Text) where
+    owner f s@SchemaResource{..} =
+        (\a -> s { _owner = a } :: SchemaResource)
+             <$> f _owner
+
+instance HasPolicy SchemaResource (TF.Argument Text) where
+    policy f s@SchemaResource{..} =
+        (\a -> s { _policy = a } :: SchemaResource)
+             <$> f _policy
 
 schemaResource :: TF.Resource TF.PostgreSQL SchemaResource
 schemaResource =
@@ -265,3 +440,159 @@ schemaResource =
             , _owner = TF.Nil
             , _policy = TF.Nil
             }
+
+class HasAllowConnections s a | s -> a where
+    allowConnections :: Functor f => (a -> f a) -> s -> f s
+
+instance HasAllowConnections s a => HasAllowConnections (TF.Resource p s) a where
+    allowConnections = TF.configuration . allowConnections
+
+class HasBypassRowLevelSecurity s a | s -> a where
+    bypassRowLevelSecurity :: Functor f => (a -> f a) -> s -> f s
+
+instance HasBypassRowLevelSecurity s a => HasBypassRowLevelSecurity (TF.Resource p s) a where
+    bypassRowLevelSecurity = TF.configuration . bypassRowLevelSecurity
+
+class HasConnectionLimit s a | s -> a where
+    connectionLimit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasConnectionLimit s a => HasConnectionLimit (TF.Resource p s) a where
+    connectionLimit = TF.configuration . connectionLimit
+
+class HasCreateDatabase s a | s -> a where
+    createDatabase :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCreateDatabase s a => HasCreateDatabase (TF.Resource p s) a where
+    createDatabase = TF.configuration . createDatabase
+
+class HasCreateRole s a | s -> a where
+    createRole :: Functor f => (a -> f a) -> s -> f s
+
+instance HasCreateRole s a => HasCreateRole (TF.Resource p s) a where
+    createRole = TF.configuration . createRole
+
+class HasEncoding s a | s -> a where
+    encoding :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEncoding s a => HasEncoding (TF.Resource p s) a where
+    encoding = TF.configuration . encoding
+
+class HasEncryptedPassword s a | s -> a where
+    encryptedPassword :: Functor f => (a -> f a) -> s -> f s
+
+instance HasEncryptedPassword s a => HasEncryptedPassword (TF.Resource p s) a where
+    encryptedPassword = TF.configuration . encryptedPassword
+
+class HasIfNotExists s a | s -> a where
+    ifNotExists :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIfNotExists s a => HasIfNotExists (TF.Resource p s) a where
+    ifNotExists = TF.configuration . ifNotExists
+
+class HasInherit s a | s -> a where
+    inherit :: Functor f => (a -> f a) -> s -> f s
+
+instance HasInherit s a => HasInherit (TF.Resource p s) a where
+    inherit = TF.configuration . inherit
+
+class HasIsTemplate s a | s -> a where
+    isTemplate :: Functor f => (a -> f a) -> s -> f s
+
+instance HasIsTemplate s a => HasIsTemplate (TF.Resource p s) a where
+    isTemplate = TF.configuration . isTemplate
+
+class HasLcCollate s a | s -> a where
+    lcCollate :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLcCollate s a => HasLcCollate (TF.Resource p s) a where
+    lcCollate = TF.configuration . lcCollate
+
+class HasLcCtype s a | s -> a where
+    lcCtype :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLcCtype s a => HasLcCtype (TF.Resource p s) a where
+    lcCtype = TF.configuration . lcCtype
+
+class HasLogin s a | s -> a where
+    login :: Functor f => (a -> f a) -> s -> f s
+
+instance HasLogin s a => HasLogin (TF.Resource p s) a where
+    login = TF.configuration . login
+
+class HasName s a | s -> a where
+    name :: Functor f => (a -> f a) -> s -> f s
+
+instance HasName s a => HasName (TF.Resource p s) a where
+    name = TF.configuration . name
+
+class HasOwner s a | s -> a where
+    owner :: Functor f => (a -> f a) -> s -> f s
+
+instance HasOwner s a => HasOwner (TF.Resource p s) a where
+    owner = TF.configuration . owner
+
+class HasPassword s a | s -> a where
+    password :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPassword s a => HasPassword (TF.Resource p s) a where
+    password = TF.configuration . password
+
+class HasPolicy s a | s -> a where
+    policy :: Functor f => (a -> f a) -> s -> f s
+
+instance HasPolicy s a => HasPolicy (TF.Resource p s) a where
+    policy = TF.configuration . policy
+
+class HasReplication s a | s -> a where
+    replication :: Functor f => (a -> f a) -> s -> f s
+
+instance HasReplication s a => HasReplication (TF.Resource p s) a where
+    replication = TF.configuration . replication
+
+class HasSchema s a | s -> a where
+    schema :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSchema s a => HasSchema (TF.Resource p s) a where
+    schema = TF.configuration . schema
+
+class HasSkipDropRole s a | s -> a where
+    skipDropRole :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSkipDropRole s a => HasSkipDropRole (TF.Resource p s) a where
+    skipDropRole = TF.configuration . skipDropRole
+
+class HasSkipReassignOwned s a | s -> a where
+    skipReassignOwned :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSkipReassignOwned s a => HasSkipReassignOwned (TF.Resource p s) a where
+    skipReassignOwned = TF.configuration . skipReassignOwned
+
+class HasSuperuser s a | s -> a where
+    superuser :: Functor f => (a -> f a) -> s -> f s
+
+instance HasSuperuser s a => HasSuperuser (TF.Resource p s) a where
+    superuser = TF.configuration . superuser
+
+class HasTablespaceName s a | s -> a where
+    tablespaceName :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTablespaceName s a => HasTablespaceName (TF.Resource p s) a where
+    tablespaceName = TF.configuration . tablespaceName
+
+class HasTemplate s a | s -> a where
+    template :: Functor f => (a -> f a) -> s -> f s
+
+instance HasTemplate s a => HasTemplate (TF.Resource p s) a where
+    template = TF.configuration . template
+
+class HasValidUntil s a | s -> a where
+    validUntil :: Functor f => (a -> f a) -> s -> f s
+
+instance HasValidUntil s a => HasValidUntil (TF.Resource p s) a where
+    validUntil = TF.configuration . validUntil
+
+class HasVersion s a | s -> a where
+    version :: Functor f => (a -> f a) -> s -> f s
+
+instance HasVersion s a => HasVersion (TF.Resource p s) a where
+    version = TF.configuration . version

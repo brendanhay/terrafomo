@@ -8,6 +8,7 @@ name: terrafomo-cobbler
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

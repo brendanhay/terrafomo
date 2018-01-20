@@ -8,6 +8,7 @@ name: terrafomo-vsphere
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

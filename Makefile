@@ -12,7 +12,7 @@ default: $(PROVIDERS)
 .PHONY: $(GENERATE)
 
 $(GENERATE):
-	@stack install terrafomo-gen 1>&2
+	@stack install --nix terrafomo-gen 1>&2
 
 full-clean: $(addsuffix -full-clean,$(PROVIDERS)) clean
 
@@ -32,7 +32,7 @@ format: $(STYLISH)
  -exec $(STYLISH) -i {} \;
 
 $(STYLISH):
-	@stack install stylish-haskell
+	@stack install --nix stylish-haskell
 
 define provider
 .PHONY: $1

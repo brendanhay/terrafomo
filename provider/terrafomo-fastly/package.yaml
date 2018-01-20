@@ -8,6 +8,7 @@ name: terrafomo-fastly
 
 dependencies:
   - base
+  - containers
   - hashable
   - terrafomo
   - text

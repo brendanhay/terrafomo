@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleContexts       #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TemplateHaskell        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -21,22 +19,33 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Kubernetes.DataSource where
+module Terrafomo.Kubernetes.DataSource
+    (
+    -- * Types
+      ServiceDataSource (..)
+    , serviceDataSource
 
-import Data.Functor ((<$>))
+    , StorageClassDataSource (..)
+    , storageClassDataSource
+
+    -- * Overloaded Fields
+    , HasMetadata (..)
+    ) where
+
+import Data.Functor (Functor, (<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import qualified Terrafomo.Kubernetes.Provider as TF
 import qualified Terrafomo.Kubernetes.Types    as TF
 import qualified Terrafomo.Syntax.DataSource   as TF
 import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.Meta         as TF (configuration)
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Variable     as TF
-import qualified Terrafomo.TH                  as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 
@@ -54,10 +63,10 @@ instance TF.ToHCL ServiceDataSource where
         [ TF.assign "metadata" <$> TF.argument _metadata
         ]
 
-$(TF.makeSchemaLenses
-    ''ServiceDataSource
-    ''TF.Kubernetes
-    ''TF.DataSource)
+instance HasMetadata ServiceDataSource (TF.Argument Text) where
+    metadata f s@ServiceDataSource{..} =
+        (\a -> s { _metadata = a } :: ServiceDataSource)
+             <$> f _metadata
 
 serviceDataSource :: TF.DataSource TF.Kubernetes ServiceDataSource
 serviceDataSource =
@@ -83,10 +92,10 @@ instance TF.ToHCL StorageClassDataSource where
         [ TF.assign "metadata" <$> TF.argument _metadata
         ]
 
-$(TF.makeSchemaLenses
-    ''StorageClassDataSource
-    ''TF.Kubernetes
-    ''TF.DataSource)
+instance HasMetadata StorageClassDataSource (TF.Argument Text) where
+    metadata f s@StorageClassDataSource{..} =
+        (\a -> s { _metadata = a } :: StorageClassDataSource)
+             <$> f _metadata
 
 storageClassDataSource :: TF.DataSource TF.Kubernetes StorageClassDataSource
 storageClassDataSource =
@@ -94,3 +103,9 @@ storageClassDataSource =
         StorageClassDataSource {
             _metadata = TF.Nil
             }
+
+class HasMetadata s a | s -> a where
+    metadata :: Functor f => (a -> f a) -> s -> f s
+
+instance HasMetadata s a => HasMetadata (TF.DataSource p s) a where
+    metadata = TF.configuration . metadata

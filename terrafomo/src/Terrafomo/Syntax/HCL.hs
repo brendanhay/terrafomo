@@ -30,11 +30,13 @@ module Terrafomo.Syntax.HCL
     , string
     ) where
 
+import Data.Int
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Monoid        ((<>))
 import Data.String        (IsString (fromString))
 import Data.Text          (Text)
+import Data.Word
 
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
@@ -87,9 +89,10 @@ data Value
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
-        Assign k v   -> pretty k <+> "=" <+> pretty v
-        Object ks vs -> prettyList (Fold.toList ks) <+> prettyObject vs
-        Block  vs    -> PP.vcat (map pretty vs)
+        Assign k (Block vs) -> pretty k <+> prettyBlock vs
+        Assign k v          -> pretty k <+> "=" <+> pretty v
+        Object ks vs        -> prettyList (Fold.toList ks) <+> prettyBlock vs
+        Block  vs           -> PP.vcat (map pretty vs)
 
         List (reverse -> vs) ->
             case vs of
@@ -124,8 +127,8 @@ instance Pretty Interpolate where
 render :: [Value] -> Doc
 render = PP.vcat . List.intersperse (PP.text " ") . map pretty
 
-prettyObject :: [Value] -> Doc
-prettyObject xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
+prettyBlock :: [Value] -> Doc
+prettyBlock xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
 
 prettyBool :: Bool -> Doc
 prettyBool = \case
@@ -202,6 +205,30 @@ instance ToHCL Int where
 instance ToHCL Integer where
     toHCL = number
 
+instance ToHCL Int8 where
+    toHCL = number
+
+instance ToHCL Int16 where
+    toHCL = number
+
+instance ToHCL Int32 where
+    toHCL = number
+
+instance ToHCL Int64 where
+    toHCL = number
+
+instance ToHCL Word8 where
+    toHCL = number
+
+instance ToHCL Word16 where
+    toHCL = number
+
+instance ToHCL Word32 where
+    toHCL = number
+
+instance ToHCL Word64 where
+    toHCL = number
+
 instance ToHCL Text where
     toHCL = string . Text.unpack -- FIXME: return to using 'Text' for chunks.
 
@@ -234,11 +261,11 @@ instance ToHCL (Resource Alias (Key, Value)) where
             [ assign "provider" <$> _resourceProvider
             , Just $ snd _resourceConfig
             , Just $ assign "depends_on" (list _resourceDependsOn)
-            , Just $ object (pure "lifecycle")
-                [ assign "prevent_destroy"       _preventDestroy
-                , assign "create_before_destroy" _createBeforeDestroy
-                , assign "ignore_changes"        (list _ignoreChanges)
-                ]
+            , Just $ assign "lifecycle" $
+                block [ assign "prevent_destroy"       _preventDestroy
+                      , assign "create_before_destroy" _createBeforeDestroy
+                      , assign "ignore_changes"        (list _ignoreChanges)
+                      ]
             ]
 
 instance ToHCL (Output Value) where

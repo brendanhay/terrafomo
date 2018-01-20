@@ -4,7 +4,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -18,8 +17,20 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PostgreSQL.Provider
-    ( PostgreSQL    (..)
-    , HasPostgreSQL (..)
+    (
+    -- * Provider Datatype
+      PostgreSQL (..)
+
+    -- * Lenses
+    , connectTimeout
+    , database
+    , expectedVersion
+    , host
+    , maxConnections
+    , password
+    , port
+    , sslmode
+    , username
     ) where
 
 import Data.Function      (on)
@@ -34,10 +45,9 @@ import GHC.Generics (Generic)
 
 import qualified Terrafomo.PostgreSQL.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.Meta      as TF
 import qualified Terrafomo.Syntax.Name      as TF
+import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
-import qualified Terrafomo.TH               as TF
 
 {- | PostgreSQL Terraform provider.
 
@@ -113,4 +123,83 @@ instance Monoid PostgreSQL where
 instance TF.IsProvider PostgreSQL where
     type ProviderName PostgreSQL = "postgresql"
 
-$(TF.makeProviderLenses ''PostgreSQL)
+connectTimeout
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+connectTimeout f s =
+        (\a -> s { _connect_timeout = a } :: PostgreSQL)
+             <$> f (_connect_timeout s)
+
+database
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+database f s =
+        (\a -> s { _database = a } :: PostgreSQL)
+             <$> f (_database s)
+
+expectedVersion
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+expectedVersion f s =
+        (\a -> s { _expected_version = a } :: PostgreSQL)
+             <$> f (_expected_version s)
+
+host
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+host f s =
+        (\a -> s { _host = a } :: PostgreSQL)
+             <$> f (_host s)
+
+maxConnections
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+maxConnections f s =
+        (\a -> s { _max_connections = a } :: PostgreSQL)
+             <$> f (_max_connections s)
+
+password
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+password f s =
+        (\a -> s { _password = a } :: PostgreSQL)
+             <$> f (_password s)
+
+port
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+port f s =
+        (\a -> s { _port = a } :: PostgreSQL)
+             <$> f (_port s)
+
+sslmode
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+sslmode f s =
+        (\a -> s { _sslmode = a } :: PostgreSQL)
+             <$> f (_sslmode s)
+
+username
+    :: Functor f
+    => ((TF.Argument Text) -> f (TF.Argument Text))
+    -> PostgreSQL
+    -> f PostgreSQL
+username f s =
+        (\a -> s { _username = a } :: PostgreSQL)
+             <$> f (_username s)
