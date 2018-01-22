@@ -3,6 +3,10 @@ resolver:  nightly-2018-01-09
 
 local-bin-path: bin
 
+nix:
+  enable: true
+  packages: [zlib]
+
 extra-deps: []
 
 packages:

@@ -38,6 +38,7 @@ import GHC.Show (Show)
 import qualified {{ import.value }} as TF
 {% endfor %}
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Variable as TF

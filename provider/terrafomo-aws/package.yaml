@@ -12,6 +12,8 @@ dependencies:
   - hashable
   - terrafomo
   - text
+  - amazonka-core
+  - formatting
 
 library:
   source-dirs:

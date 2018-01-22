@@ -535,13 +535,14 @@ import Data.Text    (Text)
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
-import qualified Terrafomo.AWS.Provider      as TF
-import qualified Terrafomo.AWS.Types         as TF
+import qualified Terrafomo.AWS.Types as TF
+import qualified Terrafomo.AWS.Provider as TF
 import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
+import qualified Terrafomo.Syntax.Meta     as TF (configuration)
+import qualified Terrafomo.Syntax.Resource as TF
+import qualified Terrafomo.Syntax.Variable as TF
 
 {- | The @DataSource:aws_acm_certificate@ AWS datasource.
 
@@ -552,9 +553,9 @@ creation of ACM certificates. But using this data source, you can reference
 them by domain without having to hard code the ARNs as input.
 -}
 data AcmCertificateDataSource = AcmCertificateDataSource {
-      _domain       :: !(TF.Argument Text)
+      _domain :: !(TF.Argument Text)
     {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
-    , _statuses     :: !(TF.Argument Text)
+    , _statuses :: !(TF.Argument Text)
     {- ^ (Optional) A list of statuses on which to filter the returned list. Valid values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@ , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the @ISSUED@ state are returned. -}
     , _computed_arn :: !(TF.Attribute Text)
     {- ^ - Set to the ARN of the found certificate, suitable for referencing in other resources that support ACM certificates. -}
@@ -596,63 +597,63 @@ Use this data source to get the ID of a registered AMI for use in other
 resources.
 -}
 data AmiDataSource = AmiDataSource {
-      _executable_users               :: !(TF.Argument Text)
+      _executable_users :: !(TF.Argument Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter                         :: !(TF.Argument Text)
+    , _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _most_recent                    :: !(TF.Argument Text)
+    , _most_recent :: !(TF.Argument Text)
     {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
-    , _name_regex                     :: !(TF.Argument Text)
+    , _name_regex :: !(TF.Argument Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners                         :: !(TF.Argument Text)
+    , _owners :: !(TF.Argument Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
-    , _computed_architecture          :: !(TF.Attribute Text)
+    , _computed_architecture :: !(TF.Attribute Text)
     {- ^ - The OS architecture of the AMI (ie: @i386@ or @x86_64@ ). -}
     , _computed_block_device_mappings :: !(TF.Attribute Text)
     {- ^ - The block device mappings of the AMI. -}
-    , _computed_creation_date         :: !(TF.Attribute Text)
+    , _computed_creation_date :: !(TF.Attribute Text)
     {- ^ - The date and time the image was created. -}
-    , _computed_description           :: !(TF.Attribute Text)
+    , _computed_description :: !(TF.Attribute Text)
     {- ^ - The description of the AMI that was provided during image creation. -}
-    , _computed_hypervisor            :: !(TF.Attribute Text)
+    , _computed_hypervisor :: !(TF.Attribute Text)
     {- ^ - The hypervisor type of the image. -}
-    , _computed_image_id              :: !(TF.Attribute Text)
+    , _computed_image_id :: !(TF.Attribute Text)
     {- ^ - The ID of the AMI. Should be the same as the resource @id@ . -}
-    , _computed_image_location        :: !(TF.Attribute Text)
+    , _computed_image_location :: !(TF.Attribute Text)
     {- ^ - The location of the AMI. -}
-    , _computed_image_owner_alias     :: !(TF.Attribute Text)
+    , _computed_image_owner_alias :: !(TF.Attribute Text)
     {- ^ - The AWS account alias (for example, @amazon@ , @self@ ) or the AWS account ID of the AMI owner. -}
-    , _computed_image_type            :: !(TF.Attribute Text)
+    , _computed_image_type :: !(TF.Attribute Text)
     {- ^ - The type of image. -}
-    , _computed_kernel_id             :: !(TF.Attribute Text)
+    , _computed_kernel_id :: !(TF.Attribute Text)
     {- ^ - The kernel associated with the image, if any. Only applicable for machine images. -}
-    , _computed_name                  :: !(TF.Attribute Text)
+    , _computed_name :: !(TF.Attribute Text)
     {- ^ - The name of the AMI that was provided during image creation. -}
-    , _computed_owner_id              :: !(TF.Attribute Text)
+    , _computed_owner_id :: !(TF.Attribute Text)
     {- ^ - The AWS account ID of the image owner. -}
-    , _computed_platform              :: !(TF.Attribute Text)
+    , _computed_platform :: !(TF.Attribute Text)
     {- ^ - The value is Windows for @Windows@ AMIs; otherwise blank. -}
-    , _computed_product_codes         :: !(TF.Attribute Text)
+    , _computed_product_codes :: !(TF.Attribute Text)
     {- ^ - Any product codes associated with the AMI. -}
-    , _computed_public                :: !(TF.Attribute Text)
+    , _computed_public :: !(TF.Attribute Text)
     {- ^ - @true@ if the image has public launch permissions. -}
-    , _computed_ramdisk_id            :: !(TF.Attribute Text)
+    , _computed_ramdisk_id :: !(TF.Attribute Text)
     {- ^ - The RAM disk associated with the image, if any. Only applicable for machine images. -}
-    , _computed_root_device_name      :: !(TF.Attribute Text)
+    , _computed_root_device_name :: !(TF.Attribute Text)
     {- ^ - The device name of the root device. -}
-    , _computed_root_device_type      :: !(TF.Attribute Text)
+    , _computed_root_device_type :: !(TF.Attribute Text)
     {- ^ - The type of root device (ie: @ebs@ or @instance-store@ ). -}
-    , _computed_root_snapshot_id      :: !(TF.Attribute Text)
+    , _computed_root_snapshot_id :: !(TF.Attribute Text)
     {- ^ - The snapshot id associated with the root device, if any (only applies to @ebs@ root devices). -}
-    , _computed_sriov_net_support     :: !(TF.Attribute Text)
+    , _computed_sriov_net_support :: !(TF.Attribute Text)
     {- ^ - Specifies whether enhanced networking is enabled. -}
-    , _computed_state                 :: !(TF.Attribute Text)
+    , _computed_state :: !(TF.Attribute Text)
     {- ^ - The current state of the AMI. If the state is @available@ , the image is successfully registered and can be used to launch an instance. -}
-    , _computed_state_reason          :: !(TF.Attribute Text)
+    , _computed_state_reason :: !(TF.Attribute Text)
     {- ^ - Describes a state change. Fields are @UNSET@ if not available. -}
-    , _computed_tags                  :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - Any tags assigned to the image. -}
-    , _computed_virtualization_type   :: !(TF.Attribute Text)
+    , _computed_virtualization_type :: !(TF.Attribute Text)
     {- ^ - The type of virtualization of the AMI (ie: @hvm@ or @paravirtual@ ). -}
     } deriving (Show, Eq)
 
@@ -853,11 +854,11 @@ criteria.
 data AmiIdsDataSource = AmiIdsDataSource {
       _executable_users :: !(TF.Argument Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter           :: !(TF.Argument Text)
+    , _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _name_regex       :: !(TF.Argument Text)
+    , _name_regex :: !(TF.Argument Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners           :: !(TF.Argument Text)
+    , _owners :: !(TF.Argument Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -906,7 +907,7 @@ within a specific region. This will allow you to pass a list of AutoScaling
 Groups to other resources.
 -}
 data AutoscalingGroupsDataSource = AutoscalingGroupsDataSource {
-      _filter         :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) A filter used to scope the list e.g. by tags. See <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_Filter.html> . -}
     , _computed_names :: !(TF.Attribute Text)
     {- ^ - A list of the Autoscaling Groups in the current region. -}
@@ -947,17 +948,17 @@ numbers. This is different from the @aws_availability_zones@ (plural) data
 source, which provides a list of the available zones.
 -}
 data AvailabilityZoneDataSource = AvailabilityZoneDataSource {
-      _name                 :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Optional) The full name of the availability zone to select. -}
-    , _state                :: !(TF.Argument Text)
+    , _state :: !(TF.Argument Text)
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
-    , _computed_name        :: !(TF.Attribute Text)
+    , _computed_name :: !(TF.Attribute Text)
     {- ^ - The name of the selected availability zone. -}
     , _computed_name_suffix :: !(TF.Attribute Text)
     {- ^ - The part of the AZ name that appears after the region name, uniquely identifying the AZ within its region. -}
-    , _computed_region      :: !(TF.Attribute Text)
+    , _computed_region :: !(TF.Attribute TF.Region)
     {- ^ - The region where the selected availability zone resides. This is always the region selected on the provider, since this data source searches only within that region. -}
-    , _computed_state       :: !(TF.Attribute Text)
+    , _computed_state :: !(TF.Attribute Text)
     {- ^ - The current state of the AZ. -}
     } deriving (Show, Eq)
 
@@ -987,7 +988,7 @@ instance HasComputedNameSuffix AvailabilityZoneDataSource (TF.Attribute Text) wh
         (\a -> s { _computed_name_suffix = a } :: AvailabilityZoneDataSource)
              <$> f _computed_name_suffix
 
-instance HasComputedRegion AvailabilityZoneDataSource (TF.Attribute Text) where
+instance HasComputedRegion AvailabilityZoneDataSource (TF.Attribute TF.Region) where
     computedRegion f s@AvailabilityZoneDataSource{..} =
         (\a -> s { _computed_region = a } :: AvailabilityZoneDataSource)
              <$> f _computed_region
@@ -1018,7 +1019,7 @@ configured in the provider. This is different from the
 about a specific availability zone.
 -}
 data AvailabilityZonesDataSource = AvailabilityZonesDataSource {
-      _state          :: !(TF.Argument Text)
+      _state :: !(TF.Argument Text)
     {- ^ (Optional) Allows to filter list of Availability Zones based on their current state. Can be either @"available"@ , @"information"@ , @"impaired"@ or @"unavailable"@ . By default the list includes a complete set of Availability Zones to which the underlying AWS account has access, regardless of their state. -}
     , _computed_names :: !(TF.Attribute Text)
     {- ^ - A list of the Availability Zone names available to the account. -}
@@ -1056,7 +1057,7 @@ for the purpose of whitelisting in S3 bucket policy.
 data BillingServiceAccountDataSource = BillingServiceAccountDataSource {
       _computed_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the AWS billing service account. -}
-    , _computed_id  :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The ID of the AWS billing service account. -}
     } deriving (Show, Eq)
 
@@ -1089,9 +1090,9 @@ and ARN in which Terraform is authorized.
 data CallerIdentityDataSource = CallerIdentityDataSource {
       _account_id :: !(TF.Argument Text)
     {- ^ - The AWS Account ID number of the account that owns or contains the calling entity. -}
-    , _arn        :: !(TF.Argument Text)
+    , _arn :: !(TF.Argument Text)
     {- ^ - The AWS ARN associated with the calling entity. -}
-    , _user_id    :: !(TF.Argument Text)
+    , _user_id :: !(TF.Argument Text)
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
@@ -1135,7 +1136,7 @@ effective account in which Terraform is working.
 data CanonicalUserIdDataSource = CanonicalUserIdDataSource {
       _display_name :: !(TF.Argument Text)
     {- ^ - The human-friendly name linked to the canonical user ID. -}
-    , _id           :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
@@ -1169,25 +1170,25 @@ The CloudFormation Stack data source allows access to stack outputs and
 other useful data including the template body.
 -}
 data CloudformationStackDataSource = CloudformationStackDataSource {
-      _name                        :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The name of the stack -}
-    , _computed_capabilities       :: !(TF.Attribute Text)
+    , _computed_capabilities :: !(TF.Attribute Text)
     {- ^ - A list of capabilities -}
-    , _computed_description        :: !(TF.Attribute Text)
+    , _computed_description :: !(TF.Attribute Text)
     {- ^ - Description of the stack -}
-    , _computed_disable_rollback   :: !(TF.Attribute Text)
+    , _computed_disable_rollback :: !(TF.Attribute Text)
     {- ^ - Whether the rollback of the stack is disabled when stack creation fails -}
-    , _computed_iam_role_arn       :: !(TF.Attribute Text)
+    , _computed_iam_role_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the IAM role used to create the stack. -}
-    , _computed_notification_arns  :: !(TF.Attribute Text)
+    , _computed_notification_arns :: !(TF.Attribute Text)
     {- ^ - A list of SNS topic ARNs to publish stack related events -}
-    , _computed_outputs            :: !(TF.Attribute Text)
+    , _computed_outputs :: !(TF.Attribute Text)
     {- ^ - A map of outputs from the stack. -}
-    , _computed_parameters         :: !(TF.Attribute Text)
+    , _computed_parameters :: !(TF.Attribute Text)
     {- ^ - A map of parameters that specify input parameters for the stack. -}
-    , _computed_tags               :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - A map of tags associated with this stack. -}
-    , _computed_template_body      :: !(TF.Attribute Text)
+    , _computed_template_body :: !(TF.Attribute Text)
     {- ^ - Structure containing the template body. -}
     , _computed_timeout_in_minutes :: !(TF.Attribute Text)
     {- ^ - The amount of time that can pass before the stack status becomes @CREATE_FAILED@ -}
@@ -1278,11 +1279,11 @@ in a given region for the purpose of allowing CloudTrail to store trail data
 in S3.
 -}
 data CloudtrailServiceAccountDataSource = CloudtrailServiceAccountDataSource {
-      _region       :: !(TF.Argument Text)
+      _region :: !(TF.Argument TF.Region)
     {- ^ (Optional) Name of the region whose AWS CloudTrail account ID is desired. Defaults to the region from the AWS provider configuration. -}
     , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the AWS CloudTrail service account in the selected region. -}
-    , _computed_id  :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The ID of the AWS CloudTrail service account in the selected region. -}
     } deriving (Show, Eq)
 
@@ -1291,7 +1292,7 @@ instance TF.ToHCL CloudtrailServiceAccountDataSource where
         [ TF.assign "region" <$> TF.argument _region
         ]
 
-instance HasRegion CloudtrailServiceAccountDataSource (TF.Argument Text) where
+instance HasRegion CloudtrailServiceAccountDataSource (TF.Argument TF.Region) where
     region f s@CloudtrailServiceAccountDataSource{..} =
         (\a -> s { _region = a } :: CloudtrailServiceAccountDataSource)
              <$> f _region
@@ -1320,77 +1321,77 @@ cloudtrailServiceAccountDataSource =
 Use this data source to get information about an RDS instance
 -}
 data DbInstanceDataSource = DbInstanceDataSource {
-      _db_instance_identifier                :: !(TF.Argument Text)
+      _db_instance_identifier :: !(TF.Argument Text)
     {- ^ (Required) The name of the RDS instance -}
-    , _computed_address                      :: !(TF.Attribute Text)
+    , _computed_address :: !(TF.Attribute Text)
     {- ^ - The address of the RDS instance. -}
-    , _computed_allocated_storage            :: !(TF.Attribute Text)
+    , _computed_allocated_storage :: !(TF.Attribute Text)
     {- ^ - Specifies the allocated storage size specified in gigabytes. -}
-    , _computed_auto_minor_version_upgrade   :: !(TF.Attribute Text)
+    , _computed_auto_minor_version_upgrade :: !(TF.Attribute Text)
     {- ^ - Indicates that minor version patches are applied automatically. -}
-    , _computed_availability_zone            :: !(TF.Attribute Text)
+    , _computed_availability_zone :: !(TF.Attribute TF.Zone)
     {- ^ - Specifies the name of the Availability Zone the DB instance is located in. -}
-    , _computed_backup_retention_period      :: !(TF.Attribute Text)
+    , _computed_backup_retention_period :: !(TF.Attribute Text)
     {- ^ - Specifies the number of days for which automatic DB snapshots are retained. -}
-    , _computed_ca_cert_identifier           :: !(TF.Attribute Text)
+    , _computed_ca_cert_identifier :: !(TF.Attribute Text)
     {- ^ - Specifies the identifier of the CA certificate for the DB instance. -}
-    , _computed_db_cluster_identifier        :: !(TF.Attribute Text)
+    , _computed_db_cluster_identifier :: !(TF.Attribute Text)
     {- ^ - If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of. -}
-    , _computed_db_instance_arn              :: !(TF.Attribute Text)
+    , _computed_db_instance_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) for the DB instance. -}
-    , _computed_db_instance_class            :: !(TF.Attribute Text)
+    , _computed_db_instance_class :: !(TF.Attribute Text)
     {- ^ - Contains the name of the compute and memory capacity class of the DB instance. -}
-    , _computed_db_instance_port             :: !(TF.Attribute TF.Word16)
+    , _computed_db_instance_port :: !(TF.Attribute TF.Word16)
     {- ^ - Specifies the port that the DB instance listens on. -}
-    , _computed_db_name                      :: !(TF.Attribute Text)
+    , _computed_db_name :: !(TF.Attribute Text)
     {- ^ - Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. -}
-    , _computed_db_parameter_groups          :: !(TF.Attribute Text)
+    , _computed_db_parameter_groups :: !(TF.Attribute Text)
     {- ^ - Provides the list of DB parameter groups applied to this DB instance. -}
-    , _computed_db_security_groups           :: !(TF.Attribute Text)
+    , _computed_db_security_groups :: !(TF.Attribute Text)
     {- ^ - Provides List of DB security groups associated to this DB instance. -}
-    , _computed_db_subnet_group              :: !(TF.Attribute Text)
+    , _computed_db_subnet_group :: !(TF.Attribute Text)
     {- ^ - Specifies the name of the subnet group associated with the DB instance. -}
-    , _computed_endpoint                     :: !(TF.Attribute Text)
+    , _computed_endpoint :: !(TF.Attribute Text)
     {- ^ - The connection endpoint. -}
-    , _computed_engine                       :: !(TF.Attribute Text)
+    , _computed_engine :: !(TF.Attribute Text)
     {- ^ - Provides the name of the database engine to be used for this DB instance. -}
-    , _computed_engine_version               :: !(TF.Attribute Text)
+    , _computed_engine_version :: !(TF.Attribute Text)
     {- ^ - Indicates the database engine version. -}
-    , _computed_hosted_zone_id               :: !(TF.Attribute Text)
+    , _computed_hosted_zone_id :: !(TF.Attribute Text)
     {- ^ - The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record). -}
-    , _computed_iops                         :: !(TF.Attribute Text)
+    , _computed_iops :: !(TF.Attribute Text)
     {- ^ - Specifies the Provisioned IOPS (I/O operations per second) value. -}
-    , _computed_kms_key_id                   :: !(TF.Attribute Text)
+    , _computed_kms_key_id :: !(TF.Attribute Text)
     {- ^ - If StorageEncrypted is true, the KMS key identifier for the encrypted DB instance. -}
-    , _computed_license_model                :: !(TF.Attribute Text)
+    , _computed_license_model :: !(TF.Attribute Text)
     {- ^ - License model information for this DB instance. -}
-    , _computed_master_username              :: !(TF.Attribute Text)
+    , _computed_master_username :: !(TF.Attribute Text)
     {- ^ - Contains the master username for the DB instance. -}
-    , _computed_monitoring_interval          :: !(TF.Attribute Text)
+    , _computed_monitoring_interval :: !(TF.Attribute Text)
     {- ^ - The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. -}
-    , _computed_monitoring_role_arn          :: !(TF.Attribute Text)
+    , _computed_monitoring_role_arn :: !(TF.Attribute Text)
     {- ^ - The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs. -}
-    , _computed_multi_az                     :: !(TF.Attribute Text)
+    , _computed_multi_az :: !(TF.Attribute Text)
     {- ^ - Specifies if the DB instance is a Multi-AZ deployment. -}
-    , _computed_option_group_memberships     :: !(TF.Attribute Text)
+    , _computed_option_group_memberships :: !(TF.Attribute Text)
     {- ^ - Provides the list of option group memberships for this DB instance. -}
-    , _computed_port                         :: !(TF.Attribute Text)
+    , _computed_port :: !(TF.Attribute Text)
     {- ^ - The database port. -}
-    , _computed_preferred_backup_window      :: !(TF.Attribute Text)
+    , _computed_preferred_backup_window :: !(TF.Attribute Text)
     {- ^ - Specifies the daily time range during which automated backups are created. -}
     , _computed_preferred_maintenance_window :: !(TF.Attribute Text)
     {- ^ -  Specifies the weekly time range during which system maintenance can occur in UTC. -}
-    , _computed_publicly_accessible          :: !(TF.Attribute Text)
+    , _computed_publicly_accessible :: !(TF.Attribute Text)
     {- ^ - Specifies the accessibility options for the DB instance. -}
-    , _computed_replicate_source_db          :: !(TF.Attribute Text)
+    , _computed_replicate_source_db :: !(TF.Attribute Text)
     {- ^ - The identifier of the source DB that this is a replica of. -}
-    , _computed_storage_encrypted            :: !(TF.Attribute Text)
+    , _computed_storage_encrypted :: !(TF.Attribute Text)
     {- ^ - Specifies whether the DB instance is encrypted. -}
-    , _computed_storage_type                 :: !(TF.Attribute Text)
+    , _computed_storage_type :: !(TF.Attribute Text)
     {- ^ - Specifies the storage type associated with DB instance. -}
-    , _computed_timezone                     :: !(TF.Attribute Text)
+    , _computed_timezone :: !(TF.Attribute Text)
     {- ^ - The time zone of the DB instance. -}
-    , _computed_vpc_security_groups          :: !(TF.Attribute Text)
+    , _computed_vpc_security_groups :: !(TF.Attribute Text)
     {- ^ - Provides a list of VPC security group elements that the DB instance belongs to. -}
     } deriving (Show, Eq)
 
@@ -1419,7 +1420,7 @@ instance HasComputedAutoMinorVersionUpgrade DbInstanceDataSource (TF.Attribute T
         (\a -> s { _computed_auto_minor_version_upgrade = a } :: DbInstanceDataSource)
              <$> f _computed_auto_minor_version_upgrade
 
-instance HasComputedAvailabilityZone DbInstanceDataSource (TF.Attribute Text) where
+instance HasComputedAvailabilityZone DbInstanceDataSource (TF.Attribute TF.Zone) where
     computedAvailabilityZone f s@DbInstanceDataSource{..} =
         (\a -> s { _computed_availability_zone = a } :: DbInstanceDataSource)
              <$> f _computed_availability_zone
@@ -1628,51 +1629,51 @@ provisioning DB instances ~> NOTE: This data source does not apply to
 snapshots created on Aurora DB clusters.
 -}
 data DbSnapshotDataSource = DbSnapshotDataSource {
-      _db_instance_identifier                 :: !(TF.Argument Text)
+      _db_instance_identifier :: !(TF.Argument Text)
     {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
-    , _db_snapshot_identifier                 :: !(TF.Argument Text)
+    , _db_snapshot_identifier :: !(TF.Argument Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
-    , _include_public                         :: !(TF.Argument Text)
+    , _include_public :: !(TF.Argument Text)
     {- ^ (Optional) Set this value to true to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to false. The default is @false@ . -}
-    , _include_shared                         :: !(TF.Argument Text)
+    , _include_shared :: !(TF.Argument Text)
     {- ^ (Optional) Set this value to true to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to false. The default is @false@ . -}
-    , _most_recent                            :: !(TF.Argument Text)
+    , _most_recent :: !(TF.Argument Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Snapshot. -}
-    , _snapshot_type                          :: !(TF.Argument Text)
+    , _snapshot_type :: !(TF.Argument Text)
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
-    , _computed_allocated_storage             :: !(TF.Attribute Text)
+    , _computed_allocated_storage :: !(TF.Attribute Text)
     {- ^ - Specifies the allocated storage size in gigabytes (GB). -}
-    , _computed_availability_zone             :: !(TF.Attribute Text)
+    , _computed_availability_zone :: !(TF.Attribute TF.Zone)
     {- ^ - Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot. -}
-    , _computed_db_snapshot_arn               :: !(TF.Attribute Text)
+    , _computed_db_snapshot_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) for the DB snapshot. -}
-    , _computed_encrypted                     :: !(TF.Attribute Text)
+    , _computed_encrypted :: !(TF.Attribute Text)
     {- ^ - Specifies whether the DB snapshot is encrypted. -}
-    , _computed_engine                        :: !(TF.Attribute Text)
+    , _computed_engine :: !(TF.Attribute Text)
     {- ^ - Specifies the name of the database engine. -}
-    , _computed_engine_version                :: !(TF.Attribute Text)
+    , _computed_engine_version :: !(TF.Attribute Text)
     {- ^ - Specifies the version of the database engine. -}
-    , _computed_id                            :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The snapshot ID. -}
-    , _computed_iops                          :: !(TF.Attribute Text)
+    , _computed_iops :: !(TF.Attribute Text)
     {- ^ - Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot. -}
-    , _computed_kms_key_id                    :: !(TF.Attribute Text)
+    , _computed_kms_key_id :: !(TF.Attribute Text)
     {- ^ - The ARN for the KMS encryption key. -}
-    , _computed_license_model                 :: !(TF.Attribute Text)
+    , _computed_license_model :: !(TF.Attribute Text)
     {- ^ - License model information for the restored DB instance. -}
-    , _computed_option_group_name             :: !(TF.Attribute Text)
+    , _computed_option_group_name :: !(TF.Attribute Text)
     {- ^ - Provides the option group name for the DB snapshot. -}
-    , _computed_snapshot_create_time          :: !(TF.Attribute Text)
+    , _computed_snapshot_create_time :: !(TF.Attribute Text)
     {- ^ - Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). -}
     , _computed_source_db_snapshot_identifier :: !(TF.Attribute Text)
     {- ^ - The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy. -}
-    , _computed_source_region                 :: !(TF.Attribute Text)
+    , _computed_source_region :: !(TF.Attribute TF.Region)
     {- ^ - The region that the DB snapshot was created in or copied from. -}
-    , _computed_status                        :: !(TF.Attribute Text)
+    , _computed_status :: !(TF.Attribute Text)
     {- ^ - Specifies the status of this DB snapshot. -}
-    , _computed_storage_type                  :: !(TF.Attribute Text)
+    , _computed_storage_type :: !(TF.Attribute Text)
     {- ^ - Specifies the storage type associated with DB snapshot. -}
-    , _computed_vpc_id                        :: !(TF.Attribute Text)
+    , _computed_vpc_id :: !(TF.Attribute Text)
     {- ^ - Specifies the storage type associated with DB snapshot. -}
     } deriving (Show, Eq)
 
@@ -1721,7 +1722,7 @@ instance HasComputedAllocatedStorage DbSnapshotDataSource (TF.Attribute Text) wh
         (\a -> s { _computed_allocated_storage = a } :: DbSnapshotDataSource)
              <$> f _computed_allocated_storage
 
-instance HasComputedAvailabilityZone DbSnapshotDataSource (TF.Attribute Text) where
+instance HasComputedAvailabilityZone DbSnapshotDataSource (TF.Attribute TF.Zone) where
     computedAvailabilityZone f s@DbSnapshotDataSource{..} =
         (\a -> s { _computed_availability_zone = a } :: DbSnapshotDataSource)
              <$> f _computed_availability_zone
@@ -1781,7 +1782,7 @@ instance HasComputedSourceDbSnapshotIdentifier DbSnapshotDataSource (TF.Attribut
         (\a -> s { _computed_source_db_snapshot_identifier = a } :: DbSnapshotDataSource)
              <$> f _computed_source_db_snapshot_identifier
 
-instance HasComputedSourceRegion DbSnapshotDataSource (TF.Attribute Text) where
+instance HasComputedSourceRegion DbSnapshotDataSource (TF.Attribute TF.Region) where
     computedSourceRegion f s@DbSnapshotDataSource{..} =
         (\a -> s { _computed_source_region = a } :: DbSnapshotDataSource)
              <$> f _computed_source_region
@@ -1862,39 +1863,39 @@ Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
 -}
 data EbsSnapshotDataSource = EbsSnapshotDataSource {
-      _filter                          :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _most_recent                     :: !(TF.Argument Text)
+    , _most_recent :: !(TF.Argument Text)
     {- ^ (Optional) If more than one result is returned, use the most recent snapshot. -}
-    , _owners                          :: !(TF.Argument Text)
+    , _owners :: !(TF.Argument Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
-    , _restorable_by_user_ids          :: !(TF.Argument Text)
+    , _restorable_by_user_ids :: !(TF.Argument Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
-    , _snapshot_ids                    :: !(TF.Argument Text)
+    , _snapshot_ids :: !(TF.Argument Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     , _computed_data_encryption_key_id :: !(TF.Attribute Text)
     {- ^ - The data encryption key identifier for the snapshot. -}
-    , _computed_description            :: !(TF.Attribute Text)
+    , _computed_description :: !(TF.Attribute Text)
     {- ^ - A description for the snapshot -}
-    , _computed_encrypted              :: !(TF.Attribute Text)
+    , _computed_encrypted :: !(TF.Attribute Text)
     {- ^ - Whether the snapshot is encrypted. -}
-    , _computed_id                     :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The snapshot ID (e.g. snap-59fcb34e). -}
-    , _computed_kms_key_id             :: !(TF.Attribute Text)
+    , _computed_kms_key_id :: !(TF.Attribute Text)
     {- ^ - The ARN for the KMS encryption key. -}
-    , _computed_owner_alias            :: !(TF.Attribute Text)
+    , _computed_owner_alias :: !(TF.Attribute Text)
     {- ^ - Value from an Amazon-maintained list ( @amazon@ , @aws-marketplace@ , @microsoft@ ) of snapshot owners. -}
-    , _computed_owner_id               :: !(TF.Attribute Text)
+    , _computed_owner_id :: !(TF.Attribute Text)
     {- ^ - The AWS account ID of the EBS snapshot owner. -}
-    , _computed_snapshot_id            :: !(TF.Attribute Text)
+    , _computed_snapshot_id :: !(TF.Attribute Text)
     {- ^ - The snapshot ID (e.g. snap-59fcb34e). -}
-    , _computed_state                  :: !(TF.Attribute Text)
+    , _computed_state :: !(TF.Attribute Text)
     {- ^ - The snapshot state. -}
-    , _computed_tags                   :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - A mapping of tags for the resource. -}
-    , _computed_volume_id              :: !(TF.Attribute Text)
+    , _computed_volume_id :: !(TF.Attribute Text)
     {- ^ - The volume ID (e.g. vol-59fcb34e). -}
-    , _computed_volume_size            :: !(TF.Attribute Text)
+    , _computed_volume_size :: !(TF.Attribute Text)
     {- ^ - The size of the drive in GiBs. -}
     } deriving (Show, Eq)
 
@@ -2021,9 +2022,9 @@ Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
 -}
 data EbsSnapshotIdsDataSource = EbsSnapshotIdsDataSource {
-      _filter                 :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _owners                 :: !(TF.Argument Text)
+    , _owners :: !(TF.Argument Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Argument Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
@@ -2066,31 +2067,31 @@ Use this data source to get information about an EBS volume for use in other
 resources.
 -}
 data EbsVolumeDataSource = EbsVolumeDataSource {
-      _filter                     :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
-    , _most_recent                :: !(TF.Argument Text)
+    , _most_recent :: !(TF.Argument Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
-    , _computed_arn               :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The volume ARN (e.g. arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e). -}
-    , _computed_availability_zone :: !(TF.Attribute Text)
+    , _computed_availability_zone :: !(TF.Attribute TF.Zone)
     {- ^ - The AZ where the EBS volume exists. -}
-    , _computed_encrypted         :: !(TF.Attribute Text)
+    , _computed_encrypted :: !(TF.Attribute Text)
     {- ^ - Whether the disk is encrypted. -}
-    , _computed_id                :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The volume ID (e.g. vol-59fcb34e). -}
-    , _computed_iops              :: !(TF.Attribute Text)
+    , _computed_iops :: !(TF.Attribute Text)
     {- ^ - The amount of IOPS for the disk. -}
-    , _computed_kms_key_id        :: !(TF.Attribute Text)
+    , _computed_kms_key_id :: !(TF.Attribute Text)
     {- ^ - The ARN for the KMS encryption key. -}
-    , _computed_size              :: !(TF.Attribute Text)
+    , _computed_size :: !(TF.Attribute Text)
     {- ^ - The size of the drive in GiBs. -}
-    , _computed_snapshot_id       :: !(TF.Attribute Text)
+    , _computed_snapshot_id :: !(TF.Attribute Text)
     {- ^ - The snapshot_id the EBS volume is based off. -}
-    , _computed_tags              :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - A mapping of tags for the resource. -}
-    , _computed_volume_id         :: !(TF.Attribute Text)
+    , _computed_volume_id :: !(TF.Attribute Text)
     {- ^ - The volume ID (e.g. vol-59fcb34e). -}
-    , _computed_volume_type       :: !(TF.Attribute Text)
+    , _computed_volume_type :: !(TF.Attribute Text)
     {- ^ - The type of EBS volume. -}
     } deriving (Show, Eq)
 
@@ -2115,7 +2116,7 @@ instance HasComputedArn EbsVolumeDataSource (TF.Attribute Text) where
         (\a -> s { _computed_arn = a } :: EbsVolumeDataSource)
              <$> f _computed_arn
 
-instance HasComputedAvailabilityZone EbsVolumeDataSource (TF.Attribute Text) where
+instance HasComputedAvailabilityZone EbsVolumeDataSource (TF.Attribute TF.Zone) where
     computedAvailabilityZone f s@EbsVolumeDataSource{..} =
         (\a -> s { _computed_availability_zone = a } :: EbsVolumeDataSource)
              <$> f _computed_availability_zone
@@ -2190,11 +2191,11 @@ The ECR Repository data source allows the ARN, Repository URI and Registry
 ID to be retrieved for an ECR repository.
 -}
 data EcrRepositoryDataSource = EcrRepositoryDataSource {
-      _name                    :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The name of the ECR Repository. -}
-    , _computed_arn            :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - Full ARN of the repository. -}
-    , _computed_registry_id    :: !(TF.Attribute Text)
+    , _computed_registry_id :: !(TF.Attribute Text)
     {- ^ - The registry ID where the repository was created. -}
     , _computed_repository_url :: !(TF.Attribute Text)
     {- ^ - The URL of the repository (in the form @aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName@ ). -}
@@ -2241,17 +2242,17 @@ The ECS Cluster data source allows access to details of a specific cluster
 within an AWS ECS service.
 -}
 data EcsClusterDataSource = EcsClusterDataSource {
-      _cluster_name                                  :: !(TF.Argument Text)
+      _cluster_name :: !(TF.Argument Text)
     {- ^ (Required) The name of the ECS Cluster -}
-    , _computed_arn                                  :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the ECS Cluster -}
-    , _computed_pending_tasks_count                  :: !(TF.Attribute Text)
+    , _computed_pending_tasks_count :: !(TF.Attribute Text)
     {- ^ - The number of pending tasks for the ECS Cluster -}
     , _computed_registered_container_instances_count :: !(TF.Attribute Text)
     {- ^ - The number of registered container instances for the ECS Cluster -}
-    , _computed_running_tasks_count                  :: !(TF.Attribute Text)
+    , _computed_running_tasks_count :: !(TF.Attribute Text)
     {- ^ - The number of running tasks for the ECS Cluster -}
-    , _computed_status                               :: !(TF.Attribute Text)
+    , _computed_status :: !(TF.Attribute Text)
     {- ^ - The status of the ECS Cluster -}
     } deriving (Show, Eq)
 
@@ -2308,23 +2309,23 @@ The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
 -}
 data EcsContainerDefinitionDataSource = EcsContainerDefinitionDataSource {
-      _container_name              :: !(TF.Argument Text)
+      _container_name :: !(TF.Argument Text)
     {- ^ (Required) The name of the container definition -}
-    , _task_definition             :: !(TF.Argument Text)
+    , _task_definition :: !(TF.Argument Text)
     {- ^ (Required) The ARN of the task definition which contains the container -}
-    , _computed_cpu                :: !(TF.Attribute Text)
+    , _computed_cpu :: !(TF.Attribute Text)
     {- ^ - The CPU limit for this container definition -}
     , _computed_disable_networking :: !(TF.Attribute Text)
     {- ^ - Indicator if networking is disabled -}
-    , _computed_docker_labels      :: !(TF.Attribute Text)
+    , _computed_docker_labels :: !(TF.Attribute Text)
     {- ^ - Set docker labels -}
-    , _computed_environment        :: !(TF.Attribute Text)
+    , _computed_environment :: !(TF.Attribute Text)
     {- ^ - The environment in use -}
-    , _computed_image              :: !(TF.Attribute Text)
+    , _computed_image :: !(TF.Attribute Text)
     {- ^ - The docker image in use, including the digest -}
-    , _computed_image_digest       :: !(TF.Attribute Text)
+    , _computed_image_digest :: !(TF.Attribute Text)
     {- ^ - The digest of the docker image in use -}
-    , _computed_memory             :: !(TF.Attribute Text)
+    , _computed_memory :: !(TF.Attribute Text)
     {- ^ - The memory limit for this container definition -}
     , _computed_memory_reservation :: !(TF.Attribute Text)
     {- ^ - The soft limit (in MiB) of memory to reserve for the container. When system memory is under contention, Docker attempts to keep the container memory to this soft limit -}
@@ -2408,15 +2409,15 @@ The ECS task definition data source allows access to details of a specific
 AWS ECS task definition.
 -}
 data EcsTaskDefinitionDataSource = EcsTaskDefinitionDataSource {
-      _task_definition        :: !(TF.Argument Text)
+      _task_definition :: !(TF.Argument Text)
     {- ^ (Required) The family for the latest ACTIVE revision, family and revision (family:revision) for a specific revision in the family, the ARN of the task definition to access to. -}
-    , _computed_family'       :: !(TF.Attribute Text)
+    , _computed_family' :: !(TF.Attribute Text)
     {- ^ - The family of this task definition -}
-    , _computed_network_mode  :: !(TF.Attribute Text)
+    , _computed_network_mode :: !(TF.Attribute Text)
     {- ^ - The Docker networking mode to use for the containers in this task. -}
-    , _computed_revision      :: !(TF.Attribute Text)
+    , _computed_revision :: !(TF.Attribute Text)
     {- ^ - The revision of this task definition -}
-    , _computed_status        :: !(TF.Attribute Text)
+    , _computed_status :: !(TF.Attribute Text)
     {- ^ - The status of this task definition -}
     , _computed_task_role_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the IAM role that containers in this task can assume -}
@@ -2474,19 +2475,19 @@ ecsTaskDefinitionDataSource =
 Provides information about an Elastic File System (EFS).
 -}
 data EfsFileSystemDataSource = EfsFileSystemDataSource {
-      _creation_token            :: !(TF.Argument Text)
+      _creation_token :: !(TF.Argument Text)
     {- ^ (Optional) Restricts the list to the file system with this creation token. -}
-    , _file_system_id            :: !(TF.Argument Text)
+    , _file_system_id :: !(TF.Argument Text)
     {- ^ (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65). -}
-    , _computed_dns_name         :: !(TF.Attribute Text)
+    , _computed_dns_name :: !(TF.Attribute Text)
     {- ^ - The DNS name for the filesystem per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-    , _computed_encrypted        :: !(TF.Attribute Text)
+    , _computed_encrypted :: !(TF.Attribute Text)
     {- ^ - Whether EFS is encrypted. -}
-    , _computed_kms_key_id       :: !(TF.Attribute Text)
+    , _computed_kms_key_id :: !(TF.Attribute Text)
     {- ^ - The ARN for the KMS encryption key. -}
     , _computed_performance_mode :: !(TF.Attribute Text)
     {- ^ - The PerformanceMode of the file system. -}
-    , _computed_tags             :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - The list of tags assigned to the file system. -}
     } deriving (Show, Eq)
 
@@ -2549,19 +2550,19 @@ efsFileSystemDataSource =
 Provides information about an Elastic File System Mount Target (EFS).
 -}
 data EfsMountTargetDataSource = EfsMountTargetDataSource {
-      _mount_target_id               :: !(TF.Argument Text)
+      _mount_target_id :: !(TF.Argument Text)
     {- ^ (Required) ID of the mount target that you want to have described -}
-    , _computed_dns_name             :: !(TF.Attribute Text)
+    , _computed_dns_name :: !(TF.Attribute Text)
     {- ^ - The DNS name for the given subnet/AZ per <http://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html> . -}
-    , _computed_file_system_id       :: !(TF.Attribute Text)
+    , _computed_file_system_id :: !(TF.Attribute Text)
     {- ^ - ID of the file system for which the mount target is intended. -}
-    , _computed_ip_address           :: !(TF.Attribute Text)
+    , _computed_ip_address :: !(TF.Attribute Text)
     {- ^ - Address at which the file system may be mounted via the mount target. -}
     , _computed_network_interface_id :: !(TF.Attribute Text)
     {- ^ - The ID of the network interface that Amazon EFS created when it created the mount target. -}
-    , _computed_security_groups      :: !(TF.Attribute Text)
+    , _computed_security_groups :: !(TF.Attribute Text)
     {- ^ - List of VPC security group IDs attached to the mount target. -}
-    , _computed_subnet_id            :: !(TF.Attribute Text)
+    , _computed_subnet_id :: !(TF.Attribute Text)
     {- ^ - ID of the mount target's subnet. -}
     } deriving (Show, Eq)
 
@@ -2625,7 +2626,7 @@ prove useful when a module accepts an allocation ID or public IP as an input
 variable and needs to determine the other.
 -}
 data EipDataSource = EipDataSource {
-      _id        :: !(TF.Argument Text)
+      _id :: !(TF.Argument Text)
     {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _public_ip :: !(TF.Argument Text)
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
@@ -2660,9 +2661,9 @@ eipDataSource =
 Use this data source to get the name of a elastic beanstalk solution stack.
 -}
 data ElasticBeanstalkSolutionStackDataSource = ElasticBeanstalkSolutionStackDataSource {
-      _most_recent   :: !(TF.Argument Text)
+      _most_recent :: !(TF.Argument Text)
     {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
-    , _name_regex    :: !(TF.Argument Text)
+    , _name_regex :: !(TF.Argument Text)
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     , _computed_name :: !(TF.Attribute Text)
     {- ^ - The name of the solution stack. -}
@@ -2703,45 +2704,45 @@ elasticBeanstalkSolutionStackDataSource =
 Use this data source to get information about an Elasticache Cluster
 -}
 data ElasticacheClusterDataSource = ElasticacheClusterDataSource {
-      _cluster_id                        :: !(TF.Argument Text)
+      _cluster_id :: !(TF.Argument Text)
     {- ^ – (Required) Group identifier. -}
-    , _computed_availability_zone        :: !(TF.Attribute Text)
+    , _computed_availability_zone :: !(TF.Attribute TF.Zone)
     {- ^ - The Availability Zone for the cache cluster. -}
-    , _computed_cache_nodes              :: !(TF.Attribute Text)
+    , _computed_cache_nodes :: !(TF.Attribute Text)
     {- ^ - List of node objects including @id@ , @address@ , @port@ and @availability_zone@ . Referenceable e.g. as @${data.aws_elasticache_cluster.bar.cache_nodes.0.address}@ -}
-    , _computed_cluster_address          :: !(TF.Attribute Text)
+    , _computed_cluster_address :: !(TF.Attribute Text)
     {- ^ - The DNS name of the cache cluster without the port appended. -}
-    , _computed_configuration_endpoint   :: !(TF.Attribute Text)
+    , _computed_configuration_endpoint :: !(TF.Attribute Text)
     {- ^ - The configuration endpoint to allow host discovery. -}
-    , _computed_engine                   :: !(TF.Attribute Text)
+    , _computed_engine :: !(TF.Attribute Text)
     {- ^ – Name of the cache engine. -}
-    , _computed_engine_version           :: !(TF.Attribute Text)
+    , _computed_engine_version :: !(TF.Attribute Text)
     {- ^ – Version number of the cache engine. -}
-    , _computed_maintenance_window       :: !(TF.Attribute Text)
+    , _computed_maintenance_window :: !(TF.Attribute Text)
     {- ^ – Specifies the weekly time range for when maintenance on the cache cluster is performed. -}
-    , _computed_node_type                :: !(TF.Attribute Text)
+    , _computed_node_type :: !(TF.Attribute Text)
     {- ^ – The cluster node type. -}
-    , _computed_notification_topic_arn   :: !(TF.Attribute Text)
+    , _computed_notification_topic_arn :: !(TF.Attribute Text)
     {- ^ – An Amazon Resource Name (ARN) of an SNS topic that ElastiCache notifications get sent to. -}
-    , _computed_num_cache_nodes          :: !(TF.Attribute Text)
+    , _computed_num_cache_nodes :: !(TF.Attribute Text)
     {- ^ – The number of cache nodes that the cache cluster has. -}
-    , _computed_parameter_group_name     :: !(TF.Attribute Text)
+    , _computed_parameter_group_name :: !(TF.Attribute Text)
     {- ^ – Name of the parameter group associated with this cache cluster. -}
-    , _computed_port                     :: !(TF.Attribute Text)
+    , _computed_port :: !(TF.Attribute Text)
     {- ^ – The port number on which each of the cache nodes will accept connections. -}
-    , _computed_replication_group_id     :: !(TF.Attribute Text)
+    , _computed_replication_group_id :: !(TF.Attribute Text)
     {- ^ - The replication group to which this cache cluster belongs. -}
-    , _computed_security_group_ids       :: !(TF.Attribute Text)
+    , _computed_security_group_ids :: !(TF.Attribute Text)
     {- ^ – List VPC security groups associated with the cache cluster. -}
-    , _computed_security_group_names     :: !(TF.Attribute Text)
+    , _computed_security_group_names :: !(TF.Attribute Text)
     {- ^ – List of security group names associated with this cache cluster. -}
     , _computed_snapshot_retention_limit :: !(TF.Attribute Text)
     {- ^ - The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. -}
-    , _computed_snapshot_window          :: !(TF.Attribute Text)
+    , _computed_snapshot_window :: !(TF.Attribute Text)
     {- ^ - The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of the cache cluster. -}
-    , _computed_subnet_group_name        :: !(TF.Attribute Text)
+    , _computed_subnet_group_name :: !(TF.Attribute Text)
     {- ^ – Name of the subnet group associated to the cache cluster. -}
-    , _computed_tags                     :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - The tags assigned to the resource -}
     } deriving (Show, Eq)
 
@@ -2755,7 +2756,7 @@ instance HasClusterId ElasticacheClusterDataSource (TF.Argument Text) where
         (\a -> s { _cluster_id = a } :: ElasticacheClusterDataSource)
              <$> f _cluster_id
 
-instance HasComputedAvailabilityZone ElasticacheClusterDataSource (TF.Attribute Text) where
+instance HasComputedAvailabilityZone ElasticacheClusterDataSource (TF.Attribute TF.Zone) where
     computedAvailabilityZone f s@ElasticacheClusterDataSource{..} =
         (\a -> s { _computed_availability_zone = a } :: ElasticacheClusterDataSource)
              <$> f _computed_availability_zone
@@ -2882,29 +2883,29 @@ Use this data source to get information about an Elasticache Replication
 Group.
 -}
 data ElasticacheReplicationGroupDataSource = ElasticacheReplicationGroupDataSource {
-      _replication_group_id                    :: !(TF.Argument Text)
+      _replication_group_id :: !(TF.Argument Text)
     {- ^ – (Required) The identifier for the replication group. -}
-    , _computed_auth_token_enabled             :: !(TF.Attribute TF.Bool)
+    , _computed_auth_token_enabled :: !(TF.Attribute TF.Bool)
     {- ^ - A flag that enables using an AuthToken (password) when issuing Redis commands. -}
-    , _computed_automatic_failover_enabled     :: !(TF.Attribute TF.Bool)
+    , _computed_automatic_failover_enabled :: !(TF.Attribute TF.Bool)
     {- ^ - A flag whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. -}
     , _computed_configuration_endpoint_address :: !(TF.Attribute Text)
     {- ^ - The configuration endpoint address to allow host discovery. -}
-    , _computed_node_type                      :: !(TF.Attribute Text)
+    , _computed_node_type :: !(TF.Attribute Text)
     {- ^ – The cluster node type. -}
-    , _computed_number_cache_clusters          :: !(TF.Attribute Text)
+    , _computed_number_cache_clusters :: !(TF.Attribute Text)
     {- ^ – The number of cache clusters that the replication group has. -}
-    , _computed_port                           :: !(TF.Attribute Text)
+    , _computed_port :: !(TF.Attribute Text)
     {- ^ – The port number on which the configuration endpoint will accept connections. -}
-    , _computed_primary_endpoint_address       :: !(TF.Attribute Text)
+    , _computed_primary_endpoint_address :: !(TF.Attribute Text)
     {- ^ - The endpoint of the primary node in this node group (shard). -}
-    , _computed_replication_group_description  :: !(TF.Attribute Text)
+    , _computed_replication_group_description :: !(TF.Attribute Text)
     {- ^ - The description of the replication group. -}
-    , _computed_replication_group_id           :: !(TF.Attribute Text)
+    , _computed_replication_group_id :: !(TF.Attribute Text)
     {- ^ - The identifier for the replication group. -}
-    , _computed_snapshot_retention_limit       :: !(TF.Attribute Text)
+    , _computed_snapshot_retention_limit :: !(TF.Attribute Text)
     {- ^ - The number of days for which ElastiCache retains automatic cache cluster snapshots before deleting them. -}
-    , _computed_snapshot_window                :: !(TF.Attribute Text)
+    , _computed_snapshot_window :: !(TF.Attribute Text)
     {- ^ - The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard). -}
     } deriving (Show, Eq)
 
@@ -3028,7 +3029,7 @@ Balancing HostedZoneId in a given region for the purpose of using in an AWS
 Route53 Alias.
 -}
 data ElbHostedZoneIdDataSource = ElbHostedZoneIdDataSource {
-      _region      :: !(TF.Argument Text)
+      _region :: !(TF.Argument TF.Region)
     {- ^ (Optional) Name of the region whose AWS ELB HostedZoneId is desired. Defaults to the region from the AWS provider configuration. -}
     , _computed_id :: !(TF.Attribute Text)
     {- ^ - The ID of the AWS ELB HostedZoneId in the selected region. -}
@@ -3039,7 +3040,7 @@ instance TF.ToHCL ElbHostedZoneIdDataSource where
         [ TF.assign "region" <$> TF.argument _region
         ]
 
-instance HasRegion ElbHostedZoneIdDataSource (TF.Argument Text) where
+instance HasRegion ElbHostedZoneIdDataSource (TF.Argument TF.Region) where
     region f s@ElbHostedZoneIdDataSource{..} =
         (\a -> s { _region = a } :: ElbHostedZoneIdDataSource)
              <$> f _region
@@ -3064,11 +3065,11 @@ Use this data source to get the Account ID of the
 in a given region for the purpose of whitelisting in S3 bucket policy.
 -}
 data ElbServiceAccountDataSource = ElbServiceAccountDataSource {
-      _region       :: !(TF.Argument Text)
+      _region :: !(TF.Argument TF.Region)
     {- ^ (Optional) Name of the region whose AWS ELB account ID is desired. Defaults to the region from the AWS provider configuration. -}
     , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the AWS ELB service account in the selected region. -}
-    , _computed_id  :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The ID of the AWS ELB service account in the selected region. -}
     } deriving (Show, Eq)
 
@@ -3077,7 +3078,7 @@ instance TF.ToHCL ElbServiceAccountDataSource where
         [ TF.assign "region" <$> TF.argument _region
         ]
 
-instance HasRegion ElbServiceAccountDataSource (TF.Argument Text) where
+instance HasRegion ElbServiceAccountDataSource (TF.Argument TF.Region) where
     region f s@ElbServiceAccountDataSource{..} =
         (\a -> s { _region = a } :: ElbServiceAccountDataSource)
              <$> f _region
@@ -3135,13 +3136,13 @@ group. By using this data source, you can reference IAM group properties
 without having to hard code ARNs as input.
 -}
 data IamGroupDataSource = IamGroupDataSource {
-      _group_name        :: !(TF.Argument Text)
+      _group_name :: !(TF.Argument Text)
     {- ^ (Required) The friendly IAM group name to match. -}
-    , _computed_arn      :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) specifying the group. -}
     , _computed_group_id :: !(TF.Attribute Text)
     {- ^ - The stable and unique string identifying the group. -}
-    , _computed_path     :: !(TF.Attribute Text)
+    , _computed_path :: !(TF.Attribute Text)
     {- ^ - The path to the group. -}
     } deriving (Show, Eq)
 
@@ -3187,15 +3188,15 @@ instance profile. By using this data source, you can reference IAM instance
 profile properties without having to hard code ARNs as input.
 -}
 data IamInstanceProfileDataSource = IamInstanceProfileDataSource {
-      _name                 :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The friendly IAM instance profile name to match. -}
-    , _computed_arn         :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) specifying the instance profile. -}
     , _computed_create_date :: !(TF.Attribute Text)
     {- ^ - The string representation of the date the instance profile was created. -}
-    , _computed_path        :: !(TF.Attribute Text)
+    , _computed_path :: !(TF.Attribute Text)
     {- ^ - The path to the instance profile. -}
-    , _computed_role_id     :: !(TF.Attribute Text)
+    , _computed_role_id :: !(TF.Attribute Text)
     {- ^ - The role id associated with this instance profile. -}
     } deriving (Show, Eq)
 
@@ -3285,17 +3286,17 @@ By using this data source, you can reference IAM role properties without
 having to hard code ARNs as input.
 -}
 data IamRoleDataSource = IamRoleDataSource {
-      _name                        :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The friendly IAM role name to match. -}
-    , _computed_arn                :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) specifying the role. -}
     , _computed_assume_role_policy :: !(TF.Attribute Text)
     {- ^ - The policy document associated with the role. -}
-    , _computed_id                 :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The friendly IAM role name to match. -}
-    , _computed_path               :: !(TF.Attribute Text)
+    , _computed_path :: !(TF.Attribute Text)
     {- ^ - The path to the role. -}
-    , _computed_unique_id          :: !(TF.Attribute Text)
+    , _computed_unique_id :: !(TF.Attribute Text)
     {- ^ - The stable and unique string identifying the role. -}
     } deriving (Show, Eq)
 
@@ -3351,23 +3352,23 @@ iamRoleDataSource =
 Use this data source to lookup information about IAM Server Certificates.
 -}
 data IamServerCertificateDataSource = IamServerCertificateDataSource {
-      _latest                     :: !(TF.Argument Text)
+      _latest :: !(TF.Argument Text)
     {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
-    , _name                       :: !(TF.Argument Text)
+    , _name :: !(TF.Argument Text)
     {- ^ - exact name of the cert to lookup -}
-    , _name_prefix                :: !(TF.Argument Text)
+    , _name_prefix :: !(TF.Argument Text)
     {- ^ - prefix of cert to filter by -}
-    , _computed_arn               :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ is set to the ARN of the IAM Server Certificate -}
-    , _computed_certificate_body  :: !(TF.Attribute Text)
+    , _computed_certificate_body :: !(TF.Attribute Text)
     {- ^ is the public key certificate (PEM-encoded). This is useful when <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html> policy for load balancer -}
     , _computed_certificate_chain :: !(TF.Attribute Text)
     {- ^ is the public key certificate chain (PEM-encoded) if exists, empty otherwise -}
-    , _computed_expiration_date   :: !(TF.Attribute Text)
+    , _computed_expiration_date :: !(TF.Attribute Text)
     {- ^ is set to the expiration date of the IAM Server Certificate -}
-    , _computed_path              :: !(TF.Attribute Text)
+    , _computed_path :: !(TF.Attribute Text)
     {- ^ is set to the path of the IAM Server Certificate -}
-    , _computed_upload_date       :: !(TF.Attribute Text)
+    , _computed_upload_date :: !(TF.Attribute Text)
     {- ^ is the date when the server certificate was uploaded -}
     } deriving (Show, Eq)
 
@@ -3445,11 +3446,11 @@ By using this data source, you can reference IAM user properties without
 having to hard code ARNs or unique IDs as input.
 -}
 data IamUserDataSource = IamUserDataSource {
-      _user_name        :: !(TF.Argument Text)
+      _user_name :: !(TF.Argument Text)
     {- ^ (Required) The friendly IAM user name to match. -}
-    , _computed_arn     :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) assigned by AWS for this user. -}
-    , _computed_path    :: !(TF.Attribute Text)
+    , _computed_path :: !(TF.Attribute Text)
     {- ^ - Path in which this user was created. -}
     , _computed_user_id :: !(TF.Attribute Text)
     {- ^ - The unique ID assigned by AWS for this user. -}
@@ -3496,59 +3497,59 @@ Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
 data InstanceDataSource = InstanceDataSource {
-      _filter                               :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_id                          :: !(TF.Argument Text)
+    , _instance_id :: !(TF.Argument Text)
     {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
-    , _instance_tags                        :: !(TF.Argument Text)
+    , _instance_tags :: !(TF.Argument Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
     , _computed_associate_public_ip_address :: !(TF.Attribute Text)
     {- ^ - Whether or not the Instance is associated with a public IP address or not (Boolean). -}
-    , _computed_availability_zone           :: !(TF.Attribute Text)
+    , _computed_availability_zone :: !(TF.Attribute TF.Zone)
     {- ^ - The availability zone of the Instance. -}
-    , _computed_ebs_block_device            :: !(TF.Attribute Text)
+    , _computed_ebs_block_device :: !(TF.Attribute Text)
     {- ^ - The EBS block device mappings of the Instance. -}
-    , _computed_ebs_optimized               :: !(TF.Attribute Text)
+    , _computed_ebs_optimized :: !(TF.Attribute Text)
     {- ^ - Whether the Instance is EBS optimized or not (Boolean). -}
-    , _computed_ephemeral_block_device      :: !(TF.Attribute Text)
+    , _computed_ephemeral_block_device :: !(TF.Attribute Text)
     {- ^ - The ephemeral block device mappings of the Instance. -}
-    , _computed_iam_instance_profile        :: !(TF.Attribute Text)
+    , _computed_iam_instance_profile :: !(TF.Attribute Text)
     {- ^ - The name of the instance profile associated with the Instance. -}
-    , _computed_instance_type               :: !(TF.Attribute Text)
+    , _computed_instance_type :: !(TF.Attribute Text)
     {- ^ - The type of the Instance. -}
-    , _computed_ipv6_addresses              :: !(TF.Attribute Text)
+    , _computed_ipv6_addresses :: !(TF.Attribute Text)
     {- ^ - The IPv6 addresses associated to the Instance, if applicable. NOTE : Unlike the IPv4 address, this doesn't change if you attach an EIP to the instance. -}
-    , _computed_key_name                    :: !(TF.Attribute Text)
+    , _computed_key_name :: !(TF.Attribute Text)
     {- ^ - The key name of the Instance. -}
-    , _computed_monitoring                  :: !(TF.Attribute Text)
+    , _computed_monitoring :: !(TF.Attribute Text)
     {- ^ - Whether detailed monitoring is enabled or disabled for the Instance (Boolean). -}
-    , _computed_network_interface_id        :: !(TF.Attribute Text)
+    , _computed_network_interface_id :: !(TF.Attribute Text)
     {- ^ - The ID of the network interface that was created with the Instance. -}
-    , _computed_placement_group             :: !(TF.Attribute Text)
+    , _computed_placement_group :: !(TF.Attribute Text)
     {- ^ - The placement group of the Instance. -}
-    , _computed_private_dns                 :: !(TF.Attribute Text)
+    , _computed_private_dns :: !(TF.Attribute Text)
     {- ^ - The private DNS name assigned to the Instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC. -}
-    , _computed_private_ip                  :: !(TF.Attribute Text)
+    , _computed_private_ip :: !(TF.Attribute Text)
     {- ^ - The private IP address assigned to the Instance. -}
-    , _computed_public_dns                  :: !(TF.Attribute Text)
+    , _computed_public_dns :: !(TF.Attribute Text)
     {- ^ - The public DNS name assigned to the Instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC. -}
-    , _computed_public_ip                   :: !(TF.Attribute Text)
+    , _computed_public_ip :: !(TF.Attribute Text)
     {- ^ - The public IP address assigned to the Instance, if applicable. NOTE : If you are using an </docs/providers/aws/r/eip.html> with your instance, you should refer to the EIP's address directly and not use @public_ip@ , as this field will change after the EIP is attached. -}
-    , _computed_root_block_device           :: !(TF.Attribute Text)
+    , _computed_root_block_device :: !(TF.Attribute Text)
     {- ^ - The root block device mappings of the Instance -}
-    , _computed_security_groups             :: !(TF.Attribute Text)
+    , _computed_security_groups :: !(TF.Attribute Text)
     {- ^ - The associated security groups. -}
-    , _computed_source_dest_check           :: !(TF.Attribute Text)
+    , _computed_source_dest_check :: !(TF.Attribute Text)
     {- ^ - Whether the network interface performs source/destination checking (Boolean). -}
-    , _computed_subnet_id                   :: !(TF.Attribute Text)
+    , _computed_subnet_id :: !(TF.Attribute Text)
     {- ^ - The VPC subnet ID. -}
-    , _computed_tags                        :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - A mapping of tags assigned to the Instance. -}
-    , _computed_tenancy                     :: !(TF.Attribute Text)
+    , _computed_tenancy :: !(TF.Attribute Text)
     {- ^ - The tenancy of the instance: @dedicated@ , @default@ , @host@ . -}
-    , _computed_user_data                   :: !(TF.Attribute Text)
+    , _computed_user_data :: !(TF.Attribute Text)
     {- ^ - The User Data supplied to the Instance. -}
-    , _computed_vpc_security_group_ids      :: !(TF.Attribute Text)
+    , _computed_vpc_security_group_ids :: !(TF.Attribute Text)
     {- ^ - The associated security groups in a non-default VPC. -}
     } deriving (Show, Eq)
 
@@ -3579,7 +3580,7 @@ instance HasComputedAssociatePublicIpAddress InstanceDataSource (TF.Attribute Te
         (\a -> s { _computed_associate_public_ip_address = a } :: InstanceDataSource)
              <$> f _computed_associate_public_ip_address
 
-instance HasComputedAvailabilityZone InstanceDataSource (TF.Attribute Text) where
+instance HasComputedAvailabilityZone InstanceDataSource (TF.Attribute TF.Zone) where
     computedAvailabilityZone f s@InstanceDataSource{..} =
         (\a -> s { _computed_availability_zone = a } :: InstanceDataSource)
              <$> f _computed_availability_zone
@@ -3743,15 +3744,15 @@ any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
 data InstancesDataSource = InstancesDataSource {
-      _filter               :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_tags        :: !(TF.Argument Text)
+    , _instance_tags :: !(TF.Argument Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
-    , _computed_ids         :: !(TF.Attribute Text)
+    , _computed_ids :: !(TF.Attribute Text)
     {- ^ - IDs of instances found through the filter -}
     , _computed_private_ips :: !(TF.Attribute Text)
     {- ^ - Private IP addresses of instances found through the filter -}
-    , _computed_public_ips  :: !(TF.Attribute Text)
+    , _computed_public_ips :: !(TF.Attribute Text)
     {- ^ - Public IP addresses of instances found through the filter -}
     } deriving (Show, Eq)
 
@@ -3802,15 +3803,15 @@ instancesDataSource =
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
 data InternetGatewayDataSource = InternetGatewayDataSource {
-      _filter              :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags                :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
-    , _computed_state      :: !(TF.Attribute Text)
+    , _computed_state :: !(TF.Attribute Text)
     {- ^ - The current state of the attachment between the gateway and the VPC. Present only if a VPC is attached -}
-    , _computed_vpc_id     :: !(TF.Attribute Text)
+    , _computed_vpc_id :: !(TF.Attribute Text)
     {- ^ - The ID of an attached VPC. -}
     } deriving (Show, Eq)
 
@@ -3864,15 +3865,15 @@ Use this data source to get the
 AWS products and services.
 -}
 data IpRangesDataSource = IpRangesDataSource {
-      _regions              :: !(TF.Argument Text)
+      _regions :: !(TF.Argument Text)
     {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
-    , _services             :: !(TF.Argument Text)
+    , _services :: !(TF.Argument Text)
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
     , _computed_cidr_blocks :: !(TF.Attribute Text)
     {- ^ - The lexically ordered list of CIDR blocks. -}
     , _computed_create_date :: !(TF.Attribute Text)
     {- ^ - The publication time of the IP ranges (e.g. @2016-08-03-23-46-05@ ). -}
-    , _computed_sync_token  :: !(TF.Attribute Text)
+    , _computed_sync_token :: !(TF.Attribute Text)
     {- ^ - The publication time of the IP ranges, in Unix epoch time format (e.g. @1470267965@ ). -}
     } deriving (Show, Eq)
 
@@ -3925,25 +3926,25 @@ other resources. For more details, see the
 <https://aws.amazon.com/documentation/kinesis/> .
 -}
 data KinesisStreamDataSource = KinesisStreamDataSource {
-      _name                         :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The name of the Kinesis Stream. -}
-    , _computed_arn                 :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name (ARN) of the Kinesis Stream (same as id). -}
-    , _computed_closed_shards       :: !(TF.Attribute Text)
+    , _computed_closed_shards :: !(TF.Attribute Text)
     {- ^ - The list of shard ids in the CLOSED state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-    , _computed_creation_timestamp  :: !(TF.Attribute Text)
+    , _computed_creation_timestamp :: !(TF.Attribute Text)
     {- ^ - The approximate UNIX timestamp that the stream was created. -}
-    , _computed_name                :: !(TF.Attribute Text)
+    , _computed_name :: !(TF.Attribute Text)
     {- ^ - The name of the Kinesis Stream. -}
-    , _computed_open_shards         :: !(TF.Attribute Text)
+    , _computed_open_shards :: !(TF.Attribute Text)
     {- ^ - The list of shard ids in the OPEN state. See <https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing> for more. -}
-    , _computed_retention_period    :: !(TF.Attribute Text)
+    , _computed_retention_period :: !(TF.Attribute Text)
     {- ^ - Length of time (in hours) data records are accessible after they are added to the stream. -}
     , _computed_shard_level_metrics :: !(TF.Attribute Text)
     {- ^ - A list of shard-level CloudWatch metrics which are enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. -}
-    , _computed_status              :: !(TF.Attribute Text)
+    , _computed_status :: !(TF.Attribute Text)
     {- ^ - The current status of the stream. The stream status is one of CREATING, DELETING, ACTIVE, or UPDATING. -}
-    , _computed_tags                :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - A mapping of tags to assigned to the stream. -}
     } deriving (Show, Eq)
 
@@ -4025,9 +4026,9 @@ source, you can reference key alias without having to hard code the ARN as
 input.
 -}
 data KmsAliasDataSource = KmsAliasDataSource {
-      _name                   :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The display name of the alias. The name must start with the word "alias" followed by a forward slash (alias/) -}
-    , _computed_arn           :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The Amazon Resource Name(ARN) of the key alias. -}
     , _computed_target_key_id :: !(TF.Attribute Text)
     {- ^ - Key identifier pointed to by the alias. -}
@@ -4070,11 +4071,11 @@ including the plaintext be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data KmsCiphertextDataSource = KmsCiphertextDataSource {
-      _context                  :: !(TF.Argument Text)
+      _context :: !(TF.Argument Text)
     {- ^ (Optional) An optional mapping that makes up the encryption context. -}
-    , _key_id                   :: !(TF.Argument Text)
+    , _key_id :: !(TF.Argument Text)
     {- ^ (Required) Globally unique key ID for the customer master key. -}
-    , _plaintext                :: !(TF.Argument Text)
+    , _plaintext :: !(TF.Argument Text)
     {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
     , _computed_ciphertext_blob :: !(TF.Attribute Text)
     {- ^ - Base64 encoded ciphertext -}
@@ -4156,7 +4157,7 @@ useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
 data LbDataSource = LbDataSource {
-      _arn  :: !(TF.Argument Text)
+      _arn :: !(TF.Argument Text)
     {- ^ (Optional) The full ARN of the load balancer. -}
     , _name :: !(TF.Argument Text)
     {- ^ (Optional) The unique name of the load balancer. -}
@@ -4226,7 +4227,7 @@ also be used to get the ARN of an LB Target Group for use in other
 resources, given LB Target Group name.
 -}
 data LbTargetGroupDataSource = LbTargetGroupDataSource {
-      _arn  :: !(TF.Argument Text)
+      _arn :: !(TF.Argument Text)
     {- ^ (Optional) The full ARN of the target group. -}
     , _name :: !(TF.Argument Text)
     {- ^ (Optional) The unique name of the target group. -}
@@ -4261,27 +4262,27 @@ lbTargetGroupDataSource =
 Provides details about a specific Nat Gateway.
 -}
 data NatGatewayDataSource = NatGatewayDataSource {
-      _filter                        :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
-    , _id                            :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the specific Nat Gateway to retrieve. -}
-    , _name                          :: !(TF.Argument Text)
+    , _name :: !(TF.Argument Text)
     {- ^ (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html> . -}
-    , _state                         :: !(TF.Argument Text)
+    , _state :: !(TF.Argument Text)
     {- ^ (Optional) The state of the NAT gateway (pending | failed | available | deleting | deleted ). -}
-    , _subnet_id                     :: !(TF.Argument Text)
+    , _subnet_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of subnet that the Nat Gateway resides in. -}
-    , _values                        :: !(TF.Argument Text)
+    , _values :: !(TF.Argument Text)
     {- ^ (Required) Set of values that are accepted for the given field. An Nat Gateway will be selected if any one of the given values matches. -}
-    , _vpc_id                        :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
-    , _computed_allocation_id        :: !(TF.Attribute Text)
+    , _computed_allocation_id :: !(TF.Attribute Text)
     {- ^ - The Id of the EIP allocated to the selected Nat Gateway. -}
     , _computed_network_interface_id :: !(TF.Attribute Text)
     {- ^ - The Id of the ENI allocated to the selected Nat Gateway. -}
-    , _computed_private_ip           :: !(TF.Attribute Text)
+    , _computed_private_ip :: !(TF.Attribute Text)
     {- ^ - The private Ip address of the selected Nat Gateway. -}
-    , _computed_public_ip            :: !(TF.Attribute Text)
+    , _computed_public_ip :: !(TF.Attribute Text)
     {- ^ - The public Ip (EIP) address of the selected Nat Gateway. -}
     } deriving (Show, Eq)
 
@@ -4373,21 +4374,21 @@ natGatewayDataSource =
 Use this data source to get information about a Network Interface.
 -}
 data NetworkInterfaceDataSource = NetworkInterfaceDataSource {
-      _id                         :: !(TF.Argument Text)
+      _id :: !(TF.Argument Text)
     {- ^ – (Required) The identifier for the network interface. -}
-    , _computed_association       :: !(TF.Attribute Text)
+    , _computed_association :: !(TF.Attribute Text)
     {- ^ - The association information for an Elastic IP address (IPv4) associated with the network interface. See supported fields below. -}
-    , _computed_availability_zone :: !(TF.Attribute Text)
+    , _computed_availability_zone :: !(TF.Attribute TF.Zone)
     {- ^ - The Availability Zone. -}
-    , _computed_interface_type    :: !(TF.Attribute Text)
+    , _computed_interface_type :: !(TF.Attribute Text)
     {- ^ - The type of interface. -}
-    , _computed_ipv6_addresses    :: !(TF.Attribute Text)
+    , _computed_ipv6_addresses :: !(TF.Attribute Text)
     {- ^ - List of IPv6 addresses to assign to the ENI. -}
-    , _computed_mac_address       :: !(TF.Attribute Text)
+    , _computed_mac_address :: !(TF.Attribute Text)
     {- ^ - The MAC address. -}
-    , _computed_owner_id          :: !(TF.Attribute Text)
+    , _computed_owner_id :: !(TF.Attribute Text)
     {- ^ - The AWS account ID of the owner of the network interface. -}
-    , _computed_requester_id      :: !(TF.Attribute Text)
+    , _computed_requester_id :: !(TF.Attribute Text)
     {- ^ - The ID of the entity that launched the instance on your behalf. -}
     } deriving (Show, Eq)
 
@@ -4406,7 +4407,7 @@ instance HasComputedAssociation NetworkInterfaceDataSource (TF.Attribute Text) w
         (\a -> s { _computed_association = a } :: NetworkInterfaceDataSource)
              <$> f _computed_association
 
-instance HasComputedAvailabilityZone NetworkInterfaceDataSource (TF.Attribute Text) where
+instance HasComputedAvailabilityZone NetworkInterfaceDataSource (TF.Attribute TF.Zone) where
     computedAvailabilityZone f s@NetworkInterfaceDataSource{..} =
         (\a -> s { _computed_availability_zone = a } :: NetworkInterfaceDataSource)
              <$> f _computed_availability_zone
@@ -4476,15 +4477,15 @@ associated AWS service. The latter may be useful e.g. for adding network ACL
 rules.
 -}
 data PrefixListDataSource = PrefixListDataSource {
-      _name                 :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Optional) The name of the prefix list to select. -}
-    , _prefix_list_id       :: !(TF.Argument Text)
+    , _prefix_list_id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the prefix list to select. -}
     , _computed_cidr_blocks :: !(TF.Attribute Text)
     {- ^ - The list of CIDR blocks for the AWS service associated with the prefix list. -}
-    , _computed_id          :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The ID of the selected prefix list. -}
-    , _computed_name        :: !(TF.Attribute Text)
+    , _computed_name :: !(TF.Attribute Text)
     {- ^ - The name of the selected prefix list. -}
     } deriving (Show, Eq)
 
@@ -4564,11 +4565,11 @@ in a given region for the purpose of allowing Redshift to store audit data
 in S3.
 -}
 data RedshiftServiceAccountDataSource = RedshiftServiceAccountDataSource {
-      _region       :: !(TF.Argument Text)
+      _region :: !(TF.Argument TF.Region)
     {- ^ (Optional) Name of the region whose AWS Redshift account ID is desired. Defaults to the region from the AWS provider configuration. -}
     , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the AWS Redshift service account in the selected region. -}
-    , _computed_id  :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The ID of the AWS Redshift service account in the selected region. -}
     } deriving (Show, Eq)
 
@@ -4577,7 +4578,7 @@ instance TF.ToHCL RedshiftServiceAccountDataSource where
         [ TF.assign "region" <$> TF.argument _region
         ]
 
-instance HasRegion RedshiftServiceAccountDataSource (TF.Argument Text) where
+instance HasRegion RedshiftServiceAccountDataSource (TF.Argument TF.Region) where
     region f s@RedshiftServiceAccountDataSource{..} =
         (\a -> s { _region = a } :: RedshiftServiceAccountDataSource)
              <$> f _region
@@ -4610,17 +4611,17 @@ the provider. The latter can be useful in a child module which is inheriting
 an AWS provider configuration from its parent module.
 -}
 data RegionDataSource = RegionDataSource {
-      _current           :: !(TF.Argument Text)
+      _current :: !(TF.Argument Text)
     {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
-    , _endpoint          :: !(TF.Argument Text)
+    , _endpoint :: !(TF.Argument Text)
     {- ^ (Optional) The endpoint of the region to select. -}
-    , _name              :: !(TF.Argument Text)
+    , _name :: !(TF.Argument Text)
     {- ^ (Optional) The full name of the region to select. -}
-    , _computed_current  :: !(TF.Attribute Text)
+    , _computed_current :: !(TF.Attribute Text)
     {- ^ - @true@ if the selected region is the one configured on the provider, or @false@ otherwise. -}
     , _computed_endpoint :: !(TF.Attribute Text)
     {- ^ - The endpoint for the selected region. -}
-    , _computed_name     :: !(TF.Attribute Text)
+    , _computed_name :: !(TF.Attribute Text)
     {- ^ - The name of the selected region. -}
     } deriving (Show, Eq)
 
@@ -4680,19 +4681,19 @@ This data source allows to find a Hosted Zone ID given Hosted Zone name and
 certain search criteria.
 -}
 data Route53ZoneDataSource = Route53ZoneDataSource {
-      _name                               :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
-    , _private_zone                       :: !(TF.Argument Text)
+    , _private_zone :: !(TF.Argument Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , _tags                               :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
-    , _vpc_id                             :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
-    , _zone_id                            :: !(TF.Argument Text)
+    , _zone_id :: !(TF.Argument Text)
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
-    , _computed_caller_reference          :: !(TF.Attribute Text)
+    , _computed_caller_reference :: !(TF.Attribute Text)
     {- ^ - Caller Reference of the Hosted Zone. -}
-    , _computed_comment                   :: !(TF.Attribute Text)
+    , _computed_comment :: !(TF.Attribute Text)
     {- ^ - The comment field of the Hosted Zone. -}
     , _computed_resource_record_set_count :: !(TF.Attribute Text)
     {- ^ - the number of Record Set in the Hosted Zone -}
@@ -4768,29 +4769,29 @@ resource can prove useful when a module accepts a Subnet id as an input
 variable and needs to, for example, add a route in the Route Table.
 -}
 data RouteTableDataSource = RouteTableDataSource {
-      _filter                             :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _route_table_id                     :: !(TF.Argument Text)
+    , _route_table_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , _subnet_id                          :: !(TF.Argument Text)
+    , _subnet_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , _tags                               :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
-    , _vpc_id                             :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
-    , _computed_cidr_block                :: !(TF.Attribute Text)
+    , _computed_cidr_block :: !(TF.Attribute TF.CIDR)
     {- ^ - The CIDR block of the route. -}
-    , _computed_egress_only_gateway_id    :: !(TF.Attribute Text)
+    , _computed_egress_only_gateway_id :: !(TF.Attribute Text)
     {- ^ - The ID of the Egress Only Internet Gateway. -}
-    , _computed_gateway_id                :: !(TF.Attribute Text)
+    , _computed_gateway_id :: !(TF.Attribute Text)
     {- ^ - The Internet Gateway ID. -}
-    , _computed_instance_id               :: !(TF.Attribute Text)
+    , _computed_instance_id :: !(TF.Attribute Text)
     {- ^ - The EC2 instance ID. -}
-    , _computed_ipv6_cidr_block           :: !(TF.Attribute Text)
+    , _computed_ipv6_cidr_block :: !(TF.Attribute TF.CIDR)
     {- ^ - The IPv6 CIDR block of the route. -}
-    , _computed_nat_gateway_id            :: !(TF.Attribute Text)
+    , _computed_nat_gateway_id :: !(TF.Attribute Text)
     {- ^ - The NAT Gateway ID. -}
-    , _computed_network_interface_id      :: !(TF.Attribute Text)
+    , _computed_network_interface_id :: !(TF.Attribute Text)
     {- ^ - The ID of the elastic network interface (eni) to use. -}
     , _computed_vpc_peering_connection_id :: !(TF.Attribute Text)
     {- ^ - The VPC Peering ID. -}
@@ -4830,7 +4831,7 @@ instance HasVpcId RouteTableDataSource (TF.Argument Text) where
         (\a -> s { _vpc_id = a } :: RouteTableDataSource)
              <$> f _vpc_id
 
-instance HasComputedCidrBlock RouteTableDataSource (TF.Attribute Text) where
+instance HasComputedCidrBlock RouteTableDataSource (TF.Attribute TF.CIDR) where
     computedCidrBlock f s@RouteTableDataSource{..} =
         (\a -> s { _computed_cidr_block = a } :: RouteTableDataSource)
              <$> f _computed_cidr_block
@@ -4850,7 +4851,7 @@ instance HasComputedInstanceId RouteTableDataSource (TF.Attribute Text) where
         (\a -> s { _computed_instance_id = a } :: RouteTableDataSource)
              <$> f _computed_instance_id
 
-instance HasComputedIpv6CidrBlock RouteTableDataSource (TF.Attribute Text) where
+instance HasComputedIpv6CidrBlock RouteTableDataSource (TF.Attribute TF.CIDR) where
     computedIpv6CidrBlock f s@RouteTableDataSource{..} =
         (\a -> s { _computed_ipv6_cidr_block = a } :: RouteTableDataSource)
              <$> f _computed_ipv6_cidr_block
@@ -4896,21 +4897,21 @@ when setting up a Route53 record, or an origin for a CloudFront
 Distribution.
 -}
 data S3BucketDataSource = S3BucketDataSource {
-      _bucket                      :: !(TF.Argument Text)
+      _bucket :: !(TF.Argument Text)
     {- ^ (Required) The name of the bucket -}
-    , _computed_arn                :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The ARN of the bucket. Will be of format @arn:aws:s3:::bucketname@ . -}
     , _computed_bucket_domain_name :: !(TF.Attribute Text)
     {- ^ - The bucket domain name. Will be of format @bucketname.s3.amazonaws.com@ . -}
-    , _computed_hosted_zone_id     :: !(TF.Attribute Text)
+    , _computed_hosted_zone_id :: !(TF.Attribute Text)
     {- ^ - The <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints> for this bucket's region. -}
-    , _computed_id                 :: !(TF.Attribute Text)
+    , _computed_id :: !(TF.Attribute Text)
     {- ^ - The name of the bucket. -}
-    , _computed_region             :: !(TF.Attribute Text)
+    , _computed_region :: !(TF.Attribute TF.Region)
     {- ^ - The AWS region this bucket resides in. -}
-    , _computed_website_domain     :: !(TF.Attribute Text)
+    , _computed_website_domain :: !(TF.Attribute Text)
     {- ^ - The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. -}
-    , _computed_website_endpoint   :: !(TF.Attribute Text)
+    , _computed_website_endpoint :: !(TF.Attribute Text)
     {- ^ - The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. -}
     } deriving (Show, Eq)
 
@@ -4944,7 +4945,7 @@ instance HasComputedId S3BucketDataSource (TF.Attribute Text) where
         (\a -> s { _computed_id = a } :: S3BucketDataSource)
              <$> f _computed_id
 
-instance HasComputedRegion S3BucketDataSource (TF.Attribute Text) where
+instance HasComputedRegion S3BucketDataSource (TF.Attribute TF.Region) where
     computedRegion f s@S3BucketDataSource{..} =
         (\a -> s { _computed_region = a } :: S3BucketDataSource)
              <$> f _computed_region
@@ -4983,45 +4984,45 @@ to prevent printing unsafe characters and potentially downloading large
 amount of data which would be thrown away in favour of metadata.
 -}
 data S3BucketObjectDataSource = S3BucketObjectDataSource {
-      _bucket                             :: !(TF.Argument Text)
+      _bucket :: !(TF.Argument Text)
     {- ^ (Required) The name of the bucket to read the object from -}
-    , _key                                :: !(TF.Argument Text)
+    , _key :: !(TF.Argument Text)
     {- ^ (Required) The full path to the object inside the bucket -}
-    , _version_id                         :: !(TF.Argument Text)
+    , _version_id :: !(TF.Argument Text)
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
-    , _computed_body                      :: !(TF.Attribute Text)
+    , _computed_body :: !(TF.Attribute Text)
     {- ^ - Object data (see limitations above to understand cases in which this field is actually available) -}
-    , _computed_cache_control             :: !(TF.Attribute Text)
+    , _computed_cache_control :: !(TF.Attribute Text)
     {- ^ - Specifies caching behavior along the request/reply chain. -}
-    , _computed_content_disposition       :: !(TF.Attribute Text)
+    , _computed_content_disposition :: !(TF.Attribute Text)
     {- ^ - Specifies presentational information for the object. -}
-    , _computed_content_encoding          :: !(TF.Attribute Text)
+    , _computed_content_encoding :: !(TF.Attribute Text)
     {- ^ - Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. -}
-    , _computed_content_language          :: !(TF.Attribute Text)
+    , _computed_content_language :: !(TF.Attribute Text)
     {- ^ - The language the content is in. -}
-    , _computed_content_length            :: !(TF.Attribute Text)
+    , _computed_content_length :: !(TF.Attribute Text)
     {- ^ - Size of the body in bytes. -}
-    , _computed_content_type              :: !(TF.Attribute Text)
+    , _computed_content_type :: !(TF.Attribute Text)
     {- ^ - A standard MIME type describing the format of the object data. -}
-    , _computed_etag                      :: !(TF.Attribute Text)
+    , _computed_etag :: !(TF.Attribute Text)
     {- ^ - <https://en.wikipedia.org/wiki/HTTP_ETag> generated for the object (an MD5 sum of the object content in case it's not encrypted) -}
-    , _computed_expiration                :: !(TF.Attribute Text)
+    , _computed_expiration :: !(TF.Attribute Text)
     {- ^ - If the object expiration is configured (see <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html> ), the field includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded. -}
-    , _computed_expires                   :: !(TF.Attribute Text)
+    , _computed_expires :: !(TF.Attribute Text)
     {- ^ - The date and time at which the object is no longer cacheable. -}
-    , _computed_last_modified             :: !(TF.Attribute Text)
+    , _computed_last_modified :: !(TF.Attribute Text)
     {- ^ - Last modified date of the object in RFC1123 format (e.g. @Mon, 02 Jan 2006 15:04:05 MST@ ) -}
-    , _computed_metadata                  :: !(TF.Attribute Text)
+    , _computed_metadata :: !(TF.Attribute Text)
     {- ^ - A map of metadata stored with the object in S3 -}
-    , _computed_server_side_encryption    :: !(TF.Attribute Text)
+    , _computed_server_side_encryption :: !(TF.Attribute Text)
     {- ^ - If the object is stored using server-side encryption (KMS or Amazon S3-managed encryption key), this field includes the chosen encryption and algorithm used. -}
-    , _computed_sse_kms_key_id            :: !(TF.Attribute Text)
+    , _computed_sse_kms_key_id :: !(TF.Attribute Text)
     {- ^ - If present, specifies the ID of the Key Management Service (KMS) master encryption key that was used for the object. -}
-    , _computed_storage_class             :: !(TF.Attribute Text)
+    , _computed_storage_class :: !(TF.Attribute Text)
     {- ^ - <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> information of the object. Available for all objects except for @Standard@ storage class objects. -}
-    , _computed_tags                      :: !(TF.Attribute TF.Tags)
+    , _computed_tags :: !(TF.Attribute TF.Tags)
     {- ^ - A mapping of tags assigned to the object. -}
-    , _computed_version_id                :: !(TF.Attribute Text)
+    , _computed_version_id :: !(TF.Attribute Text)
     {- ^ - The latest version ID of the object returned. -}
     , _computed_website_redirect_location :: !(TF.Attribute Text)
     {- ^ - If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. -}
@@ -5174,17 +5175,17 @@ input variable and needs to, for example, determine the id of the VPC that
 the security group belongs to.
 -}
 data SecurityGroupDataSource = SecurityGroupDataSource {
-      _filter               :: !(TF.Argument Text)
+      _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                   :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the specific security group to retrieve. -}
-    , _name                 :: !(TF.Argument Text)
+    , _name :: !(TF.Argument Text)
     {- ^ (Optional) The name that the desired security group must have. -}
-    , _tags                 :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
-    , _vpc_id               :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
-    , _computed_arn         :: !(TF.Attribute Text)
+    , _computed_arn :: !(TF.Attribute Text)
     {- ^ - The computed ARN of the security group. -}
     , _computed_description :: !(TF.Attribute Text)
     {- ^ - The description of the security group. -}
@@ -5254,7 +5255,7 @@ Service (SNS). By using this data source, you can reference SNS topics
 without having to hard code the ARNs as input.
 -}
 data SnsTopicDataSource = SnsTopicDataSource {
-      _name         :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The friendly name of the topic to match. -}
     , _computed_arn :: !(TF.Attribute Text)
     {- ^ - Set to the ARN of the found topic, suitable for referencing in other resources that support SNS topics. -}
@@ -5288,7 +5289,7 @@ snsTopicDataSource =
 Provides an SSM Parameter data source.
 -}
 data SsmParameterDataSource = SsmParameterDataSource {
-      _name            :: !(TF.Argument Text)
+      _name :: !(TF.Argument Text)
     {- ^ (Required) The name of the parameter. -}
     , _with_decryption :: !(TF.Argument Text)
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
@@ -5326,23 +5327,23 @@ needs to, for example, determine the id of the VPC that the subnet belongs
 to.
 -}
 data SubnetDataSource = SubnetDataSource {
-      _availability_zone :: !(TF.Argument Text)
+      _availability_zone :: !(TF.Argument TF.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
-    , _cidr_block        :: !(TF.Argument Text)
+    , _cidr_block :: !(TF.Argument TF.CIDR)
     {- ^ (Optional) The cidr block of the desired subnet. -}
-    , _default_for_az    :: !(TF.Argument Text)
+    , _default_for_az :: !(TF.Argument Text)
     {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
-    , _filter            :: !(TF.Argument Text)
+    , _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the specific subnet to retrieve. -}
-    , _ipv6_cidr_block   :: !(TF.Argument Text)
+    , _ipv6_cidr_block :: !(TF.Argument TF.CIDR)
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
-    , _state             :: !(TF.Argument Text)
+    , _state :: !(TF.Argument Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
-    , _tags              :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnet. -}
-    , _vpc_id            :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
@@ -5359,12 +5360,12 @@ instance TF.ToHCL SubnetDataSource where
         , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
-instance HasAvailabilityZone SubnetDataSource (TF.Argument Text) where
+instance HasAvailabilityZone SubnetDataSource (TF.Argument TF.Zone) where
     availabilityZone f s@SubnetDataSource{..} =
         (\a -> s { _availability_zone = a } :: SubnetDataSource)
              <$> f _availability_zone
 
-instance HasCidrBlock SubnetDataSource (TF.Argument Text) where
+instance HasCidrBlock SubnetDataSource (TF.Argument TF.CIDR) where
     cidrBlock f s@SubnetDataSource{..} =
         (\a -> s { _cidr_block = a } :: SubnetDataSource)
              <$> f _cidr_block
@@ -5384,7 +5385,7 @@ instance HasId SubnetDataSource (TF.Argument Text) where
         (\a -> s { _id = a } :: SubnetDataSource)
              <$> f _id
 
-instance HasIpv6CidrBlock SubnetDataSource (TF.Argument Text) where
+instance HasIpv6CidrBlock SubnetDataSource (TF.Argument TF.CIDR) where
     ipv6CidrBlock f s@SubnetDataSource{..} =
         (\a -> s { _ipv6_cidr_block = a } :: SubnetDataSource)
              <$> f _ipv6_cidr_block
@@ -5425,9 +5426,9 @@ subnetDataSource =
 useful for getting back a list of subnet ids for a vpc.
 -}
 data SubnetIdsDataSource = SubnetIdsDataSource {
-      _tags         :: !(TF.Argument TF.Tags)
+      _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
-    , _vpc_id       :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
     , _computed_ids :: !(TF.Attribute Text)
     {- ^ - A list of all the subnet ids found. This data source will fail if none are found. -}
@@ -5470,29 +5471,29 @@ useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
 data VpcDataSource = VpcDataSource {
-      _cidr_block                    :: !(TF.Argument Text)
+      _cidr_block :: !(TF.Argument TF.CIDR)
     {- ^ (Optional) The cidr block of the desired VPC. -}
-    , _default'                      :: !(TF.Argument Text)
+    , _default' :: !(TF.Argument Text)
     {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
-    , _dhcp_options_id               :: !(TF.Argument Text)
+    , _dhcp_options_id :: !(TF.Argument Text)
     {- ^ (Optional) The DHCP options id of the desired VPC. -}
-    , _filter                        :: !(TF.Argument Text)
+    , _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                            :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ (Optional) The id of the specific VPC to retrieve. -}
-    , _state                         :: !(TF.Argument Text)
+    , _state :: !(TF.Argument Text)
     {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
-    , _tags                          :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     , _computed_enable_dns_hostnames :: !(TF.Attribute TF.Bool)
     {- ^ - Whether or not the VPC has DNS hostname support -}
-    , _computed_enable_dns_support   :: !(TF.Attribute TF.Bool)
+    , _computed_enable_dns_support :: !(TF.Attribute TF.Bool)
     {- ^ - Whether or not the VPC has DNS support -}
-    , _computed_instance_tenancy     :: !(TF.Attribute Text)
+    , _computed_instance_tenancy :: !(TF.Attribute Text)
     {- ^ - The allowed tenancy of instances launched into the selected VPC. May be any of @"default"@ , @"dedicated"@ , or @"host"@ . -}
-    , _computed_ipv6_association_id  :: !(TF.Attribute Text)
+    , _computed_ipv6_association_id :: !(TF.Attribute Text)
     {- ^ - The association ID for the IPv6 CIDR block. -}
-    , _computed_ipv6_cidr_block      :: !(TF.Attribute Text)
+    , _computed_ipv6_cidr_block :: !(TF.Attribute TF.CIDR)
     {- ^ - The IPv6 CIDR block. -}
     } deriving (Show, Eq)
 
@@ -5507,7 +5508,7 @@ instance TF.ToHCL VpcDataSource where
         , TF.assign "tags" <$> TF.argument _tags
         ]
 
-instance HasCidrBlock VpcDataSource (TF.Argument Text) where
+instance HasCidrBlock VpcDataSource (TF.Argument TF.CIDR) where
     cidrBlock f s@VpcDataSource{..} =
         (\a -> s { _cidr_block = a } :: VpcDataSource)
              <$> f _cidr_block
@@ -5562,7 +5563,7 @@ instance HasComputedIpv6AssociationId VpcDataSource (TF.Attribute Text) where
         (\a -> s { _computed_ipv6_association_id = a } :: VpcDataSource)
              <$> f _computed_ipv6_association_id
 
-instance HasComputedIpv6CidrBlock VpcDataSource (TF.Attribute Text) where
+instance HasComputedIpv6CidrBlock VpcDataSource (TF.Attribute TF.CIDR) where
     computedIpv6CidrBlock f s@VpcDataSource{..} =
         (\a -> s { _computed_ipv6_cidr_block = a } :: VpcDataSource)
              <$> f _computed_ipv6_cidr_block
@@ -5590,17 +5591,17 @@ vpcDataSource =
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
 data VpcEndpointDataSource = VpcEndpointDataSource {
-      _id                       :: !(TF.Argument Text)
+      _id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
-    , _service_name             :: !(TF.Argument Text)
+    , _service_name :: !(TF.Argument Text)
     {- ^ (Optional) The AWS service name of the specific VPC Endpoint to retrieve. -}
-    , _state                    :: !(TF.Argument Text)
+    , _state :: !(TF.Argument Text)
     {- ^ (Optional) The state of the specific VPC Endpoint to retrieve. -}
-    , _vpc_id                   :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
-    , _computed_policy          :: !(TF.Attribute Text)
+    , _computed_policy :: !(TF.Attribute Text)
     {- ^ - The policy document associated with the VPC Endpoint. -}
-    , _computed_prefix_list_id  :: !(TF.Attribute Text)
+    , _computed_prefix_list_id :: !(TF.Attribute Text)
     {- ^ - The prefix list ID of the exposed service. -}
     , _computed_route_table_ids :: !(TF.Attribute Text)
     {- ^ - One or more route tables associated with the VPC Endpoint. -}
@@ -5669,7 +5670,7 @@ that can be specified when creating a VPC endpoint within the region
 configured in the provider.
 -}
 data VpcEndpointServiceDataSource = VpcEndpointServiceDataSource {
-      _service               :: !(TF.Argument Text)
+      _service :: !(TF.Argument Text)
     {- ^ (Required) The common name of the AWS service (e.g. @s3@ ). -}
     , _computed_service_name :: !(TF.Attribute Text)
     {- ^ - The service name of the AWS service that can be specified when creating a VPC endpoint. -}
@@ -5704,31 +5705,31 @@ The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
 data VpcPeeringConnectionDataSource = VpcPeeringConnectionDataSource {
-      _cidr_block         :: !(TF.Argument Text)
+      _cidr_block :: !(TF.Argument TF.CIDR)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _filter             :: !(TF.Argument Text)
+    , _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                 :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the specific VPC Peering Connection to retrieve. -}
-    , _owner_id           :: !(TF.Argument Text)
+    , _owner_id :: !(TF.Argument Text)
     {- ^ (Optional) The AWS account ID of the owner of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_cidr_block    :: !(TF.Argument Text)
+    , _peer_cidr_block :: !(TF.Argument TF.CIDR)
     {- ^ (Optional) The CIDR block of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_owner_id      :: !(TF.Argument Text)
+    , _peer_owner_id :: !(TF.Argument Text)
     {- ^ (Optional) The AWS account ID of the owner of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_region        :: !(TF.Argument Text)
+    , _peer_region :: !(TF.Argument TF.Region)
     {- ^ (Optional) The region of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_vpc_id        :: !(TF.Argument Text)
+    , _peer_vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _region             :: !(TF.Argument Text)
+    , _region :: !(TF.Argument TF.Region)
     {- ^ (Optional) The region of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _status             :: !(TF.Argument Text)
+    , _status :: !(TF.Argument Text)
     {- ^ (Optional) The status of the specific VPC Peering Connection to retrieve. -}
-    , _tags               :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC Peering Connection. -}
-    , _vpc_id             :: !(TF.Argument Text)
+    , _vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _computed_accepter  :: !(TF.Attribute Text)
+    , _computed_accepter :: !(TF.Attribute Text)
     {- ^ - A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options set for the accepter VPC. -}
     , _computed_requester :: !(TF.Attribute Text)
     {- ^ - A configuration block that describes [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options set for the requester VPC. -}
@@ -5750,7 +5751,7 @@ instance TF.ToHCL VpcPeeringConnectionDataSource where
         , TF.assign "vpc_id" <$> TF.argument _vpc_id
         ]
 
-instance HasCidrBlock VpcPeeringConnectionDataSource (TF.Argument Text) where
+instance HasCidrBlock VpcPeeringConnectionDataSource (TF.Argument TF.CIDR) where
     cidrBlock f s@VpcPeeringConnectionDataSource{..} =
         (\a -> s { _cidr_block = a } :: VpcPeeringConnectionDataSource)
              <$> f _cidr_block
@@ -5770,7 +5771,7 @@ instance HasOwnerId VpcPeeringConnectionDataSource (TF.Argument Text) where
         (\a -> s { _owner_id = a } :: VpcPeeringConnectionDataSource)
              <$> f _owner_id
 
-instance HasPeerCidrBlock VpcPeeringConnectionDataSource (TF.Argument Text) where
+instance HasPeerCidrBlock VpcPeeringConnectionDataSource (TF.Argument TF.CIDR) where
     peerCidrBlock f s@VpcPeeringConnectionDataSource{..} =
         (\a -> s { _peer_cidr_block = a } :: VpcPeeringConnectionDataSource)
              <$> f _peer_cidr_block
@@ -5780,7 +5781,7 @@ instance HasPeerOwnerId VpcPeeringConnectionDataSource (TF.Argument Text) where
         (\a -> s { _peer_owner_id = a } :: VpcPeeringConnectionDataSource)
              <$> f _peer_owner_id
 
-instance HasPeerRegion VpcPeeringConnectionDataSource (TF.Argument Text) where
+instance HasPeerRegion VpcPeeringConnectionDataSource (TF.Argument TF.Region) where
     peerRegion f s@VpcPeeringConnectionDataSource{..} =
         (\a -> s { _peer_region = a } :: VpcPeeringConnectionDataSource)
              <$> f _peer_region
@@ -5790,7 +5791,7 @@ instance HasPeerVpcId VpcPeeringConnectionDataSource (TF.Argument Text) where
         (\a -> s { _peer_vpc_id = a } :: VpcPeeringConnectionDataSource)
              <$> f _peer_vpc_id
 
-instance HasRegion VpcPeeringConnectionDataSource (TF.Argument Text) where
+instance HasRegion VpcPeeringConnectionDataSource (TF.Argument TF.Region) where
     region f s@VpcPeeringConnectionDataSource{..} =
         (\a -> s { _region = a } :: VpcPeeringConnectionDataSource)
              <$> f _region
@@ -5845,17 +5846,17 @@ vpcPeeringConnectionDataSource =
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
 data VpnGatewayDataSource = VpnGatewayDataSource {
-      _attached_vpc_id   :: !(TF.Argument Text)
+      _attached_vpc_id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
-    , _availability_zone :: !(TF.Argument Text)
+    , _availability_zone :: !(TF.Argument TF.Zone)
     {- ^ (Optional) The Availability Zone of the specific VPN Gateway to retrieve. -}
-    , _filter            :: !(TF.Argument Text)
+    , _filter :: !(TF.Argument Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                :: !(TF.Argument Text)
+    , _id :: !(TF.Argument Text)
     {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
-    , _state             :: !(TF.Argument Text)
+    , _state :: !(TF.Argument Text)
     {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
-    , _tags              :: !(TF.Argument TF.Tags)
+    , _tags :: !(TF.Argument TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
@@ -5874,7 +5875,7 @@ instance HasAttachedVpcId VpnGatewayDataSource (TF.Argument Text) where
         (\a -> s { _attached_vpc_id = a } :: VpnGatewayDataSource)
              <$> f _attached_vpc_id
 
-instance HasAvailabilityZone VpnGatewayDataSource (TF.Argument Text) where
+instance HasAvailabilityZone VpnGatewayDataSource (TF.Argument TF.Zone) where
     availabilityZone f s@VpnGatewayDataSource{..} =
         (\a -> s { _availability_zone = a } :: VpnGatewayDataSource)
              <$> f _availability_zone

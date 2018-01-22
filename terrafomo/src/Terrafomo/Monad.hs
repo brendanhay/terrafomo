@@ -39,6 +39,7 @@ module Terrafomo.Monad
 
     -- * References
     , Reference
+    , dependency
     , datasource
     , resource
     , output
@@ -65,6 +66,7 @@ import Data.Function         ((&))
 import Data.Functor.Identity (Identity (..))
 import Data.Map.Strict       (Map)
 import Data.Proxy            (Proxy (..))
+import Data.Set              (Set)
 import Data.Typeable         (Typeable)
 
 import Terrafomo.Syntax.DataSource (DataSource (..))
@@ -76,6 +78,7 @@ import Terrafomo.ValueMap          (ValueMap)
 
 import qualified Data.DList                   as DList
 import qualified Data.Map.Strict              as Map
+import qualified Data.Set                     as Set
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Traversable             as Traverse
 import qualified Lens.Micro                   as Lens
@@ -85,10 +88,9 @@ import qualified Terrafomo.Syntax.Name        as Name
 import qualified Terrafomo.ValueMap           as VMap
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
-import qualified Control.Monad.Error.Class  as MTL
-import qualified Control.Monad.Reader.Class as MTL
-import qualified Control.Monad.RWS.Class    as MTL
-
+import qualified Control.Monad.Error.Class         as MTL
+import qualified Control.Monad.Reader.Class        as MTL
+import qualified Control.Monad.RWS.Class           as MTL
 import qualified Control.Monad.Trans.Except        as Trans
 import qualified Control.Monad.Trans.Identity      as Trans
 import qualified Control.Monad.Trans.Maybe         as Trans
@@ -132,7 +134,7 @@ renderOutput :: TerraformOutput -> LText.Text
 renderOutput s =
       PP.displayT
     . PP.renderPretty 0.4 100
-    . HCL.render
+    . HCL.renderHCL
     . DList.toList
     $ DList.concat
          [ VMap.values (providers   s)
@@ -483,6 +485,9 @@ insertProvider mp =
 -- | Opaque Named Reference.
 data Reference p a = Reference !Key !a
     deriving (Show)
+
+dependency :: Reference p a -> Set Key
+dependency (Reference key _) = Set.singleton key
 
 datasource
     :: ( MonadTerraform m

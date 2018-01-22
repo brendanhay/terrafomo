@@ -49,6 +49,7 @@ module Terrafomo
     -- * Meta Parameters
     , HasMeta         (..)
     , Change          (..)
+    , dependency
 
     -- * DataSources
     , DataSource
@@ -74,10 +75,20 @@ module Terrafomo
     , (Lens..~)
     , (Lens.?~)
     , (Lens.%~)
+
+    -- * Domain Types
+    , IPAddress (..)
+    , BitMask   (..)
+    , CIDR      (..)
+
+    -- * Serialization
+    , HCL.ToHCL (..)
+    , HCL.renderHCL
     ) where
 
 import Terrafomo.Monad
 import Terrafomo.Syntax.DataSource
+import Terrafomo.Syntax.IP
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Provider
@@ -85,4 +96,5 @@ import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 
 import qualified Formatting
-import qualified Lens.Micro as Lens
+import qualified Lens.Micro           as Lens
+import qualified Terrafomo.Syntax.HCL as HCL

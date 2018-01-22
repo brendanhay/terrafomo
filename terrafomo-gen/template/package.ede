@@ -12,6 +12,9 @@ dependencies:
   - hashable
   - terrafomo
   - text
+{% for dep in provider.dependencies %}
+  - {{ dep.value }}
+{% endfor %}
 
 library:
   source-dirs:

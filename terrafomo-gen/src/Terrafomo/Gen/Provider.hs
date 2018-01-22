@@ -55,29 +55,33 @@ guessType rules name =
             _      -> Nothing
 
 data Provider a = Provider
-    { providerName     :: !Text
-    , providerOriginal :: !Text
-    , providerPackage  :: !(Maybe Text)
-    , providerDatatype :: !a
-    , providerRules    :: ![Rule]
+    { providerName         :: !Text
+    , providerOriginal     :: !Text
+    , providerPackage      :: !(Maybe Text)
+    , providerDependencies :: ![Text]
+    , providerDatatype     :: !a
+    , providerRules        :: ![Rule]
     } deriving (Show, Generic, Functor)
 
 instance FromJSON (Provider Bool) where
     parseJSON = JSON.withObject "Provider" $ \o -> do
-        providerName     <- o .:  "name"
-        providerOriginal <- o .:  "original"
-        providerPackage  <- o .:? "package"
-        providerDatatype <- o .:? "datatype" .!= False
-        providerRules    <- o .:? "rules"    .!= []
+        providerName         <- o .:  "name"
+        providerOriginal     <- o .:  "original"
+        providerPackage      <- o .:? "package"
+        providerDependencies <- o .:? "dependencies" .!= []
+        providerDatatype     <- o .:? "datatype"     .!= False
+        providerRules        <- o .:? "rules"        .!= []
         pure Provider {..}
 
 instance ToJSON (Provider (Maybe a)) where
     toJSON Provider{..} =
         JSON.object
-            [ "name"     .= providerName
-            , "original" .= providerOriginal
-            , "rules"    .= providerRules
-            , "type"     .=
+            [ "name"         .= providerName
+            , "original"     .= providerOriginal
+            , "package"      .= providerPackage
+            , "dependencies" .= providerDependencies
+            , "rules"        .= providerRules
+            , "type"         .=
                 if isJust providerDatatype
                     then providerName
                     else "Provider"

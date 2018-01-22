@@ -10,7 +10,7 @@ module Terrafomo.Syntax.HCL
     , Interpolate (..)
 
     -- * Pretty Printing
-    , render
+    , renderHCL
 
     -- * Serialization
     , ToHCL       (..)
@@ -31,17 +31,19 @@ module Terrafomo.Syntax.HCL
     ) where
 
 import Data.Int
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Monoid        ((<>))
-import Data.String        (IsString (fromString))
-import Data.Text          (Text)
+import Data.List.NonEmpty     (NonEmpty ((:|)))
+import Data.Maybe             (catMaybes)
+import Data.Monoid            ((<>))
+import Data.String            (IsString (fromString))
+import Data.Text              (Text)
+import Data.Text.Lazy.Builder (Builder)
 import Data.Word
 
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
 import Terrafomo.Syntax.DataSource
+import Terrafomo.Syntax.IP
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Resource
@@ -50,10 +52,14 @@ import Terrafomo.Syntax.Variable
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
 import qualified Data.Text                    as Text
+import qualified Data.Text.Lazy               as LText
+import qualified Data.Text.Lazy.Builder       as Build
+import qualified Data.Text.Lazy.Builder.Int   as Build
+import qualified Terrafomo.Format             as Format
 import qualified Terrafomo.Hash               as Hash
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
--- FIXME: JSON serialization instances
+-- FIXME: Alternative JSON serialization.
 
 data Id
     = Unquoted !Text
@@ -79,12 +85,9 @@ data Value
     | Number  !Integer
     | Float   !Double
     | String  !Interpolate
-    | HereDoc !Text !Text
-    | Comment !Text
+    | HereDoc !Text !Builder
+    | Comment !Builder
       deriving (Show, Eq)
-
--- instance IsString Value where
---     fromString = String . fromString
 
 instance Pretty Value where
     prettyList = pretty . List
@@ -108,24 +111,27 @@ instance Pretty Value where
         String x -> PP.dquotes (pretty x)
 
         HereDoc (pretty -> k) x ->
-            "<<" <> k <$$> pretty x <$$> k
+            "<<" <> k <$$> prettyBuild x <$$> k
 
-        Comment x -> "//" <+> pretty x
+        Comment x -> "//" <+> prettyBuild x
 
 data Interpolate
     = Chunks   ![Interpolate]
-    | Chunk    !String
-    | Template !String
+    | Chunk    !Builder
+    | Template !Builder
       deriving (Show, Eq)
 
 instance Pretty Interpolate where
     pretty = \case
         Chunks   xs -> PP.hcat (map pretty xs)
-        Chunk    s  -> pretty s
-        Template s  -> "${" <> pretty s <> "}"
+        Chunk    s  -> prettyBuild s
+        Template s  -> "${" <> prettyBuild s <> "}"
 
-render :: [Value] -> Doc
-render = PP.vcat . List.intersperse (PP.text " ") . map pretty
+renderHCL :: [Value] -> Doc
+renderHCL = PP.vcat . List.intersperse (PP.text " ") . map pretty
+
+prettyBuild :: Builder -> Doc
+prettyBuild = pretty . Build.toLazyText
 
 prettyBlock :: [Value] -> Doc
 prettyBlock xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
@@ -181,7 +187,7 @@ number = Number . fromIntegral
 float :: Real a => a -> Value
 float = Float . realToFrac
 
-string :: String -> Value
+string :: Builder -> Value
 string = String . Chunk
 
 class ToHCL a where
@@ -230,7 +236,13 @@ instance ToHCL Word64 where
     toHCL = number
 
 instance ToHCL Text where
-    toHCL = string . Text.unpack -- FIXME: return to using 'Text' for chunks.
+    toHCL = string . Build.fromText
+
+instance ToHCL LText.Text where
+    toHCL = string . Build.fromLazyText
+
+instance ToHCL Builder where
+    toHCL = string
 
 instance ToHCL Alias where
     toHCL = toHCL . Hash.human
@@ -240,6 +252,12 @@ instance ToHCL Name where
 
 instance ToHCL Key where
     toHCL (Key t n) = toHCL (fromType t <> "." <> fromName n)
+
+instance ToHCL IPAddress where
+    toHCL = string . Format.bprint Format.fip
+
+instance ToHCL CIDR where
+    toHCL = string . Format.bprint Format.fcidr
 
 instance ToHCL Change where
     toHCL = \case
