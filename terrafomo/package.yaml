@@ -61,3 +61,4 @@ library:
     - filepath
     - optparse-applicative
     - process
+    - lens

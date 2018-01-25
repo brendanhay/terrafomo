@@ -20,6 +20,7 @@ module Terrafomo.DNSMadeEasy.Provider
     (
     -- * Provider Datatype
       DNSMadeEasy (..)
+    , emptyDNSMadeEasy
 
     -- * Lenses
     , akey
@@ -32,13 +33,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.DNSMadeEasy.Types as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.IP         as TF
 import qualified Terrafomo.Syntax.Name       as TF
 import qualified Terrafomo.Syntax.Provider   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
@@ -51,11 +54,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSMadeEasy = DNSMadeEasy {
-      _akey       :: !(TF.Argument Text)
+      _akey       :: !(TF.Argument "akey" Text)
     {- ^ (Required) The DNSMadeEasy API key. This can also be specified with the @DME_AKEY@ shell environment variable. -}
-    , _skey       :: !(TF.Argument Text)
+    , _skey       :: !(TF.Argument "skey" Text)
     {- ^ (Required) The DNSMadeEasy Secret key. This can also be specified with the @DME_SKEY@ shell environment variable. -}
-    , _usesandbox :: !(TF.Argument Text)
+    , _usesandbox :: !(TF.Argument "usesandbox" Text)
     {- ^ (Optional) If true, the DNSMadeEasy sandbox will be used. This can also be specified with the @DME_USESANDBOX@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -65,52 +68,29 @@ instance TF.ToHCL DNSMadeEasy where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy DNSMadeEasy))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "akey" <$> TF.argument (_akey x)
-            , TF.assign "skey" <$> TF.argument (_skey x)
-            , TF.assign "usesandbox" <$> TF.argument (_usesandbox x)
+            , TF.argument (_akey x)
+            , TF.argument (_skey x)
+            , TF.argument (_usesandbox x)
             ]
 
-instance Semigroup DNSMadeEasy where
-    (<>) a b = DNSMadeEasy {
-          _akey = on (<>) _akey a b
-        , _skey = on (<>) _skey a b
-        , _usesandbox = on (<>) _usesandbox a b
-        }
-
-instance Monoid DNSMadeEasy where
-    mappend = (<>)
-    mempty  = DNSMadeEasy {
-            _akey = TF.Nil
-          , _skey = TF.Nil
-          , _usesandbox = TF.Nil
-        }
+emptyDNSMadeEasy :: DNSMadeEasy
+emptyDNSMadeEasy = DNSMadeEasy {
+        _akey = TF.Nil
+      , _skey = TF.Nil
+      , _usesandbox = TF.Nil
+    }
 
 instance TF.IsProvider DNSMadeEasy where
     type ProviderName DNSMadeEasy = "dme"
 
-akey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> DNSMadeEasy
-    -> f DNSMadeEasy
-akey f s =
-        (\a -> s { _akey = a } :: DNSMadeEasy)
-             <$> f (_akey s)
+akey :: Lens' DNSMadeEasy (TF.Argument "akey" Text)
+akey =
+    lens _akey (\s a -> s { _akey = a })
 
-skey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> DNSMadeEasy
-    -> f DNSMadeEasy
-skey f s =
-        (\a -> s { _skey = a } :: DNSMadeEasy)
-             <$> f (_skey s)
+skey :: Lens' DNSMadeEasy (TF.Argument "skey" Text)
+skey =
+    lens _skey (\s a -> s { _skey = a })
 
-usesandbox
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> DNSMadeEasy
-    -> f DNSMadeEasy
-usesandbox f s =
-        (\a -> s { _usesandbox = a } :: DNSMadeEasy)
-             <$> f (_usesandbox s)
+usesandbox :: Lens' DNSMadeEasy (TF.Argument "usesandbox" Text)
+usesandbox =
+    lens _usesandbox (\s a -> s { _usesandbox = a })

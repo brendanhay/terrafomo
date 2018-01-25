@@ -20,6 +20,7 @@ module Terrafomo.MySQL.Provider
     (
     -- * Provider Datatype
       MySQL (..)
+    , emptyMySQL
 
     -- * Lenses
     , endpoint
@@ -32,13 +33,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.MySQL.Types     as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,11 +54,11 @@ server. Use the navigation to the left to read about the available
 resources.
 -}
 data MySQL = MySQL {
-      _endpoint :: !(TF.Argument Text)
+      _endpoint :: !(TF.Argument "endpoint" Text)
     {- ^ (Required) The address of the MySQL server to use. Most often a "hostname:port" pair, but may also be an absolute path to a Unix socket when the host OS is Unix-compatible. -}
-    , _password :: !(TF.Argument Text)
+    , _password :: !(TF.Argument "password" Text)
     {- ^ (Optional) Password for the given user, if that user has a password. -}
-    , _username :: !(TF.Argument Text)
+    , _username :: !(TF.Argument "username" Text)
     {- ^ (Required) Username to use to authenticate with the server. -}
     } deriving (Show, Eq, Generic)
 
@@ -65,52 +68,29 @@ instance TF.ToHCL MySQL where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy MySQL))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "endpoint" <$> TF.argument (_endpoint x)
-            , TF.assign "password" <$> TF.argument (_password x)
-            , TF.assign "username" <$> TF.argument (_username x)
+            , TF.argument (_endpoint x)
+            , TF.argument (_password x)
+            , TF.argument (_username x)
             ]
 
-instance Semigroup MySQL where
-    (<>) a b = MySQL {
-          _endpoint = on (<>) _endpoint a b
-        , _password = on (<>) _password a b
-        , _username = on (<>) _username a b
-        }
-
-instance Monoid MySQL where
-    mappend = (<>)
-    mempty  = MySQL {
-            _endpoint = TF.Nil
-          , _password = TF.Nil
-          , _username = TF.Nil
-        }
+emptyMySQL :: MySQL
+emptyMySQL = MySQL {
+        _endpoint = TF.Nil
+      , _password = TF.Nil
+      , _username = TF.Nil
+    }
 
 instance TF.IsProvider MySQL where
     type ProviderName MySQL = "mysql"
 
-endpoint
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> MySQL
-    -> f MySQL
-endpoint f s =
-        (\a -> s { _endpoint = a } :: MySQL)
-             <$> f (_endpoint s)
+endpoint :: Lens' MySQL (TF.Argument "endpoint" Text)
+endpoint =
+    lens _endpoint (\s a -> s { _endpoint = a })
 
-password
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> MySQL
-    -> f MySQL
-password f s =
-        (\a -> s { _password = a } :: MySQL)
-             <$> f (_password s)
+password :: Lens' MySQL (TF.Argument "password" Text)
+password =
+    lens _password (\s a -> s { _password = a })
 
-username
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> MySQL
-    -> f MySQL
-username f s =
-        (\a -> s { _username = a } :: MySQL)
-             <$> f (_username s)
+username :: Lens' MySQL (TF.Argument "username" Text)
+username =
+    lens _username (\s a -> s { _username = a })

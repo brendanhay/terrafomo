@@ -20,6 +20,7 @@ module Terrafomo.VCloudDirector.Provider
     (
     -- * Provider Datatype
       VCloudDirector (..)
+    , emptyVCloudDirector
 
     -- * Lenses
     , allowUnverifiedSsl
@@ -36,12 +37,14 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Syntax.HCL           as TF
+import qualified Terrafomo.Syntax.IP            as TF
 import qualified Terrafomo.Syntax.Name          as TF
 import qualified Terrafomo.Syntax.Provider      as TF
 import qualified Terrafomo.Syntax.Variable      as TF
@@ -57,19 +60,19 @@ Director Provider currently represents initial support and therefore may
 undergo significant changes as the community improves it.
 -}
 data VCloudDirector = VCloudDirector {
-      _allow_unverified_ssl :: !(TF.Argument Text)
+      _allow_unverified_ssl :: !(TF.Argument "allow_unverified_ssl" Text)
     {- ^ (Optional) Boolean that can be set to true to disable SSL certificate verification. This should be used with care as it could allow an attacker to intercept your auth token. If omitted, default value is false. Can also be specified with the @VCD_ALLOW_UNVERIFIED_SSL@ environment variable. -}
-    , _max_retry_timeout    :: !(TF.Argument Text)
+    , _max_retry_timeout    :: !(TF.Argument "max_retry_timeout" Text)
     {- ^ (Optional) This provides you with the ability to specify the maximum amount of time (in seconds) you are prepared to wait for interactions on resources managed by vCloud Director to be successful. If a resource action fails, the action will be retried (as long as it is still within the @max_retry_timeout@ value) to try and ensure success. Defaults to 60 seconds if not set. Can also be specified with the @VCD_MAX_RETRY_TIMEOUT@ environment variable. -}
-    , _org                  :: !(TF.Argument Text)
+    , _org                  :: !(TF.Argument "org" Text)
     {- ^ (Required) This is the vCloud Director Org on which to run API operations. Can also be specified with the @VCD_ORG@ environment variable. -}
-    , _password             :: !(TF.Argument Text)
+    , _password             :: !(TF.Argument "password" Text)
     {- ^ (Required) This is the password for vCloud Director API operations. Can also be specified with the @VCD_PASSWORD@ environment variable. -}
-    , _url                  :: !(TF.Argument Text)
+    , _url                  :: !(TF.Argument "url" Text)
     {- ^ (Required) This is the URL for the vCloud Director API endpoint. e.g. https://server.domain.com/api. Can also be specified with the @VCD_URL@ environment variable. -}
-    , _user                 :: !(TF.Argument Text)
+    , _user                 :: !(TF.Argument "user" Text)
     {- ^ (Required) This is the username for vCloud Director API operations. Can also be specified with the @VCD_USER@ environment variable. -}
-    , _vdc                  :: !(TF.Argument Text)
+    , _vdc                  :: !(TF.Argument "vdc" Text)
     {- ^ (Optional) This is the virtual datacenter within vCloud Director to run API operations against. If not set the plugin will select the first virtual datacenter available to your Org. Can also be specified with the @VCD_VDC@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,100 +82,53 @@ instance TF.ToHCL VCloudDirector where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy VCloudDirector))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "allow_unverified_ssl" <$> TF.argument (_allow_unverified_ssl x)
-            , TF.assign "max_retry_timeout" <$> TF.argument (_max_retry_timeout x)
-            , TF.assign "org" <$> TF.argument (_org x)
-            , TF.assign "password" <$> TF.argument (_password x)
-            , TF.assign "url" <$> TF.argument (_url x)
-            , TF.assign "user" <$> TF.argument (_user x)
-            , TF.assign "vdc" <$> TF.argument (_vdc x)
+            , TF.argument (_allow_unverified_ssl x)
+            , TF.argument (_max_retry_timeout x)
+            , TF.argument (_org x)
+            , TF.argument (_password x)
+            , TF.argument (_url x)
+            , TF.argument (_user x)
+            , TF.argument (_vdc x)
             ]
 
-instance Semigroup VCloudDirector where
-    (<>) a b = VCloudDirector {
-          _allow_unverified_ssl = on (<>) _allow_unverified_ssl a b
-        , _max_retry_timeout = on (<>) _max_retry_timeout a b
-        , _org = on (<>) _org a b
-        , _password = on (<>) _password a b
-        , _url = on (<>) _url a b
-        , _user = on (<>) _user a b
-        , _vdc = on (<>) _vdc a b
-        }
-
-instance Monoid VCloudDirector where
-    mappend = (<>)
-    mempty  = VCloudDirector {
-            _allow_unverified_ssl = TF.Nil
-          , _max_retry_timeout = TF.Nil
-          , _org = TF.Nil
-          , _password = TF.Nil
-          , _url = TF.Nil
-          , _user = TF.Nil
-          , _vdc = TF.Nil
-        }
+emptyVCloudDirector :: VCloudDirector
+emptyVCloudDirector = VCloudDirector {
+        _allow_unverified_ssl = TF.Nil
+      , _max_retry_timeout = TF.Nil
+      , _org = TF.Nil
+      , _password = TF.Nil
+      , _url = TF.Nil
+      , _user = TF.Nil
+      , _vdc = TF.Nil
+    }
 
 instance TF.IsProvider VCloudDirector where
     type ProviderName VCloudDirector = "vcd"
 
-allowUnverifiedSsl
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-allowUnverifiedSsl f s =
-        (\a -> s { _allow_unverified_ssl = a } :: VCloudDirector)
-             <$> f (_allow_unverified_ssl s)
+allowUnverifiedSsl :: Lens' VCloudDirector (TF.Argument "allow_unverified_ssl" Text)
+allowUnverifiedSsl =
+    lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
 
-maxRetryTimeout
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-maxRetryTimeout f s =
-        (\a -> s { _max_retry_timeout = a } :: VCloudDirector)
-             <$> f (_max_retry_timeout s)
+maxRetryTimeout :: Lens' VCloudDirector (TF.Argument "max_retry_timeout" Text)
+maxRetryTimeout =
+    lens _max_retry_timeout (\s a -> s { _max_retry_timeout = a })
 
-org
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-org f s =
-        (\a -> s { _org = a } :: VCloudDirector)
-             <$> f (_org s)
+org :: Lens' VCloudDirector (TF.Argument "org" Text)
+org =
+    lens _org (\s a -> s { _org = a })
 
-password
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-password f s =
-        (\a -> s { _password = a } :: VCloudDirector)
-             <$> f (_password s)
+password :: Lens' VCloudDirector (TF.Argument "password" Text)
+password =
+    lens _password (\s a -> s { _password = a })
 
-url
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-url f s =
-        (\a -> s { _url = a } :: VCloudDirector)
-             <$> f (_url s)
+url :: Lens' VCloudDirector (TF.Argument "url" Text)
+url =
+    lens _url (\s a -> s { _url = a })
 
-user
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-user f s =
-        (\a -> s { _user = a } :: VCloudDirector)
-             <$> f (_user s)
+user :: Lens' VCloudDirector (TF.Argument "user" Text)
+user =
+    lens _user (\s a -> s { _user = a })
 
-vdc
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> VCloudDirector
-    -> f VCloudDirector
-vdc f s =
-        (\a -> s { _vdc = a } :: VCloudDirector)
-             <$> f (_vdc s)
+vdc :: Lens' VCloudDirector (TF.Argument "vdc" Text)
+vdc =
+    lens _vdc (\s a -> s { _vdc = a })

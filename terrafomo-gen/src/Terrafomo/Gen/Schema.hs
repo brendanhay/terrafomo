@@ -7,12 +7,13 @@
 
 module Terrafomo.Gen.Schema where
 
-import Control.Arrow   ((&&&))
 import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:), (.:?), (.=))
+import Data.Bifunctor  (bimap)
 import Data.Function   (on)
 import Data.Map.Strict (Map)
 import Data.Monoid     (Last (..))
 import Data.Semigroup  (Semigroup ((<>)))
+import Data.Set        (Set)
 import Data.Text       (Text)
 
 import GHC.Generics (Generic)
@@ -22,6 +23,7 @@ import Terrafomo.Gen.Text
 
 import qualified Data.Aeson         as JSON
 import qualified Data.Map.Strict    as Map
+import qualified Data.Set           as Set
 import qualified Terrafomo.Gen.JSON as JSON
 
 -- Syntax Types
@@ -47,30 +49,45 @@ data Field = Field
     { fieldClass  :: !Text
     , fieldMethod :: !Text
     , fieldLabel  :: !Text
+    , fieldName   :: !(Last Text)
     , fieldType   :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Field where
     toJSON = JSON.genericToJSON (JSON.options "field")
 
-getFields :: Schema -> [Field]
+getFields :: Schema -> ([Field], [Field])
 getFields Schema{..} =
-    let go name wrap ty =
-            Field { fieldClass  = fieldClassName  name
-                  , fieldMethod = fieldMethodName name
-                  , fieldLabel  = name
-                  , fieldType   = (\x -> "(" <> wrap <> " " <> x <> ")") <$> ty
-                  }
-     in map (\(k, v) -> go k "TF.Argument"  (argType  v))
-            (Map.toList schemaArguments)
-     <> map (\(k, v) -> go k "TF.Attribute" (attrType v))
-            (Map.toList schemaAttributes)
+    ( map (\(k, v) -> go k (argName  v) (argType  v)) (Map.toList schemaArguments)
+    , map (\(k, v) -> go k (attrName v) (attrType v)) (Map.toList schemaAttributes)
+    )
+  where
+    go k name ty =
+        Field { fieldClass  = fieldClassName  k
+              , fieldMethod = fieldMethodName k
+              , fieldLabel  = k
+              , fieldName   = name
+              , fieldType   = ty
+              }
 
-getClasses :: [Schema] -> Map Text Text
+data Class = Class
+    { className   :: !Text
+    , classMethod :: !Text
+    , classSymbol :: !(Last Text)
+    } deriving (Show, Eq, Ord, Generic)
+
+instance ToJSON Class where
+    toJSON = JSON.genericToJSON (JSON.options "class")
+
+getClasses :: [Schema] -> (Set Class, Set Class)
 getClasses =
-      Map.fromList
-    . map (fieldClass &&& fieldMethod)
-    . concatMap getFields
+    bimap Set.unions Set.unions . unzip . map (bimap go go . getFields)
+  where
+    go = Set.fromList . map (\x ->
+        Class { className   = fieldClass  x
+              , classMethod = fieldMethod x
+              , classSymbol = fieldName   x
+              })
 
 instance Semigroup Schema where
     (<>) parsed saved = Schema
@@ -86,15 +103,18 @@ instance Semigroup Schema where
         }
 
 instance ToJSON Schema where
-    toJSON x@Schema{..} = JSON.object
-        [ "name"       .= schemaName
-        , "about"      .= schemaAbout
-        , "examples"   .= schemaExamples
-        , "deprecated" .= schemaDeprecated
-        , "arguments"  .= schemaArguments
-        , "attributes" .= schemaAttributes
-        , "fields"     .= getFields x
-        ]
+    toJSON x@Schema{..} =
+        let (argFields, attrFields) = getFields x
+         in JSON.object
+            [ "name"            .= schemaName
+            , "about"           .= schemaAbout
+            , "examples"        .= schemaExamples
+            , "deprecated"      .= schemaDeprecated
+            , "arguments"       .= schemaArguments
+            , "attributes"      .= schemaAttributes
+            , "argumentFields"  .= argFields
+            , "attributeFields" .= attrFields
+            ]
 
 instance FromJSON Schema where
     parseJSON = JSON.withObject "Schema" $ \o -> do

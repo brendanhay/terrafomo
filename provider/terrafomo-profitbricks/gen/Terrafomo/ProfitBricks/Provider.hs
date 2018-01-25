@@ -20,6 +20,7 @@ module Terrafomo.ProfitBricks.Provider
     (
     -- * Provider Datatype
       ProfitBricks (..)
+    , emptyProfitBricks
 
     -- * Lenses
     ) where
@@ -29,13 +30,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.ProfitBricks.Types as TF
 import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.IP          as TF
 import qualified Terrafomo.Syntax.Name        as TF
 import qualified Terrafomo.Syntax.Provider    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
@@ -57,14 +60,9 @@ instance TF.ToHCL ProfitBricks where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup ProfitBricks where
-    (<>) a b = ProfitBricks {
-        }
-
-instance Monoid ProfitBricks where
-    mappend = (<>)
-    mempty  = ProfitBricks {
-        }
+emptyProfitBricks :: ProfitBricks
+emptyProfitBricks = ProfitBricks {
+    }
 
 instance TF.IsProvider ProfitBricks where
     type ProviderName ProfitBricks = "profitbricks"

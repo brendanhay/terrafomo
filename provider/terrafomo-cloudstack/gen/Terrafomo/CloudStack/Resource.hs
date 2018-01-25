@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -95,33 +98,13 @@ module Terrafomo.CloudStack.Resource
     , vpnGatewayResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasAclId (..)
     , HasAffinityGroupIds (..)
     , HasAffinityGroupNames (..)
     , HasAlgorithm (..)
     , HasAttach (..)
     , HasCidr (..)
-    , HasComputedDescription (..)
-    , HasComputedDeviceId (..)
-    , HasComputedDisplayName (..)
-    , HasComputedDisplayText (..)
-    , HasComputedDpd (..)
-    , HasComputedEspLifetime (..)
-    , HasComputedFingerprint (..)
-    , HasComputedId (..)
-    , HasComputedIkeLifetime (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIsDynamicallyScalable (..)
-    , HasComputedIsExtractable (..)
-    , HasComputedIsFeatured (..)
-    , HasComputedIsPublic (..)
-    , HasComputedIsReady (..)
-    , HasComputedNetworkDomain (..)
-    , HasComputedPasswordEnabled (..)
-    , HasComputedPrivateKey (..)
-    , HasComputedPublicIp (..)
-    , HasComputedSourceNatIp (..)
-    , HasComputedVmGuestIp (..)
     , HasCustomerGatewayId (..)
     , HasDescription (..)
     , HasDeviceId (..)
@@ -189,18 +172,43 @@ module Terrafomo.CloudStack.Resource
     , HasVpcOffering (..)
     , HasVpnGatewayId (..)
     , HasZone (..)
+
+    -- ** Computed Attributes
+    , HasComputedDescription (..)
+    , HasComputedDeviceId (..)
+    , HasComputedDisplayName (..)
+    , HasComputedDisplayText (..)
+    , HasComputedDpd (..)
+    , HasComputedEspLifetime (..)
+    , HasComputedFingerprint (..)
+    , HasComputedId (..)
+    , HasComputedIkeLifetime (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIsDynamicallyScalable (..)
+    , HasComputedIsExtractable (..)
+    , HasComputedIsFeatured (..)
+    , HasComputedIsPublic (..)
+    , HasComputedIsReady (..)
+    , HasComputedNetworkDomain (..)
+    , HasComputedPasswordEnabled (..)
+    , HasComputedPrivateKey (..)
+    , HasComputedPublicIp (..)
+    , HasComputedSourceNatIp (..)
+    , HasComputedVmGuestIp (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.CloudStack.Provider as TF
 import qualified Terrafomo.CloudStack.Types    as TF
 import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.IP           as TF
 import qualified Terrafomo.Syntax.Meta         as TF (configuration)
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Resource     as TF
@@ -211,57 +219,51 @@ import qualified Terrafomo.Syntax.Variable     as TF
 Creates an affinity group.
 -}
 data AffinityGroupResource = AffinityGroupResource {
-      _description          :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the affinity group. -}
-    , _name                 :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the affinity group. Changing this forces a new resource to be created. -}
-    , _project              :: !(TF.Argument Text)
+    , _project     :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to register this affinity group to. Changing this forces a new resource to be created. -}
-    , _type'                :: !(TF.Argument Text)
+    , _type'       :: !(TF.Argument "type" Text)
     {- ^ (Required) The affinity group type. Changing this forces a new resource to be created. -}
-    , _computed_description :: !(TF.Attribute Text)
-    {- ^ - The description of the affinity group. -}
-    , _computed_id          :: !(TF.Attribute Text)
-    {- ^ - The id of the affinity group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AffinityGroupResource where
     toHCL AffinityGroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _description
+        , TF.argument _name
+        , TF.argument _project
+        , TF.argument _type'
         ]
 
-instance HasDescription AffinityGroupResource (TF.Argument Text) where
-    description f s@AffinityGroupResource{..} =
-        (\a -> s { _description = a } :: AffinityGroupResource)
-             <$> f _description
+instance HasDescription AffinityGroupResource Text where
+    description =
+        lens (_description :: AffinityGroupResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: AffinityGroupResource)
 
-instance HasName AffinityGroupResource (TF.Argument Text) where
-    name f s@AffinityGroupResource{..} =
-        (\a -> s { _name = a } :: AffinityGroupResource)
-             <$> f _name
+instance HasName AffinityGroupResource Text where
+    name =
+        lens (_name :: AffinityGroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: AffinityGroupResource)
 
-instance HasProject AffinityGroupResource (TF.Argument Text) where
-    project f s@AffinityGroupResource{..} =
-        (\a -> s { _project = a } :: AffinityGroupResource)
-             <$> f _project
+instance HasProject AffinityGroupResource Text where
+    project =
+        lens (_project :: AffinityGroupResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: AffinityGroupResource)
 
-instance HasType' AffinityGroupResource (TF.Argument Text) where
-    type' f s@AffinityGroupResource{..} =
-        (\a -> s { _type' = a } :: AffinityGroupResource)
-             <$> f _type'
+instance HasType' AffinityGroupResource Text where
+    type' =
+        lens (_type' :: AffinityGroupResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: AffinityGroupResource)
 
-instance HasComputedDescription AffinityGroupResource (TF.Attribute Text) where
-    computedDescription f s@AffinityGroupResource{..} =
-        (\a -> s { _computed_description = a } :: AffinityGroupResource)
-             <$> f _computed_description
+instance HasComputedDescription AffinityGroupResource Text where
+    computedDescription =
+        to (\_  -> TF.Compute "description")
 
-instance HasComputedId AffinityGroupResource (TF.Attribute Text) where
-    computedId f s@AffinityGroupResource{..} =
-        (\a -> s { _computed_id = a } :: AffinityGroupResource)
-             <$> f _computed_id
+instance HasComputedId AffinityGroupResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 affinityGroupResource :: TF.Resource TF.CloudStack AffinityGroupResource
 affinityGroupResource =
@@ -271,8 +273,6 @@ affinityGroupResource =
             , _name = TF.Nil
             , _project = TF.Nil
             , _type' = TF.Nil
-            , _computed_description = TF.Compute "description"
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_disk@ CloudStack resource.
@@ -281,97 +281,91 @@ Creates a disk volume from a disk offering. This disk volume will be
 attached to a virtual machine if the optional parameters are configured.
 -}
 data DiskResource = DiskResource {
-      _attach             :: !(TF.Argument Text)
+      _attach             :: !(TF.Argument "attach" Text)
     {- ^ (Optional) Determines whether or not to attach the disk volume to a virtual machine (defaults false). -}
-    , _device_id          :: !(TF.Argument Text)
+    , _device_id          :: !(TF.Argument "device_id" Text)
     {- ^ (Optional) The device ID to map the disk volume to within the guest OS. -}
-    , _disk_offering      :: !(TF.Argument Text)
+    , _disk_offering      :: !(TF.Argument "disk_offering" Text)
     {- ^ (Required) The name or ID of the disk offering to use for this disk volume. -}
-    , _name               :: !(TF.Argument Text)
+    , _name               :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the disk volume. Changing this forces a new resource to be created. -}
-    , _project            :: !(TF.Argument Text)
+    , _project            :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _shrink_ok          :: !(TF.Argument Text)
+    , _shrink_ok          :: !(TF.Argument "shrink_ok" Text)
     {- ^ (Optional) Verifies if the disk volume is allowed to shrink when resizing (defaults false). -}
-    , _size               :: !(TF.Argument Text)
+    , _size               :: !(TF.Argument "size" Text)
     {- ^ (Optional) The size of the disk volume in gigabytes. -}
-    , _virtual_machine_id :: !(TF.Argument Text)
+    , _virtual_machine_id :: !(TF.Argument "virtual_machine_id" Text)
     {- ^ (Optional) The ID of the virtual machine to which you want to attach the disk volume. -}
-    , _zone               :: !(TF.Argument Text)
+    , _zone               :: !(TF.Argument "zone" Text)
     {- ^ (Required) The name or ID of the zone where this disk volume will be available. Changing this forces a new resource to be created. -}
-    , _computed_device_id :: !(TF.Attribute Text)
-    {- ^ - The device ID the disk volume is mapped to within the guest OS. -}
-    , _computed_id        :: !(TF.Attribute Text)
-    {- ^ - The ID of the disk volume. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DiskResource where
     toHCL DiskResource{..} = TF.block $ catMaybes
-        [ TF.assign "attach" <$> TF.argument _attach
-        , TF.assign "device_id" <$> TF.argument _device_id
-        , TF.assign "disk_offering" <$> TF.argument _disk_offering
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "shrink_ok" <$> TF.argument _shrink_ok
-        , TF.assign "size" <$> TF.argument _size
-        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
-        , TF.assign "zone" <$> TF.argument _zone
+        [ TF.argument _attach
+        , TF.argument _device_id
+        , TF.argument _disk_offering
+        , TF.argument _name
+        , TF.argument _project
+        , TF.argument _shrink_ok
+        , TF.argument _size
+        , TF.argument _virtual_machine_id
+        , TF.argument _zone
         ]
 
-instance HasAttach DiskResource (TF.Argument Text) where
-    attach f s@DiskResource{..} =
-        (\a -> s { _attach = a } :: DiskResource)
-             <$> f _attach
+instance HasAttach DiskResource Text where
+    attach =
+        lens (_attach :: DiskResource -> TF.Argument "attach" Text)
+             (\s a -> s { _attach = a } :: DiskResource)
 
-instance HasDeviceId DiskResource (TF.Argument Text) where
-    deviceId f s@DiskResource{..} =
-        (\a -> s { _device_id = a } :: DiskResource)
-             <$> f _device_id
+instance HasDeviceId DiskResource Text where
+    deviceId =
+        lens (_device_id :: DiskResource -> TF.Argument "device_id" Text)
+             (\s a -> s { _device_id = a } :: DiskResource)
 
-instance HasDiskOffering DiskResource (TF.Argument Text) where
-    diskOffering f s@DiskResource{..} =
-        (\a -> s { _disk_offering = a } :: DiskResource)
-             <$> f _disk_offering
+instance HasDiskOffering DiskResource Text where
+    diskOffering =
+        lens (_disk_offering :: DiskResource -> TF.Argument "disk_offering" Text)
+             (\s a -> s { _disk_offering = a } :: DiskResource)
 
-instance HasName DiskResource (TF.Argument Text) where
-    name f s@DiskResource{..} =
-        (\a -> s { _name = a } :: DiskResource)
-             <$> f _name
+instance HasName DiskResource Text where
+    name =
+        lens (_name :: DiskResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DiskResource)
 
-instance HasProject DiskResource (TF.Argument Text) where
-    project f s@DiskResource{..} =
-        (\a -> s { _project = a } :: DiskResource)
-             <$> f _project
+instance HasProject DiskResource Text where
+    project =
+        lens (_project :: DiskResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: DiskResource)
 
-instance HasShrinkOk DiskResource (TF.Argument Text) where
-    shrinkOk f s@DiskResource{..} =
-        (\a -> s { _shrink_ok = a } :: DiskResource)
-             <$> f _shrink_ok
+instance HasShrinkOk DiskResource Text where
+    shrinkOk =
+        lens (_shrink_ok :: DiskResource -> TF.Argument "shrink_ok" Text)
+             (\s a -> s { _shrink_ok = a } :: DiskResource)
 
-instance HasSize DiskResource (TF.Argument Text) where
-    size f s@DiskResource{..} =
-        (\a -> s { _size = a } :: DiskResource)
-             <$> f _size
+instance HasSize DiskResource Text where
+    size =
+        lens (_size :: DiskResource -> TF.Argument "size" Text)
+             (\s a -> s { _size = a } :: DiskResource)
 
-instance HasVirtualMachineId DiskResource (TF.Argument Text) where
-    virtualMachineId f s@DiskResource{..} =
-        (\a -> s { _virtual_machine_id = a } :: DiskResource)
-             <$> f _virtual_machine_id
+instance HasVirtualMachineId DiskResource Text where
+    virtualMachineId =
+        lens (_virtual_machine_id :: DiskResource -> TF.Argument "virtual_machine_id" Text)
+             (\s a -> s { _virtual_machine_id = a } :: DiskResource)
 
-instance HasZone DiskResource (TF.Argument Text) where
-    zone f s@DiskResource{..} =
-        (\a -> s { _zone = a } :: DiskResource)
-             <$> f _zone
+instance HasZone DiskResource Text where
+    zone =
+        lens (_zone :: DiskResource -> TF.Argument "zone" Text)
+             (\s a -> s { _zone = a } :: DiskResource)
 
-instance HasComputedDeviceId DiskResource (TF.Attribute Text) where
-    computedDeviceId f s@DiskResource{..} =
-        (\a -> s { _computed_device_id = a } :: DiskResource)
-             <$> f _computed_device_id
+instance HasComputedDeviceId DiskResource Text where
+    computedDeviceId =
+        to (\_  -> TF.Compute "device_id")
 
-instance HasComputedId DiskResource (TF.Attribute Text) where
-    computedId f s@DiskResource{..} =
-        (\a -> s { _computed_id = a } :: DiskResource)
-             <$> f _computed_id
+instance HasComputedId DiskResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 diskResource :: TF.Resource TF.CloudStack DiskResource
 diskResource =
@@ -386,8 +380,6 @@ diskResource =
             , _size = TF.Nil
             , _virtual_machine_id = TF.Nil
             , _zone = TF.Nil
-            , _computed_device_id = TF.Compute "device_id"
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_egress_firewall@ CloudStack resource.
@@ -395,50 +387,47 @@ diskResource =
 Creates egress firewall rules for a given network.
 -}
 data EgressFirewallResource = EgressFirewallResource {
-      _managed     :: !(TF.Argument Text)
+      _managed     :: !(TF.Argument "managed" Text)
     {- ^ (Optional) USE WITH CAUTION! If enabled all the egress firewall rules for this network will be managed by this resource. This means it will delete all firewall rules that are not in your config! (defaults false) -}
-    , _network_id  :: !(TF.Argument Text)
+    , _network_id  :: !(TF.Argument "network_id" Text)
     {- ^ (Required) The network ID for which to create the egress firewall rules. Changing this forces a new resource to be created. -}
-    , _parallelism :: !(TF.Argument Text)
+    , _parallelism :: !(TF.Argument "parallelism" Text)
     {- ^ (Optional) Specifies how much rules will be created or deleted concurrently. (defaults 2) -}
-    , _rule        :: !(TF.Argument Text)
+    , _rule        :: !(TF.Argument "rule" Text)
     {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
-    , _computed_id :: !(TF.Attribute Text)
-    {- ^ - The network ID for which the egress firewall rules are created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL EgressFirewallResource where
     toHCL EgressFirewallResource{..} = TF.block $ catMaybes
-        [ TF.assign "managed" <$> TF.argument _managed
-        , TF.assign "network_id" <$> TF.argument _network_id
-        , TF.assign "parallelism" <$> TF.argument _parallelism
-        , TF.assign "rule" <$> TF.argument _rule
+        [ TF.argument _managed
+        , TF.argument _network_id
+        , TF.argument _parallelism
+        , TF.argument _rule
         ]
 
-instance HasManaged EgressFirewallResource (TF.Argument Text) where
-    managed f s@EgressFirewallResource{..} =
-        (\a -> s { _managed = a } :: EgressFirewallResource)
-             <$> f _managed
+instance HasManaged EgressFirewallResource Text where
+    managed =
+        lens (_managed :: EgressFirewallResource -> TF.Argument "managed" Text)
+             (\s a -> s { _managed = a } :: EgressFirewallResource)
 
-instance HasNetworkId EgressFirewallResource (TF.Argument Text) where
-    networkId f s@EgressFirewallResource{..} =
-        (\a -> s { _network_id = a } :: EgressFirewallResource)
-             <$> f _network_id
+instance HasNetworkId EgressFirewallResource Text where
+    networkId =
+        lens (_network_id :: EgressFirewallResource -> TF.Argument "network_id" Text)
+             (\s a -> s { _network_id = a } :: EgressFirewallResource)
 
-instance HasParallelism EgressFirewallResource (TF.Argument Text) where
-    parallelism f s@EgressFirewallResource{..} =
-        (\a -> s { _parallelism = a } :: EgressFirewallResource)
-             <$> f _parallelism
+instance HasParallelism EgressFirewallResource Text where
+    parallelism =
+        lens (_parallelism :: EgressFirewallResource -> TF.Argument "parallelism" Text)
+             (\s a -> s { _parallelism = a } :: EgressFirewallResource)
 
-instance HasRule EgressFirewallResource (TF.Argument Text) where
-    rule f s@EgressFirewallResource{..} =
-        (\a -> s { _rule = a } :: EgressFirewallResource)
-             <$> f _rule
+instance HasRule EgressFirewallResource Text where
+    rule =
+        lens (_rule :: EgressFirewallResource -> TF.Argument "rule" Text)
+             (\s a -> s { _rule = a } :: EgressFirewallResource)
 
-instance HasComputedId EgressFirewallResource (TF.Attribute Text) where
-    computedId f s@EgressFirewallResource{..} =
-        (\a -> s { _computed_id = a } :: EgressFirewallResource)
-             <$> f _computed_id
+instance HasComputedId EgressFirewallResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 egressFirewallResource :: TF.Resource TF.CloudStack EgressFirewallResource
 egressFirewallResource =
@@ -448,7 +437,6 @@ egressFirewallResource =
             , _network_id = TF.Nil
             , _parallelism = TF.Nil
             , _rule = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_firewall@ CloudStack resource.
@@ -456,50 +444,47 @@ egressFirewallResource =
 Creates firewall rules for a given IP address.
 -}
 data FirewallResource = FirewallResource {
-      _ip_address_id :: !(TF.Argument Text)
+      _ip_address_id :: !(TF.Argument "ip_address_id" Text)
     {- ^ (Required) The IP address ID for which to create the firewall rules. Changing this forces a new resource to be created. -}
-    , _managed       :: !(TF.Argument Text)
+    , _managed       :: !(TF.Argument "managed" Text)
     {- ^ (Optional) USE WITH CAUTION! If enabled all the firewall rules for this IP address will be managed by this resource. This means it will delete all firewall rules that are not in your config! (defaults false) -}
-    , _parallelism   :: !(TF.Argument Text)
+    , _parallelism   :: !(TF.Argument "parallelism" Text)
     {- ^ (Optional) Specifies how much rules will be created or deleted concurrently. (defaults 2) -}
-    , _rule          :: !(TF.Argument Text)
+    , _rule          :: !(TF.Argument "rule" Text)
     {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
-    , _computed_id   :: !(TF.Attribute Text)
-    {- ^ - The IP address ID for which the firewall rules are created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL FirewallResource where
     toHCL FirewallResource{..} = TF.block $ catMaybes
-        [ TF.assign "ip_address_id" <$> TF.argument _ip_address_id
-        , TF.assign "managed" <$> TF.argument _managed
-        , TF.assign "parallelism" <$> TF.argument _parallelism
-        , TF.assign "rule" <$> TF.argument _rule
+        [ TF.argument _ip_address_id
+        , TF.argument _managed
+        , TF.argument _parallelism
+        , TF.argument _rule
         ]
 
-instance HasIpAddressId FirewallResource (TF.Argument Text) where
-    ipAddressId f s@FirewallResource{..} =
-        (\a -> s { _ip_address_id = a } :: FirewallResource)
-             <$> f _ip_address_id
+instance HasIpAddressId FirewallResource Text where
+    ipAddressId =
+        lens (_ip_address_id :: FirewallResource -> TF.Argument "ip_address_id" Text)
+             (\s a -> s { _ip_address_id = a } :: FirewallResource)
 
-instance HasManaged FirewallResource (TF.Argument Text) where
-    managed f s@FirewallResource{..} =
-        (\a -> s { _managed = a } :: FirewallResource)
-             <$> f _managed
+instance HasManaged FirewallResource Text where
+    managed =
+        lens (_managed :: FirewallResource -> TF.Argument "managed" Text)
+             (\s a -> s { _managed = a } :: FirewallResource)
 
-instance HasParallelism FirewallResource (TF.Argument Text) where
-    parallelism f s@FirewallResource{..} =
-        (\a -> s { _parallelism = a } :: FirewallResource)
-             <$> f _parallelism
+instance HasParallelism FirewallResource Text where
+    parallelism =
+        lens (_parallelism :: FirewallResource -> TF.Argument "parallelism" Text)
+             (\s a -> s { _parallelism = a } :: FirewallResource)
 
-instance HasRule FirewallResource (TF.Argument Text) where
-    rule f s@FirewallResource{..} =
-        (\a -> s { _rule = a } :: FirewallResource)
-             <$> f _rule
+instance HasRule FirewallResource Text where
+    rule =
+        lens (_rule :: FirewallResource -> TF.Argument "rule" Text)
+             (\s a -> s { _rule = a } :: FirewallResource)
 
-instance HasComputedId FirewallResource (TF.Attribute Text) where
-    computedId f s@FirewallResource{..} =
-        (\a -> s { _computed_id = a } :: FirewallResource)
-             <$> f _computed_id
+instance HasComputedId FirewallResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 firewallResource :: TF.Resource TF.CloudStack FirewallResource
 firewallResource =
@@ -509,7 +494,6 @@ firewallResource =
             , _managed = TF.Nil
             , _parallelism = TF.Nil
             , _rule = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_instance@ CloudStack resource.
@@ -518,161 +502,155 @@ Creates and automatically starts a virtual machine based on a service
 offering, disk offering, and template.
 -}
 data InstanceResource = InstanceResource {
-      _affinity_group_ids    :: !(TF.Argument Text)
+      _affinity_group_ids   :: !(TF.Argument "affinity_group_ids" Text)
     {- ^ (Optional) List of affinity group IDs to apply to this instance. -}
-    , _affinity_group_names  :: !(TF.Argument Text)
+    , _affinity_group_names :: !(TF.Argument "affinity_group_names" Text)
     {- ^ (Optional) List of affinity group names to apply to this instance. -}
-    , _display_name          :: !(TF.Argument Text)
+    , _display_name         :: !(TF.Argument "display_name" Text)
     {- ^ (Optional) The display name of the instance. -}
-    , _expunge               :: !(TF.Argument Text)
+    , _expunge              :: !(TF.Argument "expunge" Text)
     {- ^ (Optional) This determines if the instance is expunged when it is destroyed (defaults false) -}
-    , _group                 :: !(TF.Argument Text)
+    , _group                :: !(TF.Argument "group" Text)
     {- ^ (Optional) The group name of the instance. -}
-    , _ip_address            :: !(TF.Argument Text)
+    , _ip_address           :: !(TF.Argument "ip_address" Text)
     {- ^ (Optional) The IP address to assign to this instance. Changing this forces a new resource to be created. -}
-    , _keypair               :: !(TF.Argument Text)
+    , _keypair              :: !(TF.Argument "keypair" Text)
     {- ^ (Optional) The name of the SSH key pair that will be used to access this instance. -}
-    , _name                  :: !(TF.Argument Text)
+    , _name                 :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the instance. -}
-    , _network_id            :: !(TF.Argument Text)
+    , _network_id           :: !(TF.Argument "network_id" Text)
     {- ^ (Optional) The ID of the network to connect this instance to. Changing this forces a new resource to be created. -}
-    , _project               :: !(TF.Argument Text)
+    , _project              :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _root_disk_size        :: !(TF.Argument Text)
+    , _root_disk_size       :: !(TF.Argument "root_disk_size" Text)
     {- ^ (Optional) The size of the root disk in gigabytes. The root disk is resized on deploy. Only applies to template-based deployments. Changing this forces a new resource to be created. -}
-    , _security_group_ids    :: !(TF.Argument Text)
+    , _security_group_ids   :: !(TF.Argument "security_group_ids" Text)
     {- ^ (Optional) List of security group IDs to apply to this instance. Changing this forces a new resource to be created. -}
-    , _security_group_names  :: !(TF.Argument Text)
+    , _security_group_names :: !(TF.Argument "security_group_names" Text)
     {- ^ (Optional) List of security group names to apply to this instance. Changing this forces a new resource to be created. -}
-    , _service_offering      :: !(TF.Argument Text)
+    , _service_offering     :: !(TF.Argument "service_offering" Text)
     {- ^ (Required) The name or ID of the service offering used for this instance. -}
-    , _template              :: !(TF.Argument Text)
+    , _template             :: !(TF.Argument "template" Text)
     {- ^ (Required) The name or ID of the template used for this instance. Changing this forces a new resource to be created. -}
-    , _user_data             :: !(TF.Argument Text)
+    , _user_data            :: !(TF.Argument "user_data" Text)
     {- ^ (Optional) The user data to provide when launching the instance. -}
-    , _zone                  :: !(TF.Argument Text)
+    , _zone                 :: !(TF.Argument "zone" Text)
     {- ^ (Required) The name or ID of the zone where this instance will be created. Changing this forces a new resource to be created. -}
-    , _computed_display_name :: !(TF.Attribute Text)
-    {- ^ - The display name of the instance. -}
-    , _computed_id           :: !(TF.Attribute Text)
-    {- ^ - The instance ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL InstanceResource where
     toHCL InstanceResource{..} = TF.block $ catMaybes
-        [ TF.assign "affinity_group_ids" <$> TF.argument _affinity_group_ids
-        , TF.assign "affinity_group_names" <$> TF.argument _affinity_group_names
-        , TF.assign "display_name" <$> TF.argument _display_name
-        , TF.assign "expunge" <$> TF.argument _expunge
-        , TF.assign "group" <$> TF.argument _group
-        , TF.assign "ip_address" <$> TF.argument _ip_address
-        , TF.assign "keypair" <$> TF.argument _keypair
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "network_id" <$> TF.argument _network_id
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "root_disk_size" <$> TF.argument _root_disk_size
-        , TF.assign "security_group_ids" <$> TF.argument _security_group_ids
-        , TF.assign "security_group_names" <$> TF.argument _security_group_names
-        , TF.assign "service_offering" <$> TF.argument _service_offering
-        , TF.assign "template" <$> TF.argument _template
-        , TF.assign "user_data" <$> TF.argument _user_data
-        , TF.assign "zone" <$> TF.argument _zone
+        [ TF.argument _affinity_group_ids
+        , TF.argument _affinity_group_names
+        , TF.argument _display_name
+        , TF.argument _expunge
+        , TF.argument _group
+        , TF.argument _ip_address
+        , TF.argument _keypair
+        , TF.argument _name
+        , TF.argument _network_id
+        , TF.argument _project
+        , TF.argument _root_disk_size
+        , TF.argument _security_group_ids
+        , TF.argument _security_group_names
+        , TF.argument _service_offering
+        , TF.argument _template
+        , TF.argument _user_data
+        , TF.argument _zone
         ]
 
-instance HasAffinityGroupIds InstanceResource (TF.Argument Text) where
-    affinityGroupIds f s@InstanceResource{..} =
-        (\a -> s { _affinity_group_ids = a } :: InstanceResource)
-             <$> f _affinity_group_ids
+instance HasAffinityGroupIds InstanceResource Text where
+    affinityGroupIds =
+        lens (_affinity_group_ids :: InstanceResource -> TF.Argument "affinity_group_ids" Text)
+             (\s a -> s { _affinity_group_ids = a } :: InstanceResource)
 
-instance HasAffinityGroupNames InstanceResource (TF.Argument Text) where
-    affinityGroupNames f s@InstanceResource{..} =
-        (\a -> s { _affinity_group_names = a } :: InstanceResource)
-             <$> f _affinity_group_names
+instance HasAffinityGroupNames InstanceResource Text where
+    affinityGroupNames =
+        lens (_affinity_group_names :: InstanceResource -> TF.Argument "affinity_group_names" Text)
+             (\s a -> s { _affinity_group_names = a } :: InstanceResource)
 
-instance HasDisplayName InstanceResource (TF.Argument Text) where
-    displayName f s@InstanceResource{..} =
-        (\a -> s { _display_name = a } :: InstanceResource)
-             <$> f _display_name
+instance HasDisplayName InstanceResource Text where
+    displayName =
+        lens (_display_name :: InstanceResource -> TF.Argument "display_name" Text)
+             (\s a -> s { _display_name = a } :: InstanceResource)
 
-instance HasExpunge InstanceResource (TF.Argument Text) where
-    expunge f s@InstanceResource{..} =
-        (\a -> s { _expunge = a } :: InstanceResource)
-             <$> f _expunge
+instance HasExpunge InstanceResource Text where
+    expunge =
+        lens (_expunge :: InstanceResource -> TF.Argument "expunge" Text)
+             (\s a -> s { _expunge = a } :: InstanceResource)
 
-instance HasGroup InstanceResource (TF.Argument Text) where
-    group f s@InstanceResource{..} =
-        (\a -> s { _group = a } :: InstanceResource)
-             <$> f _group
+instance HasGroup InstanceResource Text where
+    group =
+        lens (_group :: InstanceResource -> TF.Argument "group" Text)
+             (\s a -> s { _group = a } :: InstanceResource)
 
-instance HasIpAddress InstanceResource (TF.Argument Text) where
-    ipAddress f s@InstanceResource{..} =
-        (\a -> s { _ip_address = a } :: InstanceResource)
-             <$> f _ip_address
+instance HasIpAddress InstanceResource Text where
+    ipAddress =
+        lens (_ip_address :: InstanceResource -> TF.Argument "ip_address" Text)
+             (\s a -> s { _ip_address = a } :: InstanceResource)
 
-instance HasKeypair InstanceResource (TF.Argument Text) where
-    keypair f s@InstanceResource{..} =
-        (\a -> s { _keypair = a } :: InstanceResource)
-             <$> f _keypair
+instance HasKeypair InstanceResource Text where
+    keypair =
+        lens (_keypair :: InstanceResource -> TF.Argument "keypair" Text)
+             (\s a -> s { _keypair = a } :: InstanceResource)
 
-instance HasName InstanceResource (TF.Argument Text) where
-    name f s@InstanceResource{..} =
-        (\a -> s { _name = a } :: InstanceResource)
-             <$> f _name
+instance HasName InstanceResource Text where
+    name =
+        lens (_name :: InstanceResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: InstanceResource)
 
-instance HasNetworkId InstanceResource (TF.Argument Text) where
-    networkId f s@InstanceResource{..} =
-        (\a -> s { _network_id = a } :: InstanceResource)
-             <$> f _network_id
+instance HasNetworkId InstanceResource Text where
+    networkId =
+        lens (_network_id :: InstanceResource -> TF.Argument "network_id" Text)
+             (\s a -> s { _network_id = a } :: InstanceResource)
 
-instance HasProject InstanceResource (TF.Argument Text) where
-    project f s@InstanceResource{..} =
-        (\a -> s { _project = a } :: InstanceResource)
-             <$> f _project
+instance HasProject InstanceResource Text where
+    project =
+        lens (_project :: InstanceResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: InstanceResource)
 
-instance HasRootDiskSize InstanceResource (TF.Argument Text) where
-    rootDiskSize f s@InstanceResource{..} =
-        (\a -> s { _root_disk_size = a } :: InstanceResource)
-             <$> f _root_disk_size
+instance HasRootDiskSize InstanceResource Text where
+    rootDiskSize =
+        lens (_root_disk_size :: InstanceResource -> TF.Argument "root_disk_size" Text)
+             (\s a -> s { _root_disk_size = a } :: InstanceResource)
 
-instance HasSecurityGroupIds InstanceResource (TF.Argument Text) where
-    securityGroupIds f s@InstanceResource{..} =
-        (\a -> s { _security_group_ids = a } :: InstanceResource)
-             <$> f _security_group_ids
+instance HasSecurityGroupIds InstanceResource Text where
+    securityGroupIds =
+        lens (_security_group_ids :: InstanceResource -> TF.Argument "security_group_ids" Text)
+             (\s a -> s { _security_group_ids = a } :: InstanceResource)
 
-instance HasSecurityGroupNames InstanceResource (TF.Argument Text) where
-    securityGroupNames f s@InstanceResource{..} =
-        (\a -> s { _security_group_names = a } :: InstanceResource)
-             <$> f _security_group_names
+instance HasSecurityGroupNames InstanceResource Text where
+    securityGroupNames =
+        lens (_security_group_names :: InstanceResource -> TF.Argument "security_group_names" Text)
+             (\s a -> s { _security_group_names = a } :: InstanceResource)
 
-instance HasServiceOffering InstanceResource (TF.Argument Text) where
-    serviceOffering f s@InstanceResource{..} =
-        (\a -> s { _service_offering = a } :: InstanceResource)
-             <$> f _service_offering
+instance HasServiceOffering InstanceResource Text where
+    serviceOffering =
+        lens (_service_offering :: InstanceResource -> TF.Argument "service_offering" Text)
+             (\s a -> s { _service_offering = a } :: InstanceResource)
 
-instance HasTemplate InstanceResource (TF.Argument Text) where
-    template f s@InstanceResource{..} =
-        (\a -> s { _template = a } :: InstanceResource)
-             <$> f _template
+instance HasTemplate InstanceResource Text where
+    template =
+        lens (_template :: InstanceResource -> TF.Argument "template" Text)
+             (\s a -> s { _template = a } :: InstanceResource)
 
-instance HasUserData InstanceResource (TF.Argument Text) where
-    userData f s@InstanceResource{..} =
-        (\a -> s { _user_data = a } :: InstanceResource)
-             <$> f _user_data
+instance HasUserData InstanceResource Text where
+    userData =
+        lens (_user_data :: InstanceResource -> TF.Argument "user_data" Text)
+             (\s a -> s { _user_data = a } :: InstanceResource)
 
-instance HasZone InstanceResource (TF.Argument Text) where
-    zone f s@InstanceResource{..} =
-        (\a -> s { _zone = a } :: InstanceResource)
-             <$> f _zone
+instance HasZone InstanceResource Text where
+    zone =
+        lens (_zone :: InstanceResource -> TF.Argument "zone" Text)
+             (\s a -> s { _zone = a } :: InstanceResource)
 
-instance HasComputedDisplayName InstanceResource (TF.Attribute Text) where
-    computedDisplayName f s@InstanceResource{..} =
-        (\a -> s { _computed_display_name = a } :: InstanceResource)
-             <$> f _computed_display_name
+instance HasComputedDisplayName InstanceResource Text where
+    computedDisplayName =
+        to (\_  -> TF.Compute "display_name")
 
-instance HasComputedId InstanceResource (TF.Attribute Text) where
-    computedId f s@InstanceResource{..} =
-        (\a -> s { _computed_id = a } :: InstanceResource)
-             <$> f _computed_id
+instance HasComputedId InstanceResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 instanceResource :: TF.Resource TF.CloudStack InstanceResource
 instanceResource =
@@ -695,8 +673,6 @@ instanceResource =
             , _template = TF.Nil
             , _user_data = TF.Nil
             , _zone = TF.Nil
-            , _computed_display_name = TF.Compute "display_name"
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_ipaddress@ CloudStack resource.
@@ -704,65 +680,59 @@ instanceResource =
 Acquires and associates a public IP.
 -}
 data IpaddressResource = IpaddressResource {
-      _is_portable         :: !(TF.Argument Text)
+      _is_portable :: !(TF.Argument "is_portable" Text)
     {- ^ (Optional) This determines if the IP address should be transferable across zones (defaults false) -}
-    , _network_id          :: !(TF.Argument Text)
+    , _network_id  :: !(TF.Argument "network_id" Text)
     {- ^ (Optional) The ID of the network for which an IP address should be acquired and associated. Changing this forces a new resource to be created. -}
-    , _project             :: !(TF.Argument Text)
+    , _project     :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _vpc_id              :: !(TF.Argument Text)
+    , _vpc_id      :: !(TF.Argument "vpc_id" Text)
     {- ^ (Optional) The ID of the VPC for which an IP address should be acquired and associated. Changing this forces a new resource to be created. -}
-    , _zone                :: !(TF.Argument Text)
+    , _zone        :: !(TF.Argument "zone" Text)
     {- ^ (Optional) The name or ID of the zone for which an IP address should be acquired and associated. Changing this forces a new resource to be created. -}
-    , _computed_id         :: !(TF.Attribute Text)
-    {- ^ - The ID of the acquired and associated IP address. -}
-    , _computed_ip_address :: !(TF.Attribute Text)
-    {- ^ - The IP address that was acquired and associated. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL IpaddressResource where
     toHCL IpaddressResource{..} = TF.block $ catMaybes
-        [ TF.assign "is_portable" <$> TF.argument _is_portable
-        , TF.assign "network_id" <$> TF.argument _network_id
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "vpc_id" <$> TF.argument _vpc_id
-        , TF.assign "zone" <$> TF.argument _zone
+        [ TF.argument _is_portable
+        , TF.argument _network_id
+        , TF.argument _project
+        , TF.argument _vpc_id
+        , TF.argument _zone
         ]
 
-instance HasIsPortable IpaddressResource (TF.Argument Text) where
-    isPortable f s@IpaddressResource{..} =
-        (\a -> s { _is_portable = a } :: IpaddressResource)
-             <$> f _is_portable
+instance HasIsPortable IpaddressResource Text where
+    isPortable =
+        lens (_is_portable :: IpaddressResource -> TF.Argument "is_portable" Text)
+             (\s a -> s { _is_portable = a } :: IpaddressResource)
 
-instance HasNetworkId IpaddressResource (TF.Argument Text) where
-    networkId f s@IpaddressResource{..} =
-        (\a -> s { _network_id = a } :: IpaddressResource)
-             <$> f _network_id
+instance HasNetworkId IpaddressResource Text where
+    networkId =
+        lens (_network_id :: IpaddressResource -> TF.Argument "network_id" Text)
+             (\s a -> s { _network_id = a } :: IpaddressResource)
 
-instance HasProject IpaddressResource (TF.Argument Text) where
-    project f s@IpaddressResource{..} =
-        (\a -> s { _project = a } :: IpaddressResource)
-             <$> f _project
+instance HasProject IpaddressResource Text where
+    project =
+        lens (_project :: IpaddressResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: IpaddressResource)
 
-instance HasVpcId IpaddressResource (TF.Argument Text) where
-    vpcId f s@IpaddressResource{..} =
-        (\a -> s { _vpc_id = a } :: IpaddressResource)
-             <$> f _vpc_id
+instance HasVpcId IpaddressResource Text where
+    vpcId =
+        lens (_vpc_id :: IpaddressResource -> TF.Argument "vpc_id" Text)
+             (\s a -> s { _vpc_id = a } :: IpaddressResource)
 
-instance HasZone IpaddressResource (TF.Argument Text) where
-    zone f s@IpaddressResource{..} =
-        (\a -> s { _zone = a } :: IpaddressResource)
-             <$> f _zone
+instance HasZone IpaddressResource Text where
+    zone =
+        lens (_zone :: IpaddressResource -> TF.Argument "zone" Text)
+             (\s a -> s { _zone = a } :: IpaddressResource)
 
-instance HasComputedId IpaddressResource (TF.Attribute Text) where
-    computedId f s@IpaddressResource{..} =
-        (\a -> s { _computed_id = a } :: IpaddressResource)
-             <$> f _computed_id
+instance HasComputedId IpaddressResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedIpAddress IpaddressResource (TF.Attribute Text) where
-    computedIpAddress f s@IpaddressResource{..} =
-        (\a -> s { _computed_ip_address = a } :: IpaddressResource)
-             <$> f _computed_ip_address
+instance HasComputedIpAddress IpaddressResource Text where
+    computedIpAddress =
+        to (\_  -> TF.Compute "ip_address")
 
 ipaddressResource :: TF.Resource TF.CloudStack IpaddressResource
 ipaddressResource =
@@ -773,8 +743,6 @@ ipaddressResource =
             , _project = TF.Nil
             , _vpc_id = TF.Nil
             , _zone = TF.Nil
-            , _computed_id = TF.Compute "id"
-            , _computed_ip_address = TF.Compute "ip_address"
             }
 
 {- | The @cloudstack_loadbalancer_rule@ CloudStack resource.
@@ -782,105 +750,99 @@ ipaddressResource =
 Creates a loadbalancer rule.
 -}
 data LoadbalancerRuleResource = LoadbalancerRuleResource {
-      _algorithm            :: !(TF.Argument Text)
+      _algorithm     :: !(TF.Argument "algorithm" Text)
     {- ^ (Required) Load balancer rule algorithm (source, roundrobin, leastconn). Changing this forces a new resource to be created. -}
-    , _description          :: !(TF.Argument Text)
+    , _description   :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the load balancer rule. -}
-    , _ip_address_id        :: !(TF.Argument Text)
+    , _ip_address_id :: !(TF.Argument "ip_address_id" Text)
     {- ^ (Required) Public IP address ID from where the network traffic will be load balanced from. Changing this forces a new resource to be created. -}
-    , _member_ids           :: !(TF.Argument Text)
+    , _member_ids    :: !(TF.Argument "member_ids" Text)
     {- ^ (Required) List of instance IDs to assign to the load balancer rule. Changing this forces a new resource to be created. -}
-    , _name                 :: !(TF.Argument Text)
+    , _name          :: !(TF.Argument "name" Text)
     {- ^ (Required) Name of the loadbalancer rule. Changing this forces a new resource to be created. -}
-    , _network_id           :: !(TF.Argument Text)
+    , _network_id    :: !(TF.Argument "network_id" Text)
     {- ^ (Optional) The network ID this rule will be created for. Required when public IP address is not associated with any network yet (VPC case). -}
-    , _private_port         :: !(TF.Argument Text)
+    , _private_port  :: !(TF.Argument "private_port" Text)
     {- ^ (Required) The private port of the private IP address (virtual machine) where the network traffic will be load balanced to. Changing this forces a new resource to be created. -}
-    , _project              :: !(TF.Argument Text)
+    , _project       :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _protocol             :: !(TF.Argument Text)
+    , _protocol      :: !(TF.Argument "protocol" Text)
     {- ^ (Optional) Load balancer protocol (tcp, udp, tcp-proxy). Changing this forces a new resource to be created. -}
-    , _public_port          :: !(TF.Argument Text)
+    , _public_port   :: !(TF.Argument "public_port" Text)
     {- ^ (Required) The public port from where the network traffic will be load balanced from. Changing this forces a new resource to be created. -}
-    , _computed_description :: !(TF.Attribute Text)
-    {- ^ - The description of the load balancer rule. -}
-    , _computed_id          :: !(TF.Attribute Text)
-    {- ^ - The load balancer rule ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL LoadbalancerRuleResource where
     toHCL LoadbalancerRuleResource{..} = TF.block $ catMaybes
-        [ TF.assign "algorithm" <$> TF.argument _algorithm
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "ip_address_id" <$> TF.argument _ip_address_id
-        , TF.assign "member_ids" <$> TF.argument _member_ids
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "network_id" <$> TF.argument _network_id
-        , TF.assign "private_port" <$> TF.argument _private_port
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "protocol" <$> TF.argument _protocol
-        , TF.assign "public_port" <$> TF.argument _public_port
+        [ TF.argument _algorithm
+        , TF.argument _description
+        , TF.argument _ip_address_id
+        , TF.argument _member_ids
+        , TF.argument _name
+        , TF.argument _network_id
+        , TF.argument _private_port
+        , TF.argument _project
+        , TF.argument _protocol
+        , TF.argument _public_port
         ]
 
-instance HasAlgorithm LoadbalancerRuleResource (TF.Argument Text) where
-    algorithm f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _algorithm = a } :: LoadbalancerRuleResource)
-             <$> f _algorithm
+instance HasAlgorithm LoadbalancerRuleResource Text where
+    algorithm =
+        lens (_algorithm :: LoadbalancerRuleResource -> TF.Argument "algorithm" Text)
+             (\s a -> s { _algorithm = a } :: LoadbalancerRuleResource)
 
-instance HasDescription LoadbalancerRuleResource (TF.Argument Text) where
-    description f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _description = a } :: LoadbalancerRuleResource)
-             <$> f _description
+instance HasDescription LoadbalancerRuleResource Text where
+    description =
+        lens (_description :: LoadbalancerRuleResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: LoadbalancerRuleResource)
 
-instance HasIpAddressId LoadbalancerRuleResource (TF.Argument Text) where
-    ipAddressId f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _ip_address_id = a } :: LoadbalancerRuleResource)
-             <$> f _ip_address_id
+instance HasIpAddressId LoadbalancerRuleResource Text where
+    ipAddressId =
+        lens (_ip_address_id :: LoadbalancerRuleResource -> TF.Argument "ip_address_id" Text)
+             (\s a -> s { _ip_address_id = a } :: LoadbalancerRuleResource)
 
-instance HasMemberIds LoadbalancerRuleResource (TF.Argument Text) where
-    memberIds f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _member_ids = a } :: LoadbalancerRuleResource)
-             <$> f _member_ids
+instance HasMemberIds LoadbalancerRuleResource Text where
+    memberIds =
+        lens (_member_ids :: LoadbalancerRuleResource -> TF.Argument "member_ids" Text)
+             (\s a -> s { _member_ids = a } :: LoadbalancerRuleResource)
 
-instance HasName LoadbalancerRuleResource (TF.Argument Text) where
-    name f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _name = a } :: LoadbalancerRuleResource)
-             <$> f _name
+instance HasName LoadbalancerRuleResource Text where
+    name =
+        lens (_name :: LoadbalancerRuleResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: LoadbalancerRuleResource)
 
-instance HasNetworkId LoadbalancerRuleResource (TF.Argument Text) where
-    networkId f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _network_id = a } :: LoadbalancerRuleResource)
-             <$> f _network_id
+instance HasNetworkId LoadbalancerRuleResource Text where
+    networkId =
+        lens (_network_id :: LoadbalancerRuleResource -> TF.Argument "network_id" Text)
+             (\s a -> s { _network_id = a } :: LoadbalancerRuleResource)
 
-instance HasPrivatePort LoadbalancerRuleResource (TF.Argument Text) where
-    privatePort f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _private_port = a } :: LoadbalancerRuleResource)
-             <$> f _private_port
+instance HasPrivatePort LoadbalancerRuleResource Text where
+    privatePort =
+        lens (_private_port :: LoadbalancerRuleResource -> TF.Argument "private_port" Text)
+             (\s a -> s { _private_port = a } :: LoadbalancerRuleResource)
 
-instance HasProject LoadbalancerRuleResource (TF.Argument Text) where
-    project f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _project = a } :: LoadbalancerRuleResource)
-             <$> f _project
+instance HasProject LoadbalancerRuleResource Text where
+    project =
+        lens (_project :: LoadbalancerRuleResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: LoadbalancerRuleResource)
 
-instance HasProtocol LoadbalancerRuleResource (TF.Argument Text) where
-    protocol f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _protocol = a } :: LoadbalancerRuleResource)
-             <$> f _protocol
+instance HasProtocol LoadbalancerRuleResource Text where
+    protocol =
+        lens (_protocol :: LoadbalancerRuleResource -> TF.Argument "protocol" Text)
+             (\s a -> s { _protocol = a } :: LoadbalancerRuleResource)
 
-instance HasPublicPort LoadbalancerRuleResource (TF.Argument Text) where
-    publicPort f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _public_port = a } :: LoadbalancerRuleResource)
-             <$> f _public_port
+instance HasPublicPort LoadbalancerRuleResource Text where
+    publicPort =
+        lens (_public_port :: LoadbalancerRuleResource -> TF.Argument "public_port" Text)
+             (\s a -> s { _public_port = a } :: LoadbalancerRuleResource)
 
-instance HasComputedDescription LoadbalancerRuleResource (TF.Attribute Text) where
-    computedDescription f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _computed_description = a } :: LoadbalancerRuleResource)
-             <$> f _computed_description
+instance HasComputedDescription LoadbalancerRuleResource Text where
+    computedDescription =
+        to (\_  -> TF.Compute "description")
 
-instance HasComputedId LoadbalancerRuleResource (TF.Attribute Text) where
-    computedId f s@LoadbalancerRuleResource{..} =
-        (\a -> s { _computed_id = a } :: LoadbalancerRuleResource)
-             <$> f _computed_id
+instance HasComputedId LoadbalancerRuleResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 loadbalancerRuleResource :: TF.Resource TF.CloudStack LoadbalancerRuleResource
 loadbalancerRuleResource =
@@ -896,8 +858,6 @@ loadbalancerRuleResource =
             , _project = TF.Nil
             , _protocol = TF.Nil
             , _public_port = TF.Nil
-            , _computed_description = TF.Compute "description"
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_network_acl@ CloudStack resource.
@@ -905,50 +865,47 @@ loadbalancerRuleResource =
 Creates a Network ACL for the given VPC.
 -}
 data NetworkAclResource = NetworkAclResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the ACL. Changing this forces a new resource to be created. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the ACL. Changing this forces a new resource to be created. -}
-    , _project     :: !(TF.Argument Text)
+    , _project     :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _vpc_id      :: !(TF.Argument Text)
+    , _vpc_id      :: !(TF.Argument "vpc_id" Text)
     {- ^ (Required) The ID of the VPC to create this ACL for. Changing this forces a new resource to be created. -}
-    , _computed_id :: !(TF.Attribute Text)
-    {- ^ - The ID of the Network ACL -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL NetworkAclResource where
     toHCL NetworkAclResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "vpc_id" <$> TF.argument _vpc_id
+        [ TF.argument _description
+        , TF.argument _name
+        , TF.argument _project
+        , TF.argument _vpc_id
         ]
 
-instance HasDescription NetworkAclResource (TF.Argument Text) where
-    description f s@NetworkAclResource{..} =
-        (\a -> s { _description = a } :: NetworkAclResource)
-             <$> f _description
+instance HasDescription NetworkAclResource Text where
+    description =
+        lens (_description :: NetworkAclResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: NetworkAclResource)
 
-instance HasName NetworkAclResource (TF.Argument Text) where
-    name f s@NetworkAclResource{..} =
-        (\a -> s { _name = a } :: NetworkAclResource)
-             <$> f _name
+instance HasName NetworkAclResource Text where
+    name =
+        lens (_name :: NetworkAclResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: NetworkAclResource)
 
-instance HasProject NetworkAclResource (TF.Argument Text) where
-    project f s@NetworkAclResource{..} =
-        (\a -> s { _project = a } :: NetworkAclResource)
-             <$> f _project
+instance HasProject NetworkAclResource Text where
+    project =
+        lens (_project :: NetworkAclResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: NetworkAclResource)
 
-instance HasVpcId NetworkAclResource (TF.Argument Text) where
-    vpcId f s@NetworkAclResource{..} =
-        (\a -> s { _vpc_id = a } :: NetworkAclResource)
-             <$> f _vpc_id
+instance HasVpcId NetworkAclResource Text where
+    vpcId =
+        lens (_vpc_id :: NetworkAclResource -> TF.Argument "vpc_id" Text)
+             (\s a -> s { _vpc_id = a } :: NetworkAclResource)
 
-instance HasComputedId NetworkAclResource (TF.Attribute Text) where
-    computedId f s@NetworkAclResource{..} =
-        (\a -> s { _computed_id = a } :: NetworkAclResource)
-             <$> f _computed_id
+instance HasComputedId NetworkAclResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 networkAclResource :: TF.Resource TF.CloudStack NetworkAclResource
 networkAclResource =
@@ -958,7 +915,6 @@ networkAclResource =
             , _name = TF.Nil
             , _project = TF.Nil
             , _vpc_id = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_network_acl_rule@ CloudStack resource.
@@ -966,58 +922,55 @@ networkAclResource =
 Creates network ACL rules for a given network ACL.
 -}
 data NetworkAclRuleResource = NetworkAclRuleResource {
-      _acl_id      :: !(TF.Argument Text)
+      _acl_id      :: !(TF.Argument "acl_id" Text)
     {- ^ (Required) The network ACL ID for which to create the rules. Changing this forces a new resource to be created. -}
-    , _managed     :: !(TF.Argument Text)
+    , _managed     :: !(TF.Argument "managed" Text)
     {- ^ (Optional) USE WITH CAUTION! If enabled all the firewall rules for this network ACL will be managed by this resource. This means it will delete all firewall rules that are not in your config! (defaults false) -}
-    , _parallelism :: !(TF.Argument Text)
+    , _parallelism :: !(TF.Argument "parallelism" Text)
     {- ^ (Optional) Specifies how much rules will be created or deleted concurrently. (defaults 2) -}
-    , _project     :: !(TF.Argument Text)
+    , _project     :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _rule        :: !(TF.Argument Text)
+    , _rule        :: !(TF.Argument "rule" Text)
     {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
-    , _computed_id :: !(TF.Attribute Text)
-    {- ^ - The ACL ID for which the rules are created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL NetworkAclRuleResource where
     toHCL NetworkAclRuleResource{..} = TF.block $ catMaybes
-        [ TF.assign "acl_id" <$> TF.argument _acl_id
-        , TF.assign "managed" <$> TF.argument _managed
-        , TF.assign "parallelism" <$> TF.argument _parallelism
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "rule" <$> TF.argument _rule
+        [ TF.argument _acl_id
+        , TF.argument _managed
+        , TF.argument _parallelism
+        , TF.argument _project
+        , TF.argument _rule
         ]
 
-instance HasAclId NetworkAclRuleResource (TF.Argument Text) where
-    aclId f s@NetworkAclRuleResource{..} =
-        (\a -> s { _acl_id = a } :: NetworkAclRuleResource)
-             <$> f _acl_id
+instance HasAclId NetworkAclRuleResource Text where
+    aclId =
+        lens (_acl_id :: NetworkAclRuleResource -> TF.Argument "acl_id" Text)
+             (\s a -> s { _acl_id = a } :: NetworkAclRuleResource)
 
-instance HasManaged NetworkAclRuleResource (TF.Argument Text) where
-    managed f s@NetworkAclRuleResource{..} =
-        (\a -> s { _managed = a } :: NetworkAclRuleResource)
-             <$> f _managed
+instance HasManaged NetworkAclRuleResource Text where
+    managed =
+        lens (_managed :: NetworkAclRuleResource -> TF.Argument "managed" Text)
+             (\s a -> s { _managed = a } :: NetworkAclRuleResource)
 
-instance HasParallelism NetworkAclRuleResource (TF.Argument Text) where
-    parallelism f s@NetworkAclRuleResource{..} =
-        (\a -> s { _parallelism = a } :: NetworkAclRuleResource)
-             <$> f _parallelism
+instance HasParallelism NetworkAclRuleResource Text where
+    parallelism =
+        lens (_parallelism :: NetworkAclRuleResource -> TF.Argument "parallelism" Text)
+             (\s a -> s { _parallelism = a } :: NetworkAclRuleResource)
 
-instance HasProject NetworkAclRuleResource (TF.Argument Text) where
-    project f s@NetworkAclRuleResource{..} =
-        (\a -> s { _project = a } :: NetworkAclRuleResource)
-             <$> f _project
+instance HasProject NetworkAclRuleResource Text where
+    project =
+        lens (_project :: NetworkAclRuleResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: NetworkAclRuleResource)
 
-instance HasRule NetworkAclRuleResource (TF.Argument Text) where
-    rule f s@NetworkAclRuleResource{..} =
-        (\a -> s { _rule = a } :: NetworkAclRuleResource)
-             <$> f _rule
+instance HasRule NetworkAclRuleResource Text where
+    rule =
+        lens (_rule :: NetworkAclRuleResource -> TF.Argument "rule" Text)
+             (\s a -> s { _rule = a } :: NetworkAclRuleResource)
 
-instance HasComputedId NetworkAclRuleResource (TF.Attribute Text) where
-    computedId f s@NetworkAclRuleResource{..} =
-        (\a -> s { _computed_id = a } :: NetworkAclRuleResource)
-             <$> f _computed_id
+instance HasComputedId NetworkAclRuleResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 networkAclRuleResource :: TF.Resource TF.CloudStack NetworkAclRuleResource
 networkAclRuleResource =
@@ -1028,7 +981,6 @@ networkAclRuleResource =
             , _parallelism = TF.Nil
             , _project = TF.Nil
             , _rule = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_network@ CloudStack resource.
@@ -1036,144 +988,135 @@ networkAclRuleResource =
 Creates a network.
 -}
 data NetworkResource = NetworkResource {
-      _acl_id                  :: !(TF.Argument Text)
+      _acl_id           :: !(TF.Argument "acl_id" Text)
     {- ^ (Optional) The ACL ID that should be attached to the network or @none@ if you do not want to attach an ACL. You can dynamically attach and swap ACL's, but if you want to detach an attached ACL and revert to using @none@ , this will force a new resource to be created. (defaults @none@ ) -}
-    , _cidr                    :: !(TF.Argument Text)
+    , _cidr             :: !(TF.Argument "cidr" Text)
     {- ^ (Required) The CIDR block for the network. Changing this forces a new resource to be created. -}
-    , _display_text            :: !(TF.Argument Text)
+    , _display_text     :: !(TF.Argument "display_text" Text)
     {- ^ (Optional) The display text of the network. -}
-    , _endip                   :: !(TF.Argument Text)
+    , _endip            :: !(TF.Argument "endip" Text)
     {- ^ (Optional) End of the IP block that will be available on the network. Defaults to the last available IP in the range. -}
-    , _gateway                 :: !(TF.Argument Text)
+    , _gateway          :: !(TF.Argument "gateway" Text)
     {- ^ (Optional) Gateway that will be provided to the instances in this network. Defaults to the first usable IP in the range. -}
-    , _name                    :: !(TF.Argument Text)
+    , _name             :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the network. -}
-    , _network_domain          :: !(TF.Argument Text)
+    , _network_domain   :: !(TF.Argument "network_domain" Text)
     {- ^ (Optional) DNS domain for the network. -}
-    , _network_offering        :: !(TF.Argument Text)
+    , _network_offering :: !(TF.Argument "network_offering" Text)
     {- ^ (Required) The name or ID of the network offering to use for this network. -}
-    , _project                 :: !(TF.Argument Text)
+    , _project          :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _startip                 :: !(TF.Argument Text)
+    , _startip          :: !(TF.Argument "startip" Text)
     {- ^ (Optional) Start of the IP block that will be available on the network. Defaults to the second available IP in the range. -}
-    , _tags                    :: !(TF.Argument Text)
+    , _tags             :: !(TF.Argument "tags" Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vlan                    :: !(TF.Argument Text)
+    , _vlan             :: !(TF.Argument "vlan" Text)
     {- ^ (Optional) The VLAN number (1-4095) the network will use. This might be required by the Network Offering if specifyVlan=true is set. Only the ROOT admin can set this value. -}
-    , _vpc_id                  :: !(TF.Argument Text)
+    , _vpc_id           :: !(TF.Argument "vpc_id" Text)
     {- ^ (Optional) The VPC ID in which to create this network. Changing this forces a new resource to be created. -}
-    , _zone                    :: !(TF.Argument Text)
+    , _zone             :: !(TF.Argument "zone" Text)
     {- ^ (Required) The name or ID of the zone where this network will be available. Changing this forces a new resource to be created. -}
-    , _computed_display_text   :: !(TF.Attribute Text)
-    {- ^ - The display text of the network. -}
-    , _computed_id             :: !(TF.Attribute Text)
-    {- ^ - The ID of the network. -}
-    , _computed_network_domain :: !(TF.Attribute Text)
-    {- ^ - DNS domain for the network. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL NetworkResource where
     toHCL NetworkResource{..} = TF.block $ catMaybes
-        [ TF.assign "acl_id" <$> TF.argument _acl_id
-        , TF.assign "cidr" <$> TF.argument _cidr
-        , TF.assign "display_text" <$> TF.argument _display_text
-        , TF.assign "endip" <$> TF.argument _endip
-        , TF.assign "gateway" <$> TF.argument _gateway
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "network_domain" <$> TF.argument _network_domain
-        , TF.assign "network_offering" <$> TF.argument _network_offering
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "startip" <$> TF.argument _startip
-        , TF.assign "tags" <$> TF.argument _tags
-        , TF.assign "vlan" <$> TF.argument _vlan
-        , TF.assign "vpc_id" <$> TF.argument _vpc_id
-        , TF.assign "zone" <$> TF.argument _zone
+        [ TF.argument _acl_id
+        , TF.argument _cidr
+        , TF.argument _display_text
+        , TF.argument _endip
+        , TF.argument _gateway
+        , TF.argument _name
+        , TF.argument _network_domain
+        , TF.argument _network_offering
+        , TF.argument _project
+        , TF.argument _startip
+        , TF.argument _tags
+        , TF.argument _vlan
+        , TF.argument _vpc_id
+        , TF.argument _zone
         ]
 
-instance HasAclId NetworkResource (TF.Argument Text) where
-    aclId f s@NetworkResource{..} =
-        (\a -> s { _acl_id = a } :: NetworkResource)
-             <$> f _acl_id
+instance HasAclId NetworkResource Text where
+    aclId =
+        lens (_acl_id :: NetworkResource -> TF.Argument "acl_id" Text)
+             (\s a -> s { _acl_id = a } :: NetworkResource)
 
-instance HasCidr NetworkResource (TF.Argument Text) where
-    cidr f s@NetworkResource{..} =
-        (\a -> s { _cidr = a } :: NetworkResource)
-             <$> f _cidr
+instance HasCidr NetworkResource Text where
+    cidr =
+        lens (_cidr :: NetworkResource -> TF.Argument "cidr" Text)
+             (\s a -> s { _cidr = a } :: NetworkResource)
 
-instance HasDisplayText NetworkResource (TF.Argument Text) where
-    displayText f s@NetworkResource{..} =
-        (\a -> s { _display_text = a } :: NetworkResource)
-             <$> f _display_text
+instance HasDisplayText NetworkResource Text where
+    displayText =
+        lens (_display_text :: NetworkResource -> TF.Argument "display_text" Text)
+             (\s a -> s { _display_text = a } :: NetworkResource)
 
-instance HasEndip NetworkResource (TF.Argument Text) where
-    endip f s@NetworkResource{..} =
-        (\a -> s { _endip = a } :: NetworkResource)
-             <$> f _endip
+instance HasEndip NetworkResource Text where
+    endip =
+        lens (_endip :: NetworkResource -> TF.Argument "endip" Text)
+             (\s a -> s { _endip = a } :: NetworkResource)
 
-instance HasGateway NetworkResource (TF.Argument Text) where
-    gateway f s@NetworkResource{..} =
-        (\a -> s { _gateway = a } :: NetworkResource)
-             <$> f _gateway
+instance HasGateway NetworkResource Text where
+    gateway =
+        lens (_gateway :: NetworkResource -> TF.Argument "gateway" Text)
+             (\s a -> s { _gateway = a } :: NetworkResource)
 
-instance HasName NetworkResource (TF.Argument Text) where
-    name f s@NetworkResource{..} =
-        (\a -> s { _name = a } :: NetworkResource)
-             <$> f _name
+instance HasName NetworkResource Text where
+    name =
+        lens (_name :: NetworkResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: NetworkResource)
 
-instance HasNetworkDomain NetworkResource (TF.Argument Text) where
-    networkDomain f s@NetworkResource{..} =
-        (\a -> s { _network_domain = a } :: NetworkResource)
-             <$> f _network_domain
+instance HasNetworkDomain NetworkResource Text where
+    networkDomain =
+        lens (_network_domain :: NetworkResource -> TF.Argument "network_domain" Text)
+             (\s a -> s { _network_domain = a } :: NetworkResource)
 
-instance HasNetworkOffering NetworkResource (TF.Argument Text) where
-    networkOffering f s@NetworkResource{..} =
-        (\a -> s { _network_offering = a } :: NetworkResource)
-             <$> f _network_offering
+instance HasNetworkOffering NetworkResource Text where
+    networkOffering =
+        lens (_network_offering :: NetworkResource -> TF.Argument "network_offering" Text)
+             (\s a -> s { _network_offering = a } :: NetworkResource)
 
-instance HasProject NetworkResource (TF.Argument Text) where
-    project f s@NetworkResource{..} =
-        (\a -> s { _project = a } :: NetworkResource)
-             <$> f _project
+instance HasProject NetworkResource Text where
+    project =
+        lens (_project :: NetworkResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: NetworkResource)
 
-instance HasStartip NetworkResource (TF.Argument Text) where
-    startip f s@NetworkResource{..} =
-        (\a -> s { _startip = a } :: NetworkResource)
-             <$> f _startip
+instance HasStartip NetworkResource Text where
+    startip =
+        lens (_startip :: NetworkResource -> TF.Argument "startip" Text)
+             (\s a -> s { _startip = a } :: NetworkResource)
 
-instance HasTags NetworkResource (TF.Argument Text) where
-    tags f s@NetworkResource{..} =
-        (\a -> s { _tags = a } :: NetworkResource)
-             <$> f _tags
+instance HasTags NetworkResource Text where
+    tags =
+        lens (_tags :: NetworkResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: NetworkResource)
 
-instance HasVlan NetworkResource (TF.Argument Text) where
-    vlan f s@NetworkResource{..} =
-        (\a -> s { _vlan = a } :: NetworkResource)
-             <$> f _vlan
+instance HasVlan NetworkResource Text where
+    vlan =
+        lens (_vlan :: NetworkResource -> TF.Argument "vlan" Text)
+             (\s a -> s { _vlan = a } :: NetworkResource)
 
-instance HasVpcId NetworkResource (TF.Argument Text) where
-    vpcId f s@NetworkResource{..} =
-        (\a -> s { _vpc_id = a } :: NetworkResource)
-             <$> f _vpc_id
+instance HasVpcId NetworkResource Text where
+    vpcId =
+        lens (_vpc_id :: NetworkResource -> TF.Argument "vpc_id" Text)
+             (\s a -> s { _vpc_id = a } :: NetworkResource)
 
-instance HasZone NetworkResource (TF.Argument Text) where
-    zone f s@NetworkResource{..} =
-        (\a -> s { _zone = a } :: NetworkResource)
-             <$> f _zone
+instance HasZone NetworkResource Text where
+    zone =
+        lens (_zone :: NetworkResource -> TF.Argument "zone" Text)
+             (\s a -> s { _zone = a } :: NetworkResource)
 
-instance HasComputedDisplayText NetworkResource (TF.Attribute Text) where
-    computedDisplayText f s@NetworkResource{..} =
-        (\a -> s { _computed_display_text = a } :: NetworkResource)
-             <$> f _computed_display_text
+instance HasComputedDisplayText NetworkResource Text where
+    computedDisplayText =
+        to (\_  -> TF.Compute "display_text")
 
-instance HasComputedId NetworkResource (TF.Attribute Text) where
-    computedId f s@NetworkResource{..} =
-        (\a -> s { _computed_id = a } :: NetworkResource)
-             <$> f _computed_id
+instance HasComputedId NetworkResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedNetworkDomain NetworkResource (TF.Attribute Text) where
-    computedNetworkDomain f s@NetworkResource{..} =
-        (\a -> s { _computed_network_domain = a } :: NetworkResource)
-             <$> f _computed_network_domain
+instance HasComputedNetworkDomain NetworkResource Text where
+    computedNetworkDomain =
+        to (\_  -> TF.Compute "network_domain")
 
 networkResource :: TF.Resource TF.CloudStack NetworkResource
 networkResource =
@@ -1193,9 +1136,6 @@ networkResource =
             , _vlan = TF.Nil
             , _vpc_id = TF.Nil
             , _zone = TF.Nil
-            , _computed_display_text = TF.Compute "display_text"
-            , _computed_id = TF.Compute "id"
-            , _computed_network_domain = TF.Compute "network_domain"
             }
 
 {- | The @cloudstack_nic@ CloudStack resource.
@@ -1203,49 +1143,43 @@ networkResource =
 Creates an additional NIC to add a VM to the specified network.
 -}
 data NicResource = NicResource {
-      _ip_address          :: !(TF.Argument Text)
+      _ip_address         :: !(TF.Argument "ip_address" Text)
     {- ^ (Optional) The IP address to assign to the NIC. Changing this forces a new resource to be created. -}
-    , _network_id          :: !(TF.Argument Text)
+    , _network_id         :: !(TF.Argument "network_id" Text)
     {- ^ (Required) The ID of the network to plug the NIC into. Changing this forces a new resource to be created. -}
-    , _virtual_machine_id  :: !(TF.Argument Text)
+    , _virtual_machine_id :: !(TF.Argument "virtual_machine_id" Text)
     {- ^ (Required) The ID of the virtual machine to which to attach the NIC. Changing this forces a new resource to be created. -}
-    , _computed_id         :: !(TF.Attribute Text)
-    {- ^ - The ID of the NIC. -}
-    , _computed_ip_address :: !(TF.Attribute Text)
-    {- ^ - The assigned IP address. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL NicResource where
     toHCL NicResource{..} = TF.block $ catMaybes
-        [ TF.assign "ip_address" <$> TF.argument _ip_address
-        , TF.assign "network_id" <$> TF.argument _network_id
-        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
+        [ TF.argument _ip_address
+        , TF.argument _network_id
+        , TF.argument _virtual_machine_id
         ]
 
-instance HasIpAddress NicResource (TF.Argument Text) where
-    ipAddress f s@NicResource{..} =
-        (\a -> s { _ip_address = a } :: NicResource)
-             <$> f _ip_address
+instance HasIpAddress NicResource Text where
+    ipAddress =
+        lens (_ip_address :: NicResource -> TF.Argument "ip_address" Text)
+             (\s a -> s { _ip_address = a } :: NicResource)
 
-instance HasNetworkId NicResource (TF.Argument Text) where
-    networkId f s@NicResource{..} =
-        (\a -> s { _network_id = a } :: NicResource)
-             <$> f _network_id
+instance HasNetworkId NicResource Text where
+    networkId =
+        lens (_network_id :: NicResource -> TF.Argument "network_id" Text)
+             (\s a -> s { _network_id = a } :: NicResource)
 
-instance HasVirtualMachineId NicResource (TF.Argument Text) where
-    virtualMachineId f s@NicResource{..} =
-        (\a -> s { _virtual_machine_id = a } :: NicResource)
-             <$> f _virtual_machine_id
+instance HasVirtualMachineId NicResource Text where
+    virtualMachineId =
+        lens (_virtual_machine_id :: NicResource -> TF.Argument "virtual_machine_id" Text)
+             (\s a -> s { _virtual_machine_id = a } :: NicResource)
 
-instance HasComputedId NicResource (TF.Attribute Text) where
-    computedId f s@NicResource{..} =
-        (\a -> s { _computed_id = a } :: NicResource)
-             <$> f _computed_id
+instance HasComputedId NicResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedIpAddress NicResource (TF.Attribute Text) where
-    computedIpAddress f s@NicResource{..} =
-        (\a -> s { _computed_ip_address = a } :: NicResource)
-             <$> f _computed_ip_address
+instance HasComputedIpAddress NicResource Text where
+    computedIpAddress =
+        to (\_  -> TF.Compute "ip_address")
 
 nicResource :: TF.Resource TF.CloudStack NicResource
 nicResource =
@@ -1254,8 +1188,6 @@ nicResource =
             _ip_address = TF.Nil
             , _network_id = TF.Nil
             , _virtual_machine_id = TF.Nil
-            , _computed_id = TF.Compute "id"
-            , _computed_ip_address = TF.Compute "ip_address"
             }
 
 {- | The @cloudstack_port_forward@ CloudStack resource.
@@ -1263,57 +1195,51 @@ nicResource =
 Creates port forwards.
 -}
 data PortForwardResource = PortForwardResource {
-      _forward              :: !(TF.Argument Text)
+      _forward       :: !(TF.Argument "forward" Text)
     {- ^ (Required) Can be specified multiple times. Each forward block supports fields documented below. -}
-    , _ip_address_id        :: !(TF.Argument Text)
+    , _ip_address_id :: !(TF.Argument "ip_address_id" Text)
     {- ^ (Required) The IP address ID for which to create the port forwards. Changing this forces a new resource to be created. -}
-    , _managed              :: !(TF.Argument Text)
+    , _managed       :: !(TF.Argument "managed" Text)
     {- ^ (Optional) USE WITH CAUTION! If enabled all the port forwards for this IP address will be managed by this resource. This means it will delete all port forwards that are not in your config! (defaults false) -}
-    , _project              :: !(TF.Argument Text)
+    , _project       :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to create this port forward in. Changing this forces a new resource to be created. -}
-    , _computed_id          :: !(TF.Attribute Text)
-    {- ^ - The ID of the IP address for which the port forwards are created. -}
-    , _computed_vm_guest_ip :: !(TF.Attribute Text)
-    {- ^ - The IP address of the virtual machine that is used for the port forwarding rule. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL PortForwardResource where
     toHCL PortForwardResource{..} = TF.block $ catMaybes
-        [ TF.assign "forward" <$> TF.argument _forward
-        , TF.assign "ip_address_id" <$> TF.argument _ip_address_id
-        , TF.assign "managed" <$> TF.argument _managed
-        , TF.assign "project" <$> TF.argument _project
+        [ TF.argument _forward
+        , TF.argument _ip_address_id
+        , TF.argument _managed
+        , TF.argument _project
         ]
 
-instance HasForward PortForwardResource (TF.Argument Text) where
-    forward f s@PortForwardResource{..} =
-        (\a -> s { _forward = a } :: PortForwardResource)
-             <$> f _forward
+instance HasForward PortForwardResource Text where
+    forward =
+        lens (_forward :: PortForwardResource -> TF.Argument "forward" Text)
+             (\s a -> s { _forward = a } :: PortForwardResource)
 
-instance HasIpAddressId PortForwardResource (TF.Argument Text) where
-    ipAddressId f s@PortForwardResource{..} =
-        (\a -> s { _ip_address_id = a } :: PortForwardResource)
-             <$> f _ip_address_id
+instance HasIpAddressId PortForwardResource Text where
+    ipAddressId =
+        lens (_ip_address_id :: PortForwardResource -> TF.Argument "ip_address_id" Text)
+             (\s a -> s { _ip_address_id = a } :: PortForwardResource)
 
-instance HasManaged PortForwardResource (TF.Argument Text) where
-    managed f s@PortForwardResource{..} =
-        (\a -> s { _managed = a } :: PortForwardResource)
-             <$> f _managed
+instance HasManaged PortForwardResource Text where
+    managed =
+        lens (_managed :: PortForwardResource -> TF.Argument "managed" Text)
+             (\s a -> s { _managed = a } :: PortForwardResource)
 
-instance HasProject PortForwardResource (TF.Argument Text) where
-    project f s@PortForwardResource{..} =
-        (\a -> s { _project = a } :: PortForwardResource)
-             <$> f _project
+instance HasProject PortForwardResource Text where
+    project =
+        lens (_project :: PortForwardResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: PortForwardResource)
 
-instance HasComputedId PortForwardResource (TF.Attribute Text) where
-    computedId f s@PortForwardResource{..} =
-        (\a -> s { _computed_id = a } :: PortForwardResource)
-             <$> f _computed_id
+instance HasComputedId PortForwardResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedVmGuestIp PortForwardResource (TF.Attribute Text) where
-    computedVmGuestIp f s@PortForwardResource{..} =
-        (\a -> s { _computed_vm_guest_ip = a } :: PortForwardResource)
-             <$> f _computed_vm_guest_ip
+instance HasComputedVmGuestIp PortForwardResource Text where
+    computedVmGuestIp =
+        to (\_  -> TF.Compute "vm_guest_ip")
 
 portForwardResource :: TF.Resource TF.CloudStack PortForwardResource
 portForwardResource =
@@ -1323,8 +1249,6 @@ portForwardResource =
             , _ip_address_id = TF.Nil
             , _managed = TF.Nil
             , _project = TF.Nil
-            , _computed_id = TF.Compute "id"
-            , _computed_vm_guest_ip = TF.Compute "vm_guest_ip"
             }
 
 {- | The @cloudstack_private_gateway@ CloudStack resource.
@@ -1333,82 +1257,79 @@ Creates a private gateway for the given VPC. NOTE: private gateway can only
 be created using a ROOT account!
 -}
 data PrivateGatewayResource = PrivateGatewayResource {
-      _acl_id              :: !(TF.Argument Text)
+      _acl_id              :: !(TF.Argument "acl_id" Text)
     {- ^ (Required) The ACL ID that should be attached to the network. -}
-    , _gateway             :: !(TF.Argument Text)
+    , _gateway             :: !(TF.Argument "gateway" Text)
     {- ^ (Required) the gateway of the Private gateway. Changing this forces a new resource to be created. -}
-    , _ip_address          :: !(TF.Argument Text)
+    , _ip_address          :: !(TF.Argument "ip_address" Text)
     {- ^ (Required) the IP address of the Private gateway. Changing this forces a new resource to be created. -}
-    , _netmask             :: !(TF.Argument Text)
+    , _netmask             :: !(TF.Argument "netmask" Text)
     {- ^ (Required) The netmask of the Private gateway. Changing this forces a new resource to be created. -}
-    , _network_offering    :: !(TF.Argument Text)
+    , _network_offering    :: !(TF.Argument "network_offering" Text)
     {- ^ (Optional) The name or ID of the network offering to use for the private gateways network connection. -}
-    , _physical_network_id :: !(TF.Argument Text)
+    , _physical_network_id :: !(TF.Argument "physical_network_id" Text)
     {- ^ (Optional) The ID of the physical network this private gateway belongs to. -}
-    , _vlan                :: !(TF.Argument Text)
+    , _vlan                :: !(TF.Argument "vlan" Text)
     {- ^ (Required) The VLAN number (1-4095) the network will use. -}
-    , _vpc_id              :: !(TF.Argument Text)
+    , _vpc_id              :: !(TF.Argument "vpc_id" Text)
     {- ^ (Required) The VPC ID in which to create this Private gateway. Changing this forces a new resource to be created. -}
-    , _computed_id         :: !(TF.Attribute Text)
-    {- ^ - The ID of the private gateway. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL PrivateGatewayResource where
     toHCL PrivateGatewayResource{..} = TF.block $ catMaybes
-        [ TF.assign "acl_id" <$> TF.argument _acl_id
-        , TF.assign "gateway" <$> TF.argument _gateway
-        , TF.assign "ip_address" <$> TF.argument _ip_address
-        , TF.assign "netmask" <$> TF.argument _netmask
-        , TF.assign "network_offering" <$> TF.argument _network_offering
-        , TF.assign "physical_network_id" <$> TF.argument _physical_network_id
-        , TF.assign "vlan" <$> TF.argument _vlan
-        , TF.assign "vpc_id" <$> TF.argument _vpc_id
+        [ TF.argument _acl_id
+        , TF.argument _gateway
+        , TF.argument _ip_address
+        , TF.argument _netmask
+        , TF.argument _network_offering
+        , TF.argument _physical_network_id
+        , TF.argument _vlan
+        , TF.argument _vpc_id
         ]
 
-instance HasAclId PrivateGatewayResource (TF.Argument Text) where
-    aclId f s@PrivateGatewayResource{..} =
-        (\a -> s { _acl_id = a } :: PrivateGatewayResource)
-             <$> f _acl_id
+instance HasAclId PrivateGatewayResource Text where
+    aclId =
+        lens (_acl_id :: PrivateGatewayResource -> TF.Argument "acl_id" Text)
+             (\s a -> s { _acl_id = a } :: PrivateGatewayResource)
 
-instance HasGateway PrivateGatewayResource (TF.Argument Text) where
-    gateway f s@PrivateGatewayResource{..} =
-        (\a -> s { _gateway = a } :: PrivateGatewayResource)
-             <$> f _gateway
+instance HasGateway PrivateGatewayResource Text where
+    gateway =
+        lens (_gateway :: PrivateGatewayResource -> TF.Argument "gateway" Text)
+             (\s a -> s { _gateway = a } :: PrivateGatewayResource)
 
-instance HasIpAddress PrivateGatewayResource (TF.Argument Text) where
-    ipAddress f s@PrivateGatewayResource{..} =
-        (\a -> s { _ip_address = a } :: PrivateGatewayResource)
-             <$> f _ip_address
+instance HasIpAddress PrivateGatewayResource Text where
+    ipAddress =
+        lens (_ip_address :: PrivateGatewayResource -> TF.Argument "ip_address" Text)
+             (\s a -> s { _ip_address = a } :: PrivateGatewayResource)
 
-instance HasNetmask PrivateGatewayResource (TF.Argument Text) where
-    netmask f s@PrivateGatewayResource{..} =
-        (\a -> s { _netmask = a } :: PrivateGatewayResource)
-             <$> f _netmask
+instance HasNetmask PrivateGatewayResource Text where
+    netmask =
+        lens (_netmask :: PrivateGatewayResource -> TF.Argument "netmask" Text)
+             (\s a -> s { _netmask = a } :: PrivateGatewayResource)
 
-instance HasNetworkOffering PrivateGatewayResource (TF.Argument Text) where
-    networkOffering f s@PrivateGatewayResource{..} =
-        (\a -> s { _network_offering = a } :: PrivateGatewayResource)
-             <$> f _network_offering
+instance HasNetworkOffering PrivateGatewayResource Text where
+    networkOffering =
+        lens (_network_offering :: PrivateGatewayResource -> TF.Argument "network_offering" Text)
+             (\s a -> s { _network_offering = a } :: PrivateGatewayResource)
 
-instance HasPhysicalNetworkId PrivateGatewayResource (TF.Argument Text) where
-    physicalNetworkId f s@PrivateGatewayResource{..} =
-        (\a -> s { _physical_network_id = a } :: PrivateGatewayResource)
-             <$> f _physical_network_id
+instance HasPhysicalNetworkId PrivateGatewayResource Text where
+    physicalNetworkId =
+        lens (_physical_network_id :: PrivateGatewayResource -> TF.Argument "physical_network_id" Text)
+             (\s a -> s { _physical_network_id = a } :: PrivateGatewayResource)
 
-instance HasVlan PrivateGatewayResource (TF.Argument Text) where
-    vlan f s@PrivateGatewayResource{..} =
-        (\a -> s { _vlan = a } :: PrivateGatewayResource)
-             <$> f _vlan
+instance HasVlan PrivateGatewayResource Text where
+    vlan =
+        lens (_vlan :: PrivateGatewayResource -> TF.Argument "vlan" Text)
+             (\s a -> s { _vlan = a } :: PrivateGatewayResource)
 
-instance HasVpcId PrivateGatewayResource (TF.Argument Text) where
-    vpcId f s@PrivateGatewayResource{..} =
-        (\a -> s { _vpc_id = a } :: PrivateGatewayResource)
-             <$> f _vpc_id
+instance HasVpcId PrivateGatewayResource Text where
+    vpcId =
+        lens (_vpc_id :: PrivateGatewayResource -> TF.Argument "vpc_id" Text)
+             (\s a -> s { _vpc_id = a } :: PrivateGatewayResource)
 
-instance HasComputedId PrivateGatewayResource (TF.Attribute Text) where
-    computedId f s@PrivateGatewayResource{..} =
-        (\a -> s { _computed_id = a } :: PrivateGatewayResource)
-             <$> f _computed_id
+instance HasComputedId PrivateGatewayResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 privateGatewayResource :: TF.Resource TF.CloudStack PrivateGatewayResource
 privateGatewayResource =
@@ -1422,7 +1343,6 @@ privateGatewayResource =
             , _physical_network_id = TF.Nil
             , _vlan = TF.Nil
             , _vpc_id = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_secondary_ipaddress@ CloudStack resource.
@@ -1430,42 +1350,39 @@ privateGatewayResource =
 Assigns a secondary IP to a NIC.
 -}
 data SecondaryIpaddressResource = SecondaryIpaddressResource {
-      _ip_address         :: !(TF.Argument Text)
+      _ip_address         :: !(TF.Argument "ip_address" Text)
     {- ^ (Optional) The IP address to bind the to NIC. If not supplied an IP address will be selected randomly. Changing this forces a new resource to be	created. -}
-    , _nic_id             :: !(TF.Argument Text)
+    , _nic_id             :: !(TF.Argument "nic_id" Text)
     {- ^ (Optional) The NIC ID to which you want to attach the secondary IP address. Changing this forces a new resource to be created (defaults to the ID of the primary NIC) -}
-    , _virtual_machine_id :: !(TF.Argument Text)
+    , _virtual_machine_id :: !(TF.Argument "virtual_machine_id" Text)
     {- ^ (Required) The ID of the virtual machine to which you want to attach the secondary IP address. Changing this forces a new resource to be created. -}
-    , _computed_id        :: !(TF.Attribute Text)
-    {- ^ - The secondary IP address ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL SecondaryIpaddressResource where
     toHCL SecondaryIpaddressResource{..} = TF.block $ catMaybes
-        [ TF.assign "ip_address" <$> TF.argument _ip_address
-        , TF.assign "nic_id" <$> TF.argument _nic_id
-        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
+        [ TF.argument _ip_address
+        , TF.argument _nic_id
+        , TF.argument _virtual_machine_id
         ]
 
-instance HasIpAddress SecondaryIpaddressResource (TF.Argument Text) where
-    ipAddress f s@SecondaryIpaddressResource{..} =
-        (\a -> s { _ip_address = a } :: SecondaryIpaddressResource)
-             <$> f _ip_address
+instance HasIpAddress SecondaryIpaddressResource Text where
+    ipAddress =
+        lens (_ip_address :: SecondaryIpaddressResource -> TF.Argument "ip_address" Text)
+             (\s a -> s { _ip_address = a } :: SecondaryIpaddressResource)
 
-instance HasNicId SecondaryIpaddressResource (TF.Argument Text) where
-    nicId f s@SecondaryIpaddressResource{..} =
-        (\a -> s { _nic_id = a } :: SecondaryIpaddressResource)
-             <$> f _nic_id
+instance HasNicId SecondaryIpaddressResource Text where
+    nicId =
+        lens (_nic_id :: SecondaryIpaddressResource -> TF.Argument "nic_id" Text)
+             (\s a -> s { _nic_id = a } :: SecondaryIpaddressResource)
 
-instance HasVirtualMachineId SecondaryIpaddressResource (TF.Argument Text) where
-    virtualMachineId f s@SecondaryIpaddressResource{..} =
-        (\a -> s { _virtual_machine_id = a } :: SecondaryIpaddressResource)
-             <$> f _virtual_machine_id
+instance HasVirtualMachineId SecondaryIpaddressResource Text where
+    virtualMachineId =
+        lens (_virtual_machine_id :: SecondaryIpaddressResource -> TF.Argument "virtual_machine_id" Text)
+             (\s a -> s { _virtual_machine_id = a } :: SecondaryIpaddressResource)
 
-instance HasComputedId SecondaryIpaddressResource (TF.Attribute Text) where
-    computedId f s@SecondaryIpaddressResource{..} =
-        (\a -> s { _computed_id = a } :: SecondaryIpaddressResource)
-             <$> f _computed_id
+instance HasComputedId SecondaryIpaddressResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 secondaryIpaddressResource :: TF.Resource TF.CloudStack SecondaryIpaddressResource
 secondaryIpaddressResource =
@@ -1474,7 +1391,6 @@ secondaryIpaddressResource =
             _ip_address = TF.Nil
             , _nic_id = TF.Nil
             , _virtual_machine_id = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_security_group@ CloudStack resource.
@@ -1482,42 +1398,39 @@ secondaryIpaddressResource =
 Creates a security group.
 -}
 data SecurityGroupResource = SecurityGroupResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the security group. Changing this forces a new resource to be created. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the security group. Changing this forces a new resource to be created. -}
-    , _project     :: !(TF.Argument Text)
+    , _project     :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to create this security group in. Changing this forces a new resource to be created. -}
-    , _computed_id :: !(TF.Attribute Text)
-    {- ^ - The ID of the security group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL SecurityGroupResource where
     toHCL SecurityGroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "project" <$> TF.argument _project
+        [ TF.argument _description
+        , TF.argument _name
+        , TF.argument _project
         ]
 
-instance HasDescription SecurityGroupResource (TF.Argument Text) where
-    description f s@SecurityGroupResource{..} =
-        (\a -> s { _description = a } :: SecurityGroupResource)
-             <$> f _description
+instance HasDescription SecurityGroupResource Text where
+    description =
+        lens (_description :: SecurityGroupResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: SecurityGroupResource)
 
-instance HasName SecurityGroupResource (TF.Argument Text) where
-    name f s@SecurityGroupResource{..} =
-        (\a -> s { _name = a } :: SecurityGroupResource)
-             <$> f _name
+instance HasName SecurityGroupResource Text where
+    name =
+        lens (_name :: SecurityGroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: SecurityGroupResource)
 
-instance HasProject SecurityGroupResource (TF.Argument Text) where
-    project f s@SecurityGroupResource{..} =
-        (\a -> s { _project = a } :: SecurityGroupResource)
-             <$> f _project
+instance HasProject SecurityGroupResource Text where
+    project =
+        lens (_project :: SecurityGroupResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: SecurityGroupResource)
 
-instance HasComputedId SecurityGroupResource (TF.Attribute Text) where
-    computedId f s@SecurityGroupResource{..} =
-        (\a -> s { _computed_id = a } :: SecurityGroupResource)
-             <$> f _computed_id
+instance HasComputedId SecurityGroupResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 securityGroupResource :: TF.Resource TF.CloudStack SecurityGroupResource
 securityGroupResource =
@@ -1526,7 +1439,6 @@ securityGroupResource =
             _description = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_security_group_rule@ CloudStack resource.
@@ -1535,50 +1447,47 @@ Authorizes and revokes both ingress and egress rulea for a given security
 group.
 -}
 data SecurityGroupRuleResource = SecurityGroupRuleResource {
-      _parallelism       :: !(TF.Argument Text)
+      _parallelism       :: !(TF.Argument "parallelism" Text)
     {- ^ (Optional) Specifies how much rules will be created or deleted concurrently. (defaults 2) -}
-    , _project           :: !(TF.Argument Text)
+    , _project           :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project in which the security group is created. Changing this forces a new resource to be created. -}
-    , _rule              :: !(TF.Argument Text)
+    , _rule              :: !(TF.Argument "rule" Text)
     {- ^ (Required) Can be specified multiple times. Each rule block supports fields documented below. -}
-    , _security_group_id :: !(TF.Argument Text)
+    , _security_group_id :: !(TF.Argument "security_group_id" Text)
     {- ^ (Required) The security group ID for which to create the rules. Changing this forces a new resource to be created. -}
-    , _computed_id       :: !(TF.Attribute Text)
-    {- ^ - The security group ID for which the rules are created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL SecurityGroupRuleResource where
     toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
-        [ TF.assign "parallelism" <$> TF.argument _parallelism
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "rule" <$> TF.argument _rule
-        , TF.assign "security_group_id" <$> TF.argument _security_group_id
+        [ TF.argument _parallelism
+        , TF.argument _project
+        , TF.argument _rule
+        , TF.argument _security_group_id
         ]
 
-instance HasParallelism SecurityGroupRuleResource (TF.Argument Text) where
-    parallelism f s@SecurityGroupRuleResource{..} =
-        (\a -> s { _parallelism = a } :: SecurityGroupRuleResource)
-             <$> f _parallelism
+instance HasParallelism SecurityGroupRuleResource Text where
+    parallelism =
+        lens (_parallelism :: SecurityGroupRuleResource -> TF.Argument "parallelism" Text)
+             (\s a -> s { _parallelism = a } :: SecurityGroupRuleResource)
 
-instance HasProject SecurityGroupRuleResource (TF.Argument Text) where
-    project f s@SecurityGroupRuleResource{..} =
-        (\a -> s { _project = a } :: SecurityGroupRuleResource)
-             <$> f _project
+instance HasProject SecurityGroupRuleResource Text where
+    project =
+        lens (_project :: SecurityGroupRuleResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: SecurityGroupRuleResource)
 
-instance HasRule SecurityGroupRuleResource (TF.Argument Text) where
-    rule f s@SecurityGroupRuleResource{..} =
-        (\a -> s { _rule = a } :: SecurityGroupRuleResource)
-             <$> f _rule
+instance HasRule SecurityGroupRuleResource Text where
+    rule =
+        lens (_rule :: SecurityGroupRuleResource -> TF.Argument "rule" Text)
+             (\s a -> s { _rule = a } :: SecurityGroupRuleResource)
 
-instance HasSecurityGroupId SecurityGroupRuleResource (TF.Argument Text) where
-    securityGroupId f s@SecurityGroupRuleResource{..} =
-        (\a -> s { _security_group_id = a } :: SecurityGroupRuleResource)
-             <$> f _security_group_id
+instance HasSecurityGroupId SecurityGroupRuleResource Text where
+    securityGroupId =
+        lens (_security_group_id :: SecurityGroupRuleResource -> TF.Argument "security_group_id" Text)
+             (\s a -> s { _security_group_id = a } :: SecurityGroupRuleResource)
 
-instance HasComputedId SecurityGroupRuleResource (TF.Attribute Text) where
-    computedId f s@SecurityGroupRuleResource{..} =
-        (\a -> s { _computed_id = a } :: SecurityGroupRuleResource)
-             <$> f _computed_id
+instance HasComputedId SecurityGroupRuleResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 securityGroupRuleResource :: TF.Resource TF.CloudStack SecurityGroupRuleResource
 securityGroupRuleResource =
@@ -1588,7 +1497,6 @@ securityGroupRuleResource =
             , _project = TF.Nil
             , _rule = TF.Nil
             , _security_group_id = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_ssh_keypair@ CloudStack resource.
@@ -1596,56 +1504,47 @@ securityGroupRuleResource =
 Creates or registers an SSH key pair.
 -}
 data SshKeypairResource = SshKeypairResource {
-      _name                 :: !(TF.Argument Text)
+      _name       :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the SSH key pair. This is a unique value within a CloudStack account. Changing this forces a new resource to be created. -}
-    , _project              :: !(TF.Argument Text)
+    , _project    :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to register this key to. Changing this forces a new resource to be created. -}
-    , _public_key           :: !(TF.Argument Text)
+    , _public_key :: !(TF.Argument "public_key" Text)
     {- ^ (Optional) The public key to register with CloudStack. If this is omitted, CloudStack will generate a new key pair. The key can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . Changing this forces a new resource to be created. -}
-    , _computed_fingerprint :: !(TF.Attribute Text)
-    {- ^ - The fingerprint of the public key specified or created. -}
-    , _computed_id          :: !(TF.Attribute Text)
-    {- ^ - The key pair ID. -}
-    , _computed_private_key :: !(TF.Attribute Text)
-    {- ^ - The private key generated by CloudStack. Only available if CloudStack generated the key pair. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL SshKeypairResource where
     toHCL SshKeypairResource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "public_key" <$> TF.argument _public_key
+        [ TF.argument _name
+        , TF.argument _project
+        , TF.argument _public_key
         ]
 
-instance HasName SshKeypairResource (TF.Argument Text) where
-    name f s@SshKeypairResource{..} =
-        (\a -> s { _name = a } :: SshKeypairResource)
-             <$> f _name
+instance HasName SshKeypairResource Text where
+    name =
+        lens (_name :: SshKeypairResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: SshKeypairResource)
 
-instance HasProject SshKeypairResource (TF.Argument Text) where
-    project f s@SshKeypairResource{..} =
-        (\a -> s { _project = a } :: SshKeypairResource)
-             <$> f _project
+instance HasProject SshKeypairResource Text where
+    project =
+        lens (_project :: SshKeypairResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: SshKeypairResource)
 
-instance HasPublicKey SshKeypairResource (TF.Argument Text) where
-    publicKey f s@SshKeypairResource{..} =
-        (\a -> s { _public_key = a } :: SshKeypairResource)
-             <$> f _public_key
+instance HasPublicKey SshKeypairResource Text where
+    publicKey =
+        lens (_public_key :: SshKeypairResource -> TF.Argument "public_key" Text)
+             (\s a -> s { _public_key = a } :: SshKeypairResource)
 
-instance HasComputedFingerprint SshKeypairResource (TF.Attribute Text) where
-    computedFingerprint f s@SshKeypairResource{..} =
-        (\a -> s { _computed_fingerprint = a } :: SshKeypairResource)
-             <$> f _computed_fingerprint
+instance HasComputedFingerprint SshKeypairResource Text where
+    computedFingerprint =
+        to (\_  -> TF.Compute "fingerprint")
 
-instance HasComputedId SshKeypairResource (TF.Attribute Text) where
-    computedId f s@SshKeypairResource{..} =
-        (\a -> s { _computed_id = a } :: SshKeypairResource)
-             <$> f _computed_id
+instance HasComputedId SshKeypairResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedPrivateKey SshKeypairResource (TF.Attribute Text) where
-    computedPrivateKey f s@SshKeypairResource{..} =
-        (\a -> s { _computed_private_key = a } :: SshKeypairResource)
-             <$> f _computed_private_key
+instance HasComputedPrivateKey SshKeypairResource Text where
+    computedPrivateKey =
+        to (\_  -> TF.Compute "private_key")
 
 sshKeypairResource :: TF.Resource TF.CloudStack SshKeypairResource
 sshKeypairResource =
@@ -1654,9 +1553,6 @@ sshKeypairResource =
             _name = TF.Nil
             , _project = TF.Nil
             , _public_key = TF.Nil
-            , _computed_fingerprint = TF.Compute "fingerprint"
-            , _computed_id = TF.Compute "id"
-            , _computed_private_key = TF.Compute "private_key"
             }
 
 {- | The @cloudstack_static_nat@ CloudStack resource.
@@ -1664,57 +1560,51 @@ sshKeypairResource =
 Enables static NAT for a given IP address
 -}
 data StaticNatResource = StaticNatResource {
-      _ip_address_id        :: !(TF.Argument Text)
+      _ip_address_id      :: !(TF.Argument "ip_address_id" Text)
     {- ^ (Required) The public IP address ID for which static NAT will be enabled. Changing this forces a new resource to be created. -}
-    , _project              :: !(TF.Argument Text)
+    , _project            :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _virtual_machine_id   :: !(TF.Argument Text)
+    , _virtual_machine_id :: !(TF.Argument "virtual_machine_id" Text)
     {- ^ (Required) The virtual machine ID to enable the static NAT feature for. Changing this forces a new resource to be created. -}
-    , _vm_guest_ip          :: !(TF.Argument Text)
+    , _vm_guest_ip        :: !(TF.Argument "vm_guest_ip" Text)
     {- ^ (Optional) The virtual machine IP address to forward the static NAT traffic to (useful when the virtual machine has secondary NICs or IP addresses). Changing this forces a new resource to be created. -}
-    , _computed_id          :: !(TF.Attribute Text)
-    {- ^ - The static nat ID. -}
-    , _computed_vm_guest_ip :: !(TF.Attribute Text)
-    {- ^ - The IP address of the virtual machine that is used to forward the static NAT traffic to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL StaticNatResource where
     toHCL StaticNatResource{..} = TF.block $ catMaybes
-        [ TF.assign "ip_address_id" <$> TF.argument _ip_address_id
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "virtual_machine_id" <$> TF.argument _virtual_machine_id
-        , TF.assign "vm_guest_ip" <$> TF.argument _vm_guest_ip
+        [ TF.argument _ip_address_id
+        , TF.argument _project
+        , TF.argument _virtual_machine_id
+        , TF.argument _vm_guest_ip
         ]
 
-instance HasIpAddressId StaticNatResource (TF.Argument Text) where
-    ipAddressId f s@StaticNatResource{..} =
-        (\a -> s { _ip_address_id = a } :: StaticNatResource)
-             <$> f _ip_address_id
+instance HasIpAddressId StaticNatResource Text where
+    ipAddressId =
+        lens (_ip_address_id :: StaticNatResource -> TF.Argument "ip_address_id" Text)
+             (\s a -> s { _ip_address_id = a } :: StaticNatResource)
 
-instance HasProject StaticNatResource (TF.Argument Text) where
-    project f s@StaticNatResource{..} =
-        (\a -> s { _project = a } :: StaticNatResource)
-             <$> f _project
+instance HasProject StaticNatResource Text where
+    project =
+        lens (_project :: StaticNatResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: StaticNatResource)
 
-instance HasVirtualMachineId StaticNatResource (TF.Argument Text) where
-    virtualMachineId f s@StaticNatResource{..} =
-        (\a -> s { _virtual_machine_id = a } :: StaticNatResource)
-             <$> f _virtual_machine_id
+instance HasVirtualMachineId StaticNatResource Text where
+    virtualMachineId =
+        lens (_virtual_machine_id :: StaticNatResource -> TF.Argument "virtual_machine_id" Text)
+             (\s a -> s { _virtual_machine_id = a } :: StaticNatResource)
 
-instance HasVmGuestIp StaticNatResource (TF.Argument Text) where
-    vmGuestIp f s@StaticNatResource{..} =
-        (\a -> s { _vm_guest_ip = a } :: StaticNatResource)
-             <$> f _vm_guest_ip
+instance HasVmGuestIp StaticNatResource Text where
+    vmGuestIp =
+        lens (_vm_guest_ip :: StaticNatResource -> TF.Argument "vm_guest_ip" Text)
+             (\s a -> s { _vm_guest_ip = a } :: StaticNatResource)
 
-instance HasComputedId StaticNatResource (TF.Attribute Text) where
-    computedId f s@StaticNatResource{..} =
-        (\a -> s { _computed_id = a } :: StaticNatResource)
-             <$> f _computed_id
+instance HasComputedId StaticNatResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedVmGuestIp StaticNatResource (TF.Attribute Text) where
-    computedVmGuestIp f s@StaticNatResource{..} =
-        (\a -> s { _computed_vm_guest_ip = a } :: StaticNatResource)
-             <$> f _computed_vm_guest_ip
+instance HasComputedVmGuestIp StaticNatResource Text where
+    computedVmGuestIp =
+        to (\_  -> TF.Compute "vm_guest_ip")
 
 staticNatResource :: TF.Resource TF.CloudStack StaticNatResource
 staticNatResource =
@@ -1724,8 +1614,6 @@ staticNatResource =
             , _project = TF.Nil
             , _virtual_machine_id = TF.Nil
             , _vm_guest_ip = TF.Nil
-            , _computed_id = TF.Compute "id"
-            , _computed_vm_guest_ip = TF.Compute "vm_guest_ip"
             }
 
 {- | The @cloudstack_static_route@ CloudStack resource.
@@ -1733,34 +1621,31 @@ staticNatResource =
 Creates a static route for the given private gateway or VPC.
 -}
 data StaticRouteResource = StaticRouteResource {
-      _cidr        :: !(TF.Argument Text)
+      _cidr       :: !(TF.Argument "cidr" Text)
     {- ^ (Required) The CIDR for the static route. Changing this forces a new resource to be created. -}
-    , _gateway_id  :: !(TF.Argument Text)
+    , _gateway_id :: !(TF.Argument "gateway_id" Text)
     {- ^ (Required) The ID of the Private gateway. Changing this forces a new resource to be created. -}
-    , _computed_id :: !(TF.Attribute Text)
-    {- ^ - The ID of the static route. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL StaticRouteResource where
     toHCL StaticRouteResource{..} = TF.block $ catMaybes
-        [ TF.assign "cidr" <$> TF.argument _cidr
-        , TF.assign "gateway_id" <$> TF.argument _gateway_id
+        [ TF.argument _cidr
+        , TF.argument _gateway_id
         ]
 
-instance HasCidr StaticRouteResource (TF.Argument Text) where
-    cidr f s@StaticRouteResource{..} =
-        (\a -> s { _cidr = a } :: StaticRouteResource)
-             <$> f _cidr
+instance HasCidr StaticRouteResource Text where
+    cidr =
+        lens (_cidr :: StaticRouteResource -> TF.Argument "cidr" Text)
+             (\s a -> s { _cidr = a } :: StaticRouteResource)
 
-instance HasGatewayId StaticRouteResource (TF.Argument Text) where
-    gatewayId f s@StaticRouteResource{..} =
-        (\a -> s { _gateway_id = a } :: StaticRouteResource)
-             <$> f _gateway_id
+instance HasGatewayId StaticRouteResource Text where
+    gatewayId =
+        lens (_gateway_id :: StaticRouteResource -> TF.Argument "gateway_id" Text)
+             (\s a -> s { _gateway_id = a } :: StaticRouteResource)
 
-instance HasComputedId StaticRouteResource (TF.Attribute Text) where
-    computedId f s@StaticRouteResource{..} =
-        (\a -> s { _computed_id = a } :: StaticRouteResource)
-             <$> f _computed_id
+instance HasComputedId StaticRouteResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 staticRouteResource :: TF.Resource TF.CloudStack StaticRouteResource
 staticRouteResource =
@@ -1768,7 +1653,6 @@ staticRouteResource =
         StaticRouteResource {
             _cidr = TF.Nil
             , _gateway_id = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_template@ CloudStack resource.
@@ -1776,179 +1660,155 @@ staticRouteResource =
 Registers an existing template into the CloudStack cloud.
 -}
 data TemplateResource = TemplateResource {
-      _display_text                     :: !(TF.Argument Text)
+      _display_text            :: !(TF.Argument "display_text" Text)
     {- ^ (Optional) The display name of the template. -}
-    , _format                           :: !(TF.Argument Text)
+    , _format                  :: !(TF.Argument "format" Text)
     {- ^ (Required) The format of the template. Valid values are @QCOW2@ , @RAW@ , and @VHD@ . -}
-    , _hypervisor                       :: !(TF.Argument Text)
+    , _hypervisor              :: !(TF.Argument "hypervisor" Text)
     {- ^ (Required) The target hypervisor for the template. Changing this forces a new resource to be created. -}
-    , _is_dynamically_scalable          :: !(TF.Argument Text)
+    , _is_dynamically_scalable :: !(TF.Argument "is_dynamically_scalable" Text)
     {- ^ (Optional) Set to indicate if the template contains tools to support dynamic scaling of VM cpu/memory (defaults false) -}
-    , _is_extractable                   :: !(TF.Argument Text)
+    , _is_extractable          :: !(TF.Argument "is_extractable" Text)
     {- ^ (Optional) Set to indicate if the template is extractable (defaults false) -}
-    , _is_featured                      :: !(TF.Argument Text)
+    , _is_featured             :: !(TF.Argument "is_featured" Text)
     {- ^ (Optional) Set to indicate if the template is featured (defaults false) -}
-    , _is_public                        :: !(TF.Argument Text)
+    , _is_public               :: !(TF.Argument "is_public" Text)
     {- ^ (Optional) Set to indicate if the template is available for all accounts (defaults true) -}
-    , _is_ready_timeout                 :: !(TF.Argument Text)
+    , _is_ready_timeout        :: !(TF.Argument "is_ready_timeout" Text)
     {- ^ (Optional) The maximum time in seconds to wait until the template is ready for use (defaults 300 seconds) -}
-    , _name                             :: !(TF.Argument Text)
+    , _name                    :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the template. -}
-    , _os_type                          :: !(TF.Argument Text)
+    , _os_type                 :: !(TF.Argument "os_type" Text)
     {- ^ (Required) The OS Type that best represents the OS of this template. -}
-    , _password_enabled                 :: !(TF.Argument Text)
+    , _password_enabled        :: !(TF.Argument "password_enabled" Text)
     {- ^ (Optional) Set to indicate if the template should be password enabled (defaults false) -}
-    , _project                          :: !(TF.Argument Text)
+    , _project                 :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to create this template for. Changing this forces a new resource to be created. -}
-    , _url                              :: !(TF.Argument Text)
+    , _url                     :: !(TF.Argument "url" Text)
     {- ^ (Required) The URL of where the template is hosted. Changing this forces a new resource to be created. -}
-    , _zone                             :: !(TF.Argument Text)
+    , _zone                    :: !(TF.Argument "zone" Text)
     {- ^ (Required) The name or ID of the zone where this template will be created. Changing this forces a new resource to be created. -}
-    , _computed_display_text            :: !(TF.Attribute Text)
-    {- ^ - The display text of the template. -}
-    , _computed_id                      :: !(TF.Attribute Text)
-    {- ^ - The template ID. -}
-    , _computed_is_dynamically_scalable :: !(TF.Attribute Text)
-    {- ^ - Set to "true" if the template is dynamically scalable. -}
-    , _computed_is_extractable          :: !(TF.Attribute Text)
-    {- ^ - Set to "true" if the template is extractable. -}
-    , _computed_is_featured             :: !(TF.Attribute Text)
-    {- ^ - Set to "true" if the template is featured. -}
-    , _computed_is_public               :: !(TF.Attribute Text)
-    {- ^ - Set to "true" if the template is public. -}
-    , _computed_is_ready                :: !(TF.Attribute Text)
-    {- ^ - Set to "true" once the template is ready for use. -}
-    , _computed_password_enabled        :: !(TF.Attribute Text)
-    {- ^ - Set to "true" if the template is password enabled. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL TemplateResource where
     toHCL TemplateResource{..} = TF.block $ catMaybes
-        [ TF.assign "display_text" <$> TF.argument _display_text
-        , TF.assign "format" <$> TF.argument _format
-        , TF.assign "hypervisor" <$> TF.argument _hypervisor
-        , TF.assign "is_dynamically_scalable" <$> TF.argument _is_dynamically_scalable
-        , TF.assign "is_extractable" <$> TF.argument _is_extractable
-        , TF.assign "is_featured" <$> TF.argument _is_featured
-        , TF.assign "is_public" <$> TF.argument _is_public
-        , TF.assign "is_ready_timeout" <$> TF.argument _is_ready_timeout
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "os_type" <$> TF.argument _os_type
-        , TF.assign "password_enabled" <$> TF.argument _password_enabled
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "url" <$> TF.argument _url
-        , TF.assign "zone" <$> TF.argument _zone
+        [ TF.argument _display_text
+        , TF.argument _format
+        , TF.argument _hypervisor
+        , TF.argument _is_dynamically_scalable
+        , TF.argument _is_extractable
+        , TF.argument _is_featured
+        , TF.argument _is_public
+        , TF.argument _is_ready_timeout
+        , TF.argument _name
+        , TF.argument _os_type
+        , TF.argument _password_enabled
+        , TF.argument _project
+        , TF.argument _url
+        , TF.argument _zone
         ]
 
-instance HasDisplayText TemplateResource (TF.Argument Text) where
-    displayText f s@TemplateResource{..} =
-        (\a -> s { _display_text = a } :: TemplateResource)
-             <$> f _display_text
+instance HasDisplayText TemplateResource Text where
+    displayText =
+        lens (_display_text :: TemplateResource -> TF.Argument "display_text" Text)
+             (\s a -> s { _display_text = a } :: TemplateResource)
 
-instance HasFormat TemplateResource (TF.Argument Text) where
-    format f s@TemplateResource{..} =
-        (\a -> s { _format = a } :: TemplateResource)
-             <$> f _format
+instance HasFormat TemplateResource Text where
+    format =
+        lens (_format :: TemplateResource -> TF.Argument "format" Text)
+             (\s a -> s { _format = a } :: TemplateResource)
 
-instance HasHypervisor TemplateResource (TF.Argument Text) where
-    hypervisor f s@TemplateResource{..} =
-        (\a -> s { _hypervisor = a } :: TemplateResource)
-             <$> f _hypervisor
+instance HasHypervisor TemplateResource Text where
+    hypervisor =
+        lens (_hypervisor :: TemplateResource -> TF.Argument "hypervisor" Text)
+             (\s a -> s { _hypervisor = a } :: TemplateResource)
 
-instance HasIsDynamicallyScalable TemplateResource (TF.Argument Text) where
-    isDynamicallyScalable f s@TemplateResource{..} =
-        (\a -> s { _is_dynamically_scalable = a } :: TemplateResource)
-             <$> f _is_dynamically_scalable
+instance HasIsDynamicallyScalable TemplateResource Text where
+    isDynamicallyScalable =
+        lens (_is_dynamically_scalable :: TemplateResource -> TF.Argument "is_dynamically_scalable" Text)
+             (\s a -> s { _is_dynamically_scalable = a } :: TemplateResource)
 
-instance HasIsExtractable TemplateResource (TF.Argument Text) where
-    isExtractable f s@TemplateResource{..} =
-        (\a -> s { _is_extractable = a } :: TemplateResource)
-             <$> f _is_extractable
+instance HasIsExtractable TemplateResource Text where
+    isExtractable =
+        lens (_is_extractable :: TemplateResource -> TF.Argument "is_extractable" Text)
+             (\s a -> s { _is_extractable = a } :: TemplateResource)
 
-instance HasIsFeatured TemplateResource (TF.Argument Text) where
-    isFeatured f s@TemplateResource{..} =
-        (\a -> s { _is_featured = a } :: TemplateResource)
-             <$> f _is_featured
+instance HasIsFeatured TemplateResource Text where
+    isFeatured =
+        lens (_is_featured :: TemplateResource -> TF.Argument "is_featured" Text)
+             (\s a -> s { _is_featured = a } :: TemplateResource)
 
-instance HasIsPublic TemplateResource (TF.Argument Text) where
-    isPublic f s@TemplateResource{..} =
-        (\a -> s { _is_public = a } :: TemplateResource)
-             <$> f _is_public
+instance HasIsPublic TemplateResource Text where
+    isPublic =
+        lens (_is_public :: TemplateResource -> TF.Argument "is_public" Text)
+             (\s a -> s { _is_public = a } :: TemplateResource)
 
-instance HasIsReadyTimeout TemplateResource (TF.Argument Text) where
-    isReadyTimeout f s@TemplateResource{..} =
-        (\a -> s { _is_ready_timeout = a } :: TemplateResource)
-             <$> f _is_ready_timeout
+instance HasIsReadyTimeout TemplateResource Text where
+    isReadyTimeout =
+        lens (_is_ready_timeout :: TemplateResource -> TF.Argument "is_ready_timeout" Text)
+             (\s a -> s { _is_ready_timeout = a } :: TemplateResource)
 
-instance HasName TemplateResource (TF.Argument Text) where
-    name f s@TemplateResource{..} =
-        (\a -> s { _name = a } :: TemplateResource)
-             <$> f _name
+instance HasName TemplateResource Text where
+    name =
+        lens (_name :: TemplateResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: TemplateResource)
 
-instance HasOsType TemplateResource (TF.Argument Text) where
-    osType f s@TemplateResource{..} =
-        (\a -> s { _os_type = a } :: TemplateResource)
-             <$> f _os_type
+instance HasOsType TemplateResource Text where
+    osType =
+        lens (_os_type :: TemplateResource -> TF.Argument "os_type" Text)
+             (\s a -> s { _os_type = a } :: TemplateResource)
 
-instance HasPasswordEnabled TemplateResource (TF.Argument Text) where
-    passwordEnabled f s@TemplateResource{..} =
-        (\a -> s { _password_enabled = a } :: TemplateResource)
-             <$> f _password_enabled
+instance HasPasswordEnabled TemplateResource Text where
+    passwordEnabled =
+        lens (_password_enabled :: TemplateResource -> TF.Argument "password_enabled" Text)
+             (\s a -> s { _password_enabled = a } :: TemplateResource)
 
-instance HasProject TemplateResource (TF.Argument Text) where
-    project f s@TemplateResource{..} =
-        (\a -> s { _project = a } :: TemplateResource)
-             <$> f _project
+instance HasProject TemplateResource Text where
+    project =
+        lens (_project :: TemplateResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: TemplateResource)
 
-instance HasUrl TemplateResource (TF.Argument Text) where
-    url f s@TemplateResource{..} =
-        (\a -> s { _url = a } :: TemplateResource)
-             <$> f _url
+instance HasUrl TemplateResource Text where
+    url =
+        lens (_url :: TemplateResource -> TF.Argument "url" Text)
+             (\s a -> s { _url = a } :: TemplateResource)
 
-instance HasZone TemplateResource (TF.Argument Text) where
-    zone f s@TemplateResource{..} =
-        (\a -> s { _zone = a } :: TemplateResource)
-             <$> f _zone
+instance HasZone TemplateResource Text where
+    zone =
+        lens (_zone :: TemplateResource -> TF.Argument "zone" Text)
+             (\s a -> s { _zone = a } :: TemplateResource)
 
-instance HasComputedDisplayText TemplateResource (TF.Attribute Text) where
-    computedDisplayText f s@TemplateResource{..} =
-        (\a -> s { _computed_display_text = a } :: TemplateResource)
-             <$> f _computed_display_text
+instance HasComputedDisplayText TemplateResource Text where
+    computedDisplayText =
+        to (\_  -> TF.Compute "display_text")
 
-instance HasComputedId TemplateResource (TF.Attribute Text) where
-    computedId f s@TemplateResource{..} =
-        (\a -> s { _computed_id = a } :: TemplateResource)
-             <$> f _computed_id
+instance HasComputedId TemplateResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedIsDynamicallyScalable TemplateResource (TF.Attribute Text) where
-    computedIsDynamicallyScalable f s@TemplateResource{..} =
-        (\a -> s { _computed_is_dynamically_scalable = a } :: TemplateResource)
-             <$> f _computed_is_dynamically_scalable
+instance HasComputedIsDynamicallyScalable TemplateResource Text where
+    computedIsDynamicallyScalable =
+        to (\_  -> TF.Compute "is_dynamically_scalable")
 
-instance HasComputedIsExtractable TemplateResource (TF.Attribute Text) where
-    computedIsExtractable f s@TemplateResource{..} =
-        (\a -> s { _computed_is_extractable = a } :: TemplateResource)
-             <$> f _computed_is_extractable
+instance HasComputedIsExtractable TemplateResource Text where
+    computedIsExtractable =
+        to (\_  -> TF.Compute "is_extractable")
 
-instance HasComputedIsFeatured TemplateResource (TF.Attribute Text) where
-    computedIsFeatured f s@TemplateResource{..} =
-        (\a -> s { _computed_is_featured = a } :: TemplateResource)
-             <$> f _computed_is_featured
+instance HasComputedIsFeatured TemplateResource Text where
+    computedIsFeatured =
+        to (\_  -> TF.Compute "is_featured")
 
-instance HasComputedIsPublic TemplateResource (TF.Attribute Text) where
-    computedIsPublic f s@TemplateResource{..} =
-        (\a -> s { _computed_is_public = a } :: TemplateResource)
-             <$> f _computed_is_public
+instance HasComputedIsPublic TemplateResource Text where
+    computedIsPublic =
+        to (\_  -> TF.Compute "is_public")
 
-instance HasComputedIsReady TemplateResource (TF.Attribute Text) where
-    computedIsReady f s@TemplateResource{..} =
-        (\a -> s { _computed_is_ready = a } :: TemplateResource)
-             <$> f _computed_is_ready
+instance HasComputedIsReady TemplateResource Text where
+    computedIsReady =
+        to (\_  -> TF.Compute "is_ready")
 
-instance HasComputedPasswordEnabled TemplateResource (TF.Attribute Text) where
-    computedPasswordEnabled f s@TemplateResource{..} =
-        (\a -> s { _computed_password_enabled = a } :: TemplateResource)
-             <$> f _computed_password_enabled
+instance HasComputedPasswordEnabled TemplateResource Text where
+    computedPasswordEnabled =
+        to (\_  -> TF.Compute "password_enabled")
 
 templateResource :: TF.Resource TF.CloudStack TemplateResource
 templateResource =
@@ -1968,14 +1828,6 @@ templateResource =
             , _project = TF.Nil
             , _url = TF.Nil
             , _zone = TF.Nil
-            , _computed_display_text = TF.Compute "display_text"
-            , _computed_id = TF.Compute "id"
-            , _computed_is_dynamically_scalable = TF.Compute "is_dynamically_scalable"
-            , _computed_is_extractable = TF.Compute "is_extractable"
-            , _computed_is_featured = TF.Compute "is_featured"
-            , _computed_is_public = TF.Compute "is_public"
-            , _computed_is_ready = TF.Compute "is_ready"
-            , _computed_password_enabled = TF.Compute "password_enabled"
             }
 
 {- | The @cloudstack_vpc@ CloudStack resource.
@@ -1983,88 +1835,79 @@ templateResource =
 Creates a VPC.
 -}
 data VpcResource = VpcResource {
-      _cidr                   :: !(TF.Argument Text)
+      _cidr           :: !(TF.Argument "cidr" Text)
     {- ^ (Required) The CIDR block for the VPC. Changing this forces a new resource to be created. -}
-    , _display_text           :: !(TF.Argument Text)
+    , _display_text   :: !(TF.Argument "display_text" Text)
     {- ^ (Optional) The display text of the VPC. -}
-    , _name                   :: !(TF.Argument Text)
+    , _name           :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the VPC. -}
-    , _network_domain         :: !(TF.Argument Text)
+    , _network_domain :: !(TF.Argument "network_domain" Text)
     {- ^ (Optional) The default DNS domain for networks created in this VPC. Changing this forces a new resource to be created. -}
-    , _project                :: !(TF.Argument Text)
+    , _project        :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to deploy this instance to. Changing this forces a new resource to be created. -}
-    , _vpc_offering           :: !(TF.Argument Text)
+    , _vpc_offering   :: !(TF.Argument "vpc_offering" Text)
     {- ^ (Required) The name or ID of the VPC offering to use for this VPC. Changing this forces a new resource to be created. -}
-    , _zone                   :: !(TF.Argument Text)
+    , _zone           :: !(TF.Argument "zone" Text)
     {- ^ (Required) The name or ID of the zone where this disk volume will be available. Changing this forces a new resource to be created. -}
-    , _computed_display_text  :: !(TF.Attribute Text)
-    {- ^ - The display text of the VPC. -}
-    , _computed_id            :: !(TF.Attribute Text)
-    {- ^ - The ID of the VPC. -}
-    , _computed_source_nat_ip :: !(TF.Attribute Text)
-    {- ^ - The source NAT IP assigned to the VPC. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VpcResource where
     toHCL VpcResource{..} = TF.block $ catMaybes
-        [ TF.assign "cidr" <$> TF.argument _cidr
-        , TF.assign "display_text" <$> TF.argument _display_text
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "network_domain" <$> TF.argument _network_domain
-        , TF.assign "project" <$> TF.argument _project
-        , TF.assign "vpc_offering" <$> TF.argument _vpc_offering
-        , TF.assign "zone" <$> TF.argument _zone
+        [ TF.argument _cidr
+        , TF.argument _display_text
+        , TF.argument _name
+        , TF.argument _network_domain
+        , TF.argument _project
+        , TF.argument _vpc_offering
+        , TF.argument _zone
         ]
 
-instance HasCidr VpcResource (TF.Argument Text) where
-    cidr f s@VpcResource{..} =
-        (\a -> s { _cidr = a } :: VpcResource)
-             <$> f _cidr
+instance HasCidr VpcResource Text where
+    cidr =
+        lens (_cidr :: VpcResource -> TF.Argument "cidr" Text)
+             (\s a -> s { _cidr = a } :: VpcResource)
 
-instance HasDisplayText VpcResource (TF.Argument Text) where
-    displayText f s@VpcResource{..} =
-        (\a -> s { _display_text = a } :: VpcResource)
-             <$> f _display_text
+instance HasDisplayText VpcResource Text where
+    displayText =
+        lens (_display_text :: VpcResource -> TF.Argument "display_text" Text)
+             (\s a -> s { _display_text = a } :: VpcResource)
 
-instance HasName VpcResource (TF.Argument Text) where
-    name f s@VpcResource{..} =
-        (\a -> s { _name = a } :: VpcResource)
-             <$> f _name
+instance HasName VpcResource Text where
+    name =
+        lens (_name :: VpcResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: VpcResource)
 
-instance HasNetworkDomain VpcResource (TF.Argument Text) where
-    networkDomain f s@VpcResource{..} =
-        (\a -> s { _network_domain = a } :: VpcResource)
-             <$> f _network_domain
+instance HasNetworkDomain VpcResource Text where
+    networkDomain =
+        lens (_network_domain :: VpcResource -> TF.Argument "network_domain" Text)
+             (\s a -> s { _network_domain = a } :: VpcResource)
 
-instance HasProject VpcResource (TF.Argument Text) where
-    project f s@VpcResource{..} =
-        (\a -> s { _project = a } :: VpcResource)
-             <$> f _project
+instance HasProject VpcResource Text where
+    project =
+        lens (_project :: VpcResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: VpcResource)
 
-instance HasVpcOffering VpcResource (TF.Argument Text) where
-    vpcOffering f s@VpcResource{..} =
-        (\a -> s { _vpc_offering = a } :: VpcResource)
-             <$> f _vpc_offering
+instance HasVpcOffering VpcResource Text where
+    vpcOffering =
+        lens (_vpc_offering :: VpcResource -> TF.Argument "vpc_offering" Text)
+             (\s a -> s { _vpc_offering = a } :: VpcResource)
 
-instance HasZone VpcResource (TF.Argument Text) where
-    zone f s@VpcResource{..} =
-        (\a -> s { _zone = a } :: VpcResource)
-             <$> f _zone
+instance HasZone VpcResource Text where
+    zone =
+        lens (_zone :: VpcResource -> TF.Argument "zone" Text)
+             (\s a -> s { _zone = a } :: VpcResource)
 
-instance HasComputedDisplayText VpcResource (TF.Attribute Text) where
-    computedDisplayText f s@VpcResource{..} =
-        (\a -> s { _computed_display_text = a } :: VpcResource)
-             <$> f _computed_display_text
+instance HasComputedDisplayText VpcResource Text where
+    computedDisplayText =
+        to (\_  -> TF.Compute "display_text")
 
-instance HasComputedId VpcResource (TF.Attribute Text) where
-    computedId f s@VpcResource{..} =
-        (\a -> s { _computed_id = a } :: VpcResource)
-             <$> f _computed_id
+instance HasComputedId VpcResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedSourceNatIp VpcResource (TF.Attribute Text) where
-    computedSourceNatIp f s@VpcResource{..} =
-        (\a -> s { _computed_source_nat_ip = a } :: VpcResource)
-             <$> f _computed_source_nat_ip
+instance HasComputedSourceNatIp VpcResource Text where
+    computedSourceNatIp =
+        to (\_  -> TF.Compute "source_nat_ip")
 
 vpcResource :: TF.Resource TF.CloudStack VpcResource
 vpcResource =
@@ -2077,9 +1920,6 @@ vpcResource =
             , _project = TF.Nil
             , _vpc_offering = TF.Nil
             , _zone = TF.Nil
-            , _computed_display_text = TF.Compute "display_text"
-            , _computed_id = TF.Compute "id"
-            , _computed_source_nat_ip = TF.Compute "source_nat_ip"
             }
 
 {- | The @cloudstack_vpn_connection@ CloudStack resource.
@@ -2087,34 +1927,31 @@ vpcResource =
 Creates a site to site VPN connection.
 -}
 data VpnConnectionResource = VpnConnectionResource {
-      _customer_gateway_id :: !(TF.Argument Text)
+      _customer_gateway_id :: !(TF.Argument "customer_gateway_id" Text)
     {- ^ (Required) The Customer Gateway ID to connect. Changing this forces a new resource to be created. -}
-    , _vpn_gateway_id      :: !(TF.Argument Text)
+    , _vpn_gateway_id      :: !(TF.Argument "vpn_gateway_id" Text)
     {- ^ (Required) The VPN Gateway ID to connect. Changing this forces a new resource to be created. -}
-    , _computed_id         :: !(TF.Attribute Text)
-    {- ^ - The ID of the VPN Connection. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VpnConnectionResource where
     toHCL VpnConnectionResource{..} = TF.block $ catMaybes
-        [ TF.assign "customer_gateway_id" <$> TF.argument _customer_gateway_id
-        , TF.assign "vpn_gateway_id" <$> TF.argument _vpn_gateway_id
+        [ TF.argument _customer_gateway_id
+        , TF.argument _vpn_gateway_id
         ]
 
-instance HasCustomerGatewayId VpnConnectionResource (TF.Argument Text) where
-    customerGatewayId f s@VpnConnectionResource{..} =
-        (\a -> s { _customer_gateway_id = a } :: VpnConnectionResource)
-             <$> f _customer_gateway_id
+instance HasCustomerGatewayId VpnConnectionResource Text where
+    customerGatewayId =
+        lens (_customer_gateway_id :: VpnConnectionResource -> TF.Argument "customer_gateway_id" Text)
+             (\s a -> s { _customer_gateway_id = a } :: VpnConnectionResource)
 
-instance HasVpnGatewayId VpnConnectionResource (TF.Argument Text) where
-    vpnGatewayId f s@VpnConnectionResource{..} =
-        (\a -> s { _vpn_gateway_id = a } :: VpnConnectionResource)
-             <$> f _vpn_gateway_id
+instance HasVpnGatewayId VpnConnectionResource Text where
+    vpnGatewayId =
+        lens (_vpn_gateway_id :: VpnConnectionResource -> TF.Argument "vpn_gateway_id" Text)
+             (\s a -> s { _vpn_gateway_id = a } :: VpnConnectionResource)
 
-instance HasComputedId VpnConnectionResource (TF.Attribute Text) where
-    computedId f s@VpnConnectionResource{..} =
-        (\a -> s { _computed_id = a } :: VpnConnectionResource)
-             <$> f _computed_id
+instance HasComputedId VpnConnectionResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 vpnConnectionResource :: TF.Resource TF.CloudStack VpnConnectionResource
 vpnConnectionResource =
@@ -2122,7 +1959,6 @@ vpnConnectionResource =
         VpnConnectionResource {
             _customer_gateway_id = TF.Nil
             , _vpn_gateway_id = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 {- | The @cloudstack_vpn_customer_gateway@ CloudStack resource.
@@ -2130,119 +1966,107 @@ vpnConnectionResource =
 Creates a site to site VPN local customer gateway.
 -}
 data VpnCustomerGatewayResource = VpnCustomerGatewayResource {
-      _cidr                  :: !(TF.Argument Text)
+      _cidr         :: !(TF.Argument "cidr" Text)
     {- ^ (Required) The CIDR block that needs to be routed through this gateway. -}
-    , _dpd                   :: !(TF.Argument Text)
+    , _dpd          :: !(TF.Argument "dpd" Text)
     {- ^ (Optional) If DPD is enabled for the related VPN connection (defaults false) -}
-    , _esp_lifetime          :: !(TF.Argument Text)
+    , _esp_lifetime :: !(TF.Argument "esp_lifetime" Text)
     {- ^ (Optional) The ESP lifetime of phase 2 VPN connection to this VPN Customer Gateway in seconds (defaults 86400) -}
-    , _esp_policy            :: !(TF.Argument Text)
+    , _esp_policy   :: !(TF.Argument "esp_policy" Text)
     {- ^ (Required) The ESP policy to use for this VPN Customer Gateway. -}
-    , _gateway               :: !(TF.Argument Text)
+    , _gateway      :: !(TF.Argument "gateway" Text)
     {- ^ (Required) The public IP address of the related VPN Gateway. -}
-    , _ike_lifetime          :: !(TF.Argument Text)
+    , _ike_lifetime :: !(TF.Argument "ike_lifetime" Text)
     {- ^ (Optional) The IKE lifetime of phase 2 VPN connection to this VPN Customer Gateway in seconds (defaults 86400) -}
-    , _ike_policy            :: !(TF.Argument Text)
+    , _ike_policy   :: !(TF.Argument "ike_policy" Text)
     {- ^ (Required) The IKE policy to use for this VPN Customer Gateway. -}
-    , _ipsec_psk             :: !(TF.Argument Text)
+    , _ipsec_psk    :: !(TF.Argument "ipsec_psk" Text)
     {- ^ (Required) The IPSEC pre-shared key used for this gateway. -}
-    , _name                  :: !(TF.Argument Text)
+    , _name         :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the VPN Customer Gateway. -}
-    , _project               :: !(TF.Argument Text)
+    , _project      :: !(TF.Argument "project" Text)
     {- ^ (Optional) The name or ID of the project to create this VPN Customer Gateway in. Changing this forces a new resource to be created. -}
-    , _computed_dpd          :: !(TF.Attribute Text)
-    {- ^ - Enable or disable DPD is enabled for the related VPN connection. -}
-    , _computed_esp_lifetime :: !(TF.Attribute Text)
-    {- ^ - The ESP lifetime of phase 2 VPN connection to this VPN Customer Gateway. -}
-    , _computed_id           :: !(TF.Attribute Text)
-    {- ^ - The ID of the VPN Customer Gateway. -}
-    , _computed_ike_lifetime :: !(TF.Attribute Text)
-    {- ^ - The IKE lifetime of phase 2 VPN connection to this VPN Customer Gateway. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VpnCustomerGatewayResource where
     toHCL VpnCustomerGatewayResource{..} = TF.block $ catMaybes
-        [ TF.assign "cidr" <$> TF.argument _cidr
-        , TF.assign "dpd" <$> TF.argument _dpd
-        , TF.assign "esp_lifetime" <$> TF.argument _esp_lifetime
-        , TF.assign "esp_policy" <$> TF.argument _esp_policy
-        , TF.assign "gateway" <$> TF.argument _gateway
-        , TF.assign "ike_lifetime" <$> TF.argument _ike_lifetime
-        , TF.assign "ike_policy" <$> TF.argument _ike_policy
-        , TF.assign "ipsec_psk" <$> TF.argument _ipsec_psk
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "project" <$> TF.argument _project
+        [ TF.argument _cidr
+        , TF.argument _dpd
+        , TF.argument _esp_lifetime
+        , TF.argument _esp_policy
+        , TF.argument _gateway
+        , TF.argument _ike_lifetime
+        , TF.argument _ike_policy
+        , TF.argument _ipsec_psk
+        , TF.argument _name
+        , TF.argument _project
         ]
 
-instance HasCidr VpnCustomerGatewayResource (TF.Argument Text) where
-    cidr f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _cidr = a } :: VpnCustomerGatewayResource)
-             <$> f _cidr
+instance HasCidr VpnCustomerGatewayResource Text where
+    cidr =
+        lens (_cidr :: VpnCustomerGatewayResource -> TF.Argument "cidr" Text)
+             (\s a -> s { _cidr = a } :: VpnCustomerGatewayResource)
 
-instance HasDpd VpnCustomerGatewayResource (TF.Argument Text) where
-    dpd f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _dpd = a } :: VpnCustomerGatewayResource)
-             <$> f _dpd
+instance HasDpd VpnCustomerGatewayResource Text where
+    dpd =
+        lens (_dpd :: VpnCustomerGatewayResource -> TF.Argument "dpd" Text)
+             (\s a -> s { _dpd = a } :: VpnCustomerGatewayResource)
 
-instance HasEspLifetime VpnCustomerGatewayResource (TF.Argument Text) where
-    espLifetime f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _esp_lifetime = a } :: VpnCustomerGatewayResource)
-             <$> f _esp_lifetime
+instance HasEspLifetime VpnCustomerGatewayResource Text where
+    espLifetime =
+        lens (_esp_lifetime :: VpnCustomerGatewayResource -> TF.Argument "esp_lifetime" Text)
+             (\s a -> s { _esp_lifetime = a } :: VpnCustomerGatewayResource)
 
-instance HasEspPolicy VpnCustomerGatewayResource (TF.Argument Text) where
-    espPolicy f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _esp_policy = a } :: VpnCustomerGatewayResource)
-             <$> f _esp_policy
+instance HasEspPolicy VpnCustomerGatewayResource Text where
+    espPolicy =
+        lens (_esp_policy :: VpnCustomerGatewayResource -> TF.Argument "esp_policy" Text)
+             (\s a -> s { _esp_policy = a } :: VpnCustomerGatewayResource)
 
-instance HasGateway VpnCustomerGatewayResource (TF.Argument Text) where
-    gateway f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _gateway = a } :: VpnCustomerGatewayResource)
-             <$> f _gateway
+instance HasGateway VpnCustomerGatewayResource Text where
+    gateway =
+        lens (_gateway :: VpnCustomerGatewayResource -> TF.Argument "gateway" Text)
+             (\s a -> s { _gateway = a } :: VpnCustomerGatewayResource)
 
-instance HasIkeLifetime VpnCustomerGatewayResource (TF.Argument Text) where
-    ikeLifetime f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _ike_lifetime = a } :: VpnCustomerGatewayResource)
-             <$> f _ike_lifetime
+instance HasIkeLifetime VpnCustomerGatewayResource Text where
+    ikeLifetime =
+        lens (_ike_lifetime :: VpnCustomerGatewayResource -> TF.Argument "ike_lifetime" Text)
+             (\s a -> s { _ike_lifetime = a } :: VpnCustomerGatewayResource)
 
-instance HasIkePolicy VpnCustomerGatewayResource (TF.Argument Text) where
-    ikePolicy f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _ike_policy = a } :: VpnCustomerGatewayResource)
-             <$> f _ike_policy
+instance HasIkePolicy VpnCustomerGatewayResource Text where
+    ikePolicy =
+        lens (_ike_policy :: VpnCustomerGatewayResource -> TF.Argument "ike_policy" Text)
+             (\s a -> s { _ike_policy = a } :: VpnCustomerGatewayResource)
 
-instance HasIpsecPsk VpnCustomerGatewayResource (TF.Argument Text) where
-    ipsecPsk f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _ipsec_psk = a } :: VpnCustomerGatewayResource)
-             <$> f _ipsec_psk
+instance HasIpsecPsk VpnCustomerGatewayResource Text where
+    ipsecPsk =
+        lens (_ipsec_psk :: VpnCustomerGatewayResource -> TF.Argument "ipsec_psk" Text)
+             (\s a -> s { _ipsec_psk = a } :: VpnCustomerGatewayResource)
 
-instance HasName VpnCustomerGatewayResource (TF.Argument Text) where
-    name f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _name = a } :: VpnCustomerGatewayResource)
-             <$> f _name
+instance HasName VpnCustomerGatewayResource Text where
+    name =
+        lens (_name :: VpnCustomerGatewayResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: VpnCustomerGatewayResource)
 
-instance HasProject VpnCustomerGatewayResource (TF.Argument Text) where
-    project f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _project = a } :: VpnCustomerGatewayResource)
-             <$> f _project
+instance HasProject VpnCustomerGatewayResource Text where
+    project =
+        lens (_project :: VpnCustomerGatewayResource -> TF.Argument "project" Text)
+             (\s a -> s { _project = a } :: VpnCustomerGatewayResource)
 
-instance HasComputedDpd VpnCustomerGatewayResource (TF.Attribute Text) where
-    computedDpd f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _computed_dpd = a } :: VpnCustomerGatewayResource)
-             <$> f _computed_dpd
+instance HasComputedDpd VpnCustomerGatewayResource Text where
+    computedDpd =
+        to (\_  -> TF.Compute "dpd")
 
-instance HasComputedEspLifetime VpnCustomerGatewayResource (TF.Attribute Text) where
-    computedEspLifetime f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _computed_esp_lifetime = a } :: VpnCustomerGatewayResource)
-             <$> f _computed_esp_lifetime
+instance HasComputedEspLifetime VpnCustomerGatewayResource Text where
+    computedEspLifetime =
+        to (\_  -> TF.Compute "esp_lifetime")
 
-instance HasComputedId VpnCustomerGatewayResource (TF.Attribute Text) where
-    computedId f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _computed_id = a } :: VpnCustomerGatewayResource)
-             <$> f _computed_id
+instance HasComputedId VpnCustomerGatewayResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedIkeLifetime VpnCustomerGatewayResource (TF.Attribute Text) where
-    computedIkeLifetime f s@VpnCustomerGatewayResource{..} =
-        (\a -> s { _computed_ike_lifetime = a } :: VpnCustomerGatewayResource)
-             <$> f _computed_ike_lifetime
+instance HasComputedIkeLifetime VpnCustomerGatewayResource Text where
+    computedIkeLifetime =
+        to (\_  -> TF.Compute "ike_lifetime")
 
 vpnCustomerGatewayResource :: TF.Resource TF.CloudStack VpnCustomerGatewayResource
 vpnCustomerGatewayResource =
@@ -2258,10 +2082,6 @@ vpnCustomerGatewayResource =
             , _ipsec_psk = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
-            , _computed_dpd = TF.Compute "dpd"
-            , _computed_esp_lifetime = TF.Compute "esp_lifetime"
-            , _computed_id = TF.Compute "id"
-            , _computed_ike_lifetime = TF.Compute "ike_lifetime"
             }
 
 {- | The @cloudstack_vpn_gateway@ CloudStack resource.
@@ -2269,603 +2089,595 @@ vpnCustomerGatewayResource =
 Creates a site to site VPN local gateway.
 -}
 data VpnGatewayResource = VpnGatewayResource {
-      _vpc_id             :: !(TF.Argument Text)
+      _vpc_id :: !(TF.Argument "vpc_id" Text)
     {- ^ (Required) The ID of the VPC for which to create the VPN Gateway. Changing this forces a new resource to be created. -}
-    , _computed_id        :: !(TF.Attribute Text)
-    {- ^ - The ID of the VPN Gateway. -}
-    , _computed_public_ip :: !(TF.Attribute Text)
-    {- ^ - The public IP address associated with the VPN Gateway. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VpnGatewayResource where
     toHCL VpnGatewayResource{..} = TF.block $ catMaybes
-        [ TF.assign "vpc_id" <$> TF.argument _vpc_id
+        [ TF.argument _vpc_id
         ]
 
-instance HasVpcId VpnGatewayResource (TF.Argument Text) where
-    vpcId f s@VpnGatewayResource{..} =
-        (\a -> s { _vpc_id = a } :: VpnGatewayResource)
-             <$> f _vpc_id
+instance HasVpcId VpnGatewayResource Text where
+    vpcId =
+        lens (_vpc_id :: VpnGatewayResource -> TF.Argument "vpc_id" Text)
+             (\s a -> s { _vpc_id = a } :: VpnGatewayResource)
 
-instance HasComputedId VpnGatewayResource (TF.Attribute Text) where
-    computedId f s@VpnGatewayResource{..} =
-        (\a -> s { _computed_id = a } :: VpnGatewayResource)
-             <$> f _computed_id
+instance HasComputedId VpnGatewayResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedPublicIp VpnGatewayResource (TF.Attribute Text) where
-    computedPublicIp f s@VpnGatewayResource{..} =
-        (\a -> s { _computed_public_ip = a } :: VpnGatewayResource)
-             <$> f _computed_public_ip
+instance HasComputedPublicIp VpnGatewayResource Text where
+    computedPublicIp =
+        to (\_  -> TF.Compute "public_ip")
 
 vpnGatewayResource :: TF.Resource TF.CloudStack VpnGatewayResource
 vpnGatewayResource =
     TF.newResource "cloudstack_vpn_gateway" $
         VpnGatewayResource {
             _vpc_id = TF.Nil
-            , _computed_id = TF.Compute "id"
-            , _computed_public_ip = TF.Compute "public_ip"
             }
 
 class HasAclId s a | s -> a where
-    aclId :: Functor f => (a -> f a) -> s -> f s
+    aclId :: Lens' s (TF.Argument "acl_id" a)
 
 instance HasAclId s a => HasAclId (TF.Resource p s) a where
     aclId = TF.configuration . aclId
 
 class HasAffinityGroupIds s a | s -> a where
-    affinityGroupIds :: Functor f => (a -> f a) -> s -> f s
+    affinityGroupIds :: Lens' s (TF.Argument "affinity_group_ids" a)
 
 instance HasAffinityGroupIds s a => HasAffinityGroupIds (TF.Resource p s) a where
     affinityGroupIds = TF.configuration . affinityGroupIds
 
 class HasAffinityGroupNames s a | s -> a where
-    affinityGroupNames :: Functor f => (a -> f a) -> s -> f s
+    affinityGroupNames :: Lens' s (TF.Argument "affinity_group_names" a)
 
 instance HasAffinityGroupNames s a => HasAffinityGroupNames (TF.Resource p s) a where
     affinityGroupNames = TF.configuration . affinityGroupNames
 
 class HasAlgorithm s a | s -> a where
-    algorithm :: Functor f => (a -> f a) -> s -> f s
+    algorithm :: Lens' s (TF.Argument "algorithm" a)
 
 instance HasAlgorithm s a => HasAlgorithm (TF.Resource p s) a where
     algorithm = TF.configuration . algorithm
 
 class HasAttach s a | s -> a where
-    attach :: Functor f => (a -> f a) -> s -> f s
+    attach :: Lens' s (TF.Argument "attach" a)
 
 instance HasAttach s a => HasAttach (TF.Resource p s) a where
     attach = TF.configuration . attach
 
 class HasCidr s a | s -> a where
-    cidr :: Functor f => (a -> f a) -> s -> f s
+    cidr :: Lens' s (TF.Argument "cidr" a)
 
 instance HasCidr s a => HasCidr (TF.Resource p s) a where
     cidr = TF.configuration . cidr
 
-class HasComputedDescription s a | s -> a where
-    computedDescription :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedDescription s a => HasComputedDescription (TF.Resource p s) a where
-    computedDescription = TF.configuration . computedDescription
-
-class HasComputedDeviceId s a | s -> a where
-    computedDeviceId :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedDeviceId s a => HasComputedDeviceId (TF.Resource p s) a where
-    computedDeviceId = TF.configuration . computedDeviceId
-
-class HasComputedDisplayName s a | s -> a where
-    computedDisplayName :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedDisplayName s a => HasComputedDisplayName (TF.Resource p s) a where
-    computedDisplayName = TF.configuration . computedDisplayName
-
-class HasComputedDisplayText s a | s -> a where
-    computedDisplayText :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedDisplayText s a => HasComputedDisplayText (TF.Resource p s) a where
-    computedDisplayText = TF.configuration . computedDisplayText
-
-class HasComputedDpd s a | s -> a where
-    computedDpd :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedDpd s a => HasComputedDpd (TF.Resource p s) a where
-    computedDpd = TF.configuration . computedDpd
-
-class HasComputedEspLifetime s a | s -> a where
-    computedEspLifetime :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedEspLifetime s a => HasComputedEspLifetime (TF.Resource p s) a where
-    computedEspLifetime = TF.configuration . computedEspLifetime
-
-class HasComputedFingerprint s a | s -> a where
-    computedFingerprint :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedFingerprint s a => HasComputedFingerprint (TF.Resource p s) a where
-    computedFingerprint = TF.configuration . computedFingerprint
-
-class HasComputedId s a | s -> a where
-    computedId :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedIkeLifetime s a | s -> a where
-    computedIkeLifetime :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIkeLifetime s a => HasComputedIkeLifetime (TF.Resource p s) a where
-    computedIkeLifetime = TF.configuration . computedIkeLifetime
-
-class HasComputedIpAddress s a | s -> a where
-    computedIpAddress :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIpAddress s a => HasComputedIpAddress (TF.Resource p s) a where
-    computedIpAddress = TF.configuration . computedIpAddress
-
-class HasComputedIsDynamicallyScalable s a | s -> a where
-    computedIsDynamicallyScalable :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIsDynamicallyScalable s a => HasComputedIsDynamicallyScalable (TF.Resource p s) a where
-    computedIsDynamicallyScalable = TF.configuration . computedIsDynamicallyScalable
-
-class HasComputedIsExtractable s a | s -> a where
-    computedIsExtractable :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIsExtractable s a => HasComputedIsExtractable (TF.Resource p s) a where
-    computedIsExtractable = TF.configuration . computedIsExtractable
-
-class HasComputedIsFeatured s a | s -> a where
-    computedIsFeatured :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIsFeatured s a => HasComputedIsFeatured (TF.Resource p s) a where
-    computedIsFeatured = TF.configuration . computedIsFeatured
-
-class HasComputedIsPublic s a | s -> a where
-    computedIsPublic :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIsPublic s a => HasComputedIsPublic (TF.Resource p s) a where
-    computedIsPublic = TF.configuration . computedIsPublic
-
-class HasComputedIsReady s a | s -> a where
-    computedIsReady :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIsReady s a => HasComputedIsReady (TF.Resource p s) a where
-    computedIsReady = TF.configuration . computedIsReady
-
-class HasComputedNetworkDomain s a | s -> a where
-    computedNetworkDomain :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedNetworkDomain s a => HasComputedNetworkDomain (TF.Resource p s) a where
-    computedNetworkDomain = TF.configuration . computedNetworkDomain
-
-class HasComputedPasswordEnabled s a | s -> a where
-    computedPasswordEnabled :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedPasswordEnabled s a => HasComputedPasswordEnabled (TF.Resource p s) a where
-    computedPasswordEnabled = TF.configuration . computedPasswordEnabled
-
-class HasComputedPrivateKey s a | s -> a where
-    computedPrivateKey :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedPrivateKey s a => HasComputedPrivateKey (TF.Resource p s) a where
-    computedPrivateKey = TF.configuration . computedPrivateKey
-
-class HasComputedPublicIp s a | s -> a where
-    computedPublicIp :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedPublicIp s a => HasComputedPublicIp (TF.Resource p s) a where
-    computedPublicIp = TF.configuration . computedPublicIp
-
-class HasComputedSourceNatIp s a | s -> a where
-    computedSourceNatIp :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedSourceNatIp s a => HasComputedSourceNatIp (TF.Resource p s) a where
-    computedSourceNatIp = TF.configuration . computedSourceNatIp
-
-class HasComputedVmGuestIp s a | s -> a where
-    computedVmGuestIp :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedVmGuestIp s a => HasComputedVmGuestIp (TF.Resource p s) a where
-    computedVmGuestIp = TF.configuration . computedVmGuestIp
-
 class HasCustomerGatewayId s a | s -> a where
-    customerGatewayId :: Functor f => (a -> f a) -> s -> f s
+    customerGatewayId :: Lens' s (TF.Argument "customer_gateway_id" a)
 
 instance HasCustomerGatewayId s a => HasCustomerGatewayId (TF.Resource p s) a where
     customerGatewayId = TF.configuration . customerGatewayId
 
 class HasDescription s a | s -> a where
-    description :: Functor f => (a -> f a) -> s -> f s
+    description :: Lens' s (TF.Argument "description" a)
 
 instance HasDescription s a => HasDescription (TF.Resource p s) a where
     description = TF.configuration . description
 
 class HasDeviceId s a | s -> a where
-    deviceId :: Functor f => (a -> f a) -> s -> f s
+    deviceId :: Lens' s (TF.Argument "device_id" a)
 
 instance HasDeviceId s a => HasDeviceId (TF.Resource p s) a where
     deviceId = TF.configuration . deviceId
 
 class HasDiskOffering s a | s -> a where
-    diskOffering :: Functor f => (a -> f a) -> s -> f s
+    diskOffering :: Lens' s (TF.Argument "disk_offering" a)
 
 instance HasDiskOffering s a => HasDiskOffering (TF.Resource p s) a where
     diskOffering = TF.configuration . diskOffering
 
 class HasDisplayName s a | s -> a where
-    displayName :: Functor f => (a -> f a) -> s -> f s
+    displayName :: Lens' s (TF.Argument "display_name" a)
 
 instance HasDisplayName s a => HasDisplayName (TF.Resource p s) a where
     displayName = TF.configuration . displayName
 
 class HasDisplayText s a | s -> a where
-    displayText :: Functor f => (a -> f a) -> s -> f s
+    displayText :: Lens' s (TF.Argument "display_text" a)
 
 instance HasDisplayText s a => HasDisplayText (TF.Resource p s) a where
     displayText = TF.configuration . displayText
 
 class HasDpd s a | s -> a where
-    dpd :: Functor f => (a -> f a) -> s -> f s
+    dpd :: Lens' s (TF.Argument "dpd" a)
 
 instance HasDpd s a => HasDpd (TF.Resource p s) a where
     dpd = TF.configuration . dpd
 
 class HasEndip s a | s -> a where
-    endip :: Functor f => (a -> f a) -> s -> f s
+    endip :: Lens' s (TF.Argument "endip" a)
 
 instance HasEndip s a => HasEndip (TF.Resource p s) a where
     endip = TF.configuration . endip
 
 class HasEspLifetime s a | s -> a where
-    espLifetime :: Functor f => (a -> f a) -> s -> f s
+    espLifetime :: Lens' s (TF.Argument "esp_lifetime" a)
 
 instance HasEspLifetime s a => HasEspLifetime (TF.Resource p s) a where
     espLifetime = TF.configuration . espLifetime
 
 class HasEspPolicy s a | s -> a where
-    espPolicy :: Functor f => (a -> f a) -> s -> f s
+    espPolicy :: Lens' s (TF.Argument "esp_policy" a)
 
 instance HasEspPolicy s a => HasEspPolicy (TF.Resource p s) a where
     espPolicy = TF.configuration . espPolicy
 
 class HasExpunge s a | s -> a where
-    expunge :: Functor f => (a -> f a) -> s -> f s
+    expunge :: Lens' s (TF.Argument "expunge" a)
 
 instance HasExpunge s a => HasExpunge (TF.Resource p s) a where
     expunge = TF.configuration . expunge
 
 class HasFormat s a | s -> a where
-    format :: Functor f => (a -> f a) -> s -> f s
+    format :: Lens' s (TF.Argument "format" a)
 
 instance HasFormat s a => HasFormat (TF.Resource p s) a where
     format = TF.configuration . format
 
 class HasForward s a | s -> a where
-    forward :: Functor f => (a -> f a) -> s -> f s
+    forward :: Lens' s (TF.Argument "forward" a)
 
 instance HasForward s a => HasForward (TF.Resource p s) a where
     forward = TF.configuration . forward
 
 class HasGateway s a | s -> a where
-    gateway :: Functor f => (a -> f a) -> s -> f s
+    gateway :: Lens' s (TF.Argument "gateway" a)
 
 instance HasGateway s a => HasGateway (TF.Resource p s) a where
     gateway = TF.configuration . gateway
 
 class HasGatewayId s a | s -> a where
-    gatewayId :: Functor f => (a -> f a) -> s -> f s
+    gatewayId :: Lens' s (TF.Argument "gateway_id" a)
 
 instance HasGatewayId s a => HasGatewayId (TF.Resource p s) a where
     gatewayId = TF.configuration . gatewayId
 
 class HasGroup s a | s -> a where
-    group :: Functor f => (a -> f a) -> s -> f s
+    group :: Lens' s (TF.Argument "group" a)
 
 instance HasGroup s a => HasGroup (TF.Resource p s) a where
     group = TF.configuration . group
 
 class HasHypervisor s a | s -> a where
-    hypervisor :: Functor f => (a -> f a) -> s -> f s
+    hypervisor :: Lens' s (TF.Argument "hypervisor" a)
 
 instance HasHypervisor s a => HasHypervisor (TF.Resource p s) a where
     hypervisor = TF.configuration . hypervisor
 
 class HasIkeLifetime s a | s -> a where
-    ikeLifetime :: Functor f => (a -> f a) -> s -> f s
+    ikeLifetime :: Lens' s (TF.Argument "ike_lifetime" a)
 
 instance HasIkeLifetime s a => HasIkeLifetime (TF.Resource p s) a where
     ikeLifetime = TF.configuration . ikeLifetime
 
 class HasIkePolicy s a | s -> a where
-    ikePolicy :: Functor f => (a -> f a) -> s -> f s
+    ikePolicy :: Lens' s (TF.Argument "ike_policy" a)
 
 instance HasIkePolicy s a => HasIkePolicy (TF.Resource p s) a where
     ikePolicy = TF.configuration . ikePolicy
 
 class HasIpAddress s a | s -> a where
-    ipAddress :: Functor f => (a -> f a) -> s -> f s
+    ipAddress :: Lens' s (TF.Argument "ip_address" a)
 
 instance HasIpAddress s a => HasIpAddress (TF.Resource p s) a where
     ipAddress = TF.configuration . ipAddress
 
 class HasIpAddressId s a | s -> a where
-    ipAddressId :: Functor f => (a -> f a) -> s -> f s
+    ipAddressId :: Lens' s (TF.Argument "ip_address_id" a)
 
 instance HasIpAddressId s a => HasIpAddressId (TF.Resource p s) a where
     ipAddressId = TF.configuration . ipAddressId
 
 class HasIpsecPsk s a | s -> a where
-    ipsecPsk :: Functor f => (a -> f a) -> s -> f s
+    ipsecPsk :: Lens' s (TF.Argument "ipsec_psk" a)
 
 instance HasIpsecPsk s a => HasIpsecPsk (TF.Resource p s) a where
     ipsecPsk = TF.configuration . ipsecPsk
 
 class HasIsDynamicallyScalable s a | s -> a where
-    isDynamicallyScalable :: Functor f => (a -> f a) -> s -> f s
+    isDynamicallyScalable :: Lens' s (TF.Argument "is_dynamically_scalable" a)
 
 instance HasIsDynamicallyScalable s a => HasIsDynamicallyScalable (TF.Resource p s) a where
     isDynamicallyScalable = TF.configuration . isDynamicallyScalable
 
 class HasIsExtractable s a | s -> a where
-    isExtractable :: Functor f => (a -> f a) -> s -> f s
+    isExtractable :: Lens' s (TF.Argument "is_extractable" a)
 
 instance HasIsExtractable s a => HasIsExtractable (TF.Resource p s) a where
     isExtractable = TF.configuration . isExtractable
 
 class HasIsFeatured s a | s -> a where
-    isFeatured :: Functor f => (a -> f a) -> s -> f s
+    isFeatured :: Lens' s (TF.Argument "is_featured" a)
 
 instance HasIsFeatured s a => HasIsFeatured (TF.Resource p s) a where
     isFeatured = TF.configuration . isFeatured
 
 class HasIsPortable s a | s -> a where
-    isPortable :: Functor f => (a -> f a) -> s -> f s
+    isPortable :: Lens' s (TF.Argument "is_portable" a)
 
 instance HasIsPortable s a => HasIsPortable (TF.Resource p s) a where
     isPortable = TF.configuration . isPortable
 
 class HasIsPublic s a | s -> a where
-    isPublic :: Functor f => (a -> f a) -> s -> f s
+    isPublic :: Lens' s (TF.Argument "is_public" a)
 
 instance HasIsPublic s a => HasIsPublic (TF.Resource p s) a where
     isPublic = TF.configuration . isPublic
 
 class HasIsReadyTimeout s a | s -> a where
-    isReadyTimeout :: Functor f => (a -> f a) -> s -> f s
+    isReadyTimeout :: Lens' s (TF.Argument "is_ready_timeout" a)
 
 instance HasIsReadyTimeout s a => HasIsReadyTimeout (TF.Resource p s) a where
     isReadyTimeout = TF.configuration . isReadyTimeout
 
 class HasKeypair s a | s -> a where
-    keypair :: Functor f => (a -> f a) -> s -> f s
+    keypair :: Lens' s (TF.Argument "keypair" a)
 
 instance HasKeypair s a => HasKeypair (TF.Resource p s) a where
     keypair = TF.configuration . keypair
 
 class HasManaged s a | s -> a where
-    managed :: Functor f => (a -> f a) -> s -> f s
+    managed :: Lens' s (TF.Argument "managed" a)
 
 instance HasManaged s a => HasManaged (TF.Resource p s) a where
     managed = TF.configuration . managed
 
 class HasMemberIds s a | s -> a where
-    memberIds :: Functor f => (a -> f a) -> s -> f s
+    memberIds :: Lens' s (TF.Argument "member_ids" a)
 
 instance HasMemberIds s a => HasMemberIds (TF.Resource p s) a where
     memberIds = TF.configuration . memberIds
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name
 
 class HasNetmask s a | s -> a where
-    netmask :: Functor f => (a -> f a) -> s -> f s
+    netmask :: Lens' s (TF.Argument "netmask" a)
 
 instance HasNetmask s a => HasNetmask (TF.Resource p s) a where
     netmask = TF.configuration . netmask
 
 class HasNetworkDomain s a | s -> a where
-    networkDomain :: Functor f => (a -> f a) -> s -> f s
+    networkDomain :: Lens' s (TF.Argument "network_domain" a)
 
 instance HasNetworkDomain s a => HasNetworkDomain (TF.Resource p s) a where
     networkDomain = TF.configuration . networkDomain
 
 class HasNetworkId s a | s -> a where
-    networkId :: Functor f => (a -> f a) -> s -> f s
+    networkId :: Lens' s (TF.Argument "network_id" a)
 
 instance HasNetworkId s a => HasNetworkId (TF.Resource p s) a where
     networkId = TF.configuration . networkId
 
 class HasNetworkOffering s a | s -> a where
-    networkOffering :: Functor f => (a -> f a) -> s -> f s
+    networkOffering :: Lens' s (TF.Argument "network_offering" a)
 
 instance HasNetworkOffering s a => HasNetworkOffering (TF.Resource p s) a where
     networkOffering = TF.configuration . networkOffering
 
 class HasNicId s a | s -> a where
-    nicId :: Functor f => (a -> f a) -> s -> f s
+    nicId :: Lens' s (TF.Argument "nic_id" a)
 
 instance HasNicId s a => HasNicId (TF.Resource p s) a where
     nicId = TF.configuration . nicId
 
 class HasOsType s a | s -> a where
-    osType :: Functor f => (a -> f a) -> s -> f s
+    osType :: Lens' s (TF.Argument "os_type" a)
 
 instance HasOsType s a => HasOsType (TF.Resource p s) a where
     osType = TF.configuration . osType
 
 class HasParallelism s a | s -> a where
-    parallelism :: Functor f => (a -> f a) -> s -> f s
+    parallelism :: Lens' s (TF.Argument "parallelism" a)
 
 instance HasParallelism s a => HasParallelism (TF.Resource p s) a where
     parallelism = TF.configuration . parallelism
 
 class HasPasswordEnabled s a | s -> a where
-    passwordEnabled :: Functor f => (a -> f a) -> s -> f s
+    passwordEnabled :: Lens' s (TF.Argument "password_enabled" a)
 
 instance HasPasswordEnabled s a => HasPasswordEnabled (TF.Resource p s) a where
     passwordEnabled = TF.configuration . passwordEnabled
 
 class HasPhysicalNetworkId s a | s -> a where
-    physicalNetworkId :: Functor f => (a -> f a) -> s -> f s
+    physicalNetworkId :: Lens' s (TF.Argument "physical_network_id" a)
 
 instance HasPhysicalNetworkId s a => HasPhysicalNetworkId (TF.Resource p s) a where
     physicalNetworkId = TF.configuration . physicalNetworkId
 
 class HasPrivatePort s a | s -> a where
-    privatePort :: Functor f => (a -> f a) -> s -> f s
+    privatePort :: Lens' s (TF.Argument "private_port" a)
 
 instance HasPrivatePort s a => HasPrivatePort (TF.Resource p s) a where
     privatePort = TF.configuration . privatePort
 
 class HasProject s a | s -> a where
-    project :: Functor f => (a -> f a) -> s -> f s
+    project :: Lens' s (TF.Argument "project" a)
 
 instance HasProject s a => HasProject (TF.Resource p s) a where
     project = TF.configuration . project
 
 class HasProtocol s a | s -> a where
-    protocol :: Functor f => (a -> f a) -> s -> f s
+    protocol :: Lens' s (TF.Argument "protocol" a)
 
 instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
     protocol = TF.configuration . protocol
 
 class HasPublicKey s a | s -> a where
-    publicKey :: Functor f => (a -> f a) -> s -> f s
+    publicKey :: Lens' s (TF.Argument "public_key" a)
 
 instance HasPublicKey s a => HasPublicKey (TF.Resource p s) a where
     publicKey = TF.configuration . publicKey
 
 class HasPublicPort s a | s -> a where
-    publicPort :: Functor f => (a -> f a) -> s -> f s
+    publicPort :: Lens' s (TF.Argument "public_port" a)
 
 instance HasPublicPort s a => HasPublicPort (TF.Resource p s) a where
     publicPort = TF.configuration . publicPort
 
 class HasRootDiskSize s a | s -> a where
-    rootDiskSize :: Functor f => (a -> f a) -> s -> f s
+    rootDiskSize :: Lens' s (TF.Argument "root_disk_size" a)
 
 instance HasRootDiskSize s a => HasRootDiskSize (TF.Resource p s) a where
     rootDiskSize = TF.configuration . rootDiskSize
 
 class HasRule s a | s -> a where
-    rule :: Functor f => (a -> f a) -> s -> f s
+    rule :: Lens' s (TF.Argument "rule" a)
 
 instance HasRule s a => HasRule (TF.Resource p s) a where
     rule = TF.configuration . rule
 
 class HasSecurityGroupId s a | s -> a where
-    securityGroupId :: Functor f => (a -> f a) -> s -> f s
+    securityGroupId :: Lens' s (TF.Argument "security_group_id" a)
 
 instance HasSecurityGroupId s a => HasSecurityGroupId (TF.Resource p s) a where
     securityGroupId = TF.configuration . securityGroupId
 
 class HasSecurityGroupIds s a | s -> a where
-    securityGroupIds :: Functor f => (a -> f a) -> s -> f s
+    securityGroupIds :: Lens' s (TF.Argument "security_group_ids" a)
 
 instance HasSecurityGroupIds s a => HasSecurityGroupIds (TF.Resource p s) a where
     securityGroupIds = TF.configuration . securityGroupIds
 
 class HasSecurityGroupNames s a | s -> a where
-    securityGroupNames :: Functor f => (a -> f a) -> s -> f s
+    securityGroupNames :: Lens' s (TF.Argument "security_group_names" a)
 
 instance HasSecurityGroupNames s a => HasSecurityGroupNames (TF.Resource p s) a where
     securityGroupNames = TF.configuration . securityGroupNames
 
 class HasServiceOffering s a | s -> a where
-    serviceOffering :: Functor f => (a -> f a) -> s -> f s
+    serviceOffering :: Lens' s (TF.Argument "service_offering" a)
 
 instance HasServiceOffering s a => HasServiceOffering (TF.Resource p s) a where
     serviceOffering = TF.configuration . serviceOffering
 
 class HasShrinkOk s a | s -> a where
-    shrinkOk :: Functor f => (a -> f a) -> s -> f s
+    shrinkOk :: Lens' s (TF.Argument "shrink_ok" a)
 
 instance HasShrinkOk s a => HasShrinkOk (TF.Resource p s) a where
     shrinkOk = TF.configuration . shrinkOk
 
 class HasSize s a | s -> a where
-    size :: Functor f => (a -> f a) -> s -> f s
+    size :: Lens' s (TF.Argument "size" a)
 
 instance HasSize s a => HasSize (TF.Resource p s) a where
     size = TF.configuration . size
 
 class HasStartip s a | s -> a where
-    startip :: Functor f => (a -> f a) -> s -> f s
+    startip :: Lens' s (TF.Argument "startip" a)
 
 instance HasStartip s a => HasStartip (TF.Resource p s) a where
     startip = TF.configuration . startip
 
 class HasTags s a | s -> a where
-    tags :: Functor f => (a -> f a) -> s -> f s
+    tags :: Lens' s (TF.Argument "tags" a)
 
 instance HasTags s a => HasTags (TF.Resource p s) a where
     tags = TF.configuration . tags
 
 class HasTemplate s a | s -> a where
-    template :: Functor f => (a -> f a) -> s -> f s
+    template :: Lens' s (TF.Argument "template" a)
 
 instance HasTemplate s a => HasTemplate (TF.Resource p s) a where
     template = TF.configuration . template
 
 class HasType' s a | s -> a where
-    type' :: Functor f => (a -> f a) -> s -> f s
+    type' :: Lens' s (TF.Argument "type" a)
 
 instance HasType' s a => HasType' (TF.Resource p s) a where
     type' = TF.configuration . type'
 
 class HasUrl s a | s -> a where
-    url :: Functor f => (a -> f a) -> s -> f s
+    url :: Lens' s (TF.Argument "url" a)
 
 instance HasUrl s a => HasUrl (TF.Resource p s) a where
     url = TF.configuration . url
 
 class HasUserData s a | s -> a where
-    userData :: Functor f => (a -> f a) -> s -> f s
+    userData :: Lens' s (TF.Argument "user_data" a)
 
 instance HasUserData s a => HasUserData (TF.Resource p s) a where
     userData = TF.configuration . userData
 
 class HasVirtualMachineId s a | s -> a where
-    virtualMachineId :: Functor f => (a -> f a) -> s -> f s
+    virtualMachineId :: Lens' s (TF.Argument "virtual_machine_id" a)
 
 instance HasVirtualMachineId s a => HasVirtualMachineId (TF.Resource p s) a where
     virtualMachineId = TF.configuration . virtualMachineId
 
 class HasVlan s a | s -> a where
-    vlan :: Functor f => (a -> f a) -> s -> f s
+    vlan :: Lens' s (TF.Argument "vlan" a)
 
 instance HasVlan s a => HasVlan (TF.Resource p s) a where
     vlan = TF.configuration . vlan
 
 class HasVmGuestIp s a | s -> a where
-    vmGuestIp :: Functor f => (a -> f a) -> s -> f s
+    vmGuestIp :: Lens' s (TF.Argument "vm_guest_ip" a)
 
 instance HasVmGuestIp s a => HasVmGuestIp (TF.Resource p s) a where
     vmGuestIp = TF.configuration . vmGuestIp
 
 class HasVpcId s a | s -> a where
-    vpcId :: Functor f => (a -> f a) -> s -> f s
+    vpcId :: Lens' s (TF.Argument "vpc_id" a)
 
 instance HasVpcId s a => HasVpcId (TF.Resource p s) a where
     vpcId = TF.configuration . vpcId
 
 class HasVpcOffering s a | s -> a where
-    vpcOffering :: Functor f => (a -> f a) -> s -> f s
+    vpcOffering :: Lens' s (TF.Argument "vpc_offering" a)
 
 instance HasVpcOffering s a => HasVpcOffering (TF.Resource p s) a where
     vpcOffering = TF.configuration . vpcOffering
 
 class HasVpnGatewayId s a | s -> a where
-    vpnGatewayId :: Functor f => (a -> f a) -> s -> f s
+    vpnGatewayId :: Lens' s (TF.Argument "vpn_gateway_id" a)
 
 instance HasVpnGatewayId s a => HasVpnGatewayId (TF.Resource p s) a where
     vpnGatewayId = TF.configuration . vpnGatewayId
 
 class HasZone s a | s -> a where
-    zone :: Functor f => (a -> f a) -> s -> f s
+    zone :: Lens' s (TF.Argument "zone" a)
 
 instance HasZone s a => HasZone (TF.Resource p s) a where
     zone = TF.configuration . zone
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedDescription s a => HasComputedDescription (TF.Resource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedDeviceId s a | s -> a where
+    computedDeviceId :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedDeviceId s a => HasComputedDeviceId (TF.Resource p s) a where
+    computedDeviceId = TF.configuration . computedDeviceId
+
+class HasComputedDisplayName s a | s -> a where
+    computedDisplayName :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedDisplayName s a => HasComputedDisplayName (TF.Resource p s) a where
+    computedDisplayName = TF.configuration . computedDisplayName
+
+class HasComputedDisplayText s a | s -> a where
+    computedDisplayText :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedDisplayText s a => HasComputedDisplayText (TF.Resource p s) a where
+    computedDisplayText = TF.configuration . computedDisplayText
+
+class HasComputedDpd s a | s -> a where
+    computedDpd :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedDpd s a => HasComputedDpd (TF.Resource p s) a where
+    computedDpd = TF.configuration . computedDpd
+
+class HasComputedEspLifetime s a | s -> a where
+    computedEspLifetime :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedEspLifetime s a => HasComputedEspLifetime (TF.Resource p s) a where
+    computedEspLifetime = TF.configuration . computedEspLifetime
+
+class HasComputedFingerprint s a | s -> a where
+    computedFingerprint :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedFingerprint s a => HasComputedFingerprint (TF.Resource p s) a where
+    computedFingerprint = TF.configuration . computedFingerprint
+
+class HasComputedId s a | s -> a where
+    computedId :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedIkeLifetime s a | s -> a where
+    computedIkeLifetime :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIkeLifetime s a => HasComputedIkeLifetime (TF.Resource p s) a where
+    computedIkeLifetime = TF.configuration . computedIkeLifetime
+
+class HasComputedIpAddress s a | s -> a where
+    computedIpAddress :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIpAddress s a => HasComputedIpAddress (TF.Resource p s) a where
+    computedIpAddress = TF.configuration . computedIpAddress
+
+class HasComputedIsDynamicallyScalable s a | s -> a where
+    computedIsDynamicallyScalable :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIsDynamicallyScalable s a => HasComputedIsDynamicallyScalable (TF.Resource p s) a where
+    computedIsDynamicallyScalable = TF.configuration . computedIsDynamicallyScalable
+
+class HasComputedIsExtractable s a | s -> a where
+    computedIsExtractable :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIsExtractable s a => HasComputedIsExtractable (TF.Resource p s) a where
+    computedIsExtractable = TF.configuration . computedIsExtractable
+
+class HasComputedIsFeatured s a | s -> a where
+    computedIsFeatured :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIsFeatured s a => HasComputedIsFeatured (TF.Resource p s) a where
+    computedIsFeatured = TF.configuration . computedIsFeatured
+
+class HasComputedIsPublic s a | s -> a where
+    computedIsPublic :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIsPublic s a => HasComputedIsPublic (TF.Resource p s) a where
+    computedIsPublic = TF.configuration . computedIsPublic
+
+class HasComputedIsReady s a | s -> a where
+    computedIsReady :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIsReady s a => HasComputedIsReady (TF.Resource p s) a where
+    computedIsReady = TF.configuration . computedIsReady
+
+class HasComputedNetworkDomain s a | s -> a where
+    computedNetworkDomain :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedNetworkDomain s a => HasComputedNetworkDomain (TF.Resource p s) a where
+    computedNetworkDomain = TF.configuration . computedNetworkDomain
+
+class HasComputedPasswordEnabled s a | s -> a where
+    computedPasswordEnabled :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedPasswordEnabled s a => HasComputedPasswordEnabled (TF.Resource p s) a where
+    computedPasswordEnabled = TF.configuration . computedPasswordEnabled
+
+class HasComputedPrivateKey s a | s -> a where
+    computedPrivateKey :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedPrivateKey s a => HasComputedPrivateKey (TF.Resource p s) a where
+    computedPrivateKey = TF.configuration . computedPrivateKey
+
+class HasComputedPublicIp s a | s -> a where
+    computedPublicIp :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedPublicIp s a => HasComputedPublicIp (TF.Resource p s) a where
+    computedPublicIp = TF.configuration . computedPublicIp
+
+class HasComputedSourceNatIp s a | s -> a where
+    computedSourceNatIp :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedSourceNatIp s a => HasComputedSourceNatIp (TF.Resource p s) a where
+    computedSourceNatIp = TF.configuration . computedSourceNatIp
+
+class HasComputedVmGuestIp s a | s -> a where
+    computedVmGuestIp :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedVmGuestIp s a => HasComputedVmGuestIp (TF.Resource p s) a where
+    computedVmGuestIp = TF.configuration . computedVmGuestIp

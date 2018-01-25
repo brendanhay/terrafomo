@@ -20,6 +20,7 @@ module Terrafomo.Scaleway.Provider
     (
     -- * Provider Datatype
       Scaleway (..)
+    , emptyScaleway
 
     -- * Lenses
     ) where
@@ -29,13 +30,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Scaleway.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -56,14 +59,9 @@ instance TF.ToHCL Scaleway where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup Scaleway where
-    (<>) a b = Scaleway {
-        }
-
-instance Monoid Scaleway where
-    mappend = (<>)
-    mempty  = Scaleway {
-        }
+emptyScaleway :: Scaleway
+emptyScaleway = Scaleway {
+    }
 
 instance TF.IsProvider Scaleway where
     type ProviderName Scaleway = "scaleway"

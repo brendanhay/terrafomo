@@ -18,7 +18,6 @@ import Terrafomo.Syntax.HCL  (ToHCL)
 import Terrafomo.Syntax.Name
 
 class ( Hashable a
-      , Monoid   a
       , ToHCL    a
       , KnownSymbol (ProviderName a)
       ) => IsProvider a where

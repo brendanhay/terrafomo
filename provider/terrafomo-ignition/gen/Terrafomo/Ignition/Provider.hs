@@ -20,6 +20,7 @@ module Terrafomo.Ignition.Provider
     (
     -- * Provider Datatype
       Ignition (..)
+    , emptyIgnition
 
     -- * Lenses
     ) where
@@ -29,13 +30,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Ignition.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -60,14 +63,9 @@ instance TF.ToHCL Ignition where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup Ignition where
-    (<>) a b = Ignition {
-        }
-
-instance Monoid Ignition where
-    mappend = (<>)
-    mempty  = Ignition {
-        }
+emptyIgnition :: Ignition
+emptyIgnition = Ignition {
+    }
 
 instance TF.IsProvider Ignition where
     type ProviderName Ignition = "ignition"

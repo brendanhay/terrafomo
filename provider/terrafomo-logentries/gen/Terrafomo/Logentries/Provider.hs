@@ -20,6 +20,7 @@ module Terrafomo.Logentries.Provider
     (
     -- * Provider Datatype
       Logentries (..)
+    , emptyLogentries
 
     -- * Lenses
     , accountKey
@@ -30,13 +31,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Logentries.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.IP        as TF
 import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
@@ -49,7 +52,7 @@ be configured with a Logentries account key before it can be used. Use the
 navigation to the left to read about the available resources.
 -}
 data Logentries = Logentries {
-      _account_key :: !(TF.Argument Text)
+      _account_key :: !(TF.Argument "account_key" Text)
     {- ^ (Required) The Logentries account key. This can also be specified with the @LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries <https://logentries.com/doc/accountkey/> for more information. -}
     } deriving (Show, Eq, Generic)
 
@@ -59,28 +62,17 @@ instance TF.ToHCL Logentries where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Logentries))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "account_key" <$> TF.argument (_account_key x)
+            , TF.argument (_account_key x)
             ]
 
-instance Semigroup Logentries where
-    (<>) a b = Logentries {
-          _account_key = on (<>) _account_key a b
-        }
-
-instance Monoid Logentries where
-    mappend = (<>)
-    mempty  = Logentries {
-            _account_key = TF.Nil
-        }
+emptyLogentries :: Logentries
+emptyLogentries = Logentries {
+        _account_key = TF.Nil
+    }
 
 instance TF.IsProvider Logentries where
     type ProviderName Logentries = "logentries"
 
-accountKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Logentries
-    -> f Logentries
-accountKey f s =
-        (\a -> s { _account_key = a } :: Logentries)
-             <$> f (_account_key s)
+accountKey :: Lens' Logentries (TF.Argument "account_key" Text)
+accountKey =
+    lens _account_key (\s a -> s { _account_key = a })

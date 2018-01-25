@@ -20,6 +20,7 @@ module Terrafomo.NS1.Provider
     (
     -- * Provider Datatype
       NS1 (..)
+    , emptyNS1
 
     -- * Lenses
     , apikey
@@ -30,13 +31,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.NS1.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -48,7 +51,7 @@ provider needs to be configured with the proper credentials before it can be
 used. Use the navigation to the left to read about the available resources.
 -}
 data NS1 = NS1 {
-      _apikey :: !(TF.Argument Text)
+      _apikey :: !(TF.Argument "apikey" Text)
     {- ^ (Required) NS1 API token. It must be provided, but it can also be sourced from the @NS1_APIKEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -58,28 +61,17 @@ instance TF.ToHCL NS1 where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy NS1))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "apikey" <$> TF.argument (_apikey x)
+            , TF.argument (_apikey x)
             ]
 
-instance Semigroup NS1 where
-    (<>) a b = NS1 {
-          _apikey = on (<>) _apikey a b
-        }
-
-instance Monoid NS1 where
-    mappend = (<>)
-    mempty  = NS1 {
-            _apikey = TF.Nil
-        }
+emptyNS1 :: NS1
+emptyNS1 = NS1 {
+        _apikey = TF.Nil
+    }
 
 instance TF.IsProvider NS1 where
     type ProviderName NS1 = "ns1"
 
-apikey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> NS1
-    -> f NS1
-apikey f s =
-        (\a -> s { _apikey = a } :: NS1)
-             <$> f (_apikey s)
+apikey :: Lens' NS1 (TF.Argument "apikey" Text)
+apikey =
+    lens _apikey (\s a -> s { _apikey = a })

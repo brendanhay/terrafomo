@@ -20,6 +20,7 @@ module Terrafomo.Gitlab.Provider
     (
     -- * Provider Datatype
       Gitlab (..)
+    , emptyGitlab
 
     -- * Lenses
     , baseUrl
@@ -33,13 +34,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Gitlab.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,13 +54,13 @@ It needs to be configured with the proper credentials before it can be used.
 Use the navigation to the left to read about the available resources.
 -}
 data Gitlab = Gitlab {
-      _base_url    :: !(TF.Argument Text)
+      _base_url    :: !(TF.Argument "base_url" Text)
     {- ^ (Optional) This is the target GitLab base API endpoint. Providing a value is a requirement when working with GitLab CE or GitLab Enterprise e.g. https://my.gitlab.server/api/v3/. It is optional to provide this value and it can also be sourced from the @GITLAB_BASE_URL@ environment variable. The value must end with a slash. -}
-    , _cacert_file :: !(TF.Argument Text)
+    , _cacert_file :: !(TF.Argument "cacert_file" Text)
     {- ^ (Optional) This is a file containing the ca cert to verify the gitlab instance.  This is available for use when working with GitLab CE or Gitlab Enterprise with a locally-issued or self-signed certificate chain. -}
-    , _insecure    :: !(TF.Argument Text)
+    , _insecure    :: !(TF.Argument "insecure" Text)
     {- ^ (Optional; boolean, defaults to false) When set to true this disables SSL verification of the connection to the GitLab instance. -}
-    , _token       :: !(TF.Argument Text)
+    , _token       :: !(TF.Argument "token" Text)
     {- ^ (Optional) This is the GitLab personal access token. It must be provided, but it can also be sourced from the @GITLAB_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -67,64 +70,35 @@ instance TF.ToHCL Gitlab where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Gitlab))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "base_url" <$> TF.argument (_base_url x)
-            , TF.assign "cacert_file" <$> TF.argument (_cacert_file x)
-            , TF.assign "insecure" <$> TF.argument (_insecure x)
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_base_url x)
+            , TF.argument (_cacert_file x)
+            , TF.argument (_insecure x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup Gitlab where
-    (<>) a b = Gitlab {
-          _base_url = on (<>) _base_url a b
-        , _cacert_file = on (<>) _cacert_file a b
-        , _insecure = on (<>) _insecure a b
-        , _token = on (<>) _token a b
-        }
-
-instance Monoid Gitlab where
-    mappend = (<>)
-    mempty  = Gitlab {
-            _base_url = TF.Nil
-          , _cacert_file = TF.Nil
-          , _insecure = TF.Nil
-          , _token = TF.Nil
-        }
+emptyGitlab :: Gitlab
+emptyGitlab = Gitlab {
+        _base_url = TF.Nil
+      , _cacert_file = TF.Nil
+      , _insecure = TF.Nil
+      , _token = TF.Nil
+    }
 
 instance TF.IsProvider Gitlab where
     type ProviderName Gitlab = "gitlab"
 
-baseUrl
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Gitlab
-    -> f Gitlab
-baseUrl f s =
-        (\a -> s { _base_url = a } :: Gitlab)
-             <$> f (_base_url s)
+baseUrl :: Lens' Gitlab (TF.Argument "base_url" Text)
+baseUrl =
+    lens _base_url (\s a -> s { _base_url = a })
 
-cacertFile
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Gitlab
-    -> f Gitlab
-cacertFile f s =
-        (\a -> s { _cacert_file = a } :: Gitlab)
-             <$> f (_cacert_file s)
+cacertFile :: Lens' Gitlab (TF.Argument "cacert_file" Text)
+cacertFile =
+    lens _cacert_file (\s a -> s { _cacert_file = a })
 
-insecure
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Gitlab
-    -> f Gitlab
-insecure f s =
-        (\a -> s { _insecure = a } :: Gitlab)
-             <$> f (_insecure s)
+insecure :: Lens' Gitlab (TF.Argument "insecure" Text)
+insecure =
+    lens _insecure (\s a -> s { _insecure = a })
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Gitlab
-    -> f Gitlab
-token f s =
-        (\a -> s { _token = a } :: Gitlab)
-             <$> f (_token s)
+token :: Lens' Gitlab (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

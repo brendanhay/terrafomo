@@ -20,6 +20,7 @@ module Terrafomo.AWS.Provider
     (
     -- * Provider Datatype
       AWS (..)
+    , emptyAWS
 
     -- * Lenses
     , accessKey
@@ -46,12 +47,13 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Terrafomo.AWS.Types as TF
+import Lens.Micro (Lens', lens)
+
+import qualified Terrafomo.AWS.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
@@ -66,39 +68,39 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AWS = AWS {
-      _access_key :: !(TF.Argument Text)
+      _access_key :: !(TF.Argument "access_key" Text)
     {- ^ (Optional) This is the AWS access key. It must be provided, but it can also be sourced from the @AWS_ACCESS_KEY_ID@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _allowed_account_ids :: !(TF.Argument Text)
+    , _allowed_account_ids :: !(TF.Argument "allowed_account_ids" Text)
     {- ^ (Optional) List of allowed, white listed, AWS account IDs to prevent you from mistakenly using an incorrect one (and potentially end up destroying a live environment). Conflicts with @forbidden_account_ids@ . -}
-    , _assume_role :: !(TF.Argument Text)
+    , _assume_role :: !(TF.Argument "assume_role" Text)
     {- ^ (Optional) An @assume_role@ block (documented below). Only one @assume_role@ block may be in the configuration. -}
-    , _forbidden_account_ids :: !(TF.Argument Text)
+    , _forbidden_account_ids :: !(TF.Argument "forbidden_account_ids" Text)
     {- ^ (Optional) List of forbidden, blacklisted, AWS account IDs to prevent you mistakenly using a wrong one (and potentially end up destroying a live environment). Conflicts with @allowed_account_ids@ . -}
-    , _insecure :: !(TF.Argument Text)
+    , _insecure :: !(TF.Argument "insecure" Text)
     {- ^ (Optional) Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is @false@ . -}
-    , _max_retries :: !(TF.Argument Text)
+    , _max_retries :: !(TF.Argument "max_retries" Text)
     {- ^ (Optional) This is the maximum number of times an API call is retried, in the case where requests are being throttled or experiencing transient failures. The delay between the subsequent API calls increases exponentially. -}
-    , _profile :: !(TF.Argument Text)
+    , _profile :: !(TF.Argument "profile" Text)
     {- ^ (Optional) This is the AWS profile name as set in the shared credentials file. -}
-    , _region :: !(TF.Argument TF.Region)
+    , _region :: !(TF.Argument "region" TF.Region)
     {- ^ (Required) This is the AWS region. It must be provided, but it can also be sourced from the @AWS_DEFAULT_REGION@ environment variables, or via a shared credentials file if @profile@ is specified. -}
-    , _s3_force_path_style :: !(TF.Argument Text)
+    , _s3_force_path_style :: !(TF.Argument "s3_force_path_style" Text)
     {- ^ (Optional) Set this to @true@ to force the request to use path-style addressing, i.e., @http://s3.amazonaws.com/BUCKET/KEY@ . By default, the S3 client will use virtual hosted bucket addressing, @http://BUCKET.s3.amazonaws.com/KEY@ , when possible. Specific to the Amazon S3 service. -}
-    , _secret_key :: !(TF.Argument Text)
+    , _secret_key :: !(TF.Argument "secret_key" Text)
     {- ^ (Optional) This is the AWS secret key. It must be provided, but it can also be sourced from the @AWS_SECRET_ACCESS_KEY@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _shared_credentials_file :: !(TF.Argument Text)
+    , _shared_credentials_file :: !(TF.Argument "shared_credentials_file" Text)
     {- ^ = (Optional) This is the path to the shared credentials file. If this is not set and a profile is specified, @~/.aws/credentials@ will be used. -}
-    , _skip_credentials_validation :: !(TF.Argument Text)
+    , _skip_credentials_validation :: !(TF.Argument "skip_credentials_validation" Text)
     {- ^ (Optional) Skip the credentials validation via the STS API. Useful for AWS API implementations that do not have STS available or implemented. -}
-    , _skip_get_ec2_platforms :: !(TF.Argument Text)
+    , _skip_get_ec2_platforms :: !(TF.Argument "skip_get_ec2_platforms" Text)
     {- ^ (Optional) Skip getting the supported EC2 platforms. Used by users that don't have ec2:DescribeAccountAttributes permissions. -}
-    , _skip_metadata_api_check :: !(TF.Argument Text)
+    , _skip_metadata_api_check :: !(TF.Argument "skip_metadata_api_check" Text)
     {- ^ (Optional) Skip the AWS Metadata API check.  Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to @true@ prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables. -}
-    , _skip_region_validation :: !(TF.Argument Text)
+    , _skip_region_validation :: !(TF.Argument "skip_region_validation" Text)
     {- ^ (Optional) Skip validation of provided region name. Useful for AWS-like implementations that use their own region names or to bypass the validation for regions that aren't publicly available yet. -}
-    , _skip_requesting_account_id :: !(TF.Argument Text)
+    , _skip_requesting_account_id :: !(TF.Argument "skip_requesting_account_id" Text)
     {- ^ (Optional) Skip requesting the account ID.  Useful for AWS API implementations that do not have the IAM, STS API, or metadata API.  When set to @true@ , prevents you from managing any resource that requires Account ID to construct an ARN, e.g. -}
-    , _token :: !(TF.Argument Text)
+    , _token :: !(TF.Argument "token" Text)
     {- ^ (Optional) Use this to set an MFA token. It can also be sourced from the @AWS_SESSION_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -108,220 +110,113 @@ instance TF.ToHCL AWS where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AWS))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "access_key" <$> TF.argument (_access_key x)
-            , TF.assign "allowed_account_ids" <$> TF.argument (_allowed_account_ids x)
-            , TF.assign "assume_role" <$> TF.argument (_assume_role x)
-            , TF.assign "forbidden_account_ids" <$> TF.argument (_forbidden_account_ids x)
-            , TF.assign "insecure" <$> TF.argument (_insecure x)
-            , TF.assign "max_retries" <$> TF.argument (_max_retries x)
-            , TF.assign "profile" <$> TF.argument (_profile x)
-            , TF.assign "region" <$> TF.argument (_region x)
-            , TF.assign "s3_force_path_style" <$> TF.argument (_s3_force_path_style x)
-            , TF.assign "secret_key" <$> TF.argument (_secret_key x)
-            , TF.assign "shared_credentials_file" <$> TF.argument (_shared_credentials_file x)
-            , TF.assign "skip_credentials_validation" <$> TF.argument (_skip_credentials_validation x)
-            , TF.assign "skip_get_ec2_platforms" <$> TF.argument (_skip_get_ec2_platforms x)
-            , TF.assign "skip_metadata_api_check" <$> TF.argument (_skip_metadata_api_check x)
-            , TF.assign "skip_region_validation" <$> TF.argument (_skip_region_validation x)
-            , TF.assign "skip_requesting_account_id" <$> TF.argument (_skip_requesting_account_id x)
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_access_key x)
+            , TF.argument (_allowed_account_ids x)
+            , TF.argument (_assume_role x)
+            , TF.argument (_forbidden_account_ids x)
+            , TF.argument (_insecure x)
+            , TF.argument (_max_retries x)
+            , TF.argument (_profile x)
+            , TF.argument (_region x)
+            , TF.argument (_s3_force_path_style x)
+            , TF.argument (_secret_key x)
+            , TF.argument (_shared_credentials_file x)
+            , TF.argument (_skip_credentials_validation x)
+            , TF.argument (_skip_get_ec2_platforms x)
+            , TF.argument (_skip_metadata_api_check x)
+            , TF.argument (_skip_region_validation x)
+            , TF.argument (_skip_requesting_account_id x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup AWS where
-    (<>) a b = AWS {
-          _access_key = on (<>) _access_key a b
-        , _allowed_account_ids = on (<>) _allowed_account_ids a b
-        , _assume_role = on (<>) _assume_role a b
-        , _forbidden_account_ids = on (<>) _forbidden_account_ids a b
-        , _insecure = on (<>) _insecure a b
-        , _max_retries = on (<>) _max_retries a b
-        , _profile = on (<>) _profile a b
-        , _region = on (<>) _region a b
-        , _s3_force_path_style = on (<>) _s3_force_path_style a b
-        , _secret_key = on (<>) _secret_key a b
-        , _shared_credentials_file = on (<>) _shared_credentials_file a b
-        , _skip_credentials_validation = on (<>) _skip_credentials_validation a b
-        , _skip_get_ec2_platforms = on (<>) _skip_get_ec2_platforms a b
-        , _skip_metadata_api_check = on (<>) _skip_metadata_api_check a b
-        , _skip_region_validation = on (<>) _skip_region_validation a b
-        , _skip_requesting_account_id = on (<>) _skip_requesting_account_id a b
-        , _token = on (<>) _token a b
-        }
-
-instance Monoid AWS where
-    mappend = (<>)
-    mempty  = AWS {
-            _access_key = TF.Nil
-          , _allowed_account_ids = TF.Nil
-          , _assume_role = TF.Nil
-          , _forbidden_account_ids = TF.Nil
-          , _insecure = TF.Nil
-          , _max_retries = TF.Nil
-          , _profile = TF.Nil
-          , _region = TF.Nil
-          , _s3_force_path_style = TF.Nil
-          , _secret_key = TF.Nil
-          , _shared_credentials_file = TF.Nil
-          , _skip_credentials_validation = TF.Nil
-          , _skip_get_ec2_platforms = TF.Nil
-          , _skip_metadata_api_check = TF.Nil
-          , _skip_region_validation = TF.Nil
-          , _skip_requesting_account_id = TF.Nil
-          , _token = TF.Nil
-        }
+emptyAWS :: AWS
+emptyAWS = AWS {
+        _access_key = TF.Nil
+      , _allowed_account_ids = TF.Nil
+      , _assume_role = TF.Nil
+      , _forbidden_account_ids = TF.Nil
+      , _insecure = TF.Nil
+      , _max_retries = TF.Nil
+      , _profile = TF.Nil
+      , _region = TF.Nil
+      , _s3_force_path_style = TF.Nil
+      , _secret_key = TF.Nil
+      , _shared_credentials_file = TF.Nil
+      , _skip_credentials_validation = TF.Nil
+      , _skip_get_ec2_platforms = TF.Nil
+      , _skip_metadata_api_check = TF.Nil
+      , _skip_region_validation = TF.Nil
+      , _skip_requesting_account_id = TF.Nil
+      , _token = TF.Nil
+    }
 
 instance TF.IsProvider AWS where
     type ProviderName AWS = "aws"
 
-accessKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-accessKey f s =
-        (\a -> s { _access_key = a } :: AWS)
-             <$> f (_access_key s)
+accessKey :: Lens' AWS (TF.Argument "access_key" Text)
+accessKey =
+    lens _access_key (\s a -> s { _access_key = a })
 
-allowedAccountIds
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-allowedAccountIds f s =
-        (\a -> s { _allowed_account_ids = a } :: AWS)
-             <$> f (_allowed_account_ids s)
+allowedAccountIds :: Lens' AWS (TF.Argument "allowed_account_ids" Text)
+allowedAccountIds =
+    lens _allowed_account_ids (\s a -> s { _allowed_account_ids = a })
 
-assumeRole
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-assumeRole f s =
-        (\a -> s { _assume_role = a } :: AWS)
-             <$> f (_assume_role s)
+assumeRole :: Lens' AWS (TF.Argument "assume_role" Text)
+assumeRole =
+    lens _assume_role (\s a -> s { _assume_role = a })
 
-forbiddenAccountIds
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-forbiddenAccountIds f s =
-        (\a -> s { _forbidden_account_ids = a } :: AWS)
-             <$> f (_forbidden_account_ids s)
+forbiddenAccountIds :: Lens' AWS (TF.Argument "forbidden_account_ids" Text)
+forbiddenAccountIds =
+    lens _forbidden_account_ids (\s a -> s { _forbidden_account_ids = a })
 
-insecure
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-insecure f s =
-        (\a -> s { _insecure = a } :: AWS)
-             <$> f (_insecure s)
+insecure :: Lens' AWS (TF.Argument "insecure" Text)
+insecure =
+    lens _insecure (\s a -> s { _insecure = a })
 
-maxRetries
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-maxRetries f s =
-        (\a -> s { _max_retries = a } :: AWS)
-             <$> f (_max_retries s)
+maxRetries :: Lens' AWS (TF.Argument "max_retries" Text)
+maxRetries =
+    lens _max_retries (\s a -> s { _max_retries = a })
 
-profile
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-profile f s =
-        (\a -> s { _profile = a } :: AWS)
-             <$> f (_profile s)
+profile :: Lens' AWS (TF.Argument "profile" Text)
+profile =
+    lens _profile (\s a -> s { _profile = a })
 
-region
-    :: Functor f
-    => ((TF.Argument TF.Region) -> f (TF.Argument TF.Region))
-    -> AWS
-    -> f AWS
-region f s =
-        (\a -> s { _region = a } :: AWS)
-             <$> f (_region s)
+region :: Lens' AWS (TF.Argument "region" TF.Region)
+region =
+    lens _region (\s a -> s { _region = a })
 
-s3ForcePathStyle
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-s3ForcePathStyle f s =
-        (\a -> s { _s3_force_path_style = a } :: AWS)
-             <$> f (_s3_force_path_style s)
+s3ForcePathStyle :: Lens' AWS (TF.Argument "s3_force_path_style" Text)
+s3ForcePathStyle =
+    lens _s3_force_path_style (\s a -> s { _s3_force_path_style = a })
 
-secretKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-secretKey f s =
-        (\a -> s { _secret_key = a } :: AWS)
-             <$> f (_secret_key s)
+secretKey :: Lens' AWS (TF.Argument "secret_key" Text)
+secretKey =
+    lens _secret_key (\s a -> s { _secret_key = a })
 
-sharedCredentialsFile
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-sharedCredentialsFile f s =
-        (\a -> s { _shared_credentials_file = a } :: AWS)
-             <$> f (_shared_credentials_file s)
+sharedCredentialsFile :: Lens' AWS (TF.Argument "shared_credentials_file" Text)
+sharedCredentialsFile =
+    lens _shared_credentials_file (\s a -> s { _shared_credentials_file = a })
 
-skipCredentialsValidation
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-skipCredentialsValidation f s =
-        (\a -> s { _skip_credentials_validation = a } :: AWS)
-             <$> f (_skip_credentials_validation s)
+skipCredentialsValidation :: Lens' AWS (TF.Argument "skip_credentials_validation" Text)
+skipCredentialsValidation =
+    lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-skipGetEc2Platforms
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-skipGetEc2Platforms f s =
-        (\a -> s { _skip_get_ec2_platforms = a } :: AWS)
-             <$> f (_skip_get_ec2_platforms s)
+skipGetEc2Platforms :: Lens' AWS (TF.Argument "skip_get_ec2_platforms" Text)
+skipGetEc2Platforms =
+    lens _skip_get_ec2_platforms (\s a -> s { _skip_get_ec2_platforms = a })
 
-skipMetadataApiCheck
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-skipMetadataApiCheck f s =
-        (\a -> s { _skip_metadata_api_check = a } :: AWS)
-             <$> f (_skip_metadata_api_check s)
+skipMetadataApiCheck :: Lens' AWS (TF.Argument "skip_metadata_api_check" Text)
+skipMetadataApiCheck =
+    lens _skip_metadata_api_check (\s a -> s { _skip_metadata_api_check = a })
 
-skipRegionValidation
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-skipRegionValidation f s =
-        (\a -> s { _skip_region_validation = a } :: AWS)
-             <$> f (_skip_region_validation s)
+skipRegionValidation :: Lens' AWS (TF.Argument "skip_region_validation" Text)
+skipRegionValidation =
+    lens _skip_region_validation (\s a -> s { _skip_region_validation = a })
 
-skipRequestingAccountId
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-skipRequestingAccountId f s =
-        (\a -> s { _skip_requesting_account_id = a } :: AWS)
-             <$> f (_skip_requesting_account_id s)
+skipRequestingAccountId :: Lens' AWS (TF.Argument "skip_requesting_account_id" Text)
+skipRequestingAccountId =
+    lens _skip_requesting_account_id (\s a -> s { _skip_requesting_account_id = a })
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AWS
-    -> f AWS
-token f s =
-        (\a -> s { _token = a } :: AWS)
-             <$> f (_token s)
+token :: Lens' AWS (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

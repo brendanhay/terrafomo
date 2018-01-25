@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -22,17 +25,24 @@ module {{ namespace }}
 
   {% endfor %}
     -- * Overloaded Fields
-  {% for class in classes %}
-    , {{ class.key }} (..)
+    -- ** Arguments
+  {% for class in argumentClasses %}
+    , {{ class.value.name }} (..)
+  {% endfor %}
+
+    -- ** Computed Attributes
+  {% for class in attributeClasses %}
+    , {{ class.value.name }} (..)
   {% endfor %}
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
+
+import Lens.Micro (Getting, Lens', lens, to)
 
 {% for import in imports %}
 import qualified {{ import.value }} as TF
@@ -65,29 +75,31 @@ import qualified Terrafomo.Syntax.Variable as TF
 -}
 data {{ schema.key }} = {{ schema.key }} {
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument "{{ arg.value.name }}" {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
-  {% endfor %}
-  {% for attr in schema.value.attributes %}
-    {% if (schema.value.arguments | empty) && attr.first %}  {% else %}, {% endif %}{{ attr.key }} :: !(TF.Attribute {{ attr.value.type }})
-    {- ^ {{ attr.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq)
 
 instance TF.ToHCL {{ schema.key }} where
   {% for arg in schema.value.arguments %}
     {% if arg.first %}toHCL {{ schema.key }}{..} = TF.block $ catMaybes
-        [{% else %}    ,{% endif %} TF.assign "{{ arg.value.name }}" <$> TF.argument {{ arg.key }}{% if arg.last %}
+        [{% else %}    ,{% endif %} TF.argument {{ arg.key }}{% if arg.last %}
         ]{% endif %}
   {% else %}
     toHCL _ = TF.block []
   {% endfor %}
-  {% for field in schema.value.fields %}
+  {% for field in schema.value.argumentFields %}
 
 instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
-    {{ field.value.method }} f s@{{ schema.key }}{..} =
-        (\a -> s { {{ field.value.label }} = a } :: {{ schema.key }})
-             <$> f {{ field.value.label }}
+    {{ field.value.method }} =
+        lens ({{ field.value.label }} :: {{ schema.key }} -> TF.Argument "{{ field.value.name }}" {{ field.value.type }})
+             (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }})
+  {% endfor %}
+  {% for field in schema.value.attributeFields %}
+
+instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
+    {{ field.value.method }} =
+        to (\_  -> TF.Compute "{{ field.value.name }}")
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
@@ -98,18 +110,23 @@ instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
           {% for arg in schema.value.arguments %}
             {% if !arg.first %}, {% endif %}{{ arg.key }} = TF.Nil
           {% endfor %}
-          {% for attr in schema.value.attributes %}
-            {% if (schema.value.arguments | empty) && attr.first %}  {% else %}, {% endif %}{{ attr.key }} = TF.Compute "{{ attr.value.name }}"
-          {% endfor %}
             }
 {% endlet %}
 {% endlet %}
 {% endfor %}
-{% for class in classes %}
+{% for class in argumentClasses %}
 
-class {{ class.key }} s a | s -> a where
-    {{ class.value }} :: Functor f => (a -> f a) -> s -> f s
+class {{ class.value.name }} s a | s -> a where
+    {{ class.value.method }} :: Lens' s (TF.Argument "{{ class.value.symbol }}" a)
 
-instance {{ class.key }} s a => {{ class.key}} (TF.{{ type }} p s) a where
-    {{ class.value }} = TF.configuration . {{ class.value }}
+instance {{ class.value.name }} s a => {{ class.value.name}} (TF.{{ type }} p s) a where
+    {{ class.value.method }} = TF.configuration . {{ class.value.method }}
+{% endfor %}
+{% for class in attributeClasses %}
+
+class {{ class.value.name }} s a | s -> a where
+    {{ class.value.method }} :: forall r. Getting r s (TF.Attribute a)
+
+instance {{ class.value.name }} s a => {{ class.value.name }} (TF.{{ type }} p s) a where
+    {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}

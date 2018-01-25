@@ -20,6 +20,7 @@ module Terrafomo.Consul.Provider
     (
     -- * Provider Datatype
       Consul (..)
+    , emptyConsul
 
     -- * Lenses
     , address
@@ -37,13 +38,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Consul.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -57,21 +60,21 @@ defaults for all arguments. Use the navigation to the left to read about the
 available resources.
 -}
 data Consul = Consul {
-      _address    :: !(TF.Argument Text)
+      _address    :: !(TF.Argument "address" Text)
     {- ^ (Optional) The HTTP(S) API address of the agent to use. Defaults to "127.0.0.1:8500". -}
-    , _ca_file    :: !(TF.Argument Text)
+    , _ca_file    :: !(TF.Argument "ca_file" Text)
     {- ^ (Optional) A path to a PEM-encoded certificate authority used to verify the remote agent's certificate. -}
-    , _cert_file  :: !(TF.Argument Text)
+    , _cert_file  :: !(TF.Argument "cert_file" Text)
     {- ^ (Optional) A path to a PEM-encoded certificate provided to the remote agent; requires use of @key_file@ . -}
-    , _datacenter :: !(TF.Argument Text)
+    , _datacenter :: !(TF.Argument "datacenter" Text)
     {- ^ (Optional) The datacenter to use. Defaults to that of the agent. -}
-    , _http_auth  :: !(TF.Argument Text)
+    , _http_auth  :: !(TF.Argument "http_auth" Text)
     {- ^ (Optional) HTTP Basic Authentication credentials to be used when communicating with Consul, in the format of either @user@ or @user:pass@ . This may also be specified using the @CONSUL_HTTP_AUTH@ environment variable. -}
-    , _key_file   :: !(TF.Argument Text)
+    , _key_file   :: !(TF.Argument "key_file" Text)
     {- ^ (Optional) A path to a PEM-encoded private key, required if @cert_file@ is specified. -}
-    , _scheme     :: !(TF.Argument Text)
+    , _scheme     :: !(TF.Argument "scheme" Text)
     {- ^ (Optional) The URL scheme of the agent to use ("http" or "https"). Defaults to "http". -}
-    , _token      :: !(TF.Argument Text)
+    , _token      :: !(TF.Argument "token" Text)
     {- ^ (Optional) The ACL token to use by default when making requests to the agent. -}
     } deriving (Show, Eq, Generic)
 
@@ -81,112 +84,59 @@ instance TF.ToHCL Consul where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Consul))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "address" <$> TF.argument (_address x)
-            , TF.assign "ca_file" <$> TF.argument (_ca_file x)
-            , TF.assign "cert_file" <$> TF.argument (_cert_file x)
-            , TF.assign "datacenter" <$> TF.argument (_datacenter x)
-            , TF.assign "http_auth" <$> TF.argument (_http_auth x)
-            , TF.assign "key_file" <$> TF.argument (_key_file x)
-            , TF.assign "scheme" <$> TF.argument (_scheme x)
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_address x)
+            , TF.argument (_ca_file x)
+            , TF.argument (_cert_file x)
+            , TF.argument (_datacenter x)
+            , TF.argument (_http_auth x)
+            , TF.argument (_key_file x)
+            , TF.argument (_scheme x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup Consul where
-    (<>) a b = Consul {
-          _address = on (<>) _address a b
-        , _ca_file = on (<>) _ca_file a b
-        , _cert_file = on (<>) _cert_file a b
-        , _datacenter = on (<>) _datacenter a b
-        , _http_auth = on (<>) _http_auth a b
-        , _key_file = on (<>) _key_file a b
-        , _scheme = on (<>) _scheme a b
-        , _token = on (<>) _token a b
-        }
-
-instance Monoid Consul where
-    mappend = (<>)
-    mempty  = Consul {
-            _address = TF.Nil
-          , _ca_file = TF.Nil
-          , _cert_file = TF.Nil
-          , _datacenter = TF.Nil
-          , _http_auth = TF.Nil
-          , _key_file = TF.Nil
-          , _scheme = TF.Nil
-          , _token = TF.Nil
-        }
+emptyConsul :: Consul
+emptyConsul = Consul {
+        _address = TF.Nil
+      , _ca_file = TF.Nil
+      , _cert_file = TF.Nil
+      , _datacenter = TF.Nil
+      , _http_auth = TF.Nil
+      , _key_file = TF.Nil
+      , _scheme = TF.Nil
+      , _token = TF.Nil
+    }
 
 instance TF.IsProvider Consul where
     type ProviderName Consul = "consul"
 
-address
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-address f s =
-        (\a -> s { _address = a } :: Consul)
-             <$> f (_address s)
+address :: Lens' Consul (TF.Argument "address" Text)
+address =
+    lens _address (\s a -> s { _address = a })
 
-caFile
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-caFile f s =
-        (\a -> s { _ca_file = a } :: Consul)
-             <$> f (_ca_file s)
+caFile :: Lens' Consul (TF.Argument "ca_file" Text)
+caFile =
+    lens _ca_file (\s a -> s { _ca_file = a })
 
-certFile
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-certFile f s =
-        (\a -> s { _cert_file = a } :: Consul)
-             <$> f (_cert_file s)
+certFile :: Lens' Consul (TF.Argument "cert_file" Text)
+certFile =
+    lens _cert_file (\s a -> s { _cert_file = a })
 
-datacenter
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-datacenter f s =
-        (\a -> s { _datacenter = a } :: Consul)
-             <$> f (_datacenter s)
+datacenter :: Lens' Consul (TF.Argument "datacenter" Text)
+datacenter =
+    lens _datacenter (\s a -> s { _datacenter = a })
 
-httpAuth
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-httpAuth f s =
-        (\a -> s { _http_auth = a } :: Consul)
-             <$> f (_http_auth s)
+httpAuth :: Lens' Consul (TF.Argument "http_auth" Text)
+httpAuth =
+    lens _http_auth (\s a -> s { _http_auth = a })
 
-keyFile
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-keyFile f s =
-        (\a -> s { _key_file = a } :: Consul)
-             <$> f (_key_file s)
+keyFile :: Lens' Consul (TF.Argument "key_file" Text)
+keyFile =
+    lens _key_file (\s a -> s { _key_file = a })
 
-scheme
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-scheme f s =
-        (\a -> s { _scheme = a } :: Consul)
-             <$> f (_scheme s)
+scheme :: Lens' Consul (TF.Argument "scheme" Text)
+scheme =
+    lens _scheme (\s a -> s { _scheme = a })
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Consul
-    -> f Consul
-token f s =
-        (\a -> s { _token = a } :: Consul)
-             <$> f (_token s)
+token :: Lens' Consul (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

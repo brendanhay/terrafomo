@@ -1,10 +1,12 @@
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
 module Terrafomo.Syntax.Resource
     ( Resource (..)
     , newResource
     ) where
 
-import Data.Bifunctor (Bifunctor (bimap, second))
-import Data.Set       (Set)
+import Data.Set (Set)
 
 import Lens.Micro (lens)
 
@@ -15,27 +17,18 @@ import Terrafomo.Syntax.Name
 
 data Resource p a = Resource
     { _resourceProvider  :: !(Maybe p)
-    , _resourceLifecycle :: !Lifecycle
-    , _resourceDependsOn :: !(Set Key)
+    , _resourceLifecycle :: !(Lifecycle a)
+    , _resourceDependsOn :: !(Set Dependency)
     , _resourceType      :: !Type
     , _resourceConfig    :: !a
     } deriving (Show, Eq)
-
-instance Bifunctor Resource where
-    bimap f g x =
-        x { _resourceProvider = f <$> _resourceProvider x
-          , _resourceConfig   = g (_resourceConfig x)
-          }
-
-instance Functor (Resource p) where
-    fmap = second
 
 instance HasMeta Resource where
     provider      = lens _resourceProvider  (\s a -> s { _resourceProvider  = a })
     configuration = lens _resourceConfig    (\s a -> s { _resourceConfig    = a })
     dependsOn     = lens _resourceDependsOn (\s a -> s { _resourceDependsOn = a })
 
-instance HasLifecycle (Resource p a) where
+instance HasLifecycle (Resource p a) a where
     lifecycle = lens _resourceLifecycle (\s a -> s { _resourceLifecycle = a })
 
 newResource :: Type -> a -> Resource p a

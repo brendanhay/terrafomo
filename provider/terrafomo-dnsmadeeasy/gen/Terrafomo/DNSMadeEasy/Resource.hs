@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -26,18 +29,23 @@ module Terrafomo.DNSMadeEasy.Resource
     , recordResource
 
     -- * Overloaded Fields
+    -- ** Arguments
+
+    -- ** Computed Attributes
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.DNSMadeEasy.Provider as TF
 import qualified Terrafomo.DNSMadeEasy.Types    as TF
 import qualified Terrafomo.Syntax.HCL           as TF
+import qualified Terrafomo.Syntax.IP            as TF
 import qualified Terrafomo.Syntax.Meta          as TF (configuration)
 import qualified Terrafomo.Syntax.Resource      as TF
 import qualified Terrafomo.Syntax.Resource      as TF

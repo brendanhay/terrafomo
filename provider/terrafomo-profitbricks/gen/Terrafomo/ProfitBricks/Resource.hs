@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -62,21 +65,26 @@ module Terrafomo.ProfitBricks.Resource
     , volumeResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasDescription (..)
     , HasLocation (..)
     , HasName (..)
+
+    -- ** Computed Attributes
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.ProfitBricks.Provider as TF
 import qualified Terrafomo.ProfitBricks.Types    as TF
 import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.IP             as TF
 import qualified Terrafomo.Syntax.Meta           as TF (configuration)
 import qualified Terrafomo.Syntax.Resource       as TF
 import qualified Terrafomo.Syntax.Resource       as TF
@@ -87,35 +95,35 @@ import qualified Terrafomo.Syntax.Variable       as TF
 Manages a Virtual Data Center on ProfitBricks
 -}
 data DatacenterResource = DatacenterResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional)[string] Description for the data center. -}
-    , _location    :: !(TF.Argument Text)
+    , _location    :: !(TF.Argument "location" Text)
     {- ^ (Required)[string] The physical location where the data center will be created. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DatacenterResource where
     toHCL DatacenterResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "location" <$> TF.argument _location
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _description
+        , TF.argument _location
+        , TF.argument _name
         ]
 
-instance HasDescription DatacenterResource (TF.Argument Text) where
-    description f s@DatacenterResource{..} =
-        (\a -> s { _description = a } :: DatacenterResource)
-             <$> f _description
+instance HasDescription DatacenterResource Text where
+    description =
+        lens (_description :: DatacenterResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: DatacenterResource)
 
-instance HasLocation DatacenterResource (TF.Argument Text) where
-    location f s@DatacenterResource{..} =
-        (\a -> s { _location = a } :: DatacenterResource)
-             <$> f _location
+instance HasLocation DatacenterResource Text where
+    location =
+        lens (_location :: DatacenterResource -> TF.Argument "location" Text)
+             (\s a -> s { _location = a } :: DatacenterResource)
 
-instance HasName DatacenterResource (TF.Argument Text) where
-    name f s@DatacenterResource{..} =
-        (\a -> s { _name = a } :: DatacenterResource)
-             <$> f _name
+instance HasName DatacenterResource Text where
+    name =
+        lens (_name :: DatacenterResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DatacenterResource)
 
 datacenterResource :: TF.Resource TF.ProfitBricks DatacenterResource
 datacenterResource =
@@ -320,19 +328,19 @@ volumeResource =
             }
 
 class HasDescription s a | s -> a where
-    description :: Functor f => (a -> f a) -> s -> f s
+    description :: Lens' s (TF.Argument "description" a)
 
 instance HasDescription s a => HasDescription (TF.Resource p s) a where
     description = TF.configuration . description
 
 class HasLocation s a | s -> a where
-    location :: Functor f => (a -> f a) -> s -> f s
+    location :: Lens' s (TF.Argument "location" a)
 
 instance HasLocation s a => HasLocation (TF.Resource p s) a where
     location = TF.configuration . location
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name

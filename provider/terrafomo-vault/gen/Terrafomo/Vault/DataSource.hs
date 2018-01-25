@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -29,7 +32,13 @@ module Terrafomo.Vault.DataSource
     , genericSecretDataSource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasBackend (..)
+    , HasPath (..)
+    , HasRole (..)
+    , HasType' (..)
+
+    -- ** Computed Attributes
     , HasComputedAccessKey (..)
     , HasComputedLeaseDuration (..)
     , HasComputedLeaseId (..)
@@ -37,20 +46,19 @@ module Terrafomo.Vault.DataSource
     , HasComputedLeaseStartTime (..)
     , HasComputedSecretKey (..)
     , HasComputedSecurityToken (..)
-    , HasPath (..)
-    , HasRole (..)
-    , HasType' (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.IP         as TF
 import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
@@ -67,84 +75,63 @@ resource attributes. Protect these artifacts accordingly. See
 <../index.html> for more details.
 -}
 data AwsAccessCredentialsDataSource = AwsAccessCredentialsDataSource {
-      _backend                   :: !(TF.Argument Text)
+      _backend :: !(TF.Argument "backend" Text)
     {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
-    , _role                      :: !(TF.Argument Text)
+    , _role    :: !(TF.Argument "role" Text)
     {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
-    , _type'                     :: !(TF.Argument Text)
+    , _type'   :: !(TF.Argument "type" Text)
     {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
-    , _computed_access_key       :: !(TF.Attribute Text)
-    {- ^ - The AWS Access Key ID returned by Vault. -}
-    , _computed_lease_duration   :: !(TF.Attribute Text)
-    {- ^ - The duration of the secret lease, in seconds relative to the time the data was requested. Once this time has passed any plan generated with this data may fail to apply. -}
-    , _computed_lease_id         :: !(TF.Attribute Text)
-    {- ^ - The lease identifier assigned by Vault. -}
-    , _computed_lease_renewable  :: !(TF.Attribute Text)
-    {- ^ - @true@ if the lease can be renewed using Vault's @sys/renew/{lease-id}@ endpoint. Terraform does not currently support lease renewal, and so it will request a new lease each time this data source is refreshed. -}
-    , _computed_lease_start_time :: !(TF.Attribute Text)
-    {- ^ - As a convenience, this records the current time on the computer where Terraform is running when the data is requested. This can be used to approximate the absolute time represented by @lease_duration@ , though users must allow for any clock drift and response latency relative to the Vault server. -}
-    , _computed_secret_key       :: !(TF.Attribute Text)
-    {- ^ - The AWS Secret Key returned by Vault. -}
-    , _computed_security_token   :: !(TF.Attribute Text)
-    {- ^ - The STS token returned by Vault, if any. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsAccessCredentialsDataSource where
     toHCL AwsAccessCredentialsDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "backend" <$> TF.argument _backend
-        , TF.assign "role" <$> TF.argument _role
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _backend
+        , TF.argument _role
+        , TF.argument _type'
         ]
 
-instance HasBackend AwsAccessCredentialsDataSource (TF.Argument Text) where
-    backend f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _backend = a } :: AwsAccessCredentialsDataSource)
-             <$> f _backend
+instance HasBackend AwsAccessCredentialsDataSource Text where
+    backend =
+        lens (_backend :: AwsAccessCredentialsDataSource -> TF.Argument "backend" Text)
+             (\s a -> s { _backend = a } :: AwsAccessCredentialsDataSource)
 
-instance HasRole AwsAccessCredentialsDataSource (TF.Argument Text) where
-    role f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _role = a } :: AwsAccessCredentialsDataSource)
-             <$> f _role
+instance HasRole AwsAccessCredentialsDataSource Text where
+    role =
+        lens (_role :: AwsAccessCredentialsDataSource -> TF.Argument "role" Text)
+             (\s a -> s { _role = a } :: AwsAccessCredentialsDataSource)
 
-instance HasType' AwsAccessCredentialsDataSource (TF.Argument Text) where
-    type' f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _type' = a } :: AwsAccessCredentialsDataSource)
-             <$> f _type'
+instance HasType' AwsAccessCredentialsDataSource Text where
+    type' =
+        lens (_type' :: AwsAccessCredentialsDataSource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: AwsAccessCredentialsDataSource)
 
-instance HasComputedAccessKey AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedAccessKey f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_access_key = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_access_key
+instance HasComputedAccessKey AwsAccessCredentialsDataSource Text where
+    computedAccessKey =
+        to (\_  -> TF.Compute "access_key")
 
-instance HasComputedLeaseDuration AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedLeaseDuration f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_lease_duration = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_lease_duration
+instance HasComputedLeaseDuration AwsAccessCredentialsDataSource Text where
+    computedLeaseDuration =
+        to (\_  -> TF.Compute "lease_duration")
 
-instance HasComputedLeaseId AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedLeaseId f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_lease_id = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_lease_id
+instance HasComputedLeaseId AwsAccessCredentialsDataSource Text where
+    computedLeaseId =
+        to (\_  -> TF.Compute "lease_id")
 
-instance HasComputedLeaseRenewable AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedLeaseRenewable f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_lease_renewable = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_lease_renewable
+instance HasComputedLeaseRenewable AwsAccessCredentialsDataSource Text where
+    computedLeaseRenewable =
+        to (\_  -> TF.Compute "lease_renewable")
 
-instance HasComputedLeaseStartTime AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedLeaseStartTime f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_lease_start_time = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_lease_start_time
+instance HasComputedLeaseStartTime AwsAccessCredentialsDataSource Text where
+    computedLeaseStartTime =
+        to (\_  -> TF.Compute "lease_start_time")
 
-instance HasComputedSecretKey AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedSecretKey f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_secret_key = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_secret_key
+instance HasComputedSecretKey AwsAccessCredentialsDataSource Text where
+    computedSecretKey =
+        to (\_  -> TF.Compute "secret_key")
 
-instance HasComputedSecurityToken AwsAccessCredentialsDataSource (TF.Attribute Text) where
-    computedSecurityToken f s@AwsAccessCredentialsDataSource{..} =
-        (\a -> s { _computed_security_token = a } :: AwsAccessCredentialsDataSource)
-             <$> f _computed_security_token
+instance HasComputedSecurityToken AwsAccessCredentialsDataSource Text where
+    computedSecurityToken =
+        to (\_  -> TF.Compute "security_token")
 
 awsAccessCredentialsDataSource :: TF.DataSource TF.Vault AwsAccessCredentialsDataSource
 awsAccessCredentialsDataSource =
@@ -153,13 +140,6 @@ awsAccessCredentialsDataSource =
             _backend = TF.Nil
             , _role = TF.Nil
             , _type' = TF.Nil
-            , _computed_access_key = TF.Compute "access_key"
-            , _computed_lease_duration = TF.Compute "lease_duration"
-            , _computed_lease_id = TF.Compute "lease_id"
-            , _computed_lease_renewable = TF.Compute "lease_renewable"
-            , _computed_lease_start_time = TF.Compute "lease_start_time"
-            , _computed_secret_key = TF.Compute "secret_key"
-            , _computed_security_token = TF.Compute "security_token"
             }
 
 {- | The @vault_generic_secret@ Vault datasource.
@@ -175,19 +155,19 @@ interpolated into any resource attributes. Protect these artifacts
 accordingly. See <../index.html> for more details.
 -}
 data GenericSecretDataSource = GenericSecretDataSource {
-      _path :: !(TF.Argument Text)
+      _path :: !(TF.Argument "path" Text)
     {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL GenericSecretDataSource where
     toHCL GenericSecretDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "path" <$> TF.argument _path
+        [ TF.argument _path
         ]
 
-instance HasPath GenericSecretDataSource (TF.Argument Text) where
-    path f s@GenericSecretDataSource{..} =
-        (\a -> s { _path = a } :: GenericSecretDataSource)
-             <$> f _path
+instance HasPath GenericSecretDataSource Text where
+    path =
+        lens (_path :: GenericSecretDataSource -> TF.Argument "path" Text)
+             (\s a -> s { _path = a } :: GenericSecretDataSource)
 
 genericSecretDataSource :: TF.DataSource TF.Vault GenericSecretDataSource
 genericSecretDataSource =
@@ -197,67 +177,67 @@ genericSecretDataSource =
             }
 
 class HasBackend s a | s -> a where
-    backend :: Functor f => (a -> f a) -> s -> f s
+    backend :: Lens' s (TF.Argument "backend" a)
 
 instance HasBackend s a => HasBackend (TF.DataSource p s) a where
     backend = TF.configuration . backend
 
-class HasComputedAccessKey s a | s -> a where
-    computedAccessKey :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedAccessKey s a => HasComputedAccessKey (TF.DataSource p s) a where
-    computedAccessKey = TF.configuration . computedAccessKey
-
-class HasComputedLeaseDuration s a | s -> a where
-    computedLeaseDuration :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedLeaseDuration s a => HasComputedLeaseDuration (TF.DataSource p s) a where
-    computedLeaseDuration = TF.configuration . computedLeaseDuration
-
-class HasComputedLeaseId s a | s -> a where
-    computedLeaseId :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedLeaseId s a => HasComputedLeaseId (TF.DataSource p s) a where
-    computedLeaseId = TF.configuration . computedLeaseId
-
-class HasComputedLeaseRenewable s a | s -> a where
-    computedLeaseRenewable :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedLeaseRenewable s a => HasComputedLeaseRenewable (TF.DataSource p s) a where
-    computedLeaseRenewable = TF.configuration . computedLeaseRenewable
-
-class HasComputedLeaseStartTime s a | s -> a where
-    computedLeaseStartTime :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedLeaseStartTime s a => HasComputedLeaseStartTime (TF.DataSource p s) a where
-    computedLeaseStartTime = TF.configuration . computedLeaseStartTime
-
-class HasComputedSecretKey s a | s -> a where
-    computedSecretKey :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedSecretKey s a => HasComputedSecretKey (TF.DataSource p s) a where
-    computedSecretKey = TF.configuration . computedSecretKey
-
-class HasComputedSecurityToken s a | s -> a where
-    computedSecurityToken :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedSecurityToken s a => HasComputedSecurityToken (TF.DataSource p s) a where
-    computedSecurityToken = TF.configuration . computedSecurityToken
-
 class HasPath s a | s -> a where
-    path :: Functor f => (a -> f a) -> s -> f s
+    path :: Lens' s (TF.Argument "path" a)
 
 instance HasPath s a => HasPath (TF.DataSource p s) a where
     path = TF.configuration . path
 
 class HasRole s a | s -> a where
-    role :: Functor f => (a -> f a) -> s -> f s
+    role :: Lens' s (TF.Argument "role" a)
 
 instance HasRole s a => HasRole (TF.DataSource p s) a where
     role = TF.configuration . role
 
 class HasType' s a | s -> a where
-    type' :: Functor f => (a -> f a) -> s -> f s
+    type' :: Lens' s (TF.Argument "type" a)
 
 instance HasType' s a => HasType' (TF.DataSource p s) a where
     type' = TF.configuration . type'
+
+class HasComputedAccessKey s a | s -> a where
+    computedAccessKey :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedAccessKey s a => HasComputedAccessKey (TF.DataSource p s) a where
+    computedAccessKey = TF.configuration . computedAccessKey
+
+class HasComputedLeaseDuration s a | s -> a where
+    computedLeaseDuration :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedLeaseDuration s a => HasComputedLeaseDuration (TF.DataSource p s) a where
+    computedLeaseDuration = TF.configuration . computedLeaseDuration
+
+class HasComputedLeaseId s a | s -> a where
+    computedLeaseId :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedLeaseId s a => HasComputedLeaseId (TF.DataSource p s) a where
+    computedLeaseId = TF.configuration . computedLeaseId
+
+class HasComputedLeaseRenewable s a | s -> a where
+    computedLeaseRenewable :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedLeaseRenewable s a => HasComputedLeaseRenewable (TF.DataSource p s) a where
+    computedLeaseRenewable = TF.configuration . computedLeaseRenewable
+
+class HasComputedLeaseStartTime s a | s -> a where
+    computedLeaseStartTime :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedLeaseStartTime s a => HasComputedLeaseStartTime (TF.DataSource p s) a where
+    computedLeaseStartTime = TF.configuration . computedLeaseStartTime
+
+class HasComputedSecretKey s a | s -> a where
+    computedSecretKey :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedSecretKey s a => HasComputedSecretKey (TF.DataSource p s) a where
+    computedSecretKey = TF.configuration . computedSecretKey
+
+class HasComputedSecurityToken s a | s -> a where
+    computedSecurityToken :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedSecurityToken s a => HasComputedSecurityToken (TF.DataSource p s) a where
+    computedSecurityToken = TF.configuration . computedSecurityToken

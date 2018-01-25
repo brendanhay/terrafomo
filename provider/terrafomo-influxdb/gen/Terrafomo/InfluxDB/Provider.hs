@@ -20,6 +20,7 @@ module Terrafomo.InfluxDB.Provider
     (
     -- * Provider Datatype
       InfluxDB (..)
+    , emptyInfluxDB
 
     -- * Lenses
     ) where
@@ -29,13 +30,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.InfluxDB.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -58,14 +61,9 @@ instance TF.ToHCL InfluxDB where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup InfluxDB where
-    (<>) a b = InfluxDB {
-        }
-
-instance Monoid InfluxDB where
-    mappend = (<>)
-    mempty  = InfluxDB {
-        }
+emptyInfluxDB :: InfluxDB
+emptyInfluxDB = InfluxDB {
+    }
 
 instance TF.IsProvider InfluxDB where
     type ProviderName InfluxDB = "influxdb"

@@ -20,6 +20,7 @@ module Terrafomo.Dyn.Provider
     (
     -- * Provider Datatype
       Dyn (..)
+    , emptyDyn
 
     -- * Lenses
     , customerName
@@ -32,13 +33,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Dyn.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,11 +54,11 @@ can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data Dyn = Dyn {
-      _customer_name :: !(TF.Argument Text)
+      _customer_name :: !(TF.Argument "customer_name" Text)
     {- ^ (Required) The Dyn customer name. It must be provided, but it can also be sourced from the @DYN_CUSTOMER_NAME@ environment variable. -}
-    , _password      :: !(TF.Argument Text)
+    , _password      :: !(TF.Argument "password" Text)
     {- ^ (Required) The Dyn password. It must be provided, but it can also be sourced from the @DYN_PASSWORD@ environment variable. -}
-    , _username      :: !(TF.Argument Text)
+    , _username      :: !(TF.Argument "username" Text)
     {- ^ (Required) The Dyn username. It must be provided, but it can also be sourced from the @DYN_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -65,52 +68,29 @@ instance TF.ToHCL Dyn where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Dyn))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "customer_name" <$> TF.argument (_customer_name x)
-            , TF.assign "password" <$> TF.argument (_password x)
-            , TF.assign "username" <$> TF.argument (_username x)
+            , TF.argument (_customer_name x)
+            , TF.argument (_password x)
+            , TF.argument (_username x)
             ]
 
-instance Semigroup Dyn where
-    (<>) a b = Dyn {
-          _customer_name = on (<>) _customer_name a b
-        , _password = on (<>) _password a b
-        , _username = on (<>) _username a b
-        }
-
-instance Monoid Dyn where
-    mappend = (<>)
-    mempty  = Dyn {
-            _customer_name = TF.Nil
-          , _password = TF.Nil
-          , _username = TF.Nil
-        }
+emptyDyn :: Dyn
+emptyDyn = Dyn {
+        _customer_name = TF.Nil
+      , _password = TF.Nil
+      , _username = TF.Nil
+    }
 
 instance TF.IsProvider Dyn where
     type ProviderName Dyn = "dyn"
 
-customerName
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Dyn
-    -> f Dyn
-customerName f s =
-        (\a -> s { _customer_name = a } :: Dyn)
-             <$> f (_customer_name s)
+customerName :: Lens' Dyn (TF.Argument "customer_name" Text)
+customerName =
+    lens _customer_name (\s a -> s { _customer_name = a })
 
-password
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Dyn
-    -> f Dyn
-password f s =
-        (\a -> s { _password = a } :: Dyn)
-             <$> f (_password s)
+password :: Lens' Dyn (TF.Argument "password" Text)
+password =
+    lens _password (\s a -> s { _password = a })
 
-username
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Dyn
-    -> f Dyn
-username f s =
-        (\a -> s { _username = a } :: Dyn)
-             <$> f (_username s)
+username :: Lens' Dyn (TF.Argument "username" Text)
+username =
+    lens _username (\s a -> s { _username = a })

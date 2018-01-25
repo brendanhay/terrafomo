@@ -110,14 +110,16 @@ schemas
     -> [Schema]
     -> Either Text (NS, LText.Text)
 schemas tmpls p typ xs =
-    let ns = NS.schemaType p typ
+    let ns                        = NS.schemaType p typ
+        (argClasses, attrClasses) = getClasses xs
      in second (ns,) $ render (schemaTemplate tmpls)
-        [ "namespace" .= ns
-        , "provider"  .= p
-        , "type"      .= typ
-        , "schemas"   .= createMap (getTypeName typ) xs
-        , "classes"   .= getClasses xs
-        , "imports"   .=
+        [ "namespace"        .= ns
+        , "provider"         .= p
+        , "type"             .= typ
+        , "schemas"          .= createMap (getTypeName typ) xs
+        , "argumentClasses"  .= argClasses
+        , "attributeClasses" .= attrClasses
+        , "imports"          .=
             ( NS.types p
             : [NS.provider p <> "Provider"   | isJust (providerDatatype p)]
            ++ ["Terrafomo.Syntax.Resource"   | typ == Resource]

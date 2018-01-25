@@ -20,6 +20,7 @@ module Terrafomo.Rundeck.Provider
     (
     -- * Provider Datatype
       Rundeck (..)
+    , emptyRundeck
 
     -- * Lenses
     ) where
@@ -29,13 +30,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Rundeck.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -59,14 +62,9 @@ instance TF.ToHCL Rundeck where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup Rundeck where
-    (<>) a b = Rundeck {
-        }
-
-instance Monoid Rundeck where
-    mappend = (<>)
-    mempty  = Rundeck {
-        }
+emptyRundeck :: Rundeck
+emptyRundeck = Rundeck {
+    }
 
 instance TF.IsProvider Rundeck where
     type ProviderName Rundeck = "rundeck"

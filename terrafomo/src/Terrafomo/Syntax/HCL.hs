@@ -16,14 +16,19 @@ module Terrafomo.Syntax.HCL
     , ToHCL       (..)
 
     , assign
+
     , argument
+
     , object
     , block
     , list
+
     , unquoted
     , quoted
+
     , key
     , type_
+
     , name
     , number
     , float
@@ -51,10 +56,8 @@ import Terrafomo.Syntax.Variable
 
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
-import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
-import qualified Data.Text.Lazy.Builder.Int   as Build
 import qualified Terrafomo.Format             as Format
 import qualified Terrafomo.Hash               as Hash
 import qualified Text.PrettyPrint.Leijen.Text as PP
@@ -146,16 +149,17 @@ assign k v = Assign k (toHCL v)
 
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-argument :: ToHCL a => Argument a -> Maybe Value
+argument :: ToHCL a => Argument n a -> Maybe Value
 argument = \case
-    Attribute (Key t n) (Compute x) ->
-        Just $
-            toHCL ( "${"
-                 <> fromType t <> "." <> fromName n <> "." <> fromName x
-                 <> "}"
-                  )
+    Attribute (Key t n) x ->
+        Just $ toHCL
+            ( "${"
+           <> fromType t <> "." <> fromName n <> "." <> fromName (attributeName x)
+           <> "}"
+            )
     Constant  x -> Just (toHCL x)
     _           -> Nothing
+
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
@@ -253,37 +257,49 @@ instance ToHCL Name where
 instance ToHCL Key where
     toHCL (Key t n) = toHCL (fromType t <> "." <> fromName n)
 
-instance ToHCL IPAddress where
-    toHCL = string . Format.bprint Format.fip
-
 instance ToHCL CIDR where
     toHCL = string . Format.bprint Format.fcidr
 
-instance ToHCL Change where
-    toHCL = \case
-        Match n  -> toHCL n
-        Wildcard -> string "*"
+instance ToHCL IP where
+    toHCL = string . Format.bprint Format.fip
 
-instance ToHCL (DataSource Alias (Key, Value)) where
-    toHCL DataSource{..} =
-        object (key "resource" (fst _dataConfig)) $ catMaybes
+instance ToHCL Dependency where
+    toHCL (Dependency k) = toHCL k
+
+instance ToHCL (Changes a) where
+    toHCL x =
+        case getChanges x of
+            Nothing -> list [string "*"]
+            Just ns -> list ns
+
+instance ToHCL (Lifecycle a) where
+   toHCL Lifecycle{..} =
+       block [ assign "prevent_destroy"       _preventDestroy
+             , assign "create_before_destroy" _createBeforeDestroy
+             , assign "ignore_changes"        _ignoreChanges
+             ]
+
+instance ToHCL a => ToHCL (Key, DataSource Alias a) where
+    toHCL (k, DataSource{..}) =
+        object (key "resource" k) $ catMaybes
             [ assign "provider" <$> _dataProvider
-            , Just $ snd _dataConfig
-            , Just $ assign "depends_on" (list _dataDependsOn)
+            , Just $ toHCL _dataConfig
+            , if _dataDependsOn == mempty
+                  then Nothing
+                  else Just $ assign "depends_on" (list _dataDependsOn)
             ]
 
-instance ToHCL (Resource Alias (Key, Value)) where
-    toHCL Resource{..} =
-        let Lifecycle{..} = _resourceLifecycle
-         in object (key "resource" (fst _resourceConfig)) $ catMaybes
+instance ToHCL a => ToHCL (Key, Resource Alias a) where
+    toHCL (k, Resource{..}) =
+       object (key "resource" k) $ catMaybes
             [ assign "provider" <$> _resourceProvider
-            , Just $ snd _resourceConfig
-            , Just $ assign "depends_on" (list _resourceDependsOn)
-            , Just $ assign "lifecycle" $
-                block [ assign "prevent_destroy"       _preventDestroy
-                      , assign "create_before_destroy" _createBeforeDestroy
-                      , assign "ignore_changes"        (list _ignoreChanges)
-                      ]
+            , Just $ toHCL _resourceConfig
+            , if _resourceDependsOn == mempty
+                  then Nothing
+                  else Just $ assign "depends_on" (list _resourceDependsOn)
+            , if _resourceLifecycle == mempty
+                  then Nothing
+                  else Just $ assign "lifecycle" _resourceLifecycle
             ]
 
 instance ToHCL (Output Value) where

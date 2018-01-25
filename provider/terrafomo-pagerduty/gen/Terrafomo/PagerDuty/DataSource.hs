@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -35,23 +38,28 @@ module Terrafomo.PagerDuty.DataSource
     , vendorDataSource
 
     -- * Overloaded Fields
-    , HasComputedName (..)
-    , HasComputedType' (..)
+    -- ** Arguments
     , HasEmail (..)
     , HasName (..)
+
+    -- ** Computed Attributes
+    , HasComputedName (..)
+    , HasComputedType' (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
+
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.PagerDuty.Provider as TF
 import qualified Terrafomo.PagerDuty.Types    as TF
 import qualified Terrafomo.Syntax.DataSource  as TF
 import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.IP          as TF
 import qualified Terrafomo.Syntax.Meta        as TF (configuration)
 import qualified Terrafomo.Syntax.Resource    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
@@ -63,33 +71,29 @@ Use this data source to get information about a specific
 that you can use for other PagerDuty resources.
 -}
 data EscalationPolicyDataSource = EscalationPolicyDataSource {
-      _name          :: !(TF.Argument Text)
+      _name :: !(TF.Argument "name" Text)
     {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
-    , _computed_name :: !(TF.Attribute Text)
-    {- ^ - The short name of the found escalation policy. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL EscalationPolicyDataSource where
     toHCL EscalationPolicyDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
+        [ TF.argument _name
         ]
 
-instance HasName EscalationPolicyDataSource (TF.Argument Text) where
-    name f s@EscalationPolicyDataSource{..} =
-        (\a -> s { _name = a } :: EscalationPolicyDataSource)
-             <$> f _name
+instance HasName EscalationPolicyDataSource Text where
+    name =
+        lens (_name :: EscalationPolicyDataSource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: EscalationPolicyDataSource)
 
-instance HasComputedName EscalationPolicyDataSource (TF.Attribute Text) where
-    computedName f s@EscalationPolicyDataSource{..} =
-        (\a -> s { _computed_name = a } :: EscalationPolicyDataSource)
-             <$> f _computed_name
+instance HasComputedName EscalationPolicyDataSource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
 escalationPolicyDataSource :: TF.DataSource TF.PagerDuty EscalationPolicyDataSource
 escalationPolicyDataSource =
     TF.newDataSource "pagerduty_escalation_policy" $
         EscalationPolicyDataSource {
             _name = TF.Nil
-            , _computed_name = TF.Compute "name"
             }
 
 {- | The @pagerduty_schedule@ PagerDuty datasource.
@@ -99,33 +103,29 @@ Use this data source to get information about a specific
 that you can use for other PagerDuty resources.
 -}
 data ScheduleDataSource = ScheduleDataSource {
-      _name          :: !(TF.Argument Text)
+      _name :: !(TF.Argument "name" Text)
     {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
-    , _computed_name :: !(TF.Attribute Text)
-    {- ^ - The short name of the found schedule. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ScheduleDataSource where
     toHCL ScheduleDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
+        [ TF.argument _name
         ]
 
-instance HasName ScheduleDataSource (TF.Argument Text) where
-    name f s@ScheduleDataSource{..} =
-        (\a -> s { _name = a } :: ScheduleDataSource)
-             <$> f _name
+instance HasName ScheduleDataSource Text where
+    name =
+        lens (_name :: ScheduleDataSource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ScheduleDataSource)
 
-instance HasComputedName ScheduleDataSource (TF.Attribute Text) where
-    computedName f s@ScheduleDataSource{..} =
-        (\a -> s { _computed_name = a } :: ScheduleDataSource)
-             <$> f _computed_name
+instance HasComputedName ScheduleDataSource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
 scheduleDataSource :: TF.DataSource TF.PagerDuty ScheduleDataSource
 scheduleDataSource =
     TF.newDataSource "pagerduty_schedule" $
         ScheduleDataSource {
             _name = TF.Nil
-            , _computed_name = TF.Compute "name"
             }
 
 {- | The @pagerduty_user@ PagerDuty datasource.
@@ -135,33 +135,29 @@ Use this data source to get information about a specific
 that you can use for other PagerDuty resources.
 -}
 data UserDataSource = UserDataSource {
-      _email         :: !(TF.Argument Text)
+      _email :: !(TF.Argument "email" Text)
     {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
-    , _computed_name :: !(TF.Attribute Text)
-    {- ^ - The short name of the found user. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL UserDataSource where
     toHCL UserDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "email" <$> TF.argument _email
+        [ TF.argument _email
         ]
 
-instance HasEmail UserDataSource (TF.Argument Text) where
-    email f s@UserDataSource{..} =
-        (\a -> s { _email = a } :: UserDataSource)
-             <$> f _email
+instance HasEmail UserDataSource Text where
+    email =
+        lens (_email :: UserDataSource -> TF.Argument "email" Text)
+             (\s a -> s { _email = a } :: UserDataSource)
 
-instance HasComputedName UserDataSource (TF.Attribute Text) where
-    computedName f s@UserDataSource{..} =
-        (\a -> s { _computed_name = a } :: UserDataSource)
-             <$> f _computed_name
+instance HasComputedName UserDataSource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
 userDataSource :: TF.DataSource TF.PagerDuty UserDataSource
 userDataSource =
     TF.newDataSource "pagerduty_user" $
         UserDataSource {
             _email = TF.Nil
-            , _computed_name = TF.Compute "name"
             }
 
 {- | The @pagerduty_vendor@ PagerDuty datasource.
@@ -172,63 +168,55 @@ that you can use for a service integration (e.g Amazon Cloudwatch, Splunk,
 Datadog).
 -}
 data VendorDataSource = VendorDataSource {
-      _name           :: !(TF.Argument Text)
+      _name :: !(TF.Argument "name" Text)
     {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
-    , _computed_name  :: !(TF.Attribute Text)
-    {- ^ - The short name of the found vendor. -}
-    , _computed_type' :: !(TF.Attribute Text)
-    {- ^ - The generic service type for this vendor. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VendorDataSource where
     toHCL VendorDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
+        [ TF.argument _name
         ]
 
-instance HasName VendorDataSource (TF.Argument Text) where
-    name f s@VendorDataSource{..} =
-        (\a -> s { _name = a } :: VendorDataSource)
-             <$> f _name
+instance HasName VendorDataSource Text where
+    name =
+        lens (_name :: VendorDataSource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: VendorDataSource)
 
-instance HasComputedName VendorDataSource (TF.Attribute Text) where
-    computedName f s@VendorDataSource{..} =
-        (\a -> s { _computed_name = a } :: VendorDataSource)
-             <$> f _computed_name
+instance HasComputedName VendorDataSource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
-instance HasComputedType' VendorDataSource (TF.Attribute Text) where
-    computedType' f s@VendorDataSource{..} =
-        (\a -> s { _computed_type' = a } :: VendorDataSource)
-             <$> f _computed_type'
+instance HasComputedType' VendorDataSource Text where
+    computedType' =
+        to (\_  -> TF.Compute "type")
 
 vendorDataSource :: TF.DataSource TF.PagerDuty VendorDataSource
 vendorDataSource =
     TF.newDataSource "pagerduty_vendor" $
         VendorDataSource {
             _name = TF.Nil
-            , _computed_name = TF.Compute "name"
-            , _computed_type' = TF.Compute "type"
             }
 
-class HasComputedName s a | s -> a where
-    computedName :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedType' s a | s -> a where
-    computedType' :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
-    computedType' = TF.configuration . computedType'
-
 class HasEmail s a | s -> a where
-    email :: Functor f => (a -> f a) -> s -> f s
+    email :: Lens' s (TF.Argument "email" a)
 
 instance HasEmail s a => HasEmail (TF.DataSource p s) a where
     email = TF.configuration . email
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.DataSource p s) a where
     name = TF.configuration . name
+
+class HasComputedName s a | s -> a where
+    computedName :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedType' s a | s -> a where
+    computedType' :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
+    computedType' = TF.configuration . computedType'

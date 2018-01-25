@@ -20,6 +20,7 @@ module Terrafomo.PostgreSQL.Provider
     (
     -- * Provider Datatype
       PostgreSQL (..)
+    , emptyPostgreSQL
 
     -- * Lenses
     , connectTimeout
@@ -38,13 +39,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.PostgreSQL.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.IP        as TF
 import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
@@ -56,23 +59,23 @@ in a PostgreSQL server. Use the navigation to the left to read about the
 available resources.
 -}
 data PostgreSQL = PostgreSQL {
-      _connect_timeout  :: !(TF.Argument Text)
+      _connect_timeout  :: !(TF.Argument "connect_timeout" Text)
     {- ^ (Optional) Maximum wait for connection, in seconds. The default is @180s@ .  Zero or not specified means wait indefinitely. -}
-    , _database         :: !(TF.Argument Text)
+    , _database         :: !(TF.Argument "database" Text)
     {- ^ (Optional) Database to connect to. The default is @postgres@ . -}
-    , _expected_version :: !(TF.Argument Text)
+    , _expected_version :: !(TF.Argument "expected_version" Text)
     {- ^ (Optional) Specify a hint to Terraform regarding the expected version that the provider will be talking with.  This is a required hint in order for Terraform to talk with an ancient version of PostgreSQL. This parameter is expected to be a <https://www.postgresql.org/support/versioning/> or @current@ .  Once a connection has been established, Terraform will fingerprint the actual version.  Default: @9.0.0@ . -}
-    , _host             :: !(TF.Argument Text)
+    , _host             :: !(TF.Argument "host" Text)
     {- ^ (Required) The address for the postgresql server connection. -}
-    , _max_connections  :: !(TF.Argument Text)
+    , _max_connections  :: !(TF.Argument "max_connections" Text)
     {- ^ (Optional) Set the maximum number of open connections to the database. The default is @4@ .  Zero means unlimited open connections. -}
-    , _password         :: !(TF.Argument Text)
+    , _password         :: !(TF.Argument "password" Text)
     {- ^ (Optional) Password for the server connection. -}
-    , _port             :: !(TF.Argument Text)
+    , _port             :: !(TF.Argument "port" Text)
     {- ^ (Optional) The port for the postgresql server connection. The default is @5432@ . -}
-    , _sslmode          :: !(TF.Argument Text)
+    , _sslmode          :: !(TF.Argument "sslmode" Text)
     {- ^ (Optional) Set the priority for an SSL connection to the server. Valid values for @sslmode@ are (note: @prefer@ is not supported by Go's <https://godoc.org/github.com/lib/pq> ): -}
-    , _username         :: !(TF.Argument Text)
+    , _username         :: !(TF.Argument "username" Text)
     {- ^ (Required) Username for the server connection. -}
     } deriving (Show, Eq, Generic)
 
@@ -82,124 +85,65 @@ instance TF.ToHCL PostgreSQL where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy PostgreSQL))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "connect_timeout" <$> TF.argument (_connect_timeout x)
-            , TF.assign "database" <$> TF.argument (_database x)
-            , TF.assign "expected_version" <$> TF.argument (_expected_version x)
-            , TF.assign "host" <$> TF.argument (_host x)
-            , TF.assign "max_connections" <$> TF.argument (_max_connections x)
-            , TF.assign "password" <$> TF.argument (_password x)
-            , TF.assign "port" <$> TF.argument (_port x)
-            , TF.assign "sslmode" <$> TF.argument (_sslmode x)
-            , TF.assign "username" <$> TF.argument (_username x)
+            , TF.argument (_connect_timeout x)
+            , TF.argument (_database x)
+            , TF.argument (_expected_version x)
+            , TF.argument (_host x)
+            , TF.argument (_max_connections x)
+            , TF.argument (_password x)
+            , TF.argument (_port x)
+            , TF.argument (_sslmode x)
+            , TF.argument (_username x)
             ]
 
-instance Semigroup PostgreSQL where
-    (<>) a b = PostgreSQL {
-          _connect_timeout = on (<>) _connect_timeout a b
-        , _database = on (<>) _database a b
-        , _expected_version = on (<>) _expected_version a b
-        , _host = on (<>) _host a b
-        , _max_connections = on (<>) _max_connections a b
-        , _password = on (<>) _password a b
-        , _port = on (<>) _port a b
-        , _sslmode = on (<>) _sslmode a b
-        , _username = on (<>) _username a b
-        }
-
-instance Monoid PostgreSQL where
-    mappend = (<>)
-    mempty  = PostgreSQL {
-            _connect_timeout = TF.Nil
-          , _database = TF.Nil
-          , _expected_version = TF.Nil
-          , _host = TF.Nil
-          , _max_connections = TF.Nil
-          , _password = TF.Nil
-          , _port = TF.Nil
-          , _sslmode = TF.Nil
-          , _username = TF.Nil
-        }
+emptyPostgreSQL :: PostgreSQL
+emptyPostgreSQL = PostgreSQL {
+        _connect_timeout = TF.Nil
+      , _database = TF.Nil
+      , _expected_version = TF.Nil
+      , _host = TF.Nil
+      , _max_connections = TF.Nil
+      , _password = TF.Nil
+      , _port = TF.Nil
+      , _sslmode = TF.Nil
+      , _username = TF.Nil
+    }
 
 instance TF.IsProvider PostgreSQL where
     type ProviderName PostgreSQL = "postgresql"
 
-connectTimeout
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-connectTimeout f s =
-        (\a -> s { _connect_timeout = a } :: PostgreSQL)
-             <$> f (_connect_timeout s)
+connectTimeout :: Lens' PostgreSQL (TF.Argument "connect_timeout" Text)
+connectTimeout =
+    lens _connect_timeout (\s a -> s { _connect_timeout = a })
 
-database
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-database f s =
-        (\a -> s { _database = a } :: PostgreSQL)
-             <$> f (_database s)
+database :: Lens' PostgreSQL (TF.Argument "database" Text)
+database =
+    lens _database (\s a -> s { _database = a })
 
-expectedVersion
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-expectedVersion f s =
-        (\a -> s { _expected_version = a } :: PostgreSQL)
-             <$> f (_expected_version s)
+expectedVersion :: Lens' PostgreSQL (TF.Argument "expected_version" Text)
+expectedVersion =
+    lens _expected_version (\s a -> s { _expected_version = a })
 
-host
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-host f s =
-        (\a -> s { _host = a } :: PostgreSQL)
-             <$> f (_host s)
+host :: Lens' PostgreSQL (TF.Argument "host" Text)
+host =
+    lens _host (\s a -> s { _host = a })
 
-maxConnections
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-maxConnections f s =
-        (\a -> s { _max_connections = a } :: PostgreSQL)
-             <$> f (_max_connections s)
+maxConnections :: Lens' PostgreSQL (TF.Argument "max_connections" Text)
+maxConnections =
+    lens _max_connections (\s a -> s { _max_connections = a })
 
-password
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-password f s =
-        (\a -> s { _password = a } :: PostgreSQL)
-             <$> f (_password s)
+password :: Lens' PostgreSQL (TF.Argument "password" Text)
+password =
+    lens _password (\s a -> s { _password = a })
 
-port
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-port f s =
-        (\a -> s { _port = a } :: PostgreSQL)
-             <$> f (_port s)
+port :: Lens' PostgreSQL (TF.Argument "port" Text)
+port =
+    lens _port (\s a -> s { _port = a })
 
-sslmode
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-sslmode f s =
-        (\a -> s { _sslmode = a } :: PostgreSQL)
-             <$> f (_sslmode s)
+sslmode :: Lens' PostgreSQL (TF.Argument "sslmode" Text)
+sslmode =
+    lens _sslmode (\s a -> s { _sslmode = a })
 
-username
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PostgreSQL
-    -> f PostgreSQL
-username f s =
-        (\a -> s { _username = a } :: PostgreSQL)
-             <$> f (_username s)
+username :: Lens' PostgreSQL (TF.Argument "username" Text)
+username =
+    lens _username (\s a -> s { _username = a })

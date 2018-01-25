@@ -20,6 +20,7 @@ module Terrafomo.Rancher.Provider
     (
     -- * Provider Datatype
       Rancher (..)
+    , emptyRancher
 
     -- * Lenses
     , accessKey
@@ -32,13 +33,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Rancher.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,11 +54,11 @@ server at minimum and API credentials if access control is enabled on the
 server.
 -}
 data Rancher = Rancher {
-      _access_key :: !(TF.Argument Text)
+      _access_key :: !(TF.Argument "access_key" Text)
     {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_ACCESS_KEY@ environment variable. -}
-    , _api_url    :: !(TF.Argument Text)
+    , _api_url    :: !(TF.Argument "api_url" Text)
     {- ^ (Required) Rancher API url. It must be provided, but it can also be sourced from the @RANCHER_URL@ environment variable. -}
-    , _secret_key :: !(TF.Argument Text)
+    , _secret_key :: !(TF.Argument "secret_key" Text)
     {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -65,52 +68,29 @@ instance TF.ToHCL Rancher where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Rancher))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "access_key" <$> TF.argument (_access_key x)
-            , TF.assign "api_url" <$> TF.argument (_api_url x)
-            , TF.assign "secret_key" <$> TF.argument (_secret_key x)
+            , TF.argument (_access_key x)
+            , TF.argument (_api_url x)
+            , TF.argument (_secret_key x)
             ]
 
-instance Semigroup Rancher where
-    (<>) a b = Rancher {
-          _access_key = on (<>) _access_key a b
-        , _api_url = on (<>) _api_url a b
-        , _secret_key = on (<>) _secret_key a b
-        }
-
-instance Monoid Rancher where
-    mappend = (<>)
-    mempty  = Rancher {
-            _access_key = TF.Nil
-          , _api_url = TF.Nil
-          , _secret_key = TF.Nil
-        }
+emptyRancher :: Rancher
+emptyRancher = Rancher {
+        _access_key = TF.Nil
+      , _api_url = TF.Nil
+      , _secret_key = TF.Nil
+    }
 
 instance TF.IsProvider Rancher where
     type ProviderName Rancher = "rancher"
 
-accessKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Rancher
-    -> f Rancher
-accessKey f s =
-        (\a -> s { _access_key = a } :: Rancher)
-             <$> f (_access_key s)
+accessKey :: Lens' Rancher (TF.Argument "access_key" Text)
+accessKey =
+    lens _access_key (\s a -> s { _access_key = a })
 
-apiUrl
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Rancher
-    -> f Rancher
-apiUrl f s =
-        (\a -> s { _api_url = a } :: Rancher)
-             <$> f (_api_url s)
+apiUrl :: Lens' Rancher (TF.Argument "api_url" Text)
+apiUrl =
+    lens _api_url (\s a -> s { _api_url = a })
 
-secretKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Rancher
-    -> f Rancher
-secretKey f s =
-        (\a -> s { _secret_key = a } :: Rancher)
-             <$> f (_secret_key s)
+secretKey :: Lens' Rancher (TF.Argument "secret_key" Text)
+secretKey =
+    lens _secret_key (\s a -> s { _secret_key = a })

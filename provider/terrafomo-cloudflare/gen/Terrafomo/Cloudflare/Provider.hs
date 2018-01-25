@@ -20,6 +20,7 @@ module Terrafomo.Cloudflare.Provider
     (
     -- * Provider Datatype
       Cloudflare (..)
+    , emptyCloudflare
 
     -- * Lenses
     , email
@@ -31,13 +32,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Cloudflare.Types as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.IP        as TF
 import qualified Terrafomo.Syntax.Name      as TF
 import qualified Terrafomo.Syntax.Provider  as TF
 import qualified Terrafomo.Syntax.Variable  as TF
@@ -50,9 +53,9 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Cloudflare = Cloudflare {
-      _email :: !(TF.Argument Text)
+      _email :: !(TF.Argument "email" Text)
     {- ^ (Required) The email associated with the account. This can also be specified with the @CLOUDFLARE_EMAIL@ shell environment variable. -}
-    , _token :: !(TF.Argument Text)
+    , _token :: !(TF.Argument "token" Text)
     {- ^ (Required) The Cloudflare API token. This can also be specified with the @CLOUDFLARE_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -62,40 +65,23 @@ instance TF.ToHCL Cloudflare where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Cloudflare))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "email" <$> TF.argument (_email x)
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_email x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup Cloudflare where
-    (<>) a b = Cloudflare {
-          _email = on (<>) _email a b
-        , _token = on (<>) _token a b
-        }
-
-instance Monoid Cloudflare where
-    mappend = (<>)
-    mempty  = Cloudflare {
-            _email = TF.Nil
-          , _token = TF.Nil
-        }
+emptyCloudflare :: Cloudflare
+emptyCloudflare = Cloudflare {
+        _email = TF.Nil
+      , _token = TF.Nil
+    }
 
 instance TF.IsProvider Cloudflare where
     type ProviderName Cloudflare = "cloudflare"
 
-email
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Cloudflare
-    -> f Cloudflare
-email f s =
-        (\a -> s { _email = a } :: Cloudflare)
-             <$> f (_email s)
+email :: Lens' Cloudflare (TF.Argument "email" Text)
+email =
+    lens _email (\s a -> s { _email = a })
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Cloudflare
-    -> f Cloudflare
-token f s =
-        (\a -> s { _token = a } :: Cloudflare)
-             <$> f (_token s)
+token :: Lens' Cloudflare (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -35,6 +38,7 @@ module Terrafomo.Icinga2.Resource
     , serviceResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasAddress (..)
     , HasArguments (..)
     , HasCheckCommand (..)
@@ -44,18 +48,22 @@ module Terrafomo.Icinga2.Resource
     , HasName (..)
     , HasTemplates (..)
     , HasVars (..)
+
+    -- ** Computed Attributes
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.Icinga2.Provider as TF
 import qualified Terrafomo.Icinga2.Types    as TF
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.IP        as TF
 import qualified Terrafomo.Syntax.Meta      as TF (configuration)
 import qualified Terrafomo.Syntax.Resource  as TF
 import qualified Terrafomo.Syntax.Resource  as TF
@@ -67,43 +75,43 @@ Configures an Icinga2 checkcommand resource. This allows checkcommands to be
 configured, updated, and deleted.
 -}
 data CheckcommandResource = CheckcommandResource {
-      _arguments :: !(TF.Argument Text)
+      _arguments :: !(TF.Argument "arguments" Text)
     {- ^ (Optional) A mapping of arguments to include with the command. -}
-    , _command   :: !(TF.Argument Text)
+    , _command   :: !(TF.Argument "command" Text)
     {- ^ (Required) Path to the command te be executed. -}
-    , _name      :: !(TF.Argument Text)
+    , _name      :: !(TF.Argument "name" Text)
     {- ^ (Required) Name by which to reference the checkcommand -}
-    , _templates :: !(TF.Argument Text)
+    , _templates :: !(TF.Argument "templates" Text)
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL CheckcommandResource where
     toHCL CheckcommandResource{..} = TF.block $ catMaybes
-        [ TF.assign "arguments" <$> TF.argument _arguments
-        , TF.assign "command" <$> TF.argument _command
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "templates" <$> TF.argument _templates
+        [ TF.argument _arguments
+        , TF.argument _command
+        , TF.argument _name
+        , TF.argument _templates
         ]
 
-instance HasArguments CheckcommandResource (TF.Argument Text) where
-    arguments f s@CheckcommandResource{..} =
-        (\a -> s { _arguments = a } :: CheckcommandResource)
-             <$> f _arguments
+instance HasArguments CheckcommandResource Text where
+    arguments =
+        lens (_arguments :: CheckcommandResource -> TF.Argument "arguments" Text)
+             (\s a -> s { _arguments = a } :: CheckcommandResource)
 
-instance HasCommand CheckcommandResource (TF.Argument Text) where
-    command f s@CheckcommandResource{..} =
-        (\a -> s { _command = a } :: CheckcommandResource)
-             <$> f _command
+instance HasCommand CheckcommandResource Text where
+    command =
+        lens (_command :: CheckcommandResource -> TF.Argument "command" Text)
+             (\s a -> s { _command = a } :: CheckcommandResource)
 
-instance HasName CheckcommandResource (TF.Argument Text) where
-    name f s@CheckcommandResource{..} =
-        (\a -> s { _name = a } :: CheckcommandResource)
-             <$> f _name
+instance HasName CheckcommandResource Text where
+    name =
+        lens (_name :: CheckcommandResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: CheckcommandResource)
 
-instance HasTemplates CheckcommandResource (TF.Argument Text) where
-    templates f s@CheckcommandResource{..} =
-        (\a -> s { _templates = a } :: CheckcommandResource)
-             <$> f _templates
+instance HasTemplates CheckcommandResource Text where
+    templates =
+        lens (_templates :: CheckcommandResource -> TF.Argument "templates" Text)
+             (\s a -> s { _templates = a } :: CheckcommandResource)
 
 checkcommandResource :: TF.Resource TF.Icinga2 CheckcommandResource
 checkcommandResource =
@@ -121,51 +129,51 @@ Configures an Icinga2 host resource. This allows hosts to be configured,
 updated, and deleted.
 -}
 data HostResource = HostResource {
-      _address       :: !(TF.Argument Text)
+      _address       :: !(TF.Argument "address" Text)
     {- ^ (Required) The address of the host. -}
-    , _check_command :: !(TF.Argument Text)
+    , _check_command :: !(TF.Argument "check_command" Text)
     {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the host is available or not. -}
-    , _hostname      :: !(TF.Argument Text)
+    , _hostname      :: !(TF.Argument "hostname" Text)
     {- ^ (Required) The hostname of the host. -}
-    , _templates     :: !(TF.Argument Text)
+    , _templates     :: !(TF.Argument "templates" Text)
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
-    , _vars          :: !(TF.Argument Text)
+    , _vars          :: !(TF.Argument "vars" Text)
     {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL HostResource where
     toHCL HostResource{..} = TF.block $ catMaybes
-        [ TF.assign "address" <$> TF.argument _address
-        , TF.assign "check_command" <$> TF.argument _check_command
-        , TF.assign "hostname" <$> TF.argument _hostname
-        , TF.assign "templates" <$> TF.argument _templates
-        , TF.assign "vars" <$> TF.argument _vars
+        [ TF.argument _address
+        , TF.argument _check_command
+        , TF.argument _hostname
+        , TF.argument _templates
+        , TF.argument _vars
         ]
 
-instance HasAddress HostResource (TF.Argument Text) where
-    address f s@HostResource{..} =
-        (\a -> s { _address = a } :: HostResource)
-             <$> f _address
+instance HasAddress HostResource Text where
+    address =
+        lens (_address :: HostResource -> TF.Argument "address" Text)
+             (\s a -> s { _address = a } :: HostResource)
 
-instance HasCheckCommand HostResource (TF.Argument Text) where
-    checkCommand f s@HostResource{..} =
-        (\a -> s { _check_command = a } :: HostResource)
-             <$> f _check_command
+instance HasCheckCommand HostResource Text where
+    checkCommand =
+        lens (_check_command :: HostResource -> TF.Argument "check_command" Text)
+             (\s a -> s { _check_command = a } :: HostResource)
 
-instance HasHostname HostResource (TF.Argument Text) where
-    hostname f s@HostResource{..} =
-        (\a -> s { _hostname = a } :: HostResource)
-             <$> f _hostname
+instance HasHostname HostResource Text where
+    hostname =
+        lens (_hostname :: HostResource -> TF.Argument "hostname" Text)
+             (\s a -> s { _hostname = a } :: HostResource)
 
-instance HasTemplates HostResource (TF.Argument Text) where
-    templates f s@HostResource{..} =
-        (\a -> s { _templates = a } :: HostResource)
-             <$> f _templates
+instance HasTemplates HostResource Text where
+    templates =
+        lens (_templates :: HostResource -> TF.Argument "templates" Text)
+             (\s a -> s { _templates = a } :: HostResource)
 
-instance HasVars HostResource (TF.Argument Text) where
-    vars f s@HostResource{..} =
-        (\a -> s { _vars = a } :: HostResource)
-             <$> f _vars
+instance HasVars HostResource Text where
+    vars =
+        lens (_vars :: HostResource -> TF.Argument "vars" Text)
+             (\s a -> s { _vars = a } :: HostResource)
 
 hostResource :: TF.Resource TF.Icinga2 HostResource
 hostResource =
@@ -184,27 +192,27 @@ Configures an Icinga2 hostgroup resource. This allows hostgroup to be
 configured, updated, and deleted.
 -}
 data HostgroupResource = HostgroupResource {
-      _display_name :: !(TF.Argument Text)
+      _display_name :: !(TF.Argument "display_name" Text)
     {- ^ (Required) The name of the hostgroup to display in the Icinga2 interface. -}
-    , _name         :: !(TF.Argument Text)
+    , _name         :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL HostgroupResource where
     toHCL HostgroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "display_name" <$> TF.argument _display_name
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _display_name
+        , TF.argument _name
         ]
 
-instance HasDisplayName HostgroupResource (TF.Argument Text) where
-    displayName f s@HostgroupResource{..} =
-        (\a -> s { _display_name = a } :: HostgroupResource)
-             <$> f _display_name
+instance HasDisplayName HostgroupResource Text where
+    displayName =
+        lens (_display_name :: HostgroupResource -> TF.Argument "display_name" Text)
+             (\s a -> s { _display_name = a } :: HostgroupResource)
 
-instance HasName HostgroupResource (TF.Argument Text) where
-    name f s@HostgroupResource{..} =
-        (\a -> s { _name = a } :: HostgroupResource)
-             <$> f _name
+instance HasName HostgroupResource Text where
+    name =
+        lens (_name :: HostgroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: HostgroupResource)
 
 hostgroupResource :: TF.Resource TF.Icinga2 HostgroupResource
 hostgroupResource =
@@ -220,35 +228,35 @@ Configures an Icinga2 service resource. This allows service to be
 configured, updated, and deleted.
 -}
 data ServiceResource = ServiceResource {
-      _check_command :: !(TF.Argument Text)
+      _check_command :: !(TF.Argument "check_command" Text)
     {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the service is available on the host. -}
-    , _hostname      :: !(TF.Argument Text)
+    , _hostname      :: !(TF.Argument "hostname" Text)
     {- ^ (Required) The host to check the service's status on -}
-    , _name          :: !(TF.Argument Text)
+    , _name          :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ServiceResource where
     toHCL ServiceResource{..} = TF.block $ catMaybes
-        [ TF.assign "check_command" <$> TF.argument _check_command
-        , TF.assign "hostname" <$> TF.argument _hostname
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _check_command
+        , TF.argument _hostname
+        , TF.argument _name
         ]
 
-instance HasCheckCommand ServiceResource (TF.Argument Text) where
-    checkCommand f s@ServiceResource{..} =
-        (\a -> s { _check_command = a } :: ServiceResource)
-             <$> f _check_command
+instance HasCheckCommand ServiceResource Text where
+    checkCommand =
+        lens (_check_command :: ServiceResource -> TF.Argument "check_command" Text)
+             (\s a -> s { _check_command = a } :: ServiceResource)
 
-instance HasHostname ServiceResource (TF.Argument Text) where
-    hostname f s@ServiceResource{..} =
-        (\a -> s { _hostname = a } :: ServiceResource)
-             <$> f _hostname
+instance HasHostname ServiceResource Text where
+    hostname =
+        lens (_hostname :: ServiceResource -> TF.Argument "hostname" Text)
+             (\s a -> s { _hostname = a } :: ServiceResource)
 
-instance HasName ServiceResource (TF.Argument Text) where
-    name f s@ServiceResource{..} =
-        (\a -> s { _name = a } :: ServiceResource)
-             <$> f _name
+instance HasName ServiceResource Text where
+    name =
+        lens (_name :: ServiceResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ServiceResource)
 
 serviceResource :: TF.Resource TF.Icinga2 ServiceResource
 serviceResource =
@@ -260,55 +268,55 @@ serviceResource =
             }
 
 class HasAddress s a | s -> a where
-    address :: Functor f => (a -> f a) -> s -> f s
+    address :: Lens' s (TF.Argument "address" a)
 
 instance HasAddress s a => HasAddress (TF.Resource p s) a where
     address = TF.configuration . address
 
 class HasArguments s a | s -> a where
-    arguments :: Functor f => (a -> f a) -> s -> f s
+    arguments :: Lens' s (TF.Argument "arguments" a)
 
 instance HasArguments s a => HasArguments (TF.Resource p s) a where
     arguments = TF.configuration . arguments
 
 class HasCheckCommand s a | s -> a where
-    checkCommand :: Functor f => (a -> f a) -> s -> f s
+    checkCommand :: Lens' s (TF.Argument "check_command" a)
 
 instance HasCheckCommand s a => HasCheckCommand (TF.Resource p s) a where
     checkCommand = TF.configuration . checkCommand
 
 class HasCommand s a | s -> a where
-    command :: Functor f => (a -> f a) -> s -> f s
+    command :: Lens' s (TF.Argument "command" a)
 
 instance HasCommand s a => HasCommand (TF.Resource p s) a where
     command = TF.configuration . command
 
 class HasDisplayName s a | s -> a where
-    displayName :: Functor f => (a -> f a) -> s -> f s
+    displayName :: Lens' s (TF.Argument "display_name" a)
 
 instance HasDisplayName s a => HasDisplayName (TF.Resource p s) a where
     displayName = TF.configuration . displayName
 
 class HasHostname s a | s -> a where
-    hostname :: Functor f => (a -> f a) -> s -> f s
+    hostname :: Lens' s (TF.Argument "hostname" a)
 
 instance HasHostname s a => HasHostname (TF.Resource p s) a where
     hostname = TF.configuration . hostname
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name
 
 class HasTemplates s a | s -> a where
-    templates :: Functor f => (a -> f a) -> s -> f s
+    templates :: Lens' s (TF.Argument "templates" a)
 
 instance HasTemplates s a => HasTemplates (TF.Resource p s) a where
     templates = TF.configuration . templates
 
 class HasVars s a | s -> a where
-    vars :: Functor f => (a -> f a) -> s -> f s
+    vars :: Lens' s (TF.Argument "vars" a)
 
 instance HasVars s a => HasVars (TF.Resource p s) a where
     vars = TF.configuration . vars

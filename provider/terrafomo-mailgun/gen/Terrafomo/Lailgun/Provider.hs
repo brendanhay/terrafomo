@@ -20,6 +20,7 @@ module Terrafomo.Lailgun.Provider
     (
     -- * Provider Datatype
       Lailgun (..)
+    , emptyLailgun
 
     -- * Lenses
     , apiKey
@@ -30,13 +31,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Lailgun.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -49,7 +52,7 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Lailgun = Lailgun {
-      _api_key :: !(TF.Argument Text)
+      _api_key :: !(TF.Argument "api_key" Text)
     {- ^ (Required) Mailgun API key -}
     } deriving (Show, Eq, Generic)
 
@@ -59,28 +62,17 @@ instance TF.ToHCL Lailgun where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Lailgun))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "api_key" <$> TF.argument (_api_key x)
+            , TF.argument (_api_key x)
             ]
 
-instance Semigroup Lailgun where
-    (<>) a b = Lailgun {
-          _api_key = on (<>) _api_key a b
-        }
-
-instance Monoid Lailgun where
-    mappend = (<>)
-    mempty  = Lailgun {
-            _api_key = TF.Nil
-        }
+emptyLailgun :: Lailgun
+emptyLailgun = Lailgun {
+        _api_key = TF.Nil
+    }
 
 instance TF.IsProvider Lailgun where
     type ProviderName Lailgun = "mailgun"
 
-apiKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> Lailgun
-    -> f Lailgun
-apiKey f s =
-        (\a -> s { _api_key = a } :: Lailgun)
-             <$> f (_api_key s)
+apiKey :: Lens' Lailgun (TF.Argument "api_key" Text)
+apiKey =
+    lens _api_key (\s a -> s { _api_key = a })

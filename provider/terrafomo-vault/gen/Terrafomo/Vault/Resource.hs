@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -56,6 +59,7 @@ module Terrafomo.Vault.Resource
     , policyResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasAccessKey (..)
     , HasAccountId (..)
     , HasAllowInstanceMigration (..)
@@ -72,14 +76,6 @@ module Terrafomo.Vault.Resource
     , HasBoundSubnetId (..)
     , HasBoundVpcId (..)
     , HasCertName (..)
-    , HasComputedAccessor (..)
-    , HasComputedAuthType (..)
-    , HasComputedClientToken (..)
-    , HasComputedLeaseDuration (..)
-    , HasComputedLeaseStartTime (..)
-    , HasComputedMetadata (..)
-    , HasComputedPolicies (..)
-    , HasComputedRenewable (..)
     , HasDataJson (..)
     , HasDefaultLeaseTtlSeconds (..)
     , HasDescription (..)
@@ -114,16 +110,28 @@ module Terrafomo.Vault.Resource
     , HasStsRole (..)
     , HasTtl (..)
     , HasType' (..)
+
+    -- ** Computed Attributes
+    , HasComputedAccessor (..)
+    , HasComputedAuthType (..)
+    , HasComputedClientToken (..)
+    , HasComputedLeaseDuration (..)
+    , HasComputedLeaseStartTime (..)
+    , HasComputedMetadata (..)
+    , HasComputedPolicies (..)
+    , HasComputedRenewable (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
@@ -136,35 +144,35 @@ import qualified Terrafomo.Vault.Types     as TF
 
 -}
 data AuthBackendResource = AuthBackendResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the auth backend -}
-    , _path        :: !(TF.Argument Text)
+    , _path        :: !(TF.Argument "path" Text)
     {- ^ (Optional) The path to mount the auth backend. This defaults to the name. -}
-    , _type'       :: !(TF.Argument Text)
+    , _type'       :: !(TF.Argument "type" Text)
     {- ^ (Required) The name of the policy -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AuthBackendResource where
     toHCL AuthBackendResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "path" <$> TF.argument _path
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _description
+        , TF.argument _path
+        , TF.argument _type'
         ]
 
-instance HasDescription AuthBackendResource (TF.Argument Text) where
-    description f s@AuthBackendResource{..} =
-        (\a -> s { _description = a } :: AuthBackendResource)
-             <$> f _description
+instance HasDescription AuthBackendResource Text where
+    description =
+        lens (_description :: AuthBackendResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: AuthBackendResource)
 
-instance HasPath AuthBackendResource (TF.Argument Text) where
-    path f s@AuthBackendResource{..} =
-        (\a -> s { _path = a } :: AuthBackendResource)
-             <$> f _path
+instance HasPath AuthBackendResource Text where
+    path =
+        lens (_path :: AuthBackendResource -> TF.Argument "path" Text)
+             (\s a -> s { _path = a } :: AuthBackendResource)
 
-instance HasType' AuthBackendResource (TF.Argument Text) where
-    type' f s@AuthBackendResource{..} =
-        (\a -> s { _type' = a } :: AuthBackendResource)
-             <$> f _type'
+instance HasType' AuthBackendResource Text where
+    type' =
+        lens (_type' :: AuthBackendResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: AuthBackendResource)
 
 authBackendResource :: TF.Resource TF.Vault AuthBackendResource
 authBackendResource =
@@ -188,43 +196,43 @@ the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
 data AwsAuthBackendCertResource = AwsAuthBackendCertResource {
-      _aws_public_cert :: !(TF.Argument Text)
+      _aws_public_cert :: !(TF.Argument "aws_public_cert" Text)
     {- ^ (Required) The  Base64 encoded AWS Public key required to verify PKCS7 signature of the EC2 instance metadata. You can find this key in the <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html> . -}
-    , _backend         :: !(TF.Argument Text)
+    , _backend         :: !(TF.Argument "backend" Text)
     {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
-    , _cert_name       :: !(TF.Argument Text)
+    , _cert_name       :: !(TF.Argument "cert_name" Text)
     {- ^ (Required) The name of the certificate. -}
-    , _type'           :: !(TF.Argument Text)
+    , _type'           :: !(TF.Argument "type" Text)
     {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsAuthBackendCertResource where
     toHCL AwsAuthBackendCertResource{..} = TF.block $ catMaybes
-        [ TF.assign "aws_public_cert" <$> TF.argument _aws_public_cert
-        , TF.assign "backend" <$> TF.argument _backend
-        , TF.assign "cert_name" <$> TF.argument _cert_name
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _aws_public_cert
+        , TF.argument _backend
+        , TF.argument _cert_name
+        , TF.argument _type'
         ]
 
-instance HasAwsPublicCert AwsAuthBackendCertResource (TF.Argument Text) where
-    awsPublicCert f s@AwsAuthBackendCertResource{..} =
-        (\a -> s { _aws_public_cert = a } :: AwsAuthBackendCertResource)
-             <$> f _aws_public_cert
+instance HasAwsPublicCert AwsAuthBackendCertResource Text where
+    awsPublicCert =
+        lens (_aws_public_cert :: AwsAuthBackendCertResource -> TF.Argument "aws_public_cert" Text)
+             (\s a -> s { _aws_public_cert = a } :: AwsAuthBackendCertResource)
 
-instance HasBackend AwsAuthBackendCertResource (TF.Argument Text) where
-    backend f s@AwsAuthBackendCertResource{..} =
-        (\a -> s { _backend = a } :: AwsAuthBackendCertResource)
-             <$> f _backend
+instance HasBackend AwsAuthBackendCertResource Text where
+    backend =
+        lens (_backend :: AwsAuthBackendCertResource -> TF.Argument "backend" Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendCertResource)
 
-instance HasCertName AwsAuthBackendCertResource (TF.Argument Text) where
-    certName f s@AwsAuthBackendCertResource{..} =
-        (\a -> s { _cert_name = a } :: AwsAuthBackendCertResource)
-             <$> f _cert_name
+instance HasCertName AwsAuthBackendCertResource Text where
+    certName =
+        lens (_cert_name :: AwsAuthBackendCertResource -> TF.Argument "cert_name" Text)
+             (\s a -> s { _cert_name = a } :: AwsAuthBackendCertResource)
 
-instance HasType' AwsAuthBackendCertResource (TF.Argument Text) where
-    type' f s@AwsAuthBackendCertResource{..} =
-        (\a -> s { _type' = a } :: AwsAuthBackendCertResource)
-             <$> f _type'
+instance HasType' AwsAuthBackendCertResource Text where
+    type' =
+        lens (_type' :: AwsAuthBackendCertResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: AwsAuthBackendCertResource)
 
 awsAuthBackendCertResource :: TF.Resource TF.Vault AwsAuthBackendCertResource
 awsAuthBackendCertResource =
@@ -250,67 +258,67 @@ the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
 data AwsAuthBackendClientResource = AwsAuthBackendClientResource {
-      _access_key                 :: !(TF.Argument Text)
+      _access_key :: !(TF.Argument "access_key" Text)
     {- ^ (Optional) The AWS access key that Vault should use for the auth backend. -}
-    , _backend                    :: !(TF.Argument Text)
+    , _backend :: !(TF.Argument "backend" Text)
     {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
-    , _ec2_endpoint               :: !(TF.Argument Text)
+    , _ec2_endpoint :: !(TF.Argument "ec2_endpoint" Text)
     {- ^ (Optional) Override the URL Vault uses when making EC2 API calls. -}
-    , _iam_endpoint               :: !(TF.Argument Text)
+    , _iam_endpoint :: !(TF.Argument "iam_endpoint" Text)
     {- ^ (Optional) Override the URL Vault uses when making IAM API calls. -}
-    , _iam_server_id_header_value :: !(TF.Argument Text)
+    , _iam_server_id_header_value :: !(TF.Argument "iam_server_id_header_value" Text)
     {- ^ (Optional) The value to require in the @X-Vault-AWS-IAM-Server-ID@ header as part of @GetCallerIdentity@ requests that are used in the IAM auth method. -}
-    , _secret_key                 :: !(TF.Argument Text)
+    , _secret_key :: !(TF.Argument "secret_key" Text)
     {- ^ (Optional) The AWS secret key that Vault should use for the auth backend. -}
-    , _sts_endpoint               :: !(TF.Argument Text)
+    , _sts_endpoint :: !(TF.Argument "sts_endpoint" Text)
     {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsAuthBackendClientResource where
     toHCL AwsAuthBackendClientResource{..} = TF.block $ catMaybes
-        [ TF.assign "access_key" <$> TF.argument _access_key
-        , TF.assign "backend" <$> TF.argument _backend
-        , TF.assign "ec2_endpoint" <$> TF.argument _ec2_endpoint
-        , TF.assign "iam_endpoint" <$> TF.argument _iam_endpoint
-        , TF.assign "iam_server_id_header_value" <$> TF.argument _iam_server_id_header_value
-        , TF.assign "secret_key" <$> TF.argument _secret_key
-        , TF.assign "sts_endpoint" <$> TF.argument _sts_endpoint
+        [ TF.argument _access_key
+        , TF.argument _backend
+        , TF.argument _ec2_endpoint
+        , TF.argument _iam_endpoint
+        , TF.argument _iam_server_id_header_value
+        , TF.argument _secret_key
+        , TF.argument _sts_endpoint
         ]
 
-instance HasAccessKey AwsAuthBackendClientResource (TF.Argument Text) where
-    accessKey f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _access_key = a } :: AwsAuthBackendClientResource)
-             <$> f _access_key
+instance HasAccessKey AwsAuthBackendClientResource Text where
+    accessKey =
+        lens (_access_key :: AwsAuthBackendClientResource -> TF.Argument "access_key" Text)
+             (\s a -> s { _access_key = a } :: AwsAuthBackendClientResource)
 
-instance HasBackend AwsAuthBackendClientResource (TF.Argument Text) where
-    backend f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _backend = a } :: AwsAuthBackendClientResource)
-             <$> f _backend
+instance HasBackend AwsAuthBackendClientResource Text where
+    backend =
+        lens (_backend :: AwsAuthBackendClientResource -> TF.Argument "backend" Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendClientResource)
 
-instance HasEc2Endpoint AwsAuthBackendClientResource (TF.Argument Text) where
-    ec2Endpoint f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _ec2_endpoint = a } :: AwsAuthBackendClientResource)
-             <$> f _ec2_endpoint
+instance HasEc2Endpoint AwsAuthBackendClientResource Text where
+    ec2Endpoint =
+        lens (_ec2_endpoint :: AwsAuthBackendClientResource -> TF.Argument "ec2_endpoint" Text)
+             (\s a -> s { _ec2_endpoint = a } :: AwsAuthBackendClientResource)
 
-instance HasIamEndpoint AwsAuthBackendClientResource (TF.Argument Text) where
-    iamEndpoint f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _iam_endpoint = a } :: AwsAuthBackendClientResource)
-             <$> f _iam_endpoint
+instance HasIamEndpoint AwsAuthBackendClientResource Text where
+    iamEndpoint =
+        lens (_iam_endpoint :: AwsAuthBackendClientResource -> TF.Argument "iam_endpoint" Text)
+             (\s a -> s { _iam_endpoint = a } :: AwsAuthBackendClientResource)
 
-instance HasIamServerIdHeaderValue AwsAuthBackendClientResource (TF.Argument Text) where
-    iamServerIdHeaderValue f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _iam_server_id_header_value = a } :: AwsAuthBackendClientResource)
-             <$> f _iam_server_id_header_value
+instance HasIamServerIdHeaderValue AwsAuthBackendClientResource Text where
+    iamServerIdHeaderValue =
+        lens (_iam_server_id_header_value :: AwsAuthBackendClientResource -> TF.Argument "iam_server_id_header_value" Text)
+             (\s a -> s { _iam_server_id_header_value = a } :: AwsAuthBackendClientResource)
 
-instance HasSecretKey AwsAuthBackendClientResource (TF.Argument Text) where
-    secretKey f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _secret_key = a } :: AwsAuthBackendClientResource)
-             <$> f _secret_key
+instance HasSecretKey AwsAuthBackendClientResource Text where
+    secretKey =
+        lens (_secret_key :: AwsAuthBackendClientResource -> TF.Argument "secret_key" Text)
+             (\s a -> s { _secret_key = a } :: AwsAuthBackendClientResource)
 
-instance HasStsEndpoint AwsAuthBackendClientResource (TF.Argument Text) where
-    stsEndpoint f s@AwsAuthBackendClientResource{..} =
-        (\a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource)
-             <$> f _sts_endpoint
+instance HasStsEndpoint AwsAuthBackendClientResource Text where
+    stsEndpoint =
+        lens (_sts_endpoint :: AwsAuthBackendClientResource -> TF.Argument "sts_endpoint" Text)
+             (\s a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource)
 
 awsAuthBackendClientResource :: TF.Resource TF.Vault AwsAuthBackendClientResource
 awsAuthBackendClientResource =
@@ -333,147 +341,123 @@ metadata. For more information, see the
 <https://www.vaultproject.io/docs/auth/aws.html> .
 -}
 data AwsAuthBackendLoginResource = AwsAuthBackendLoginResource {
-      _backend                   :: !(TF.Argument Text)
+      _backend                 :: !(TF.Argument "backend" Text)
     {- ^ (Optional) The unique name of the AWS auth backend. Defaults to 'aws'. -}
-    , _iam_http_request_method   :: !(TF.Argument Text)
+    , _iam_http_request_method :: !(TF.Argument "iam_http_request_method" Text)
     {- ^ (Optional) The HTTP method used in the signed IAM request. -}
-    , _iam_request_body          :: !(TF.Argument Text)
+    , _iam_request_body        :: !(TF.Argument "iam_request_body" Text)
     {- ^ (Optional) The base64-encoded body of the signed request. -}
-    , _iam_request_headers       :: !(TF.Argument Text)
+    , _iam_request_headers     :: !(TF.Argument "iam_request_headers" Text)
     {- ^ (Optional) The base64-encoded, JSON serialized representation of the GetCallerIdentity HTTP request headers. -}
-    , _iam_request_url           :: !(TF.Argument Text)
+    , _iam_request_url         :: !(TF.Argument "iam_request_url" Text)
     {- ^ (Optional) The base64-encoded HTTP URL used in the signed request. -}
-    , _identity                  :: !(TF.Argument Text)
+    , _identity                :: !(TF.Argument "identity" Text)
     {- ^ (Optional) The base64-encoded EC2 instance identity document to authenticate with. Can be retrieved from the EC2 metadata server. -}
-    , _nonce                     :: !(TF.Argument Text)
+    , _nonce                   :: !(TF.Argument "nonce" Text)
     {- ^ (Optional) The unique nonce to be used for login requests. Can be set to a user-specified value, or will contain the server-generated value once a token is issued. EC2 instances can only acquire a single token until the whitelist is tidied again unless they keep track of this nonce. -}
-    , _pkcs7                     :: !(TF.Argument Text)
+    , _pkcs7                   :: !(TF.Argument "pkcs7" Text)
     {- ^ (Optional) The PKCS#7 signature of the identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
-    , _role                      :: !(TF.Argument Text)
+    , _role                    :: !(TF.Argument "role" Text)
     {- ^ (Optional) The name of the AWS auth backend role to create tokens against. -}
-    , _signature                 :: !(TF.Argument Text)
+    , _signature               :: !(TF.Argument "signature" Text)
     {- ^ (Optional) The base64-encoded SHA256 RSA signature of the instance identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
-    , _computed_accessor         :: !(TF.Attribute Text)
-    {- ^ - The token's accessor. -}
-    , _computed_auth_type        :: !(TF.Attribute Text)
-    {- ^ - The authentication type used to generate this token. -}
-    , _computed_client_token     :: !(TF.Attribute Text)
-    {- ^ - The token returned by Vault. -}
-    , _computed_lease_duration   :: !(TF.Attribute Text)
-    {- ^ - The duration in seconds the token will be valid, relative to the time in @lease_start_time@ . -}
-    , _computed_lease_start_time :: !(TF.Attribute Text)
-    {- ^ - The approximate time at which the token was created, using the clock of the system where Terraform was running. -}
-    , _computed_metadata         :: !(TF.Attribute Text)
-    {- ^ - A map of information returned by the Vault server about the authentication used to generate this token. -}
-    , _computed_policies         :: !(TF.Attribute Text)
-    {- ^ - The Vault policies assigned to this token. -}
-    , _computed_renewable        :: !(TF.Attribute Text)
-    {- ^ - Set to true if the token can be extended through renewal. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsAuthBackendLoginResource where
     toHCL AwsAuthBackendLoginResource{..} = TF.block $ catMaybes
-        [ TF.assign "backend" <$> TF.argument _backend
-        , TF.assign "iam_http_request_method" <$> TF.argument _iam_http_request_method
-        , TF.assign "iam_request_body" <$> TF.argument _iam_request_body
-        , TF.assign "iam_request_headers" <$> TF.argument _iam_request_headers
-        , TF.assign "iam_request_url" <$> TF.argument _iam_request_url
-        , TF.assign "identity" <$> TF.argument _identity
-        , TF.assign "nonce" <$> TF.argument _nonce
-        , TF.assign "pkcs7" <$> TF.argument _pkcs7
-        , TF.assign "role" <$> TF.argument _role
-        , TF.assign "signature" <$> TF.argument _signature
+        [ TF.argument _backend
+        , TF.argument _iam_http_request_method
+        , TF.argument _iam_request_body
+        , TF.argument _iam_request_headers
+        , TF.argument _iam_request_url
+        , TF.argument _identity
+        , TF.argument _nonce
+        , TF.argument _pkcs7
+        , TF.argument _role
+        , TF.argument _signature
         ]
 
-instance HasBackend AwsAuthBackendLoginResource (TF.Argument Text) where
-    backend f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _backend = a } :: AwsAuthBackendLoginResource)
-             <$> f _backend
+instance HasBackend AwsAuthBackendLoginResource Text where
+    backend =
+        lens (_backend :: AwsAuthBackendLoginResource -> TF.Argument "backend" Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendLoginResource)
 
-instance HasIamHttpRequestMethod AwsAuthBackendLoginResource (TF.Argument Text) where
-    iamHttpRequestMethod f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _iam_http_request_method = a } :: AwsAuthBackendLoginResource)
-             <$> f _iam_http_request_method
+instance HasIamHttpRequestMethod AwsAuthBackendLoginResource Text where
+    iamHttpRequestMethod =
+        lens (_iam_http_request_method :: AwsAuthBackendLoginResource -> TF.Argument "iam_http_request_method" Text)
+             (\s a -> s { _iam_http_request_method = a } :: AwsAuthBackendLoginResource)
 
-instance HasIamRequestBody AwsAuthBackendLoginResource (TF.Argument Text) where
-    iamRequestBody f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _iam_request_body = a } :: AwsAuthBackendLoginResource)
-             <$> f _iam_request_body
+instance HasIamRequestBody AwsAuthBackendLoginResource Text where
+    iamRequestBody =
+        lens (_iam_request_body :: AwsAuthBackendLoginResource -> TF.Argument "iam_request_body" Text)
+             (\s a -> s { _iam_request_body = a } :: AwsAuthBackendLoginResource)
 
-instance HasIamRequestHeaders AwsAuthBackendLoginResource (TF.Argument Text) where
-    iamRequestHeaders f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _iam_request_headers = a } :: AwsAuthBackendLoginResource)
-             <$> f _iam_request_headers
+instance HasIamRequestHeaders AwsAuthBackendLoginResource Text where
+    iamRequestHeaders =
+        lens (_iam_request_headers :: AwsAuthBackendLoginResource -> TF.Argument "iam_request_headers" Text)
+             (\s a -> s { _iam_request_headers = a } :: AwsAuthBackendLoginResource)
 
-instance HasIamRequestUrl AwsAuthBackendLoginResource (TF.Argument Text) where
-    iamRequestUrl f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _iam_request_url = a } :: AwsAuthBackendLoginResource)
-             <$> f _iam_request_url
+instance HasIamRequestUrl AwsAuthBackendLoginResource Text where
+    iamRequestUrl =
+        lens (_iam_request_url :: AwsAuthBackendLoginResource -> TF.Argument "iam_request_url" Text)
+             (\s a -> s { _iam_request_url = a } :: AwsAuthBackendLoginResource)
 
-instance HasIdentity AwsAuthBackendLoginResource (TF.Argument Text) where
-    identity f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _identity = a } :: AwsAuthBackendLoginResource)
-             <$> f _identity
+instance HasIdentity AwsAuthBackendLoginResource Text where
+    identity =
+        lens (_identity :: AwsAuthBackendLoginResource -> TF.Argument "identity" Text)
+             (\s a -> s { _identity = a } :: AwsAuthBackendLoginResource)
 
-instance HasNonce AwsAuthBackendLoginResource (TF.Argument Text) where
-    nonce f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _nonce = a } :: AwsAuthBackendLoginResource)
-             <$> f _nonce
+instance HasNonce AwsAuthBackendLoginResource Text where
+    nonce =
+        lens (_nonce :: AwsAuthBackendLoginResource -> TF.Argument "nonce" Text)
+             (\s a -> s { _nonce = a } :: AwsAuthBackendLoginResource)
 
-instance HasPkcs7 AwsAuthBackendLoginResource (TF.Argument Text) where
-    pkcs7 f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _pkcs7 = a } :: AwsAuthBackendLoginResource)
-             <$> f _pkcs7
+instance HasPkcs7 AwsAuthBackendLoginResource Text where
+    pkcs7 =
+        lens (_pkcs7 :: AwsAuthBackendLoginResource -> TF.Argument "pkcs7" Text)
+             (\s a -> s { _pkcs7 = a } :: AwsAuthBackendLoginResource)
 
-instance HasRole AwsAuthBackendLoginResource (TF.Argument Text) where
-    role f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _role = a } :: AwsAuthBackendLoginResource)
-             <$> f _role
+instance HasRole AwsAuthBackendLoginResource Text where
+    role =
+        lens (_role :: AwsAuthBackendLoginResource -> TF.Argument "role" Text)
+             (\s a -> s { _role = a } :: AwsAuthBackendLoginResource)
 
-instance HasSignature AwsAuthBackendLoginResource (TF.Argument Text) where
-    signature f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _signature = a } :: AwsAuthBackendLoginResource)
-             <$> f _signature
+instance HasSignature AwsAuthBackendLoginResource Text where
+    signature =
+        lens (_signature :: AwsAuthBackendLoginResource -> TF.Argument "signature" Text)
+             (\s a -> s { _signature = a } :: AwsAuthBackendLoginResource)
 
-instance HasComputedAccessor AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedAccessor f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_accessor = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_accessor
+instance HasComputedAccessor AwsAuthBackendLoginResource Text where
+    computedAccessor =
+        to (\_  -> TF.Compute "accessor")
 
-instance HasComputedAuthType AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedAuthType f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_auth_type = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_auth_type
+instance HasComputedAuthType AwsAuthBackendLoginResource Text where
+    computedAuthType =
+        to (\_  -> TF.Compute "auth_type")
 
-instance HasComputedClientToken AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedClientToken f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_client_token = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_client_token
+instance HasComputedClientToken AwsAuthBackendLoginResource Text where
+    computedClientToken =
+        to (\_  -> TF.Compute "client_token")
 
-instance HasComputedLeaseDuration AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedLeaseDuration f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_lease_duration = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_lease_duration
+instance HasComputedLeaseDuration AwsAuthBackendLoginResource Text where
+    computedLeaseDuration =
+        to (\_  -> TF.Compute "lease_duration")
 
-instance HasComputedLeaseStartTime AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedLeaseStartTime f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_lease_start_time = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_lease_start_time
+instance HasComputedLeaseStartTime AwsAuthBackendLoginResource Text where
+    computedLeaseStartTime =
+        to (\_  -> TF.Compute "lease_start_time")
 
-instance HasComputedMetadata AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedMetadata f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_metadata = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_metadata
+instance HasComputedMetadata AwsAuthBackendLoginResource Text where
+    computedMetadata =
+        to (\_  -> TF.Compute "metadata")
 
-instance HasComputedPolicies AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedPolicies f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_policies = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_policies
+instance HasComputedPolicies AwsAuthBackendLoginResource Text where
+    computedPolicies =
+        to (\_  -> TF.Compute "policies")
 
-instance HasComputedRenewable AwsAuthBackendLoginResource (TF.Attribute Text) where
-    computedRenewable f s@AwsAuthBackendLoginResource{..} =
-        (\a -> s { _computed_renewable = a } :: AwsAuthBackendLoginResource)
-             <$> f _computed_renewable
+instance HasComputedRenewable AwsAuthBackendLoginResource Text where
+    computedRenewable =
+        to (\_  -> TF.Compute "renewable")
 
 awsAuthBackendLoginResource :: TF.Resource TF.Vault AwsAuthBackendLoginResource
 awsAuthBackendLoginResource =
@@ -489,14 +473,6 @@ awsAuthBackendLoginResource =
             , _pkcs7 = TF.Nil
             , _role = TF.Nil
             , _signature = TF.Nil
-            , _computed_accessor = TF.Compute "accessor"
-            , _computed_auth_type = TF.Compute "auth_type"
-            , _computed_client_token = TF.Compute "client_token"
-            , _computed_lease_duration = TF.Compute "lease_duration"
-            , _computed_lease_start_time = TF.Compute "lease_start_time"
-            , _computed_metadata = TF.Compute "metadata"
-            , _computed_policies = TF.Compute "policies"
-            , _computed_renewable = TF.Compute "renewable"
             }
 
 {- | The @vault_aws_auth_backend_role@ Vault resource.
@@ -507,171 +483,171 @@ backend. See the <https://www.vaultproject.io/docs/auth/aws.html> for more
 information.
 -}
 data AwsAuthBackendRoleResource = AwsAuthBackendRoleResource {
-      _allow_instance_migration       :: !(TF.Argument Text)
+      _allow_instance_migration :: !(TF.Argument "allow_instance_migration" Text)
     {- ^ (Optional) If set to @true@ , allows migration of the underlying instance where the client resides. -}
-    , _auth_type                      :: !(TF.Argument Text)
+    , _auth_type :: !(TF.Argument "auth_type" Text)
     {- ^ (Optional) The auth type permitted for this role. Valid choices are @ec2@ and @iam@ . Defaults to @iam@ . -}
-    , _bound_account_id               :: !(TF.Argument Text)
+    , _bound_account_id :: !(TF.Argument "bound_account_id" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they should be using the account ID specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _bound_ami_id                   :: !(TF.Argument Text)
+    , _bound_ami_id :: !(TF.Argument "bound_ami_id" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they should be using the AMI ID specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _bound_iam_instance_profile_arn :: !(TF.Argument Text)
+    , _bound_iam_instance_profile_arn :: !(TF.Argument "bound_iam_instance_profile_arn" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they must be associated with an IAM instance profile ARN which has a prefix that matches the value specified by this field. The value is prefix-matched as though it were a glob ending in @*@ . @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _bound_iam_principal_arn        :: !(TF.Argument Text)
+    , _bound_iam_principal_arn :: !(TF.Argument "bound_iam_principal_arn" Text)
     {- ^ (Optional) If set, defines the IAM principal that must be authenticated when @auth_type@ is set to @iam@ . Wildcards are supported at the end of the ARN. -}
-    , _bound_iam_role_arn             :: !(TF.Argument Text)
+    , _bound_iam_role_arn :: !(TF.Argument "bound_iam_role_arn" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they must match the IAM role ARN specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _bound_region                   :: !(TF.Argument Text)
+    , _bound_region :: !(TF.Argument "bound_region" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that the region in their identity document must match the one specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _bound_subnet_id                :: !(TF.Argument Text)
+    , _bound_subnet_id :: !(TF.Argument "bound_subnet_id" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they be associated with the subnet ID that matches the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _bound_vpc_id                   :: !(TF.Argument Text)
+    , _bound_vpc_id :: !(TF.Argument "bound_vpc_id" Text)
     {- ^ (Optional) If set, defines a constraint on the EC2 instances that can perform the login operation that they be associated with the VPC ID that matches the value specified by this field. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _disallow_reauthentication      :: !(TF.Argument Text)
+    , _disallow_reauthentication :: !(TF.Argument "disallow_reauthentication" Text)
     {- ^ (Optional) IF set to @true@ , only allows a single token to be granted per instance ID. This can only be set when @auth_type@ is set to @ec2@ . -}
-    , _inferred_aws_region            :: !(TF.Argument Text)
+    , _inferred_aws_region :: !(TF.Argument "inferred_aws_region" Text)
     {- ^ (Optional) When @inferred_entity_type@ is set, this is the region to search for the inferred entities. Required if @inferred_entity_type@ is set. This only applies when @auth_type@ is set to @iam@ . -}
-    , _inferred_entity_type           :: !(TF.Argument Text)
+    , _inferred_entity_type :: !(TF.Argument "inferred_entity_type" Text)
     {- ^ (Optional) If set, instructs Vault to turn on inferencing. The only valid value is @ec2_instance@ , which instructs Vault to infer that the role comes from an EC2 instance in an IAM instance profile. This only applies when @auth_type@ is set to @iam@ . -}
-    , _max_ttl                        :: !(TF.Argument Text)
+    , _max_ttl :: !(TF.Argument "max_ttl" Text)
     {- ^ (Optional) The maximum allowed lifetime of tokens issued using this role, provided as a number of minutes. -}
-    , _period                         :: !(TF.Argument Text)
+    , _period :: !(TF.Argument "period" Text)
     {- ^ (Optional) If set, indicates that the token generated using this role should never expire. The token should be renewed within the duration specified by this value. At each renewal, the token's TTL will be set to the value of this field. The maximum allowed lifetime of token issued using this role. Specified as a number of minutes. -}
-    , _policies                       :: !(TF.Argument Text)
+    , _policies :: !(TF.Argument "policies" Text)
     {- ^ (Optional) An array of strings specifying the policies to be set on tokens issued using this role. -}
-    , _resolve_aws_unique_ids         :: !(TF.Argument Text)
+    , _resolve_aws_unique_ids :: !(TF.Argument "resolve_aws_unique_ids" Text)
     {- ^ (Optional) If set to @true@ , the @bound_iam_principal_arn@ is resolved to an <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids> for the bound principal ARN. This field is ignored when @bound_iam_principal_arn@ ends in a wildcard. Resolving to unique IDs more closely mimics the behavior of AWS services in that if an IAM user or role is deleted and a new one is recreated with the same name, those new users or roles won't get access to roles in Vault that were permissioned to the prioer principals of the same name. Defaults to @true@ . Once set to @true@ , this cannot be changed to @false@ --the role must be deleted and recreated, with the value set to @true@ . -}
-    , _role                           :: !(TF.Argument Text)
+    , _role :: !(TF.Argument "role" Text)
     {- ^ (Required) The name of the role. -}
-    , _role_tag                       :: !(TF.Argument Text)
+    , _role_tag :: !(TF.Argument "role_tag" Text)
     {- ^ (Optional) If set, enable role tags for this role. The value set for this field should be the key of the tag on the EC2 instance. @auth_type@ must be set to @ec2@ or @inferred_entity_type@ must be set to @ec2_instance@ to use this constraint. -}
-    , _ttl                            :: !(TF.Argument Text)
+    , _ttl :: !(TF.Argument "ttl" Text)
     {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsAuthBackendRoleResource where
     toHCL AwsAuthBackendRoleResource{..} = TF.block $ catMaybes
-        [ TF.assign "allow_instance_migration" <$> TF.argument _allow_instance_migration
-        , TF.assign "auth_type" <$> TF.argument _auth_type
-        , TF.assign "bound_account_id" <$> TF.argument _bound_account_id
-        , TF.assign "bound_ami_id" <$> TF.argument _bound_ami_id
-        , TF.assign "bound_iam_instance_profile_arn" <$> TF.argument _bound_iam_instance_profile_arn
-        , TF.assign "bound_iam_principal_arn" <$> TF.argument _bound_iam_principal_arn
-        , TF.assign "bound_iam_role_arn" <$> TF.argument _bound_iam_role_arn
-        , TF.assign "bound_region" <$> TF.argument _bound_region
-        , TF.assign "bound_subnet_id" <$> TF.argument _bound_subnet_id
-        , TF.assign "bound_vpc_id" <$> TF.argument _bound_vpc_id
-        , TF.assign "disallow_reauthentication" <$> TF.argument _disallow_reauthentication
-        , TF.assign "inferred_aws_region" <$> TF.argument _inferred_aws_region
-        , TF.assign "inferred_entity_type" <$> TF.argument _inferred_entity_type
-        , TF.assign "max_ttl" <$> TF.argument _max_ttl
-        , TF.assign "period" <$> TF.argument _period
-        , TF.assign "policies" <$> TF.argument _policies
-        , TF.assign "resolve_aws_unique_ids" <$> TF.argument _resolve_aws_unique_ids
-        , TF.assign "role" <$> TF.argument _role
-        , TF.assign "role_tag" <$> TF.argument _role_tag
-        , TF.assign "ttl" <$> TF.argument _ttl
+        [ TF.argument _allow_instance_migration
+        , TF.argument _auth_type
+        , TF.argument _bound_account_id
+        , TF.argument _bound_ami_id
+        , TF.argument _bound_iam_instance_profile_arn
+        , TF.argument _bound_iam_principal_arn
+        , TF.argument _bound_iam_role_arn
+        , TF.argument _bound_region
+        , TF.argument _bound_subnet_id
+        , TF.argument _bound_vpc_id
+        , TF.argument _disallow_reauthentication
+        , TF.argument _inferred_aws_region
+        , TF.argument _inferred_entity_type
+        , TF.argument _max_ttl
+        , TF.argument _period
+        , TF.argument _policies
+        , TF.argument _resolve_aws_unique_ids
+        , TF.argument _role
+        , TF.argument _role_tag
+        , TF.argument _ttl
         ]
 
-instance HasAllowInstanceMigration AwsAuthBackendRoleResource (TF.Argument Text) where
-    allowInstanceMigration f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleResource)
-             <$> f _allow_instance_migration
+instance HasAllowInstanceMigration AwsAuthBackendRoleResource Text where
+    allowInstanceMigration =
+        lens (_allow_instance_migration :: AwsAuthBackendRoleResource -> TF.Argument "allow_instance_migration" Text)
+             (\s a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleResource)
 
-instance HasAuthType AwsAuthBackendRoleResource (TF.Argument Text) where
-    authType f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _auth_type = a } :: AwsAuthBackendRoleResource)
-             <$> f _auth_type
+instance HasAuthType AwsAuthBackendRoleResource Text where
+    authType =
+        lens (_auth_type :: AwsAuthBackendRoleResource -> TF.Argument "auth_type" Text)
+             (\s a -> s { _auth_type = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundAccountId AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundAccountId f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_account_id = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_account_id
+instance HasBoundAccountId AwsAuthBackendRoleResource Text where
+    boundAccountId =
+        lens (_bound_account_id :: AwsAuthBackendRoleResource -> TF.Argument "bound_account_id" Text)
+             (\s a -> s { _bound_account_id = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundAmiId AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundAmiId f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_ami_id = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_ami_id
+instance HasBoundAmiId AwsAuthBackendRoleResource Text where
+    boundAmiId =
+        lens (_bound_ami_id :: AwsAuthBackendRoleResource -> TF.Argument "bound_ami_id" Text)
+             (\s a -> s { _bound_ami_id = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundIamInstanceProfileArn AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundIamInstanceProfileArn f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_iam_instance_profile_arn = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_iam_instance_profile_arn
+instance HasBoundIamInstanceProfileArn AwsAuthBackendRoleResource Text where
+    boundIamInstanceProfileArn =
+        lens (_bound_iam_instance_profile_arn :: AwsAuthBackendRoleResource -> TF.Argument "bound_iam_instance_profile_arn" Text)
+             (\s a -> s { _bound_iam_instance_profile_arn = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundIamPrincipalArn AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundIamPrincipalArn f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_iam_principal_arn = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_iam_principal_arn
+instance HasBoundIamPrincipalArn AwsAuthBackendRoleResource Text where
+    boundIamPrincipalArn =
+        lens (_bound_iam_principal_arn :: AwsAuthBackendRoleResource -> TF.Argument "bound_iam_principal_arn" Text)
+             (\s a -> s { _bound_iam_principal_arn = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundIamRoleArn AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundIamRoleArn f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_iam_role_arn = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_iam_role_arn
+instance HasBoundIamRoleArn AwsAuthBackendRoleResource Text where
+    boundIamRoleArn =
+        lens (_bound_iam_role_arn :: AwsAuthBackendRoleResource -> TF.Argument "bound_iam_role_arn" Text)
+             (\s a -> s { _bound_iam_role_arn = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundRegion AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundRegion f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_region = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_region
+instance HasBoundRegion AwsAuthBackendRoleResource Text where
+    boundRegion =
+        lens (_bound_region :: AwsAuthBackendRoleResource -> TF.Argument "bound_region" Text)
+             (\s a -> s { _bound_region = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundSubnetId AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundSubnetId f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_subnet_id = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_subnet_id
+instance HasBoundSubnetId AwsAuthBackendRoleResource Text where
+    boundSubnetId =
+        lens (_bound_subnet_id :: AwsAuthBackendRoleResource -> TF.Argument "bound_subnet_id" Text)
+             (\s a -> s { _bound_subnet_id = a } :: AwsAuthBackendRoleResource)
 
-instance HasBoundVpcId AwsAuthBackendRoleResource (TF.Argument Text) where
-    boundVpcId f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _bound_vpc_id = a } :: AwsAuthBackendRoleResource)
-             <$> f _bound_vpc_id
+instance HasBoundVpcId AwsAuthBackendRoleResource Text where
+    boundVpcId =
+        lens (_bound_vpc_id :: AwsAuthBackendRoleResource -> TF.Argument "bound_vpc_id" Text)
+             (\s a -> s { _bound_vpc_id = a } :: AwsAuthBackendRoleResource)
 
-instance HasDisallowReauthentication AwsAuthBackendRoleResource (TF.Argument Text) where
-    disallowReauthentication f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleResource)
-             <$> f _disallow_reauthentication
+instance HasDisallowReauthentication AwsAuthBackendRoleResource Text where
+    disallowReauthentication =
+        lens (_disallow_reauthentication :: AwsAuthBackendRoleResource -> TF.Argument "disallow_reauthentication" Text)
+             (\s a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleResource)
 
-instance HasInferredAwsRegion AwsAuthBackendRoleResource (TF.Argument Text) where
-    inferredAwsRegion f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _inferred_aws_region = a } :: AwsAuthBackendRoleResource)
-             <$> f _inferred_aws_region
+instance HasInferredAwsRegion AwsAuthBackendRoleResource Text where
+    inferredAwsRegion =
+        lens (_inferred_aws_region :: AwsAuthBackendRoleResource -> TF.Argument "inferred_aws_region" Text)
+             (\s a -> s { _inferred_aws_region = a } :: AwsAuthBackendRoleResource)
 
-instance HasInferredEntityType AwsAuthBackendRoleResource (TF.Argument Text) where
-    inferredEntityType f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _inferred_entity_type = a } :: AwsAuthBackendRoleResource)
-             <$> f _inferred_entity_type
+instance HasInferredEntityType AwsAuthBackendRoleResource Text where
+    inferredEntityType =
+        lens (_inferred_entity_type :: AwsAuthBackendRoleResource -> TF.Argument "inferred_entity_type" Text)
+             (\s a -> s { _inferred_entity_type = a } :: AwsAuthBackendRoleResource)
 
-instance HasMaxTtl AwsAuthBackendRoleResource (TF.Argument Text) where
-    maxTtl f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _max_ttl = a } :: AwsAuthBackendRoleResource)
-             <$> f _max_ttl
+instance HasMaxTtl AwsAuthBackendRoleResource Text where
+    maxTtl =
+        lens (_max_ttl :: AwsAuthBackendRoleResource -> TF.Argument "max_ttl" Text)
+             (\s a -> s { _max_ttl = a } :: AwsAuthBackendRoleResource)
 
-instance HasPeriod AwsAuthBackendRoleResource (TF.Argument Text) where
-    period f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _period = a } :: AwsAuthBackendRoleResource)
-             <$> f _period
+instance HasPeriod AwsAuthBackendRoleResource Text where
+    period =
+        lens (_period :: AwsAuthBackendRoleResource -> TF.Argument "period" Text)
+             (\s a -> s { _period = a } :: AwsAuthBackendRoleResource)
 
-instance HasPolicies AwsAuthBackendRoleResource (TF.Argument Text) where
-    policies f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _policies = a } :: AwsAuthBackendRoleResource)
-             <$> f _policies
+instance HasPolicies AwsAuthBackendRoleResource Text where
+    policies =
+        lens (_policies :: AwsAuthBackendRoleResource -> TF.Argument "policies" Text)
+             (\s a -> s { _policies = a } :: AwsAuthBackendRoleResource)
 
-instance HasResolveAwsUniqueIds AwsAuthBackendRoleResource (TF.Argument Text) where
-    resolveAwsUniqueIds f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _resolve_aws_unique_ids = a } :: AwsAuthBackendRoleResource)
-             <$> f _resolve_aws_unique_ids
+instance HasResolveAwsUniqueIds AwsAuthBackendRoleResource Text where
+    resolveAwsUniqueIds =
+        lens (_resolve_aws_unique_ids :: AwsAuthBackendRoleResource -> TF.Argument "resolve_aws_unique_ids" Text)
+             (\s a -> s { _resolve_aws_unique_ids = a } :: AwsAuthBackendRoleResource)
 
-instance HasRole AwsAuthBackendRoleResource (TF.Argument Text) where
-    role f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _role = a } :: AwsAuthBackendRoleResource)
-             <$> f _role
+instance HasRole AwsAuthBackendRoleResource Text where
+    role =
+        lens (_role :: AwsAuthBackendRoleResource -> TF.Argument "role" Text)
+             (\s a -> s { _role = a } :: AwsAuthBackendRoleResource)
 
-instance HasRoleTag AwsAuthBackendRoleResource (TF.Argument Text) where
-    roleTag f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _role_tag = a } :: AwsAuthBackendRoleResource)
-             <$> f _role_tag
+instance HasRoleTag AwsAuthBackendRoleResource Text where
+    roleTag =
+        lens (_role_tag :: AwsAuthBackendRoleResource -> TF.Argument "role_tag" Text)
+             (\s a -> s { _role_tag = a } :: AwsAuthBackendRoleResource)
 
-instance HasTtl AwsAuthBackendRoleResource (TF.Argument Text) where
-    ttl f s@AwsAuthBackendRoleResource{..} =
-        (\a -> s { _ttl = a } :: AwsAuthBackendRoleResource)
-             <$> f _ttl
+instance HasTtl AwsAuthBackendRoleResource Text where
+    ttl =
+        lens (_ttl :: AwsAuthBackendRoleResource -> TF.Argument "ttl" Text)
+             (\s a -> s { _ttl = a } :: AwsAuthBackendRoleResource)
 
 awsAuthBackendRoleResource :: TF.Resource TF.Vault AwsAuthBackendRoleResource
 awsAuthBackendRoleResource =
@@ -712,35 +688,35 @@ the console output when Terraform runs. Protect these artifacts accordingly.
 See <../../index.html> for more details.
 -}
 data AwsAuthBackendStsRoleResource = AwsAuthBackendStsRoleResource {
-      _account_id :: !(TF.Argument Text)
+      _account_id :: !(TF.Argument "account_id" Text)
     {- ^ (Optional) The AWS account ID to configure the STS role for. -}
-    , _backend    :: !(TF.Argument Text)
+    , _backend    :: !(TF.Argument "backend" Text)
     {- ^ (Optional) The path the AWS auth backend being configured was mounted at.  Defaults to @aws@ . -}
-    , _sts_role   :: !(TF.Argument Text)
+    , _sts_role   :: !(TF.Argument "sts_role" Text)
     {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsAuthBackendStsRoleResource where
     toHCL AwsAuthBackendStsRoleResource{..} = TF.block $ catMaybes
-        [ TF.assign "account_id" <$> TF.argument _account_id
-        , TF.assign "backend" <$> TF.argument _backend
-        , TF.assign "sts_role" <$> TF.argument _sts_role
+        [ TF.argument _account_id
+        , TF.argument _backend
+        , TF.argument _sts_role
         ]
 
-instance HasAccountId AwsAuthBackendStsRoleResource (TF.Argument Text) where
-    accountId f s@AwsAuthBackendStsRoleResource{..} =
-        (\a -> s { _account_id = a } :: AwsAuthBackendStsRoleResource)
-             <$> f _account_id
+instance HasAccountId AwsAuthBackendStsRoleResource Text where
+    accountId =
+        lens (_account_id :: AwsAuthBackendStsRoleResource -> TF.Argument "account_id" Text)
+             (\s a -> s { _account_id = a } :: AwsAuthBackendStsRoleResource)
 
-instance HasBackend AwsAuthBackendStsRoleResource (TF.Argument Text) where
-    backend f s@AwsAuthBackendStsRoleResource{..} =
-        (\a -> s { _backend = a } :: AwsAuthBackendStsRoleResource)
-             <$> f _backend
+instance HasBackend AwsAuthBackendStsRoleResource Text where
+    backend =
+        lens (_backend :: AwsAuthBackendStsRoleResource -> TF.Argument "backend" Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendStsRoleResource)
 
-instance HasStsRole AwsAuthBackendStsRoleResource (TF.Argument Text) where
-    stsRole f s@AwsAuthBackendStsRoleResource{..} =
-        (\a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource)
-             <$> f _sts_role
+instance HasStsRole AwsAuthBackendStsRoleResource Text where
+    stsRole =
+        lens (_sts_role :: AwsAuthBackendStsRoleResource -> TF.Argument "sts_role" Text)
+             (\s a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource)
 
 awsAuthBackendStsRoleResource :: TF.Resource TF.Vault AwsAuthBackendStsRoleResource
 awsAuthBackendStsRoleResource =
@@ -761,27 +737,27 @@ in the console output when Terraform runs. Protect these artifacts
 accordingly. See <../index.html> for more details.
 -}
 data AwsSecretBackendResource = AwsSecretBackendResource {
-      _access_key :: !(TF.Argument Text)
+      _access_key :: !(TF.Argument "access_key" Text)
     {- ^ (Required) The AWS Access Key ID this backend should use to issue new credentials. -}
-    , _secret_key :: !(TF.Argument Text)
+    , _secret_key :: !(TF.Argument "secret_key" Text)
     {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsSecretBackendResource where
     toHCL AwsSecretBackendResource{..} = TF.block $ catMaybes
-        [ TF.assign "access_key" <$> TF.argument _access_key
-        , TF.assign "secret_key" <$> TF.argument _secret_key
+        [ TF.argument _access_key
+        , TF.argument _secret_key
         ]
 
-instance HasAccessKey AwsSecretBackendResource (TF.Argument Text) where
-    accessKey f s@AwsSecretBackendResource{..} =
-        (\a -> s { _access_key = a } :: AwsSecretBackendResource)
-             <$> f _access_key
+instance HasAccessKey AwsSecretBackendResource Text where
+    accessKey =
+        lens (_access_key :: AwsSecretBackendResource -> TF.Argument "access_key" Text)
+             (\s a -> s { _access_key = a } :: AwsSecretBackendResource)
 
-instance HasSecretKey AwsSecretBackendResource (TF.Argument Text) where
-    secretKey f s@AwsSecretBackendResource{..} =
-        (\a -> s { _secret_key = a } :: AwsSecretBackendResource)
-             <$> f _secret_key
+instance HasSecretKey AwsSecretBackendResource Text where
+    secretKey =
+        lens (_secret_key :: AwsSecretBackendResource -> TF.Argument "secret_key" Text)
+             (\s a -> s { _secret_key = a } :: AwsSecretBackendResource)
 
 awsSecretBackendResource :: TF.Resource TF.Vault AwsSecretBackendResource
 awsSecretBackendResource =
@@ -801,43 +777,43 @@ when Terraform runs. Protect these artifacts accordingly. See
 <../index.html> for more details.
 -}
 data AwsSecretBackendRoleResource = AwsSecretBackendRoleResource {
-      _backend    :: !(TF.Argument Text)
+      _backend    :: !(TF.Argument "backend" Text)
     {- ^ (Required) The path the AWS secret backend is mounted at, with no leading or trailing @/@ s. -}
-    , _name       :: !(TF.Argument Text)
+    , _name       :: !(TF.Argument "name" Text)
     {- ^ (Required) The name to identify this role within the backend. Must be unique within the backend. -}
-    , _policy     :: !(TF.Argument Text)
+    , _policy     :: !(TF.Argument "policy" Text)
     {- ^ (Optional) The JSON-formatted policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
-    , _policy_arn :: !(TF.Argument Text)
+    , _policy_arn :: !(TF.Argument "policy_arn" Text)
     {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AwsSecretBackendRoleResource where
     toHCL AwsSecretBackendRoleResource{..} = TF.block $ catMaybes
-        [ TF.assign "backend" <$> TF.argument _backend
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "policy" <$> TF.argument _policy
-        , TF.assign "policy_arn" <$> TF.argument _policy_arn
+        [ TF.argument _backend
+        , TF.argument _name
+        , TF.argument _policy
+        , TF.argument _policy_arn
         ]
 
-instance HasBackend AwsSecretBackendRoleResource (TF.Argument Text) where
-    backend f s@AwsSecretBackendRoleResource{..} =
-        (\a -> s { _backend = a } :: AwsSecretBackendRoleResource)
-             <$> f _backend
+instance HasBackend AwsSecretBackendRoleResource Text where
+    backend =
+        lens (_backend :: AwsSecretBackendRoleResource -> TF.Argument "backend" Text)
+             (\s a -> s { _backend = a } :: AwsSecretBackendRoleResource)
 
-instance HasName AwsSecretBackendRoleResource (TF.Argument Text) where
-    name f s@AwsSecretBackendRoleResource{..} =
-        (\a -> s { _name = a } :: AwsSecretBackendRoleResource)
-             <$> f _name
+instance HasName AwsSecretBackendRoleResource Text where
+    name =
+        lens (_name :: AwsSecretBackendRoleResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: AwsSecretBackendRoleResource)
 
-instance HasPolicy AwsSecretBackendRoleResource (TF.Argument Text) where
-    policy f s@AwsSecretBackendRoleResource{..} =
-        (\a -> s { _policy = a } :: AwsSecretBackendRoleResource)
-             <$> f _policy
+instance HasPolicy AwsSecretBackendRoleResource Text where
+    policy =
+        lens (_policy :: AwsSecretBackendRoleResource -> TF.Argument "policy" Text)
+             (\s a -> s { _policy = a } :: AwsSecretBackendRoleResource)
 
-instance HasPolicyArn AwsSecretBackendRoleResource (TF.Argument Text) where
-    policyArn f s@AwsSecretBackendRoleResource{..} =
-        (\a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource)
-             <$> f _policy_arn
+instance HasPolicyArn AwsSecretBackendRoleResource Text where
+    policyArn =
+        lens (_policy_arn :: AwsSecretBackendRoleResource -> TF.Argument "policy_arn" Text)
+             (\s a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource)
 
 awsSecretBackendRoleResource :: TF.Resource TF.Vault AwsSecretBackendRoleResource
 awsSecretBackendRoleResource =
@@ -862,43 +838,43 @@ the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
 data GenericSecretResource = GenericSecretResource {
-      _allow_read   :: !(TF.Argument Text)
+      _allow_read   :: !(TF.Argument "allow_read" Text)
     {- ^ (Optional, Deprecated) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
-    , _data_json    :: !(TF.Argument Text)
+    , _data_json    :: !(TF.Argument "data_json" Text)
     {- ^ (Required) String containing a JSON-encoded object that will be written as the secret data at the given path. -}
-    , _disable_read :: !(TF.Argument Text)
+    , _disable_read :: !(TF.Argument "disable_read" Text)
     {- ^ (Optional) True/false. Set this to true if your vault authentication is not able to read the data. Setting this to @true@ will break drift detection. Defaults to false. -}
-    , _path         :: !(TF.Argument Text)
+    , _path         :: !(TF.Argument "path" Text)
     {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL GenericSecretResource where
     toHCL GenericSecretResource{..} = TF.block $ catMaybes
-        [ TF.assign "allow_read" <$> TF.argument _allow_read
-        , TF.assign "data_json" <$> TF.argument _data_json
-        , TF.assign "disable_read" <$> TF.argument _disable_read
-        , TF.assign "path" <$> TF.argument _path
+        [ TF.argument _allow_read
+        , TF.argument _data_json
+        , TF.argument _disable_read
+        , TF.argument _path
         ]
 
-instance HasAllowRead GenericSecretResource (TF.Argument Text) where
-    allowRead f s@GenericSecretResource{..} =
-        (\a -> s { _allow_read = a } :: GenericSecretResource)
-             <$> f _allow_read
+instance HasAllowRead GenericSecretResource Text where
+    allowRead =
+        lens (_allow_read :: GenericSecretResource -> TF.Argument "allow_read" Text)
+             (\s a -> s { _allow_read = a } :: GenericSecretResource)
 
-instance HasDataJson GenericSecretResource (TF.Argument Text) where
-    dataJson f s@GenericSecretResource{..} =
-        (\a -> s { _data_json = a } :: GenericSecretResource)
-             <$> f _data_json
+instance HasDataJson GenericSecretResource Text where
+    dataJson =
+        lens (_data_json :: GenericSecretResource -> TF.Argument "data_json" Text)
+             (\s a -> s { _data_json = a } :: GenericSecretResource)
 
-instance HasDisableRead GenericSecretResource (TF.Argument Text) where
-    disableRead f s@GenericSecretResource{..} =
-        (\a -> s { _disable_read = a } :: GenericSecretResource)
-             <$> f _disable_read
+instance HasDisableRead GenericSecretResource Text where
+    disableRead =
+        lens (_disable_read :: GenericSecretResource -> TF.Argument "disable_read" Text)
+             (\s a -> s { _disable_read = a } :: GenericSecretResource)
 
-instance HasPath GenericSecretResource (TF.Argument Text) where
-    path f s@GenericSecretResource{..} =
-        (\a -> s { _path = a } :: GenericSecretResource)
-             <$> f _path
+instance HasPath GenericSecretResource Text where
+    path =
+        lens (_path :: GenericSecretResource -> TF.Argument "path" Text)
+             (\s a -> s { _path = a } :: GenericSecretResource)
 
 genericSecretResource :: TF.Resource TF.Vault GenericSecretResource
 genericSecretResource =
@@ -915,51 +891,51 @@ genericSecretResource =
 
 -}
 data MountResource = MountResource {
-      _default_lease_ttl_seconds :: !(TF.Argument Text)
+      _default_lease_ttl_seconds :: !(TF.Argument "default_lease_ttl_seconds" Text)
     {- ^ (Optional) Default lease duration for tokens and secrets in seconds -}
-    , _description               :: !(TF.Argument Text)
+    , _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) Human-friendly description of the mount -}
-    , _max_lease_ttl_seconds     :: !(TF.Argument Text)
+    , _max_lease_ttl_seconds :: !(TF.Argument "max_lease_ttl_seconds" Text)
     {- ^ (Optional) Maximum possible lease duration for tokens and secrets in seconds -}
-    , _path                      :: !(TF.Argument Text)
+    , _path :: !(TF.Argument "path" Text)
     {- ^ (Required) Where the secret backend will be mounted -}
-    , _type'                     :: !(TF.Argument Text)
+    , _type' :: !(TF.Argument "type" Text)
     {- ^ (Required) Type of the backend, such as "aws" -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL MountResource where
     toHCL MountResource{..} = TF.block $ catMaybes
-        [ TF.assign "default_lease_ttl_seconds" <$> TF.argument _default_lease_ttl_seconds
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "max_lease_ttl_seconds" <$> TF.argument _max_lease_ttl_seconds
-        , TF.assign "path" <$> TF.argument _path
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _default_lease_ttl_seconds
+        , TF.argument _description
+        , TF.argument _max_lease_ttl_seconds
+        , TF.argument _path
+        , TF.argument _type'
         ]
 
-instance HasDefaultLeaseTtlSeconds MountResource (TF.Argument Text) where
-    defaultLeaseTtlSeconds f s@MountResource{..} =
-        (\a -> s { _default_lease_ttl_seconds = a } :: MountResource)
-             <$> f _default_lease_ttl_seconds
+instance HasDefaultLeaseTtlSeconds MountResource Text where
+    defaultLeaseTtlSeconds =
+        lens (_default_lease_ttl_seconds :: MountResource -> TF.Argument "default_lease_ttl_seconds" Text)
+             (\s a -> s { _default_lease_ttl_seconds = a } :: MountResource)
 
-instance HasDescription MountResource (TF.Argument Text) where
-    description f s@MountResource{..} =
-        (\a -> s { _description = a } :: MountResource)
-             <$> f _description
+instance HasDescription MountResource Text where
+    description =
+        lens (_description :: MountResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: MountResource)
 
-instance HasMaxLeaseTtlSeconds MountResource (TF.Argument Text) where
-    maxLeaseTtlSeconds f s@MountResource{..} =
-        (\a -> s { _max_lease_ttl_seconds = a } :: MountResource)
-             <$> f _max_lease_ttl_seconds
+instance HasMaxLeaseTtlSeconds MountResource Text where
+    maxLeaseTtlSeconds =
+        lens (_max_lease_ttl_seconds :: MountResource -> TF.Argument "max_lease_ttl_seconds" Text)
+             (\s a -> s { _max_lease_ttl_seconds = a } :: MountResource)
 
-instance HasPath MountResource (TF.Argument Text) where
-    path f s@MountResource{..} =
-        (\a -> s { _path = a } :: MountResource)
-             <$> f _path
+instance HasPath MountResource Text where
+    path =
+        lens (_path :: MountResource -> TF.Argument "path" Text)
+             (\s a -> s { _path = a } :: MountResource)
 
-instance HasType' MountResource (TF.Argument Text) where
-    type' f s@MountResource{..} =
-        (\a -> s { _type' = a } :: MountResource)
-             <$> f _type'
+instance HasType' MountResource Text where
+    type' =
+        lens (_type' :: MountResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: MountResource)
 
 mountResource :: TF.Resource TF.Vault MountResource
 mountResource =
@@ -977,27 +953,27 @@ mountResource =
 
 -}
 data PolicyResource = PolicyResource {
-      _name   :: !(TF.Argument Text)
+      _name   :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the policy -}
-    , _policy :: !(TF.Argument Text)
+    , _policy :: !(TF.Argument "policy" Text)
     {- ^ (Required) String containing a Vault policy -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL PolicyResource where
     toHCL PolicyResource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
-        , TF.assign "policy" <$> TF.argument _policy
+        [ TF.argument _name
+        , TF.argument _policy
         ]
 
-instance HasName PolicyResource (TF.Argument Text) where
-    name f s@PolicyResource{..} =
-        (\a -> s { _name = a } :: PolicyResource)
-             <$> f _name
+instance HasName PolicyResource Text where
+    name =
+        lens (_name :: PolicyResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: PolicyResource)
 
-instance HasPolicy PolicyResource (TF.Argument Text) where
-    policy f s@PolicyResource{..} =
-        (\a -> s { _policy = a } :: PolicyResource)
-             <$> f _policy
+instance HasPolicy PolicyResource Text where
+    policy =
+        lens (_policy :: PolicyResource -> TF.Argument "policy" Text)
+             (\s a -> s { _policy = a } :: PolicyResource)
 
 policyResource :: TF.Resource TF.Vault PolicyResource
 policyResource =
@@ -1008,349 +984,349 @@ policyResource =
             }
 
 class HasAccessKey s a | s -> a where
-    accessKey :: Functor f => (a -> f a) -> s -> f s
+    accessKey :: Lens' s (TF.Argument "access_key" a)
 
 instance HasAccessKey s a => HasAccessKey (TF.Resource p s) a where
     accessKey = TF.configuration . accessKey
 
 class HasAccountId s a | s -> a where
-    accountId :: Functor f => (a -> f a) -> s -> f s
+    accountId :: Lens' s (TF.Argument "account_id" a)
 
 instance HasAccountId s a => HasAccountId (TF.Resource p s) a where
     accountId = TF.configuration . accountId
 
 class HasAllowInstanceMigration s a | s -> a where
-    allowInstanceMigration :: Functor f => (a -> f a) -> s -> f s
+    allowInstanceMigration :: Lens' s (TF.Argument "allow_instance_migration" a)
 
 instance HasAllowInstanceMigration s a => HasAllowInstanceMigration (TF.Resource p s) a where
     allowInstanceMigration = TF.configuration . allowInstanceMigration
 
 class HasAllowRead s a | s -> a where
-    allowRead :: Functor f => (a -> f a) -> s -> f s
+    allowRead :: Lens' s (TF.Argument "allow_read" a)
 
 instance HasAllowRead s a => HasAllowRead (TF.Resource p s) a where
     allowRead = TF.configuration . allowRead
 
 class HasAuthType s a | s -> a where
-    authType :: Functor f => (a -> f a) -> s -> f s
+    authType :: Lens' s (TF.Argument "auth_type" a)
 
 instance HasAuthType s a => HasAuthType (TF.Resource p s) a where
     authType = TF.configuration . authType
 
 class HasAwsPublicCert s a | s -> a where
-    awsPublicCert :: Functor f => (a -> f a) -> s -> f s
+    awsPublicCert :: Lens' s (TF.Argument "aws_public_cert" a)
 
 instance HasAwsPublicCert s a => HasAwsPublicCert (TF.Resource p s) a where
     awsPublicCert = TF.configuration . awsPublicCert
 
 class HasBackend s a | s -> a where
-    backend :: Functor f => (a -> f a) -> s -> f s
+    backend :: Lens' s (TF.Argument "backend" a)
 
 instance HasBackend s a => HasBackend (TF.Resource p s) a where
     backend = TF.configuration . backend
 
 class HasBoundAccountId s a | s -> a where
-    boundAccountId :: Functor f => (a -> f a) -> s -> f s
+    boundAccountId :: Lens' s (TF.Argument "bound_account_id" a)
 
 instance HasBoundAccountId s a => HasBoundAccountId (TF.Resource p s) a where
     boundAccountId = TF.configuration . boundAccountId
 
 class HasBoundAmiId s a | s -> a where
-    boundAmiId :: Functor f => (a -> f a) -> s -> f s
+    boundAmiId :: Lens' s (TF.Argument "bound_ami_id" a)
 
 instance HasBoundAmiId s a => HasBoundAmiId (TF.Resource p s) a where
     boundAmiId = TF.configuration . boundAmiId
 
 class HasBoundIamInstanceProfileArn s a | s -> a where
-    boundIamInstanceProfileArn :: Functor f => (a -> f a) -> s -> f s
+    boundIamInstanceProfileArn :: Lens' s (TF.Argument "bound_iam_instance_profile_arn" a)
 
 instance HasBoundIamInstanceProfileArn s a => HasBoundIamInstanceProfileArn (TF.Resource p s) a where
     boundIamInstanceProfileArn = TF.configuration . boundIamInstanceProfileArn
 
 class HasBoundIamPrincipalArn s a | s -> a where
-    boundIamPrincipalArn :: Functor f => (a -> f a) -> s -> f s
+    boundIamPrincipalArn :: Lens' s (TF.Argument "bound_iam_principal_arn" a)
 
 instance HasBoundIamPrincipalArn s a => HasBoundIamPrincipalArn (TF.Resource p s) a where
     boundIamPrincipalArn = TF.configuration . boundIamPrincipalArn
 
 class HasBoundIamRoleArn s a | s -> a where
-    boundIamRoleArn :: Functor f => (a -> f a) -> s -> f s
+    boundIamRoleArn :: Lens' s (TF.Argument "bound_iam_role_arn" a)
 
 instance HasBoundIamRoleArn s a => HasBoundIamRoleArn (TF.Resource p s) a where
     boundIamRoleArn = TF.configuration . boundIamRoleArn
 
 class HasBoundRegion s a | s -> a where
-    boundRegion :: Functor f => (a -> f a) -> s -> f s
+    boundRegion :: Lens' s (TF.Argument "bound_region" a)
 
 instance HasBoundRegion s a => HasBoundRegion (TF.Resource p s) a where
     boundRegion = TF.configuration . boundRegion
 
 class HasBoundSubnetId s a | s -> a where
-    boundSubnetId :: Functor f => (a -> f a) -> s -> f s
+    boundSubnetId :: Lens' s (TF.Argument "bound_subnet_id" a)
 
 instance HasBoundSubnetId s a => HasBoundSubnetId (TF.Resource p s) a where
     boundSubnetId = TF.configuration . boundSubnetId
 
 class HasBoundVpcId s a | s -> a where
-    boundVpcId :: Functor f => (a -> f a) -> s -> f s
+    boundVpcId :: Lens' s (TF.Argument "bound_vpc_id" a)
 
 instance HasBoundVpcId s a => HasBoundVpcId (TF.Resource p s) a where
     boundVpcId = TF.configuration . boundVpcId
 
 class HasCertName s a | s -> a where
-    certName :: Functor f => (a -> f a) -> s -> f s
+    certName :: Lens' s (TF.Argument "cert_name" a)
 
 instance HasCertName s a => HasCertName (TF.Resource p s) a where
     certName = TF.configuration . certName
 
-class HasComputedAccessor s a | s -> a where
-    computedAccessor :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedAccessor s a => HasComputedAccessor (TF.Resource p s) a where
-    computedAccessor = TF.configuration . computedAccessor
-
-class HasComputedAuthType s a | s -> a where
-    computedAuthType :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedAuthType s a => HasComputedAuthType (TF.Resource p s) a where
-    computedAuthType = TF.configuration . computedAuthType
-
-class HasComputedClientToken s a | s -> a where
-    computedClientToken :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedClientToken s a => HasComputedClientToken (TF.Resource p s) a where
-    computedClientToken = TF.configuration . computedClientToken
-
-class HasComputedLeaseDuration s a | s -> a where
-    computedLeaseDuration :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedLeaseDuration s a => HasComputedLeaseDuration (TF.Resource p s) a where
-    computedLeaseDuration = TF.configuration . computedLeaseDuration
-
-class HasComputedLeaseStartTime s a | s -> a where
-    computedLeaseStartTime :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedLeaseStartTime s a => HasComputedLeaseStartTime (TF.Resource p s) a where
-    computedLeaseStartTime = TF.configuration . computedLeaseStartTime
-
-class HasComputedMetadata s a | s -> a where
-    computedMetadata :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedMetadata s a => HasComputedMetadata (TF.Resource p s) a where
-    computedMetadata = TF.configuration . computedMetadata
-
-class HasComputedPolicies s a | s -> a where
-    computedPolicies :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedPolicies s a => HasComputedPolicies (TF.Resource p s) a where
-    computedPolicies = TF.configuration . computedPolicies
-
-class HasComputedRenewable s a | s -> a where
-    computedRenewable :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedRenewable s a => HasComputedRenewable (TF.Resource p s) a where
-    computedRenewable = TF.configuration . computedRenewable
-
 class HasDataJson s a | s -> a where
-    dataJson :: Functor f => (a -> f a) -> s -> f s
+    dataJson :: Lens' s (TF.Argument "data_json" a)
 
 instance HasDataJson s a => HasDataJson (TF.Resource p s) a where
     dataJson = TF.configuration . dataJson
 
 class HasDefaultLeaseTtlSeconds s a | s -> a where
-    defaultLeaseTtlSeconds :: Functor f => (a -> f a) -> s -> f s
+    defaultLeaseTtlSeconds :: Lens' s (TF.Argument "default_lease_ttl_seconds" a)
 
 instance HasDefaultLeaseTtlSeconds s a => HasDefaultLeaseTtlSeconds (TF.Resource p s) a where
     defaultLeaseTtlSeconds = TF.configuration . defaultLeaseTtlSeconds
 
 class HasDescription s a | s -> a where
-    description :: Functor f => (a -> f a) -> s -> f s
+    description :: Lens' s (TF.Argument "description" a)
 
 instance HasDescription s a => HasDescription (TF.Resource p s) a where
     description = TF.configuration . description
 
 class HasDisableRead s a | s -> a where
-    disableRead :: Functor f => (a -> f a) -> s -> f s
+    disableRead :: Lens' s (TF.Argument "disable_read" a)
 
 instance HasDisableRead s a => HasDisableRead (TF.Resource p s) a where
     disableRead = TF.configuration . disableRead
 
 class HasDisallowReauthentication s a | s -> a where
-    disallowReauthentication :: Functor f => (a -> f a) -> s -> f s
+    disallowReauthentication :: Lens' s (TF.Argument "disallow_reauthentication" a)
 
 instance HasDisallowReauthentication s a => HasDisallowReauthentication (TF.Resource p s) a where
     disallowReauthentication = TF.configuration . disallowReauthentication
 
 class HasEc2Endpoint s a | s -> a where
-    ec2Endpoint :: Functor f => (a -> f a) -> s -> f s
+    ec2Endpoint :: Lens' s (TF.Argument "ec2_endpoint" a)
 
 instance HasEc2Endpoint s a => HasEc2Endpoint (TF.Resource p s) a where
     ec2Endpoint = TF.configuration . ec2Endpoint
 
 class HasIamEndpoint s a | s -> a where
-    iamEndpoint :: Functor f => (a -> f a) -> s -> f s
+    iamEndpoint :: Lens' s (TF.Argument "iam_endpoint" a)
 
 instance HasIamEndpoint s a => HasIamEndpoint (TF.Resource p s) a where
     iamEndpoint = TF.configuration . iamEndpoint
 
 class HasIamHttpRequestMethod s a | s -> a where
-    iamHttpRequestMethod :: Functor f => (a -> f a) -> s -> f s
+    iamHttpRequestMethod :: Lens' s (TF.Argument "iam_http_request_method" a)
 
 instance HasIamHttpRequestMethod s a => HasIamHttpRequestMethod (TF.Resource p s) a where
     iamHttpRequestMethod = TF.configuration . iamHttpRequestMethod
 
 class HasIamRequestBody s a | s -> a where
-    iamRequestBody :: Functor f => (a -> f a) -> s -> f s
+    iamRequestBody :: Lens' s (TF.Argument "iam_request_body" a)
 
 instance HasIamRequestBody s a => HasIamRequestBody (TF.Resource p s) a where
     iamRequestBody = TF.configuration . iamRequestBody
 
 class HasIamRequestHeaders s a | s -> a where
-    iamRequestHeaders :: Functor f => (a -> f a) -> s -> f s
+    iamRequestHeaders :: Lens' s (TF.Argument "iam_request_headers" a)
 
 instance HasIamRequestHeaders s a => HasIamRequestHeaders (TF.Resource p s) a where
     iamRequestHeaders = TF.configuration . iamRequestHeaders
 
 class HasIamRequestUrl s a | s -> a where
-    iamRequestUrl :: Functor f => (a -> f a) -> s -> f s
+    iamRequestUrl :: Lens' s (TF.Argument "iam_request_url" a)
 
 instance HasIamRequestUrl s a => HasIamRequestUrl (TF.Resource p s) a where
     iamRequestUrl = TF.configuration . iamRequestUrl
 
 class HasIamServerIdHeaderValue s a | s -> a where
-    iamServerIdHeaderValue :: Functor f => (a -> f a) -> s -> f s
+    iamServerIdHeaderValue :: Lens' s (TF.Argument "iam_server_id_header_value" a)
 
 instance HasIamServerIdHeaderValue s a => HasIamServerIdHeaderValue (TF.Resource p s) a where
     iamServerIdHeaderValue = TF.configuration . iamServerIdHeaderValue
 
 class HasIdentity s a | s -> a where
-    identity :: Functor f => (a -> f a) -> s -> f s
+    identity :: Lens' s (TF.Argument "identity" a)
 
 instance HasIdentity s a => HasIdentity (TF.Resource p s) a where
     identity = TF.configuration . identity
 
 class HasInferredAwsRegion s a | s -> a where
-    inferredAwsRegion :: Functor f => (a -> f a) -> s -> f s
+    inferredAwsRegion :: Lens' s (TF.Argument "inferred_aws_region" a)
 
 instance HasInferredAwsRegion s a => HasInferredAwsRegion (TF.Resource p s) a where
     inferredAwsRegion = TF.configuration . inferredAwsRegion
 
 class HasInferredEntityType s a | s -> a where
-    inferredEntityType :: Functor f => (a -> f a) -> s -> f s
+    inferredEntityType :: Lens' s (TF.Argument "inferred_entity_type" a)
 
 instance HasInferredEntityType s a => HasInferredEntityType (TF.Resource p s) a where
     inferredEntityType = TF.configuration . inferredEntityType
 
 class HasMaxLeaseTtlSeconds s a | s -> a where
-    maxLeaseTtlSeconds :: Functor f => (a -> f a) -> s -> f s
+    maxLeaseTtlSeconds :: Lens' s (TF.Argument "max_lease_ttl_seconds" a)
 
 instance HasMaxLeaseTtlSeconds s a => HasMaxLeaseTtlSeconds (TF.Resource p s) a where
     maxLeaseTtlSeconds = TF.configuration . maxLeaseTtlSeconds
 
 class HasMaxTtl s a | s -> a where
-    maxTtl :: Functor f => (a -> f a) -> s -> f s
+    maxTtl :: Lens' s (TF.Argument "max_ttl" a)
 
 instance HasMaxTtl s a => HasMaxTtl (TF.Resource p s) a where
     maxTtl = TF.configuration . maxTtl
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name
 
 class HasNonce s a | s -> a where
-    nonce :: Functor f => (a -> f a) -> s -> f s
+    nonce :: Lens' s (TF.Argument "nonce" a)
 
 instance HasNonce s a => HasNonce (TF.Resource p s) a where
     nonce = TF.configuration . nonce
 
 class HasPath s a | s -> a where
-    path :: Functor f => (a -> f a) -> s -> f s
+    path :: Lens' s (TF.Argument "path" a)
 
 instance HasPath s a => HasPath (TF.Resource p s) a where
     path = TF.configuration . path
 
 class HasPeriod s a | s -> a where
-    period :: Functor f => (a -> f a) -> s -> f s
+    period :: Lens' s (TF.Argument "period" a)
 
 instance HasPeriod s a => HasPeriod (TF.Resource p s) a where
     period = TF.configuration . period
 
 class HasPkcs7 s a | s -> a where
-    pkcs7 :: Functor f => (a -> f a) -> s -> f s
+    pkcs7 :: Lens' s (TF.Argument "pkcs7" a)
 
 instance HasPkcs7 s a => HasPkcs7 (TF.Resource p s) a where
     pkcs7 = TF.configuration . pkcs7
 
 class HasPolicies s a | s -> a where
-    policies :: Functor f => (a -> f a) -> s -> f s
+    policies :: Lens' s (TF.Argument "policies" a)
 
 instance HasPolicies s a => HasPolicies (TF.Resource p s) a where
     policies = TF.configuration . policies
 
 class HasPolicy s a | s -> a where
-    policy :: Functor f => (a -> f a) -> s -> f s
+    policy :: Lens' s (TF.Argument "policy" a)
 
 instance HasPolicy s a => HasPolicy (TF.Resource p s) a where
     policy = TF.configuration . policy
 
 class HasPolicyArn s a | s -> a where
-    policyArn :: Functor f => (a -> f a) -> s -> f s
+    policyArn :: Lens' s (TF.Argument "policy_arn" a)
 
 instance HasPolicyArn s a => HasPolicyArn (TF.Resource p s) a where
     policyArn = TF.configuration . policyArn
 
 class HasResolveAwsUniqueIds s a | s -> a where
-    resolveAwsUniqueIds :: Functor f => (a -> f a) -> s -> f s
+    resolveAwsUniqueIds :: Lens' s (TF.Argument "resolve_aws_unique_ids" a)
 
 instance HasResolveAwsUniqueIds s a => HasResolveAwsUniqueIds (TF.Resource p s) a where
     resolveAwsUniqueIds = TF.configuration . resolveAwsUniqueIds
 
 class HasRole s a | s -> a where
-    role :: Functor f => (a -> f a) -> s -> f s
+    role :: Lens' s (TF.Argument "role" a)
 
 instance HasRole s a => HasRole (TF.Resource p s) a where
     role = TF.configuration . role
 
 class HasRoleTag s a | s -> a where
-    roleTag :: Functor f => (a -> f a) -> s -> f s
+    roleTag :: Lens' s (TF.Argument "role_tag" a)
 
 instance HasRoleTag s a => HasRoleTag (TF.Resource p s) a where
     roleTag = TF.configuration . roleTag
 
 class HasSecretKey s a | s -> a where
-    secretKey :: Functor f => (a -> f a) -> s -> f s
+    secretKey :: Lens' s (TF.Argument "secret_key" a)
 
 instance HasSecretKey s a => HasSecretKey (TF.Resource p s) a where
     secretKey = TF.configuration . secretKey
 
 class HasSignature s a | s -> a where
-    signature :: Functor f => (a -> f a) -> s -> f s
+    signature :: Lens' s (TF.Argument "signature" a)
 
 instance HasSignature s a => HasSignature (TF.Resource p s) a where
     signature = TF.configuration . signature
 
 class HasStsEndpoint s a | s -> a where
-    stsEndpoint :: Functor f => (a -> f a) -> s -> f s
+    stsEndpoint :: Lens' s (TF.Argument "sts_endpoint" a)
 
 instance HasStsEndpoint s a => HasStsEndpoint (TF.Resource p s) a where
     stsEndpoint = TF.configuration . stsEndpoint
 
 class HasStsRole s a | s -> a where
-    stsRole :: Functor f => (a -> f a) -> s -> f s
+    stsRole :: Lens' s (TF.Argument "sts_role" a)
 
 instance HasStsRole s a => HasStsRole (TF.Resource p s) a where
     stsRole = TF.configuration . stsRole
 
 class HasTtl s a | s -> a where
-    ttl :: Functor f => (a -> f a) -> s -> f s
+    ttl :: Lens' s (TF.Argument "ttl" a)
 
 instance HasTtl s a => HasTtl (TF.Resource p s) a where
     ttl = TF.configuration . ttl
 
 class HasType' s a | s -> a where
-    type' :: Functor f => (a -> f a) -> s -> f s
+    type' :: Lens' s (TF.Argument "type" a)
 
 instance HasType' s a => HasType' (TF.Resource p s) a where
     type' = TF.configuration . type'
+
+class HasComputedAccessor s a | s -> a where
+    computedAccessor :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedAccessor s a => HasComputedAccessor (TF.Resource p s) a where
+    computedAccessor = TF.configuration . computedAccessor
+
+class HasComputedAuthType s a | s -> a where
+    computedAuthType :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedAuthType s a => HasComputedAuthType (TF.Resource p s) a where
+    computedAuthType = TF.configuration . computedAuthType
+
+class HasComputedClientToken s a | s -> a where
+    computedClientToken :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedClientToken s a => HasComputedClientToken (TF.Resource p s) a where
+    computedClientToken = TF.configuration . computedClientToken
+
+class HasComputedLeaseDuration s a | s -> a where
+    computedLeaseDuration :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedLeaseDuration s a => HasComputedLeaseDuration (TF.Resource p s) a where
+    computedLeaseDuration = TF.configuration . computedLeaseDuration
+
+class HasComputedLeaseStartTime s a | s -> a where
+    computedLeaseStartTime :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedLeaseStartTime s a => HasComputedLeaseStartTime (TF.Resource p s) a where
+    computedLeaseStartTime = TF.configuration . computedLeaseStartTime
+
+class HasComputedMetadata s a | s -> a where
+    computedMetadata :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedMetadata s a => HasComputedMetadata (TF.Resource p s) a where
+    computedMetadata = TF.configuration . computedMetadata
+
+class HasComputedPolicies s a | s -> a where
+    computedPolicies :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedPolicies s a => HasComputedPolicies (TF.Resource p s) a where
+    computedPolicies = TF.configuration . computedPolicies
+
+class HasComputedRenewable s a | s -> a where
+    computedRenewable :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedRenewable s a => HasComputedRenewable (TF.Resource p s) a where
+    computedRenewable = TF.configuration . computedRenewable

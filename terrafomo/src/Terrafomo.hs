@@ -1,3 +1,5 @@
+{-# LANGUAGE RankNTypes #-}
+
 -- | The intention here is to have a somewhat bash-esque suite of
 -- functionality.  Rather than requiring heavily curated imports etc. that a
 -- batteries-included environment tailored to matching Terraform's builtin
@@ -26,10 +28,9 @@ module Terrafomo
 
     -- * Terraform Syntax
     , Name            (..)
-    , Reference
 
-    -- ** Count
-    , count
+    , Reference
+    , referenceKey
 
     -- ** Arguments and Attributes
     , Attribute
@@ -37,8 +38,6 @@ module Terrafomo
 
     , constant
     , nil
-    , true
-    , false
     , attribute
 
     -- * Providers
@@ -48,8 +47,11 @@ module Terrafomo
 
     -- * Meta Parameters
     , HasMeta         (..)
-    , Change          (..)
-    , dependency
+    , dependOn
+
+    , Changes
+    , ignoreAllChanges
+    , ignoreChange
 
     -- * DataSources
     , DataSource
@@ -63,9 +65,8 @@ module Terrafomo
     , HasLifecycle    (..)
     , Lifecycle       (..)
 
-    -- * Outputs
-    , Output
-    , output
+    -- -- * Outputs
+    -- , output
 
     -- * Formatting
     , (Formatting.%)
@@ -77,14 +78,16 @@ module Terrafomo
     , (Lens.%~)
 
     -- * Domain Types
-    , IPAddress (..)
-    , BitMask   (..)
+    , Bits      (..)
+    , IP        (..)
     , CIDR      (..)
 
     -- * Serialization
     , HCL.ToHCL (..)
     , HCL.renderHCL
     ) where
+
+import GHC.TypeLits (KnownSymbol)
 
 import Terrafomo.Monad
 import Terrafomo.Syntax.DataSource
@@ -95,6 +98,33 @@ import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 
+import qualified Data.Set             as Set
 import qualified Formatting
 import qualified Lens.Micro           as Lens
 import qualified Terrafomo.Syntax.HCL as HCL
+
+dependOn
+    :: HasMeta b
+    => Reference p a
+    -> b p c
+    -> b p c
+dependOn x =
+    Lens.over dependsOn $
+        Set.insert (Dependency (referenceKey x))
+
+ignoreAllChanges
+    :: HasLifecycle a b
+    => a
+    -> a
+ignoreAllChanges =
+    Lens.over ignoreChanges wildcardChange
+
+ignoreChange
+    :: ( KnownSymbol n
+       , HasLifecycle a b
+       )
+    => Lens.SimpleGetter a (Argument n b)
+    -> a
+    -> a
+ignoreChange l x =
+    Lens.over ignoreChanges (argumentChange (x Lens.^. l)) x

@@ -20,6 +20,7 @@ module Terrafomo.Vault.Provider
     (
     -- * Provider Datatype
       Vault (..)
+    , emptyVault
 
     -- * Lenses
     ) where
@@ -29,12 +30,14 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -63,14 +66,9 @@ instance TF.ToHCL Vault where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup Vault where
-    (<>) a b = Vault {
-        }
-
-instance Monoid Vault where
-    mappend = (<>)
-    mempty  = Vault {
-        }
+emptyVault :: Vault
+emptyVault = Vault {
+    }
 
 instance TF.IsProvider Vault where
     type ProviderName Vault = "vault"

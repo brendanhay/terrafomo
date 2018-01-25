@@ -20,6 +20,7 @@ module Terrafomo.PagerDuty.Provider
     (
     -- * Provider Datatype
       PagerDuty (..)
+    , emptyPagerDuty
 
     -- * Lenses
     , skipCredentialsValidation
@@ -31,13 +32,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.PagerDuty.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,9 +54,9 @@ alarms, and alerts an on duty engineer if there’s a problem. Use the
 navigation to the left to read about the available resources.
 -}
 data PagerDuty = PagerDuty {
-      _skip_credentials_validation :: !(TF.Argument Text)
+      _skip_credentials_validation :: !(TF.Argument "skip_credentials_validation" Text)
     {- ^ (Optional) Skip validation of the token against the PagerDuty API. -}
-    , _token                       :: !(TF.Argument Text)
+    , _token :: !(TF.Argument "token" Text)
     {- ^ (Required) The v2 authorization token. See <https://v2.developer.pagerduty.com/docs/authentication> for more information. -}
     } deriving (Show, Eq, Generic)
 
@@ -63,40 +66,23 @@ instance TF.ToHCL PagerDuty where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy PagerDuty))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "skip_credentials_validation" <$> TF.argument (_skip_credentials_validation x)
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_skip_credentials_validation x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup PagerDuty where
-    (<>) a b = PagerDuty {
-          _skip_credentials_validation = on (<>) _skip_credentials_validation a b
-        , _token = on (<>) _token a b
-        }
-
-instance Monoid PagerDuty where
-    mappend = (<>)
-    mempty  = PagerDuty {
-            _skip_credentials_validation = TF.Nil
-          , _token = TF.Nil
-        }
+emptyPagerDuty :: PagerDuty
+emptyPagerDuty = PagerDuty {
+        _skip_credentials_validation = TF.Nil
+      , _token = TF.Nil
+    }
 
 instance TF.IsProvider PagerDuty where
     type ProviderName PagerDuty = "pagerduty"
 
-skipCredentialsValidation
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PagerDuty
-    -> f PagerDuty
-skipCredentialsValidation f s =
-        (\a -> s { _skip_credentials_validation = a } :: PagerDuty)
-             <$> f (_skip_credentials_validation s)
+skipCredentialsValidation :: Lens' PagerDuty (TF.Argument "skip_credentials_validation" Text)
+skipCredentialsValidation =
+    lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> PagerDuty
-    -> f PagerDuty
-token f s =
-        (\a -> s { _token = a } :: PagerDuty)
-             <$> f (_token s)
+token :: Lens' PagerDuty (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

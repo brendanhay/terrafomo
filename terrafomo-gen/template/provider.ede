@@ -14,9 +14,13 @@ module {{ namespace }}
     (
     -- * Provider Datatype
       {{ provider.name }} (..)
+    , empty{{ provider.name }}
 
     -- * Lenses
-  {% for field in schema.fields %}
+  {% for field in schema.argumentFields %}
+    , {{ field.value.method }}
+  {% endfor %}
+  {% for field in schema.attributeFields %}
     , {{ field.value.method }}
   {% endfor %}
     ) where
@@ -26,10 +30,11 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
+
+import Lens.Micro (Lens', lens)
 
 {% for import in imports %}
 import qualified {{ import.value }} as TF
@@ -60,7 +65,7 @@ import qualified Terrafomo.Syntax.Variable as TF
 -}
 data {{ provider.name }} = {{ provider.name }} {
   {% for arg in schema.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument "{{ arg.value.name }}" {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq, Generic)
@@ -72,35 +77,22 @@ instance TF.ToHCL {{ provider.name }} where
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy {{ provider.name }}))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
           {% for arg in schema.arguments %}
-            , TF.assign "{{ arg.value.name }}" <$> TF.argument ({{ arg.key }} x)
+            , TF.argument ({{ arg.key }} x)
           {% endfor %}
             ]
 
-instance Semigroup {{ provider.name }} where
-    (<>) a b = {{ provider.name }} {
-      {% for arg in schema.arguments %}
-        {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = on (<>) {{ arg.key }} a b
-      {% endfor %}
-        }
-
-instance Monoid {{ provider.name }} where
-    mappend = (<>)
-    mempty  = {{ provider.name }} {
-        {% for arg in schema.arguments %}
-          {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = TF.Nil
-        {% endfor %}
-        }
+empty{{ provider.name }} :: {{ provider.name }}
+empty{{ provider.name }} = {{ provider.name }} {
+    {% for arg in schema.arguments %}
+      {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = TF.Nil
+    {% endfor %}
+    }
 
 instance TF.IsProvider {{ provider.name }} where
     type ProviderName {{ provider.name }} = "{{ provider.original }}"
-{% for field in schema.fields %}
+{% for field in schema.argumentFields %}
 
-{{ field.value.method }}
-    :: Functor f
-    => ({{ field.value.type }} -> f {{ field.value.type }})
-    -> {{ provider.name }}
-    -> f {{ provider.name }}
-{{ field.value.method }} f s =
-        (\a -> s { {{ field.value.label }} = a } :: {{ provider.name }})
-             <$> f ({{ field.value.label }} s)
+{{ field.value.method }} :: Lens' {{ provider.name }} (TF.Argument "{{ field.value.name }}" {{ field.value.type }})
+{{ field.value.method }} =
+    lens {{ field.value.label }} (\s a -> s { {{ field.value.label }} = a })
 {% endfor %}

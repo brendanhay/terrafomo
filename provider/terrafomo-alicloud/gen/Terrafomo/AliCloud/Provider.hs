@@ -20,6 +20,7 @@ module Terrafomo.AliCloud.Provider
     (
     -- * Provider Datatype
       AliCloud (..)
+    , emptyAliCloud
 
     -- * Lenses
     , accessKey
@@ -32,13 +33,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.AliCloud.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,11 +54,11 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AliCloud = AliCloud {
-      _access_key :: !(TF.Argument Text)
+      _access_key :: !(TF.Argument "access_key" Text)
     {- ^ (Optional) This is the Alicloud access key. It must be provided, but it can also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable. -}
-    , _region     :: !(TF.Argument Text)
+    , _region     :: !(TF.Argument "region" Text)
     {- ^ (Required) This is the Alicloud region. It must be provided, but it can also be sourced from the @ALICLOUD_REGION@ environment variables. -}
-    , _secret_key :: !(TF.Argument Text)
+    , _secret_key :: !(TF.Argument "secret_key" Text)
     {- ^ (Optional) This is the Alicloud secret key. It must be provided, but it can also be sourced from the @ALICLOUD_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -65,52 +68,29 @@ instance TF.ToHCL AliCloud where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AliCloud))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "access_key" <$> TF.argument (_access_key x)
-            , TF.assign "region" <$> TF.argument (_region x)
-            , TF.assign "secret_key" <$> TF.argument (_secret_key x)
+            , TF.argument (_access_key x)
+            , TF.argument (_region x)
+            , TF.argument (_secret_key x)
             ]
 
-instance Semigroup AliCloud where
-    (<>) a b = AliCloud {
-          _access_key = on (<>) _access_key a b
-        , _region = on (<>) _region a b
-        , _secret_key = on (<>) _secret_key a b
-        }
-
-instance Monoid AliCloud where
-    mappend = (<>)
-    mempty  = AliCloud {
-            _access_key = TF.Nil
-          , _region = TF.Nil
-          , _secret_key = TF.Nil
-        }
+emptyAliCloud :: AliCloud
+emptyAliCloud = AliCloud {
+        _access_key = TF.Nil
+      , _region = TF.Nil
+      , _secret_key = TF.Nil
+    }
 
 instance TF.IsProvider AliCloud where
     type ProviderName AliCloud = "alicloud"
 
-accessKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AliCloud
-    -> f AliCloud
-accessKey f s =
-        (\a -> s { _access_key = a } :: AliCloud)
-             <$> f (_access_key s)
+accessKey :: Lens' AliCloud (TF.Argument "access_key" Text)
+accessKey =
+    lens _access_key (\s a -> s { _access_key = a })
 
-region
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AliCloud
-    -> f AliCloud
-region f s =
-        (\a -> s { _region = a } :: AliCloud)
-             <$> f (_region s)
+region :: Lens' AliCloud (TF.Argument "region" Text)
+region =
+    lens _region (\s a -> s { _region = a })
 
-secretKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> AliCloud
-    -> f AliCloud
-secretKey f s =
-        (\a -> s { _secret_key = a } :: AliCloud)
-             <$> f (_secret_key s)
+secretKey :: Lens' AliCloud (TF.Argument "secret_key" Text)
+secretKey =
+    lens _secret_key (\s a -> s { _secret_key = a })

@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -32,6 +35,7 @@ module Terrafomo.LogicMonitor.Resource
     , deviceResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasAppliesTo (..)
     , HasCollector (..)
     , HasDescription (..)
@@ -42,18 +46,22 @@ module Terrafomo.LogicMonitor.Resource
     , HasName (..)
     , HasParentId (..)
     , HasProperties (..)
+
+    -- ** Computed Attributes
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.LogicMonitor.Provider as TF
 import qualified Terrafomo.LogicMonitor.Types    as TF
 import qualified Terrafomo.Syntax.HCL            as TF
+import qualified Terrafomo.Syntax.IP             as TF
 import qualified Terrafomo.Syntax.Meta           as TF (configuration)
 import qualified Terrafomo.Syntax.Resource       as TF
 import qualified Terrafomo.Syntax.Resource       as TF
@@ -65,27 +73,27 @@ Provides a LogicMonitor collector group resource. This can be used to create
 and manage LogicMonitor users
 -}
 data CollectorGroupResource = CollectorGroupResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) Set description of collector group -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL CollectorGroupResource where
     toHCL CollectorGroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _description
+        , TF.argument _name
         ]
 
-instance HasDescription CollectorGroupResource (TF.Argument Text) where
-    description f s@CollectorGroupResource{..} =
-        (\a -> s { _description = a } :: CollectorGroupResource)
-             <$> f _description
+instance HasDescription CollectorGroupResource Text where
+    description =
+        lens (_description :: CollectorGroupResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: CollectorGroupResource)
 
-instance HasName CollectorGroupResource (TF.Argument Text) where
-    name f s@CollectorGroupResource{..} =
-        (\a -> s { _name = a } :: CollectorGroupResource)
-             <$> f _name
+instance HasName CollectorGroupResource Text where
+    name =
+        lens (_name :: CollectorGroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: CollectorGroupResource)
 
 collectorGroupResource :: TF.Resource TF.LogicMonitor CollectorGroupResource
 collectorGroupResource =
@@ -101,59 +109,59 @@ Provides a LogicMonitor device group resource. This can be used to create
 and manage LogicMonitor device groups
 -}
 data DeviceGroupResource = DeviceGroupResource {
-      _applies_to       :: !(TF.Argument Text)
+      _applies_to       :: !(TF.Argument "applies_to" Text)
     {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
-    , _description      :: !(TF.Argument Text)
+    , _description      :: !(TF.Argument "description" Text)
     {- ^ (Optional) Description of device group -}
-    , _disable_alerting :: !(TF.Argument Text)
+    , _disable_alerting :: !(TF.Argument "disable_alerting" Text)
     {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
-    , _name             :: !(TF.Argument Text)
+    , _name             :: !(TF.Argument "name" Text)
     {- ^ (Required) Name of device group -}
-    , _parent_id        :: !(TF.Argument Text)
+    , _parent_id        :: !(TF.Argument "parent_id" Text)
     {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
-    , _properties       :: !(TF.Argument Text)
+    , _properties       :: !(TF.Argument "properties" Text)
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DeviceGroupResource where
     toHCL DeviceGroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "applies_to" <$> TF.argument _applies_to
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "disable_alerting" <$> TF.argument _disable_alerting
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "parent_id" <$> TF.argument _parent_id
-        , TF.assign "properties" <$> TF.argument _properties
+        [ TF.argument _applies_to
+        , TF.argument _description
+        , TF.argument _disable_alerting
+        , TF.argument _name
+        , TF.argument _parent_id
+        , TF.argument _properties
         ]
 
-instance HasAppliesTo DeviceGroupResource (TF.Argument Text) where
-    appliesTo f s@DeviceGroupResource{..} =
-        (\a -> s { _applies_to = a } :: DeviceGroupResource)
-             <$> f _applies_to
+instance HasAppliesTo DeviceGroupResource Text where
+    appliesTo =
+        lens (_applies_to :: DeviceGroupResource -> TF.Argument "applies_to" Text)
+             (\s a -> s { _applies_to = a } :: DeviceGroupResource)
 
-instance HasDescription DeviceGroupResource (TF.Argument Text) where
-    description f s@DeviceGroupResource{..} =
-        (\a -> s { _description = a } :: DeviceGroupResource)
-             <$> f _description
+instance HasDescription DeviceGroupResource Text where
+    description =
+        lens (_description :: DeviceGroupResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: DeviceGroupResource)
 
-instance HasDisableAlerting DeviceGroupResource (TF.Argument Text) where
-    disableAlerting f s@DeviceGroupResource{..} =
-        (\a -> s { _disable_alerting = a } :: DeviceGroupResource)
-             <$> f _disable_alerting
+instance HasDisableAlerting DeviceGroupResource Text where
+    disableAlerting =
+        lens (_disable_alerting :: DeviceGroupResource -> TF.Argument "disable_alerting" Text)
+             (\s a -> s { _disable_alerting = a } :: DeviceGroupResource)
 
-instance HasName DeviceGroupResource (TF.Argument Text) where
-    name f s@DeviceGroupResource{..} =
-        (\a -> s { _name = a } :: DeviceGroupResource)
-             <$> f _name
+instance HasName DeviceGroupResource Text where
+    name =
+        lens (_name :: DeviceGroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DeviceGroupResource)
 
-instance HasParentId DeviceGroupResource (TF.Argument Text) where
-    parentId f s@DeviceGroupResource{..} =
-        (\a -> s { _parent_id = a } :: DeviceGroupResource)
-             <$> f _parent_id
+instance HasParentId DeviceGroupResource Text where
+    parentId =
+        lens (_parent_id :: DeviceGroupResource -> TF.Argument "parent_id" Text)
+             (\s a -> s { _parent_id = a } :: DeviceGroupResource)
 
-instance HasProperties DeviceGroupResource (TF.Argument Text) where
-    properties f s@DeviceGroupResource{..} =
-        (\a -> s { _properties = a } :: DeviceGroupResource)
-             <$> f _properties
+instance HasProperties DeviceGroupResource Text where
+    properties =
+        lens (_properties :: DeviceGroupResource -> TF.Argument "properties" Text)
+             (\s a -> s { _properties = a } :: DeviceGroupResource)
 
 deviceGroupResource :: TF.Resource TF.LogicMonitor DeviceGroupResource
 deviceGroupResource =
@@ -173,59 +181,59 @@ Provides a LogicMonitor device resource. This can be used to create and
 manage LogicMonitor devices
 -}
 data DeviceResource = DeviceResource {
-      _collector        :: !(TF.Argument Text)
+      _collector        :: !(TF.Argument "collector" Text)
     {- ^ - (required) The id of the collector that will monitoring the device -}
-    , _disable_alerting :: !(TF.Argument Text)
+    , _disable_alerting :: !(TF.Argument "disable_alerting" Text)
     {- ^ (Optional) The host is created with alerting disabled (default is true) -}
-    , _display_name     :: !(TF.Argument Text)
+    , _display_name     :: !(TF.Argument "display_name" Text)
     {- ^ (Optional) Display name of device, (default is ip_addr) -}
-    , _hostgroup_id     :: !(TF.Argument Text)
+    , _hostgroup_id     :: !(TF.Argument "hostgroup_id" Text)
     {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
-    , _ip_addr          :: !(TF.Argument Text)
+    , _ip_addr          :: !(TF.Argument "ip_addr" Text)
     {- ^ (Required) Ip Address/Hostname of device -}
-    , _properties       :: !(TF.Argument Text)
+    , _properties       :: !(TF.Argument "properties" Text)
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DeviceResource where
     toHCL DeviceResource{..} = TF.block $ catMaybes
-        [ TF.assign "collector" <$> TF.argument _collector
-        , TF.assign "disable_alerting" <$> TF.argument _disable_alerting
-        , TF.assign "display_name" <$> TF.argument _display_name
-        , TF.assign "hostgroup_id" <$> TF.argument _hostgroup_id
-        , TF.assign "ip_addr" <$> TF.argument _ip_addr
-        , TF.assign "properties" <$> TF.argument _properties
+        [ TF.argument _collector
+        , TF.argument _disable_alerting
+        , TF.argument _display_name
+        , TF.argument _hostgroup_id
+        , TF.argument _ip_addr
+        , TF.argument _properties
         ]
 
-instance HasCollector DeviceResource (TF.Argument Text) where
-    collector f s@DeviceResource{..} =
-        (\a -> s { _collector = a } :: DeviceResource)
-             <$> f _collector
+instance HasCollector DeviceResource Text where
+    collector =
+        lens (_collector :: DeviceResource -> TF.Argument "collector" Text)
+             (\s a -> s { _collector = a } :: DeviceResource)
 
-instance HasDisableAlerting DeviceResource (TF.Argument Text) where
-    disableAlerting f s@DeviceResource{..} =
-        (\a -> s { _disable_alerting = a } :: DeviceResource)
-             <$> f _disable_alerting
+instance HasDisableAlerting DeviceResource Text where
+    disableAlerting =
+        lens (_disable_alerting :: DeviceResource -> TF.Argument "disable_alerting" Text)
+             (\s a -> s { _disable_alerting = a } :: DeviceResource)
 
-instance HasDisplayName DeviceResource (TF.Argument Text) where
-    displayName f s@DeviceResource{..} =
-        (\a -> s { _display_name = a } :: DeviceResource)
-             <$> f _display_name
+instance HasDisplayName DeviceResource Text where
+    displayName =
+        lens (_display_name :: DeviceResource -> TF.Argument "display_name" Text)
+             (\s a -> s { _display_name = a } :: DeviceResource)
 
-instance HasHostgroupId DeviceResource (TF.Argument Text) where
-    hostgroupId f s@DeviceResource{..} =
-        (\a -> s { _hostgroup_id = a } :: DeviceResource)
-             <$> f _hostgroup_id
+instance HasHostgroupId DeviceResource Text where
+    hostgroupId =
+        lens (_hostgroup_id :: DeviceResource -> TF.Argument "hostgroup_id" Text)
+             (\s a -> s { _hostgroup_id = a } :: DeviceResource)
 
-instance HasIpAddr DeviceResource (TF.Argument Text) where
-    ipAddr f s@DeviceResource{..} =
-        (\a -> s { _ip_addr = a } :: DeviceResource)
-             <$> f _ip_addr
+instance HasIpAddr DeviceResource Text where
+    ipAddr =
+        lens (_ip_addr :: DeviceResource -> TF.Argument "ip_addr" Text)
+             (\s a -> s { _ip_addr = a } :: DeviceResource)
 
-instance HasProperties DeviceResource (TF.Argument Text) where
-    properties f s@DeviceResource{..} =
-        (\a -> s { _properties = a } :: DeviceResource)
-             <$> f _properties
+instance HasProperties DeviceResource Text where
+    properties =
+        lens (_properties :: DeviceResource -> TF.Argument "properties" Text)
+             (\s a -> s { _properties = a } :: DeviceResource)
 
 deviceResource :: TF.Resource TF.LogicMonitor DeviceResource
 deviceResource =
@@ -240,61 +248,61 @@ deviceResource =
             }
 
 class HasAppliesTo s a | s -> a where
-    appliesTo :: Functor f => (a -> f a) -> s -> f s
+    appliesTo :: Lens' s (TF.Argument "applies_to" a)
 
 instance HasAppliesTo s a => HasAppliesTo (TF.Resource p s) a where
     appliesTo = TF.configuration . appliesTo
 
 class HasCollector s a | s -> a where
-    collector :: Functor f => (a -> f a) -> s -> f s
+    collector :: Lens' s (TF.Argument "collector" a)
 
 instance HasCollector s a => HasCollector (TF.Resource p s) a where
     collector = TF.configuration . collector
 
 class HasDescription s a | s -> a where
-    description :: Functor f => (a -> f a) -> s -> f s
+    description :: Lens' s (TF.Argument "description" a)
 
 instance HasDescription s a => HasDescription (TF.Resource p s) a where
     description = TF.configuration . description
 
 class HasDisableAlerting s a | s -> a where
-    disableAlerting :: Functor f => (a -> f a) -> s -> f s
+    disableAlerting :: Lens' s (TF.Argument "disable_alerting" a)
 
 instance HasDisableAlerting s a => HasDisableAlerting (TF.Resource p s) a where
     disableAlerting = TF.configuration . disableAlerting
 
 class HasDisplayName s a | s -> a where
-    displayName :: Functor f => (a -> f a) -> s -> f s
+    displayName :: Lens' s (TF.Argument "display_name" a)
 
 instance HasDisplayName s a => HasDisplayName (TF.Resource p s) a where
     displayName = TF.configuration . displayName
 
 class HasHostgroupId s a | s -> a where
-    hostgroupId :: Functor f => (a -> f a) -> s -> f s
+    hostgroupId :: Lens' s (TF.Argument "hostgroup_id" a)
 
 instance HasHostgroupId s a => HasHostgroupId (TF.Resource p s) a where
     hostgroupId = TF.configuration . hostgroupId
 
 class HasIpAddr s a | s -> a where
-    ipAddr :: Functor f => (a -> f a) -> s -> f s
+    ipAddr :: Lens' s (TF.Argument "ip_addr" a)
 
 instance HasIpAddr s a => HasIpAddr (TF.Resource p s) a where
     ipAddr = TF.configuration . ipAddr
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name
 
 class HasParentId s a | s -> a where
-    parentId :: Functor f => (a -> f a) -> s -> f s
+    parentId :: Lens' s (TF.Argument "parent_id" a)
 
 instance HasParentId s a => HasParentId (TF.Resource p s) a where
     parentId = TF.configuration . parentId
 
 class HasProperties s a | s -> a where
-    properties :: Functor f => (a -> f a) -> s -> f s
+    properties :: Lens' s (TF.Argument "properties" a)
 
 instance HasProperties s a => HasProperties (TF.Resource p s) a where
     properties = TF.configuration . properties

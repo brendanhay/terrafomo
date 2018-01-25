@@ -20,6 +20,7 @@ module Terrafomo.GitHub.Provider
     (
     -- * Provider Datatype
       GitHub (..)
+    , emptyGitHub
 
     -- * Lenses
     , baseUrl
@@ -32,13 +33,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.GitHub.Types    as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -52,11 +55,11 @@ it can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data GitHub = GitHub {
-      _base_url     :: !(TF.Argument Text)
+      _base_url     :: !(TF.Argument "base_url" Text)
     {- ^ (Optional) This is the target GitHub base API endpoint. Providing a value is a requirement when working with GitHub Enterprise.  It is optional to provide this value and it can also be sourced from the @GITHUB_BASE_URL@ environment variable.  The value must end with a slash. -}
-    , _organization :: !(TF.Argument Text)
+    , _organization :: !(TF.Argument "organization" Text)
     {- ^ (Optional) This is the target GitHub organization to manage. The account corresponding to the token will need "owner" privileges for this organization. It must be provided, but it can also be sourced from the @GITHUB_ORGANIZATION@ environment variable. -}
-    , _token        :: !(TF.Argument Text)
+    , _token        :: !(TF.Argument "token" Text)
     {- ^ (Optional) This is the GitHub personal access token. It must be provided, but it can also be sourced from the @GITHUB_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,52 +69,29 @@ instance TF.ToHCL GitHub where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy GitHub))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "base_url" <$> TF.argument (_base_url x)
-            , TF.assign "organization" <$> TF.argument (_organization x)
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_base_url x)
+            , TF.argument (_organization x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup GitHub where
-    (<>) a b = GitHub {
-          _base_url = on (<>) _base_url a b
-        , _organization = on (<>) _organization a b
-        , _token = on (<>) _token a b
-        }
-
-instance Monoid GitHub where
-    mappend = (<>)
-    mempty  = GitHub {
-            _base_url = TF.Nil
-          , _organization = TF.Nil
-          , _token = TF.Nil
-        }
+emptyGitHub :: GitHub
+emptyGitHub = GitHub {
+        _base_url = TF.Nil
+      , _organization = TF.Nil
+      , _token = TF.Nil
+    }
 
 instance TF.IsProvider GitHub where
     type ProviderName GitHub = "github"
 
-baseUrl
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> GitHub
-    -> f GitHub
-baseUrl f s =
-        (\a -> s { _base_url = a } :: GitHub)
-             <$> f (_base_url s)
+baseUrl :: Lens' GitHub (TF.Argument "base_url" Text)
+baseUrl =
+    lens _base_url (\s a -> s { _base_url = a })
 
-organization
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> GitHub
-    -> f GitHub
-organization f s =
-        (\a -> s { _organization = a } :: GitHub)
-             <$> f (_organization s)
+organization :: Lens' GitHub (TF.Argument "organization" Text)
+organization =
+    lens _organization (\s a -> s { _organization = a })
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> GitHub
-    -> f GitHub
-token f s =
-        (\a -> s { _token = a } :: GitHub)
-             <$> f (_token s)
+token :: Lens' GitHub (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

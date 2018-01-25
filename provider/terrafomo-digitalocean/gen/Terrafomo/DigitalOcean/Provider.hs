@@ -20,6 +20,7 @@ module Terrafomo.DigitalOcean.Provider
     (
     -- * Provider Datatype
       DigitalOcean (..)
+    , emptyDigitalOcean
 
     -- * Lenses
     , token
@@ -30,13 +31,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.DigitalOcean.Types as TF
 import qualified Terrafomo.Syntax.HCL         as TF
+import qualified Terrafomo.Syntax.IP          as TF
 import qualified Terrafomo.Syntax.Name        as TF
 import qualified Terrafomo.Syntax.Provider    as TF
 import qualified Terrafomo.Syntax.Variable    as TF
@@ -49,7 +52,7 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data DigitalOcean = DigitalOcean {
-      _token :: !(TF.Argument Text)
+      _token :: !(TF.Argument "token" Text)
     {- ^ (Required) This is the DO API token. This can also be specified with the @DIGITALOCEAN_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -59,28 +62,17 @@ instance TF.ToHCL DigitalOcean where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy DigitalOcean))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "token" <$> TF.argument (_token x)
+            , TF.argument (_token x)
             ]
 
-instance Semigroup DigitalOcean where
-    (<>) a b = DigitalOcean {
-          _token = on (<>) _token a b
-        }
-
-instance Monoid DigitalOcean where
-    mappend = (<>)
-    mempty  = DigitalOcean {
-            _token = TF.Nil
-        }
+emptyDigitalOcean :: DigitalOcean
+emptyDigitalOcean = DigitalOcean {
+        _token = TF.Nil
+    }
 
 instance TF.IsProvider DigitalOcean where
     type ProviderName DigitalOcean = "digitalocean"
 
-token
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> DigitalOcean
-    -> f DigitalOcean
-token f s =
-        (\a -> s { _token = a } :: DigitalOcean)
-             <$> f (_token s)
+token :: Lens' DigitalOcean (TF.Argument "token" Text)
+token =
+    lens _token (\s a -> s { _token = a })

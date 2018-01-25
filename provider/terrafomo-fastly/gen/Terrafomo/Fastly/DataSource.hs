@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -26,20 +29,25 @@ module Terrafomo.Fastly.DataSource
     , ipRangesDataSource
 
     -- * Overloaded Fields
+    -- ** Arguments
+
+    -- ** Computed Attributes
     , HasComputedCidrBlocks (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
+
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Fastly.Provider   as TF
 import qualified Terrafomo.Fastly.Types      as TF
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.IP         as TF
 import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
@@ -51,27 +59,23 @@ Use this data source to get the
 of Fastly edge nodes.
 -}
 data IpRangesDataSource = IpRangesDataSource {
-      _computed_cidr_blocks :: !(TF.Attribute Text)
-    {- ^ - The lexically ordered list of CIDR blocks. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL IpRangesDataSource where
     toHCL _ = TF.block []
 
-instance HasComputedCidrBlocks IpRangesDataSource (TF.Attribute Text) where
-    computedCidrBlocks f s@IpRangesDataSource{..} =
-        (\a -> s { _computed_cidr_blocks = a } :: IpRangesDataSource)
-             <$> f _computed_cidr_blocks
+instance HasComputedCidrBlocks IpRangesDataSource Text where
+    computedCidrBlocks =
+        to (\_  -> TF.Compute "cidr_blocks")
 
 ipRangesDataSource :: TF.DataSource TF.Fastly IpRangesDataSource
 ipRangesDataSource =
     TF.newDataSource "fastly_ip_ranges" $
         IpRangesDataSource {
-              _computed_cidr_blocks = TF.Compute "cidr_blocks"
             }
 
 class HasComputedCidrBlocks s a | s -> a where
-    computedCidrBlocks :: Functor f => (a -> f a) -> s -> f s
+    computedCidrBlocks :: forall r. Getting r s (TF.Attribute a)
 
 instance HasComputedCidrBlocks s a => HasComputedCidrBlocks (TF.DataSource p s) a where
     computedCidrBlocks = TF.configuration . computedCidrBlocks

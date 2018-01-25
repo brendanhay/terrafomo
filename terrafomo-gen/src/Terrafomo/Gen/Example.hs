@@ -7,7 +7,7 @@
 
 module Terrafomo.Gen.Example
     ( Example (..)
-    , renderHCL
+    , renderExampleHCL
     ) where
 
 import Data.Aeson         (FromJSON, ToJSON)
@@ -28,6 +28,8 @@ import qualified Data.Aeson                   as JSON
 import qualified Data.Char                    as Char
 import qualified Data.List                    as List
 import qualified Data.Text                    as Text
+import qualified Data.Text.Lazy               as LText
+import qualified Data.Text.Lazy.Builder       as Build
 import qualified Terrafomo.Gen.HCL            as HCL
 import qualified Terrafomo.Gen.JSON           as JSON
 import qualified Text.Megaparsec              as P
@@ -45,8 +47,8 @@ instance ToJSON Example where
 instance FromJSON Example where
     parseJSON = JSON.genericParseJSON (JSON.options "example")
 
-renderHCL :: Text -> Either String [Text]
-renderHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
+renderExampleHCL :: Text -> Either String [Text]
+renderExampleHCL = fmap go . HCL.runParser HCL.statementsParser "<renderHCL>"
   where
     go =  Text.lines
         . Text.pack
@@ -105,12 +107,12 @@ type Parser = P.Parsec Void String
 interpolate :: Interpolate -> Doc
 interpolate = \case
     Chunks   xs -> PP.hcat . List.intersperse "<>" $ map interpolate xs
-    Chunk    s  -> PP.dquotes (pretty s)
-    Template s  -> stringParse computeParser s
+    Chunk    b  -> PP.dquotes (pretty (Build.toLazyText b))
+    Template b  -> stringParse computeParser (Build.toLazyText b)
 
-stringParse :: Parser Doc -> String -> Doc
+stringParse :: Parser Doc -> LText.Text -> Doc
 stringParse p s =
-    case P.runParser p "" s of
+    case P.runParser p "" (LText.unpack s) of
         Left  _ -> pretty s
         Right x -> x
 
@@ -119,10 +121,10 @@ computeParser = do
     let sep  = '.'
         path = P.takeWhile1P Nothing (/= sep)
 
-    _    <- path <* P.char sep <?> "type"
-    name <- path <* P.char sep <?> "name"
-    attr <- path <* P.eof      <?> "attribute"
+    _     <- path <* P.char sep <?> "type"
+    name' <- path <* P.char sep <?> "name"
+    attr  <- path <* P.eof      <?> "attribute"
 
     pure $! "compute"
-        <+> pretty name
+        <+> pretty name'
         <+> "@" <> PP.dquotes (pretty attr)

@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -71,25 +74,13 @@ module Terrafomo.VSphere.Resource
     , vmfsDatastoreResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasAccessMode (..)
     , HasAdapterType (..)
     , HasAssociableTypes (..)
     , HasAutoExpand (..)
     , HasCardinality (..)
     , HasCategoryId (..)
-    , HasComputedAccessible (..)
-    , HasComputedCapacity (..)
-    , HasComputedEditionKey (..)
-    , HasComputedFreeSpace (..)
-    , HasComputedId (..)
-    , HasComputedMaintenanceMode (..)
-    , HasComputedMultipleHostAccess (..)
-    , HasComputedName (..)
-    , HasComputedProtocolEndpoint (..)
-    , HasComputedTotal (..)
-    , HasComputedUncommittedSpace (..)
-    , HasComputedUrl (..)
-    , HasComputedUsed (..)
     , HasConsolidate (..)
     , HasContactDetail (..)
     , HasContactName (..)
@@ -136,16 +127,33 @@ module Terrafomo.VSphere.Resource
     , HasVirtualSwitchName (..)
     , HasVlanId (..)
     , HasVmdkPath (..)
+
+    -- ** Computed Attributes
+    , HasComputedAccessible (..)
+    , HasComputedCapacity (..)
+    , HasComputedEditionKey (..)
+    , HasComputedFreeSpace (..)
+    , HasComputedId (..)
+    , HasComputedMaintenanceMode (..)
+    , HasComputedMultipleHostAccess (..)
+    , HasComputedName (..)
+    , HasComputedProtocolEndpoint (..)
+    , HasComputedTotal (..)
+    , HasComputedUncommittedSpace (..)
+    , HasComputedUrl (..)
+    , HasComputedUsed (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.Syntax.HCL       as TF
+import qualified Terrafomo.Syntax.IP        as TF
 import qualified Terrafomo.Syntax.Meta      as TF (configuration)
 import qualified Terrafomo.Syntax.Resource  as TF
 import qualified Terrafomo.Syntax.Resource  as TF
@@ -165,27 +173,27 @@ For more information about custom attributes, click
 require vCenter.
 -}
 data CustomAttributeResource = CustomAttributeResource {
-      _managed_object_type :: !(TF.Argument Text)
+      _managed_object_type :: !(TF.Argument "managed_object_type" Text)
     {- ^ (Optional) The object type that this attribute may be applied to. If not set, the custom attribute may be applied to any object type. For a full list, click <#managed-object-types> . Forces a new resource if changed. -}
-    , _name                :: !(TF.Argument Text)
+    , _name                :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the custom attribute. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL CustomAttributeResource where
     toHCL CustomAttributeResource{..} = TF.block $ catMaybes
-        [ TF.assign "managed_object_type" <$> TF.argument _managed_object_type
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _managed_object_type
+        , TF.argument _name
         ]
 
-instance HasManagedObjectType CustomAttributeResource (TF.Argument Text) where
-    managedObjectType f s@CustomAttributeResource{..} =
-        (\a -> s { _managed_object_type = a } :: CustomAttributeResource)
-             <$> f _managed_object_type
+instance HasManagedObjectType CustomAttributeResource Text where
+    managedObjectType =
+        lens (_managed_object_type :: CustomAttributeResource -> TF.Argument "managed_object_type" Text)
+             (\s a -> s { _managed_object_type = a } :: CustomAttributeResource)
 
-instance HasName CustomAttributeResource (TF.Argument Text) where
-    name f s@CustomAttributeResource{..} =
-        (\a -> s { _name = a } :: CustomAttributeResource)
-             <$> f _name
+instance HasName CustomAttributeResource Text where
+    name =
+        lens (_name :: CustomAttributeResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: CustomAttributeResource)
 
 customAttributeResource :: TF.Resource TF.VSphere CustomAttributeResource
 customAttributeResource =
@@ -201,35 +209,35 @@ Provides a VMware vSphere datacenter resource. This can be used as the
 primary container of inventory objects such as hosts and virtual machines.
 -}
 data DatacenterResource = DatacenterResource {
-      _folder :: !(TF.Argument Text)
+      _folder :: !(TF.Argument "folder" Text)
     {- ^ (Optional) The folder where the datacenter should be created. Forces a new resource if changed. -}
-    , _name   :: !(TF.Argument Text)
+    , _name   :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the datacenter. This name needs to be unique within the folder. Forces a new resource if changed. -}
-    , _tags   :: !(TF.Argument Text)
+    , _tags   :: !(TF.Argument "tags" Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DatacenterResource where
     toHCL DatacenterResource{..} = TF.block $ catMaybes
-        [ TF.assign "folder" <$> TF.argument _folder
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _folder
+        , TF.argument _name
+        , TF.argument _tags
         ]
 
-instance HasFolder DatacenterResource (TF.Argument Text) where
-    folder f s@DatacenterResource{..} =
-        (\a -> s { _folder = a } :: DatacenterResource)
-             <$> f _folder
+instance HasFolder DatacenterResource Text where
+    folder =
+        lens (_folder :: DatacenterResource -> TF.Argument "folder" Text)
+             (\s a -> s { _folder = a } :: DatacenterResource)
 
-instance HasName DatacenterResource (TF.Argument Text) where
-    name f s@DatacenterResource{..} =
-        (\a -> s { _name = a } :: DatacenterResource)
-             <$> f _name
+instance HasName DatacenterResource Text where
+    name =
+        lens (_name :: DatacenterResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DatacenterResource)
 
-instance HasTags DatacenterResource (TF.Argument Text) where
-    tags f s@DatacenterResource{..} =
-        (\a -> s { _tags = a } :: DatacenterResource)
-             <$> f _tags
+instance HasTags DatacenterResource Text where
+    tags =
+        lens (_tags :: DatacenterResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: DatacenterResource)
 
 datacenterResource :: TF.Resource TF.VSphere DatacenterResource
 datacenterResource =
@@ -257,59 +265,59 @@ desired. For an overview on vSphere networking concepts, see
 ESXi connections.
 -}
 data DistributedPortGroupResource = DistributedPortGroupResource {
-      _auto_expand                     :: !(TF.Argument Text)
+      _auto_expand :: !(TF.Argument "auto_expand" Text)
     {- ^ (Optional) Allows the port group to create additional ports past the limit specified in @number_of_ports@ if necessary. Default: @true@ . -}
-    , _description                     :: !(TF.Argument Text)
+    , _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) An optional description for the port group. -}
-    , _distributed_virtual_switch_uuid :: !(TF.Argument Text)
+    , _distributed_virtual_switch_uuid :: !(TF.Argument "distributed_virtual_switch_uuid" Text)
     {- ^ (Required) The ID of the DVS to add the port group to. Forces a new resource if changed. -}
-    , _name                            :: !(TF.Argument Text)
+    , _name :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the port group. -}
-    , _number_of_ports                 :: !(TF.Argument Text)
+    , _number_of_ports :: !(TF.Argument "number_of_ports" Text)
     {- ^ (Optional) The number of ports available on this port group. Cannot be decreased below the amount of used ports on the port group. -}
-    , _type'                           :: !(TF.Argument Text)
+    , _type' :: !(TF.Argument "type" Text)
     {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DistributedPortGroupResource where
     toHCL DistributedPortGroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "auto_expand" <$> TF.argument _auto_expand
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "distributed_virtual_switch_uuid" <$> TF.argument _distributed_virtual_switch_uuid
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "number_of_ports" <$> TF.argument _number_of_ports
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _auto_expand
+        , TF.argument _description
+        , TF.argument _distributed_virtual_switch_uuid
+        , TF.argument _name
+        , TF.argument _number_of_ports
+        , TF.argument _type'
         ]
 
-instance HasAutoExpand DistributedPortGroupResource (TF.Argument Text) where
-    autoExpand f s@DistributedPortGroupResource{..} =
-        (\a -> s { _auto_expand = a } :: DistributedPortGroupResource)
-             <$> f _auto_expand
+instance HasAutoExpand DistributedPortGroupResource Text where
+    autoExpand =
+        lens (_auto_expand :: DistributedPortGroupResource -> TF.Argument "auto_expand" Text)
+             (\s a -> s { _auto_expand = a } :: DistributedPortGroupResource)
 
-instance HasDescription DistributedPortGroupResource (TF.Argument Text) where
-    description f s@DistributedPortGroupResource{..} =
-        (\a -> s { _description = a } :: DistributedPortGroupResource)
-             <$> f _description
+instance HasDescription DistributedPortGroupResource Text where
+    description =
+        lens (_description :: DistributedPortGroupResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: DistributedPortGroupResource)
 
-instance HasDistributedVirtualSwitchUuid DistributedPortGroupResource (TF.Argument Text) where
-    distributedVirtualSwitchUuid f s@DistributedPortGroupResource{..} =
-        (\a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource)
-             <$> f _distributed_virtual_switch_uuid
+instance HasDistributedVirtualSwitchUuid DistributedPortGroupResource Text where
+    distributedVirtualSwitchUuid =
+        lens (_distributed_virtual_switch_uuid :: DistributedPortGroupResource -> TF.Argument "distributed_virtual_switch_uuid" Text)
+             (\s a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource)
 
-instance HasName DistributedPortGroupResource (TF.Argument Text) where
-    name f s@DistributedPortGroupResource{..} =
-        (\a -> s { _name = a } :: DistributedPortGroupResource)
-             <$> f _name
+instance HasName DistributedPortGroupResource Text where
+    name =
+        lens (_name :: DistributedPortGroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DistributedPortGroupResource)
 
-instance HasNumberOfPorts DistributedPortGroupResource (TF.Argument Text) where
-    numberOfPorts f s@DistributedPortGroupResource{..} =
-        (\a -> s { _number_of_ports = a } :: DistributedPortGroupResource)
-             <$> f _number_of_ports
+instance HasNumberOfPorts DistributedPortGroupResource Text where
+    numberOfPorts =
+        lens (_number_of_ports :: DistributedPortGroupResource -> TF.Argument "number_of_ports" Text)
+             (\s a -> s { _number_of_ports = a } :: DistributedPortGroupResource)
 
-instance HasType' DistributedPortGroupResource (TF.Argument Text) where
-    type' f s@DistributedPortGroupResource{..} =
-        (\a -> s { _type' = a } :: DistributedPortGroupResource)
-             <$> f _type'
+instance HasType' DistributedPortGroupResource Text where
+    type' =
+        lens (_type' :: DistributedPortGroupResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: DistributedPortGroupResource)
 
 distributedPortGroupResource :: TF.Resource TF.VSphere DistributedPortGroupResource
 distributedPortGroupResource =
@@ -342,123 +350,123 @@ For an overview on vSphere networking concepts, see
 ESXi connections.
 -}
 data DistributedVirtualSwitchResource = DistributedVirtualSwitchResource {
-      _contact_detail           :: !(TF.Argument Text)
+      _contact_detail :: !(TF.Argument "contact_detail" Text)
     {- ^ (Optional) The detailed contact information for the person who is responsible for the DVS. -}
-    , _contact_name             :: !(TF.Argument Text)
+    , _contact_name :: !(TF.Argument "contact_name" Text)
     {- ^ (Optional) The name of the person who is responsible for the DVS. -}
-    , _datacenter_id            :: !(TF.Argument Text)
+    , _datacenter_id :: !(TF.Argument "datacenter_id" Text)
     {- ^ (Required) The ID of the datacenter where the distributed virtual switch will be created. Forces a new resource if changed. -}
-    , _description              :: !(TF.Argument Text)
+    , _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A detailed description for the DVS. -}
-    , _folder                   :: !(TF.Argument Text)
+    , _folder :: !(TF.Argument "folder" Text)
     {- ^ (Optional) The folder to create the DVS in. Forces a new resource if changed. -}
-    , _ipv4_address             :: !(TF.Argument Text)
+    , _ipv4_address :: !(TF.Argument "ipv4_address" Text)
     {- ^ (Optional) An IPv4 address to identify the switch. This is mostly useful when used with the <#netflow-arguments> found below. -}
-    , _lacp_api_version         :: !(TF.Argument Text)
+    , _lacp_api_version :: !(TF.Argument "lacp_api_version" Text)
     {- ^ (Optional) The Link Aggregation Control Protocol group version to use with the switch. Possible values are @singleLag@ and @multipleLag@ . -}
-    , _link_discovery_operation :: !(TF.Argument Text)
+    , _link_discovery_operation :: !(TF.Argument "link_discovery_operation" Text)
     {- ^ (Optional) Whether to @advertise@ or @listen@ for link discovery traffic. -}
-    , _link_discovery_protocol  :: !(TF.Argument Text)
+    , _link_discovery_protocol :: !(TF.Argument "link_discovery_protocol" Text)
     {- ^ (Optional) The discovery protocol type. Valid types are @cdp@ and @lldp@ . -}
-    , _max_mtu                  :: !(TF.Argument Text)
+    , _max_mtu :: !(TF.Argument "max_mtu" Text)
     {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. -}
-    , _multicast_filtering_mode :: !(TF.Argument Text)
+    , _multicast_filtering_mode :: !(TF.Argument "multicast_filtering_mode" Text)
     {- ^ (Optional) The multicast filtering mode to use with the switch. Can be one of @legacyFiltering@ or @snooping@ . -}
-    , _name                     :: !(TF.Argument Text)
+    , _name :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the distributed virtual switch. -}
-    , _tags                     :: !(TF.Argument Text)
+    , _tags :: !(TF.Argument "tags" Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _version                  :: !(TF.Argument Text)
+    , _version :: !(TF.Argument "version" Text)
     {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DistributedVirtualSwitchResource where
     toHCL DistributedVirtualSwitchResource{..} = TF.block $ catMaybes
-        [ TF.assign "contact_detail" <$> TF.argument _contact_detail
-        , TF.assign "contact_name" <$> TF.argument _contact_name
-        , TF.assign "datacenter_id" <$> TF.argument _datacenter_id
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "folder" <$> TF.argument _folder
-        , TF.assign "ipv4_address" <$> TF.argument _ipv4_address
-        , TF.assign "lacp_api_version" <$> TF.argument _lacp_api_version
-        , TF.assign "link_discovery_operation" <$> TF.argument _link_discovery_operation
-        , TF.assign "link_discovery_protocol" <$> TF.argument _link_discovery_protocol
-        , TF.assign "max_mtu" <$> TF.argument _max_mtu
-        , TF.assign "multicast_filtering_mode" <$> TF.argument _multicast_filtering_mode
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
-        , TF.assign "version" <$> TF.argument _version
+        [ TF.argument _contact_detail
+        , TF.argument _contact_name
+        , TF.argument _datacenter_id
+        , TF.argument _description
+        , TF.argument _folder
+        , TF.argument _ipv4_address
+        , TF.argument _lacp_api_version
+        , TF.argument _link_discovery_operation
+        , TF.argument _link_discovery_protocol
+        , TF.argument _max_mtu
+        , TF.argument _multicast_filtering_mode
+        , TF.argument _name
+        , TF.argument _tags
+        , TF.argument _version
         ]
 
-instance HasContactDetail DistributedVirtualSwitchResource (TF.Argument Text) where
-    contactDetail f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource)
-             <$> f _contact_detail
+instance HasContactDetail DistributedVirtualSwitchResource Text where
+    contactDetail =
+        lens (_contact_detail :: DistributedVirtualSwitchResource -> TF.Argument "contact_detail" Text)
+             (\s a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource)
 
-instance HasContactName DistributedVirtualSwitchResource (TF.Argument Text) where
-    contactName f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _contact_name = a } :: DistributedVirtualSwitchResource)
-             <$> f _contact_name
+instance HasContactName DistributedVirtualSwitchResource Text where
+    contactName =
+        lens (_contact_name :: DistributedVirtualSwitchResource -> TF.Argument "contact_name" Text)
+             (\s a -> s { _contact_name = a } :: DistributedVirtualSwitchResource)
 
-instance HasDatacenterId DistributedVirtualSwitchResource (TF.Argument Text) where
-    datacenterId f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource)
-             <$> f _datacenter_id
+instance HasDatacenterId DistributedVirtualSwitchResource Text where
+    datacenterId =
+        lens (_datacenter_id :: DistributedVirtualSwitchResource -> TF.Argument "datacenter_id" Text)
+             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource)
 
-instance HasDescription DistributedVirtualSwitchResource (TF.Argument Text) where
-    description f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _description = a } :: DistributedVirtualSwitchResource)
-             <$> f _description
+instance HasDescription DistributedVirtualSwitchResource Text where
+    description =
+        lens (_description :: DistributedVirtualSwitchResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: DistributedVirtualSwitchResource)
 
-instance HasFolder DistributedVirtualSwitchResource (TF.Argument Text) where
-    folder f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _folder = a } :: DistributedVirtualSwitchResource)
-             <$> f _folder
+instance HasFolder DistributedVirtualSwitchResource Text where
+    folder =
+        lens (_folder :: DistributedVirtualSwitchResource -> TF.Argument "folder" Text)
+             (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource)
 
-instance HasIpv4Address DistributedVirtualSwitchResource (TF.Argument Text) where
-    ipv4Address f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource)
-             <$> f _ipv4_address
+instance HasIpv4Address DistributedVirtualSwitchResource Text where
+    ipv4Address =
+        lens (_ipv4_address :: DistributedVirtualSwitchResource -> TF.Argument "ipv4_address" Text)
+             (\s a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource)
 
-instance HasLacpApiVersion DistributedVirtualSwitchResource (TF.Argument Text) where
-    lacpApiVersion f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource)
-             <$> f _lacp_api_version
+instance HasLacpApiVersion DistributedVirtualSwitchResource Text where
+    lacpApiVersion =
+        lens (_lacp_api_version :: DistributedVirtualSwitchResource -> TF.Argument "lacp_api_version" Text)
+             (\s a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource)
 
-instance HasLinkDiscoveryOperation DistributedVirtualSwitchResource (TF.Argument Text) where
-    linkDiscoveryOperation f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource)
-             <$> f _link_discovery_operation
+instance HasLinkDiscoveryOperation DistributedVirtualSwitchResource Text where
+    linkDiscoveryOperation =
+        lens (_link_discovery_operation :: DistributedVirtualSwitchResource -> TF.Argument "link_discovery_operation" Text)
+             (\s a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource)
 
-instance HasLinkDiscoveryProtocol DistributedVirtualSwitchResource (TF.Argument Text) where
-    linkDiscoveryProtocol f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource)
-             <$> f _link_discovery_protocol
+instance HasLinkDiscoveryProtocol DistributedVirtualSwitchResource Text where
+    linkDiscoveryProtocol =
+        lens (_link_discovery_protocol :: DistributedVirtualSwitchResource -> TF.Argument "link_discovery_protocol" Text)
+             (\s a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource)
 
-instance HasMaxMtu DistributedVirtualSwitchResource (TF.Argument Text) where
-    maxMtu f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource)
-             <$> f _max_mtu
+instance HasMaxMtu DistributedVirtualSwitchResource Text where
+    maxMtu =
+        lens (_max_mtu :: DistributedVirtualSwitchResource -> TF.Argument "max_mtu" Text)
+             (\s a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource)
 
-instance HasMulticastFilteringMode DistributedVirtualSwitchResource (TF.Argument Text) where
-    multicastFilteringMode f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource)
-             <$> f _multicast_filtering_mode
+instance HasMulticastFilteringMode DistributedVirtualSwitchResource Text where
+    multicastFilteringMode =
+        lens (_multicast_filtering_mode :: DistributedVirtualSwitchResource -> TF.Argument "multicast_filtering_mode" Text)
+             (\s a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource)
 
-instance HasName DistributedVirtualSwitchResource (TF.Argument Text) where
-    name f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _name = a } :: DistributedVirtualSwitchResource)
-             <$> f _name
+instance HasName DistributedVirtualSwitchResource Text where
+    name =
+        lens (_name :: DistributedVirtualSwitchResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DistributedVirtualSwitchResource)
 
-instance HasTags DistributedVirtualSwitchResource (TF.Argument Text) where
-    tags f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _tags = a } :: DistributedVirtualSwitchResource)
-             <$> f _tags
+instance HasTags DistributedVirtualSwitchResource Text where
+    tags =
+        lens (_tags :: DistributedVirtualSwitchResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource)
 
-instance HasVersion DistributedVirtualSwitchResource (TF.Argument Text) where
-    version f s@DistributedVirtualSwitchResource{..} =
-        (\a -> s { _version = a } :: DistributedVirtualSwitchResource)
-             <$> f _version
+instance HasVersion DistributedVirtualSwitchResource Text where
+    version =
+        lens (_version :: DistributedVirtualSwitchResource -> TF.Argument "version" Text)
+             (\s a -> s { _version = a } :: DistributedVirtualSwitchResource)
 
 distributedVirtualSwitchResource :: TF.Resource TF.VSphere DistributedVirtualSwitchResource
 distributedVirtualSwitchResource =
@@ -495,67 +503,67 @@ as well, this may result in the destination file either being overwritten or
 deleted at the old location.
 -}
 data FileResource = FileResource {
-      _create_directories :: !(TF.Argument Text)
+      _create_directories :: !(TF.Argument "create_directories" Text)
     {- ^ (Optional) Create directories in @destination_file@ path parameter if any missing for copy operation. -}
-    , _datacenter         :: !(TF.Argument Text)
+    , _datacenter         :: !(TF.Argument "datacenter" Text)
     {- ^ (Optional) The name of a datacenter in which the file will be uploaded to. -}
-    , _datastore          :: !(TF.Argument Text)
+    , _datastore          :: !(TF.Argument "datastore" Text)
     {- ^ (Required) The name of the datastore in which to upload the file to. -}
-    , _destination_file   :: !(TF.Argument Text)
+    , _destination_file   :: !(TF.Argument "destination_file" Text)
     {- ^ (Required) The path to where the file should be uploaded or copied to on vSphere. -}
-    , _source_datacenter  :: !(TF.Argument Text)
+    , _source_datacenter  :: !(TF.Argument "source_datacenter" Text)
     {- ^ (Optional) The name of a datacenter in which the file will be copied from. Forces a new resource if changed. -}
-    , _source_datastore   :: !(TF.Argument Text)
+    , _source_datastore   :: !(TF.Argument "source_datastore" Text)
     {- ^ (Optional) The name of the datastore in which file will be copied from. Forces a new resource if changed. -}
-    , _source_file        :: !(TF.Argument Text)
+    , _source_file        :: !(TF.Argument "source_file" Text)
     {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL FileResource where
     toHCL FileResource{..} = TF.block $ catMaybes
-        [ TF.assign "create_directories" <$> TF.argument _create_directories
-        , TF.assign "datacenter" <$> TF.argument _datacenter
-        , TF.assign "datastore" <$> TF.argument _datastore
-        , TF.assign "destination_file" <$> TF.argument _destination_file
-        , TF.assign "source_datacenter" <$> TF.argument _source_datacenter
-        , TF.assign "source_datastore" <$> TF.argument _source_datastore
-        , TF.assign "source_file" <$> TF.argument _source_file
+        [ TF.argument _create_directories
+        , TF.argument _datacenter
+        , TF.argument _datastore
+        , TF.argument _destination_file
+        , TF.argument _source_datacenter
+        , TF.argument _source_datastore
+        , TF.argument _source_file
         ]
 
-instance HasCreateDirectories FileResource (TF.Argument Text) where
-    createDirectories f s@FileResource{..} =
-        (\a -> s { _create_directories = a } :: FileResource)
-             <$> f _create_directories
+instance HasCreateDirectories FileResource Text where
+    createDirectories =
+        lens (_create_directories :: FileResource -> TF.Argument "create_directories" Text)
+             (\s a -> s { _create_directories = a } :: FileResource)
 
-instance HasDatacenter FileResource (TF.Argument Text) where
-    datacenter f s@FileResource{..} =
-        (\a -> s { _datacenter = a } :: FileResource)
-             <$> f _datacenter
+instance HasDatacenter FileResource Text where
+    datacenter =
+        lens (_datacenter :: FileResource -> TF.Argument "datacenter" Text)
+             (\s a -> s { _datacenter = a } :: FileResource)
 
-instance HasDatastore FileResource (TF.Argument Text) where
-    datastore f s@FileResource{..} =
-        (\a -> s { _datastore = a } :: FileResource)
-             <$> f _datastore
+instance HasDatastore FileResource Text where
+    datastore =
+        lens (_datastore :: FileResource -> TF.Argument "datastore" Text)
+             (\s a -> s { _datastore = a } :: FileResource)
 
-instance HasDestinationFile FileResource (TF.Argument Text) where
-    destinationFile f s@FileResource{..} =
-        (\a -> s { _destination_file = a } :: FileResource)
-             <$> f _destination_file
+instance HasDestinationFile FileResource Text where
+    destinationFile =
+        lens (_destination_file :: FileResource -> TF.Argument "destination_file" Text)
+             (\s a -> s { _destination_file = a } :: FileResource)
 
-instance HasSourceDatacenter FileResource (TF.Argument Text) where
-    sourceDatacenter f s@FileResource{..} =
-        (\a -> s { _source_datacenter = a } :: FileResource)
-             <$> f _source_datacenter
+instance HasSourceDatacenter FileResource Text where
+    sourceDatacenter =
+        lens (_source_datacenter :: FileResource -> TF.Argument "source_datacenter" Text)
+             (\s a -> s { _source_datacenter = a } :: FileResource)
 
-instance HasSourceDatastore FileResource (TF.Argument Text) where
-    sourceDatastore f s@FileResource{..} =
-        (\a -> s { _source_datastore = a } :: FileResource)
-             <$> f _source_datastore
+instance HasSourceDatastore FileResource Text where
+    sourceDatastore =
+        lens (_source_datastore :: FileResource -> TF.Argument "source_datastore" Text)
+             (\s a -> s { _source_datastore = a } :: FileResource)
 
-instance HasSourceFile FileResource (TF.Argument Text) where
-    sourceFile f s@FileResource{..} =
-        (\a -> s { _source_file = a } :: FileResource)
-             <$> f _source_file
+instance HasSourceFile FileResource Text where
+    sourceFile =
+        lens (_source_file :: FileResource -> TF.Argument "source_file" Text)
+             (\s a -> s { _source_file = a } :: FileResource)
 
 fileResource :: TF.Resource TF.VSphere FileResource
 fileResource =
@@ -582,19 +590,19 @@ folder named @bar@ in the parent folder @foo@ , as long as that folder
 exists.
 -}
 data FolderResource = FolderResource {
-      _path :: !(TF.Argument Text)
+      _path :: !(TF.Argument "path" Text)
     {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL FolderResource where
     toHCL FolderResource{..} = TF.block $ catMaybes
-        [ TF.assign "path" <$> TF.argument _path
+        [ TF.argument _path
         ]
 
-instance HasPath FolderResource (TF.Argument Text) where
-    path f s@FolderResource{..} =
-        (\a -> s { _path = a } :: FolderResource)
-             <$> f _path
+instance HasPath FolderResource Text where
+    path =
+        lens (_path :: FolderResource -> TF.Argument "path" Text)
+             (\s a -> s { _path = a } :: FolderResource)
 
 folderResource :: TF.Resource TF.VSphere FolderResource
 folderResource =
@@ -614,43 +622,43 @@ overview on vSphere networking concepts, see
 .
 -}
 data HostPortGroupResource = HostPortGroupResource {
-      _host_system_id      :: !(TF.Argument Text)
+      _host_system_id      :: !(TF.Argument "host_system_id" Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the port group up on. Forces a new resource if changed. -}
-    , _name                :: !(TF.Argument Text)
+    , _name                :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the port group.  Forces a new resource if changed. -}
-    , _virtual_switch_name :: !(TF.Argument Text)
+    , _virtual_switch_name :: !(TF.Argument "virtual_switch_name" Text)
     {- ^ (Required) The name of the virtual switch to bind this port group to. Forces a new resource if changed. -}
-    , _vlan_id             :: !(TF.Argument Text)
+    , _vlan_id             :: !(TF.Argument "vlan_id" Text)
     {- ^ (Optional) The VLAN ID/trunk mode for this port group.  An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL HostPortGroupResource where
     toHCL HostPortGroupResource{..} = TF.block $ catMaybes
-        [ TF.assign "host_system_id" <$> TF.argument _host_system_id
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "virtual_switch_name" <$> TF.argument _virtual_switch_name
-        , TF.assign "vlan_id" <$> TF.argument _vlan_id
+        [ TF.argument _host_system_id
+        , TF.argument _name
+        , TF.argument _virtual_switch_name
+        , TF.argument _vlan_id
         ]
 
-instance HasHostSystemId HostPortGroupResource (TF.Argument Text) where
-    hostSystemId f s@HostPortGroupResource{..} =
-        (\a -> s { _host_system_id = a } :: HostPortGroupResource)
-             <$> f _host_system_id
+instance HasHostSystemId HostPortGroupResource Text where
+    hostSystemId =
+        lens (_host_system_id :: HostPortGroupResource -> TF.Argument "host_system_id" Text)
+             (\s a -> s { _host_system_id = a } :: HostPortGroupResource)
 
-instance HasName HostPortGroupResource (TF.Argument Text) where
-    name f s@HostPortGroupResource{..} =
-        (\a -> s { _name = a } :: HostPortGroupResource)
-             <$> f _name
+instance HasName HostPortGroupResource Text where
+    name =
+        lens (_name :: HostPortGroupResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: HostPortGroupResource)
 
-instance HasVirtualSwitchName HostPortGroupResource (TF.Argument Text) where
-    virtualSwitchName f s@HostPortGroupResource{..} =
-        (\a -> s { _virtual_switch_name = a } :: HostPortGroupResource)
-             <$> f _virtual_switch_name
+instance HasVirtualSwitchName HostPortGroupResource Text where
+    virtualSwitchName =
+        lens (_virtual_switch_name :: HostPortGroupResource -> TF.Argument "virtual_switch_name" Text)
+             (\s a -> s { _virtual_switch_name = a } :: HostPortGroupResource)
 
-instance HasVlanId HostPortGroupResource (TF.Argument Text) where
-    vlanId f s@HostPortGroupResource{..} =
-        (\a -> s { _vlan_id = a } :: HostPortGroupResource)
-             <$> f _vlan_id
+instance HasVlanId HostPortGroupResource Text where
+    vlanId =
+        lens (_vlan_id :: HostPortGroupResource -> TF.Argument "vlan_id" Text)
+             (\s a -> s { _vlan_id = a } :: HostPortGroupResource)
 
 hostPortGroupResource :: TF.Resource TF.VSphere HostPortGroupResource
 hostPortGroupResource =
@@ -673,43 +681,43 @@ on vSphere networking concepts, see
 .
 -}
 data HostVirtualSwitchResource = HostVirtualSwitchResource {
-      _host_system_id  :: !(TF.Argument Text)
+      _host_system_id  :: !(TF.Argument "host_system_id" Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the virtual switch up on. Forces a new resource if changed. -}
-    , _mtu             :: !(TF.Argument Text)
+    , _mtu             :: !(TF.Argument "mtu" Text)
     {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. Default: @1500@ . -}
-    , _name            :: !(TF.Argument Text)
+    , _name            :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the virtual switch. Forces a new resource if changed. -}
-    , _number_of_ports :: !(TF.Argument Text)
+    , _number_of_ports :: !(TF.Argument "number_of_ports" Text)
     {- ^ (Optional) The number of ports to create with this virtual switch. Default: @128@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL HostVirtualSwitchResource where
     toHCL HostVirtualSwitchResource{..} = TF.block $ catMaybes
-        [ TF.assign "host_system_id" <$> TF.argument _host_system_id
-        , TF.assign "mtu" <$> TF.argument _mtu
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "number_of_ports" <$> TF.argument _number_of_ports
+        [ TF.argument _host_system_id
+        , TF.argument _mtu
+        , TF.argument _name
+        , TF.argument _number_of_ports
         ]
 
-instance HasHostSystemId HostVirtualSwitchResource (TF.Argument Text) where
-    hostSystemId f s@HostVirtualSwitchResource{..} =
-        (\a -> s { _host_system_id = a } :: HostVirtualSwitchResource)
-             <$> f _host_system_id
+instance HasHostSystemId HostVirtualSwitchResource Text where
+    hostSystemId =
+        lens (_host_system_id :: HostVirtualSwitchResource -> TF.Argument "host_system_id" Text)
+             (\s a -> s { _host_system_id = a } :: HostVirtualSwitchResource)
 
-instance HasMtu HostVirtualSwitchResource (TF.Argument Text) where
-    mtu f s@HostVirtualSwitchResource{..} =
-        (\a -> s { _mtu = a } :: HostVirtualSwitchResource)
-             <$> f _mtu
+instance HasMtu HostVirtualSwitchResource Text where
+    mtu =
+        lens (_mtu :: HostVirtualSwitchResource -> TF.Argument "mtu" Text)
+             (\s a -> s { _mtu = a } :: HostVirtualSwitchResource)
 
-instance HasName HostVirtualSwitchResource (TF.Argument Text) where
-    name f s@HostVirtualSwitchResource{..} =
-        (\a -> s { _name = a } :: HostVirtualSwitchResource)
-             <$> f _name
+instance HasName HostVirtualSwitchResource Text where
+    name =
+        lens (_name :: HostVirtualSwitchResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: HostVirtualSwitchResource)
 
-instance HasNumberOfPorts HostVirtualSwitchResource (TF.Argument Text) where
-    numberOfPorts f s@HostVirtualSwitchResource{..} =
-        (\a -> s { _number_of_ports = a } :: HostVirtualSwitchResource)
-             <$> f _number_of_ports
+instance HasNumberOfPorts HostVirtualSwitchResource Text where
+    numberOfPorts =
+        lens (_number_of_ports :: HostVirtualSwitchResource -> TF.Argument "number_of_ports" Text)
+             (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource)
 
 hostVirtualSwitchResource :: TF.Resource TF.VSphere HostVirtualSwitchResource
 hostVirtualSwitchResource =
@@ -727,55 +735,43 @@ Provides a VMware vSphere license resource. This can be used to add and
 remove license keys.
 -}
 data LicenseResource = LicenseResource {
-      _labels               :: !(TF.Argument Text)
+      _labels      :: !(TF.Argument "labels" Text)
     {- ^ (Optional) A map of key/value pairs to be attached as labels (tags) to the license key. -}
-    , _license_key          :: !(TF.Argument Text)
+    , _license_key :: !(TF.Argument "license_key" Text)
     {- ^ (Required) The license key to add. -}
-    , _computed_edition_key :: !(TF.Attribute Text)
-    {- ^ - The product edition of the license key. -}
-    , _computed_name        :: !(TF.Attribute Text)
-    {- ^ - The display name for the license. -}
-    , _computed_total       :: !(TF.Attribute Text)
-    {- ^ - Total number of units (example: CPUs) contained in the license. -}
-    , _computed_used        :: !(TF.Attribute Text)
-    {- ^ - The number of units (example: CPUs) assigned to this license. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL LicenseResource where
     toHCL LicenseResource{..} = TF.block $ catMaybes
-        [ TF.assign "labels" <$> TF.argument _labels
-        , TF.assign "license_key" <$> TF.argument _license_key
+        [ TF.argument _labels
+        , TF.argument _license_key
         ]
 
-instance HasLabels LicenseResource (TF.Argument Text) where
-    labels f s@LicenseResource{..} =
-        (\a -> s { _labels = a } :: LicenseResource)
-             <$> f _labels
+instance HasLabels LicenseResource Text where
+    labels =
+        lens (_labels :: LicenseResource -> TF.Argument "labels" Text)
+             (\s a -> s { _labels = a } :: LicenseResource)
 
-instance HasLicenseKey LicenseResource (TF.Argument Text) where
-    licenseKey f s@LicenseResource{..} =
-        (\a -> s { _license_key = a } :: LicenseResource)
-             <$> f _license_key
+instance HasLicenseKey LicenseResource Text where
+    licenseKey =
+        lens (_license_key :: LicenseResource -> TF.Argument "license_key" Text)
+             (\s a -> s { _license_key = a } :: LicenseResource)
 
-instance HasComputedEditionKey LicenseResource (TF.Attribute Text) where
-    computedEditionKey f s@LicenseResource{..} =
-        (\a -> s { _computed_edition_key = a } :: LicenseResource)
-             <$> f _computed_edition_key
+instance HasComputedEditionKey LicenseResource Text where
+    computedEditionKey =
+        to (\_  -> TF.Compute "edition_key")
 
-instance HasComputedName LicenseResource (TF.Attribute Text) where
-    computedName f s@LicenseResource{..} =
-        (\a -> s { _computed_name = a } :: LicenseResource)
-             <$> f _computed_name
+instance HasComputedName LicenseResource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
-instance HasComputedTotal LicenseResource (TF.Attribute Text) where
-    computedTotal f s@LicenseResource{..} =
-        (\a -> s { _computed_total = a } :: LicenseResource)
-             <$> f _computed_total
+instance HasComputedTotal LicenseResource Text where
+    computedTotal =
+        to (\_  -> TF.Compute "total")
 
-instance HasComputedUsed LicenseResource (TF.Attribute Text) where
-    computedUsed f s@LicenseResource{..} =
-        (\a -> s { _computed_used = a } :: LicenseResource)
-             <$> f _computed_used
+instance HasComputedUsed LicenseResource Text where
+    computedUsed =
+        to (\_  -> TF.Compute "used")
 
 licenseResource :: TF.Resource TF.VSphere LicenseResource
 licenseResource =
@@ -783,10 +779,6 @@ licenseResource =
         LicenseResource {
             _labels = TF.Nil
             , _license_key = TF.Nil
-            , _computed_edition_key = TF.Compute "edition_key"
-            , _computed_name = TF.Compute "name"
-            , _computed_total = TF.Compute "total"
-            , _computed_used = TF.Compute "used"
             }
 
 {- | The @vsphere_nas_datastore@ VSphere resource.
@@ -800,146 +792,119 @@ you must specify each host that you want to add in the @host_system_ids@
 argument.
 -}
 data NasDatastoreResource = NasDatastoreResource {
-      _access_mode                   :: !(TF.Argument Text)
+      _access_mode     :: !(TF.Argument "access_mode" Text)
     {- ^ (Optional) Access mode for the mount point. Can be one of @readOnly@ or @readWrite@ . Note that @readWrite@ does not necessarily mean that the datastore will be read-write depending on the permissions of the actual share. Default: @readWrite@ . Forces a new resource if changed. -}
-    , _folder                        :: !(TF.Argument Text)
+    , _folder          :: !(TF.Argument "folder" Text)
     {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . -}
-    , _host_system_ids               :: !(TF.Argument Text)
+    , _host_system_ids :: !(TF.Argument "host_system_ids" Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the hosts to mount the datastore on. -}
-    , _name                          :: !(TF.Argument Text)
+    , _name            :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _remote_hosts                  :: !(TF.Argument Text)
+    , _remote_hosts    :: !(TF.Argument "remote_hosts" Text)
     {- ^ (Required) The hostnames or IP addresses of the remote server or servers. Only one element should be present for NFS v3 but multiple can be present for NFS v4.1. Forces a new resource if changed. -}
-    , _remote_path                   :: !(TF.Argument Text)
+    , _remote_path     :: !(TF.Argument "remote_path" Text)
     {- ^ (Required) The remote path of the mount point. Forces a new resource if changed. -}
-    , _security_type                 :: !(TF.Argument Text)
+    , _security_type   :: !(TF.Argument "security_type" Text)
     {- ^ (Optional) The security type to use when using NFS v4.1. Can be one of @AUTH_SYS@ , @SEC_KRB5@ , or @SEC_KRB5I@ . Forces a new resource if changed. -}
-    , _tags                          :: !(TF.Argument Text)
+    , _tags            :: !(TF.Argument "tags" Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _type'                         :: !(TF.Argument Text)
+    , _type'           :: !(TF.Argument "type" Text)
     {- ^ (Optional) The type of NAS volume. Can be one of @NFS@ (to denote v3) or @NFS41@ (to denote NFS v4.1). Default: @NFS@ . Forces a new resource if changed. -}
-    , _computed_accessible           :: !(TF.Attribute Text)
-    {- ^ - The connectivity status of the datastore. If this is @false@ , some other computed attributes may be out of date. -}
-    , _computed_capacity             :: !(TF.Attribute Text)
-    {- ^ - Maximum capacity of the datastore, in megabytes. -}
-    , _computed_free_space           :: !(TF.Attribute Text)
-    {- ^ - Available space of this datastore, in megabytes. -}
-    , _computed_id                   :: !(TF.Attribute Text)
-    {- ^ - The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datastore. -}
-    , _computed_maintenance_mode     :: !(TF.Attribute Text)
-    {- ^ - The current maintenance mode state of the datastore. -}
-    , _computed_multiple_host_access :: !(TF.Attribute Text)
-    {- ^ - If @true@ , more than one host in the datacenter has been configured with access to the datastore. -}
-    , _computed_protocol_endpoint    :: !(TF.Attribute Text)
-    {- ^ - Indicates that this NAS volume is a protocol endpoint. This field is only populated if the host supports virtual datastores. -}
-    , _computed_uncommitted_space    :: !(TF.Attribute Text)
-    {- ^ - Total additional storage space, in megabytes, potentially used by all virtual machines on this datastore. -}
-    , _computed_url                  :: !(TF.Attribute Text)
-    {- ^ - The unique locator for the datastore. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL NasDatastoreResource where
     toHCL NasDatastoreResource{..} = TF.block $ catMaybes
-        [ TF.assign "access_mode" <$> TF.argument _access_mode
-        , TF.assign "folder" <$> TF.argument _folder
-        , TF.assign "host_system_ids" <$> TF.argument _host_system_ids
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "remote_hosts" <$> TF.argument _remote_hosts
-        , TF.assign "remote_path" <$> TF.argument _remote_path
-        , TF.assign "security_type" <$> TF.argument _security_type
-        , TF.assign "tags" <$> TF.argument _tags
-        , TF.assign "type" <$> TF.argument _type'
+        [ TF.argument _access_mode
+        , TF.argument _folder
+        , TF.argument _host_system_ids
+        , TF.argument _name
+        , TF.argument _remote_hosts
+        , TF.argument _remote_path
+        , TF.argument _security_type
+        , TF.argument _tags
+        , TF.argument _type'
         ]
 
-instance HasAccessMode NasDatastoreResource (TF.Argument Text) where
-    accessMode f s@NasDatastoreResource{..} =
-        (\a -> s { _access_mode = a } :: NasDatastoreResource)
-             <$> f _access_mode
+instance HasAccessMode NasDatastoreResource Text where
+    accessMode =
+        lens (_access_mode :: NasDatastoreResource -> TF.Argument "access_mode" Text)
+             (\s a -> s { _access_mode = a } :: NasDatastoreResource)
 
-instance HasFolder NasDatastoreResource (TF.Argument Text) where
-    folder f s@NasDatastoreResource{..} =
-        (\a -> s { _folder = a } :: NasDatastoreResource)
-             <$> f _folder
+instance HasFolder NasDatastoreResource Text where
+    folder =
+        lens (_folder :: NasDatastoreResource -> TF.Argument "folder" Text)
+             (\s a -> s { _folder = a } :: NasDatastoreResource)
 
-instance HasHostSystemIds NasDatastoreResource (TF.Argument Text) where
-    hostSystemIds f s@NasDatastoreResource{..} =
-        (\a -> s { _host_system_ids = a } :: NasDatastoreResource)
-             <$> f _host_system_ids
+instance HasHostSystemIds NasDatastoreResource Text where
+    hostSystemIds =
+        lens (_host_system_ids :: NasDatastoreResource -> TF.Argument "host_system_ids" Text)
+             (\s a -> s { _host_system_ids = a } :: NasDatastoreResource)
 
-instance HasName NasDatastoreResource (TF.Argument Text) where
-    name f s@NasDatastoreResource{..} =
-        (\a -> s { _name = a } :: NasDatastoreResource)
-             <$> f _name
+instance HasName NasDatastoreResource Text where
+    name =
+        lens (_name :: NasDatastoreResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: NasDatastoreResource)
 
-instance HasRemoteHosts NasDatastoreResource (TF.Argument Text) where
-    remoteHosts f s@NasDatastoreResource{..} =
-        (\a -> s { _remote_hosts = a } :: NasDatastoreResource)
-             <$> f _remote_hosts
+instance HasRemoteHosts NasDatastoreResource Text where
+    remoteHosts =
+        lens (_remote_hosts :: NasDatastoreResource -> TF.Argument "remote_hosts" Text)
+             (\s a -> s { _remote_hosts = a } :: NasDatastoreResource)
 
-instance HasRemotePath NasDatastoreResource (TF.Argument Text) where
-    remotePath f s@NasDatastoreResource{..} =
-        (\a -> s { _remote_path = a } :: NasDatastoreResource)
-             <$> f _remote_path
+instance HasRemotePath NasDatastoreResource Text where
+    remotePath =
+        lens (_remote_path :: NasDatastoreResource -> TF.Argument "remote_path" Text)
+             (\s a -> s { _remote_path = a } :: NasDatastoreResource)
 
-instance HasSecurityType NasDatastoreResource (TF.Argument Text) where
-    securityType f s@NasDatastoreResource{..} =
-        (\a -> s { _security_type = a } :: NasDatastoreResource)
-             <$> f _security_type
+instance HasSecurityType NasDatastoreResource Text where
+    securityType =
+        lens (_security_type :: NasDatastoreResource -> TF.Argument "security_type" Text)
+             (\s a -> s { _security_type = a } :: NasDatastoreResource)
 
-instance HasTags NasDatastoreResource (TF.Argument Text) where
-    tags f s@NasDatastoreResource{..} =
-        (\a -> s { _tags = a } :: NasDatastoreResource)
-             <$> f _tags
+instance HasTags NasDatastoreResource Text where
+    tags =
+        lens (_tags :: NasDatastoreResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: NasDatastoreResource)
 
-instance HasType' NasDatastoreResource (TF.Argument Text) where
-    type' f s@NasDatastoreResource{..} =
-        (\a -> s { _type' = a } :: NasDatastoreResource)
-             <$> f _type'
+instance HasType' NasDatastoreResource Text where
+    type' =
+        lens (_type' :: NasDatastoreResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: NasDatastoreResource)
 
-instance HasComputedAccessible NasDatastoreResource (TF.Attribute Text) where
-    computedAccessible f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_accessible = a } :: NasDatastoreResource)
-             <$> f _computed_accessible
+instance HasComputedAccessible NasDatastoreResource Text where
+    computedAccessible =
+        to (\_  -> TF.Compute "accessible")
 
-instance HasComputedCapacity NasDatastoreResource (TF.Attribute Text) where
-    computedCapacity f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_capacity = a } :: NasDatastoreResource)
-             <$> f _computed_capacity
+instance HasComputedCapacity NasDatastoreResource Text where
+    computedCapacity =
+        to (\_  -> TF.Compute "capacity")
 
-instance HasComputedFreeSpace NasDatastoreResource (TF.Attribute Text) where
-    computedFreeSpace f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_free_space = a } :: NasDatastoreResource)
-             <$> f _computed_free_space
+instance HasComputedFreeSpace NasDatastoreResource Text where
+    computedFreeSpace =
+        to (\_  -> TF.Compute "free_space")
 
-instance HasComputedId NasDatastoreResource (TF.Attribute Text) where
-    computedId f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_id = a } :: NasDatastoreResource)
-             <$> f _computed_id
+instance HasComputedId NasDatastoreResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedMaintenanceMode NasDatastoreResource (TF.Attribute Text) where
-    computedMaintenanceMode f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_maintenance_mode = a } :: NasDatastoreResource)
-             <$> f _computed_maintenance_mode
+instance HasComputedMaintenanceMode NasDatastoreResource Text where
+    computedMaintenanceMode =
+        to (\_  -> TF.Compute "maintenance_mode")
 
-instance HasComputedMultipleHostAccess NasDatastoreResource (TF.Attribute Text) where
-    computedMultipleHostAccess f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_multiple_host_access = a } :: NasDatastoreResource)
-             <$> f _computed_multiple_host_access
+instance HasComputedMultipleHostAccess NasDatastoreResource Text where
+    computedMultipleHostAccess =
+        to (\_  -> TF.Compute "multiple_host_access")
 
-instance HasComputedProtocolEndpoint NasDatastoreResource (TF.Attribute Text) where
-    computedProtocolEndpoint f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_protocol_endpoint = a } :: NasDatastoreResource)
-             <$> f _computed_protocol_endpoint
+instance HasComputedProtocolEndpoint NasDatastoreResource Text where
+    computedProtocolEndpoint =
+        to (\_  -> TF.Compute "protocol_endpoint")
 
-instance HasComputedUncommittedSpace NasDatastoreResource (TF.Attribute Text) where
-    computedUncommittedSpace f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_uncommitted_space = a } :: NasDatastoreResource)
-             <$> f _computed_uncommitted_space
+instance HasComputedUncommittedSpace NasDatastoreResource Text where
+    computedUncommittedSpace =
+        to (\_  -> TF.Compute "uncommitted_space")
 
-instance HasComputedUrl NasDatastoreResource (TF.Attribute Text) where
-    computedUrl f s@NasDatastoreResource{..} =
-        (\a -> s { _computed_url = a } :: NasDatastoreResource)
-             <$> f _computed_url
+instance HasComputedUrl NasDatastoreResource Text where
+    computedUrl =
+        to (\_  -> TF.Compute "url")
 
 nasDatastoreResource :: TF.Resource TF.VSphere NasDatastoreResource
 nasDatastoreResource =
@@ -954,15 +919,6 @@ nasDatastoreResource =
             , _security_type = TF.Nil
             , _tags = TF.Nil
             , _type' = TF.Nil
-            , _computed_accessible = TF.Compute "accessible"
-            , _computed_capacity = TF.Compute "capacity"
-            , _computed_free_space = TF.Compute "free_space"
-            , _computed_id = TF.Compute "id"
-            , _computed_maintenance_mode = TF.Compute "maintenance_mode"
-            , _computed_multiple_host_access = TF.Compute "multiple_host_access"
-            , _computed_protocol_endpoint = TF.Compute "protocol_endpoint"
-            , _computed_uncommitted_space = TF.Compute "uncommitted_space"
-            , _computed_url = TF.Compute "url"
             }
 
 {- | The @vsphere_tag_category@ VSphere resource.
@@ -977,43 +933,43 @@ specific objects. For more information about tags, click
 requires vCenter 6.0 or higher.
 -}
 data TagCategoryResource = TagCategoryResource {
-      _associable_types :: !(TF.Argument Text)
+      _associable_types :: !(TF.Argument "associable_types" Text)
     {- ^ (Required) A list object types that this category is valid to be assigned to. For a full list, click <#associable-object-types> . -}
-    , _cardinality      :: !(TF.Argument Text)
+    , _cardinality      :: !(TF.Argument "cardinality" Text)
     {- ^ (Required) The number of tags that can be assigned from this category to a single object at once. Can be one of @SINGLE@ (object can only be assigned one tag in this category), to @MULTIPLE@ (object can be assigned multiple tags in this category). Forces a new resource if changed. -}
-    , _description      :: !(TF.Argument Text)
+    , _description      :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description for the category. -}
-    , _name             :: !(TF.Argument Text)
+    , _name             :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the category. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL TagCategoryResource where
     toHCL TagCategoryResource{..} = TF.block $ catMaybes
-        [ TF.assign "associable_types" <$> TF.argument _associable_types
-        , TF.assign "cardinality" <$> TF.argument _cardinality
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _associable_types
+        , TF.argument _cardinality
+        , TF.argument _description
+        , TF.argument _name
         ]
 
-instance HasAssociableTypes TagCategoryResource (TF.Argument Text) where
-    associableTypes f s@TagCategoryResource{..} =
-        (\a -> s { _associable_types = a } :: TagCategoryResource)
-             <$> f _associable_types
+instance HasAssociableTypes TagCategoryResource Text where
+    associableTypes =
+        lens (_associable_types :: TagCategoryResource -> TF.Argument "associable_types" Text)
+             (\s a -> s { _associable_types = a } :: TagCategoryResource)
 
-instance HasCardinality TagCategoryResource (TF.Argument Text) where
-    cardinality f s@TagCategoryResource{..} =
-        (\a -> s { _cardinality = a } :: TagCategoryResource)
-             <$> f _cardinality
+instance HasCardinality TagCategoryResource Text where
+    cardinality =
+        lens (_cardinality :: TagCategoryResource -> TF.Argument "cardinality" Text)
+             (\s a -> s { _cardinality = a } :: TagCategoryResource)
 
-instance HasDescription TagCategoryResource (TF.Argument Text) where
-    description f s@TagCategoryResource{..} =
-        (\a -> s { _description = a } :: TagCategoryResource)
-             <$> f _description
+instance HasDescription TagCategoryResource Text where
+    description =
+        lens (_description :: TagCategoryResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: TagCategoryResource)
 
-instance HasName TagCategoryResource (TF.Argument Text) where
-    name f s@TagCategoryResource{..} =
-        (\a -> s { _name = a } :: TagCategoryResource)
-             <$> f _name
+instance HasName TagCategoryResource Text where
+    name =
+        lens (_name :: TagCategoryResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: TagCategoryResource)
 
 tagCategoryResource :: TF.Resource TF.VSphere TagCategoryResource
 tagCategoryResource =
@@ -1036,35 +992,35 @@ click
 requires vCenter 6.0 or higher.
 -}
 data TagResource = TagResource {
-      _category_id :: !(TF.Argument Text)
+      _category_id :: !(TF.Argument "category_id" Text)
     {- ^ (Required) The unique identifier of the parent category in which this tag will be created. Forces a new resource if changed. -}
-    , _description :: !(TF.Argument Text)
+    , _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description for the tag. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The display name of the tag. The name must be unique within its category. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL TagResource where
     toHCL TagResource{..} = TF.block $ catMaybes
-        [ TF.assign "category_id" <$> TF.argument _category_id
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _category_id
+        , TF.argument _description
+        , TF.argument _name
         ]
 
-instance HasCategoryId TagResource (TF.Argument Text) where
-    categoryId f s@TagResource{..} =
-        (\a -> s { _category_id = a } :: TagResource)
-             <$> f _category_id
+instance HasCategoryId TagResource Text where
+    categoryId =
+        lens (_category_id :: TagResource -> TF.Argument "category_id" Text)
+             (\s a -> s { _category_id = a } :: TagResource)
 
-instance HasDescription TagResource (TF.Argument Text) where
-    description f s@TagResource{..} =
-        (\a -> s { _description = a } :: TagResource)
-             <$> f _description
+instance HasDescription TagResource Text where
+    description =
+        lens (_description :: TagResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: TagResource)
 
-instance HasName TagResource (TF.Argument Text) where
-    name f s@TagResource{..} =
-        (\a -> s { _name = a } :: TagResource)
-             <$> f _name
+instance HasName TagResource Text where
+    name =
+        lens (_name :: TagResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: TagResource)
 
 tagResource :: TF.Resource TF.VSphere TagResource
 tagResource =
@@ -1084,59 +1040,59 @@ disk sub-resource with the
 </docs/providers/vsphere/r/virtual_machine.html#attach> parameter.
 -}
 data VirtualDiskResource = VirtualDiskResource {
-      _adapter_type :: !(TF.Argument Text)
+      _adapter_type :: !(TF.Argument "adapter_type" Text)
     {- ^ (Optional) The adapter type for this virtual disk. Can be one of @ide@ , @lsiLogic@ , or @busLogic@ .  Default: @lsiLogic@ . -}
-    , _datacenter   :: !(TF.Argument Text)
+    , _datacenter   :: !(TF.Argument "datacenter" Text)
     {- ^ (Optional) The name of the datacenter in which to create the disk. Can be omitted when when ESXi or if there is only one datacenter in your infrastructure. -}
-    , _datastore    :: !(TF.Argument Text)
+    , _datastore    :: !(TF.Argument "datastore" Text)
     {- ^ (Required) The name of the datastore in which to create the disk. -}
-    , _size         :: !(TF.Argument Text)
+    , _size         :: !(TF.Argument "size" Text)
     {- ^ (Required) Size of the disk (in GB). -}
-    , _type'        :: !(TF.Argument Text)
+    , _type'        :: !(TF.Argument "type" Text)
     {- ^ (Optional) The type of disk to create. Can be one of @eagerZeroedThick@ , @lazy@ , or @thin@ . Default: @eagerZeroedThick@ . For information on what each kind of disk provisioning policy means, click <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-4C0F4D73-82F2-4B81-8AA7-1DD752A8A5AC.html> . -}
-    , _vmdk_path    :: !(TF.Argument Text)
+    , _vmdk_path    :: !(TF.Argument "vmdk_path" Text)
     {- ^ (Required) The path, including filename, of the virtual disk to be created.  This needs to end in @.vmdk@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VirtualDiskResource where
     toHCL VirtualDiskResource{..} = TF.block $ catMaybes
-        [ TF.assign "adapter_type" <$> TF.argument _adapter_type
-        , TF.assign "datacenter" <$> TF.argument _datacenter
-        , TF.assign "datastore" <$> TF.argument _datastore
-        , TF.assign "size" <$> TF.argument _size
-        , TF.assign "type" <$> TF.argument _type'
-        , TF.assign "vmdk_path" <$> TF.argument _vmdk_path
+        [ TF.argument _adapter_type
+        , TF.argument _datacenter
+        , TF.argument _datastore
+        , TF.argument _size
+        , TF.argument _type'
+        , TF.argument _vmdk_path
         ]
 
-instance HasAdapterType VirtualDiskResource (TF.Argument Text) where
-    adapterType f s@VirtualDiskResource{..} =
-        (\a -> s { _adapter_type = a } :: VirtualDiskResource)
-             <$> f _adapter_type
+instance HasAdapterType VirtualDiskResource Text where
+    adapterType =
+        lens (_adapter_type :: VirtualDiskResource -> TF.Argument "adapter_type" Text)
+             (\s a -> s { _adapter_type = a } :: VirtualDiskResource)
 
-instance HasDatacenter VirtualDiskResource (TF.Argument Text) where
-    datacenter f s@VirtualDiskResource{..} =
-        (\a -> s { _datacenter = a } :: VirtualDiskResource)
-             <$> f _datacenter
+instance HasDatacenter VirtualDiskResource Text where
+    datacenter =
+        lens (_datacenter :: VirtualDiskResource -> TF.Argument "datacenter" Text)
+             (\s a -> s { _datacenter = a } :: VirtualDiskResource)
 
-instance HasDatastore VirtualDiskResource (TF.Argument Text) where
-    datastore f s@VirtualDiskResource{..} =
-        (\a -> s { _datastore = a } :: VirtualDiskResource)
-             <$> f _datastore
+instance HasDatastore VirtualDiskResource Text where
+    datastore =
+        lens (_datastore :: VirtualDiskResource -> TF.Argument "datastore" Text)
+             (\s a -> s { _datastore = a } :: VirtualDiskResource)
 
-instance HasSize VirtualDiskResource (TF.Argument Text) where
-    size f s@VirtualDiskResource{..} =
-        (\a -> s { _size = a } :: VirtualDiskResource)
-             <$> f _size
+instance HasSize VirtualDiskResource Text where
+    size =
+        lens (_size :: VirtualDiskResource -> TF.Argument "size" Text)
+             (\s a -> s { _size = a } :: VirtualDiskResource)
 
-instance HasType' VirtualDiskResource (TF.Argument Text) where
-    type' f s@VirtualDiskResource{..} =
-        (\a -> s { _type' = a } :: VirtualDiskResource)
-             <$> f _type'
+instance HasType' VirtualDiskResource Text where
+    type' =
+        lens (_type' :: VirtualDiskResource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: VirtualDiskResource)
 
-instance HasVmdkPath VirtualDiskResource (TF.Argument Text) where
-    vmdkPath f s@VirtualDiskResource{..} =
-        (\a -> s { _vmdk_path = a } :: VirtualDiskResource)
-             <$> f _vmdk_path
+instance HasVmdkPath VirtualDiskResource Text where
+    vmdkPath =
+        lens (_vmdk_path :: VirtualDiskResource -> TF.Argument "vmdk_path" Text)
+             (\s a -> s { _vmdk_path = a } :: VirtualDiskResource)
 
 virtualDiskResource :: TF.Resource TF.VSphere VirtualDiskResource
 virtualDiskResource =
@@ -1161,27 +1117,27 @@ details on working with virtual machines in vSphere, see
 .
 -}
 data VirtualMachineResource = VirtualMachineResource {
-      _name             :: !(TF.Argument Text)
+      _name             :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the virtual machine. -}
-    , _resource_pool_id :: !(TF.Argument Text)
+    , _resource_pool_id :: !(TF.Argument "resource_pool_id" Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the resource pool to put this virtual machine in. See the section on <#virtual-machine-migration> for details on changing this value. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VirtualMachineResource where
     toHCL VirtualMachineResource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
-        , TF.assign "resource_pool_id" <$> TF.argument _resource_pool_id
+        [ TF.argument _name
+        , TF.argument _resource_pool_id
         ]
 
-instance HasName VirtualMachineResource (TF.Argument Text) where
-    name f s@VirtualMachineResource{..} =
-        (\a -> s { _name = a } :: VirtualMachineResource)
-             <$> f _name
+instance HasName VirtualMachineResource Text where
+    name =
+        lens (_name :: VirtualMachineResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: VirtualMachineResource)
 
-instance HasResourcePoolId VirtualMachineResource (TF.Argument Text) where
-    resourcePoolId f s@VirtualMachineResource{..} =
-        (\a -> s { _resource_pool_id = a } :: VirtualMachineResource)
-             <$> f _resource_pool_id
+instance HasResourcePoolId VirtualMachineResource Text where
+    resourcePoolId =
+        lens (_resource_pool_id :: VirtualMachineResource -> TF.Argument "resource_pool_id" Text)
+             (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource)
 
 virtualMachineResource :: TF.Resource TF.VSphere VirtualMachineResource
 virtualMachineResource =
@@ -1213,67 +1169,67 @@ limitation of virtual machine snapshots, see
 .
 -}
 data VirtualMachineSnapshotResource = VirtualMachineSnapshotResource {
-      _consolidate          :: !(TF.Argument Text)
+      _consolidate          :: !(TF.Argument "consolidate" Text)
     {- ^ (Optional) If set to @true@ , the delta disks involved in this snapshot will be consolidated into the parent when this resource is destroyed. -}
-    , _description          :: !(TF.Argument Text)
+    , _description          :: !(TF.Argument "description" Text)
     {- ^ (Required) A description for the snapshot. -}
-    , _memory               :: !(TF.Argument Text)
+    , _memory               :: !(TF.Argument "memory" Text)
     {- ^ (Required) If set to @true@ , a dump of the internal state of the virtual machine is included in the snapshot. -}
-    , _quiesce              :: !(TF.Argument Text)
+    , _quiesce              :: !(TF.Argument "quiesce" Text)
     {- ^ (Required) If set to @true@ , and the virtual machine is powered on when the snapshot is taken, VMware Tools is used to quiesce the file system in the virtual machine. -}
-    , _remove_children      :: !(TF.Argument Text)
+    , _remove_children      :: !(TF.Argument "remove_children" Text)
     {- ^ (Optional) If set to @true@ , the entire snapshot subtree is removed when this resource is destroyed. -}
-    , _snapshot_name        :: !(TF.Argument Text)
+    , _snapshot_name        :: !(TF.Argument "snapshot_name" Text)
     {- ^ (Required) The name of the snapshot. -}
-    , _virtual_machine_uuid :: !(TF.Argument Text)
+    , _virtual_machine_uuid :: !(TF.Argument "virtual_machine_uuid" Text)
     {- ^ (Required) The virtual machine UUID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VirtualMachineSnapshotResource where
     toHCL VirtualMachineSnapshotResource{..} = TF.block $ catMaybes
-        [ TF.assign "consolidate" <$> TF.argument _consolidate
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "memory" <$> TF.argument _memory
-        , TF.assign "quiesce" <$> TF.argument _quiesce
-        , TF.assign "remove_children" <$> TF.argument _remove_children
-        , TF.assign "snapshot_name" <$> TF.argument _snapshot_name
-        , TF.assign "virtual_machine_uuid" <$> TF.argument _virtual_machine_uuid
+        [ TF.argument _consolidate
+        , TF.argument _description
+        , TF.argument _memory
+        , TF.argument _quiesce
+        , TF.argument _remove_children
+        , TF.argument _snapshot_name
+        , TF.argument _virtual_machine_uuid
         ]
 
-instance HasConsolidate VirtualMachineSnapshotResource (TF.Argument Text) where
-    consolidate f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _consolidate = a } :: VirtualMachineSnapshotResource)
-             <$> f _consolidate
+instance HasConsolidate VirtualMachineSnapshotResource Text where
+    consolidate =
+        lens (_consolidate :: VirtualMachineSnapshotResource -> TF.Argument "consolidate" Text)
+             (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource)
 
-instance HasDescription VirtualMachineSnapshotResource (TF.Argument Text) where
-    description f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _description = a } :: VirtualMachineSnapshotResource)
-             <$> f _description
+instance HasDescription VirtualMachineSnapshotResource Text where
+    description =
+        lens (_description :: VirtualMachineSnapshotResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: VirtualMachineSnapshotResource)
 
-instance HasMemory VirtualMachineSnapshotResource (TF.Argument Text) where
-    memory f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _memory = a } :: VirtualMachineSnapshotResource)
-             <$> f _memory
+instance HasMemory VirtualMachineSnapshotResource Text where
+    memory =
+        lens (_memory :: VirtualMachineSnapshotResource -> TF.Argument "memory" Text)
+             (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource)
 
-instance HasQuiesce VirtualMachineSnapshotResource (TF.Argument Text) where
-    quiesce f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _quiesce = a } :: VirtualMachineSnapshotResource)
-             <$> f _quiesce
+instance HasQuiesce VirtualMachineSnapshotResource Text where
+    quiesce =
+        lens (_quiesce :: VirtualMachineSnapshotResource -> TF.Argument "quiesce" Text)
+             (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource)
 
-instance HasRemoveChildren VirtualMachineSnapshotResource (TF.Argument Text) where
-    removeChildren f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _remove_children = a } :: VirtualMachineSnapshotResource)
-             <$> f _remove_children
+instance HasRemoveChildren VirtualMachineSnapshotResource Text where
+    removeChildren =
+        lens (_remove_children :: VirtualMachineSnapshotResource -> TF.Argument "remove_children" Text)
+             (\s a -> s { _remove_children = a } :: VirtualMachineSnapshotResource)
 
-instance HasSnapshotName VirtualMachineSnapshotResource (TF.Argument Text) where
-    snapshotName f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource)
-             <$> f _snapshot_name
+instance HasSnapshotName VirtualMachineSnapshotResource Text where
+    snapshotName =
+        lens (_snapshot_name :: VirtualMachineSnapshotResource -> TF.Argument "snapshot_name" Text)
+             (\s a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource)
 
-instance HasVirtualMachineUuid VirtualMachineSnapshotResource (TF.Argument Text) where
-    virtualMachineUuid f s@VirtualMachineSnapshotResource{..} =
-        (\a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource)
-             <$> f _virtual_machine_uuid
+instance HasVirtualMachineUuid VirtualMachineSnapshotResource Text where
+    virtualMachineUuid =
+        lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource -> TF.Argument "virtual_machine_uuid" Text)
+             (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource)
 
 virtualMachineSnapshotResource :: TF.Resource TF.VSphere VirtualMachineSnapshotResource
 virtualMachineSnapshotResource =
@@ -1298,107 +1254,83 @@ iSCSI. Devices can be specified manually, or discovered using the
 </docs/providers/vsphere/d/vmfs_disks.html> data source.
 -}
 data VmfsDatastoreResource = VmfsDatastoreResource {
-      _disks                         :: !(TF.Argument Text)
+      _disks          :: !(TF.Argument "disks" Text)
     {- ^ (Required) The disks to use with the datastore. -}
-    , _folder                        :: !(TF.Argument Text)
+    , _folder         :: !(TF.Argument "folder" Text)
     {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . -}
-    , _host_system_id                :: !(TF.Argument Text)
+    , _host_system_id :: !(TF.Argument "host_system_id" Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the datastore up on. Note that this is not necessarily the only host that the datastore will be set up on - see <#auto-mounting-of-datastores-within-vcenter> for more info. Forces a new resource if changed. -}
-    , _name                          :: !(TF.Argument Text)
+    , _name           :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _tags                          :: !(TF.Argument Text)
+    , _tags           :: !(TF.Argument "tags" Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _computed_accessible           :: !(TF.Attribute Text)
-    {- ^ - The connectivity status of the datastore. If this is @false@ , some other computed attributes may be out of date. -}
-    , _computed_capacity             :: !(TF.Attribute Text)
-    {- ^ - Maximum capacity of the datastore, in megabytes. -}
-    , _computed_free_space           :: !(TF.Attribute Text)
-    {- ^ - Available space of this datastore, in megabytes. -}
-    , _computed_id                   :: !(TF.Attribute Text)
-    {- ^ - The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datastore. -}
-    , _computed_maintenance_mode     :: !(TF.Attribute Text)
-    {- ^ - The current maintenance mode state of the datastore. -}
-    , _computed_multiple_host_access :: !(TF.Attribute Text)
-    {- ^ - If @true@ , more than one host in the datacenter has been configured with access to the datastore. -}
-    , _computed_uncommitted_space    :: !(TF.Attribute Text)
-    {- ^ - Total additional storage space, in megabytes, potentially used by all virtual machines on this datastore. -}
-    , _computed_url                  :: !(TF.Attribute Text)
-    {- ^ - The unique locator for the datastore. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL VmfsDatastoreResource where
     toHCL VmfsDatastoreResource{..} = TF.block $ catMaybes
-        [ TF.assign "disks" <$> TF.argument _disks
-        , TF.assign "folder" <$> TF.argument _folder
-        , TF.assign "host_system_id" <$> TF.argument _host_system_id
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _disks
+        , TF.argument _folder
+        , TF.argument _host_system_id
+        , TF.argument _name
+        , TF.argument _tags
         ]
 
-instance HasDisks VmfsDatastoreResource (TF.Argument Text) where
-    disks f s@VmfsDatastoreResource{..} =
-        (\a -> s { _disks = a } :: VmfsDatastoreResource)
-             <$> f _disks
+instance HasDisks VmfsDatastoreResource Text where
+    disks =
+        lens (_disks :: VmfsDatastoreResource -> TF.Argument "disks" Text)
+             (\s a -> s { _disks = a } :: VmfsDatastoreResource)
 
-instance HasFolder VmfsDatastoreResource (TF.Argument Text) where
-    folder f s@VmfsDatastoreResource{..} =
-        (\a -> s { _folder = a } :: VmfsDatastoreResource)
-             <$> f _folder
+instance HasFolder VmfsDatastoreResource Text where
+    folder =
+        lens (_folder :: VmfsDatastoreResource -> TF.Argument "folder" Text)
+             (\s a -> s { _folder = a } :: VmfsDatastoreResource)
 
-instance HasHostSystemId VmfsDatastoreResource (TF.Argument Text) where
-    hostSystemId f s@VmfsDatastoreResource{..} =
-        (\a -> s { _host_system_id = a } :: VmfsDatastoreResource)
-             <$> f _host_system_id
+instance HasHostSystemId VmfsDatastoreResource Text where
+    hostSystemId =
+        lens (_host_system_id :: VmfsDatastoreResource -> TF.Argument "host_system_id" Text)
+             (\s a -> s { _host_system_id = a } :: VmfsDatastoreResource)
 
-instance HasName VmfsDatastoreResource (TF.Argument Text) where
-    name f s@VmfsDatastoreResource{..} =
-        (\a -> s { _name = a } :: VmfsDatastoreResource)
-             <$> f _name
+instance HasName VmfsDatastoreResource Text where
+    name =
+        lens (_name :: VmfsDatastoreResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: VmfsDatastoreResource)
 
-instance HasTags VmfsDatastoreResource (TF.Argument Text) where
-    tags f s@VmfsDatastoreResource{..} =
-        (\a -> s { _tags = a } :: VmfsDatastoreResource)
-             <$> f _tags
+instance HasTags VmfsDatastoreResource Text where
+    tags =
+        lens (_tags :: VmfsDatastoreResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: VmfsDatastoreResource)
 
-instance HasComputedAccessible VmfsDatastoreResource (TF.Attribute Text) where
-    computedAccessible f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_accessible = a } :: VmfsDatastoreResource)
-             <$> f _computed_accessible
+instance HasComputedAccessible VmfsDatastoreResource Text where
+    computedAccessible =
+        to (\_  -> TF.Compute "accessible")
 
-instance HasComputedCapacity VmfsDatastoreResource (TF.Attribute Text) where
-    computedCapacity f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_capacity = a } :: VmfsDatastoreResource)
-             <$> f _computed_capacity
+instance HasComputedCapacity VmfsDatastoreResource Text where
+    computedCapacity =
+        to (\_  -> TF.Compute "capacity")
 
-instance HasComputedFreeSpace VmfsDatastoreResource (TF.Attribute Text) where
-    computedFreeSpace f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_free_space = a } :: VmfsDatastoreResource)
-             <$> f _computed_free_space
+instance HasComputedFreeSpace VmfsDatastoreResource Text where
+    computedFreeSpace =
+        to (\_  -> TF.Compute "free_space")
 
-instance HasComputedId VmfsDatastoreResource (TF.Attribute Text) where
-    computedId f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_id = a } :: VmfsDatastoreResource)
-             <$> f _computed_id
+instance HasComputedId VmfsDatastoreResource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
-instance HasComputedMaintenanceMode VmfsDatastoreResource (TF.Attribute Text) where
-    computedMaintenanceMode f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_maintenance_mode = a } :: VmfsDatastoreResource)
-             <$> f _computed_maintenance_mode
+instance HasComputedMaintenanceMode VmfsDatastoreResource Text where
+    computedMaintenanceMode =
+        to (\_  -> TF.Compute "maintenance_mode")
 
-instance HasComputedMultipleHostAccess VmfsDatastoreResource (TF.Attribute Text) where
-    computedMultipleHostAccess f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_multiple_host_access = a } :: VmfsDatastoreResource)
-             <$> f _computed_multiple_host_access
+instance HasComputedMultipleHostAccess VmfsDatastoreResource Text where
+    computedMultipleHostAccess =
+        to (\_  -> TF.Compute "multiple_host_access")
 
-instance HasComputedUncommittedSpace VmfsDatastoreResource (TF.Attribute Text) where
-    computedUncommittedSpace f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_uncommitted_space = a } :: VmfsDatastoreResource)
-             <$> f _computed_uncommitted_space
+instance HasComputedUncommittedSpace VmfsDatastoreResource Text where
+    computedUncommittedSpace =
+        to (\_  -> TF.Compute "uncommitted_space")
 
-instance HasComputedUrl VmfsDatastoreResource (TF.Attribute Text) where
-    computedUrl f s@VmfsDatastoreResource{..} =
-        (\a -> s { _computed_url = a } :: VmfsDatastoreResource)
-             <$> f _computed_url
+instance HasComputedUrl VmfsDatastoreResource Text where
+    computedUrl =
+        to (\_  -> TF.Compute "url")
 
 vmfsDatastoreResource :: TF.Resource TF.VSphere VmfsDatastoreResource
 vmfsDatastoreResource =
@@ -1409,402 +1341,394 @@ vmfsDatastoreResource =
             , _host_system_id = TF.Nil
             , _name = TF.Nil
             , _tags = TF.Nil
-            , _computed_accessible = TF.Compute "accessible"
-            , _computed_capacity = TF.Compute "capacity"
-            , _computed_free_space = TF.Compute "free_space"
-            , _computed_id = TF.Compute "id"
-            , _computed_maintenance_mode = TF.Compute "maintenance_mode"
-            , _computed_multiple_host_access = TF.Compute "multiple_host_access"
-            , _computed_uncommitted_space = TF.Compute "uncommitted_space"
-            , _computed_url = TF.Compute "url"
             }
 
 class HasAccessMode s a | s -> a where
-    accessMode :: Functor f => (a -> f a) -> s -> f s
+    accessMode :: Lens' s (TF.Argument "access_mode" a)
 
 instance HasAccessMode s a => HasAccessMode (TF.Resource p s) a where
     accessMode = TF.configuration . accessMode
 
 class HasAdapterType s a | s -> a where
-    adapterType :: Functor f => (a -> f a) -> s -> f s
+    adapterType :: Lens' s (TF.Argument "adapter_type" a)
 
 instance HasAdapterType s a => HasAdapterType (TF.Resource p s) a where
     adapterType = TF.configuration . adapterType
 
 class HasAssociableTypes s a | s -> a where
-    associableTypes :: Functor f => (a -> f a) -> s -> f s
+    associableTypes :: Lens' s (TF.Argument "associable_types" a)
 
 instance HasAssociableTypes s a => HasAssociableTypes (TF.Resource p s) a where
     associableTypes = TF.configuration . associableTypes
 
 class HasAutoExpand s a | s -> a where
-    autoExpand :: Functor f => (a -> f a) -> s -> f s
+    autoExpand :: Lens' s (TF.Argument "auto_expand" a)
 
 instance HasAutoExpand s a => HasAutoExpand (TF.Resource p s) a where
     autoExpand = TF.configuration . autoExpand
 
 class HasCardinality s a | s -> a where
-    cardinality :: Functor f => (a -> f a) -> s -> f s
+    cardinality :: Lens' s (TF.Argument "cardinality" a)
 
 instance HasCardinality s a => HasCardinality (TF.Resource p s) a where
     cardinality = TF.configuration . cardinality
 
 class HasCategoryId s a | s -> a where
-    categoryId :: Functor f => (a -> f a) -> s -> f s
+    categoryId :: Lens' s (TF.Argument "category_id" a)
 
 instance HasCategoryId s a => HasCategoryId (TF.Resource p s) a where
     categoryId = TF.configuration . categoryId
 
-class HasComputedAccessible s a | s -> a where
-    computedAccessible :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedAccessible s a => HasComputedAccessible (TF.Resource p s) a where
-    computedAccessible = TF.configuration . computedAccessible
-
-class HasComputedCapacity s a | s -> a where
-    computedCapacity :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedCapacity s a => HasComputedCapacity (TF.Resource p s) a where
-    computedCapacity = TF.configuration . computedCapacity
-
-class HasComputedEditionKey s a | s -> a where
-    computedEditionKey :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedEditionKey s a => HasComputedEditionKey (TF.Resource p s) a where
-    computedEditionKey = TF.configuration . computedEditionKey
-
-class HasComputedFreeSpace s a | s -> a where
-    computedFreeSpace :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedFreeSpace s a => HasComputedFreeSpace (TF.Resource p s) a where
-    computedFreeSpace = TF.configuration . computedFreeSpace
-
-class HasComputedId s a | s -> a where
-    computedId :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedMaintenanceMode s a | s -> a where
-    computedMaintenanceMode :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedMaintenanceMode s a => HasComputedMaintenanceMode (TF.Resource p s) a where
-    computedMaintenanceMode = TF.configuration . computedMaintenanceMode
-
-class HasComputedMultipleHostAccess s a | s -> a where
-    computedMultipleHostAccess :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedMultipleHostAccess s a => HasComputedMultipleHostAccess (TF.Resource p s) a where
-    computedMultipleHostAccess = TF.configuration . computedMultipleHostAccess
-
-class HasComputedName s a | s -> a where
-    computedName :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedProtocolEndpoint s a | s -> a where
-    computedProtocolEndpoint :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedProtocolEndpoint s a => HasComputedProtocolEndpoint (TF.Resource p s) a where
-    computedProtocolEndpoint = TF.configuration . computedProtocolEndpoint
-
-class HasComputedTotal s a | s -> a where
-    computedTotal :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedTotal s a => HasComputedTotal (TF.Resource p s) a where
-    computedTotal = TF.configuration . computedTotal
-
-class HasComputedUncommittedSpace s a | s -> a where
-    computedUncommittedSpace :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedUncommittedSpace s a => HasComputedUncommittedSpace (TF.Resource p s) a where
-    computedUncommittedSpace = TF.configuration . computedUncommittedSpace
-
-class HasComputedUrl s a | s -> a where
-    computedUrl :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedUrl s a => HasComputedUrl (TF.Resource p s) a where
-    computedUrl = TF.configuration . computedUrl
-
-class HasComputedUsed s a | s -> a where
-    computedUsed :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedUsed s a => HasComputedUsed (TF.Resource p s) a where
-    computedUsed = TF.configuration . computedUsed
-
 class HasConsolidate s a | s -> a where
-    consolidate :: Functor f => (a -> f a) -> s -> f s
+    consolidate :: Lens' s (TF.Argument "consolidate" a)
 
 instance HasConsolidate s a => HasConsolidate (TF.Resource p s) a where
     consolidate = TF.configuration . consolidate
 
 class HasContactDetail s a | s -> a where
-    contactDetail :: Functor f => (a -> f a) -> s -> f s
+    contactDetail :: Lens' s (TF.Argument "contact_detail" a)
 
 instance HasContactDetail s a => HasContactDetail (TF.Resource p s) a where
     contactDetail = TF.configuration . contactDetail
 
 class HasContactName s a | s -> a where
-    contactName :: Functor f => (a -> f a) -> s -> f s
+    contactName :: Lens' s (TF.Argument "contact_name" a)
 
 instance HasContactName s a => HasContactName (TF.Resource p s) a where
     contactName = TF.configuration . contactName
 
 class HasCreateDirectories s a | s -> a where
-    createDirectories :: Functor f => (a -> f a) -> s -> f s
+    createDirectories :: Lens' s (TF.Argument "create_directories" a)
 
 instance HasCreateDirectories s a => HasCreateDirectories (TF.Resource p s) a where
     createDirectories = TF.configuration . createDirectories
 
 class HasDatacenter s a | s -> a where
-    datacenter :: Functor f => (a -> f a) -> s -> f s
+    datacenter :: Lens' s (TF.Argument "datacenter" a)
 
 instance HasDatacenter s a => HasDatacenter (TF.Resource p s) a where
     datacenter = TF.configuration . datacenter
 
 class HasDatacenterId s a | s -> a where
-    datacenterId :: Functor f => (a -> f a) -> s -> f s
+    datacenterId :: Lens' s (TF.Argument "datacenter_id" a)
 
 instance HasDatacenterId s a => HasDatacenterId (TF.Resource p s) a where
     datacenterId = TF.configuration . datacenterId
 
 class HasDatastore s a | s -> a where
-    datastore :: Functor f => (a -> f a) -> s -> f s
+    datastore :: Lens' s (TF.Argument "datastore" a)
 
 instance HasDatastore s a => HasDatastore (TF.Resource p s) a where
     datastore = TF.configuration . datastore
 
 class HasDescription s a | s -> a where
-    description :: Functor f => (a -> f a) -> s -> f s
+    description :: Lens' s (TF.Argument "description" a)
 
 instance HasDescription s a => HasDescription (TF.Resource p s) a where
     description = TF.configuration . description
 
 class HasDestinationFile s a | s -> a where
-    destinationFile :: Functor f => (a -> f a) -> s -> f s
+    destinationFile :: Lens' s (TF.Argument "destination_file" a)
 
 instance HasDestinationFile s a => HasDestinationFile (TF.Resource p s) a where
     destinationFile = TF.configuration . destinationFile
 
 class HasDisks s a | s -> a where
-    disks :: Functor f => (a -> f a) -> s -> f s
+    disks :: Lens' s (TF.Argument "disks" a)
 
 instance HasDisks s a => HasDisks (TF.Resource p s) a where
     disks = TF.configuration . disks
 
 class HasDistributedVirtualSwitchUuid s a | s -> a where
-    distributedVirtualSwitchUuid :: Functor f => (a -> f a) -> s -> f s
+    distributedVirtualSwitchUuid :: Lens' s (TF.Argument "distributed_virtual_switch_uuid" a)
 
 instance HasDistributedVirtualSwitchUuid s a => HasDistributedVirtualSwitchUuid (TF.Resource p s) a where
     distributedVirtualSwitchUuid = TF.configuration . distributedVirtualSwitchUuid
 
 class HasFolder s a | s -> a where
-    folder :: Functor f => (a -> f a) -> s -> f s
+    folder :: Lens' s (TF.Argument "folder" a)
 
 instance HasFolder s a => HasFolder (TF.Resource p s) a where
     folder = TF.configuration . folder
 
 class HasHostSystemId s a | s -> a where
-    hostSystemId :: Functor f => (a -> f a) -> s -> f s
+    hostSystemId :: Lens' s (TF.Argument "host_system_id" a)
 
 instance HasHostSystemId s a => HasHostSystemId (TF.Resource p s) a where
     hostSystemId = TF.configuration . hostSystemId
 
 class HasHostSystemIds s a | s -> a where
-    hostSystemIds :: Functor f => (a -> f a) -> s -> f s
+    hostSystemIds :: Lens' s (TF.Argument "host_system_ids" a)
 
 instance HasHostSystemIds s a => HasHostSystemIds (TF.Resource p s) a where
     hostSystemIds = TF.configuration . hostSystemIds
 
 class HasIpv4Address s a | s -> a where
-    ipv4Address :: Functor f => (a -> f a) -> s -> f s
+    ipv4Address :: Lens' s (TF.Argument "ipv4_address" a)
 
 instance HasIpv4Address s a => HasIpv4Address (TF.Resource p s) a where
     ipv4Address = TF.configuration . ipv4Address
 
 class HasLabels s a | s -> a where
-    labels :: Functor f => (a -> f a) -> s -> f s
+    labels :: Lens' s (TF.Argument "labels" a)
 
 instance HasLabels s a => HasLabels (TF.Resource p s) a where
     labels = TF.configuration . labels
 
 class HasLacpApiVersion s a | s -> a where
-    lacpApiVersion :: Functor f => (a -> f a) -> s -> f s
+    lacpApiVersion :: Lens' s (TF.Argument "lacp_api_version" a)
 
 instance HasLacpApiVersion s a => HasLacpApiVersion (TF.Resource p s) a where
     lacpApiVersion = TF.configuration . lacpApiVersion
 
 class HasLicenseKey s a | s -> a where
-    licenseKey :: Functor f => (a -> f a) -> s -> f s
+    licenseKey :: Lens' s (TF.Argument "license_key" a)
 
 instance HasLicenseKey s a => HasLicenseKey (TF.Resource p s) a where
     licenseKey = TF.configuration . licenseKey
 
 class HasLinkDiscoveryOperation s a | s -> a where
-    linkDiscoveryOperation :: Functor f => (a -> f a) -> s -> f s
+    linkDiscoveryOperation :: Lens' s (TF.Argument "link_discovery_operation" a)
 
 instance HasLinkDiscoveryOperation s a => HasLinkDiscoveryOperation (TF.Resource p s) a where
     linkDiscoveryOperation = TF.configuration . linkDiscoveryOperation
 
 class HasLinkDiscoveryProtocol s a | s -> a where
-    linkDiscoveryProtocol :: Functor f => (a -> f a) -> s -> f s
+    linkDiscoveryProtocol :: Lens' s (TF.Argument "link_discovery_protocol" a)
 
 instance HasLinkDiscoveryProtocol s a => HasLinkDiscoveryProtocol (TF.Resource p s) a where
     linkDiscoveryProtocol = TF.configuration . linkDiscoveryProtocol
 
 class HasManagedObjectType s a | s -> a where
-    managedObjectType :: Functor f => (a -> f a) -> s -> f s
+    managedObjectType :: Lens' s (TF.Argument "managed_object_type" a)
 
 instance HasManagedObjectType s a => HasManagedObjectType (TF.Resource p s) a where
     managedObjectType = TF.configuration . managedObjectType
 
 class HasMaxMtu s a | s -> a where
-    maxMtu :: Functor f => (a -> f a) -> s -> f s
+    maxMtu :: Lens' s (TF.Argument "max_mtu" a)
 
 instance HasMaxMtu s a => HasMaxMtu (TF.Resource p s) a where
     maxMtu = TF.configuration . maxMtu
 
 class HasMemory s a | s -> a where
-    memory :: Functor f => (a -> f a) -> s -> f s
+    memory :: Lens' s (TF.Argument "memory" a)
 
 instance HasMemory s a => HasMemory (TF.Resource p s) a where
     memory = TF.configuration . memory
 
 class HasMtu s a | s -> a where
-    mtu :: Functor f => (a -> f a) -> s -> f s
+    mtu :: Lens' s (TF.Argument "mtu" a)
 
 instance HasMtu s a => HasMtu (TF.Resource p s) a where
     mtu = TF.configuration . mtu
 
 class HasMulticastFilteringMode s a | s -> a where
-    multicastFilteringMode :: Functor f => (a -> f a) -> s -> f s
+    multicastFilteringMode :: Lens' s (TF.Argument "multicast_filtering_mode" a)
 
 instance HasMulticastFilteringMode s a => HasMulticastFilteringMode (TF.Resource p s) a where
     multicastFilteringMode = TF.configuration . multicastFilteringMode
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name
 
 class HasNumberOfPorts s a | s -> a where
-    numberOfPorts :: Functor f => (a -> f a) -> s -> f s
+    numberOfPorts :: Lens' s (TF.Argument "number_of_ports" a)
 
 instance HasNumberOfPorts s a => HasNumberOfPorts (TF.Resource p s) a where
     numberOfPorts = TF.configuration . numberOfPorts
 
 class HasPath s a | s -> a where
-    path :: Functor f => (a -> f a) -> s -> f s
+    path :: Lens' s (TF.Argument "path" a)
 
 instance HasPath s a => HasPath (TF.Resource p s) a where
     path = TF.configuration . path
 
 class HasQuiesce s a | s -> a where
-    quiesce :: Functor f => (a -> f a) -> s -> f s
+    quiesce :: Lens' s (TF.Argument "quiesce" a)
 
 instance HasQuiesce s a => HasQuiesce (TF.Resource p s) a where
     quiesce = TF.configuration . quiesce
 
 class HasRemoteHosts s a | s -> a where
-    remoteHosts :: Functor f => (a -> f a) -> s -> f s
+    remoteHosts :: Lens' s (TF.Argument "remote_hosts" a)
 
 instance HasRemoteHosts s a => HasRemoteHosts (TF.Resource p s) a where
     remoteHosts = TF.configuration . remoteHosts
 
 class HasRemotePath s a | s -> a where
-    remotePath :: Functor f => (a -> f a) -> s -> f s
+    remotePath :: Lens' s (TF.Argument "remote_path" a)
 
 instance HasRemotePath s a => HasRemotePath (TF.Resource p s) a where
     remotePath = TF.configuration . remotePath
 
 class HasRemoveChildren s a | s -> a where
-    removeChildren :: Functor f => (a -> f a) -> s -> f s
+    removeChildren :: Lens' s (TF.Argument "remove_children" a)
 
 instance HasRemoveChildren s a => HasRemoveChildren (TF.Resource p s) a where
     removeChildren = TF.configuration . removeChildren
 
 class HasResourcePoolId s a | s -> a where
-    resourcePoolId :: Functor f => (a -> f a) -> s -> f s
+    resourcePoolId :: Lens' s (TF.Argument "resource_pool_id" a)
 
 instance HasResourcePoolId s a => HasResourcePoolId (TF.Resource p s) a where
     resourcePoolId = TF.configuration . resourcePoolId
 
 class HasSecurityType s a | s -> a where
-    securityType :: Functor f => (a -> f a) -> s -> f s
+    securityType :: Lens' s (TF.Argument "security_type" a)
 
 instance HasSecurityType s a => HasSecurityType (TF.Resource p s) a where
     securityType = TF.configuration . securityType
 
 class HasSize s a | s -> a where
-    size :: Functor f => (a -> f a) -> s -> f s
+    size :: Lens' s (TF.Argument "size" a)
 
 instance HasSize s a => HasSize (TF.Resource p s) a where
     size = TF.configuration . size
 
 class HasSnapshotName s a | s -> a where
-    snapshotName :: Functor f => (a -> f a) -> s -> f s
+    snapshotName :: Lens' s (TF.Argument "snapshot_name" a)
 
 instance HasSnapshotName s a => HasSnapshotName (TF.Resource p s) a where
     snapshotName = TF.configuration . snapshotName
 
 class HasSourceDatacenter s a | s -> a where
-    sourceDatacenter :: Functor f => (a -> f a) -> s -> f s
+    sourceDatacenter :: Lens' s (TF.Argument "source_datacenter" a)
 
 instance HasSourceDatacenter s a => HasSourceDatacenter (TF.Resource p s) a where
     sourceDatacenter = TF.configuration . sourceDatacenter
 
 class HasSourceDatastore s a | s -> a where
-    sourceDatastore :: Functor f => (a -> f a) -> s -> f s
+    sourceDatastore :: Lens' s (TF.Argument "source_datastore" a)
 
 instance HasSourceDatastore s a => HasSourceDatastore (TF.Resource p s) a where
     sourceDatastore = TF.configuration . sourceDatastore
 
 class HasSourceFile s a | s -> a where
-    sourceFile :: Functor f => (a -> f a) -> s -> f s
+    sourceFile :: Lens' s (TF.Argument "source_file" a)
 
 instance HasSourceFile s a => HasSourceFile (TF.Resource p s) a where
     sourceFile = TF.configuration . sourceFile
 
 class HasTags s a | s -> a where
-    tags :: Functor f => (a -> f a) -> s -> f s
+    tags :: Lens' s (TF.Argument "tags" a)
 
 instance HasTags s a => HasTags (TF.Resource p s) a where
     tags = TF.configuration . tags
 
 class HasType' s a | s -> a where
-    type' :: Functor f => (a -> f a) -> s -> f s
+    type' :: Lens' s (TF.Argument "type" a)
 
 instance HasType' s a => HasType' (TF.Resource p s) a where
     type' = TF.configuration . type'
 
 class HasVersion s a | s -> a where
-    version :: Functor f => (a -> f a) -> s -> f s
+    version :: Lens' s (TF.Argument "version" a)
 
 instance HasVersion s a => HasVersion (TF.Resource p s) a where
     version = TF.configuration . version
 
 class HasVirtualMachineUuid s a | s -> a where
-    virtualMachineUuid :: Functor f => (a -> f a) -> s -> f s
+    virtualMachineUuid :: Lens' s (TF.Argument "virtual_machine_uuid" a)
 
 instance HasVirtualMachineUuid s a => HasVirtualMachineUuid (TF.Resource p s) a where
     virtualMachineUuid = TF.configuration . virtualMachineUuid
 
 class HasVirtualSwitchName s a | s -> a where
-    virtualSwitchName :: Functor f => (a -> f a) -> s -> f s
+    virtualSwitchName :: Lens' s (TF.Argument "virtual_switch_name" a)
 
 instance HasVirtualSwitchName s a => HasVirtualSwitchName (TF.Resource p s) a where
     virtualSwitchName = TF.configuration . virtualSwitchName
 
 class HasVlanId s a | s -> a where
-    vlanId :: Functor f => (a -> f a) -> s -> f s
+    vlanId :: Lens' s (TF.Argument "vlan_id" a)
 
 instance HasVlanId s a => HasVlanId (TF.Resource p s) a where
     vlanId = TF.configuration . vlanId
 
 class HasVmdkPath s a | s -> a where
-    vmdkPath :: Functor f => (a -> f a) -> s -> f s
+    vmdkPath :: Lens' s (TF.Argument "vmdk_path" a)
 
 instance HasVmdkPath s a => HasVmdkPath (TF.Resource p s) a where
     vmdkPath = TF.configuration . vmdkPath
+
+class HasComputedAccessible s a | s -> a where
+    computedAccessible :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedAccessible s a => HasComputedAccessible (TF.Resource p s) a where
+    computedAccessible = TF.configuration . computedAccessible
+
+class HasComputedCapacity s a | s -> a where
+    computedCapacity :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedCapacity s a => HasComputedCapacity (TF.Resource p s) a where
+    computedCapacity = TF.configuration . computedCapacity
+
+class HasComputedEditionKey s a | s -> a where
+    computedEditionKey :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedEditionKey s a => HasComputedEditionKey (TF.Resource p s) a where
+    computedEditionKey = TF.configuration . computedEditionKey
+
+class HasComputedFreeSpace s a | s -> a where
+    computedFreeSpace :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedFreeSpace s a => HasComputedFreeSpace (TF.Resource p s) a where
+    computedFreeSpace = TF.configuration . computedFreeSpace
+
+class HasComputedId s a | s -> a where
+    computedId :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
+    computedId = TF.configuration . computedId
+
+class HasComputedMaintenanceMode s a | s -> a where
+    computedMaintenanceMode :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedMaintenanceMode s a => HasComputedMaintenanceMode (TF.Resource p s) a where
+    computedMaintenanceMode = TF.configuration . computedMaintenanceMode
+
+class HasComputedMultipleHostAccess s a | s -> a where
+    computedMultipleHostAccess :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedMultipleHostAccess s a => HasComputedMultipleHostAccess (TF.Resource p s) a where
+    computedMultipleHostAccess = TF.configuration . computedMultipleHostAccess
+
+class HasComputedName s a | s -> a where
+    computedName :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedProtocolEndpoint s a | s -> a where
+    computedProtocolEndpoint :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedProtocolEndpoint s a => HasComputedProtocolEndpoint (TF.Resource p s) a where
+    computedProtocolEndpoint = TF.configuration . computedProtocolEndpoint
+
+class HasComputedTotal s a | s -> a where
+    computedTotal :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedTotal s a => HasComputedTotal (TF.Resource p s) a where
+    computedTotal = TF.configuration . computedTotal
+
+class HasComputedUncommittedSpace s a | s -> a where
+    computedUncommittedSpace :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedUncommittedSpace s a => HasComputedUncommittedSpace (TF.Resource p s) a where
+    computedUncommittedSpace = TF.configuration . computedUncommittedSpace
+
+class HasComputedUrl s a | s -> a where
+    computedUrl :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedUrl s a => HasComputedUrl (TF.Resource p s) a where
+    computedUrl = TF.configuration . computedUrl
+
+class HasComputedUsed s a | s -> a where
+    computedUsed :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedUsed s a => HasComputedUsed (TF.Resource p s) a where
+    computedUsed = TF.configuration . computedUsed

@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -29,20 +32,25 @@ module Terrafomo.Kubernetes.DataSource
     , storageClassDataSource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasMetadata (..)
+
+    -- ** Computed Attributes
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
+
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Kubernetes.Provider as TF
 import qualified Terrafomo.Kubernetes.Types    as TF
 import qualified Terrafomo.Syntax.DataSource   as TF
 import qualified Terrafomo.Syntax.HCL          as TF
+import qualified Terrafomo.Syntax.IP           as TF
 import qualified Terrafomo.Syntax.Meta         as TF (configuration)
 import qualified Terrafomo.Syntax.Resource     as TF
 import qualified Terrafomo.Syntax.Variable     as TF
@@ -54,19 +62,19 @@ by which to access them - sometimes called a micro-service. This data source
 allows you to pull data about such service.
 -}
 data ServiceDataSource = ServiceDataSource {
-      _metadata :: !(TF.Argument Text)
+      _metadata :: !(TF.Argument "metadata" Text)
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ServiceDataSource where
     toHCL ServiceDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "metadata" <$> TF.argument _metadata
+        [ TF.argument _metadata
         ]
 
-instance HasMetadata ServiceDataSource (TF.Argument Text) where
-    metadata f s@ServiceDataSource{..} =
-        (\a -> s { _metadata = a } :: ServiceDataSource)
-             <$> f _metadata
+instance HasMetadata ServiceDataSource Text where
+    metadata =
+        lens (_metadata :: ServiceDataSource -> TF.Argument "metadata" Text)
+             (\s a -> s { _metadata = a } :: ServiceDataSource)
 
 serviceDataSource :: TF.DataSource TF.Kubernetes ServiceDataSource
 serviceDataSource =
@@ -83,19 +91,19 @@ Read more at
 http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kubernetes.html
 -}
 data StorageClassDataSource = StorageClassDataSource {
-      _metadata :: !(TF.Argument Text)
+      _metadata :: !(TF.Argument "metadata" Text)
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL StorageClassDataSource where
     toHCL StorageClassDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "metadata" <$> TF.argument _metadata
+        [ TF.argument _metadata
         ]
 
-instance HasMetadata StorageClassDataSource (TF.Argument Text) where
-    metadata f s@StorageClassDataSource{..} =
-        (\a -> s { _metadata = a } :: StorageClassDataSource)
-             <$> f _metadata
+instance HasMetadata StorageClassDataSource Text where
+    metadata =
+        lens (_metadata :: StorageClassDataSource -> TF.Argument "metadata" Text)
+             (\s a -> s { _metadata = a } :: StorageClassDataSource)
 
 storageClassDataSource :: TF.DataSource TF.Kubernetes StorageClassDataSource
 storageClassDataSource =
@@ -105,7 +113,7 @@ storageClassDataSource =
             }
 
 class HasMetadata s a | s -> a where
-    metadata :: Functor f => (a -> f a) -> s -> f s
+    metadata :: Lens' s (TF.Argument "metadata" a)
 
 instance HasMetadata s a => HasMetadata (TF.DataSource p s) a where
     metadata = TF.configuration . metadata

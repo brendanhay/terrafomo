@@ -39,20 +39,16 @@ module Terrafomo.Monad
 
     -- * References
     , Reference
-    , dependency
+    , referenceKey
+
     , datasource
     , resource
-    , output
-
-    -- * Count
-    , count
+--    , output
 
     -- * Arguments and Attributes
-    , attribute
     , constant
     , nil
-    , true
-    , false
+    , attribute
     ) where
 
 import Control.Applicative (Alternative (..))
@@ -69,7 +65,10 @@ import Data.Proxy            (Proxy (..))
 import Data.Set              (Set)
 import Data.Typeable         (Typeable)
 
+import GHC.TypeLits (KnownSymbol)
+
 import Terrafomo.Syntax.DataSource (DataSource (..))
+import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource   (Resource (..))
@@ -404,39 +403,32 @@ instance (MonadTerraform m, Monoid w) => MonadTerraform (Lazy.RWST   r w s m)
 
 -- Syntax
 
--- | Example of replacing terraform's count attribute.
---
--- Uses a specialized type signature for the most common usecase.
-count
-    :: Applicative f
-    => [Int]
-    -> (Int -> f (Reference p s))
-    -> f [Reference p s]
-count = Traverse.for
+-- | Supply a constant Haskell value as an argument. Equivalent to 'Just'.
+constant :: a -> Argument n a
+constant = Constant
+
+-- | Omit an argument. Equivalent to 'Nothing'.
+nil :: Argument n a
+nil = Nil
 
 -- | Refer to a reference's attribute for which the value will be computed
 -- during @terraform apply@.
 attribute
     :: Reference p a
     -> Lens.SimpleGetter a (Attribute b)
-    -> Argument b
+    -> Argument n b
 attribute (Reference k x) l = Attribute k (x Lens.^. l)
 
--- | Supply a constant Haskell value as an argument. Equivalent to 'Just'.
-constant :: a -> Argument a
-constant = Constant
-
--- | Omit an argument. Equivalent to 'Nothing'.
-nil :: Argument a
-nil = Nil
-
--- | A convenience alias for @constant True@.
-true :: Argument Bool
-true = constant True
-
--- | A convenience alias for @constant False@.
-false :: Argument Bool
-false = constant True
+-- -- | Refer to another resource/datasource's argument.
+-- argument
+--     :: Reference p a
+--     -> Lens.SimpleGetter a (Argument n' b)
+--     -> Argument n b
+-- argument (Reference _ x) l =
+--     case x Lens.^. l of
+--         Attribute k a -> Attribute k a
+--         Constant    a -> Constant    a
+--         Nil           -> Nil
 
 -- Providers
 
@@ -486,8 +478,11 @@ insertProvider mp =
 data Reference p a = Reference !Key !a
     deriving (Show)
 
-dependency :: Reference p a -> Set Key
-dependency (Reference key _) = Set.singleton key
+referenceKey :: Reference p a -> Key
+referenceKey (Reference k _) = k
+
+referenceValue :: Reference p a -> a
+referenceValue (Reference _ x) = x
 
 datasource
     :: ( MonadTerraform m
@@ -501,9 +496,7 @@ datasource name x = do
     alias <- insertProvider (_dataProvider x)
 
     let key   = Name.Key (_dataType x) name
-        value = x & Meta.provider Lens..~ alias
-                  & second ((key,) . HCL.toHCL)
-                  & HCL.toHCL
+        value = HCL.toHCL (key, Lens.set Meta.provider alias x)
 
     ds <- datasources <$> get
 
@@ -525,9 +518,7 @@ resource name x = do
     alias <- insertProvider (_resourceProvider x)
 
     let key   = Name.Key (_resourceType x) name
-        value = x & Meta.provider Lens..~ alias
-                  & second ((key,) . HCL.toHCL)
-                  & HCL.toHCL
+        value = HCL.toHCL (key, Lens.set Meta.provider alias x)
 
     rs <- resources <$> get
 
@@ -540,22 +531,22 @@ resource name x = do
 -- FIXME: I feel like output variables are not even needed + possibly even
 -- an anti-pattern.
 --
--- | Emit an output variable.
-output
-    :: ( MonadTerraform m
-       , HCL.ToHCL a
-       )
-    => Name
-    -- ^ The name of the output variable
-    -> Argument a
-    -- ^ The value to output.
-    -> m ()
-output name arg =
-    case HCL.toHCL . Output name <$> HCL.argument arg of
-        Nothing    -> pure ()
-        Just value -> do
-            os <- outputs <$> get
+-- -- | Emit an output variable.
+-- output
+--     :: ( MonadTerraform m
+--        , KnownSymbol n
+--        , HCL.ToHCL a
+--        )
+--     => Name
+--     -> a
+--     -- ^ The value to output.
+--     -> m ()
+-- output name arg =
+--     case HCL.toHCL . Output name <$> HCL. arg of
+--         Nothing    -> pure ()
+--         Just value -> do
+--             os <- outputs <$> get
 
-            case VMap.insert name (HCL.toHCL value) os of
-                Nothing -> throw (NonUniqueOutput name value)
-                Just m  -> modify' (\w -> w { outputs = m })
+--             case VMap.insert name value os of
+--                 Nothing -> throw (NonUniqueOutput name value)
+--                 Just m  -> modify' (\w -> w { outputs = m })

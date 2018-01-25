@@ -1,10 +1,18 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE LambdaCase             #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
 
 module Terrafomo.Syntax.Meta
     ( HasMeta      (..)
-    , Change       (..)
-    , Lifecycle    (..)
+    , Dependency   (..)
+
+    , Changes
+    , getChanges
+    , wildcardChange
+    , argumentChange
+
     , HasLifecycle (..)
+    , Lifecycle    (..)
     )where
 
 import Data.Function  (on)
@@ -12,9 +20,15 @@ import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 import Data.String    (IsString (fromString))
 
+import GHC.TypeLits (KnownSymbol)
+
 import Lens.Micro (ASetter', Lens, Lens', lens)
 
 import Terrafomo.Syntax.Name
+import Terrafomo.Syntax.Variable (Argument, argumentName)
+
+import qualified Data.Set   as Set
+import qualified Lens.Micro as Lens
 
 -- Meta Parameters (shared between Resource + DataSources)
 
@@ -25,11 +39,16 @@ class HasMeta b where
 
     -- | The underlying type/data config representing the specific resource or
     -- datasource configuration.
-    configuration :: Lens (b p a) (b p a') a a'
+    configuration :: Lens' (b p a) a
 
     -- | Explicit dependencies that this resource or datasource has. These
     -- dependencies will be created _before_.
-    dependsOn :: Lens' (b p a) (Set Key)
+    dependsOn :: Lens' (b p a) (Set Dependency)
+
+-- Dependencies
+
+newtype Dependency = Dependency Key
+   deriving (Show, Eq, Ord)
 
 -- Attribute Changes
 
@@ -39,15 +58,32 @@ class HasMeta b where
 -- also use a single entry with a wildcard (e.g. "*") which will match all
 -- attribute names. Using a partial string together with a wildcard
 -- (e.g. "rout*") is not supported.
-data Change
-    = Match !Name
-    | Wildcard -- '*'
+data Changes a
+    = Wildcard -- '*'
+    | Match !(Set Name)
       deriving (Show, Eq, Ord)
 
-instance IsString Change where
-    fromString = \case
-        "*" -> Wildcard
-        n   -> Match (fromString n)
+instance Semigroup (Changes a) where
+    (<>) a b =
+        case (a, b) of
+            (Wildcard, _)        -> Wildcard
+            (_,        Wildcard) -> Wildcard
+            (Match xs, Match ys) -> Match (xs <> ys)
+
+instance Monoid (Changes a) where
+    mempty  = Match mempty
+    mappend = (<>)
+
+getChanges :: Changes a -> Maybe (Set Name)
+getChanges = \case
+    Wildcard -> Nothing
+    Match xs -> Just xs
+
+wildcardChange :: Changes a -> Changes a
+wildcardChange = const Wildcard
+
+argumentChange :: KnownSymbol n => Argument n a -> Changes a -> Changes a
+argumentChange x xs = Match (Set.singleton (argumentName x)) <> xs
 
 -- Lifecycle
 
@@ -55,25 +91,25 @@ instance IsString Change where
 -- machines. Understanding this lifecycle can help better understand how Terraform
 -- generates an execution plan, how it safely executes that plan, and what the
 -- resource provider is doing throughout all of this.
-data Lifecycle = Lifecycle
+data Lifecycle a = Lifecycle
     { _preventDestroy      :: !Bool
     , _createBeforeDestroy :: !Bool
-    , _ignoreChanges       :: !(Set Change)
+    , _ignoreChanges       :: !(Changes a)
     } deriving (Show, Eq)
 
-instance Semigroup Lifecycle where
+instance Semigroup (Lifecycle a) where
     (<>) a b = Lifecycle
         { _preventDestroy      = on (||) _preventDestroy      a b
         , _createBeforeDestroy = on (||) _createBeforeDestroy a b
         , _ignoreChanges       = on (<>) _ignoreChanges       a b
         }
 
-instance Monoid Lifecycle where
+instance Monoid (Lifecycle a) where
     mempty  = Lifecycle False False mempty
     mappend = (<>)
 
-class HasLifecycle a where
-    lifecycle :: Lens' a Lifecycle
+class HasLifecycle a b | a -> b where
+    lifecycle :: Lens' a (Lifecycle b)
 
     -- | This flag provides extra protection against the destruction of a given
     -- resource. When this is set to true, any plan that includes a destroy of
@@ -105,8 +141,9 @@ class HasLifecycle a where
     -- attributes to be ignored through changes. As an example, this can be used to
     -- ignore dynamic changes to the resource from external resources. Other
     -- meta-parameters cannot be ignored.
-    ignoreChanges :: ASetter' a (Set Change)
+    ignoreChanges :: ASetter' a (Changes b)
     ignoreChanges =
         lifecycle .
             lens _ignoreChanges
                 (\s a -> s { _ignoreChanges = a })
+

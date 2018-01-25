@@ -20,6 +20,7 @@ module Terrafomo.NewRelic.Provider
     (
     -- * Provider Datatype
       NewRelic (..)
+    , emptyNewRelic
 
     -- * Lenses
     , apiKey
@@ -30,13 +31,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.NewRelic.Types  as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -48,7 +51,7 @@ developers to diagnose and fix application performance problems in real
 time. Use the navigation to the left to read about the available resources.
 -}
 data NewRelic = NewRelic {
-      _api_key :: !(TF.Argument Text)
+      _api_key :: !(TF.Argument "api_key" Text)
     {- ^ (Required) Your New Relic API key. Can also use @NEWRELIC_API_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -58,28 +61,17 @@ instance TF.ToHCL NewRelic where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy NewRelic))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "api_key" <$> TF.argument (_api_key x)
+            , TF.argument (_api_key x)
             ]
 
-instance Semigroup NewRelic where
-    (<>) a b = NewRelic {
-          _api_key = on (<>) _api_key a b
-        }
-
-instance Monoid NewRelic where
-    mappend = (<>)
-    mempty  = NewRelic {
-            _api_key = TF.Nil
-        }
+emptyNewRelic :: NewRelic
+emptyNewRelic = NewRelic {
+        _api_key = TF.Nil
+    }
 
 instance TF.IsProvider NewRelic where
     type ProviderName NewRelic = "newrelic"
 
-apiKey
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> NewRelic
-    -> f NewRelic
-apiKey f s =
-        (\a -> s { _api_key = a } :: NewRelic)
-             <$> f (_api_key s)
+apiKey :: Lens' NewRelic (TF.Argument "api_key" Text)
+apiKey =
+    lens _api_key (\s a -> s { _api_key = a })

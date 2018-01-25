@@ -20,6 +20,7 @@ module Terrafomo.UltraDNS.Provider
     (
     -- * Provider Datatype
       UltraDNS (..)
+    , emptyUltraDNS
 
     -- * Lenses
     , baseurl
@@ -32,12 +33,14 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -51,11 +54,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data UltraDNS = UltraDNS {
-      _baseurl  :: !(TF.Argument Text)
+      _baseurl  :: !(TF.Argument "baseurl" Text)
     {- ^ (Required) The base url for the UltraDNS REST API, but it can also be sourced from the @ULTRADNS_BASEURL@ environment variable. -}
-    , _password :: !(TF.Argument Text)
+    , _password :: !(TF.Argument "password" Text)
     {- ^ (Required) The password associated with the username. It must be provided, but it can also be sourced from the @ULTRADNS_PASSWORD@ environment variable. -}
-    , _username :: !(TF.Argument Text)
+    , _username :: !(TF.Argument "username" Text)
     {- ^ (Required) The UltraDNS username. It must be provided, but it can also be sourced from the @ULTRADNS_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -65,52 +68,29 @@ instance TF.ToHCL UltraDNS where
     toHCL x =
         TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy UltraDNS))]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
-            , TF.assign "baseurl" <$> TF.argument (_baseurl x)
-            , TF.assign "password" <$> TF.argument (_password x)
-            , TF.assign "username" <$> TF.argument (_username x)
+            , TF.argument (_baseurl x)
+            , TF.argument (_password x)
+            , TF.argument (_username x)
             ]
 
-instance Semigroup UltraDNS where
-    (<>) a b = UltraDNS {
-          _baseurl = on (<>) _baseurl a b
-        , _password = on (<>) _password a b
-        , _username = on (<>) _username a b
-        }
-
-instance Monoid UltraDNS where
-    mappend = (<>)
-    mempty  = UltraDNS {
-            _baseurl = TF.Nil
-          , _password = TF.Nil
-          , _username = TF.Nil
-        }
+emptyUltraDNS :: UltraDNS
+emptyUltraDNS = UltraDNS {
+        _baseurl = TF.Nil
+      , _password = TF.Nil
+      , _username = TF.Nil
+    }
 
 instance TF.IsProvider UltraDNS where
     type ProviderName UltraDNS = "ultradns"
 
-baseurl
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> UltraDNS
-    -> f UltraDNS
-baseurl f s =
-        (\a -> s { _baseurl = a } :: UltraDNS)
-             <$> f (_baseurl s)
+baseurl :: Lens' UltraDNS (TF.Argument "baseurl" Text)
+baseurl =
+    lens _baseurl (\s a -> s { _baseurl = a })
 
-password
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> UltraDNS
-    -> f UltraDNS
-password f s =
-        (\a -> s { _password = a } :: UltraDNS)
-             <$> f (_password s)
+password :: Lens' UltraDNS (TF.Argument "password" Text)
+password =
+    lens _password (\s a -> s { _password = a })
 
-username
-    :: Functor f
-    => ((TF.Argument Text) -> f (TF.Argument Text))
-    -> UltraDNS
-    -> f UltraDNS
-username f s =
-        (\a -> s { _username = a } :: UltraDNS)
-             <$> f (_username s)
+username :: Lens' UltraDNS (TF.Argument "username" Text)
+username =
+    lens _username (\s a -> s { _username = a })

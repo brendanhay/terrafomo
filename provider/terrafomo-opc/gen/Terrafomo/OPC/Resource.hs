@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -88,6 +91,9 @@ module Terrafomo.OPC.Resource
     , ComputeSshKeyResource (..)
     , computeSshKeyResource
 
+    , ComputeStorageVolumeAttachmentResource (..)
+    , computeStorageVolumeAttachmentResource
+
     , ComputeStorageVolumeResource (..)
     , computeStorageVolumeResource
 
@@ -104,6 +110,7 @@ module Terrafomo.OPC.Resource
     , storageObjectResource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasAccount (..)
     , HasAcl (..)
     , HasAction (..)
@@ -115,30 +122,6 @@ module Terrafomo.OPC.Resource
     , HasBootOrder (..)
     , HasBootable (..)
     , HasCollocated (..)
-    , HasComputedAccount (..)
-    , HasComputedAdminDistance (..)
-    , HasComputedDescription (..)
-    , HasComputedHypervisor (..)
-    , HasComputedIpAddressPrefix (..)
-    , HasComputedIpNetworkExchange (..)
-    , HasComputedMachineImage (..)
-    , HasComputedMachineImageName (..)
-    , HasComputedManaged (..)
-    , HasComputedName (..)
-    , HasComputedNextHopVnicSet (..)
-    , HasComputedPlatform (..)
-    , HasComputedProperty (..)
-    , HasComputedPublicNaptEnabled (..)
-    , HasComputedReadonly (..)
-    , HasComputedSize (..)
-    , HasComputedSnapshotId (..)
-    , HasComputedSnapshotTimestamp (..)
-    , HasComputedStartTimestamp (..)
-    , HasComputedStatus (..)
-    , HasComputedStatusDetail (..)
-    , HasComputedStatusTimestamp (..)
-    , HasComputedStoragePool (..)
-    , HasComputedUri (..)
     , HasContainer (..)
     , HasDefault' (..)
     , HasDescription (..)
@@ -158,6 +141,7 @@ module Terrafomo.OPC.Resource
     , HasIcmptype (..)
     , HasImageList (..)
     , HasImageListEntry (..)
+    , HasIndex (..)
     , HasInstance' (..)
     , HasInstanceAttributes (..)
     , HasIpAddressPool (..)
@@ -202,6 +186,7 @@ module Terrafomo.OPC.Resource
     , HasSshKeys (..)
     , HasStorage (..)
     , HasStorageType (..)
+    , HasStorageVolume (..)
     , HasTags (..)
     , HasVcable (..)
     , HasVersion (..)
@@ -209,18 +194,46 @@ module Terrafomo.OPC.Resource
     , HasVnic (..)
     , HasVolumeName (..)
     , HasWriteAcls (..)
+
+    -- ** Computed Attributes
+    , HasComputedAccount (..)
+    , HasComputedAdminDistance (..)
+    , HasComputedDescription (..)
+    , HasComputedHypervisor (..)
+    , HasComputedIpAddressPrefix (..)
+    , HasComputedIpNetworkExchange (..)
+    , HasComputedMachineImage (..)
+    , HasComputedMachineImageName (..)
+    , HasComputedManaged (..)
+    , HasComputedName (..)
+    , HasComputedNextHopVnicSet (..)
+    , HasComputedPlatform (..)
+    , HasComputedProperty (..)
+    , HasComputedPublicNaptEnabled (..)
+    , HasComputedReadonly (..)
+    , HasComputedSize (..)
+    , HasComputedSnapshotId (..)
+    , HasComputedSnapshotTimestamp (..)
+    , HasComputedStartTimestamp (..)
+    , HasComputedStatus (..)
+    , HasComputedStatusDetail (..)
+    , HasComputedStatusTimestamp (..)
+    , HasComputedStoragePool (..)
+    , HasComputedUri (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.OPC.Provider    as TF
 import qualified Terrafomo.OPC.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Meta     as TF (configuration)
 import qualified Terrafomo.Syntax.Resource as TF
 import qualified Terrafomo.Syntax.Resource as TF
@@ -232,43 +245,43 @@ The @opc_compute_acl@ resource creates and manages an ACL in an OPC identity
 domain.
 -}
 data ComputeAclResource = ComputeAclResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the ACL. -}
-    , _enabled     :: !(TF.Argument Text)
+    , _enabled     :: !(TF.Argument "enabled" Text)
     {- ^ (Optional) Enables or disables the ACL. Set to true by default. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the ACL. -}
-    , _tags        :: !(TF.Argument Text)
+    , _tags        :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the ACL. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeAclResource where
     toHCL ComputeAclResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "enabled" <$> TF.argument _enabled
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _description
+        , TF.argument _enabled
+        , TF.argument _name
+        , TF.argument _tags
         ]
 
-instance HasDescription ComputeAclResource (TF.Argument Text) where
-    description f s@ComputeAclResource{..} =
-        (\a -> s { _description = a } :: ComputeAclResource)
-             <$> f _description
+instance HasDescription ComputeAclResource Text where
+    description =
+        lens (_description :: ComputeAclResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeAclResource)
 
-instance HasEnabled ComputeAclResource (TF.Argument Text) where
-    enabled f s@ComputeAclResource{..} =
-        (\a -> s { _enabled = a } :: ComputeAclResource)
-             <$> f _enabled
+instance HasEnabled ComputeAclResource Text where
+    enabled =
+        lens (_enabled :: ComputeAclResource -> TF.Argument "enabled" Text)
+             (\s a -> s { _enabled = a } :: ComputeAclResource)
 
-instance HasName ComputeAclResource (TF.Argument Text) where
-    name f s@ComputeAclResource{..} =
-        (\a -> s { _name = a } :: ComputeAclResource)
-             <$> f _name
+instance HasName ComputeAclResource Text where
+    name =
+        lens (_name :: ComputeAclResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeAclResource)
 
-instance HasTags ComputeAclResource (TF.Argument Text) where
-    tags f s@ComputeAclResource{..} =
-        (\a -> s { _tags = a } :: ComputeAclResource)
-             <$> f _tags
+instance HasTags ComputeAclResource Text where
+    tags =
+        lens (_tags :: ComputeAclResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeAclResource)
 
 computeAclResource :: TF.Resource TF.OPC ComputeAclResource
 computeAclResource =
@@ -286,50 +299,47 @@ The @opc_compute_image_list_entry@ resource creates and manages an Image
 List Entry in an OPC identity domain.
 -}
 data ComputeImageListEntryResource = ComputeImageListEntryResource {
-      _attributes     :: !(TF.Argument Text)
+      _attributes     :: !(TF.Argument "attributes" Text)
     {- ^ (Optional) JSON String of optional data that will be passed to an instance of this machine image when it is launched. -}
-    , _machine_images :: !(TF.Argument Text)
+    , _machine_images :: !(TF.Argument "machine_images" Text)
     {- ^ (Required) An array of machine images. -}
-    , _name           :: !(TF.Argument Text)
+    , _name           :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the Image List. -}
-    , _version        :: !(TF.Argument Text)
+    , _version        :: !(TF.Argument "version" Text)
     {- ^ (Required) The unique version of the image list entry, as an integer. -}
-    , _computed_uri   :: !(TF.Attribute Text)
-    {- ^ - The Unique Resource Identifier for the Image List Entry. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeImageListEntryResource where
     toHCL ComputeImageListEntryResource{..} = TF.block $ catMaybes
-        [ TF.assign "attributes" <$> TF.argument _attributes
-        , TF.assign "machine_images" <$> TF.argument _machine_images
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "version" <$> TF.argument _version
+        [ TF.argument _attributes
+        , TF.argument _machine_images
+        , TF.argument _name
+        , TF.argument _version
         ]
 
-instance HasAttributes ComputeImageListEntryResource (TF.Argument Text) where
-    attributes f s@ComputeImageListEntryResource{..} =
-        (\a -> s { _attributes = a } :: ComputeImageListEntryResource)
-             <$> f _attributes
+instance HasAttributes ComputeImageListEntryResource Text where
+    attributes =
+        lens (_attributes :: ComputeImageListEntryResource -> TF.Argument "attributes" Text)
+             (\s a -> s { _attributes = a } :: ComputeImageListEntryResource)
 
-instance HasMachineImages ComputeImageListEntryResource (TF.Argument Text) where
-    machineImages f s@ComputeImageListEntryResource{..} =
-        (\a -> s { _machine_images = a } :: ComputeImageListEntryResource)
-             <$> f _machine_images
+instance HasMachineImages ComputeImageListEntryResource Text where
+    machineImages =
+        lens (_machine_images :: ComputeImageListEntryResource -> TF.Argument "machine_images" Text)
+             (\s a -> s { _machine_images = a } :: ComputeImageListEntryResource)
 
-instance HasName ComputeImageListEntryResource (TF.Argument Text) where
-    name f s@ComputeImageListEntryResource{..} =
-        (\a -> s { _name = a } :: ComputeImageListEntryResource)
-             <$> f _name
+instance HasName ComputeImageListEntryResource Text where
+    name =
+        lens (_name :: ComputeImageListEntryResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeImageListEntryResource)
 
-instance HasVersion ComputeImageListEntryResource (TF.Argument Text) where
-    version f s@ComputeImageListEntryResource{..} =
-        (\a -> s { _version = a } :: ComputeImageListEntryResource)
-             <$> f _version
+instance HasVersion ComputeImageListEntryResource Text where
+    version =
+        lens (_version :: ComputeImageListEntryResource -> TF.Argument "version" Text)
+             (\s a -> s { _version = a } :: ComputeImageListEntryResource)
 
-instance HasComputedUri ComputeImageListEntryResource (TF.Attribute Text) where
-    computedUri f s@ComputeImageListEntryResource{..} =
-        (\a -> s { _computed_uri = a } :: ComputeImageListEntryResource)
-             <$> f _computed_uri
+instance HasComputedUri ComputeImageListEntryResource Text where
+    computedUri =
+        to (\_  -> TF.Compute "uri")
 
 computeImageListEntryResource :: TF.Resource TF.OPC ComputeImageListEntryResource
 computeImageListEntryResource =
@@ -339,7 +349,6 @@ computeImageListEntryResource =
             , _machine_images = TF.Nil
             , _name = TF.Nil
             , _version = TF.Nil
-            , _computed_uri = TF.Compute "uri"
             }
 
 {- | The @opc_compute_image_list@ OPC resource.
@@ -348,35 +357,35 @@ The @opc_compute_image_list@ resource creates and manages an Image List in
 an OPC identity domain.
 -}
 data ComputeImageListResource = ComputeImageListResource {
-      _default'    :: !(TF.Argument Text)
+      _default'    :: !(TF.Argument "default" Text)
     {- ^ (Required) The image list entry to be used, by default, when launching instances using this image list. Defaults to @1@ . -}
-    , _description :: !(TF.Argument Text)
+    , _description :: !(TF.Argument "description" Text)
     {- ^ (Required) A description of the Image List. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the Image List. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeImageListResource where
     toHCL ComputeImageListResource{..} = TF.block $ catMaybes
-        [ TF.assign "default" <$> TF.argument _default'
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _default'
+        , TF.argument _description
+        , TF.argument _name
         ]
 
-instance HasDefault' ComputeImageListResource (TF.Argument Text) where
-    default' f s@ComputeImageListResource{..} =
-        (\a -> s { _default' = a } :: ComputeImageListResource)
-             <$> f _default'
+instance HasDefault' ComputeImageListResource Text where
+    default' =
+        lens (_default' :: ComputeImageListResource -> TF.Argument "default" Text)
+             (\s a -> s { _default' = a } :: ComputeImageListResource)
 
-instance HasDescription ComputeImageListResource (TF.Argument Text) where
-    description f s@ComputeImageListResource{..} =
-        (\a -> s { _description = a } :: ComputeImageListResource)
-             <$> f _description
+instance HasDescription ComputeImageListResource Text where
+    description =
+        lens (_description :: ComputeImageListResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeImageListResource)
 
-instance HasName ComputeImageListResource (TF.Argument Text) where
-    name f s@ComputeImageListResource{..} =
-        (\a -> s { _name = a } :: ComputeImageListResource)
-             <$> f _name
+instance HasName ComputeImageListResource Text where
+    name =
+        lens (_name :: ComputeImageListResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeImageListResource)
 
 computeImageListResource :: TF.Resource TF.OPC ComputeImageListResource
 computeImageListResource =
@@ -397,115 +406,115 @@ costly accidents, consider setting
 resources as an extra safety measure.
 -}
 data ComputeInstanceResource = ComputeInstanceResource {
-      _boot_order          :: !(TF.Argument Text)
+      _boot_order          :: !(TF.Argument "boot_order" Text)
     {- ^ (Optional) The index number of the bootable storage volume, presented as a list, that should be used to boot the instance. The only valid value is @[1]@ . If you set this attribute, you must also specify a bootable storage volume with index number 1 in the volume sub-parameter of storage_attachments. When you specify boot_order, you don't need to specify the imagelist attribute, because the instance is booted using the image on the specified bootable storage volume. If you specify both boot_order and imagelist, the imagelist attribute is ignored. -}
-    , _desired_state       :: !(TF.Argument Text)
+    , _desired_state       :: !(TF.Argument "desired_state" Text)
     {- ^ (Optional) Set the desire state of the instance to @running@ (default) or @shutdown@ . You can use this request to shut down and restart individual instances which use a persistent bootable storage volume. -}
-    , _hostname            :: !(TF.Argument Text)
+    , _hostname            :: !(TF.Argument "hostname" Text)
     {- ^ (Optional) The host name assigned to the instance. On an Oracle Linux instance, this host name is displayed in response to the hostname command. Only relative DNS is supported. The domain name is suffixed to the host name that you specify. The host name must not end with a period. If you don't specify a host name, then a name is generated automatically. -}
-    , _image_list          :: !(TF.Argument Text)
+    , _image_list          :: !(TF.Argument "image_list" Text)
     {- ^ (Optional) The imageList of the instance, e.g. @/oracle/public/oel_6.4_2GB_v1@ . -}
-    , _instance_attributes :: !(TF.Argument Text)
+    , _instance_attributes :: !(TF.Argument "instance_attributes" Text)
     {- ^ (Optional) A JSON string of custom attributes. See <#attributes> below for more information. -}
-    , _label               :: !(TF.Argument Text)
+    , _label               :: !(TF.Argument "label" Text)
     {- ^ (Optional) The label to apply to the instance. -}
-    , _name                :: !(TF.Argument Text)
+    , _name                :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the instance. -}
-    , _networking_info     :: !(TF.Argument Text)
+    , _networking_info     :: !(TF.Argument "networking_info" Text)
     {- ^ (Optional) Information pertaining to an individual network interface to be created and attached to the instance. If left unspecified, the instance will be created within the @shared_network@ . See <#networking-info> below for more information. -}
-    , _reverse_dns         :: !(TF.Argument Text)
+    , _reverse_dns         :: !(TF.Argument "reverse_dns" Text)
     {- ^ (Optional) If set to @true@ (default), then reverse DNS records are created. If set to @false@ , no reverse DNS records are created. -}
-    , _shape               :: !(TF.Argument Text)
+    , _shape               :: !(TF.Argument "shape" Text)
     {- ^ (Required) The shape of the instance, e.g. @oc4@ . -}
-    , _ssh_keys            :: !(TF.Argument Text)
+    , _ssh_keys            :: !(TF.Argument "ssh_keys" Text)
     {- ^ (Optional) A list of the names of the SSH Keys that can be used to log into the instance. -}
-    , _storage             :: !(TF.Argument Text)
+    , _storage             :: !(TF.Argument "storage" Text)
     {- ^ (Optional) Information pertaining to an individual storage attachment to be created during instance creation. Please see <#storage-attachments> below for more information. -}
-    , _tags                :: !(TF.Argument Text)
+    , _tags                :: !(TF.Argument "tags" Text)
     {- ^ (Optional) A list of strings that should be supplied to the instance as tags. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeInstanceResource where
     toHCL ComputeInstanceResource{..} = TF.block $ catMaybes
-        [ TF.assign "boot_order" <$> TF.argument _boot_order
-        , TF.assign "desired_state" <$> TF.argument _desired_state
-        , TF.assign "hostname" <$> TF.argument _hostname
-        , TF.assign "image_list" <$> TF.argument _image_list
-        , TF.assign "instance_attributes" <$> TF.argument _instance_attributes
-        , TF.assign "label" <$> TF.argument _label
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "networking_info" <$> TF.argument _networking_info
-        , TF.assign "reverse_dns" <$> TF.argument _reverse_dns
-        , TF.assign "shape" <$> TF.argument _shape
-        , TF.assign "ssh_keys" <$> TF.argument _ssh_keys
-        , TF.assign "storage" <$> TF.argument _storage
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _boot_order
+        , TF.argument _desired_state
+        , TF.argument _hostname
+        , TF.argument _image_list
+        , TF.argument _instance_attributes
+        , TF.argument _label
+        , TF.argument _name
+        , TF.argument _networking_info
+        , TF.argument _reverse_dns
+        , TF.argument _shape
+        , TF.argument _ssh_keys
+        , TF.argument _storage
+        , TF.argument _tags
         ]
 
-instance HasBootOrder ComputeInstanceResource (TF.Argument Text) where
-    bootOrder f s@ComputeInstanceResource{..} =
-        (\a -> s { _boot_order = a } :: ComputeInstanceResource)
-             <$> f _boot_order
+instance HasBootOrder ComputeInstanceResource Text where
+    bootOrder =
+        lens (_boot_order :: ComputeInstanceResource -> TF.Argument "boot_order" Text)
+             (\s a -> s { _boot_order = a } :: ComputeInstanceResource)
 
-instance HasDesiredState ComputeInstanceResource (TF.Argument Text) where
-    desiredState f s@ComputeInstanceResource{..} =
-        (\a -> s { _desired_state = a } :: ComputeInstanceResource)
-             <$> f _desired_state
+instance HasDesiredState ComputeInstanceResource Text where
+    desiredState =
+        lens (_desired_state :: ComputeInstanceResource -> TF.Argument "desired_state" Text)
+             (\s a -> s { _desired_state = a } :: ComputeInstanceResource)
 
-instance HasHostname ComputeInstanceResource (TF.Argument Text) where
-    hostname f s@ComputeInstanceResource{..} =
-        (\a -> s { _hostname = a } :: ComputeInstanceResource)
-             <$> f _hostname
+instance HasHostname ComputeInstanceResource Text where
+    hostname =
+        lens (_hostname :: ComputeInstanceResource -> TF.Argument "hostname" Text)
+             (\s a -> s { _hostname = a } :: ComputeInstanceResource)
 
-instance HasImageList ComputeInstanceResource (TF.Argument Text) where
-    imageList f s@ComputeInstanceResource{..} =
-        (\a -> s { _image_list = a } :: ComputeInstanceResource)
-             <$> f _image_list
+instance HasImageList ComputeInstanceResource Text where
+    imageList =
+        lens (_image_list :: ComputeInstanceResource -> TF.Argument "image_list" Text)
+             (\s a -> s { _image_list = a } :: ComputeInstanceResource)
 
-instance HasInstanceAttributes ComputeInstanceResource (TF.Argument Text) where
-    instanceAttributes f s@ComputeInstanceResource{..} =
-        (\a -> s { _instance_attributes = a } :: ComputeInstanceResource)
-             <$> f _instance_attributes
+instance HasInstanceAttributes ComputeInstanceResource Text where
+    instanceAttributes =
+        lens (_instance_attributes :: ComputeInstanceResource -> TF.Argument "instance_attributes" Text)
+             (\s a -> s { _instance_attributes = a } :: ComputeInstanceResource)
 
-instance HasLabel ComputeInstanceResource (TF.Argument Text) where
-    label f s@ComputeInstanceResource{..} =
-        (\a -> s { _label = a } :: ComputeInstanceResource)
-             <$> f _label
+instance HasLabel ComputeInstanceResource Text where
+    label =
+        lens (_label :: ComputeInstanceResource -> TF.Argument "label" Text)
+             (\s a -> s { _label = a } :: ComputeInstanceResource)
 
-instance HasName ComputeInstanceResource (TF.Argument Text) where
-    name f s@ComputeInstanceResource{..} =
-        (\a -> s { _name = a } :: ComputeInstanceResource)
-             <$> f _name
+instance HasName ComputeInstanceResource Text where
+    name =
+        lens (_name :: ComputeInstanceResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeInstanceResource)
 
-instance HasNetworkingInfo ComputeInstanceResource (TF.Argument Text) where
-    networkingInfo f s@ComputeInstanceResource{..} =
-        (\a -> s { _networking_info = a } :: ComputeInstanceResource)
-             <$> f _networking_info
+instance HasNetworkingInfo ComputeInstanceResource Text where
+    networkingInfo =
+        lens (_networking_info :: ComputeInstanceResource -> TF.Argument "networking_info" Text)
+             (\s a -> s { _networking_info = a } :: ComputeInstanceResource)
 
-instance HasReverseDns ComputeInstanceResource (TF.Argument Text) where
-    reverseDns f s@ComputeInstanceResource{..} =
-        (\a -> s { _reverse_dns = a } :: ComputeInstanceResource)
-             <$> f _reverse_dns
+instance HasReverseDns ComputeInstanceResource Text where
+    reverseDns =
+        lens (_reverse_dns :: ComputeInstanceResource -> TF.Argument "reverse_dns" Text)
+             (\s a -> s { _reverse_dns = a } :: ComputeInstanceResource)
 
-instance HasShape ComputeInstanceResource (TF.Argument Text) where
-    shape f s@ComputeInstanceResource{..} =
-        (\a -> s { _shape = a } :: ComputeInstanceResource)
-             <$> f _shape
+instance HasShape ComputeInstanceResource Text where
+    shape =
+        lens (_shape :: ComputeInstanceResource -> TF.Argument "shape" Text)
+             (\s a -> s { _shape = a } :: ComputeInstanceResource)
 
-instance HasSshKeys ComputeInstanceResource (TF.Argument Text) where
-    sshKeys f s@ComputeInstanceResource{..} =
-        (\a -> s { _ssh_keys = a } :: ComputeInstanceResource)
-             <$> f _ssh_keys
+instance HasSshKeys ComputeInstanceResource Text where
+    sshKeys =
+        lens (_ssh_keys :: ComputeInstanceResource -> TF.Argument "ssh_keys" Text)
+             (\s a -> s { _ssh_keys = a } :: ComputeInstanceResource)
 
-instance HasStorage ComputeInstanceResource (TF.Argument Text) where
-    storage f s@ComputeInstanceResource{..} =
-        (\a -> s { _storage = a } :: ComputeInstanceResource)
-             <$> f _storage
+instance HasStorage ComputeInstanceResource Text where
+    storage =
+        lens (_storage :: ComputeInstanceResource -> TF.Argument "storage" Text)
+             (\s a -> s { _storage = a } :: ComputeInstanceResource)
 
-instance HasTags ComputeInstanceResource (TF.Argument Text) where
-    tags f s@ComputeInstanceResource{..} =
-        (\a -> s { _tags = a } :: ComputeInstanceResource)
-             <$> f _tags
+instance HasTags ComputeInstanceResource Text where
+    tags =
+        lens (_tags :: ComputeInstanceResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeInstanceResource)
 
 computeInstanceResource :: TF.Resource TF.OPC ComputeInstanceResource
 computeInstanceResource =
@@ -533,51 +542,51 @@ address association between an IP address reservation and a virtual NIC in
 an OPC identity domain, for an IP Network.
 -}
 data ComputeIpAddressAssociationResource = ComputeIpAddressAssociationResource {
-      _description            :: !(TF.Argument Text)
+      _description            :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the ip address association. -}
-    , _ip_address_reservation :: !(TF.Argument Text)
+    , _ip_address_reservation :: !(TF.Argument "ip_address_reservation" Text)
     {- ^ (Optional) The name of the NAT IP address reservation. -}
-    , _name                   :: !(TF.Argument Text)
+    , _name                   :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the ip address association. -}
-    , _tags                   :: !(TF.Argument Text)
+    , _tags                   :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the ip address association. -}
-    , _vnic                   :: !(TF.Argument Text)
+    , _vnic                   :: !(TF.Argument "vnic" Text)
     {- ^ (Optional) The name of the virtual NIC associated with this NAT IP reservation. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpAddressAssociationResource where
     toHCL ComputeIpAddressAssociationResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "ip_address_reservation" <$> TF.argument _ip_address_reservation
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
-        , TF.assign "vnic" <$> TF.argument _vnic
+        [ TF.argument _description
+        , TF.argument _ip_address_reservation
+        , TF.argument _name
+        , TF.argument _tags
+        , TF.argument _vnic
         ]
 
-instance HasDescription ComputeIpAddressAssociationResource (TF.Argument Text) where
-    description f s@ComputeIpAddressAssociationResource{..} =
-        (\a -> s { _description = a } :: ComputeIpAddressAssociationResource)
-             <$> f _description
+instance HasDescription ComputeIpAddressAssociationResource Text where
+    description =
+        lens (_description :: ComputeIpAddressAssociationResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeIpAddressAssociationResource)
 
-instance HasIpAddressReservation ComputeIpAddressAssociationResource (TF.Argument Text) where
-    ipAddressReservation f s@ComputeIpAddressAssociationResource{..} =
-        (\a -> s { _ip_address_reservation = a } :: ComputeIpAddressAssociationResource)
-             <$> f _ip_address_reservation
+instance HasIpAddressReservation ComputeIpAddressAssociationResource Text where
+    ipAddressReservation =
+        lens (_ip_address_reservation :: ComputeIpAddressAssociationResource -> TF.Argument "ip_address_reservation" Text)
+             (\s a -> s { _ip_address_reservation = a } :: ComputeIpAddressAssociationResource)
 
-instance HasName ComputeIpAddressAssociationResource (TF.Argument Text) where
-    name f s@ComputeIpAddressAssociationResource{..} =
-        (\a -> s { _name = a } :: ComputeIpAddressAssociationResource)
-             <$> f _name
+instance HasName ComputeIpAddressAssociationResource Text where
+    name =
+        lens (_name :: ComputeIpAddressAssociationResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressAssociationResource)
 
-instance HasTags ComputeIpAddressAssociationResource (TF.Argument Text) where
-    tags f s@ComputeIpAddressAssociationResource{..} =
-        (\a -> s { _tags = a } :: ComputeIpAddressAssociationResource)
-             <$> f _tags
+instance HasTags ComputeIpAddressAssociationResource Text where
+    tags =
+        lens (_tags :: ComputeIpAddressAssociationResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeIpAddressAssociationResource)
 
-instance HasVnic ComputeIpAddressAssociationResource (TF.Argument Text) where
-    vnic f s@ComputeIpAddressAssociationResource{..} =
-        (\a -> s { _vnic = a } :: ComputeIpAddressAssociationResource)
-             <$> f _vnic
+instance HasVnic ComputeIpAddressAssociationResource Text where
+    vnic =
+        lens (_vnic :: ComputeIpAddressAssociationResource -> TF.Argument "vnic" Text)
+             (\s a -> s { _vnic = a } :: ComputeIpAddressAssociationResource)
 
 computeIpAddressAssociationResource :: TF.Resource TF.OPC ComputeIpAddressAssociationResource
 computeIpAddressAssociationResource =
@@ -596,43 +605,43 @@ The @opc_compute_ip_address_prefix_set@ resource creates and manages an IP
 address prefix set in an OPC identity domain.
 -}
 data ComputeIpAddressPrefixSetResource = ComputeIpAddressPrefixSetResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the ip address prefix set. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the ip address prefix set. -}
-    , _prefixes    :: !(TF.Argument Text)
+    , _prefixes    :: !(TF.Argument "prefixes" Text)
     {- ^ (Optional) List of CIDR IPv4 prefixes assigned in the virtual network. -}
-    , _tags        :: !(TF.Argument Text)
+    , _tags        :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the ip address prefix set. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpAddressPrefixSetResource where
     toHCL ComputeIpAddressPrefixSetResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "prefixes" <$> TF.argument _prefixes
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _description
+        , TF.argument _name
+        , TF.argument _prefixes
+        , TF.argument _tags
         ]
 
-instance HasDescription ComputeIpAddressPrefixSetResource (TF.Argument Text) where
-    description f s@ComputeIpAddressPrefixSetResource{..} =
-        (\a -> s { _description = a } :: ComputeIpAddressPrefixSetResource)
-             <$> f _description
+instance HasDescription ComputeIpAddressPrefixSetResource Text where
+    description =
+        lens (_description :: ComputeIpAddressPrefixSetResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeIpAddressPrefixSetResource)
 
-instance HasName ComputeIpAddressPrefixSetResource (TF.Argument Text) where
-    name f s@ComputeIpAddressPrefixSetResource{..} =
-        (\a -> s { _name = a } :: ComputeIpAddressPrefixSetResource)
-             <$> f _name
+instance HasName ComputeIpAddressPrefixSetResource Text where
+    name =
+        lens (_name :: ComputeIpAddressPrefixSetResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressPrefixSetResource)
 
-instance HasPrefixes ComputeIpAddressPrefixSetResource (TF.Argument Text) where
-    prefixes f s@ComputeIpAddressPrefixSetResource{..} =
-        (\a -> s { _prefixes = a } :: ComputeIpAddressPrefixSetResource)
-             <$> f _prefixes
+instance HasPrefixes ComputeIpAddressPrefixSetResource Text where
+    prefixes =
+        lens (_prefixes :: ComputeIpAddressPrefixSetResource -> TF.Argument "prefixes" Text)
+             (\s a -> s { _prefixes = a } :: ComputeIpAddressPrefixSetResource)
 
-instance HasTags ComputeIpAddressPrefixSetResource (TF.Argument Text) where
-    tags f s@ComputeIpAddressPrefixSetResource{..} =
-        (\a -> s { _tags = a } :: ComputeIpAddressPrefixSetResource)
-             <$> f _tags
+instance HasTags ComputeIpAddressPrefixSetResource Text where
+    tags =
+        lens (_tags :: ComputeIpAddressPrefixSetResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeIpAddressPrefixSetResource)
 
 computeIpAddressPrefixSetResource :: TF.Resource TF.OPC ComputeIpAddressPrefixSetResource
 computeIpAddressPrefixSetResource =
@@ -650,43 +659,43 @@ The @opc_compute_ip_address_reservation@ resource creates and manages an IP
 address reservation in an OPC identity domain, for an IP Network.
 -}
 data ComputeIpAddressReservationResource = ComputeIpAddressReservationResource {
-      _description     :: !(TF.Argument Text)
+      _description     :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the ip address reservation. -}
-    , _ip_address_pool :: !(TF.Argument Text)
+    , _ip_address_pool :: !(TF.Argument "ip_address_pool" Text)
     {- ^ (Required) The IP address pool from which you want to reserve an IP address. Must be either @public-ippool@ or @cloud-ippool@ . -}
-    , _name            :: !(TF.Argument Text)
+    , _name            :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the ip address reservation. -}
-    , _tags            :: !(TF.Argument Text)
+    , _tags            :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the IP address reservation. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpAddressReservationResource where
     toHCL ComputeIpAddressReservationResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "ip_address_pool" <$> TF.argument _ip_address_pool
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _description
+        , TF.argument _ip_address_pool
+        , TF.argument _name
+        , TF.argument _tags
         ]
 
-instance HasDescription ComputeIpAddressReservationResource (TF.Argument Text) where
-    description f s@ComputeIpAddressReservationResource{..} =
-        (\a -> s { _description = a } :: ComputeIpAddressReservationResource)
-             <$> f _description
+instance HasDescription ComputeIpAddressReservationResource Text where
+    description =
+        lens (_description :: ComputeIpAddressReservationResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeIpAddressReservationResource)
 
-instance HasIpAddressPool ComputeIpAddressReservationResource (TF.Argument Text) where
-    ipAddressPool f s@ComputeIpAddressReservationResource{..} =
-        (\a -> s { _ip_address_pool = a } :: ComputeIpAddressReservationResource)
-             <$> f _ip_address_pool
+instance HasIpAddressPool ComputeIpAddressReservationResource Text where
+    ipAddressPool =
+        lens (_ip_address_pool :: ComputeIpAddressReservationResource -> TF.Argument "ip_address_pool" Text)
+             (\s a -> s { _ip_address_pool = a } :: ComputeIpAddressReservationResource)
 
-instance HasName ComputeIpAddressReservationResource (TF.Argument Text) where
-    name f s@ComputeIpAddressReservationResource{..} =
-        (\a -> s { _name = a } :: ComputeIpAddressReservationResource)
-             <$> f _name
+instance HasName ComputeIpAddressReservationResource Text where
+    name =
+        lens (_name :: ComputeIpAddressReservationResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressReservationResource)
 
-instance HasTags ComputeIpAddressReservationResource (TF.Argument Text) where
-    tags f s@ComputeIpAddressReservationResource{..} =
-        (\a -> s { _tags = a } :: ComputeIpAddressReservationResource)
-             <$> f _tags
+instance HasTags ComputeIpAddressReservationResource Text where
+    tags =
+        lens (_tags :: ComputeIpAddressReservationResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeIpAddressReservationResource)
 
 computeIpAddressReservationResource :: TF.Resource TF.OPC ComputeIpAddressReservationResource
 computeIpAddressReservationResource =
@@ -705,34 +714,31 @@ between an IP address and an instance in an OPC identity domain, for the
 Shared Network.
 -}
 data ComputeIpAssociationResource = ComputeIpAssociationResource {
-      _parent_pool   :: !(TF.Argument Text)
+      _parent_pool :: !(TF.Argument "parent_pool" Text)
     {- ^ (Required) The pool from which to take an IP address. To associate a specific reserved IP address, use the prefix @ipreservation:@ followed by the name of the IP reservation. To allocate an IP address from a pool, use the prefix @ippool:@ , e.g. @ippool:/oracle/public/ippool@ . -}
-    , _vcable        :: !(TF.Argument Text)
+    , _vcable      :: !(TF.Argument "vcable" Text)
     {- ^ (Required) The vcable of the instance to associate the IP address with. -}
-    , _computed_name :: !(TF.Attribute Text)
-    {- ^ The name of the IP Association -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpAssociationResource where
     toHCL ComputeIpAssociationResource{..} = TF.block $ catMaybes
-        [ TF.assign "parent_pool" <$> TF.argument _parent_pool
-        , TF.assign "vcable" <$> TF.argument _vcable
+        [ TF.argument _parent_pool
+        , TF.argument _vcable
         ]
 
-instance HasParentPool ComputeIpAssociationResource (TF.Argument Text) where
-    parentPool f s@ComputeIpAssociationResource{..} =
-        (\a -> s { _parent_pool = a } :: ComputeIpAssociationResource)
-             <$> f _parent_pool
+instance HasParentPool ComputeIpAssociationResource Text where
+    parentPool =
+        lens (_parent_pool :: ComputeIpAssociationResource -> TF.Argument "parent_pool" Text)
+             (\s a -> s { _parent_pool = a } :: ComputeIpAssociationResource)
 
-instance HasVcable ComputeIpAssociationResource (TF.Argument Text) where
-    vcable f s@ComputeIpAssociationResource{..} =
-        (\a -> s { _vcable = a } :: ComputeIpAssociationResource)
-             <$> f _vcable
+instance HasVcable ComputeIpAssociationResource Text where
+    vcable =
+        lens (_vcable :: ComputeIpAssociationResource -> TF.Argument "vcable" Text)
+             (\s a -> s { _vcable = a } :: ComputeIpAssociationResource)
 
-instance HasComputedName ComputeIpAssociationResource (TF.Attribute Text) where
-    computedName f s@ComputeIpAssociationResource{..} =
-        (\a -> s { _computed_name = a } :: ComputeIpAssociationResource)
-             <$> f _computed_name
+instance HasComputedName ComputeIpAssociationResource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
 computeIpAssociationResource :: TF.Resource TF.OPC ComputeIpAssociationResource
 computeIpAssociationResource =
@@ -740,7 +746,6 @@ computeIpAssociationResource =
         ComputeIpAssociationResource {
             _parent_pool = TF.Nil
             , _vcable = TF.Nil
-            , _computed_name = TF.Compute "name"
             }
 
 {- | The @opc_compute_ip_network_exchange@ OPC resource.
@@ -749,35 +754,35 @@ The @opc_compute_ip_network_exchange@ resource creates and manages an IP
 network exchange in an OPC identity domain.
 -}
 data ComputeIpNetworkExchangeResource = ComputeIpNetworkExchangeResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the ip network exchange. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the ip network exchange. -}
-    , _tags        :: !(TF.Argument Text)
+    , _tags        :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the IP network exchange. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpNetworkExchangeResource where
     toHCL ComputeIpNetworkExchangeResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _description
+        , TF.argument _name
+        , TF.argument _tags
         ]
 
-instance HasDescription ComputeIpNetworkExchangeResource (TF.Argument Text) where
-    description f s@ComputeIpNetworkExchangeResource{..} =
-        (\a -> s { _description = a } :: ComputeIpNetworkExchangeResource)
-             <$> f _description
+instance HasDescription ComputeIpNetworkExchangeResource Text where
+    description =
+        lens (_description :: ComputeIpNetworkExchangeResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeIpNetworkExchangeResource)
 
-instance HasName ComputeIpNetworkExchangeResource (TF.Argument Text) where
-    name f s@ComputeIpNetworkExchangeResource{..} =
-        (\a -> s { _name = a } :: ComputeIpNetworkExchangeResource)
-             <$> f _name
+instance HasName ComputeIpNetworkExchangeResource Text where
+    name =
+        lens (_name :: ComputeIpNetworkExchangeResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeIpNetworkExchangeResource)
 
-instance HasTags ComputeIpNetworkExchangeResource (TF.Argument Text) where
-    tags f s@ComputeIpNetworkExchangeResource{..} =
-        (\a -> s { _tags = a } :: ComputeIpNetworkExchangeResource)
-             <$> f _tags
+instance HasTags ComputeIpNetworkExchangeResource Text where
+    tags =
+        lens (_tags :: ComputeIpNetworkExchangeResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource)
 
 computeIpNetworkExchangeResource :: TF.Resource TF.OPC ComputeIpNetworkExchangeResource
 computeIpNetworkExchangeResource =
@@ -793,93 +798,75 @@ computeIpNetworkExchangeResource =
 The @opc_compute_ip_network@ resource creates and manages an IP Network.
 -}
 data ComputeIpNetworkResource = ComputeIpNetworkResource {
-      _description                  :: !(TF.Argument Text)
+      _description         :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the IP Network. -}
-    , _ip_address_prefix            :: !(TF.Argument Text)
+    , _ip_address_prefix   :: !(TF.Argument "ip_address_prefix" Text)
     {- ^ (Required) The IPv4 address prefix, in CIDR format. -}
-    , _ip_network_exchange          :: !(TF.Argument Text)
+    , _ip_network_exchange :: !(TF.Argument "ip_network_exchange" Text)
     {- ^ (Optional) Specify the IP Network exchange to which the IP Network belongs to. -}
-    , _name                         :: !(TF.Argument Text)
+    , _name                :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the IP Network. Changing this name forces a new resource to be created. -}
-    , _public_napt_enabled          :: !(TF.Argument Text)
+    , _public_napt_enabled :: !(TF.Argument "public_napt_enabled" Text)
     {- ^ (Optional) If true, enable public internet access using NAPT for VNICs without any public IP Reservation. Defaults to @false@ . -}
-    , _computed_description         :: !(TF.Attribute Text)
-    {- ^ - The description of the IP Network. -}
-    , _computed_ip_address_prefix   :: !(TF.Attribute Text)
-    {- ^ - The IPv4 address prefix, in CIDR format. -}
-    , _computed_ip_network_exchange :: !(TF.Attribute Text)
-    {- ^ - The IP Network Exchange for the IP Network -}
-    , _computed_name                :: !(TF.Attribute Text)
-    {- ^ - The name of the IP Network -}
-    , _computed_public_napt_enabled :: !(TF.Attribute Text)
-    {- ^ - Whether public internet access using NAPT for VNICs without any public IP Reservation or not. -}
-    , _computed_uri                 :: !(TF.Attribute Text)
-    {- ^ - Uniform Resource Identifier for the IP Network -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpNetworkResource where
     toHCL ComputeIpNetworkResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "ip_address_prefix" <$> TF.argument _ip_address_prefix
-        , TF.assign "ip_network_exchange" <$> TF.argument _ip_network_exchange
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "public_napt_enabled" <$> TF.argument _public_napt_enabled
+        [ TF.argument _description
+        , TF.argument _ip_address_prefix
+        , TF.argument _ip_network_exchange
+        , TF.argument _name
+        , TF.argument _public_napt_enabled
         ]
 
-instance HasDescription ComputeIpNetworkResource (TF.Argument Text) where
-    description f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _description = a } :: ComputeIpNetworkResource)
-             <$> f _description
+instance HasDescription ComputeIpNetworkResource Text where
+    description =
+        lens (_description :: ComputeIpNetworkResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeIpNetworkResource)
 
-instance HasIpAddressPrefix ComputeIpNetworkResource (TF.Argument Text) where
-    ipAddressPrefix f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _ip_address_prefix = a } :: ComputeIpNetworkResource)
-             <$> f _ip_address_prefix
+instance HasIpAddressPrefix ComputeIpNetworkResource Text where
+    ipAddressPrefix =
+        lens (_ip_address_prefix :: ComputeIpNetworkResource -> TF.Argument "ip_address_prefix" Text)
+             (\s a -> s { _ip_address_prefix = a } :: ComputeIpNetworkResource)
 
-instance HasIpNetworkExchange ComputeIpNetworkResource (TF.Argument Text) where
-    ipNetworkExchange f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _ip_network_exchange = a } :: ComputeIpNetworkResource)
-             <$> f _ip_network_exchange
+instance HasIpNetworkExchange ComputeIpNetworkResource Text where
+    ipNetworkExchange =
+        lens (_ip_network_exchange :: ComputeIpNetworkResource -> TF.Argument "ip_network_exchange" Text)
+             (\s a -> s { _ip_network_exchange = a } :: ComputeIpNetworkResource)
 
-instance HasName ComputeIpNetworkResource (TF.Argument Text) where
-    name f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _name = a } :: ComputeIpNetworkResource)
-             <$> f _name
+instance HasName ComputeIpNetworkResource Text where
+    name =
+        lens (_name :: ComputeIpNetworkResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeIpNetworkResource)
 
-instance HasPublicNaptEnabled ComputeIpNetworkResource (TF.Argument Text) where
-    publicNaptEnabled f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _public_napt_enabled = a } :: ComputeIpNetworkResource)
-             <$> f _public_napt_enabled
+instance HasPublicNaptEnabled ComputeIpNetworkResource Text where
+    publicNaptEnabled =
+        lens (_public_napt_enabled :: ComputeIpNetworkResource -> TF.Argument "public_napt_enabled" Text)
+             (\s a -> s { _public_napt_enabled = a } :: ComputeIpNetworkResource)
 
-instance HasComputedDescription ComputeIpNetworkResource (TF.Attribute Text) where
-    computedDescription f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _computed_description = a } :: ComputeIpNetworkResource)
-             <$> f _computed_description
+instance HasComputedDescription ComputeIpNetworkResource Text where
+    computedDescription =
+        to (\_  -> TF.Compute "description")
 
-instance HasComputedIpAddressPrefix ComputeIpNetworkResource (TF.Attribute Text) where
-    computedIpAddressPrefix f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _computed_ip_address_prefix = a } :: ComputeIpNetworkResource)
-             <$> f _computed_ip_address_prefix
+instance HasComputedIpAddressPrefix ComputeIpNetworkResource Text where
+    computedIpAddressPrefix =
+        to (\_  -> TF.Compute "ip_address_prefix")
 
-instance HasComputedIpNetworkExchange ComputeIpNetworkResource (TF.Attribute Text) where
-    computedIpNetworkExchange f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _computed_ip_network_exchange = a } :: ComputeIpNetworkResource)
-             <$> f _computed_ip_network_exchange
+instance HasComputedIpNetworkExchange ComputeIpNetworkResource Text where
+    computedIpNetworkExchange =
+        to (\_  -> TF.Compute "ip_network_exchange")
 
-instance HasComputedName ComputeIpNetworkResource (TF.Attribute Text) where
-    computedName f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _computed_name = a } :: ComputeIpNetworkResource)
-             <$> f _computed_name
+instance HasComputedName ComputeIpNetworkResource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
-instance HasComputedPublicNaptEnabled ComputeIpNetworkResource (TF.Attribute Text) where
-    computedPublicNaptEnabled f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _computed_public_napt_enabled = a } :: ComputeIpNetworkResource)
-             <$> f _computed_public_napt_enabled
+instance HasComputedPublicNaptEnabled ComputeIpNetworkResource Text where
+    computedPublicNaptEnabled =
+        to (\_  -> TF.Compute "public_napt_enabled")
 
-instance HasComputedUri ComputeIpNetworkResource (TF.Attribute Text) where
-    computedUri f s@ComputeIpNetworkResource{..} =
-        (\a -> s { _computed_uri = a } :: ComputeIpNetworkResource)
-             <$> f _computed_uri
+instance HasComputedUri ComputeIpNetworkResource Text where
+    computedUri =
+        to (\_  -> TF.Compute "uri")
 
 computeIpNetworkResource :: TF.Resource TF.OPC ComputeIpNetworkResource
 computeIpNetworkResource =
@@ -890,12 +877,6 @@ computeIpNetworkResource =
             , _ip_network_exchange = TF.Nil
             , _name = TF.Nil
             , _public_napt_enabled = TF.Nil
-            , _computed_description = TF.Compute "description"
-            , _computed_ip_address_prefix = TF.Compute "ip_address_prefix"
-            , _computed_ip_network_exchange = TF.Compute "ip_network_exchange"
-            , _computed_name = TF.Compute "name"
-            , _computed_public_napt_enabled = TF.Compute "public_napt_enabled"
-            , _computed_uri = TF.Compute "uri"
             }
 
 {- | The @opc_compute_ip_reservation@ OPC resource.
@@ -904,43 +885,43 @@ The @opc_compute_ip_reservation@ resource creates and manages an IP
 reservation in an OPC identity domain for the Shared Network.
 -}
 data ComputeIpReservationResource = ComputeIpReservationResource {
-      _name        :: !(TF.Argument Text)
+      _name        :: !(TF.Argument "name" Text)
     {- ^ (Optional) Name of the IP Reservation. Will be generated if unspecified. -}
-    , _parent_pool :: !(TF.Argument Text)
+    , _parent_pool :: !(TF.Argument "parent_pool" Text)
     {- ^ (Optional) The pool from which to allocate the IP address. Defaults to @/oracle/public/ippool@ , and is currently the only acceptable input. -}
-    , _permanent   :: !(TF.Argument Text)
+    , _permanent   :: !(TF.Argument "permanent" Text)
     {- ^ (Required) Whether the IP address remains reserved even when it is no longer associated with an instance (if true), or may be returned to the pool and replaced with a different IP address when an instance is restarted, or deleted and recreated (if false). -}
-    , _tags        :: !(TF.Argument Text)
+    , _tags        :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the IP reservation. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeIpReservationResource where
     toHCL ComputeIpReservationResource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
-        , TF.assign "parent_pool" <$> TF.argument _parent_pool
-        , TF.assign "permanent" <$> TF.argument _permanent
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _name
+        , TF.argument _parent_pool
+        , TF.argument _permanent
+        , TF.argument _tags
         ]
 
-instance HasName ComputeIpReservationResource (TF.Argument Text) where
-    name f s@ComputeIpReservationResource{..} =
-        (\a -> s { _name = a } :: ComputeIpReservationResource)
-             <$> f _name
+instance HasName ComputeIpReservationResource Text where
+    name =
+        lens (_name :: ComputeIpReservationResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeIpReservationResource)
 
-instance HasParentPool ComputeIpReservationResource (TF.Argument Text) where
-    parentPool f s@ComputeIpReservationResource{..} =
-        (\a -> s { _parent_pool = a } :: ComputeIpReservationResource)
-             <$> f _parent_pool
+instance HasParentPool ComputeIpReservationResource Text where
+    parentPool =
+        lens (_parent_pool :: ComputeIpReservationResource -> TF.Argument "parent_pool" Text)
+             (\s a -> s { _parent_pool = a } :: ComputeIpReservationResource)
 
-instance HasPermanent ComputeIpReservationResource (TF.Argument Text) where
-    permanent f s@ComputeIpReservationResource{..} =
-        (\a -> s { _permanent = a } :: ComputeIpReservationResource)
-             <$> f _permanent
+instance HasPermanent ComputeIpReservationResource Text where
+    permanent =
+        lens (_permanent :: ComputeIpReservationResource -> TF.Argument "permanent" Text)
+             (\s a -> s { _permanent = a } :: ComputeIpReservationResource)
 
-instance HasTags ComputeIpReservationResource (TF.Argument Text) where
-    tags f s@ComputeIpReservationResource{..} =
-        (\a -> s { _tags = a } :: ComputeIpReservationResource)
-             <$> f _tags
+instance HasTags ComputeIpReservationResource Text where
+    tags =
+        lens (_tags :: ComputeIpReservationResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeIpReservationResource)
 
 computeIpReservationResource :: TF.Resource TF.OPC ComputeIpReservationResource
 computeIpReservationResource =
@@ -961,51 +942,51 @@ must upload your machine image file to Oracle Cloud Infrastructure Object
 Storage Classic @compute_images@ container
 -}
 data ComputeMachineImageResource = ComputeMachineImageResource {
-      _account     :: !(TF.Argument Text)
+      _account     :: !(TF.Argument "account" Text)
     {- ^ (Required) The two part name of the compute object storage account in the format @/Compute-{identity_domain}/cloud_storage@ -}
-    , _attributes  :: !(TF.Argument Text)
+    , _attributes  :: !(TF.Argument "attributes" Text)
     {- ^ (Optional) An optional JSON object of arbitrary attributes to be made available to the instance. These are user-defined tags. After defining attributes, you can view them from within an instance at http://192.0.0.192/ -}
-    , _description :: !(TF.Argument Text)
+    , _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the Machine Image. -}
-    , _file        :: !(TF.Argument Text)
+    , _file        :: !(TF.Argument "file" Text)
     {- ^ (Required) The name of the Machine Image .tar.gz file in the @compute_images@ storage container. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the Machine Image. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeMachineImageResource where
     toHCL ComputeMachineImageResource{..} = TF.block $ catMaybes
-        [ TF.assign "account" <$> TF.argument _account
-        , TF.assign "attributes" <$> TF.argument _attributes
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "file" <$> TF.argument _file
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _account
+        , TF.argument _attributes
+        , TF.argument _description
+        , TF.argument _file
+        , TF.argument _name
         ]
 
-instance HasAccount ComputeMachineImageResource (TF.Argument Text) where
-    account f s@ComputeMachineImageResource{..} =
-        (\a -> s { _account = a } :: ComputeMachineImageResource)
-             <$> f _account
+instance HasAccount ComputeMachineImageResource Text where
+    account =
+        lens (_account :: ComputeMachineImageResource -> TF.Argument "account" Text)
+             (\s a -> s { _account = a } :: ComputeMachineImageResource)
 
-instance HasAttributes ComputeMachineImageResource (TF.Argument Text) where
-    attributes f s@ComputeMachineImageResource{..} =
-        (\a -> s { _attributes = a } :: ComputeMachineImageResource)
-             <$> f _attributes
+instance HasAttributes ComputeMachineImageResource Text where
+    attributes =
+        lens (_attributes :: ComputeMachineImageResource -> TF.Argument "attributes" Text)
+             (\s a -> s { _attributes = a } :: ComputeMachineImageResource)
 
-instance HasDescription ComputeMachineImageResource (TF.Argument Text) where
-    description f s@ComputeMachineImageResource{..} =
-        (\a -> s { _description = a } :: ComputeMachineImageResource)
-             <$> f _description
+instance HasDescription ComputeMachineImageResource Text where
+    description =
+        lens (_description :: ComputeMachineImageResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeMachineImageResource)
 
-instance HasFile ComputeMachineImageResource (TF.Argument Text) where
-    file f s@ComputeMachineImageResource{..} =
-        (\a -> s { _file = a } :: ComputeMachineImageResource)
-             <$> f _file
+instance HasFile ComputeMachineImageResource Text where
+    file =
+        lens (_file :: ComputeMachineImageResource -> TF.Argument "file" Text)
+             (\s a -> s { _file = a } :: ComputeMachineImageResource)
 
-instance HasName ComputeMachineImageResource (TF.Argument Text) where
-    name f s@ComputeMachineImageResource{..} =
-        (\a -> s { _name = a } :: ComputeMachineImageResource)
-             <$> f _name
+instance HasName ComputeMachineImageResource Text where
+    name =
+        lens (_name :: ComputeMachineImageResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeMachineImageResource)
 
 computeMachineImageResource :: TF.Resource TF.OPC ComputeMachineImageResource
 computeMachineImageResource =
@@ -1024,43 +1005,43 @@ The @opc_compute_orchestrated_instance@ resource creates and manages an
 orchestration containing a number of instances in an OPC identity domain.
 -}
 data ComputeOrchestratedInstanceResource = ComputeOrchestratedInstanceResource {
-      _description   :: !(TF.Argument Text)
+      _description   :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the orchestration. -}
-    , _desired_state :: !(TF.Argument Text)
+    , _desired_state :: !(TF.Argument "desired_state" Text)
     {- ^ (Required) The desired state of the orchestration. Permitted values are: -}
-    , _instance'     :: !(TF.Argument Text)
+    , _instance'     :: !(TF.Argument "instance" Text)
     {- ^ (Required) The information pertaining to creating an instance through the orchestration API. -}
-    , _name          :: !(TF.Argument Text)
+    , _name          :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the orchestration. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeOrchestratedInstanceResource where
     toHCL ComputeOrchestratedInstanceResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "desired_state" <$> TF.argument _desired_state
-        , TF.assign "instance" <$> TF.argument _instance'
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _description
+        , TF.argument _desired_state
+        , TF.argument _instance'
+        , TF.argument _name
         ]
 
-instance HasDescription ComputeOrchestratedInstanceResource (TF.Argument Text) where
-    description f s@ComputeOrchestratedInstanceResource{..} =
-        (\a -> s { _description = a } :: ComputeOrchestratedInstanceResource)
-             <$> f _description
+instance HasDescription ComputeOrchestratedInstanceResource Text where
+    description =
+        lens (_description :: ComputeOrchestratedInstanceResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeOrchestratedInstanceResource)
 
-instance HasDesiredState ComputeOrchestratedInstanceResource (TF.Argument Text) where
-    desiredState f s@ComputeOrchestratedInstanceResource{..} =
-        (\a -> s { _desired_state = a } :: ComputeOrchestratedInstanceResource)
-             <$> f _desired_state
+instance HasDesiredState ComputeOrchestratedInstanceResource Text where
+    desiredState =
+        lens (_desired_state :: ComputeOrchestratedInstanceResource -> TF.Argument "desired_state" Text)
+             (\s a -> s { _desired_state = a } :: ComputeOrchestratedInstanceResource)
 
-instance HasInstance' ComputeOrchestratedInstanceResource (TF.Argument Text) where
-    instance' f s@ComputeOrchestratedInstanceResource{..} =
-        (\a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource)
-             <$> f _instance'
+instance HasInstance' ComputeOrchestratedInstanceResource Text where
+    instance' =
+        lens (_instance' :: ComputeOrchestratedInstanceResource -> TF.Argument "instance" Text)
+             (\s a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource)
 
-instance HasName ComputeOrchestratedInstanceResource (TF.Argument Text) where
-    name f s@ComputeOrchestratedInstanceResource{..} =
-        (\a -> s { _name = a } :: ComputeOrchestratedInstanceResource)
-             <$> f _name
+instance HasName ComputeOrchestratedInstanceResource Text where
+    name =
+        lens (_name :: ComputeOrchestratedInstanceResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeOrchestratedInstanceResource)
 
 computeOrchestratedInstanceResource :: TF.Resource TF.OPC ComputeOrchestratedInstanceResource
 computeOrchestratedInstanceResource =
@@ -1078,86 +1059,71 @@ The @opc_compute_route@ resource creates and manages a route for an IP
 Network.
 -}
 data ComputeRouteResource = ComputeRouteResource {
-      _admin_distance             :: !(TF.Argument Text)
+      _admin_distance    :: !(TF.Argument "admin_distance" Text)
     {- ^ (Optional) The route's administrative distance. Defaults to @0@ . -}
-    , _description                :: !(TF.Argument Text)
+    , _description       :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the route. -}
-    , _ip_address_prefix          :: !(TF.Argument Text)
+    , _ip_address_prefix :: !(TF.Argument "ip_address_prefix" Text)
     {- ^ (Required) The IPv4 address prefix, in CIDR format, of the external network from which to route traffic. -}
-    , _name                       :: !(TF.Argument Text)
+    , _name              :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the route. -}
-    , _next_hop_vnic_set          :: !(TF.Argument Text)
+    , _next_hop_vnic_set :: !(TF.Argument "next_hop_vnic_set" Text)
     {- ^ (Required) Name of the virtual NIC set to route matching packets to. Routed flows are load-balanced among all the virtual NICs in the virtual NIC set. -}
-    , _computed_admin_distance    :: !(TF.Attribute Text)
-    {- ^ - The route's administrative distance. Defaults to @0@ . -}
-    , _computed_description       :: !(TF.Attribute Text)
-    {- ^ - The description of the route. -}
-    , _computed_ip_address_prefix :: !(TF.Attribute Text)
-    {- ^ - The IPv4 address prefix, in CIDR format, of the external network from which to route traffic. -}
-    , _computed_name              :: !(TF.Attribute Text)
-    {- ^ The name of the route -}
-    , _computed_next_hop_vnic_set :: !(TF.Attribute Text)
-    {- ^ - Name of the virtual NIC set to route matching packets to. Routed flows are load-balanced among all the virtual NICs in the virtual NIC set. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeRouteResource where
     toHCL ComputeRouteResource{..} = TF.block $ catMaybes
-        [ TF.assign "admin_distance" <$> TF.argument _admin_distance
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "ip_address_prefix" <$> TF.argument _ip_address_prefix
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "next_hop_vnic_set" <$> TF.argument _next_hop_vnic_set
+        [ TF.argument _admin_distance
+        , TF.argument _description
+        , TF.argument _ip_address_prefix
+        , TF.argument _name
+        , TF.argument _next_hop_vnic_set
         ]
 
-instance HasAdminDistance ComputeRouteResource (TF.Argument Text) where
-    adminDistance f s@ComputeRouteResource{..} =
-        (\a -> s { _admin_distance = a } :: ComputeRouteResource)
-             <$> f _admin_distance
+instance HasAdminDistance ComputeRouteResource Text where
+    adminDistance =
+        lens (_admin_distance :: ComputeRouteResource -> TF.Argument "admin_distance" Text)
+             (\s a -> s { _admin_distance = a } :: ComputeRouteResource)
 
-instance HasDescription ComputeRouteResource (TF.Argument Text) where
-    description f s@ComputeRouteResource{..} =
-        (\a -> s { _description = a } :: ComputeRouteResource)
-             <$> f _description
+instance HasDescription ComputeRouteResource Text where
+    description =
+        lens (_description :: ComputeRouteResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeRouteResource)
 
-instance HasIpAddressPrefix ComputeRouteResource (TF.Argument Text) where
-    ipAddressPrefix f s@ComputeRouteResource{..} =
-        (\a -> s { _ip_address_prefix = a } :: ComputeRouteResource)
-             <$> f _ip_address_prefix
+instance HasIpAddressPrefix ComputeRouteResource Text where
+    ipAddressPrefix =
+        lens (_ip_address_prefix :: ComputeRouteResource -> TF.Argument "ip_address_prefix" Text)
+             (\s a -> s { _ip_address_prefix = a } :: ComputeRouteResource)
 
-instance HasName ComputeRouteResource (TF.Argument Text) where
-    name f s@ComputeRouteResource{..} =
-        (\a -> s { _name = a } :: ComputeRouteResource)
-             <$> f _name
+instance HasName ComputeRouteResource Text where
+    name =
+        lens (_name :: ComputeRouteResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeRouteResource)
 
-instance HasNextHopVnicSet ComputeRouteResource (TF.Argument Text) where
-    nextHopVnicSet f s@ComputeRouteResource{..} =
-        (\a -> s { _next_hop_vnic_set = a } :: ComputeRouteResource)
-             <$> f _next_hop_vnic_set
+instance HasNextHopVnicSet ComputeRouteResource Text where
+    nextHopVnicSet =
+        lens (_next_hop_vnic_set :: ComputeRouteResource -> TF.Argument "next_hop_vnic_set" Text)
+             (\s a -> s { _next_hop_vnic_set = a } :: ComputeRouteResource)
 
-instance HasComputedAdminDistance ComputeRouteResource (TF.Attribute Text) where
-    computedAdminDistance f s@ComputeRouteResource{..} =
-        (\a -> s { _computed_admin_distance = a } :: ComputeRouteResource)
-             <$> f _computed_admin_distance
+instance HasComputedAdminDistance ComputeRouteResource Text where
+    computedAdminDistance =
+        to (\_  -> TF.Compute "admin_distance")
 
-instance HasComputedDescription ComputeRouteResource (TF.Attribute Text) where
-    computedDescription f s@ComputeRouteResource{..} =
-        (\a -> s { _computed_description = a } :: ComputeRouteResource)
-             <$> f _computed_description
+instance HasComputedDescription ComputeRouteResource Text where
+    computedDescription =
+        to (\_  -> TF.Compute "description")
 
-instance HasComputedIpAddressPrefix ComputeRouteResource (TF.Attribute Text) where
-    computedIpAddressPrefix f s@ComputeRouteResource{..} =
-        (\a -> s { _computed_ip_address_prefix = a } :: ComputeRouteResource)
-             <$> f _computed_ip_address_prefix
+instance HasComputedIpAddressPrefix ComputeRouteResource Text where
+    computedIpAddressPrefix =
+        to (\_  -> TF.Compute "ip_address_prefix")
 
-instance HasComputedName ComputeRouteResource (TF.Attribute Text) where
-    computedName f s@ComputeRouteResource{..} =
-        (\a -> s { _computed_name = a } :: ComputeRouteResource)
-             <$> f _computed_name
+instance HasComputedName ComputeRouteResource Text where
+    computedName =
+        to (\_  -> TF.Compute "name")
 
-instance HasComputedNextHopVnicSet ComputeRouteResource (TF.Attribute Text) where
-    computedNextHopVnicSet f s@ComputeRouteResource{..} =
-        (\a -> s { _computed_next_hop_vnic_set = a } :: ComputeRouteResource)
-             <$> f _computed_next_hop_vnic_set
+instance HasComputedNextHopVnicSet ComputeRouteResource Text where
+    computedNextHopVnicSet =
+        to (\_  -> TF.Compute "next_hop_vnic_set")
 
 computeRouteResource :: TF.Resource TF.OPC ComputeRouteResource
 computeRouteResource =
@@ -1168,11 +1134,6 @@ computeRouteResource =
             , _ip_address_prefix = TF.Nil
             , _name = TF.Nil
             , _next_hop_vnic_set = TF.Nil
-            , _computed_admin_distance = TF.Compute "admin_distance"
-            , _computed_description = TF.Compute "description"
-            , _computed_ip_address_prefix = TF.Compute "ip_address_prefix"
-            , _computed_name = TF.Compute "name"
-            , _computed_next_hop_vnic_set = TF.Compute "next_hop_vnic_set"
             }
 
 {- | The @opc_compute_sec_rule@ OPC resource.
@@ -1183,67 +1144,67 @@ list), a destination security list (or security IP list), and a security
 application.
 -}
 data ComputeSecRuleResource = ComputeSecRuleResource {
-      _action           :: !(TF.Argument Text)
+      _action           :: !(TF.Argument "action" Text)
     {- ^ (Required) Whether to @permit@ , @refuse@ or @deny@ packets to which this rule applies. This will ordinarily be @permit@ . -}
-    , _application      :: !(TF.Argument Text)
+    , _application      :: !(TF.Argument "application" Text)
     {- ^ (Required) The name of the application to which the rule applies. -}
-    , _description      :: !(TF.Argument Text)
+    , _description      :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description for this security rule. -}
-    , _destination_list :: !(TF.Argument Text)
+    , _destination_list :: !(TF.Argument "destination_list" Text)
     {- ^ (Required) The destination security list (prefixed with @seclist:@ ), or security IP list (prefixed with @seciplist:@ ). -}
-    , _disabled         :: !(TF.Argument Text)
+    , _disabled         :: !(TF.Argument "disabled" Text)
     {- ^ (Optional) Whether to disable this security rule. This is useful if you want to temporarily disable a rule without removing it outright from your Terraform resource definition. Defaults to @false@ . -}
-    , _name             :: !(TF.Argument Text)
+    , _name             :: !(TF.Argument "name" Text)
     {- ^ (Required) The unique (within the identity domain) name of the security rule. -}
-    , _source_list      :: !(TF.Argument Text)
+    , _source_list      :: !(TF.Argument "source_list" Text)
     {- ^ (Required) The source security list (prefixed with @seclist:@ ), or security IP list (prefixed with @seciplist:@ ). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecRuleResource where
     toHCL ComputeSecRuleResource{..} = TF.block $ catMaybes
-        [ TF.assign "action" <$> TF.argument _action
-        , TF.assign "application" <$> TF.argument _application
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "destination_list" <$> TF.argument _destination_list
-        , TF.assign "disabled" <$> TF.argument _disabled
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "source_list" <$> TF.argument _source_list
+        [ TF.argument _action
+        , TF.argument _application
+        , TF.argument _description
+        , TF.argument _destination_list
+        , TF.argument _disabled
+        , TF.argument _name
+        , TF.argument _source_list
         ]
 
-instance HasAction ComputeSecRuleResource (TF.Argument Text) where
-    action f s@ComputeSecRuleResource{..} =
-        (\a -> s { _action = a } :: ComputeSecRuleResource)
-             <$> f _action
+instance HasAction ComputeSecRuleResource Text where
+    action =
+        lens (_action :: ComputeSecRuleResource -> TF.Argument "action" Text)
+             (\s a -> s { _action = a } :: ComputeSecRuleResource)
 
-instance HasApplication ComputeSecRuleResource (TF.Argument Text) where
-    application f s@ComputeSecRuleResource{..} =
-        (\a -> s { _application = a } :: ComputeSecRuleResource)
-             <$> f _application
+instance HasApplication ComputeSecRuleResource Text where
+    application =
+        lens (_application :: ComputeSecRuleResource -> TF.Argument "application" Text)
+             (\s a -> s { _application = a } :: ComputeSecRuleResource)
 
-instance HasDescription ComputeSecRuleResource (TF.Argument Text) where
-    description f s@ComputeSecRuleResource{..} =
-        (\a -> s { _description = a } :: ComputeSecRuleResource)
-             <$> f _description
+instance HasDescription ComputeSecRuleResource Text where
+    description =
+        lens (_description :: ComputeSecRuleResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeSecRuleResource)
 
-instance HasDestinationList ComputeSecRuleResource (TF.Argument Text) where
-    destinationList f s@ComputeSecRuleResource{..} =
-        (\a -> s { _destination_list = a } :: ComputeSecRuleResource)
-             <$> f _destination_list
+instance HasDestinationList ComputeSecRuleResource Text where
+    destinationList =
+        lens (_destination_list :: ComputeSecRuleResource -> TF.Argument "destination_list" Text)
+             (\s a -> s { _destination_list = a } :: ComputeSecRuleResource)
 
-instance HasDisabled ComputeSecRuleResource (TF.Argument Text) where
-    disabled f s@ComputeSecRuleResource{..} =
-        (\a -> s { _disabled = a } :: ComputeSecRuleResource)
-             <$> f _disabled
+instance HasDisabled ComputeSecRuleResource Text where
+    disabled =
+        lens (_disabled :: ComputeSecRuleResource -> TF.Argument "disabled" Text)
+             (\s a -> s { _disabled = a } :: ComputeSecRuleResource)
 
-instance HasName ComputeSecRuleResource (TF.Argument Text) where
-    name f s@ComputeSecRuleResource{..} =
-        (\a -> s { _name = a } :: ComputeSecRuleResource)
-             <$> f _name
+instance HasName ComputeSecRuleResource Text where
+    name =
+        lens (_name :: ComputeSecRuleResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecRuleResource)
 
-instance HasSourceList ComputeSecRuleResource (TF.Argument Text) where
-    sourceList f s@ComputeSecRuleResource{..} =
-        (\a -> s { _source_list = a } :: ComputeSecRuleResource)
-             <$> f _source_list
+instance HasSourceList ComputeSecRuleResource Text where
+    sourceList =
+        lens (_source_list :: ComputeSecRuleResource -> TF.Argument "source_list" Text)
+             (\s a -> s { _source_list = a } :: ComputeSecRuleResource)
 
 computeSecRuleResource :: TF.Resource TF.OPC ComputeSecRuleResource
 computeSecRuleResource =
@@ -1264,51 +1225,51 @@ The @opc_compute_security_application@ resource creates and manages a
 security application in an OPC identity domain.
 -}
 data ComputeSecurityApplicationResource = ComputeSecurityApplicationResource {
-      _dport    :: !(TF.Argument Text)
+      _dport    :: !(TF.Argument "dport" Text)
     {- ^ (Required) The port, or range of ports, to enable for this application, e.g @8080@ , @6000-7000@ . This must be set if the @protocol@ is set to @tcp@ or @udp@ . -}
-    , _icmpcode :: !(TF.Argument Text)
+    , _icmpcode :: !(TF.Argument "icmpcode" Text)
     {- ^ (Optional) The ICMP code to enable for this application, if the @protocol@ is @icmp@ . Must be one of @admin@ , @df@ , @host@ , @network@ , @port@ or @protocol@ . -}
-    , _icmptype :: !(TF.Argument Text)
+    , _icmptype :: !(TF.Argument "icmptype" Text)
     {- ^ (Optional) The ICMP type to enable for this application, if the @protocol@ is @icmp@ . Must be one of @echo@ , @reply@ , @ttl@ , @traceroute@ , @unreachable@ . -}
-    , _name     :: !(TF.Argument Text)
+    , _name     :: !(TF.Argument "name" Text)
     {- ^ (Required) The unique (within the identity domain) name of the application -}
-    , _protocol :: !(TF.Argument Text)
+    , _protocol :: !(TF.Argument "protocol" Text)
     {- ^ (Required) The protocol to enable for this application. Must be one of @tcp@ , @udp@ , @ah@ , @esp@ , @icmp@ , @icmpv6@ , @igmp@ , @ipip@ , @gre@ , @mplsip@ , @ospf@ , @pim@ , @rdp@ , @sctp@ or @all@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecurityApplicationResource where
     toHCL ComputeSecurityApplicationResource{..} = TF.block $ catMaybes
-        [ TF.assign "dport" <$> TF.argument _dport
-        , TF.assign "icmpcode" <$> TF.argument _icmpcode
-        , TF.assign "icmptype" <$> TF.argument _icmptype
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "protocol" <$> TF.argument _protocol
+        [ TF.argument _dport
+        , TF.argument _icmpcode
+        , TF.argument _icmptype
+        , TF.argument _name
+        , TF.argument _protocol
         ]
 
-instance HasDport ComputeSecurityApplicationResource (TF.Argument Text) where
-    dport f s@ComputeSecurityApplicationResource{..} =
-        (\a -> s { _dport = a } :: ComputeSecurityApplicationResource)
-             <$> f _dport
+instance HasDport ComputeSecurityApplicationResource Text where
+    dport =
+        lens (_dport :: ComputeSecurityApplicationResource -> TF.Argument "dport" Text)
+             (\s a -> s { _dport = a } :: ComputeSecurityApplicationResource)
 
-instance HasIcmpcode ComputeSecurityApplicationResource (TF.Argument Text) where
-    icmpcode f s@ComputeSecurityApplicationResource{..} =
-        (\a -> s { _icmpcode = a } :: ComputeSecurityApplicationResource)
-             <$> f _icmpcode
+instance HasIcmpcode ComputeSecurityApplicationResource Text where
+    icmpcode =
+        lens (_icmpcode :: ComputeSecurityApplicationResource -> TF.Argument "icmpcode" Text)
+             (\s a -> s { _icmpcode = a } :: ComputeSecurityApplicationResource)
 
-instance HasIcmptype ComputeSecurityApplicationResource (TF.Argument Text) where
-    icmptype f s@ComputeSecurityApplicationResource{..} =
-        (\a -> s { _icmptype = a } :: ComputeSecurityApplicationResource)
-             <$> f _icmptype
+instance HasIcmptype ComputeSecurityApplicationResource Text where
+    icmptype =
+        lens (_icmptype :: ComputeSecurityApplicationResource -> TF.Argument "icmptype" Text)
+             (\s a -> s { _icmptype = a } :: ComputeSecurityApplicationResource)
 
-instance HasName ComputeSecurityApplicationResource (TF.Argument Text) where
-    name f s@ComputeSecurityApplicationResource{..} =
-        (\a -> s { _name = a } :: ComputeSecurityApplicationResource)
-             <$> f _name
+instance HasName ComputeSecurityApplicationResource Text where
+    name =
+        lens (_name :: ComputeSecurityApplicationResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecurityApplicationResource)
 
-instance HasProtocol ComputeSecurityApplicationResource (TF.Argument Text) where
-    protocol f s@ComputeSecurityApplicationResource{..} =
-        (\a -> s { _protocol = a } :: ComputeSecurityApplicationResource)
-             <$> f _protocol
+instance HasProtocol ComputeSecurityApplicationResource Text where
+    protocol =
+        lens (_protocol :: ComputeSecurityApplicationResource -> TF.Argument "protocol" Text)
+             (\s a -> s { _protocol = a } :: ComputeSecurityApplicationResource)
 
 computeSecurityApplicationResource :: TF.Resource TF.OPC ComputeSecurityApplicationResource
 computeSecurityApplicationResource =
@@ -1328,35 +1289,35 @@ association between an instance and a security list in an OPC identity
 domain.
 -}
 data ComputeSecurityAssociationResource = ComputeSecurityAssociationResource {
-      _name    :: !(TF.Argument Text)
+      _name    :: !(TF.Argument "name" Text)
     {- ^ (Optional) The Name for the Security Association. If not specified, one is created automatically. Changing this forces a new resource to be created. -}
-    , _seclist :: !(TF.Argument Text)
+    , _seclist :: !(TF.Argument "seclist" Text)
     {- ^ (Required) The name of the security list to associate the instance to. -}
-    , _vcable  :: !(TF.Argument Text)
+    , _vcable  :: !(TF.Argument "vcable" Text)
     {- ^ (Required) The @vcable@ of the instance to associate to the security list. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecurityAssociationResource where
     toHCL ComputeSecurityAssociationResource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
-        , TF.assign "seclist" <$> TF.argument _seclist
-        , TF.assign "vcable" <$> TF.argument _vcable
+        [ TF.argument _name
+        , TF.argument _seclist
+        , TF.argument _vcable
         ]
 
-instance HasName ComputeSecurityAssociationResource (TF.Argument Text) where
-    name f s@ComputeSecurityAssociationResource{..} =
-        (\a -> s { _name = a } :: ComputeSecurityAssociationResource)
-             <$> f _name
+instance HasName ComputeSecurityAssociationResource Text where
+    name =
+        lens (_name :: ComputeSecurityAssociationResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecurityAssociationResource)
 
-instance HasSeclist ComputeSecurityAssociationResource (TF.Argument Text) where
-    seclist f s@ComputeSecurityAssociationResource{..} =
-        (\a -> s { _seclist = a } :: ComputeSecurityAssociationResource)
-             <$> f _seclist
+instance HasSeclist ComputeSecurityAssociationResource Text where
+    seclist =
+        lens (_seclist :: ComputeSecurityAssociationResource -> TF.Argument "seclist" Text)
+             (\s a -> s { _seclist = a } :: ComputeSecurityAssociationResource)
 
-instance HasVcable ComputeSecurityAssociationResource (TF.Argument Text) where
-    vcable f s@ComputeSecurityAssociationResource{..} =
-        (\a -> s { _vcable = a } :: ComputeSecurityAssociationResource)
-             <$> f _vcable
+instance HasVcable ComputeSecurityAssociationResource Text where
+    vcable =
+        lens (_vcable :: ComputeSecurityAssociationResource -> TF.Argument "vcable" Text)
+             (\s a -> s { _vcable = a } :: ComputeSecurityAssociationResource)
 
 computeSecurityAssociationResource :: TF.Resource TF.OPC ComputeSecurityAssociationResource
 computeSecurityAssociationResource =
@@ -1373,35 +1334,35 @@ The @opc_compute_security_ip_list@ resource creates and manages a security
 IP list in an OPC identity domain.
 -}
 data ComputeSecurityIpListResource = ComputeSecurityIpListResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the security ip list. -}
-    , _ip_entries  :: !(TF.Argument Text)
+    , _ip_entries  :: !(TF.Argument "ip_entries" Text)
     {- ^ (Required) The IP addresses to include in the list. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The unique (within the identity domain) name of the security IP list. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecurityIpListResource where
     toHCL ComputeSecurityIpListResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "ip_entries" <$> TF.argument _ip_entries
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _description
+        , TF.argument _ip_entries
+        , TF.argument _name
         ]
 
-instance HasDescription ComputeSecurityIpListResource (TF.Argument Text) where
-    description f s@ComputeSecurityIpListResource{..} =
-        (\a -> s { _description = a } :: ComputeSecurityIpListResource)
-             <$> f _description
+instance HasDescription ComputeSecurityIpListResource Text where
+    description =
+        lens (_description :: ComputeSecurityIpListResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeSecurityIpListResource)
 
-instance HasIpEntries ComputeSecurityIpListResource (TF.Argument Text) where
-    ipEntries f s@ComputeSecurityIpListResource{..} =
-        (\a -> s { _ip_entries = a } :: ComputeSecurityIpListResource)
-             <$> f _ip_entries
+instance HasIpEntries ComputeSecurityIpListResource Text where
+    ipEntries =
+        lens (_ip_entries :: ComputeSecurityIpListResource -> TF.Argument "ip_entries" Text)
+             (\s a -> s { _ip_entries = a } :: ComputeSecurityIpListResource)
 
-instance HasName ComputeSecurityIpListResource (TF.Argument Text) where
-    name f s@ComputeSecurityIpListResource{..} =
-        (\a -> s { _name = a } :: ComputeSecurityIpListResource)
-             <$> f _name
+instance HasName ComputeSecurityIpListResource Text where
+    name =
+        lens (_name :: ComputeSecurityIpListResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecurityIpListResource)
 
 computeSecurityIpListResource :: TF.Resource TF.OPC ComputeSecurityIpListResource
 computeSecurityIpListResource =
@@ -1418,35 +1379,35 @@ The @opc_compute_security_list@ resource creates and manages a security list
 in an OPC identity domain.
 -}
 data ComputeSecurityListResource = ComputeSecurityListResource {
-      _name               :: !(TF.Argument Text)
+      _name               :: !(TF.Argument "name" Text)
     {- ^ (Required) The unique (within the identity domain) name of the security list. -}
-    , _output_cidr_policy :: !(TF.Argument Text)
+    , _output_cidr_policy :: !(TF.Argument "output_cidr_policy" Text)
     {- ^ (Required) The policy for outbound traffic from the security list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
-    , _policy             :: !(TF.Argument Text)
+    , _policy             :: !(TF.Argument "policy" Text)
     {- ^ (Required) The policy to apply to instances associated with this list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecurityListResource where
     toHCL ComputeSecurityListResource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
-        , TF.assign "output_cidr_policy" <$> TF.argument _output_cidr_policy
-        , TF.assign "policy" <$> TF.argument _policy
+        [ TF.argument _name
+        , TF.argument _output_cidr_policy
+        , TF.argument _policy
         ]
 
-instance HasName ComputeSecurityListResource (TF.Argument Text) where
-    name f s@ComputeSecurityListResource{..} =
-        (\a -> s { _name = a } :: ComputeSecurityListResource)
-             <$> f _name
+instance HasName ComputeSecurityListResource Text where
+    name =
+        lens (_name :: ComputeSecurityListResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecurityListResource)
 
-instance HasOutputCidrPolicy ComputeSecurityListResource (TF.Argument Text) where
-    outputCidrPolicy f s@ComputeSecurityListResource{..} =
-        (\a -> s { _output_cidr_policy = a } :: ComputeSecurityListResource)
-             <$> f _output_cidr_policy
+instance HasOutputCidrPolicy ComputeSecurityListResource Text where
+    outputCidrPolicy =
+        lens (_output_cidr_policy :: ComputeSecurityListResource -> TF.Argument "output_cidr_policy" Text)
+             (\s a -> s { _output_cidr_policy = a } :: ComputeSecurityListResource)
 
-instance HasPolicy ComputeSecurityListResource (TF.Argument Text) where
-    policy f s@ComputeSecurityListResource{..} =
-        (\a -> s { _policy = a } :: ComputeSecurityListResource)
-             <$> f _policy
+instance HasPolicy ComputeSecurityListResource Text where
+    policy =
+        lens (_policy :: ComputeSecurityListResource -> TF.Argument "policy" Text)
+             (\s a -> s { _policy = a } :: ComputeSecurityListResource)
 
 computeSecurityListResource :: TF.Resource TF.OPC ComputeSecurityListResource
 computeSecurityListResource =
@@ -1463,59 +1424,59 @@ The @opc_compute_security_protocol@ resource creates and manages a security
 protocol in an OPC identity domain.
 -}
 data ComputeSecurityProtocolResource = ComputeSecurityProtocolResource {
-      _description :: !(TF.Argument Text)
+      _description :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the security protocol. -}
-    , _dst_ports   :: !(TF.Argument Text)
+    , _dst_ports   :: !(TF.Argument "dst_ports" Text)
     {- ^ (Optional) Enter a list of port numbers or port range strings. Traffic is enabled by a security rule when a packet's destination port matches the ports specified here. For TCP, SCTP, and UDP, each port is a destination transport port, between 0 and 65535, inclusive. For ICMP, each port is an ICMP type, between 0 and 255, inclusive. If no destination ports are specified, all destination ports or ICMP types are allowed. -}
-    , _ip_protocol :: !(TF.Argument Text)
+    , _ip_protocol :: !(TF.Argument "ip_protocol" Text)
     {- ^ (Optional) The protocol used in the data portion of the IP datagram. Permitted values are: tcp, udp, icmp, igmp, ipip, rdp, esp, ah, gre, icmpv6, ospf, pim, sctp, mplsip, all. Traffic is enabled by a security rule when the protocol in the packet matches the protocol specified here. If no protocol is specified, all protocols are allowed. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the security protocol. -}
-    , _src_ports   :: !(TF.Argument Text)
+    , _src_ports   :: !(TF.Argument "src_ports" Text)
     {- ^ (Optional) Enter a list of port numbers or port range strings. Traffic is enabled by a security rule when a packet's source port matches the ports specified here. For TCP, SCTP, and UDP, each port is a source transport port, between 0 and 65535, inclusive. For ICMP, each port is an ICMP type, between 0 and 255, inclusive. If no source ports are specified, all source ports or ICMP types are allowed. -}
-    , _tags        :: !(TF.Argument Text)
+    , _tags        :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the security protocol. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecurityProtocolResource where
     toHCL ComputeSecurityProtocolResource{..} = TF.block $ catMaybes
-        [ TF.assign "description" <$> TF.argument _description
-        , TF.assign "dst_ports" <$> TF.argument _dst_ports
-        , TF.assign "ip_protocol" <$> TF.argument _ip_protocol
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "src_ports" <$> TF.argument _src_ports
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _description
+        , TF.argument _dst_ports
+        , TF.argument _ip_protocol
+        , TF.argument _name
+        , TF.argument _src_ports
+        , TF.argument _tags
         ]
 
-instance HasDescription ComputeSecurityProtocolResource (TF.Argument Text) where
-    description f s@ComputeSecurityProtocolResource{..} =
-        (\a -> s { _description = a } :: ComputeSecurityProtocolResource)
-             <$> f _description
+instance HasDescription ComputeSecurityProtocolResource Text where
+    description =
+        lens (_description :: ComputeSecurityProtocolResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeSecurityProtocolResource)
 
-instance HasDstPorts ComputeSecurityProtocolResource (TF.Argument Text) where
-    dstPorts f s@ComputeSecurityProtocolResource{..} =
-        (\a -> s { _dst_ports = a } :: ComputeSecurityProtocolResource)
-             <$> f _dst_ports
+instance HasDstPorts ComputeSecurityProtocolResource Text where
+    dstPorts =
+        lens (_dst_ports :: ComputeSecurityProtocolResource -> TF.Argument "dst_ports" Text)
+             (\s a -> s { _dst_ports = a } :: ComputeSecurityProtocolResource)
 
-instance HasIpProtocol ComputeSecurityProtocolResource (TF.Argument Text) where
-    ipProtocol f s@ComputeSecurityProtocolResource{..} =
-        (\a -> s { _ip_protocol = a } :: ComputeSecurityProtocolResource)
-             <$> f _ip_protocol
+instance HasIpProtocol ComputeSecurityProtocolResource Text where
+    ipProtocol =
+        lens (_ip_protocol :: ComputeSecurityProtocolResource -> TF.Argument "ip_protocol" Text)
+             (\s a -> s { _ip_protocol = a } :: ComputeSecurityProtocolResource)
 
-instance HasName ComputeSecurityProtocolResource (TF.Argument Text) where
-    name f s@ComputeSecurityProtocolResource{..} =
-        (\a -> s { _name = a } :: ComputeSecurityProtocolResource)
-             <$> f _name
+instance HasName ComputeSecurityProtocolResource Text where
+    name =
+        lens (_name :: ComputeSecurityProtocolResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecurityProtocolResource)
 
-instance HasSrcPorts ComputeSecurityProtocolResource (TF.Argument Text) where
-    srcPorts f s@ComputeSecurityProtocolResource{..} =
-        (\a -> s { _src_ports = a } :: ComputeSecurityProtocolResource)
-             <$> f _src_ports
+instance HasSrcPorts ComputeSecurityProtocolResource Text where
+    srcPorts =
+        lens (_src_ports :: ComputeSecurityProtocolResource -> TF.Argument "src_ports" Text)
+             (\s a -> s { _src_ports = a } :: ComputeSecurityProtocolResource)
 
-instance HasTags ComputeSecurityProtocolResource (TF.Argument Text) where
-    tags f s@ComputeSecurityProtocolResource{..} =
-        (\a -> s { _tags = a } :: ComputeSecurityProtocolResource)
-             <$> f _tags
+instance HasTags ComputeSecurityProtocolResource Text where
+    tags =
+        lens (_tags :: ComputeSecurityProtocolResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeSecurityProtocolResource)
 
 computeSecurityProtocolResource :: TF.Resource TF.OPC ComputeSecurityProtocolResource
 computeSecurityProtocolResource =
@@ -1535,106 +1496,103 @@ The @opc_compute_security_rule@ resource creates and manages a security rule
 in an OPC identity domain.
 -}
 data ComputeSecurityRuleResource = ComputeSecurityRuleResource {
-      _acl                     :: !(TF.Argument Text)
+      _acl                     :: !(TF.Argument "acl" Text)
     {- ^ (Optional) Name of the ACL that contains this security rule. -}
-    , _description             :: !(TF.Argument Text)
+    , _description             :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the security rule. -}
-    , _disabled                :: !(TF.Argument Text)
+    , _disabled                :: !(TF.Argument "disabled" Text)
     {- ^ (Optional) Whether to disable this security rule. This is useful if you want to temporarily disable a rule without removing it outright from your Terraform resource definition. Defaults to @false@ . -}
-    , _dst_ip_address_prefixes :: !(TF.Argument Text)
+    , _dst_ip_address_prefixes :: !(TF.Argument "dst_ip_address_prefixes" Text)
     {- ^ (Optional) List of IP address prefix set names to match the packet's destination IP address. -}
-    , _dst_vnic_set            :: !(TF.Argument Text)
+    , _dst_vnic_set            :: !(TF.Argument "dst_vnic_set" Text)
     {- ^ (Optional) Name of virtual NIC set containing the packet's destination virtual NIC. -}
-    , _flow_direction          :: !(TF.Argument Text)
+    , _flow_direction          :: !(TF.Argument "flow_direction" Text)
     {- ^ (Required) Specify the direction of flow of traffic, which is relative to the instances, for this security rule. Allowed values are ingress or egress. -}
-    , _name                    :: !(TF.Argument Text)
+    , _name                    :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the security rule. -}
-    , _security_protocols      :: !(TF.Argument Text)
+    , _security_protocols      :: !(TF.Argument "security_protocols" Text)
     {- ^ (Optional) List of security protocol object names to match the packet's protocol and port. -}
-    , _src_ip_address_prefixes :: !(TF.Argument Text)
+    , _src_ip_address_prefixes :: !(TF.Argument "src_ip_address_prefixes" Text)
     {- ^ (Optional) List of names of IP address prefix set to match the packet's source IP address. -}
-    , _src_vnic_set            :: !(TF.Argument Text)
+    , _src_vnic_set            :: !(TF.Argument "src_vnic_set" Text)
     {- ^ (Optional) Name of virtual NIC set containing the packet's source virtual NIC. -}
-    , _tags                    :: !(TF.Argument Text)
+    , _tags                    :: !(TF.Argument "tags" Text)
     {- ^ (Optional) List of tags that may be applied to the security rule. -}
-    , _computed_uri            :: !(TF.Attribute Text)
-    {- ^ - The Uniform Resource Identifier of the security rule. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSecurityRuleResource where
     toHCL ComputeSecurityRuleResource{..} = TF.block $ catMaybes
-        [ TF.assign "acl" <$> TF.argument _acl
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "disabled" <$> TF.argument _disabled
-        , TF.assign "dst_ip_address_prefixes" <$> TF.argument _dst_ip_address_prefixes
-        , TF.assign "dst_vnic_set" <$> TF.argument _dst_vnic_set
-        , TF.assign "flow_direction" <$> TF.argument _flow_direction
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "security_protocols" <$> TF.argument _security_protocols
-        , TF.assign "src_ip_address_prefixes" <$> TF.argument _src_ip_address_prefixes
-        , TF.assign "src_vnic_set" <$> TF.argument _src_vnic_set
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _acl
+        , TF.argument _description
+        , TF.argument _disabled
+        , TF.argument _dst_ip_address_prefixes
+        , TF.argument _dst_vnic_set
+        , TF.argument _flow_direction
+        , TF.argument _name
+        , TF.argument _security_protocols
+        , TF.argument _src_ip_address_prefixes
+        , TF.argument _src_vnic_set
+        , TF.argument _tags
         ]
 
-instance HasAcl ComputeSecurityRuleResource (TF.Argument Text) where
-    acl f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _acl = a } :: ComputeSecurityRuleResource)
-             <$> f _acl
+instance HasAcl ComputeSecurityRuleResource Text where
+    acl =
+        lens (_acl :: ComputeSecurityRuleResource -> TF.Argument "acl" Text)
+             (\s a -> s { _acl = a } :: ComputeSecurityRuleResource)
 
-instance HasDescription ComputeSecurityRuleResource (TF.Argument Text) where
-    description f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _description = a } :: ComputeSecurityRuleResource)
-             <$> f _description
+instance HasDescription ComputeSecurityRuleResource Text where
+    description =
+        lens (_description :: ComputeSecurityRuleResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeSecurityRuleResource)
 
-instance HasDisabled ComputeSecurityRuleResource (TF.Argument Text) where
-    disabled f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _disabled = a } :: ComputeSecurityRuleResource)
-             <$> f _disabled
+instance HasDisabled ComputeSecurityRuleResource Text where
+    disabled =
+        lens (_disabled :: ComputeSecurityRuleResource -> TF.Argument "disabled" Text)
+             (\s a -> s { _disabled = a } :: ComputeSecurityRuleResource)
 
-instance HasDstIpAddressPrefixes ComputeSecurityRuleResource (TF.Argument Text) where
-    dstIpAddressPrefixes f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _dst_ip_address_prefixes = a } :: ComputeSecurityRuleResource)
-             <$> f _dst_ip_address_prefixes
+instance HasDstIpAddressPrefixes ComputeSecurityRuleResource Text where
+    dstIpAddressPrefixes =
+        lens (_dst_ip_address_prefixes :: ComputeSecurityRuleResource -> TF.Argument "dst_ip_address_prefixes" Text)
+             (\s a -> s { _dst_ip_address_prefixes = a } :: ComputeSecurityRuleResource)
 
-instance HasDstVnicSet ComputeSecurityRuleResource (TF.Argument Text) where
-    dstVnicSet f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _dst_vnic_set = a } :: ComputeSecurityRuleResource)
-             <$> f _dst_vnic_set
+instance HasDstVnicSet ComputeSecurityRuleResource Text where
+    dstVnicSet =
+        lens (_dst_vnic_set :: ComputeSecurityRuleResource -> TF.Argument "dst_vnic_set" Text)
+             (\s a -> s { _dst_vnic_set = a } :: ComputeSecurityRuleResource)
 
-instance HasFlowDirection ComputeSecurityRuleResource (TF.Argument Text) where
-    flowDirection f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _flow_direction = a } :: ComputeSecurityRuleResource)
-             <$> f _flow_direction
+instance HasFlowDirection ComputeSecurityRuleResource Text where
+    flowDirection =
+        lens (_flow_direction :: ComputeSecurityRuleResource -> TF.Argument "flow_direction" Text)
+             (\s a -> s { _flow_direction = a } :: ComputeSecurityRuleResource)
 
-instance HasName ComputeSecurityRuleResource (TF.Argument Text) where
-    name f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _name = a } :: ComputeSecurityRuleResource)
-             <$> f _name
+instance HasName ComputeSecurityRuleResource Text where
+    name =
+        lens (_name :: ComputeSecurityRuleResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSecurityRuleResource)
 
-instance HasSecurityProtocols ComputeSecurityRuleResource (TF.Argument Text) where
-    securityProtocols f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _security_protocols = a } :: ComputeSecurityRuleResource)
-             <$> f _security_protocols
+instance HasSecurityProtocols ComputeSecurityRuleResource Text where
+    securityProtocols =
+        lens (_security_protocols :: ComputeSecurityRuleResource -> TF.Argument "security_protocols" Text)
+             (\s a -> s { _security_protocols = a } :: ComputeSecurityRuleResource)
 
-instance HasSrcIpAddressPrefixes ComputeSecurityRuleResource (TF.Argument Text) where
-    srcIpAddressPrefixes f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _src_ip_address_prefixes = a } :: ComputeSecurityRuleResource)
-             <$> f _src_ip_address_prefixes
+instance HasSrcIpAddressPrefixes ComputeSecurityRuleResource Text where
+    srcIpAddressPrefixes =
+        lens (_src_ip_address_prefixes :: ComputeSecurityRuleResource -> TF.Argument "src_ip_address_prefixes" Text)
+             (\s a -> s { _src_ip_address_prefixes = a } :: ComputeSecurityRuleResource)
 
-instance HasSrcVnicSet ComputeSecurityRuleResource (TF.Argument Text) where
-    srcVnicSet f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _src_vnic_set = a } :: ComputeSecurityRuleResource)
-             <$> f _src_vnic_set
+instance HasSrcVnicSet ComputeSecurityRuleResource Text where
+    srcVnicSet =
+        lens (_src_vnic_set :: ComputeSecurityRuleResource -> TF.Argument "src_vnic_set" Text)
+             (\s a -> s { _src_vnic_set = a } :: ComputeSecurityRuleResource)
 
-instance HasTags ComputeSecurityRuleResource (TF.Argument Text) where
-    tags f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _tags = a } :: ComputeSecurityRuleResource)
-             <$> f _tags
+instance HasTags ComputeSecurityRuleResource Text where
+    tags =
+        lens (_tags :: ComputeSecurityRuleResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeSecurityRuleResource)
 
-instance HasComputedUri ComputeSecurityRuleResource (TF.Attribute Text) where
-    computedUri f s@ComputeSecurityRuleResource{..} =
-        (\a -> s { _computed_uri = a } :: ComputeSecurityRuleResource)
-             <$> f _computed_uri
+instance HasComputedUri ComputeSecurityRuleResource Text where
+    computedUri =
+        to (\_  -> TF.Compute "uri")
 
 computeSecurityRuleResource :: TF.Resource TF.OPC ComputeSecurityRuleResource
 computeSecurityRuleResource =
@@ -1651,7 +1609,6 @@ computeSecurityRuleResource =
             , _src_ip_address_prefixes = TF.Nil
             , _src_vnic_set = TF.Nil
             , _tags = TF.Nil
-            , _computed_uri = TF.Compute "uri"
             }
 
 {- | The @opc_compute_ssh_key@ OPC resource.
@@ -1660,35 +1617,35 @@ The @opc_compute_ssh_key@ resource creates and manages an SSH key in an OPC
 identity domain.
 -}
 data ComputeSshKeyResource = ComputeSshKeyResource {
-      _enabled :: !(TF.Argument Text)
+      _enabled :: !(TF.Argument "enabled" Text)
     {- ^ (Optional) Whether or not the key is enabled. This is useful if you want to temporarily disable an SSH key, without removing it entirely from your Terraform resource definition. Defaults to @true@ -}
-    , _key     :: !(TF.Argument Text)
+    , _key     :: !(TF.Argument "key" Text)
     {- ^ (Required) The SSH key itself -}
-    , _name    :: !(TF.Argument Text)
+    , _name    :: !(TF.Argument "name" Text)
     {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeSshKeyResource where
     toHCL ComputeSshKeyResource{..} = TF.block $ catMaybes
-        [ TF.assign "enabled" <$> TF.argument _enabled
-        , TF.assign "key" <$> TF.argument _key
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _enabled
+        , TF.argument _key
+        , TF.argument _name
         ]
 
-instance HasEnabled ComputeSshKeyResource (TF.Argument Text) where
-    enabled f s@ComputeSshKeyResource{..} =
-        (\a -> s { _enabled = a } :: ComputeSshKeyResource)
-             <$> f _enabled
+instance HasEnabled ComputeSshKeyResource Text where
+    enabled =
+        lens (_enabled :: ComputeSshKeyResource -> TF.Argument "enabled" Text)
+             (\s a -> s { _enabled = a } :: ComputeSshKeyResource)
 
-instance HasKey ComputeSshKeyResource (TF.Argument Text) where
-    key f s@ComputeSshKeyResource{..} =
-        (\a -> s { _key = a } :: ComputeSshKeyResource)
-             <$> f _key
+instance HasKey ComputeSshKeyResource Text where
+    key =
+        lens (_key :: ComputeSshKeyResource -> TF.Argument "key" Text)
+             (\s a -> s { _key = a } :: ComputeSshKeyResource)
 
-instance HasName ComputeSshKeyResource (TF.Argument Text) where
-    name f s@ComputeSshKeyResource{..} =
-        (\a -> s { _name = a } :: ComputeSshKeyResource)
-             <$> f _name
+instance HasName ComputeSshKeyResource Text where
+    name =
+        lens (_name :: ComputeSshKeyResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeSshKeyResource)
 
 computeSshKeyResource :: TF.Resource TF.OPC ComputeSshKeyResource
 computeSshKeyResource =
@@ -1697,6 +1654,51 @@ computeSshKeyResource =
             _enabled = TF.Nil
             , _key = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @opc_compute_storage_volume_attachment@ OPC resource.
+
+The @opc_compute_storage_volume_attachment@ resource creates and manages a
+storage volume attachment in an OPC identity domain.
+-}
+data ComputeStorageVolumeAttachmentResource = ComputeStorageVolumeAttachmentResource {
+      _index          :: !(TF.Argument "index" Text)
+    {- ^ (Required) The index on the instance that the storage volume will be attached to. -}
+    , _instance'      :: !(TF.Argument "instance" Text)
+    {- ^ (Required) The name of the instance the volume will be attached to. -}
+    , _storage_volume :: !(TF.Argument "storage_volume" Text)
+    {- ^ (Required) The name of the storage volume that will be attached to the instance -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL ComputeStorageVolumeAttachmentResource where
+    toHCL ComputeStorageVolumeAttachmentResource{..} = TF.block $ catMaybes
+        [ TF.argument _index
+        , TF.argument _instance'
+        , TF.argument _storage_volume
+        ]
+
+instance HasIndex ComputeStorageVolumeAttachmentResource Text where
+    index =
+        lens (_index :: ComputeStorageVolumeAttachmentResource -> TF.Argument "index" Text)
+             (\s a -> s { _index = a } :: ComputeStorageVolumeAttachmentResource)
+
+instance HasInstance' ComputeStorageVolumeAttachmentResource Text where
+    instance' =
+        lens (_instance' :: ComputeStorageVolumeAttachmentResource -> TF.Argument "instance" Text)
+             (\s a -> s { _instance' = a } :: ComputeStorageVolumeAttachmentResource)
+
+instance HasStorageVolume ComputeStorageVolumeAttachmentResource Text where
+    storageVolume =
+        lens (_storage_volume :: ComputeStorageVolumeAttachmentResource -> TF.Argument "storage_volume" Text)
+             (\s a -> s { _storage_volume = a } :: ComputeStorageVolumeAttachmentResource)
+
+computeStorageVolumeAttachmentResource :: TF.Resource TF.OPC ComputeStorageVolumeAttachmentResource
+computeStorageVolumeAttachmentResource =
+    TF.newResource "opc_compute_storage_volume_attachment" $
+        ComputeStorageVolumeAttachmentResource {
+            _index = TF.Nil
+            , _instance' = TF.Nil
+            , _storage_volume = TF.Nil
             }
 
 {- | The @opc_compute_storage_volume@ OPC resource.
@@ -1709,155 +1711,131 @@ consider setting </docs/configuration/resources.html#prevent_destroy> on
 your storage volume resources as an extra safety measure.
 -}
 data ComputeStorageVolumeResource = ComputeStorageVolumeResource {
-      _bootable               :: !(TF.Argument Text)
+      _bootable         :: !(TF.Argument "bootable" Text)
     {- ^ (Optional) Is the Volume Bootable? Defaults to @false@ . -}
-    , _description            :: !(TF.Argument Text)
+    , _description      :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the storage volume. -}
-    , _image_list             :: !(TF.Argument Text)
+    , _image_list       :: !(TF.Argument "image_list" Text)
     {- ^ (Optional) Defines an image list. -}
-    , _image_list_entry       :: !(TF.Argument Text)
+    , _image_list_entry :: !(TF.Argument "image_list_entry" Text)
     {- ^ (Optional) Defines an image list entry. -}
-    , _name                   :: !(TF.Argument Text)
+    , _name             :: !(TF.Argument "name" Text)
     {- ^ (Required) The name for the Storage Account. -}
-    , _size                   :: !(TF.Argument Text)
+    , _size             :: !(TF.Argument "size" Text)
     {- ^ (Required) The size of this storage volume in GB. The allowed range is from 1 GB to 2 TB (2048 GB). -}
-    , _snapshot               :: !(TF.Argument Text)
+    , _snapshot         :: !(TF.Argument "snapshot" Text)
     {- ^ (Optional) The name of the parent snapshot from which the storage volume is restored or cloned. See <#snapshots> , below for more information. -}
-    , _snapshot_account       :: !(TF.Argument Text)
+    , _snapshot_account :: !(TF.Argument "snapshot_account" Text)
     {- ^ (Optional) The Account of the parent snapshot from which the storage volume is restored. See <#snapshots> , below for more information. -}
-    , _snapshot_id            :: !(TF.Argument Text)
+    , _snapshot_id      :: !(TF.Argument "snapshot_id" Text)
     {- ^ (Optional) The Id of the parent snapshot from which the storage volume is restored or cloned. See <#snapshots> , below for more information. -}
-    , _storage_type           :: !(TF.Argument Text)
+    , _storage_type     :: !(TF.Argument "storage_type" Text)
     {- ^ (Optional) - The Type of Storage to provision. Defaults to @/oracle/public/storage/default@ . -}
-    , _tags                   :: !(TF.Argument Text)
+    , _tags             :: !(TF.Argument "tags" Text)
     {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
-    , _computed_hypervisor    :: !(TF.Attribute Text)
-    {- ^ - The hypervisor that this volume is compatible with. -}
-    , _computed_machine_image :: !(TF.Attribute Text)
-    {- ^ - Name of the Machine Image - available if the volume is a bootable storage volume. -}
-    , _computed_managed       :: !(TF.Attribute Text)
-    {- ^ - Is this a Managed Volume? -}
-    , _computed_platform      :: !(TF.Attribute Text)
-    {- ^ - The OS platform this volume is compatible with. -}
-    , _computed_readonly      :: !(TF.Attribute Text)
-    {- ^ - Can this Volume be attached as readonly? -}
-    , _computed_status        :: !(TF.Attribute Text)
-    {- ^ - The current state of the storage volume. -}
-    , _computed_storage_pool  :: !(TF.Attribute Text)
-    {- ^ - The storage pool from which this volume is allocated. -}
-    , _computed_uri           :: !(TF.Attribute Text)
-    {- ^ - Unique Resource Identifier of the Storage Volume. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeStorageVolumeResource where
     toHCL ComputeStorageVolumeResource{..} = TF.block $ catMaybes
-        [ TF.assign "bootable" <$> TF.argument _bootable
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "image_list" <$> TF.argument _image_list
-        , TF.assign "image_list_entry" <$> TF.argument _image_list_entry
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "size" <$> TF.argument _size
-        , TF.assign "snapshot" <$> TF.argument _snapshot
-        , TF.assign "snapshot_account" <$> TF.argument _snapshot_account
-        , TF.assign "snapshot_id" <$> TF.argument _snapshot_id
-        , TF.assign "storage_type" <$> TF.argument _storage_type
-        , TF.assign "tags" <$> TF.argument _tags
+        [ TF.argument _bootable
+        , TF.argument _description
+        , TF.argument _image_list
+        , TF.argument _image_list_entry
+        , TF.argument _name
+        , TF.argument _size
+        , TF.argument _snapshot
+        , TF.argument _snapshot_account
+        , TF.argument _snapshot_id
+        , TF.argument _storage_type
+        , TF.argument _tags
         ]
 
-instance HasBootable ComputeStorageVolumeResource (TF.Argument Text) where
-    bootable f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _bootable = a } :: ComputeStorageVolumeResource)
-             <$> f _bootable
+instance HasBootable ComputeStorageVolumeResource Text where
+    bootable =
+        lens (_bootable :: ComputeStorageVolumeResource -> TF.Argument "bootable" Text)
+             (\s a -> s { _bootable = a } :: ComputeStorageVolumeResource)
 
-instance HasDescription ComputeStorageVolumeResource (TF.Argument Text) where
-    description f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _description = a } :: ComputeStorageVolumeResource)
-             <$> f _description
+instance HasDescription ComputeStorageVolumeResource Text where
+    description =
+        lens (_description :: ComputeStorageVolumeResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeStorageVolumeResource)
 
-instance HasImageList ComputeStorageVolumeResource (TF.Argument Text) where
-    imageList f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _image_list = a } :: ComputeStorageVolumeResource)
-             <$> f _image_list
+instance HasImageList ComputeStorageVolumeResource Text where
+    imageList =
+        lens (_image_list :: ComputeStorageVolumeResource -> TF.Argument "image_list" Text)
+             (\s a -> s { _image_list = a } :: ComputeStorageVolumeResource)
 
-instance HasImageListEntry ComputeStorageVolumeResource (TF.Argument Text) where
-    imageListEntry f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _image_list_entry = a } :: ComputeStorageVolumeResource)
-             <$> f _image_list_entry
+instance HasImageListEntry ComputeStorageVolumeResource Text where
+    imageListEntry =
+        lens (_image_list_entry :: ComputeStorageVolumeResource -> TF.Argument "image_list_entry" Text)
+             (\s a -> s { _image_list_entry = a } :: ComputeStorageVolumeResource)
 
-instance HasName ComputeStorageVolumeResource (TF.Argument Text) where
-    name f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _name = a } :: ComputeStorageVolumeResource)
-             <$> f _name
+instance HasName ComputeStorageVolumeResource Text where
+    name =
+        lens (_name :: ComputeStorageVolumeResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeStorageVolumeResource)
 
-instance HasSize ComputeStorageVolumeResource (TF.Argument Text) where
-    size f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _size = a } :: ComputeStorageVolumeResource)
-             <$> f _size
+instance HasSize ComputeStorageVolumeResource Text where
+    size =
+        lens (_size :: ComputeStorageVolumeResource -> TF.Argument "size" Text)
+             (\s a -> s { _size = a } :: ComputeStorageVolumeResource)
 
-instance HasSnapshot ComputeStorageVolumeResource (TF.Argument Text) where
-    snapshot f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _snapshot = a } :: ComputeStorageVolumeResource)
-             <$> f _snapshot
+instance HasSnapshot ComputeStorageVolumeResource Text where
+    snapshot =
+        lens (_snapshot :: ComputeStorageVolumeResource -> TF.Argument "snapshot" Text)
+             (\s a -> s { _snapshot = a } :: ComputeStorageVolumeResource)
 
-instance HasSnapshotAccount ComputeStorageVolumeResource (TF.Argument Text) where
-    snapshotAccount f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _snapshot_account = a } :: ComputeStorageVolumeResource)
-             <$> f _snapshot_account
+instance HasSnapshotAccount ComputeStorageVolumeResource Text where
+    snapshotAccount =
+        lens (_snapshot_account :: ComputeStorageVolumeResource -> TF.Argument "snapshot_account" Text)
+             (\s a -> s { _snapshot_account = a } :: ComputeStorageVolumeResource)
 
-instance HasSnapshotId ComputeStorageVolumeResource (TF.Argument Text) where
-    snapshotId f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _snapshot_id = a } :: ComputeStorageVolumeResource)
-             <$> f _snapshot_id
+instance HasSnapshotId ComputeStorageVolumeResource Text where
+    snapshotId =
+        lens (_snapshot_id :: ComputeStorageVolumeResource -> TF.Argument "snapshot_id" Text)
+             (\s a -> s { _snapshot_id = a } :: ComputeStorageVolumeResource)
 
-instance HasStorageType ComputeStorageVolumeResource (TF.Argument Text) where
-    storageType f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _storage_type = a } :: ComputeStorageVolumeResource)
-             <$> f _storage_type
+instance HasStorageType ComputeStorageVolumeResource Text where
+    storageType =
+        lens (_storage_type :: ComputeStorageVolumeResource -> TF.Argument "storage_type" Text)
+             (\s a -> s { _storage_type = a } :: ComputeStorageVolumeResource)
 
-instance HasTags ComputeStorageVolumeResource (TF.Argument Text) where
-    tags f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _tags = a } :: ComputeStorageVolumeResource)
-             <$> f _tags
+instance HasTags ComputeStorageVolumeResource Text where
+    tags =
+        lens (_tags :: ComputeStorageVolumeResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeStorageVolumeResource)
 
-instance HasComputedHypervisor ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedHypervisor f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_hypervisor = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_hypervisor
+instance HasComputedHypervisor ComputeStorageVolumeResource Text where
+    computedHypervisor =
+        to (\_  -> TF.Compute "hypervisor")
 
-instance HasComputedMachineImage ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedMachineImage f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_machine_image = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_machine_image
+instance HasComputedMachineImage ComputeStorageVolumeResource Text where
+    computedMachineImage =
+        to (\_  -> TF.Compute "machine_image")
 
-instance HasComputedManaged ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedManaged f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_managed = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_managed
+instance HasComputedManaged ComputeStorageVolumeResource Text where
+    computedManaged =
+        to (\_  -> TF.Compute "managed")
 
-instance HasComputedPlatform ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedPlatform f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_platform = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_platform
+instance HasComputedPlatform ComputeStorageVolumeResource Text where
+    computedPlatform =
+        to (\_  -> TF.Compute "platform")
 
-instance HasComputedReadonly ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedReadonly f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_readonly = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_readonly
+instance HasComputedReadonly ComputeStorageVolumeResource Text where
+    computedReadonly =
+        to (\_  -> TF.Compute "readonly")
 
-instance HasComputedStatus ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedStatus f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_status = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_status
+instance HasComputedStatus ComputeStorageVolumeResource Text where
+    computedStatus =
+        to (\_  -> TF.Compute "status")
 
-instance HasComputedStoragePool ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedStoragePool f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_storage_pool = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_storage_pool
+instance HasComputedStoragePool ComputeStorageVolumeResource Text where
+    computedStoragePool =
+        to (\_  -> TF.Compute "storage_pool")
 
-instance HasComputedUri ComputeStorageVolumeResource (TF.Attribute Text) where
-    computedUri f s@ComputeStorageVolumeResource{..} =
-        (\a -> s { _computed_uri = a } :: ComputeStorageVolumeResource)
-             <$> f _computed_uri
+instance HasComputedUri ComputeStorageVolumeResource Text where
+    computedUri =
+        to (\_  -> TF.Compute "uri")
 
 computeStorageVolumeResource :: TF.Resource TF.OPC ComputeStorageVolumeResource
 computeStorageVolumeResource =
@@ -1874,14 +1852,6 @@ computeStorageVolumeResource =
             , _snapshot_id = TF.Nil
             , _storage_type = TF.Nil
             , _tags = TF.Nil
-            , _computed_hypervisor = TF.Compute "hypervisor"
-            , _computed_machine_image = TF.Compute "machine_image"
-            , _computed_managed = TF.Compute "managed"
-            , _computed_platform = TF.Compute "platform"
-            , _computed_readonly = TF.Compute "readonly"
-            , _computed_status = TF.Compute "status"
-            , _computed_storage_pool = TF.Compute "storage_pool"
-            , _computed_uri = TF.Compute "uri"
             }
 
 {- | The @opc_compute_storage_volume_snapshot@ OPC resource.
@@ -1890,143 +1860,107 @@ The @opc_compute_storage_volume_snapshot@ resource creates and manages a
 storage volume snapshot in an OPC identity domain.
 -}
 data ComputeStorageVolumeSnapshotResource = ComputeStorageVolumeSnapshotResource {
-      _collocated                  :: !(TF.Argument Text)
+      _collocated             :: !(TF.Argument "collocated" Text)
     {- ^ (Optional) Boolean specifying whether the snapshot is collocated or remote. Defaults to @false@ . -}
-    , _description                 :: !(TF.Argument Text)
+    , _description            :: !(TF.Argument "description" Text)
     {- ^ (Optional) The description of the storage volume snapshot. -}
-    , _name                        :: !(TF.Argument Text)
+    , _name                   :: !(TF.Argument "name" Text)
     {- ^ (Optional) The name of the storage volume snapshot. Will be generated if unspecified. -}
-    , _parent_volume_bootable      :: !(TF.Argument Text)
+    , _parent_volume_bootable :: !(TF.Argument "parent_volume_bootable" Text)
     {- ^ (Optional) A string value of whether or not the parent volume is 'bootable' or not. Defaults to @"false"@ . -}
-    , _tags                        :: !(TF.Argument Text)
+    , _tags                   :: !(TF.Argument "tags" Text)
     {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
-    , _volume_name                 :: !(TF.Argument Text)
+    , _volume_name            :: !(TF.Argument "volume_name" Text)
     {- ^ (Required) The name of the storage volume to create the snapshot from. -}
-    , _computed_account            :: !(TF.Attribute Text)
-    {- ^ - Account to use for snapshots. -}
-    , _computed_machine_image_name :: !(TF.Attribute Text)
-    {- ^ - The name of the machine image that's used in the boot volume from which this snapshot is taken. -}
-    , _computed_platform           :: !(TF.Attribute Text)
-    {- ^ - The OS platform this snapshot is compatible with -}
-    , _computed_property           :: !(TF.Attribute Text)
-    {- ^ - Where the snapshot is stored, whether collocated, or in the Oracle Storage Cloud Service instance. -}
-    , _computed_size               :: !(TF.Attribute Text)
-    {- ^ - The size of the snapshot in GB. -}
-    , _computed_snapshot_id        :: !(TF.Attribute Text)
-    {- ^ - The Oracle ID of the snapshot. -}
-    , _computed_snapshot_timestamp :: !(TF.Attribute Text)
-    {- ^ - Timestamp of the storage snapshot, generated by storage server. The snapshot will contain data written to the original volume before this time. -}
-    , _computed_start_timestamp    :: !(TF.Attribute Text)
-    {- ^ - Timestamp when the snapshot was started. -}
-    , _computed_status             :: !(TF.Attribute Text)
-    {- ^ - Status of the snapshot. -}
-    , _computed_status_detail      :: !(TF.Attribute Text)
-    {- ^ - Details about the latest state of the storage volume snapshot. -}
-    , _computed_status_timestamp   :: !(TF.Attribute Text)
-    {- ^ - Indicates the time that the current view of the storage volume snapshot was generated. -}
-    , _computed_uri                :: !(TF.Attribute Text)
-    {- ^ - Uniform Resource Identifier -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeStorageVolumeSnapshotResource where
     toHCL ComputeStorageVolumeSnapshotResource{..} = TF.block $ catMaybes
-        [ TF.assign "collocated" <$> TF.argument _collocated
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "parent_volume_bootable" <$> TF.argument _parent_volume_bootable
-        , TF.assign "tags" <$> TF.argument _tags
-        , TF.assign "volume_name" <$> TF.argument _volume_name
+        [ TF.argument _collocated
+        , TF.argument _description
+        , TF.argument _name
+        , TF.argument _parent_volume_bootable
+        , TF.argument _tags
+        , TF.argument _volume_name
         ]
 
-instance HasCollocated ComputeStorageVolumeSnapshotResource (TF.Argument Text) where
-    collocated f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _collocated = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _collocated
+instance HasCollocated ComputeStorageVolumeSnapshotResource Text where
+    collocated =
+        lens (_collocated :: ComputeStorageVolumeSnapshotResource -> TF.Argument "collocated" Text)
+             (\s a -> s { _collocated = a } :: ComputeStorageVolumeSnapshotResource)
 
-instance HasDescription ComputeStorageVolumeSnapshotResource (TF.Argument Text) where
-    description f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _description = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _description
+instance HasDescription ComputeStorageVolumeSnapshotResource Text where
+    description =
+        lens (_description :: ComputeStorageVolumeSnapshotResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeStorageVolumeSnapshotResource)
 
-instance HasName ComputeStorageVolumeSnapshotResource (TF.Argument Text) where
-    name f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _name = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _name
+instance HasName ComputeStorageVolumeSnapshotResource Text where
+    name =
+        lens (_name :: ComputeStorageVolumeSnapshotResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotResource)
 
-instance HasParentVolumeBootable ComputeStorageVolumeSnapshotResource (TF.Argument Text) where
-    parentVolumeBootable f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _parent_volume_bootable = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _parent_volume_bootable
+instance HasParentVolumeBootable ComputeStorageVolumeSnapshotResource Text where
+    parentVolumeBootable =
+        lens (_parent_volume_bootable :: ComputeStorageVolumeSnapshotResource -> TF.Argument "parent_volume_bootable" Text)
+             (\s a -> s { _parent_volume_bootable = a } :: ComputeStorageVolumeSnapshotResource)
 
-instance HasTags ComputeStorageVolumeSnapshotResource (TF.Argument Text) where
-    tags f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _tags = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _tags
+instance HasTags ComputeStorageVolumeSnapshotResource Text where
+    tags =
+        lens (_tags :: ComputeStorageVolumeSnapshotResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeStorageVolumeSnapshotResource)
 
-instance HasVolumeName ComputeStorageVolumeSnapshotResource (TF.Argument Text) where
-    volumeName f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _volume_name = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _volume_name
+instance HasVolumeName ComputeStorageVolumeSnapshotResource Text where
+    volumeName =
+        lens (_volume_name :: ComputeStorageVolumeSnapshotResource -> TF.Argument "volume_name" Text)
+             (\s a -> s { _volume_name = a } :: ComputeStorageVolumeSnapshotResource)
 
-instance HasComputedAccount ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedAccount f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_account = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_account
+instance HasComputedAccount ComputeStorageVolumeSnapshotResource Text where
+    computedAccount =
+        to (\_  -> TF.Compute "account")
 
-instance HasComputedMachineImageName ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedMachineImageName f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_machine_image_name = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_machine_image_name
+instance HasComputedMachineImageName ComputeStorageVolumeSnapshotResource Text where
+    computedMachineImageName =
+        to (\_  -> TF.Compute "machine_image_name")
 
-instance HasComputedPlatform ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedPlatform f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_platform = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_platform
+instance HasComputedPlatform ComputeStorageVolumeSnapshotResource Text where
+    computedPlatform =
+        to (\_  -> TF.Compute "platform")
 
-instance HasComputedProperty ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedProperty f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_property = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_property
+instance HasComputedProperty ComputeStorageVolumeSnapshotResource Text where
+    computedProperty =
+        to (\_  -> TF.Compute "property")
 
-instance HasComputedSize ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedSize f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_size = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_size
+instance HasComputedSize ComputeStorageVolumeSnapshotResource Text where
+    computedSize =
+        to (\_  -> TF.Compute "size")
 
-instance HasComputedSnapshotId ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedSnapshotId f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_snapshot_id = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_snapshot_id
+instance HasComputedSnapshotId ComputeStorageVolumeSnapshotResource Text where
+    computedSnapshotId =
+        to (\_  -> TF.Compute "snapshot_id")
 
-instance HasComputedSnapshotTimestamp ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedSnapshotTimestamp f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_snapshot_timestamp = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_snapshot_timestamp
+instance HasComputedSnapshotTimestamp ComputeStorageVolumeSnapshotResource Text where
+    computedSnapshotTimestamp =
+        to (\_  -> TF.Compute "snapshot_timestamp")
 
-instance HasComputedStartTimestamp ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedStartTimestamp f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_start_timestamp = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_start_timestamp
+instance HasComputedStartTimestamp ComputeStorageVolumeSnapshotResource Text where
+    computedStartTimestamp =
+        to (\_  -> TF.Compute "start_timestamp")
 
-instance HasComputedStatus ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedStatus f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_status = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_status
+instance HasComputedStatus ComputeStorageVolumeSnapshotResource Text where
+    computedStatus =
+        to (\_  -> TF.Compute "status")
 
-instance HasComputedStatusDetail ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedStatusDetail f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_status_detail = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_status_detail
+instance HasComputedStatusDetail ComputeStorageVolumeSnapshotResource Text where
+    computedStatusDetail =
+        to (\_  -> TF.Compute "status_detail")
 
-instance HasComputedStatusTimestamp ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedStatusTimestamp f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_status_timestamp = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_status_timestamp
+instance HasComputedStatusTimestamp ComputeStorageVolumeSnapshotResource Text where
+    computedStatusTimestamp =
+        to (\_  -> TF.Compute "status_timestamp")
 
-instance HasComputedUri ComputeStorageVolumeSnapshotResource (TF.Attribute Text) where
-    computedUri f s@ComputeStorageVolumeSnapshotResource{..} =
-        (\a -> s { _computed_uri = a } :: ComputeStorageVolumeSnapshotResource)
-             <$> f _computed_uri
+instance HasComputedUri ComputeStorageVolumeSnapshotResource Text where
+    computedUri =
+        to (\_  -> TF.Compute "uri")
 
 computeStorageVolumeSnapshotResource :: TF.Resource TF.OPC ComputeStorageVolumeSnapshotResource
 computeStorageVolumeSnapshotResource =
@@ -2038,18 +1972,6 @@ computeStorageVolumeSnapshotResource =
             , _parent_volume_bootable = TF.Nil
             , _tags = TF.Nil
             , _volume_name = TF.Nil
-            , _computed_account = TF.Compute "account"
-            , _computed_machine_image_name = TF.Compute "machine_image_name"
-            , _computed_platform = TF.Compute "platform"
-            , _computed_property = TF.Compute "property"
-            , _computed_size = TF.Compute "size"
-            , _computed_snapshot_id = TF.Compute "snapshot_id"
-            , _computed_snapshot_timestamp = TF.Compute "snapshot_timestamp"
-            , _computed_start_timestamp = TF.Compute "start_timestamp"
-            , _computed_status = TF.Compute "status"
-            , _computed_status_detail = TF.Compute "status_detail"
-            , _computed_status_timestamp = TF.Compute "status_timestamp"
-            , _computed_uri = TF.Compute "uri"
             }
 
 {- | The @opc_compute_vnic_set@ OPC resource.
@@ -2058,51 +1980,51 @@ The @opc_compute_vnic_set@ resource creates and manages a virtual NIC set in
 an OPC identity domain.
 -}
 data ComputeVnicSetResource = ComputeVnicSetResource {
-      _applied_acls :: !(TF.Argument Text)
+      _applied_acls :: !(TF.Argument "applied_acls" Text)
     {- ^ (Optional) A list of the ACLs to apply to the virtual nics in the set. -}
-    , _description  :: !(TF.Argument Text)
+    , _description  :: !(TF.Argument "description" Text)
     {- ^ (Optional) A description of the virtual nic set. -}
-    , _name         :: !(TF.Argument Text)
+    , _name         :: !(TF.Argument "name" Text)
     {- ^ (Required) The unique (within this identity domain) name of the virtual nic set. -}
-    , _tags         :: !(TF.Argument Text)
+    , _tags         :: !(TF.Argument "tags" Text)
     {- ^ (Optional) A list of tags to apply to the storage volume. -}
-    , _virtual_nics :: !(TF.Argument Text)
+    , _virtual_nics :: !(TF.Argument "virtual_nics" Text)
     {- ^ (Optional) List of virtual NICs associated with this virtual NIC set. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ComputeVnicSetResource where
     toHCL ComputeVnicSetResource{..} = TF.block $ catMaybes
-        [ TF.assign "applied_acls" <$> TF.argument _applied_acls
-        , TF.assign "description" <$> TF.argument _description
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "tags" <$> TF.argument _tags
-        , TF.assign "virtual_nics" <$> TF.argument _virtual_nics
+        [ TF.argument _applied_acls
+        , TF.argument _description
+        , TF.argument _name
+        , TF.argument _tags
+        , TF.argument _virtual_nics
         ]
 
-instance HasAppliedAcls ComputeVnicSetResource (TF.Argument Text) where
-    appliedAcls f s@ComputeVnicSetResource{..} =
-        (\a -> s { _applied_acls = a } :: ComputeVnicSetResource)
-             <$> f _applied_acls
+instance HasAppliedAcls ComputeVnicSetResource Text where
+    appliedAcls =
+        lens (_applied_acls :: ComputeVnicSetResource -> TF.Argument "applied_acls" Text)
+             (\s a -> s { _applied_acls = a } :: ComputeVnicSetResource)
 
-instance HasDescription ComputeVnicSetResource (TF.Argument Text) where
-    description f s@ComputeVnicSetResource{..} =
-        (\a -> s { _description = a } :: ComputeVnicSetResource)
-             <$> f _description
+instance HasDescription ComputeVnicSetResource Text where
+    description =
+        lens (_description :: ComputeVnicSetResource -> TF.Argument "description" Text)
+             (\s a -> s { _description = a } :: ComputeVnicSetResource)
 
-instance HasName ComputeVnicSetResource (TF.Argument Text) where
-    name f s@ComputeVnicSetResource{..} =
-        (\a -> s { _name = a } :: ComputeVnicSetResource)
-             <$> f _name
+instance HasName ComputeVnicSetResource Text where
+    name =
+        lens (_name :: ComputeVnicSetResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ComputeVnicSetResource)
 
-instance HasTags ComputeVnicSetResource (TF.Argument Text) where
-    tags f s@ComputeVnicSetResource{..} =
-        (\a -> s { _tags = a } :: ComputeVnicSetResource)
-             <$> f _tags
+instance HasTags ComputeVnicSetResource Text where
+    tags =
+        lens (_tags :: ComputeVnicSetResource -> TF.Argument "tags" Text)
+             (\s a -> s { _tags = a } :: ComputeVnicSetResource)
 
-instance HasVirtualNics ComputeVnicSetResource (TF.Argument Text) where
-    virtualNics f s@ComputeVnicSetResource{..} =
-        (\a -> s { _virtual_nics = a } :: ComputeVnicSetResource)
-             <$> f _virtual_nics
+instance HasVirtualNics ComputeVnicSetResource Text where
+    virtualNics =
+        lens (_virtual_nics :: ComputeVnicSetResource -> TF.Argument "virtual_nics" Text)
+             (\s a -> s { _virtual_nics = a } :: ComputeVnicSetResource)
 
 computeVnicSetResource :: TF.Resource TF.OPC ComputeVnicSetResource
 computeVnicSetResource =
@@ -2122,99 +2044,99 @@ Creates and manages a Container in the OPC Storage Domain.
 these resources.
 -}
 data StorageContainerResource = StorageContainerResource {
-      _allowed_origins :: !(TF.Argument Text)
+      _allowed_origins :: !(TF.Argument "allowed_origins" Text)
     {- ^ (Optional) List of origins that are allowed to make cross-origin requests. -}
-    , _exposed_headers :: !(TF.Argument Text)
+    , _exposed_headers :: !(TF.Argument "exposed_headers" Text)
     {- ^ (Optional) List of headers exposed to the user agent (e.g. browser) in the actual request response -}
-    , _max_age         :: !(TF.Argument Text)
+    , _max_age         :: !(TF.Argument "max_age" Text)
     {- ^ (Optional) Maximum age in seconds for the origin to hold the preflight results. -}
-    , _metadata        :: !(TF.Argument Text)
+    , _metadata        :: !(TF.Argument "metadata" Text)
     {- ^ (Optional) Additional object metadata headers. See <#container-metadata> below for more information. -}
-    , _name            :: !(TF.Argument Text)
+    , _name            :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the Storage Container. -}
-    , _primary_key     :: !(TF.Argument Text)
+    , _primary_key     :: !(TF.Argument "primary_key" Text)
     {- ^ (Optional) The primary secret key value for temporary URLs. -}
-    , _quota_bytes     :: !(TF.Argument Text)
+    , _quota_bytes     :: !(TF.Argument "quota_bytes" Text)
     {- ^ (Optional) Maximum size of the container, in bytes -}
-    , _quota_count     :: !(TF.Argument Text)
+    , _quota_count     :: !(TF.Argument "quota_count" Text)
     {- ^ (Optional) Maximum object count of the container -}
-    , _read_acls       :: !(TF.Argument Text)
-    {- ^ (Optional) The list of ACLs that grant read access. See <setting-container-acls> . -}
-    , _secondary_key   :: !(TF.Argument Text)
+    , _read_acls       :: !(TF.Argument "read_acls" Text)
+    {- ^ (Optional) The list of ACLs that grant read access. See <#setting-container-acls> . -}
+    , _secondary_key   :: !(TF.Argument "secondary_key" Text)
     {- ^ (Optional) The secondary secret key value for temporary URLs. -}
-    , _write_acls      :: !(TF.Argument Text)
-    {- ^ (Optional) The list of ACLs that grant write access. See <setting-container-acls> . -}
+    , _write_acls      :: !(TF.Argument "write_acls" Text)
+    {- ^ (Optional) The list of ACLs that grant write access. See <#setting-container-acls> . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL StorageContainerResource where
     toHCL StorageContainerResource{..} = TF.block $ catMaybes
-        [ TF.assign "allowed_origins" <$> TF.argument _allowed_origins
-        , TF.assign "exposed_headers" <$> TF.argument _exposed_headers
-        , TF.assign "max_age" <$> TF.argument _max_age
-        , TF.assign "metadata" <$> TF.argument _metadata
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "primary_key" <$> TF.argument _primary_key
-        , TF.assign "quota_bytes" <$> TF.argument _quota_bytes
-        , TF.assign "quota_count" <$> TF.argument _quota_count
-        , TF.assign "read_acls" <$> TF.argument _read_acls
-        , TF.assign "secondary_key" <$> TF.argument _secondary_key
-        , TF.assign "write_acls" <$> TF.argument _write_acls
+        [ TF.argument _allowed_origins
+        , TF.argument _exposed_headers
+        , TF.argument _max_age
+        , TF.argument _metadata
+        , TF.argument _name
+        , TF.argument _primary_key
+        , TF.argument _quota_bytes
+        , TF.argument _quota_count
+        , TF.argument _read_acls
+        , TF.argument _secondary_key
+        , TF.argument _write_acls
         ]
 
-instance HasAllowedOrigins StorageContainerResource (TF.Argument Text) where
-    allowedOrigins f s@StorageContainerResource{..} =
-        (\a -> s { _allowed_origins = a } :: StorageContainerResource)
-             <$> f _allowed_origins
+instance HasAllowedOrigins StorageContainerResource Text where
+    allowedOrigins =
+        lens (_allowed_origins :: StorageContainerResource -> TF.Argument "allowed_origins" Text)
+             (\s a -> s { _allowed_origins = a } :: StorageContainerResource)
 
-instance HasExposedHeaders StorageContainerResource (TF.Argument Text) where
-    exposedHeaders f s@StorageContainerResource{..} =
-        (\a -> s { _exposed_headers = a } :: StorageContainerResource)
-             <$> f _exposed_headers
+instance HasExposedHeaders StorageContainerResource Text where
+    exposedHeaders =
+        lens (_exposed_headers :: StorageContainerResource -> TF.Argument "exposed_headers" Text)
+             (\s a -> s { _exposed_headers = a } :: StorageContainerResource)
 
-instance HasMaxAge StorageContainerResource (TF.Argument Text) where
-    maxAge f s@StorageContainerResource{..} =
-        (\a -> s { _max_age = a } :: StorageContainerResource)
-             <$> f _max_age
+instance HasMaxAge StorageContainerResource Text where
+    maxAge =
+        lens (_max_age :: StorageContainerResource -> TF.Argument "max_age" Text)
+             (\s a -> s { _max_age = a } :: StorageContainerResource)
 
-instance HasMetadata StorageContainerResource (TF.Argument Text) where
-    metadata f s@StorageContainerResource{..} =
-        (\a -> s { _metadata = a } :: StorageContainerResource)
-             <$> f _metadata
+instance HasMetadata StorageContainerResource Text where
+    metadata =
+        lens (_metadata :: StorageContainerResource -> TF.Argument "metadata" Text)
+             (\s a -> s { _metadata = a } :: StorageContainerResource)
 
-instance HasName StorageContainerResource (TF.Argument Text) where
-    name f s@StorageContainerResource{..} =
-        (\a -> s { _name = a } :: StorageContainerResource)
-             <$> f _name
+instance HasName StorageContainerResource Text where
+    name =
+        lens (_name :: StorageContainerResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: StorageContainerResource)
 
-instance HasPrimaryKey StorageContainerResource (TF.Argument Text) where
-    primaryKey f s@StorageContainerResource{..} =
-        (\a -> s { _primary_key = a } :: StorageContainerResource)
-             <$> f _primary_key
+instance HasPrimaryKey StorageContainerResource Text where
+    primaryKey =
+        lens (_primary_key :: StorageContainerResource -> TF.Argument "primary_key" Text)
+             (\s a -> s { _primary_key = a } :: StorageContainerResource)
 
-instance HasQuotaBytes StorageContainerResource (TF.Argument Text) where
-    quotaBytes f s@StorageContainerResource{..} =
-        (\a -> s { _quota_bytes = a } :: StorageContainerResource)
-             <$> f _quota_bytes
+instance HasQuotaBytes StorageContainerResource Text where
+    quotaBytes =
+        lens (_quota_bytes :: StorageContainerResource -> TF.Argument "quota_bytes" Text)
+             (\s a -> s { _quota_bytes = a } :: StorageContainerResource)
 
-instance HasQuotaCount StorageContainerResource (TF.Argument Text) where
-    quotaCount f s@StorageContainerResource{..} =
-        (\a -> s { _quota_count = a } :: StorageContainerResource)
-             <$> f _quota_count
+instance HasQuotaCount StorageContainerResource Text where
+    quotaCount =
+        lens (_quota_count :: StorageContainerResource -> TF.Argument "quota_count" Text)
+             (\s a -> s { _quota_count = a } :: StorageContainerResource)
 
-instance HasReadAcls StorageContainerResource (TF.Argument Text) where
-    readAcls f s@StorageContainerResource{..} =
-        (\a -> s { _read_acls = a } :: StorageContainerResource)
-             <$> f _read_acls
+instance HasReadAcls StorageContainerResource Text where
+    readAcls =
+        lens (_read_acls :: StorageContainerResource -> TF.Argument "read_acls" Text)
+             (\s a -> s { _read_acls = a } :: StorageContainerResource)
 
-instance HasSecondaryKey StorageContainerResource (TF.Argument Text) where
-    secondaryKey f s@StorageContainerResource{..} =
-        (\a -> s { _secondary_key = a } :: StorageContainerResource)
-             <$> f _secondary_key
+instance HasSecondaryKey StorageContainerResource Text where
+    secondaryKey =
+        lens (_secondary_key :: StorageContainerResource -> TF.Argument "secondary_key" Text)
+             (\s a -> s { _secondary_key = a } :: StorageContainerResource)
 
-instance HasWriteAcls StorageContainerResource (TF.Argument Text) where
-    writeAcls f s@StorageContainerResource{..} =
-        (\a -> s { _write_acls = a } :: StorageContainerResource)
-             <$> f _write_acls
+instance HasWriteAcls StorageContainerResource Text where
+    writeAcls =
+        lens (_write_acls :: StorageContainerResource -> TF.Argument "write_acls" Text)
+             (\s a -> s { _write_acls = a } :: StorageContainerResource)
 
 storageContainerResource :: TF.Resource TF.OPC StorageContainerResource
 storageContainerResource =
@@ -2240,27 +2162,27 @@ Creates and manages a Object in the OPC Storage Container.
 these resources.
 -}
 data StorageObjectResource = StorageObjectResource {
-      _container :: !(TF.Argument Text)
+      _container :: !(TF.Argument "container" Text)
     {- ^ (Required) The name of Storage Container the store the object in. -}
-    , _name      :: !(TF.Argument Text)
+    , _name      :: !(TF.Argument "name" Text)
     {- ^ (Required) The name of the Storage Object. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL StorageObjectResource where
     toHCL StorageObjectResource{..} = TF.block $ catMaybes
-        [ TF.assign "container" <$> TF.argument _container
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _container
+        , TF.argument _name
         ]
 
-instance HasContainer StorageObjectResource (TF.Argument Text) where
-    container f s@StorageObjectResource{..} =
-        (\a -> s { _container = a } :: StorageObjectResource)
-             <$> f _container
+instance HasContainer StorageObjectResource Text where
+    container =
+        lens (_container :: StorageObjectResource -> TF.Argument "container" Text)
+             (\s a -> s { _container = a } :: StorageObjectResource)
 
-instance HasName StorageObjectResource (TF.Argument Text) where
-    name f s@StorageObjectResource{..} =
-        (\a -> s { _name = a } :: StorageObjectResource)
-             <$> f _name
+instance HasName StorageObjectResource Text where
+    name =
+        lens (_name :: StorageObjectResource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: StorageObjectResource)
 
 storageObjectResource :: TF.Resource TF.OPC StorageObjectResource
 storageObjectResource =
@@ -2271,631 +2193,643 @@ storageObjectResource =
             }
 
 class HasAccount s a | s -> a where
-    account :: Functor f => (a -> f a) -> s -> f s
+    account :: Lens' s (TF.Argument "account" a)
 
 instance HasAccount s a => HasAccount (TF.Resource p s) a where
     account = TF.configuration . account
 
 class HasAcl s a | s -> a where
-    acl :: Functor f => (a -> f a) -> s -> f s
+    acl :: Lens' s (TF.Argument "acl" a)
 
 instance HasAcl s a => HasAcl (TF.Resource p s) a where
     acl = TF.configuration . acl
 
 class HasAction s a | s -> a where
-    action :: Functor f => (a -> f a) -> s -> f s
+    action :: Lens' s (TF.Argument "action" a)
 
 instance HasAction s a => HasAction (TF.Resource p s) a where
     action = TF.configuration . action
 
 class HasAdminDistance s a | s -> a where
-    adminDistance :: Functor f => (a -> f a) -> s -> f s
+    adminDistance :: Lens' s (TF.Argument "admin_distance" a)
 
 instance HasAdminDistance s a => HasAdminDistance (TF.Resource p s) a where
     adminDistance = TF.configuration . adminDistance
 
 class HasAllowedOrigins s a | s -> a where
-    allowedOrigins :: Functor f => (a -> f a) -> s -> f s
+    allowedOrigins :: Lens' s (TF.Argument "allowed_origins" a)
 
 instance HasAllowedOrigins s a => HasAllowedOrigins (TF.Resource p s) a where
     allowedOrigins = TF.configuration . allowedOrigins
 
 class HasApplication s a | s -> a where
-    application :: Functor f => (a -> f a) -> s -> f s
+    application :: Lens' s (TF.Argument "application" a)
 
 instance HasApplication s a => HasApplication (TF.Resource p s) a where
     application = TF.configuration . application
 
 class HasAppliedAcls s a | s -> a where
-    appliedAcls :: Functor f => (a -> f a) -> s -> f s
+    appliedAcls :: Lens' s (TF.Argument "applied_acls" a)
 
 instance HasAppliedAcls s a => HasAppliedAcls (TF.Resource p s) a where
     appliedAcls = TF.configuration . appliedAcls
 
 class HasAttributes s a | s -> a where
-    attributes :: Functor f => (a -> f a) -> s -> f s
+    attributes :: Lens' s (TF.Argument "attributes" a)
 
 instance HasAttributes s a => HasAttributes (TF.Resource p s) a where
     attributes = TF.configuration . attributes
 
 class HasBootOrder s a | s -> a where
-    bootOrder :: Functor f => (a -> f a) -> s -> f s
+    bootOrder :: Lens' s (TF.Argument "boot_order" a)
 
 instance HasBootOrder s a => HasBootOrder (TF.Resource p s) a where
     bootOrder = TF.configuration . bootOrder
 
 class HasBootable s a | s -> a where
-    bootable :: Functor f => (a -> f a) -> s -> f s
+    bootable :: Lens' s (TF.Argument "bootable" a)
 
 instance HasBootable s a => HasBootable (TF.Resource p s) a where
     bootable = TF.configuration . bootable
 
 class HasCollocated s a | s -> a where
-    collocated :: Functor f => (a -> f a) -> s -> f s
+    collocated :: Lens' s (TF.Argument "collocated" a)
 
 instance HasCollocated s a => HasCollocated (TF.Resource p s) a where
     collocated = TF.configuration . collocated
 
-class HasComputedAccount s a | s -> a where
-    computedAccount :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedAccount s a => HasComputedAccount (TF.Resource p s) a where
-    computedAccount = TF.configuration . computedAccount
-
-class HasComputedAdminDistance s a | s -> a where
-    computedAdminDistance :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedAdminDistance s a => HasComputedAdminDistance (TF.Resource p s) a where
-    computedAdminDistance = TF.configuration . computedAdminDistance
-
-class HasComputedDescription s a | s -> a where
-    computedDescription :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedDescription s a => HasComputedDescription (TF.Resource p s) a where
-    computedDescription = TF.configuration . computedDescription
-
-class HasComputedHypervisor s a | s -> a where
-    computedHypervisor :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedHypervisor s a => HasComputedHypervisor (TF.Resource p s) a where
-    computedHypervisor = TF.configuration . computedHypervisor
-
-class HasComputedIpAddressPrefix s a | s -> a where
-    computedIpAddressPrefix :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIpAddressPrefix s a => HasComputedIpAddressPrefix (TF.Resource p s) a where
-    computedIpAddressPrefix = TF.configuration . computedIpAddressPrefix
-
-class HasComputedIpNetworkExchange s a | s -> a where
-    computedIpNetworkExchange :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedIpNetworkExchange s a => HasComputedIpNetworkExchange (TF.Resource p s) a where
-    computedIpNetworkExchange = TF.configuration . computedIpNetworkExchange
-
-class HasComputedMachineImage s a | s -> a where
-    computedMachineImage :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedMachineImage s a => HasComputedMachineImage (TF.Resource p s) a where
-    computedMachineImage = TF.configuration . computedMachineImage
-
-class HasComputedMachineImageName s a | s -> a where
-    computedMachineImageName :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedMachineImageName s a => HasComputedMachineImageName (TF.Resource p s) a where
-    computedMachineImageName = TF.configuration . computedMachineImageName
-
-class HasComputedManaged s a | s -> a where
-    computedManaged :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedManaged s a => HasComputedManaged (TF.Resource p s) a where
-    computedManaged = TF.configuration . computedManaged
-
-class HasComputedName s a | s -> a where
-    computedName :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedNextHopVnicSet s a | s -> a where
-    computedNextHopVnicSet :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedNextHopVnicSet s a => HasComputedNextHopVnicSet (TF.Resource p s) a where
-    computedNextHopVnicSet = TF.configuration . computedNextHopVnicSet
-
-class HasComputedPlatform s a | s -> a where
-    computedPlatform :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedPlatform s a => HasComputedPlatform (TF.Resource p s) a where
-    computedPlatform = TF.configuration . computedPlatform
-
-class HasComputedProperty s a | s -> a where
-    computedProperty :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedProperty s a => HasComputedProperty (TF.Resource p s) a where
-    computedProperty = TF.configuration . computedProperty
-
-class HasComputedPublicNaptEnabled s a | s -> a where
-    computedPublicNaptEnabled :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedPublicNaptEnabled s a => HasComputedPublicNaptEnabled (TF.Resource p s) a where
-    computedPublicNaptEnabled = TF.configuration . computedPublicNaptEnabled
-
-class HasComputedReadonly s a | s -> a where
-    computedReadonly :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedReadonly s a => HasComputedReadonly (TF.Resource p s) a where
-    computedReadonly = TF.configuration . computedReadonly
-
-class HasComputedSize s a | s -> a where
-    computedSize :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedSize s a => HasComputedSize (TF.Resource p s) a where
-    computedSize = TF.configuration . computedSize
-
-class HasComputedSnapshotId s a | s -> a where
-    computedSnapshotId :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedSnapshotId s a => HasComputedSnapshotId (TF.Resource p s) a where
-    computedSnapshotId = TF.configuration . computedSnapshotId
-
-class HasComputedSnapshotTimestamp s a | s -> a where
-    computedSnapshotTimestamp :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedSnapshotTimestamp s a => HasComputedSnapshotTimestamp (TF.Resource p s) a where
-    computedSnapshotTimestamp = TF.configuration . computedSnapshotTimestamp
-
-class HasComputedStartTimestamp s a | s -> a where
-    computedStartTimestamp :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedStartTimestamp s a => HasComputedStartTimestamp (TF.Resource p s) a where
-    computedStartTimestamp = TF.configuration . computedStartTimestamp
-
-class HasComputedStatus s a | s -> a where
-    computedStatus :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedStatus s a => HasComputedStatus (TF.Resource p s) a where
-    computedStatus = TF.configuration . computedStatus
-
-class HasComputedStatusDetail s a | s -> a where
-    computedStatusDetail :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedStatusDetail s a => HasComputedStatusDetail (TF.Resource p s) a where
-    computedStatusDetail = TF.configuration . computedStatusDetail
-
-class HasComputedStatusTimestamp s a | s -> a where
-    computedStatusTimestamp :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedStatusTimestamp s a => HasComputedStatusTimestamp (TF.Resource p s) a where
-    computedStatusTimestamp = TF.configuration . computedStatusTimestamp
-
-class HasComputedStoragePool s a | s -> a where
-    computedStoragePool :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedStoragePool s a => HasComputedStoragePool (TF.Resource p s) a where
-    computedStoragePool = TF.configuration . computedStoragePool
-
-class HasComputedUri s a | s -> a where
-    computedUri :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedUri s a => HasComputedUri (TF.Resource p s) a where
-    computedUri = TF.configuration . computedUri
-
 class HasContainer s a | s -> a where
-    container :: Functor f => (a -> f a) -> s -> f s
+    container :: Lens' s (TF.Argument "container" a)
 
 instance HasContainer s a => HasContainer (TF.Resource p s) a where
     container = TF.configuration . container
 
 class HasDefault' s a | s -> a where
-    default' :: Functor f => (a -> f a) -> s -> f s
+    default' :: Lens' s (TF.Argument "default" a)
 
 instance HasDefault' s a => HasDefault' (TF.Resource p s) a where
     default' = TF.configuration . default'
 
 class HasDescription s a | s -> a where
-    description :: Functor f => (a -> f a) -> s -> f s
+    description :: Lens' s (TF.Argument "description" a)
 
 instance HasDescription s a => HasDescription (TF.Resource p s) a where
     description = TF.configuration . description
 
 class HasDesiredState s a | s -> a where
-    desiredState :: Functor f => (a -> f a) -> s -> f s
+    desiredState :: Lens' s (TF.Argument "desired_state" a)
 
 instance HasDesiredState s a => HasDesiredState (TF.Resource p s) a where
     desiredState = TF.configuration . desiredState
 
 class HasDestinationList s a | s -> a where
-    destinationList :: Functor f => (a -> f a) -> s -> f s
+    destinationList :: Lens' s (TF.Argument "destination_list" a)
 
 instance HasDestinationList s a => HasDestinationList (TF.Resource p s) a where
     destinationList = TF.configuration . destinationList
 
 class HasDisabled s a | s -> a where
-    disabled :: Functor f => (a -> f a) -> s -> f s
+    disabled :: Lens' s (TF.Argument "disabled" a)
 
 instance HasDisabled s a => HasDisabled (TF.Resource p s) a where
     disabled = TF.configuration . disabled
 
 class HasDport s a | s -> a where
-    dport :: Functor f => (a -> f a) -> s -> f s
+    dport :: Lens' s (TF.Argument "dport" a)
 
 instance HasDport s a => HasDport (TF.Resource p s) a where
     dport = TF.configuration . dport
 
 class HasDstIpAddressPrefixes s a | s -> a where
-    dstIpAddressPrefixes :: Functor f => (a -> f a) -> s -> f s
+    dstIpAddressPrefixes :: Lens' s (TF.Argument "dst_ip_address_prefixes" a)
 
 instance HasDstIpAddressPrefixes s a => HasDstIpAddressPrefixes (TF.Resource p s) a where
     dstIpAddressPrefixes = TF.configuration . dstIpAddressPrefixes
 
 class HasDstPorts s a | s -> a where
-    dstPorts :: Functor f => (a -> f a) -> s -> f s
+    dstPorts :: Lens' s (TF.Argument "dst_ports" a)
 
 instance HasDstPorts s a => HasDstPorts (TF.Resource p s) a where
     dstPorts = TF.configuration . dstPorts
 
 class HasDstVnicSet s a | s -> a where
-    dstVnicSet :: Functor f => (a -> f a) -> s -> f s
+    dstVnicSet :: Lens' s (TF.Argument "dst_vnic_set" a)
 
 instance HasDstVnicSet s a => HasDstVnicSet (TF.Resource p s) a where
     dstVnicSet = TF.configuration . dstVnicSet
 
 class HasEnabled s a | s -> a where
-    enabled :: Functor f => (a -> f a) -> s -> f s
+    enabled :: Lens' s (TF.Argument "enabled" a)
 
 instance HasEnabled s a => HasEnabled (TF.Resource p s) a where
     enabled = TF.configuration . enabled
 
 class HasExposedHeaders s a | s -> a where
-    exposedHeaders :: Functor f => (a -> f a) -> s -> f s
+    exposedHeaders :: Lens' s (TF.Argument "exposed_headers" a)
 
 instance HasExposedHeaders s a => HasExposedHeaders (TF.Resource p s) a where
     exposedHeaders = TF.configuration . exposedHeaders
 
 class HasFile s a | s -> a where
-    file :: Functor f => (a -> f a) -> s -> f s
+    file :: Lens' s (TF.Argument "file" a)
 
 instance HasFile s a => HasFile (TF.Resource p s) a where
     file = TF.configuration . file
 
 class HasFlowDirection s a | s -> a where
-    flowDirection :: Functor f => (a -> f a) -> s -> f s
+    flowDirection :: Lens' s (TF.Argument "flow_direction" a)
 
 instance HasFlowDirection s a => HasFlowDirection (TF.Resource p s) a where
     flowDirection = TF.configuration . flowDirection
 
 class HasHostname s a | s -> a where
-    hostname :: Functor f => (a -> f a) -> s -> f s
+    hostname :: Lens' s (TF.Argument "hostname" a)
 
 instance HasHostname s a => HasHostname (TF.Resource p s) a where
     hostname = TF.configuration . hostname
 
 class HasIcmpcode s a | s -> a where
-    icmpcode :: Functor f => (a -> f a) -> s -> f s
+    icmpcode :: Lens' s (TF.Argument "icmpcode" a)
 
 instance HasIcmpcode s a => HasIcmpcode (TF.Resource p s) a where
     icmpcode = TF.configuration . icmpcode
 
 class HasIcmptype s a | s -> a where
-    icmptype :: Functor f => (a -> f a) -> s -> f s
+    icmptype :: Lens' s (TF.Argument "icmptype" a)
 
 instance HasIcmptype s a => HasIcmptype (TF.Resource p s) a where
     icmptype = TF.configuration . icmptype
 
 class HasImageList s a | s -> a where
-    imageList :: Functor f => (a -> f a) -> s -> f s
+    imageList :: Lens' s (TF.Argument "image_list" a)
 
 instance HasImageList s a => HasImageList (TF.Resource p s) a where
     imageList = TF.configuration . imageList
 
 class HasImageListEntry s a | s -> a where
-    imageListEntry :: Functor f => (a -> f a) -> s -> f s
+    imageListEntry :: Lens' s (TF.Argument "image_list_entry" a)
 
 instance HasImageListEntry s a => HasImageListEntry (TF.Resource p s) a where
     imageListEntry = TF.configuration . imageListEntry
 
+class HasIndex s a | s -> a where
+    index :: Lens' s (TF.Argument "index" a)
+
+instance HasIndex s a => HasIndex (TF.Resource p s) a where
+    index = TF.configuration . index
+
 class HasInstance' s a | s -> a where
-    instance' :: Functor f => (a -> f a) -> s -> f s
+    instance' :: Lens' s (TF.Argument "instance" a)
 
 instance HasInstance' s a => HasInstance' (TF.Resource p s) a where
     instance' = TF.configuration . instance'
 
 class HasInstanceAttributes s a | s -> a where
-    instanceAttributes :: Functor f => (a -> f a) -> s -> f s
+    instanceAttributes :: Lens' s (TF.Argument "instance_attributes" a)
 
 instance HasInstanceAttributes s a => HasInstanceAttributes (TF.Resource p s) a where
     instanceAttributes = TF.configuration . instanceAttributes
 
 class HasIpAddressPool s a | s -> a where
-    ipAddressPool :: Functor f => (a -> f a) -> s -> f s
+    ipAddressPool :: Lens' s (TF.Argument "ip_address_pool" a)
 
 instance HasIpAddressPool s a => HasIpAddressPool (TF.Resource p s) a where
     ipAddressPool = TF.configuration . ipAddressPool
 
 class HasIpAddressPrefix s a | s -> a where
-    ipAddressPrefix :: Functor f => (a -> f a) -> s -> f s
+    ipAddressPrefix :: Lens' s (TF.Argument "ip_address_prefix" a)
 
 instance HasIpAddressPrefix s a => HasIpAddressPrefix (TF.Resource p s) a where
     ipAddressPrefix = TF.configuration . ipAddressPrefix
 
 class HasIpAddressReservation s a | s -> a where
-    ipAddressReservation :: Functor f => (a -> f a) -> s -> f s
+    ipAddressReservation :: Lens' s (TF.Argument "ip_address_reservation" a)
 
 instance HasIpAddressReservation s a => HasIpAddressReservation (TF.Resource p s) a where
     ipAddressReservation = TF.configuration . ipAddressReservation
 
 class HasIpEntries s a | s -> a where
-    ipEntries :: Functor f => (a -> f a) -> s -> f s
+    ipEntries :: Lens' s (TF.Argument "ip_entries" a)
 
 instance HasIpEntries s a => HasIpEntries (TF.Resource p s) a where
     ipEntries = TF.configuration . ipEntries
 
 class HasIpNetworkExchange s a | s -> a where
-    ipNetworkExchange :: Functor f => (a -> f a) -> s -> f s
+    ipNetworkExchange :: Lens' s (TF.Argument "ip_network_exchange" a)
 
 instance HasIpNetworkExchange s a => HasIpNetworkExchange (TF.Resource p s) a where
     ipNetworkExchange = TF.configuration . ipNetworkExchange
 
 class HasIpProtocol s a | s -> a where
-    ipProtocol :: Functor f => (a -> f a) -> s -> f s
+    ipProtocol :: Lens' s (TF.Argument "ip_protocol" a)
 
 instance HasIpProtocol s a => HasIpProtocol (TF.Resource p s) a where
     ipProtocol = TF.configuration . ipProtocol
 
 class HasKey s a | s -> a where
-    key :: Functor f => (a -> f a) -> s -> f s
+    key :: Lens' s (TF.Argument "key" a)
 
 instance HasKey s a => HasKey (TF.Resource p s) a where
     key = TF.configuration . key
 
 class HasLabel s a | s -> a where
-    label :: Functor f => (a -> f a) -> s -> f s
+    label :: Lens' s (TF.Argument "label" a)
 
 instance HasLabel s a => HasLabel (TF.Resource p s) a where
     label = TF.configuration . label
 
 class HasMachineImages s a | s -> a where
-    machineImages :: Functor f => (a -> f a) -> s -> f s
+    machineImages :: Lens' s (TF.Argument "machine_images" a)
 
 instance HasMachineImages s a => HasMachineImages (TF.Resource p s) a where
     machineImages = TF.configuration . machineImages
 
 class HasMaxAge s a | s -> a where
-    maxAge :: Functor f => (a -> f a) -> s -> f s
+    maxAge :: Lens' s (TF.Argument "max_age" a)
 
 instance HasMaxAge s a => HasMaxAge (TF.Resource p s) a where
     maxAge = TF.configuration . maxAge
 
 class HasMetadata s a | s -> a where
-    metadata :: Functor f => (a -> f a) -> s -> f s
+    metadata :: Lens' s (TF.Argument "metadata" a)
 
 instance HasMetadata s a => HasMetadata (TF.Resource p s) a where
     metadata = TF.configuration . metadata
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.Resource p s) a where
     name = TF.configuration . name
 
 class HasNetworkingInfo s a | s -> a where
-    networkingInfo :: Functor f => (a -> f a) -> s -> f s
+    networkingInfo :: Lens' s (TF.Argument "networking_info" a)
 
 instance HasNetworkingInfo s a => HasNetworkingInfo (TF.Resource p s) a where
     networkingInfo = TF.configuration . networkingInfo
 
 class HasNextHopVnicSet s a | s -> a where
-    nextHopVnicSet :: Functor f => (a -> f a) -> s -> f s
+    nextHopVnicSet :: Lens' s (TF.Argument "next_hop_vnic_set" a)
 
 instance HasNextHopVnicSet s a => HasNextHopVnicSet (TF.Resource p s) a where
     nextHopVnicSet = TF.configuration . nextHopVnicSet
 
 class HasOutputCidrPolicy s a | s -> a where
-    outputCidrPolicy :: Functor f => (a -> f a) -> s -> f s
+    outputCidrPolicy :: Lens' s (TF.Argument "output_cidr_policy" a)
 
 instance HasOutputCidrPolicy s a => HasOutputCidrPolicy (TF.Resource p s) a where
     outputCidrPolicy = TF.configuration . outputCidrPolicy
 
 class HasParentPool s a | s -> a where
-    parentPool :: Functor f => (a -> f a) -> s -> f s
+    parentPool :: Lens' s (TF.Argument "parent_pool" a)
 
 instance HasParentPool s a => HasParentPool (TF.Resource p s) a where
     parentPool = TF.configuration . parentPool
 
 class HasParentVolumeBootable s a | s -> a where
-    parentVolumeBootable :: Functor f => (a -> f a) -> s -> f s
+    parentVolumeBootable :: Lens' s (TF.Argument "parent_volume_bootable" a)
 
 instance HasParentVolumeBootable s a => HasParentVolumeBootable (TF.Resource p s) a where
     parentVolumeBootable = TF.configuration . parentVolumeBootable
 
 class HasPermanent s a | s -> a where
-    permanent :: Functor f => (a -> f a) -> s -> f s
+    permanent :: Lens' s (TF.Argument "permanent" a)
 
 instance HasPermanent s a => HasPermanent (TF.Resource p s) a where
     permanent = TF.configuration . permanent
 
 class HasPolicy s a | s -> a where
-    policy :: Functor f => (a -> f a) -> s -> f s
+    policy :: Lens' s (TF.Argument "policy" a)
 
 instance HasPolicy s a => HasPolicy (TF.Resource p s) a where
     policy = TF.configuration . policy
 
 class HasPrefixes s a | s -> a where
-    prefixes :: Functor f => (a -> f a) -> s -> f s
+    prefixes :: Lens' s (TF.Argument "prefixes" a)
 
 instance HasPrefixes s a => HasPrefixes (TF.Resource p s) a where
     prefixes = TF.configuration . prefixes
 
 class HasPrimaryKey s a | s -> a where
-    primaryKey :: Functor f => (a -> f a) -> s -> f s
+    primaryKey :: Lens' s (TF.Argument "primary_key" a)
 
 instance HasPrimaryKey s a => HasPrimaryKey (TF.Resource p s) a where
     primaryKey = TF.configuration . primaryKey
 
 class HasProtocol s a | s -> a where
-    protocol :: Functor f => (a -> f a) -> s -> f s
+    protocol :: Lens' s (TF.Argument "protocol" a)
 
 instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
     protocol = TF.configuration . protocol
 
 class HasPublicNaptEnabled s a | s -> a where
-    publicNaptEnabled :: Functor f => (a -> f a) -> s -> f s
+    publicNaptEnabled :: Lens' s (TF.Argument "public_napt_enabled" a)
 
 instance HasPublicNaptEnabled s a => HasPublicNaptEnabled (TF.Resource p s) a where
     publicNaptEnabled = TF.configuration . publicNaptEnabled
 
 class HasQuotaBytes s a | s -> a where
-    quotaBytes :: Functor f => (a -> f a) -> s -> f s
+    quotaBytes :: Lens' s (TF.Argument "quota_bytes" a)
 
 instance HasQuotaBytes s a => HasQuotaBytes (TF.Resource p s) a where
     quotaBytes = TF.configuration . quotaBytes
 
 class HasQuotaCount s a | s -> a where
-    quotaCount :: Functor f => (a -> f a) -> s -> f s
+    quotaCount :: Lens' s (TF.Argument "quota_count" a)
 
 instance HasQuotaCount s a => HasQuotaCount (TF.Resource p s) a where
     quotaCount = TF.configuration . quotaCount
 
 class HasReadAcls s a | s -> a where
-    readAcls :: Functor f => (a -> f a) -> s -> f s
+    readAcls :: Lens' s (TF.Argument "read_acls" a)
 
 instance HasReadAcls s a => HasReadAcls (TF.Resource p s) a where
     readAcls = TF.configuration . readAcls
 
 class HasReverseDns s a | s -> a where
-    reverseDns :: Functor f => (a -> f a) -> s -> f s
+    reverseDns :: Lens' s (TF.Argument "reverse_dns" a)
 
 instance HasReverseDns s a => HasReverseDns (TF.Resource p s) a where
     reverseDns = TF.configuration . reverseDns
 
 class HasSeclist s a | s -> a where
-    seclist :: Functor f => (a -> f a) -> s -> f s
+    seclist :: Lens' s (TF.Argument "seclist" a)
 
 instance HasSeclist s a => HasSeclist (TF.Resource p s) a where
     seclist = TF.configuration . seclist
 
 class HasSecondaryKey s a | s -> a where
-    secondaryKey :: Functor f => (a -> f a) -> s -> f s
+    secondaryKey :: Lens' s (TF.Argument "secondary_key" a)
 
 instance HasSecondaryKey s a => HasSecondaryKey (TF.Resource p s) a where
     secondaryKey = TF.configuration . secondaryKey
 
 class HasSecurityProtocols s a | s -> a where
-    securityProtocols :: Functor f => (a -> f a) -> s -> f s
+    securityProtocols :: Lens' s (TF.Argument "security_protocols" a)
 
 instance HasSecurityProtocols s a => HasSecurityProtocols (TF.Resource p s) a where
     securityProtocols = TF.configuration . securityProtocols
 
 class HasShape s a | s -> a where
-    shape :: Functor f => (a -> f a) -> s -> f s
+    shape :: Lens' s (TF.Argument "shape" a)
 
 instance HasShape s a => HasShape (TF.Resource p s) a where
     shape = TF.configuration . shape
 
 class HasSize s a | s -> a where
-    size :: Functor f => (a -> f a) -> s -> f s
+    size :: Lens' s (TF.Argument "size" a)
 
 instance HasSize s a => HasSize (TF.Resource p s) a where
     size = TF.configuration . size
 
 class HasSnapshot s a | s -> a where
-    snapshot :: Functor f => (a -> f a) -> s -> f s
+    snapshot :: Lens' s (TF.Argument "snapshot" a)
 
 instance HasSnapshot s a => HasSnapshot (TF.Resource p s) a where
     snapshot = TF.configuration . snapshot
 
 class HasSnapshotAccount s a | s -> a where
-    snapshotAccount :: Functor f => (a -> f a) -> s -> f s
+    snapshotAccount :: Lens' s (TF.Argument "snapshot_account" a)
 
 instance HasSnapshotAccount s a => HasSnapshotAccount (TF.Resource p s) a where
     snapshotAccount = TF.configuration . snapshotAccount
 
 class HasSnapshotId s a | s -> a where
-    snapshotId :: Functor f => (a -> f a) -> s -> f s
+    snapshotId :: Lens' s (TF.Argument "snapshot_id" a)
 
 instance HasSnapshotId s a => HasSnapshotId (TF.Resource p s) a where
     snapshotId = TF.configuration . snapshotId
 
 class HasSourceList s a | s -> a where
-    sourceList :: Functor f => (a -> f a) -> s -> f s
+    sourceList :: Lens' s (TF.Argument "source_list" a)
 
 instance HasSourceList s a => HasSourceList (TF.Resource p s) a where
     sourceList = TF.configuration . sourceList
 
 class HasSrcIpAddressPrefixes s a | s -> a where
-    srcIpAddressPrefixes :: Functor f => (a -> f a) -> s -> f s
+    srcIpAddressPrefixes :: Lens' s (TF.Argument "src_ip_address_prefixes" a)
 
 instance HasSrcIpAddressPrefixes s a => HasSrcIpAddressPrefixes (TF.Resource p s) a where
     srcIpAddressPrefixes = TF.configuration . srcIpAddressPrefixes
 
 class HasSrcPorts s a | s -> a where
-    srcPorts :: Functor f => (a -> f a) -> s -> f s
+    srcPorts :: Lens' s (TF.Argument "src_ports" a)
 
 instance HasSrcPorts s a => HasSrcPorts (TF.Resource p s) a where
     srcPorts = TF.configuration . srcPorts
 
 class HasSrcVnicSet s a | s -> a where
-    srcVnicSet :: Functor f => (a -> f a) -> s -> f s
+    srcVnicSet :: Lens' s (TF.Argument "src_vnic_set" a)
 
 instance HasSrcVnicSet s a => HasSrcVnicSet (TF.Resource p s) a where
     srcVnicSet = TF.configuration . srcVnicSet
 
 class HasSshKeys s a | s -> a where
-    sshKeys :: Functor f => (a -> f a) -> s -> f s
+    sshKeys :: Lens' s (TF.Argument "ssh_keys" a)
 
 instance HasSshKeys s a => HasSshKeys (TF.Resource p s) a where
     sshKeys = TF.configuration . sshKeys
 
 class HasStorage s a | s -> a where
-    storage :: Functor f => (a -> f a) -> s -> f s
+    storage :: Lens' s (TF.Argument "storage" a)
 
 instance HasStorage s a => HasStorage (TF.Resource p s) a where
     storage = TF.configuration . storage
 
 class HasStorageType s a | s -> a where
-    storageType :: Functor f => (a -> f a) -> s -> f s
+    storageType :: Lens' s (TF.Argument "storage_type" a)
 
 instance HasStorageType s a => HasStorageType (TF.Resource p s) a where
     storageType = TF.configuration . storageType
 
+class HasStorageVolume s a | s -> a where
+    storageVolume :: Lens' s (TF.Argument "storage_volume" a)
+
+instance HasStorageVolume s a => HasStorageVolume (TF.Resource p s) a where
+    storageVolume = TF.configuration . storageVolume
+
 class HasTags s a | s -> a where
-    tags :: Functor f => (a -> f a) -> s -> f s
+    tags :: Lens' s (TF.Argument "tags" a)
 
 instance HasTags s a => HasTags (TF.Resource p s) a where
     tags = TF.configuration . tags
 
 class HasVcable s a | s -> a where
-    vcable :: Functor f => (a -> f a) -> s -> f s
+    vcable :: Lens' s (TF.Argument "vcable" a)
 
 instance HasVcable s a => HasVcable (TF.Resource p s) a where
     vcable = TF.configuration . vcable
 
 class HasVersion s a | s -> a where
-    version :: Functor f => (a -> f a) -> s -> f s
+    version :: Lens' s (TF.Argument "version" a)
 
 instance HasVersion s a => HasVersion (TF.Resource p s) a where
     version = TF.configuration . version
 
 class HasVirtualNics s a | s -> a where
-    virtualNics :: Functor f => (a -> f a) -> s -> f s
+    virtualNics :: Lens' s (TF.Argument "virtual_nics" a)
 
 instance HasVirtualNics s a => HasVirtualNics (TF.Resource p s) a where
     virtualNics = TF.configuration . virtualNics
 
 class HasVnic s a | s -> a where
-    vnic :: Functor f => (a -> f a) -> s -> f s
+    vnic :: Lens' s (TF.Argument "vnic" a)
 
 instance HasVnic s a => HasVnic (TF.Resource p s) a where
     vnic = TF.configuration . vnic
 
 class HasVolumeName s a | s -> a where
-    volumeName :: Functor f => (a -> f a) -> s -> f s
+    volumeName :: Lens' s (TF.Argument "volume_name" a)
 
 instance HasVolumeName s a => HasVolumeName (TF.Resource p s) a where
     volumeName = TF.configuration . volumeName
 
 class HasWriteAcls s a | s -> a where
-    writeAcls :: Functor f => (a -> f a) -> s -> f s
+    writeAcls :: Lens' s (TF.Argument "write_acls" a)
 
 instance HasWriteAcls s a => HasWriteAcls (TF.Resource p s) a where
     writeAcls = TF.configuration . writeAcls
+
+class HasComputedAccount s a | s -> a where
+    computedAccount :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedAccount s a => HasComputedAccount (TF.Resource p s) a where
+    computedAccount = TF.configuration . computedAccount
+
+class HasComputedAdminDistance s a | s -> a where
+    computedAdminDistance :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedAdminDistance s a => HasComputedAdminDistance (TF.Resource p s) a where
+    computedAdminDistance = TF.configuration . computedAdminDistance
+
+class HasComputedDescription s a | s -> a where
+    computedDescription :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedDescription s a => HasComputedDescription (TF.Resource p s) a where
+    computedDescription = TF.configuration . computedDescription
+
+class HasComputedHypervisor s a | s -> a where
+    computedHypervisor :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedHypervisor s a => HasComputedHypervisor (TF.Resource p s) a where
+    computedHypervisor = TF.configuration . computedHypervisor
+
+class HasComputedIpAddressPrefix s a | s -> a where
+    computedIpAddressPrefix :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIpAddressPrefix s a => HasComputedIpAddressPrefix (TF.Resource p s) a where
+    computedIpAddressPrefix = TF.configuration . computedIpAddressPrefix
+
+class HasComputedIpNetworkExchange s a | s -> a where
+    computedIpNetworkExchange :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedIpNetworkExchange s a => HasComputedIpNetworkExchange (TF.Resource p s) a where
+    computedIpNetworkExchange = TF.configuration . computedIpNetworkExchange
+
+class HasComputedMachineImage s a | s -> a where
+    computedMachineImage :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedMachineImage s a => HasComputedMachineImage (TF.Resource p s) a where
+    computedMachineImage = TF.configuration . computedMachineImage
+
+class HasComputedMachineImageName s a | s -> a where
+    computedMachineImageName :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedMachineImageName s a => HasComputedMachineImageName (TF.Resource p s) a where
+    computedMachineImageName = TF.configuration . computedMachineImageName
+
+class HasComputedManaged s a | s -> a where
+    computedManaged :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedManaged s a => HasComputedManaged (TF.Resource p s) a where
+    computedManaged = TF.configuration . computedManaged
+
+class HasComputedName s a | s -> a where
+    computedName :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
+    computedName = TF.configuration . computedName
+
+class HasComputedNextHopVnicSet s a | s -> a where
+    computedNextHopVnicSet :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedNextHopVnicSet s a => HasComputedNextHopVnicSet (TF.Resource p s) a where
+    computedNextHopVnicSet = TF.configuration . computedNextHopVnicSet
+
+class HasComputedPlatform s a | s -> a where
+    computedPlatform :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedPlatform s a => HasComputedPlatform (TF.Resource p s) a where
+    computedPlatform = TF.configuration . computedPlatform
+
+class HasComputedProperty s a | s -> a where
+    computedProperty :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedProperty s a => HasComputedProperty (TF.Resource p s) a where
+    computedProperty = TF.configuration . computedProperty
+
+class HasComputedPublicNaptEnabled s a | s -> a where
+    computedPublicNaptEnabled :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedPublicNaptEnabled s a => HasComputedPublicNaptEnabled (TF.Resource p s) a where
+    computedPublicNaptEnabled = TF.configuration . computedPublicNaptEnabled
+
+class HasComputedReadonly s a | s -> a where
+    computedReadonly :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedReadonly s a => HasComputedReadonly (TF.Resource p s) a where
+    computedReadonly = TF.configuration . computedReadonly
+
+class HasComputedSize s a | s -> a where
+    computedSize :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedSize s a => HasComputedSize (TF.Resource p s) a where
+    computedSize = TF.configuration . computedSize
+
+class HasComputedSnapshotId s a | s -> a where
+    computedSnapshotId :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedSnapshotId s a => HasComputedSnapshotId (TF.Resource p s) a where
+    computedSnapshotId = TF.configuration . computedSnapshotId
+
+class HasComputedSnapshotTimestamp s a | s -> a where
+    computedSnapshotTimestamp :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedSnapshotTimestamp s a => HasComputedSnapshotTimestamp (TF.Resource p s) a where
+    computedSnapshotTimestamp = TF.configuration . computedSnapshotTimestamp
+
+class HasComputedStartTimestamp s a | s -> a where
+    computedStartTimestamp :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedStartTimestamp s a => HasComputedStartTimestamp (TF.Resource p s) a where
+    computedStartTimestamp = TF.configuration . computedStartTimestamp
+
+class HasComputedStatus s a | s -> a where
+    computedStatus :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedStatus s a => HasComputedStatus (TF.Resource p s) a where
+    computedStatus = TF.configuration . computedStatus
+
+class HasComputedStatusDetail s a | s -> a where
+    computedStatusDetail :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedStatusDetail s a => HasComputedStatusDetail (TF.Resource p s) a where
+    computedStatusDetail = TF.configuration . computedStatusDetail
+
+class HasComputedStatusTimestamp s a | s -> a where
+    computedStatusTimestamp :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedStatusTimestamp s a => HasComputedStatusTimestamp (TF.Resource p s) a where
+    computedStatusTimestamp = TF.configuration . computedStatusTimestamp
+
+class HasComputedStoragePool s a | s -> a where
+    computedStoragePool :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedStoragePool s a => HasComputedStoragePool (TF.Resource p s) a where
+    computedStoragePool = TF.configuration . computedStoragePool
+
+class HasComputedUri s a | s -> a where
+    computedUri :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedUri s a => HasComputedUri (TF.Resource p s) a where
+    computedUri = TF.configuration . computedUri

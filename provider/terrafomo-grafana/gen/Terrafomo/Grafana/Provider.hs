@@ -20,6 +20,7 @@ module Terrafomo.Grafana.Provider
     (
     -- * Provider Datatype
       Grafana (..)
+    , emptyGrafana
 
     -- * Lenses
     ) where
@@ -29,13 +30,15 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Semigroup     (Semigroup ((<>)))
 import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
+import Lens.Micro (Lens', lens)
+
 import qualified Terrafomo.Grafana.Types   as TF
 import qualified Terrafomo.Syntax.HCL      as TF
+import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
 import qualified Terrafomo.Syntax.Provider as TF
 import qualified Terrafomo.Syntax.Variable as TF
@@ -58,14 +61,9 @@ instance TF.ToHCL Grafana where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
             ]
 
-instance Semigroup Grafana where
-    (<>) a b = Grafana {
-        }
-
-instance Monoid Grafana where
-    mappend = (<>)
-    mempty  = Grafana {
-        }
+emptyGrafana :: Grafana
+emptyGrafana = Grafana {
+    }
 
 instance TF.IsProvider Grafana where
     type ProviderName Grafana = "grafana"

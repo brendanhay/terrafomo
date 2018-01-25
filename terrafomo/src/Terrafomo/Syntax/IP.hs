@@ -1,14 +1,20 @@
-module Terrafomo.Syntax.IP where
+module Terrafomo.Syntax.IP
+    ( Bits (..)
+    , CIDR (..)
+    , IP   (..)
+    , ipv4
+    ) where
 
-import Data.Word (Word8)
+import Data.Word (Word32)
 
--- | Internet Protocol notation.
-data IPAddress = IPv4 !Word8 !Word8 !Word8 !Word8
-    deriving (Show, Eq)
+import Numeric (showInt)
+
+import qualified Data.Bits as Bit
 
 -- | A 32-bit mask.
-data BitMask
-    = B1
+data Bits
+    = B0
+    | B1
     | B2
     | B3
     | B4
@@ -43,5 +49,33 @@ data BitMask
       deriving (Show, Eq, Enum, Bounded)
 
 -- | Classless Inter-Domain Routing notation.
-data CIDR = !IPAddress :/ !BitMask
+data CIDR = !IP :/ !Bits
     deriving (Show, Eq)
+
+-- | Internet Protocol notation.
+data IP = IPv4 !Word32
+    deriving (Eq)
+
+instance Show IP where
+    showsPrec _ (IPv4 w) =
+        let showBits n = showInt (fromEnum (Bit.shiftR w n Bit..&. 0xff))
+         in showBits 0o30
+          . showChar '.'
+          . showBits 0o20
+          . showChar '.'
+          . showBits 0o10
+          . showChar '.'
+          . showBits 0o00
+
+instance Enum IP where
+    fromEnum (IPv4 w) = fromEnum w
+    toEnum            = IPv4 . toEnum
+
+ipv4 :: Int -> Int -> Int -> Int -> IP
+ipv4 a b c d =
+    IPv4 $ fromIntegral
+         ( Bit.shift a 24
+         + Bit.shift b 16
+         + Bit.shift c 8
+         + d
+         )

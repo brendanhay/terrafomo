@@ -1,11 +1,14 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
@@ -35,8 +38,8 @@ module Terrafomo.Triton.DataSource
     , networkDataSource
 
     -- * Overloaded Fields
+    -- ** Arguments
     , HasCnsEnabled (..)
-    , HasComputedId (..)
     , HasEndpoint (..)
     , HasMostRecent (..)
     , HasName (..)
@@ -46,17 +49,22 @@ module Terrafomo.Triton.DataSource
     , HasState (..)
     , HasType' (..)
     , HasVersion (..)
+
+    -- ** Computed Attributes
+    , HasComputedId (..)
     ) where
 
-import Data.Functor (Functor, (<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
+import Lens.Micro (Getting, Lens', lens, to)
+
 import qualified Terrafomo.Syntax.DataSource as TF
 import qualified Terrafomo.Syntax.HCL        as TF
+import qualified Terrafomo.Syntax.IP         as TF
 import qualified Terrafomo.Syntax.Meta       as TF (configuration)
 import qualified Terrafomo.Syntax.Resource   as TF
 import qualified Terrafomo.Syntax.Variable   as TF
@@ -69,19 +77,19 @@ The @triton_account@ data source queries the Triton Account API for account
 information.
 -}
 data AccountDataSource = AccountDataSource {
-      _cns_enabled :: !(TF.Argument Text)
+      _cns_enabled :: !(TF.Argument "cns_enabled" Text)
     {- ^ - (bool) Whether CNS is enabled for the account. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL AccountDataSource where
     toHCL AccountDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "cns_enabled" <$> TF.argument _cns_enabled
+        [ TF.argument _cns_enabled
         ]
 
-instance HasCnsEnabled AccountDataSource (TF.Argument Text) where
-    cnsEnabled f s@AccountDataSource{..} =
-        (\a -> s { _cns_enabled = a } :: AccountDataSource)
-             <$> f _cns_enabled
+instance HasCnsEnabled AccountDataSource Text where
+    cnsEnabled =
+        lens (_cns_enabled :: AccountDataSource -> TF.Argument "cns_enabled" Text)
+             (\s a -> s { _cns_enabled = a } :: AccountDataSource)
 
 accountDataSource :: TF.DataSource TF.Triton AccountDataSource
 accountDataSource =
@@ -96,27 +104,27 @@ The @triton_datacenter@ data source queries the Triton Account API for
 datacenter information.
 -}
 data DatacenterDataSource = DatacenterDataSource {
-      _endpoint :: !(TF.Argument Text)
+      _endpoint :: !(TF.Argument "endpoint" Text)
     {- ^ - (string) The endpoint url of the datacenter -}
-    , _name     :: !(TF.Argument Text)
+    , _name     :: !(TF.Argument "name" Text)
     {- ^ - (string) The name of the datacenter. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL DatacenterDataSource where
     toHCL DatacenterDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "endpoint" <$> TF.argument _endpoint
-        , TF.assign "name" <$> TF.argument _name
+        [ TF.argument _endpoint
+        , TF.argument _name
         ]
 
-instance HasEndpoint DatacenterDataSource (TF.Argument Text) where
-    endpoint f s@DatacenterDataSource{..} =
-        (\a -> s { _endpoint = a } :: DatacenterDataSource)
-             <$> f _endpoint
+instance HasEndpoint DatacenterDataSource Text where
+    endpoint =
+        lens (_endpoint :: DatacenterDataSource -> TF.Argument "endpoint" Text)
+             (\s a -> s { _endpoint = a } :: DatacenterDataSource)
 
-instance HasName DatacenterDataSource (TF.Argument Text) where
-    name f s@DatacenterDataSource{..} =
-        (\a -> s { _name = a } :: DatacenterDataSource)
-             <$> f _name
+instance HasName DatacenterDataSource Text where
+    name =
+        lens (_name :: DatacenterDataSource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: DatacenterDataSource)
 
 datacenterDataSource :: TF.DataSource TF.Triton DatacenterDataSource
 datacenterDataSource =
@@ -132,75 +140,75 @@ The @triton_image@ data source queries the Triton Image API for an image ID
 based on a variety of different parameters.
 -}
 data ImageDataSource = ImageDataSource {
-      _most_recent :: !(TF.Argument Text)
+      _most_recent :: !(TF.Argument "most_recent" Text)
     {- ^ - (bool) If more than one result is returned, use the most recent Image. -}
-    , _name        :: !(TF.Argument Text)
+    , _name        :: !(TF.Argument "name" Text)
     {- ^ - (string) The name of the image -}
-    , _os          :: !(TF.Argument Text)
+    , _os          :: !(TF.Argument "os" Text)
     {- ^ - (string) The underlying operating system for the image -}
-    , _owner       :: !(TF.Argument Text)
+    , _owner       :: !(TF.Argument "owner" Text)
     {- ^ - (string) The UUID of the account which owns the image -}
-    , _public      :: !(TF.Argument Text)
+    , _public      :: !(TF.Argument "public" Text)
     {- ^ - (boolean) Whether to return public as well as private images -}
-    , _state       :: !(TF.Argument Text)
+    , _state       :: !(TF.Argument "state" Text)
     {- ^ - (string) The state of the image. By default, only @active@ images are shown. Must be one of: @active@ , @unactivated@ , @disabled@ , @creating@ , @failed@ or @all@ , though the default is sufficient in almost every case. -}
-    , _type'       :: !(TF.Argument Text)
+    , _type'       :: !(TF.Argument "type" Text)
     {- ^ - (string) The image type. Must be one of: @zone-dataset@ , @lx-dataset@ , @zvol@ , @docker@ or @other@ . -}
-    , _version     :: !(TF.Argument Text)
+    , _version     :: !(TF.Argument "version" Text)
     {- ^ - (string) The version for the image -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ImageDataSource where
     toHCL ImageDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "most_recent" <$> TF.argument _most_recent
-        , TF.assign "name" <$> TF.argument _name
-        , TF.assign "os" <$> TF.argument _os
-        , TF.assign "owner" <$> TF.argument _owner
-        , TF.assign "public" <$> TF.argument _public
-        , TF.assign "state" <$> TF.argument _state
-        , TF.assign "type" <$> TF.argument _type'
-        , TF.assign "version" <$> TF.argument _version
+        [ TF.argument _most_recent
+        , TF.argument _name
+        , TF.argument _os
+        , TF.argument _owner
+        , TF.argument _public
+        , TF.argument _state
+        , TF.argument _type'
+        , TF.argument _version
         ]
 
-instance HasMostRecent ImageDataSource (TF.Argument Text) where
-    mostRecent f s@ImageDataSource{..} =
-        (\a -> s { _most_recent = a } :: ImageDataSource)
-             <$> f _most_recent
+instance HasMostRecent ImageDataSource Text where
+    mostRecent =
+        lens (_most_recent :: ImageDataSource -> TF.Argument "most_recent" Text)
+             (\s a -> s { _most_recent = a } :: ImageDataSource)
 
-instance HasName ImageDataSource (TF.Argument Text) where
-    name f s@ImageDataSource{..} =
-        (\a -> s { _name = a } :: ImageDataSource)
-             <$> f _name
+instance HasName ImageDataSource Text where
+    name =
+        lens (_name :: ImageDataSource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: ImageDataSource)
 
-instance HasOs ImageDataSource (TF.Argument Text) where
-    os f s@ImageDataSource{..} =
-        (\a -> s { _os = a } :: ImageDataSource)
-             <$> f _os
+instance HasOs ImageDataSource Text where
+    os =
+        lens (_os :: ImageDataSource -> TF.Argument "os" Text)
+             (\s a -> s { _os = a } :: ImageDataSource)
 
-instance HasOwner ImageDataSource (TF.Argument Text) where
-    owner f s@ImageDataSource{..} =
-        (\a -> s { _owner = a } :: ImageDataSource)
-             <$> f _owner
+instance HasOwner ImageDataSource Text where
+    owner =
+        lens (_owner :: ImageDataSource -> TF.Argument "owner" Text)
+             (\s a -> s { _owner = a } :: ImageDataSource)
 
-instance HasPublic ImageDataSource (TF.Argument Text) where
-    public f s@ImageDataSource{..} =
-        (\a -> s { _public = a } :: ImageDataSource)
-             <$> f _public
+instance HasPublic ImageDataSource Text where
+    public =
+        lens (_public :: ImageDataSource -> TF.Argument "public" Text)
+             (\s a -> s { _public = a } :: ImageDataSource)
 
-instance HasState ImageDataSource (TF.Argument Text) where
-    state f s@ImageDataSource{..} =
-        (\a -> s { _state = a } :: ImageDataSource)
-             <$> f _state
+instance HasState ImageDataSource Text where
+    state =
+        lens (_state :: ImageDataSource -> TF.Argument "state" Text)
+             (\s a -> s { _state = a } :: ImageDataSource)
 
-instance HasType' ImageDataSource (TF.Argument Text) where
-    type' f s@ImageDataSource{..} =
-        (\a -> s { _type' = a } :: ImageDataSource)
-             <$> f _type'
+instance HasType' ImageDataSource Text where
+    type' =
+        lens (_type' :: ImageDataSource -> TF.Argument "type" Text)
+             (\s a -> s { _type' = a } :: ImageDataSource)
 
-instance HasVersion ImageDataSource (TF.Argument Text) where
-    version f s@ImageDataSource{..} =
-        (\a -> s { _version = a } :: ImageDataSource)
-             <$> f _version
+instance HasVersion ImageDataSource Text where
+    version =
+        lens (_version :: ImageDataSource -> TF.Argument "version" Text)
+             (\s a -> s { _version = a } :: ImageDataSource)
 
 imageDataSource :: TF.DataSource TF.Triton ImageDataSource
 imageDataSource =
@@ -222,97 +230,93 @@ The @triton_network@ data source queries the Triton Network API for a
 network ID based on the name of the network.
 -}
 data NetworkDataSource = NetworkDataSource {
-      _name        :: !(TF.Argument Text)
+      _name :: !(TF.Argument "name" Text)
     {- ^ - (string) The name of the network. -}
-    , _computed_id :: !(TF.Attribute Text)
-    {- ^ - (string) The ID of the network. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL NetworkDataSource where
     toHCL NetworkDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.argument _name
+        [ TF.argument _name
         ]
 
-instance HasName NetworkDataSource (TF.Argument Text) where
-    name f s@NetworkDataSource{..} =
-        (\a -> s { _name = a } :: NetworkDataSource)
-             <$> f _name
+instance HasName NetworkDataSource Text where
+    name =
+        lens (_name :: NetworkDataSource -> TF.Argument "name" Text)
+             (\s a -> s { _name = a } :: NetworkDataSource)
 
-instance HasComputedId NetworkDataSource (TF.Attribute Text) where
-    computedId f s@NetworkDataSource{..} =
-        (\a -> s { _computed_id = a } :: NetworkDataSource)
-             <$> f _computed_id
+instance HasComputedId NetworkDataSource Text where
+    computedId =
+        to (\_  -> TF.Compute "id")
 
 networkDataSource :: TF.DataSource TF.Triton NetworkDataSource
 networkDataSource =
     TF.newDataSource "triton_network" $
         NetworkDataSource {
             _name = TF.Nil
-            , _computed_id = TF.Compute "id"
             }
 
 class HasCnsEnabled s a | s -> a where
-    cnsEnabled :: Functor f => (a -> f a) -> s -> f s
+    cnsEnabled :: Lens' s (TF.Argument "cns_enabled" a)
 
 instance HasCnsEnabled s a => HasCnsEnabled (TF.DataSource p s) a where
     cnsEnabled = TF.configuration . cnsEnabled
 
-class HasComputedId s a | s -> a where
-    computedId :: Functor f => (a -> f a) -> s -> f s
-
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
-
 class HasEndpoint s a | s -> a where
-    endpoint :: Functor f => (a -> f a) -> s -> f s
+    endpoint :: Lens' s (TF.Argument "endpoint" a)
 
 instance HasEndpoint s a => HasEndpoint (TF.DataSource p s) a where
     endpoint = TF.configuration . endpoint
 
 class HasMostRecent s a | s -> a where
-    mostRecent :: Functor f => (a -> f a) -> s -> f s
+    mostRecent :: Lens' s (TF.Argument "most_recent" a)
 
 instance HasMostRecent s a => HasMostRecent (TF.DataSource p s) a where
     mostRecent = TF.configuration . mostRecent
 
 class HasName s a | s -> a where
-    name :: Functor f => (a -> f a) -> s -> f s
+    name :: Lens' s (TF.Argument "name" a)
 
 instance HasName s a => HasName (TF.DataSource p s) a where
     name = TF.configuration . name
 
 class HasOs s a | s -> a where
-    os :: Functor f => (a -> f a) -> s -> f s
+    os :: Lens' s (TF.Argument "os" a)
 
 instance HasOs s a => HasOs (TF.DataSource p s) a where
     os = TF.configuration . os
 
 class HasOwner s a | s -> a where
-    owner :: Functor f => (a -> f a) -> s -> f s
+    owner :: Lens' s (TF.Argument "owner" a)
 
 instance HasOwner s a => HasOwner (TF.DataSource p s) a where
     owner = TF.configuration . owner
 
 class HasPublic s a | s -> a where
-    public :: Functor f => (a -> f a) -> s -> f s
+    public :: Lens' s (TF.Argument "public" a)
 
 instance HasPublic s a => HasPublic (TF.DataSource p s) a where
     public = TF.configuration . public
 
 class HasState s a | s -> a where
-    state :: Functor f => (a -> f a) -> s -> f s
+    state :: Lens' s (TF.Argument "state" a)
 
 instance HasState s a => HasState (TF.DataSource p s) a where
     state = TF.configuration . state
 
 class HasType' s a | s -> a where
-    type' :: Functor f => (a -> f a) -> s -> f s
+    type' :: Lens' s (TF.Argument "type" a)
 
 instance HasType' s a => HasType' (TF.DataSource p s) a where
     type' = TF.configuration . type'
 
 class HasVersion s a | s -> a where
-    version :: Functor f => (a -> f a) -> s -> f s
+    version :: Lens' s (TF.Argument "version" a)
 
 instance HasVersion s a => HasVersion (TF.DataSource p s) a where
     version = TF.configuration . version
+
+class HasComputedId s a | s -> a where
+    computedId :: forall r. Getting r s (TF.Attribute a)
+
+instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
+    computedId = TF.configuration . computedId

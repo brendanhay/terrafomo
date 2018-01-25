@@ -15,7 +15,7 @@ import Terrafomo.Syntax.Name
 
 data DataSource p a = DataSource
     { _dataProvider  :: !(Maybe p)
-    , _dataDependsOn :: !(Set Key)
+    , _dataDependsOn :: !(Set Dependency)
     , _dataType      :: !Type
     , _dataConfig    :: !a
     } deriving (Show, Eq)
