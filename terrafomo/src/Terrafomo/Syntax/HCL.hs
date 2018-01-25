@@ -44,6 +44,8 @@ import Data.Text              (Text)
 import Data.Text.Lazy.Builder (Builder)
 import Data.Word
 
+import GHC.TypeLits (KnownSymbol)
+
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
@@ -149,17 +151,17 @@ assign k v = Assign k (toHCL v)
 
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-argument :: ToHCL a => Argument n a -> Maybe Value
-argument = \case
-    Attribute (Key t n) x ->
-        Just $ toHCL
-            ( "${"
-           <> fromType t <> "." <> fromName n <> "." <> fromName (attributeName x)
-           <> "}"
-            )
-    Constant  x -> Just (toHCL x)
-    _           -> Nothing
+argument :: (KnownSymbol n, ToHCL a) => Argument n a -> Maybe Value
+argument x =
+    assign (unquoted (fromName (argumentName x))) <$>
+        case x of
+            Attribute (Key t n) x ->
+                let a = attributeName x
+                    s = fromType t <> "." <> fromName n <> "." <> fromName a
+                 in Just $ toHCL ("${" <> s <> "}")
 
+            Constant  x -> Just (toHCL x)
+            _           -> Nothing
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
