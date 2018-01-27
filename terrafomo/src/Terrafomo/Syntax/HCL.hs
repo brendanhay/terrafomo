@@ -67,7 +67,6 @@ import qualified Data.List                    as List
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import qualified Terrafomo.Format             as Format
-import qualified Terrafomo.Hash               as Hash
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
 -- FIXME: Alternative JSON serialization.
@@ -161,13 +160,13 @@ argument :: (KnownSymbol n, ToHCL a) => Argument n a -> Maybe Value
 argument x =
     assign (unquoted (fromName (argumentName x))) <$>
         case x of
-            Attribute (Key t n) x ->
-                let a = attributeName x
+            Attribute (Key t n) v ->
+                let a = attributeName v
                     s = fromType t <> "." <> fromName n <> "." <> fromName a
                  in Just $ toHCL ("${" <> s <> "}")
 
-            Constant  x -> Just (toHCL x)
-            _           -> Nothing
+            Constant v -> Just (toHCL v)
+            _          -> Nothing
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
@@ -265,9 +264,6 @@ instance ToHCL Builder where
 instance ToHCL v => ToHCL (Map Text v) where
     toHCL = block . map (uncurry assign . bimap unquoted toHCL) . toList
 
-instance ToHCL Alias where
-    toHCL = toHCL . Hash.human
-
 instance ToHCL Name where
     toHCL = toHCL . fromName
 
@@ -296,7 +292,7 @@ instance ToHCL (Lifecycle a) where
              , assign "ignore_changes"        _ignoreChanges
              ]
 
-instance ToHCL a => ToHCL (Key, DataSource Alias a) where
+instance ToHCL a => ToHCL (Key, DataSource Key a) where
     toHCL (k, DataSource{..}) =
         object (key "resource" k) $ catMaybes
             [ assign "provider" <$> _dataProvider
@@ -306,7 +302,7 @@ instance ToHCL a => ToHCL (Key, DataSource Alias a) where
                   else Just $ assign "depends_on" (list _dataDependsOn)
             ]
 
-instance ToHCL a => ToHCL (Key, Resource Alias a) where
+instance ToHCL a => ToHCL (Key, Resource Key a) where
     toHCL (k, Resource{..}) =
        object (key "resource" k) $ catMaybes
             [ assign "provider" <$> _resourceProvider

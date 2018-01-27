@@ -74,8 +74,8 @@ instance Hashable {{ provider.name }}
 
 instance TF.ToHCL {{ provider.name }} where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy {{ provider.name }}))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy {{ provider.name }}))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerKey x))
           {% for arg in schema.arguments %}
             , TF.argument ({{ arg.key }} x)
           {% endfor %}
@@ -89,7 +89,7 @@ empty{{ provider.name }} = {{ provider.name }} {
     }
 
 instance TF.IsProvider {{ provider.name }} where
-    type ProviderName {{ provider.name }} = "{{ provider.original }}"
+    type ProviderType {{ provider.name }} = "{{ provider.original }}"
 {% for field in schema.argumentFields %}
 
 {{ field.value.method }} :: Lens' {{ provider.name }} (TF.Argument "{{ field.value.name }}" {{ field.value.type }})

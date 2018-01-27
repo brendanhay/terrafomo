@@ -4,9 +4,6 @@ module Terrafomo.Syntax.Name
     ( Name      (..)
     , Type      (..)
     , Key       (..)
-
-    , Alias
-    , newAlias
     ) where
 
 import Data.Hashable  (Hashable (hash, hashWithSalt))
@@ -37,14 +34,3 @@ instance Hashable Key where
     hashWithSalt s k =
         s `hashWithSalt` keyType k
           `hashWithSalt` keyName k
-
--- An auto-generated + serialized provider alias.
--- should be efficient to obtain this from a data type to avoid needing to
--- check the serialized form. Hashable?
-newtype Alias = Alias Int
-    deriving (Show, Eq, Ord, Hashable)
-
--- FIXME: Seed the alias with the provider name.
-
-newAlias :: Hashable a => Name -> a -> Alias
-newAlias n x = Alias (hash n `hashWithSalt` x)

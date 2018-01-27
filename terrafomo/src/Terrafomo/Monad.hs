@@ -117,7 +117,7 @@ instance Exception TerraformError
 -- Internal Configuration
 
 newtype TerraformConfig = TerraformConfig
-    { aliases :: Map Name Alias
+    { aliases :: Map Type Key
     }
 
 -- HCL Output
@@ -125,7 +125,7 @@ newtype TerraformConfig = TerraformConfig
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformOutput = UnsafeTerraformOutput
     { backend     :: !HCL.Value
-    , providers   :: !(ValueMap Alias)
+    , providers   :: !(ValueMap Key)
     , datasources :: !(ValueMap Key)
     , resources   :: !(ValueMap Key)
     , outputs     :: !(ValueMap Name)
@@ -462,7 +462,7 @@ withProvider p m =
         Just alias ->
             flip local m $ \s ->
                 s { aliases =
-                      Map.insert (providerName (Proxy :: Proxy p)) alias
+                      Map.insert (providerType (Proxy :: Proxy p)) alias
                                  (aliases s)
                   }
 
@@ -472,21 +472,21 @@ insertProvider
        , IsProvider p
        )
     => Maybe p
-    -> m (Maybe Alias)
+    -> m (Maybe Key)
 insertProvider mp =
     case mp of
-        Nothing -> Map.lookup (providerName (Proxy :: Proxy p)) . aliases <$> ask
+        Nothing -> Map.lookup (providerType (Proxy :: Proxy p)) . aliases <$> ask
         Just p  -> do
-            let value = HCL.toHCL     p
-                alias = providerAlias p
+            let key   = providerKey p
+                value = HCL.toHCL   p
 
             ps <- providers <$> get
 
-            case VMap.insert alias value ps of
+            case VMap.insert key value ps of
                 Nothing -> pure ()
                 Just m  -> modify' (\w -> w { providers = m })
 
-            pure $! Just alias
+            pure $! Just key
 
 -- References
 

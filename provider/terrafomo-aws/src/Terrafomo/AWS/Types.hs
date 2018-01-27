@@ -163,11 +163,10 @@ instance HCL.ToHCL DynamoTableAttributes where
     toHCL = HCL.block . map (uncurry go) . toList
       where
         go k v =
-            HCL.assign "attribute" $
-                HCL.block
-                    [ HCL.assign "name" k
-                    , HCL.assign "type" v
-                    ]
+            HCL.block
+                [ HCL.assign "name" k
+                , HCL.assign "type" v
+                ]
 
 -- Field Classes
 

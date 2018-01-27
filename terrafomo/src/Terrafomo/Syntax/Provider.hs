@@ -5,7 +5,7 @@
 
 module Terrafomo.Syntax.Provider
     ( IsProvider (..)
-    , providerAlias
+    , providerKey
     ) where
 
 import Data.Hashable (Hashable)
@@ -17,16 +17,23 @@ import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 import Terrafomo.Syntax.HCL  (ToHCL)
 import Terrafomo.Syntax.Name
 
+import qualified Terrafomo.Hash as Hash
+
 class ( Hashable a
       , ToHCL    a
-      , KnownSymbol (ProviderName a)
+      , KnownSymbol (ProviderType a)
       ) => IsProvider a where
-    type ProviderName a :: Symbol
+    type ProviderType a :: Symbol
 
-    -- | >>> symbolVal (ProviderName a) == providerName
-    providerName :: proxy a -> Name
-    providerName _ = fromString $ symbolVal (Proxy :: Proxy (ProviderName a))
-    {-# INLINEABLE providerName #-}
+    -- | >>> symbolVal (ProviderType a) == providerType
+    providerType :: proxy a -> Type
+    providerType _ = fromString $ symbolVal (Proxy :: Proxy (ProviderType a))
+    {-# INLINEABLE providerType #-}
 
-providerAlias :: forall a. IsProvider a => a -> Alias
-providerAlias = newAlias (providerName (Proxy :: Proxy a))
+-- FIXME: Seed the alias with the provider name.
+
+providerKey :: forall a. IsProvider a => a -> Key
+providerKey x =
+    Key { keyType = providerType (Proxy :: Proxy a)
+        , keyName = Name (Hash.human x)
+        }

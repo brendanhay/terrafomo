@@ -108,8 +108,8 @@ instance Hashable AWS
 
 instance TF.ToHCL AWS where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AWS))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy AWS))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerKey x))
             , TF.argument (_access_key x)
             , TF.argument (_allowed_account_ids x)
             , TF.argument (_assume_role x)
@@ -151,7 +151,7 @@ emptyAWS = AWS {
     }
 
 instance TF.IsProvider AWS where
-    type ProviderName AWS = "aws"
+    type ProviderType AWS = "aws"
 
 accessKey :: Lens' AWS (TF.Argument "access_key" Text)
 accessKey =
