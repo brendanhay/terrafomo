@@ -35,20 +35,26 @@ module Terrafomo.Syntax.HCL
     , string
     ) where
 
+import Data.Bifunctor         (bimap)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
+import Data.Map.Strict        (Map)
 import Data.Maybe             (catMaybes)
-import Data.Monoid            ((<>))
+import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)
 import Data.Text.Lazy.Builder (Builder)
 import Data.Word
 
+import GHC.Exts     (toList)
 import GHC.TypeLits (KnownSymbol)
+
+import Numeric.Natural (Natural)
 
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
+import Terrafomo.Syntax.Backend
 import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.IP
 import Terrafomo.Syntax.Meta
@@ -205,6 +211,9 @@ instance ToHCL Value where
 instance ToHCL Bool where
     toHCL = Bool
 
+instance ToHCL [Char] where
+    toHCL = string . fromString
+
 instance ToHCL Float where
     toHCL = float
 
@@ -212,6 +221,9 @@ instance ToHCL Double where
     toHCL = float
 
 instance ToHCL Int where
+    toHCL = number
+
+instance ToHCL Natural where
     toHCL = number
 
 instance ToHCL Integer where
@@ -249,6 +261,9 @@ instance ToHCL LText.Text where
 
 instance ToHCL Builder where
     toHCL = string
+
+instance ToHCL v => ToHCL (Map Text v) where
+    toHCL = block . map (uncurry assign . bimap unquoted toHCL) . toList
 
 instance ToHCL Alias where
     toHCL = toHCL . Hash.human
@@ -308,4 +323,12 @@ instance ToHCL (Output Value) where
     toHCL (Output n x) =
         object ("output" :| [name n])
             [ assign "value" x
+            ]
+
+instance ToHCL (Backend Local) where
+    toHCL (Backend (Local path)) =
+        object (pure (unquoted "terraform"))
+            [ object (pure (unquoted "backend") <> pure (quoted "local"))
+                [ assign "path" path
+                ]
             ]

@@ -1,0 +1,4 @@
+name: aws_s3_bucket
+arguments:
+  _versioning:
+    type: 'TF.S3BucketVersioning'

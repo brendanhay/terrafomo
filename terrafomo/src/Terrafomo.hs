@@ -26,6 +26,11 @@ module Terrafomo
     , TerraformOutput (..)
     , renderOutput
 
+    -- * Terraform Backends
+    , Backend         (..)
+    , Local
+    , localBackend
+
     -- * Terraform Syntax
     , Name            (..)
 
@@ -90,6 +95,7 @@ module Terrafomo
 import GHC.TypeLits (KnownSymbol)
 
 import Terrafomo.Monad
+import Terrafomo.Syntax.Backend
 import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.IP
 import Terrafomo.Syntax.Meta

@@ -25,7 +25,7 @@ module Terrafomo.Monad
     , renderTerraformT
 
     -- * Terraform Monad Class
-    , MonadTerraform (..)
+    , MonadTerraform  (..)
 
     -- * Errors
     , TerraformError  (..)
@@ -67,6 +67,7 @@ import Data.Typeable         (Typeable)
 
 import GHC.TypeLits (KnownSymbol)
 
+import Terrafomo.Syntax.Backend
 import Terrafomo.Syntax.DataSource (DataSource (..))
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
@@ -101,6 +102,9 @@ import qualified Control.Monad.Trans.State.Strict  as Strict
 import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
 
+-- FIXME: Reference + TerraformT should be parameterised similar to ST
+-- to prevent leaking.
+
 -- Errors
 
 data TerraformError
@@ -120,7 +124,8 @@ newtype TerraformConfig = TerraformConfig
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformOutput = UnsafeTerraformOutput
-    { providers   :: !(ValueMap Alias)
+    { backend     :: !HCL.Value
+    , providers   :: !(ValueMap Alias)
     , datasources :: !(ValueMap Key)
     , resources   :: !(ValueMap Key)
     , outputs     :: !(ValueMap Name)
@@ -135,6 +140,7 @@ renderOutput s =
     . PP.renderPretty 0.4 100
     . HCL.renderHCL
     . DList.toList
+    . DList.cons (backend s)
     $ DList.concat
          [ VMap.values (providers   s)
          , VMap.values (datasources s)
@@ -147,17 +153,21 @@ renderOutput s =
 type Terraform a = TerraformT Identity a
 
 instance Show a => Show (Terraform a) where
-   show = show . runTerraform
+   show = show . runTerraform (localBackend "<undefined>")
 
 renderTerraform
-    :: Terraform a
+    :: HCL.ToHCL (Backend a)
+    => Backend a
+    -> Terraform b
     -> Either TerraformError LText.Text
-renderTerraform = runIdentity . renderTerraformT
+renderTerraform x = runIdentity . renderTerraformT x
 
 runTerraform
-    :: Terraform a
-    -> Either TerraformError (a, TerraformOutput)
-runTerraform = runIdentity . runTerraformT
+    :: HCL.ToHCL (Backend a)
+    => Backend a
+    -> Terraform b
+    -> Either TerraformError (b, TerraformOutput)
+runTerraform x = runIdentity . runTerraformT x
 
 -- Terraform CPS Monad
 
@@ -171,24 +181,30 @@ newtype TerraformT m a = TerraformT
 -- Unwrapping
 
 renderTerraformT
-    :: Functor m
-    => TerraformT m a
+    :: ( Functor m
+       , HCL.ToHCL (Backend a)
+       )
+    => Backend a
+    -> TerraformT m b
     -> m (Either TerraformError LText.Text)
-renderTerraformT = fmap (second (renderOutput . snd)) . runTerraformT
+renderTerraformT x = fmap (second (renderOutput . snd)) . runTerraformT x
 
 runTerraformT
-    :: TerraformT m a
-    -> m (Either TerraformError (a, TerraformOutput))
-runTerraformT m =
+    :: HCL.ToHCL (Backend a)
+    => Backend a
+    -> TerraformT m b
+    -> m (Either TerraformError (b, TerraformOutput))
+runTerraformT x m =
     unTerraformT m
         TerraformConfig
             { aliases = mempty
             }
         UnsafeTerraformOutput
-            { providers      = VMap.empty
-            , datasources    = VMap.empty
-            , resources      = VMap.empty
-            , outputs        = VMap.empty
+            { backend     = HCL.toHCL x
+            , providers   = VMap.empty
+            , datasources = VMap.empty
+            , resources   = VMap.empty
+            , outputs     = VMap.empty
             }
 
 -- Instances

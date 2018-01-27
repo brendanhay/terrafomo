@@ -21,7 +21,9 @@ library:
     - Terrafomo.Monad
     - Terrafomo.Options
     - Terrafomo.Program
+    - Terrafomo.ValueMap
 
+    - Terrafomo.Syntax.Backend
     - Terrafomo.Syntax.DataSource
     - Terrafomo.Syntax.HCL
     - Terrafomo.Syntax.IP

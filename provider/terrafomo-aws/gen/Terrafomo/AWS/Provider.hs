@@ -53,7 +53,7 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.AWS.Types       as TF
+import qualified Terrafomo.AWS.Types as TF
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF

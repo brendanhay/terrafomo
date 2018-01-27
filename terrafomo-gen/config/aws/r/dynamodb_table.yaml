@@ -1,0 +1,8 @@
+name: aws_dynamodb_table
+arguments:
+  _attribute:
+    type: 'TF.DynamoTableAttributes'
+  _read_capacity:
+    type: 'TF.Natural'
+  _write_capacity:
+    type: 'TF.Natural'

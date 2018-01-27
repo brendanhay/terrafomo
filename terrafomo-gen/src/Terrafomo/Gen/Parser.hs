@@ -163,8 +163,8 @@ argItem rules = item >>> paragraph >>> argument
                 (x, _)  -> (,) x $
                     arg { argName     = pure name
                         , argHelp     = pure "(Optional) See datatype documentation."
-                        , argRequired = pure False
-                        , argIgnored  = pure False
+                        , argRequired = False
+                        , argIgnored  = False
                         , argType     = pure ("TF." <> dataTypeName x <> "Type")
                         }
 
@@ -176,8 +176,12 @@ argItem rules = item >>> paragraph >>> argument
         | otherwise                         = mk h               True  False
       where
         mk h' require deprecate =
-            Arg (pure mempty) (pure h') (pure require) (pure deprecate)
-                (guessType rules name)
+            Arg { argName     = pure mempty
+                , argHelp     = pure h'
+                , argRequired = require
+                , argIgnored  = deprecate
+                , argType     = guessType rules name
+                }
 
 attrItem :: [Rule] -> Parser (Text, Attr)
 attrItem rules = item >>> paragraph >>> attribute

@@ -131,15 +131,15 @@ applyDeprecations x
     | schemaDeprecated x = Nothing
     | otherwise          = Just $
         x { schemaArguments =
-              Map.filter ((/= pure True) . argIgnored) (schemaArguments x)
+              Map.filter ((/= True) . argIgnored) (schemaArguments x)
           }
 
 -- > * `fieldname` - (Optional) documentation
 data Arg = Arg
     { argName     :: !(Last Text)
     , argHelp     :: !(Last Text)
-    , argRequired :: !(Last Bool)
-    , argIgnored  :: !(Last Bool) -- FIXME: Should be added to 'Attr' too.
+    , argRequired :: !Bool
+    , argIgnored  :: !Bool
     , argType     :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
@@ -147,8 +147,8 @@ instance Semigroup Arg where
     (<>) parsed saved = Arg
         { argName     = on (<>) argName     parsed saved
         , argHelp     = on (<>) argHelp     parsed saved
-        , argRequired = on (<>) argRequired parsed saved
-        , argIgnored  = on (<>) argIgnored  parsed saved
+        , argRequired = on (||) argRequired parsed saved
+        , argIgnored  = on (||) argIgnored  parsed saved
         , argType     = on (<>) argType     parsed saved
         }
 
@@ -156,7 +156,13 @@ instance ToJSON Arg where
     toJSON = JSON.genericToJSON (JSON.options "arg")
 
 instance FromJSON Arg where
-    parseJSON = JSON.genericParseJSON (JSON.options "arg")
+    parseJSON = JSON.withObject "Argument" $ \o -> do
+        argName     <- o .:? "name"     .!= mempty
+        argHelp     <- o .:? "help"     .!= mempty
+        argRequired <- o .:? "required" .!= False
+        argIgnored  <- o .:? "ignored"  .!= False
+        argType     <- o .:? "type"     .!= mempty
+        pure Arg{..}
 
 -- > * `name` - documentation
 data Attr = Attr
@@ -176,4 +182,8 @@ instance ToJSON Attr where
     toJSON = JSON.genericToJSON (JSON.options "attr")
 
 instance FromJSON Attr where
-    parseJSON = JSON.genericParseJSON (JSON.options "attr")
+    parseJSON = JSON.withObject "Attribute" $ \o -> do
+        attrName     <- o .:? "name" .!= mempty
+        attrHelp     <- o .:? "help" .!= mempty
+        attrType     <- o .:? "type" .!= mempty
+        pure Attr{..}
