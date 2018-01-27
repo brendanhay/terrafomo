@@ -19,8 +19,6 @@ library:
     - Terrafomo
     - Terrafomo.Format
     - Terrafomo.Monad
-    - Terrafomo.Options
-    - Terrafomo.Program
     - Terrafomo.ValueMap
 
     - Terrafomo.Syntax.Backend
@@ -58,9 +56,3 @@ library:
     - text
     - transformers
     - wl-pprint-text
-
-    - directory
-    - filepath
-    - optparse-applicative
-    - process
-    - lens
