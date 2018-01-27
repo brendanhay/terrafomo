@@ -83,8 +83,8 @@ instance Hashable PostgreSQL
 
 instance TF.ToHCL PostgreSQL where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy PostgreSQL))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy PostgreSQL))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_connect_timeout x)
             , TF.argument (_database x)
             , TF.argument (_expected_version x)
@@ -110,7 +110,7 @@ emptyPostgreSQL = PostgreSQL {
     }
 
 instance TF.IsProvider PostgreSQL where
-    type ProviderName PostgreSQL = "postgresql"
+    type ProviderType PostgreSQL = "postgresql"
 
 connectTimeout :: Lens' PostgreSQL (TF.Argument "connect_timeout" Text)
 connectTimeout =

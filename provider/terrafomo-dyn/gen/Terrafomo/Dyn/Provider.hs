@@ -66,8 +66,8 @@ instance Hashable Dyn
 
 instance TF.ToHCL Dyn where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Dyn))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Dyn))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_customer_name x)
             , TF.argument (_password x)
             , TF.argument (_username x)
@@ -81,7 +81,7 @@ emptyDyn = Dyn {
     }
 
 instance TF.IsProvider Dyn where
-    type ProviderName Dyn = "dyn"
+    type ProviderType Dyn = "dyn"
 
 customerName :: Lens' Dyn (TF.Argument "customer_name" Text)
 customerName =

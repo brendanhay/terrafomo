@@ -82,8 +82,8 @@ instance Hashable CloudStack
 
 instance TF.ToHCL CloudStack where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy CloudStack))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy CloudStack))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             , TF.argument (_api_url x)
             , TF.argument (_config x)
@@ -105,7 +105,7 @@ emptyCloudStack = CloudStack {
     }
 
 instance TF.IsProvider CloudStack where
-    type ProviderName CloudStack = "cloudstack"
+    type ProviderType CloudStack = "cloudstack"
 
 apiKey :: Lens' CloudStack (TF.Argument "api_key" Text)
 apiKey =

@@ -53,7 +53,7 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.AWS.Types as TF
+import qualified Terrafomo.AWS.Types       as TF
 import qualified Terrafomo.Syntax.HCL      as TF
 import qualified Terrafomo.Syntax.IP       as TF
 import qualified Terrafomo.Syntax.Name     as TF
@@ -109,7 +109,7 @@ instance Hashable AWS
 instance TF.ToHCL AWS where
     toHCL x =
         TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy AWS))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerKey x))
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_access_key x)
             , TF.argument (_allowed_account_ids x)
             , TF.argument (_assume_role x)

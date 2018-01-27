@@ -61,8 +61,8 @@ instance Hashable Fastly
 
 instance TF.ToHCL Fastly where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Fastly))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Fastly))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             ]
 
@@ -72,7 +72,7 @@ emptyFastly = Fastly {
     }
 
 instance TF.IsProvider Fastly where
-    type ProviderName Fastly = "fastly"
+    type ProviderType Fastly = "fastly"
 
 apiKey :: Lens' Fastly (TF.Argument "api_key" Text)
 apiKey =

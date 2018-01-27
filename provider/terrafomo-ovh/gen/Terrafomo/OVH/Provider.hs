@@ -57,8 +57,8 @@ instance Hashable OVH
 
 instance TF.ToHCL OVH where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OVH))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OVH))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyOVH :: OVH
@@ -66,4 +66,4 @@ emptyOVH = OVH {
     }
 
 instance TF.IsProvider OVH where
-    type ProviderName OVH = "ovh"
+    type ProviderType OVH = "ovh"

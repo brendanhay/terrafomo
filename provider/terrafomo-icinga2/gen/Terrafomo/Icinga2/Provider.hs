@@ -69,8 +69,8 @@ instance Hashable Icinga2
 
 instance TF.ToHCL Icinga2 where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Icinga2))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Icinga2))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_password x)
             , TF.argument (_api_url x)
             , TF.argument (_api_user x)
@@ -86,7 +86,7 @@ emptyIcinga2 = Icinga2 {
     }
 
 instance TF.IsProvider Icinga2 where
-    type ProviderName Icinga2 = "icinga2"
+    type ProviderType Icinga2 = "icinga2"
 
 apiPassword :: Lens' Icinga2 (TF.Argument "api_password" Text)
 apiPassword =

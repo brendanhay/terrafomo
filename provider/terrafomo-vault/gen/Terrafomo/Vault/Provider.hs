@@ -62,8 +62,8 @@ instance Hashable Vault
 
 instance TF.ToHCL Vault where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Vault))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Vault))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyVault :: Vault
@@ -71,4 +71,4 @@ emptyVault = Vault {
     }
 
 instance TF.IsProvider Vault where
-    type ProviderName Vault = "vault"
+    type ProviderType Vault = "vault"

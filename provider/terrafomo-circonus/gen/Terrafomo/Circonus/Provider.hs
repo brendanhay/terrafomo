@@ -61,8 +61,8 @@ instance Hashable Circonus
 
 instance TF.ToHCL Circonus where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Circonus))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Circonus))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_url x)
             , TF.argument (_key x)
             ]
@@ -74,7 +74,7 @@ emptyCirconus = Circonus {
     }
 
 instance TF.IsProvider Circonus where
-    type ProviderName Circonus = "circonus"
+    type ProviderType Circonus = "circonus"
 
 apiUrl :: Lens' Circonus (TF.Argument "api_url" Text)
 apiUrl =

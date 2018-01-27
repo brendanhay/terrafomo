@@ -76,8 +76,8 @@ instance Hashable Triton
 
 instance TF.ToHCL Triton where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Triton))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Triton))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_account x)
             , TF.argument (_insecure_skip_tls_verify x)
             , TF.argument (_key_id x)
@@ -97,7 +97,7 @@ emptyTriton = Triton {
     }
 
 instance TF.IsProvider Triton where
-    type ProviderName Triton = "triton"
+    type ProviderType Triton = "triton"
 
 account :: Lens' Triton (TF.Argument "account" Text)
 account =

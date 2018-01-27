@@ -75,7 +75,7 @@ instance Hashable {{ provider.name }}
 instance TF.ToHCL {{ provider.name }} where
     toHCL x =
         TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy {{ provider.name }}))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerKey x))
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
           {% for arg in schema.arguments %}
             , TF.argument ({{ arg.key }} x)
           {% endfor %}

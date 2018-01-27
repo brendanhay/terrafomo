@@ -66,8 +66,8 @@ instance Hashable PowerDNS
 
 instance TF.ToHCL PowerDNS where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy PowerDNS))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy PowerDNS))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             , TF.argument (_server_url x)
             ]
@@ -79,7 +79,7 @@ emptyPowerDNS = PowerDNS {
     }
 
 instance TF.IsProvider PowerDNS where
-    type ProviderName PowerDNS = "powerdns"
+    type ProviderType PowerDNS = "powerdns"
 
 apiKey :: Lens' PowerDNS (TF.Argument "api_key" Text)
 apiKey =

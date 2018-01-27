@@ -72,8 +72,8 @@ instance Hashable Spotinst
 
 instance TF.ToHCL Spotinst where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Spotinst))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Spotinst))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_client_id x)
             , TF.argument (_client_secret x)
             , TF.argument (_email x)
@@ -91,7 +91,7 @@ emptySpotinst = Spotinst {
     }
 
 instance TF.IsProvider Spotinst where
-    type ProviderName Spotinst = "spotinst"
+    type ProviderType Spotinst = "spotinst"
 
 clientId :: Lens' Spotinst (TF.Argument "client_id" Text)
 clientId =

@@ -56,8 +56,8 @@ instance Hashable ProfitBricks
 
 instance TF.ToHCL ProfitBricks where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy ProfitBricks))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy ProfitBricks))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyProfitBricks :: ProfitBricks
@@ -65,4 +65,4 @@ emptyProfitBricks = ProfitBricks {
     }
 
 instance TF.IsProvider ProfitBricks where
-    type ProviderName ProfitBricks = "profitbricks"
+    type ProviderType ProfitBricks = "profitbricks"

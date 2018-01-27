@@ -71,8 +71,8 @@ instance Hashable Docker
 
 instance TF.ToHCL Docker where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Docker))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Docker))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_ca_material x)
             , TF.argument (_cert_path x)
             , TF.argument (_host x)
@@ -88,7 +88,7 @@ emptyDocker = Docker {
     }
 
 instance TF.IsProvider Docker where
-    type ProviderName Docker = "docker"
+    type ProviderType Docker = "docker"
 
 caMaterial :: Lens' Docker (TF.Argument "ca_material" Text)
 caMaterial =

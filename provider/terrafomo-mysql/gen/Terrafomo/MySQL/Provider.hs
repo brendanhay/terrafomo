@@ -66,8 +66,8 @@ instance Hashable MySQL
 
 instance TF.ToHCL MySQL where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy MySQL))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy MySQL))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_endpoint x)
             , TF.argument (_password x)
             , TF.argument (_username x)
@@ -81,7 +81,7 @@ emptyMySQL = MySQL {
     }
 
 instance TF.IsProvider MySQL where
-    type ProviderName MySQL = "mysql"
+    type ProviderType MySQL = "mysql"
 
 endpoint :: Lens' MySQL (TF.Argument "endpoint" Text)
 endpoint =

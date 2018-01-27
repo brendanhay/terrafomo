@@ -69,8 +69,8 @@ instance Hashable Chef
 
 instance TF.ToHCL Chef where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Chef))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Chef))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_allow_unverified_ssl x)
             , TF.argument (_client_name x)
             , TF.argument (_key_material x)
@@ -86,7 +86,7 @@ emptyChef = Chef {
     }
 
 instance TF.IsProvider Chef where
-    type ProviderName Chef = "chef"
+    type ProviderType Chef = "chef"
 
 allowUnverifiedSsl :: Lens' Chef (TF.Argument "allow_unverified_ssl" Text)
 allowUnverifiedSsl =

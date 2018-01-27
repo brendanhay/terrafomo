@@ -60,8 +60,8 @@ instance Hashable DigitalOcean
 
 instance TF.ToHCL DigitalOcean where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy DigitalOcean))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy DigitalOcean))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_token x)
             ]
 
@@ -71,7 +71,7 @@ emptyDigitalOcean = DigitalOcean {
     }
 
 instance TF.IsProvider DigitalOcean where
-    type ProviderName DigitalOcean = "digitalocean"
+    type ProviderType DigitalOcean = "digitalocean"
 
 token :: Lens' DigitalOcean (TF.Argument "token" Text)
 token =

@@ -64,8 +64,8 @@ instance Hashable PagerDuty
 
 instance TF.ToHCL PagerDuty where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy PagerDuty))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy PagerDuty))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_skip_credentials_validation x)
             , TF.argument (_token x)
             ]
@@ -77,7 +77,7 @@ emptyPagerDuty = PagerDuty {
     }
 
 instance TF.IsProvider PagerDuty where
-    type ProviderName PagerDuty = "pagerduty"
+    type ProviderType PagerDuty = "pagerduty"
 
 skipCredentialsValidation :: Lens' PagerDuty (TF.Argument "skip_credentials_validation" Text)
 skipCredentialsValidation =

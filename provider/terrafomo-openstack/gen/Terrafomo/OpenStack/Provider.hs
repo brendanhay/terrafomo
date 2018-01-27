@@ -57,8 +57,8 @@ instance Hashable OpenStack
 
 instance TF.ToHCL OpenStack where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OpenStack))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OpenStack))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyOpenStack :: OpenStack
@@ -66,4 +66,4 @@ emptyOpenStack = OpenStack {
     }
 
 instance TF.IsProvider OpenStack where
-    type ProviderName OpenStack = "openstack"
+    type ProviderType OpenStack = "openstack"

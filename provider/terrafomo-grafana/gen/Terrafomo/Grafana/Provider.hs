@@ -57,8 +57,8 @@ instance Hashable Grafana
 
 instance TF.ToHCL Grafana where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Grafana))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Grafana))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyGrafana :: Grafana
@@ -66,4 +66,4 @@ emptyGrafana = Grafana {
     }
 
 instance TF.IsProvider Grafana where
-    type ProviderName Grafana = "grafana"
+    type ProviderType Grafana = "grafana"

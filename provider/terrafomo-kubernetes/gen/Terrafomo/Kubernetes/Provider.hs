@@ -96,8 +96,8 @@ instance Hashable Kubernetes
 
 instance TF.ToHCL Kubernetes where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Kubernetes))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Kubernetes))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_client_certificate x)
             , TF.argument (_client_key x)
             , TF.argument (_cluster_ca_certificate x)
@@ -131,7 +131,7 @@ emptyKubernetes = Kubernetes {
     }
 
 instance TF.IsProvider Kubernetes where
-    type ProviderName Kubernetes = "kubernetes"
+    type ProviderType Kubernetes = "kubernetes"
 
 clientCertificate :: Lens' Kubernetes (TF.Argument "client_certificate" Text)
 clientCertificate =

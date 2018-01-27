@@ -56,8 +56,8 @@ instance Hashable OneAndOne
 
 instance TF.ToHCL OneAndOne where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OneAndOne))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OneAndOne))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyOneAndOne :: OneAndOne
@@ -65,4 +65,4 @@ emptyOneAndOne = OneAndOne {
     }
 
 instance TF.IsProvider OneAndOne where
-    type ProviderName OneAndOne = "oneandone"
+    type ProviderType OneAndOne = "oneandone"

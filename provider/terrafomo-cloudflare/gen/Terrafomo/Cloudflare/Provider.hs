@@ -63,8 +63,8 @@ instance Hashable Cloudflare
 
 instance TF.ToHCL Cloudflare where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Cloudflare))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Cloudflare))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_email x)
             , TF.argument (_token x)
             ]
@@ -76,7 +76,7 @@ emptyCloudflare = Cloudflare {
     }
 
 instance TF.IsProvider Cloudflare where
-    type ProviderName Cloudflare = "cloudflare"
+    type ProviderType Cloudflare = "cloudflare"
 
 email :: Lens' Cloudflare (TF.Argument "email" Text)
 email =

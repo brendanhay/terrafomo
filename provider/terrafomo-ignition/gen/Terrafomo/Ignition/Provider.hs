@@ -59,8 +59,8 @@ instance Hashable Ignition
 
 instance TF.ToHCL Ignition where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Ignition))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Ignition))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyIgnition :: Ignition
@@ -68,4 +68,4 @@ emptyIgnition = Ignition {
     }
 
 instance TF.IsProvider Ignition where
-    type ProviderName Ignition = "ignition"
+    type ProviderType Ignition = "ignition"

@@ -74,8 +74,8 @@ instance Hashable VSphere
 
 instance TF.ToHCL VSphere where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy VSphere))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy VSphere))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_allow_unverified_ssl x)
             , TF.argument (_password x)
             , TF.argument (_user x)
@@ -91,7 +91,7 @@ emptyVSphere = VSphere {
     }
 
 instance TF.IsProvider VSphere where
-    type ProviderName VSphere = "vsphere"
+    type ProviderType VSphere = "vsphere"
 
 allowUnverifiedSsl :: Lens' VSphere (TF.Argument "allow_unverified_ssl" Text)
 allowUnverifiedSsl =

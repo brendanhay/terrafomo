@@ -74,8 +74,8 @@ instance Hashable Nomad
 
 instance TF.ToHCL Nomad where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Nomad))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Nomad))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_address x)
             , TF.argument (_ca_file x)
             , TF.argument (_cert_file x)
@@ -95,7 +95,7 @@ emptyNomad = Nomad {
     }
 
 instance TF.IsProvider Nomad where
-    type ProviderName Nomad = "nomad"
+    type ProviderType Nomad = "nomad"
 
 address :: Lens' Nomad (TF.Argument "address" Text)
 address =

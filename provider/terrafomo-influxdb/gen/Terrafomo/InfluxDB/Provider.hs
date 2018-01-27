@@ -57,8 +57,8 @@ instance Hashable InfluxDB
 
 instance TF.ToHCL InfluxDB where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy InfluxDB))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy InfluxDB))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyInfluxDB :: InfluxDB
@@ -66,4 +66,4 @@ emptyInfluxDB = InfluxDB {
     }
 
 instance TF.IsProvider InfluxDB where
-    type ProviderName InfluxDB = "influxdb"
+    type ProviderType InfluxDB = "influxdb"

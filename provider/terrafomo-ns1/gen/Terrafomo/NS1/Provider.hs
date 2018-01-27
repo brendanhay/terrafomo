@@ -59,8 +59,8 @@ instance Hashable NS1
 
 instance TF.ToHCL NS1 where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy NS1))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy NS1))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_apikey x)
             ]
 
@@ -70,7 +70,7 @@ emptyNS1 = NS1 {
     }
 
 instance TF.IsProvider NS1 where
-    type ProviderName NS1 = "ns1"
+    type ProviderType NS1 = "ns1"
 
 apikey :: Lens' NS1 (TF.Argument "apikey" Text)
 apikey =

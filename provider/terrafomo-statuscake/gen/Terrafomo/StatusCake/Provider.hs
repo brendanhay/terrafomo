@@ -57,8 +57,8 @@ instance Hashable StatusCake
 
 instance TF.ToHCL StatusCake where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy StatusCake))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy StatusCake))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyStatusCake :: StatusCake
@@ -66,4 +66,4 @@ emptyStatusCake = StatusCake {
     }
 
 instance TF.IsProvider StatusCake where
-    type ProviderName StatusCake = "statuscake"
+    type ProviderType StatusCake = "statuscake"

@@ -57,8 +57,8 @@ instance Hashable Google
 
 instance TF.ToHCL Google where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Google))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Google))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyGoogle :: Google
@@ -66,4 +66,4 @@ emptyGoogle = Google {
     }
 
 instance TF.IsProvider Google where
-    type ProviderName Google = "google"
+    type ProviderType Google = "google"

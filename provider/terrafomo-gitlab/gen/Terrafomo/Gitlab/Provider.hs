@@ -68,8 +68,8 @@ instance Hashable Gitlab
 
 instance TF.ToHCL Gitlab where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Gitlab))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Gitlab))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_base_url x)
             , TF.argument (_cacert_file x)
             , TF.argument (_insecure x)
@@ -85,7 +85,7 @@ emptyGitlab = Gitlab {
     }
 
 instance TF.IsProvider Gitlab where
-    type ProviderName Gitlab = "gitlab"
+    type ProviderType Gitlab = "gitlab"
 
 baseUrl :: Lens' Gitlab (TF.Argument "base_url" Text)
 baseUrl =

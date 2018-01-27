@@ -63,8 +63,8 @@ instance Hashable Heroku
 
 instance TF.ToHCL Heroku where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Heroku))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Heroku))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             , TF.argument (_email x)
             ]
@@ -76,7 +76,7 @@ emptyHeroku = Heroku {
     }
 
 instance TF.IsProvider Heroku where
-    type ProviderName Heroku = "heroku"
+    type ProviderType Heroku = "heroku"
 
 apiKey :: Lens' Heroku (TF.Argument "api_key" Text)
 apiKey =

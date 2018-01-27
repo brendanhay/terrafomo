@@ -63,8 +63,8 @@ instance Hashable DNSimple
 
 instance TF.ToHCL DNSimple where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy DNSimple))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy DNSimple))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_account x)
             , TF.argument (_token x)
             ]
@@ -76,7 +76,7 @@ emptyDNSimple = DNSimple {
     }
 
 instance TF.IsProvider DNSimple where
-    type ProviderName DNSimple = "dnsimple"
+    type ProviderType DNSimple = "dnsimple"
 
 account :: Lens' DNSimple (TF.Argument "account" Text)
 account =

@@ -63,8 +63,8 @@ instance Hashable Librato
 
 instance TF.ToHCL Librato where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Librato))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Librato))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_email x)
             , TF.argument (_token x)
             ]
@@ -76,7 +76,7 @@ emptyLibrato = Librato {
     }
 
 instance TF.IsProvider Librato where
-    type ProviderName Librato = "librato"
+    type ProviderType Librato = "librato"
 
 email :: Lens' Librato (TF.Argument "email" Text)
 email =

@@ -60,8 +60,8 @@ instance Hashable Logentries
 
 instance TF.ToHCL Logentries where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Logentries))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Logentries))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_account_key x)
             ]
 
@@ -71,7 +71,7 @@ emptyLogentries = Logentries {
     }
 
 instance TF.IsProvider Logentries where
-    type ProviderName Logentries = "logentries"
+    type ProviderType Logentries = "logentries"
 
 accountKey :: Lens' Logentries (TF.Argument "account_key" Text)
 accountKey =

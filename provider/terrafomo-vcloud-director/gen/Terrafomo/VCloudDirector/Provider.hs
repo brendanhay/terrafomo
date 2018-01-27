@@ -80,8 +80,8 @@ instance Hashable VCloudDirector
 
 instance TF.ToHCL VCloudDirector where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy VCloudDirector))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy VCloudDirector))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_allow_unverified_ssl x)
             , TF.argument (_max_retry_timeout x)
             , TF.argument (_org x)
@@ -103,7 +103,7 @@ emptyVCloudDirector = VCloudDirector {
     }
 
 instance TF.IsProvider VCloudDirector where
-    type ProviderName VCloudDirector = "vcd"
+    type ProviderType VCloudDirector = "vcd"
 
 allowUnverifiedSsl :: Lens' VCloudDirector (TF.Argument "allow_unverified_ssl" Text)
 allowUnverifiedSsl =

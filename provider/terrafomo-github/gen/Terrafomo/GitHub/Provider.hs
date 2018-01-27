@@ -67,8 +67,8 @@ instance Hashable GitHub
 
 instance TF.ToHCL GitHub where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy GitHub))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy GitHub))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_base_url x)
             , TF.argument (_organization x)
             , TF.argument (_token x)
@@ -82,7 +82,7 @@ emptyGitHub = GitHub {
     }
 
 instance TF.IsProvider GitHub where
-    type ProviderName GitHub = "github"
+    type ProviderType GitHub = "github"
 
 baseUrl :: Lens' GitHub (TF.Argument "base_url" Text)
 baseUrl =

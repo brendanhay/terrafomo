@@ -66,8 +66,8 @@ instance Hashable UltraDNS
 
 instance TF.ToHCL UltraDNS where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy UltraDNS))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy UltraDNS))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_baseurl x)
             , TF.argument (_password x)
             , TF.argument (_username x)
@@ -81,7 +81,7 @@ emptyUltraDNS = UltraDNS {
     }
 
 instance TF.IsProvider UltraDNS where
-    type ProviderName UltraDNS = "ultradns"
+    type ProviderType UltraDNS = "ultradns"
 
 baseurl :: Lens' UltraDNS (TF.Argument "baseurl" Text)
 baseurl =

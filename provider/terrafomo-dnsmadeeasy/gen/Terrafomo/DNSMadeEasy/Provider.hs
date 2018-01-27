@@ -66,8 +66,8 @@ instance Hashable DNSMadeEasy
 
 instance TF.ToHCL DNSMadeEasy where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy DNSMadeEasy))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy DNSMadeEasy))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_akey x)
             , TF.argument (_skey x)
             , TF.argument (_usesandbox x)
@@ -81,7 +81,7 @@ emptyDNSMadeEasy = DNSMadeEasy {
     }
 
 instance TF.IsProvider DNSMadeEasy where
-    type ProviderName DNSMadeEasy = "dme"
+    type ProviderType DNSMadeEasy = "dme"
 
 akey :: Lens' DNSMadeEasy (TF.Argument "akey" Text)
 akey =

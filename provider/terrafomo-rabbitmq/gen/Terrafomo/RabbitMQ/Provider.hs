@@ -72,8 +72,8 @@ instance Hashable RabbitMQ
 
 instance TF.ToHCL RabbitMQ where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy RabbitMQ))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy RabbitMQ))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_cacert_file x)
             , TF.argument (_endpoint x)
             , TF.argument (_insecure x)
@@ -91,7 +91,7 @@ emptyRabbitMQ = RabbitMQ {
     }
 
 instance TF.IsProvider RabbitMQ where
-    type ProviderName RabbitMQ = "rabbitmq"
+    type ProviderType RabbitMQ = "rabbitmq"
 
 cacertFile :: Lens' RabbitMQ (TF.Argument "cacert_file" Text)
 cacertFile =

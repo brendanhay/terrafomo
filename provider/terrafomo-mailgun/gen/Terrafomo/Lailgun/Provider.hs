@@ -60,8 +60,8 @@ instance Hashable Lailgun
 
 instance TF.ToHCL Lailgun where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Lailgun))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Lailgun))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             ]
 
@@ -71,7 +71,7 @@ emptyLailgun = Lailgun {
     }
 
 instance TF.IsProvider Lailgun where
-    type ProviderName Lailgun = "mailgun"
+    type ProviderType Lailgun = "mailgun"
 
 apiKey :: Lens' Lailgun (TF.Argument "api_key" Text)
 apiKey =

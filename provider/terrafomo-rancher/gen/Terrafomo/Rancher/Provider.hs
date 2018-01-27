@@ -66,8 +66,8 @@ instance Hashable Rancher
 
 instance TF.ToHCL Rancher where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Rancher))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Rancher))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_access_key x)
             , TF.argument (_api_url x)
             , TF.argument (_secret_key x)
@@ -81,7 +81,7 @@ emptyRancher = Rancher {
     }
 
 instance TF.IsProvider Rancher where
-    type ProviderName Rancher = "rancher"
+    type ProviderType Rancher = "rancher"
 
 accessKey :: Lens' Rancher (TF.Argument "access_key" Text)
 accessKey =

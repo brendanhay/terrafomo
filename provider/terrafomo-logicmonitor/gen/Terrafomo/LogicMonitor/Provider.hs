@@ -66,8 +66,8 @@ instance Hashable LogicMonitor
 
 instance TF.ToHCL LogicMonitor where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy LogicMonitor))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy LogicMonitor))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_id x)
             , TF.argument (_api_key x)
             , TF.argument (_company x)
@@ -81,7 +81,7 @@ emptyLogicMonitor = LogicMonitor {
     }
 
 instance TF.IsProvider LogicMonitor where
-    type ProviderName LogicMonitor = "logicmonitor"
+    type ProviderType LogicMonitor = "logicmonitor"
 
 apiId :: Lens' LogicMonitor (TF.Argument "api_id" Text)
 apiId =

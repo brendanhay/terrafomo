@@ -58,8 +58,8 @@ instance Hashable Rundeck
 
 instance TF.ToHCL Rundeck where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Rundeck))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Rundeck))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyRundeck :: Rundeck
@@ -67,4 +67,4 @@ emptyRundeck = Rundeck {
     }
 
 instance TF.IsProvider Rundeck where
-    type ProviderName Rundeck = "rundeck"
+    type ProviderType Rundeck = "rundeck"

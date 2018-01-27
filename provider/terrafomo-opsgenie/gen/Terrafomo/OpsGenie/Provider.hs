@@ -57,8 +57,8 @@ instance Hashable OpsGenie
 
 instance TF.ToHCL OpsGenie where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OpsGenie))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OpsGenie))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyOpsGenie :: OpsGenie
@@ -66,4 +66,4 @@ emptyOpsGenie = OpsGenie {
     }
 
 instance TF.IsProvider OpsGenie where
-    type ProviderName OpsGenie = "opsgenie"
+    type ProviderType OpsGenie = "opsgenie"

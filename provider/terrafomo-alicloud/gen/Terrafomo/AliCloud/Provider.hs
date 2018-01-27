@@ -66,8 +66,8 @@ instance Hashable AliCloud
 
 instance TF.ToHCL AliCloud where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AliCloud))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy AliCloud))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_access_key x)
             , TF.argument (_region x)
             , TF.argument (_secret_key x)
@@ -81,7 +81,7 @@ emptyAliCloud = AliCloud {
     }
 
 instance TF.IsProvider AliCloud where
-    type ProviderName AliCloud = "alicloud"
+    type ProviderType AliCloud = "alicloud"
 
 accessKey :: Lens' AliCloud (TF.Argument "access_key" Text)
 accessKey =

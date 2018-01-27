@@ -59,8 +59,8 @@ instance Hashable NewRelic
 
 instance TF.ToHCL NewRelic where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy NewRelic))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy NewRelic))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             ]
 
@@ -70,7 +70,7 @@ emptyNewRelic = NewRelic {
     }
 
 instance TF.IsProvider NewRelic where
-    type ProviderName NewRelic = "newrelic"
+    type ProviderType NewRelic = "newrelic"
 
 apiKey :: Lens' NewRelic (TF.Argument "api_key" Text)
 apiKey =

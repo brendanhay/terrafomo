@@ -58,8 +58,8 @@ instance Hashable SoftLayer
 
 instance TF.ToHCL SoftLayer where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy SoftLayer))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy SoftLayer))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptySoftLayer :: SoftLayer
@@ -67,4 +67,4 @@ emptySoftLayer = SoftLayer {
     }
 
 instance TF.IsProvider SoftLayer where
-    type ProviderName SoftLayer = "softlayer"
+    type ProviderType SoftLayer = "softlayer"

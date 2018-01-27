@@ -81,8 +81,8 @@ instance Hashable OPC
 
 instance TF.ToHCL OPC where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy OPC))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OPC))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_endpoint x)
             , TF.argument (_identity_domain x)
             , TF.argument (_insecure x)
@@ -106,7 +106,7 @@ emptyOPC = OPC {
     }
 
 instance TF.IsProvider OPC where
-    type ProviderName OPC = "opc"
+    type ProviderType OPC = "opc"
 
 endpoint :: Lens' OPC (TF.Argument "endpoint" Text)
 endpoint =

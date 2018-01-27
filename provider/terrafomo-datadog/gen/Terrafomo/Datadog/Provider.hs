@@ -63,8 +63,8 @@ instance Hashable Datadog
 
 instance TF.ToHCL Datadog where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Datadog))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Datadog))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_api_key x)
             , TF.argument (_app_key x)
             ]
@@ -76,7 +76,7 @@ emptyDatadog = Datadog {
     }
 
 instance TF.IsProvider Datadog where
-    type ProviderName Datadog = "datadog"
+    type ProviderType Datadog = "datadog"
 
 apiKey :: Lens' Datadog (TF.Argument "api_key" Text)
 apiKey =

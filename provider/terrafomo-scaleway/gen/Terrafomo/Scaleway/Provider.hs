@@ -55,8 +55,8 @@ instance Hashable Scaleway
 
 instance TF.ToHCL Scaleway where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Scaleway))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Scaleway))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             ]
 
 emptyScaleway :: Scaleway
@@ -64,4 +64,4 @@ emptyScaleway = Scaleway {
     }
 
 instance TF.IsProvider Scaleway where
-    type ProviderName Scaleway = "scaleway"
+    type ProviderType Scaleway = "scaleway"

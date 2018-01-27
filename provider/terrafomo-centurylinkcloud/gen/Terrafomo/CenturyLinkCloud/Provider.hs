@@ -67,8 +67,8 @@ instance Hashable CenturyLinkCloud
 
 instance TF.ToHCL CenturyLinkCloud where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy CenturyLinkCloud))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy CenturyLinkCloud))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_clc_account x)
             , TF.argument (_clc_password x)
             , TF.argument (_clc_username x)
@@ -82,7 +82,7 @@ emptyCenturyLinkCloud = CenturyLinkCloud {
     }
 
 instance TF.IsProvider CenturyLinkCloud where
-    type ProviderName CenturyLinkCloud = "clc"
+    type ProviderType CenturyLinkCloud = "clc"
 
 clcAccount :: Lens' CenturyLinkCloud (TF.Argument "clc_account" Text)
 clcAccount =

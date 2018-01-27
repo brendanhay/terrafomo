@@ -62,8 +62,8 @@ instance Hashable Bitbucket
 
 instance TF.ToHCL Bitbucket where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Bitbucket))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Bitbucket))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_password x)
             , TF.argument (_username x)
             ]
@@ -75,7 +75,7 @@ emptyBitbucket = Bitbucket {
     }
 
 instance TF.IsProvider Bitbucket where
-    type ProviderName Bitbucket = "bitbucket"
+    type ProviderType Bitbucket = "bitbucket"
 
 password :: Lens' Bitbucket (TF.Argument "password" Text)
 password =

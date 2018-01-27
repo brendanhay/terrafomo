@@ -60,8 +60,8 @@ instance Hashable Packet
 
 instance TF.ToHCL Packet where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Packet))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Packet))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_auth_token x)
             ]
 
@@ -71,7 +71,7 @@ emptyPacket = Packet {
     }
 
 instance TF.IsProvider Packet where
-    type ProviderName Packet = "packet"
+    type ProviderType Packet = "packet"
 
 authToken :: Lens' Packet (TF.Argument "auth_token" Text)
 authToken =

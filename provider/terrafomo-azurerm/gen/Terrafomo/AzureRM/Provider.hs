@@ -79,8 +79,8 @@ instance Hashable AzureRM
 
 instance TF.ToHCL AzureRM where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy AzureRM))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy AzureRM))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_client_id x)
             , TF.argument (_client_secret x)
             , TF.argument (_environment x)
@@ -102,7 +102,7 @@ emptyAzureRM = AzureRM {
     }
 
 instance TF.IsProvider AzureRM where
-    type ProviderName AzureRM = "azurerm"
+    type ProviderType AzureRM = "azurerm"
 
 clientId :: Lens' AzureRM (TF.Argument "client_id" Text)
 clientId =

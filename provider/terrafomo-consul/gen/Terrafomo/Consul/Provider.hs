@@ -82,8 +82,8 @@ instance Hashable Consul
 
 instance TF.ToHCL Consul where
     toHCL x =
-        TF.object ("provider" :| [TF.name (TF.providerName (Proxy :: Proxy Consul))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.providerAlias x))
+        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Consul))]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
             , TF.argument (_address x)
             , TF.argument (_ca_file x)
             , TF.argument (_cert_file x)
@@ -107,7 +107,7 @@ emptyConsul = Consul {
     }
 
 instance TF.IsProvider Consul where
-    type ProviderName Consul = "consul"
+    type ProviderType Consul = "consul"
 
 address :: Lens' Consul (TF.Argument "address" Text)
 address =
