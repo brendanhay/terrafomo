@@ -108,7 +108,7 @@ instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
     TF.new{{ type }} "{{ original }}" $
         {{ schema.key }} {
           {% for arg in schema.value.arguments %}
-            {% if !arg.first %}, {% endif %}{{ arg.key }} = TF.Nil
+            {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = TF.Nil
           {% endfor %}
             }
 {% endlet %}

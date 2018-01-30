@@ -10,6 +10,14 @@ import qualified Data.Char as Char
 import qualified Data.Set  as Set
 import qualified Data.Text as Text
 
+titleName :: Text -> Text
+titleName x
+    | Just y <- Text.stripPrefix "Data Source:" x = go y
+    | Just y <- Text.stripPrefix "Resource:"    x = go y
+    | otherwise                                   = go x
+  where
+    go = Text.filter (not . Char.isSpace)
+
 safeArgName :: Text -> Text
 safeArgName x =
     Text.cons '_' . unreserved $

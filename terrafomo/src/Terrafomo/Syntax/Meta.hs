@@ -1,6 +1,7 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE LambdaCase             #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE RecordWildCards        #-}
 
 module Terrafomo.Syntax.Meta
     ( HasMeta      (..)
@@ -146,4 +147,3 @@ class HasLifecycle a b | a -> b where
         lifecycle .
             lens _ignoreChanges
                 (\s a -> s { _ignoreChanges = a })
-

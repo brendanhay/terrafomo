@@ -7,10 +7,7 @@
 {-# LANGUAGE StandaloneDeriving         #-}
 
 module Terrafomo.Syntax.Variable
-    ( Output    (..)
-    , outputName
-
-    , Attribute (..)
+    ( Attribute (..)
     , attributeName
 
     , Argument  (..)
@@ -21,21 +18,15 @@ import Data.Hashable  (Hashable (hashWithSalt))
 import Data.Proxy     (Proxy (Proxy))
 import Data.Semigroup (Semigroup ((<>)))
 import Data.String    (fromString)
+import Data.Text      (Text)
+
+import Formatting (Format, (%))
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
 import Terrafomo.Syntax.Name (Key, Name)
 
--- | An explicitly declared output variable of the form:
---
--- > output "ip" {
--- >   value = "${aws_eip.ip.public_ip}"
--- > }
-data Output a = Output !Name !a
-    deriving (Show, Eq)
-
-outputName :: Output a -> Name
-outputName (Output n _) = n
+import qualified Formatting as Format
 
 -- | An attribute dependency of the form:
 --

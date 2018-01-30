@@ -30,7 +30,6 @@ import Terrafomo.Gen.Text
 import Text.Megaparsec  ((<?>))
 import Text.Show.Pretty (ppShow)
 
-import qualified Data.Char       as Char
 import qualified Data.Foldable   as Fold
 import qualified Data.List       as List
 import qualified Data.Map.Strict as Map
@@ -86,7 +85,7 @@ schemaParser rules = do
     P.skipManyTill node (P.lookAhead (void h1))
 
     -- resource/datasource name
-    schemaName  <- h1 >>> fmap (Text.filter (not . Char.isSpace)) textual
+    schemaName  <- h1 >>> fmap titleName textual
 
     -- about/documentation
     schemaAbout <- Just . Text.intercalate " " <$> many (paragraph >>> textual)

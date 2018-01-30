@@ -1,12 +1,14 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE RecordWildCards       #-}
 
 module Terrafomo.Syntax.Resource
     ( Resource (..)
     , newResource
     ) where
 
-import Data.Set (Set)
+import Data.Set  (Set)
+import Data.Text (Text)
 
 import Lens.Micro (lens)
 
@@ -21,7 +23,7 @@ data Resource p a = Resource
     , _resourceDependsOn :: !(Set Dependency)
     , _resourceType      :: !Type
     , _resourceConfig    :: !a
-    } deriving (Show, Eq)
+    }
 
 instance HasMeta Resource where
     provider      = lens _resourceProvider  (\s a -> s { _resourceProvider  = a })
@@ -31,5 +33,11 @@ instance HasMeta Resource where
 instance HasLifecycle (Resource p a) a where
     lifecycle = lens _resourceLifecycle (\s a -> s { _resourceLifecycle = a })
 
-newResource :: Type -> a -> Resource p a
-newResource = Resource Nothing mempty mempty
+newResource :: Text -> a -> Resource p a
+newResource name cfg = Resource
+    { _resourceProvider  = Nothing
+    , _resourceLifecycle = mempty
+    , _resourceDependsOn = mempty
+    , _resourceType      = Type Nothing name
+    , _resourceConfig    = cfg
+    }

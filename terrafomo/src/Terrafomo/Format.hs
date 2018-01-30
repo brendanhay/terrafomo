@@ -84,32 +84,12 @@ aformat fmt =
 
 -- Formatters
 
--- | Output a Terraform 'Name'.
-fname :: Format r (Name -> r)
-fname = Format.later (Build.fromText . fromName)
-
 -- | Format a lowercase boolean.
 fbool :: Format r (Bool -> r)
 fbool =
     Format.later $ \case
         True  -> "true"
         False -> "false"
-
--- | Format a 32-bit bits.
-fbits :: Format r (Bits -> r)
-fbits = Format.later (Build.fromString . ('/':) . drop 1 . show)
-
--- | Format a CIDR block.
-fcidr :: Format r (CIDR -> r)
-fcidr =
-    Format.later $ \(ip :/ m) ->
-        Format.bprint (fip % fbits) ip m
-
--- | Format an IP address.
-fip :: Format r (IP -> r)
-fip =
-    Format.later $ \ip ->
-        Build.fromString (shows ip "")
 
 -- -- | Output a zero-padded 'Integral'.
 -- intp :: (Integral a, Format.Buildable a) => Int -> Format r (a -> r)

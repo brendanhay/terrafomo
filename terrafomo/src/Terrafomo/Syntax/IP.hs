@@ -1,15 +1,24 @@
 module Terrafomo.Syntax.IP
     ( Bits (..)
+    , fbits
+
     , CIDR (..)
+    , fcidr
+
     , IP   (..)
     , ipv4
+    , fip
     ) where
 
 import Data.Word (Word32)
 
+import Formatting (Format, (%))
+
 import Numeric (showInt)
 
-import qualified Data.Bits as Bit
+import qualified Data.Bits              as Bit
+import qualified Data.Text.Lazy.Builder as Build
+import qualified Formatting             as Format
 
 -- | A 32-bit mask.
 data Bits
@@ -48,9 +57,19 @@ data Bits
     | B32
       deriving (Show, Eq, Enum, Bounded)
 
+-- | Format a 32-bit bits.
+fbits :: Format r (Bits -> r)
+fbits = Format.later (Build.fromString . ('/':) . drop 1 . show)
+
 -- | Classless Inter-Domain Routing notation.
 data CIDR = !IP :/ !Bits
     deriving (Show, Eq)
+
+-- | Format a CIDR block.
+fcidr :: Format r (CIDR -> r)
+fcidr =
+    Format.later $ \(ip :/ m) ->
+        Format.bprint (fip % fbits) ip m
 
 -- | Internet Protocol notation.
 data IP = IPv4 !Word32
@@ -79,3 +98,9 @@ ipv4 a b c d =
          + Bit.shift c 8
          + d
          )
+
+-- | Format an IP address.
+fip :: Format r (IP -> r)
+fip =
+    Format.later $ \ip ->
+        Build.fromString (shows ip "")

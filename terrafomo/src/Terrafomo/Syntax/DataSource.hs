@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Terrafomo.Syntax.DataSource
     ( DataSource (..)
     , newDataSource
@@ -5,6 +7,7 @@ module Terrafomo.Syntax.DataSource
 
 import Data.Bifunctor (Bifunctor (bimap, second))
 import Data.Set       (Set)
+import Data.Text      (Text)
 
 import Lens.Micro (lens)
 
@@ -34,5 +37,10 @@ instance HasMeta DataSource where
     configuration = lens _dataConfig    (\s a -> s { _dataConfig    = a })
     dependsOn     = lens _dataDependsOn (\s a -> s { _dataDependsOn = a })
 
-newDataSource :: Type -> a -> DataSource p a
-newDataSource = DataSource Nothing mempty
+newDataSource :: Text -> a -> DataSource p a
+newDataSource name cfg = DataSource
+    { _dataProvider  = Nothing
+    , _dataDependsOn = mempty
+    , _dataType      = Type (Just "data") name
+    , _dataConfig    = cfg
+    }
