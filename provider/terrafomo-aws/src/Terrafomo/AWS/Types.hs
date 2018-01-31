@@ -74,7 +74,10 @@ import qualified Network.AWS.Data.Text  as AWS
 import qualified Terrafomo.Syntax.HCL   as HCL
 
 newtype Tags = Tags { fromTags :: Map Text Text }
-    deriving (Show, Eq, HCL.ToHCL)
+    deriving (Show, Eq)
+
+instance HCL.ToHCL Tags where
+    toHCL = HCL.pairs . fromTags
 
 instance IsList Tags where
     type Item Tags = (Text, Text)
@@ -105,32 +108,32 @@ fzone =
 
 -- S3
 
-data S3BucketVersioning = S3BucketVersioning
-    { _enabled    :: !(Argument "enabled" Bool)
+data S3BucketVersioning s = S3BucketVersioning
+    { _enabled    :: !(Argument s "enabled" Bool)
     -- ^ Enable versioning. Once you version-enable a bucket, it can never
     -- return to an unversioned state. You can, however, suspend versioning on
     -- that bucket.
-    , _mfa_delete :: !(Argument "mfa_delete" Bool)
+    , _mfa_delete :: !(Argument s "mfa_delete" Bool)
     -- ^ Enable MFA delete for either Change the versioning state of your
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq)
 
-s3BucketVersioning :: S3BucketVersioning
+s3BucketVersioning :: S3BucketVersioning s
 s3BucketVersioning = S3BucketVersioning
     { _enabled    = constant False
     , _mfa_delete = constant False
     }
 
-instance HCL.ToHCL S3BucketVersioning where
+instance HCL.ToHCL (S3BucketVersioning s) where
     toHCL S3BucketVersioning{..} = HCL.block $ catMaybes
         [ HCL.argument _enabled
         , HCL.argument _mfa_delete
         ]
 
-instance HasEnabled S3BucketVersioning Bool where
+instance HasEnabled (S3BucketVersioning s) s Bool where
     enabled = lens _enabled (\s a -> s { _enabled = a })
 
-instance HasMfaDelete S3BucketVersioning Bool where
+instance HasMfaDelete (S3BucketVersioning s) s Bool where
     mfaDelete = lens _mfa_delete (\s a -> s { _mfa_delete = a })
 
 -- DynamoDB
@@ -174,14 +177,14 @@ instance HCL.ToHCL DynamoTableAttributes where
 -- currently exist - additionally these should be re-exported by the schema.ede
 -- template, possible along with smart constructors for the above types.
 
-class HasEnabled s a | s -> a where
-    enabled :: Lens' s (Argument "enabled" a)
+class HasEnabled a s b | a -> s b where
+    enabled :: Lens' a (Argument s "enabled" b)
 
-instance HasEnabled s a => HasEnabled (Resource p s) a where
+instance HasEnabled a s b => HasEnabled (Resource p a) s b where
     enabled = configuration . enabled
 
-class HasMfaDelete s a | s -> a where
-    mfaDelete :: Lens' s (Argument "mfa_delete" a)
+class HasMfaDelete a s b | a -> s b where
+    mfaDelete :: Lens' a (Argument s "mfa_delete" b)
 
-instance HasMfaDelete s a => HasMfaDelete (Resource p s) a where
+instance HasMfaDelete a s b => HasMfaDelete (Resource p a) s b where
     mfaDelete = configuration . mfaDelete

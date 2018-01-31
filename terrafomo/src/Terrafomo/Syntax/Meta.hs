@@ -19,7 +19,6 @@ module Terrafomo.Syntax.Meta
 import Data.Function  (on)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
-import Data.String    (IsString (fromString))
 
 import GHC.TypeLits (KnownSymbol)
 
@@ -28,8 +27,7 @@ import Lens.Micro (ASetter', Lens, Lens', lens)
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Variable (Argument, argumentName)
 
-import qualified Data.Set   as Set
-import qualified Lens.Micro as Lens
+import qualified Data.Set as Set
 
 -- Meta Parameters (shared between Resource + DataSources)
 
@@ -83,7 +81,7 @@ getChanges = \case
 wildcardChange :: Changes a -> Changes a
 wildcardChange = const Wildcard
 
-argumentChange :: KnownSymbol n => Argument n a -> Changes a -> Changes a
+argumentChange :: KnownSymbol n => Argument s n a -> Changes a -> Changes a
 argumentChange x xs = Match (Set.singleton (argumentName x)) <> xs
 
 -- Lifecycle

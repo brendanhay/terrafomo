@@ -63,36 +63,38 @@ import qualified Terrafomo.Syntax.Variable as TF
 @
 {% endfor %}
 -}
-data {{ provider.name }} = {{ provider.name }} {
+data {{ provider.name }} s = {{ provider.name }} {
   {% for arg in schema.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument "{{ arg.value.name }}" {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument s "{{ arg.value.name }}" {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq, Generic)
 
-instance Hashable {{ provider.name }}
+instance Hashable ({{ provider.name }} s)
 
-instance TF.ToHCL {{ provider.name }} where
+instance TF.ToHCL ({{ provider.name }} s) where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy {{ provider.name }}))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
+        let typ = TF.providerType (Proxy :: Proxy ({{ provider.name }} s))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
           {% for arg in schema.arguments %}
             , TF.argument ({{ arg.key }} x)
           {% endfor %}
             ]
 
-empty{{ provider.name }} :: {{ provider.name }}
+empty{{ provider.name }} :: {{ provider.name }} s
 empty{{ provider.name }} = {{ provider.name }} {
     {% for arg in schema.arguments %}
       {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = TF.Nil
     {% endfor %}
     }
 
-instance TF.IsProvider {{ provider.name }} where
-    type ProviderType {{ provider.name }} = "{{ provider.original }}"
+instance TF.IsProvider ({{ provider.name }} s) where
+    type ProviderType ({{ provider.name }} s) = "{{ provider.original }}"
 {% for field in schema.argumentFields %}
 
-{{ field.value.method }} :: Lens' {{ provider.name }} (TF.Argument "{{ field.value.name }}" {{ field.value.type }})
+{{ field.value.method }} :: Lens' ({{ provider.name }} s) (TF.Argument s "{{ field.value.name }}" {{ field.value.type }})
 {{ field.value.method }} =
     lens {{ field.value.label }} (\s a -> s { {{ field.value.label }} = a })
 {% endfor %}

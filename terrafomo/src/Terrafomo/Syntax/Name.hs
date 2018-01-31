@@ -11,8 +11,8 @@ module Terrafomo.Syntax.Name
     , Key  (..)
     ) where
 
-import Data.Hashable  (Hashable (hash, hashWithSalt))
-import Data.Semigroup (Semigroup ((<>)))
+import Data.Hashable  (Hashable (hashWithSalt))
+import Data.Semigroup (Semigroup)
 import Data.String    (IsString)
 import Data.Text      (Text)
 

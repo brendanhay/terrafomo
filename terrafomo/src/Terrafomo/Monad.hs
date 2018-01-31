@@ -1,82 +1,71 @@
-{-# LANGUAGE BangPatterns               #-}
-{-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE DefaultSignatures          #-}
-{-# LANGUAGE DeriveFunctor              #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE FunctionalDependencies     #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE KindSignatures             #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE RankNTypes                 #-}
-{-# LANGUAGE ScopedTypeVariables        #-}
-{-# LANGUAGE TupleSections              #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE UndecidableInstances       #-}
+{-# LANGUAGE BangPatterns           #-}
+{-# LANGUAGE DefaultSignatures      #-}
+{-# LANGUAGE DeriveFunctor          #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE LambdaCase             #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RankNTypes             #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TupleSections          #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
-module Terrafomo.Monad where
---     (
---     -- * Terraform Monad
---       Terraform
---     , runTerraform
---     , renderTerraform
+module Terrafomo.Monad
+    (
+    -- * Terraform Monad
+      Terraform
+    , runTerraform
 
---     -- * Terraform Monad Transformer
---     , TerraformT
---     , runTerraformT
---     , renderTerraformT
+    -- * Terraform Monad Transformer
+    , TerraformT
+    , runTerraformT
 
---     -- * Terraform Monad Class
---     , MonadTerraform  (..)
+    -- * Terraform Monad Class
+    , MonadTerraform (..)
 
---     -- * Errors
---     , TerraformError  (..)
+    -- * Errors
+    , TerraformError (..)
 
---     -- * HCL Output
---     , TerraformOutput (..)
---     , renderOutput
+    -- * State/Output
+    , TerraformState (..)
+    , renderState
 
---     -- * Providers
---     , withProvider
+    -- * Providers
+    , withProvider
 
---     -- * References
---     , Reference
---     , referenceKey
+    -- * References
+    , Reference
+    , referenceKey
 
---     , datasource
---     , resource
--- --    , output
+    , datasource
+    , resource
+    , output
 
---     -- * Arguments and Attributes
---     , constant
---     , nil
---     , attribute
---     ) where
+    -- * Arguments and Attributes
+    , constant
+    , nil
+    , attribute
+    ) where
 
-import Control.Applicative (Alternative (..))
+import Control.Applicative (Alternative (empty, (<|>)))
 import Control.Exception   (Exception)
-import Control.Monad       (MonadPlus (..), ap)
+import Control.Monad       (MonadPlus (mplus, mzero), ap)
 import Control.Monad.Morph (MFunctor (hoist))
-import Control.Monad.Trans (MonadTrans (..))
+import Control.Monad.Trans (MonadTrans (lift))
 
-import Data.Bifunctor        (Bifunctor (..))
-import Data.Function         ((&))
-import Data.Functor.Identity (Identity (..))
+import Data.Bifunctor        (first, second)
+import Data.Functor.Identity (Identity, runIdentity)
 import Data.Map.Strict       (Map)
 import Data.Proxy            (Proxy (..))
-import Data.Set              (Set)
 import Data.Typeable         (Typeable)
 
-import Formatting (Format, (%))
-
-import GHC.TypeLits (KnownSymbol)
+import Formatting ((%))
 
 import Terrafomo.Syntax.Backend
 import Terrafomo.Syntax.DataSource (DataSource (..))
-import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Output
 import Terrafomo.Syntax.Provider
 import Terrafomo.Syntax.Resource   (Resource (..))
 import Terrafomo.Syntax.Variable
@@ -84,24 +73,21 @@ import Terrafomo.ValueMap          (ValueMap)
 
 import qualified Data.DList                   as DList
 import qualified Data.Map.Strict              as Map
-import qualified Data.Set                     as Set
 import qualified Data.Text.Lazy               as LText
-import qualified Data.Traversable             as Traverse
 import qualified Lens.Micro                   as Lens
 import qualified Terrafomo.Format             as Format
 import qualified Terrafomo.Syntax.HCL         as HCL
 import qualified Terrafomo.Syntax.Meta        as Meta
-import qualified Terrafomo.Syntax.Name        as Name
 import qualified Terrafomo.ValueMap           as VMap
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
-import qualified Control.Monad.Error.Class         as MTL
-import qualified Control.Monad.Reader.Class        as MTL
-import qualified Control.Monad.RWS.Class           as MTL
-import qualified Control.Monad.Trans.Except        as Trans
+import qualified Control.Monad.Except as MTL
+import qualified Control.Monad.Reader as MTL
+import qualified Control.Monad.State  as MTL
+import qualified Control.Monad.Writer as MTL
+
 import qualified Control.Monad.Trans.Identity      as Trans
 import qualified Control.Monad.Trans.Maybe         as Trans
-import qualified Control.Monad.Trans.Reader        as Trans
 import qualified Control.Monad.Trans.RWS.Lazy      as Lazy
 import qualified Control.Monad.Trans.RWS.Strict    as Strict
 import qualified Control.Monad.Trans.State.Lazy    as Lazy
@@ -124,13 +110,9 @@ newtype TerraformConfig = TerraformConfig
     { aliases :: Map Type Key
     }
 
--- class HasTerraformConfig a where
---     terraformConfig :: Lens.Lens' a TerraformConfig
-
--- HCL Output
-
+-- Output State
 -- | Provides key uniquness invariants and ordering of output statements.
-data TerraformOutput b = UnsafeTerraformOutput
+data TerraformState b = UnsafeTerraformState
     { backend     :: !(Backend  b)
     , providers   :: !(ValueMap Key)
     , datasources :: !(ValueMap Key)
@@ -138,14 +120,8 @@ data TerraformOutput b = UnsafeTerraformOutput
     , outputs     :: !(ValueMap Name)
     }
 
--- class HasTerraformOutput a s | a -> s where
---     terraformOutput :: Lens.Lens' a (TerraformOutput b)
-
-instance HCL.ToHCL b => Show (TerraformOutput b) where
-    show = LText.unpack . renderOutput
-
-renderOutput :: HCL.ToHCL b => TerraformOutput b -> LText.Text
-renderOutput s =
+renderState :: HCL.ToHCL b => TerraformState b -> LText.Text
+renderState s =
       PP.displayT
     . PP.renderPretty 0.4 100
     . HCL.renderHCL
@@ -160,106 +136,91 @@ renderOutput s =
 
 -- Terraform CPS over Identity
 
--- type Terraform a = TerraformT Identity a
+type Terraform s b a = TerraformT s b Identity a
 
--- instance Show a => Show (Terraform a) where
---    show = show . runTerraform (localBackend "<undefined>")
-
--- renderTerraform
---     :: HCL.ToHCL (Backend a)
---     => Backend a
---     -> Terraform b
---     -> Either TerraformError LText.Text
--- renderTerraform x = runIdentity . renderTerraformT x
-
--- runTerraform
---     :: HCL.ToHCL (Backend a)
---     => Backend a
---     -> Terraform b
---     -> Either TerraformError (b, TerraformOutput)
--- runTerraform x = runIdentity . runTerraformT x
+runTerraform
+    :: HCL.ToHCL b
+    => Backend b
+    -> (forall s. Terraform s b a)
+    -> Either TerraformError (a, TerraformState b)
+runTerraform x m = runIdentity (runTerraformT x m)
 
 -- Terraform CPS Monad
 
-newtype TerraformT b m a = TerraformT
+newtype TerraformT s b m a = TerraformT
     { unTerraformT
         :: TerraformConfig
-        -> TerraformOutput b
-        -> m (Either TerraformError (a, TerraformOutput b))
+        -> TerraformState b
+        -> m (Either TerraformError (a, TerraformState b))
     } deriving (Functor)
 
 -- Unwrapping
 
--- renderTerraformT
---     :: ( Functor m
---        , HCL.ToHCL (Backend a)
---        )
---     => Backend a
---     -> TerraformT m b
---     -> m (Either TerraformError LText.Text)
--- renderTerraformT x = fmap (second (renderOutput . snd)) . runTerraformT x
+runTerraformT
+    :: HCL.ToHCL b
+    => Backend b
+    -> (forall s. TerraformT s b m a)
+    -> m (Either TerraformError (a, TerraformState b))
+runTerraformT x m =
+    unTerraformT m config state
+  where
+    config =
+        TerraformConfig
+            { aliases = mempty
+            }
 
--- runTerraformT
---     :: HCL.ToHCL (Backend a)
---     => Backend a
---     -> TerraformT m b
---     -> m (Either TerraformError (b, TerraformOutput))
--- runTerraformT x m =
---     unTerraformT m
---         TerraformConfig
---             { aliases = mempty
---             }
---         UnsafeTerraformOutput
---             { backend     = HCL.toHCL x
---             , providers   = VMap.empty
---             , datasources = VMap.empty
---             , resources   = VMap.empty
---             , outputs     = VMap.empty
---             }
+    state =
+        UnsafeTerraformState
+            { backend     = x
+            , providers   = VMap.empty
+            , datasources = VMap.empty
+            , resources   = VMap.empty
+            , outputs     = VMap.empty
+            }
 
 -- Instances
 
-instance Monad m => Applicative (TerraformT b m) where
+instance Monad m => Applicative (TerraformT s b m) where
     pure x = TerraformT (\_ w -> pure $! Right (x, w))
     {-# INLINEABLE pure #-}
 
     (<*>) = ap
     {-# INLINEABLE (<*>) #-}
 
-instance MonadPlus m => Alternative (TerraformT b m) where
+instance MonadPlus m => Alternative (TerraformT s b m) where
     empty = TerraformT (\_ _ -> mzero)
     {-# INLINEABLE empty #-}
 
     TerraformT m <|> TerraformT n = TerraformT (\r w -> m r w `mplus` n r w)
     {-# INLINEABLE (<|>) #-}
 
-instance Monad m => Monad (TerraformT b m) where
+instance Monad m => Monad (TerraformT s b m) where
     m >>= k = TerraformT $ \r w ->
         unTerraformT m r w >>= \case
             Left  e       -> pure $! Left e
             Right (x, w') -> unTerraformT (k x) r w'
     {-# INLINEABLE (>>=) #-}
 
-instance MonadPlus m => MonadPlus (TerraformT b m) where
+instance MonadPlus m => MonadPlus (TerraformT s b m) where
     mzero = empty
     {-# INLINEABLE mzero #-}
 
     mplus = (<|>)
     {-# INLINEABLE mplus #-}
 
-instance MonadTrans (TerraformT b) where
+instance MonadTrans (TerraformT s b) where
     lift m = TerraformT $ \_ w -> do
         x <- m
         pure $! Right (x, w)
     {-# INLINEABLE lift #-}
 
-instance MFunctor (TerraformT b) where
+instance MFunctor (TerraformT s b) where
     hoist nat m = TerraformT (\r w -> nat (unTerraformT m r w))
     {-# INLINEABLE hoist #-}
 
 -- MTL Instances
 
-instance MTL.MonadReader r m => MTL.MonadReader r (TerraformT b m) where
+instance MTL.MonadReader r m => MTL.MonadReader r (TerraformT s b m) where
     ask = lift MTL.ask
     {-# INLINEABLE ask #-}
 
@@ -269,14 +230,14 @@ instance MTL.MonadReader r m => MTL.MonadReader r (TerraformT b m) where
     reader = lift . MTL.reader
     {-# INLINEABLE reader #-}
 
-instance MTL.MonadState s m => MTL.MonadState s (TerraformT b' m) where
+instance MTL.MonadState s m => MTL.MonadState s (TerraformT s b' m) where
     get = lift MTL.get
     {-# INLINEABLE get #-}
 
     put = lift . MTL.put
     {-# INLINEABLE put #-}
 
-instance MTL.MonadError e m => MTL.MonadError e (TerraformT b m) where
+instance MTL.MonadError e m => MTL.MonadError e (TerraformT s b m) where
     throwError = lift . MTL.throwError
     {-# INLINEABLE throwError #-}
 
@@ -287,7 +248,7 @@ instance MTL.MonadError e m => MTL.MonadError e (TerraformT b m) where
                     unTerraformT (f e) r w
     {-# INLINEABLE catchError #-}
 
-instance MTL.MonadWriter w m => MTL.MonadWriter w (TerraformT b m) where
+instance MTL.MonadWriter w m => MTL.MonadWriter w (TerraformT s b m) where
     writer = lift . MTL.writer
     {-# INLINEABLE writer #-}
 
@@ -307,9 +268,9 @@ instance MTL.MonadWriter w m => MTL.MonadWriter w (TerraformT b m) where
                 Right ((x, f), w') -> pure $! (Right (x, w'), f)
     {-# INLINEABLE pass #-}
 
--- instance MTL.MonadRWS r w s m => MTL.MonadRWS r w s (TerraformT m)
+-- Monad Class
 
-class Monad m => MonadTerraform b m | m -> b where
+class Monad m => MonadTerraform s b m | m -> s b where
     -- | Executes a computation in with a modified Terraform configuration.
     local :: (TerraformConfig -> TerraformConfig) -> m a -> m a
 
@@ -317,10 +278,10 @@ class Monad m => MonadTerraform b m | m -> b where
     ask :: m TerraformConfig
 
     -- | Replace the current state inside the monad.
-    put :: TerraformOutput b -> m ()
+    put :: TerraformState b -> m ()
 
     -- | Return the current output state from the internals of the monad.
-    get :: m (TerraformOutput b)
+    get :: m (TerraformState b)
 
     -- | Instances should obey the following law:
     --
@@ -334,7 +295,7 @@ class Monad m => MonadTerraform b m | m -> b where
     -- constraint, with a 'MonadTerraform' instance for the wrapped monad.
     default local
         :: ( MFunctor t
-           , MonadTerraform b n
+           , MonadTerraform s b n
            , t n ~ m
            )
         => (TerraformConfig -> TerraformConfig)
@@ -347,7 +308,7 @@ class Monad m => MonadTerraform b m | m -> b where
     -- for the wrapped monad.
     default ask
         :: ( MonadTrans t
-           , MonadTerraform b n
+           , MonadTerraform s b n
            , t n ~ m
            )
         => m TerraformConfig
@@ -358,10 +319,10 @@ class Monad m => MonadTerraform b m | m -> b where
     -- for the wrapped monad.
     default put
         :: ( MonadTrans t
-           , MonadTerraform b n
+           , MonadTerraform s b n
            , t n ~ m
            )
-        => TerraformOutput b
+        => TerraformState b
         -> m ()
     put = lift . put
     {-# INLINEABLE put #-}
@@ -370,10 +331,10 @@ class Monad m => MonadTerraform b m | m -> b where
     -- for the wrapped monad.
     default get
         :: ( MonadTrans t
-           , MonadTerraform b n
+           , MonadTerraform s b n
            , t n ~ m
            )
-        => m (TerraformOutput b)
+        => m (TerraformState b)
     get = lift get
     {-# INLINEABLE get #-}
 
@@ -381,78 +342,77 @@ class Monad m => MonadTerraform b m | m -> b where
     -- for the wrapped monad.
     default throw
         :: ( MonadTrans t
-           , MonadTerraform b n
+           , MonadTerraform s b n
            , t n ~ m
            )
         => TerraformError
         -> m a
     throw = lift . throw
 
-instance Monad m => MonadTerraform b (TerraformT b m) where
-    local f m = TerraformT (\r w -> unTerraformT m (f r) w)
-    {-# INLINEABLE local #-}
-
-    ask = TerraformT (\r w -> pure $! Right (r, w))
-    {-# INLINEABLE ask #-}
-
-    put w = TerraformT (\_ _ -> pure $! Right ((), w))
-    {-# INLINEABLE put #-}
-
-    get = TerraformT (\_ w -> pure $! Right (w, w))
-    {-# INLINEABLE get #-}
-
-    throw e = TerraformT (\_ _ -> pure $! Left e)
-    {-# INLINEABLE throw #-}
-
--- Internal State Modifiers
+gets
+    :: MonadTerraform s b m
+    => (TerraformState b -> a)
+    -> m a
+gets f = f <$> get
+{-# INLINE gets #-}
 
 modify'
-    :: MonadTerraform b m
-    => (TerraformOutput b -> TerraformOutput b)
+    :: MonadTerraform s b m
+    => (TerraformState b -> TerraformState b)
     -> m ()
 modify' f = do
-    !w <- f <$> get
+    !w <- gets f
     put w
+{-# INLINE modify' #-}
 
 -- Transformers Instances
 
-instance MonadTerraform b m => MonadTerraform b (Trans.IdentityT m)
-instance MonadTerraform b m => MonadTerraform b (Trans.MaybeT    m)
+instance MonadTerraform s b m => MonadTerraform s b (Trans.IdentityT m)
+instance MonadTerraform s b m => MonadTerraform s b (Trans.MaybeT    m)
+instance MonadTerraform s b m => MonadTerraform s b (MTL.ExceptT   e m)
+instance MonadTerraform s b m => MonadTerraform s b (MTL.ReaderT   r m)
+instance MonadTerraform s b m => MonadTerraform s b (Strict.StateT s m)
+instance MonadTerraform s b m => MonadTerraform s b (Lazy.StateT   s m)
 
-instance MonadTerraform b m => MonadTerraform b (Trans.ExceptT e m)
-instance MonadTerraform b m => MonadTerraform b (Trans.ReaderT r m)
-instance MonadTerraform b m => MonadTerraform b (Strict.StateT s m)
-instance MonadTerraform b m => MonadTerraform b (Lazy.StateT   s m)
+instance ( MonadTerraform s b m
+         , Monoid w
+         ) => MonadTerraform s b (Strict.WriterT w m)
 
-instance (MonadTerraform b m, Monoid w) => MonadTerraform b (Strict.WriterT w m)
-instance (MonadTerraform b m, Monoid w) => MonadTerraform b (Lazy.WriterT   w m)
+instance ( MonadTerraform s b m
+         , Monoid w
+         ) => MonadTerraform s b (Lazy.WriterT w m)
 
-instance (MonadTerraform b m, Monoid w) => MonadTerraform b (Strict.RWST r w s m)
-instance (MonadTerraform b m, Monoid w) => MonadTerraform b (Lazy.RWST   r w s m)
+instance ( MonadTerraform s b m
+         , Monoid w
+         ) => MonadTerraform s b (Strict.RWST r w s m)
+
+instance ( MonadTerraform s b m
+         , Monoid w
+         ) => MonadTerraform s b (Lazy.RWST r w s m)
 
 -- Syntax
 
 -- | Supply a constant Haskell value as an argument. Equivalent to 'Just'.
-constant :: a -> Argument n a
+constant :: a -> Argument s n a
 constant = Constant
 
 -- | Omit an argument. Equivalent to 'Nothing'.
-nil :: Argument n a
+nil :: Argument s n a
 nil = Nil
 
 -- | Refer to a reference's attribute for which the value will be computed
 -- during @terraform apply@.
 attribute
-    :: Reference p a
-    -> Lens.SimpleGetter a (Attribute b)
-    -> Argument n b
+    :: Reference s p a
+    -> Lens.SimpleGetter a (Attribute s b)
+    -> Argument s n b
 attribute (Reference key x) l = Attribute key (x Lens.^. l)
 
 -- Providers
 
 withProvider
-    :: forall b m p a.
-       ( MonadTerraform b m
+    :: forall s b m p a.
+       ( MonadTerraform s b m
        , IsProvider p
        )
     => p
@@ -469,8 +429,8 @@ withProvider p m =
                   }
 
 insertProvider
-    :: forall b m p.
-       ( MonadTerraform b m
+    :: forall s b m p.
+       ( MonadTerraform s b m
        , IsProvider p
        )
     => Maybe p
@@ -482,7 +442,7 @@ insertProvider mp =
             let key   = providerKey p
                 value = HCL.toHCL p
 
-            ps <- providers <$> get
+            ps <- gets providers
 
             case VMap.insert key value ps of
                 Nothing -> pure ()
@@ -493,30 +453,30 @@ insertProvider mp =
 -- References
 
 -- | Opaque Named Reference.
-data Reference p a = Reference !Key !a
+data Reference s p a = Reference !Key !a
     deriving (Show)
 
-referenceKey :: Reference p a -> Key
+referenceKey :: Reference s p a -> Key
 referenceKey (Reference key _) = key
 
-referenceValue :: Reference p a -> a
-referenceValue (Reference _ x) = x
+-- referenceValue :: Reference s p a -> a
+-- referenceValue (Reference _ x) = x
 
 datasource
-    :: ( MonadTerraform b m
+    :: ( MonadTerraform s b m
        , IsProvider p
        , HCL.ToHCL a
        )
     => Name
     -> DataSource p a
-    -> m (Reference p a)
+    -> m (Reference s p a)
 datasource name x = do
     alias <- insertProvider (_dataProvider x)
 
-    let key   = Name.Key (_dataType x) name
+    let key   = Key (_dataType x) name
         value = HCL.toHCL (key, Lens.set Meta.provider alias x)
 
-    ds <- datasources <$> get
+    ds    <- gets datasources
 
     case VMap.insert key (HCL.toHCL value) ds of
         Nothing -> throw (NonUniqueKey key value)
@@ -525,20 +485,20 @@ datasource name x = do
     pure $! Reference key (_dataConfig x)
 
 resource
-    :: ( MonadTerraform b m
+    :: ( MonadTerraform s b m
        , IsProvider p
        , HCL.ToHCL a
        )
     => Name
     -> Resource p a
-    -> m (Reference p a)
+    -> m (Reference s p a)
 resource name x = do
     alias <- insertProvider (_resourceProvider x)
 
-    let key   = Name.Key (_resourceType x) name
+    let key   = Key (_resourceType x) name
         value = HCL.toHCL (key, Lens.set Meta.provider alias x)
 
-    rs <- resources <$> get
+    rs    <- gets resources
 
     case VMap.insert key (HCL.toHCL value) rs of
         Nothing -> throw (NonUniqueKey key value)
@@ -548,23 +508,23 @@ resource name x = do
 
 -- | Emit an output variable to the remote state.
 output
-    :: Monad m
-    => Reference p a
-    -> Lens.SimpleGetter a (Attribute c)
+    :: MonadTerraform s b m
+    => Reference s p a
+    -> Lens.SimpleGetter a (Attribute s c)
     -- ^ The attribute to add to the remote state output.
-    -> TerraformT b m (Output b c)
+    -> m (Output b c)
 output (Reference key x) l = do
-    b  <- backend <$> get
-    os <- outputs <$> get
+    b  <- gets backend
+    os <- gets outputs
 
-    let attr = x Lens.^. l
-        name = Format.nformat (ftype % "_" % fname % "_" % fname)
-                   (keyType key) (keyName key) (attributeName attr)
-        out   = Output b key name attr
-        value = HCL.toHCL out
+    let attr   = x Lens.^. l
+        name   = Format.nformat (ftype % "_" % fname % "_" % fname)
+                     (keyType key) (keyName key) (attributeName attr)
+        result = Output b name (key, attributeName attr)
+        value  = HCL.toHCL result
 
     case VMap.insert name value os of
         Nothing -> throw (NonUniqueOutput name value)
         Just m  -> modify' (\w -> w { outputs = m })
 
-    pure out
+    pure result

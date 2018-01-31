@@ -17,7 +17,7 @@ import Text.Megaparsec ((<?>))
 
 import qualified Data.Char                  as Char
 import qualified Data.Text                  as Text
-import qualified Data.Text.Lazy.Builder     as Build
+import qualified Data.Text.Lazy             as LText
 import qualified Text.Megaparsec            as P
 import qualified Text.Megaparsec.Char       as P
 import qualified Text.Megaparsec.Char.Lexer as P (charLiteral, decimal, float)
@@ -79,7 +79,7 @@ valueParser =
 
 commentParser :: Parser Value
 commentParser =
-    Comment . Build.fromText
+    Comment . LText.fromStrict
         <$> (P.string "//" *> P.takeWhileP Nothing (/= '\n'))
 
 assignParser :: Parser Value

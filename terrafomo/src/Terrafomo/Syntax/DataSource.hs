@@ -5,9 +5,8 @@ module Terrafomo.Syntax.DataSource
     , newDataSource
     ) where
 
-import Data.Bifunctor (Bifunctor (bimap, second))
-import Data.Set       (Set)
-import Data.Text      (Text)
+import Data.Set  (Set)
+import Data.Text (Text)
 
 import Lens.Micro (lens)
 
@@ -22,15 +21,6 @@ data DataSource p a = DataSource
     , _dataType      :: !Type
     , _dataConfig    :: !a
     } deriving (Show, Eq)
-
-instance Bifunctor DataSource where
-    bimap f g x =
-        x { _dataProvider = f <$> _dataProvider x
-          , _dataConfig   = g (_dataConfig x)
-          }
-
-instance Functor (DataSource p) where
-    fmap = second
 
 instance HasMeta DataSource where
     provider      = lens _dataProvider  (\s a -> s { _dataProvider  = a })

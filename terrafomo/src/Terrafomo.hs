@@ -9,30 +9,28 @@ module Terrafomo
     -- * Terraform Monad
       Terraform
     , runTerraform
-    , renderTerraform
 
     -- * Terraform Monad Transformer
     , TerraformT
     , runTerraformT
-    , renderTerraformT
 
     -- * Terraform Monad Class
-    , MonadTerraform  (..)
+    , MonadTerraform (..)
 
     -- * Errors
-    , TerraformError  (..)
+    , TerraformError (..)
 
-    -- * HCL Output
-    , TerraformOutput (..)
-    , renderOutput
+    -- * State/Output
+    , TerraformState (..)
+    , renderState
 
     -- * Terraform Backends
-    , Backend         (..)
-    , Local
+    , Backend        (..)
+    , Local          (..)
     , localBackend
 
     -- * Terraform Syntax
-    , Name            (..)
+    , Name           (..)
 
     , Reference
     , referenceKey
@@ -46,11 +44,11 @@ module Terrafomo
     , attribute
 
     -- * Providers
-    , IsProvider      (..)
+    , IsProvider     (..)
     , withProvider
 
     -- * Meta Parameters
-    , HasMeta         (..)
+    , HasMeta        (..)
     , dependOn
 
     , Changes
@@ -69,8 +67,8 @@ module Terrafomo
     , HasLifecycle    (..)
     , Lifecycle       (..)
 
-    -- -- * Outputs
-    -- , output
+    -- * Outputs and Remote State
+    , output
 
     -- * Formatting
     , (Formatting.%)
@@ -110,7 +108,7 @@ import qualified Terrafomo.Syntax.HCL as HCL
 
 dependOn
     :: HasMeta b
-    => Reference p a
+    => Reference s p a
     -> b p c
     -> b p c
 dependOn x =
@@ -128,7 +126,7 @@ ignoreChange
     :: ( KnownSymbol n
        , HasLifecycle a b
        )
-    => Lens.SimpleGetter a (Argument n b)
+    => Lens.SimpleGetter a (Argument s n b)
     -> a
     -> a
 ignoreChange l x =

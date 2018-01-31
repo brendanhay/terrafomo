@@ -8,7 +8,7 @@ module Terrafomo.Syntax.Provider
     , providerKey
     ) where
 
-import Data.Hashable (Hashable (hashWithSalt))
+import Data.Hashable (Hashable)
 import Data.Proxy    (Proxy (..))
 import Data.String   (fromString)
 

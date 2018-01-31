@@ -38,17 +38,14 @@ module Terrafomo.Format
     , Format.bytes
     ) where
 
-import Data.Text              (Text)
-import Data.Text.Lazy.Builder (Builder)
-import Data.Word              (Word8)
+import Data.Text (Text)
 
-import Formatting (Format, (%), (%.))
+import Formatting (Format, (%))
 
 import Terrafomo.Syntax.IP
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Variable (Argument (Constant))
 
-import qualified Data.List              as List
 import qualified Data.Text.Lazy         as LText
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
@@ -67,7 +64,7 @@ nformat fmt =
     Format.runFormat fmt (Name . LText.toStrict . Build.toLazyText)
 
 -- | Given a textual formatter and a constant, produce a Terraform argument.
-aformat :: Format (Argument n Text) r -> r
+aformat :: Format (Argument s n Text) r -> r
 aformat fmt =
     Format.runFormat fmt (Constant . LText.toStrict . Build.toLazyText)
 

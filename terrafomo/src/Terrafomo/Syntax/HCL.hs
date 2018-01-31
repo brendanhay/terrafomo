@@ -24,6 +24,7 @@ module Terrafomo.Syntax.HCL
     , object
     , block
     , list
+    , pairs
 
     , unquoted
     , quoted
@@ -37,7 +38,6 @@ module Terrafomo.Syntax.HCL
     , string
     ) where
 
-import Data.Bifunctor         (bimap)
 import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
@@ -51,7 +51,6 @@ import Data.Word
 
 import Formatting ((%))
 
-import GHC.Exts     (toList)
 import GHC.Generics (Generic)
 import GHC.TypeLits (KnownSymbol)
 
@@ -65,12 +64,12 @@ import Terrafomo.Syntax.DataSource
 import Terrafomo.Syntax.IP
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Output
 import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
+import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import qualified Formatting                   as Format
@@ -165,7 +164,7 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
-attribute :: Key -> Attribute a -> Value
+attribute :: Key -> Attribute s a -> Value
 attribute (Key t n) v =
     toHCL $
         Format.sformat ("${" % ftype % "." % fname % "." % fname % "}")
@@ -173,7 +172,7 @@ attribute (Key t n) v =
 
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-argument :: (KnownSymbol n, ToHCL a) => Argument n a -> Maybe Value
+argument :: (KnownSymbol n, ToHCL a) => Argument s n a -> Maybe Value
 argument x =
     assign (unquoted (fromName (argumentName x))) <$>
         case x of
@@ -189,6 +188,9 @@ block = Block
 
 list :: (Foldable f, ToHCL a) => f a -> Value
 list = List . map toHCL . Fold.toList
+
+pairs :: ToHCL a => Map Text a -> Value
+pairs = block . map (\(k, v) -> assign (quoted k) v) . Map.toList
 
 unquoted :: Text -> Id
 unquoted = Unquoted
@@ -337,7 +339,7 @@ instance ToHCL a => ToHCL (Key, Resource Key a) where
             ]
 
 instance ToHCL (Output b a) where
-    toHCL (Output _ k n v) =
+    toHCL (Output _ n (k, v)) =
         object (pure "output" <> pure (name n)) $
-            [ assign "value" (attribute k v)
+            [ assign "value" (attribute k (Compute v))
             ]

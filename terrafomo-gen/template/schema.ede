@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
@@ -10,6 +9,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -73,14 +74,14 @@ import qualified Terrafomo.Syntax.Variable as TF
 @
 {% endfor %}
 -}
-data {{ schema.key }} = {{ schema.key }} {
+data {{ schema.key }} s = {{ schema.key }} {
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument "{{ arg.value.name }}" {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument s "{{ arg.value.name }}" {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq)
 
-instance TF.ToHCL {{ schema.key }} where
+instance TF.ToHCL ({{ schema.key }} s) where
   {% for arg in schema.value.arguments %}
     {% if arg.first %}toHCL {{ schema.key }}{..} = TF.block $ catMaybes
         [{% else %}    ,{% endif %} TF.argument {{ arg.key }}{% if arg.last %}
@@ -90,20 +91,24 @@ instance TF.ToHCL {{ schema.key }} where
   {% endfor %}
   {% for field in schema.value.argumentFields %}
 
-instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
+instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} where
+    type {{ field.value.class }}Thread ({{ schema.key }} s) {{ field.value.type }} = s
+
     {{ field.value.method }} =
-        lens ({{ field.value.label }} :: {{ schema.key }} -> TF.Argument "{{ field.value.name }}" {{ field.value.type }})
-             (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }})
+        lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Argument s "{{ field.value.name }}" {{ field.value.type }})
+             (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }} s)
   {% endfor %}
   {% for field in schema.value.attributeFields %}
 
-instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
+instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} where
+    type {{ field.value.class }}Thread ({{ schema.key }} s) {{ field.value.type }} = s
+
     {{ field.value.method }} =
         to (\_  -> TF.Compute "{{ field.value.name }}")
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
-{{ constructor }} :: TF.{{ type }} TF.{{ provider.name }} {{ schema.key }}
+{{ constructor }} :: TF.{{ type }} (TF.{{ provider.name }} s) ({{ schema.key }} s)
 {{ constructor }} =
     TF.new{{ type }} "{{ original }}" $
         {{ schema.key }} {
@@ -116,17 +121,27 @@ instance {{ field.value.class }} {{ schema.key }} {{ field.value.type }} where
 {% endfor %}
 {% for class in argumentClasses %}
 
-class {{ class.value.name }} s a | s -> a where
-    {{ class.value.method }} :: Lens' s (TF.Argument "{{ class.value.symbol }}" a)
+class {{ class.value.name }} a b | a -> b where
+    type {{ class.value.name }}Thread a b :: *
 
-instance {{ class.value.name }} s a => {{ class.value.name}} (TF.{{ type }} p s) a where
+    {{ class.value.method }} :: Lens' a (TF.Argument ({{ class.value.name }}Thread a b) "{{ class.value.symbol }}" b)
+
+instance {{ class.value.name }} a b => {{ class.value.name}} (TF.{{ type }} p a) b where
+    type {{ class.value.name }}Thread (TF.{{ type }} p a) b =
+         {{ class.value.name }}Thread a b
+
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}
 {% for class in attributeClasses %}
 
-class {{ class.value.name }} s a | s -> a where
-    {{ class.value.method }} :: forall r. Getting r s (TF.Attribute a)
+class {{ class.value.name }} a b | a -> b where
+    type {{ class.value.name }}Thread a b :: *
 
-instance {{ class.value.name }} s a => {{ class.value.name }} (TF.{{ type }} p s) a where
+    {{ class.value.method }} :: forall r. Getting r a (TF.Attribute ({{ class.value.name }}Thread a b) b)
+
+instance {{ class.value.name }} a b => {{ class.value.name }} (TF.{{ type }} p a) b where
+    type {{ class.value.name }}Thread (TF.{{ type }} p a) b =
+         {{ class.value.name }}Thread a b
+
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}

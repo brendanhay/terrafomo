@@ -29,7 +29,6 @@ import qualified Data.Char                    as Char
 import qualified Data.List                    as List
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
 import qualified Terrafomo.Gen.HCL            as HCL
 import qualified Terrafomo.Gen.JSON           as JSON
 import qualified Text.Megaparsec              as P
@@ -107,8 +106,8 @@ type Parser = P.Parsec Void String
 interpolate :: Interpolate -> Doc
 interpolate = \case
     Chunks   xs -> PP.hcat . List.intersperse "<>" $ map interpolate xs
-    Chunk    b  -> PP.dquotes (pretty (Build.toLazyText b))
-    Template b  -> stringParse computeParser (Build.toLazyText b)
+    Chunk    b  -> PP.dquotes (pretty b)
+    Template b  -> stringParse computeParser b
 
 stringParse :: Parser Doc -> LText.Text -> Doc
 stringParse p s =
