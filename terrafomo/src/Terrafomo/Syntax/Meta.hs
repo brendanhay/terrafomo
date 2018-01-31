@@ -1,6 +1,7 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE LambdaCase             #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 
 module Terrafomo.Syntax.Meta
@@ -27,7 +28,8 @@ import Lens.Micro (ASetter', Lens, Lens', lens)
 import Terrafomo.Syntax.Name
 import Terrafomo.Syntax.Variable (Argument, argumentName)
 
-import qualified Data.Set as Set
+import qualified Data.Set             as Set
+import qualified Terrafomo.Syntax.HCL as HCL
 
 -- Meta Parameters (shared between Resource + DataSources)
 
@@ -48,6 +50,9 @@ class HasMeta b where
 
 newtype Dependency = Dependency Key
    deriving (Show, Eq, Ord)
+
+instance HCL.ToHCL Dependency where
+    toHCL (Dependency k) = HCL.toHCL k
 
 -- Attribute Changes
 
@@ -72,6 +77,12 @@ instance Semigroup (Changes a) where
 instance Monoid (Changes a) where
     mempty  = Match mempty
     mappend = (<>)
+
+instance HCL.ToHCL (Changes a) where
+    toHCL x =
+        case getChanges x of
+            Nothing -> HCL.list [HCL.string "*"]
+            Just ns -> HCL.list ns
 
 getChanges :: Changes a -> Maybe (Set Name)
 getChanges = \case
@@ -145,3 +156,11 @@ class HasLifecycle a b | a -> b where
         lifecycle .
             lens _ignoreChanges
                 (\s a -> s { _ignoreChanges = a })
+
+instance HCL.ToHCL (Lifecycle a) where
+   toHCL Lifecycle{..} =
+       HCL.block
+           [ HCL.assign "prevent_destroy"       _preventDestroy
+           , HCL.assign "create_before_destroy" _createBeforeDestroy
+           , HCL.assign "ignore_changes"        _ignoreChanges
+           ]

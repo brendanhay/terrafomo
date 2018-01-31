@@ -19,6 +19,7 @@ import Numeric (showInt)
 import qualified Data.Bits              as Bit
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
+import qualified Terrafomo.Syntax.HCL   as HCL
 
 -- | A 32-bit mask.
 data Bits
@@ -65,6 +66,9 @@ fbits = Format.later (Build.fromString . ('/':) . drop 1 . show)
 data CIDR = !IP :/ !Bits
     deriving (Show, Eq)
 
+instance HCL.ToHCL CIDR where
+    toHCL = HCL.string . Format.format fcidr
+
 -- | Format a CIDR block.
 fcidr :: Format r (CIDR -> r)
 fcidr =
@@ -89,6 +93,9 @@ instance Show IP where
 instance Enum IP where
     fromEnum (IPv4 w) = fromEnum w
     toEnum            = IPv4 . toEnum
+
+instance HCL.ToHCL IP where
+    toHCL = HCL.string . Format.format fip
 
 ipv4 :: Int -> Int -> Int -> Int -> IP
 ipv4 a b c d =

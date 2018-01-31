@@ -12,24 +12,16 @@ module Terrafomo.Syntax.Variable
 
     , Argument  (..)
     , argumentName
-
-    , Output    (..)
     ) where
 
 import Data.Hashable  (Hashable (hashWithSalt))
 import Data.Proxy     (Proxy (Proxy))
 import Data.Semigroup (Semigroup ((<>)))
 import Data.String    (fromString)
-import Data.Text      (Text)
-
-import Formatting (Format, (%))
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
-import Terrafomo.Syntax.Backend (Backend)
-import Terrafomo.Syntax.Name    (Key, Name)
-
-import qualified Formatting as Format
+import Terrafomo.Syntax.Name (Key, Name)
 
 -- | An attribute dependency of the form:
 --
@@ -68,14 +60,3 @@ instance Semigroup (Argument s n a) where
 
 argumentName :: forall s n a. KnownSymbol n => Argument s n a -> Name
 argumentName _ = fromString (symbolVal (Proxy :: Proxy n))
-
--- | An explicitly declared output variable of the form:
---
--- > output "ip" {
--- >   value = "${aws_eip.ip.public_ip}"
--- > }
-data Output b a = Output
-    { _outputBackend   :: !(Backend b)
-    , _outputName      :: !Name
-    , _outputAttribute :: !(Key, Name)
-    }

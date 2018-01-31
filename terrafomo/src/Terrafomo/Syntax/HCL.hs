@@ -42,7 +42,6 @@ import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
 import Data.Map.Strict        (Map)
-import Data.Maybe             (catMaybes)
 import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)
@@ -59,12 +58,7 @@ import Numeric.Natural (Natural)
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
-import Terrafomo.Syntax.Backend
-import Terrafomo.Syntax.DataSource
-import Terrafomo.Syntax.IP
-import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Resource
 import Terrafomo.Syntax.Variable
 
 import qualified Data.Foldable                as Fold
@@ -276,70 +270,8 @@ instance ToHCL LText.Text where
 instance ToHCL Builder where
     toHCL = string . Build.toLazyText
 
-instance ToHCL CIDR where
-    toHCL = string . Format.format fcidr
-
-instance ToHCL IP where
-    toHCL = string . Format.format fip
-
 instance ToHCL Name where
     toHCL = toHCL . Format.sformat fname
 
 instance ToHCL Key where
     toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
-
-instance ToHCL a => ToHCL (Backend a) where
-    toHCL (Backend n x) =
-        object (pure "terraform")
-            [ object (pure "backend" <> pure (name n))
-                [ toHCL x
-                ]
-            ]
-
-instance ToHCL Local where
-    toHCL (Local path) = assign "path" path
-
-instance ToHCL Dependency where
-    toHCL (Dependency k) = toHCL k
-
-instance ToHCL (Changes a) where
-    toHCL x =
-        case getChanges x of
-            Nothing -> list [string "*"]
-            Just ns -> list ns
-
-instance ToHCL (Lifecycle a) where
-   toHCL Lifecycle{..} =
-       block [ assign "prevent_destroy"       _preventDestroy
-             , assign "create_before_destroy" _createBeforeDestroy
-             , assign "ignore_changes"        _ignoreChanges
-             ]
-
-instance ToHCL a => ToHCL (Key, DataSource Key a) where
-    toHCL (k, DataSource{..}) =
-        object (key "resource" k) $ catMaybes
-            [ assign "provider" <$> _dataProvider
-            , Just (toHCL _dataConfig)
-            , if _dataDependsOn == mempty
-                  then Nothing
-                  else Just (assign "depends_on" (list _dataDependsOn))
-            ]
-
-instance ToHCL a => ToHCL (Key, Resource Key a) where
-    toHCL (k, Resource{..}) =
-       object (key "resource" k) $ catMaybes
-            [ assign "provider" <$> _resourceProvider
-            , Just (toHCL _resourceConfig)
-            , if _resourceDependsOn == mempty
-                  then Nothing
-                  else Just (assign "depends_on" (list _resourceDependsOn))
-            , if _resourceLifecycle == mempty
-                  then Nothing
-                  else Just (assign "lifecycle" _resourceLifecycle)
-            ]
-
-instance ToHCL (Output b a) where
-    toHCL (Output _ n (k, v)) =
-        object (pure "output" <> pure (name n)) $
-            [ assign "value" (attribute k (Compute v))
-            ]

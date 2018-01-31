@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RecordWildCards       #-}
 
 module Terrafomo.Syntax.Resource
@@ -7,13 +8,16 @@ module Terrafomo.Syntax.Resource
     , newResource
     ) where
 
-import Data.Set  (Set)
-import Data.Text (Text)
+import Data.Maybe (catMaybes)
+import Data.Set   (Set)
+import Data.Text  (Text)
 
 import Lens.Micro (lens)
 
 import Terrafomo.Syntax.Meta
 import Terrafomo.Syntax.Name
+
+import qualified Terrafomo.Syntax.HCL as HCL
 
 -- Resource
 
@@ -32,6 +36,19 @@ instance HasMeta Resource where
 
 instance HasLifecycle (Resource p a) a where
     lifecycle = lens _resourceLifecycle (\s a -> s { _resourceLifecycle = a })
+
+instance HCL.ToHCL a => HCL.ToHCL (Key, Resource Key a) where
+    toHCL (k, Resource{..}) =
+       HCL.object (HCL.key "resource" k) $ catMaybes
+            [ HCL.assign "provider" <$> _resourceProvider
+            , Just (HCL.toHCL _resourceConfig)
+            , if _resourceDependsOn == mempty
+                  then Nothing
+                  else Just (HCL.assign "depends_on" (HCL.list _resourceDependsOn))
+            , if _resourceLifecycle == mempty
+                  then Nothing
+                  else Just (HCL.assign "lifecycle" _resourceLifecycle)
+            ]
 
 newResource :: Text -> a -> Resource p a
 newResource name cfg = Resource

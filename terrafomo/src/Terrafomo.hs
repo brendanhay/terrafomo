@@ -108,7 +108,7 @@ import qualified Terrafomo.Syntax.HCL as HCL
 
 dependOn
     :: HasMeta b
-    => Reference s p a
+    => Reference s a
     -> b p c
     -> b p c
 dependOn x =
