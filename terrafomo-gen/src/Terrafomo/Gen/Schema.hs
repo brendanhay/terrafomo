@@ -46,11 +46,12 @@ data Schema = Schema
     } deriving (Show, Generic)
 
 data Field = Field
-    { fieldClass  :: !Text
-    , fieldMethod :: !Text
-    , fieldLabel  :: !Text
-    , fieldName   :: !(Last Text)
-    , fieldType   :: !(Last Text)
+    { fieldClass    :: !Text
+    , fieldMethod   :: !Text
+    , fieldLabel    :: !Text
+    , fieldName     :: !(Last Text)
+    , fieldType     :: !(Last Text)
+    , fieldRequired :: !Bool
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Field where
@@ -58,16 +59,19 @@ instance ToJSON Field where
 
 getFields :: Schema -> ([Field], [Field])
 getFields Schema{..} =
-    ( map (\(k, v) -> go k (argName  v) (argType  v)) (Map.toList schemaArguments)
-    , map (\(k, v) -> go k (attrName v) (attrType v)) (Map.toList schemaAttributes)
+    ( map (\(k, v) -> go k (argName  v) (argType  v) (argRequired v))
+          (Map.toList schemaArguments)
+    , map (\(k, v) -> go k (attrName v) (attrType v) False)
+          (Map.toList schemaAttributes)
     )
   where
-    go k name ty =
-        Field { fieldClass  = fieldClassName  k
-              , fieldMethod = fieldMethodName k
-              , fieldLabel  = k
-              , fieldName   = name
-              , fieldType   = ty
+    go k name ty req =
+        Field { fieldClass    = fieldClassName  k
+              , fieldMethod   = fieldMethodName k
+              , fieldLabel    = k
+              , fieldName     = name
+              , fieldType     = ty
+              , fieldRequired = req
               }
 
 data Class = Class

@@ -594,7 +594,7 @@ instance HasComputedArn (AcmCertificateDataSource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-acmCertificateDataSource :: TF.DataSource (TF.AWS s) (AcmCertificateDataSource s)
+acmCertificateDataSource :: TF.DataSource TF.AWS (AcmCertificateDataSource s)
 acmCertificateDataSource =
     TF.newDataSource "aws_acm_certificate" $
         AcmCertificateDataSource {
@@ -808,7 +808,7 @@ instance HasComputedVirtualizationType (AmiDataSource s) Text where
     computedVirtualizationType =
         to (\_  -> TF.Compute "virtualization_type")
 
-amiDataSource :: TF.DataSource (TF.AWS s) (AmiDataSource s)
+amiDataSource :: TF.DataSource TF.AWS (AmiDataSource s)
 amiDataSource =
     TF.newDataSource "aws_ami" $
         AmiDataSource {
@@ -871,7 +871,7 @@ instance HasOwners (AmiIdsDataSource s) Text where
         lens (_owners :: AmiIdsDataSource s -> TF.Argument s "owners" Text)
              (\s a -> s { _owners = a } :: AmiIdsDataSource s)
 
-amiIdsDataSource :: TF.DataSource (TF.AWS s) (AmiIdsDataSource s)
+amiIdsDataSource :: TF.DataSource TF.AWS (AmiIdsDataSource s)
 amiIdsDataSource =
     TF.newDataSource "aws_ami_ids" $
         AmiIdsDataSource {
@@ -910,7 +910,7 @@ instance HasComputedNames (AutoscalingGroupsDataSource s) Text where
     computedNames =
         to (\_  -> TF.Compute "names")
 
-autoscalingGroupsDataSource :: TF.DataSource (TF.AWS s) (AutoscalingGroupsDataSource s)
+autoscalingGroupsDataSource :: TF.DataSource TF.AWS (AutoscalingGroupsDataSource s)
 autoscalingGroupsDataSource =
     TF.newDataSource "aws_autoscaling_groups" $
         AutoscalingGroupsDataSource {
@@ -979,7 +979,7 @@ instance HasComputedState (AvailabilityZoneDataSource s) Text where
     computedState =
         to (\_  -> TF.Compute "state")
 
-availabilityZoneDataSource :: TF.DataSource (TF.AWS s) (AvailabilityZoneDataSource s)
+availabilityZoneDataSource :: TF.DataSource TF.AWS (AvailabilityZoneDataSource s)
 availabilityZoneDataSource =
     TF.newDataSource "aws_availability_zone" $
         AvailabilityZoneDataSource {
@@ -1018,7 +1018,7 @@ instance HasComputedNames (AvailabilityZonesDataSource s) Text where
     computedNames =
         to (\_  -> TF.Compute "names")
 
-availabilityZonesDataSource :: TF.DataSource (TF.AWS s) (AvailabilityZonesDataSource s)
+availabilityZonesDataSource :: TF.DataSource TF.AWS (AvailabilityZonesDataSource s)
 availabilityZonesDataSource =
     TF.newDataSource "aws_availability_zones" $
         AvailabilityZonesDataSource {
@@ -1049,7 +1049,7 @@ instance HasComputedId (BillingServiceAccountDataSource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-billingServiceAccountDataSource :: TF.DataSource (TF.AWS s) (BillingServiceAccountDataSource s)
+billingServiceAccountDataSource :: TF.DataSource TF.AWS (BillingServiceAccountDataSource s)
 billingServiceAccountDataSource =
     TF.newDataSource "aws_billing_service_account" $
         BillingServiceAccountDataSource {
@@ -1097,7 +1097,7 @@ instance HasUserId (CallerIdentityDataSource s) Text where
         lens (_user_id :: CallerIdentityDataSource s -> TF.Argument s "user_id" Text)
              (\s a -> s { _user_id = a } :: CallerIdentityDataSource s)
 
-callerIdentityDataSource :: TF.DataSource (TF.AWS s) (CallerIdentityDataSource s)
+callerIdentityDataSource :: TF.DataSource TF.AWS (CallerIdentityDataSource s)
 callerIdentityDataSource =
     TF.newDataSource "aws_caller_identity" $
         CallerIdentityDataSource {
@@ -1139,7 +1139,7 @@ instance HasId (CanonicalUserIdDataSource s) Text where
         lens (_id :: CanonicalUserIdDataSource s -> TF.Argument s "id" Text)
              (\s a -> s { _id = a } :: CanonicalUserIdDataSource s)
 
-canonicalUserIdDataSource :: TF.DataSource (TF.AWS s) (CanonicalUserIdDataSource s)
+canonicalUserIdDataSource :: TF.DataSource TF.AWS (CanonicalUserIdDataSource s)
 canonicalUserIdDataSource =
     TF.newDataSource "aws_canonical_user_id" $
         CanonicalUserIdDataSource {
@@ -1229,7 +1229,7 @@ instance HasComputedTimeoutInMinutes (CloudformationStackDataSource s) Text wher
     computedTimeoutInMinutes =
         to (\_  -> TF.Compute "timeout_in_minutes")
 
-cloudformationStackDataSource :: TF.DataSource (TF.AWS s) (CloudformationStackDataSource s)
+cloudformationStackDataSource :: TF.DataSource TF.AWS (CloudformationStackDataSource s)
 cloudformationStackDataSource =
     TF.newDataSource "aws_cloudformation_stack" $
         CloudformationStackDataSource {
@@ -1272,7 +1272,7 @@ instance HasComputedId (CloudtrailServiceAccountDataSource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cloudtrailServiceAccountDataSource :: TF.DataSource (TF.AWS s) (CloudtrailServiceAccountDataSource s)
+cloudtrailServiceAccountDataSource :: TF.DataSource TF.AWS (CloudtrailServiceAccountDataSource s)
 cloudtrailServiceAccountDataSource =
     TF.newDataSource "aws_cloudtrail_service_account" $
         CloudtrailServiceAccountDataSource {
@@ -1510,7 +1510,7 @@ instance HasComputedVpcSecurityGroups (DbInstanceDataSource s) Text where
     computedVpcSecurityGroups =
         to (\_  -> TF.Compute "vpc_security_groups")
 
-dbInstanceDataSource :: TF.DataSource (TF.AWS s) (DbInstanceDataSource s)
+dbInstanceDataSource :: TF.DataSource TF.AWS (DbInstanceDataSource s)
 dbInstanceDataSource =
     TF.newDataSource "aws_db_instance" $
         DbInstanceDataSource {
@@ -1692,7 +1692,7 @@ instance HasComputedVpcId (DbSnapshotDataSource s) Text where
     computedVpcId =
         to (\_  -> TF.Compute "vpc_id")
 
-dbSnapshotDataSource :: TF.DataSource (TF.AWS s) (DbSnapshotDataSource s)
+dbSnapshotDataSource :: TF.DataSource TF.AWS (DbSnapshotDataSource s)
 dbSnapshotDataSource =
     TF.newDataSource "aws_db_snapshot" $
         DbSnapshotDataSource {
@@ -1725,7 +1725,7 @@ instance HasName (DynamodbTableDataSource s) Text where
         lens (_name :: DynamodbTableDataSource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: DynamodbTableDataSource s)
 
-dynamodbTableDataSource :: TF.DataSource (TF.AWS s) (DynamodbTableDataSource s)
+dynamodbTableDataSource :: TF.DataSource TF.AWS (DynamodbTableDataSource s)
 dynamodbTableDataSource =
     TF.newDataSource "aws_dynamodb_table" $
         DynamodbTableDataSource {
@@ -1866,7 +1866,7 @@ instance HasComputedVolumeSize (EbsSnapshotDataSource s) Text where
     computedVolumeSize =
         to (\_  -> TF.Compute "volume_size")
 
-ebsSnapshotDataSource :: TF.DataSource (TF.AWS s) (EbsSnapshotDataSource s)
+ebsSnapshotDataSource :: TF.DataSource TF.AWS (EbsSnapshotDataSource s)
 ebsSnapshotDataSource =
     TF.newDataSource "aws_ebs_snapshot" $
         EbsSnapshotDataSource {
@@ -1919,7 +1919,7 @@ instance HasRestorableByUserIds (EbsSnapshotIdsDataSource s) Text where
         lens (_restorable_by_user_ids :: EbsSnapshotIdsDataSource s -> TF.Argument s "restorable_by_user_ids" Text)
              (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsDataSource s)
 
-ebsSnapshotIdsDataSource :: TF.DataSource (TF.AWS s) (EbsSnapshotIdsDataSource s)
+ebsSnapshotIdsDataSource :: TF.DataSource TF.AWS (EbsSnapshotIdsDataSource s)
 ebsSnapshotIdsDataSource =
     TF.newDataSource "aws_ebs_snapshot_ids" $
         EbsSnapshotIdsDataSource {
@@ -2026,7 +2026,7 @@ instance HasComputedVolumeType (EbsVolumeDataSource s) Text where
     computedVolumeType =
         to (\_  -> TF.Compute "volume_type")
 
-ebsVolumeDataSource :: TF.DataSource (TF.AWS s) (EbsVolumeDataSource s)
+ebsVolumeDataSource :: TF.DataSource TF.AWS (EbsVolumeDataSource s)
 ebsVolumeDataSource =
     TF.newDataSource "aws_ebs_volume" $
         EbsVolumeDataSource {
@@ -2074,7 +2074,7 @@ instance HasComputedRepositoryUrl (EcrRepositoryDataSource s) Text where
     computedRepositoryUrl =
         to (\_  -> TF.Compute "repository_url")
 
-ecrRepositoryDataSource :: TF.DataSource (TF.AWS s) (EcrRepositoryDataSource s)
+ecrRepositoryDataSource :: TF.DataSource TF.AWS (EcrRepositoryDataSource s)
 ecrRepositoryDataSource =
     TF.newDataSource "aws_ecr_repository" $
         EcrRepositoryDataSource {
@@ -2133,7 +2133,7 @@ instance HasComputedStatus (EcsClusterDataSource s) Text where
     computedStatus =
         to (\_  -> TF.Compute "status")
 
-ecsClusterDataSource :: TF.DataSource (TF.AWS s) (EcsClusterDataSource s)
+ecsClusterDataSource :: TF.DataSource TF.AWS (EcsClusterDataSource s)
 ecsClusterDataSource =
     TF.newDataSource "aws_ecs_cluster" $
         EcsClusterDataSource {
@@ -2220,7 +2220,7 @@ instance HasComputedMemoryReservation (EcsContainerDefinitionDataSource s) Text 
     computedMemoryReservation =
         to (\_  -> TF.Compute "memory_reservation")
 
-ecsContainerDefinitionDataSource :: TF.DataSource (TF.AWS s) (EcsContainerDefinitionDataSource s)
+ecsContainerDefinitionDataSource :: TF.DataSource TF.AWS (EcsContainerDefinitionDataSource s)
 ecsContainerDefinitionDataSource =
     TF.newDataSource "aws_ecs_container_definition" $
         EcsContainerDefinitionDataSource {
@@ -2280,7 +2280,7 @@ instance HasComputedTaskRoleArn (EcsTaskDefinitionDataSource s) Text where
     computedTaskRoleArn =
         to (\_  -> TF.Compute "task_role_arn")
 
-ecsTaskDefinitionDataSource :: TF.DataSource (TF.AWS s) (EcsTaskDefinitionDataSource s)
+ecsTaskDefinitionDataSource :: TF.DataSource TF.AWS (EcsTaskDefinitionDataSource s)
 ecsTaskDefinitionDataSource =
     TF.newDataSource "aws_ecs_task_definition" $
         EcsTaskDefinitionDataSource {
@@ -2348,7 +2348,7 @@ instance HasComputedTags (EfsFileSystemDataSource s) TF.Tags where
     computedTags =
         to (\_  -> TF.Compute "tags")
 
-efsFileSystemDataSource :: TF.DataSource (TF.AWS s) (EfsFileSystemDataSource s)
+efsFileSystemDataSource :: TF.DataSource TF.AWS (EfsFileSystemDataSource s)
 efsFileSystemDataSource =
     TF.newDataSource "aws_efs_file_system" $
         EfsFileSystemDataSource {
@@ -2413,7 +2413,7 @@ instance HasComputedSubnetId (EfsMountTargetDataSource s) Text where
     computedSubnetId =
         to (\_  -> TF.Compute "subnet_id")
 
-efsMountTargetDataSource :: TF.DataSource (TF.AWS s) (EfsMountTargetDataSource s)
+efsMountTargetDataSource :: TF.DataSource TF.AWS (EfsMountTargetDataSource s)
 efsMountTargetDataSource =
     TF.newDataSource "aws_efs_mount_target" $
         EfsMountTargetDataSource {
@@ -2453,7 +2453,7 @@ instance HasPublicIp (EipDataSource s) Text where
         lens (_public_ip :: EipDataSource s -> TF.Argument s "public_ip" Text)
              (\s a -> s { _public_ip = a } :: EipDataSource s)
 
-eipDataSource :: TF.DataSource (TF.AWS s) (EipDataSource s)
+eipDataSource :: TF.DataSource TF.AWS (EipDataSource s)
 eipDataSource =
     TF.newDataSource "aws_eip" $
         EipDataSource {
@@ -2498,7 +2498,7 @@ instance HasComputedName (ElasticBeanstalkSolutionStackDataSource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-elasticBeanstalkSolutionStackDataSource :: TF.DataSource (TF.AWS s) (ElasticBeanstalkSolutionStackDataSource s)
+elasticBeanstalkSolutionStackDataSource :: TF.DataSource TF.AWS (ElasticBeanstalkSolutionStackDataSource s)
 elasticBeanstalkSolutionStackDataSource =
     TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
         ElasticBeanstalkSolutionStackDataSource {
@@ -2641,7 +2641,7 @@ instance HasComputedTags (ElasticacheClusterDataSource s) TF.Tags where
     computedTags =
         to (\_  -> TF.Compute "tags")
 
-elasticacheClusterDataSource :: TF.DataSource (TF.AWS s) (ElasticacheClusterDataSource s)
+elasticacheClusterDataSource :: TF.DataSource TF.AWS (ElasticacheClusterDataSource s)
 elasticacheClusterDataSource =
     TF.newDataSource "aws_elasticache_cluster" $
         ElasticacheClusterDataSource {
@@ -2736,7 +2736,7 @@ instance HasComputedSnapshotWindow (ElasticacheReplicationGroupDataSource s) Tex
     computedSnapshotWindow =
         to (\_  -> TF.Compute "snapshot_window")
 
-elasticacheReplicationGroupDataSource :: TF.DataSource (TF.AWS s) (ElasticacheReplicationGroupDataSource s)
+elasticacheReplicationGroupDataSource :: TF.DataSource TF.AWS (ElasticacheReplicationGroupDataSource s)
 elasticacheReplicationGroupDataSource =
     TF.newDataSource "aws_elasticache_replication_group" $
         ElasticacheReplicationGroupDataSource {
@@ -2768,7 +2768,7 @@ instance HasName (ElbDataSource s) Text where
         lens (_name :: ElbDataSource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: ElbDataSource s)
 
-elbDataSource :: TF.DataSource (TF.AWS s) (ElbDataSource s)
+elbDataSource :: TF.DataSource TF.AWS (ElbDataSource s)
 elbDataSource =
     TF.newDataSource "aws_elb" $
         ElbDataSource {
@@ -2804,7 +2804,7 @@ instance HasComputedId (ElbHostedZoneIdDataSource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-elbHostedZoneIdDataSource :: TF.DataSource (TF.AWS s) (ElbHostedZoneIdDataSource s)
+elbHostedZoneIdDataSource :: TF.DataSource TF.AWS (ElbHostedZoneIdDataSource s)
 elbHostedZoneIdDataSource =
     TF.newDataSource "aws_elb_hosted_zone_id" $
         ElbHostedZoneIdDataSource {
@@ -2846,7 +2846,7 @@ instance HasComputedId (ElbServiceAccountDataSource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-elbServiceAccountDataSource :: TF.DataSource (TF.AWS s) (ElbServiceAccountDataSource s)
+elbServiceAccountDataSource :: TF.DataSource TF.AWS (ElbServiceAccountDataSource s)
 elbServiceAccountDataSource =
     TF.newDataSource "aws_elb_service_account" $
         ElbServiceAccountDataSource {
@@ -2875,7 +2875,7 @@ instance HasAccountAlias (IamAccountAliasDataSource s) Text where
         lens (_account_alias :: IamAccountAliasDataSource s -> TF.Argument s "account_alias" Text)
              (\s a -> s { _account_alias = a } :: IamAccountAliasDataSource s)
 
-iamAccountAliasDataSource :: TF.DataSource (TF.AWS s) (IamAccountAliasDataSource s)
+iamAccountAliasDataSource :: TF.DataSource TF.AWS (IamAccountAliasDataSource s)
 iamAccountAliasDataSource =
     TF.newDataSource "aws_iam_account_alias" $
         IamAccountAliasDataSource {
@@ -2923,7 +2923,7 @@ instance HasComputedPath (IamGroupDataSource s) Text where
     computedPath =
         to (\_  -> TF.Compute "path")
 
-iamGroupDataSource :: TF.DataSource (TF.AWS s) (IamGroupDataSource s)
+iamGroupDataSource :: TF.DataSource TF.AWS (IamGroupDataSource s)
 iamGroupDataSource =
     TF.newDataSource "aws_iam_group" $
         IamGroupDataSource {
@@ -2977,7 +2977,7 @@ instance HasComputedRoleId (IamInstanceProfileDataSource s) Text where
     computedRoleId =
         to (\_  -> TF.Compute "role_id")
 
-iamInstanceProfileDataSource :: TF.DataSource (TF.AWS s) (IamInstanceProfileDataSource s)
+iamInstanceProfileDataSource :: TF.DataSource TF.AWS (IamInstanceProfileDataSource s)
 iamInstanceProfileDataSource =
     TF.newDataSource "aws_iam_instance_profile" $
         IamInstanceProfileDataSource {
@@ -3018,7 +3018,7 @@ instance HasStatement (IamPolicyDocumentDataSource s) Text where
         lens (_statement :: IamPolicyDocumentDataSource s -> TF.Argument s "statement" Text)
              (\s a -> s { _statement = a } :: IamPolicyDocumentDataSource s)
 
-iamPolicyDocumentDataSource :: TF.DataSource (TF.AWS s) (IamPolicyDocumentDataSource s)
+iamPolicyDocumentDataSource :: TF.DataSource TF.AWS (IamPolicyDocumentDataSource s)
 iamPolicyDocumentDataSource =
     TF.newDataSource "aws_iam_policy_document" $
         IamPolicyDocumentDataSource {
@@ -3079,7 +3079,7 @@ instance HasComputedUniqueId (IamRoleDataSource s) Text where
     computedUniqueId =
         to (\_  -> TF.Compute "unique_id")
 
-iamRoleDataSource :: TF.DataSource (TF.AWS s) (IamRoleDataSource s)
+iamRoleDataSource :: TF.DataSource TF.AWS (IamRoleDataSource s)
 iamRoleDataSource =
     TF.newDataSource "aws_iam_role" $
         IamRoleDataSource {
@@ -3163,7 +3163,7 @@ instance HasComputedUploadDate (IamServerCertificateDataSource s) Text where
     computedUploadDate =
         to (\_  -> TF.Compute "upload_date")
 
-iamServerCertificateDataSource :: TF.DataSource (TF.AWS s) (IamServerCertificateDataSource s)
+iamServerCertificateDataSource :: TF.DataSource TF.AWS (IamServerCertificateDataSource s)
 iamServerCertificateDataSource =
     TF.newDataSource "aws_iam_server_certificate" $
         IamServerCertificateDataSource {
@@ -3213,7 +3213,7 @@ instance HasComputedUserId (IamUserDataSource s) Text where
     computedUserId =
         to (\_  -> TF.Compute "user_id")
 
-iamUserDataSource :: TF.DataSource (TF.AWS s) (IamUserDataSource s)
+iamUserDataSource :: TF.DataSource TF.AWS (IamUserDataSource s)
 iamUserDataSource =
     TF.newDataSource "aws_iam_user" $
         IamUserDataSource {
@@ -3406,7 +3406,7 @@ instance HasComputedVpcSecurityGroupIds (InstanceDataSource s) Text where
     computedVpcSecurityGroupIds =
         to (\_  -> TF.Compute "vpc_security_group_ids")
 
-instanceDataSource :: TF.DataSource (TF.AWS s) (InstanceDataSource s)
+instanceDataSource :: TF.DataSource TF.AWS (InstanceDataSource s)
 instanceDataSource =
     TF.newDataSource "aws_instance" $
         InstanceDataSource {
@@ -3475,7 +3475,7 @@ instance HasComputedPublicIps (InstancesDataSource s) Text where
     computedPublicIps =
         to (\_  -> TF.Compute "public_ips")
 
-instancesDataSource :: TF.DataSource (TF.AWS s) (InstancesDataSource s)
+instancesDataSource :: TF.DataSource TF.AWS (InstancesDataSource s)
 instancesDataSource =
     TF.newDataSource "aws_instances" $
         InstancesDataSource {
@@ -3536,7 +3536,7 @@ instance HasComputedVpcId (InternetGatewayDataSource s) Text where
     computedVpcId =
         to (\_  -> TF.Compute "vpc_id")
 
-internetGatewayDataSource :: TF.DataSource (TF.AWS s) (InternetGatewayDataSource s)
+internetGatewayDataSource :: TF.DataSource TF.AWS (InternetGatewayDataSource s)
 internetGatewayDataSource =
     TF.newDataSource "aws_internet_gateway" $
         InternetGatewayDataSource {
@@ -3596,7 +3596,7 @@ instance HasComputedSyncToken (IpRangesDataSource s) Text where
     computedSyncToken =
         to (\_  -> TF.Compute "sync_token")
 
-ipRangesDataSource :: TF.DataSource (TF.AWS s) (IpRangesDataSource s)
+ipRangesDataSource :: TF.DataSource TF.AWS (IpRangesDataSource s)
 ipRangesDataSource =
     TF.newDataSource "aws_ip_ranges" $
         IpRangesDataSource {
@@ -3681,7 +3681,7 @@ instance HasComputedTags (KinesisStreamDataSource s) TF.Tags where
     computedTags =
         to (\_  -> TF.Compute "tags")
 
-kinesisStreamDataSource :: TF.DataSource (TF.AWS s) (KinesisStreamDataSource s)
+kinesisStreamDataSource :: TF.DataSource TF.AWS (KinesisStreamDataSource s)
 kinesisStreamDataSource =
     TF.newDataSource "aws_kinesis_stream" $
         KinesisStreamDataSource {
@@ -3729,7 +3729,7 @@ instance HasComputedTargetKeyId (KmsAliasDataSource s) Text where
     computedTargetKeyId =
         to (\_  -> TF.Compute "target_key_id")
 
-kmsAliasDataSource :: TF.DataSource (TF.AWS s) (KmsAliasDataSource s)
+kmsAliasDataSource :: TF.DataSource TF.AWS (KmsAliasDataSource s)
 kmsAliasDataSource =
     TF.newDataSource "aws_kms_alias" $
         KmsAliasDataSource {
@@ -3786,7 +3786,7 @@ instance HasComputedCiphertextBlob (KmsCiphertextDataSource s) Text where
     computedCiphertextBlob =
         to (\_  -> TF.Compute "ciphertext_blob")
 
-kmsCiphertextDataSource :: TF.DataSource (TF.AWS s) (KmsCiphertextDataSource s)
+kmsCiphertextDataSource :: TF.DataSource TF.AWS (KmsCiphertextDataSource s)
 kmsCiphertextDataSource =
     TF.newDataSource "aws_kms_ciphertext" $
         KmsCiphertextDataSource {
@@ -3821,7 +3821,7 @@ instance HasSecret (KmsSecretDataSource s) Text where
         lens (_secret :: KmsSecretDataSource s -> TF.Argument s "secret" Text)
              (\s a -> s { _secret = a } :: KmsSecretDataSource s)
 
-kmsSecretDataSource :: TF.DataSource (TF.AWS s) (KmsSecretDataSource s)
+kmsSecretDataSource :: TF.DataSource TF.AWS (KmsSecretDataSource s)
 kmsSecretDataSource =
     TF.newDataSource "aws_kms_secret" $
         KmsSecretDataSource {
@@ -3862,7 +3862,7 @@ instance HasName (LbDataSource s) Text where
         lens (_name :: LbDataSource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: LbDataSource s)
 
-lbDataSource :: TF.DataSource (TF.AWS s) (LbDataSource s)
+lbDataSource :: TF.DataSource TF.AWS (LbDataSource s)
 lbDataSource =
     TF.newDataSource "aws_lb" $
         LbDataSource {
@@ -3895,7 +3895,7 @@ instance HasArn (LbListenerDataSource s) Text where
         lens (_arn :: LbListenerDataSource s -> TF.Argument s "arn" Text)
              (\s a -> s { _arn = a } :: LbListenerDataSource s)
 
-lbListenerDataSource :: TF.DataSource (TF.AWS s) (LbListenerDataSource s)
+lbListenerDataSource :: TF.DataSource TF.AWS (LbListenerDataSource s)
 lbListenerDataSource =
     TF.newDataSource "aws_lb_listener" $
         LbListenerDataSource {
@@ -3938,7 +3938,7 @@ instance HasName (LbTargetGroupDataSource s) Text where
         lens (_name :: LbTargetGroupDataSource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: LbTargetGroupDataSource s)
 
-lbTargetGroupDataSource :: TF.DataSource (TF.AWS s) (LbTargetGroupDataSource s)
+lbTargetGroupDataSource :: TF.DataSource TF.AWS (LbTargetGroupDataSource s)
 lbTargetGroupDataSource =
     TF.newDataSource "aws_lb_target_group" $
         LbTargetGroupDataSource {
@@ -4051,7 +4051,7 @@ instance HasComputedPublicIp (NatGatewayDataSource s) Text where
     computedPublicIp =
         to (\_  -> TF.Compute "public_ip")
 
-natGatewayDataSource :: TF.DataSource (TF.AWS s) (NatGatewayDataSource s)
+natGatewayDataSource :: TF.DataSource TF.AWS (NatGatewayDataSource s)
 natGatewayDataSource =
     TF.newDataSource "aws_nat_gateway" $
         NatGatewayDataSource {
@@ -4127,7 +4127,7 @@ instance HasComputedRequesterId (NetworkInterfaceDataSource s) Text where
     computedRequesterId =
         to (\_  -> TF.Compute "requester_id")
 
-networkInterfaceDataSource :: TF.DataSource (TF.AWS s) (NetworkInterfaceDataSource s)
+networkInterfaceDataSource :: TF.DataSource TF.AWS (NetworkInterfaceDataSource s)
 networkInterfaceDataSource =
     TF.newDataSource "aws_network_interface" $
         NetworkInterfaceDataSource {
@@ -4145,7 +4145,7 @@ data PartitionDataSource s = PartitionDataSource {
 instance TF.ToHCL (PartitionDataSource s) where
     toHCL _ = TF.block []
 
-partitionDataSource :: TF.DataSource (TF.AWS s) (PartitionDataSource s)
+partitionDataSource :: TF.DataSource TF.AWS (PartitionDataSource s)
 partitionDataSource =
     TF.newDataSource "aws_partition" $
         PartitionDataSource {
@@ -4204,7 +4204,7 @@ instance HasComputedName (PrefixListDataSource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-prefixListDataSource :: TF.DataSource (TF.AWS s) (PrefixListDataSource s)
+prefixListDataSource :: TF.DataSource TF.AWS (PrefixListDataSource s)
 prefixListDataSource =
     TF.newDataSource "aws_prefix_list" $
         PrefixListDataSource {
@@ -4233,7 +4233,7 @@ instance HasClusterIdentifier (RdsClusterDataSource s) Text where
         lens (_cluster_identifier :: RdsClusterDataSource s -> TF.Argument s "cluster_identifier" Text)
              (\s a -> s { _cluster_identifier = a } :: RdsClusterDataSource s)
 
-rdsClusterDataSource :: TF.DataSource (TF.AWS s) (RdsClusterDataSource s)
+rdsClusterDataSource :: TF.DataSource TF.AWS (RdsClusterDataSource s)
 rdsClusterDataSource =
     TF.newDataSource "aws_rds_cluster" $
         RdsClusterDataSource {
@@ -4276,7 +4276,7 @@ instance HasComputedId (RedshiftServiceAccountDataSource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-redshiftServiceAccountDataSource :: TF.DataSource (TF.AWS s) (RedshiftServiceAccountDataSource s)
+redshiftServiceAccountDataSource :: TF.DataSource TF.AWS (RedshiftServiceAccountDataSource s)
 redshiftServiceAccountDataSource =
     TF.newDataSource "aws_redshift_service_account" $
         RedshiftServiceAccountDataSource {
@@ -4346,7 +4346,7 @@ instance HasComputedName (RegionDataSource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-regionDataSource :: TF.DataSource (TF.AWS s) (RegionDataSource s)
+regionDataSource :: TF.DataSource TF.AWS (RegionDataSource s)
 regionDataSource =
     TF.newDataSource "aws_region" $
         RegionDataSource {
@@ -4436,7 +4436,7 @@ instance HasComputedResourceRecordSetCount (Route53ZoneDataSource s) Text where
     computedResourceRecordSetCount =
         to (\_  -> TF.Compute "resource_record_set_count")
 
-route53ZoneDataSource :: TF.DataSource (TF.AWS s) (Route53ZoneDataSource s)
+route53ZoneDataSource :: TF.DataSource TF.AWS (Route53ZoneDataSource s)
 route53ZoneDataSource =
     TF.newDataSource "aws_route53_zone" $
         Route53ZoneDataSource {
@@ -4558,7 +4558,7 @@ instance HasComputedVpcPeeringConnectionId (RouteTableDataSource s) Text where
     computedVpcPeeringConnectionId =
         to (\_  -> TF.Compute "vpc_peering_connection_id")
 
-routeTableDataSource :: TF.DataSource (TF.AWS s) (RouteTableDataSource s)
+routeTableDataSource :: TF.DataSource TF.AWS (RouteTableDataSource s)
 routeTableDataSource =
     TF.newDataSource "aws_route_table" $
         RouteTableDataSource {
@@ -4634,7 +4634,7 @@ instance HasComputedWebsiteEndpoint (S3BucketDataSource s) Text where
     computedWebsiteEndpoint =
         to (\_  -> TF.Compute "website_endpoint")
 
-s3BucketDataSource :: TF.DataSource (TF.AWS s) (S3BucketDataSource s)
+s3BucketDataSource :: TF.DataSource TF.AWS (S3BucketDataSource s)
 s3BucketDataSource =
     TF.newDataSource "aws_s3_bucket" $
         S3BucketDataSource {
@@ -4795,7 +4795,7 @@ instance HasComputedWebsiteRedirectLocation (S3BucketObjectDataSource s) Text wh
     computedWebsiteRedirectLocation =
         to (\_  -> TF.Compute "website_redirect_location")
 
-s3BucketObjectDataSource :: TF.DataSource (TF.AWS s) (S3BucketObjectDataSource s)
+s3BucketObjectDataSource :: TF.DataSource TF.AWS (S3BucketObjectDataSource s)
 s3BucketObjectDataSource =
     TF.newDataSource "aws_s3_bucket_object" $
         S3BucketObjectDataSource {
@@ -4880,7 +4880,7 @@ instance HasComputedDescription (SecurityGroupDataSource s) Text where
     computedDescription =
         to (\_  -> TF.Compute "description")
 
-securityGroupDataSource :: TF.DataSource (TF.AWS s) (SecurityGroupDataSource s)
+securityGroupDataSource :: TF.DataSource TF.AWS (SecurityGroupDataSource s)
 securityGroupDataSource =
     TF.newDataSource "aws_security_group" $
         SecurityGroupDataSource {
@@ -4920,7 +4920,7 @@ instance HasComputedArn (SnsTopicDataSource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-snsTopicDataSource :: TF.DataSource (TF.AWS s) (SnsTopicDataSource s)
+snsTopicDataSource :: TF.DataSource TF.AWS (SnsTopicDataSource s)
 snsTopicDataSource =
     TF.newDataSource "aws_sns_topic" $
         SnsTopicDataSource {
@@ -4958,7 +4958,7 @@ instance HasWithDecryption (SsmParameterDataSource s) Text where
         lens (_with_decryption :: SsmParameterDataSource s -> TF.Argument s "with_decryption" Text)
              (\s a -> s { _with_decryption = a } :: SsmParameterDataSource s)
 
-ssmParameterDataSource :: TF.DataSource (TF.AWS s) (SsmParameterDataSource s)
+ssmParameterDataSource :: TF.DataSource TF.AWS (SsmParameterDataSource s)
 ssmParameterDataSource =
     TF.newDataSource "aws_ssm_parameter" $
         SsmParameterDataSource {
@@ -5070,7 +5070,7 @@ instance HasVpcId (SubnetDataSource s) Text where
         lens (_vpc_id :: SubnetDataSource s -> TF.Argument s "vpc_id" Text)
              (\s a -> s { _vpc_id = a } :: SubnetDataSource s)
 
-subnetDataSource :: TF.DataSource (TF.AWS s) (SubnetDataSource s)
+subnetDataSource :: TF.DataSource TF.AWS (SubnetDataSource s)
 subnetDataSource =
     TF.newDataSource "aws_subnet" $
         SubnetDataSource {
@@ -5123,7 +5123,7 @@ instance HasComputedIds (SubnetIdsDataSource s) Text where
     computedIds =
         to (\_  -> TF.Compute "ids")
 
-subnetIdsDataSource :: TF.DataSource (TF.AWS s) (SubnetIdsDataSource s)
+subnetIdsDataSource :: TF.DataSource TF.AWS (SubnetIdsDataSource s)
 subnetIdsDataSource =
     TF.newDataSource "aws_subnet_ids" $
         SubnetIdsDataSource {
@@ -5244,7 +5244,7 @@ instance HasComputedIpv6CidrBlock (VpcDataSource s) TF.CIDR where
     computedIpv6CidrBlock =
         to (\_  -> TF.Compute "ipv6_cidr_block")
 
-vpcDataSource :: TF.DataSource (TF.AWS s) (VpcDataSource s)
+vpcDataSource :: TF.DataSource TF.AWS (VpcDataSource s)
 vpcDataSource =
     TF.newDataSource "aws_vpc" $
         VpcDataSource {
@@ -5326,7 +5326,7 @@ instance HasComputedRouteTableIds (VpcEndpointDataSource s) Text where
     computedRouteTableIds =
         to (\_  -> TF.Compute "route_table_ids")
 
-vpcEndpointDataSource :: TF.DataSource (TF.AWS s) (VpcEndpointDataSource s)
+vpcEndpointDataSource :: TF.DataSource TF.AWS (VpcEndpointDataSource s)
 vpcEndpointDataSource =
     TF.newDataSource "aws_vpc_endpoint" $
         VpcEndpointDataSource {
@@ -5365,7 +5365,7 @@ instance HasComputedServiceName (VpcEndpointServiceDataSource s) Text where
     computedServiceName =
         to (\_  -> TF.Compute "service_name")
 
-vpcEndpointServiceDataSource :: TF.DataSource (TF.AWS s) (VpcEndpointServiceDataSource s)
+vpcEndpointServiceDataSource :: TF.DataSource TF.AWS (VpcEndpointServiceDataSource s)
 vpcEndpointServiceDataSource =
     TF.newDataSource "aws_vpc_endpoint_service" $
         VpcEndpointServiceDataSource {
@@ -5516,7 +5516,7 @@ instance HasComputedRequester (VpcPeeringConnectionDataSource s) Text where
     computedRequester =
         to (\_  -> TF.Compute "requester")
 
-vpcPeeringConnectionDataSource :: TF.DataSource (TF.AWS s) (VpcPeeringConnectionDataSource s)
+vpcPeeringConnectionDataSource :: TF.DataSource TF.AWS (VpcPeeringConnectionDataSource s)
 vpcPeeringConnectionDataSource =
     TF.newDataSource "aws_vpc_peering_connection" $
         VpcPeeringConnectionDataSource {
@@ -5605,7 +5605,7 @@ instance HasTags (VpnGatewayDataSource s) TF.Tags where
         lens (_tags :: VpnGatewayDataSource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: VpnGatewayDataSource s)
 
-vpnGatewayDataSource :: TF.DataSource (TF.AWS s) (VpnGatewayDataSource s)
+vpnGatewayDataSource :: TF.DataSource TF.AWS (VpnGatewayDataSource s)
 vpnGatewayDataSource =
     TF.newDataSource "aws_vpn_gateway" $
         VpnGatewayDataSource {

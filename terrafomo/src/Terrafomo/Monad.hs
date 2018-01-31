@@ -531,12 +531,12 @@ output
     -- FIXME: what's the 'n', here, how is it set? Do we expect use of TypeApplications?
     -- if only an attribute is needed we can auto-generate output names.
     -> m (Output a)
-output arg = do
+output x = do
     b  <- gets backend
     os <- gets outputs
 
-    let name   = argumentName arg
-        result = Output b name arg
+    let name   = argumentName x
+        result = Output b name x
         value  = HCL.toHCL result
 
     case VMap.insert name value os of

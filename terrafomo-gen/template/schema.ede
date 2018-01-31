@@ -108,7 +108,7 @@ instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} whe
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
-{{ constructor }} :: TF.{{ type }} (TF.{{ provider.name }} s) ({{ schema.key }} s)
+{{ constructor }} :: TF.{{ type }} TF.{{ provider.name }} ({{ schema.key }} s)
 {{ constructor }} =
     TF.new{{ type }} "{{ original }}" $
         {{ schema.key }} {

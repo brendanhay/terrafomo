@@ -2183,7 +2183,7 @@ instance HasComputedName (ActivityResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-activityResource :: TF.Resource (TF.AWS s) (ActivityResource s)
+activityResource :: TF.Resource TF.AWS (ActivityResource s)
 activityResource =
     TF.newResource "sfn_activity" $
         ActivityResource {
@@ -2257,7 +2257,7 @@ instance HasSourceAmiRegion (AmiCopyResource s) TF.Region where
         lens (_source_ami_region :: AmiCopyResource s -> TF.Argument s "source_ami_region" TF.Region)
              (\s a -> s { _source_ami_region = a } :: AmiCopyResource s)
 
-amiCopyResource :: TF.Resource (TF.AWS s) (AmiCopyResource s)
+amiCopyResource :: TF.Resource TF.AWS (AmiCopyResource s)
 amiCopyResource =
     TF.newResource "aws_ami_copy" $
         AmiCopyResource {
@@ -2321,7 +2321,7 @@ instance HasSourceInstanceId (AmiFromInstanceResource s) Text where
         lens (_source_instance_id :: AmiFromInstanceResource s -> TF.Argument s "source_instance_id" Text)
              (\s a -> s { _source_instance_id = a } :: AmiFromInstanceResource s)
 
-amiFromInstanceResource :: TF.Resource (TF.AWS s) (AmiFromInstanceResource s)
+amiFromInstanceResource :: TF.Resource TF.AWS (AmiFromInstanceResource s)
 amiFromInstanceResource =
     TF.newResource "aws_ami_from_instance" $
         AmiFromInstanceResource {
@@ -2368,7 +2368,7 @@ instance HasComputedId (AmiLaunchPermissionResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-amiLaunchPermissionResource :: TF.Resource (TF.AWS s) (AmiLaunchPermissionResource s)
+amiLaunchPermissionResource :: TF.Resource TF.AWS (AmiLaunchPermissionResource s)
 amiLaunchPermissionResource =
     TF.newResource "aws_ami_launch_permission" $
         AmiLaunchPermissionResource {
@@ -2461,7 +2461,7 @@ instance HasVirtualizationType (AmiResource s) Text where
         lens (_virtualization_type :: AmiResource s -> TF.Argument s "virtualization_type" Text)
              (\s a -> s { _virtualization_type = a } :: AmiResource s)
 
-amiResource :: TF.Resource (TF.AWS s) (AmiResource s)
+amiResource :: TF.Resource TF.AWS (AmiResource s)
 amiResource =
     TF.newResource "aws_ami" $
         AmiResource {
@@ -2504,7 +2504,7 @@ instance HasComputedThrottleSettings (ApiGatewayAccountResource s) Text where
     computedThrottleSettings =
         to (\_  -> TF.Compute "throttle_settings")
 
-apiGatewayAccountResource :: TF.Resource (TF.AWS s) (ApiGatewayAccountResource s)
+apiGatewayAccountResource :: TF.Resource TF.AWS (ApiGatewayAccountResource s)
 apiGatewayAccountResource =
     TF.newResource "aws_api_gateway_account" $
         ApiGatewayAccountResource {
@@ -2598,7 +2598,7 @@ instance HasComputedValue (ApiGatewayApiKeyResource s) Text where
     computedValue =
         to (\_  -> TF.Compute "value")
 
-apiGatewayApiKeyResource :: TF.Resource (TF.AWS s) (ApiGatewayApiKeyResource s)
+apiGatewayApiKeyResource :: TF.Resource TF.AWS (ApiGatewayApiKeyResource s)
 apiGatewayApiKeyResource =
     TF.newResource "aws_api_gateway_api_key" $
         ApiGatewayApiKeyResource {
@@ -2700,7 +2700,7 @@ instance HasType' (ApiGatewayAuthorizerResource s) Text where
         lens (_type' :: ApiGatewayAuthorizerResource s -> TF.Argument s "type" Text)
              (\s a -> s { _type' = a } :: ApiGatewayAuthorizerResource s)
 
-apiGatewayAuthorizerResource :: TF.Resource (TF.AWS s) (ApiGatewayAuthorizerResource s)
+apiGatewayAuthorizerResource :: TF.Resource TF.AWS (ApiGatewayAuthorizerResource s)
 apiGatewayAuthorizerResource =
     TF.newResource "aws_api_gateway_authorizer" $
         ApiGatewayAuthorizerResource {
@@ -2767,7 +2767,7 @@ instance HasStageName (ApiGatewayBasePathMappingResource s) Text where
         lens (_stage_name :: ApiGatewayBasePathMappingResource s -> TF.Argument s "stage_name" Text)
              (\s a -> s { _stage_name = a } :: ApiGatewayBasePathMappingResource s)
 
-apiGatewayBasePathMappingResource :: TF.Resource (TF.AWS s) (ApiGatewayBasePathMappingResource s)
+apiGatewayBasePathMappingResource :: TF.Resource TF.AWS (ApiGatewayBasePathMappingResource s)
 apiGatewayBasePathMappingResource =
     TF.newResource "aws_api_gateway_base_path_mapping" $
         ApiGatewayBasePathMappingResource {
@@ -2822,7 +2822,7 @@ instance HasComputedPemEncodedCertificate (ApiGatewayClientCertificateResource s
     computedPemEncodedCertificate =
         to (\_  -> TF.Compute "pem_encoded_certificate")
 
-apiGatewayClientCertificateResource :: TF.Resource (TF.AWS s) (ApiGatewayClientCertificateResource s)
+apiGatewayClientCertificateResource :: TF.Resource TF.AWS (ApiGatewayClientCertificateResource s)
 apiGatewayClientCertificateResource =
     TF.newResource "aws_api_gateway_client_certificate" $
         ApiGatewayClientCertificateResource {
@@ -2917,7 +2917,7 @@ instance HasComputedInvokeUrl (ApiGatewayDeploymentResource s) Text where
     computedInvokeUrl =
         to (\_  -> TF.Compute "invoke_url")
 
-apiGatewayDeploymentResource :: TF.Resource (TF.AWS s) (ApiGatewayDeploymentResource s)
+apiGatewayDeploymentResource :: TF.Resource TF.AWS (ApiGatewayDeploymentResource s)
 apiGatewayDeploymentResource =
     TF.newResource "aws_api_gateway_deployment" $
         ApiGatewayDeploymentResource {
@@ -2969,7 +2969,7 @@ instance HasRestApiId (ApiGatewayDocumentationPartResource s) Text where
         lens (_rest_api_id :: ApiGatewayDocumentationPartResource s -> TF.Argument s "rest_api_id" Text)
              (\s a -> s { _rest_api_id = a } :: ApiGatewayDocumentationPartResource s)
 
-apiGatewayDocumentationPartResource :: TF.Resource (TF.AWS s) (ApiGatewayDocumentationPartResource s)
+apiGatewayDocumentationPartResource :: TF.Resource TF.AWS (ApiGatewayDocumentationPartResource s)
 apiGatewayDocumentationPartResource =
     TF.newResource "aws_api_gateway_documentation_part" $
         ApiGatewayDocumentationPartResource {
@@ -3083,7 +3083,7 @@ instance HasComputedId (ApiGatewayDomainNameResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-apiGatewayDomainNameResource :: TF.Resource (TF.AWS s) (ApiGatewayDomainNameResource s)
+apiGatewayDomainNameResource :: TF.Resource TF.AWS (ApiGatewayDomainNameResource s)
 apiGatewayDomainNameResource =
     TF.newResource "aws_api_gateway_domain_name" $
         ApiGatewayDomainNameResource {
@@ -3156,7 +3156,7 @@ instance HasStatusCode (ApiGatewayGatewayResponseResource s) Text where
         lens (_status_code :: ApiGatewayGatewayResponseResource s -> TF.Argument s "status_code" Text)
              (\s a -> s { _status_code = a } :: ApiGatewayGatewayResponseResource s)
 
-apiGatewayGatewayResponseResource :: TF.Resource (TF.AWS s) (ApiGatewayGatewayResponseResource s)
+apiGatewayGatewayResponseResource :: TF.Resource TF.AWS (ApiGatewayGatewayResponseResource s)
 apiGatewayGatewayResponseResource =
     TF.newResource "aws_api_gateway_gateway_response" $
         ApiGatewayGatewayResponseResource {
@@ -3318,7 +3318,7 @@ instance HasUri (ApiGatewayIntegrationResource s) Text where
         lens (_uri :: ApiGatewayIntegrationResource s -> TF.Argument s "uri" Text)
              (\s a -> s { _uri = a } :: ApiGatewayIntegrationResource s)
 
-apiGatewayIntegrationResource :: TF.Resource (TF.AWS s) (ApiGatewayIntegrationResource s)
+apiGatewayIntegrationResource :: TF.Resource TF.AWS (ApiGatewayIntegrationResource s)
 apiGatewayIntegrationResource =
     TF.newResource "aws_api_gateway_integration" $
         ApiGatewayIntegrationResource {
@@ -3442,7 +3442,7 @@ instance HasStatusCode (ApiGatewayIntegrationResponseResource s) Text where
         lens (_status_code :: ApiGatewayIntegrationResponseResource s -> TF.Argument s "status_code" Text)
              (\s a -> s { _status_code = a } :: ApiGatewayIntegrationResponseResource s)
 
-apiGatewayIntegrationResponseResource :: TF.Resource (TF.AWS s) (ApiGatewayIntegrationResponseResource s)
+apiGatewayIntegrationResponseResource :: TF.Resource TF.AWS (ApiGatewayIntegrationResponseResource s)
 apiGatewayIntegrationResponseResource =
     TF.newResource "aws_api_gateway_integration_response" $
         ApiGatewayIntegrationResponseResource {
@@ -3558,7 +3558,7 @@ instance HasRestApiId (ApiGatewayMethodResource s) Text where
         lens (_rest_api_id :: ApiGatewayMethodResource s -> TF.Argument s "rest_api_id" Text)
              (\s a -> s { _rest_api_id = a } :: ApiGatewayMethodResource s)
 
-apiGatewayMethodResource :: TF.Resource (TF.AWS s) (ApiGatewayMethodResource s)
+apiGatewayMethodResource :: TF.Resource TF.AWS (ApiGatewayMethodResource s)
 apiGatewayMethodResource =
     TF.newResource "aws_api_gateway_method" $
         ApiGatewayMethodResource {
@@ -3654,7 +3654,7 @@ instance HasStatusCode (ApiGatewayMethodResponseResource s) Text where
         lens (_status_code :: ApiGatewayMethodResponseResource s -> TF.Argument s "status_code" Text)
              (\s a -> s { _status_code = a } :: ApiGatewayMethodResponseResource s)
 
-apiGatewayMethodResponseResource :: TF.Resource (TF.AWS s) (ApiGatewayMethodResponseResource s)
+apiGatewayMethodResponseResource :: TF.Resource TF.AWS (ApiGatewayMethodResponseResource s)
 apiGatewayMethodResponseResource =
     TF.newResource "aws_api_gateway_method_response" $
         ApiGatewayMethodResponseResource {
@@ -3718,7 +3718,7 @@ instance HasStageName (ApiGatewayMethodSettingsResource s) Text where
         lens (_stage_name :: ApiGatewayMethodSettingsResource s -> TF.Argument s "stage_name" Text)
              (\s a -> s { _stage_name = a } :: ApiGatewayMethodSettingsResource s)
 
-apiGatewayMethodSettingsResource :: TF.Resource (TF.AWS s) (ApiGatewayMethodSettingsResource s)
+apiGatewayMethodSettingsResource :: TF.Resource TF.AWS (ApiGatewayMethodSettingsResource s)
 apiGatewayMethodSettingsResource =
     TF.newResource "aws_api_gateway_method_settings" $
         ApiGatewayMethodSettingsResource {
@@ -3795,7 +3795,7 @@ instance HasComputedId (ApiGatewayModelResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-apiGatewayModelResource :: TF.Resource (TF.AWS s) (ApiGatewayModelResource s)
+apiGatewayModelResource :: TF.Resource TF.AWS (ApiGatewayModelResource s)
 apiGatewayModelResource =
     TF.newResource "aws_api_gateway_model" $
         ApiGatewayModelResource {
@@ -3859,7 +3859,7 @@ instance HasComputedPath (ApiGatewayResourceResource s) Text where
     computedPath =
         to (\_  -> TF.Compute "path")
 
-apiGatewayResourceResource :: TF.Resource (TF.AWS s) (ApiGatewayResourceResource s)
+apiGatewayResourceResource :: TF.Resource TF.AWS (ApiGatewayResourceResource s)
 apiGatewayResourceResource =
     TF.newResource "aws_api_gateway_resource" $
         ApiGatewayResourceResource {
@@ -3937,7 +3937,7 @@ instance HasComputedRootResourceId (ApiGatewayRestApiResource s) Text where
     computedRootResourceId =
         to (\_  -> TF.Compute "root_resource_id")
 
-apiGatewayRestApiResource :: TF.Resource (TF.AWS s) (ApiGatewayRestApiResource s)
+apiGatewayRestApiResource :: TF.Resource TF.AWS (ApiGatewayRestApiResource s)
 apiGatewayRestApiResource =
     TF.newResource "aws_api_gateway_rest_api" $
         ApiGatewayRestApiResource {
@@ -4048,7 +4048,7 @@ instance HasVariables (ApiGatewayStageResource s) Text where
         lens (_variables :: ApiGatewayStageResource s -> TF.Argument s "variables" Text)
              (\s a -> s { _variables = a } :: ApiGatewayStageResource s)
 
-apiGatewayStageResource :: TF.Resource (TF.AWS s) (ApiGatewayStageResource s)
+apiGatewayStageResource :: TF.Resource TF.AWS (ApiGatewayStageResource s)
 apiGatewayStageResource =
     TF.newResource "aws_api_gateway_stage" $
         ApiGatewayStageResource {
@@ -4140,7 +4140,7 @@ instance HasComputedValue (ApiGatewayUsagePlanKeyResource s) Text where
     computedValue =
         to (\_  -> TF.Compute "value")
 
-apiGatewayUsagePlanKeyResource :: TF.Resource (TF.AWS s) (ApiGatewayUsagePlanKeyResource s)
+apiGatewayUsagePlanKeyResource :: TF.Resource TF.AWS (ApiGatewayUsagePlanKeyResource s)
 apiGatewayUsagePlanKeyResource =
     TF.newResource "aws_api_gateway_usage_plan_key" $
         ApiGatewayUsagePlanKeyResource {
@@ -4220,7 +4220,7 @@ instance HasThrottleSettings (ApiGatewayUsagePlanResource s) Text where
         lens (_throttle_settings :: ApiGatewayUsagePlanResource s -> TF.Argument s "throttle_settings" Text)
              (\s a -> s { _throttle_settings = a } :: ApiGatewayUsagePlanResource s)
 
-apiGatewayUsagePlanResource :: TF.Resource (TF.AWS s) (ApiGatewayUsagePlanResource s)
+apiGatewayUsagePlanResource :: TF.Resource TF.AWS (ApiGatewayUsagePlanResource s)
 apiGatewayUsagePlanResource =
     TF.newResource "aws_api_gateway_usage_plan" $
         ApiGatewayUsagePlanResource {
@@ -4314,7 +4314,7 @@ instance HasComputedName (AppCookieStickinessPolicyResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-appCookieStickinessPolicyResource :: TF.Resource (TF.AWS s) (AppCookieStickinessPolicyResource s)
+appCookieStickinessPolicyResource :: TF.Resource TF.AWS (AppCookieStickinessPolicyResource s)
 appCookieStickinessPolicyResource =
     TF.newResource "aws_app_cookie_stickiness_policy" $
         AppCookieStickinessPolicyResource {
@@ -4405,7 +4405,7 @@ instance HasTargetTrackingScalingPolicyConfiguration (AppautoscalingPolicyResour
         lens (_target_tracking_scaling_policy_configuration :: AppautoscalingPolicyResource s -> TF.Argument s "target_tracking_scaling_policy_configuration" Text)
              (\s a -> s { _target_tracking_scaling_policy_configuration = a } :: AppautoscalingPolicyResource s)
 
-appautoscalingPolicyResource :: TF.Resource (TF.AWS s) (AppautoscalingPolicyResource s)
+appautoscalingPolicyResource :: TF.Resource TF.AWS (AppautoscalingPolicyResource s)
 appautoscalingPolicyResource =
     TF.newResource "aws_appautoscaling_policy" $
         AppautoscalingPolicyResource {
@@ -4509,7 +4509,7 @@ instance HasStartTime (AppautoscalingScheduledActionResource s) Text where
         lens (_start_time :: AppautoscalingScheduledActionResource s -> TF.Argument s "start_time" Text)
              (\s a -> s { _start_time = a } :: AppautoscalingScheduledActionResource s)
 
-appautoscalingScheduledActionResource :: TF.Resource (TF.AWS s) (AppautoscalingScheduledActionResource s)
+appautoscalingScheduledActionResource :: TF.Resource TF.AWS (AppautoscalingScheduledActionResource s)
 appautoscalingScheduledActionResource =
     TF.newResource "aws_appautoscaling_scheduled_action" $
         AppautoscalingScheduledActionResource {
@@ -4594,7 +4594,7 @@ instance HasServiceNamespace (AppautoscalingTargetResource s) Text where
         lens (_service_namespace :: AppautoscalingTargetResource s -> TF.Argument s "service_namespace" Text)
              (\s a -> s { _service_namespace = a } :: AppautoscalingTargetResource s)
 
-appautoscalingTargetResource :: TF.Resource (TF.AWS s) (AppautoscalingTargetResource s)
+appautoscalingTargetResource :: TF.Resource TF.AWS (AppautoscalingTargetResource s)
 appautoscalingTargetResource =
     TF.newResource "aws_appautoscaling_target" $
         AppautoscalingTargetResource {
@@ -4637,7 +4637,7 @@ instance HasS3Destination (AthenaDatabaseResource s) Text where
         lens (_s3_destination :: AthenaDatabaseResource s -> TF.Argument s "s3_destination" Text)
              (\s a -> s { _s3_destination = a } :: AthenaDatabaseResource s)
 
-athenaDatabaseResource :: TF.Resource (TF.AWS s) (AthenaDatabaseResource s)
+athenaDatabaseResource :: TF.Resource TF.AWS (AthenaDatabaseResource s)
 athenaDatabaseResource =
     TF.newResource "aws_athena_database" $
         AthenaDatabaseResource {
@@ -4702,7 +4702,7 @@ instance HasComputedId (AthenaNamedQueryResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-athenaNamedQueryResource :: TF.Resource (TF.AWS s) (AthenaNamedQueryResource s)
+athenaNamedQueryResource :: TF.Resource TF.AWS (AthenaNamedQueryResource s)
 athenaNamedQueryResource =
     TF.newResource "aws_athena_named_query" $
         AthenaNamedQueryResource {
@@ -4759,7 +4759,7 @@ instance HasElb (AutoscalingAttachmentResource s) Text where
         lens (_elb :: AutoscalingAttachmentResource s -> TF.Argument s "elb" Text)
              (\s a -> s { _elb = a } :: AutoscalingAttachmentResource s)
 
-autoscalingAttachmentResource :: TF.Resource (TF.AWS s) (AutoscalingAttachmentResource s)
+autoscalingAttachmentResource :: TF.Resource TF.AWS (AutoscalingAttachmentResource s)
 autoscalingAttachmentResource =
     TF.newResource "aws_autoscaling_attachment" $
         AutoscalingAttachmentResource {
@@ -5123,7 +5123,7 @@ instance HasComputedVpcZoneIdentifier (AutoscalingGroupResource s) Text where
     computedVpcZoneIdentifier =
         to (\_  -> TF.Compute "vpc_zone_identifier")
 
-autoscalingGroupResource :: TF.Resource (TF.AWS s) (AutoscalingGroupResource s)
+autoscalingGroupResource :: TF.Resource TF.AWS (AutoscalingGroupResource s)
 autoscalingGroupResource =
     TF.newResource "aws_autoscaling_group" $
         AutoscalingGroupResource {
@@ -5256,7 +5256,7 @@ instance HasRoleArn (AutoscalingLifecycleHookResource s) Text where
         lens (_role_arn :: AutoscalingLifecycleHookResource s -> TF.Argument s "role_arn" Text)
              (\s a -> s { _role_arn = a } :: AutoscalingLifecycleHookResource s)
 
-autoscalingLifecycleHookResource :: TF.Resource (TF.AWS s) (AutoscalingLifecycleHookResource s)
+autoscalingLifecycleHookResource :: TF.Resource TF.AWS (AutoscalingLifecycleHookResource s)
 autoscalingLifecycleHookResource =
     TF.newResource "aws_autoscaling_lifecycle_hook" $
         AutoscalingLifecycleHookResource {
@@ -5315,7 +5315,7 @@ instance HasTopicArn (AutoscalingNotificationResource s) Text where
         lens (_topic_arn :: AutoscalingNotificationResource s -> TF.Argument s "topic_arn" Text)
              (\s a -> s { _topic_arn = a } :: AutoscalingNotificationResource s)
 
-autoscalingNotificationResource :: TF.Resource (TF.AWS s) (AutoscalingNotificationResource s)
+autoscalingNotificationResource :: TF.Resource TF.AWS (AutoscalingNotificationResource s)
 autoscalingNotificationResource =
     TF.newResource "aws_autoscaling_notification" $
         AutoscalingNotificationResource {
@@ -5411,7 +5411,7 @@ instance HasComputedPolicyType (AutoscalingPolicyResource s) Text where
     computedPolicyType =
         to (\_  -> TF.Compute "policy_type")
 
-autoscalingPolicyResource :: TF.Resource (TF.AWS s) (AutoscalingPolicyResource s)
+autoscalingPolicyResource :: TF.Resource TF.AWS (AutoscalingPolicyResource s)
 autoscalingPolicyResource =
     TF.newResource "aws_autoscaling_policy" $
         AutoscalingPolicyResource {
@@ -5518,7 +5518,7 @@ instance HasComputedArn (AutoscalingScheduleResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-autoscalingScheduleResource :: TF.Resource (TF.AWS s) (AutoscalingScheduleResource s)
+autoscalingScheduleResource :: TF.Resource TF.AWS (AutoscalingScheduleResource s)
 autoscalingScheduleResource =
     TF.newResource "aws_autoscaling_schedule" $
         AutoscalingScheduleResource {
@@ -5627,7 +5627,7 @@ instance HasComputedStatusReason (BatchComputeEnvironmentResource s) Text where
     computedStatusReason =
         to (\_  -> TF.Compute "status_reason")
 
-batchComputeEnvironmentResource :: TF.Resource (TF.AWS s) (BatchComputeEnvironmentResource s)
+batchComputeEnvironmentResource :: TF.Resource TF.AWS (BatchComputeEnvironmentResource s)
 batchComputeEnvironmentResource =
     TF.newResource "aws_batch_compute_environment" $
         BatchComputeEnvironmentResource {
@@ -5699,7 +5699,7 @@ instance HasType' (BatchJobDefinitionResource s) Text where
         lens (_type' :: BatchJobDefinitionResource s -> TF.Argument s "type" Text)
              (\s a -> s { _type' = a } :: BatchJobDefinitionResource s)
 
-batchJobDefinitionResource :: TF.Resource (TF.AWS s) (BatchJobDefinitionResource s)
+batchJobDefinitionResource :: TF.Resource TF.AWS (BatchJobDefinitionResource s)
 batchJobDefinitionResource =
     TF.newResource "aws_batch_job_definition" $
         BatchJobDefinitionResource {
@@ -5767,7 +5767,7 @@ instance HasComputedArn (BatchJobQueueResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-batchJobQueueResource :: TF.Resource (TF.AWS s) (BatchJobQueueResource s)
+batchJobQueueResource :: TF.Resource TF.AWS (BatchJobQueueResource s)
 batchJobQueueResource =
     TF.newResource "aws_batch_job_queue" $
         BatchJobQueueResource {
@@ -5930,7 +5930,7 @@ instance HasComputedOutputs (CloudformationStackResource s) Text where
     computedOutputs =
         to (\_  -> TF.Compute "outputs")
 
-cloudformationStackResource :: TF.Resource (TF.AWS s) (CloudformationStackResource s)
+cloudformationStackResource :: TF.Resource TF.AWS (CloudformationStackResource s)
 cloudformationStackResource =
     TF.newResource "aws_cloudformation_stack" $
         CloudformationStackResource {
@@ -6140,7 +6140,7 @@ instance HasWebAclId (CloudfrontDistributionResource s) Text where
         lens (_web_acl_id :: CloudfrontDistributionResource s -> TF.Argument s "web_acl_id" Text)
              (\s a -> s { _web_acl_id = a } :: CloudfrontDistributionResource s)
 
-cloudfrontDistributionResource :: TF.Resource (TF.AWS s) (CloudfrontDistributionResource s)
+cloudfrontDistributionResource :: TF.Resource TF.AWS (CloudfrontDistributionResource s)
 cloudfrontDistributionResource =
     TF.newResource "aws_cloudfront_distribution" $
         CloudfrontDistributionResource {
@@ -6225,7 +6225,7 @@ instance HasComputedS3CanonicalUserId (CloudfrontOriginAccessIdentityResource s)
     computedS3CanonicalUserId =
         to (\_  -> TF.Compute "s3_canonical_user_id")
 
-cloudfrontOriginAccessIdentityResource :: TF.Resource (TF.AWS s) (CloudfrontOriginAccessIdentityResource s)
+cloudfrontOriginAccessIdentityResource :: TF.Resource TF.AWS (CloudfrontOriginAccessIdentityResource s)
 cloudfrontOriginAccessIdentityResource =
     TF.newResource "aws_cloudfront_origin_access_identity" $
         CloudfrontOriginAccessIdentityResource {
@@ -6381,7 +6381,7 @@ instance HasComputedId (CloudtrailResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cloudtrailResource :: TF.Resource (TF.AWS s) (CloudtrailResource s)
+cloudtrailResource :: TF.Resource TF.AWS (CloudtrailResource s)
 cloudtrailResource =
     TF.newResource "aws_cloudtrail" $
         CloudtrailResource {
@@ -6436,7 +6436,7 @@ instance HasComputedDashboardArn (CloudwatchDashboardResource s) Text where
     computedDashboardArn =
         to (\_  -> TF.Compute "dashboard_arn")
 
-cloudwatchDashboardResource :: TF.Resource (TF.AWS s) (CloudwatchDashboardResource s)
+cloudwatchDashboardResource :: TF.Resource TF.AWS (CloudwatchDashboardResource s)
 cloudwatchDashboardResource =
     TF.newResource "aws_cloudwatch_dashboard" $
         CloudwatchDashboardResource {
@@ -6492,7 +6492,7 @@ instance HasComputedId (CloudwatchEventPermissionResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cloudwatchEventPermissionResource :: TF.Resource (TF.AWS s) (CloudwatchEventPermissionResource s)
+cloudwatchEventPermissionResource :: TF.Resource TF.AWS (CloudwatchEventPermissionResource s)
 cloudwatchEventPermissionResource =
     TF.newResource "aws_cloudwatch_event_permission" $
         CloudwatchEventPermissionResource {
@@ -6578,7 +6578,7 @@ instance HasComputedArn (CloudwatchEventRuleResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-cloudwatchEventRuleResource :: TF.Resource (TF.AWS s) (CloudwatchEventRuleResource s)
+cloudwatchEventRuleResource :: TF.Resource TF.AWS (CloudwatchEventRuleResource s)
 cloudwatchEventRuleResource =
     TF.newResource "aws_cloudwatch_event_rule" $
         CloudwatchEventRuleResource {
@@ -6691,7 +6691,7 @@ instance HasTargetId (CloudwatchEventTargetResource s) Text where
         lens (_target_id :: CloudwatchEventTargetResource s -> TF.Argument s "target_id" Text)
              (\s a -> s { _target_id = a } :: CloudwatchEventTargetResource s)
 
-cloudwatchEventTargetResource :: TF.Resource (TF.AWS s) (CloudwatchEventTargetResource s)
+cloudwatchEventTargetResource :: TF.Resource TF.AWS (CloudwatchEventTargetResource s)
 cloudwatchEventTargetResource =
     TF.newResource "aws_cloudwatch_event_target" $
         CloudwatchEventTargetResource {
@@ -6737,7 +6737,7 @@ instance HasDestinationName (CloudwatchLogDestinationPolicyResource s) Text wher
         lens (_destination_name :: CloudwatchLogDestinationPolicyResource s -> TF.Argument s "destination_name" Text)
              (\s a -> s { _destination_name = a } :: CloudwatchLogDestinationPolicyResource s)
 
-cloudwatchLogDestinationPolicyResource :: TF.Resource (TF.AWS s) (CloudwatchLogDestinationPolicyResource s)
+cloudwatchLogDestinationPolicyResource :: TF.Resource TF.AWS (CloudwatchLogDestinationPolicyResource s)
 cloudwatchLogDestinationPolicyResource =
     TF.newResource "aws_cloudwatch_log_destination_policy" $
         CloudwatchLogDestinationPolicyResource {
@@ -6792,7 +6792,7 @@ instance HasComputedArn (CloudwatchLogDestinationResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-cloudwatchLogDestinationResource :: TF.Resource (TF.AWS s) (CloudwatchLogDestinationResource s)
+cloudwatchLogDestinationResource :: TF.Resource TF.AWS (CloudwatchLogDestinationResource s)
 cloudwatchLogDestinationResource =
     TF.newResource "aws_cloudwatch_log_destination" $
         CloudwatchLogDestinationResource {
@@ -6868,7 +6868,7 @@ instance HasComputedArn (CloudwatchLogGroupResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-cloudwatchLogGroupResource :: TF.Resource (TF.AWS s) (CloudwatchLogGroupResource s)
+cloudwatchLogGroupResource :: TF.Resource TF.AWS (CloudwatchLogGroupResource s)
 cloudwatchLogGroupResource =
     TF.newResource "aws_cloudwatch_log_group" $
         CloudwatchLogGroupResource {
@@ -6936,7 +6936,7 @@ instance HasComputedId (CloudwatchLogMetricFilterResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cloudwatchLogMetricFilterResource :: TF.Resource (TF.AWS s) (CloudwatchLogMetricFilterResource s)
+cloudwatchLogMetricFilterResource :: TF.Resource TF.AWS (CloudwatchLogMetricFilterResource s)
 cloudwatchLogMetricFilterResource =
     TF.newResource "aws_cloudwatch_log_metric_filter" $
         CloudwatchLogMetricFilterResource {
@@ -6983,7 +6983,7 @@ instance HasComputedId (CloudwatchLogResourcePolicyResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cloudwatchLogResourcePolicyResource :: TF.Resource (TF.AWS s) (CloudwatchLogResourcePolicyResource s)
+cloudwatchLogResourcePolicyResource :: TF.Resource TF.AWS (CloudwatchLogResourcePolicyResource s)
 cloudwatchLogResourcePolicyResource =
     TF.newResource "aws_cloudwatch_log_resource_policy" $
         CloudwatchLogResourcePolicyResource {
@@ -7028,7 +7028,7 @@ instance HasComputedArn (CloudwatchLogStreamResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-cloudwatchLogStreamResource :: TF.Resource (TF.AWS s) (CloudwatchLogStreamResource s)
+cloudwatchLogStreamResource :: TF.Resource TF.AWS (CloudwatchLogStreamResource s)
 cloudwatchLogStreamResource =
     TF.newResource "aws_cloudwatch_log_stream" $
         CloudwatchLogStreamResource {
@@ -7103,7 +7103,7 @@ instance HasComputedArn (CloudwatchLogSubscriptionFilterResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-cloudwatchLogSubscriptionFilterResource :: TF.Resource (TF.AWS s) (CloudwatchLogSubscriptionFilterResource s)
+cloudwatchLogSubscriptionFilterResource :: TF.Resource TF.AWS (CloudwatchLogSubscriptionFilterResource s)
 cloudwatchLogSubscriptionFilterResource =
     TF.newResource "aws_cloudwatch_log_subscription_filter" $
         CloudwatchLogSubscriptionFilterResource {
@@ -7321,7 +7321,7 @@ instance HasComputedId (CloudwatchMetricAlarmResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cloudwatchMetricAlarmResource :: TF.Resource (TF.AWS s) (CloudwatchMetricAlarmResource s)
+cloudwatchMetricAlarmResource :: TF.Resource TF.AWS (CloudwatchMetricAlarmResource s)
 cloudwatchMetricAlarmResource =
     TF.newResource "aws_cloudwatch_metric_alarm" $
         CloudwatchMetricAlarmResource {
@@ -7477,7 +7477,7 @@ instance HasComputedServiceRole (CodebuildProjectResource s) Text where
     computedServiceRole =
         to (\_  -> TF.Compute "service_role")
 
-codebuildProjectResource :: TF.Resource (TF.AWS s) (CodebuildProjectResource s)
+codebuildProjectResource :: TF.Resource TF.AWS (CodebuildProjectResource s)
 codebuildProjectResource =
     TF.newResource "aws_codebuild_project" $
         CodebuildProjectResource {
@@ -7561,7 +7561,7 @@ instance HasComputedRepositoryId (CodecommitRepositoryResource s) Text where
     computedRepositoryId =
         to (\_  -> TF.Compute "repository_id")
 
-codecommitRepositoryResource :: TF.Resource (TF.AWS s) (CodecommitRepositoryResource s)
+codecommitRepositoryResource :: TF.Resource TF.AWS (CodecommitRepositoryResource s)
 codecommitRepositoryResource =
     TF.newResource "aws_codecommit_repository" $
         CodecommitRepositoryResource {
@@ -7645,7 +7645,7 @@ instance HasRepositoryName (CodecommitTriggerResource s) Text where
         lens (_repository_name :: CodecommitTriggerResource s -> TF.Argument s "repository_name" Text)
              (\s a -> s { _repository_name = a } :: CodecommitTriggerResource s)
 
-codecommitTriggerResource :: TF.Resource (TF.AWS s) (CodecommitTriggerResource s)
+codecommitTriggerResource :: TF.Resource TF.AWS (CodecommitTriggerResource s)
 codecommitTriggerResource =
     TF.newResource "aws_codecommit_trigger" $
         CodecommitTriggerResource {
@@ -7690,7 +7690,7 @@ instance HasComputedName (CodedeployAppResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-codedeployAppResource :: TF.Resource (TF.AWS s) (CodedeployAppResource s)
+codedeployAppResource :: TF.Resource TF.AWS (CodedeployAppResource s)
 codedeployAppResource =
     TF.newResource "aws_codedeploy_app" $
         CodedeployAppResource {
@@ -7740,7 +7740,7 @@ instance HasComputedId (CodedeployDeploymentConfigResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-codedeployDeploymentConfigResource :: TF.Resource (TF.AWS s) (CodedeployDeploymentConfigResource s)
+codedeployDeploymentConfigResource :: TF.Resource TF.AWS (CodedeployDeploymentConfigResource s)
 codedeployDeploymentConfigResource =
     TF.newResource "aws_codedeploy_deployment_config" $
         CodedeployDeploymentConfigResource {
@@ -7889,7 +7889,7 @@ instance HasTriggerConfiguration (CodedeployDeploymentGroupResource s) Text wher
         lens (_trigger_configuration :: CodedeployDeploymentGroupResource s -> TF.Argument s "trigger_configuration" Text)
              (\s a -> s { _trigger_configuration = a } :: CodedeployDeploymentGroupResource s)
 
-codedeployDeploymentGroupResource :: TF.Resource (TF.AWS s) (CodedeployDeploymentGroupResource s)
+codedeployDeploymentGroupResource :: TF.Resource TF.AWS (CodedeployDeploymentGroupResource s)
 codedeployDeploymentGroupResource =
     TF.newResource "aws_codedeploy_deployment_group" $
         CodedeployDeploymentGroupResource {
@@ -7973,7 +7973,7 @@ instance HasComputedId (CodepipelineResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-codepipelineResource :: TF.Resource (TF.AWS s) (CodepipelineResource s)
+codepipelineResource :: TF.Resource TF.AWS (CodepipelineResource s)
 codepipelineResource =
     TF.newResource "aws_codepipeline" $
         CodepipelineResource {
@@ -8064,7 +8064,7 @@ instance HasSupportedLoginProviders (CognitoIdentityPoolResource s) Text where
         lens (_supported_login_providers :: CognitoIdentityPoolResource s -> TF.Argument s "supported_login_providers" Text)
              (\s a -> s { _supported_login_providers = a } :: CognitoIdentityPoolResource s)
 
-cognitoIdentityPoolResource :: TF.Resource (TF.AWS s) (CognitoIdentityPoolResource s)
+cognitoIdentityPoolResource :: TF.Resource TF.AWS (CognitoIdentityPoolResource s)
 cognitoIdentityPoolResource =
     TF.newResource "aws_cognito_identity_pool" $
         CognitoIdentityPoolResource {
@@ -8118,7 +8118,7 @@ instance HasRoles (CognitoIdentityPoolRolesAttachmentResource s) Text where
         lens (_roles :: CognitoIdentityPoolRolesAttachmentResource s -> TF.Argument s "roles" Text)
              (\s a -> s { _roles = a } :: CognitoIdentityPoolRolesAttachmentResource s)
 
-cognitoIdentityPoolRolesAttachmentResource :: TF.Resource (TF.AWS s) (CognitoIdentityPoolRolesAttachmentResource s)
+cognitoIdentityPoolRolesAttachmentResource :: TF.Resource TF.AWS (CognitoIdentityPoolRolesAttachmentResource s)
 cognitoIdentityPoolRolesAttachmentResource =
     TF.newResource "aws_cognito_identity_pool_roles_attachment" $
         CognitoIdentityPoolRolesAttachmentResource {
@@ -8290,7 +8290,7 @@ instance HasComputedId (CognitoUserPoolClientResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-cognitoUserPoolClientResource :: TF.Resource (TF.AWS s) (CognitoUserPoolClientResource s)
+cognitoUserPoolClientResource :: TF.Resource TF.AWS (CognitoUserPoolClientResource s)
 cognitoUserPoolClientResource =
     TF.newResource "aws_cognito_user_pool_client" $
         CognitoUserPoolClientResource {
@@ -8365,7 +8365,7 @@ instance HasComputedVersion (CognitoUserPoolDomainResource s) Text where
     computedVersion =
         to (\_  -> TF.Compute "version")
 
-cognitoUserPoolDomainResource :: TF.Resource (TF.AWS s) (CognitoUserPoolDomainResource s)
+cognitoUserPoolDomainResource :: TF.Resource TF.AWS (CognitoUserPoolDomainResource s)
 cognitoUserPoolDomainResource =
     TF.newResource "aws_cognito_user_pool_domain" $
         CognitoUserPoolDomainResource {
@@ -8564,7 +8564,7 @@ instance HasVerificationMessageTemplate (CognitoUserPoolResource s) Text where
         lens (_verification_message_template :: CognitoUserPoolResource s -> TF.Argument s "verification_message_template" Text)
              (\s a -> s { _verification_message_template = a } :: CognitoUserPoolResource s)
 
-cognitoUserPoolResource :: TF.Resource (TF.AWS s) (CognitoUserPoolResource s)
+cognitoUserPoolResource :: TF.Resource TF.AWS (CognitoUserPoolResource s)
 cognitoUserPoolResource =
     TF.newResource "aws_cognito_user_pool" $
         CognitoUserPoolResource {
@@ -8662,7 +8662,7 @@ instance HasSource (ConfigConfigRuleResource s) Text where
         lens (_source :: ConfigConfigRuleResource s -> TF.Argument s "source" Text)
              (\s a -> s { _source = a } :: ConfigConfigRuleResource s)
 
-configConfigRuleResource :: TF.Resource (TF.AWS s) (ConfigConfigRuleResource s)
+configConfigRuleResource :: TF.Resource TF.AWS (ConfigConfigRuleResource s)
 configConfigRuleResource =
     TF.newResource "aws_config_config_rule" $
         ConfigConfigRuleResource {
@@ -8721,7 +8721,7 @@ instance HasRoleArn (ConfigConfigurationRecorderResource s) Text where
         lens (_role_arn :: ConfigConfigurationRecorderResource s -> TF.Argument s "role_arn" Text)
              (\s a -> s { _role_arn = a } :: ConfigConfigurationRecorderResource s)
 
-configConfigurationRecorderResource :: TF.Resource (TF.AWS s) (ConfigConfigurationRecorderResource s)
+configConfigurationRecorderResource :: TF.Resource TF.AWS (ConfigConfigurationRecorderResource s)
 configConfigurationRecorderResource =
     TF.newResource "aws_config_configuration_recorder" $
         ConfigConfigurationRecorderResource {
@@ -8764,7 +8764,7 @@ instance HasName (ConfigConfigurationRecorderStatusResource s) Text where
         lens (_name :: ConfigConfigurationRecorderStatusResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: ConfigConfigurationRecorderStatusResource s)
 
-configConfigurationRecorderStatusResource :: TF.Resource (TF.AWS s) (ConfigConfigurationRecorderStatusResource s)
+configConfigurationRecorderStatusResource :: TF.Resource TF.AWS (ConfigConfigurationRecorderStatusResource s)
 configConfigurationRecorderStatusResource =
     TF.newResource "aws_config_configuration_recorder_status" $
         ConfigConfigurationRecorderStatusResource {
@@ -8836,7 +8836,7 @@ instance HasSnsTopicArn (ConfigDeliveryChannelResource s) Text where
         lens (_sns_topic_arn :: ConfigDeliveryChannelResource s -> TF.Argument s "sns_topic_arn" Text)
              (\s a -> s { _sns_topic_arn = a } :: ConfigDeliveryChannelResource s)
 
-configDeliveryChannelResource :: TF.Resource (TF.AWS s) (ConfigDeliveryChannelResource s)
+configDeliveryChannelResource :: TF.Resource TF.AWS (ConfigDeliveryChannelResource s)
 configDeliveryChannelResource =
     TF.newResource "aws_config_delivery_channel" $
         ConfigDeliveryChannelResource {
@@ -8930,7 +8930,7 @@ instance HasComputedType' (CustomerGatewayResource s) Text where
     computedType' =
         to (\_  -> TF.Compute "type")
 
-customerGatewayResource :: TF.Resource (TF.AWS s) (CustomerGatewayResource s)
+customerGatewayResource :: TF.Resource TF.AWS (CustomerGatewayResource s)
 customerGatewayResource =
     TF.newResource "aws_customer_gateway" $
         CustomerGatewayResource {
@@ -9021,7 +9021,7 @@ instance HasTags (DbEventSubscriptionResource s) TF.Tags where
         lens (_tags :: DbEventSubscriptionResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: DbEventSubscriptionResource s)
 
-dbEventSubscriptionResource :: TF.Resource (TF.AWS s) (DbEventSubscriptionResource s)
+dbEventSubscriptionResource :: TF.Resource TF.AWS (DbEventSubscriptionResource s)
 dbEventSubscriptionResource =
     TF.newResource "aws_db_event_subscription" $
         DbEventSubscriptionResource {
@@ -9459,7 +9459,7 @@ instance HasVpcSecurityGroupIds (DbInstanceResource s) Text where
         lens (_vpc_security_group_ids :: DbInstanceResource s -> TF.Argument s "vpc_security_group_ids" Text)
              (\s a -> s { _vpc_security_group_ids = a } :: DbInstanceResource s)
 
-dbInstanceResource :: TF.Resource (TF.AWS s) (DbInstanceResource s)
+dbInstanceResource :: TF.Resource TF.AWS (DbInstanceResource s)
 dbInstanceResource =
     TF.newResource "aws_db_instance" $
         DbInstanceResource {
@@ -9598,7 +9598,7 @@ instance HasComputedId (DbOptionGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-dbOptionGroupResource :: TF.Resource (TF.AWS s) (DbOptionGroupResource s)
+dbOptionGroupResource :: TF.Resource TF.AWS (DbOptionGroupResource s)
 dbOptionGroupResource =
     TF.newResource "aws_db_option_group" $
         DbOptionGroupResource {
@@ -9694,7 +9694,7 @@ instance HasComputedId (DbParameterGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-dbParameterGroupResource :: TF.Resource (TF.AWS s) (DbParameterGroupResource s)
+dbParameterGroupResource :: TF.Resource TF.AWS (DbParameterGroupResource s)
 dbParameterGroupResource =
     TF.newResource "aws_db_parameter_group" $
         DbParameterGroupResource {
@@ -9772,7 +9772,7 @@ instance HasComputedId (DbSecurityGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-dbSecurityGroupResource :: TF.Resource (TF.AWS s) (DbSecurityGroupResource s)
+dbSecurityGroupResource :: TF.Resource TF.AWS (DbSecurityGroupResource s)
 dbSecurityGroupResource =
     TF.newResource "aws_db_security_group" $
         DbSecurityGroupResource {
@@ -9903,7 +9903,7 @@ instance HasComputedVpcId (DbSnapshotResource s) Text where
     computedVpcId =
         to (\_  -> TF.Compute "vpc_id")
 
-dbSnapshotResource :: TF.Resource (TF.AWS s) (DbSnapshotResource s)
+dbSnapshotResource :: TF.Resource TF.AWS (DbSnapshotResource s)
 dbSnapshotResource =
     TF.newResource "aws_db_snapshot" $
         DbSnapshotResource {
@@ -9984,7 +9984,7 @@ instance HasComputedId (DbSubnetGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-dbSubnetGroupResource :: TF.Resource (TF.AWS s) (DbSubnetGroupResource s)
+dbSubnetGroupResource :: TF.Resource TF.AWS (DbSubnetGroupResource s)
 dbSubnetGroupResource =
     TF.newResource "aws_db_subnet_group" $
         DbSubnetGroupResource {
@@ -10073,7 +10073,7 @@ instance HasTags (DefaultNetworkAclResource s) TF.Tags where
         lens (_tags :: DefaultNetworkAclResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: DefaultNetworkAclResource s)
 
-defaultNetworkAclResource :: TF.Resource (TF.AWS s) (DefaultNetworkAclResource s)
+defaultNetworkAclResource :: TF.Resource TF.AWS (DefaultNetworkAclResource s)
 defaultNetworkAclResource =
     TF.newResource "aws_default_network_acl" $
         DefaultNetworkAclResource {
@@ -10164,7 +10164,7 @@ instance HasComputedId (DefaultRouteTableResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-defaultRouteTableResource :: TF.Resource (TF.AWS s) (DefaultRouteTableResource s)
+defaultRouteTableResource :: TF.Resource TF.AWS (DefaultRouteTableResource s)
 defaultRouteTableResource =
     TF.newResource "aws_default_route_table" $
         DefaultRouteTableResource {
@@ -10245,7 +10245,7 @@ instance HasVpcId (DefaultSecurityGroupResource s) Text where
         lens (_vpc_id :: DefaultSecurityGroupResource s -> TF.Argument s "vpc_id" Text)
              (\s a -> s { _vpc_id = a } :: DefaultSecurityGroupResource s)
 
-defaultSecurityGroupResource :: TF.Resource (TF.AWS s) (DefaultSecurityGroupResource s)
+defaultSecurityGroupResource :: TF.Resource TF.AWS (DefaultSecurityGroupResource s)
 defaultSecurityGroupResource =
     TF.newResource "aws_default_security_group" $
         DefaultSecurityGroupResource {
@@ -10280,7 +10280,7 @@ instance HasTags (DefaultSubnetResource s) TF.Tags where
         lens (_tags :: DefaultSubnetResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: DefaultSubnetResource s)
 
-defaultSubnetResource :: TF.Resource (TF.AWS s) (DefaultSubnetResource s)
+defaultSubnetResource :: TF.Resource TF.AWS (DefaultSubnetResource s)
 defaultSubnetResource =
     TF.newResource "aws_default_subnet" $
         DefaultSubnetResource {
@@ -10335,7 +10335,7 @@ instance HasTags (DefaultVpcDhcpOptionsResource s) TF.Tags where
         lens (_tags :: DefaultVpcDhcpOptionsResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: DefaultVpcDhcpOptionsResource s)
 
-defaultVpcDhcpOptionsResource :: TF.Resource (TF.AWS s) (DefaultVpcDhcpOptionsResource s)
+defaultVpcDhcpOptionsResource :: TF.Resource TF.AWS (DefaultVpcDhcpOptionsResource s)
 defaultVpcDhcpOptionsResource =
     TF.newResource "aws_default_vpc_dhcp_options" $
         DefaultVpcDhcpOptionsResource {
@@ -10402,7 +10402,7 @@ instance HasTags (DefaultVpcResource s) TF.Tags where
         lens (_tags :: DefaultVpcResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: DefaultVpcResource s)
 
-defaultVpcResource :: TF.Resource (TF.AWS s) (DefaultVpcResource s)
+defaultVpcResource :: TF.Resource TF.AWS (DefaultVpcResource s)
 defaultVpcResource =
     TF.newResource "aws_default_vpc" $
         DefaultVpcResource {
@@ -10444,7 +10444,7 @@ instance HasComputedArn (DevicefarmProjectResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-devicefarmProjectResource :: TF.Resource (TF.AWS s) (DevicefarmProjectResource s)
+devicefarmProjectResource :: TF.Resource TF.AWS (DevicefarmProjectResource s)
 devicefarmProjectResource =
     TF.newResource "aws_devicefarm_project" $
         DevicefarmProjectResource {
@@ -10598,7 +10598,7 @@ instance HasComputedSecurityGroupId (DirectoryServiceDirectoryResource s) Text w
     computedSecurityGroupId =
         to (\_  -> TF.Compute "security_group_id")
 
-directoryServiceDirectoryResource :: TF.Resource (TF.AWS s) (DirectoryServiceDirectoryResource s)
+directoryServiceDirectoryResource :: TF.Resource TF.AWS (DirectoryServiceDirectoryResource s)
 directoryServiceDirectoryResource =
     TF.newResource "aws_directory_service_directory" $
         DirectoryServiceDirectoryResource {
@@ -10665,7 +10665,7 @@ instance HasComputedCertificateArn (DmsCertificateResource s) Text where
     computedCertificateArn =
         to (\_  -> TF.Compute "certificate_arn")
 
-dmsCertificateResource :: TF.Resource (TF.AWS s) (DmsCertificateResource s)
+dmsCertificateResource :: TF.Resource TF.AWS (DmsCertificateResource s)
 dmsCertificateResource =
     TF.newResource "aws_dms_certificate" $
         DmsCertificateResource {
@@ -10834,7 +10834,7 @@ instance HasComputedEndpointArn (DmsEndpointResource s) Text where
     computedEndpointArn =
         to (\_  -> TF.Compute "endpoint_arn")
 
-dmsEndpointResource :: TF.Resource (TF.AWS s) (DmsEndpointResource s)
+dmsEndpointResource :: TF.Resource TF.AWS (DmsEndpointResource s)
 dmsEndpointResource =
     TF.newResource "aws_dms_endpoint" $
         DmsEndpointResource {
@@ -11024,7 +11024,7 @@ instance HasComputedReplicationInstancePublicIps (DmsReplicationInstanceResource
     computedReplicationInstancePublicIps =
         to (\_  -> TF.Compute "replication_instance_public_ips")
 
-dmsReplicationInstanceResource :: TF.Resource (TF.AWS s) (DmsReplicationInstanceResource s)
+dmsReplicationInstanceResource :: TF.Resource TF.AWS (DmsReplicationInstanceResource s)
 dmsReplicationInstanceResource =
     TF.newResource "aws_dms_replication_instance" $
         DmsReplicationInstanceResource {
@@ -11093,7 +11093,7 @@ instance HasComputedVpcId (DmsReplicationSubnetGroupResource s) Text where
     computedVpcId =
         to (\_  -> TF.Compute "vpc_id")
 
-dmsReplicationSubnetGroupResource :: TF.Resource (TF.AWS s) (DmsReplicationSubnetGroupResource s)
+dmsReplicationSubnetGroupResource :: TF.Resource TF.AWS (DmsReplicationSubnetGroupResource s)
 dmsReplicationSubnetGroupResource =
     TF.newResource "aws_dms_replication_subnet_group" $
         DmsReplicationSubnetGroupResource {
@@ -11210,7 +11210,7 @@ instance HasComputedReplicationTaskArn (DmsReplicationTaskResource s) Text where
     computedReplicationTaskArn =
         to (\_  -> TF.Compute "replication_task_arn")
 
-dmsReplicationTaskResource :: TF.Resource (TF.AWS s) (DmsReplicationTaskResource s)
+dmsReplicationTaskResource :: TF.Resource TF.AWS (DmsReplicationTaskResource s)
 dmsReplicationTaskResource =
     TF.newResource "aws_dms_replication_task" $
         DmsReplicationTaskResource {
@@ -11256,7 +11256,7 @@ instance HasLagId (DxConnectionAssociationResource s) Text where
         lens (_lag_id :: DxConnectionAssociationResource s -> TF.Argument s "lag_id" Text)
              (\s a -> s { _lag_id = a } :: DxConnectionAssociationResource s)
 
-dxConnectionAssociationResource :: TF.Resource (TF.AWS s) (DxConnectionAssociationResource s)
+dxConnectionAssociationResource :: TF.Resource TF.AWS (DxConnectionAssociationResource s)
 dxConnectionAssociationResource =
     TF.newResource "aws_dx_connection_association" $
         DxConnectionAssociationResource {
@@ -11311,7 +11311,7 @@ instance HasComputedId (DxConnectionResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-dxConnectionResource :: TF.Resource (TF.AWS s) (DxConnectionResource s)
+dxConnectionResource :: TF.Resource TF.AWS (DxConnectionResource s)
 dxConnectionResource =
     TF.newResource "aws_dx_connection" $
         DxConnectionResource {
@@ -11387,7 +11387,7 @@ instance HasComputedId (DxLagResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-dxLagResource :: TF.Resource (TF.AWS s) (DxLagResource s)
+dxLagResource :: TF.Resource TF.AWS (DxLagResource s)
 dxLagResource =
     TF.newResource "aws_dx_lag" $
         DxLagResource {
@@ -11532,7 +11532,7 @@ instance HasWriteCapacity (DynamodbTableResource s) TF.Natural where
         lens (_write_capacity :: DynamodbTableResource s -> TF.Argument s "write_capacity" TF.Natural)
              (\s a -> s { _write_capacity = a } :: DynamodbTableResource s)
 
-dynamodbTableResource :: TF.Resource (TF.AWS s) (DynamodbTableResource s)
+dynamodbTableResource :: TF.Resource TF.AWS (DynamodbTableResource s)
 dynamodbTableResource =
     TF.newResource "aws_dynamodb_table" $
         DynamodbTableResource {
@@ -11639,7 +11639,7 @@ instance HasComputedVolumeSize (EbsSnapshotResource s) Text where
     computedVolumeSize =
         to (\_  -> TF.Compute "volume_size")
 
-ebsSnapshotResource :: TF.Resource (TF.AWS s) (EbsSnapshotResource s)
+ebsSnapshotResource :: TF.Resource TF.AWS (EbsSnapshotResource s)
 ebsSnapshotResource =
     TF.newResource "aws_ebs_snapshot" $
         EbsSnapshotResource {
@@ -11751,7 +11751,7 @@ instance HasComputedId (EbsVolumeResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ebsVolumeResource :: TF.Resource (TF.AWS s) (EbsVolumeResource s)
+ebsVolumeResource :: TF.Resource TF.AWS (EbsVolumeResource s)
 ebsVolumeResource =
     TF.newResource "aws_ebs_volume" $
         EbsVolumeResource {
@@ -11808,7 +11808,7 @@ instance HasComputedRepository (EcrLifecyclePolicyResource s) Text where
     computedRepository =
         to (\_  -> TF.Compute "repository")
 
-ecrLifecyclePolicyResource :: TF.Resource (TF.AWS s) (EcrLifecyclePolicyResource s)
+ecrLifecyclePolicyResource :: TF.Resource TF.AWS (EcrLifecyclePolicyResource s)
 ecrLifecyclePolicyResource =
     TF.newResource "aws_ecr_lifecycle_policy" $
         EcrLifecyclePolicyResource {
@@ -11862,7 +11862,7 @@ instance HasComputedRepository (EcrRepositoryPolicyResource s) Text where
     computedRepository =
         to (\_  -> TF.Compute "repository")
 
-ecrRepositoryPolicyResource :: TF.Resource (TF.AWS s) (EcrRepositoryPolicyResource s)
+ecrRepositoryPolicyResource :: TF.Resource TF.AWS (EcrRepositoryPolicyResource s)
 ecrRepositoryPolicyResource =
     TF.newResource "aws_ecr_repository_policy" $
         EcrRepositoryPolicyResource {
@@ -11918,7 +11918,7 @@ instance HasComputedRepositoryUrl (EcrRepositoryResource s) Text where
     computedRepositoryUrl =
         to (\_  -> TF.Compute "repository_url")
 
-ecrRepositoryResource :: TF.Resource (TF.AWS s) (EcrRepositoryResource s)
+ecrRepositoryResource :: TF.Resource TF.AWS (EcrRepositoryResource s)
 ecrRepositoryResource =
     TF.newResource "aws_ecr_repository" $
         EcrRepositoryResource {
@@ -11958,7 +11958,7 @@ instance HasComputedId (EcsClusterResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ecsClusterResource :: TF.Resource (TF.AWS s) (EcsClusterResource s)
+ecsClusterResource :: TF.Resource TF.AWS (EcsClusterResource s)
 ecsClusterResource =
     TF.newResource "aws_ecs_cluster" $
         EcsClusterResource {
@@ -12113,7 +12113,7 @@ instance HasTaskDefinition (EcsServiceResource s) Text where
         lens (_task_definition :: EcsServiceResource s -> TF.Argument s "task_definition" Text)
              (\s a -> s { _task_definition = a } :: EcsServiceResource s)
 
-ecsServiceResource :: TF.Resource (TF.AWS s) (EcsServiceResource s)
+ecsServiceResource :: TF.Resource TF.AWS (EcsServiceResource s)
 ecsServiceResource =
     TF.newResource "aws_ecs_service" $
         EcsServiceResource {
@@ -12163,7 +12163,7 @@ instance HasFamily' (EcsTaskDefinitionResource s) Text where
         lens (_family' :: EcsTaskDefinitionResource s -> TF.Argument s "family" Text)
              (\s a -> s { _family' = a } :: EcsTaskDefinitionResource s)
 
-ecsTaskDefinitionResource :: TF.Resource (TF.AWS s) (EcsTaskDefinitionResource s)
+ecsTaskDefinitionResource :: TF.Resource TF.AWS (EcsTaskDefinitionResource s)
 ecsTaskDefinitionResource =
     TF.newResource "aws_ecs_task_definition" $
         EcsTaskDefinitionResource {
@@ -12260,7 +12260,7 @@ instance HasComputedKmsKeyId (EfsFileSystemResource s) Text where
     computedKmsKeyId =
         to (\_  -> TF.Compute "kms_key_id")
 
-efsFileSystemResource :: TF.Resource (TF.AWS s) (EfsFileSystemResource s)
+efsFileSystemResource :: TF.Resource TF.AWS (EfsFileSystemResource s)
 efsFileSystemResource =
     TF.newResource "aws_efs_file_system" $
         EfsFileSystemResource {
@@ -12341,7 +12341,7 @@ instance HasComputedNetworkInterfaceId (EfsMountTargetResource s) Text where
     computedNetworkInterfaceId =
         to (\_  -> TF.Compute "network_interface_id")
 
-efsMountTargetResource :: TF.Resource (TF.AWS s) (EfsMountTargetResource s)
+efsMountTargetResource :: TF.Resource TF.AWS (EfsMountTargetResource s)
 efsMountTargetResource =
     TF.newResource "aws_efs_mount_target" $
         EfsMountTargetResource {
@@ -12381,7 +12381,7 @@ instance HasComputedId (EgressOnlyInternetGatewayResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-egressOnlyInternetGatewayResource :: TF.Resource (TF.AWS s) (EgressOnlyInternetGatewayResource s)
+egressOnlyInternetGatewayResource :: TF.Resource TF.AWS (EgressOnlyInternetGatewayResource s)
 egressOnlyInternetGatewayResource =
     TF.newResource "aws_egress_only_internet_gateway" $
         EgressOnlyInternetGatewayResource {
@@ -12499,7 +12499,7 @@ instance HasComputedPublicIp (EipAssociationResource s) Text where
     computedPublicIp =
         to (\_  -> TF.Compute "public_ip")
 
-eipAssociationResource :: TF.Resource (TF.AWS s) (EipAssociationResource s)
+eipAssociationResource :: TF.Resource TF.AWS (EipAssociationResource s)
 eipAssociationResource =
     TF.newResource "aws_eip_association" $
         EipAssociationResource {
@@ -12609,7 +12609,7 @@ instance HasComputedPublicIp (EipResource s) Text where
     computedPublicIp =
         to (\_  -> TF.Compute "public_ip")
 
-eipResource :: TF.Resource (TF.AWS s) (EipResource s)
+eipResource :: TF.Resource TF.AWS (EipResource s)
 eipResource =
     TF.newResource "aws_eip" $
         EipResource {
@@ -12655,7 +12655,7 @@ instance HasName (ElasticBeanstalkApplicationResource s) Text where
         lens (_name :: ElasticBeanstalkApplicationResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: ElasticBeanstalkApplicationResource s)
 
-elasticBeanstalkApplicationResource :: TF.Resource (TF.AWS s) (ElasticBeanstalkApplicationResource s)
+elasticBeanstalkApplicationResource :: TF.Resource TF.AWS (ElasticBeanstalkApplicationResource s)
 elasticBeanstalkApplicationResource =
     TF.newResource "aws_elastic_beanstalk_application" $
         ElasticBeanstalkApplicationResource {
@@ -12748,7 +12748,7 @@ instance HasComputedName (ElasticBeanstalkApplicationVersionResource s) Text whe
     computedName =
         to (\_  -> TF.Compute "name")
 
-elasticBeanstalkApplicationVersionResource :: TF.Resource (TF.AWS s) (ElasticBeanstalkApplicationVersionResource s)
+elasticBeanstalkApplicationVersionResource :: TF.Resource TF.AWS (ElasticBeanstalkApplicationVersionResource s)
 elasticBeanstalkApplicationVersionResource =
     TF.newResource "aws_elastic_beanstalk_application_version" $
         ElasticBeanstalkApplicationVersionResource {
@@ -12833,7 +12833,7 @@ instance HasSolutionStackName (ElasticBeanstalkConfigurationTemplateResource s) 
         lens (_solution_stack_name :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Argument s "solution_stack_name" Text)
              (\s a -> s { _solution_stack_name = a } :: ElasticBeanstalkConfigurationTemplateResource s)
 
-elasticBeanstalkConfigurationTemplateResource :: TF.Resource (TF.AWS s) (ElasticBeanstalkConfigurationTemplateResource s)
+elasticBeanstalkConfigurationTemplateResource :: TF.Resource TF.AWS (ElasticBeanstalkConfigurationTemplateResource s)
 elasticBeanstalkConfigurationTemplateResource =
     TF.newResource "aws_elastic_beanstalk_configuration_template" $
         ElasticBeanstalkConfigurationTemplateResource {
@@ -12979,7 +12979,7 @@ instance HasWaitForReadyTimeout (ElasticBeanstalkEnvironmentResource s) Text whe
         lens (_wait_for_ready_timeout :: ElasticBeanstalkEnvironmentResource s -> TF.Argument s "wait_for_ready_timeout" Text)
              (\s a -> s { _wait_for_ready_timeout = a } :: ElasticBeanstalkEnvironmentResource s)
 
-elasticBeanstalkEnvironmentResource :: TF.Resource (TF.AWS s) (ElasticBeanstalkEnvironmentResource s)
+elasticBeanstalkEnvironmentResource :: TF.Resource TF.AWS (ElasticBeanstalkEnvironmentResource s)
 elasticBeanstalkEnvironmentResource =
     TF.newResource "aws_elastic_beanstalk_environment" $
         ElasticBeanstalkEnvironmentResource {
@@ -13245,7 +13245,7 @@ instance HasComputedConfigurationEndpoint (ElasticacheClusterResource s) Text wh
     computedConfigurationEndpoint =
         to (\_  -> TF.Compute "configuration_endpoint")
 
-elasticacheClusterResource :: TF.Resource (TF.AWS s) (ElasticacheClusterResource s)
+elasticacheClusterResource :: TF.Resource TF.AWS (ElasticacheClusterResource s)
 elasticacheClusterResource =
     TF.newResource "aws_elasticache_cluster" $
         ElasticacheClusterResource {
@@ -13329,7 +13329,7 @@ instance HasComputedId (ElasticacheParameterGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-elasticacheParameterGroupResource :: TF.Resource (TF.AWS s) (ElasticacheParameterGroupResource s)
+elasticacheParameterGroupResource :: TF.Resource TF.AWS (ElasticacheParameterGroupResource s)
 elasticacheParameterGroupResource =
     TF.newResource "aws_elasticache_parameter_group" $
         ElasticacheParameterGroupResource {
@@ -13628,7 +13628,7 @@ instance HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupResource 
     computedPrimaryEndpointAddress =
         to (\_  -> TF.Compute "primary_endpoint_address")
 
-elasticacheReplicationGroupResource :: TF.Resource (TF.AWS s) (ElasticacheReplicationGroupResource s)
+elasticacheReplicationGroupResource :: TF.Resource TF.AWS (ElasticacheReplicationGroupResource s)
 elasticacheReplicationGroupResource =
     TF.newResource "aws_elasticache_replication_group" $
         ElasticacheReplicationGroupResource {
@@ -13704,7 +13704,7 @@ instance HasSecurityGroupNames (ElasticacheSecurityGroupResource s) Text where
         lens (_security_group_names :: ElasticacheSecurityGroupResource s -> TF.Argument s "security_group_names" Text)
              (\s a -> s { _security_group_names = a } :: ElasticacheSecurityGroupResource s)
 
-elasticacheSecurityGroupResource :: TF.Resource (TF.AWS s) (ElasticacheSecurityGroupResource s)
+elasticacheSecurityGroupResource :: TF.Resource TF.AWS (ElasticacheSecurityGroupResource s)
 elasticacheSecurityGroupResource =
     TF.newResource "aws_elasticache_security_group" $
         ElasticacheSecurityGroupResource {
@@ -13756,7 +13756,7 @@ instance HasSubnetIds (ElasticacheSubnetGroupResource s) Text where
         lens (_subnet_ids :: ElasticacheSubnetGroupResource s -> TF.Argument s "subnet_ids" Text)
              (\s a -> s { _subnet_ids = a } :: ElasticacheSubnetGroupResource s)
 
-elasticacheSubnetGroupResource :: TF.Resource (TF.AWS s) (ElasticacheSubnetGroupResource s)
+elasticacheSubnetGroupResource :: TF.Resource TF.AWS (ElasticacheSubnetGroupResource s)
 elasticacheSubnetGroupResource =
     TF.newResource "aws_elasticache_subnet_group" $
         ElasticacheSubnetGroupResource {
@@ -13797,7 +13797,7 @@ instance HasDomainName (ElasticsearchDomainPolicyResource s) Text where
         lens (_domain_name :: ElasticsearchDomainPolicyResource s -> TF.Argument s "domain_name" Text)
              (\s a -> s { _domain_name = a } :: ElasticsearchDomainPolicyResource s)
 
-elasticsearchDomainPolicyResource :: TF.Resource (TF.AWS s) (ElasticsearchDomainPolicyResource s)
+elasticsearchDomainPolicyResource :: TF.Resource TF.AWS (ElasticsearchDomainPolicyResource s)
 elasticsearchDomainPolicyResource =
     TF.newResource "aws_elasticsearch_domain_policy" $
         ElasticsearchDomainPolicyResource {
@@ -13962,7 +13962,7 @@ instance HasComputedVpcOptions0VpcId (ElasticsearchDomainResource s) Text where
     computedVpcOptions0VpcId =
         to (\_  -> TF.Compute "vpc_options.0.vpc_id")
 
-elasticsearchDomainResource :: TF.Resource (TF.AWS s) (ElasticsearchDomainResource s)
+elasticsearchDomainResource :: TF.Resource TF.AWS (ElasticsearchDomainResource s)
 elasticsearchDomainResource =
     TF.newResource "aws_elasticsearch_domain" $
         ElasticsearchDomainResource {
@@ -14090,7 +14090,7 @@ instance HasThumbnailConfigPermissions (ElastictranscoderPipelineResource s) Tex
         lens (_thumbnail_config_permissions :: ElastictranscoderPipelineResource s -> TF.Argument s "thumbnail_config_permissions" Text)
              (\s a -> s { _thumbnail_config_permissions = a } :: ElastictranscoderPipelineResource s)
 
-elastictranscoderPipelineResource :: TF.Resource (TF.AWS s) (ElastictranscoderPipelineResource s)
+elastictranscoderPipelineResource :: TF.Resource TF.AWS (ElastictranscoderPipelineResource s)
 elastictranscoderPipelineResource =
     TF.newResource "aws_elastictranscoder_pipeline" $
         ElastictranscoderPipelineResource {
@@ -14207,7 +14207,7 @@ instance HasVideoWatermarks (ElastictranscoderPresetResource s) Text where
         lens (_video_watermarks :: ElastictranscoderPresetResource s -> TF.Argument s "video_watermarks" Text)
              (\s a -> s { _video_watermarks = a } :: ElastictranscoderPresetResource s)
 
-elastictranscoderPresetResource :: TF.Resource (TF.AWS s) (ElastictranscoderPresetResource s)
+elastictranscoderPresetResource :: TF.Resource TF.AWS (ElastictranscoderPresetResource s)
 elastictranscoderPresetResource =
     TF.newResource "aws_elastictranscoder_preset" $
         ElastictranscoderPresetResource {
@@ -14259,7 +14259,7 @@ instance HasInstance' (ElbAttachmentResource s) Text where
         lens (_instance' :: ElbAttachmentResource s -> TF.Argument s "instance" Text)
              (\s a -> s { _instance' = a } :: ElbAttachmentResource s)
 
-elbAttachmentResource :: TF.Resource (TF.AWS s) (ElbAttachmentResource s)
+elbAttachmentResource :: TF.Resource TF.AWS (ElbAttachmentResource s)
 elbAttachmentResource =
     TF.newResource "aws_elb_attachment" $
         ElbAttachmentResource {
@@ -14326,7 +14326,7 @@ instance HasComputedLoadBalancerName (ElbLoadBalancerBackendServerPolicyResource
     computedLoadBalancerName =
         to (\_  -> TF.Compute "load_balancer_name")
 
-elbLoadBalancerBackendServerPolicyResource :: TF.Resource (TF.AWS s) (ElbLoadBalancerBackendServerPolicyResource s)
+elbLoadBalancerBackendServerPolicyResource :: TF.Resource TF.AWS (ElbLoadBalancerBackendServerPolicyResource s)
 elbLoadBalancerBackendServerPolicyResource =
     TF.newResource "aws_elb_load_balancer_backend_server_policy" $
         ElbLoadBalancerBackendServerPolicyResource {
@@ -14394,7 +14394,7 @@ instance HasComputedLoadBalancerPort (ElbLoadBalancerListenerPolicyResource s) T
     computedLoadBalancerPort =
         to (\_  -> TF.Compute "load_balancer_port")
 
-elbLoadBalancerListenerPolicyResource :: TF.Resource (TF.AWS s) (ElbLoadBalancerListenerPolicyResource s)
+elbLoadBalancerListenerPolicyResource :: TF.Resource TF.AWS (ElbLoadBalancerListenerPolicyResource s)
 elbLoadBalancerListenerPolicyResource =
     TF.newResource "aws_elb_load_balancer_listener_policy" $
         ElbLoadBalancerListenerPolicyResource {
@@ -14479,7 +14479,7 @@ instance HasComputedPolicyTypeName (ElbLoadBalancerPolicyResource s) Text where
     computedPolicyTypeName =
         to (\_  -> TF.Compute "policy_type_name")
 
-elbLoadBalancerPolicyResource :: TF.Resource (TF.AWS s) (ElbLoadBalancerPolicyResource s)
+elbLoadBalancerPolicyResource :: TF.Resource TF.AWS (ElbLoadBalancerPolicyResource s)
 elbLoadBalancerPolicyResource =
     TF.newResource "aws_elb_load_balancer_policy" $
         ElbLoadBalancerPolicyResource {
@@ -14657,7 +14657,7 @@ instance HasTags (ElbResource s) TF.Tags where
         lens (_tags :: ElbResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: ElbResource s)
 
-elbResource :: TF.Resource (TF.AWS s) (ElbResource s)
+elbResource :: TF.Resource TF.AWS (ElbResource s)
 elbResource =
     TF.newResource "aws_elb" $
         ElbResource {
@@ -14882,7 +14882,7 @@ instance HasVisibleToAllUsers (EmrClusterResource s) Text where
         lens (_visible_to_all_users :: EmrClusterResource s -> TF.Argument s "visible_to_all_users" Text)
              (\s a -> s { _visible_to_all_users = a } :: EmrClusterResource s)
 
-emrClusterResource :: TF.Resource (TF.AWS s) (EmrClusterResource s)
+emrClusterResource :: TF.Resource TF.AWS (EmrClusterResource s)
 emrClusterResource =
     TF.newResource "aws_emr_cluster" $
         EmrClusterResource {
@@ -15001,7 +15001,7 @@ instance HasComputedStatus (EmrInstanceGroupResource s) Text where
     computedStatus =
         to (\_  -> TF.Compute "status")
 
-emrInstanceGroupResource :: TF.Resource (TF.AWS s) (EmrInstanceGroupResource s)
+emrInstanceGroupResource :: TF.Resource TF.AWS (EmrInstanceGroupResource s)
 emrInstanceGroupResource =
     TF.newResource "aws_emr_instance_group" $
         EmrInstanceGroupResource {
@@ -15078,7 +15078,7 @@ instance HasComputedName (EmrSecurityConfigurationResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-emrSecurityConfigurationResource :: TF.Resource (TF.AWS s) (EmrSecurityConfigurationResource s)
+emrSecurityConfigurationResource :: TF.Resource TF.AWS (EmrSecurityConfigurationResource s)
 emrSecurityConfigurationResource =
     TF.newResource "aws_emr_security_configuration" $
         EmrSecurityConfigurationResource {
@@ -15165,7 +15165,7 @@ instance HasComputedId (FlowLogResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-flowLogResource :: TF.Resource (TF.AWS s) (FlowLogResource s)
+flowLogResource :: TF.Resource TF.AWS (FlowLogResource s)
 flowLogResource =
     TF.newResource "aws_flow_log" $
         FlowLogResource {
@@ -15243,7 +15243,7 @@ instance HasComputedLocation (GlacierVaultResource s) Text where
     computedLocation =
         to (\_  -> TF.Compute "location")
 
-glacierVaultResource :: TF.Resource (TF.AWS s) (GlacierVaultResource s)
+glacierVaultResource :: TF.Resource TF.AWS (GlacierVaultResource s)
 glacierVaultResource =
     TF.newResource "aws_glacier_vault" $
         GlacierVaultResource {
@@ -15316,7 +15316,7 @@ instance HasParameters (GlueCatalogDatabaseResource s) Text where
         lens (_parameters :: GlueCatalogDatabaseResource s -> TF.Argument s "parameters" Text)
              (\s a -> s { _parameters = a } :: GlueCatalogDatabaseResource s)
 
-glueCatalogDatabaseResource :: TF.Resource (TF.AWS s) (GlueCatalogDatabaseResource s)
+glueCatalogDatabaseResource :: TF.Resource TF.AWS (GlueCatalogDatabaseResource s)
 glueCatalogDatabaseResource =
     TF.newResource "aws_glue_catalog_database" $
         GlueCatalogDatabaseResource {
@@ -15366,7 +15366,7 @@ instance HasComputedId (GuarddutyDetectorResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-guarddutyDetectorResource :: TF.Resource (TF.AWS s) (GuarddutyDetectorResource s)
+guarddutyDetectorResource :: TF.Resource TF.AWS (GuarddutyDetectorResource s)
 guarddutyDetectorResource =
     TF.newResource "aws_guardduty_detector" $
         GuarddutyDetectorResource {
@@ -15429,7 +15429,7 @@ instance HasComputedId (GuarddutyMemberResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-guarddutyMemberResource :: TF.Resource (TF.AWS s) (GuarddutyMemberResource s)
+guarddutyMemberResource :: TF.Resource TF.AWS (GuarddutyMemberResource s)
 guarddutyMemberResource =
     TF.newResource "aws_guardduty_member" $
         GuarddutyMemberResource {
@@ -15512,7 +15512,7 @@ instance HasComputedUser (IamAccessKeyResource s) Text where
     computedUser =
         to (\_  -> TF.Compute "user")
 
-iamAccessKeyResource :: TF.Resource (TF.AWS s) (IamAccessKeyResource s)
+iamAccessKeyResource :: TF.Resource TF.AWS (IamAccessKeyResource s)
 iamAccessKeyResource =
     TF.newResource "aws_iam_access_key" $
         IamAccessKeyResource {
@@ -15542,7 +15542,7 @@ instance HasAccountAlias (IamAccountAliasResource s) Text where
         lens (_account_alias :: IamAccountAliasResource s -> TF.Argument s "account_alias" Text)
              (\s a -> s { _account_alias = a } :: IamAccountAliasResource s)
 
-iamAccountAliasResource :: TF.Resource (TF.AWS s) (IamAccountAliasResource s)
+iamAccountAliasResource :: TF.Resource TF.AWS (IamAccountAliasResource s)
 iamAccountAliasResource =
     TF.newResource "aws_iam_account_alias" $
         IamAccountAliasResource {
@@ -15660,7 +15660,7 @@ instance HasComputedExpirePasswords (IamAccountPasswordPolicyResource s) Text wh
     computedExpirePasswords =
         to (\_  -> TF.Compute "expire_passwords")
 
-iamAccountPasswordPolicyResource :: TF.Resource (TF.AWS s) (IamAccountPasswordPolicyResource s)
+iamAccountPasswordPolicyResource :: TF.Resource TF.AWS (IamAccountPasswordPolicyResource s)
 iamAccountPasswordPolicyResource =
     TF.newResource "aws_iam_account_password_policy" $
         IamAccountPasswordPolicyResource {
@@ -15737,7 +15737,7 @@ instance HasComputedUsers (IamGroupMembershipResource s) Text where
     computedUsers =
         to (\_  -> TF.Compute "users")
 
-iamGroupMembershipResource :: TF.Resource (TF.AWS s) (IamGroupMembershipResource s)
+iamGroupMembershipResource :: TF.Resource TF.AWS (IamGroupMembershipResource s)
 iamGroupMembershipResource =
     TF.newResource "aws_iam_group_membership" $
         IamGroupMembershipResource {
@@ -15777,7 +15777,7 @@ instance HasPolicyArn (IamGroupPolicyAttachmentResource s) Text where
         lens (_policy_arn :: IamGroupPolicyAttachmentResource s -> TF.Argument s "policy_arn" Text)
              (\s a -> s { _policy_arn = a } :: IamGroupPolicyAttachmentResource s)
 
-iamGroupPolicyAttachmentResource :: TF.Resource (TF.AWS s) (IamGroupPolicyAttachmentResource s)
+iamGroupPolicyAttachmentResource :: TF.Resource TF.AWS (IamGroupPolicyAttachmentResource s)
 iamGroupPolicyAttachmentResource =
     TF.newResource "aws_iam_group_policy_attachment" $
         IamGroupPolicyAttachmentResource {
@@ -15860,7 +15860,7 @@ instance HasComputedPolicy (IamGroupPolicyResource s) Text where
     computedPolicy =
         to (\_  -> TF.Compute "policy")
 
-iamGroupPolicyResource :: TF.Resource (TF.AWS s) (IamGroupPolicyResource s)
+iamGroupPolicyResource :: TF.Resource TF.AWS (IamGroupPolicyResource s)
 iamGroupPolicyResource =
     TF.newResource "aws_iam_group_policy" $
         IamGroupPolicyResource {
@@ -15931,7 +15931,7 @@ instance HasComputedUniqueId (IamGroupResource s) Text where
     computedUniqueId =
         to (\_  -> TF.Compute "unique_id")
 
-iamGroupResource :: TF.Resource (TF.AWS s) (IamGroupResource s)
+iamGroupResource :: TF.Resource TF.AWS (IamGroupResource s)
 iamGroupResource =
     TF.newResource "aws_iam_group" $
         IamGroupResource {
@@ -16049,7 +16049,7 @@ instance HasComputedUniqueId (IamInstanceProfileResource s) Text where
     computedUniqueId =
         to (\_  -> TF.Compute "unique_id")
 
-iamInstanceProfileResource :: TF.Resource (TF.AWS s) (IamInstanceProfileResource s)
+iamInstanceProfileResource :: TF.Resource TF.AWS (IamInstanceProfileResource s)
 iamInstanceProfileResource =
     TF.newResource "aws_iam_instance_profile" $
         IamInstanceProfileResource {
@@ -16107,7 +16107,7 @@ instance HasComputedArn (IamOpenidConnectProviderResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-iamOpenidConnectProviderResource :: TF.Resource (TF.AWS s) (IamOpenidConnectProviderResource s)
+iamOpenidConnectProviderResource :: TF.Resource TF.AWS (IamOpenidConnectProviderResource s)
 iamOpenidConnectProviderResource =
     TF.newResource "aws_iam_openid_connect_provider" $
         IamOpenidConnectProviderResource {
@@ -16198,7 +16198,7 @@ instance HasComputedName (IamPolicyAttachmentResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-iamPolicyAttachmentResource :: TF.Resource (TF.AWS s) (IamPolicyAttachmentResource s)
+iamPolicyAttachmentResource :: TF.Resource TF.AWS (IamPolicyAttachmentResource s)
 iamPolicyAttachmentResource =
     TF.newResource "aws_iam_policy_attachment" $
         IamPolicyAttachmentResource {
@@ -16306,7 +16306,7 @@ instance HasComputedPolicy (IamPolicyResource s) Text where
     computedPolicy =
         to (\_  -> TF.Compute "policy")
 
-iamPolicyResource :: TF.Resource (TF.AWS s) (IamPolicyResource s)
+iamPolicyResource :: TF.Resource TF.AWS (IamPolicyResource s)
 iamPolicyResource =
     TF.newResource "aws_iam_policy" $
         IamPolicyResource {
@@ -16348,7 +16348,7 @@ instance HasRole (IamRolePolicyAttachmentResource s) Text where
         lens (_role :: IamRolePolicyAttachmentResource s -> TF.Argument s "role" Text)
              (\s a -> s { _role = a } :: IamRolePolicyAttachmentResource s)
 
-iamRolePolicyAttachmentResource :: TF.Resource (TF.AWS s) (IamRolePolicyAttachmentResource s)
+iamRolePolicyAttachmentResource :: TF.Resource TF.AWS (IamRolePolicyAttachmentResource s)
 iamRolePolicyAttachmentResource =
     TF.newResource "aws_iam_role_policy_attachment" $
         IamRolePolicyAttachmentResource {
@@ -16431,7 +16431,7 @@ instance HasComputedRole (IamRolePolicyResource s) Text where
     computedRole =
         to (\_  -> TF.Compute "role")
 
-iamRolePolicyResource :: TF.Resource (TF.AWS s) (IamRolePolicyResource s)
+iamRolePolicyResource :: TF.Resource TF.AWS (IamRolePolicyResource s)
 iamRolePolicyResource =
     TF.newResource "aws_iam_role_policy" $
         IamRolePolicyResource {
@@ -16512,7 +16512,7 @@ instance HasComputedUniqueId (IamRoleResource s) Text where
     computedUniqueId =
         to (\_  -> TF.Compute "unique_id")
 
-iamRoleResource :: TF.Resource (TF.AWS s) (IamRoleResource s)
+iamRoleResource :: TF.Resource TF.AWS (IamRoleResource s)
 iamRoleResource =
     TF.newResource "aws_iam_role" $
         IamRoleResource {
@@ -16564,7 +16564,7 @@ instance HasComputedValidUntil (IamSamlProviderResource s) Text where
     computedValidUntil =
         to (\_  -> TF.Compute "valid_until")
 
-iamSamlProviderResource :: TF.Resource (TF.AWS s) (IamSamlProviderResource s)
+iamSamlProviderResource :: TF.Resource TF.AWS (IamSamlProviderResource s)
 iamSamlProviderResource =
     TF.newResource "aws_iam_saml_provider" $
         IamSamlProviderResource {
@@ -16662,7 +16662,7 @@ instance HasComputedName (IamServerCertificateResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-iamServerCertificateResource :: TF.Resource (TF.AWS s) (IamServerCertificateResource s)
+iamServerCertificateResource :: TF.Resource TF.AWS (IamServerCertificateResource s)
 iamServerCertificateResource =
     TF.newResource "aws_iam_server_certificate" $
         IamServerCertificateResource {
@@ -16739,7 +16739,7 @@ instance HasComputedKeyFingerprint (IamUserLoginProfileResource s) Text where
     computedKeyFingerprint =
         to (\_  -> TF.Compute "key_fingerprint")
 
-iamUserLoginProfileResource :: TF.Resource (TF.AWS s) (IamUserLoginProfileResource s)
+iamUserLoginProfileResource :: TF.Resource TF.AWS (IamUserLoginProfileResource s)
 iamUserLoginProfileResource =
     TF.newResource "aws_iam_user_login_profile" $
         IamUserLoginProfileResource {
@@ -16780,7 +16780,7 @@ instance HasUser (IamUserPolicyAttachmentResource s) Text where
         lens (_user :: IamUserPolicyAttachmentResource s -> TF.Argument s "user" Text)
              (\s a -> s { _user = a } :: IamUserPolicyAttachmentResource s)
 
-iamUserPolicyAttachmentResource :: TF.Resource (TF.AWS s) (IamUserPolicyAttachmentResource s)
+iamUserPolicyAttachmentResource :: TF.Resource TF.AWS (IamUserPolicyAttachmentResource s)
 iamUserPolicyAttachmentResource =
     TF.newResource "aws_iam_user_policy_attachment" $
         IamUserPolicyAttachmentResource {
@@ -16839,7 +16839,7 @@ instance HasUser (IamUserPolicyResource s) Text where
         lens (_user :: IamUserPolicyResource s -> TF.Argument s "user" Text)
              (\s a -> s { _user = a } :: IamUserPolicyResource s)
 
-iamUserPolicyResource :: TF.Resource (TF.AWS s) (IamUserPolicyResource s)
+iamUserPolicyResource :: TF.Resource TF.AWS (IamUserPolicyResource s)
 iamUserPolicyResource =
     TF.newResource "aws_iam_user_policy" $
         IamUserPolicyResource {
@@ -16908,7 +16908,7 @@ instance HasComputedUniqueId (IamUserResource s) Text where
     computedUniqueId =
         to (\_  -> TF.Compute "unique_id")
 
-iamUserResource :: TF.Resource (TF.AWS s) (IamUserResource s)
+iamUserResource :: TF.Resource TF.AWS (IamUserResource s)
 iamUserResource =
     TF.newResource "aws_iam_user" $
         IamUserResource {
@@ -16980,7 +16980,7 @@ instance HasComputedSshPublicKeyId (IamUserSshKeyResource s) Text where
     computedSshPublicKeyId =
         to (\_  -> TF.Compute "ssh_public_key_id")
 
-iamUserSshKeyResource :: TF.Resource (TF.AWS s) (IamUserSshKeyResource s)
+iamUserSshKeyResource :: TF.Resource TF.AWS (IamUserSshKeyResource s)
 iamUserSshKeyResource =
     TF.newResource "aws_iam_user_ssh_key" $
         IamUserSshKeyResource {
@@ -17027,7 +17027,7 @@ instance HasComputedArn (InspectorAssessmentTargetResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-inspectorAssessmentTargetResource :: TF.Resource (TF.AWS s) (InspectorAssessmentTargetResource s)
+inspectorAssessmentTargetResource :: TF.Resource TF.AWS (InspectorAssessmentTargetResource s)
 inspectorAssessmentTargetResource =
     TF.newResource "aws_inspector_assessment_target" $
         InspectorAssessmentTargetResource {
@@ -17092,7 +17092,7 @@ instance HasComputedArn (InspectorAssessmentTemplateResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-inspectorAssessmentTemplateResource :: TF.Resource (TF.AWS s) (InspectorAssessmentTemplateResource s)
+inspectorAssessmentTemplateResource :: TF.Resource TF.AWS (InspectorAssessmentTemplateResource s)
 inspectorAssessmentTemplateResource =
     TF.newResource "aws_inspector_assessment_template" $
         InspectorAssessmentTemplateResource {
@@ -17129,7 +17129,7 @@ instance HasComputedArn (InspectorResourceGroupResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-inspectorResourceGroupResource :: TF.Resource (TF.AWS s) (InspectorResourceGroupResource s)
+inspectorResourceGroupResource :: TF.Resource TF.AWS (InspectorResourceGroupResource s)
 inspectorResourceGroupResource =
     TF.newResource "aws_inspector_resource_group" $
         InspectorResourceGroupResource {
@@ -17419,7 +17419,7 @@ instance HasVpcSecurityGroupIds (InstanceResource s) Text where
         lens (_vpc_security_group_ids :: InstanceResource s -> TF.Argument s "vpc_security_group_ids" Text)
              (\s a -> s { _vpc_security_group_ids = a } :: InstanceResource s)
 
-instanceResource :: TF.Resource (TF.AWS s) (InstanceResource s)
+instanceResource :: TF.Resource TF.AWS (InstanceResource s)
 instanceResource =
     TF.newResource "aws_instance" $
         InstanceResource {
@@ -17489,7 +17489,7 @@ instance HasComputedId (InternetGatewayResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-internetGatewayResource :: TF.Resource (TF.AWS s) (InternetGatewayResource s)
+internetGatewayResource :: TF.Resource TF.AWS (InternetGatewayResource s)
 internetGatewayResource =
     TF.newResource "aws_internet_gateway" $
         InternetGatewayResource {
@@ -17534,7 +17534,7 @@ instance HasComputedArn (IotCertificateResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-iotCertificateResource :: TF.Resource (TF.AWS s) (IotCertificateResource s)
+iotCertificateResource :: TF.Resource TF.AWS (IotCertificateResource s)
 iotCertificateResource =
     TF.newResource "aws_iot_certificate" $
         IotCertificateResource {
@@ -17597,7 +17597,7 @@ instance HasComputedPolicy (IotPolicyResource s) Text where
     computedPolicy =
         to (\_  -> TF.Compute "policy")
 
-iotPolicyResource :: TF.Resource (TF.AWS s) (IotPolicyResource s)
+iotPolicyResource :: TF.Resource TF.AWS (IotPolicyResource s)
 iotPolicyResource =
     TF.newResource "aws_iot_policy" $
         IotPolicyResource {
@@ -17666,7 +17666,7 @@ instance HasComputedKeyName (KeyPairResource s) Text where
     computedKeyName =
         to (\_  -> TF.Compute "key_name")
 
-keyPairResource :: TF.Resource (TF.AWS s) (KeyPairResource s)
+keyPairResource :: TF.Resource TF.AWS (KeyPairResource s)
 keyPairResource =
     TF.newResource "aws_key_pair" $
         KeyPairResource {
@@ -17755,7 +17755,7 @@ instance HasComputedArn (KinesisFirehoseDeliveryStreamResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-kinesisFirehoseDeliveryStreamResource :: TF.Resource (TF.AWS s) (KinesisFirehoseDeliveryStreamResource s)
+kinesisFirehoseDeliveryStreamResource :: TF.Resource TF.AWS (KinesisFirehoseDeliveryStreamResource s)
 kinesisFirehoseDeliveryStreamResource =
     TF.newResource "aws_kinesis_firehose_delivery_stream" $
         KinesisFirehoseDeliveryStreamResource {
@@ -17874,7 +17874,7 @@ instance HasComputedShardCount (KinesisStreamResource s) Text where
     computedShardCount =
         to (\_  -> TF.Compute "shard_count")
 
-kinesisStreamResource :: TF.Resource (TF.AWS s) (KinesisStreamResource s)
+kinesisStreamResource :: TF.Resource TF.AWS (KinesisStreamResource s)
 kinesisStreamResource =
     TF.newResource "aws_kinesis_stream" $
         KinesisStreamResource {
@@ -17938,7 +17938,7 @@ instance HasComputedArn (KmsAliasResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-kmsAliasResource :: TF.Resource (TF.AWS s) (KmsAliasResource s)
+kmsAliasResource :: TF.Resource TF.AWS (KmsAliasResource s)
 kmsAliasResource =
     TF.newResource "aws_kms_alias" $
         KmsAliasResource {
@@ -18040,7 +18040,7 @@ instance HasComputedKeyId (KmsKeyResource s) Text where
     computedKeyId =
         to (\_  -> TF.Compute "key_id")
 
-kmsKeyResource :: TF.Resource (TF.AWS s) (KmsKeyResource s)
+kmsKeyResource :: TF.Resource TF.AWS (KmsKeyResource s)
 kmsKeyResource =
     TF.newResource "aws_kms_key" $
         KmsKeyResource {
@@ -18115,7 +18115,7 @@ instance HasComputedArn (LambdaAliasResource s) Text where
     computedArn =
         to (\_  -> TF.Compute "arn")
 
-lambdaAliasResource :: TF.Resource (TF.AWS s) (LambdaAliasResource s)
+lambdaAliasResource :: TF.Resource TF.AWS (LambdaAliasResource s)
 lambdaAliasResource =
     TF.newResource "aws_lambda_alias" $
         LambdaAliasResource {
@@ -18227,7 +18227,7 @@ instance HasComputedUuid (LambdaEventSourceMappingResource s) Text where
     computedUuid =
         to (\_  -> TF.Compute "uuid")
 
-lambdaEventSourceMappingResource :: TF.Resource (TF.AWS s) (LambdaEventSourceMappingResource s)
+lambdaEventSourceMappingResource :: TF.Resource TF.AWS (LambdaEventSourceMappingResource s)
 lambdaEventSourceMappingResource =
     TF.newResource "aws_lambda_event_source_mapping" $
         LambdaEventSourceMappingResource {
@@ -18484,7 +18484,7 @@ instance HasComputedVersion (LambdaFunctionResource s) Text where
     computedVersion =
         to (\_  -> TF.Compute "version")
 
-lambdaFunctionResource :: TF.Resource (TF.AWS s) (LambdaFunctionResource s)
+lambdaFunctionResource :: TF.Resource TF.AWS (LambdaFunctionResource s)
 lambdaFunctionResource =
     TF.newResource "aws_lambda_function" $
         LambdaFunctionResource {
@@ -18591,7 +18591,7 @@ instance HasStatementId (LambdaPermissionResource s) Text where
         lens (_statement_id :: LambdaPermissionResource s -> TF.Argument s "statement_id" Text)
              (\s a -> s { _statement_id = a } :: LambdaPermissionResource s)
 
-lambdaPermissionResource :: TF.Resource (TF.AWS s) (LambdaPermissionResource s)
+lambdaPermissionResource :: TF.Resource TF.AWS (LambdaPermissionResource s)
 lambdaPermissionResource =
     TF.newResource "aws_lambda_permission" $
         LambdaPermissionResource {
@@ -18796,7 +18796,7 @@ instance HasVpcClassicLinkSecurityGroups (LaunchConfigurationResource s) Text wh
         lens (_vpc_classic_link_security_groups :: LaunchConfigurationResource s -> TF.Argument s "vpc_classic_link_security_groups" Text)
              (\s a -> s { _vpc_classic_link_security_groups = a } :: LaunchConfigurationResource s)
 
-launchConfigurationResource :: TF.Resource (TF.AWS s) (LaunchConfigurationResource s)
+launchConfigurationResource :: TF.Resource TF.AWS (LaunchConfigurationResource s)
 launchConfigurationResource =
     TF.newResource "aws_launch_configuration" $
         LaunchConfigurationResource {
@@ -18902,7 +18902,7 @@ instance HasComputedName (LbCookieStickinessPolicyResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-lbCookieStickinessPolicyResource :: TF.Resource (TF.AWS s) (LbCookieStickinessPolicyResource s)
+lbCookieStickinessPolicyResource :: TF.Resource TF.AWS (LbCookieStickinessPolicyResource s)
 lbCookieStickinessPolicyResource =
     TF.newResource "aws_lb_cookie_stickiness_policy" $
         LbCookieStickinessPolicyResource {
@@ -18996,7 +18996,7 @@ instance HasComputedId (LbListenerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-lbListenerResource :: TF.Resource (TF.AWS s) (LbListenerResource s)
+lbListenerResource :: TF.Resource TF.AWS (LbListenerResource s)
 lbListenerResource =
     TF.newResource "aws_lb_listener" $
         LbListenerResource {
@@ -19073,7 +19073,7 @@ instance HasComputedId (LbListenerRuleResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-lbListenerRuleResource :: TF.Resource (TF.AWS s) (LbListenerRuleResource s)
+lbListenerRuleResource :: TF.Resource TF.AWS (LbListenerRuleResource s)
 lbListenerRuleResource =
     TF.newResource "aws_lb_listener_rule" $
         LbListenerRuleResource {
@@ -19251,7 +19251,7 @@ instance HasComputedZoneId (LbResource s) Text where
     computedZoneId =
         to (\_  -> TF.Compute "zone_id")
 
-lbResource :: TF.Resource (TF.AWS s) (LbResource s)
+lbResource :: TF.Resource TF.AWS (LbResource s)
 lbResource =
     TF.newResource "aws_lb" $
         LbResource {
@@ -19352,7 +19352,7 @@ instance HasComputedName (LbSslNegotiationPolicyResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-lbSslNegotiationPolicyResource :: TF.Resource (TF.AWS s) (LbSslNegotiationPolicyResource s)
+lbSslNegotiationPolicyResource :: TF.Resource TF.AWS (LbSslNegotiationPolicyResource s)
 lbSslNegotiationPolicyResource =
     TF.newResource "aws_lb_ssl_negotiation_policy" $
         LbSslNegotiationPolicyResource {
@@ -19421,7 +19421,7 @@ instance HasComputedId (LbTargetGroupAttachmentResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-lbTargetGroupAttachmentResource :: TF.Resource (TF.AWS s) (LbTargetGroupAttachmentResource s)
+lbTargetGroupAttachmentResource :: TF.Resource TF.AWS (LbTargetGroupAttachmentResource s)
 lbTargetGroupAttachmentResource =
     TF.newResource "aws_lb_target_group_attachment" $
         LbTargetGroupAttachmentResource {
@@ -19568,7 +19568,7 @@ instance HasComputedName (LbTargetGroupResource s) Text where
     computedName =
         to (\_  -> TF.Compute "name")
 
-lbTargetGroupResource :: TF.Resource (TF.AWS s) (LbTargetGroupResource s)
+lbTargetGroupResource :: TF.Resource TF.AWS (LbTargetGroupResource s)
 lbTargetGroupResource =
     TF.newResource "aws_lb_target_group" $
         LbTargetGroupResource {
@@ -19624,7 +19624,7 @@ instance HasComputedId (LightsailDomainResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-lightsailDomainResource :: TF.Resource (TF.AWS s) (LightsailDomainResource s)
+lightsailDomainResource :: TF.Resource TF.AWS (LightsailDomainResource s)
 lightsailDomainResource =
     TF.newResource "aws_lightsail_domain" $
         LightsailDomainResource {
@@ -19708,7 +19708,7 @@ instance HasUserData (LightsailInstanceResource s) Text where
         lens (_user_data :: LightsailInstanceResource s -> TF.Argument s "user_data" Text)
              (\s a -> s { _user_data = a } :: LightsailInstanceResource s)
 
-lightsailInstanceResource :: TF.Resource (TF.AWS s) (LightsailInstanceResource s)
+lightsailInstanceResource :: TF.Resource TF.AWS (LightsailInstanceResource s)
 lightsailInstanceResource =
     TF.newResource "aws_lightsail_instance" $
         LightsailInstanceResource {
@@ -19808,7 +19808,7 @@ instance HasComputedPublicKey (LightsailKeyPairResource s) Text where
     computedPublicKey =
         to (\_  -> TF.Compute "public_key")
 
-lightsailKeyPairResource :: TF.Resource (TF.AWS s) (LightsailKeyPairResource s)
+lightsailKeyPairResource :: TF.Resource TF.AWS (LightsailKeyPairResource s)
 lightsailKeyPairResource =
     TF.newResource "aws_lightsail_key_pair" $
         LightsailKeyPairResource {
@@ -19870,7 +19870,7 @@ instance HasComputedSupportCode (LightsailStaticIpAttachmentResource s) Text whe
     computedSupportCode =
         to (\_  -> TF.Compute "support_code")
 
-lightsailStaticIpAttachmentResource :: TF.Resource (TF.AWS s) (LightsailStaticIpAttachmentResource s)
+lightsailStaticIpAttachmentResource :: TF.Resource TF.AWS (LightsailStaticIpAttachmentResource s)
 lightsailStaticIpAttachmentResource =
     TF.newResource "aws_lightsail_static_ip_attachment" $
         LightsailStaticIpAttachmentResource {
@@ -19920,7 +19920,7 @@ instance HasComputedSupportCode (LightsailStaticIpResource s) Text where
     computedSupportCode =
         to (\_  -> TF.Compute "support_code")
 
-lightsailStaticIpResource :: TF.Resource (TF.AWS s) (LightsailStaticIpResource s)
+lightsailStaticIpResource :: TF.Resource TF.AWS (LightsailStaticIpResource s)
 lightsailStaticIpResource =
     TF.newResource "aws_lightsail_static_ip" $
         LightsailStaticIpResource {
@@ -19970,7 +19970,7 @@ instance HasComputedOriginalRouteTableId (MainRouteTableAssociationResource s) T
     computedOriginalRouteTableId =
         to (\_  -> TF.Compute "original_route_table_id")
 
-mainRouteTableAssociationResource :: TF.Resource (TF.AWS s) (MainRouteTableAssociationResource s)
+mainRouteTableAssociationResource :: TF.Resource TF.AWS (MainRouteTableAssociationResource s)
 mainRouteTableAssociationResource =
     TF.newResource "aws_main_route_table_association" $
         MainRouteTableAssociationResource {
@@ -20011,7 +20011,7 @@ instance HasComputedEndpoint (MediaStoreContainerResource s) Text where
     computedEndpoint =
         to (\_  -> TF.Compute "endpoint")
 
-mediaStoreContainerResource :: TF.Resource (TF.AWS s) (MediaStoreContainerResource s)
+mediaStoreContainerResource :: TF.Resource TF.AWS (MediaStoreContainerResource s)
 mediaStoreContainerResource =
     TF.newResource "aws_media_store_container" $
         MediaStoreContainerResource {
@@ -20170,7 +20170,7 @@ instance HasUser (MqBrokerResource s) Text where
         lens (_user :: MqBrokerResource s -> TF.Argument s "user" Text)
              (\s a -> s { _user = a } :: MqBrokerResource s)
 
-mqBrokerResource :: TF.Resource (TF.AWS s) (MqBrokerResource s)
+mqBrokerResource :: TF.Resource TF.AWS (MqBrokerResource s)
 mqBrokerResource =
     TF.newResource "aws_mq_broker" $
         MqBrokerResource {
@@ -20271,7 +20271,7 @@ instance HasComputedLatestRevision (MqConfigurationResource s) Text where
     computedLatestRevision =
         to (\_  -> TF.Compute "latest_revision")
 
-mqConfigurationResource :: TF.Resource (TF.AWS s) (MqConfigurationResource s)
+mqConfigurationResource :: TF.Resource TF.AWS (MqConfigurationResource s)
 mqConfigurationResource =
     TF.newResource "aws_mq_configuration" $
         MqConfigurationResource {
@@ -20359,7 +20359,7 @@ instance HasComputedSubnetId (NatGatewayResource s) Text where
     computedSubnetId =
         to (\_  -> TF.Compute "subnet_id")
 
-natGatewayResource :: TF.Resource (TF.AWS s) (NatGatewayResource s)
+natGatewayResource :: TF.Resource TF.AWS (NatGatewayResource s)
 natGatewayResource =
     TF.newResource "aws_nat_gateway" $
         NatGatewayResource {
@@ -20447,7 +20447,7 @@ instance HasComputedId (NetworkAclResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-networkAclResource :: TF.Resource (TF.AWS s) (NetworkAclResource s)
+networkAclResource :: TF.Resource TF.AWS (NetworkAclResource s)
 networkAclResource =
     TF.newResource "aws_network_acl" $
         NetworkAclResource {
@@ -20586,7 +20586,7 @@ instance HasComputedId (NetworkAclRuleResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-networkAclRuleResource :: TF.Resource (TF.AWS s) (NetworkAclRuleResource s)
+networkAclRuleResource :: TF.Resource TF.AWS (NetworkAclRuleResource s)
 networkAclRuleResource =
     TF.newResource "aws_network_acl_rule" $
         NetworkAclRuleResource {
@@ -20668,7 +20668,7 @@ instance HasComputedStatus (NetworkInterfaceAttachmentResource s) Text where
     computedStatus =
         to (\_  -> TF.Compute "status")
 
-networkInterfaceAttachmentResource :: TF.Resource (TF.AWS s) (NetworkInterfaceAttachmentResource s)
+networkInterfaceAttachmentResource :: TF.Resource TF.AWS (NetworkInterfaceAttachmentResource s)
 networkInterfaceAttachmentResource =
     TF.newResource "aws_network_interface_attachment" $
         NetworkInterfaceAttachmentResource {
@@ -20816,7 +20816,7 @@ instance HasComputedTags (NetworkInterfaceResource s) TF.Tags where
     computedTags =
         to (\_  -> TF.Compute "tags")
 
-networkInterfaceResource :: TF.Resource (TF.AWS s) (NetworkInterfaceResource s)
+networkInterfaceResource :: TF.Resource TF.AWS (NetworkInterfaceResource s)
 networkInterfaceResource =
     TF.newResource "aws_network_interface" $
         NetworkInterfaceResource {
@@ -20870,7 +20870,7 @@ instance HasSecurityGroupId (NetworkInterfaceSgAttachmentResource s) Text where
         lens (_security_group_id :: NetworkInterfaceSgAttachmentResource s -> TF.Argument s "security_group_id" Text)
              (\s a -> s { _security_group_id = a } :: NetworkInterfaceSgAttachmentResource s)
 
-networkInterfaceSgAttachmentResource :: TF.Resource (TF.AWS s) (NetworkInterfaceSgAttachmentResource s)
+networkInterfaceSgAttachmentResource :: TF.Resource TF.AWS (NetworkInterfaceSgAttachmentResource s)
 networkInterfaceSgAttachmentResource =
     TF.newResource "aws_network_interface_sg_attachment" $
         NetworkInterfaceSgAttachmentResource {
@@ -21065,7 +21065,7 @@ instance HasComputedId (OpsworksApplicationResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksApplicationResource :: TF.Resource (TF.AWS s) (OpsworksApplicationResource s)
+opsworksApplicationResource :: TF.Resource TF.AWS (OpsworksApplicationResource s)
 opsworksApplicationResource =
     TF.newResource "aws_opsworks_application" $
         OpsworksApplicationResource {
@@ -21265,7 +21265,7 @@ instance HasComputedId (OpsworksCustomLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksCustomLayerResource :: TF.Resource (TF.AWS s) (OpsworksCustomLayerResource s)
+opsworksCustomLayerResource :: TF.Resource TF.AWS (OpsworksCustomLayerResource s)
 opsworksCustomLayerResource =
     TF.newResource "aws_opsworks_custom_layer" $
         OpsworksCustomLayerResource {
@@ -21484,7 +21484,7 @@ instance HasComputedId (OpsworksGangliaLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksGangliaLayerResource :: TF.Resource (TF.AWS s) (OpsworksGangliaLayerResource s)
+opsworksGangliaLayerResource :: TF.Resource TF.AWS (OpsworksGangliaLayerResource s)
 opsworksGangliaLayerResource =
     TF.newResource "aws_opsworks_ganglia_layer" $
         OpsworksGangliaLayerResource {
@@ -21735,7 +21735,7 @@ instance HasComputedId (OpsworksHaproxyLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksHaproxyLayerResource :: TF.Resource (TF.AWS s) (OpsworksHaproxyLayerResource s)
+opsworksHaproxyLayerResource :: TF.Resource TF.AWS (OpsworksHaproxyLayerResource s)
 opsworksHaproxyLayerResource =
     TF.newResource "aws_opsworks_haproxy_layer" $
         OpsworksHaproxyLayerResource {
@@ -21983,7 +21983,7 @@ instance HasVirtualizationType (OpsworksInstanceResource s) Text where
         lens (_virtualization_type :: OpsworksInstanceResource s -> TF.Argument s "virtualization_type" Text)
              (\s a -> s { _virtualization_type = a } :: OpsworksInstanceResource s)
 
-opsworksInstanceResource :: TF.Resource (TF.AWS s) (OpsworksInstanceResource s)
+opsworksInstanceResource :: TF.Resource TF.AWS (OpsworksInstanceResource s)
 opsworksInstanceResource =
     TF.newResource "aws_opsworks_instance" $
         OpsworksInstanceResource {
@@ -22227,7 +22227,7 @@ instance HasComputedId (OpsworksJavaAppLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksJavaAppLayerResource :: TF.Resource (TF.AWS s) (OpsworksJavaAppLayerResource s)
+opsworksJavaAppLayerResource :: TF.Resource TF.AWS (OpsworksJavaAppLayerResource s)
 opsworksJavaAppLayerResource =
     TF.newResource "aws_opsworks_java_app_layer" $
         OpsworksJavaAppLayerResource {
@@ -22430,7 +22430,7 @@ instance HasComputedId (OpsworksMemcachedLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksMemcachedLayerResource :: TF.Resource (TF.AWS s) (OpsworksMemcachedLayerResource s)
+opsworksMemcachedLayerResource :: TF.Resource TF.AWS (OpsworksMemcachedLayerResource s)
 opsworksMemcachedLayerResource =
     TF.newResource "aws_opsworks_memcached_layer" $
         OpsworksMemcachedLayerResource {
@@ -22641,7 +22641,7 @@ instance HasComputedId (OpsworksMysqlLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksMysqlLayerResource :: TF.Resource (TF.AWS s) (OpsworksMysqlLayerResource s)
+opsworksMysqlLayerResource :: TF.Resource TF.AWS (OpsworksMysqlLayerResource s)
 opsworksMysqlLayerResource =
     TF.newResource "aws_opsworks_mysql_layer" $
         OpsworksMysqlLayerResource {
@@ -22841,7 +22841,7 @@ instance HasComputedId (OpsworksNodejsAppLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksNodejsAppLayerResource :: TF.Resource (TF.AWS s) (OpsworksNodejsAppLayerResource s)
+opsworksNodejsAppLayerResource :: TF.Resource TF.AWS (OpsworksNodejsAppLayerResource s)
 opsworksNodejsAppLayerResource =
     TF.newResource "aws_opsworks_nodejs_app_layer" $
         OpsworksNodejsAppLayerResource {
@@ -22930,7 +22930,7 @@ instance HasComputedId (OpsworksPermissionResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksPermissionResource :: TF.Resource (TF.AWS s) (OpsworksPermissionResource s)
+opsworksPermissionResource :: TF.Resource TF.AWS (OpsworksPermissionResource s)
 opsworksPermissionResource =
     TF.newResource "aws_opsworks_permission" $
         OpsworksPermissionResource {
@@ -23108,7 +23108,7 @@ instance HasComputedId (OpsworksPhpAppLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksPhpAppLayerResource :: TF.Resource (TF.AWS s) (OpsworksPhpAppLayerResource s)
+opsworksPhpAppLayerResource :: TF.Resource TF.AWS (OpsworksPhpAppLayerResource s)
 opsworksPhpAppLayerResource =
     TF.newResource "aws_opsworks_php_app_layer" $
         OpsworksPhpAppLayerResource {
@@ -23356,7 +23356,7 @@ instance HasComputedId (OpsworksRailsAppLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksRailsAppLayerResource :: TF.Resource (TF.AWS s) (OpsworksRailsAppLayerResource s)
+opsworksRailsAppLayerResource :: TF.Resource TF.AWS (OpsworksRailsAppLayerResource s)
 opsworksRailsAppLayerResource =
     TF.newResource "aws_opsworks_rails_app_layer" $
         OpsworksRailsAppLayerResource {
@@ -23442,7 +23442,7 @@ instance HasComputedId (OpsworksRdsDbInstanceResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksRdsDbInstanceResource :: TF.Resource (TF.AWS s) (OpsworksRdsDbInstanceResource s)
+opsworksRdsDbInstanceResource :: TF.Resource TF.AWS (OpsworksRdsDbInstanceResource s)
 opsworksRdsDbInstanceResource =
     TF.newResource "aws_opsworks_rds_db_instance" $
         OpsworksRdsDbInstanceResource {
@@ -23689,7 +23689,7 @@ instance HasComputedId (OpsworksStackResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksStackResource :: TF.Resource (TF.AWS s) (OpsworksStackResource s)
+opsworksStackResource :: TF.Resource TF.AWS (OpsworksStackResource s)
 opsworksStackResource =
     TF.newResource "aws_opsworks_stack" $
         OpsworksStackResource {
@@ -23874,7 +23874,7 @@ instance HasComputedId (OpsworksStaticWebLayerResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksStaticWebLayerResource :: TF.Resource (TF.AWS s) (OpsworksStaticWebLayerResource s)
+opsworksStaticWebLayerResource :: TF.Resource TF.AWS (OpsworksStaticWebLayerResource s)
 opsworksStaticWebLayerResource =
     TF.newResource "aws_opsworks_static_web_layer" $
         OpsworksStaticWebLayerResource {
@@ -23951,7 +23951,7 @@ instance HasComputedId (OpsworksUserProfileResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-opsworksUserProfileResource :: TF.Resource (TF.AWS s) (OpsworksUserProfileResource s)
+opsworksUserProfileResource :: TF.Resource TF.AWS (OpsworksUserProfileResource s)
 opsworksUserProfileResource =
     TF.newResource "aws_opsworks_user_profile" $
         OpsworksUserProfileResource {
@@ -24000,7 +24000,7 @@ instance HasComputedId (PlacementGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-placementGroupResource :: TF.Resource (TF.AWS s) (PlacementGroupResource s)
+placementGroupResource :: TF.Resource TF.AWS (PlacementGroupResource s)
 placementGroupResource =
     TF.newResource "aws_placement_group" $
         PlacementGroupResource {
@@ -24052,7 +24052,7 @@ instance HasComputedLoadBalancer (ProxyProtocolPolicyResource s) Text where
     computedLoadBalancer =
         to (\_  -> TF.Compute "load_balancer")
 
-proxyProtocolPolicyResource :: TF.Resource (TF.AWS s) (ProxyProtocolPolicyResource s)
+proxyProtocolPolicyResource :: TF.Resource TF.AWS (ProxyProtocolPolicyResource s)
 proxyProtocolPolicyResource =
     TF.newResource "aws_proxy_protocol_policy" $
         ProxyProtocolPolicyResource {
@@ -24374,7 +24374,7 @@ instance HasComputedWriter (RdsClusterInstanceResource s) Text where
     computedWriter =
         to (\_  -> TF.Compute "writer")
 
-rdsClusterInstanceResource :: TF.Resource (TF.AWS s) (RdsClusterInstanceResource s)
+rdsClusterInstanceResource :: TF.Resource TF.AWS (RdsClusterInstanceResource s)
 rdsClusterInstanceResource =
     TF.newResource "aws_rds_cluster_instance" $
         RdsClusterInstanceResource {
@@ -24482,7 +24482,7 @@ instance HasComputedId (RdsClusterParameterGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-rdsClusterParameterGroupResource :: TF.Resource (TF.AWS s) (RdsClusterParameterGroupResource s)
+rdsClusterParameterGroupResource :: TF.Resource TF.AWS (RdsClusterParameterGroupResource s)
 rdsClusterParameterGroupResource =
     TF.newResource "aws_rds_cluster_parameter_group" $
         RdsClusterParameterGroupResource {
@@ -24871,7 +24871,7 @@ instance HasComputedStorageEncrypted (RdsClusterResource s) Text where
     computedStorageEncrypted =
         to (\_  -> TF.Compute "storage_encrypted")
 
-rdsClusterResource :: TF.Resource (TF.AWS s) (RdsClusterResource s)
+rdsClusterResource :: TF.Resource TF.AWS (RdsClusterResource s)
 rdsClusterResource =
     TF.newResource "aws_rds_cluster" $
         RdsClusterResource {
@@ -25223,7 +25223,7 @@ instance HasVpcSecurityGroupIds (RedshiftClusterResource s) Text where
         lens (_vpc_security_group_ids :: RedshiftClusterResource s -> TF.Argument s "vpc_security_group_ids" Text)
              (\s a -> s { _vpc_security_group_ids = a } :: RedshiftClusterResource s)
 
-redshiftClusterResource :: TF.Resource (TF.AWS s) (RedshiftClusterResource s)
+redshiftClusterResource :: TF.Resource TF.AWS (RedshiftClusterResource s)
 redshiftClusterResource =
     TF.newResource "aws_redshift_cluster" $
         RedshiftClusterResource {
@@ -25317,7 +25317,7 @@ instance HasComputedId (RedshiftParameterGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-redshiftParameterGroupResource :: TF.Resource (TF.AWS s) (RedshiftParameterGroupResource s)
+redshiftParameterGroupResource :: TF.Resource TF.AWS (RedshiftParameterGroupResource s)
 redshiftParameterGroupResource =
     TF.newResource "aws_redshift_parameter_group" $
         RedshiftParameterGroupResource {
@@ -25375,7 +25375,7 @@ instance HasComputedId (RedshiftSecurityGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-redshiftSecurityGroupResource :: TF.Resource (TF.AWS s) (RedshiftSecurityGroupResource s)
+redshiftSecurityGroupResource :: TF.Resource TF.AWS (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource =
     TF.newResource "aws_redshift_security_group" $
         RedshiftSecurityGroupResource {
@@ -25443,7 +25443,7 @@ instance HasComputedId (RedshiftSubnetGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-redshiftSubnetGroupResource :: TF.Resource (TF.AWS s) (RedshiftSubnetGroupResource s)
+redshiftSubnetGroupResource :: TF.Resource TF.AWS (RedshiftSubnetGroupResource s)
 redshiftSubnetGroupResource =
     TF.newResource "aws_redshift_subnet_group" $
         RedshiftSubnetGroupResource {
@@ -25488,7 +25488,7 @@ instance HasComputedNameServers (Route53DelegationSetResource s) Text where
     computedNameServers =
         to (\_  -> TF.Compute "name_servers")
 
-route53DelegationSetResource :: TF.Resource (TF.AWS s) (Route53DelegationSetResource s)
+route53DelegationSetResource :: TF.Resource TF.AWS (Route53DelegationSetResource s)
 route53DelegationSetResource =
     TF.newResource "aws_route53_delegation_set" $
         Route53DelegationSetResource {
@@ -25696,7 +25696,7 @@ instance HasType' (Route53HealthCheckResource s) Text where
         lens (_type' :: Route53HealthCheckResource s -> TF.Argument s "type" Text)
              (\s a -> s { _type' = a } :: Route53HealthCheckResource s)
 
-route53HealthCheckResource :: TF.Resource (TF.AWS s) (Route53HealthCheckResource s)
+route53HealthCheckResource :: TF.Resource TF.AWS (Route53HealthCheckResource s)
 route53HealthCheckResource =
     TF.newResource "aws_route53_health_check" $
         Route53HealthCheckResource {
@@ -25764,7 +25764,7 @@ instance HasComputedId (Route53QueryLogResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-route53QueryLogResource :: TF.Resource (TF.AWS s) (Route53QueryLogResource s)
+route53QueryLogResource :: TF.Resource TF.AWS (Route53QueryLogResource s)
 route53QueryLogResource =
     TF.newResource "aws_route53_query_log" $
         Route53QueryLogResource {
@@ -25919,7 +25919,7 @@ instance HasComputedFqdn (Route53RecordResource s) Text where
     computedFqdn =
         to (\_  -> TF.Compute "fqdn")
 
-route53RecordResource :: TF.Resource (TF.AWS s) (Route53RecordResource s)
+route53RecordResource :: TF.Resource TF.AWS (Route53RecordResource s)
 route53RecordResource =
     TF.newResource "aws_route53_record" $
         Route53RecordResource {
@@ -26003,7 +26003,7 @@ instance HasComputedZoneId (Route53ZoneAssociationResource s) Text where
     computedZoneId =
         to (\_  -> TF.Compute "zone_id")
 
-route53ZoneAssociationResource :: TF.Resource (TF.AWS s) (Route53ZoneAssociationResource s)
+route53ZoneAssociationResource :: TF.Resource TF.AWS (Route53ZoneAssociationResource s)
 route53ZoneAssociationResource =
     TF.newResource "aws_route53_zone_association" $
         Route53ZoneAssociationResource {
@@ -26105,7 +26105,7 @@ instance HasComputedZoneId (Route53ZoneResource s) Text where
     computedZoneId =
         to (\_  -> TF.Compute "zone_id")
 
-route53ZoneResource :: TF.Resource (TF.AWS s) (Route53ZoneResource s)
+route53ZoneResource :: TF.Resource TF.AWS (Route53ZoneResource s)
 route53ZoneResource =
     TF.newResource "aws_route53_zone" $
         Route53ZoneResource {
@@ -26278,7 +26278,7 @@ instance HasComputedVpcPeeringConnectionId (RouteResource s) Text where
     computedVpcPeeringConnectionId =
         to (\_  -> TF.Compute "vpc_peering_connection_id")
 
-routeResource :: TF.Resource (TF.AWS s) (RouteResource s)
+routeResource :: TF.Resource TF.AWS (RouteResource s)
 routeResource =
     TF.newResource "aws_route" $
         RouteResource {
@@ -26331,7 +26331,7 @@ instance HasComputedId (RouteTableAssociationResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-routeTableAssociationResource :: TF.Resource (TF.AWS s) (RouteTableAssociationResource s)
+routeTableAssociationResource :: TF.Resource TF.AWS (RouteTableAssociationResource s)
 routeTableAssociationResource =
     TF.newResource "aws_route_table_association" $
         RouteTableAssociationResource {
@@ -26413,7 +26413,7 @@ instance HasComputedId (RouteTableResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-routeTableResource :: TF.Resource (TF.AWS s) (RouteTableResource s)
+routeTableResource :: TF.Resource TF.AWS (RouteTableResource s)
 routeTableResource =
     TF.newResource "aws_route_table" $
         RouteTableResource {
@@ -26474,7 +26474,7 @@ instance HasTopic (S3BucketNotificationResource s) Text where
         lens (_topic :: S3BucketNotificationResource s -> TF.Argument s "topic" Text)
              (\s a -> s { _topic = a } :: S3BucketNotificationResource s)
 
-s3BucketNotificationResource :: TF.Resource (TF.AWS s) (S3BucketNotificationResource s)
+s3BucketNotificationResource :: TF.Resource TF.AWS (S3BucketNotificationResource s)
 s3BucketNotificationResource =
     TF.newResource "aws_s3_bucket_notification" $
         S3BucketNotificationResource {
@@ -26673,7 +26673,7 @@ instance HasComputedVersionId (S3BucketObjectResource s) Text where
     computedVersionId =
         to (\_  -> TF.Compute "version_id")
 
-s3BucketObjectResource :: TF.Resource (TF.AWS s) (S3BucketObjectResource s)
+s3BucketObjectResource :: TF.Resource TF.AWS (S3BucketObjectResource s)
 s3BucketObjectResource =
     TF.newResource "aws_s3_bucket_object" $
         S3BucketObjectResource {
@@ -26726,7 +26726,7 @@ instance HasPolicy (S3BucketPolicyResource s) Text where
         lens (_policy :: S3BucketPolicyResource s -> TF.Argument s "policy" Text)
              (\s a -> s { _policy = a } :: S3BucketPolicyResource s)
 
-s3BucketPolicyResource :: TF.Resource (TF.AWS s) (S3BucketPolicyResource s)
+s3BucketPolicyResource :: TF.Resource TF.AWS (S3BucketPolicyResource s)
 s3BucketPolicyResource =
     TF.newResource "aws_s3_bucket_policy" $
         S3BucketPolicyResource {
@@ -26947,7 +26947,7 @@ instance HasComputedWebsiteEndpoint (S3BucketResource s) Text where
     computedWebsiteEndpoint =
         to (\_  -> TF.Compute "website_endpoint")
 
-s3BucketResource :: TF.Resource (TF.AWS s) (S3BucketResource s)
+s3BucketResource :: TF.Resource TF.AWS (S3BucketResource s)
 s3BucketResource =
     TF.newResource "aws_s3_bucket" $
         S3BucketResource {
@@ -27066,7 +27066,7 @@ instance HasVpcId (SecurityGroupResource s) Text where
         lens (_vpc_id :: SecurityGroupResource s -> TF.Argument s "vpc_id" Text)
              (\s a -> s { _vpc_id = a } :: SecurityGroupResource s)
 
-securityGroupResource :: TF.Resource (TF.AWS s) (SecurityGroupResource s)
+securityGroupResource :: TF.Resource TF.AWS (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "aws_security_group" $
         SecurityGroupResource {
@@ -27208,7 +27208,7 @@ instance HasType' (SecurityGroupRuleResource s) Text where
         lens (_type' :: SecurityGroupRuleResource s -> TF.Argument s "type" Text)
              (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
-securityGroupRuleResource :: TF.Resource (TF.AWS s) (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Resource TF.AWS (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "aws_security_group_rule" $
         SecurityGroupRuleResource {
@@ -27284,7 +27284,7 @@ instance HasComputedId (ServiceDiscoveryPrivateDnsNamespaceResource s) Text wher
     computedId =
         to (\_  -> TF.Compute "id")
 
-serviceDiscoveryPrivateDnsNamespaceResource :: TF.Resource (TF.AWS s) (ServiceDiscoveryPrivateDnsNamespaceResource s)
+serviceDiscoveryPrivateDnsNamespaceResource :: TF.Resource TF.AWS (ServiceDiscoveryPrivateDnsNamespaceResource s)
 serviceDiscoveryPrivateDnsNamespaceResource =
     TF.newResource "aws_service_discovery_private_dns_namespace" $
         ServiceDiscoveryPrivateDnsNamespaceResource {
@@ -27342,7 +27342,7 @@ instance HasComputedId (ServiceDiscoveryPublicDnsNamespaceResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-serviceDiscoveryPublicDnsNamespaceResource :: TF.Resource (TF.AWS s) (ServiceDiscoveryPublicDnsNamespaceResource s)
+serviceDiscoveryPublicDnsNamespaceResource :: TF.Resource TF.AWS (ServiceDiscoveryPublicDnsNamespaceResource s)
 serviceDiscoveryPublicDnsNamespaceResource =
     TF.newResource "aws_service_discovery_public_dns_namespace" $
         ServiceDiscoveryPublicDnsNamespaceResource {
@@ -27401,7 +27401,7 @@ instance HasName (ServiceDiscoveryServiceResource s) Text where
         lens (_name :: ServiceDiscoveryServiceResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: ServiceDiscoveryServiceResource s)
 
-serviceDiscoveryServiceResource :: TF.Resource (TF.AWS s) (ServiceDiscoveryServiceResource s)
+serviceDiscoveryServiceResource :: TF.Resource TF.AWS (ServiceDiscoveryServiceResource s)
 serviceDiscoveryServiceResource =
     TF.newResource "aws_service_discovery_service" $
         ServiceDiscoveryServiceResource {
@@ -27468,7 +27468,7 @@ instance HasComputedId (ServicecatalogPortfolioResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-servicecatalogPortfolioResource :: TF.Resource (TF.AWS s) (ServicecatalogPortfolioResource s)
+servicecatalogPortfolioResource :: TF.Resource TF.AWS (ServicecatalogPortfolioResource s)
 servicecatalogPortfolioResource =
     TF.newResource "aws_servicecatalog_portfolio" $
         ServicecatalogPortfolioResource {
@@ -27499,7 +27499,7 @@ instance HasRuleSetName (SesActiveReceiptRuleSetResource s) Text where
         lens (_rule_set_name :: SesActiveReceiptRuleSetResource s -> TF.Argument s "rule_set_name" Text)
              (\s a -> s { _rule_set_name = a } :: SesActiveReceiptRuleSetResource s)
 
-sesActiveReceiptRuleSetResource :: TF.Resource (TF.AWS s) (SesActiveReceiptRuleSetResource s)
+sesActiveReceiptRuleSetResource :: TF.Resource TF.AWS (SesActiveReceiptRuleSetResource s)
 sesActiveReceiptRuleSetResource =
     TF.newResource "aws_ses_active_receipt_rule_set" $
         SesActiveReceiptRuleSetResource {
@@ -27527,7 +27527,7 @@ instance HasName (SesConfigurationSetResource s) Text where
         lens (_name :: SesConfigurationSetResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: SesConfigurationSetResource s)
 
-sesConfigurationSetResource :: TF.Resource (TF.AWS s) (SesConfigurationSetResource s)
+sesConfigurationSetResource :: TF.Resource TF.AWS (SesConfigurationSetResource s)
 sesConfigurationSetResource =
     TF.newResource "aws_ses_configuration_set" $
         SesConfigurationSetResource {
@@ -27562,7 +27562,7 @@ instance HasComputedDkimTokens (SesDomainDkimResource s) Text where
     computedDkimTokens =
         to (\_  -> TF.Compute "dkim_tokens")
 
-sesDomainDkimResource :: TF.Resource (TF.AWS s) (SesDomainDkimResource s)
+sesDomainDkimResource :: TF.Resource TF.AWS (SesDomainDkimResource s)
 sesDomainDkimResource =
     TF.newResource "aws_ses_domain_dkim" $
         SesDomainDkimResource {
@@ -27602,7 +27602,7 @@ instance HasComputedVerificationToken (SesDomainIdentityResource s) Text where
     computedVerificationToken =
         to (\_  -> TF.Compute "verification_token")
 
-sesDomainIdentityResource :: TF.Resource (TF.AWS s) (SesDomainIdentityResource s)
+sesDomainIdentityResource :: TF.Resource TF.AWS (SesDomainIdentityResource s)
 sesDomainIdentityResource =
     TF.newResource "aws_ses_domain_identity" $
         SesDomainIdentityResource {
@@ -27690,7 +27690,7 @@ instance HasSnsDestination (SesEventDestinationResource s) Text where
         lens (_sns_destination :: SesEventDestinationResource s -> TF.Argument s "sns_destination" Text)
              (\s a -> s { _sns_destination = a } :: SesEventDestinationResource s)
 
-sesEventDestinationResource :: TF.Resource (TF.AWS s) (SesEventDestinationResource s)
+sesEventDestinationResource :: TF.Resource TF.AWS (SesEventDestinationResource s)
 sesEventDestinationResource =
     TF.newResource "aws_ses_event_destination" $
         SesEventDestinationResource {
@@ -27744,7 +27744,7 @@ instance HasPolicy (SesReceiptFilterResource s) Text where
         lens (_policy :: SesReceiptFilterResource s -> TF.Argument s "policy" Text)
              (\s a -> s { _policy = a } :: SesReceiptFilterResource s)
 
-sesReceiptFilterResource :: TF.Resource (TF.AWS s) (SesReceiptFilterResource s)
+sesReceiptFilterResource :: TF.Resource TF.AWS (SesReceiptFilterResource s)
 sesReceiptFilterResource =
     TF.newResource "aws_ses_receipt_filter" $
         SesReceiptFilterResource {
@@ -27904,7 +27904,7 @@ instance HasWorkmailAction (SesReceiptRuleResource s) Text where
         lens (_workmail_action :: SesReceiptRuleResource s -> TF.Argument s "workmail_action" Text)
              (\s a -> s { _workmail_action = a } :: SesReceiptRuleResource s)
 
-sesReceiptRuleResource :: TF.Resource (TF.AWS s) (SesReceiptRuleResource s)
+sesReceiptRuleResource :: TF.Resource TF.AWS (SesReceiptRuleResource s)
 sesReceiptRuleResource =
     TF.newResource "aws_ses_receipt_rule" $
         SesReceiptRuleResource {
@@ -27945,7 +27945,7 @@ instance HasRuleSetName (SesReceiptRuleSetResource s) Text where
         lens (_rule_set_name :: SesReceiptRuleSetResource s -> TF.Argument s "rule_set_name" Text)
              (\s a -> s { _rule_set_name = a } :: SesReceiptRuleSetResource s)
 
-sesReceiptRuleSetResource :: TF.Resource (TF.AWS s) (SesReceiptRuleSetResource s)
+sesReceiptRuleSetResource :: TF.Resource TF.AWS (SesReceiptRuleSetResource s)
 sesReceiptRuleSetResource =
     TF.newResource "aws_ses_receipt_rule_set" $
         SesReceiptRuleSetResource {
@@ -28009,7 +28009,7 @@ instance HasComputedId (SesTemplateResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-sesTemplateResource :: TF.Resource (TF.AWS s) (SesTemplateResource s)
+sesTemplateResource :: TF.Resource TF.AWS (SesTemplateResource s)
 sesTemplateResource =
     TF.newResource "aws_ses_template" $
         SesTemplateResource {
@@ -28046,7 +28046,7 @@ instance HasComputedId (SimpledbDomainResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-simpledbDomainResource :: TF.Resource (TF.AWS s) (SimpledbDomainResource s)
+simpledbDomainResource :: TF.Resource TF.AWS (SimpledbDomainResource s)
 simpledbDomainResource =
     TF.newResource "aws_simpledb_domain" $
         SimpledbDomainResource {
@@ -28090,7 +28090,7 @@ instance HasComputedId (SnapshotCreateVolumePermissionResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-snapshotCreateVolumePermissionResource :: TF.Resource (TF.AWS s) (SnapshotCreateVolumePermissionResource s)
+snapshotCreateVolumePermissionResource :: TF.Resource TF.AWS (SnapshotCreateVolumePermissionResource s)
 snapshotCreateVolumePermissionResource =
     TF.newResource "aws_snapshot_create_volume_permission" $
         SnapshotCreateVolumePermissionResource {
@@ -28133,7 +28133,7 @@ instance HasPolicy (SnsTopicPolicyResource s) Text where
         lens (_policy :: SnsTopicPolicyResource s -> TF.Argument s "policy" Text)
              (\s a -> s { _policy = a } :: SnsTopicPolicyResource s)
 
-snsTopicPolicyResource :: TF.Resource (TF.AWS s) (SnsTopicPolicyResource s)
+snsTopicPolicyResource :: TF.Resource TF.AWS (SnsTopicPolicyResource s)
 snsTopicPolicyResource =
     TF.newResource "aws_sns_topic_policy" $
         SnsTopicPolicyResource {
@@ -28204,7 +28204,7 @@ instance HasComputedId (SnsTopicResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-snsTopicResource :: TF.Resource (TF.AWS s) (SnsTopicResource s)
+snsTopicResource :: TF.Resource TF.AWS (SnsTopicResource s)
 snsTopicResource =
     TF.newResource "aws_sns_topic" $
         SnsTopicResource {
@@ -28306,7 +28306,7 @@ instance HasTopicArn (SnsTopicSubscriptionResource s) Text where
         lens (_topic_arn :: SnsTopicSubscriptionResource s -> TF.Argument s "topic_arn" Text)
              (\s a -> s { _topic_arn = a } :: SnsTopicSubscriptionResource s)
 
-snsTopicSubscriptionResource :: TF.Resource (TF.AWS s) (SnsTopicSubscriptionResource s)
+snsTopicSubscriptionResource :: TF.Resource TF.AWS (SnsTopicSubscriptionResource s)
 snsTopicSubscriptionResource =
     TF.newResource "aws_sns_topic_subscription" $
         SnsTopicSubscriptionResource {
@@ -28353,7 +28353,7 @@ instance HasPrefix (SpotDatafeedSubscriptionResource s) Text where
         lens (_prefix :: SpotDatafeedSubscriptionResource s -> TF.Argument s "prefix" Text)
              (\s a -> s { _prefix = a } :: SpotDatafeedSubscriptionResource s)
 
-spotDatafeedSubscriptionResource :: TF.Resource (TF.AWS s) (SpotDatafeedSubscriptionResource s)
+spotDatafeedSubscriptionResource :: TF.Resource TF.AWS (SpotDatafeedSubscriptionResource s)
 spotDatafeedSubscriptionResource =
     TF.newResource "aws_spot_datafeed_subscription" $
         SpotDatafeedSubscriptionResource {
@@ -28483,7 +28483,7 @@ instance HasWaitForFulfillment (SpotFleetRequestResource s) Text where
         lens (_wait_for_fulfillment :: SpotFleetRequestResource s -> TF.Argument s "wait_for_fulfillment" Text)
              (\s a -> s { _wait_for_fulfillment = a } :: SpotFleetRequestResource s)
 
-spotFleetRequestResource :: TF.Resource (TF.AWS s) (SpotFleetRequestResource s)
+spotFleetRequestResource :: TF.Resource TF.AWS (SpotFleetRequestResource s)
 spotFleetRequestResource =
     TF.newResource "aws_spot_fleet_request" $
         SpotFleetRequestResource {
@@ -28583,7 +28583,7 @@ instance HasWaitForFulfillment (SpotInstanceRequestResource s) Text where
         lens (_wait_for_fulfillment :: SpotInstanceRequestResource s -> TF.Argument s "wait_for_fulfillment" Text)
              (\s a -> s { _wait_for_fulfillment = a } :: SpotInstanceRequestResource s)
 
-spotInstanceRequestResource :: TF.Resource (TF.AWS s) (SpotInstanceRequestResource s)
+spotInstanceRequestResource :: TF.Resource TF.AWS (SpotInstanceRequestResource s)
 spotInstanceRequestResource =
     TF.newResource "aws_spot_instance_request" $
         SpotInstanceRequestResource {
@@ -28627,7 +28627,7 @@ instance HasQueueUrl (SqsQueuePolicyResource s) Text where
         lens (_queue_url :: SqsQueuePolicyResource s -> TF.Argument s "queue_url" Text)
              (\s a -> s { _queue_url = a } :: SqsQueuePolicyResource s)
 
-sqsQueuePolicyResource :: TF.Resource (TF.AWS s) (SqsQueuePolicyResource s)
+sqsQueuePolicyResource :: TF.Resource TF.AWS (SqsQueuePolicyResource s)
 sqsQueuePolicyResource =
     TF.newResource "aws_sqs_queue_policy" $
         SqsQueuePolicyResource {
@@ -28798,7 +28798,7 @@ instance HasComputedId (SqsQueueResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-sqsQueueResource :: TF.Resource (TF.AWS s) (SqsQueueResource s)
+sqsQueueResource :: TF.Resource TF.AWS (SqsQueueResource s)
 sqsQueueResource =
     TF.newResource "aws_sqs_queue" $
         SqsQueueResource {
@@ -28928,7 +28928,7 @@ instance HasComputedRegistrationLimit (SsmActivationResource s) Text where
     computedRegistrationLimit =
         to (\_  -> TF.Compute "registration_limit")
 
-ssmActivationResource :: TF.Resource (TF.AWS s) (SsmActivationResource s)
+ssmActivationResource :: TF.Resource TF.AWS (SsmActivationResource s)
 ssmActivationResource =
     TF.newResource "aws_ssm_activation" $
         SsmActivationResource {
@@ -29048,7 +29048,7 @@ instance HasComputedParameters (SsmAssociationResource s) Text where
     computedParameters =
         to (\_  -> TF.Compute "parameters")
 
-ssmAssociationResource :: TF.Resource (TF.AWS s) (SsmAssociationResource s)
+ssmAssociationResource :: TF.Resource TF.AWS (SsmAssociationResource s)
 ssmAssociationResource =
     TF.newResource "aws_ssm_association" $
         SsmAssociationResource {
@@ -29208,7 +29208,7 @@ instance HasComputedStatus (SsmDocumentResource s) Text where
     computedStatus =
         to (\_  -> TF.Compute "status")
 
-ssmDocumentResource :: TF.Resource (TF.AWS s) (SsmDocumentResource s)
+ssmDocumentResource :: TF.Resource TF.AWS (SsmDocumentResource s)
 ssmDocumentResource =
     TF.newResource "aws_ssm_document" $
         SsmDocumentResource {
@@ -29285,7 +29285,7 @@ instance HasComputedId (SsmMaintenanceWindowResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ssmMaintenanceWindowResource :: TF.Resource (TF.AWS s) (SsmMaintenanceWindowResource s)
+ssmMaintenanceWindowResource :: TF.Resource TF.AWS (SsmMaintenanceWindowResource s)
 ssmMaintenanceWindowResource =
     TF.newResource "aws_ssm_maintenance_window" $
         SsmMaintenanceWindowResource {
@@ -29353,7 +29353,7 @@ instance HasComputedId (SsmMaintenanceWindowTargetResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ssmMaintenanceWindowTargetResource :: TF.Resource (TF.AWS s) (SsmMaintenanceWindowTargetResource s)
+ssmMaintenanceWindowTargetResource :: TF.Resource TF.AWS (SsmMaintenanceWindowTargetResource s)
 ssmMaintenanceWindowTargetResource =
     TF.newResource "aws_ssm_maintenance_window_target" $
         SsmMaintenanceWindowTargetResource {
@@ -29480,7 +29480,7 @@ instance HasComputedId (SsmMaintenanceWindowTaskResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ssmMaintenanceWindowTaskResource :: TF.Resource (TF.AWS s) (SsmMaintenanceWindowTaskResource s)
+ssmMaintenanceWindowTaskResource :: TF.Resource TF.AWS (SsmMaintenanceWindowTaskResource s)
 ssmMaintenanceWindowTaskResource =
     TF.newResource "aws_ssm_maintenance_window_task" $
         SsmMaintenanceWindowTaskResource {
@@ -29581,7 +29581,7 @@ instance HasComputedValue (SsmParameterResource s) Text where
     computedValue =
         to (\_  -> TF.Compute "value")
 
-ssmParameterResource :: TF.Resource (TF.AWS s) (SsmParameterResource s)
+ssmParameterResource :: TF.Resource TF.AWS (SsmParameterResource s)
 ssmParameterResource =
     TF.newResource "aws_ssm_parameter" $
         SsmParameterResource {
@@ -29691,7 +29691,7 @@ instance HasComputedId (SsmPatchBaselineResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ssmPatchBaselineResource :: TF.Resource (TF.AWS s) (SsmPatchBaselineResource s)
+ssmPatchBaselineResource :: TF.Resource TF.AWS (SsmPatchBaselineResource s)
 ssmPatchBaselineResource =
     TF.newResource "aws_ssm_patch_baseline" $
         SsmPatchBaselineResource {
@@ -29742,7 +29742,7 @@ instance HasComputedId (SsmPatchGroupResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-ssmPatchGroupResource :: TF.Resource (TF.AWS s) (SsmPatchGroupResource s)
+ssmPatchGroupResource :: TF.Resource TF.AWS (SsmPatchGroupResource s)
 ssmPatchGroupResource =
     TF.newResource "aws_ssm_patch_group" $
         SsmPatchGroupResource {
@@ -29809,7 +29809,7 @@ instance HasComputedStatus (StateMachineResource s) Text where
     computedStatus =
         to (\_  -> TF.Compute "status")
 
-stateMachineResource :: TF.Resource (TF.AWS s) (StateMachineResource s)
+stateMachineResource :: TF.Resource TF.AWS (StateMachineResource s)
 stateMachineResource =
     TF.newResource "sfn_state_machine" $
         StateMachineResource {
@@ -29935,7 +29935,7 @@ instance HasComputedVpcId (SubnetResource s) Text where
     computedVpcId =
         to (\_  -> TF.Compute "vpc_id")
 
-subnetResource :: TF.Resource (TF.AWS s) (SubnetResource s)
+subnetResource :: TF.Resource TF.AWS (SubnetResource s)
 subnetResource =
     TF.newResource "aws_subnet" $
         SubnetResource {
@@ -30033,7 +30033,7 @@ instance HasComputedVolumeId (VolumeAttachmentResource s) Text where
     computedVolumeId =
         to (\_  -> TF.Compute "volume_id")
 
-volumeAttachmentResource :: TF.Resource (TF.AWS s) (VolumeAttachmentResource s)
+volumeAttachmentResource :: TF.Resource TF.AWS (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "aws_volume_attachment" $
         VolumeAttachmentResource {
@@ -30075,7 +30075,7 @@ instance HasVpcId (VpcDhcpOptionsAssociationResource s) Text where
         lens (_vpc_id :: VpcDhcpOptionsAssociationResource s -> TF.Argument s "vpc_id" Text)
              (\s a -> s { _vpc_id = a } :: VpcDhcpOptionsAssociationResource s)
 
-vpcDhcpOptionsAssociationResource :: TF.Resource (TF.AWS s) (VpcDhcpOptionsAssociationResource s)
+vpcDhcpOptionsAssociationResource :: TF.Resource TF.AWS (VpcDhcpOptionsAssociationResource s)
 vpcDhcpOptionsAssociationResource =
     TF.newResource "aws_vpc_dhcp_options_association" $
         VpcDhcpOptionsAssociationResource {
@@ -30154,7 +30154,7 @@ instance HasTags (VpcDhcpOptionsResource s) TF.Tags where
         lens (_tags :: VpcDhcpOptionsResource s -> TF.Argument s "tags" TF.Tags)
              (\s a -> s { _tags = a } :: VpcDhcpOptionsResource s)
 
-vpcDhcpOptionsResource :: TF.Resource (TF.AWS s) (VpcDhcpOptionsResource s)
+vpcDhcpOptionsResource :: TF.Resource TF.AWS (VpcDhcpOptionsResource s)
 vpcDhcpOptionsResource =
     TF.newResource "aws_vpc_dhcp_options" $
         VpcDhcpOptionsResource {
@@ -30242,7 +30242,7 @@ instance HasComputedPrefixListId (VpcEndpointResource s) Text where
     computedPrefixListId =
         to (\_  -> TF.Compute "prefix_list_id")
 
-vpcEndpointResource :: TF.Resource (TF.AWS s) (VpcEndpointResource s)
+vpcEndpointResource :: TF.Resource TF.AWS (VpcEndpointResource s)
 vpcEndpointResource =
     TF.newResource "aws_vpc_endpoint" $
         VpcEndpointResource {
@@ -30297,7 +30297,7 @@ instance HasComputedId (VpcEndpointRouteTableAssociationResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-vpcEndpointRouteTableAssociationResource :: TF.Resource (TF.AWS s) (VpcEndpointRouteTableAssociationResource s)
+vpcEndpointRouteTableAssociationResource :: TF.Resource TF.AWS (VpcEndpointRouteTableAssociationResource s)
 vpcEndpointRouteTableAssociationResource =
     TF.newResource "aws_vpc_endpoint_route_table_association" $
         VpcEndpointRouteTableAssociationResource {
@@ -30353,7 +30353,7 @@ instance HasVpcPeeringConnectionId (VpcPeeringConnectionAccepterResource s) Text
         lens (_vpc_peering_connection_id :: VpcPeeringConnectionAccepterResource s -> TF.Argument s "vpc_peering_connection_id" Text)
              (\s a -> s { _vpc_peering_connection_id = a } :: VpcPeeringConnectionAccepterResource s)
 
-vpcPeeringConnectionAccepterResource :: TF.Resource (TF.AWS s) (VpcPeeringConnectionAccepterResource s)
+vpcPeeringConnectionAccepterResource :: TF.Resource TF.AWS (VpcPeeringConnectionAccepterResource s)
 vpcPeeringConnectionAccepterResource =
     TF.newResource "aws_vpc_peering_connection_accepter" $
         VpcPeeringConnectionAccepterResource {
@@ -30458,7 +30458,7 @@ instance HasVpcId (VpcPeeringConnectionResource s) Text where
         lens (_vpc_id :: VpcPeeringConnectionResource s -> TF.Argument s "vpc_id" Text)
              (\s a -> s { _vpc_id = a } :: VpcPeeringConnectionResource s)
 
-vpcPeeringConnectionResource :: TF.Resource (TF.AWS s) (VpcPeeringConnectionResource s)
+vpcPeeringConnectionResource :: TF.Resource TF.AWS (VpcPeeringConnectionResource s)
 vpcPeeringConnectionResource =
     TF.newResource "aws_vpc_peering_connection" $
         VpcPeeringConnectionResource {
@@ -30635,7 +30635,7 @@ instance HasComputedMainRouteTableId (VpcResource s) Text where
     computedMainRouteTableId =
         to (\_  -> TF.Compute "main_route_table_id")
 
-vpcResource :: TF.Resource (TF.AWS s) (VpcResource s)
+vpcResource :: TF.Resource TF.AWS (VpcResource s)
 vpcResource =
     TF.newResource "aws_vpc" $
         VpcResource {
@@ -30828,7 +30828,7 @@ instance HasComputedVpnGatewayId (VpnConnectionResource s) Text where
     computedVpnGatewayId =
         to (\_  -> TF.Compute "vpn_gateway_id")
 
-vpnConnectionResource :: TF.Resource (TF.AWS s) (VpnConnectionResource s)
+vpnConnectionResource :: TF.Resource TF.AWS (VpnConnectionResource s)
 vpnConnectionResource =
     TF.newResource "aws_vpn_connection" $
         VpnConnectionResource {
@@ -30882,7 +30882,7 @@ instance HasComputedVpnConnectionId (VpnConnectionRouteResource s) Text where
     computedVpnConnectionId =
         to (\_  -> TF.Compute "vpn_connection_id")
 
-vpnConnectionRouteResource :: TF.Resource (TF.AWS s) (VpnConnectionRouteResource s)
+vpnConnectionRouteResource :: TF.Resource TF.AWS (VpnConnectionRouteResource s)
 vpnConnectionRouteResource =
     TF.newResource "aws_vpn_connection_route" $
         VpnConnectionRouteResource {
@@ -30937,7 +30937,7 @@ instance HasComputedVpnGatewayId (VpnGatewayAttachmentResource s) Text where
     computedVpnGatewayId =
         to (\_  -> TF.Compute "vpn_gateway_id")
 
-vpnGatewayAttachmentResource :: TF.Resource (TF.AWS s) (VpnGatewayAttachmentResource s)
+vpnGatewayAttachmentResource :: TF.Resource TF.AWS (VpnGatewayAttachmentResource s)
 vpnGatewayAttachmentResource =
     TF.newResource "aws_vpn_gateway_attachment" $
         VpnGatewayAttachmentResource {
@@ -30992,7 +30992,7 @@ instance HasComputedId (VpnGatewayResource s) Text where
     computedId =
         to (\_  -> TF.Compute "id")
 
-vpnGatewayResource :: TF.Resource (TF.AWS s) (VpnGatewayResource s)
+vpnGatewayResource :: TF.Resource TF.AWS (VpnGatewayResource s)
 vpnGatewayResource =
     TF.newResource "aws_vpn_gateway" $
         VpnGatewayResource {
@@ -31035,7 +31035,7 @@ instance HasVpnGatewayId (VpnGatewayRoutePropagationResource s) Text where
         lens (_vpn_gateway_id :: VpnGatewayRoutePropagationResource s -> TF.Argument s "vpn_gateway_id" Text)
              (\s a -> s { _vpn_gateway_id = a } :: VpnGatewayRoutePropagationResource s)
 
-vpnGatewayRoutePropagationResource :: TF.Resource (TF.AWS s) (VpnGatewayRoutePropagationResource s)
+vpnGatewayRoutePropagationResource :: TF.Resource TF.AWS (VpnGatewayRoutePropagationResource s)
 vpnGatewayRoutePropagationResource =
     TF.newResource "aws_vpn_gateway_route_propagation" $
         VpnGatewayRoutePropagationResource {
@@ -31074,7 +31074,7 @@ instance HasName (WafByteMatchSetResource s) Text where
         lens (_name :: WafByteMatchSetResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: WafByteMatchSetResource s)
 
-wafByteMatchSetResource :: TF.Resource (TF.AWS s) (WafByteMatchSetResource s)
+wafByteMatchSetResource :: TF.Resource TF.AWS (WafByteMatchSetResource s)
 wafByteMatchSetResource =
     TF.newResource "aws_waf_byte_match_set" $
         WafByteMatchSetResource {
@@ -31113,7 +31113,7 @@ instance HasName (WafIpsetResource s) Text where
         lens (_name :: WafIpsetResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: WafIpsetResource s)
 
-wafIpsetResource :: TF.Resource (TF.AWS s) (WafIpsetResource s)
+wafIpsetResource :: TF.Resource TF.AWS (WafIpsetResource s)
 wafIpsetResource =
     TF.newResource "aws_waf_ipset" $
         WafIpsetResource {
@@ -31182,7 +31182,7 @@ instance HasRateLimit (WafRateBasedRuleResource s) Text where
         lens (_rate_limit :: WafRateBasedRuleResource s -> TF.Argument s "rate_limit" Text)
              (\s a -> s { _rate_limit = a } :: WafRateBasedRuleResource s)
 
-wafRateBasedRuleResource :: TF.Resource (TF.AWS s) (WafRateBasedRuleResource s)
+wafRateBasedRuleResource :: TF.Resource TF.AWS (WafRateBasedRuleResource s)
 wafRateBasedRuleResource =
     TF.newResource "aws_waf_rate_based_rule" $
         WafRateBasedRuleResource {
@@ -31234,7 +31234,7 @@ instance HasPredicates (WafRuleResource s) Text where
         lens (_predicates :: WafRuleResource s -> TF.Argument s "predicates" Text)
              (\s a -> s { _predicates = a } :: WafRuleResource s)
 
-wafRuleResource :: TF.Resource (TF.AWS s) (WafRuleResource s)
+wafRuleResource :: TF.Resource TF.AWS (WafRuleResource s)
 wafRuleResource =
     TF.newResource "aws_waf_rule" $
         WafRuleResource {
@@ -31274,7 +31274,7 @@ instance HasSizeConstraints (WafSizeConstraintSetResource s) Text where
         lens (_size_constraints :: WafSizeConstraintSetResource s -> TF.Argument s "size_constraints" Text)
              (\s a -> s { _size_constraints = a } :: WafSizeConstraintSetResource s)
 
-wafSizeConstraintSetResource :: TF.Resource (TF.AWS s) (WafSizeConstraintSetResource s)
+wafSizeConstraintSetResource :: TF.Resource TF.AWS (WafSizeConstraintSetResource s)
 wafSizeConstraintSetResource =
     TF.newResource "aws_waf_size_constraint_set" $
         WafSizeConstraintSetResource {
@@ -31313,7 +31313,7 @@ instance HasSqlInjectionMatchTuples (WafSqlInjectionMatchSetResource s) Text whe
         lens (_sql_injection_match_tuples :: WafSqlInjectionMatchSetResource s -> TF.Argument s "sql_injection_match_tuples" Text)
              (\s a -> s { _sql_injection_match_tuples = a } :: WafSqlInjectionMatchSetResource s)
 
-wafSqlInjectionMatchSetResource :: TF.Resource (TF.AWS s) (WafSqlInjectionMatchSetResource s)
+wafSqlInjectionMatchSetResource :: TF.Resource TF.AWS (WafSqlInjectionMatchSetResource s)
 wafSqlInjectionMatchSetResource =
     TF.newResource "aws_waf_sql_injection_match_set" $
         WafSqlInjectionMatchSetResource {
@@ -31372,7 +31372,7 @@ instance HasRules (WafWebAclResource s) Text where
         lens (_rules :: WafWebAclResource s -> TF.Argument s "rules" Text)
              (\s a -> s { _rules = a } :: WafWebAclResource s)
 
-wafWebAclResource :: TF.Resource (TF.AWS s) (WafWebAclResource s)
+wafWebAclResource :: TF.Resource TF.AWS (WafWebAclResource s)
 wafWebAclResource =
     TF.newResource "aws_waf_web_acl" $
         WafWebAclResource {
@@ -31413,7 +31413,7 @@ instance HasXssMatchTuples (WafXssMatchSetResource s) Text where
         lens (_xss_match_tuples :: WafXssMatchSetResource s -> TF.Argument s "xss_match_tuples" Text)
              (\s a -> s { _xss_match_tuples = a } :: WafXssMatchSetResource s)
 
-wafXssMatchSetResource :: TF.Resource (TF.AWS s) (WafXssMatchSetResource s)
+wafXssMatchSetResource :: TF.Resource TF.AWS (WafXssMatchSetResource s)
 wafXssMatchSetResource =
     TF.newResource "aws_waf_xss_match_set" $
         WafXssMatchSetResource {
@@ -31453,7 +31453,7 @@ instance HasName (WafregionalByteMatchSetResource s) Text where
         lens (_name :: WafregionalByteMatchSetResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: WafregionalByteMatchSetResource s)
 
-wafregionalByteMatchSetResource :: TF.Resource (TF.AWS s) (WafregionalByteMatchSetResource s)
+wafregionalByteMatchSetResource :: TF.Resource TF.AWS (WafregionalByteMatchSetResource s)
 wafregionalByteMatchSetResource =
     TF.newResource "aws_wafregional_byte_match_set" $
         WafregionalByteMatchSetResource {
@@ -31493,7 +31493,7 @@ instance HasName (WafregionalIpsetResource s) Text where
         lens (_name :: WafregionalIpsetResource s -> TF.Argument s "name" Text)
              (\s a -> s { _name = a } :: WafregionalIpsetResource s)
 
-wafregionalIpsetResource :: TF.Resource (TF.AWS s) (WafregionalIpsetResource s)
+wafregionalIpsetResource :: TF.Resource TF.AWS (WafregionalIpsetResource s)
 wafregionalIpsetResource =
     TF.newResource "aws_wafregional_ipset" $
         WafregionalIpsetResource {
