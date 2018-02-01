@@ -34,6 +34,7 @@ module Terrafomo.Format
 
     -- ** Numbers
     , Format.int
+    , pint
     , Format.float
 
     -- ** Bytes
@@ -42,7 +43,7 @@ module Terrafomo.Format
 
 import Data.Text (Text)
 
-import Formatting (Format, (%))
+import Formatting (Format, (%), (%.))
 
 import Terrafomo.Attribute (Attribute (Constant))
 import Terrafomo.IP
@@ -66,7 +67,7 @@ nformat fmt =
     Format.runFormat fmt (Name . LText.toStrict . Build.toLazyText)
 
 -- | Given a textual formatter and a constant, produce a Terraform attribute.
-aformat :: Format (Attribute s n Text) r -> r
+aformat :: Format (Attribute s Text) r -> r
 aformat fmt =
     Format.runFormat fmt (Constant . LText.toStrict . Build.toLazyText)
 
@@ -90,6 +91,6 @@ fbool =
         True  -> "true"
         False -> "false"
 
--- -- | Output a zero-padded 'Integral'.
--- intp :: (Integral a, Format.Buildable a) => Int -> Format r (a -> r)
--- intp n = Format.left n '0' %. Format.int
+-- | Output a zero-padded 'Integral'.
+pint :: (Integral a, Format.Buildable a) => Int -> Format r (a -> r)
+pint n = Format.left n '0' %. Format.int

@@ -38,7 +38,6 @@ module Terrafomo.Monad
     , remote
 
     -- * Attribute Values
-    , computed
     , constant
     , nil
     ) where
@@ -70,6 +69,7 @@ import qualified Data.DList                   as DList
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Lens.Micro                   as Lens
+import qualified Terrafomo.Format             as Format
 import qualified Terrafomo.Hash               as Hash
 import qualified Terrafomo.HCL                as HCL
 import qualified Terrafomo.Meta               as Meta
@@ -108,7 +108,8 @@ newtype TerraformConfig = TerraformConfig
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformState = UnsafeTerraformState
-    { backend     :: !(Backend  HCL.Value)
+    { supply      :: !Int
+    , backend     :: !(Backend  HCL.Value)
     , providers   :: !(ValueMap Key)
     , remotes     :: !(ValueMap Key)
     , datasources :: !(ValueMap Key)
@@ -166,7 +167,8 @@ runTerraform x name m =
 
     state =
         UnsafeTerraformState
-            { backend     = HCL.toHCL <$> x
+            { supply      = 0
+            , backend     = HCL.toHCL <$> x
             , providers   = VMap.empty
             , remotes     = VMap.empty
             , datasources = VMap.empty
@@ -278,20 +280,12 @@ instance ( MonadTerraform s m
 
 -- Syntax
 
--- | Refer to a reference's attribute for which the value will be computed
--- during @terraform apply@.
-computed
-    :: Lens.SimpleGetter a (Computed s b)
-    -> Reference s a
-    -> Attribute s n b
-computed l (UnsafeReference key x) = Compute key (x Lens.^. l)
-
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
-constant :: forall n s a. a -> Attribute s n a
+constant :: a -> Attribute s a
 constant = Constant
 
 -- | Omit an attribute. Equivalent to 'Nothing'.
-nil :: forall n s a. Attribute s n a
+nil :: Attribute s a
 nil = Nil
 
 withProvider
@@ -353,7 +347,7 @@ datasource name x =
         unless unique $
             MTL.throwError (NonUniqueKey key value)
 
-        pure $! UnsafeReference key (dataConfig x)
+        pure (UnsafeReference key)
 
 resource
     :: ( MonadTerraform s m
@@ -376,7 +370,10 @@ resource name x =
         unless unique $
             MTL.throwError (NonUniqueKey key value)
 
-        pure $! UnsafeReference key (resourceConfig x)
+        pure (UnsafeReference key)
+
+-- * Use a unique supply / incrementing counter to generate unique output names
+--   for values and key/name for computed attributes.
 
 -- | Emit an output variable to the remote state.
 --
@@ -385,19 +382,20 @@ resource name x =
 -- @
 output
     :: ( MonadTerraform s m
-       , HCL.ToHCL b
+       , HCL.ToHCL a
        )
-    => Lens.SimpleGetter a (Computed s b)
-    -> Reference s a
-    -> m (Output b)
-output l (UnsafeReference key x) =
+    => Attribute s a
+    -> m (Output a)
+output attr = do
     liftTerraform $ do
-        b <- MTL.gets backend
+        b    <- MTL.gets backend
+        name <- case attr of
+            Computed k v ->
+                pure $! nformat (Format.stext % "_" % fname) (Hash.base16 k) v
+            _ ->
+                getNextName "var_"
 
-        let attr  = x Lens.^. l
-            name  = nformat (ftype % "_" % fname % "_" % fname)
-                        (keyType key) (keyName key) (computedName attr)
-            out   = Output b name (key, computedName attr)
+        let out   = Output b name attr
             value = HCL.toHCL out
 
         unique <-
@@ -411,14 +409,13 @@ output l (UnsafeReference key x) =
 -- | Refer to another block of terraform's output variable, and automagically
 -- introduce the appropriate remote state datasource.
 remote
-    :: forall n s m a.
-       MonadTerraform s m
+    :: MonadTerraform s m
     => Output a
-    -> m (Attribute s n a)
-remote (Output x name _) =
+    -> m (Attribute s a)
+remote x =
     liftTerraform $ do
-        let hash  = Name (Hash.human x)
-            state = newRemoteState hash x
+        let hash  = Name (Hash.human (outputBackend x))
+            state = newRemoteState hash (outputBackend x)
             key   = remoteStateKey state
             value = HCL.toHCL state
 
@@ -428,7 +425,7 @@ remote (Output x name _) =
             then MTL.throwError (NonUniqueKey key value)
             else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
-        pure $! Compute key (Computed name)
+        pure (Computed key (outputName x))
 
 insertValue
     :: ( MonadTerraform s m
@@ -449,3 +446,14 @@ insertValue key value state update =
         case VMap.insert key value vmap of
             Nothing    ->                               pure False
             Just vmap' -> MTL.modify' (update vmap') >> pure True
+
+-- | Generate a unique prefixed name for the current context.
+getNextName
+    :: MonadTerraform s m
+    => LText.Text
+    -> m Name
+getNextName pre =
+    liftTerraform $ do
+        MTL.modify' (\s -> s { supply = supply s + 1 })
+        nformat (Format.text % Format.pint 3) pre
+            <$> MTL.gets supply

@@ -51,7 +51,6 @@ import Data.Word
 import Formatting ((%))
 
 import GHC.Generics (Generic)
-import GHC.TypeLits (KnownSymbol)
 
 import Numeric.Natural (Natural)
 
@@ -159,17 +158,16 @@ assign k v = Assign k (toHCL v)
 
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-attribute :: (KnownSymbol n, ToHCL a) => Attribute s n a -> Maybe Value
-attribute x =
-    assign (unquoted (fromName (attributeName x))) <$>
-        case x of
-            Compute  k (Computed n) -> Just (computed k n)
-            Constant             v  -> Just (toHCL      v)
-            _                       -> Nothing
+attribute :: ToHCL a => Attribute s a -> Maybe Value
+attribute = \case
+    Computed k v -> Just (computed k v)
+    Constant   v -> Just (toHCL      v)
+    _            -> Nothing
 
 computed :: Key -> Name -> Value
 computed (Key t n) v =
-    toHCL $ Format.sformat ("${" % ftype % "." % fname % "." % fname % "}") t n v
+    toHCL $
+        Format.sformat ("${" % ftype % "." % fname % "." % fname % "}") t n v
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object

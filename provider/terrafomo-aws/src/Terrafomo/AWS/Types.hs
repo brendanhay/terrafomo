@@ -116,11 +116,11 @@ fzonesuf =
 -- S3
 
 data S3BucketVersioning s = S3BucketVersioning
-    { _enabled    :: !(Attribute s "enabled" Bool)
+    { _enabled    :: !(Attribute s Bool)
     -- ^ Enable versioning. Once you version-enable a bucket, it can never
     -- return to an unversioned state. You can, however, suspend versioning on
     -- that bucket.
-    , _mfa_delete :: !(Attribute s "mfa_delete" Bool)
+    , _mfa_delete :: !(Attribute s Bool)
     -- ^ Enable MFA delete for either Change the versioning state of your
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq)
@@ -133,8 +133,8 @@ s3BucketVersioning = S3BucketVersioning
 
 instance HCL.ToHCL (S3BucketVersioning s) where
     toHCL S3BucketVersioning{..} = HCL.block $ catMaybes
-        [ HCL.attribute _enabled
-        , HCL.attribute _mfa_delete
+        [ HCL.assign "enabled"    <$> HCL.attribute _enabled
+        , HCL.assign "mfa_delete" <$> HCL.attribute _mfa_delete
         ]
 
 instance HasEnabled (S3BucketVersioning s) s Bool where
@@ -185,13 +185,13 @@ instance HCL.ToHCL DynamoTableAttributes where
 -- template, possible along with smart constructors for the above types.
 
 class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (Attribute s "enabled" b)
+    enabled :: Lens' a (Attribute s b)
 
 instance HasEnabled a s b => HasEnabled (Resource p a) s b where
     enabled = configuration . enabled
 
 class HasMfaDelete a s b | a -> s b where
-    mfaDelete :: Lens' a (Attribute s "mfa_delete" b)
+    mfaDelete :: Lens' a (Attribute s b)
 
 instance HasMfaDelete a s b => HasMfaDelete (Resource p a) s b where
     mfaDelete = configuration . mfaDelete

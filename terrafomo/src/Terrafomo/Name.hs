@@ -45,10 +45,8 @@ instance Hashable Type where
 -- | Output a Terraform 'Type'.
 ftype :: Format r (Type -> r)
 ftype =
-    Format.later $ \(Type mp n) ->
-        case mp of
-            Nothing -> Build.fromText n
-            Just p  -> Format.bprint (Format.stext % "." % Format.stext) p n
+    Format.later $ \(Type _ n) ->
+        Build.fromText n
 
 data Key = Key
     { keyType :: !Type
@@ -61,9 +59,8 @@ instance Hashable Key where
           `hashWithSalt` keyName x
 
 -- | Opaque Named Reference.
-data Reference s a = UnsafeReference
-    { referenceKey    :: !Key
-    , referenceConfig :: !a
+newtype Reference s a = UnsafeReference
+    { referenceKey :: Key
     } deriving (Show)
 
 referenceName :: Reference s a -> Name

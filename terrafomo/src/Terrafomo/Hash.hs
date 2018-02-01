@@ -1,21 +1,30 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Terrafomo.Hash where
+module Terrafomo.Hash
+    ( base16
+    , human
+    ) where
 
 import Data.Hashable (Hashable (hash))
 import Data.Text     (Text)
 
+import Numeric (showHex)
+
 import qualified Data.Text     as Text
 import qualified System.Random as Random
 
+base16 :: Hashable a => a -> Text
+base16 x =
+   let n = hash x
+    in Text.pack ((if signum n < 0 then 'n' else 'p') : showHex (abs n) "")
+
 human :: Hashable a => a -> Text
-human =
-      Text.intercalate "_"
-    . map (dictionary !!)
-    . take 5
-    . Random.randomRs (0, length dictionary)
-    . Random.mkStdGen
-    . hash
+human = Text.intercalate "_"
+      . map (dictionary !!)
+      . take 5
+      . Random.randomRs (0, length dictionary)
+      . Random.mkStdGen
+      . hash
 
 dictionary :: [Text]
 dictionary =

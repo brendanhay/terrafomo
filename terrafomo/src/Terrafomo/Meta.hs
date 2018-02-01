@@ -2,16 +2,19 @@
 {-# LANGUAGE LambdaCase             #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 
 module Terrafomo.Meta
     ( HasMeta      (..)
     , Dependency   (..)
+    , dependOn
 
     , Changes
-    , getChanges
     , wildcardChange
     , attributeChange
+    , ignoreAllChanges
+    , ignore
 
     , HasLifecycle (..)
     , Lifecycle    (..)
@@ -21,14 +24,12 @@ import Data.Function  (on)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 
-import GHC.TypeLits (KnownSymbol)
-
 import Lens.Micro (ASetter', Lens, Lens', lens)
 
-import Terrafomo.Attribute (Attribute, attributeName)
 import Terrafomo.Name
 
 import qualified Data.Set      as Set
+import qualified Lens.Micro    as Lens
 import qualified Terrafomo.HCL as HCL
 
 -- Meta Parameters (shared between Resource + DataSources)
@@ -53,6 +54,15 @@ newtype Dependency = Dependency Key
 
 instance HCL.ToHCL Dependency where
     toHCL (Dependency k) = HCL.toHCL k
+
+dependOn
+    :: HasMeta b
+    => Reference s a
+    -> b p c
+    -> b p c
+dependOn x =
+    Lens.over dependsOn $
+        Set.insert (Dependency (referenceKey x))
 
 -- Attribute Changes
 
@@ -79,21 +89,28 @@ instance Monoid (Changes a) where
     mappend = (<>)
 
 instance HCL.ToHCL (Changes a) where
-    toHCL x =
-        case getChanges x of
-            Nothing -> HCL.list [HCL.string "*"]
-            Just ns -> HCL.list ns
+    toHCL = \case
+        Wildcard -> HCL.list [HCL.string "*"]
+        Match xs -> HCL.list xs
 
-getChanges :: Changes a -> Maybe (Set Name)
-getChanges = \case
-    Wildcard -> Nothing
-    Match xs -> Just xs
+wildcardChange :: Changes a
+wildcardChange = Wildcard
 
-wildcardChange :: Changes a -> Changes a
-wildcardChange = const Wildcard
+attributeChange :: Name -> Changes a
+attributeChange x = Match (Set.singleton x)
 
-attributeChange :: KnownSymbol n => Attribute s n a -> Changes a -> Changes a
-attributeChange x xs = Match (Set.singleton (attributeName x)) <> xs
+ignoreAllChanges
+    :: HasLifecycle a b
+    => a
+    -> a
+ignoreAllChanges = Lens.set ignoreChanges wildcardChange
+
+ignore
+    :: HasLifecycle a b
+    => Lens.SimpleGetter a (Changes b)
+    -> a
+    -> a
+ignore l x = Lens.over ignoreChanges (<> (x Lens.^. l)) x
 
 -- Lifecycle
 
