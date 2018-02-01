@@ -43,6 +43,7 @@ module Terrafomo.AWS.Types
     -- * Formatters
     , fregion
     , fzone
+    , fzonesuf
 
     -- * Re-exported Types
     , Bool
@@ -106,14 +107,20 @@ fzone =
     Format.later $ \(Zone reg suf) ->
         Format.bprint (fregion % Format.char) reg suf
 
+-- | Format an AWS availability zone suffix.
+fzonesuf :: Format r (Zone -> r)
+fzonesuf =
+    Format.later $ \(Zone _ suf) ->
+        Format.bprint Format.char suf
+
 -- S3
 
 data S3BucketVersioning s = S3BucketVersioning
-    { _enabled    :: !(Argument s "enabled" Bool)
+    { _enabled    :: !(Attribute s "enabled" Bool)
     -- ^ Enable versioning. Once you version-enable a bucket, it can never
     -- return to an unversioned state. You can, however, suspend versioning on
     -- that bucket.
-    , _mfa_delete :: !(Argument s "mfa_delete" Bool)
+    , _mfa_delete :: !(Attribute s "mfa_delete" Bool)
     -- ^ Enable MFA delete for either Change the versioning state of your
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq)
@@ -126,8 +133,8 @@ s3BucketVersioning = S3BucketVersioning
 
 instance HCL.ToHCL (S3BucketVersioning s) where
     toHCL S3BucketVersioning{..} = HCL.block $ catMaybes
-        [ HCL.argument _enabled
-        , HCL.argument _mfa_delete
+        [ HCL.attribute _enabled
+        , HCL.attribute _mfa_delete
         ]
 
 instance HasEnabled (S3BucketVersioning s) s Bool where
@@ -178,13 +185,13 @@ instance HCL.ToHCL DynamoTableAttributes where
 -- template, possible along with smart constructors for the above types.
 
 class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (Argument s "enabled" b)
+    enabled :: Lens' a (Attribute s "enabled" b)
 
 instance HasEnabled a s b => HasEnabled (Resource p a) s b where
     enabled = configuration . enabled
 
 class HasMfaDelete a s b | a -> s b where
-    mfaDelete :: Lens' a (Argument s "mfa_delete" b)
+    mfaDelete :: Lens' a (Attribute s "mfa_delete" b)
 
 instance HasMfaDelete a s b => HasMfaDelete (Resource p a) s b where
     mfaDelete = configuration . mfaDelete

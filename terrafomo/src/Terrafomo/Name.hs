@@ -1,14 +1,18 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings          #-}
 
-module Terrafomo.Syntax.Name
-    ( Name (..)
+module Terrafomo.Name
+    ( Name      (..)
     , fname
 
-    , Type (..)
+    , Type      (..)
     , ftype
 
-    , Key  (..)
+    , Key       (..)
+
+    , Reference (..)
+    , referenceName
+    , freference
     ) where
 
 import Data.Hashable  (Hashable (hashWithSalt))
@@ -55,3 +59,14 @@ instance Hashable Key where
     hashWithSalt s x =
         s `hashWithSalt` keyType x
           `hashWithSalt` keyName x
+
+-- | Opaque Named Reference.
+newtype Reference s a = UnsafeReference { referenceKey :: Key }
+    deriving (Show)
+
+referenceName :: Reference s a -> Name
+referenceName = keyName . referenceKey
+
+-- | Format the @NAME@ from the @TYPE.NAME@ Terraform key reference.
+freference :: Format r (Reference s a -> r)
+freference = Format.mapf referenceName fname

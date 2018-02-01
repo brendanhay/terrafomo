@@ -10,7 +10,7 @@ import qualified System.Random as Random
 
 human :: Hashable a => a -> Text
 human =
-      Text.intercalate "-"
+      Text.intercalate "_"
     . map (dictionary !!)
     . take 5
     . Random.randomRs (0, length dictionary)

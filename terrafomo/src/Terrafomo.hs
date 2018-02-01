@@ -10,19 +10,11 @@ module Terrafomo
       Terraform
     , runTerraform
 
-    -- * Terraform Monad Transformer
-    , TerraformT
-    , runTerraformT
-
     -- * Terraform Monad Class
     , MonadTerraform (..)
 
     -- * Errors
     , TerraformError (..)
-
-    -- * State/Output
-    , TerraformState (..)
-    , renderState
 
     -- * Terraform Backends
     , Backend        (..)
@@ -35,13 +27,10 @@ module Terrafomo
     , Reference
     , referenceKey
 
-    -- ** Arguments and Attributes
+    -- ** Attributes
     , Attribute
-    , Argument
-
     , constant
     , nil
-    , attribute
 
     -- * Providers
     , IsProvider     (..)
@@ -68,7 +57,9 @@ module Terrafomo
     , Lifecycle       (..)
 
     -- * Outputs and Remote State
+    , Output
     , output
+    , remote
 
     -- * Formatting
     , (Formatting.%)
@@ -91,20 +82,21 @@ module Terrafomo
 
 import GHC.TypeLits (KnownSymbol)
 
+import Terrafomo.Attribute
+import Terrafomo.Backend
+import Terrafomo.DataSource
+import Terrafomo.IP
+import Terrafomo.Meta
 import Terrafomo.Monad
-import Terrafomo.Syntax.Backend
-import Terrafomo.Syntax.DataSource
-import Terrafomo.Syntax.IP
-import Terrafomo.Syntax.Meta
-import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Provider
-import Terrafomo.Syntax.Resource
-import Terrafomo.Syntax.Variable
+import Terrafomo.Name
+import Terrafomo.Output
+import Terrafomo.Provider
+import Terrafomo.Resource
 
-import qualified Data.Set             as Set
+import qualified Data.Set      as Set
 import qualified Formatting
-import qualified Lens.Micro           as Lens
-import qualified Terrafomo.Syntax.HCL as HCL
+import qualified Lens.Micro    as Lens
+import qualified Terrafomo.HCL as HCL
 
 dependOn
     :: HasMeta b
@@ -126,8 +118,8 @@ ignoreChange
     :: ( KnownSymbol n
        , HasLifecycle a b
        )
-    => Lens.SimpleGetter a (Argument s n b)
+    => Lens.SimpleGetter a (Attribute s n b)
     -> a
     -> a
 ignoreChange l x =
-    Lens.over ignoreChanges (argumentChange (x Lens.^. l)) x
+    Lens.over ignoreChanges (attributeChange (x Lens.^. l)) x

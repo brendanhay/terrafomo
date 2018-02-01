@@ -19,7 +19,7 @@ import Data.Void          (Void)
 import GHC.Generics (Generic)
 
 import Terrafomo.Gen.Text
-import Terrafomo.Syntax.HCL
+import Terrafomo.HCL
 
 import Text.Megaparsec              ((<?>))
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty), (<$$>), (<+>))

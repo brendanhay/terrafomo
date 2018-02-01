@@ -4,14 +4,14 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 
-module Terrafomo.Syntax.Meta
+module Terrafomo.Meta
     ( HasMeta      (..)
     , Dependency   (..)
 
     , Changes
     , getChanges
     , wildcardChange
-    , argumentChange
+    , attributeChange
 
     , HasLifecycle (..)
     , Lifecycle    (..)
@@ -25,11 +25,11 @@ import GHC.TypeLits (KnownSymbol)
 
 import Lens.Micro (ASetter', Lens, Lens', lens)
 
-import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Variable (Argument, argumentName)
+import Terrafomo.Attribute (Attribute, attributeName)
+import Terrafomo.Name
 
-import qualified Data.Set             as Set
-import qualified Terrafomo.Syntax.HCL as HCL
+import qualified Data.Set      as Set
+import qualified Terrafomo.HCL as HCL
 
 -- Meta Parameters (shared between Resource + DataSources)
 
@@ -92,8 +92,8 @@ getChanges = \case
 wildcardChange :: Changes a -> Changes a
 wildcardChange = const Wildcard
 
-argumentChange :: KnownSymbol n => Argument s n a -> Changes a -> Changes a
-argumentChange x xs = Match (Set.singleton (argumentName x)) <> xs
+attributeChange :: KnownSymbol n => Attribute s n a -> Changes a -> Changes a
+attributeChange x xs = Match (Set.singleton (attributeName x)) <> xs
 
 -- Lifecycle
 

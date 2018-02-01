@@ -1,4 +1,4 @@
-module Terrafomo.Syntax.IP
+module Terrafomo.IP
     ( Bits (..)
     , fbits
 
@@ -19,7 +19,7 @@ import Numeric (showInt)
 import qualified Data.Bits              as Bit
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
-import qualified Terrafomo.Syntax.HCL   as HCL
+import qualified Terrafomo.HCL          as HCL
 
 -- | A 32-bit mask.
 data Bits

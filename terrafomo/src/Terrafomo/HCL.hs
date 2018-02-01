@@ -5,7 +5,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE ViewPatterns      #-}
 
-module Terrafomo.Syntax.HCL
+module Terrafomo.HCL
     ( Id          (..)
     , Value       (..)
     , Interpolate (..)
@@ -19,7 +19,7 @@ module Terrafomo.Syntax.HCL
     , assign
 
     , attribute
-    , argument
+    , computed
 
     , object
     , block
@@ -58,8 +58,8 @@ import Numeric.Natural (Natural)
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
-import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Variable
+import Terrafomo.Attribute
+import Terrafomo.Name
 
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
@@ -146,7 +146,6 @@ instance Pretty Interpolate where
 renderHCL :: [Value] -> Doc
 renderHCL = PP.vcat . List.intersperse (PP.text " ") . map pretty
 
-
 prettyBlock :: [Value] -> Doc
 prettyBlock xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
 
@@ -158,21 +157,19 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
-attribute :: Key -> Attribute s a -> Value
-attribute (Key t n) v =
-    toHCL $
-        Format.sformat ("${" % ftype % "." % fname % "." % fname % "}")
-            t n (attributeName v)
-
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-argument :: (KnownSymbol n, ToHCL a) => Argument s n a -> Maybe Value
-argument x =
-    assign (unquoted (fromName (argumentName x))) <$>
+attribute :: (KnownSymbol n, ToHCL a) => Attribute s n a -> Maybe Value
+attribute x =
+    assign (unquoted (fromName (attributeName x))) <$>
         case x of
-            Attribute k v -> Just (attribute k v)
-            Constant    v -> Just (toHCL       v)
-            _             -> Nothing
+            Computed k n -> Just (computed k n)
+            Constant   v -> Just (toHCL      v)
+            _            -> Nothing
+
+computed :: Key -> Name -> Value
+computed (Key t n) v =
+    toHCL $ Format.sformat ("${" % ftype % "." % fname % "." % fname % "}") t n v
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
@@ -184,7 +181,7 @@ list :: (Foldable f, ToHCL a) => f a -> Value
 list = List . map toHCL . Fold.toList
 
 pairs :: ToHCL a => Map Text a -> Value
-pairs = block . map (\(k, v) -> assign (quoted k) v) . Map.toList
+pairs = block . map (\(k, v) -> assign (unquoted k) v) . Map.toList
 
 unquoted :: Text -> Id
 unquoted = Unquoted
@@ -196,7 +193,7 @@ key :: Id -> Key -> NonEmpty Id
 key p k = p :| [type_ (keyType k), name (keyName k)]
 
 type_ :: Type -> Id
-type_ = Quoted . Format.sformat ftype
+type_ = Quoted . Format.sformat Format.stext . typeName
 
 name :: Name -> Id
 name = Quoted . Format.sformat fname

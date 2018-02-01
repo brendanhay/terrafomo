@@ -48,11 +48,12 @@ import Lens.Micro (Getting, Lens', lens, to)
 {% for import in imports %}
 import qualified {{ import.value }} as TF
 {% endfor %}
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Meta     as TF (configuration)
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.IP as TF
+import qualified Terrafomo.Meta as TF (configuration)
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Resource as TF
+import qualified Terrafomo.Attribute as TF
 {% for schema in schemas %}
 
 {% let original = schema.value.name %}
@@ -76,7 +77,7 @@ import qualified Terrafomo.Syntax.Variable as TF
 -}
 data {{ schema.key }} s = {{ schema.key }} {
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Argument s "{{ arg.value.name }}" {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Attribute s "{{ arg.value.name }}" {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq)
@@ -84,7 +85,7 @@ data {{ schema.key }} s = {{ schema.key }} {
 instance TF.ToHCL ({{ schema.key }} s) where
   {% for arg in schema.value.arguments %}
     {% if arg.first %}toHCL {{ schema.key }}{..} = TF.block $ catMaybes
-        [{% else %}    ,{% endif %} TF.argument {{ arg.key }}{% if arg.last %}
+        [{% else %}    ,{% endif %} TF.attribute {{ arg.key }}{% if arg.last %}
         ]{% endif %}
   {% else %}
     toHCL _ = TF.block []
@@ -95,16 +96,14 @@ instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} whe
     type {{ field.value.class }}Thread ({{ schema.key }} s) {{ field.value.type }} = s
 
     {{ field.value.method }} =
-        lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Argument s "{{ field.value.name }}" {{ field.value.type }})
+        lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Attribute s "{{ field.value.name }}" {{ field.value.type }})
              (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }} s)
   {% endfor %}
   {% for field in schema.value.attributeFields %}
 
 instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} where
-    type {{ field.value.class }}Thread ({{ schema.key }} s) {{ field.value.type }} = s
-
     {{ field.value.method }} =
-        to (\_  -> TF.Compute "{{ field.value.name }}")
+        to (\x -> TF.Computed (TF.referenceKey x) "{{ field.value.name }}")
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
@@ -124,7 +123,7 @@ instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} whe
 class {{ class.value.name }} a b | a -> b where
     type {{ class.value.name }}Thread a b :: *
 
-    {{ class.value.method }} :: Lens' a (TF.Argument ({{ class.value.name }}Thread a b) "{{ class.value.symbol }}" b)
+    {{ class.value.method }} :: Lens' a (TF.Attribute ({{ class.value.name }}Thread a b) "{{ class.value.symbol }}" b)
 
 instance {{ class.value.name }} a b => {{ class.value.name}} (TF.{{ type }} p a) b where
     type {{ class.value.name }}Thread (TF.{{ type }} p a) b =
@@ -135,13 +134,5 @@ instance {{ class.value.name }} a b => {{ class.value.name}} (TF.{{ type }} p a)
 {% for class in attributeClasses %}
 
 class {{ class.value.name }} a b | a -> b where
-    type {{ class.value.name }}Thread a b :: *
-
-    {{ class.value.method }} :: forall r. Getting r a (TF.Attribute ({{ class.value.name }}Thread a b) b)
-
-instance {{ class.value.name }} a b => {{ class.value.name }} (TF.{{ type }} p a) b where
-    type {{ class.value.name }}Thread (TF.{{ type }} p a) b =
-         {{ class.value.name }}Thread a b
-
-    {{ class.value.method }} = TF.configuration . {{ class.value.method }}
+    {{ class.value.method }} :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 {% endfor %}

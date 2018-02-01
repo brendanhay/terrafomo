@@ -1,17 +1,18 @@
 {-# LANGUAGE DeriveFunctor     #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Terrafomo.Syntax.Backend
+module Terrafomo.Backend
     ( Backend (..)
     , Local   (..)
     , localBackend
     ) where
 
+import Data.Hashable  (Hashable (hashWithSalt))
 import Data.Semigroup ((<>))
 
-import Terrafomo.Syntax.Name (Name)
+import Terrafomo.Name (Name)
 
-import qualified Terrafomo.Syntax.HCL as HCL
+import qualified Terrafomo.HCL as HCL
 
 -- | Only one backend may be specified and the configuration may not contain
 -- interpolations.
@@ -19,6 +20,11 @@ data Backend b = Backend
     { backendName   :: !Name
     , backendConfig :: !b
     } deriving (Show, Eq, Functor)
+
+instance Hashable b => Hashable (Backend b) where
+    hashWithSalt s x =
+        s `hashWithSalt` backendName   x
+          `hashWithSalt` backendConfig x
 
 instance HCL.ToHCL a => HCL.ToHCL (Backend a) where
     toHCL (Backend n x) =

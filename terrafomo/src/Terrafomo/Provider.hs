@@ -3,7 +3,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeFamilies        #-}
 
-module Terrafomo.Syntax.Provider
+module Terrafomo.Provider
     ( IsProvider (..)
     , providerKey
     ) where
@@ -14,10 +14,10 @@ import Data.String   (fromString)
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
-import Terrafomo.Syntax.Name
+import Terrafomo.Name
 
-import qualified Terrafomo.Hash       as Hash
-import qualified Terrafomo.Syntax.HCL as HCL
+import qualified Terrafomo.Hash as Hash
+import qualified Terrafomo.HCL  as HCL
 
 class ( KnownSymbol (ProviderType p)
       , Hashable p

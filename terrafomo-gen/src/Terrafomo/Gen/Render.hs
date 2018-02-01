@@ -122,8 +122,8 @@ schemas tmpls p typ xs =
         , "imports"          .=
             ( NS.types p
             : [NS.provider p <> "Provider"   | isJust (providerDatatype p)]
-           ++ ["Terrafomo.Syntax.Resource"   | typ == Resource]
-           ++ ["Terrafomo.Syntax.DataSource" | typ == DataSource]
+           ++ ["Terrafomo.Resource"   | typ == Resource]
+           ++ ["Terrafomo.DataSource" | typ == DataSource]
             )
         ]
 

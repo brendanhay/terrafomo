@@ -17,30 +17,19 @@ library:
 
   exposed-modules:
     - Terrafomo
+    - Terrafomo.Attribute
+    - Terrafomo.Backend
+    - Terrafomo.DataSource
     - Terrafomo.Format
+    - Terrafomo.HCL
+    - Terrafomo.IP
+    - Terrafomo.Meta
     - Terrafomo.Monad
-    - Terrafomo.ValueMap
-
-    - Terrafomo.Syntax.Backend
-    - Terrafomo.Syntax.DataSource
-    - Terrafomo.Syntax.HCL
-    - Terrafomo.Syntax.IP
-    - Terrafomo.Syntax.Meta
-    - Terrafomo.Syntax.Name
-    - Terrafomo.Syntax.Provider
-    - Terrafomo.Syntax.Resource
-    - Terrafomo.Syntax.Variable
-
-    # FIXME: Most of these should in fact be replaced by
-    # equivalent Haskell-isms, such as 'readFile', 'genRandom', and so on.
-    # - Terrafomo.Archive.DataSource
-    # - Terrafomo.DNS.DataSource
-    # - Terrafomo.DNS.Resource
-    # - Terrafomo.Local.Resource
-    # - Terrafomo.Random.Resource
-    # - Terrafomo.TLS.Resource
-    # - Terrafomo.Template.DataSource
-    # - Terrafomo.Template.Resource
+    - Terrafomo.Name
+    - Terrafomo.Output
+    - Terrafomo.Provider
+    - Terrafomo.RemoteState
+    - Terrafomo.Resource
 
   dependencies:
     - base       >= 4.9

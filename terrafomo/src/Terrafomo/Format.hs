@@ -19,6 +19,8 @@ module Terrafomo.Format
     -- * Formatters
     -- ** Terraform Syntax
     , fname
+    , ftype
+    , freference
     , fbool
     , fbits
     , fcidr
@@ -42,9 +44,9 @@ import Data.Text (Text)
 
 import Formatting (Format, (%))
 
-import Terrafomo.Syntax.IP
-import Terrafomo.Syntax.Name
-import Terrafomo.Syntax.Variable (Argument (Constant))
+import Terrafomo.Attribute (Attribute (Constant))
+import Terrafomo.IP
+import Terrafomo.Name
 
 import qualified Data.Text.Lazy         as LText
 import qualified Data.Text.Lazy.Builder as Build
@@ -63,14 +65,14 @@ nformat :: Format Name r -> r
 nformat fmt =
     Format.runFormat fmt (Name . LText.toStrict . Build.toLazyText)
 
--- | Given a textual formatter and a constant, produce a Terraform argument.
-aformat :: Format (Argument s n Text) r -> r
+-- | Given a textual formatter and a constant, produce a Terraform attribute.
+aformat :: Format (Attribute s n Text) r -> r
 aformat fmt =
     Format.runFormat fmt (Constant . LText.toStrict . Build.toLazyText)
 
 -- -- | Given a lazy textual formatter and a list of constants, produce a
--- -- delimited Terraform argument list.
--- aformatList :: Format (Argument Text) r -> r
+-- -- delimited Terraform attribute list.
+-- aformatList :: Format (Attribute Text) r -> r
 -- aformatList fmt =
 --       Constant
 --     . LText.toStrict

@@ -9,9 +9,9 @@ module Terrafomo.ValueMap
 import Data.DList (DList)
 import Data.Set   (Set)
 
-import qualified Data.DList           as DList
-import qualified Data.Set             as Set
-import qualified Terrafomo.Syntax.HCL as HCL
+import qualified Data.DList    as DList
+import qualified Data.Set      as Set
+import qualified Terrafomo.HCL as HCL
 
 data ValueMap k = ValueMap
     { keys   :: !(Set   k)
