@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -113,14 +114,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute       as TF
 import qualified Terrafomo.GitHub.Provider as TF
 import qualified Terrafomo.GitHub.Types    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Meta     as TF (configuration)
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.IP              as TF
+import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Resource        as TF
+import qualified Terrafomo.Resource        as TF
 
 {- | The @github_branch_protection@ GitHub resource.
 
@@ -130,66 +132,78 @@ will be protected from forced pushes and deletion. Additional constraints,
 such as required status checks or restrictions on users and teams, can also
 be configured.
 -}
-data BranchProtectionResource = BranchProtectionResource {
-      _branch :: !(TF.Argument "branch" Text)
+data BranchProtectionResource s = BranchProtectionResource {
+      _branch :: !(TF.Attribute s "branch" Text)
     {- ^ (Required) The Git branch to protect. -}
-    , _enforce_admins :: !(TF.Argument "enforce_admins" Text)
+    , _enforce_admins :: !(TF.Attribute s "enforce_admins" Text)
     {- ^ (Optional) Boolean, setting this to @true@ enforces status checks for repository administrators. -}
-    , _repository :: !(TF.Argument "repository" Text)
+    , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) The GitHub repository name. -}
-    , _required_pull_request_reviews :: !(TF.Argument "required_pull_request_reviews" Text)
+    , _required_pull_request_reviews :: !(TF.Attribute s "required_pull_request_reviews" Text)
     {- ^ (Optional) Enforce restrictions for pull request reviews. See <#required-pull-request-reviews> below for details. -}
-    , _required_status_checks :: !(TF.Argument "required_status_checks" Text)
+    , _required_status_checks :: !(TF.Attribute s "required_status_checks" Text)
     {- ^ (Optional) Enforce restrictions for required status checks. See <#required-status-checks> below for details. -}
-    , _restrictions :: !(TF.Argument "restrictions" Text)
+    , _restrictions :: !(TF.Attribute s "restrictions" Text)
     {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL BranchProtectionResource where
+instance TF.ToHCL (BranchProtectionResource s) where
     toHCL BranchProtectionResource{..} = TF.block $ catMaybes
-        [ TF.argument _branch
-        , TF.argument _enforce_admins
-        , TF.argument _repository
-        , TF.argument _required_pull_request_reviews
-        , TF.argument _required_status_checks
-        , TF.argument _restrictions
+        [ TF.attribute _branch
+        , TF.attribute _enforce_admins
+        , TF.attribute _repository
+        , TF.attribute _required_pull_request_reviews
+        , TF.attribute _required_status_checks
+        , TF.attribute _restrictions
         ]
 
-instance HasBranch BranchProtectionResource Text where
+instance HasBranch (BranchProtectionResource s) Text where
+    type HasBranchThread (BranchProtectionResource s) Text = s
+
     branch =
-        lens (_branch :: BranchProtectionResource -> TF.Argument "branch" Text)
-             (\s a -> s { _branch = a } :: BranchProtectionResource)
+        lens (_branch :: BranchProtectionResource s -> TF.Attribute s "branch" Text)
+             (\s a -> s { _branch = a } :: BranchProtectionResource s)
 
-instance HasEnforceAdmins BranchProtectionResource Text where
+instance HasEnforceAdmins (BranchProtectionResource s) Text where
+    type HasEnforceAdminsThread (BranchProtectionResource s) Text = s
+
     enforceAdmins =
-        lens (_enforce_admins :: BranchProtectionResource -> TF.Argument "enforce_admins" Text)
-             (\s a -> s { _enforce_admins = a } :: BranchProtectionResource)
+        lens (_enforce_admins :: BranchProtectionResource s -> TF.Attribute s "enforce_admins" Text)
+             (\s a -> s { _enforce_admins = a } :: BranchProtectionResource s)
 
-instance HasRepository BranchProtectionResource Text where
+instance HasRepository (BranchProtectionResource s) Text where
+    type HasRepositoryThread (BranchProtectionResource s) Text = s
+
     repository =
-        lens (_repository :: BranchProtectionResource -> TF.Argument "repository" Text)
-             (\s a -> s { _repository = a } :: BranchProtectionResource)
+        lens (_repository :: BranchProtectionResource s -> TF.Attribute s "repository" Text)
+             (\s a -> s { _repository = a } :: BranchProtectionResource s)
 
-instance HasRequiredPullRequestReviews BranchProtectionResource Text where
+instance HasRequiredPullRequestReviews (BranchProtectionResource s) Text where
+    type HasRequiredPullRequestReviewsThread (BranchProtectionResource s) Text = s
+
     requiredPullRequestReviews =
-        lens (_required_pull_request_reviews :: BranchProtectionResource -> TF.Argument "required_pull_request_reviews" Text)
-             (\s a -> s { _required_pull_request_reviews = a } :: BranchProtectionResource)
+        lens (_required_pull_request_reviews :: BranchProtectionResource s -> TF.Attribute s "required_pull_request_reviews" Text)
+             (\s a -> s { _required_pull_request_reviews = a } :: BranchProtectionResource s)
 
-instance HasRequiredStatusChecks BranchProtectionResource Text where
+instance HasRequiredStatusChecks (BranchProtectionResource s) Text where
+    type HasRequiredStatusChecksThread (BranchProtectionResource s) Text = s
+
     requiredStatusChecks =
-        lens (_required_status_checks :: BranchProtectionResource -> TF.Argument "required_status_checks" Text)
-             (\s a -> s { _required_status_checks = a } :: BranchProtectionResource)
+        lens (_required_status_checks :: BranchProtectionResource s -> TF.Attribute s "required_status_checks" Text)
+             (\s a -> s { _required_status_checks = a } :: BranchProtectionResource s)
 
-instance HasRestrictions BranchProtectionResource Text where
+instance HasRestrictions (BranchProtectionResource s) Text where
+    type HasRestrictionsThread (BranchProtectionResource s) Text = s
+
     restrictions =
-        lens (_restrictions :: BranchProtectionResource -> TF.Argument "restrictions" Text)
-             (\s a -> s { _restrictions = a } :: BranchProtectionResource)
+        lens (_restrictions :: BranchProtectionResource s -> TF.Attribute s "restrictions" Text)
+             (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
-branchProtectionResource :: TF.Resource TF.GitHub BranchProtectionResource
+branchProtectionResource :: TF.Resource TF.GitHub (BranchProtectionResource s)
 branchProtectionResource =
     TF.newResource "github_branch_protection" $
         BranchProtectionResource {
-            _branch = TF.Nil
+              _branch = TF.Nil
             , _enforce_admins = TF.Nil
             , _repository = TF.Nil
             , _required_pull_request_reviews = TF.Nil
@@ -208,50 +222,58 @@ and those labels easily conflict with custom ones. This resource will first
 check if the label exists, and then issue an update, otherwise it will
 create.
 -}
-data IssueLabelResource = IssueLabelResource {
-      _color      :: !(TF.Argument "color" Text)
+data IssueLabelResource s = IssueLabelResource {
+      _color      :: !(TF.Attribute s "color" Text)
     {- ^ (Required) A 6 character hex code, without the leading # , identifying the color of the label. -}
-    , _name       :: !(TF.Argument "name" Text)
+    , _name       :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the label. -}
-    , _repository :: !(TF.Argument "repository" Text)
+    , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) The GitHub repository -}
-    , _url        :: !(TF.Argument "url" Text)
+    , _url        :: !(TF.Attribute s "url" Text)
     {- ^ - (Computed) The URL to the issue label -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL IssueLabelResource where
+instance TF.ToHCL (IssueLabelResource s) where
     toHCL IssueLabelResource{..} = TF.block $ catMaybes
-        [ TF.argument _color
-        , TF.argument _name
-        , TF.argument _repository
-        , TF.argument _url
+        [ TF.attribute _color
+        , TF.attribute _name
+        , TF.attribute _repository
+        , TF.attribute _url
         ]
 
-instance HasColor IssueLabelResource Text where
+instance HasColor (IssueLabelResource s) Text where
+    type HasColorThread (IssueLabelResource s) Text = s
+
     color =
-        lens (_color :: IssueLabelResource -> TF.Argument "color" Text)
-             (\s a -> s { _color = a } :: IssueLabelResource)
+        lens (_color :: IssueLabelResource s -> TF.Attribute s "color" Text)
+             (\s a -> s { _color = a } :: IssueLabelResource s)
 
-instance HasName IssueLabelResource Text where
+instance HasName (IssueLabelResource s) Text where
+    type HasNameThread (IssueLabelResource s) Text = s
+
     name =
-        lens (_name :: IssueLabelResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: IssueLabelResource)
+        lens (_name :: IssueLabelResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: IssueLabelResource s)
 
-instance HasRepository IssueLabelResource Text where
+instance HasRepository (IssueLabelResource s) Text where
+    type HasRepositoryThread (IssueLabelResource s) Text = s
+
     repository =
-        lens (_repository :: IssueLabelResource -> TF.Argument "repository" Text)
-             (\s a -> s { _repository = a } :: IssueLabelResource)
+        lens (_repository :: IssueLabelResource s -> TF.Attribute s "repository" Text)
+             (\s a -> s { _repository = a } :: IssueLabelResource s)
 
-instance HasUrl IssueLabelResource Text where
+instance HasUrl (IssueLabelResource s) Text where
+    type HasUrlThread (IssueLabelResource s) Text = s
+
     url =
-        lens (_url :: IssueLabelResource -> TF.Argument "url" Text)
-             (\s a -> s { _url = a } :: IssueLabelResource)
+        lens (_url :: IssueLabelResource s -> TF.Attribute s "url" Text)
+             (\s a -> s { _url = a } :: IssueLabelResource s)
 
-issueLabelResource :: TF.Resource TF.GitHub IssueLabelResource
+issueLabelResource :: TF.Resource TF.GitHub (IssueLabelResource s)
 issueLabelResource =
     TF.newResource "github_issue_label" $
         IssueLabelResource {
-            _color = TF.Nil
+              _color = TF.Nil
             , _name = TF.Nil
             , _repository = TF.Nil
             , _url = TF.Nil
@@ -264,34 +286,38 @@ add/remove users from your organization. When applied, an invitation will be
 sent to the user to become part of the organization. When destroyed, either
 the invitation will be cancelled or the user will be removed.
 -}
-data MembershipResource = MembershipResource {
-      _role     :: !(TF.Argument "role" Text)
+data MembershipResource s = MembershipResource {
+      _role     :: !(TF.Attribute s "role" Text)
     {- ^ (Optional) The role of the user within the organization. Must be one of @member@ or @admin@ . Defaults to @member@ . -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The user to add to the organization. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL MembershipResource where
+instance TF.ToHCL (MembershipResource s) where
     toHCL MembershipResource{..} = TF.block $ catMaybes
-        [ TF.argument _role
-        , TF.argument _username
+        [ TF.attribute _role
+        , TF.attribute _username
         ]
 
-instance HasRole MembershipResource Text where
+instance HasRole (MembershipResource s) Text where
+    type HasRoleThread (MembershipResource s) Text = s
+
     role =
-        lens (_role :: MembershipResource -> TF.Argument "role" Text)
-             (\s a -> s { _role = a } :: MembershipResource)
+        lens (_role :: MembershipResource s -> TF.Attribute s "role" Text)
+             (\s a -> s { _role = a } :: MembershipResource s)
 
-instance HasUsername MembershipResource Text where
+instance HasUsername (MembershipResource s) Text where
+    type HasUsernameThread (MembershipResource s) Text = s
+
     username =
-        lens (_username :: MembershipResource -> TF.Argument "username" Text)
-             (\s a -> s { _username = a } :: MembershipResource)
+        lens (_username :: MembershipResource s -> TF.Attribute s "username" Text)
+             (\s a -> s { _username = a } :: MembershipResource s)
 
-membershipResource :: TF.Resource TF.GitHub MembershipResource
+membershipResource :: TF.Resource TF.GitHub (MembershipResource s)
 membershipResource =
     TF.newResource "github_membership" $
         MembershipResource {
-            _role = TF.Nil
+              _role = TF.Nil
             , _username = TF.Nil
             }
 
@@ -300,54 +326,62 @@ membershipResource =
 This resource allows you to create and manage webhooks for Github
 organization.
 -}
-data OrganizationWebhookResource = OrganizationWebhookResource {
-      _active        :: !(TF.Argument "active" Text)
+data OrganizationWebhookResource s = OrganizationWebhookResource {
+      _active        :: !(TF.Attribute s "active" Text)
     {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
-    , _configuration :: !(TF.Argument "configuration" Text)
+    , _configuration :: !(TF.Attribute s "configuration" Text)
     {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
-    , _events        :: !(TF.Argument "events" Text)
+    , _events        :: !(TF.Attribute s "events" Text)
     {- ^ (Required) A list of events which should trigger the webhook. See a list of <https://developer.github.com/v3/activity/events/types/> -}
-    , _name          :: !(TF.Argument "name" Text)
+    , _name          :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL OrganizationWebhookResource where
+instance TF.ToHCL (OrganizationWebhookResource s) where
     toHCL OrganizationWebhookResource{..} = TF.block $ catMaybes
-        [ TF.argument _active
-        , TF.argument _configuration
-        , TF.argument _events
-        , TF.argument _name
+        [ TF.attribute _active
+        , TF.attribute _configuration
+        , TF.attribute _events
+        , TF.attribute _name
         ]
 
-instance HasActive OrganizationWebhookResource Text where
+instance HasActive (OrganizationWebhookResource s) Text where
+    type HasActiveThread (OrganizationWebhookResource s) Text = s
+
     active =
-        lens (_active :: OrganizationWebhookResource -> TF.Argument "active" Text)
-             (\s a -> s { _active = a } :: OrganizationWebhookResource)
+        lens (_active :: OrganizationWebhookResource s -> TF.Attribute s "active" Text)
+             (\s a -> s { _active = a } :: OrganizationWebhookResource s)
 
-instance HasConfiguration OrganizationWebhookResource Text where
+instance HasConfiguration (OrganizationWebhookResource s) Text where
+    type HasConfigurationThread (OrganizationWebhookResource s) Text = s
+
     configuration =
-        lens (_configuration :: OrganizationWebhookResource -> TF.Argument "configuration" Text)
-             (\s a -> s { _configuration = a } :: OrganizationWebhookResource)
+        lens (_configuration :: OrganizationWebhookResource s -> TF.Attribute s "configuration" Text)
+             (\s a -> s { _configuration = a } :: OrganizationWebhookResource s)
 
-instance HasEvents OrganizationWebhookResource Text where
+instance HasEvents (OrganizationWebhookResource s) Text where
+    type HasEventsThread (OrganizationWebhookResource s) Text = s
+
     events =
-        lens (_events :: OrganizationWebhookResource -> TF.Argument "events" Text)
-             (\s a -> s { _events = a } :: OrganizationWebhookResource)
+        lens (_events :: OrganizationWebhookResource s -> TF.Attribute s "events" Text)
+             (\s a -> s { _events = a } :: OrganizationWebhookResource s)
 
-instance HasName OrganizationWebhookResource Text where
+instance HasName (OrganizationWebhookResource s) Text where
+    type HasNameThread (OrganizationWebhookResource s) Text = s
+
     name =
-        lens (_name :: OrganizationWebhookResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: OrganizationWebhookResource)
+        lens (_name :: OrganizationWebhookResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: OrganizationWebhookResource s)
 
-instance HasComputedUrl OrganizationWebhookResource Text where
+instance HasComputedUrl (OrganizationWebhookResource s) Text where
     computedUrl =
-        to (\_  -> TF.Compute "url")
+        to (\x -> TF.Computed (TF.referenceKey x) "url")
 
-organizationWebhookResource :: TF.Resource TF.GitHub OrganizationWebhookResource
+organizationWebhookResource :: TF.Resource TF.GitHub (OrganizationWebhookResource s)
 organizationWebhookResource =
     TF.newResource "github_organization_webhook" $
         OrganizationWebhookResource {
-            _active = TF.Nil
+              _active = TF.Nil
             , _configuration = TF.Nil
             , _events = TF.Nil
             , _name = TF.Nil
@@ -365,42 +399,48 @@ destroyed, either the invitation will be cancelled or the collaborator will
 be removed from the repository. Further documentation on GitHub
 collaborators:
 -}
-data RepositoryCollaboratorResource = RepositoryCollaboratorResource {
-      _permission :: !(TF.Argument "permission" Text)
+data RepositoryCollaboratorResource s = RepositoryCollaboratorResource {
+      _permission :: !(TF.Attribute s "permission" Text)
     {- ^ (Optional) The permission of the outside collaborator for the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @push@ . -}
-    , _repository :: !(TF.Argument "repository" Text)
+    , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) The GitHub repository -}
-    , _username   :: !(TF.Argument "username" Text)
+    , _username   :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The user to add to the repository as a collaborator. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RepositoryCollaboratorResource where
+instance TF.ToHCL (RepositoryCollaboratorResource s) where
     toHCL RepositoryCollaboratorResource{..} = TF.block $ catMaybes
-        [ TF.argument _permission
-        , TF.argument _repository
-        , TF.argument _username
+        [ TF.attribute _permission
+        , TF.attribute _repository
+        , TF.attribute _username
         ]
 
-instance HasPermission RepositoryCollaboratorResource Text where
+instance HasPermission (RepositoryCollaboratorResource s) Text where
+    type HasPermissionThread (RepositoryCollaboratorResource s) Text = s
+
     permission =
-        lens (_permission :: RepositoryCollaboratorResource -> TF.Argument "permission" Text)
-             (\s a -> s { _permission = a } :: RepositoryCollaboratorResource)
+        lens (_permission :: RepositoryCollaboratorResource s -> TF.Attribute s "permission" Text)
+             (\s a -> s { _permission = a } :: RepositoryCollaboratorResource s)
 
-instance HasRepository RepositoryCollaboratorResource Text where
+instance HasRepository (RepositoryCollaboratorResource s) Text where
+    type HasRepositoryThread (RepositoryCollaboratorResource s) Text = s
+
     repository =
-        lens (_repository :: RepositoryCollaboratorResource -> TF.Argument "repository" Text)
-             (\s a -> s { _repository = a } :: RepositoryCollaboratorResource)
+        lens (_repository :: RepositoryCollaboratorResource s -> TF.Attribute s "repository" Text)
+             (\s a -> s { _repository = a } :: RepositoryCollaboratorResource s)
 
-instance HasUsername RepositoryCollaboratorResource Text where
+instance HasUsername (RepositoryCollaboratorResource s) Text where
+    type HasUsernameThread (RepositoryCollaboratorResource s) Text = s
+
     username =
-        lens (_username :: RepositoryCollaboratorResource -> TF.Argument "username" Text)
-             (\s a -> s { _username = a } :: RepositoryCollaboratorResource)
+        lens (_username :: RepositoryCollaboratorResource s -> TF.Attribute s "username" Text)
+             (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
 
-repositoryCollaboratorResource :: TF.Resource TF.GitHub RepositoryCollaboratorResource
+repositoryCollaboratorResource :: TF.Resource TF.GitHub (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource =
     TF.newResource "github_repository_collaborator" $
         RepositoryCollaboratorResource {
-            _permission = TF.Nil
+              _permission = TF.Nil
             , _repository = TF.Nil
             , _username = TF.Nil
             }
@@ -413,50 +453,58 @@ repository. This key is attached directly to the repository instead of to a
 personal user account. This resource allows you to add/remove repository
 deploy keys. Further documentation on GitHub repository deploy keys:
 -}
-data RepositoryDeployKeyResource = RepositoryDeployKeyResource {
-      _key        :: !(TF.Argument "key" Text)
+data RepositoryDeployKeyResource s = RepositoryDeployKeyResource {
+      _key        :: !(TF.Attribute s "key" Text)
     {- ^ (Required) A ssh key. -}
-    , _read_only  :: !(TF.Argument "read_only" Text)
+    , _read_only  :: !(TF.Attribute s "read_only" Text)
     {- ^ (Required) A boolean qualifying the key to be either read only or read/write. -}
-    , _repository :: !(TF.Argument "repository" Text)
+    , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) Name of the Github repository. -}
-    , _title      :: !(TF.Argument "title" Text)
+    , _title      :: !(TF.Attribute s "title" Text)
     {- ^ (Required) A title. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RepositoryDeployKeyResource where
+instance TF.ToHCL (RepositoryDeployKeyResource s) where
     toHCL RepositoryDeployKeyResource{..} = TF.block $ catMaybes
-        [ TF.argument _key
-        , TF.argument _read_only
-        , TF.argument _repository
-        , TF.argument _title
+        [ TF.attribute _key
+        , TF.attribute _read_only
+        , TF.attribute _repository
+        , TF.attribute _title
         ]
 
-instance HasKey RepositoryDeployKeyResource Text where
+instance HasKey (RepositoryDeployKeyResource s) Text where
+    type HasKeyThread (RepositoryDeployKeyResource s) Text = s
+
     key =
-        lens (_key :: RepositoryDeployKeyResource -> TF.Argument "key" Text)
-             (\s a -> s { _key = a } :: RepositoryDeployKeyResource)
+        lens (_key :: RepositoryDeployKeyResource s -> TF.Attribute s "key" Text)
+             (\s a -> s { _key = a } :: RepositoryDeployKeyResource s)
 
-instance HasReadOnly RepositoryDeployKeyResource Text where
+instance HasReadOnly (RepositoryDeployKeyResource s) Text where
+    type HasReadOnlyThread (RepositoryDeployKeyResource s) Text = s
+
     readOnly =
-        lens (_read_only :: RepositoryDeployKeyResource -> TF.Argument "read_only" Text)
-             (\s a -> s { _read_only = a } :: RepositoryDeployKeyResource)
+        lens (_read_only :: RepositoryDeployKeyResource s -> TF.Attribute s "read_only" Text)
+             (\s a -> s { _read_only = a } :: RepositoryDeployKeyResource s)
 
-instance HasRepository RepositoryDeployKeyResource Text where
+instance HasRepository (RepositoryDeployKeyResource s) Text where
+    type HasRepositoryThread (RepositoryDeployKeyResource s) Text = s
+
     repository =
-        lens (_repository :: RepositoryDeployKeyResource -> TF.Argument "repository" Text)
-             (\s a -> s { _repository = a } :: RepositoryDeployKeyResource)
+        lens (_repository :: RepositoryDeployKeyResource s -> TF.Attribute s "repository" Text)
+             (\s a -> s { _repository = a } :: RepositoryDeployKeyResource s)
 
-instance HasTitle RepositoryDeployKeyResource Text where
+instance HasTitle (RepositoryDeployKeyResource s) Text where
+    type HasTitleThread (RepositoryDeployKeyResource s) Text = s
+
     title =
-        lens (_title :: RepositoryDeployKeyResource -> TF.Argument "title" Text)
-             (\s a -> s { _title = a } :: RepositoryDeployKeyResource)
+        lens (_title :: RepositoryDeployKeyResource s -> TF.Attribute s "title" Text)
+             (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
 
-repositoryDeployKeyResource :: TF.Resource TF.GitHub RepositoryDeployKeyResource
+repositoryDeployKeyResource :: TF.Resource TF.GitHub (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource =
     TF.newResource "github_repository_deploy_key" $
         RepositoryDeployKeyResource {
-            _key = TF.Nil
+              _key = TF.Nil
             , _read_only = TF.Nil
             , _repository = TF.Nil
             , _title = TF.Nil
@@ -468,150 +516,178 @@ This resource allows you to create and manage repositories within your
 Github organization. This resource cannot currently be used to manage
 personal repositories, outside of organizations.
 -}
-data RepositoryResource = RepositoryResource {
-      _allow_merge_commit :: !(TF.Argument "allow_merge_commit" Text)
+data RepositoryResource s = RepositoryResource {
+      _allow_merge_commit :: !(TF.Attribute s "allow_merge_commit" Text)
     {- ^ (Optional) Set to @false@ to disable merge commits on the repository. -}
-    , _allow_rebase_merge :: !(TF.Argument "allow_rebase_merge" Text)
+    , _allow_rebase_merge :: !(TF.Attribute s "allow_rebase_merge" Text)
     {- ^ (Optional) Set to @false@ to disable rebase merges on the repository. -}
-    , _allow_squash_merge :: !(TF.Argument "allow_squash_merge" Text)
+    , _allow_squash_merge :: !(TF.Attribute s "allow_squash_merge" Text)
     {- ^ (Optional) Set to @false@ to disable squash merges on the repository. -}
-    , _auto_init          :: !(TF.Argument "auto_init" Text)
+    , _auto_init          :: !(TF.Attribute s "auto_init" Text)
     {- ^ (Optional) Meaningful only during create; set to @true@ to produce an initial commit in the repository. -}
-    , _default_branch     :: !(TF.Argument "default_branch" Text)
+    , _default_branch     :: !(TF.Attribute s "default_branch" Text)
     {- ^ (Optional) The name of the default branch of the repository. NOTE: This can only be set after a repository has already been created, and after a correct reference has been created for the target branch inside the repository. This means a user will have to omit this parameter from the initial repository creation and create the target branch inside of the repository prior to setting this attribute. -}
-    , _description        :: !(TF.Argument "description" Text)
+    , _description        :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description of the repository. -}
-    , _gitignore_template :: !(TF.Argument "gitignore_template" Text)
+    , _gitignore_template :: !(TF.Attribute s "gitignore_template" Text)
     {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/gitignore> without the extension. For example, "Haskell". -}
-    , _has_downloads      :: !(TF.Argument "has_downloads" Text)
+    , _has_downloads      :: !(TF.Attribute s "has_downloads" Text)
     {- ^ (Optional) Set to @true@ to enable the (deprecated) downloads features on the repository. -}
-    , _has_issues         :: !(TF.Argument "has_issues" Text)
+    , _has_issues         :: !(TF.Attribute s "has_issues" Text)
     {- ^ (Optional) Set to @true@ to enable the Github Issues features on the repository. -}
-    , _has_wiki           :: !(TF.Argument "has_wiki" Text)
+    , _has_wiki           :: !(TF.Attribute s "has_wiki" Text)
     {- ^ (Optional) Set to @true@ to enable the Github Wiki features on the repository. -}
-    , _homepage_url       :: !(TF.Argument "homepage_url" Text)
+    , _homepage_url       :: !(TF.Attribute s "homepage_url" Text)
     {- ^ (Optional) URL of a page describing the project. -}
-    , _license_template   :: !(TF.Argument "license_template" Text)
+    , _license_template   :: !(TF.Attribute s "license_template" Text)
     {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses> without the extension. For example, "mit" or "mozilla". -}
-    , _name               :: !(TF.Argument "name" Text)
+    , _name               :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the repository. -}
-    , _private            :: !(TF.Argument "private" Text)
+    , _private            :: !(TF.Attribute s "private" Text)
     {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RepositoryResource where
+instance TF.ToHCL (RepositoryResource s) where
     toHCL RepositoryResource{..} = TF.block $ catMaybes
-        [ TF.argument _allow_merge_commit
-        , TF.argument _allow_rebase_merge
-        , TF.argument _allow_squash_merge
-        , TF.argument _auto_init
-        , TF.argument _default_branch
-        , TF.argument _description
-        , TF.argument _gitignore_template
-        , TF.argument _has_downloads
-        , TF.argument _has_issues
-        , TF.argument _has_wiki
-        , TF.argument _homepage_url
-        , TF.argument _license_template
-        , TF.argument _name
-        , TF.argument _private
+        [ TF.attribute _allow_merge_commit
+        , TF.attribute _allow_rebase_merge
+        , TF.attribute _allow_squash_merge
+        , TF.attribute _auto_init
+        , TF.attribute _default_branch
+        , TF.attribute _description
+        , TF.attribute _gitignore_template
+        , TF.attribute _has_downloads
+        , TF.attribute _has_issues
+        , TF.attribute _has_wiki
+        , TF.attribute _homepage_url
+        , TF.attribute _license_template
+        , TF.attribute _name
+        , TF.attribute _private
         ]
 
-instance HasAllowMergeCommit RepositoryResource Text where
+instance HasAllowMergeCommit (RepositoryResource s) Text where
+    type HasAllowMergeCommitThread (RepositoryResource s) Text = s
+
     allowMergeCommit =
-        lens (_allow_merge_commit :: RepositoryResource -> TF.Argument "allow_merge_commit" Text)
-             (\s a -> s { _allow_merge_commit = a } :: RepositoryResource)
+        lens (_allow_merge_commit :: RepositoryResource s -> TF.Attribute s "allow_merge_commit" Text)
+             (\s a -> s { _allow_merge_commit = a } :: RepositoryResource s)
 
-instance HasAllowRebaseMerge RepositoryResource Text where
+instance HasAllowRebaseMerge (RepositoryResource s) Text where
+    type HasAllowRebaseMergeThread (RepositoryResource s) Text = s
+
     allowRebaseMerge =
-        lens (_allow_rebase_merge :: RepositoryResource -> TF.Argument "allow_rebase_merge" Text)
-             (\s a -> s { _allow_rebase_merge = a } :: RepositoryResource)
+        lens (_allow_rebase_merge :: RepositoryResource s -> TF.Attribute s "allow_rebase_merge" Text)
+             (\s a -> s { _allow_rebase_merge = a } :: RepositoryResource s)
 
-instance HasAllowSquashMerge RepositoryResource Text where
+instance HasAllowSquashMerge (RepositoryResource s) Text where
+    type HasAllowSquashMergeThread (RepositoryResource s) Text = s
+
     allowSquashMerge =
-        lens (_allow_squash_merge :: RepositoryResource -> TF.Argument "allow_squash_merge" Text)
-             (\s a -> s { _allow_squash_merge = a } :: RepositoryResource)
+        lens (_allow_squash_merge :: RepositoryResource s -> TF.Attribute s "allow_squash_merge" Text)
+             (\s a -> s { _allow_squash_merge = a } :: RepositoryResource s)
 
-instance HasAutoInit RepositoryResource Text where
+instance HasAutoInit (RepositoryResource s) Text where
+    type HasAutoInitThread (RepositoryResource s) Text = s
+
     autoInit =
-        lens (_auto_init :: RepositoryResource -> TF.Argument "auto_init" Text)
-             (\s a -> s { _auto_init = a } :: RepositoryResource)
+        lens (_auto_init :: RepositoryResource s -> TF.Attribute s "auto_init" Text)
+             (\s a -> s { _auto_init = a } :: RepositoryResource s)
 
-instance HasDefaultBranch RepositoryResource Text where
+instance HasDefaultBranch (RepositoryResource s) Text where
+    type HasDefaultBranchThread (RepositoryResource s) Text = s
+
     defaultBranch =
-        lens (_default_branch :: RepositoryResource -> TF.Argument "default_branch" Text)
-             (\s a -> s { _default_branch = a } :: RepositoryResource)
+        lens (_default_branch :: RepositoryResource s -> TF.Attribute s "default_branch" Text)
+             (\s a -> s { _default_branch = a } :: RepositoryResource s)
 
-instance HasDescription RepositoryResource Text where
+instance HasDescription (RepositoryResource s) Text where
+    type HasDescriptionThread (RepositoryResource s) Text = s
+
     description =
-        lens (_description :: RepositoryResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: RepositoryResource)
+        lens (_description :: RepositoryResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: RepositoryResource s)
 
-instance HasGitignoreTemplate RepositoryResource Text where
+instance HasGitignoreTemplate (RepositoryResource s) Text where
+    type HasGitignoreTemplateThread (RepositoryResource s) Text = s
+
     gitignoreTemplate =
-        lens (_gitignore_template :: RepositoryResource -> TF.Argument "gitignore_template" Text)
-             (\s a -> s { _gitignore_template = a } :: RepositoryResource)
+        lens (_gitignore_template :: RepositoryResource s -> TF.Attribute s "gitignore_template" Text)
+             (\s a -> s { _gitignore_template = a } :: RepositoryResource s)
 
-instance HasHasDownloads RepositoryResource Text where
+instance HasHasDownloads (RepositoryResource s) Text where
+    type HasHasDownloadsThread (RepositoryResource s) Text = s
+
     hasDownloads =
-        lens (_has_downloads :: RepositoryResource -> TF.Argument "has_downloads" Text)
-             (\s a -> s { _has_downloads = a } :: RepositoryResource)
+        lens (_has_downloads :: RepositoryResource s -> TF.Attribute s "has_downloads" Text)
+             (\s a -> s { _has_downloads = a } :: RepositoryResource s)
 
-instance HasHasIssues RepositoryResource Text where
+instance HasHasIssues (RepositoryResource s) Text where
+    type HasHasIssuesThread (RepositoryResource s) Text = s
+
     hasIssues =
-        lens (_has_issues :: RepositoryResource -> TF.Argument "has_issues" Text)
-             (\s a -> s { _has_issues = a } :: RepositoryResource)
+        lens (_has_issues :: RepositoryResource s -> TF.Attribute s "has_issues" Text)
+             (\s a -> s { _has_issues = a } :: RepositoryResource s)
 
-instance HasHasWiki RepositoryResource Text where
+instance HasHasWiki (RepositoryResource s) Text where
+    type HasHasWikiThread (RepositoryResource s) Text = s
+
     hasWiki =
-        lens (_has_wiki :: RepositoryResource -> TF.Argument "has_wiki" Text)
-             (\s a -> s { _has_wiki = a } :: RepositoryResource)
+        lens (_has_wiki :: RepositoryResource s -> TF.Attribute s "has_wiki" Text)
+             (\s a -> s { _has_wiki = a } :: RepositoryResource s)
 
-instance HasHomepageUrl RepositoryResource Text where
+instance HasHomepageUrl (RepositoryResource s) Text where
+    type HasHomepageUrlThread (RepositoryResource s) Text = s
+
     homepageUrl =
-        lens (_homepage_url :: RepositoryResource -> TF.Argument "homepage_url" Text)
-             (\s a -> s { _homepage_url = a } :: RepositoryResource)
+        lens (_homepage_url :: RepositoryResource s -> TF.Attribute s "homepage_url" Text)
+             (\s a -> s { _homepage_url = a } :: RepositoryResource s)
 
-instance HasLicenseTemplate RepositoryResource Text where
+instance HasLicenseTemplate (RepositoryResource s) Text where
+    type HasLicenseTemplateThread (RepositoryResource s) Text = s
+
     licenseTemplate =
-        lens (_license_template :: RepositoryResource -> TF.Argument "license_template" Text)
-             (\s a -> s { _license_template = a } :: RepositoryResource)
+        lens (_license_template :: RepositoryResource s -> TF.Attribute s "license_template" Text)
+             (\s a -> s { _license_template = a } :: RepositoryResource s)
 
-instance HasName RepositoryResource Text where
+instance HasName (RepositoryResource s) Text where
+    type HasNameThread (RepositoryResource s) Text = s
+
     name =
-        lens (_name :: RepositoryResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RepositoryResource)
+        lens (_name :: RepositoryResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RepositoryResource s)
 
-instance HasPrivate RepositoryResource Text where
+instance HasPrivate (RepositoryResource s) Text where
+    type HasPrivateThread (RepositoryResource s) Text = s
+
     private =
-        lens (_private :: RepositoryResource -> TF.Argument "private" Text)
-             (\s a -> s { _private = a } :: RepositoryResource)
+        lens (_private :: RepositoryResource s -> TF.Attribute s "private" Text)
+             (\s a -> s { _private = a } :: RepositoryResource s)
 
-instance HasComputedFullName RepositoryResource Text where
+instance HasComputedFullName (RepositoryResource s) Text where
     computedFullName =
-        to (\_  -> TF.Compute "full_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "full_name")
 
-instance HasComputedGitCloneUrl RepositoryResource Text where
+instance HasComputedGitCloneUrl (RepositoryResource s) Text where
     computedGitCloneUrl =
-        to (\_  -> TF.Compute "git_clone_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "git_clone_url")
 
-instance HasComputedHttpCloneUrl RepositoryResource Text where
+instance HasComputedHttpCloneUrl (RepositoryResource s) Text where
     computedHttpCloneUrl =
-        to (\_  -> TF.Compute "http_clone_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "http_clone_url")
 
-instance HasComputedSshCloneUrl RepositoryResource Text where
+instance HasComputedSshCloneUrl (RepositoryResource s) Text where
     computedSshCloneUrl =
-        to (\_  -> TF.Compute "ssh_clone_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "ssh_clone_url")
 
-instance HasComputedSvnUrl RepositoryResource Text where
+instance HasComputedSvnUrl (RepositoryResource s) Text where
     computedSvnUrl =
-        to (\_  -> TF.Compute "svn_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "svn_url")
 
-repositoryResource :: TF.Resource TF.GitHub RepositoryResource
+repositoryResource :: TF.Resource TF.GitHub (RepositoryResource s)
 repositoryResource =
     TF.newResource "github_repository" $
         RepositoryResource {
-            _allow_merge_commit = TF.Nil
+              _allow_merge_commit = TF.Nil
             , _allow_rebase_merge = TF.Nil
             , _allow_squash_merge = TF.Nil
             , _auto_init = TF.Nil
@@ -633,62 +709,72 @@ This resource allows you to create and manage webhooks for repositories
 within your Github organization. This resource cannot currently be used to
 manage webhooks for personal repositories, outside of organizations.
 -}
-data RepositoryWebhookResource = RepositoryWebhookResource {
-      _active        :: !(TF.Argument "active" Text)
+data RepositoryWebhookResource s = RepositoryWebhookResource {
+      _active        :: !(TF.Attribute s "active" Text)
     {- ^ (Optional) Indicate of the webhook should receive events. Defaults to @true@ . -}
-    , _configuration :: !(TF.Argument "configuration" Text)
+    , _configuration :: !(TF.Attribute s "configuration" Text)
     {- ^ (Required) key/value pair of configuration for this webhook. Available keys are @url@ , @content_type@ , @secret@ and @insecure_ssl@ . -}
-    , _events        :: !(TF.Argument "events" Text)
+    , _events        :: !(TF.Attribute s "events" Text)
     {- ^ (Required) A list of events which should trigger the webhook. See a list of <https://developer.github.com/v3/activity/events/types/> -}
-    , _name          :: !(TF.Argument "name" Text)
+    , _name          :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
-    , _repository    :: !(TF.Argument "repository" Text)
+    , _repository    :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) The repository of the webhook. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RepositoryWebhookResource where
+instance TF.ToHCL (RepositoryWebhookResource s) where
     toHCL RepositoryWebhookResource{..} = TF.block $ catMaybes
-        [ TF.argument _active
-        , TF.argument _configuration
-        , TF.argument _events
-        , TF.argument _name
-        , TF.argument _repository
+        [ TF.attribute _active
+        , TF.attribute _configuration
+        , TF.attribute _events
+        , TF.attribute _name
+        , TF.attribute _repository
         ]
 
-instance HasActive RepositoryWebhookResource Text where
+instance HasActive (RepositoryWebhookResource s) Text where
+    type HasActiveThread (RepositoryWebhookResource s) Text = s
+
     active =
-        lens (_active :: RepositoryWebhookResource -> TF.Argument "active" Text)
-             (\s a -> s { _active = a } :: RepositoryWebhookResource)
+        lens (_active :: RepositoryWebhookResource s -> TF.Attribute s "active" Text)
+             (\s a -> s { _active = a } :: RepositoryWebhookResource s)
 
-instance HasConfiguration RepositoryWebhookResource Text where
+instance HasConfiguration (RepositoryWebhookResource s) Text where
+    type HasConfigurationThread (RepositoryWebhookResource s) Text = s
+
     configuration =
-        lens (_configuration :: RepositoryWebhookResource -> TF.Argument "configuration" Text)
-             (\s a -> s { _configuration = a } :: RepositoryWebhookResource)
+        lens (_configuration :: RepositoryWebhookResource s -> TF.Attribute s "configuration" Text)
+             (\s a -> s { _configuration = a } :: RepositoryWebhookResource s)
 
-instance HasEvents RepositoryWebhookResource Text where
+instance HasEvents (RepositoryWebhookResource s) Text where
+    type HasEventsThread (RepositoryWebhookResource s) Text = s
+
     events =
-        lens (_events :: RepositoryWebhookResource -> TF.Argument "events" Text)
-             (\s a -> s { _events = a } :: RepositoryWebhookResource)
+        lens (_events :: RepositoryWebhookResource s -> TF.Attribute s "events" Text)
+             (\s a -> s { _events = a } :: RepositoryWebhookResource s)
 
-instance HasName RepositoryWebhookResource Text where
+instance HasName (RepositoryWebhookResource s) Text where
+    type HasNameThread (RepositoryWebhookResource s) Text = s
+
     name =
-        lens (_name :: RepositoryWebhookResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RepositoryWebhookResource)
+        lens (_name :: RepositoryWebhookResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RepositoryWebhookResource s)
 
-instance HasRepository RepositoryWebhookResource Text where
+instance HasRepository (RepositoryWebhookResource s) Text where
+    type HasRepositoryThread (RepositoryWebhookResource s) Text = s
+
     repository =
-        lens (_repository :: RepositoryWebhookResource -> TF.Argument "repository" Text)
-             (\s a -> s { _repository = a } :: RepositoryWebhookResource)
+        lens (_repository :: RepositoryWebhookResource s -> TF.Attribute s "repository" Text)
+             (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
-instance HasComputedUrl RepositoryWebhookResource Text where
+instance HasComputedUrl (RepositoryWebhookResource s) Text where
     computedUrl =
-        to (\_  -> TF.Compute "url")
+        to (\x -> TF.Computed (TF.referenceKey x) "url")
 
-repositoryWebhookResource :: TF.Resource TF.GitHub RepositoryWebhookResource
+repositoryWebhookResource :: TF.Resource TF.GitHub (RepositoryWebhookResource s)
 repositoryWebhookResource =
     TF.newResource "github_repository_webhook" $
         RepositoryWebhookResource {
-            _active = TF.Nil
+              _active = TF.Nil
             , _configuration = TF.Nil
             , _events = TF.Nil
             , _name = TF.Nil
@@ -703,42 +789,48 @@ will be added to the team. If the user hasn't accepted their invitation to
 the organization, they won't be part of the team until they do. When
 destroyed, the user will be removed from the team.
 -}
-data TeamMembershipResource = TeamMembershipResource {
-      _role     :: !(TF.Argument "role" Text)
+data TeamMembershipResource s = TeamMembershipResource {
+      _role     :: !(TF.Attribute s "role" Text)
     {- ^ (Optional) The role of the user within the team. Must be one of @member@ or @maintainer@ . Defaults to @member@ . -}
-    , _team_id  :: !(TF.Argument "team_id" Text)
+    , _team_id  :: !(TF.Attribute s "team_id" Text)
     {- ^ (Required) The GitHub team id -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The user to add to the team. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamMembershipResource where
+instance TF.ToHCL (TeamMembershipResource s) where
     toHCL TeamMembershipResource{..} = TF.block $ catMaybes
-        [ TF.argument _role
-        , TF.argument _team_id
-        , TF.argument _username
+        [ TF.attribute _role
+        , TF.attribute _team_id
+        , TF.attribute _username
         ]
 
-instance HasRole TeamMembershipResource Text where
+instance HasRole (TeamMembershipResource s) Text where
+    type HasRoleThread (TeamMembershipResource s) Text = s
+
     role =
-        lens (_role :: TeamMembershipResource -> TF.Argument "role" Text)
-             (\s a -> s { _role = a } :: TeamMembershipResource)
+        lens (_role :: TeamMembershipResource s -> TF.Attribute s "role" Text)
+             (\s a -> s { _role = a } :: TeamMembershipResource s)
 
-instance HasTeamId TeamMembershipResource Text where
+instance HasTeamId (TeamMembershipResource s) Text where
+    type HasTeamIdThread (TeamMembershipResource s) Text = s
+
     teamId =
-        lens (_team_id :: TeamMembershipResource -> TF.Argument "team_id" Text)
-             (\s a -> s { _team_id = a } :: TeamMembershipResource)
+        lens (_team_id :: TeamMembershipResource s -> TF.Attribute s "team_id" Text)
+             (\s a -> s { _team_id = a } :: TeamMembershipResource s)
 
-instance HasUsername TeamMembershipResource Text where
+instance HasUsername (TeamMembershipResource s) Text where
+    type HasUsernameThread (TeamMembershipResource s) Text = s
+
     username =
-        lens (_username :: TeamMembershipResource -> TF.Argument "username" Text)
-             (\s a -> s { _username = a } :: TeamMembershipResource)
+        lens (_username :: TeamMembershipResource s -> TF.Attribute s "username" Text)
+             (\s a -> s { _username = a } :: TeamMembershipResource s)
 
-teamMembershipResource :: TF.Resource TF.GitHub TeamMembershipResource
+teamMembershipResource :: TF.Resource TF.GitHub (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "github_team_membership" $
         TeamMembershipResource {
-            _role = TF.Nil
+              _role = TF.Nil
             , _team_id = TF.Nil
             , _username = TF.Nil
             }
@@ -751,42 +843,48 @@ permissions on a particular repository. The repository and the team must
 both belong to the same organization on Github. This resource does not
 actually create any repositories; to do that, see <repository.html> .
 -}
-data TeamRepositoryResource = TeamRepositoryResource {
-      _permission :: !(TF.Argument "permission" Text)
+data TeamRepositoryResource s = TeamRepositoryResource {
+      _permission :: !(TF.Attribute s "permission" Text)
     {- ^ (Optional) The permissions of team members regarding the repository. Must be one of @pull@ , @push@ , or @admin@ . Defaults to @pull@ . -}
-    , _repository :: !(TF.Argument "repository" Text)
+    , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) The repository to add to the team. -}
-    , _team_id    :: !(TF.Argument "team_id" Text)
+    , _team_id    :: !(TF.Attribute s "team_id" Text)
     {- ^ (Required) The GitHub team id -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamRepositoryResource where
+instance TF.ToHCL (TeamRepositoryResource s) where
     toHCL TeamRepositoryResource{..} = TF.block $ catMaybes
-        [ TF.argument _permission
-        , TF.argument _repository
-        , TF.argument _team_id
+        [ TF.attribute _permission
+        , TF.attribute _repository
+        , TF.attribute _team_id
         ]
 
-instance HasPermission TeamRepositoryResource Text where
+instance HasPermission (TeamRepositoryResource s) Text where
+    type HasPermissionThread (TeamRepositoryResource s) Text = s
+
     permission =
-        lens (_permission :: TeamRepositoryResource -> TF.Argument "permission" Text)
-             (\s a -> s { _permission = a } :: TeamRepositoryResource)
+        lens (_permission :: TeamRepositoryResource s -> TF.Attribute s "permission" Text)
+             (\s a -> s { _permission = a } :: TeamRepositoryResource s)
 
-instance HasRepository TeamRepositoryResource Text where
+instance HasRepository (TeamRepositoryResource s) Text where
+    type HasRepositoryThread (TeamRepositoryResource s) Text = s
+
     repository =
-        lens (_repository :: TeamRepositoryResource -> TF.Argument "repository" Text)
-             (\s a -> s { _repository = a } :: TeamRepositoryResource)
+        lens (_repository :: TeamRepositoryResource s -> TF.Attribute s "repository" Text)
+             (\s a -> s { _repository = a } :: TeamRepositoryResource s)
 
-instance HasTeamId TeamRepositoryResource Text where
+instance HasTeamId (TeamRepositoryResource s) Text where
+    type HasTeamIdThread (TeamRepositoryResource s) Text = s
+
     teamId =
-        lens (_team_id :: TeamRepositoryResource -> TF.Argument "team_id" Text)
-             (\s a -> s { _team_id = a } :: TeamRepositoryResource)
+        lens (_team_id :: TeamRepositoryResource s -> TF.Attribute s "team_id" Text)
+             (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
 
-teamRepositoryResource :: TF.Resource TF.GitHub TeamRepositoryResource
+teamRepositoryResource :: TF.Resource TF.GitHub (TeamRepositoryResource s)
 teamRepositoryResource =
     TF.newResource "github_team_repository" $
         TeamRepositoryResource {
-            _permission = TF.Nil
+              _permission = TF.Nil
             , _repository = TF.Nil
             , _team_id = TF.Nil
             }
@@ -797,301 +895,458 @@ Provides a GitHub team resource. This resource allows you to add/remove
 teams from your organization. When applied, a new team will be created. When
 destroyed, that team will be removed.
 -}
-data TeamResource = TeamResource {
-      _description :: !(TF.Argument "description" Text)
+data TeamResource s = TeamResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description of the team. -}
-    , _ldap_dn     :: !(TF.Argument "ldap_dn" Text)
+    , _ldap_dn     :: !(TF.Attribute s "ldap_dn" Text)
     {- ^ (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the team. -}
-    , _privacy     :: !(TF.Argument "privacy" Text)
+    , _privacy     :: !(TF.Attribute s "privacy" Text)
     {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamResource where
+instance TF.ToHCL (TeamResource s) where
     toHCL TeamResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _ldap_dn
-        , TF.argument _name
-        , TF.argument _privacy
+        [ TF.attribute _description
+        , TF.attribute _ldap_dn
+        , TF.attribute _name
+        , TF.attribute _privacy
         ]
 
-instance HasDescription TeamResource Text where
+instance HasDescription (TeamResource s) Text where
+    type HasDescriptionThread (TeamResource s) Text = s
+
     description =
-        lens (_description :: TeamResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: TeamResource)
+        lens (_description :: TeamResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: TeamResource s)
 
-instance HasLdapDn TeamResource Text where
+instance HasLdapDn (TeamResource s) Text where
+    type HasLdapDnThread (TeamResource s) Text = s
+
     ldapDn =
-        lens (_ldap_dn :: TeamResource -> TF.Argument "ldap_dn" Text)
-             (\s a -> s { _ldap_dn = a } :: TeamResource)
+        lens (_ldap_dn :: TeamResource s -> TF.Attribute s "ldap_dn" Text)
+             (\s a -> s { _ldap_dn = a } :: TeamResource s)
 
-instance HasName TeamResource Text where
+instance HasName (TeamResource s) Text where
+    type HasNameThread (TeamResource s) Text = s
+
     name =
-        lens (_name :: TeamResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: TeamResource)
+        lens (_name :: TeamResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: TeamResource s)
 
-instance HasPrivacy TeamResource Text where
+instance HasPrivacy (TeamResource s) Text where
+    type HasPrivacyThread (TeamResource s) Text = s
+
     privacy =
-        lens (_privacy :: TeamResource -> TF.Argument "privacy" Text)
-             (\s a -> s { _privacy = a } :: TeamResource)
+        lens (_privacy :: TeamResource s -> TF.Attribute s "privacy" Text)
+             (\s a -> s { _privacy = a } :: TeamResource s)
 
-instance HasComputedId TeamResource Text where
+instance HasComputedId (TeamResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-teamResource :: TF.Resource TF.GitHub TeamResource
+teamResource :: TF.Resource TF.GitHub (TeamResource s)
 teamResource =
     TF.newResource "github_team" $
         TeamResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _ldap_dn = TF.Nil
             , _name = TF.Nil
             , _privacy = TF.Nil
             }
 
-class HasActive s a | s -> a where
-    active :: Lens' s (TF.Argument "active" a)
+class HasActive a b | a -> b where
+    type HasActiveThread a b :: *
 
-instance HasActive s a => HasActive (TF.Resource p s) a where
+    active :: Lens' a (TF.Attribute (HasActiveThread a b) "active" b)
+
+instance HasActive a b => HasActive (TF.Resource p a) b where
+    type HasActiveThread (TF.Resource p a) b =
+         HasActiveThread a b
+
     active = TF.configuration . active
 
-class HasAllowMergeCommit s a | s -> a where
-    allowMergeCommit :: Lens' s (TF.Argument "allow_merge_commit" a)
+class HasAllowMergeCommit a b | a -> b where
+    type HasAllowMergeCommitThread a b :: *
 
-instance HasAllowMergeCommit s a => HasAllowMergeCommit (TF.Resource p s) a where
+    allowMergeCommit :: Lens' a (TF.Attribute (HasAllowMergeCommitThread a b) "allow_merge_commit" b)
+
+instance HasAllowMergeCommit a b => HasAllowMergeCommit (TF.Resource p a) b where
+    type HasAllowMergeCommitThread (TF.Resource p a) b =
+         HasAllowMergeCommitThread a b
+
     allowMergeCommit = TF.configuration . allowMergeCommit
 
-class HasAllowRebaseMerge s a | s -> a where
-    allowRebaseMerge :: Lens' s (TF.Argument "allow_rebase_merge" a)
+class HasAllowRebaseMerge a b | a -> b where
+    type HasAllowRebaseMergeThread a b :: *
 
-instance HasAllowRebaseMerge s a => HasAllowRebaseMerge (TF.Resource p s) a where
+    allowRebaseMerge :: Lens' a (TF.Attribute (HasAllowRebaseMergeThread a b) "allow_rebase_merge" b)
+
+instance HasAllowRebaseMerge a b => HasAllowRebaseMerge (TF.Resource p a) b where
+    type HasAllowRebaseMergeThread (TF.Resource p a) b =
+         HasAllowRebaseMergeThread a b
+
     allowRebaseMerge = TF.configuration . allowRebaseMerge
 
-class HasAllowSquashMerge s a | s -> a where
-    allowSquashMerge :: Lens' s (TF.Argument "allow_squash_merge" a)
+class HasAllowSquashMerge a b | a -> b where
+    type HasAllowSquashMergeThread a b :: *
 
-instance HasAllowSquashMerge s a => HasAllowSquashMerge (TF.Resource p s) a where
+    allowSquashMerge :: Lens' a (TF.Attribute (HasAllowSquashMergeThread a b) "allow_squash_merge" b)
+
+instance HasAllowSquashMerge a b => HasAllowSquashMerge (TF.Resource p a) b where
+    type HasAllowSquashMergeThread (TF.Resource p a) b =
+         HasAllowSquashMergeThread a b
+
     allowSquashMerge = TF.configuration . allowSquashMerge
 
-class HasAutoInit s a | s -> a where
-    autoInit :: Lens' s (TF.Argument "auto_init" a)
+class HasAutoInit a b | a -> b where
+    type HasAutoInitThread a b :: *
 
-instance HasAutoInit s a => HasAutoInit (TF.Resource p s) a where
+    autoInit :: Lens' a (TF.Attribute (HasAutoInitThread a b) "auto_init" b)
+
+instance HasAutoInit a b => HasAutoInit (TF.Resource p a) b where
+    type HasAutoInitThread (TF.Resource p a) b =
+         HasAutoInitThread a b
+
     autoInit = TF.configuration . autoInit
 
-class HasBranch s a | s -> a where
-    branch :: Lens' s (TF.Argument "branch" a)
+class HasBranch a b | a -> b where
+    type HasBranchThread a b :: *
 
-instance HasBranch s a => HasBranch (TF.Resource p s) a where
+    branch :: Lens' a (TF.Attribute (HasBranchThread a b) "branch" b)
+
+instance HasBranch a b => HasBranch (TF.Resource p a) b where
+    type HasBranchThread (TF.Resource p a) b =
+         HasBranchThread a b
+
     branch = TF.configuration . branch
 
-class HasColor s a | s -> a where
-    color :: Lens' s (TF.Argument "color" a)
+class HasColor a b | a -> b where
+    type HasColorThread a b :: *
 
-instance HasColor s a => HasColor (TF.Resource p s) a where
+    color :: Lens' a (TF.Attribute (HasColorThread a b) "color" b)
+
+instance HasColor a b => HasColor (TF.Resource p a) b where
+    type HasColorThread (TF.Resource p a) b =
+         HasColorThread a b
+
     color = TF.configuration . color
 
-class HasConfiguration s a | s -> a where
-    configuration :: Lens' s (TF.Argument "configuration" a)
+class HasConfiguration a b | a -> b where
+    type HasConfigurationThread a b :: *
 
-instance HasConfiguration s a => HasConfiguration (TF.Resource p s) a where
+    configuration :: Lens' a (TF.Attribute (HasConfigurationThread a b) "configuration" b)
+
+instance HasConfiguration a b => HasConfiguration (TF.Resource p a) b where
+    type HasConfigurationThread (TF.Resource p a) b =
+         HasConfigurationThread a b
+
     configuration = TF.configuration . configuration
 
-class HasDefaultBranch s a | s -> a where
-    defaultBranch :: Lens' s (TF.Argument "default_branch" a)
+class HasDefaultBranch a b | a -> b where
+    type HasDefaultBranchThread a b :: *
 
-instance HasDefaultBranch s a => HasDefaultBranch (TF.Resource p s) a where
+    defaultBranch :: Lens' a (TF.Attribute (HasDefaultBranchThread a b) "default_branch" b)
+
+instance HasDefaultBranch a b => HasDefaultBranch (TF.Resource p a) b where
+    type HasDefaultBranchThread (TF.Resource p a) b =
+         HasDefaultBranchThread a b
+
     defaultBranch = TF.configuration . defaultBranch
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasEnforceAdmins s a | s -> a where
-    enforceAdmins :: Lens' s (TF.Argument "enforce_admins" a)
+class HasEnforceAdmins a b | a -> b where
+    type HasEnforceAdminsThread a b :: *
 
-instance HasEnforceAdmins s a => HasEnforceAdmins (TF.Resource p s) a where
+    enforceAdmins :: Lens' a (TF.Attribute (HasEnforceAdminsThread a b) "enforce_admins" b)
+
+instance HasEnforceAdmins a b => HasEnforceAdmins (TF.Resource p a) b where
+    type HasEnforceAdminsThread (TF.Resource p a) b =
+         HasEnforceAdminsThread a b
+
     enforceAdmins = TF.configuration . enforceAdmins
 
-class HasEvents s a | s -> a where
-    events :: Lens' s (TF.Argument "events" a)
+class HasEvents a b | a -> b where
+    type HasEventsThread a b :: *
 
-instance HasEvents s a => HasEvents (TF.Resource p s) a where
+    events :: Lens' a (TF.Attribute (HasEventsThread a b) "events" b)
+
+instance HasEvents a b => HasEvents (TF.Resource p a) b where
+    type HasEventsThread (TF.Resource p a) b =
+         HasEventsThread a b
+
     events = TF.configuration . events
 
-class HasGitignoreTemplate s a | s -> a where
-    gitignoreTemplate :: Lens' s (TF.Argument "gitignore_template" a)
+class HasGitignoreTemplate a b | a -> b where
+    type HasGitignoreTemplateThread a b :: *
 
-instance HasGitignoreTemplate s a => HasGitignoreTemplate (TF.Resource p s) a where
+    gitignoreTemplate :: Lens' a (TF.Attribute (HasGitignoreTemplateThread a b) "gitignore_template" b)
+
+instance HasGitignoreTemplate a b => HasGitignoreTemplate (TF.Resource p a) b where
+    type HasGitignoreTemplateThread (TF.Resource p a) b =
+         HasGitignoreTemplateThread a b
+
     gitignoreTemplate = TF.configuration . gitignoreTemplate
 
-class HasHasDownloads s a | s -> a where
-    hasDownloads :: Lens' s (TF.Argument "has_downloads" a)
+class HasHasDownloads a b | a -> b where
+    type HasHasDownloadsThread a b :: *
 
-instance HasHasDownloads s a => HasHasDownloads (TF.Resource p s) a where
+    hasDownloads :: Lens' a (TF.Attribute (HasHasDownloadsThread a b) "has_downloads" b)
+
+instance HasHasDownloads a b => HasHasDownloads (TF.Resource p a) b where
+    type HasHasDownloadsThread (TF.Resource p a) b =
+         HasHasDownloadsThread a b
+
     hasDownloads = TF.configuration . hasDownloads
 
-class HasHasIssues s a | s -> a where
-    hasIssues :: Lens' s (TF.Argument "has_issues" a)
+class HasHasIssues a b | a -> b where
+    type HasHasIssuesThread a b :: *
 
-instance HasHasIssues s a => HasHasIssues (TF.Resource p s) a where
+    hasIssues :: Lens' a (TF.Attribute (HasHasIssuesThread a b) "has_issues" b)
+
+instance HasHasIssues a b => HasHasIssues (TF.Resource p a) b where
+    type HasHasIssuesThread (TF.Resource p a) b =
+         HasHasIssuesThread a b
+
     hasIssues = TF.configuration . hasIssues
 
-class HasHasWiki s a | s -> a where
-    hasWiki :: Lens' s (TF.Argument "has_wiki" a)
+class HasHasWiki a b | a -> b where
+    type HasHasWikiThread a b :: *
 
-instance HasHasWiki s a => HasHasWiki (TF.Resource p s) a where
+    hasWiki :: Lens' a (TF.Attribute (HasHasWikiThread a b) "has_wiki" b)
+
+instance HasHasWiki a b => HasHasWiki (TF.Resource p a) b where
+    type HasHasWikiThread (TF.Resource p a) b =
+         HasHasWikiThread a b
+
     hasWiki = TF.configuration . hasWiki
 
-class HasHomepageUrl s a | s -> a where
-    homepageUrl :: Lens' s (TF.Argument "homepage_url" a)
+class HasHomepageUrl a b | a -> b where
+    type HasHomepageUrlThread a b :: *
 
-instance HasHomepageUrl s a => HasHomepageUrl (TF.Resource p s) a where
+    homepageUrl :: Lens' a (TF.Attribute (HasHomepageUrlThread a b) "homepage_url" b)
+
+instance HasHomepageUrl a b => HasHomepageUrl (TF.Resource p a) b where
+    type HasHomepageUrlThread (TF.Resource p a) b =
+         HasHomepageUrlThread a b
+
     homepageUrl = TF.configuration . homepageUrl
 
-class HasKey s a | s -> a where
-    key :: Lens' s (TF.Argument "key" a)
+class HasKey a b | a -> b where
+    type HasKeyThread a b :: *
 
-instance HasKey s a => HasKey (TF.Resource p s) a where
+    key :: Lens' a (TF.Attribute (HasKeyThread a b) "key" b)
+
+instance HasKey a b => HasKey (TF.Resource p a) b where
+    type HasKeyThread (TF.Resource p a) b =
+         HasKeyThread a b
+
     key = TF.configuration . key
 
-class HasLdapDn s a | s -> a where
-    ldapDn :: Lens' s (TF.Argument "ldap_dn" a)
+class HasLdapDn a b | a -> b where
+    type HasLdapDnThread a b :: *
 
-instance HasLdapDn s a => HasLdapDn (TF.Resource p s) a where
+    ldapDn :: Lens' a (TF.Attribute (HasLdapDnThread a b) "ldap_dn" b)
+
+instance HasLdapDn a b => HasLdapDn (TF.Resource p a) b where
+    type HasLdapDnThread (TF.Resource p a) b =
+         HasLdapDnThread a b
+
     ldapDn = TF.configuration . ldapDn
 
-class HasLicenseTemplate s a | s -> a where
-    licenseTemplate :: Lens' s (TF.Argument "license_template" a)
+class HasLicenseTemplate a b | a -> b where
+    type HasLicenseTemplateThread a b :: *
 
-instance HasLicenseTemplate s a => HasLicenseTemplate (TF.Resource p s) a where
+    licenseTemplate :: Lens' a (TF.Attribute (HasLicenseTemplateThread a b) "license_template" b)
+
+instance HasLicenseTemplate a b => HasLicenseTemplate (TF.Resource p a) b where
+    type HasLicenseTemplateThread (TF.Resource p a) b =
+         HasLicenseTemplateThread a b
+
     licenseTemplate = TF.configuration . licenseTemplate
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasPermission s a | s -> a where
-    permission :: Lens' s (TF.Argument "permission" a)
+class HasPermission a b | a -> b where
+    type HasPermissionThread a b :: *
 
-instance HasPermission s a => HasPermission (TF.Resource p s) a where
+    permission :: Lens' a (TF.Attribute (HasPermissionThread a b) "permission" b)
+
+instance HasPermission a b => HasPermission (TF.Resource p a) b where
+    type HasPermissionThread (TF.Resource p a) b =
+         HasPermissionThread a b
+
     permission = TF.configuration . permission
 
-class HasPrivacy s a | s -> a where
-    privacy :: Lens' s (TF.Argument "privacy" a)
+class HasPrivacy a b | a -> b where
+    type HasPrivacyThread a b :: *
 
-instance HasPrivacy s a => HasPrivacy (TF.Resource p s) a where
+    privacy :: Lens' a (TF.Attribute (HasPrivacyThread a b) "privacy" b)
+
+instance HasPrivacy a b => HasPrivacy (TF.Resource p a) b where
+    type HasPrivacyThread (TF.Resource p a) b =
+         HasPrivacyThread a b
+
     privacy = TF.configuration . privacy
 
-class HasPrivate s a | s -> a where
-    private :: Lens' s (TF.Argument "private" a)
+class HasPrivate a b | a -> b where
+    type HasPrivateThread a b :: *
 
-instance HasPrivate s a => HasPrivate (TF.Resource p s) a where
+    private :: Lens' a (TF.Attribute (HasPrivateThread a b) "private" b)
+
+instance HasPrivate a b => HasPrivate (TF.Resource p a) b where
+    type HasPrivateThread (TF.Resource p a) b =
+         HasPrivateThread a b
+
     private = TF.configuration . private
 
-class HasReadOnly s a | s -> a where
-    readOnly :: Lens' s (TF.Argument "read_only" a)
+class HasReadOnly a b | a -> b where
+    type HasReadOnlyThread a b :: *
 
-instance HasReadOnly s a => HasReadOnly (TF.Resource p s) a where
+    readOnly :: Lens' a (TF.Attribute (HasReadOnlyThread a b) "read_only" b)
+
+instance HasReadOnly a b => HasReadOnly (TF.Resource p a) b where
+    type HasReadOnlyThread (TF.Resource p a) b =
+         HasReadOnlyThread a b
+
     readOnly = TF.configuration . readOnly
 
-class HasRepository s a | s -> a where
-    repository :: Lens' s (TF.Argument "repository" a)
+class HasRepository a b | a -> b where
+    type HasRepositoryThread a b :: *
 
-instance HasRepository s a => HasRepository (TF.Resource p s) a where
+    repository :: Lens' a (TF.Attribute (HasRepositoryThread a b) "repository" b)
+
+instance HasRepository a b => HasRepository (TF.Resource p a) b where
+    type HasRepositoryThread (TF.Resource p a) b =
+         HasRepositoryThread a b
+
     repository = TF.configuration . repository
 
-class HasRequiredPullRequestReviews s a | s -> a where
-    requiredPullRequestReviews :: Lens' s (TF.Argument "required_pull_request_reviews" a)
+class HasRequiredPullRequestReviews a b | a -> b where
+    type HasRequiredPullRequestReviewsThread a b :: *
 
-instance HasRequiredPullRequestReviews s a => HasRequiredPullRequestReviews (TF.Resource p s) a where
+    requiredPullRequestReviews :: Lens' a (TF.Attribute (HasRequiredPullRequestReviewsThread a b) "required_pull_request_reviews" b)
+
+instance HasRequiredPullRequestReviews a b => HasRequiredPullRequestReviews (TF.Resource p a) b where
+    type HasRequiredPullRequestReviewsThread (TF.Resource p a) b =
+         HasRequiredPullRequestReviewsThread a b
+
     requiredPullRequestReviews = TF.configuration . requiredPullRequestReviews
 
-class HasRequiredStatusChecks s a | s -> a where
-    requiredStatusChecks :: Lens' s (TF.Argument "required_status_checks" a)
+class HasRequiredStatusChecks a b | a -> b where
+    type HasRequiredStatusChecksThread a b :: *
 
-instance HasRequiredStatusChecks s a => HasRequiredStatusChecks (TF.Resource p s) a where
+    requiredStatusChecks :: Lens' a (TF.Attribute (HasRequiredStatusChecksThread a b) "required_status_checks" b)
+
+instance HasRequiredStatusChecks a b => HasRequiredStatusChecks (TF.Resource p a) b where
+    type HasRequiredStatusChecksThread (TF.Resource p a) b =
+         HasRequiredStatusChecksThread a b
+
     requiredStatusChecks = TF.configuration . requiredStatusChecks
 
-class HasRestrictions s a | s -> a where
-    restrictions :: Lens' s (TF.Argument "restrictions" a)
+class HasRestrictions a b | a -> b where
+    type HasRestrictionsThread a b :: *
 
-instance HasRestrictions s a => HasRestrictions (TF.Resource p s) a where
+    restrictions :: Lens' a (TF.Attribute (HasRestrictionsThread a b) "restrictions" b)
+
+instance HasRestrictions a b => HasRestrictions (TF.Resource p a) b where
+    type HasRestrictionsThread (TF.Resource p a) b =
+         HasRestrictionsThread a b
+
     restrictions = TF.configuration . restrictions
 
-class HasRole s a | s -> a where
-    role :: Lens' s (TF.Argument "role" a)
+class HasRole a b | a -> b where
+    type HasRoleThread a b :: *
 
-instance HasRole s a => HasRole (TF.Resource p s) a where
+    role :: Lens' a (TF.Attribute (HasRoleThread a b) "role" b)
+
+instance HasRole a b => HasRole (TF.Resource p a) b where
+    type HasRoleThread (TF.Resource p a) b =
+         HasRoleThread a b
+
     role = TF.configuration . role
 
-class HasTeamId s a | s -> a where
-    teamId :: Lens' s (TF.Argument "team_id" a)
+class HasTeamId a b | a -> b where
+    type HasTeamIdThread a b :: *
 
-instance HasTeamId s a => HasTeamId (TF.Resource p s) a where
+    teamId :: Lens' a (TF.Attribute (HasTeamIdThread a b) "team_id" b)
+
+instance HasTeamId a b => HasTeamId (TF.Resource p a) b where
+    type HasTeamIdThread (TF.Resource p a) b =
+         HasTeamIdThread a b
+
     teamId = TF.configuration . teamId
 
-class HasTitle s a | s -> a where
-    title :: Lens' s (TF.Argument "title" a)
+class HasTitle a b | a -> b where
+    type HasTitleThread a b :: *
 
-instance HasTitle s a => HasTitle (TF.Resource p s) a where
+    title :: Lens' a (TF.Attribute (HasTitleThread a b) "title" b)
+
+instance HasTitle a b => HasTitle (TF.Resource p a) b where
+    type HasTitleThread (TF.Resource p a) b =
+         HasTitleThread a b
+
     title = TF.configuration . title
 
-class HasUrl s a | s -> a where
-    url :: Lens' s (TF.Argument "url" a)
+class HasUrl a b | a -> b where
+    type HasUrlThread a b :: *
 
-instance HasUrl s a => HasUrl (TF.Resource p s) a where
+    url :: Lens' a (TF.Attribute (HasUrlThread a b) "url" b)
+
+instance HasUrl a b => HasUrl (TF.Resource p a) b where
+    type HasUrlThread (TF.Resource p a) b =
+         HasUrlThread a b
+
     url = TF.configuration . url
 
-class HasUsername s a | s -> a where
-    username :: Lens' s (TF.Argument "username" a)
+class HasUsername a b | a -> b where
+    type HasUsernameThread a b :: *
 
-instance HasUsername s a => HasUsername (TF.Resource p s) a where
+    username :: Lens' a (TF.Attribute (HasUsernameThread a b) "username" b)
+
+instance HasUsername a b => HasUsername (TF.Resource p a) b where
+    type HasUsernameThread (TF.Resource p a) b =
+         HasUsernameThread a b
+
     username = TF.configuration . username
 
-class HasComputedFullName s a | s -> a where
-    computedFullName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedFullName a b | a -> b where
+    computedFullName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFullName s a => HasComputedFullName (TF.Resource p s) a where
-    computedFullName = TF.configuration . computedFullName
+class HasComputedGitCloneUrl a b | a -> b where
+    computedGitCloneUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedGitCloneUrl s a | s -> a where
-    computedGitCloneUrl :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHttpCloneUrl a b | a -> b where
+    computedHttpCloneUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedGitCloneUrl s a => HasComputedGitCloneUrl (TF.Resource p s) a where
-    computedGitCloneUrl = TF.configuration . computedGitCloneUrl
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHttpCloneUrl s a | s -> a where
-    computedHttpCloneUrl :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSshCloneUrl a b | a -> b where
+    computedSshCloneUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHttpCloneUrl s a => HasComputedHttpCloneUrl (TF.Resource p s) a where
-    computedHttpCloneUrl = TF.configuration . computedHttpCloneUrl
+class HasComputedSvnUrl a b | a -> b where
+    computedSvnUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedSshCloneUrl s a | s -> a where
-    computedSshCloneUrl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSshCloneUrl s a => HasComputedSshCloneUrl (TF.Resource p s) a where
-    computedSshCloneUrl = TF.configuration . computedSshCloneUrl
-
-class HasComputedSvnUrl s a | s -> a where
-    computedSvnUrl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSvnUrl s a => HasComputedSvnUrl (TF.Resource p s) a where
-    computedSvnUrl = TF.configuration . computedSvnUrl
-
-class HasComputedUrl s a | s -> a where
-    computedUrl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUrl s a => HasComputedUrl (TF.Resource p s) a where
-    computedUrl = TF.configuration . computedUrl
+class HasComputedUrl a b | a -> b where
+    computedUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

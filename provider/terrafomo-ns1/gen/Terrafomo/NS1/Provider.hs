@@ -37,12 +37,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.NS1.Types       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.IP        as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.NS1.Types as TF
+import qualified Terrafomo.Provider  as TF
 
 {- | NS1 Terraform provider.
 
@@ -51,7 +51,7 @@ provider needs to be configured with the proper credentials before it can be
 used. Use the navigation to the left to read about the available resources.
 -}
 data NS1 = NS1 {
-      _apikey :: !(TF.Argument "apikey" Text)
+      _apikey :: !(Maybe Text)
     {- ^ (Required) NS1 API token. It must be provided, but it can also be sourced from the @NS1_APIKEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -59,19 +59,21 @@ instance Hashable NS1
 
 instance TF.ToHCL NS1 where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy NS1))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_apikey x)
+        let typ = TF.providerType (Proxy :: Proxy (NS1))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "apikey" <$> _apikey x
             ]
-
-emptyNS1 :: NS1
-emptyNS1 = NS1 {
-        _apikey = TF.Nil
-    }
 
 instance TF.IsProvider NS1 where
     type ProviderType NS1 = "ns1"
 
-apikey :: Lens' NS1 (TF.Argument "apikey" Text)
+emptyNS1 :: NS1
+emptyNS1 = NS1 {
+        _apikey = Nothing
+    }
+
+apikey :: Lens' NS1 (Maybe Text)
 apikey =
     lens _apikey (\s a -> s { _apikey = a })

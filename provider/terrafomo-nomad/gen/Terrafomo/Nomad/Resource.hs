@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -45,14 +46,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Nomad.Provider  as TF
-import qualified Terrafomo.Nomad.Types     as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Meta     as TF (configuration)
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Meta           as TF (configuration)
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Nomad.Provider as TF
+import qualified Terrafomo.Nomad.Types    as TF
+import qualified Terrafomo.Resource       as TF
+import qualified Terrafomo.Resource       as TF
 
 {- | The @nomad_job@ Nomad resource.
 
@@ -64,60 +66,81 @@ runs core system services that are ideally setup during infrastructure
 creation. This resource is ideal for the latter type of job, but can be used
 to manage any job within Nomad.
 -}
-data JobResource = JobResource {
-      _deregister_on_destroy   :: !(TF.Argument "deregister_on_destroy" Text)
+data JobResource s = JobResource {
+      _deregister_on_destroy :: !(TF.Attribute s "deregister_on_destroy" Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
-    , _deregister_on_id_change :: !(TF.Argument "deregister_on_id_change" Text)
+    , _deregister_on_id_change :: !(TF.Attribute s "deregister_on_id_change" Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
-    , _jobspec                 :: !(TF.Argument "jobspec" Text)
+    , _jobspec :: !(TF.Attribute s "jobspec" Text)
     {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL JobResource where
+instance TF.ToHCL (JobResource s) where
     toHCL JobResource{..} = TF.block $ catMaybes
-        [ TF.argument _deregister_on_destroy
-        , TF.argument _deregister_on_id_change
-        , TF.argument _jobspec
+        [ TF.attribute _deregister_on_destroy
+        , TF.attribute _deregister_on_id_change
+        , TF.attribute _jobspec
         ]
 
-instance HasDeregisterOnDestroy JobResource Text where
+instance HasDeregisterOnDestroy (JobResource s) Text where
+    type HasDeregisterOnDestroyThread (JobResource s) Text = s
+
     deregisterOnDestroy =
-        lens (_deregister_on_destroy :: JobResource -> TF.Argument "deregister_on_destroy" Text)
-             (\s a -> s { _deregister_on_destroy = a } :: JobResource)
+        lens (_deregister_on_destroy :: JobResource s -> TF.Attribute s "deregister_on_destroy" Text)
+             (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
 
-instance HasDeregisterOnIdChange JobResource Text where
+instance HasDeregisterOnIdChange (JobResource s) Text where
+    type HasDeregisterOnIdChangeThread (JobResource s) Text = s
+
     deregisterOnIdChange =
-        lens (_deregister_on_id_change :: JobResource -> TF.Argument "deregister_on_id_change" Text)
-             (\s a -> s { _deregister_on_id_change = a } :: JobResource)
+        lens (_deregister_on_id_change :: JobResource s -> TF.Attribute s "deregister_on_id_change" Text)
+             (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
 
-instance HasJobspec JobResource Text where
+instance HasJobspec (JobResource s) Text where
+    type HasJobspecThread (JobResource s) Text = s
+
     jobspec =
-        lens (_jobspec :: JobResource -> TF.Argument "jobspec" Text)
-             (\s a -> s { _jobspec = a } :: JobResource)
+        lens (_jobspec :: JobResource s -> TF.Attribute s "jobspec" Text)
+             (\s a -> s { _jobspec = a } :: JobResource s)
 
-jobResource :: TF.Resource TF.Nomad JobResource
+jobResource :: TF.Resource TF.Nomad (JobResource s)
 jobResource =
     TF.newResource "nomad_job" $
         JobResource {
-            _deregister_on_destroy = TF.Nil
+              _deregister_on_destroy = TF.Nil
             , _deregister_on_id_change = TF.Nil
             , _jobspec = TF.Nil
             }
 
-class HasDeregisterOnDestroy s a | s -> a where
-    deregisterOnDestroy :: Lens' s (TF.Argument "deregister_on_destroy" a)
+class HasDeregisterOnDestroy a b | a -> b where
+    type HasDeregisterOnDestroyThread a b :: *
 
-instance HasDeregisterOnDestroy s a => HasDeregisterOnDestroy (TF.Resource p s) a where
+    deregisterOnDestroy :: Lens' a (TF.Attribute (HasDeregisterOnDestroyThread a b) "deregister_on_destroy" b)
+
+instance HasDeregisterOnDestroy a b => HasDeregisterOnDestroy (TF.Resource p a) b where
+    type HasDeregisterOnDestroyThread (TF.Resource p a) b =
+         HasDeregisterOnDestroyThread a b
+
     deregisterOnDestroy = TF.configuration . deregisterOnDestroy
 
-class HasDeregisterOnIdChange s a | s -> a where
-    deregisterOnIdChange :: Lens' s (TF.Argument "deregister_on_id_change" a)
+class HasDeregisterOnIdChange a b | a -> b where
+    type HasDeregisterOnIdChangeThread a b :: *
 
-instance HasDeregisterOnIdChange s a => HasDeregisterOnIdChange (TF.Resource p s) a where
+    deregisterOnIdChange :: Lens' a (TF.Attribute (HasDeregisterOnIdChangeThread a b) "deregister_on_id_change" b)
+
+instance HasDeregisterOnIdChange a b => HasDeregisterOnIdChange (TF.Resource p a) b where
+    type HasDeregisterOnIdChangeThread (TF.Resource p a) b =
+         HasDeregisterOnIdChangeThread a b
+
     deregisterOnIdChange = TF.configuration . deregisterOnIdChange
 
-class HasJobspec s a | s -> a where
-    jobspec :: Lens' s (TF.Argument "jobspec" a)
+class HasJobspec a b | a -> b where
+    type HasJobspecThread a b :: *
 
-instance HasJobspec s a => HasJobspec (TF.Resource p s) a where
+    jobspec :: Lens' a (TF.Attribute (HasJobspecThread a b) "jobspec" b)
+
+instance HasJobspec a b => HasJobspec (TF.Resource p a) b where
+    type HasJobspecThread (TF.Resource p a) b =
+         HasJobspecThread a b
+
     jobspec = TF.configuration . jobspec

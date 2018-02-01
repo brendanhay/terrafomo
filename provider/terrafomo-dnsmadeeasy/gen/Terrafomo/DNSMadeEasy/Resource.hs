@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -42,26 +43,27 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute            as TF
 import qualified Terrafomo.DNSMadeEasy.Provider as TF
 import qualified Terrafomo.DNSMadeEasy.Types    as TF
-import qualified Terrafomo.Syntax.HCL           as TF
-import qualified Terrafomo.Syntax.IP            as TF
-import qualified Terrafomo.Syntax.Meta          as TF (configuration)
-import qualified Terrafomo.Syntax.Resource      as TF
-import qualified Terrafomo.Syntax.Resource      as TF
-import qualified Terrafomo.Syntax.Variable      as TF
+import qualified Terrafomo.HCL                  as TF
+import qualified Terrafomo.IP                   as TF
+import qualified Terrafomo.Meta                 as TF (configuration)
+import qualified Terrafomo.Name                 as TF
+import qualified Terrafomo.Resource             as TF
+import qualified Terrafomo.Resource             as TF
 
 {- | The @dme_record@ DNSMadeEasy resource.
 
 Provides a DNSMadeEasy record resource.
 -}
-data RecordResource = RecordResource {
+data RecordResource s = RecordResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL RecordResource where
+instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.block []
 
-recordResource :: TF.Resource TF.DNSMadeEasy RecordResource
+recordResource :: TF.Resource TF.DNSMadeEasy (RecordResource s)
 recordResource =
     TF.newResource "dme_record" $
         RecordResource {

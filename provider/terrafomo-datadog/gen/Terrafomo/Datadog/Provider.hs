@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Datadog.Types   as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.Datadog.Types as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.IP            as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
 
 {- | Datadog Terraform provider.
 
@@ -53,9 +53,9 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data Datadog = Datadog {
-      _api_key :: !(TF.Argument "api_key" Text)
+      _api_key :: !(Maybe Text)
     {- ^ (Required) Datadog API key. This can also be set via the @DATADOG_API_KEY@ environment variable. -}
-    , _app_key :: !(TF.Argument "app_key" Text)
+    , _app_key :: !(Maybe Text)
     {- ^ (Required) Datadog APP key. This can also be set via the @DATADOG_APP_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -63,25 +63,27 @@ instance Hashable Datadog
 
 instance TF.ToHCL Datadog where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Datadog))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_key x)
-            , TF.argument (_app_key x)
+        let typ = TF.providerType (Proxy :: Proxy (Datadog))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_key" <$> _api_key x
+            , TF.assign "app_key" <$> _app_key x
             ]
-
-emptyDatadog :: Datadog
-emptyDatadog = Datadog {
-        _api_key = TF.Nil
-      , _app_key = TF.Nil
-    }
 
 instance TF.IsProvider Datadog where
     type ProviderType Datadog = "datadog"
 
-apiKey :: Lens' Datadog (TF.Argument "api_key" Text)
+emptyDatadog :: Datadog
+emptyDatadog = Datadog {
+        _api_key = Nothing
+      , _app_key = Nothing
+    }
+
+apiKey :: Lens' Datadog (Maybe Text)
 apiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-appKey :: Lens' Datadog (TF.Argument "app_key" Text)
+appKey :: Lens' Datadog (Maybe Text)
 appKey =
     lens _app_key (\s a -> s { _app_key = a })

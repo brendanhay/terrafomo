@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -91,80 +92,93 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute                 as TF
 import qualified Terrafomo.CenturyLinkCloud.Provider as TF
 import qualified Terrafomo.CenturyLinkCloud.Types    as TF
-import qualified Terrafomo.Syntax.HCL                as TF
-import qualified Terrafomo.Syntax.IP                 as TF
-import qualified Terrafomo.Syntax.Meta               as TF (configuration)
-import qualified Terrafomo.Syntax.Resource           as TF
-import qualified Terrafomo.Syntax.Resource           as TF
-import qualified Terrafomo.Syntax.Variable           as TF
+import qualified Terrafomo.HCL                       as TF
+import qualified Terrafomo.IP                        as TF
+import qualified Terrafomo.Meta                      as TF (configuration)
+import qualified Terrafomo.Name                      as TF
+import qualified Terrafomo.Resource                  as TF
+import qualified Terrafomo.Resource                  as TF
 
 {- | The @clc_group@ CenturyLinkCloud resource.
 
 Manages a CLC server group. Either provisions or resolves to an existing
 group. See also <https://www.ctl.io/api-docs/v2/#groups> .
 -}
-data GroupResource = GroupResource {
-      _custom_fields   :: !(TF.Argument "custom_fields" Text)
+data GroupResource s = GroupResource {
+      _custom_fields   :: !(TF.Attribute s "custom_fields" Text)
     {- ^ (Optional) See <#custom_fields> below for details. -}
-    , _description     :: !(TF.Argument "description" Text)
+    , _description     :: !(TF.Attribute s "description" Text)
     {- ^ (Optional, string) Description for server group (visible in control portal only) -}
-    , _location_id     :: !(TF.Argument "location_id" Text)
+    , _location_id     :: !(TF.Attribute s "location_id" Text)
     {- ^ (Required, string) The datacenter location of both parent group and this group. Examples: "WA1", "VA1" -}
-    , _name            :: !(TF.Argument "name" Text)
+    , _name            :: !(TF.Attribute s "name" Text)
     {- ^ (Required, string) The name (or GUID) of this server group. Will resolve to existing if present. -}
-    , _parent          :: !(TF.Argument "parent" Text)
+    , _parent          :: !(TF.Attribute s "parent" Text)
     {- ^ (Required, string) The name or ID of the parent group. Will error if absent or unable to resolve. -}
-    , _parent_group_id :: !(TF.Argument "parent_group_id" Text)
+    , _parent_group_id :: !(TF.Attribute s "parent_group_id" Text)
     {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL GroupResource where
+instance TF.ToHCL (GroupResource s) where
     toHCL GroupResource{..} = TF.block $ catMaybes
-        [ TF.argument _custom_fields
-        , TF.argument _description
-        , TF.argument _location_id
-        , TF.argument _name
-        , TF.argument _parent
-        , TF.argument _parent_group_id
+        [ TF.attribute _custom_fields
+        , TF.attribute _description
+        , TF.attribute _location_id
+        , TF.attribute _name
+        , TF.attribute _parent
+        , TF.attribute _parent_group_id
         ]
 
-instance HasCustomFields GroupResource Text where
+instance HasCustomFields (GroupResource s) Text where
+    type HasCustomFieldsThread (GroupResource s) Text = s
+
     customFields =
-        lens (_custom_fields :: GroupResource -> TF.Argument "custom_fields" Text)
-             (\s a -> s { _custom_fields = a } :: GroupResource)
+        lens (_custom_fields :: GroupResource s -> TF.Attribute s "custom_fields" Text)
+             (\s a -> s { _custom_fields = a } :: GroupResource s)
 
-instance HasDescription GroupResource Text where
+instance HasDescription (GroupResource s) Text where
+    type HasDescriptionThread (GroupResource s) Text = s
+
     description =
-        lens (_description :: GroupResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: GroupResource)
+        lens (_description :: GroupResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: GroupResource s)
 
-instance HasLocationId GroupResource Text where
+instance HasLocationId (GroupResource s) Text where
+    type HasLocationIdThread (GroupResource s) Text = s
+
     locationId =
-        lens (_location_id :: GroupResource -> TF.Argument "location_id" Text)
-             (\s a -> s { _location_id = a } :: GroupResource)
+        lens (_location_id :: GroupResource s -> TF.Attribute s "location_id" Text)
+             (\s a -> s { _location_id = a } :: GroupResource s)
 
-instance HasName GroupResource Text where
+instance HasName (GroupResource s) Text where
+    type HasNameThread (GroupResource s) Text = s
+
     name =
-        lens (_name :: GroupResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: GroupResource)
+        lens (_name :: GroupResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: GroupResource s)
 
-instance HasParent GroupResource Text where
+instance HasParent (GroupResource s) Text where
+    type HasParentThread (GroupResource s) Text = s
+
     parent =
-        lens (_parent :: GroupResource -> TF.Argument "parent" Text)
-             (\s a -> s { _parent = a } :: GroupResource)
+        lens (_parent :: GroupResource s -> TF.Attribute s "parent" Text)
+             (\s a -> s { _parent = a } :: GroupResource s)
 
-instance HasParentGroupId GroupResource Text where
+instance HasParentGroupId (GroupResource s) Text where
+    type HasParentGroupIdThread (GroupResource s) Text = s
+
     parentGroupId =
-        lens (_parent_group_id :: GroupResource -> TF.Argument "parent_group_id" Text)
-             (\s a -> s { _parent_group_id = a } :: GroupResource)
+        lens (_parent_group_id :: GroupResource s -> TF.Attribute s "parent_group_id" Text)
+             (\s a -> s { _parent_group_id = a } :: GroupResource s)
 
-groupResource :: TF.Resource TF.CenturyLinkCloud GroupResource
+groupResource :: TF.Resource TF.CenturyLinkCloud (GroupResource s)
 groupResource =
     TF.newResource "clc_group" $
         GroupResource {
-            _custom_fields = TF.Nil
+              _custom_fields = TF.Nil
             , _description = TF.Nil
             , _location_id = TF.Nil
             , _name = TF.Nil
@@ -178,66 +192,78 @@ Manages a CLC load balancer pool. Manage related frontend with
 <load_balancer.html> See also
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
-data LoadBalancerPoolResource = LoadBalancerPoolResource {
-      _data_center   :: !(TF.Argument "data_center" Text)
+data LoadBalancerPoolResource s = LoadBalancerPoolResource {
+      _data_center   :: !(TF.Attribute s "data_center" Text)
     {- ^ (Required, string) The datacenter location for this pool. -}
-    , _load_balancer :: !(TF.Argument "load_balancer" Text)
+    , _load_balancer :: !(TF.Attribute s "load_balancer" Text)
     {- ^ (Required, string) The id of the load balancer. -}
-    , _method        :: !(TF.Argument "method" Text)
+    , _method        :: !(TF.Attribute s "method" Text)
     {- ^ (Optional, string) The configured balancing method. Either "roundRobin" (default) or "leastConnection". -}
-    , _nodes         :: !(TF.Argument "nodes" Text)
+    , _nodes         :: !(TF.Attribute s "nodes" Text)
     {- ^ (Optional) See <#nodes> below for details. -}
-    , _persistence   :: !(TF.Argument "persistence" Text)
+    , _persistence   :: !(TF.Attribute s "persistence" Text)
     {- ^ (Optional, string) The configured persistence method. Either "standard" (default) or "sticky". -}
-    , _port          :: !(TF.Argument "port" Text)
+    , _port          :: !(TF.Attribute s "port" Text)
     {- ^ (Required, int) Either 80 or 443 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL LoadBalancerPoolResource where
+instance TF.ToHCL (LoadBalancerPoolResource s) where
     toHCL LoadBalancerPoolResource{..} = TF.block $ catMaybes
-        [ TF.argument _data_center
-        , TF.argument _load_balancer
-        , TF.argument _method
-        , TF.argument _nodes
-        , TF.argument _persistence
-        , TF.argument _port
+        [ TF.attribute _data_center
+        , TF.attribute _load_balancer
+        , TF.attribute _method
+        , TF.attribute _nodes
+        , TF.attribute _persistence
+        , TF.attribute _port
         ]
 
-instance HasDataCenter LoadBalancerPoolResource Text where
+instance HasDataCenter (LoadBalancerPoolResource s) Text where
+    type HasDataCenterThread (LoadBalancerPoolResource s) Text = s
+
     dataCenter =
-        lens (_data_center :: LoadBalancerPoolResource -> TF.Argument "data_center" Text)
-             (\s a -> s { _data_center = a } :: LoadBalancerPoolResource)
+        lens (_data_center :: LoadBalancerPoolResource s -> TF.Attribute s "data_center" Text)
+             (\s a -> s { _data_center = a } :: LoadBalancerPoolResource s)
 
-instance HasLoadBalancer LoadBalancerPoolResource Text where
+instance HasLoadBalancer (LoadBalancerPoolResource s) Text where
+    type HasLoadBalancerThread (LoadBalancerPoolResource s) Text = s
+
     loadBalancer =
-        lens (_load_balancer :: LoadBalancerPoolResource -> TF.Argument "load_balancer" Text)
-             (\s a -> s { _load_balancer = a } :: LoadBalancerPoolResource)
+        lens (_load_balancer :: LoadBalancerPoolResource s -> TF.Attribute s "load_balancer" Text)
+             (\s a -> s { _load_balancer = a } :: LoadBalancerPoolResource s)
 
-instance HasMethod LoadBalancerPoolResource Text where
+instance HasMethod (LoadBalancerPoolResource s) Text where
+    type HasMethodThread (LoadBalancerPoolResource s) Text = s
+
     method =
-        lens (_method :: LoadBalancerPoolResource -> TF.Argument "method" Text)
-             (\s a -> s { _method = a } :: LoadBalancerPoolResource)
+        lens (_method :: LoadBalancerPoolResource s -> TF.Attribute s "method" Text)
+             (\s a -> s { _method = a } :: LoadBalancerPoolResource s)
 
-instance HasNodes LoadBalancerPoolResource Text where
+instance HasNodes (LoadBalancerPoolResource s) Text where
+    type HasNodesThread (LoadBalancerPoolResource s) Text = s
+
     nodes =
-        lens (_nodes :: LoadBalancerPoolResource -> TF.Argument "nodes" Text)
-             (\s a -> s { _nodes = a } :: LoadBalancerPoolResource)
+        lens (_nodes :: LoadBalancerPoolResource s -> TF.Attribute s "nodes" Text)
+             (\s a -> s { _nodes = a } :: LoadBalancerPoolResource s)
 
-instance HasPersistence LoadBalancerPoolResource Text where
+instance HasPersistence (LoadBalancerPoolResource s) Text where
+    type HasPersistenceThread (LoadBalancerPoolResource s) Text = s
+
     persistence =
-        lens (_persistence :: LoadBalancerPoolResource -> TF.Argument "persistence" Text)
-             (\s a -> s { _persistence = a } :: LoadBalancerPoolResource)
+        lens (_persistence :: LoadBalancerPoolResource s -> TF.Attribute s "persistence" Text)
+             (\s a -> s { _persistence = a } :: LoadBalancerPoolResource s)
 
-instance HasPort LoadBalancerPoolResource Text where
+instance HasPort (LoadBalancerPoolResource s) Text where
+    type HasPortThread (LoadBalancerPoolResource s) Text = s
+
     port =
-        lens (_port :: LoadBalancerPoolResource -> TF.Argument "port" Text)
-             (\s a -> s { _port = a } :: LoadBalancerPoolResource)
+        lens (_port :: LoadBalancerPoolResource s -> TF.Attribute s "port" Text)
+             (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
-loadBalancerPoolResource :: TF.Resource TF.CenturyLinkCloud LoadBalancerPoolResource
+loadBalancerPoolResource :: TF.Resource TF.CenturyLinkCloud (LoadBalancerPoolResource s)
 loadBalancerPoolResource =
     TF.newResource "clc_load_balancer_pool" $
         LoadBalancerPoolResource {
-            _data_center = TF.Nil
+              _data_center = TF.Nil
             , _load_balancer = TF.Nil
             , _method = TF.Nil
             , _nodes = TF.Nil
@@ -251,58 +277,68 @@ Manages a CLC load balancer. Manage connected backends with
 <load_balancer_pool.html> See also
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
-data LoadBalancerResource = LoadBalancerResource {
-      _data_center :: !(TF.Argument "data_center" Text)
+data LoadBalancerResource s = LoadBalancerResource {
+      _data_center :: !(TF.Attribute s "data_center" Text)
     {- ^ (Required, string) The datacenter location of both parent group and this group. -}
-    , _description :: !(TF.Argument "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional, string) Description for server group (visible in control portal only) -}
-    , _ip_address  :: !(TF.Argument "ip_address" Text)
+    , _ip_address  :: !(TF.Attribute s "ip_address" Text)
     {- ^ - (Computed) The IP of the load balancer. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required, string) The name of the load balancer. -}
-    , _status      :: !(TF.Argument "status" Text)
+    , _status      :: !(TF.Attribute s "status" Text)
     {- ^ (Required, string) Either "enabled" or "disabled" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL LoadBalancerResource where
+instance TF.ToHCL (LoadBalancerResource s) where
     toHCL LoadBalancerResource{..} = TF.block $ catMaybes
-        [ TF.argument _data_center
-        , TF.argument _description
-        , TF.argument _ip_address
-        , TF.argument _name
-        , TF.argument _status
+        [ TF.attribute _data_center
+        , TF.attribute _description
+        , TF.attribute _ip_address
+        , TF.attribute _name
+        , TF.attribute _status
         ]
 
-instance HasDataCenter LoadBalancerResource Text where
+instance HasDataCenter (LoadBalancerResource s) Text where
+    type HasDataCenterThread (LoadBalancerResource s) Text = s
+
     dataCenter =
-        lens (_data_center :: LoadBalancerResource -> TF.Argument "data_center" Text)
-             (\s a -> s { _data_center = a } :: LoadBalancerResource)
+        lens (_data_center :: LoadBalancerResource s -> TF.Attribute s "data_center" Text)
+             (\s a -> s { _data_center = a } :: LoadBalancerResource s)
 
-instance HasDescription LoadBalancerResource Text where
+instance HasDescription (LoadBalancerResource s) Text where
+    type HasDescriptionThread (LoadBalancerResource s) Text = s
+
     description =
-        lens (_description :: LoadBalancerResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: LoadBalancerResource)
+        lens (_description :: LoadBalancerResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: LoadBalancerResource s)
 
-instance HasIpAddress LoadBalancerResource Text where
+instance HasIpAddress (LoadBalancerResource s) Text where
+    type HasIpAddressThread (LoadBalancerResource s) Text = s
+
     ipAddress =
-        lens (_ip_address :: LoadBalancerResource -> TF.Argument "ip_address" Text)
-             (\s a -> s { _ip_address = a } :: LoadBalancerResource)
+        lens (_ip_address :: LoadBalancerResource s -> TF.Attribute s "ip_address" Text)
+             (\s a -> s { _ip_address = a } :: LoadBalancerResource s)
 
-instance HasName LoadBalancerResource Text where
+instance HasName (LoadBalancerResource s) Text where
+    type HasNameThread (LoadBalancerResource s) Text = s
+
     name =
-        lens (_name :: LoadBalancerResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: LoadBalancerResource)
+        lens (_name :: LoadBalancerResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: LoadBalancerResource s)
 
-instance HasStatus LoadBalancerResource Text where
+instance HasStatus (LoadBalancerResource s) Text where
+    type HasStatusThread (LoadBalancerResource s) Text = s
+
     status =
-        lens (_status :: LoadBalancerResource -> TF.Argument "status" Text)
-             (\s a -> s { _status = a } :: LoadBalancerResource)
+        lens (_status :: LoadBalancerResource s -> TF.Attribute s "status" Text)
+             (\s a -> s { _status = a } :: LoadBalancerResource s)
 
-loadBalancerResource :: TF.Resource TF.CenturyLinkCloud LoadBalancerResource
+loadBalancerResource :: TF.Resource TF.CenturyLinkCloud (LoadBalancerResource s)
 loadBalancerResource =
     TF.newResource "clc_load_balancer" $
         LoadBalancerResource {
-            _data_center = TF.Nil
+              _data_center = TF.Nil
             , _description = TF.Nil
             , _ip_address = TF.Nil
             , _name = TF.Nil
@@ -314,50 +350,58 @@ loadBalancerResource =
 Manages a CLC public ip (for an existing server). See also
 <https://www.ctl.io/api-docs/v2/#public-ip> .
 -}
-data PublicIpResource = PublicIpResource {
-      _internal_ip_address :: !(TF.Argument "internal_ip_address" Text)
+data PublicIpResource s = PublicIpResource {
+      _internal_ip_address :: !(TF.Attribute s "internal_ip_address" Text)
     {- ^ (Required, string) The internal IP of the NIC to attach to. If not provided, a new internal NIC will be provisioned and used. -}
-    , _ports               :: !(TF.Argument "ports" Text)
+    , _ports               :: !(TF.Attribute s "ports" Text)
     {- ^ (Optional) See <#ports> below for details. -}
-    , _server_id           :: !(TF.Argument "server_id" Text)
+    , _server_id           :: !(TF.Attribute s "server_id" Text)
     {- ^ (Required, string) The name or ID of the server to bind IP to. -}
-    , _source_restrictions :: !(TF.Argument "source_restrictions" Text)
+    , _source_restrictions :: !(TF.Attribute s "source_restrictions" Text)
     {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL PublicIpResource where
+instance TF.ToHCL (PublicIpResource s) where
     toHCL PublicIpResource{..} = TF.block $ catMaybes
-        [ TF.argument _internal_ip_address
-        , TF.argument _ports
-        , TF.argument _server_id
-        , TF.argument _source_restrictions
+        [ TF.attribute _internal_ip_address
+        , TF.attribute _ports
+        , TF.attribute _server_id
+        , TF.attribute _source_restrictions
         ]
 
-instance HasInternalIpAddress PublicIpResource Text where
+instance HasInternalIpAddress (PublicIpResource s) Text where
+    type HasInternalIpAddressThread (PublicIpResource s) Text = s
+
     internalIpAddress =
-        lens (_internal_ip_address :: PublicIpResource -> TF.Argument "internal_ip_address" Text)
-             (\s a -> s { _internal_ip_address = a } :: PublicIpResource)
+        lens (_internal_ip_address :: PublicIpResource s -> TF.Attribute s "internal_ip_address" Text)
+             (\s a -> s { _internal_ip_address = a } :: PublicIpResource s)
 
-instance HasPorts PublicIpResource Text where
+instance HasPorts (PublicIpResource s) Text where
+    type HasPortsThread (PublicIpResource s) Text = s
+
     ports =
-        lens (_ports :: PublicIpResource -> TF.Argument "ports" Text)
-             (\s a -> s { _ports = a } :: PublicIpResource)
+        lens (_ports :: PublicIpResource s -> TF.Attribute s "ports" Text)
+             (\s a -> s { _ports = a } :: PublicIpResource s)
 
-instance HasServerId PublicIpResource Text where
+instance HasServerId (PublicIpResource s) Text where
+    type HasServerIdThread (PublicIpResource s) Text = s
+
     serverId =
-        lens (_server_id :: PublicIpResource -> TF.Argument "server_id" Text)
-             (\s a -> s { _server_id = a } :: PublicIpResource)
+        lens (_server_id :: PublicIpResource s -> TF.Attribute s "server_id" Text)
+             (\s a -> s { _server_id = a } :: PublicIpResource s)
 
-instance HasSourceRestrictions PublicIpResource Text where
+instance HasSourceRestrictions (PublicIpResource s) Text where
+    type HasSourceRestrictionsThread (PublicIpResource s) Text = s
+
     sourceRestrictions =
-        lens (_source_restrictions :: PublicIpResource -> TF.Argument "source_restrictions" Text)
-             (\s a -> s { _source_restrictions = a } :: PublicIpResource)
+        lens (_source_restrictions :: PublicIpResource s -> TF.Attribute s "source_restrictions" Text)
+             (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
 
-publicIpResource :: TF.Resource TF.CenturyLinkCloud PublicIpResource
+publicIpResource :: TF.Resource TF.CenturyLinkCloud (PublicIpResource s)
 publicIpResource =
     TF.newResource "clc_public_ip" $
         PublicIpResource {
-            _internal_ip_address = TF.Nil
+              _internal_ip_address = TF.Nil
             , _ports = TF.Nil
             , _server_id = TF.Nil
             , _source_restrictions = TF.Nil
@@ -367,194 +411,238 @@ publicIpResource =
 
 Manages a CLC server. Resources and Documentation:
 -}
-data ServerResource = ServerResource {
-      _aa_policy_id       :: !(TF.Argument "aa_policy_id" Text)
+data ServerResource s = ServerResource {
+      _aa_policy_id       :: !(TF.Attribute s "aa_policy_id" Text)
     {- ^ (Optional, string | hyperscale) Anti-Affinity policy ID -}
-    , _additional_disks   :: !(TF.Argument "additional_disks" Text)
+    , _additional_disks   :: !(TF.Attribute s "additional_disks" Text)
     {- ^ (Optional) See <#disks> below for details. -}
-    , _configuration_id   :: !(TF.Argument "configuration_id" Text)
+    , _configuration_id   :: !(TF.Attribute s "configuration_id" Text)
     {- ^ (Optional, string | bareMetal) Hardware configuration ID -}
-    , _cpu                :: !(TF.Argument "cpu" Text)
+    , _cpu                :: !(TF.Attribute s "cpu" Text)
     {- ^ (Required, int) The number of virtual cores -}
-    , _created_dat        :: !(TF.Argument "created_dat" Text)
+    , _created_dat        :: !(TF.Attribute s "created_dat" Text)
     {- ^ - (Computed) The creation date of the server. -}
-    , _custom_fields      :: !(TF.Argument "custom_fields" Text)
+    , _custom_fields      :: !(TF.Attribute s "custom_fields" Text)
     {- ^ (Optional) See <#custom_fields> below for details. -}
-    , _description        :: !(TF.Argument "description" Text)
+    , _description        :: !(TF.Attribute s "description" Text)
     {- ^ (Optional, string) Description for server (visible in control portal only) -}
-    , _group_id           :: !(TF.Argument "group_id" Text)
+    , _group_id           :: !(TF.Attribute s "group_id" Text)
     {- ^ (Required, string) The name or ID of the server group to spawn server into. -}
-    , _memory_mb          :: !(TF.Argument "memory_mb" Text)
+    , _memory_mb          :: !(TF.Attribute s "memory_mb" Text)
     {- ^ (Required, int) Provisioned RAM -}
-    , _metadata           :: !(TF.Argument "metadata" Text)
+    , _metadata           :: !(TF.Attribute s "metadata" Text)
     {- ^ (Optional) Misc state storage for non-CLC metadata. -}
-    , _modified_dat       :: !(TF.Argument "modified_dat" Text)
+    , _modified_dat       :: !(TF.Attribute s "modified_dat" Text)
     {- ^ - (Computed) The last modification date of the server. -}
-    , _name               :: !(TF.Argument "name" Text)
+    , _name               :: !(TF.Attribute s "name" Text)
     {- ^ - (Computed) the unique name of the server, as generated by the platform. -}
-    , _name_template      :: !(TF.Argument "name_template" Text)
+    , _name_template      :: !(TF.Attribute s "name_template" Text)
     {- ^ (Required, string) The basename of the server. A unique name will be generated by the platform. -}
-    , _network_id         :: !(TF.Argument "network_id" Text)
+    , _network_id         :: !(TF.Attribute s "network_id" Text)
     {- ^ (Optional, string) GUID of network to use. (Must be set up in advance from control portal.) When absent, the default network will be used. -}
-    , _os_type            :: !(TF.Argument "os_type" Text)
+    , _os_type            :: !(TF.Attribute s "os_type" Text)
     {- ^ (Optional, string | bareMetal) Operating system to install. -}
-    , _password           :: !(TF.Argument "password" Text)
+    , _password           :: !(TF.Attribute s "password" Text)
     {- ^ (Optional, string) The root/administrator password. Will be generated by platform if not provided. -}
-    , _power_state        :: !(TF.Argument "power_state" Text)
+    , _power_state        :: !(TF.Attribute s "power_state" Text)
     {- ^ (Optional, string) See <#power_states> below for details. If absent, defaults to @started@ . -}
-    , _private_ip_address :: !(TF.Argument "private_ip_address" Text)
+    , _private_ip_address :: !(TF.Attribute s "private_ip_address" Text)
     {- ^ (Optional, string) Set internal IP address. If absent, allocated and assigned from pool. -}
-    , _public_ip_address  :: !(TF.Argument "public_ip_address" Text)
+    , _public_ip_address  :: !(TF.Attribute s "public_ip_address" Text)
     {- ^ - (Computed) The public IP address of the server. -}
-    , _source_server_id   :: !(TF.Argument "source_server_id" Text)
+    , _source_server_id   :: !(TF.Attribute s "source_server_id" Text)
     {- ^ (Required, string) The name or ID of the base OS image. Examples: "ubuntu-14-64-template", "rhel-7-64-template", "win2012r2dtc-64" -}
-    , _storage_type       :: !(TF.Argument "storage_type" Text)
+    , _storage_type       :: !(TF.Attribute s "storage_type" Text)
     {- ^ (Optional, string) Backup and replication strategy for disks. One of "standard", "premium" -}
-    , _type'              :: !(TF.Argument "type" Text)
+    , _type'              :: !(TF.Attribute s "type" Text)
     {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ServerResource where
+instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.block $ catMaybes
-        [ TF.argument _aa_policy_id
-        , TF.argument _additional_disks
-        , TF.argument _configuration_id
-        , TF.argument _cpu
-        , TF.argument _created_dat
-        , TF.argument _custom_fields
-        , TF.argument _description
-        , TF.argument _group_id
-        , TF.argument _memory_mb
-        , TF.argument _metadata
-        , TF.argument _modified_dat
-        , TF.argument _name
-        , TF.argument _name_template
-        , TF.argument _network_id
-        , TF.argument _os_type
-        , TF.argument _password
-        , TF.argument _power_state
-        , TF.argument _private_ip_address
-        , TF.argument _public_ip_address
-        , TF.argument _source_server_id
-        , TF.argument _storage_type
-        , TF.argument _type'
+        [ TF.attribute _aa_policy_id
+        , TF.attribute _additional_disks
+        , TF.attribute _configuration_id
+        , TF.attribute _cpu
+        , TF.attribute _created_dat
+        , TF.attribute _custom_fields
+        , TF.attribute _description
+        , TF.attribute _group_id
+        , TF.attribute _memory_mb
+        , TF.attribute _metadata
+        , TF.attribute _modified_dat
+        , TF.attribute _name
+        , TF.attribute _name_template
+        , TF.attribute _network_id
+        , TF.attribute _os_type
+        , TF.attribute _password
+        , TF.attribute _power_state
+        , TF.attribute _private_ip_address
+        , TF.attribute _public_ip_address
+        , TF.attribute _source_server_id
+        , TF.attribute _storage_type
+        , TF.attribute _type'
         ]
 
-instance HasAaPolicyId ServerResource Text where
+instance HasAaPolicyId (ServerResource s) Text where
+    type HasAaPolicyIdThread (ServerResource s) Text = s
+
     aaPolicyId =
-        lens (_aa_policy_id :: ServerResource -> TF.Argument "aa_policy_id" Text)
-             (\s a -> s { _aa_policy_id = a } :: ServerResource)
+        lens (_aa_policy_id :: ServerResource s -> TF.Attribute s "aa_policy_id" Text)
+             (\s a -> s { _aa_policy_id = a } :: ServerResource s)
 
-instance HasAdditionalDisks ServerResource Text where
+instance HasAdditionalDisks (ServerResource s) Text where
+    type HasAdditionalDisksThread (ServerResource s) Text = s
+
     additionalDisks =
-        lens (_additional_disks :: ServerResource -> TF.Argument "additional_disks" Text)
-             (\s a -> s { _additional_disks = a } :: ServerResource)
+        lens (_additional_disks :: ServerResource s -> TF.Attribute s "additional_disks" Text)
+             (\s a -> s { _additional_disks = a } :: ServerResource s)
 
-instance HasConfigurationId ServerResource Text where
+instance HasConfigurationId (ServerResource s) Text where
+    type HasConfigurationIdThread (ServerResource s) Text = s
+
     configurationId =
-        lens (_configuration_id :: ServerResource -> TF.Argument "configuration_id" Text)
-             (\s a -> s { _configuration_id = a } :: ServerResource)
+        lens (_configuration_id :: ServerResource s -> TF.Attribute s "configuration_id" Text)
+             (\s a -> s { _configuration_id = a } :: ServerResource s)
 
-instance HasCpu ServerResource Text where
+instance HasCpu (ServerResource s) Text where
+    type HasCpuThread (ServerResource s) Text = s
+
     cpu =
-        lens (_cpu :: ServerResource -> TF.Argument "cpu" Text)
-             (\s a -> s { _cpu = a } :: ServerResource)
+        lens (_cpu :: ServerResource s -> TF.Attribute s "cpu" Text)
+             (\s a -> s { _cpu = a } :: ServerResource s)
 
-instance HasCreatedDat ServerResource Text where
+instance HasCreatedDat (ServerResource s) Text where
+    type HasCreatedDatThread (ServerResource s) Text = s
+
     createdDat =
-        lens (_created_dat :: ServerResource -> TF.Argument "created_dat" Text)
-             (\s a -> s { _created_dat = a } :: ServerResource)
+        lens (_created_dat :: ServerResource s -> TF.Attribute s "created_dat" Text)
+             (\s a -> s { _created_dat = a } :: ServerResource s)
 
-instance HasCustomFields ServerResource Text where
+instance HasCustomFields (ServerResource s) Text where
+    type HasCustomFieldsThread (ServerResource s) Text = s
+
     customFields =
-        lens (_custom_fields :: ServerResource -> TF.Argument "custom_fields" Text)
-             (\s a -> s { _custom_fields = a } :: ServerResource)
+        lens (_custom_fields :: ServerResource s -> TF.Attribute s "custom_fields" Text)
+             (\s a -> s { _custom_fields = a } :: ServerResource s)
 
-instance HasDescription ServerResource Text where
+instance HasDescription (ServerResource s) Text where
+    type HasDescriptionThread (ServerResource s) Text = s
+
     description =
-        lens (_description :: ServerResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: ServerResource)
+        lens (_description :: ServerResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: ServerResource s)
 
-instance HasGroupId ServerResource Text where
+instance HasGroupId (ServerResource s) Text where
+    type HasGroupIdThread (ServerResource s) Text = s
+
     groupId =
-        lens (_group_id :: ServerResource -> TF.Argument "group_id" Text)
-             (\s a -> s { _group_id = a } :: ServerResource)
+        lens (_group_id :: ServerResource s -> TF.Attribute s "group_id" Text)
+             (\s a -> s { _group_id = a } :: ServerResource s)
 
-instance HasMemoryMb ServerResource Text where
+instance HasMemoryMb (ServerResource s) Text where
+    type HasMemoryMbThread (ServerResource s) Text = s
+
     memoryMb =
-        lens (_memory_mb :: ServerResource -> TF.Argument "memory_mb" Text)
-             (\s a -> s { _memory_mb = a } :: ServerResource)
+        lens (_memory_mb :: ServerResource s -> TF.Attribute s "memory_mb" Text)
+             (\s a -> s { _memory_mb = a } :: ServerResource s)
 
-instance HasMetadata ServerResource Text where
+instance HasMetadata (ServerResource s) Text where
+    type HasMetadataThread (ServerResource s) Text = s
+
     metadata =
-        lens (_metadata :: ServerResource -> TF.Argument "metadata" Text)
-             (\s a -> s { _metadata = a } :: ServerResource)
+        lens (_metadata :: ServerResource s -> TF.Attribute s "metadata" Text)
+             (\s a -> s { _metadata = a } :: ServerResource s)
 
-instance HasModifiedDat ServerResource Text where
+instance HasModifiedDat (ServerResource s) Text where
+    type HasModifiedDatThread (ServerResource s) Text = s
+
     modifiedDat =
-        lens (_modified_dat :: ServerResource -> TF.Argument "modified_dat" Text)
-             (\s a -> s { _modified_dat = a } :: ServerResource)
+        lens (_modified_dat :: ServerResource s -> TF.Attribute s "modified_dat" Text)
+             (\s a -> s { _modified_dat = a } :: ServerResource s)
 
-instance HasName ServerResource Text where
+instance HasName (ServerResource s) Text where
+    type HasNameThread (ServerResource s) Text = s
+
     name =
-        lens (_name :: ServerResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ServerResource)
+        lens (_name :: ServerResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ServerResource s)
 
-instance HasNameTemplate ServerResource Text where
+instance HasNameTemplate (ServerResource s) Text where
+    type HasNameTemplateThread (ServerResource s) Text = s
+
     nameTemplate =
-        lens (_name_template :: ServerResource -> TF.Argument "name_template" Text)
-             (\s a -> s { _name_template = a } :: ServerResource)
+        lens (_name_template :: ServerResource s -> TF.Attribute s "name_template" Text)
+             (\s a -> s { _name_template = a } :: ServerResource s)
 
-instance HasNetworkId ServerResource Text where
+instance HasNetworkId (ServerResource s) Text where
+    type HasNetworkIdThread (ServerResource s) Text = s
+
     networkId =
-        lens (_network_id :: ServerResource -> TF.Argument "network_id" Text)
-             (\s a -> s { _network_id = a } :: ServerResource)
+        lens (_network_id :: ServerResource s -> TF.Attribute s "network_id" Text)
+             (\s a -> s { _network_id = a } :: ServerResource s)
 
-instance HasOsType ServerResource Text where
+instance HasOsType (ServerResource s) Text where
+    type HasOsTypeThread (ServerResource s) Text = s
+
     osType =
-        lens (_os_type :: ServerResource -> TF.Argument "os_type" Text)
-             (\s a -> s { _os_type = a } :: ServerResource)
+        lens (_os_type :: ServerResource s -> TF.Attribute s "os_type" Text)
+             (\s a -> s { _os_type = a } :: ServerResource s)
 
-instance HasPassword ServerResource Text where
+instance HasPassword (ServerResource s) Text where
+    type HasPasswordThread (ServerResource s) Text = s
+
     password =
-        lens (_password :: ServerResource -> TF.Argument "password" Text)
-             (\s a -> s { _password = a } :: ServerResource)
+        lens (_password :: ServerResource s -> TF.Attribute s "password" Text)
+             (\s a -> s { _password = a } :: ServerResource s)
 
-instance HasPowerState ServerResource Text where
+instance HasPowerState (ServerResource s) Text where
+    type HasPowerStateThread (ServerResource s) Text = s
+
     powerState =
-        lens (_power_state :: ServerResource -> TF.Argument "power_state" Text)
-             (\s a -> s { _power_state = a } :: ServerResource)
+        lens (_power_state :: ServerResource s -> TF.Attribute s "power_state" Text)
+             (\s a -> s { _power_state = a } :: ServerResource s)
 
-instance HasPrivateIpAddress ServerResource Text where
+instance HasPrivateIpAddress (ServerResource s) Text where
+    type HasPrivateIpAddressThread (ServerResource s) Text = s
+
     privateIpAddress =
-        lens (_private_ip_address :: ServerResource -> TF.Argument "private_ip_address" Text)
-             (\s a -> s { _private_ip_address = a } :: ServerResource)
+        lens (_private_ip_address :: ServerResource s -> TF.Attribute s "private_ip_address" Text)
+             (\s a -> s { _private_ip_address = a } :: ServerResource s)
 
-instance HasPublicIpAddress ServerResource Text where
+instance HasPublicIpAddress (ServerResource s) Text where
+    type HasPublicIpAddressThread (ServerResource s) Text = s
+
     publicIpAddress =
-        lens (_public_ip_address :: ServerResource -> TF.Argument "public_ip_address" Text)
-             (\s a -> s { _public_ip_address = a } :: ServerResource)
+        lens (_public_ip_address :: ServerResource s -> TF.Attribute s "public_ip_address" Text)
+             (\s a -> s { _public_ip_address = a } :: ServerResource s)
 
-instance HasSourceServerId ServerResource Text where
+instance HasSourceServerId (ServerResource s) Text where
+    type HasSourceServerIdThread (ServerResource s) Text = s
+
     sourceServerId =
-        lens (_source_server_id :: ServerResource -> TF.Argument "source_server_id" Text)
-             (\s a -> s { _source_server_id = a } :: ServerResource)
+        lens (_source_server_id :: ServerResource s -> TF.Attribute s "source_server_id" Text)
+             (\s a -> s { _source_server_id = a } :: ServerResource s)
 
-instance HasStorageType ServerResource Text where
+instance HasStorageType (ServerResource s) Text where
+    type HasStorageTypeThread (ServerResource s) Text = s
+
     storageType =
-        lens (_storage_type :: ServerResource -> TF.Argument "storage_type" Text)
-             (\s a -> s { _storage_type = a } :: ServerResource)
+        lens (_storage_type :: ServerResource s -> TF.Attribute s "storage_type" Text)
+             (\s a -> s { _storage_type = a } :: ServerResource s)
 
-instance HasType' ServerResource Text where
+instance HasType' (ServerResource s) Text where
+    type HasType'Thread (ServerResource s) Text = s
+
     type' =
-        lens (_type' :: ServerResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: ServerResource)
+        lens (_type' :: ServerResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: ServerResource s)
 
-serverResource :: TF.Resource TF.CenturyLinkCloud ServerResource
+serverResource :: TF.Resource TF.CenturyLinkCloud (ServerResource s)
 serverResource =
     TF.newResource "clc_server" $
         ServerResource {
-            _aa_policy_id = TF.Nil
+              _aa_policy_id = TF.Nil
             , _additional_disks = TF.Nil
             , _configuration_id = TF.Nil
             , _cpu = TF.Nil
@@ -578,224 +666,409 @@ serverResource =
             , _type' = TF.Nil
             }
 
-class HasAaPolicyId s a | s -> a where
-    aaPolicyId :: Lens' s (TF.Argument "aa_policy_id" a)
+class HasAaPolicyId a b | a -> b where
+    type HasAaPolicyIdThread a b :: *
 
-instance HasAaPolicyId s a => HasAaPolicyId (TF.Resource p s) a where
+    aaPolicyId :: Lens' a (TF.Attribute (HasAaPolicyIdThread a b) "aa_policy_id" b)
+
+instance HasAaPolicyId a b => HasAaPolicyId (TF.Resource p a) b where
+    type HasAaPolicyIdThread (TF.Resource p a) b =
+         HasAaPolicyIdThread a b
+
     aaPolicyId = TF.configuration . aaPolicyId
 
-class HasAdditionalDisks s a | s -> a where
-    additionalDisks :: Lens' s (TF.Argument "additional_disks" a)
+class HasAdditionalDisks a b | a -> b where
+    type HasAdditionalDisksThread a b :: *
 
-instance HasAdditionalDisks s a => HasAdditionalDisks (TF.Resource p s) a where
+    additionalDisks :: Lens' a (TF.Attribute (HasAdditionalDisksThread a b) "additional_disks" b)
+
+instance HasAdditionalDisks a b => HasAdditionalDisks (TF.Resource p a) b where
+    type HasAdditionalDisksThread (TF.Resource p a) b =
+         HasAdditionalDisksThread a b
+
     additionalDisks = TF.configuration . additionalDisks
 
-class HasConfigurationId s a | s -> a where
-    configurationId :: Lens' s (TF.Argument "configuration_id" a)
+class HasConfigurationId a b | a -> b where
+    type HasConfigurationIdThread a b :: *
 
-instance HasConfigurationId s a => HasConfigurationId (TF.Resource p s) a where
+    configurationId :: Lens' a (TF.Attribute (HasConfigurationIdThread a b) "configuration_id" b)
+
+instance HasConfigurationId a b => HasConfigurationId (TF.Resource p a) b where
+    type HasConfigurationIdThread (TF.Resource p a) b =
+         HasConfigurationIdThread a b
+
     configurationId = TF.configuration . configurationId
 
-class HasCpu s a | s -> a where
-    cpu :: Lens' s (TF.Argument "cpu" a)
+class HasCpu a b | a -> b where
+    type HasCpuThread a b :: *
 
-instance HasCpu s a => HasCpu (TF.Resource p s) a where
+    cpu :: Lens' a (TF.Attribute (HasCpuThread a b) "cpu" b)
+
+instance HasCpu a b => HasCpu (TF.Resource p a) b where
+    type HasCpuThread (TF.Resource p a) b =
+         HasCpuThread a b
+
     cpu = TF.configuration . cpu
 
-class HasCreatedDat s a | s -> a where
-    createdDat :: Lens' s (TF.Argument "created_dat" a)
+class HasCreatedDat a b | a -> b where
+    type HasCreatedDatThread a b :: *
 
-instance HasCreatedDat s a => HasCreatedDat (TF.Resource p s) a where
+    createdDat :: Lens' a (TF.Attribute (HasCreatedDatThread a b) "created_dat" b)
+
+instance HasCreatedDat a b => HasCreatedDat (TF.Resource p a) b where
+    type HasCreatedDatThread (TF.Resource p a) b =
+         HasCreatedDatThread a b
+
     createdDat = TF.configuration . createdDat
 
-class HasCustomFields s a | s -> a where
-    customFields :: Lens' s (TF.Argument "custom_fields" a)
+class HasCustomFields a b | a -> b where
+    type HasCustomFieldsThread a b :: *
 
-instance HasCustomFields s a => HasCustomFields (TF.Resource p s) a where
+    customFields :: Lens' a (TF.Attribute (HasCustomFieldsThread a b) "custom_fields" b)
+
+instance HasCustomFields a b => HasCustomFields (TF.Resource p a) b where
+    type HasCustomFieldsThread (TF.Resource p a) b =
+         HasCustomFieldsThread a b
+
     customFields = TF.configuration . customFields
 
-class HasDataCenter s a | s -> a where
-    dataCenter :: Lens' s (TF.Argument "data_center" a)
+class HasDataCenter a b | a -> b where
+    type HasDataCenterThread a b :: *
 
-instance HasDataCenter s a => HasDataCenter (TF.Resource p s) a where
+    dataCenter :: Lens' a (TF.Attribute (HasDataCenterThread a b) "data_center" b)
+
+instance HasDataCenter a b => HasDataCenter (TF.Resource p a) b where
+    type HasDataCenterThread (TF.Resource p a) b =
+         HasDataCenterThread a b
+
     dataCenter = TF.configuration . dataCenter
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasGroupId s a | s -> a where
-    groupId :: Lens' s (TF.Argument "group_id" a)
+class HasGroupId a b | a -> b where
+    type HasGroupIdThread a b :: *
 
-instance HasGroupId s a => HasGroupId (TF.Resource p s) a where
+    groupId :: Lens' a (TF.Attribute (HasGroupIdThread a b) "group_id" b)
+
+instance HasGroupId a b => HasGroupId (TF.Resource p a) b where
+    type HasGroupIdThread (TF.Resource p a) b =
+         HasGroupIdThread a b
+
     groupId = TF.configuration . groupId
 
-class HasInternalIpAddress s a | s -> a where
-    internalIpAddress :: Lens' s (TF.Argument "internal_ip_address" a)
+class HasInternalIpAddress a b | a -> b where
+    type HasInternalIpAddressThread a b :: *
 
-instance HasInternalIpAddress s a => HasInternalIpAddress (TF.Resource p s) a where
+    internalIpAddress :: Lens' a (TF.Attribute (HasInternalIpAddressThread a b) "internal_ip_address" b)
+
+instance HasInternalIpAddress a b => HasInternalIpAddress (TF.Resource p a) b where
+    type HasInternalIpAddressThread (TF.Resource p a) b =
+         HasInternalIpAddressThread a b
+
     internalIpAddress = TF.configuration . internalIpAddress
 
-class HasIpAddress s a | s -> a where
-    ipAddress :: Lens' s (TF.Argument "ip_address" a)
+class HasIpAddress a b | a -> b where
+    type HasIpAddressThread a b :: *
 
-instance HasIpAddress s a => HasIpAddress (TF.Resource p s) a where
+    ipAddress :: Lens' a (TF.Attribute (HasIpAddressThread a b) "ip_address" b)
+
+instance HasIpAddress a b => HasIpAddress (TF.Resource p a) b where
+    type HasIpAddressThread (TF.Resource p a) b =
+         HasIpAddressThread a b
+
     ipAddress = TF.configuration . ipAddress
 
-class HasLoadBalancer s a | s -> a where
-    loadBalancer :: Lens' s (TF.Argument "load_balancer" a)
+class HasLoadBalancer a b | a -> b where
+    type HasLoadBalancerThread a b :: *
 
-instance HasLoadBalancer s a => HasLoadBalancer (TF.Resource p s) a where
+    loadBalancer :: Lens' a (TF.Attribute (HasLoadBalancerThread a b) "load_balancer" b)
+
+instance HasLoadBalancer a b => HasLoadBalancer (TF.Resource p a) b where
+    type HasLoadBalancerThread (TF.Resource p a) b =
+         HasLoadBalancerThread a b
+
     loadBalancer = TF.configuration . loadBalancer
 
-class HasLocationId s a | s -> a where
-    locationId :: Lens' s (TF.Argument "location_id" a)
+class HasLocationId a b | a -> b where
+    type HasLocationIdThread a b :: *
 
-instance HasLocationId s a => HasLocationId (TF.Resource p s) a where
+    locationId :: Lens' a (TF.Attribute (HasLocationIdThread a b) "location_id" b)
+
+instance HasLocationId a b => HasLocationId (TF.Resource p a) b where
+    type HasLocationIdThread (TF.Resource p a) b =
+         HasLocationIdThread a b
+
     locationId = TF.configuration . locationId
 
-class HasMemoryMb s a | s -> a where
-    memoryMb :: Lens' s (TF.Argument "memory_mb" a)
+class HasMemoryMb a b | a -> b where
+    type HasMemoryMbThread a b :: *
 
-instance HasMemoryMb s a => HasMemoryMb (TF.Resource p s) a where
+    memoryMb :: Lens' a (TF.Attribute (HasMemoryMbThread a b) "memory_mb" b)
+
+instance HasMemoryMb a b => HasMemoryMb (TF.Resource p a) b where
+    type HasMemoryMbThread (TF.Resource p a) b =
+         HasMemoryMbThread a b
+
     memoryMb = TF.configuration . memoryMb
 
-class HasMetadata s a | s -> a where
-    metadata :: Lens' s (TF.Argument "metadata" a)
+class HasMetadata a b | a -> b where
+    type HasMetadataThread a b :: *
 
-instance HasMetadata s a => HasMetadata (TF.Resource p s) a where
+    metadata :: Lens' a (TF.Attribute (HasMetadataThread a b) "metadata" b)
+
+instance HasMetadata a b => HasMetadata (TF.Resource p a) b where
+    type HasMetadataThread (TF.Resource p a) b =
+         HasMetadataThread a b
+
     metadata = TF.configuration . metadata
 
-class HasMethod s a | s -> a where
-    method :: Lens' s (TF.Argument "method" a)
+class HasMethod a b | a -> b where
+    type HasMethodThread a b :: *
 
-instance HasMethod s a => HasMethod (TF.Resource p s) a where
+    method :: Lens' a (TF.Attribute (HasMethodThread a b) "method" b)
+
+instance HasMethod a b => HasMethod (TF.Resource p a) b where
+    type HasMethodThread (TF.Resource p a) b =
+         HasMethodThread a b
+
     method = TF.configuration . method
 
-class HasModifiedDat s a | s -> a where
-    modifiedDat :: Lens' s (TF.Argument "modified_dat" a)
+class HasModifiedDat a b | a -> b where
+    type HasModifiedDatThread a b :: *
 
-instance HasModifiedDat s a => HasModifiedDat (TF.Resource p s) a where
+    modifiedDat :: Lens' a (TF.Attribute (HasModifiedDatThread a b) "modified_dat" b)
+
+instance HasModifiedDat a b => HasModifiedDat (TF.Resource p a) b where
+    type HasModifiedDatThread (TF.Resource p a) b =
+         HasModifiedDatThread a b
+
     modifiedDat = TF.configuration . modifiedDat
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasNameTemplate s a | s -> a where
-    nameTemplate :: Lens' s (TF.Argument "name_template" a)
+class HasNameTemplate a b | a -> b where
+    type HasNameTemplateThread a b :: *
 
-instance HasNameTemplate s a => HasNameTemplate (TF.Resource p s) a where
+    nameTemplate :: Lens' a (TF.Attribute (HasNameTemplateThread a b) "name_template" b)
+
+instance HasNameTemplate a b => HasNameTemplate (TF.Resource p a) b where
+    type HasNameTemplateThread (TF.Resource p a) b =
+         HasNameTemplateThread a b
+
     nameTemplate = TF.configuration . nameTemplate
 
-class HasNetworkId s a | s -> a where
-    networkId :: Lens' s (TF.Argument "network_id" a)
+class HasNetworkId a b | a -> b where
+    type HasNetworkIdThread a b :: *
 
-instance HasNetworkId s a => HasNetworkId (TF.Resource p s) a where
+    networkId :: Lens' a (TF.Attribute (HasNetworkIdThread a b) "network_id" b)
+
+instance HasNetworkId a b => HasNetworkId (TF.Resource p a) b where
+    type HasNetworkIdThread (TF.Resource p a) b =
+         HasNetworkIdThread a b
+
     networkId = TF.configuration . networkId
 
-class HasNodes s a | s -> a where
-    nodes :: Lens' s (TF.Argument "nodes" a)
+class HasNodes a b | a -> b where
+    type HasNodesThread a b :: *
 
-instance HasNodes s a => HasNodes (TF.Resource p s) a where
+    nodes :: Lens' a (TF.Attribute (HasNodesThread a b) "nodes" b)
+
+instance HasNodes a b => HasNodes (TF.Resource p a) b where
+    type HasNodesThread (TF.Resource p a) b =
+         HasNodesThread a b
+
     nodes = TF.configuration . nodes
 
-class HasOsType s a | s -> a where
-    osType :: Lens' s (TF.Argument "os_type" a)
+class HasOsType a b | a -> b where
+    type HasOsTypeThread a b :: *
 
-instance HasOsType s a => HasOsType (TF.Resource p s) a where
+    osType :: Lens' a (TF.Attribute (HasOsTypeThread a b) "os_type" b)
+
+instance HasOsType a b => HasOsType (TF.Resource p a) b where
+    type HasOsTypeThread (TF.Resource p a) b =
+         HasOsTypeThread a b
+
     osType = TF.configuration . osType
 
-class HasParent s a | s -> a where
-    parent :: Lens' s (TF.Argument "parent" a)
+class HasParent a b | a -> b where
+    type HasParentThread a b :: *
 
-instance HasParent s a => HasParent (TF.Resource p s) a where
+    parent :: Lens' a (TF.Attribute (HasParentThread a b) "parent" b)
+
+instance HasParent a b => HasParent (TF.Resource p a) b where
+    type HasParentThread (TF.Resource p a) b =
+         HasParentThread a b
+
     parent = TF.configuration . parent
 
-class HasParentGroupId s a | s -> a where
-    parentGroupId :: Lens' s (TF.Argument "parent_group_id" a)
+class HasParentGroupId a b | a -> b where
+    type HasParentGroupIdThread a b :: *
 
-instance HasParentGroupId s a => HasParentGroupId (TF.Resource p s) a where
+    parentGroupId :: Lens' a (TF.Attribute (HasParentGroupIdThread a b) "parent_group_id" b)
+
+instance HasParentGroupId a b => HasParentGroupId (TF.Resource p a) b where
+    type HasParentGroupIdThread (TF.Resource p a) b =
+         HasParentGroupIdThread a b
+
     parentGroupId = TF.configuration . parentGroupId
 
-class HasPassword s a | s -> a where
-    password :: Lens' s (TF.Argument "password" a)
+class HasPassword a b | a -> b where
+    type HasPasswordThread a b :: *
 
-instance HasPassword s a => HasPassword (TF.Resource p s) a where
+    password :: Lens' a (TF.Attribute (HasPasswordThread a b) "password" b)
+
+instance HasPassword a b => HasPassword (TF.Resource p a) b where
+    type HasPasswordThread (TF.Resource p a) b =
+         HasPasswordThread a b
+
     password = TF.configuration . password
 
-class HasPersistence s a | s -> a where
-    persistence :: Lens' s (TF.Argument "persistence" a)
+class HasPersistence a b | a -> b where
+    type HasPersistenceThread a b :: *
 
-instance HasPersistence s a => HasPersistence (TF.Resource p s) a where
+    persistence :: Lens' a (TF.Attribute (HasPersistenceThread a b) "persistence" b)
+
+instance HasPersistence a b => HasPersistence (TF.Resource p a) b where
+    type HasPersistenceThread (TF.Resource p a) b =
+         HasPersistenceThread a b
+
     persistence = TF.configuration . persistence
 
-class HasPort s a | s -> a where
-    port :: Lens' s (TF.Argument "port" a)
+class HasPort a b | a -> b where
+    type HasPortThread a b :: *
 
-instance HasPort s a => HasPort (TF.Resource p s) a where
+    port :: Lens' a (TF.Attribute (HasPortThread a b) "port" b)
+
+instance HasPort a b => HasPort (TF.Resource p a) b where
+    type HasPortThread (TF.Resource p a) b =
+         HasPortThread a b
+
     port = TF.configuration . port
 
-class HasPorts s a | s -> a where
-    ports :: Lens' s (TF.Argument "ports" a)
+class HasPorts a b | a -> b where
+    type HasPortsThread a b :: *
 
-instance HasPorts s a => HasPorts (TF.Resource p s) a where
+    ports :: Lens' a (TF.Attribute (HasPortsThread a b) "ports" b)
+
+instance HasPorts a b => HasPorts (TF.Resource p a) b where
+    type HasPortsThread (TF.Resource p a) b =
+         HasPortsThread a b
+
     ports = TF.configuration . ports
 
-class HasPowerState s a | s -> a where
-    powerState :: Lens' s (TF.Argument "power_state" a)
+class HasPowerState a b | a -> b where
+    type HasPowerStateThread a b :: *
 
-instance HasPowerState s a => HasPowerState (TF.Resource p s) a where
+    powerState :: Lens' a (TF.Attribute (HasPowerStateThread a b) "power_state" b)
+
+instance HasPowerState a b => HasPowerState (TF.Resource p a) b where
+    type HasPowerStateThread (TF.Resource p a) b =
+         HasPowerStateThread a b
+
     powerState = TF.configuration . powerState
 
-class HasPrivateIpAddress s a | s -> a where
-    privateIpAddress :: Lens' s (TF.Argument "private_ip_address" a)
+class HasPrivateIpAddress a b | a -> b where
+    type HasPrivateIpAddressThread a b :: *
 
-instance HasPrivateIpAddress s a => HasPrivateIpAddress (TF.Resource p s) a where
+    privateIpAddress :: Lens' a (TF.Attribute (HasPrivateIpAddressThread a b) "private_ip_address" b)
+
+instance HasPrivateIpAddress a b => HasPrivateIpAddress (TF.Resource p a) b where
+    type HasPrivateIpAddressThread (TF.Resource p a) b =
+         HasPrivateIpAddressThread a b
+
     privateIpAddress = TF.configuration . privateIpAddress
 
-class HasPublicIpAddress s a | s -> a where
-    publicIpAddress :: Lens' s (TF.Argument "public_ip_address" a)
+class HasPublicIpAddress a b | a -> b where
+    type HasPublicIpAddressThread a b :: *
 
-instance HasPublicIpAddress s a => HasPublicIpAddress (TF.Resource p s) a where
+    publicIpAddress :: Lens' a (TF.Attribute (HasPublicIpAddressThread a b) "public_ip_address" b)
+
+instance HasPublicIpAddress a b => HasPublicIpAddress (TF.Resource p a) b where
+    type HasPublicIpAddressThread (TF.Resource p a) b =
+         HasPublicIpAddressThread a b
+
     publicIpAddress = TF.configuration . publicIpAddress
 
-class HasServerId s a | s -> a where
-    serverId :: Lens' s (TF.Argument "server_id" a)
+class HasServerId a b | a -> b where
+    type HasServerIdThread a b :: *
 
-instance HasServerId s a => HasServerId (TF.Resource p s) a where
+    serverId :: Lens' a (TF.Attribute (HasServerIdThread a b) "server_id" b)
+
+instance HasServerId a b => HasServerId (TF.Resource p a) b where
+    type HasServerIdThread (TF.Resource p a) b =
+         HasServerIdThread a b
+
     serverId = TF.configuration . serverId
 
-class HasSourceRestrictions s a | s -> a where
-    sourceRestrictions :: Lens' s (TF.Argument "source_restrictions" a)
+class HasSourceRestrictions a b | a -> b where
+    type HasSourceRestrictionsThread a b :: *
 
-instance HasSourceRestrictions s a => HasSourceRestrictions (TF.Resource p s) a where
+    sourceRestrictions :: Lens' a (TF.Attribute (HasSourceRestrictionsThread a b) "source_restrictions" b)
+
+instance HasSourceRestrictions a b => HasSourceRestrictions (TF.Resource p a) b where
+    type HasSourceRestrictionsThread (TF.Resource p a) b =
+         HasSourceRestrictionsThread a b
+
     sourceRestrictions = TF.configuration . sourceRestrictions
 
-class HasSourceServerId s a | s -> a where
-    sourceServerId :: Lens' s (TF.Argument "source_server_id" a)
+class HasSourceServerId a b | a -> b where
+    type HasSourceServerIdThread a b :: *
 
-instance HasSourceServerId s a => HasSourceServerId (TF.Resource p s) a where
+    sourceServerId :: Lens' a (TF.Attribute (HasSourceServerIdThread a b) "source_server_id" b)
+
+instance HasSourceServerId a b => HasSourceServerId (TF.Resource p a) b where
+    type HasSourceServerIdThread (TF.Resource p a) b =
+         HasSourceServerIdThread a b
+
     sourceServerId = TF.configuration . sourceServerId
 
-class HasStatus s a | s -> a where
-    status :: Lens' s (TF.Argument "status" a)
+class HasStatus a b | a -> b where
+    type HasStatusThread a b :: *
 
-instance HasStatus s a => HasStatus (TF.Resource p s) a where
+    status :: Lens' a (TF.Attribute (HasStatusThread a b) "status" b)
+
+instance HasStatus a b => HasStatus (TF.Resource p a) b where
+    type HasStatusThread (TF.Resource p a) b =
+         HasStatusThread a b
+
     status = TF.configuration . status
 
-class HasStorageType s a | s -> a where
-    storageType :: Lens' s (TF.Argument "storage_type" a)
+class HasStorageType a b | a -> b where
+    type HasStorageTypeThread a b :: *
 
-instance HasStorageType s a => HasStorageType (TF.Resource p s) a where
+    storageType :: Lens' a (TF.Attribute (HasStorageTypeThread a b) "storage_type" b)
+
+instance HasStorageType a b => HasStorageType (TF.Resource p a) b where
+    type HasStorageTypeThread (TF.Resource p a) b =
+         HasStorageTypeThread a b
+
     storageType = TF.configuration . storageType
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'

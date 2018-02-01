@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Terrafomo.Attribute       as TF
 import qualified Terrafomo.Bitbucket.Types as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.IP              as TF
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Provider        as TF
 
 {- | Bitbucket Terraform provider.
 
@@ -52,9 +52,9 @@ repositories, webhooks, and default reviewers. Use the navigation to the
 left to read about the available resources.
 -}
 data Bitbucket = Bitbucket {
-      _password :: !(TF.Argument "password" Text)
+      _password :: !(Maybe Text)
     {- ^ (Required) Your password used to connect to bitbucket. You can also set this via the environment variable. @BITBUCKET_PASSWORD@ -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username :: !(Maybe Text)
     {- ^ (Required) Your username used to connect to bitbucket. You can also set this via the environment variable. @BITBUCKET_USERNAME@ -}
     } deriving (Show, Eq, Generic)
 
@@ -62,25 +62,27 @@ instance Hashable Bitbucket
 
 instance TF.ToHCL Bitbucket where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Bitbucket))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_password x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (Bitbucket))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "password" <$> _password x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyBitbucket :: Bitbucket
-emptyBitbucket = Bitbucket {
-        _password = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider Bitbucket where
     type ProviderType Bitbucket = "bitbucket"
 
-password :: Lens' Bitbucket (TF.Argument "password" Text)
+emptyBitbucket :: Bitbucket
+emptyBitbucket = Bitbucket {
+        _password = Nothing
+      , _username = Nothing
+    }
+
+password :: Lens' Bitbucket (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' Bitbucket (TF.Argument "username" Text)
+username :: Lens' Bitbucket (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

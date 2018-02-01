@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Heroku.Types    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Heroku.Types as TF
+import qualified Terrafomo.IP           as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
 
 {- | Heroku Terraform provider.
 
@@ -53,9 +53,9 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Heroku = Heroku {
-      _api_key :: !(TF.Argument "api_key" Text)
+      _api_key :: !(Maybe Text)
     {- ^ (Required) Heroku API token. It must be provided, but it can also be sourced from the @HEROKU_API_KEY@ environment variable. -}
-    , _email   :: !(TF.Argument "email" Text)
+    , _email   :: !(Maybe Text)
     {- ^ (Required) Email to be notified by Heroku. It must be provided, but it can also be sourced from the @HEROKU_EMAIL@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -63,25 +63,27 @@ instance Hashable Heroku
 
 instance TF.ToHCL Heroku where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Heroku))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_key x)
-            , TF.argument (_email x)
+        let typ = TF.providerType (Proxy :: Proxy (Heroku))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_key" <$> _api_key x
+            , TF.assign "email" <$> _email x
             ]
-
-emptyHeroku :: Heroku
-emptyHeroku = Heroku {
-        _api_key = TF.Nil
-      , _email = TF.Nil
-    }
 
 instance TF.IsProvider Heroku where
     type ProviderType Heroku = "heroku"
 
-apiKey :: Lens' Heroku (TF.Argument "api_key" Text)
+emptyHeroku :: Heroku
+emptyHeroku = Heroku {
+        _api_key = Nothing
+      , _email = Nothing
+    }
+
+apiKey :: Lens' Heroku (Maybe Text)
 apiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-email :: Lens' Heroku (TF.Argument "email" Text)
+email :: Lens' Heroku (Maybe Text)
 email =
     lens _email (\s a -> s { _email = a })

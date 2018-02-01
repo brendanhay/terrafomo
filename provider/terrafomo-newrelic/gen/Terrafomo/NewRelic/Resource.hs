@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -73,59 +74,66 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.NewRelic.Provider as TF
 import qualified Terrafomo.NewRelic.Types    as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @newrelic_alert_channel@ NewRelic resource.
 
 
 -}
-data AlertChannelResource = AlertChannelResource {
-      _configuration :: !(TF.Argument "configuration" Text)
+data AlertChannelResource s = AlertChannelResource {
+      _configuration :: !(TF.Attribute s "configuration" Text)
     {- ^ (Required) A map of key / value pairs with channel type specific values. -}
-    , _name          :: !(TF.Argument "name" Text)
+    , _name          :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the channel. -}
-    , _type'         :: !(TF.Argument "type" Text)
+    , _type'         :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@ , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AlertChannelResource where
+instance TF.ToHCL (AlertChannelResource s) where
     toHCL AlertChannelResource{..} = TF.block $ catMaybes
-        [ TF.argument _configuration
-        , TF.argument _name
-        , TF.argument _type'
+        [ TF.attribute _configuration
+        , TF.attribute _name
+        , TF.attribute _type'
         ]
 
-instance HasConfiguration AlertChannelResource Text where
+instance HasConfiguration (AlertChannelResource s) Text where
+    type HasConfigurationThread (AlertChannelResource s) Text = s
+
     configuration =
-        lens (_configuration :: AlertChannelResource -> TF.Argument "configuration" Text)
-             (\s a -> s { _configuration = a } :: AlertChannelResource)
+        lens (_configuration :: AlertChannelResource s -> TF.Attribute s "configuration" Text)
+             (\s a -> s { _configuration = a } :: AlertChannelResource s)
 
-instance HasName AlertChannelResource Text where
+instance HasName (AlertChannelResource s) Text where
+    type HasNameThread (AlertChannelResource s) Text = s
+
     name =
-        lens (_name :: AlertChannelResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AlertChannelResource)
+        lens (_name :: AlertChannelResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AlertChannelResource s)
 
-instance HasType' AlertChannelResource Text where
+instance HasType' (AlertChannelResource s) Text where
+    type HasType'Thread (AlertChannelResource s) Text = s
+
     type' =
-        lens (_type' :: AlertChannelResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: AlertChannelResource)
+        lens (_type' :: AlertChannelResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: AlertChannelResource s)
 
-instance HasComputedId AlertChannelResource Text where
+instance HasComputedId (AlertChannelResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-alertChannelResource :: TF.Resource TF.NewRelic AlertChannelResource
+alertChannelResource :: TF.Resource TF.NewRelic (AlertChannelResource s)
 alertChannelResource =
     TF.newResource "newrelic_alert_channel" $
         AlertChannelResource {
-            _configuration = TF.Nil
+              _configuration = TF.Nil
             , _name = TF.Nil
             , _type' = TF.Nil
             }
@@ -134,98 +142,118 @@ alertChannelResource =
 
 
 -}
-data AlertConditionResource = AlertConditionResource {
-      _condition_scope :: !(TF.Argument "condition_scope" Text)
+data AlertConditionResource s = AlertConditionResource {
+      _condition_scope :: !(TF.Attribute s "condition_scope" Text)
     {- ^ (Optional) @instance@ or @application@ .  This is required if you are using the JVM plugin in New Relic. -}
-    , _entities :: !(TF.Argument "entities" Text)
+    , _entities :: !(TF.Attribute s "entities" Text)
     {- ^ (Required) The instance IDS associated with this condition. -}
-    , _metric :: !(TF.Argument "metric" Text)
+    , _metric :: !(TF.Attribute s "metric" Text)
     {- ^ (Required) The metric field accepts parameters based on the @type@ set. -}
-    , _name :: !(TF.Argument "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The title of the condition -}
-    , _policy_id :: !(TF.Argument "policy_id" Text)
+    , _policy_id :: !(TF.Attribute s "policy_id" Text)
     {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url :: !(TF.Argument "runbook_url" Text)
+    , _runbook_url :: !(TF.Attribute s "runbook_url" Text)
     {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term :: !(TF.Argument "term" Text)
+    , _term :: !(TF.Attribute s "term" Text)
     {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
-    , _type' :: !(TF.Argument "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of condition. One of: @apm_app_metric@ , @apm_kt_metric@ , @servers_metric@ , @browser_metric@ , @mobile_metric@ -}
-    , _user_defined_metric :: !(TF.Argument "user_defined_metric" Text)
+    , _user_defined_metric :: !(TF.Attribute s "user_defined_metric" Text)
     {- ^ (Optional) A custom metric to be evaluated. -}
-    , _user_defined_value_function :: !(TF.Argument "user_defined_value_function" Text)
+    , _user_defined_value_function :: !(TF.Attribute s "user_defined_value_function" Text)
     {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AlertConditionResource where
+instance TF.ToHCL (AlertConditionResource s) where
     toHCL AlertConditionResource{..} = TF.block $ catMaybes
-        [ TF.argument _condition_scope
-        , TF.argument _entities
-        , TF.argument _metric
-        , TF.argument _name
-        , TF.argument _policy_id
-        , TF.argument _runbook_url
-        , TF.argument _term
-        , TF.argument _type'
-        , TF.argument _user_defined_metric
-        , TF.argument _user_defined_value_function
+        [ TF.attribute _condition_scope
+        , TF.attribute _entities
+        , TF.attribute _metric
+        , TF.attribute _name
+        , TF.attribute _policy_id
+        , TF.attribute _runbook_url
+        , TF.attribute _term
+        , TF.attribute _type'
+        , TF.attribute _user_defined_metric
+        , TF.attribute _user_defined_value_function
         ]
 
-instance HasConditionScope AlertConditionResource Text where
+instance HasConditionScope (AlertConditionResource s) Text where
+    type HasConditionScopeThread (AlertConditionResource s) Text = s
+
     conditionScope =
-        lens (_condition_scope :: AlertConditionResource -> TF.Argument "condition_scope" Text)
-             (\s a -> s { _condition_scope = a } :: AlertConditionResource)
+        lens (_condition_scope :: AlertConditionResource s -> TF.Attribute s "condition_scope" Text)
+             (\s a -> s { _condition_scope = a } :: AlertConditionResource s)
 
-instance HasEntities AlertConditionResource Text where
+instance HasEntities (AlertConditionResource s) Text where
+    type HasEntitiesThread (AlertConditionResource s) Text = s
+
     entities =
-        lens (_entities :: AlertConditionResource -> TF.Argument "entities" Text)
-             (\s a -> s { _entities = a } :: AlertConditionResource)
+        lens (_entities :: AlertConditionResource s -> TF.Attribute s "entities" Text)
+             (\s a -> s { _entities = a } :: AlertConditionResource s)
 
-instance HasMetric AlertConditionResource Text where
+instance HasMetric (AlertConditionResource s) Text where
+    type HasMetricThread (AlertConditionResource s) Text = s
+
     metric =
-        lens (_metric :: AlertConditionResource -> TF.Argument "metric" Text)
-             (\s a -> s { _metric = a } :: AlertConditionResource)
+        lens (_metric :: AlertConditionResource s -> TF.Attribute s "metric" Text)
+             (\s a -> s { _metric = a } :: AlertConditionResource s)
 
-instance HasName AlertConditionResource Text where
+instance HasName (AlertConditionResource s) Text where
+    type HasNameThread (AlertConditionResource s) Text = s
+
     name =
-        lens (_name :: AlertConditionResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AlertConditionResource)
+        lens (_name :: AlertConditionResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AlertConditionResource s)
 
-instance HasPolicyId AlertConditionResource Text where
+instance HasPolicyId (AlertConditionResource s) Text where
+    type HasPolicyIdThread (AlertConditionResource s) Text = s
+
     policyId =
-        lens (_policy_id :: AlertConditionResource -> TF.Argument "policy_id" Text)
-             (\s a -> s { _policy_id = a } :: AlertConditionResource)
+        lens (_policy_id :: AlertConditionResource s -> TF.Attribute s "policy_id" Text)
+             (\s a -> s { _policy_id = a } :: AlertConditionResource s)
 
-instance HasRunbookUrl AlertConditionResource Text where
+instance HasRunbookUrl (AlertConditionResource s) Text where
+    type HasRunbookUrlThread (AlertConditionResource s) Text = s
+
     runbookUrl =
-        lens (_runbook_url :: AlertConditionResource -> TF.Argument "runbook_url" Text)
-             (\s a -> s { _runbook_url = a } :: AlertConditionResource)
+        lens (_runbook_url :: AlertConditionResource s -> TF.Attribute s "runbook_url" Text)
+             (\s a -> s { _runbook_url = a } :: AlertConditionResource s)
 
-instance HasTerm AlertConditionResource Text where
+instance HasTerm (AlertConditionResource s) Text where
+    type HasTermThread (AlertConditionResource s) Text = s
+
     term =
-        lens (_term :: AlertConditionResource -> TF.Argument "term" Text)
-             (\s a -> s { _term = a } :: AlertConditionResource)
+        lens (_term :: AlertConditionResource s -> TF.Attribute s "term" Text)
+             (\s a -> s { _term = a } :: AlertConditionResource s)
 
-instance HasType' AlertConditionResource Text where
+instance HasType' (AlertConditionResource s) Text where
+    type HasType'Thread (AlertConditionResource s) Text = s
+
     type' =
-        lens (_type' :: AlertConditionResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: AlertConditionResource)
+        lens (_type' :: AlertConditionResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: AlertConditionResource s)
 
-instance HasUserDefinedMetric AlertConditionResource Text where
+instance HasUserDefinedMetric (AlertConditionResource s) Text where
+    type HasUserDefinedMetricThread (AlertConditionResource s) Text = s
+
     userDefinedMetric =
-        lens (_user_defined_metric :: AlertConditionResource -> TF.Argument "user_defined_metric" Text)
-             (\s a -> s { _user_defined_metric = a } :: AlertConditionResource)
+        lens (_user_defined_metric :: AlertConditionResource s -> TF.Attribute s "user_defined_metric" Text)
+             (\s a -> s { _user_defined_metric = a } :: AlertConditionResource s)
 
-instance HasUserDefinedValueFunction AlertConditionResource Text where
+instance HasUserDefinedValueFunction (AlertConditionResource s) Text where
+    type HasUserDefinedValueFunctionThread (AlertConditionResource s) Text = s
+
     userDefinedValueFunction =
-        lens (_user_defined_value_function :: AlertConditionResource -> TF.Argument "user_defined_value_function" Text)
-             (\s a -> s { _user_defined_value_function = a } :: AlertConditionResource)
+        lens (_user_defined_value_function :: AlertConditionResource s -> TF.Attribute s "user_defined_value_function" Text)
+             (\s a -> s { _user_defined_value_function = a } :: AlertConditionResource s)
 
-alertConditionResource :: TF.Resource TF.NewRelic AlertConditionResource
+alertConditionResource :: TF.Resource TF.NewRelic (AlertConditionResource s)
 alertConditionResource =
     TF.newResource "newrelic_alert_condition" $
         AlertConditionResource {
-            _condition_scope = TF.Nil
+              _condition_scope = TF.Nil
             , _entities = TF.Nil
             , _metric = TF.Nil
             , _name = TF.Nil
@@ -241,34 +269,38 @@ alertConditionResource =
 
 
 -}
-data AlertPolicyChannelResource = AlertPolicyChannelResource {
-      _channel_id :: !(TF.Argument "channel_id" Text)
+data AlertPolicyChannelResource s = AlertPolicyChannelResource {
+      _channel_id :: !(TF.Attribute s "channel_id" Text)
     {- ^ (Required) The ID of the channel. -}
-    , _policy_id  :: !(TF.Argument "policy_id" Text)
+    , _policy_id  :: !(TF.Attribute s "policy_id" Text)
     {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AlertPolicyChannelResource where
+instance TF.ToHCL (AlertPolicyChannelResource s) where
     toHCL AlertPolicyChannelResource{..} = TF.block $ catMaybes
-        [ TF.argument _channel_id
-        , TF.argument _policy_id
+        [ TF.attribute _channel_id
+        , TF.attribute _policy_id
         ]
 
-instance HasChannelId AlertPolicyChannelResource Text where
+instance HasChannelId (AlertPolicyChannelResource s) Text where
+    type HasChannelIdThread (AlertPolicyChannelResource s) Text = s
+
     channelId =
-        lens (_channel_id :: AlertPolicyChannelResource -> TF.Argument "channel_id" Text)
-             (\s a -> s { _channel_id = a } :: AlertPolicyChannelResource)
+        lens (_channel_id :: AlertPolicyChannelResource s -> TF.Attribute s "channel_id" Text)
+             (\s a -> s { _channel_id = a } :: AlertPolicyChannelResource s)
 
-instance HasPolicyId AlertPolicyChannelResource Text where
+instance HasPolicyId (AlertPolicyChannelResource s) Text where
+    type HasPolicyIdThread (AlertPolicyChannelResource s) Text = s
+
     policyId =
-        lens (_policy_id :: AlertPolicyChannelResource -> TF.Argument "policy_id" Text)
-             (\s a -> s { _policy_id = a } :: AlertPolicyChannelResource)
+        lens (_policy_id :: AlertPolicyChannelResource s -> TF.Attribute s "policy_id" Text)
+             (\s a -> s { _policy_id = a } :: AlertPolicyChannelResource s)
 
-alertPolicyChannelResource :: TF.Resource TF.NewRelic AlertPolicyChannelResource
+alertPolicyChannelResource :: TF.Resource TF.NewRelic (AlertPolicyChannelResource s)
 alertPolicyChannelResource =
     TF.newResource "newrelic_alert_policy_channel" $
         AlertPolicyChannelResource {
-            _channel_id = TF.Nil
+              _channel_id = TF.Nil
             , _policy_id = TF.Nil
             }
 
@@ -276,46 +308,50 @@ alertPolicyChannelResource =
 
 
 -}
-data AlertPolicyResource = AlertPolicyResource {
-      _incident_preference :: !(TF.Argument "incident_preference" Text)
+data AlertPolicyResource s = AlertPolicyResource {
+      _incident_preference :: !(TF.Attribute s "incident_preference" Text)
     {- ^ (Optional) The rollup strategy for the policy.  Options include: @PER_POLICY@ , @PER_CONDITION@ , or @PER_CONDITION_AND_TARGET@ .  The default is @PER_POLICY@ . -}
-    , _name                :: !(TF.Argument "name" Text)
+    , _name                :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AlertPolicyResource where
+instance TF.ToHCL (AlertPolicyResource s) where
     toHCL AlertPolicyResource{..} = TF.block $ catMaybes
-        [ TF.argument _incident_preference
-        , TF.argument _name
+        [ TF.attribute _incident_preference
+        , TF.attribute _name
         ]
 
-instance HasIncidentPreference AlertPolicyResource Text where
+instance HasIncidentPreference (AlertPolicyResource s) Text where
+    type HasIncidentPreferenceThread (AlertPolicyResource s) Text = s
+
     incidentPreference =
-        lens (_incident_preference :: AlertPolicyResource -> TF.Argument "incident_preference" Text)
-             (\s a -> s { _incident_preference = a } :: AlertPolicyResource)
+        lens (_incident_preference :: AlertPolicyResource s -> TF.Attribute s "incident_preference" Text)
+             (\s a -> s { _incident_preference = a } :: AlertPolicyResource s)
 
-instance HasName AlertPolicyResource Text where
+instance HasName (AlertPolicyResource s) Text where
+    type HasNameThread (AlertPolicyResource s) Text = s
+
     name =
-        lens (_name :: AlertPolicyResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AlertPolicyResource)
+        lens (_name :: AlertPolicyResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AlertPolicyResource s)
 
-instance HasComputedCreatedAt AlertPolicyResource Text where
+instance HasComputedCreatedAt (AlertPolicyResource s) Text where
     computedCreatedAt =
-        to (\_  -> TF.Compute "created_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
 
-instance HasComputedId AlertPolicyResource Text where
+instance HasComputedId (AlertPolicyResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedUpdatedAt AlertPolicyResource Text where
+instance HasComputedUpdatedAt (AlertPolicyResource s) Text where
     computedUpdatedAt =
-        to (\_  -> TF.Compute "updated_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")
 
-alertPolicyResource :: TF.Resource TF.NewRelic AlertPolicyResource
+alertPolicyResource :: TF.Resource TF.NewRelic (AlertPolicyResource s)
 alertPolicyResource =
     TF.newResource "newrelic_alert_policy" $
         AlertPolicyResource {
-            _incident_preference = TF.Nil
+              _incident_preference = TF.Nil
             , _name = TF.Nil
             }
 
@@ -323,74 +359,88 @@ alertPolicyResource =
 
 
 -}
-data NrqlAlertConditionResource = NrqlAlertConditionResource {
-      _enabled        :: !(TF.Argument "enabled" Text)
+data NrqlAlertConditionResource s = NrqlAlertConditionResource {
+      _enabled        :: !(TF.Attribute s "enabled" Text)
     {- ^ (Optional) Set whether to enable the alert condition. Defaults to @true@ . -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The title of the condition -}
-    , _nrql           :: !(TF.Argument "nrql" Text)
+    , _nrql           :: !(TF.Attribute s "nrql" Text)
     {- ^ (Required) A NRQL query. See <#nrql> below for details. -}
-    , _policy_id      :: !(TF.Argument "policy_id" Text)
+    , _policy_id      :: !(TF.Attribute s "policy_id" Text)
     {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url    :: !(TF.Argument "runbook_url" Text)
+    , _runbook_url    :: !(TF.Attribute s "runbook_url" Text)
     {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term           :: !(TF.Argument "term" Text)
+    , _term           :: !(TF.Attribute s "term" Text)
     {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
-    , _value_function :: !(TF.Argument "value_function" Text)
+    , _value_function :: !(TF.Attribute s "value_function" Text)
     {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL NrqlAlertConditionResource where
+instance TF.ToHCL (NrqlAlertConditionResource s) where
     toHCL NrqlAlertConditionResource{..} = TF.block $ catMaybes
-        [ TF.argument _enabled
-        , TF.argument _name
-        , TF.argument _nrql
-        , TF.argument _policy_id
-        , TF.argument _runbook_url
-        , TF.argument _term
-        , TF.argument _value_function
+        [ TF.attribute _enabled
+        , TF.attribute _name
+        , TF.attribute _nrql
+        , TF.attribute _policy_id
+        , TF.attribute _runbook_url
+        , TF.attribute _term
+        , TF.attribute _value_function
         ]
 
-instance HasEnabled NrqlAlertConditionResource Text where
+instance HasEnabled (NrqlAlertConditionResource s) Text where
+    type HasEnabledThread (NrqlAlertConditionResource s) Text = s
+
     enabled =
-        lens (_enabled :: NrqlAlertConditionResource -> TF.Argument "enabled" Text)
-             (\s a -> s { _enabled = a } :: NrqlAlertConditionResource)
+        lens (_enabled :: NrqlAlertConditionResource s -> TF.Attribute s "enabled" Text)
+             (\s a -> s { _enabled = a } :: NrqlAlertConditionResource s)
 
-instance HasName NrqlAlertConditionResource Text where
+instance HasName (NrqlAlertConditionResource s) Text where
+    type HasNameThread (NrqlAlertConditionResource s) Text = s
+
     name =
-        lens (_name :: NrqlAlertConditionResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: NrqlAlertConditionResource)
+        lens (_name :: NrqlAlertConditionResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
 
-instance HasNrql NrqlAlertConditionResource Text where
+instance HasNrql (NrqlAlertConditionResource s) Text where
+    type HasNrqlThread (NrqlAlertConditionResource s) Text = s
+
     nrql =
-        lens (_nrql :: NrqlAlertConditionResource -> TF.Argument "nrql" Text)
-             (\s a -> s { _nrql = a } :: NrqlAlertConditionResource)
+        lens (_nrql :: NrqlAlertConditionResource s -> TF.Attribute s "nrql" Text)
+             (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
 
-instance HasPolicyId NrqlAlertConditionResource Text where
+instance HasPolicyId (NrqlAlertConditionResource s) Text where
+    type HasPolicyIdThread (NrqlAlertConditionResource s) Text = s
+
     policyId =
-        lens (_policy_id :: NrqlAlertConditionResource -> TF.Argument "policy_id" Text)
-             (\s a -> s { _policy_id = a } :: NrqlAlertConditionResource)
+        lens (_policy_id :: NrqlAlertConditionResource s -> TF.Attribute s "policy_id" Text)
+             (\s a -> s { _policy_id = a } :: NrqlAlertConditionResource s)
 
-instance HasRunbookUrl NrqlAlertConditionResource Text where
+instance HasRunbookUrl (NrqlAlertConditionResource s) Text where
+    type HasRunbookUrlThread (NrqlAlertConditionResource s) Text = s
+
     runbookUrl =
-        lens (_runbook_url :: NrqlAlertConditionResource -> TF.Argument "runbook_url" Text)
-             (\s a -> s { _runbook_url = a } :: NrqlAlertConditionResource)
+        lens (_runbook_url :: NrqlAlertConditionResource s -> TF.Attribute s "runbook_url" Text)
+             (\s a -> s { _runbook_url = a } :: NrqlAlertConditionResource s)
 
-instance HasTerm NrqlAlertConditionResource Text where
+instance HasTerm (NrqlAlertConditionResource s) Text where
+    type HasTermThread (NrqlAlertConditionResource s) Text = s
+
     term =
-        lens (_term :: NrqlAlertConditionResource -> TF.Argument "term" Text)
-             (\s a -> s { _term = a } :: NrqlAlertConditionResource)
+        lens (_term :: NrqlAlertConditionResource s -> TF.Attribute s "term" Text)
+             (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
 
-instance HasValueFunction NrqlAlertConditionResource Text where
+instance HasValueFunction (NrqlAlertConditionResource s) Text where
+    type HasValueFunctionThread (NrqlAlertConditionResource s) Text = s
+
     valueFunction =
-        lens (_value_function :: NrqlAlertConditionResource -> TF.Argument "value_function" Text)
-             (\s a -> s { _value_function = a } :: NrqlAlertConditionResource)
+        lens (_value_function :: NrqlAlertConditionResource s -> TF.Attribute s "value_function" Text)
+             (\s a -> s { _value_function = a } :: NrqlAlertConditionResource s)
 
-nrqlAlertConditionResource :: TF.Resource TF.NewRelic NrqlAlertConditionResource
+nrqlAlertConditionResource :: TF.Resource TF.NewRelic (NrqlAlertConditionResource s)
 nrqlAlertConditionResource =
     TF.newResource "newrelic_nrql_alert_condition" $
         NrqlAlertConditionResource {
-            _enabled = TF.Nil
+              _enabled = TF.Nil
             , _name = TF.Nil
             , _nrql = TF.Nil
             , _policy_id = TF.Nil
@@ -399,116 +449,187 @@ nrqlAlertConditionResource =
             , _value_function = TF.Nil
             }
 
-class HasChannelId s a | s -> a where
-    channelId :: Lens' s (TF.Argument "channel_id" a)
+class HasChannelId a b | a -> b where
+    type HasChannelIdThread a b :: *
 
-instance HasChannelId s a => HasChannelId (TF.Resource p s) a where
+    channelId :: Lens' a (TF.Attribute (HasChannelIdThread a b) "channel_id" b)
+
+instance HasChannelId a b => HasChannelId (TF.Resource p a) b where
+    type HasChannelIdThread (TF.Resource p a) b =
+         HasChannelIdThread a b
+
     channelId = TF.configuration . channelId
 
-class HasConditionScope s a | s -> a where
-    conditionScope :: Lens' s (TF.Argument "condition_scope" a)
+class HasConditionScope a b | a -> b where
+    type HasConditionScopeThread a b :: *
 
-instance HasConditionScope s a => HasConditionScope (TF.Resource p s) a where
+    conditionScope :: Lens' a (TF.Attribute (HasConditionScopeThread a b) "condition_scope" b)
+
+instance HasConditionScope a b => HasConditionScope (TF.Resource p a) b where
+    type HasConditionScopeThread (TF.Resource p a) b =
+         HasConditionScopeThread a b
+
     conditionScope = TF.configuration . conditionScope
 
-class HasConfiguration s a | s -> a where
-    configuration :: Lens' s (TF.Argument "configuration" a)
+class HasConfiguration a b | a -> b where
+    type HasConfigurationThread a b :: *
 
-instance HasConfiguration s a => HasConfiguration (TF.Resource p s) a where
+    configuration :: Lens' a (TF.Attribute (HasConfigurationThread a b) "configuration" b)
+
+instance HasConfiguration a b => HasConfiguration (TF.Resource p a) b where
+    type HasConfigurationThread (TF.Resource p a) b =
+         HasConfigurationThread a b
+
     configuration = TF.configuration . configuration
 
-class HasEnabled s a | s -> a where
-    enabled :: Lens' s (TF.Argument "enabled" a)
+class HasEnabled a b | a -> b where
+    type HasEnabledThread a b :: *
 
-instance HasEnabled s a => HasEnabled (TF.Resource p s) a where
+    enabled :: Lens' a (TF.Attribute (HasEnabledThread a b) "enabled" b)
+
+instance HasEnabled a b => HasEnabled (TF.Resource p a) b where
+    type HasEnabledThread (TF.Resource p a) b =
+         HasEnabledThread a b
+
     enabled = TF.configuration . enabled
 
-class HasEntities s a | s -> a where
-    entities :: Lens' s (TF.Argument "entities" a)
+class HasEntities a b | a -> b where
+    type HasEntitiesThread a b :: *
 
-instance HasEntities s a => HasEntities (TF.Resource p s) a where
+    entities :: Lens' a (TF.Attribute (HasEntitiesThread a b) "entities" b)
+
+instance HasEntities a b => HasEntities (TF.Resource p a) b where
+    type HasEntitiesThread (TF.Resource p a) b =
+         HasEntitiesThread a b
+
     entities = TF.configuration . entities
 
-class HasIncidentPreference s a | s -> a where
-    incidentPreference :: Lens' s (TF.Argument "incident_preference" a)
+class HasIncidentPreference a b | a -> b where
+    type HasIncidentPreferenceThread a b :: *
 
-instance HasIncidentPreference s a => HasIncidentPreference (TF.Resource p s) a where
+    incidentPreference :: Lens' a (TF.Attribute (HasIncidentPreferenceThread a b) "incident_preference" b)
+
+instance HasIncidentPreference a b => HasIncidentPreference (TF.Resource p a) b where
+    type HasIncidentPreferenceThread (TF.Resource p a) b =
+         HasIncidentPreferenceThread a b
+
     incidentPreference = TF.configuration . incidentPreference
 
-class HasMetric s a | s -> a where
-    metric :: Lens' s (TF.Argument "metric" a)
+class HasMetric a b | a -> b where
+    type HasMetricThread a b :: *
 
-instance HasMetric s a => HasMetric (TF.Resource p s) a where
+    metric :: Lens' a (TF.Attribute (HasMetricThread a b) "metric" b)
+
+instance HasMetric a b => HasMetric (TF.Resource p a) b where
+    type HasMetricThread (TF.Resource p a) b =
+         HasMetricThread a b
+
     metric = TF.configuration . metric
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasNrql s a | s -> a where
-    nrql :: Lens' s (TF.Argument "nrql" a)
+class HasNrql a b | a -> b where
+    type HasNrqlThread a b :: *
 
-instance HasNrql s a => HasNrql (TF.Resource p s) a where
+    nrql :: Lens' a (TF.Attribute (HasNrqlThread a b) "nrql" b)
+
+instance HasNrql a b => HasNrql (TF.Resource p a) b where
+    type HasNrqlThread (TF.Resource p a) b =
+         HasNrqlThread a b
+
     nrql = TF.configuration . nrql
 
-class HasPolicyId s a | s -> a where
-    policyId :: Lens' s (TF.Argument "policy_id" a)
+class HasPolicyId a b | a -> b where
+    type HasPolicyIdThread a b :: *
 
-instance HasPolicyId s a => HasPolicyId (TF.Resource p s) a where
+    policyId :: Lens' a (TF.Attribute (HasPolicyIdThread a b) "policy_id" b)
+
+instance HasPolicyId a b => HasPolicyId (TF.Resource p a) b where
+    type HasPolicyIdThread (TF.Resource p a) b =
+         HasPolicyIdThread a b
+
     policyId = TF.configuration . policyId
 
-class HasRunbookUrl s a | s -> a where
-    runbookUrl :: Lens' s (TF.Argument "runbook_url" a)
+class HasRunbookUrl a b | a -> b where
+    type HasRunbookUrlThread a b :: *
 
-instance HasRunbookUrl s a => HasRunbookUrl (TF.Resource p s) a where
+    runbookUrl :: Lens' a (TF.Attribute (HasRunbookUrlThread a b) "runbook_url" b)
+
+instance HasRunbookUrl a b => HasRunbookUrl (TF.Resource p a) b where
+    type HasRunbookUrlThread (TF.Resource p a) b =
+         HasRunbookUrlThread a b
+
     runbookUrl = TF.configuration . runbookUrl
 
-class HasTerm s a | s -> a where
-    term :: Lens' s (TF.Argument "term" a)
+class HasTerm a b | a -> b where
+    type HasTermThread a b :: *
 
-instance HasTerm s a => HasTerm (TF.Resource p s) a where
+    term :: Lens' a (TF.Attribute (HasTermThread a b) "term" b)
+
+instance HasTerm a b => HasTerm (TF.Resource p a) b where
+    type HasTermThread (TF.Resource p a) b =
+         HasTermThread a b
+
     term = TF.configuration . term
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasUserDefinedMetric s a | s -> a where
-    userDefinedMetric :: Lens' s (TF.Argument "user_defined_metric" a)
+class HasUserDefinedMetric a b | a -> b where
+    type HasUserDefinedMetricThread a b :: *
 
-instance HasUserDefinedMetric s a => HasUserDefinedMetric (TF.Resource p s) a where
+    userDefinedMetric :: Lens' a (TF.Attribute (HasUserDefinedMetricThread a b) "user_defined_metric" b)
+
+instance HasUserDefinedMetric a b => HasUserDefinedMetric (TF.Resource p a) b where
+    type HasUserDefinedMetricThread (TF.Resource p a) b =
+         HasUserDefinedMetricThread a b
+
     userDefinedMetric = TF.configuration . userDefinedMetric
 
-class HasUserDefinedValueFunction s a | s -> a where
-    userDefinedValueFunction :: Lens' s (TF.Argument "user_defined_value_function" a)
+class HasUserDefinedValueFunction a b | a -> b where
+    type HasUserDefinedValueFunctionThread a b :: *
 
-instance HasUserDefinedValueFunction s a => HasUserDefinedValueFunction (TF.Resource p s) a where
+    userDefinedValueFunction :: Lens' a (TF.Attribute (HasUserDefinedValueFunctionThread a b) "user_defined_value_function" b)
+
+instance HasUserDefinedValueFunction a b => HasUserDefinedValueFunction (TF.Resource p a) b where
+    type HasUserDefinedValueFunctionThread (TF.Resource p a) b =
+         HasUserDefinedValueFunctionThread a b
+
     userDefinedValueFunction = TF.configuration . userDefinedValueFunction
 
-class HasValueFunction s a | s -> a where
-    valueFunction :: Lens' s (TF.Argument "value_function" a)
+class HasValueFunction a b | a -> b where
+    type HasValueFunctionThread a b :: *
 
-instance HasValueFunction s a => HasValueFunction (TF.Resource p s) a where
+    valueFunction :: Lens' a (TF.Attribute (HasValueFunctionThread a b) "value_function" b)
+
+instance HasValueFunction a b => HasValueFunction (TF.Resource p a) b where
+    type HasValueFunctionThread (TF.Resource p a) b =
+         HasValueFunctionThread a b
+
     valueFunction = TF.configuration . valueFunction
 
-class HasComputedCreatedAt s a | s -> a where
-    computedCreatedAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCreatedAt a b | a -> b where
+    computedCreatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCreatedAt s a => HasComputedCreatedAt (TF.Resource p s) a where
-    computedCreatedAt = TF.configuration . computedCreatedAt
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedUpdatedAt s a | s -> a where
-    computedUpdatedAt :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUpdatedAt s a => HasComputedUpdatedAt (TF.Resource p s) a where
-    computedUpdatedAt = TF.configuration . computedUpdatedAt
+class HasComputedUpdatedAt a b | a -> b where
+    computedUpdatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

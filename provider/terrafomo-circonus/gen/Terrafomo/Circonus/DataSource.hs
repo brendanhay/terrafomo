@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -68,14 +69,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.Circonus.Provider as TF
 import qualified Terrafomo.Circonus.Types    as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @circonus_account@ Circonus datasource.
 
@@ -85,98 +87,102 @@ import qualified Terrafomo.Syntax.Variable   as TF
 @circonus_account@ data source can be used for pulling various attributes
 about a specific Circonus Account.
 -}
-data AccountDataSource = AccountDataSource {
-      _current :: !(TF.Argument "current" Text)
+data AccountDataSource s = AccountDataSource {
+      _current :: !(TF.Attribute s "current" Text)
     {- ^ (Optional) Automatically use the current Circonus Account attached to the API token making the request. -}
-    , _id      :: !(TF.Argument "id" Text)
+    , _id      :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The Circonus ID of a given account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AccountDataSource where
+instance TF.ToHCL (AccountDataSource s) where
     toHCL AccountDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _current
-        , TF.argument _id
+        [ TF.attribute _current
+        , TF.attribute _id
         ]
 
-instance HasCurrent AccountDataSource Text where
+instance HasCurrent (AccountDataSource s) Text where
+    type HasCurrentThread (AccountDataSource s) Text = s
+
     current =
-        lens (_current :: AccountDataSource -> TF.Argument "current" Text)
-             (\s a -> s { _current = a } :: AccountDataSource)
+        lens (_current :: AccountDataSource s -> TF.Attribute s "current" Text)
+             (\s a -> s { _current = a } :: AccountDataSource s)
 
-instance HasId AccountDataSource Text where
+instance HasId (AccountDataSource s) Text where
+    type HasIdThread (AccountDataSource s) Text = s
+
     id =
-        lens (_id :: AccountDataSource -> TF.Argument "id" Text)
-             (\s a -> s { _id = a } :: AccountDataSource)
+        lens (_id :: AccountDataSource s -> TF.Attribute s "id" Text)
+             (\s a -> s { _id = a } :: AccountDataSource s)
 
-instance HasComputedAddress1 AccountDataSource Text where
+instance HasComputedAddress1 (AccountDataSource s) Text where
     computedAddress1 =
-        to (\_  -> TF.Compute "address1")
+        to (\x -> TF.Computed (TF.referenceKey x) "address1")
 
-instance HasComputedAddress2 AccountDataSource Text where
+instance HasComputedAddress2 (AccountDataSource s) Text where
     computedAddress2 =
-        to (\_  -> TF.Compute "address2")
+        to (\x -> TF.Computed (TF.referenceKey x) "address2")
 
-instance HasComputedCcEmail AccountDataSource Text where
+instance HasComputedCcEmail (AccountDataSource s) Text where
     computedCcEmail =
-        to (\_  -> TF.Compute "cc_email")
+        to (\x -> TF.Computed (TF.referenceKey x) "cc_email")
 
-instance HasComputedCity AccountDataSource Text where
+instance HasComputedCity (AccountDataSource s) Text where
     computedCity =
-        to (\_  -> TF.Compute "city")
+        to (\x -> TF.Computed (TF.referenceKey x) "city")
 
-instance HasComputedContactGroups AccountDataSource Text where
+instance HasComputedContactGroups (AccountDataSource s) Text where
     computedContactGroups =
-        to (\_  -> TF.Compute "contact_groups")
+        to (\x -> TF.Computed (TF.referenceKey x) "contact_groups")
 
-instance HasComputedCountry AccountDataSource Text where
+instance HasComputedCountry (AccountDataSource s) Text where
     computedCountry =
-        to (\_  -> TF.Compute "country")
+        to (\x -> TF.Computed (TF.referenceKey x) "country")
 
-instance HasComputedDescription AccountDataSource Text where
+instance HasComputedDescription (AccountDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedId AccountDataSource Text where
+instance HasComputedId (AccountDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedInvites AccountDataSource Text where
+instance HasComputedInvites (AccountDataSource s) Text where
     computedInvites =
-        to (\_  -> TF.Compute "invites")
+        to (\x -> TF.Computed (TF.referenceKey x) "invites")
 
-instance HasComputedName AccountDataSource Text where
+instance HasComputedName (AccountDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedOwner AccountDataSource Text where
+instance HasComputedOwner (AccountDataSource s) Text where
     computedOwner =
-        to (\_  -> TF.Compute "owner")
+        to (\x -> TF.Computed (TF.referenceKey x) "owner")
 
-instance HasComputedState AccountDataSource Text where
+instance HasComputedState (AccountDataSource s) Text where
     computedState =
-        to (\_  -> TF.Compute "state")
+        to (\x -> TF.Computed (TF.referenceKey x) "state")
 
-instance HasComputedTimezone AccountDataSource Text where
+instance HasComputedTimezone (AccountDataSource s) Text where
     computedTimezone =
-        to (\_  -> TF.Compute "timezone")
+        to (\x -> TF.Computed (TF.referenceKey x) "timezone")
 
-instance HasComputedUiBaseUrl AccountDataSource Text where
+instance HasComputedUiBaseUrl (AccountDataSource s) Text where
     computedUiBaseUrl =
-        to (\_  -> TF.Compute "ui_base_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "ui_base_url")
 
-instance HasComputedUsage AccountDataSource Text where
+instance HasComputedUsage (AccountDataSource s) Text where
     computedUsage =
-        to (\_  -> TF.Compute "usage")
+        to (\x -> TF.Computed (TF.referenceKey x) "usage")
 
-instance HasComputedUsers AccountDataSource Text where
+instance HasComputedUsers (AccountDataSource s) Text where
     computedUsers =
-        to (\_  -> TF.Compute "users")
+        to (\x -> TF.Computed (TF.referenceKey x) "users")
 
-accountDataSource :: TF.DataSource TF.Circonus AccountDataSource
+accountDataSource :: TF.DataSource TF.Circonus (AccountDataSource s)
 accountDataSource =
     TF.newDataSource "circonus_account" $
         AccountDataSource {
-            _current = TF.Nil
+              _current = TF.Nil
             , _id = TF.Nil
             }
 
@@ -197,190 +203,139 @@ broker group level. The @circonus_collector@ is simply a renamed Circonus
 act as a fan-in agent that either pulls or has metrics pushed into it and
 funneled back through Circonus.
 -}
-data CollectorDataSource = CollectorDataSource {
-      _id :: !(TF.Argument "id" Text)
+data CollectorDataSource s = CollectorDataSource {
+      _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The Circonus ID of a given collector. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CollectorDataSource where
+instance TF.ToHCL (CollectorDataSource s) where
     toHCL CollectorDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _id
+        [ TF.attribute _id
         ]
 
-instance HasId CollectorDataSource Text where
+instance HasId (CollectorDataSource s) Text where
+    type HasIdThread (CollectorDataSource s) Text = s
+
     id =
-        lens (_id :: CollectorDataSource -> TF.Argument "id" Text)
-             (\s a -> s { _id = a } :: CollectorDataSource)
+        lens (_id :: CollectorDataSource s -> TF.Attribute s "id" Text)
+             (\s a -> s { _id = a } :: CollectorDataSource s)
 
-instance HasComputedDetails CollectorDataSource Text where
+instance HasComputedDetails (CollectorDataSource s) Text where
     computedDetails =
-        to (\_  -> TF.Compute "details")
+        to (\x -> TF.Computed (TF.referenceKey x) "details")
 
-instance HasComputedId CollectorDataSource Text where
+instance HasComputedId (CollectorDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedLatitude CollectorDataSource Text where
+instance HasComputedLatitude (CollectorDataSource s) Text where
     computedLatitude =
-        to (\_  -> TF.Compute "latitude")
+        to (\x -> TF.Computed (TF.referenceKey x) "latitude")
 
-instance HasComputedLongitude CollectorDataSource Text where
+instance HasComputedLongitude (CollectorDataSource s) Text where
     computedLongitude =
-        to (\_  -> TF.Compute "longitude")
+        to (\x -> TF.Computed (TF.referenceKey x) "longitude")
 
-instance HasComputedName CollectorDataSource Text where
+instance HasComputedName (CollectorDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedTags CollectorDataSource Text where
+instance HasComputedTags (CollectorDataSource s) Text where
     computedTags =
-        to (\_  -> TF.Compute "tags")
+        to (\x -> TF.Computed (TF.referenceKey x) "tags")
 
-instance HasComputedType' CollectorDataSource Text where
+instance HasComputedType' (CollectorDataSource s) Text where
     computedType' =
-        to (\_  -> TF.Compute "type")
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
-collectorDataSource :: TF.DataSource TF.Circonus CollectorDataSource
+collectorDataSource :: TF.DataSource TF.Circonus (CollectorDataSource s)
 collectorDataSource =
     TF.newDataSource "circonus_collector" $
         CollectorDataSource {
-            _id = TF.Nil
+              _id = TF.Nil
             }
 
-class HasCurrent s a | s -> a where
-    current :: Lens' s (TF.Argument "current" a)
+class HasCurrent a b | a -> b where
+    type HasCurrentThread a b :: *
 
-instance HasCurrent s a => HasCurrent (TF.DataSource p s) a where
+    current :: Lens' a (TF.Attribute (HasCurrentThread a b) "current" b)
+
+instance HasCurrent a b => HasCurrent (TF.DataSource p a) b where
+    type HasCurrentThread (TF.DataSource p a) b =
+         HasCurrentThread a b
+
     current = TF.configuration . current
 
-class HasId s a | s -> a where
-    id :: Lens' s (TF.Argument "id" a)
+class HasId a b | a -> b where
+    type HasIdThread a b :: *
 
-instance HasId s a => HasId (TF.DataSource p s) a where
+    id :: Lens' a (TF.Attribute (HasIdThread a b) "id" b)
+
+instance HasId a b => HasId (TF.DataSource p a) b where
+    type HasIdThread (TF.DataSource p a) b =
+         HasIdThread a b
+
     id = TF.configuration . id
 
-class HasComputedAddress1 s a | s -> a where
-    computedAddress1 :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAddress1 a b | a -> b where
+    computedAddress1 :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAddress1 s a => HasComputedAddress1 (TF.DataSource p s) a where
-    computedAddress1 = TF.configuration . computedAddress1
+class HasComputedAddress2 a b | a -> b where
+    computedAddress2 :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAddress2 s a | s -> a where
-    computedAddress2 :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCcEmail a b | a -> b where
+    computedCcEmail :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAddress2 s a => HasComputedAddress2 (TF.DataSource p s) a where
-    computedAddress2 = TF.configuration . computedAddress2
+class HasComputedCity a b | a -> b where
+    computedCity :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCcEmail s a | s -> a where
-    computedCcEmail :: forall r. Getting r s (TF.Attribute a)
+class HasComputedContactGroups a b | a -> b where
+    computedContactGroups :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCcEmail s a => HasComputedCcEmail (TF.DataSource p s) a where
-    computedCcEmail = TF.configuration . computedCcEmail
+class HasComputedCountry a b | a -> b where
+    computedCountry :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCity s a | s -> a where
-    computedCity :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDescription a b | a -> b where
+    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCity s a => HasComputedCity (TF.DataSource p s) a where
-    computedCity = TF.configuration . computedCity
+class HasComputedDetails a b | a -> b where
+    computedDetails :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedContactGroups s a | s -> a where
-    computedContactGroups :: forall r. Getting r s (TF.Attribute a)
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedContactGroups s a => HasComputedContactGroups (TF.DataSource p s) a where
-    computedContactGroups = TF.configuration . computedContactGroups
+class HasComputedInvites a b | a -> b where
+    computedInvites :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCountry s a | s -> a where
-    computedCountry :: forall r. Getting r s (TF.Attribute a)
+class HasComputedLatitude a b | a -> b where
+    computedLatitude :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCountry s a => HasComputedCountry (TF.DataSource p s) a where
-    computedCountry = TF.configuration . computedCountry
+class HasComputedLongitude a b | a -> b where
+    computedLongitude :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDescription s a | s -> a where
-    computedDescription :: forall r. Getting r s (TF.Attribute a)
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
-    computedDescription = TF.configuration . computedDescription
+class HasComputedOwner a b | a -> b where
+    computedOwner :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDetails s a | s -> a where
-    computedDetails :: forall r. Getting r s (TF.Attribute a)
+class HasComputedState a b | a -> b where
+    computedState :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDetails s a => HasComputedDetails (TF.DataSource p s) a where
-    computedDetails = TF.configuration . computedDetails
+class HasComputedTags a b | a -> b where
+    computedTags :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedTimezone a b | a -> b where
+    computedTimezone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedType' a b | a -> b where
+    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedInvites s a | s -> a where
-    computedInvites :: forall r. Getting r s (TF.Attribute a)
+class HasComputedUiBaseUrl a b | a -> b where
+    computedUiBaseUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedInvites s a => HasComputedInvites (TF.DataSource p s) a where
-    computedInvites = TF.configuration . computedInvites
+class HasComputedUsage a b | a -> b where
+    computedUsage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedLatitude s a | s -> a where
-    computedLatitude :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLatitude s a => HasComputedLatitude (TF.DataSource p s) a where
-    computedLatitude = TF.configuration . computedLatitude
-
-class HasComputedLongitude s a | s -> a where
-    computedLongitude :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLongitude s a => HasComputedLongitude (TF.DataSource p s) a where
-    computedLongitude = TF.configuration . computedLongitude
-
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedOwner s a | s -> a where
-    computedOwner :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedOwner s a => HasComputedOwner (TF.DataSource p s) a where
-    computedOwner = TF.configuration . computedOwner
-
-class HasComputedState s a | s -> a where
-    computedState :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedState s a => HasComputedState (TF.DataSource p s) a where
-    computedState = TF.configuration . computedState
-
-class HasComputedTags s a | s -> a where
-    computedTags :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTags s a => HasComputedTags (TF.DataSource p s) a where
-    computedTags = TF.configuration . computedTags
-
-class HasComputedTimezone s a | s -> a where
-    computedTimezone :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTimezone s a => HasComputedTimezone (TF.DataSource p s) a where
-    computedTimezone = TF.configuration . computedTimezone
-
-class HasComputedType' s a | s -> a where
-    computedType' :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
-    computedType' = TF.configuration . computedType'
-
-class HasComputedUiBaseUrl s a | s -> a where
-    computedUiBaseUrl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUiBaseUrl s a => HasComputedUiBaseUrl (TF.DataSource p s) a where
-    computedUiBaseUrl = TF.configuration . computedUiBaseUrl
-
-class HasComputedUsage s a | s -> a where
-    computedUsage :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUsage s a => HasComputedUsage (TF.DataSource p s) a where
-    computedUsage = TF.configuration . computedUsage
-
-class HasComputedUsers s a | s -> a where
-    computedUsers :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUsers s a => HasComputedUsers (TF.DataSource p s) a where
-    computedUsers = TF.configuration . computedUsers
+class HasComputedUsers a b | a -> b where
+    computedUsers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

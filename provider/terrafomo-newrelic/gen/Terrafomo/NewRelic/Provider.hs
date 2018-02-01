@@ -37,12 +37,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.NewRelic.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.NewRelic.Types as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | NewRelic Terraform provider.
 
@@ -51,7 +51,7 @@ developers to diagnose and fix application performance problems in real
 time. Use the navigation to the left to read about the available resources.
 -}
 data NewRelic = NewRelic {
-      _api_key :: !(TF.Argument "api_key" Text)
+      _api_key :: !(Maybe Text)
     {- ^ (Required) Your New Relic API key. Can also use @NEWRELIC_API_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -59,19 +59,21 @@ instance Hashable NewRelic
 
 instance TF.ToHCL NewRelic where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy NewRelic))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_key x)
+        let typ = TF.providerType (Proxy :: Proxy (NewRelic))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_key" <$> _api_key x
             ]
-
-emptyNewRelic :: NewRelic
-emptyNewRelic = NewRelic {
-        _api_key = TF.Nil
-    }
 
 instance TF.IsProvider NewRelic where
     type ProviderType NewRelic = "newrelic"
 
-apiKey :: Lens' NewRelic (TF.Argument "api_key" Text)
+emptyNewRelic :: NewRelic
+emptyNewRelic = NewRelic {
+        _api_key = Nothing
+    }
+
+apiKey :: Lens' NewRelic (Maybe Text)
 apiKey =
     lens _api_key (\s a -> s { _api_key = a })

@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.Cloudflare.Types as TF
-import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.IP        as TF
-import qualified Terrafomo.Syntax.Name      as TF
-import qualified Terrafomo.Syntax.Provider  as TF
-import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.IP               as TF
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Provider         as TF
 
 {- | Cloudflare Terraform provider.
 
@@ -53,9 +53,9 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Cloudflare = Cloudflare {
-      _email :: !(TF.Argument "email" Text)
+      _email :: !(Maybe Text)
     {- ^ (Required) The email associated with the account. This can also be specified with the @CLOUDFLARE_EMAIL@ shell environment variable. -}
-    , _token :: !(TF.Argument "token" Text)
+    , _token :: !(Maybe Text)
     {- ^ (Required) The Cloudflare API token. This can also be specified with the @CLOUDFLARE_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -63,25 +63,27 @@ instance Hashable Cloudflare
 
 instance TF.ToHCL Cloudflare where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Cloudflare))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_email x)
-            , TF.argument (_token x)
+        let typ = TF.providerType (Proxy :: Proxy (Cloudflare))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "email" <$> _email x
+            , TF.assign "token" <$> _token x
             ]
-
-emptyCloudflare :: Cloudflare
-emptyCloudflare = Cloudflare {
-        _email = TF.Nil
-      , _token = TF.Nil
-    }
 
 instance TF.IsProvider Cloudflare where
     type ProviderType Cloudflare = "cloudflare"
 
-email :: Lens' Cloudflare (TF.Argument "email" Text)
+emptyCloudflare :: Cloudflare
+emptyCloudflare = Cloudflare {
+        _email = Nothing
+      , _token = Nothing
+    }
+
+email :: Lens' Cloudflare (Maybe Text)
 email =
     lens _email (\s a -> s { _email = a })
 
-token :: Lens' Cloudflare (TF.Argument "token" Text)
+token :: Lens' Cloudflare (Maybe Text)
 token =
     lens _token (\s a -> s { _token = a })

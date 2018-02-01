@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.MySQL.Types     as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute   as TF
+import qualified Terrafomo.HCL         as TF
+import qualified Terrafomo.IP          as TF
+import qualified Terrafomo.MySQL.Types as TF
+import qualified Terrafomo.Name        as TF
+import qualified Terrafomo.Provider    as TF
 
 {- | MySQL Terraform provider.
 
@@ -54,11 +54,11 @@ server. Use the navigation to the left to read about the available
 resources.
 -}
 data MySQL = MySQL {
-      _endpoint :: !(TF.Argument "endpoint" Text)
+      _endpoint :: !(Maybe Text)
     {- ^ (Required) The address of the MySQL server to use. Most often a "hostname:port" pair, but may also be an absolute path to a Unix socket when the host OS is Unix-compatible. -}
-    , _password :: !(TF.Argument "password" Text)
+    , _password :: !(Maybe Text)
     {- ^ (Optional) Password for the given user, if that user has a password. -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username :: !(Maybe Text)
     {- ^ (Required) Username to use to authenticate with the server. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable MySQL
 
 instance TF.ToHCL MySQL where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy MySQL))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_endpoint x)
-            , TF.argument (_password x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (MySQL))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "endpoint" <$> _endpoint x
+            , TF.assign "password" <$> _password x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyMySQL :: MySQL
-emptyMySQL = MySQL {
-        _endpoint = TF.Nil
-      , _password = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider MySQL where
     type ProviderType MySQL = "mysql"
 
-endpoint :: Lens' MySQL (TF.Argument "endpoint" Text)
+emptyMySQL :: MySQL
+emptyMySQL = MySQL {
+        _endpoint = Nothing
+      , _password = Nothing
+      , _username = Nothing
+    }
+
+endpoint :: Lens' MySQL (Maybe Text)
 endpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-password :: Lens' MySQL (TF.Argument "password" Text)
+password :: Lens' MySQL (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' MySQL (TF.Argument "username" Text)
+username :: Lens' MySQL (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

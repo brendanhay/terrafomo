@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -43,14 +44,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Fastly.Provider   as TF
-import qualified Terrafomo.Fastly.Types      as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.Fastly.Provider as TF
+import qualified Terrafomo.Fastly.Types    as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.IP              as TF
+import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Resource        as TF
 
 {- | The @fastly_ip_ranges@ Fastly datasource.
 
@@ -58,24 +60,21 @@ Use this data source to get the
 <https://docs.fastly.com/guides/securing-communications/accessing-fastlys-ip-ranges>
 of Fastly edge nodes.
 -}
-data IpRangesDataSource = IpRangesDataSource {
+data IpRangesDataSource s = IpRangesDataSource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL IpRangesDataSource where
+instance TF.ToHCL (IpRangesDataSource s) where
     toHCL _ = TF.block []
 
-instance HasComputedCidrBlocks IpRangesDataSource Text where
+instance HasComputedCidrBlocks (IpRangesDataSource s) Text where
     computedCidrBlocks =
-        to (\_  -> TF.Compute "cidr_blocks")
+        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
 
-ipRangesDataSource :: TF.DataSource TF.Fastly IpRangesDataSource
+ipRangesDataSource :: TF.DataSource TF.Fastly (IpRangesDataSource s)
 ipRangesDataSource =
     TF.newDataSource "fastly_ip_ranges" $
         IpRangesDataSource {
             }
 
-class HasComputedCidrBlocks s a | s -> a where
-    computedCidrBlocks :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedCidrBlocks s a => HasComputedCidrBlocks (TF.DataSource p s) a where
-    computedCidrBlocks = TF.configuration . computedCidrBlocks
+class HasComputedCidrBlocks a b | a -> b where
+    computedCidrBlocks :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

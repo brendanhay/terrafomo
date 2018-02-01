@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -53,159 +54,167 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute        as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Lailgun.Provider as TF
 import qualified Terrafomo.Lailgun.Types    as TF
-import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.IP        as TF
-import qualified Terrafomo.Syntax.Meta      as TF (configuration)
-import qualified Terrafomo.Syntax.Resource  as TF
-import qualified Terrafomo.Syntax.Resource  as TF
-import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.Meta             as TF (configuration)
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Resource         as TF
+import qualified Terrafomo.Resource         as TF
 
 {- | The @mailgun_domain@ Lailgun resource.
 
 Provides a Mailgun App resource. This can be used to create and manage
 applications on Mailgun.
 -}
-data DomainResource = DomainResource {
-      _name          :: !(TF.Argument "name" Text)
+data DomainResource s = DomainResource {
+      _name          :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The domain to add to Mailgun -}
-    , _smtp_password :: !(TF.Argument "smtp_password" Text)
+    , _smtp_password :: !(TF.Attribute s "smtp_password" Text)
     {- ^ (Required) Password for SMTP authentication -}
-    , _spam_action   :: !(TF.Argument "spam_action" Text)
+    , _spam_action   :: !(TF.Attribute s "spam_action" Text)
     {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
-    , _wildcard      :: !(TF.Argument "wildcard" Text)
+    , _wildcard      :: !(TF.Attribute s "wildcard" Text)
     {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DomainResource where
+instance TF.ToHCL (DomainResource s) where
     toHCL DomainResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _smtp_password
-        , TF.argument _spam_action
-        , TF.argument _wildcard
+        [ TF.attribute _name
+        , TF.attribute _smtp_password
+        , TF.attribute _spam_action
+        , TF.attribute _wildcard
         ]
 
-instance HasName DomainResource Text where
+instance HasName (DomainResource s) Text where
+    type HasNameThread (DomainResource s) Text = s
+
     name =
-        lens (_name :: DomainResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: DomainResource)
+        lens (_name :: DomainResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: DomainResource s)
 
-instance HasSmtpPassword DomainResource Text where
+instance HasSmtpPassword (DomainResource s) Text where
+    type HasSmtpPasswordThread (DomainResource s) Text = s
+
     smtpPassword =
-        lens (_smtp_password :: DomainResource -> TF.Argument "smtp_password" Text)
-             (\s a -> s { _smtp_password = a } :: DomainResource)
+        lens (_smtp_password :: DomainResource s -> TF.Attribute s "smtp_password" Text)
+             (\s a -> s { _smtp_password = a } :: DomainResource s)
 
-instance HasSpamAction DomainResource Text where
+instance HasSpamAction (DomainResource s) Text where
+    type HasSpamActionThread (DomainResource s) Text = s
+
     spamAction =
-        lens (_spam_action :: DomainResource -> TF.Argument "spam_action" Text)
-             (\s a -> s { _spam_action = a } :: DomainResource)
+        lens (_spam_action :: DomainResource s -> TF.Attribute s "spam_action" Text)
+             (\s a -> s { _spam_action = a } :: DomainResource s)
 
-instance HasWildcard DomainResource Text where
+instance HasWildcard (DomainResource s) Text where
+    type HasWildcardThread (DomainResource s) Text = s
+
     wildcard =
-        lens (_wildcard :: DomainResource -> TF.Argument "wildcard" Text)
-             (\s a -> s { _wildcard = a } :: DomainResource)
+        lens (_wildcard :: DomainResource s -> TF.Attribute s "wildcard" Text)
+             (\s a -> s { _wildcard = a } :: DomainResource s)
 
-instance HasComputedName DomainResource Text where
+instance HasComputedName (DomainResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedReceivingRecords DomainResource Text where
+instance HasComputedReceivingRecords (DomainResource s) Text where
     computedReceivingRecords =
-        to (\_  -> TF.Compute "receiving_records")
+        to (\x -> TF.Computed (TF.referenceKey x) "receiving_records")
 
-instance HasComputedSendingRecords DomainResource Text where
+instance HasComputedSendingRecords (DomainResource s) Text where
     computedSendingRecords =
-        to (\_  -> TF.Compute "sending_records")
+        to (\x -> TF.Computed (TF.referenceKey x) "sending_records")
 
-instance HasComputedSmtpLogin DomainResource Text where
+instance HasComputedSmtpLogin (DomainResource s) Text where
     computedSmtpLogin =
-        to (\_  -> TF.Compute "smtp_login")
+        to (\x -> TF.Computed (TF.referenceKey x) "smtp_login")
 
-instance HasComputedSmtpPassword DomainResource Text where
+instance HasComputedSmtpPassword (DomainResource s) Text where
     computedSmtpPassword =
-        to (\_  -> TF.Compute "smtp_password")
+        to (\x -> TF.Computed (TF.referenceKey x) "smtp_password")
 
-instance HasComputedSpamAction DomainResource Text where
+instance HasComputedSpamAction (DomainResource s) Text where
     computedSpamAction =
-        to (\_  -> TF.Compute "spam_action")
+        to (\x -> TF.Computed (TF.referenceKey x) "spam_action")
 
-instance HasComputedWildcard DomainResource Text where
+instance HasComputedWildcard (DomainResource s) Text where
     computedWildcard =
-        to (\_  -> TF.Compute "wildcard")
+        to (\x -> TF.Computed (TF.referenceKey x) "wildcard")
 
-domainResource :: TF.Resource TF.Lailgun DomainResource
+domainResource :: TF.Resource TF.Lailgun (DomainResource s)
 domainResource =
     TF.newResource "mailgun_domain" $
         DomainResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _smtp_password = TF.Nil
             , _spam_action = TF.Nil
             , _wildcard = TF.Nil
             }
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasSmtpPassword s a | s -> a where
-    smtpPassword :: Lens' s (TF.Argument "smtp_password" a)
+class HasSmtpPassword a b | a -> b where
+    type HasSmtpPasswordThread a b :: *
 
-instance HasSmtpPassword s a => HasSmtpPassword (TF.Resource p s) a where
+    smtpPassword :: Lens' a (TF.Attribute (HasSmtpPasswordThread a b) "smtp_password" b)
+
+instance HasSmtpPassword a b => HasSmtpPassword (TF.Resource p a) b where
+    type HasSmtpPasswordThread (TF.Resource p a) b =
+         HasSmtpPasswordThread a b
+
     smtpPassword = TF.configuration . smtpPassword
 
-class HasSpamAction s a | s -> a where
-    spamAction :: Lens' s (TF.Argument "spam_action" a)
+class HasSpamAction a b | a -> b where
+    type HasSpamActionThread a b :: *
 
-instance HasSpamAction s a => HasSpamAction (TF.Resource p s) a where
+    spamAction :: Lens' a (TF.Attribute (HasSpamActionThread a b) "spam_action" b)
+
+instance HasSpamAction a b => HasSpamAction (TF.Resource p a) b where
+    type HasSpamActionThread (TF.Resource p a) b =
+         HasSpamActionThread a b
+
     spamAction = TF.configuration . spamAction
 
-class HasWildcard s a | s -> a where
-    wildcard :: Lens' s (TF.Argument "wildcard" a)
+class HasWildcard a b | a -> b where
+    type HasWildcardThread a b :: *
 
-instance HasWildcard s a => HasWildcard (TF.Resource p s) a where
+    wildcard :: Lens' a (TF.Attribute (HasWildcardThread a b) "wildcard" b)
+
+instance HasWildcard a b => HasWildcard (TF.Resource p a) b where
+    type HasWildcardThread (TF.Resource p a) b =
+         HasWildcardThread a b
+
     wildcard = TF.configuration . wildcard
 
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
-    computedName = TF.configuration . computedName
+class HasComputedReceivingRecords a b | a -> b where
+    computedReceivingRecords :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedReceivingRecords s a | s -> a where
-    computedReceivingRecords :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSendingRecords a b | a -> b where
+    computedSendingRecords :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedReceivingRecords s a => HasComputedReceivingRecords (TF.Resource p s) a where
-    computedReceivingRecords = TF.configuration . computedReceivingRecords
+class HasComputedSmtpLogin a b | a -> b where
+    computedSmtpLogin :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedSendingRecords s a | s -> a where
-    computedSendingRecords :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSmtpPassword a b | a -> b where
+    computedSmtpPassword :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedSendingRecords s a => HasComputedSendingRecords (TF.Resource p s) a where
-    computedSendingRecords = TF.configuration . computedSendingRecords
+class HasComputedSpamAction a b | a -> b where
+    computedSpamAction :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedSmtpLogin s a | s -> a where
-    computedSmtpLogin :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSmtpLogin s a => HasComputedSmtpLogin (TF.Resource p s) a where
-    computedSmtpLogin = TF.configuration . computedSmtpLogin
-
-class HasComputedSmtpPassword s a | s -> a where
-    computedSmtpPassword :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSmtpPassword s a => HasComputedSmtpPassword (TF.Resource p s) a where
-    computedSmtpPassword = TF.configuration . computedSmtpPassword
-
-class HasComputedSpamAction s a | s -> a where
-    computedSpamAction :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSpamAction s a => HasComputedSpamAction (TF.Resource p s) a where
-    computedSpamAction = TF.configuration . computedSpamAction
-
-class HasComputedWildcard s a | s -> a where
-    computedWildcard :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedWildcard s a => HasComputedWildcard (TF.Resource p s) a where
-    computedWildcard = TF.configuration . computedWildcard
+class HasComputedWildcard a b | a -> b where
+    computedWildcard :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

@@ -36,12 +36,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Scaleway.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.Scaleway.Types as TF
 
 {- | Scaleway Terraform provider.
 
@@ -55,13 +55,15 @@ instance Hashable Scaleway
 
 instance TF.ToHCL Scaleway where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Scaleway))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
+        let typ = TF.providerType (Proxy :: Proxy (Scaleway))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
             ]
+
+instance TF.IsProvider Scaleway where
+    type ProviderType Scaleway = "scaleway"
 
 emptyScaleway :: Scaleway
 emptyScaleway = Scaleway {
     }
-
-instance TF.IsProvider Scaleway where
-    type ProviderType Scaleway = "scaleway"

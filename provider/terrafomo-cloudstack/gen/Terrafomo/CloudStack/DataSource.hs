@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -53,148 +54,136 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.CloudStack.Provider as TF
 import qualified Terrafomo.CloudStack.Types    as TF
-import qualified Terrafomo.Syntax.DataSource   as TF
-import qualified Terrafomo.Syntax.HCL          as TF
-import qualified Terrafomo.Syntax.IP           as TF
-import qualified Terrafomo.Syntax.Meta         as TF (configuration)
-import qualified Terrafomo.Syntax.Resource     as TF
-import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.DataSource          as TF
+import qualified Terrafomo.HCL                 as TF
+import qualified Terrafomo.IP                  as TF
+import qualified Terrafomo.Meta                as TF (configuration)
+import qualified Terrafomo.Name                as TF
+import qualified Terrafomo.Resource            as TF
 
 {- | The @cloudstack_template@ CloudStack datasource.
 
 Use this datasource to get the ID of a template for use in other resources.
 -}
-data TemplateDataSource = TemplateDataSource {
-      _filter          :: !(TF.Argument "filter" Text)
+data TemplateDataSource s = TemplateDataSource {
+      _filter          :: !(TF.Attribute s "filter" Text)
     {- ^ (Required) One or more name/value pairs to filter off of. You can apply filters on any exported attributes. -}
-    , _template_filter :: !(TF.Argument "template_filter" Text)
+    , _template_filter :: !(TF.Attribute s "template_filter" Text)
     {- ^ (Required) The template filter. Possible values are @featured@ , @self@ , @selfexecutable@ , @sharedexecutable@ , @executable@ and @community@ (see the Cloudstack API listTemplate command documentation). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TemplateDataSource where
+instance TF.ToHCL (TemplateDataSource s) where
     toHCL TemplateDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _filter
-        , TF.argument _template_filter
+        [ TF.attribute _filter
+        , TF.attribute _template_filter
         ]
 
-instance HasFilter TemplateDataSource Text where
+instance HasFilter (TemplateDataSource s) Text where
+    type HasFilterThread (TemplateDataSource s) Text = s
+
     filter =
-        lens (_filter :: TemplateDataSource -> TF.Argument "filter" Text)
-             (\s a -> s { _filter = a } :: TemplateDataSource)
+        lens (_filter :: TemplateDataSource s -> TF.Attribute s "filter" Text)
+             (\s a -> s { _filter = a } :: TemplateDataSource s)
 
-instance HasTemplateFilter TemplateDataSource Text where
+instance HasTemplateFilter (TemplateDataSource s) Text where
+    type HasTemplateFilterThread (TemplateDataSource s) Text = s
+
     templateFilter =
-        lens (_template_filter :: TemplateDataSource -> TF.Argument "template_filter" Text)
-             (\s a -> s { _template_filter = a } :: TemplateDataSource)
+        lens (_template_filter :: TemplateDataSource s -> TF.Attribute s "template_filter" Text)
+             (\s a -> s { _template_filter = a } :: TemplateDataSource s)
 
-instance HasComputedAccount TemplateDataSource Text where
+instance HasComputedAccount (TemplateDataSource s) Text where
     computedAccount =
-        to (\_  -> TF.Compute "account")
+        to (\x -> TF.Computed (TF.referenceKey x) "account")
 
-instance HasComputedCreated TemplateDataSource Text where
+instance HasComputedCreated (TemplateDataSource s) Text where
     computedCreated =
-        to (\_  -> TF.Compute "created")
+        to (\x -> TF.Computed (TF.referenceKey x) "created")
 
-instance HasComputedDisplayText TemplateDataSource Text where
+instance HasComputedDisplayText (TemplateDataSource s) Text where
     computedDisplayText =
-        to (\_  -> TF.Compute "display_text")
+        to (\x -> TF.Computed (TF.referenceKey x) "display_text")
 
-instance HasComputedFormat TemplateDataSource Text where
+instance HasComputedFormat (TemplateDataSource s) Text where
     computedFormat =
-        to (\_  -> TF.Compute "format")
+        to (\x -> TF.Computed (TF.referenceKey x) "format")
 
-instance HasComputedHypervisor TemplateDataSource Text where
+instance HasComputedHypervisor (TemplateDataSource s) Text where
     computedHypervisor =
-        to (\_  -> TF.Compute "hypervisor")
+        to (\x -> TF.Computed (TF.referenceKey x) "hypervisor")
 
-instance HasComputedId TemplateDataSource Text where
+instance HasComputedId (TemplateDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName TemplateDataSource Text where
+instance HasComputedName (TemplateDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedSize TemplateDataSource Text where
+instance HasComputedSize (TemplateDataSource s) Text where
     computedSize =
-        to (\_  -> TF.Compute "size")
+        to (\x -> TF.Computed (TF.referenceKey x) "size")
 
-instance HasComputedTags TemplateDataSource Text where
+instance HasComputedTags (TemplateDataSource s) Text where
     computedTags =
-        to (\_  -> TF.Compute "tags")
+        to (\x -> TF.Computed (TF.referenceKey x) "tags")
 
-templateDataSource :: TF.DataSource TF.CloudStack TemplateDataSource
+templateDataSource :: TF.DataSource TF.CloudStack (TemplateDataSource s)
 templateDataSource =
     TF.newDataSource "cloudstack_template" $
         TemplateDataSource {
-            _filter = TF.Nil
+              _filter = TF.Nil
             , _template_filter = TF.Nil
             }
 
-class HasFilter s a | s -> a where
-    filter :: Lens' s (TF.Argument "filter" a)
+class HasFilter a b | a -> b where
+    type HasFilterThread a b :: *
 
-instance HasFilter s a => HasFilter (TF.DataSource p s) a where
+    filter :: Lens' a (TF.Attribute (HasFilterThread a b) "filter" b)
+
+instance HasFilter a b => HasFilter (TF.DataSource p a) b where
+    type HasFilterThread (TF.DataSource p a) b =
+         HasFilterThread a b
+
     filter = TF.configuration . filter
 
-class HasTemplateFilter s a | s -> a where
-    templateFilter :: Lens' s (TF.Argument "template_filter" a)
+class HasTemplateFilter a b | a -> b where
+    type HasTemplateFilterThread a b :: *
 
-instance HasTemplateFilter s a => HasTemplateFilter (TF.DataSource p s) a where
+    templateFilter :: Lens' a (TF.Attribute (HasTemplateFilterThread a b) "template_filter" b)
+
+instance HasTemplateFilter a b => HasTemplateFilter (TF.DataSource p a) b where
+    type HasTemplateFilterThread (TF.DataSource p a) b =
+         HasTemplateFilterThread a b
+
     templateFilter = TF.configuration . templateFilter
 
-class HasComputedAccount s a | s -> a where
-    computedAccount :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAccount a b | a -> b where
+    computedAccount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAccount s a => HasComputedAccount (TF.DataSource p s) a where
-    computedAccount = TF.configuration . computedAccount
+class HasComputedCreated a b | a -> b where
+    computedCreated :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCreated s a | s -> a where
-    computedCreated :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDisplayText a b | a -> b where
+    computedDisplayText :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCreated s a => HasComputedCreated (TF.DataSource p s) a where
-    computedCreated = TF.configuration . computedCreated
+class HasComputedFormat a b | a -> b where
+    computedFormat :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDisplayText s a | s -> a where
-    computedDisplayText :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHypervisor a b | a -> b where
+    computedHypervisor :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDisplayText s a => HasComputedDisplayText (TF.DataSource p s) a where
-    computedDisplayText = TF.configuration . computedDisplayText
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedFormat s a | s -> a where
-    computedFormat :: forall r. Getting r s (TF.Attribute a)
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFormat s a => HasComputedFormat (TF.DataSource p s) a where
-    computedFormat = TF.configuration . computedFormat
+class HasComputedSize a b | a -> b where
+    computedSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHypervisor s a | s -> a where
-    computedHypervisor :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedHypervisor s a => HasComputedHypervisor (TF.DataSource p s) a where
-    computedHypervisor = TF.configuration . computedHypervisor
-
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedSize s a | s -> a where
-    computedSize :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
-    computedSize = TF.configuration . computedSize
-
-class HasComputedTags s a | s -> a where
-    computedTags :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTags s a => HasComputedTags (TF.DataSource p s) a where
-    computedTags = TF.configuration . computedTags
+class HasComputedTags a b | a -> b where
+    computedTags :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

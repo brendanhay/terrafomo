@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Circonus.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.Circonus.Types as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | Circonus Terraform provider.
 
@@ -51,9 +51,9 @@ The Circonus provider gives the ability to manage a Circonus account. Use
 the navigation to the left to read about the available resources.
 -}
 data Circonus = Circonus {
-      _api_url :: !(TF.Argument "api_url" Text)
+      _api_url :: !(Maybe Text)
     {- ^ (Optional) The API URL to use to talk with. The default is @https://api.circonus.com/v2@ . -}
-    , _key     :: !(TF.Argument "key" Text)
+    , _key     :: !(Maybe Text)
     {- ^ (Required) The Circonus API Key. -}
     } deriving (Show, Eq, Generic)
 
@@ -61,25 +61,27 @@ instance Hashable Circonus
 
 instance TF.ToHCL Circonus where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Circonus))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_url x)
-            , TF.argument (_key x)
+        let typ = TF.providerType (Proxy :: Proxy (Circonus))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_url" <$> _api_url x
+            , TF.assign "key" <$> _key x
             ]
-
-emptyCirconus :: Circonus
-emptyCirconus = Circonus {
-        _api_url = TF.Nil
-      , _key = TF.Nil
-    }
 
 instance TF.IsProvider Circonus where
     type ProviderType Circonus = "circonus"
 
-apiUrl :: Lens' Circonus (TF.Argument "api_url" Text)
+emptyCirconus :: Circonus
+emptyCirconus = Circonus {
+        _api_url = Nothing
+      , _key = Nothing
+    }
+
+apiUrl :: Lens' Circonus (Maybe Text)
 apiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-key :: Lens' Circonus (TF.Argument "key" Text)
+key :: Lens' Circonus (Maybe Text)
 key =
     lens _key (\s a -> s { _key = a })

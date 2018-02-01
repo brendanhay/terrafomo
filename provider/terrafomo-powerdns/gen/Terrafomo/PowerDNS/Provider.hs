@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.PowerDNS.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.PowerDNS.Types as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | PowerDNS Terraform provider.
 
@@ -56,9 +56,9 @@ to be configured differently. Use the navigation to the left to read about
 the available resources.
 -}
 data PowerDNS = PowerDNS {
-      _api_key    :: !(TF.Argument "api_key" Text)
+      _api_key    :: !(Maybe Text)
     {- ^ (Required) The PowerDNS API key. This can also be specified with @PDNS_API_KEY@ environment variable. -}
-    , _server_url :: !(TF.Argument "server_url" Text)
+    , _server_url :: !(Maybe Text)
     {- ^ (Required) The address of PowerDNS server. This can also be specified with @PDNS_SERVER_URL@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,25 +66,27 @@ instance Hashable PowerDNS
 
 instance TF.ToHCL PowerDNS where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy PowerDNS))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_key x)
-            , TF.argument (_server_url x)
+        let typ = TF.providerType (Proxy :: Proxy (PowerDNS))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_key" <$> _api_key x
+            , TF.assign "server_url" <$> _server_url x
             ]
-
-emptyPowerDNS :: PowerDNS
-emptyPowerDNS = PowerDNS {
-        _api_key = TF.Nil
-      , _server_url = TF.Nil
-    }
 
 instance TF.IsProvider PowerDNS where
     type ProviderType PowerDNS = "powerdns"
 
-apiKey :: Lens' PowerDNS (TF.Argument "api_key" Text)
+emptyPowerDNS :: PowerDNS
+emptyPowerDNS = PowerDNS {
+        _api_key = Nothing
+      , _server_url = Nothing
+    }
+
+apiKey :: Lens' PowerDNS (Maybe Text)
 apiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-serverUrl :: Lens' PowerDNS (TF.Argument "server_url" Text)
+serverUrl :: Lens' PowerDNS (Maybe Text)
 serverUrl =
     lens _server_url (\s a -> s { _server_url = a })

@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
@@ -10,6 +9,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -70,12 +71,13 @@ import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Consul.Types as TF
 import qualified Terrafomo.Consul.Provider as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Meta     as TF (configuration)
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.IP as TF
+import qualified Terrafomo.Meta as TF (configuration)
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Resource as TF
+import qualified Terrafomo.Attribute as TF
 
 {- | The @consul_agent_self@ Consul datasource.
 
@@ -83,13 +85,13 @@ The @consul_agent_self@ data source returns
 <https://www.consul.io/docs/agent/http/agent.html#agent_self> from the agent
 specified in the @provider@ .
 -}
-data AgentSelfDataSource = AgentSelfDataSource {
+data AgentSelfDataSource s = AgentSelfDataSource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL AgentSelfDataSource where
+instance TF.ToHCL (AgentSelfDataSource s) where
     toHCL _ = TF.block []
 
-agentSelfDataSource :: TF.DataSource TF.Consul AgentSelfDataSource
+agentSelfDataSource :: TF.DataSource TF.Consul (AgentSelfDataSource s)
 agentSelfDataSource =
     TF.newDataSource "consul_agent_self" $
         AgentSelfDataSource {
@@ -102,50 +104,54 @@ have been registered with the Consul cluster in a given datacenter.  By
 specifying a different datacenter in the @query_options@ it is possible to
 retrieve a list of nodes from a different WAN-attached Consul datacenter.
 -}
-data CatalogNodesDataSource = CatalogNodesDataSource {
-      _datacenter :: !(TF.Argument "datacenter" Text)
+data CatalogNodesDataSource s = CatalogNodesDataSource {
+      _datacenter :: !(TF.Attribute s "datacenter" Text)
     {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _query_options :: !(TF.Argument "query_options" Text)
+    , _query_options :: !(TF.Attribute s "query_options" Text)
     {- ^ (Optional) See below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CatalogNodesDataSource where
+instance TF.ToHCL (CatalogNodesDataSource s) where
     toHCL CatalogNodesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _datacenter
-        , TF.argument _query_options
+        [ TF.attribute _datacenter
+        , TF.attribute _query_options
         ]
 
-instance HasDatacenter CatalogNodesDataSource Text where
+instance HasDatacenter (CatalogNodesDataSource s) Text where
+    type HasDatacenterThread (CatalogNodesDataSource s) Text = s
+
     datacenter =
-        lens (_datacenter :: CatalogNodesDataSource -> TF.Argument "datacenter" Text)
-             (\s a -> s { _datacenter = a } :: CatalogNodesDataSource)
+        lens (_datacenter :: CatalogNodesDataSource s -> TF.Attribute s "datacenter" Text)
+             (\s a -> s { _datacenter = a } :: CatalogNodesDataSource s)
 
-instance HasQueryOptions CatalogNodesDataSource Text where
+instance HasQueryOptions (CatalogNodesDataSource s) Text where
+    type HasQueryOptionsThread (CatalogNodesDataSource s) Text = s
+
     queryOptions =
-        lens (_query_options :: CatalogNodesDataSource -> TF.Argument "query_options" Text)
-             (\s a -> s { _query_options = a } :: CatalogNodesDataSource)
+        lens (_query_options :: CatalogNodesDataSource s -> TF.Attribute s "query_options" Text)
+             (\s a -> s { _query_options = a } :: CatalogNodesDataSource s)
 
-instance HasComputedDatacenter CatalogNodesDataSource Text where
+instance HasComputedDatacenter (CatalogNodesDataSource s) Text where
     computedDatacenter =
-        to (\_  -> TF.Compute "datacenter")
+        to (\x -> TF.Computed (TF.referenceKey x) "datacenter")
 
-instance HasComputedNodeIds CatalogNodesDataSource Text where
+instance HasComputedNodeIds (CatalogNodesDataSource s) Text where
     computedNodeIds =
-        to (\_  -> TF.Compute "node_ids")
+        to (\x -> TF.Computed (TF.referenceKey x) "node_ids")
 
-instance HasComputedNodeNames CatalogNodesDataSource Text where
+instance HasComputedNodeNames (CatalogNodesDataSource s) Text where
     computedNodeNames =
-        to (\_  -> TF.Compute "node_names")
+        to (\x -> TF.Computed (TF.referenceKey x) "node_names")
 
-instance HasComputedNodes CatalogNodesDataSource Text where
+instance HasComputedNodes (CatalogNodesDataSource s) Text where
     computedNodes =
-        to (\_  -> TF.Compute "nodes")
+        to (\x -> TF.Computed (TF.referenceKey x) "nodes")
 
-catalogNodesDataSource :: TF.DataSource TF.Consul CatalogNodesDataSource
+catalogNodesDataSource :: TF.DataSource TF.Consul (CatalogNodesDataSource s)
 catalogNodesDataSource =
     TF.newDataSource "consul_catalog_nodes" $
         CatalogNodesDataSource {
-            _datacenter = TF.Nil
+              _datacenter = TF.Nil
             , _query_options = TF.Nil
             }
 
@@ -159,66 +165,74 @@ retrieve a list of services from a different WAN-attached Consul datacenter.
 This data source is different from the @consul_catalog_services@ (plural)
 data source, which provides a summary of the current Consul services.
 -}
-data CatalogServiceDataSource = CatalogServiceDataSource {
-      _datacenter :: !(TF.Argument "datacenter" Text)
+data CatalogServiceDataSource s = CatalogServiceDataSource {
+      _datacenter :: !(TF.Attribute s "datacenter" Text)
     {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _name :: !(TF.Argument "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The service name to select. -}
-    , _query_options :: !(TF.Argument "query_options" Text)
+    , _query_options :: !(TF.Attribute s "query_options" Text)
     {- ^ (Optional) See below. -}
-    , _tag :: !(TF.Argument "tag" Text)
+    , _tag :: !(TF.Attribute s "tag" Text)
     {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CatalogServiceDataSource where
+instance TF.ToHCL (CatalogServiceDataSource s) where
     toHCL CatalogServiceDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _datacenter
-        , TF.argument _name
-        , TF.argument _query_options
-        , TF.argument _tag
+        [ TF.attribute _datacenter
+        , TF.attribute _name
+        , TF.attribute _query_options
+        , TF.attribute _tag
         ]
 
-instance HasDatacenter CatalogServiceDataSource Text where
+instance HasDatacenter (CatalogServiceDataSource s) Text where
+    type HasDatacenterThread (CatalogServiceDataSource s) Text = s
+
     datacenter =
-        lens (_datacenter :: CatalogServiceDataSource -> TF.Argument "datacenter" Text)
-             (\s a -> s { _datacenter = a } :: CatalogServiceDataSource)
+        lens (_datacenter :: CatalogServiceDataSource s -> TF.Attribute s "datacenter" Text)
+             (\s a -> s { _datacenter = a } :: CatalogServiceDataSource s)
 
-instance HasName CatalogServiceDataSource Text where
+instance HasName (CatalogServiceDataSource s) Text where
+    type HasNameThread (CatalogServiceDataSource s) Text = s
+
     name =
-        lens (_name :: CatalogServiceDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: CatalogServiceDataSource)
+        lens (_name :: CatalogServiceDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: CatalogServiceDataSource s)
 
-instance HasQueryOptions CatalogServiceDataSource Text where
+instance HasQueryOptions (CatalogServiceDataSource s) Text where
+    type HasQueryOptionsThread (CatalogServiceDataSource s) Text = s
+
     queryOptions =
-        lens (_query_options :: CatalogServiceDataSource -> TF.Argument "query_options" Text)
-             (\s a -> s { _query_options = a } :: CatalogServiceDataSource)
+        lens (_query_options :: CatalogServiceDataSource s -> TF.Attribute s "query_options" Text)
+             (\s a -> s { _query_options = a } :: CatalogServiceDataSource s)
 
-instance HasTag CatalogServiceDataSource Text where
+instance HasTag (CatalogServiceDataSource s) Text where
+    type HasTagThread (CatalogServiceDataSource s) Text = s
+
     tag =
-        lens (_tag :: CatalogServiceDataSource -> TF.Argument "tag" Text)
-             (\s a -> s { _tag = a } :: CatalogServiceDataSource)
+        lens (_tag :: CatalogServiceDataSource s -> TF.Attribute s "tag" Text)
+             (\s a -> s { _tag = a } :: CatalogServiceDataSource s)
 
-instance HasComputedDatacenter CatalogServiceDataSource Text where
+instance HasComputedDatacenter (CatalogServiceDataSource s) Text where
     computedDatacenter =
-        to (\_  -> TF.Compute "datacenter")
+        to (\x -> TF.Computed (TF.referenceKey x) "datacenter")
 
-instance HasComputedName CatalogServiceDataSource Text where
+instance HasComputedName (CatalogServiceDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedService CatalogServiceDataSource Text where
+instance HasComputedService (CatalogServiceDataSource s) Text where
     computedService =
-        to (\_  -> TF.Compute "service")
+        to (\x -> TF.Computed (TF.referenceKey x) "service")
 
-instance HasComputedTag CatalogServiceDataSource Text where
+instance HasComputedTag (CatalogServiceDataSource s) Text where
     computedTag =
-        to (\_  -> TF.Compute "tag")
+        to (\x -> TF.Computed (TF.referenceKey x) "tag")
 
-catalogServiceDataSource :: TF.DataSource TF.Consul CatalogServiceDataSource
+catalogServiceDataSource :: TF.DataSource TF.Consul (CatalogServiceDataSource s)
 catalogServiceDataSource =
     TF.newDataSource "consul_catalog_service" $
         CatalogServiceDataSource {
-            _datacenter = TF.Nil
+              _datacenter = TF.Nil
             , _name = TF.Nil
             , _query_options = TF.Nil
             , _tag = TF.Nil
@@ -229,169 +243,182 @@ catalogServiceDataSource =
 Allows Terraform to read values from a "namespace" of Consul keys that share
 a common name prefix.
 -}
-data KeyPrefixDataSource = KeyPrefixDataSource {
-      _datacenter :: !(TF.Argument "datacenter" Text)
+data KeyPrefixDataSource s = KeyPrefixDataSource {
+      _datacenter :: !(TF.Attribute s "datacenter" Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _path_prefix :: !(TF.Argument "path_prefix" Text)
+    , _path_prefix :: !(TF.Attribute s "path_prefix" Text)
     {- ^ (Required) Specifies the common prefix shared by all keys that will be read by this data source instance. In most cases, this will end with a slash to read a "folder" of subkeys. -}
-    , _subkey :: !(TF.Argument "subkey" Text)
+    , _subkey :: !(TF.Attribute s "subkey" Text)
     {- ^ (Optional) Specifies a subkey in Consul to be read. Supported values documented below. Multiple blocks supported. -}
-    , _token :: !(TF.Argument "token" Text)
+    , _token :: !(TF.Attribute s "token" Text)
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL KeyPrefixDataSource where
+instance TF.ToHCL (KeyPrefixDataSource s) where
     toHCL KeyPrefixDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _datacenter
-        , TF.argument _path_prefix
-        , TF.argument _subkey
-        , TF.argument _token
+        [ TF.attribute _datacenter
+        , TF.attribute _path_prefix
+        , TF.attribute _subkey
+        , TF.attribute _token
         ]
 
-instance HasDatacenter KeyPrefixDataSource Text where
+instance HasDatacenter (KeyPrefixDataSource s) Text where
+    type HasDatacenterThread (KeyPrefixDataSource s) Text = s
+
     datacenter =
-        lens (_datacenter :: KeyPrefixDataSource -> TF.Argument "datacenter" Text)
-             (\s a -> s { _datacenter = a } :: KeyPrefixDataSource)
+        lens (_datacenter :: KeyPrefixDataSource s -> TF.Attribute s "datacenter" Text)
+             (\s a -> s { _datacenter = a } :: KeyPrefixDataSource s)
 
-instance HasPathPrefix KeyPrefixDataSource Text where
+instance HasPathPrefix (KeyPrefixDataSource s) Text where
+    type HasPathPrefixThread (KeyPrefixDataSource s) Text = s
+
     pathPrefix =
-        lens (_path_prefix :: KeyPrefixDataSource -> TF.Argument "path_prefix" Text)
-             (\s a -> s { _path_prefix = a } :: KeyPrefixDataSource)
+        lens (_path_prefix :: KeyPrefixDataSource s -> TF.Attribute s "path_prefix" Text)
+             (\s a -> s { _path_prefix = a } :: KeyPrefixDataSource s)
 
-instance HasSubkey KeyPrefixDataSource Text where
+instance HasSubkey (KeyPrefixDataSource s) Text where
+    type HasSubkeyThread (KeyPrefixDataSource s) Text = s
+
     subkey =
-        lens (_subkey :: KeyPrefixDataSource -> TF.Argument "subkey" Text)
-             (\s a -> s { _subkey = a } :: KeyPrefixDataSource)
+        lens (_subkey :: KeyPrefixDataSource s -> TF.Attribute s "subkey" Text)
+             (\s a -> s { _subkey = a } :: KeyPrefixDataSource s)
 
-instance HasToken KeyPrefixDataSource Text where
+instance HasToken (KeyPrefixDataSource s) Text where
+    type HasTokenThread (KeyPrefixDataSource s) Text = s
+
     token =
-        lens (_token :: KeyPrefixDataSource -> TF.Argument "token" Text)
-             (\s a -> s { _token = a } :: KeyPrefixDataSource)
+        lens (_token :: KeyPrefixDataSource s -> TF.Attribute s "token" Text)
+             (\s a -> s { _token = a } :: KeyPrefixDataSource s)
 
-instance HasComputedDatacenter KeyPrefixDataSource Text where
+instance HasComputedDatacenter (KeyPrefixDataSource s) Text where
     computedDatacenter =
-        to (\_  -> TF.Compute "datacenter")
+        to (\x -> TF.Computed (TF.referenceKey x) "datacenter")
 
-instance HasComputedPathPrefix KeyPrefixDataSource Text where
+instance HasComputedPathPrefix (KeyPrefixDataSource s) Text where
     computedPathPrefix =
-        to (\_  -> TF.Compute "path_prefix")
+        to (\x -> TF.Computed (TF.referenceKey x) "path_prefix")
 
-instance HasComputedSubkeys KeyPrefixDataSource Text where
+instance HasComputedSubkeys (KeyPrefixDataSource s) Text where
     computedSubkeys =
-        to (\_  -> TF.Compute "subkeys")
+        to (\x -> TF.Computed (TF.referenceKey x) "subkeys")
 
-instance HasComputedVar<name> KeyPrefixDataSource Text where
+instance HasComputedVar<name> (KeyPrefixDataSource s) Text where
     computedVar<name> =
-        to (\_  -> TF.Compute "var.<name>")
+        to (\x -> TF.Computed (TF.referenceKey x) "var.<name>")
 
-keyPrefixDataSource :: TF.DataSource TF.Consul KeyPrefixDataSource
+keyPrefixDataSource :: TF.DataSource TF.Consul (KeyPrefixDataSource s)
 keyPrefixDataSource =
     TF.newDataSource "consul_key_prefix" $
         KeyPrefixDataSource {
-            _datacenter = TF.Nil
+              _datacenter = TF.Nil
             , _path_prefix = TF.Nil
             , _subkey = TF.Nil
             , _token = TF.Nil
             }
 
-class HasDatacenter s a | s -> a where
-    datacenter :: Lens' s (TF.Argument "datacenter" a)
+class HasDatacenter a b | a -> b where
+    type HasDatacenterThread a b :: *
 
-instance HasDatacenter s a => HasDatacenter (TF.DataSource p s) a where
+    datacenter :: Lens' a (TF.Attribute (HasDatacenterThread a b) "datacenter" b)
+
+instance HasDatacenter a b => HasDatacenter (TF.DataSource p a) b where
+    type HasDatacenterThread (TF.DataSource p a) b =
+         HasDatacenterThread a b
+
     datacenter = TF.configuration . datacenter
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasPathPrefix s a | s -> a where
-    pathPrefix :: Lens' s (TF.Argument "path_prefix" a)
+class HasPathPrefix a b | a -> b where
+    type HasPathPrefixThread a b :: *
 
-instance HasPathPrefix s a => HasPathPrefix (TF.DataSource p s) a where
+    pathPrefix :: Lens' a (TF.Attribute (HasPathPrefixThread a b) "path_prefix" b)
+
+instance HasPathPrefix a b => HasPathPrefix (TF.DataSource p a) b where
+    type HasPathPrefixThread (TF.DataSource p a) b =
+         HasPathPrefixThread a b
+
     pathPrefix = TF.configuration . pathPrefix
 
-class HasQueryOptions s a | s -> a where
-    queryOptions :: Lens' s (TF.Argument "query_options" a)
+class HasQueryOptions a b | a -> b where
+    type HasQueryOptionsThread a b :: *
 
-instance HasQueryOptions s a => HasQueryOptions (TF.DataSource p s) a where
+    queryOptions :: Lens' a (TF.Attribute (HasQueryOptionsThread a b) "query_options" b)
+
+instance HasQueryOptions a b => HasQueryOptions (TF.DataSource p a) b where
+    type HasQueryOptionsThread (TF.DataSource p a) b =
+         HasQueryOptionsThread a b
+
     queryOptions = TF.configuration . queryOptions
 
-class HasSubkey s a | s -> a where
-    subkey :: Lens' s (TF.Argument "subkey" a)
+class HasSubkey a b | a -> b where
+    type HasSubkeyThread a b :: *
 
-instance HasSubkey s a => HasSubkey (TF.DataSource p s) a where
+    subkey :: Lens' a (TF.Attribute (HasSubkeyThread a b) "subkey" b)
+
+instance HasSubkey a b => HasSubkey (TF.DataSource p a) b where
+    type HasSubkeyThread (TF.DataSource p a) b =
+         HasSubkeyThread a b
+
     subkey = TF.configuration . subkey
 
-class HasTag s a | s -> a where
-    tag :: Lens' s (TF.Argument "tag" a)
+class HasTag a b | a -> b where
+    type HasTagThread a b :: *
 
-instance HasTag s a => HasTag (TF.DataSource p s) a where
+    tag :: Lens' a (TF.Attribute (HasTagThread a b) "tag" b)
+
+instance HasTag a b => HasTag (TF.DataSource p a) b where
+    type HasTagThread (TF.DataSource p a) b =
+         HasTagThread a b
+
     tag = TF.configuration . tag
 
-class HasToken s a | s -> a where
-    token :: Lens' s (TF.Argument "token" a)
+class HasToken a b | a -> b where
+    type HasTokenThread a b :: *
 
-instance HasToken s a => HasToken (TF.DataSource p s) a where
+    token :: Lens' a (TF.Attribute (HasTokenThread a b) "token" b)
+
+instance HasToken a b => HasToken (TF.DataSource p a) b where
+    type HasTokenThread (TF.DataSource p a) b =
+         HasTokenThread a b
+
     token = TF.configuration . token
 
-class HasComputedDatacenter s a | s -> a where
-    computedDatacenter :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDatacenter a b | a -> b where
+    computedDatacenter :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDatacenter s a => HasComputedDatacenter (TF.DataSource p s) a where
-    computedDatacenter = TF.configuration . computedDatacenter
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedNodeIds a b | a -> b where
+    computedNodeIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
+class HasComputedNodeNames a b | a -> b where
+    computedNodeNames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedNodeIds s a | s -> a where
-    computedNodeIds :: forall r. Getting r s (TF.Attribute a)
+class HasComputedNodes a b | a -> b where
+    computedNodes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedNodeIds s a => HasComputedNodeIds (TF.DataSource p s) a where
-    computedNodeIds = TF.configuration . computedNodeIds
+class HasComputedPathPrefix a b | a -> b where
+    computedPathPrefix :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedNodeNames s a | s -> a where
-    computedNodeNames :: forall r. Getting r s (TF.Attribute a)
+class HasComputedService a b | a -> b where
+    computedService :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedNodeNames s a => HasComputedNodeNames (TF.DataSource p s) a where
-    computedNodeNames = TF.configuration . computedNodeNames
+class HasComputedSubkeys a b | a -> b where
+    computedSubkeys :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedNodes s a | s -> a where
-    computedNodes :: forall r. Getting r s (TF.Attribute a)
+class HasComputedTag a b | a -> b where
+    computedTag :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedNodes s a => HasComputedNodes (TF.DataSource p s) a where
-    computedNodes = TF.configuration . computedNodes
-
-class HasComputedPathPrefix s a | s -> a where
-    computedPathPrefix :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPathPrefix s a => HasComputedPathPrefix (TF.DataSource p s) a where
-    computedPathPrefix = TF.configuration . computedPathPrefix
-
-class HasComputedService s a | s -> a where
-    computedService :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedService s a => HasComputedService (TF.DataSource p s) a where
-    computedService = TF.configuration . computedService
-
-class HasComputedSubkeys s a | s -> a where
-    computedSubkeys :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSubkeys s a => HasComputedSubkeys (TF.DataSource p s) a where
-    computedSubkeys = TF.configuration . computedSubkeys
-
-class HasComputedTag s a | s -> a where
-    computedTag :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTag s a => HasComputedTag (TF.DataSource p s) a where
-    computedTag = TF.configuration . computedTag
-
-class HasComputedVar<name> s a | s -> a where
-    computedVar<name> :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVar<name> s a => HasComputedVar<name> (TF.DataSource p s) a where
-    computedVar<name> = TF.configuration . computedVar<name>
+class HasComputedVar<name> a b | a -> b where
+    computedVar<name> :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

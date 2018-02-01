@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -110,124 +111,137 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute        as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.IP               as TF
+import qualified Terrafomo.Meta             as TF (configuration)
+import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Rancher.Provider as TF
 import qualified Terrafomo.Rancher.Types    as TF
-import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.IP        as TF
-import qualified Terrafomo.Syntax.Meta      as TF (configuration)
-import qualified Terrafomo.Syntax.Resource  as TF
-import qualified Terrafomo.Syntax.Resource  as TF
-import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.Resource         as TF
+import qualified Terrafomo.Resource         as TF
 
 {- | The @rancher_certificate@ Rancher resource.
 
 Provides a Rancher Certificate resource. This can be used to create
 certificates for rancher environments and retrieve their information.
 -}
-data CertificateResource = CertificateResource {
-      _cert           :: !(TF.Argument "cert" Text)
+data CertificateResource s = CertificateResource {
+      _cert           :: !(TF.Attribute s "cert" Text)
     {- ^ (Required) The certificate content. -}
-    , _cert_chain     :: !(TF.Argument "cert_chain" Text)
+    , _cert_chain     :: !(TF.Attribute s "cert_chain" Text)
     {- ^ (Optional) The certificate chain. -}
-    , _description    :: !(TF.Argument "description" Text)
+    , _description    :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A certificate description. -}
-    , _environment_id :: !(TF.Argument "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment to create the certificate for. -}
-    , _key            :: !(TF.Argument "key" Text)
+    , _key            :: !(TF.Attribute s "key" Text)
     {- ^ (Required) The certificate key. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the certificate. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CertificateResource where
+instance TF.ToHCL (CertificateResource s) where
     toHCL CertificateResource{..} = TF.block $ catMaybes
-        [ TF.argument _cert
-        , TF.argument _cert_chain
-        , TF.argument _description
-        , TF.argument _environment_id
-        , TF.argument _key
-        , TF.argument _name
+        [ TF.attribute _cert
+        , TF.attribute _cert_chain
+        , TF.attribute _description
+        , TF.attribute _environment_id
+        , TF.attribute _key
+        , TF.attribute _name
         ]
 
-instance HasCert CertificateResource Text where
+instance HasCert (CertificateResource s) Text where
+    type HasCertThread (CertificateResource s) Text = s
+
     cert =
-        lens (_cert :: CertificateResource -> TF.Argument "cert" Text)
-             (\s a -> s { _cert = a } :: CertificateResource)
+        lens (_cert :: CertificateResource s -> TF.Attribute s "cert" Text)
+             (\s a -> s { _cert = a } :: CertificateResource s)
 
-instance HasCertChain CertificateResource Text where
+instance HasCertChain (CertificateResource s) Text where
+    type HasCertChainThread (CertificateResource s) Text = s
+
     certChain =
-        lens (_cert_chain :: CertificateResource -> TF.Argument "cert_chain" Text)
-             (\s a -> s { _cert_chain = a } :: CertificateResource)
+        lens (_cert_chain :: CertificateResource s -> TF.Attribute s "cert_chain" Text)
+             (\s a -> s { _cert_chain = a } :: CertificateResource s)
 
-instance HasDescription CertificateResource Text where
+instance HasDescription (CertificateResource s) Text where
+    type HasDescriptionThread (CertificateResource s) Text = s
+
     description =
-        lens (_description :: CertificateResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: CertificateResource)
+        lens (_description :: CertificateResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: CertificateResource s)
 
-instance HasEnvironmentId CertificateResource Text where
+instance HasEnvironmentId (CertificateResource s) Text where
+    type HasEnvironmentIdThread (CertificateResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: CertificateResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: CertificateResource)
+        lens (_environment_id :: CertificateResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: CertificateResource s)
 
-instance HasKey CertificateResource Text where
+instance HasKey (CertificateResource s) Text where
+    type HasKeyThread (CertificateResource s) Text = s
+
     key =
-        lens (_key :: CertificateResource -> TF.Argument "key" Text)
-             (\s a -> s { _key = a } :: CertificateResource)
+        lens (_key :: CertificateResource s -> TF.Attribute s "key" Text)
+             (\s a -> s { _key = a } :: CertificateResource s)
 
-instance HasName CertificateResource Text where
+instance HasName (CertificateResource s) Text where
+    type HasNameThread (CertificateResource s) Text = s
+
     name =
-        lens (_name :: CertificateResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: CertificateResource)
+        lens (_name :: CertificateResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: CertificateResource s)
 
-instance HasComputedAlgorithm CertificateResource Text where
+instance HasComputedAlgorithm (CertificateResource s) Text where
     computedAlgorithm =
-        to (\_  -> TF.Compute "algorithm")
+        to (\x -> TF.Computed (TF.referenceKey x) "algorithm")
 
-instance HasComputedCertFingerprint CertificateResource Text where
+instance HasComputedCertFingerprint (CertificateResource s) Text where
     computedCertFingerprint =
-        to (\_  -> TF.Compute "cert_fingerprint")
+        to (\x -> TF.Computed (TF.referenceKey x) "cert_fingerprint")
 
-instance HasComputedCn CertificateResource Text where
+instance HasComputedCn (CertificateResource s) Text where
     computedCn =
-        to (\_  -> TF.Compute "cn")
+        to (\x -> TF.Computed (TF.referenceKey x) "cn")
 
-instance HasComputedExpiresAt CertificateResource Text where
+instance HasComputedExpiresAt (CertificateResource s) Text where
     computedExpiresAt =
-        to (\_  -> TF.Compute "expires_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "expires_at")
 
-instance HasComputedId CertificateResource Text where
+instance HasComputedId (CertificateResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedIssuedAt CertificateResource Text where
+instance HasComputedIssuedAt (CertificateResource s) Text where
     computedIssuedAt =
-        to (\_  -> TF.Compute "issued_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "issued_at")
 
-instance HasComputedIssuer CertificateResource Text where
+instance HasComputedIssuer (CertificateResource s) Text where
     computedIssuer =
-        to (\_  -> TF.Compute "issuer")
+        to (\x -> TF.Computed (TF.referenceKey x) "issuer")
 
-instance HasComputedKeySize CertificateResource Text where
+instance HasComputedKeySize (CertificateResource s) Text where
     computedKeySize =
-        to (\_  -> TF.Compute "key_size")
+        to (\x -> TF.Computed (TF.referenceKey x) "key_size")
 
-instance HasComputedSerialNumber CertificateResource Text where
+instance HasComputedSerialNumber (CertificateResource s) Text where
     computedSerialNumber =
-        to (\_  -> TF.Compute "serial_number")
+        to (\x -> TF.Computed (TF.referenceKey x) "serial_number")
 
-instance HasComputedSubjectAlternativeNames CertificateResource Text where
+instance HasComputedSubjectAlternativeNames (CertificateResource s) Text where
     computedSubjectAlternativeNames =
-        to (\_  -> TF.Compute "subject_alternative_names")
+        to (\x -> TF.Computed (TF.referenceKey x) "subject_alternative_names")
 
-instance HasComputedVersion CertificateResource Text where
+instance HasComputedVersion (CertificateResource s) Text where
     computedVersion =
-        to (\_  -> TF.Compute "version")
+        to (\x -> TF.Computed (TF.referenceKey x) "version")
 
-certificateResource :: TF.Resource TF.Rancher CertificateResource
+certificateResource :: TF.Resource TF.Rancher (CertificateResource s)
 certificateResource =
     TF.newResource "rancher_certificate" $
         CertificateResource {
-            _cert = TF.Nil
+              _cert = TF.Nil
             , _cert_chain = TF.Nil
             , _description = TF.Nil
             , _environment_id = TF.Nil
@@ -240,58 +254,68 @@ certificateResource =
 Provides a Rancher Environment resource. This can be used to create and
 manage environments on rancher.
 -}
-data EnvironmentResource = EnvironmentResource {
-      _description         :: !(TF.Argument "description" Text)
+data EnvironmentResource s = EnvironmentResource {
+      _description         :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) An environment description. -}
-    , _member              :: !(TF.Argument "member" Text)
+    , _member              :: !(TF.Attribute s "member" Text)
     {- ^ (Optional) Members to add to the environment. -}
-    , _name                :: !(TF.Argument "name" Text)
+    , _name                :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the environment. -}
-    , _orchestration       :: !(TF.Argument "orchestration" Text)
+    , _orchestration       :: !(TF.Attribute s "orchestration" Text)
     {- ^ (Optional) Must be one of cattle , swarm , mesos , windows or kubernetes . This is a helper for setting the project_template_ids for the included Rancher templates. This will conflict with project_template_id setting. Changing this forces a new resource to be created. -}
-    , _project_template_id :: !(TF.Argument "project_template_id" Text)
+    , _project_template_id :: !(TF.Attribute s "project_template_id" Text)
     {- ^ (Optional) This can be any valid project template ID. If this is set, then orchestration can not be. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL EnvironmentResource where
+instance TF.ToHCL (EnvironmentResource s) where
     toHCL EnvironmentResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _member
-        , TF.argument _name
-        , TF.argument _orchestration
-        , TF.argument _project_template_id
+        [ TF.attribute _description
+        , TF.attribute _member
+        , TF.attribute _name
+        , TF.attribute _orchestration
+        , TF.attribute _project_template_id
         ]
 
-instance HasDescription EnvironmentResource Text where
+instance HasDescription (EnvironmentResource s) Text where
+    type HasDescriptionThread (EnvironmentResource s) Text = s
+
     description =
-        lens (_description :: EnvironmentResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: EnvironmentResource)
+        lens (_description :: EnvironmentResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: EnvironmentResource s)
 
-instance HasMember EnvironmentResource Text where
+instance HasMember (EnvironmentResource s) Text where
+    type HasMemberThread (EnvironmentResource s) Text = s
+
     member =
-        lens (_member :: EnvironmentResource -> TF.Argument "member" Text)
-             (\s a -> s { _member = a } :: EnvironmentResource)
+        lens (_member :: EnvironmentResource s -> TF.Attribute s "member" Text)
+             (\s a -> s { _member = a } :: EnvironmentResource s)
 
-instance HasName EnvironmentResource Text where
+instance HasName (EnvironmentResource s) Text where
+    type HasNameThread (EnvironmentResource s) Text = s
+
     name =
-        lens (_name :: EnvironmentResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: EnvironmentResource)
+        lens (_name :: EnvironmentResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: EnvironmentResource s)
 
-instance HasOrchestration EnvironmentResource Text where
+instance HasOrchestration (EnvironmentResource s) Text where
+    type HasOrchestrationThread (EnvironmentResource s) Text = s
+
     orchestration =
-        lens (_orchestration :: EnvironmentResource -> TF.Argument "orchestration" Text)
-             (\s a -> s { _orchestration = a } :: EnvironmentResource)
+        lens (_orchestration :: EnvironmentResource s -> TF.Attribute s "orchestration" Text)
+             (\s a -> s { _orchestration = a } :: EnvironmentResource s)
 
-instance HasProjectTemplateId EnvironmentResource Text where
+instance HasProjectTemplateId (EnvironmentResource s) Text where
+    type HasProjectTemplateIdThread (EnvironmentResource s) Text = s
+
     projectTemplateId =
-        lens (_project_template_id :: EnvironmentResource -> TF.Argument "project_template_id" Text)
-             (\s a -> s { _project_template_id = a } :: EnvironmentResource)
+        lens (_project_template_id :: EnvironmentResource s -> TF.Attribute s "project_template_id" Text)
+             (\s a -> s { _project_template_id = a } :: EnvironmentResource s)
 
-environmentResource :: TF.Resource TF.Rancher EnvironmentResource
+environmentResource :: TF.Resource TF.Rancher (EnvironmentResource s)
 environmentResource =
     TF.newResource "rancher_environment" $
         EnvironmentResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _member = TF.Nil
             , _name = TF.Nil
             , _orchestration = TF.Nil
@@ -303,66 +327,78 @@ environmentResource =
 Provides a Rancher Host resource. This can be used to manage and delete
 hosts on Rancher.
 -}
-data HostResource = HostResource {
-      _description    :: !(TF.Argument "description" Text)
+data HostResource s = HostResource {
+      _description    :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A host description. -}
-    , _environment_id :: !(TF.Argument "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment the host is associated to. -}
-    , _hostname       :: !(TF.Argument "hostname" Text)
+    , _hostname       :: !(TF.Attribute s "hostname" Text)
     {- ^ (Required) The host name. Used as the primary key to detect the host ID. -}
-    , _id             :: !(TF.Argument "id" Text)
+    , _id             :: !(TF.Attribute s "id" Text)
     {- ^ - (Computed) The ID of the resource. -}
-    , _labels         :: !(TF.Argument "labels" Text)
+    , _labels         :: !(TF.Attribute s "labels" Text)
     {- ^ (Optional) A dictionary of labels to apply to the host. Computed internal labels are excluded from that list. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the host. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL HostResource where
+instance TF.ToHCL (HostResource s) where
     toHCL HostResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _environment_id
-        , TF.argument _hostname
-        , TF.argument _id
-        , TF.argument _labels
-        , TF.argument _name
+        [ TF.attribute _description
+        , TF.attribute _environment_id
+        , TF.attribute _hostname
+        , TF.attribute _id
+        , TF.attribute _labels
+        , TF.attribute _name
         ]
 
-instance HasDescription HostResource Text where
+instance HasDescription (HostResource s) Text where
+    type HasDescriptionThread (HostResource s) Text = s
+
     description =
-        lens (_description :: HostResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: HostResource)
+        lens (_description :: HostResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: HostResource s)
 
-instance HasEnvironmentId HostResource Text where
+instance HasEnvironmentId (HostResource s) Text where
+    type HasEnvironmentIdThread (HostResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: HostResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: HostResource)
+        lens (_environment_id :: HostResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: HostResource s)
 
-instance HasHostname HostResource Text where
+instance HasHostname (HostResource s) Text where
+    type HasHostnameThread (HostResource s) Text = s
+
     hostname =
-        lens (_hostname :: HostResource -> TF.Argument "hostname" Text)
-             (\s a -> s { _hostname = a } :: HostResource)
+        lens (_hostname :: HostResource s -> TF.Attribute s "hostname" Text)
+             (\s a -> s { _hostname = a } :: HostResource s)
 
-instance HasId HostResource Text where
+instance HasId (HostResource s) Text where
+    type HasIdThread (HostResource s) Text = s
+
     id =
-        lens (_id :: HostResource -> TF.Argument "id" Text)
-             (\s a -> s { _id = a } :: HostResource)
+        lens (_id :: HostResource s -> TF.Attribute s "id" Text)
+             (\s a -> s { _id = a } :: HostResource s)
 
-instance HasLabels HostResource Text where
+instance HasLabels (HostResource s) Text where
+    type HasLabelsThread (HostResource s) Text = s
+
     labels =
-        lens (_labels :: HostResource -> TF.Argument "labels" Text)
-             (\s a -> s { _labels = a } :: HostResource)
+        lens (_labels :: HostResource s -> TF.Attribute s "labels" Text)
+             (\s a -> s { _labels = a } :: HostResource s)
 
-instance HasName HostResource Text where
+instance HasName (HostResource s) Text where
+    type HasNameThread (HostResource s) Text = s
+
     name =
-        lens (_name :: HostResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: HostResource)
+        lens (_name :: HostResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: HostResource s)
 
-hostResource :: TF.Resource TF.Rancher HostResource
+hostResource :: TF.Resource TF.Rancher (HostResource s)
 hostResource =
     TF.newResource "rancher_host" $
         HostResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _environment_id = TF.Nil
             , _hostname = TF.Nil
             , _id = TF.Nil
@@ -375,78 +411,88 @@ hostResource =
 Provides a Rancher Registration Token resource. This can be used to create
 registration tokens for rancher environments and retrieve their information.
 -}
-data RegistrationTokenResource = RegistrationTokenResource {
-      _agent_ip       :: !(TF.Argument "agent_ip" Text)
+data RegistrationTokenResource s = RegistrationTokenResource {
+      _agent_ip       :: !(TF.Attribute s "agent_ip" Text)
     {- ^ (Optional) A string containing the CATTLE_AGENT_IP to add to the registration command. -}
-    , _description    :: !(TF.Argument "description" Text)
+    , _description    :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A registration token description. -}
-    , _environment_id :: !(TF.Argument "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment to create the token for. -}
-    , _host_labels    :: !(TF.Argument "host_labels" Text)
+    , _host_labels    :: !(TF.Attribute s "host_labels" Text)
     {- ^ (Optional) A map of host labels to add to the registration command. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the registration token. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RegistrationTokenResource where
+instance TF.ToHCL (RegistrationTokenResource s) where
     toHCL RegistrationTokenResource{..} = TF.block $ catMaybes
-        [ TF.argument _agent_ip
-        , TF.argument _description
-        , TF.argument _environment_id
-        , TF.argument _host_labels
-        , TF.argument _name
+        [ TF.attribute _agent_ip
+        , TF.attribute _description
+        , TF.attribute _environment_id
+        , TF.attribute _host_labels
+        , TF.attribute _name
         ]
 
-instance HasAgentIp RegistrationTokenResource Text where
+instance HasAgentIp (RegistrationTokenResource s) Text where
+    type HasAgentIpThread (RegistrationTokenResource s) Text = s
+
     agentIp =
-        lens (_agent_ip :: RegistrationTokenResource -> TF.Argument "agent_ip" Text)
-             (\s a -> s { _agent_ip = a } :: RegistrationTokenResource)
+        lens (_agent_ip :: RegistrationTokenResource s -> TF.Attribute s "agent_ip" Text)
+             (\s a -> s { _agent_ip = a } :: RegistrationTokenResource s)
 
-instance HasDescription RegistrationTokenResource Text where
+instance HasDescription (RegistrationTokenResource s) Text where
+    type HasDescriptionThread (RegistrationTokenResource s) Text = s
+
     description =
-        lens (_description :: RegistrationTokenResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: RegistrationTokenResource)
+        lens (_description :: RegistrationTokenResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: RegistrationTokenResource s)
 
-instance HasEnvironmentId RegistrationTokenResource Text where
+instance HasEnvironmentId (RegistrationTokenResource s) Text where
+    type HasEnvironmentIdThread (RegistrationTokenResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: RegistrationTokenResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: RegistrationTokenResource)
+        lens (_environment_id :: RegistrationTokenResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: RegistrationTokenResource s)
 
-instance HasHostLabels RegistrationTokenResource Text where
+instance HasHostLabels (RegistrationTokenResource s) Text where
+    type HasHostLabelsThread (RegistrationTokenResource s) Text = s
+
     hostLabels =
-        lens (_host_labels :: RegistrationTokenResource -> TF.Argument "host_labels" Text)
-             (\s a -> s { _host_labels = a } :: RegistrationTokenResource)
+        lens (_host_labels :: RegistrationTokenResource s -> TF.Attribute s "host_labels" Text)
+             (\s a -> s { _host_labels = a } :: RegistrationTokenResource s)
 
-instance HasName RegistrationTokenResource Text where
+instance HasName (RegistrationTokenResource s) Text where
+    type HasNameThread (RegistrationTokenResource s) Text = s
+
     name =
-        lens (_name :: RegistrationTokenResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RegistrationTokenResource)
+        lens (_name :: RegistrationTokenResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RegistrationTokenResource s)
 
-instance HasComputedCommand RegistrationTokenResource Text where
+instance HasComputedCommand (RegistrationTokenResource s) Text where
     computedCommand =
-        to (\_  -> TF.Compute "command")
+        to (\x -> TF.Computed (TF.referenceKey x) "command")
 
-instance HasComputedId RegistrationTokenResource Text where
+instance HasComputedId (RegistrationTokenResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedImage RegistrationTokenResource Text where
+instance HasComputedImage (RegistrationTokenResource s) Text where
     computedImage =
-        to (\_  -> TF.Compute "image")
+        to (\x -> TF.Computed (TF.referenceKey x) "image")
 
-instance HasComputedRegistrationUrl RegistrationTokenResource Text where
+instance HasComputedRegistrationUrl (RegistrationTokenResource s) Text where
     computedRegistrationUrl =
-        to (\_  -> TF.Compute "registration_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "registration_url")
 
-instance HasComputedToken RegistrationTokenResource Text where
+instance HasComputedToken (RegistrationTokenResource s) Text where
     computedToken =
-        to (\_  -> TF.Compute "token")
+        to (\x -> TF.Computed (TF.referenceKey x) "token")
 
-registrationTokenResource :: TF.Resource TF.Rancher RegistrationTokenResource
+registrationTokenResource :: TF.Resource TF.Rancher (RegistrationTokenResource s)
 registrationTokenResource =
     TF.newResource "rancher_registration_token" $
         RegistrationTokenResource {
-            _agent_ip = TF.Nil
+              _agent_ip = TF.Nil
             , _description = TF.Nil
             , _environment_id = TF.Nil
             , _host_labels = TF.Nil
@@ -459,62 +505,72 @@ Provides a Rancher Registy Credential resource. This can be used to create
 registry credentials for rancher environments and retrieve their
 information.
 -}
-data RegistryCredentialResource = RegistryCredentialResource {
-      _description  :: !(TF.Argument "description" Text)
+data RegistryCredentialResource s = RegistryCredentialResource {
+      _description  :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A registry credential description. -}
-    , _name         :: !(TF.Argument "name" Text)
+    , _name         :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the registry credential. -}
-    , _public_value :: !(TF.Argument "public_value" Text)
+    , _public_value :: !(TF.Attribute s "public_value" Text)
     {- ^ (Required) The public value (user name) of the account. -}
-    , _registry_id  :: !(TF.Argument "registry_id" Text)
+    , _registry_id  :: !(TF.Attribute s "registry_id" Text)
     {- ^ (Required) The ID of the registry to create the credential for. -}
-    , _secret_value :: !(TF.Argument "secret_value" Text)
+    , _secret_value :: !(TF.Attribute s "secret_value" Text)
     {- ^ (Required) The secret value (password) of the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RegistryCredentialResource where
+instance TF.ToHCL (RegistryCredentialResource s) where
     toHCL RegistryCredentialResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _name
-        , TF.argument _public_value
-        , TF.argument _registry_id
-        , TF.argument _secret_value
+        [ TF.attribute _description
+        , TF.attribute _name
+        , TF.attribute _public_value
+        , TF.attribute _registry_id
+        , TF.attribute _secret_value
         ]
 
-instance HasDescription RegistryCredentialResource Text where
+instance HasDescription (RegistryCredentialResource s) Text where
+    type HasDescriptionThread (RegistryCredentialResource s) Text = s
+
     description =
-        lens (_description :: RegistryCredentialResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: RegistryCredentialResource)
+        lens (_description :: RegistryCredentialResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: RegistryCredentialResource s)
 
-instance HasName RegistryCredentialResource Text where
+instance HasName (RegistryCredentialResource s) Text where
+    type HasNameThread (RegistryCredentialResource s) Text = s
+
     name =
-        lens (_name :: RegistryCredentialResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RegistryCredentialResource)
+        lens (_name :: RegistryCredentialResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RegistryCredentialResource s)
 
-instance HasPublicValue RegistryCredentialResource Text where
+instance HasPublicValue (RegistryCredentialResource s) Text where
+    type HasPublicValueThread (RegistryCredentialResource s) Text = s
+
     publicValue =
-        lens (_public_value :: RegistryCredentialResource -> TF.Argument "public_value" Text)
-             (\s a -> s { _public_value = a } :: RegistryCredentialResource)
+        lens (_public_value :: RegistryCredentialResource s -> TF.Attribute s "public_value" Text)
+             (\s a -> s { _public_value = a } :: RegistryCredentialResource s)
 
-instance HasRegistryId RegistryCredentialResource Text where
+instance HasRegistryId (RegistryCredentialResource s) Text where
+    type HasRegistryIdThread (RegistryCredentialResource s) Text = s
+
     registryId =
-        lens (_registry_id :: RegistryCredentialResource -> TF.Argument "registry_id" Text)
-             (\s a -> s { _registry_id = a } :: RegistryCredentialResource)
+        lens (_registry_id :: RegistryCredentialResource s -> TF.Attribute s "registry_id" Text)
+             (\s a -> s { _registry_id = a } :: RegistryCredentialResource s)
 
-instance HasSecretValue RegistryCredentialResource Text where
+instance HasSecretValue (RegistryCredentialResource s) Text where
+    type HasSecretValueThread (RegistryCredentialResource s) Text = s
+
     secretValue =
-        lens (_secret_value :: RegistryCredentialResource -> TF.Argument "secret_value" Text)
-             (\s a -> s { _secret_value = a } :: RegistryCredentialResource)
+        lens (_secret_value :: RegistryCredentialResource s -> TF.Attribute s "secret_value" Text)
+             (\s a -> s { _secret_value = a } :: RegistryCredentialResource s)
 
-instance HasComputedId RegistryCredentialResource Text where
+instance HasComputedId (RegistryCredentialResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-registryCredentialResource :: TF.Resource TF.Rancher RegistryCredentialResource
+registryCredentialResource :: TF.Resource TF.Rancher (RegistryCredentialResource s)
 registryCredentialResource =
     TF.newResource "rancher_registry_credential" $
         RegistryCredentialResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _name = TF.Nil
             , _public_value = TF.Nil
             , _registry_id = TF.Nil
@@ -526,54 +582,62 @@ registryCredentialResource =
 Provides a Rancher Registy resource. This can be used to create registries
 for rancher environments and retrieve their information
 -}
-data RegistryResource = RegistryResource {
-      _description    :: !(TF.Argument "description" Text)
+data RegistryResource s = RegistryResource {
+      _description    :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A registry description. -}
-    , _environment_id :: !(TF.Argument "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment to create the registry for. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the registry. -}
-    , _server_address :: !(TF.Argument "server_address" Text)
+    , _server_address :: !(TF.Attribute s "server_address" Text)
     {- ^ (Required) The server address for the registry. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RegistryResource where
+instance TF.ToHCL (RegistryResource s) where
     toHCL RegistryResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _environment_id
-        , TF.argument _name
-        , TF.argument _server_address
+        [ TF.attribute _description
+        , TF.attribute _environment_id
+        , TF.attribute _name
+        , TF.attribute _server_address
         ]
 
-instance HasDescription RegistryResource Text where
+instance HasDescription (RegistryResource s) Text where
+    type HasDescriptionThread (RegistryResource s) Text = s
+
     description =
-        lens (_description :: RegistryResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: RegistryResource)
+        lens (_description :: RegistryResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: RegistryResource s)
 
-instance HasEnvironmentId RegistryResource Text where
+instance HasEnvironmentId (RegistryResource s) Text where
+    type HasEnvironmentIdThread (RegistryResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: RegistryResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: RegistryResource)
+        lens (_environment_id :: RegistryResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: RegistryResource s)
 
-instance HasName RegistryResource Text where
+instance HasName (RegistryResource s) Text where
+    type HasNameThread (RegistryResource s) Text = s
+
     name =
-        lens (_name :: RegistryResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RegistryResource)
+        lens (_name :: RegistryResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RegistryResource s)
 
-instance HasServerAddress RegistryResource Text where
+instance HasServerAddress (RegistryResource s) Text where
+    type HasServerAddressThread (RegistryResource s) Text = s
+
     serverAddress =
-        lens (_server_address :: RegistryResource -> TF.Argument "server_address" Text)
-             (\s a -> s { _server_address = a } :: RegistryResource)
+        lens (_server_address :: RegistryResource s -> TF.Attribute s "server_address" Text)
+             (\s a -> s { _server_address = a } :: RegistryResource s)
 
-instance HasComputedId RegistryResource Text where
+instance HasComputedId (RegistryResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-registryResource :: TF.Resource TF.Rancher RegistryResource
+registryResource :: TF.Resource TF.Rancher (RegistryResource s)
 registryResource =
     TF.newResource "rancher_registry" $
         RegistryResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _environment_id = TF.Nil
             , _name = TF.Nil
             , _server_address = TF.Nil
@@ -584,50 +648,58 @@ registryResource =
 Provides a Rancher Secret resource. This can be used to create secrets for
 rancher environments and retrieve their information.
 -}
-data SecretsResource = SecretsResource {
-      _description    :: !(TF.Argument "description" Text)
+data SecretsResource s = SecretsResource {
+      _description    :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description of the secret. -}
-    , _environment_id :: !(TF.Argument "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment to create the secret for. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the secret. -}
-    , _value          :: !(TF.Argument "value" Text)
+    , _value          :: !(TF.Attribute s "value" Text)
     {- ^ (Required) The secret value. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SecretsResource where
+instance TF.ToHCL (SecretsResource s) where
     toHCL SecretsResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _environment_id
-        , TF.argument _name
-        , TF.argument _value
+        [ TF.attribute _description
+        , TF.attribute _environment_id
+        , TF.attribute _name
+        , TF.attribute _value
         ]
 
-instance HasDescription SecretsResource Text where
+instance HasDescription (SecretsResource s) Text where
+    type HasDescriptionThread (SecretsResource s) Text = s
+
     description =
-        lens (_description :: SecretsResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: SecretsResource)
+        lens (_description :: SecretsResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: SecretsResource s)
 
-instance HasEnvironmentId SecretsResource Text where
+instance HasEnvironmentId (SecretsResource s) Text where
+    type HasEnvironmentIdThread (SecretsResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: SecretsResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: SecretsResource)
+        lens (_environment_id :: SecretsResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: SecretsResource s)
 
-instance HasName SecretsResource Text where
+instance HasName (SecretsResource s) Text where
+    type HasNameThread (SecretsResource s) Text = s
+
     name =
-        lens (_name :: SecretsResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: SecretsResource)
+        lens (_name :: SecretsResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: SecretsResource s)
 
-instance HasValue SecretsResource Text where
+instance HasValue (SecretsResource s) Text where
+    type HasValueThread (SecretsResource s) Text = s
+
     value =
-        lens (_value :: SecretsResource -> TF.Argument "value" Text)
-             (\s a -> s { _value = a } :: SecretsResource)
+        lens (_value :: SecretsResource s -> TF.Attribute s "value" Text)
+             (\s a -> s { _value = a } :: SecretsResource s)
 
-secretsResource :: TF.Resource TF.Rancher SecretsResource
+secretsResource :: TF.Resource TF.Rancher (SecretsResource s)
 secretsResource =
     TF.newResource "rancher_secrets" $
         SecretsResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _environment_id = TF.Nil
             , _name = TF.Nil
             , _value = TF.Nil
@@ -638,110 +710,130 @@ secretsResource =
 Provides a Rancher Stack resource. This can be used to create and manage
 stacks on rancher.
 -}
-data StackResource = StackResource {
-      _catalog_id      :: !(TF.Argument "catalog_id" Text)
+data StackResource s = StackResource {
+      _catalog_id      :: !(TF.Attribute s "catalog_id" Text)
     {- ^ (Optional) The catalog ID to link this stack to. When provided, @docker_compose@ and @rancher_compose@ will be retrieved from the catalog unless they are overridden. -}
-    , _description     :: !(TF.Argument "description" Text)
+    , _description     :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A stack description. -}
-    , _docker_compose  :: !(TF.Argument "docker_compose" Text)
+    , _docker_compose  :: !(TF.Attribute s "docker_compose" Text)
     {- ^ (Optional) The @docker-compose.yml@ content to apply for the stack. -}
-    , _environment     :: !(TF.Argument "environment" Text)
+    , _environment     :: !(TF.Attribute s "environment" Text)
     {- ^ (Optional) The environment to apply to interpret the docker-compose and rancher-compose files. -}
-    , _environment_id  :: !(TF.Argument "environment_id" Text)
+    , _environment_id  :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment to create the stack for. -}
-    , _finish_upgrade  :: !(TF.Argument "finish_upgrade" Text)
+    , _finish_upgrade  :: !(TF.Attribute s "finish_upgrade" Text)
     {- ^ (Optional) Whether to automatically finish upgrades to this stack. -}
-    , _name            :: !(TF.Argument "name" Text)
+    , _name            :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the stack. -}
-    , _rancher_compose :: !(TF.Argument "rancher_compose" Text)
+    , _rancher_compose :: !(TF.Attribute s "rancher_compose" Text)
     {- ^ (Optional) The @rancher-compose.yml@ content to apply for the stack. -}
-    , _scope           :: !(TF.Argument "scope" Text)
+    , _scope           :: !(TF.Attribute s "scope" Text)
     {- ^ (Optional) The scope to attach the stack to. Must be one of user or system . Defaults to user . -}
-    , _start_on_create :: !(TF.Argument "start_on_create" Text)
+    , _start_on_create :: !(TF.Attribute s "start_on_create" Text)
     {- ^ (Optional) Whether to start the stack automatically. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL StackResource where
+instance TF.ToHCL (StackResource s) where
     toHCL StackResource{..} = TF.block $ catMaybes
-        [ TF.argument _catalog_id
-        , TF.argument _description
-        , TF.argument _docker_compose
-        , TF.argument _environment
-        , TF.argument _environment_id
-        , TF.argument _finish_upgrade
-        , TF.argument _name
-        , TF.argument _rancher_compose
-        , TF.argument _scope
-        , TF.argument _start_on_create
+        [ TF.attribute _catalog_id
+        , TF.attribute _description
+        , TF.attribute _docker_compose
+        , TF.attribute _environment
+        , TF.attribute _environment_id
+        , TF.attribute _finish_upgrade
+        , TF.attribute _name
+        , TF.attribute _rancher_compose
+        , TF.attribute _scope
+        , TF.attribute _start_on_create
         ]
 
-instance HasCatalogId StackResource Text where
+instance HasCatalogId (StackResource s) Text where
+    type HasCatalogIdThread (StackResource s) Text = s
+
     catalogId =
-        lens (_catalog_id :: StackResource -> TF.Argument "catalog_id" Text)
-             (\s a -> s { _catalog_id = a } :: StackResource)
+        lens (_catalog_id :: StackResource s -> TF.Attribute s "catalog_id" Text)
+             (\s a -> s { _catalog_id = a } :: StackResource s)
 
-instance HasDescription StackResource Text where
+instance HasDescription (StackResource s) Text where
+    type HasDescriptionThread (StackResource s) Text = s
+
     description =
-        lens (_description :: StackResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: StackResource)
+        lens (_description :: StackResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: StackResource s)
 
-instance HasDockerCompose StackResource Text where
+instance HasDockerCompose (StackResource s) Text where
+    type HasDockerComposeThread (StackResource s) Text = s
+
     dockerCompose =
-        lens (_docker_compose :: StackResource -> TF.Argument "docker_compose" Text)
-             (\s a -> s { _docker_compose = a } :: StackResource)
+        lens (_docker_compose :: StackResource s -> TF.Attribute s "docker_compose" Text)
+             (\s a -> s { _docker_compose = a } :: StackResource s)
 
-instance HasEnvironment StackResource Text where
+instance HasEnvironment (StackResource s) Text where
+    type HasEnvironmentThread (StackResource s) Text = s
+
     environment =
-        lens (_environment :: StackResource -> TF.Argument "environment" Text)
-             (\s a -> s { _environment = a } :: StackResource)
+        lens (_environment :: StackResource s -> TF.Attribute s "environment" Text)
+             (\s a -> s { _environment = a } :: StackResource s)
 
-instance HasEnvironmentId StackResource Text where
+instance HasEnvironmentId (StackResource s) Text where
+    type HasEnvironmentIdThread (StackResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: StackResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: StackResource)
+        lens (_environment_id :: StackResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: StackResource s)
 
-instance HasFinishUpgrade StackResource Text where
+instance HasFinishUpgrade (StackResource s) Text where
+    type HasFinishUpgradeThread (StackResource s) Text = s
+
     finishUpgrade =
-        lens (_finish_upgrade :: StackResource -> TF.Argument "finish_upgrade" Text)
-             (\s a -> s { _finish_upgrade = a } :: StackResource)
+        lens (_finish_upgrade :: StackResource s -> TF.Attribute s "finish_upgrade" Text)
+             (\s a -> s { _finish_upgrade = a } :: StackResource s)
 
-instance HasName StackResource Text where
+instance HasName (StackResource s) Text where
+    type HasNameThread (StackResource s) Text = s
+
     name =
-        lens (_name :: StackResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: StackResource)
+        lens (_name :: StackResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: StackResource s)
 
-instance HasRancherCompose StackResource Text where
+instance HasRancherCompose (StackResource s) Text where
+    type HasRancherComposeThread (StackResource s) Text = s
+
     rancherCompose =
-        lens (_rancher_compose :: StackResource -> TF.Argument "rancher_compose" Text)
-             (\s a -> s { _rancher_compose = a } :: StackResource)
+        lens (_rancher_compose :: StackResource s -> TF.Attribute s "rancher_compose" Text)
+             (\s a -> s { _rancher_compose = a } :: StackResource s)
 
-instance HasScope StackResource Text where
+instance HasScope (StackResource s) Text where
+    type HasScopeThread (StackResource s) Text = s
+
     scope =
-        lens (_scope :: StackResource -> TF.Argument "scope" Text)
-             (\s a -> s { _scope = a } :: StackResource)
+        lens (_scope :: StackResource s -> TF.Attribute s "scope" Text)
+             (\s a -> s { _scope = a } :: StackResource s)
 
-instance HasStartOnCreate StackResource Text where
+instance HasStartOnCreate (StackResource s) Text where
+    type HasStartOnCreateThread (StackResource s) Text = s
+
     startOnCreate =
-        lens (_start_on_create :: StackResource -> TF.Argument "start_on_create" Text)
-             (\s a -> s { _start_on_create = a } :: StackResource)
+        lens (_start_on_create :: StackResource s -> TF.Attribute s "start_on_create" Text)
+             (\s a -> s { _start_on_create = a } :: StackResource s)
 
-instance HasComputedId StackResource Text where
+instance HasComputedId (StackResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedRenderedDockerCompose StackResource Text where
+instance HasComputedRenderedDockerCompose (StackResource s) Text where
     computedRenderedDockerCompose =
-        to (\_  -> TF.Compute "rendered_docker_compose")
+        to (\x -> TF.Computed (TF.referenceKey x) "rendered_docker_compose")
 
-instance HasComputedRenderedRancherCompose StackResource Text where
+instance HasComputedRenderedRancherCompose (StackResource s) Text where
     computedRenderedRancherCompose =
-        to (\_  -> TF.Compute "rendered_rancher_compose")
+        to (\x -> TF.Computed (TF.referenceKey x) "rendered_rancher_compose")
 
-stackResource :: TF.Resource TF.Rancher StackResource
+stackResource :: TF.Resource TF.Rancher (StackResource s)
 stackResource =
     TF.newResource "rancher_stack" $
         StackResource {
-            _catalog_id = TF.Nil
+              _catalog_id = TF.Nil
             , _description = TF.Nil
             , _docker_compose = TF.Nil
             , _environment = TF.Nil
@@ -758,315 +850,407 @@ stackResource =
 Provides a Rancher Volume resource. This can be used to create volumes for
 rancher environments and retrieve their information.
 -}
-data VolumesResource = VolumesResource {
-      _description    :: !(TF.Argument "description" Text)
+data VolumesResource s = VolumesResource {
+      _description    :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description of the volume. -}
-    , _driver         :: !(TF.Argument "driver" Text)
+    , _driver         :: !(TF.Attribute s "driver" Text)
     {- ^ (Required) The volume driver. -}
-    , _environment_id :: !(TF.Argument "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment to create the volume for. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL VolumesResource where
+instance TF.ToHCL (VolumesResource s) where
     toHCL VolumesResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _driver
-        , TF.argument _environment_id
-        , TF.argument _name
+        [ TF.attribute _description
+        , TF.attribute _driver
+        , TF.attribute _environment_id
+        , TF.attribute _name
         ]
 
-instance HasDescription VolumesResource Text where
+instance HasDescription (VolumesResource s) Text where
+    type HasDescriptionThread (VolumesResource s) Text = s
+
     description =
-        lens (_description :: VolumesResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: VolumesResource)
+        lens (_description :: VolumesResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: VolumesResource s)
 
-instance HasDriver VolumesResource Text where
+instance HasDriver (VolumesResource s) Text where
+    type HasDriverThread (VolumesResource s) Text = s
+
     driver =
-        lens (_driver :: VolumesResource -> TF.Argument "driver" Text)
-             (\s a -> s { _driver = a } :: VolumesResource)
+        lens (_driver :: VolumesResource s -> TF.Attribute s "driver" Text)
+             (\s a -> s { _driver = a } :: VolumesResource s)
 
-instance HasEnvironmentId VolumesResource Text where
+instance HasEnvironmentId (VolumesResource s) Text where
+    type HasEnvironmentIdThread (VolumesResource s) Text = s
+
     environmentId =
-        lens (_environment_id :: VolumesResource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: VolumesResource)
+        lens (_environment_id :: VolumesResource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: VolumesResource s)
 
-instance HasName VolumesResource Text where
+instance HasName (VolumesResource s) Text where
+    type HasNameThread (VolumesResource s) Text = s
+
     name =
-        lens (_name :: VolumesResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: VolumesResource)
+        lens (_name :: VolumesResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: VolumesResource s)
 
-volumesResource :: TF.Resource TF.Rancher VolumesResource
+volumesResource :: TF.Resource TF.Rancher (VolumesResource s)
 volumesResource =
     TF.newResource "rancher_volumes" $
         VolumesResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _driver = TF.Nil
             , _environment_id = TF.Nil
             , _name = TF.Nil
             }
 
-class HasAgentIp s a | s -> a where
-    agentIp :: Lens' s (TF.Argument "agent_ip" a)
+class HasAgentIp a b | a -> b where
+    type HasAgentIpThread a b :: *
 
-instance HasAgentIp s a => HasAgentIp (TF.Resource p s) a where
+    agentIp :: Lens' a (TF.Attribute (HasAgentIpThread a b) "agent_ip" b)
+
+instance HasAgentIp a b => HasAgentIp (TF.Resource p a) b where
+    type HasAgentIpThread (TF.Resource p a) b =
+         HasAgentIpThread a b
+
     agentIp = TF.configuration . agentIp
 
-class HasCatalogId s a | s -> a where
-    catalogId :: Lens' s (TF.Argument "catalog_id" a)
+class HasCatalogId a b | a -> b where
+    type HasCatalogIdThread a b :: *
 
-instance HasCatalogId s a => HasCatalogId (TF.Resource p s) a where
+    catalogId :: Lens' a (TF.Attribute (HasCatalogIdThread a b) "catalog_id" b)
+
+instance HasCatalogId a b => HasCatalogId (TF.Resource p a) b where
+    type HasCatalogIdThread (TF.Resource p a) b =
+         HasCatalogIdThread a b
+
     catalogId = TF.configuration . catalogId
 
-class HasCert s a | s -> a where
-    cert :: Lens' s (TF.Argument "cert" a)
+class HasCert a b | a -> b where
+    type HasCertThread a b :: *
 
-instance HasCert s a => HasCert (TF.Resource p s) a where
+    cert :: Lens' a (TF.Attribute (HasCertThread a b) "cert" b)
+
+instance HasCert a b => HasCert (TF.Resource p a) b where
+    type HasCertThread (TF.Resource p a) b =
+         HasCertThread a b
+
     cert = TF.configuration . cert
 
-class HasCertChain s a | s -> a where
-    certChain :: Lens' s (TF.Argument "cert_chain" a)
+class HasCertChain a b | a -> b where
+    type HasCertChainThread a b :: *
 
-instance HasCertChain s a => HasCertChain (TF.Resource p s) a where
+    certChain :: Lens' a (TF.Attribute (HasCertChainThread a b) "cert_chain" b)
+
+instance HasCertChain a b => HasCertChain (TF.Resource p a) b where
+    type HasCertChainThread (TF.Resource p a) b =
+         HasCertChainThread a b
+
     certChain = TF.configuration . certChain
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasDockerCompose s a | s -> a where
-    dockerCompose :: Lens' s (TF.Argument "docker_compose" a)
+class HasDockerCompose a b | a -> b where
+    type HasDockerComposeThread a b :: *
 
-instance HasDockerCompose s a => HasDockerCompose (TF.Resource p s) a where
+    dockerCompose :: Lens' a (TF.Attribute (HasDockerComposeThread a b) "docker_compose" b)
+
+instance HasDockerCompose a b => HasDockerCompose (TF.Resource p a) b where
+    type HasDockerComposeThread (TF.Resource p a) b =
+         HasDockerComposeThread a b
+
     dockerCompose = TF.configuration . dockerCompose
 
-class HasDriver s a | s -> a where
-    driver :: Lens' s (TF.Argument "driver" a)
+class HasDriver a b | a -> b where
+    type HasDriverThread a b :: *
 
-instance HasDriver s a => HasDriver (TF.Resource p s) a where
+    driver :: Lens' a (TF.Attribute (HasDriverThread a b) "driver" b)
+
+instance HasDriver a b => HasDriver (TF.Resource p a) b where
+    type HasDriverThread (TF.Resource p a) b =
+         HasDriverThread a b
+
     driver = TF.configuration . driver
 
-class HasEnvironment s a | s -> a where
-    environment :: Lens' s (TF.Argument "environment" a)
+class HasEnvironment a b | a -> b where
+    type HasEnvironmentThread a b :: *
 
-instance HasEnvironment s a => HasEnvironment (TF.Resource p s) a where
+    environment :: Lens' a (TF.Attribute (HasEnvironmentThread a b) "environment" b)
+
+instance HasEnvironment a b => HasEnvironment (TF.Resource p a) b where
+    type HasEnvironmentThread (TF.Resource p a) b =
+         HasEnvironmentThread a b
+
     environment = TF.configuration . environment
 
-class HasEnvironmentId s a | s -> a where
-    environmentId :: Lens' s (TF.Argument "environment_id" a)
+class HasEnvironmentId a b | a -> b where
+    type HasEnvironmentIdThread a b :: *
 
-instance HasEnvironmentId s a => HasEnvironmentId (TF.Resource p s) a where
+    environmentId :: Lens' a (TF.Attribute (HasEnvironmentIdThread a b) "environment_id" b)
+
+instance HasEnvironmentId a b => HasEnvironmentId (TF.Resource p a) b where
+    type HasEnvironmentIdThread (TF.Resource p a) b =
+         HasEnvironmentIdThread a b
+
     environmentId = TF.configuration . environmentId
 
-class HasFinishUpgrade s a | s -> a where
-    finishUpgrade :: Lens' s (TF.Argument "finish_upgrade" a)
+class HasFinishUpgrade a b | a -> b where
+    type HasFinishUpgradeThread a b :: *
 
-instance HasFinishUpgrade s a => HasFinishUpgrade (TF.Resource p s) a where
+    finishUpgrade :: Lens' a (TF.Attribute (HasFinishUpgradeThread a b) "finish_upgrade" b)
+
+instance HasFinishUpgrade a b => HasFinishUpgrade (TF.Resource p a) b where
+    type HasFinishUpgradeThread (TF.Resource p a) b =
+         HasFinishUpgradeThread a b
+
     finishUpgrade = TF.configuration . finishUpgrade
 
-class HasHostLabels s a | s -> a where
-    hostLabels :: Lens' s (TF.Argument "host_labels" a)
+class HasHostLabels a b | a -> b where
+    type HasHostLabelsThread a b :: *
 
-instance HasHostLabels s a => HasHostLabels (TF.Resource p s) a where
+    hostLabels :: Lens' a (TF.Attribute (HasHostLabelsThread a b) "host_labels" b)
+
+instance HasHostLabels a b => HasHostLabels (TF.Resource p a) b where
+    type HasHostLabelsThread (TF.Resource p a) b =
+         HasHostLabelsThread a b
+
     hostLabels = TF.configuration . hostLabels
 
-class HasHostname s a | s -> a where
-    hostname :: Lens' s (TF.Argument "hostname" a)
+class HasHostname a b | a -> b where
+    type HasHostnameThread a b :: *
 
-instance HasHostname s a => HasHostname (TF.Resource p s) a where
+    hostname :: Lens' a (TF.Attribute (HasHostnameThread a b) "hostname" b)
+
+instance HasHostname a b => HasHostname (TF.Resource p a) b where
+    type HasHostnameThread (TF.Resource p a) b =
+         HasHostnameThread a b
+
     hostname = TF.configuration . hostname
 
-class HasId s a | s -> a where
-    id :: Lens' s (TF.Argument "id" a)
+class HasId a b | a -> b where
+    type HasIdThread a b :: *
 
-instance HasId s a => HasId (TF.Resource p s) a where
+    id :: Lens' a (TF.Attribute (HasIdThread a b) "id" b)
+
+instance HasId a b => HasId (TF.Resource p a) b where
+    type HasIdThread (TF.Resource p a) b =
+         HasIdThread a b
+
     id = TF.configuration . id
 
-class HasKey s a | s -> a where
-    key :: Lens' s (TF.Argument "key" a)
+class HasKey a b | a -> b where
+    type HasKeyThread a b :: *
 
-instance HasKey s a => HasKey (TF.Resource p s) a where
+    key :: Lens' a (TF.Attribute (HasKeyThread a b) "key" b)
+
+instance HasKey a b => HasKey (TF.Resource p a) b where
+    type HasKeyThread (TF.Resource p a) b =
+         HasKeyThread a b
+
     key = TF.configuration . key
 
-class HasLabels s a | s -> a where
-    labels :: Lens' s (TF.Argument "labels" a)
+class HasLabels a b | a -> b where
+    type HasLabelsThread a b :: *
 
-instance HasLabels s a => HasLabels (TF.Resource p s) a where
+    labels :: Lens' a (TF.Attribute (HasLabelsThread a b) "labels" b)
+
+instance HasLabels a b => HasLabels (TF.Resource p a) b where
+    type HasLabelsThread (TF.Resource p a) b =
+         HasLabelsThread a b
+
     labels = TF.configuration . labels
 
-class HasMember s a | s -> a where
-    member :: Lens' s (TF.Argument "member" a)
+class HasMember a b | a -> b where
+    type HasMemberThread a b :: *
 
-instance HasMember s a => HasMember (TF.Resource p s) a where
+    member :: Lens' a (TF.Attribute (HasMemberThread a b) "member" b)
+
+instance HasMember a b => HasMember (TF.Resource p a) b where
+    type HasMemberThread (TF.Resource p a) b =
+         HasMemberThread a b
+
     member = TF.configuration . member
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasOrchestration s a | s -> a where
-    orchestration :: Lens' s (TF.Argument "orchestration" a)
+class HasOrchestration a b | a -> b where
+    type HasOrchestrationThread a b :: *
 
-instance HasOrchestration s a => HasOrchestration (TF.Resource p s) a where
+    orchestration :: Lens' a (TF.Attribute (HasOrchestrationThread a b) "orchestration" b)
+
+instance HasOrchestration a b => HasOrchestration (TF.Resource p a) b where
+    type HasOrchestrationThread (TF.Resource p a) b =
+         HasOrchestrationThread a b
+
     orchestration = TF.configuration . orchestration
 
-class HasProjectTemplateId s a | s -> a where
-    projectTemplateId :: Lens' s (TF.Argument "project_template_id" a)
+class HasProjectTemplateId a b | a -> b where
+    type HasProjectTemplateIdThread a b :: *
 
-instance HasProjectTemplateId s a => HasProjectTemplateId (TF.Resource p s) a where
+    projectTemplateId :: Lens' a (TF.Attribute (HasProjectTemplateIdThread a b) "project_template_id" b)
+
+instance HasProjectTemplateId a b => HasProjectTemplateId (TF.Resource p a) b where
+    type HasProjectTemplateIdThread (TF.Resource p a) b =
+         HasProjectTemplateIdThread a b
+
     projectTemplateId = TF.configuration . projectTemplateId
 
-class HasPublicValue s a | s -> a where
-    publicValue :: Lens' s (TF.Argument "public_value" a)
+class HasPublicValue a b | a -> b where
+    type HasPublicValueThread a b :: *
 
-instance HasPublicValue s a => HasPublicValue (TF.Resource p s) a where
+    publicValue :: Lens' a (TF.Attribute (HasPublicValueThread a b) "public_value" b)
+
+instance HasPublicValue a b => HasPublicValue (TF.Resource p a) b where
+    type HasPublicValueThread (TF.Resource p a) b =
+         HasPublicValueThread a b
+
     publicValue = TF.configuration . publicValue
 
-class HasRancherCompose s a | s -> a where
-    rancherCompose :: Lens' s (TF.Argument "rancher_compose" a)
+class HasRancherCompose a b | a -> b where
+    type HasRancherComposeThread a b :: *
 
-instance HasRancherCompose s a => HasRancherCompose (TF.Resource p s) a where
+    rancherCompose :: Lens' a (TF.Attribute (HasRancherComposeThread a b) "rancher_compose" b)
+
+instance HasRancherCompose a b => HasRancherCompose (TF.Resource p a) b where
+    type HasRancherComposeThread (TF.Resource p a) b =
+         HasRancherComposeThread a b
+
     rancherCompose = TF.configuration . rancherCompose
 
-class HasRegistryId s a | s -> a where
-    registryId :: Lens' s (TF.Argument "registry_id" a)
+class HasRegistryId a b | a -> b where
+    type HasRegistryIdThread a b :: *
 
-instance HasRegistryId s a => HasRegistryId (TF.Resource p s) a where
+    registryId :: Lens' a (TF.Attribute (HasRegistryIdThread a b) "registry_id" b)
+
+instance HasRegistryId a b => HasRegistryId (TF.Resource p a) b where
+    type HasRegistryIdThread (TF.Resource p a) b =
+         HasRegistryIdThread a b
+
     registryId = TF.configuration . registryId
 
-class HasScope s a | s -> a where
-    scope :: Lens' s (TF.Argument "scope" a)
+class HasScope a b | a -> b where
+    type HasScopeThread a b :: *
 
-instance HasScope s a => HasScope (TF.Resource p s) a where
+    scope :: Lens' a (TF.Attribute (HasScopeThread a b) "scope" b)
+
+instance HasScope a b => HasScope (TF.Resource p a) b where
+    type HasScopeThread (TF.Resource p a) b =
+         HasScopeThread a b
+
     scope = TF.configuration . scope
 
-class HasSecretValue s a | s -> a where
-    secretValue :: Lens' s (TF.Argument "secret_value" a)
+class HasSecretValue a b | a -> b where
+    type HasSecretValueThread a b :: *
 
-instance HasSecretValue s a => HasSecretValue (TF.Resource p s) a where
+    secretValue :: Lens' a (TF.Attribute (HasSecretValueThread a b) "secret_value" b)
+
+instance HasSecretValue a b => HasSecretValue (TF.Resource p a) b where
+    type HasSecretValueThread (TF.Resource p a) b =
+         HasSecretValueThread a b
+
     secretValue = TF.configuration . secretValue
 
-class HasServerAddress s a | s -> a where
-    serverAddress :: Lens' s (TF.Argument "server_address" a)
+class HasServerAddress a b | a -> b where
+    type HasServerAddressThread a b :: *
 
-instance HasServerAddress s a => HasServerAddress (TF.Resource p s) a where
+    serverAddress :: Lens' a (TF.Attribute (HasServerAddressThread a b) "server_address" b)
+
+instance HasServerAddress a b => HasServerAddress (TF.Resource p a) b where
+    type HasServerAddressThread (TF.Resource p a) b =
+         HasServerAddressThread a b
+
     serverAddress = TF.configuration . serverAddress
 
-class HasStartOnCreate s a | s -> a where
-    startOnCreate :: Lens' s (TF.Argument "start_on_create" a)
+class HasStartOnCreate a b | a -> b where
+    type HasStartOnCreateThread a b :: *
 
-instance HasStartOnCreate s a => HasStartOnCreate (TF.Resource p s) a where
+    startOnCreate :: Lens' a (TF.Attribute (HasStartOnCreateThread a b) "start_on_create" b)
+
+instance HasStartOnCreate a b => HasStartOnCreate (TF.Resource p a) b where
+    type HasStartOnCreateThread (TF.Resource p a) b =
+         HasStartOnCreateThread a b
+
     startOnCreate = TF.configuration . startOnCreate
 
-class HasValue s a | s -> a where
-    value :: Lens' s (TF.Argument "value" a)
+class HasValue a b | a -> b where
+    type HasValueThread a b :: *
 
-instance HasValue s a => HasValue (TF.Resource p s) a where
+    value :: Lens' a (TF.Attribute (HasValueThread a b) "value" b)
+
+instance HasValue a b => HasValue (TF.Resource p a) b where
+    type HasValueThread (TF.Resource p a) b =
+         HasValueThread a b
+
     value = TF.configuration . value
 
-class HasComputedAlgorithm s a | s -> a where
-    computedAlgorithm :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAlgorithm a b | a -> b where
+    computedAlgorithm :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAlgorithm s a => HasComputedAlgorithm (TF.Resource p s) a where
-    computedAlgorithm = TF.configuration . computedAlgorithm
+class HasComputedCertFingerprint a b | a -> b where
+    computedCertFingerprint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCertFingerprint s a | s -> a where
-    computedCertFingerprint :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCn a b | a -> b where
+    computedCn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCertFingerprint s a => HasComputedCertFingerprint (TF.Resource p s) a where
-    computedCertFingerprint = TF.configuration . computedCertFingerprint
+class HasComputedCommand a b | a -> b where
+    computedCommand :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCn s a | s -> a where
-    computedCn :: forall r. Getting r s (TF.Attribute a)
+class HasComputedExpiresAt a b | a -> b where
+    computedExpiresAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCn s a => HasComputedCn (TF.Resource p s) a where
-    computedCn = TF.configuration . computedCn
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCommand s a | s -> a where
-    computedCommand :: forall r. Getting r s (TF.Attribute a)
+class HasComputedImage a b | a -> b where
+    computedImage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCommand s a => HasComputedCommand (TF.Resource p s) a where
-    computedCommand = TF.configuration . computedCommand
+class HasComputedIssuedAt a b | a -> b where
+    computedIssuedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedExpiresAt s a | s -> a where
-    computedExpiresAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedIssuer a b | a -> b where
+    computedIssuer :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedExpiresAt s a => HasComputedExpiresAt (TF.Resource p s) a where
-    computedExpiresAt = TF.configuration . computedExpiresAt
+class HasComputedKeySize a b | a -> b where
+    computedKeySize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedRegistrationUrl a b | a -> b where
+    computedRegistrationUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedRenderedDockerCompose a b | a -> b where
+    computedRenderedDockerCompose :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedImage s a | s -> a where
-    computedImage :: forall r. Getting r s (TF.Attribute a)
+class HasComputedRenderedRancherCompose a b | a -> b where
+    computedRenderedRancherCompose :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedImage s a => HasComputedImage (TF.Resource p s) a where
-    computedImage = TF.configuration . computedImage
+class HasComputedSerialNumber a b | a -> b where
+    computedSerialNumber :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIssuedAt s a | s -> a where
-    computedIssuedAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSubjectAlternativeNames a b | a -> b where
+    computedSubjectAlternativeNames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedIssuedAt s a => HasComputedIssuedAt (TF.Resource p s) a where
-    computedIssuedAt = TF.configuration . computedIssuedAt
+class HasComputedToken a b | a -> b where
+    computedToken :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIssuer s a | s -> a where
-    computedIssuer :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedIssuer s a => HasComputedIssuer (TF.Resource p s) a where
-    computedIssuer = TF.configuration . computedIssuer
-
-class HasComputedKeySize s a | s -> a where
-    computedKeySize :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedKeySize s a => HasComputedKeySize (TF.Resource p s) a where
-    computedKeySize = TF.configuration . computedKeySize
-
-class HasComputedRegistrationUrl s a | s -> a where
-    computedRegistrationUrl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRegistrationUrl s a => HasComputedRegistrationUrl (TF.Resource p s) a where
-    computedRegistrationUrl = TF.configuration . computedRegistrationUrl
-
-class HasComputedRenderedDockerCompose s a | s -> a where
-    computedRenderedDockerCompose :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRenderedDockerCompose s a => HasComputedRenderedDockerCompose (TF.Resource p s) a where
-    computedRenderedDockerCompose = TF.configuration . computedRenderedDockerCompose
-
-class HasComputedRenderedRancherCompose s a | s -> a where
-    computedRenderedRancherCompose :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRenderedRancherCompose s a => HasComputedRenderedRancherCompose (TF.Resource p s) a where
-    computedRenderedRancherCompose = TF.configuration . computedRenderedRancherCompose
-
-class HasComputedSerialNumber s a | s -> a where
-    computedSerialNumber :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSerialNumber s a => HasComputedSerialNumber (TF.Resource p s) a where
-    computedSerialNumber = TF.configuration . computedSerialNumber
-
-class HasComputedSubjectAlternativeNames s a | s -> a where
-    computedSubjectAlternativeNames :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSubjectAlternativeNames s a => HasComputedSubjectAlternativeNames (TF.Resource p s) a where
-    computedSubjectAlternativeNames = TF.configuration . computedSubjectAlternativeNames
-
-class HasComputedToken s a | s -> a where
-    computedToken :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedToken s a => HasComputedToken (TF.Resource p s) a where
-    computedToken = TF.configuration . computedToken
-
-class HasComputedVersion s a | s -> a where
-    computedVersion :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVersion s a => HasComputedVersion (TF.Resource p s) a where
-    computedVersion = TF.configuration . computedVersion
+class HasComputedVersion a b | a -> b where
+    computedVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

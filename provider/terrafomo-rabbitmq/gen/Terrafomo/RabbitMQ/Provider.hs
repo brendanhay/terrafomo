@@ -41,12 +41,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.RabbitMQ.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.RabbitMQ.Types as TF
 
 {- | RabbitMQ Terraform provider.
 
@@ -56,15 +56,15 @@ a RabbitMQ server. Use the navigation to the left to read about the
 available resources.
 -}
 data RabbitMQ = RabbitMQ {
-      _cacert_file :: !(TF.Argument "cacert_file" Text)
+      _cacert_file :: !(Maybe Text)
     {- ^ (Optional) The path to a custom CA / intermediate certificate. -}
-    , _endpoint    :: !(TF.Argument "endpoint" Text)
+    , _endpoint    :: !(Maybe Text)
     {- ^ (Required) The HTTP URL of the management plugin on the RabbitMQ server. The RabbitMQ management plugin must be enabled in order to use this provder. Note : This is not the IP address or hostname of the RabbitMQ server that you would use to access RabbitMQ directly. -}
-    , _insecure    :: !(TF.Argument "insecure" Text)
+    , _insecure    :: !(Maybe Text)
     {- ^ (Optional) Trust self-signed certificates. -}
-    , _password    :: !(TF.Argument "password" Text)
+    , _password    :: !(Maybe Text)
     {- ^ (Optional) Password for the given user. -}
-    , _username    :: !(TF.Argument "username" Text)
+    , _username    :: !(Maybe Text)
     {- ^ (Required) Username to use to authenticate with the server. -}
     } deriving (Show, Eq, Generic)
 
@@ -72,43 +72,45 @@ instance Hashable RabbitMQ
 
 instance TF.ToHCL RabbitMQ where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy RabbitMQ))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_cacert_file x)
-            , TF.argument (_endpoint x)
-            , TF.argument (_insecure x)
-            , TF.argument (_password x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (RabbitMQ))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "cacert_file" <$> _cacert_file x
+            , TF.assign "endpoint" <$> _endpoint x
+            , TF.assign "insecure" <$> _insecure x
+            , TF.assign "password" <$> _password x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyRabbitMQ :: RabbitMQ
-emptyRabbitMQ = RabbitMQ {
-        _cacert_file = TF.Nil
-      , _endpoint = TF.Nil
-      , _insecure = TF.Nil
-      , _password = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider RabbitMQ where
     type ProviderType RabbitMQ = "rabbitmq"
 
-cacertFile :: Lens' RabbitMQ (TF.Argument "cacert_file" Text)
+emptyRabbitMQ :: RabbitMQ
+emptyRabbitMQ = RabbitMQ {
+        _cacert_file = Nothing
+      , _endpoint = Nothing
+      , _insecure = Nothing
+      , _password = Nothing
+      , _username = Nothing
+    }
+
+cacertFile :: Lens' RabbitMQ (Maybe Text)
 cacertFile =
     lens _cacert_file (\s a -> s { _cacert_file = a })
 
-endpoint :: Lens' RabbitMQ (TF.Argument "endpoint" Text)
+endpoint :: Lens' RabbitMQ (Maybe Text)
 endpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-insecure :: Lens' RabbitMQ (TF.Argument "insecure" Text)
+insecure :: Lens' RabbitMQ (Maybe Text)
 insecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-password :: Lens' RabbitMQ (TF.Argument "password" Text)
+password :: Lens' RabbitMQ (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' RabbitMQ (TF.Argument "username" Text)
+username :: Lens' RabbitMQ (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

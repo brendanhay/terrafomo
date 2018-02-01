@@ -41,12 +41,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Spotinst.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.Spotinst.Types as TF
 
 {- | Spotinst Terraform provider.
 
@@ -56,15 +56,15 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Spotinst = Spotinst {
-      _client_id     :: !(TF.Argument "client_id" Text)
+      _client_id     :: !(Maybe Text)
     {- ^ (Optional; Required if not using @token@ ) The OAuth client ID associated with the username. It can be sourced from the @SPOTINST_CLIENT_ID@ environment variable. -}
-    , _client_secret :: !(TF.Argument "client_secret" Text)
+    , _client_secret :: !(Maybe Text)
     {- ^ (Optional; Required if not using @token@ ) The OAuth client secret associated with the username. It can be sourced from the @SPOTINST_CLIENT_SECRET@ environment variable. -}
-    , _email         :: !(TF.Argument "email" Text)
+    , _email         :: !(Maybe Text)
     {- ^ (Required) The email registered in Spotinst. It must be provided, but it can also be sourced from the @SPOTINST_EMAIL@ environment variable. -}
-    , _password      :: !(TF.Argument "password" Text)
+    , _password      :: !(Maybe Text)
     {- ^ (Optional; Required if not using @token@ ) The password associated with the username. It can be sourced from the @SPOTINST_PASSWORD@ environment variable. -}
-    , _token         :: !(TF.Argument "token" Text)
+    , _token         :: !(Maybe Text)
     {- ^ (Optional; Required if not using @password@ ) A Personal API Access Token issued by Spotinst. It can be sourced from the @SPOTINST_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -72,43 +72,45 @@ instance Hashable Spotinst
 
 instance TF.ToHCL Spotinst where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Spotinst))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_client_id x)
-            , TF.argument (_client_secret x)
-            , TF.argument (_email x)
-            , TF.argument (_password x)
-            , TF.argument (_token x)
+        let typ = TF.providerType (Proxy :: Proxy (Spotinst))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "client_id" <$> _client_id x
+            , TF.assign "client_secret" <$> _client_secret x
+            , TF.assign "email" <$> _email x
+            , TF.assign "password" <$> _password x
+            , TF.assign "token" <$> _token x
             ]
-
-emptySpotinst :: Spotinst
-emptySpotinst = Spotinst {
-        _client_id = TF.Nil
-      , _client_secret = TF.Nil
-      , _email = TF.Nil
-      , _password = TF.Nil
-      , _token = TF.Nil
-    }
 
 instance TF.IsProvider Spotinst where
     type ProviderType Spotinst = "spotinst"
 
-clientId :: Lens' Spotinst (TF.Argument "client_id" Text)
+emptySpotinst :: Spotinst
+emptySpotinst = Spotinst {
+        _client_id = Nothing
+      , _client_secret = Nothing
+      , _email = Nothing
+      , _password = Nothing
+      , _token = Nothing
+    }
+
+clientId :: Lens' Spotinst (Maybe Text)
 clientId =
     lens _client_id (\s a -> s { _client_id = a })
 
-clientSecret :: Lens' Spotinst (TF.Argument "client_secret" Text)
+clientSecret :: Lens' Spotinst (Maybe Text)
 clientSecret =
     lens _client_secret (\s a -> s { _client_secret = a })
 
-email :: Lens' Spotinst (TF.Argument "email" Text)
+email :: Lens' Spotinst (Maybe Text)
 email =
     lens _email (\s a -> s { _email = a })
 
-password :: Lens' Spotinst (TF.Argument "password" Text)
+password :: Lens' Spotinst (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-token :: Lens' Spotinst (TF.Argument "token" Text)
+token :: Lens' Spotinst (Maybe Text)
 token =
     lens _token (\s a -> s { _token = a })

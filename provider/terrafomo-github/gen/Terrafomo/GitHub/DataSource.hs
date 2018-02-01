@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -70,309 +71,255 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.GitHub.Provider   as TF
-import qualified Terrafomo.GitHub.Types      as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.GitHub.Provider as TF
+import qualified Terrafomo.GitHub.Types    as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.IP              as TF
+import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Resource        as TF
 
 {- | The @github_team@ GitHub datasource.
 
 Use this data source to retrieve information about a Github team.
 -}
-data TeamDataSource = TeamDataSource {
-      _slug :: !(TF.Argument "slug" Text)
+data TeamDataSource s = TeamDataSource {
+      _slug :: !(TF.Attribute s "slug" Text)
     {- ^ (Required) The team slug. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamDataSource where
+instance TF.ToHCL (TeamDataSource s) where
     toHCL TeamDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _slug
+        [ TF.attribute _slug
         ]
 
-instance HasSlug TeamDataSource Text where
+instance HasSlug (TeamDataSource s) Text where
+    type HasSlugThread (TeamDataSource s) Text = s
+
     slug =
-        lens (_slug :: TeamDataSource -> TF.Argument "slug" Text)
-             (\s a -> s { _slug = a } :: TeamDataSource)
+        lens (_slug :: TeamDataSource s -> TF.Attribute s "slug" Text)
+             (\s a -> s { _slug = a } :: TeamDataSource s)
 
-instance HasComputedDescription TeamDataSource Text where
+instance HasComputedDescription (TeamDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedId TeamDataSource Text where
+instance HasComputedId (TeamDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedMembers TeamDataSource Text where
+instance HasComputedMembers (TeamDataSource s) Text where
     computedMembers =
-        to (\_  -> TF.Compute "members")
+        to (\x -> TF.Computed (TF.referenceKey x) "members")
 
-instance HasComputedName TeamDataSource Text where
+instance HasComputedName (TeamDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedPermission TeamDataSource Text where
+instance HasComputedPermission (TeamDataSource s) Text where
     computedPermission =
-        to (\_  -> TF.Compute "permission")
+        to (\x -> TF.Computed (TF.referenceKey x) "permission")
 
-instance HasComputedPrivacy TeamDataSource Text where
+instance HasComputedPrivacy (TeamDataSource s) Text where
     computedPrivacy =
-        to (\_  -> TF.Compute "privacy")
+        to (\x -> TF.Computed (TF.referenceKey x) "privacy")
 
-teamDataSource :: TF.DataSource TF.GitHub TeamDataSource
+teamDataSource :: TF.DataSource TF.GitHub (TeamDataSource s)
 teamDataSource =
     TF.newDataSource "github_team" $
         TeamDataSource {
-            _slug = TF.Nil
+              _slug = TF.Nil
             }
 
 {- | The @github_user@ GitHub datasource.
 
 Use this data source to retrieve information about a Github user.
 -}
-data UserDataSource = UserDataSource {
-      _username :: !(TF.Argument "username" Text)
+data UserDataSource s = UserDataSource {
+      _username :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The username. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserDataSource where
+instance TF.ToHCL (UserDataSource s) where
     toHCL UserDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _username
+        [ TF.attribute _username
         ]
 
-instance HasUsername UserDataSource Text where
+instance HasUsername (UserDataSource s) Text where
+    type HasUsernameThread (UserDataSource s) Text = s
+
     username =
-        lens (_username :: UserDataSource -> TF.Argument "username" Text)
-             (\s a -> s { _username = a } :: UserDataSource)
+        lens (_username :: UserDataSource s -> TF.Attribute s "username" Text)
+             (\s a -> s { _username = a } :: UserDataSource s)
 
-instance HasComputedAvatarUrl UserDataSource Text where
+instance HasComputedAvatarUrl (UserDataSource s) Text where
     computedAvatarUrl =
-        to (\_  -> TF.Compute "avatar_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "avatar_url")
 
-instance HasComputedBio UserDataSource Text where
+instance HasComputedBio (UserDataSource s) Text where
     computedBio =
-        to (\_  -> TF.Compute "bio")
+        to (\x -> TF.Computed (TF.referenceKey x) "bio")
 
-instance HasComputedBlog UserDataSource Text where
+instance HasComputedBlog (UserDataSource s) Text where
     computedBlog =
-        to (\_  -> TF.Compute "blog")
+        to (\x -> TF.Computed (TF.referenceKey x) "blog")
 
-instance HasComputedCompany UserDataSource Text where
+instance HasComputedCompany (UserDataSource s) Text where
     computedCompany =
-        to (\_  -> TF.Compute "company")
+        to (\x -> TF.Computed (TF.referenceKey x) "company")
 
-instance HasComputedCreatedAt UserDataSource Text where
+instance HasComputedCreatedAt (UserDataSource s) Text where
     computedCreatedAt =
-        to (\_  -> TF.Compute "created_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
 
-instance HasComputedEmail UserDataSource Text where
+instance HasComputedEmail (UserDataSource s) Text where
     computedEmail =
-        to (\_  -> TF.Compute "email")
+        to (\x -> TF.Computed (TF.referenceKey x) "email")
 
-instance HasComputedFollowers UserDataSource Text where
+instance HasComputedFollowers (UserDataSource s) Text where
     computedFollowers =
-        to (\_  -> TF.Compute "followers")
+        to (\x -> TF.Computed (TF.referenceKey x) "followers")
 
-instance HasComputedFollowing UserDataSource Text where
+instance HasComputedFollowing (UserDataSource s) Text where
     computedFollowing =
-        to (\_  -> TF.Compute "following")
+        to (\x -> TF.Computed (TF.referenceKey x) "following")
 
-instance HasComputedGpgKeys UserDataSource Text where
+instance HasComputedGpgKeys (UserDataSource s) Text where
     computedGpgKeys =
-        to (\_  -> TF.Compute "gpg_keys")
+        to (\x -> TF.Computed (TF.referenceKey x) "gpg_keys")
 
-instance HasComputedGravatarId UserDataSource Text where
+instance HasComputedGravatarId (UserDataSource s) Text where
     computedGravatarId =
-        to (\_  -> TF.Compute "gravatar_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "gravatar_id")
 
-instance HasComputedLocation UserDataSource Text where
+instance HasComputedLocation (UserDataSource s) Text where
     computedLocation =
-        to (\_  -> TF.Compute "location")
+        to (\x -> TF.Computed (TF.referenceKey x) "location")
 
-instance HasComputedLogin UserDataSource Text where
+instance HasComputedLogin (UserDataSource s) Text where
     computedLogin =
-        to (\_  -> TF.Compute "login")
+        to (\x -> TF.Computed (TF.referenceKey x) "login")
 
-instance HasComputedName UserDataSource Text where
+instance HasComputedName (UserDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedPublicGists UserDataSource Text where
+instance HasComputedPublicGists (UserDataSource s) Text where
     computedPublicGists =
-        to (\_  -> TF.Compute "public_gists")
+        to (\x -> TF.Computed (TF.referenceKey x) "public_gists")
 
-instance HasComputedPublicRepos UserDataSource Text where
+instance HasComputedPublicRepos (UserDataSource s) Text where
     computedPublicRepos =
-        to (\_  -> TF.Compute "public_repos")
+        to (\x -> TF.Computed (TF.referenceKey x) "public_repos")
 
-instance HasComputedSiteAdmin UserDataSource Text where
+instance HasComputedSiteAdmin (UserDataSource s) Text where
     computedSiteAdmin =
-        to (\_  -> TF.Compute "site_admin")
+        to (\x -> TF.Computed (TF.referenceKey x) "site_admin")
 
-instance HasComputedSshKeys UserDataSource Text where
+instance HasComputedSshKeys (UserDataSource s) Text where
     computedSshKeys =
-        to (\_  -> TF.Compute "ssh_keys")
+        to (\x -> TF.Computed (TF.referenceKey x) "ssh_keys")
 
-instance HasComputedUpdatedAt UserDataSource Text where
+instance HasComputedUpdatedAt (UserDataSource s) Text where
     computedUpdatedAt =
-        to (\_  -> TF.Compute "updated_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")
 
-userDataSource :: TF.DataSource TF.GitHub UserDataSource
+userDataSource :: TF.DataSource TF.GitHub (UserDataSource s)
 userDataSource =
     TF.newDataSource "github_user" $
         UserDataSource {
-            _username = TF.Nil
+              _username = TF.Nil
             }
 
-class HasSlug s a | s -> a where
-    slug :: Lens' s (TF.Argument "slug" a)
+class HasSlug a b | a -> b where
+    type HasSlugThread a b :: *
 
-instance HasSlug s a => HasSlug (TF.DataSource p s) a where
+    slug :: Lens' a (TF.Attribute (HasSlugThread a b) "slug" b)
+
+instance HasSlug a b => HasSlug (TF.DataSource p a) b where
+    type HasSlugThread (TF.DataSource p a) b =
+         HasSlugThread a b
+
     slug = TF.configuration . slug
 
-class HasUsername s a | s -> a where
-    username :: Lens' s (TF.Argument "username" a)
+class HasUsername a b | a -> b where
+    type HasUsernameThread a b :: *
 
-instance HasUsername s a => HasUsername (TF.DataSource p s) a where
+    username :: Lens' a (TF.Attribute (HasUsernameThread a b) "username" b)
+
+instance HasUsername a b => HasUsername (TF.DataSource p a) b where
+    type HasUsernameThread (TF.DataSource p a) b =
+         HasUsernameThread a b
+
     username = TF.configuration . username
 
-class HasComputedAvatarUrl s a | s -> a where
-    computedAvatarUrl :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAvatarUrl a b | a -> b where
+    computedAvatarUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAvatarUrl s a => HasComputedAvatarUrl (TF.DataSource p s) a where
-    computedAvatarUrl = TF.configuration . computedAvatarUrl
+class HasComputedBio a b | a -> b where
+    computedBio :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedBio s a | s -> a where
-    computedBio :: forall r. Getting r s (TF.Attribute a)
+class HasComputedBlog a b | a -> b where
+    computedBlog :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedBio s a => HasComputedBio (TF.DataSource p s) a where
-    computedBio = TF.configuration . computedBio
+class HasComputedCompany a b | a -> b where
+    computedCompany :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedBlog s a | s -> a where
-    computedBlog :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCreatedAt a b | a -> b where
+    computedCreatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedBlog s a => HasComputedBlog (TF.DataSource p s) a where
-    computedBlog = TF.configuration . computedBlog
+class HasComputedDescription a b | a -> b where
+    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCompany s a | s -> a where
-    computedCompany :: forall r. Getting r s (TF.Attribute a)
+class HasComputedEmail a b | a -> b where
+    computedEmail :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCompany s a => HasComputedCompany (TF.DataSource p s) a where
-    computedCompany = TF.configuration . computedCompany
+class HasComputedFollowers a b | a -> b where
+    computedFollowers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCreatedAt s a | s -> a where
-    computedCreatedAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedFollowing a b | a -> b where
+    computedFollowing :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCreatedAt s a => HasComputedCreatedAt (TF.DataSource p s) a where
-    computedCreatedAt = TF.configuration . computedCreatedAt
+class HasComputedGpgKeys a b | a -> b where
+    computedGpgKeys :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDescription s a | s -> a where
-    computedDescription :: forall r. Getting r s (TF.Attribute a)
+class HasComputedGravatarId a b | a -> b where
+    computedGravatarId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
-    computedDescription = TF.configuration . computedDescription
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedEmail s a | s -> a where
-    computedEmail :: forall r. Getting r s (TF.Attribute a)
+class HasComputedLocation a b | a -> b where
+    computedLocation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedEmail s a => HasComputedEmail (TF.DataSource p s) a where
-    computedEmail = TF.configuration . computedEmail
+class HasComputedLogin a b | a -> b where
+    computedLogin :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedFollowers s a | s -> a where
-    computedFollowers :: forall r. Getting r s (TF.Attribute a)
+class HasComputedMembers a b | a -> b where
+    computedMembers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFollowers s a => HasComputedFollowers (TF.DataSource p s) a where
-    computedFollowers = TF.configuration . computedFollowers
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedFollowing s a | s -> a where
-    computedFollowing :: forall r. Getting r s (TF.Attribute a)
+class HasComputedPermission a b | a -> b where
+    computedPermission :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFollowing s a => HasComputedFollowing (TF.DataSource p s) a where
-    computedFollowing = TF.configuration . computedFollowing
+class HasComputedPrivacy a b | a -> b where
+    computedPrivacy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedGpgKeys s a | s -> a where
-    computedGpgKeys :: forall r. Getting r s (TF.Attribute a)
+class HasComputedPublicGists a b | a -> b where
+    computedPublicGists :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedGpgKeys s a => HasComputedGpgKeys (TF.DataSource p s) a where
-    computedGpgKeys = TF.configuration . computedGpgKeys
+class HasComputedPublicRepos a b | a -> b where
+    computedPublicRepos :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedGravatarId s a | s -> a where
-    computedGravatarId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSiteAdmin a b | a -> b where
+    computedSiteAdmin :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedGravatarId s a => HasComputedGravatarId (TF.DataSource p s) a where
-    computedGravatarId = TF.configuration . computedGravatarId
+class HasComputedSshKeys a b | a -> b where
+    computedSshKeys :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedLocation s a | s -> a where
-    computedLocation :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLocation s a => HasComputedLocation (TF.DataSource p s) a where
-    computedLocation = TF.configuration . computedLocation
-
-class HasComputedLogin s a | s -> a where
-    computedLogin :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLogin s a => HasComputedLogin (TF.DataSource p s) a where
-    computedLogin = TF.configuration . computedLogin
-
-class HasComputedMembers s a | s -> a where
-    computedMembers :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedMembers s a => HasComputedMembers (TF.DataSource p s) a where
-    computedMembers = TF.configuration . computedMembers
-
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedPermission s a | s -> a where
-    computedPermission :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPermission s a => HasComputedPermission (TF.DataSource p s) a where
-    computedPermission = TF.configuration . computedPermission
-
-class HasComputedPrivacy s a | s -> a where
-    computedPrivacy :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPrivacy s a => HasComputedPrivacy (TF.DataSource p s) a where
-    computedPrivacy = TF.configuration . computedPrivacy
-
-class HasComputedPublicGists s a | s -> a where
-    computedPublicGists :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPublicGists s a => HasComputedPublicGists (TF.DataSource p s) a where
-    computedPublicGists = TF.configuration . computedPublicGists
-
-class HasComputedPublicRepos s a | s -> a where
-    computedPublicRepos :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPublicRepos s a => HasComputedPublicRepos (TF.DataSource p s) a where
-    computedPublicRepos = TF.configuration . computedPublicRepos
-
-class HasComputedSiteAdmin s a | s -> a where
-    computedSiteAdmin :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSiteAdmin s a => HasComputedSiteAdmin (TF.DataSource p s) a where
-    computedSiteAdmin = TF.configuration . computedSiteAdmin
-
-class HasComputedSshKeys s a | s -> a where
-    computedSshKeys :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSshKeys s a => HasComputedSshKeys (TF.DataSource p s) a where
-    computedSshKeys = TF.configuration . computedSshKeys
-
-class HasComputedUpdatedAt s a | s -> a where
-    computedUpdatedAt :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUpdatedAt s a => HasComputedUpdatedAt (TF.DataSource p s) a where
-    computedUpdatedAt = TF.configuration . computedUpdatedAt
+class HasComputedUpdatedAt a b | a -> b where
+    computedUpdatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -49,63 +50,72 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.DataSource            as TF
+import qualified Terrafomo.HCL                   as TF
+import qualified Terrafomo.IP                    as TF
 import qualified Terrafomo.LogicMonitor.Provider as TF
 import qualified Terrafomo.LogicMonitor.Types    as TF
-import qualified Terrafomo.Syntax.DataSource     as TF
-import qualified Terrafomo.Syntax.HCL            as TF
-import qualified Terrafomo.Syntax.IP             as TF
-import qualified Terrafomo.Syntax.Meta           as TF (configuration)
-import qualified Terrafomo.Syntax.Resource       as TF
-import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.Meta                  as TF (configuration)
+import qualified Terrafomo.Name                  as TF
+import qualified Terrafomo.Resource              as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
 Use this datasource to get the ID of an available collector.
 -}
-data CollectorsDataSource = CollectorsDataSource {
-      _filters     :: !(TF.Argument "filters" Text)
+data CollectorsDataSource s = CollectorsDataSource {
+      _filters     :: !(TF.Attribute s "filters" Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _most_recent :: !(TF.Argument "most_recent" Text)
+    , _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) The most recent collector installed that is online -}
-    , _offset      :: !(TF.Argument "offset" Text)
+    , _offset      :: !(TF.Attribute s "offset" Text)
     {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size        :: !(TF.Argument "size" Text)
+    , _size        :: !(TF.Attribute s "size" Text)
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CollectorsDataSource where
+instance TF.ToHCL (CollectorsDataSource s) where
     toHCL CollectorsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _filters
-        , TF.argument _most_recent
-        , TF.argument _offset
-        , TF.argument _size
+        [ TF.attribute _filters
+        , TF.attribute _most_recent
+        , TF.attribute _offset
+        , TF.attribute _size
         ]
 
-instance HasFilters CollectorsDataSource Text where
+instance HasFilters (CollectorsDataSource s) Text where
+    type HasFiltersThread (CollectorsDataSource s) Text = s
+
     filters =
-        lens (_filters :: CollectorsDataSource -> TF.Argument "filters" Text)
-             (\s a -> s { _filters = a } :: CollectorsDataSource)
+        lens (_filters :: CollectorsDataSource s -> TF.Attribute s "filters" Text)
+             (\s a -> s { _filters = a } :: CollectorsDataSource s)
 
-instance HasMostRecent CollectorsDataSource Text where
+instance HasMostRecent (CollectorsDataSource s) Text where
+    type HasMostRecentThread (CollectorsDataSource s) Text = s
+
     mostRecent =
-        lens (_most_recent :: CollectorsDataSource -> TF.Argument "most_recent" Text)
-             (\s a -> s { _most_recent = a } :: CollectorsDataSource)
+        lens (_most_recent :: CollectorsDataSource s -> TF.Attribute s "most_recent" Text)
+             (\s a -> s { _most_recent = a } :: CollectorsDataSource s)
 
-instance HasOffset CollectorsDataSource Text where
+instance HasOffset (CollectorsDataSource s) Text where
+    type HasOffsetThread (CollectorsDataSource s) Text = s
+
     offset =
-        lens (_offset :: CollectorsDataSource -> TF.Argument "offset" Text)
-             (\s a -> s { _offset = a } :: CollectorsDataSource)
+        lens (_offset :: CollectorsDataSource s -> TF.Attribute s "offset" Text)
+             (\s a -> s { _offset = a } :: CollectorsDataSource s)
 
-instance HasSize CollectorsDataSource Text where
+instance HasSize (CollectorsDataSource s) Text where
+    type HasSizeThread (CollectorsDataSource s) Text = s
+
     size =
-        lens (_size :: CollectorsDataSource -> TF.Argument "size" Text)
-             (\s a -> s { _size = a } :: CollectorsDataSource)
+        lens (_size :: CollectorsDataSource s -> TF.Attribute s "size" Text)
+             (\s a -> s { _size = a } :: CollectorsDataSource s)
 
-collectorsDataSource :: TF.DataSource TF.LogicMonitor CollectorsDataSource
+collectorsDataSource :: TF.DataSource TF.LogicMonitor (CollectorsDataSource s)
 collectorsDataSource =
     TF.newDataSource "logicmonitor_collectors" $
         CollectorsDataSource {
-            _filters = TF.Nil
+              _filters = TF.Nil
             , _most_recent = TF.Nil
             , _offset = TF.Nil
             , _size = TF.Nil
@@ -115,66 +125,92 @@ collectorsDataSource =
 
 Use this datasource to get the ID of an available device group.
 -}
-data DeviceGroupDataSource = DeviceGroupDataSource {
-      _filters :: !(TF.Argument "filters" Text)
+data DeviceGroupDataSource s = DeviceGroupDataSource {
+      _filters :: !(TF.Attribute s "filters" Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _offset  :: !(TF.Argument "offset" Text)
+    , _offset  :: !(TF.Attribute s "offset" Text)
     {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size    :: !(TF.Argument "size" Text)
+    , _size    :: !(TF.Attribute s "size" Text)
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DeviceGroupDataSource where
+instance TF.ToHCL (DeviceGroupDataSource s) where
     toHCL DeviceGroupDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _filters
-        , TF.argument _offset
-        , TF.argument _size
+        [ TF.attribute _filters
+        , TF.attribute _offset
+        , TF.attribute _size
         ]
 
-instance HasFilters DeviceGroupDataSource Text where
+instance HasFilters (DeviceGroupDataSource s) Text where
+    type HasFiltersThread (DeviceGroupDataSource s) Text = s
+
     filters =
-        lens (_filters :: DeviceGroupDataSource -> TF.Argument "filters" Text)
-             (\s a -> s { _filters = a } :: DeviceGroupDataSource)
+        lens (_filters :: DeviceGroupDataSource s -> TF.Attribute s "filters" Text)
+             (\s a -> s { _filters = a } :: DeviceGroupDataSource s)
 
-instance HasOffset DeviceGroupDataSource Text where
+instance HasOffset (DeviceGroupDataSource s) Text where
+    type HasOffsetThread (DeviceGroupDataSource s) Text = s
+
     offset =
-        lens (_offset :: DeviceGroupDataSource -> TF.Argument "offset" Text)
-             (\s a -> s { _offset = a } :: DeviceGroupDataSource)
+        lens (_offset :: DeviceGroupDataSource s -> TF.Attribute s "offset" Text)
+             (\s a -> s { _offset = a } :: DeviceGroupDataSource s)
 
-instance HasSize DeviceGroupDataSource Text where
+instance HasSize (DeviceGroupDataSource s) Text where
+    type HasSizeThread (DeviceGroupDataSource s) Text = s
+
     size =
-        lens (_size :: DeviceGroupDataSource -> TF.Argument "size" Text)
-             (\s a -> s { _size = a } :: DeviceGroupDataSource)
+        lens (_size :: DeviceGroupDataSource s -> TF.Attribute s "size" Text)
+             (\s a -> s { _size = a } :: DeviceGroupDataSource s)
 
-deviceGroupDataSource :: TF.DataSource TF.LogicMonitor DeviceGroupDataSource
+deviceGroupDataSource :: TF.DataSource TF.LogicMonitor (DeviceGroupDataSource s)
 deviceGroupDataSource =
     TF.newDataSource "logicmonitor_device_group" $
         DeviceGroupDataSource {
-            _filters = TF.Nil
+              _filters = TF.Nil
             , _offset = TF.Nil
             , _size = TF.Nil
             }
 
-class HasFilters s a | s -> a where
-    filters :: Lens' s (TF.Argument "filters" a)
+class HasFilters a b | a -> b where
+    type HasFiltersThread a b :: *
 
-instance HasFilters s a => HasFilters (TF.DataSource p s) a where
+    filters :: Lens' a (TF.Attribute (HasFiltersThread a b) "filters" b)
+
+instance HasFilters a b => HasFilters (TF.DataSource p a) b where
+    type HasFiltersThread (TF.DataSource p a) b =
+         HasFiltersThread a b
+
     filters = TF.configuration . filters
 
-class HasMostRecent s a | s -> a where
-    mostRecent :: Lens' s (TF.Argument "most_recent" a)
+class HasMostRecent a b | a -> b where
+    type HasMostRecentThread a b :: *
 
-instance HasMostRecent s a => HasMostRecent (TF.DataSource p s) a where
+    mostRecent :: Lens' a (TF.Attribute (HasMostRecentThread a b) "most_recent" b)
+
+instance HasMostRecent a b => HasMostRecent (TF.DataSource p a) b where
+    type HasMostRecentThread (TF.DataSource p a) b =
+         HasMostRecentThread a b
+
     mostRecent = TF.configuration . mostRecent
 
-class HasOffset s a | s -> a where
-    offset :: Lens' s (TF.Argument "offset" a)
+class HasOffset a b | a -> b where
+    type HasOffsetThread a b :: *
 
-instance HasOffset s a => HasOffset (TF.DataSource p s) a where
+    offset :: Lens' a (TF.Attribute (HasOffsetThread a b) "offset" b)
+
+instance HasOffset a b => HasOffset (TF.DataSource p a) b where
+    type HasOffsetThread (TF.DataSource p a) b =
+         HasOffsetThread a b
+
     offset = TF.configuration . offset
 
-class HasSize s a | s -> a where
-    size :: Lens' s (TF.Argument "size" a)
+class HasSize a b | a -> b where
+    type HasSizeThread a b :: *
 
-instance HasSize s a => HasSize (TF.DataSource p s) a where
+    size :: Lens' a (TF.Attribute (HasSizeThread a b) "size" b)
+
+instance HasSize a b => HasSize (TF.DataSource p a) b where
+    type HasSizeThread (TF.DataSource p a) b =
+         HasSizeThread a b
+
     size = TF.configuration . size

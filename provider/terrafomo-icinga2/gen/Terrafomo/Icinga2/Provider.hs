@@ -40,12 +40,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Icinga2.Types   as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Icinga2.Types as TF
+import qualified Terrafomo.IP            as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
 
 {- | Icinga2 Terraform provider.
 
@@ -55,13 +55,13 @@ be configured with the API URL of the Icinga2 server and credentials for an
 API user with the appropriate permissions.
 -}
 data Icinga2 = Icinga2 {
-      _api_password :: !(TF.Argument "api_password" Text)
+      _api_password             :: !(Maybe Text)
     {- ^ (Required) The password to use to authenticate to the Icinga2 server. May alternatively be set via the @ICINGA2_API_PASSWORD@ environment variable. -}
-    , _api_url :: !(TF.Argument "api_url" Text)
+    , _api_url                  :: !(Maybe Text)
     {- ^ (Required) The root API URL of an Icinga2 server. May alternatively be set via the @ICINGA2_API_URL@ environment variable. -}
-    , _api_user :: !(TF.Argument "api_user" Text)
+    , _api_user                 :: !(Maybe Text)
     {- ^ (Required) The API username to use to authenticate to the Icinga2 server. May alternatively be set via the @ICINGA2_API_USER@ environment variable. -}
-    , _insecure_skip_tls_verify :: !(TF.Argument "insecure_skip_tls_verify" Text)
+    , _insecure_skip_tls_verify :: !(Maybe Text)
     {- ^ - (optional) Defaults to false. If set to true, verification of the Icinga2 server's SSL certificate is disabled. This is a security risk and should be avoided. May alternatively be set via the @ICINGA2_INSECURE_SKIP_TLS_VERIFY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -69,37 +69,39 @@ instance Hashable Icinga2
 
 instance TF.ToHCL Icinga2 where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Icinga2))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_password x)
-            , TF.argument (_api_url x)
-            , TF.argument (_api_user x)
-            , TF.argument (_insecure_skip_tls_verify x)
+        let typ = TF.providerType (Proxy :: Proxy (Icinga2))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_password" <$> _api_password x
+            , TF.assign "api_url" <$> _api_url x
+            , TF.assign "api_user" <$> _api_user x
+            , TF.assign "insecure_skip_tls_verify" <$> _insecure_skip_tls_verify x
             ]
-
-emptyIcinga2 :: Icinga2
-emptyIcinga2 = Icinga2 {
-        _api_password = TF.Nil
-      , _api_url = TF.Nil
-      , _api_user = TF.Nil
-      , _insecure_skip_tls_verify = TF.Nil
-    }
 
 instance TF.IsProvider Icinga2 where
     type ProviderType Icinga2 = "icinga2"
 
-apiPassword :: Lens' Icinga2 (TF.Argument "api_password" Text)
+emptyIcinga2 :: Icinga2
+emptyIcinga2 = Icinga2 {
+        _api_password = Nothing
+      , _api_url = Nothing
+      , _api_user = Nothing
+      , _insecure_skip_tls_verify = Nothing
+    }
+
+apiPassword :: Lens' Icinga2 (Maybe Text)
 apiPassword =
     lens _api_password (\s a -> s { _api_password = a })
 
-apiUrl :: Lens' Icinga2 (TF.Argument "api_url" Text)
+apiUrl :: Lens' Icinga2 (Maybe Text)
 apiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-apiUser :: Lens' Icinga2 (TF.Argument "api_user" Text)
+apiUser :: Lens' Icinga2 (Maybe Text)
 apiUser =
     lens _api_user (\s a -> s { _api_user = a })
 
-insecureSkipTlsVerify :: Lens' Icinga2 (TF.Argument "insecure_skip_tls_verify" Text)
+insecureSkipTlsVerify :: Lens' Icinga2 (Maybe Text)
 insecureSkipTlsVerify =
     lens _insecure_skip_tls_verify (\s a -> s { _insecure_skip_tls_verify = a })

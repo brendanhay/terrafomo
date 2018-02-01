@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -54,59 +55,66 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.OpsGenie.Provider as TF
 import qualified Terrafomo.OpsGenie.Types    as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @opsgenie_team@ OpsGenie resource.
 
 Manages a Team within OpsGenie.
 -}
-data TeamResource = TeamResource {
-      _description :: !(TF.Argument "description" Text)
+data TeamResource s = TeamResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description for this team. -}
-    , _member      :: !(TF.Argument "member" Text)
+    , _member      :: !(TF.Attribute s "member" Text)
     {- ^ (Optional) A Member block as documented below. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamResource where
+instance TF.ToHCL (TeamResource s) where
     toHCL TeamResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _member
-        , TF.argument _name
+        [ TF.attribute _description
+        , TF.attribute _member
+        , TF.attribute _name
         ]
 
-instance HasDescription TeamResource Text where
+instance HasDescription (TeamResource s) Text where
+    type HasDescriptionThread (TeamResource s) Text = s
+
     description =
-        lens (_description :: TeamResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: TeamResource)
+        lens (_description :: TeamResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: TeamResource s)
 
-instance HasMember TeamResource Text where
+instance HasMember (TeamResource s) Text where
+    type HasMemberThread (TeamResource s) Text = s
+
     member =
-        lens (_member :: TeamResource -> TF.Argument "member" Text)
-             (\s a -> s { _member = a } :: TeamResource)
+        lens (_member :: TeamResource s -> TF.Attribute s "member" Text)
+             (\s a -> s { _member = a } :: TeamResource s)
 
-instance HasName TeamResource Text where
+instance HasName (TeamResource s) Text where
+    type HasNameThread (TeamResource s) Text = s
+
     name =
-        lens (_name :: TeamResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: TeamResource)
+        lens (_name :: TeamResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: TeamResource s)
 
-instance HasComputedId TeamResource Text where
+instance HasComputedId (TeamResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-teamResource :: TF.Resource TF.OpsGenie TeamResource
+teamResource :: TF.Resource TF.OpsGenie (TeamResource s)
 teamResource =
     TF.newResource "opsgenie_team" $
         TeamResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _member = TF.Nil
             , _name = TF.Nil
             }
@@ -115,118 +123,165 @@ teamResource =
 
 Manages a User within OpsGenie.
 -}
-data UserResource = UserResource {
-      _full_name :: !(TF.Argument "full_name" Text)
+data UserResource s = UserResource {
+      _full_name :: !(TF.Attribute s "full_name" Text)
     {- ^ (Required) The Full Name of the User. -}
-    , _locale    :: !(TF.Argument "locale" Text)
+    , _locale    :: !(TF.Attribute s "locale" Text)
     {- ^ (Optional) Location information for the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-locales> for available locales - Defaults to "en_US". -}
-    , _role      :: !(TF.Argument "role" Text)
+    , _role      :: !(TF.Attribute s "role" Text)
     {- ^ (Required) The Role assigned to the User. Either a built-in such as 'Owner', 'Admin' or 'User' - or the name of a custom role. -}
-    , _timezone  :: !(TF.Argument "timezone" Text)
+    , _timezone  :: !(TF.Attribute s "timezone" Text)
     {- ^ (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids> for available timezones - Defaults to "America/New_York". -}
-    , _username  :: !(TF.Argument "username" Text)
+    , _username  :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserResource where
+instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.block $ catMaybes
-        [ TF.argument _full_name
-        , TF.argument _locale
-        , TF.argument _role
-        , TF.argument _timezone
-        , TF.argument _username
+        [ TF.attribute _full_name
+        , TF.attribute _locale
+        , TF.attribute _role
+        , TF.attribute _timezone
+        , TF.attribute _username
         ]
 
-instance HasFullName UserResource Text where
+instance HasFullName (UserResource s) Text where
+    type HasFullNameThread (UserResource s) Text = s
+
     fullName =
-        lens (_full_name :: UserResource -> TF.Argument "full_name" Text)
-             (\s a -> s { _full_name = a } :: UserResource)
+        lens (_full_name :: UserResource s -> TF.Attribute s "full_name" Text)
+             (\s a -> s { _full_name = a } :: UserResource s)
 
-instance HasLocale UserResource Text where
+instance HasLocale (UserResource s) Text where
+    type HasLocaleThread (UserResource s) Text = s
+
     locale =
-        lens (_locale :: UserResource -> TF.Argument "locale" Text)
-             (\s a -> s { _locale = a } :: UserResource)
+        lens (_locale :: UserResource s -> TF.Attribute s "locale" Text)
+             (\s a -> s { _locale = a } :: UserResource s)
 
-instance HasRole UserResource Text where
+instance HasRole (UserResource s) Text where
+    type HasRoleThread (UserResource s) Text = s
+
     role =
-        lens (_role :: UserResource -> TF.Argument "role" Text)
-             (\s a -> s { _role = a } :: UserResource)
+        lens (_role :: UserResource s -> TF.Attribute s "role" Text)
+             (\s a -> s { _role = a } :: UserResource s)
 
-instance HasTimezone UserResource Text where
+instance HasTimezone (UserResource s) Text where
+    type HasTimezoneThread (UserResource s) Text = s
+
     timezone =
-        lens (_timezone :: UserResource -> TF.Argument "timezone" Text)
-             (\s a -> s { _timezone = a } :: UserResource)
+        lens (_timezone :: UserResource s -> TF.Attribute s "timezone" Text)
+             (\s a -> s { _timezone = a } :: UserResource s)
 
-instance HasUsername UserResource Text where
+instance HasUsername (UserResource s) Text where
+    type HasUsernameThread (UserResource s) Text = s
+
     username =
-        lens (_username :: UserResource -> TF.Argument "username" Text)
-             (\s a -> s { _username = a } :: UserResource)
+        lens (_username :: UserResource s -> TF.Attribute s "username" Text)
+             (\s a -> s { _username = a } :: UserResource s)
 
-instance HasComputedId UserResource Text where
+instance HasComputedId (UserResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-userResource :: TF.Resource TF.OpsGenie UserResource
+userResource :: TF.Resource TF.OpsGenie (UserResource s)
 userResource =
     TF.newResource "opsgenie_user" $
         UserResource {
-            _full_name = TF.Nil
+              _full_name = TF.Nil
             , _locale = TF.Nil
             , _role = TF.Nil
             , _timezone = TF.Nil
             , _username = TF.Nil
             }
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasFullName s a | s -> a where
-    fullName :: Lens' s (TF.Argument "full_name" a)
+class HasFullName a b | a -> b where
+    type HasFullNameThread a b :: *
 
-instance HasFullName s a => HasFullName (TF.Resource p s) a where
+    fullName :: Lens' a (TF.Attribute (HasFullNameThread a b) "full_name" b)
+
+instance HasFullName a b => HasFullName (TF.Resource p a) b where
+    type HasFullNameThread (TF.Resource p a) b =
+         HasFullNameThread a b
+
     fullName = TF.configuration . fullName
 
-class HasLocale s a | s -> a where
-    locale :: Lens' s (TF.Argument "locale" a)
+class HasLocale a b | a -> b where
+    type HasLocaleThread a b :: *
 
-instance HasLocale s a => HasLocale (TF.Resource p s) a where
+    locale :: Lens' a (TF.Attribute (HasLocaleThread a b) "locale" b)
+
+instance HasLocale a b => HasLocale (TF.Resource p a) b where
+    type HasLocaleThread (TF.Resource p a) b =
+         HasLocaleThread a b
+
     locale = TF.configuration . locale
 
-class HasMember s a | s -> a where
-    member :: Lens' s (TF.Argument "member" a)
+class HasMember a b | a -> b where
+    type HasMemberThread a b :: *
 
-instance HasMember s a => HasMember (TF.Resource p s) a where
+    member :: Lens' a (TF.Attribute (HasMemberThread a b) "member" b)
+
+instance HasMember a b => HasMember (TF.Resource p a) b where
+    type HasMemberThread (TF.Resource p a) b =
+         HasMemberThread a b
+
     member = TF.configuration . member
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasRole s a | s -> a where
-    role :: Lens' s (TF.Argument "role" a)
+class HasRole a b | a -> b where
+    type HasRoleThread a b :: *
 
-instance HasRole s a => HasRole (TF.Resource p s) a where
+    role :: Lens' a (TF.Attribute (HasRoleThread a b) "role" b)
+
+instance HasRole a b => HasRole (TF.Resource p a) b where
+    type HasRoleThread (TF.Resource p a) b =
+         HasRoleThread a b
+
     role = TF.configuration . role
 
-class HasTimezone s a | s -> a where
-    timezone :: Lens' s (TF.Argument "timezone" a)
+class HasTimezone a b | a -> b where
+    type HasTimezoneThread a b :: *
 
-instance HasTimezone s a => HasTimezone (TF.Resource p s) a where
+    timezone :: Lens' a (TF.Attribute (HasTimezoneThread a b) "timezone" b)
+
+instance HasTimezone a b => HasTimezone (TF.Resource p a) b where
+    type HasTimezoneThread (TF.Resource p a) b =
+         HasTimezoneThread a b
+
     timezone = TF.configuration . timezone
 
-class HasUsername s a | s -> a where
-    username :: Lens' s (TF.Argument "username" a)
+class HasUsername a b | a -> b where
+    type HasUsernameThread a b :: *
 
-instance HasUsername s a => HasUsername (TF.Resource p s) a where
+    username :: Lens' a (TF.Attribute (HasUsernameThread a b) "username" b)
+
+instance HasUsername a b => HasUsername (TF.Resource p a) b where
+    type HasUsernameThread (TF.Resource p a) b =
+         HasUsernameThread a b
+
     username = TF.configuration . username
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

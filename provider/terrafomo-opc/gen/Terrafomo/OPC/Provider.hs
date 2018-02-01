@@ -44,12 +44,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.OPC.Types       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.IP        as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.OPC.Types as TF
+import qualified Terrafomo.Provider  as TF
 
 {- | OPC Terraform provider.
 
@@ -59,21 +59,21 @@ with credentials for the Oracle Public Cloud API. Use the navigation to the
 left to read about the available resources.
 -}
 data OPC = OPC {
-      _endpoint           :: !(TF.Argument "endpoint" Text)
+      _endpoint           :: !(Maybe Text)
     {- ^ (Optional) The API endpoint to use, associated with your Oracle Public Cloud account. This is known as the @REST Endpoint@ within the Oracle portal. It can also be sourced from the @OPC_ENDPOINT@ environment variable. -}
-    , _identity_domain    :: !(TF.Argument "identity_domain" Text)
+    , _identity_domain    :: !(Maybe Text)
     {- ^ (Optional) The Identity Domain or Service Instance ID of the environment to use. It can also be sourced from the @OPC_IDENTITY_DOMAIN@ environment variable. -}
-    , _insecure           :: !(TF.Argument "insecure" Text)
+    , _insecure           :: !(Maybe Text)
     {- ^ (Optional) Skips TLS Verification for using self-signed certificates. Should only be used if absolutely needed. Can also via setting the @OPC_INSECURE@ environment variable to @true@ . -}
-    , _max_retries        :: !(TF.Argument "max_retries" Text)
+    , _max_retries        :: !(Maybe Text)
     {- ^ (Optional) The maximum number of tries to make for a successful response when operating on resources within Oracle Public Cloud. It can also be sourced from the @OPC_MAX_RETRIES@ environment variable. Defaults to 1. -}
-    , _password           :: !(TF.Argument "password" Text)
+    , _password           :: !(Maybe Text)
     {- ^ (Optional) The password associated with the username to use. It can also be sourced from the @OPC_PASSWORD@ environment variable. -}
-    , _storage_endpoint   :: !(TF.Argument "storage_endpoint" Text)
+    , _storage_endpoint   :: !(Maybe Text)
     {- ^ (Optional) The API endpoint to use, associated with your Oracle Storage Cloud account. This is known as the @REST Endpoint@ within the Oracle portal. Can also be set via the @OPC_STORAGE_ENDPOINT@ environment variable. -}
-    , _storage_service_id :: !(TF.Argument "storage_service_id" Text)
+    , _storage_service_id :: !(Maybe Text)
     {- ^ (Optional) The Storage Service ID for authentication with the @storage_endpoint@ If not set the @identity_domain@ value is used. Can also be set via the @OPC_STORAGE_SERVICE_ID@ environment variable. -}
-    , _user               :: !(TF.Argument "user" Text)
+    , _user               :: !(Maybe Text)
     {- ^ (Optional) The username to use, generally your email address. It can also be sourced from the @OPC_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -81,61 +81,63 @@ instance Hashable OPC
 
 instance TF.ToHCL OPC where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OPC))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_endpoint x)
-            , TF.argument (_identity_domain x)
-            , TF.argument (_insecure x)
-            , TF.argument (_max_retries x)
-            , TF.argument (_password x)
-            , TF.argument (_storage_endpoint x)
-            , TF.argument (_storage_service_id x)
-            , TF.argument (_user x)
+        let typ = TF.providerType (Proxy :: Proxy (OPC))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "endpoint" <$> _endpoint x
+            , TF.assign "identity_domain" <$> _identity_domain x
+            , TF.assign "insecure" <$> _insecure x
+            , TF.assign "max_retries" <$> _max_retries x
+            , TF.assign "password" <$> _password x
+            , TF.assign "storage_endpoint" <$> _storage_endpoint x
+            , TF.assign "storage_service_id" <$> _storage_service_id x
+            , TF.assign "user" <$> _user x
             ]
-
-emptyOPC :: OPC
-emptyOPC = OPC {
-        _endpoint = TF.Nil
-      , _identity_domain = TF.Nil
-      , _insecure = TF.Nil
-      , _max_retries = TF.Nil
-      , _password = TF.Nil
-      , _storage_endpoint = TF.Nil
-      , _storage_service_id = TF.Nil
-      , _user = TF.Nil
-    }
 
 instance TF.IsProvider OPC where
     type ProviderType OPC = "opc"
 
-endpoint :: Lens' OPC (TF.Argument "endpoint" Text)
+emptyOPC :: OPC
+emptyOPC = OPC {
+        _endpoint = Nothing
+      , _identity_domain = Nothing
+      , _insecure = Nothing
+      , _max_retries = Nothing
+      , _password = Nothing
+      , _storage_endpoint = Nothing
+      , _storage_service_id = Nothing
+      , _user = Nothing
+    }
+
+endpoint :: Lens' OPC (Maybe Text)
 endpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-identityDomain :: Lens' OPC (TF.Argument "identity_domain" Text)
+identityDomain :: Lens' OPC (Maybe Text)
 identityDomain =
     lens _identity_domain (\s a -> s { _identity_domain = a })
 
-insecure :: Lens' OPC (TF.Argument "insecure" Text)
+insecure :: Lens' OPC (Maybe Text)
 insecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-maxRetries :: Lens' OPC (TF.Argument "max_retries" Text)
+maxRetries :: Lens' OPC (Maybe Text)
 maxRetries =
     lens _max_retries (\s a -> s { _max_retries = a })
 
-password :: Lens' OPC (TF.Argument "password" Text)
+password :: Lens' OPC (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-storageEndpoint :: Lens' OPC (TF.Argument "storage_endpoint" Text)
+storageEndpoint :: Lens' OPC (Maybe Text)
 storageEndpoint =
     lens _storage_endpoint (\s a -> s { _storage_endpoint = a })
 
-storageServiceId :: Lens' OPC (TF.Argument "storage_service_id" Text)
+storageServiceId :: Lens' OPC (Maybe Text)
 storageServiceId =
     lens _storage_service_id (\s a -> s { _storage_service_id = a })
 
-user :: Lens' OPC (TF.Argument "user" Text)
+user :: Lens' OPC (Maybe Text)
 user =
     lens _user (\s a -> s { _user = a })

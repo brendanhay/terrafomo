@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.AliCloud.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.AliCloud.Types as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | AliCloud Terraform provider.
 
@@ -54,11 +54,11 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AliCloud = AliCloud {
-      _access_key :: !(TF.Argument "access_key" Text)
+      _access_key :: !(Maybe Text)
     {- ^ (Optional) This is the Alicloud access key. It must be provided, but it can also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable. -}
-    , _region     :: !(TF.Argument "region" Text)
+    , _region     :: !(Maybe Text)
     {- ^ (Required) This is the Alicloud region. It must be provided, but it can also be sourced from the @ALICLOUD_REGION@ environment variables. -}
-    , _secret_key :: !(TF.Argument "secret_key" Text)
+    , _secret_key :: !(Maybe Text)
     {- ^ (Optional) This is the Alicloud secret key. It must be provided, but it can also be sourced from the @ALICLOUD_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable AliCloud
 
 instance TF.ToHCL AliCloud where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy AliCloud))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_access_key x)
-            , TF.argument (_region x)
-            , TF.argument (_secret_key x)
+        let typ = TF.providerType (Proxy :: Proxy (AliCloud))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "access_key" <$> _access_key x
+            , TF.assign "region" <$> _region x
+            , TF.assign "secret_key" <$> _secret_key x
             ]
-
-emptyAliCloud :: AliCloud
-emptyAliCloud = AliCloud {
-        _access_key = TF.Nil
-      , _region = TF.Nil
-      , _secret_key = TF.Nil
-    }
 
 instance TF.IsProvider AliCloud where
     type ProviderType AliCloud = "alicloud"
 
-accessKey :: Lens' AliCloud (TF.Argument "access_key" Text)
+emptyAliCloud :: AliCloud
+emptyAliCloud = AliCloud {
+        _access_key = Nothing
+      , _region = Nothing
+      , _secret_key = Nothing
+    }
+
+accessKey :: Lens' AliCloud (Maybe Text)
 accessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-region :: Lens' AliCloud (TF.Argument "region" Text)
+region :: Lens' AliCloud (Maybe Text)
 region =
     lens _region (\s a -> s { _region = a })
 
-secretKey :: Lens' AliCloud (TF.Argument "secret_key" Text)
+secretKey :: Lens' AliCloud (Maybe Text)
 secretKey =
     lens _secret_key (\s a -> s { _secret_key = a })

@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -65,87 +66,92 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Rancher.Provider  as TF
-import qualified Terrafomo.Rancher.Types     as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute        as TF
+import qualified Terrafomo.DataSource       as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.IP               as TF
+import qualified Terrafomo.Meta             as TF (configuration)
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Rancher.Provider as TF
+import qualified Terrafomo.Rancher.Types    as TF
+import qualified Terrafomo.Resource         as TF
 
 {- | The @rancher_certificate@ Rancher datasource.
 
 Use this data source to retrieve information about a Rancher certificate.
 -}
-data CertificateDataSource = CertificateDataSource {
-      _environment_id :: !(TF.Argument "environment_id" Text)
+data CertificateDataSource s = CertificateDataSource {
+      _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ (Required) The ID of the environment. -}
-    , _name           :: !(TF.Argument "name" Text)
+    , _name           :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CertificateDataSource where
+instance TF.ToHCL (CertificateDataSource s) where
     toHCL CertificateDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _environment_id
-        , TF.argument _name
+        [ TF.attribute _environment_id
+        , TF.attribute _name
         ]
 
-instance HasEnvironmentId CertificateDataSource Text where
+instance HasEnvironmentId (CertificateDataSource s) Text where
+    type HasEnvironmentIdThread (CertificateDataSource s) Text = s
+
     environmentId =
-        lens (_environment_id :: CertificateDataSource -> TF.Argument "environment_id" Text)
-             (\s a -> s { _environment_id = a } :: CertificateDataSource)
+        lens (_environment_id :: CertificateDataSource s -> TF.Attribute s "environment_id" Text)
+             (\s a -> s { _environment_id = a } :: CertificateDataSource s)
 
-instance HasName CertificateDataSource Text where
+instance HasName (CertificateDataSource s) Text where
+    type HasNameThread (CertificateDataSource s) Text = s
+
     name =
-        lens (_name :: CertificateDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: CertificateDataSource)
+        lens (_name :: CertificateDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: CertificateDataSource s)
 
-instance HasComputedAlgorithm CertificateDataSource Text where
+instance HasComputedAlgorithm (CertificateDataSource s) Text where
     computedAlgorithm =
-        to (\_  -> TF.Compute "algorithm")
+        to (\x -> TF.Computed (TF.referenceKey x) "algorithm")
 
-instance HasComputedCertFingerprint CertificateDataSource Text where
+instance HasComputedCertFingerprint (CertificateDataSource s) Text where
     computedCertFingerprint =
-        to (\_  -> TF.Compute "cert_fingerprint")
+        to (\x -> TF.Computed (TF.referenceKey x) "cert_fingerprint")
 
-instance HasComputedCn CertificateDataSource Text where
+instance HasComputedCn (CertificateDataSource s) Text where
     computedCn =
-        to (\_  -> TF.Compute "cn")
+        to (\x -> TF.Computed (TF.referenceKey x) "cn")
 
-instance HasComputedExpiresAt CertificateDataSource Text where
+instance HasComputedExpiresAt (CertificateDataSource s) Text where
     computedExpiresAt =
-        to (\_  -> TF.Compute "expires_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "expires_at")
 
-instance HasComputedId CertificateDataSource Text where
+instance HasComputedId (CertificateDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedIssuedAt CertificateDataSource Text where
+instance HasComputedIssuedAt (CertificateDataSource s) Text where
     computedIssuedAt =
-        to (\_  -> TF.Compute "issued_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "issued_at")
 
-instance HasComputedIssuer CertificateDataSource Text where
+instance HasComputedIssuer (CertificateDataSource s) Text where
     computedIssuer =
-        to (\_  -> TF.Compute "issuer")
+        to (\x -> TF.Computed (TF.referenceKey x) "issuer")
 
-instance HasComputedSerialNumber CertificateDataSource Text where
+instance HasComputedSerialNumber (CertificateDataSource s) Text where
     computedSerialNumber =
-        to (\_  -> TF.Compute "serial_number")
+        to (\x -> TF.Computed (TF.referenceKey x) "serial_number")
 
-instance HasComputedSubjectAlternativeNames CertificateDataSource Text where
+instance HasComputedSubjectAlternativeNames (CertificateDataSource s) Text where
     computedSubjectAlternativeNames =
-        to (\_  -> TF.Compute "subject_alternative_names")
+        to (\x -> TF.Computed (TF.referenceKey x) "subject_alternative_names")
 
-instance HasComputedVersion CertificateDataSource Text where
+instance HasComputedVersion (CertificateDataSource s) Text where
     computedVersion =
-        to (\_  -> TF.Compute "version")
+        to (\x -> TF.Computed (TF.referenceKey x) "version")
 
-certificateDataSource :: TF.DataSource TF.Rancher CertificateDataSource
+certificateDataSource :: TF.DataSource TF.Rancher (CertificateDataSource s)
 certificateDataSource =
     TF.newDataSource "rancher_certificate" $
         CertificateDataSource {
-            _environment_id = TF.Nil
+              _environment_id = TF.Nil
             , _name = TF.Nil
             }
 
@@ -153,176 +159,145 @@ certificateDataSource =
 
 Use this data source to retrieve information about a Rancher environment.
 -}
-data EnvironmentDataSource = EnvironmentDataSource {
-      _name :: !(TF.Argument "name" Text)
+data EnvironmentDataSource s = EnvironmentDataSource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL EnvironmentDataSource where
+instance TF.ToHCL (EnvironmentDataSource s) where
     toHCL EnvironmentDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName EnvironmentDataSource Text where
+instance HasName (EnvironmentDataSource s) Text where
+    type HasNameThread (EnvironmentDataSource s) Text = s
+
     name =
-        lens (_name :: EnvironmentDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: EnvironmentDataSource)
+        lens (_name :: EnvironmentDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: EnvironmentDataSource s)
 
-instance HasComputedDescription EnvironmentDataSource Text where
+instance HasComputedDescription (EnvironmentDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedId EnvironmentDataSource Text where
+instance HasComputedId (EnvironmentDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedMember EnvironmentDataSource Text where
+instance HasComputedMember (EnvironmentDataSource s) Text where
     computedMember =
-        to (\_  -> TF.Compute "member")
+        to (\x -> TF.Computed (TF.referenceKey x) "member")
 
-instance HasComputedOrchestration EnvironmentDataSource Text where
+instance HasComputedOrchestration (EnvironmentDataSource s) Text where
     computedOrchestration =
-        to (\_  -> TF.Compute "orchestration")
+        to (\x -> TF.Computed (TF.referenceKey x) "orchestration")
 
-instance HasComputedProjectTemplateId EnvironmentDataSource Text where
+instance HasComputedProjectTemplateId (EnvironmentDataSource s) Text where
     computedProjectTemplateId =
-        to (\_  -> TF.Compute "project_template_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "project_template_id")
 
-environmentDataSource :: TF.DataSource TF.Rancher EnvironmentDataSource
+environmentDataSource :: TF.DataSource TF.Rancher (EnvironmentDataSource s)
 environmentDataSource =
     TF.newDataSource "rancher_environment" $
         EnvironmentDataSource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
 {- | The @rancher_setting@ Rancher datasource.
 
 Use this data source to retrieve information about a Rancher setting.
 -}
-data SettingDataSource = SettingDataSource {
-      _name :: !(TF.Argument "name" Text)
+data SettingDataSource s = SettingDataSource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SettingDataSource where
+instance TF.ToHCL (SettingDataSource s) where
     toHCL SettingDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName SettingDataSource Text where
+instance HasName (SettingDataSource s) Text where
+    type HasNameThread (SettingDataSource s) Text = s
+
     name =
-        lens (_name :: SettingDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: SettingDataSource)
+        lens (_name :: SettingDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: SettingDataSource s)
 
-instance HasComputedValue SettingDataSource Text where
+instance HasComputedValue (SettingDataSource s) Text where
     computedValue =
-        to (\_  -> TF.Compute "value")
+        to (\x -> TF.Computed (TF.referenceKey x) "value")
 
-settingDataSource :: TF.DataSource TF.Rancher SettingDataSource
+settingDataSource :: TF.DataSource TF.Rancher (SettingDataSource s)
 settingDataSource =
     TF.newDataSource "rancher_setting" $
         SettingDataSource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
-class HasEnvironmentId s a | s -> a where
-    environmentId :: Lens' s (TF.Argument "environment_id" a)
+class HasEnvironmentId a b | a -> b where
+    type HasEnvironmentIdThread a b :: *
 
-instance HasEnvironmentId s a => HasEnvironmentId (TF.DataSource p s) a where
+    environmentId :: Lens' a (TF.Attribute (HasEnvironmentIdThread a b) "environment_id" b)
+
+instance HasEnvironmentId a b => HasEnvironmentId (TF.DataSource p a) b where
+    type HasEnvironmentIdThread (TF.DataSource p a) b =
+         HasEnvironmentIdThread a b
+
     environmentId = TF.configuration . environmentId
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasComputedAlgorithm s a | s -> a where
-    computedAlgorithm :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAlgorithm a b | a -> b where
+    computedAlgorithm :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAlgorithm s a => HasComputedAlgorithm (TF.DataSource p s) a where
-    computedAlgorithm = TF.configuration . computedAlgorithm
+class HasComputedCertFingerprint a b | a -> b where
+    computedCertFingerprint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCertFingerprint s a | s -> a where
-    computedCertFingerprint :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCn a b | a -> b where
+    computedCn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCertFingerprint s a => HasComputedCertFingerprint (TF.DataSource p s) a where
-    computedCertFingerprint = TF.configuration . computedCertFingerprint
+class HasComputedDescription a b | a -> b where
+    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCn s a | s -> a where
-    computedCn :: forall r. Getting r s (TF.Attribute a)
+class HasComputedExpiresAt a b | a -> b where
+    computedExpiresAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCn s a => HasComputedCn (TF.DataSource p s) a where
-    computedCn = TF.configuration . computedCn
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDescription s a | s -> a where
-    computedDescription :: forall r. Getting r s (TF.Attribute a)
+class HasComputedIssuedAt a b | a -> b where
+    computedIssuedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
-    computedDescription = TF.configuration . computedDescription
+class HasComputedIssuer a b | a -> b where
+    computedIssuer :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedExpiresAt s a | s -> a where
-    computedExpiresAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedMember a b | a -> b where
+    computedMember :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedExpiresAt s a => HasComputedExpiresAt (TF.DataSource p s) a where
-    computedExpiresAt = TF.configuration . computedExpiresAt
+class HasComputedOrchestration a b | a -> b where
+    computedOrchestration :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedProjectTemplateId a b | a -> b where
+    computedProjectTemplateId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedSerialNumber a b | a -> b where
+    computedSerialNumber :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIssuedAt s a | s -> a where
-    computedIssuedAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSubjectAlternativeNames a b | a -> b where
+    computedSubjectAlternativeNames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedIssuedAt s a => HasComputedIssuedAt (TF.DataSource p s) a where
-    computedIssuedAt = TF.configuration . computedIssuedAt
+class HasComputedValue a b | a -> b where
+    computedValue :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIssuer s a | s -> a where
-    computedIssuer :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedIssuer s a => HasComputedIssuer (TF.DataSource p s) a where
-    computedIssuer = TF.configuration . computedIssuer
-
-class HasComputedMember s a | s -> a where
-    computedMember :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedMember s a => HasComputedMember (TF.DataSource p s) a where
-    computedMember = TF.configuration . computedMember
-
-class HasComputedOrchestration s a | s -> a where
-    computedOrchestration :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedOrchestration s a => HasComputedOrchestration (TF.DataSource p s) a where
-    computedOrchestration = TF.configuration . computedOrchestration
-
-class HasComputedProjectTemplateId s a | s -> a where
-    computedProjectTemplateId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedProjectTemplateId s a => HasComputedProjectTemplateId (TF.DataSource p s) a where
-    computedProjectTemplateId = TF.configuration . computedProjectTemplateId
-
-class HasComputedSerialNumber s a | s -> a where
-    computedSerialNumber :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSerialNumber s a => HasComputedSerialNumber (TF.DataSource p s) a where
-    computedSerialNumber = TF.configuration . computedSerialNumber
-
-class HasComputedSubjectAlternativeNames s a | s -> a where
-    computedSubjectAlternativeNames :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSubjectAlternativeNames s a => HasComputedSubjectAlternativeNames (TF.DataSource p s) a where
-    computedSubjectAlternativeNames = TF.configuration . computedSubjectAlternativeNames
-
-class HasComputedValue s a | s -> a where
-    computedValue :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedValue s a => HasComputedValue (TF.DataSource p s) a where
-    computedValue = TF.configuration . computedValue
-
-class HasComputedVersion s a | s -> a where
-    computedVersion :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVersion s a => HasComputedVersion (TF.DataSource p s) a where
-    computedVersion = TF.configuration . computedVersion
+class HasComputedVersion a b | a -> b where
+    computedVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

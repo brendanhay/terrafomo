@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -108,59 +109,66 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Heroku.Provider as TF
 import qualified Terrafomo.Heroku.Types    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Meta     as TF (configuration)
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.IP              as TF
+import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Resource        as TF
+import qualified Terrafomo.Resource        as TF
 
 {- | The @heroku_addon_attachment@ Heroku resource.
 
 Attaches a Heroku Addon Resource to an additional Heroku App.
 -}
-data AddonAttachmentResource = AddonAttachmentResource {
-      _addon_id :: !(TF.Argument "addon_id" Text)
+data AddonAttachmentResource s = AddonAttachmentResource {
+      _addon_id :: !(TF.Attribute s "addon_id" Text)
     {- ^ (Required) The ID of the existing Heroku Addon to attach. -}
-    , _app_id   :: !(TF.Argument "app_id" Text)
+    , _app_id   :: !(TF.Attribute s "app_id" Text)
     {- ^ (Required) The ID of the Heroku App to attach to. -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) A friendly name for the Heroku Addon Attachment. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AddonAttachmentResource where
+instance TF.ToHCL (AddonAttachmentResource s) where
     toHCL AddonAttachmentResource{..} = TF.block $ catMaybes
-        [ TF.argument _addon_id
-        , TF.argument _app_id
-        , TF.argument _name
+        [ TF.attribute _addon_id
+        , TF.attribute _app_id
+        , TF.attribute _name
         ]
 
-instance HasAddonId AddonAttachmentResource Text where
+instance HasAddonId (AddonAttachmentResource s) Text where
+    type HasAddonIdThread (AddonAttachmentResource s) Text = s
+
     addonId =
-        lens (_addon_id :: AddonAttachmentResource -> TF.Argument "addon_id" Text)
-             (\s a -> s { _addon_id = a } :: AddonAttachmentResource)
+        lens (_addon_id :: AddonAttachmentResource s -> TF.Attribute s "addon_id" Text)
+             (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
 
-instance HasAppId AddonAttachmentResource Text where
+instance HasAppId (AddonAttachmentResource s) Text where
+    type HasAppIdThread (AddonAttachmentResource s) Text = s
+
     appId =
-        lens (_app_id :: AddonAttachmentResource -> TF.Argument "app_id" Text)
-             (\s a -> s { _app_id = a } :: AddonAttachmentResource)
+        lens (_app_id :: AddonAttachmentResource s -> TF.Attribute s "app_id" Text)
+             (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
 
-instance HasName AddonAttachmentResource Text where
+instance HasName (AddonAttachmentResource s) Text where
+    type HasNameThread (AddonAttachmentResource s) Text = s
+
     name =
-        lens (_name :: AddonAttachmentResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AddonAttachmentResource)
+        lens (_name :: AddonAttachmentResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AddonAttachmentResource s)
 
-instance HasComputedId AddonAttachmentResource Text where
+instance HasComputedId (AddonAttachmentResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-addonAttachmentResource :: TF.Resource TF.Heroku AddonAttachmentResource
+addonAttachmentResource :: TF.Resource TF.Heroku (AddonAttachmentResource s)
 addonAttachmentResource =
     TF.newResource "heroku_addon_attachment" $
         AddonAttachmentResource {
-            _addon_id = TF.Nil
+              _addon_id = TF.Nil
             , _app_id = TF.Nil
             , _name = TF.Nil
             }
@@ -170,62 +178,68 @@ addonAttachmentResource =
 Provides a Heroku Add-On resource. These can be attach services to a Heroku
 app.
 -}
-data AddonResource = AddonResource {
-      _app    :: !(TF.Argument "app" Text)
+data AddonResource s = AddonResource {
+      _app    :: !(TF.Attribute s "app" Text)
     {- ^ (Required) The Heroku app to add to. -}
-    , _config :: !(TF.Argument "config" Text)
+    , _config :: !(TF.Attribute s "config" Text)
     {- ^ (Optional) Optional plan configuration. -}
-    , _plan   :: !(TF.Argument "plan" Text)
+    , _plan   :: !(TF.Attribute s "plan" Text)
     {- ^ (Required) The addon to add. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AddonResource where
+instance TF.ToHCL (AddonResource s) where
     toHCL AddonResource{..} = TF.block $ catMaybes
-        [ TF.argument _app
-        , TF.argument _config
-        , TF.argument _plan
+        [ TF.attribute _app
+        , TF.attribute _config
+        , TF.attribute _plan
         ]
 
-instance HasApp AddonResource Text where
+instance HasApp (AddonResource s) Text where
+    type HasAppThread (AddonResource s) Text = s
+
     app =
-        lens (_app :: AddonResource -> TF.Argument "app" Text)
-             (\s a -> s { _app = a } :: AddonResource)
+        lens (_app :: AddonResource s -> TF.Attribute s "app" Text)
+             (\s a -> s { _app = a } :: AddonResource s)
 
-instance HasConfig AddonResource Text where
+instance HasConfig (AddonResource s) Text where
+    type HasConfigThread (AddonResource s) Text = s
+
     config =
-        lens (_config :: AddonResource -> TF.Argument "config" Text)
-             (\s a -> s { _config = a } :: AddonResource)
+        lens (_config :: AddonResource s -> TF.Attribute s "config" Text)
+             (\s a -> s { _config = a } :: AddonResource s)
 
-instance HasPlan AddonResource Text where
+instance HasPlan (AddonResource s) Text where
+    type HasPlanThread (AddonResource s) Text = s
+
     plan =
-        lens (_plan :: AddonResource -> TF.Argument "plan" Text)
-             (\s a -> s { _plan = a } :: AddonResource)
+        lens (_plan :: AddonResource s -> TF.Attribute s "plan" Text)
+             (\s a -> s { _plan = a } :: AddonResource s)
 
-instance HasComputedConfigVars AddonResource Text where
+instance HasComputedConfigVars (AddonResource s) Text where
     computedConfigVars =
-        to (\_  -> TF.Compute "config_vars")
+        to (\x -> TF.Computed (TF.referenceKey x) "config_vars")
 
-instance HasComputedId AddonResource Text where
+instance HasComputedId (AddonResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName AddonResource Text where
+instance HasComputedName (AddonResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedPlan AddonResource Text where
+instance HasComputedPlan (AddonResource s) Text where
     computedPlan =
-        to (\_  -> TF.Compute "plan")
+        to (\x -> TF.Computed (TF.referenceKey x) "plan")
 
-instance HasComputedProviderId AddonResource Text where
+instance HasComputedProviderId (AddonResource s) Text where
     computedProviderId =
-        to (\_  -> TF.Compute "provider_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "provider_id")
 
-addonResource :: TF.Resource TF.Heroku AddonResource
+addonResource :: TF.Resource TF.Heroku (AddonResource s)
 addonResource =
     TF.newResource "heroku_addon" $
         AddonResource {
-            _app = TF.Nil
+              _app = TF.Nil
             , _config = TF.Nil
             , _plan = TF.Nil
             }
@@ -235,42 +249,48 @@ addonResource =
 Provides a Heroku App Feature resource. This can be used to create and
 manage App Features on Heroku.
 -}
-data AppFeatureResource = AppFeatureResource {
-      _app     :: !(TF.Argument "app" Text)
+data AppFeatureResource s = AppFeatureResource {
+      _app     :: !(TF.Attribute s "app" Text)
     {- ^ (Required) The Heroku app to link to. -}
-    , _enabled :: !(TF.Argument "enabled" Text)
+    , _enabled :: !(TF.Attribute s "enabled" Text)
     {- ^ (Optional) Whether to enable or disable the App Feature. The default value is true. -}
-    , _name    :: !(TF.Argument "name" Text)
+    , _name    :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the App Feature to manage. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AppFeatureResource where
+instance TF.ToHCL (AppFeatureResource s) where
     toHCL AppFeatureResource{..} = TF.block $ catMaybes
-        [ TF.argument _app
-        , TF.argument _enabled
-        , TF.argument _name
+        [ TF.attribute _app
+        , TF.attribute _enabled
+        , TF.attribute _name
         ]
 
-instance HasApp AppFeatureResource Text where
+instance HasApp (AppFeatureResource s) Text where
+    type HasAppThread (AppFeatureResource s) Text = s
+
     app =
-        lens (_app :: AppFeatureResource -> TF.Argument "app" Text)
-             (\s a -> s { _app = a } :: AppFeatureResource)
+        lens (_app :: AppFeatureResource s -> TF.Attribute s "app" Text)
+             (\s a -> s { _app = a } :: AppFeatureResource s)
 
-instance HasEnabled AppFeatureResource Text where
+instance HasEnabled (AppFeatureResource s) Text where
+    type HasEnabledThread (AppFeatureResource s) Text = s
+
     enabled =
-        lens (_enabled :: AppFeatureResource -> TF.Argument "enabled" Text)
-             (\s a -> s { _enabled = a } :: AppFeatureResource)
+        lens (_enabled :: AppFeatureResource s -> TF.Attribute s "enabled" Text)
+             (\s a -> s { _enabled = a } :: AppFeatureResource s)
 
-instance HasName AppFeatureResource Text where
+instance HasName (AppFeatureResource s) Text where
+    type HasNameThread (AppFeatureResource s) Text = s
+
     name =
-        lens (_name :: AppFeatureResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AppFeatureResource)
+        lens (_name :: AppFeatureResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AppFeatureResource s)
 
-appFeatureResource :: TF.Resource TF.Heroku AppFeatureResource
+appFeatureResource :: TF.Resource TF.Heroku (AppFeatureResource s)
 appFeatureResource =
     TF.newResource "heroku_app_feature" $
         AppFeatureResource {
-            _app = TF.Nil
+              _app = TF.Nil
             , _enabled = TF.Nil
             , _name = TF.Nil
             }
@@ -280,110 +300,124 @@ appFeatureResource =
 Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
-data AppResource = AppResource {
-      _buildpacks   :: !(TF.Argument "buildpacks" Text)
+data AppResource s = AppResource {
+      _buildpacks   :: !(TF.Attribute s "buildpacks" Text)
     {- ^ (Optional) Buildpack names or URLs for the application. Buildpacks configured externally won't be altered if this is not present. -}
-    , _config_vars  :: !(TF.Argument "config_vars" Text)
+    , _config_vars  :: !(TF.Attribute s "config_vars" Text)
     {- ^ (Optional) Configuration variables for the application. The config variables in this map are not the final set of configuration variables, but rather variables you want present. That is, other configuration variables set externally won't be removed by Terraform if they aren't present in this list. -}
-    , _name         :: !(TF.Argument "name" Text)
+    , _name         :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the application. In Heroku, this is also the unique ID, so it must be unique and have a minimum of 3 characters. -}
-    , _organization :: !(TF.Argument "organization" Text)
+    , _organization :: !(TF.Attribute s "organization" Text)
     {- ^ (Optional) A block that can be specified once to define organization settings for this app. The fields for this block are documented below. -}
-    , _region       :: !(TF.Argument "region" Text)
+    , _region       :: !(TF.Attribute s "region" Text)
     {- ^ (Required) The region that the app should be deployed in. -}
-    , _space        :: !(TF.Argument "space" Text)
+    , _space        :: !(TF.Attribute s "space" Text)
     {- ^ (Optional) The name of a private space to create the app in. -}
-    , _stack        :: !(TF.Argument "stack" Text)
+    , _stack        :: !(TF.Attribute s "stack" Text)
     {- ^ (Optional) The application stack is what platform to run the application in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AppResource where
+instance TF.ToHCL (AppResource s) where
     toHCL AppResource{..} = TF.block $ catMaybes
-        [ TF.argument _buildpacks
-        , TF.argument _config_vars
-        , TF.argument _name
-        , TF.argument _organization
-        , TF.argument _region
-        , TF.argument _space
-        , TF.argument _stack
+        [ TF.attribute _buildpacks
+        , TF.attribute _config_vars
+        , TF.attribute _name
+        , TF.attribute _organization
+        , TF.attribute _region
+        , TF.attribute _space
+        , TF.attribute _stack
         ]
 
-instance HasBuildpacks AppResource Text where
+instance HasBuildpacks (AppResource s) Text where
+    type HasBuildpacksThread (AppResource s) Text = s
+
     buildpacks =
-        lens (_buildpacks :: AppResource -> TF.Argument "buildpacks" Text)
-             (\s a -> s { _buildpacks = a } :: AppResource)
+        lens (_buildpacks :: AppResource s -> TF.Attribute s "buildpacks" Text)
+             (\s a -> s { _buildpacks = a } :: AppResource s)
 
-instance HasConfigVars AppResource Text where
+instance HasConfigVars (AppResource s) Text where
+    type HasConfigVarsThread (AppResource s) Text = s
+
     configVars =
-        lens (_config_vars :: AppResource -> TF.Argument "config_vars" Text)
-             (\s a -> s { _config_vars = a } :: AppResource)
+        lens (_config_vars :: AppResource s -> TF.Attribute s "config_vars" Text)
+             (\s a -> s { _config_vars = a } :: AppResource s)
 
-instance HasName AppResource Text where
+instance HasName (AppResource s) Text where
+    type HasNameThread (AppResource s) Text = s
+
     name =
-        lens (_name :: AppResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AppResource)
+        lens (_name :: AppResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AppResource s)
 
-instance HasOrganization AppResource Text where
+instance HasOrganization (AppResource s) Text where
+    type HasOrganizationThread (AppResource s) Text = s
+
     organization =
-        lens (_organization :: AppResource -> TF.Argument "organization" Text)
-             (\s a -> s { _organization = a } :: AppResource)
+        lens (_organization :: AppResource s -> TF.Attribute s "organization" Text)
+             (\s a -> s { _organization = a } :: AppResource s)
 
-instance HasRegion AppResource Text where
+instance HasRegion (AppResource s) Text where
+    type HasRegionThread (AppResource s) Text = s
+
     region =
-        lens (_region :: AppResource -> TF.Argument "region" Text)
-             (\s a -> s { _region = a } :: AppResource)
+        lens (_region :: AppResource s -> TF.Attribute s "region" Text)
+             (\s a -> s { _region = a } :: AppResource s)
 
-instance HasSpace AppResource Text where
+instance HasSpace (AppResource s) Text where
+    type HasSpaceThread (AppResource s) Text = s
+
     space =
-        lens (_space :: AppResource -> TF.Argument "space" Text)
-             (\s a -> s { _space = a } :: AppResource)
+        lens (_space :: AppResource s -> TF.Attribute s "space" Text)
+             (\s a -> s { _space = a } :: AppResource s)
 
-instance HasStack AppResource Text where
+instance HasStack (AppResource s) Text where
+    type HasStackThread (AppResource s) Text = s
+
     stack =
-        lens (_stack :: AppResource -> TF.Argument "stack" Text)
-             (\s a -> s { _stack = a } :: AppResource)
+        lens (_stack :: AppResource s -> TF.Attribute s "stack" Text)
+             (\s a -> s { _stack = a } :: AppResource s)
 
-instance HasComputedAllConfigVars AppResource Text where
+instance HasComputedAllConfigVars (AppResource s) Text where
     computedAllConfigVars =
-        to (\_  -> TF.Compute "all_config_vars")
+        to (\x -> TF.Computed (TF.referenceKey x) "all_config_vars")
 
-instance HasComputedGitUrl AppResource Text where
+instance HasComputedGitUrl (AppResource s) Text where
     computedGitUrl =
-        to (\_  -> TF.Compute "git_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "git_url")
 
-instance HasComputedHerokuHostname AppResource Text where
+instance HasComputedHerokuHostname (AppResource s) Text where
     computedHerokuHostname =
-        to (\_  -> TF.Compute "heroku_hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "heroku_hostname")
 
-instance HasComputedId AppResource Text where
+instance HasComputedId (AppResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName AppResource Text where
+instance HasComputedName (AppResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedRegion AppResource Text where
+instance HasComputedRegion (AppResource s) Text where
     computedRegion =
-        to (\_  -> TF.Compute "region")
+        to (\x -> TF.Computed (TF.referenceKey x) "region")
 
-instance HasComputedSpace AppResource Text where
+instance HasComputedSpace (AppResource s) Text where
     computedSpace =
-        to (\_  -> TF.Compute "space")
+        to (\x -> TF.Computed (TF.referenceKey x) "space")
 
-instance HasComputedStack AppResource Text where
+instance HasComputedStack (AppResource s) Text where
     computedStack =
-        to (\_  -> TF.Compute "stack")
+        to (\x -> TF.Computed (TF.referenceKey x) "stack")
 
-instance HasComputedWebUrl AppResource Text where
+instance HasComputedWebUrl (AppResource s) Text where
     computedWebUrl =
-        to (\_  -> TF.Compute "web_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "web_url")
 
-appResource :: TF.Resource TF.Heroku AppResource
+appResource :: TF.Resource TF.Heroku (AppResource s)
 appResource =
     TF.newResource "heroku_app" $
         AppResource {
-            _buildpacks = TF.Nil
+              _buildpacks = TF.Nil
             , _config_vars = TF.Nil
             , _name = TF.Nil
             , _organization = TF.Nil
@@ -397,54 +431,60 @@ appResource =
 Provides a Heroku SSL certificate resource. It allows to set a given
 certificate for a Heroku app.
 -}
-data CertResource = CertResource {
-      _app               :: !(TF.Argument "app" Text)
+data CertResource s = CertResource {
+      _app               :: !(TF.Attribute s "app" Text)
     {- ^ (Required) The Heroku app to add to. -}
-    , _certificate_chain :: !(TF.Argument "certificate_chain" Text)
+    , _certificate_chain :: !(TF.Attribute s "certificate_chain" Text)
     {- ^ (Required) The certificate chain to add -}
-    , _private_key       :: !(TF.Argument "private_key" Text)
+    , _private_key       :: !(TF.Attribute s "private_key" Text)
     {- ^ (Required) The private key for a given certificate chain -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL CertResource where
+instance TF.ToHCL (CertResource s) where
     toHCL CertResource{..} = TF.block $ catMaybes
-        [ TF.argument _app
-        , TF.argument _certificate_chain
-        , TF.argument _private_key
+        [ TF.attribute _app
+        , TF.attribute _certificate_chain
+        , TF.attribute _private_key
         ]
 
-instance HasApp CertResource Text where
+instance HasApp (CertResource s) Text where
+    type HasAppThread (CertResource s) Text = s
+
     app =
-        lens (_app :: CertResource -> TF.Argument "app" Text)
-             (\s a -> s { _app = a } :: CertResource)
+        lens (_app :: CertResource s -> TF.Attribute s "app" Text)
+             (\s a -> s { _app = a } :: CertResource s)
 
-instance HasCertificateChain CertResource Text where
+instance HasCertificateChain (CertResource s) Text where
+    type HasCertificateChainThread (CertResource s) Text = s
+
     certificateChain =
-        lens (_certificate_chain :: CertResource -> TF.Argument "certificate_chain" Text)
-             (\s a -> s { _certificate_chain = a } :: CertResource)
+        lens (_certificate_chain :: CertResource s -> TF.Attribute s "certificate_chain" Text)
+             (\s a -> s { _certificate_chain = a } :: CertResource s)
 
-instance HasPrivateKey CertResource Text where
+instance HasPrivateKey (CertResource s) Text where
+    type HasPrivateKeyThread (CertResource s) Text = s
+
     privateKey =
-        lens (_private_key :: CertResource -> TF.Argument "private_key" Text)
-             (\s a -> s { _private_key = a } :: CertResource)
+        lens (_private_key :: CertResource s -> TF.Attribute s "private_key" Text)
+             (\s a -> s { _private_key = a } :: CertResource s)
 
-instance HasComputedCname CertResource Text where
+instance HasComputedCname (CertResource s) Text where
     computedCname =
-        to (\_  -> TF.Compute "cname")
+        to (\x -> TF.Computed (TF.referenceKey x) "cname")
 
-instance HasComputedId CertResource Text where
+instance HasComputedId (CertResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName CertResource Text where
+instance HasComputedName (CertResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-certResource :: TF.Resource TF.Heroku CertResource
+certResource :: TF.Resource TF.Heroku (CertResource s)
 certResource =
     TF.newResource "heroku_cert" $
         CertResource {
-            _app = TF.Nil
+              _app = TF.Nil
             , _certificate_chain = TF.Nil
             , _private_key = TF.Nil
             }
@@ -454,46 +494,50 @@ certResource =
 Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
-data DomainResource = DomainResource {
-      _app      :: !(TF.Argument "app" Text)
+data DomainResource s = DomainResource {
+      _app      :: !(TF.Attribute s "app" Text)
     {- ^ (Required) The Heroku app to link to. -}
-    , _hostname :: !(TF.Argument "hostname" Text)
+    , _hostname :: !(TF.Attribute s "hostname" Text)
     {- ^ (Required) The hostname to serve requests from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DomainResource where
+instance TF.ToHCL (DomainResource s) where
     toHCL DomainResource{..} = TF.block $ catMaybes
-        [ TF.argument _app
-        , TF.argument _hostname
+        [ TF.attribute _app
+        , TF.attribute _hostname
         ]
 
-instance HasApp DomainResource Text where
+instance HasApp (DomainResource s) Text where
+    type HasAppThread (DomainResource s) Text = s
+
     app =
-        lens (_app :: DomainResource -> TF.Argument "app" Text)
-             (\s a -> s { _app = a } :: DomainResource)
+        lens (_app :: DomainResource s -> TF.Attribute s "app" Text)
+             (\s a -> s { _app = a } :: DomainResource s)
 
-instance HasHostname DomainResource Text where
+instance HasHostname (DomainResource s) Text where
+    type HasHostnameThread (DomainResource s) Text = s
+
     hostname =
-        lens (_hostname :: DomainResource -> TF.Argument "hostname" Text)
-             (\s a -> s { _hostname = a } :: DomainResource)
+        lens (_hostname :: DomainResource s -> TF.Attribute s "hostname" Text)
+             (\s a -> s { _hostname = a } :: DomainResource s)
 
-instance HasComputedCname DomainResource Text where
+instance HasComputedCname (DomainResource s) Text where
     computedCname =
-        to (\_  -> TF.Compute "cname")
+        to (\x -> TF.Computed (TF.referenceKey x) "cname")
 
-instance HasComputedHostname DomainResource Text where
+instance HasComputedHostname (DomainResource s) Text where
     computedHostname =
-        to (\_  -> TF.Compute "hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
-instance HasComputedId DomainResource Text where
+instance HasComputedId (DomainResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-domainResource :: TF.Resource TF.Heroku DomainResource
+domainResource :: TF.Resource TF.Heroku (DomainResource s)
 domainResource =
     TF.newResource "heroku_domain" $
         DomainResource {
-            _app = TF.Nil
+              _app = TF.Nil
             , _hostname = TF.Nil
             }
 
@@ -502,38 +546,42 @@ domainResource =
 Provides a Heroku Drain resource. This can be used to create and manage Log
 Drains on Heroku.
 -}
-data DrainResource = DrainResource {
-      _app :: !(TF.Argument "app" Text)
+data DrainResource s = DrainResource {
+      _app :: !(TF.Attribute s "app" Text)
     {- ^ (Required) The Heroku app to link to. -}
-    , _url :: !(TF.Argument "url" Text)
+    , _url :: !(TF.Attribute s "url" Text)
     {- ^ (Required) The URL for Heroku to drain your logs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DrainResource where
+instance TF.ToHCL (DrainResource s) where
     toHCL DrainResource{..} = TF.block $ catMaybes
-        [ TF.argument _app
-        , TF.argument _url
+        [ TF.attribute _app
+        , TF.attribute _url
         ]
 
-instance HasApp DrainResource Text where
+instance HasApp (DrainResource s) Text where
+    type HasAppThread (DrainResource s) Text = s
+
     app =
-        lens (_app :: DrainResource -> TF.Argument "app" Text)
-             (\s a -> s { _app = a } :: DrainResource)
+        lens (_app :: DrainResource s -> TF.Attribute s "app" Text)
+             (\s a -> s { _app = a } :: DrainResource s)
 
-instance HasUrl DrainResource Text where
+instance HasUrl (DrainResource s) Text where
+    type HasUrlThread (DrainResource s) Text = s
+
     url =
-        lens (_url :: DrainResource -> TF.Argument "url" Text)
-             (\s a -> s { _url = a } :: DrainResource)
+        lens (_url :: DrainResource s -> TF.Attribute s "url" Text)
+             (\s a -> s { _url = a } :: DrainResource s)
 
-instance HasComputedToken DrainResource Text where
+instance HasComputedToken (DrainResource s) Text where
     computedToken =
-        to (\_  -> TF.Compute "token")
+        to (\x -> TF.Computed (TF.referenceKey x) "token")
 
-drainResource :: TF.Resource TF.Heroku DrainResource
+drainResource :: TF.Resource TF.Heroku (DrainResource s)
 drainResource =
     TF.newResource "heroku_drain" $
         DrainResource {
-            _app = TF.Nil
+              _app = TF.Nil
             , _url = TF.Nil
             }
 
@@ -545,62 +593,68 @@ pipeline is created using <./pipeline.html> , and apps are added to
 different stages using @heroku_pipeline_coupling@ , you can promote app
 slugs to the downstream stages.
 -}
-data PipelineCouplingResource = PipelineCouplingResource {
-      _app      :: !(TF.Argument "app" Text)
+data PipelineCouplingResource s = PipelineCouplingResource {
+      _app      :: !(TF.Attribute s "app" Text)
     {- ^ (Required) The name of the app for this coupling. -}
-    , _pipeline :: !(TF.Argument "pipeline" Text)
+    , _pipeline :: !(TF.Attribute s "pipeline" Text)
     {- ^ (Required) The ID of the pipeline to add this app to. -}
-    , _stage    :: !(TF.Argument "stage" Text)
+    , _stage    :: !(TF.Attribute s "stage" Text)
     {- ^ (Required) The stage to couple this app to. Must be one of @review@ , @development@ , @staging@ , or @production@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL PipelineCouplingResource where
+instance TF.ToHCL (PipelineCouplingResource s) where
     toHCL PipelineCouplingResource{..} = TF.block $ catMaybes
-        [ TF.argument _app
-        , TF.argument _pipeline
-        , TF.argument _stage
+        [ TF.attribute _app
+        , TF.attribute _pipeline
+        , TF.attribute _stage
         ]
 
-instance HasApp PipelineCouplingResource Text where
+instance HasApp (PipelineCouplingResource s) Text where
+    type HasAppThread (PipelineCouplingResource s) Text = s
+
     app =
-        lens (_app :: PipelineCouplingResource -> TF.Argument "app" Text)
-             (\s a -> s { _app = a } :: PipelineCouplingResource)
+        lens (_app :: PipelineCouplingResource s -> TF.Attribute s "app" Text)
+             (\s a -> s { _app = a } :: PipelineCouplingResource s)
 
-instance HasPipeline PipelineCouplingResource Text where
+instance HasPipeline (PipelineCouplingResource s) Text where
+    type HasPipelineThread (PipelineCouplingResource s) Text = s
+
     pipeline =
-        lens (_pipeline :: PipelineCouplingResource -> TF.Argument "pipeline" Text)
-             (\s a -> s { _pipeline = a } :: PipelineCouplingResource)
+        lens (_pipeline :: PipelineCouplingResource s -> TF.Attribute s "pipeline" Text)
+             (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
 
-instance HasStage PipelineCouplingResource Text where
+instance HasStage (PipelineCouplingResource s) Text where
+    type HasStageThread (PipelineCouplingResource s) Text = s
+
     stage =
-        lens (_stage :: PipelineCouplingResource -> TF.Argument "stage" Text)
-             (\s a -> s { _stage = a } :: PipelineCouplingResource)
+        lens (_stage :: PipelineCouplingResource s -> TF.Attribute s "stage" Text)
+             (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
-instance HasComputedApp PipelineCouplingResource Text where
+instance HasComputedApp (PipelineCouplingResource s) Text where
     computedApp =
-        to (\_  -> TF.Compute "app")
+        to (\x -> TF.Computed (TF.referenceKey x) "app")
 
-instance HasComputedAppId PipelineCouplingResource Text where
+instance HasComputedAppId (PipelineCouplingResource s) Text where
     computedAppId =
-        to (\_  -> TF.Compute "app_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "app_id")
 
-instance HasComputedId PipelineCouplingResource Text where
+instance HasComputedId (PipelineCouplingResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedPipeline PipelineCouplingResource Text where
+instance HasComputedPipeline (PipelineCouplingResource s) Text where
     computedPipeline =
-        to (\_  -> TF.Compute "pipeline")
+        to (\x -> TF.Computed (TF.referenceKey x) "pipeline")
 
-instance HasComputedStage PipelineCouplingResource Text where
+instance HasComputedStage (PipelineCouplingResource s) Text where
     computedStage =
-        to (\_  -> TF.Compute "stage")
+        to (\x -> TF.Computed (TF.referenceKey x) "stage")
 
-pipelineCouplingResource :: TF.Resource TF.Heroku PipelineCouplingResource
+pipelineCouplingResource :: TF.Resource TF.Heroku (PipelineCouplingResource s)
 pipelineCouplingResource =
     TF.newResource "heroku_pipeline_coupling" $
         PipelineCouplingResource {
-            _app = TF.Nil
+              _app = TF.Nil
             , _pipeline = TF.Nil
             , _stage = TF.Nil
             }
@@ -612,34 +666,36 @@ pipeline is a group of Heroku apps that share the same codebase. Once a
 pipeline is created, and apps are added to different stages using
 <./pipeline_coupling.html> , you can promote app slugs to the next stage.
 -}
-data PipelineResource = PipelineResource {
-      _name :: !(TF.Argument "name" Text)
+data PipelineResource s = PipelineResource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the pipeline. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL PipelineResource where
+instance TF.ToHCL (PipelineResource s) where
     toHCL PipelineResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName PipelineResource Text where
+instance HasName (PipelineResource s) Text where
+    type HasNameThread (PipelineResource s) Text = s
+
     name =
-        lens (_name :: PipelineResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: PipelineResource)
+        lens (_name :: PipelineResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: PipelineResource s)
 
-instance HasComputedId PipelineResource Text where
+instance HasComputedId (PipelineResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName PipelineResource Text where
+instance HasComputedName (PipelineResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-pipelineResource :: TF.Resource TF.Heroku PipelineResource
+pipelineResource :: TF.Resource TF.Heroku (PipelineResource s)
 pipelineResource =
     TF.newResource "heroku_pipeline" $
         PipelineResource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
 {- | The @heroku_space@ Heroku resource.
@@ -647,292 +703,333 @@ pipelineResource =
 Provides a Heroku Space resource for running apps in isolated, highly
 available, secure app execution environments.
 -}
-data SpaceResource = SpaceResource {
-      _name         :: !(TF.Argument "name" Text)
+data SpaceResource s = SpaceResource {
+      _name         :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the space. -}
-    , _organization :: !(TF.Argument "organization" Text)
+    , _organization :: !(TF.Attribute s "organization" Text)
     {- ^ (Required) The name of the organization which will own the space. -}
-    , _region       :: !(TF.Argument "region" Text)
+    , _region       :: !(TF.Attribute s "region" Text)
     {- ^ (Optional) The region that the space should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SpaceResource where
+instance TF.ToHCL (SpaceResource s) where
     toHCL SpaceResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _organization
-        , TF.argument _region
+        [ TF.attribute _name
+        , TF.attribute _organization
+        , TF.attribute _region
         ]
 
-instance HasName SpaceResource Text where
+instance HasName (SpaceResource s) Text where
+    type HasNameThread (SpaceResource s) Text = s
+
     name =
-        lens (_name :: SpaceResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: SpaceResource)
+        lens (_name :: SpaceResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: SpaceResource s)
 
-instance HasOrganization SpaceResource Text where
+instance HasOrganization (SpaceResource s) Text where
+    type HasOrganizationThread (SpaceResource s) Text = s
+
     organization =
-        lens (_organization :: SpaceResource -> TF.Argument "organization" Text)
-             (\s a -> s { _organization = a } :: SpaceResource)
+        lens (_organization :: SpaceResource s -> TF.Attribute s "organization" Text)
+             (\s a -> s { _organization = a } :: SpaceResource s)
 
-instance HasRegion SpaceResource Text where
+instance HasRegion (SpaceResource s) Text where
+    type HasRegionThread (SpaceResource s) Text = s
+
     region =
-        lens (_region :: SpaceResource -> TF.Argument "region" Text)
-             (\s a -> s { _region = a } :: SpaceResource)
+        lens (_region :: SpaceResource s -> TF.Attribute s "region" Text)
+             (\s a -> s { _region = a } :: SpaceResource s)
 
-instance HasComputedId SpaceResource Text where
+instance HasComputedId (SpaceResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName SpaceResource Text where
+instance HasComputedName (SpaceResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedOrganization SpaceResource Text where
+instance HasComputedOrganization (SpaceResource s) Text where
     computedOrganization =
-        to (\_  -> TF.Compute "organization")
+        to (\x -> TF.Computed (TF.referenceKey x) "organization")
 
-instance HasComputedRegion SpaceResource Text where
+instance HasComputedRegion (SpaceResource s) Text where
     computedRegion =
-        to (\_  -> TF.Compute "region")
+        to (\x -> TF.Computed (TF.referenceKey x) "region")
 
-spaceResource :: TF.Resource TF.Heroku SpaceResource
+spaceResource :: TF.Resource TF.Heroku (SpaceResource s)
 spaceResource =
     TF.newResource "heroku_space" $
         SpaceResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _organization = TF.Nil
             , _region = TF.Nil
             }
 
-class HasAddonId s a | s -> a where
-    addonId :: Lens' s (TF.Argument "addon_id" a)
+class HasAddonId a b | a -> b where
+    type HasAddonIdThread a b :: *
 
-instance HasAddonId s a => HasAddonId (TF.Resource p s) a where
+    addonId :: Lens' a (TF.Attribute (HasAddonIdThread a b) "addon_id" b)
+
+instance HasAddonId a b => HasAddonId (TF.Resource p a) b where
+    type HasAddonIdThread (TF.Resource p a) b =
+         HasAddonIdThread a b
+
     addonId = TF.configuration . addonId
 
-class HasApp s a | s -> a where
-    app :: Lens' s (TF.Argument "app" a)
+class HasApp a b | a -> b where
+    type HasAppThread a b :: *
 
-instance HasApp s a => HasApp (TF.Resource p s) a where
+    app :: Lens' a (TF.Attribute (HasAppThread a b) "app" b)
+
+instance HasApp a b => HasApp (TF.Resource p a) b where
+    type HasAppThread (TF.Resource p a) b =
+         HasAppThread a b
+
     app = TF.configuration . app
 
-class HasAppId s a | s -> a where
-    appId :: Lens' s (TF.Argument "app_id" a)
+class HasAppId a b | a -> b where
+    type HasAppIdThread a b :: *
 
-instance HasAppId s a => HasAppId (TF.Resource p s) a where
+    appId :: Lens' a (TF.Attribute (HasAppIdThread a b) "app_id" b)
+
+instance HasAppId a b => HasAppId (TF.Resource p a) b where
+    type HasAppIdThread (TF.Resource p a) b =
+         HasAppIdThread a b
+
     appId = TF.configuration . appId
 
-class HasBuildpacks s a | s -> a where
-    buildpacks :: Lens' s (TF.Argument "buildpacks" a)
+class HasBuildpacks a b | a -> b where
+    type HasBuildpacksThread a b :: *
 
-instance HasBuildpacks s a => HasBuildpacks (TF.Resource p s) a where
+    buildpacks :: Lens' a (TF.Attribute (HasBuildpacksThread a b) "buildpacks" b)
+
+instance HasBuildpacks a b => HasBuildpacks (TF.Resource p a) b where
+    type HasBuildpacksThread (TF.Resource p a) b =
+         HasBuildpacksThread a b
+
     buildpacks = TF.configuration . buildpacks
 
-class HasCertificateChain s a | s -> a where
-    certificateChain :: Lens' s (TF.Argument "certificate_chain" a)
+class HasCertificateChain a b | a -> b where
+    type HasCertificateChainThread a b :: *
 
-instance HasCertificateChain s a => HasCertificateChain (TF.Resource p s) a where
+    certificateChain :: Lens' a (TF.Attribute (HasCertificateChainThread a b) "certificate_chain" b)
+
+instance HasCertificateChain a b => HasCertificateChain (TF.Resource p a) b where
+    type HasCertificateChainThread (TF.Resource p a) b =
+         HasCertificateChainThread a b
+
     certificateChain = TF.configuration . certificateChain
 
-class HasConfig s a | s -> a where
-    config :: Lens' s (TF.Argument "config" a)
+class HasConfig a b | a -> b where
+    type HasConfigThread a b :: *
 
-instance HasConfig s a => HasConfig (TF.Resource p s) a where
+    config :: Lens' a (TF.Attribute (HasConfigThread a b) "config" b)
+
+instance HasConfig a b => HasConfig (TF.Resource p a) b where
+    type HasConfigThread (TF.Resource p a) b =
+         HasConfigThread a b
+
     config = TF.configuration . config
 
-class HasConfigVars s a | s -> a where
-    configVars :: Lens' s (TF.Argument "config_vars" a)
+class HasConfigVars a b | a -> b where
+    type HasConfigVarsThread a b :: *
 
-instance HasConfigVars s a => HasConfigVars (TF.Resource p s) a where
+    configVars :: Lens' a (TF.Attribute (HasConfigVarsThread a b) "config_vars" b)
+
+instance HasConfigVars a b => HasConfigVars (TF.Resource p a) b where
+    type HasConfigVarsThread (TF.Resource p a) b =
+         HasConfigVarsThread a b
+
     configVars = TF.configuration . configVars
 
-class HasEnabled s a | s -> a where
-    enabled :: Lens' s (TF.Argument "enabled" a)
+class HasEnabled a b | a -> b where
+    type HasEnabledThread a b :: *
 
-instance HasEnabled s a => HasEnabled (TF.Resource p s) a where
+    enabled :: Lens' a (TF.Attribute (HasEnabledThread a b) "enabled" b)
+
+instance HasEnabled a b => HasEnabled (TF.Resource p a) b where
+    type HasEnabledThread (TF.Resource p a) b =
+         HasEnabledThread a b
+
     enabled = TF.configuration . enabled
 
-class HasHostname s a | s -> a where
-    hostname :: Lens' s (TF.Argument "hostname" a)
+class HasHostname a b | a -> b where
+    type HasHostnameThread a b :: *
 
-instance HasHostname s a => HasHostname (TF.Resource p s) a where
+    hostname :: Lens' a (TF.Attribute (HasHostnameThread a b) "hostname" b)
+
+instance HasHostname a b => HasHostname (TF.Resource p a) b where
+    type HasHostnameThread (TF.Resource p a) b =
+         HasHostnameThread a b
+
     hostname = TF.configuration . hostname
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasOrganization s a | s -> a where
-    organization :: Lens' s (TF.Argument "organization" a)
+class HasOrganization a b | a -> b where
+    type HasOrganizationThread a b :: *
 
-instance HasOrganization s a => HasOrganization (TF.Resource p s) a where
+    organization :: Lens' a (TF.Attribute (HasOrganizationThread a b) "organization" b)
+
+instance HasOrganization a b => HasOrganization (TF.Resource p a) b where
+    type HasOrganizationThread (TF.Resource p a) b =
+         HasOrganizationThread a b
+
     organization = TF.configuration . organization
 
-class HasPipeline s a | s -> a where
-    pipeline :: Lens' s (TF.Argument "pipeline" a)
+class HasPipeline a b | a -> b where
+    type HasPipelineThread a b :: *
 
-instance HasPipeline s a => HasPipeline (TF.Resource p s) a where
+    pipeline :: Lens' a (TF.Attribute (HasPipelineThread a b) "pipeline" b)
+
+instance HasPipeline a b => HasPipeline (TF.Resource p a) b where
+    type HasPipelineThread (TF.Resource p a) b =
+         HasPipelineThread a b
+
     pipeline = TF.configuration . pipeline
 
-class HasPlan s a | s -> a where
-    plan :: Lens' s (TF.Argument "plan" a)
+class HasPlan a b | a -> b where
+    type HasPlanThread a b :: *
 
-instance HasPlan s a => HasPlan (TF.Resource p s) a where
+    plan :: Lens' a (TF.Attribute (HasPlanThread a b) "plan" b)
+
+instance HasPlan a b => HasPlan (TF.Resource p a) b where
+    type HasPlanThread (TF.Resource p a) b =
+         HasPlanThread a b
+
     plan = TF.configuration . plan
 
-class HasPrivateKey s a | s -> a where
-    privateKey :: Lens' s (TF.Argument "private_key" a)
+class HasPrivateKey a b | a -> b where
+    type HasPrivateKeyThread a b :: *
 
-instance HasPrivateKey s a => HasPrivateKey (TF.Resource p s) a where
+    privateKey :: Lens' a (TF.Attribute (HasPrivateKeyThread a b) "private_key" b)
+
+instance HasPrivateKey a b => HasPrivateKey (TF.Resource p a) b where
+    type HasPrivateKeyThread (TF.Resource p a) b =
+         HasPrivateKeyThread a b
+
     privateKey = TF.configuration . privateKey
 
-class HasRegion s a | s -> a where
-    region :: Lens' s (TF.Argument "region" a)
+class HasRegion a b | a -> b where
+    type HasRegionThread a b :: *
 
-instance HasRegion s a => HasRegion (TF.Resource p s) a where
+    region :: Lens' a (TF.Attribute (HasRegionThread a b) "region" b)
+
+instance HasRegion a b => HasRegion (TF.Resource p a) b where
+    type HasRegionThread (TF.Resource p a) b =
+         HasRegionThread a b
+
     region = TF.configuration . region
 
-class HasSpace s a | s -> a where
-    space :: Lens' s (TF.Argument "space" a)
+class HasSpace a b | a -> b where
+    type HasSpaceThread a b :: *
 
-instance HasSpace s a => HasSpace (TF.Resource p s) a where
+    space :: Lens' a (TF.Attribute (HasSpaceThread a b) "space" b)
+
+instance HasSpace a b => HasSpace (TF.Resource p a) b where
+    type HasSpaceThread (TF.Resource p a) b =
+         HasSpaceThread a b
+
     space = TF.configuration . space
 
-class HasStack s a | s -> a where
-    stack :: Lens' s (TF.Argument "stack" a)
+class HasStack a b | a -> b where
+    type HasStackThread a b :: *
 
-instance HasStack s a => HasStack (TF.Resource p s) a where
+    stack :: Lens' a (TF.Attribute (HasStackThread a b) "stack" b)
+
+instance HasStack a b => HasStack (TF.Resource p a) b where
+    type HasStackThread (TF.Resource p a) b =
+         HasStackThread a b
+
     stack = TF.configuration . stack
 
-class HasStage s a | s -> a where
-    stage :: Lens' s (TF.Argument "stage" a)
+class HasStage a b | a -> b where
+    type HasStageThread a b :: *
 
-instance HasStage s a => HasStage (TF.Resource p s) a where
+    stage :: Lens' a (TF.Attribute (HasStageThread a b) "stage" b)
+
+instance HasStage a b => HasStage (TF.Resource p a) b where
+    type HasStageThread (TF.Resource p a) b =
+         HasStageThread a b
+
     stage = TF.configuration . stage
 
-class HasUrl s a | s -> a where
-    url :: Lens' s (TF.Argument "url" a)
+class HasUrl a b | a -> b where
+    type HasUrlThread a b :: *
 
-instance HasUrl s a => HasUrl (TF.Resource p s) a where
+    url :: Lens' a (TF.Attribute (HasUrlThread a b) "url" b)
+
+instance HasUrl a b => HasUrl (TF.Resource p a) b where
+    type HasUrlThread (TF.Resource p a) b =
+         HasUrlThread a b
+
     url = TF.configuration . url
 
-class HasComputedAllConfigVars s a | s -> a where
-    computedAllConfigVars :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAllConfigVars a b | a -> b where
+    computedAllConfigVars :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAllConfigVars s a => HasComputedAllConfigVars (TF.Resource p s) a where
-    computedAllConfigVars = TF.configuration . computedAllConfigVars
+class HasComputedApp a b | a -> b where
+    computedApp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedApp s a | s -> a where
-    computedApp :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAppId a b | a -> b where
+    computedAppId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedApp s a => HasComputedApp (TF.Resource p s) a where
-    computedApp = TF.configuration . computedApp
+class HasComputedCname a b | a -> b where
+    computedCname :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAppId s a | s -> a where
-    computedAppId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedConfigVars a b | a -> b where
+    computedConfigVars :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAppId s a => HasComputedAppId (TF.Resource p s) a where
-    computedAppId = TF.configuration . computedAppId
+class HasComputedGitUrl a b | a -> b where
+    computedGitUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCname s a | s -> a where
-    computedCname :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHerokuHostname a b | a -> b where
+    computedHerokuHostname :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCname s a => HasComputedCname (TF.Resource p s) a where
-    computedCname = TF.configuration . computedCname
+class HasComputedHostname a b | a -> b where
+    computedHostname :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedConfigVars s a | s -> a where
-    computedConfigVars :: forall r. Getting r s (TF.Attribute a)
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedConfigVars s a => HasComputedConfigVars (TF.Resource p s) a where
-    computedConfigVars = TF.configuration . computedConfigVars
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedGitUrl s a | s -> a where
-    computedGitUrl :: forall r. Getting r s (TF.Attribute a)
+class HasComputedOrganization a b | a -> b where
+    computedOrganization :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedGitUrl s a => HasComputedGitUrl (TF.Resource p s) a where
-    computedGitUrl = TF.configuration . computedGitUrl
+class HasComputedPipeline a b | a -> b where
+    computedPipeline :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHerokuHostname s a | s -> a where
-    computedHerokuHostname :: forall r. Getting r s (TF.Attribute a)
+class HasComputedPlan a b | a -> b where
+    computedPlan :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHerokuHostname s a => HasComputedHerokuHostname (TF.Resource p s) a where
-    computedHerokuHostname = TF.configuration . computedHerokuHostname
+class HasComputedProviderId a b | a -> b where
+    computedProviderId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHostname s a | s -> a where
-    computedHostname :: forall r. Getting r s (TF.Attribute a)
+class HasComputedRegion a b | a -> b where
+    computedRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHostname s a => HasComputedHostname (TF.Resource p s) a where
-    computedHostname = TF.configuration . computedHostname
+class HasComputedSpace a b | a -> b where
+    computedSpace :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedStack a b | a -> b where
+    computedStack :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedStage a b | a -> b where
+    computedStage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedToken a b | a -> b where
+    computedToken :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedOrganization s a | s -> a where
-    computedOrganization :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedOrganization s a => HasComputedOrganization (TF.Resource p s) a where
-    computedOrganization = TF.configuration . computedOrganization
-
-class HasComputedPipeline s a | s -> a where
-    computedPipeline :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPipeline s a => HasComputedPipeline (TF.Resource p s) a where
-    computedPipeline = TF.configuration . computedPipeline
-
-class HasComputedPlan s a | s -> a where
-    computedPlan :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPlan s a => HasComputedPlan (TF.Resource p s) a where
-    computedPlan = TF.configuration . computedPlan
-
-class HasComputedProviderId s a | s -> a where
-    computedProviderId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedProviderId s a => HasComputedProviderId (TF.Resource p s) a where
-    computedProviderId = TF.configuration . computedProviderId
-
-class HasComputedRegion s a | s -> a where
-    computedRegion :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRegion s a => HasComputedRegion (TF.Resource p s) a where
-    computedRegion = TF.configuration . computedRegion
-
-class HasComputedSpace s a | s -> a where
-    computedSpace :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSpace s a => HasComputedSpace (TF.Resource p s) a where
-    computedSpace = TF.configuration . computedSpace
-
-class HasComputedStack s a | s -> a where
-    computedStack :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStack s a => HasComputedStack (TF.Resource p s) a where
-    computedStack = TF.configuration . computedStack
-
-class HasComputedStage s a | s -> a where
-    computedStage :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStage s a => HasComputedStage (TF.Resource p s) a where
-    computedStage = TF.configuration . computedStage
-
-class HasComputedToken s a | s -> a where
-    computedToken :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedToken s a => HasComputedToken (TF.Resource p s) a where
-    computedToken = TF.configuration . computedToken
-
-class HasComputedWebUrl s a | s -> a where
-    computedWebUrl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedWebUrl s a => HasComputedWebUrl (TF.Resource p s) a where
-    computedWebUrl = TF.configuration . computedWebUrl
+class HasComputedWebUrl a b | a -> b where
+    computedWebUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

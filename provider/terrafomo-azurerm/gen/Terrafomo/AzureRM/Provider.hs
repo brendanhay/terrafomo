@@ -43,12 +43,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.AzureRM.Types   as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.AzureRM.Types as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.IP            as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
 
 {- | AzureRM Terraform provider.
 
@@ -59,19 +59,19 @@ Azure using the Service Management API. Use the navigation to the left to
 read about the available resources.
 -}
 data AzureRM = AzureRM {
-      _client_id :: !(TF.Argument "client_id" Text)
+      _client_id                   :: !(Maybe Text)
     {- ^ (Optional) The client ID to use. It can also be sourced from the @ARM_CLIENT_ID@ environment variable. -}
-    , _client_secret :: !(TF.Argument "client_secret" Text)
+    , _client_secret               :: !(Maybe Text)
     {- ^ (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@ environment variable. -}
-    , _environment :: !(TF.Argument "environment" Text)
+    , _environment                 :: !(Maybe Text)
     {- ^ (Optional) The cloud environment to use. It can also be sourced from the @ARM_ENVIRONMENT@ environment variable. Supported values are: -}
-    , _skip_credentials_validation :: !(TF.Argument "skip_credentials_validation" Text)
+    , _skip_credentials_validation :: !(Maybe Text)
     {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable, defaults to @false@ . -}
-    , _skip_provider_registration :: !(TF.Argument "skip_provider_registration" Text)
+    , _skip_provider_registration  :: !(Maybe Text)
     {- ^ (Optional) Prevents the provider from registering the ARM provider namespaces, this can be used if you don't wish to give the Active Directory Application permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable, defaults to @false@ . -}
-    , _subscription_id :: !(TF.Argument "subscription_id" Text)
+    , _subscription_id             :: !(Maybe Text)
     {- ^ (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@ environment variable. -}
-    , _tenant_id :: !(TF.Argument "tenant_id" Text)
+    , _tenant_id                   :: !(Maybe Text)
     {- ^ (Optional) The tenant ID to use. It can also be sourced from the @ARM_TENANT_ID@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,55 +79,57 @@ instance Hashable AzureRM
 
 instance TF.ToHCL AzureRM where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy AzureRM))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_client_id x)
-            , TF.argument (_client_secret x)
-            , TF.argument (_environment x)
-            , TF.argument (_skip_credentials_validation x)
-            , TF.argument (_skip_provider_registration x)
-            , TF.argument (_subscription_id x)
-            , TF.argument (_tenant_id x)
+        let typ = TF.providerType (Proxy :: Proxy (AzureRM))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "client_id" <$> _client_id x
+            , TF.assign "client_secret" <$> _client_secret x
+            , TF.assign "environment" <$> _environment x
+            , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
+            , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
+            , TF.assign "subscription_id" <$> _subscription_id x
+            , TF.assign "tenant_id" <$> _tenant_id x
             ]
-
-emptyAzureRM :: AzureRM
-emptyAzureRM = AzureRM {
-        _client_id = TF.Nil
-      , _client_secret = TF.Nil
-      , _environment = TF.Nil
-      , _skip_credentials_validation = TF.Nil
-      , _skip_provider_registration = TF.Nil
-      , _subscription_id = TF.Nil
-      , _tenant_id = TF.Nil
-    }
 
 instance TF.IsProvider AzureRM where
     type ProviderType AzureRM = "azurerm"
 
-clientId :: Lens' AzureRM (TF.Argument "client_id" Text)
+emptyAzureRM :: AzureRM
+emptyAzureRM = AzureRM {
+        _client_id = Nothing
+      , _client_secret = Nothing
+      , _environment = Nothing
+      , _skip_credentials_validation = Nothing
+      , _skip_provider_registration = Nothing
+      , _subscription_id = Nothing
+      , _tenant_id = Nothing
+    }
+
+clientId :: Lens' AzureRM (Maybe Text)
 clientId =
     lens _client_id (\s a -> s { _client_id = a })
 
-clientSecret :: Lens' AzureRM (TF.Argument "client_secret" Text)
+clientSecret :: Lens' AzureRM (Maybe Text)
 clientSecret =
     lens _client_secret (\s a -> s { _client_secret = a })
 
-environment :: Lens' AzureRM (TF.Argument "environment" Text)
+environment :: Lens' AzureRM (Maybe Text)
 environment =
     lens _environment (\s a -> s { _environment = a })
 
-skipCredentialsValidation :: Lens' AzureRM (TF.Argument "skip_credentials_validation" Text)
+skipCredentialsValidation :: Lens' AzureRM (Maybe Text)
 skipCredentialsValidation =
     lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-skipProviderRegistration :: Lens' AzureRM (TF.Argument "skip_provider_registration" Text)
+skipProviderRegistration :: Lens' AzureRM (Maybe Text)
 skipProviderRegistration =
     lens _skip_provider_registration (\s a -> s { _skip_provider_registration = a })
 
-subscriptionId :: Lens' AzureRM (TF.Argument "subscription_id" Text)
+subscriptionId :: Lens' AzureRM (Maybe Text)
 subscriptionId =
     lens _subscription_id (\s a -> s { _subscription_id = a })
 
-tenantId :: Lens' AzureRM (TF.Argument "tenant_id" Text)
+tenantId :: Lens' AzureRM (Maybe Text)
 tenantId =
     lens _tenant_id (\s a -> s { _tenant_id = a })

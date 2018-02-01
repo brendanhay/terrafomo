@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -81,55 +82,62 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.HCL                   as TF
+import qualified Terrafomo.IP                    as TF
+import qualified Terrafomo.Meta                  as TF (configuration)
+import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.ProfitBricks.Provider as TF
 import qualified Terrafomo.ProfitBricks.Types    as TF
-import qualified Terrafomo.Syntax.HCL            as TF
-import qualified Terrafomo.Syntax.IP             as TF
-import qualified Terrafomo.Syntax.Meta           as TF (configuration)
-import qualified Terrafomo.Syntax.Resource       as TF
-import qualified Terrafomo.Syntax.Resource       as TF
-import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.Resource              as TF
+import qualified Terrafomo.Resource              as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks resource.
 
 Manages a Virtual Data Center on ProfitBricks
 -}
-data DatacenterResource = DatacenterResource {
-      _description :: !(TF.Argument "description" Text)
+data DatacenterResource s = DatacenterResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional)[string] Description for the data center. -}
-    , _location    :: !(TF.Argument "location" Text)
+    , _location    :: !(TF.Attribute s "location" Text)
     {- ^ (Required)[string] The physical location where the data center will be created. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DatacenterResource where
+instance TF.ToHCL (DatacenterResource s) where
     toHCL DatacenterResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _location
-        , TF.argument _name
+        [ TF.attribute _description
+        , TF.attribute _location
+        , TF.attribute _name
         ]
 
-instance HasDescription DatacenterResource Text where
+instance HasDescription (DatacenterResource s) Text where
+    type HasDescriptionThread (DatacenterResource s) Text = s
+
     description =
-        lens (_description :: DatacenterResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: DatacenterResource)
+        lens (_description :: DatacenterResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: DatacenterResource s)
 
-instance HasLocation DatacenterResource Text where
+instance HasLocation (DatacenterResource s) Text where
+    type HasLocationThread (DatacenterResource s) Text = s
+
     location =
-        lens (_location :: DatacenterResource -> TF.Argument "location" Text)
-             (\s a -> s { _location = a } :: DatacenterResource)
+        lens (_location :: DatacenterResource s -> TF.Attribute s "location" Text)
+             (\s a -> s { _location = a } :: DatacenterResource s)
 
-instance HasName DatacenterResource Text where
+instance HasName (DatacenterResource s) Text where
+    type HasNameThread (DatacenterResource s) Text = s
+
     name =
-        lens (_name :: DatacenterResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: DatacenterResource)
+        lens (_name :: DatacenterResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: DatacenterResource s)
 
-datacenterResource :: TF.Resource TF.ProfitBricks DatacenterResource
+datacenterResource :: TF.Resource TF.ProfitBricks (DatacenterResource s)
 datacenterResource =
     TF.newResource "profitbricks_datacenter" $
         DatacenterResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _location = TF.Nil
             , _name = TF.Nil
             }
@@ -138,13 +146,13 @@ datacenterResource =
 
 Manages a Firewall Rules on ProfitBricks
 -}
-data FirewallResource = FirewallResource {
+data FirewallResource s = FirewallResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL FirewallResource where
+instance TF.ToHCL (FirewallResource s) where
     toHCL _ = TF.block []
 
-firewallResource :: TF.Resource TF.ProfitBricks FirewallResource
+firewallResource :: TF.Resource TF.ProfitBricks (FirewallResource s)
 firewallResource =
     TF.newResource "profitbricks_firewall" $
         FirewallResource {
@@ -154,13 +162,13 @@ firewallResource =
 
 Manages groups and group priviliages on ProfitBricks
 -}
-data GroupResource = GroupResource {
+data GroupResource s = GroupResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL GroupResource where
+instance TF.ToHCL (GroupResource s) where
     toHCL _ = TF.block []
 
-groupResource :: TF.Resource TF.ProfitBricks GroupResource
+groupResource :: TF.Resource TF.ProfitBricks (GroupResource s)
 groupResource =
     TF.newResource "profitbricks_group" $
         GroupResource {
@@ -170,13 +178,13 @@ groupResource =
 
 Manages a IP Blocks on ProfitBricks
 -}
-data IpblockResource = IpblockResource {
+data IpblockResource s = IpblockResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL IpblockResource where
+instance TF.ToHCL (IpblockResource s) where
     toHCL _ = TF.block []
 
-ipblockResource :: TF.Resource TF.ProfitBricks IpblockResource
+ipblockResource :: TF.Resource TF.ProfitBricks (IpblockResource s)
 ipblockResource =
     TF.newResource "profitbricks_ipblock" $
         IpblockResource {
@@ -186,13 +194,13 @@ ipblockResource =
 
 Manages Ip Failover groups on ProfitBricks
 -}
-data IpfailoverResource = IpfailoverResource {
+data IpfailoverResource s = IpfailoverResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL IpfailoverResource where
+instance TF.ToHCL (IpfailoverResource s) where
     toHCL _ = TF.block []
 
-ipfailoverResource :: TF.Resource TF.ProfitBricks IpfailoverResource
+ipfailoverResource :: TF.Resource TF.ProfitBricks (IpfailoverResource s)
 ipfailoverResource =
     TF.newResource "profitbricks_ipfailover" $
         IpfailoverResource {
@@ -202,13 +210,13 @@ ipfailoverResource =
 
 Manages a LANs on ProfitBricks
 -}
-data LanResource = LanResource {
+data LanResource s = LanResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL LanResource where
+instance TF.ToHCL (LanResource s) where
     toHCL _ = TF.block []
 
-lanResource :: TF.Resource TF.ProfitBricks LanResource
+lanResource :: TF.Resource TF.ProfitBricks (LanResource s)
 lanResource =
     TF.newResource "profitbricks_lan" $
         LanResource {
@@ -218,13 +226,13 @@ lanResource =
 
 Manages a Load Balancers on ProfitBricks
 -}
-data LoadbalancerResource = LoadbalancerResource {
+data LoadbalancerResource s = LoadbalancerResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL LoadbalancerResource where
+instance TF.ToHCL (LoadbalancerResource s) where
     toHCL _ = TF.block []
 
-loadbalancerResource :: TF.Resource TF.ProfitBricks LoadbalancerResource
+loadbalancerResource :: TF.Resource TF.ProfitBricks (LoadbalancerResource s)
 loadbalancerResource =
     TF.newResource "profitbricks_loadbalancer" $
         LoadbalancerResource {
@@ -234,13 +242,13 @@ loadbalancerResource =
 
 Manages a NICs on ProfitBricks
 -}
-data NicResource = NicResource {
+data NicResource s = NicResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL NicResource where
+instance TF.ToHCL (NicResource s) where
     toHCL _ = TF.block []
 
-nicResource :: TF.Resource TF.ProfitBricks NicResource
+nicResource :: TF.Resource TF.ProfitBricks (NicResource s)
 nicResource =
     TF.newResource "profitbricks_nic" $
         NicResource {
@@ -250,13 +258,13 @@ nicResource =
 
 Manages a Servers on ProfitBricks
 -}
-data ServerResource = ServerResource {
+data ServerResource s = ServerResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL ServerResource where
+instance TF.ToHCL (ServerResource s) where
     toHCL _ = TF.block []
 
-serverResource :: TF.Resource TF.ProfitBricks ServerResource
+serverResource :: TF.Resource TF.ProfitBricks (ServerResource s)
 serverResource =
     TF.newResource "profitbricks_server" $
         ServerResource {
@@ -267,13 +275,13 @@ serverResource =
 Manages shares and list shares permissions granted to the group members for
 each shared resource.
 -}
-data ShareResource = ShareResource {
+data ShareResource s = ShareResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL ShareResource where
+instance TF.ToHCL (ShareResource s) where
     toHCL _ = TF.block []
 
-shareResource :: TF.Resource TF.ProfitBricks ShareResource
+shareResource :: TF.Resource TF.ProfitBricks (ShareResource s)
 shareResource =
     TF.newResource "profitbricks_share" $
         ShareResource {
@@ -283,13 +291,13 @@ shareResource =
 
 Manages snapshots on ProfitBricks.
 -}
-data SnapshotResource = SnapshotResource {
+data SnapshotResource s = SnapshotResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL SnapshotResource where
+instance TF.ToHCL (SnapshotResource s) where
     toHCL _ = TF.block []
 
-snapshotResource :: TF.Resource TF.ProfitBricks SnapshotResource
+snapshotResource :: TF.Resource TF.ProfitBricks (SnapshotResource s)
 snapshotResource =
     TF.newResource "profitbricks_snapshot" $
         SnapshotResource {
@@ -299,13 +307,13 @@ snapshotResource =
 
 Manages users and list users and groups associated.
 -}
-data UserResource = UserResource {
+data UserResource s = UserResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserResource where
+instance TF.ToHCL (UserResource s) where
     toHCL _ = TF.block []
 
-userResource :: TF.Resource TF.ProfitBricks UserResource
+userResource :: TF.Resource TF.ProfitBricks (UserResource s)
 userResource =
     TF.newResource "profitbricks_user" $
         UserResource {
@@ -315,32 +323,47 @@ userResource =
 
 Manages a Volumes on ProfitBricks
 -}
-data VolumeResource = VolumeResource {
+data VolumeResource s = VolumeResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL VolumeResource where
+instance TF.ToHCL (VolumeResource s) where
     toHCL _ = TF.block []
 
-volumeResource :: TF.Resource TF.ProfitBricks VolumeResource
+volumeResource :: TF.Resource TF.ProfitBricks (VolumeResource s)
 volumeResource =
     TF.newResource "profitbricks_volume" $
         VolumeResource {
             }
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasLocation s a | s -> a where
-    location :: Lens' s (TF.Argument "location" a)
+class HasLocation a b | a -> b where
+    type HasLocationThread a b :: *
 
-instance HasLocation s a => HasLocation (TF.Resource p s) a where
+    location :: Lens' a (TF.Attribute (HasLocationThread a b) "location" b)
+
+instance HasLocation a b => HasLocation (TF.Resource p a) b where
+    type HasLocationThread (TF.Resource p a) b =
+         HasLocationThread a b
+
     location = TF.configuration . location
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name

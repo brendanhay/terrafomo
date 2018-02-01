@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -99,55 +100,62 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.OPC.Provider      as TF
-import qualified Terrafomo.OPC.Types         as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.DataSource   as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.IP           as TF
+import qualified Terrafomo.Meta         as TF (configuration)
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.OPC.Provider as TF
+import qualified Terrafomo.OPC.Types    as TF
+import qualified Terrafomo.Resource     as TF
 
 {- | The @opc_compute_image_list_entry@ OPC datasource.
 
 Use this data source to access the configuration of an Image List Entry.
 -}
-data ComputeImageListEntryDataSource = ComputeImageListEntryDataSource {
-      _entry      :: !(TF.Argument "entry" Text)
+data ComputeImageListEntryDataSource s = ComputeImageListEntryDataSource {
+      _entry      :: !(TF.Attribute s "entry" Text)
     {- ^ (Optional) - Which machine image to use. See <#entry> below for more details -}
-    , _image_list :: !(TF.Argument "image_list" Text)
+    , _image_list :: !(TF.Attribute s "image_list" Text)
     {- ^ (Required) - The name of the image list to lookup. -}
-    , _version    :: !(TF.Argument "version" Text)
+    , _version    :: !(TF.Attribute s "version" Text)
     {- ^ (Required) - The version (integer) of the Image List to use. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ComputeImageListEntryDataSource where
+instance TF.ToHCL (ComputeImageListEntryDataSource s) where
     toHCL ComputeImageListEntryDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _entry
-        , TF.argument _image_list
-        , TF.argument _version
+        [ TF.attribute _entry
+        , TF.attribute _image_list
+        , TF.attribute _version
         ]
 
-instance HasEntry ComputeImageListEntryDataSource Text where
+instance HasEntry (ComputeImageListEntryDataSource s) Text where
+    type HasEntryThread (ComputeImageListEntryDataSource s) Text = s
+
     entry =
-        lens (_entry :: ComputeImageListEntryDataSource -> TF.Argument "entry" Text)
-             (\s a -> s { _entry = a } :: ComputeImageListEntryDataSource)
+        lens (_entry :: ComputeImageListEntryDataSource s -> TF.Attribute s "entry" Text)
+             (\s a -> s { _entry = a } :: ComputeImageListEntryDataSource s)
 
-instance HasImageList ComputeImageListEntryDataSource Text where
+instance HasImageList (ComputeImageListEntryDataSource s) Text where
+    type HasImageListThread (ComputeImageListEntryDataSource s) Text = s
+
     imageList =
-        lens (_image_list :: ComputeImageListEntryDataSource -> TF.Argument "image_list" Text)
-             (\s a -> s { _image_list = a } :: ComputeImageListEntryDataSource)
+        lens (_image_list :: ComputeImageListEntryDataSource s -> TF.Attribute s "image_list" Text)
+             (\s a -> s { _image_list = a } :: ComputeImageListEntryDataSource s)
 
-instance HasVersion ComputeImageListEntryDataSource Text where
+instance HasVersion (ComputeImageListEntryDataSource s) Text where
+    type HasVersionThread (ComputeImageListEntryDataSource s) Text = s
+
     version =
-        lens (_version :: ComputeImageListEntryDataSource -> TF.Argument "version" Text)
-             (\s a -> s { _version = a } :: ComputeImageListEntryDataSource)
+        lens (_version :: ComputeImageListEntryDataSource s -> TF.Attribute s "version" Text)
+             (\s a -> s { _version = a } :: ComputeImageListEntryDataSource s)
 
-computeImageListEntryDataSource :: TF.DataSource TF.OPC ComputeImageListEntryDataSource
+computeImageListEntryDataSource :: TF.DataSource TF.OPC (ComputeImageListEntryDataSource s)
 computeImageListEntryDataSource =
     TF.newDataSource "opc_compute_image_list_entry" $
         ComputeImageListEntryDataSource {
-            _entry = TF.Nil
+              _entry = TF.Nil
             , _image_list = TF.Nil
             , _version = TF.Nil
             }
@@ -156,70 +164,74 @@ computeImageListEntryDataSource =
 
 Use this data source to access the configuration of an Machine Image.
 -}
-data ComputeMachineImageDataSource = ComputeMachineImageDataSource {
-      _account :: !(TF.Argument "account" Text)
+data ComputeMachineImageDataSource s = ComputeMachineImageDataSource {
+      _account :: !(TF.Attribute s "account" Text)
     {- ^ (Required) The two part name of the compute object storage account in the format @/Compute-{identity_domain}/cloud_storage@ -}
-    , _name    :: !(TF.Argument "name" Text)
+    , _name    :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the Machine Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ComputeMachineImageDataSource where
+instance TF.ToHCL (ComputeMachineImageDataSource s) where
     toHCL ComputeMachineImageDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _account
-        , TF.argument _name
+        [ TF.attribute _account
+        , TF.attribute _name
         ]
 
-instance HasAccount ComputeMachineImageDataSource Text where
+instance HasAccount (ComputeMachineImageDataSource s) Text where
+    type HasAccountThread (ComputeMachineImageDataSource s) Text = s
+
     account =
-        lens (_account :: ComputeMachineImageDataSource -> TF.Argument "account" Text)
-             (\s a -> s { _account = a } :: ComputeMachineImageDataSource)
+        lens (_account :: ComputeMachineImageDataSource s -> TF.Attribute s "account" Text)
+             (\s a -> s { _account = a } :: ComputeMachineImageDataSource s)
 
-instance HasName ComputeMachineImageDataSource Text where
+instance HasName (ComputeMachineImageDataSource s) Text where
+    type HasNameThread (ComputeMachineImageDataSource s) Text = s
+
     name =
-        lens (_name :: ComputeMachineImageDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ComputeMachineImageDataSource)
+        lens (_name :: ComputeMachineImageDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ComputeMachineImageDataSource s)
 
-instance HasComputedAttributes ComputeMachineImageDataSource Text where
+instance HasComputedAttributes (ComputeMachineImageDataSource s) Text where
     computedAttributes =
-        to (\_  -> TF.Compute "attributes")
+        to (\x -> TF.Computed (TF.referenceKey x) "attributes")
 
-instance HasComputedDescription ComputeMachineImageDataSource Text where
+instance HasComputedDescription (ComputeMachineImageDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedErrorReason ComputeMachineImageDataSource Text where
+instance HasComputedErrorReason (ComputeMachineImageDataSource s) Text where
     computedErrorReason =
-        to (\_  -> TF.Compute "error_reason")
+        to (\x -> TF.Computed (TF.referenceKey x) "error_reason")
 
-instance HasComputedFile ComputeMachineImageDataSource Text where
+instance HasComputedFile (ComputeMachineImageDataSource s) Text where
     computedFile =
-        to (\_  -> TF.Compute "file")
+        to (\x -> TF.Computed (TF.referenceKey x) "file")
 
-instance HasComputedHypervisor ComputeMachineImageDataSource Text where
+instance HasComputedHypervisor (ComputeMachineImageDataSource s) Text where
     computedHypervisor =
-        to (\_  -> TF.Compute "hypervisor")
+        to (\x -> TF.Computed (TF.referenceKey x) "hypervisor")
 
-instance HasComputedImageFormat ComputeMachineImageDataSource Text where
+instance HasComputedImageFormat (ComputeMachineImageDataSource s) Text where
     computedImageFormat =
-        to (\_  -> TF.Compute "image_format")
+        to (\x -> TF.Computed (TF.referenceKey x) "image_format")
 
-instance HasComputedPlatform ComputeMachineImageDataSource Text where
+instance HasComputedPlatform (ComputeMachineImageDataSource s) Text where
     computedPlatform =
-        to (\_  -> TF.Compute "platform")
+        to (\x -> TF.Computed (TF.referenceKey x) "platform")
 
-instance HasComputedState ComputeMachineImageDataSource Text where
+instance HasComputedState (ComputeMachineImageDataSource s) Text where
     computedState =
-        to (\_  -> TF.Compute "state")
+        to (\x -> TF.Computed (TF.referenceKey x) "state")
 
-instance HasComputedUri ComputeMachineImageDataSource Text where
+instance HasComputedUri (ComputeMachineImageDataSource s) Text where
     computedUri =
-        to (\_  -> TF.Compute "uri")
+        to (\x -> TF.Computed (TF.referenceKey x) "uri")
 
-computeMachineImageDataSource :: TF.DataSource TF.OPC ComputeMachineImageDataSource
+computeMachineImageDataSource :: TF.DataSource TF.OPC (ComputeMachineImageDataSource s)
 computeMachineImageDataSource =
     TF.newDataSource "opc_compute_machine_image" $
         ComputeMachineImageDataSource {
-            _account = TF.Nil
+              _account = TF.Nil
             , _name = TF.Nil
             }
 
@@ -228,94 +240,100 @@ computeMachineImageDataSource =
 Use this data source to access the configuration of an instance's network
 interface
 -}
-data ComputeNetworkInterfaceDataSource = ComputeNetworkInterfaceDataSource {
-      _instance_id   :: !(TF.Argument "instance_id" Text)
+data ComputeNetworkInterfaceDataSource s = ComputeNetworkInterfaceDataSource {
+      _instance_id   :: !(TF.Attribute s "instance_id" Text)
     {- ^ is the id of the instance. -}
-    , _instance_name :: !(TF.Argument "instance_name" Text)
+    , _instance_name :: !(TF.Attribute s "instance_name" Text)
     {- ^ is the name of the instance. -}
-    , _interface     :: !(TF.Argument "interface" Text)
+    , _interface     :: !(TF.Attribute s "interface" Text)
     {- ^ is the name of the attached interface. @eth0@ , @eth1@ , ... @eth9@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ComputeNetworkInterfaceDataSource where
+instance TF.ToHCL (ComputeNetworkInterfaceDataSource s) where
     toHCL ComputeNetworkInterfaceDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _instance_id
-        , TF.argument _instance_name
-        , TF.argument _interface
+        [ TF.attribute _instance_id
+        , TF.attribute _instance_name
+        , TF.attribute _interface
         ]
 
-instance HasInstanceId ComputeNetworkInterfaceDataSource Text where
+instance HasInstanceId (ComputeNetworkInterfaceDataSource s) Text where
+    type HasInstanceIdThread (ComputeNetworkInterfaceDataSource s) Text = s
+
     instanceId =
-        lens (_instance_id :: ComputeNetworkInterfaceDataSource -> TF.Argument "instance_id" Text)
-             (\s a -> s { _instance_id = a } :: ComputeNetworkInterfaceDataSource)
+        lens (_instance_id :: ComputeNetworkInterfaceDataSource s -> TF.Attribute s "instance_id" Text)
+             (\s a -> s { _instance_id = a } :: ComputeNetworkInterfaceDataSource s)
 
-instance HasInstanceName ComputeNetworkInterfaceDataSource Text where
+instance HasInstanceName (ComputeNetworkInterfaceDataSource s) Text where
+    type HasInstanceNameThread (ComputeNetworkInterfaceDataSource s) Text = s
+
     instanceName =
-        lens (_instance_name :: ComputeNetworkInterfaceDataSource -> TF.Argument "instance_name" Text)
-             (\s a -> s { _instance_name = a } :: ComputeNetworkInterfaceDataSource)
+        lens (_instance_name :: ComputeNetworkInterfaceDataSource s -> TF.Attribute s "instance_name" Text)
+             (\s a -> s { _instance_name = a } :: ComputeNetworkInterfaceDataSource s)
 
-instance HasInterface ComputeNetworkInterfaceDataSource Text where
+instance HasInterface (ComputeNetworkInterfaceDataSource s) Text where
+    type HasInterfaceThread (ComputeNetworkInterfaceDataSource s) Text = s
+
     interface =
-        lens (_interface :: ComputeNetworkInterfaceDataSource -> TF.Argument "interface" Text)
-             (\s a -> s { _interface = a } :: ComputeNetworkInterfaceDataSource)
+        lens (_interface :: ComputeNetworkInterfaceDataSource s -> TF.Attribute s "interface" Text)
+             (\s a -> s { _interface = a } :: ComputeNetworkInterfaceDataSource s)
 
-instance HasComputedDns ComputeNetworkInterfaceDataSource Text where
+instance HasComputedDns (ComputeNetworkInterfaceDataSource s) Text where
     computedDns =
-        to (\_  -> TF.Compute "dns")
+        to (\x -> TF.Computed (TF.referenceKey x) "dns")
 
-instance HasComputedIpAddress ComputeNetworkInterfaceDataSource Text where
+instance HasComputedIpAddress (ComputeNetworkInterfaceDataSource s) Text where
     computedIpAddress =
-        to (\_  -> TF.Compute "ip_address")
+        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
 
-instance HasComputedIpNetwork ComputeNetworkInterfaceDataSource Text where
+instance HasComputedIpNetwork (ComputeNetworkInterfaceDataSource s) Text where
     computedIpNetwork =
-        to (\_  -> TF.Compute "ip_network")
+        to (\x -> TF.Computed (TF.referenceKey x) "ip_network")
 
-instance HasComputedIsDefaultGateway ComputeNetworkInterfaceDataSource Text where
+instance HasComputedIsDefaultGateway (ComputeNetworkInterfaceDataSource s) Text where
     computedIsDefaultGateway =
-        to (\_  -> TF.Compute "is_default_gateway")
+        to (\x -> TF.Computed (TF.referenceKey x) "is_default_gateway")
 
-instance HasComputedMacAddress ComputeNetworkInterfaceDataSource Text where
+instance HasComputedMacAddress (ComputeNetworkInterfaceDataSource s) Text where
     computedMacAddress =
-        to (\_  -> TF.Compute "mac_address")
+        to (\x -> TF.Computed (TF.referenceKey x) "mac_address")
 
-instance HasComputedModel ComputeNetworkInterfaceDataSource Text where
+instance HasComputedModel (ComputeNetworkInterfaceDataSource s) Text where
     computedModel =
-        to (\_  -> TF.Compute "model")
+        to (\x -> TF.Computed (TF.referenceKey x) "model")
 
-instance HasComputedNameServers ComputeNetworkInterfaceDataSource Text where
+instance HasComputedNameServers (ComputeNetworkInterfaceDataSource s) Text where
     computedNameServers =
-        to (\_  -> TF.Compute "name_servers")
+        to (\x -> TF.Computed (TF.referenceKey x) "name_servers")
 
-instance HasComputedNat ComputeNetworkInterfaceDataSource Text where
+instance HasComputedNat (ComputeNetworkInterfaceDataSource s) Text where
     computedNat =
-        to (\_  -> TF.Compute "nat")
+        to (\x -> TF.Computed (TF.referenceKey x) "nat")
 
-instance HasComputedSearchDomains ComputeNetworkInterfaceDataSource Text where
+instance HasComputedSearchDomains (ComputeNetworkInterfaceDataSource s) Text where
     computedSearchDomains =
-        to (\_  -> TF.Compute "search_domains")
+        to (\x -> TF.Computed (TF.referenceKey x) "search_domains")
 
-instance HasComputedSecLists ComputeNetworkInterfaceDataSource Text where
+instance HasComputedSecLists (ComputeNetworkInterfaceDataSource s) Text where
     computedSecLists =
-        to (\_  -> TF.Compute "sec_lists")
+        to (\x -> TF.Computed (TF.referenceKey x) "sec_lists")
 
-instance HasComputedSharedNetwork ComputeNetworkInterfaceDataSource Text where
+instance HasComputedSharedNetwork (ComputeNetworkInterfaceDataSource s) Text where
     computedSharedNetwork =
-        to (\_  -> TF.Compute "shared_network")
+        to (\x -> TF.Computed (TF.referenceKey x) "shared_network")
 
-instance HasComputedVnic ComputeNetworkInterfaceDataSource Text where
+instance HasComputedVnic (ComputeNetworkInterfaceDataSource s) Text where
     computedVnic =
-        to (\_  -> TF.Compute "vnic")
+        to (\x -> TF.Computed (TF.referenceKey x) "vnic")
 
-instance HasComputedVnicSets ComputeNetworkInterfaceDataSource Text where
+instance HasComputedVnicSets (ComputeNetworkInterfaceDataSource s) Text where
     computedVnicSets =
-        to (\_  -> TF.Compute "vnic_sets")
+        to (\x -> TF.Computed (TF.referenceKey x) "vnic_sets")
 
-computeNetworkInterfaceDataSource :: TF.DataSource TF.OPC ComputeNetworkInterfaceDataSource
+computeNetworkInterfaceDataSource :: TF.DataSource TF.OPC (ComputeNetworkInterfaceDataSource s)
 computeNetworkInterfaceDataSource =
     TF.newDataSource "opc_compute_network_interface" $
         ComputeNetworkInterfaceDataSource {
-            _instance_id = TF.Nil
+              _instance_id = TF.Nil
             , _instance_name = TF.Nil
             , _interface = TF.Nil
             }
@@ -325,408 +343,341 @@ computeNetworkInterfaceDataSource =
 Use this data source to access the configuration of a storage volume
 snapshot.
 -}
-data ComputeStorageVolumeSnapshotDataSource = ComputeStorageVolumeSnapshotDataSource {
-      _name :: !(TF.Argument "name" Text)
+data ComputeStorageVolumeSnapshotDataSource s = ComputeStorageVolumeSnapshotDataSource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ is the name of the storage volume snapshot. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ComputeStorageVolumeSnapshotDataSource where
+instance TF.ToHCL (ComputeStorageVolumeSnapshotDataSource s) where
     toHCL ComputeStorageVolumeSnapshotDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName ComputeStorageVolumeSnapshotDataSource Text where
+instance HasName (ComputeStorageVolumeSnapshotDataSource s) Text where
+    type HasNameThread (ComputeStorageVolumeSnapshotDataSource s) Text = s
+
     name =
-        lens (_name :: ComputeStorageVolumeSnapshotDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotDataSource)
+        lens (_name :: ComputeStorageVolumeSnapshotDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotDataSource s)
 
-instance HasComputedAccount ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedAccount (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedAccount =
-        to (\_  -> TF.Compute "account")
+        to (\x -> TF.Computed (TF.referenceKey x) "account")
 
-instance HasComputedCollocated ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedCollocated (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedCollocated =
-        to (\_  -> TF.Compute "collocated")
+        to (\x -> TF.Computed (TF.referenceKey x) "collocated")
 
-instance HasComputedDescription ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedDescription (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedMachineImageName ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedMachineImageName (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedMachineImageName =
-        to (\_  -> TF.Compute "machine_image_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "machine_image_name")
 
-instance HasComputedParentVolumeBootable ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedParentVolumeBootable (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedParentVolumeBootable =
-        to (\_  -> TF.Compute "parent_volume_bootable")
+        to (\x -> TF.Computed (TF.referenceKey x) "parent_volume_bootable")
 
-instance HasComputedPlatform ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedPlatform (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedPlatform =
-        to (\_  -> TF.Compute "platform")
+        to (\x -> TF.Computed (TF.referenceKey x) "platform")
 
-instance HasComputedProperty ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedProperty (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedProperty =
-        to (\_  -> TF.Compute "property")
+        to (\x -> TF.Computed (TF.referenceKey x) "property")
 
-instance HasComputedSize ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedSize (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedSize =
-        to (\_  -> TF.Compute "size")
+        to (\x -> TF.Computed (TF.referenceKey x) "size")
 
-instance HasComputedSnapshotId ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedSnapshotId (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedSnapshotId =
-        to (\_  -> TF.Compute "snapshot_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_id")
 
-instance HasComputedSnapshotTimestamp ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedSnapshotTimestamp =
-        to (\_  -> TF.Compute "snapshot_timestamp")
+        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_timestamp")
 
-instance HasComputedStartTimestamp ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedStartTimestamp (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedStartTimestamp =
-        to (\_  -> TF.Compute "start_timestamp")
+        to (\x -> TF.Computed (TF.referenceKey x) "start_timestamp")
 
-instance HasComputedStatus ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedStatus (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedStatus =
-        to (\_  -> TF.Compute "status")
+        to (\x -> TF.Computed (TF.referenceKey x) "status")
 
-instance HasComputedStatusDetail ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedStatusDetail (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedStatusDetail =
-        to (\_  -> TF.Compute "status_detail")
+        to (\x -> TF.Computed (TF.referenceKey x) "status_detail")
 
-instance HasComputedStatusTimestamp ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedStatusTimestamp =
-        to (\_  -> TF.Compute "status_timestamp")
+        to (\x -> TF.Computed (TF.referenceKey x) "status_timestamp")
 
-instance HasComputedTags ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedTags (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedTags =
-        to (\_  -> TF.Compute "tags")
+        to (\x -> TF.Computed (TF.referenceKey x) "tags")
 
-instance HasComputedUri ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedUri (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedUri =
-        to (\_  -> TF.Compute "uri")
+        to (\x -> TF.Computed (TF.referenceKey x) "uri")
 
-instance HasComputedVolumeName ComputeStorageVolumeSnapshotDataSource Text where
+instance HasComputedVolumeName (ComputeStorageVolumeSnapshotDataSource s) Text where
     computedVolumeName =
-        to (\_  -> TF.Compute "volume_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "volume_name")
 
-computeStorageVolumeSnapshotDataSource :: TF.DataSource TF.OPC ComputeStorageVolumeSnapshotDataSource
+computeStorageVolumeSnapshotDataSource :: TF.DataSource TF.OPC (ComputeStorageVolumeSnapshotDataSource s)
 computeStorageVolumeSnapshotDataSource =
     TF.newDataSource "opc_compute_storage_volume_snapshot" $
         ComputeStorageVolumeSnapshotDataSource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
 {- | The @opc_compute_vnic@ OPC datasource.
 
 Use this data source to access the configuration of a Virtual NIC.
 -}
-data ComputeVnicDataSource = ComputeVnicDataSource {
-      _name :: !(TF.Argument "name" Text)
+data ComputeVnicDataSource s = ComputeVnicDataSource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ is the name of the Virtual NIC. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ComputeVnicDataSource where
+instance TF.ToHCL (ComputeVnicDataSource s) where
     toHCL ComputeVnicDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName ComputeVnicDataSource Text where
+instance HasName (ComputeVnicDataSource s) Text where
+    type HasNameThread (ComputeVnicDataSource s) Text = s
+
     name =
-        lens (_name :: ComputeVnicDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ComputeVnicDataSource)
+        lens (_name :: ComputeVnicDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ComputeVnicDataSource s)
 
-instance HasComputedDescription ComputeVnicDataSource Text where
+instance HasComputedDescription (ComputeVnicDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedMacAddress ComputeVnicDataSource Text where
+instance HasComputedMacAddress (ComputeVnicDataSource s) Text where
     computedMacAddress =
-        to (\_  -> TF.Compute "mac_address")
+        to (\x -> TF.Computed (TF.referenceKey x) "mac_address")
 
-instance HasComputedTags ComputeVnicDataSource Text where
+instance HasComputedTags (ComputeVnicDataSource s) Text where
     computedTags =
-        to (\_  -> TF.Compute "tags")
+        to (\x -> TF.Computed (TF.referenceKey x) "tags")
 
-instance HasComputedTransitFlag ComputeVnicDataSource Text where
+instance HasComputedTransitFlag (ComputeVnicDataSource s) Text where
     computedTransitFlag =
-        to (\_  -> TF.Compute "transit_flag")
+        to (\x -> TF.Computed (TF.referenceKey x) "transit_flag")
 
-instance HasComputedUri ComputeVnicDataSource Text where
+instance HasComputedUri (ComputeVnicDataSource s) Text where
     computedUri =
-        to (\_  -> TF.Compute "uri")
+        to (\x -> TF.Computed (TF.referenceKey x) "uri")
 
-computeVnicDataSource :: TF.DataSource TF.OPC ComputeVnicDataSource
+computeVnicDataSource :: TF.DataSource TF.OPC (ComputeVnicDataSource s)
 computeVnicDataSource =
     TF.newDataSource "opc_compute_vnic" $
         ComputeVnicDataSource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
-class HasAccount s a | s -> a where
-    account :: Lens' s (TF.Argument "account" a)
+class HasAccount a b | a -> b where
+    type HasAccountThread a b :: *
 
-instance HasAccount s a => HasAccount (TF.DataSource p s) a where
+    account :: Lens' a (TF.Attribute (HasAccountThread a b) "account" b)
+
+instance HasAccount a b => HasAccount (TF.DataSource p a) b where
+    type HasAccountThread (TF.DataSource p a) b =
+         HasAccountThread a b
+
     account = TF.configuration . account
 
-class HasEntry s a | s -> a where
-    entry :: Lens' s (TF.Argument "entry" a)
+class HasEntry a b | a -> b where
+    type HasEntryThread a b :: *
 
-instance HasEntry s a => HasEntry (TF.DataSource p s) a where
+    entry :: Lens' a (TF.Attribute (HasEntryThread a b) "entry" b)
+
+instance HasEntry a b => HasEntry (TF.DataSource p a) b where
+    type HasEntryThread (TF.DataSource p a) b =
+         HasEntryThread a b
+
     entry = TF.configuration . entry
 
-class HasImageList s a | s -> a where
-    imageList :: Lens' s (TF.Argument "image_list" a)
+class HasImageList a b | a -> b where
+    type HasImageListThread a b :: *
 
-instance HasImageList s a => HasImageList (TF.DataSource p s) a where
+    imageList :: Lens' a (TF.Attribute (HasImageListThread a b) "image_list" b)
+
+instance HasImageList a b => HasImageList (TF.DataSource p a) b where
+    type HasImageListThread (TF.DataSource p a) b =
+         HasImageListThread a b
+
     imageList = TF.configuration . imageList
 
-class HasInstanceId s a | s -> a where
-    instanceId :: Lens' s (TF.Argument "instance_id" a)
+class HasInstanceId a b | a -> b where
+    type HasInstanceIdThread a b :: *
 
-instance HasInstanceId s a => HasInstanceId (TF.DataSource p s) a where
+    instanceId :: Lens' a (TF.Attribute (HasInstanceIdThread a b) "instance_id" b)
+
+instance HasInstanceId a b => HasInstanceId (TF.DataSource p a) b where
+    type HasInstanceIdThread (TF.DataSource p a) b =
+         HasInstanceIdThread a b
+
     instanceId = TF.configuration . instanceId
 
-class HasInstanceName s a | s -> a where
-    instanceName :: Lens' s (TF.Argument "instance_name" a)
+class HasInstanceName a b | a -> b where
+    type HasInstanceNameThread a b :: *
 
-instance HasInstanceName s a => HasInstanceName (TF.DataSource p s) a where
+    instanceName :: Lens' a (TF.Attribute (HasInstanceNameThread a b) "instance_name" b)
+
+instance HasInstanceName a b => HasInstanceName (TF.DataSource p a) b where
+    type HasInstanceNameThread (TF.DataSource p a) b =
+         HasInstanceNameThread a b
+
     instanceName = TF.configuration . instanceName
 
-class HasInterface s a | s -> a where
-    interface :: Lens' s (TF.Argument "interface" a)
+class HasInterface a b | a -> b where
+    type HasInterfaceThread a b :: *
 
-instance HasInterface s a => HasInterface (TF.DataSource p s) a where
+    interface :: Lens' a (TF.Attribute (HasInterfaceThread a b) "interface" b)
+
+instance HasInterface a b => HasInterface (TF.DataSource p a) b where
+    type HasInterfaceThread (TF.DataSource p a) b =
+         HasInterfaceThread a b
+
     interface = TF.configuration . interface
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasVersion s a | s -> a where
-    version :: Lens' s (TF.Argument "version" a)
+class HasVersion a b | a -> b where
+    type HasVersionThread a b :: *
 
-instance HasVersion s a => HasVersion (TF.DataSource p s) a where
+    version :: Lens' a (TF.Attribute (HasVersionThread a b) "version" b)
+
+instance HasVersion a b => HasVersion (TF.DataSource p a) b where
+    type HasVersionThread (TF.DataSource p a) b =
+         HasVersionThread a b
+
     version = TF.configuration . version
 
-class HasComputedAccount s a | s -> a where
-    computedAccount :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAccount a b | a -> b where
+    computedAccount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAccount s a => HasComputedAccount (TF.DataSource p s) a where
-    computedAccount = TF.configuration . computedAccount
+class HasComputedAttributes a b | a -> b where
+    computedAttributes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAttributes s a | s -> a where
-    computedAttributes :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCollocated a b | a -> b where
+    computedCollocated :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAttributes s a => HasComputedAttributes (TF.DataSource p s) a where
-    computedAttributes = TF.configuration . computedAttributes
+class HasComputedDescription a b | a -> b where
+    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCollocated s a | s -> a where
-    computedCollocated :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDns a b | a -> b where
+    computedDns :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCollocated s a => HasComputedCollocated (TF.DataSource p s) a where
-    computedCollocated = TF.configuration . computedCollocated
+class HasComputedErrorReason a b | a -> b where
+    computedErrorReason :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDescription s a | s -> a where
-    computedDescription :: forall r. Getting r s (TF.Attribute a)
+class HasComputedFile a b | a -> b where
+    computedFile :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
-    computedDescription = TF.configuration . computedDescription
+class HasComputedHypervisor a b | a -> b where
+    computedHypervisor :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDns s a | s -> a where
-    computedDns :: forall r. Getting r s (TF.Attribute a)
+class HasComputedImageFormat a b | a -> b where
+    computedImageFormat :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDns s a => HasComputedDns (TF.DataSource p s) a where
-    computedDns = TF.configuration . computedDns
+class HasComputedIpAddress a b | a -> b where
+    computedIpAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedErrorReason s a | s -> a where
-    computedErrorReason :: forall r. Getting r s (TF.Attribute a)
+class HasComputedIpNetwork a b | a -> b where
+    computedIpNetwork :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedErrorReason s a => HasComputedErrorReason (TF.DataSource p s) a where
-    computedErrorReason = TF.configuration . computedErrorReason
+class HasComputedIsDefaultGateway a b | a -> b where
+    computedIsDefaultGateway :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedFile s a | s -> a where
-    computedFile :: forall r. Getting r s (TF.Attribute a)
+class HasComputedMacAddress a b | a -> b where
+    computedMacAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFile s a => HasComputedFile (TF.DataSource p s) a where
-    computedFile = TF.configuration . computedFile
+class HasComputedMachineImageName a b | a -> b where
+    computedMachineImageName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHypervisor s a | s -> a where
-    computedHypervisor :: forall r. Getting r s (TF.Attribute a)
+class HasComputedModel a b | a -> b where
+    computedModel :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHypervisor s a => HasComputedHypervisor (TF.DataSource p s) a where
-    computedHypervisor = TF.configuration . computedHypervisor
+class HasComputedNameServers a b | a -> b where
+    computedNameServers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedImageFormat s a | s -> a where
-    computedImageFormat :: forall r. Getting r s (TF.Attribute a)
+class HasComputedNat a b | a -> b where
+    computedNat :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedImageFormat s a => HasComputedImageFormat (TF.DataSource p s) a where
-    computedImageFormat = TF.configuration . computedImageFormat
+class HasComputedParentVolumeBootable a b | a -> b where
+    computedParentVolumeBootable :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIpAddress s a | s -> a where
-    computedIpAddress :: forall r. Getting r s (TF.Attribute a)
+class HasComputedPlatform a b | a -> b where
+    computedPlatform :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedIpAddress s a => HasComputedIpAddress (TF.DataSource p s) a where
-    computedIpAddress = TF.configuration . computedIpAddress
+class HasComputedProperty a b | a -> b where
+    computedProperty :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIpNetwork s a | s -> a where
-    computedIpNetwork :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSearchDomains a b | a -> b where
+    computedSearchDomains :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedIpNetwork s a => HasComputedIpNetwork (TF.DataSource p s) a where
-    computedIpNetwork = TF.configuration . computedIpNetwork
+class HasComputedSecLists a b | a -> b where
+    computedSecLists :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIsDefaultGateway s a | s -> a where
-    computedIsDefaultGateway :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSharedNetwork a b | a -> b where
+    computedSharedNetwork :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedIsDefaultGateway s a => HasComputedIsDefaultGateway (TF.DataSource p s) a where
-    computedIsDefaultGateway = TF.configuration . computedIsDefaultGateway
+class HasComputedSize a b | a -> b where
+    computedSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedMacAddress s a | s -> a where
-    computedMacAddress :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSnapshotId a b | a -> b where
+    computedSnapshotId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedMacAddress s a => HasComputedMacAddress (TF.DataSource p s) a where
-    computedMacAddress = TF.configuration . computedMacAddress
+class HasComputedSnapshotTimestamp a b | a -> b where
+    computedSnapshotTimestamp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedMachineImageName s a | s -> a where
-    computedMachineImageName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedStartTimestamp a b | a -> b where
+    computedStartTimestamp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedMachineImageName s a => HasComputedMachineImageName (TF.DataSource p s) a where
-    computedMachineImageName = TF.configuration . computedMachineImageName
+class HasComputedState a b | a -> b where
+    computedState :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedModel s a | s -> a where
-    computedModel :: forall r. Getting r s (TF.Attribute a)
+class HasComputedStatus a b | a -> b where
+    computedStatus :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedModel s a => HasComputedModel (TF.DataSource p s) a where
-    computedModel = TF.configuration . computedModel
+class HasComputedStatusDetail a b | a -> b where
+    computedStatusDetail :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedNameServers s a | s -> a where
-    computedNameServers :: forall r. Getting r s (TF.Attribute a)
+class HasComputedStatusTimestamp a b | a -> b where
+    computedStatusTimestamp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedNameServers s a => HasComputedNameServers (TF.DataSource p s) a where
-    computedNameServers = TF.configuration . computedNameServers
+class HasComputedTags a b | a -> b where
+    computedTags :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedNat s a | s -> a where
-    computedNat :: forall r. Getting r s (TF.Attribute a)
+class HasComputedTransitFlag a b | a -> b where
+    computedTransitFlag :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedNat s a => HasComputedNat (TF.DataSource p s) a where
-    computedNat = TF.configuration . computedNat
+class HasComputedUri a b | a -> b where
+    computedUri :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedParentVolumeBootable s a | s -> a where
-    computedParentVolumeBootable :: forall r. Getting r s (TF.Attribute a)
+class HasComputedVnic a b | a -> b where
+    computedVnic :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedParentVolumeBootable s a => HasComputedParentVolumeBootable (TF.DataSource p s) a where
-    computedParentVolumeBootable = TF.configuration . computedParentVolumeBootable
+class HasComputedVnicSets a b | a -> b where
+    computedVnicSets :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedPlatform s a | s -> a where
-    computedPlatform :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPlatform s a => HasComputedPlatform (TF.DataSource p s) a where
-    computedPlatform = TF.configuration . computedPlatform
-
-class HasComputedProperty s a | s -> a where
-    computedProperty :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedProperty s a => HasComputedProperty (TF.DataSource p s) a where
-    computedProperty = TF.configuration . computedProperty
-
-class HasComputedSearchDomains s a | s -> a where
-    computedSearchDomains :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSearchDomains s a => HasComputedSearchDomains (TF.DataSource p s) a where
-    computedSearchDomains = TF.configuration . computedSearchDomains
-
-class HasComputedSecLists s a | s -> a where
-    computedSecLists :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSecLists s a => HasComputedSecLists (TF.DataSource p s) a where
-    computedSecLists = TF.configuration . computedSecLists
-
-class HasComputedSharedNetwork s a | s -> a where
-    computedSharedNetwork :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSharedNetwork s a => HasComputedSharedNetwork (TF.DataSource p s) a where
-    computedSharedNetwork = TF.configuration . computedSharedNetwork
-
-class HasComputedSize s a | s -> a where
-    computedSize :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
-    computedSize = TF.configuration . computedSize
-
-class HasComputedSnapshotId s a | s -> a where
-    computedSnapshotId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSnapshotId s a => HasComputedSnapshotId (TF.DataSource p s) a where
-    computedSnapshotId = TF.configuration . computedSnapshotId
-
-class HasComputedSnapshotTimestamp s a | s -> a where
-    computedSnapshotTimestamp :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSnapshotTimestamp s a => HasComputedSnapshotTimestamp (TF.DataSource p s) a where
-    computedSnapshotTimestamp = TF.configuration . computedSnapshotTimestamp
-
-class HasComputedStartTimestamp s a | s -> a where
-    computedStartTimestamp :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStartTimestamp s a => HasComputedStartTimestamp (TF.DataSource p s) a where
-    computedStartTimestamp = TF.configuration . computedStartTimestamp
-
-class HasComputedState s a | s -> a where
-    computedState :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedState s a => HasComputedState (TF.DataSource p s) a where
-    computedState = TF.configuration . computedState
-
-class HasComputedStatus s a | s -> a where
-    computedStatus :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStatus s a => HasComputedStatus (TF.DataSource p s) a where
-    computedStatus = TF.configuration . computedStatus
-
-class HasComputedStatusDetail s a | s -> a where
-    computedStatusDetail :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStatusDetail s a => HasComputedStatusDetail (TF.DataSource p s) a where
-    computedStatusDetail = TF.configuration . computedStatusDetail
-
-class HasComputedStatusTimestamp s a | s -> a where
-    computedStatusTimestamp :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStatusTimestamp s a => HasComputedStatusTimestamp (TF.DataSource p s) a where
-    computedStatusTimestamp = TF.configuration . computedStatusTimestamp
-
-class HasComputedTags s a | s -> a where
-    computedTags :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTags s a => HasComputedTags (TF.DataSource p s) a where
-    computedTags = TF.configuration . computedTags
-
-class HasComputedTransitFlag s a | s -> a where
-    computedTransitFlag :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTransitFlag s a => HasComputedTransitFlag (TF.DataSource p s) a where
-    computedTransitFlag = TF.configuration . computedTransitFlag
-
-class HasComputedUri s a | s -> a where
-    computedUri :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUri s a => HasComputedUri (TF.DataSource p s) a where
-    computedUri = TF.configuration . computedUri
-
-class HasComputedVnic s a | s -> a where
-    computedVnic :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVnic s a => HasComputedVnic (TF.DataSource p s) a where
-    computedVnic = TF.configuration . computedVnic
-
-class HasComputedVnicSets s a | s -> a where
-    computedVnicSets :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVnicSets s a => HasComputedVnicSets (TF.DataSource p s) a where
-    computedVnicSets = TF.configuration . computedVnicSets
-
-class HasComputedVolumeName s a | s -> a where
-    computedVolumeName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVolumeName s a => HasComputedVolumeName (TF.DataSource p s) a where
-    computedVolumeName = TF.configuration . computedVolumeName
+class HasComputedVolumeName a b | a -> b where
+    computedVolumeName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

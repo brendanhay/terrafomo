@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Dyn.Types       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.Dyn.Types as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.IP        as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 
 {- | Dyn Terraform provider.
 
@@ -54,11 +54,11 @@ can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data Dyn = Dyn {
-      _customer_name :: !(TF.Argument "customer_name" Text)
+      _customer_name :: !(Maybe Text)
     {- ^ (Required) The Dyn customer name. It must be provided, but it can also be sourced from the @DYN_CUSTOMER_NAME@ environment variable. -}
-    , _password      :: !(TF.Argument "password" Text)
+    , _password      :: !(Maybe Text)
     {- ^ (Required) The Dyn password. It must be provided, but it can also be sourced from the @DYN_PASSWORD@ environment variable. -}
-    , _username      :: !(TF.Argument "username" Text)
+    , _username      :: !(Maybe Text)
     {- ^ (Required) The Dyn username. It must be provided, but it can also be sourced from the @DYN_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable Dyn
 
 instance TF.ToHCL Dyn where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Dyn))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_customer_name x)
-            , TF.argument (_password x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (Dyn))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "customer_name" <$> _customer_name x
+            , TF.assign "password" <$> _password x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyDyn :: Dyn
-emptyDyn = Dyn {
-        _customer_name = TF.Nil
-      , _password = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider Dyn where
     type ProviderType Dyn = "dyn"
 
-customerName :: Lens' Dyn (TF.Argument "customer_name" Text)
+emptyDyn :: Dyn
+emptyDyn = Dyn {
+        _customer_name = Nothing
+      , _password = Nothing
+      , _username = Nothing
+    }
+
+customerName :: Lens' Dyn (Maybe Text)
 customerName =
     lens _customer_name (\s a -> s { _customer_name = a })
 
-password :: Lens' Dyn (TF.Argument "password" Text)
+password :: Lens' Dyn (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' Dyn (TF.Argument "username" Text)
+username :: Lens' Dyn (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

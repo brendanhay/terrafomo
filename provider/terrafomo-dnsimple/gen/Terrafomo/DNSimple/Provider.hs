@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.DNSimple.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.DNSimple.Types as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | DNSimple Terraform provider.
 
@@ -53,9 +53,9 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSimple = DNSimple {
-      _account :: !(TF.Argument "account" Text)
+      _account :: !(Maybe Text)
     {- ^ (Required) The ID of the account associated with the token. It must be provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment variable. -}
-    , _token   :: !(TF.Argument "token" Text)
+    , _token   :: !(Maybe Text)
     {- ^ (Required) The DNSimple API v2 token. It must be provided, but it can also be sourced from the @DNSIMPLE_TOKEN@ environment variable. Please note that this must be an <https://support.dnsimple.com/articles/api-access-token/> . You can use either an User or Account token, but an Account token is recommended. -}
     } deriving (Show, Eq, Generic)
 
@@ -63,25 +63,27 @@ instance Hashable DNSimple
 
 instance TF.ToHCL DNSimple where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy DNSimple))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_account x)
-            , TF.argument (_token x)
+        let typ = TF.providerType (Proxy :: Proxy (DNSimple))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "account" <$> _account x
+            , TF.assign "token" <$> _token x
             ]
-
-emptyDNSimple :: DNSimple
-emptyDNSimple = DNSimple {
-        _account = TF.Nil
-      , _token = TF.Nil
-    }
 
 instance TF.IsProvider DNSimple where
     type ProviderType DNSimple = "dnsimple"
 
-account :: Lens' DNSimple (TF.Argument "account" Text)
+emptyDNSimple :: DNSimple
+emptyDNSimple = DNSimple {
+        _account = Nothing
+      , _token = Nothing
+    }
+
+account :: Lens' DNSimple (Maybe Text)
 account =
     lens _account (\s a -> s { _account = a })
 
-token :: Lens' DNSimple (TF.Argument "token" Text)
+token :: Lens' DNSimple (Maybe Text)
 token =
     lens _token (\s a -> s { _token = a })

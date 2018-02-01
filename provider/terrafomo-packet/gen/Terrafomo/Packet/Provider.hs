@@ -37,12 +37,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Packet.Types    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.IP           as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Packet.Types as TF
+import qualified Terrafomo.Provider     as TF
 
 {- | Packet Terraform provider.
 
@@ -52,7 +52,7 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Packet = Packet {
-      _auth_token :: !(TF.Argument "auth_token" Text)
+      _auth_token :: !(Maybe Text)
     {- ^ (Required) This is your Packet API Auth token. This can also be specified with the @PACKET_AUTH_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -60,19 +60,21 @@ instance Hashable Packet
 
 instance TF.ToHCL Packet where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Packet))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_auth_token x)
+        let typ = TF.providerType (Proxy :: Proxy (Packet))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "auth_token" <$> _auth_token x
             ]
-
-emptyPacket :: Packet
-emptyPacket = Packet {
-        _auth_token = TF.Nil
-    }
 
 instance TF.IsProvider Packet where
     type ProviderType Packet = "packet"
 
-authToken :: Lens' Packet (TF.Argument "auth_token" Text)
+emptyPacket :: Packet
+emptyPacket = Packet {
+        _auth_token = Nothing
+    }
+
+authToken :: Lens' Packet (Maybe Text)
 authToken =
     lens _auth_token (\s a -> s { _auth_token = a })

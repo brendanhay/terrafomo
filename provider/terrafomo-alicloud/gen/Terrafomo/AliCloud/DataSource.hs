@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -176,114 +177,127 @@ import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.AliCloud.Provider as TF
 import qualified Terrafomo.AliCloud.Types    as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @alicloud_dns_domains@ AliCloud datasource.
 
 The Dns Domains data source provides a list of Alicloud Dns Domains in an
 Alicloud account according to the specified filters.
 -}
-data DnsDomainsDataSource = DnsDomainsDataSource {
-      _ali_domain        :: !(TF.Argument "ali_domain" Text)
+data DnsDomainsDataSource s = DnsDomainsDataSource {
+      _ali_domain        :: !(TF.Attribute s "ali_domain" Text)
     {- ^ (Optional, type: bool) Limit search to specific whether it is Alicloud domain. -}
-    , _domain_name_regex :: !(TF.Argument "domain_name_regex" Text)
+    , _domain_name_regex :: !(TF.Attribute s "domain_name_regex" Text)
     {- ^ (Optional) A regex string to apply to the domain list returned by Alicloud. -}
-    , _group_name_regex  :: !(TF.Argument "group_name_regex" Text)
+    , _group_name_regex  :: !(TF.Attribute s "group_name_regex" Text)
     {- ^ (Optional)  Limit search to provide group name regex. -}
-    , _instance_id       :: !(TF.Argument "instance_id" Text)
+    , _instance_id       :: !(TF.Attribute s "instance_id" Text)
     {- ^ (Optional) Limit search to specific cloud analysis product ID. -}
-    , _output_file       :: !(TF.Argument "output_file" Text)
+    , _output_file       :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save domains data source after running @terraform plan@ . -}
-    , _version_code      :: !(TF.Argument "version_code" Text)
+    , _version_code      :: !(TF.Attribute s "version_code" Text)
     {- ^ (Optional) Limit search to specific cloud analysis version code. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DnsDomainsDataSource where
+instance TF.ToHCL (DnsDomainsDataSource s) where
     toHCL DnsDomainsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _ali_domain
-        , TF.argument _domain_name_regex
-        , TF.argument _group_name_regex
-        , TF.argument _instance_id
-        , TF.argument _output_file
-        , TF.argument _version_code
+        [ TF.attribute _ali_domain
+        , TF.attribute _domain_name_regex
+        , TF.attribute _group_name_regex
+        , TF.attribute _instance_id
+        , TF.attribute _output_file
+        , TF.attribute _version_code
         ]
 
-instance HasAliDomain DnsDomainsDataSource Text where
+instance HasAliDomain (DnsDomainsDataSource s) Text where
+    type HasAliDomainThread (DnsDomainsDataSource s) Text = s
+
     aliDomain =
-        lens (_ali_domain :: DnsDomainsDataSource -> TF.Argument "ali_domain" Text)
-             (\s a -> s { _ali_domain = a } :: DnsDomainsDataSource)
+        lens (_ali_domain :: DnsDomainsDataSource s -> TF.Attribute s "ali_domain" Text)
+             (\s a -> s { _ali_domain = a } :: DnsDomainsDataSource s)
 
-instance HasDomainNameRegex DnsDomainsDataSource Text where
+instance HasDomainNameRegex (DnsDomainsDataSource s) Text where
+    type HasDomainNameRegexThread (DnsDomainsDataSource s) Text = s
+
     domainNameRegex =
-        lens (_domain_name_regex :: DnsDomainsDataSource -> TF.Argument "domain_name_regex" Text)
-             (\s a -> s { _domain_name_regex = a } :: DnsDomainsDataSource)
+        lens (_domain_name_regex :: DnsDomainsDataSource s -> TF.Attribute s "domain_name_regex" Text)
+             (\s a -> s { _domain_name_regex = a } :: DnsDomainsDataSource s)
 
-instance HasGroupNameRegex DnsDomainsDataSource Text where
+instance HasGroupNameRegex (DnsDomainsDataSource s) Text where
+    type HasGroupNameRegexThread (DnsDomainsDataSource s) Text = s
+
     groupNameRegex =
-        lens (_group_name_regex :: DnsDomainsDataSource -> TF.Argument "group_name_regex" Text)
-             (\s a -> s { _group_name_regex = a } :: DnsDomainsDataSource)
+        lens (_group_name_regex :: DnsDomainsDataSource s -> TF.Attribute s "group_name_regex" Text)
+             (\s a -> s { _group_name_regex = a } :: DnsDomainsDataSource s)
 
-instance HasInstanceId DnsDomainsDataSource Text where
+instance HasInstanceId (DnsDomainsDataSource s) Text where
+    type HasInstanceIdThread (DnsDomainsDataSource s) Text = s
+
     instanceId =
-        lens (_instance_id :: DnsDomainsDataSource -> TF.Argument "instance_id" Text)
-             (\s a -> s { _instance_id = a } :: DnsDomainsDataSource)
+        lens (_instance_id :: DnsDomainsDataSource s -> TF.Attribute s "instance_id" Text)
+             (\s a -> s { _instance_id = a } :: DnsDomainsDataSource s)
 
-instance HasOutputFile DnsDomainsDataSource Text where
+instance HasOutputFile (DnsDomainsDataSource s) Text where
+    type HasOutputFileThread (DnsDomainsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: DnsDomainsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: DnsDomainsDataSource)
+        lens (_output_file :: DnsDomainsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: DnsDomainsDataSource s)
 
-instance HasVersionCode DnsDomainsDataSource Text where
+instance HasVersionCode (DnsDomainsDataSource s) Text where
+    type HasVersionCodeThread (DnsDomainsDataSource s) Text = s
+
     versionCode =
-        lens (_version_code :: DnsDomainsDataSource -> TF.Argument "version_code" Text)
-             (\s a -> s { _version_code = a } :: DnsDomainsDataSource)
+        lens (_version_code :: DnsDomainsDataSource s -> TF.Attribute s "version_code" Text)
+             (\s a -> s { _version_code = a } :: DnsDomainsDataSource s)
 
-instance HasComputedAliDomain DnsDomainsDataSource Text where
+instance HasComputedAliDomain (DnsDomainsDataSource s) Text where
     computedAliDomain =
-        to (\_  -> TF.Compute "ali_domain")
+        to (\x -> TF.Computed (TF.referenceKey x) "ali_domain")
 
-instance HasComputedDnsServers DnsDomainsDataSource Text where
+instance HasComputedDnsServers (DnsDomainsDataSource s) Text where
     computedDnsServers =
-        to (\_  -> TF.Compute "dns_servers")
+        to (\x -> TF.Computed (TF.referenceKey x) "dns_servers")
 
-instance HasComputedDomainId DnsDomainsDataSource Text where
+instance HasComputedDomainId (DnsDomainsDataSource s) Text where
     computedDomainId =
-        to (\_  -> TF.Compute "domain_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "domain_id")
 
-instance HasComputedDomainName DnsDomainsDataSource Text where
+instance HasComputedDomainName (DnsDomainsDataSource s) Text where
     computedDomainName =
-        to (\_  -> TF.Compute "domain_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "domain_name")
 
-instance HasComputedGroupId DnsDomainsDataSource Text where
+instance HasComputedGroupId (DnsDomainsDataSource s) Text where
     computedGroupId =
-        to (\_  -> TF.Compute "group_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "group_id")
 
-instance HasComputedGroupName DnsDomainsDataSource Text where
+instance HasComputedGroupName (DnsDomainsDataSource s) Text where
     computedGroupName =
-        to (\_  -> TF.Compute "group_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "group_name")
 
-instance HasComputedInstanceId DnsDomainsDataSource Text where
+instance HasComputedInstanceId (DnsDomainsDataSource s) Text where
     computedInstanceId =
-        to (\_  -> TF.Compute "instance_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
 
-instance HasComputedPunyCode DnsDomainsDataSource Text where
+instance HasComputedPunyCode (DnsDomainsDataSource s) Text where
     computedPunyCode =
-        to (\_  -> TF.Compute "puny_code")
+        to (\x -> TF.Computed (TF.referenceKey x) "puny_code")
 
-instance HasComputedVersionCode DnsDomainsDataSource Text where
+instance HasComputedVersionCode (DnsDomainsDataSource s) Text where
     computedVersionCode =
-        to (\_  -> TF.Compute "version_code")
+        to (\x -> TF.Computed (TF.referenceKey x) "version_code")
 
-dnsDomainsDataSource :: TF.DataSource TF.AliCloud DnsDomainsDataSource
+dnsDomainsDataSource :: TF.DataSource TF.AliCloud (DnsDomainsDataSource s)
 dnsDomainsDataSource =
     TF.newDataSource "alicloud_dns_domains" $
         DnsDomainsDataSource {
-            _ali_domain = TF.Nil
+              _ali_domain = TF.Nil
             , _domain_name_regex = TF.Nil
             , _group_name_regex = TF.Nil
             , _instance_id = TF.Nil
@@ -296,42 +310,46 @@ dnsDomainsDataSource =
 The Dns Domain Groups data source provides a list of Alicloud Dns Domain
 Groups in an Alicloud account according to the specified filters.
 -}
-data DnsGroupsDataSource = DnsGroupsDataSource {
-      _name_regex  :: !(TF.Argument "name_regex" Text)
+data DnsGroupsDataSource s = DnsGroupsDataSource {
+      _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the group list returned by Alicloud. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save groups data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DnsGroupsDataSource where
+instance TF.ToHCL (DnsGroupsDataSource s) where
     toHCL DnsGroupsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name_regex
-        , TF.argument _output_file
+        [ TF.attribute _name_regex
+        , TF.attribute _output_file
         ]
 
-instance HasNameRegex DnsGroupsDataSource Text where
+instance HasNameRegex (DnsGroupsDataSource s) Text where
+    type HasNameRegexThread (DnsGroupsDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: DnsGroupsDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: DnsGroupsDataSource)
+        lens (_name_regex :: DnsGroupsDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: DnsGroupsDataSource s)
 
-instance HasOutputFile DnsGroupsDataSource Text where
+instance HasOutputFile (DnsGroupsDataSource s) Text where
+    type HasOutputFileThread (DnsGroupsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: DnsGroupsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: DnsGroupsDataSource)
+        lens (_output_file :: DnsGroupsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: DnsGroupsDataSource s)
 
-instance HasComputedGroupId DnsGroupsDataSource Text where
+instance HasComputedGroupId (DnsGroupsDataSource s) Text where
     computedGroupId =
-        to (\_  -> TF.Compute "group_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "group_id")
 
-instance HasComputedGroupName DnsGroupsDataSource Text where
+instance HasComputedGroupName (DnsGroupsDataSource s) Text where
     computedGroupName =
-        to (\_  -> TF.Compute "group_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "group_name")
 
-dnsGroupsDataSource :: TF.DataSource TF.AliCloud DnsGroupsDataSource
+dnsGroupsDataSource :: TF.DataSource TF.AliCloud (DnsGroupsDataSource s)
 dnsGroupsDataSource =
     TF.newDataSource "alicloud_dns_groups" $
         DnsGroupsDataSource {
-            _name_regex = TF.Nil
+              _name_regex = TF.Nil
             , _output_file = TF.Nil
             }
 
@@ -340,122 +358,138 @@ dnsGroupsDataSource =
 The Dns Domain Records data source provides a list of Alicloud Dns Domain
 Records in an Alicloud account according to the specified filters.
 -}
-data DnsRecordsDataSource = DnsRecordsDataSource {
-      _domain_name       :: !(TF.Argument "domain_name" Text)
+data DnsRecordsDataSource s = DnsRecordsDataSource {
+      _domain_name       :: !(TF.Attribute s "domain_name" Text)
     {- ^ (Required) A domain name which is the necessary parameter for the records query. -}
-    , _host_record_regex :: !(TF.Argument "host_record_regex" Text)
+    , _host_record_regex :: !(TF.Attribute s "host_record_regex" Text)
     {- ^ (Optional) Limit search to provide host record regex. -}
-    , _is_locked         :: !(TF.Argument "is_locked" Text)
+    , _is_locked         :: !(TF.Attribute s "is_locked" Text)
     {- ^ (Optional, type: bool) Limit search to specific record lock status. -}
-    , _line              :: !(TF.Argument "line" Text)
+    , _line              :: !(TF.Attribute s "line" Text)
     {- ^ (Optional) Limit search to specific parsing line. Valid items are @default@ , @telecom@ , @unicom@ , @mobile@ , @oversea@ , @edu@ . -}
-    , _output_file       :: !(TF.Argument "output_file" Text)
+    , _output_file       :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save records data source after running @terraform plan@ . -}
-    , _status            :: !(TF.Argument "status" Text)
+    , _status            :: !(TF.Attribute s "status" Text)
     {- ^ (Optional) Limit search to specific record status. Valid items are @ENABLE@ and @DISABLE@ . -}
-    , _type'             :: !(TF.Argument "type" Text)
+    , _type'             :: !(TF.Attribute s "type" Text)
     {- ^ (Optional) Limit search to specific record type. Valid items are @A@ , @NS@ , @MX@ , @TXT@ , @CNAME@ , @SRV@ , @AAAA@ , @REDIRECT_URL@ , @FORWORD_URL@ . -}
-    , _value_regex       :: !(TF.Argument "value_regex" Text)
+    , _value_regex       :: !(TF.Attribute s "value_regex" Text)
     {- ^ (Optional) Limit search to provide host record value regex. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DnsRecordsDataSource where
+instance TF.ToHCL (DnsRecordsDataSource s) where
     toHCL DnsRecordsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _domain_name
-        , TF.argument _host_record_regex
-        , TF.argument _is_locked
-        , TF.argument _line
-        , TF.argument _output_file
-        , TF.argument _status
-        , TF.argument _type'
-        , TF.argument _value_regex
+        [ TF.attribute _domain_name
+        , TF.attribute _host_record_regex
+        , TF.attribute _is_locked
+        , TF.attribute _line
+        , TF.attribute _output_file
+        , TF.attribute _status
+        , TF.attribute _type'
+        , TF.attribute _value_regex
         ]
 
-instance HasDomainName DnsRecordsDataSource Text where
+instance HasDomainName (DnsRecordsDataSource s) Text where
+    type HasDomainNameThread (DnsRecordsDataSource s) Text = s
+
     domainName =
-        lens (_domain_name :: DnsRecordsDataSource -> TF.Argument "domain_name" Text)
-             (\s a -> s { _domain_name = a } :: DnsRecordsDataSource)
+        lens (_domain_name :: DnsRecordsDataSource s -> TF.Attribute s "domain_name" Text)
+             (\s a -> s { _domain_name = a } :: DnsRecordsDataSource s)
 
-instance HasHostRecordRegex DnsRecordsDataSource Text where
+instance HasHostRecordRegex (DnsRecordsDataSource s) Text where
+    type HasHostRecordRegexThread (DnsRecordsDataSource s) Text = s
+
     hostRecordRegex =
-        lens (_host_record_regex :: DnsRecordsDataSource -> TF.Argument "host_record_regex" Text)
-             (\s a -> s { _host_record_regex = a } :: DnsRecordsDataSource)
+        lens (_host_record_regex :: DnsRecordsDataSource s -> TF.Attribute s "host_record_regex" Text)
+             (\s a -> s { _host_record_regex = a } :: DnsRecordsDataSource s)
 
-instance HasIsLocked DnsRecordsDataSource Text where
+instance HasIsLocked (DnsRecordsDataSource s) Text where
+    type HasIsLockedThread (DnsRecordsDataSource s) Text = s
+
     isLocked =
-        lens (_is_locked :: DnsRecordsDataSource -> TF.Argument "is_locked" Text)
-             (\s a -> s { _is_locked = a } :: DnsRecordsDataSource)
+        lens (_is_locked :: DnsRecordsDataSource s -> TF.Attribute s "is_locked" Text)
+             (\s a -> s { _is_locked = a } :: DnsRecordsDataSource s)
 
-instance HasLine DnsRecordsDataSource Text where
+instance HasLine (DnsRecordsDataSource s) Text where
+    type HasLineThread (DnsRecordsDataSource s) Text = s
+
     line =
-        lens (_line :: DnsRecordsDataSource -> TF.Argument "line" Text)
-             (\s a -> s { _line = a } :: DnsRecordsDataSource)
+        lens (_line :: DnsRecordsDataSource s -> TF.Attribute s "line" Text)
+             (\s a -> s { _line = a } :: DnsRecordsDataSource s)
 
-instance HasOutputFile DnsRecordsDataSource Text where
+instance HasOutputFile (DnsRecordsDataSource s) Text where
+    type HasOutputFileThread (DnsRecordsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: DnsRecordsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: DnsRecordsDataSource)
+        lens (_output_file :: DnsRecordsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: DnsRecordsDataSource s)
 
-instance HasStatus DnsRecordsDataSource Text where
+instance HasStatus (DnsRecordsDataSource s) Text where
+    type HasStatusThread (DnsRecordsDataSource s) Text = s
+
     status =
-        lens (_status :: DnsRecordsDataSource -> TF.Argument "status" Text)
-             (\s a -> s { _status = a } :: DnsRecordsDataSource)
+        lens (_status :: DnsRecordsDataSource s -> TF.Attribute s "status" Text)
+             (\s a -> s { _status = a } :: DnsRecordsDataSource s)
 
-instance HasType' DnsRecordsDataSource Text where
+instance HasType' (DnsRecordsDataSource s) Text where
+    type HasType'Thread (DnsRecordsDataSource s) Text = s
+
     type' =
-        lens (_type' :: DnsRecordsDataSource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: DnsRecordsDataSource)
+        lens (_type' :: DnsRecordsDataSource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: DnsRecordsDataSource s)
 
-instance HasValueRegex DnsRecordsDataSource Text where
+instance HasValueRegex (DnsRecordsDataSource s) Text where
+    type HasValueRegexThread (DnsRecordsDataSource s) Text = s
+
     valueRegex =
-        lens (_value_regex :: DnsRecordsDataSource -> TF.Argument "value_regex" Text)
-             (\s a -> s { _value_regex = a } :: DnsRecordsDataSource)
+        lens (_value_regex :: DnsRecordsDataSource s -> TF.Attribute s "value_regex" Text)
+             (\s a -> s { _value_regex = a } :: DnsRecordsDataSource s)
 
-instance HasComputedDomainName DnsRecordsDataSource Text where
+instance HasComputedDomainName (DnsRecordsDataSource s) Text where
     computedDomainName =
-        to (\_  -> TF.Compute "domain_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "domain_name")
 
-instance HasComputedHostRecord DnsRecordsDataSource Text where
+instance HasComputedHostRecord (DnsRecordsDataSource s) Text where
     computedHostRecord =
-        to (\_  -> TF.Compute "host_record")
+        to (\x -> TF.Computed (TF.referenceKey x) "host_record")
 
-instance HasComputedLine DnsRecordsDataSource Text where
+instance HasComputedLine (DnsRecordsDataSource s) Text where
     computedLine =
-        to (\_  -> TF.Compute "line")
+        to (\x -> TF.Computed (TF.referenceKey x) "line")
 
-instance HasComputedLocked DnsRecordsDataSource Text where
+instance HasComputedLocked (DnsRecordsDataSource s) Text where
     computedLocked =
-        to (\_  -> TF.Compute "locked")
+        to (\x -> TF.Computed (TF.referenceKey x) "locked")
 
-instance HasComputedPriority DnsRecordsDataSource Text where
+instance HasComputedPriority (DnsRecordsDataSource s) Text where
     computedPriority =
-        to (\_  -> TF.Compute "priority")
+        to (\x -> TF.Computed (TF.referenceKey x) "priority")
 
-instance HasComputedRecordId DnsRecordsDataSource Text where
+instance HasComputedRecordId (DnsRecordsDataSource s) Text where
     computedRecordId =
-        to (\_  -> TF.Compute "record_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "record_id")
 
-instance HasComputedStatus DnsRecordsDataSource Text where
+instance HasComputedStatus (DnsRecordsDataSource s) Text where
     computedStatus =
-        to (\_  -> TF.Compute "status")
+        to (\x -> TF.Computed (TF.referenceKey x) "status")
 
-instance HasComputedTtl DnsRecordsDataSource Text where
+instance HasComputedTtl (DnsRecordsDataSource s) Text where
     computedTtl =
-        to (\_  -> TF.Compute "ttl")
+        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
 
-instance HasComputedType' DnsRecordsDataSource Text where
+instance HasComputedType' (DnsRecordsDataSource s) Text where
     computedType' =
-        to (\_  -> TF.Compute "type")
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
-instance HasComputedValue DnsRecordsDataSource Text where
+instance HasComputedValue (DnsRecordsDataSource s) Text where
     computedValue =
-        to (\_  -> TF.Compute "value")
+        to (\x -> TF.Computed (TF.referenceKey x) "value")
 
-dnsRecordsDataSource :: TF.DataSource TF.AliCloud DnsRecordsDataSource
+dnsRecordsDataSource :: TF.DataSource TF.AliCloud (DnsRecordsDataSource s)
 dnsRecordsDataSource =
     TF.newDataSource "alicloud_dns_records" $
         DnsRecordsDataSource {
-            _domain_name = TF.Nil
+              _domain_name = TF.Nil
             , _host_record_regex = TF.Nil
             , _is_locked = TF.Nil
             , _line = TF.Nil
@@ -471,102 +505,110 @@ The Images data source list image resource list contains private images of
 the user and images of system resources provided by Alicloud, as well as
 other public images and those available on the image market.
 -}
-data ImagesDataSource = ImagesDataSource {
-      _most_recent :: !(TF.Argument "most_recent" Text)
+data ImagesDataSource s = ImagesDataSource {
+      _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) If more than one result is returned, use the most recent image. -}
-    , _name_regex  :: !(TF.Argument "name_regex" Text)
+    , _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the image list returned by Alicloud. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save images data source after running @terraform plan@ . -}
-    , _owners      :: !(TF.Argument "owners" Text)
+    , _owners      :: !(TF.Attribute s "owners" Text)
     {- ^ (Optional) Limit search to specific image owners. Valid items are @system@ , @self@ , @others@ , @marketplace@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ImagesDataSource where
+instance TF.ToHCL (ImagesDataSource s) where
     toHCL ImagesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _most_recent
-        , TF.argument _name_regex
-        , TF.argument _output_file
-        , TF.argument _owners
+        [ TF.attribute _most_recent
+        , TF.attribute _name_regex
+        , TF.attribute _output_file
+        , TF.attribute _owners
         ]
 
-instance HasMostRecent ImagesDataSource Text where
+instance HasMostRecent (ImagesDataSource s) Text where
+    type HasMostRecentThread (ImagesDataSource s) Text = s
+
     mostRecent =
-        lens (_most_recent :: ImagesDataSource -> TF.Argument "most_recent" Text)
-             (\s a -> s { _most_recent = a } :: ImagesDataSource)
+        lens (_most_recent :: ImagesDataSource s -> TF.Attribute s "most_recent" Text)
+             (\s a -> s { _most_recent = a } :: ImagesDataSource s)
 
-instance HasNameRegex ImagesDataSource Text where
+instance HasNameRegex (ImagesDataSource s) Text where
+    type HasNameRegexThread (ImagesDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: ImagesDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: ImagesDataSource)
+        lens (_name_regex :: ImagesDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: ImagesDataSource s)
 
-instance HasOutputFile ImagesDataSource Text where
+instance HasOutputFile (ImagesDataSource s) Text where
+    type HasOutputFileThread (ImagesDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: ImagesDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: ImagesDataSource)
+        lens (_output_file :: ImagesDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: ImagesDataSource s)
 
-instance HasOwners ImagesDataSource Text where
+instance HasOwners (ImagesDataSource s) Text where
+    type HasOwnersThread (ImagesDataSource s) Text = s
+
     owners =
-        lens (_owners :: ImagesDataSource -> TF.Argument "owners" Text)
-             (\s a -> s { _owners = a } :: ImagesDataSource)
+        lens (_owners :: ImagesDataSource s -> TF.Attribute s "owners" Text)
+             (\s a -> s { _owners = a } :: ImagesDataSource s)
 
-instance HasComputedArchitecture ImagesDataSource Text where
+instance HasComputedArchitecture (ImagesDataSource s) Text where
     computedArchitecture =
-        to (\_  -> TF.Compute "architecture")
+        to (\x -> TF.Computed (TF.referenceKey x) "architecture")
 
-instance HasComputedCreationTime ImagesDataSource Text where
+instance HasComputedCreationTime (ImagesDataSource s) Text where
     computedCreationTime =
-        to (\_  -> TF.Compute "creation_time")
+        to (\x -> TF.Computed (TF.referenceKey x) "creation_time")
 
-instance HasComputedDescription ImagesDataSource Text where
+instance HasComputedDescription (ImagesDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedDiskDeviceMappings ImagesDataSource Text where
+instance HasComputedDiskDeviceMappings (ImagesDataSource s) Text where
     computedDiskDeviceMappings =
-        to (\_  -> TF.Compute "disk_device_mappings")
+        to (\x -> TF.Computed (TF.referenceKey x) "disk_device_mappings")
 
-instance HasComputedId ImagesDataSource Text where
+instance HasComputedId (ImagesDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedImageOwnerAlias ImagesDataSource Text where
+instance HasComputedImageOwnerAlias (ImagesDataSource s) Text where
     computedImageOwnerAlias =
-        to (\_  -> TF.Compute "image_owner_alias")
+        to (\x -> TF.Computed (TF.referenceKey x) "image_owner_alias")
 
-instance HasComputedImageVersion ImagesDataSource Text where
+instance HasComputedImageVersion (ImagesDataSource s) Text where
     computedImageVersion =
-        to (\_  -> TF.Compute "image_version")
+        to (\x -> TF.Computed (TF.referenceKey x) "image_version")
 
-instance HasComputedIsSubscribed ImagesDataSource Text where
+instance HasComputedIsSubscribed (ImagesDataSource s) Text where
     computedIsSubscribed =
-        to (\_  -> TF.Compute "is_subscribed")
+        to (\x -> TF.Computed (TF.referenceKey x) "is_subscribed")
 
-instance HasComputedOsName ImagesDataSource Text where
+instance HasComputedOsName (ImagesDataSource s) Text where
     computedOsName =
-        to (\_  -> TF.Compute "os_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "os_name")
 
-instance HasComputedProductCode ImagesDataSource Text where
+instance HasComputedProductCode (ImagesDataSource s) Text where
     computedProductCode =
-        to (\_  -> TF.Compute "product_code")
+        to (\x -> TF.Computed (TF.referenceKey x) "product_code")
 
-instance HasComputedProgress ImagesDataSource Text where
+instance HasComputedProgress (ImagesDataSource s) Text where
     computedProgress =
-        to (\_  -> TF.Compute "progress")
+        to (\x -> TF.Computed (TF.referenceKey x) "progress")
 
-instance HasComputedSize ImagesDataSource Text where
+instance HasComputedSize (ImagesDataSource s) Text where
     computedSize =
-        to (\_  -> TF.Compute "size")
+        to (\x -> TF.Computed (TF.referenceKey x) "size")
 
-instance HasComputedStatus ImagesDataSource Text where
+instance HasComputedStatus (ImagesDataSource s) Text where
     computedStatus =
-        to (\_  -> TF.Compute "status")
+        to (\x -> TF.Computed (TF.referenceKey x) "status")
 
-imagesDataSource :: TF.DataSource TF.AliCloud ImagesDataSource
+imagesDataSource :: TF.DataSource TF.AliCloud (ImagesDataSource s)
 imagesDataSource =
     TF.newDataSource "alicloud_images" $
         ImagesDataSource {
-            _most_recent = TF.Nil
+              _most_recent = TF.Nil
             , _name_regex = TF.Nil
             , _output_file = TF.Nil
             , _owners = TF.Nil
@@ -578,82 +620,94 @@ The Instance Types data source list the ecs_instance_types of Alicloud. ~>
 NOTE: Default to provide upgraded instance types. If you want to get
 outdated instance types, you should set @is_outdated@ to true.
 -}
-data InstanceTypesDataSource = InstanceTypesDataSource {
-      _availability_zone    :: !(TF.Argument "availability_zone" Text)
+data InstanceTypesDataSource s = InstanceTypesDataSource {
+      _availability_zone    :: !(TF.Attribute s "availability_zone" Text)
     {- ^ (Optional) The Zone that supports available instance types. -}
-    , _cpu_core_count       :: !(TF.Argument "cpu_core_count" Text)
+    , _cpu_core_count       :: !(TF.Attribute s "cpu_core_count" Text)
     {- ^ (Optional) Limit search to specific cpu core count. -}
-    , _instance_type_family :: !(TF.Argument "instance_type_family" Text)
+    , _instance_type_family :: !(TF.Attribute s "instance_type_family" Text)
     {- ^ (Optional) Allows to filter list of Instance Types based on their family name, for example 'ecs.n4'. -}
-    , _is_outdated          :: !(TF.Argument "is_outdated" Text)
+    , _is_outdated          :: !(TF.Attribute s "is_outdated" Text)
     {- ^ (Optional) Whether to export outdated instance types. Default to false. -}
-    , _memory_size          :: !(TF.Argument "memory_size" Text)
+    , _memory_size          :: !(TF.Attribute s "memory_size" Text)
     {- ^ (Optional) Limit search to specific memory size. -}
-    , _output_file          :: !(TF.Argument "output_file" Text)
+    , _output_file          :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save instance types data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL InstanceTypesDataSource where
+instance TF.ToHCL (InstanceTypesDataSource s) where
     toHCL InstanceTypesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _availability_zone
-        , TF.argument _cpu_core_count
-        , TF.argument _instance_type_family
-        , TF.argument _is_outdated
-        , TF.argument _memory_size
-        , TF.argument _output_file
+        [ TF.attribute _availability_zone
+        , TF.attribute _cpu_core_count
+        , TF.attribute _instance_type_family
+        , TF.attribute _is_outdated
+        , TF.attribute _memory_size
+        , TF.attribute _output_file
         ]
 
-instance HasAvailabilityZone InstanceTypesDataSource Text where
+instance HasAvailabilityZone (InstanceTypesDataSource s) Text where
+    type HasAvailabilityZoneThread (InstanceTypesDataSource s) Text = s
+
     availabilityZone =
-        lens (_availability_zone :: InstanceTypesDataSource -> TF.Argument "availability_zone" Text)
-             (\s a -> s { _availability_zone = a } :: InstanceTypesDataSource)
+        lens (_availability_zone :: InstanceTypesDataSource s -> TF.Attribute s "availability_zone" Text)
+             (\s a -> s { _availability_zone = a } :: InstanceTypesDataSource s)
 
-instance HasCpuCoreCount InstanceTypesDataSource Text where
+instance HasCpuCoreCount (InstanceTypesDataSource s) Text where
+    type HasCpuCoreCountThread (InstanceTypesDataSource s) Text = s
+
     cpuCoreCount =
-        lens (_cpu_core_count :: InstanceTypesDataSource -> TF.Argument "cpu_core_count" Text)
-             (\s a -> s { _cpu_core_count = a } :: InstanceTypesDataSource)
+        lens (_cpu_core_count :: InstanceTypesDataSource s -> TF.Attribute s "cpu_core_count" Text)
+             (\s a -> s { _cpu_core_count = a } :: InstanceTypesDataSource s)
 
-instance HasInstanceTypeFamily InstanceTypesDataSource Text where
+instance HasInstanceTypeFamily (InstanceTypesDataSource s) Text where
+    type HasInstanceTypeFamilyThread (InstanceTypesDataSource s) Text = s
+
     instanceTypeFamily =
-        lens (_instance_type_family :: InstanceTypesDataSource -> TF.Argument "instance_type_family" Text)
-             (\s a -> s { _instance_type_family = a } :: InstanceTypesDataSource)
+        lens (_instance_type_family :: InstanceTypesDataSource s -> TF.Attribute s "instance_type_family" Text)
+             (\s a -> s { _instance_type_family = a } :: InstanceTypesDataSource s)
 
-instance HasIsOutdated InstanceTypesDataSource Text where
+instance HasIsOutdated (InstanceTypesDataSource s) Text where
+    type HasIsOutdatedThread (InstanceTypesDataSource s) Text = s
+
     isOutdated =
-        lens (_is_outdated :: InstanceTypesDataSource -> TF.Argument "is_outdated" Text)
-             (\s a -> s { _is_outdated = a } :: InstanceTypesDataSource)
+        lens (_is_outdated :: InstanceTypesDataSource s -> TF.Attribute s "is_outdated" Text)
+             (\s a -> s { _is_outdated = a } :: InstanceTypesDataSource s)
 
-instance HasMemorySize InstanceTypesDataSource Text where
+instance HasMemorySize (InstanceTypesDataSource s) Text where
+    type HasMemorySizeThread (InstanceTypesDataSource s) Text = s
+
     memorySize =
-        lens (_memory_size :: InstanceTypesDataSource -> TF.Argument "memory_size" Text)
-             (\s a -> s { _memory_size = a } :: InstanceTypesDataSource)
+        lens (_memory_size :: InstanceTypesDataSource s -> TF.Attribute s "memory_size" Text)
+             (\s a -> s { _memory_size = a } :: InstanceTypesDataSource s)
 
-instance HasOutputFile InstanceTypesDataSource Text where
+instance HasOutputFile (InstanceTypesDataSource s) Text where
+    type HasOutputFileThread (InstanceTypesDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: InstanceTypesDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: InstanceTypesDataSource)
+        lens (_output_file :: InstanceTypesDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: InstanceTypesDataSource s)
 
-instance HasComputedCpuCoreCount InstanceTypesDataSource Text where
+instance HasComputedCpuCoreCount (InstanceTypesDataSource s) Text where
     computedCpuCoreCount =
-        to (\_  -> TF.Compute "cpu_core_count")
+        to (\x -> TF.Computed (TF.referenceKey x) "cpu_core_count")
 
-instance HasComputedFamily' InstanceTypesDataSource Text where
+instance HasComputedFamily' (InstanceTypesDataSource s) Text where
     computedFamily' =
-        to (\_  -> TF.Compute "family")
+        to (\x -> TF.Computed (TF.referenceKey x) "family")
 
-instance HasComputedId InstanceTypesDataSource Text where
+instance HasComputedId (InstanceTypesDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedMemorySize InstanceTypesDataSource Text where
+instance HasComputedMemorySize (InstanceTypesDataSource s) Text where
     computedMemorySize =
-        to (\_  -> TF.Compute "memory_size")
+        to (\x -> TF.Computed (TF.referenceKey x) "memory_size")
 
-instanceTypesDataSource :: TF.DataSource TF.AliCloud InstanceTypesDataSource
+instanceTypesDataSource :: TF.DataSource TF.AliCloud (InstanceTypesDataSource s)
 instanceTypesDataSource =
     TF.newDataSource "alicloud_instance_types" $
         InstanceTypesDataSource {
-            _availability_zone = TF.Nil
+              _availability_zone = TF.Nil
             , _cpu_core_count = TF.Nil
             , _instance_type_family = TF.Nil
             , _is_outdated = TF.Nil
@@ -666,58 +720,64 @@ instanceTypesDataSource =
 The Key Pairs data source provides a list of Alicloud Key Pairs in an
 Alicloud account according to the specified filters.
 -}
-data KeyPairsDataSource = KeyPairsDataSource {
-      _finger_print :: !(TF.Argument "finger_print" Text)
+data KeyPairsDataSource s = KeyPairsDataSource {
+      _finger_print :: !(TF.Attribute s "finger_print" Text)
     {- ^ - A finger print used to retrieve specified key pair. -}
-    , _name_regex   :: !(TF.Argument "name_regex" Text)
+    , _name_regex   :: !(TF.Attribute s "name_regex" Text)
     {- ^ - A regex string to apply to the key pair list returned by Alicloud. -}
-    , _output_file  :: !(TF.Argument "output_file" Text)
+    , _output_file  :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save key pairs data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL KeyPairsDataSource where
+instance TF.ToHCL (KeyPairsDataSource s) where
     toHCL KeyPairsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _finger_print
-        , TF.argument _name_regex
-        , TF.argument _output_file
+        [ TF.attribute _finger_print
+        , TF.attribute _name_regex
+        , TF.attribute _output_file
         ]
 
-instance HasFingerPrint KeyPairsDataSource Text where
+instance HasFingerPrint (KeyPairsDataSource s) Text where
+    type HasFingerPrintThread (KeyPairsDataSource s) Text = s
+
     fingerPrint =
-        lens (_finger_print :: KeyPairsDataSource -> TF.Argument "finger_print" Text)
-             (\s a -> s { _finger_print = a } :: KeyPairsDataSource)
+        lens (_finger_print :: KeyPairsDataSource s -> TF.Attribute s "finger_print" Text)
+             (\s a -> s { _finger_print = a } :: KeyPairsDataSource s)
 
-instance HasNameRegex KeyPairsDataSource Text where
+instance HasNameRegex (KeyPairsDataSource s) Text where
+    type HasNameRegexThread (KeyPairsDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: KeyPairsDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: KeyPairsDataSource)
+        lens (_name_regex :: KeyPairsDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: KeyPairsDataSource s)
 
-instance HasOutputFile KeyPairsDataSource Text where
+instance HasOutputFile (KeyPairsDataSource s) Text where
+    type HasOutputFileThread (KeyPairsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: KeyPairsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: KeyPairsDataSource)
+        lens (_output_file :: KeyPairsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: KeyPairsDataSource s)
 
-instance HasComputedFingerPrint KeyPairsDataSource Text where
+instance HasComputedFingerPrint (KeyPairsDataSource s) Text where
     computedFingerPrint =
-        to (\_  -> TF.Compute "finger_print")
+        to (\x -> TF.Computed (TF.referenceKey x) "finger_print")
 
-instance HasComputedId KeyPairsDataSource Text where
+instance HasComputedId (KeyPairsDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedInstances KeyPairsDataSource Text where
+instance HasComputedInstances (KeyPairsDataSource s) Text where
     computedInstances =
-        to (\_  -> TF.Compute "instances")
+        to (\x -> TF.Computed (TF.referenceKey x) "instances")
 
-instance HasComputedKeyName KeyPairsDataSource Text where
+instance HasComputedKeyName (KeyPairsDataSource s) Text where
     computedKeyName =
-        to (\_  -> TF.Compute "key_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "key_name")
 
-keyPairsDataSource :: TF.DataSource TF.AliCloud KeyPairsDataSource
+keyPairsDataSource :: TF.DataSource TF.AliCloud (KeyPairsDataSource s)
 keyPairsDataSource =
     TF.newDataSource "alicloud_key_pairs" $
         KeyPairsDataSource {
-            _finger_print = TF.Nil
+              _finger_print = TF.Nil
             , _name_regex = TF.Nil
             , _output_file = TF.Nil
             }
@@ -727,30 +787,32 @@ keyPairsDataSource =
 The Ram Account Alias data source provides an alias for the Alicloud
 account.
 -}
-data RamAccountAliasesDataSource = RamAccountAliasesDataSource {
-      _output_file :: !(TF.Argument "output_file" Text)
+data RamAccountAliasesDataSource s = RamAccountAliasesDataSource {
+      _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save alias data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RamAccountAliasesDataSource where
+instance TF.ToHCL (RamAccountAliasesDataSource s) where
     toHCL RamAccountAliasesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _output_file
+        [ TF.attribute _output_file
         ]
 
-instance HasOutputFile RamAccountAliasesDataSource Text where
+instance HasOutputFile (RamAccountAliasesDataSource s) Text where
+    type HasOutputFileThread (RamAccountAliasesDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: RamAccountAliasesDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: RamAccountAliasesDataSource)
+        lens (_output_file :: RamAccountAliasesDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: RamAccountAliasesDataSource s)
 
-instance HasComputedAccountAlias RamAccountAliasesDataSource Text where
+instance HasComputedAccountAlias (RamAccountAliasesDataSource s) Text where
     computedAccountAlias =
-        to (\_  -> TF.Compute "account_alias")
+        to (\x -> TF.Computed (TF.referenceKey x) "account_alias")
 
-ramAccountAliasesDataSource :: TF.DataSource TF.AliCloud RamAccountAliasesDataSource
+ramAccountAliasesDataSource :: TF.DataSource TF.AliCloud (RamAccountAliasesDataSource s)
 ramAccountAliasesDataSource =
     TF.newDataSource "alicloud_ram_account_aliases" $
         RamAccountAliasesDataSource {
-            _output_file = TF.Nil
+              _output_file = TF.Nil
             }
 
 {- | The @alicloud_ram_groups@ AliCloud datasource.
@@ -758,66 +820,76 @@ ramAccountAliasesDataSource =
 The Ram Groups data source provides a list of Alicloud Ram Groups in an
 Alicloud account according to the specified filters.
 -}
-data RamGroupsDataSource = RamGroupsDataSource {
-      _name_regex  :: !(TF.Argument "name_regex" Text)
+data RamGroupsDataSource s = RamGroupsDataSource {
+      _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the group list returned by Alicloud. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save groups data source after running @terraform plan@ . -}
-    , _policy_name :: !(TF.Argument "policy_name" Text)
+    , _policy_name :: !(TF.Attribute s "policy_name" Text)
     {- ^ (Optional) Limit search to specific the policy name. If you set this parameter without set @policy_type@ , we will specified it as @System@ . Found the groups which attached with the specified policy. -}
-    , _policy_type :: !(TF.Argument "policy_type" Text)
+    , _policy_type :: !(TF.Attribute s "policy_type" Text)
     {- ^ (Optional) Limit search to specific the policy type. Valid items are @Custom@ and @System@ . If you set this parameter, you must set @policy_name@ at one time. -}
-    , _user_name   :: !(TF.Argument "user_name" Text)
+    , _user_name   :: !(TF.Attribute s "user_name" Text)
     {- ^ (Optional) Limit search to specific the user name. Found the groups for the specified user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RamGroupsDataSource where
+instance TF.ToHCL (RamGroupsDataSource s) where
     toHCL RamGroupsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name_regex
-        , TF.argument _output_file
-        , TF.argument _policy_name
-        , TF.argument _policy_type
-        , TF.argument _user_name
+        [ TF.attribute _name_regex
+        , TF.attribute _output_file
+        , TF.attribute _policy_name
+        , TF.attribute _policy_type
+        , TF.attribute _user_name
         ]
 
-instance HasNameRegex RamGroupsDataSource Text where
+instance HasNameRegex (RamGroupsDataSource s) Text where
+    type HasNameRegexThread (RamGroupsDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: RamGroupsDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: RamGroupsDataSource)
+        lens (_name_regex :: RamGroupsDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: RamGroupsDataSource s)
 
-instance HasOutputFile RamGroupsDataSource Text where
+instance HasOutputFile (RamGroupsDataSource s) Text where
+    type HasOutputFileThread (RamGroupsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: RamGroupsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: RamGroupsDataSource)
+        lens (_output_file :: RamGroupsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: RamGroupsDataSource s)
 
-instance HasPolicyName RamGroupsDataSource Text where
+instance HasPolicyName (RamGroupsDataSource s) Text where
+    type HasPolicyNameThread (RamGroupsDataSource s) Text = s
+
     policyName =
-        lens (_policy_name :: RamGroupsDataSource -> TF.Argument "policy_name" Text)
-             (\s a -> s { _policy_name = a } :: RamGroupsDataSource)
+        lens (_policy_name :: RamGroupsDataSource s -> TF.Attribute s "policy_name" Text)
+             (\s a -> s { _policy_name = a } :: RamGroupsDataSource s)
 
-instance HasPolicyType RamGroupsDataSource Text where
+instance HasPolicyType (RamGroupsDataSource s) Text where
+    type HasPolicyTypeThread (RamGroupsDataSource s) Text = s
+
     policyType =
-        lens (_policy_type :: RamGroupsDataSource -> TF.Argument "policy_type" Text)
-             (\s a -> s { _policy_type = a } :: RamGroupsDataSource)
+        lens (_policy_type :: RamGroupsDataSource s -> TF.Attribute s "policy_type" Text)
+             (\s a -> s { _policy_type = a } :: RamGroupsDataSource s)
 
-instance HasUserName RamGroupsDataSource Text where
+instance HasUserName (RamGroupsDataSource s) Text where
+    type HasUserNameThread (RamGroupsDataSource s) Text = s
+
     userName =
-        lens (_user_name :: RamGroupsDataSource -> TF.Argument "user_name" Text)
-             (\s a -> s { _user_name = a } :: RamGroupsDataSource)
+        lens (_user_name :: RamGroupsDataSource s -> TF.Attribute s "user_name" Text)
+             (\s a -> s { _user_name = a } :: RamGroupsDataSource s)
 
-instance HasComputedComments RamGroupsDataSource Text where
+instance HasComputedComments (RamGroupsDataSource s) Text where
     computedComments =
-        to (\_  -> TF.Compute "comments")
+        to (\x -> TF.Computed (TF.referenceKey x) "comments")
 
-instance HasComputedName RamGroupsDataSource Text where
+instance HasComputedName (RamGroupsDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-ramGroupsDataSource :: TF.DataSource TF.AliCloud RamGroupsDataSource
+ramGroupsDataSource :: TF.DataSource TF.AliCloud (RamGroupsDataSource s)
 ramGroupsDataSource =
     TF.newDataSource "alicloud_ram_groups" $
         RamGroupsDataSource {
-            _name_regex = TF.Nil
+              _name_regex = TF.Nil
             , _output_file = TF.Nil
             , _policy_name = TF.Nil
             , _policy_type = TF.Nil
@@ -829,98 +901,110 @@ ramGroupsDataSource =
 The Ram Policies data source provides a list of Alicloud Ram Policies in an
 Alicloud account according to the specified filters.
 -}
-data RamPoliciesDataSource = RamPoliciesDataSource {
-      _group_name  :: !(TF.Argument "group_name" Text)
+data RamPoliciesDataSource s = RamPoliciesDataSource {
+      _group_name  :: !(TF.Attribute s "group_name" Text)
     {- ^ (Optional) Limit search to specific the group name. Found the policies which attached with the specified group. -}
-    , _name_regex  :: !(TF.Argument "name_regex" Text)
+    , _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the policy list returned by Alicloud. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save policies data source after running @terraform plan@ . -}
-    , _role_name   :: !(TF.Argument "role_name" Text)
+    , _role_name   :: !(TF.Attribute s "role_name" Text)
     {- ^ (Optional) Limit search to specific the role name. Found the policies which attached with the specified role. -}
-    , _type'       :: !(TF.Argument "type" Text)
+    , _type'       :: !(TF.Attribute s "type" Text)
     {- ^ (Optional) Limit search to specific the policy type. Valid items are @Custom@ and @System@ . -}
-    , _user_name   :: !(TF.Argument "user_name" Text)
+    , _user_name   :: !(TF.Attribute s "user_name" Text)
     {- ^ (Optional) Limit search to specific the user name. Found the policies which attached with the specified user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RamPoliciesDataSource where
+instance TF.ToHCL (RamPoliciesDataSource s) where
     toHCL RamPoliciesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _group_name
-        , TF.argument _name_regex
-        , TF.argument _output_file
-        , TF.argument _role_name
-        , TF.argument _type'
-        , TF.argument _user_name
+        [ TF.attribute _group_name
+        , TF.attribute _name_regex
+        , TF.attribute _output_file
+        , TF.attribute _role_name
+        , TF.attribute _type'
+        , TF.attribute _user_name
         ]
 
-instance HasGroupName RamPoliciesDataSource Text where
+instance HasGroupName (RamPoliciesDataSource s) Text where
+    type HasGroupNameThread (RamPoliciesDataSource s) Text = s
+
     groupName =
-        lens (_group_name :: RamPoliciesDataSource -> TF.Argument "group_name" Text)
-             (\s a -> s { _group_name = a } :: RamPoliciesDataSource)
+        lens (_group_name :: RamPoliciesDataSource s -> TF.Attribute s "group_name" Text)
+             (\s a -> s { _group_name = a } :: RamPoliciesDataSource s)
 
-instance HasNameRegex RamPoliciesDataSource Text where
+instance HasNameRegex (RamPoliciesDataSource s) Text where
+    type HasNameRegexThread (RamPoliciesDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: RamPoliciesDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: RamPoliciesDataSource)
+        lens (_name_regex :: RamPoliciesDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: RamPoliciesDataSource s)
 
-instance HasOutputFile RamPoliciesDataSource Text where
+instance HasOutputFile (RamPoliciesDataSource s) Text where
+    type HasOutputFileThread (RamPoliciesDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: RamPoliciesDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: RamPoliciesDataSource)
+        lens (_output_file :: RamPoliciesDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: RamPoliciesDataSource s)
 
-instance HasRoleName RamPoliciesDataSource Text where
+instance HasRoleName (RamPoliciesDataSource s) Text where
+    type HasRoleNameThread (RamPoliciesDataSource s) Text = s
+
     roleName =
-        lens (_role_name :: RamPoliciesDataSource -> TF.Argument "role_name" Text)
-             (\s a -> s { _role_name = a } :: RamPoliciesDataSource)
+        lens (_role_name :: RamPoliciesDataSource s -> TF.Attribute s "role_name" Text)
+             (\s a -> s { _role_name = a } :: RamPoliciesDataSource s)
 
-instance HasType' RamPoliciesDataSource Text where
+instance HasType' (RamPoliciesDataSource s) Text where
+    type HasType'Thread (RamPoliciesDataSource s) Text = s
+
     type' =
-        lens (_type' :: RamPoliciesDataSource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: RamPoliciesDataSource)
+        lens (_type' :: RamPoliciesDataSource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: RamPoliciesDataSource s)
 
-instance HasUserName RamPoliciesDataSource Text where
+instance HasUserName (RamPoliciesDataSource s) Text where
+    type HasUserNameThread (RamPoliciesDataSource s) Text = s
+
     userName =
-        lens (_user_name :: RamPoliciesDataSource -> TF.Argument "user_name" Text)
-             (\s a -> s { _user_name = a } :: RamPoliciesDataSource)
+        lens (_user_name :: RamPoliciesDataSource s -> TF.Attribute s "user_name" Text)
+             (\s a -> s { _user_name = a } :: RamPoliciesDataSource s)
 
-instance HasComputedAttachmentCount RamPoliciesDataSource Text where
+instance HasComputedAttachmentCount (RamPoliciesDataSource s) Text where
     computedAttachmentCount =
-        to (\_  -> TF.Compute "attachment_count")
+        to (\x -> TF.Computed (TF.referenceKey x) "attachment_count")
 
-instance HasComputedCreateDate RamPoliciesDataSource Text where
+instance HasComputedCreateDate (RamPoliciesDataSource s) Text where
     computedCreateDate =
-        to (\_  -> TF.Compute "create_date")
+        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
 
-instance HasComputedDefaultVersion RamPoliciesDataSource Text where
+instance HasComputedDefaultVersion (RamPoliciesDataSource s) Text where
     computedDefaultVersion =
-        to (\_  -> TF.Compute "default_version")
+        to (\x -> TF.Computed (TF.referenceKey x) "default_version")
 
-instance HasComputedDescription RamPoliciesDataSource Text where
+instance HasComputedDescription (RamPoliciesDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedDocument RamPoliciesDataSource Text where
+instance HasComputedDocument (RamPoliciesDataSource s) Text where
     computedDocument =
-        to (\_  -> TF.Compute "document")
+        to (\x -> TF.Computed (TF.referenceKey x) "document")
 
-instance HasComputedName RamPoliciesDataSource Text where
+instance HasComputedName (RamPoliciesDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedType' RamPoliciesDataSource Text where
+instance HasComputedType' (RamPoliciesDataSource s) Text where
     computedType' =
-        to (\_  -> TF.Compute "type")
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
-instance HasComputedUpdateDate RamPoliciesDataSource Text where
+instance HasComputedUpdateDate (RamPoliciesDataSource s) Text where
     computedUpdateDate =
-        to (\_  -> TF.Compute "update_date")
+        to (\x -> TF.Computed (TF.referenceKey x) "update_date")
 
-ramPoliciesDataSource :: TF.DataSource TF.AliCloud RamPoliciesDataSource
+ramPoliciesDataSource :: TF.DataSource TF.AliCloud (RamPoliciesDataSource s)
 ramPoliciesDataSource =
     TF.newDataSource "alicloud_ram_policies" $
         RamPoliciesDataSource {
-            _group_name = TF.Nil
+              _group_name = TF.Nil
             , _name_regex = TF.Nil
             , _output_file = TF.Nil
             , _role_name = TF.Nil
@@ -933,82 +1017,90 @@ ramPoliciesDataSource =
 The Ram Roles data source provides a list of Alicloud Ram Roles in an
 Alicloud account according to the specified filters.
 -}
-data RamRolesDataSource = RamRolesDataSource {
-      _name_regex  :: !(TF.Argument "name_regex" Text)
+data RamRolesDataSource s = RamRolesDataSource {
+      _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the role list returned by Alicloud. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save roles data source after running @terraform plan@ . -}
-    , _policy_name :: !(TF.Argument "policy_name" Text)
+    , _policy_name :: !(TF.Attribute s "policy_name" Text)
     {- ^ (Optional) Limit search to specific the policy name. If you set this parameter without set @policy_type@ , we will specified it as @System@ . Found the roles which attached with the specified policy. -}
-    , _policy_type :: !(TF.Argument "policy_type" Text)
+    , _policy_type :: !(TF.Attribute s "policy_type" Text)
     {- ^ (Optional) Limit search to specific the policy type. Valid items are @Custom@ and @System@ . If you set this parameter, you must set @policy_name@ at one time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RamRolesDataSource where
+instance TF.ToHCL (RamRolesDataSource s) where
     toHCL RamRolesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name_regex
-        , TF.argument _output_file
-        , TF.argument _policy_name
-        , TF.argument _policy_type
+        [ TF.attribute _name_regex
+        , TF.attribute _output_file
+        , TF.attribute _policy_name
+        , TF.attribute _policy_type
         ]
 
-instance HasNameRegex RamRolesDataSource Text where
+instance HasNameRegex (RamRolesDataSource s) Text where
+    type HasNameRegexThread (RamRolesDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: RamRolesDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: RamRolesDataSource)
+        lens (_name_regex :: RamRolesDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: RamRolesDataSource s)
 
-instance HasOutputFile RamRolesDataSource Text where
+instance HasOutputFile (RamRolesDataSource s) Text where
+    type HasOutputFileThread (RamRolesDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: RamRolesDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: RamRolesDataSource)
+        lens (_output_file :: RamRolesDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: RamRolesDataSource s)
 
-instance HasPolicyName RamRolesDataSource Text where
+instance HasPolicyName (RamRolesDataSource s) Text where
+    type HasPolicyNameThread (RamRolesDataSource s) Text = s
+
     policyName =
-        lens (_policy_name :: RamRolesDataSource -> TF.Argument "policy_name" Text)
-             (\s a -> s { _policy_name = a } :: RamRolesDataSource)
+        lens (_policy_name :: RamRolesDataSource s -> TF.Attribute s "policy_name" Text)
+             (\s a -> s { _policy_name = a } :: RamRolesDataSource s)
 
-instance HasPolicyType RamRolesDataSource Text where
+instance HasPolicyType (RamRolesDataSource s) Text where
+    type HasPolicyTypeThread (RamRolesDataSource s) Text = s
+
     policyType =
-        lens (_policy_type :: RamRolesDataSource -> TF.Argument "policy_type" Text)
-             (\s a -> s { _policy_type = a } :: RamRolesDataSource)
+        lens (_policy_type :: RamRolesDataSource s -> TF.Attribute s "policy_type" Text)
+             (\s a -> s { _policy_type = a } :: RamRolesDataSource s)
 
-instance HasComputedArn RamRolesDataSource Text where
+instance HasComputedArn (RamRolesDataSource s) Text where
     computedArn =
-        to (\_  -> TF.Compute "arn")
+        to (\x -> TF.Computed (TF.referenceKey x) "arn")
 
-instance HasComputedAssumeRolePolicyDocument RamRolesDataSource Text where
+instance HasComputedAssumeRolePolicyDocument (RamRolesDataSource s) Text where
     computedAssumeRolePolicyDocument =
-        to (\_  -> TF.Compute "assume_role_policy_document")
+        to (\x -> TF.Computed (TF.referenceKey x) "assume_role_policy_document")
 
-instance HasComputedCreateDate RamRolesDataSource Text where
+instance HasComputedCreateDate (RamRolesDataSource s) Text where
     computedCreateDate =
-        to (\_  -> TF.Compute "create_date")
+        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
 
-instance HasComputedDescription RamRolesDataSource Text where
+instance HasComputedDescription (RamRolesDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedDocument RamRolesDataSource Text where
+instance HasComputedDocument (RamRolesDataSource s) Text where
     computedDocument =
-        to (\_  -> TF.Compute "document")
+        to (\x -> TF.Computed (TF.referenceKey x) "document")
 
-instance HasComputedId RamRolesDataSource Text where
+instance HasComputedId (RamRolesDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName RamRolesDataSource Text where
+instance HasComputedName (RamRolesDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedUpdateDate RamRolesDataSource Text where
+instance HasComputedUpdateDate (RamRolesDataSource s) Text where
     computedUpdateDate =
-        to (\_  -> TF.Compute "update_date")
+        to (\x -> TF.Computed (TF.referenceKey x) "update_date")
 
-ramRolesDataSource :: TF.DataSource TF.AliCloud RamRolesDataSource
+ramRolesDataSource :: TF.DataSource TF.AliCloud (RamRolesDataSource s)
 ramRolesDataSource =
     TF.newDataSource "alicloud_ram_roles" $
         RamRolesDataSource {
-            _name_regex = TF.Nil
+              _name_regex = TF.Nil
             , _output_file = TF.Nil
             , _policy_name = TF.Nil
             , _policy_type = TF.Nil
@@ -1019,74 +1111,84 @@ ramRolesDataSource =
 The Ram Users data source provides a list of Alicloud Ram Users in an
 Alicloud account according to the specified filters.
 -}
-data RamUsersDataSource = RamUsersDataSource {
-      _group_name  :: !(TF.Argument "group_name" Text)
+data RamUsersDataSource s = RamUsersDataSource {
+      _group_name  :: !(TF.Attribute s "group_name" Text)
     {- ^ (Optional) Limit search to specific the group name. Found the users which in the specified group. -}
-    , _name_regex  :: !(TF.Argument "name_regex" Text)
+    , _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the user list returned by Alicloud. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save users data source after running @terraform plan@ . -}
-    , _policy_name :: !(TF.Argument "policy_name" Text)
+    , _policy_name :: !(TF.Attribute s "policy_name" Text)
     {- ^ (Optional) Limit search to specific the policy name. If you set this parameter without set @policy_type@ , we will specified it as @System@ . Found the users which attached with the specified policy. -}
-    , _policy_type :: !(TF.Argument "policy_type" Text)
+    , _policy_type :: !(TF.Attribute s "policy_type" Text)
     {- ^ (Optional) Limit search to specific the policy type. Valid items are @Custom@ and @System@ . If you set this parameter, you must set @policy_name@ at one time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RamUsersDataSource where
+instance TF.ToHCL (RamUsersDataSource s) where
     toHCL RamUsersDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _group_name
-        , TF.argument _name_regex
-        , TF.argument _output_file
-        , TF.argument _policy_name
-        , TF.argument _policy_type
+        [ TF.attribute _group_name
+        , TF.attribute _name_regex
+        , TF.attribute _output_file
+        , TF.attribute _policy_name
+        , TF.attribute _policy_type
         ]
 
-instance HasGroupName RamUsersDataSource Text where
+instance HasGroupName (RamUsersDataSource s) Text where
+    type HasGroupNameThread (RamUsersDataSource s) Text = s
+
     groupName =
-        lens (_group_name :: RamUsersDataSource -> TF.Argument "group_name" Text)
-             (\s a -> s { _group_name = a } :: RamUsersDataSource)
+        lens (_group_name :: RamUsersDataSource s -> TF.Attribute s "group_name" Text)
+             (\s a -> s { _group_name = a } :: RamUsersDataSource s)
 
-instance HasNameRegex RamUsersDataSource Text where
+instance HasNameRegex (RamUsersDataSource s) Text where
+    type HasNameRegexThread (RamUsersDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: RamUsersDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: RamUsersDataSource)
+        lens (_name_regex :: RamUsersDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: RamUsersDataSource s)
 
-instance HasOutputFile RamUsersDataSource Text where
+instance HasOutputFile (RamUsersDataSource s) Text where
+    type HasOutputFileThread (RamUsersDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: RamUsersDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: RamUsersDataSource)
+        lens (_output_file :: RamUsersDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: RamUsersDataSource s)
 
-instance HasPolicyName RamUsersDataSource Text where
+instance HasPolicyName (RamUsersDataSource s) Text where
+    type HasPolicyNameThread (RamUsersDataSource s) Text = s
+
     policyName =
-        lens (_policy_name :: RamUsersDataSource -> TF.Argument "policy_name" Text)
-             (\s a -> s { _policy_name = a } :: RamUsersDataSource)
+        lens (_policy_name :: RamUsersDataSource s -> TF.Attribute s "policy_name" Text)
+             (\s a -> s { _policy_name = a } :: RamUsersDataSource s)
 
-instance HasPolicyType RamUsersDataSource Text where
+instance HasPolicyType (RamUsersDataSource s) Text where
+    type HasPolicyTypeThread (RamUsersDataSource s) Text = s
+
     policyType =
-        lens (_policy_type :: RamUsersDataSource -> TF.Argument "policy_type" Text)
-             (\s a -> s { _policy_type = a } :: RamUsersDataSource)
+        lens (_policy_type :: RamUsersDataSource s -> TF.Attribute s "policy_type" Text)
+             (\s a -> s { _policy_type = a } :: RamUsersDataSource s)
 
-instance HasComputedCreateDate RamUsersDataSource Text where
+instance HasComputedCreateDate (RamUsersDataSource s) Text where
     computedCreateDate =
-        to (\_  -> TF.Compute "create_date")
+        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
 
-instance HasComputedId RamUsersDataSource Text where
+instance HasComputedId (RamUsersDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedLastLoginDate RamUsersDataSource Text where
+instance HasComputedLastLoginDate (RamUsersDataSource s) Text where
     computedLastLoginDate =
-        to (\_  -> TF.Compute "last_login_date")
+        to (\x -> TF.Computed (TF.referenceKey x) "last_login_date")
 
-instance HasComputedName RamUsersDataSource Text where
+instance HasComputedName (RamUsersDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-ramUsersDataSource :: TF.DataSource TF.AliCloud RamUsersDataSource
+ramUsersDataSource :: TF.DataSource TF.AliCloud (RamUsersDataSource s)
 ramUsersDataSource =
     TF.newDataSource "alicloud_ram_users" $
         RamUsersDataSource {
-            _group_name = TF.Nil
+              _group_name = TF.Nil
             , _name_regex = TF.Nil
             , _output_file = TF.Nil
             , _policy_name = TF.Nil
@@ -1097,50 +1199,56 @@ ramUsersDataSource =
 
 The Regions data source allows access to the list of Alicloud Regions.
 -}
-data RegionsDataSource = RegionsDataSource {
-      _current     :: !(TF.Argument "current" Text)
+data RegionsDataSource s = RegionsDataSource {
+      _current     :: !(TF.Attribute s "current" Text)
     {- ^ (Optional) Set to true to match only the region configured in the provider. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The full name of the region to select. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save regions data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RegionsDataSource where
+instance TF.ToHCL (RegionsDataSource s) where
     toHCL RegionsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _current
-        , TF.argument _name
-        , TF.argument _output_file
+        [ TF.attribute _current
+        , TF.attribute _name
+        , TF.attribute _output_file
         ]
 
-instance HasCurrent RegionsDataSource Text where
+instance HasCurrent (RegionsDataSource s) Text where
+    type HasCurrentThread (RegionsDataSource s) Text = s
+
     current =
-        lens (_current :: RegionsDataSource -> TF.Argument "current" Text)
-             (\s a -> s { _current = a } :: RegionsDataSource)
+        lens (_current :: RegionsDataSource s -> TF.Attribute s "current" Text)
+             (\s a -> s { _current = a } :: RegionsDataSource s)
 
-instance HasName RegionsDataSource Text where
+instance HasName (RegionsDataSource s) Text where
+    type HasNameThread (RegionsDataSource s) Text = s
+
     name =
-        lens (_name :: RegionsDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RegionsDataSource)
+        lens (_name :: RegionsDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RegionsDataSource s)
 
-instance HasOutputFile RegionsDataSource Text where
+instance HasOutputFile (RegionsDataSource s) Text where
+    type HasOutputFileThread (RegionsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: RegionsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: RegionsDataSource)
+        lens (_output_file :: RegionsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: RegionsDataSource s)
 
-instance HasComputedId RegionsDataSource Text where
+instance HasComputedId (RegionsDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedLocalName RegionsDataSource Text where
+instance HasComputedLocalName (RegionsDataSource s) Text where
     computedLocalName =
-        to (\_  -> TF.Compute "local_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "local_name")
 
-regionsDataSource :: TF.DataSource TF.AliCloud RegionsDataSource
+regionsDataSource :: TF.DataSource TF.AliCloud (RegionsDataSource s)
 regionsDataSource =
     TF.newDataSource "alicloud_regions" $
         RegionsDataSource {
-            _current = TF.Nil
+              _current = TF.Nil
             , _name = TF.Nil
             , _output_file = TF.Nil
             }
@@ -1150,110 +1258,122 @@ regionsDataSource =
 The VPCs data source lists a number of VPCs resource information owned by an
 Alicloud account.
 -}
-data VpcsDataSource = VpcsDataSource {
-      _cidr_block  :: !(TF.Argument "cidr_block" Text)
+data VpcsDataSource s = VpcsDataSource {
+      _cidr_block  :: !(TF.Attribute s "cidr_block" Text)
     {- ^ (Optional) Limit search to specific cidr block,like "172.16.0.0/12". -}
-    , _is_default  :: !(TF.Argument "is_default" Text)
+    , _is_default  :: !(TF.Attribute s "is_default" Text)
     {- ^ (Optional) Whether the VPC is the default VPC in the specified region - valid value is true or false. -}
-    , _name_regex  :: !(TF.Argument "name_regex" Text)
+    , _name_regex  :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string of VPC name. -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save vpcs data source after running @terraform plan@ . -}
-    , _status      :: !(TF.Argument "status" Text)
+    , _status      :: !(TF.Attribute s "status" Text)
     {- ^ (Optional) Limit search to specific status - valid value is "Pending" or "Available". -}
-    , _vswitch_id  :: !(TF.Argument "vswitch_id" Text)
+    , _vswitch_id  :: !(TF.Attribute s "vswitch_id" Text)
     {- ^ (Optional) Retrieving VPC according to the specified VSwitch. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL VpcsDataSource where
+instance TF.ToHCL (VpcsDataSource s) where
     toHCL VpcsDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _cidr_block
-        , TF.argument _is_default
-        , TF.argument _name_regex
-        , TF.argument _output_file
-        , TF.argument _status
-        , TF.argument _vswitch_id
+        [ TF.attribute _cidr_block
+        , TF.attribute _is_default
+        , TF.attribute _name_regex
+        , TF.attribute _output_file
+        , TF.attribute _status
+        , TF.attribute _vswitch_id
         ]
 
-instance HasCidrBlock VpcsDataSource Text where
+instance HasCidrBlock (VpcsDataSource s) Text where
+    type HasCidrBlockThread (VpcsDataSource s) Text = s
+
     cidrBlock =
-        lens (_cidr_block :: VpcsDataSource -> TF.Argument "cidr_block" Text)
-             (\s a -> s { _cidr_block = a } :: VpcsDataSource)
+        lens (_cidr_block :: VpcsDataSource s -> TF.Attribute s "cidr_block" Text)
+             (\s a -> s { _cidr_block = a } :: VpcsDataSource s)
 
-instance HasIsDefault VpcsDataSource Text where
+instance HasIsDefault (VpcsDataSource s) Text where
+    type HasIsDefaultThread (VpcsDataSource s) Text = s
+
     isDefault =
-        lens (_is_default :: VpcsDataSource -> TF.Argument "is_default" Text)
-             (\s a -> s { _is_default = a } :: VpcsDataSource)
+        lens (_is_default :: VpcsDataSource s -> TF.Attribute s "is_default" Text)
+             (\s a -> s { _is_default = a } :: VpcsDataSource s)
 
-instance HasNameRegex VpcsDataSource Text where
+instance HasNameRegex (VpcsDataSource s) Text where
+    type HasNameRegexThread (VpcsDataSource s) Text = s
+
     nameRegex =
-        lens (_name_regex :: VpcsDataSource -> TF.Argument "name_regex" Text)
-             (\s a -> s { _name_regex = a } :: VpcsDataSource)
+        lens (_name_regex :: VpcsDataSource s -> TF.Attribute s "name_regex" Text)
+             (\s a -> s { _name_regex = a } :: VpcsDataSource s)
 
-instance HasOutputFile VpcsDataSource Text where
+instance HasOutputFile (VpcsDataSource s) Text where
+    type HasOutputFileThread (VpcsDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: VpcsDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: VpcsDataSource)
+        lens (_output_file :: VpcsDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: VpcsDataSource s)
 
-instance HasStatus VpcsDataSource Text where
+instance HasStatus (VpcsDataSource s) Text where
+    type HasStatusThread (VpcsDataSource s) Text = s
+
     status =
-        lens (_status :: VpcsDataSource -> TF.Argument "status" Text)
-             (\s a -> s { _status = a } :: VpcsDataSource)
+        lens (_status :: VpcsDataSource s -> TF.Attribute s "status" Text)
+             (\s a -> s { _status = a } :: VpcsDataSource s)
 
-instance HasVswitchId VpcsDataSource Text where
+instance HasVswitchId (VpcsDataSource s) Text where
+    type HasVswitchIdThread (VpcsDataSource s) Text = s
+
     vswitchId =
-        lens (_vswitch_id :: VpcsDataSource -> TF.Argument "vswitch_id" Text)
-             (\s a -> s { _vswitch_id = a } :: VpcsDataSource)
+        lens (_vswitch_id :: VpcsDataSource s -> TF.Attribute s "vswitch_id" Text)
+             (\s a -> s { _vswitch_id = a } :: VpcsDataSource s)
 
-instance HasComputedCidrBlock VpcsDataSource Text where
+instance HasComputedCidrBlock (VpcsDataSource s) Text where
     computedCidrBlock =
-        to (\_  -> TF.Compute "cidr_block")
+        to (\x -> TF.Computed (TF.referenceKey x) "cidr_block")
 
-instance HasComputedCreationTime VpcsDataSource Text where
+instance HasComputedCreationTime (VpcsDataSource s) Text where
     computedCreationTime =
-        to (\_  -> TF.Compute "creation_time")
+        to (\x -> TF.Computed (TF.referenceKey x) "creation_time")
 
-instance HasComputedDescription VpcsDataSource Text where
+instance HasComputedDescription (VpcsDataSource s) Text where
     computedDescription =
-        to (\_  -> TF.Compute "description")
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
-instance HasComputedId VpcsDataSource Text where
+instance HasComputedId (VpcsDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedIsDefault VpcsDataSource Text where
+instance HasComputedIsDefault (VpcsDataSource s) Text where
     computedIsDefault =
-        to (\_  -> TF.Compute "is_default")
+        to (\x -> TF.Computed (TF.referenceKey x) "is_default")
 
-instance HasComputedRegionId VpcsDataSource Text where
+instance HasComputedRegionId (VpcsDataSource s) Text where
     computedRegionId =
-        to (\_  -> TF.Compute "region_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "region_id")
 
-instance HasComputedRouteTableId VpcsDataSource Text where
+instance HasComputedRouteTableId (VpcsDataSource s) Text where
     computedRouteTableId =
-        to (\_  -> TF.Compute "route_table_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "route_table_id")
 
-instance HasComputedStatus VpcsDataSource Text where
+instance HasComputedStatus (VpcsDataSource s) Text where
     computedStatus =
-        to (\_  -> TF.Compute "status")
+        to (\x -> TF.Computed (TF.referenceKey x) "status")
 
-instance HasComputedVpcName VpcsDataSource Text where
+instance HasComputedVpcName (VpcsDataSource s) Text where
     computedVpcName =
-        to (\_  -> TF.Compute "vpc_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "vpc_name")
 
-instance HasComputedVrouterId VpcsDataSource Text where
+instance HasComputedVrouterId (VpcsDataSource s) Text where
     computedVrouterId =
-        to (\_  -> TF.Compute "vrouter_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "vrouter_id")
 
-instance HasComputedVswitchIds VpcsDataSource Text where
+instance HasComputedVswitchIds (VpcsDataSource s) Text where
     computedVswitchIds =
-        to (\_  -> TF.Compute "vswitch_ids")
+        to (\x -> TF.Computed (TF.referenceKey x) "vswitch_ids")
 
-vpcsDataSource :: TF.DataSource TF.AliCloud VpcsDataSource
+vpcsDataSource :: TF.DataSource TF.AliCloud (VpcsDataSource s)
 vpcsDataSource =
     TF.newDataSource "alicloud_vpcs" $
         VpcsDataSource {
-            _cidr_block = TF.Nil
+              _cidr_block = TF.Nil
             , _is_default = TF.Nil
             , _name_regex = TF.Nil
             , _output_file = TF.Nil
@@ -1267,629 +1387,638 @@ The Zones data source allows access to the list of Alicloud Zones which can
 be accessed by an Alicloud account within the region configured in the
 provider.
 -}
-data ZonesDataSource = ZonesDataSource {
-      _available_disk_category :: !(TF.Argument "available_disk_category" Text)
+data ZonesDataSource s = ZonesDataSource {
+      _available_disk_category :: !(TF.Attribute s "available_disk_category" Text)
     {- ^ (Optional) Limit search to specific disk category. Can be either @cloud@ , @cloud_efficiency@ , @cloud_ssd@ . -}
-    , _available_instance_type :: !(TF.Argument "available_instance_type" Text)
+    , _available_instance_type :: !(TF.Attribute s "available_instance_type" Text)
     {- ^ (Optional) Limit search to specific instance type. -}
-    , _available_resource_creation :: !(TF.Argument "available_resource_creation" Text)
+    , _available_resource_creation :: !(TF.Attribute s "available_resource_creation" Text)
     {- ^ (Optional) Limit search to specific resource type. The following values are allowed @Instance@ , @Disk@ and @VSwitch@ . -}
-    , _output_file :: !(TF.Argument "output_file" Text)
+    , _output_file :: !(TF.Attribute s "output_file" Text)
     {- ^ (Optional) The name of file that can save zones data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ZonesDataSource where
+instance TF.ToHCL (ZonesDataSource s) where
     toHCL ZonesDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _available_disk_category
-        , TF.argument _available_instance_type
-        , TF.argument _available_resource_creation
-        , TF.argument _output_file
+        [ TF.attribute _available_disk_category
+        , TF.attribute _available_instance_type
+        , TF.attribute _available_resource_creation
+        , TF.attribute _output_file
         ]
 
-instance HasAvailableDiskCategory ZonesDataSource Text where
+instance HasAvailableDiskCategory (ZonesDataSource s) Text where
+    type HasAvailableDiskCategoryThread (ZonesDataSource s) Text = s
+
     availableDiskCategory =
-        lens (_available_disk_category :: ZonesDataSource -> TF.Argument "available_disk_category" Text)
-             (\s a -> s { _available_disk_category = a } :: ZonesDataSource)
+        lens (_available_disk_category :: ZonesDataSource s -> TF.Attribute s "available_disk_category" Text)
+             (\s a -> s { _available_disk_category = a } :: ZonesDataSource s)
 
-instance HasAvailableInstanceType ZonesDataSource Text where
+instance HasAvailableInstanceType (ZonesDataSource s) Text where
+    type HasAvailableInstanceTypeThread (ZonesDataSource s) Text = s
+
     availableInstanceType =
-        lens (_available_instance_type :: ZonesDataSource -> TF.Argument "available_instance_type" Text)
-             (\s a -> s { _available_instance_type = a } :: ZonesDataSource)
+        lens (_available_instance_type :: ZonesDataSource s -> TF.Attribute s "available_instance_type" Text)
+             (\s a -> s { _available_instance_type = a } :: ZonesDataSource s)
 
-instance HasAvailableResourceCreation ZonesDataSource Text where
+instance HasAvailableResourceCreation (ZonesDataSource s) Text where
+    type HasAvailableResourceCreationThread (ZonesDataSource s) Text = s
+
     availableResourceCreation =
-        lens (_available_resource_creation :: ZonesDataSource -> TF.Argument "available_resource_creation" Text)
-             (\s a -> s { _available_resource_creation = a } :: ZonesDataSource)
+        lens (_available_resource_creation :: ZonesDataSource s -> TF.Attribute s "available_resource_creation" Text)
+             (\s a -> s { _available_resource_creation = a } :: ZonesDataSource s)
 
-instance HasOutputFile ZonesDataSource Text where
+instance HasOutputFile (ZonesDataSource s) Text where
+    type HasOutputFileThread (ZonesDataSource s) Text = s
+
     outputFile =
-        lens (_output_file :: ZonesDataSource -> TF.Argument "output_file" Text)
-             (\s a -> s { _output_file = a } :: ZonesDataSource)
+        lens (_output_file :: ZonesDataSource s -> TF.Attribute s "output_file" Text)
+             (\s a -> s { _output_file = a } :: ZonesDataSource s)
 
-instance HasComputedAvailableDiskCategories ZonesDataSource Text where
+instance HasComputedAvailableDiskCategories (ZonesDataSource s) Text where
     computedAvailableDiskCategories =
-        to (\_  -> TF.Compute "available_disk_categories")
+        to (\x -> TF.Computed (TF.referenceKey x) "available_disk_categories")
 
-instance HasComputedAvailableInstanceTypes ZonesDataSource Text where
+instance HasComputedAvailableInstanceTypes (ZonesDataSource s) Text where
     computedAvailableInstanceTypes =
-        to (\_  -> TF.Compute "available_instance_types")
+        to (\x -> TF.Computed (TF.referenceKey x) "available_instance_types")
 
-instance HasComputedAvailableResourceCreation ZonesDataSource Text where
+instance HasComputedAvailableResourceCreation (ZonesDataSource s) Text where
     computedAvailableResourceCreation =
-        to (\_  -> TF.Compute "available_resource_creation")
+        to (\x -> TF.Computed (TF.referenceKey x) "available_resource_creation")
 
-instance HasComputedId ZonesDataSource Text where
+instance HasComputedId (ZonesDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedLocalName ZonesDataSource Text where
+instance HasComputedLocalName (ZonesDataSource s) Text where
     computedLocalName =
-        to (\_  -> TF.Compute "local_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "local_name")
 
-zonesDataSource :: TF.DataSource TF.AliCloud ZonesDataSource
+zonesDataSource :: TF.DataSource TF.AliCloud (ZonesDataSource s)
 zonesDataSource =
     TF.newDataSource "alicloud_zones" $
         ZonesDataSource {
-            _available_disk_category = TF.Nil
+              _available_disk_category = TF.Nil
             , _available_instance_type = TF.Nil
             , _available_resource_creation = TF.Nil
             , _output_file = TF.Nil
             }
 
-class HasAliDomain s a | s -> a where
-    aliDomain :: Lens' s (TF.Argument "ali_domain" a)
+class HasAliDomain a b | a -> b where
+    type HasAliDomainThread a b :: *
 
-instance HasAliDomain s a => HasAliDomain (TF.DataSource p s) a where
+    aliDomain :: Lens' a (TF.Attribute (HasAliDomainThread a b) "ali_domain" b)
+
+instance HasAliDomain a b => HasAliDomain (TF.DataSource p a) b where
+    type HasAliDomainThread (TF.DataSource p a) b =
+         HasAliDomainThread a b
+
     aliDomain = TF.configuration . aliDomain
 
-class HasAvailabilityZone s a | s -> a where
-    availabilityZone :: Lens' s (TF.Argument "availability_zone" a)
+class HasAvailabilityZone a b | a -> b where
+    type HasAvailabilityZoneThread a b :: *
 
-instance HasAvailabilityZone s a => HasAvailabilityZone (TF.DataSource p s) a where
+    availabilityZone :: Lens' a (TF.Attribute (HasAvailabilityZoneThread a b) "availability_zone" b)
+
+instance HasAvailabilityZone a b => HasAvailabilityZone (TF.DataSource p a) b where
+    type HasAvailabilityZoneThread (TF.DataSource p a) b =
+         HasAvailabilityZoneThread a b
+
     availabilityZone = TF.configuration . availabilityZone
 
-class HasAvailableDiskCategory s a | s -> a where
-    availableDiskCategory :: Lens' s (TF.Argument "available_disk_category" a)
+class HasAvailableDiskCategory a b | a -> b where
+    type HasAvailableDiskCategoryThread a b :: *
 
-instance HasAvailableDiskCategory s a => HasAvailableDiskCategory (TF.DataSource p s) a where
+    availableDiskCategory :: Lens' a (TF.Attribute (HasAvailableDiskCategoryThread a b) "available_disk_category" b)
+
+instance HasAvailableDiskCategory a b => HasAvailableDiskCategory (TF.DataSource p a) b where
+    type HasAvailableDiskCategoryThread (TF.DataSource p a) b =
+         HasAvailableDiskCategoryThread a b
+
     availableDiskCategory = TF.configuration . availableDiskCategory
 
-class HasAvailableInstanceType s a | s -> a where
-    availableInstanceType :: Lens' s (TF.Argument "available_instance_type" a)
+class HasAvailableInstanceType a b | a -> b where
+    type HasAvailableInstanceTypeThread a b :: *
 
-instance HasAvailableInstanceType s a => HasAvailableInstanceType (TF.DataSource p s) a where
+    availableInstanceType :: Lens' a (TF.Attribute (HasAvailableInstanceTypeThread a b) "available_instance_type" b)
+
+instance HasAvailableInstanceType a b => HasAvailableInstanceType (TF.DataSource p a) b where
+    type HasAvailableInstanceTypeThread (TF.DataSource p a) b =
+         HasAvailableInstanceTypeThread a b
+
     availableInstanceType = TF.configuration . availableInstanceType
 
-class HasAvailableResourceCreation s a | s -> a where
-    availableResourceCreation :: Lens' s (TF.Argument "available_resource_creation" a)
+class HasAvailableResourceCreation a b | a -> b where
+    type HasAvailableResourceCreationThread a b :: *
 
-instance HasAvailableResourceCreation s a => HasAvailableResourceCreation (TF.DataSource p s) a where
+    availableResourceCreation :: Lens' a (TF.Attribute (HasAvailableResourceCreationThread a b) "available_resource_creation" b)
+
+instance HasAvailableResourceCreation a b => HasAvailableResourceCreation (TF.DataSource p a) b where
+    type HasAvailableResourceCreationThread (TF.DataSource p a) b =
+         HasAvailableResourceCreationThread a b
+
     availableResourceCreation = TF.configuration . availableResourceCreation
 
-class HasCidrBlock s a | s -> a where
-    cidrBlock :: Lens' s (TF.Argument "cidr_block" a)
+class HasCidrBlock a b | a -> b where
+    type HasCidrBlockThread a b :: *
 
-instance HasCidrBlock s a => HasCidrBlock (TF.DataSource p s) a where
+    cidrBlock :: Lens' a (TF.Attribute (HasCidrBlockThread a b) "cidr_block" b)
+
+instance HasCidrBlock a b => HasCidrBlock (TF.DataSource p a) b where
+    type HasCidrBlockThread (TF.DataSource p a) b =
+         HasCidrBlockThread a b
+
     cidrBlock = TF.configuration . cidrBlock
 
-class HasCpuCoreCount s a | s -> a where
-    cpuCoreCount :: Lens' s (TF.Argument "cpu_core_count" a)
+class HasCpuCoreCount a b | a -> b where
+    type HasCpuCoreCountThread a b :: *
 
-instance HasCpuCoreCount s a => HasCpuCoreCount (TF.DataSource p s) a where
+    cpuCoreCount :: Lens' a (TF.Attribute (HasCpuCoreCountThread a b) "cpu_core_count" b)
+
+instance HasCpuCoreCount a b => HasCpuCoreCount (TF.DataSource p a) b where
+    type HasCpuCoreCountThread (TF.DataSource p a) b =
+         HasCpuCoreCountThread a b
+
     cpuCoreCount = TF.configuration . cpuCoreCount
 
-class HasCurrent s a | s -> a where
-    current :: Lens' s (TF.Argument "current" a)
+class HasCurrent a b | a -> b where
+    type HasCurrentThread a b :: *
 
-instance HasCurrent s a => HasCurrent (TF.DataSource p s) a where
+    current :: Lens' a (TF.Attribute (HasCurrentThread a b) "current" b)
+
+instance HasCurrent a b => HasCurrent (TF.DataSource p a) b where
+    type HasCurrentThread (TF.DataSource p a) b =
+         HasCurrentThread a b
+
     current = TF.configuration . current
 
-class HasDomainName s a | s -> a where
-    domainName :: Lens' s (TF.Argument "domain_name" a)
+class HasDomainName a b | a -> b where
+    type HasDomainNameThread a b :: *
 
-instance HasDomainName s a => HasDomainName (TF.DataSource p s) a where
+    domainName :: Lens' a (TF.Attribute (HasDomainNameThread a b) "domain_name" b)
+
+instance HasDomainName a b => HasDomainName (TF.DataSource p a) b where
+    type HasDomainNameThread (TF.DataSource p a) b =
+         HasDomainNameThread a b
+
     domainName = TF.configuration . domainName
 
-class HasDomainNameRegex s a | s -> a where
-    domainNameRegex :: Lens' s (TF.Argument "domain_name_regex" a)
+class HasDomainNameRegex a b | a -> b where
+    type HasDomainNameRegexThread a b :: *
 
-instance HasDomainNameRegex s a => HasDomainNameRegex (TF.DataSource p s) a where
+    domainNameRegex :: Lens' a (TF.Attribute (HasDomainNameRegexThread a b) "domain_name_regex" b)
+
+instance HasDomainNameRegex a b => HasDomainNameRegex (TF.DataSource p a) b where
+    type HasDomainNameRegexThread (TF.DataSource p a) b =
+         HasDomainNameRegexThread a b
+
     domainNameRegex = TF.configuration . domainNameRegex
 
-class HasFingerPrint s a | s -> a where
-    fingerPrint :: Lens' s (TF.Argument "finger_print" a)
+class HasFingerPrint a b | a -> b where
+    type HasFingerPrintThread a b :: *
 
-instance HasFingerPrint s a => HasFingerPrint (TF.DataSource p s) a where
+    fingerPrint :: Lens' a (TF.Attribute (HasFingerPrintThread a b) "finger_print" b)
+
+instance HasFingerPrint a b => HasFingerPrint (TF.DataSource p a) b where
+    type HasFingerPrintThread (TF.DataSource p a) b =
+         HasFingerPrintThread a b
+
     fingerPrint = TF.configuration . fingerPrint
 
-class HasGroupName s a | s -> a where
-    groupName :: Lens' s (TF.Argument "group_name" a)
+class HasGroupName a b | a -> b where
+    type HasGroupNameThread a b :: *
 
-instance HasGroupName s a => HasGroupName (TF.DataSource p s) a where
+    groupName :: Lens' a (TF.Attribute (HasGroupNameThread a b) "group_name" b)
+
+instance HasGroupName a b => HasGroupName (TF.DataSource p a) b where
+    type HasGroupNameThread (TF.DataSource p a) b =
+         HasGroupNameThread a b
+
     groupName = TF.configuration . groupName
 
-class HasGroupNameRegex s a | s -> a where
-    groupNameRegex :: Lens' s (TF.Argument "group_name_regex" a)
+class HasGroupNameRegex a b | a -> b where
+    type HasGroupNameRegexThread a b :: *
 
-instance HasGroupNameRegex s a => HasGroupNameRegex (TF.DataSource p s) a where
+    groupNameRegex :: Lens' a (TF.Attribute (HasGroupNameRegexThread a b) "group_name_regex" b)
+
+instance HasGroupNameRegex a b => HasGroupNameRegex (TF.DataSource p a) b where
+    type HasGroupNameRegexThread (TF.DataSource p a) b =
+         HasGroupNameRegexThread a b
+
     groupNameRegex = TF.configuration . groupNameRegex
 
-class HasHostRecordRegex s a | s -> a where
-    hostRecordRegex :: Lens' s (TF.Argument "host_record_regex" a)
+class HasHostRecordRegex a b | a -> b where
+    type HasHostRecordRegexThread a b :: *
 
-instance HasHostRecordRegex s a => HasHostRecordRegex (TF.DataSource p s) a where
+    hostRecordRegex :: Lens' a (TF.Attribute (HasHostRecordRegexThread a b) "host_record_regex" b)
+
+instance HasHostRecordRegex a b => HasHostRecordRegex (TF.DataSource p a) b where
+    type HasHostRecordRegexThread (TF.DataSource p a) b =
+         HasHostRecordRegexThread a b
+
     hostRecordRegex = TF.configuration . hostRecordRegex
 
-class HasInstanceId s a | s -> a where
-    instanceId :: Lens' s (TF.Argument "instance_id" a)
+class HasInstanceId a b | a -> b where
+    type HasInstanceIdThread a b :: *
 
-instance HasInstanceId s a => HasInstanceId (TF.DataSource p s) a where
+    instanceId :: Lens' a (TF.Attribute (HasInstanceIdThread a b) "instance_id" b)
+
+instance HasInstanceId a b => HasInstanceId (TF.DataSource p a) b where
+    type HasInstanceIdThread (TF.DataSource p a) b =
+         HasInstanceIdThread a b
+
     instanceId = TF.configuration . instanceId
 
-class HasInstanceTypeFamily s a | s -> a where
-    instanceTypeFamily :: Lens' s (TF.Argument "instance_type_family" a)
+class HasInstanceTypeFamily a b | a -> b where
+    type HasInstanceTypeFamilyThread a b :: *
 
-instance HasInstanceTypeFamily s a => HasInstanceTypeFamily (TF.DataSource p s) a where
+    instanceTypeFamily :: Lens' a (TF.Attribute (HasInstanceTypeFamilyThread a b) "instance_type_family" b)
+
+instance HasInstanceTypeFamily a b => HasInstanceTypeFamily (TF.DataSource p a) b where
+    type HasInstanceTypeFamilyThread (TF.DataSource p a) b =
+         HasInstanceTypeFamilyThread a b
+
     instanceTypeFamily = TF.configuration . instanceTypeFamily
 
-class HasIsDefault s a | s -> a where
-    isDefault :: Lens' s (TF.Argument "is_default" a)
+class HasIsDefault a b | a -> b where
+    type HasIsDefaultThread a b :: *
 
-instance HasIsDefault s a => HasIsDefault (TF.DataSource p s) a where
+    isDefault :: Lens' a (TF.Attribute (HasIsDefaultThread a b) "is_default" b)
+
+instance HasIsDefault a b => HasIsDefault (TF.DataSource p a) b where
+    type HasIsDefaultThread (TF.DataSource p a) b =
+         HasIsDefaultThread a b
+
     isDefault = TF.configuration . isDefault
 
-class HasIsLocked s a | s -> a where
-    isLocked :: Lens' s (TF.Argument "is_locked" a)
+class HasIsLocked a b | a -> b where
+    type HasIsLockedThread a b :: *
 
-instance HasIsLocked s a => HasIsLocked (TF.DataSource p s) a where
+    isLocked :: Lens' a (TF.Attribute (HasIsLockedThread a b) "is_locked" b)
+
+instance HasIsLocked a b => HasIsLocked (TF.DataSource p a) b where
+    type HasIsLockedThread (TF.DataSource p a) b =
+         HasIsLockedThread a b
+
     isLocked = TF.configuration . isLocked
 
-class HasIsOutdated s a | s -> a where
-    isOutdated :: Lens' s (TF.Argument "is_outdated" a)
+class HasIsOutdated a b | a -> b where
+    type HasIsOutdatedThread a b :: *
 
-instance HasIsOutdated s a => HasIsOutdated (TF.DataSource p s) a where
+    isOutdated :: Lens' a (TF.Attribute (HasIsOutdatedThread a b) "is_outdated" b)
+
+instance HasIsOutdated a b => HasIsOutdated (TF.DataSource p a) b where
+    type HasIsOutdatedThread (TF.DataSource p a) b =
+         HasIsOutdatedThread a b
+
     isOutdated = TF.configuration . isOutdated
 
-class HasLine s a | s -> a where
-    line :: Lens' s (TF.Argument "line" a)
+class HasLine a b | a -> b where
+    type HasLineThread a b :: *
 
-instance HasLine s a => HasLine (TF.DataSource p s) a where
+    line :: Lens' a (TF.Attribute (HasLineThread a b) "line" b)
+
+instance HasLine a b => HasLine (TF.DataSource p a) b where
+    type HasLineThread (TF.DataSource p a) b =
+         HasLineThread a b
+
     line = TF.configuration . line
 
-class HasMemorySize s a | s -> a where
-    memorySize :: Lens' s (TF.Argument "memory_size" a)
+class HasMemorySize a b | a -> b where
+    type HasMemorySizeThread a b :: *
 
-instance HasMemorySize s a => HasMemorySize (TF.DataSource p s) a where
+    memorySize :: Lens' a (TF.Attribute (HasMemorySizeThread a b) "memory_size" b)
+
+instance HasMemorySize a b => HasMemorySize (TF.DataSource p a) b where
+    type HasMemorySizeThread (TF.DataSource p a) b =
+         HasMemorySizeThread a b
+
     memorySize = TF.configuration . memorySize
 
-class HasMostRecent s a | s -> a where
-    mostRecent :: Lens' s (TF.Argument "most_recent" a)
+class HasMostRecent a b | a -> b where
+    type HasMostRecentThread a b :: *
 
-instance HasMostRecent s a => HasMostRecent (TF.DataSource p s) a where
+    mostRecent :: Lens' a (TF.Attribute (HasMostRecentThread a b) "most_recent" b)
+
+instance HasMostRecent a b => HasMostRecent (TF.DataSource p a) b where
+    type HasMostRecentThread (TF.DataSource p a) b =
+         HasMostRecentThread a b
+
     mostRecent = TF.configuration . mostRecent
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasNameRegex s a | s -> a where
-    nameRegex :: Lens' s (TF.Argument "name_regex" a)
+class HasNameRegex a b | a -> b where
+    type HasNameRegexThread a b :: *
 
-instance HasNameRegex s a => HasNameRegex (TF.DataSource p s) a where
+    nameRegex :: Lens' a (TF.Attribute (HasNameRegexThread a b) "name_regex" b)
+
+instance HasNameRegex a b => HasNameRegex (TF.DataSource p a) b where
+    type HasNameRegexThread (TF.DataSource p a) b =
+         HasNameRegexThread a b
+
     nameRegex = TF.configuration . nameRegex
 
-class HasOutputFile s a | s -> a where
-    outputFile :: Lens' s (TF.Argument "output_file" a)
+class HasOutputFile a b | a -> b where
+    type HasOutputFileThread a b :: *
 
-instance HasOutputFile s a => HasOutputFile (TF.DataSource p s) a where
+    outputFile :: Lens' a (TF.Attribute (HasOutputFileThread a b) "output_file" b)
+
+instance HasOutputFile a b => HasOutputFile (TF.DataSource p a) b where
+    type HasOutputFileThread (TF.DataSource p a) b =
+         HasOutputFileThread a b
+
     outputFile = TF.configuration . outputFile
 
-class HasOwners s a | s -> a where
-    owners :: Lens' s (TF.Argument "owners" a)
+class HasOwners a b | a -> b where
+    type HasOwnersThread a b :: *
 
-instance HasOwners s a => HasOwners (TF.DataSource p s) a where
+    owners :: Lens' a (TF.Attribute (HasOwnersThread a b) "owners" b)
+
+instance HasOwners a b => HasOwners (TF.DataSource p a) b where
+    type HasOwnersThread (TF.DataSource p a) b =
+         HasOwnersThread a b
+
     owners = TF.configuration . owners
 
-class HasPolicyName s a | s -> a where
-    policyName :: Lens' s (TF.Argument "policy_name" a)
+class HasPolicyName a b | a -> b where
+    type HasPolicyNameThread a b :: *
 
-instance HasPolicyName s a => HasPolicyName (TF.DataSource p s) a where
+    policyName :: Lens' a (TF.Attribute (HasPolicyNameThread a b) "policy_name" b)
+
+instance HasPolicyName a b => HasPolicyName (TF.DataSource p a) b where
+    type HasPolicyNameThread (TF.DataSource p a) b =
+         HasPolicyNameThread a b
+
     policyName = TF.configuration . policyName
 
-class HasPolicyType s a | s -> a where
-    policyType :: Lens' s (TF.Argument "policy_type" a)
+class HasPolicyType a b | a -> b where
+    type HasPolicyTypeThread a b :: *
 
-instance HasPolicyType s a => HasPolicyType (TF.DataSource p s) a where
+    policyType :: Lens' a (TF.Attribute (HasPolicyTypeThread a b) "policy_type" b)
+
+instance HasPolicyType a b => HasPolicyType (TF.DataSource p a) b where
+    type HasPolicyTypeThread (TF.DataSource p a) b =
+         HasPolicyTypeThread a b
+
     policyType = TF.configuration . policyType
 
-class HasRoleName s a | s -> a where
-    roleName :: Lens' s (TF.Argument "role_name" a)
+class HasRoleName a b | a -> b where
+    type HasRoleNameThread a b :: *
 
-instance HasRoleName s a => HasRoleName (TF.DataSource p s) a where
+    roleName :: Lens' a (TF.Attribute (HasRoleNameThread a b) "role_name" b)
+
+instance HasRoleName a b => HasRoleName (TF.DataSource p a) b where
+    type HasRoleNameThread (TF.DataSource p a) b =
+         HasRoleNameThread a b
+
     roleName = TF.configuration . roleName
 
-class HasStatus s a | s -> a where
-    status :: Lens' s (TF.Argument "status" a)
+class HasStatus a b | a -> b where
+    type HasStatusThread a b :: *
 
-instance HasStatus s a => HasStatus (TF.DataSource p s) a where
+    status :: Lens' a (TF.Attribute (HasStatusThread a b) "status" b)
+
+instance HasStatus a b => HasStatus (TF.DataSource p a) b where
+    type HasStatusThread (TF.DataSource p a) b =
+         HasStatusThread a b
+
     status = TF.configuration . status
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.DataSource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.DataSource p a) b where
+    type HasType'Thread (TF.DataSource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasUserName s a | s -> a where
-    userName :: Lens' s (TF.Argument "user_name" a)
+class HasUserName a b | a -> b where
+    type HasUserNameThread a b :: *
 
-instance HasUserName s a => HasUserName (TF.DataSource p s) a where
+    userName :: Lens' a (TF.Attribute (HasUserNameThread a b) "user_name" b)
+
+instance HasUserName a b => HasUserName (TF.DataSource p a) b where
+    type HasUserNameThread (TF.DataSource p a) b =
+         HasUserNameThread a b
+
     userName = TF.configuration . userName
 
-class HasValueRegex s a | s -> a where
-    valueRegex :: Lens' s (TF.Argument "value_regex" a)
+class HasValueRegex a b | a -> b where
+    type HasValueRegexThread a b :: *
 
-instance HasValueRegex s a => HasValueRegex (TF.DataSource p s) a where
+    valueRegex :: Lens' a (TF.Attribute (HasValueRegexThread a b) "value_regex" b)
+
+instance HasValueRegex a b => HasValueRegex (TF.DataSource p a) b where
+    type HasValueRegexThread (TF.DataSource p a) b =
+         HasValueRegexThread a b
+
     valueRegex = TF.configuration . valueRegex
 
-class HasVersionCode s a | s -> a where
-    versionCode :: Lens' s (TF.Argument "version_code" a)
+class HasVersionCode a b | a -> b where
+    type HasVersionCodeThread a b :: *
 
-instance HasVersionCode s a => HasVersionCode (TF.DataSource p s) a where
+    versionCode :: Lens' a (TF.Attribute (HasVersionCodeThread a b) "version_code" b)
+
+instance HasVersionCode a b => HasVersionCode (TF.DataSource p a) b where
+    type HasVersionCodeThread (TF.DataSource p a) b =
+         HasVersionCodeThread a b
+
     versionCode = TF.configuration . versionCode
 
-class HasVswitchId s a | s -> a where
-    vswitchId :: Lens' s (TF.Argument "vswitch_id" a)
+class HasVswitchId a b | a -> b where
+    type HasVswitchIdThread a b :: *
 
-instance HasVswitchId s a => HasVswitchId (TF.DataSource p s) a where
+    vswitchId :: Lens' a (TF.Attribute (HasVswitchIdThread a b) "vswitch_id" b)
+
+instance HasVswitchId a b => HasVswitchId (TF.DataSource p a) b where
+    type HasVswitchIdThread (TF.DataSource p a) b =
+         HasVswitchIdThread a b
+
     vswitchId = TF.configuration . vswitchId
 
-class HasComputedAccountAlias s a | s -> a where
-    computedAccountAlias :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAccountAlias a b | a -> b where
+    computedAccountAlias :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAccountAlias s a => HasComputedAccountAlias (TF.DataSource p s) a where
-    computedAccountAlias = TF.configuration . computedAccountAlias
+class HasComputedAliDomain a b | a -> b where
+    computedAliDomain :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAliDomain s a | s -> a where
-    computedAliDomain :: forall r. Getting r s (TF.Attribute a)
+class HasComputedArchitecture a b | a -> b where
+    computedArchitecture :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAliDomain s a => HasComputedAliDomain (TF.DataSource p s) a where
-    computedAliDomain = TF.configuration . computedAliDomain
+class HasComputedArn a b | a -> b where
+    computedArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedArchitecture s a | s -> a where
-    computedArchitecture :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAssumeRolePolicyDocument a b | a -> b where
+    computedAssumeRolePolicyDocument :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedArchitecture s a => HasComputedArchitecture (TF.DataSource p s) a where
-    computedArchitecture = TF.configuration . computedArchitecture
+class HasComputedAttachmentCount a b | a -> b where
+    computedAttachmentCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedArn s a | s -> a where
-    computedArn :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAvailableDiskCategories a b | a -> b where
+    computedAvailableDiskCategories :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedArn s a => HasComputedArn (TF.DataSource p s) a where
-    computedArn = TF.configuration . computedArn
+class HasComputedAvailableInstanceTypes a b | a -> b where
+    computedAvailableInstanceTypes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAssumeRolePolicyDocument s a | s -> a where
-    computedAssumeRolePolicyDocument :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAvailableResourceCreation a b | a -> b where
+    computedAvailableResourceCreation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAssumeRolePolicyDocument s a => HasComputedAssumeRolePolicyDocument (TF.DataSource p s) a where
-    computedAssumeRolePolicyDocument = TF.configuration . computedAssumeRolePolicyDocument
+class HasComputedCidrBlock a b | a -> b where
+    computedCidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAttachmentCount s a | s -> a where
-    computedAttachmentCount :: forall r. Getting r s (TF.Attribute a)
+class HasComputedComments a b | a -> b where
+    computedComments :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAttachmentCount s a => HasComputedAttachmentCount (TF.DataSource p s) a where
-    computedAttachmentCount = TF.configuration . computedAttachmentCount
+class HasComputedCpuCoreCount a b | a -> b where
+    computedCpuCoreCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAvailableDiskCategories s a | s -> a where
-    computedAvailableDiskCategories :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCreateDate a b | a -> b where
+    computedCreateDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAvailableDiskCategories s a => HasComputedAvailableDiskCategories (TF.DataSource p s) a where
-    computedAvailableDiskCategories = TF.configuration . computedAvailableDiskCategories
+class HasComputedCreationTime a b | a -> b where
+    computedCreationTime :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAvailableInstanceTypes s a | s -> a where
-    computedAvailableInstanceTypes :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDefaultVersion a b | a -> b where
+    computedDefaultVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAvailableInstanceTypes s a => HasComputedAvailableInstanceTypes (TF.DataSource p s) a where
-    computedAvailableInstanceTypes = TF.configuration . computedAvailableInstanceTypes
+class HasComputedDescription a b | a -> b where
+    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedAvailableResourceCreation s a | s -> a where
-    computedAvailableResourceCreation :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDiskDeviceMappings a b | a -> b where
+    computedDiskDeviceMappings :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAvailableResourceCreation s a => HasComputedAvailableResourceCreation (TF.DataSource p s) a where
-    computedAvailableResourceCreation = TF.configuration . computedAvailableResourceCreation
+class HasComputedDnsServers a b | a -> b where
+    computedDnsServers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCidrBlock s a | s -> a where
-    computedCidrBlock :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDocument a b | a -> b where
+    computedDocument :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCidrBlock s a => HasComputedCidrBlock (TF.DataSource p s) a where
-    computedCidrBlock = TF.configuration . computedCidrBlock
+class HasComputedDomainId a b | a -> b where
+    computedDomainId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedComments s a | s -> a where
-    computedComments :: forall r. Getting r s (TF.Attribute a)
+class HasComputedDomainName a b | a -> b where
+    computedDomainName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedComments s a => HasComputedComments (TF.DataSource p s) a where
-    computedComments = TF.configuration . computedComments
+class HasComputedFamily' a b | a -> b where
+    computedFamily' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCpuCoreCount s a | s -> a where
-    computedCpuCoreCount :: forall r. Getting r s (TF.Attribute a)
+class HasComputedFingerPrint a b | a -> b where
+    computedFingerPrint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCpuCoreCount s a => HasComputedCpuCoreCount (TF.DataSource p s) a where
-    computedCpuCoreCount = TF.configuration . computedCpuCoreCount
+class HasComputedGroupId a b | a -> b where
+    computedGroupId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCreateDate s a | s -> a where
-    computedCreateDate :: forall r. Getting r s (TF.Attribute a)
+class HasComputedGroupName a b | a -> b where
+    computedGroupName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCreateDate s a => HasComputedCreateDate (TF.DataSource p s) a where
-    computedCreateDate = TF.configuration . computedCreateDate
+class HasComputedHostRecord a b | a -> b where
+    computedHostRecord :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCreationTime s a | s -> a where
-    computedCreationTime :: forall r. Getting r s (TF.Attribute a)
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCreationTime s a => HasComputedCreationTime (TF.DataSource p s) a where
-    computedCreationTime = TF.configuration . computedCreationTime
+class HasComputedImageOwnerAlias a b | a -> b where
+    computedImageOwnerAlias :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDefaultVersion s a | s -> a where
-    computedDefaultVersion :: forall r. Getting r s (TF.Attribute a)
+class HasComputedImageVersion a b | a -> b where
+    computedImageVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDefaultVersion s a => HasComputedDefaultVersion (TF.DataSource p s) a where
-    computedDefaultVersion = TF.configuration . computedDefaultVersion
+class HasComputedInstanceId a b | a -> b where
+    computedInstanceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDescription s a | s -> a where
-    computedDescription :: forall r. Getting r s (TF.Attribute a)
+class HasComputedInstances a b | a -> b where
+    computedInstances :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDescription s a => HasComputedDescription (TF.DataSource p s) a where
-    computedDescription = TF.configuration . computedDescription
+class HasComputedIsDefault a b | a -> b where
+    computedIsDefault :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDiskDeviceMappings s a | s -> a where
-    computedDiskDeviceMappings :: forall r. Getting r s (TF.Attribute a)
+class HasComputedIsSubscribed a b | a -> b where
+    computedIsSubscribed :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDiskDeviceMappings s a => HasComputedDiskDeviceMappings (TF.DataSource p s) a where
-    computedDiskDeviceMappings = TF.configuration . computedDiskDeviceMappings
+class HasComputedKeyName a b | a -> b where
+    computedKeyName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDnsServers s a | s -> a where
-    computedDnsServers :: forall r. Getting r s (TF.Attribute a)
+class HasComputedLastLoginDate a b | a -> b where
+    computedLastLoginDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDnsServers s a => HasComputedDnsServers (TF.DataSource p s) a where
-    computedDnsServers = TF.configuration . computedDnsServers
+class HasComputedLine a b | a -> b where
+    computedLine :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDocument s a | s -> a where
-    computedDocument :: forall r. Getting r s (TF.Attribute a)
+class HasComputedLocalName a b | a -> b where
+    computedLocalName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDocument s a => HasComputedDocument (TF.DataSource p s) a where
-    computedDocument = TF.configuration . computedDocument
+class HasComputedLocked a b | a -> b where
+    computedLocked :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDomainId s a | s -> a where
-    computedDomainId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedMemorySize a b | a -> b where
+    computedMemorySize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDomainId s a => HasComputedDomainId (TF.DataSource p s) a where
-    computedDomainId = TF.configuration . computedDomainId
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedDomainName s a | s -> a where
-    computedDomainName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedOsName a b | a -> b where
+    computedOsName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedDomainName s a => HasComputedDomainName (TF.DataSource p s) a where
-    computedDomainName = TF.configuration . computedDomainName
+class HasComputedPriority a b | a -> b where
+    computedPriority :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedFamily' s a | s -> a where
-    computedFamily' :: forall r. Getting r s (TF.Attribute a)
+class HasComputedProductCode a b | a -> b where
+    computedProductCode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFamily' s a => HasComputedFamily' (TF.DataSource p s) a where
-    computedFamily' = TF.configuration . computedFamily'
+class HasComputedProgress a b | a -> b where
+    computedProgress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedFingerPrint s a | s -> a where
-    computedFingerPrint :: forall r. Getting r s (TF.Attribute a)
+class HasComputedPunyCode a b | a -> b where
+    computedPunyCode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFingerPrint s a => HasComputedFingerPrint (TF.DataSource p s) a where
-    computedFingerPrint = TF.configuration . computedFingerPrint
+class HasComputedRecordId a b | a -> b where
+    computedRecordId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedGroupId s a | s -> a where
-    computedGroupId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedRegionId a b | a -> b where
+    computedRegionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedGroupId s a => HasComputedGroupId (TF.DataSource p s) a where
-    computedGroupId = TF.configuration . computedGroupId
+class HasComputedRouteTableId a b | a -> b where
+    computedRouteTableId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedGroupName s a | s -> a where
-    computedGroupName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedSize a b | a -> b where
+    computedSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedGroupName s a => HasComputedGroupName (TF.DataSource p s) a where
-    computedGroupName = TF.configuration . computedGroupName
+class HasComputedStatus a b | a -> b where
+    computedStatus :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHostRecord s a | s -> a where
-    computedHostRecord :: forall r. Getting r s (TF.Attribute a)
+class HasComputedTtl a b | a -> b where
+    computedTtl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHostRecord s a => HasComputedHostRecord (TF.DataSource p s) a where
-    computedHostRecord = TF.configuration . computedHostRecord
+class HasComputedType' a b | a -> b where
+    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedUpdateDate a b | a -> b where
+    computedUpdateDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedValue a b | a -> b where
+    computedValue :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedImageOwnerAlias s a | s -> a where
-    computedImageOwnerAlias :: forall r. Getting r s (TF.Attribute a)
+class HasComputedVersionCode a b | a -> b where
+    computedVersionCode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedImageOwnerAlias s a => HasComputedImageOwnerAlias (TF.DataSource p s) a where
-    computedImageOwnerAlias = TF.configuration . computedImageOwnerAlias
+class HasComputedVpcName a b | a -> b where
+    computedVpcName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedImageVersion s a | s -> a where
-    computedImageVersion :: forall r. Getting r s (TF.Attribute a)
+class HasComputedVrouterId a b | a -> b where
+    computedVrouterId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedImageVersion s a => HasComputedImageVersion (TF.DataSource p s) a where
-    computedImageVersion = TF.configuration . computedImageVersion
-
-class HasComputedInstanceId s a | s -> a where
-    computedInstanceId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedInstanceId s a => HasComputedInstanceId (TF.DataSource p s) a where
-    computedInstanceId = TF.configuration . computedInstanceId
-
-class HasComputedInstances s a | s -> a where
-    computedInstances :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedInstances s a => HasComputedInstances (TF.DataSource p s) a where
-    computedInstances = TF.configuration . computedInstances
-
-class HasComputedIsDefault s a | s -> a where
-    computedIsDefault :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedIsDefault s a => HasComputedIsDefault (TF.DataSource p s) a where
-    computedIsDefault = TF.configuration . computedIsDefault
-
-class HasComputedIsSubscribed s a | s -> a where
-    computedIsSubscribed :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedIsSubscribed s a => HasComputedIsSubscribed (TF.DataSource p s) a where
-    computedIsSubscribed = TF.configuration . computedIsSubscribed
-
-class HasComputedKeyName s a | s -> a where
-    computedKeyName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedKeyName s a => HasComputedKeyName (TF.DataSource p s) a where
-    computedKeyName = TF.configuration . computedKeyName
-
-class HasComputedLastLoginDate s a | s -> a where
-    computedLastLoginDate :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLastLoginDate s a => HasComputedLastLoginDate (TF.DataSource p s) a where
-    computedLastLoginDate = TF.configuration . computedLastLoginDate
-
-class HasComputedLine s a | s -> a where
-    computedLine :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLine s a => HasComputedLine (TF.DataSource p s) a where
-    computedLine = TF.configuration . computedLine
-
-class HasComputedLocalName s a | s -> a where
-    computedLocalName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLocalName s a => HasComputedLocalName (TF.DataSource p s) a where
-    computedLocalName = TF.configuration . computedLocalName
-
-class HasComputedLocked s a | s -> a where
-    computedLocked :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLocked s a => HasComputedLocked (TF.DataSource p s) a where
-    computedLocked = TF.configuration . computedLocked
-
-class HasComputedMemorySize s a | s -> a where
-    computedMemorySize :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedMemorySize s a => HasComputedMemorySize (TF.DataSource p s) a where
-    computedMemorySize = TF.configuration . computedMemorySize
-
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
-
-class HasComputedOsName s a | s -> a where
-    computedOsName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedOsName s a => HasComputedOsName (TF.DataSource p s) a where
-    computedOsName = TF.configuration . computedOsName
-
-class HasComputedPriority s a | s -> a where
-    computedPriority :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPriority s a => HasComputedPriority (TF.DataSource p s) a where
-    computedPriority = TF.configuration . computedPriority
-
-class HasComputedProductCode s a | s -> a where
-    computedProductCode :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedProductCode s a => HasComputedProductCode (TF.DataSource p s) a where
-    computedProductCode = TF.configuration . computedProductCode
-
-class HasComputedProgress s a | s -> a where
-    computedProgress :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedProgress s a => HasComputedProgress (TF.DataSource p s) a where
-    computedProgress = TF.configuration . computedProgress
-
-class HasComputedPunyCode s a | s -> a where
-    computedPunyCode :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPunyCode s a => HasComputedPunyCode (TF.DataSource p s) a where
-    computedPunyCode = TF.configuration . computedPunyCode
-
-class HasComputedRecordId s a | s -> a where
-    computedRecordId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRecordId s a => HasComputedRecordId (TF.DataSource p s) a where
-    computedRecordId = TF.configuration . computedRecordId
-
-class HasComputedRegionId s a | s -> a where
-    computedRegionId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRegionId s a => HasComputedRegionId (TF.DataSource p s) a where
-    computedRegionId = TF.configuration . computedRegionId
-
-class HasComputedRouteTableId s a | s -> a where
-    computedRouteTableId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRouteTableId s a => HasComputedRouteTableId (TF.DataSource p s) a where
-    computedRouteTableId = TF.configuration . computedRouteTableId
-
-class HasComputedSize s a | s -> a where
-    computedSize :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSize s a => HasComputedSize (TF.DataSource p s) a where
-    computedSize = TF.configuration . computedSize
-
-class HasComputedStatus s a | s -> a where
-    computedStatus :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStatus s a => HasComputedStatus (TF.DataSource p s) a where
-    computedStatus = TF.configuration . computedStatus
-
-class HasComputedTtl s a | s -> a where
-    computedTtl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTtl s a => HasComputedTtl (TF.DataSource p s) a where
-    computedTtl = TF.configuration . computedTtl
-
-class HasComputedType' s a | s -> a where
-    computedType' :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
-    computedType' = TF.configuration . computedType'
-
-class HasComputedUpdateDate s a | s -> a where
-    computedUpdateDate :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUpdateDate s a => HasComputedUpdateDate (TF.DataSource p s) a where
-    computedUpdateDate = TF.configuration . computedUpdateDate
-
-class HasComputedValue s a | s -> a where
-    computedValue :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedValue s a => HasComputedValue (TF.DataSource p s) a where
-    computedValue = TF.configuration . computedValue
-
-class HasComputedVersionCode s a | s -> a where
-    computedVersionCode :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVersionCode s a => HasComputedVersionCode (TF.DataSource p s) a where
-    computedVersionCode = TF.configuration . computedVersionCode
-
-class HasComputedVpcName s a | s -> a where
-    computedVpcName :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVpcName s a => HasComputedVpcName (TF.DataSource p s) a where
-    computedVpcName = TF.configuration . computedVpcName
-
-class HasComputedVrouterId s a | s -> a where
-    computedVrouterId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVrouterId s a => HasComputedVrouterId (TF.DataSource p s) a where
-    computedVrouterId = TF.configuration . computedVrouterId
-
-class HasComputedVswitchIds s a | s -> a where
-    computedVswitchIds :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedVswitchIds s a => HasComputedVswitchIds (TF.DataSource p s) a where
-    computedVswitchIds = TF.configuration . computedVswitchIds
+class HasComputedVswitchIds a b | a -> b where
+    computedVswitchIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -53,115 +54,136 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute           as TF
+import qualified Terrafomo.HCL                 as TF
+import qualified Terrafomo.IP                  as TF
+import qualified Terrafomo.Meta                as TF (configuration)
+import qualified Terrafomo.Name                as TF
+import qualified Terrafomo.Resource            as TF
+import qualified Terrafomo.Resource            as TF
 import qualified Terrafomo.StatusCake.Provider as TF
 import qualified Terrafomo.StatusCake.Types    as TF
-import qualified Terrafomo.Syntax.HCL          as TF
-import qualified Terrafomo.Syntax.IP           as TF
-import qualified Terrafomo.Syntax.Meta         as TF (configuration)
-import qualified Terrafomo.Syntax.Resource     as TF
-import qualified Terrafomo.Syntax.Resource     as TF
-import qualified Terrafomo.Syntax.Variable     as TF
 
 {- | The @statuscake_test@ StatusCake resource.
 
 The test resource allows StatusCake tests to be managed by Terraform.
 -}
-data TestResource = TestResource {
-      _check_rate    :: !(TF.Argument "check_rate" Text)
+data TestResource s = TestResource {
+      _check_rate    :: !(TF.Attribute s "check_rate" Text)
     {- ^ (Optional) Test check rate in seconds. Defaults to 300 -}
-    , _confirmations :: !(TF.Argument "confirmations" Text)
+    , _confirmations :: !(TF.Attribute s "confirmations" Text)
     {- ^ (Optional) The number of confirmation servers to use in order to detect downtime. Defaults to 0. -}
-    , _contact_id    :: !(TF.Argument "contact_id" Text)
+    , _contact_id    :: !(TF.Attribute s "contact_id" Text)
     {- ^ (Optional) The id of the contact group to be add to the test.  Each test can have only one. -}
-    , _paused        :: !(TF.Argument "paused" Text)
+    , _paused        :: !(TF.Attribute s "paused" Text)
     {- ^ (Optional) Whether or not the test is paused. Defaults to false. -}
-    , _port          :: !(TF.Argument "port" Text)
+    , _port          :: !(TF.Attribute s "port" Text)
     {- ^ (Optional) The port to use when specifying a TCP test. -}
-    , _test_type     :: !(TF.Argument "test_type" Text)
+    , _test_type     :: !(TF.Attribute s "test_type" Text)
     {- ^ (Required) The type of Test. Either HTTP or TCP -}
-    , _timeout       :: !(TF.Argument "timeout" Text)
+    , _timeout       :: !(TF.Attribute s "timeout" Text)
     {- ^ (Optional) The timeout of the test in seconds. -}
-    , _trigger_rate  :: !(TF.Argument "trigger_rate" Text)
+    , _trigger_rate  :: !(TF.Attribute s "trigger_rate" Text)
     {- ^ (Optional) The number of minutes to wait before sending an alert. Default is @5@ . -}
-    , _website_name  :: !(TF.Argument "website_name" Text)
+    , _website_name  :: !(TF.Attribute s "website_name" Text)
     {- ^ (Required) This is the name of the test and the website to be monitored. -}
-    , _website_url   :: !(TF.Argument "website_url" Text)
+    , _website_url   :: !(TF.Attribute s "website_url" Text)
     {- ^ (Required) The URL of the website to be monitored -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TestResource where
+instance TF.ToHCL (TestResource s) where
     toHCL TestResource{..} = TF.block $ catMaybes
-        [ TF.argument _check_rate
-        , TF.argument _confirmations
-        , TF.argument _contact_id
-        , TF.argument _paused
-        , TF.argument _port
-        , TF.argument _test_type
-        , TF.argument _timeout
-        , TF.argument _trigger_rate
-        , TF.argument _website_name
-        , TF.argument _website_url
+        [ TF.attribute _check_rate
+        , TF.attribute _confirmations
+        , TF.attribute _contact_id
+        , TF.attribute _paused
+        , TF.attribute _port
+        , TF.attribute _test_type
+        , TF.attribute _timeout
+        , TF.attribute _trigger_rate
+        , TF.attribute _website_name
+        , TF.attribute _website_url
         ]
 
-instance HasCheckRate TestResource Text where
+instance HasCheckRate (TestResource s) Text where
+    type HasCheckRateThread (TestResource s) Text = s
+
     checkRate =
-        lens (_check_rate :: TestResource -> TF.Argument "check_rate" Text)
-             (\s a -> s { _check_rate = a } :: TestResource)
+        lens (_check_rate :: TestResource s -> TF.Attribute s "check_rate" Text)
+             (\s a -> s { _check_rate = a } :: TestResource s)
 
-instance HasConfirmations TestResource Text where
+instance HasConfirmations (TestResource s) Text where
+    type HasConfirmationsThread (TestResource s) Text = s
+
     confirmations =
-        lens (_confirmations :: TestResource -> TF.Argument "confirmations" Text)
-             (\s a -> s { _confirmations = a } :: TestResource)
+        lens (_confirmations :: TestResource s -> TF.Attribute s "confirmations" Text)
+             (\s a -> s { _confirmations = a } :: TestResource s)
 
-instance HasContactId TestResource Text where
+instance HasContactId (TestResource s) Text where
+    type HasContactIdThread (TestResource s) Text = s
+
     contactId =
-        lens (_contact_id :: TestResource -> TF.Argument "contact_id" Text)
-             (\s a -> s { _contact_id = a } :: TestResource)
+        lens (_contact_id :: TestResource s -> TF.Attribute s "contact_id" Text)
+             (\s a -> s { _contact_id = a } :: TestResource s)
 
-instance HasPaused TestResource Text where
+instance HasPaused (TestResource s) Text where
+    type HasPausedThread (TestResource s) Text = s
+
     paused =
-        lens (_paused :: TestResource -> TF.Argument "paused" Text)
-             (\s a -> s { _paused = a } :: TestResource)
+        lens (_paused :: TestResource s -> TF.Attribute s "paused" Text)
+             (\s a -> s { _paused = a } :: TestResource s)
 
-instance HasPort TestResource Text where
+instance HasPort (TestResource s) Text where
+    type HasPortThread (TestResource s) Text = s
+
     port =
-        lens (_port :: TestResource -> TF.Argument "port" Text)
-             (\s a -> s { _port = a } :: TestResource)
+        lens (_port :: TestResource s -> TF.Attribute s "port" Text)
+             (\s a -> s { _port = a } :: TestResource s)
 
-instance HasTestType TestResource Text where
+instance HasTestType (TestResource s) Text where
+    type HasTestTypeThread (TestResource s) Text = s
+
     testType =
-        lens (_test_type :: TestResource -> TF.Argument "test_type" Text)
-             (\s a -> s { _test_type = a } :: TestResource)
+        lens (_test_type :: TestResource s -> TF.Attribute s "test_type" Text)
+             (\s a -> s { _test_type = a } :: TestResource s)
 
-instance HasTimeout TestResource Text where
+instance HasTimeout (TestResource s) Text where
+    type HasTimeoutThread (TestResource s) Text = s
+
     timeout =
-        lens (_timeout :: TestResource -> TF.Argument "timeout" Text)
-             (\s a -> s { _timeout = a } :: TestResource)
+        lens (_timeout :: TestResource s -> TF.Attribute s "timeout" Text)
+             (\s a -> s { _timeout = a } :: TestResource s)
 
-instance HasTriggerRate TestResource Text where
+instance HasTriggerRate (TestResource s) Text where
+    type HasTriggerRateThread (TestResource s) Text = s
+
     triggerRate =
-        lens (_trigger_rate :: TestResource -> TF.Argument "trigger_rate" Text)
-             (\s a -> s { _trigger_rate = a } :: TestResource)
+        lens (_trigger_rate :: TestResource s -> TF.Attribute s "trigger_rate" Text)
+             (\s a -> s { _trigger_rate = a } :: TestResource s)
 
-instance HasWebsiteName TestResource Text where
+instance HasWebsiteName (TestResource s) Text where
+    type HasWebsiteNameThread (TestResource s) Text = s
+
     websiteName =
-        lens (_website_name :: TestResource -> TF.Argument "website_name" Text)
-             (\s a -> s { _website_name = a } :: TestResource)
+        lens (_website_name :: TestResource s -> TF.Attribute s "website_name" Text)
+             (\s a -> s { _website_name = a } :: TestResource s)
 
-instance HasWebsiteUrl TestResource Text where
+instance HasWebsiteUrl (TestResource s) Text where
+    type HasWebsiteUrlThread (TestResource s) Text = s
+
     websiteUrl =
-        lens (_website_url :: TestResource -> TF.Argument "website_url" Text)
-             (\s a -> s { _website_url = a } :: TestResource)
+        lens (_website_url :: TestResource s -> TF.Attribute s "website_url" Text)
+             (\s a -> s { _website_url = a } :: TestResource s)
 
-instance HasComputedTestId TestResource Text where
+instance HasComputedTestId (TestResource s) Text where
     computedTestId =
-        to (\_  -> TF.Compute "test_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "test_id")
 
-testResource :: TF.Resource TF.StatusCake TestResource
+testResource :: TF.Resource TF.StatusCake (TestResource s)
 testResource =
     TF.newResource "statuscake_test" $
         TestResource {
-            _check_rate = TF.Nil
+              _check_rate = TF.Nil
             , _confirmations = TF.Nil
             , _contact_id = TF.Nil
             , _paused = TF.Nil
@@ -173,68 +195,115 @@ testResource =
             , _website_url = TF.Nil
             }
 
-class HasCheckRate s a | s -> a where
-    checkRate :: Lens' s (TF.Argument "check_rate" a)
+class HasCheckRate a b | a -> b where
+    type HasCheckRateThread a b :: *
 
-instance HasCheckRate s a => HasCheckRate (TF.Resource p s) a where
+    checkRate :: Lens' a (TF.Attribute (HasCheckRateThread a b) "check_rate" b)
+
+instance HasCheckRate a b => HasCheckRate (TF.Resource p a) b where
+    type HasCheckRateThread (TF.Resource p a) b =
+         HasCheckRateThread a b
+
     checkRate = TF.configuration . checkRate
 
-class HasConfirmations s a | s -> a where
-    confirmations :: Lens' s (TF.Argument "confirmations" a)
+class HasConfirmations a b | a -> b where
+    type HasConfirmationsThread a b :: *
 
-instance HasConfirmations s a => HasConfirmations (TF.Resource p s) a where
+    confirmations :: Lens' a (TF.Attribute (HasConfirmationsThread a b) "confirmations" b)
+
+instance HasConfirmations a b => HasConfirmations (TF.Resource p a) b where
+    type HasConfirmationsThread (TF.Resource p a) b =
+         HasConfirmationsThread a b
+
     confirmations = TF.configuration . confirmations
 
-class HasContactId s a | s -> a where
-    contactId :: Lens' s (TF.Argument "contact_id" a)
+class HasContactId a b | a -> b where
+    type HasContactIdThread a b :: *
 
-instance HasContactId s a => HasContactId (TF.Resource p s) a where
+    contactId :: Lens' a (TF.Attribute (HasContactIdThread a b) "contact_id" b)
+
+instance HasContactId a b => HasContactId (TF.Resource p a) b where
+    type HasContactIdThread (TF.Resource p a) b =
+         HasContactIdThread a b
+
     contactId = TF.configuration . contactId
 
-class HasPaused s a | s -> a where
-    paused :: Lens' s (TF.Argument "paused" a)
+class HasPaused a b | a -> b where
+    type HasPausedThread a b :: *
 
-instance HasPaused s a => HasPaused (TF.Resource p s) a where
+    paused :: Lens' a (TF.Attribute (HasPausedThread a b) "paused" b)
+
+instance HasPaused a b => HasPaused (TF.Resource p a) b where
+    type HasPausedThread (TF.Resource p a) b =
+         HasPausedThread a b
+
     paused = TF.configuration . paused
 
-class HasPort s a | s -> a where
-    port :: Lens' s (TF.Argument "port" a)
+class HasPort a b | a -> b where
+    type HasPortThread a b :: *
 
-instance HasPort s a => HasPort (TF.Resource p s) a where
+    port :: Lens' a (TF.Attribute (HasPortThread a b) "port" b)
+
+instance HasPort a b => HasPort (TF.Resource p a) b where
+    type HasPortThread (TF.Resource p a) b =
+         HasPortThread a b
+
     port = TF.configuration . port
 
-class HasTestType s a | s -> a where
-    testType :: Lens' s (TF.Argument "test_type" a)
+class HasTestType a b | a -> b where
+    type HasTestTypeThread a b :: *
 
-instance HasTestType s a => HasTestType (TF.Resource p s) a where
+    testType :: Lens' a (TF.Attribute (HasTestTypeThread a b) "test_type" b)
+
+instance HasTestType a b => HasTestType (TF.Resource p a) b where
+    type HasTestTypeThread (TF.Resource p a) b =
+         HasTestTypeThread a b
+
     testType = TF.configuration . testType
 
-class HasTimeout s a | s -> a where
-    timeout :: Lens' s (TF.Argument "timeout" a)
+class HasTimeout a b | a -> b where
+    type HasTimeoutThread a b :: *
 
-instance HasTimeout s a => HasTimeout (TF.Resource p s) a where
+    timeout :: Lens' a (TF.Attribute (HasTimeoutThread a b) "timeout" b)
+
+instance HasTimeout a b => HasTimeout (TF.Resource p a) b where
+    type HasTimeoutThread (TF.Resource p a) b =
+         HasTimeoutThread a b
+
     timeout = TF.configuration . timeout
 
-class HasTriggerRate s a | s -> a where
-    triggerRate :: Lens' s (TF.Argument "trigger_rate" a)
+class HasTriggerRate a b | a -> b where
+    type HasTriggerRateThread a b :: *
 
-instance HasTriggerRate s a => HasTriggerRate (TF.Resource p s) a where
+    triggerRate :: Lens' a (TF.Attribute (HasTriggerRateThread a b) "trigger_rate" b)
+
+instance HasTriggerRate a b => HasTriggerRate (TF.Resource p a) b where
+    type HasTriggerRateThread (TF.Resource p a) b =
+         HasTriggerRateThread a b
+
     triggerRate = TF.configuration . triggerRate
 
-class HasWebsiteName s a | s -> a where
-    websiteName :: Lens' s (TF.Argument "website_name" a)
+class HasWebsiteName a b | a -> b where
+    type HasWebsiteNameThread a b :: *
 
-instance HasWebsiteName s a => HasWebsiteName (TF.Resource p s) a where
+    websiteName :: Lens' a (TF.Attribute (HasWebsiteNameThread a b) "website_name" b)
+
+instance HasWebsiteName a b => HasWebsiteName (TF.Resource p a) b where
+    type HasWebsiteNameThread (TF.Resource p a) b =
+         HasWebsiteNameThread a b
+
     websiteName = TF.configuration . websiteName
 
-class HasWebsiteUrl s a | s -> a where
-    websiteUrl :: Lens' s (TF.Argument "website_url" a)
+class HasWebsiteUrl a b | a -> b where
+    type HasWebsiteUrlThread a b :: *
 
-instance HasWebsiteUrl s a => HasWebsiteUrl (TF.Resource p s) a where
+    websiteUrl :: Lens' a (TF.Attribute (HasWebsiteUrlThread a b) "website_url" b)
+
+instance HasWebsiteUrl a b => HasWebsiteUrl (TF.Resource p a) b where
+    type HasWebsiteUrlThread (TF.Resource p a) b =
+         HasWebsiteUrlThread a b
+
     websiteUrl = TF.configuration . websiteUrl
 
-class HasComputedTestId s a | s -> a where
-    computedTestId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTestId s a => HasComputedTestId (TF.Resource p s) a where
-    computedTestId = TF.configuration . computedTestId
+class HasComputedTestId a b | a -> b where
+    computedTestId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

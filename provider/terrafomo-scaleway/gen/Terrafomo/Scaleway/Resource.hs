@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -79,14 +80,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 import qualified Terrafomo.Scaleway.Provider as TF
 import qualified Terrafomo.Scaleway.Types    as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
 
 {- | The @scaleway_ip@ Scaleway resource.
 
@@ -94,34 +96,36 @@ Provides IPs for servers. This allows IPs to be created, updated and
 deleted. For additional details please refer to
 <https://developer.scaleway.com/#ips> .
 -}
-data IpResource = IpResource {
-      _server :: !(TF.Argument "server" Text)
+data IpResource s = IpResource {
+      _server :: !(TF.Attribute s "server" Text)
     {- ^ (Optional) ID of server to associate IP with -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL IpResource where
+instance TF.ToHCL (IpResource s) where
     toHCL IpResource{..} = TF.block $ catMaybes
-        [ TF.argument _server
+        [ TF.attribute _server
         ]
 
-instance HasServer IpResource Text where
+instance HasServer (IpResource s) Text where
+    type HasServerThread (IpResource s) Text = s
+
     server =
-        lens (_server :: IpResource -> TF.Argument "server" Text)
-             (\s a -> s { _server = a } :: IpResource)
+        lens (_server :: IpResource s -> TF.Attribute s "server" Text)
+             (\s a -> s { _server = a } :: IpResource s)
 
-instance HasComputedId IpResource Text where
+instance HasComputedId (IpResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedIp IpResource Text where
+instance HasComputedIp (IpResource s) Text where
     computedIp =
-        to (\_  -> TF.Compute "ip")
+        to (\x -> TF.Computed (TF.referenceKey x) "ip")
 
-ipResource :: TF.Resource TF.Scaleway IpResource
+ipResource :: TF.Resource TF.Scaleway (IpResource s)
 ipResource =
     TF.newResource "scaleway_ip" $
         IpResource {
-            _server = TF.Nil
+              _server = TF.Nil
             }
 
 {- | The @scaleway_security_group@ Scaleway resource.
@@ -130,38 +134,42 @@ Provides security groups. This allows security groups to be created, updated
 and deleted. For additional details please refer to
 <https://developer.scaleway.com/#security-groups> .
 -}
-data SecurityGroupResource = SecurityGroupResource {
-      _description :: !(TF.Argument "description" Text)
+data SecurityGroupResource s = SecurityGroupResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Required) description of security group -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) name of security group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SecurityGroupResource where
+instance TF.ToHCL (SecurityGroupResource s) where
     toHCL SecurityGroupResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _name
+        [ TF.attribute _description
+        , TF.attribute _name
         ]
 
-instance HasDescription SecurityGroupResource Text where
+instance HasDescription (SecurityGroupResource s) Text where
+    type HasDescriptionThread (SecurityGroupResource s) Text = s
+
     description =
-        lens (_description :: SecurityGroupResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: SecurityGroupResource)
+        lens (_description :: SecurityGroupResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: SecurityGroupResource s)
 
-instance HasName SecurityGroupResource Text where
+instance HasName (SecurityGroupResource s) Text where
+    type HasNameThread (SecurityGroupResource s) Text = s
+
     name =
-        lens (_name :: SecurityGroupResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: SecurityGroupResource)
+        lens (_name :: SecurityGroupResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: SecurityGroupResource s)
 
-instance HasComputedId SecurityGroupResource Text where
+instance HasComputedId (SecurityGroupResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-securityGroupResource :: TF.Resource TF.Scaleway SecurityGroupResource
+securityGroupResource :: TF.Resource TF.Scaleway (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "scaleway_security_group" $
         SecurityGroupResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _name = TF.Nil
             }
 
@@ -171,70 +179,82 @@ Provides security group rules. This allows security group rules to be
 created, updated and deleted. For additional details please refer to
 <https://developer.scaleway.com/#security-groups-manage-rules> .
 -}
-data SecurityGroupRuleResource = SecurityGroupRuleResource {
-      _action         :: !(TF.Argument "action" Text)
+data SecurityGroupRuleResource s = SecurityGroupRuleResource {
+      _action         :: !(TF.Attribute s "action" Text)
     {- ^ (Required) action of rule ( @accept@ , @drop@ ) -}
-    , _direction      :: !(TF.Argument "direction" Text)
+    , _direction      :: !(TF.Attribute s "direction" Text)
     {- ^ (Required) direction of rule ( @inbound@ , @outbound@ ) -}
-    , _ip_range       :: !(TF.Argument "ip_range" Text)
+    , _ip_range       :: !(TF.Attribute s "ip_range" Text)
     {- ^ (Required) ip_range of rule -}
-    , _port           :: !(TF.Argument "port" Text)
+    , _port           :: !(TF.Attribute s "port" Text)
     {- ^ (Optional) port of the rule -}
-    , _protocol       :: !(TF.Argument "protocol" Text)
+    , _protocol       :: !(TF.Attribute s "protocol" Text)
     {- ^ (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ ) -}
-    , _security_group :: !(TF.Argument "security_group" Text)
+    , _security_group :: !(TF.Attribute s "security_group" Text)
     {- ^ (Required) the security group which should be associated with this rule -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SecurityGroupRuleResource where
+instance TF.ToHCL (SecurityGroupRuleResource s) where
     toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
-        [ TF.argument _action
-        , TF.argument _direction
-        , TF.argument _ip_range
-        , TF.argument _port
-        , TF.argument _protocol
-        , TF.argument _security_group
+        [ TF.attribute _action
+        , TF.attribute _direction
+        , TF.attribute _ip_range
+        , TF.attribute _port
+        , TF.attribute _protocol
+        , TF.attribute _security_group
         ]
 
-instance HasAction SecurityGroupRuleResource Text where
+instance HasAction (SecurityGroupRuleResource s) Text where
+    type HasActionThread (SecurityGroupRuleResource s) Text = s
+
     action =
-        lens (_action :: SecurityGroupRuleResource -> TF.Argument "action" Text)
-             (\s a -> s { _action = a } :: SecurityGroupRuleResource)
+        lens (_action :: SecurityGroupRuleResource s -> TF.Attribute s "action" Text)
+             (\s a -> s { _action = a } :: SecurityGroupRuleResource s)
 
-instance HasDirection SecurityGroupRuleResource Text where
+instance HasDirection (SecurityGroupRuleResource s) Text where
+    type HasDirectionThread (SecurityGroupRuleResource s) Text = s
+
     direction =
-        lens (_direction :: SecurityGroupRuleResource -> TF.Argument "direction" Text)
-             (\s a -> s { _direction = a } :: SecurityGroupRuleResource)
+        lens (_direction :: SecurityGroupRuleResource s -> TF.Attribute s "direction" Text)
+             (\s a -> s { _direction = a } :: SecurityGroupRuleResource s)
 
-instance HasIpRange SecurityGroupRuleResource Text where
+instance HasIpRange (SecurityGroupRuleResource s) Text where
+    type HasIpRangeThread (SecurityGroupRuleResource s) Text = s
+
     ipRange =
-        lens (_ip_range :: SecurityGroupRuleResource -> TF.Argument "ip_range" Text)
-             (\s a -> s { _ip_range = a } :: SecurityGroupRuleResource)
+        lens (_ip_range :: SecurityGroupRuleResource s -> TF.Attribute s "ip_range" Text)
+             (\s a -> s { _ip_range = a } :: SecurityGroupRuleResource s)
 
-instance HasPort SecurityGroupRuleResource Text where
+instance HasPort (SecurityGroupRuleResource s) Text where
+    type HasPortThread (SecurityGroupRuleResource s) Text = s
+
     port =
-        lens (_port :: SecurityGroupRuleResource -> TF.Argument "port" Text)
-             (\s a -> s { _port = a } :: SecurityGroupRuleResource)
+        lens (_port :: SecurityGroupRuleResource s -> TF.Attribute s "port" Text)
+             (\s a -> s { _port = a } :: SecurityGroupRuleResource s)
 
-instance HasProtocol SecurityGroupRuleResource Text where
+instance HasProtocol (SecurityGroupRuleResource s) Text where
+    type HasProtocolThread (SecurityGroupRuleResource s) Text = s
+
     protocol =
-        lens (_protocol :: SecurityGroupRuleResource -> TF.Argument "protocol" Text)
-             (\s a -> s { _protocol = a } :: SecurityGroupRuleResource)
+        lens (_protocol :: SecurityGroupRuleResource s -> TF.Attribute s "protocol" Text)
+             (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
-instance HasSecurityGroup SecurityGroupRuleResource Text where
+instance HasSecurityGroup (SecurityGroupRuleResource s) Text where
+    type HasSecurityGroupThread (SecurityGroupRuleResource s) Text = s
+
     securityGroup =
-        lens (_security_group :: SecurityGroupRuleResource -> TF.Argument "security_group" Text)
-             (\s a -> s { _security_group = a } :: SecurityGroupRuleResource)
+        lens (_security_group :: SecurityGroupRuleResource s -> TF.Attribute s "security_group" Text)
+             (\s a -> s { _security_group = a } :: SecurityGroupRuleResource s)
 
-instance HasComputedId SecurityGroupRuleResource Text where
+instance HasComputedId (SecurityGroupRuleResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-securityGroupRuleResource :: TF.Resource TF.Scaleway SecurityGroupRuleResource
+securityGroupRuleResource :: TF.Resource TF.Scaleway (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "scaleway_security_group_rule" $
         SecurityGroupRuleResource {
-            _action = TF.Nil
+              _action = TF.Nil
             , _direction = TF.Nil
             , _ip_range = TF.Nil
             , _port = TF.Nil
@@ -248,114 +268,138 @@ Provides servers. This allows servers to be created, updated and deleted.
 For additional details please refer to
 <https://developer.scaleway.com/#servers> .
 -}
-data ServerResource = ServerResource {
-      _bootscript          :: !(TF.Argument "bootscript" Text)
+data ServerResource s = ServerResource {
+      _bootscript          :: !(TF.Attribute s "bootscript" Text)
     {- ^ (Optional) server bootscript -}
-    , _dynamic_ip_required :: !(TF.Argument "dynamic_ip_required" Text)
+    , _dynamic_ip_required :: !(TF.Attribute s "dynamic_ip_required" Text)
     {- ^ (Optional) make server publicly available -}
-    , _enable_ipv6         :: !(TF.Argument "enable_ipv6" Text)
+    , _enable_ipv6         :: !(TF.Attribute s "enable_ipv6" Text)
     {- ^ (Optional) enable ipv6 -}
-    , _image               :: !(TF.Argument "image" Text)
+    , _image               :: !(TF.Attribute s "image" Text)
     {- ^ (Required) base image of server -}
-    , _name                :: !(TF.Argument "name" Text)
+    , _name                :: !(TF.Attribute s "name" Text)
     {- ^ (Required) name of server -}
-    , _public_ipv6         :: !(TF.Argument "public_ipv6" Text)
+    , _public_ipv6         :: !(TF.Attribute s "public_ipv6" Text)
     {- ^ - (Read Only) if @enable_ipv6@ is set this contains the ipv6 address of your instance -}
-    , _security_group      :: !(TF.Argument "security_group" Text)
+    , _security_group      :: !(TF.Attribute s "security_group" Text)
     {- ^ (Optional) assign security group to server -}
-    , _state               :: !(TF.Argument "state" Text)
+    , _state               :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) allows you to define the desired state of your server. Valid values include ( @stopped@ , @running@ ) -}
-    , _state_detail        :: !(TF.Argument "state_detail" Text)
+    , _state_detail        :: !(TF.Attribute s "state_detail" Text)
     {- ^ - (Read Only) contains details from the scaleway API the state of your instance -}
-    , _tags                :: !(TF.Argument "tags" Text)
+    , _tags                :: !(TF.Attribute s "tags" Text)
     {- ^ (Optional) list of tags for server -}
-    , _type'               :: !(TF.Argument "type" Text)
+    , _type'               :: !(TF.Attribute s "type" Text)
     {- ^ (Required) type of server -}
-    , _volume              :: !(TF.Argument "volume" Text)
+    , _volume              :: !(TF.Attribute s "volume" Text)
     {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ServerResource where
+instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.block $ catMaybes
-        [ TF.argument _bootscript
-        , TF.argument _dynamic_ip_required
-        , TF.argument _enable_ipv6
-        , TF.argument _image
-        , TF.argument _name
-        , TF.argument _public_ipv6
-        , TF.argument _security_group
-        , TF.argument _state
-        , TF.argument _state_detail
-        , TF.argument _tags
-        , TF.argument _type'
-        , TF.argument _volume
+        [ TF.attribute _bootscript
+        , TF.attribute _dynamic_ip_required
+        , TF.attribute _enable_ipv6
+        , TF.attribute _image
+        , TF.attribute _name
+        , TF.attribute _public_ipv6
+        , TF.attribute _security_group
+        , TF.attribute _state
+        , TF.attribute _state_detail
+        , TF.attribute _tags
+        , TF.attribute _type'
+        , TF.attribute _volume
         ]
 
-instance HasBootscript ServerResource Text where
+instance HasBootscript (ServerResource s) Text where
+    type HasBootscriptThread (ServerResource s) Text = s
+
     bootscript =
-        lens (_bootscript :: ServerResource -> TF.Argument "bootscript" Text)
-             (\s a -> s { _bootscript = a } :: ServerResource)
+        lens (_bootscript :: ServerResource s -> TF.Attribute s "bootscript" Text)
+             (\s a -> s { _bootscript = a } :: ServerResource s)
 
-instance HasDynamicIpRequired ServerResource Text where
+instance HasDynamicIpRequired (ServerResource s) Text where
+    type HasDynamicIpRequiredThread (ServerResource s) Text = s
+
     dynamicIpRequired =
-        lens (_dynamic_ip_required :: ServerResource -> TF.Argument "dynamic_ip_required" Text)
-             (\s a -> s { _dynamic_ip_required = a } :: ServerResource)
+        lens (_dynamic_ip_required :: ServerResource s -> TF.Attribute s "dynamic_ip_required" Text)
+             (\s a -> s { _dynamic_ip_required = a } :: ServerResource s)
 
-instance HasEnableIpv6 ServerResource Text where
+instance HasEnableIpv6 (ServerResource s) Text where
+    type HasEnableIpv6Thread (ServerResource s) Text = s
+
     enableIpv6 =
-        lens (_enable_ipv6 :: ServerResource -> TF.Argument "enable_ipv6" Text)
-             (\s a -> s { _enable_ipv6 = a } :: ServerResource)
+        lens (_enable_ipv6 :: ServerResource s -> TF.Attribute s "enable_ipv6" Text)
+             (\s a -> s { _enable_ipv6 = a } :: ServerResource s)
 
-instance HasImage ServerResource Text where
+instance HasImage (ServerResource s) Text where
+    type HasImageThread (ServerResource s) Text = s
+
     image =
-        lens (_image :: ServerResource -> TF.Argument "image" Text)
-             (\s a -> s { _image = a } :: ServerResource)
+        lens (_image :: ServerResource s -> TF.Attribute s "image" Text)
+             (\s a -> s { _image = a } :: ServerResource s)
 
-instance HasName ServerResource Text where
+instance HasName (ServerResource s) Text where
+    type HasNameThread (ServerResource s) Text = s
+
     name =
-        lens (_name :: ServerResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ServerResource)
+        lens (_name :: ServerResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ServerResource s)
 
-instance HasPublicIpv6 ServerResource Text where
+instance HasPublicIpv6 (ServerResource s) Text where
+    type HasPublicIpv6Thread (ServerResource s) Text = s
+
     publicIpv6 =
-        lens (_public_ipv6 :: ServerResource -> TF.Argument "public_ipv6" Text)
-             (\s a -> s { _public_ipv6 = a } :: ServerResource)
+        lens (_public_ipv6 :: ServerResource s -> TF.Attribute s "public_ipv6" Text)
+             (\s a -> s { _public_ipv6 = a } :: ServerResource s)
 
-instance HasSecurityGroup ServerResource Text where
+instance HasSecurityGroup (ServerResource s) Text where
+    type HasSecurityGroupThread (ServerResource s) Text = s
+
     securityGroup =
-        lens (_security_group :: ServerResource -> TF.Argument "security_group" Text)
-             (\s a -> s { _security_group = a } :: ServerResource)
+        lens (_security_group :: ServerResource s -> TF.Attribute s "security_group" Text)
+             (\s a -> s { _security_group = a } :: ServerResource s)
 
-instance HasState ServerResource Text where
+instance HasState (ServerResource s) Text where
+    type HasStateThread (ServerResource s) Text = s
+
     state =
-        lens (_state :: ServerResource -> TF.Argument "state" Text)
-             (\s a -> s { _state = a } :: ServerResource)
+        lens (_state :: ServerResource s -> TF.Attribute s "state" Text)
+             (\s a -> s { _state = a } :: ServerResource s)
 
-instance HasStateDetail ServerResource Text where
+instance HasStateDetail (ServerResource s) Text where
+    type HasStateDetailThread (ServerResource s) Text = s
+
     stateDetail =
-        lens (_state_detail :: ServerResource -> TF.Argument "state_detail" Text)
-             (\s a -> s { _state_detail = a } :: ServerResource)
+        lens (_state_detail :: ServerResource s -> TF.Attribute s "state_detail" Text)
+             (\s a -> s { _state_detail = a } :: ServerResource s)
 
-instance HasTags ServerResource Text where
+instance HasTags (ServerResource s) Text where
+    type HasTagsThread (ServerResource s) Text = s
+
     tags =
-        lens (_tags :: ServerResource -> TF.Argument "tags" Text)
-             (\s a -> s { _tags = a } :: ServerResource)
+        lens (_tags :: ServerResource s -> TF.Attribute s "tags" Text)
+             (\s a -> s { _tags = a } :: ServerResource s)
 
-instance HasType' ServerResource Text where
+instance HasType' (ServerResource s) Text where
+    type HasType'Thread (ServerResource s) Text = s
+
     type' =
-        lens (_type' :: ServerResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: ServerResource)
+        lens (_type' :: ServerResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: ServerResource s)
 
-instance HasVolume ServerResource Text where
+instance HasVolume (ServerResource s) Text where
+    type HasVolumeThread (ServerResource s) Text = s
+
     volume =
-        lens (_volume :: ServerResource -> TF.Argument "volume" Text)
-             (\s a -> s { _volume = a } :: ServerResource)
+        lens (_volume :: ServerResource s -> TF.Attribute s "volume" Text)
+             (\s a -> s { _volume = a } :: ServerResource s)
 
-serverResource :: TF.Resource TF.Scaleway ServerResource
+serverResource :: TF.Resource TF.Scaleway (ServerResource s)
 serverResource =
     TF.newResource "scaleway_server" $
         ServerResource {
-            _bootscript = TF.Nil
+              _bootscript = TF.Nil
             , _dynamic_ip_required = TF.Nil
             , _enable_ipv6 = TF.Nil
             , _image = TF.Nil
@@ -375,38 +419,42 @@ This allows volumes to be attached to servers. Warning: Attaching volumes
 requires the servers to be powered off. This will lead to downtime if the
 server is already in use.
 -}
-data VolumeAttachmentResource = VolumeAttachmentResource {
-      _server :: !(TF.Argument "server" Text)
+data VolumeAttachmentResource s = VolumeAttachmentResource {
+      _server :: !(TF.Attribute s "server" Text)
     {- ^ (Required) id of the server -}
-    , _volume :: !(TF.Argument "volume" Text)
+    , _volume :: !(TF.Attribute s "volume" Text)
     {- ^ (Required) id of the volume to be attached -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL VolumeAttachmentResource where
+instance TF.ToHCL (VolumeAttachmentResource s) where
     toHCL VolumeAttachmentResource{..} = TF.block $ catMaybes
-        [ TF.argument _server
-        , TF.argument _volume
+        [ TF.attribute _server
+        , TF.attribute _volume
         ]
 
-instance HasServer VolumeAttachmentResource Text where
+instance HasServer (VolumeAttachmentResource s) Text where
+    type HasServerThread (VolumeAttachmentResource s) Text = s
+
     server =
-        lens (_server :: VolumeAttachmentResource -> TF.Argument "server" Text)
-             (\s a -> s { _server = a } :: VolumeAttachmentResource)
+        lens (_server :: VolumeAttachmentResource s -> TF.Attribute s "server" Text)
+             (\s a -> s { _server = a } :: VolumeAttachmentResource s)
 
-instance HasVolume VolumeAttachmentResource Text where
+instance HasVolume (VolumeAttachmentResource s) Text where
+    type HasVolumeThread (VolumeAttachmentResource s) Text = s
+
     volume =
-        lens (_volume :: VolumeAttachmentResource -> TF.Argument "volume" Text)
-             (\s a -> s { _volume = a } :: VolumeAttachmentResource)
+        lens (_volume :: VolumeAttachmentResource s -> TF.Attribute s "volume" Text)
+             (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
 
-instance HasComputedId VolumeAttachmentResource Text where
+instance HasComputedId (VolumeAttachmentResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-volumeAttachmentResource :: TF.Resource TF.Scaleway VolumeAttachmentResource
+volumeAttachmentResource :: TF.Resource TF.Scaleway (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "scaleway_volume_attachment" $
         VolumeAttachmentResource {
-            _server = TF.Nil
+              _server = TF.Nil
             , _volume = TF.Nil
             }
 
@@ -416,187 +464,289 @@ Provides volumes. This allows volumes to be created, updated and deleted.
 For additional details please refer to
 <https://developer.scaleway.com/#volumes> .
 -}
-data VolumeResource = VolumeResource {
-      _name       :: !(TF.Argument "name" Text)
+data VolumeResource s = VolumeResource {
+      _name       :: !(TF.Attribute s "name" Text)
     {- ^ (Required) name of volume -}
-    , _server     :: !(TF.Argument "server" Text)
+    , _server     :: !(TF.Attribute s "server" Text)
     {- ^ - (Read Only) the @scaleway_server@ instance which has this volume mounted right now -}
-    , _size_in_gb :: !(TF.Argument "size_in_gb" Text)
+    , _size_in_gb :: !(TF.Attribute s "size_in_gb" Text)
     {- ^ (Required) size of the volume in GB -}
-    , _type'      :: !(TF.Argument "type" Text)
+    , _type'      :: !(TF.Attribute s "type" Text)
     {- ^ (Required) type of volume -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL VolumeResource where
+instance TF.ToHCL (VolumeResource s) where
     toHCL VolumeResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _server
-        , TF.argument _size_in_gb
-        , TF.argument _type'
+        [ TF.attribute _name
+        , TF.attribute _server
+        , TF.attribute _size_in_gb
+        , TF.attribute _type'
         ]
 
-instance HasName VolumeResource Text where
+instance HasName (VolumeResource s) Text where
+    type HasNameThread (VolumeResource s) Text = s
+
     name =
-        lens (_name :: VolumeResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: VolumeResource)
+        lens (_name :: VolumeResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: VolumeResource s)
 
-instance HasServer VolumeResource Text where
+instance HasServer (VolumeResource s) Text where
+    type HasServerThread (VolumeResource s) Text = s
+
     server =
-        lens (_server :: VolumeResource -> TF.Argument "server" Text)
-             (\s a -> s { _server = a } :: VolumeResource)
+        lens (_server :: VolumeResource s -> TF.Attribute s "server" Text)
+             (\s a -> s { _server = a } :: VolumeResource s)
 
-instance HasSizeInGb VolumeResource Text where
+instance HasSizeInGb (VolumeResource s) Text where
+    type HasSizeInGbThread (VolumeResource s) Text = s
+
     sizeInGb =
-        lens (_size_in_gb :: VolumeResource -> TF.Argument "size_in_gb" Text)
-             (\s a -> s { _size_in_gb = a } :: VolumeResource)
+        lens (_size_in_gb :: VolumeResource s -> TF.Attribute s "size_in_gb" Text)
+             (\s a -> s { _size_in_gb = a } :: VolumeResource s)
 
-instance HasType' VolumeResource Text where
+instance HasType' (VolumeResource s) Text where
+    type HasType'Thread (VolumeResource s) Text = s
+
     type' =
-        lens (_type' :: VolumeResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: VolumeResource)
+        lens (_type' :: VolumeResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: VolumeResource s)
 
-instance HasComputedId VolumeResource Text where
+instance HasComputedId (VolumeResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-volumeResource :: TF.Resource TF.Scaleway VolumeResource
+volumeResource :: TF.Resource TF.Scaleway (VolumeResource s)
 volumeResource =
     TF.newResource "scaleway_volume" $
         VolumeResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _server = TF.Nil
             , _size_in_gb = TF.Nil
             , _type' = TF.Nil
             }
 
-class HasAction s a | s -> a where
-    action :: Lens' s (TF.Argument "action" a)
+class HasAction a b | a -> b where
+    type HasActionThread a b :: *
 
-instance HasAction s a => HasAction (TF.Resource p s) a where
+    action :: Lens' a (TF.Attribute (HasActionThread a b) "action" b)
+
+instance HasAction a b => HasAction (TF.Resource p a) b where
+    type HasActionThread (TF.Resource p a) b =
+         HasActionThread a b
+
     action = TF.configuration . action
 
-class HasBootscript s a | s -> a where
-    bootscript :: Lens' s (TF.Argument "bootscript" a)
+class HasBootscript a b | a -> b where
+    type HasBootscriptThread a b :: *
 
-instance HasBootscript s a => HasBootscript (TF.Resource p s) a where
+    bootscript :: Lens' a (TF.Attribute (HasBootscriptThread a b) "bootscript" b)
+
+instance HasBootscript a b => HasBootscript (TF.Resource p a) b where
+    type HasBootscriptThread (TF.Resource p a) b =
+         HasBootscriptThread a b
+
     bootscript = TF.configuration . bootscript
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasDirection s a | s -> a where
-    direction :: Lens' s (TF.Argument "direction" a)
+class HasDirection a b | a -> b where
+    type HasDirectionThread a b :: *
 
-instance HasDirection s a => HasDirection (TF.Resource p s) a where
+    direction :: Lens' a (TF.Attribute (HasDirectionThread a b) "direction" b)
+
+instance HasDirection a b => HasDirection (TF.Resource p a) b where
+    type HasDirectionThread (TF.Resource p a) b =
+         HasDirectionThread a b
+
     direction = TF.configuration . direction
 
-class HasDynamicIpRequired s a | s -> a where
-    dynamicIpRequired :: Lens' s (TF.Argument "dynamic_ip_required" a)
+class HasDynamicIpRequired a b | a -> b where
+    type HasDynamicIpRequiredThread a b :: *
 
-instance HasDynamicIpRequired s a => HasDynamicIpRequired (TF.Resource p s) a where
+    dynamicIpRequired :: Lens' a (TF.Attribute (HasDynamicIpRequiredThread a b) "dynamic_ip_required" b)
+
+instance HasDynamicIpRequired a b => HasDynamicIpRequired (TF.Resource p a) b where
+    type HasDynamicIpRequiredThread (TF.Resource p a) b =
+         HasDynamicIpRequiredThread a b
+
     dynamicIpRequired = TF.configuration . dynamicIpRequired
 
-class HasEnableIpv6 s a | s -> a where
-    enableIpv6 :: Lens' s (TF.Argument "enable_ipv6" a)
+class HasEnableIpv6 a b | a -> b where
+    type HasEnableIpv6Thread a b :: *
 
-instance HasEnableIpv6 s a => HasEnableIpv6 (TF.Resource p s) a where
+    enableIpv6 :: Lens' a (TF.Attribute (HasEnableIpv6Thread a b) "enable_ipv6" b)
+
+instance HasEnableIpv6 a b => HasEnableIpv6 (TF.Resource p a) b where
+    type HasEnableIpv6Thread (TF.Resource p a) b =
+         HasEnableIpv6Thread a b
+
     enableIpv6 = TF.configuration . enableIpv6
 
-class HasImage s a | s -> a where
-    image :: Lens' s (TF.Argument "image" a)
+class HasImage a b | a -> b where
+    type HasImageThread a b :: *
 
-instance HasImage s a => HasImage (TF.Resource p s) a where
+    image :: Lens' a (TF.Attribute (HasImageThread a b) "image" b)
+
+instance HasImage a b => HasImage (TF.Resource p a) b where
+    type HasImageThread (TF.Resource p a) b =
+         HasImageThread a b
+
     image = TF.configuration . image
 
-class HasIpRange s a | s -> a where
-    ipRange :: Lens' s (TF.Argument "ip_range" a)
+class HasIpRange a b | a -> b where
+    type HasIpRangeThread a b :: *
 
-instance HasIpRange s a => HasIpRange (TF.Resource p s) a where
+    ipRange :: Lens' a (TF.Attribute (HasIpRangeThread a b) "ip_range" b)
+
+instance HasIpRange a b => HasIpRange (TF.Resource p a) b where
+    type HasIpRangeThread (TF.Resource p a) b =
+         HasIpRangeThread a b
+
     ipRange = TF.configuration . ipRange
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasPort s a | s -> a where
-    port :: Lens' s (TF.Argument "port" a)
+class HasPort a b | a -> b where
+    type HasPortThread a b :: *
 
-instance HasPort s a => HasPort (TF.Resource p s) a where
+    port :: Lens' a (TF.Attribute (HasPortThread a b) "port" b)
+
+instance HasPort a b => HasPort (TF.Resource p a) b where
+    type HasPortThread (TF.Resource p a) b =
+         HasPortThread a b
+
     port = TF.configuration . port
 
-class HasProtocol s a | s -> a where
-    protocol :: Lens' s (TF.Argument "protocol" a)
+class HasProtocol a b | a -> b where
+    type HasProtocolThread a b :: *
 
-instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
+    protocol :: Lens' a (TF.Attribute (HasProtocolThread a b) "protocol" b)
+
+instance HasProtocol a b => HasProtocol (TF.Resource p a) b where
+    type HasProtocolThread (TF.Resource p a) b =
+         HasProtocolThread a b
+
     protocol = TF.configuration . protocol
 
-class HasPublicIpv6 s a | s -> a where
-    publicIpv6 :: Lens' s (TF.Argument "public_ipv6" a)
+class HasPublicIpv6 a b | a -> b where
+    type HasPublicIpv6Thread a b :: *
 
-instance HasPublicIpv6 s a => HasPublicIpv6 (TF.Resource p s) a where
+    publicIpv6 :: Lens' a (TF.Attribute (HasPublicIpv6Thread a b) "public_ipv6" b)
+
+instance HasPublicIpv6 a b => HasPublicIpv6 (TF.Resource p a) b where
+    type HasPublicIpv6Thread (TF.Resource p a) b =
+         HasPublicIpv6Thread a b
+
     publicIpv6 = TF.configuration . publicIpv6
 
-class HasSecurityGroup s a | s -> a where
-    securityGroup :: Lens' s (TF.Argument "security_group" a)
+class HasSecurityGroup a b | a -> b where
+    type HasSecurityGroupThread a b :: *
 
-instance HasSecurityGroup s a => HasSecurityGroup (TF.Resource p s) a where
+    securityGroup :: Lens' a (TF.Attribute (HasSecurityGroupThread a b) "security_group" b)
+
+instance HasSecurityGroup a b => HasSecurityGroup (TF.Resource p a) b where
+    type HasSecurityGroupThread (TF.Resource p a) b =
+         HasSecurityGroupThread a b
+
     securityGroup = TF.configuration . securityGroup
 
-class HasServer s a | s -> a where
-    server :: Lens' s (TF.Argument "server" a)
+class HasServer a b | a -> b where
+    type HasServerThread a b :: *
 
-instance HasServer s a => HasServer (TF.Resource p s) a where
+    server :: Lens' a (TF.Attribute (HasServerThread a b) "server" b)
+
+instance HasServer a b => HasServer (TF.Resource p a) b where
+    type HasServerThread (TF.Resource p a) b =
+         HasServerThread a b
+
     server = TF.configuration . server
 
-class HasSizeInGb s a | s -> a where
-    sizeInGb :: Lens' s (TF.Argument "size_in_gb" a)
+class HasSizeInGb a b | a -> b where
+    type HasSizeInGbThread a b :: *
 
-instance HasSizeInGb s a => HasSizeInGb (TF.Resource p s) a where
+    sizeInGb :: Lens' a (TF.Attribute (HasSizeInGbThread a b) "size_in_gb" b)
+
+instance HasSizeInGb a b => HasSizeInGb (TF.Resource p a) b where
+    type HasSizeInGbThread (TF.Resource p a) b =
+         HasSizeInGbThread a b
+
     sizeInGb = TF.configuration . sizeInGb
 
-class HasState s a | s -> a where
-    state :: Lens' s (TF.Argument "state" a)
+class HasState a b | a -> b where
+    type HasStateThread a b :: *
 
-instance HasState s a => HasState (TF.Resource p s) a where
+    state :: Lens' a (TF.Attribute (HasStateThread a b) "state" b)
+
+instance HasState a b => HasState (TF.Resource p a) b where
+    type HasStateThread (TF.Resource p a) b =
+         HasStateThread a b
+
     state = TF.configuration . state
 
-class HasStateDetail s a | s -> a where
-    stateDetail :: Lens' s (TF.Argument "state_detail" a)
+class HasStateDetail a b | a -> b where
+    type HasStateDetailThread a b :: *
 
-instance HasStateDetail s a => HasStateDetail (TF.Resource p s) a where
+    stateDetail :: Lens' a (TF.Attribute (HasStateDetailThread a b) "state_detail" b)
+
+instance HasStateDetail a b => HasStateDetail (TF.Resource p a) b where
+    type HasStateDetailThread (TF.Resource p a) b =
+         HasStateDetailThread a b
+
     stateDetail = TF.configuration . stateDetail
 
-class HasTags s a | s -> a where
-    tags :: Lens' s (TF.Argument "tags" a)
+class HasTags a b | a -> b where
+    type HasTagsThread a b :: *
 
-instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags :: Lens' a (TF.Attribute (HasTagsThread a b) "tags" b)
+
+instance HasTags a b => HasTags (TF.Resource p a) b where
+    type HasTagsThread (TF.Resource p a) b =
+         HasTagsThread a b
+
     tags = TF.configuration . tags
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasVolume s a | s -> a where
-    volume :: Lens' s (TF.Argument "volume" a)
+class HasVolume a b | a -> b where
+    type HasVolumeThread a b :: *
 
-instance HasVolume s a => HasVolume (TF.Resource p s) a where
+    volume :: Lens' a (TF.Attribute (HasVolumeThread a b) "volume" b)
+
+instance HasVolume a b => HasVolume (TF.Resource p a) b where
+    type HasVolumeThread (TF.Resource p a) b =
+         HasVolumeThread a b
+
     volume = TF.configuration . volume
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedIp s a | s -> a where
-    computedIp :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedIp s a => HasComputedIp (TF.Resource p s) a where
-    computedIp = TF.configuration . computedIp
+class HasComputedIp a b | a -> b where
+    computedIp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

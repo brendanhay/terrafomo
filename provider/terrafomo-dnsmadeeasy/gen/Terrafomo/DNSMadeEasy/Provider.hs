@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.DNSMadeEasy.Types as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Name       as TF
-import qualified Terrafomo.Syntax.Provider   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Provider          as TF
 
 {- | DNSMadeEasy Terraform provider.
 
@@ -54,11 +54,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSMadeEasy = DNSMadeEasy {
-      _akey       :: !(TF.Argument "akey" Text)
+      _akey       :: !(Maybe Text)
     {- ^ (Required) The DNSMadeEasy API key. This can also be specified with the @DME_AKEY@ shell environment variable. -}
-    , _skey       :: !(TF.Argument "skey" Text)
+    , _skey       :: !(Maybe Text)
     {- ^ (Required) The DNSMadeEasy Secret key. This can also be specified with the @DME_SKEY@ shell environment variable. -}
-    , _usesandbox :: !(TF.Argument "usesandbox" Text)
+    , _usesandbox :: !(Maybe Text)
     {- ^ (Optional) If true, the DNSMadeEasy sandbox will be used. This can also be specified with the @DME_USESANDBOX@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable DNSMadeEasy
 
 instance TF.ToHCL DNSMadeEasy where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy DNSMadeEasy))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_akey x)
-            , TF.argument (_skey x)
-            , TF.argument (_usesandbox x)
+        let typ = TF.providerType (Proxy :: Proxy (DNSMadeEasy))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "akey" <$> _akey x
+            , TF.assign "skey" <$> _skey x
+            , TF.assign "usesandbox" <$> _usesandbox x
             ]
-
-emptyDNSMadeEasy :: DNSMadeEasy
-emptyDNSMadeEasy = DNSMadeEasy {
-        _akey = TF.Nil
-      , _skey = TF.Nil
-      , _usesandbox = TF.Nil
-    }
 
 instance TF.IsProvider DNSMadeEasy where
     type ProviderType DNSMadeEasy = "dme"
 
-akey :: Lens' DNSMadeEasy (TF.Argument "akey" Text)
+emptyDNSMadeEasy :: DNSMadeEasy
+emptyDNSMadeEasy = DNSMadeEasy {
+        _akey = Nothing
+      , _skey = Nothing
+      , _usesandbox = Nothing
+    }
+
+akey :: Lens' DNSMadeEasy (Maybe Text)
 akey =
     lens _akey (\s a -> s { _akey = a })
 
-skey :: Lens' DNSMadeEasy (TF.Argument "skey" Text)
+skey :: Lens' DNSMadeEasy (Maybe Text)
 skey =
     lens _skey (\s a -> s { _skey = a })
 
-usesandbox :: Lens' DNSMadeEasy (TF.Argument "usesandbox" Text)
+usesandbox :: Lens' DNSMadeEasy (Maybe Text)
 usesandbox =
     lens _usesandbox (\s a -> s { _usesandbox = a })

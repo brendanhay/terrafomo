@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -114,14 +115,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute          as TF
+import qualified Terrafomo.HCL                as TF
+import qualified Terrafomo.IP                 as TF
+import qualified Terrafomo.Meta               as TF (configuration)
+import qualified Terrafomo.Name               as TF
 import qualified Terrafomo.PagerDuty.Provider as TF
 import qualified Terrafomo.PagerDuty.Types    as TF
-import qualified Terrafomo.Syntax.HCL         as TF
-import qualified Terrafomo.Syntax.IP          as TF
-import qualified Terrafomo.Syntax.Meta        as TF (configuration)
-import qualified Terrafomo.Syntax.Resource    as TF
-import qualified Terrafomo.Syntax.Resource    as TF
-import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.Resource           as TF
+import qualified Terrafomo.Resource           as TF
 
 {- | The @pagerduty_addon@ PagerDuty resource.
 
@@ -131,38 +133,42 @@ With
 Given a configuration containing a src parameter, that URL will be embedded
 in an iframe on a page that's available to users from a drop-down menu.
 -}
-data AddonResource = AddonResource {
-      _name :: !(TF.Argument "name" Text)
+data AddonResource s = AddonResource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the add-on. -}
-    , _src  :: !(TF.Argument "src" Text)
+    , _src  :: !(TF.Attribute s "src" Text)
     {- ^ (Required) The source URL to display in a frame in the PagerDuty UI. @HTTPS@ is required. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AddonResource where
+instance TF.ToHCL (AddonResource s) where
     toHCL AddonResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _src
+        [ TF.attribute _name
+        , TF.attribute _src
         ]
 
-instance HasName AddonResource Text where
+instance HasName (AddonResource s) Text where
+    type HasNameThread (AddonResource s) Text = s
+
     name =
-        lens (_name :: AddonResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AddonResource)
+        lens (_name :: AddonResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AddonResource s)
 
-instance HasSrc AddonResource Text where
+instance HasSrc (AddonResource s) Text where
+    type HasSrcThread (AddonResource s) Text = s
+
     src =
-        lens (_src :: AddonResource -> TF.Argument "src" Text)
-             (\s a -> s { _src = a } :: AddonResource)
+        lens (_src :: AddonResource s -> TF.Attribute s "src" Text)
+             (\s a -> s { _src = a } :: AddonResource s)
 
-instance HasComputedId AddonResource Text where
+instance HasComputedId (AddonResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-addonResource :: TF.Resource TF.PagerDuty AddonResource
+addonResource :: TF.Resource TF.PagerDuty (AddonResource s)
 addonResource =
     TF.newResource "pagerduty_addon" $
         AddonResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _src = TF.Nil
             }
 
@@ -174,62 +180,72 @@ determines what user or schedule will be notified first, second, and so on
 when an incident is triggered. Escalation policies are used by one or more
 services.
 -}
-data EscalationPolicyResource = EscalationPolicyResource {
-      _description :: !(TF.Argument "description" Text)
+data EscalationPolicyResource s = EscalationPolicyResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A human-friendly description of the escalation policy. If not set, a placeholder of "Managed by Terraform" will be set. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the escalation policy. -}
-    , _num_loops   :: !(TF.Argument "num_loops" Text)
+    , _num_loops   :: !(TF.Attribute s "num_loops" Text)
     {- ^ (Optional) The number of times the escalation policy will repeat after reaching the end of its escalation. -}
-    , _rule        :: !(TF.Argument "rule" Text)
+    , _rule        :: !(TF.Attribute s "rule" Text)
     {- ^ (Required) An Escalation rule block. Escalation rules documented below. -}
-    , _teams       :: !(TF.Argument "teams" Text)
+    , _teams       :: !(TF.Attribute s "teams" Text)
     {- ^ (Optional) Teams associated with the policy. Account must have the @teams@ ability to use this parameter. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL EscalationPolicyResource where
+instance TF.ToHCL (EscalationPolicyResource s) where
     toHCL EscalationPolicyResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _name
-        , TF.argument _num_loops
-        , TF.argument _rule
-        , TF.argument _teams
+        [ TF.attribute _description
+        , TF.attribute _name
+        , TF.attribute _num_loops
+        , TF.attribute _rule
+        , TF.attribute _teams
         ]
 
-instance HasDescription EscalationPolicyResource Text where
+instance HasDescription (EscalationPolicyResource s) Text where
+    type HasDescriptionThread (EscalationPolicyResource s) Text = s
+
     description =
-        lens (_description :: EscalationPolicyResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: EscalationPolicyResource)
+        lens (_description :: EscalationPolicyResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: EscalationPolicyResource s)
 
-instance HasName EscalationPolicyResource Text where
+instance HasName (EscalationPolicyResource s) Text where
+    type HasNameThread (EscalationPolicyResource s) Text = s
+
     name =
-        lens (_name :: EscalationPolicyResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: EscalationPolicyResource)
+        lens (_name :: EscalationPolicyResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: EscalationPolicyResource s)
 
-instance HasNumLoops EscalationPolicyResource Text where
+instance HasNumLoops (EscalationPolicyResource s) Text where
+    type HasNumLoopsThread (EscalationPolicyResource s) Text = s
+
     numLoops =
-        lens (_num_loops :: EscalationPolicyResource -> TF.Argument "num_loops" Text)
-             (\s a -> s { _num_loops = a } :: EscalationPolicyResource)
+        lens (_num_loops :: EscalationPolicyResource s -> TF.Attribute s "num_loops" Text)
+             (\s a -> s { _num_loops = a } :: EscalationPolicyResource s)
 
-instance HasRule EscalationPolicyResource Text where
+instance HasRule (EscalationPolicyResource s) Text where
+    type HasRuleThread (EscalationPolicyResource s) Text = s
+
     rule =
-        lens (_rule :: EscalationPolicyResource -> TF.Argument "rule" Text)
-             (\s a -> s { _rule = a } :: EscalationPolicyResource)
+        lens (_rule :: EscalationPolicyResource s -> TF.Attribute s "rule" Text)
+             (\s a -> s { _rule = a } :: EscalationPolicyResource s)
 
-instance HasTeams EscalationPolicyResource Text where
+instance HasTeams (EscalationPolicyResource s) Text where
+    type HasTeamsThread (EscalationPolicyResource s) Text = s
+
     teams =
-        lens (_teams :: EscalationPolicyResource -> TF.Argument "teams" Text)
-             (\s a -> s { _teams = a } :: EscalationPolicyResource)
+        lens (_teams :: EscalationPolicyResource s -> TF.Attribute s "teams" Text)
+             (\s a -> s { _teams = a } :: EscalationPolicyResource s)
 
-instance HasComputedId EscalationPolicyResource Text where
+instance HasComputedId (EscalationPolicyResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-escalationPolicyResource :: TF.Resource TF.PagerDuty EscalationPolicyResource
+escalationPolicyResource :: TF.Resource TF.PagerDuty (EscalationPolicyResource s)
 escalationPolicyResource =
     TF.newResource "pagerduty_escalation_policy" $
         EscalationPolicyResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _name = TF.Nil
             , _num_loops = TF.Nil
             , _rule = TF.Nil
@@ -247,54 +263,62 @@ specified to start at a certain time and end after they have begun. Once
 started, a maintenance window cannot be deleted; it can only be ended
 immediately to re-enable the service.
 -}
-data MaintenanceWindowResource = MaintenanceWindowResource {
-      _description :: !(TF.Argument "description" Text)
+data MaintenanceWindowResource s = MaintenanceWindowResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description for the maintenance window. -}
-    , _end_time    :: !(TF.Argument "end_time" Text)
+    , _end_time    :: !(TF.Attribute s "end_time" Text)
     {- ^ (Required) The maintenance window's end time. This is when the services will start creating incidents again. This date must be in the future and after the @start_time@ . -}
-    , _services    :: !(TF.Argument "services" Text)
+    , _services    :: !(TF.Attribute s "services" Text)
     {- ^ (Required) A list of service IDs to include in the maintenance window. -}
-    , _start_time  :: !(TF.Argument "start_time" Text)
+    , _start_time  :: !(TF.Attribute s "start_time" Text)
     {- ^ (Required) The maintenance window's start time. This is when the services will stop creating incidents. If this date is in the past, it will be updated to be the current time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL MaintenanceWindowResource where
+instance TF.ToHCL (MaintenanceWindowResource s) where
     toHCL MaintenanceWindowResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _end_time
-        , TF.argument _services
-        , TF.argument _start_time
+        [ TF.attribute _description
+        , TF.attribute _end_time
+        , TF.attribute _services
+        , TF.attribute _start_time
         ]
 
-instance HasDescription MaintenanceWindowResource Text where
+instance HasDescription (MaintenanceWindowResource s) Text where
+    type HasDescriptionThread (MaintenanceWindowResource s) Text = s
+
     description =
-        lens (_description :: MaintenanceWindowResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: MaintenanceWindowResource)
+        lens (_description :: MaintenanceWindowResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: MaintenanceWindowResource s)
 
-instance HasEndTime MaintenanceWindowResource Text where
+instance HasEndTime (MaintenanceWindowResource s) Text where
+    type HasEndTimeThread (MaintenanceWindowResource s) Text = s
+
     endTime =
-        lens (_end_time :: MaintenanceWindowResource -> TF.Argument "end_time" Text)
-             (\s a -> s { _end_time = a } :: MaintenanceWindowResource)
+        lens (_end_time :: MaintenanceWindowResource s -> TF.Attribute s "end_time" Text)
+             (\s a -> s { _end_time = a } :: MaintenanceWindowResource s)
 
-instance HasServices MaintenanceWindowResource Text where
+instance HasServices (MaintenanceWindowResource s) Text where
+    type HasServicesThread (MaintenanceWindowResource s) Text = s
+
     services =
-        lens (_services :: MaintenanceWindowResource -> TF.Argument "services" Text)
-             (\s a -> s { _services = a } :: MaintenanceWindowResource)
+        lens (_services :: MaintenanceWindowResource s -> TF.Attribute s "services" Text)
+             (\s a -> s { _services = a } :: MaintenanceWindowResource s)
 
-instance HasStartTime MaintenanceWindowResource Text where
+instance HasStartTime (MaintenanceWindowResource s) Text where
+    type HasStartTimeThread (MaintenanceWindowResource s) Text = s
+
     startTime =
-        lens (_start_time :: MaintenanceWindowResource -> TF.Argument "start_time" Text)
-             (\s a -> s { _start_time = a } :: MaintenanceWindowResource)
+        lens (_start_time :: MaintenanceWindowResource s -> TF.Attribute s "start_time" Text)
+             (\s a -> s { _start_time = a } :: MaintenanceWindowResource s)
 
-instance HasComputedId MaintenanceWindowResource Text where
+instance HasComputedId (MaintenanceWindowResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-maintenanceWindowResource :: TF.Resource TF.PagerDuty MaintenanceWindowResource
+maintenanceWindowResource :: TF.Resource TF.PagerDuty (MaintenanceWindowResource s)
 maintenanceWindowResource =
     TF.newResource "pagerduty_maintenance_window" $
         MaintenanceWindowResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _end_time = TF.Nil
             , _services = TF.Nil
             , _start_time = TF.Nil
@@ -307,62 +331,72 @@ A
 determines the time periods that users are on call. Only on-call users are
 eligible to receive notifications from incidents.
 -}
-data ScheduleResource = ScheduleResource {
-      _description :: !(TF.Argument "description" Text)
+data ScheduleResource s = ScheduleResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the schedule -}
-    , _layer       :: !(TF.Argument "layer" Text)
+    , _layer       :: !(TF.Attribute s "layer" Text)
     {- ^ (Required) A schedule layer block. Schedule layers documented below. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the escalation policy. -}
-    , _overflow    :: !(TF.Argument "overflow" Text)
+    , _overflow    :: !(TF.Attribute s "overflow" Text)
     {- ^ (Optional) Any on-call schedule entries that pass the date range bounds will be truncated at the bounds, unless the parameter @overflow@ is passed. For instance, if your schedule is a rotation that changes daily at midnight UTC, and your date range is from @2011-06-01T10:00:00Z@ to @2011-06-01T14:00:00Z@ : If you don't pass the overflow=true parameter, you will get one schedule entry returned with a start of @2011-06-01T10:00:00Z@ and end of @2011-06-01T14:00:00Z@ . If you do pass the @overflow@ parameter, you will get one schedule entry returned with a start of @2011-06-01T00:00:00Z@ and end of @2011-06-02T00:00:00Z@ . -}
-    , _time_zone   :: !(TF.Argument "time_zone" Text)
+    , _time_zone   :: !(TF.Attribute s "time_zone" Text)
     {- ^ (Required) The time zone of the schedule (e.g Europe/Berlin). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ScheduleResource where
+instance TF.ToHCL (ScheduleResource s) where
     toHCL ScheduleResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _layer
-        , TF.argument _name
-        , TF.argument _overflow
-        , TF.argument _time_zone
+        [ TF.attribute _description
+        , TF.attribute _layer
+        , TF.attribute _name
+        , TF.attribute _overflow
+        , TF.attribute _time_zone
         ]
 
-instance HasDescription ScheduleResource Text where
+instance HasDescription (ScheduleResource s) Text where
+    type HasDescriptionThread (ScheduleResource s) Text = s
+
     description =
-        lens (_description :: ScheduleResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: ScheduleResource)
+        lens (_description :: ScheduleResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: ScheduleResource s)
 
-instance HasLayer ScheduleResource Text where
+instance HasLayer (ScheduleResource s) Text where
+    type HasLayerThread (ScheduleResource s) Text = s
+
     layer =
-        lens (_layer :: ScheduleResource -> TF.Argument "layer" Text)
-             (\s a -> s { _layer = a } :: ScheduleResource)
+        lens (_layer :: ScheduleResource s -> TF.Attribute s "layer" Text)
+             (\s a -> s { _layer = a } :: ScheduleResource s)
 
-instance HasName ScheduleResource Text where
+instance HasName (ScheduleResource s) Text where
+    type HasNameThread (ScheduleResource s) Text = s
+
     name =
-        lens (_name :: ScheduleResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ScheduleResource)
+        lens (_name :: ScheduleResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ScheduleResource s)
 
-instance HasOverflow ScheduleResource Text where
+instance HasOverflow (ScheduleResource s) Text where
+    type HasOverflowThread (ScheduleResource s) Text = s
+
     overflow =
-        lens (_overflow :: ScheduleResource -> TF.Argument "overflow" Text)
-             (\s a -> s { _overflow = a } :: ScheduleResource)
+        lens (_overflow :: ScheduleResource s -> TF.Attribute s "overflow" Text)
+             (\s a -> s { _overflow = a } :: ScheduleResource s)
 
-instance HasTimeZone ScheduleResource Text where
+instance HasTimeZone (ScheduleResource s) Text where
+    type HasTimeZoneThread (ScheduleResource s) Text = s
+
     timeZone =
-        lens (_time_zone :: ScheduleResource -> TF.Argument "time_zone" Text)
-             (\s a -> s { _time_zone = a } :: ScheduleResource)
+        lens (_time_zone :: ScheduleResource s -> TF.Attribute s "time_zone" Text)
+             (\s a -> s { _time_zone = a } :: ScheduleResource s)
 
-instance HasComputedId ScheduleResource Text where
+instance HasComputedId (ScheduleResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-scheduleResource :: TF.Resource TF.PagerDuty ScheduleResource
+scheduleResource :: TF.Resource TF.PagerDuty (ScheduleResource s)
 scheduleResource =
     TF.newResource "pagerduty_schedule" $
         ScheduleResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _layer = TF.Nil
             , _name = TF.Nil
             , _overflow = TF.Nil
@@ -375,78 +409,90 @@ A
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Services/post_services_id_integrations>
 is an integration that belongs to a service.
 -}
-data ServiceIntegrationResource = ServiceIntegrationResource {
-      _integration_email :: !(TF.Argument "integration_email" Text)
+data ServiceIntegrationResource s = ServiceIntegrationResource {
+      _integration_email :: !(TF.Attribute s "integration_email" Text)
     {- ^ (Optional) This is the unique fully-qualified email address used for routing emails to this integration for processing. -}
-    , _integration_key   :: !(TF.Argument "integration_key" Text)
+    , _integration_key   :: !(TF.Attribute s "integration_key" Text)
     {- ^ (Optional) This is the unique key used to route events to this integration when received via the PagerDuty Events API. -}
-    , _name              :: !(TF.Argument "name" Text)
+    , _name              :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the service integration. -}
-    , _service           :: !(TF.Argument "service" Text)
+    , _service           :: !(TF.Attribute s "service" Text)
     {- ^ (Required) The ID of the service the integration should belong to. -}
-    , _type'             :: !(TF.Argument "type" Text)
+    , _type'             :: !(TF.Attribute s "type" Text)
     {- ^ (Optional) The service type. Can be: @aws_cloudwatch_inbound_integration@ , @cloudkick_inbound_integration@ , @event_transformer_api_inbound_integration@ , @events_api_v2_inbound_integration@ (requires service @alert_creation@ to be @create_alerts_and_incidents@ ), @generic_email_inbound_integration@ , @generic_events_api_inbound_integration@ , @keynote_inbound_integration@ , @nagios_inbound_integration@ , @pingdom_inbound_integration@ or @sql_monitor_inbound_integration@ . -}
-    , _vendor            :: !(TF.Argument "vendor" Text)
+    , _vendor            :: !(TF.Attribute s "vendor" Text)
     {- ^ (Optional) The ID of the vendor the integration should integrate with (e.g Datadog or Amazon Cloudwatch). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ServiceIntegrationResource where
+instance TF.ToHCL (ServiceIntegrationResource s) where
     toHCL ServiceIntegrationResource{..} = TF.block $ catMaybes
-        [ TF.argument _integration_email
-        , TF.argument _integration_key
-        , TF.argument _name
-        , TF.argument _service
-        , TF.argument _type'
-        , TF.argument _vendor
+        [ TF.attribute _integration_email
+        , TF.attribute _integration_key
+        , TF.attribute _name
+        , TF.attribute _service
+        , TF.attribute _type'
+        , TF.attribute _vendor
         ]
 
-instance HasIntegrationEmail ServiceIntegrationResource Text where
+instance HasIntegrationEmail (ServiceIntegrationResource s) Text where
+    type HasIntegrationEmailThread (ServiceIntegrationResource s) Text = s
+
     integrationEmail =
-        lens (_integration_email :: ServiceIntegrationResource -> TF.Argument "integration_email" Text)
-             (\s a -> s { _integration_email = a } :: ServiceIntegrationResource)
+        lens (_integration_email :: ServiceIntegrationResource s -> TF.Attribute s "integration_email" Text)
+             (\s a -> s { _integration_email = a } :: ServiceIntegrationResource s)
 
-instance HasIntegrationKey ServiceIntegrationResource Text where
+instance HasIntegrationKey (ServiceIntegrationResource s) Text where
+    type HasIntegrationKeyThread (ServiceIntegrationResource s) Text = s
+
     integrationKey =
-        lens (_integration_key :: ServiceIntegrationResource -> TF.Argument "integration_key" Text)
-             (\s a -> s { _integration_key = a } :: ServiceIntegrationResource)
+        lens (_integration_key :: ServiceIntegrationResource s -> TF.Attribute s "integration_key" Text)
+             (\s a -> s { _integration_key = a } :: ServiceIntegrationResource s)
 
-instance HasName ServiceIntegrationResource Text where
+instance HasName (ServiceIntegrationResource s) Text where
+    type HasNameThread (ServiceIntegrationResource s) Text = s
+
     name =
-        lens (_name :: ServiceIntegrationResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ServiceIntegrationResource)
+        lens (_name :: ServiceIntegrationResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ServiceIntegrationResource s)
 
-instance HasService ServiceIntegrationResource Text where
+instance HasService (ServiceIntegrationResource s) Text where
+    type HasServiceThread (ServiceIntegrationResource s) Text = s
+
     service =
-        lens (_service :: ServiceIntegrationResource -> TF.Argument "service" Text)
-             (\s a -> s { _service = a } :: ServiceIntegrationResource)
+        lens (_service :: ServiceIntegrationResource s -> TF.Attribute s "service" Text)
+             (\s a -> s { _service = a } :: ServiceIntegrationResource s)
 
-instance HasType' ServiceIntegrationResource Text where
+instance HasType' (ServiceIntegrationResource s) Text where
+    type HasType'Thread (ServiceIntegrationResource s) Text = s
+
     type' =
-        lens (_type' :: ServiceIntegrationResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: ServiceIntegrationResource)
+        lens (_type' :: ServiceIntegrationResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: ServiceIntegrationResource s)
 
-instance HasVendor ServiceIntegrationResource Text where
+instance HasVendor (ServiceIntegrationResource s) Text where
+    type HasVendorThread (ServiceIntegrationResource s) Text = s
+
     vendor =
-        lens (_vendor :: ServiceIntegrationResource -> TF.Argument "vendor" Text)
-             (\s a -> s { _vendor = a } :: ServiceIntegrationResource)
+        lens (_vendor :: ServiceIntegrationResource s -> TF.Attribute s "vendor" Text)
+             (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
 
-instance HasComputedId ServiceIntegrationResource Text where
+instance HasComputedId (ServiceIntegrationResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedIntegrationEmail ServiceIntegrationResource Text where
+instance HasComputedIntegrationEmail (ServiceIntegrationResource s) Text where
     computedIntegrationEmail =
-        to (\_  -> TF.Compute "integration_email")
+        to (\x -> TF.Computed (TF.referenceKey x) "integration_email")
 
-instance HasComputedIntegrationKey ServiceIntegrationResource Text where
+instance HasComputedIntegrationKey (ServiceIntegrationResource s) Text where
     computedIntegrationKey =
-        to (\_  -> TF.Compute "integration_key")
+        to (\x -> TF.Computed (TF.referenceKey x) "integration_key")
 
-serviceIntegrationResource :: TF.Resource TF.PagerDuty ServiceIntegrationResource
+serviceIntegrationResource :: TF.Resource TF.PagerDuty (ServiceIntegrationResource s)
 serviceIntegrationResource =
     TF.newResource "pagerduty_service_integration" $
         ServiceIntegrationResource {
-            _integration_email = TF.Nil
+              _integration_email = TF.Nil
             , _integration_key = TF.Nil
             , _name = TF.Nil
             , _service = TF.Nil
@@ -462,82 +508,94 @@ represents something you monitor (like a web service, email service, or
 database service). It is a container for related incidents that associates
 them with escalation policies.
 -}
-data ServiceResource = ServiceResource {
-      _acknowledgement_timeout :: !(TF.Argument "acknowledgement_timeout" Text)
+data ServiceResource s = ServiceResource {
+      _acknowledgement_timeout :: !(TF.Attribute s "acknowledgement_timeout" Text)
     {- ^ (Optional) Time in seconds that an incident changes to the Triggered State after being Acknowledged. Disabled if set to the @"null"@ string. -}
-    , _alert_creation          :: !(TF.Argument "alert_creation" Text)
+    , _alert_creation :: !(TF.Attribute s "alert_creation" Text)
     {- ^ (Optional) Must be one of two values. PagerDuty receives events from your monitoring systems and can then create incidents in different ways. Value "create_incidents" is default: events will create an incident that cannot be merged. Value "create_alerts_and_incidents" is the alternative: events will create an alert and then add it to a new incident, these incidents can be merged. -}
-    , _auto_resolve_timeout    :: !(TF.Argument "auto_resolve_timeout" Text)
+    , _auto_resolve_timeout :: !(TF.Attribute s "auto_resolve_timeout" Text)
     {- ^ (Optional) Time in seconds that an incident is automatically resolved if left open for that long. Disabled if set to the @"null"@ string. -}
-    , _description             :: !(TF.Argument "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A human-friendly description of the escalation policy. If not set, a placeholder of "Managed by Terraform" will be set. -}
-    , _escalation_policy       :: !(TF.Argument "escalation_policy" Text)
+    , _escalation_policy :: !(TF.Attribute s "escalation_policy" Text)
     {- ^ (Required) The escalation policy used by this service. -}
-    , _name                    :: !(TF.Argument "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the service. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ServiceResource where
+instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.block $ catMaybes
-        [ TF.argument _acknowledgement_timeout
-        , TF.argument _alert_creation
-        , TF.argument _auto_resolve_timeout
-        , TF.argument _description
-        , TF.argument _escalation_policy
-        , TF.argument _name
+        [ TF.attribute _acknowledgement_timeout
+        , TF.attribute _alert_creation
+        , TF.attribute _auto_resolve_timeout
+        , TF.attribute _description
+        , TF.attribute _escalation_policy
+        , TF.attribute _name
         ]
 
-instance HasAcknowledgementTimeout ServiceResource Text where
+instance HasAcknowledgementTimeout (ServiceResource s) Text where
+    type HasAcknowledgementTimeoutThread (ServiceResource s) Text = s
+
     acknowledgementTimeout =
-        lens (_acknowledgement_timeout :: ServiceResource -> TF.Argument "acknowledgement_timeout" Text)
-             (\s a -> s { _acknowledgement_timeout = a } :: ServiceResource)
+        lens (_acknowledgement_timeout :: ServiceResource s -> TF.Attribute s "acknowledgement_timeout" Text)
+             (\s a -> s { _acknowledgement_timeout = a } :: ServiceResource s)
 
-instance HasAlertCreation ServiceResource Text where
+instance HasAlertCreation (ServiceResource s) Text where
+    type HasAlertCreationThread (ServiceResource s) Text = s
+
     alertCreation =
-        lens (_alert_creation :: ServiceResource -> TF.Argument "alert_creation" Text)
-             (\s a -> s { _alert_creation = a } :: ServiceResource)
+        lens (_alert_creation :: ServiceResource s -> TF.Attribute s "alert_creation" Text)
+             (\s a -> s { _alert_creation = a } :: ServiceResource s)
 
-instance HasAutoResolveTimeout ServiceResource Text where
+instance HasAutoResolveTimeout (ServiceResource s) Text where
+    type HasAutoResolveTimeoutThread (ServiceResource s) Text = s
+
     autoResolveTimeout =
-        lens (_auto_resolve_timeout :: ServiceResource -> TF.Argument "auto_resolve_timeout" Text)
-             (\s a -> s { _auto_resolve_timeout = a } :: ServiceResource)
+        lens (_auto_resolve_timeout :: ServiceResource s -> TF.Attribute s "auto_resolve_timeout" Text)
+             (\s a -> s { _auto_resolve_timeout = a } :: ServiceResource s)
 
-instance HasDescription ServiceResource Text where
+instance HasDescription (ServiceResource s) Text where
+    type HasDescriptionThread (ServiceResource s) Text = s
+
     description =
-        lens (_description :: ServiceResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: ServiceResource)
+        lens (_description :: ServiceResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: ServiceResource s)
 
-instance HasEscalationPolicy ServiceResource Text where
+instance HasEscalationPolicy (ServiceResource s) Text where
+    type HasEscalationPolicyThread (ServiceResource s) Text = s
+
     escalationPolicy =
-        lens (_escalation_policy :: ServiceResource -> TF.Argument "escalation_policy" Text)
-             (\s a -> s { _escalation_policy = a } :: ServiceResource)
+        lens (_escalation_policy :: ServiceResource s -> TF.Attribute s "escalation_policy" Text)
+             (\s a -> s { _escalation_policy = a } :: ServiceResource s)
 
-instance HasName ServiceResource Text where
+instance HasName (ServiceResource s) Text where
+    type HasNameThread (ServiceResource s) Text = s
+
     name =
-        lens (_name :: ServiceResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ServiceResource)
+        lens (_name :: ServiceResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ServiceResource s)
 
-instance HasComputedCreatedAt ServiceResource Text where
+instance HasComputedCreatedAt (ServiceResource s) Text where
     computedCreatedAt =
-        to (\_  -> TF.Compute "created_at")
+        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
 
-instance HasComputedId ServiceResource Text where
+instance HasComputedId (ServiceResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedLastIncidentTimestamp ServiceResource Text where
+instance HasComputedLastIncidentTimestamp (ServiceResource s) Text where
     computedLastIncidentTimestamp =
-        to (\_  -> TF.Compute "last_incident_timestamp")
+        to (\x -> TF.Computed (TF.referenceKey x) "last_incident_timestamp")
 
-instance HasComputedStatus ServiceResource Text where
+instance HasComputedStatus (ServiceResource s) Text where
     computedStatus =
-        to (\_  -> TF.Compute "status")
+        to (\x -> TF.Computed (TF.referenceKey x) "status")
 
-serviceResource :: TF.Resource TF.PagerDuty ServiceResource
+serviceResource :: TF.Resource TF.PagerDuty (ServiceResource s)
 serviceResource =
     TF.newResource "pagerduty_service" $
         ServiceResource {
-            _acknowledgement_timeout = TF.Nil
+              _acknowledgement_timeout = TF.Nil
             , _alert_creation = TF.Nil
             , _auto_resolve_timeout = TF.Nil
             , _description = TF.Nil
@@ -551,42 +609,46 @@ A
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Teams/put_teams_id_users_user_id>
 manages memberships within a team.
 -}
-data TeamMembershipResource = TeamMembershipResource {
-      _team_id :: !(TF.Argument "team_id" Text)
+data TeamMembershipResource s = TeamMembershipResource {
+      _team_id :: !(TF.Attribute s "team_id" Text)
     {- ^ (Required) The ID of the team in which the user will belong. -}
-    , _user_id :: !(TF.Argument "user_id" Text)
+    , _user_id :: !(TF.Attribute s "user_id" Text)
     {- ^ (Required) The ID of the user to add to the team. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamMembershipResource where
+instance TF.ToHCL (TeamMembershipResource s) where
     toHCL TeamMembershipResource{..} = TF.block $ catMaybes
-        [ TF.argument _team_id
-        , TF.argument _user_id
+        [ TF.attribute _team_id
+        , TF.attribute _user_id
         ]
 
-instance HasTeamId TeamMembershipResource Text where
+instance HasTeamId (TeamMembershipResource s) Text where
+    type HasTeamIdThread (TeamMembershipResource s) Text = s
+
     teamId =
-        lens (_team_id :: TeamMembershipResource -> TF.Argument "team_id" Text)
-             (\s a -> s { _team_id = a } :: TeamMembershipResource)
+        lens (_team_id :: TeamMembershipResource s -> TF.Attribute s "team_id" Text)
+             (\s a -> s { _team_id = a } :: TeamMembershipResource s)
 
-instance HasUserId TeamMembershipResource Text where
+instance HasUserId (TeamMembershipResource s) Text where
+    type HasUserIdThread (TeamMembershipResource s) Text = s
+
     userId =
-        lens (_user_id :: TeamMembershipResource -> TF.Argument "user_id" Text)
-             (\s a -> s { _user_id = a } :: TeamMembershipResource)
+        lens (_user_id :: TeamMembershipResource s -> TF.Attribute s "user_id" Text)
+             (\s a -> s { _user_id = a } :: TeamMembershipResource s)
 
-instance HasComputedTeamId TeamMembershipResource Text where
+instance HasComputedTeamId (TeamMembershipResource s) Text where
     computedTeamId =
-        to (\_  -> TF.Compute "team_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "team_id")
 
-instance HasComputedUserId TeamMembershipResource Text where
+instance HasComputedUserId (TeamMembershipResource s) Text where
     computedUserId =
-        to (\_  -> TF.Compute "user_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "user_id")
 
-teamMembershipResource :: TF.Resource TF.PagerDuty TeamMembershipResource
+teamMembershipResource :: TF.Resource TF.PagerDuty (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "pagerduty_team_membership" $
         TeamMembershipResource {
-            _team_id = TF.Nil
+              _team_id = TF.Nil
             , _user_id = TF.Nil
             }
 
@@ -598,38 +660,42 @@ is a collection of users and escalation policies that represent a group of
 people within an organization. The account must have the @teams@ ability to
 use the following resource.
 -}
-data TeamResource = TeamResource {
-      _description :: !(TF.Argument "description" Text)
+data TeamResource s = TeamResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A human-friendly description of the team. If not set, a placeholder of "Managed by Terraform" will be set. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TeamResource where
+instance TF.ToHCL (TeamResource s) where
     toHCL TeamResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _name
+        [ TF.attribute _description
+        , TF.attribute _name
         ]
 
-instance HasDescription TeamResource Text where
+instance HasDescription (TeamResource s) Text where
+    type HasDescriptionThread (TeamResource s) Text = s
+
     description =
-        lens (_description :: TeamResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: TeamResource)
+        lens (_description :: TeamResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: TeamResource s)
 
-instance HasName TeamResource Text where
+instance HasName (TeamResource s) Text where
+    type HasNameThread (TeamResource s) Text = s
+
     name =
-        lens (_name :: TeamResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: TeamResource)
+        lens (_name :: TeamResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: TeamResource s)
 
-instance HasComputedId TeamResource Text where
+instance HasComputedId (TeamResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-teamResource :: TF.Resource TF.PagerDuty TeamResource
+teamResource :: TF.Resource TF.PagerDuty (TeamResource s)
 teamResource =
     TF.newResource "pagerduty_team" $
         TeamResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _name = TF.Nil
             }
 
@@ -639,78 +705,90 @@ A
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Users/get_users_id_contact_methods>
 is a contact method for a PagerDuty user (email, phone or SMS).
 -}
-data UserContactMethodResource = UserContactMethodResource {
-      _address          :: !(TF.Argument "address" Text)
+data UserContactMethodResource s = UserContactMethodResource {
+      _address          :: !(TF.Attribute s "address" Text)
     {- ^ (Required) The "address" to deliver to: @email@ , @phone number@ , etc., depending on the type. -}
-    , _country_code     :: !(TF.Argument "country_code" Text)
+    , _country_code     :: !(TF.Attribute s "country_code" Text)
     {- ^ (Optional) The 1-to-3 digit country calling code. Required when using @phone_contact_method@ or @sms_contact_method@ . -}
-    , _label            :: !(TF.Argument "label" Text)
+    , _label            :: !(TF.Attribute s "label" Text)
     {- ^ (Required) The label (e.g., "Work", "Mobile", etc.). -}
-    , _send_short_email :: !(TF.Argument "send_short_email" Text)
+    , _send_short_email :: !(TF.Attribute s "send_short_email" Text)
     {- ^ (Optional) Send an abbreviated email message instead of the standard email output. -}
-    , _type'            :: !(TF.Argument "type" Text)
+    , _type'            :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The contact method type. May be ( @email_contact_method@ , @phone_contact_method@ , @sms_contact_method@ ). -}
-    , _user_id          :: !(TF.Argument "user_id" Text)
+    , _user_id          :: !(TF.Attribute s "user_id" Text)
     {- ^ (Required) The ID of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserContactMethodResource where
+instance TF.ToHCL (UserContactMethodResource s) where
     toHCL UserContactMethodResource{..} = TF.block $ catMaybes
-        [ TF.argument _address
-        , TF.argument _country_code
-        , TF.argument _label
-        , TF.argument _send_short_email
-        , TF.argument _type'
-        , TF.argument _user_id
+        [ TF.attribute _address
+        , TF.attribute _country_code
+        , TF.attribute _label
+        , TF.attribute _send_short_email
+        , TF.attribute _type'
+        , TF.attribute _user_id
         ]
 
-instance HasAddress UserContactMethodResource Text where
+instance HasAddress (UserContactMethodResource s) Text where
+    type HasAddressThread (UserContactMethodResource s) Text = s
+
     address =
-        lens (_address :: UserContactMethodResource -> TF.Argument "address" Text)
-             (\s a -> s { _address = a } :: UserContactMethodResource)
+        lens (_address :: UserContactMethodResource s -> TF.Attribute s "address" Text)
+             (\s a -> s { _address = a } :: UserContactMethodResource s)
 
-instance HasCountryCode UserContactMethodResource Text where
+instance HasCountryCode (UserContactMethodResource s) Text where
+    type HasCountryCodeThread (UserContactMethodResource s) Text = s
+
     countryCode =
-        lens (_country_code :: UserContactMethodResource -> TF.Argument "country_code" Text)
-             (\s a -> s { _country_code = a } :: UserContactMethodResource)
+        lens (_country_code :: UserContactMethodResource s -> TF.Attribute s "country_code" Text)
+             (\s a -> s { _country_code = a } :: UserContactMethodResource s)
 
-instance HasLabel UserContactMethodResource Text where
+instance HasLabel (UserContactMethodResource s) Text where
+    type HasLabelThread (UserContactMethodResource s) Text = s
+
     label =
-        lens (_label :: UserContactMethodResource -> TF.Argument "label" Text)
-             (\s a -> s { _label = a } :: UserContactMethodResource)
+        lens (_label :: UserContactMethodResource s -> TF.Attribute s "label" Text)
+             (\s a -> s { _label = a } :: UserContactMethodResource s)
 
-instance HasSendShortEmail UserContactMethodResource Text where
+instance HasSendShortEmail (UserContactMethodResource s) Text where
+    type HasSendShortEmailThread (UserContactMethodResource s) Text = s
+
     sendShortEmail =
-        lens (_send_short_email :: UserContactMethodResource -> TF.Argument "send_short_email" Text)
-             (\s a -> s { _send_short_email = a } :: UserContactMethodResource)
+        lens (_send_short_email :: UserContactMethodResource s -> TF.Attribute s "send_short_email" Text)
+             (\s a -> s { _send_short_email = a } :: UserContactMethodResource s)
 
-instance HasType' UserContactMethodResource Text where
+instance HasType' (UserContactMethodResource s) Text where
+    type HasType'Thread (UserContactMethodResource s) Text = s
+
     type' =
-        lens (_type' :: UserContactMethodResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: UserContactMethodResource)
+        lens (_type' :: UserContactMethodResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: UserContactMethodResource s)
 
-instance HasUserId UserContactMethodResource Text where
+instance HasUserId (UserContactMethodResource s) Text where
+    type HasUserIdThread (UserContactMethodResource s) Text = s
+
     userId =
-        lens (_user_id :: UserContactMethodResource -> TF.Argument "user_id" Text)
-             (\s a -> s { _user_id = a } :: UserContactMethodResource)
+        lens (_user_id :: UserContactMethodResource s -> TF.Attribute s "user_id" Text)
+             (\s a -> s { _user_id = a } :: UserContactMethodResource s)
 
-instance HasComputedBlacklisted UserContactMethodResource Text where
+instance HasComputedBlacklisted (UserContactMethodResource s) Text where
     computedBlacklisted =
-        to (\_  -> TF.Compute "blacklisted")
+        to (\x -> TF.Computed (TF.referenceKey x) "blacklisted")
 
-instance HasComputedEnabled UserContactMethodResource Text where
+instance HasComputedEnabled (UserContactMethodResource s) Text where
     computedEnabled =
-        to (\_  -> TF.Compute "enabled")
+        to (\x -> TF.Computed (TF.referenceKey x) "enabled")
 
-instance HasComputedId UserContactMethodResource Text where
+instance HasComputedId (UserContactMethodResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-userContactMethodResource :: TF.Resource TF.PagerDuty UserContactMethodResource
+userContactMethodResource :: TF.Resource TF.PagerDuty (UserContactMethodResource s)
 userContactMethodResource =
     TF.newResource "pagerduty_user_contact_method" $
         UserContactMethodResource {
-            _address = TF.Nil
+              _address = TF.Nil
             , _country_code = TF.Nil
             , _label = TF.Nil
             , _send_short_email = TF.Nil
@@ -725,94 +803,108 @@ A
 is a member of a PagerDuty account that have the ability to interact with
 incidents and other data on the account.
 -}
-data UserResource = UserResource {
-      _color       :: !(TF.Argument "color" Text)
+data UserResource s = UserResource {
+      _color       :: !(TF.Attribute s "color" Text)
     {- ^ (Optional) The schedule color for the user. -}
-    , _description :: !(TF.Argument "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A human-friendly description of the user. If not set, a placeholder of "Managed by Terraform" will be set. -}
-    , _email       :: !(TF.Argument "email" Text)
+    , _email       :: !(TF.Attribute s "email" Text)
     {- ^ (Required) The user's email address. -}
-    , _job_title   :: !(TF.Argument "job_title" Text)
+    , _job_title   :: !(TF.Attribute s "job_title" Text)
     {- ^ (Optional) The user's title. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the user. -}
-    , _role        :: !(TF.Argument "role" Text)
+    , _role        :: !(TF.Attribute s "role" Text)
     {- ^ (Optional) The user role. Account must have the @read_only_users@ ability to set a user as a @read_only_user@ . Can be @admin@ , @limited_user@ , @owner@ , @read_only_user@ , @team_responder@ or @user@ -}
-    , _teams       :: !(TF.Argument "teams" Text)
+    , _teams       :: !(TF.Attribute s "teams" Text)
     {- ^ (Optional) A list of teams the user should belong to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserResource where
+instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.block $ catMaybes
-        [ TF.argument _color
-        , TF.argument _description
-        , TF.argument _email
-        , TF.argument _job_title
-        , TF.argument _name
-        , TF.argument _role
-        , TF.argument _teams
+        [ TF.attribute _color
+        , TF.attribute _description
+        , TF.attribute _email
+        , TF.attribute _job_title
+        , TF.attribute _name
+        , TF.attribute _role
+        , TF.attribute _teams
         ]
 
-instance HasColor UserResource Text where
+instance HasColor (UserResource s) Text where
+    type HasColorThread (UserResource s) Text = s
+
     color =
-        lens (_color :: UserResource -> TF.Argument "color" Text)
-             (\s a -> s { _color = a } :: UserResource)
+        lens (_color :: UserResource s -> TF.Attribute s "color" Text)
+             (\s a -> s { _color = a } :: UserResource s)
 
-instance HasDescription UserResource Text where
+instance HasDescription (UserResource s) Text where
+    type HasDescriptionThread (UserResource s) Text = s
+
     description =
-        lens (_description :: UserResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: UserResource)
+        lens (_description :: UserResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: UserResource s)
 
-instance HasEmail UserResource Text where
+instance HasEmail (UserResource s) Text where
+    type HasEmailThread (UserResource s) Text = s
+
     email =
-        lens (_email :: UserResource -> TF.Argument "email" Text)
-             (\s a -> s { _email = a } :: UserResource)
+        lens (_email :: UserResource s -> TF.Attribute s "email" Text)
+             (\s a -> s { _email = a } :: UserResource s)
 
-instance HasJobTitle UserResource Text where
+instance HasJobTitle (UserResource s) Text where
+    type HasJobTitleThread (UserResource s) Text = s
+
     jobTitle =
-        lens (_job_title :: UserResource -> TF.Argument "job_title" Text)
-             (\s a -> s { _job_title = a } :: UserResource)
+        lens (_job_title :: UserResource s -> TF.Attribute s "job_title" Text)
+             (\s a -> s { _job_title = a } :: UserResource s)
 
-instance HasName UserResource Text where
+instance HasName (UserResource s) Text where
+    type HasNameThread (UserResource s) Text = s
+
     name =
-        lens (_name :: UserResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: UserResource)
+        lens (_name :: UserResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: UserResource s)
 
-instance HasRole UserResource Text where
+instance HasRole (UserResource s) Text where
+    type HasRoleThread (UserResource s) Text = s
+
     role =
-        lens (_role :: UserResource -> TF.Argument "role" Text)
-             (\s a -> s { _role = a } :: UserResource)
+        lens (_role :: UserResource s -> TF.Attribute s "role" Text)
+             (\s a -> s { _role = a } :: UserResource s)
 
-instance HasTeams UserResource Text where
+instance HasTeams (UserResource s) Text where
+    type HasTeamsThread (UserResource s) Text = s
+
     teams =
-        lens (_teams :: UserResource -> TF.Argument "teams" Text)
-             (\s a -> s { _teams = a } :: UserResource)
+        lens (_teams :: UserResource s -> TF.Attribute s "teams" Text)
+             (\s a -> s { _teams = a } :: UserResource s)
 
-instance HasComputedAvatarUrl UserResource Text where
+instance HasComputedAvatarUrl (UserResource s) Text where
     computedAvatarUrl =
-        to (\_  -> TF.Compute "avatar_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "avatar_url")
 
-instance HasComputedHtmlUrl UserResource Text where
+instance HasComputedHtmlUrl (UserResource s) Text where
     computedHtmlUrl =
-        to (\_  -> TF.Compute "html_url")
+        to (\x -> TF.Computed (TF.referenceKey x) "html_url")
 
-instance HasComputedId UserResource Text where
+instance HasComputedId (UserResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedInvitationSent UserResource Text where
+instance HasComputedInvitationSent (UserResource s) Text where
     computedInvitationSent =
-        to (\_  -> TF.Compute "invitation_sent")
+        to (\x -> TF.Computed (TF.referenceKey x) "invitation_sent")
 
-instance HasComputedTimeZone UserResource Text where
+instance HasComputedTimeZone (UserResource s) Text where
     computedTimeZone =
-        to (\_  -> TF.Compute "time_zone")
+        to (\x -> TF.Computed (TF.referenceKey x) "time_zone")
 
-userResource :: TF.Resource TF.PagerDuty UserResource
+userResource :: TF.Resource TF.PagerDuty (UserResource s)
 userResource =
     TF.newResource "pagerduty_user" $
         UserResource {
-            _color = TF.Nil
+              _color = TF.Nil
             , _description = TF.Nil
             , _email = TF.Nil
             , _job_title = TF.Nil
@@ -821,272 +913,385 @@ userResource =
             , _teams = TF.Nil
             }
 
-class HasAcknowledgementTimeout s a | s -> a where
-    acknowledgementTimeout :: Lens' s (TF.Argument "acknowledgement_timeout" a)
+class HasAcknowledgementTimeout a b | a -> b where
+    type HasAcknowledgementTimeoutThread a b :: *
 
-instance HasAcknowledgementTimeout s a => HasAcknowledgementTimeout (TF.Resource p s) a where
+    acknowledgementTimeout :: Lens' a (TF.Attribute (HasAcknowledgementTimeoutThread a b) "acknowledgement_timeout" b)
+
+instance HasAcknowledgementTimeout a b => HasAcknowledgementTimeout (TF.Resource p a) b where
+    type HasAcknowledgementTimeoutThread (TF.Resource p a) b =
+         HasAcknowledgementTimeoutThread a b
+
     acknowledgementTimeout = TF.configuration . acknowledgementTimeout
 
-class HasAddress s a | s -> a where
-    address :: Lens' s (TF.Argument "address" a)
+class HasAddress a b | a -> b where
+    type HasAddressThread a b :: *
 
-instance HasAddress s a => HasAddress (TF.Resource p s) a where
+    address :: Lens' a (TF.Attribute (HasAddressThread a b) "address" b)
+
+instance HasAddress a b => HasAddress (TF.Resource p a) b where
+    type HasAddressThread (TF.Resource p a) b =
+         HasAddressThread a b
+
     address = TF.configuration . address
 
-class HasAlertCreation s a | s -> a where
-    alertCreation :: Lens' s (TF.Argument "alert_creation" a)
+class HasAlertCreation a b | a -> b where
+    type HasAlertCreationThread a b :: *
 
-instance HasAlertCreation s a => HasAlertCreation (TF.Resource p s) a where
+    alertCreation :: Lens' a (TF.Attribute (HasAlertCreationThread a b) "alert_creation" b)
+
+instance HasAlertCreation a b => HasAlertCreation (TF.Resource p a) b where
+    type HasAlertCreationThread (TF.Resource p a) b =
+         HasAlertCreationThread a b
+
     alertCreation = TF.configuration . alertCreation
 
-class HasAutoResolveTimeout s a | s -> a where
-    autoResolveTimeout :: Lens' s (TF.Argument "auto_resolve_timeout" a)
+class HasAutoResolveTimeout a b | a -> b where
+    type HasAutoResolveTimeoutThread a b :: *
 
-instance HasAutoResolveTimeout s a => HasAutoResolveTimeout (TF.Resource p s) a where
+    autoResolveTimeout :: Lens' a (TF.Attribute (HasAutoResolveTimeoutThread a b) "auto_resolve_timeout" b)
+
+instance HasAutoResolveTimeout a b => HasAutoResolveTimeout (TF.Resource p a) b where
+    type HasAutoResolveTimeoutThread (TF.Resource p a) b =
+         HasAutoResolveTimeoutThread a b
+
     autoResolveTimeout = TF.configuration . autoResolveTimeout
 
-class HasColor s a | s -> a where
-    color :: Lens' s (TF.Argument "color" a)
+class HasColor a b | a -> b where
+    type HasColorThread a b :: *
 
-instance HasColor s a => HasColor (TF.Resource p s) a where
+    color :: Lens' a (TF.Attribute (HasColorThread a b) "color" b)
+
+instance HasColor a b => HasColor (TF.Resource p a) b where
+    type HasColorThread (TF.Resource p a) b =
+         HasColorThread a b
+
     color = TF.configuration . color
 
-class HasCountryCode s a | s -> a where
-    countryCode :: Lens' s (TF.Argument "country_code" a)
+class HasCountryCode a b | a -> b where
+    type HasCountryCodeThread a b :: *
 
-instance HasCountryCode s a => HasCountryCode (TF.Resource p s) a where
+    countryCode :: Lens' a (TF.Attribute (HasCountryCodeThread a b) "country_code" b)
+
+instance HasCountryCode a b => HasCountryCode (TF.Resource p a) b where
+    type HasCountryCodeThread (TF.Resource p a) b =
+         HasCountryCodeThread a b
+
     countryCode = TF.configuration . countryCode
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasEmail s a | s -> a where
-    email :: Lens' s (TF.Argument "email" a)
+class HasEmail a b | a -> b where
+    type HasEmailThread a b :: *
 
-instance HasEmail s a => HasEmail (TF.Resource p s) a where
+    email :: Lens' a (TF.Attribute (HasEmailThread a b) "email" b)
+
+instance HasEmail a b => HasEmail (TF.Resource p a) b where
+    type HasEmailThread (TF.Resource p a) b =
+         HasEmailThread a b
+
     email = TF.configuration . email
 
-class HasEndTime s a | s -> a where
-    endTime :: Lens' s (TF.Argument "end_time" a)
+class HasEndTime a b | a -> b where
+    type HasEndTimeThread a b :: *
 
-instance HasEndTime s a => HasEndTime (TF.Resource p s) a where
+    endTime :: Lens' a (TF.Attribute (HasEndTimeThread a b) "end_time" b)
+
+instance HasEndTime a b => HasEndTime (TF.Resource p a) b where
+    type HasEndTimeThread (TF.Resource p a) b =
+         HasEndTimeThread a b
+
     endTime = TF.configuration . endTime
 
-class HasEscalationPolicy s a | s -> a where
-    escalationPolicy :: Lens' s (TF.Argument "escalation_policy" a)
+class HasEscalationPolicy a b | a -> b where
+    type HasEscalationPolicyThread a b :: *
 
-instance HasEscalationPolicy s a => HasEscalationPolicy (TF.Resource p s) a where
+    escalationPolicy :: Lens' a (TF.Attribute (HasEscalationPolicyThread a b) "escalation_policy" b)
+
+instance HasEscalationPolicy a b => HasEscalationPolicy (TF.Resource p a) b where
+    type HasEscalationPolicyThread (TF.Resource p a) b =
+         HasEscalationPolicyThread a b
+
     escalationPolicy = TF.configuration . escalationPolicy
 
-class HasIntegrationEmail s a | s -> a where
-    integrationEmail :: Lens' s (TF.Argument "integration_email" a)
+class HasIntegrationEmail a b | a -> b where
+    type HasIntegrationEmailThread a b :: *
 
-instance HasIntegrationEmail s a => HasIntegrationEmail (TF.Resource p s) a where
+    integrationEmail :: Lens' a (TF.Attribute (HasIntegrationEmailThread a b) "integration_email" b)
+
+instance HasIntegrationEmail a b => HasIntegrationEmail (TF.Resource p a) b where
+    type HasIntegrationEmailThread (TF.Resource p a) b =
+         HasIntegrationEmailThread a b
+
     integrationEmail = TF.configuration . integrationEmail
 
-class HasIntegrationKey s a | s -> a where
-    integrationKey :: Lens' s (TF.Argument "integration_key" a)
+class HasIntegrationKey a b | a -> b where
+    type HasIntegrationKeyThread a b :: *
 
-instance HasIntegrationKey s a => HasIntegrationKey (TF.Resource p s) a where
+    integrationKey :: Lens' a (TF.Attribute (HasIntegrationKeyThread a b) "integration_key" b)
+
+instance HasIntegrationKey a b => HasIntegrationKey (TF.Resource p a) b where
+    type HasIntegrationKeyThread (TF.Resource p a) b =
+         HasIntegrationKeyThread a b
+
     integrationKey = TF.configuration . integrationKey
 
-class HasJobTitle s a | s -> a where
-    jobTitle :: Lens' s (TF.Argument "job_title" a)
+class HasJobTitle a b | a -> b where
+    type HasJobTitleThread a b :: *
 
-instance HasJobTitle s a => HasJobTitle (TF.Resource p s) a where
+    jobTitle :: Lens' a (TF.Attribute (HasJobTitleThread a b) "job_title" b)
+
+instance HasJobTitle a b => HasJobTitle (TF.Resource p a) b where
+    type HasJobTitleThread (TF.Resource p a) b =
+         HasJobTitleThread a b
+
     jobTitle = TF.configuration . jobTitle
 
-class HasLabel s a | s -> a where
-    label :: Lens' s (TF.Argument "label" a)
+class HasLabel a b | a -> b where
+    type HasLabelThread a b :: *
 
-instance HasLabel s a => HasLabel (TF.Resource p s) a where
+    label :: Lens' a (TF.Attribute (HasLabelThread a b) "label" b)
+
+instance HasLabel a b => HasLabel (TF.Resource p a) b where
+    type HasLabelThread (TF.Resource p a) b =
+         HasLabelThread a b
+
     label = TF.configuration . label
 
-class HasLayer s a | s -> a where
-    layer :: Lens' s (TF.Argument "layer" a)
+class HasLayer a b | a -> b where
+    type HasLayerThread a b :: *
 
-instance HasLayer s a => HasLayer (TF.Resource p s) a where
+    layer :: Lens' a (TF.Attribute (HasLayerThread a b) "layer" b)
+
+instance HasLayer a b => HasLayer (TF.Resource p a) b where
+    type HasLayerThread (TF.Resource p a) b =
+         HasLayerThread a b
+
     layer = TF.configuration . layer
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasNumLoops s a | s -> a where
-    numLoops :: Lens' s (TF.Argument "num_loops" a)
+class HasNumLoops a b | a -> b where
+    type HasNumLoopsThread a b :: *
 
-instance HasNumLoops s a => HasNumLoops (TF.Resource p s) a where
+    numLoops :: Lens' a (TF.Attribute (HasNumLoopsThread a b) "num_loops" b)
+
+instance HasNumLoops a b => HasNumLoops (TF.Resource p a) b where
+    type HasNumLoopsThread (TF.Resource p a) b =
+         HasNumLoopsThread a b
+
     numLoops = TF.configuration . numLoops
 
-class HasOverflow s a | s -> a where
-    overflow :: Lens' s (TF.Argument "overflow" a)
+class HasOverflow a b | a -> b where
+    type HasOverflowThread a b :: *
 
-instance HasOverflow s a => HasOverflow (TF.Resource p s) a where
+    overflow :: Lens' a (TF.Attribute (HasOverflowThread a b) "overflow" b)
+
+instance HasOverflow a b => HasOverflow (TF.Resource p a) b where
+    type HasOverflowThread (TF.Resource p a) b =
+         HasOverflowThread a b
+
     overflow = TF.configuration . overflow
 
-class HasRole s a | s -> a where
-    role :: Lens' s (TF.Argument "role" a)
+class HasRole a b | a -> b where
+    type HasRoleThread a b :: *
 
-instance HasRole s a => HasRole (TF.Resource p s) a where
+    role :: Lens' a (TF.Attribute (HasRoleThread a b) "role" b)
+
+instance HasRole a b => HasRole (TF.Resource p a) b where
+    type HasRoleThread (TF.Resource p a) b =
+         HasRoleThread a b
+
     role = TF.configuration . role
 
-class HasRule s a | s -> a where
-    rule :: Lens' s (TF.Argument "rule" a)
+class HasRule a b | a -> b where
+    type HasRuleThread a b :: *
 
-instance HasRule s a => HasRule (TF.Resource p s) a where
+    rule :: Lens' a (TF.Attribute (HasRuleThread a b) "rule" b)
+
+instance HasRule a b => HasRule (TF.Resource p a) b where
+    type HasRuleThread (TF.Resource p a) b =
+         HasRuleThread a b
+
     rule = TF.configuration . rule
 
-class HasSendShortEmail s a | s -> a where
-    sendShortEmail :: Lens' s (TF.Argument "send_short_email" a)
+class HasSendShortEmail a b | a -> b where
+    type HasSendShortEmailThread a b :: *
 
-instance HasSendShortEmail s a => HasSendShortEmail (TF.Resource p s) a where
+    sendShortEmail :: Lens' a (TF.Attribute (HasSendShortEmailThread a b) "send_short_email" b)
+
+instance HasSendShortEmail a b => HasSendShortEmail (TF.Resource p a) b where
+    type HasSendShortEmailThread (TF.Resource p a) b =
+         HasSendShortEmailThread a b
+
     sendShortEmail = TF.configuration . sendShortEmail
 
-class HasService s a | s -> a where
-    service :: Lens' s (TF.Argument "service" a)
+class HasService a b | a -> b where
+    type HasServiceThread a b :: *
 
-instance HasService s a => HasService (TF.Resource p s) a where
+    service :: Lens' a (TF.Attribute (HasServiceThread a b) "service" b)
+
+instance HasService a b => HasService (TF.Resource p a) b where
+    type HasServiceThread (TF.Resource p a) b =
+         HasServiceThread a b
+
     service = TF.configuration . service
 
-class HasServices s a | s -> a where
-    services :: Lens' s (TF.Argument "services" a)
+class HasServices a b | a -> b where
+    type HasServicesThread a b :: *
 
-instance HasServices s a => HasServices (TF.Resource p s) a where
+    services :: Lens' a (TF.Attribute (HasServicesThread a b) "services" b)
+
+instance HasServices a b => HasServices (TF.Resource p a) b where
+    type HasServicesThread (TF.Resource p a) b =
+         HasServicesThread a b
+
     services = TF.configuration . services
 
-class HasSrc s a | s -> a where
-    src :: Lens' s (TF.Argument "src" a)
+class HasSrc a b | a -> b where
+    type HasSrcThread a b :: *
 
-instance HasSrc s a => HasSrc (TF.Resource p s) a where
+    src :: Lens' a (TF.Attribute (HasSrcThread a b) "src" b)
+
+instance HasSrc a b => HasSrc (TF.Resource p a) b where
+    type HasSrcThread (TF.Resource p a) b =
+         HasSrcThread a b
+
     src = TF.configuration . src
 
-class HasStartTime s a | s -> a where
-    startTime :: Lens' s (TF.Argument "start_time" a)
+class HasStartTime a b | a -> b where
+    type HasStartTimeThread a b :: *
 
-instance HasStartTime s a => HasStartTime (TF.Resource p s) a where
+    startTime :: Lens' a (TF.Attribute (HasStartTimeThread a b) "start_time" b)
+
+instance HasStartTime a b => HasStartTime (TF.Resource p a) b where
+    type HasStartTimeThread (TF.Resource p a) b =
+         HasStartTimeThread a b
+
     startTime = TF.configuration . startTime
 
-class HasTeamId s a | s -> a where
-    teamId :: Lens' s (TF.Argument "team_id" a)
+class HasTeamId a b | a -> b where
+    type HasTeamIdThread a b :: *
 
-instance HasTeamId s a => HasTeamId (TF.Resource p s) a where
+    teamId :: Lens' a (TF.Attribute (HasTeamIdThread a b) "team_id" b)
+
+instance HasTeamId a b => HasTeamId (TF.Resource p a) b where
+    type HasTeamIdThread (TF.Resource p a) b =
+         HasTeamIdThread a b
+
     teamId = TF.configuration . teamId
 
-class HasTeams s a | s -> a where
-    teams :: Lens' s (TF.Argument "teams" a)
+class HasTeams a b | a -> b where
+    type HasTeamsThread a b :: *
 
-instance HasTeams s a => HasTeams (TF.Resource p s) a where
+    teams :: Lens' a (TF.Attribute (HasTeamsThread a b) "teams" b)
+
+instance HasTeams a b => HasTeams (TF.Resource p a) b where
+    type HasTeamsThread (TF.Resource p a) b =
+         HasTeamsThread a b
+
     teams = TF.configuration . teams
 
-class HasTimeZone s a | s -> a where
-    timeZone :: Lens' s (TF.Argument "time_zone" a)
+class HasTimeZone a b | a -> b where
+    type HasTimeZoneThread a b :: *
 
-instance HasTimeZone s a => HasTimeZone (TF.Resource p s) a where
+    timeZone :: Lens' a (TF.Attribute (HasTimeZoneThread a b) "time_zone" b)
+
+instance HasTimeZone a b => HasTimeZone (TF.Resource p a) b where
+    type HasTimeZoneThread (TF.Resource p a) b =
+         HasTimeZoneThread a b
+
     timeZone = TF.configuration . timeZone
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasUserId s a | s -> a where
-    userId :: Lens' s (TF.Argument "user_id" a)
+class HasUserId a b | a -> b where
+    type HasUserIdThread a b :: *
 
-instance HasUserId s a => HasUserId (TF.Resource p s) a where
+    userId :: Lens' a (TF.Attribute (HasUserIdThread a b) "user_id" b)
+
+instance HasUserId a b => HasUserId (TF.Resource p a) b where
+    type HasUserIdThread (TF.Resource p a) b =
+         HasUserIdThread a b
+
     userId = TF.configuration . userId
 
-class HasVendor s a | s -> a where
-    vendor :: Lens' s (TF.Argument "vendor" a)
+class HasVendor a b | a -> b where
+    type HasVendorThread a b :: *
 
-instance HasVendor s a => HasVendor (TF.Resource p s) a where
+    vendor :: Lens' a (TF.Attribute (HasVendorThread a b) "vendor" b)
+
+instance HasVendor a b => HasVendor (TF.Resource p a) b where
+    type HasVendorThread (TF.Resource p a) b =
+         HasVendorThread a b
+
     vendor = TF.configuration . vendor
 
-class HasComputedAvatarUrl s a | s -> a where
-    computedAvatarUrl :: forall r. Getting r s (TF.Attribute a)
+class HasComputedAvatarUrl a b | a -> b where
+    computedAvatarUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedAvatarUrl s a => HasComputedAvatarUrl (TF.Resource p s) a where
-    computedAvatarUrl = TF.configuration . computedAvatarUrl
+class HasComputedBlacklisted a b | a -> b where
+    computedBlacklisted :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedBlacklisted s a | s -> a where
-    computedBlacklisted :: forall r. Getting r s (TF.Attribute a)
+class HasComputedCreatedAt a b | a -> b where
+    computedCreatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedBlacklisted s a => HasComputedBlacklisted (TF.Resource p s) a where
-    computedBlacklisted = TF.configuration . computedBlacklisted
+class HasComputedEnabled a b | a -> b where
+    computedEnabled :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedCreatedAt s a | s -> a where
-    computedCreatedAt :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHtmlUrl a b | a -> b where
+    computedHtmlUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedCreatedAt s a => HasComputedCreatedAt (TF.Resource p s) a where
-    computedCreatedAt = TF.configuration . computedCreatedAt
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedEnabled s a | s -> a where
-    computedEnabled :: forall r. Getting r s (TF.Attribute a)
+class HasComputedIntegrationEmail a b | a -> b where
+    computedIntegrationEmail :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedEnabled s a => HasComputedEnabled (TF.Resource p s) a where
-    computedEnabled = TF.configuration . computedEnabled
+class HasComputedIntegrationKey a b | a -> b where
+    computedIntegrationKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedHtmlUrl s a | s -> a where
-    computedHtmlUrl :: forall r. Getting r s (TF.Attribute a)
+class HasComputedInvitationSent a b | a -> b where
+    computedInvitationSent :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHtmlUrl s a => HasComputedHtmlUrl (TF.Resource p s) a where
-    computedHtmlUrl = TF.configuration . computedHtmlUrl
+class HasComputedLastIncidentTimestamp a b | a -> b where
+    computedLastIncidentTimestamp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedStatus a b | a -> b where
+    computedStatus :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedTeamId a b | a -> b where
+    computedTeamId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedIntegrationEmail s a | s -> a where
-    computedIntegrationEmail :: forall r. Getting r s (TF.Attribute a)
+class HasComputedTimeZone a b | a -> b where
+    computedTimeZone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedIntegrationEmail s a => HasComputedIntegrationEmail (TF.Resource p s) a where
-    computedIntegrationEmail = TF.configuration . computedIntegrationEmail
-
-class HasComputedIntegrationKey s a | s -> a where
-    computedIntegrationKey :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedIntegrationKey s a => HasComputedIntegrationKey (TF.Resource p s) a where
-    computedIntegrationKey = TF.configuration . computedIntegrationKey
-
-class HasComputedInvitationSent s a | s -> a where
-    computedInvitationSent :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedInvitationSent s a => HasComputedInvitationSent (TF.Resource p s) a where
-    computedInvitationSent = TF.configuration . computedInvitationSent
-
-class HasComputedLastIncidentTimestamp s a | s -> a where
-    computedLastIncidentTimestamp :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedLastIncidentTimestamp s a => HasComputedLastIncidentTimestamp (TF.Resource p s) a where
-    computedLastIncidentTimestamp = TF.configuration . computedLastIncidentTimestamp
-
-class HasComputedStatus s a | s -> a where
-    computedStatus :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedStatus s a => HasComputedStatus (TF.Resource p s) a where
-    computedStatus = TF.configuration . computedStatus
-
-class HasComputedTeamId s a | s -> a where
-    computedTeamId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTeamId s a => HasComputedTeamId (TF.Resource p s) a where
-    computedTeamId = TF.configuration . computedTeamId
-
-class HasComputedTimeZone s a | s -> a where
-    computedTimeZone :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTimeZone s a => HasComputedTimeZone (TF.Resource p s) a where
-    computedTimeZone = TF.configuration . computedTimeZone
-
-class HasComputedUserId s a | s -> a where
-    computedUserId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedUserId s a => HasComputedUserId (TF.Resource p s) a where
-    computedUserId = TF.configuration . computedUserId
+class HasComputedUserId a b | a -> b where
+    computedUserId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

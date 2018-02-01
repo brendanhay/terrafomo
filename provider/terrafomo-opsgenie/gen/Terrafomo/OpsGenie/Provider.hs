@@ -36,12 +36,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.OpsGenie.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.OpsGenie.Types as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | OpsGenie Terraform provider.
 
@@ -57,13 +57,15 @@ instance Hashable OpsGenie
 
 instance TF.ToHCL OpsGenie where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy OpsGenie))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
+        let typ = TF.providerType (Proxy :: Proxy (OpsGenie))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
             ]
+
+instance TF.IsProvider OpsGenie where
+    type ProviderType OpsGenie = "opsgenie"
 
 emptyOpsGenie :: OpsGenie
 emptyOpsGenie = OpsGenie {
     }
-
-instance TF.IsProvider OpsGenie where
-    type ProviderType OpsGenie = "opsgenie"

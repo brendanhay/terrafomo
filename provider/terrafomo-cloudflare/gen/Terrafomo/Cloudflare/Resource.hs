@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -58,123 +59,138 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.Cloudflare.Provider as TF
 import qualified Terrafomo.Cloudflare.Types    as TF
-import qualified Terrafomo.Syntax.HCL          as TF
-import qualified Terrafomo.Syntax.IP           as TF
-import qualified Terrafomo.Syntax.Meta         as TF (configuration)
-import qualified Terrafomo.Syntax.Resource     as TF
-import qualified Terrafomo.Syntax.Resource     as TF
-import qualified Terrafomo.Syntax.Variable     as TF
+import qualified Terrafomo.HCL                 as TF
+import qualified Terrafomo.IP                  as TF
+import qualified Terrafomo.Meta                as TF (configuration)
+import qualified Terrafomo.Name                as TF
+import qualified Terrafomo.Resource            as TF
+import qualified Terrafomo.Resource            as TF
 
 {- | The @cloudflare_record@ Cloudflare resource.
 
 Provides a Cloudflare record resource.
 -}
-data RecordResource = RecordResource {
-      _domain   :: !(TF.Argument "domain" Text)
+data RecordResource s = RecordResource {
+      _domain   :: !(TF.Attribute s "domain" Text)
     {- ^ (Required) The domain to add the record to -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record -}
-    , _priority :: !(TF.Argument "priority" Text)
+    , _priority :: !(TF.Attribute s "priority" Text)
     {- ^ (Optional) The priority of the record -}
-    , _proxied  :: !(TF.Argument "proxied" Text)
+    , _proxied  :: !(TF.Attribute s "proxied" Text)
     {- ^ (Optional) Whether the record gets Cloudflare's origin protection. -}
-    , _ttl      :: !(TF.Argument "ttl" Text)
+    , _ttl      :: !(TF.Attribute s "ttl" Text)
     {- ^ (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record> ) -}
-    , _type'    :: !(TF.Argument "type" Text)
+    , _type'    :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of the record -}
-    , _value    :: !(TF.Argument "value" Text)
+    , _value    :: !(TF.Attribute s "value" Text)
     {- ^ (Required) The value of the record -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RecordResource where
+instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.block $ catMaybes
-        [ TF.argument _domain
-        , TF.argument _name
-        , TF.argument _priority
-        , TF.argument _proxied
-        , TF.argument _ttl
-        , TF.argument _type'
-        , TF.argument _value
+        [ TF.attribute _domain
+        , TF.attribute _name
+        , TF.attribute _priority
+        , TF.attribute _proxied
+        , TF.attribute _ttl
+        , TF.attribute _type'
+        , TF.attribute _value
         ]
 
-instance HasDomain RecordResource Text where
+instance HasDomain (RecordResource s) Text where
+    type HasDomainThread (RecordResource s) Text = s
+
     domain =
-        lens (_domain :: RecordResource -> TF.Argument "domain" Text)
-             (\s a -> s { _domain = a } :: RecordResource)
+        lens (_domain :: RecordResource s -> TF.Attribute s "domain" Text)
+             (\s a -> s { _domain = a } :: RecordResource s)
 
-instance HasName RecordResource Text where
+instance HasName (RecordResource s) Text where
+    type HasNameThread (RecordResource s) Text = s
+
     name =
-        lens (_name :: RecordResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RecordResource)
+        lens (_name :: RecordResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RecordResource s)
 
-instance HasPriority RecordResource Text where
+instance HasPriority (RecordResource s) Text where
+    type HasPriorityThread (RecordResource s) Text = s
+
     priority =
-        lens (_priority :: RecordResource -> TF.Argument "priority" Text)
-             (\s a -> s { _priority = a } :: RecordResource)
+        lens (_priority :: RecordResource s -> TF.Attribute s "priority" Text)
+             (\s a -> s { _priority = a } :: RecordResource s)
 
-instance HasProxied RecordResource Text where
+instance HasProxied (RecordResource s) Text where
+    type HasProxiedThread (RecordResource s) Text = s
+
     proxied =
-        lens (_proxied :: RecordResource -> TF.Argument "proxied" Text)
-             (\s a -> s { _proxied = a } :: RecordResource)
+        lens (_proxied :: RecordResource s -> TF.Attribute s "proxied" Text)
+             (\s a -> s { _proxied = a } :: RecordResource s)
 
-instance HasTtl RecordResource Text where
+instance HasTtl (RecordResource s) Text where
+    type HasTtlThread (RecordResource s) Text = s
+
     ttl =
-        lens (_ttl :: RecordResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: RecordResource)
+        lens (_ttl :: RecordResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance HasType' RecordResource Text where
+instance HasType' (RecordResource s) Text where
+    type HasType'Thread (RecordResource s) Text = s
+
     type' =
-        lens (_type' :: RecordResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: RecordResource)
+        lens (_type' :: RecordResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
-instance HasValue RecordResource Text where
+instance HasValue (RecordResource s) Text where
+    type HasValueThread (RecordResource s) Text = s
+
     value =
-        lens (_value :: RecordResource -> TF.Argument "value" Text)
-             (\s a -> s { _value = a } :: RecordResource)
+        lens (_value :: RecordResource s -> TF.Attribute s "value" Text)
+             (\s a -> s { _value = a } :: RecordResource s)
 
-instance HasComputedHostname RecordResource Text where
+instance HasComputedHostname (RecordResource s) Text where
     computedHostname =
-        to (\_  -> TF.Compute "hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
-instance HasComputedId RecordResource Text where
+instance HasComputedId (RecordResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName RecordResource Text where
+instance HasComputedName (RecordResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedPriority RecordResource Text where
+instance HasComputedPriority (RecordResource s) Text where
     computedPriority =
-        to (\_  -> TF.Compute "priority")
+        to (\x -> TF.Computed (TF.referenceKey x) "priority")
 
-instance HasComputedProxied RecordResource Text where
+instance HasComputedProxied (RecordResource s) Text where
     computedProxied =
-        to (\_  -> TF.Compute "proxied")
+        to (\x -> TF.Computed (TF.referenceKey x) "proxied")
 
-instance HasComputedTtl RecordResource Text where
+instance HasComputedTtl (RecordResource s) Text where
     computedTtl =
-        to (\_  -> TF.Compute "ttl")
+        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
 
-instance HasComputedType' RecordResource Text where
+instance HasComputedType' (RecordResource s) Text where
     computedType' =
-        to (\_  -> TF.Compute "type")
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
-instance HasComputedValue RecordResource Text where
+instance HasComputedValue (RecordResource s) Text where
     computedValue =
-        to (\_  -> TF.Compute "value")
+        to (\x -> TF.Computed (TF.referenceKey x) "value")
 
-instance HasComputedZoneId RecordResource Text where
+instance HasComputedZoneId (RecordResource s) Text where
     computedZoneId =
-        to (\_  -> TF.Compute "zone_id")
+        to (\x -> TF.Computed (TF.referenceKey x) "zone_id")
 
-recordResource :: TF.Resource TF.Cloudflare RecordResource
+recordResource :: TF.Resource TF.Cloudflare (RecordResource s)
 recordResource =
     TF.newResource "cloudflare_record" $
         RecordResource {
-            _domain = TF.Nil
+              _domain = TF.Nil
             , _name = TF.Nil
             , _priority = TF.Nil
             , _proxied = TF.Nil
@@ -183,98 +199,106 @@ recordResource =
             , _value = TF.Nil
             }
 
-class HasDomain s a | s -> a where
-    domain :: Lens' s (TF.Argument "domain" a)
+class HasDomain a b | a -> b where
+    type HasDomainThread a b :: *
 
-instance HasDomain s a => HasDomain (TF.Resource p s) a where
+    domain :: Lens' a (TF.Attribute (HasDomainThread a b) "domain" b)
+
+instance HasDomain a b => HasDomain (TF.Resource p a) b where
+    type HasDomainThread (TF.Resource p a) b =
+         HasDomainThread a b
+
     domain = TF.configuration . domain
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasPriority s a | s -> a where
-    priority :: Lens' s (TF.Argument "priority" a)
+class HasPriority a b | a -> b where
+    type HasPriorityThread a b :: *
 
-instance HasPriority s a => HasPriority (TF.Resource p s) a where
+    priority :: Lens' a (TF.Attribute (HasPriorityThread a b) "priority" b)
+
+instance HasPriority a b => HasPriority (TF.Resource p a) b where
+    type HasPriorityThread (TF.Resource p a) b =
+         HasPriorityThread a b
+
     priority = TF.configuration . priority
 
-class HasProxied s a | s -> a where
-    proxied :: Lens' s (TF.Argument "proxied" a)
+class HasProxied a b | a -> b where
+    type HasProxiedThread a b :: *
 
-instance HasProxied s a => HasProxied (TF.Resource p s) a where
+    proxied :: Lens' a (TF.Attribute (HasProxiedThread a b) "proxied" b)
+
+instance HasProxied a b => HasProxied (TF.Resource p a) b where
+    type HasProxiedThread (TF.Resource p a) b =
+         HasProxiedThread a b
+
     proxied = TF.configuration . proxied
 
-class HasTtl s a | s -> a where
-    ttl :: Lens' s (TF.Argument "ttl" a)
+class HasTtl a b | a -> b where
+    type HasTtlThread a b :: *
 
-instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl :: Lens' a (TF.Attribute (HasTtlThread a b) "ttl" b)
+
+instance HasTtl a b => HasTtl (TF.Resource p a) b where
+    type HasTtlThread (TF.Resource p a) b =
+         HasTtlThread a b
+
     ttl = TF.configuration . ttl
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasValue s a | s -> a where
-    value :: Lens' s (TF.Argument "value" a)
+class HasValue a b | a -> b where
+    type HasValueThread a b :: *
 
-instance HasValue s a => HasValue (TF.Resource p s) a where
+    value :: Lens' a (TF.Attribute (HasValueThread a b) "value" b)
+
+instance HasValue a b => HasValue (TF.Resource p a) b where
+    type HasValueThread (TF.Resource p a) b =
+         HasValueThread a b
+
     value = TF.configuration . value
 
-class HasComputedHostname s a | s -> a where
-    computedHostname :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHostname a b | a -> b where
+    computedHostname :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHostname s a => HasComputedHostname (TF.Resource p s) a where
-    computedHostname = TF.configuration . computedHostname
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedPriority a b | a -> b where
+    computedPriority :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedProxied a b | a -> b where
+    computedProxied :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
-    computedName = TF.configuration . computedName
+class HasComputedTtl a b | a -> b where
+    computedTtl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedPriority s a | s -> a where
-    computedPriority :: forall r. Getting r s (TF.Attribute a)
+class HasComputedType' a b | a -> b where
+    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedPriority s a => HasComputedPriority (TF.Resource p s) a where
-    computedPriority = TF.configuration . computedPriority
+class HasComputedValue a b | a -> b where
+    computedValue :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedProxied s a | s -> a where
-    computedProxied :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedProxied s a => HasComputedProxied (TF.Resource p s) a where
-    computedProxied = TF.configuration . computedProxied
-
-class HasComputedTtl s a | s -> a where
-    computedTtl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTtl s a => HasComputedTtl (TF.Resource p s) a where
-    computedTtl = TF.configuration . computedTtl
-
-class HasComputedType' s a | s -> a where
-    computedType' :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedType' s a => HasComputedType' (TF.Resource p s) a where
-    computedType' = TF.configuration . computedType'
-
-class HasComputedValue s a | s -> a where
-    computedValue :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedValue s a => HasComputedValue (TF.Resource p s) a where
-    computedValue = TF.configuration . computedValue
-
-class HasComputedZoneId s a | s -> a where
-    computedZoneId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedZoneId s a => HasComputedZoneId (TF.Resource p s) a where
-    computedZoneId = TF.configuration . computedZoneId
+class HasComputedZoneId a b | a -> b where
+    computedZoneId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

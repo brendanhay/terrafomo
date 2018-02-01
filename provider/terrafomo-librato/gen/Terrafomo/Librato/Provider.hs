@@ -38,12 +38,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Librato.Types   as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.IP            as TF
+import qualified Terrafomo.Librato.Types as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
 
 {- | Librato Terraform provider.
 
@@ -53,9 +53,9 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Librato = Librato {
-      _email :: !(TF.Argument "email" Text)
+      _email :: !(Maybe Text)
     {- ^ (Required) Librato email address. It must be provided, but it can also be sourced from the @LIBRATO_EMAIL@ environment variable. -}
-    , _token :: !(TF.Argument "token" Text)
+    , _token :: !(Maybe Text)
     {- ^ (Required) Librato API token. It must be provided, but it can also be sourced from the @LIBRATO_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -63,25 +63,27 @@ instance Hashable Librato
 
 instance TF.ToHCL Librato where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Librato))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_email x)
-            , TF.argument (_token x)
+        let typ = TF.providerType (Proxy :: Proxy (Librato))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "email" <$> _email x
+            , TF.assign "token" <$> _token x
             ]
-
-emptyLibrato :: Librato
-emptyLibrato = Librato {
-        _email = TF.Nil
-      , _token = TF.Nil
-    }
 
 instance TF.IsProvider Librato where
     type ProviderType Librato = "librato"
 
-email :: Lens' Librato (TF.Argument "email" Text)
+emptyLibrato :: Librato
+emptyLibrato = Librato {
+        _email = Nothing
+      , _token = Nothing
+    }
+
+email :: Lens' Librato (Maybe Text)
 email =
     lens _email (\s a -> s { _email = a })
 
-token :: Lens' Librato (TF.Argument "token" Text)
+token :: Lens' Librato (Maybe Text)
 token =
     lens _token (\s a -> s { _token = a })

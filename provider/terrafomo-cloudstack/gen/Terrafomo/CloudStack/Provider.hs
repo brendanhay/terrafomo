@@ -43,12 +43,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.CloudStack.Types as TF
-import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.IP        as TF
-import qualified Terrafomo.Syntax.Name      as TF
-import qualified Terrafomo.Syntax.Provider  as TF
-import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.IP               as TF
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Provider         as TF
 
 {- | CloudStack Terraform provider.
 
@@ -62,19 +62,19 @@ allowed and will not work. Use the navigation to the left to read about the
 available resources.
 -}
 data CloudStack = CloudStack {
-      _api_key       :: !(TF.Argument "api_key" Text)
+      _api_key       :: !(Maybe Text)
     {- ^ (Optional) This is the CloudStack API key. It can also be sourced from the @CLOUDSTACK_API_KEY@ environment variable. -}
-    , _api_url       :: !(TF.Argument "api_url" Text)
+    , _api_url       :: !(Maybe Text)
     {- ^ (Optional) This is the CloudStack API URL. It can also be sourced from the @CLOUDSTACK_API_URL@ environment variable. -}
-    , _config        :: !(TF.Argument "config" Text)
+    , _config        :: !(Maybe Text)
     {- ^ (Optional) The path to a @CloudMonkey@ config file. If set the API URL, key and secret will be retrieved from this file. -}
-    , _http_get_only :: !(TF.Argument "http_get_only" Text)
+    , _http_get_only :: !(Maybe Text)
     {- ^ (Optional) Some cloud providers only allow HTTP GET calls to their CloudStack API. If using such a provider, you need to set this to @true@ in order for the provider to only make GET calls and no POST calls. It can also be sourced from the @CLOUDSTACK_HTTP_GET_ONLY@ environment variable. -}
-    , _profile       :: !(TF.Argument "profile" Text)
+    , _profile       :: !(Maybe Text)
     {- ^ (Optional) Used together with the @config@ option. Specifies which @CloudMonkey@ profile in the config file to use. -}
-    , _secret_key    :: !(TF.Argument "secret_key" Text)
+    , _secret_key    :: !(Maybe Text)
     {- ^ (Optional) This is the CloudStack secret key. It can also be sourced from the @CLOUDSTACK_SECRET_KEY@ environment variable. -}
-    , _timeout       :: !(TF.Argument "timeout" Text)
+    , _timeout       :: !(Maybe Text)
     {- ^ (Optional) A value in seconds. This is the time allowed for Cloudstack to complete each asynchronous job triggered. If unset, this can be sourced from the @CLOUDSTACK_TIMEOUT@ environment variable. Otherwise, this will default to 300 seconds. -}
     } deriving (Show, Eq, Generic)
 
@@ -82,55 +82,57 @@ instance Hashable CloudStack
 
 instance TF.ToHCL CloudStack where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy CloudStack))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_api_key x)
-            , TF.argument (_api_url x)
-            , TF.argument (_config x)
-            , TF.argument (_http_get_only x)
-            , TF.argument (_profile x)
-            , TF.argument (_secret_key x)
-            , TF.argument (_timeout x)
+        let typ = TF.providerType (Proxy :: Proxy (CloudStack))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "api_key" <$> _api_key x
+            , TF.assign "api_url" <$> _api_url x
+            , TF.assign "config" <$> _config x
+            , TF.assign "http_get_only" <$> _http_get_only x
+            , TF.assign "profile" <$> _profile x
+            , TF.assign "secret_key" <$> _secret_key x
+            , TF.assign "timeout" <$> _timeout x
             ]
-
-emptyCloudStack :: CloudStack
-emptyCloudStack = CloudStack {
-        _api_key = TF.Nil
-      , _api_url = TF.Nil
-      , _config = TF.Nil
-      , _http_get_only = TF.Nil
-      , _profile = TF.Nil
-      , _secret_key = TF.Nil
-      , _timeout = TF.Nil
-    }
 
 instance TF.IsProvider CloudStack where
     type ProviderType CloudStack = "cloudstack"
 
-apiKey :: Lens' CloudStack (TF.Argument "api_key" Text)
+emptyCloudStack :: CloudStack
+emptyCloudStack = CloudStack {
+        _api_key = Nothing
+      , _api_url = Nothing
+      , _config = Nothing
+      , _http_get_only = Nothing
+      , _profile = Nothing
+      , _secret_key = Nothing
+      , _timeout = Nothing
+    }
+
+apiKey :: Lens' CloudStack (Maybe Text)
 apiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-apiUrl :: Lens' CloudStack (TF.Argument "api_url" Text)
+apiUrl :: Lens' CloudStack (Maybe Text)
 apiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-config :: Lens' CloudStack (TF.Argument "config" Text)
+config :: Lens' CloudStack (Maybe Text)
 config =
     lens _config (\s a -> s { _config = a })
 
-httpGetOnly :: Lens' CloudStack (TF.Argument "http_get_only" Text)
+httpGetOnly :: Lens' CloudStack (Maybe Text)
 httpGetOnly =
     lens _http_get_only (\s a -> s { _http_get_only = a })
 
-profile :: Lens' CloudStack (TF.Argument "profile" Text)
+profile :: Lens' CloudStack (Maybe Text)
 profile =
     lens _profile (\s a -> s { _profile = a })
 
-secretKey :: Lens' CloudStack (TF.Argument "secret_key" Text)
+secretKey :: Lens' CloudStack (Maybe Text)
 secretKey =
     lens _secret_key (\s a -> s { _secret_key = a })
 
-timeout :: Lens' CloudStack (TF.Argument "timeout" Text)
+timeout :: Lens' CloudStack (Maybe Text)
 timeout =
     lens _timeout (\s a -> s { _timeout = a })

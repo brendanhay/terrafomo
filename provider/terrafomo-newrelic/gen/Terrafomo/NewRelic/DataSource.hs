@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -46,74 +47,73 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.NewRelic.Provider as TF
 import qualified Terrafomo.NewRelic.Types    as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @newrelic_application@ NewRelic datasource.
 
 Use this data source to get information about a specific application in New
 Relic.
 -}
-data ApplicationDataSource = ApplicationDataSource {
-      _name :: !(TF.Argument "name" Text)
+data ApplicationDataSource s = ApplicationDataSource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ApplicationDataSource where
+instance TF.ToHCL (ApplicationDataSource s) where
     toHCL ApplicationDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName ApplicationDataSource Text where
+instance HasName (ApplicationDataSource s) Text where
+    type HasNameThread (ApplicationDataSource s) Text = s
+
     name =
-        lens (_name :: ApplicationDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ApplicationDataSource)
+        lens (_name :: ApplicationDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ApplicationDataSource s)
 
-instance HasComputedHostIds ApplicationDataSource Text where
+instance HasComputedHostIds (ApplicationDataSource s) Text where
     computedHostIds =
-        to (\_  -> TF.Compute "host_ids")
+        to (\x -> TF.Computed (TF.referenceKey x) "host_ids")
 
-instance HasComputedId ApplicationDataSource Text where
+instance HasComputedId (ApplicationDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedInstanceIds ApplicationDataSource Text where
+instance HasComputedInstanceIds (ApplicationDataSource s) Text where
     computedInstanceIds =
-        to (\_  -> TF.Compute "instance_ids")
+        to (\x -> TF.Computed (TF.referenceKey x) "instance_ids")
 
-applicationDataSource :: TF.DataSource TF.NewRelic ApplicationDataSource
+applicationDataSource :: TF.DataSource TF.NewRelic (ApplicationDataSource s)
 applicationDataSource =
     TF.newDataSource "newrelic_application" $
         ApplicationDataSource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasComputedHostIds s a | s -> a where
-    computedHostIds :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHostIds a b | a -> b where
+    computedHostIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHostIds s a => HasComputedHostIds (TF.DataSource p s) a where
-    computedHostIds = TF.configuration . computedHostIds
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
-
-class HasComputedInstanceIds s a | s -> a where
-    computedInstanceIds :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedInstanceIds s a => HasComputedInstanceIds (TF.DataSource p s) a where
-    computedInstanceIds = TF.configuration . computedInstanceIds
+class HasComputedInstanceIds a b | a -> b where
+    computedInstanceIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

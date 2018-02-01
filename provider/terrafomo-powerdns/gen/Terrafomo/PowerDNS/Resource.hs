@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -47,103 +48,139 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.PowerDNS.Provider as TF
 import qualified Terrafomo.PowerDNS.Types    as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @powerdns_record@ PowerDNS resource.
 
 Provides a PowerDNS record resource.
 -}
-data RecordResource = RecordResource {
-      _name    :: !(TF.Argument "name" Text)
+data RecordResource s = RecordResource {
+      _name    :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record. -}
-    , _records :: !(TF.Argument "records" Text)
+    , _records :: !(TF.Attribute s "records" Text)
     {- ^ (Required) A string list of records. -}
-    , _ttl     :: !(TF.Argument "ttl" Text)
+    , _ttl     :: !(TF.Attribute s "ttl" Text)
     {- ^ (Required) The TTL of the record. -}
-    , _type'   :: !(TF.Argument "type" Text)
+    , _type'   :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The record type. -}
-    , _zone    :: !(TF.Argument "zone" Text)
+    , _zone    :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The name of zone to contain this record. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RecordResource where
+instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _records
-        , TF.argument _ttl
-        , TF.argument _type'
-        , TF.argument _zone
+        [ TF.attribute _name
+        , TF.attribute _records
+        , TF.attribute _ttl
+        , TF.attribute _type'
+        , TF.attribute _zone
         ]
 
-instance HasName RecordResource Text where
+instance HasName (RecordResource s) Text where
+    type HasNameThread (RecordResource s) Text = s
+
     name =
-        lens (_name :: RecordResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RecordResource)
+        lens (_name :: RecordResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RecordResource s)
 
-instance HasRecords RecordResource Text where
+instance HasRecords (RecordResource s) Text where
+    type HasRecordsThread (RecordResource s) Text = s
+
     records =
-        lens (_records :: RecordResource -> TF.Argument "records" Text)
-             (\s a -> s { _records = a } :: RecordResource)
+        lens (_records :: RecordResource s -> TF.Attribute s "records" Text)
+             (\s a -> s { _records = a } :: RecordResource s)
 
-instance HasTtl RecordResource Text where
+instance HasTtl (RecordResource s) Text where
+    type HasTtlThread (RecordResource s) Text = s
+
     ttl =
-        lens (_ttl :: RecordResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: RecordResource)
+        lens (_ttl :: RecordResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance HasType' RecordResource Text where
+instance HasType' (RecordResource s) Text where
+    type HasType'Thread (RecordResource s) Text = s
+
     type' =
-        lens (_type' :: RecordResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: RecordResource)
+        lens (_type' :: RecordResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
-instance HasZone RecordResource Text where
+instance HasZone (RecordResource s) Text where
+    type HasZoneThread (RecordResource s) Text = s
+
     zone =
-        lens (_zone :: RecordResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: RecordResource)
+        lens (_zone :: RecordResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: RecordResource s)
 
-recordResource :: TF.Resource TF.PowerDNS RecordResource
+recordResource :: TF.Resource TF.PowerDNS (RecordResource s)
 recordResource =
     TF.newResource "powerdns_record" $
         RecordResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _records = TF.Nil
             , _ttl = TF.Nil
             , _type' = TF.Nil
             , _zone = TF.Nil
             }
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasRecords s a | s -> a where
-    records :: Lens' s (TF.Argument "records" a)
+class HasRecords a b | a -> b where
+    type HasRecordsThread a b :: *
 
-instance HasRecords s a => HasRecords (TF.Resource p s) a where
+    records :: Lens' a (TF.Attribute (HasRecordsThread a b) "records" b)
+
+instance HasRecords a b => HasRecords (TF.Resource p a) b where
+    type HasRecordsThread (TF.Resource p a) b =
+         HasRecordsThread a b
+
     records = TF.configuration . records
 
-class HasTtl s a | s -> a where
-    ttl :: Lens' s (TF.Argument "ttl" a)
+class HasTtl a b | a -> b where
+    type HasTtlThread a b :: *
 
-instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl :: Lens' a (TF.Attribute (HasTtlThread a b) "ttl" b)
+
+instance HasTtl a b => HasTtl (TF.Resource p a) b where
+    type HasTtlThread (TF.Resource p a) b =
+         HasTtlThread a b
+
     ttl = TF.configuration . ttl
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasZone s a | s -> a where
-    zone :: Lens' s (TF.Argument "zone" a)
+class HasZone a b | a -> b where
+    type HasZoneThread a b :: *
 
-instance HasZone s a => HasZone (TF.Resource p s) a where
+    zone :: Lens' a (TF.Attribute (HasZoneThread a b) "zone" b)
+
+instance HasZone a b => HasZone (TF.Resource p a) b where
+    type HasZoneThread (TF.Resource p a) b =
+         HasZoneThread a b
+
     zone = TF.configuration . zone

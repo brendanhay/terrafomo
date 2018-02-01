@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -55,56 +56,63 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.InfluxDB.Provider as TF
 import qualified Terrafomo.InfluxDB.Types    as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @influxdb_continuous_query@ InfluxDB resource.
 
 The continuous_query resource allows a continuous query to be created on an
 InfluxDB server.
 -}
-data ContinuousQueryResource = ContinuousQueryResource {
-      _database :: !(TF.Argument "database" Text)
+data ContinuousQueryResource s = ContinuousQueryResource {
+      _database :: !(TF.Attribute s "database" Text)
     {- ^ (Required) The database for the continuous_query. This must be an existing influxdb database. -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
-    , _query    :: !(TF.Argument "query" Text)
+    , _query    :: !(TF.Attribute s "query" Text)
     {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ContinuousQueryResource where
+instance TF.ToHCL (ContinuousQueryResource s) where
     toHCL ContinuousQueryResource{..} = TF.block $ catMaybes
-        [ TF.argument _database
-        , TF.argument _name
-        , TF.argument _query
+        [ TF.attribute _database
+        , TF.attribute _name
+        , TF.attribute _query
         ]
 
-instance HasDatabase ContinuousQueryResource Text where
+instance HasDatabase (ContinuousQueryResource s) Text where
+    type HasDatabaseThread (ContinuousQueryResource s) Text = s
+
     database =
-        lens (_database :: ContinuousQueryResource -> TF.Argument "database" Text)
-             (\s a -> s { _database = a } :: ContinuousQueryResource)
+        lens (_database :: ContinuousQueryResource s -> TF.Attribute s "database" Text)
+             (\s a -> s { _database = a } :: ContinuousQueryResource s)
 
-instance HasName ContinuousQueryResource Text where
+instance HasName (ContinuousQueryResource s) Text where
+    type HasNameThread (ContinuousQueryResource s) Text = s
+
     name =
-        lens (_name :: ContinuousQueryResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ContinuousQueryResource)
+        lens (_name :: ContinuousQueryResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ContinuousQueryResource s)
 
-instance HasQuery ContinuousQueryResource Text where
+instance HasQuery (ContinuousQueryResource s) Text where
+    type HasQueryThread (ContinuousQueryResource s) Text = s
+
     query =
-        lens (_query :: ContinuousQueryResource -> TF.Argument "query" Text)
-             (\s a -> s { _query = a } :: ContinuousQueryResource)
+        lens (_query :: ContinuousQueryResource s -> TF.Attribute s "query" Text)
+             (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
-continuousQueryResource :: TF.Resource TF.InfluxDB ContinuousQueryResource
+continuousQueryResource :: TF.Resource TF.InfluxDB (ContinuousQueryResource s)
 continuousQueryResource =
     TF.newResource "influxdb_continuous_query" $
         ContinuousQueryResource {
-            _database = TF.Nil
+              _database = TF.Nil
             , _name = TF.Nil
             , _query = TF.Nil
             }
@@ -113,123 +121,160 @@ continuousQueryResource =
 
 The database resource allows a database to be created on an InfluxDB server.
 -}
-data DatabaseResource = DatabaseResource {
-      _name :: !(TF.Argument "name" Text)
+data DatabaseResource s = DatabaseResource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DatabaseResource where
+instance TF.ToHCL (DatabaseResource s) where
     toHCL DatabaseResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName DatabaseResource Text where
-    name =
-        lens (_name :: DatabaseResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: DatabaseResource)
+instance HasName (DatabaseResource s) Text where
+    type HasNameThread (DatabaseResource s) Text = s
 
-databaseResource :: TF.Resource TF.InfluxDB DatabaseResource
+    name =
+        lens (_name :: DatabaseResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: DatabaseResource s)
+
+databaseResource :: TF.Resource TF.InfluxDB (DatabaseResource s)
 databaseResource =
     TF.newResource "influxdb_database" $
         DatabaseResource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
 {- | The @influxdb_user@ InfluxDB resource.
 
 The user resource allows a user to be created on an InfluxDB server.
 -}
-data UserResource = UserResource {
-      _admin    :: !(TF.Argument "admin" Text)
+data UserResource s = UserResource {
+      _admin    :: !(TF.Attribute s "admin" Text)
     {- ^ (Optional) Mark the user as admin. -}
-    , _grant    :: !(TF.Argument "grant" Text)
+    , _grant    :: !(TF.Attribute s "grant" Text)
     {- ^ (Optional) A list of grants for non-admin users -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name for the user. -}
-    , _password :: !(TF.Argument "password" Text)
+    , _password :: !(TF.Attribute s "password" Text)
     {- ^ (Required) The password for the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserResource where
+instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.block $ catMaybes
-        [ TF.argument _admin
-        , TF.argument _grant
-        , TF.argument _name
-        , TF.argument _password
+        [ TF.attribute _admin
+        , TF.attribute _grant
+        , TF.attribute _name
+        , TF.attribute _password
         ]
 
-instance HasAdmin UserResource Text where
+instance HasAdmin (UserResource s) Text where
+    type HasAdminThread (UserResource s) Text = s
+
     admin =
-        lens (_admin :: UserResource -> TF.Argument "admin" Text)
-             (\s a -> s { _admin = a } :: UserResource)
+        lens (_admin :: UserResource s -> TF.Attribute s "admin" Text)
+             (\s a -> s { _admin = a } :: UserResource s)
 
-instance HasGrant UserResource Text where
+instance HasGrant (UserResource s) Text where
+    type HasGrantThread (UserResource s) Text = s
+
     grant =
-        lens (_grant :: UserResource -> TF.Argument "grant" Text)
-             (\s a -> s { _grant = a } :: UserResource)
+        lens (_grant :: UserResource s -> TF.Attribute s "grant" Text)
+             (\s a -> s { _grant = a } :: UserResource s)
 
-instance HasName UserResource Text where
+instance HasName (UserResource s) Text where
+    type HasNameThread (UserResource s) Text = s
+
     name =
-        lens (_name :: UserResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: UserResource)
+        lens (_name :: UserResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: UserResource s)
 
-instance HasPassword UserResource Text where
+instance HasPassword (UserResource s) Text where
+    type HasPasswordThread (UserResource s) Text = s
+
     password =
-        lens (_password :: UserResource -> TF.Argument "password" Text)
-             (\s a -> s { _password = a } :: UserResource)
+        lens (_password :: UserResource s -> TF.Attribute s "password" Text)
+             (\s a -> s { _password = a } :: UserResource s)
 
-instance HasComputedAdmin UserResource Text where
+instance HasComputedAdmin (UserResource s) Text where
     computedAdmin =
-        to (\_  -> TF.Compute "admin")
+        to (\x -> TF.Computed (TF.referenceKey x) "admin")
 
-userResource :: TF.Resource TF.InfluxDB UserResource
+userResource :: TF.Resource TF.InfluxDB (UserResource s)
 userResource =
     TF.newResource "influxdb_user" $
         UserResource {
-            _admin = TF.Nil
+              _admin = TF.Nil
             , _grant = TF.Nil
             , _name = TF.Nil
             , _password = TF.Nil
             }
 
-class HasAdmin s a | s -> a where
-    admin :: Lens' s (TF.Argument "admin" a)
+class HasAdmin a b | a -> b where
+    type HasAdminThread a b :: *
 
-instance HasAdmin s a => HasAdmin (TF.Resource p s) a where
+    admin :: Lens' a (TF.Attribute (HasAdminThread a b) "admin" b)
+
+instance HasAdmin a b => HasAdmin (TF.Resource p a) b where
+    type HasAdminThread (TF.Resource p a) b =
+         HasAdminThread a b
+
     admin = TF.configuration . admin
 
-class HasDatabase s a | s -> a where
-    database :: Lens' s (TF.Argument "database" a)
+class HasDatabase a b | a -> b where
+    type HasDatabaseThread a b :: *
 
-instance HasDatabase s a => HasDatabase (TF.Resource p s) a where
+    database :: Lens' a (TF.Attribute (HasDatabaseThread a b) "database" b)
+
+instance HasDatabase a b => HasDatabase (TF.Resource p a) b where
+    type HasDatabaseThread (TF.Resource p a) b =
+         HasDatabaseThread a b
+
     database = TF.configuration . database
 
-class HasGrant s a | s -> a where
-    grant :: Lens' s (TF.Argument "grant" a)
+class HasGrant a b | a -> b where
+    type HasGrantThread a b :: *
 
-instance HasGrant s a => HasGrant (TF.Resource p s) a where
+    grant :: Lens' a (TF.Attribute (HasGrantThread a b) "grant" b)
+
+instance HasGrant a b => HasGrant (TF.Resource p a) b where
+    type HasGrantThread (TF.Resource p a) b =
+         HasGrantThread a b
+
     grant = TF.configuration . grant
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasPassword s a | s -> a where
-    password :: Lens' s (TF.Argument "password" a)
+class HasPassword a b | a -> b where
+    type HasPasswordThread a b :: *
 
-instance HasPassword s a => HasPassword (TF.Resource p s) a where
+    password :: Lens' a (TF.Attribute (HasPasswordThread a b) "password" b)
+
+instance HasPassword a b => HasPassword (TF.Resource p a) b where
+    type HasPasswordThread (TF.Resource p a) b =
+         HasPasswordThread a b
+
     password = TF.configuration . password
 
-class HasQuery s a | s -> a where
-    query :: Lens' s (TF.Argument "query" a)
+class HasQuery a b | a -> b where
+    type HasQueryThread a b :: *
 
-instance HasQuery s a => HasQuery (TF.Resource p s) a where
+    query :: Lens' a (TF.Attribute (HasQueryThread a b) "query" b)
+
+instance HasQuery a b => HasQuery (TF.Resource p a) b where
+    type HasQueryThread (TF.Resource p a) b =
+         HasQueryThread a b
+
     query = TF.configuration . query
 
-class HasComputedAdmin s a | s -> a where
-    computedAdmin :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedAdmin s a => HasComputedAdmin (TF.Resource p s) a where
-    computedAdmin = TF.configuration . computedAdmin
+class HasComputedAdmin a b | a -> b where
+    computedAdmin :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

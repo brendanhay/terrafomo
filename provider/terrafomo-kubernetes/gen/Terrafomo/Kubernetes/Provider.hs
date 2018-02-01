@@ -49,12 +49,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Terrafomo.Attribute        as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Kubernetes.Types as TF
-import qualified Terrafomo.Syntax.HCL       as TF
-import qualified Terrafomo.Syntax.IP        as TF
-import qualified Terrafomo.Syntax.Name      as TF
-import qualified Terrafomo.Syntax.Provider  as TF
-import qualified Terrafomo.Syntax.Variable  as TF
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Provider         as TF
 
 {- | Kubernetes Terraform provider.
 
@@ -64,31 +64,31 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Kubernetes = Kubernetes {
-      _client_certificate :: !(TF.Argument "client_certificate" Text)
+      _client_certificate       :: !(Maybe Text)
     {- ^ (Optional) PEM-encoded client certificate for TLS authentication. Can be sourced from @KUBE_CLIENT_CERT_DATA@ . -}
-    , _client_key :: !(TF.Argument "client_key" Text)
+    , _client_key               :: !(Maybe Text)
     {- ^ (Optional) PEM-encoded client certificate key for TLS authentication. Can be sourced from @KUBE_CLIENT_KEY_DATA@ . -}
-    , _cluster_ca_certificate :: !(TF.Argument "cluster_ca_certificate" Text)
+    , _cluster_ca_certificate   :: !(Maybe Text)
     {- ^ (Optional) PEM-encoded root certificates bundle for TLS authentication. Can be sourced from @KUBE_CLUSTER_CA_CERT_DATA@ . -}
-    , _config_context :: !(TF.Argument "config_context" Text)
+    , _config_context           :: !(Maybe Text)
     {- ^ (Optional) Context to choose from the config file. Can be sourced from @KUBE_CTX@ . -}
-    , _config_context_auth_info :: !(TF.Argument "config_context_auth_info" Text)
+    , _config_context_auth_info :: !(Maybe Text)
     {- ^ (Optional) Authentication info context of the kube config (name of the kubeconfig user, @--user@ flag in @kubectl@ ). Can be sourced from @KUBE_CTX_AUTH_INFO@ . -}
-    , _config_context_cluster :: !(TF.Argument "config_context_cluster" Text)
+    , _config_context_cluster   :: !(Maybe Text)
     {- ^ (Optional) Cluster context of the kube config (name of the kubeconfig cluster, @--cluster@ flag in @kubectl@ ). Can be sourced from @KUBE_CTX_CLUSTER@ . -}
-    , _config_path :: !(TF.Argument "config_path" Text)
+    , _config_path              :: !(Maybe Text)
     {- ^ (Optional) Path to the kube config file. Can be sourced from @KUBE_CONFIG@ or @KUBECONFIG@ . Defaults to @~/.kube/config@ . -}
-    , _host :: !(TF.Argument "host" Text)
+    , _host                     :: !(Maybe Text)
     {- ^ (Optional) The hostname (in form of URI) of Kubernetes master. Can be sourced from @KUBE_HOST@ . Defaults to @https://localhost@ . -}
-    , _insecure :: !(TF.Argument "insecure" Text)
+    , _insecure                 :: !(Maybe Text)
     {- ^ (Optional) Whether server should be accessed without verifying the TLS certificate. Can be sourced from @KUBE_INSECURE@ . Defaults to @false@ . -}
-    , _load_config_file :: !(TF.Argument "load_config_file" Text)
+    , _load_config_file         :: !(Maybe Text)
     {- ^ (Optional) By default the local config (~/.kube/config) is loaded when you use this provider. This option at false disable this behaviour. Can be sourced from @KUBE_LOAD_CONFIG_FILE@ . -}
-    , _password :: !(TF.Argument "password" Text)
+    , _password                 :: !(Maybe Text)
     {- ^ (Optional) The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Can be sourced from @KUBE_PASSWORD@ . -}
-    , _token :: !(TF.Argument "token" Text)
+    , _token                    :: !(Maybe Text)
     {- ^ (Optional) Token of your service account.  Can be sourced from @KUBE_TOKEN@ . -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username                 :: !(Maybe Text)
     {- ^ (Optional) The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Can be sourced from @KUBE_USER@ . -}
     } deriving (Show, Eq, Generic)
 
@@ -96,91 +96,93 @@ instance Hashable Kubernetes
 
 instance TF.ToHCL Kubernetes where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Kubernetes))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_client_certificate x)
-            , TF.argument (_client_key x)
-            , TF.argument (_cluster_ca_certificate x)
-            , TF.argument (_config_context x)
-            , TF.argument (_config_context_auth_info x)
-            , TF.argument (_config_context_cluster x)
-            , TF.argument (_config_path x)
-            , TF.argument (_host x)
-            , TF.argument (_insecure x)
-            , TF.argument (_load_config_file x)
-            , TF.argument (_password x)
-            , TF.argument (_token x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (Kubernetes))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "client_certificate" <$> _client_certificate x
+            , TF.assign "client_key" <$> _client_key x
+            , TF.assign "cluster_ca_certificate" <$> _cluster_ca_certificate x
+            , TF.assign "config_context" <$> _config_context x
+            , TF.assign "config_context_auth_info" <$> _config_context_auth_info x
+            , TF.assign "config_context_cluster" <$> _config_context_cluster x
+            , TF.assign "config_path" <$> _config_path x
+            , TF.assign "host" <$> _host x
+            , TF.assign "insecure" <$> _insecure x
+            , TF.assign "load_config_file" <$> _load_config_file x
+            , TF.assign "password" <$> _password x
+            , TF.assign "token" <$> _token x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyKubernetes :: Kubernetes
-emptyKubernetes = Kubernetes {
-        _client_certificate = TF.Nil
-      , _client_key = TF.Nil
-      , _cluster_ca_certificate = TF.Nil
-      , _config_context = TF.Nil
-      , _config_context_auth_info = TF.Nil
-      , _config_context_cluster = TF.Nil
-      , _config_path = TF.Nil
-      , _host = TF.Nil
-      , _insecure = TF.Nil
-      , _load_config_file = TF.Nil
-      , _password = TF.Nil
-      , _token = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider Kubernetes where
     type ProviderType Kubernetes = "kubernetes"
 
-clientCertificate :: Lens' Kubernetes (TF.Argument "client_certificate" Text)
+emptyKubernetes :: Kubernetes
+emptyKubernetes = Kubernetes {
+        _client_certificate = Nothing
+      , _client_key = Nothing
+      , _cluster_ca_certificate = Nothing
+      , _config_context = Nothing
+      , _config_context_auth_info = Nothing
+      , _config_context_cluster = Nothing
+      , _config_path = Nothing
+      , _host = Nothing
+      , _insecure = Nothing
+      , _load_config_file = Nothing
+      , _password = Nothing
+      , _token = Nothing
+      , _username = Nothing
+    }
+
+clientCertificate :: Lens' Kubernetes (Maybe Text)
 clientCertificate =
     lens _client_certificate (\s a -> s { _client_certificate = a })
 
-clientKey :: Lens' Kubernetes (TF.Argument "client_key" Text)
+clientKey :: Lens' Kubernetes (Maybe Text)
 clientKey =
     lens _client_key (\s a -> s { _client_key = a })
 
-clusterCaCertificate :: Lens' Kubernetes (TF.Argument "cluster_ca_certificate" Text)
+clusterCaCertificate :: Lens' Kubernetes (Maybe Text)
 clusterCaCertificate =
     lens _cluster_ca_certificate (\s a -> s { _cluster_ca_certificate = a })
 
-configContext :: Lens' Kubernetes (TF.Argument "config_context" Text)
+configContext :: Lens' Kubernetes (Maybe Text)
 configContext =
     lens _config_context (\s a -> s { _config_context = a })
 
-configContextAuthInfo :: Lens' Kubernetes (TF.Argument "config_context_auth_info" Text)
+configContextAuthInfo :: Lens' Kubernetes (Maybe Text)
 configContextAuthInfo =
     lens _config_context_auth_info (\s a -> s { _config_context_auth_info = a })
 
-configContextCluster :: Lens' Kubernetes (TF.Argument "config_context_cluster" Text)
+configContextCluster :: Lens' Kubernetes (Maybe Text)
 configContextCluster =
     lens _config_context_cluster (\s a -> s { _config_context_cluster = a })
 
-configPath :: Lens' Kubernetes (TF.Argument "config_path" Text)
+configPath :: Lens' Kubernetes (Maybe Text)
 configPath =
     lens _config_path (\s a -> s { _config_path = a })
 
-host :: Lens' Kubernetes (TF.Argument "host" Text)
+host :: Lens' Kubernetes (Maybe Text)
 host =
     lens _host (\s a -> s { _host = a })
 
-insecure :: Lens' Kubernetes (TF.Argument "insecure" Text)
+insecure :: Lens' Kubernetes (Maybe Text)
 insecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-loadConfigFile :: Lens' Kubernetes (TF.Argument "load_config_file" Text)
+loadConfigFile :: Lens' Kubernetes (Maybe Text)
 loadConfigFile =
     lens _load_config_file (\s a -> s { _load_config_file = a })
 
-password :: Lens' Kubernetes (TF.Argument "password" Text)
+password :: Lens' Kubernetes (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-token :: Lens' Kubernetes (TF.Argument "token" Text)
+token :: Lens' Kubernetes (Maybe Text)
 token =
     lens _token (\s a -> s { _token = a })
 
-username :: Lens' Kubernetes (TF.Argument "username" Text)
+username :: Lens' Kubernetes (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

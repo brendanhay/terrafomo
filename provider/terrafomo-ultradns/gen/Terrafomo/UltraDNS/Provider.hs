@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
-import qualified Terrafomo.UltraDNS.Types  as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.UltraDNS.Types as TF
 
 {- | UltraDNS Terraform provider.
 
@@ -54,11 +54,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data UltraDNS = UltraDNS {
-      _baseurl  :: !(TF.Argument "baseurl" Text)
+      _baseurl  :: !(Maybe Text)
     {- ^ (Required) The base url for the UltraDNS REST API, but it can also be sourced from the @ULTRADNS_BASEURL@ environment variable. -}
-    , _password :: !(TF.Argument "password" Text)
+    , _password :: !(Maybe Text)
     {- ^ (Required) The password associated with the username. It must be provided, but it can also be sourced from the @ULTRADNS_PASSWORD@ environment variable. -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username :: !(Maybe Text)
     {- ^ (Required) The UltraDNS username. It must be provided, but it can also be sourced from the @ULTRADNS_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable UltraDNS
 
 instance TF.ToHCL UltraDNS where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy UltraDNS))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_baseurl x)
-            , TF.argument (_password x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (UltraDNS))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "baseurl" <$> _baseurl x
+            , TF.assign "password" <$> _password x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyUltraDNS :: UltraDNS
-emptyUltraDNS = UltraDNS {
-        _baseurl = TF.Nil
-      , _password = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider UltraDNS where
     type ProviderType UltraDNS = "ultradns"
 
-baseurl :: Lens' UltraDNS (TF.Argument "baseurl" Text)
+emptyUltraDNS :: UltraDNS
+emptyUltraDNS = UltraDNS {
+        _baseurl = Nothing
+      , _password = Nothing
+      , _username = Nothing
+    }
+
+baseurl :: Lens' UltraDNS (Maybe Text)
 baseurl =
     lens _baseurl (\s a -> s { _baseurl = a })
 
-password :: Lens' UltraDNS (TF.Argument "password" Text)
+password :: Lens' UltraDNS (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' UltraDNS (TF.Argument "username" Text)
+username :: Lens' UltraDNS (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

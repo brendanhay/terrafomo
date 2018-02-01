@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -50,14 +51,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.DataSource            as TF
 import qualified Terrafomo.DigitalOcean.Provider as TF
 import qualified Terrafomo.DigitalOcean.Types    as TF
-import qualified Terrafomo.Syntax.DataSource     as TF
-import qualified Terrafomo.Syntax.HCL            as TF
-import qualified Terrafomo.Syntax.IP             as TF
-import qualified Terrafomo.Syntax.Meta           as TF (configuration)
-import qualified Terrafomo.Syntax.Resource       as TF
-import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.HCL                   as TF
+import qualified Terrafomo.IP                    as TF
+import qualified Terrafomo.Meta                  as TF (configuration)
+import qualified Terrafomo.Name                  as TF
+import qualified Terrafomo.Resource              as TF
 
 {- | The @digitalocean_image@ DigitalOcean datasource.
 
@@ -65,100 +67,86 @@ Get information on an snapshot images. The aim of this datasource is to
 enable you to build droplets based on snapshot names. An error is triggered
 if zero or more than one result is returned by the query.
 -}
-data ImageDataSource = ImageDataSource {
-      _name :: !(TF.Argument "name" Text)
+data ImageDataSource s = ImageDataSource {
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ - The name of the image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ImageDataSource where
+instance TF.ToHCL (ImageDataSource s) where
     toHCL ImageDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _name
+        [ TF.attribute _name
         ]
 
-instance HasName ImageDataSource Text where
+instance HasName (ImageDataSource s) Text where
+    type HasNameThread (ImageDataSource s) Text = s
+
     name =
-        lens (_name :: ImageDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ImageDataSource)
+        lens (_name :: ImageDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ImageDataSource s)
 
-instance HasComputedImage ImageDataSource Text where
+instance HasComputedImage (ImageDataSource s) Text where
     computedImage =
-        to (\_  -> TF.Compute "image")
+        to (\x -> TF.Computed (TF.referenceKey x) "image")
 
-instance HasComputedMinDiskSize ImageDataSource Text where
+instance HasComputedMinDiskSize (ImageDataSource s) Text where
     computedMinDiskSize =
-        to (\_  -> TF.Compute "min_disk_size")
+        to (\x -> TF.Computed (TF.referenceKey x) "min_disk_size")
 
-instance HasComputedName ImageDataSource Text where
+instance HasComputedName (ImageDataSource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedPrivate ImageDataSource Text where
+instance HasComputedPrivate (ImageDataSource s) Text where
     computedPrivate =
-        to (\_  -> TF.Compute "private")
+        to (\x -> TF.Computed (TF.referenceKey x) "private")
 
-instance HasComputedRegions ImageDataSource Text where
+instance HasComputedRegions (ImageDataSource s) Text where
     computedRegions =
-        to (\_  -> TF.Compute "regions")
+        to (\x -> TF.Computed (TF.referenceKey x) "regions")
 
-instance HasComputedSizeGigabytes ImageDataSource Text where
+instance HasComputedSizeGigabytes (ImageDataSource s) Text where
     computedSizeGigabytes =
-        to (\_  -> TF.Compute "size_gigabytes")
+        to (\x -> TF.Computed (TF.referenceKey x) "size_gigabytes")
 
-instance HasComputedType' ImageDataSource Text where
+instance HasComputedType' (ImageDataSource s) Text where
     computedType' =
-        to (\_  -> TF.Compute "type")
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
-imageDataSource :: TF.DataSource TF.DigitalOcean ImageDataSource
+imageDataSource :: TF.DataSource TF.DigitalOcean (ImageDataSource s)
 imageDataSource =
     TF.newDataSource "digitalocean_image" $
         ImageDataSource {
-            _name = TF.Nil
+              _name = TF.Nil
             }
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasComputedImage s a | s -> a where
-    computedImage :: forall r. Getting r s (TF.Attribute a)
+class HasComputedImage a b | a -> b where
+    computedImage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedImage s a => HasComputedImage (TF.DataSource p s) a where
-    computedImage = TF.configuration . computedImage
+class HasComputedMinDiskSize a b | a -> b where
+    computedMinDiskSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedMinDiskSize s a | s -> a where
-    computedMinDiskSize :: forall r. Getting r s (TF.Attribute a)
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedMinDiskSize s a => HasComputedMinDiskSize (TF.DataSource p s) a where
-    computedMinDiskSize = TF.configuration . computedMinDiskSize
+class HasComputedPrivate a b | a -> b where
+    computedPrivate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedRegions a b | a -> b where
+    computedRegions :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedName s a => HasComputedName (TF.DataSource p s) a where
-    computedName = TF.configuration . computedName
+class HasComputedSizeGigabytes a b | a -> b where
+    computedSizeGigabytes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedPrivate s a | s -> a where
-    computedPrivate :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedPrivate s a => HasComputedPrivate (TF.DataSource p s) a where
-    computedPrivate = TF.configuration . computedPrivate
-
-class HasComputedRegions s a | s -> a where
-    computedRegions :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRegions s a => HasComputedRegions (TF.DataSource p s) a where
-    computedRegions = TF.configuration . computedRegions
-
-class HasComputedSizeGigabytes s a | s -> a where
-    computedSizeGigabytes :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedSizeGigabytes s a => HasComputedSizeGigabytes (TF.DataSource p s) a where
-    computedSizeGigabytes = TF.configuration . computedSizeGigabytes
-
-class HasComputedType' s a | s -> a where
-    computedType' :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedType' s a => HasComputedType' (TF.DataSource p s) a where
-    computedType' = TF.configuration . computedType'
+class HasComputedType' a b | a -> b where
+    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

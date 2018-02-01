@@ -40,12 +40,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Docker.Types    as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.Docker.Types as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.IP           as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
 
 {- | Docker Terraform provider.
 
@@ -57,13 +57,13 @@ Docker-compatible API hosts. Use the navigation to the left to read about
 the available resources.
 -}
 data Docker = Docker {
-      _ca_material   :: !(TF.Argument "ca_material" Text)
+      _ca_material   :: !(Maybe Text)
     {- ^ , @cert_material@ , @key_material@ , - (Optional) Content of @ca.pem@ , @cert.pem@ , and @key.pem@ files for TLS authentication. Cannot be used together with @cert_path@ . -}
-    , _cert_path     :: !(TF.Argument "cert_path" Text)
+    , _cert_path     :: !(Maybe Text)
     {- ^ (Optional) Path to a directory with certificate information for connecting to the Docker host via TLS. If this is blank, the @DOCKER_CERT_PATH@ will also be checked. -}
-    , _host          :: !(TF.Argument "host" Text)
+    , _host          :: !(Maybe Text)
     {- ^ (Required) This is the address to the Docker host. If this is blank, the @DOCKER_HOST@ environment variable will also be read. -}
-    , _registry_auth :: !(TF.Argument "registry_auth" Text)
+    , _registry_auth :: !(Maybe Text)
     {- ^ (Optional) A block specifying the credentials for a target v2 Docker registry. -}
     } deriving (Show, Eq, Generic)
 
@@ -71,37 +71,39 @@ instance Hashable Docker
 
 instance TF.ToHCL Docker where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Docker))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_ca_material x)
-            , TF.argument (_cert_path x)
-            , TF.argument (_host x)
-            , TF.argument (_registry_auth x)
+        let typ = TF.providerType (Proxy :: Proxy (Docker))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "ca_material" <$> _ca_material x
+            , TF.assign "cert_path" <$> _cert_path x
+            , TF.assign "host" <$> _host x
+            , TF.assign "registry_auth" <$> _registry_auth x
             ]
-
-emptyDocker :: Docker
-emptyDocker = Docker {
-        _ca_material = TF.Nil
-      , _cert_path = TF.Nil
-      , _host = TF.Nil
-      , _registry_auth = TF.Nil
-    }
 
 instance TF.IsProvider Docker where
     type ProviderType Docker = "docker"
 
-caMaterial :: Lens' Docker (TF.Argument "ca_material" Text)
+emptyDocker :: Docker
+emptyDocker = Docker {
+        _ca_material = Nothing
+      , _cert_path = Nothing
+      , _host = Nothing
+      , _registry_auth = Nothing
+    }
+
+caMaterial :: Lens' Docker (Maybe Text)
 caMaterial =
     lens _ca_material (\s a -> s { _ca_material = a })
 
-certPath :: Lens' Docker (TF.Argument "cert_path" Text)
+certPath :: Lens' Docker (Maybe Text)
 certPath =
     lens _cert_path (\s a -> s { _cert_path = a })
 
-host :: Lens' Docker (TF.Argument "host" Text)
+host :: Lens' Docker (Maybe Text)
 host =
     lens _host (\s a -> s { _host = a })
 
-registryAuth :: Lens' Docker (TF.Argument "registry_auth" Text)
+registryAuth :: Lens' Docker (Maybe Text)
 registryAuth =
     lens _registry_auth (\s a -> s { _registry_auth = a })

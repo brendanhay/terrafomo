@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -63,14 +64,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.DataSource            as TF
+import qualified Terrafomo.HCL                   as TF
+import qualified Terrafomo.IP                    as TF
+import qualified Terrafomo.Meta                  as TF (configuration)
+import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.ProfitBricks.Provider as TF
 import qualified Terrafomo.ProfitBricks.Types    as TF
-import qualified Terrafomo.Syntax.DataSource     as TF
-import qualified Terrafomo.Syntax.HCL            as TF
-import qualified Terrafomo.Syntax.IP             as TF
-import qualified Terrafomo.Syntax.Meta           as TF (configuration)
-import qualified Terrafomo.Syntax.Resource       as TF
-import qualified Terrafomo.Syntax.Variable       as TF
+import qualified Terrafomo.Resource              as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks datasource.
 
@@ -82,38 +84,42 @@ results in multiple matches, an error will be generated. When this happens,
 please refine your search string so that it is specific enough to return
 only one result.
 -}
-data DatacenterDataSource = DatacenterDataSource {
-      _location :: !(TF.Argument "location" Text)
+data DatacenterDataSource s = DatacenterDataSource {
+      _location :: !(TF.Attribute s "location" Text)
     {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DatacenterDataSource where
+instance TF.ToHCL (DatacenterDataSource s) where
     toHCL DatacenterDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _location
-        , TF.argument _name
+        [ TF.attribute _location
+        , TF.attribute _name
         ]
 
-instance HasLocation DatacenterDataSource Text where
+instance HasLocation (DatacenterDataSource s) Text where
+    type HasLocationThread (DatacenterDataSource s) Text = s
+
     location =
-        lens (_location :: DatacenterDataSource -> TF.Argument "location" Text)
-             (\s a -> s { _location = a } :: DatacenterDataSource)
+        lens (_location :: DatacenterDataSource s -> TF.Attribute s "location" Text)
+             (\s a -> s { _location = a } :: DatacenterDataSource s)
 
-instance HasName DatacenterDataSource Text where
+instance HasName (DatacenterDataSource s) Text where
+    type HasNameThread (DatacenterDataSource s) Text = s
+
     name =
-        lens (_name :: DatacenterDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: DatacenterDataSource)
+        lens (_name :: DatacenterDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: DatacenterDataSource s)
 
-instance HasComputedId DatacenterDataSource Text where
+instance HasComputedId (DatacenterDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-datacenterDataSource :: TF.DataSource TF.ProfitBricks DatacenterDataSource
+datacenterDataSource :: TF.DataSource TF.ProfitBricks (DatacenterDataSource s)
 datacenterDataSource =
     TF.newDataSource "profitbricks_datacenter" $
         DatacenterDataSource {
-            _location = TF.Nil
+              _location = TF.Nil
             , _name = TF.Nil
             }
 
@@ -122,54 +128,62 @@ datacenterDataSource =
 The images data source can be used to search for and return an existing
 image which can then be used to provision a server.
 -}
-data ImageDataSource = ImageDataSource {
-      _location :: !(TF.Argument "location" Text)
+data ImageDataSource s = ImageDataSource {
+      _location :: !(TF.Attribute s "location" Text)
     {- ^ (Optional) Id of the existing image's location. -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Name or part of the name of an existing image that you want to search for. -}
-    , _type'    :: !(TF.Argument "type" Text)
+    , _type'    :: !(TF.Attribute s "type" Text)
     {- ^ (Optional) The image type, HDD or CD-ROM. -}
-    , _version  :: !(TF.Argument "version" Text)
+    , _version  :: !(TF.Attribute s "version" Text)
     {- ^ (Optional) Version of the image (see details below). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ImageDataSource where
+instance TF.ToHCL (ImageDataSource s) where
     toHCL ImageDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _location
-        , TF.argument _name
-        , TF.argument _type'
-        , TF.argument _version
+        [ TF.attribute _location
+        , TF.attribute _name
+        , TF.attribute _type'
+        , TF.attribute _version
         ]
 
-instance HasLocation ImageDataSource Text where
+instance HasLocation (ImageDataSource s) Text where
+    type HasLocationThread (ImageDataSource s) Text = s
+
     location =
-        lens (_location :: ImageDataSource -> TF.Argument "location" Text)
-             (\s a -> s { _location = a } :: ImageDataSource)
+        lens (_location :: ImageDataSource s -> TF.Attribute s "location" Text)
+             (\s a -> s { _location = a } :: ImageDataSource s)
 
-instance HasName ImageDataSource Text where
+instance HasName (ImageDataSource s) Text where
+    type HasNameThread (ImageDataSource s) Text = s
+
     name =
-        lens (_name :: ImageDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ImageDataSource)
+        lens (_name :: ImageDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ImageDataSource s)
 
-instance HasType' ImageDataSource Text where
+instance HasType' (ImageDataSource s) Text where
+    type HasType'Thread (ImageDataSource s) Text = s
+
     type' =
-        lens (_type' :: ImageDataSource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: ImageDataSource)
+        lens (_type' :: ImageDataSource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: ImageDataSource s)
 
-instance HasVersion ImageDataSource Text where
+instance HasVersion (ImageDataSource s) Text where
+    type HasVersionThread (ImageDataSource s) Text = s
+
     version =
-        lens (_version :: ImageDataSource -> TF.Argument "version" Text)
-             (\s a -> s { _version = a } :: ImageDataSource)
+        lens (_version :: ImageDataSource s -> TF.Attribute s "version" Text)
+             (\s a -> s { _version = a } :: ImageDataSource s)
 
-instance HasComputedId ImageDataSource Text where
+instance HasComputedId (ImageDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-imageDataSource :: TF.DataSource TF.ProfitBricks ImageDataSource
+imageDataSource :: TF.DataSource TF.ProfitBricks (ImageDataSource s)
 imageDataSource =
     TF.newDataSource "profitbricks_image" $
         ImageDataSource {
-            _location = TF.Nil
+              _location = TF.Nil
             , _name = TF.Nil
             , _type' = TF.Nil
             , _version = TF.Nil
@@ -180,38 +194,42 @@ imageDataSource =
 The locations data source can be used to search for and return an existing
 location which can then be used elsewhere in the configuration.
 -}
-data LocationDataSource = LocationDataSource {
-      _feature :: !(TF.Argument "feature" Text)
+data LocationDataSource s = LocationDataSource {
+      _feature :: !(TF.Attribute s "feature" Text)
     {- ^ (Optional) A desired feature that the location must be able to provide. -}
-    , _name    :: !(TF.Argument "name" Text)
+    , _name    :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Name or part of the location name to search for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL LocationDataSource where
+instance TF.ToHCL (LocationDataSource s) where
     toHCL LocationDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _feature
-        , TF.argument _name
+        [ TF.attribute _feature
+        , TF.attribute _name
         ]
 
-instance HasFeature LocationDataSource Text where
+instance HasFeature (LocationDataSource s) Text where
+    type HasFeatureThread (LocationDataSource s) Text = s
+
     feature =
-        lens (_feature :: LocationDataSource -> TF.Argument "feature" Text)
-             (\s a -> s { _feature = a } :: LocationDataSource)
+        lens (_feature :: LocationDataSource s -> TF.Attribute s "feature" Text)
+             (\s a -> s { _feature = a } :: LocationDataSource s)
 
-instance HasName LocationDataSource Text where
+instance HasName (LocationDataSource s) Text where
+    type HasNameThread (LocationDataSource s) Text = s
+
     name =
-        lens (_name :: LocationDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: LocationDataSource)
+        lens (_name :: LocationDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: LocationDataSource s)
 
-instance HasComputedId LocationDataSource Text where
+instance HasComputedId (LocationDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-locationDataSource :: TF.DataSource TF.ProfitBricks LocationDataSource
+locationDataSource :: TF.DataSource TF.ProfitBricks (LocationDataSource s)
 locationDataSource =
     TF.newDataSource "profitbricks_location" $
         LocationDataSource {
-            _feature = TF.Nil
+              _feature = TF.Nil
             , _name = TF.Nil
             }
 
@@ -226,38 +244,42 @@ results in multiple matches, an error will be generated. When this happens,
 please refine your search string so that it is specific enough to return
 only one result.
 -}
-data ResourceDataSource = ResourceDataSource {
-      _resource_id   :: !(TF.Argument "resource_id" Text)
+data ResourceDataSource s = ResourceDataSource {
+      _resource_id   :: !(TF.Attribute s "resource_id" Text)
     {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
-    , _resource_type :: !(TF.Argument "resource_type" Text)
+    , _resource_type :: !(TF.Attribute s "resource_type" Text)
     {- ^ (Optional) The specific type of resources to retrieve information about. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ResourceDataSource where
+instance TF.ToHCL (ResourceDataSource s) where
     toHCL ResourceDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _resource_id
-        , TF.argument _resource_type
+        [ TF.attribute _resource_id
+        , TF.attribute _resource_type
         ]
 
-instance HasResourceId ResourceDataSource Text where
+instance HasResourceId (ResourceDataSource s) Text where
+    type HasResourceIdThread (ResourceDataSource s) Text = s
+
     resourceId =
-        lens (_resource_id :: ResourceDataSource -> TF.Argument "resource_id" Text)
-             (\s a -> s { _resource_id = a } :: ResourceDataSource)
+        lens (_resource_id :: ResourceDataSource s -> TF.Attribute s "resource_id" Text)
+             (\s a -> s { _resource_id = a } :: ResourceDataSource s)
 
-instance HasResourceType ResourceDataSource Text where
+instance HasResourceType (ResourceDataSource s) Text where
+    type HasResourceTypeThread (ResourceDataSource s) Text = s
+
     resourceType =
-        lens (_resource_type :: ResourceDataSource -> TF.Argument "resource_type" Text)
-             (\s a -> s { _resource_type = a } :: ResourceDataSource)
+        lens (_resource_type :: ResourceDataSource s -> TF.Attribute s "resource_type" Text)
+             (\s a -> s { _resource_type = a } :: ResourceDataSource s)
 
-instance HasComputedId ResourceDataSource Text where
+instance HasComputedId (ResourceDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-resourceDataSource :: TF.DataSource TF.ProfitBricks ResourceDataSource
+resourceDataSource :: TF.DataSource TF.ProfitBricks (ResourceDataSource s)
 resourceDataSource =
     TF.newDataSource "profitbricks_resource" $
         ResourceDataSource {
-            _resource_id = TF.Nil
+              _resource_id = TF.Nil
             , _resource_type = TF.Nil
             }
 
@@ -266,100 +288,143 @@ resourceDataSource =
 The snapshots data source can be used to search for and return an existing
 snapshot which can then be used to provision a server.
 -}
-data SnapshotDataSource = SnapshotDataSource {
-      _location :: !(TF.Argument "location" Text)
+data SnapshotDataSource s = SnapshotDataSource {
+      _location :: !(TF.Attribute s "location" Text)
     {- ^ (Optional) Id of the existing snapshot's location. -}
-    , _name     :: !(TF.Argument "name" Text)
+    , _name     :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
-    , _size     :: !(TF.Argument "size" Text)
+    , _size     :: !(TF.Attribute s "size" Text)
     {- ^ (Optional) The size of the snapshot to look for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SnapshotDataSource where
+instance TF.ToHCL (SnapshotDataSource s) where
     toHCL SnapshotDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _location
-        , TF.argument _name
-        , TF.argument _size
+        [ TF.attribute _location
+        , TF.attribute _name
+        , TF.attribute _size
         ]
 
-instance HasLocation SnapshotDataSource Text where
+instance HasLocation (SnapshotDataSource s) Text where
+    type HasLocationThread (SnapshotDataSource s) Text = s
+
     location =
-        lens (_location :: SnapshotDataSource -> TF.Argument "location" Text)
-             (\s a -> s { _location = a } :: SnapshotDataSource)
+        lens (_location :: SnapshotDataSource s -> TF.Attribute s "location" Text)
+             (\s a -> s { _location = a } :: SnapshotDataSource s)
 
-instance HasName SnapshotDataSource Text where
+instance HasName (SnapshotDataSource s) Text where
+    type HasNameThread (SnapshotDataSource s) Text = s
+
     name =
-        lens (_name :: SnapshotDataSource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: SnapshotDataSource)
+        lens (_name :: SnapshotDataSource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: SnapshotDataSource s)
 
-instance HasSize SnapshotDataSource Text where
+instance HasSize (SnapshotDataSource s) Text where
+    type HasSizeThread (SnapshotDataSource s) Text = s
+
     size =
-        lens (_size :: SnapshotDataSource -> TF.Argument "size" Text)
-             (\s a -> s { _size = a } :: SnapshotDataSource)
+        lens (_size :: SnapshotDataSource s -> TF.Attribute s "size" Text)
+             (\s a -> s { _size = a } :: SnapshotDataSource s)
 
-instance HasComputedId SnapshotDataSource Text where
+instance HasComputedId (SnapshotDataSource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-snapshotDataSource :: TF.DataSource TF.ProfitBricks SnapshotDataSource
+snapshotDataSource :: TF.DataSource TF.ProfitBricks (SnapshotDataSource s)
 snapshotDataSource =
     TF.newDataSource "profitbricks_snapshot" $
         SnapshotDataSource {
-            _location = TF.Nil
+              _location = TF.Nil
             , _name = TF.Nil
             , _size = TF.Nil
             }
 
-class HasFeature s a | s -> a where
-    feature :: Lens' s (TF.Argument "feature" a)
+class HasFeature a b | a -> b where
+    type HasFeatureThread a b :: *
 
-instance HasFeature s a => HasFeature (TF.DataSource p s) a where
+    feature :: Lens' a (TF.Attribute (HasFeatureThread a b) "feature" b)
+
+instance HasFeature a b => HasFeature (TF.DataSource p a) b where
+    type HasFeatureThread (TF.DataSource p a) b =
+         HasFeatureThread a b
+
     feature = TF.configuration . feature
 
-class HasLocation s a | s -> a where
-    location :: Lens' s (TF.Argument "location" a)
+class HasLocation a b | a -> b where
+    type HasLocationThread a b :: *
 
-instance HasLocation s a => HasLocation (TF.DataSource p s) a where
+    location :: Lens' a (TF.Attribute (HasLocationThread a b) "location" b)
+
+instance HasLocation a b => HasLocation (TF.DataSource p a) b where
+    type HasLocationThread (TF.DataSource p a) b =
+         HasLocationThread a b
+
     location = TF.configuration . location
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.DataSource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.DataSource p a) b where
+    type HasNameThread (TF.DataSource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasResourceId s a | s -> a where
-    resourceId :: Lens' s (TF.Argument "resource_id" a)
+class HasResourceId a b | a -> b where
+    type HasResourceIdThread a b :: *
 
-instance HasResourceId s a => HasResourceId (TF.DataSource p s) a where
+    resourceId :: Lens' a (TF.Attribute (HasResourceIdThread a b) "resource_id" b)
+
+instance HasResourceId a b => HasResourceId (TF.DataSource p a) b where
+    type HasResourceIdThread (TF.DataSource p a) b =
+         HasResourceIdThread a b
+
     resourceId = TF.configuration . resourceId
 
-class HasResourceType s a | s -> a where
-    resourceType :: Lens' s (TF.Argument "resource_type" a)
+class HasResourceType a b | a -> b where
+    type HasResourceTypeThread a b :: *
 
-instance HasResourceType s a => HasResourceType (TF.DataSource p s) a where
+    resourceType :: Lens' a (TF.Attribute (HasResourceTypeThread a b) "resource_type" b)
+
+instance HasResourceType a b => HasResourceType (TF.DataSource p a) b where
+    type HasResourceTypeThread (TF.DataSource p a) b =
+         HasResourceTypeThread a b
+
     resourceType = TF.configuration . resourceType
 
-class HasSize s a | s -> a where
-    size :: Lens' s (TF.Argument "size" a)
+class HasSize a b | a -> b where
+    type HasSizeThread a b :: *
 
-instance HasSize s a => HasSize (TF.DataSource p s) a where
+    size :: Lens' a (TF.Attribute (HasSizeThread a b) "size" b)
+
+instance HasSize a b => HasSize (TF.DataSource p a) b where
+    type HasSizeThread (TF.DataSource p a) b =
+         HasSizeThread a b
+
     size = TF.configuration . size
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.DataSource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.DataSource p a) b where
+    type HasType'Thread (TF.DataSource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasVersion s a | s -> a where
-    version :: Lens' s (TF.Argument "version" a)
+class HasVersion a b | a -> b where
+    type HasVersionThread a b :: *
 
-instance HasVersion s a => HasVersion (TF.DataSource p s) a where
+    version :: Lens' a (TF.Attribute (HasVersionThread a b) "version" b)
+
+instance HasVersion a b => HasVersion (TF.DataSource p a) b where
+    type HasVersionThread (TF.DataSource p a) b =
+         HasVersionThread a b
+
     version = TF.configuration . version
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.DataSource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

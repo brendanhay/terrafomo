@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -84,12 +85,13 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 import qualified Terrafomo.UltraDNS.Provider as TF
 import qualified Terrafomo.UltraDNS.Types    as TF
 
@@ -97,90 +99,106 @@ import qualified Terrafomo.UltraDNS.Types    as TF
 
 Provides an UltraDNS Directional Controller pool resource.
 -}
-data DirpoolResource = DirpoolResource {
-      _conflict_resolve :: !(TF.Argument "conflict_resolve" Text)
+data DirpoolResource s = DirpoolResource {
+      _conflict_resolve :: !(TF.Attribute s "conflict_resolve" Text)
     {- ^ (Optional) String. Valid: @"GEO"@ or @"IP"@ . Default: @"GEO"@ . -}
-    , _description      :: !(TF.Argument "description" Text)
+    , _description      :: !(TF.Attribute s "description" Text)
     {- ^ (Required) Description of the Traffic Controller pool. Valid values are strings less than 256 characters. -}
-    , _name             :: !(TF.Argument "name" Text)
+    , _name             :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record -}
-    , _no_response      :: !(TF.Argument "no_response" Text)
+    , _no_response      :: !(TF.Attribute s "no_response" Text)
     {- ^ (Optional) a single Record Data block, without any @host@ attribute. Record Data documented below. -}
-    , _rdata            :: !(TF.Argument "rdata" Text)
+    , _rdata            :: !(TF.Attribute s "rdata" Text)
     {- ^ (Required) a list of Record Data blocks, one for each member in the pool. Record Data documented below. -}
-    , _ttl              :: !(TF.Argument "ttl" Text)
+    , _ttl              :: !(TF.Attribute s "ttl" Text)
     {- ^ (Optional) The TTL of the record. Default: @3600@ . -}
-    , _type'            :: !(TF.Argument "type" Text)
+    , _type'            :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The Record Type of the record -}
-    , _zone             :: !(TF.Argument "zone" Text)
+    , _zone             :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL DirpoolResource where
+instance TF.ToHCL (DirpoolResource s) where
     toHCL DirpoolResource{..} = TF.block $ catMaybes
-        [ TF.argument _conflict_resolve
-        , TF.argument _description
-        , TF.argument _name
-        , TF.argument _no_response
-        , TF.argument _rdata
-        , TF.argument _ttl
-        , TF.argument _type'
-        , TF.argument _zone
+        [ TF.attribute _conflict_resolve
+        , TF.attribute _description
+        , TF.attribute _name
+        , TF.attribute _no_response
+        , TF.attribute _rdata
+        , TF.attribute _ttl
+        , TF.attribute _type'
+        , TF.attribute _zone
         ]
 
-instance HasConflictResolve DirpoolResource Text where
+instance HasConflictResolve (DirpoolResource s) Text where
+    type HasConflictResolveThread (DirpoolResource s) Text = s
+
     conflictResolve =
-        lens (_conflict_resolve :: DirpoolResource -> TF.Argument "conflict_resolve" Text)
-             (\s a -> s { _conflict_resolve = a } :: DirpoolResource)
+        lens (_conflict_resolve :: DirpoolResource s -> TF.Attribute s "conflict_resolve" Text)
+             (\s a -> s { _conflict_resolve = a } :: DirpoolResource s)
 
-instance HasDescription DirpoolResource Text where
+instance HasDescription (DirpoolResource s) Text where
+    type HasDescriptionThread (DirpoolResource s) Text = s
+
     description =
-        lens (_description :: DirpoolResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: DirpoolResource)
+        lens (_description :: DirpoolResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: DirpoolResource s)
 
-instance HasName DirpoolResource Text where
+instance HasName (DirpoolResource s) Text where
+    type HasNameThread (DirpoolResource s) Text = s
+
     name =
-        lens (_name :: DirpoolResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: DirpoolResource)
+        lens (_name :: DirpoolResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: DirpoolResource s)
 
-instance HasNoResponse DirpoolResource Text where
+instance HasNoResponse (DirpoolResource s) Text where
+    type HasNoResponseThread (DirpoolResource s) Text = s
+
     noResponse =
-        lens (_no_response :: DirpoolResource -> TF.Argument "no_response" Text)
-             (\s a -> s { _no_response = a } :: DirpoolResource)
+        lens (_no_response :: DirpoolResource s -> TF.Attribute s "no_response" Text)
+             (\s a -> s { _no_response = a } :: DirpoolResource s)
 
-instance HasRdata DirpoolResource Text where
+instance HasRdata (DirpoolResource s) Text where
+    type HasRdataThread (DirpoolResource s) Text = s
+
     rdata =
-        lens (_rdata :: DirpoolResource -> TF.Argument "rdata" Text)
-             (\s a -> s { _rdata = a } :: DirpoolResource)
+        lens (_rdata :: DirpoolResource s -> TF.Attribute s "rdata" Text)
+             (\s a -> s { _rdata = a } :: DirpoolResource s)
 
-instance HasTtl DirpoolResource Text where
+instance HasTtl (DirpoolResource s) Text where
+    type HasTtlThread (DirpoolResource s) Text = s
+
     ttl =
-        lens (_ttl :: DirpoolResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: DirpoolResource)
+        lens (_ttl :: DirpoolResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: DirpoolResource s)
 
-instance HasType' DirpoolResource Text where
+instance HasType' (DirpoolResource s) Text where
+    type HasType'Thread (DirpoolResource s) Text = s
+
     type' =
-        lens (_type' :: DirpoolResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: DirpoolResource)
+        lens (_type' :: DirpoolResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: DirpoolResource s)
 
-instance HasZone DirpoolResource Text where
+instance HasZone (DirpoolResource s) Text where
+    type HasZoneThread (DirpoolResource s) Text = s
+
     zone =
-        lens (_zone :: DirpoolResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: DirpoolResource)
+        lens (_zone :: DirpoolResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: DirpoolResource s)
 
-instance HasComputedHostname DirpoolResource Text where
+instance HasComputedHostname (DirpoolResource s) Text where
     computedHostname =
-        to (\_  -> TF.Compute "hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
-instance HasComputedId DirpoolResource Text where
+instance HasComputedId (DirpoolResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-dirpoolResource :: TF.Resource TF.UltraDNS DirpoolResource
+dirpoolResource :: TF.Resource TF.UltraDNS (DirpoolResource s)
 dirpoolResource =
     TF.newResource "ultradns_dirpool" $
         DirpoolResource {
-            _conflict_resolve = TF.Nil
+              _conflict_resolve = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
             , _no_response = TF.Nil
@@ -194,74 +212,88 @@ dirpoolResource =
 
 Provides an UltraDNS HTTP probe
 -}
-data ProbeHttpResource = ProbeHttpResource {
-      _agents      :: !(TF.Argument "agents" Text)
+data ProbeHttpResource s = ProbeHttpResource {
+      _agents      :: !(TF.Attribute s "agents" Text)
     {- ^ (Required) List of locations that will be used for probing. One or more values must be specified. Valid values are @"NEW_YORK"@ , @"PALO_ALTO"@ , @"DALLAS"@ & @"AMSTERDAM"@ . -}
-    , _http_probe  :: !(TF.Argument "http_probe" Text)
+    , _http_probe  :: !(TF.Attribute s "http_probe" Text)
     {- ^ (Required) an HTTP Probe block. -}
-    , _interval    :: !(TF.Argument "interval" Text)
+    , _interval    :: !(TF.Attribute s "interval" Text)
     {- ^ (Optional) Length of time between probes in minutes. Valid values are @"HALF_MINUTE"@ , @"ONE_MINUTE"@ , @"TWO_MINUTES"@ , @"FIVE_MINUTES"@ , @"TEN_MINUTES"@ & @"FIFTEEN_MINUTE"@ . Default: @"FIVE_MINUTES"@ . -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the pool to probe. -}
-    , _pool_record :: !(TF.Argument "pool_record" Text)
+    , _pool_record :: !(TF.Attribute s "pool_record" Text)
     {- ^ - (optional) IP address or domain. If provided, a record-level probe is created, otherwise a pool-level probe is created. -}
-    , _threshold   :: !(TF.Argument "threshold" Text)
+    , _threshold   :: !(TF.Attribute s "threshold" Text)
     {- ^ (Required) Number of agents that must agree for a probe state to be changed. -}
-    , _zone        :: !(TF.Argument "zone" Text)
+    , _zone        :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ProbeHttpResource where
+instance TF.ToHCL (ProbeHttpResource s) where
     toHCL ProbeHttpResource{..} = TF.block $ catMaybes
-        [ TF.argument _agents
-        , TF.argument _http_probe
-        , TF.argument _interval
-        , TF.argument _name
-        , TF.argument _pool_record
-        , TF.argument _threshold
-        , TF.argument _zone
+        [ TF.attribute _agents
+        , TF.attribute _http_probe
+        , TF.attribute _interval
+        , TF.attribute _name
+        , TF.attribute _pool_record
+        , TF.attribute _threshold
+        , TF.attribute _zone
         ]
 
-instance HasAgents ProbeHttpResource Text where
+instance HasAgents (ProbeHttpResource s) Text where
+    type HasAgentsThread (ProbeHttpResource s) Text = s
+
     agents =
-        lens (_agents :: ProbeHttpResource -> TF.Argument "agents" Text)
-             (\s a -> s { _agents = a } :: ProbeHttpResource)
+        lens (_agents :: ProbeHttpResource s -> TF.Attribute s "agents" Text)
+             (\s a -> s { _agents = a } :: ProbeHttpResource s)
 
-instance HasHttpProbe ProbeHttpResource Text where
+instance HasHttpProbe (ProbeHttpResource s) Text where
+    type HasHttpProbeThread (ProbeHttpResource s) Text = s
+
     httpProbe =
-        lens (_http_probe :: ProbeHttpResource -> TF.Argument "http_probe" Text)
-             (\s a -> s { _http_probe = a } :: ProbeHttpResource)
+        lens (_http_probe :: ProbeHttpResource s -> TF.Attribute s "http_probe" Text)
+             (\s a -> s { _http_probe = a } :: ProbeHttpResource s)
 
-instance HasInterval ProbeHttpResource Text where
+instance HasInterval (ProbeHttpResource s) Text where
+    type HasIntervalThread (ProbeHttpResource s) Text = s
+
     interval =
-        lens (_interval :: ProbeHttpResource -> TF.Argument "interval" Text)
-             (\s a -> s { _interval = a } :: ProbeHttpResource)
+        lens (_interval :: ProbeHttpResource s -> TF.Attribute s "interval" Text)
+             (\s a -> s { _interval = a } :: ProbeHttpResource s)
 
-instance HasName ProbeHttpResource Text where
+instance HasName (ProbeHttpResource s) Text where
+    type HasNameThread (ProbeHttpResource s) Text = s
+
     name =
-        lens (_name :: ProbeHttpResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ProbeHttpResource)
+        lens (_name :: ProbeHttpResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ProbeHttpResource s)
 
-instance HasPoolRecord ProbeHttpResource Text where
+instance HasPoolRecord (ProbeHttpResource s) Text where
+    type HasPoolRecordThread (ProbeHttpResource s) Text = s
+
     poolRecord =
-        lens (_pool_record :: ProbeHttpResource -> TF.Argument "pool_record" Text)
-             (\s a -> s { _pool_record = a } :: ProbeHttpResource)
+        lens (_pool_record :: ProbeHttpResource s -> TF.Attribute s "pool_record" Text)
+             (\s a -> s { _pool_record = a } :: ProbeHttpResource s)
 
-instance HasThreshold ProbeHttpResource Text where
+instance HasThreshold (ProbeHttpResource s) Text where
+    type HasThresholdThread (ProbeHttpResource s) Text = s
+
     threshold =
-        lens (_threshold :: ProbeHttpResource -> TF.Argument "threshold" Text)
-             (\s a -> s { _threshold = a } :: ProbeHttpResource)
+        lens (_threshold :: ProbeHttpResource s -> TF.Attribute s "threshold" Text)
+             (\s a -> s { _threshold = a } :: ProbeHttpResource s)
 
-instance HasZone ProbeHttpResource Text where
+instance HasZone (ProbeHttpResource s) Text where
+    type HasZoneThread (ProbeHttpResource s) Text = s
+
     zone =
-        lens (_zone :: ProbeHttpResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: ProbeHttpResource)
+        lens (_zone :: ProbeHttpResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: ProbeHttpResource s)
 
-probeHttpResource :: TF.Resource TF.UltraDNS ProbeHttpResource
+probeHttpResource :: TF.Resource TF.UltraDNS (ProbeHttpResource s)
 probeHttpResource =
     TF.newResource "ultradns_probe_http" $
         ProbeHttpResource {
-            _agents = TF.Nil
+              _agents = TF.Nil
             , _http_probe = TF.Nil
             , _interval = TF.Nil
             , _name = TF.Nil
@@ -274,74 +306,88 @@ probeHttpResource =
 
 Provides an UltraDNS ping probe
 -}
-data ProbePingResource = ProbePingResource {
-      _agents      :: !(TF.Argument "agents" Text)
+data ProbePingResource s = ProbePingResource {
+      _agents      :: !(TF.Attribute s "agents" Text)
     {- ^ (Required) List of locations that will be used for probing. One or more values must be specified. Valid values are @"NEW_YORK"@ , @"PALO_ALTO"@ , @"DALLAS"@ & @"AMSTERDAM"@ . -}
-    , _interval    :: !(TF.Argument "interval" Text)
+    , _interval    :: !(TF.Attribute s "interval" Text)
     {- ^ (Optional) Length of time between probes in minutes. Valid values are @"HALF_MINUTE"@ , @"ONE_MINUTE"@ , @"TWO_MINUTES"@ , @"FIVE_MINUTES"@ , @"TEN_MINUTES"@ & @"FIFTEEN_MINUTE"@ . Default: @"FIVE_MINUTES"@ . -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the pool to probe. -}
-    , _ping_probe  :: !(TF.Argument "ping_probe" Text)
+    , _ping_probe  :: !(TF.Attribute s "ping_probe" Text)
     {- ^ (Required) a Ping Probe block. -}
-    , _pool_record :: !(TF.Argument "pool_record" Text)
+    , _pool_record :: !(TF.Attribute s "pool_record" Text)
     {- ^ - (optional) IP address or domain. If provided, a record-level probe is created, otherwise a pool-level probe is created. -}
-    , _threshold   :: !(TF.Argument "threshold" Text)
+    , _threshold   :: !(TF.Attribute s "threshold" Text)
     {- ^ (Required) Number of agents that must agree for a probe state to be changed. -}
-    , _zone        :: !(TF.Argument "zone" Text)
+    , _zone        :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ProbePingResource where
+instance TF.ToHCL (ProbePingResource s) where
     toHCL ProbePingResource{..} = TF.block $ catMaybes
-        [ TF.argument _agents
-        , TF.argument _interval
-        , TF.argument _name
-        , TF.argument _ping_probe
-        , TF.argument _pool_record
-        , TF.argument _threshold
-        , TF.argument _zone
+        [ TF.attribute _agents
+        , TF.attribute _interval
+        , TF.attribute _name
+        , TF.attribute _ping_probe
+        , TF.attribute _pool_record
+        , TF.attribute _threshold
+        , TF.attribute _zone
         ]
 
-instance HasAgents ProbePingResource Text where
+instance HasAgents (ProbePingResource s) Text where
+    type HasAgentsThread (ProbePingResource s) Text = s
+
     agents =
-        lens (_agents :: ProbePingResource -> TF.Argument "agents" Text)
-             (\s a -> s { _agents = a } :: ProbePingResource)
+        lens (_agents :: ProbePingResource s -> TF.Attribute s "agents" Text)
+             (\s a -> s { _agents = a } :: ProbePingResource s)
 
-instance HasInterval ProbePingResource Text where
+instance HasInterval (ProbePingResource s) Text where
+    type HasIntervalThread (ProbePingResource s) Text = s
+
     interval =
-        lens (_interval :: ProbePingResource -> TF.Argument "interval" Text)
-             (\s a -> s { _interval = a } :: ProbePingResource)
+        lens (_interval :: ProbePingResource s -> TF.Attribute s "interval" Text)
+             (\s a -> s { _interval = a } :: ProbePingResource s)
 
-instance HasName ProbePingResource Text where
+instance HasName (ProbePingResource s) Text where
+    type HasNameThread (ProbePingResource s) Text = s
+
     name =
-        lens (_name :: ProbePingResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: ProbePingResource)
+        lens (_name :: ProbePingResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: ProbePingResource s)
 
-instance HasPingProbe ProbePingResource Text where
+instance HasPingProbe (ProbePingResource s) Text where
+    type HasPingProbeThread (ProbePingResource s) Text = s
+
     pingProbe =
-        lens (_ping_probe :: ProbePingResource -> TF.Argument "ping_probe" Text)
-             (\s a -> s { _ping_probe = a } :: ProbePingResource)
+        lens (_ping_probe :: ProbePingResource s -> TF.Attribute s "ping_probe" Text)
+             (\s a -> s { _ping_probe = a } :: ProbePingResource s)
 
-instance HasPoolRecord ProbePingResource Text where
+instance HasPoolRecord (ProbePingResource s) Text where
+    type HasPoolRecordThread (ProbePingResource s) Text = s
+
     poolRecord =
-        lens (_pool_record :: ProbePingResource -> TF.Argument "pool_record" Text)
-             (\s a -> s { _pool_record = a } :: ProbePingResource)
+        lens (_pool_record :: ProbePingResource s -> TF.Attribute s "pool_record" Text)
+             (\s a -> s { _pool_record = a } :: ProbePingResource s)
 
-instance HasThreshold ProbePingResource Text where
+instance HasThreshold (ProbePingResource s) Text where
+    type HasThresholdThread (ProbePingResource s) Text = s
+
     threshold =
-        lens (_threshold :: ProbePingResource -> TF.Argument "threshold" Text)
-             (\s a -> s { _threshold = a } :: ProbePingResource)
+        lens (_threshold :: ProbePingResource s -> TF.Attribute s "threshold" Text)
+             (\s a -> s { _threshold = a } :: ProbePingResource s)
 
-instance HasZone ProbePingResource Text where
+instance HasZone (ProbePingResource s) Text where
+    type HasZoneThread (ProbePingResource s) Text = s
+
     zone =
-        lens (_zone :: ProbePingResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: ProbePingResource)
+        lens (_zone :: ProbePingResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: ProbePingResource s)
 
-probePingResource :: TF.Resource TF.UltraDNS ProbePingResource
+probePingResource :: TF.Resource TF.UltraDNS (ProbePingResource s)
 probePingResource =
     TF.newResource "ultradns_probe_ping" $
         ProbePingResource {
-            _agents = TF.Nil
+              _agents = TF.Nil
             , _interval = TF.Nil
             , _name = TF.Nil
             , _ping_probe = TF.Nil
@@ -356,74 +402,86 @@ Provides an UltraDNS Resource Distribution (RD) pool resource, which are
 used to define rules for returning multiple A or AAAA records for a given
 owner name. Ordering can be FIXED, RANDOM or ROUND_ROBIN.
 -}
-data RdpoolResource = RdpoolResource {
-      _description :: !(TF.Argument "description" Text)
+data RdpoolResource s = RdpoolResource {
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Description of the Resource Distribution pool. Valid values are strings less than 256 characters. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record -}
-    , _order       :: !(TF.Argument "order" Text)
+    , _order       :: !(TF.Attribute s "order" Text)
     {- ^ (Optional) Ordering rule, one of FIXED, RANDOM or ROUND_ROBIN. Default: 'ROUND_ROBIN'. -}
-    , _rdata       :: !(TF.Argument "rdata" Text)
+    , _rdata       :: !(TF.Attribute s "rdata" Text)
     {- ^ (Required) list ip addresses. -}
-    , _ttl         :: !(TF.Argument "ttl" Text)
+    , _ttl         :: !(TF.Attribute s "ttl" Text)
     {- ^ (Optional) The TTL of the pool in seconds. Default: @3600@ . -}
-    , _zone        :: !(TF.Argument "zone" Text)
+    , _zone        :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RdpoolResource where
+instance TF.ToHCL (RdpoolResource s) where
     toHCL RdpoolResource{..} = TF.block $ catMaybes
-        [ TF.argument _description
-        , TF.argument _name
-        , TF.argument _order
-        , TF.argument _rdata
-        , TF.argument _ttl
-        , TF.argument _zone
+        [ TF.attribute _description
+        , TF.attribute _name
+        , TF.attribute _order
+        , TF.attribute _rdata
+        , TF.attribute _ttl
+        , TF.attribute _zone
         ]
 
-instance HasDescription RdpoolResource Text where
+instance HasDescription (RdpoolResource s) Text where
+    type HasDescriptionThread (RdpoolResource s) Text = s
+
     description =
-        lens (_description :: RdpoolResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: RdpoolResource)
+        lens (_description :: RdpoolResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: RdpoolResource s)
 
-instance HasName RdpoolResource Text where
+instance HasName (RdpoolResource s) Text where
+    type HasNameThread (RdpoolResource s) Text = s
+
     name =
-        lens (_name :: RdpoolResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RdpoolResource)
+        lens (_name :: RdpoolResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RdpoolResource s)
 
-instance HasOrder RdpoolResource Text where
+instance HasOrder (RdpoolResource s) Text where
+    type HasOrderThread (RdpoolResource s) Text = s
+
     order =
-        lens (_order :: RdpoolResource -> TF.Argument "order" Text)
-             (\s a -> s { _order = a } :: RdpoolResource)
+        lens (_order :: RdpoolResource s -> TF.Attribute s "order" Text)
+             (\s a -> s { _order = a } :: RdpoolResource s)
 
-instance HasRdata RdpoolResource Text where
+instance HasRdata (RdpoolResource s) Text where
+    type HasRdataThread (RdpoolResource s) Text = s
+
     rdata =
-        lens (_rdata :: RdpoolResource -> TF.Argument "rdata" Text)
-             (\s a -> s { _rdata = a } :: RdpoolResource)
+        lens (_rdata :: RdpoolResource s -> TF.Attribute s "rdata" Text)
+             (\s a -> s { _rdata = a } :: RdpoolResource s)
 
-instance HasTtl RdpoolResource Text where
+instance HasTtl (RdpoolResource s) Text where
+    type HasTtlThread (RdpoolResource s) Text = s
+
     ttl =
-        lens (_ttl :: RdpoolResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: RdpoolResource)
+        lens (_ttl :: RdpoolResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: RdpoolResource s)
 
-instance HasZone RdpoolResource Text where
+instance HasZone (RdpoolResource s) Text where
+    type HasZoneThread (RdpoolResource s) Text = s
+
     zone =
-        lens (_zone :: RdpoolResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: RdpoolResource)
+        lens (_zone :: RdpoolResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: RdpoolResource s)
 
-instance HasComputedHostname RdpoolResource Text where
+instance HasComputedHostname (RdpoolResource s) Text where
     computedHostname =
-        to (\_  -> TF.Compute "hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
-instance HasComputedId RdpoolResource Text where
+instance HasComputedId (RdpoolResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-rdpoolResource :: TF.Resource TF.UltraDNS RdpoolResource
+rdpoolResource :: TF.Resource TF.UltraDNS (RdpoolResource s)
 rdpoolResource =
     TF.newResource "ultradns_rdpool" $
         RdpoolResource {
-            _description = TF.Nil
+              _description = TF.Nil
             , _name = TF.Nil
             , _order = TF.Nil
             , _rdata = TF.Nil
@@ -435,86 +493,96 @@ rdpoolResource =
 
 Provides an UltraDNS record resource.
 -}
-data RecordResource = RecordResource {
-      _name  :: !(TF.Argument "name" Text)
+data RecordResource s = RecordResource {
+      _name  :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record -}
-    , _rdata :: !(TF.Argument "rdata" Text)
+    , _rdata :: !(TF.Attribute s "rdata" Text)
     {- ^ (Required) An array containing the values of the record -}
-    , _ttl   :: !(TF.Argument "ttl" Text)
+    , _ttl   :: !(TF.Attribute s "ttl" Text)
     {- ^ (Optional) The TTL of the record -}
-    , _type' :: !(TF.Argument "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of the record -}
-    , _zone  :: !(TF.Argument "zone" Text)
+    , _zone  :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RecordResource where
+instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _rdata
-        , TF.argument _ttl
-        , TF.argument _type'
-        , TF.argument _zone
+        [ TF.attribute _name
+        , TF.attribute _rdata
+        , TF.attribute _ttl
+        , TF.attribute _type'
+        , TF.attribute _zone
         ]
 
-instance HasName RecordResource Text where
+instance HasName (RecordResource s) Text where
+    type HasNameThread (RecordResource s) Text = s
+
     name =
-        lens (_name :: RecordResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RecordResource)
+        lens (_name :: RecordResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RecordResource s)
 
-instance HasRdata RecordResource Text where
+instance HasRdata (RecordResource s) Text where
+    type HasRdataThread (RecordResource s) Text = s
+
     rdata =
-        lens (_rdata :: RecordResource -> TF.Argument "rdata" Text)
-             (\s a -> s { _rdata = a } :: RecordResource)
+        lens (_rdata :: RecordResource s -> TF.Attribute s "rdata" Text)
+             (\s a -> s { _rdata = a } :: RecordResource s)
 
-instance HasTtl RecordResource Text where
+instance HasTtl (RecordResource s) Text where
+    type HasTtlThread (RecordResource s) Text = s
+
     ttl =
-        lens (_ttl :: RecordResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: RecordResource)
+        lens (_ttl :: RecordResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance HasType' RecordResource Text where
+instance HasType' (RecordResource s) Text where
+    type HasType'Thread (RecordResource s) Text = s
+
     type' =
-        lens (_type' :: RecordResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: RecordResource)
+        lens (_type' :: RecordResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
-instance HasZone RecordResource Text where
+instance HasZone (RecordResource s) Text where
+    type HasZoneThread (RecordResource s) Text = s
+
     zone =
-        lens (_zone :: RecordResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: RecordResource)
+        lens (_zone :: RecordResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: RecordResource s)
 
-instance HasComputedHostname RecordResource Text where
+instance HasComputedHostname (RecordResource s) Text where
     computedHostname =
-        to (\_  -> TF.Compute "hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
-instance HasComputedId RecordResource Text where
+instance HasComputedId (RecordResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-instance HasComputedName RecordResource Text where
+instance HasComputedName (RecordResource s) Text where
     computedName =
-        to (\_  -> TF.Compute "name")
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
-instance HasComputedRdata RecordResource Text where
+instance HasComputedRdata (RecordResource s) Text where
     computedRdata =
-        to (\_  -> TF.Compute "rdata")
+        to (\x -> TF.Computed (TF.referenceKey x) "rdata")
 
-instance HasComputedTtl RecordResource Text where
+instance HasComputedTtl (RecordResource s) Text where
     computedTtl =
-        to (\_  -> TF.Compute "ttl")
+        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
 
-instance HasComputedType' RecordResource Text where
+instance HasComputedType' (RecordResource s) Text where
     computedType' =
-        to (\_  -> TF.Compute "type")
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
-instance HasComputedZone RecordResource Text where
+instance HasComputedZone (RecordResource s) Text where
     computedZone =
-        to (\_  -> TF.Compute "zone")
+        to (\x -> TF.Computed (TF.referenceKey x) "zone")
 
-recordResource :: TF.Resource TF.UltraDNS RecordResource
+recordResource :: TF.Resource TF.UltraDNS (RecordResource s)
 recordResource =
     TF.newResource "ultradns_record" $
         RecordResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _rdata = TF.Nil
             , _ttl = TF.Nil
             , _type' = TF.Nil
@@ -525,106 +593,126 @@ recordResource =
 
 Provides an UltraDNS Traffic Controller pool resource.
 -}
-data TcpoolResource = TcpoolResource {
-      _act_on_probes :: !(TF.Argument "act_on_probes" Text)
+data TcpoolResource s = TcpoolResource {
+      _act_on_probes :: !(TF.Attribute s "act_on_probes" Text)
     {- ^ (Optional) Boolean to enable and disable pool records when probes are run. Default: @true@ . -}
-    , _backup_record_failover_delay :: !(TF.Argument "backup_record_failover_delay" Text)
+    , _backup_record_failover_delay :: !(TF.Attribute s "backup_record_failover_delay" Text)
     {- ^ (Optional) Time in minutes that Traffic Controller waits after detecting that the pool record has failed before activating primary records. Valid values are integers @0@ - @30@ . Default: @0@ . -}
-    , _backup_record_rdata :: !(TF.Argument "backup_record_rdata" Text)
+    , _backup_record_rdata :: !(TF.Attribute s "backup_record_rdata" Text)
     {- ^ (Optional) IPv4 address or CNAME for the backup record. Default: @nil@ . -}
-    , _description :: !(TF.Argument "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Required) Description of the Traffic Controller pool. Valid values are strings less than 256 characters. -}
-    , _max_to_lb :: !(TF.Argument "max_to_lb" Text)
+    , _max_to_lb :: !(TF.Attribute s "max_to_lb" Text)
     {- ^ (Optional) Determines the number of records to balance between. Valid values are integers @0@ - @len(rdata)@ . Default: @0@ . -}
-    , _name :: !(TF.Argument "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record -}
-    , _rdata :: !(TF.Argument "rdata" Text)
+    , _rdata :: !(TF.Attribute s "rdata" Text)
     {- ^ (Required) a list of rdata blocks, one for each member in the pool. Record Data documented below. -}
-    , _run_probes :: !(TF.Argument "run_probes" Text)
+    , _run_probes :: !(TF.Attribute s "run_probes" Text)
     {- ^ (Optional) Boolean to run probes for this pool. Default: @true@ . -}
-    , _ttl :: !(TF.Argument "ttl" Text)
+    , _ttl :: !(TF.Attribute s "ttl" Text)
     {- ^ (Optional) The TTL of the record. Default: @3600@ . -}
-    , _zone :: !(TF.Argument "zone" Text)
+    , _zone :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL TcpoolResource where
+instance TF.ToHCL (TcpoolResource s) where
     toHCL TcpoolResource{..} = TF.block $ catMaybes
-        [ TF.argument _act_on_probes
-        , TF.argument _backup_record_failover_delay
-        , TF.argument _backup_record_rdata
-        , TF.argument _description
-        , TF.argument _max_to_lb
-        , TF.argument _name
-        , TF.argument _rdata
-        , TF.argument _run_probes
-        , TF.argument _ttl
-        , TF.argument _zone
+        [ TF.attribute _act_on_probes
+        , TF.attribute _backup_record_failover_delay
+        , TF.attribute _backup_record_rdata
+        , TF.attribute _description
+        , TF.attribute _max_to_lb
+        , TF.attribute _name
+        , TF.attribute _rdata
+        , TF.attribute _run_probes
+        , TF.attribute _ttl
+        , TF.attribute _zone
         ]
 
-instance HasActOnProbes TcpoolResource Text where
+instance HasActOnProbes (TcpoolResource s) Text where
+    type HasActOnProbesThread (TcpoolResource s) Text = s
+
     actOnProbes =
-        lens (_act_on_probes :: TcpoolResource -> TF.Argument "act_on_probes" Text)
-             (\s a -> s { _act_on_probes = a } :: TcpoolResource)
+        lens (_act_on_probes :: TcpoolResource s -> TF.Attribute s "act_on_probes" Text)
+             (\s a -> s { _act_on_probes = a } :: TcpoolResource s)
 
-instance HasBackupRecordFailoverDelay TcpoolResource Text where
+instance HasBackupRecordFailoverDelay (TcpoolResource s) Text where
+    type HasBackupRecordFailoverDelayThread (TcpoolResource s) Text = s
+
     backupRecordFailoverDelay =
-        lens (_backup_record_failover_delay :: TcpoolResource -> TF.Argument "backup_record_failover_delay" Text)
-             (\s a -> s { _backup_record_failover_delay = a } :: TcpoolResource)
+        lens (_backup_record_failover_delay :: TcpoolResource s -> TF.Attribute s "backup_record_failover_delay" Text)
+             (\s a -> s { _backup_record_failover_delay = a } :: TcpoolResource s)
 
-instance HasBackupRecordRdata TcpoolResource Text where
+instance HasBackupRecordRdata (TcpoolResource s) Text where
+    type HasBackupRecordRdataThread (TcpoolResource s) Text = s
+
     backupRecordRdata =
-        lens (_backup_record_rdata :: TcpoolResource -> TF.Argument "backup_record_rdata" Text)
-             (\s a -> s { _backup_record_rdata = a } :: TcpoolResource)
+        lens (_backup_record_rdata :: TcpoolResource s -> TF.Attribute s "backup_record_rdata" Text)
+             (\s a -> s { _backup_record_rdata = a } :: TcpoolResource s)
 
-instance HasDescription TcpoolResource Text where
+instance HasDescription (TcpoolResource s) Text where
+    type HasDescriptionThread (TcpoolResource s) Text = s
+
     description =
-        lens (_description :: TcpoolResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: TcpoolResource)
+        lens (_description :: TcpoolResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: TcpoolResource s)
 
-instance HasMaxToLb TcpoolResource Text where
+instance HasMaxToLb (TcpoolResource s) Text where
+    type HasMaxToLbThread (TcpoolResource s) Text = s
+
     maxToLb =
-        lens (_max_to_lb :: TcpoolResource -> TF.Argument "max_to_lb" Text)
-             (\s a -> s { _max_to_lb = a } :: TcpoolResource)
+        lens (_max_to_lb :: TcpoolResource s -> TF.Attribute s "max_to_lb" Text)
+             (\s a -> s { _max_to_lb = a } :: TcpoolResource s)
 
-instance HasName TcpoolResource Text where
+instance HasName (TcpoolResource s) Text where
+    type HasNameThread (TcpoolResource s) Text = s
+
     name =
-        lens (_name :: TcpoolResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: TcpoolResource)
+        lens (_name :: TcpoolResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: TcpoolResource s)
 
-instance HasRdata TcpoolResource Text where
+instance HasRdata (TcpoolResource s) Text where
+    type HasRdataThread (TcpoolResource s) Text = s
+
     rdata =
-        lens (_rdata :: TcpoolResource -> TF.Argument "rdata" Text)
-             (\s a -> s { _rdata = a } :: TcpoolResource)
+        lens (_rdata :: TcpoolResource s -> TF.Attribute s "rdata" Text)
+             (\s a -> s { _rdata = a } :: TcpoolResource s)
 
-instance HasRunProbes TcpoolResource Text where
+instance HasRunProbes (TcpoolResource s) Text where
+    type HasRunProbesThread (TcpoolResource s) Text = s
+
     runProbes =
-        lens (_run_probes :: TcpoolResource -> TF.Argument "run_probes" Text)
-             (\s a -> s { _run_probes = a } :: TcpoolResource)
+        lens (_run_probes :: TcpoolResource s -> TF.Attribute s "run_probes" Text)
+             (\s a -> s { _run_probes = a } :: TcpoolResource s)
 
-instance HasTtl TcpoolResource Text where
+instance HasTtl (TcpoolResource s) Text where
+    type HasTtlThread (TcpoolResource s) Text = s
+
     ttl =
-        lens (_ttl :: TcpoolResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: TcpoolResource)
+        lens (_ttl :: TcpoolResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: TcpoolResource s)
 
-instance HasZone TcpoolResource Text where
+instance HasZone (TcpoolResource s) Text where
+    type HasZoneThread (TcpoolResource s) Text = s
+
     zone =
-        lens (_zone :: TcpoolResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: TcpoolResource)
+        lens (_zone :: TcpoolResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: TcpoolResource s)
 
-instance HasComputedHostname TcpoolResource Text where
+instance HasComputedHostname (TcpoolResource s) Text where
     computedHostname =
-        to (\_  -> TF.Compute "hostname")
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
-instance HasComputedId TcpoolResource Text where
+instance HasComputedId (TcpoolResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-tcpoolResource :: TF.Resource TF.UltraDNS TcpoolResource
+tcpoolResource :: TF.Resource TF.UltraDNS (TcpoolResource s)
 tcpoolResource =
     TF.newResource "ultradns_tcpool" $
         TcpoolResource {
-            _act_on_probes = TF.Nil
+              _act_on_probes = TF.Nil
             , _backup_record_failover_delay = TF.Nil
             , _backup_record_rdata = TF.Nil
             , _description = TF.Nil
@@ -636,164 +724,243 @@ tcpoolResource =
             , _zone = TF.Nil
             }
 
-class HasActOnProbes s a | s -> a where
-    actOnProbes :: Lens' s (TF.Argument "act_on_probes" a)
+class HasActOnProbes a b | a -> b where
+    type HasActOnProbesThread a b :: *
 
-instance HasActOnProbes s a => HasActOnProbes (TF.Resource p s) a where
+    actOnProbes :: Lens' a (TF.Attribute (HasActOnProbesThread a b) "act_on_probes" b)
+
+instance HasActOnProbes a b => HasActOnProbes (TF.Resource p a) b where
+    type HasActOnProbesThread (TF.Resource p a) b =
+         HasActOnProbesThread a b
+
     actOnProbes = TF.configuration . actOnProbes
 
-class HasAgents s a | s -> a where
-    agents :: Lens' s (TF.Argument "agents" a)
+class HasAgents a b | a -> b where
+    type HasAgentsThread a b :: *
 
-instance HasAgents s a => HasAgents (TF.Resource p s) a where
+    agents :: Lens' a (TF.Attribute (HasAgentsThread a b) "agents" b)
+
+instance HasAgents a b => HasAgents (TF.Resource p a) b where
+    type HasAgentsThread (TF.Resource p a) b =
+         HasAgentsThread a b
+
     agents = TF.configuration . agents
 
-class HasBackupRecordFailoverDelay s a | s -> a where
-    backupRecordFailoverDelay :: Lens' s (TF.Argument "backup_record_failover_delay" a)
+class HasBackupRecordFailoverDelay a b | a -> b where
+    type HasBackupRecordFailoverDelayThread a b :: *
 
-instance HasBackupRecordFailoverDelay s a => HasBackupRecordFailoverDelay (TF.Resource p s) a where
+    backupRecordFailoverDelay :: Lens' a (TF.Attribute (HasBackupRecordFailoverDelayThread a b) "backup_record_failover_delay" b)
+
+instance HasBackupRecordFailoverDelay a b => HasBackupRecordFailoverDelay (TF.Resource p a) b where
+    type HasBackupRecordFailoverDelayThread (TF.Resource p a) b =
+         HasBackupRecordFailoverDelayThread a b
+
     backupRecordFailoverDelay = TF.configuration . backupRecordFailoverDelay
 
-class HasBackupRecordRdata s a | s -> a where
-    backupRecordRdata :: Lens' s (TF.Argument "backup_record_rdata" a)
+class HasBackupRecordRdata a b | a -> b where
+    type HasBackupRecordRdataThread a b :: *
 
-instance HasBackupRecordRdata s a => HasBackupRecordRdata (TF.Resource p s) a where
+    backupRecordRdata :: Lens' a (TF.Attribute (HasBackupRecordRdataThread a b) "backup_record_rdata" b)
+
+instance HasBackupRecordRdata a b => HasBackupRecordRdata (TF.Resource p a) b where
+    type HasBackupRecordRdataThread (TF.Resource p a) b =
+         HasBackupRecordRdataThread a b
+
     backupRecordRdata = TF.configuration . backupRecordRdata
 
-class HasConflictResolve s a | s -> a where
-    conflictResolve :: Lens' s (TF.Argument "conflict_resolve" a)
+class HasConflictResolve a b | a -> b where
+    type HasConflictResolveThread a b :: *
 
-instance HasConflictResolve s a => HasConflictResolve (TF.Resource p s) a where
+    conflictResolve :: Lens' a (TF.Attribute (HasConflictResolveThread a b) "conflict_resolve" b)
+
+instance HasConflictResolve a b => HasConflictResolve (TF.Resource p a) b where
+    type HasConflictResolveThread (TF.Resource p a) b =
+         HasConflictResolveThread a b
+
     conflictResolve = TF.configuration . conflictResolve
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasHttpProbe s a | s -> a where
-    httpProbe :: Lens' s (TF.Argument "http_probe" a)
+class HasHttpProbe a b | a -> b where
+    type HasHttpProbeThread a b :: *
 
-instance HasHttpProbe s a => HasHttpProbe (TF.Resource p s) a where
+    httpProbe :: Lens' a (TF.Attribute (HasHttpProbeThread a b) "http_probe" b)
+
+instance HasHttpProbe a b => HasHttpProbe (TF.Resource p a) b where
+    type HasHttpProbeThread (TF.Resource p a) b =
+         HasHttpProbeThread a b
+
     httpProbe = TF.configuration . httpProbe
 
-class HasInterval s a | s -> a where
-    interval :: Lens' s (TF.Argument "interval" a)
+class HasInterval a b | a -> b where
+    type HasIntervalThread a b :: *
 
-instance HasInterval s a => HasInterval (TF.Resource p s) a where
+    interval :: Lens' a (TF.Attribute (HasIntervalThread a b) "interval" b)
+
+instance HasInterval a b => HasInterval (TF.Resource p a) b where
+    type HasIntervalThread (TF.Resource p a) b =
+         HasIntervalThread a b
+
     interval = TF.configuration . interval
 
-class HasMaxToLb s a | s -> a where
-    maxToLb :: Lens' s (TF.Argument "max_to_lb" a)
+class HasMaxToLb a b | a -> b where
+    type HasMaxToLbThread a b :: *
 
-instance HasMaxToLb s a => HasMaxToLb (TF.Resource p s) a where
+    maxToLb :: Lens' a (TF.Attribute (HasMaxToLbThread a b) "max_to_lb" b)
+
+instance HasMaxToLb a b => HasMaxToLb (TF.Resource p a) b where
+    type HasMaxToLbThread (TF.Resource p a) b =
+         HasMaxToLbThread a b
+
     maxToLb = TF.configuration . maxToLb
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasNoResponse s a | s -> a where
-    noResponse :: Lens' s (TF.Argument "no_response" a)
+class HasNoResponse a b | a -> b where
+    type HasNoResponseThread a b :: *
 
-instance HasNoResponse s a => HasNoResponse (TF.Resource p s) a where
+    noResponse :: Lens' a (TF.Attribute (HasNoResponseThread a b) "no_response" b)
+
+instance HasNoResponse a b => HasNoResponse (TF.Resource p a) b where
+    type HasNoResponseThread (TF.Resource p a) b =
+         HasNoResponseThread a b
+
     noResponse = TF.configuration . noResponse
 
-class HasOrder s a | s -> a where
-    order :: Lens' s (TF.Argument "order" a)
+class HasOrder a b | a -> b where
+    type HasOrderThread a b :: *
 
-instance HasOrder s a => HasOrder (TF.Resource p s) a where
+    order :: Lens' a (TF.Attribute (HasOrderThread a b) "order" b)
+
+instance HasOrder a b => HasOrder (TF.Resource p a) b where
+    type HasOrderThread (TF.Resource p a) b =
+         HasOrderThread a b
+
     order = TF.configuration . order
 
-class HasPingProbe s a | s -> a where
-    pingProbe :: Lens' s (TF.Argument "ping_probe" a)
+class HasPingProbe a b | a -> b where
+    type HasPingProbeThread a b :: *
 
-instance HasPingProbe s a => HasPingProbe (TF.Resource p s) a where
+    pingProbe :: Lens' a (TF.Attribute (HasPingProbeThread a b) "ping_probe" b)
+
+instance HasPingProbe a b => HasPingProbe (TF.Resource p a) b where
+    type HasPingProbeThread (TF.Resource p a) b =
+         HasPingProbeThread a b
+
     pingProbe = TF.configuration . pingProbe
 
-class HasPoolRecord s a | s -> a where
-    poolRecord :: Lens' s (TF.Argument "pool_record" a)
+class HasPoolRecord a b | a -> b where
+    type HasPoolRecordThread a b :: *
 
-instance HasPoolRecord s a => HasPoolRecord (TF.Resource p s) a where
+    poolRecord :: Lens' a (TF.Attribute (HasPoolRecordThread a b) "pool_record" b)
+
+instance HasPoolRecord a b => HasPoolRecord (TF.Resource p a) b where
+    type HasPoolRecordThread (TF.Resource p a) b =
+         HasPoolRecordThread a b
+
     poolRecord = TF.configuration . poolRecord
 
-class HasRdata s a | s -> a where
-    rdata :: Lens' s (TF.Argument "rdata" a)
+class HasRdata a b | a -> b where
+    type HasRdataThread a b :: *
 
-instance HasRdata s a => HasRdata (TF.Resource p s) a where
+    rdata :: Lens' a (TF.Attribute (HasRdataThread a b) "rdata" b)
+
+instance HasRdata a b => HasRdata (TF.Resource p a) b where
+    type HasRdataThread (TF.Resource p a) b =
+         HasRdataThread a b
+
     rdata = TF.configuration . rdata
 
-class HasRunProbes s a | s -> a where
-    runProbes :: Lens' s (TF.Argument "run_probes" a)
+class HasRunProbes a b | a -> b where
+    type HasRunProbesThread a b :: *
 
-instance HasRunProbes s a => HasRunProbes (TF.Resource p s) a where
+    runProbes :: Lens' a (TF.Attribute (HasRunProbesThread a b) "run_probes" b)
+
+instance HasRunProbes a b => HasRunProbes (TF.Resource p a) b where
+    type HasRunProbesThread (TF.Resource p a) b =
+         HasRunProbesThread a b
+
     runProbes = TF.configuration . runProbes
 
-class HasThreshold s a | s -> a where
-    threshold :: Lens' s (TF.Argument "threshold" a)
+class HasThreshold a b | a -> b where
+    type HasThresholdThread a b :: *
 
-instance HasThreshold s a => HasThreshold (TF.Resource p s) a where
+    threshold :: Lens' a (TF.Attribute (HasThresholdThread a b) "threshold" b)
+
+instance HasThreshold a b => HasThreshold (TF.Resource p a) b where
+    type HasThresholdThread (TF.Resource p a) b =
+         HasThresholdThread a b
+
     threshold = TF.configuration . threshold
 
-class HasTtl s a | s -> a where
-    ttl :: Lens' s (TF.Argument "ttl" a)
+class HasTtl a b | a -> b where
+    type HasTtlThread a b :: *
 
-instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl :: Lens' a (TF.Attribute (HasTtlThread a b) "ttl" b)
+
+instance HasTtl a b => HasTtl (TF.Resource p a) b where
+    type HasTtlThread (TF.Resource p a) b =
+         HasTtlThread a b
+
     ttl = TF.configuration . ttl
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasZone s a | s -> a where
-    zone :: Lens' s (TF.Argument "zone" a)
+class HasZone a b | a -> b where
+    type HasZoneThread a b :: *
 
-instance HasZone s a => HasZone (TF.Resource p s) a where
+    zone :: Lens' a (TF.Attribute (HasZoneThread a b) "zone" b)
+
+instance HasZone a b => HasZone (TF.Resource p a) b where
+    type HasZoneThread (TF.Resource p a) b =
+         HasZoneThread a b
+
     zone = TF.configuration . zone
 
-class HasComputedHostname s a | s -> a where
-    computedHostname :: forall r. Getting r s (TF.Attribute a)
+class HasComputedHostname a b | a -> b where
+    computedHostname :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedHostname s a => HasComputedHostname (TF.Resource p s) a where
-    computedHostname = TF.configuration . computedHostname
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
+class HasComputedName a b | a -> b where
+    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedRdata a b | a -> b where
+    computedRdata :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedName s a | s -> a where
-    computedName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedTtl a b | a -> b where
+    computedTtl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedName s a => HasComputedName (TF.Resource p s) a where
-    computedName = TF.configuration . computedName
+class HasComputedType' a b | a -> b where
+    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-class HasComputedRdata s a | s -> a where
-    computedRdata :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRdata s a => HasComputedRdata (TF.Resource p s) a where
-    computedRdata = TF.configuration . computedRdata
-
-class HasComputedTtl s a | s -> a where
-    computedTtl :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedTtl s a => HasComputedTtl (TF.Resource p s) a where
-    computedTtl = TF.configuration . computedTtl
-
-class HasComputedType' s a | s -> a where
-    computedType' :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedType' s a => HasComputedType' (TF.Resource p s) a where
-    computedType' = TF.configuration . computedType'
-
-class HasComputedZone s a | s -> a where
-    computedZone :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedZone s a => HasComputedZone (TF.Resource p s) a where
-    computedZone = TF.configuration . computedZone
+class HasComputedZone a b | a -> b where
+    computedZone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

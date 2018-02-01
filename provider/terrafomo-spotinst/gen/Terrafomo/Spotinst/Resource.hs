@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -66,103 +67,122 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Resource          as TF
+import qualified Terrafomo.Resource          as TF
 import qualified Terrafomo.Spotinst.Provider as TF
 import qualified Terrafomo.Spotinst.Types    as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
 
 {- | The @spotinst_aws_group@ Spotinst resource.
 
 Provides a Spotinst AWS group resource.
 -}
-data AwsGroupResource = AwsGroupResource {
-      _capacity             :: !(TF.Argument "capacity" Text)
+data AwsGroupResource s = AwsGroupResource {
+      _capacity             :: !(TF.Attribute s "capacity" Text)
     {- ^ (Required) The group capacity. Only a single block is allowed. -}
-    , _description          :: !(TF.Argument "description" Text)
+    , _description          :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The group description. -}
-    , _elastic_ips          :: !(TF.Argument "elastic_ips" Text)
+    , _elastic_ips          :: !(TF.Attribute s "elastic_ips" Text)
     {- ^ (Optional) A list of <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html> allocation IDs to associate to the group instances. -}
-    , _instance_types       :: !(TF.Argument "instance_types" Text)
+    , _instance_types       :: !(TF.Attribute s "instance_types" Text)
     {- ^ - The type of instance determines your instance's CPU capacity, memory and storage (e.g., m1.small, c1.xlarge). -}
-    , _launch_specification :: !(TF.Argument "launch_specification" Text)
+    , _launch_specification :: !(TF.Attribute s "launch_specification" Text)
     {- ^ (Required) Describes the launch specification for an instance. -}
-    , _name                 :: !(TF.Argument "name" Text)
+    , _name                 :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The group description. -}
-    , _product              :: !(TF.Argument "product" Text)
+    , _product              :: !(TF.Attribute s "product" Text)
     {- ^ (Required) Operation system type. -}
-    , _strategy             :: !(TF.Argument "strategy" Text)
+    , _strategy             :: !(TF.Attribute s "strategy" Text)
     {- ^ (Required) This determines how your group request is fulfilled from the possible On-Demand and Spot pools selected for launch. Only a single block is allowed. -}
-    , _tags                 :: !(TF.Argument "tags" Text)
+    , _tags                 :: !(TF.Attribute s "tags" Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL AwsGroupResource where
+instance TF.ToHCL (AwsGroupResource s) where
     toHCL AwsGroupResource{..} = TF.block $ catMaybes
-        [ TF.argument _capacity
-        , TF.argument _description
-        , TF.argument _elastic_ips
-        , TF.argument _instance_types
-        , TF.argument _launch_specification
-        , TF.argument _name
-        , TF.argument _product
-        , TF.argument _strategy
-        , TF.argument _tags
+        [ TF.attribute _capacity
+        , TF.attribute _description
+        , TF.attribute _elastic_ips
+        , TF.attribute _instance_types
+        , TF.attribute _launch_specification
+        , TF.attribute _name
+        , TF.attribute _product
+        , TF.attribute _strategy
+        , TF.attribute _tags
         ]
 
-instance HasCapacity AwsGroupResource Text where
+instance HasCapacity (AwsGroupResource s) Text where
+    type HasCapacityThread (AwsGroupResource s) Text = s
+
     capacity =
-        lens (_capacity :: AwsGroupResource -> TF.Argument "capacity" Text)
-             (\s a -> s { _capacity = a } :: AwsGroupResource)
+        lens (_capacity :: AwsGroupResource s -> TF.Attribute s "capacity" Text)
+             (\s a -> s { _capacity = a } :: AwsGroupResource s)
 
-instance HasDescription AwsGroupResource Text where
+instance HasDescription (AwsGroupResource s) Text where
+    type HasDescriptionThread (AwsGroupResource s) Text = s
+
     description =
-        lens (_description :: AwsGroupResource -> TF.Argument "description" Text)
-             (\s a -> s { _description = a } :: AwsGroupResource)
+        lens (_description :: AwsGroupResource s -> TF.Attribute s "description" Text)
+             (\s a -> s { _description = a } :: AwsGroupResource s)
 
-instance HasElasticIps AwsGroupResource Text where
+instance HasElasticIps (AwsGroupResource s) Text where
+    type HasElasticIpsThread (AwsGroupResource s) Text = s
+
     elasticIps =
-        lens (_elastic_ips :: AwsGroupResource -> TF.Argument "elastic_ips" Text)
-             (\s a -> s { _elastic_ips = a } :: AwsGroupResource)
+        lens (_elastic_ips :: AwsGroupResource s -> TF.Attribute s "elastic_ips" Text)
+             (\s a -> s { _elastic_ips = a } :: AwsGroupResource s)
 
-instance HasInstanceTypes AwsGroupResource Text where
+instance HasInstanceTypes (AwsGroupResource s) Text where
+    type HasInstanceTypesThread (AwsGroupResource s) Text = s
+
     instanceTypes =
-        lens (_instance_types :: AwsGroupResource -> TF.Argument "instance_types" Text)
-             (\s a -> s { _instance_types = a } :: AwsGroupResource)
+        lens (_instance_types :: AwsGroupResource s -> TF.Attribute s "instance_types" Text)
+             (\s a -> s { _instance_types = a } :: AwsGroupResource s)
 
-instance HasLaunchSpecification AwsGroupResource Text where
+instance HasLaunchSpecification (AwsGroupResource s) Text where
+    type HasLaunchSpecificationThread (AwsGroupResource s) Text = s
+
     launchSpecification =
-        lens (_launch_specification :: AwsGroupResource -> TF.Argument "launch_specification" Text)
-             (\s a -> s { _launch_specification = a } :: AwsGroupResource)
+        lens (_launch_specification :: AwsGroupResource s -> TF.Attribute s "launch_specification" Text)
+             (\s a -> s { _launch_specification = a } :: AwsGroupResource s)
 
-instance HasName AwsGroupResource Text where
+instance HasName (AwsGroupResource s) Text where
+    type HasNameThread (AwsGroupResource s) Text = s
+
     name =
-        lens (_name :: AwsGroupResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: AwsGroupResource)
+        lens (_name :: AwsGroupResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: AwsGroupResource s)
 
-instance HasProduct AwsGroupResource Text where
+instance HasProduct (AwsGroupResource s) Text where
+    type HasProductThread (AwsGroupResource s) Text = s
+
     product =
-        lens (_product :: AwsGroupResource -> TF.Argument "product" Text)
-             (\s a -> s { _product = a } :: AwsGroupResource)
+        lens (_product :: AwsGroupResource s -> TF.Attribute s "product" Text)
+             (\s a -> s { _product = a } :: AwsGroupResource s)
 
-instance HasStrategy AwsGroupResource Text where
+instance HasStrategy (AwsGroupResource s) Text where
+    type HasStrategyThread (AwsGroupResource s) Text = s
+
     strategy =
-        lens (_strategy :: AwsGroupResource -> TF.Argument "strategy" Text)
-             (\s a -> s { _strategy = a } :: AwsGroupResource)
+        lens (_strategy :: AwsGroupResource s -> TF.Attribute s "strategy" Text)
+             (\s a -> s { _strategy = a } :: AwsGroupResource s)
 
-instance HasTags AwsGroupResource Text where
+instance HasTags (AwsGroupResource s) Text where
+    type HasTagsThread (AwsGroupResource s) Text = s
+
     tags =
-        lens (_tags :: AwsGroupResource -> TF.Argument "tags" Text)
-             (\s a -> s { _tags = a } :: AwsGroupResource)
+        lens (_tags :: AwsGroupResource s -> TF.Attribute s "tags" Text)
+             (\s a -> s { _tags = a } :: AwsGroupResource s)
 
-awsGroupResource :: TF.Resource TF.Spotinst AwsGroupResource
+awsGroupResource :: TF.Resource TF.Spotinst (AwsGroupResource s)
 awsGroupResource =
     TF.newResource "spotinst_aws_group" $
         AwsGroupResource {
-            _capacity = TF.Nil
+              _capacity = TF.Nil
             , _description = TF.Nil
             , _elastic_ips = TF.Nil
             , _instance_types = TF.Nil
@@ -177,62 +197,72 @@ awsGroupResource =
 
 Provides a Spotinst healthcheck resource.
 -}
-data HealthcheckResource = HealthcheckResource {
-      _check       :: !(TF.Argument "check" Text)
+data HealthcheckResource s = HealthcheckResource {
+      _check       :: !(TF.Attribute s "check" Text)
     {- ^ (Required) Describes the check to execute. -}
-    , _name        :: !(TF.Argument "name" Text)
+    , _name        :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) the name of the healthcheck -}
-    , _proxy       :: !(TF.Argument "proxy" Text)
+    , _proxy       :: !(TF.Attribute s "proxy" Text)
     {- ^ (Required) -}
-    , _resource_id :: !(TF.Argument "resource_id" Text)
+    , _resource_id :: !(TF.Attribute s "resource_id" Text)
     {- ^ (Required) The resource to health check -}
-    , _threshold   :: !(TF.Argument "threshold" Text)
+    , _threshold   :: !(TF.Attribute s "threshold" Text)
     {- ^ (Required) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL HealthcheckResource where
+instance TF.ToHCL (HealthcheckResource s) where
     toHCL HealthcheckResource{..} = TF.block $ catMaybes
-        [ TF.argument _check
-        , TF.argument _name
-        , TF.argument _proxy
-        , TF.argument _resource_id
-        , TF.argument _threshold
+        [ TF.attribute _check
+        , TF.attribute _name
+        , TF.attribute _proxy
+        , TF.attribute _resource_id
+        , TF.attribute _threshold
         ]
 
-instance HasCheck HealthcheckResource Text where
+instance HasCheck (HealthcheckResource s) Text where
+    type HasCheckThread (HealthcheckResource s) Text = s
+
     check =
-        lens (_check :: HealthcheckResource -> TF.Argument "check" Text)
-             (\s a -> s { _check = a } :: HealthcheckResource)
+        lens (_check :: HealthcheckResource s -> TF.Attribute s "check" Text)
+             (\s a -> s { _check = a } :: HealthcheckResource s)
 
-instance HasName HealthcheckResource Text where
+instance HasName (HealthcheckResource s) Text where
+    type HasNameThread (HealthcheckResource s) Text = s
+
     name =
-        lens (_name :: HealthcheckResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: HealthcheckResource)
+        lens (_name :: HealthcheckResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: HealthcheckResource s)
 
-instance HasProxy HealthcheckResource Text where
+instance HasProxy (HealthcheckResource s) Text where
+    type HasProxyThread (HealthcheckResource s) Text = s
+
     proxy =
-        lens (_proxy :: HealthcheckResource -> TF.Argument "proxy" Text)
-             (\s a -> s { _proxy = a } :: HealthcheckResource)
+        lens (_proxy :: HealthcheckResource s -> TF.Attribute s "proxy" Text)
+             (\s a -> s { _proxy = a } :: HealthcheckResource s)
 
-instance HasResourceId HealthcheckResource Text where
+instance HasResourceId (HealthcheckResource s) Text where
+    type HasResourceIdThread (HealthcheckResource s) Text = s
+
     resourceId =
-        lens (_resource_id :: HealthcheckResource -> TF.Argument "resource_id" Text)
-             (\s a -> s { _resource_id = a } :: HealthcheckResource)
+        lens (_resource_id :: HealthcheckResource s -> TF.Attribute s "resource_id" Text)
+             (\s a -> s { _resource_id = a } :: HealthcheckResource s)
 
-instance HasThreshold HealthcheckResource Text where
+instance HasThreshold (HealthcheckResource s) Text where
+    type HasThresholdThread (HealthcheckResource s) Text = s
+
     threshold =
-        lens (_threshold :: HealthcheckResource -> TF.Argument "threshold" Text)
-             (\s a -> s { _threshold = a } :: HealthcheckResource)
+        lens (_threshold :: HealthcheckResource s -> TF.Attribute s "threshold" Text)
+             (\s a -> s { _threshold = a } :: HealthcheckResource s)
 
-instance HasComputedId HealthcheckResource Text where
+instance HasComputedId (HealthcheckResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-healthcheckResource :: TF.Resource TF.Spotinst HealthcheckResource
+healthcheckResource :: TF.Resource TF.Spotinst (HealthcheckResource s)
 healthcheckResource =
     TF.newResource "spotinst_healthcheck" $
         HealthcheckResource {
-            _check = TF.Nil
+              _check = TF.Nil
             , _name = TF.Nil
             , _proxy = TF.Nil
             , _resource_id = TF.Nil
@@ -243,172 +273,264 @@ healthcheckResource =
 
 Provides a Spotinst subscription resource.
 -}
-data SubscriptionResource = SubscriptionResource {
-      _endpoint    :: !(TF.Argument "endpoint" Text)
+data SubscriptionResource s = SubscriptionResource {
+      _endpoint    :: !(TF.Attribute s "endpoint" Text)
     {- ^ (Required) The destination for the request -}
-    , _event_type  :: !(TF.Argument "event_type" Text)
+    , _event_type  :: !(TF.Attribute s "event_type" Text)
     {- ^ (Required) The events to subscribe to -}
-    , _format      :: !(TF.Argument "format" Text)
+    , _format      :: !(TF.Attribute s "format" Text)
     {- ^ (Optional) The structure of the payload. -}
-    , _protocol    :: !(TF.Argument "protocol" Text)
+    , _protocol    :: !(TF.Attribute s "protocol" Text)
     {- ^ (Required) The protocol to use to connect with the instance. Valid values: http, https -}
-    , _resource_id :: !(TF.Argument "resource_id" Text)
+    , _resource_id :: !(TF.Attribute s "resource_id" Text)
     {- ^ (Required) The resource to subscribe to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL SubscriptionResource where
+instance TF.ToHCL (SubscriptionResource s) where
     toHCL SubscriptionResource{..} = TF.block $ catMaybes
-        [ TF.argument _endpoint
-        , TF.argument _event_type
-        , TF.argument _format
-        , TF.argument _protocol
-        , TF.argument _resource_id
+        [ TF.attribute _endpoint
+        , TF.attribute _event_type
+        , TF.attribute _format
+        , TF.attribute _protocol
+        , TF.attribute _resource_id
         ]
 
-instance HasEndpoint SubscriptionResource Text where
+instance HasEndpoint (SubscriptionResource s) Text where
+    type HasEndpointThread (SubscriptionResource s) Text = s
+
     endpoint =
-        lens (_endpoint :: SubscriptionResource -> TF.Argument "endpoint" Text)
-             (\s a -> s { _endpoint = a } :: SubscriptionResource)
+        lens (_endpoint :: SubscriptionResource s -> TF.Attribute s "endpoint" Text)
+             (\s a -> s { _endpoint = a } :: SubscriptionResource s)
 
-instance HasEventType SubscriptionResource Text where
+instance HasEventType (SubscriptionResource s) Text where
+    type HasEventTypeThread (SubscriptionResource s) Text = s
+
     eventType =
-        lens (_event_type :: SubscriptionResource -> TF.Argument "event_type" Text)
-             (\s a -> s { _event_type = a } :: SubscriptionResource)
+        lens (_event_type :: SubscriptionResource s -> TF.Attribute s "event_type" Text)
+             (\s a -> s { _event_type = a } :: SubscriptionResource s)
 
-instance HasFormat SubscriptionResource Text where
+instance HasFormat (SubscriptionResource s) Text where
+    type HasFormatThread (SubscriptionResource s) Text = s
+
     format =
-        lens (_format :: SubscriptionResource -> TF.Argument "format" Text)
-             (\s a -> s { _format = a } :: SubscriptionResource)
+        lens (_format :: SubscriptionResource s -> TF.Attribute s "format" Text)
+             (\s a -> s { _format = a } :: SubscriptionResource s)
 
-instance HasProtocol SubscriptionResource Text where
+instance HasProtocol (SubscriptionResource s) Text where
+    type HasProtocolThread (SubscriptionResource s) Text = s
+
     protocol =
-        lens (_protocol :: SubscriptionResource -> TF.Argument "protocol" Text)
-             (\s a -> s { _protocol = a } :: SubscriptionResource)
+        lens (_protocol :: SubscriptionResource s -> TF.Attribute s "protocol" Text)
+             (\s a -> s { _protocol = a } :: SubscriptionResource s)
 
-instance HasResourceId SubscriptionResource Text where
+instance HasResourceId (SubscriptionResource s) Text where
+    type HasResourceIdThread (SubscriptionResource s) Text = s
+
     resourceId =
-        lens (_resource_id :: SubscriptionResource -> TF.Argument "resource_id" Text)
-             (\s a -> s { _resource_id = a } :: SubscriptionResource)
+        lens (_resource_id :: SubscriptionResource s -> TF.Attribute s "resource_id" Text)
+             (\s a -> s { _resource_id = a } :: SubscriptionResource s)
 
-instance HasComputedId SubscriptionResource Text where
+instance HasComputedId (SubscriptionResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-subscriptionResource :: TF.Resource TF.Spotinst SubscriptionResource
+subscriptionResource :: TF.Resource TF.Spotinst (SubscriptionResource s)
 subscriptionResource =
     TF.newResource "spotinst_subscription" $
         SubscriptionResource {
-            _endpoint = TF.Nil
+              _endpoint = TF.Nil
             , _event_type = TF.Nil
             , _format = TF.Nil
             , _protocol = TF.Nil
             , _resource_id = TF.Nil
             }
 
-class HasCapacity s a | s -> a where
-    capacity :: Lens' s (TF.Argument "capacity" a)
+class HasCapacity a b | a -> b where
+    type HasCapacityThread a b :: *
 
-instance HasCapacity s a => HasCapacity (TF.Resource p s) a where
+    capacity :: Lens' a (TF.Attribute (HasCapacityThread a b) "capacity" b)
+
+instance HasCapacity a b => HasCapacity (TF.Resource p a) b where
+    type HasCapacityThread (TF.Resource p a) b =
+         HasCapacityThread a b
+
     capacity = TF.configuration . capacity
 
-class HasCheck s a | s -> a where
-    check :: Lens' s (TF.Argument "check" a)
+class HasCheck a b | a -> b where
+    type HasCheckThread a b :: *
 
-instance HasCheck s a => HasCheck (TF.Resource p s) a where
+    check :: Lens' a (TF.Attribute (HasCheckThread a b) "check" b)
+
+instance HasCheck a b => HasCheck (TF.Resource p a) b where
+    type HasCheckThread (TF.Resource p a) b =
+         HasCheckThread a b
+
     check = TF.configuration . check
 
-class HasDescription s a | s -> a where
-    description :: Lens' s (TF.Argument "description" a)
+class HasDescription a b | a -> b where
+    type HasDescriptionThread a b :: *
 
-instance HasDescription s a => HasDescription (TF.Resource p s) a where
+    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
+
+instance HasDescription a b => HasDescription (TF.Resource p a) b where
+    type HasDescriptionThread (TF.Resource p a) b =
+         HasDescriptionThread a b
+
     description = TF.configuration . description
 
-class HasElasticIps s a | s -> a where
-    elasticIps :: Lens' s (TF.Argument "elastic_ips" a)
+class HasElasticIps a b | a -> b where
+    type HasElasticIpsThread a b :: *
 
-instance HasElasticIps s a => HasElasticIps (TF.Resource p s) a where
+    elasticIps :: Lens' a (TF.Attribute (HasElasticIpsThread a b) "elastic_ips" b)
+
+instance HasElasticIps a b => HasElasticIps (TF.Resource p a) b where
+    type HasElasticIpsThread (TF.Resource p a) b =
+         HasElasticIpsThread a b
+
     elasticIps = TF.configuration . elasticIps
 
-class HasEndpoint s a | s -> a where
-    endpoint :: Lens' s (TF.Argument "endpoint" a)
+class HasEndpoint a b | a -> b where
+    type HasEndpointThread a b :: *
 
-instance HasEndpoint s a => HasEndpoint (TF.Resource p s) a where
+    endpoint :: Lens' a (TF.Attribute (HasEndpointThread a b) "endpoint" b)
+
+instance HasEndpoint a b => HasEndpoint (TF.Resource p a) b where
+    type HasEndpointThread (TF.Resource p a) b =
+         HasEndpointThread a b
+
     endpoint = TF.configuration . endpoint
 
-class HasEventType s a | s -> a where
-    eventType :: Lens' s (TF.Argument "event_type" a)
+class HasEventType a b | a -> b where
+    type HasEventTypeThread a b :: *
 
-instance HasEventType s a => HasEventType (TF.Resource p s) a where
+    eventType :: Lens' a (TF.Attribute (HasEventTypeThread a b) "event_type" b)
+
+instance HasEventType a b => HasEventType (TF.Resource p a) b where
+    type HasEventTypeThread (TF.Resource p a) b =
+         HasEventTypeThread a b
+
     eventType = TF.configuration . eventType
 
-class HasFormat s a | s -> a where
-    format :: Lens' s (TF.Argument "format" a)
+class HasFormat a b | a -> b where
+    type HasFormatThread a b :: *
 
-instance HasFormat s a => HasFormat (TF.Resource p s) a where
+    format :: Lens' a (TF.Attribute (HasFormatThread a b) "format" b)
+
+instance HasFormat a b => HasFormat (TF.Resource p a) b where
+    type HasFormatThread (TF.Resource p a) b =
+         HasFormatThread a b
+
     format = TF.configuration . format
 
-class HasInstanceTypes s a | s -> a where
-    instanceTypes :: Lens' s (TF.Argument "instance_types" a)
+class HasInstanceTypes a b | a -> b where
+    type HasInstanceTypesThread a b :: *
 
-instance HasInstanceTypes s a => HasInstanceTypes (TF.Resource p s) a where
+    instanceTypes :: Lens' a (TF.Attribute (HasInstanceTypesThread a b) "instance_types" b)
+
+instance HasInstanceTypes a b => HasInstanceTypes (TF.Resource p a) b where
+    type HasInstanceTypesThread (TF.Resource p a) b =
+         HasInstanceTypesThread a b
+
     instanceTypes = TF.configuration . instanceTypes
 
-class HasLaunchSpecification s a | s -> a where
-    launchSpecification :: Lens' s (TF.Argument "launch_specification" a)
+class HasLaunchSpecification a b | a -> b where
+    type HasLaunchSpecificationThread a b :: *
 
-instance HasLaunchSpecification s a => HasLaunchSpecification (TF.Resource p s) a where
+    launchSpecification :: Lens' a (TF.Attribute (HasLaunchSpecificationThread a b) "launch_specification" b)
+
+instance HasLaunchSpecification a b => HasLaunchSpecification (TF.Resource p a) b where
+    type HasLaunchSpecificationThread (TF.Resource p a) b =
+         HasLaunchSpecificationThread a b
+
     launchSpecification = TF.configuration . launchSpecification
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasProduct s a | s -> a where
-    product :: Lens' s (TF.Argument "product" a)
+class HasProduct a b | a -> b where
+    type HasProductThread a b :: *
 
-instance HasProduct s a => HasProduct (TF.Resource p s) a where
+    product :: Lens' a (TF.Attribute (HasProductThread a b) "product" b)
+
+instance HasProduct a b => HasProduct (TF.Resource p a) b where
+    type HasProductThread (TF.Resource p a) b =
+         HasProductThread a b
+
     product = TF.configuration . product
 
-class HasProtocol s a | s -> a where
-    protocol :: Lens' s (TF.Argument "protocol" a)
+class HasProtocol a b | a -> b where
+    type HasProtocolThread a b :: *
 
-instance HasProtocol s a => HasProtocol (TF.Resource p s) a where
+    protocol :: Lens' a (TF.Attribute (HasProtocolThread a b) "protocol" b)
+
+instance HasProtocol a b => HasProtocol (TF.Resource p a) b where
+    type HasProtocolThread (TF.Resource p a) b =
+         HasProtocolThread a b
+
     protocol = TF.configuration . protocol
 
-class HasProxy s a | s -> a where
-    proxy :: Lens' s (TF.Argument "proxy" a)
+class HasProxy a b | a -> b where
+    type HasProxyThread a b :: *
 
-instance HasProxy s a => HasProxy (TF.Resource p s) a where
+    proxy :: Lens' a (TF.Attribute (HasProxyThread a b) "proxy" b)
+
+instance HasProxy a b => HasProxy (TF.Resource p a) b where
+    type HasProxyThread (TF.Resource p a) b =
+         HasProxyThread a b
+
     proxy = TF.configuration . proxy
 
-class HasResourceId s a | s -> a where
-    resourceId :: Lens' s (TF.Argument "resource_id" a)
+class HasResourceId a b | a -> b where
+    type HasResourceIdThread a b :: *
 
-instance HasResourceId s a => HasResourceId (TF.Resource p s) a where
+    resourceId :: Lens' a (TF.Attribute (HasResourceIdThread a b) "resource_id" b)
+
+instance HasResourceId a b => HasResourceId (TF.Resource p a) b where
+    type HasResourceIdThread (TF.Resource p a) b =
+         HasResourceIdThread a b
+
     resourceId = TF.configuration . resourceId
 
-class HasStrategy s a | s -> a where
-    strategy :: Lens' s (TF.Argument "strategy" a)
+class HasStrategy a b | a -> b where
+    type HasStrategyThread a b :: *
 
-instance HasStrategy s a => HasStrategy (TF.Resource p s) a where
+    strategy :: Lens' a (TF.Attribute (HasStrategyThread a b) "strategy" b)
+
+instance HasStrategy a b => HasStrategy (TF.Resource p a) b where
+    type HasStrategyThread (TF.Resource p a) b =
+         HasStrategyThread a b
+
     strategy = TF.configuration . strategy
 
-class HasTags s a | s -> a where
-    tags :: Lens' s (TF.Argument "tags" a)
+class HasTags a b | a -> b where
+    type HasTagsThread a b :: *
 
-instance HasTags s a => HasTags (TF.Resource p s) a where
+    tags :: Lens' a (TF.Attribute (HasTagsThread a b) "tags" b)
+
+instance HasTags a b => HasTags (TF.Resource p a) b where
+    type HasTagsThread (TF.Resource p a) b =
+         HasTagsThread a b
+
     tags = TF.configuration . tags
 
-class HasThreshold s a | s -> a where
-    threshold :: Lens' s (TF.Argument "threshold" a)
+class HasThreshold a b | a -> b where
+    type HasThresholdThread a b :: *
 
-instance HasThreshold s a => HasThreshold (TF.Resource p s) a where
+    threshold :: Lens' a (TF.Attribute (HasThresholdThread a b) "threshold" b)
+
+instance HasThreshold a b => HasThreshold (TF.Resource p a) b where
+    type HasThresholdThread (TF.Resource p a) b =
+         HasThresholdThread a b
+
     threshold = TF.configuration . threshold
 
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

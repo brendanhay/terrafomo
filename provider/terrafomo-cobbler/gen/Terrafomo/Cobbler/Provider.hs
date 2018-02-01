@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Cobbler.Types   as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.Cobbler.Types as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.IP            as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
 
 {- | Cobbler Terraform provider.
 
@@ -54,11 +54,11 @@ the proper credentials before it can be used. Use the navigation to the left
 to read about the available resources.
 -}
 data Cobbler = Cobbler {
-      _password :: !(TF.Argument "password" Text)
+      _password :: !(Maybe Text)
     {- ^ (Required) The password to the Cobbler service. This can also be specified with the @COBBLER_PASSWORD@ shell environment variable. -}
-    , _url      :: !(TF.Argument "url" Text)
+    , _url      :: !(Maybe Text)
     {- ^ (Required) The url to the Cobbler service. This can also be specified with the @COBBLER_URL@ shell environment variable. -}
-    , _username :: !(TF.Argument "username" Text)
+    , _username :: !(Maybe Text)
     {- ^ (Required) The username to the Cobbler service. This can also be specified with the @COBBLER_USERNAME@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable Cobbler
 
 instance TF.ToHCL Cobbler where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Cobbler))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_password x)
-            , TF.argument (_url x)
-            , TF.argument (_username x)
+        let typ = TF.providerType (Proxy :: Proxy (Cobbler))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "password" <$> _password x
+            , TF.assign "url" <$> _url x
+            , TF.assign "username" <$> _username x
             ]
-
-emptyCobbler :: Cobbler
-emptyCobbler = Cobbler {
-        _password = TF.Nil
-      , _url = TF.Nil
-      , _username = TF.Nil
-    }
 
 instance TF.IsProvider Cobbler where
     type ProviderType Cobbler = "cobbler"
 
-password :: Lens' Cobbler (TF.Argument "password" Text)
+emptyCobbler :: Cobbler
+emptyCobbler = Cobbler {
+        _password = Nothing
+      , _url = Nothing
+      , _username = Nothing
+    }
+
+password :: Lens' Cobbler (Maybe Text)
 password =
     lens _password (\s a -> s { _password = a })
 
-url :: Lens' Cobbler (TF.Argument "url" Text)
+url :: Lens' Cobbler (Maybe Text)
 url =
     lens _url (\s a -> s { _url = a })
 
-username :: Lens' Cobbler (TF.Argument "username" Text)
+username :: Lens' Cobbler (Maybe Text)
 username =
     lens _username (\s a -> s { _username = a })

@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -47,14 +48,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Packet.Provider   as TF
-import qualified Terrafomo.Packet.Types      as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.IP              as TF
+import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Packet.Provider as TF
+import qualified Terrafomo.Packet.Types    as TF
+import qualified Terrafomo.Resource        as TF
 
 {- | The @packet_precreated_ip_block@ Packet datasource.
 
@@ -62,85 +64,110 @@ Use this data source to get CIDR expression for precreated IPv6 and IPv4
 blocks in Packet. You can then use the cidrsubnet TF builtin function to
 derive subnets.
 -}
-data PrecreatedIpBlockDataSource = PrecreatedIpBlockDataSource {
-      _address_family :: !(TF.Argument "address_family" Text)
+data PrecreatedIpBlockDataSource s = PrecreatedIpBlockDataSource {
+      _address_family :: !(TF.Attribute s "address_family" Text)
     {- ^ (Required) 4 or 6, depending on which block you are looking for. -}
-    , _facility       :: !(TF.Argument "facility" Text)
+    , _facility       :: !(TF.Attribute s "facility" Text)
     {- ^ (Required) Facility of the searched block. -}
-    , _project_id     :: !(TF.Argument "project_id" Text)
+    , _project_id     :: !(TF.Attribute s "project_id" Text)
     {- ^ (Required) ID of the project where the searched block should be. -}
-    , _public         :: !(TF.Argument "public" Text)
+    , _public         :: !(TF.Attribute s "public" Text)
     {- ^ (Required) Whether to look for public or private block. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL PrecreatedIpBlockDataSource where
+instance TF.ToHCL (PrecreatedIpBlockDataSource s) where
     toHCL PrecreatedIpBlockDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _address_family
-        , TF.argument _facility
-        , TF.argument _project_id
-        , TF.argument _public
+        [ TF.attribute _address_family
+        , TF.attribute _facility
+        , TF.attribute _project_id
+        , TF.attribute _public
         ]
 
-instance HasAddressFamily PrecreatedIpBlockDataSource Text where
+instance HasAddressFamily (PrecreatedIpBlockDataSource s) Text where
+    type HasAddressFamilyThread (PrecreatedIpBlockDataSource s) Text = s
+
     addressFamily =
-        lens (_address_family :: PrecreatedIpBlockDataSource -> TF.Argument "address_family" Text)
-             (\s a -> s { _address_family = a } :: PrecreatedIpBlockDataSource)
+        lens (_address_family :: PrecreatedIpBlockDataSource s -> TF.Attribute s "address_family" Text)
+             (\s a -> s { _address_family = a } :: PrecreatedIpBlockDataSource s)
 
-instance HasFacility PrecreatedIpBlockDataSource Text where
+instance HasFacility (PrecreatedIpBlockDataSource s) Text where
+    type HasFacilityThread (PrecreatedIpBlockDataSource s) Text = s
+
     facility =
-        lens (_facility :: PrecreatedIpBlockDataSource -> TF.Argument "facility" Text)
-             (\s a -> s { _facility = a } :: PrecreatedIpBlockDataSource)
+        lens (_facility :: PrecreatedIpBlockDataSource s -> TF.Attribute s "facility" Text)
+             (\s a -> s { _facility = a } :: PrecreatedIpBlockDataSource s)
 
-instance HasProjectId PrecreatedIpBlockDataSource Text where
+instance HasProjectId (PrecreatedIpBlockDataSource s) Text where
+    type HasProjectIdThread (PrecreatedIpBlockDataSource s) Text = s
+
     projectId =
-        lens (_project_id :: PrecreatedIpBlockDataSource -> TF.Argument "project_id" Text)
-             (\s a -> s { _project_id = a } :: PrecreatedIpBlockDataSource)
+        lens (_project_id :: PrecreatedIpBlockDataSource s -> TF.Attribute s "project_id" Text)
+             (\s a -> s { _project_id = a } :: PrecreatedIpBlockDataSource s)
 
-instance HasPublic PrecreatedIpBlockDataSource Text where
+instance HasPublic (PrecreatedIpBlockDataSource s) Text where
+    type HasPublicThread (PrecreatedIpBlockDataSource s) Text = s
+
     public =
-        lens (_public :: PrecreatedIpBlockDataSource -> TF.Argument "public" Text)
-             (\s a -> s { _public = a } :: PrecreatedIpBlockDataSource)
+        lens (_public :: PrecreatedIpBlockDataSource s -> TF.Attribute s "public" Text)
+             (\s a -> s { _public = a } :: PrecreatedIpBlockDataSource s)
 
-instance HasComputedCidrNotation PrecreatedIpBlockDataSource Text where
+instance HasComputedCidrNotation (PrecreatedIpBlockDataSource s) Text where
     computedCidrNotation =
-        to (\_  -> TF.Compute "cidr_notation")
+        to (\x -> TF.Computed (TF.referenceKey x) "cidr_notation")
 
-precreatedIpBlockDataSource :: TF.DataSource TF.Packet PrecreatedIpBlockDataSource
+precreatedIpBlockDataSource :: TF.DataSource TF.Packet (PrecreatedIpBlockDataSource s)
 precreatedIpBlockDataSource =
     TF.newDataSource "packet_precreated_ip_block" $
         PrecreatedIpBlockDataSource {
-            _address_family = TF.Nil
+              _address_family = TF.Nil
             , _facility = TF.Nil
             , _project_id = TF.Nil
             , _public = TF.Nil
             }
 
-class HasAddressFamily s a | s -> a where
-    addressFamily :: Lens' s (TF.Argument "address_family" a)
+class HasAddressFamily a b | a -> b where
+    type HasAddressFamilyThread a b :: *
 
-instance HasAddressFamily s a => HasAddressFamily (TF.DataSource p s) a where
+    addressFamily :: Lens' a (TF.Attribute (HasAddressFamilyThread a b) "address_family" b)
+
+instance HasAddressFamily a b => HasAddressFamily (TF.DataSource p a) b where
+    type HasAddressFamilyThread (TF.DataSource p a) b =
+         HasAddressFamilyThread a b
+
     addressFamily = TF.configuration . addressFamily
 
-class HasFacility s a | s -> a where
-    facility :: Lens' s (TF.Argument "facility" a)
+class HasFacility a b | a -> b where
+    type HasFacilityThread a b :: *
 
-instance HasFacility s a => HasFacility (TF.DataSource p s) a where
+    facility :: Lens' a (TF.Attribute (HasFacilityThread a b) "facility" b)
+
+instance HasFacility a b => HasFacility (TF.DataSource p a) b where
+    type HasFacilityThread (TF.DataSource p a) b =
+         HasFacilityThread a b
+
     facility = TF.configuration . facility
 
-class HasProjectId s a | s -> a where
-    projectId :: Lens' s (TF.Argument "project_id" a)
+class HasProjectId a b | a -> b where
+    type HasProjectIdThread a b :: *
 
-instance HasProjectId s a => HasProjectId (TF.DataSource p s) a where
+    projectId :: Lens' a (TF.Attribute (HasProjectIdThread a b) "project_id" b)
+
+instance HasProjectId a b => HasProjectId (TF.DataSource p a) b where
+    type HasProjectIdThread (TF.DataSource p a) b =
+         HasProjectIdThread a b
+
     projectId = TF.configuration . projectId
 
-class HasPublic s a | s -> a where
-    public :: Lens' s (TF.Argument "public" a)
+class HasPublic a b | a -> b where
+    type HasPublicThread a b :: *
 
-instance HasPublic s a => HasPublic (TF.DataSource p s) a where
+    public :: Lens' a (TF.Attribute (HasPublicThread a b) "public" b)
+
+instance HasPublic a b => HasPublic (TF.DataSource p a) b where
+    type HasPublicThread (TF.DataSource p a) b =
+         HasPublicThread a b
+
     public = TF.configuration . public
 
-class HasComputedCidrNotation s a | s -> a where
-    computedCidrNotation :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedCidrNotation s a => HasComputedCidrNotation (TF.DataSource p s) a where
-    computedCidrNotation = TF.configuration . computedCidrNotation
+class HasComputedCidrNotation a b | a -> b where
+    computedCidrNotation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

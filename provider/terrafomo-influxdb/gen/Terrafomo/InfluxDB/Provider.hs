@@ -36,12 +36,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.InfluxDB.Types  as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.InfluxDB.Types as TF
+import qualified Terrafomo.IP             as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
 
 {- | InfluxDB Terraform provider.
 
@@ -57,13 +57,15 @@ instance Hashable InfluxDB
 
 instance TF.ToHCL InfluxDB where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy InfluxDB))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
+        let typ = TF.providerType (Proxy :: Proxy (InfluxDB))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
             ]
+
+instance TF.IsProvider InfluxDB where
+    type ProviderType InfluxDB = "influxdb"
 
 emptyInfluxDB :: InfluxDB
 emptyInfluxDB = InfluxDB {
     }
-
-instance TF.IsProvider InfluxDB where
-    type ProviderType InfluxDB = "influxdb"

@@ -39,12 +39,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Rancher.Types   as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Name     as TF
-import qualified Terrafomo.Syntax.Provider as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.IP            as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Rancher.Types as TF
 
 {- | Rancher Terraform provider.
 
@@ -54,11 +54,11 @@ server at minimum and API credentials if access control is enabled on the
 server.
 -}
 data Rancher = Rancher {
-      _access_key :: !(TF.Argument "access_key" Text)
+      _access_key :: !(Maybe Text)
     {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_ACCESS_KEY@ environment variable. -}
-    , _api_url    :: !(TF.Argument "api_url" Text)
+    , _api_url    :: !(Maybe Text)
     {- ^ (Required) Rancher API url. It must be provided, but it can also be sourced from the @RANCHER_URL@ environment variable. -}
-    , _secret_key :: !(TF.Argument "secret_key" Text)
+    , _secret_key :: !(Maybe Text)
     {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -66,31 +66,33 @@ instance Hashable Rancher
 
 instance TF.ToHCL Rancher where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy Rancher))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_access_key x)
-            , TF.argument (_api_url x)
-            , TF.argument (_secret_key x)
+        let typ = TF.providerType (Proxy :: Proxy (Rancher))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "access_key" <$> _access_key x
+            , TF.assign "api_url" <$> _api_url x
+            , TF.assign "secret_key" <$> _secret_key x
             ]
-
-emptyRancher :: Rancher
-emptyRancher = Rancher {
-        _access_key = TF.Nil
-      , _api_url = TF.Nil
-      , _secret_key = TF.Nil
-    }
 
 instance TF.IsProvider Rancher where
     type ProviderType Rancher = "rancher"
 
-accessKey :: Lens' Rancher (TF.Argument "access_key" Text)
+emptyRancher :: Rancher
+emptyRancher = Rancher {
+        _access_key = Nothing
+      , _api_url = Nothing
+      , _secret_key = Nothing
+    }
+
+accessKey :: Lens' Rancher (Maybe Text)
 accessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-apiUrl :: Lens' Rancher (TF.Argument "api_url" Text)
+apiUrl :: Lens' Rancher (Maybe Text)
 apiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-secretKey :: Lens' Rancher (TF.Argument "secret_key" Text)
+secretKey :: Lens' Rancher (Maybe Text)
 secretKey =
     lens _secret_key (\s a -> s { _secret_key = a })

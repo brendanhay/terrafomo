@@ -37,12 +37,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Terrafomo.Attribute          as TF
 import qualified Terrafomo.DigitalOcean.Types as TF
-import qualified Terrafomo.Syntax.HCL         as TF
-import qualified Terrafomo.Syntax.IP          as TF
-import qualified Terrafomo.Syntax.Name        as TF
-import qualified Terrafomo.Syntax.Provider    as TF
-import qualified Terrafomo.Syntax.Variable    as TF
+import qualified Terrafomo.HCL                as TF
+import qualified Terrafomo.IP                 as TF
+import qualified Terrafomo.Name               as TF
+import qualified Terrafomo.Provider           as TF
 
 {- | DigitalOcean Terraform provider.
 
@@ -52,7 +52,7 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data DigitalOcean = DigitalOcean {
-      _token :: !(TF.Argument "token" Text)
+      _token :: !(Maybe Text)
     {- ^ (Required) This is the DO API token. This can also be specified with the @DIGITALOCEAN_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -60,19 +60,21 @@ instance Hashable DigitalOcean
 
 instance TF.ToHCL DigitalOcean where
     toHCL x =
-        TF.object ("provider" :| [TF.type_ (TF.providerType (Proxy :: Proxy DigitalOcean))]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName (TF.providerKey x)))
-            , TF.argument (_token x)
+        let typ = TF.providerType (Proxy :: Proxy (DigitalOcean))
+            key = TF.providerKey x
+         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
+            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "token" <$> _token x
             ]
-
-emptyDigitalOcean :: DigitalOcean
-emptyDigitalOcean = DigitalOcean {
-        _token = TF.Nil
-    }
 
 instance TF.IsProvider DigitalOcean where
     type ProviderType DigitalOcean = "digitalocean"
 
-token :: Lens' DigitalOcean (TF.Argument "token" Text)
+emptyDigitalOcean :: DigitalOcean
+emptyDigitalOcean = DigitalOcean {
+        _token = Nothing
+    }
+
+token :: Lens' DigitalOcean (Maybe Text)
 token =
     lens _token (\s a -> s { _token = a })

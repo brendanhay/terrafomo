@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -45,64 +46,66 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.IP                as TF
+import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.OpsGenie.Provider as TF
 import qualified Terrafomo.OpsGenie.Types    as TF
-import qualified Terrafomo.Syntax.DataSource as TF
-import qualified Terrafomo.Syntax.HCL        as TF
-import qualified Terrafomo.Syntax.IP         as TF
-import qualified Terrafomo.Syntax.Meta       as TF (configuration)
-import qualified Terrafomo.Syntax.Resource   as TF
-import qualified Terrafomo.Syntax.Variable   as TF
+import qualified Terrafomo.Resource          as TF
 
 {- | The @opsgenie_user@ OpsGenie datasource.
 
 Use this data source to get information about a specific user within
 OpsGenie.
 -}
-data UserDataSource = UserDataSource {
-      _username :: !(TF.Argument "username" Text)
+data UserDataSource s = UserDataSource {
+      _username :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL UserDataSource where
+instance TF.ToHCL (UserDataSource s) where
     toHCL UserDataSource{..} = TF.block $ catMaybes
-        [ TF.argument _username
+        [ TF.attribute _username
         ]
 
-instance HasUsername UserDataSource Text where
+instance HasUsername (UserDataSource s) Text where
+    type HasUsernameThread (UserDataSource s) Text = s
+
     username =
-        lens (_username :: UserDataSource -> TF.Argument "username" Text)
-             (\s a -> s { _username = a } :: UserDataSource)
+        lens (_username :: UserDataSource s -> TF.Attribute s "username" Text)
+             (\s a -> s { _username = a } :: UserDataSource s)
 
-instance HasComputedFullName UserDataSource Text where
+instance HasComputedFullName (UserDataSource s) Text where
     computedFullName =
-        to (\_  -> TF.Compute "full_name")
+        to (\x -> TF.Computed (TF.referenceKey x) "full_name")
 
-instance HasComputedRole UserDataSource Text where
+instance HasComputedRole (UserDataSource s) Text where
     computedRole =
-        to (\_  -> TF.Compute "role")
+        to (\x -> TF.Computed (TF.referenceKey x) "role")
 
-userDataSource :: TF.DataSource TF.OpsGenie UserDataSource
+userDataSource :: TF.DataSource TF.OpsGenie (UserDataSource s)
 userDataSource =
     TF.newDataSource "opsgenie_user" $
         UserDataSource {
-            _username = TF.Nil
+              _username = TF.Nil
             }
 
-class HasUsername s a | s -> a where
-    username :: Lens' s (TF.Argument "username" a)
+class HasUsername a b | a -> b where
+    type HasUsernameThread a b :: *
 
-instance HasUsername s a => HasUsername (TF.DataSource p s) a where
+    username :: Lens' a (TF.Attribute (HasUsernameThread a b) "username" b)
+
+instance HasUsername a b => HasUsername (TF.DataSource p a) b where
+    type HasUsernameThread (TF.DataSource p a) b =
+         HasUsernameThread a b
+
     username = TF.configuration . username
 
-class HasComputedFullName s a | s -> a where
-    computedFullName :: forall r. Getting r s (TF.Attribute a)
+class HasComputedFullName a b | a -> b where
+    computedFullName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFullName s a => HasComputedFullName (TF.DataSource p s) a where
-    computedFullName = TF.configuration . computedFullName
-
-class HasComputedRole s a | s -> a where
-    computedRole :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedRole s a => HasComputedRole (TF.DataSource p s) a where
-    computedRole = TF.configuration . computedRole
+class HasComputedRole a b | a -> b where
+    computedRole :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)

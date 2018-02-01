@@ -7,9 +7,10 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -49,123 +50,153 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Dyn.Provider    as TF
-import qualified Terrafomo.Dyn.Types       as TF
-import qualified Terrafomo.Syntax.HCL      as TF
-import qualified Terrafomo.Syntax.IP       as TF
-import qualified Terrafomo.Syntax.Meta     as TF (configuration)
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Resource as TF
-import qualified Terrafomo.Syntax.Variable as TF
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.Dyn.Provider as TF
+import qualified Terrafomo.Dyn.Types    as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.IP           as TF
+import qualified Terrafomo.Meta         as TF (configuration)
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Resource     as TF
+import qualified Terrafomo.Resource     as TF
 
 {- | The @dyn_record@ Dyn resource.
 
 Provides a Dyn DNS record resource.
 -}
-data RecordResource = RecordResource {
-      _name  :: !(TF.Argument "name" Text)
+data RecordResource s = RecordResource {
+      _name  :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the record. -}
-    , _ttl   :: !(TF.Argument "ttl" Text)
+    , _ttl   :: !(TF.Attribute s "ttl" Text)
     {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
-    , _type' :: !(TF.Argument "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of the record. -}
-    , _value :: !(TF.Argument "value" Text)
+    , _value :: !(TF.Attribute s "value" Text)
     {- ^ (Required) The value of the record. -}
-    , _zone  :: !(TF.Argument "zone" Text)
+    , _zone  :: !(TF.Attribute s "zone" Text)
     {- ^ (Required) The DNS zone to add the record to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL RecordResource where
+instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.block $ catMaybes
-        [ TF.argument _name
-        , TF.argument _ttl
-        , TF.argument _type'
-        , TF.argument _value
-        , TF.argument _zone
+        [ TF.attribute _name
+        , TF.attribute _ttl
+        , TF.attribute _type'
+        , TF.attribute _value
+        , TF.attribute _zone
         ]
 
-instance HasName RecordResource Text where
+instance HasName (RecordResource s) Text where
+    type HasNameThread (RecordResource s) Text = s
+
     name =
-        lens (_name :: RecordResource -> TF.Argument "name" Text)
-             (\s a -> s { _name = a } :: RecordResource)
+        lens (_name :: RecordResource s -> TF.Attribute s "name" Text)
+             (\s a -> s { _name = a } :: RecordResource s)
 
-instance HasTtl RecordResource Text where
+instance HasTtl (RecordResource s) Text where
+    type HasTtlThread (RecordResource s) Text = s
+
     ttl =
-        lens (_ttl :: RecordResource -> TF.Argument "ttl" Text)
-             (\s a -> s { _ttl = a } :: RecordResource)
+        lens (_ttl :: RecordResource s -> TF.Attribute s "ttl" Text)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance HasType' RecordResource Text where
+instance HasType' (RecordResource s) Text where
+    type HasType'Thread (RecordResource s) Text = s
+
     type' =
-        lens (_type' :: RecordResource -> TF.Argument "type" Text)
-             (\s a -> s { _type' = a } :: RecordResource)
+        lens (_type' :: RecordResource s -> TF.Attribute s "type" Text)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
-instance HasValue RecordResource Text where
+instance HasValue (RecordResource s) Text where
+    type HasValueThread (RecordResource s) Text = s
+
     value =
-        lens (_value :: RecordResource -> TF.Argument "value" Text)
-             (\s a -> s { _value = a } :: RecordResource)
+        lens (_value :: RecordResource s -> TF.Attribute s "value" Text)
+             (\s a -> s { _value = a } :: RecordResource s)
 
-instance HasZone RecordResource Text where
+instance HasZone (RecordResource s) Text where
+    type HasZoneThread (RecordResource s) Text = s
+
     zone =
-        lens (_zone :: RecordResource -> TF.Argument "zone" Text)
-             (\s a -> s { _zone = a } :: RecordResource)
+        lens (_zone :: RecordResource s -> TF.Attribute s "zone" Text)
+             (\s a -> s { _zone = a } :: RecordResource s)
 
-instance HasComputedFqdn RecordResource Text where
+instance HasComputedFqdn (RecordResource s) Text where
     computedFqdn =
-        to (\_  -> TF.Compute "fqdn")
+        to (\x -> TF.Computed (TF.referenceKey x) "fqdn")
 
-instance HasComputedId RecordResource Text where
+instance HasComputedId (RecordResource s) Text where
     computedId =
-        to (\_  -> TF.Compute "id")
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
-recordResource :: TF.Resource TF.Dyn RecordResource
+recordResource :: TF.Resource TF.Dyn (RecordResource s)
 recordResource =
     TF.newResource "dyn_record" $
         RecordResource {
-            _name = TF.Nil
+              _name = TF.Nil
             , _ttl = TF.Nil
             , _type' = TF.Nil
             , _value = TF.Nil
             , _zone = TF.Nil
             }
 
-class HasName s a | s -> a where
-    name :: Lens' s (TF.Argument "name" a)
+class HasName a b | a -> b where
+    type HasNameThread a b :: *
 
-instance HasName s a => HasName (TF.Resource p s) a where
+    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
+
+instance HasName a b => HasName (TF.Resource p a) b where
+    type HasNameThread (TF.Resource p a) b =
+         HasNameThread a b
+
     name = TF.configuration . name
 
-class HasTtl s a | s -> a where
-    ttl :: Lens' s (TF.Argument "ttl" a)
+class HasTtl a b | a -> b where
+    type HasTtlThread a b :: *
 
-instance HasTtl s a => HasTtl (TF.Resource p s) a where
+    ttl :: Lens' a (TF.Attribute (HasTtlThread a b) "ttl" b)
+
+instance HasTtl a b => HasTtl (TF.Resource p a) b where
+    type HasTtlThread (TF.Resource p a) b =
+         HasTtlThread a b
+
     ttl = TF.configuration . ttl
 
-class HasType' s a | s -> a where
-    type' :: Lens' s (TF.Argument "type" a)
+class HasType' a b | a -> b where
+    type HasType'Thread a b :: *
 
-instance HasType' s a => HasType' (TF.Resource p s) a where
+    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
+
+instance HasType' a b => HasType' (TF.Resource p a) b where
+    type HasType'Thread (TF.Resource p a) b =
+         HasType'Thread a b
+
     type' = TF.configuration . type'
 
-class HasValue s a | s -> a where
-    value :: Lens' s (TF.Argument "value" a)
+class HasValue a b | a -> b where
+    type HasValueThread a b :: *
 
-instance HasValue s a => HasValue (TF.Resource p s) a where
+    value :: Lens' a (TF.Attribute (HasValueThread a b) "value" b)
+
+instance HasValue a b => HasValue (TF.Resource p a) b where
+    type HasValueThread (TF.Resource p a) b =
+         HasValueThread a b
+
     value = TF.configuration . value
 
-class HasZone s a | s -> a where
-    zone :: Lens' s (TF.Argument "zone" a)
+class HasZone a b | a -> b where
+    type HasZoneThread a b :: *
 
-instance HasZone s a => HasZone (TF.Resource p s) a where
+    zone :: Lens' a (TF.Attribute (HasZoneThread a b) "zone" b)
+
+instance HasZone a b => HasZone (TF.Resource p a) b where
+    type HasZoneThread (TF.Resource p a) b =
+         HasZoneThread a b
+
     zone = TF.configuration . zone
 
-class HasComputedFqdn s a | s -> a where
-    computedFqdn :: forall r. Getting r s (TF.Attribute a)
+class HasComputedFqdn a b | a -> b where
+    computedFqdn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
 
-instance HasComputedFqdn s a => HasComputedFqdn (TF.Resource p s) a where
-    computedFqdn = TF.configuration . computedFqdn
-
-class HasComputedId s a | s -> a where
-    computedId :: forall r. Getting r s (TF.Attribute a)
-
-instance HasComputedId s a => HasComputedId (TF.Resource p s) a where
-    computedId = TF.configuration . computedId
+class HasComputedId a b | a -> b where
+    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
